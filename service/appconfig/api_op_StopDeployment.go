@@ -12,8 +12,9 @@ import (
 	"time"
 )
 
-// Stops a deployment. This API action works only on deployments that have a status
-// of DEPLOYING. This action moves the deployment to a status of ROLLED_BACK.
+// Stops a deployment. This API action works only on deployments that have a
+// status of DEPLOYING . This action moves the deployment to a status of
+// ROLLED_BACK .
 func (c *Client) StopDeployment(ctx context.Context, params *StopDeploymentInput, optFns ...func(*Options)) (*StopDeploymentOutput, error) {
 	if params == nil {
 		params = &StopDeploymentInput{}
@@ -56,7 +57,7 @@ type StopDeploymentOutput struct {
 
 	// A list of extensions that were processed as part of the deployment. The
 	// extensions that were previously associated to the configuration profile,
-	// environment, or the application when StartDeployment was called.
+	// environment, or the application when StartDeployment  was called.
 	AppliedExtensions []types.AppliedExtension
 
 	// The time the deployment completed.
@@ -89,8 +90,8 @@ type StopDeploymentOutput struct {
 	// The ID of the environment that was deployed.
 	EnvironmentId *string
 
-	// A list containing all events related to a deployment. The most recent events are
-	// displayed first.
+	// A list containing all events related to a deployment. The most recent events
+	// are displayed first.
 	EventLog []types.DeploymentEvent
 
 	// The amount of time that AppConfig monitored for alarms before considering the

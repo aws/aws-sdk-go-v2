@@ -10,8 +10,8 @@ import (
 // Describes the activity information.
 type Activity struct {
 
-	// Metadata of the commenting activity. This is an optional field and is filled for
-	// commenting activities.
+	// Metadata of the commenting activity. This is an optional field and is filled
+	// for commenting activities.
 	CommentMetadata *CommentMetadata
 
 	// The user who performed the action.
@@ -26,8 +26,8 @@ type Activity struct {
 	// The ID of the organization.
 	OrganizationId *string
 
-	// The original parent of the resource. This is an optional field and is filled for
-	// move activities.
+	// The original parent of the resource. This is an optional field and is filled
+	// for move activities.
 	OriginalParent *ResourceMetadata
 
 	// The list of users or groups impacted by this action. This is an optional field
@@ -77,9 +77,10 @@ type Comment struct {
 	// The ID of the root comment in the thread.
 	ThreadId *string
 
-	// The visibility of the comment. Options are either PRIVATE, where the comment is
-	// visible only to the comment author and document owner and co-owners, or PUBLIC,
-	// where the comment is visible to document owners, co-owners, and contributors.
+	// The visibility of the comment. Options are either PRIVATE, where the comment
+	// is visible only to the comment author and document owner and co-owners, or
+	// PUBLIC, where the comment is visible to document owners, co-owners, and
+	// contributors.
 	Visibility CommentVisibilityType
 
 	noSmithyDocumentSerde

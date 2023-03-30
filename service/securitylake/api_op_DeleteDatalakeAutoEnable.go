@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// DeleteDatalakeAutoEnable removes automatic enablement of configuration settings
-// for new member accounts (but keeps settings for the delegated administrator)
-// from Amazon Security Lake. You must run this API using credentials of the
-// delegated administrator. When you run this API, new member accounts that are
-// added after the organization enables Security Lake won't contribute to the data
-// lake.
+// DeleteDatalakeAutoEnable removes automatic enablement of configuration
+// settings for new member accounts (but keeps settings for the delegated
+// administrator) from Amazon Security Lake. You must run this API using
+// credentials of the delegated administrator. When you run this API, new member
+// accounts that are added after the organization enables Security Lake won't
+// contribute to the data lake.
 func (c *Client) DeleteDatalakeAutoEnable(ctx context.Context, params *DeleteDatalakeAutoEnableInput, optFns ...func(*Options)) (*DeleteDatalakeAutoEnableOutput, error) {
 	if params == nil {
 		params = &DeleteDatalakeAutoEnableInput{}
@@ -34,8 +34,8 @@ func (c *Client) DeleteDatalakeAutoEnable(ctx context.Context, params *DeleteDat
 
 type DeleteDatalakeAutoEnableInput struct {
 
-	// Remove automatic enablement of configuration settings for new member accounts in
-	// Security Lake.
+	// Remove automatic enablement of configuration settings for new member accounts
+	// in Security Lake.
 	//
 	// This member is required.
 	RemoveFromConfigurationForNewAccounts []types.AutoEnableNewRegionConfiguration

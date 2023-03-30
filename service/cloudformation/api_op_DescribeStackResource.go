@@ -29,23 +29,21 @@ func (c *Client) DescribeStackResource(ctx context.Context, params *DescribeStac
 	return out, nil
 }
 
-// The input for DescribeStackResource action.
+// The input for DescribeStackResource  action.
 type DescribeStackResourceInput struct {
 
-	// The logical name of the resource as specified in the template. Default: There is
-	// no default value.
+	// The logical name of the resource as specified in the template. Default: There
+	// is no default value.
 	//
 	// This member is required.
 	LogicalResourceId *string
 
 	// The name or the unique stack ID that's associated with the stack, which aren't
 	// always interchangeable:
-	// - Running stacks: You can specify either the stack's
-	// name or its unique stack ID.
-	// - Deleted stacks: You must specify the unique stack
-	// ID.
-	//
-	// Default: There is no default value.
+	//     - Running stacks: You can specify either the stack's name or its unique stack ID.
+	//     - Deleted stacks: You must specify the unique stack ID.
+	// Default: There is
+	// no default value.
 	//
 	// This member is required.
 	StackName *string
@@ -53,7 +51,7 @@ type DescribeStackResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-// The output for a DescribeStackResource action.
+// The output for a DescribeStackResource  action.
 type DescribeStackResourceOutput struct {
 
 	// A StackResourceDetail structure containing the description of the specified

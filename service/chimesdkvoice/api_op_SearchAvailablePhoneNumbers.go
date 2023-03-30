@@ -47,11 +47,12 @@ type SearchAvailablePhoneNumbersInput struct {
 	// The token used to return the next page of results.
 	NextToken *string
 
-	// Confines a search to just the phone numbers associated with the specified phone
-	// number type, either local or toll-free.
+	// Confines a search to just the phone numbers associated with the specified
+	// phone number type, either local or toll-free.
 	PhoneNumberType types.PhoneNumberType
 
-	// Confines a search to just the phone numbers associated with the specified state.
+	// Confines a search to just the phone numbers associated with the specified
+	// state.
 	State *string
 
 	// Confines a search to just the phone numbers associated with the specified
@@ -149,8 +150,8 @@ type SearchAvailablePhoneNumbersPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

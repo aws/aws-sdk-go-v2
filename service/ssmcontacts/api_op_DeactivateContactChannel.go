@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// To no longer receive Incident Manager engagements to a contact channel, you can
-// deactivate the channel.
+// To no longer receive Incident Manager engagements to a contact channel, you
+// can deactivate the channel.
 func (c *Client) DeactivateContactChannel(ctx context.Context, params *DeactivateContactChannelInput, optFns ...func(*Options)) (*DeactivateContactChannelOutput, error) {
 	if params == nil {
 		params = &DeactivateContactChannelInput{}

@@ -38,7 +38,7 @@ type StartBlueprintRunInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// Specifies the parameters as a BlueprintParameters object.
+	// Specifies the parameters as a BlueprintParameters  object.
 	Parameters *string
 
 	noSmithyDocumentSerde

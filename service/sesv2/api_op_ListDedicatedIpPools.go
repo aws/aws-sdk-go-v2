@@ -47,13 +47,13 @@ type ListDedicatedIpPoolsInput struct {
 // A list of dedicated IP pools.
 type ListDedicatedIpPoolsOutput struct {
 
-	// A list of all of the dedicated IP pools that are associated with your Amazon Web
-	// Services account in the current Region.
+	// A list of all of the dedicated IP pools that are associated with your Amazon
+	// Web Services account in the current Region.
 	DedicatedIpPools []string
 
 	// A token that indicates that there are additional IP pools to list. To view
-	// additional IP pools, issue another request to ListDedicatedIpPools, passing this
-	// token in the NextToken parameter.
+	// additional IP pools, issue another request to ListDedicatedIpPools, passing
+	// this token in the NextToken  parameter.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -139,8 +139,8 @@ type ListDedicatedIpPoolsPaginatorOptions struct {
 	// additional results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

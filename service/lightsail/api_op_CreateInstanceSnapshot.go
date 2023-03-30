@@ -13,9 +13,9 @@ import (
 
 // Creates a snapshot of a specific virtual private server, or instance. You can
 // use a snapshot to create a new instance that is based on that snapshot. The
-// create instance snapshot operation supports tag-based access control via request
-// tags. For more information, see the Amazon Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// create instance snapshotoperation supports tag-based access control via
+// request tags. For more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) CreateInstanceSnapshot(ctx context.Context, params *CreateInstanceSnapshotInput, optFns ...func(*Options)) (*CreateInstanceSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateInstanceSnapshotInput{}

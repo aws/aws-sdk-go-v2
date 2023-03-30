@@ -25,7 +25,7 @@ type ChannelInfo struct {
 	// The time at which the signaling channel was created.
 	CreationTime *time.Time
 
-	// A structure that contains the configuration for the SINGLE_MASTER channel type.
+	// A structure that contains the configuration for the SINGLE_MASTER  channel type.
 	SingleMasterConfiguration *SingleMasterConfiguration
 
 	// The current version of the signaling channel.
@@ -36,11 +36,11 @@ type ChannelInfo struct {
 
 // An optional input parameter for the ListSignalingChannels API. When this
 // parameter is specified while invoking ListSignalingChannels, the API returns
-// only the channels that satisfy a condition specified in ChannelNameCondition.
+// only the channels that satisfy a condition specified in ChannelNameCondition .
 type ChannelNameCondition struct {
 
-	// A comparison operator. Currently, you can only specify the BEGINS_WITH operator,
-	// which finds signaling channels whose names begin with a given prefix.
+	// A comparison operator. Currently, you can only specify the BEGINS_WITH
+	// operator, which finds signaling channels whose names begin with a given prefix.
 	ComparisonOperator ComparisonOperator
 
 	// A value to compare.
@@ -53,13 +53,13 @@ type ChannelNameCondition struct {
 // the Edge Agent.
 type DeletionConfig struct {
 
-	// The boolean value used to indicate whether or not you want to mark the media for
-	// deletion, once it has been uploaded to the Kinesis Video Stream cloud. The media
-	// files can be deleted if any of the deletion configuration values are set to
-	// true, such as when the limit for the EdgeRetentionInHours, or the
-	// MaxLocalMediaSizeInMB, has been reached. Since the default value is set to true,
-	// configure the uploader schedule such that the media files are not being deleted
-	// before they are initially uploaded to AWS cloud.
+	// The boolean value used to indicate whether or not you want to mark the media
+	// for deletion, once it has been uploaded to the Kinesis Video Stream cloud. The
+	// media files can be deleted if any of the deletion configuration values are set
+	// to true , such as when the limit for the EdgeRetentionInHours , or the
+	// MaxLocalMediaSizeInMB , has been reached. Since the default value is set to
+	// true, configure the uploader schedule such that the media files are not being
+	// deleted before they are initially uploaded to AWS cloud.
 	DeleteAfterUpload *bool
 
 	// The number of hours that you want to retain the data in the stream on the Edge
@@ -73,9 +73,9 @@ type DeletionConfig struct {
 	noSmithyDocumentSerde
 }
 
-// A description of the stream's edge configuration that will be used to sync with
-// the Edge Agent IoT Greengrass component. The Edge Agent component will run on an
-// IoT Hub Device setup at your premise.
+// A description of the stream's edge configuration that will be used to sync
+// with the Edge Agent IoT Greengrass component. The Edge Agent component will run
+// on an IoT Hub Device setup at your premise.
 type EdgeConfig struct {
 
 	// The "Internet of Things (IoT) Thing" Arn of the stream.
@@ -83,20 +83,21 @@ type EdgeConfig struct {
 	// This member is required.
 	HubDeviceArn *string
 
-	// The recorder configuration consists of the local MediaSourceConfig details, that
-	// are used as credentials to access the local media files streamed on the camera.
+	// The recorder configuration consists of the local MediaSourceConfig details,
+	// that are used as credentials to access the local media files streamed on the
+	// camera.
 	//
 	// This member is required.
 	RecorderConfig *RecorderConfig
 
-	// The deletion configuration is made up of the retention time
-	// (EdgeRetentionInHours) and local size configuration (LocalSizeConfig) details
+	// The deletion configuration is made up of the retention time (
+	// EdgeRetentionInHours ) and local size configuration ( LocalSizeConfig) details
 	// that are used to make the deletion.
 	DeletionConfig *DeletionConfig
 
-	// The uploader configuration contains the ScheduleExpression details that are used
-	// to schedule upload jobs for the recorded media files from the Edge Agent to a
-	// Kinesis Video Stream.
+	// The uploader configuration contains the ScheduleExpression details that are
+	// used to schedule upload jobs for the recorded media files from the Edge Agent to
+	// a Kinesis Video Stream.
 	UploaderConfig *UploaderConfig
 
 	noSmithyDocumentSerde
@@ -122,44 +123,45 @@ type ImageGenerationConfiguration struct {
 	// This member is required.
 	ImageSelectorType ImageSelectorType
 
-	// The time interval in milliseconds (ms) at which the images need to be generated
-	// from the stream. The minimum value that can be provided is 33 ms, because a
-	// camera that generates content at 30 FPS would create a frame every 33.3 ms. If
-	// the timestamp range is less than the sampling interval, the Image from the
-	// StartTimestamp will be returned if available.
+	// The time interval in milliseconds (ms) at which the images need to be
+	// generated from the stream. The minimum value that can be provided is 33 ms,
+	// because a camera that generates content at 30 FPS would create a frame every
+	// 33.3 ms. If the timestamp range is less than the sampling interval, the Image
+	// from the StartTimestamp  will be returned if available.
 	//
 	// This member is required.
 	SamplingInterval *int32
 
-	// Indicates whether the ContinuousImageGenerationConfigurations API is enabled or
-	// disabled.
+	// Indicates whether the ContinuousImageGenerationConfigurations API is enabled
+	// or disabled.
 	//
 	// This member is required.
 	Status ConfigurationStatus
 
 	// The list of a key-value pair structure that contains extra parameters that can
-	// be applied when the image is generated. The FormatConfig key is the JPEGQuality,
-	// which indicates the JPEG quality key to be used to generate the image. The
-	// FormatConfig value accepts ints from 1 to 100. If the value is 1, the image will
-	// be generated with less quality and the best compression. If the value is 100,
-	// the image will be generated with the best quality and less compression. If no
-	// value is provided, the default value of the JPEGQuality key will be set to 80.
+	// be applied when the image is generated. The FormatConfig  key is the
+	// JPEGQuality, which indicates the JPEG quality key to be used to generate the
+	// image. The FormatConfig value accepts ints from 1 to 100. If the value is 1,
+	// the image will be generated with less quality and the best compression. If the
+	// value is 100, the image will be generated with the best quality and less
+	// compression. If no value is provided, the default value of the JPEGQuality key
+	// will be set to 80.
 	FormatConfig map[string]string
 
 	// The height of the output image that is used in conjunction with the WidthPixels
-	// parameter. When both HeightPixels and WidthPixels parameters are provided, the
-	// image will be stretched to fit the specified aspect ratio. If only the
-	// HeightPixels parameter is provided, its original aspect ratio will be used to
-	// calculate the WidthPixels ratio. If neither parameter is provided, the original
-	// image size will be returned.
+	// parameter. When both HeightPixels  and WidthPixels parameters are provided,
+	// the image will be stretched to fit the specified aspect ratio. If only the
+	// HeightPixelsparameter is provided, its original aspect ratio will be used to
+	// calculate the WidthPixels ratio. If neither parameter is provided, the
+	// original image size will be returned.
 	HeightPixels *int32
 
 	// The width of the output image that is used in conjunction with the HeightPixels
-	// parameter. When both WidthPixels and HeightPixels parameters are provided, the
-	// image will be stretched to fit the specified aspect ratio. If only the
-	// WidthPixels parameter is provided, its original aspect ratio will be used to
-	// calculate the HeightPixels ratio. If neither parameter is provided, the original
-	// image size will be returned.
+	// parameter. When both WidthPixels  and HeightPixels parameters are provided,
+	// the image will be stretched to fit the specified aspect ratio. If only the
+	// WidthPixelsparameter is provided, its original aspect ratio will be used to
+	// calculate the HeightPixels ratio. If neither parameter is provided, the
+	// original image size will be returned.
 	WidthPixels *int32
 
 	noSmithyDocumentSerde
@@ -184,17 +186,17 @@ type ImageGenerationDestinationConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration details that include the maximum size of the media
-// (MaxLocalMediaSizeInMB) that you want to store for a stream on the Edge Agent,
-// as well as the strategy that should be used (StrategyOnFullSize) when a stream's
-// maximum size has been reached.
+// The configuration details that include the maximum size of the media (
+// MaxLocalMediaSizeInMB) that you want to store for a stream on the Edge Agent,
+// as well as the strategy that should be used ( StrategyOnFullSize) when a
+// stream's maximum size has been reached.
 type LocalSizeConfig struct {
 
-	// The overall maximum size of the media that you want to store for a stream on the
-	// Edge Agent.
+	// The overall maximum size of the media that you want to store for a stream on
+	// the Edge Agent.
 	MaxLocalMediaSizeInMB *int32
 
-	// The strategy to perform when a stream’s MaxLocalMediaSizeInMB limit is reached.
+	// The strategy to perform when a stream’s MaxLocalMediaSizeInMB  limit is reached.
 	StrategyOnFullSize StrategyOnFullSize
 
 	noSmithyDocumentSerde
@@ -204,8 +206,8 @@ type LocalSizeConfig struct {
 // properties.
 type MappedResourceConfigurationListItem struct {
 
-	// The Amazon Resource Name (ARN) of the Kinesis Video Stream resource, associated
-	// with the stream.
+	// The Amazon Resource Name (ARN) of the Kinesis Video Stream resource,
+	// associated with the stream.
 	ARN *string
 
 	// The type of the associated resource for the kinesis video stream.
@@ -214,9 +216,9 @@ type MappedResourceConfigurationListItem struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration details that consist of the credentials required
-// (MediaUriSecretArn and MediaUriType) to access the media files that are streamed
-// to the camera.
+// The configuration details that consist of the credentials required (
+// MediaUriSecretArn and MediaUriType) to access the media files that are
+// streamed to the camera.
 type MediaSourceConfig struct {
 
 	// The AWS Secrets Manager ARN for the username and password of the camera, or a
@@ -281,21 +283,22 @@ type NotificationDestinationConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The recorder configuration consists of the local MediaSourceConfig details that
-// are used as credentials to accesss the local media files streamed on the camera.
+// The recorder configuration consists of the local MediaSourceConfig details
+// that are used as credentials to accesss the local media files streamed on the
+// camera.
 type RecorderConfig struct {
 
-	// The configuration details that consist of the credentials required
-	// (MediaUriSecretArn and MediaUriType) to access the media files streamed to the
+	// The configuration details that consist of the credentials required (
+	// MediaUriSecretArn and MediaUriType) to access the media files streamed to the
 	// camera.
 	//
 	// This member is required.
 	MediaSourceConfig *MediaSourceConfig
 
-	// The configuration that consists of the ScheduleExpression and the
-	// DurationInMinutes details that specify the scheduling to record from a camera,
-	// or local media file, onto the Edge Agent. If the ScheduleExpression attribute is
-	// not provided, then the Edge Agent will always be set to recording mode.
+	// The configuration that consists of the ScheduleExpression  and the
+	// DurationInMinutesdetails that specify the scheduling to record from a camera,
+	// or local media file, onto the Edge Agent. If the ScheduleExpression attribute
+	// is not provided, then the Edge Agent will always be set to recording mode.
 	ScheduleConfig *ScheduleConfig
 
 	noSmithyDocumentSerde
@@ -317,24 +320,23 @@ type ResourceEndpointListItem struct {
 }
 
 // This API enables you to specify the duration that the camera, or local media
-// file, should record onto the Edge Agent. The ScheduleConfig consists of the
-// ScheduleExpression and the DurationInMinutes attributes. If the
-// ScheduleExpression is not provided, then the Edge Agent will always be set to
+// file, should record onto the Edge Agent. The ScheduleConfig  consists of the
+// ScheduleExpression and the DurationInMinutes  attributes. If the
+// ScheduleExpressionis not provided, then the Edge Agent will always be set to
 // recording mode.
 type ScheduleConfig struct {
 
 	// The total duration to record the media. If the ScheduleExpression attribute is
-	// provided, then the DurationInSeconds attribute should also be specified.
+	// provided, then the DurationInSeconds  attribute should also be specified.
 	//
 	// This member is required.
 	DurationInSeconds *int32
 
-	// The Quartz cron expression that takes care of scheduling jobs to record from the
-	// camera, or local media file, onto the Edge Agent. If the ScheduleExpression is
-	// not provided for the RecorderConfig, then the Edge Agent will always be set to
-	// recording mode. For more information about Quartz, refer to the  Cron Trigger
-	// Tutorial
-	// (http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html)
+	// The Quartz cron expression that takes care of scheduling jobs to record from
+	// the camera, or local media file, onto the Edge Agent. If the ScheduleExpression
+	// is not provided for the RecorderConfig, then the Edge Agent will always be set
+	// to recording mode. For more information about Quartz, refer to the Cron
+	// Trigger Tutorial  (http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html)
 	// page to understand the valid expressions and its use.
 	//
 	// This member is required.
@@ -343,13 +345,13 @@ type ScheduleConfig struct {
 	noSmithyDocumentSerde
 }
 
-// An object that contains the endpoint configuration for the SINGLE_MASTER channel
-// type.
+// An object that contains the endpoint configuration for the SINGLE_MASTER
+// channel type.
 type SingleMasterChannelEndpointConfiguration struct {
 
 	// This property is used to determine the nature of communication over this
 	// SINGLE_MASTER signaling channel. If WSS is specified, this API returns a
-	// websocket endpoint. If HTTPS is specified, this API returns an HTTPS endpoint.
+	// websocket endpoint. If HTTPS  is specified, this API returns an HTTPS  endpoint.
 	Protocols []ChannelProtocol
 
 	// This property is used to determine messaging permissions in this SINGLE_MASTER
@@ -363,11 +365,11 @@ type SingleMasterChannelEndpointConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that contains the configuration for the SINGLE_MASTER channel type.
+// A structure that contains the configuration for the SINGLE_MASTER  channel type.
 type SingleMasterConfiguration struct {
 
-	// The period of time a signaling channel retains undelivered messages before they
-	// are discarded.
+	// The period of time a signaling channel retains undelivered messages before
+	// they are discarded.
 	MessageTtlSeconds *int32
 
 	noSmithyDocumentSerde
@@ -389,7 +391,7 @@ type StreamInfo struct {
 	// to encrypt data on the stream.
 	KmsKeyId *string
 
-	// The MediaType of the stream.
+	// The MediaType  of the stream.
 	MediaType *string
 
 	// The status of the stream.
@@ -408,13 +410,13 @@ type StreamInfo struct {
 }
 
 // Specifies the condition that streams must satisfy to be returned when you list
-// streams (see the ListStreams API). A condition has a comparison operation and a
-// value. Currently, you can specify only the BEGINS_WITH operator, which finds
+// streams (see the ListStreams API). A condition has a comparison operation and
+// a value. Currently, you can specify only the BEGINS_WITH operator, which finds
 // streams whose names start with a given prefix.
 type StreamNameCondition struct {
 
-	// A comparison operator. Currently, you can specify only the BEGINS_WITH operator,
-	// which finds streams whose names start with a given prefix.
+	// A comparison operator. Currently, you can specify only the BEGINS_WITH
+	// operator, which finds streams whose names start with a given prefix.
 	ComparisonOperator ComparisonOperator
 
 	// A value to compare.
@@ -439,15 +441,15 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration that consists of the ScheduleExpression and the
+// The configuration that consists of the ScheduleExpression  and the
 // DurationInMinutesdetails, that specify the scheduling to record from a camera,
 // or local media file, onto the Edge Agent. If the ScheduleExpression is not
 // provided, then the Edge Agent will always be in upload mode.
 type UploaderConfig struct {
 
-	// The configuration that consists of the ScheduleExpression and the
-	// DurationInMinutesdetails that specify the scheduling to record from a camera, or
-	// local media file, onto the Edge Agent. If the ScheduleExpression is not
+	// The configuration that consists of the ScheduleExpression  and the
+	// DurationInMinutesdetails that specify the scheduling to record from a camera,
+	// or local media file, onto the Edge Agent. If the ScheduleExpression is not
 	// provided, then the Edge Agent will always be in recording mode.
 	//
 	// This member is required.

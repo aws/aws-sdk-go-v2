@@ -15,9 +15,9 @@ type As2ConnectorConfig struct {
 	// Specifies whether the AS2 file is compressed.
 	Compression CompressionEnum
 
-	// The algorithm that is used to encrypt the file. You can only specify NONE if the
-	// URL for your connector uses HTTPS. This ensures that no traffic is sent in clear
-	// text.
+	// The algorithm that is used to encrypt the file. You can only specify NONE if
+	// the URL for your connector uses HTTPS. This ensures that no traffic is sent in
+	// clear text.
 	EncryptionAlgorithm EncryptionAlg
 
 	// A unique identifier for the AS2 local profile.
@@ -26,14 +26,12 @@ type As2ConnectorConfig struct {
 	// Used for outbound requests (from an Transfer Family server to a partner AS2
 	// server) to determine whether the partner response for transfers is synchronous
 	// or asynchronous. Specify either of the following values:
-	// - SYNC: The system
-	// expects a synchronous MDN response, confirming that the file was transferred
-	// successfully (or not).
-	// - NONE: Specifies that no MDN response is required.
+	//     - SYNC : The system expects a synchronous MDN response, confirming that the file was transferred successfully (or not).
+	//     - NONE : Specifies that no MDN response is required.
 	MdnResponse MdnResponse
 
 	// The signing algorithm for the MDN response. If set to DEFAULT (or not set at
-	// all), the value for SigningAlgorithm is used.
+	// all), the value for SigningAlgorithm  is used.
 	MdnSigningAlgorithm MdnSigningAlg
 
 	// Used as the Subject HTTP header attribute in AS2 messages that are being sent
@@ -49,43 +47,33 @@ type As2ConnectorConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Each step type has its own StepDetails structure.
+// Each step type has its own StepDetails  structure.
 type CopyStepDetails struct {
 
-	// Specifies the location for the file being copied. Use ${Transfer:username} or
-	// ${Transfer:UploadDate} in this field to parametrize the destination prefix by
+	// Specifies the location for the file being copied. Use ${Transfer:username}  or
+	// ${Transfer:UploadDate}in this field to parametrize the destination prefix by
 	// username or uploaded date.
-	// - Set the value of DestinationFileLocation to
-	// ${Transfer:username} to copy uploaded files to an Amazon S3 bucket that is
-	// prefixed with the name of the Transfer Family user that uploaded the file.
-	// - Set
-	// the value of DestinationFileLocation to ${Transfer:UploadDate} to copy uploaded
-	// files to an Amazon S3 bucket that is prefixed with the date of the upload. The
-	// system resolves UploadDate to a date format of YYYY-MM-DD, based on the date the
-	// file is uploaded.
+	//     - Set the value of DestinationFileLocation to ${Transfer:username} to copy uploaded files to an Amazon S3 bucket that is prefixed with the name of the Transfer Family user that uploaded the file.
+	//     - Set the value of DestinationFileLocation to ${Transfer:UploadDate} to copy uploaded files to an Amazon S3 bucket that is prefixed with the date of the upload. The system resolves UploadDate to a date format of YYYY-MM-DD, based on the date the file is uploaded.
 	DestinationFileLocation *InputFileLocation
 
 	// The name of the step, used as an identifier.
 	Name *string
 
 	// A flag that indicates whether to overwrite an existing file of the same name.
-	// The default is FALSE.
+	// The default is FALSE .
 	OverwriteExisting OverwriteExisting
 
 	// Specifies which file to use as input to the workflow step: either the output
 	// from the previous step, or the originally uploaded file for the workflow.
-	// - To
-	// use the previous file as the input, enter ${previous.file}. In this case, this
-	// workflow step uses the output file from the previous workflow step as input.
-	// This is the default value.
-	// - To use the originally uploaded file location as
-	// input for this step, enter ${original.file}.
+	//     - To use the previous file as the input, enter ${previous.file} . In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.
+	//     - To use the originally uploaded file location as input for this step, enter ${original.file} .
 	SourceFileLocation *string
 
 	noSmithyDocumentSerde
 }
 
-// Each step type has its own StepDetails structure.
+// Each step type has its own StepDetails  structure.
 type CustomStepDetails struct {
 
 	// The name of the step, used as an identifier.
@@ -93,12 +81,8 @@ type CustomStepDetails struct {
 
 	// Specifies which file to use as input to the workflow step: either the output
 	// from the previous step, or the originally uploaded file for the workflow.
-	// - To
-	// use the previous file as the input, enter ${previous.file}. In this case, this
-	// workflow step uses the output file from the previous workflow step as input.
-	// This is the default value.
-	// - To use the originally uploaded file location as
-	// input for this step, enter ${original.file}.
+	//     - To use the previous file as the input, enter ${previous.file} . In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.
+	//     - To use the originally uploaded file location as input for this step, enter ${original.file} .
 	SourceFileLocation *string
 
 	// The ARN for the lambda function that is being called.
@@ -110,7 +94,7 @@ type CustomStepDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Each step type has its own StepDetails structure.
+// Each step type has its own StepDetails  structure.
 type DecryptStepDetails struct {
 
 	// Specifies the location for the file that's being processed.
@@ -118,7 +102,7 @@ type DecryptStepDetails struct {
 	// This member is required.
 	DestinationFileLocation *InputFileLocation
 
-	// The type of encryption used. Currently, this value must be PGP.
+	// The type of encryption used. Currently, this value must be PGP .
 	//
 	// This member is required.
 	Type EncryptionType
@@ -127,17 +111,13 @@ type DecryptStepDetails struct {
 	Name *string
 
 	// A flag that indicates whether to overwrite an existing file of the same name.
-	// The default is FALSE.
+	// The default is FALSE .
 	OverwriteExisting OverwriteExisting
 
 	// Specifies which file to use as input to the workflow step: either the output
 	// from the previous step, or the originally uploaded file for the workflow.
-	// - To
-	// use the previous file as the input, enter ${previous.file}. In this case, this
-	// workflow step uses the output file from the previous workflow step as input.
-	// This is the default value.
-	// - To use the originally uploaded file location as
-	// input for this step, enter ${original.file}.
+	//     - To use the previous file as the input, enter ${previous.file} . In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.
+	//     - To use the originally uploaded file location as input for this step, enter ${original.file} .
 	SourceFileLocation *string
 
 	noSmithyDocumentSerde
@@ -151,12 +131,8 @@ type DeleteStepDetails struct {
 
 	// Specifies which file to use as input to the workflow step: either the output
 	// from the previous step, or the originally uploaded file for the workflow.
-	// - To
-	// use the previous file as the input, enter ${previous.file}. In this case, this
-	// workflow step uses the output file from the previous workflow step as input.
-	// This is the default value.
-	// - To use the originally uploaded file location as
-	// input for this step, enter ${original.file}.
+	//     - To use the previous file as the input, enter ${previous.file} . In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.
+	//     - To use the originally uploaded file location as input for this step, enter ${original.file} .
 	SourceFileLocation *string
 
 	noSmithyDocumentSerde
@@ -170,7 +146,7 @@ type DescribedAccess struct {
 	// S3 or Amazon EFS resources over the enabled protocols using Transfer Family. If
 	// you know the group name, you can view the SID values by running the following
 	// command using Windows PowerShell. Get-ADGroup -Filter {samAccountName -like
-	// "YourGroupName*"} -Properties * | Select SamAccountName,ObjectSid In that
+	// "YourGroupName*"} -Properties * | Select SamAccountName,ObjectSidIn that
 	// command, replace YourGroupName with the name of your Active Directory group. The
 	// regular expression used to validate this parameter is a string of characters
 	// consisting of uppercase and lowercase alphanumeric characters with no spaces.
@@ -178,47 +154,47 @@ type DescribedAccess struct {
 	ExternalId *string
 
 	// The landing directory (folder) for a user when they log in to the server using
-	// the client. A HomeDirectory example is /bucket_name/home/mydirectory.
+	// the client. A HomeDirectory  example is /bucket_name/home/mydirectory .
 	HomeDirectory *string
 
 	// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and
 	// keys should be visible to your user and how you want to make them visible. You
-	// must specify the Entry and Target pair, where Entry shows how the path is made
-	// visible and Target is the actual Amazon S3 or Amazon EFS path. If you only
-	// specify a target, it is displayed as is. You also must ensure that your Identity
-	// and Access Management (IAM) role provides access to paths in Target. This value
-	// can be set only when HomeDirectoryType is set to LOGICAL. In most cases, you can
-	// use this value instead of the session policy to lock down the associated access
-	// to the designated home directory ("chroot"). To do this, you can set Entry to
-	// '/' and set Target to the HomeDirectory parameter value.
+	// must specify the Entry  and Target  pair, where Entry shows how the path is
+	// made visible and Target is the actual Amazon S3 or Amazon EFS path. If you
+	// only specify a target, it is displayed as is. You also must ensure that your
+	// Identity and Access Management (IAM) role provides access to paths in Target.
+	// This value can be set only when HomeDirectoryType is set to LOGICAL. In most
+	// cases, you can use this value instead of the session policy to lock down the
+	// associated access to the designated home directory (" chroot"). To do this,
+	// you can set Entry  to '/' and set Target  to the HomeDirectory  parameter value.
 	HomeDirectoryMappings []HomeDirectoryMapEntry
 
-	// The type of landing directory (folder) that you want your users' home directory
-	// to be when they log in to the server. If you set it to PATH, the user will see
-	// the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol
-	// clients. If you set it LOGICAL, you need to provide mappings in the
-	// HomeDirectoryMappings for how you want to make Amazon S3 or Amazon EFS paths
-	// visible to your users.
+	// The type of landing directory (folder) that you want your users' home
+	// directory to be when they log in to the server. If you set it to PATH, the
+	// user will see the absolute Amazon S3 bucket or EFS paths as is in their file
+	// transfer protocol clients. If you set it LOGICAL, you need to provide mappings
+	// in the HomeDirectoryMappings for how you want to make Amazon S3 or Amazon EFS
+	// paths visible to your users.
 	HomeDirectoryType HomeDirectoryType
 
-	// A session policy for your user so that you can use the same Identity and Access
-	// Management (IAM) role across multiple users. This policy scopes down a user's
-	// access to portions of their Amazon S3 bucket. Variables that you can use inside
-	// this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and
-	// ${Transfer:HomeBucket}.
+	// A session policy for your user so that you can use the same Identity and
+	// Access Management (IAM) role across multiple users. This policy scopes down a
+	// user's access to portions of their Amazon S3 bucket. Variables that you can use
+	// inside this policy include ${Transfer:UserName} , ${Transfer:HomeDirectory},
+	// and ${Transfer:HomeBucket} .
 	Policy *string
 
-	// The full POSIX identity, including user ID (Uid), group ID (Gid), and any
-	// secondary groups IDs (SecondaryGids), that controls your users' access to your
-	// Amazon EFS file systems. The POSIX permissions that are set on files and
+	// The full POSIX identity, including user ID ( Uid ), group ID ( Gid), and any
+	// secondary groups IDs ( SecondaryGids), that controls your users' access to
+	// your Amazon EFS file systems. The POSIX permissions that are set on files and
 	// directories in your file system determine the level of access your users get
 	// when transferring files into and out of your Amazon EFS file systems.
 	PosixProfile *PosixProfile
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-	// that controls your users' access to your Amazon S3 bucket or Amazon EFS file
-	// system. The policies attached to this role determine the level of access that
-	// you want to provide your users when transferring files into and out of your
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
+	// role that controls your users' access to your Amazon S3 bucket or Amazon EFS
+	// file system. The policies attached to this role determine the level of access
+	// that you want to provide your users when transferring files into and out of your
 	// Amazon S3 bucket or Amazon EFS file system. The IAM role should also contain a
 	// trust relationship that allows the server to access your resources when
 	// servicing your users' transfer requests.
@@ -244,7 +220,7 @@ type DescribedAgreement struct {
 	// provide read and write access to the parent directory of the file location used
 	// in the StartFileTransfer request. Additionally, you need to provide read and
 	// write access to the parent directory of the files that you intend to send with
-	// StartFileTransfer.
+	// StartFileTransfer .
 	AccessRole *string
 
 	// A unique identifier for the agreement. This identifier is returned when you
@@ -268,7 +244,7 @@ type DescribedAgreement struct {
 	// indicates the specific server that the agreement uses.
 	ServerId *string
 
-	// The current status of the agreement, either ACTIVE or INACTIVE.
+	// The current status of the agreement, either ACTIVE  or INACTIVE .
 	Status AgreementStatusType
 
 	// Key-value pairs that can be used to group and search for agreements.
@@ -313,8 +289,8 @@ type DescribedCertificate struct {
 	// The serial number for the certificate.
 	Serial *string
 
-	// The certificate can be either ACTIVE, PENDING_ROTATION, or INACTIVE.
-	// PENDING_ROTATION means that this certificate will replace the current
+	// The certificate can be either ACTIVE , PENDING_ROTATION , or INACTIVE .
+	// PENDING_ROTATIONmeans that this certificate will replace the current
 	// certificate when it expires.
 	Status CertificateStatusType
 
@@ -322,8 +298,8 @@ type DescribedCertificate struct {
 	Tags []Tag
 
 	// If a private key has been specified for the certificate, its type is
-	// CERTIFICATE_WITH_PRIVATE_KEY. If there is no private key, the type is
-	// CERTIFICATE.
+	// CERTIFICATE_WITH_PRIVATE_KEY . If there is no private key, the type is
+	// CERTIFICATE .
 	Type CertificateType
 
 	// Specifies whether this certificate is used for signing or encryption.
@@ -332,7 +308,7 @@ type DescribedCertificate struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the parameters for the connector, as identified by the ConnectorId.
+// Describes the parameters for the connector, as identified by the ConnectorId .
 type DescribedConnector struct {
 
 	// The unique Amazon Resource Name (ARN) for the connector.
@@ -349,7 +325,7 @@ type DescribedConnector struct {
 	// provide read and write access to the parent directory of the file location used
 	// in the StartFileTransfer request. Additionally, you need to provide read and
 	// write access to the parent directory of the files that you intend to send with
-	// StartFileTransfer.
+	// StartFileTransfer .
 	AccessRole *string
 
 	// A structure that contains the parameters for a connector object.
@@ -358,9 +334,9 @@ type DescribedConnector struct {
 	// The unique identifier for the connector.
 	ConnectorId *string
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-	// that allows a connector to turn on CloudWatch logging for Amazon S3 events. When
-	// set, you can view connector activity in your CloudWatch logs.
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
+	// role that allows a connector to turn on CloudWatch logging for Amazon S3 events.
+	// When set, you can view connector activity in your CloudWatch logs.
 	LoggingRole *string
 
 	// Key-value pairs that can be used to group and search for connectors.
@@ -381,24 +357,24 @@ type DescribedExecution struct {
 	// The IAM role associated with the execution.
 	ExecutionRole *string
 
-	// A structure that describes the Amazon S3 or EFS file location. This is the file
-	// location when the execution begins: if the file is being copied, this is the
-	// initial (as opposed to destination) file location.
+	// A structure that describes the Amazon S3 or EFS file location. This is the
+	// file location when the execution begins: if the file is being copied, this is
+	// the initial (as opposed to destination) file location.
 	InitialFileLocation *FileLocation
 
 	// The IAM logging role associated with the execution.
 	LoggingConfiguration *LoggingConfiguration
 
-	// The full POSIX identity, including user ID (Uid), group ID (Gid), and any
-	// secondary groups IDs (SecondaryGids), that controls your users' access to your
-	// Amazon EFS file systems. The POSIX permissions that are set on files and
+	// The full POSIX identity, including user ID ( Uid ), group ID ( Gid), and any
+	// secondary groups IDs ( SecondaryGids), that controls your users' access to
+	// your Amazon EFS file systems. The POSIX permissions that are set on files and
 	// directories in your file system determine the level of access your users get
 	// when transferring files into and out of your Amazon EFS file systems.
 	PosixProfile *PosixProfile
 
 	// A structure that describes the execution results. This includes a list of the
 	// steps along with the details of each step, error type and message (if any), and
-	// the OnExceptionSteps structure.
+	// the OnExceptionSteps  structure.
 	Results *ExecutionResults
 
 	// A container object for the session details that are associated with a workflow.
@@ -425,8 +401,8 @@ type DescribedHostKey struct {
 	// The text description for this host key.
 	Description *string
 
-	// The public key fingerprint, which is a short sequence of bytes used to identify
-	// the longer public key.
+	// The public key fingerprint, which is a short sequence of bytes used to
+	// identify the longer public key.
 	HostKeyFingerprint *string
 
 	// A unique identifier for the host key.
@@ -437,12 +413,11 @@ type DescribedHostKey struct {
 
 	// The encryption algorithm that is used for the host key. The Type parameter is
 	// specified by using one of the following values:
-	// - ssh-rsa
-	// - ssh-ed25519
-	// -
-	// ecdsa-sha2-nistp256
-	// - ecdsa-sha2-nistp384
-	// - ecdsa-sha2-nistp521
+	//     - ssh-rsa
+	//     - ssh-ed25519
+	//     - ecdsa-sha2-nistp256
+	//     - ecdsa-sha2-nistp384
+	//     - ecdsa-sha2-nistp521
 	Type *string
 
 	noSmithyDocumentSerde
@@ -456,11 +431,11 @@ type DescribedProfile struct {
 	// This member is required.
 	Arn *string
 
-	// The As2Id is the AS2-name, as defined in the RFC 4130
-	// (https://datatracker.ietf.org/doc/html/rfc4130). For inbound transfers, this is
-	// the AS2-From header for the AS2 messages sent from the partner. For outbound
-	// connectors, this is the AS2-To header for the AS2 messages sent to the partner
-	// using the StartFileTransfer API operation. This ID cannot include spaces.
+	// The As2Id  is the AS2-name, as defined in the RFC 4130 (https://datatracker.ietf.org/doc/html/rfc4130)
+	// . For inbound transfers, this is the AS2-From header for the AS2 messages sent
+	// from the partner. For outbound connectors, this is the AS2-To header for the
+	// AS2 messages sent to the partner using the StartFileTransfer API operation.
+	// This ID cannot include spaces.
 	As2Id *string
 
 	// An array of identifiers for the imported certificates. You use this identifier
@@ -470,7 +445,7 @@ type DescribedProfile struct {
 	// A unique identifier for the local or partner AS2 profile.
 	ProfileId *string
 
-	// Indicates whether to list only LOCAL type profiles or only PARTNER type
+	// Indicates whether to list only LOCAL  type profiles or only PARTNER type
 	// profiles. If not supplied in the request, the command lists all types of
 	// profiles.
 	ProfileType ProfileType
@@ -482,8 +457,8 @@ type DescribedProfile struct {
 }
 
 // Describes the properties of a security policy that was specified. For more
-// information about security policies, see Working with security policies
-// (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html).
+// information about security policies, see Working with security policies (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html)
+// .
 type DescribedSecurityPolicy struct {
 
 	// Specifies the name of the security policy that is attached to the server.
@@ -524,7 +499,7 @@ type DescribedServer struct {
 	Arn *string
 
 	// Specifies the ARN of the Amazon Web ServicesCertificate Manager (ACM)
-	// certificate. Required when Protocols is set to FTPS.
+	// certificate. Required when Protocols  is set to FTPS .
 	Certificate *string
 
 	// Specifies the domain of the storage system that is used for file transfers.
@@ -537,8 +512,8 @@ type DescribedServer struct {
 	// VPC's default security groups are automatically assigned to your endpoint.
 	EndpointDetails *EndpointDetails
 
-	// Defines the type of endpoint that your server is connected to. If your server is
-	// connected to a VPC endpoint, your server isn't accessible over the public
+	// Defines the type of endpoint that your server is connected to. If your server
+	// is connected to a VPC endpoint, your server isn't accessible over the public
 	// internet.
 	EndpointType EndpointType
 
@@ -547,28 +522,28 @@ type DescribedServer struct {
 	// command.
 	HostKeyFingerprint *string
 
-	// Specifies information to call a customer-supplied authentication API. This field
-	// is not populated when the IdentityProviderType of a server is
-	// AWS_DIRECTORY_SERVICE or SERVICE_MANAGED.
+	// Specifies information to call a customer-supplied authentication API. This
+	// field is not populated when the IdentityProviderType  of a server is
+	// AWS_DIRECTORY_SERVICE or SERVICE_MANAGED .
 	IdentityProviderDetails *IdentityProviderDetails
 
 	// The mode of authentication for a server. The default value is SERVICE_MANAGED,
 	// which allows you to store and access user credentials within the Transfer Family
-	// service. Use AWS_DIRECTORY_SERVICE to provide access to Active Directory groups
-	// in Directory Service for Microsoft Active Directory or Microsoft Active
+	// service. Use AWS_DIRECTORY_SERVICE to provide access to Active Directory
+	// groups in Directory Service for Microsoft Active Directory or Microsoft Active
 	// Directory in your on-premises environment or in Amazon Web Services using AD
 	// Connector. This option also requires you to provide a Directory ID by using the
 	// IdentityProviderDetails parameter. Use the API_GATEWAY value to integrate with
 	// an identity provider of your choosing. The API_GATEWAY setting requires you to
 	// provide an Amazon API Gateway endpoint URL to call for authentication by using
-	// the IdentityProviderDetails parameter. Use the AWS_LAMBDA value to directly use
-	// an Lambda function as your identity provider. If you choose this value, you must
-	// specify the ARN for the Lambda function in the Function parameter or the
+	// the IdentityProviderDetails  parameter. Use the AWS_LAMBDA value to directly
+	// use an Lambda function as your identity provider. If you choose this value, you
+	// must specify the ARN for the Lambda function in the Function  parameter or the
 	// IdentityProviderDetails data type.
 	IdentityProviderType IdentityProviderType
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-	// that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
+	// role that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or
 	// Amazon EFSevents. When set, you can view user activity in your CloudWatch logs.
 	LoggingRole *string
 
@@ -586,51 +561,25 @@ type DescribedServer struct {
 	PreAuthenticationLoginBanner *string
 
 	// The protocol settings that are configured for your server.
-	// - To indicate passive
-	// mode (for FTP and FTPS protocols), use the PassiveIp parameter. Enter a single
-	// dotted-quad IPv4 address, such as the external IP address of a firewall, router,
-	// or load balancer.
-	// - To ignore the error that is generated when the client
-	// attempts to use the SETSTAT command on a file that you are uploading to an
-	// Amazon S3 bucket, use the SetStatOption parameter. To have the Transfer Family
-	// server ignore the SETSTAT command and upload files without needing to make any
-	// changes to your SFTP client, set the value to ENABLE_NO_OP. If you set the
-	// SetStatOption parameter to ENABLE_NO_OP, Transfer Family generates a log entry
-	// to Amazon CloudWatch Logs, so that you can determine when the client is making a
-	// SETSTAT call.
-	// - To determine whether your Transfer Family server resumes recent,
-	// negotiated sessions through a unique session ID, use the
-	// TlsSessionResumptionMode parameter.
-	// - As2Transports indicates the transport
-	// method for the AS2 messages. Currently, only HTTP is supported.
+	//     - To indicate passive mode (for FTP and FTPS protocols), use the PassiveIp parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer.
+	//     - To ignore the error that is generated when the client attempts to use the SETSTAT command on a file that you are uploading to an Amazon S3 bucket, use the SetStatOption parameter. To have the Transfer Family server ignore the SETSTAT command and upload files without needing to make any changes to your SFTP client, set the value to ENABLE_NO_OP . If you set the SetStatOption parameter to ENABLE_NO_OP , Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a SETSTAT call.
+	//     - To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the TlsSessionResumptionMode parameter.
+	//     - As2Transports indicates the transport method for the AS2 messages. Currently, only HTTP is supported.
 	ProtocolDetails *ProtocolDetails
 
-	// Specifies the file transfer protocol or protocols over which your file transfer
-	// protocol client can connect to your server's endpoint. The available protocols
-	// are:
-	// - SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over
-	// SSH
-	// - FTPS (File Transfer Protocol Secure): File transfer with TLS encryption
-	// -
-	// FTP (File Transfer Protocol): Unencrypted file transfer
-	// - AS2 (Applicability
-	// Statement 2): used for transporting structured business-to-business data
+	// Specifies the file transfer protocol or protocols over which your file
+	// transfer protocol client can connect to your server's endpoint. The available
+	// protocols are:
+	//     - SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH
+	//     - FTPS (File Transfer Protocol Secure): File transfer with TLS encryption
+	//     - FTP (File Transfer Protocol): Unencrypted file transfer
+	//     - AS2 (Applicability Statement 2): used for transporting structured business-to-business data
 	//
-	// - If
-	// you select FTPS, you must choose a certificate stored in Certificate Manager
-	// (ACM) which is used to identify your server when clients connect to it over
-	// FTPS.
-	// - If Protocol includes either FTP or FTPS, then the EndpointType must be
-	// VPC and the IdentityProviderType must be either AWS_DIRECTORY_SERVICE,
-	// AWS_LAMBDA, or API_GATEWAY.
-	// - If Protocol includes FTP, then
-	// AddressAllocationIds cannot be associated.
-	// - If Protocol is set only to SFTP,
-	// the EndpointType can be set to PUBLIC and the IdentityProviderType can be set
-	// any of the supported identity types: SERVICE_MANAGED, AWS_DIRECTORY_SERVICE,
-	// AWS_LAMBDA, or API_GATEWAY.
-	// - If Protocol includes AS2, then the EndpointType
-	// must be VPC, and domain must be Amazon S3.
+	//     - If you select FTPS , you must choose a certificate stored in Certificate Manager (ACM) which is used to identify your server when clients connect to it over FTPS.
+	//     - If Protocol includes either FTP or FTPS , then the EndpointType must be VPC and the IdentityProviderType must be either AWS_DIRECTORY_SERVICE , AWS_LAMBDA , or API_GATEWAY .
+	//     - If Protocol includes FTP , then AddressAllocationIds cannot be associated.
+	//     - If Protocol is set only to SFTP , the EndpointType can be set to PUBLIC and the IdentityProviderType can be set any of the supported identity types: SERVICE_MANAGED , AWS_DIRECTORY_SERVICE , AWS_LAMBDA , or API_GATEWAY .
+	//     - If Protocol includes AS2 , then the EndpointType must be VPC , and domain must be Amazon S3.
 	Protocols []Protocol
 
 	// Specifies the name of the security policy that is attached to the server.
@@ -640,12 +589,12 @@ type DescribedServer struct {
 	// instantiate.
 	ServerId *string
 
-	// The condition of the server that was described. A value of ONLINE indicates that
-	// the server can accept jobs and transfer files. A State value of OFFLINE means
-	// that the server cannot perform file transfer operations. The states of STARTING
-	// and STOPPING indicate that the server is in an intermediate state, either not
-	// fully able to respond, or not fully offline. The values of START_FAILED or
-	// STOP_FAILED can indicate an error condition.
+	// The condition of the server that was described. A value of ONLINE indicates
+	// that the server can accept jobs and transfer files. A State  value of OFFLINE
+	// means that the server cannot perform file transfer operations. The states of
+	// STARTING and STOPPING indicate that the server is in an intermediate state,
+	// either not fully able to respond, or not fully offline. The values of
+	// START_FAILED or STOP_FAILED  can indicate an error condition.
 	State State
 
 	// Specifies the key-value pairs that you can use to search for and group servers
@@ -653,14 +602,14 @@ type DescribedServer struct {
 	Tags []Tag
 
 	// Specifies the number of users that are assigned to a server you specified with
-	// the ServerId.
+	// the ServerId .
 	UserCount *int32
 
 	// Specifies the workflow ID for the workflow to assign and the execution role
 	// that's used for executing the workflow. In addition to a workflow to execute
-	// when a file is uploaded completely, WorkflowDetails can also contain a workflow
-	// ID (and execution role) for a workflow to execute on partial upload. A partial
-	// upload occurs when a file is open when the session disconnects.
+	// when a file is uploaded completely, WorkflowDetails can also contain a
+	// workflow ID (and execution role) for a workflow to execute on partial upload. A
+	// partial upload occurs when a file is open when the session disconnects.
 	WorkflowDetails *WorkflowDetails
 
 	noSmithyDocumentSerde
@@ -669,55 +618,55 @@ type DescribedServer struct {
 // Describes the properties of a user that was specified.
 type DescribedUser struct {
 
-	// Specifies the unique Amazon Resource Name (ARN) for the user that was requested
-	// to be described.
+	// Specifies the unique Amazon Resource Name (ARN) for the user that was
+	// requested to be described.
 	//
 	// This member is required.
 	Arn *string
 
 	// The landing directory (folder) for a user when they log in to the server using
-	// the client. A HomeDirectory example is /bucket_name/home/mydirectory.
+	// the client. A HomeDirectory  example is /bucket_name/home/mydirectory .
 	HomeDirectory *string
 
 	// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and
 	// keys should be visible to your user and how you want to make them visible. You
-	// must specify the Entry and Target pair, where Entry shows how the path is made
-	// visible and Target is the actual Amazon S3 or Amazon EFS path. If you only
-	// specify a target, it is displayed as is. You also must ensure that your Identity
-	// and Access Management (IAM) role provides access to paths in Target. This value
-	// can be set only when HomeDirectoryType is set to LOGICAL. In most cases, you can
-	// use this value instead of the session policy to lock your user down to the
-	// designated home directory ("chroot"). To do this, you can set Entry to '/' and
-	// set Target to the HomeDirectory parameter value.
+	// must specify the Entry  and Target  pair, where Entry shows how the path is
+	// made visible and Target is the actual Amazon S3 or Amazon EFS path. If you
+	// only specify a target, it is displayed as is. You also must ensure that your
+	// Identity and Access Management (IAM) role provides access to paths in Target.
+	// This value can be set only when HomeDirectoryType is set to LOGICAL. In most
+	// cases, you can use this value instead of the session policy to lock your user
+	// down to the designated home directory (" chroot "). To do this, you can set
+	// Entry to '/' and set Target  to the HomeDirectory parameter value.
 	HomeDirectoryMappings []HomeDirectoryMapEntry
 
-	// The type of landing directory (folder) that you want your users' home directory
-	// to be when they log in to the server. If you set it to PATH, the user will see
-	// the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol
-	// clients. If you set it LOGICAL, you need to provide mappings in the
-	// HomeDirectoryMappings for how you want to make Amazon S3 or Amazon EFS paths
-	// visible to your users.
+	// The type of landing directory (folder) that you want your users' home
+	// directory to be when they log in to the server. If you set it to PATH, the
+	// user will see the absolute Amazon S3 bucket or EFS paths as is in their file
+	// transfer protocol clients. If you set it LOGICAL, you need to provide mappings
+	// in the HomeDirectoryMappings for how you want to make Amazon S3 or Amazon EFS
+	// paths visible to your users.
 	HomeDirectoryType HomeDirectoryType
 
-	// A session policy for your user so that you can use the same Identity and Access
-	// Management (IAM) role across multiple users. This policy scopes down a user's
-	// access to portions of their Amazon S3 bucket. Variables that you can use inside
-	// this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and
-	// ${Transfer:HomeBucket}.
+	// A session policy for your user so that you can use the same Identity and
+	// Access Management (IAM) role across multiple users. This policy scopes down a
+	// user's access to portions of their Amazon S3 bucket. Variables that you can use
+	// inside this policy include ${Transfer:UserName} , ${Transfer:HomeDirectory},
+	// and ${Transfer:HomeBucket} .
 	Policy *string
 
-	// Specifies the full POSIX identity, including user ID (Uid), group ID (Gid), and
-	// any secondary groups IDs (SecondaryGids), that controls your users' access to
-	// your Amazon Elastic File System (Amazon EFS) file systems. The POSIX permissions
-	// that are set on files and directories in your file system determine the level of
-	// access your users get when transferring files into and out of your Amazon EFS
-	// file systems.
+	// Specifies the full POSIX identity, including user ID ( Uid ), group ID ( Gid),
+	// and any secondary groups IDs ( SecondaryGids), that controls your users'
+	// access to your Amazon Elastic File System (Amazon EFS) file systems. The POSIX
+	// permissions that are set on files and directories in your file system determine
+	// the level of access your users get when transferring files into and out of your
+	// Amazon EFS file systems.
 	PosixProfile *PosixProfile
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-	// that controls your users' access to your Amazon S3 bucket or Amazon EFS file
-	// system. The policies attached to this role determine the level of access that
-	// you want to provide your users when transferring files into and out of your
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
+	// role that controls your users' access to your Amazon S3 bucket or Amazon EFS
+	// file system. The policies attached to this role determine the level of access
+	// that you want to provide your users when transferring files into and out of your
 	// Amazon S3 bucket or Amazon EFS file system. The IAM role should also contain a
 	// trust relationship that allows the server to access your resources when
 	// servicing your users' transfer requests.
@@ -727,8 +676,8 @@ type DescribedUser struct {
 	// described user.
 	SshPublicKeys []SshPublicKey
 
-	// Specifies the key-value pairs for the user requested. Tag can be used to search
-	// for and group users for a variety of purposes.
+	// Specifies the key-value pairs for the user requested. Tag can be used to
+	// search for and group users for a variety of purposes.
 	Tags []Tag
 
 	// Specifies the name of the user that was requested to be described. User names
@@ -750,8 +699,8 @@ type DescribedWorkflow struct {
 	// Specifies the text description for the workflow.
 	Description *string
 
-	// Specifies the steps (actions) to take if errors are encountered during execution
-	// of the workflow.
+	// Specifies the steps (actions) to take if errors are encountered during
+	// execution of the workflow.
 	OnExceptionSteps []WorkflowStep
 
 	// Specifies the details for the steps that are in the specified workflow.
@@ -790,28 +739,26 @@ type EfsFileLocation struct {
 // your account hasn't already done so before May 19, 2021. If you have already
 // created servers with EndpointType=VPC_ENDPOINT in your Amazon Web
 // Servicesaccount on or before May 19, 2021, you will not be affected. After this
-// date, use EndpointType=VPC. For more information, see
+// date, use EndpointType = VPC. For more information, see
 // https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.
 type EndpointDetails struct {
 
 	// A list of address allocation IDs that are required to attach an Elastic IP
 	// address to your server's endpoint. This property can only be set when
-	// EndpointType is set to VPC and it is only valid in the UpdateServer API.
+	// EndpointType is set to VPC  and it is only valid in the UpdateServer  API.
 	AddressAllocationIds []string
 
 	// A list of security groups IDs that are available to attach to your server's
-	// endpoint. This property can only be set when EndpointType is set to VPC. You can
-	// edit the SecurityGroupIds property in the UpdateServer
-	// (https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateServer.html)
-	// API only if you are changing the EndpointType from PUBLIC or VPC_ENDPOINT to
-	// VPC. To change security groups associated with your server's VPC endpoint after
-	// creation, use the Amazon EC2 ModifyVpcEndpoint
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVpcEndpoint.html)
+	// endpoint. This property can only be set when EndpointType  is set to VPC. You
+	// can edit the SecurityGroupIds  property in the UpdateServer (https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateServer.html)
+	// API only if you are changing the EndpointType  from PUBLIC  or VPC_ENDPOINT  to
+	// VPC. To change security groups associated with your server's VPC endpoint
+	// after creation, use the Amazon EC2 ModifyVpcEndpoint (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVpcEndpoint.html)
 	// API.
 	SecurityGroupIds []string
 
-	// A list of subnet IDs that are required to host your server endpoint in your VPC.
-	// This property can only be set when EndpointType is set to VPC.
+	// A list of subnet IDs that are required to host your server endpoint in your
+	// VPC. This property can only be set when EndpointType  is set to VPC .
 	SubnetIds []string
 
 	// The identifier of the VPC endpoint. This property can only be set when
@@ -819,8 +766,8 @@ type EndpointDetails struct {
 	// https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.
 	VpcEndpointId *string
 
-	// The VPC identifier of the VPC in which a server's endpoint will be hosted. This
-	// property can only be set when EndpointType is set to VPC.
+	// The VPC identifier of the VPC in which a server's endpoint will be hosted.
+	// This property can only be set when EndpointType  is set to VPC .
 	VpcId *string
 
 	noSmithyDocumentSerde
@@ -830,32 +777,20 @@ type EndpointDetails struct {
 // execution of the workflow.
 type ExecutionError struct {
 
-	// Specifies the descriptive message that corresponds to the ErrorType.
+	// Specifies the descriptive message that corresponds to the ErrorType .
 	//
 	// This member is required.
 	Message *string
 
 	// Specifies the error type.
-	// - ALREADY_EXISTS: occurs for a copy step, if the
-	// overwrite option is not selected and a file with the same name already exists in
-	// the target location.
-	// - BAD_REQUEST: a general bad request: for example, a step
-	// that attempts to tag an EFS file returns BAD_REQUEST, as only S3 files can be
-	// tagged.
-	// - CUSTOM_STEP_FAILED: occurs when the custom step provided a callback
-	// that indicates failure.
-	// - INTERNAL_SERVER_ERROR: a catch-all error that can
-	// occur for a variety of reasons.
-	// - NOT_FOUND: occurs when a requested entity, for
-	// example a source file for a copy step, does not exist.
-	// - PERMISSION_DENIED:
-	// occurs if your policy does not contain the correct permissions to complete one
-	// or more of the steps in the workflow.
-	// - TIMEOUT: occurs when the execution times
-	// out. You can set the TimeoutSeconds for a custom step, anywhere from 1 second to
-	// 1800 seconds (30 minutes).
-	// - THROTTLED: occurs if you exceed the new execution
-	// refill rate of one workflow per second.
+	//     - ALREADY_EXISTS : occurs for a copy step, if the overwrite option is not selected and a file with the same name already exists in the target location.
+	//     - BAD_REQUEST : a general bad request: for example, a step that attempts to tag an EFS file returns BAD_REQUEST , as only S3 files can be tagged.
+	//     - CUSTOM_STEP_FAILED : occurs when the custom step provided a callback that indicates failure.
+	//     - INTERNAL_SERVER_ERROR : a catch-all error that can occur for a variety of reasons.
+	//     - NOT_FOUND : occurs when a requested entity, for example a source file for a copy step, does not exist.
+	//     - PERMISSION_DENIED : occurs if your policy does not contain the correct permissions to complete one or more of the steps in the workflow.
+	//     - TIMEOUT : occurs when the execution times out. You can set the TimeoutSeconds for a custom step, anywhere from 1 second to 1800 seconds (30 minutes).
+	//     - THROTTLED : occurs if you exceed the new execution refill rate of one workflow per second.
 	//
 	// This member is required.
 	Type ExecutionErrorType
@@ -863,12 +798,12 @@ type ExecutionError struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the steps in the workflow, as well as the steps to execute in case of
-// any errors during workflow execution.
+// Specifies the steps in the workflow, as well as the steps to execute in case
+// of any errors during workflow execution.
 type ExecutionResults struct {
 
-	// Specifies the steps (actions) to take if errors are encountered during execution
-	// of the workflow.
+	// Specifies the steps (actions) to take if errors are encountered during
+	// execution of the workflow.
 	OnExceptionSteps []ExecutionStepResult
 
 	// Specifies the details for the steps that are in the specified workflow.
@@ -877,27 +812,24 @@ type ExecutionResults struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the following details for the step: error (if any), outputs (if any),
-// and the step type.
+// Specifies the following details for the step: error (if any), outputs (if
+// any), and the step type.
 type ExecutionStepResult struct {
 
 	// Specifies the details for an error, if it occurred during execution of the
 	// specified workflow step.
 	Error *ExecutionError
 
-	// The values for the key/value pair applied as a tag to the file. Only applicable
-	// if the step type is TAG.
+	// The values for the key/value pair applied as a tag to the file. Only
+	// applicable if the step type is TAG .
 	Outputs *string
 
 	// One of the available step types.
-	// - COPY - Copy the file to another location.
-	// -
-	// CUSTOM - Perform a custom step with an Lambda function target.
-	// - DECRYPT -
-	// Decrypt a file that was encrypted before it was uploaded.
-	// - DELETE - Delete the
-	// file.
-	// - TAG - Add a tag to the file.
+	//     - COPY - Copy the file to another location.
+	//     - CUSTOM - Perform a custom step with an Lambda function target.
+	//     - DECRYPT - Decrypt a file that was encrypted before it was uploaded.
+	//     - DELETE - Delete the file.
+	//     - TAG - Add a tag to the file.
 	StepType WorkflowStepType
 
 	noSmithyDocumentSerde
@@ -917,16 +849,16 @@ type FileLocation struct {
 }
 
 // Represents an object that contains entries and targets for
-// HomeDirectoryMappings. The following is an Entry and Target pair example for
-// chroot. [ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]
+// HomeDirectoryMappings . The following is an Entry  and Target  pair example for
+// chroot . [ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]
 type HomeDirectoryMapEntry struct {
 
-	// Represents an entry for HomeDirectoryMappings.
+	// Represents an entry for HomeDirectoryMappings .
 	//
 	// This member is required.
 	Entry *string
 
-	// Represents the map target that is used in a HomeDirectorymapEntry.
+	// Represents the map target that is used in a HomeDirectorymapEntry .
 	//
 	// This member is required.
 	Target *string
@@ -939,13 +871,14 @@ type HomeDirectoryMapEntry struct {
 // method of authentication.
 type IdentityProviderDetails struct {
 
-	// The identifier of the Directory Service directory that you want to stop sharing.
+	// The identifier of the Directory Service directory that you want to stop
+	// sharing.
 	DirectoryId *string
 
 	// The ARN for a lambda function to use for the Identity provider.
 	Function *string
 
-	// Provides the type of InvocationRole used to authenticate the user account.
+	// Provides the type of InvocationRole  used to authenticate the user account.
 	InvocationRole *string
 
 	// Provides the location of the service endpoint used to authenticate users.
@@ -975,7 +908,7 @@ type ListedAccess struct {
 	// S3 or Amazon EFS resources over the enabled protocols using Transfer Family. If
 	// you know the group name, you can view the SID values by running the following
 	// command using Windows PowerShell. Get-ADGroup -Filter {samAccountName -like
-	// "YourGroupName*"} -Properties * | Select SamAccountName,ObjectSid In that
+	// "YourGroupName*"} -Properties * | Select SamAccountName,ObjectSidIn that
 	// command, replace YourGroupName with the name of your Active Directory group. The
 	// regular expression used to validate this parameter is a string of characters
 	// consisting of uppercase and lowercase alphanumeric characters with no spaces.
@@ -983,21 +916,21 @@ type ListedAccess struct {
 	ExternalId *string
 
 	// The landing directory (folder) for a user when they log in to the server using
-	// the client. A HomeDirectory example is /bucket_name/home/mydirectory.
+	// the client. A HomeDirectory  example is /bucket_name/home/mydirectory .
 	HomeDirectory *string
 
-	// The type of landing directory (folder) that you want your users' home directory
-	// to be when they log in to the server. If you set it to PATH, the user will see
-	// the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol
-	// clients. If you set it LOGICAL, you need to provide mappings in the
-	// HomeDirectoryMappings for how you want to make Amazon S3 or Amazon EFS paths
-	// visible to your users.
+	// The type of landing directory (folder) that you want your users' home
+	// directory to be when they log in to the server. If you set it to PATH, the
+	// user will see the absolute Amazon S3 bucket or EFS paths as is in their file
+	// transfer protocol clients. If you set it LOGICAL, you need to provide mappings
+	// in the HomeDirectoryMappings for how you want to make Amazon S3 or Amazon EFS
+	// paths visible to your users.
 	HomeDirectoryType HomeDirectoryType
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-	// that controls your users' access to your Amazon S3 bucket or Amazon EFS file
-	// system. The policies attached to this role determine the level of access that
-	// you want to provide your users when transferring files into and out of your
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
+	// role that controls your users' access to your Amazon S3 bucket or Amazon EFS
+	// file system. The policies attached to this role determine the level of access
+	// that you want to provide your users when transferring files into and out of your
 	// Amazon S3 bucket or Amazon EFS file system. The IAM role should also contain a
 	// trust relationship that allows the server to access your resources when
 	// servicing your users' transfer requests.
@@ -1029,7 +962,7 @@ type ListedAgreement struct {
 	// The unique identifier for the agreement.
 	ServerId *string
 
-	// The agreement can be either ACTIVE or INACTIVE.
+	// The agreement can be either ACTIVE  or INACTIVE .
 	Status AgreementStatusType
 
 	noSmithyDocumentSerde
@@ -1054,14 +987,14 @@ type ListedCertificate struct {
 	// An optional date that specifies when the certificate becomes inactive.
 	InactiveDate *time.Time
 
-	// The certificate can be either ACTIVE, PENDING_ROTATION, or INACTIVE.
-	// PENDING_ROTATION means that this certificate will replace the current
+	// The certificate can be either ACTIVE , PENDING_ROTATION , or INACTIVE .
+	// PENDING_ROTATIONmeans that this certificate will replace the current
 	// certificate when it expires.
 	Status CertificateStatusType
 
 	// The type for the certificate. If a private key has been specified for the
 	// certificate, its type is CERTIFICATE_WITH_PRIVATE_KEY. If there is no private
-	// key, the type is CERTIFICATE.
+	// key, the type is CERTIFICATE .
 	Type CertificateType
 
 	// Specifies whether this certificate is used for signing or encryption.
@@ -1091,9 +1024,9 @@ type ListedExecution struct {
 	// A unique identifier for the execution of a workflow.
 	ExecutionId *string
 
-	// A structure that describes the Amazon S3 or EFS file location. This is the file
-	// location when the execution begins: if the file is being copied, this is the
-	// initial (as opposed to destination) file location.
+	// A structure that describes the Amazon S3 or EFS file location. This is the
+	// file location when the execution begins: if the file is being copied, this is
+	// the initial (as opposed to destination) file location.
 	InitialFileLocation *FileLocation
 
 	// A container object for the session details that are associated with a workflow.
@@ -1121,8 +1054,8 @@ type ListedHostKey struct {
 	// UpdateHostKey operation and providing a new description.
 	Description *string
 
-	// The public key fingerprint, which is a short sequence of bytes used to identify
-	// the longer public key.
+	// The public key fingerprint, which is a short sequence of bytes used to
+	// identify the longer public key.
 	Fingerprint *string
 
 	// A unique identifier for the host key.
@@ -1130,12 +1063,11 @@ type ListedHostKey struct {
 
 	// The encryption algorithm that is used for the host key. The Type parameter is
 	// specified by using one of the following values:
-	// - ssh-rsa
-	// - ssh-ed25519
-	// -
-	// ecdsa-sha2-nistp256
-	// - ecdsa-sha2-nistp384
-	// - ecdsa-sha2-nistp521
+	//     - ssh-rsa
+	//     - ssh-ed25519
+	//     - ecdsa-sha2-nistp256
+	//     - ecdsa-sha2-nistp384
+	//     - ecdsa-sha2-nistp521
 	Type *string
 
 	noSmithyDocumentSerde
@@ -1147,17 +1079,17 @@ type ListedProfile struct {
 	// The Amazon Resource Name (ARN) of the specified profile.
 	Arn *string
 
-	// The As2Id is the AS2-name, as defined in the RFC 4130
-	// (https://datatracker.ietf.org/doc/html/rfc4130). For inbound transfers, this is
-	// the AS2-From header for the AS2 messages sent from the partner. For outbound
-	// connectors, this is the AS2-To header for the AS2 messages sent to the partner
-	// using the StartFileTransfer API operation. This ID cannot include spaces.
+	// The As2Id  is the AS2-name, as defined in the RFC 4130 (https://datatracker.ietf.org/doc/html/rfc4130)
+	// . For inbound transfers, this is the AS2-From header for the AS2 messages sent
+	// from the partner. For outbound connectors, this is the AS2-To header for the
+	// AS2 messages sent to the partner using the StartFileTransfer API operation.
+	// This ID cannot include spaces.
 	As2Id *string
 
 	// A unique identifier for the local or partner AS2 profile.
 	ProfileId *string
 
-	// Indicates whether to list only LOCAL type profiles or only PARTNER type
+	// Indicates whether to list only LOCAL  type profiles or only PARTNER type
 	// profiles. If not supplied in the request, the command lists all types of
 	// profiles.
 	ProfileType ProfileType
@@ -1184,21 +1116,21 @@ type ListedServer struct {
 
 	// The mode of authentication for a server. The default value is SERVICE_MANAGED,
 	// which allows you to store and access user credentials within the Transfer Family
-	// service. Use AWS_DIRECTORY_SERVICE to provide access to Active Directory groups
-	// in Directory Service for Microsoft Active Directory or Microsoft Active
+	// service. Use AWS_DIRECTORY_SERVICE to provide access to Active Directory
+	// groups in Directory Service for Microsoft Active Directory or Microsoft Active
 	// Directory in your on-premises environment or in Amazon Web Services using AD
 	// Connector. This option also requires you to provide a Directory ID by using the
 	// IdentityProviderDetails parameter. Use the API_GATEWAY value to integrate with
 	// an identity provider of your choosing. The API_GATEWAY setting requires you to
 	// provide an Amazon API Gateway endpoint URL to call for authentication by using
-	// the IdentityProviderDetails parameter. Use the AWS_LAMBDA value to directly use
-	// an Lambda function as your identity provider. If you choose this value, you must
-	// specify the ARN for the Lambda function in the Function parameter or the
+	// the IdentityProviderDetails  parameter. Use the AWS_LAMBDA value to directly
+	// use an Lambda function as your identity provider. If you choose this value, you
+	// must specify the ARN for the Lambda function in the Function  parameter or the
 	// IdentityProviderDetails data type.
 	IdentityProviderType IdentityProviderType
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-	// that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
+	// role that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or
 	// Amazon EFSevents. When set, you can view user activity in your CloudWatch logs.
 	LoggingRole *string
 
@@ -1206,16 +1138,16 @@ type ListedServer struct {
 	// listed.
 	ServerId *string
 
-	// The condition of the server that was described. A value of ONLINE indicates that
-	// the server can accept jobs and transfer files. A State value of OFFLINE means
-	// that the server cannot perform file transfer operations. The states of STARTING
-	// and STOPPING indicate that the server is in an intermediate state, either not
-	// fully able to respond, or not fully offline. The values of START_FAILED or
-	// STOP_FAILED can indicate an error condition.
+	// The condition of the server that was described. A value of ONLINE indicates
+	// that the server can accept jobs and transfer files. A State  value of OFFLINE
+	// means that the server cannot perform file transfer operations. The states of
+	// STARTING and STOPPING indicate that the server is in an intermediate state,
+	// either not fully able to respond, or not fully offline. The values of
+	// START_FAILED or STOP_FAILED  can indicate an error condition.
 	State State
 
 	// Specifies the number of users that are assigned to a server you specified with
-	// the ServerId.
+	// the ServerId .
 	UserCount *int32
 
 	noSmithyDocumentSerde
@@ -1231,35 +1163,35 @@ type ListedUser struct {
 	Arn *string
 
 	// The landing directory (folder) for a user when they log in to the server using
-	// the client. A HomeDirectory example is /bucket_name/home/mydirectory.
+	// the client. A HomeDirectory  example is /bucket_name/home/mydirectory .
 	HomeDirectory *string
 
-	// The type of landing directory (folder) that you want your users' home directory
-	// to be when they log in to the server. If you set it to PATH, the user will see
-	// the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol
-	// clients. If you set it LOGICAL, you need to provide mappings in the
-	// HomeDirectoryMappings for how you want to make Amazon S3 or Amazon EFS paths
-	// visible to your users.
+	// The type of landing directory (folder) that you want your users' home
+	// directory to be when they log in to the server. If you set it to PATH, the
+	// user will see the absolute Amazon S3 bucket or EFS paths as is in their file
+	// transfer protocol clients. If you set it LOGICAL, you need to provide mappings
+	// in the HomeDirectoryMappings for how you want to make Amazon S3 or Amazon EFS
+	// paths visible to your users.
 	HomeDirectoryType HomeDirectoryType
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-	// that controls your users' access to your Amazon S3 bucket or Amazon EFS file
-	// system. The policies attached to this role determine the level of access that
-	// you want to provide your users when transferring files into and out of your
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
+	// role that controls your users' access to your Amazon S3 bucket or Amazon EFS
+	// file system. The policies attached to this role determine the level of access
+	// that you want to provide your users when transferring files into and out of your
 	// Amazon S3 bucket or Amazon EFS file system. The IAM role should also contain a
 	// trust relationship that allows the server to access your resources when
 	// servicing your users' transfer requests. The IAM role that controls your users'
 	// access to your Amazon S3 bucket for servers with Domain=S3, or your EFS file
-	// system for servers with Domain=EFS. The policies attached to this role determine
-	// the level of access you want to provide your users when transferring files into
-	// and out of your S3 buckets or EFS file systems.
+	// system for servers with Domain=EFS. The policies attached to this role
+	// determine the level of access you want to provide your users when transferring
+	// files into and out of your S3 buckets or EFS file systems.
 	Role *string
 
 	// Specifies the number of SSH public keys stored for the user you specified.
 	SshPublicKeyCount *int32
 
-	// Specifies the name of the user whose ARN was specified. User names are used for
-	// authentication purposes.
+	// Specifies the name of the user whose ARN was specified. User names are used
+	// for authentication purposes.
 	UserName *string
 
 	noSmithyDocumentSerde
@@ -1284,21 +1216,21 @@ type ListedWorkflow struct {
 // Consists of the logging role and the log group name.
 type LoggingConfiguration struct {
 
-	// The name of the CloudWatch logging group for the Transfer Family server to which
-	// this workflow belongs.
+	// The name of the CloudWatch logging group for the Transfer Family server to
+	// which this workflow belongs.
 	LogGroupName *string
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-	// that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
+	// role that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or
 	// Amazon EFSevents. When set, you can view user activity in your CloudWatch logs.
 	LoggingRole *string
 
 	noSmithyDocumentSerde
 }
 
-// The full POSIX identity, including user ID (Uid), group ID (Gid), and any
-// secondary groups IDs (SecondaryGids), that controls your users' access to your
-// Amazon EFS file systems. The POSIX permissions that are set on files and
+// The full POSIX identity, including user ID ( Uid ), group ID ( Gid), and any
+// secondary groups IDs ( SecondaryGids), that controls your users' access to
+// your Amazon EFS file systems. The POSIX permissions that are set on files and
 // directories in your file system determine the level of access your users get
 // when transferring files into and out of your Amazon EFS file systems.
 type PosixProfile struct {
@@ -1326,18 +1258,17 @@ type ProtocolDetails struct {
 	// supported.
 	As2Transports []As2Transport
 
-	// Indicates passive mode, for FTP and FTPS protocols. Enter a single IPv4 address,
-	// such as the public IP address of a firewall, router, or load balancer. For
-	// example: aws transfer update-server --protocol-details PassiveIp=0.0.0.0 Replace
-	// 0.0.0.0 in the example above with the actual IP address you want to use. If you
-	// change the PassiveIp value, you must stop and then restart your Transfer Family
-	// server for the change to take effect. For details on using passive mode (PASV)
-	// in a NAT environment, see Configuring your FTPS server behind a firewall or NAT
-	// with Transfer Family
-	// (http://aws.amazon.com/blogs/storage/configuring-your-ftps-server-behind-a-firewall-or-nat-with-aws-transfer-family/).
-	// Special values The AUTO and 0.0.0.0 are special values for the PassiveIp
-	// parameter. The value PassiveIp=AUTO is assigned by default to FTP and FTPS type
-	// servers. In this case, the server automatically responds with one of the
+	// Indicates passive mode, for FTP and FTPS protocols. Enter a single IPv4
+	// address, such as the public IP address of a firewall, router, or load balancer.
+	// For example: aws transfer update-server --protocol-details PassiveIp=0.0.0.0
+	// Replace 0.0.0.0 in the example above with the actual IP address you want to
+	// use. If you change the PassiveIp value, you must stop and then restart your
+	// Transfer Family server for the change to take effect. For details on using
+	// passive mode (PASV) in a NAT environment, see Configuring your FTPS server
+	// behind a firewall or NAT with Transfer Family (http://aws.amazon.com/blogs/storage/configuring-your-ftps-server-behind-a-firewall-or-nat-with-aws-transfer-family/)
+	// . Special values The AUTO  and 0.0.0.0  are special values for the PassiveIp
+	// parameter. The value PassiveIp=AUTO is assigned by default to FTP and FTPS
+	// type servers. In this case, the server automatically responds with one of the
 	// endpoint IPs within the PASV response. PassiveIp=0.0.0.0 has a more unique
 	// application for its usage. For example, if you have a High Availability (HA)
 	// Network Load Balancer (NLB) environment, where you have 3 subnets, you can only
@@ -1347,7 +1278,7 @@ type ProtocolDetails struct {
 	// Control connection and utilize all AZs for their connections. Note, however,
 	// that not all FTP clients support the PassiveIp=0.0.0.0 response. FileZilla and
 	// WinSCP do support it. If you are using other clients, check to see if your
-	// client supports the PassiveIp=0.0.0.0 response.
+	// client supports the PassiveIp=0.0.0.0  response.
 	PassiveIp *string
 
 	// Use the SetStatOption to ignore the error that is generated when the client
@@ -1357,37 +1288,26 @@ type ProtocolDetails struct {
 	// uploading the file. However, these commands are not compatible with object
 	// storage systems, such as Amazon S3. Due to this incompatibility, file uploads
 	// from these clients can result in errors even when the file is otherwise
-	// successfully uploaded. Set the value to ENABLE_NO_OP to have the Transfer Family
-	// server ignore the SETSTAT command, and upload files without needing to make any
-	// changes to your SFTP client. While the SetStatOptionENABLE_NO_OP setting ignores
-	// the error, it does generate a log entry in Amazon CloudWatch Logs, so you can
-	// determine when the client is making a SETSTAT call. If you want to preserve the
-	// original timestamp for your file, and modify other file attributes using
-	// SETSTAT, you can use Amazon EFS as backend storage with Transfer Family.
+	// successfully uploaded. Set the value to ENABLE_NO_OP to have the Transfer
+	// Family server ignore the SETSTAT command, and upload files without needing to
+	// make any changes to your SFTP client. While the SetStatOption ENABLE_NO_OP
+	// setting ignores the error, it does generate a log entry in Amazon CloudWatch
+	// Logs, so you can determine when the client is making a SETSTAT call. If you
+	// want to preserve the original timestamp for your file, and modify other file
+	// attributes using SETSTAT, you can use Amazon EFS as backend storage with
+	// Transfer Family.
 	SetStatOption SetStatOption
 
 	// A property used with Transfer Family servers that use the FTPS protocol. TLS
 	// Session Resumption provides a mechanism to resume or share a negotiated secret
 	// key between the control and data connection for an FTPS session.
-	// TlsSessionResumptionMode determines whether or not the server resumes recent,
+	// TlsSessionResumptionModedetermines whether or not the server resumes recent,
 	// negotiated sessions through a unique session ID. This property is available
-	// during CreateServer and UpdateServer calls. If a TlsSessionResumptionMode value
-	// is not specified during CreateServer, it is set to ENFORCED by default.
-	// -
-	// DISABLED: the server does not process TLS session resumption client requests and
-	// creates a new TLS session for each request.
-	// - ENABLED: the server processes and
-	// accepts clients that are performing TLS session resumption. The server doesn't
-	// reject client data connections that do not perform the TLS session resumption
-	// client processing.
-	// - ENFORCED: the server processes and accepts clients that are
-	// performing TLS session resumption. The server rejects client data connections
-	// that do not perform the TLS session resumption client processing. Before you set
-	// the value to ENFORCED, test your clients. Not all FTPS clients perform TLS
-	// session resumption. So, if you choose to enforce TLS session resumption, you
-	// prevent any connections from FTPS clients that don't perform the protocol
-	// negotiation. To determine whether or not you can use the ENFORCED value, you
-	// need to test your clients.
+	// during CreateServer  and UpdateServer  calls. If a TlsSessionResumptionMode
+	// value is not specified during CreateServer , it is set to ENFORCED  by default.
+	//     - DISABLED : the server does not process TLS session resumption client requests and creates a new TLS session for each request.
+	//     - ENABLED : the server processes and accepts clients that are performing TLS session resumption. The server doesn't reject client data connections that do not perform the TLS session resumption client processing.
+	//     - ENFORCED : the server processes and accepts clients that are performing TLS session resumption. The server rejects client data connections that do not perform the TLS session resumption client processing. Before you set the value to ENFORCED , test your clients. Not all FTPS clients perform TLS session resumption. So, if you choose to enforce TLS session resumption, you prevent any connections from FTPS clients that don't perform the protocol negotiation. To determine whether or not you can use the ENFORCED value, you need to test your clients.
 	TlsSessionResumptionMode TlsSessionResumptionMode
 
 	noSmithyDocumentSerde
@@ -1423,9 +1343,9 @@ type S3FileLocation struct {
 // character is alphanumeric, your uploaded file is renamed to the path value. In
 // this case, if a file with that name already exists, it is overwritten. For
 // example, if your path is shared-files/bob/, your uploaded files are copied to
-// the shared-files/bob/, folder. If your path is shared-files/today, each uploaded
-// file is copied to the shared-files folder and named today: each upload
-// overwrites the previous version of the bob file.
+// the shared-files/bob/ , folder. If your path is shared-files/today, each
+// uploaded file is copied to the shared-files  folder and named today: each
+// upload overwrites the previous version of the bob file.
 type S3InputFileLocation struct {
 
 	// Specifies the S3 bucket for the customer input file.
@@ -1438,8 +1358,8 @@ type S3InputFileLocation struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the key-value pair that are assigned to a file during the execution of
-// a Tagging step.
+// Specifies the key-value pair that are assigned to a file during the execution
+// of a Tagging step.
 type S3Tag struct {
 
 	// The name assigned to the tag that you create.
@@ -1458,8 +1378,8 @@ type S3Tag struct {
 // A container object for the session details that are associated with a workflow.
 type ServiceMetadata struct {
 
-	// The Server ID (ServerId), Session ID (SessionId) and user (UserName) make up the
-	// UserDetails.
+	// The Server ID ( ServerId ), Session ID ( SessionId ) and user ( UserName) make
+	// up the UserDetails .
 	//
 	// This member is required.
 	UserDetails *UserDetails
@@ -1467,11 +1387,12 @@ type ServiceMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about the public Secure Shell (SSH) key that is associated
-// with a user account for the specific file transfer protocol-enabled server (as
-// identified by ServerId). The information returned includes the date the key was
-// imported, the public key contents, and the public key ID. A user can store more
-// than one SSH public key associated with their user name on a specific server.
+// Provides information about the public Secure Shell (SSH) key that is
+// associated with a user account for the specific file transfer protocol-enabled
+// server (as identified by ServerId). The information returned includes the date
+// the key was imported, the public key contents, and the public key ID. A user can
+// store more than one SSH public key associated with their user name on a specific
+// server.
 type SshPublicKey struct {
 
 	// Specifies the date that the public key was added to the user account.
@@ -1494,11 +1415,12 @@ type SshPublicKey struct {
 	noSmithyDocumentSerde
 }
 
-// Creates a key-value pair for a specific resource. Tags are metadata that you can
-// use to search for and group a resource for various purposes. You can apply tags
-// to servers, users, and roles. A tag key can take more than one value. For
+// Creates a key-value pair for a specific resource. Tags are metadata that you
+// can use to search for and group a resource for various purposes. You can apply
+// tags to servers, users, and roles. A tag key can take more than one value. For
 // example, to group servers for accounting purposes, you might create a tag called
-// Group and assign the values Research and Accounting to that group.
+//
+// Group and assign the values Research  and Accounting  to that group.
 type Tag struct {
 
 	// The name assigned to the tag that you create.
@@ -1523,12 +1445,8 @@ type TagStepDetails struct {
 
 	// Specifies which file to use as input to the workflow step: either the output
 	// from the previous step, or the originally uploaded file for the workflow.
-	// - To
-	// use the previous file as the input, enter ${previous.file}. In this case, this
-	// workflow step uses the output file from the previous workflow step as input.
-	// This is the default value.
-	// - To use the originally uploaded file location as
-	// input for this step, enter ${original.file}.
+	//     - To use the previous file as the input, enter ${previous.file} . In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.
+	//     - To use the originally uploaded file location as input for this step, enter ${original.file} .
 	SourceFileLocation *string
 
 	// Array that contains from 1 to 10 key/value pairs.
@@ -1559,9 +1477,9 @@ type UserDetails struct {
 
 // Specifies the workflow ID for the workflow to assign and the execution role
 // that's used for executing the workflow. In addition to a workflow to execute
-// when a file is uploaded completely, WorkflowDetails can also contain a workflow
-// ID (and execution role) for a workflow to execute on partial upload. A partial
-// upload occurs when a file is open when the session disconnects.
+// when a file is uploaded completely, WorkflowDetails can also contain a
+// workflow ID (and execution role) for a workflow to execute on partial upload. A
+// partial upload occurs when a file is open when the session disconnects.
 type WorkflowDetail struct {
 
 	// Includes the necessary permissions for S3, EFS, and Lambda operations that
@@ -1579,8 +1497,8 @@ type WorkflowDetail struct {
 	noSmithyDocumentSerde
 }
 
-// Container for the WorkflowDetail data type. It is used by actions that trigger a
-// workflow to begin execution.
+// Container for the WorkflowDetail data type. It is used by actions that trigger
+// a workflow to begin execution.
 type WorkflowDetails struct {
 
 	// A trigger that starts a workflow if a file is only partially uploaded. You can
@@ -1588,10 +1506,11 @@ type WorkflowDetails struct {
 	// A partial upload occurs when a file is open when the session disconnects.
 	OnPartialUpload []WorkflowDetail
 
-	// A trigger that starts a workflow: the workflow begins to execute after a file is
-	// uploaded. To remove an associated workflow from a server, you can provide an
-	// empty OnUpload object, as in the following example. aws transfer update-server
-	// --server-id s-01234567890abcdef --workflow-details '{"OnUpload":[]}'
+	// A trigger that starts a workflow: the workflow begins to execute after a file
+	// is uploaded. To remove an associated workflow from a server, you can provide an
+	// empty OnUpload  object, as in the following example. aws transfer
+	// update-server --server-id s-01234567890abcdef --workflow-details
+	// '{"OnUpload":[]}'
 	OnUpload []WorkflowDetail
 
 	noSmithyDocumentSerde
@@ -1602,11 +1521,9 @@ type WorkflowStep struct {
 
 	// Details for a step that performs a file copy. Consists of the following
 	// values:
-	// - A description
-	// - An Amazon S3 location for the destination of the file
-	// copy.
-	// - A flag that indicates whether to overwrite an existing file of the same
-	// name. The default is FALSE.
+	//     - A description
+	//     - An Amazon S3 location for the destination of the file copy.
+	//     - A flag that indicates whether to overwrite an existing file of the same name. The default is FALSE .
 	CopyStepDetails *CopyStepDetails
 
 	// Details for a step that invokes an Lambda function. Consists of the Lambda
@@ -1615,33 +1532,26 @@ type WorkflowStep struct {
 
 	// Details for a step that decrypts an encrypted file. Consists of the following
 	// values:
-	// - A descriptive name
-	// - An Amazon S3 or Amazon Elastic File System
-	// (Amazon EFS) location for the source file to decrypt.
-	// - An S3 or Amazon EFS
-	// location for the destination of the file decryption.
-	// - A flag that indicates
-	// whether to overwrite an existing file of the same name. The default is FALSE.
-	// -
-	// The type of encryption that's used. Currently, only PGP encryption is supported.
+	//     - A descriptive name
+	//     - An Amazon S3 or Amazon Elastic File System (Amazon EFS) location for the source file to decrypt.
+	//     - An S3 or Amazon EFS location for the destination of the file decryption.
+	//     - A flag that indicates whether to overwrite an existing file of the same name. The default is FALSE .
+	//     - The type of encryption that's used. Currently, only PGP encryption is supported.
 	DecryptStepDetails *DecryptStepDetails
 
 	// Details for a step that deletes the file.
 	DeleteStepDetails *DeleteStepDetails
 
-	// Details for a step that creates one or more tags. You specify one or more tags.
-	// Each tag contains a key-value pair.
+	// Details for a step that creates one or more tags. You specify one or more
+	// tags. Each tag contains a key-value pair.
 	TagStepDetails *TagStepDetails
 
 	// Currently, the following step types are supported.
-	// - COPY - Copy the file to
-	// another location.
-	// - CUSTOM - Perform a custom step with an Lambda function
-	// target.
-	// - DECRYPT - Decrypt a file that was encrypted before it was uploaded.
-	// -
-	// DELETE - Delete the file.
-	// - TAG - Add a tag to the file.
+	//     - COPY - Copy the file to another location.
+	//     - CUSTOM - Perform a custom step with an Lambda function target.
+	//     - DECRYPT - Decrypt a file that was encrypted before it was uploaded.
+	//     - DELETE - Delete the file.
+	//     - TAG - Add a tag to the file.
 	Type WorkflowStepType
 
 	noSmithyDocumentSerde

@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops the application from processing data. You can stop an application only if
-// it is in the running status, unless you set the Force parameter to true. You can
-// use the DescribeApplication operation to find the application status. Kinesis
-// Data Analytics takes a snapshot when the application is stopped, unless Force is
-// set to true.
+// Stops the application from processing data. You can stop an application only
+// if it is in the running status, unless you set the Force  parameter to true.
+// You can use the DescribeApplication operation to find the application status.
+// Kinesis Data Analytics takes a snapshot when the application is stopped, unless
+// Force is set to true .
 func (c *Client) StopApplication(ctx context.Context, params *StopApplicationInput, optFns ...func(*Options)) (*StopApplicationOutput, error) {
 	if params == nil {
 		params = &StopApplicationInput{}
@@ -37,14 +37,14 @@ type StopApplicationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// Set to true to force the application to stop. If you set Force to true, Kinesis
-	// Data Analytics stops the application without taking a snapshot. Force-stopping
-	// your application may lead to data loss or duplication. To prevent data loss or
-	// duplicate processing of data during application restarts, we recommend you to
-	// take frequent snapshots of your application. You can only force stop a
-	// Flink-based Kinesis Data Analytics application. You can't force stop a SQL-based
-	// Kinesis Data Analytics application. The application must be in the STARTING,
-	// UPDATING, STOPPING, AUTOSCALING, or RUNNING status.
+	// Set to true  to force the application to stop. If you set Force  to true,
+	// Kinesis Data Analytics stops the application without taking a snapshot.
+	// Force-stopping your application may lead to data loss or duplication. To prevent
+	// data loss or duplicate processing of data during application restarts, we
+	// recommend you to take frequent snapshots of your application. You can only force
+	// stop a Flink-based Kinesis Data Analytics application. You can't force stop a
+	// SQL-based Kinesis Data Analytics application. The application must be in the
+	// STARTING , UPDATING , STOPPING , AUTOSCALING , or RUNNING  status.
 	Force *bool
 
 	noSmithyDocumentSerde

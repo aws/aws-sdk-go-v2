@@ -27,7 +27,7 @@ func (c *Client) DeleteSchedulingPolicy(ctx context.Context, params *DeleteSched
 	return out, nil
 }
 
-// Contains the parameters for DeleteSchedulingPolicy.
+// Contains the parameters for DeleteSchedulingPolicy .
 type DeleteSchedulingPolicyInput struct {
 
 	// The Amazon Resource Name (ARN) of the scheduling policy to delete.

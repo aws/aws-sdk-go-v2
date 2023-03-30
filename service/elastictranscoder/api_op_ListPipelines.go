@@ -29,16 +29,16 @@ func (c *Client) ListPipelines(ctx context.Context, params *ListPipelinesInput, 
 	return out, nil
 }
 
-// The ListPipelineRequest structure.
+// The ListPipelineRequest  structure.
 type ListPipelinesInput struct {
 
 	// To list pipelines in chronological order by the date and time that they were
-	// created, enter true. To list pipelines in reverse chronological order, enter
-	// false.
+	// created, enter true . To list pipelines in reverse chronological order, enter
+	// false .
 	Ascending *string
 
-	// When Elastic Transcoder returns more than one page of results, use pageToken in
-	// subsequent GET requests to get each successive page of results.
+	// When Elastic Transcoder returns more than one page of results, use pageToken
+	// in subsequent GET  requests to get each successive page of results.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -49,10 +49,10 @@ type ListPipelinesOutput struct {
 
 	// A value that you use to access the second and subsequent pages of results, if
 	// any. When the pipelines fit on one page or when you've reached the last page of
-	// results, the value of NextPageToken is null.
+	// results, the value of NextPageToken  is null .
 	NextPageToken *string
 
-	// An array of Pipeline objects.
+	// An array of Pipeline  objects.
 	Pipelines []types.Pipeline
 
 	// Metadata pertaining to the operation's result.
@@ -130,8 +130,8 @@ var _ ListPipelinesAPIClient = (*Client)(nil)
 
 // ListPipelinesPaginatorOptions is the paginator options for ListPipelines
 type ListPipelinesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

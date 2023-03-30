@@ -12,7 +12,7 @@ import (
 // This example uses a constant query string parameters and a label. This simply
 // tests that labels and query string parameters are compatible. The fixed query
 // string parameter named "hello" should in no way conflict with the label,
-// {hello}.
+// {hello} .
 func (c *Client) ConstantQueryString(ctx context.Context, params *ConstantQueryStringInput, optFns ...func(*Options)) (*ConstantQueryStringOutput, error) {
 	if params == nil {
 		params = &ConstantQueryStringInput{}

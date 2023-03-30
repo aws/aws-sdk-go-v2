@@ -14,8 +14,7 @@ import (
 
 // Provides summary information about the security profiles for the specified
 // Amazon Connect instance. For more information about security profiles, see
-// Security Profiles
-// (https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html)
+// Security Profiles (https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) ListSecurityProfiles(ctx context.Context, params *ListSecurityProfilesInput, optFns ...func(*Options)) (*ListSecurityProfilesOutput, error) {
 	if params == nil {
@@ -34,15 +33,14 @@ func (c *Client) ListSecurityProfiles(ctx context.Context, params *ListSecurityP
 
 type ListSecurityProfilesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The maximum number of results to return per page. The default MaxResult size is
-	// 100.
+	// The maximum number of results to return per page. The default MaxResult size
+	// is 100.
 	MaxResults *int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -140,12 +138,12 @@ var _ ListSecurityProfilesAPIClient = (*Client)(nil)
 // ListSecurityProfilesPaginatorOptions is the paginator options for
 // ListSecurityProfiles
 type ListSecurityProfilesPaginatorOptions struct {
-	// The maximum number of results to return per page. The default MaxResult size is
-	// 100.
+	// The maximum number of results to return per page. The default MaxResult size
+	// is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

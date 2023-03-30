@@ -65,9 +65,9 @@ const (
 	FileTypeCram  FileType = "CRAM"
 )
 
-// Values returns all known values for FileType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for FileType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (FileType) Values() []FileType {
 	return []FileType{
 		"FASTQ",
@@ -120,9 +120,9 @@ const (
 	JobStatusCompletedWithFailures JobStatus = "COMPLETED_WITH_FAILURES"
 )
 
-// Values returns all known values for JobStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"SUBMITTED",
@@ -244,9 +244,9 @@ const (
 	ReadSetFileIndex   ReadSetFile = "INDEX"
 )
 
-// Values returns all known values for ReadSetFile. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReadSetFile. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ReadSetFile) Values() []ReadSetFile {
 	return []ReadSetFile{
 		"SOURCE1",
@@ -357,9 +357,10 @@ const (
 	ReferenceImportJobItemStatusFailed     ReferenceImportJobItemStatus = "FAILED"
 )
 
-// Values returns all known values for ReferenceImportJobItemStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReferenceImportJobItemStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ReferenceImportJobItemStatus) Values() []ReferenceImportJobItemStatus {
 	return []ReferenceImportJobItemStatus{
 		"NOT_STARTED",
@@ -382,9 +383,9 @@ const (
 	ReferenceImportJobStatusCompletedWithFailures ReferenceImportJobStatus = "COMPLETED_WITH_FAILURES"
 )
 
-// Values returns all known values for ReferenceImportJobStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReferenceImportJobStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReferenceImportJobStatus) Values() []ReferenceImportJobStatus {
 	return []ReferenceImportJobStatus{
 		"SUBMITTED",
@@ -424,9 +425,9 @@ const (
 	RunExportDefinition RunExport = "DEFINITION"
 )
 
-// Values returns all known values for RunExport. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for RunExport. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (RunExport) Values() []RunExport {
 	return []RunExport{
 		"DEFINITION",
@@ -443,9 +444,9 @@ const (
 	RunLogLevelAll   RunLogLevel = "ALL"
 )
 
-// Values returns all known values for RunLogLevel. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RunLogLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (RunLogLevel) Values() []RunLogLevel {
 	return []RunLogLevel{
 		"OFF",
@@ -469,9 +470,9 @@ const (
 	RunStatusFailed    RunStatus = "FAILED"
 )
 
-// Values returns all known values for RunStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for RunStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (RunStatus) Values() []RunStatus {
 	return []RunStatus{
 		"PENDING",
@@ -529,9 +530,9 @@ const (
 	StoreFormatVcf StoreFormat = "VCF"
 )
 
-// Values returns all known values for StoreFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StoreFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (StoreFormat) Values() []StoreFormat {
 	return []StoreFormat{
 		"GFF",
@@ -556,9 +557,9 @@ const (
 	StoreStatusFailed StoreStatus = "FAILED"
 )
 
-// Values returns all known values for StoreStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StoreStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (StoreStatus) Values() []StoreStatus {
 	return []StoreStatus{
 		"CREATING",
@@ -665,9 +666,9 @@ const (
 	WorkflowTypeService WorkflowType = "SERVICE"
 )
 
-// Values returns all known values for WorkflowType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for WorkflowType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (WorkflowType) Values() []WorkflowType {
 	return []WorkflowType{
 		"PRIVATE",

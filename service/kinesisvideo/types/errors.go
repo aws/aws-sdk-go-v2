@@ -33,8 +33,8 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have reached the maximum limit of active signaling channels for this Amazon
-// Web Services account in this region.
+// You have reached the maximum limit of active signaling channels for this
+// Amazon Web Services account in this region.
 type AccountChannelLimitExceededException struct {
 	Message *string
 
@@ -197,7 +197,7 @@ func (e *InvalidDeviceException) ErrorCode() string {
 }
 func (e *InvalidDeviceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The format of the StreamARN is invalid.
+// The format of the StreamARN  is invalid.
 type InvalidResourceFormatException struct {
 	Message *string
 
@@ -275,16 +275,12 @@ func (e *NotAuthorizedException) ErrorCode() string {
 }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// When the input StreamARN or ChannelARN in CLOUD_STORAGE_MODE is already mapped
-// to a different Kinesis Video Stream resource, or if the provided input StreamARN
-// or ChannelARN is not in Active status, try one of the following :
-// - The
-// DescribeMediaStorageConfiguration API to determine what the stream given channel
-// is mapped to.
-// - The DescribeMappedResourceConfiguration API to determine the
-// channel that the given stream is mapped to.
-// - The DescribeStream or
-// DescribeSignalingChannel API to determine the status of the resource.
+// When the input StreamARN  or ChannelARN  in CLOUD_STORAGE_MODE is already
+// mapped to a different Kinesis Video Stream resource, or if the provided input
+// StreamARN or ChannelARN  is not in Active status, try one of the following :
+//   - The DescribeMediaStorageConfiguration API to determine what the stream given channel is mapped to.
+//   - The DescribeMappedResourceConfiguration API to determine the channel that the given stream is mapped to.
+//   - The DescribeStream or DescribeSignalingChannel API to determine the status of the resource.
 type ResourceInUseException struct {
 	Message *string
 
@@ -365,8 +361,8 @@ func (e *StreamEdgeConfigurationNotFoundException) ErrorFault() smithy.ErrorFaul
 	return smithy.FaultClient
 }
 
-// You have exceeded the limit of tags that you can associate with the resource. A
-// Kinesis video stream can support up to 50 tags.
+// You have exceeded the limit of tags that you can associate with the resource.
+// A Kinesis video stream can support up to 50 tags.
 type TagsPerResourceExceededLimitException struct {
 	Message *string
 
@@ -395,8 +391,7 @@ func (e *TagsPerResourceExceededLimitException) ErrorFault() smithy.ErrorFault {
 }
 
 // The stream version that you specified is not the latest version. To get the
-// latest version, use the DescribeStream
-// (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_DescribeStream.html)
+// latest version, use the DescribeStream (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_DescribeStream.html)
 // API.
 type VersionMismatchException struct {
 	Message *string

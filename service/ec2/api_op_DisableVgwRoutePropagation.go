@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables a virtual private gateway (VGW) from propagating routes to a specified
-// route table of a VPC.
+// Disables a virtual private gateway (VGW) from propagating routes to a
+// specified route table of a VPC.
 func (c *Client) DisableVgwRoutePropagation(ctx context.Context, params *DisableVgwRoutePropagationInput, optFns ...func(*Options)) (*DisableVgwRoutePropagationOutput, error) {
 	if params == nil {
 		params = &DisableVgwRoutePropagationInput{}
@@ -42,8 +42,8 @@ type DisableVgwRoutePropagationInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

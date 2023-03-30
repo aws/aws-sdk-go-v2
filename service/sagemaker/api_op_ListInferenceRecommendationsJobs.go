@@ -37,8 +37,8 @@ type ListInferenceRecommendationsJobsInput struct {
 	// A filter that returns only jobs created before the specified time (timestamp).
 	CreationTimeBefore *time.Time
 
-	// A filter that returns only jobs that were last modified after the specified time
-	// (timestamp).
+	// A filter that returns only jobs that were last modified after the specified
+	// time (timestamp).
 	LastModifiedTimeAfter *time.Time
 
 	// A filter that returns only jobs that were last modified before the specified
@@ -72,7 +72,8 @@ type ListInferenceRecommendationsJobsInput struct {
 
 type ListInferenceRecommendationsJobsOutput struct {
 
-	// The recommendations created from the Amazon SageMaker Inference Recommender job.
+	// The recommendations created from the Amazon SageMaker Inference Recommender
+	// job.
 	//
 	// This member is required.
 	InferenceRecommendationsJobs []types.InferenceRecommendationsJob
@@ -160,8 +161,8 @@ type ListInferenceRecommendationsJobsPaginatorOptions struct {
 	// The maximum number of recommendations to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

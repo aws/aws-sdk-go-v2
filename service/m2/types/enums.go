@@ -38,8 +38,8 @@ const (
 	ApplicationLifecycleDeletingFromEnvironment ApplicationLifecycle = "Deleting From Environment"
 )
 
-// Values returns all known values for ApplicationLifecycle. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ApplicationLifecycle. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationLifecycle) Values() []ApplicationLifecycle {
 	return []ApplicationLifecycle{
@@ -66,9 +66,10 @@ const (
 	ApplicationVersionLifecycleFailed    ApplicationVersionLifecycle = "Failed"
 )
 
-// Values returns all known values for ApplicationVersionLifecycle. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ApplicationVersionLifecycle. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ApplicationVersionLifecycle) Values() []ApplicationVersionLifecycle {
 	return []ApplicationVersionLifecycle{
 		"Creating",
@@ -92,9 +93,9 @@ const (
 	BatchJobExecutionStatusSucceededWithWarning BatchJobExecutionStatus = "Succeeded With Warning"
 )
 
-// Values returns all known values for BatchJobExecutionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BatchJobExecutionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BatchJobExecutionStatus) Values() []BatchJobExecutionStatus {
 	return []BatchJobExecutionStatus{
 		"Submitting",
@@ -118,9 +119,9 @@ const (
 	BatchJobTypeJes3 BatchJobType = "JES3"
 )
 
-// Values returns all known values for BatchJobType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BatchJobType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (BatchJobType) Values() []BatchJobType {
 	return []BatchJobType{
 		"VSE",
@@ -138,8 +139,8 @@ const (
 	DataSetTaskLifecycleCompleted DataSetTaskLifecycle = "Completed"
 )
 
-// Values returns all known values for DataSetTaskLifecycle. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DataSetTaskLifecycle. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DataSetTaskLifecycle) Values() []DataSetTaskLifecycle {
 	return []DataSetTaskLifecycle{
@@ -198,8 +199,8 @@ const (
 	EnvironmentLifecycleUpdating  EnvironmentLifecycle = "Updating"
 )
 
-// Values returns all known values for EnvironmentLifecycle. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for EnvironmentLifecycle. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (EnvironmentLifecycle) Values() []EnvironmentLifecycle {
 	return []EnvironmentLifecycle{

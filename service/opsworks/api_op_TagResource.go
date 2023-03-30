@@ -10,10 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Apply cost-allocation tags to a specified stack or layer in AWS OpsWorks Stacks.
-// For more information about how tagging works, see Tags
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/tagging.html) in the AWS
-// OpsWorks User Guide.
+// Apply cost-allocation tags to a specified stack or layer in AWS OpsWorks
+// Stacks. For more information about how tagging works, see Tags (https://docs.aws.amazon.com/opsworks/latest/userguide/tagging.html)
+// in the AWS OpsWorks User Guide.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -38,17 +37,11 @@ type TagResourceInput struct {
 
 	// A map that contains tag keys and tag values that are attached to a stack or
 	// layer.
-	// - The key cannot be empty.
-	// - The key can be a maximum of 127 characters,
-	// and can contain only Unicode letters, numbers, or separators, or the following
-	// special characters: + - = . _ : /
-	// - The value can be a maximum 255 characters,
-	// and contain only Unicode letters, numbers, or separators, or the following
-	// special characters: + - = . _ : /
-	// - Leading and trailing white spaces are
-	// trimmed from both the key and value.
-	// - A maximum of 40 tags is allowed for any
-	// resource.
+	//     - The key cannot be empty.
+	//     - The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : /
+	//     - The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : /
+	//     - Leading and trailing white spaces are trimmed from both the key and value.
+	//     - A maximum of 40 tags is allowed for any resource.
 	//
 	// This member is required.
 	Tags map[string]string

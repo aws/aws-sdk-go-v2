@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of schemas with minimal details. Schemas in Deleting status will
-// not be included in the results. Empty results will be returned if there are no
-// schemas available. When the RegistryId is not provided, all the schemas across
-// registries will be part of the API response.
+// Returns a list of schemas with minimal details. Schemas in Deleting status
+// will not be included in the results. Empty results will be returned if there are
+// no schemas available. When the RegistryId is not provided, all the schemas
+// across registries will be part of the API response.
 func (c *Client) ListSchemas(ctx context.Context, params *ListSchemasInput, optFns ...func(*Options)) (*ListSchemasOutput, error) {
 	if params == nil {
 		params = &ListSchemasInput{}
@@ -33,15 +33,15 @@ func (c *Client) ListSchemas(ctx context.Context, params *ListSchemasInput, optF
 
 type ListSchemasInput struct {
 
-	// Maximum number of results required per page. If the value is not supplied, this
-	// will be defaulted to 25 per page.
+	// Maximum number of results required per page. If the value is not supplied,
+	// this will be defaulted to 25 per page.
 	MaxResults *int32
 
 	// A continuation token, if this is a continuation call.
 	NextToken *string
 
-	// A wrapper structure that may contain the registry name and Amazon Resource Name
-	// (ARN).
+	// A wrapper structure that may contain the registry name and Amazon Resource
+	// Name (ARN).
 	RegistryId *types.RegistryId
 
 	noSmithyDocumentSerde
@@ -49,11 +49,11 @@ type ListSchemasInput struct {
 
 type ListSchemasOutput struct {
 
-	// A continuation token for paginating the returned list of tokens, returned if the
-	// current segment of the list is not the last.
+	// A continuation token for paginating the returned list of tokens, returned if
+	// the current segment of the list is not the last.
 	NextToken *string
 
-	// An array of SchemaListItem objects containing details of each schema.
+	// An array of SchemaListItem  objects containing details of each schema.
 	Schemas []types.SchemaListItem
 
 	// Metadata pertaining to the operation's result.
@@ -131,12 +131,12 @@ var _ ListSchemasAPIClient = (*Client)(nil)
 
 // ListSchemasPaginatorOptions is the paginator options for ListSchemas
 type ListSchemasPaginatorOptions struct {
-	// Maximum number of results required per page. If the value is not supplied, this
-	// will be defaulted to 25 per page.
+	// Maximum number of results required per page. If the value is not supplied,
+	// this will be defaulted to 25 per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

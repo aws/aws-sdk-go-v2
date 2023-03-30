@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches for things associated with the specified entity. You can search by both
-// device and device model. For example, if two different devices, camera1 and
+// Searches for things associated with the specified entity. You can search by
+// both device and device model. For example, if two different devices, camera1 and
 // camera2, implement the camera device model, the user can associate thing1 to
 // camera1 and thing2 to camera2. SearchThings(camera2) will return only thing2,
 // but SearchThings(camera) will return both thing1 and thing2. This action
@@ -59,7 +59,7 @@ type SearchThingsInput struct {
 
 type SearchThingsOutput struct {
 
-	// The string to specify as nextToken when you request the next page of results.
+	// The string to specify as nextToken  when you request the next page of results.
 	NextToken *string
 
 	// An array of things in the result set.
@@ -146,8 +146,8 @@ type SearchThingsPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

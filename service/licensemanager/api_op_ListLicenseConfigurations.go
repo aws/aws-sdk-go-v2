@@ -31,15 +31,9 @@ type ListLicenseConfigurationsInput struct {
 
 	// Filters to scope the results. The following filters and logical operators are
 	// supported:
-	// - licenseCountingType - The dimension for which licenses are counted.
-	// Possible values are vCPU | Instance | Core | Socket. Logical operators are
-	// EQUALS | NOT_EQUALS.
-	// - enforceLicenseCount - A Boolean value that indicates
-	// whether hard license enforcement is used. Logical operators are EQUALS |
-	// NOT_EQUALS.
-	// - usagelimitExceeded - A Boolean value that indicates whether the
-	// available licenses have been exceeded. Logical operators are EQUALS |
-	// NOT_EQUALS.
+	//     - licenseCountingType - The dimension for which licenses are counted. Possible values are vCPU | Instance | Core | Socket . Logical operators are EQUALS | NOT_EQUALS .
+	//     - enforceLicenseCount - A Boolean value that indicates whether hard license enforcement is used. Logical operators are EQUALS | NOT_EQUALS .
+	//     - usagelimitExceeded - A Boolean value that indicates whether the available licenses have been exceeded. Logical operators are EQUALS | NOT_EQUALS .
 	Filters []types.Filter
 
 	// Amazon Resource Names (ARN) of the license configurations.

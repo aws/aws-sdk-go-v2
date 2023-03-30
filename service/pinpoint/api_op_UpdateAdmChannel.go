@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the ADM channel for an application or updates the status and settings of
-// the ADM channel for an application.
+// Enables the ADM channel for an application or updates the status and settings
+// of the ADM channel for an application.
 func (c *Client) UpdateAdmChannel(ctx context.Context, params *UpdateAdmChannelInput, optFns ...func(*Options)) (*UpdateAdmChannelOutput, error) {
 	if params == nil {
 		params = &UpdateAdmChannelInput{}

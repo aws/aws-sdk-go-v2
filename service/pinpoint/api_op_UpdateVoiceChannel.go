@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the voice channel for an application or updates the status and settings
-// of the voice channel for an application.
+// Enables the voice channel for an application or updates the status and
+// settings of the voice channel for an application.
 func (c *Client) UpdateVoiceChannel(ctx context.Context, params *UpdateVoiceChannelInput, optFns ...func(*Options)) (*UpdateVoiceChannelOutput, error) {
 	if params == nil {
 		params = &UpdateVoiceChannelInput{}

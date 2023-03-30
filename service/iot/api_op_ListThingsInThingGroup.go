@@ -12,8 +12,7 @@ import (
 )
 
 // Lists the things in the specified group. Requires permission to access the
-// ListThingsInThingGroup
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// ListThingsInThingGroup (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListThingsInThingGroup(ctx context.Context, params *ListThingsInThingGroupInput, optFns ...func(*Options)) (*ListThingsInThingGroupOutput, error) {
 	if params == nil {
@@ -142,8 +141,8 @@ type ListThingsInThingGroupPaginatorOptions struct {
 	// The maximum number of results to return at one time.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -156,7 +155,8 @@ type ListThingsInThingGroupPaginator struct {
 	firstPage bool
 }
 
-// NewListThingsInThingGroupPaginator returns a new ListThingsInThingGroupPaginator
+// NewListThingsInThingGroupPaginator returns a new
+// ListThingsInThingGroupPaginator
 func NewListThingsInThingGroupPaginator(client ListThingsInThingGroupAPIClient, params *ListThingsInThingGroupInput, optFns ...func(*ListThingsInThingGroupPaginatorOptions)) *ListThingsInThingGroupPaginator {
 	if params == nil {
 		params = &ListThingsInThingGroupInput{}

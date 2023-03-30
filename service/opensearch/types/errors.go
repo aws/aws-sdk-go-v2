@@ -166,8 +166,8 @@ func (e *InvalidPaginationTokenException) ErrorCode() string {
 }
 func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An exception for trying to create or access a sub-resource that's either invalid
-// or not supported.
+// An exception for trying to create or access a sub-resource that's either
+// invalid or not supported.
 type InvalidTypeException struct {
 	Message *string
 

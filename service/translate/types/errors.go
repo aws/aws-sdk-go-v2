@@ -60,11 +60,10 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The confidence that Amazon Comprehend accurately detected the source language is
-// low. If a low confidence level is acceptable for your application, you can use
-// the language in the exception to call Amazon Translate again. For more
-// information, see the DetectDominantLanguage
-// (https://docs.aws.amazon.com/comprehend/latest/dg/API_DetectDominantLanguage.html)
+// The confidence that Amazon Comprehend accurately detected the source language
+// is low. If a low confidence level is acceptable for your application, you can
+// use the language in the exception to call Amazon Translate again. For more
+// information, see the DetectDominantLanguage (https://docs.aws.amazon.com/comprehend/latest/dg/API_DetectDominantLanguage.html)
 // operation in the Amazon Comprehend Developer Guide.
 type DetectedLanguageLowConfidenceException struct {
 	Message *string
@@ -121,7 +120,8 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The filter specified for the operation is not valid. Specify a different filter.
+// The filter specified for the operation is not valid. Specify a different
+// filter.
 type InvalidFilterException struct {
 	Message *string
 
@@ -174,8 +174,8 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request that you made is not valid. Check your request to determine why it's
-// not valid and then retry the request.
+// The request that you made is not valid. Check your request to determine why
+// it's not valid and then retry the request.
 type InvalidRequestException struct {
 	Message *string
 
@@ -228,9 +228,9 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource you are looking for has not been found. Review the resource you're
-// looking for and see if a different resource will accomplish your needs before
-// retrying the revised request.
+// The resource you are looking for has not been found. Review the resource
+// you're looking for and see if a different resource will accomplish your needs
+// before retrying the revised request.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -310,8 +310,8 @@ func (e *TextSizeLimitExceededException) ErrorCode() string {
 }
 func (e *TextSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have made too many requests within a short period of time. Wait for a short
-// time and then try your request again.
+// You have made too many requests within a short period of time. Wait for a
+// short time and then try your request again.
 type TooManyRequestsException struct {
 	Message *string
 
@@ -397,8 +397,8 @@ func (e *UnsupportedDisplayLanguageCodeException) ErrorFault() smithy.ErrorFault
 
 // Amazon Translate does not support translation from the language of the source
 // text into the requested target language. For more information, see Error
-// messages
-// (https://docs.aws.amazon.com/translate/latest/dg/how-to-error-msg.html).
+// messages (https://docs.aws.amazon.com/translate/latest/dg/how-to-error-msg.html)
+// .
 type UnsupportedLanguagePairException struct {
 	Message *string
 

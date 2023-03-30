@@ -28,9 +28,9 @@ func (c *Client) CancelPolicyGeneration(ctx context.Context, params *CancelPolic
 
 type CancelPolicyGenerationInput struct {
 
-	// The JobId that is returned by the StartPolicyGeneration operation. The JobId can
-	// be used with GetGeneratedPolicy to retrieve the generated policies or used with
-	// CancelPolicyGeneration to cancel the policy generation request.
+	// The JobId  that is returned by the StartPolicyGeneration  operation. The JobId
+	// can be used with GetGeneratedPolicy to retrieve the generated policies or used
+	// with CancelPolicyGeneration  to cancel the policy generation request.
 	//
 	// This member is required.
 	JobId *string

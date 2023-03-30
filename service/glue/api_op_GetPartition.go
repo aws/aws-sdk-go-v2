@@ -53,7 +53,7 @@ type GetPartitionInput struct {
 
 type GetPartitionOutput struct {
 
-	// The requested information, in the form of a Partition object.
+	// The requested information, in the form of a Partition  object.
 	Partition *types.Partition
 
 	// Metadata pertaining to the operation's result.

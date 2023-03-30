@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the readiness status for an individual readiness check. To see the overall
-// readiness status for a recovery group, that considers the readiness status for
-// all the readiness checks in a recovery group, use
+// Gets the readiness status for an individual readiness check. To see the
+// overall readiness status for a recovery group, that considers the readiness
+// status for all the readiness checks in a recovery group, use
 // GetRecoveryGroupReadinessSummary.
 func (c *Client) GetReadinessCheckStatus(ctx context.Context, params *GetReadinessCheckStatusInput, optFns ...func(*Options)) (*GetReadinessCheckStatusOutput, error) {
 	if params == nil {
@@ -144,8 +144,8 @@ type GetReadinessCheckStatusPaginatorOptions struct {
 	// The number of objects that you want to return with this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

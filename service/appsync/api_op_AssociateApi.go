@@ -44,7 +44,7 @@ type AssociateApiInput struct {
 
 type AssociateApiOutput struct {
 
-	// The ApiAssociation object.
+	// The ApiAssociation  object.
 	ApiAssociation *types.ApiAssociation
 
 	// Metadata pertaining to the operation's result.

@@ -16,7 +16,8 @@ import (
 // format; this interpolated by Wisdom using ingested content. For example, if you
 // ingest a Salesforce article, it has an Id value, and you can set the template
 // URI to
-// https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*${Id}*/view.
+// https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*${Id}*/view
+// .
 func (c *Client) UpdateKnowledgeBaseTemplateUri(ctx context.Context, params *UpdateKnowledgeBaseTemplateUriInput, optFns ...func(*Options)) (*UpdateKnowledgeBaseTemplateUriOutput, error) {
 	if params == nil {
 		params = &UpdateKnowledgeBaseTemplateUriInput{}

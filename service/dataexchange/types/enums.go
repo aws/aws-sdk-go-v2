@@ -13,9 +13,9 @@ const (
 	AssetTypeLakeFormationDataPermission AssetType = "LAKE_FORMATION_DATA_PERMISSION"
 )
 
-// Values returns all known values for AssetType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for AssetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AssetType) Values() []AssetType {
 	return []AssetType{
 		"S3_SNAPSHOT",
@@ -39,8 +39,8 @@ const (
 	CodeMalwareScanEncryptedFile      Code = "MALWARE_SCAN_ENCRYPTED_FILE"
 )
 
-// Values returns all known values for Code. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Code. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Code) Values() []Code {
 	return []Code{
@@ -122,8 +122,8 @@ const (
 	JobErrorResourceTypesDataSet  JobErrorResourceTypes = "DATA_SET"
 )
 
-// Values returns all known values for JobErrorResourceTypes. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for JobErrorResourceTypes. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (JobErrorResourceTypes) Values() []JobErrorResourceTypes {
 	return []JobErrorResourceTypes{
@@ -158,9 +158,9 @@ const (
 	LFPermissionSelect   LFPermission = "SELECT"
 )
 
-// Values returns all known values for LFPermission. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LFPermission. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LFPermission) Values() []LFPermission {
 	return []LFPermission{
 		"DESCRIBE",
@@ -220,9 +220,9 @@ const (
 	LimitNameConcurrentInProgressJobsToCreateAmazonS3DataAccessAssetsFromS3Buckets LimitName = "Concurrent in progress jobs to create Amazon S3 data access assets from S3 buckets"
 )
 
-// Values returns all known values for LimitName. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for LimitName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (LimitName) Values() []LimitName {
 	return []LimitName{
 		"Products per account",
@@ -281,9 +281,9 @@ const (
 	ProtocolTypeRest ProtocolType = "REST"
 )
 
-// Values returns all known values for ProtocolType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ProtocolType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ProtocolType) Values() []ProtocolType {
 	return []ProtocolType{
 		"REST",
@@ -301,9 +301,9 @@ const (
 	ResourceTypeEventAction ResourceType = "EVENT_ACTION"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"DATA_SET",
@@ -344,8 +344,8 @@ const (
 	StateTimedOut   State = "TIMED_OUT"
 )
 
-// Values returns all known values for State. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for State. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (State) Values() []State {
 	return []State{
@@ -391,8 +391,8 @@ const (
 	TypeImportAssetsFromLakeFormationTagPolicy Type = "IMPORT_ASSETS_FROM_LAKE_FORMATION_TAG_POLICY"
 )
 
-// Values returns all known values for Type. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Type. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{

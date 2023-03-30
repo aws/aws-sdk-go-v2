@@ -14,8 +14,8 @@ import (
 
 // Gets information about your Amazon Kendra experience such as a search
 // application. For more information on creating a search application experience,
-// see Building a search experience with no code
-// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
+// see Building a search experience with no code (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html)
+// .
 func (c *Client) DescribeExperience(ctx context.Context, params *DescribeExperienceInput, optFns ...func(*Options)) (*DescribeExperienceOutput, error) {
 	if params == nil {
 		params = &DescribeExperienceInput{}
@@ -49,9 +49,9 @@ type DescribeExperienceInput struct {
 type DescribeExperienceOutput struct {
 
 	// Shows the configuration information for your Amazon Kendra experience. This
-	// includes ContentSourceConfiguration, which specifies the data source IDs and/or
-	// FAQ IDs, and UserIdentityConfiguration, which specifies the user or group
-	// information to grant access to your Amazon Kendra experience.
+	// includes ContentSourceConfiguration, which specifies the data source IDs
+	// and/or FAQ IDs, and UserIdentityConfiguration, which specifies the user or
+	// group information to grant access to your Amazon Kendra experience.
 	Configuration *types.ExperienceConfiguration
 
 	// Shows the date-time your Amazon Kendra experience was created.
@@ -60,8 +60,8 @@ type DescribeExperienceOutput struct {
 	// Shows the description for your Amazon Kendra experience.
 	Description *string
 
-	// Shows the endpoint URLs for your Amazon Kendra experiences. The URLs are unique
-	// and fully hosted by Amazon Web Services.
+	// Shows the endpoint URLs for your Amazon Kendra experiences. The URLs are
+	// unique and fully hosted by Amazon Web Services.
 	Endpoints []types.ExperienceEndpoint
 
 	// The reason your Amazon Kendra experience could not properly process.
@@ -77,13 +77,13 @@ type DescribeExperienceOutput struct {
 	Name *string
 
 	// Shows the Amazon Resource Name (ARN) of a role with permission to access Query
-	// API, QuerySuggestions API, SubmitFeedback API, and IAM Identity Center that
+	// API, QuerySuggestions  API, SubmitFeedback API, and IAM Identity Center that
 	// stores your user and group information.
 	RoleArn *string
 
-	// The current processing status of your Amazon Kendra experience. When the status
-	// is ACTIVE, your Amazon Kendra experience is ready to use. When the status is
-	// FAILED, the ErrorMessage field contains the reason that this failed.
+	// The current processing status of your Amazon Kendra experience. When the
+	// status is ACTIVE, your Amazon Kendra experience is ready to use. When the
+	// status is FAILED , the ErrorMessage  field contains the reason that this failed.
 	Status types.ExperienceStatus
 
 	// Shows the date-time your Amazon Kendra experience was last updated.

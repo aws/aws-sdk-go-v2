@@ -59,8 +59,8 @@ type UpdatePhoneNumberInput struct {
 	// The Amazon Resource Name (ARN) of the two way channel.
 	TwoWayChannelArn *string
 
-	// By default this is set to false. When set to true you can receive incoming text
-	// messages from your end recipients.
+	// By default this is set to false. When set to true you can receive incoming
+	// text messages from your end recipients.
 	TwoWayEnabled *bool
 
 	noSmithyDocumentSerde
@@ -68,14 +68,15 @@ type UpdatePhoneNumberInput struct {
 
 type UpdatePhoneNumberOutput struct {
 
-	// The time when the phone number was created, in UNIX epoch time
-	// (https://www.epochconverter.com/) format.
+	// The time when the phone number was created, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
 	CreatedTimestamp *time.Time
 
 	// When set to true the phone number can't be deleted.
 	DeletionProtectionEnabled bool
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region.
 	IsoCountryCode *string
 
 	// The type of message. Valid values are TRANSACTIONAL for messages that are
@@ -113,8 +114,8 @@ type UpdatePhoneNumberOutput struct {
 	// The Amazon Resource Name (ARN) of the two way channel.
 	TwoWayChannelArn *string
 
-	// By default this is set to false. When set to true you can receive incoming text
-	// messages from your end recipients.
+	// By default this is set to false. When set to true you can receive incoming
+	// text messages from your end recipients.
 	TwoWayEnabled bool
 
 	// Metadata pertaining to the operation's result.

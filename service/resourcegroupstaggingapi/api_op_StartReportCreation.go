@@ -35,7 +35,7 @@ func (c *Client) StartReportCreation(ctx context.Context, params *StartReportCre
 type StartReportCreationInput struct {
 
 	// The name of the Amazon S3 bucket where the report will be stored; for example:
-	// awsexamplebucket For more information on S3 bucket requirements, including an
+	// awsexamplebucketFor more information on S3 bucket requirements, including an
 	// example bucket policy, see the example S3 bucket policy on this page.
 	//
 	// This member is required.

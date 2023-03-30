@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about an access control configuration that you created for your
-// documents in an index. This includes user and group access information for your
-// documents. This is useful for user context filtering, where search results are
-// filtered based on the user or their group access to documents.
+// Gets information about an access control configuration that you created for
+// your documents in an index. This includes user and group access information for
+// your documents. This is useful for user context filtering, where search results
+// are filtered based on the user or their group access to documents.
 func (c *Client) DescribeAccessControlConfiguration(ctx context.Context, params *DescribeAccessControlConfigurationInput, optFns ...func(*Options)) (*DescribeAccessControlConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeAccessControlConfigurationInput{}
@@ -53,9 +53,9 @@ type DescribeAccessControlConfigurationOutput struct {
 	// This member is required.
 	Name *string
 
-	// Information on principals (users and/or groups) and which documents they should
-	// have access to. This is useful for user context filtering, where search results
-	// are filtered based on the user or their group access to documents.
+	// Information on principals (users and/or groups) and which documents they
+	// should have access to. This is useful for user context filtering, where search
+	// results are filtered based on the user or their group access to documents.
 	AccessControlList []types.Principal
 
 	// The description for the access control configuration.
@@ -65,9 +65,8 @@ type DescribeAccessControlConfigurationOutput struct {
 	// control configuration.
 	ErrorMessage *string
 
-	// The list of principal
-	// (https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html) lists that
-	// define the hierarchy for which documents users should have access to.
+	// The list of principal (https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html)
+	// lists that define the hierarchy for which documents users should have access to.
 	HierarchicalAccessControlList []types.HierarchicalPrincipal
 
 	// Metadata pertaining to the operation's result.

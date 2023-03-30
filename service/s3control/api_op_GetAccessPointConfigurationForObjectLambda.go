@@ -16,10 +16,8 @@ import (
 )
 
 // Returns configuration for an Object Lambda Access Point. The following actions
-// are related to GetAccessPointConfigurationForObjectLambda:
-// -
-// PutAccessPointConfigurationForObjectLambda
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointConfigurationForObjectLambda.html)
+// are related to GetAccessPointConfigurationForObjectLambda :
+//   - PutAccessPointConfigurationForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointConfigurationForObjectLambda.html)
 func (c *Client) GetAccessPointConfigurationForObjectLambda(ctx context.Context, params *GetAccessPointConfigurationForObjectLambdaInput, optFns ...func(*Options)) (*GetAccessPointConfigurationForObjectLambdaOutput, error) {
 	if params == nil {
 		params = &GetAccessPointConfigurationForObjectLambdaInput{}
@@ -43,8 +41,8 @@ type GetAccessPointConfigurationForObjectLambdaInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The name of the Object Lambda Access Point you want to return the configuration
-	// for.
+	// The name of the Object Lambda Access Point you want to return the
+	// configuration for.
 	//
 	// This member is required.
 	Name *string

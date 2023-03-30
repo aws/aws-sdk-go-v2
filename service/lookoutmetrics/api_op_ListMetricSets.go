@@ -52,8 +52,8 @@ type ListMetricSetsOutput struct {
 	// A list of the datasets in the AWS Region, with configuration details for each.
 	MetricSetSummaryList []types.MetricSetSummary
 
-	// If the response is truncated, the list call returns this token. To retrieve the
-	// next set of results, use the token in the next list request.
+	// If the response is truncated, the list call returns this token. To retrieve
+	// the next set of results, use the token in the next list request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -135,8 +135,8 @@ type ListMetricSetsPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

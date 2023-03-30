@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the users and groups who have the Grafana Admin and Editor roles in this
-// workspace. If you use this operation without specifying userId or groupId, the
-// operation returns the roles of all users and groups. If you specify a userId or
-// a groupId, only the roles for that user or group are returned. If you do this,
-// you can specify only one userId or one groupId.
+// Lists the users and groups who have the Grafana Admin  and Editor roles in
+// this workspace. If you use this operation without specifying userId  or groupId
+// , the operation returns the roles of all users and groups. If you specify a
+// userId or a groupId, only the roles for that user or group are returned. If
+// you do this, you can specify only one userId  or one groupId .
 func (c *Client) ListPermissions(ctx context.Context, params *ListPermissionsInput, optFns ...func(*Options)) (*ListPermissionsOutput, error) {
 	if params == nil {
 		params = &ListPermissionsInput{}
@@ -46,15 +46,15 @@ type ListPermissionsInput struct {
 	MaxResults *int32
 
 	// The token to use when requesting the next set of results. You received this
-	// token from a previous ListPermissions operation.
+	// token from a previous ListPermissions  operation.
 	NextToken *string
 
 	// (Optional) Limits the results to only the user that matches this ID.
 	UserId *string
 
 	// (Optional) If you specify SSO_USER, then only the permissions of IAM Identity
-	// Center users are returned. If you specify SSO_GROUP, only the permissions of IAM
-	// Identity Center groups are returned.
+	// Center users are returned. If you specify SSO_GROUP, only the permissions of
+	// IAM Identity Center groups are returned.
 	UserType types.UserType
 
 	noSmithyDocumentSerde
@@ -153,8 +153,8 @@ type ListPermissionsPaginatorOptions struct {
 	// The maximum number of results to include in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -149,8 +149,8 @@ func addEndpointPrefix_opListReferenceStoresMiddleware(stack *middleware.Stack) 
 	return stack.Serialize.Insert(&endpointPrefix_opListReferenceStoresMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
-// ListReferenceStoresAPIClient is a client that implements the ListReferenceStores
-// operation.
+// ListReferenceStoresAPIClient is a client that implements the
+// ListReferenceStores operation.
 type ListReferenceStoresAPIClient interface {
 	ListReferenceStores(context.Context, *ListReferenceStoresInput, ...func(*Options)) (*ListReferenceStoresOutput, error)
 }
@@ -163,8 +163,8 @@ type ListReferenceStoresPaginatorOptions struct {
 	// The maximum number of stores to return in one page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

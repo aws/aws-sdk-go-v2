@@ -34,8 +34,7 @@ type GetAccessPreviewInput struct {
 	// This member is required.
 	AccessPreviewId *string
 
-	// The ARN of the analyzer
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
+	// The ARN of the analyzer (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
 	// used to generate the access preview.
 	//
 	// This member is required.

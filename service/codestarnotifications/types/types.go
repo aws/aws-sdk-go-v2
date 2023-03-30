@@ -10,8 +10,7 @@ import (
 type EventTypeSummary struct {
 
 	// The system-generated ID of the event. For a complete list of event types and
-	// IDs, see Notification concepts
-	// (https://docs.aws.amazon.com/codestar-notifications/latest/userguide/concepts.html#concepts-api)
+	// IDs, see Notification concepts (https://docs.aws.amazon.com/codestar-notifications/latest/userguide/concepts.html#concepts-api)
 	// in the Developer Tools Console User Guide.
 	EventTypeId *string
 
@@ -27,8 +26,8 @@ type EventTypeSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a filter to apply to the list of returned event types. You can
-// filter by resource type or service name.
+// Information about a filter to apply to the list of returned event types. You
+// can filter by resource type or service name.
 type ListEventTypesFilter struct {
 
 	// The system-generated name of the filter type you want to filter by.
@@ -45,8 +44,8 @@ type ListEventTypesFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a filter to apply to the list of returned notification rules.
-// You can filter by event type, owner, resource, or target.
+// Information about a filter to apply to the list of returned notification
+// rules. You can filter by event type, owner, resource, or target.
 type ListNotificationRulesFilter struct {
 
 	// The name of the attribute you want to use to filter the returned notification
@@ -68,8 +67,8 @@ type ListNotificationRulesFilter struct {
 // Information about a filter to apply to the list of returned targets. You can
 // filter by target type, address, or status. For example, to filter results to
 // notification rules that have active Chatbot topics as targets, you could specify
-// a ListTargetsFilter Name as TargetType and a Value of SNS, and a Name of
-// TARGET_STATUS and a Value of ACTIVE.
+// a ListTargetsFilter Name as TargetType  and a Value of SNS , and a Name of
+// TARGET_STATUS and a Value of ACTIVE .
 type ListTargetsFilter struct {
 
 	// The name of the attribute you want to use to filter the returned targets.
@@ -107,9 +106,8 @@ type Target struct {
 	TargetAddress *string
 
 	// The target type. Can be an Chatbot topic or Chatbot client.
-	// - Chatbot topics are
-	// specified as SNS.
-	// - Chatbot clients are specified as AWSChatbotSlack.
+	//     - Chatbot topics are specified as SNS .
+	//     - Chatbot clients are specified as AWSChatbotSlack .
 	TargetType *string
 
 	noSmithyDocumentSerde
@@ -124,10 +122,9 @@ type TargetSummary struct {
 	// The status of the target.
 	TargetStatus TargetStatus
 
-	// The type of the target (for example, SNS).
-	// - Chatbot topics are specified as
-	// SNS.
-	// - Chatbot clients are specified as AWSChatbotSlack.
+	// The type of the target (for example, SNS ).
+	//     - Chatbot topics are specified as SNS .
+	//     - Chatbot clients are specified as AWSChatbotSlack .
 	TargetType *string
 
 	noSmithyDocumentSerde

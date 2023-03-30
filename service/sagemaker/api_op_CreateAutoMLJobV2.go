@@ -11,13 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon SageMaker AutoML job that uses non-tabular data such as images
-// or text for Computer Vision or Natural Language Processing problems. Find the
-// resulting model after you run an AutoML job V2 by calling DescribeAutoMLJobV2
-// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html).
-// To create an AutoMLJob using tabular data, see CreateAutoMLJob
-// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html).
-// This API action is callable through SageMaker Canvas only. Calling it directly
+// Creates an Amazon SageMaker AutoML job that uses non-tabular data such as
+// images or text for Computer Vision or Natural Language Processing problems. Find
+// the resulting model after you run an AutoML job V2 by calling
+// DescribeAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html)
+// . To create an AutoMLJob  using tabular data, see CreateAutoMLJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html)
+// . This API action is callable through SageMaker Canvas only. Calling it directly
 // from the CLI or an SDK results in an error.
 func (c *Client) CreateAutoMLJobV2(ctx context.Context, params *CreateAutoMLJobV2Input, optFns ...func(*Options)) (*CreateAutoMLJobV2Output, error) {
 	if params == nil {
@@ -37,21 +36,17 @@ func (c *Client) CreateAutoMLJobV2(ctx context.Context, params *CreateAutoMLJobV
 type CreateAutoMLJobV2Input struct {
 
 	// An array of channel objects describing the input data and their location. Each
-	// channel is a named input source. Similar to InputDataConfig
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig)
+	// channel is a named input source. Similar to InputDataConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig)
 	// supported by CreateAutoMLJob. The supported formats depend on the problem
 	// type:
-	//
-	// * ImageClassification: S3Prefix, ManifestFile, AugmentedManifestFile
-	//
-	// *
-	// TextClassification: S3Prefix
+	//     - ImageClassification: S3Prefix, ManifestFile , AugmentedManifestFile
+	//     - TextClassification: S3Prefix
 	//
 	// This member is required.
 	AutoMLJobInputDataConfig []types.AutoMLJobChannel
 
-	// Identifies an Autopilot job. The name must be unique to your account and is case
-	// insensitive.
+	// Identifies an Autopilot job. The name must be unique to your account and is
+	// case insensitive.
 	//
 	// This member is required.
 	AutoMLJobName *string
@@ -73,21 +68,20 @@ type CreateAutoMLJobV2Input struct {
 	RoleArn *string
 
 	// Specifies a metric to minimize or maximize as the objective of a job. For
-	// CreateAutoMLJobV2
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html),
-	// only Accuracy is supported.
+	// CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html)
+	// , only Accuracy  is supported.
 	AutoMLJobObjective *types.AutoMLJobObjective
 
 	// This structure specifies how to split the data into train and validation
 	// datasets. If you are using the V1 API (for example CreateAutoMLJob) or the V2
-	// API for Natural Language Processing problems (for example CreateAutoMLJobV2 with
-	// a TextClassificationJobConfig problem type), the validation and training
+	// API for Natural Language Processing problems (for example CreateAutoMLJobV2
+	// with a TextClassificationJobConfig problem type), the validation and training
 	// datasets must contain the same headers. Also, for V1 API jobs, the validation
 	// dataset must be less than 2 GB in size.
 	DataSplitConfig *types.AutoMLDataSplitConfig
 
-	// Specifies how to generate the endpoint name for an automatic one-click Autopilot
-	// model deployment.
+	// Specifies how to generate the endpoint name for an automatic one-click
+	// Autopilot model deployment.
 	ModelDeployConfig *types.ModelDeployConfig
 
 	// The security configuration for traffic encryption or Amazon VPC settings.
@@ -95,9 +89,8 @@ type CreateAutoMLJobV2Input struct {
 
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, such as by purpose, owner, or environment.
-	// For more information, see Tagging Amazon Web ServicesResources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html). Tag keys must
-	// be unique per resource.
+	// For more information, see Tagging Amazon Web ServicesResources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// . Tag keys must be unique per resource.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

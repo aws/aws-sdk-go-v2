@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A replication set replicates and encrypts your data to the provided Regions with
-// the provided KMS key.
+// A replication set replicates and encrypts your data to the provided Regions
+// with the provided KMS key.
 func (c *Client) CreateReplicationSet(ctx context.Context, params *CreateReplicationSetInput, optFns ...func(*Options)) (*CreateReplicationSetOutput, error) {
 	if params == nil {
 		params = &CreateReplicationSetInput{}

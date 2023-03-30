@@ -13,14 +13,10 @@ import (
 )
 
 // Returns intent information as follows:
-// - If you specify the nameContains field,
-// returns the $LATEST version of all intents that contain the specified string.
-// -
-// If you don't specify the nameContains field, returns information about the
-// $LATEST version of all intents.
+//   - If you specify the nameContains field, returns the $LATEST version of all intents that contain the specified string.
+//   - If you don't specify the nameContains field, returns information about the $LATEST version of all intents.
 //
-// The operation requires permission for the
-// lex:GetIntents action.
+// The operation requires permission for the lex:GetIntents  action.
 func (c *Client) GetIntents(ctx context.Context, params *GetIntentsInput, optFns ...func(*Options)) (*GetIntentsOutput, error) {
 	if params == nil {
 		params = &GetIntentsInput{}
@@ -57,11 +53,11 @@ type GetIntentsInput struct {
 
 type GetIntentsOutput struct {
 
-	// An array of Intent objects. For more information, see PutBot.
+	// An array of Intent  objects. For more information, see PutBot .
 	Intents []types.IntentMetadata
 
-	// If the response is truncated, the response includes a pagination token that you
-	// can specify in your next request to fetch the next page of intents.
+	// If the response is truncated, the response includes a pagination token that
+	// you can specify in your next request to fetch the next page of intents.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -142,8 +138,8 @@ type GetIntentsPaginatorOptions struct {
 	// The maximum number of intents to return in the response. The default is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

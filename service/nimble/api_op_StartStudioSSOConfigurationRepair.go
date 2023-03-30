@@ -12,14 +12,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Repairs the IAM Identity Center configuration for a given studio. If the studio
-// has a valid IAM Identity Center configuration currently associated with it, this
-// operation will fail with a validation error. If the studio does not have a valid
-// IAM Identity Center configuration currently associated with it, then a new IAM
-// Identity Center application is created for the studio and the studio is changed
-// to the READY state. After the IAM Identity Center application is repaired, you
-// must use the Amazon Nimble Studio console to add administrators and users to
-// your studio.
+// Repairs the IAM Identity Center configuration for a given studio. If the
+// studio has a valid IAM Identity Center configuration currently associated with
+// it, this operation will fail with a validation error. If the studio does not
+// have a valid IAM Identity Center configuration currently associated with it,
+// then a new IAM Identity Center application is created for the studio and the
+// studio is changed to the READY state. After the IAM Identity Center
+// application is repaired, you must use the Amazon Nimble Studio console to add
+// administrators and users to your studio.
 func (c *Client) StartStudioSSOConfigurationRepair(ctx context.Context, params *StartStudioSSOConfigurationRepairInput, optFns ...func(*Options)) (*StartStudioSSOConfigurationRepairOutput, error) {
 	if params == nil {
 		params = &StartStudioSSOConfigurationRepairInput{}
@@ -42,8 +42,8 @@ type StartStudioSSOConfigurationRepairInput struct {
 	// This member is required.
 	StudioId *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. If you don’t specify a client token, the Amazon Web Services SDK
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
 	ClientToken *string

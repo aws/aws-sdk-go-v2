@@ -34,8 +34,8 @@ type ListCloudFrontOriginAccessIdentitiesInput struct {
 	// Use this when paginating results to indicate where to begin in your list of
 	// origin access identities. The results include identities in the list that occur
 	// after the marker. To get the next page of results, set the Marker to the value
-	// of the NextMarker from the current page's response (which is also the ID of the
-	// last identity on that page).
+	// of the NextMarker from the current page's response (which is also the ID of
+	// the last identity on that page).
 	Marker *string
 
 	// The maximum number of origin access identities you want in the response body.
@@ -47,7 +47,7 @@ type ListCloudFrontOriginAccessIdentitiesInput struct {
 // The returned result of the corresponding request.
 type ListCloudFrontOriginAccessIdentitiesOutput struct {
 
-	// The CloudFrontOriginAccessIdentityList type.
+	// The CloudFrontOriginAccessIdentityList  type.
 	CloudFrontOriginAccessIdentityList *types.CloudFrontOriginAccessIdentityList
 
 	// Metadata pertaining to the operation's result.
@@ -130,8 +130,8 @@ type ListCloudFrontOriginAccessIdentitiesPaginatorOptions struct {
 	// The maximum number of origin access identities you want in the response body.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

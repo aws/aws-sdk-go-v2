@@ -28,8 +28,8 @@ func (c *Client) CancelResize(ctx context.Context, params *CancelResizeInput, op
 
 type CancelResizeInput struct {
 
-	// The unique identifier for the cluster that you want to cancel a resize operation
-	// for.
+	// The unique identifier for the cluster that you want to cancel a resize
+	// operation for.
 	//
 	// This member is required.
 	ClusterIdentifier *string
@@ -40,16 +40,16 @@ type CancelResizeInput struct {
 // Describes the result of a cluster resize operation.
 type CancelResizeOutput struct {
 
-	// The average rate of the resize operation over the last few minutes, measured in
-	// megabytes per second. After the resize operation completes, this value shows the
-	// average rate of the entire resize operation.
+	// The average rate of the resize operation over the last few minutes, measured
+	// in megabytes per second. After the resize operation completes, this value shows
+	// the average rate of the entire resize operation.
 	AvgResizeRateInMegaBytesPerSecond *float64
 
 	// The percent of data transferred from source cluster to target cluster.
 	DataTransferProgressPercent *float64
 
-	// The amount of seconds that have elapsed since the resize operation began. After
-	// the resize operation completes, this value shows the total actual time, in
+	// The amount of seconds that have elapsed since the resize operation began.
+	// After the resize operation completes, this value shows the total actual time, in
 	// seconds, for the resize operation.
 	ElapsedTimeInSeconds *int64
 
@@ -67,8 +67,8 @@ type CancelResizeOutput struct {
 	// table names.
 	ImportTablesInProgress []string
 
-	// The names of tables that have not been yet imported. Valid Values: List of table
-	// names
+	// The names of tables that have not been yet imported. Valid Values: List of
+	// table names
 	ImportTablesNotStarted []string
 
 	// An optional string to provide additional details about the resize action.
@@ -81,12 +81,12 @@ type CancelResizeOutput struct {
 	// estimated total amount of data before resize).
 	ProgressInMegaBytes *int64
 
-	// An enum with possible values of ClassicResize and ElasticResize. These values
+	// An enum with possible values of ClassicResize  and ElasticResize. These values
 	// describe the type of resize operation being performed.
 	ResizeType *string
 
-	// The status of the resize operation. Valid Values: NONE | IN_PROGRESS | FAILED |
-	// SUCCEEDED | CANCELLING
+	// The status of the resize operation. Valid Values: NONE  | IN_PROGRESS  | FAILED
+	// | SUCCEEDED  | CANCELLING
 	Status *string
 
 	// The cluster type after the resize operation is complete. Valid Values:
@@ -94,10 +94,11 @@ type CancelResizeOutput struct {
 	TargetClusterType *string
 
 	// The type of encryption for the cluster after the resize is complete. Possible
-	// values are KMS and None.
+	// values are KMS  and None .
 	TargetEncryptionType *string
 
-	// The node type that the cluster will have after the resize operation is complete.
+	// The node type that the cluster will have after the resize operation is
+	// complete.
 	TargetNodeType *string
 
 	// The number of nodes that the cluster will have after the resize operation is

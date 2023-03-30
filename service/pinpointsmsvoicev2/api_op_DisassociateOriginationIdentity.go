@@ -31,15 +31,16 @@ func (c *Client) DisassociateOriginationIdentity(ctx context.Context, params *Di
 
 type DisassociateOriginationIdentityInput struct {
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region.
 	//
 	// This member is required.
 	IsoCountryCode *string
 
 	// The origination identity to use such as a PhoneNumberId, PhoneNumberArn,
 	// SenderId or SenderIdArn. You can use DescribePhoneNumbers find the values for
-	// PhoneNumberId and PhoneNumberArn, or use DescribeSenderIds to get the values for
-	// SenderId and SenderIdArn.
+	// PhoneNumberId and PhoneNumberArn, or use DescribeSenderIds to get the values
+	// for SenderId and SenderIdArn.
 	//
 	// This member is required.
 	OriginationIdentity *string
@@ -60,7 +61,8 @@ type DisassociateOriginationIdentityInput struct {
 
 type DisassociateOriginationIdentityOutput struct {
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region.
 	IsoCountryCode *string
 
 	// The PhoneNumberId or SenderId of the origination identity.

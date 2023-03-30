@@ -15,13 +15,11 @@ import (
 )
 
 // Deletes the Amazon S3 Storage Lens configuration tags. For more information
-// about S3 Storage Lens, see Assessing your storage activity and usage with Amazon
-// S3 Storage Lens
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html) in the
-// Amazon S3 User Guide. To use this action, you must have permission to perform
-// the s3:DeleteStorageLensConfigurationTagging action. For more information, see
-// Setting permissions to use Amazon S3 Storage Lens
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html)
+// about S3 Storage Lens, see Assessing your storage activity and usage with
+// Amazon S3 Storage Lens  (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html)
+// in the Amazon S3 User Guide. To use this action, you must have permission to
+// perform the s3:DeleteStorageLensConfigurationTagging action. For more
+// information, see Setting permissions to use Amazon S3 Storage Lens (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html)
 // in the Amazon S3 User Guide.
 func (c *Client) DeleteStorageLensConfigurationTagging(ctx context.Context, params *DeleteStorageLensConfigurationTaggingInput, optFns ...func(*Options)) (*DeleteStorageLensConfigurationTaggingOutput, error) {
 	if params == nil {

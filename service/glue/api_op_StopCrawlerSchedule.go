@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the schedule state of the specified crawler to NOT_SCHEDULED, but does not
-// stop the crawler if it is already running.
+// Sets the schedule state of the specified crawler to NOT_SCHEDULED, but does
+// not stop the crawler if it is already running.
 func (c *Client) StopCrawlerSchedule(ctx context.Context, params *StopCrawlerScheduleInput, optFns ...func(*Options)) (*StopCrawlerScheduleOutput, error) {
 	if params == nil {
 		params = &StopCrawlerScheduleInput{}

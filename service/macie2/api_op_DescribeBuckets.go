@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves (queries) statistical data and other information about one or more S3
-// buckets that Amazon Macie monitors and analyzes for an account.
+// Retrieves (queries) statistical data and other information about one or more
+// S3 buckets that Amazon Macie monitors and analyzes for an account.
 func (c *Client) DescribeBuckets(ctx context.Context, params *DescribeBucketsInput, optFns ...func(*Options)) (*DescribeBucketsOutput, error) {
 	if params == nil {
 		params = &DescribeBucketsInput{}
@@ -34,8 +34,8 @@ type DescribeBucketsInput struct {
 	// The criteria to use to filter the query results.
 	Criteria map[string]types.BucketCriteriaAdditionalProperties
 
-	// The maximum number of items to include in each page of the response. The default
-	// value is 50.
+	// The maximum number of items to include in each page of the response. The
+	// default value is 50.
 	MaxResults int32
 
 	// The nextToken string that specifies which page of results to return in a
@@ -134,12 +134,12 @@ var _ DescribeBucketsAPIClient = (*Client)(nil)
 
 // DescribeBucketsPaginatorOptions is the paginator options for DescribeBuckets
 type DescribeBucketsPaginatorOptions struct {
-	// The maximum number of items to include in each page of the response. The default
-	// value is 50.
+	// The maximum number of items to include in each page of the response. The
+	// default value is 50.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

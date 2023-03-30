@@ -12,14 +12,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists gateways owned by an Amazon Web Services account in an Amazon Web Services
-// Region specified in the request. The returned list is ordered by gateway Amazon
-// Resource Name (ARN). By default, the operation returns a maximum of 100
-// gateways. This operation supports pagination that allows you to optionally
-// reduce the number of gateways returned in a response. If you have more gateways
-// than are returned in a response (that is, the response returns only a truncated
-// list of your gateways), the response contains a marker that you can specify in
-// your next request to fetch the next page of gateways.
+// Lists gateways owned by an Amazon Web Services account in an Amazon Web
+// Services Region specified in the request. The returned list is ordered by
+// gateway Amazon Resource Name (ARN). By default, the operation returns a maximum
+// of 100 gateways. This operation supports pagination that allows you to
+// optionally reduce the number of gateways returned in a response. If you have
+// more gateways than are returned in a response (that is, the response returns
+// only a truncated list of your gateways), the response contains a marker that you
+// can specify in your next request to fetch the next page of gateways.
 func (c *Client) ListGateways(ctx context.Context, params *ListGatewaysInput, optFns ...func(*Options)) (*ListGatewaysOutput, error) {
 	if params == nil {
 		params = &ListGatewaysInput{}
@@ -36,17 +36,16 @@ func (c *Client) ListGateways(ctx context.Context, params *ListGatewaysInput, op
 }
 
 // A JSON object containing zero or more of the following fields:
-// -
-// ListGatewaysInput$Limit
-// - ListGatewaysInput$Marker
+//   - ListGatewaysInput$Limit
+//   - ListGatewaysInput$Marker
 type ListGatewaysInput struct {
 
-	// Specifies that the list of gateways returned be limited to the specified number
-	// of items.
+	// Specifies that the list of gateways returned be limited to the specified
+	// number of items.
 	Limit *int32
 
-	// An opaque string that indicates the position at which to begin the returned list
-	// of gateways.
+	// An opaque string that indicates the position at which to begin the returned
+	// list of gateways.
 	Marker *string
 
 	noSmithyDocumentSerde
@@ -54,7 +53,7 @@ type ListGatewaysInput struct {
 
 type ListGatewaysOutput struct {
 
-	// An array of GatewayInfo objects.
+	// An array of GatewayInfo  objects.
 	Gateways []types.GatewayInfo
 
 	// Use the marker in your next request to fetch the next set of gateways in the
@@ -137,12 +136,12 @@ var _ ListGatewaysAPIClient = (*Client)(nil)
 
 // ListGatewaysPaginatorOptions is the paginator options for ListGateways
 type ListGatewaysPaginatorOptions struct {
-	// Specifies that the list of gateways returned be limited to the specified number
-	// of items.
+	// Specifies that the list of gateways returned be limited to the specified
+	// number of items.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

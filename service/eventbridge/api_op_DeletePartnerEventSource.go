@@ -31,8 +31,8 @@ func (c *Client) DeletePartnerEventSource(ctx context.Context, params *DeletePar
 
 type DeletePartnerEventSourceInput struct {
 
-	// The Amazon Web Services account ID of the Amazon Web Services customer that the
-	// event source was created for.
+	// The Amazon Web Services account ID of the Amazon Web Services customer that
+	// the event source was created for.
 	//
 	// This member is required.
 	Account *string

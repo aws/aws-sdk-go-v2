@@ -39,7 +39,7 @@ type UpdateMapInput struct {
 	// Updates the description for the map resource.
 	Description *string
 
-	// No longer used. If included, the only allowed value is RequestBasedUsage.
+	// No longer used. If included, the only allowed value is RequestBasedUsage .
 	//
 	// Deprecated: Deprecated. If included, the only allowed value is
 	// RequestBasedUsage.
@@ -52,8 +52,7 @@ type UpdateMapOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated map resource. Used to specify a
 	// resource across AWS.
-	// - Format example:
-	// arn:aws:geo:region:account-id:map/ExampleMap
+	//     - Format example: arn:aws:geo:region:account-id:map/ExampleMap
 	//
 	// This member is required.
 	MapArn *string
@@ -63,9 +62,8 @@ type UpdateMapOutput struct {
 	// This member is required.
 	MapName *string
 
-	// The timestamp for when the map resource was last updated in  ISO 8601
-	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ.
+	// The timestamp for when the map resource was last updated in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format: YYYY-MM-DDThh:mm:ss.sssZ .
 	//
 	// This member is required.
 	UpdateTime *time.Time

@@ -121,8 +121,8 @@ func (c *Client) addOperationListEulaAcceptancesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListEulaAcceptancesAPIClient is a client that implements the ListEulaAcceptances
-// operation.
+// ListEulaAcceptancesAPIClient is a client that implements the
+// ListEulaAcceptances operation.
 type ListEulaAcceptancesAPIClient interface {
 	ListEulaAcceptances(context.Context, *ListEulaAcceptancesInput, ...func(*Options)) (*ListEulaAcceptancesOutput, error)
 }
@@ -132,8 +132,8 @@ var _ ListEulaAcceptancesAPIClient = (*Client)(nil)
 // ListEulaAcceptancesPaginatorOptions is the paginator options for
 // ListEulaAcceptances
 type ListEulaAcceptancesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

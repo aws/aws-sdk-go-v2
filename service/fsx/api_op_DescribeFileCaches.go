@@ -13,24 +13,21 @@ import (
 )
 
 // Returns the description of a specific Amazon File Cache resource, if a
-// FileCacheIds value is provided for that cache. Otherwise, it returns
+// FileCacheIdsvalue is provided for that cache. Otherwise, it returns
 // descriptions of all caches owned by your Amazon Web Services account in the
 // Amazon Web Services Region of the endpoint that you're calling. When retrieving
 // all cache descriptions, you can optionally specify the MaxResults parameter to
 // limit the number of descriptions in a response. If more cache descriptions
 // remain, the operation returns a NextToken value in the response. In this case,
-// send a later request with the NextToken request parameter set to the value of
-// NextToken from the last response. This operation is used in an iterative process
-// to retrieve a list of your cache descriptions. DescribeFileCaches is called
-// first without a NextTokenvalue. Then the operation continues to be called with
-// the NextToken parameter set to the value of the last NextToken value until a
-// response has no NextToken. When using this operation, keep the following in
-// mind:
-// - The implementation might return fewer than MaxResults cache descriptions
-// while still including a NextToken value.
-// - The order of caches returned in the
-// response of one DescribeFileCaches call and the order of caches returned across
-// the responses of a multicall iteration is unspecified.
+// send a later request with the NextToken  request parameter set to the value of
+// NextTokenfrom the last response. This operation is used in an iterative
+// process to retrieve a list of your cache descriptions. DescribeFileCaches is
+// called first without a NextTokenvalue. Then the operation continues to be
+// called with the NextToken  parameter set to the value of the last NextToken
+// value until a response has no NextToken. When using this operation, keep the
+// following in mind:
+//   - The implementation might return fewer than MaxResults cache descriptions while still including a NextToken value.
+//   - The order of caches returned in the response of one DescribeFileCaches call and the order of caches returned across the responses of a multicall iteration is unspecified.
 func (c *Client) DescribeFileCaches(ctx context.Context, params *DescribeFileCachesInput, optFns ...func(*Options)) (*DescribeFileCachesOutput, error) {
 	if params == nil {
 		params = &DescribeFileCachesInput{}
@@ -51,13 +48,13 @@ type DescribeFileCachesInput struct {
 	// IDs of the caches whose descriptions you want to retrieve (String).
 	FileCacheIds []string
 
-	// The maximum number of resources to return in the response. This value must be an
-	// integer greater than zero.
+	// The maximum number of resources to return in the response. This value must be
+	// an integer greater than zero.
 	MaxResults *int32
 
-	// (Optional) Opaque pagination token returned from a previous operation (String).
-	// If present, this token indicates from what point you can continue processing the
-	// request, where the previous NextToken value left off.
+	// (Optional) Opaque pagination token returned from a previous operation
+	// (String). If present, this token indicates from what point you can continue
+	// processing the request, where the previous NextToken  value left off.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -65,12 +62,12 @@ type DescribeFileCachesInput struct {
 
 type DescribeFileCachesOutput struct {
 
-	// The response object for the DescribeFileCaches operation.
+	// The response object for the DescribeFileCaches  operation.
 	FileCaches []types.FileCache
 
-	// (Optional) Opaque pagination token returned from a previous operation (String).
-	// If present, this token indicates from what point you can continue processing the
-	// request, where the previous NextToken value left off.
+	// (Optional) Opaque pagination token returned from a previous operation
+	// (String). If present, this token indicates from what point you can continue
+	// processing the request, where the previous NextToken  value left off.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -150,12 +147,12 @@ var _ DescribeFileCachesAPIClient = (*Client)(nil)
 // DescribeFileCachesPaginatorOptions is the paginator options for
 // DescribeFileCaches
 type DescribeFileCachesPaginatorOptions struct {
-	// The maximum number of resources to return in the response. This value must be an
-	// integer greater than zero.
+	// The maximum number of resources to return in the response. This value must be
+	// an integer greater than zero.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

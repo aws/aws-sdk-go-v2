@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about a specified development endpoint. When you create a
-// development endpoint in a virtual private cloud (VPC), Glue returns only a
+// Retrieves information about a specified development endpoint. When you create
+// a development endpoint in a virtual private cloud (VPC), Glue returns only a
 // private IP address, and the public IP address field is not populated. When you
 // create a non-VPC development endpoint, Glue returns only a public IP address.
 func (c *Client) GetDevEndpoint(ctx context.Context, params *GetDevEndpointInput, optFns ...func(*Options)) (*GetDevEndpointOutput, error) {
@@ -32,7 +32,7 @@ func (c *Client) GetDevEndpoint(ctx context.Context, params *GetDevEndpointInput
 
 type GetDevEndpointInput struct {
 
-	// Name of the DevEndpoint to retrieve information for.
+	// Name of the DevEndpoint  to retrieve information for.
 	//
 	// This member is required.
 	EndpointName *string
@@ -42,7 +42,7 @@ type GetDevEndpointInput struct {
 
 type GetDevEndpointOutput struct {
 
-	// A DevEndpoint definition.
+	// A DevEndpoint  definition.
 	DevEndpoint *types.DevEndpoint
 
 	// Metadata pertaining to the operation's result.

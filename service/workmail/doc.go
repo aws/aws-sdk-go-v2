@@ -10,23 +10,23 @@
 // existing corporate directory and control both the keys that encrypt your data
 // and the location in which your data is stored. The WorkMail API is designed for
 // the following scenarios:
-// - Listing and describing organizations
 //
-// - Managing
-// users
+//   - Listing and describing organizations
 //
-// - Managing groups
+//   - Managing users
 //
-// - Managing resources
+//   - Managing groups
 //
-// All WorkMail API operations are
-// Amazon-authenticated and certificate-signed. They not only require the use of
-// the AWS SDK, but also allow for the exclusive use of AWS Identity and Access
-// Management users and roles to help facilitate access, trust, and permission
-// policies. By creating a role and allowing an IAM user to access the WorkMail
-// site, the IAM user gains full administrative visibility into the entire WorkMail
-// organization (or as set in the IAM policy). This includes, but is not limited
-// to, the ability to create, update, and delete users, groups, and resources. This
-// allows developers to perform the scenarios listed above, as well as give users
-// the ability to grant access on a selective basis using the IAM model.
+//   - Managing resources
+//
+// All WorkMail API operations are Amazon-authenticated
+// and certificate-signed. They not only require the use of the AWS SDK, but also
+// allow for the exclusive use of AWS Identity and Access Management users and
+// roles to help facilitate access, trust, and permission policies. By creating a
+// role and allowing an IAM user to access the WorkMail site, the IAM user gains
+// full administrative visibility into the entire WorkMail organization (or as set
+// in the IAM policy). This includes, but is not limited to, the ability to create,
+// update, and delete users, groups, and resources. This allows developers to
+// perform the scenarios listed above, as well as give users the ability to grant
+// access on a selective basis using the IAM model.
 package workmail

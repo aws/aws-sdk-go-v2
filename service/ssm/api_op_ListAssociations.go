@@ -35,9 +35,9 @@ type ListAssociationsInput struct {
 
 	// One or more filters. Use a filter to return a more specific list of results.
 	// Filtering associations using the InstanceID attribute only returns legacy
-	// associations created using the InstanceID attribute. Associations targeting the
-	// managed node that are part of the Target Attributes ResourceGroup or Tags aren't
-	// returned.
+	// associations created using the InstanceID attribute. Associations targeting
+	// the managed node that are part of the Target Attributes ResourceGroup  or Tags
+	// aren't returned.
 	AssociationFilterList []types.AssociationFilter
 
 	// The maximum number of items to return for this call. The call also returns a
@@ -143,8 +143,8 @@ type ListAssociationsPaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

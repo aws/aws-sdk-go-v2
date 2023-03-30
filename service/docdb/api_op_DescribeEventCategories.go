@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays a list of categories for all event source types, or, if specified, for
-// a specified source type.
+// Displays a list of categories for all event source types, or, if specified,
+// for a specified source type.
 func (c *Client) DescribeEventCategories(ctx context.Context, params *DescribeEventCategoriesInput, optFns ...func(*Options)) (*DescribeEventCategoriesOutput, error) {
 	if params == nil {
 		params = &DescribeEventCategoriesInput{}
@@ -28,20 +28,20 @@ func (c *Client) DescribeEventCategories(ctx context.Context, params *DescribeEv
 	return out, nil
 }
 
-// Represents the input to DescribeEventCategories.
+// Represents the input to DescribeEventCategories .
 type DescribeEventCategoriesInput struct {
 
 	// This parameter is not currently supported.
 	Filters []types.Filter
 
-	// The type of source that is generating the events. Valid values: db-instance,
-	// db-parameter-group, db-security-group
+	// The type of source that is generating the events. Valid values: db-instance ,
+	// db-parameter-group , db-security-group
 	SourceType *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of DescribeEventCategories.
+// Represents the output of DescribeEventCategories .
 type DescribeEventCategoriesOutput struct {
 
 	// A list of event category maps.

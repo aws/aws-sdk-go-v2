@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the target On-Demand and target Spot capacities for the instance fleet
-// with the specified InstanceFleetID within the cluster specified using ClusterID.
-// The call either succeeds or fails atomically. The instance fleet configuration
-// is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x
-// versions.
+// Modifies the target On-Demand and target Spot capacities for the instance
+// fleet with the specified InstanceFleetID within the cluster specified using
+// ClusterID. The call either succeeds or fails atomically. The instance fleet
+// configuration is available only in Amazon EMR versions 4.8.0 and later,
+// excluding 5.0.x versions.
 func (c *Client) ModifyInstanceFleet(ctx context.Context, params *ModifyInstanceFleetInput, optFns ...func(*Options)) (*ModifyInstanceFleetOutput, error) {
 	if params == nil {
 		params = &ModifyInstanceFleetInput{}

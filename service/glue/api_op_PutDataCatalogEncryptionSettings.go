@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the security configuration for a specified catalog. After the configuration
-// has been set, the specified encryption is applied to every catalog write
-// thereafter.
+// Sets the security configuration for a specified catalog. After the
+// configuration has been set, the specified encryption is applied to every catalog
+// write thereafter.
 func (c *Client) PutDataCatalogEncryptionSettings(ctx context.Context, params *PutDataCatalogEncryptionSettingsInput, optFns ...func(*Options)) (*PutDataCatalogEncryptionSettingsOutput, error) {
 	if params == nil {
 		params = &PutDataCatalogEncryptionSettingsInput{}

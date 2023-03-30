@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the status of a player's connection to the game runtime. It's possible for
-// a single player to have multiple connections to the game runtime. If a player is
-// not connected, this operation returns an empty list.
+// Gets the status of a player's connection to the game runtime. It's possible
+// for a single player to have multiple connections to the game runtime. If a
+// player is not connected, this operation returns an empty list.
 func (c *Client) GetPlayerConnectionStatus(ctx context.Context, params *GetPlayerConnectionStatusInput, optFns ...func(*Options)) (*GetPlayerConnectionStatusOutput, error) {
 	if params == nil {
 		params = &GetPlayerConnectionStatusInput{}

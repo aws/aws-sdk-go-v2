@@ -45,7 +45,7 @@ type DescribePageOutput struct {
 	ContactArn *string
 
 	// The secure content of the message that was sent to the contact. Use this field
-	// for engagements to VOICE and EMAIL.
+	// for engagements to VOICE  and EMAIL .
 	//
 	// This member is required.
 	Content *string
@@ -66,7 +66,7 @@ type DescribePageOutput struct {
 	Sender *string
 
 	// The secure subject of the message that was sent to the contact. Use this field
-	// for engagements to VOICE and EMAIL.
+	// for engagements to VOICE  and EMAIL .
 	//
 	// This member is required.
 	Subject *string
@@ -77,12 +77,12 @@ type DescribePageOutput struct {
 	// The ARN of the incident that engaged the contact channel.
 	IncidentId *string
 
-	// The insecure content of the message that was sent to the contact. Use this field
-	// for engagements to SMS.
+	// The insecure content of the message that was sent to the contact. Use this
+	// field for engagements to SMS .
 	PublicContent *string
 
-	// The insecure subject of the message that was sent to the contact. Use this field
-	// for engagements to SMS.
+	// The insecure subject of the message that was sent to the contact. Use this
+	// field for engagements to SMS .
 	PublicSubject *string
 
 	// The time that the contact channel acknowledged the engagement.

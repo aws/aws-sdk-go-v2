@@ -41,9 +41,9 @@ type ListTagsForResourceInput struct {
 	MaxResults *int32
 
 	// For the first ListTagsForResource request, omit this value. If you have more
-	// than MaxResults tags, you can submit another ListTagsForResource request to get
-	// the next group of tags for the resource. In the next request, specify the value
-	// of NextToken from the previous response.
+	// than MaxResults  tags, you can submit another ListTagsForResource request to
+	// get the next group of tags for the resource. In the next request, specify the
+	// value of NextToken  from the previous response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -53,7 +53,7 @@ type ListTagsForResourceOutput struct {
 
 	// If more than MaxResults tags match the specified criteria, you can submit
 	// another ListTagsForResource request to get the next group of results. In the
-	// next request, specify the value of NextToken from the previous response.
+	// next request, specify the value of NextToken  from the previous response.
 	NextToken *string
 
 	// The tags that are associated with the resource that you specified in the
@@ -129,8 +129,8 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListTagsForResourceAPIClient is a client that implements the ListTagsForResource
-// operation.
+// ListTagsForResourceAPIClient is a client that implements the
+// ListTagsForResource operation.
 type ListTagsForResourceAPIClient interface {
 	ListTagsForResource(context.Context, *ListTagsForResourceInput, ...func(*Options)) (*ListTagsForResourceOutput, error)
 }
@@ -145,8 +145,8 @@ type ListTagsForResourcePaginatorOptions struct {
 	// Resolver returns up to 100 tags.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

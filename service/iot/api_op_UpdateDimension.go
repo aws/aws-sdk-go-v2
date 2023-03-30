@@ -14,8 +14,7 @@ import (
 
 // Updates the definition for a dimension. You cannot change the type of a
 // dimension after it is created (you can delete it and recreate it). Requires
-// permission to access the UpdateDimension
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// permission to access the UpdateDimension (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) UpdateDimension(ctx context.Context, params *UpdateDimensionInput, optFns ...func(*Options)) (*UpdateDimensionOutput, error) {
 	if params == nil {
@@ -34,8 +33,8 @@ func (c *Client) UpdateDimension(ctx context.Context, params *UpdateDimensionInp
 
 type UpdateDimensionInput struct {
 
-	// A unique identifier for the dimension. Choose something that describes the type
-	// and value to make it easy to remember what it does.
+	// A unique identifier for the dimension. Choose something that describes the
+	// type and value to make it easy to remember what it does.
 	//
 	// This member is required.
 	Name *string
@@ -55,8 +54,8 @@ type UpdateDimensionOutput struct {
 	// The Amazon Resource Name (ARN)of the created dimension.
 	Arn *string
 
-	// The date and time, in milliseconds since epoch, when the dimension was initially
-	// created.
+	// The date and time, in milliseconds since epoch, when the dimension was
+	// initially created.
 	CreationDate *time.Time
 
 	// The date and time, in milliseconds since epoch, when the dimension was most
@@ -66,8 +65,8 @@ type UpdateDimensionOutput struct {
 	// A unique identifier for the dimension.
 	Name *string
 
-	// The value or list of values used to scope the dimension. For example, for topic
-	// filters, this is the pattern used to match the MQTT topic name.
+	// The value or list of values used to scope the dimension. For example, for
+	// topic filters, this is the pattern used to match the MQTT topic name.
 	StringValues []string
 
 	// The type of the dimension.

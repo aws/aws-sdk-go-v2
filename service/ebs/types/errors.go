@@ -36,8 +36,7 @@ func (e *AccessDeniedException) ErrorCode() string {
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have reached the limit for concurrent API requests. For more information,
-// see Optimizing performance of the EBS direct APIs
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapi-performance)
+// see Optimizing performance of the EBS direct APIs (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapi-performance)
 // in the Amazon Elastic Compute Cloud User Guide.
 type ConcurrentLimitExceededException struct {
 	Message *string
@@ -64,7 +63,8 @@ func (e *ConcurrentLimitExceededException) ErrorCode() string {
 }
 func (e *ConcurrentLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request uses the same client token as a previous, but non-identical request.
+// The request uses the same client token as a previous, but non-identical
+// request.
 type ConflictException struct {
 	Message *string
 
@@ -116,8 +116,8 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The number of API requests has exceed the maximum allowed API request throttling
-// limit.
+// The number of API requests has exceed the maximum allowed API request
+// throttling limit.
 type RequestThrottledException struct {
 	Message *string
 

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies a usage limit in a cluster. You can't modify the feature type or period
-// of a usage limit.
+// Modifies a usage limit in a cluster. You can't modify the feature type or
+// period of a usage limit.
 func (c *Client) ModifyUsageLimit(ctx context.Context, params *ModifyUsageLimitInput, optFns ...func(*Options)) (*ModifyUsageLimitOutput, error) {
 	if params == nil {
 		params = &ModifyUsageLimitInput{}
@@ -35,11 +35,12 @@ type ModifyUsageLimitInput struct {
 	// This member is required.
 	UsageLimitId *string
 
-	// The new limit amount. For more information about this parameter, see UsageLimit.
+	// The new limit amount. For more information about this parameter, see UsageLimit
+	// .
 	Amount *int64
 
 	// The new action that Amazon Redshift takes when the limit is reached. For more
-	// information about this parameter, see UsageLimit.
+	// information about this parameter, see UsageLimit .
 	BreachAction types.UsageLimitBreachAction
 
 	noSmithyDocumentSerde
@@ -48,17 +49,15 @@ type ModifyUsageLimitInput struct {
 // Describes a usage limit object for a cluster.
 type ModifyUsageLimitOutput struct {
 
-	// The limit amount. If time-based, this amount is in minutes. If data-based, this
-	// amount is in terabytes (TB).
+	// The limit amount. If time-based, this amount is in minutes. If data-based,
+	// this amount is in terabytes (TB).
 	Amount int64
 
-	// The action that Amazon Redshift takes when the limit is reached. Possible values
-	// are:
-	// - log - To log an event in a system table. The default is log.
-	// -
-	// emit-metric - To emit CloudWatch metrics.
-	// - disable - To disable the feature
-	// until the next usage period begins.
+	// The action that Amazon Redshift takes when the limit is reached. Possible
+	// values are:
+	//     - log - To log an event in a system table. The default is log.
+	//     - emit-metric - To emit CloudWatch metrics.
+	//     - disable - To disable the feature until the next usage period begins.
 	BreachAction types.UsageLimitBreachAction
 
 	// The identifier of the cluster with a usage limit.
@@ -72,7 +71,7 @@ type ModifyUsageLimitOutput struct {
 	LimitType types.UsageLimitLimitType
 
 	// The time period that the amount applies to. A weekly period begins on Sunday.
-	// The default is monthly.
+	// The default is monthly .
 	Period types.UsageLimitPeriod
 
 	// A list of tag instances.

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the administrators in the AppInstance.
+// Returns a list of the administrators in the AppInstance .
 func (c *Client) ListAppInstanceAdmins(ctx context.Context, params *ListAppInstanceAdminsInput, optFns ...func(*Options)) (*ListAppInstanceAdminsOutput, error) {
 	if params == nil {
 		params = &ListAppInstanceAdminsInput{}
@@ -30,7 +30,7 @@ func (c *Client) ListAppInstanceAdmins(ctx context.Context, params *ListAppInsta
 
 type ListAppInstanceAdminsInput struct {
 
-	// The ARN of the AppInstance.
+	// The ARN of the AppInstance .
 	//
 	// This member is required.
 	AppInstanceArn *string
@@ -38,8 +38,8 @@ type ListAppInstanceAdminsInput struct {
 	// The maximum number of administrators that you want to return.
 	MaxResults *int32
 
-	// The token returned from previous API requests until the number of administrators
-	// is reached.
+	// The token returned from previous API requests until the number of
+	// administrators is reached.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -50,11 +50,11 @@ type ListAppInstanceAdminsOutput struct {
 	// The information for each administrator.
 	AppInstanceAdmins []types.AppInstanceAdminSummary
 
-	// The ARN of the AppInstance.
+	// The ARN of the AppInstance .
 	AppInstanceArn *string
 
-	// The token returned from previous API requests until the number of administrators
-	// is reached.
+	// The token returned from previous API requests until the number of
+	// administrators is reached.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -170,8 +170,8 @@ type ListAppInstanceAdminsPaginatorOptions struct {
 	// The maximum number of administrators that you want to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

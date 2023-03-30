@@ -111,8 +111,8 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request must contain either a valid (registered) Amazon Web Services access
-// key ID or X.509 certificate.
+// The request must contain either a valid (registered) Amazon Web Services
+// access key ID or X.509 certificate.
 type MissingAuthenticationToken struct {
 	Message *string
 

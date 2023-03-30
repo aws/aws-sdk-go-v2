@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the AppInstanceUserEndpoints created under a single AppInstanceUser.
+// Lists all the AppInstanceUserEndpoints  created under a single AppInstanceUser .
 func (c *Client) ListAppInstanceUserEndpoints(ctx context.Context, params *ListAppInstanceUserEndpointsInput, optFns ...func(*Options)) (*ListAppInstanceUserEndpointsOutput, error) {
 	if params == nil {
 		params = &ListAppInstanceUserEndpointsInput{}
@@ -30,7 +30,7 @@ func (c *Client) ListAppInstanceUserEndpoints(ctx context.Context, params *ListA
 
 type ListAppInstanceUserEndpointsInput struct {
 
-	// The ARN of the AppInstanceUser.
+	// The ARN of the AppInstanceUser .
 	//
 	// This member is required.
 	AppInstanceUserArn *string
@@ -47,7 +47,7 @@ type ListAppInstanceUserEndpointsInput struct {
 
 type ListAppInstanceUserEndpointsOutput struct {
 
-	// The information for each requested AppInstanceUserEndpoint.
+	// The information for each requested AppInstanceUserEndpoint .
 	AppInstanceUserEndpoints []types.AppInstanceUserEndpointSummary
 
 	// The token passed by previous API calls until all requested endpoints are
@@ -137,8 +137,8 @@ type ListAppInstanceUserEndpointsPaginatorOptions struct {
 	// The maximum number of endpoints that you want to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

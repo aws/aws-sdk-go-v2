@@ -12,10 +12,10 @@ import (
 
 // Creates an access policy for the specified container to restrict the users and
 // clients that can access it. For information about the data that is included in
-// an access policy, see the AWS Identity and Access Management User Guide
-// (https://aws.amazon.com/documentation/iam/). For this release of the REST API,
-// you can create only one policy for a container. If you enter PutContainerPolicy
-// twice, the second command modifies the existing policy.
+// an access policy, see the AWS Identity and Access Management User Guide (https://aws.amazon.com/documentation/iam/)
+// . For this release of the REST API, you can create only one policy for a
+// container. If you enter PutContainerPolicy twice, the second command modifies
+// the existing policy.
 func (c *Client) PutContainerPolicy(ctx context.Context, params *PutContainerPolicyInput, optFns ...func(*Options)) (*PutContainerPolicyOutput, error) {
 	if params == nil {
 		params = &PutContainerPolicyInput{}
@@ -39,9 +39,8 @@ type PutContainerPolicyInput struct {
 	ContainerName *string
 
 	// The contents of the policy, which includes the following:
-	// - One Version tag
-	// -
-	// One Statement tag that contains the standard tags for the policy.
+	//     - One Version tag
+	//     - One Statement tag that contains the standard tags for the policy.
 	//
 	// This member is required.
 	Policy *string

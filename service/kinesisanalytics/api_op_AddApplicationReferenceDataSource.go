@@ -21,11 +21,9 @@ import (
 // the in-application table to create, and the necessary mapping information that
 // describes how data in Amazon S3 object maps to columns in the resulting
 // in-application table. For conceptual information, see Configuring Application
-// Input
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
-// For the limits on data sources you can add to your application, see Limits
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html). This
-// operation requires permissions to perform the
+// Input (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html)
+// . For the limits on data sources you can add to your application, see Limits (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html)
+// . This operation requires permissions to perform the
 // kinesisanalytics:AddApplicationOutput action.
 func (c *Client) AddApplicationReferenceDataSource(ctx context.Context, params *AddApplicationReferenceDataSourceInput, optFns ...func(*Options)) (*AddApplicationReferenceDataSourceOutput, error) {
 	if params == nil {
@@ -50,10 +48,9 @@ type AddApplicationReferenceDataSourceInput struct {
 	ApplicationName *string
 
 	// Version of the application for which you are adding the reference data source.
-	// You can use the DescribeApplication
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation to get the current application version. If the version specified is
-	// not the current version, the ConcurrentModificationException is returned.
+	// not the current version, the ConcurrentModificationException  is returned.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64

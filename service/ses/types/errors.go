@@ -7,9 +7,9 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Indicates that email sending is disabled for your entire Amazon SES account. You
-// can enable or disable email sending for your Amazon SES account using
-// UpdateAccountSendingEnabled.
+// Indicates that email sending is disabled for your entire Amazon SES account.
+// You can enable or disable email sending for your Amazon SES account using
+// UpdateAccountSendingEnabled .
 type AccountSendingPausedException struct {
 	Message *string
 
@@ -154,7 +154,7 @@ func (e *ConfigurationSetDoesNotExistException) ErrorFault() smithy.ErrorFault {
 
 // Indicates that email sending is disabled for the configuration set. You can
 // enable or disable email sending for a configuration set using
-// UpdateConfigurationSetSendingEnabled.
+// UpdateConfigurationSetSendingEnabled .
 type ConfigurationSetSendingPausedException struct {
 	Message *string
 
@@ -212,8 +212,8 @@ func (e *CustomVerificationEmailInvalidContentException) ErrorFault() smithy.Err
 	return smithy.FaultClient
 }
 
-// Indicates that a custom verification email template with the name you specified
-// already exists.
+// Indicates that a custom verification email template with the name you
+// specified already exists.
 type CustomVerificationEmailTemplateAlreadyExistsException struct {
 	Message *string
 
@@ -243,8 +243,8 @@ func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorFault() smi
 	return smithy.FaultClient
 }
 
-// Indicates that a custom verification email template with the name you specified
-// does not exist.
+// Indicates that a custom verification email template with the name you
+// specified does not exist.
 type CustomVerificationEmailTemplateDoesNotExistException struct {
 	Message *string
 
@@ -454,8 +454,8 @@ func (e *InvalidDeliveryOptionsException) ErrorCode() string {
 }
 func (e *InvalidDeliveryOptionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that the Amazon Kinesis Firehose destination is invalid. See the error
-// message for details.
+// Indicates that the Amazon Kinesis Firehose destination is invalid. See the
+// error message for details.
 type InvalidFirehoseDestinationException struct {
 	Message *string
 
@@ -488,8 +488,8 @@ func (e *InvalidFirehoseDestinationException) ErrorFault() smithy.ErrorFault {
 
 // Indicates that the provided AWS Lambda function is invalid, or that Amazon SES
 // could not execute the provided function, possibly due to permissions issues. For
-// information about giving permissions, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html).
+// information about giving permissions, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html)
+// .
 type InvalidLambdaFunctionException struct {
 	Message *string
 
@@ -577,9 +577,9 @@ func (e *InvalidRenderingParameterException) ErrorFault() smithy.ErrorFault {
 
 // Indicates that the provided Amazon S3 bucket or AWS KMS encryption key is
 // invalid, or that Amazon SES could not publish to the bucket, possibly due to
-// permissions issues. For information about giving permissions, see the Amazon SES
-// Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html).
+// permissions issues. For information about giving permissions, see the Amazon
+// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html)
+// .
 type InvalidS3ConfigurationException struct {
 	Message *string
 
@@ -639,8 +639,8 @@ func (e *InvalidSNSDestinationException) ErrorFault() smithy.ErrorFault { return
 
 // Indicates that the provided Amazon SNS topic is invalid, or that Amazon SES
 // could not publish to the topic, possibly due to permissions issues. For
-// information about giving permissions, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html).
+// information about giving permissions, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html)
+// .
 type InvalidSnsTopicException struct {
 	Message *string
 
@@ -668,8 +668,8 @@ func (e *InvalidSnsTopicException) ErrorCode() string {
 }
 func (e *InvalidSnsTopicException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that the template that you specified could not be rendered. This issue
-// may occur when a template refers to a partial that does not exist.
+// Indicates that the template that you specified could not be rendered. This
+// issue may occur when a template refers to a partial that does not exist.
 type InvalidTemplateException struct {
 	Message *string
 
@@ -698,12 +698,10 @@ func (e *InvalidTemplateException) ErrorCode() string {
 func (e *InvalidTemplateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the custom domain to be used for open and click tracking
-// redirects is invalid. This error appears most often in the following
-// situations:
-// - When the tracking domain you specified is not verified in Amazon
-// SES.
-// - When the tracking domain you specified is not a valid domain or
-// subdomain.
+// redirects is invalid. This error appears most often in the following situations:
+//
+//   - When the tracking domain you specified is not verified in Amazon SES.
+//   - When the tracking domain you specified is not a valid domain or subdomain.
 type InvalidTrackingOptionsException struct {
 	Message *string
 
@@ -729,9 +727,9 @@ func (e *InvalidTrackingOptionsException) ErrorCode() string {
 }
 func (e *InvalidTrackingOptionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that a resource could not be created because of service limits. For a
-// list of Amazon SES limits, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html).
+// Indicates that a resource could not be created because of service limits. For
+// a list of Amazon SES limits, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html)
+// .
 type LimitExceededException struct {
 	Message *string
 
@@ -760,8 +758,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // Indicates that the message could not be sent because Amazon SES could not read
 // the MX record required to use the specified MAIL FROM domain. For information
 // about editing the custom MAIL FROM domain settings for an identity, see the
-// Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from-edit.html).
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from-edit.html)
+// .
 type MailFromDomainNotVerifiedException struct {
 	Message *string
 
@@ -816,9 +814,9 @@ func (e *MessageRejected) ErrorCode() string {
 }
 func (e *MessageRejected) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that one or more of the replacement values for the specified template
-// was not specified. Ensure that the TemplateData object contains references to
-// all of the replacement tags in the specified template.
+// Indicates that one or more of the replacement values for the specified
+// template was not specified. Ensure that the TemplateData object contains
+// references to all of the replacement tags in the specified template.
 type MissingRenderingAttributeException struct {
 	Message *string
 

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the state, variable values, and timer settings of one or more detectors
-// (instances) of a specified detector model.
+// Updates the state, variable values, and timer settings of one or more
+// detectors (instances) of a specified detector model.
 func (c *Client) BatchUpdateDetector(ctx context.Context, params *BatchUpdateDetectorInput, optFns ...func(*Options)) (*BatchUpdateDetectorOutput, error) {
 	if params == nil {
 		params = &BatchUpdateDetectorInput{}
@@ -40,8 +40,8 @@ type BatchUpdateDetectorInput struct {
 
 type BatchUpdateDetectorOutput struct {
 
-	// A list of those detector updates that resulted in errors. (If an error is listed
-	// here, the specific update did not occur.)
+	// A list of those detector updates that resulted in errors. (If an error is
+	// listed here, the specific update did not occur.)
 	BatchUpdateDetectorErrorEntries []types.BatchUpdateDetectorErrorEntry
 
 	// Metadata pertaining to the operation's result.

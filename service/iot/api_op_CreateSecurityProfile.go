@@ -12,8 +12,7 @@ import (
 )
 
 // Creates a Device Defender security profile. Requires permission to access the
-// CreateSecurityProfile
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// CreateSecurityProfile (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateSecurityProfile(ctx context.Context, params *CreateSecurityProfileInput, optFns ...func(*Options)) (*CreateSecurityProfileOutput, error) {
 	if params == nil {
@@ -39,24 +38,25 @@ type CreateSecurityProfileInput struct {
 
 	// Please use CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead. A
 	// list of metrics whose data is retained (stored). By default, data is retained
-	// for any metric used in the profile's behaviors, but it is also retained for any
-	// metric specified here. Can be used with custom metrics; cannot be used with
+	// for any metric used in the profile's behaviors, but it is also retained for
+	// any metric specified here. Can be used with custom metrics; cannot be used with
 	// dimensions.
 	//
 	// Deprecated: Use additionalMetricsToRetainV2.
 	AdditionalMetricsToRetain []string
 
-	// A list of metrics whose data is retained (stored). By default, data is retained
-	// for any metric used in the profile's behaviors, but it is also retained for any
-	// metric specified here. Can be used with custom metrics; cannot be used with
-	// dimensions.
+	// A list of metrics whose data is retained (stored). By default, data is
+	// retained for any metric used in the profile's behaviors, but it is also
+	// retained for any metric specified here. Can be used with custom metrics; cannot
+	// be used with dimensions.
 	AdditionalMetricsToRetainV2 []types.MetricToRetain
 
-	// Specifies the destinations to which alerts are sent. (Alerts are always sent to
-	// the console.) Alerts are generated when a device (thing) violates a behavior.
+	// Specifies the destinations to which alerts are sent. (Alerts are always sent
+	// to the console.) Alerts are generated when a device (thing) violates a behavior.
 	AlertTargets map[string]types.AlertTarget
 
-	// Specifies the behaviors that, when violated by a device (thing), cause an alert.
+	// Specifies the behaviors that, when violated by a device (thing), cause an
+	// alert.
 	Behaviors []types.Behavior
 
 	// A description of the security profile.

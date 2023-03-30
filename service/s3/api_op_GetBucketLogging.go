@@ -14,12 +14,9 @@ import (
 
 // Returns the logging status of a bucket and the permissions users have to view
 // and modify that status. To use GET, you must be the bucket owner. The following
-// operations are related to GetBucketLogging:
-// - CreateBucket
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
-// -
-// PutBucketLogging
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLogging.html)
+// operations are related to GetBucketLogging :
+//   - CreateBucket (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
+//   - PutBucketLogging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLogging.html)
 func (c *Client) GetBucketLogging(ctx context.Context, params *GetBucketLoggingInput, optFns ...func(*Options)) (*GetBucketLoggingOutput, error) {
 	if params == nil {
 		params = &GetBucketLoggingInput{}
@@ -52,10 +49,9 @@ type GetBucketLoggingInput struct {
 
 type GetBucketLoggingOutput struct {
 
-	// Describes where logs are stored and the prefix that Amazon S3 assigns to all log
-	// object keys for a bucket. For more information, see PUT Bucket logging
-	// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html) in
-	// the Amazon S3 API Reference.
+	// Describes where logs are stored and the prefix that Amazon S3 assigns to all
+	// log object keys for a bucket. For more information, see PUT Bucket logging (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html)
+	// in the Amazon S3 API Reference.
 	LoggingEnabled *types.LoggingEnabled
 
 	// Metadata pertaining to the operation's result.
@@ -148,9 +144,9 @@ func newServiceMetadataMiddleware_opGetBucketLogging(region string) *awsmiddlewa
 	}
 }
 
-// getGetBucketLoggingBucketMember returns a pointer to string denoting a provided
-// bucket member valueand a boolean indicating if the input has a modeled bucket
-// name,
+// getGetBucketLoggingBucketMember returns a pointer to string denoting a
+// provided bucket member valueand a boolean indicating if the input has a modeled
+// bucket name,
 func getGetBucketLoggingBucketMember(input interface{}) (*string, bool) {
 	in := input.(*GetBucketLoggingInput)
 	if in.Bucket == nil {

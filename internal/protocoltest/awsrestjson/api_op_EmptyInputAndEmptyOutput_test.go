@@ -148,8 +148,8 @@ func TestClient_EmptyInputAndEmptyOutput_awsRestjson1Deserialize(t *testing.T) {
 			Body:          []byte(`{}`),
 			ExpectResult:  &EmptyInputAndEmptyOutputOutput{},
 		},
-		// This test ensures that clients can gracefully handle situations where a service
-		// omits a JSON payload entirely.
+		// This test ensures that clients can gracefully handle situations where a
+		// service omits a JSON payload entirely.
 		"RestJsonEmptyInputAndEmptyOutputJsonObjectOutput": {
 			StatusCode:   200,
 			Body:         []byte(``),

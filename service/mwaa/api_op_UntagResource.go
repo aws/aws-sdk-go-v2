@@ -12,7 +12,7 @@ import (
 )
 
 // Removes key-value tag pairs associated to your Amazon Managed Workflows for
-// Apache Airflow (MWAA) environment. For example, "Environment": "Staging".
+// Apache Airflow (MWAA) environment. For example, "Environment": "Staging" .
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -31,13 +31,13 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 type UntagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon MWAA environment. For example,
-	// arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment.
+	// arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment .
 	//
 	// This member is required.
 	ResourceArn *string
 
 	// The key-value tag pair you want to remove. For example, "Environment":
-	// "Staging".
+	// "Staging" .
 	//
 	// This member is required.
 	TagKeys []string

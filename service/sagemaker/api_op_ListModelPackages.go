@@ -50,13 +50,11 @@ type ListModelPackagesInput struct {
 	// group.
 	ModelPackageGroupName *string
 
-	// A filter that returns only the model packages of the specified type. This can be
-	// one of the following values.
-	// - UNVERSIONED - List only unversioined models. This
-	// is the default value if no ModelPackageType is specified.
-	// - VERSIONED - List
-	// only versioned models.
-	// - BOTH - List both versioned and unversioned models.
+	// A filter that returns only the model packages of the specified type. This can
+	// be one of the following values.
+	//     - UNVERSIONED - List only unversioined models. This is the default value if no ModelPackageType is specified.
+	//     - VERSIONED - List only versioned models.
+	//     - BOTH - List both versioned and unversioned models.
 	ModelPackageType types.ModelPackageType
 
 	// A string in the model package name. This filter returns only model packages
@@ -68,10 +66,10 @@ type ListModelPackagesInput struct {
 	// the token in the next request.
 	NextToken *string
 
-	// The parameter by which to sort the results. The default is CreationTime.
+	// The parameter by which to sort the results. The default is CreationTime .
 	SortBy types.ModelPackageSortBy
 
-	// The sort order for the results. The default is Ascending.
+	// The sort order for the results. The default is Ascending .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -79,13 +77,13 @@ type ListModelPackagesInput struct {
 
 type ListModelPackagesOutput struct {
 
-	// An array of ModelPackageSummary objects, each of which lists a model package.
+	// An array of ModelPackageSummary  objects, each of which lists a model package.
 	//
 	// This member is required.
 	ModelPackageSummaryList []types.ModelPackageSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of model packages, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of model packages, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -162,13 +160,14 @@ type ListModelPackagesAPIClient interface {
 
 var _ ListModelPackagesAPIClient = (*Client)(nil)
 
-// ListModelPackagesPaginatorOptions is the paginator options for ListModelPackages
+// ListModelPackagesPaginatorOptions is the paginator options for
+// ListModelPackages
 type ListModelPackagesPaginatorOptions struct {
 	// The maximum number of model packages to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

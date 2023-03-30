@@ -17,7 +17,7 @@ import (
 // number of signing jobs that are returned in the response. If additional jobs
 // remain to be listed, code signing returns a nextToken value. Use this value in
 // subsequent calls to ListSigningJobs to fetch the remaining values. You can
-// continue calling ListSigningJobs with your maxResults parameter and with new
+// continue calling ListSigningJobs  with your maxResults parameter and with new
 // values that code signing returns in the nextToken parameter until all of your
 // signing jobs have been returned.
 func (c *Client) ListSigningJobs(ctx context.Context, params *ListSigningJobsInput, optFns ...func(*Options)) (*ListSigningJobsOutput, error) {
@@ -40,12 +40,13 @@ type ListSigningJobsInput struct {
 	// Filters results to return only signing jobs with revoked signatures.
 	IsRevoked bool
 
-	// Filters results to return only signing jobs initiated by a specified IAM entity.
+	// Filters results to return only signing jobs initiated by a specified IAM
+	// entity.
 	JobInvoker *string
 
 	// Specifies the maximum number of items to return in the response. Use this
 	// parameter when paginating results. If additional items exist beyond the number
-	// you specify, the nextToken element is set in the response. Use the nextToken
+	// you specify, the nextToken  element is set in the response. Use the nextToken
 	// value in a subsequent request to retrieve additional items.
 	MaxResults *int32
 
@@ -162,12 +163,12 @@ var _ ListSigningJobsAPIClient = (*Client)(nil)
 type ListSigningJobsPaginatorOptions struct {
 	// Specifies the maximum number of items to return in the response. Use this
 	// parameter when paginating results. If additional items exist beyond the number
-	// you specify, the nextToken element is set in the response. Use the nextToken
+	// you specify, the nextToken  element is set in the response. Use the nextToken
 	// value in a subsequent request to retrieve additional items.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -31,8 +31,8 @@ func (c *Client) ListImports(ctx context.Context, params *ListImportsInput, optF
 type ListImportsInput struct {
 
 	// An optional string that, if supplied, must be copied from the output of a
-	// previous call to ListImports. When provided in this manner, the API fetches the
-	// next page of results.
+	// previous call to ListImports. When provided in this manner, the API fetches
+	// the next page of results.
 	NextToken *string
 
 	// The number of ImportSummary objects returned in a single page.
@@ -46,11 +46,11 @@ type ListImportsInput struct {
 
 type ListImportsOutput struct {
 
-	// A list of ImportSummary objects.
+	// A list of ImportSummary  objects.
 	ImportSummaryList []types.ImportSummary
 
 	// If this value is returned, there are additional results to be displayed. To
-	// retrieve them, call ListImports again, with NextToken set to this value.
+	// retrieve them, call ListImports  again, with NextToken  set to this value.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -137,8 +137,8 @@ type ListImportsPaginatorOptions struct {
 	// The number of ImportSummary objects returned in a single page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

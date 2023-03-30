@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Initiates a Job for launching the machine that is being failed back to from the
-// specified Recovery Instance. This will run conversion on the failback client and
-// will reboot your machine, thus completing the failback process.
+// Initiates a Job for launching the machine that is being failed back to from
+// the specified Recovery Instance. This will run conversion on the failback client
+// and will reboot your machine, thus completing the failback process.
 func (c *Client) StartFailbackLaunch(ctx context.Context, params *StartFailbackLaunchInput, optFns ...func(*Options)) (*StartFailbackLaunchOutput, error) {
 	if params == nil {
 		params = &StartFailbackLaunchInput{}

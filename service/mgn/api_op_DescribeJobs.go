@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of Jobs. Use the JobsID and fromDate and toData filters to limit
-// which jobs are returned. The response is sorted by creationDataTime - latest
-// date first. Jobs are normally created by the StartTest, StartCutover, and
+// Returns a list of Jobs. Use the JobsID and fromDate and toData filters to
+// limit which jobs are returned. The response is sorted by creationDataTime -
+// latest date first. Jobs are normally created by the StartTest, StartCutover, and
 // TerminateTargetInstances APIs. Jobs are also created by DiagnosticLaunch and
 // TerminateDiagnosticInstances, which are APIs available only to *Support* and
 // only used in response to relevant support tickets.
@@ -133,8 +133,8 @@ type DescribeJobsPaginatorOptions struct {
 	// Request to describe job log items by max results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

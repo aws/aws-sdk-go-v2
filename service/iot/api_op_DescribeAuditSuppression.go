@@ -31,9 +31,9 @@ func (c *Client) DescribeAuditSuppression(ctx context.Context, params *DescribeA
 type DescribeAuditSuppressionInput struct {
 
 	// An audit check name. Checks must be enabled for your account. (Use
-	// DescribeAccountAuditConfiguration to see the list of all checks, including those
-	// that are enabled or use UpdateAccountAuditConfiguration to select which checks
-	// are enabled.)
+	// DescribeAccountAuditConfigurationto see the list of all checks, including
+	// those that are enabled or use UpdateAccountAuditConfiguration to select which
+	// checks are enabled.)
 	//
 	// This member is required.
 	CheckName *string
@@ -49,9 +49,9 @@ type DescribeAuditSuppressionInput struct {
 type DescribeAuditSuppressionOutput struct {
 
 	// An audit check name. Checks must be enabled for your account. (Use
-	// DescribeAccountAuditConfiguration to see the list of all checks, including those
-	// that are enabled or use UpdateAccountAuditConfiguration to select which checks
-	// are enabled.)
+	// DescribeAccountAuditConfigurationto see the list of all checks, including
+	// those that are enabled or use UpdateAccountAuditConfiguration to select which
+	// checks are enabled.)
 	CheckName *string
 
 	// The description of the audit suppression.

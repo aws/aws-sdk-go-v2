@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an InputProcessingConfiguration from an input.
+// Deletes an InputProcessingConfiguration  from an input.
 func (c *Client) DeleteApplicationInputProcessingConfiguration(ctx context.Context, params *DeleteApplicationInputProcessingConfigurationInput, optFns ...func(*Options)) (*DeleteApplicationInputProcessingConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationInputProcessingConfigurationInput{}
@@ -35,14 +35,14 @@ type DeleteApplicationInputProcessingConfigurationInput struct {
 
 	// The application version. You can use the DescribeApplication operation to get
 	// the current application version. If the version specified is not the current
-	// version, the ConcurrentModificationException is returned.
+	// version, the ConcurrentModificationException  is returned.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
 
 	// The ID of the input configuration from which to delete the input processing
 	// configuration. You can get a list of the input IDs for an application by using
-	// the DescribeApplication operation.
+	// the DescribeApplication  operation.
 	//
 	// This member is required.
 	InputId *string

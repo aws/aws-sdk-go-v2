@@ -131,8 +131,8 @@ type ListPackagingConfigurationsPaginatorOptions struct {
 	// Upper bound on number of records to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

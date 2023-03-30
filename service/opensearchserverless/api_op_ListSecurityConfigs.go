@@ -14,8 +14,8 @@ import (
 
 // Returns information about configured OpenSearch Serverless security
 // configurations. For more information, see SAML authentication for Amazon
-// OpenSearch Serverless
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html).
+// OpenSearch Serverless (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html)
+// .
 func (c *Client) ListSecurityConfigs(ctx context.Context, params *ListSecurityConfigsInput, optFns ...func(*Options)) (*ListSecurityConfigsOutput, error) {
 	if params == nil {
 		params = &ListSecurityConfigsInput{}
@@ -39,11 +39,11 @@ type ListSecurityConfigsInput struct {
 	Type types.SecurityConfigType
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results. The default is 20.
+	// You can use nextToken  to get the next page of results. The default is 20.
 	MaxResults *int32
 
-	// If your initial ListSecurityConfigs operation returns a nextToken, you can
-	// include the returned nextToken in subsequent ListSecurityConfigs operations,
+	// If your initial ListSecurityConfigs  operation returns a nextToken, you can
+	// include the returned nextToken  in subsequent ListSecurityConfigs operations,
 	// which returns results in the next page.
 	NextToken *string
 
@@ -52,8 +52,8 @@ type ListSecurityConfigsInput struct {
 
 type ListSecurityConfigsOutput struct {
 
-	// When nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// When nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page.
 	NextToken *string
 
@@ -129,8 +129,8 @@ func (c *Client) addOperationListSecurityConfigsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListSecurityConfigsAPIClient is a client that implements the ListSecurityConfigs
-// operation.
+// ListSecurityConfigsAPIClient is a client that implements the
+// ListSecurityConfigs operation.
 type ListSecurityConfigsAPIClient interface {
 	ListSecurityConfigs(context.Context, *ListSecurityConfigsInput, ...func(*Options)) (*ListSecurityConfigsOutput, error)
 }
@@ -140,8 +140,8 @@ var _ ListSecurityConfigsAPIClient = (*Client)(nil)
 // ListSecurityConfigsPaginatorOptions is the paginator options for
 // ListSecurityConfigs
 type ListSecurityConfigsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

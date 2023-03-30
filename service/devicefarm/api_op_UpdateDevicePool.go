@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the name, description, and rules in a device pool given the attributes
-// and the pool ARN. Rule updates are all-or-nothing, meaning they can only be
-// updated as a whole (or not at all).
+// Modifies the name, description, and rules in a device pool given the
+// attributes and the pool ARN. Rule updates are all-or-nothing, meaning they can
+// only be updated as a whole (or not at all).
 func (c *Client) UpdateDevicePool(ctx context.Context, params *UpdateDevicePoolInput, optFns ...func(*Options)) (*UpdateDevicePoolOutput, error) {
 	if params == nil {
 		params = &UpdateDevicePoolInput{}
@@ -38,30 +38,31 @@ type UpdateDevicePoolInput struct {
 	Arn *string
 
 	// Sets whether the maxDevices parameter applies to your device pool. If you set
-	// this parameter to true, the maxDevices parameter does not apply, and Device Farm
-	// does not limit the number of devices that it adds to your device pool. In this
-	// case, Device Farm adds all available devices that meet the criteria specified in
-	// the rules parameter. If you use this parameter in your request, you cannot use
-	// the maxDevices parameter in the same request.
+	// this parameter to true , the maxDevices parameter does not apply, and Device
+	// Farm does not limit the number of devices that it adds to your device pool. In
+	// this case, Device Farm adds all available devices that meet the criteria
+	// specified in the rules parameter. If you use this parameter in your request,
+	// you cannot use the maxDevices  parameter in the same request.
 	ClearMaxDevices *bool
 
 	// A description of the device pool to update.
 	Description *string
 
-	// The number of devices that Device Farm can add to your device pool. Device Farm
-	// adds devices that are available and that meet the criteria that you assign for
-	// the rules parameter. Depending on how many devices meet these constraints, your
-	// device pool might contain fewer devices than the value for this parameter. By
-	// specifying the maximum number of devices, you can control the costs that you
+	// The number of devices that Device Farm can add to your device pool. Device
+	// Farm adds devices that are available and that meet the criteria that you assign
+	// for the rules parameter. Depending on how many devices meet these constraints,
+	// your device pool might contain fewer devices than the value for this parameter.
+	// By specifying the maximum number of devices, you can control the costs that you
 	// incur by running tests. If you use this parameter in your request, you cannot
-	// use the clearMaxDevices parameter in the same request.
+	// use the clearMaxDevices  parameter in the same request.
 	MaxDevices *int32
 
 	// A string that represents the name of the device pool to update.
 	Name *string
 
-	// Represents the rules to modify for the device pool. Updating rules is optional.
-	// If you update rules for your request, the update replaces the existing rules.
+	// Represents the rules to modify for the device pool. Updating rules is
+	// optional. If you update rules for your request, the update replaces the existing
+	// rules.
 	Rules []types.Rule
 
 	noSmithyDocumentSerde

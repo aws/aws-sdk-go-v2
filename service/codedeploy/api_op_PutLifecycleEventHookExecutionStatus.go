@@ -15,13 +15,12 @@ import (
 // lifecycle hooks during a deployment that uses the Lambda or Amazon ECS compute
 // platform. For Lambda deployments, the available lifecycle hooks are
 // BeforeAllowTraffic and AfterAllowTraffic. For Amazon ECS deployments, the
-// available lifecycle hooks are BeforeInstall, AfterInstall,
-// AfterAllowTestTraffic, BeforeAllowTraffic, and AfterAllowTraffic. Lambda
-// validation functions return Succeeded or Failed. For more information, see
-// AppSpec 'hooks' Section for an Lambda Deployment
-// (https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-lambda)
-// and AppSpec 'hooks' Section for an Amazon ECS Deployment
-// (https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-ecs).
+// available lifecycle hooks are BeforeInstall , AfterInstall ,
+// AfterAllowTestTraffic , BeforeAllowTraffic , and AfterAllowTraffic. Lambda
+// validation functions return Succeeded  or Failed . For more information, see
+// AppSpec 'hooks' Section for an Lambda Deployment  (https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-lambda)
+// and AppSpec 'hooks' Section for an Amazon ECS Deployment (https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-ecs)
+// .
 func (c *Client) PutLifecycleEventHookExecutionStatus(ctx context.Context, params *PutLifecycleEventHookExecutionStatusInput, optFns ...func(*Options)) (*PutLifecycleEventHookExecutionStatusOutput, error) {
 	if params == nil {
 		params = &PutLifecycleEventHookExecutionStatusInput{}
@@ -39,17 +38,18 @@ func (c *Client) PutLifecycleEventHookExecutionStatus(ctx context.Context, param
 
 type PutLifecycleEventHookExecutionStatusInput struct {
 
-	// The unique ID of a deployment. Pass this ID to a Lambda function that validates
-	// a deployment lifecycle event.
+	// The unique ID of a deployment. Pass this ID to a Lambda function that
+	// validates a deployment lifecycle event.
 	DeploymentId *string
 
 	// The execution ID of a deployment's lifecycle hook. A deployment lifecycle hook
-	// is specified in the hooks section of the AppSpec file.
+	// is specified in the hooks  section of the AppSpec file.
 	LifecycleEventHookExecutionId *string
 
-	// The result of a Lambda function that validates a deployment lifecycle event. The
-	// values listed in Valid Values are valid for lifecycle statuses in general;
-	// however, only Succeeded and Failed can be passed successfully in your API call.
+	// The result of a Lambda function that validates a deployment lifecycle event.
+	// The values listed in Valid Values are valid for lifecycle statuses in general;
+	// however, only Succeeded  and Failed can be passed successfully in your API
+	// call.
 	Status types.LifecycleEventStatus
 
 	noSmithyDocumentSerde

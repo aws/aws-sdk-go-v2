@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of campaigns that use the given solution. When a solution is not
-// specified, all the campaigns associated with the account are listed. The
+// Returns a list of campaigns that use the given solution. When a solution is
+// not specified, all the campaigns associated with the account are listed. The
 // response provides the properties for each campaign, including the Amazon
-// Resource Name (ARN). For more information on campaigns, see CreateCampaign
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html).
+// Resource Name (ARN). For more information on campaigns, see CreateCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html)
+// .
 func (c *Client) ListCampaigns(ctx context.Context, params *ListCampaignsInput, optFns ...func(*Options)) (*ListCampaignsOutput, error) {
 	if params == nil {
 		params = &ListCampaignsInput{}
@@ -37,13 +37,12 @@ type ListCampaignsInput struct {
 	// The maximum number of campaigns to return.
 	MaxResults *int32
 
-	// A token returned from the previous call to ListCampaigns
-	// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html) for
-	// getting the next set of campaigns (if they exist).
+	// A token returned from the previous call to ListCampaigns (https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html)
+	// for getting the next set of campaigns (if they exist).
 	NextToken *string
 
-	// The Amazon Resource Name (ARN) of the solution to list the campaigns for. When a
-	// solution is not specified, all the campaigns associated with the account are
+	// The Amazon Resource Name (ARN) of the solution to list the campaigns for. When
+	// a solution is not specified, all the campaigns associated with the account are
 	// listed.
 	SolutionArn *string
 
@@ -136,8 +135,8 @@ type ListCampaignsPaginatorOptions struct {
 	// The maximum number of campaigns to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

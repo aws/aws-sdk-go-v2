@@ -34,7 +34,7 @@ type BatchStopJobRunInput struct {
 	// This member is required.
 	JobName *string
 
-	// A list of the JobRunIds that should be stopped for that job definition.
+	// A list of the JobRunIds  that should be stopped for that job definition.
 	//
 	// This member is required.
 	JobRunIds []string
@@ -44,8 +44,9 @@ type BatchStopJobRunInput struct {
 
 type BatchStopJobRunOutput struct {
 
-	// A list of the errors that were encountered in trying to stop JobRuns, including
-	// the JobRunId for which each error was encountered and details about the error.
+	// A list of the errors that were encountered in trying to stop JobRuns,
+	// including the JobRunId for which each error was encountered and details about
+	// the error.
 	Errors []types.BatchStopJobRunError
 
 	// A list of the JobRuns that were successfully submitted for stopping.

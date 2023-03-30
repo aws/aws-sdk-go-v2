@@ -39,8 +39,8 @@ type GetInstanceSnapshotInput struct {
 
 type GetInstanceSnapshotOutput struct {
 
-	// An array of key-value pairs containing information about the results of your get
-	// instance snapshot request.
+	// An array of key-value pairs containing information about the results of your
+	// get instance snapshot request.
 	InstanceSnapshot *types.InstanceSnapshot
 
 	// Metadata pertaining to the operation's result.

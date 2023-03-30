@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables the email channel for an application and deletes any existing settings
-// for the channel.
+// Disables the email channel for an application and deletes any existing
+// settings for the channel.
 func (c *Client) DeleteEmailChannel(ctx context.Context, params *DeleteEmailChannelInput, optFns ...func(*Options)) (*DeleteEmailChannelOutput, error) {
 	if params == nil {
 		params = &DeleteEmailChannelInput{}

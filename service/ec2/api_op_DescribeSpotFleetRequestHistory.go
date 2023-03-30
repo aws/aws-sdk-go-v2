@@ -16,9 +16,8 @@ import (
 // time. Spot Fleet events are delayed by up to 30 seconds before they can be
 // described. This ensures that you can query by the last evaluated time and not
 // miss a recorded event. Spot Fleet events are available for 48 hours. For more
-// information, see Monitor fleet events using Amazon EventBridge
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/fleet-monitor.html) in the
-// Amazon EC2 User Guide.
+// information, see Monitor fleet events using Amazon EventBridge (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/fleet-monitor.html)
+// in the Amazon EC2 User Guide.
 func (c *Client) DescribeSpotFleetRequestHistory(ctx context.Context, params *DescribeSpotFleetRequestHistoryInput, optFns ...func(*Options)) (*DescribeSpotFleetRequestHistoryOutput, error) {
 	if params == nil {
 		params = &DescribeSpotFleetRequestHistoryInput{}
@@ -50,21 +49,21 @@ type DescribeSpotFleetRequestHistoryInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The type of events to describe. By default, all events are described.
 	EventType types.EventType
 
-	// The maximum number of items to return for this request. To get the next page of
-	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// The maximum number of items to return for this request. To get the next page
+	// of items, make another request with the token returned in the output. For more
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	MaxResults *int32
 
 	// The token to include in another request to get the next page of items. This
-	// value is null when there are no more items to return.
+	// value is null  when there are no more items to return.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -82,7 +81,7 @@ type DescribeSpotFleetRequestHistoryOutput struct {
 	LastEvaluatedTime *time.Time
 
 	// The token to include in another request to get the next page of items. This
-	// value is null when there are no more items to return.
+	// value is null  when there are no more items to return.
 	NextToken *string
 
 	// The ID of the Spot Fleet request.

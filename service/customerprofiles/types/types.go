@@ -7,13 +7,10 @@ import (
 	"time"
 )
 
-// A data type pair that consists of a KeyName and Values list that is used in
-// conjunction with the KeyName
-// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-KeyName)
-// and Values
-// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-Values)
-// parameters to search for profiles using the SearchProfiles
-// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html)
+// A data type pair that consists of a KeyName  and Values list that is used in
+// conjunction with the KeyName (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-KeyName)
+// and Values (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-Values)
+// parameters to search for profiles using the SearchProfiles (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html)
 // API.
 type AdditionalSearchKey struct {
 
@@ -30,8 +27,8 @@ type AdditionalSearchKey struct {
 	noSmithyDocumentSerde
 }
 
-// A generic address associated with the customer that is not mailing, shipping, or
-// billing.
+// A generic address associated with the customer that is not mailing, shipping,
+// or billing.
 type Address struct {
 
 	// The first line of a customer address.
@@ -67,7 +64,7 @@ type Address struct {
 	noSmithyDocumentSerde
 }
 
-// Details for workflow of type APPFLOW_INTEGRATION.
+// Details for workflow of type APPFLOW_INTEGRATION .
 type AppflowIntegration struct {
 
 	// The configurations that control how Customer Profiles retrieves data from the
@@ -77,13 +74,13 @@ type AppflowIntegration struct {
 	// This member is required.
 	FlowDefinition *FlowDefinition
 
-	// Batches in workflow of type APPFLOW_INTEGRATION.
+	// Batches in workflow of type APPFLOW_INTEGRATION .
 	Batches []Batch
 
 	noSmithyDocumentSerde
 }
 
-// Structure holding all APPFLOW_INTEGRATION specific workflow attributes.
+// Structure holding all APPFLOW_INTEGRATION  specific workflow attributes.
 type AppflowIntegrationWorkflowAttributes struct {
 
 	// The name of the AppFlow connector profile used for ingestion.
@@ -104,20 +101,20 @@ type AppflowIntegrationWorkflowAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Workflow specific execution metrics for APPFLOW_INTEGRATION workflow.
+// Workflow specific execution metrics for APPFLOW_INTEGRATION  workflow.
 type AppflowIntegrationWorkflowMetrics struct {
 
-	// Number of records processed in APPFLOW_INTEGRATION workflow.
+	// Number of records processed in APPFLOW_INTEGRATION  workflow.
 	//
 	// This member is required.
 	RecordsProcessed int64
 
-	// Total steps completed in APPFLOW_INTEGRATION workflow.
+	// Total steps completed in APPFLOW_INTEGRATION  workflow.
 	//
 	// This member is required.
 	StepsCompleted int64
 
-	// Total steps in APPFLOW_INTEGRATION workflow.
+	// Total steps in APPFLOW_INTEGRATION  workflow.
 	//
 	// This member is required.
 	TotalSteps int64
@@ -125,7 +122,7 @@ type AppflowIntegrationWorkflowMetrics struct {
 	noSmithyDocumentSerde
 }
 
-// Workflow step details for APPFLOW_INTEGRATION workflow.
+// Workflow step details for APPFLOW_INTEGRATION  workflow.
 type AppflowIntegrationWorkflowStep struct {
 
 	// End datetime of records pulled in batch during execution of workflow step for
@@ -134,18 +131,18 @@ type AppflowIntegrationWorkflowStep struct {
 	// This member is required.
 	BatchRecordsEndTime *string
 
-	// Start datetime of records pulled in batch during execution of workflow step for
-	// APPFLOW_INTEGRATION workflow.
+	// Start datetime of records pulled in batch during execution of workflow step
+	// for APPFLOW_INTEGRATION  workflow.
 	//
 	// This member is required.
 	BatchRecordsStartTime *string
 
-	// Creation timestamp of workflow step for APPFLOW_INTEGRATION workflow.
+	// Creation timestamp of workflow step for APPFLOW_INTEGRATION  workflow.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Message indicating execution of workflow step for APPFLOW_INTEGRATION workflow.
+	// Message indicating execution of workflow step for APPFLOW_INTEGRATION  workflow.
 	//
 	// This member is required.
 	ExecutionMessage *string
@@ -157,7 +154,7 @@ type AppflowIntegrationWorkflowStep struct {
 	// This member is required.
 	FlowName *string
 
-	// Last updated timestamp for workflow step for APPFLOW_INTEGRATION workflow.
+	// Last updated timestamp for workflow step for APPFLOW_INTEGRATION  workflow.
 	//
 	// This member is required.
 	LastUpdatedAt *time.Time
@@ -168,7 +165,7 @@ type AppflowIntegrationWorkflowStep struct {
 	// This member is required.
 	RecordsProcessed int64
 
-	// Workflow step status for APPFLOW_INTEGRATION workflow.
+	// Workflow step status for APPFLOW_INTEGRATION  workflow.
 	//
 	// This member is required.
 	Status Status
@@ -185,13 +182,14 @@ type AutoMerging struct {
 	Enabled *bool
 
 	// How the auto-merging process should resolve conflicts between different
-	// profiles. For example, if Profile A and Profile B have the same FirstName and
-	// LastName (and that is the matching criteria), which EmailAddress should be used?
+	// profiles. For example, if Profile A and Profile B have the same FirstName  and
+	// LastName (and that is the matching criteria), which EmailAddress should be
+	// used?
 	ConflictResolution *ConflictResolution
 
-	// A list of matching attributes that represent matching criteria. If two profiles
-	// meet at least one of the requirements in the matching attributes list, they will
-	// be merged.
+	// A list of matching attributes that represent matching criteria. If two
+	// profiles meet at least one of the requirements in the matching attributes list,
+	// they will be merged.
 	Consolidation *Consolidation
 
 	// A number between 0 and 1 that represents the minimum confidence score required
@@ -226,17 +224,14 @@ type ConflictResolution struct {
 
 	// How the auto-merging process should resolve conflicts between different
 	// profiles.
-	// - RECENCY: Uses the data that was most recently updated.
-	// - SOURCE:
-	// Uses the data from a specific source. For example, if a company has been aquired
-	// or two departments have merged, data from the specified source is used. If two
-	// duplicate profiles are from the same source, then RECENCY is used again.
+	//     - RECENCY : Uses the data that was most recently updated.
+	//     - SOURCE : Uses the data from a specific source. For example, if a company has been aquired or two departments have merged, data from the specified source is used. If two duplicate profiles are from the same source, then RECENCY is used again.
 	//
 	// This member is required.
 	ConflictResolvingModel ConflictResolvingModel
 
 	// The ObjectType name that is used to resolve profile merging conflicts when
-	// choosing SOURCE as the ConflictResolvingModel.
+	// choosing SOURCE  as the ConflictResolvingModel .
 	SourceName *string
 
 	noSmithyDocumentSerde
@@ -299,8 +294,8 @@ type DomainStats struct {
 // writes result files. You need to give Customer Profiles service principal write
 // permission to your S3 bucket. Otherwise, you'll get an exception in the API
 // response. For an example policy, see Amazon Connect Customer Profiles
-// cross-service confused deputy prevention
-// (https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service).
+// cross-service confused deputy prevention (https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service)
+// .
 type ExportingConfig struct {
 
 	// The S3 location where Identity Resolution Jobs write result files.
@@ -393,14 +388,14 @@ type FieldSourceProfileIds struct {
 // AppFlow flow on behalf of customers.
 type FlowDefinition struct {
 
-	// The specified name of the flow. Use underscores (_) or hyphens (-) only. Spaces
-	// are not allowed.
+	// The specified name of the flow. Use underscores (_) or hyphens (-) only.
+	// Spaces are not allowed.
 	//
 	// This member is required.
 	FlowName *string
 
-	// The Amazon Resource Name of the AWS Key Management Service (KMS) key you provide
-	// for encryption.
+	// The Amazon Resource Name of the AWS Key Management Service (KMS) key you
+	// provide for encryption.
 	//
 	// This member is required.
 	KmsArn *string
@@ -428,9 +423,8 @@ type FlowDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// A data type pair that consists of a KeyName and Values list that were used to
-// find a profile returned in response to a SearchProfiles
-// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html)
+// A data type pair that consists of a KeyName  and Values list that were used to
+// find a profile returned in response to a SearchProfiles (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html)
 // request.
 type FoundByKeyValue struct {
 
@@ -468,23 +462,13 @@ type IdentityResolutionJob struct {
 	Message *string
 
 	// The status of the Identity Resolution Job.
-	// - PENDING: The Identity Resolution
-	// Job is scheduled but has not started yet. If you turn off the Identity
-	// Resolution feature in your domain, jobs in the PENDING state are deleted.
-	// -
-	// PREPROCESSING: The Identity Resolution Job is loading your data.
-	// -
-	// FIND_MATCHING: The Identity Resolution Job is using the machine learning model
-	// to identify profiles that belong to the same matching group.
-	// - MERGING: The
-	// Identity Resolution Job is merging duplicate profiles.
-	// - COMPLETED: The Identity
-	// Resolution Job completed successfully.
-	// - PARTIAL_SUCCESS: There's a system error
-	// and not all of the data is merged. The Identity Resolution Job writes a message
-	// indicating the source of the problem.
-	// - FAILED: The Identity Resolution Job did
-	// not merge any data. It writes a message indicating the source of the problem.
+	//     - PENDING : The Identity Resolution Job is scheduled but has not started yet. If you turn off the Identity Resolution feature in your domain, jobs in the PENDING state are deleted.
+	//     - PREPROCESSING : The Identity Resolution Job is loading your data.
+	//     - FIND_MATCHING : The Identity Resolution Job is using the machine learning model to identify profiles that belong to the same matching group.
+	//     - MERGING : The Identity Resolution Job is merging duplicate profiles.
+	//     - COMPLETED : The Identity Resolution Job completed successfully.
+	//     - PARTIAL_SUCCESS : There's a system error and not all of the data is merged. The Identity Resolution Job writes a message indicating the source of the problem.
+	//     - FAILED : The Identity Resolution Job did not merge any data. It writes a message indicating the source of the problem.
 	Status IdentityResolutionJobStatus
 
 	noSmithyDocumentSerde
@@ -504,7 +488,7 @@ type IncrementalPullConfig struct {
 // Configuration data for integration workflow.
 type IntegrationConfig struct {
 
-	// Configuration data for APPFLOW_INTEGRATION workflow type.
+	// Configuration data for APPFLOW_INTEGRATION  workflow type.
 	AppflowIntegration *AppflowIntegration
 
 	noSmithyDocumentSerde
@@ -589,9 +573,9 @@ type ListIntegrationItem struct {
 	// This member is required.
 	Uri *string
 
-	// Boolean that shows if the Flow that's associated with the Integration is created
-	// in Amazon Appflow, or with ObjectTypeName equals _unstructured via API/CLI in
-	// flowDefinition.
+	// Boolean that shows if the Flow that's associated with the Integration is
+	// created in Amazon Appflow, or with ObjectTypeName equals _unstructured via
+	// API/CLI in flowDefinition.
 	IsUnstructured *bool
 
 	// The name of the profile object type.
@@ -599,9 +583,9 @@ type ListIntegrationItem struct {
 
 	// A map in which each key is an event type from an external application such as
 	// Segment or Shopify, and each value is an ObjectTypeName (template) used to
-	// ingest the event. It supports the following event types: SegmentIdentify,
-	// ShopifyCreateCustomers, ShopifyUpdateCustomers, ShopifyCreateDraftOrders,
-	// ShopifyUpdateDraftOrders, ShopifyCreateOrders, and ShopifyUpdatedOrders.
+	// ingest the event. It supports the following event types: SegmentIdentify ,
+	// ShopifyCreateCustomers , ShopifyUpdateCustomers , ShopifyCreateDraftOrders ,
+	// ShopifyUpdateDraftOrders , ShopifyCreateOrders , and ShopifyUpdatedOrders .
 	ObjectTypeNames map[string]string
 
 	// The tags used to organize, track, or control access for this resource.
@@ -807,8 +791,8 @@ type ObjectTypeField struct {
 	// The content type of the field. Used for determining equality when searching.
 	ContentType FieldContentType
 
-	// A field of a ProfileObject. For example: _source.FirstName, where “_source” is a
-	// ProfileObjectType of a Zendesk user and “FirstName” is a field in that
+	// A field of a ProfileObject. For example: _source.FirstName, where “_source” is
+	// a ProfileObjectType of a Zendesk user and “FirstName” is a field in that
 	// ObjectType.
 	Source *string
 
@@ -850,8 +834,8 @@ type Profile struct {
 	// Any additional information relevant to the customer’s profile.
 	AdditionalInformation *string
 
-	// A generic address associated with the customer that is not mailing, shipping, or
-	// billing.
+	// A generic address associated with the customer that is not mailing, shipping,
+	// or billing.
 	Address *Address
 
 	// A key value pair of attributes of a customer profile.
@@ -879,26 +863,17 @@ type Profile struct {
 	// The customer’s first name.
 	FirstName *string
 
-	// A list of items used to find a profile returned in a SearchProfiles
-	// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html)
+	// A list of items used to find a profile returned in a SearchProfiles (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html)
 	// response. An item is a key-value(s) pair that matches an attribute in the
-	// profile. If the optional AdditionalSearchKeys parameter was included in the
-	// SearchProfiles
-	// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html)
-	// request, the FoundByItems list should be interpreted based on the
+	// profile. If the optional AdditionalSearchKeys  parameter was included in the
+	// SearchProfiles (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html)
+	// request, the FoundByItems  list should be interpreted based on the
 	// LogicalOperator used in the request:
-	// - AND - The profile included in the
-	// response matched all of the search keys specified in the request. The
-	// FoundByItems will include all of the key-value(s) pairs that were specified in
-	// the request (as this is a requirement of AND search logic).
-	// - OR - The profile
-	// included in the response matched at least one of the search keys specified in
-	// the request. The FoundByItems will include each of the key-value(s) pairs that
-	// the profile was found by.
+	//     - AND - The profile included in the response matched all of the search keys specified in the request. The FoundByItems will include all of the key-value(s) pairs that were specified in the request (as this is a requirement of AND search logic).
+	//     - OR - The profile included in the response matched at least one of the search keys specified in the request. The FoundByItems will include each of the key-value(s) pairs that the profile was found by.
 	//
-	// The OR relationship is the default behavior if the
-	// LogicalOperator parameter is not included in the SearchProfiles
-	// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html)
+	// The OR  relationship is the default behavior if the LogicalOperator parameter
+	// is not included in the SearchProfiles (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html)
 	// request.
 	FoundByItems []FoundByKeyValue
 
@@ -936,8 +911,8 @@ type Profile struct {
 	// The customer’s personal email address.
 	PersonalEmailAddress *string
 
-	// The customer's phone number, which has not been specified as a mobile, home, or
-	// business number.
+	// The customer's phone number, which has not been specified as a mobile, home,
+	// or business number.
 	PhoneNumber *string
 
 	// The unique identifier of a customer profile.
@@ -979,7 +954,8 @@ type S3ExportingLocation struct {
 	noSmithyDocumentSerde
 }
 
-// The properties that are applied when Amazon S3 is being used as the flow source.
+// The properties that are applied when Amazon S3 is being used as the flow
+// source.
 type S3SourceProperties struct {
 
 	// The Amazon S3 bucket name where the source files are stored.
@@ -1011,8 +987,8 @@ type SalesforceSourceProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the configuration details of a scheduled-trigger flow that you define.
-// Currently, these settings only apply to the scheduled-trigger type.
+// Specifies the configuration details of a scheduled-trigger flow that you
+// define. Currently, these settings only apply to the scheduled-trigger type.
 type ScheduledTriggerProperties struct {
 
 	// The scheduling expression that determines the rate at which the schedule will
@@ -1057,15 +1033,16 @@ type ServiceNowSourceProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the information that is required to query a particular Amazon AppFlow
-// connector. Customer Profiles supports Salesforce, Zendesk, Marketo, ServiceNow
-// and Amazon S3.
+// Specifies the information that is required to query a particular Amazon
+// AppFlow connector. Customer Profiles supports Salesforce, Zendesk, Marketo,
+// ServiceNow and Amazon S3.
 type SourceConnectorProperties struct {
 
 	// The properties that are applied when Marketo is being used as a source.
 	Marketo *MarketoSourceProperties
 
-	// The properties that are applied when Amazon S3 is being used as the flow source.
+	// The properties that are applied when Amazon S3 is being used as the flow
+	// source.
 	S3 *S3SourceProperties
 
 	// The properties that are applied when Salesforce is being used as a source.
@@ -1080,8 +1057,8 @@ type SourceConnectorProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the configuration of the source connector used in the
-// flow.
+// Contains information about the configuration of the source connector used in
+// the flow.
 type SourceFlowConfig struct {
 
 	// The type of connector, such as Salesforce, Marketo, and so on.
@@ -1201,7 +1178,7 @@ type UpdateAddress struct {
 // Structure to hold workflow attributes.
 type WorkflowAttributes struct {
 
-	// Workflow attributes specific to APPFLOW_INTEGRATION workflow.
+	// Workflow attributes specific to APPFLOW_INTEGRATION  workflow.
 	AppflowIntegration *AppflowIntegrationWorkflowAttributes
 
 	noSmithyDocumentSerde
@@ -1210,7 +1187,7 @@ type WorkflowAttributes struct {
 // Generic object containing workflow execution metrics.
 type WorkflowMetrics struct {
 
-	// Workflow execution metrics for APPFLOW_INTEGRATION workflow.
+	// Workflow execution metrics for APPFLOW_INTEGRATION  workflow.
 	AppflowIntegration *AppflowIntegrationWorkflowMetrics
 
 	noSmithyDocumentSerde
@@ -1219,7 +1196,7 @@ type WorkflowMetrics struct {
 // List containing steps in workflow.
 type WorkflowStepItem struct {
 
-	// Workflow step information specific to APPFLOW_INTEGRATION workflow.
+	// Workflow step information specific to APPFLOW_INTEGRATION  workflow.
 	AppflowIntegration *AppflowIntegrationWorkflowStep
 
 	noSmithyDocumentSerde

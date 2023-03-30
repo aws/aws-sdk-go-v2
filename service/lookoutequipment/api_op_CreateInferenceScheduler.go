@@ -35,8 +35,8 @@ func (c *Client) CreateInferenceScheduler(ctx context.Context, params *CreateInf
 
 type CreateInferenceSchedulerInput struct {
 
-	// A unique identifier for the request. If you do not set the client request token,
-	// Amazon Lookout for Equipment generates one.
+	// A unique identifier for the request. If you do not set the client request
+	// token, Amazon Lookout for Equipment generates one.
 	//
 	// This member is required.
 	ClientToken *string
@@ -58,8 +58,8 @@ type CreateInferenceSchedulerInput struct {
 	// you select 5 minutes, Amazon Lookout for Equipment will upload the real-time
 	// data to the source bucket once every 5 minutes. This frequency also determines
 	// how often Amazon Lookout for Equipment runs inference on your data. For more
-	// information, see Understanding the inference process
-	// (https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html).
+	// information, see Understanding the inference process (https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html)
+	// .
 	//
 	// This member is required.
 	DataUploadFrequency types.DataUploadFrequency
@@ -89,12 +89,12 @@ type CreateInferenceSchedulerInput struct {
 	// bucket. The delay provides a buffer for you to upload data at the same
 	// frequency, so that you don't have to stop and restart the scheduler when
 	// uploading new data. For more information, see Understanding the inference
-	// process
-	// (https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html).
+	// process (https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html)
+	// .
 	DataDelayOffsetInMinutes *int64
 
-	// Provides the identifier of the KMS key used to encrypt inference scheduler data
-	// by Amazon Lookout for Equipment.
+	// Provides the identifier of the KMS key used to encrypt inference scheduler
+	// data by Amazon Lookout for Equipment.
 	ServerSideKmsKeyId *string
 
 	// Any tags associated with the inference scheduler.
@@ -111,7 +111,7 @@ type CreateInferenceSchedulerOutput struct {
 	// The name of inference scheduler being created.
 	InferenceSchedulerName *string
 
-	// Indicates the status of the CreateInferenceScheduler operation.
+	// Indicates the status of the CreateInferenceScheduler  operation.
 	Status types.InferenceSchedulerStatus
 
 	// Metadata pertaining to the operation's result.

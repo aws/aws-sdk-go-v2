@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all datasets currently available in your account, filtering on the dataset
-// name.
+// Lists all datasets currently available in your account, filtering on the
+// dataset name.
 func (c *Client) ListDatasets(ctx context.Context, params *ListDatasetsInput, optFns ...func(*Options)) (*ListDatasetsOutput, error) {
 	if params == nil {
 		params = &ListDatasetsInput{}
@@ -37,7 +37,8 @@ type ListDatasetsInput struct {
 	// Specifies the maximum number of datasets to list.
 	MaxResults *int32
 
-	// An opaque pagination token indicating where to continue the listing of datasets.
+	// An opaque pagination token indicating where to continue the listing of
+	// datasets.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,7 +50,8 @@ type ListDatasetsOutput struct {
 	// dataset ARN, and status.
 	DatasetSummaries []types.DatasetSummary
 
-	// An opaque pagination token indicating where to continue the listing of datasets.
+	// An opaque pagination token indicating where to continue the listing of
+	// datasets.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -130,8 +132,8 @@ type ListDatasetsPaginatorOptions struct {
 	// Specifies the maximum number of datasets to list.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

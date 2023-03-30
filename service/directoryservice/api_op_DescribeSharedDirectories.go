@@ -38,8 +38,8 @@ type DescribeSharedDirectoriesInput struct {
 	// The number of shared directories to return in the response object.
 	Limit *int32
 
-	// The DescribeSharedDirectoriesResult.NextToken value from a previous call to
-	// DescribeSharedDirectories. Pass null if this is the first call.
+	// The DescribeSharedDirectoriesResult.NextToken  value from a previous call to
+	// DescribeSharedDirectories . Pass null if this is the first call.
 	NextToken *string
 
 	// A list of identifiers of all shared directories in your account.
@@ -51,7 +51,7 @@ type DescribeSharedDirectoriesInput struct {
 type DescribeSharedDirectoriesOutput struct {
 
 	// If not null, token that indicates that more results are available. Pass this
-	// value for the NextToken parameter in a subsequent call to
+	// value for the NextToken  parameter in a subsequent call to
 	// DescribeSharedDirectories to retrieve the next set of items.
 	NextToken *string
 
@@ -141,8 +141,8 @@ type DescribeSharedDirectoriesPaginatorOptions struct {
 	// The number of shared directories to return in the response object.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

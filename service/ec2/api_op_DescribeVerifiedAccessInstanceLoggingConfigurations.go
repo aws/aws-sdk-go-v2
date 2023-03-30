@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the current logging configuration for the Amazon Web Services Verified
-// Access instances.
+// Describes the current logging configuration for the Amazon Web Services
+// Verified Access instances.
 func (c *Client) DescribeVerifiedAccessInstanceLoggingConfigurations(ctx context.Context, params *DescribeVerifiedAccessInstanceLoggingConfigurationsInput, optFns ...func(*Options)) (*DescribeVerifiedAccessInstanceLoggingConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeVerifiedAccessInstanceLoggingConfigurationsInput{}
@@ -33,15 +33,15 @@ type DescribeVerifiedAccessInstanceLoggingConfigurationsInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// One or more filters. Filter names and values are case-sensitive.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -141,16 +141,16 @@ var _ DescribeVerifiedAccessInstanceLoggingConfigurationsAPIClient = (*Client)(n
 // paginator options for DescribeVerifiedAccessInstanceLoggingConfigurations
 type DescribeVerifiedAccessInstanceLoggingConfigurationsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
-// DescribeVerifiedAccessInstanceLoggingConfigurationsPaginator is a paginator for
-// DescribeVerifiedAccessInstanceLoggingConfigurations
+// DescribeVerifiedAccessInstanceLoggingConfigurationsPaginator is a paginator
+// for DescribeVerifiedAccessInstanceLoggingConfigurations
 type DescribeVerifiedAccessInstanceLoggingConfigurationsPaginator struct {
 	options   DescribeVerifiedAccessInstanceLoggingConfigurationsPaginatorOptions
 	client    DescribeVerifiedAccessInstanceLoggingConfigurationsAPIClient
@@ -189,8 +189,8 @@ func (p *DescribeVerifiedAccessInstanceLoggingConfigurationsPaginator) HasMorePa
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next DescribeVerifiedAccessInstanceLoggingConfigurations
-// page.
+// NextPage retrieves the next
+// DescribeVerifiedAccessInstanceLoggingConfigurations page.
 func (p *DescribeVerifiedAccessInstanceLoggingConfigurationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeVerifiedAccessInstanceLoggingConfigurationsOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")

@@ -27,7 +27,7 @@ func (c *Client) CreateComputer(ctx context.Context, params *CreateComputerInput
 	return out, nil
 }
 
-// Contains the inputs for the CreateComputer operation.
+// Contains the inputs for the CreateComputer  operation.
 type CreateComputerInput struct {
 
 	// The name of the computer account.
@@ -57,10 +57,10 @@ type CreateComputerInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the results for the CreateComputer operation.
+// Contains the results for the CreateComputer  operation.
 type CreateComputerOutput struct {
 
-	// A Computer object that represents the computer account.
+	// A Computer  object that represents the computer account.
 	Computer *types.Computer
 
 	// Metadata pertaining to the operation's result.

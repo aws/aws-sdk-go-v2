@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates the connector, which captures the parameters for an outbound connection
-// for the AS2 protocol. The connector is required for sending files to an
-// externally hosted AS2 server. For more details about connectors, see Create AS2
-// connectors
-// (https://docs.aws.amazon.com/transfer/latest/userguide/create-b2b-server.html#configure-as2-connector).
+// Creates the connector, which captures the parameters for an outbound
+// connection for the AS2 protocol. The connector is required for sending files to
+// an externally hosted AS2 server. For more details about connectors, see Create
+// AS2 connectors (https://docs.aws.amazon.com/transfer/latest/userguide/create-b2b-server.html#configure-as2-connector)
+// .
 func (c *Client) CreateConnector(ctx context.Context, params *CreateConnectorInput, optFns ...func(*Options)) (*CreateConnectorOutput, error) {
 	if params == nil {
 		params = &CreateConnectorInput{}
@@ -42,7 +42,7 @@ type CreateConnectorInput struct {
 	// provide read and write access to the parent directory of the file location used
 	// in the StartFileTransfer request. Additionally, you need to provide read and
 	// write access to the parent directory of the files that you intend to send with
-	// StartFileTransfer.
+	// StartFileTransfer .
 	//
 	// This member is required.
 	AccessRole *string
@@ -57,9 +57,9 @@ type CreateConnectorInput struct {
 	// This member is required.
 	Url *string
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-	// that allows a connector to turn on CloudWatch logging for Amazon S3 events. When
-	// set, you can view connector activity in your CloudWatch logs.
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
+	// role that allows a connector to turn on CloudWatch logging for Amazon S3 events.
+	// When set, you can view connector activity in your CloudWatch logs.
 	LoggingRole *string
 
 	// Key-value pairs that can be used to group and search for connectors. Tags are

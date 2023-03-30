@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change. For
-// the specified version of Amazon Lex, returns a paginated list of all the Amazon
-// Lex bots currently associated with the instance. Use this API to returns both
-// Amazon Lex V1 and V2 bots.
+// This API is in preview release for Amazon Connect and is subject to change.
+// For the specified version of Amazon Lex, returns a paginated list of all the
+// Amazon Lex bots currently associated with the instance. Use this API to returns
+// both Amazon Lex V1 and V2 bots.
 func (c *Client) ListBots(ctx context.Context, params *ListBotsInput, optFns ...func(*Options)) (*ListBotsOutput, error) {
 	if params == nil {
 		params = &ListBotsInput{}
@@ -33,8 +33,7 @@ func (c *Client) ListBots(ctx context.Context, params *ListBotsInput, optFns ...
 
 type ListBotsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -145,8 +144,8 @@ type ListBotsPaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

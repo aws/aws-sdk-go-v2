@@ -13,8 +13,8 @@ import (
 
 // Updates some parameters of an existing object storage location that DataSync
 // accesses for a transfer. For information about creating a self-managed object
-// storage location, see Creating a location for object storage
-// (https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html).
+// storage location, see Creating a location for object storage (https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html)
+// .
 func (c *Client) UpdateLocationObjectStorage(ctx context.Context, params *UpdateLocationObjectStorageInput, optFns ...func(*Options)) (*UpdateLocationObjectStorageOutput, error) {
 	if params == nil {
 		params = &UpdateLocationObjectStorageInput{}
@@ -37,8 +37,8 @@ type UpdateLocationObjectStorageInput struct {
 	// This member is required.
 	LocationArn *string
 
-	// Specifies the access key (for example, a user name) if credentials are required
-	// to authenticate with the object storage server.
+	// Specifies the access key (for example, a user name) if credentials are
+	// required to authenticate with the object storage server.
 	AccessKey *string
 
 	// Specifies the Amazon Resource Names (ARNs) of the DataSync agents that can
@@ -49,9 +49,9 @@ type UpdateLocationObjectStorageInput struct {
 	// to authenticate with the object storage server.
 	SecretKey *string
 
-	// Specifies a certificate to authenticate with an object storage system that uses
-	// a private or self-signed certificate authority (CA). You must specify a
-	// Base64-encoded .pem file (for example,
+	// Specifies a certificate to authenticate with an object storage system that
+	// uses a private or self-signed certificate authority (CA). You must specify a
+	// Base64-encoded .pem  file (for example,
 	// file:///home/user/.ssh/storage_sys_certificate.pem). The certificate can be up
 	// to 32768 bytes (before Base64 encoding). To use this parameter, configure
 	// ServerProtocol to HTTPS. Updating the certificate doesn't interfere with tasks
@@ -65,8 +65,8 @@ type UpdateLocationObjectStorageInput struct {
 	// Specifies the protocol that your object storage server uses to communicate.
 	ServerProtocol types.ObjectStorageServerProtocol
 
-	// Specifies the object prefix for your object storage server. If this is a source
-	// location, DataSync only copies objects with this prefix. If this is a
+	// Specifies the object prefix for your object storage server. If this is a
+	// source location, DataSync only copies objects with this prefix. If this is a
 	// destination location, DataSync writes all objects with this prefix.
 	Subdirectory *string
 

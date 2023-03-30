@@ -43,7 +43,7 @@ type ExportTableToPointInTimeInput struct {
 	// This member is required.
 	TableArn *string
 
-	// Providing a ClientToken makes the call to ExportTableToPointInTimeInput
+	// Providing a ClientToken  makes the call to ExportTableToPointInTimeInput
 	// idempotent, meaning that multiple identical calls have the same effect as one
 	// single call. A client token is valid for 8 hours after the first request that
 	// uses it is completed. After 8 hours, any request with the same client token is
@@ -51,11 +51,11 @@ type ExportTableToPointInTimeInput struct {
 	// token for more than 8 hours, or the result might not be idempotent. If you
 	// submit a request with the same client token but a change in other parameters
 	// within the 8-hour idempotency window, DynamoDB returns an
-	// ImportConflictException.
+	// ImportConflictException .
 	ClientToken *string
 
-	// The format for the exported data. Valid values for ExportFormat are
-	// DYNAMODB_JSON or ION.
+	// The format for the exported data. Valid values for ExportFormat  are
+	// DYNAMODB_JSON or ION .
 	ExportFormat types.ExportFormat
 
 	// Time in the past from which to export table data, counted in seconds from the
@@ -72,10 +72,9 @@ type ExportTableToPointInTimeInput struct {
 	S3Prefix *string
 
 	// Type of encryption used on the bucket where export data will be stored. Valid
-	// values for S3SseAlgorithm are:
-	// - AES256 - server-side encryption with Amazon S3
-	// managed keys
-	// - KMS - server-side encryption with KMS managed keys
+	// values for S3SseAlgorithm  are:
+	//     - AES256 - server-side encryption with Amazon S3 managed keys
+	//     - KMS - server-side encryption with KMS managed keys
 	S3SseAlgorithm types.S3SseAlgorithm
 
 	// The ID of the KMS managed key used to encrypt the S3 bucket where export data

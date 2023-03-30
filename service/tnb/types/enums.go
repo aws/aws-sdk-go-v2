@@ -9,8 +9,8 @@ const (
 	DescriptorContentTypeTextPlain DescriptorContentType = "text/plain"
 )
 
-// Values returns all known values for DescriptorContentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DescriptorContentType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DescriptorContentType) Values() []DescriptorContentType {
 	return []DescriptorContentType{
@@ -237,8 +237,8 @@ const (
 	UpdateSolNetworkTypeModifyVnfInformation UpdateSolNetworkType = "MODIFY_VNF_INFORMATION"
 )
 
-// Values returns all known values for UpdateSolNetworkType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for UpdateSolNetworkType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateSolNetworkType) Values() []UpdateSolNetworkType {
 	return []UpdateSolNetworkType{
@@ -272,8 +272,8 @@ const (
 	VnfInstantiationStateNotInstantiated VnfInstantiationState = "NOT_INSTANTIATED"
 )
 
-// Values returns all known values for VnfInstantiationState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for VnfInstantiationState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (VnfInstantiationState) Values() []VnfInstantiationState {
 	return []VnfInstantiationState{

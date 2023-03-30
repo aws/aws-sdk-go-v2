@@ -30,8 +30,8 @@ func (c *Client) CreateExtendedSourceServer(ctx context.Context, params *CreateE
 
 type CreateExtendedSourceServerInput struct {
 
-	// This defines the ARN of the source server in staging Account based on which you
-	// want to create an extended source server.
+	// This defines the ARN of the source server in staging Account based on which
+	// you want to create an extended source server.
 	//
 	// This member is required.
 	SourceServerArn *string

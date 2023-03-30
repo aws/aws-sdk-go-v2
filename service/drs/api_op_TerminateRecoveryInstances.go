@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Initiates a Job for terminating the EC2 resources associated with the specified
-// Recovery Instances, and then will delete the Recovery Instances from the Elastic
-// Disaster Recovery service.
+// Initiates a Job for terminating the EC2 resources associated with the
+// specified Recovery Instances, and then will delete the Recovery Instances from
+// the Elastic Disaster Recovery service.
 func (c *Client) TerminateRecoveryInstances(ctx context.Context, params *TerminateRecoveryInstancesInput, optFns ...func(*Options)) (*TerminateRecoveryInstancesOutput, error) {
 	if params == nil {
 		params = &TerminateRecoveryInstancesInput{}

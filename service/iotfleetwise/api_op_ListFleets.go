@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information for each created fleet in an Amazon Web Services account.
-// This API operation uses pagination. Specify the nextToken parameter in the
-// request to return more results.
+// Retrieves information for each created fleet in an Amazon Web Services
+// account. This API operation uses pagination. Specify the nextToken parameter
+// in the request to return more results.
 func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns ...func(*Options)) (*ListFleetsOutput, error) {
 	if params == nil {
 		params = &ListFleetsInput{}
@@ -132,8 +132,8 @@ type ListFleetsPaginatorOptions struct {
 	// The maximum number of items to return, between 1 and 100, inclusive.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -12,8 +12,8 @@ import (
 
 // Deletes your Amazon Kendra experience such as a search application. For more
 // information on creating a search application experience, see Building a search
-// experience with no code
-// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
+// experience with no code (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html)
+// .
 func (c *Client) DeleteExperience(ctx context.Context, params *DeleteExperienceInput, optFns ...func(*Options)) (*DeleteExperienceOutput, error) {
 	if params == nil {
 		params = &DeleteExperienceInput{}

@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Checks in the specified license. Check in a license when it is no longer in use.
+// Checks in the specified license. Check in a license when it is no longer in
+// use.
 func (c *Client) CheckInLicense(ctx context.Context, params *CheckInLicenseInput, optFns ...func(*Options)) (*CheckInLicenseOutput, error) {
 	if params == nil {
 		params = &CheckInLicenseInput{}

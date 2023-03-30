@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the recording configuration for the specified ARN. If you try to delete
-// a recording configuration that is associated with a channel, you will get an
-// error (409 ConflictException). To avoid this, for all channels that reference
-// the recording configuration, first use UpdateChannel to set the
-// recordingConfigurationArn field to an empty string, then use
+// Deletes the recording configuration for the specified ARN. If you try to
+// delete a recording configuration that is associated with a channel, you will get
+// an error (409 ConflictException). To avoid this, for all channels that reference
+// the recording configuration, first use UpdateChannel  to set the
+// recordingConfigurationArnfield to an empty string, then use
 // DeleteRecordingConfiguration.
 func (c *Client) DeleteRecordingConfiguration(ctx context.Context, params *DeleteRecordingConfigurationInput, optFns ...func(*Options)) (*DeleteRecordingConfigurationOutput, error) {
 	if params == nil {

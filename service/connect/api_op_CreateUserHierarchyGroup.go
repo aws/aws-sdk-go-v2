@@ -28,8 +28,7 @@ func (c *Client) CreateUserHierarchyGroup(ctx context.Context, params *CreateUse
 
 type CreateUserHierarchyGroupInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -40,8 +39,8 @@ type CreateUserHierarchyGroupInput struct {
 	// This member is required.
 	Name *string
 
-	// The identifier for the parent hierarchy group. The user hierarchy is created at
-	// level one if the parent group ID is null.
+	// The identifier for the parent hierarchy group. The user hierarchy is created
+	// at level one if the parent group ID is null.
 	ParentGroupId *string
 
 	// The tags used to organize, track, or control access for this resource. For

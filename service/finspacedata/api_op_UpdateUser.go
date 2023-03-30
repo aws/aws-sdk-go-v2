@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the details of the specified user account. You cannot update the userId
-// for a user.
+// Modifies the details of the specified user account. You cannot update the
+// userId for a user.
 func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns ...func(*Options)) (*UpdateUserOutput, error) {
 	if params == nil {
 		params = &UpdateUserInput{}
@@ -37,16 +37,14 @@ type UpdateUserInput struct {
 	UserId *string
 
 	// The option to indicate whether the user can use the
-	// GetProgrammaticAccessCredentials API to obtain credentials that can then be used
-	// to access other FinSpace Data API operations.
-	// - ENABLED – The user has
-	// permissions to use the APIs.
-	// - DISABLED – The user does not have permissions to
-	// use any APIs.
+	// GetProgrammaticAccessCredentialsAPI to obtain credentials that can then be
+	// used to access other FinSpace Data API operations.
+	//     - ENABLED – The user has permissions to use the APIs.
+	//     - DISABLED – The user does not have permissions to use any APIs.
 	ApiAccess types.ApiAccess
 
 	// The ARN identifier of an AWS user or role that is allowed to call the
-	// GetProgrammaticAccessCredentials API to obtain a credentials token for a
+	// GetProgrammaticAccessCredentialsAPI to obtain a credentials token for a
 	// specific FinSpace user. This must be an IAM role within your FinSpace account.
 	ApiAccessPrincipalArn *string
 
@@ -60,11 +58,8 @@ type UpdateUserInput struct {
 	LastName *string
 
 	// The option to indicate the type of user.
-	// - SUPER_USER– A user with permission to
-	// all the functionality and data in FinSpace.
-	// - APP_USER – A user with specific
-	// permissions in FinSpace. The users are assigned permissions by adding them to a
-	// permission group.
+	//     - SUPER_USER – A user with permission to all the functionality and data in FinSpace.
+	//     - APP_USER – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permission group.
 	Type types.UserType
 
 	noSmithyDocumentSerde

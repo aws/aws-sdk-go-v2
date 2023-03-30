@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deregisters the specified members (network interfaces) from the transit gateway
-// multicast group.
+// Deregisters the specified members (network interfaces) from the transit
+// gateway multicast group.
 func (c *Client) DeregisterTransitGatewayMulticastGroupMembers(ctx context.Context, params *DeregisterTransitGatewayMulticastGroupMembersInput, optFns ...func(*Options)) (*DeregisterTransitGatewayMulticastGroupMembersOutput, error) {
 	if params == nil {
 		params = &DeregisterTransitGatewayMulticastGroupMembersInput{}
@@ -32,8 +32,8 @@ type DeregisterTransitGatewayMulticastGroupMembersInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The IP address assigned to the transit gateway multicast group.

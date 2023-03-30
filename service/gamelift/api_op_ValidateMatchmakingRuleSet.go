@@ -14,8 +14,7 @@ import (
 // that the rule set is using syntactically correct JSON and that it conforms to
 // allowed property expressions. To validate syntax, provide a rule set JSON
 // string. Learn more
-// - Build a rule set
-// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
+//   - Build a rule set (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
 func (c *Client) ValidateMatchmakingRuleSet(ctx context.Context, params *ValidateMatchmakingRuleSetInput, optFns ...func(*Options)) (*ValidateMatchmakingRuleSetOutput, error) {
 	if params == nil {
 		params = &ValidateMatchmakingRuleSetInput{}

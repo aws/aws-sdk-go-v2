@@ -36,8 +36,8 @@ type GetMembersInput struct {
 	// This member is required.
 	AccountIds []string
 
-	// The unique ID of the detector of the GuardDuty account whose members you want to
-	// retrieve.
+	// The unique ID of the detector of the GuardDuty account whose members you want
+	// to retrieve.
 	//
 	// This member is required.
 	DetectorId *string
@@ -52,8 +52,8 @@ type GetMembersOutput struct {
 	// This member is required.
 	Members []types.Member
 
-	// A list of objects that contain the unprocessed account and a result string that
-	// explains why it was unprocessed.
+	// A list of objects that contain the unprocessed account and a result string
+	// that explains why it was unprocessed.
 	//
 	// This member is required.
 	UnprocessedAccounts []types.UnprocessedAccount

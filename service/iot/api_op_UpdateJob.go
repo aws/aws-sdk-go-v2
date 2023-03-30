@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates supported fields of the specified job. Requires permission to access the
-// UpdateJob
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Updates supported fields of the specified job. Requires permission to access
+// the UpdateJob (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) UpdateJob(ctx context.Context, params *UpdateJobInput, optFns ...func(*Options)) (*UpdateJobOutput, error) {
 	if params == nil {
@@ -59,10 +58,10 @@ type UpdateJobInput struct {
 	// Configuration information for pre-signed S3 URLs.
 	PresignedUrlConfig *types.PresignedUrlConfig
 
-	// Specifies the amount of time each device has to finish its execution of the job.
-	// The timer is started when the job execution status is set to IN_PROGRESS. If the
-	// job execution status is not set to another terminal state before the time
-	// expires, it will be automatically set to TIMED_OUT.
+	// Specifies the amount of time each device has to finish its execution of the
+	// job. The timer is started when the job execution status is set to IN_PROGRESS.
+	// If the job execution status is not set to another terminal state before the time
+	// expires, it will be automatically set to TIMED_OUT .
 	TimeoutConfig *types.TimeoutConfig
 
 	noSmithyDocumentSerde

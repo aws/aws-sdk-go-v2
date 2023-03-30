@@ -33,8 +33,8 @@ type ListSecurityControlDefinitionsInput struct {
 	// An optional parameter that limits the total results of the API response to the
 	// specified number. If this parameter isn't provided in the request, the results
 	// include the first 25 security controls that apply to the specified standard. The
-	// results also include a NextToken parameter that you can use in a subsequent API
-	// call to get the next 25 controls. This repeats until all controls for the
+	// results also include a NextToken parameter that you can use in a subsequent
+	// API call to get the next 25 controls. This repeats until all controls for the
 	// standard are returned.
 	MaxResults int32
 
@@ -139,13 +139,13 @@ type ListSecurityControlDefinitionsPaginatorOptions struct {
 	// An optional parameter that limits the total results of the API response to the
 	// specified number. If this parameter isn't provided in the request, the results
 	// include the first 25 security controls that apply to the specified standard. The
-	// results also include a NextToken parameter that you can use in a subsequent API
-	// call to get the next 25 controls. This repeats until all controls for the
+	// results also include a NextToken parameter that you can use in a subsequent
+	// API call to get the next 25 controls. This repeats until all controls for the
 	// standard are returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

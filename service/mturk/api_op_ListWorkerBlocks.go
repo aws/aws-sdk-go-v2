@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListWorkersBlocks operation retrieves a list of Workers who are blocked from
-// working on your HITs.
+// The ListWorkersBlocks operation retrieves a list of Workers who are blocked
+// from working on your HITs.
 func (c *Client) ListWorkerBlocks(ctx context.Context, params *ListWorkerBlocksInput, optFns ...func(*Options)) (*ListWorkerBlocksOutput, error) {
 	if params == nil {
 		params = &ListWorkerBlocksInput{}
@@ -131,8 +131,8 @@ var _ ListWorkerBlocksAPIClient = (*Client)(nil)
 type ListWorkerBlocksPaginatorOptions struct {
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Returned if the access point that you are trying to create already exists, with
-// the creation token you provided in the request.
+// Returned if the access point that you are trying to create already exists,
+// with the creation token you provided in the request.
 type AccessPointAlreadyExists struct {
 	Message *string
 
@@ -39,8 +39,8 @@ func (e *AccessPointAlreadyExists) ErrorFault() smithy.ErrorFault { return smith
 
 // Returned if the Amazon Web Services account has already created the maximum
 // number of access points allowed per file system. For more informaton, see
-// https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region
-// (https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region).
+// https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region (https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region)
+// .
 type AccessPointLimitExceeded struct {
 	Message *string
 
@@ -99,8 +99,8 @@ func (e *AccessPointNotFound) ErrorFault() smithy.ErrorFault { return smithy.Fau
 
 // Returned if the Availability Zone that was specified for a mount target is
 // different from the Availability Zone that was specified for One Zone storage.
-// For more information, see Regional and One Zone storage redundancy
-// (https://docs.aws.amazon.com/efs/latest/ug/availability-durability.html).
+// For more information, see Regional and One Zone storage redundancy (https://docs.aws.amazon.com/efs/latest/ug/availability-durability.html)
+// .
 type AvailabilityZonesMismatch struct {
 	Message *string
 
@@ -358,8 +358,8 @@ func (e *IncorrectMountTargetState) ErrorCode() string {
 }
 func (e *IncorrectMountTargetState) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if there's not enough capacity to provision additional throughput. This
-// value might be returned when you try to create a file system in provisioned
+// Returned if there's not enough capacity to provision additional throughput.
+// This value might be returned when you try to create a file system in provisioned
 // throughput mode, when you attempt to increase the provisioned throughput of an
 // existing file system, or when you attempt to change an existing file system from
 // Bursting Throughput to Provisioned Throughput mode. Try again later.
@@ -506,8 +506,8 @@ func (e *MountTargetConflict) ErrorCode() string {
 }
 func (e *MountTargetConflict) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if there is no mount target with the specified ID found in the caller's
-// Amazon Web Services account.
+// Returned if there is no mount target with the specified ID found in the
+// caller's Amazon Web Services account.
 type MountTargetNotFound struct {
 	Message *string
 
@@ -535,11 +535,10 @@ func (e *MountTargetNotFound) ErrorCode() string {
 }
 func (e *MountTargetNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The calling account has reached the limit for elastic network interfaces for the
-// specific Amazon Web Services Region. Either delete some network interfaces or
-// request that the account quota be raised. For more information, see Amazon VPC
-// Quotas
-// (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html)
+// The calling account has reached the limit for elastic network interfaces for
+// the specific Amazon Web Services Region. Either delete some network interfaces
+// or request that the account quota be raised. For more information, see Amazon
+// VPC Quotas (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html)
 // in the Amazon VPC User Guide (see the Network interfaces per Region entry in the
 // Network interfaces table).
 type NetworkInterfaceLimitExceeded struct {
@@ -569,8 +568,8 @@ func (e *NetworkInterfaceLimitExceeded) ErrorCode() string {
 }
 func (e *NetworkInterfaceLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if IpAddress was not specified in the request and there are no free IP
-// addresses in the subnet.
+// Returned if IpAddress was not specified in the request and there are no free
+// IP addresses in the subnet.
 type NoFreeAddressesInSubnet struct {
 	Message *string
 
@@ -598,8 +597,8 @@ func (e *NoFreeAddressesInSubnet) ErrorCode() string {
 }
 func (e *NoFreeAddressesInSubnet) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if the default file system policy is in effect for the EFS file system
-// specified.
+// Returned if the default file system policy is in effect for the EFS file
+// system specified.
 type PolicyNotFound struct {
 	Message *string
 
@@ -627,7 +626,8 @@ func (e *PolicyNotFound) ErrorCode() string {
 }
 func (e *PolicyNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if the specified file system does not have a replication configuration.
+// Returned if the specified file system does not have a replication
+// configuration.
 type ReplicationNotFound struct {
 	Message *string
 
@@ -655,8 +655,8 @@ func (e *ReplicationNotFound) ErrorCode() string {
 }
 func (e *ReplicationNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if the size of SecurityGroups specified in the request is greater than
-// five.
+// Returned if the size of SecurityGroups specified in the request is greater
+// than five.
 type SecurityGroupLimitExceeded struct {
 	Message *string
 
@@ -713,7 +713,7 @@ func (e *SecurityGroupNotFound) ErrorCode() string {
 }
 func (e *SecurityGroupNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if there is no subnet with ID SubnetId provided in the request.
+// Returned if there is no subnet with ID SubnetId  provided in the request.
 type SubnetNotFound struct {
 	Message *string
 
@@ -742,8 +742,8 @@ func (e *SubnetNotFound) ErrorCode() string {
 func (e *SubnetNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned when the CreateAccessPoint API action is called too quickly and the
-// number of Access Points on the file system is nearing the limit of 120
-// (https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region).
+// number of Access Points on the file system is nearing the limit of 120 (https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region)
+// .
 type ThrottlingException struct {
 	Message *string
 

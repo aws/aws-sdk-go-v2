@@ -46,14 +46,9 @@ type GetEmailTemplateInput struct {
 	// the identifier for the latest existing version of the template. This restriction
 	// helps ensure that race conditions don't occur. If you don't specify a value for
 	// this parameter, Amazon Pinpoint does the following:
-	// - For a get operation,
-	// retrieves information about the active version of the template.
-	// - For an update
-	// operation, saves the updates to (overwrites) the latest existing version of the
-	// template, if the create-new-version parameter isn't used or is set to false.
-	// -
-	// For a delete operation, deletes the template, including all versions of the
-	// template.
+	//     - For a get operation, retrieves information about the active version of the template.
+	//     - For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.
+	//     - For a delete operation, deletes the template, including all versions of the template.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -61,8 +56,8 @@ type GetEmailTemplateInput struct {
 
 type GetEmailTemplateOutput struct {
 
-	// Provides information about the content and settings for a message template that
-	// can be used in messages that are sent through the email channel.
+	// Provides information about the content and settings for a message template
+	// that can be used in messages that are sent through the email channel.
 	//
 	// This member is required.
 	EmailTemplateResponse *types.EmailTemplateResponse

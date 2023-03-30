@@ -45,8 +45,8 @@ type ListFoldersInput struct {
 
 type ListFoldersOutput struct {
 
-	// A structure that contains all of the folders in the Amazon Web Services account.
-	// This structure provides basic information about the folders.
+	// A structure that contains all of the folders in the Amazon Web Services
+	// account. This structure provides basic information about the folders.
 	FolderSummaryList []types.FolderSummary
 
 	// The token for the next set of results, or null if there are no more results.

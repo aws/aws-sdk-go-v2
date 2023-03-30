@@ -13,17 +13,12 @@ import (
 	"time"
 )
 
-// Gets aggregated values for an asset property. For more information, see Querying
-// aggregates
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates)
+// Gets aggregated values for an asset property. For more information, see
+// Querying aggregates (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates)
 // in the IoT SiteWise User Guide. To identify an asset property, you must specify
 // one of the following:
-// - The assetId and propertyId of an asset property.
-// - A
-// propertyAlias, which is a data stream alias (for example,
-// /company/windfarm/3/turbine/7/temperature). To define an asset property's alias,
-// see UpdateAssetProperty
-// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
+//   - The assetId and propertyId of an asset property.
+//   - A propertyAlias , which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature ). To define an asset property's alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html) .
 func (c *Client) GetAssetPropertyAggregates(ctx context.Context, params *GetAssetPropertyAggregatesInput, optFns ...func(*Options)) (*GetAssetPropertyAggregatesOutput, error) {
 	if params == nil {
 		params = &GetAssetPropertyAggregatesInput{}
@@ -46,8 +41,8 @@ type GetAssetPropertyAggregatesInput struct {
 	// This member is required.
 	AggregateTypes []types.AggregateType
 
-	// The inclusive end of the range from which to query historical data, expressed in
-	// seconds in Unix epoch time.
+	// The inclusive end of the range from which to query historical data, expressed
+	// in seconds in Unix epoch time.
 	//
 	// This member is required.
 	EndDate *time.Time
@@ -57,8 +52,8 @@ type GetAssetPropertyAggregatesInput struct {
 	// This member is required.
 	Resolution *string
 
-	// The exclusive start of the range from which to query historical data, expressed
-	// in seconds in Unix epoch time.
+	// The exclusive start of the range from which to query historical data,
+	// expressed in seconds in Unix epoch time.
 	//
 	// This member is required.
 	StartDate *time.Time
@@ -66,7 +61,8 @@ type GetAssetPropertyAggregatesInput struct {
 	// The ID of the asset.
 	AssetId *string
 
-	// The maximum number of results to return for each paginated request. Default: 100
+	// The maximum number of results to return for each paginated request. Default:
+	// 100
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
@@ -74,8 +70,7 @@ type GetAssetPropertyAggregatesInput struct {
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
 	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
-	// information, see Mapping industrial data streams to asset properties
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
+	// information, see Mapping industrial data streams to asset properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the IoT SiteWise User Guide.
 	PropertyAlias *string
 
@@ -85,7 +80,8 @@ type GetAssetPropertyAggregatesInput struct {
 	// The quality by which to filter asset data.
 	Qualities []types.Quality
 
-	// The chronological sorting order of the requested information. Default: ASCENDING
+	// The chronological sorting order of the requested information. Default:
+	// ASCENDING
 	TimeOrdering types.TimeOrdering
 
 	noSmithyDocumentSerde
@@ -212,11 +208,12 @@ var _ GetAssetPropertyAggregatesAPIClient = (*Client)(nil)
 // GetAssetPropertyAggregatesPaginatorOptions is the paginator options for
 // GetAssetPropertyAggregates
 type GetAssetPropertyAggregatesPaginatorOptions struct {
-	// The maximum number of results to return for each paginated request. Default: 100
+	// The maximum number of results to return for each paginated request. Default:
+	// 100
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

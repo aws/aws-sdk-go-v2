@@ -30,8 +30,8 @@ func (c *Client) CreateWorldTemplate(ctx context.Context, params *CreateWorldTem
 
 type CreateWorldTemplateInput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
 	// The name of the world template.
@@ -55,8 +55,8 @@ type CreateWorldTemplateOutput struct {
 	// The Amazon Resource Name (ARN) of the world template.
 	Arn *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
 	// The time, in milliseconds since the epoch, when the world template was created.

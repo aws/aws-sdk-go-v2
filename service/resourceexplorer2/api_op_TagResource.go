@@ -29,14 +29,14 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the view or index that you want to attach tags
-	// to.
+	// The Amazon Resource Name (ARN) of the view or index that you want to attach
+	// tags to.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// A list of tag key and value pairs that you want to attach to the specified view
-	// or index.
+	// A list of tag key and value pairs that you want to attach to the specified
+	// view or index.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

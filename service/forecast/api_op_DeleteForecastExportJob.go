@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes a forecast export job created using the CreateForecastExportJob
-// operation. You can delete only export jobs that have a status of ACTIVE or
-// CREATE_FAILED. To get the status, use the DescribeForecastExportJob operation.
+// operation. You can delete only export jobs that have a status of ACTIVE  or
+// CREATE_FAILED . To get the status, use the DescribeForecastExportJob  operation.
 func (c *Client) DeleteForecastExportJob(ctx context.Context, params *DeleteForecastExportJobInput, optFns ...func(*Options)) (*DeleteForecastExportJobOutput, error) {
 	if params == nil {
 		params = &DeleteForecastExportJobInput{}

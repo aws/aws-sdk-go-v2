@@ -14,8 +14,8 @@ import (
 // calculate a fresh set of Savings Plans recommendations that takes your latest
 // usage data and current Savings Plans inventory into account. You can refresh
 // Savings Plans recommendations up to three times daily for a consolidated billing
-// family. StartSavingsPlansPurchaseRecommendationGeneration has no request syntax
-// because no input parameters are needed to support this operation.
+// family. StartSavingsPlansPurchaseRecommendationGeneration has no request
+// syntax because no input parameters are needed to support this operation.
 func (c *Client) StartSavingsPlansPurchaseRecommendationGeneration(ctx context.Context, params *StartSavingsPlansPurchaseRecommendationGenerationInput, optFns ...func(*Options)) (*StartSavingsPlansPurchaseRecommendationGenerationOutput, error) {
 	if params == nil {
 		params = &StartSavingsPlansPurchaseRecommendationGenerationInput{}

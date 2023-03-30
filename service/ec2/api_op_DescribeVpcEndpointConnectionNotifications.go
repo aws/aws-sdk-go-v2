@@ -36,26 +36,21 @@ type DescribeVpcEndpointConnectionNotificationsInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The filters.
-	// - connection-notification-arn - The ARN of the SNS topic for the
-	// notification.
-	// - connection-notification-id - The ID of the notification.
-	// -
-	// connection-notification-state - The state of the notification (Enabled |
-	// Disabled).
-	// - connection-notification-type - The type of notification (Topic).
-	// -
-	// service-id - The ID of the endpoint service.
-	// - vpc-endpoint-id - The ID of the
-	// VPC endpoint.
+	//     - connection-notification-arn - The ARN of the SNS topic for the notification.
+	//     - connection-notification-id - The ID of the notification.
+	//     - connection-notification-state - The state of the notification ( Enabled | Disabled ).
+	//     - connection-notification-type - The type of notification ( Topic ).
+	//     - service-id - The ID of the endpoint service.
+	//     - vpc-endpoint-id - The ID of the VPC endpoint.
 	Filters []types.Filter
 
 	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another request with the returned NextToken value.
+	// remaining results, make another request with the returned NextToken  value.
 	MaxResults *int32
 
 	// The token to request the next page of results.
@@ -139,8 +134,8 @@ func (c *Client) addOperationDescribeVpcEndpointConnectionNotificationsMiddlewar
 	return nil
 }
 
-// DescribeVpcEndpointConnectionNotificationsAPIClient is a client that implements
-// the DescribeVpcEndpointConnectionNotifications operation.
+// DescribeVpcEndpointConnectionNotificationsAPIClient is a client that
+// implements the DescribeVpcEndpointConnectionNotifications operation.
 type DescribeVpcEndpointConnectionNotificationsAPIClient interface {
 	DescribeVpcEndpointConnectionNotifications(context.Context, *DescribeVpcEndpointConnectionNotificationsInput, ...func(*Options)) (*DescribeVpcEndpointConnectionNotificationsOutput, error)
 }
@@ -151,11 +146,11 @@ var _ DescribeVpcEndpointConnectionNotificationsAPIClient = (*Client)(nil)
 // options for DescribeVpcEndpointConnectionNotifications
 type DescribeVpcEndpointConnectionNotificationsPaginatorOptions struct {
 	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another request with the returned NextToken value.
+	// remaining results, make another request with the returned NextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

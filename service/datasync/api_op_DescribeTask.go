@@ -42,15 +42,17 @@ type DescribeTaskInput struct {
 // DescribeTaskResponse
 type DescribeTaskOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was used
-	// to monitor and log events in the task. For more information on these groups, see
-	// Working with Log Groups and Log Streams in the Amazon CloudWatch User Guide.
+	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was
+	// used to monitor and log events in the task. For more information on these
+	// groups, see Working with Log Groups and Log Streams in the Amazon CloudWatch
+	// User Guide.
 	CloudWatchLogGroupArn *string
 
 	// The time that the task was created.
 	CreationTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the task execution that is transferring files.
+	// The Amazon Resource Name (ARN) of the task execution that is transferring
+	// files.
 	CurrentTaskExecutionArn *string
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services storage resource's
@@ -58,26 +60,26 @@ type DescribeTaskOutput struct {
 	DestinationLocationArn *string
 
 	// The Amazon Resource Names (ARNs) of the network interfaces created for your
-	// destination location. For more information, see Network interface requirements
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces).
+	// destination location. For more information, see Network interface requirements (https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces)
+	// .
 	DestinationNetworkInterfaceArns []string
 
-	// Errors that DataSync encountered during execution of the task. You can use this
-	// error code to help troubleshoot issues.
+	// Errors that DataSync encountered during execution of the task. You can use
+	// this error code to help troubleshoot issues.
 	ErrorCode *string
 
-	// Detailed description of an error that was encountered during the task execution.
-	// You can use this information to help troubleshoot issues.
+	// Detailed description of an error that was encountered during the task
+	// execution. You can use this information to help troubleshoot issues.
 	ErrorDetail *string
 
-	// A list of filter rules that exclude specific data during your transfer. For more
-	// information and examples, see Filtering data transferred by DataSync
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html).
+	// A list of filter rules that exclude specific data during your transfer. For
+	// more information and examples, see Filtering data transferred by DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)
+	// .
 	Excludes []types.FilterRule
 
-	// A list of filter rules that include specific data during your transfer. For more
-	// information and examples, see Filtering data transferred by DataSync
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html).
+	// A list of filter rules that include specific data during your transfer. For
+	// more information and examples, see Filtering data transferred by DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)
+	// .
 	Includes []types.FilterRule
 
 	// The name of the task that was described.
@@ -86,20 +88,20 @@ type DescribeTaskOutput struct {
 	// The configuration options that control the behavior of the StartTaskExecution
 	// operation. Some options include preserving file or object metadata and verifying
 	// data integrity. You can override these options for each task execution. For more
-	// information, see StartTaskExecution
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html).
+	// information, see StartTaskExecution (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html)
+	// .
 	Options *types.Options
 
-	// The schedule used to periodically transfer files from a source to a destination
-	// location.
+	// The schedule used to periodically transfer files from a source to a
+	// destination location.
 	Schedule *types.TaskSchedule
 
 	// The Amazon Resource Name (ARN) of the source file system's location.
 	SourceLocationArn *string
 
 	// The Amazon Resource Names (ARNs) of the network interfaces created for your
-	// source location. For more information, see Network interface requirements
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces).
+	// source location. For more information, see Network interface requirements (https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces)
+	// .
 	SourceNetworkInterfaceArns []string
 
 	// The status of the task that was described. For detailed information about task

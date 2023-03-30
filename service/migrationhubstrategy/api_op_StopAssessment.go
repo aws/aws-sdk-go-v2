@@ -28,7 +28,7 @@ func (c *Client) StopAssessment(ctx context.Context, params *StopAssessmentInput
 
 type StopAssessmentInput struct {
 
-	// The assessmentId returned by StartAssessment.
+	// The assessmentId  returned by StartAssessment .
 	//
 	// This member is required.
 	AssessmentId *string

@@ -77,8 +77,8 @@ type DescribeFlowOutput struct {
 	// Describes the details of the most recent flow run.
 	LastRunExecutionDetails *types.ExecutionDetails
 
-	// Describes the metadata catalog, metadata table, and data partitions that Amazon
-	// AppFlow used for the associated flow run.
+	// Describes the metadata catalog, metadata table, and data partitions that
+	// Amazon AppFlow used for the associated flow run.
 	LastRunMetadataCatalogDetails []types.MetadataCatalogDetail
 
 	// Specifies when the flow was last updated.
@@ -95,10 +95,9 @@ type DescribeFlowOutput struct {
 	// The version number of your data schema. Amazon AppFlow assigns this version
 	// number. The version number increases by one when you change any of the following
 	// settings in your flow configuration:
-	// - Source-to-destination field mappings
-	// -
-	// Field data types
-	// - Partition keys
+	//     - Source-to-destination field mappings
+	//     - Field data types
+	//     - Partition keys
 	SchemaVersion *int64
 
 	// The configuration that controls how Amazon AppFlow retrieves data from the
@@ -108,8 +107,8 @@ type DescribeFlowOutput struct {
 	// The tags used to organize, track, or control access for your flow.
 	Tags map[string]string
 
-	// A list of tasks that Amazon AppFlow performs while transferring the data in the
-	// flow run.
+	// A list of tasks that Amazon AppFlow performs while transferring the data in
+	// the flow run.
 	Tasks []types.Task
 
 	// The trigger settings that determine how and when the flow runs.

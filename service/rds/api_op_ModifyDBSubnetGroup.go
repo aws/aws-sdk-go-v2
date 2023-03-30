@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies an existing DB subnet group. DB subnet groups must contain at least one
-// subnet in at least two AZs in the Amazon Web Services Region.
+// Modifies an existing DB subnet group. DB subnet groups must contain at least
+// one subnet in at least two AZs in the Amazon Web Services Region.
 func (c *Client) ModifyDBSubnetGroup(ctx context.Context, params *ModifyDBSubnetGroupInput, optFns ...func(*Options)) (*ModifyDBSubnetGroupOutput, error) {
 	if params == nil {
 		params = &ModifyDBSubnetGroupInput{}
@@ -50,8 +50,8 @@ type ModifyDBSubnetGroupInput struct {
 
 type ModifyDBSubnetGroupOutput struct {
 
-	// Contains the details of an Amazon RDS DB subnet group. This data type is used as
-	// a response element in the DescribeDBSubnetGroups action.
+	// Contains the details of an Amazon RDS DB subnet group. This data type is used
+	// as a response element in the DescribeDBSubnetGroups  action.
 	DBSubnetGroup *types.DBSubnetGroup
 
 	// Metadata pertaining to the operation's result.

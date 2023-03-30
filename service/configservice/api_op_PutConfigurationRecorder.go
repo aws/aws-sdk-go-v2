@@ -12,11 +12,11 @@ import (
 )
 
 // Creates a new configuration recorder to record the selected resource
-// configurations. You can use this action to change the role roleARN or the
-// recordingGroup of an existing recorder. To change the role, call the action on
+// configurations. You can use this action to change the role roleARN  or the
+// recordingGroupof an existing recorder. To change the role, call the action on
 // the existing configuration recorder and specify a role. Currently, you can
 // specify only one configuration recorder per region in your account. If
-// ConfigurationRecorder does not have the recordingGroup parameter specified, the
+// ConfigurationRecorderdoes not have the recordingGroup parameter specified, the
 // default is to record all supported resource types.
 func (c *Client) PutConfigurationRecorder(ctx context.Context, params *PutConfigurationRecorderInput, optFns ...func(*Options)) (*PutConfigurationRecorderOutput, error) {
 	if params == nil {
@@ -33,11 +33,11 @@ func (c *Client) PutConfigurationRecorder(ctx context.Context, params *PutConfig
 	return out, nil
 }
 
-// The input for the PutConfigurationRecorder action.
+// The input for the PutConfigurationRecorder  action.
 type PutConfigurationRecorderInput struct {
 
-	// The configuration recorder object that records each configuration change made to
-	// the resources.
+	// The configuration recorder object that records each configuration change made
+	// to the resources.
 	//
 	// This member is required.
 	ConfigurationRecorder *types.ConfigurationRecorder

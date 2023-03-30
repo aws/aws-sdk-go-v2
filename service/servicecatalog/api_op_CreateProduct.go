@@ -14,9 +14,9 @@ import (
 
 // Creates a product. A delegated admin is authorized to invoke this command. The
 // user or role that performs this operation must have the
-// cloudformation:GetTemplate IAM policy permission. This policy permission is
-// required when using the ImportFromPhysicalId template source in the information
-// data section.
+// cloudformation:GetTemplateIAM policy permission. This policy permission is
+// required when using the ImportFromPhysicalId template source in the
+// information data section.
 func (c *Client) CreateProduct(ctx context.Context, params *CreateProductInput, optFns ...func(*Options)) (*CreateProductOutput, error) {
 	if params == nil {
 		params = &CreateProductInput{}
@@ -34,9 +34,9 @@ func (c *Client) CreateProduct(ctx context.Context, params *CreateProductInput, 
 
 type CreateProductInput struct {
 
-	// A unique identifier that you provide to ensure idempotency. If multiple requests
-	// differ only by the idempotency token, the same response is returned for each
-	// repeated request.
+	// A unique identifier that you provide to ensure idempotency. If multiple
+	// requests differ only by the idempotency token, the same response is returned for
+	// each repeated request.
 	//
 	// This member is required.
 	IdempotencyToken *string
@@ -57,9 +57,9 @@ type CreateProductInput struct {
 	ProductType types.ProductType
 
 	// The language code.
-	// - en - English (default)
-	// - jp - Japanese
-	// - zh - Chinese
+	//     - en - English (default)
+	//     - jp - Japanese
+	//     - zh - Chinese
 	AcceptLanguage *string
 
 	// The description of the product.
@@ -75,8 +75,8 @@ type CreateProductInput struct {
 	// the connection source artifact. This automatically manages the product's
 	// artifacts based on changes to the source. The SourceConnection parameter
 	// consists of the following sub-fields.
-	// - Type
-	// - ConnectionParamters
+	//     - Type
+	//     - ConnectionParamters
 	SourceConnection *types.SourceConnection
 
 	// The support information about the product.

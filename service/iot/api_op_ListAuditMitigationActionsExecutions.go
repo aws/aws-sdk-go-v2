@@ -13,8 +13,7 @@ import (
 )
 
 // Gets the status of audit mitigation action tasks that were executed. Requires
-// permission to access the ListAuditMitigationActionsExecutions
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// permission to access the ListAuditMitigationActionsExecutions (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListAuditMitigationActionsExecutions(ctx context.Context, params *ListAuditMitigationActionsExecutionsInput, optFns ...func(*Options)) (*ListAuditMitigationActionsExecutionsOutput, error) {
 	if params == nil {
@@ -39,8 +38,8 @@ type ListAuditMitigationActionsExecutionsInput struct {
 	// This member is required.
 	FindingId *string
 
-	// Specify this filter to limit results to actions for a specific audit mitigation
-	// actions task.
+	// Specify this filter to limit results to actions for a specific audit
+	// mitigation actions task.
 	//
 	// This member is required.
 	TaskId *string
@@ -149,8 +148,8 @@ type ListAuditMitigationActionsExecutionsPaginatorOptions struct {
 	// The maximum number of results to return at one time. The default is 25.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

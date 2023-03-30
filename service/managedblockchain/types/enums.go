@@ -29,9 +29,9 @@ const (
 	AccessorTypeBillingToken AccessorType = "BILLING_TOKEN"
 )
 
-// Values returns all known values for AccessorType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AccessorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AccessorType) Values() []AccessorType {
 	return []AccessorType{
 		"BILLING_TOKEN",
@@ -64,9 +64,9 @@ const (
 	FrameworkEthereum          Framework = "ETHEREUM"
 )
 
-// Values returns all known values for Framework. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Framework. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Framework) Values() []Framework {
 	return []Framework{
 		"HYPERLEDGER_FABRIC",
@@ -111,9 +111,9 @@ const (
 	MemberStatusInaccessibleEncryptionKey MemberStatus = "INACCESSIBLE_ENCRYPTION_KEY"
 )
 
-// Values returns all known values for MemberStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MemberStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (MemberStatus) Values() []MemberStatus {
 	return []MemberStatus{
 		"CREATING",
@@ -214,9 +214,9 @@ const (
 	StateDBTypeCouchDB StateDBType = "CouchDB"
 )
 
-// Values returns all known values for StateDBType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StateDBType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (StateDBType) Values() []StateDBType {
 	return []StateDBType{
 		"LevelDB",
@@ -250,9 +250,9 @@ const (
 	VoteValueNo  VoteValue = "NO"
 )
 
-// Values returns all known values for VoteValue. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for VoteValue. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (VoteValue) Values() []VoteValue {
 	return []VoteValue{
 		"YES",

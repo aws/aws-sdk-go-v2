@@ -32,32 +32,28 @@ type DescribeFastLaunchImagesInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// Use the following filters to streamline results.
-	// - resource-type - The resource
-	// type for pre-provisioning.
-	// - launch-template - The launch template that is
-	// associated with the pre-provisioned Windows AMI.
-	// - owner-id - The owner ID for
-	// the pre-provisioning resource.
-	// - state - The current state of fast launching for
-	// the Windows AMI.
+	//     - resource-type - The resource type for pre-provisioning.
+	//     - launch-template - The launch template that is associated with the pre-provisioned Windows AMI.
+	//     - owner-id - The owner ID for the pre-provisioning resource.
+	//     - state - The current state of fast launching for the Windows AMI.
 	Filters []types.Filter
 
 	// Details for one or more Windows AMI image IDs.
 	ImageIds []string
 
-	// The maximum number of items to return for this request. To get the next page of
-	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// The maximum number of items to return for this request. To get the next page
+	// of items, make another request with the token returned in the output. For more
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	MaxResults *int32
 
-	// The token returned from a previous paginated request. Pagination continues from
-	// the end of the items returned by the previous request.
+	// The token returned from a previous paginated request. Pagination continues
+	// from the end of the items returned by the previous request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -70,7 +66,7 @@ type DescribeFastLaunchImagesOutput struct {
 	FastLaunchImages []types.DescribeFastLaunchImagesSuccessItem
 
 	// The token to include in another request to get the next page of items. This
-	// value is null when there are no more items to return.
+	// value is null  when there are no more items to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -150,14 +146,14 @@ var _ DescribeFastLaunchImagesAPIClient = (*Client)(nil)
 // DescribeFastLaunchImagesPaginatorOptions is the paginator options for
 // DescribeFastLaunchImages
 type DescribeFastLaunchImagesPaginatorOptions struct {
-	// The maximum number of items to return for this request. To get the next page of
-	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// The maximum number of items to return for this request. To get the next page
+	// of items, make another request with the token returned in the output. For more
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

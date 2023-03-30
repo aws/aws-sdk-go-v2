@@ -7,18 +7,18 @@ import (
 	"time"
 )
 
-// The aggregation settings that you can use to customize the output format of your
-// flow data.
+// The aggregation settings that you can use to customize the output format of
+// your flow data.
 type AggregationConfig struct {
 
-	// Specifies whether Amazon AppFlow aggregates the flow records into a single file,
-	// or leave them unaggregated.
+	// Specifies whether Amazon AppFlow aggregates the flow records into a single
+	// file, or leave them unaggregated.
 	AggregationType AggregationType
 
-	// The desired file size, in MB, for each output file that Amazon AppFlow writes to
-	// the flow destination. For each file, Amazon AppFlow attempts to achieve the size
-	// that you specify. The actual file sizes might differ from this target based on
-	// the number and size of the records that each file contains.
+	// The desired file size, in MB, for each output file that Amazon AppFlow writes
+	// to the flow destination. For each file, Amazon AppFlow attempts to achieve the
+	// size that you specify. The actual file sizes might differ from this target based
+	// on the number and size of the records that each file contains.
 	TargetFileSize *int64
 
 	noSmithyDocumentSerde
@@ -163,8 +163,8 @@ type ConnectorConfiguration struct {
 	// The label used for registering the connector.
 	ConnectorLabel *string
 
-	// Specifies connector-specific metadata such as oAuthScopes, supportedRegions,
-	// privateLinkServiceUrl, and so on.
+	// Specifies connector-specific metadata such as oAuthScopes , supportedRegions ,
+	// privateLinkServiceUrl , and so on.
 	ConnectorMetadata *ConnectorMetadata
 
 	// The connection modes that the connector supports.
@@ -327,15 +327,15 @@ type ConnectorEntityField struct {
 	// as a source.
 	SourceProperties *SourceFieldProperties
 
-	// Contains details regarding the supported FieldType, including the corresponding
-	// filterOperators and supportedValues.
+	// Contains details regarding the supported FieldType, including the
+	// corresponding filterOperators  and supportedValues .
 	SupportedFieldTypeDetails *SupportedFieldTypeDetails
 
 	noSmithyDocumentSerde
 }
 
-// A structure to specify connector-specific metadata such as oAuthScopes,
-// supportedRegions, privateLinkServiceUrl, and so on.
+// A structure to specify connector-specific metadata such as oAuthScopes ,
+// supportedRegions , privateLinkServiceUrl , and so on.
 type ConnectorMetadata struct {
 
 	// The connector metadata specific to Amplitude.
@@ -483,7 +483,7 @@ type ConnectorOperator struct {
 // credentials ARN, connection-mode, and so on. To keep the API intuitive and
 // extensible, the fields that are common to all types of connector profiles are
 // explicitly specified at the top level. The rest of the connector-specific
-// properties are available via the connectorProfileProperties field.
+// properties are available via the connectorProfileProperties  field.
 type ConnectorProfile struct {
 
 	// Indicates the connection mode and if it is public or private.
@@ -672,8 +672,8 @@ type ConnectorProvisioningConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the connector runtime settings that are required for
-// flow execution.
+// Contains information about the connector runtime settings that are required
+// for flow execution.
 type ConnectorRuntimeSetting struct {
 
 	// Contains default values for the connector runtime setting that are supplied by
@@ -744,8 +744,8 @@ type CustomConnectorDestinationProperties struct {
 	// data in the custom connector as destination.
 	ErrorHandlingConfig *ErrorHandlingConfig
 
-	// The name of the field that Amazon AppFlow uses as an ID when performing a write
-	// operation such as update, delete, or upsert.
+	// The name of the field that Amazon AppFlow uses as an ID when performing a
+	// write operation such as update, delete, or upsert.
 	IdFieldNames []string
 
 	// Specifies the type of write operation to be performed in the custom connector
@@ -759,8 +759,8 @@ type CustomConnectorDestinationProperties struct {
 // custom connector.
 type CustomConnectorProfileCredentials struct {
 
-	// The authentication type that the custom connector uses for authenticating while
-	// creating a connector profile.
+	// The authentication type that the custom connector uses for authenticating
+	// while creating a connector profile.
 	//
 	// This member is required.
 	AuthenticationType AuthenticationType
@@ -809,8 +809,8 @@ type CustomConnectorSourceProperties struct {
 	noSmithyDocumentSerde
 }
 
-// The properties that are applied when Amazon Connect Customer Profiles is used as
-// a destination.
+// The properties that are applied when Amazon Connect Customer Profiles is used
+// as a destination.
 type CustomerProfilesDestinationProperties struct {
 
 	// The unique name of the Amazon Connect Customer Profiles domain.
@@ -921,25 +921,26 @@ type DestinationConnectorProperties struct {
 	noSmithyDocumentSerde
 }
 
-// The properties that can be applied to a field when connector is being used as a
-// destination.
+// The properties that can be applied to a field when connector is being used as
+// a destination.
 type DestinationFieldProperties struct {
 
 	// Specifies if the destination field can be created by the current user.
 	IsCreatable bool
 
-	// Specifies whether the field can use the default value during a Create operation.
+	// Specifies whether the field can use the default value during a Create
+	// operation.
 	IsDefaultedOnCreate bool
 
 	// Specifies if the destination field can have a null value.
 	IsNullable bool
 
-	// Specifies whether the field can be updated during an UPDATE or UPSERT write
+	// Specifies whether the field can be updated during an UPDATE  or UPSERT write
 	// operation.
 	IsUpdatable bool
 
-	// Specifies if the flow run can either insert new rows in the destination field if
-	// they do not already exist, or update them if they do.
+	// Specifies if the flow run can either insert new rows in the destination field
+	// if they do not already exist, or update them if they do.
 	IsUpsertable bool
 
 	// A list of supported write operations. For each write operation listed, this
@@ -1032,8 +1033,8 @@ type ErrorHandlingConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Provides details in the event of a failed flow, including the failure count and
-// the related error messages.
+// Provides details in the event of a failed flow, including the failure count
+// and the related error messages.
 type ErrorInfo struct {
 
 	// Specifies the error message that appears if a flow fails.
@@ -1088,12 +1089,12 @@ type ExecutionDetails struct {
 // Specifies information about the past flow run instances for a given flow.
 type ExecutionRecord struct {
 
-	// The timestamp that indicates the last new or updated record to be transferred in
-	// the flow run.
+	// The timestamp that indicates the last new or updated record to be transferred
+	// in the flow run.
 	DataPullEndTime *time.Time
 
-	// The timestamp that determines the first new or updated record to be transferred
-	// in the flow run.
+	// The timestamp that determines the first new or updated record to be
+	// transferred in the flow run.
 	DataPullStartTime *time.Time
 
 	// Specifies the identifier of the given flow run.
@@ -1109,8 +1110,8 @@ type ExecutionRecord struct {
 	// Specifies the time of the most recent update.
 	LastUpdatedAt *time.Time
 
-	// Describes the metadata catalog, metadata table, and data partitions that Amazon
-	// AppFlow used for the associated flow run.
+	// Describes the metadata catalog, metadata table, and data partitions that
+	// Amazon AppFlow used for the associated flow run.
 	MetadataCatalogDetails []MetadataCatalogDetail
 
 	// Specifies the start time of the flow run.
@@ -1219,15 +1220,16 @@ type FlowDefinition struct {
 	// The tags used to organize, track, or control access for your flow.
 	Tags map[string]string
 
-	// Specifies the type of flow trigger. This can be OnDemand, Scheduled, or Event.
+	// Specifies the type of flow trigger. This can be OnDemand , Scheduled , or Event
+	// .
 	TriggerType TriggerType
 
 	noSmithyDocumentSerde
 }
 
-// Specifies the configuration that Amazon AppFlow uses when it catalogs your data
-// with the Glue Data Catalog. When Amazon AppFlow catalogs your data, it stores
-// metadata in Data Catalog tables. This metadata represents the data that's
+// Specifies the configuration that Amazon AppFlow uses when it catalogs your
+// data with the Glue Data Catalog. When Amazon AppFlow catalogs your data, it
+// stores metadata in Data Catalog tables. This metadata represents the data that's
 // transferred by the flow that you configure with these settings. You can
 // configure a flow with these settings only when the flow destination is Amazon
 // S3.
@@ -1244,16 +1246,16 @@ type GlueDataCatalogConfig struct {
 
 	// The Amazon Resource Name (ARN) of an IAM role that grants Amazon AppFlow the
 	// permissions it needs to create Data Catalog tables, databases, and partitions.
-	// For an example IAM policy that has the required permissions, see Identity-based
-	// policy examples for Amazon AppFlow
-	// (https://docs.aws.amazon.com/appflow/latest/userguide/security_iam_id-based-policy-examples.html).
+	// For an example IAM policy that has the required permissions, see
+	// Identity-based policy examples for Amazon AppFlow (https://docs.aws.amazon.com/appflow/latest/userguide/security_iam_id-based-policy-examples.html)
+	// .
 	//
 	// This member is required.
 	RoleArn *string
 
-	// A naming prefix for each Data Catalog table that Amazon AppFlow creates for the
-	// flow that you configure with this setting. Amazon AppFlow adds the prefix to the
-	// beginning of the each table name.
+	// A naming prefix for each Data Catalog table that Amazon AppFlow creates for
+	// the flow that you configure with this setting. Amazon AppFlow adds the prefix to
+	// the beginning of the each table name.
 	//
 	// This member is required.
 	TablePrefix *string
@@ -1269,8 +1271,8 @@ type GoogleAnalyticsConnectorProfileCredentials struct {
 	// This member is required.
 	ClientId *string
 
-	// The client secret used by the OAuth client to authenticate to the authorization
-	// server.
+	// The client secret used by the OAuth client to authenticate to the
+	// authorization server.
 	//
 	// This member is required.
 	ClientSecret *string
@@ -1303,7 +1305,8 @@ type GoogleAnalyticsMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// The properties that are applied when Google Analytics is being used as a source.
+// The properties that are applied when Google Analytics is being used as a
+// source.
 type GoogleAnalyticsSourceProperties struct {
 
 	// The object specified in the Google Analytics flow source.
@@ -1452,8 +1455,8 @@ type MarketoConnectorProfileCredentials struct {
 	// This member is required.
 	ClientId *string
 
-	// The client secret used by the OAuth client to authenticate to the authorization
-	// server.
+	// The client secret used by the OAuth client to authenticate to the
+	// authorization server.
 	//
 	// This member is required.
 	ClientSecret *string
@@ -1514,19 +1517,20 @@ type MarketoSourceProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the configuration that Amazon AppFlow uses when it catalogs your data.
-// When Amazon AppFlow catalogs your data, it stores metadata in a data catalog.
+// Specifies the configuration that Amazon AppFlow uses when it catalogs your
+// data. When Amazon AppFlow catalogs your data, it stores metadata in a data
+// catalog.
 type MetadataCatalogConfig struct {
 
-	// Specifies the configuration that Amazon AppFlow uses when it catalogs your data
-	// with the Glue Data Catalog.
+	// Specifies the configuration that Amazon AppFlow uses when it catalogs your
+	// data with the Glue Data Catalog.
 	GlueDataCatalog *GlueDataCatalogConfig
 
 	noSmithyDocumentSerde
 }
 
-// Describes the metadata catalog, metadata table, and data partitions that Amazon
-// AppFlow used for the associated flow run.
+// Describes the metadata catalog, metadata table, and data partitions that
+// Amazon AppFlow used for the associated flow run.
 type MetadataCatalogDetail struct {
 
 	// The type of metadata catalog that Amazon AppFlow used for the associated flow
@@ -1542,14 +1546,14 @@ type MetadataCatalogDetail struct {
 	// configuration.
 	PartitionRegistrationOutput *RegistrationOutput
 
-	// The name of the table that stores the metadata for the associated flow run. The
-	// table stores metadata that represents the data that the flow transferred. Amazon
-	// AppFlow stores the table in the metadata catalog.
+	// The name of the table that stores the metadata for the associated flow run.
+	// The table stores metadata that represents the data that the flow transferred.
+	// Amazon AppFlow stores the table in the metadata catalog.
 	TableName *string
 
-	// Describes the status of the attempt from Amazon AppFlow to register the metadata
-	// table with the metadata catalog. Amazon AppFlow creates or updates this table
-	// for the associated flow run.
+	// Describes the status of the attempt from Amazon AppFlow to register the
+	// metadata table with the metadata catalog. Amazon AppFlow creates or updates this
+	// table for the associated flow run.
 	TableRegistrationOutput *RegistrationOutput
 
 	noSmithyDocumentSerde
@@ -1564,8 +1568,8 @@ type OAuth2Credentials struct {
 	// The identifier for the desired client.
 	ClientId *string
 
-	// The client secret used by the OAuth client to authenticate to the authorization
-	// server.
+	// The client secret used by the OAuth client to authenticate to the
+	// authorization server.
 	ClientSecret *string
 
 	// Used by select connectors for which the OAuth workflow is supported, such as
@@ -1588,7 +1592,8 @@ type OAuth2CustomParameter struct {
 	// A description about the custom parameter used for OAuth 2.0 authentication.
 	Description *string
 
-	// Indicates whether the custom parameter for OAuth 2.0 authentication is required.
+	// Indicates whether the custom parameter for OAuth 2.0 authentication is
+	// required.
 	IsRequired bool
 
 	// Indicates whether this authentication custom parameter is a sensitive field.
@@ -1656,8 +1661,8 @@ type OAuthCredentials struct {
 	// This member is required.
 	ClientId *string
 
-	// The client secret used by the OAuth client to authenticate to the authorization
-	// server.
+	// The client secret used by the OAuth client to authenticate to the
+	// authorization server.
 	//
 	// This member is required.
 	ClientSecret *string
@@ -1719,7 +1724,8 @@ type PardotConnectorProfileCredentials struct {
 	noSmithyDocumentSerde
 }
 
-// The connector-specific profile properties required when using Salesforce Pardot.
+// The connector-specific profile properties required when using Salesforce
+// Pardot.
 type PardotConnectorProfileProperties struct {
 
 	// The business unit id of Salesforce Pardot instance.
@@ -1752,8 +1758,8 @@ type PardotSourceProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies elements that Amazon AppFlow includes in the file and folder names in
-// the flow destination.
+// Specifies elements that Amazon AppFlow includes in the file and folder names
+// in the flow destination.
 type PrefixConfig struct {
 
 	// Specifies whether the destination file path includes either or both of the
@@ -1761,14 +1767,13 @@ type PrefixConfig struct {
 	// run. SCHEMA_VERSION The version number of your data schema. Amazon AppFlow
 	// assigns this version number. The version number increases by one when you change
 	// any of the following settings in your flow configuration:
-	// -
-	// Source-to-destination field mappings
-	// - Field data types
-	// - Partition keys
+	//     - Source-to-destination field mappings
+	//     - Field data types
+	//     - Partition keys
 	PathPrefixHierarchy []PathPrefix
 
-	// Determines the level of granularity for the date and time that's included in the
-	// prefix.
+	// Determines the level of granularity for the date and time that's included in
+	// the prefix.
 	PrefixFormat PrefixFormat
 
 	// Determines the format of the prefix, and whether it applies to the file name,
@@ -1825,11 +1830,11 @@ type RedshiftConnectorProfileProperties struct {
 	// This member is required.
 	BucketName *string
 
-	// The Amazon Resource Name (ARN) of IAM role that grants Amazon Redshift read-only
-	// access to Amazon S3. For more information, and for the polices that you attach
-	// to this role, see Allow Amazon Redshift to access your Amazon AppFlow data in
-	// Amazon S3
-	// (https://docs.aws.amazon.com/appflow/latest/userguide/security_iam_service-role-policies.html#redshift-access-s3).
+	// The Amazon Resource Name (ARN) of IAM role that grants Amazon Redshift
+	// read-only access to Amazon S3. For more information, and for the polices that
+	// you attach to this role, see Allow Amazon Redshift to access your Amazon
+	// AppFlow data in Amazon S3 (https://docs.aws.amazon.com/appflow/latest/userguide/security_iam_service-role-policies.html#redshift-access-s3)
+	// .
 	//
 	// This member is required.
 	RoleArn *string
@@ -1844,8 +1849,8 @@ type RedshiftConnectorProfileProperties struct {
 	// The Amazon Resource Name (ARN) of an IAM role that permits Amazon AppFlow to
 	// access your Amazon Redshift database through the Data API. For more information,
 	// and for the polices that you attach to this role, see Allow Amazon AppFlow to
-	// access Amazon Redshift databases with the Data API
-	// (https://docs.aws.amazon.com/appflow/latest/userguide/security_iam_service-role-policies.html#access-redshift).
+	// access Amazon Redshift databases with the Data API (https://docs.aws.amazon.com/appflow/latest/userguide/security_iam_service-role-policies.html#access-redshift)
+	// .
 	DataApiRoleArn *string
 
 	// The name of an Amazon Redshift database.
@@ -1938,8 +1943,8 @@ type S3DestinationProperties struct {
 	noSmithyDocumentSerde
 }
 
-// When you use Amazon S3 as the source, the configuration format that you provide
-// the flow input data.
+// When you use Amazon S3 as the source, the configuration format that you
+// provide the flow input data.
 type S3InputFormatConfig struct {
 
 	// The file type that Amazon AppFlow gets from your Amazon S3 bucket.
@@ -1957,8 +1962,8 @@ type S3Metadata struct {
 // output data when Amazon S3 is used as the destination.
 type S3OutputFormatConfig struct {
 
-	// The aggregation settings that you can use to customize the output format of your
-	// flow data.
+	// The aggregation settings that you can use to customize the output format of
+	// your flow data.
 	AggregationConfig *AggregationConfig
 
 	// Indicates the file type that Amazon AppFlow places in the Amazon S3 bucket.
@@ -1968,21 +1973,18 @@ type S3OutputFormatConfig struct {
 	// Amazon S3 bucket. You can name folders according to the flow frequency and date.
 	PrefixConfig *PrefixConfig
 
-	// If your file output format is Parquet, use this parameter to set whether Amazon
-	// AppFlow preserves the data types in your source data when it writes the output
-	// to Amazon S3.
-	// - true: Amazon AppFlow preserves the data types when it writes to
-	// Amazon S3. For example, an integer or 1 in your source data is still an integer
-	// in your output.
-	// - false: Amazon AppFlow converts all of the source data into
-	// strings when it writes to Amazon S3. For example, an integer of 1 in your source
-	// data becomes the string "1" in the output.
+	// If your file output format is Parquet, use this parameter to set whether
+	// Amazon AppFlow preserves the data types in your source data when it writes the
+	// output to Amazon S3.
+	//     - true : Amazon AppFlow preserves the data types when it writes to Amazon S3. For example, an integer or 1 in your source data is still an integer in your output.
+	//     - false : Amazon AppFlow converts all of the source data into strings when it writes to Amazon S3. For example, an integer of 1 in your source data becomes the string "1" in the output.
 	PreserveSourceDataTyping *bool
 
 	noSmithyDocumentSerde
 }
 
-// The properties that are applied when Amazon S3 is being used as the flow source.
+// The properties that are applied when Amazon S3 is being used as the flow
+// source.
 type S3SourceProperties struct {
 
 	// The Amazon S3 bucket name where the source files are stored.
@@ -1993,8 +1995,8 @@ type S3SourceProperties struct {
 	// The object key for the Amazon S3 bucket in which the source files are stored.
 	BucketPrefix *string
 
-	// When you use Amazon S3 as the source, the configuration format that you provide
-	// the flow input data.
+	// When you use Amazon S3 as the source, the configuration format that you
+	// provide the flow input data.
 	S3InputFormatConfig *S3InputFormatConfig
 
 	noSmithyDocumentSerde
@@ -2030,31 +2032,23 @@ type SalesforceConnectorProfileProperties struct {
 	// environment.
 	IsSandboxEnvironment bool
 
-	// If the connection mode for the connector profile is private, this parameter sets
-	// whether Amazon AppFlow uses the private network to send metadata and
+	// If the connection mode for the connector profile is private, this parameter
+	// sets whether Amazon AppFlow uses the private network to send metadata and
 	// authorization calls to Salesforce. Amazon AppFlow sends private calls through
 	// Amazon Web Services PrivateLink. These calls travel through Amazon Web Services
 	// infrastructure without being exposed to the public internet. Set either of the
 	// following values: true Amazon AppFlow sends all calls to Salesforce over the
 	// private network. These private calls are:
-	// - Calls to get metadata about your
-	// Salesforce records. This metadata describes your Salesforce objects and their
-	// fields.
-	// - Calls to get or refresh access tokens that allow Amazon AppFlow to
-	// access your Salesforce records.
-	// - Calls to transfer your Salesforce records as
-	// part of a flow run.
-	//
-	// false The default value. Amazon AppFlow sends some calls to
-	// Salesforce privately and other calls over the public internet. The public calls
-	// are:
-	// - Calls to get metadata about your Salesforce records.
-	// - Calls to get or
-	// refresh access tokens.
-	//
+	//     - Calls to get metadata about your Salesforce records. This metadata describes your Salesforce objects and their fields.
+	//     - Calls to get or refresh access tokens that allow Amazon AppFlow to access your Salesforce records.
+	//     - Calls to transfer your Salesforce records as part of a flow run.
+	// false
+	// The default value. Amazon AppFlow sends some calls to Salesforce privately and
+	// other calls over the public internet. The public calls are:
+	//     - Calls to get metadata about your Salesforce records.
+	//     - Calls to get or refresh access tokens.
 	// The private calls are:
-	// - Calls to transfer your
-	// Salesforce records as part of a flow run.
+	//     - Calls to transfer your Salesforce records as part of a flow run.
 	UsePrivateLinkForMetadataAndAuthorization bool
 
 	noSmithyDocumentSerde
@@ -2098,16 +2092,16 @@ type SalesforceDestinationProperties struct {
 	// The settings that determine how Amazon AppFlow handles an error when placing
 	// data in the Salesforce destination. For example, this setting would determine if
 	// the flow should fail after one insertion error, or continue and attempt to
-	// insert every record regardless of the initial failure. ErrorHandlingConfig is a
-	// part of the destination connector details.
+	// insert every record regardless of the initial failure. ErrorHandlingConfig is
+	// a part of the destination connector details.
 	ErrorHandlingConfig *ErrorHandlingConfig
 
-	// The name of the field that Amazon AppFlow uses as an ID when performing a write
-	// operation such as update or delete.
+	// The name of the field that Amazon AppFlow uses as an ID when performing a
+	// write operation such as update or delete.
 	IdFieldNames []string
 
 	// This specifies the type of write operation to be performed in Salesforce. When
-	// the value is UPSERT, then idFieldNames is required.
+	// the value is UPSERT , then idFieldNames  is required.
 	WriteOperationType WriteOperationType
 
 	noSmithyDocumentSerde
@@ -2237,14 +2231,14 @@ type SAPODataDestinationProperties struct {
 	// operation.
 	IdFieldNames []string
 
-	// Determines how Amazon AppFlow handles the success response that it gets from the
-	// connector after placing data. For example, this setting would determine where to
-	// write the response from a destination connector upon a successful insert
-	// operation.
+	// Determines how Amazon AppFlow handles the success response that it gets from
+	// the connector after placing data. For example, this setting would determine
+	// where to write the response from a destination connector upon a successful
+	// insert operation.
 	SuccessResponseHandlingConfig *SuccessResponseHandlingConfig
 
 	// The possible write operations in the destination connector. When this value is
-	// not provided, this defaults to the INSERT operation.
+	// not provided, this defaults to the INSERT  operation.
 	WriteOperationType WriteOperationType
 
 	noSmithyDocumentSerde
@@ -2265,11 +2259,11 @@ type SAPODataSourceProperties struct {
 }
 
 // Specifies the configuration details of a schedule-triggered flow as defined by
-// the user. Currently, these settings only apply to the Scheduled trigger type.
+// the user. Currently, these settings only apply to the Scheduled  trigger type.
 type ScheduledTriggerProperties struct {
 
 	// The scheduling expression that determines the rate at which the schedule will
-	// run, for example rate(5minutes).
+	// run, for example rate(5minutes) .
 	//
 	// This member is required.
 	ScheduleExpression *string
@@ -2286,8 +2280,9 @@ type ScheduledTriggerProperties struct {
 	// AppFlow deactivates it.
 	FlowErrorDeactivationThreshold *int32
 
-	// The time at which the scheduled flow ends. The time is formatted as a timestamp
-	// that follows the ISO 8601 standard, such as 2022-04-27T13:00:00-07:00.
+	// The time at which the scheduled flow ends. The time is formatted as a
+	// timestamp that follows the ISO 8601 standard, such as 2022-04-27T13:00:00-07:00
+	// .
 	ScheduleEndTime *time.Time
 
 	// Specifies the optional offset that is added to the time interval for a
@@ -2295,7 +2290,8 @@ type ScheduledTriggerProperties struct {
 	ScheduleOffset *int64
 
 	// The time at which the scheduled flow starts. The time is formatted as a
-	// timestamp that follows the ISO 8601 standard, such as 2022-04-26T13:00:00-07:00.
+	// timestamp that follows the ISO 8601 standard, such as 2022-04-26T13:00:00-07:00
+	// .
 	ScheduleStartTime *time.Time
 
 	// Specifies the time zone used when referring to the dates and times of a
@@ -2303,8 +2299,8 @@ type ScheduledTriggerProperties struct {
 	// label. It doesn't affect how Amazon AppFlow interprets the timestamps that you
 	// specify to schedule the flow. If you want to schedule a flow by using times in a
 	// particular time zone, indicate the time zone as a UTC offset in your timestamps.
-	// For example, the UTC offsets for the America/New_York timezone are -04:00 EDT
-	// and -05:00 EST.
+	// For example, the UTC offsets for the America/New_York  timezone are -04:00 EDT
+	// and -05:00 EST .
 	Timezone *string
 
 	noSmithyDocumentSerde
@@ -2394,8 +2390,8 @@ type SlackConnectorProfileCredentials struct {
 	// This member is required.
 	ClientId *string
 
-	// The client secret used by the OAuth client to authenticate to the authorization
-	// server.
+	// The client secret used by the OAuth client to authenticate to the
+	// authorization server.
 	//
 	// This member is required.
 	ClientSecret *string
@@ -2513,8 +2509,8 @@ type SnowflakeDestinationProperties struct {
 	// The settings that determine how Amazon AppFlow handles an error when placing
 	// data in the Snowflake destination. For example, this setting would determine if
 	// the flow should fail after one insertion error, or continue and attempt to
-	// insert every record regardless of the initial failure. ErrorHandlingConfig is a
-	// part of the destination connector details.
+	// insert every record regardless of the initial failure. ErrorHandlingConfig is
+	// a part of the destination connector details.
 	ErrorHandlingConfig *ErrorHandlingConfig
 
 	noSmithyDocumentSerde
@@ -2603,8 +2599,8 @@ type SourceFieldProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the configuration of the source connector used in the
-// flow.
+// Contains information about the configuration of the source connector used in
+// the flow.
 type SourceFlowConfig struct {
 
 	// The type of connector, such as Salesforce, Amplitude, and so on.
@@ -2633,10 +2629,10 @@ type SourceFlowConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Determines how Amazon AppFlow handles the success response that it gets from the
-// connector after placing data. For example, this setting would determine where to
-// write the response from the destination connector upon a successful insert
-// operation.
+// Determines how Amazon AppFlow handles the success response that it gets from
+// the connector after placing data. For example, this setting would determine
+// where to write the response from the destination connector upon a successful
+// insert operation.
 type SuccessResponseHandlingConfig struct {
 
 	// The name of the Amazon S3 bucket.
@@ -2648,8 +2644,8 @@ type SuccessResponseHandlingConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details regarding all the supported FieldTypes and their corresponding
-// filterOperators and supportedValues.
+// Contains details regarding all the supported FieldTypes and their
+// corresponding filterOperators  and supportedValues .
 type SupportedFieldTypeDetails struct {
 
 	// The initial supported version for fieldType. If this is later changed to a
@@ -2662,7 +2658,7 @@ type SupportedFieldTypeDetails struct {
 }
 
 // A class for modeling different type of tasks. Task implementation varies based
-// on the TaskType.
+// on the TaskType .
 type Task struct {
 
 	// The source fields to which a particular task is applied.
@@ -2683,7 +2679,7 @@ type Task struct {
 	DestinationField *string
 
 	// A map used to store task-related information. The execution service looks for
-	// particular information based on the TaskType.
+	// particular information based on the TaskType .
 	TaskProperties map[string]string
 
 	noSmithyDocumentSerde
@@ -2725,20 +2721,21 @@ type TrendmicroSourceProperties struct {
 // specified flow.
 type TriggerConfig struct {
 
-	// Specifies the type of flow trigger. This can be OnDemand, Scheduled, or Event.
+	// Specifies the type of flow trigger. This can be OnDemand , Scheduled , or Event
+	// .
 	//
 	// This member is required.
 	TriggerType TriggerType
 
 	// Specifies the configuration details of a schedule-triggered flow as defined by
-	// the user. Currently, these settings only apply to the Scheduled trigger type.
+	// the user. Currently, these settings only apply to the Scheduled  trigger type.
 	TriggerProperties *TriggerProperties
 
 	noSmithyDocumentSerde
 }
 
 // Specifies the configuration details that control the trigger for a flow.
-// Currently, these settings only apply to the Scheduled trigger type.
+// Currently, these settings only apply to the Scheduled  trigger type.
 type TriggerProperties struct {
 
 	// Specifies the configuration details of a schedule-triggered flow as defined by
@@ -2757,8 +2754,8 @@ type UpsolverDestinationProperties struct {
 	// This member is required.
 	BucketName *string
 
-	// The configuration that determines how data is formatted when Upsolver is used as
-	// the flow destination.
+	// The configuration that determines how data is formatted when Upsolver is used
+	// as the flow destination.
 	//
 	// This member is required.
 	S3OutputFormatConfig *UpsolverS3OutputFormatConfig
@@ -2779,14 +2776,14 @@ type UpsolverMetadata struct {
 // data when Upsolver is used as the destination.
 type UpsolverS3OutputFormatConfig struct {
 
-	// Specifies elements that Amazon AppFlow includes in the file and folder names in
-	// the flow destination.
+	// Specifies elements that Amazon AppFlow includes in the file and folder names
+	// in the flow destination.
 	//
 	// This member is required.
 	PrefixConfig *PrefixConfig
 
-	// The aggregation settings that you can use to customize the output format of your
-	// flow data.
+	// The aggregation settings that you can use to customize the output format of
+	// your flow data.
 	AggregationConfig *AggregationConfig
 
 	// Indicates the file type that Amazon AppFlow places in the Upsolver Amazon S3
@@ -2859,8 +2856,8 @@ type ZendeskConnectorProfileCredentials struct {
 	// This member is required.
 	ClientId *string
 
-	// The client secret used by the OAuth client to authenticate to the authorization
-	// server.
+	// The client secret used by the OAuth client to authenticate to the
+	// authorization server.
 	//
 	// This member is required.
 	ClientSecret *string
@@ -2906,7 +2903,7 @@ type ZendeskDestinationProperties struct {
 	IdFieldNames []string
 
 	// The possible write operations in the destination connector. When this value is
-	// not provided, this defaults to the INSERT operation.
+	// not provided, this defaults to the INSERT  operation.
 	WriteOperationType WriteOperationType
 
 	noSmithyDocumentSerde

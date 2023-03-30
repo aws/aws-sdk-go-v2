@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches metadata and the content of folders, documents, document versions, and
-// comments.
+// Searches metadata and the content of folders, documents, document versions,
+// and comments.
 func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInput, optFns ...func(*Options)) (*SearchResourcesOutput, error) {
 	if params == nil {
 		params = &SearchResourcesInput{}
@@ -31,8 +31,8 @@ func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInp
 
 type SearchResourcesInput struct {
 
-	// A list of attributes to include in the response. Used to request fields that are
-	// not normally returned in a standard response.
+	// A list of attributes to include in the response. Used to request fields that
+	// are not normally returned in a standard response.
 	AdditionalResponseFields []types.AdditionalResponseFieldType
 
 	// Amazon WorkDocs authentication token. Not required when using Amazon Web
@@ -55,13 +55,14 @@ type SearchResourcesInput struct {
 	// using Admin SigV4 credentials.
 	OrganizationId *string
 
-	// Filter based on the text field type. A Folder has only a name and no content. A
-	// Comment has only content and no name. A Document or Document Version has a name
-	// and content
+	// Filter based on the text field type. A Folder has only a name and no content.
+	// A Comment has only content and no name. A Document or Document Version has a
+	// name and content
 	QueryScopes []types.SearchQueryScopeType
 
-	// The String to search for. Searches across different text fields based on request
-	// parameters. Use double quotes around the query string for exact phrase matches.
+	// The String to search for. Searches across different text fields based on
+	// request parameters. Use double quotes around the query string for exact phrase
+	// matches.
 	QueryText *string
 
 	noSmithyDocumentSerde
@@ -158,8 +159,8 @@ type SearchResourcesPaginatorOptions struct {
 	// Max results count per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

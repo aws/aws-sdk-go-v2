@@ -13,8 +13,8 @@ import (
 
 // Lists all metadata tags attached to an DMS resource, including replication
 // instance, endpoint, subnet group, and migration task. For more information, see
-// Tag (https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html) data type
-// description.
+// Tag (https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html)data
+// type description.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -32,9 +32,9 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) string that uniquely identifies the DMS resource
-	// to list tags for. This returns a list of keys (names of tags) created for the
-	// resource and their associated tag values.
+	// The Amazon Resource Name (ARN) string that uniquely identifies the DMS
+	// resource to list tags for. This returns a list of keys (names of tags) created
+	// for the resource and their associated tag values.
 	ResourceArn *string
 
 	// List of ARNs that identify multiple DMS resources that you want to list tags

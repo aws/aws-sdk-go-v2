@@ -539,7 +539,8 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// No user with the specified credentials was found in the Amazon Connect instance.
+// No user with the specified credentials was found in the Amazon Connect
+// instance.
 type UserNotFoundException struct {
 	Message *string
 

@@ -46,12 +46,12 @@ type StartChangeRequestExecutionInput struct {
 
 	// Indicates whether the change request can be approved automatically without the
 	// need for manual approvals. If AutoApprovable is enabled in a change template,
-	// then setting AutoApprove to true in StartChangeRequestExecution creates a change
-	// request that bypasses approver review. Change Calendar restrictions are not
-	// bypassed in this scenario. If the state of an associated calendar is CLOSED,
-	// change freeze approvers must still grant permission for this change request to
+	// then setting AutoApprove  to true  in StartChangeRequestExecution creates a
+	// change request that bypasses approver review. Change Calendar restrictions are
+	// not bypassed in this scenario. If the state of an associated calendar is CLOSED
+	// , change freeze approvers must still grant permission for this change request to
 	// run. If they don't, the change won't be processed until the calendar state is
-	// again OPEN.
+	// again OPEN .
 	AutoApprove bool
 
 	// User-provided details about the change. If no details are provided, content
@@ -89,8 +89,8 @@ type StartChangeRequestExecutionInput struct {
 	// might want to tag a change request to identify an environment or target Amazon
 	// Web Services Region. In this case, you could specify the following key-value
 	// pairs:
-	// - Key=Environment,Value=Production
-	// - Key=Region,Value=us-east-2
+	//     - Key=Environment,Value=Production
+	//     - Key=Region,Value=us-east-2
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -98,8 +98,8 @@ type StartChangeRequestExecutionInput struct {
 
 type StartChangeRequestExecutionOutput struct {
 
-	// The unique ID of a runbook workflow operation. (A runbook workflow is a type of
-	// Automation operation.)
+	// The unique ID of a runbook workflow operation. (A runbook workflow is a type
+	// of Automation operation.)
 	AutomationExecutionId *string
 
 	// Metadata pertaining to the operation's result.

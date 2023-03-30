@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the password for the guest user smbguest. The smbguest user is the user
+// Sets the password for the guest user smbguest . The smbguest user is the user
 // when the authentication method for the file share is set to GuestAccess. This
 // operation only supported for S3 File Gateways
 func (c *Client) SetSMBGuestPassword(ctx context.Context, params *SetSMBGuestPasswordInput, optFns ...func(*Options)) (*SetSMBGuestPasswordOutput, error) {
@@ -47,8 +47,8 @@ type SetSMBGuestPasswordInput struct {
 
 type SetSMBGuestPasswordOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

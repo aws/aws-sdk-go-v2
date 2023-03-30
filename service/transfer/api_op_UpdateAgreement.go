@@ -37,8 +37,8 @@ type UpdateAgreementInput struct {
 	// This member is required.
 	AgreementId *string
 
-	// A system-assigned unique identifier for a server instance. This is the specific
-	// server that the agreement uses.
+	// A system-assigned unique identifier for a server instance. This is the
+	// specific server that the agreement uses.
 	//
 	// This member is required.
 	ServerId *string
@@ -52,11 +52,11 @@ type UpdateAgreementInput struct {
 	// provide read and write access to the parent directory of the file location used
 	// in the StartFileTransfer request. Additionally, you need to provide read and
 	// write access to the parent directory of the files that you intend to send with
-	// StartFileTransfer.
+	// StartFileTransfer .
 	AccessRole *string
 
-	// To change the landing directory (folder) for files that are transferred, provide
-	// the bucket folder that you want to use; for example,
+	// To change the landing directory (folder) for files that are transferred,
+	// provide the bucket folder that you want to use; for example,
 	// /DOC-EXAMPLE-BUCKET/home/mydirectory .
 	BaseDirectory *string
 

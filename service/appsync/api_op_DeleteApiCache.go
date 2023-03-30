@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an ApiCache object.
+// Deletes an ApiCache  object.
 func (c *Client) DeleteApiCache(ctx context.Context, params *DeleteApiCacheInput, optFns ...func(*Options)) (*DeleteApiCacheOutput, error) {
 	if params == nil {
 		params = &DeleteApiCacheInput{}
@@ -26,7 +26,7 @@ func (c *Client) DeleteApiCache(ctx context.Context, params *DeleteApiCacheInput
 	return out, nil
 }
 
-// Represents the input of a DeleteApiCache operation.
+// Represents the input of a DeleteApiCache  operation.
 type DeleteApiCacheInput struct {
 
 	// The API ID.
@@ -37,7 +37,7 @@ type DeleteApiCacheInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a DeleteApiCache operation.
+// Represents the output of a DeleteApiCache  operation.
 type DeleteApiCacheOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

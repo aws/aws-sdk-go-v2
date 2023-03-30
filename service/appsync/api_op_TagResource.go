@@ -28,12 +28,12 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The GraphqlApi Amazon Resource Name (ARN).
+	// The GraphqlApi  Amazon Resource Name (ARN).
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// A TagMap object.
+	// A TagMap  object.
 	//
 	// This member is required.
 	Tags map[string]string

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified policy from the specified load balancer. This policy must
-// not be enabled for any listeners.
+// Deletes the specified policy from the specified load balancer. This policy
+// must not be enabled for any listeners.
 func (c *Client) DeleteLoadBalancerPolicy(ctx context.Context, params *DeleteLoadBalancerPolicyInput, optFns ...func(*Options)) (*DeleteLoadBalancerPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteLoadBalancerPolicyInput{}

@@ -20,17 +20,12 @@ import (
 // add an account in the resource policy, you then run the following Resource
 // Access Manager (RAM) operations to access and accept the shared rule group or
 // firewall policy.
-// - GetResourceShareInvitations
-// (https://docs.aws.amazon.com/ram/latest/APIReference/API_GetResourceShareInvitations.html)
-// - Returns the Amazon Resource Names (ARNs) of the resource share invitations.
-// -
-// AcceptResourceShareInvitation
-// (https://docs.aws.amazon.com/ram/latest/APIReference/API_AcceptResourceShareInvitation.html)
-// - Accepts the share invitation for a specified resource share.
+//   - GetResourceShareInvitations (https://docs.aws.amazon.com/ram/latest/APIReference/API_GetResourceShareInvitations.html) - Returns the Amazon Resource Names (ARNs) of the resource share invitations.
+//   - AcceptResourceShareInvitation (https://docs.aws.amazon.com/ram/latest/APIReference/API_AcceptResourceShareInvitation.html) - Accepts the share invitation for a specified resource share.
 //
-// For additional
-// information about resource sharing using RAM, see Resource Access Manager User
-// Guide (https://docs.aws.amazon.com/ram/latest/userguide/what-is.html).
+// For additional information about resource sharing using RAM, see Resource
+// Access Manager User Guide (https://docs.aws.amazon.com/ram/latest/userguide/what-is.html)
+// .
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
 		params = &PutResourcePolicyInput{}
@@ -52,31 +47,24 @@ type PutResourcePolicyInput struct {
 	// rule group or firewall policy with and the operations that you want the accounts
 	// to be able to perform. For a rule group resource, you can specify the following
 	// operations in the Actions section of the statement:
-	// -
-	// network-firewall:CreateFirewallPolicy
-	// - network-firewall:UpdateFirewallPolicy
-	// -
-	// network-firewall:ListRuleGroups
-	//
-	// For a firewall policy resource, you can specify
-	// the following operations in the Actions section of the statement:
-	// -
-	// network-firewall:CreateFirewall
-	// - network-firewall:UpdateFirewall
-	// -
-	// network-firewall:AssociateFirewallPolicy
-	// -
-	// network-firewall:ListFirewallPolicies
-	//
-	// In the Resource section of the statement,
-	// you specify the ARNs for the rule groups and firewall policies that you want to
-	// share with the account that you specified in Arn.
+	//     - network-firewall:CreateFirewallPolicy
+	//     - network-firewall:UpdateFirewallPolicy
+	//     - network-firewall:ListRuleGroups
+	// For a firewall policy resource, you can
+	// specify the following operations in the Actions section of the statement:
+	//     - network-firewall:CreateFirewall
+	//     - network-firewall:UpdateFirewall
+	//     - network-firewall:AssociateFirewallPolicy
+	//     - network-firewall:ListFirewallPolicies
+	// In the Resource section of the
+	// statement, you specify the ARNs for the rule groups and firewall policies that
+	// you want to share with the account that you specified in Arn .
 	//
 	// This member is required.
 	Policy *string
 
-	// The Amazon Resource Name (ARN) of the account that you want to share rule groups
-	// and firewall policies with.
+	// The Amazon Resource Name (ARN) of the account that you want to share rule
+	// groups and firewall policies with.
 	//
 	// This member is required.
 	ResourceArn *string

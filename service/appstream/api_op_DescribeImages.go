@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list that describes one or more specified images, if the image names
-// or image ARNs are provided. Otherwise, all images in the account are described.
+// Retrieves a list that describes one or more specified images, if the image
+// names or image ARNs are provided. Otherwise, all images in the account are
+// described.
 func (c *Client) DescribeImages(ctx context.Context, params *DescribeImagesInput, optFns ...func(*Options)) (*DescribeImagesOutput, error) {
 	if params == nil {
 		params = &DescribeImagesInput{}
@@ -138,8 +139,8 @@ type DescribeImagesPaginatorOptions struct {
 	// The maximum size of each page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

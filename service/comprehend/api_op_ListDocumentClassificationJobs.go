@@ -30,9 +30,9 @@ func (c *Client) ListDocumentClassificationJobs(ctx context.Context, params *Lis
 
 type ListDocumentClassificationJobsInput struct {
 
-	// Filters the jobs that are returned. You can filter jobs on their names, status,
-	// or the date and time that they were submitted. You can only set one filter at a
-	// time.
+	// Filters the jobs that are returned. You can filter jobs on their names,
+	// status, or the date and time that they were submitted. You can only set one
+	// filter at a time.
 	Filter *types.DocumentClassificationJobFilter
 
 	// The maximum number of results to return in each page. The default is 100.
@@ -132,8 +132,8 @@ type ListDocumentClassificationJobsPaginatorOptions struct {
 	// The maximum number of results to return in each page. The default is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

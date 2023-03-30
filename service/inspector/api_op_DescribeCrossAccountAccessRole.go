@@ -11,7 +11,8 @@ import (
 	"time"
 )
 
-// Describes the IAM role that enables Amazon Inspector to access your AWS account.
+// Describes the IAM role that enables Amazon Inspector to access your AWS
+// account.
 func (c *Client) DescribeCrossAccountAccessRole(ctx context.Context, params *DescribeCrossAccountAccessRoleInput, optFns ...func(*Options)) (*DescribeCrossAccountAccessRoleOutput, error) {
 	if params == nil {
 		params = &DescribeCrossAccountAccessRoleInput{}

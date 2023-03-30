@@ -12,8 +12,8 @@ import (
 	"io"
 )
 
-// Upload object that can store object metadata String and data blob in single API
-// call using inline chunk field.
+// Upload object that can store object metadata String and data blob in single
+// API call using inline chunk field.
 func (c *Client) PutObject(ctx context.Context, params *PutObjectInput, optFns ...func(*Options)) (*PutObjectOutput, error) {
 	if params == nil {
 		params = &PutObjectInput{}

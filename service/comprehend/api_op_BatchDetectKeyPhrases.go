@@ -48,8 +48,8 @@ type BatchDetectKeyPhrasesInput struct {
 type BatchDetectKeyPhrasesOutput struct {
 
 	// A list containing one object for each document that contained an error. The
-	// results are sorted in ascending order by the Index field and match the order of
-	// the documents in the input list. If there are no errors in the batch, the
+	// results are sorted in ascending order by the Index field and match the order
+	// of the documents in the input list. If there are no errors in the batch, the
 	// ErrorList is empty.
 	//
 	// This member is required.

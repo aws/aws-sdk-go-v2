@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches an existing object to another object. An object can be accessed in two
-// ways:
-// - Using the path
-// - Using ObjectIdentifier
+// Attaches an existing object to another object. An object can be accessed in
+// two ways:
+//   - Using the path
+//   - Using ObjectIdentifier
 func (c *Client) AttachObject(ctx context.Context, params *AttachObjectInput, optFns ...func(*Options)) (*AttachObjectOutput, error) {
 	if params == nil {
 		params = &AttachObjectInput{}
@@ -38,7 +38,7 @@ type AttachObjectInput struct {
 	ChildReference *types.ObjectReference
 
 	// Amazon Resource Name (ARN) that is associated with the Directory where both
-	// objects reside. For more information, see arns.
+	// objects reside. For more information, see arns .
 	//
 	// This member is required.
 	DirectoryArn *string
@@ -58,7 +58,7 @@ type AttachObjectInput struct {
 
 type AttachObjectOutput struct {
 
-	// The attached ObjectIdentifier, which is the child ObjectIdentifier.
+	// The attached ObjectIdentifier , which is the child ObjectIdentifier .
 	AttachedObjectIdentifier *string
 
 	// Metadata pertaining to the operation's result.

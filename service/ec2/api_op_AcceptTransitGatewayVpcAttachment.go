@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Accepts a request to attach a VPC to a transit gateway. The VPC attachment must
-// be in the pendingAcceptance state. Use DescribeTransitGatewayVpcAttachments to
-// view your pending VPC attachment requests. Use RejectTransitGatewayVpcAttachment
-// to reject a VPC attachment request.
+// Accepts a request to attach a VPC to a transit gateway. The VPC attachment
+// must be in the pendingAcceptance  state. Use
+// DescribeTransitGatewayVpcAttachmentsto view your pending VPC attachment
+// requests. Use RejectTransitGatewayVpcAttachment to reject a VPC attachment
+// request.
 func (c *Client) AcceptTransitGatewayVpcAttachment(ctx context.Context, params *AcceptTransitGatewayVpcAttachmentInput, optFns ...func(*Options)) (*AcceptTransitGatewayVpcAttachmentOutput, error) {
 	if params == nil {
 		params = &AcceptTransitGatewayVpcAttachmentInput{}
@@ -39,8 +40,8 @@ type AcceptTransitGatewayVpcAttachmentInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

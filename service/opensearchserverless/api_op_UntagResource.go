@@ -11,8 +11,8 @@ import (
 )
 
 // Removes a tag or set of tags from an OpenSearch Serverless resource. For more
-// information, see Tagging Amazon OpenSearch Serverless collections
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html).
+// information, see Tagging Amazon OpenSearch Serverless collections (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html)
+// .
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -30,15 +30,15 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource to remove tags from. The resource
-	// must be active (not in the DELETING state), and must be owned by the account ID
-	// included in the request.
+	// The Amazon Resource Name (ARN) of the resource to remove tags from. The
+	// resource must be active (not in the DELETING state), and must be owned by the
+	// account ID included in the request.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// The tag or set of tags to remove from the resource. All tag keys in the request
-	// must be unique.
+	// The tag or set of tags to remove from the resource. All tag keys in the
+	// request must be unique.
 	//
 	// This member is required.
 	TagKeys []string

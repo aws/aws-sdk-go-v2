@@ -51,8 +51,8 @@ func (c *Client) GetIdentityVerificationAttributes(ctx context.Context, params *
 // Represents a request to return the Amazon SES verification status of a list of
 // identities. For domain identities, this request also returns the verification
 // token. For information about verifying identities with Amazon SES, see the
-// Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html).
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
+// .
 type GetIdentityVerificationAttributesInput struct {
 
 	// A list of identities.
@@ -162,9 +162,9 @@ type IdentityExistsWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, IdentityExistsWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, IdentityExistsWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -204,9 +204,9 @@ func NewIdentityExistsWaiter(client GetIdentityVerificationAttributesAPIClient, 
 	}
 }
 
-// Wait calls the waiter function for IdentityExists waiter. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// Wait calls the waiter function for IdentityExists waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *IdentityExistsWaiter) Wait(ctx context.Context, params *GetIdentityVerificationAttributesInput, maxWaitDur time.Duration, optFns ...func(*IdentityExistsWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

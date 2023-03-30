@@ -31,8 +31,8 @@ func (c *Client) ListCopyJobs(ctx context.Context, params *ListCopyJobsInput, op
 
 type ListCopyJobsInput struct {
 
-	// The account ID to list the jobs from. Returns only copy jobs associated with the
-	// specified account ID.
+	// The account ID to list the jobs from. Returns only copy jobs associated with
+	// the specified account ID.
 	ByAccountId *string
 
 	// Returns only copy jobs completed after a date expressed in Unix format and
@@ -49,9 +49,9 @@ type ListCopyJobsInput struct {
 	// Returns only copy jobs that were created before the specified date.
 	ByCreatedBefore *time.Time
 
-	// An Amazon Resource Name (ARN) that uniquely identifies a source backup vault to
-	// copy from; for example,
-	// arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+	// An Amazon Resource Name (ARN) that uniquely identifies a source backup vault
+	// to copy from; for example,
+	// arn:aws:backup:us-east-1:123456789012:vault:aBackupVault .
 	ByDestinationVaultArn *string
 
 	// This is a filter to list child (nested) jobs based on parent job ID.
@@ -62,24 +62,18 @@ type ListCopyJobsInput struct {
 	ByResourceArn *string
 
 	// Returns only backup jobs for the specified resources:
-	// - Aurora for Amazon
-	// Aurora
-	// - DocumentDB for Amazon DocumentDB (with MongoDB compatibility)
-	// -
-	// DynamoDB for Amazon DynamoDB
-	// - EBS for Amazon Elastic Block Store
-	// - EC2 for
-	// Amazon Elastic Compute Cloud
-	// - EFS for Amazon Elastic File System
-	// - FSx for
-	// Amazon FSx
-	// - Neptune for Amazon Neptune
-	// - RDS for Amazon Relational Database
-	// Service
-	// - Storage Gateway for Storage Gateway
-	// - S3 for Amazon S3
-	// -
-	// VirtualMachine for virtual machines
+	//     - Aurora for Amazon Aurora
+	//     - DocumentDB for Amazon DocumentDB (with MongoDB compatibility)
+	//     - DynamoDB for Amazon DynamoDB
+	//     - EBS for Amazon Elastic Block Store
+	//     - EC2 for Amazon Elastic Compute Cloud
+	//     - EFS for Amazon Elastic File System
+	//     - FSx for Amazon FSx
+	//     - Neptune for Amazon Neptune
+	//     - RDS for Amazon Relational Database Service
+	//     - Storage Gateway for Storage Gateway
+	//     - S3 for Amazon S3
+	//     - VirtualMachine for virtual machines
 	ByResourceType *string
 
 	// Returns only copy jobs that are in the specified state.
@@ -99,8 +93,8 @@ type ListCopyJobsInput struct {
 
 type ListCopyJobsOutput struct {
 
-	// An array of structures containing metadata about your copy jobs returned in JSON
-	// format.
+	// An array of structures containing metadata about your copy jobs returned in
+	// JSON format.
 	CopyJobs []types.CopyJob
 
 	// The next item following a partial list of returned items. For example, if a
@@ -187,8 +181,8 @@ type ListCopyJobsPaginatorOptions struct {
 	// The maximum number of items to be returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

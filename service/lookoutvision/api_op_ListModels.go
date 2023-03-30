@@ -13,9 +13,9 @@ import (
 )
 
 // Lists the versions of a model in an Amazon Lookout for Vision project. The
-// ListModels operation is eventually consistent. Recent calls to CreateModel might
-// take a while to appear in the response from ListProjects. This operation
-// requires permissions to perform the lookoutvision:ListModels operation.
+// ListModels operation is eventually consistent. Recent calls to CreateModel
+// might take a while to appear in the response from ListProjects. This operation
+// requires permissions to perform the lookoutvision:ListModels  operation.
 func (c *Client) ListModels(ctx context.Context, params *ListModelsInput, optFns ...func(*Options)) (*ListModelsOutput, error) {
 	if params == nil {
 		params = &ListModelsInput{}
@@ -56,8 +56,8 @@ type ListModelsOutput struct {
 	// A list of model versions in the specified project.
 	Models []types.ModelMetadata
 
-	// If the response is truncated, Amazon Lookout for Vision returns this token that
-	// you can use in the subsequent request to retrieve the next set of models.
+	// If the response is truncated, Amazon Lookout for Vision returns this token
+	// that you can use in the subsequent request to retrieve the next set of models.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -143,8 +143,8 @@ type ListModelsPaginatorOptions struct {
 	// ValidationException error occurs. The default value is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

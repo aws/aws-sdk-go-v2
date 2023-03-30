@@ -13,8 +13,7 @@ import (
 
 // List the global endpoints associated with this account. For more information
 // about global endpoints, see Making applications Regional-fault tolerant with
-// global endpoints and event replication
-// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html)
+// global endpoints and event replication (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html)
 // in the Amazon EventBridge User Guide..
 func (c *Client) ListEndpoints(ctx context.Context, params *ListEndpointsInput, optFns ...func(*Options)) (*ListEndpointsOutput, error) {
 	if params == nil {
@@ -34,19 +33,19 @@ func (c *Client) ListEndpoints(ctx context.Context, params *ListEndpointsInput, 
 type ListEndpointsInput struct {
 
 	// The primary Region of the endpoints associated with this account. For example
-	// "HomeRegion": "us-east-1".
+	// "HomeRegion": "us-east-1" .
 	HomeRegion *string
 
 	// The maximum number of results returned by the call.
 	MaxResults *int32
 
-	// A value that will return a subset of the endpoints associated with this account.
-	// For example, "NamePrefix": "ABC" will return all endpoints with "ABC" in the
-	// name.
+	// A value that will return a subset of the endpoints associated with this
+	// account. For example, "NamePrefix": "ABC" will return all endpoints with "ABC"
+	// in the name.
 	NamePrefix *string
 
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// If nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 24 hours. Using an expired
 	// pagination token will return an HTTP 400 InvalidToken error.
@@ -60,8 +59,8 @@ type ListEndpointsOutput struct {
 	// The endpoints returned by the call.
 	Endpoints []types.Endpoint
 
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// If nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 24 hours. Using an expired
 	// pagination token will return an HTTP 400 InvalidToken error.

@@ -60,8 +60,8 @@ type DescribeMailboxExportJobOutput struct {
 	// The estimated progress of the mailbox export job, in percentage points.
 	EstimatedProgress int32
 
-	// The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service (AWS
-	// KMS) key that encrypts the exported mailbox content.
+	// The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service
+	// (AWS KMS) key that encrypts the exported mailbox content.
 	KmsKeyArn *string
 
 	// The ARN of the AWS Identity and Access Management (IAM) role that grants write

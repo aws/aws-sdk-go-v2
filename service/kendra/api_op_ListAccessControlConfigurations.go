@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists one or more access control configurations for an index. This includes user
-// and group access information for your documents. This is useful for user context
-// filtering, where search results are filtered based on the user or their group
-// access to documents.
+// Lists one or more access control configurations for an index. This includes
+// user and group access information for your documents. This is useful for user
+// context filtering, where search results are filtered based on the user or their
+// group access to documents.
 func (c *Client) ListAccessControlConfigurations(ctx context.Context, params *ListAccessControlConfigurationsInput, optFns ...func(*Options)) (*ListAccessControlConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListAccessControlConfigurationsInput{}
@@ -41,9 +41,9 @@ type ListAccessControlConfigurationsInput struct {
 	// The maximum number of access control configurations to return.
 	MaxResults *int32
 
-	// If the previous response was incomplete (because there's more data to retrieve),
-	// Amazon Kendra returns a pagination token in the response. You can use this
-	// pagination token to retrieve the next set of access control configurations.
+	// If the previous response was incomplete (because there's more data to
+	// retrieve), Amazon Kendra returns a pagination token in the response. You can use
+	// this pagination token to retrieve the next set of access control configurations.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -144,8 +144,8 @@ type ListAccessControlConfigurationsPaginatorOptions struct {
 	// The maximum number of access control configurations to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -12,8 +12,7 @@ import (
 )
 
 // Lists tags for up to 10 health checks or hosted zones. For information about
-// using tags for cost allocation, see Using Cost Allocation Tags
-// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+// using tags for cost allocation, see Using Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
 // in the Billing and Cost Management User Guide.
 func (c *Client) ListTagsForResources(ctx context.Context, params *ListTagsForResourcesInput, optFns ...func(*Options)) (*ListTagsForResourcesOutput, error) {
 	if params == nil {
@@ -30,20 +29,19 @@ func (c *Client) ListTagsForResources(ctx context.Context, params *ListTagsForRe
 	return out, nil
 }
 
-// A complex type that contains information about the health checks or hosted zones
-// for which you want to list tags.
+// A complex type that contains information about the health checks or hosted
+// zones for which you want to list tags.
 type ListTagsForResourcesInput struct {
 
-	// A complex type that contains the ResourceId element for each resource for which
-	// you want to get a list of tags.
+	// A complex type that contains the ResourceId element for each resource for
+	// which you want to get a list of tags.
 	//
 	// This member is required.
 	ResourceIds []string
 
 	// The type of the resources.
-	// - The resource type for health checks is
-	// healthcheck.
-	// - The resource type for hosted zones is hostedzone.
+	//     - The resource type for health checks is healthcheck .
+	//     - The resource type for hosted zones is hostedzone .
 	//
 	// This member is required.
 	ResourceType types.TagResourceType

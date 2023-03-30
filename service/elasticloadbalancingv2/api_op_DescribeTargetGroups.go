@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified target groups or all of your target groups. By default,
-// all target groups are described. Alternatively, you can specify one of the
-// following to filter the results: the ARN of the load balancer, the names of one
-// or more target groups, or the ARNs of one or more target groups.
+// Describes the specified target groups or all of your target groups. By
+// default, all target groups are described. Alternatively, you can specify one of
+// the following to filter the results: the ARN of the load balancer, the names of
+// one or more target groups, or the ARNs of one or more target groups.
 func (c *Client) DescribeTargetGroups(ctx context.Context, params *DescribeTargetGroupsInput, optFns ...func(*Options)) (*DescribeTargetGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeTargetGroupsInput{}
@@ -54,8 +54,8 @@ type DescribeTargetGroupsInput struct {
 
 type DescribeTargetGroupsOutput struct {
 
-	// If there are additional results, this is the marker for the next set of results.
-	// Otherwise, this is null.
+	// If there are additional results, this is the marker for the next set of
+	// results. Otherwise, this is null.
 	NextMarker *string
 
 	// Information about the target groups.
@@ -138,8 +138,8 @@ var _ DescribeTargetGroupsAPIClient = (*Client)(nil)
 // DescribeTargetGroupsPaginatorOptions is the paginator options for
 // DescribeTargetGroups
 type DescribeTargetGroupsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

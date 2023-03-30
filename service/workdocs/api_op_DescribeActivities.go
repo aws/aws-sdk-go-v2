@@ -31,8 +31,8 @@ func (c *Client) DescribeActivities(ctx context.Context, params *DescribeActivit
 
 type DescribeActivitiesInput struct {
 
-	// Specifies which activity types to include in the response. If this field is left
-	// empty, all activity types are returned.
+	// Specifies which activity types to include in the response. If this field is
+	// left empty, all activity types are returned.
 	ActivityTypes *string
 
 	// Amazon WorkDocs authentication token. Not required when using Amazon Web
@@ -62,8 +62,8 @@ type DescribeActivitiesInput struct {
 	// The document or folder ID for which to describe activity types.
 	ResourceId *string
 
-	// The timestamp that determines the starting time of the activities. The response
-	// includes the activities performed after the specified timestamp.
+	// The timestamp that determines the starting time of the activities. The
+	// response includes the activities performed after the specified timestamp.
 	StartTime *time.Time
 
 	// The ID of the user who performed the action. The response includes activities
@@ -162,8 +162,8 @@ type DescribeActivitiesPaginatorOptions struct {
 	// The maximum number of items to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

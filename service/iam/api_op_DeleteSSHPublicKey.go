@@ -13,8 +13,7 @@ import (
 // Deletes the specified SSH public key. The SSH public key deleted by this
 // operation is used only for authenticating the associated IAM user to an
 // CodeCommit repository. For more information about using SSH keys to authenticate
-// to an CodeCommit repository, see Set up CodeCommit for SSH connections
-// (https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
+// to an CodeCommit repository, see Set up CodeCommit for SSH connections (https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
 // in the CodeCommit User Guide.
 func (c *Client) DeleteSSHPublicKey(ctx context.Context, params *DeleteSSHPublicKeyInput, optFns ...func(*Options)) (*DeleteSSHPublicKeyOutput, error) {
 	if params == nil {
@@ -33,16 +32,16 @@ func (c *Client) DeleteSSHPublicKey(ctx context.Context, params *DeleteSSHPublic
 
 type DeleteSSHPublicKeyInput struct {
 
-	// The unique identifier for the SSH public key. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters that can
-	// consist of any upper or lowercased letter or digit.
+	// The unique identifier for the SSH public key. This parameter allows (through
+	// its regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
+	// that can consist of any upper or lowercased letter or digit.
 	//
 	// This member is required.
 	SSHPublicKeyId *string
 
 	// The name of the IAM user associated with the SSH public key. This parameter
-	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters consisting of upper and lowercase alphanumeric characters with no
+	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string
+	// of characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.

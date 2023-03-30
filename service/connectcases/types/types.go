@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-// Content specific to BasicLayout type. It configures fields in the top panel and
-// More Info tab of agent application.
+// Content specific to BasicLayout type. It configures fields in the top panel
+// and More Info tab of agent application.
 type BasicLayout struct {
 
 	// This represents sections in a tab of the page layout.
@@ -85,15 +85,15 @@ type CaseSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the content of a Comment to be returned to agents.
+// Represents the content of a Comment  to be returned to agents.
 type CommentContent struct {
 
-	// Text in the body of a Comment on a case.
+	// Text in the body of a Comment  on a case.
 	//
 	// This member is required.
 	Body *string
 
-	// Type of the text in the box of a Comment on a case.
+	// Type of the text in the box of a Comment  on a case.
 	//
 	// This member is required.
 	ContentType CommentBodyTextType
@@ -101,7 +101,7 @@ type CommentContent struct {
 	noSmithyDocumentSerde
 }
 
-// A filter for related items of type Comment.
+// A filter for related items of type Comment .
 type CommentFilter struct {
 	noSmithyDocumentSerde
 }
@@ -120,12 +120,12 @@ type Contact struct {
 // An object that represents a content of an Amazon Connect contact object.
 type ContactContent struct {
 
-	// A list of channels to filter on for related items of type Contact.
+	// A list of channels to filter on for related items of type Contact .
 	//
 	// This member is required.
 	Channel *string
 
-	// The difference between the InitiationTimestamp and the DisconnectTimestamp of
+	// The difference between the InitiationTimestamp  and the DisconnectTimestamp of
 	// the contact.
 	//
 	// This member is required.
@@ -139,10 +139,10 @@ type ContactContent struct {
 	noSmithyDocumentSerde
 }
 
-// A filter for related items of type Contact.
+// A filter for related items of type Contact .
 type ContactFilter struct {
 
-	// A list of channels to filter on for related items of type Contact.
+	// A list of channels to filter on for related items of type Contact .
 	Channel []string
 
 	// A unique identifier of a contact in Amazon Connect.
@@ -172,8 +172,8 @@ type DomainSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration to enable EventBridge case event delivery and determine what data
-// is delivered.
+// Configuration to enable EventBridge case event delivery and determine what
+// data is delivered.
 type EventBridgeConfiguration struct {
 
 	// Indicates whether the to broadcast case event data to the customer.
@@ -327,12 +327,12 @@ type FieldItem struct {
 // Object for field Options information.
 type FieldOption struct {
 
-	// Describes whether the FieldOption is active (displayed) or inactive.
+	// Describes whether the FieldOption  is active (displayed) or inactive.
 	//
 	// This member is required.
 	Active *bool
 
-	// FieldOptionName has max length 100 and disallows trailing spaces.
+	// FieldOptionName  has max length 100 and disallows trailing spaces.
 	//
 	// This member is required.
 	Name *string
@@ -485,8 +485,8 @@ type GetFieldResponse struct {
 	// Description of the field.
 	Description *string
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
-	// organize, track, or control access for this resource.
+	// A map of of key-value pairs that represent tags on a resource. Tags are used
+	// to organize, track, or control access for this resource.
 	Tags map[string]*string
 
 	noSmithyDocumentSerde
@@ -510,8 +510,8 @@ type LayoutContent interface {
 	isLayoutContent()
 }
 
-// Content specific to BasicLayout type. It configures fields in the top panel and
-// More Info tab of Cases user interface.
+// Content specific to BasicLayout type. It configures fields in the top panel
+// and More Info tab of Cases user interface.
 type LayoutContentMemberBasic struct {
 	Value BasicLayout
 
@@ -628,7 +628,7 @@ type RelatedItemTypeFilter interface {
 	isRelatedItemTypeFilter()
 }
 
-// A filter for related items of type Comment.
+// A filter for related items of type Comment .
 type RelatedItemTypeFilterMemberComment struct {
 	Value CommentFilter
 
@@ -637,7 +637,7 @@ type RelatedItemTypeFilterMemberComment struct {
 
 func (*RelatedItemTypeFilterMemberComment) isRelatedItemTypeFilter() {}
 
-// A filter for related items of type Contact.
+// A filter for related items of type Contact .
 type RelatedItemTypeFilterMemberContact struct {
 	Value ContactFilter
 
@@ -675,8 +675,8 @@ type SearchCasesResponseItem struct {
 	// This member is required.
 	TemplateId *string
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
-	// organize, track, or control access for this resource.
+	// A map of of key-value pairs that represent tags on a resource. Tags are used
+	// to organize, track, or control access for this resource.
 	Tags map[string]*string
 
 	noSmithyDocumentSerde
@@ -705,8 +705,8 @@ type SearchRelatedItemsResponseItem struct {
 	// This member is required.
 	Type RelatedItemType
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
-	// organize, track, or control access for this resource.
+	// A map of of key-value pairs that represent tags on a resource. Tags are used
+	// to organize, track, or control access for this resource.
 	Tags map[string]*string
 
 	noSmithyDocumentSerde

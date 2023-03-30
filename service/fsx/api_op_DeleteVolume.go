@@ -40,13 +40,13 @@ type DeleteVolumeInput struct {
 	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
-	// For Amazon FSx for ONTAP volumes, specify whether to take a final backup of the
-	// volume and apply tags to the backup. To apply tags to the backup, you must have
-	// the fsx:TagResource permission.
+	// For Amazon FSx for ONTAP volumes, specify whether to take a final backup of
+	// the volume and apply tags to the backup. To apply tags to the backup, you must
+	// have the fsx:TagResource  permission.
 	OntapConfiguration *types.DeleteVolumeOntapConfiguration
 
-	// For Amazon FSx for OpenZFS volumes, specify whether to delete all child volumes
-	// and snapshots.
+	// For Amazon FSx for OpenZFS volumes, specify whether to delete all child
+	// volumes and snapshots.
 	OpenZFSConfiguration *types.DeleteVolumeOpenZFSConfiguration
 
 	noSmithyDocumentSerde
@@ -55,10 +55,11 @@ type DeleteVolumeInput struct {
 type DeleteVolumeOutput struct {
 
 	// The lifecycle state of the volume being deleted. If the DeleteVolume operation
-	// is successful, this value is DELETING.
+	// is successful, this value is DELETING .
 	Lifecycle types.VolumeLifecycle
 
-	// Returned after a DeleteVolume request, showing the status of the delete request.
+	// Returned after a DeleteVolume request, showing the status of the delete
+	// request.
 	OntapResponse *types.DeleteVolumeOntapResponse
 
 	// The ID of the volume that's being deleted.

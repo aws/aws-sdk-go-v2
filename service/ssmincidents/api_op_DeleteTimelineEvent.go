@@ -28,13 +28,14 @@ func (c *Client) DeleteTimelineEvent(ctx context.Context, params *DeleteTimeline
 
 type DeleteTimelineEventInput struct {
 
-	// The ID of the event to update. You can use ListTimelineEvents to find an event's
-	// ID.
+	// The ID of the event to update. You can use ListTimelineEvents to find an
+	// event's ID.
 	//
 	// This member is required.
 	EventId *string
 
-	// The Amazon Resource Name (ARN) of the incident that includes the timeline event.
+	// The Amazon Resource Name (ARN) of the incident that includes the timeline
+	// event.
 	//
 	// This member is required.
 	IncidentRecordArn *string

@@ -39,7 +39,7 @@ type GetControlInput struct {
 
 type GetControlOutput struct {
 
-	// The name of the control that the GetControl API returned.
+	// The name of the control that the GetControl  API returned.
 	Control *types.Control
 
 	// Metadata pertaining to the operation's result.

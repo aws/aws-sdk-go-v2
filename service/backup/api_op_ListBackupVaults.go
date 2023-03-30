@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of recovery point storage containers along with information about
-// them.
+// Returns a list of recovery point storage containers along with information
+// about them.
 func (c *Client) ListBackupVaults(ctx context.Context, params *ListBackupVaultsInput, optFns ...func(*Options)) (*ListBackupVaultsOutput, error) {
 	if params == nil {
 		params = &ListBackupVaultsInput{}
@@ -35,7 +35,7 @@ type ListBackupVaultsInput struct {
 	MaxResults *int32
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return maxResults  number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -52,7 +52,7 @@ type ListBackupVaultsOutput struct {
 	BackupVaultList []types.BackupVaultListMember
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return maxResults  number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -136,8 +136,8 @@ type ListBackupVaultsPaginatorOptions struct {
 	// The maximum number of items to be returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

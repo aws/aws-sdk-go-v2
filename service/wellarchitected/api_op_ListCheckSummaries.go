@@ -41,8 +41,8 @@ type ListCheckSummariesInput struct {
 	// This member is required.
 	LensArn *string
 
-	// The ID used to identify a pillar, for example, security. A pillar is identified
-	// by its PillarReviewSummary$PillarId.
+	// The ID used to identify a pillar, for example, security. A pillar is
+	// identified by its PillarReviewSummary$PillarId .
 	//
 	// This member is required.
 	PillarId *string
@@ -52,8 +52,8 @@ type ListCheckSummariesInput struct {
 	// This member is required.
 	QuestionId *string
 
-	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
-	// Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web
+	// Services Region.
 	//
 	// This member is required.
 	WorkloadId *string
@@ -69,7 +69,8 @@ type ListCheckSummariesInput struct {
 
 type ListCheckSummariesOutput struct {
 
-	// List of Trusted Advisor summaries related to the Well-Architected best practice.
+	// List of Trusted Advisor summaries related to the Well-Architected best
+	// practice.
 	CheckSummaries []types.CheckSummary
 
 	// The token to use to retrieve the next set of results.
@@ -158,8 +159,8 @@ type ListCheckSummariesPaginatorOptions struct {
 	// The maximum number of results to return for this request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

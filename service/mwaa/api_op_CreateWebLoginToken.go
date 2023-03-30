@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a web login token for the Airflow Web UI. To learn more, see Creating an
-// Apache Airflow web login token
-// (https://docs.aws.amazon.com/mwaa/latest/userguide/call-mwaa-apis-web.html).
+// Creates a web login token for the Airflow Web UI. To learn more, see Creating
+// an Apache Airflow web login token (https://docs.aws.amazon.com/mwaa/latest/userguide/call-mwaa-apis-web.html)
+// .
 func (c *Client) CreateWebLoginToken(ctx context.Context, params *CreateWebLoginTokenInput, optFns ...func(*Options)) (*CreateWebLoginTokenOutput, error) {
 	if params == nil {
 		params = &CreateWebLoginTokenInput{}
@@ -31,7 +31,7 @@ func (c *Client) CreateWebLoginToken(ctx context.Context, params *CreateWebLogin
 
 type CreateWebLoginTokenInput struct {
 
-	// The name of the Amazon MWAA environment. For example, MyMWAAEnvironment.
+	// The name of the Amazon MWAA environment. For example, MyMWAAEnvironment .
 	//
 	// This member is required.
 	Name *string

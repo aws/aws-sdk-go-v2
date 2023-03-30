@@ -14,15 +14,13 @@ import (
 
 // Returns a list of Batch jobs. You must specify only one of the following
 // items:
-// - A job queue ID to return a list of jobs in that job queue
-// - A
-// multi-node parallel job ID to return a list of nodes for that job
-// - An array job
-// ID to return a list of the children for that job
+//   - A job queue ID to return a list of jobs in that job queue
+//   - A multi-node parallel job ID to return a list of nodes for that job
+//   - An array job ID to return a list of the children for that job
 //
-// You can filter the results by
-// job status with the jobStatus parameter. If you don't specify a status, only
-// RUNNING jobs are returned.
+// You can
+// filter the results by job status with the jobStatus parameter. If you don't
+// specify a status, only RUNNING  jobs are returned.
 func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...func(*Options)) (*ListJobsOutput, error) {
 	if params == nil {
 		params = &ListJobsInput{}
@@ -38,7 +36,7 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 	return out, nil
 }
 
-// Contains the parameters for ListJobs.
+// Contains the parameters for ListJobs .
 type ListJobsInput struct {
 
 	// The job ID for an array job. Specifying an array job ID with this parameter
@@ -46,32 +44,34 @@ type ListJobsInput struct {
 	ArrayJobId *string
 
 	// The filter to apply to the query. Only one filter can be used at a time. When
-	// the filter is used, jobStatus is ignored. The filter doesn't apply to child jobs
-	// in an array or multi-node parallel (MNP) jobs. The results are sorted by the
-	// createdAt field, with the most recent jobs being first. JOB_NAME The value of
-	// the filter is a case-insensitive match for the job name. If the value ends with
-	// an asterisk (*), the filter matches any job name that begins with the string
-	// before the '*'. This corresponds to the jobName value. For example, test1
-	// matches both Test1 and test1, and test1* matches both test1 and Test10. When the
-	// JOB_NAME filter is used, the results are grouped by the job name and version.
-	// JOB_DEFINITION The value for the filter is the name or Amazon Resource Name
-	// (ARN) of the job definition. This corresponds to the jobDefinition value. The
-	// value is case sensitive. When the value for the filter is the job definition
-	// name, the results include all the jobs that used any revision of that job
-	// definition name. If the value ends with an asterisk (*), the filter matches any
-	// job definition name that begins with the string before the '*'. For example, jd1
-	// matches only jd1, and jd1* matches both jd1 and jd1A. The version of the job
-	// definition that's used doesn't affect the sort order. When the JOB_DEFINITION
-	// filter is used and the ARN is used (which is in the form
-	// arn:${Partition}:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}),
-	// the results include jobs that used the specified revision of the job definition.
-	// Asterisk (*) isn't supported when the ARN is used. BEFORE_CREATED_AT The value
-	// for the filter is the time that's before the job was created. This corresponds
-	// to the createdAt value. The value is a string representation of the number of
-	// milliseconds since 00:00:00 UTC (midnight) on January 1, 1970. AFTER_CREATED_AT
-	// The value for the filter is the time that's after the job was created. This
-	// corresponds to the createdAt value. The value is a string representation of the
-	// number of milliseconds since 00:00:00 UTC (midnight) on January 1, 1970.
+	// the filter is used, jobStatus is ignored. The filter doesn't apply to child
+	// jobs in an array or multi-node parallel (MNP) jobs. The results are sorted by
+	// the createdAt field, with the most recent jobs being first. JOB_NAME The value
+	// of the filter is a case-insensitive match for the job name. If the value ends
+	// with an asterisk (*), the filter matches any job name that begins with the
+	// string before the '*'. This corresponds to the jobName  value. For example,
+	// test1 matches both Test1  and test1 , and test1*  matches both test1  and
+	// Test10 . When the JOB_NAME filter is used, the results are grouped by the job
+	// name and version. JOB_DEFINITION The value for the filter is the name or Amazon
+	// Resource Name (ARN) of the job definition. This corresponds to the
+	// jobDefinitionvalue. The value is case sensitive. When the value for the filter
+	// is the job definition name, the results include all the jobs that used any
+	// revision of that job definition name. If the value ends with an asterisk (*),
+	// the filter matches any job definition name that begins with the string before
+	// the '*'. For example, jd1  matches only jd1 , and jd1*  matches both jd1  and
+	// jd1A. The version of the job definition that's used doesn't affect the sort
+	// order. When the JOB_DEFINITION filter is used and the ARN is used (which is in
+	// the form
+	// arn:${Partition}:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}
+	// ), the results include jobs that used the specified revision of the job
+	// definition. Asterisk (*) isn't supported when the ARN is used. BEFORE_CREATED_AT
+	// The value for the filter is the time that's before the job was created. This
+	// corresponds to the createdAt value. The value is a string representation of
+	// the number of milliseconds since 00:00:00 UTC (midnight) on January 1, 1970.
+	// AFTER_CREATED_AT The value for the filter is the time that's after the job was
+	// created. This corresponds to the createdAt value. The value is a string
+	// representation of the number of milliseconds since 00:00:00 UTC (midnight) on
+	// January 1, 1970.
 	Filters []types.KeyValuesPair
 
 	// The name or full Amazon Resource Name (ARN) of the job queue used to list jobs.
@@ -84,11 +84,11 @@ type ListJobsInput struct {
 	JobStatus types.JobStatus
 
 	// The maximum number of results returned by ListJobs in paginated output. When
-	// this parameter is used, ListJobs only returns maxResults results in a single
+	// this parameter is used, ListJobs  only returns maxResults results in a single
 	// page and a nextToken response element. The remaining results of the initial
-	// request can be seen by sending another ListJobs request with the returned
-	// nextToken value. This value can be between 1 and 100. If this parameter isn't
-	// used, then ListJobs returns up to 100 results and a nextToken value if
+	// request can be seen by sending another ListJobs  request with the returned
+	// nextTokenvalue. This value can be between 1 and 100. If this parameter isn't
+	// used, then ListJobs  returns up to 100 results and a nextToken value if
 	// applicable.
 	MaxResults *int32
 
@@ -97,8 +97,8 @@ type ListJobsInput struct {
 	// job.
 	MultiNodeJobId *string
 
-	// The nextToken value returned from a previous paginated ListJobs request where
-	// maxResults was used and the results exceeded the value of that parameter.
+	// The nextToken  value returned from a previous paginated ListJobs  request where
+	// maxResultswas used and the results exceeded the value of that parameter.
 	// Pagination continues from the end of the previous results that returned the
 	// nextToken value. This value is null when there are no more results to return.
 	// Treat this token as an opaque identifier that's only used to retrieve the next
@@ -115,9 +115,9 @@ type ListJobsOutput struct {
 	// This member is required.
 	JobSummaryList []types.JobSummary
 
-	// The nextToken value to include in a future ListJobs request. When the results of
-	// a ListJobs request exceed maxResults, this value can be used to retrieve the
-	// next page of results. This value is null when there are no more results to
+	// The nextToken  value to include in a future ListJobs request. When the results
+	// of a ListJobs  request exceed maxResults, this value can be used to retrieve
+	// the next page of results. This value is null when there are no more results to
 	// return.
 	NextToken *string
 
@@ -197,16 +197,16 @@ var _ ListJobsAPIClient = (*Client)(nil)
 // ListJobsPaginatorOptions is the paginator options for ListJobs
 type ListJobsPaginatorOptions struct {
 	// The maximum number of results returned by ListJobs in paginated output. When
-	// this parameter is used, ListJobs only returns maxResults results in a single
+	// this parameter is used, ListJobs  only returns maxResults results in a single
 	// page and a nextToken response element. The remaining results of the initial
-	// request can be seen by sending another ListJobs request with the returned
-	// nextToken value. This value can be between 1 and 100. If this parameter isn't
-	// used, then ListJobs returns up to 100 results and a nextToken value if
+	// request can be seen by sending another ListJobs  request with the returned
+	// nextTokenvalue. This value can be between 1 and 100. If this parameter isn't
+	// used, then ListJobs  returns up to 100 results and a nextToken value if
 	// applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

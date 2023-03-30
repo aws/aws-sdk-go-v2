@@ -36,8 +36,8 @@ type TagResourceInput struct {
 	ResourceArn *string
 
 	// The key-value string map. The valid character set is [a-zA-Z+-=._:/]. The tag
-	// key can be up to 128 characters and must not start with aws:. The tag value can
-	// be up to 256 characters.
+	// key can be up to 128 characters and must not start with aws:. The tag value
+	// can be up to 256 characters.
 	//
 	// This member is required.
 	Tags map[string]string

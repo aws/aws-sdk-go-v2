@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a link to a device. A device can be associated to multiple links and
-// a link can be associated to multiple devices. The device and link must be in the
-// same global network and the same site.
+// Associates a link to a device. A device can be associated to multiple links
+// and a link can be associated to multiple devices. The device and link must be in
+// the same global network and the same site.
 func (c *Client) AssociateLink(ctx context.Context, params *AssociateLinkInput, optFns ...func(*Options)) (*AssociateLinkOutput, error) {
 	if params == nil {
 		params = &AssociateLinkInput{}

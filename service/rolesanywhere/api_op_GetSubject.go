@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a Subject. A Subject associates a certificate identity with authentication
-// attempts by CreateSession. The Subject resources stores audit information such
-// as status of the last authentication attempt, the certificate data used in the
-// attempt, and the last time the associated identity attempted authentication.
-// Required permissions: rolesanywhere:GetSubject.
+// Gets a Subject. A Subject associates a certificate identity with
+// authentication attempts by CreateSession. The Subject resources stores audit
+// information such as status of the last authentication attempt, the certificate
+// data used in the attempt, and the last time the associated identity attempted
+// authentication. Required permissions: rolesanywhere:GetSubject .
 func (c *Client) GetSubject(ctx context.Context, params *GetSubjectInput, optFns ...func(*Options)) (*GetSubjectOutput, error) {
 	if params == nil {
 		params = &GetSubjectInput{}

@@ -39,8 +39,8 @@ type DisassociateMembersInput struct {
 	// This member is required.
 	AccountIds []string
 
-	// The unique ID of the detector of the GuardDuty account whose members you want to
-	// disassociate from the administrator account.
+	// The unique ID of the detector of the GuardDuty account whose members you want
+	// to disassociate from the administrator account.
 	//
 	// This member is required.
 	DetectorId *string
@@ -50,8 +50,8 @@ type DisassociateMembersInput struct {
 
 type DisassociateMembersOutput struct {
 
-	// A list of objects that contain the unprocessed account and a result string that
-	// explains why it was unprocessed.
+	// A list of objects that contain the unprocessed account and a result string
+	// that explains why it was unprocessed.
 	//
 	// This member is required.
 	UnprocessedAccounts []types.UnprocessedAccount

@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the number of compliant and noncompliant rules for one or more accounts
-// and regions in an aggregator. The results can return an empty result page, but
-// if you have a nextToken, the results are displayed on the next page.
+// Returns the number of compliant and noncompliant rules for one or more
+// accounts and regions in an aggregator. The results can return an empty result
+// page, but if you have a nextToken, the results are displayed on the next page.
 func (c *Client) GetAggregateConfigRuleComplianceSummary(ctx context.Context, params *GetAggregateConfigRuleComplianceSummaryInput, optFns ...func(*Options)) (*GetAggregateConfigRuleComplianceSummaryOutput, error) {
 	if params == nil {
 		params = &GetAggregateConfigRuleComplianceSummaryInput{}
@@ -136,24 +136,24 @@ func (c *Client) addOperationGetAggregateConfigRuleComplianceSummaryMiddlewares(
 	return nil
 }
 
-// GetAggregateConfigRuleComplianceSummaryAPIClient is a client that implements the
-// GetAggregateConfigRuleComplianceSummary operation.
+// GetAggregateConfigRuleComplianceSummaryAPIClient is a client that implements
+// the GetAggregateConfigRuleComplianceSummary operation.
 type GetAggregateConfigRuleComplianceSummaryAPIClient interface {
 	GetAggregateConfigRuleComplianceSummary(context.Context, *GetAggregateConfigRuleComplianceSummaryInput, ...func(*Options)) (*GetAggregateConfigRuleComplianceSummaryOutput, error)
 }
 
 var _ GetAggregateConfigRuleComplianceSummaryAPIClient = (*Client)(nil)
 
-// GetAggregateConfigRuleComplianceSummaryPaginatorOptions is the paginator options
-// for GetAggregateConfigRuleComplianceSummary
+// GetAggregateConfigRuleComplianceSummaryPaginatorOptions is the paginator
+// options for GetAggregateConfigRuleComplianceSummary
 type GetAggregateConfigRuleComplianceSummaryPaginatorOptions struct {
 	// The maximum number of evaluation results returned on each page. The default is
 	// 1000. You cannot specify a number greater than 1000. If you specify 0, Config
 	// uses the default.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

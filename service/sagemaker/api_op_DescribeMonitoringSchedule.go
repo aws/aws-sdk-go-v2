@@ -55,8 +55,8 @@ type DescribeMonitoringScheduleOutput struct {
 	// This member is required.
 	MonitoringScheduleArn *string
 
-	// The configuration object that specifies the monitoring schedule and defines the
-	// monitoring job.
+	// The configuration object that specifies the monitoring schedule and defines
+	// the monitoring job.
 	//
 	// This member is required.
 	MonitoringScheduleConfig *types.MonitoringScheduleConfig
@@ -83,13 +83,10 @@ type DescribeMonitoringScheduleOutput struct {
 
 	// The type of the monitoring job that this schedule runs. This is one of the
 	// following values.
-	// - DATA_QUALITY - The schedule is for a data quality monitoring
-	// job.
-	// - MODEL_QUALITY - The schedule is for a model quality monitoring job.
-	// -
-	// MODEL_BIAS - The schedule is for a bias monitoring job.
-	// - MODEL_EXPLAINABILITY -
-	// The schedule is for an explainability monitoring job.
+	//     - DATA_QUALITY - The schedule is for a data quality monitoring job.
+	//     - MODEL_QUALITY - The schedule is for a model quality monitoring job.
+	//     - MODEL_BIAS - The schedule is for a bias monitoring job.
+	//     - MODEL_EXPLAINABILITY - The schedule is for an explainability monitoring job.
 	MonitoringType types.MonitoringType
 
 	// Metadata pertaining to the operation's result.

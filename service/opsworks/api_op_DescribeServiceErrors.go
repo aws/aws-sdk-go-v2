@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes AWS OpsWorks Stacks service errors. Required Permissions: To use this
-// action, an IAM user must have a Show, Deploy, or Manage permissions level for
-// the stack, or an attached policy that explicitly grants permissions. For more
-// information about user permissions, see Managing User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-// This call accepts only one resource-identifying parameter.
+// Describes AWS OpsWorks Stacks service errors. Required Permissions: To use
+// this action, an IAM user must have a Show, Deploy, or Manage permissions level
+// for the stack, or an attached policy that explicitly grants permissions. For
+// more information about user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// . This call accepts only one resource-identifying parameter.
 func (c *Client) DescribeServiceErrors(ctx context.Context, params *DescribeServiceErrorsInput, optFns ...func(*Options)) (*DescribeServiceErrorsOutput, error) {
 	if params == nil {
 		params = &DescribeServiceErrorsInput{}
@@ -50,10 +49,10 @@ type DescribeServiceErrorsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeServiceErrors request.
+// Contains the response to a DescribeServiceErrors  request.
 type DescribeServiceErrorsOutput struct {
 
-	// An array of ServiceError objects that describe the specified service errors.
+	// An array of ServiceError  objects that describe the specified service errors.
 	ServiceErrors []types.ServiceError
 
 	// Metadata pertaining to the operation's result.

@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified domain recordset and all of its domain records. The delete
-// domain operation supports tag-based access control via resource tags applied to
-// the resource identified by domain name. For more information, see the Amazon
-// Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// Deletes the specified domain recordset and all of its domain records. The
+// delete domainoperation supports tag-based access control via resource tags
+// applied to the resource identified by domain name. For more information, see
+// the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) DeleteDomain(ctx context.Context, params *DeleteDomainInput, optFns ...func(*Options)) (*DeleteDomainOutput, error) {
 	if params == nil {
 		params = &DeleteDomainInput{}

@@ -15,8 +15,7 @@ import (
 // exported in a comma-separated values (.csv) file, and its metadata in a
 // JavaScript Object Notation (JSON) (.json) file, to an existing Amazon Simple
 // Storage Service (Amazon S3) bucket that you specify. For more information, see
-// Exporting Recommendations
-// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html)
+// Exporting Recommendations (https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html)
 // in the Compute Optimizer User Guide. You can have only one Lambda function
 // export job in progress per Amazon Web Services Region.
 func (c *Client) ExportLambdaFunctionRecommendations(ctx context.Context, params *ExportLambdaFunctionRecommendationsInput, optFns ...func(*Options)) (*ExportLambdaFunctionRecommendationsOutput, error) {
@@ -36,39 +35,37 @@ func (c *Client) ExportLambdaFunctionRecommendations(ctx context.Context, params
 
 type ExportLambdaFunctionRecommendationsInput struct {
 
-	// Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name
-	// and key prefix for a recommendations export job. You must create the destination
-	// Amazon S3 bucket for your recommendations export before you create the export
-	// job. Compute Optimizer does not create the S3 bucket for you. After you create
-	// the S3 bucket, ensure that it has the required permission policy to allow
-	// Compute Optimizer to write the export file to it. If you plan to specify an
-	// object prefix when you create the export job, you must include the object prefix
-	// in the policy that you add to the S3 bucket. For more information, see Amazon S3
-	// Bucket Policy for Compute Optimizer
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html)
+	// Describes the destination Amazon Simple Storage Service (Amazon S3) bucket
+	// name and key prefix for a recommendations export job. You must create the
+	// destination Amazon S3 bucket for your recommendations export before you create
+	// the export job. Compute Optimizer does not create the S3 bucket for you. After
+	// you create the S3 bucket, ensure that it has the required permission policy to
+	// allow Compute Optimizer to write the export file to it. If you plan to specify
+	// an object prefix when you create the export job, you must include the object
+	// prefix in the policy that you add to the S3 bucket. For more information, see
+	// Amazon S3 Bucket Policy for Compute Optimizer (https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html)
 	// in the Compute Optimizer User Guide.
 	//
 	// This member is required.
 	S3DestinationConfig *types.S3DestinationConfig
 
-	// The IDs of the Amazon Web Services accounts for which to export Lambda function
-	// recommendations. If your account is the management account of an organization,
-	// use this parameter to specify the member account for which you want to export
-	// recommendations. This parameter cannot be specified together with the include
-	// member accounts parameter. The parameters are mutually exclusive.
+	// The IDs of the Amazon Web Services accounts for which to export Lambda
+	// function recommendations. If your account is the management account of an
+	// organization, use this parameter to specify the member account for which you
+	// want to export recommendations. This parameter cannot be specified together with
+	// the include member accounts parameter. The parameters are mutually exclusive.
 	// Recommendations for member accounts are not included in the export if this
 	// parameter, or the include member accounts parameter, is omitted. You can specify
 	// multiple account IDs per request.
 	AccountIds []string
 
 	// The recommendations data to include in the export file. For more information
-	// about the fields that can be exported, see Exported files
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files)
+	// about the fields that can be exported, see Exported files (https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files)
 	// in the Compute Optimizer User Guide.
 	FieldsToExport []types.ExportableLambdaFunctionField
 
 	// The format of the export file. The only export file format currently supported
-	// is Csv.
+	// is Csv .
 	FileFormat types.FileFormat
 
 	// An array of objects to specify a filter that exports a more specific set of
@@ -80,8 +77,7 @@ type ExportLambdaFunctionRecommendationsInput struct {
 	// organization. The member accounts must also be opted in to Compute Optimizer,
 	// and trusted access for Compute Optimizer must be enabled in the organization
 	// account. For more information, see Compute Optimizer and Amazon Web Services
-	// Organizations trusted access
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access)
+	// Organizations trusted access (https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access)
 	// in the Compute Optimizer User Guide. Recommendations for member accounts of the
 	// organization are not included in the export file if this parameter is omitted.
 	// This parameter cannot be specified together with the account IDs parameter. The
@@ -96,13 +92,13 @@ type ExportLambdaFunctionRecommendationsInput struct {
 type ExportLambdaFunctionRecommendationsOutput struct {
 
 	// The identification number of the export job. Use the
-	// DescribeRecommendationExportJobs action, and specify the job ID to view the
+	// DescribeRecommendationExportJobsaction, and specify the job ID to view the
 	// status of an export job.
 	JobId *string
 
-	// Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name
-	// and object keys of a recommendations export file, and its associated metadata
-	// file.
+	// Describes the destination Amazon Simple Storage Service (Amazon S3) bucket
+	// name and object keys of a recommendations export file, and its associated
+	// metadata file.
 	S3Destination *types.S3Destination
 
 	// Metadata pertaining to the operation's result.

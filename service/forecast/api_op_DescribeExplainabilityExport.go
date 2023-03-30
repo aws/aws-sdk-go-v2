@@ -61,27 +61,23 @@ type DescribeExplainabilityExportOutput struct {
 	// The format of the exported data, CSV or PARQUET.
 	Format *string
 
-	// The last time the resource was modified. The timestamp depends on the status of
-	// the job:
-	// - CREATE_PENDING - The CreationTime.
-	// - CREATE_IN_PROGRESS - The current
-	// timestamp.
-	// - CREATE_STOPPING - The current timestamp.
-	// - CREATE_STOPPED - When
-	// the job stopped.
-	// - ACTIVE or CREATE_FAILED - When the job finished or failed.
+	// The last time the resource was modified. The timestamp depends on the status
+	// of the job:
+	//     - CREATE_PENDING - The CreationTime .
+	//     - CREATE_IN_PROGRESS - The current timestamp.
+	//     - CREATE_STOPPING - The current timestamp.
+	//     - CREATE_STOPPED - When the job stopped.
+	//     - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// Information about any errors that occurred during the export.
 	Message *string
 
 	// The status of the Explainability export. States include:
-	// - ACTIVE
-	// -
-	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
-	// - CREATE_STOPPING,
-	// CREATE_STOPPED
-	// - DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
+	//     - ACTIVE
+	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//     - CREATE_STOPPING , CREATE_STOPPED
+	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
 	Status *string
 
 	// Metadata pertaining to the operation's result.

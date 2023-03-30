@@ -153,12 +153,12 @@ type DescribeJobsRequestFilters struct {
 // A set of filters by which to return Recovery Instances.
 type DescribeRecoveryInstancesRequestFilters struct {
 
-	// An array of Recovery Instance IDs that should be returned. An empty array means
-	// all Recovery Instances.
+	// An array of Recovery Instance IDs that should be returned. An empty array
+	// means all Recovery Instances.
 	RecoveryInstanceIDs []string
 
-	// An array of Source Server IDs for which associated Recovery Instances should be
-	// returned.
+	// An array of Source Server IDs for which associated Recovery Instances should
+	// be returned.
 	SourceServerIDs []string
 
 	noSmithyDocumentSerde
@@ -183,12 +183,12 @@ type DescribeSourceServersRequestFilters struct {
 	// instance id, a VMware uuid or a mac address.
 	HardwareId *string
 
-	// An array of Source Servers IDs that should be returned. An empty array means all
-	// Source Servers.
+	// An array of Source Servers IDs that should be returned. An empty array means
+	// all Source Servers.
 	SourceServerIDs []string
 
-	// An array of staging account IDs that extended source servers belong to. An empty
-	// array means all source servers will be shown.
+	// An array of staging account IDs that extended source servers belong to. An
+	// empty array means all source servers will be shown.
 	StagingAccountIDs []string
 
 	noSmithyDocumentSerde
@@ -316,7 +316,8 @@ type LifeCycle struct {
 	// The date and time of the first byte that was replicated from the Source Server.
 	FirstByteDateTime *string
 
-	// An object containing information regarding the last launch of the Source Server.
+	// An object containing information regarding the last launch of the Source
+	// Server.
 	LastLaunch *LifeCycleLastLaunch
 
 	// The date and time this Source Server was last seen by the service.
@@ -328,8 +329,8 @@ type LifeCycle struct {
 // An object containing information regarding the last launch of a Source Server.
 type LifeCycleLastLaunch struct {
 
-	// An object containing information regarding the initiation of the last launch of
-	// a Source Server.
+	// An object containing information regarding the initiation of the last launch
+	// of a Source Server.
 	Initiated *LifeCycleLastLaunchInitiated
 
 	// Status of Source Server's last launch.
@@ -338,8 +339,8 @@ type LifeCycleLastLaunch struct {
 	noSmithyDocumentSerde
 }
 
-// An object containing information regarding the initiation of the last launch of
-// a Source Server.
+// An object containing information regarding the initiation of the last launch
+// of a Source Server.
 type LifeCycleLastLaunchInitiated struct {
 
 	// The date and time the last Source Server launch was initiated.
@@ -393,8 +394,8 @@ type ParticipatingServer struct {
 	noSmithyDocumentSerde
 }
 
-// A rule in the Point in Time (PIT) policy representing when to take snapshots and
-// how long to retain them for.
+// A rule in the Point in Time (PIT) policy representing when to take snapshots
+// and how long to retain them for.
 type PITPolicyRule struct {
 
 	// How often, in the chosen units, a snapshot should be taken.
@@ -439,8 +440,8 @@ type RecoveryInstance struct {
 	// An object representing failback related information of the Recovery Instance.
 	Failback *RecoveryInstanceFailback
 
-	// Whether this Recovery Instance was created for a drill or for an actual Recovery
-	// event.
+	// Whether this Recovery Instance was created for a drill or for an actual
+	// Recovery event.
 	IsDrill *bool
 
 	// The ID of the Job that created the Recovery Instance.
@@ -685,8 +686,8 @@ type ReplicationConfigurationReplicatedDisk struct {
 	// The Staging Disk EBS volume type to be used during replication.
 	StagingDiskType ReplicationConfigurationReplicatedDiskStagingDiskType
 
-	// The throughput to use for the EBS volume in MiB/s. This parameter is valid only
-	// for gp3 volumes.
+	// The throughput to use for the EBS volume in MiB/s. This parameter is valid
+	// only for gp3 volumes.
 	Throughput int64
 
 	noSmithyDocumentSerde
@@ -706,8 +707,8 @@ type ReplicationConfigurationTemplate struct {
 	// the Replication Configuration Template.
 	AssociateDefaultSecurityGroup *bool
 
-	// Configure bandwidth throttling for the outbound data transfer rate of the Source
-	// Server in Mbps.
+	// Configure bandwidth throttling for the outbound data transfer rate of the
+	// Source Server in Mbps.
 	BandwidthThrottling int64
 
 	// Whether to create a Public IP for the Recovery Instance by default.
@@ -843,21 +844,21 @@ type SourceServer struct {
 // Staging information related to source server.
 type StagingArea struct {
 
-	// Shows an error message that occurred when DRS tried to access the staging source
-	// server. In this case StagingArea$status will have value EXTENSION_ERROR
+	// Shows an error message that occurred when DRS tried to access the staging
+	// source server. In this case StagingArea$status will have value EXTENSION_ERROR
 	ErrorMessage *string
 
-	// Account ID of the account to which source server belongs. If this source server
-	// is extended - shows Account ID of staging source server.
+	// Account ID of the account to which source server belongs. If this source
+	// server is extended - shows Account ID of staging source server.
 	StagingAccountID *string
 
 	// Arn of the staging source server if this source server is extended
 	StagingSourceServerArn *string
 
-	// Status of Source server extension. Possible values: (a) NOT_EXTENDED - This is a
-	// source server that is replicating in the current account. (b) EXTENDED - Source
-	// server is extended from a staging source server. In this case, the value of
-	// stagingSourceServerArn is pointing to the Arn of the source server in the
+	// Status of Source server extension. Possible values: (a) NOT_EXTENDED - This is
+	// a source server that is replicating in the current account. (b) EXTENDED -
+	// Source server is extended from a staging source server. In this case, the value
+	// of stagingSourceServerArn is pointing to the Arn of the source server in the
 	// staging account. (c) EXTENSION_ERROR - Some issue occurred when accessing
 	// staging source server. In this case, errorMessage field will contain an error
 	// message that explains what happened.
@@ -889,8 +890,8 @@ type StartRecoveryRequestSourceServer struct {
 	// This member is required.
 	SourceServerID *string
 
-	// The ID of a Recovery Snapshot we want to recover from. Omit this field to launch
-	// from the latest data by taking an on-demand snapshot.
+	// The ID of a Recovery Snapshot we want to recover from. Omit this field to
+	// launch from the latest data by taking an on-demand snapshot.
 	RecoverySnapshotID *string
 
 	noSmithyDocumentSerde

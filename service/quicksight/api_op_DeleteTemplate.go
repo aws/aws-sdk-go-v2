@@ -28,8 +28,8 @@ func (c *Client) DeleteTemplate(ctx context.Context, params *DeleteTemplateInput
 
 type DeleteTemplateInput struct {
 
-	// The ID of the Amazon Web Services account that contains the template that you're
-	// deleting.
+	// The ID of the Amazon Web Services account that contains the template that
+	// you're deleting.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -40,7 +40,7 @@ type DeleteTemplateInput struct {
 	TemplateId *string
 
 	// Specifies the version of the template that you want to delete. If you don't
-	// provide a version number, DeleteTemplate deletes all versions of the template.
+	// provide a version number, DeleteTemplate  deletes all versions of the template.
 	VersionNumber *int64
 
 	noSmithyDocumentSerde

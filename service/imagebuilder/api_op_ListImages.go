@@ -35,12 +35,11 @@ type ListImagesInput struct {
 	ByName bool
 
 	// Use the following filters to streamline results:
-	// - name
-	// - osVersion
-	// - platform
-	// -
-	// type
-	// - version
+	//     - name
+	//     - osVersion
+	//     - platform
+	//     - type
+	//     - version
 	Filters []types.Filter
 
 	// Includes deprecated images in the response list.
@@ -158,8 +157,8 @@ type ListImagesPaginatorOptions struct {
 	// The maximum items to return in a request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

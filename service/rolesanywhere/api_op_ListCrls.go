@@ -13,7 +13,7 @@ import (
 )
 
 // Lists all Crls in the authenticated account and Amazon Web Services Region.
-// Required permissions: rolesanywhere:ListCrls.
+// Required permissions: rolesanywhere:ListCrls .
 func (c *Client) ListCrls(ctx context.Context, params *ListCrlsInput, optFns ...func(*Options)) (*ListCrlsOutput, error) {
 	if params == nil {
 		params = &ListCrlsInput{}
@@ -127,8 +127,8 @@ var _ ListCrlsAPIClient = (*Client)(nil)
 
 // ListCrlsPaginatorOptions is the paginator options for ListCrls
 type ListCrlsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

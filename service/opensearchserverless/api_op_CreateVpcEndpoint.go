@@ -13,8 +13,9 @@ import (
 )
 
 // Creates an OpenSearch Serverless-managed interface VPC endpoint. For more
-// information, see Access Amazon OpenSearch Serverless using an interface endpoint
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html).
+// information, see Access Amazon OpenSearch Serverless using an interface
+// endpoint (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html)
+// .
 func (c *Client) CreateVpcEndpoint(ctx context.Context, params *CreateVpcEndpointInput, optFns ...func(*Options)) (*CreateVpcEndpointOutput, error) {
 	if params == nil {
 		params = &CreateVpcEndpointInput{}
@@ -50,8 +51,9 @@ type CreateVpcEndpointInput struct {
 	// Unique, case-sensitive identifier to ensure idempotency of the request.
 	ClientToken *string
 
-	// The unique identifiers of the security groups that define the ports, protocols,
-	// and sources for inbound traffic that you are authorizing into your endpoint.
+	// The unique identifiers of the security groups that define the ports,
+	// protocols, and sources for inbound traffic that you are authorizing into your
+	// endpoint.
 	SecurityGroupIds []string
 
 	noSmithyDocumentSerde

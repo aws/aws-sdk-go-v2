@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Deletes an Amazon Web Services Migration Hub Refactor Spaces application. Before
-// you can delete an application, you must first delete any services or routes
-// within the application.
+// Deletes an Amazon Web Services Migration Hub Refactor Spaces application.
+// Before you can delete an application, you must first delete any services or
+// routes within the application.
 func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicationInput, optFns ...func(*Options)) (*DeleteApplicationOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationInput{}

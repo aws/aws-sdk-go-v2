@@ -34,8 +34,8 @@ type UpdateReplicationConfigurationInput struct {
 	// This member is required.
 	SourceServerID *string
 
-	// Update replication configuration associate default Application Migration Service
-	// Security group request.
+	// Update replication configuration associate default Application Migration
+	// Service Security group request.
 	AssociateDefaultSecurityGroup *bool
 
 	// Update replication configuration bandwidth throttling request.
@@ -65,7 +65,8 @@ type UpdateReplicationConfigurationInput struct {
 	// Update replication configuration Replication Server instance type request.
 	ReplicationServerInstanceType *string
 
-	// Update replication configuration Replication Server Security Groups IDs request.
+	// Update replication configuration Replication Server Security Groups IDs
+	// request.
 	ReplicationServersSecurityGroupsIDs []string
 
 	// Update replication configuration Staging Area subnet request.

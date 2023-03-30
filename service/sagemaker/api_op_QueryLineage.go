@@ -13,8 +13,7 @@ import (
 )
 
 // Use this action to inspect your lineage and discover relationships between
-// entities. For more information, see  Querying Lineage Entities
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/querying-lineage-entities.html)
+// entities. For more information, see Querying Lineage Entities (https://docs.aws.amazon.com/sagemaker/latest/dg/querying-lineage-entities.html)
 // in the Amazon SageMaker Developer Guide.
 func (c *Client) QueryLineage(ctx context.Context, params *QueryLineageInput, optFns ...func(*Options)) (*QueryLineageOutput, error) {
 	if params == nil {
@@ -37,41 +36,36 @@ type QueryLineageInput struct {
 	// determines the direction from the StartArn(s) that the query traverses.
 	Direction types.Direction
 
-	// A set of filtering parameters that allow you to specify which entities should be
-	// returned.
-	// - Properties - Key-value pairs to match on the lineage entities'
-	// properties.
-	// - LineageTypes - A set of lineage entity types to match on. For
-	// example: TrialComponent, Artifact, or Context.
-	// - CreatedBefore - Filter entities
-	// created before this date.
-	// - ModifiedBefore - Filter entities modified before
-	// this date.
-	// - ModifiedAfter - Filter entities modified after this date.
+	// A set of filtering parameters that allow you to specify which entities should
+	// be returned.
+	//     - Properties - Key-value pairs to match on the lineage entities' properties.
+	//     - LineageTypes - A set of lineage entity types to match on. For example: TrialComponent , Artifact , or Context .
+	//     - CreatedBefore - Filter entities created before this date.
+	//     - ModifiedBefore - Filter entities modified before this date.
+	//     - ModifiedAfter - Filter entities modified after this date.
 	Filters *types.QueryFilters
 
-	// Setting this value to True retrieves not only the entities of interest but also
-	// the Associations
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking-entities.html)
+	// Setting this value to True retrieves not only the entities of interest but
+	// also the Associations (https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking-entities.html)
 	// and lineage entities on the path. Set to False to only return lineage entities
 	// that match your query.
 	IncludeEdges bool
 
 	// The maximum depth in lineage relationships from the StartArns that are
-	// traversed. Depth is a measure of the number of Associations from the StartArn
+	// traversed. Depth is a measure of the number of Associations  from the StartArn
 	// entity to the matched results.
 	MaxDepth *int32
 
-	// Limits the number of vertices in the results. Use the NextToken in a response to
-	// to retrieve the next page of results.
+	// Limits the number of vertices in the results. Use the NextToken in a response
+	// to to retrieve the next page of results.
 	MaxResults *int32
 
-	// Limits the number of vertices in the request. Use the NextToken in a response to
-	// to retrieve the next page of results.
+	// Limits the number of vertices in the request. Use the NextToken in a response
+	// to to retrieve the next page of results.
 	NextToken *string
 
-	// A list of resource Amazon Resource Name (ARN) that represent the starting point
-	// for your lineage query.
+	// A list of resource Amazon Resource Name (ARN) that represent the starting
+	// point for your lineage query.
 	StartArns []string
 
 	noSmithyDocumentSerde
@@ -164,12 +158,12 @@ var _ QueryLineageAPIClient = (*Client)(nil)
 
 // QueryLineagePaginatorOptions is the paginator options for QueryLineage
 type QueryLineagePaginatorOptions struct {
-	// Limits the number of vertices in the results. Use the NextToken in a response to
-	// to retrieve the next page of results.
+	// Limits the number of vertices in the results. Use the NextToken in a response
+	// to to retrieve the next page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

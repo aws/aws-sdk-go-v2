@@ -33,9 +33,9 @@ type ListDistributionsInput struct {
 
 	// Use this when paginating results to indicate where to begin in your list of
 	// distributions. The results include distributions in the list that occur after
-	// the marker. To get the next page of results, set the Marker to the value of the
-	// NextMarker from the current page's response (which is also the ID of the last
-	// distribution on that page).
+	// the marker. To get the next page of results, set the Marker to the value of
+	// the NextMarker from the current page's response (which is also the ID of the
+	// last distribution on that page).
 	Marker *string
 
 	// The maximum number of distributions you want in the response body.
@@ -47,7 +47,7 @@ type ListDistributionsInput struct {
 // The returned result of the corresponding request.
 type ListDistributionsOutput struct {
 
-	// The DistributionList type.
+	// The DistributionList  type.
 	DistributionList *types.DistributionList
 
 	// Metadata pertaining to the operation's result.
@@ -124,13 +124,14 @@ type ListDistributionsAPIClient interface {
 
 var _ ListDistributionsAPIClient = (*Client)(nil)
 
-// ListDistributionsPaginatorOptions is the paginator options for ListDistributions
+// ListDistributionsPaginatorOptions is the paginator options for
+// ListDistributions
 type ListDistributionsPaginatorOptions struct {
 	// The maximum number of distributions you want in the response body.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

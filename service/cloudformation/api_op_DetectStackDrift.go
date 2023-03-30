@@ -18,20 +18,18 @@ import (
 // explicitly defined in the stack template are checked for drift. A stack is
 // considered to have drifted if one or more of its resources differ from their
 // expected template configurations. For more information, see Detecting
-// Unregulated Configuration Changes to Stacks and Resources
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
-// Use DetectStackDrift to detect drift on all supported resources for a given
-// stack, or DetectStackResourceDrift to detect drift on individual resources. For
-// a list of stack resources that currently support drift detection, see Resources
-// that Support Drift Detection
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
-// DetectStackDrift can take up to several minutes, depending on the number of
+// Unregulated Configuration Changes to Stacks and Resources (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html)
+// . Use DetectStackDrift to detect drift on all supported resources for a given
+// stack, or DetectStackResourceDrift to detect drift on individual resources.
+// For a list of stack resources that currently support drift detection, see
+// Resources that Support Drift Detection (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html)
+// . DetectStackDrift can take up to several minutes, depending on the number of
 // resources contained within the stack. Use DescribeStackDriftDetectionStatus to
 // monitor the progress of a detect stack drift operation. Once the drift detection
 // operation has completed, use DescribeStackResourceDrifts to return drift
 // information about the stack and its resources. When detecting drift on a stack,
 // CloudFormation doesn't detect drift on any nested stacks belonging to that
-// stack. Perform DetectStackDrift directly on the nested stack itself.
+// stack. Perform DetectStackDrift  directly on the nested stack itself.
 func (c *Client) DetectStackDrift(ctx context.Context, params *DetectStackDriftInput, optFns ...func(*Options)) (*DetectStackDriftOutput, error) {
 	if params == nil {
 		params = &DetectStackDriftInput{}

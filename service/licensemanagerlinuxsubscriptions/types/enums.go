@@ -12,9 +12,10 @@ const (
 	LinuxSubscriptionsDiscoveryDisabled LinuxSubscriptionsDiscovery = "Disabled"
 )
 
-// Values returns all known values for LinuxSubscriptionsDiscovery. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LinuxSubscriptionsDiscovery. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (LinuxSubscriptionsDiscovery) Values() []LinuxSubscriptionsDiscovery {
 	return []LinuxSubscriptionsDiscovery{
 		"Enabled",
@@ -34,9 +35,9 @@ const (
 	OperatorContains Operator = "Contains"
 )
 
-// Values returns all known values for Operator. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Operator. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Operator) Values() []Operator {
 	return []Operator{
 		"Equal",
@@ -55,9 +56,9 @@ const (
 	OrganizationIntegrationDisabled OrganizationIntegration = "Disabled"
 )
 
-// Values returns all known values for OrganizationIntegration. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OrganizationIntegration. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrganizationIntegration) Values() []OrganizationIntegration {
 	return []OrganizationIntegration{
 		"Enabled",

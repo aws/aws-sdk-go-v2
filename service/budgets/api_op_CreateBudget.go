@@ -12,10 +12,9 @@ import (
 )
 
 // Creates a budget and, if included, notifications and subscribers. Only one of
-// BudgetLimit or PlannedBudgetLimits can be present in the syntax at one time. Use
-// the syntax that matches your case. The Request Syntax section shows the
-// BudgetLimit syntax. For PlannedBudgetLimits, see the Examples
-// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_CreateBudget.html#API_CreateBudget_Examples)
+// BudgetLimit or PlannedBudgetLimits can be present in the syntax at one time.
+// Use the syntax that matches your case. The Request Syntax section shows the
+// BudgetLimit syntax. For PlannedBudgetLimits , see the Examples (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_CreateBudget.html#API_CreateBudget_Examples)
 // section.
 func (c *Client) CreateBudget(ctx context.Context, params *CreateBudgetInput, optFns ...func(*Options)) (*CreateBudgetOutput, error) {
 	if params == nil {
@@ -35,7 +34,7 @@ func (c *Client) CreateBudget(ctx context.Context, params *CreateBudgetInput, op
 // Request of CreateBudget
 type CreateBudgetInput struct {
 
-	// The accountId that is associated with the budget.
+	// The accountId  that is associated with the budget.
 	//
 	// This member is required.
 	AccountId *string
@@ -45,11 +44,11 @@ type CreateBudgetInput struct {
 	// This member is required.
 	Budget *types.Budget
 
-	// A notification that you want to associate with a budget. A budget can have up to
-	// five notifications, and each notification can have one SNS subscriber and up to
-	// 10 email subscribers. If you include notifications and subscribers in your
-	// CreateBudget call, Amazon Web Services creates the notifications and subscribers
-	// for you.
+	// A notification that you want to associate with a budget. A budget can have up
+	// to five notifications, and each notification can have one SNS subscriber and up
+	// to 10 email subscribers. If you include notifications and subscribers in your
+	// CreateBudgetcall, Amazon Web Services creates the notifications and
+	// subscribers for you.
 	NotificationsWithSubscribers []types.NotificationWithSubscribers
 
 	noSmithyDocumentSerde

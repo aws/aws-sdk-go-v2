@@ -34,8 +34,8 @@ type DescribeReservedDBInstancesOfferingsInput struct {
 	// available offerings matching the specified DB instance class.
 	DBInstanceClass *string
 
-	// Duration filter value, specified in years or seconds. Specify this parameter to
-	// show only reservations for this duration. Valid Values: 1 | 3 | 31536000 |
+	// Duration filter value, specified in years or seconds. Specify this parameter
+	// to show only reservations for this duration. Valid Values: 1 | 3 | 31536000 |
 	// 94608000
 	Duration *string
 
@@ -44,12 +44,12 @@ type DescribeReservedDBInstancesOfferingsInput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response. If more than the
-	// MaxRecords value is available, a pagination token called a marker is included in
-	// the response so you can retrieve the remaining results. Default: 100
+	// MaxRecordsvalue is available, a pagination token called a marker is included
+	// in the response so you can retrieve the remaining results. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -58,8 +58,8 @@ type DescribeReservedDBInstancesOfferingsInput struct {
 	MultiAZ *bool
 
 	// The offering type filter value. Specify this parameter to show only the
-	// available offerings matching the specified offering type. Valid Values: "Partial
-	// Upfront" | "All Upfront" | "No Upfront"
+	// available offerings matching the specified offering type. Valid Values:
+	// "Partial Upfront" | "All Upfront" | "No Upfront"
 	OfferingType *string
 
 	// Product description filter value. Specify this parameter to show only the
@@ -81,7 +81,7 @@ type DescribeReservedDBInstancesOfferingsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// A list of reserved DB instance offerings.
@@ -168,13 +168,13 @@ var _ DescribeReservedDBInstancesOfferingsAPIClient = (*Client)(nil)
 // for DescribeReservedDBInstancesOfferings
 type DescribeReservedDBInstancesOfferingsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more than the
-	// MaxRecords value is available, a pagination token called a marker is included in
-	// the response so you can retrieve the remaining results. Default: 100
+	// MaxRecordsvalue is available, a pagination token called a marker is included
+	// in the response so you can retrieve the remaining results. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

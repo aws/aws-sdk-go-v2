@@ -11,8 +11,8 @@ import (
 	"time"
 )
 
-// Retrieves an attribute group by its ARN, ID, or name. The attribute group can be
-// specified by its ARN, ID, or name.
+// Retrieves an attribute group by its ARN, ID, or name. The attribute group can
+// be specified by its ARN, ID, or name.
 func (c *Client) GetAttributeGroup(ctx context.Context, params *GetAttributeGroupInput, optFns ...func(*Options)) (*GetAttributeGroupOutput, error) {
 	if params == nil {
 		params = &GetAttributeGroupInput{}

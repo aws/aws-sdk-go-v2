@@ -41,8 +41,8 @@ type GetFileInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The fully quaified reference that identifies the commit that contains the file.
-	// For example, you can specify a full commit ID, a tag, a branch name, or a
+	// The fully quaified reference that identifies the commit that contains the
+	// file. For example, you can specify a full commit ID, a tag, a branch name, or a
 	// reference such as refs/heads/master. If none is provided, the head commit is
 	// used.
 	CommitSpecifier *string
@@ -67,10 +67,10 @@ type GetFileOutput struct {
 	// This member is required.
 	FileContent []byte
 
-	// The extrapolated file mode permissions of the blob. Valid values include strings
-	// such as EXECUTABLE and not numeric values. The file mode permissions returned by
-	// this API are not the standard file mode permission values, such as 100644, but
-	// rather extrapolated values. See the supported return values.
+	// The extrapolated file mode permissions of the blob. Valid values include
+	// strings such as EXECUTABLE and not numeric values. The file mode permissions
+	// returned by this API are not the standard file mode permission values, such as
+	// 100644, but rather extrapolated values. See the supported return values.
 	//
 	// This member is required.
 	FileMode types.FileModeTypeEnum

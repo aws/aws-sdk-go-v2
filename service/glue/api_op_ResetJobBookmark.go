@@ -13,14 +13,9 @@ import (
 
 // Resets a bookmark entry. For more information about enabling and using job
 // bookmarks, see:
-// - Tracking processed data using job bookmarks
-// (https://docs.aws.amazon.com/glue/latest/dg/monitor-continuations.html)
-// - Job
-// parameters used by Glue
-// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
-// -
-// Job structure
-// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-jobs-job.html#aws-glue-api-jobs-job-Job)
+//   - Tracking processed data using job bookmarks (https://docs.aws.amazon.com/glue/latest/dg/monitor-continuations.html)
+//   - Job parameters used by Glue (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
+//   - Job structure (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-jobs-job.html#aws-glue-api-jobs-job-Job)
 func (c *Client) ResetJobBookmark(ctx context.Context, params *ResetJobBookmarkInput, optFns ...func(*Options)) (*ResetJobBookmarkOutput, error) {
 	if params == nil {
 		params = &ResetJobBookmarkInput{}

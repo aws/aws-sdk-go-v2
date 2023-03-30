@@ -169,12 +169,12 @@ type BatchDisassociateApprovalRuleTemplateFromRepositoriesError struct {
 	// found.
 	ErrorCode *string
 
-	// An error message that provides details about why the repository name was either
-	// not found or not valid.
+	// An error message that provides details about why the repository name was
+	// either not found or not valid.
 	ErrorMessage *string
 
-	// The name of the repository where the association with the template was not able
-	// to be removed.
+	// The name of the repository where the association with the template was not
+	// able to be removed.
 	RepositoryName *string
 
 	noSmithyDocumentSerde
@@ -203,12 +203,10 @@ type BlobMetadata struct {
 	BlobId *string
 
 	// The file mode permissions of the blob. File mode permission codes include:
-	// -
-	// 100644 indicates read/write
-	// - 100755 indicates read/write/execute
-	// - 160000
-	// indicates a submodule
-	// - 120000 indicates a symlink
+	//     - 100644 indicates read/write
+	//     - 100755 indicates read/write/execute
+	//     - 160000 indicates a submodule
+	//     - 120000 indicates a symlink
 	Mode *string
 
 	// The path to the blob and associated file name, if any.
@@ -263,8 +261,8 @@ type Comment struct {
 	// The date and time the comment was most recently modified, in timestamp format.
 	LastModifiedDate *time.Time
 
-	// A string to integer map that represents the number of individual users who have
-	// responded to a comment with the specified reactions.
+	// A string to integer map that represents the number of individual users who
+	// have responded to a comment with the specified reactions.
 	ReactionCounts map[string]int32
 
 	noSmithyDocumentSerde
@@ -282,7 +280,8 @@ type CommentsForComparedCommit struct {
 	// The full blob ID of the commit used to establish the before of the comparison.
 	BeforeBlobId *string
 
-	// The full commit ID of the commit used to establish the before of the comparison.
+	// The full commit ID of the commit used to establish the before of the
+	// comparison.
 	BeforeCommitId *string
 
 	// An array of comment objects. Each comment object contains information about a
@@ -314,10 +313,10 @@ type CommentsForPullRequest struct {
 	// commit.
 	BeforeBlobId *string
 
-	// The full commit ID of the commit that was the tip of the destination branch when
-	// the pull request was created. This commit is superceded by the after commit in
-	// the source branch when and if you merge the source branch into the destination
-	// branch.
+	// The full commit ID of the commit that was the tip of the destination branch
+	// when the pull request was created. This commit is superceded by the after commit
+	// in the source branch when and if you merge the source branch into the
+	// destination branch.
 	BeforeCommitId *string
 
 	// An array of comment objects. Each comment object contains information about a
@@ -356,15 +355,15 @@ type Commit struct {
 	// the committer. Information includes the date in timestamp format with GMT
 	// offset, the name of the committer, and the email address for the committer, as
 	// configured in Git. For more information about the difference between an author
-	// and a committer in Git, see Viewing the Commit History
-	// (http://git-scm.com/book/ch2-3.html) in Pro Git by Scott Chacon and Ben Straub.
+	// and a committer in Git, see Viewing the Commit History (http://git-scm.com/book/ch2-3.html)
+	// in Pro Git by Scott Chacon and Ben Straub.
 	Committer *UserInfo
 
 	// The commit message associated with the specified commit.
 	Message *string
 
-	// A list of parent commits for the specified commit. Each parent commit ID is the
-	// full commit ID.
+	// A list of parent commits for the specified commit. Each parent commit ID is
+	// the full commit ID.
 	Parents []string
 
 	// Tree information for the specified commit.
@@ -379,8 +378,8 @@ type Conflict struct {
 	// Metadata about a conflict in a merge operation.
 	ConflictMetadata *ConflictMetadata
 
-	// A list of hunks that contain the differences between files or lines causing the
-	// conflict.
+	// A list of hunks that contain the differences between files or lines causing
+	// the conflict.
 	MergeHunks []MergeHunk
 
 	noSmithyDocumentSerde
@@ -389,7 +388,8 @@ type Conflict struct {
 // Information about the metadata for a conflict in a merge operation.
 type ConflictMetadata struct {
 
-	// A boolean value indicating whether there are conflicts in the content of a file.
+	// A boolean value indicating whether there are conflicts in the content of a
+	// file.
 	ContentConflict bool
 
 	// A boolean value indicating whether there are conflicts in the file mode of a
@@ -405,8 +405,8 @@ type ConflictMetadata struct {
 	// The file sizes of the file in the source, destination, and base of the merge.
 	FileSizes *FileSizes
 
-	// A boolean value (true or false) indicating whether the file is binary or textual
-	// in the source, destination, and base of the merge.
+	// A boolean value (true or false) indicating whether the file is binary or
+	// textual in the source, destination, and base of the merge.
 	IsBinaryFile *IsBinaryFile
 
 	// Whether an add, modify, or delete operation caused the conflict between the
@@ -456,12 +456,12 @@ type DeleteFileEntry struct {
 // Returns information about a set of differences for a commit specifier.
 type Difference struct {
 
-	// Information about an afterBlob data type object, including the ID, the file mode
-	// permission code, and the path.
+	// Information about an afterBlob data type object, including the ID, the file
+	// mode permission code, and the path.
 	AfterBlob *BlobMetadata
 
-	// Information about a beforeBlob data type object, including the ID, the file mode
-	// permission code, and the path.
+	// Information about a beforeBlob data type object, including the ID, the file
+	// mode permission code, and the path.
 	BeforeBlob *BlobMetadata
 
 	// Whether the change type of the difference is an addition (A), deletion (D), or
@@ -484,8 +484,8 @@ type Evaluation struct {
 	// Whether the state of the pull request is approved.
 	Approved bool
 
-	// Whether the approval rule requirements for the pull request have been overridden
-	// and no longer need to be met.
+	// Whether the approval rule requirements for the pull request have been
+	// overridden and no longer need to be met.
 	Overridden bool
 
 	noSmithyDocumentSerde
@@ -567,23 +567,23 @@ type Folder struct {
 	// originated.
 	RelativePath *string
 
-	// The full SHA-1 pointer of the tree information for the commit that contains the
-	// folder.
+	// The full SHA-1 pointer of the tree information for the commit that contains
+	// the folder.
 	TreeId *string
 
 	noSmithyDocumentSerde
 }
 
-// Information about whether a file is binary or textual in a merge or pull request
-// operation.
+// Information about whether a file is binary or textual in a merge or pull
+// request operation.
 type IsBinaryFile struct {
 
 	// The binary or non-binary status of a file in the base of a merge or pull
 	// request.
 	Base *bool
 
-	// The binary or non-binary status of a file in the destination of a merge or pull
-	// request.
+	// The binary or non-binary status of a file in the destination of a merge or
+	// pull request.
 	Destination *bool
 
 	// The binary or non-binary status of file in the source of a merge or pull
@@ -593,8 +593,8 @@ type IsBinaryFile struct {
 	noSmithyDocumentSerde
 }
 
-// Returns information about the location of a change or comment in the comparison
-// between two commits or a pull request.
+// Returns information about the location of a change or comment in the
+// comparison between two commits or a pull request.
 type Location struct {
 
 	// The name of the file being compared, including its extension and subdirectory,
@@ -651,8 +651,8 @@ type MergeHunkDetail struct {
 	noSmithyDocumentSerde
 }
 
-// Returns information about a merge or potential merge between a source reference
-// and a destination reference in a pull request.
+// Returns information about a merge or potential merge between a source
+// reference and a destination reference in a pull request.
 type MergeMetadata struct {
 
 	// A Boolean value indicating whether the merge has been made.
@@ -698,8 +698,8 @@ type ObjectTypes struct {
 	noSmithyDocumentSerde
 }
 
-// Returns information about the template that created the approval rule for a pull
-// request.
+// Returns information about the template that created the approval rule for a
+// pull request.
 type OriginApprovalRuleTemplate struct {
 
 	// The ID of the template that created the approval rule.
@@ -740,8 +740,8 @@ type PullRequest struct {
 	// The system-generated ID of the pull request.
 	PullRequestId *string
 
-	// The status of the pull request. Pull request status can only change from OPEN to
-	// CLOSED.
+	// The status of the pull request. Pull request status can only change from OPEN
+	// to CLOSED .
 	PullRequestStatus PullRequestStatusEnum
 
 	// The targets of the pull request, including the source branch and destination
@@ -751,8 +751,8 @@ type PullRequest struct {
 	// The system-generated revision ID for the pull request.
 	RevisionId *string
 
-	// The user-defined title of the pull request. This title is displayed in the list
-	// of pull requests to other repository users.
+	// The user-defined title of the pull request. This title is displayed in the
+	// list of pull requests to other repository users.
 	Title *string
 
 	noSmithyDocumentSerde
@@ -762,8 +762,8 @@ type PullRequest struct {
 // source with its destination.
 type PullRequestCreatedEventMetadata struct {
 
-	// The commit ID of the tip of the branch specified as the destination branch when
-	// the pull request was created.
+	// The commit ID of the tip of the branch specified as the destination branch
+	// when the pull request was created.
 	DestinationCommitId *string
 
 	// The commit ID of the most recent commit that the source branch and the
@@ -782,9 +782,9 @@ type PullRequestCreatedEventMetadata struct {
 // Returns information about a pull request event.
 type PullRequestEvent struct {
 
-	// The Amazon Resource Name (ARN) of the user whose actions resulted in the event.
-	// Examples include updating the pull request with more commits or changing the
-	// status of a pull request.
+	// The Amazon Resource Name (ARN) of the user whose actions resulted in the
+	// event. Examples include updating the pull request with more commits or changing
+	// the status of a pull request.
 	ActorArn *string
 
 	// Information about a pull request event.
@@ -871,8 +871,8 @@ type PullRequestStatusChangedEventMetadata struct {
 // Returns information about a pull request target.
 type PullRequestTarget struct {
 
-	// The full commit ID that is the tip of the destination branch. This is the commit
-	// where the pull request was or will be merged.
+	// The full commit ID that is the tip of the destination branch. This is the
+	// commit where the pull request was or will be merged.
 	DestinationCommit *string
 
 	// The branch of the repository where the pull request changes are merged. Also
@@ -887,8 +887,8 @@ type PullRequestTarget struct {
 	// been made.
 	MergeMetadata *MergeMetadata
 
-	// The name of the repository that contains the pull request source and destination
-	// branches.
+	// The name of the repository that contains the pull request source and
+	// destination branches.
 	RepositoryName *string
 
 	// The full commit ID of the tip of the source branch used to create the pull
@@ -918,8 +918,8 @@ type PutFileEntry struct {
 	// EXECUTABLE and NORMAL.
 	FileMode FileModeTypeEnum
 
-	// The name and full path of the file that contains the changes you want to make as
-	// part of the commit, if you are not providing the file content directly.
+	// The name and full path of the file that contains the changes you want to make
+	// as part of the commit, if you are not providing the file content directly.
 	SourceFile *SourceFileSpecifier
 
 	noSmithyDocumentSerde
@@ -935,16 +935,17 @@ type ReactionForComment struct {
 	// comment.
 	ReactionUsers []string
 
-	// A numerical count of users who reacted with the specified emoji whose identities
-	// have been subsequently deleted from IAM. While these IAM users or roles no
-	// longer exist, the reactions might still appear in total reaction counts.
+	// A numerical count of users who reacted with the specified emoji whose
+	// identities have been subsequently deleted from IAM. While these IAM users or
+	// roles no longer exist, the reactions might still appear in total reaction
+	// counts.
 	ReactionsFromDeletedUsersCount *int32
 
 	noSmithyDocumentSerde
 }
 
-// Information about the values for reactions to a comment. AWS CodeCommit supports
-// a limited set of reactions.
+// Information about the values for reactions to a comment. AWS CodeCommit
+// supports a limited set of reactions.
 type ReactionValueFormats struct {
 
 	// The Emoji Version 1.0 graphic of the reaction. These graphics are interpreted
@@ -961,8 +962,8 @@ type ReactionValueFormats struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a replacement content entry in the conflict of a merge or pull
-// request operation.
+// Information about a replacement content entry in the conflict of a merge or
+// pull request operation.
 type ReplaceContentEntry struct {
 
 	// The path of the conflicting file.
@@ -975,7 +976,8 @@ type ReplaceContentEntry struct {
 	// This member is required.
 	ReplacementType ReplacementTypeEnum
 
-	// The base-64 encoded content to use when the replacement type is USE_NEW_CONTENT.
+	// The base-64 encoded content to use when the replacement type is
+	// USE_NEW_CONTENT.
 	Content []byte
 
 	// The file mode to apply during conflict resoltion.
@@ -1041,9 +1043,9 @@ type RepositoryTrigger struct {
 	// This member is required.
 	DestinationArn *string
 
-	// The repository events that cause the trigger to run actions in another service,
-	// such as sending a notification through Amazon SNS. The valid value "all" cannot
-	// be used with any other values.
+	// The repository events that cause the trigger to run actions in another
+	// service, such as sending a notification through Amazon SNS. The valid value
+	// "all" cannot be used with any other values.
 	//
 	// This member is required.
 	Events []RepositoryTriggerEventEnum

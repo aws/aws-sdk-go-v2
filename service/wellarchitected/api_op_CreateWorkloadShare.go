@@ -12,11 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a workload share. The owner of a workload can share it with other Amazon
-// Web Services accounts and IAM users in the same Amazon Web Services Region.
-// Shared access to a workload is not removed until the workload invitation is
-// deleted. For more information, see Sharing a Workload
-// (https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html)
+// Create a workload share. The owner of a workload can share it with other
+// Amazon Web Services accounts and IAM users in the same Amazon Web Services
+// Region. Shared access to a workload is not removed until the workload invitation
+// is deleted. For more information, see Sharing a Workload (https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html)
 // in the Well-Architected Tool User Guide.
 func (c *Client) CreateWorkloadShare(ctx context.Context, params *CreateWorkloadShareInput, optFns ...func(*Options)) (*CreateWorkloadShareOutput, error) {
 	if params == nil {
@@ -53,14 +52,14 @@ type CreateWorkloadShareInput struct {
 	// This member is required.
 	PermissionType types.PermissionType
 
-	// The Amazon Web Services account ID, IAM role, organization ID, or organizational
-	// unit (OU) ID with which the workload is shared.
+	// The Amazon Web Services account ID, IAM role, organization ID, or
+	// organizational unit (OU) ID with which the workload is shared.
 	//
 	// This member is required.
 	SharedWith *string
 
-	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
-	// Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web
+	// Services Region.
 	//
 	// This member is required.
 	WorkloadId *string
@@ -74,8 +73,8 @@ type CreateWorkloadShareOutput struct {
 	// The ID associated with the workload share.
 	ShareId *string
 
-	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
-	// Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web
+	// Services Region.
 	WorkloadId *string
 
 	// Metadata pertaining to the operation's result.

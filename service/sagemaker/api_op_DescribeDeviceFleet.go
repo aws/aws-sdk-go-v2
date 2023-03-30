@@ -68,8 +68,8 @@ type DescribeDeviceFleetOutput struct {
 	// A description of the fleet.
 	Description *string
 
-	// The Amazon Resource Name (ARN) alias created in Amazon Web Services Internet of
-	// Things (IoT).
+	// The Amazon Resource Name (ARN) alias created in Amazon Web Services Internet
+	// of Things (IoT).
 	IotRoleAlias *string
 
 	// The Amazon Resource Name (ARN) that has access to Amazon Web Services Internet

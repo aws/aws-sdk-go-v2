@@ -13,7 +13,7 @@ import (
 // Move a dedicated IP address to an existing dedicated IP pool. The dedicated IP
 // address that you specify must already exist, and must be associated with your
 // Amazon Web Services account. The dedicated IP pool you specify must already
-// exist. You can create a new pool by using the CreateDedicatedIpPool operation.
+// exist. You can create a new pool by using the CreateDedicatedIpPool  operation.
 func (c *Client) PutDedicatedIpInPool(ctx context.Context, params *PutDedicatedIpInPoolInput, optFns ...func(*Options)) (*PutDedicatedIpInPoolOutput, error) {
 	if params == nil {
 		params = &PutDedicatedIpInPoolInput{}
@@ -48,8 +48,8 @@ type PutDedicatedIpInPoolInput struct {
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type PutDedicatedIpInPoolOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

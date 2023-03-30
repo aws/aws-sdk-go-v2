@@ -13,10 +13,11 @@ import (
 
 // Detaches a stopped block storage disk from a Lightsail instance. Make sure to
 // unmount any file systems on the device within your operating system before
-// stopping the instance and detaching the disk. The detach disk operation supports
-// tag-based access control via resource tags applied to the resource identified by
-// disk name. For more information, see the Amazon Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// stopping the instance and detaching the disk. The detach disk operation
+// supports tag-based access control via resource tags applied to the resource
+// identified by disk name . For more information, see the Amazon Lightsail
+// Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) DetachDisk(ctx context.Context, params *DetachDiskInput, optFns ...func(*Options)) (*DetachDiskOutput, error) {
 	if params == nil {
 		params = &DetachDiskInput{}
@@ -35,7 +36,7 @@ func (c *Client) DetachDisk(ctx context.Context, params *DetachDiskInput, optFns
 type DetachDiskInput struct {
 
 	// The unique name of the disk you want to detach from your instance (e.g.,
-	// my-disk).
+	// my-disk ).
 	//
 	// This member is required.
 	DiskName *string

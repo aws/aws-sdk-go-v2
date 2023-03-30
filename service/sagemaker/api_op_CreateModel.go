@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a model in SageMaker. In the request, you name the model and describe a
-// primary container. For the primary container, you specify the Docker image that
-// contains inference code, artifacts (from prior training), and a custom
+// Creates a model in SageMaker. In the request, you name the model and describe
+// a primary container. For the primary container, you specify the Docker image
+// that contains inference code, artifacts (from prior training), and a custom
 // environment map that the inference code uses when you deploy the model for
 // predictions. Use this API to create a model if you want to use SageMaker hosting
 // services or run a batch transform job. To host your model, you create an
@@ -21,10 +21,9 @@ import (
 // endpoint with the CreateEndpoint API. SageMaker then deploys all of the
 // containers that you defined for the model in the hosting environment. For an
 // example that calls this method when deploying a model to SageMaker hosting
-// services, see Create a Model (Amazon Web Services SDK for Python (Boto 3)).
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-deployment.html#realtime-endpoints-deployment-create-model)
+// services, see Create a Model (Amazon Web Services SDK for Python (Boto 3)). (https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-deployment.html#realtime-endpoints-deployment-create-model)
 // To run a batch transform using your model, you start a job with the
-// CreateTransformJob API. SageMaker uses your model and your dataset to get
+// CreateTransformJobAPI. SageMaker uses your model and your dataset to get
 // inferences which are then saved to a specified S3 location. In the request, you
 // also provide an IAM role that SageMaker can assume to access model artifacts and
 // docker image for deployment on ML compute hosting instances or for batch
@@ -51,10 +50,9 @@ type CreateModelInput struct {
 	// The Amazon Resource Name (ARN) of the IAM role that SageMaker can assume to
 	// access model artifacts and docker image for deployment on ML compute instances
 	// or for batch transform jobs. Deploying on ML compute instances is part of model
-	// hosting. For more information, see SageMaker Roles
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html). To be
-	// able to pass this role to SageMaker, the caller of this API must have the
-	// iam:PassRole permission.
+	// hosting. For more information, see SageMaker Roles (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html)
+	// . To be able to pass this role to SageMaker, the caller of this API must have
+	// the iam:PassRole  permission.
 	//
 	// This member is required.
 	ExecutionRoleArn *string
@@ -81,17 +79,16 @@ type CreateModelInput struct {
 
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or
-	// environment. For more information, see Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	// environment. For more information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// .
 	Tags []types.Tag
 
 	// A VpcConfig object that specifies the VPC that you want your model to connect
 	// to. Control access to and from your model container by configuring the VPC.
-	// VpcConfig is used in hosting services and in batch transform. For more
-	// information, see Protect Endpoints by Using an Amazon Virtual Private Cloud
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html) and Protect Data
-	// in Batch Transform Jobs by Using an Amazon Virtual Private Cloud
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html).
+	// VpcConfigis used in hosting services and in batch transform. For more
+	// information, see Protect Endpoints by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
+	// and Protect Data in Batch Transform Jobs by Using an Amazon Virtual Private
+	// Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html) .
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde

@@ -12,8 +12,8 @@ import (
 )
 
 // Updates a package for use with Amazon OpenSearch Service domains. For more
-// information, see Custom packages for Amazon OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
+// information, see Custom packages for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html)
+// .
 func (c *Client) UpdatePackage(ctx context.Context, params *UpdatePackageInput, optFns ...func(*Options)) (*UpdatePackageOutput, error) {
 	if params == nil {
 		params = &UpdatePackageInput{}
@@ -29,7 +29,7 @@ func (c *Client) UpdatePackage(ctx context.Context, params *UpdatePackageInput, 
 	return out, nil
 }
 
-// Container for request parameters to the UpdatePackage operation.
+// Container for request parameters to the UpdatePackage  operation.
 type UpdatePackageInput struct {
 
 	// The unique identifier for the package.
@@ -43,7 +43,7 @@ type UpdatePackageInput struct {
 	PackageSource *types.PackageSource
 
 	// Commit message for the updated file, which is shown as part of
-	// GetPackageVersionHistoryResponse.
+	// GetPackageVersionHistoryResponse .
 	CommitMessage *string
 
 	// A new description of the package.
@@ -52,7 +52,7 @@ type UpdatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for the response returned by the UpdatePackage operation.
+// Container for the response returned by the UpdatePackage  operation.
 type UpdatePackageOutput struct {
 
 	// Information about a package.

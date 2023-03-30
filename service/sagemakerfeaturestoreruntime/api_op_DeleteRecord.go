@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Record from a FeatureGroup. When the DeleteRecord API is called a new
-// record will be added to the OfflineStore and the Record will be removed from the
-// OnlineStore. This record will have a value of True in the is_deleted column.
+// Deletes a Record  from a FeatureGroup . When the DeleteRecord API is called a
+// new record will be added to the OfflineStore  and the Record will be removed
+// from the OnlineStore . This record will have a value of True  in the is_deleted
+// column.
 func (c *Client) DeleteRecord(ctx context.Context, params *DeleteRecordInput, optFns ...func(*Options)) (*DeleteRecordOutput, error) {
 	if params == nil {
 		params = &DeleteRecordInput{}
@@ -31,8 +32,8 @@ func (c *Client) DeleteRecord(ctx context.Context, params *DeleteRecordInput, op
 
 type DeleteRecordInput struct {
 
-	// Timestamp indicating when the deletion event occurred. EventTime can be used to
-	// query data at a certain point in time.
+	// Timestamp indicating when the deletion event occurred. EventTime can be used
+	// to query data at a certain point in time.
 	//
 	// This member is required.
 	EventTime *string
@@ -50,7 +51,7 @@ type DeleteRecordInput struct {
 
 	// A list of stores from which you're deleting the record. By default, Feature
 	// Store deletes the record from all of the stores that you're using for the
-	// FeatureGroup.
+	// FeatureGroup .
 	TargetStores []types.TargetStore
 
 	noSmithyDocumentSerde

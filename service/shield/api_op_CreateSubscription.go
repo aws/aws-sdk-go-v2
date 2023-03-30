@@ -15,7 +15,7 @@ import (
 // organization's payer account, regardless of whether the payer account itself is
 // subscribed. When you initially create a subscription, your subscription is set
 // to be automatically renewed at the end of the existing subscription period. You
-// can change this by submitting an UpdateSubscription request.
+// can change this by submitting an UpdateSubscription  request.
 func (c *Client) CreateSubscription(ctx context.Context, params *CreateSubscriptionInput, optFns ...func(*Options)) (*CreateSubscriptionOutput, error) {
 	if params == nil {
 		params = &CreateSubscriptionInput{}

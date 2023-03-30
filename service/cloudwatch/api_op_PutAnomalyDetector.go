@@ -13,8 +13,8 @@ import (
 
 // Creates an anomaly detection model for a CloudWatch metric. You can use the
 // model to display a band of expected normal values when the metric is graphed.
-// For more information, see CloudWatch Anomaly Detection
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html).
+// For more information, see CloudWatch Anomaly Detection (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html)
+// .
 func (c *Client) PutAnomalyDetector(ctx context.Context, params *PutAnomalyDetectorInput, optFns ...func(*Options)) (*PutAnomalyDetectorOutput, error) {
 	if params == nil {
 		params = &PutAnomalyDetectorInput{}
@@ -32,8 +32,8 @@ func (c *Client) PutAnomalyDetector(ctx context.Context, params *PutAnomalyDetec
 
 type PutAnomalyDetectorInput struct {
 
-	// The configuration specifies details about how the anomaly detection model is to
-	// be trained, including time ranges to exclude when training and updating the
+	// The configuration specifies details about how the anomaly detection model is
+	// to be trained, including time ranges to exclude when training and updating the
 	// model. You can specify as many as 10 time ranges. The configuration can also
 	// include the time zone to use for the metric.
 	Configuration *types.AnomalyDetectorConfiguration
@@ -46,16 +46,14 @@ type PutAnomalyDetectorInput struct {
 	// The metric math anomaly detector to be created. When using
 	// MetricMathAnomalyDetector, you cannot include the following parameters in the
 	// same operation:
-	// - Dimensions
-	// - MetricName
-	// - Namespace
-	// - Stat
-	// - the
-	// SingleMetricAnomalyDetector parameters of PutAnomalyDetectorInput
+	//     - Dimensions
+	//     - MetricName
+	//     - Namespace
+	//     - Stat
+	//     - the SingleMetricAnomalyDetector parameters of PutAnomalyDetectorInput
 	//
-	// Instead,
-	// specify the metric math anomaly detector attributes as part of the property
-	// MetricMathAnomalyDetector.
+	// Instead, specify the metric math anomaly detector attributes as part of the
+	// property MetricMathAnomalyDetector .
 	MetricMathAnomalyDetector *types.MetricMathAnomalyDetector
 
 	// The name of the metric to create the anomaly detection model for.
@@ -69,18 +67,16 @@ type PutAnomalyDetectorInput struct {
 	Namespace *string
 
 	// A single metric anomaly detector to be created. When using
-	// SingleMetricAnomalyDetector, you cannot include the following parameters in the
-	// same operation:
-	// - Dimensions
-	// - MetricName
-	// - Namespace
-	// - Stat
-	// - the
-	// MetricMatchAnomalyDetector parameters of PutAnomalyDetectorInput
+	// SingleMetricAnomalyDetector, you cannot include the following parameters in
+	// the same operation:
+	//     - Dimensions
+	//     - MetricName
+	//     - Namespace
+	//     - Stat
+	//     - the MetricMatchAnomalyDetector parameters of PutAnomalyDetectorInput
 	//
-	// Instead,
-	// specify the single metric anomaly detector attributes as part of the property
-	// SingleMetricAnomalyDetector.
+	// Instead, specify the single metric anomaly detector attributes as part of the
+	// property SingleMetricAnomalyDetector .
 	SingleMetricAnomalyDetector *types.SingleMetricAnomalyDetector
 
 	// The statistic to use for the metric and the anomaly detection model.

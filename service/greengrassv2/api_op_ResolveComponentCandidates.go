@@ -16,15 +16,15 @@ import (
 // they receive a deployment to identify the components to install. This operation
 // identifies components that meet all dependency requirements for a deployment. If
 // the requirements conflict, then this operation returns an error and the
-// deployment fails. For example, this occurs if component A requires version
-// >2.0.0 and component B requires version <2.0.0 of a component dependency. When
-// you specify the component candidates to resolve, IoT Greengrass compares each
-// component's digest from the core device with the component's digest in the
+// deployment fails. For example, this occurs if component A  requires version
+// >2.0.0 and component B  requires version <2.0.0 of a component dependency.
+// When you specify the component candidates to resolve, IoT Greengrass compares
+// each component's digest from the core device with the component's digest in the
 // Amazon Web Services Cloud. If the digests don't match, then IoT Greengrass
 // specifies to use the version from the Amazon Web Services Cloud. To use this
 // operation, you must use the data plane API endpoint and authenticate with an IoT
 // device certificate. For more information, see IoT Greengrass endpoints and
-// quotas (https://docs.aws.amazon.com/general/latest/gr/greengrass.html).
+// quotas (https://docs.aws.amazon.com/general/latest/gr/greengrass.html) .
 func (c *Client) ResolveComponentCandidates(ctx context.Context, params *ResolveComponentCandidatesInput, optFns ...func(*Options)) (*ResolveComponentCandidatesOutput, error) {
 	if params == nil {
 		params = &ResolveComponentCandidatesInput{}
@@ -53,9 +53,9 @@ type ResolveComponentCandidatesInput struct {
 
 type ResolveComponentCandidatesOutput struct {
 
-	// A list of components that meet the requirements that you specify in the request.
-	// This list includes each component's recipe that you can use to install the
-	// component.
+	// A list of components that meet the requirements that you specify in the
+	// request. This list includes each component's recipe that you can use to install
+	// the component.
 	ResolvedComponentVersions []types.ResolvedComponentVersion
 
 	// Metadata pertaining to the operation's result.

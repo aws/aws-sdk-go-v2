@@ -34,8 +34,8 @@ type UpdateRecipeJobInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-	// to be assumed when DataBrew runs the job.
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
+	// role to be assumed when DataBrew runs the job.
 	//
 	// This member is required.
 	RoleArn *string
@@ -48,15 +48,13 @@ type UpdateRecipeJobInput struct {
 	// destination for a DataBrew recipe job to write into.
 	DatabaseOutputs []types.DatabaseOutput
 
-	// The Amazon Resource Name (ARN) of an encryption key that is used to protect the
-	// job.
+	// The Amazon Resource Name (ARN) of an encryption key that is used to protect
+	// the job.
 	EncryptionKeyArn *string
 
 	// The encryption mode for the job, which can be one of the following:
-	// - SSE-KMS -
-	// Server-side encryption with keys managed by KMS.
-	// - SSE-S3 - Server-side
-	// encryption with keys managed by Amazon S3.
+	//     - SSE-KMS - Server-side encryption with keys managed by KMS.
+	//     - SSE-S3 - Server-side encryption with keys managed by Amazon S3.
 	EncryptionMode types.EncryptionMode
 
 	// Enables or disables Amazon CloudWatch logging for the job. If logging is
@@ -74,7 +72,7 @@ type UpdateRecipeJobInput struct {
 	Outputs []types.Output
 
 	// The job's timeout in minutes. A job that attempts to run longer than this
-	// timeout period ends with a status of TIMEOUT.
+	// timeout period ends with a status of TIMEOUT .
 	Timeout int32
 
 	noSmithyDocumentSerde

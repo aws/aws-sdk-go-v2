@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified access point. After deletion is complete, new clients can
-// no longer connect to the access points. Clients connected to the access point at
-// the time of deletion will continue to function until they terminate their
-// connection. This operation requires permissions for the
+// Deletes the specified access point. After deletion is complete, new clients
+// can no longer connect to the access points. Clients connected to the access
+// point at the time of deletion will continue to function until they terminate
+// their connection. This operation requires permissions for the
 // elasticfilesystem:DeleteAccessPoint action.
 func (c *Client) DeleteAccessPoint(ctx context.Context, params *DeleteAccessPointInput, optFns ...func(*Options)) (*DeleteAccessPointOutput, error) {
 	if params == nil {

@@ -51,8 +51,8 @@ type ListStreamsOutput struct {
 	// This member is required.
 	Streams []types.StreamSummary
 
-	// If there are more streams than maxResults, use nextToken in the request to get
-	// the next set.
+	// If there are more streams than maxResults , use nextToken in the request to
+	// get the next set.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -133,8 +133,8 @@ type ListStreamsPaginatorOptions struct {
 	// Maximum number of streams to return. Default: 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

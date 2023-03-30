@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a job template. Job template stores values of StartJobRun API request in
-// a template and can be used to start a job run. Job template allows two use
+// Deletes a job template. Job template stores values of StartJobRun API request
+// in a template and can be used to start a job run. Job template allows two use
 // cases: avoid repeating recurring StartJobRun API request values, enforcing
 // certain values in StartJobRun API request.
 func (c *Client) DeleteJobTemplate(ctx context.Context, params *DeleteJobTemplateInput, optFns ...func(*Options)) (*DeleteJobTemplateOutput, error) {

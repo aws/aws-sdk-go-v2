@@ -34,7 +34,7 @@ func (e *AccessDeniedException) ErrorCode() string {
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception raised to indicate that authorization of an action was successful,
-// when the DryRun flag is set to true.
+// when the DryRun  flag is set to true.
 type DryRunOperation struct {
 	Message *string
 

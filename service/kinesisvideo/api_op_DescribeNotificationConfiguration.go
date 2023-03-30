@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the NotificationConfiguration for a given Kinesis video stream.
+// Gets the NotificationConfiguration  for a given Kinesis video stream.
 func (c *Client) DescribeNotificationConfiguration(ctx context.Context, params *DescribeNotificationConfigurationInput, optFns ...func(*Options)) (*DescribeNotificationConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeNotificationConfigurationInput{}
@@ -35,7 +35,7 @@ type DescribeNotificationConfigurationInput struct {
 	StreamARN *string
 
 	// The name of the stream from which to retrieve the notification configuration.
-	// You must specify either the StreamName or the StreamARN.
+	// You must specify either the StreamName  or the StreamARN .
 	StreamName *string
 
 	noSmithyDocumentSerde

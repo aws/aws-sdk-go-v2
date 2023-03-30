@@ -35,7 +35,7 @@ func (e *AuthorizationNotFoundFault) ErrorCode() string {
 }
 func (e *AuthorizationNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// CertificateIdentifier doesn't refer to an existing certificate.
+// CertificateIdentifier  doesn't refer to an existing certificate.
 type CertificateNotFoundFault struct {
 	Message *string
 
@@ -87,7 +87,7 @@ func (e *DBClusterAlreadyExistsFault) ErrorCode() string {
 }
 func (e *DBClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// DBClusterIdentifier doesn't refer to an existing cluster.
+// DBClusterIdentifier  doesn't refer to an existing cluster.
 type DBClusterNotFoundFault struct {
 	Message *string
 
@@ -142,8 +142,8 @@ func (e *DBClusterParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The cluster can't be created because you have reached the maximum allowed quota
-// of clusters.
+// The cluster can't be created because you have reached the maximum allowed
+// quota of clusters.
 type DBClusterQuotaExceededFault struct {
 	Message *string
 
@@ -197,7 +197,7 @@ func (e *DBClusterSnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// DBClusterSnapshotIdentifier doesn't refer to an existing cluster snapshot.
+// DBClusterSnapshotIdentifier  doesn't refer to an existing cluster snapshot.
 type DBClusterSnapshotNotFoundFault struct {
 	Message *string
 
@@ -249,7 +249,7 @@ func (e *DBInstanceAlreadyExistsFault) ErrorCode() string {
 }
 func (e *DBInstanceAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// DBInstanceIdentifier doesn't refer to an existing instance.
+// DBInstanceIdentifier  doesn't refer to an existing instance.
 type DBInstanceNotFoundFault struct {
 	Message *string
 
@@ -303,7 +303,7 @@ func (e *DBParameterGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// DBParameterGroupName doesn't refer to an existing parameter group.
+// DBParameterGroupName  doesn't refer to an existing parameter group.
 type DBParameterGroupNotFoundFault struct {
 	Message *string
 
@@ -357,7 +357,7 @@ func (e *DBParameterGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// DBSecurityGroupName doesn't refer to an existing security group.
+// DBSecurityGroupName  doesn't refer to an existing security group.
 type DBSecurityGroupNotFoundFault struct {
 	Message *string
 
@@ -383,7 +383,7 @@ func (e *DBSecurityGroupNotFoundFault) ErrorCode() string {
 }
 func (e *DBSecurityGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// DBSnapshotIdentifier is already being used by an existing snapshot.
+// DBSnapshotIdentifier  is already being used by an existing snapshot.
 type DBSnapshotAlreadyExistsFault struct {
 	Message *string
 
@@ -409,7 +409,7 @@ func (e *DBSnapshotAlreadyExistsFault) ErrorCode() string {
 }
 func (e *DBSnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// DBSnapshotIdentifier doesn't refer to an existing snapshot.
+// DBSnapshotIdentifier  doesn't refer to an existing snapshot.
 type DBSnapshotNotFoundFault struct {
 	Message *string
 
@@ -435,7 +435,7 @@ func (e *DBSnapshotNotFoundFault) ErrorCode() string {
 }
 func (e *DBSnapshotNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// DBSubnetGroupName is already being used by an existing subnet group.
+// DBSubnetGroupName  is already being used by an existing subnet group.
 type DBSubnetGroupAlreadyExistsFault struct {
 	Message *string
 
@@ -461,8 +461,8 @@ func (e *DBSubnetGroupAlreadyExistsFault) ErrorCode() string {
 }
 func (e *DBSubnetGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Subnets in the subnet group should cover at least two Availability Zones unless
-// there is only one Availability Zone.
+// Subnets in the subnet group should cover at least two Availability Zones
+// unless there is only one Availability Zone.
 type DBSubnetGroupDoesNotCoverEnoughAZs struct {
 	Message *string
 
@@ -490,7 +490,7 @@ func (e *DBSubnetGroupDoesNotCoverEnoughAZs) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// DBSubnetGroupName doesn't refer to an existing subnet group.
+// DBSubnetGroupName  doesn't refer to an existing subnet group.
 type DBSubnetGroupNotFoundFault struct {
 	Message *string
 
@@ -542,8 +542,8 @@ func (e *DBSubnetGroupQuotaExceededFault) ErrorCode() string {
 }
 func (e *DBSubnetGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request would cause you to exceed the allowed number of subnets in a subnet
-// group.
+// The request would cause you to exceed the allowed number of subnets in a
+// subnet group.
 type DBSubnetQuotaExceededFault struct {
 	Message *string
 
@@ -650,7 +650,7 @@ func (e *GlobalClusterAlreadyExistsFault) ErrorCode() string {
 }
 func (e *GlobalClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The GlobalClusterIdentifier doesn't refer to an existing global cluster.
+// The GlobalClusterIdentifier  doesn't refer to an existing global cluster.
 type GlobalClusterNotFoundFault struct {
 	Message *string
 
@@ -757,7 +757,8 @@ func (e *InsufficientDBClusterCapacityFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The specified instance class isn't available in the specified Availability Zone.
+// The specified instance class isn't available in the specified Availability
+// Zone.
 type InsufficientDBInstanceCapacityFault struct {
 	Message *string
 
@@ -785,8 +786,8 @@ func (e *InsufficientDBInstanceCapacityFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// There is not enough storage available for the current action. You might be able
-// to resolve this error by updating your subnet group to use different
+// There is not enough storage available for the current action. You might be
+// able to resolve this error by updating your subnet group to use different
 // Availability Zones that have more storage available.
 type InsufficientStorageClusterCapacityFault struct {
 	Message *string
@@ -895,8 +896,8 @@ func (e *InvalidDBInstanceStateFault) ErrorCode() string {
 }
 func (e *InvalidDBInstanceStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The parameter group is in use, or it is in a state that is not valid. If you are
-// trying to delete the parameter group, you can't delete it when the parameter
+// The parameter group is in use, or it is in a state that is not valid. If you
+// are trying to delete the parameter group, you can't delete it when the parameter
 // group is in this state.
 type InvalidDBParameterGroupStateFault struct {
 	Message *string
@@ -1215,8 +1216,8 @@ func (e *ResourceNotFoundFault) ErrorCode() string {
 }
 func (e *ResourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have exceeded the maximum number of accounts that you can share a manual DB
-// snapshot with.
+// You have exceeded the maximum number of accounts that you can share a manual
+// DB snapshot with.
 type SharedSnapshotQuotaExceededFault struct {
 	Message *string
 
@@ -1400,7 +1401,7 @@ func (e *StorageQuotaExceededFault) ErrorCode() string {
 }
 func (e *StorageQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Storage of the specified StorageType can't be associated with the DB instance.
+// Storage of the specified StorageType  can't be associated with the DB instance.
 type StorageTypeNotSupportedFault struct {
 	Message *string
 

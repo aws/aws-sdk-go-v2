@@ -12,10 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Import a new lens. The lens cannot be applied to workloads or shared with other
-// Amazon Web Services accounts until it's published with CreateLensVersion Lenses
-// are defined in JSON. For more information, see JSON format specification
-// (https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html)
+// Import a new lens. The lens cannot be applied to workloads or shared with
+// other Amazon Web Services accounts until it's published with CreateLensVersion
+// Lenses are defined in JSON. For more information, see JSON format specification (https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html)
 // in the Well-Architected Tool User Guide. A custom lens cannot exceed 500 KB in
 // size. Disclaimer Do not include or gather personal identifiable information
 // (PII) of end users or other identifiable individuals in or via your custom
@@ -58,11 +57,11 @@ type ImportLensInput struct {
 	JSONString *string
 
 	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless, or the lens ARN, such as
+	// the lens alias, such as serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
 	// the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
-	// identified by its LensSummary$LensAlias.
+	// identified by its LensSummary$LensAlias .
 	LensAlias *string
 
 	// Tags to associate to a lens.

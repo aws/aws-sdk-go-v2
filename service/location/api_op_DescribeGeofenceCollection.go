@@ -43,8 +43,7 @@ type DescribeGeofenceCollectionOutput struct {
 
 	// The Amazon Resource Name (ARN) for the geofence collection resource. Used when
 	// you need to specify a resource across all Amazon Web Services.
-	// - Format example:
-	// arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection
+	//     - Format example: arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection
 	//
 	// This member is required.
 	CollectionArn *string
@@ -54,9 +53,8 @@ type DescribeGeofenceCollectionOutput struct {
 	// This member is required.
 	CollectionName *string
 
-	// The timestamp for when the geofence resource was created in ISO 8601
-	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp for when the geofence resource was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format: YYYY-MM-DDThh:mm:ss.sssZ
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -66,19 +64,17 @@ type DescribeGeofenceCollectionOutput struct {
 	// This member is required.
 	Description *string
 
-	// The timestamp for when the geofence collection was last updated in ISO 8601
-	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp for when the geofence collection was last updated in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format: YYYY-MM-DDThh:mm:ss.sssZ
 	//
 	// This member is required.
 	UpdateTime *time.Time
 
-	// A key identifier for an Amazon Web Services KMS customer managed key
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)
+	// A key identifier for an Amazon Web Services KMS customer managed key (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)
 	// assigned to the Amazon Location resource
 	KmsKeyId *string
 
-	// No longer used. Always returns RequestBasedUsage.
+	// No longer used. Always returns RequestBasedUsage .
 	//
 	// Deprecated: Deprecated. Always returns RequestBasedUsage.
 	PricingPlan types.PricingPlan

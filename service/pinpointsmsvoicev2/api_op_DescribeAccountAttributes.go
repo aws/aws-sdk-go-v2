@@ -12,13 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes attributes of your Amazon Web Services account. The supported account
-// attributes include account tier, which indicates whether your account is in the
-// sandbox or production environment. When you're ready to move your account out of
-// the sandbox, create an Amazon Web Services Support case for a service limit
-// increase request. New Amazon Pinpoint accounts are placed into an SMS or voice
-// sandbox. The sandbox protects both Amazon Web Services end recipients and SMS or
-// voice recipients from fraud and abuse.
+// Describes attributes of your Amazon Web Services account. The supported
+// account attributes include account tier, which indicates whether your account is
+// in the sandbox or production environment. When you're ready to move your account
+// out of the sandbox, create an Amazon Web Services Support case for a service
+// limit increase request. New Amazon Pinpoint accounts are placed into an SMS or
+// voice sandbox. The sandbox protects both Amazon Web Services end recipients and
+// SMS or voice recipients from fraud and abuse.
 func (c *Client) DescribeAccountAttributes(ctx context.Context, params *DescribeAccountAttributesInput, optFns ...func(*Options)) (*DescribeAccountAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeAccountAttributesInput{}
@@ -135,8 +135,8 @@ type DescribeAccountAttributesPaginatorOptions struct {
 	// The maximum number of results to return per each request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

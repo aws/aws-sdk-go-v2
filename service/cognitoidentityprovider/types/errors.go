@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// This exception is thrown when a user tries to confirm the account with an email
-// address or phone number that has already been supplied as an alias for a
+// This exception is thrown when a user tries to confirm the account with an
+// email address or phone number that has already been supplied as an alias for a
 // different user profile. This exception indicates that an account with this email
 // address or phone already exists in a user pool that you've configured to use
 // email address or phone number as a sign-in alias.
@@ -37,7 +37,8 @@ func (e *AliasExistsException) ErrorCode() string {
 }
 func (e *AliasExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when a verification code fails to deliver successfully.
+// This exception is thrown when a verification code fails to deliver
+// successfully.
 type CodeDeliveryFailureException struct {
 	Message *string
 
@@ -63,8 +64,8 @@ func (e *CodeDeliveryFailureException) ErrorCode() string {
 }
 func (e *CodeDeliveryFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown if the provided code doesn't match what the server was
-// expecting.
+// This exception is thrown if the provided code doesn't match what the server
+// was expecting.
 type CodeMismatchException struct {
 	Message *string
 
@@ -144,8 +145,8 @@ func (e *DuplicateProviderException) ErrorCode() string {
 }
 func (e *DuplicateProviderException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when there is a code mismatch and the service fails to
-// configure the software token TOTP multi-factor authentication (MFA).
+// This exception is thrown when there is a code mismatch and the service fails
+// to configure the software token TOTP multi-factor authentication (MFA).
 type EnableSoftwareTokenMFAException struct {
 	Message *string
 
@@ -197,8 +198,8 @@ func (e *ExpiredCodeException) ErrorCode() string {
 }
 func (e *ExpiredCodeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when WAF doesn't allow your request based on a web ACL
-// that's associated with your user pool.
+// This exception is thrown when WAF doesn't allow your request based on a web
+// ACL that's associated with your user pool.
 type ForbiddenException struct {
 	Message *string
 
@@ -412,8 +413,8 @@ func (e *InvalidPasswordException) ErrorCode() string {
 }
 func (e *InvalidPasswordException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is returned when the role provided for SMS configuration doesn't
-// have permission to publish using Amazon SNS.
+// This exception is returned when the role provided for SMS configuration
+// doesn't have permission to publish using Amazon SNS.
 type InvalidSmsRoleAccessPolicyException struct {
 	Message *string
 
@@ -443,8 +444,8 @@ func (e *InvalidSmsRoleAccessPolicyException) ErrorFault() smithy.ErrorFault {
 
 // This exception is thrown when the trust relationship is not valid for the role
 // provided for SMS configuration. This can happen if you don't trust
-// cognito-idp.amazonaws.com or the external ID provided in the role does not match
-// what is provided in the SMS configuration for the user pool.
+// cognito-idp.amazonaws.comor the external ID provided in the role does not
+// match what is provided in the SMS configuration for the user pool.
 type InvalidSmsRoleTrustRelationshipException struct {
 	Message *string
 
@@ -766,8 +767,8 @@ func (e *TooManyRequestsException) ErrorCode() string {
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception that is thrown when the request isn't authorized. This can happen due
-// to an invalid access token in the request.
+// Exception that is thrown when the request isn't authorized. This can happen
+// due to an invalid access token in the request.
 type UnauthorizedException struct {
 	Message *string
 
@@ -793,8 +794,8 @@ func (e *UnauthorizedException) ErrorCode() string {
 }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when Amazon Cognito encounters an unexpected exception
-// with Lambda.
+// This exception is thrown when Amazon Cognito encounters an unexpected
+// exception with Lambda.
 type UnexpectedLambdaException struct {
 	Message *string
 
@@ -981,8 +982,8 @@ func (e *UserLambdaValidationException) ErrorCode() string {
 }
 func (e *UserLambdaValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when Amazon Cognito encounters a user name that already
-// exists in the user pool.
+// This exception is thrown when Amazon Cognito encounters a user name that
+// already exists in the user pool.
 type UsernameExistsException struct {
 	Message *string
 

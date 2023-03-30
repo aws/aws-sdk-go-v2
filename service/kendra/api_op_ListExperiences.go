@@ -14,8 +14,8 @@ import (
 
 // Lists one or more Amazon Kendra experiences. You can create an Amazon Kendra
 // experience such as a search application. For more information on creating a
-// search application experience, see Building a search experience with no code
-// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
+// search application experience, see Building a search experience with no code (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html)
+// .
 func (c *Client) ListExperiences(ctx context.Context, params *ListExperiencesInput, optFns ...func(*Options)) (*ListExperiencesOutput, error) {
 	if params == nil {
 		params = &ListExperiencesInput{}
@@ -140,8 +140,8 @@ type ListExperiencesPaginatorOptions struct {
 	// The maximum number of returned Amazon Kendra experiences.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

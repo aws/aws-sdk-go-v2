@@ -30,8 +30,8 @@ func (c *Client) ListTrails(ctx context.Context, params *ListTrailsInput, optFns
 
 type ListTrailsInput struct {
 
-	// The token to use to get the next page of results after a previous API call. This
-	// token must be passed in with the same parameters that were specified in the
+	// The token to use to get the next page of results after a previous API call.
+	// This token must be passed in with the same parameters that were specified in the
 	// original call. For example, if the original call specified an AttributeKey of
 	// 'Username' with a value of 'root', the call with NextToken should include those
 	// same parameters.
@@ -127,8 +127,8 @@ var _ ListTrailsAPIClient = (*Client)(nil)
 
 // ListTrailsPaginatorOptions is the paginator options for ListTrails
 type ListTrailsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

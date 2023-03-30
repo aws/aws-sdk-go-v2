@@ -32,7 +32,7 @@ func (c *Client) DescribeMaintenanceWindowsForTarget(ctx context.Context, params
 type DescribeMaintenanceWindowsForTargetInput struct {
 
 	// The type of resource you want to retrieve information about. For example,
-	// INSTANCE.
+	// INSTANCE .
 	//
 	// This member is required.
 	ResourceType types.MaintenanceWindowResourceType
@@ -140,15 +140,15 @@ type DescribeMaintenanceWindowsForTargetAPIClient interface {
 
 var _ DescribeMaintenanceWindowsForTargetAPIClient = (*Client)(nil)
 
-// DescribeMaintenanceWindowsForTargetPaginatorOptions is the paginator options for
-// DescribeMaintenanceWindowsForTarget
+// DescribeMaintenanceWindowsForTargetPaginatorOptions is the paginator options
+// for DescribeMaintenanceWindowsForTarget
 type DescribeMaintenanceWindowsForTargetPaginatorOptions struct {
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

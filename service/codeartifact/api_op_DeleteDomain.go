@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a domain. You cannot delete a domain that contains repositories. If you
-// want to delete a domain with repositories, first delete its repositories.
+// Deletes a domain. You cannot delete a domain that contains repositories. If
+// you want to delete a domain with repositories, first delete its repositories.
 func (c *Client) DeleteDomain(ctx context.Context, params *DeleteDomainInput, optFns ...func(*Options)) (*DeleteDomainOutput, error) {
 	if params == nil {
 		params = &DeleteDomainInput{}

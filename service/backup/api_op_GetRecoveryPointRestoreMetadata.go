@@ -38,7 +38,8 @@ type GetRecoveryPointRestoreMetadataInput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for
 	// example,
-	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45
+	// .
 	//
 	// This member is required.
 	RecoveryPointArn *string
@@ -49,16 +50,17 @@ type GetRecoveryPointRestoreMetadataInput struct {
 type GetRecoveryPointRestoreMetadataOutput struct {
 
 	// An ARN that uniquely identifies a backup vault; for example,
-	// arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+	// arn:aws:backup:us-east-1:123456789012:vault:aBackupVault .
 	BackupVaultArn *string
 
 	// An ARN that uniquely identifies a recovery point; for example,
-	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45
+	// .
 	RecoveryPointArn *string
 
-	// The set of metadata key-value pairs that describe the original configuration of
-	// the backed-up resource. These values vary depending on the service that is being
-	// restored.
+	// The set of metadata key-value pairs that describe the original configuration
+	// of the backed-up resource. These values vary depending on the service that is
+	// being restored.
 	RestoreMetadata map[string]string
 
 	// Metadata pertaining to the operation's result.

@@ -14,8 +14,8 @@ import (
 
 // Creates a filter using the specified finding criteria. The maximum number of
 // saved filters per Amazon Web Services account per Region is 100. For more
-// information, see Quotas for GuardDuty
-// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_limits.html).
+// information, see Quotas for GuardDuty (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_limits.html)
+// .
 func (c *Client) CreateFilter(ctx context.Context, params *CreateFilterInput, optFns ...func(*Options)) (*CreateFilterOutput, error) {
 	if params == nil {
 		params = &CreateFilterInput{}
@@ -39,107 +39,63 @@ type CreateFilterInput struct {
 	// This member is required.
 	DetectorId *string
 
-	// Represents the criteria to be used in the filter for querying findings. You can
-	// only use the following attributes to query findings:
-	// - accountId
-	// - region
-	// - id
-	// -
-	// resource.accessKeyDetails.accessKeyId
-	// - resource.accessKeyDetails.principalId
-	// -
-	// resource.accessKeyDetails.userName
-	// - resource.accessKeyDetails.userType
-	// -
-	// resource.instanceDetails.iamInstanceProfile.id
-	// -
-	// resource.instanceDetails.imageId
-	// - resource.instanceDetails.instanceId
-	// -
-	// resource.instanceDetails.outpostArn
-	// -
-	// resource.instanceDetails.networkInterfaces.ipv6Addresses
-	// -
-	// resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
-	// -
-	// resource.instanceDetails.networkInterfaces.publicDnsName
-	// -
-	// resource.instanceDetails.networkInterfaces.publicIp
-	// -
-	// resource.instanceDetails.networkInterfaces.securityGroups.groupId
-	// -
-	// resource.instanceDetails.networkInterfaces.securityGroups.groupName
-	// -
-	// resource.instanceDetails.networkInterfaces.subnetId
-	// -
-	// resource.instanceDetails.networkInterfaces.vpcId
-	// -
-	// resource.instanceDetails.tags.key
-	// - resource.instanceDetails.tags.value
-	// -
-	// resource.resourceType
-	// - service.action.actionType
-	// -
-	// service.action.awsApiCallAction.api
-	// -
-	// service.action.awsApiCallAction.callerType
-	// -
-	// service.action.awsApiCallAction.errorCode
-	// -
-	// service.action.awsApiCallAction.userAgent
-	// -
-	// service.action.awsApiCallAction.remoteIpDetails.city.cityName
-	// -
-	// service.action.awsApiCallAction.remoteIpDetails.country.countryName
-	// -
-	// service.action.awsApiCallAction.remoteIpDetails.ipAddressV4
-	// -
-	// service.action.awsApiCallAction.remoteIpDetails.organization.asn
-	// -
-	// service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg
-	// -
-	// service.action.awsApiCallAction.serviceName
-	// -
-	// service.action.dnsRequestAction.domain
-	// -
-	// service.action.networkConnectionAction.blocked
-	// -
-	// service.action.networkConnectionAction.connectionDirection
-	// -
-	// service.action.networkConnectionAction.localPortDetails.port
-	// -
-	// service.action.networkConnectionAction.protocol
-	// -
-	// service.action.networkConnectionAction.localIpDetails.ipAddressV4
-	// -
-	// service.action.networkConnectionAction.remoteIpDetails.city.cityName
-	// -
-	// service.action.networkConnectionAction.remoteIpDetails.country.countryName
-	// -
-	// service.action.networkConnectionAction.remoteIpDetails.ipAddressV4
-	// -
-	// service.action.networkConnectionAction.remoteIpDetails.organization.asn
-	// -
-	// service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg
-	// -
-	// service.action.networkConnectionAction.remotePortDetails.port
-	// -
-	// service.additionalInfo.threatListName
-	// -
-	// resource.s3BucketDetails.publicAccess.effectivePermissions
-	// -
-	// resource.s3BucketDetails.name
-	// - resource.s3BucketDetails.tags.key
-	// -
-	// resource.s3BucketDetails.tags.value
-	// - resource.s3BucketDetails.type
-	// -
-	// service.resourceRole
-	// - severity
-	// - type
-	// - updatedAt Type: ISO 8601 string format:
-	// YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ depending on whether the value
-	// contains milliseconds.
+	// Represents the criteria to be used in the filter for querying findings. You
+	// can only use the following attributes to query findings:
+	//     - accountId
+	//     - region
+	//     - id
+	//     - resource.accessKeyDetails.accessKeyId
+	//     - resource.accessKeyDetails.principalId
+	//     - resource.accessKeyDetails.userName
+	//     - resource.accessKeyDetails.userType
+	//     - resource.instanceDetails.iamInstanceProfile.id
+	//     - resource.instanceDetails.imageId
+	//     - resource.instanceDetails.instanceId
+	//     - resource.instanceDetails.outpostArn
+	//     - resource.instanceDetails.networkInterfaces.ipv6Addresses
+	//     - resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
+	//     - resource.instanceDetails.networkInterfaces.publicDnsName
+	//     - resource.instanceDetails.networkInterfaces.publicIp
+	//     - resource.instanceDetails.networkInterfaces.securityGroups.groupId
+	//     - resource.instanceDetails.networkInterfaces.securityGroups.groupName
+	//     - resource.instanceDetails.networkInterfaces.subnetId
+	//     - resource.instanceDetails.networkInterfaces.vpcId
+	//     - resource.instanceDetails.tags.key
+	//     - resource.instanceDetails.tags.value
+	//     - resource.resourceType
+	//     - service.action.actionType
+	//     - service.action.awsApiCallAction.api
+	//     - service.action.awsApiCallAction.callerType
+	//     - service.action.awsApiCallAction.errorCode
+	//     - service.action.awsApiCallAction.userAgent
+	//     - service.action.awsApiCallAction.remoteIpDetails.city.cityName
+	//     - service.action.awsApiCallAction.remoteIpDetails.country.countryName
+	//     - service.action.awsApiCallAction.remoteIpDetails.ipAddressV4
+	//     - service.action.awsApiCallAction.remoteIpDetails.organization.asn
+	//     - service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg
+	//     - service.action.awsApiCallAction.serviceName
+	//     - service.action.dnsRequestAction.domain
+	//     - service.action.networkConnectionAction.blocked
+	//     - service.action.networkConnectionAction.connectionDirection
+	//     - service.action.networkConnectionAction.localPortDetails.port
+	//     - service.action.networkConnectionAction.protocol
+	//     - service.action.networkConnectionAction.localIpDetails.ipAddressV4
+	//     - service.action.networkConnectionAction.remoteIpDetails.city.cityName
+	//     - service.action.networkConnectionAction.remoteIpDetails.country.countryName
+	//     - service.action.networkConnectionAction.remoteIpDetails.ipAddressV4
+	//     - service.action.networkConnectionAction.remoteIpDetails.organization.asn
+	//     - service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg
+	//     - service.action.networkConnectionAction.remotePortDetails.port
+	//     - service.additionalInfo.threatListName
+	//     - resource.s3BucketDetails.publicAccess.effectivePermissions
+	//     - resource.s3BucketDetails.name
+	//     - resource.s3BucketDetails.tags.key
+	//     - resource.s3BucketDetails.tags.value
+	//     - resource.s3BucketDetails.type
+	//     - service.resourceRole
+	//     - severity
+	//     - type
+	//     - updatedAt Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ depending on whether the value contains milliseconds.
 	//
 	// This member is required.
 	FindingCriteria *types.FindingCriteria
@@ -158,10 +114,10 @@ type CreateFilterInput struct {
 	// The idempotency token for the create request.
 	ClientToken *string
 
-	// The description of the filter. Valid characters include alphanumeric characters,
-	// and special characters such as hyphen, period, colon, underscore, parentheses ({
-	// }, [ ], and ( )), forward slash, horizontal tab, vertical tab, newline, form
-	// feed, return, and whitespace.
+	// The description of the filter. Valid characters include alphanumeric
+	// characters, and special characters such as hyphen, period, colon, underscore,
+	// parentheses ( { } , [ ] , and ( )), forward slash, horizontal tab, vertical
+	// tab, newline, form feed, return, and whitespace.
 	Description *string
 
 	// Specifies the position of the filter in the list of current filters. Also

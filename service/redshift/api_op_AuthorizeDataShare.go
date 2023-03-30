@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// From a data producer account, authorizes the sharing of a datashare with one or
-// more consumer accounts or managing entities. To authorize a datashare for a data
-// consumer, the producer account must have the correct access permissions.
+// From a data producer account, authorizes the sharing of a datashare with one
+// or more consumer accounts or managing entities. To authorize a datashare for a
+// data consumer, the producer account must have the correct access permissions.
 func (c *Client) AuthorizeDataShare(ctx context.Context, params *AuthorizeDataShareInput, optFns ...func(*Options)) (*AuthorizeDataShareOutput, error) {
 	if params == nil {
 		params = &AuthorizeDataShareInput{}
@@ -31,14 +31,15 @@ func (c *Client) AuthorizeDataShare(ctx context.Context, params *AuthorizeDataSh
 
 type AuthorizeDataShareInput struct {
 
-	// The identifier of the data consumer that is authorized to access the datashare.
-	// This identifier is an Amazon Web Services account ID or a keyword, such as ADX.
+	// The identifier of the data consumer that is authorized to access the
+	// datashare. This identifier is an Amazon Web Services account ID or a keyword,
+	// such as ADX.
 	//
 	// This member is required.
 	ConsumerIdentifier *string
 
-	// The Amazon Resource Name (ARN) of the datashare that producers are to authorize
-	// sharing for.
+	// The Amazon Resource Name (ARN) of the datashare that producers are to
+	// authorize sharing for.
 	//
 	// This member is required.
 	DataShareArn *string

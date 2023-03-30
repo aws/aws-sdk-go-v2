@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the things you have added to the given billing group. Requires permission
-// to access the ListThingsInBillingGroup
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Lists the things you have added to the given billing group. Requires
+// permission to access the ListThingsInBillingGroup (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListThingsInBillingGroup(ctx context.Context, params *ListThingsInBillingGroupInput, optFns ...func(*Options)) (*ListThingsInBillingGroupOutput, error) {
 	if params == nil {
@@ -139,8 +138,8 @@ type ListThingsInBillingGroupPaginatorOptions struct {
 	// The maximum number of results to return per request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

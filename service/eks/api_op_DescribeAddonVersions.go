@@ -13,8 +13,8 @@ import (
 )
 
 // Describes the versions for an add-on. Information such as the Kubernetes
-// versions that you can use the add-on with, the owner, publisher, and the type of
-// the add-on are returned.
+// versions that you can use the add-on with, the owner , publisher , and the type
+// of the add-on are returned.
 func (c *Client) DescribeAddonVersions(ctx context.Context, params *DescribeAddonVersionsInput, optFns ...func(*Options)) (*DescribeAddonVersionsOutput, error) {
 	if params == nil {
 		params = &DescribeAddonVersionsInput{}
@@ -33,8 +33,8 @@ func (c *Client) DescribeAddonVersions(ctx context.Context, params *DescribeAddo
 type DescribeAddonVersionsInput struct {
 
 	// The name of the add-on. The name must match one of the names returned by
-	// ListAddons
-	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html).
+	// ListAddons (https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html)
+	// .
 	AddonName *string
 
 	// The Kubernetes versions that you can use the add-on with.
@@ -43,12 +43,12 @@ type DescribeAddonVersionsInput struct {
 	// The maximum number of results to return.
 	MaxResults *int32
 
-	// The nextToken value returned from a previous paginated
-	// DescribeAddonVersionsRequest where maxResults was used and the results exceeded
-	// the value of that parameter. Pagination continues from the end of the previous
-	// results that returned the nextToken value. This token should be treated as an
-	// opaque identifier that is used only to retrieve the next items in a list and not
-	// for other programmatic purposes.
+	// The nextToken  value returned from a previous paginated
+	// DescribeAddonVersionsRequest where maxResults was used and the results
+	// exceeded the value of that parameter. Pagination continues from the end of the
+	// previous results that returned the nextToken value. This token should be
+	// treated as an opaque identifier that is used only to retrieve the next items in
+	// a list and not for other programmatic purposes.
 	NextToken *string
 
 	// The owner of the add-on. For valid owners, don't specify a value for this
@@ -72,12 +72,12 @@ type DescribeAddonVersionsOutput struct {
 	// properties.
 	Addons []types.AddonInfo
 
-	// The nextToken value returned from a previous paginated
-	// DescribeAddonVersionsResponse where maxResults was used and the results exceeded
-	// the value of that parameter. Pagination continues from the end of the previous
-	// results that returned the nextToken value. This token should be treated as an
-	// opaque identifier that is used only to retrieve the next items in a list and not
-	// for other programmatic purposes.
+	// The nextToken  value returned from a previous paginated
+	// DescribeAddonVersionsResponse where maxResults was used and the results
+	// exceeded the value of that parameter. Pagination continues from the end of the
+	// previous results that returned the nextToken value. This token should be
+	// treated as an opaque identifier that is used only to retrieve the next items in
+	// a list and not for other programmatic purposes.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -160,8 +160,8 @@ type DescribeAddonVersionsPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

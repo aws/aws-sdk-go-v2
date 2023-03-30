@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the model packaging jobs created for an Amazon Lookout for Vision project.
-// This operation requires permissions to perform the
-// lookoutvision:ListModelPackagingJobs operation. For more information, see Using
+// Lists the model packaging jobs created for an Amazon Lookout for Vision
+// project. This operation requires permissions to perform the
+// lookoutvision:ListModelPackagingJobsoperation. For more information, see Using
 // your Amazon Lookout for Vision model on an edge device in the Amazon Lookout for
 // Vision Developer Guide.
 func (c *Client) ListModelPackagingJobs(ctx context.Context, params *ListModelPackagingJobsInput, optFns ...func(*Options)) (*ListModelPackagingJobsOutput, error) {
@@ -54,8 +54,8 @@ type ListModelPackagingJobsInput struct {
 
 type ListModelPackagingJobsOutput struct {
 
-	// A list of the model packaging jobs created for the specified Amazon Lookout for
-	// Vision project.
+	// A list of the model packaging jobs created for the specified Amazon Lookout
+	// for Vision project.
 	ModelPackagingJobs []types.ModelPackagingJobMetadata
 
 	// If the previous response was incomplete (because there is more results to
@@ -148,8 +148,8 @@ type ListModelPackagingJobsPaginatorOptions struct {
 	// ValidationException error occurs. The default value is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -162,7 +162,8 @@ type ListModelPackagingJobsPaginator struct {
 	firstPage bool
 }
 
-// NewListModelPackagingJobsPaginator returns a new ListModelPackagingJobsPaginator
+// NewListModelPackagingJobsPaginator returns a new
+// ListModelPackagingJobsPaginator
 func NewListModelPackagingJobsPaginator(client ListModelPackagingJobsAPIClient, params *ListModelPackagingJobsInput, optFns ...func(*ListModelPackagingJobsPaginatorOptions)) *ListModelPackagingJobsPaginator {
 	if params == nil {
 		params = &ListModelPackagingJobsInput{}

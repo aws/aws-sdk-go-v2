@@ -14,8 +14,8 @@ import (
 
 // Lists all signing platforms available in code signing that match the request
 // parameters. If additional jobs remain to be listed, code signing returns a
-// nextToken value. Use this value in subsequent calls to ListSigningJobs to fetch
-// the remaining values. You can continue calling ListSigningJobs with your
+// nextToken value. Use this value in subsequent calls to ListSigningJobs to
+// fetch the remaining values. You can continue calling ListSigningJobs  with your
 // maxResults parameter and with new values that code signing returns in the
 // nextToken parameter until all of your signing jobs have been returned.
 func (c *Client) ListSigningPlatforms(ctx context.Context, params *ListSigningPlatformsInput, optFns ...func(*Options)) (*ListSigningPlatformsOutput, error) {
@@ -144,8 +144,8 @@ type ListSigningPlatformsPaginatorOptions struct {
 	// The maximum number of results to be returned by this operation.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

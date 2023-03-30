@@ -32,31 +32,31 @@ type ListTypeRegistrationsInput struct {
 
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken
-	// value that you can assign to the NextToken request parameter to get the next set
-	// of results.
+	// value that you can assign to the NextToken request parameter to get the next
+	// set of results.
 	MaxResults *int32
 
 	// If the previous paginated request didn't return all the remaining results, the
 	// response object's NextToken parameter value is set to a token. To retrieve the
 	// next set of results, call this action again and assign that token to the request
 	// object's NextToken parameter. If there are no remaining results, the previous
-	// response object's NextToken parameter is set to null.
+	// response object's NextToken  parameter is set to null .
 	NextToken *string
 
 	// The current status of the extension registration request. The default is
-	// IN_PROGRESS.
+	// IN_PROGRESS .
 	RegistrationStatusFilter types.RegistrationStatus
 
-	// The kind of extension. Conditional: You must specify either TypeName and Type,
-	// or Arn.
+	// The kind of extension. Conditional: You must specify either TypeName  and Type
+	// , or Arn .
 	Type types.RegistryType
 
 	// The Amazon Resource Name (ARN) of the extension. Conditional: You must specify
-	// either TypeName and Type, or Arn.
+	// either TypeName  and Type , or Arn .
 	TypeArn *string
 
-	// The name of the extension. Conditional: You must specify either TypeName and
-	// Type, or Arn.
+	// The name of the extension. Conditional: You must specify either TypeName  and
+	// Type , or Arn .
 	TypeName *string
 
 	noSmithyDocumentSerde
@@ -67,11 +67,11 @@ type ListTypeRegistrationsOutput struct {
 	// If the request doesn't return all the remaining results, NextToken is set to a
 	// token. To retrieve the next set of results, call this action again and assign
 	// that token to the request object's NextToken parameter. If the request returns
-	// all results, NextToken is set to null.
+	// all results, NextToken  is set to null .
 	NextToken *string
 
-	// A list of extension registration tokens. Use DescribeTypeRegistration to return
-	// detailed information about a type registration request.
+	// A list of extension registration tokens. Use DescribeTypeRegistration to
+	// return detailed information about a type registration request.
 	RegistrationTokenList []string
 
 	// Metadata pertaining to the operation's result.
@@ -153,12 +153,12 @@ var _ ListTypeRegistrationsAPIClient = (*Client)(nil)
 type ListTypeRegistrationsPaginatorOptions struct {
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken
-	// value that you can assign to the NextToken request parameter to get the next set
-	// of results.
+	// value that you can assign to the NextToken request parameter to get the next
+	// set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

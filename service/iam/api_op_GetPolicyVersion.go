@@ -15,18 +15,16 @@ import (
 // policy, including the policy document. Policies returned by this operation are
 // URL-encoded compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986). You
 // can use a URL decoding method to convert the policy back to plain JSON text. For
-// example, if you use Java, you can use the decode method of the
-// java.net.URLDecoder utility class in the Java SDK. Other languages and SDKs
+// example, if you use Java, you can use the decode  method of the
+// java.net.URLDecoderutility class in the Java SDK. Other languages and SDKs
 // provide similar functionality. To list the available versions for a policy, use
-// ListPolicyVersions. This operation retrieves information about managed policies.
-// To retrieve information about an inline policy that is embedded in a user,
-// group, or role, use GetUserPolicy, GetGroupPolicy, or GetRolePolicy. For more
-// information about the types of policies, see Managed policies and inline
-// policies
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// ListPolicyVersions. This operation retrieves information about managed
+// policies. To retrieve information about an inline policy that is embedded in a
+// user, group, or role, use GetUserPolicy , GetGroupPolicy , or GetRolePolicy.
+// For more information about the types of policies, see Managed policies and
+// inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide. For more information about managed policy versions, see
-// Versioning for managed policies
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
+// Versioning for managed policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 // in the IAM User Guide.
 func (c *Client) GetPolicyVersion(ctx context.Context, params *GetPolicyVersionInput, optFns ...func(*Options)) (*GetPolicyVersionOutput, error) {
 	if params == nil {
@@ -46,9 +44,8 @@ func (c *Client) GetPolicyVersion(ctx context.Context, params *GetPolicyVersionI
 type GetPolicyVersionInput struct {
 
 	// The Amazon Resource Name (ARN) of the managed policy that you want information
-	// about. For more information about ARNs, see Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the Amazon Web Services General Reference.
+	// about. For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	PolicyArn *string
@@ -64,7 +61,7 @@ type GetPolicyVersionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetPolicyVersion request.
+// Contains the response to a successful GetPolicyVersion  request.
 type GetPolicyVersionOutput struct {
 
 	// A structure containing details about the policy version.

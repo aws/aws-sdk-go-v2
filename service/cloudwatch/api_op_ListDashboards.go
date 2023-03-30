@@ -14,10 +14,10 @@ import (
 
 // Returns a list of the dashboards for your account. If you include
 // DashboardNamePrefix, only those dashboards with names starting with the prefix
-// are listed. Otherwise, all dashboards in your account are listed. ListDashboards
-// returns up to 1000 results on one page. If there are more than 1000 dashboards,
-// you can call ListDashboards again and include the value you received for
-// NextToken in the first call, to receive the next 1000 results.
+// are listed. Otherwise, all dashboards in your account are listed.
+// ListDashboardsreturns up to 1000 results on one page. If there are more than
+// 1000 dashboards, you can call ListDashboards again and include the value you
+// received for NextToken  in the first call, to receive the next 1000 results.
 func (c *Client) ListDashboards(ctx context.Context, params *ListDashboardsInput, optFns ...func(*Options)) (*ListDashboardsOutput, error) {
 	if params == nil {
 		params = &ListDashboardsInput{}
@@ -35,9 +35,9 @@ func (c *Client) ListDashboards(ctx context.Context, params *ListDashboardsInput
 
 type ListDashboardsInput struct {
 
-	// If you specify this parameter, only the dashboards with names starting with the
-	// specified string are listed. The maximum length is 255, and valid characters are
-	// A-Z, a-z, 0-9, ".", "-", and "_".
+	// If you specify this parameter, only the dashboards with names starting with
+	// the specified string are listed. The maximum length is 255, and valid characters
+	// are A-Z, a-z, 0-9, ".", "-", and "_".
 	DashboardNamePrefix *string
 
 	// The token returned by a previous call to indicate that there is more data
@@ -131,8 +131,8 @@ var _ ListDashboardsAPIClient = (*Client)(nil)
 
 // ListDashboardsPaginatorOptions is the paginator options for ListDashboards
 type ListDashboardsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

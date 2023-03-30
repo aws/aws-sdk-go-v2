@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation lists all the tags attached to a vault. The operation returns an
-// empty map if there are no tags. For more information about tags, see Tagging
-// Amazon S3 Glacier Resources
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html).
+// This operation lists all the tags attached to a vault. The operation returns
+// an empty map if there are no tags. For more information about tags, see
+// Tagging Amazon S3 Glacier Resources (https://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html)
+// .
 func (c *Client) ListTagsForVault(ctx context.Context, params *ListTagsForVaultInput, optFns ...func(*Options)) (*ListTagsForVaultOutput, error) {
 	if params == nil {
 		params = &ListTagsForVaultInput{}
@@ -30,12 +30,12 @@ func (c *Client) ListTagsForVault(ctx context.Context, params *ListTagsForVaultI
 	return out, nil
 }
 
-// The input value for ListTagsForVaultInput.
+// The input value for ListTagsForVaultInput .
 type ListTagsForVaultInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
-	// which case Amazon S3 Glacier uses the AWS account ID associated with the
+	// You can either specify an AWS account ID or optionally a single ' -' (hyphen),
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//

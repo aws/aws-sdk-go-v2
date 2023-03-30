@@ -39,8 +39,8 @@ type UpdateProtectedQueryInput struct {
 	// This member is required.
 	ProtectedQueryIdentifier *string
 
-	// The target status of a query. Used to update the execution status of a currently
-	// running query.
+	// The target status of a query. Used to update the execution status of a
+	// currently running query.
 	//
 	// This member is required.
 	TargetStatus types.TargetProtectedQueryStatus

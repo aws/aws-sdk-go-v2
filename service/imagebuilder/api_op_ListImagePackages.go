@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the Packages that are associated with an Image Build Version, as determined
-// by Amazon Web Services Systems Manager Inventory at build time.
+// List the Packages that are associated with an Image Build Version, as
+// determined by Amazon Web Services Systems Manager Inventory at build time.
 func (c *Client) ListImagePackages(ctx context.Context, params *ListImagePackagesInput, optFns ...func(*Options)) (*ListImagePackagesOutput, error) {
 	if params == nil {
 		params = &ListImagePackagesInput{}
@@ -135,13 +135,14 @@ type ListImagePackagesAPIClient interface {
 
 var _ ListImagePackagesAPIClient = (*Client)(nil)
 
-// ListImagePackagesPaginatorOptions is the paginator options for ListImagePackages
+// ListImagePackagesPaginatorOptions is the paginator options for
+// ListImagePackages
 type ListImagePackagesPaginatorOptions struct {
 	// The maxiumum number of results to return from the ListImagePackages request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

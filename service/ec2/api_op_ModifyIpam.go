@@ -38,7 +38,7 @@ type ModifyIpamInput struct {
 	// Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only
 	// discovers and monitors resources in the Amazon Web Services Regions you select
 	// as operating Regions. For more information about operating Regions, see Create
-	// an IPAM (https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html) in the
+	// an IPAM (https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html)in the
 	// Amazon VPC IPAM User Guide.
 	AddOperatingRegions []types.AddIpamOperatingRegion
 
@@ -47,8 +47,8 @@ type ModifyIpamInput struct {
 
 	// A check for whether you have the required permissions for the action without
 	// actually making the request and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The operating Regions to remove.

@@ -14,8 +14,8 @@ import (
 
 // Returns the list of schemas associated with the account. The response provides
 // the properties for each schema, including the Amazon Resource Name (ARN). For
-// more information on schemas, see CreateSchema
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSchema.html).
+// more information on schemas, see CreateSchema (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSchema.html)
+// .
 func (c *Client) ListSchemas(ctx context.Context, params *ListSchemasInput, optFns ...func(*Options)) (*ListSchemasOutput, error) {
 	if params == nil {
 		params = &ListSchemasInput{}
@@ -36,8 +36,8 @@ type ListSchemasInput struct {
 	// The maximum number of schemas to return.
 	MaxResults *int32
 
-	// A token returned from the previous call to ListSchemas for getting the next set
-	// of schemas (if they exist).
+	// A token returned from the previous call to ListSchemas for getting the next
+	// set of schemas (if they exist).
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -129,8 +129,8 @@ type ListSchemasPaginatorOptions struct {
 	// The maximum number of schemas to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

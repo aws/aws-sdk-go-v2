@@ -9,9 +9,9 @@ const (
 	AlgorithmSgd Algorithm = "sgd"
 )
 
-// Values returns all known values for Algorithm. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Algorithm. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Algorithm) Values() []Algorithm {
 	return []Algorithm{
 		"sgd",
@@ -61,9 +61,9 @@ const (
 	DataSourceFilterVariableIamUser       DataSourceFilterVariable = "IAMUser"
 )
 
-// Values returns all known values for DataSourceFilterVariable. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DataSourceFilterVariable. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataSourceFilterVariable) Values() []DataSourceFilterVariable {
 	return []DataSourceFilterVariable{
 		"CreatedAt",
@@ -104,9 +104,9 @@ const (
 	EntityStatusDeleted    EntityStatus = "DELETED"
 )
 
-// Values returns all known values for EntityStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EntityStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (EntityStatus) Values() []EntityStatus {
 	return []EntityStatus{
 		"PENDING",
@@ -131,9 +131,9 @@ const (
 	EvaluationFilterVariableDataUri       EvaluationFilterVariable = "DataURI"
 )
 
-// Values returns all known values for EvaluationFilterVariable. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EvaluationFilterVariable. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EvaluationFilterVariable) Values() []EvaluationFilterVariable {
 	return []EvaluationFilterVariable{
 		"CreatedAt",
@@ -163,8 +163,8 @@ const (
 	MLModelFilterVariableTrainingDataUri        MLModelFilterVariable = "TrainingDataURI"
 )
 
-// Values returns all known values for MLModelFilterVariable. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for MLModelFilterVariable. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (MLModelFilterVariable) Values() []MLModelFilterVariable {
 	return []MLModelFilterVariable{
@@ -190,9 +190,9 @@ const (
 	MLModelTypeMulticlass MLModelType = "MULTICLASS"
 )
 
-// Values returns all known values for MLModelType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MLModelType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (MLModelType) Values() []MLModelType {
 	return []MLModelType{
 		"REGRESSION",
@@ -231,9 +231,9 @@ const (
 	SortOrderDsc SortOrder = "dsc"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"asc",
@@ -251,8 +251,8 @@ const (
 	TaggableResourceTypeMlModel         TaggableResourceType = "MLModel"
 )
 
-// Values returns all known values for TaggableResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TaggableResourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TaggableResourceType) Values() []TaggableResourceType {
 	return []TaggableResourceType{

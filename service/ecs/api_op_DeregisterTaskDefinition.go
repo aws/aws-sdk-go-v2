@@ -21,12 +21,13 @@ import (
 // new services, and you can't update an existing service to reference an INACTIVE
 // task definition. However, there may be up to a 10-minute window following
 // deregistration where these restrictions have not yet taken effect. At this time,
-// INACTIVE task definitions remain discoverable in your account indefinitely.
+//
+// INACTIVEtask definitions remain discoverable in your account indefinitely.
 // However, this behavior is subject to change in the future. We don't recommend
 // that you rely on INACTIVE task definitions persisting beyond the lifecycle of
 // any associated tasks and services. You must deregister a task definition
-// revision before you delete it. For more information, see DeleteTaskDefinitions
-// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteTaskDefinitions.html).
+// revision before you delete it. For more information, see DeleteTaskDefinitions (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteTaskDefinitions.html)
+// .
 func (c *Client) DeregisterTaskDefinition(ctx context.Context, params *DeregisterTaskDefinitionInput, optFns ...func(*Options)) (*DeregisterTaskDefinitionOutput, error) {
 	if params == nil {
 		params = &DeregisterTaskDefinitionInput{}
@@ -44,8 +45,8 @@ func (c *Client) DeregisterTaskDefinition(ctx context.Context, params *Deregiste
 
 type DeregisterTaskDefinitionInput struct {
 
-	// The family and revision (family:revision) or full Amazon Resource Name (ARN) of
-	// the task definition to deregister. You must specify a revision.
+	// The family  and revision  ( family:revision) or full Amazon Resource Name
+	// (ARN) of the task definition to deregister. You must specify a revision .
 	//
 	// This member is required.
 	TaskDefinition *string

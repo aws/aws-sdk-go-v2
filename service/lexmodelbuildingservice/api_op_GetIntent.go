@@ -50,12 +50,12 @@ type GetIntentOutput struct {
 	// Checksum of the intent.
 	Checksum *string
 
-	// After the Lambda function specified in the fulfillmentActivity element fulfills
-	// the intent, Amazon Lex conveys this statement to the user.
+	// After the Lambda function specified in the fulfillmentActivity element
+	// fulfills the intent, Amazon Lex conveys this statement to the user.
 	ConclusionStatement *types.Statement
 
 	// If defined in the bot, Amazon Lex uses prompt to confirm the intent before
-	// fulfilling the user's request. For more information, see PutIntent.
+	// fulfilling the user's request. For more information, see PutIntent .
 	ConfirmationPrompt *types.Prompt
 
 	// The date that the intent was created.
@@ -65,22 +65,22 @@ type GetIntentOutput struct {
 	Description *string
 
 	// If defined in the bot, Amazon Amazon Lex invokes this Lambda function for each
-	// user input. For more information, see PutIntent.
+	// user input. For more information, see PutIntent .
 	DialogCodeHook *types.CodeHook
 
 	// If defined in the bot, Amazon Lex uses this prompt to solicit additional user
-	// activity after the intent is fulfilled. For more information, see PutIntent.
+	// activity after the intent is fulfilled. For more information, see PutIntent .
 	FollowUpPrompt *types.FollowUpPrompt
 
-	// Describes how the intent is fulfilled. For more information, see PutIntent.
+	// Describes how the intent is fulfilled. For more information, see PutIntent .
 	FulfillmentActivity *types.FulfillmentActivity
 
-	// An array of InputContext objects that lists the contexts that must be active for
-	// Amazon Lex to choose the intent in a conversation with the user.
+	// An array of InputContext objects that lists the contexts that must be active
+	// for Amazon Lex to choose the intent in a conversation with the user.
 	InputContexts []types.InputContext
 
-	// Configuration information, if any, to connect to an Amazon Kendra index with the
-	// AMAZON.KendraSearchIntent intent.
+	// Configuration information, if any, to connect to an Amazon Kendra index with
+	// the AMAZON.KendraSearchIntent  intent.
 	KendraConfiguration *types.KendraConfiguration
 
 	// The date that the intent was updated. When you create a resource, the creation

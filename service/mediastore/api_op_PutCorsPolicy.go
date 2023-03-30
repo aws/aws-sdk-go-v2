@@ -21,8 +21,8 @@ import (
 // The policy can contain up to 398,000 characters. You can add up to 100 rules to
 // a CORS policy. If more than one rule applies, the service uses the first
 // applicable rule listed. To learn more about CORS, see Cross-Origin Resource
-// Sharing (CORS) in AWS Elemental MediaStore
-// (https://docs.aws.amazon.com/mediastore/latest/ug/cors-policy.html).
+// Sharing (CORS) in AWS Elemental MediaStore (https://docs.aws.amazon.com/mediastore/latest/ug/cors-policy.html)
+// .
 func (c *Client) PutCorsPolicy(ctx context.Context, params *PutCorsPolicyInput, optFns ...func(*Options)) (*PutCorsPolicyOutput, error) {
 	if params == nil {
 		params = &PutCorsPolicyInput{}

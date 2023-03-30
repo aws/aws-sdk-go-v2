@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops transcription for the specified meetingId.
+// Stops transcription for the specified meetingId .
 func (c *Client) StopMeetingTranscription(ctx context.Context, params *StopMeetingTranscriptionInput, optFns ...func(*Options)) (*StopMeetingTranscriptionOutput, error) {
 	if params == nil {
 		params = &StopMeetingTranscriptionInput{}

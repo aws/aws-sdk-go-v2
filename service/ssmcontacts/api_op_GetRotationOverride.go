@@ -52,8 +52,8 @@ type GetRotationOverrideOutput struct {
 	// The date and time when the override ends.
 	EndTime *time.Time
 
-	// The Amazon Resource Names (ARNs) of the contacts assigned to the override of the
-	// on-call rotation.
+	// The Amazon Resource Names (ARNs) of the contacts assigned to the override of
+	// the on-call rotation.
 	NewContactIds []string
 
 	// The Amazon Resource Name (ARN) of the on-call rotation that was overridden.

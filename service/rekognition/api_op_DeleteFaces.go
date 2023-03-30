@@ -12,7 +12,7 @@ import (
 
 // Deletes faces from a collection. You specify a collection ID and an array of
 // face IDs to remove from the collection. This operation requires permissions to
-// perform the rekognition:DeleteFaces action.
+// perform the rekognition:DeleteFaces  action.
 func (c *Client) DeleteFaces(ctx context.Context, params *DeleteFacesInput, optFns ...func(*Options)) (*DeleteFacesOutput, error) {
 	if params == nil {
 		params = &DeleteFacesInput{}

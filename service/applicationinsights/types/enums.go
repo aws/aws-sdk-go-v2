@@ -12,8 +12,8 @@ const (
 	CloudWatchEventSourceRds        CloudWatchEventSource = "RDS"
 )
 
-// Values returns all known values for CloudWatchEventSource. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for CloudWatchEventSource. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (CloudWatchEventSource) Values() []CloudWatchEventSource {
 	return []CloudWatchEventSource{
@@ -56,9 +56,9 @@ const (
 	ConfigurationEventStatusError ConfigurationEventStatus = "ERROR"
 )
 
-// Values returns all known values for ConfigurationEventStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ConfigurationEventStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigurationEventStatus) Values() []ConfigurationEventStatus {
 	return []ConfigurationEventStatus{
 		"INFO",
@@ -92,9 +92,9 @@ const (
 	FeedbackKeyInsightsFeedback FeedbackKey = "INSIGHTS_FEEDBACK"
 )
 
-// Values returns all known values for FeedbackKey. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FeedbackKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (FeedbackKey) Values() []FeedbackKey {
 	return []FeedbackKey{
 		"INSIGHTS_FEEDBACK",
@@ -128,9 +128,9 @@ const (
 	GroupingTypeAccountBased GroupingType = "ACCOUNT_BASED"
 )
 
-// Values returns all known values for GroupingType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for GroupingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (GroupingType) Values() []GroupingType {
 	return []GroupingType{
 		"ACCOUNT_BASED",
@@ -146,9 +146,9 @@ const (
 	LogFilterInfo  LogFilter = "INFO"
 )
 
-// Values returns all known values for LogFilter. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for LogFilter. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (LogFilter) Values() []LogFilter {
 	return []LogFilter{
 		"ERROR",
@@ -243,8 +243,8 @@ const (
 	TierActiveDirectory                    Tier = "ACTIVE_DIRECTORY"
 )
 
-// Values returns all known values for Tier. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Tier. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Tier) Values() []Tier {
 	return []Tier{

@@ -148,8 +148,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The number of hosted configuration versions exceeds the limit for the AppConfig
-// hosted configuration store. Delete one or more versions and try again.
+// The number of hosted configuration versions exceeds the limit for the
+// AppConfig hosted configuration store. Delete one or more versions and try again.
 type ServiceQuotaExceededException struct {
 	Message *string
 

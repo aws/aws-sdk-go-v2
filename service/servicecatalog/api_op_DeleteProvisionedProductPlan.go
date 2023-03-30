@@ -34,13 +34,13 @@ type DeleteProvisionedProductPlanInput struct {
 	PlanId *string
 
 	// The language code.
-	// - en - English (default)
-	// - jp - Japanese
-	// - zh - Chinese
+	//     - en - English (default)
+	//     - jp - Japanese
+	//     - zh - Chinese
 	AcceptLanguage *string
 
-	// If set to true, Service Catalog stops managing the specified provisioned product
-	// even if it cannot delete the underlying resources.
+	// If set to true, Service Catalog stops managing the specified provisioned
+	// product even if it cannot delete the underlying resources.
 	IgnoreErrors bool
 
 	noSmithyDocumentSerde

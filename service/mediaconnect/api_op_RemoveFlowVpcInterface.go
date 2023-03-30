@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a VPC Interface from an existing flow. This request can be made only on
-// a VPC interface that does not have a Source or Output associated with it. If the
-// VPC interface is referenced by a Source or Output, you must first delete or
+// Removes a VPC Interface from an existing flow. This request can be made only
+// on a VPC interface that does not have a Source or Output associated with it. If
+// the VPC interface is referenced by a Source or Output, you must first delete or
 // update the Source or Output to no longer reference the VPC interface.
 func (c *Client) RemoveFlowVpcInterface(ctx context.Context, params *RemoveFlowVpcInterfaceInput, optFns ...func(*Options)) (*RemoveFlowVpcInterfaceOutput, error) {
 	if params == nil {

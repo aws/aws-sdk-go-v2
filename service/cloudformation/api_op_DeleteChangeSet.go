@@ -13,10 +13,10 @@ import (
 // Deletes the specified change set. Deleting change sets ensures that no one
 // executes the wrong change set. If the call successfully completes,
 // CloudFormation successfully deleted the change set. If IncludeNestedStacks
-// specifies True during the creation of the nested change set, then
-// DeleteChangeSet will delete all change sets that belong to the stacks hierarchy
+// specifies True  during the creation of the nested change set, then
+// DeleteChangeSetwill delete all change sets that belong to the stacks hierarchy
 // and will also delete all change sets for nested stacks with the status of
-// REVIEW_IN_PROGRESS.
+// REVIEW_IN_PROGRESS .
 func (c *Client) DeleteChangeSet(ctx context.Context, params *DeleteChangeSetInput, optFns ...func(*Options)) (*DeleteChangeSetOutput, error) {
 	if params == nil {
 		params = &DeleteChangeSetInput{}
@@ -32,7 +32,7 @@ func (c *Client) DeleteChangeSet(ctx context.Context, params *DeleteChangeSetInp
 	return out, nil
 }
 
-// The input for the DeleteChangeSet action.
+// The input for the DeleteChangeSet  action.
 type DeleteChangeSetInput struct {
 
 	// The name or Amazon Resource Name (ARN) of the change set that you want to
@@ -48,7 +48,7 @@ type DeleteChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
-// The output for the DeleteChangeSet action.
+// The output for the DeleteChangeSet  action.
 type DeleteChangeSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

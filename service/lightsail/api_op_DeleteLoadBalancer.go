@@ -14,10 +14,10 @@ import (
 // Deletes a Lightsail load balancer and all its associated SSL/TLS certificates.
 // Once the load balancer is deleted, you will need to create a new load balancer,
 // create a new certificate, and verify domain ownership again. The delete load
-// balancer operation supports tag-based access control via resource tags applied
-// to the resource identified by load balancer name. For more information, see the
-// Amazon Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// balanceroperation supports tag-based access control via resource tags applied
+// to the resource identified by load balancer name. For more information, see
+// the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) DeleteLoadBalancer(ctx context.Context, params *DeleteLoadBalancerInput, optFns ...func(*Options)) (*DeleteLoadBalancerOutput, error) {
 	if params == nil {
 		params = &DeleteLoadBalancerInput{}

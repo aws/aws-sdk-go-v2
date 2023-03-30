@@ -14,24 +14,23 @@ import (
 // The DeleteDBInstance action deletes a previously provisioned DB instance. When
 // you delete a DB instance, all automated backups for that instance are deleted
 // and can't be recovered. Manual DB snapshots of the DB instance to be deleted by
-// DeleteDBInstance are not deleted. If you request a final DB snapshot the status
-// of the Amazon RDS DB instance is deleting until the DB snapshot is created. The
-// API action DescribeDBInstance is used to monitor the status of this operation.
-// The action can't be canceled or reverted once submitted. When a DB instance is
-// in a failure state and has a status of failed, incompatible-restore, or
-// incompatible-network, you can only delete it when you skip creation of the final
-// snapshot with the SkipFinalSnapshot parameter. If the specified DB instance is
-// part of an Amazon Aurora DB cluster, you can't delete the DB instance if both of
-// the following conditions are true:
-// - The DB cluster is a read replica of another
-// Amazon Aurora DB cluster.
-// - The DB instance is the only instance in the DB
-// cluster.
+// DeleteDBInstanceare not deleted. If you request a final DB snapshot the status
+// of the Amazon RDS DB instance is deleting until the DB snapshot is created.
+// The API action DescribeDBInstance is used to monitor the status of this
+// operation. The action can't be canceled or reverted once submitted. When a DB
+// instance is in a failure state and has a status of failed ,
+// incompatible-restore , or incompatible-network, you can only delete it when
+// you skip creation of the final snapshot with the SkipFinalSnapshot parameter.
+// If the specified DB instance is part of an Amazon Aurora DB cluster, you can't
+// delete the DB instance if both of the following conditions are true:
+//   - The DB cluster is a read replica of another Amazon Aurora DB cluster.
+//   - The DB instance is the only instance in the DB cluster.
 //
-// To delete a DB instance in this case, first call the
-// PromoteReadReplicaDBCluster API action to promote the DB cluster so it's no
-// longer a read replica. After the promotion completes, then call the
-// DeleteDBInstance API action to delete the final instance in the DB cluster.
+// To delete a DB
+// instance in this case, first call the PromoteReadReplicaDBCluster API action
+// to promote the DB cluster so it's no longer a read replica. After the promotion
+// completes, then call the DeleteDBInstance API action to delete the final
+// instance in the DB cluster.
 func (c *Client) DeleteDBInstance(ctx context.Context, params *DeleteDBInstanceInput, optFns ...func(*Options)) (*DeleteDBInstanceOutput, error) {
 	if params == nil {
 		params = &DeleteDBInstanceInput{}
@@ -51,27 +50,24 @@ type DeleteDBInstanceInput struct {
 
 	// The DB instance identifier for the DB instance to be deleted. This parameter
 	// isn't case-sensitive. Constraints:
-	// - Must match the name of an existing DB
-	// instance.
+	//     - Must match the name of an existing DB instance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// A value that indicates whether to remove automated backups immediately after the
-	// DB instance is deleted. This parameter isn't case-sensitive. The default is to
-	// remove automated backups immediately after the DB instance is deleted.
+	// A value that indicates whether to remove automated backups immediately after
+	// the DB instance is deleted. This parameter isn't case-sensitive. The default is
+	// to remove automated backups immediately after the DB instance is deleted.
 	DeleteAutomatedBackups *bool
 
-	// The DBSnapshotIdentifier of the new DBSnapshot created when the
-	// SkipFinalSnapshot parameter is disabled. If you enable this parameter and also
+	// The DBSnapshotIdentifier  of the new DBSnapshot  created when the
+	// SkipFinalSnapshotparameter is disabled. If you enable this parameter and also
 	// enable SkipFinalShapshot, the command results in an error. This setting doesn't
 	// apply to RDS Custom. Constraints:
-	// - Must be 1 to 255 letters or numbers.
-	// - First
-	// character must be a letter.
-	// - Can't end with a hyphen or contain two consecutive
-	// hyphens.
-	// - Can't be specified when deleting a read replica.
+	//     - Must be 1 to 255 letters or numbers.
+	//     - First character must be a letter.
+	//     - Can't end with a hyphen or contain two consecutive hyphens.
+	//     - Can't be specified when deleting a read replica.
 	FinalDBSnapshotIdentifier *string
 
 	// A value that indicates whether to skip the creation of a final DB snapshot
@@ -79,11 +75,11 @@ type DeleteDBInstanceInput struct {
 	// DB snapshot. If you don't enable this parameter, RDS creates a DB snapshot
 	// before the DB instance is deleted. By default, skip isn't enabled, and the DB
 	// snapshot is created. If you don't enable this parameter, you must specify the
-	// FinalDBSnapshotIdentifier parameter. When a DB instance is in a failure state
-	// and has a status of failed, incompatible-restore, or incompatible-network, RDS
-	// can delete the instance only if you enable this parameter. If you delete a read
-	// replica or an RDS Custom instance, you must enable this setting. This setting is
-	// required for RDS Custom.
+	// FinalDBSnapshotIdentifierparameter. When a DB instance is in a failure state
+	// and has a status of failed , incompatible-restore , or incompatible-network,
+	// RDS can delete the instance only if you enable this parameter. If you delete a
+	// read replica or an RDS Custom instance, you must enable this setting. This
+	// setting is required for RDS Custom.
 	SkipFinalSnapshot bool
 
 	noSmithyDocumentSerde
@@ -92,11 +88,11 @@ type DeleteDBInstanceInput struct {
 type DeleteDBInstanceOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a
-	// response element in the operations CreateDBInstance,
-	// CreateDBInstanceReadReplica, DeleteDBInstance, DescribeDBInstances,
-	// ModifyDBInstance, PromoteReadReplica, RebootDBInstance,
-	// RestoreDBInstanceFromDBSnapshot, RestoreDBInstanceFromS3,
-	// RestoreDBInstanceToPointInTime, StartDBInstance, and StopDBInstance.
+	// response element in the operations CreateDBInstance ,
+	// CreateDBInstanceReadReplica , DeleteDBInstance , DescribeDBInstances ,
+	// ModifyDBInstance , PromoteReadReplica , RebootDBInstance ,
+	// RestoreDBInstanceFromDBSnapshot , RestoreDBInstanceFromS3 ,
+	// RestoreDBInstanceToPointInTime , StartDBInstance , and StopDBInstance .
 	DBInstance *types.DBInstance
 
 	// Metadata pertaining to the operation's result.

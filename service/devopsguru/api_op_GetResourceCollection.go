@@ -37,7 +37,7 @@ func (c *Client) GetResourceCollection(ctx context.Context, params *GetResourceC
 type GetResourceCollectionInput struct {
 
 	// The type of Amazon Web Services resource collections to return. The one valid
-	// value is CLOUD_FORMATION for Amazon Web Services CloudFormation stacks.
+	// value is CLOUD_FORMATION  for Amazon Web Services CloudFormation stacks.
 	//
 	// This member is required.
 	ResourceCollectionType types.ResourceCollectionType
@@ -55,8 +55,8 @@ type GetResourceCollectionOutput struct {
 	// operation. If there are no more pages, this value is null.
 	NextToken *string
 
-	// The requested list of Amazon Web Services resource collections. The two types of
-	// Amazon Web Services resource collections supported are Amazon Web Services
+	// The requested list of Amazon Web Services resource collections. The two types
+	// of Amazon Web Services resource collections supported are Amazon Web Services
 	// CloudFormation stacks and Amazon Web Services resources that contain the same
 	// Amazon Web Services tag. DevOps Guru can be configured to analyze the Amazon Web
 	// Services resources that are defined in the stacks or that are tagged using the
@@ -144,8 +144,8 @@ var _ GetResourceCollectionAPIClient = (*Client)(nil)
 // GetResourceCollectionPaginatorOptions is the paginator options for
 // GetResourceCollection
 type GetResourceCollectionPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -33,11 +33,11 @@ type RetryBuildBatchInput struct {
 	// Specifies the identifier of the batch build to restart.
 	Id *string
 
-	// A unique, case sensitive identifier you provide to ensure the idempotency of the
-	// RetryBuildBatch request. The token is included in the RetryBuildBatch request
-	// and is valid for five minutes. If you repeat the RetryBuildBatch request with
-	// the same token, but change a parameter, CodeBuild returns a parameter mismatch
-	// error.
+	// A unique, case sensitive identifier you provide to ensure the idempotency of
+	// the RetryBuildBatch  request. The token is included in the RetryBuildBatch
+	// request and is valid for five minutes. If you repeat the RetryBuildBatch
+	// request with the same token, but change a parameter, CodeBuild returns a
+	// parameter mismatch error.
 	IdempotencyToken *string
 
 	// Specifies the type of retry to perform.

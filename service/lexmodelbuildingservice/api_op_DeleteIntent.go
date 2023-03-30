@@ -19,7 +19,7 @@ import (
 // remove the reference to the intent, either update the bot or delete it. If you
 // get the same exception when you attempt to delete the intent again, repeat until
 // the intent has no references and the call to DeleteIntent is successful. This
-// operation requires permission for the lex:DeleteIntent action.
+// operation requires permission for the lex:DeleteIntent  action.
 func (c *Client) DeleteIntent(ctx context.Context, params *DeleteIntentInput, optFns ...func(*Options)) (*DeleteIntentOutput, error) {
 	if params == nil {
 		params = &DeleteIntentInput{}

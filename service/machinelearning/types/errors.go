@@ -67,7 +67,8 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// An error on the client occurred. Typically, the cause is an invalid input value.
+// An error on the client occurred. Typically, the cause is an invalid input
+// value.
 type InvalidInputException struct {
 	Message *string
 
@@ -121,7 +122,7 @@ func (e *InvalidTagException) ErrorCode() string {
 func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The subscriber exceeded the maximum number of operations. This exception can
-// occur when listing objects such as DataSource.
+// occur when listing objects such as DataSource .
 type LimitExceededException struct {
 	Message *string
 
@@ -149,7 +150,7 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The exception is thrown when a predict request is made to an unmounted MLModel.
+// The exception is thrown when a predict request is made to an unmounted MLModel .
 type PredictorNotMountedException struct {
 	Message *string
 

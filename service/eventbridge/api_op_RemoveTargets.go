@@ -13,7 +13,7 @@ import (
 
 // Removes the specified targets from the specified rule. When the rule is
 // triggered, those targets are no longer be invoked. A successful execution of
-// RemoveTargets doesn't guarantee all targets are removed from the rule, it means
+// RemoveTargetsdoesn't guarantee all targets are removed from the rule, it means
 // that the target(s) listed in the request are removed. When you remove a target,
 // when the associated rule triggers, removed targets might continue to be invoked.
 // Allow a short period of time for changes to take effect. This action can
@@ -47,15 +47,15 @@ type RemoveTargetsInput struct {
 	// This member is required.
 	Rule *string
 
-	// The name or ARN of the event bus associated with the rule. If you omit this, the
-	// default event bus is used.
+	// The name or ARN of the event bus associated with the rule. If you omit this,
+	// the default event bus is used.
 	EventBusName *string
 
 	// If this is a managed rule, created by an Amazon Web Services service on your
-	// behalf, you must specify Force as True to remove targets. This parameter is
+	// behalf, you must specify Force  as True to remove targets. This parameter is
 	// ignored for rules that are not managed rules. You can check whether a rule is a
-	// managed rule by using DescribeRule or ListRules and checking the ManagedBy field
-	// of the response.
+	// managed rule by using DescribeRule  or ListRules  and checking the ManagedBy
+	// field of the response.
 	Force bool
 
 	noSmithyDocumentSerde

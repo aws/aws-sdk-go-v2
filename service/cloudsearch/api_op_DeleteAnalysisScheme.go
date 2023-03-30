@@ -12,8 +12,7 @@ import (
 )
 
 // Deletes an analysis scheme. For more information, see Configuring Analysis
-// Schemes
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html)
+// Schemes (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DeleteAnalysisScheme(ctx context.Context, params *DeleteAnalysisSchemeInput, optFns ...func(*Options)) (*DeleteAnalysisSchemeOutput, error) {
 	if params == nil {
@@ -51,8 +50,8 @@ type DeleteAnalysisSchemeInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a DeleteAnalysisScheme request. Contains the status of the deleted
-// analysis scheme.
+// The result of a DeleteAnalysisScheme request. Contains the status of the
+// deleted analysis scheme.
 type DeleteAnalysisSchemeOutput struct {
 
 	// The status of the analysis scheme being deleted.

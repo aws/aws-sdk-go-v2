@@ -37,30 +37,22 @@ type SearchLocalGatewayRoutesInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// One or more filters.
-	// - prefix-list-id - The ID of the prefix list.
-	// -
-	// route-search.exact-match - The exact match of the specified filter.
-	// -
-	// route-search.longest-prefix-match - The longest prefix that matches the route.
-	// -
-	// route-search.subnet-of-match - The routes with a subnet that match the specified
-	// CIDR filter.
-	// - route-search.supernet-of-match - The routes with a CIDR that
-	// encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31
-	// routes in your route table and you specify supernet-of-match as 10.0.1.0/30,
-	// then the result returns 10.0.1.0/29.
-	// - state - The state of the route.
-	// - type -
-	// The route type.
+	//     - prefix-list-id - The ID of the prefix list.
+	//     - route-search.exact-match - The exact match of the specified filter.
+	//     - route-search.longest-prefix-match - The longest prefix that matches the route.
+	//     - route-search.subnet-of-match - The routes with a subnet that match the specified CIDR filter.
+	//     - route-search.supernet-of-match - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.
+	//     - state - The state of the route.
+	//     - type - The route type.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -159,11 +151,11 @@ var _ SearchLocalGatewayRoutesAPIClient = (*Client)(nil)
 // SearchLocalGatewayRoutes
 type SearchLocalGatewayRoutesPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

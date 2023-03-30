@@ -11,17 +11,17 @@ import (
 )
 
 // Deletes all versions of the bot, including the $LATEST version. To delete a
-// specific version of the bot, use the DeleteBotVersion operation. The DeleteBot
+// specific version of the bot, use the DeleteBotVersion  operation. The DeleteBot
 // operation doesn't immediately remove the bot schema. Instead, it is marked for
 // deletion and removed later. Amazon Lex stores utterances indefinitely for
 // improving the ability of your bot to respond to user inputs. These utterances
 // are not removed when the bot is deleted. To remove the utterances, use the
-// DeleteUtterances operation. If a bot has an alias, you can't delete it. Instead,
-// the DeleteBot operation returns a ResourceInUseException exception that includes
-// a reference to the alias that refers to the bot. To remove the reference to the
-// bot, delete the alias. If you get the same exception again, delete the referring
-// alias until the DeleteBot operation is successful. This operation requires
-// permissions for the lex:DeleteBot action.
+// DeleteUtterancesoperation. If a bot has an alias, you can't delete it.
+// Instead, the DeleteBot  operation returns a ResourceInUseException exception
+// that includes a reference to the alias that refers to the bot. To remove the
+// reference to the bot, delete the alias. If you get the same exception again,
+// delete the referring alias until the DeleteBot operation is successful. This
+// operation requires permissions for the lex:DeleteBot  action.
 func (c *Client) DeleteBot(ctx context.Context, params *DeleteBotInput, optFns ...func(*Options)) (*DeleteBotOutput, error) {
 	if params == nil {
 		params = &DeleteBotInput{}

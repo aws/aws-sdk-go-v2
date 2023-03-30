@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns metadata of your saved backup plan templates, including the template ID,
-// name, and the creation and deletion dates.
+// Returns metadata of your saved backup plan templates, including the template
+// ID, name, and the creation and deletion dates.
 func (c *Client) ListBackupPlanTemplates(ctx context.Context, params *ListBackupPlanTemplatesInput, optFns ...func(*Options)) (*ListBackupPlanTemplatesOutput, error) {
 	if params == nil {
 		params = &ListBackupPlanTemplatesInput{}
@@ -35,7 +35,7 @@ type ListBackupPlanTemplatesInput struct {
 	MaxResults *int32
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return maxResults  number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -49,7 +49,7 @@ type ListBackupPlanTemplatesOutput struct {
 	BackupPlanTemplatesList []types.BackupPlanTemplatesListMember
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return maxResults  number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -134,8 +134,8 @@ type ListBackupPlanTemplatesPaginatorOptions struct {
 	// The maximum number of items to be returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

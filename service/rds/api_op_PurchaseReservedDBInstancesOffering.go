@@ -42,9 +42,8 @@ type PurchaseReservedDBInstancesOfferingInput struct {
 	// myreservationID
 	ReservedDBInstanceId *string
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
-	// the Amazon RDS User Guide.
+	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
+	// in the Amazon RDS User Guide.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -53,7 +52,7 @@ type PurchaseReservedDBInstancesOfferingInput struct {
 type PurchaseReservedDBInstancesOfferingOutput struct {
 
 	// This data type is used as a response element in the DescribeReservedDBInstances
-	// and PurchaseReservedDBInstancesOffering actions.
+	// and PurchaseReservedDBInstancesOffering  actions.
 	ReservedDBInstance *types.ReservedDBInstance
 
 	// Metadata pertaining to the operation's result.

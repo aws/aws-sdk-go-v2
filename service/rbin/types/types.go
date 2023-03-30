@@ -17,8 +17,8 @@ type LockConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the resource tags used to identify resources that are retained
-// by the retention rule.
+// Information about the resource tags used to identify resources that are
+// retained by the retention rule.
 type ResourceTag struct {
 
 	// The tag key.
@@ -32,18 +32,18 @@ type ResourceTag struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the retention period for which the retention rule is to retain
-// resources.
+// Information about the retention period for which the retention rule is to
+// retain resources.
 type RetentionPeriod struct {
 
-	// The unit of time in which the retention period is measured. Currently, only DAYS
-	// is supported.
+	// The unit of time in which the retention period is measured. Currently, only
+	// DAYS is supported.
 	//
 	// This member is required.
 	RetentionPeriodUnit RetentionPeriodUnit
 
-	// The period value for which the retention rule is to retain resources. The period
-	// is measured using the unit specified for RetentionPeriodUnit.
+	// The period value for which the retention rule is to retain resources. The
+	// period is measured using the unit specified for RetentionPeriodUnit.
 	//
 	// This member is required.
 	RetentionPeriodValue *int32
@@ -61,21 +61,14 @@ type RuleSummary struct {
 	Identifier *string
 
 	// The lock state for the retention rule.
-	// - locked - The retention rule is locked
-	// and can't be modified or deleted.
-	// - pending_unlock - The retention rule has been
-	// unlocked but it is still within the unlock delay period. The retention rule can
-	// be modified or deleted only after the unlock delay period has expired.
-	// -
-	// unlocked - The retention rule is unlocked and it can be modified or deleted by
-	// any user with the required permissions.
-	// - null - The retention rule has never
-	// been locked. Once a retention rule has been locked, it can transition between
-	// the locked and unlocked states only; it can never transition back to null.
+	//     - locked - The retention rule is locked and can't be modified or deleted.
+	//     - pending_unlock - The retention rule has been unlocked but it is still within the unlock delay period. The retention rule can be modified or deleted only after the unlock delay period has expired.
+	//     - unlocked - The retention rule is unlocked and it can be modified or deleted by any user with the required permissions.
+	//     - null - The retention rule has never been locked. Once a retention rule has been locked, it can transition between the locked and unlocked states only; it can never transition back to null .
 	LockState LockState
 
-	// Information about the retention period for which the retention rule is to retain
-	// resources.
+	// Information about the retention period for which the retention rule is to
+	// retain resources.
 	RetentionPeriod *RetentionPeriod
 
 	noSmithyDocumentSerde

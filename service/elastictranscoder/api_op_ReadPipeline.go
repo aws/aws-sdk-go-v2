@@ -27,7 +27,7 @@ func (c *Client) ReadPipeline(ctx context.Context, params *ReadPipelineInput, op
 	return out, nil
 }
 
-// The ReadPipelineRequest structure.
+// The ReadPipelineRequest  structure.
 type ReadPipelineInput struct {
 
 	// The identifier of the pipeline to read.
@@ -38,15 +38,15 @@ type ReadPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
-// The ReadPipelineResponse structure.
+// The ReadPipelineResponse  structure.
 type ReadPipelineOutput struct {
 
 	// A section of the response body that provides information about the pipeline.
 	Pipeline *types.Pipeline
 
-	// Elastic Transcoder returns a warning if the resources used by your pipeline are
-	// not in the same region as the pipeline. Using resources in the same region, such
-	// as your Amazon S3 buckets, Amazon SNS notification topics, and AWS KMS key,
+	// Elastic Transcoder returns a warning if the resources used by your pipeline
+	// are not in the same region as the pipeline. Using resources in the same region,
+	// such as your Amazon S3 buckets, Amazon SNS notification topics, and AWS KMS key,
 	// reduces processing time and prevents cross-regional charges.
 	Warnings []types.Warning
 

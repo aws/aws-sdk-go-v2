@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches for phone numbers that can be ordered. For US numbers, provide at least
-// one of the following search filters: AreaCode, City, State, or TollFreePrefix.
-// If you provide City, you must also provide State. Numbers outside the US only
-// support the PhoneNumberType filter, which you must use.
+// Searches for phone numbers that can be ordered. For US numbers, provide at
+// least one of the following search filters: AreaCode , City , State , or
+// TollFreePrefix . If you provide City , you must also provide State. Numbers
+// outside the US only support the PhoneNumberType  filter, which you must use.
 func (c *Client) SearchAvailablePhoneNumbers(ctx context.Context, params *SearchAvailablePhoneNumbersInput, optFns ...func(*Options)) (*SearchAvailablePhoneNumbersOutput, error) {
 	if params == nil {
 		params = &SearchAvailablePhoneNumbersInput{}
@@ -150,8 +150,8 @@ type SearchAvailablePhoneNumbersPaginatorOptions struct {
 	// The maximum number of results to return in a single call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

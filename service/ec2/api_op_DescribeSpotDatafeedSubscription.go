@@ -12,9 +12,8 @@ import (
 )
 
 // Describes the data feed for Spot Instances. For more information, see Spot
-// Instance data feed
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html) in
-// the Amazon EC2 User Guide for Linux Instances.
+// Instance data feed (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html)
+// in the Amazon EC2 User Guide for Linux Instances.
 func (c *Client) DescribeSpotDatafeedSubscription(ctx context.Context, params *DescribeSpotDatafeedSubscriptionInput, optFns ...func(*Options)) (*DescribeSpotDatafeedSubscriptionOutput, error) {
 	if params == nil {
 		params = &DescribeSpotDatafeedSubscriptionInput{}
@@ -35,8 +34,8 @@ type DescribeSpotDatafeedSubscriptionInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

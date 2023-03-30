@@ -47,16 +47,16 @@ type ListModelBiasJobDefinitionsInput struct {
 	// Filter for model bias jobs whose name contains a specified string.
 	NameContains *string
 
-	// The token returned if the response is truncated. To retrieve the next set of job
-	// executions, use it in the next request.
+	// The token returned if the response is truncated. To retrieve the next set of
+	// job executions, use it in the next request.
 	NextToken *string
 
-	// Whether to sort results by the Name or CreationTime field. The default is
-	// CreationTime.
+	// Whether to sort results by the Name  or CreationTime  field. The default is
+	// CreationTime .
 	SortBy types.MonitoringJobDefinitionSortKey
 
-	// Whether to sort the results in Ascending or Descending order. The default is
-	// Descending.
+	// Whether to sort the results in Ascending  or Descending  order. The default is
+	// Descending .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -154,8 +154,8 @@ type ListModelBiasJobDefinitionsPaginatorOptions struct {
 	// value is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -13,8 +13,7 @@ import (
 )
 
 // Retrieves a paginated list of bulk import job requests. For more information,
-// see List bulk import jobs (CLI)
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ListBulkImportJobs.html)
+// see List bulk import jobs (CLI) (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ListBulkImportJobs.html)
 // in the IoT SiteWise User Guide.
 func (c *Client) ListBulkImportJobs(ctx context.Context, params *ListBulkImportJobsInput, optFns ...func(*Options)) (*ListBulkImportJobsOutput, error) {
 	if params == nil {
@@ -166,8 +165,8 @@ type ListBulkImportJobsPaginatorOptions struct {
 	// The maximum number of results to return for each paginated request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

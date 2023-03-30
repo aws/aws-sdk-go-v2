@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For a batch of security controls and standards, identifies whether each control
-// is currently enabled or disabled in a standard.
+// For a batch of security controls and standards, identifies whether each
+// control is currently enabled or disabled in a standard.
 func (c *Client) BatchGetStandardsControlAssociations(ctx context.Context, params *BatchGetStandardsControlAssociationsInput, optFns ...func(*Options)) (*BatchGetStandardsControlAssociationsOutput, error) {
 	if params == nil {
 		params = &BatchGetStandardsControlAssociationsInput{}
@@ -31,8 +31,8 @@ func (c *Client) BatchGetStandardsControlAssociations(ctx context.Context, param
 type BatchGetStandardsControlAssociationsInput struct {
 
 	// An array with one or more objects that includes a security control (identified
-	// with SecurityControlId, SecurityControlArn, or a mix of both parameters) and the
-	// Amazon Resource Name (ARN) of a standard. This field is used to query the
+	// with SecurityControlId , SecurityControlArn, or a mix of both parameters) and
+	// the Amazon Resource Name (ARN) of a standard. This field is used to query the
 	// enablement status of a control in a specified standard. The security control ID
 	// or ARN is the same across standards.
 	//
@@ -44,14 +44,14 @@ type BatchGetStandardsControlAssociationsInput struct {
 
 type BatchGetStandardsControlAssociationsOutput struct {
 
-	// Provides the enablement status of a security control in a specified standard and
-	// other details for the control in relation to the specified standard.
+	// Provides the enablement status of a security control in a specified standard
+	// and other details for the control in relation to the specified standard.
 	//
 	// This member is required.
 	StandardsControlAssociationDetails []types.StandardsControlAssociationDetail
 
-	// A security control (identified with SecurityControlId, SecurityControlArn, or a
-	// mix of both parameters) whose enablement status in a specified standard cannot
+	// A security control (identified with SecurityControlId , SecurityControlArn, or
+	// a mix of both parameters) whose enablement status in a specified standard cannot
 	// be returned.
 	UnprocessedAssociations []types.UnprocessedStandardsControlAssociation
 

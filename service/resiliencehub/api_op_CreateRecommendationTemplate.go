@@ -31,10 +31,9 @@ func (c *Client) CreateRecommendationTemplate(ctx context.Context, params *Creat
 type CreateRecommendationTemplateInput struct {
 
 	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn:partition:resiliencehub:region:account:app-assessment/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// arn: partition :resiliencehub: region : account :app-assessment/ app-id. For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
@@ -47,9 +46,9 @@ type CreateRecommendationTemplateInput struct {
 	// The name of the Amazon S3 bucket that will contain the recommendation template.
 	BucketName *string
 
-	// Used for an idempotency token. A client token is a unique, case-sensitive string
-	// of up to 64 ASCII characters. You should not reuse the same client token for
-	// other API requests.
+	// Used for an idempotency token. A client token is a unique, case-sensitive
+	// string of up to 64 ASCII characters. You should not reuse the same client token
+	// for other API requests.
 	ClientToken *string
 
 	// The format for the recommendation template. CfnJson The template is
@@ -60,12 +59,12 @@ type CreateRecommendationTemplateInput struct {
 	RecommendationIds []string
 
 	// An array of strings that specify the recommendation template type or types.
-	// Alarm The template is an AlarmRecommendation template. Sop The template is a
-	// SopRecommendation template. Test The template is a TestRecommendation template.
+	// Alarm The template is an AlarmRecommendation  template. Sop The template is a
+	// SopRecommendation template. Test The template is a TestRecommendation  template.
 	RecommendationTypes []types.RenderRecommendationType
 
-	// The tags assigned to the resource. A tag is a label that you assign to an Amazon
-	// Web Services resource. Each tag consists of a key/value pair.
+	// The tags assigned to the resource. A tag is a label that you assign to an
+	// Amazon Web Services resource. Each tag consists of a key/value pair.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

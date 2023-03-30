@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the delegated Amazon Macie administrator account for
-// an organization in Organizations.
+// Retrieves information about the delegated Amazon Macie administrator account
+// for an organization in Organizations.
 func (c *Client) ListOrganizationAdminAccounts(ctx context.Context, params *ListOrganizationAdminAccountsInput, optFns ...func(*Options)) (*ListOrganizationAdminAccountsOutput, error) {
 	if params == nil {
 		params = &ListOrganizationAdminAccountsInput{}
@@ -131,8 +131,8 @@ type ListOrganizationAdminAccountsPaginatorOptions struct {
 	// The maximum number of items to include in each page of a paginated response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

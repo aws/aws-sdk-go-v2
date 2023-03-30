@@ -45,8 +45,8 @@ type CreateModelCardExportJobInput struct {
 	// This member is required.
 	OutputConfig *types.ModelCardExportOutputConfig
 
-	// The version of the model card to export. If a version is not provided, then the
-	// latest version of the model card is exported.
+	// The version of the model card to export. If a version is not provided, then
+	// the latest version of the model card is exported.
 	ModelCardVersion int32
 
 	noSmithyDocumentSerde

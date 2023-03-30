@@ -31,15 +31,15 @@ func (c *Client) DisassociateMacSecKey(ctx context.Context, params *Disassociate
 type DisassociateMacSecKeyInput struct {
 
 	// The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG
-	// (dxlag-xxxx). You can use DescribeConnections or DescribeLags to retrieve
+	// (dxlag-xxxx). You can use DescribeConnections  or DescribeLags to retrieve
 	// connection ID.
 	//
 	// This member is required.
 	ConnectionId *string
 
-	// The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key. You can
-	// use DescribeConnections to retrieve the ARN of the MAC Security (MACsec) secret
-	// key.
+	// The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key. You
+	// can use DescribeConnections to retrieve the ARN of the MAC Security (MACsec)
+	// secret key.
 	//
 	// This member is required.
 	SecretARN *string
@@ -53,8 +53,8 @@ type DisassociateMacSecKeyOutput struct {
 	// (dxlag-xxxx).
 	ConnectionId *string
 
-	// The MAC Security (MACsec) security keys no longer associated with the dedicated
-	// connection.
+	// The MAC Security (MACsec) security keys no longer associated with the
+	// dedicated connection.
 	MacSecKeys []types.MacSecKey
 
 	// Metadata pertaining to the operation's result.

@@ -43,8 +43,8 @@ type ListFileSharesInput struct {
 	Limit *int32
 
 	// Opaque pagination token returned from a previous ListFileShares operation. If
-	// present, Marker specifies where to continue the list from after a previous call
-	// to ListFileShares. Optional.
+	// present, Marker specifies where to continue the list from after a previous
+	// call to ListFileShares. Optional.
 	Marker *string
 
 	noSmithyDocumentSerde
@@ -56,12 +56,12 @@ type ListFileSharesOutput struct {
 	// An array of information about the S3 File Gateway's file shares.
 	FileShareInfoList []types.FileShareInfo
 
-	// If the request includes Marker, the response returns that value in this field.
+	// If the request includes Marker , the response returns that value in this field.
 	Marker *string
 
 	// If a value is present, there are more file shares to return. In a subsequent
-	// request, use NextMarker as the value for Marker to retrieve the next set of file
-	// shares.
+	// request, use NextMarker  as the value for Marker to retrieve the next set of
+	// file shares.
 	NextMarker *string
 
 	// Metadata pertaining to the operation's result.
@@ -144,8 +144,8 @@ type ListFileSharesPaginatorOptions struct {
 	// an integer with a value greater than zero. Optional.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

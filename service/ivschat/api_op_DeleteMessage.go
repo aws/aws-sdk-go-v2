@@ -12,9 +12,8 @@ import (
 
 // Sends an event to a specific room which directs clients to delete a specific
 // message; that is, unrender it from view and delete it from the client’s chat
-// history. This event’s EventName is aws:DELETE_MESSAGE. This replicates the
-// DeleteMessage
-// (https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-deletemessage-publish.html)
+// history. This event’s EventName  is aws:DELETE_MESSAGE . This replicates the
+// DeleteMessage (https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-deletemessage-publish.html)
 // WebSocket operation in the Amazon IVS Chat Messaging API.
 func (c *Client) DeleteMessage(ctx context.Context, params *DeleteMessageInput, optFns ...func(*Options)) (*DeleteMessageOutput, error) {
 	if params == nil {
@@ -34,15 +33,14 @@ func (c *Client) DeleteMessage(ctx context.Context, params *DeleteMessageInput, 
 type DeleteMessageInput struct {
 
 	// ID of the message to be deleted. This is the Id field in the received message
-	// (see  Message (Subscribe)
-	// (https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-message-subscribe.html)
+	// (see Message (Subscribe) (https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-message-subscribe.html)
 	// in the Chat Messaging API).
 	//
 	// This member is required.
 	Id *string
 
-	// Identifier of the room where the message should be deleted. Currently this must
-	// be an ARN.
+	// Identifier of the room where the message should be deleted. Currently this
+	// must be an ARN.
 	//
 	// This member is required.
 	RoomIdentifier *string

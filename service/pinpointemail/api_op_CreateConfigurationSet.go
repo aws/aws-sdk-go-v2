@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a configuration set. Configuration sets are groups of rules that you can
-// apply to the emails you send using Amazon Pinpoint. You apply a configuration
-// set to an email by including a reference to the configuration set in the headers
-// of the email. When you apply a configuration set to an email, all of the rules
-// in that configuration set are applied to the email.
+// Create a configuration set. Configuration sets are groups of rules that you
+// can apply to the emails you send using Amazon Pinpoint. You apply a
+// configuration set to an email by including a reference to the configuration set
+// in the headers of the email. When you apply a configuration set to an email, all
+// of the rules in that configuration set are applied to the email.
 func (c *Client) CreateConfigurationSet(ctx context.Context, params *CreateConfigurationSetInput, optFns ...func(*Options)) (*CreateConfigurationSetOutput, error) {
 	if params == nil {
 		params = &CreateConfigurationSetInput{}
@@ -62,8 +62,8 @@ type CreateConfigurationSetInput struct {
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type CreateConfigurationSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

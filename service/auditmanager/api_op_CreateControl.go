@@ -59,7 +59,7 @@ type CreateControlInput struct {
 
 type CreateControlOutput struct {
 
-	// The new control that the CreateControl API returned.
+	// The new control that the CreateControl  API returned.
 	Control *types.Control
 
 	// Metadata pertaining to the operation's result.

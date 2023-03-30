@@ -37,8 +37,8 @@ func (c *Client) CreateMonitor(ctx context.Context, params *CreateMonitorInput, 
 
 type CreateMonitorInput struct {
 
-	// The maximum number of city-network combinations (that is, combinations of a city
-	// location and network, such as an ISP) to be monitored for your resources.
+	// The maximum number of city-network combinations (that is, combinations of a
+	// city location and network, such as an ISP) to be monitored for your resources.
 	//
 	// This member is required.
 	MaxCityNetworksToMonitor int32
@@ -48,9 +48,9 @@ type CreateMonitorInput struct {
 	// This member is required.
 	MonitorName *string
 
-	// A unique, case-sensitive string of up to 64 ASCII characters that you specify to
-	// make an idempotent API request. Don't reuse the same client token for other API
-	// requests.
+	// A unique, case-sensitive string of up to 64 ASCII characters that you specify
+	// to make an idempotent API request. Don't reuse the same client token for other
+	// API requests.
 	ClientToken *string
 
 	// The resources to include in a monitor, which you provide as a set of Amazon

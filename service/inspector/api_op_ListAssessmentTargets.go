@@ -13,8 +13,8 @@ import (
 )
 
 // Lists the ARNs of the assessment targets within this AWS account. For more
-// information about assessment targets, see Amazon Inspector Assessment Targets
-// (https://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html).
+// information about assessment targets, see Amazon Inspector Assessment Targets (https://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html)
+// .
 func (c *Client) ListAssessmentTargets(ctx context.Context, params *ListAssessmentTargetsInput, optFns ...func(*Options)) (*ListAssessmentTargetsOutput, error) {
 	if params == nil {
 		params = &ListAssessmentTargetsInput{}
@@ -59,10 +59,10 @@ type ListAssessmentTargetsOutput struct {
 	// This member is required.
 	AssessmentTargetArns []string
 
-	// When a response is generated, if there is more data to be listed, this parameter
-	// is present in the response and contains the value to use for the nextToken
-	// parameter in a subsequent pagination request. If there is no more data to be
-	// listed, this parameter is set to null.
+	// When a response is generated, if there is more data to be listed, this
+	// parameter is present in the response and contains the value to use for the
+	// nextToken parameter in a subsequent pagination request. If there is no more data
+	// to be listed, this parameter is set to null.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -146,8 +146,8 @@ type ListAssessmentTargetsPaginatorOptions struct {
 	// the response. The default value is 10. The maximum value is 500.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

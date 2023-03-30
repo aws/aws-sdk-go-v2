@@ -41,8 +41,8 @@ type CreateApiKeyInput struct {
 	// Specifies whether the ApiKey can be used by callers.
 	Enabled bool
 
-	// Specifies whether (true) or not (false) the key identifier is distinct from the
-	// created API key value. This parameter is deprecated and should not be used.
+	// Specifies whether ( true ) or not ( false) the key identifier is distinct from
+	// the created API key value. This parameter is deprecated and should not be used.
 	GenerateDistinctId bool
 
 	// The name of the ApiKey.
@@ -52,8 +52,8 @@ type CreateApiKeyInput struct {
 	StageKeys []types.StageKey
 
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
-	// tag key can be up to 128 characters and must not start with aws:. The tag value
-	// can be up to 256 characters.
+	// tag key can be up to 128 characters and must not start with aws:. The tag
+	// value can be up to 256 characters.
 	Tags map[string]string
 
 	// Specifies a value of the API key.

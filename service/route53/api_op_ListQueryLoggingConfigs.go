@@ -15,12 +15,10 @@ import (
 // Lists the configurations for DNS query logging that are associated with the
 // current Amazon Web Services account or the configuration that is associated with
 // a specified hosted zone. For more information about DNS query logs, see
-// CreateQueryLoggingConfig
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateQueryLoggingConfig.html).
-// Additional information, including the format of DNS query logs, appears in
-// Logging DNS Queries
-// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html) in
-// the Amazon Route 53 Developer Guide.
+// CreateQueryLoggingConfig (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateQueryLoggingConfig.html)
+// . Additional information, including the format of DNS query logs, appears in
+// Logging DNS Queries (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html)
+// in the Amazon Route 53 Developer Guide.
 func (c *Client) ListQueryLoggingConfigs(ctx context.Context, params *ListQueryLoggingConfigsInput, optFns ...func(*Options)) (*ListQueryLoggingConfigsOutput, error) {
 	if params == nil {
 		params = &ListQueryLoggingConfigsInput{}
@@ -47,17 +45,16 @@ type ListQueryLoggingConfigsInput struct {
 	// (Optional) The maximum number of query logging configurations that you want
 	// Amazon Route 53 to return in response to the current request. If the current
 	// Amazon Web Services account has more than MaxResults configurations, use the
-	// value of NextToken
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListQueryLoggingConfigs.html#API_ListQueryLoggingConfigs_RequestSyntax)
+	// value of NextToken (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListQueryLoggingConfigs.html#API_ListQueryLoggingConfigs_RequestSyntax)
 	// in the response to get the next page of results. If you don't specify a value
-	// for MaxResults, Route 53 returns up to 100 configurations.
+	// for MaxResults , Route 53 returns up to 100 configurations.
 	MaxResults *int32
 
 	// (Optional) If the current Amazon Web Services account has more than MaxResults
 	// query logging configurations, use NextToken to get the second and subsequent
 	// pages of results. For the first ListQueryLoggingConfigs request, omit this
 	// value. For the second and subsequent requests, get the value of NextToken from
-	// the previous response and specify that value for NextToken in the request.
+	// the previous response and specify that value for NextToken  in the request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -65,8 +62,7 @@ type ListQueryLoggingConfigsInput struct {
 
 type ListQueryLoggingConfigsOutput struct {
 
-	// An array that contains one QueryLoggingConfig
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_QueryLoggingConfig.html)
+	// An array that contains one QueryLoggingConfig (https://docs.aws.amazon.com/Route53/latest/APIReference/API_QueryLoggingConfig.html)
 	// element for each configuration for DNS query logging that is associated with the
 	// current Amazon Web Services account.
 	//
@@ -77,10 +73,9 @@ type ListQueryLoggingConfigsOutput struct {
 	// associated with the current Amazon Web Services account, NextToken doesn't
 	// appear in the response. If a response doesn't include the last of the
 	// configurations, you can get more configurations by submitting another
-	// ListQueryLoggingConfigs
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListQueryLoggingConfigs.html)
+	// ListQueryLoggingConfigs (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListQueryLoggingConfigs.html)
 	// request. Get the value of NextToken that Amazon Route 53 returned in the
-	// previous response and include it in NextToken in the next request.
+	// previous response and include it in NextToken  in the next request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -166,14 +161,13 @@ type ListQueryLoggingConfigsPaginatorOptions struct {
 	// (Optional) The maximum number of query logging configurations that you want
 	// Amazon Route 53 to return in response to the current request. If the current
 	// Amazon Web Services account has more than MaxResults configurations, use the
-	// value of NextToken
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListQueryLoggingConfigs.html#API_ListQueryLoggingConfigs_RequestSyntax)
+	// value of NextToken (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListQueryLoggingConfigs.html#API_ListQueryLoggingConfigs_RequestSyntax)
 	// in the response to get the next page of results. If you don't specify a value
-	// for MaxResults, Route 53 returns up to 100 configurations.
+	// for MaxResults , Route 53 returns up to 100 configurations.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

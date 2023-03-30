@@ -12,8 +12,8 @@ import (
 )
 
 // Returns the tags for an OpenSearch Serverless resource. For more information,
-// see Tagging Amazon OpenSearch Serverless collections
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html).
+// see Tagging Amazon OpenSearch Serverless collections (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html)
+// .
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -31,9 +31,9 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource. The resource must be active (not
-	// in the DELETING state), and must be owned by the account ID included in the
-	// request.
+	// The Amazon Resource Name (ARN) of the resource. The resource must be active
+	// (not in the DELETING state), and must be owned by the account ID included in
+	// the request.
 	//
 	// This member is required.
 	ResourceArn *string

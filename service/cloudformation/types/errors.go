@@ -59,8 +59,8 @@ func (e *CFNRegistryException) ErrorCode() string {
 }
 func (e *CFNRegistryException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified change set name or ID doesn't exit. To view valid change sets for
-// a stack, use the ListChangeSets operation.
+// The specified change set name or ID doesn't exit. To view valid change sets
+// for a stack, use the ListChangeSets  operation.
 type ChangeSetNotFoundException struct {
 	Message *string
 
@@ -112,8 +112,8 @@ func (e *CreatedButModifiedException) ErrorCode() string {
 }
 func (e *CreatedButModifiedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The template contains resources with capabilities that weren't specified in the
-// Capabilities parameter.
+// The template contains resources with capabilities that weren't specified in
+// the Capabilities parameter.
 type InsufficientCapabilitiesException struct {
 	Message *string
 
@@ -140,8 +140,8 @@ func (e *InsufficientCapabilitiesException) ErrorCode() string {
 func (e *InsufficientCapabilitiesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified change set can't be used to update the stack. For example, the
-// change set status might be CREATE_IN_PROGRESS, or the stack status might be
-// UPDATE_IN_PROGRESS.
+// change set status might be CREATE_IN_PROGRESS , or the stack status might be
+// UPDATE_IN_PROGRESS .
 type InvalidChangeSetStatusException struct {
 	Message *string
 
@@ -193,9 +193,8 @@ func (e *InvalidOperationException) ErrorCode() string {
 }
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Error reserved for use by the CloudFormation CLI
-// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
-// CloudFormation doesn't return this error to users.
+// Error reserved for use by the CloudFormation CLI (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html)
+// . CloudFormation doesn't return this error to users.
 type InvalidStateTransitionException struct {
 	Message *string
 
@@ -222,8 +221,7 @@ func (e *InvalidStateTransitionException) ErrorCode() string {
 func (e *InvalidStateTransitionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The quota for the resource has already been reached. For information about
-// resource and stack limitations, see CloudFormation quotas
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)
+// resource and stack limitations, see CloudFormation quotas (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)
 // in the CloudFormation User Guide.
 type LimitExceededException struct {
 	Message *string
@@ -355,9 +353,8 @@ func (e *OperationNotFoundException) ErrorCode() string {
 }
 func (e *OperationNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Error reserved for use by the CloudFormation CLI
-// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
-// CloudFormation doesn't return this error to users.
+// Error reserved for use by the CloudFormation CLI (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html)
+// . CloudFormation doesn't return this error to users.
 type OperationStatusCheckFailedException struct {
 	Message *string
 
@@ -438,9 +435,9 @@ func (e *StackNotFoundException) ErrorCode() string {
 }
 func (e *StackNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You can't yet delete this stack set, because it still contains one or more stack
-// instances. Delete all stack instances from the stack set before deleting the
-// stack set.
+// You can't yet delete this stack set, because it still contains one or more
+// stack instances. Delete all stack instances from the stack set before deleting
+// the stack set.
 type StackSetNotEmptyException struct {
 	Message *string
 

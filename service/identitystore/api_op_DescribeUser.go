@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the user metadata and attributes from the UserId in an identity store.
+// Retrieves the user metadata and attributes from the UserId in an identity
+// store.
 func (c *Client) DescribeUser(ctx context.Context, params *DescribeUserInput, optFns ...func(*Options)) (*DescribeUserOutput, error) {
 	if params == nil {
 		params = &DescribeUserInput{}
@@ -29,8 +30,8 @@ func (c *Client) DescribeUser(ctx context.Context, params *DescribeUserInput, op
 
 type DescribeUserInput struct {
 
-	// The globally unique identifier for the identity store, such as d-1234567890. In
-	// this example, d- is a fixed prefix, and 1234567890 is a randomly generated
+	// The globally unique identifier for the identity store, such as d-1234567890.
+	// In this example, d-  is a fixed prefix, and 1234567890 is a randomly generated
 	// string that contains numbers and lower case letters. This value is generated at
 	// the time that a new identity store is created.
 	//
@@ -79,7 +80,7 @@ type DescribeUserOutput struct {
 	// An alternative descriptive name for the user.
 	NickName *string
 
-	// A list of PhoneNumber objects associated with a user.
+	// A list of PhoneNumber  objects associated with a user.
 	PhoneNumbers []types.PhoneNumber
 
 	// The preferred language of the user.

@@ -27,8 +27,8 @@ func TestClient_FlattenedXmlMapWithXmlNamespace_awsAwsqueryDeserialize(t *testin
 		Body          []byte
 		ExpectResult  *FlattenedXmlMapWithXmlNamespaceOutput
 	}{
-		// Serializes flattened XML maps in responses that have xmlNamespace and xmlName on
-		// members
+		// Serializes flattened XML maps in responses that have xmlNamespace and xmlName
+		// on members
 		"QueryQueryFlattenedXmlMapWithXmlNamespace": {
 			StatusCode: 200,
 			Header: http.Header{

@@ -35,16 +35,16 @@ type DeleteFileInput struct {
 	// This member is required.
 	BranchName *string
 
-	// The fully qualified path to the file that to be deleted, including the full name
-	// and extension of that file. For example, /examples/file.md is a fully qualified
-	// path to a file named file.md in a folder named examples.
+	// The fully qualified path to the file that to be deleted, including the full
+	// name and extension of that file. For example, /examples/file.md is a fully
+	// qualified path to a file named file.md in a folder named examples.
 	//
 	// This member is required.
 	FilePath *string
 
-	// The ID of the commit that is the tip of the branch where you want to create the
-	// commit that deletes the file. This must be the HEAD commit for the branch. The
-	// commit that deletes the file is created from this commit ID.
+	// The ID of the commit that is the tip of the branch where you want to create
+	// the commit that deletes the file. This must be the HEAD commit for the branch.
+	// The commit that deletes the file is created from this commit ID.
 	//
 	// This member is required.
 	ParentCommitId *string
@@ -85,19 +85,20 @@ type DeleteFileOutput struct {
 	// This member is required.
 	BlobId *string
 
-	// The full commit ID of the commit that contains the change that deletes the file.
+	// The full commit ID of the commit that contains the change that deletes the
+	// file.
 	//
 	// This member is required.
 	CommitId *string
 
-	// The fully qualified path to the file to be deleted, including the full name and
-	// extension of that file.
+	// The fully qualified path to the file to be deleted, including the full name
+	// and extension of that file.
 	//
 	// This member is required.
 	FilePath *string
 
-	// The full SHA-1 pointer of the tree information for the commit that contains the
-	// delete file change.
+	// The full SHA-1 pointer of the tree information for the commit that contains
+	// the delete file change.
 	//
 	// This member is required.
 	TreeId *string

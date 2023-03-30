@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new major or minor version of a service template. A major version of a
-// service template is a version that isn't backward compatible. A minor version of
-// a service template is a version that's backward compatible within its major
+// Create a new major or minor version of a service template. A major version of
+// a service template is a version that isn't backward compatible. A minor version
+// of a service template is a version that's backward compatible within its major
 // version.
 func (c *Client) CreateServiceTemplateVersion(ctx context.Context, params *CreateServiceTemplateVersionInput, optFns ...func(*Options)) (*CreateServiceTemplateVersionOutput, error) {
 	if params == nil {
@@ -40,8 +40,8 @@ type CreateServiceTemplateVersionInput struct {
 	// This member is required.
 	CompatibleEnvironmentTemplates []types.CompatibleEnvironmentTemplateInput
 
-	// An object that includes the template bundle S3 bucket path and name for the new
-	// version of a service template.
+	// An object that includes the template bundle S3 bucket path and name for the
+	// new version of a service template.
 	//
 	// This member is required.
 	Source types.TemplateVersionSourceInput
@@ -58,23 +58,21 @@ type CreateServiceTemplateVersionInput struct {
 	// A description of the new version of a service template.
 	Description *string
 
-	// To create a new minor version of the service template, include a major Version.
-	// To create a new major and minor version of the service template, exclude major
-	// Version.
+	// To create a new minor version of the service template, include a major Version
+	// . To create a new major and minor version of the service template, exclude
+	// major Version .
 	MajorVersion *string
 
 	// An array of supported component sources. Components with supported sources can
 	// be attached to service instances based on this service template version. For
-	// more information about components, see Proton components
-	// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
-	// Proton User Guide.
+	// more information about components, see Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
+	// in the Proton User Guide.
 	SupportedComponentSources []types.ServiceTemplateSupportedComponentSourceType
 
 	// An optional list of metadata items that you can associate with the Proton
 	// service template version. A tag is a key-value pair. For more information, see
-	// Proton resources and tagging
-	// (https://docs.aws.amazon.com/proton/latest/userguide/resources.html) in the
-	// Proton User Guide.
+	// Proton resources and tagging (https://docs.aws.amazon.com/proton/latest/userguide/resources.html)
+	// in the Proton User Guide.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

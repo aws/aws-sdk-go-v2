@@ -34,7 +34,8 @@ func (c *Client) DeleteConfigurationSetEventDestination(ctx context.Context, par
 // A request to delete an event destination from a configuration set.
 type DeleteConfigurationSetEventDestinationInput struct {
 
-	// The name of the configuration set that contains the event destination to delete.
+	// The name of the configuration set that contains the event destination to
+	// delete.
 	//
 	// This member is required.
 	ConfigurationSetName *string
@@ -47,8 +48,8 @@ type DeleteConfigurationSetEventDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type DeleteConfigurationSetEventDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

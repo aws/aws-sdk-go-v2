@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListJobsByStatus operation gets a list of jobs that have a specified status.
-// The response body contains one element for each job that satisfies the search
-// criteria.
+// The ListJobsByStatus operation gets a list of jobs that have a specified
+// status. The response body contains one element for each job that satisfies the
+// search criteria.
 func (c *Client) ListJobsByStatus(ctx context.Context, params *ListJobsByStatusInput, optFns ...func(*Options)) (*ListJobsByStatusOutput, error) {
 	if params == nil {
 		params = &ListJobsByStatusInput{}
@@ -30,36 +30,37 @@ func (c *Client) ListJobsByStatus(ctx context.Context, params *ListJobsByStatusI
 	return out, nil
 }
 
-// The ListJobsByStatusRequest structure.
+// The ListJobsByStatusRequest  structure.
 type ListJobsByStatusInput struct {
 
-	// To get information about all of the jobs associated with the current AWS account
-	// that have a given status, specify the following status: Submitted, Progressing,
-	// Complete, Canceled, or Error.
+	// To get information about all of the jobs associated with the current AWS
+	// account that have a given status, specify the following status: Submitted ,
+	// Progressing , Complete , Canceled , or Error .
 	//
 	// This member is required.
 	Status *string
 
 	// To list jobs in chronological order by the date and time that they were
-	// submitted, enter true. To list jobs in reverse chronological order, enter false.
+	// submitted, enter true . To list jobs in reverse chronological order, enter
+	// false .
 	Ascending *string
 
-	// When Elastic Transcoder returns more than one page of results, use pageToken in
-	// subsequent GET requests to get each successive page of results.
+	// When Elastic Transcoder returns more than one page of results, use pageToken
+	// in subsequent GET  requests to get each successive page of results.
 	PageToken *string
 
 	noSmithyDocumentSerde
 }
 
-// The ListJobsByStatusResponse structure.
+// The ListJobsByStatusResponse  structure.
 type ListJobsByStatusOutput struct {
 
-	// An array of Job objects that have the specified status.
+	// An array of Job  objects that have the specified status.
 	Jobs []types.Job
 
 	// A value that you use to access the second and subsequent pages of results, if
 	// any. When the jobs in the specified pipeline fit on one page or when you've
-	// reached the last page of results, the value of NextPageToken is null.
+	// reached the last page of results, the value of NextPageToken  is null .
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -141,8 +142,8 @@ var _ ListJobsByStatusAPIClient = (*Client)(nil)
 
 // ListJobsByStatusPaginatorOptions is the paginator options for ListJobsByStatus
 type ListJobsByStatusPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

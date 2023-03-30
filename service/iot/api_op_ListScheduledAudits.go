@@ -13,8 +13,7 @@ import (
 )
 
 // Lists all of your scheduled audits. Requires permission to access the
-// ListScheduledAudits
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// ListScheduledAudits (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListScheduledAudits(ctx context.Context, params *ListScheduledAuditsInput, optFns ...func(*Options)) (*ListScheduledAuditsOutput, error) {
 	if params == nil {
@@ -117,8 +116,8 @@ func (c *Client) addOperationListScheduledAuditsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListScheduledAuditsAPIClient is a client that implements the ListScheduledAudits
-// operation.
+// ListScheduledAuditsAPIClient is a client that implements the
+// ListScheduledAudits operation.
 type ListScheduledAuditsAPIClient interface {
 	ListScheduledAudits(context.Context, *ListScheduledAuditsInput, ...func(*Options)) (*ListScheduledAuditsOutput, error)
 }
@@ -131,8 +130,8 @@ type ListScheduledAuditsPaginatorOptions struct {
 	// The maximum number of results to return at one time. The default is 25.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

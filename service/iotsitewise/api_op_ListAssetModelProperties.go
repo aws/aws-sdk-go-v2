@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a paginated list of properties associated with an asset model. If you
-// update properties associated with the model before you finish listing all the
-// properties, you need to start all over again.
+// Retrieves a paginated list of properties associated with an asset model. If
+// you update properties associated with the model before you finish listing all
+// the properties, you need to start all over again.
 func (c *Client) ListAssetModelProperties(ctx context.Context, params *ListAssetModelPropertiesInput, optFns ...func(*Options)) (*ListAssetModelPropertiesOutput, error) {
 	if params == nil {
 		params = &ListAssetModelPropertiesInput{}
@@ -37,12 +37,10 @@ type ListAssetModelPropertiesInput struct {
 	// This member is required.
 	AssetModelId *string
 
-	// Filters the requested list of asset model properties. You can choose one of the
-	// following options:
-	// - ALL – The list includes all asset model properties for a
-	// given asset model ID.
-	// - BASE – The list includes only base asset model
-	// properties for a given asset model ID.
+	// Filters the requested list of asset model properties. You can choose one of
+	// the following options:
+	//     - ALL – The list includes all asset model properties for a given asset model ID.
+	//     - BASE – The list includes only base asset model properties for a given asset model ID.
 	//
 	// Default: BASE
 	Filter types.ListAssetModelPropertiesFilter
@@ -59,7 +57,8 @@ type ListAssetModelPropertiesInput struct {
 
 type ListAssetModelPropertiesOutput struct {
 
-	// A list that summarizes the properties associated with the specified asset model.
+	// A list that summarizes the properties associated with the specified asset
+	// model.
 	//
 	// This member is required.
 	AssetModelPropertySummaries []types.AssetModelPropertySummary
@@ -182,8 +181,8 @@ type ListAssetModelPropertiesPaginatorOptions struct {
 	// specified, the default value is 50.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

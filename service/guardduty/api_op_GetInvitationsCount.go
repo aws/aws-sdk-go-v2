@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the count of all GuardDuty membership invitations that were sent to the
-// current member account except the currently accepted invitation.
+// Returns the count of all GuardDuty membership invitations that were sent to
+// the current member account except the currently accepted invitation.
 func (c *Client) GetInvitationsCount(ctx context.Context, params *GetInvitationsCountInput, optFns ...func(*Options)) (*GetInvitationsCountOutput, error) {
 	if params == nil {
 		params = &GetInvitationsCountInput{}

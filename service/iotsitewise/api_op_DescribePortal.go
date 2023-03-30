@@ -45,17 +45,16 @@ type DescribePortalInput struct {
 
 type DescribePortalOutput struct {
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the portal, which has the following format.
+	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the portal, which has the following format.
 	// arn:${Partition}:iotsitewise:${Region}:${Account}:portal/${PortalId}
 	//
 	// This member is required.
 	PortalArn *string
 
-	// The IAM Identity Center application generated client ID (used with IAM Identity
-	// Center APIs). IoT SiteWise includes portalClientId for only portals that use IAM
-	// Identity Center to authenticate users.
+	// The IAM Identity Center application generated client ID (used with IAM
+	// Identity Center APIs). IoT SiteWise includes portalClientId for only portals
+	// that use IAM Identity Center to authenticate users.
 	//
 	// This member is required.
 	PortalClientId *string
@@ -114,12 +113,10 @@ type DescribePortalOutput struct {
 	// The portal's logo image, which is available at a URL.
 	PortalLogoImageLocation *types.ImageLocation
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the service role that allows the portal's users to access your IoT SiteWise
-	// resources on your behalf. For more information, see Using service roles for IoT
-	// SiteWise Monitor
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
+	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the service role that allows the portal's users to access your IoT SiteWise
+	// resources on your behalf. For more information, see Using service roles for
+	// IoT SiteWise Monitor (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
 	// in the IoT SiteWise User Guide.
 	RoleArn *string
 
@@ -243,9 +240,9 @@ type PortalActiveWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, PortalActiveWaiter will use default max delay of 120 seconds. Note that
-	// MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, PortalActiveWaiter will use default max delay of 120 seconds. Note
+	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -293,9 +290,10 @@ func (w *PortalActiveWaiter) Wait(ctx context.Context, params *DescribePortalInp
 	return err
 }
 
-// WaitForOutput calls the waiter function for PortalActive waiter and returns the
-// output of the successful operation. The maxWaitDur is the maximum wait duration
-// the waiter will wait. The maxWaitDur is required and must be greater than zero.
+// WaitForOutput calls the waiter function for PortalActive waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
 func (w *PortalActiveWaiter) WaitForOutput(ctx context.Context, params *DescribePortalInput, maxWaitDur time.Duration, optFns ...func(*PortalActiveWaiterOptions)) (*DescribePortalOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
@@ -402,9 +400,9 @@ type PortalNotExistsWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, PortalNotExistsWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, PortalNotExistsWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -444,9 +442,9 @@ func NewPortalNotExistsWaiter(client DescribePortalAPIClient, optFns ...func(*Po
 	}
 }
 
-// Wait calls the waiter function for PortalNotExists waiter. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// Wait calls the waiter function for PortalNotExists waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *PortalNotExistsWaiter) Wait(ctx context.Context, params *DescribePortalInput, maxWaitDur time.Duration, optFns ...func(*PortalNotExistsWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

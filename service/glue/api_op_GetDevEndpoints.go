@@ -45,10 +45,11 @@ type GetDevEndpointsInput struct {
 
 type GetDevEndpointsOutput struct {
 
-	// A list of DevEndpoint definitions.
+	// A list of DevEndpoint  definitions.
 	DevEndpoints []types.DevEndpoint
 
-	// A continuation token, if not all DevEndpoint definitions have yet been returned.
+	// A continuation token, if not all DevEndpoint definitions have yet been
+	// returned.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -130,8 +131,8 @@ type GetDevEndpointsPaginatorOptions struct {
 	// The maximum size of information to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

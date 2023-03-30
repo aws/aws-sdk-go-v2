@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of source servers on a staging account that are extensible, which
-// means that: a. The source server is not already extended into this Account. b.
-// The source server on the Account we’re reading from is not an extension of
-// another source server.
+// Returns a list of source servers on a staging account that are extensible,
+// which means that: a. The source server is not already extended into this
+// Account. b. The source server on the Account we’re reading from is not an
+// extension of another source server.
 func (c *Client) ListExtensibleSourceServers(ctx context.Context, params *ListExtensibleSourceServersInput, optFns ...func(*Options)) (*ListExtensibleSourceServersOutput, error) {
 	if params == nil {
 		params = &ListExtensibleSourceServersInput{}
@@ -138,8 +138,8 @@ type ListExtensibleSourceServersPaginatorOptions struct {
 	// The maximum number of extensible source servers to retrieve.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

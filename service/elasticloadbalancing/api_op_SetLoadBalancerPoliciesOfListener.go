@@ -13,12 +13,9 @@ import (
 // Replaces the current set of policies for the specified load balancer port with
 // the specified set of policies. To enable back-end server authentication, use
 // SetLoadBalancerPoliciesForBackendServer. For more information about setting
-// policies, see Update the SSL Negotiation Configuration
-// (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/ssl-config-update.html),
-// Duration-Based Session Stickiness
-// (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration),
-// and Application-Controlled Session Stickiness
-// (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application)
+// policies, see Update the SSL Negotiation Configuration (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/ssl-config-update.html)
+// , Duration-Based Session Stickiness (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration)
+// , and Application-Controlled Session Stickiness (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application)
 // in the Classic Load Balancers Guide.
 func (c *Client) SetLoadBalancerPoliciesOfListener(ctx context.Context, params *SetLoadBalancerPoliciesOfListenerInput, optFns ...func(*Options)) (*SetLoadBalancerPoliciesOfListenerOutput, error) {
 	if params == nil {
@@ -48,8 +45,8 @@ type SetLoadBalancerPoliciesOfListenerInput struct {
 	// This member is required.
 	LoadBalancerPort int32
 
-	// The names of the policies. This list must include all policies to be enabled. If
-	// you omit a policy that is currently enabled, it is disabled. If the list is
+	// The names of the policies. This list must include all policies to be enabled.
+	// If you omit a policy that is currently enabled, it is disabled. If the list is
 	// empty, all current policies are disabled.
 	//
 	// This member is required.

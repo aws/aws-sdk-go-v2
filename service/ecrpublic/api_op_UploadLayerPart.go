@@ -15,7 +15,7 @@ import (
 // be 20971520 bytes (about 20MB). The UploadLayerPart API is called once for each
 // new image layer part. This operation is used by the Amazon ECR proxy and is not
 // generally used by customers for pulling and pushing images. In most cases, you
-// should use the docker CLI to pull, tag, and push images.
+// should use the docker  CLI to pull, tag, and push images.
 func (c *Client) UploadLayerPart(ctx context.Context, params *UploadLayerPartInput, optFns ...func(*Options)) (*UploadLayerPartOutput, error) {
 	if params == nil {
 		params = &UploadLayerPartInput{}

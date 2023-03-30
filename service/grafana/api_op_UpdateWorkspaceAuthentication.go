@@ -14,7 +14,7 @@ import (
 // Use this operation to define the identity provider (IdP) that this workspace
 // authenticates users from, using SAML. You can also map SAML assertion attributes
 // to workspace user information and define which groups in the assertion attribute
-// are to have the Admin and Editor roles in the workspace. Changes to the
+// are to have the Admin  and Editor roles in the workspace. Changes to the
 // authentication method for a workspace may take a few minutes to take effect.
 func (c *Client) UpdateWorkspaceAuthentication(ctx context.Context, params *UpdateWorkspaceAuthenticationInput, optFns ...func(*Options)) (*UpdateWorkspaceAuthenticationOutput, error) {
 	if params == nil {
@@ -36,8 +36,8 @@ type UpdateWorkspaceAuthenticationInput struct {
 	// Specifies whether this workspace uses SAML 2.0, IAM Identity Center (successor
 	// to Single Sign-On), or both to authenticate users for using the Grafana console
 	// within a workspace. For more information, see User authentication in Amazon
-	// Managed Grafana
-	// (https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html).
+	// Managed Grafana (https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html)
+	// .
 	//
 	// This member is required.
 	AuthenticationProviders []types.AuthenticationProviderTypes
@@ -47,9 +47,9 @@ type UpdateWorkspaceAuthenticationInput struct {
 	// This member is required.
 	WorkspaceId *string
 
-	// If the workspace uses SAML, use this structure to map SAML assertion attributes
-	// to workspace user information and define which groups in the assertion attribute
-	// are to have the Admin and Editor roles in the workspace.
+	// If the workspace uses SAML, use this structure to map SAML assertion
+	// attributes to workspace user information and define which groups in the
+	// assertion attribute are to have the Admin  and Editor  roles in the workspace.
 	SamlConfiguration *types.SamlConfiguration
 
 	noSmithyDocumentSerde
@@ -57,8 +57,8 @@ type UpdateWorkspaceAuthenticationInput struct {
 
 type UpdateWorkspaceAuthenticationOutput struct {
 
-	// A structure that describes the user authentication for this workspace after the
-	// update is made.
+	// A structure that describes the user authentication for this workspace after
+	// the update is made.
 	//
 	// This member is required.
 	Authentication *types.AuthenticationDescription

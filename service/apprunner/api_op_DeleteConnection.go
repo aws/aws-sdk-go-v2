@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete an App Runner connection. You must first ensure that there are no running
-// App Runner services that use this connection. If there are any, the
+// Delete an App Runner connection. You must first ensure that there are no
+// running App Runner services that use this connection. If there are any, the
 // DeleteConnection action fails.
 func (c *Client) DeleteConnection(ctx context.Context, params *DeleteConnectionInput, optFns ...func(*Options)) (*DeleteConnectionOutput, error) {
 	if params == nil {

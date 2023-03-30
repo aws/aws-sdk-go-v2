@@ -242,7 +242,7 @@ func (e *OperationTimeoutException) ErrorCode() string {
 func (e *OperationTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The engine does not support filtering data based on the enforced permissions.
-// For example, if you call the GetTemporaryGlueTableCredentials operation with
+// For example, if you call the GetTemporaryGlueTableCredentials  operation with
 // SupportedPermissionType equal to ColumnPermission, but cell-level permissions
 // exist on the table, this exception is thrown.
 type PermissionTypeMismatchException struct {
@@ -432,8 +432,8 @@ func (e *TransactionCommitInProgressException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// Contains details about an error where the specified transaction has already been
-// committed and cannot be used for UpdateTableObjects.
+// Contains details about an error where the specified transaction has already
+// been committed and cannot be used for UpdateTableObjects .
 type TransactionCommittedException struct {
 	Message *string
 

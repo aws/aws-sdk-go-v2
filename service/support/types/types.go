@@ -6,8 +6,8 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// An attachment to a case communication. The attachment consists of the file name
-// and the content of the file.
+// An attachment to a case communication. The attachment consists of the file
+// name and the content of the file.
 type Attachment struct {
 
 	// The content of the attachment file.
@@ -20,7 +20,7 @@ type Attachment struct {
 }
 
 // The file name and ID of an attachment to a case communication. You can use the
-// ID to retrieve the attachment with the DescribeAttachment operation.
+// ID to retrieve the attachment with the DescribeAttachment  operation.
 type AttachmentDetails struct {
 
 	// The ID of the attachment.
@@ -33,47 +33,26 @@ type AttachmentDetails struct {
 }
 
 // A JSON-formatted object that contains the metadata for a support case. It is
-// contained in the response from a DescribeCases request. CaseDetails contains the
-// following fields:
-// - caseId - The support case ID requested or returned in the
-// call. The case ID is an alphanumeric string formatted as shown in this example:
-// case-12345678910-2013-c4c1d2bf33c5cf47.
-// - categoryCode - The category of problem
-// for the support case. Corresponds to the CategoryCode values returned by a call
-// to DescribeServices.
-// - displayId - The identifier for the case on pages in the
-// Amazon Web Services Support Center.
-// - language - The language in which Amazon
-// Web Services Support handles the case. Amazon Web Services Support currently
-// supports English ("en") and Japanese ("ja"). You must specify the ISO 639-1 code
-// for the language parameter if you want support in that language.
-// - nextToken - A
-// resumption point for pagination.
-// - recentCommunications - One or more
-// Communication objects. Fields of these objects are attachments, body, caseId,
-// submittedBy, and timeCreated.
-// - serviceCode - The identifier for the Amazon Web
-// Services service that corresponds to the service code defined in the call to
-// DescribeServices.
-// - severityCode - The severity code assigned to the case.
-// Contains one of the values returned by the call to DescribeSeverityLevels. The
-// possible values are: low, normal, high, urgent, and critical.
-// - status - The
-// status of the case in the Amazon Web Services Support Center. Valid values:
-// -
-// opened
-// - pending-customer-action
-// - reopened
-// - resolved
-// - unassigned
-// -
-// work-in-progress
-//
-// - subject - The subject line of the case.
-// - submittedBy - The
-// email address of the account that submitted the case.
-// - timeCreated - The time
-// the case was created, in ISO-8601 format.
+// contained in the response from a DescribeCases request. CaseDetails contains
+// the following fields:
+//   - caseId - The support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-12345678910-2013-c4c1d2bf33c5cf47.
+//   - categoryCode - The category of problem for the support case. Corresponds to the CategoryCode values returned by a call to DescribeServices .
+//   - displayId - The identifier for the case on pages in the Amazon Web Services Support Center.
+//   - language - The language in which Amazon Web Services Support handles the case. Amazon Web Services Support currently supports English ("en") and Japanese ("ja"). You must specify the ISO 639-1 code for the language parameter if you want support in that language.
+//   - nextToken - A resumption point for pagination.
+//   - recentCommunications - One or more Communication objects. Fields of these objects are attachments , body , caseId , submittedBy , and timeCreated .
+//   - serviceCode - The identifier for the Amazon Web Services service that corresponds to the service code defined in the call to DescribeServices .
+//   - severityCode - The severity code assigned to the case. Contains one of the values returned by the call to DescribeSeverityLevels . The possible values are: low , normal , high , urgent , and critical .
+//   - status - The status of the case in the Amazon Web Services Support Center. Valid values:
+//   - opened
+//   - pending-customer-action
+//   - reopened
+//   - resolved
+//   - unassigned
+//   - work-in-progress
+//   - subject - The subject line of the case.
+//   - submittedBy - The email address of the account that submitted the case.
+//   - timeCreated - The time the case was created, in ISO-8601 format.
 type CaseDetails struct {
 
 	// The support case ID requested or returned in the call. The case ID is an
@@ -87,8 +66,8 @@ type CaseDetails struct {
 	// The email addresses that receive copies of communication about the case.
 	CcEmailAddresses []string
 
-	// The ID displayed for the case in the Amazon Web Services Support Center. This is
-	// a numeric string.
+	// The ID displayed for the case in the Amazon Web Services Support Center. This
+	// is a numeric string.
 	DisplayId *string
 
 	// The language in which Amazon Web Services Support handles the case. Amazon Web
@@ -97,26 +76,25 @@ type CaseDetails struct {
 	// that language.
 	Language *string
 
-	// The five most recent communications between you and Amazon Web Services Support
-	// Center, including the IDs of any attachments to the communications. Also
-	// includes a nextToken that you can use to retrieve earlier communications.
+	// The five most recent communications between you and Amazon Web Services
+	// Support Center, including the IDs of any attachments to the communications. Also
+	// includes a nextToken  that you can use to retrieve earlier communications.
 	RecentCommunications *RecentCaseCommunications
 
 	// The code for the Amazon Web Services service. You can get a list of codes and
-	// the corresponding service names by calling DescribeServices.
+	// the corresponding service names by calling DescribeServices .
 	ServiceCode *string
 
-	// The code for the severity level returned by the call to DescribeSeverityLevels.
+	// The code for the severity level returned by the call to DescribeSeverityLevels .
 	SeverityCode *string
 
 	// The status of the case. Valid values:
-	// - opened
-	// - pending-customer-action
-	// -
-	// reopened
-	// - resolved
-	// - unassigned
-	// - work-in-progress
+	//     - opened
+	//     - pending-customer-action
+	//     - reopened
+	//     - resolved
+	//     - unassigned
+	//     - work-in-progress
 	Status *string
 
 	// The subject line for the case in the Amazon Web Services Support Center.
@@ -131,9 +109,9 @@ type CaseDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A JSON-formatted name/value pair that represents the category name and category
-// code of the problem, selected from the DescribeServices response for each Amazon
-// Web Services service.
+// A JSON-formatted name/value pair that represents the category name and
+// category code of the problem, selected from the DescribeServices response for
+// each Amazon Web Services service.
 type Category struct {
 
 	// The category code for the support case.
@@ -192,15 +170,15 @@ type Service struct {
 
 	// A list of categories that describe the type of support issue a case describes.
 	// Categories consist of a category name and a category code. Category names and
-	// codes are passed to Amazon Web Services Support when you call CreateCase.
+	// codes are passed to Amazon Web Services Support when you call CreateCase .
 	Categories []Category
 
 	// The code for an Amazon Web Services service returned by the DescribeServices
-	// response. The name element contains the corresponding friendly name.
+	// response. The name  element contains the corresponding friendly name.
 	Code *string
 
-	// The friendly name for an Amazon Web Services service. The code element contains
-	// the corresponding code.
+	// The friendly name for an Amazon Web Services service. The code element
+	// contains the corresponding code.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -208,31 +186,25 @@ type Service struct {
 
 // A code and name pair that represents the severity level of a support case. The
 // available values depend on the support plan for the account. For more
-// information, see Choosing a severity
-// (https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity)
+// information, see Choosing a severity (https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity)
 // in the Amazon Web Services Support User Guide.
 type SeverityLevel struct {
 
-	// The code for case severity level. Valid values: low | normal | high | urgent |
-	// critical
+	// The code for case severity level. Valid values: low  | normal  | high  | urgent
+	// | critical
 	Code *string
 
-	// The name of the severity level that corresponds to the severity level code. The
-	// values returned by the API are different from the values that appear in the
-	// Amazon Web Services Support Center. For example, the API uses the code low, but
-	// the name appears as General guidance in Support Center. The following are the
-	// API code names and how they appear in the console:
-	// - low - General guidance
-	// -
-	// normal - System impaired
-	// - high - Production system impaired
-	// - urgent -
-	// Production system down
-	// - critical - Business-critical system down
-	//
-	// For more
-	// information, see Choosing a severity
-	// (https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity)
+	// The name of the severity level that corresponds to the severity level code.
+	// The values returned by the API are different from the values that appear in the
+	// Amazon Web Services Support Center. For example, the API uses the code low,
+	// but the name appears as General guidance in Support Center. The following are
+	// the API code names and how they appear in the console:
+	//     - low - General guidance
+	//     - normal - System impaired
+	//     - high - Production system impaired
+	//     - urgent - Production system down
+	//     - critical - Business-critical system down
+	// For more information, see Choosing a severity (https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity)
 	// in the Amazon Web Services Support User Guide.
 	Name *string
 
@@ -258,8 +230,8 @@ type TrustedAdvisorCheckDescription struct {
 	// This member is required.
 	Category *string
 
-	// The description of the Trusted Advisor check, which includes the alert criteria
-	// and recommended operations (contains HTML markup).
+	// The description of the Trusted Advisor check, which includes the alert
+	// criteria and recommended operations (contains HTML markup).
 	//
 	// This member is required.
 	Description *string
@@ -271,9 +243,9 @@ type TrustedAdvisorCheckDescription struct {
 
 	// The column headings for the data returned by the Trusted Advisor check. The
 	// order of the headings corresponds to the order of the data in the Metadata
-	// element of the TrustedAdvisorResourceDetail for the check. Metadata contains all
-	// the data that is shown in the Excel download, even in those cases where the UI
-	// shows just summary data.
+	// element of the TrustedAdvisorResourceDetail for the check. Metadata contains
+	// all the data that is shown in the Excel download, even in those cases where the
+	// UI shows just summary data.
 	//
 	// This member is required.
 	Metadata []*string
@@ -294,23 +266,19 @@ type TrustedAdvisorCheckRefreshStatus struct {
 	// This member is required.
 	CheckId *string
 
-	// The amount of time, in milliseconds, until the Trusted Advisor check is eligible
-	// for refresh.
+	// The amount of time, in milliseconds, until the Trusted Advisor check is
+	// eligible for refresh.
 	//
 	// This member is required.
 	MillisUntilNextRefreshable int64
 
 	// The status of the Trusted Advisor check for which a refresh has been
 	// requested:
-	// - none - The check is not refreshed or the non-success status exceeds
-	// the timeout
-	// - enqueued - The check refresh requests has entered the refresh
-	// queue
-	// - processing - The check refresh request is picked up by the rule
-	// processing engine
-	// - success - The check is successfully refreshed
-	// - abandoned -
-	// The check refresh has failed
+	//     - none - The check is not refreshed or the non-success status exceeds the timeout
+	//     - enqueued - The check refresh requests has entered the refresh queue
+	//     - processing - The check refresh request is picked up by the rule processing engine
+	//     - success - The check is successfully refreshed
+	//     - abandoned - The check refresh has failed
 	//
 	// This member is required.
 	Status *string
@@ -319,7 +287,7 @@ type TrustedAdvisorCheckRefreshStatus struct {
 }
 
 // The results of a Trusted Advisor check returned by
-// DescribeTrustedAdvisorCheckResult.
+// DescribeTrustedAdvisorCheckResult .
 type TrustedAdvisorCheckResult struct {
 
 	// Summary information that relates to the category of the check. Cost Optimizing
@@ -339,13 +307,13 @@ type TrustedAdvisorCheckResult struct {
 	FlaggedResources []TrustedAdvisorResourceDetail
 
 	// Details about Amazon Web Services resources that were analyzed in a call to
-	// Trusted Advisor DescribeTrustedAdvisorCheckSummaries.
+	// Trusted Advisor DescribeTrustedAdvisorCheckSummaries .
 	//
 	// This member is required.
 	ResourcesSummary *TrustedAdvisorResourcesSummary
 
-	// The alert status of the check: "ok" (green), "warning" (yellow), "error" (red),
-	// or "not_available".
+	// The alert status of the check: "ok" (green), "warning" (yellow), "error"
+	// (red), or "not_available".
 	//
 	// This member is required.
 	Status *string
@@ -374,13 +342,13 @@ type TrustedAdvisorCheckSummary struct {
 	CheckId *string
 
 	// Details about Amazon Web Services resources that were analyzed in a call to
-	// Trusted Advisor DescribeTrustedAdvisorCheckSummaries.
+	// Trusted Advisor DescribeTrustedAdvisorCheckSummaries .
 	//
 	// This member is required.
 	ResourcesSummary *TrustedAdvisorResourcesSummary
 
-	// The alert status of the check: "ok" (green), "warning" (yellow), "error" (red),
-	// or "not_available".
+	// The alert status of the check: "ok" (green), "warning" (yellow), "error"
+	// (red), or "not_available".
 	//
 	// This member is required.
 	Status *string
@@ -396,8 +364,8 @@ type TrustedAdvisorCheckSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The estimated cost savings that might be realized if the recommended operations
-// are taken.
+// The estimated cost savings that might be realized if the recommended
+// operations are taken.
 type TrustedAdvisorCostOptimizingSummary struct {
 
 	// The estimated monthly savings that might be realized if the recommended
@@ -418,11 +386,11 @@ type TrustedAdvisorCostOptimizingSummary struct {
 // Contains information about a resource identified by a Trusted Advisor check.
 type TrustedAdvisorResourceDetail struct {
 
-	// Additional information about the identified resource. The exact metadata and its
-	// order can be obtained by inspecting the TrustedAdvisorCheckDescription object
-	// returned by the call to DescribeTrustedAdvisorChecks. Metadata contains all the
-	// data that is shown in the Excel download, even in those cases where the UI shows
-	// just summary data.
+	// Additional information about the identified resource. The exact metadata and
+	// its order can be obtained by inspecting the TrustedAdvisorCheckDescription
+	// object returned by the call to DescribeTrustedAdvisorChecks. Metadata contains
+	// all the data that is shown in the Excel download, even in those cases where the
+	// UI shows just summary data.
 	//
 	// This member is required.
 	Metadata []*string
@@ -448,7 +416,7 @@ type TrustedAdvisorResourceDetail struct {
 }
 
 // Details about Amazon Web Services resources that were analyzed in a call to
-// Trusted Advisor DescribeTrustedAdvisorCheckSummaries.
+// Trusted Advisor DescribeTrustedAdvisorCheckSummaries .
 type TrustedAdvisorResourcesSummary struct {
 
 	// The number of Amazon Web Services resources that were flagged (listed) by the

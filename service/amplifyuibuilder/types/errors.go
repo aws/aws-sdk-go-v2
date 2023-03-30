@@ -111,8 +111,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You exceeded your service quota. Service quotas, also referred to as limits, are
-// the maximum number of service resources or operations for your Amazon Web
+// You exceeded your service quota. Service quotas, also referred to as limits,
+// are the maximum number of service resources or operations for your Amazon Web
 // Services account.
 type ServiceQuotaExceededException struct {
 	Message *string

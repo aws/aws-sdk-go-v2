@@ -35,8 +35,8 @@ func (e *ConformancePackTemplateValidationException) ErrorFault() smithy.ErrorFa
 	return smithy.FaultClient
 }
 
-// Using the same client token with one or more different parameters. Specify a new
-// client token with the parameter changes and try again.
+// Using the same client token with one or more different parameters. Specify a
+// new client token with the parameter changes and try again.
 type IdempotentParameterMismatch struct {
 	Message *string
 
@@ -91,22 +91,12 @@ func (e *InsufficientDeliveryPolicyException) ErrorFault() smithy.ErrorFault {
 }
 
 // Indicates one of the following errors:
-// - For PutConfigRule, the rule cannot be
-// created because the IAM role assigned to Config lacks permissions to perform the
-// config:Put* action.
-// - For PutConfigRule, the Lambda function cannot be invoked.
-// Check the function ARN, and check the function's permissions.
-// - For
-// PutOrganizationConfigRule, organization Config rule cannot be created because
-// you do not have permissions to call IAM GetRole action or create a
-// service-linked role.
-// - For PutConformancePack and
-// PutOrganizationConformancePack, a conformance pack cannot be created because you
-// do not have the following permissions:
-// - You do not have permission to call IAM
-// GetRole action or create a service-linked role.
-// - You do not have permission to
-// read Amazon S3 bucket or call SSM:GetDocument.
+//   - For PutConfigRule, the rule cannot be created because the IAM role assigned to Config lacks permissions to perform the config:Put* action.
+//   - For PutConfigRule, the Lambda function cannot be invoked. Check the function ARN, and check the function's permissions.
+//   - For PutOrganizationConfigRule, organization Config rule cannot be created because you do not have permissions to call IAM GetRole action or create a service-linked role.
+//   - For PutConformancePack and PutOrganizationConformancePack, a conformance pack cannot be created because you do not have the following permissions:
+//   - You do not have permission to call IAM GetRole action or create a service-linked role.
+//   - You do not have permission to read Amazon S3 bucket or call SSM:GetDocument.
 type InsufficientPermissionsException struct {
 	Message *string
 
@@ -294,8 +284,8 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Config throws an exception if the recording group does not contain a valid list
-// of resource types. Values that are not valid might also be incorrectly
+// Config throws an exception if the recording group does not contain a valid
+// list of resource types. Values that are not valid might also be incorrectly
 // formatted.
 type InvalidRecordingGroupException struct {
 	Message *string
@@ -322,7 +312,7 @@ func (e *InvalidRecordingGroupException) ErrorCode() string {
 }
 func (e *InvalidRecordingGroupException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified ResultToken is not valid.
+// The specified ResultToken  is not valid.
 type InvalidResultTokenException struct {
 	Message *string
 
@@ -508,10 +498,10 @@ func (e *LastDeliveryChannelDeleteFailedException) ErrorFault() smithy.ErrorFaul
 	return smithy.FaultClient
 }
 
-// For StartConfigRulesEvaluation API, this exception is thrown if an evaluation is
-// in progress or if you call the StartConfigRulesEvaluation API more than once per
-// minute. For PutConfigurationAggregator API, this exception is thrown if the
-// number of accounts and aggregators exceeds the limit.
+// For StartConfigRulesEvaluation API, this exception is thrown if an evaluation
+// is in progress or if you call the StartConfigRulesEvaluation API more than
+// once per minute. For PutConfigurationAggregator API, this exception is thrown
+// if the number of accounts and aggregators exceeds the limit.
 type LimitExceededException struct {
 	Message *string
 
@@ -538,8 +528,8 @@ func (e *LimitExceededException) ErrorCode() string {
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have reached the limit of active custom resource types in your account.
-// There is a limit of 100,000. Delete unused resources using DeleteResourceConfig
-// (https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteResourceConfig.html).
+// There is a limit of 100,000. Delete unused resources using DeleteResourceConfig (https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteResourceConfig.html)
+// .
 type MaxActiveResourcesExceededException struct {
 	Message *string
 
@@ -625,10 +615,9 @@ func (e *MaxNumberOfConfigurationRecordersExceededException) ErrorFault() smithy
 	return smithy.FaultClient
 }
 
-// You have reached the limit of the number of conformance packs you can create in
-// an account. For more information, see  Service Limits
-// (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html) in
-// the Config Developer Guide.
+// You have reached the limit of the number of conformance packs you can create
+// in an account. For more information, see Service Limits  (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html)
+// in the Config Developer Guide.
 type MaxNumberOfConformancePacksExceededException struct {
 	Message *string
 
@@ -685,9 +674,8 @@ func (e *MaxNumberOfDeliveryChannelsExceededException) ErrorFault() smithy.Error
 }
 
 // You have reached the limit of the number of organization Config rules you can
-// create. For more information, see see  Service Limits
-// (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html) in
-// the Config Developer Guide.
+// create. For more information, see see Service Limits  (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html)
+// in the Config Developer Guide.
 type MaxNumberOfOrganizationConfigRulesExceededException struct {
 	Message *string
 
@@ -716,9 +704,8 @@ func (e *MaxNumberOfOrganizationConfigRulesExceededException) ErrorFault() smith
 }
 
 // You have reached the limit of the number of organization conformance packs you
-// can create in an account. For more information, see  Service Limits
-// (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html) in
-// the Config Developer Guide.
+// can create in an account. For more information, see Service Limits  (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html)
+// in the Config Developer Guide.
 type MaxNumberOfOrganizationConformancePacksExceededException struct {
 	Message *string
 
@@ -746,8 +733,8 @@ func (e *MaxNumberOfOrganizationConformancePacksExceededException) ErrorFault() 
 	return smithy.FaultClient
 }
 
-// Failed to add the retention configuration because a retention configuration with
-// that name already exists.
+// Failed to add the retention configuration because a retention configuration
+// with that name already exists.
 type MaxNumberOfRetentionConfigurationsExceededException struct {
 	Message *string
 
@@ -1220,28 +1207,16 @@ func (e *NoSuchRetentionConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// For PutConfigurationAggregator API, you can see this exception for the following
-// reasons:
-// - No permission to call EnableAWSServiceAccess API
-// - The configuration
-// aggregator cannot be updated because your Amazon Web Services Organization
-// management account or the delegated administrator role changed. Delete this
-// aggregator and create a new one with the current Amazon Web Services
-// Organization.
-// - The configuration aggregator is associated with a previous
-// Amazon Web Services Organization and Config cannot aggregate data with current
-// Amazon Web Services Organization. Delete this aggregator and create a new one
-// with the current Amazon Web Services Organization.
-// - You are not a registered
-// delegated administrator for Config with permissions to call
-// ListDelegatedAdministrators API. Ensure that the management account registers
-// delagated administrator for Config service principle name before the delegated
-// administrator creates an aggregator.
+// For PutConfigurationAggregator API, you can see this exception for the
+// following reasons:
+//   - No permission to call EnableAWSServiceAccess API
+//   - The configuration aggregator cannot be updated because your Amazon Web Services Organization management account or the delegated administrator role changed. Delete this aggregator and create a new one with the current Amazon Web Services Organization.
+//   - The configuration aggregator is associated with a previous Amazon Web Services Organization and Config cannot aggregate data with current Amazon Web Services Organization. Delete this aggregator and create a new one with the current Amazon Web Services Organization.
+//   - You are not a registered delegated administrator for Config with permissions to call ListDelegatedAdministrators API. Ensure that the management account registers delagated administrator for Config service principle name before the delegated administrator creates an aggregator.
 //
-// For all OrganizationConfigRule and
-// OrganizationConformancePack APIs, Config throws an exception if APIs are called
-// from member accounts. All APIs must be called from organization management
-// account.
+// For all OrganizationConfigRule  and OrganizationConformancePack APIs, Config
+// throws an exception if APIs are called from member accounts. All APIs must be
+// called from organization management account.
 type OrganizationAccessDeniedException struct {
 	Message *string
 
@@ -1352,8 +1327,8 @@ func (e *OversizedConfigurationItemException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// Remediation action is in progress. You can either cancel execution in Amazon Web
-// Services Systems Manager or wait and try again later.
+// Remediation action is in progress. You can either cancel execution in Amazon
+// Web Services Systems Manager or wait and try again later.
 type RemediationInProgressException struct {
 	Message *string
 
@@ -1409,25 +1384,13 @@ func (e *ResourceConcurrentModificationException) ErrorFault() smithy.ErrorFault
 }
 
 // You see this exception in the following cases:
-// - For DeleteConfigRule, Config is
-// deleting this rule. Try your request again later.
-// - For DeleteConfigRule, the
-// rule is deleting your evaluation results. Try your request again later.
-// - For
-// DeleteConfigRule, a remediation action is associated with the rule and Config
-// cannot delete this rule. Delete the remediation action associated with the rule
-// before deleting the rule and try your request again later.
-// - For
-// PutConfigOrganizationRule, organization Config rule deletion is in progress. Try
-// your request again later.
-// - For DeleteOrganizationConfigRule, organization
-// Config rule creation is in progress. Try your request again later.
-// - For
-// PutConformancePack and PutOrganizationConformancePack, a conformance pack
-// creation, update, and deletion is in progress. Try your request again later.
-// -
-// For DeleteConformancePack, a conformance pack creation, update, and deletion is
-// in progress. Try your request again later.
+//   - For DeleteConfigRule, Config is deleting this rule. Try your request again later.
+//   - For DeleteConfigRule, the rule is deleting your evaluation results. Try your request again later.
+//   - For DeleteConfigRule, a remediation action is associated with the rule and Config cannot delete this rule. Delete the remediation action associated with the rule before deleting the rule and try your request again later.
+//   - For PutConfigOrganizationRule, organization Config rule deletion is in progress. Try your request again later.
+//   - For DeleteOrganizationConfigRule, organization Config rule creation is in progress. Try your request again later.
+//   - For PutConformancePack and PutOrganizationConformancePack, a conformance pack creation, update, and deletion is in progress. Try your request again later.
+//   - For DeleteConformancePack, a conformance pack creation, update, and deletion is in progress. Try your request again later.
 type ResourceInUseException struct {
 	Message *string
 
@@ -1453,7 +1416,8 @@ func (e *ResourceInUseException) ErrorCode() string {
 }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have specified a resource that is either unknown or has not been discovered.
+// You have specified a resource that is either unknown or has not been
+// discovered.
 type ResourceNotDiscoveredException struct {
 	Message *string
 
@@ -1506,9 +1470,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have reached the limit of the number of tags you can use. For more
-// information, see  Service Limits
-// (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html) in
-// the Config Developer Guide.
+// information, see Service Limits  (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html)
+// in the Config Developer Guide.
 type TooManyTagsException struct {
 	Message *string
 

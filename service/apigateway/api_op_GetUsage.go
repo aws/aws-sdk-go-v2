@@ -49,8 +49,8 @@ type GetUsageInput struct {
 	// The Id of the API key associated with the resultant usage data.
 	KeyId *string
 
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
+	// The maximum number of returned results per page. The default value is 25 and
+	// the maximum value is 500.
 	Limit *int32
 
 	// The current pagination position in the paged result set.
@@ -67,9 +67,9 @@ type GetUsageOutput struct {
 
 	// The usage data, as daily logs of used and remaining quotas, over the specified
 	// time interval indexed over the API keys in a usage plan. For example, {...,
-	// "values" : { "{api_key}" : [ [0, 100], [10, 90], [100, 10]]}, where {api_key}
+	// "values" : { "{api_key}" : [ [0, 100], [10, 90], [100, 10]]} , where {api_key}
 	// stands for an API key value and the daily log entry is of the format [used
-	// quota, remaining quota].
+	// quota, remaining quota] .
 	Items map[string][][]int64
 
 	// The current pagination position in the paged result set.
@@ -162,12 +162,12 @@ var _ GetUsageAPIClient = (*Client)(nil)
 
 // GetUsagePaginatorOptions is the paginator options for GetUsage
 type GetUsagePaginatorOptions struct {
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
+	// The maximum number of returned results per page. The default value is 25 and
+	// the maximum value is 500.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

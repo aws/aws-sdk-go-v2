@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all AppInstanceBots created under a single AppInstance.
+// Lists all AppInstanceBots  created under a single AppInstance .
 func (c *Client) ListAppInstanceBots(ctx context.Context, params *ListAppInstanceBotsInput, optFns ...func(*Options)) (*ListAppInstanceBotsOutput, error) {
 	if params == nil {
 		params = &ListAppInstanceBotsInput{}
@@ -30,7 +30,7 @@ func (c *Client) ListAppInstanceBots(ctx context.Context, params *ListAppInstanc
 
 type ListAppInstanceBotsInput struct {
 
-	// The ARN of the AppInstance.
+	// The ARN of the AppInstance .
 	//
 	// This member is required.
 	AppInstanceArn *string
@@ -49,7 +49,7 @@ type ListAppInstanceBotsOutput struct {
 	// The ARN of the AppInstance.
 	AppInstanceArn *string
 
-	// The information for each requested AppInstanceBot.
+	// The information for each requested AppInstanceBot .
 	AppInstanceBots []types.AppInstanceBotSummary
 
 	// The token passed by previous API calls until all requested bots are returned.
@@ -124,8 +124,8 @@ func (c *Client) addOperationListAppInstanceBotsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListAppInstanceBotsAPIClient is a client that implements the ListAppInstanceBots
-// operation.
+// ListAppInstanceBotsAPIClient is a client that implements the
+// ListAppInstanceBots operation.
 type ListAppInstanceBotsAPIClient interface {
 	ListAppInstanceBots(context.Context, *ListAppInstanceBotsInput, ...func(*Options)) (*ListAppInstanceBotsOutput, error)
 }
@@ -138,8 +138,8 @@ type ListAppInstanceBotsPaginatorOptions struct {
 	// The maximum number of requests to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

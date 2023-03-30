@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The DeleteKeyspace operation deletes a keyspace and all of its tables.
+// The DeleteKeyspace  operation deletes a keyspace and all of its tables.
 func (c *Client) DeleteKeyspace(ctx context.Context, params *DeleteKeyspaceInput, optFns ...func(*Options)) (*DeleteKeyspaceOutput, error) {
 	if params == nil {
 		params = &DeleteKeyspaceInput{}

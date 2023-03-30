@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers a new migration task which represents a server, database, etc., being
-// migrated to AWS by a migration tool. This API is a prerequisite to calling the
-// NotifyMigrationTaskState API as the migration tool must first register the
+// Registers a new migration task which represents a server, database, etc.,
+// being migrated to AWS by a migration tool. This API is a prerequisite to calling
+// the NotifyMigrationTaskState API as the migration tool must first register the
 // migration task with Migration Hub.
 func (c *Client) ImportMigrationTask(ctx context.Context, params *ImportMigrationTaskInput, optFns ...func(*Options)) (*ImportMigrationTaskOutput, error) {
 	if params == nil {
@@ -31,8 +31,8 @@ func (c *Client) ImportMigrationTask(ctx context.Context, params *ImportMigratio
 
 type ImportMigrationTaskInput struct {
 
-	// Unique identifier that references the migration task. Do not store personal data
-	// in this field.
+	// Unique identifier that references the migration task. Do not store personal
+	// data in this field.
 	//
 	// This member is required.
 	MigrationTaskName *string
@@ -42,8 +42,8 @@ type ImportMigrationTaskInput struct {
 	// This member is required.
 	ProgressUpdateStream *string
 
-	// Optional boolean flag to indicate whether any effect should take place. Used to
-	// test if the caller has permission to make the call.
+	// Optional boolean flag to indicate whether any effect should take place. Used
+	// to test if the caller has permission to make the call.
 	DryRun bool
 
 	noSmithyDocumentSerde

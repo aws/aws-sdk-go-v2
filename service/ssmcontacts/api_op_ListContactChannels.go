@@ -123,8 +123,8 @@ func (c *Client) addOperationListContactChannelsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListContactChannelsAPIClient is a client that implements the ListContactChannels
-// operation.
+// ListContactChannelsAPIClient is a client that implements the
+// ListContactChannels operation.
 type ListContactChannelsAPIClient interface {
 	ListContactChannels(context.Context, *ListContactChannelsInput, ...func(*Options)) (*ListContactChannelsOutput, error)
 }
@@ -137,8 +137,8 @@ type ListContactChannelsPaginatorOptions struct {
 	// The maximum number of contact channels per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

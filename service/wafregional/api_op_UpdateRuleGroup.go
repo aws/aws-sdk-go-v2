@@ -11,30 +11,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
-// (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
-// the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Inserts or deletes ActivatedRule objects in a RuleGroup. You can
-// only insert REGULAR rules into a rule group. You can have a maximum of ten rules
-// per rule group. To create and configure a RuleGroup, perform the following
-// steps:
-// - Create and update the Rules that you want to include in the RuleGroup.
-// See CreateRule.
-// - Use GetChangeToken to get the change token that you provide in
-// the ChangeToken parameter of an UpdateRuleGroup request.
-// - Submit an
-// UpdateRuleGroup request to add Rules to the RuleGroup.
-// - Create and update a
-// WebACL that contains the RuleGroup. See CreateWebACL.
+// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+// . With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use. Inserts or deletes ActivatedRule  objects in a RuleGroup. You
+// can only insert REGULAR rules into a rule group. You can have a maximum of ten
+// rules per rule group. To create and configure a RuleGroup, perform the
+// following steps:
+//   - Create and update the Rules that you want to include in the RuleGroup . See CreateRule .
+//   - Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRuleGroup request.
+//   - Submit an UpdateRuleGroup request to add Rules to the RuleGroup .
+//   - Create and update a WebACL that contains the RuleGroup . See CreateWebACL .
 //
-// If you want to replace
-// one Rule with another, you delete the existing one and add the new one. For more
-// information about how to use the AWS WAF API to allow or block HTTP requests,
-// see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/).
+// If you want to replace one Rule with another, you delete the existing one and
+// add the new one. For more information about how to use the AWS WAF API to allow
+// or block HTTP requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/)
+// .
 func (c *Client) UpdateRuleGroup(ctx context.Context, params *UpdateRuleGroupInput, optFns ...func(*Options)) (*UpdateRuleGroupOutput, error) {
 	if params == nil {
 		params = &UpdateRuleGroupInput{}
@@ -52,22 +46,23 @@ func (c *Client) UpdateRuleGroup(ctx context.Context, params *UpdateRuleGroupInp
 
 type UpdateRuleGroupInput struct {
 
-	// The value returned by the most recent call to GetChangeToken.
+	// The value returned by the most recent call to GetChangeToken .
 	//
 	// This member is required.
 	ChangeToken *string
 
-	// The RuleGroupId of the RuleGroup that you want to update. RuleGroupId is
-	// returned by CreateRuleGroup and by ListRuleGroups.
+	// The RuleGroupId  of the RuleGroup  that you want to update. RuleGroupId is
+	// returned by CreateRuleGroup  and by ListRuleGroups .
 	//
 	// This member is required.
 	RuleGroupId *string
 
-	// An array of RuleGroupUpdate objects that you want to insert into or delete from
-	// a RuleGroup. You can only insert REGULAR rules into a rule group.
-	// ActivatedRule|OverrideAction applies only when updating or adding a RuleGroup to
-	// a WebACL. In this case you do not use ActivatedRule|Action. For all other update
-	// requests, ActivatedRule|Action is used instead of ActivatedRule|OverrideAction.
+	// An array of RuleGroupUpdate objects that you want to insert into or delete
+	// from a RuleGroup . You can only insert REGULAR  rules into a rule group.
+	// ActivatedRule|OverrideAction applies only when updating or adding a RuleGroup
+	// to a WebACL . In this case you do not use ActivatedRule|Action. For all other
+	// update requests, ActivatedRule|Action  is used instead of
+	// ActivatedRule|OverrideAction .
 	//
 	// This member is required.
 	Updates []types.RuleGroupUpdate
@@ -77,9 +72,9 @@ type UpdateRuleGroupInput struct {
 
 type UpdateRuleGroupOutput struct {
 
-	// The ChangeToken that you used to submit the UpdateRuleGroup request. You can
+	// The ChangeToken  that you used to submit the UpdateRuleGroup request. You can
 	// also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
+	// see GetChangeTokenStatus .
 	ChangeToken *string
 
 	// Metadata pertaining to the operation's result.

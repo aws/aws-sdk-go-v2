@@ -35,8 +35,8 @@ type DeleteFpgaImageInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde
@@ -44,7 +44,7 @@ type DeleteFpgaImageInput struct {
 
 type DeleteFpgaImageOutput struct {
 
-	// Is true if the request succeeds, and an error otherwise.
+	// Is true  if the request succeeds, and an error otherwise.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

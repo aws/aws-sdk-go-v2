@@ -61,8 +61,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when an error occurs in the Amazon Web ServicesTransfer
-// Family service.
+// This exception is thrown when an error occurs in the Amazon Web
+// ServicesTransfer Family service.
 type InternalServiceError struct {
 	Message *string
 
@@ -88,7 +88,7 @@ func (e *InternalServiceError) ErrorCode() string {
 }
 func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The NextToken parameter that was passed is invalid.
+// The NextToken  parameter that was passed is invalid.
 type InvalidNextTokenException struct {
 	Message *string
 
@@ -199,8 +199,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request has failed because the Amazon Web ServicesTransfer Family service is
-// not available.
+// The request has failed because the Amazon Web ServicesTransfer Family service
+// is not available.
 type ServiceUnavailableException struct {
 	Message *string
 

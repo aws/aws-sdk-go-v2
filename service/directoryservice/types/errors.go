@@ -407,8 +407,8 @@ func (e *DirectoryUnavailableException) ErrorCode() string {
 }
 func (e *DirectoryUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The maximum allowed number of domain controllers per directory was exceeded. The
-// default limit per directory is 20 domain controllers.
+// The maximum allowed number of domain controllers per directory was exceeded.
+// The default limit per directory is 20 domain controllers.
 type DomainControllerLimitExceededException struct {
 	Message *string
 
@@ -606,8 +606,8 @@ func (e *InvalidClientAuthStatusException) ErrorCode() string {
 }
 func (e *InvalidClientAuthStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The LDAP activities could not be performed because they are limited by the LDAPS
-// status.
+// The LDAP activities could not be performed because they are limited by the
+// LDAPS status.
 type InvalidLDAPSStatusException struct {
 	Message *string
 
@@ -635,7 +635,7 @@ func (e *InvalidLDAPSStatusException) ErrorCode() string {
 }
 func (e *InvalidLDAPSStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The NextToken value is not valid.
+// The NextToken  value is not valid.
 type InvalidNextTokenException struct {
 	Message *string
 
@@ -892,8 +892,8 @@ func (e *ServiceException) ErrorCode() string {
 }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The maximum number of Amazon Web Services accounts that you can share with this
-// directory has been reached.
+// The maximum number of Amazon Web Services accounts that you can share with
+// this directory has been reached.
 type ShareLimitExceededException struct {
 	Message *string
 

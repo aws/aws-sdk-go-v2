@@ -12,10 +12,9 @@ import (
 )
 
 // Gets the maximum number of hosted zones that you can associate with the
-// specified reusable delegation set. For the default limit, see Limits
-// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html)
-// in the Amazon Route 53 Developer Guide. To request a higher limit, open a case
-// (https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-route53).
+// specified reusable delegation set. For the default limit, see Limits (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html)
+// in the Amazon Route 53 Developer Guide. To request a higher limit, open a case (https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-route53)
+// .
 func (c *Client) GetReusableDelegationSetLimit(ctx context.Context, params *GetReusableDelegationSetLimitInput, optFns ...func(*Options)) (*GetReusableDelegationSetLimitOutput, error) {
 	if params == nil {
 		params = &GetReusableDelegationSetLimitInput{}
@@ -40,8 +39,8 @@ type GetReusableDelegationSetLimitInput struct {
 	// This member is required.
 	DelegationSetId *string
 
-	// Specify MAX_ZONES_BY_REUSABLE_DELEGATION_SET to get the maximum number of hosted
-	// zones that you can associate with the specified reusable delegation set.
+	// Specify MAX_ZONES_BY_REUSABLE_DELEGATION_SET to get the maximum number of
+	// hosted zones that you can associate with the specified reusable delegation set.
 	//
 	// This member is required.
 	Type types.ReusableDelegationSetLimitType

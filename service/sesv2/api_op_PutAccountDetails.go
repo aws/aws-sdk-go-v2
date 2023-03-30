@@ -40,8 +40,8 @@ type PutAccountDetailsInput struct {
 	// This member is required.
 	UseCaseDescription *string
 
-	// The URL of your website. This information helps us better understand the type of
-	// content that you plan to send.
+	// The URL of your website. This information helps us better understand the type
+	// of content that you plan to send.
 	//
 	// This member is required.
 	WebsiteURL *string
@@ -54,21 +54,22 @@ type PutAccountDetailsInput struct {
 	ContactLanguage types.ContactLanguage
 
 	// Indicates whether or not your account should have production access in the
-	// current Amazon Web Services Region. If the value is false, then your account is
-	// in the sandbox. When your account is in the sandbox, you can only send email to
-	// verified identities. Additionally, the maximum number of emails you can send in
-	// a 24-hour period (your sending quota) is 200, and the maximum number of emails
-	// you can send per second (your maximum sending rate) is 1. If the value is true,
-	// then your account has production access. When your account has production
-	// access, you can send email to any address. The sending quota and maximum sending
-	// rate for your account vary based on your specific use case.
+	// current Amazon Web Services Region. If the value is false, then your account
+	// is in the sandbox. When your account is in the sandbox, you can only send email
+	// to verified identities. Additionally, the maximum number of emails you can send
+	// in a 24-hour period (your sending quota) is 200, and the maximum number of
+	// emails you can send per second (your maximum sending rate) is 1. If the value is
+	//
+	// true, then your account has production access. When your account has
+	// production access, you can send email to any address. The sending quota and
+	// maximum sending rate for your account vary based on your specific use case.
 	ProductionAccessEnabled *bool
 
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type PutAccountDetailsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -114,10 +114,10 @@ type Cluster struct {
 	// The cluster's configuration endpoint
 	ClusterEndpoint *Endpoint
 
-	// Enables data tiering. Data tiering is only supported for clusters using the r6gd
-	// node type. This parameter must be set when using r6gd nodes. For more
-	// information, see Data tiering
-	// (https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html).
+	// Enables data tiering. Data tiering is only supported for clusters using the
+	// r6gd node type. This parameter must be set when using r6gd nodes. For more
+	// information, see Data tiering (https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html)
+	// .
 	DataTiering DataTieringStatus
 
 	// A description of the cluster
@@ -283,8 +283,8 @@ type EngineVersionInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a single occurrence of something interesting within the system. Some
-// examples of events are creating a cluster or adding or removing a node.
+// Represents a single occurrence of something interesting within the system.
+// Some examples of events are creating a cluster or adding or removing a node.
 type Event struct {
 
 	// The date and time when the event occurred.
@@ -293,8 +293,8 @@ type Event struct {
 	// The text of the event.
 	Message *string
 
-	// The name for the source of the event. For example, if the event occurred at the
-	// cluster level, the identifier would be the name of the cluster.
+	// The name for the source of the event. For example, if the event occurred at
+	// the cluster level, the identifier would be the name of the cluster.
 	SourceName *string
 
 	// Specifies the origin of this event - a cluster, a parameter group, a security
@@ -320,8 +320,8 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
-// Represents an individual node within a cluster. Each node runs its own instance
-// of the cluster's protocol-compliant caching software.
+// Represents an individual node within a cluster. Each node runs its own
+// instance of the cluster's protocol-compliant caching software.
 type Node struct {
 
 	// The Availability Zone in which the node resides
@@ -333,9 +333,9 @@ type Node struct {
 	// The hostname for connecting to this node.
 	Endpoint *Endpoint
 
-	// The node identifier. A node name is a numeric identifier (0001, 0002, etc.). The
-	// combination of cluster name, shard name and node name uniquely identifies every
-	// node used in a customer's Amazon account.
+	// The node identifier. A node name is a numeric identifier (0001, 0002, etc.).
+	// The combination of cluster name, shard name and node name uniquely identifies
+	// every node used in a customer's Amazon account.
 	Name *string
 
 	// The status of the service update on the node
@@ -435,7 +435,7 @@ type ReplicaConfigurationRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a PurchaseReservedNodesOffering operation.
+// Represents the output of a PurchaseReservedNodesOffering  operation.
 type ReservedNode struct {
 
 	// The Amazon Resource Name (ARN) of the reserved node.
@@ -484,8 +484,8 @@ type ReservedNodesOffering struct {
 	FixedPrice float64
 
 	// The node type for the reserved nodes. For more information, see Supported node
-	// types
-	// (https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported).
+	// types (https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported)
+	// .
 	NodeType *string
 
 	// The offering type of this reserved node.
@@ -562,8 +562,8 @@ type ServiceUpdateRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a collection of nodes in a cluster. One node in the node group is the
-// read/write primary node. All the other nodes are read-only Replica nodes.
+// Represents a collection of nodes in a cluster. One node in the node group is
+// the read/write primary node. All the other nodes are read-only Replica nodes.
 type Shard struct {
 
 	// The name of the shard
@@ -645,10 +645,10 @@ type Snapshot struct {
 	// The configuration of the cluster from which the snapshot was taken
 	ClusterConfiguration *ClusterConfiguration
 
-	// Enables data tiering. Data tiering is only supported for clusters using the r6gd
-	// node type. This parameter must be set when using r6gd nodes. For more
-	// information, see Data tiering
-	// (https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html).
+	// Enables data tiering. Data tiering is only supported for clusters using the
+	// r6gd node type. This parameter must be set when using r6gd nodes. For more
+	// information, see Data tiering (https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html)
+	// .
 	DataTiering DataTieringStatus
 
 	// The ID of the KMS key used to encrypt the snapshot.
@@ -683,13 +683,12 @@ type Subnet struct {
 }
 
 // Represents the output of one of the following operations:
-// - CreateSubnetGroup
-// -
-// UpdateSubnetGroup
+//   - CreateSubnetGroup
+//   - UpdateSubnetGroup
 //
-// A subnet group is a collection of subnets (typically private)
-// that you can designate for your clusters running in an Amazon Virtual Private
-// Cloud (VPC) environment.
+// A subnet group is a collection of subnets (typically
+// private) that you can designate for your clusters running in an Amazon Virtual
+// Private Cloud (VPC) environment.
 type SubnetGroup struct {
 
 	// The ARN (Amazon Resource Name) of the subnet group.
@@ -714,8 +713,7 @@ type SubnetGroup struct {
 // Key/Value pair. You can use tags to categorize and track all your MemoryDB
 // resources. When you add or remove tags on clusters, those actions will be
 // replicated to all nodes in the cluster. A tag with a null Value is permitted.
-// For more information, see Tagging your MemoryDB resources
-// (https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging-resources.html)
+// For more information, see Tagging your MemoryDB resources (https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging-resources.html)
 type Tag struct {
 
 	// The key for the tag. May not be null.
@@ -742,10 +740,10 @@ type UnprocessedCluster struct {
 	noSmithyDocumentSerde
 }
 
-// You create users and assign them specific permissions by using an access string.
-// You assign the users to Access Control Lists aligned with a specific role
-// (administrators, human resources) that are then deployed to one or more MemoryDB
-// clusters.
+// You create users and assign them specific permissions by using an access
+// string. You assign the users to Access Control Lists aligned with a specific
+// role (administrators, human resources) that are then deployed to one or more
+// MemoryDB clusters.
 type User struct {
 
 	// The names of the Access Control Lists to which the user belongs

@@ -18,12 +18,12 @@ import (
 // copy an existing dashboard. To copy an existing dashboard using the console, you
 // can load the dashboard and then use the View/edit source command in the Actions
 // menu to display the JSON block for that dashboard. Another way to copy a
-// dashboard is to use GetDashboard, and then use the data returned within
-// DashboardBody as the template for the new dashboard when you call PutDashboard.
-// When you create a dashboard with PutDashboard, a good practice is to add a text
-// widget at the top of the dashboard with a message that the dashboard was created
-// by script and should not be changed in the console. This message could also
-// point console users to the location of the DashboardBody script or the
+// dashboard is to use GetDashboard , and then use the data returned within
+// DashboardBody as the template for the new dashboard when you call PutDashboard
+// . When you create a dashboard with PutDashboard, a good practice is to add a
+// text widget at the top of the dashboard with a message that the dashboard was
+// created by script and should not be changed in the console. This message could
+// also point console users to the location of the DashboardBody script or the
 // CloudFormation template used to create the dashboard.
 func (c *Client) PutDashboard(ctx context.Context, params *PutDashboardInput, optFns ...func(*Options)) (*PutDashboardOutput, error) {
 	if params == nil {
@@ -45,8 +45,8 @@ type PutDashboardInput struct {
 	// The detailed information about the dashboard in JSON format, including the
 	// widgets to include and their location on the dashboard. This parameter is
 	// required. For more information about the syntax, see Dashboard Body Structure
-	// and Syntax
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html).
+	// and Syntax (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html)
+	// .
 	//
 	// This member is required.
 	DashboardBody *string

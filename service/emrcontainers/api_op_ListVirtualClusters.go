@@ -135,8 +135,8 @@ func (c *Client) addOperationListVirtualClustersMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListVirtualClustersAPIClient is a client that implements the ListVirtualClusters
-// operation.
+// ListVirtualClustersAPIClient is a client that implements the
+// ListVirtualClusters operation.
 type ListVirtualClustersAPIClient interface {
 	ListVirtualClusters(context.Context, *ListVirtualClustersInput, ...func(*Options)) (*ListVirtualClustersOutput, error)
 }
@@ -149,8 +149,8 @@ type ListVirtualClustersPaginatorOptions struct {
 	// The maximum number of virtual clusters that can be listed.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

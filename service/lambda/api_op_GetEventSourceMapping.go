@@ -13,7 +13,7 @@ import (
 )
 
 // Returns details about an event source mapping. You can get the identifier of a
-// mapping from the output of ListEventSourceMappings.
+// mapping from the output of ListEventSourceMappings .
 func (c *Client) GetEventSourceMapping(ctx context.Context, params *GetEventSourceMappingInput, optFns ...func(*Options)) (*GetEventSourceMappingOutput, error) {
 	if params == nil {
 		params = &GetEventSourceMappingInput{}
@@ -40,11 +40,11 @@ type GetEventSourceMappingInput struct {
 }
 
 // A mapping between an Amazon Web Services resource and a Lambda function. For
-// details, see CreateEventSourceMapping.
+// details, see CreateEventSourceMapping .
 type GetEventSourceMappingOutput struct {
 
-	// Specific configuration settings for an Amazon Managed Streaming for Apache Kafka
-	// (Amazon MSK) event source.
+	// Specific configuration settings for an Amazon Managed Streaming for Apache
+	// Kafka (Amazon MSK) event source.
 	AmazonManagedKafkaEventSourceConfig *types.AmazonManagedKafkaEventSourceConfig
 
 	// The maximum number of records in each batch that Lambda pulls from your stream
@@ -52,6 +52,7 @@ type GetEventSourceMappingOutput struct {
 	// batch to the function in a single call, up to the payload limit for synchronous
 	// invocation (6 MB). Default value: Varies by service. For Amazon SQS, the default
 	// is 10. For all other services, the default is 100. Related setting: When you set
+	//
 	// BatchSize to a value greater than 10, you must set
 	// MaximumBatchingWindowInSeconds to at least 1.
 	BatchSize *int32
@@ -60,8 +61,8 @@ type GetEventSourceMappingOutput struct {
 	// retry. The default value is false.
 	BisectBatchOnFunctionError *bool
 
-	// (Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded
-	// records.
+	// (Streams only) An Amazon SQS queue or Amazon SNS topic destination for
+	// discarded records.
 	DestinationConfig *types.DestinationConfig
 
 	// Specific configuration settings for a DocumentDB event source.
@@ -70,9 +71,9 @@ type GetEventSourceMappingOutput struct {
 	// The Amazon Resource Name (ARN) of the event source.
 	EventSourceArn *string
 
-	// An object that defines the filter criteria that determine whether Lambda should
-	// process an event. For more information, see Lambda event filtering
-	// (https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html).
+	// An object that defines the filter criteria that determine whether Lambda
+	// should process an event. For more information, see Lambda event filtering (https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html)
+	// .
 	FilterCriteria *types.FilterCriteria
 
 	// The ARN of the Lambda function.
@@ -95,7 +96,7 @@ type GetEventSourceMappingOutput struct {
 	// and Amazon SQS event sources, the default batching window is 0 seconds. For
 	// Amazon MSK, Self-managed Apache Kafka, and Amazon MQ event sources, the default
 	// batching window is 500 ms. Note that because you can only change
-	// MaximumBatchingWindowInSeconds in increments of seconds, you cannot revert back
+	// MaximumBatchingWindowInSecondsin increments of seconds, you cannot revert back
 	// to the 500 ms default batching window after you have changed it. To restore the
 	// default batching window, you must create a new event source mapping. Related
 	// setting: For streams and Amazon SQS event sources, when you set BatchSize to a
@@ -122,8 +123,8 @@ type GetEventSourceMappingOutput struct {
 	Queues []string
 
 	// (Amazon SQS only) The scaling configuration for the event source. For more
-	// information, see Configuring maximum concurrency for Amazon SQS event sources
-	// (https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency).
+	// information, see Configuring maximum concurrency for Amazon SQS event sources (https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency)
+	// .
 	ScalingConfig *types.ScalingConfig
 
 	// The self-managed Apache Kafka cluster for your event source.
@@ -141,11 +142,12 @@ type GetEventSourceMappingOutput struct {
 	// supported only for Amazon Kinesis streams.
 	StartingPosition types.EventSourcePosition
 
-	// With StartingPosition set to AT_TIMESTAMP, the time from which to start reading.
+	// With StartingPosition  set to AT_TIMESTAMP, the time from which to start
+	// reading.
 	StartingPositionTimestamp *time.Time
 
-	// The state of the event source mapping. It can be one of the following: Creating,
-	// Enabling, Enabled, Disabling, Disabled, Updating, or Deleting.
+	// The state of the event source mapping. It can be one of the following: Creating
+	// , Enabling , Enabled , Disabling , Disabled , Updating , or Deleting .
 	State *string
 
 	// Indicates whether a user or Lambda made the last change to the event source

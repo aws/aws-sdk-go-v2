@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a team member's attributes in an AWS CodeStar project. For example, you
-// can change a team member's role in the project, or change whether they have
+// Updates a team member's attributes in an AWS CodeStar project. For example,
+// you can change a team member's role in the project, or change whether they have
 // remote access to project resources.
 func (c *Client) UpdateTeamMember(ctx context.Context, params *UpdateTeamMemberInput, optFns ...func(*Options)) (*UpdateTeamMemberOutput, error) {
 	if params == nil {
@@ -42,15 +42,14 @@ type UpdateTeamMemberInput struct {
 	UserArn *string
 
 	// The role assigned to the user in the project. Project roles have different
-	// levels of access. For more information, see Working with Teams
-	// (http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html)
+	// levels of access. For more information, see Working with Teams (http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html)
 	// in the AWS CodeStar User Guide.
 	ProjectRole *string
 
-	// Whether a team member is allowed to remotely access project resources using the
-	// SSH public key associated with the user's profile. Even if this is set to True,
-	// the user must associate a public key with their profile before the user can
-	// access resources.
+	// Whether a team member is allowed to remotely access project resources using
+	// the SSH public key associated with the user's profile. Even if this is set to
+	// True, the user must associate a public key with their profile before the user
+	// can access resources.
 	RemoteAccessAllowed *bool
 
 	noSmithyDocumentSerde
@@ -61,12 +60,12 @@ type UpdateTeamMemberOutput struct {
 	// The project role granted to the user.
 	ProjectRole *string
 
-	// Whether a team member is allowed to remotely access project resources using the
-	// SSH public key associated with the user's profile.
+	// Whether a team member is allowed to remotely access project resources using
+	// the SSH public key associated with the user's profile.
 	RemoteAccessAllowed *bool
 
-	// The Amazon Resource Name (ARN) of the user whose team membership attributes were
-	// updated.
+	// The Amazon Resource Name (ARN) of the user whose team membership attributes
+	// were updated.
 	UserArn *string
 
 	// Metadata pertaining to the operation's result.

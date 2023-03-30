@@ -12,8 +12,8 @@ import (
 
 // Deletes the event tracker. Does not delete the event-interactions dataset from
 // the associated dataset group. For more information on event trackers, see
-// CreateEventTracker
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html).
+// CreateEventTracker (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html)
+// .
 func (c *Client) DeleteEventTracker(ctx context.Context, params *DeleteEventTrackerInput, optFns ...func(*Options)) (*DeleteEventTrackerOutput, error) {
 	if params == nil {
 		params = &DeleteEventTrackerInput{}

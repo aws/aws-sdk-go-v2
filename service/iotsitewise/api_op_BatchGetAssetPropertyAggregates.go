@@ -13,8 +13,7 @@ import (
 )
 
 // Gets aggregated values (for example, average, minimum, and maximum) for one or
-// more asset properties. For more information, see Querying aggregates
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates)
+// more asset properties. For more information, see Querying aggregates (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates)
 // in the IoT SiteWise User Guide.
 func (c *Client) BatchGetAssetPropertyAggregates(ctx context.Context, params *BatchGetAssetPropertyAggregatesInput, optFns ...func(*Options)) (*BatchGetAssetPropertyAggregatesOutput, error) {
 	if params == nil {
@@ -33,18 +32,16 @@ func (c *Client) BatchGetAssetPropertyAggregates(ctx context.Context, params *Ba
 
 type BatchGetAssetPropertyAggregatesInput struct {
 
-	// The list of asset property aggregate entries for the batch get request. You can
-	// specify up to 16 entries per request.
+	// The list of asset property aggregate entries for the batch get request. You
+	// can specify up to 16 entries per request.
 	//
 	// This member is required.
 	Entries []types.BatchGetAssetPropertyAggregatesEntry
 
-	// The maximum number of results to return for each paginated request. A result set
-	// is returned in the two cases, whichever occurs first.
-	// - The size of the result
-	// set is less than 1 MB.
-	// - The number of data points in the result set is less
-	// than the value of maxResults. The maximum value of maxResults is 4000.
+	// The maximum number of results to return for each paginated request. A result
+	// set is returned in the two cases, whichever occurs first.
+	//     - The size of the result set is less than 1 MB.
+	//     - The number of data points in the result set is less than the value of maxResults . The maximum value of maxResults is 4000.
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
@@ -56,14 +53,14 @@ type BatchGetAssetPropertyAggregatesInput struct {
 type BatchGetAssetPropertyAggregatesOutput struct {
 
 	// A list of the errors (if any) associated with the batch request. Each error
-	// entry contains the entryId of the entry that failed.
+	// entry contains the entryId  of the entry that failed.
 	//
 	// This member is required.
 	ErrorEntries []types.BatchGetAssetPropertyAggregatesErrorEntry
 
 	// A list of entries that were not processed by this batch request. because these
 	// entries had been completely processed by previous paginated requests. Each
-	// skipped entry contains the entryId of the entry that skipped.
+	// skipped entry contains the entryId  of the entry that skipped.
 	//
 	// This member is required.
 	SkippedEntries []types.BatchGetAssetPropertyAggregatesSkippedEntry
@@ -189,16 +186,14 @@ var _ BatchGetAssetPropertyAggregatesAPIClient = (*Client)(nil)
 // BatchGetAssetPropertyAggregatesPaginatorOptions is the paginator options for
 // BatchGetAssetPropertyAggregates
 type BatchGetAssetPropertyAggregatesPaginatorOptions struct {
-	// The maximum number of results to return for each paginated request. A result set
-	// is returned in the two cases, whichever occurs first.
-	// - The size of the result
-	// set is less than 1 MB.
-	// - The number of data points in the result set is less
-	// than the value of maxResults. The maximum value of maxResults is 4000.
+	// The maximum number of results to return for each paginated request. A result
+	// set is returned in the two cases, whichever occurs first.
+	//     - The size of the result set is less than 1 MB.
+	//     - The number of data points in the result set is less than the value of maxResults . The maximum value of maxResults is 4000.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

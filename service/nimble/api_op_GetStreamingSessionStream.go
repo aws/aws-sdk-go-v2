@@ -16,10 +16,10 @@ import (
 	"time"
 )
 
-// Gets a StreamingSessionStream for a streaming session. Invoke this operation to
-// poll the resource after invoking CreateStreamingSessionStream. After the
-// StreamingSessionStream changes to the READY state, the url property will contain
-// a stream to be used with the DCV streaming client.
+// Gets a StreamingSessionStream for a streaming session. Invoke this operation
+// to poll the resource after invoking CreateStreamingSessionStream . After the
+// StreamingSessionStream changes to the READY state, the url property will
+// contain a stream to be used with the DCV streaming client.
 func (c *Client) GetStreamingSessionStream(ctx context.Context, params *GetStreamingSessionStreamInput, optFns ...func(*Options)) (*GetStreamingSessionStreamOutput, error) {
 	if params == nil {
 		params = &GetStreamingSessionStreamInput{}
@@ -151,8 +151,8 @@ type StreamingSessionStreamReadyWaiterOptions struct {
 	// Note that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, StreamingSessionStreamReadyWaiter will use default max delay of 150
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, StreamingSessionStreamReadyWaiter will use default max delay of 150
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration

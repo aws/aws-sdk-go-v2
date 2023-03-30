@@ -20,15 +20,14 @@ import (
 // You can also get the vault inventory to obtain a list of archive IDs in a vault.
 // For more information, see InitiateJob. In the request, you must include the
 // computed SHA256 tree hash of the entire archive you have uploaded. For
-// information about computing a SHA256 tree hash, see Computing Checksums
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html).
-// On the server side, Glacier also constructs the SHA256 tree hash of the
+// information about computing a SHA256 tree hash, see Computing Checksums (https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html)
+// . On the server side, Glacier also constructs the SHA256 tree hash of the
 // assembled archive. If the values match, Glacier saves the archive to the vault;
-// otherwise, it returns an error, and the operation fails. The ListParts operation
-// returns a list of parts uploaded for a specific multipart upload. It includes
-// checksum information for each uploaded part that can be used to debug a bad
-// checksum issue. Additionally, Glacier also checks for any missing content ranges
-// when assembling the archive, if missing content ranges are found, Glacier
+// otherwise, it returns an error, and the operation fails. The ListParts
+// operation returns a list of parts uploaded for a specific multipart upload. It
+// includes checksum information for each uploaded part that can be used to debug a
+// bad checksum issue. Additionally, Glacier also checks for any missing content
+// ranges when assembling the archive, if missing content ranges are found, Glacier
 // returns an error and the operation fails. Complete Multipart Upload is an
 // idempotent operation. After your first successful complete multipart upload, if
 // you call the operation again within a short period, the operation will succeed
@@ -41,14 +40,11 @@ import (
 // idempotent complete is possible. An AWS account has full permission to perform
 // all operations (actions). However, AWS Identity and Access Management (IAM)
 // users don't have any permissions by default. You must grant them explicit
-// permission to perform specific actions. For more information, see Access Control
-// Using AWS Identity and Access Management (IAM)
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
-// For conceptual information and underlying REST API, see Uploading Large Archives
-// in Parts (Multipart Upload)
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html)
-// and Complete Multipart Upload
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-complete-upload.html)
+// permission to perform specific actions. For more information, see Access
+// Control Using AWS Identity and Access Management (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html)
+// . For conceptual information and underlying REST API, see Uploading Large
+// Archives in Parts (Multipart Upload) (https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html)
+// and Complete Multipart Upload (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-complete-upload.html)
 // in the Amazon Glacier Developer Guide.
 func (c *Client) CompleteMultipartUpload(ctx context.Context, params *CompleteMultipartUploadInput, optFns ...func(*Options)) (*CompleteMultipartUploadOutput, error) {
 	if params == nil {
@@ -73,8 +69,8 @@ func (c *Client) CompleteMultipartUpload(ctx context.Context, params *CompleteMu
 type CompleteMultipartUploadInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
-	// which case Amazon S3 Glacier uses the AWS account ID associated with the
+	// You can either specify an AWS account ID or optionally a single ' -' (hyphen),
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -91,8 +87,8 @@ type CompleteMultipartUploadInput struct {
 	// This member is required.
 	VaultName *string
 
-	// The total size, in bytes, of the entire archive. This value should be the sum of
-	// all the sizes of the individual parts that you uploaded.
+	// The total size, in bytes, of the entire archive. This value should be the sum
+	// of all the sizes of the individual parts that you uploaded.
 	ArchiveSize *string
 
 	// The SHA256 tree hash of the entire archive. It is the tree hash of SHA256 tree
@@ -105,10 +101,9 @@ type CompleteMultipartUploadInput struct {
 }
 
 // Contains the Amazon S3 Glacier response to your request. For information about
-// the underlying REST API, see Upload Archive
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html).
-// For conceptual information, see Working with Archives in Amazon S3 Glacier
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html).
+// the underlying REST API, see Upload Archive (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html)
+// . For conceptual information, see Working with Archives in Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html)
+// .
 type CompleteMultipartUploadOutput struct {
 
 	// The ID of the archive. This value is also included as part of the location.

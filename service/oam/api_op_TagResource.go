@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Assigns one or more tags (key-value pairs) to the specified resource. Both sinks
-// and links can be tagged. Tags can help you organize and categorize your
+// Assigns one or more tags (key-value pairs) to the specified resource. Both
+// sinks and links can be tagged. Tags can help you organize and categorize your
 // resources. You can also use them to scope user permissions by granting a user
 // permission to access or change only resources with certain tag values. Tags
 // don't have any semantic meaning to Amazon Web Services and are interpreted
@@ -41,11 +41,11 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The ARN of the resource that you're adding tags to. The ARN format of a sink is
-	// arn:aws:oam:Region:account-id:sink/sink-id  The ARN format of a link is
-	// arn:aws:oam:Region:account-id:link/link-id  For more information about ARN
-	// format, see CloudWatch Logs resources and operations
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html).
+	// The ARN of the resource that you're adding tags to. The ARN format of a sink
+	// is arn:aws:oam:Region:account-id:sink/sink-id  The ARN format of a link is
+	// arn:aws:oam:Region:account-id:link/link-id For more information about ARN
+	// format, see CloudWatch Logs resources and operations (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html)
+	// .
 	//
 	// This member is required.
 	ResourceArn *string

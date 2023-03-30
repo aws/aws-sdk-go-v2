@@ -13,11 +13,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the KMS key for an existing database. While updating the database, you
-// must specify the database name and the identifier of the new KMS key to be used
-// (KmsKeyId). If there are any concurrent UpdateDatabase requests, first writer
-// wins. See code sample
-// (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.update-db.html)
+// Modifies the KMS key for an existing database. While updating the database,
+// you must specify the database name and the identifier of the new KMS key to be
+// used ( KmsKeyId ). If there are any concurrent UpdateDatabase requests, first
+// writer wins. See code sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.update-db.html)
 // for details.
 func (c *Client) UpdateDatabase(ctx context.Context, params *UpdateDatabaseInput, optFns ...func(*Options)) (*UpdateDatabaseOutput, error) {
 	if params == nil {
@@ -41,18 +40,14 @@ type UpdateDatabaseInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// The identifier of the new KMS key (KmsKeyId) to be used to encrypt the data
+	// The identifier of the new KMS key ( KmsKeyId) to be used to encrypt the data
 	// stored in the database. If the KmsKeyId currently registered with the database
 	// is the same as the KmsKeyId in the request, there will not be any update. You
-	// can specify the KmsKeyId using any of the following:
-	// - Key ID:
-	// 1234abcd-12ab-34cd-56ef-1234567890ab
-	// - Key ARN:
-	// arn:aws:kms:us-east-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	// -
-	// Alias name: alias/ExampleAlias
-	// - Alias ARN:
-	// arn:aws:kms:us-east-1:111122223333:alias/ExampleAlias
+	// can specify the KmsKeyId  using any of the following:
+	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//     - Key ARN: arn:aws:kms:us-east-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//     - Alias name: alias/ExampleAlias
+	//     - Alias ARN: arn:aws:kms:us-east-1:111122223333:alias/ExampleAlias
 	//
 	// This member is required.
 	KmsKeyId *string

@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list that describes the streaming sessions for a specified stack and
-// fleet. If a UserId is provided for the stack and fleet, only streaming sessions
-// for that user are described. If an authentication type is not provided, the
-// default is to authenticate users using a streaming URL.
+// Retrieves a list that describes the streaming sessions for a specified stack
+// and fleet. If a UserId is provided for the stack and fleet, only streaming
+// sessions for that user are described. If an authentication type is not provided,
+// the default is to authenticate users using a streaming URL.
 func (c *Client) DescribeSessions(ctx context.Context, params *DescribeSessionsInput, optFns ...func(*Options)) (*DescribeSessionsOutput, error) {
 	if params == nil {
 		params = &DescribeSessionsInput{}
@@ -43,12 +43,12 @@ type DescribeSessionsInput struct {
 	StackName *string
 
 	// The authentication method. Specify API for a user authenticated using a
-	// streaming URL or SAML for a SAML federated user. The default is to authenticate
-	// users using a streaming URL.
+	// streaming URL or SAML for a SAML federated user. The default is to
+	// authenticate users using a streaming URL.
 	AuthenticationType types.AuthenticationType
 
-	// The size of each page of results. The default value is 20 and the maximum value
-	// is 50.
+	// The size of each page of results. The default value is 20 and the maximum
+	// value is 50.
 	Limit *int32
 
 	// The pagination token to use to retrieve the next page of results for this

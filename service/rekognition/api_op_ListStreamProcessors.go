@@ -13,7 +13,7 @@ import (
 )
 
 // Gets a list of stream processors that you have created with
-// CreateStreamProcessor.
+// CreateStreamProcessor .
 func (c *Client) ListStreamProcessors(ctx context.Context, params *ListStreamProcessorsInput, optFns ...func(*Options)) (*ListStreamProcessorsOutput, error) {
 	if params == nil {
 		params = &ListStreamProcessorsInput{}
@@ -31,8 +31,8 @@ func (c *Client) ListStreamProcessors(ctx context.Context, params *ListStreamPro
 
 type ListStreamProcessorsInput struct {
 
-	// Maximum number of stream processors you want Amazon Rekognition Video to return
-	// in the response. The default is 1000.
+	// Maximum number of stream processors you want Amazon Rekognition Video to
+	// return in the response. The default is 1000.
 	MaxResults *int32
 
 	// If the previous response was incomplete (because there are more stream
@@ -131,12 +131,12 @@ var _ ListStreamProcessorsAPIClient = (*Client)(nil)
 // ListStreamProcessorsPaginatorOptions is the paginator options for
 // ListStreamProcessors
 type ListStreamProcessorsPaginatorOptions struct {
-	// Maximum number of stream processors you want Amazon Rekognition Video to return
-	// in the response. The default is 1000.
+	// Maximum number of stream processors you want Amazon Rekognition Video to
+	// return in the response. The default is 1000.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

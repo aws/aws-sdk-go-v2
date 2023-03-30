@@ -13,10 +13,10 @@ import (
 
 // Deletes an Amazon Rekognition Custom Labels model. You can't delete a model if
 // it is running or if it is training. To check the status of a model, use the
-// Status field returned from DescribeProjectVersions. To stop a running model call
-// StopProjectVersion. If the model is training, wait until it finishes. This
-// operation requires permissions to perform the rekognition:DeleteProjectVersion
-// action.
+// Status field returned from DescribeProjectVersions. To stop a running model
+// call StopProjectVersion. If the model is training, wait until it finishes.
+// This operation requires permissions to perform the
+// rekognition:DeleteProjectVersion action.
 func (c *Client) DeleteProjectVersion(ctx context.Context, params *DeleteProjectVersionInput, optFns ...func(*Options)) (*DeleteProjectVersionOutput, error) {
 	if params == nil {
 		params = &DeleteProjectVersionInput{}

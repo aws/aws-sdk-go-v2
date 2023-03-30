@@ -36,23 +36,23 @@ type GetAwsNetworkPerformanceDataInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The ending time for the performance data request. The end time must be formatted
-	// as yyyy-mm-ddThh:mm:ss. For example, 2022-06-12T12:00:00.000Z.
+	// The ending time for the performance data request. The end time must be
+	// formatted as yyyy-mm-ddThh:mm:ss . For example, 2022-06-12T12:00:00.000Z .
 	EndTime *time.Time
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	MaxResults *int32
 
 	// The token for the next page of results.
 	NextToken *string
 
 	// The starting time for the performance data request. The starting time must be
-	// formatted as yyyy-mm-ddThh:mm:ss. For example, 2022-06-10T12:00:00.000Z.
+	// formatted as yyyy-mm-ddThh:mm:ss . For example, 2022-06-10T12:00:00.000Z .
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -145,11 +145,11 @@ var _ GetAwsNetworkPerformanceDataAPIClient = (*Client)(nil)
 // GetAwsNetworkPerformanceData
 type GetAwsNetworkPerformanceDataPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

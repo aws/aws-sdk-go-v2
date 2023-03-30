@@ -132,8 +132,8 @@ type ListMetricAttributionsPaginatorOptions struct {
 	// The maximum number of metric attributions to return in one page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -146,7 +146,8 @@ type ListMetricAttributionsPaginator struct {
 	firstPage bool
 }
 
-// NewListMetricAttributionsPaginator returns a new ListMetricAttributionsPaginator
+// NewListMetricAttributionsPaginator returns a new
+// ListMetricAttributionsPaginator
 func NewListMetricAttributionsPaginator(client ListMetricAttributionsAPIClient, params *ListMetricAttributionsInput, optFns ...func(*ListMetricAttributionsPaginatorOptions)) *ListMetricAttributionsPaginator {
 	if params == nil {
 		params = &ListMetricAttributionsInput{}

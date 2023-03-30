@@ -12,7 +12,7 @@ import (
 )
 
 // Returns the most current information about the channel. Specify the ChannelName
-// or ChannelARN in the input.
+// or ChannelARN  in the input.
 func (c *Client) DescribeMediaStorageConfiguration(ctx context.Context, params *DescribeMediaStorageConfigurationInput, optFns ...func(*Options)) (*DescribeMediaStorageConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeMediaStorageConfigurationInput{}

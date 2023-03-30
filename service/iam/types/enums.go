@@ -10,8 +10,8 @@ const (
 	AccessAdvisorUsageGranularityTypeActionLevel  AccessAdvisorUsageGranularityType = "ACTION_LEVEL"
 )
 
-// Values returns all known values for AccessAdvisorUsageGranularityType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for AccessAdvisorUsageGranularityType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (AccessAdvisorUsageGranularityType) Values() []AccessAdvisorUsageGranularityType {
@@ -30,8 +30,8 @@ const (
 	AssignmentStatusTypeAny        AssignmentStatusType = "Any"
 )
 
-// Values returns all known values for AssignmentStatusType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AssignmentStatusType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AssignmentStatusType) Values() []AssignmentStatusType {
 	return []AssignmentStatusType{
@@ -109,9 +109,9 @@ const (
 	EncodingTypePem EncodingType = "PEM"
 )
 
-// Values returns all known values for EncodingType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EncodingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (EncodingType) Values() []EncodingType {
 	return []EncodingType{
 		"SSH",
@@ -188,8 +188,8 @@ const (
 	PermissionsBoundaryAttachmentTypePolicy PermissionsBoundaryAttachmentType = "PermissionsBoundaryPolicy"
 )
 
-// Values returns all known values for PermissionsBoundaryAttachmentType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for PermissionsBoundaryAttachmentType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (PermissionsBoundaryAttachmentType) Values() []PermissionsBoundaryAttachmentType {
@@ -207,9 +207,10 @@ const (
 	PolicyEvaluationDecisionTypeImplicitDeny PolicyEvaluationDecisionType = "implicitDeny"
 )
 
-// Values returns all known values for PolicyEvaluationDecisionType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PolicyEvaluationDecisionType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (PolicyEvaluationDecisionType) Values() []PolicyEvaluationDecisionType {
 	return []PolicyEvaluationDecisionType{
 		"allowed",
@@ -227,8 +228,8 @@ const (
 	PolicyOwnerEntityTypeGroup PolicyOwnerEntityType = "GROUP"
 )
 
-// Values returns all known values for PolicyOwnerEntityType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PolicyOwnerEntityType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PolicyOwnerEntityType) Values() []PolicyOwnerEntityType {
 	return []PolicyOwnerEntityType{
@@ -368,9 +369,9 @@ const (
 	SortKeyTypeLastAuthenticatedTimeDescending SortKeyType = "LAST_AUTHENTICATED_TIME_DESCENDING"
 )
 
-// Values returns all known values for SortKeyType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortKeyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (SortKeyType) Values() []SortKeyType {
 	return []SortKeyType{
 		"SERVICE_NAMESPACE_ASCENDING",

@@ -30,8 +30,8 @@ func (c *Client) BatchGetAccountStatus(ctx context.Context, params *BatchGetAcco
 
 type BatchGetAccountStatusInput struct {
 
-	// The 12-digit Amazon Web Services account IDs of the accounts to retrieve Amazon
-	// Inspector status for.
+	// The 12-digit Amazon Web Services account IDs of the accounts to retrieve
+	// Amazon Inspector status for.
 	AccountIds []string
 
 	noSmithyDocumentSerde

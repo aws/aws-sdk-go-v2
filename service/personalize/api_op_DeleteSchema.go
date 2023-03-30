@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes a schema. Before deleting a schema, you must delete all datasets
-// referencing the schema. For more information on schemas, see CreateSchema
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSchema.html).
+// referencing the schema. For more information on schemas, see CreateSchema (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSchema.html)
+// .
 func (c *Client) DeleteSchema(ctx context.Context, params *DeleteSchemaInput, optFns ...func(*Options)) (*DeleteSchemaOutput, error) {
 	if params == nil {
 		params = &DeleteSchemaInput{}

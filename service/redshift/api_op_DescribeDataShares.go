@@ -36,16 +36,16 @@ type DescribeDataSharesInput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeDataShares request exceed the
-	// value specified in MaxRecords, Amazon Web Services returns a value in the Marker
-	// field of the response. You can retrieve the next set of response records by
-	// providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// value specified in MaxRecords , Amazon Web Services returns a value in the
+	// Markerfield of the response. You can retrieve the next set of response records
+	// by providing the returned marker value in the Marker parameter and retrying
+	// the request.
 	Marker *string
 
-	// The maximum number of response records to return in each call. If the number of
-	// remaining response records exceeds the specified MaxRecords value, a value is
-	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value.
+	// The maximum number of response records to return in each call. If the number
+	// of remaining response records exceeds the specified MaxRecords value, a value
+	// is returned in a marker field of the response. You can retrieve the next set
+	// of records by retrying the command with the returned marker value.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -58,10 +58,10 @@ type DescribeDataSharesOutput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeDataShares request exceed the
-	// value specified in MaxRecords, Amazon Web Services returns a value in the Marker
-	// field of the response. You can retrieve the next set of response records by
-	// providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// value specified in MaxRecords , Amazon Web Services returns a value in the
+	// Markerfield of the response. You can retrieve the next set of response records
+	// by providing the returned marker value in the Marker parameter and retrying
+	// the request.
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -141,14 +141,14 @@ var _ DescribeDataSharesAPIClient = (*Client)(nil)
 // DescribeDataSharesPaginatorOptions is the paginator options for
 // DescribeDataShares
 type DescribeDataSharesPaginatorOptions struct {
-	// The maximum number of response records to return in each call. If the number of
-	// remaining response records exceeds the specified MaxRecords value, a value is
-	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value.
+	// The maximum number of response records to return in each call. If the number
+	// of remaining response records exceeds the specified MaxRecords value, a value
+	// is returned in a marker field of the response. You can retrieve the next set
+	// of records by retrying the command with the returned marker value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

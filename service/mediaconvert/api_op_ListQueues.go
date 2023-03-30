@@ -44,8 +44,8 @@ type ListQueuesInput struct {
 	// the next batch of queues.
 	NextToken *string
 
-	// Optional. When you request lists of resources, you can specify whether they are
-	// sorted in ASCENDING or DESCENDING order. Default varies by resource.
+	// Optional. When you request lists of resources, you can specify whether they
+	// are sorted in ASCENDING or DESCENDING order. Default varies by resource.
 	Order types.Order
 
 	noSmithyDocumentSerde
@@ -137,8 +137,8 @@ type ListQueuesPaginatorOptions struct {
 	// Optional. Number of queues, up to twenty, that will be returned at one time.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -16,17 +16,13 @@ import (
 // a successful response from this operation, Amazon ElastiCache immediately begins
 // deleting the cluster; you cannot cancel or revert this operation. This operation
 // is not valid for:
-// - Redis (cluster mode enabled) clusters
-// - Redis (cluster mode
-// disabled) clusters
-// - A cluster that is the last read replica of a replication
-// group
-// - A cluster that is the primary node of a replication group
-// - A node group
-// (shard) that has Multi-AZ mode enabled
-// - A cluster from a Redis (cluster mode
-// enabled) replication group
-// - A cluster that is not in the available state
+//   - Redis (cluster mode enabled) clusters
+//   - Redis (cluster mode disabled) clusters
+//   - A cluster that is the last read replica of a replication group
+//   - A cluster that is the primary node of a replication group
+//   - A node group (shard) that has Multi-AZ mode enabled
+//   - A cluster from a Redis (cluster mode enabled) replication group
+//   - A cluster that is not in the available state
 func (c *Client) DeleteCacheCluster(ctx context.Context, params *DeleteCacheClusterInput, optFns ...func(*Options)) (*DeleteCacheClusterOutput, error) {
 	if params == nil {
 		params = &DeleteCacheClusterInput{}
@@ -42,18 +38,18 @@ func (c *Client) DeleteCacheCluster(ctx context.Context, params *DeleteCacheClus
 	return out, nil
 }
 
-// Represents the input of a DeleteCacheCluster operation.
+// Represents the input of a DeleteCacheCluster  operation.
 type DeleteCacheClusterInput struct {
 
-	// The cluster identifier for the cluster to be deleted. This parameter is not case
-	// sensitive.
+	// The cluster identifier for the cluster to be deleted. This parameter is not
+	// case sensitive.
 	//
 	// This member is required.
 	CacheClusterId *string
 
-	// The user-supplied name of a final cluster snapshot. This is the unique name that
-	// identifies the snapshot. ElastiCache creates the snapshot, and then deletes the
-	// cluster immediately afterward.
+	// The user-supplied name of a final cluster snapshot. This is the unique name
+	// that identifies the snapshot. ElastiCache creates the snapshot, and then deletes
+	// the cluster immediately afterward.
 	FinalSnapshotIdentifier *string
 
 	noSmithyDocumentSerde

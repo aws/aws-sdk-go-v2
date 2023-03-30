@@ -35,7 +35,7 @@ type UpdateServerConfigInput struct {
 	ServerId *string
 
 	// The preferred strategy options for the application component. See the response
-	// from GetServerStrategies.
+	// from GetServerStrategies .
 	StrategyOption *types.StrategyOption
 
 	noSmithyDocumentSerde

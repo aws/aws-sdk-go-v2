@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use to create a code review with a CodeReviewType
-// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html)
+// Use to create a code review with a CodeReviewType (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html)
 // of RepositoryAnalysis. This type of code review analyzes all code under a
 // specified branch in an associated repository. PullRequest code reviews are
 // automatically triggered by a pull request.
@@ -40,19 +39,16 @@ type CreateCodeReviewInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the RepositoryAssociation
-	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
-	// object. You can retrieve this ARN by calling ListRepositoryAssociations
-	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html).
-	// A code review can only be created on an associated repository. This is the ARN
+	// The Amazon Resource Name (ARN) of the RepositoryAssociation (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
+	// object. You can retrieve this ARN by calling ListRepositoryAssociations (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html)
+	// . A code review can only be created on an associated repository. This is the ARN
 	// of the associated repository.
 	//
 	// This member is required.
 	RepositoryAssociationArn *string
 
-	// The type of code review to create. This is specified using a CodeReviewType
-	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html)
-	// object. You can create a code review only of type RepositoryAnalysis.
+	// The type of code review to create. This is specified using a CodeReviewType (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html)
+	// object. You can create a code review only of type RepositoryAnalysis .
 	//
 	// This member is required.
 	Type *types.CodeReviewType

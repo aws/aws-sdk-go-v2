@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete the FeatureGroup and any data that was written to the OnlineStore of the
-// FeatureGroup. Data cannot be accessed from the OnlineStore immediately after
-// DeleteFeatureGroup is called. Data written into the OfflineStore will not be
-// deleted. The Amazon Web Services Glue database and tables that are automatically
-// created for your OfflineStore are not deleted.
+// Delete the FeatureGroup  and any data that was written to the OnlineStore of
+// the FeatureGroup . Data cannot be accessed from the OnlineStore immediately
+// after DeleteFeatureGroup  is called. Data written into the OfflineStore will
+// not be deleted. The Amazon Web Services Glue database and tables that are
+// automatically created for your OfflineStore  are not deleted.
 func (c *Client) DeleteFeatureGroup(ctx context.Context, params *DeleteFeatureGroupInput, optFns ...func(*Options)) (*DeleteFeatureGroupOutput, error) {
 	if params == nil {
 		params = &DeleteFeatureGroupInput{}
@@ -32,8 +32,8 @@ func (c *Client) DeleteFeatureGroup(ctx context.Context, params *DeleteFeatureGr
 
 type DeleteFeatureGroupInput struct {
 
-	// The name of the FeatureGroup you want to delete. The name must be unique within
-	// an Amazon Web Services Region in an Amazon Web Services account.
+	// The name of the FeatureGroup you want to delete. The name must be unique
+	// within an Amazon Web Services Region in an Amazon Web Services account.
 	//
 	// This member is required.
 	FeatureGroupName *string

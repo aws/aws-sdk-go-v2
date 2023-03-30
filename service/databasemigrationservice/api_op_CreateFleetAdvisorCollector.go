@@ -28,7 +28,7 @@ func (c *Client) CreateFleetAdvisorCollector(ctx context.Context, params *Create
 
 type CreateFleetAdvisorCollectorInput struct {
 
-	// The name of your Fleet Advisor collector (for example, sample-collector).
+	// The name of your Fleet Advisor collector (for example, sample-collector ).
 	//
 	// This member is required.
 	CollectorName *string

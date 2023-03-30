@@ -115,8 +115,8 @@ func (c *Client) addOperationListEventDataStoresMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListEventDataStoresAPIClient is a client that implements the ListEventDataStores
-// operation.
+// ListEventDataStoresAPIClient is a client that implements the
+// ListEventDataStores operation.
 type ListEventDataStoresAPIClient interface {
 	ListEventDataStores(context.Context, *ListEventDataStoresInput, ...func(*Options)) (*ListEventDataStoresOutput, error)
 }
@@ -129,8 +129,8 @@ type ListEventDataStoresPaginatorOptions struct {
 	// The maximum number of event data stores to display on a single page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

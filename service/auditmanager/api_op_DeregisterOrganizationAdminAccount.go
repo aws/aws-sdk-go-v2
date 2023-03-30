@@ -24,9 +24,8 @@ import (
 // account when they enabled evidence finder. If this task isn’t completed, the
 // event data store remains in their account. In this case, we recommend that the
 // original delegated administrator goes to CloudTrail Lake and manually deletes
-// the event data store
-// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-eds-disable-termination.html).
-// This cleanup task is necessary to ensure that you don't end up with multiple
+// the event data store (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-eds-disable-termination.html)
+// . This cleanup task is necessary to ensure that you don't end up with multiple
 // event data stores. Audit Manager ignores an unused event data store after you
 // remove or change a delegated administrator account. However, the unused event
 // data store continues to incur storage costs from CloudTrail Lake if you don't
@@ -37,36 +36,16 @@ import (
 // Audit Manager console. Or, you can use one of the delete API operations that are
 // provided by Audit Manager. To delete your Audit Manager resource data, see the
 // following instructions:
-// - DeleteAssessment
-// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessment.html)
-// (see also: Deleting an assessment
-// (https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-assessment.html)
-// in the Audit Manager User Guide)
-// - DeleteAssessmentFramework
-// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFramework.html)
-// (see also: Deleting a custom framework
-// (https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-custom-framework.html)
-// in the Audit Manager User Guide)
-// - DeleteAssessmentFrameworkShare
-// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFrameworkShare.html)
-// (see also: Deleting a share request
-// (https://docs.aws.amazon.com/audit-manager/latest/userguide/deleting-shared-framework-requests.html)
-// in the Audit Manager User Guide)
-// - DeleteAssessmentReport
-// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentReport.html)
-// (see also: Deleting an assessment report
-// (https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html#delete-assessment-report-steps)
-// in the Audit Manager User Guide)
-// - DeleteControl
-// (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteControl.html)
-// (see also: Deleting a custom control
-// (https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-controls.html)
-// in the Audit Manager User Guide)
+//   - DeleteAssessment (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessment.html) (see also: Deleting an assessment (https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-assessment.html) in the Audit Manager User Guide)
+//   - DeleteAssessmentFramework (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFramework.html) (see also: Deleting a custom framework (https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-custom-framework.html) in the Audit Manager User Guide)
+//   - DeleteAssessmentFrameworkShare (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFrameworkShare.html) (see also: Deleting a share request (https://docs.aws.amazon.com/audit-manager/latest/userguide/deleting-shared-framework-requests.html) in the Audit Manager User Guide)
+//   - DeleteAssessmentReport (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentReport.html) (see also: Deleting an assessment report (https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html#delete-assessment-report-steps) in the Audit Manager User Guide)
+//   - DeleteControl (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteControl.html) (see also: Deleting a custom control (https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-controls.html) in the Audit Manager User Guide)
 //
-// At this time, Audit Manager doesn't provide an
-// option to delete evidence for a specific delegated administrator. Instead, when
-// your management account deregisters Audit Manager, we perform a cleanup for the
-// current delegated administrator account at the time of deregistration.
+// At this time, Audit Manager doesn't provide an option to delete evidence for a
+// specific delegated administrator. Instead, when your management account
+// deregisters Audit Manager, we perform a cleanup for the current delegated
+// administrator account at the time of deregistration.
 func (c *Client) DeregisterOrganizationAdminAccount(ctx context.Context, params *DeregisterOrganizationAdminAccountInput, optFns ...func(*Options)) (*DeregisterOrganizationAdminAccountOutput, error) {
 	if params == nil {
 		params = &DeregisterOrganizationAdminAccountInput{}

@@ -11,11 +11,11 @@ import (
 )
 
 // Returns information about the last resize operation for the specified cluster.
-// If no resize operation has ever been initiated for the specified cluster, a HTTP
-// 404 error is returned. If a resize operation was initiated and completed, the
-// status of the resize remains as SUCCEEDED until the next resize. A resize
-// operation can be requested using ModifyCluster and specifying a different number
-// or type of nodes for the cluster.
+// If no resize operation has ever been initiated for the specified cluster, a
+// HTTP 404error is returned. If a resize operation was initiated and completed,
+// the status of the resize remains as SUCCEEDED until the next resize. A resize
+// operation can be requested using ModifyCluster and specifying a different
+// number or type of nodes for the cluster.
 func (c *Client) DescribeResize(ctx context.Context, params *DescribeResizeInput, optFns ...func(*Options)) (*DescribeResizeOutput, error) {
 	if params == nil {
 		params = &DescribeResizeInput{}
@@ -46,16 +46,16 @@ type DescribeResizeInput struct {
 // Describes the result of a cluster resize operation.
 type DescribeResizeOutput struct {
 
-	// The average rate of the resize operation over the last few minutes, measured in
-	// megabytes per second. After the resize operation completes, this value shows the
-	// average rate of the entire resize operation.
+	// The average rate of the resize operation over the last few minutes, measured
+	// in megabytes per second. After the resize operation completes, this value shows
+	// the average rate of the entire resize operation.
 	AvgResizeRateInMegaBytesPerSecond *float64
 
 	// The percent of data transferred from source cluster to target cluster.
 	DataTransferProgressPercent *float64
 
-	// The amount of seconds that have elapsed since the resize operation began. After
-	// the resize operation completes, this value shows the total actual time, in
+	// The amount of seconds that have elapsed since the resize operation began.
+	// After the resize operation completes, this value shows the total actual time, in
 	// seconds, for the resize operation.
 	ElapsedTimeInSeconds *int64
 
@@ -73,8 +73,8 @@ type DescribeResizeOutput struct {
 	// table names.
 	ImportTablesInProgress []string
 
-	// The names of tables that have not been yet imported. Valid Values: List of table
-	// names
+	// The names of tables that have not been yet imported. Valid Values: List of
+	// table names
 	ImportTablesNotStarted []string
 
 	// An optional string to provide additional details about the resize action.
@@ -87,12 +87,12 @@ type DescribeResizeOutput struct {
 	// estimated total amount of data before resize).
 	ProgressInMegaBytes *int64
 
-	// An enum with possible values of ClassicResize and ElasticResize. These values
+	// An enum with possible values of ClassicResize  and ElasticResize. These values
 	// describe the type of resize operation being performed.
 	ResizeType *string
 
-	// The status of the resize operation. Valid Values: NONE | IN_PROGRESS | FAILED |
-	// SUCCEEDED | CANCELLING
+	// The status of the resize operation. Valid Values: NONE  | IN_PROGRESS  | FAILED
+	// | SUCCEEDED  | CANCELLING
 	Status *string
 
 	// The cluster type after the resize operation is complete. Valid Values:
@@ -100,10 +100,11 @@ type DescribeResizeOutput struct {
 	TargetClusterType *string
 
 	// The type of encryption for the cluster after the resize is complete. Possible
-	// values are KMS and None.
+	// values are KMS  and None .
 	TargetEncryptionType *string
 
-	// The node type that the cluster will have after the resize operation is complete.
+	// The node type that the cluster will have after the resize operation is
+	// complete.
 	TargetNodeType *string
 
 	// The number of nodes that the cluster will have after the resize operation is

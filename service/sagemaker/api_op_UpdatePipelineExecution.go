@@ -34,8 +34,8 @@ type UpdatePipelineExecutionInput struct {
 	// This member is required.
 	PipelineExecutionArn *string
 
-	// This configuration, if specified, overrides the parallelism configuration of the
-	// parent pipeline for this specific run.
+	// This configuration, if specified, overrides the parallelism configuration of
+	// the parent pipeline for this specific run.
 	ParallelismConfiguration *types.ParallelismConfiguration
 
 	// The description of the pipeline execution.

@@ -10,13 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified organization Config rule and all of its evaluation results
-// from all member accounts in that organization. Only a management account and a
-// delegated administrator account can delete an organization Config rule. When
-// calling this API with a delegated administrator, you must ensure Organizations
-// ListDelegatedAdministrator permissions are added. Config sets the state of a
-// rule to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a
-// rule while it is in this state.
+// Deletes the specified organization Config rule and all of its evaluation
+// results from all member accounts in that organization. Only a management account
+// and a delegated administrator account can delete an organization Config rule.
+// When calling this API with a delegated administrator, you must ensure
+// Organizations ListDelegatedAdministrator permissions are added. Config sets
+// the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. You
+// cannot update a rule while it is in this state.
 func (c *Client) DeleteOrganizationConfigRule(ctx context.Context, params *DeleteOrganizationConfigRuleInput, optFns ...func(*Options)) (*DeleteOrganizationConfigRuleOutput, error) {
 	if params == nil {
 		params = &DeleteOrganizationConfigRuleInput{}

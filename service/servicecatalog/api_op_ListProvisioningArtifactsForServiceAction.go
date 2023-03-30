@@ -31,15 +31,15 @@ func (c *Client) ListProvisioningArtifactsForServiceAction(ctx context.Context, 
 
 type ListProvisioningArtifactsForServiceActionInput struct {
 
-	// The self-service action identifier. For example, act-fs7abcd89wxyz.
+	// The self-service action identifier. For example, act-fs7abcd89wxyz .
 	//
 	// This member is required.
 	ServiceActionId *string
 
 	// The language code.
-	// - en - English (default)
-	// - jp - Japanese
-	// - zh - Chinese
+	//     - en - English (default)
+	//     - jp - Japanese
+	//     - zh - Chinese
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.
@@ -145,8 +145,8 @@ type ListProvisioningArtifactsForServiceActionPaginatorOptions struct {
 	// The maximum number of items to return with this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

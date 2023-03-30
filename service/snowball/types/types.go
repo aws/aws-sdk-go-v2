@@ -65,18 +65,18 @@ type Address struct {
 type ClusterListEntry struct {
 
 	// The 39-character ID for the cluster that you want to list, for example
-	// CID123e4567-e89b-12d3-a456-426655440000.
+	// CID123e4567-e89b-12d3-a456-426655440000 .
 	ClusterId *string
 
-	// The current state of this cluster. For information about the state of a specific
-	// node, see JobListEntry$JobState.
+	// The current state of this cluster. For information about the state of a
+	// specific node, see JobListEntry$JobState .
 	ClusterState ClusterState
 
 	// The creation date for this cluster.
 	CreationDate *time.Time
 
 	// Defines an optional description of the cluster, for example Environmental Data
-	// Cluster-01.
+	// Cluster-01 .
 	Description *string
 
 	noSmithyDocumentSerde
@@ -105,13 +105,12 @@ type ClusterMetadata struct {
 	ForwardingAddressId *string
 
 	// The type of job for this cluster. Currently, the only job type supported for
-	// clusters is LOCAL_USE.
+	// clusters is LOCAL_USE .
 	JobType JobType
 
-	// The KmsKeyARN Amazon Resource Name (ARN) associated with this cluster. This ARN
-	// was created using the CreateKey
-	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html) API
-	// action in Key Management Service (KMS.
+	// The KmsKeyARN Amazon Resource Name (ARN) associated with this cluster. This
+	// ARN was created using the CreateKey (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
+	// API action in Key Management Service (KMS.
 	KmsKeyARN *string
 
 	// The Amazon Simple Notification Service (Amazon SNS) notification settings for
@@ -122,34 +121,27 @@ type ClusterMetadata struct {
 	// Services Snow Family device.
 	OnDeviceServiceConfiguration *OnDeviceServiceConfiguration
 
-	// The arrays of JobResource objects that can include updated S3Resource objects or
-	// LambdaResource objects.
+	// The arrays of JobResource  objects that can include updated S3Resource objects
+	// or LambdaResource  objects.
 	Resources *JobResource
 
 	// The role ARN associated with this cluster. This ARN was created using the
-	// CreateRole
-	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html) API
-	// action in Identity and Access Management (IAM).
+	// CreateRole (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
+	// API action in Identity and Access Management (IAM).
 	RoleARN *string
 
-	// The shipping speed for each node in this cluster. This speed doesn't dictate how
-	// soon you'll get each device, rather it represents how quickly each device moves
-	// to its destination while in transit. Regional shipping speeds are as follows:
-	// -
-	// In Australia, you have access to express shipping. Typically, devices shipped
-	// express are delivered in about a day.
-	// - In the European Union (EU), you have
-	// access to express shipping. Typically, Snow devices shipped express are
-	// delivered in about a day. In addition, most countries in the EU have access to
-	// standard shipping, which typically takes less than a week, one way.
-	// - In India,
-	// Snow devices are delivered in one to seven days.
-	// - In the US, you have access to
-	// one-day shipping and two-day shipping.
+	// The shipping speed for each node in this cluster. This speed doesn't dictate
+	// how soon you'll get each device, rather it represents how quickly each device
+	// moves to its destination while in transit. Regional shipping speeds are as
+	// follows:
+	//     - In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.
+	//     - In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.
+	//     - In India, Snow devices are delivered in one to seven days.
+	//     - In the US, you have access to one-day shipping and two-day shipping.
 	ShippingOption ShippingOption
 
 	// The type of Snowcone device to use for this cluster. For cluster jobs, Amazon
-	// Web Services Snow Family currently supports only the EDGE device type.
+	// Web Services Snow Family currently supports only the EDGE  device type.
 	SnowballType SnowballType
 
 	// The tax documents required in your Amazon Web Services Region.
@@ -158,10 +150,10 @@ type ClusterMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// A JSON-formatted object that describes a compatible Amazon Machine Image (AMI),
-// including the ID and name for a Snow device AMI. This AMI is compatible with the
-// device's physical hardware requirements, and it should be able to be run in an
-// SBE1 instance on the device.
+// A JSON-formatted object that describes a compatible Amazon Machine Image
+// (AMI), including the ID and name for a Snow device AMI. This AMI is compatible
+// with the device's physical hardware requirements, and it should be able to be
+// run in an SBE1 instance on the device.
 type CompatibleImage struct {
 
 	// The unique identifier for an individual Snow device AMI.
@@ -175,7 +167,7 @@ type CompatibleImage struct {
 
 // Defines the real-time status of a Snow device's data transfer while the device
 // is at Amazon Web Services. This data is only available while a job has a
-// JobState value of InProgress, for both import and export jobs.
+// JobState value of InProgress , for both import and export jobs.
 type DataTransfer struct {
 
 	// The number of bytes transferred between a Snow device and Amazon S3.
@@ -184,14 +176,14 @@ type DataTransfer struct {
 	// The number of objects transferred between a Snow device and Amazon S3.
 	ObjectsTransferred int64
 
-	// The total bytes of data for a transfer between a Snow device and Amazon S3. This
-	// value is set to 0 (zero) until all the keys that will be transferred have been
-	// listed.
-	TotalBytes int64
-
-	// The total number of objects for a transfer between a Snow device and Amazon S3.
+	// The total bytes of data for a transfer between a Snow device and Amazon S3.
 	// This value is set to 0 (zero) until all the keys that will be transferred have
 	// been listed.
+	TotalBytes int64
+
+	// The total number of objects for a transfer between a Snow device and Amazon
+	// S3. This value is set to 0 (zero) until all the keys that will be transferred
+	// have been listed.
 	TotalObjects int64
 
 	noSmithyDocumentSerde
@@ -209,7 +201,7 @@ type DependentService struct {
 	noSmithyDocumentSerde
 }
 
-// The container for SnowconeDeviceConfiguration.
+// The container for SnowconeDeviceConfiguration .
 type DeviceConfiguration struct {
 
 	// Returns information about the device configuration for an Snowcone job.
@@ -218,10 +210,10 @@ type DeviceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A JSON-formatted object that contains the IDs for an Amazon Machine Image (AMI),
-// including the Amazon EC2 AMI ID and the Snow device AMI ID. Each AMI has these
-// two IDs to simplify identifying the AMI in both the Amazon Web Services Cloud
-// and on the device.
+// A JSON-formatted object that contains the IDs for an Amazon Machine Image
+// (AMI), including the Amazon EC2 AMI ID and the Snow device AMI ID. Each AMI has
+// these two IDs to simplify identifying the AMI in both the Amazon Web Services
+// Cloud and on the device.
 type Ec2AmiResource struct {
 
 	// The ID of the AMI in Amazon EC2.
@@ -248,7 +240,7 @@ type EKSOnDeviceServiceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The container for the EventTriggerDefinition$EventResourceARN.
+// The container for the EventTriggerDefinition$EventResourceARN .
 type EventTriggerDefinition struct {
 
 	// The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an
@@ -276,7 +268,7 @@ type JobListEntry struct {
 	CreationDate *time.Time
 
 	// The optional description of this specific job, for example Important Photos
-	// 2016-08-11.
+	// 2016-08-11 .
 	Description *string
 
 	// A value that indicates that this job is a main job. A main job represents a
@@ -288,7 +280,7 @@ type JobListEntry struct {
 	IsMaster bool
 
 	// The automatically generated ID for a job, for example
-	// JID123e4567-e89b-12d3-a456-426655440000.
+	// JID123e4567-e89b-12d3-a456-426655440000 .
 	JobId *string
 
 	// The current state of this job.
@@ -303,24 +295,25 @@ type JobListEntry struct {
 	noSmithyDocumentSerde
 }
 
-// Contains job logs. Whenever a Snow device is used to import data into or export
-// data out of Amazon S3, you'll have the option of downloading a PDF job report.
-// Job logs are returned as a part of the response syntax of the DescribeJob action
-// in the JobMetadata data type. The job logs can be accessed for up to 60 minutes
-// after this request has been made. To access any of the job logs after 60 minutes
-// have passed, you'll have to make another call to the DescribeJob action. For
-// import jobs, the PDF job report becomes available at the end of the import
-// process. For export jobs, your job report typically becomes available while the
-// Snow device for your job part is being delivered to you. The job report provides
-// you insight into the state of your Amazon S3 data transfer. The report includes
-// details about your job or job part for your records. For deeper visibility into
-// the status of your transferred objects, you can look at the two associated logs:
-// a success log and a failure log. The logs are saved in comma-separated value
-// (CSV) format, and the name of each log includes the ID of the job or job part
-// that the log describes.
+// Contains job logs. Whenever a Snow device is used to import data into or
+// export data out of Amazon S3, you'll have the option of downloading a PDF job
+// report. Job logs are returned as a part of the response syntax of the
+// DescribeJob action in the JobMetadata data type. The job logs can be accessed
+// for up to 60 minutes after this request has been made. To access any of the job
+// logs after 60 minutes have passed, you'll have to make another call to the
+// DescribeJobaction. For import jobs, the PDF job report becomes available at
+// the end of the import process. For export jobs, your job report typically
+// becomes available while the Snow device for your job part is being delivered to
+// you. The job report provides you insight into the state of your Amazon S3 data
+// transfer. The report includes details about your job or job part for your
+// records. For deeper visibility into the status of your transferred objects, you
+// can look at the two associated logs: a success log and a failure log. The logs
+// are saved in comma-separated value (CSV) format, and the name of each log
+// includes the ID of the job or job part that the log describes.
 type JobLogs struct {
 
-	// A link to an Amazon S3 presigned URL where the job completion report is located.
+	// A link to an Amazon S3 presigned URL where the job completion report is
+	// located.
 	JobCompletionReportURI *string
 
 	// A link to an Amazon S3 presigned URL where the job failure log is located.
@@ -334,28 +327,28 @@ type JobLogs struct {
 
 // Contains information about a specific job including shipping information, job
 // status, and other important metadata. This information is returned as a part of
-// the response syntax of the DescribeJob action.
+// the response syntax of the DescribeJob  action.
 type JobMetadata struct {
 
 	// The ID for the address that you want the Snow device shipped to.
 	AddressId *string
 
 	// The 39-character ID for the cluster, for example
-	// CID123e4567-e89b-12d3-a456-426655440000.
+	// CID123e4567-e89b-12d3-a456-426655440000 .
 	ClusterId *string
 
 	// The creation date for this job.
 	CreationDate *time.Time
 
-	// A value that defines the real-time status of a Snow device's data transfer while
-	// the device is at Amazon Web Services. This data is only available while a job
-	// has a JobState value of InProgress, for both import and export jobs.
+	// A value that defines the real-time status of a Snow device's data transfer
+	// while the device is at Amazon Web Services. This data is only available while a
+	// job has a JobState  value of InProgress , for both import and export jobs.
 	DataTransferProgress *DataTransfer
 
 	// The description of the job, provided at job creation.
 	Description *string
 
-	// The container for SnowconeDeviceConfiguration.
+	// The container for SnowconeDeviceConfiguration .
 	DeviceConfiguration *DeviceConfiguration
 
 	// The ID of the address that you want a job shipped to, after it will be shipped
@@ -363,11 +356,11 @@ type JobMetadata struct {
 	ForwardingAddressId *string
 
 	// The automatically generated ID for a job, for example
-	// JID123e4567-e89b-12d3-a456-426655440000.
+	// JID123e4567-e89b-12d3-a456-426655440000 .
 	JobId *string
 
-	// Links to Amazon S3 presigned URLs for the job report and logs. For import jobs,
-	// the PDF job report becomes available at the end of the import process. For
+	// Links to Amazon S3 presigned URLs for the job report and logs. For import
+	// jobs, the PDF job report becomes available at the end of the import process. For
 	// export jobs, your job report typically becomes available while the Snow device
 	// for your job part is being delivered to you.
 	JobLogInfo *JobLogs
@@ -379,45 +372,44 @@ type JobMetadata struct {
 	JobType JobType
 
 	// The Amazon Resource Name (ARN) for the Key Management Service (KMS) key
-	// associated with this job. This ARN was created using the CreateKey
-	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html) API
-	// action in KMS.
+	// associated with this job. This ARN was created using the CreateKey (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
+	// API action in KMS.
 	KmsKeyARN *string
 
 	// The ID of the long-term pricing type for the device.
 	LongTermPricingId *string
 
 	// The Amazon Simple Notification Service (Amazon SNS) notification settings
-	// associated with a specific job. The Notification object is returned as a part of
-	// the response syntax of the DescribeJob action in the JobMetadata data type.
+	// associated with a specific job. The Notification object is returned as a part
+	// of the response syntax of the DescribeJob  action in the JobMetadata  data type.
 	Notification *Notification
 
 	// Represents metadata and configuration settings for services on an Amazon Web
 	// Services Snow Family device.
 	OnDeviceServiceConfiguration *OnDeviceServiceConfiguration
 
-	// Allows you to securely operate and manage Snowcone devices remotely from outside
-	// of your internal network. When set to INSTALLED_AUTOSTART, remote management
-	// will automatically be available when the device arrives at your location.
-	// Otherwise, you need to use the Snowball Client to manage the device.
+	// Allows you to securely operate and manage Snowcone devices remotely from
+	// outside of your internal network. When set to INSTALLED_AUTOSTART, remote
+	// management will automatically be available when the device arrives at your
+	// location. Otherwise, you need to use the Snowball Client to manage the device.
 	RemoteManagement RemoteManagement
 
-	// An array of S3Resource objects. Each S3Resource object represents an Amazon S3
-	// bucket that your transferred data will be exported from or imported into.
+	// An array of S3Resource  objects. Each S3Resource object represents an Amazon
+	// S3 bucket that your transferred data will be exported from or imported into.
 	Resources *JobResource
 
-	// The role ARN associated with this job. This ARN was created using the CreateRole
-	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html) API
-	// action in Identity and Access Management.
+	// The role ARN associated with this job. This ARN was created using the
+	// CreateRole (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
+	// API action in Identity and Access Management.
 	RoleARN *string
 
 	// A job's shipping information, including inbound and outbound tracking numbers
 	// and shipping speed options.
 	ShippingDetails *ShippingDetails
 
-	// The Snow device capacity preference for this job, specified at job creation. In
-	// US regions, you can choose between 50 TB and 80 TB Snowballs. All other regions
-	// use 80 TB capacity Snowballs. For more information, see
+	// The Snow device capacity preference for this job, specified at job creation.
+	// In US regions, you can choose between 50 TB and 80 TB Snowballs. All other
+	// regions use 80 TB capacity Snowballs. For more information, see
 	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
 	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
 	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
@@ -445,24 +437,24 @@ type JobResource struct {
 	// The Python-language Lambda functions for this job.
 	LambdaResources []LambdaResource
 
-	// An array of S3Resource objects.
+	// An array of S3Resource  objects.
 	S3Resources []S3Resource
 
 	noSmithyDocumentSerde
 }
 
-// Contains a key range. For export jobs, a S3Resource object can have an optional
-// KeyRange value. The length of the range is defined at job creation, and has
-// either an inclusive BeginMarker, an inclusive EndMarker, or both. Ranges are
-// UTF-8 binary sorted.
+// Contains a key range. For export jobs, a S3Resource object can have an
+// optional KeyRange value. The length of the range is defined at job creation,
+// and has either an inclusive BeginMarker , an inclusive EndMarker, or both.
+// Ranges are UTF-8 binary sorted.
 type KeyRange struct {
 
 	// The key that starts an optional key range for an export job. Ranges are
 	// inclusive and UTF-8 binary sorted.
 	BeginMarker *string
 
-	// The key that ends an optional key range for an export job. Ranges are inclusive
-	// and UTF-8 binary sorted.
+	// The key that ends an optional key range for an export job. Ranges are
+	// inclusive and UTF-8 binary sorted.
 	EndMarker *string
 
 	noSmithyDocumentSerde
@@ -471,12 +463,12 @@ type KeyRange struct {
 // Identifies
 type LambdaResource struct {
 
-	// The array of ARNs for S3Resource objects to trigger the LambdaResource objects
-	// associated with this job.
+	// The array of ARNs for S3Resource  objects to trigger the LambdaResource
+	// objects associated with this job.
 	EventTriggers []EventTriggerDefinition
 
-	// An Amazon Resource Name (ARN) that represents an Lambda function to be triggered
-	// by PUT object actions on the associated local Amazon S3 resource.
+	// An Amazon Resource Name (ARN) that represents an Lambda function to be
+	// triggered by PUT object actions on the associated local Amazon S3 resource.
 	LambdaArn *string
 
 	noSmithyDocumentSerde
@@ -489,8 +481,9 @@ type LongTermPricingListEntry struct {
 	// The current active jobs on the device the long-term pricing type.
 	CurrentActiveJob *string
 
-	// If set to true, specifies that the current long-term pricing type for the device
-	// should be automatically renewed before the long-term pricing contract expires.
+	// If set to true, specifies that the current long-term pricing type for the
+	// device should be automatically renewed before the long-term pricing contract
+	// expires.
 	IsLongTermPricingAutoRenew *bool
 
 	// The IDs of the jobs that are associated with a long-term pricing type.
@@ -534,12 +527,13 @@ type NFSOnDeviceServiceConfiguration struct {
 }
 
 // The Amazon Simple Notification Service (Amazon SNS) notification settings
-// associated with a specific job. The Notification object is returned as a part of
-// the response syntax of the DescribeJob action in the JobMetadata data type. When
-// the notification settings are defined during job creation, you can choose to
-// notify based on a specific set of job states using the JobStatesToNotify array
-// of strings, or you can specify that you want to have Amazon SNS notifications
-// sent out for all job states with NotifyAll set to true.
+// associated with a specific job. The Notification object is returned as a part
+// of the response syntax of the DescribeJob  action in the JobMetadata data
+// type. When the notification settings are defined during job creation, you can
+// choose to notify based on a specific set of job states using the
+// JobStatesToNotifyarray of strings, or you can specify that you want to have
+// Amazon SNS notifications sent out for all job states with NotifyAll set to
+// true.
 type Notification struct {
 
 	// The list of job states that will trigger a notification for this job.
@@ -549,12 +543,10 @@ type Notification struct {
 	NotifyAll bool
 
 	// The new SNS TopicArn that you want to associate with this job. You can create
-	// Amazon Resource Names (ARNs) for topics by using the CreateTopic
-	// (https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html) Amazon SNS API
-	// action. You can subscribe email addresses to an Amazon SNS topic through the
-	// Amazon Web Services Management Console, or by using the Subscribe
-	// (https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html) Amazon Simple
-	// Notification Service (Amazon SNS) API action.
+	// Amazon Resource Names (ARNs) for topics by using the CreateTopic (https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html)
+	// Amazon SNS API action. You can subscribe email addresses to an Amazon SNS topic
+	// through the Amazon Web Services Management Console, or by using the Subscribe (https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html)
+	// Amazon Simple Notification Service (Amazon SNS) API action.
 	SnsTopicARN *string
 
 	noSmithyDocumentSerde
@@ -577,11 +569,11 @@ type OnDeviceServiceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Each S3Resource object represents an Amazon S3 bucket that your transferred data
-// will be exported from or imported into. For export jobs, this object can have an
-// optional KeyRange value. The length of the range is defined at job creation, and
-// has either an inclusive BeginMarker, an inclusive EndMarker, or both. Ranges are
-// UTF-8 binary sorted.
+// Each S3Resource object represents an Amazon S3 bucket that your transferred
+// data will be exported from or imported into. For export jobs, this object can
+// have an optional KeyRange value. The length of the range is defined at job
+// creation, and has either an inclusive BeginMarker , an inclusive EndMarker, or
+// both. Ranges are UTF-8 binary sorted.
 type S3Resource struct {
 
 	// The Amazon Resource Name (ARN) of an Amazon S3 bucket.
@@ -589,8 +581,8 @@ type S3Resource struct {
 
 	// For export jobs, you can provide an optional KeyRange within a specific Amazon
 	// S3 bucket. The length of the range is defined at job creation, and has either an
-	// inclusive BeginMarker, an inclusive EndMarker, or both. Ranges are UTF-8 binary
-	// sorted.
+	// inclusive BeginMarker , an inclusive EndMarker, or both. Ranges are UTF-8
+	// binary sorted.
 	KeyRange *KeyRange
 
 	// Specifies the service or services on the Snow Family device that your
@@ -610,16 +602,16 @@ type ServiceVersion struct {
 	noSmithyDocumentSerde
 }
 
-// The Status and TrackingNumber information for an inbound or outbound shipment.
+// The Status  and TrackingNumber  information for an inbound or outbound shipment.
 type Shipment struct {
 
 	// Status information for a shipment.
 	Status *string
 
-	// The tracking number for this job. Using this tracking number with your region's
-	// carrier's website, you can track a Snow device as the carrier transports it. For
-	// India, the carrier is Amazon Logistics. For all other regions, UPS is the
-	// carrier.
+	// The tracking number for this job. Using this tracking number with your
+	// region's carrier's website, you can track a Snow device as the carrier
+	// transports it. For India, the carrier is Amazon Logistics. For all other
+	// regions, UPS is the carrier.
 	TrackingNumber *string
 
 	noSmithyDocumentSerde
@@ -629,11 +621,11 @@ type Shipment struct {
 // and shipping speed options.
 type ShippingDetails struct {
 
-	// The Status and TrackingNumber values for a Snow device being returned to Amazon
-	// Web Services for a particular job.
+	// The Status  and TrackingNumber values for a Snow device being returned to
+	// Amazon Web Services for a particular job.
 	InboundShipment *Shipment
 
-	// The Status and TrackingNumber values for a Snow device being delivered to the
+	// The Status  and TrackingNumber values for a Snow device being delivered to the
 	// address that you specified for a particular job.
 	OutboundShipment *Shipment
 
@@ -641,17 +633,10 @@ type ShippingDetails struct {
 	// you'll get the Snow device from the job's creation date. This speed represents
 	// how quickly it moves to its destination while in transit. Regional shipping
 	// speeds are as follows:
-	// - In Australia, you have access to express shipping.
-	// Typically, Snow devices shipped express are delivered in about a day.
-	// - In the
-	// European Union (EU), you have access to express shipping. Typically, Snow
-	// devices shipped express are delivered in about a day. In addition, most
-	// countries in the EU have access to standard shipping, which typically takes less
-	// than a week, one way.
-	// - In India, Snow devices are delivered in one to seven
-	// days.
-	// - In the United States of America (US), you have access to one-day
-	// shipping and two-day shipping.
+	//     - In Australia, you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day.
+	//     - In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.
+	//     - In India, Snow devices are delivered in one to seven days.
+	//     - In the United States of America (US), you have access to one-day shipping and two-day shipping.
 	ShippingOption ShippingOption
 
 	noSmithyDocumentSerde
@@ -666,8 +651,8 @@ type SnowconeDeviceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// An object that represents the service or services on the Snow Family device that
-// your transferred data will be exported from or imported into. Amazon Web
+// An object that represents the service or services on the Snow Family device
+// that your transferred data will be exported from or imported into. Amazon Web
 // Services Snow Family supports Amazon S3 and NFS (Network File System).
 type TargetOnDeviceService struct {
 

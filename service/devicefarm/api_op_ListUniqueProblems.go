@@ -15,7 +15,7 @@ import (
 // Gets information about unique problems, such as exceptions or crashes. Unique
 // problems are defined as a single instance of an error across a run, job, or
 // suite. For example, if a call in your application consistently raises an
-// exception (OutOfBoundsException in MyActivity.java:386), ListUniqueProblems
+// exception ( OutOfBoundsException in MyActivity.java:386 ), ListUniqueProblems
 // returns a single entry instead of many individual entries for that exception.
 func (c *Client) ListUniqueProblems(ctx context.Context, params *ListUniqueProblemsInput, optFns ...func(*Options)) (*ListUniqueProblemsOutput, error) {
 	if params == nil {
@@ -40,8 +40,8 @@ type ListUniqueProblemsInput struct {
 	// This member is required.
 	Arn *string
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation,
+	// which can be used to return the next set of items in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -56,14 +56,13 @@ type ListUniqueProblemsOutput struct {
 	NextToken *string
 
 	// Information about the unique problems. Allowed values include:
-	// - PENDING
-	// -
-	// PASSED
-	// - WARNED
-	// - FAILED
-	// - SKIPPED
-	// - ERRORED
-	// - STOPPED
+	//     - PENDING
+	//     - PASSED
+	//     - WARNED
+	//     - FAILED
+	//     - SKIPPED
+	//     - ERRORED
+	//     - STOPPED
 	UniqueProblems map[string][]types.UniqueProblem
 
 	// Metadata pertaining to the operation's result.
@@ -146,8 +145,8 @@ var _ ListUniqueProblemsAPIClient = (*Client)(nil)
 // ListUniqueProblemsPaginatorOptions is the paginator options for
 // ListUniqueProblems
 type ListUniqueProblemsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

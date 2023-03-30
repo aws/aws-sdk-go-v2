@@ -3,8 +3,8 @@
 // Package glacier provides the API client, operations, and parameter types for
 // Amazon Glacier.
 //
-// Amazon S3 Glacier (Glacier) is a storage solution for "cold data." Glacier is an
-// extremely low-cost storage service that provides secure, durable, and
+// Amazon S3 Glacier (Glacier) is a storage solution for "cold data." Glacier is
+// an extremely low-cost storage service that provides secure, durable, and
 // easy-to-use storage for data backup and archival. With Glacier, customers can
 // store their data cost effectively for months, years, or decades. Glacier also
 // enables customers to offload the administrative burdens of operating and scaling
@@ -18,14 +18,6 @@
 // amount of data you can store in Glacier. If you are a first-time user of
 // Glacier, we recommend that you begin by reading the following sections in the
 // Amazon S3 Glacier Developer Guide:
-// - What is Amazon S3 Glacier
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/introduction.html) - This
-// section of the Developer Guide describes the underlying data model, the
-// operations it supports, and the AWS SDKs that you can use to interact with the
-// service.
-// - Getting Started with Amazon S3 Glacier
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/amazon-glacier-getting-started.html)
-// - The Getting Started section walks you through the process of creating a vault,
-// uploading archives, creating jobs to download archives, retrieving the job
-// output, and deleting archives.
+//   - What is Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/introduction.html) - This section of the Developer Guide describes the underlying data model, the operations it supports, and the AWS SDKs that you can use to interact with the service.
+//   - Getting Started with Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/amazon-glacier-getting-started.html) - The Getting Started section walks you through the process of creating a vault, uploading archives, creating jobs to download archives, retrieving the job output, and deleting archives.
 package glacier

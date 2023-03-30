@@ -10,31 +10,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Calling this API causes a message to be sent to the end user with a confirmation
-// code that is required to change the user's password. For the Username parameter,
-// you can use the username or user alias. The method used to send the confirmation
-// code is sent according to the specified AccountRecoverySetting. For more
-// information, see Recovering User Accounts
-// (https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-recover-a-user-account.html)
+// Calling this API causes a message to be sent to the end user with a
+// confirmation code that is required to change the user's password. For the
+// Usernameparameter, you can use the username or user alias. The method used to
+// send the confirmation code is sent according to the specified
+// AccountRecoverySetting. For more information, see Recovering User Accounts (https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-recover-a-user-account.html)
 // in the Amazon Cognito Developer Guide. If neither a verified phone number nor a
 // verified email exists, an InvalidParameterException is thrown. To use the
-// confirmation code for resetting the password, call ConfirmForgotPassword
-// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html).
-// This action might generate an SMS text message. Starting June 1, 2021, US
+// confirmation code for resetting the password, call ConfirmForgotPassword (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html)
+// . This action might generate an SMS text message. Starting June 1, 2021, US
 // telecom carriers require you to register an origination phone number before you
 // can send SMS messages to US phone numbers. If you use SMS text messages in
-// Amazon Cognito, you must register a phone number with Amazon Pinpoint
-// (https://console.aws.amazon.com/pinpoint/home/). Amazon Cognito uses the
-// registered number automatically. Otherwise, Amazon Cognito users who must
-// receive SMS messages might not be able to sign up, activate their accounts, or
-// sign in. If you have never used SMS text messages with Amazon Cognito or any
-// other Amazon Web Service, Amazon Simple Notification Service might place your
-// account in the SMS sandbox. In sandbox mode
-// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you can send
-// messages only to verified phone numbers. After you test your app while in the
-// sandbox environment, you can move out of the sandbox and into production. For
-// more information, see  SMS message settings for Amazon Cognito user pools
-// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
+// Amazon Cognito, you must register a phone number with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/)
+// . Amazon Cognito uses the registered number automatically. Otherwise, Amazon
+// Cognito users who must receive SMS messages might not be able to sign up,
+// activate their accounts, or sign in. If you have never used SMS text messages
+// with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification
+// Service might place your account in the SMS sandbox. In sandbox mode (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html)
+// , you can send messages only to verified phone numbers. After you test your app
+// while in the sandbox environment, you can move out of the sandbox and into
+// production. For more information, see SMS message settings for Amazon Cognito
+// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
 // in the Amazon Cognito Developer Guide.
 func (c *Client) ForgotPassword(ctx context.Context, params *ForgotPasswordInput, optFns ...func(*Options)) (*ForgotPasswordOutput, error) {
 	if params == nil {
@@ -59,8 +55,8 @@ type ForgotPasswordInput struct {
 	// This member is required.
 	ClientId *string
 
-	// The user name of the user for whom you want to enter a code to reset a forgotten
-	// password.
+	// The user name of the user for whom you want to enter a code to reset a
+	// forgotten password.
 	//
 	// This member is required.
 	Username *string
@@ -78,23 +74,17 @@ type ForgotPasswordInput struct {
 	// receives as input. This payload contains a clientMetadata attribute, which
 	// provides the data that you assigned to the ClientMetadata parameter in your
 	// ForgotPassword request. In your function code in Lambda, you can process the
-	// clientMetadata value to enhance your workflow for your specific needs. For more
-	// information, see  Customizing user pool Workflows with Lambda Triggers
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
+	// clientMetadatavalue to enhance your workflow for your specific needs. For more
+	// information, see Customizing user pool Workflows with Lambda Triggers (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
 	// parameter, remember that Amazon Cognito won't do the following:
-	// - Store the
-	// ClientMetadata value. This data is available only to Lambda triggers that are
-	// assigned to a user pool to support custom workflows. If your user pool
-	// configuration doesn't include triggers, the ClientMetadata parameter serves no
-	// purpose.
-	// - Validate the ClientMetadata value.
-	// - Encrypt the ClientMetadata
-	// value. Don't use Amazon Cognito to provide sensitive information.
+	//     - Store the ClientMetadata value. This data is available only to Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration doesn't include triggers, the ClientMetadata parameter serves no purpose.
+	//     - Validate the ClientMetadata value.
+	//     - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide sensitive information.
 	ClientMetadata map[string]string
 
-	// A keyed-hash message authentication code (HMAC) calculated using the secret key
-	// of a user pool client and username plus the client ID in the message.
+	// A keyed-hash message authentication code (HMAC) calculated using the secret
+	// key of a user pool client and username plus the client ID in the message.
 	SecretHash *string
 
 	// Contextual data about your user session, such as the device fingerprint, IP

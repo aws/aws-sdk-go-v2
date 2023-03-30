@@ -28,8 +28,8 @@ func (c *Client) PutKMSEncryptionKey(ctx context.Context, params *PutKMSEncrypti
 
 type PutKMSEncryptionKeyInput struct {
 
-	// The KMS encryption key ARN. The KMS key must be single-Region key. Amazon Fraud
-	// Detector does not support multi-Region KMS key.
+	// The KMS encryption key ARN. The KMS key must be single-Region key. Amazon
+	// Fraud Detector does not support multi-Region KMS key.
 	//
 	// This member is required.
 	KmsEncryptionKeyArn *string

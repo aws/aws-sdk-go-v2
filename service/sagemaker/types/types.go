@@ -64,8 +64,8 @@ type AdditionalInferenceSpecificationDefinition struct {
 	// This member is required.
 	Containers []ModelPackageContainerDefinition
 
-	// A unique name to identify the additional inference specification. The name must
-	// be unique within the list of your additional inference specifications for a
+	// A unique name to identify the additional inference specification. The name
+	// must be unique within the list of your additional inference specifications for a
 	// particular model package.
 	//
 	// This member is required.
@@ -115,79 +115,71 @@ type Alarm struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the training algorithm to use in a CreateTrainingJob request. For more
-// information about algorithms provided by SageMaker, see Algorithms
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html). For information
-// about using your own algorithms, see Using Your Own Algorithms with Amazon
-// SageMaker
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html).
+// Specifies the training algorithm to use in a CreateTrainingJob request. For
+// more information about algorithms provided by SageMaker, see Algorithms (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html)
+// . For information about using your own algorithms, see Using Your Own
+// Algorithms with Amazon SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html)
+// .
 type AlgorithmSpecification struct {
 
-	// The training input mode that the algorithm supports. For more information about
-	// input modes, see Algorithms
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html). Pipe mode If an
-	// algorithm supports Pipe mode, Amazon SageMaker streams data directly from Amazon
-	// S3 to the container. File mode If an algorithm supports File mode, SageMaker
-	// downloads the training data from S3 to the provisioned ML storage volume, and
-	// mounts the directory to the Docker volume for the training container. You must
-	// provision the ML storage volume with sufficient capacity to accommodate the data
-	// downloaded from S3. In addition to the training data, the ML storage volume also
-	// stores the output model. The algorithm container uses the ML storage volume to
-	// also store intermediate information, if any. For distributed algorithms,
-	// training data is distributed uniformly. Your training duration is predictable if
-	// the input data objects sizes are approximately the same. SageMaker does not
-	// split the files any further for model training. If the object sizes are skewed,
-	// training won't be optimal as the data distribution is also skewed when one host
-	// in a training cluster is overloaded, thus becoming a bottleneck in training.
-	// FastFile mode If an algorithm supports FastFile mode, SageMaker streams data
-	// directly from S3 to the container with no code changes, and provides file system
-	// access to the data. Users can author their training script to interact with
-	// these files as if they were stored on disk. FastFile mode works best when the
-	// data is read sequentially. Augmented manifest files aren't supported. The
-	// startup time is lower when there are fewer files in the S3 bucket provided.
+	// The training input mode that the algorithm supports. For more information
+	// about input modes, see Algorithms (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html)
+	// . Pipe mode If an algorithm supports Pipe mode, Amazon SageMaker streams data
+	// directly from Amazon S3 to the container. File mode If an algorithm supports
+	// Filemode, SageMaker downloads the training data from S3 to the provisioned ML
+	// storage volume, and mounts the directory to the Docker volume for the training
+	// container. You must provision the ML storage volume with sufficient capacity to
+	// accommodate the data downloaded from S3. In addition to the training data, the
+	// ML storage volume also stores the output model. The algorithm container uses the
+	// ML storage volume to also store intermediate information, if any. For
+	// distributed algorithms, training data is distributed uniformly. Your training
+	// duration is predictable if the input data objects sizes are approximately the
+	// same. SageMaker does not split the files any further for model training. If the
+	// object sizes are skewed, training won't be optimal as the data distribution is
+	// also skewed when one host in a training cluster is overloaded, thus becoming a
+	// bottleneck in training. FastFile mode If an algorithm supports FastFile mode,
+	// SageMaker streams data directly from S3 to the container with no code changes,
+	// and provides file system access to the data. Users can author their training
+	// script to interact with these files as if they were stored on disk. FastFile
+	// mode works best when the data is read sequentially. Augmented manifest files
+	// aren't supported. The startup time is lower when there are fewer files in the S3
+	// bucket provided.
 	//
 	// This member is required.
 	TrainingInputMode TrainingInputMode
 
-	// The name of the algorithm resource to use for the training job. This must be an
-	// algorithm resource that you created or subscribe to on Amazon Web Services
+	// The name of the algorithm resource to use for the training job. This must be
+	// an algorithm resource that you created or subscribe to on Amazon Web Services
 	// Marketplace. You must specify either the algorithm name to the AlgorithmName
 	// parameter or the image URI of the algorithm container to the TrainingImage
-	// parameter. Note that the AlgorithmName parameter is mutually exclusive with the
-	// TrainingImage parameter. If you specify a value for the AlgorithmName parameter,
-	// you can't specify a value for TrainingImage, and vice versa. If you specify
-	// values for both parameters, the training job might break; if you don't specify
-	// any value for both parameters, the training job might raise a null error.
+	// parameter. Note that the AlgorithmName parameter is mutually exclusive with
+	// the TrainingImage  parameter. If you specify a value for the AlgorithmName
+	// parameter, you can't specify a value for TrainingImage, and vice versa. If you
+	// specify values for both parameters, the training job might break; if you don't
+	// specify any value for both parameters, the training job might raise a null
+	// error.
 	AlgorithmName *string
 
 	// The arguments for a container used to run a training job. See How Amazon
-	// SageMaker Runs Your Training Image
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo-dockerfile.html)
+	// SageMaker Runs Your Training Image (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo-dockerfile.html)
 	// for additional information.
 	ContainerArguments []string
 
-	// The entrypoint script for a Docker container
-	// (https://docs.docker.com/engine/reference/builder/) used to run a training job.
-	// This script takes precedence over the default train processing instructions. See
-	// How Amazon SageMaker Runs Your Training Image
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo-dockerfile.html)
+	// The entrypoint script for a Docker container (https://docs.docker.com/engine/reference/builder/)
+	// used to run a training job. This script takes precedence over the default train
+	// processing instructions. See How Amazon SageMaker Runs Your Training Image (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo-dockerfile.html)
 	// for more information.
 	ContainerEntrypoint []string
 
 	// To generate and save time-series metrics during training, set to true. The
 	// default is false and time-series metrics aren't generated except in the
 	// following cases:
-	// - You use one of the SageMaker built-in algorithms
-	// - You use
-	// one of the following Prebuilt SageMaker Docker Images
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/pre-built-containers-frameworks-deep-learning.html):
-	// -
-	// Tensorflow (version >= 1.15)
-	// - MXNet (version >= 1.6)
-	// - PyTorch (version >=
-	// 1.3)
-	//
-	// - You specify at least one MetricDefinition
+	//     - You use one of the SageMaker built-in algorithms
+	//     - You use one of the following Prebuilt SageMaker Docker Images (https://docs.aws.amazon.com/sagemaker/latest/dg/pre-built-containers-frameworks-deep-learning.html) :
+	//         - Tensorflow (version >= 1.15)
+	//         - MXNet (version >= 1.6)
+	//         - PyTorch (version >= 1.3)
+	//     - You specify at least one MetricDefinition
 	EnableSageMakerMetricsTimeSeries bool
 
 	// A list of metric definition objects. Each object specifies the metric name and
@@ -195,22 +187,20 @@ type AlgorithmSpecification struct {
 	// metric to Amazon CloudWatch.
 	MetricDefinitions []MetricDefinition
 
-	// The registry path of the Docker image that contains the training algorithm. For
-	// information about docker registry paths for SageMaker built-in algorithms, see
-	// Docker Registry Paths and Example Code
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html)
+	// The registry path of the Docker image that contains the training algorithm.
+	// For information about docker registry paths for SageMaker built-in algorithms,
+	// see Docker Registry Paths and Example Code (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html)
 	// in the Amazon SageMaker developer guide. SageMaker supports both
 	// registry/repository[:tag] and registry/repository[@digest] image path formats.
-	// For more information about using your custom training container, see Using Your
-	// Own Algorithms with Amazon SageMaker
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html). You must
-	// specify either the algorithm name to the AlgorithmName parameter or the image
-	// URI of the algorithm container to the TrainingImage parameter. For more
-	// information, see the note in the AlgorithmName parameter description.
+	// For more information about using your custom training container, see Using
+	// Your Own Algorithms with Amazon SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html)
+	// . You must specify either the algorithm name to the AlgorithmName parameter or
+	// the image URI of the algorithm container to the TrainingImage parameter. For
+	// more information, see the note in the AlgorithmName  parameter description.
 	TrainingImage *string
 
-	// The configuration to use an image from a private Docker registry for a training
-	// job.
+	// The configuration to use an image from a private Docker registry for a
+	// training job.
 	TrainingImageConfig *TrainingImageConfig
 
 	noSmithyDocumentSerde
@@ -241,7 +231,7 @@ type AlgorithmStatusItem struct {
 	// This member is required.
 	Status DetailedAlgorithmStatus
 
-	// if the overall status is Failed, the reason for the failure.
+	// if the overall status is Failed , the reason for the failure.
 	FailureReason *string
 
 	noSmithyDocumentSerde
@@ -276,9 +266,9 @@ type AlgorithmSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Defines a training job and a batch transform job that SageMaker runs to validate
-// your algorithm. The data provided in the validation profile is made available to
-// your buyers on Amazon Web Services Marketplace.
+// Defines a training job and a batch transform job that SageMaker runs to
+// validate your algorithm. The data provided in the validation profile is made
+// available to your buyers on Amazon Web Services Marketplace.
 type AlgorithmValidationProfile struct {
 
 	// The name of the profile for the algorithm. The name must have 1 to 63
@@ -287,8 +277,8 @@ type AlgorithmValidationProfile struct {
 	// This member is required.
 	ProfileName *string
 
-	// The TrainingJobDefinition object that describes the training job that SageMaker
-	// runs to validate your algorithm.
+	// The TrainingJobDefinition object that describes the training job that
+	// SageMaker runs to validate your algorithm.
 	//
 	// This member is required.
 	TrainingJobDefinition *TrainingJobDefinition
@@ -319,661 +309,374 @@ type AlgorithmValidationSpecification struct {
 	noSmithyDocumentSerde
 }
 
-// Configures how labels are consolidated across human workers and processes output
-// data.
+// Configures how labels are consolidated across human workers and processes
+// output data.
 type AnnotationConsolidationConfig struct {
 
 	// The Amazon Resource Name (ARN) of a Lambda function implements the logic for
-	// annotation consolidation
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html)
+	// annotation consolidation (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html)
 	// and to process output data. This parameter is required for all labeling jobs.
-	// For built-in task types
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html), use one
-	// of the following Amazon SageMaker Ground Truth Lambda function ARNs for
-	// AnnotationConsolidationLambdaArn. For custom labeling workflows, see
-	// Post-annotation Lambda
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step3.html#sms-custom-templates-step3-postlambda).
-	// Bounding box - Finds the most similar boxes from different workers based on the
-	// Jaccard index of the boxes.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-BoundingBox
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-BoundingBox
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-BoundingBox
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-BoundingBox
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-BoundingBox
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-BoundingBox
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-BoundingBox
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-BoundingBox
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-BoundingBox
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-BoundingBox
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-BoundingBox
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-BoundingBox
-	//
+	// For built-in task types (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html)
+	// , use one of the following Amazon SageMaker Ground Truth Lambda function ARNs
+	// for AnnotationConsolidationLambdaArn . For custom labeling workflows, see
+	// Post-annotation Lambda (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step3.html#sms-custom-templates-step3-postlambda)
+	// . Bounding box - Finds the most similar boxes from different workers based on
+	// the Jaccard index of the boxes.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-BoundingBox
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-BoundingBox
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-BoundingBox
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-BoundingBox
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-BoundingBox
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-BoundingBox
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-BoundingBox
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-BoundingBox
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-BoundingBox
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-BoundingBox
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-BoundingBox
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-BoundingBox
 	// Image
 	// classification - Uses a variant of the Expectation Maximization approach to
 	// estimate the true class of an image based on annotations from individual
 	// workers.
-	// - arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClass
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClass
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClass
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClass
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClass
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClass
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-ImageMultiClass
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-ImageMultiClass
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-ImageMultiClass
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-ImageMultiClass
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-ImageMultiClass
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClass
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClass
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClass
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClass
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClass
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClass
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClass
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-ImageMultiClass
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-ImageMultiClass
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-ImageMultiClass
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-ImageMultiClass
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-ImageMultiClass
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClass
 	//
-	// Multi-label
-	// image classification - Uses a variant of the Expectation Maximization approach
-	// to estimate the true classes of an image based on annotations from individual
-	// workers.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClassMultiLabel
+	// Multi-label image classification - Uses a variant of the Expectation
+	// Maximization approach to estimate the true classes of an image based on
+	// annotations from individual workers.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClassMultiLabel
 	//
-	// Semantic
-	// segmentation - Treats each pixel in an image as a multi-class classification and
-	// treats pixel annotations from workers as "votes" for the correct label.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-SemanticSegmentation
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-SemanticSegmentation
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-SemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-SemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-SemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-SemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-SemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-SemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-SemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-SemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-SemanticSegmentation
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-SemanticSegmentation
+	// Semantic segmentation - Treats each pixel in an image as a multi-class
+	// classification and treats pixel annotations from workers as "votes" for the
+	// correct label.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-SemanticSegmentation
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-SemanticSegmentation
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-SemanticSegmentation
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-SemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-SemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-SemanticSegmentation
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-SemanticSegmentation
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-SemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-SemanticSegmentation
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-SemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-SemanticSegmentation
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-SemanticSegmentation
 	//
-	// Text
-	// classification - Uses a variant of the Expectation Maximization approach to
+	// Text classification - Uses a variant of the Expectation Maximization approach to
 	// estimate the true class of text based on annotations from individual workers.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClass
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClass
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClass
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClass
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClass
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClass
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-TextMultiClass
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-TextMultiClass
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-TextMultiClass
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-TextMultiClass
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClass
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClass
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClass
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClass
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClass
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClass
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClass
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClass
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-TextMultiClass
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-TextMultiClass
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-TextMultiClass
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-TextMultiClass
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClass
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClass
 	//
-	// Multi-label
-	// text classification - Uses a variant of the Expectation Maximization approach to
-	// estimate the true classes of text based on annotations from individual
-	// workers.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClassMultiLabel
+	// Multi-label text classification - Uses a variant of the Expectation Maximization
+	// approach to estimate the true classes of text based on annotations from
+	// individual workers.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClassMultiLabel
 	//
-	// Named
-	// entity recognition - Groups similar selections and calculates aggregate
+	// Named entity recognition - Groups similar selections and calculates aggregate
 	// boundaries, resolving to most-assigned label.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-NamedEntityRecognition
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognition
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-NamedEntityRecognition
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-NamedEntityRecognition
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-NamedEntityRecognition
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-NamedEntityRecognition
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-NamedEntityRecognition
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-NamedEntityRecognition
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-NamedEntityRecognition
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-NamedEntityRecognition
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-NamedEntityRecognition
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-NamedEntityRecognition
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-NamedEntityRecognition
 	//
-	// Video
-	// Classification - Use this task type when you need workers to classify videos
-	// using predefined labels that you specify. Workers are shown videos and are asked
-	// to choose one label for each video.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-VideoMultiClass
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-VideoMultiClass
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-VideoMultiClass
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-VideoMultiClass
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VideoMultiClass
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VideoMultiClass
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-VideoMultiClass
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-VideoMultiClass
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VideoMultiClass
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-VideoMultiClass
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VideoMultiClass
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-VideoMultiClass
+	// Video Classification - Use this task type when you need workers to classify
+	// videos using predefined labels that you specify. Workers are shown videos and
+	// are asked to choose one label for each video.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-VideoMultiClass
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-VideoMultiClass
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-VideoMultiClass
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-VideoMultiClass
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VideoMultiClass
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VideoMultiClass
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-VideoMultiClass
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-VideoMultiClass
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VideoMultiClass
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-VideoMultiClass
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VideoMultiClass
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-VideoMultiClass
 	//
-	// Video
-	// Frame Object Detection - Use this task type to have workers identify and locate
-	// objects in a sequence of video frames (images extracted from a video) using
-	// bounding boxes. For example, you can use this task to ask workers to identify
-	// and localize various objects in a series of video frames, such as cars, bikes,
-	// and pedestrians.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-VideoObjectDetection
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-VideoObjectDetection
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-VideoObjectDetection
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-VideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-VideoObjectDetection
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-VideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VideoObjectDetection
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-VideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VideoObjectDetection
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-VideoObjectDetection
+	// Video Frame Object Detection - Use this task type to have workers identify and
+	// locate objects in a sequence of video frames (images extracted from a video)
+	// using bounding boxes. For example, you can use this task to ask workers to
+	// identify and localize various objects in a series of video frames, such as cars,
+	// bikes, and pedestrians.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-VideoObjectDetection
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-VideoObjectDetection
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-VideoObjectDetection
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-VideoObjectDetection
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VideoObjectDetection
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VideoObjectDetection
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-VideoObjectDetection
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-VideoObjectDetection
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VideoObjectDetection
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-VideoObjectDetection
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VideoObjectDetection
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-VideoObjectDetection
 	//
-	// Video
-	// Frame Object Tracking - Use this task type to have workers track the movement of
-	// objects in a sequence of video frames (images extracted from a video) using
-	// bounding boxes. For example, you can use this task to ask workers to track the
-	// movement of objects, such as cars, bikes, and pedestrians.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-VideoObjectTracking
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-VideoObjectTracking
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-VideoObjectTracking
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-VideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-VideoObjectTracking
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-VideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VideoObjectTracking
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-VideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VideoObjectTracking
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-VideoObjectTracking
+	// Video Frame Object Tracking - Use this task type to have workers track the
+	// movement of objects in a sequence of video frames (images extracted from a
+	// video) using bounding boxes. For example, you can use this task to ask workers
+	// to track the movement of objects, such as cars, bikes, and pedestrians.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-VideoObjectTracking
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-VideoObjectTracking
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-VideoObjectTracking
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-VideoObjectTracking
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VideoObjectTracking
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VideoObjectTracking
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-VideoObjectTracking
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-VideoObjectTracking
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VideoObjectTracking
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-VideoObjectTracking
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VideoObjectTracking
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-VideoObjectTracking
 	//
-	// 3D
-	// Point Cloud Object Detection - Use this task type when you want workers to
+	// 3D Point Cloud Object Detection - Use this task type when you want workers to
 	// classify objects in a 3D point cloud by drawing 3D cuboids around objects. For
 	// example, you can use this task type to ask workers to identify different types
 	// of objects in a point cloud, such as cars, bikes, and pedestrians.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudObjectDetection
 	//
-	// 3D
-	// Point Cloud Object Tracking - Use this task type when you want workers to draw
-	// 3D cuboids around objects that appear in a sequence of 3D point cloud frames.
-	// For example, you can use this task type to ask workers to track the movement of
-	// vehicles across multiple point cloud frames.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudObjectTracking
+	// 3D Point Cloud Object Tracking - Use this task type when you want workers to
+	// draw 3D cuboids around objects that appear in a sequence of 3D point cloud
+	// frames. For example, you can use this task type to ask workers to track the
+	// movement of vehicles across multiple point cloud frames.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudObjectTracking
 	//
-	// 3D
-	// Point Cloud Semantic Segmentation - Use this task type when you want workers to
-	// create a point-level semantic segmentation masks by painting objects in a 3D
+	// 3D Point Cloud Semantic Segmentation - Use this task type when you want workers
+	// to create a point-level semantic segmentation masks by painting objects in a 3D
 	// point cloud using different colors where each color is assigned to one of the
 	// classes you specify.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudSemanticSegmentation
 	//
-	// Use
-	// the following ARNs for Label Verification and Adjustment Jobs Use label
+	// Use the following ARNs for Label Verification and Adjustment Jobs Use label
 	// verification and adjustment jobs to review and adjust labels. To learn more, see
-	// Verify and Adjust Labels
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-verification-data.html).
-	// Semantic Segmentation Adjustment - Treats each pixel in an image as a
+	//
+	// Verify and Adjust Labels  (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-verification-data.html)
+	// . Semantic Segmentation Adjustment - Treats each pixel in an image as a
 	// multi-class classification and treats pixel adjusted annotations from workers as
 	// "votes" for the correct label.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentSemanticSegmentation
 	//
-	// Semantic
-	// Segmentation Verification - Uses a variant of the Expectation Maximization
-	// approach to estimate the true class of verification judgment for semantic
-	// segmentation labels based on annotations from individual workers.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationSemanticSegmentation
+	// Semantic Segmentation Verification - Uses a variant of the Expectation
+	// Maximization approach to estimate the true class of verification judgment for
+	// semantic segmentation labels based on annotations from individual workers.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationSemanticSegmentation
 	//
-	// Bounding
-	// Box Adjustment - Finds the most similar boxes from different workers based on
-	// the Jaccard index of the adjusted annotations.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentBoundingBox
+	// Bounding Box Adjustment - Finds the most similar boxes from different workers
+	// based on the Jaccard index of the adjusted annotations.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentBoundingBox
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentBoundingBox
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentBoundingBox
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentBoundingBox
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentBoundingBox
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentBoundingBox
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentBoundingBox
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentBoundingBox
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentBoundingBox
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentBoundingBox
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentBoundingBox
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentBoundingBox
 	//
-	// Bounding
-	// Box Verification - Uses a variant of the Expectation Maximization approach to
-	// estimate the true class of verification judgement for bounding box labels based
-	// on annotations from individual workers.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationBoundingBox
+	// Bounding Box Verification - Uses a variant of the Expectation Maximization
+	// approach to estimate the true class of verification judgement for bounding box
+	// labels based on annotations from individual workers.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationBoundingBox
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationBoundingBox
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationBoundingBox
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationBoundingBox
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationBoundingBox
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationBoundingBox
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationBoundingBox
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationBoundingBox
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationBoundingBox
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationBoundingBox
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationBoundingBox
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationBoundingBox
 	//
-	// Video
-	// Frame Object Detection Adjustment - Use this task type when you want workers to
-	// adjust bounding boxes that workers have added to video frames to classify and
-	// localize objects in a sequence of video frames.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentVideoObjectDetection
+	// Video Frame Object Detection Adjustment - Use this task type when you want
+	// workers to adjust bounding boxes that workers have added to video frames to
+	// classify and localize objects in a sequence of video frames.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentVideoObjectDetection
 	//
-	// Video
-	// Frame Object Tracking Adjustment - Use this task type when you want workers to
-	// adjust bounding boxes that workers have added to video frames to track object
-	// movement across a sequence of video frames.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentVideoObjectTracking
+	// Video Frame Object Tracking Adjustment - Use this task type when you want
+	// workers to adjust bounding boxes that workers have added to video frames to
+	// track object movement across a sequence of video frames.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentVideoObjectTracking
 	//
-	// 3D
-	// Point Cloud Object Detection Adjustment - Use this task type when you want
+	// 3D Point Cloud Object Detection Adjustment - Use this task type when you want
 	// workers to adjust 3D cuboids around objects in a 3D point cloud.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudObjectDetection
 	//
-	// 3D
-	// Point Cloud Object Tracking Adjustment - Use this task type when you want
+	// 3D Point Cloud Object Tracking Adjustment - Use this task type when you want
 	// workers to adjust 3D cuboids around objects that appear in a sequence of 3D
 	// point cloud frames.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudObjectTracking
 	//
-	// 3D
-	// Point Cloud Semantic Segmentation Adjustment - Use this task type when you want
-	// workers to adjust a point-level semantic segmentation masks using a paint
+	// 3D Point Cloud Semantic Segmentation Adjustment - Use this task type when you
+	// want workers to adjust a point-level semantic segmentation masks using a paint
 	// tool.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudSemanticSegmentation
 	//
 	// This member is required.
 	AnnotationConsolidationLambdaArn *string
@@ -1101,8 +804,8 @@ type ArtifactSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Lists a summary of the properties of an association. An association is an entity
-// that links other lineage or experiment entities. An example would be an
+// Lists a summary of the properties of an association. An association is an
+// entity that links other lineage or experiment entities. An example would be an
 // association between a training job and a model.
 type AssociationSummary struct {
 
@@ -1167,8 +870,8 @@ type AsyncInferenceConfig struct {
 // asynchronous inference.
 type AsyncInferenceNotificationConfig struct {
 
-	// Amazon SNS topic to post a notification to when inference fails. If no topic is
-	// provided, no notification is sent on failure.
+	// Amazon SNS topic to post a notification to when inference fails. If no topic
+	// is provided, no notification is sent on failure.
 	ErrorTopic *string
 
 	// Amazon SNS topic to post a notification to when inference completes
@@ -1239,32 +942,27 @@ type AthenaDatasetDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// The collection of algorithms run on a dataset for training the model candidates
-// of an Autopilot job.
+// The collection of algorithms run on a dataset for training the model
+// candidates of an Autopilot job.
 type AutoMLAlgorithmConfig struct {
 
-	// The selection of algorithms run on a dataset to train the model candidates of an
-	// Autopilot job. Selected algorithms must belong to the list corresponding to the
-	// training mode set in AutoMLJobConfig.Mode
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html#sagemaker-Type-AutoMLJobConfig-Mode)
-	// (ENSEMBLING or HYPERPARAMETER_TUNING). Choose a minimum of 1 algorithm.
-	// - In
-	// ENSEMBLING mode:
-	// - "catboost"
-	// - "extra-trees"
-	// - "fastai"
-	// - "lightgbm"
-	// -
-	// "linear-learner"
-	// - "nn-torch"
-	// - "randomforest"
-	// - "xgboost"
-	//
-	// - In
-	// HYPERPARAMETER_TUNING mode:
-	// - "linear-learner"
-	// - "mlp"
-	// - "xgboost"
+	// The selection of algorithms run on a dataset to train the model candidates of
+	// an Autopilot job. Selected algorithms must belong to the list corresponding to
+	// the training mode set in AutoMLJobConfig.Mode (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html#sagemaker-Type-AutoMLJobConfig-Mode)
+	// ( ENSEMBLING  or HYPERPARAMETER_TUNING ). Choose a minimum of 1 algorithm.
+	//     - In ENSEMBLING mode:
+	//         - "catboost"
+	//         - "extra-trees"
+	//         - "fastai"
+	//         - "lightgbm"
+	//         - "linear-learner"
+	//         - "nn-torch"
+	//         - "randomforest"
+	//         - "xgboost"
+	//     - In HYPERPARAMETER_TUNING mode:
+	//         - "linear-learner"
+	//         - "mlp"
+	//         - "xgboost"
 	//
 	// This member is required.
 	AutoMLAlgorithms []AutoMLAlgorithm
@@ -1272,8 +970,8 @@ type AutoMLAlgorithmConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a candidate produced by an AutoML training job, including its
-// status, steps, and other properties.
+// Information about a candidate produced by an AutoML training job, including
+// its status, steps, and other properties.
 type AutoMLCandidate struct {
 
 	// The name of the candidate.
@@ -1320,7 +1018,7 @@ type AutoMLCandidate struct {
 
 	// The mapping of all supported processing unit (CPU, GPU, etc...) to inference
 	// container definitions for the candidate. This field is populated for the V2 API
-	// only (for example, for jobs created by calling CreateAutoMLJobV2).
+	// only (for example, for jobs created by calling CreateAutoMLJobV2 ).
 	InferenceContainerDefinitions map[string][]AutoMLContainerDefinition
 
 	// Information about the recommended inference container definitions.
@@ -1335,43 +1033,34 @@ type AutoMLCandidateGenerationConfig struct {
 
 	// Stores the configuration information for the selection of algorithms used to
 	// train the model candidates. The list of available algorithms to choose from
-	// depends on the training mode set in AutoMLJobConfig.Mode
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html).
-	// -
-	// AlgorithmsConfig should not be set in AUTO training mode.
-	// - When
-	// AlgorithmsConfig is provided, one AutoMLAlgorithms attribute must be set and one
-	// only. If the list of algorithms provided as values for AutoMLAlgorithms is
-	// empty, AutoMLCandidateGenerationConfig uses the full set of algorithms for the
-	// given training mode.
-	// - When AlgorithmsConfig is not provided,
-	// AutoMLCandidateGenerationConfig uses the full set of algorithms for the given
-	// training mode.
+	// depends on the training mode set in AutoMLJobConfig.Mode (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html)
+	// .
+	//     - AlgorithmsConfig should not be set in AUTO training mode.
+	//     - When AlgorithmsConfig is provided, one AutoMLAlgorithms attribute must be set and one only. If the list of algorithms provided as values for AutoMLAlgorithms is empty, AutoMLCandidateGenerationConfig uses the full set of algorithms for the given training mode.
+	//     - When AlgorithmsConfig is not provided, AutoMLCandidateGenerationConfig uses the full set of algorithms for the given training mode.
 	//
-	// For the list of all algorithms per training mode, see
-	// AutoMLAlgorithmConfig
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html).
-	// For more information on each algorithm, see the Algorithm support
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support)
+	// For the list of all algorithms per training mode, see AutoMLAlgorithmConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html)
+	// . For more information on each algorithm, see the Algorithm support (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support)
 	// section in Autopilot developer guide.
 	AlgorithmsConfig []AutoMLAlgorithmConfig
 
 	// A URL to the Amazon S3 data source containing selected features from the input
 	// data source to run an Autopilot job. You can input FeatureAttributeNames
 	// (optional) in JSON format as shown below: { "FeatureAttributeNames":["col1",
-	// "col2", ...] }. You can also specify the data type of the feature (optional) in
-	// the format shown below: { "FeatureDataTypes":{"col1":"numeric",
-	// "col2":"categorical" ... } } These column keys may not include the target
+	// "col2", ...] }. You can also specify the data type of the feature (optional)
+	// in the format shown below: { "FeatureDataTypes":{"col1":"numeric",
+	// "col2":"categorical" ... } }These column keys may not include the target
 	// column. In ensembling mode, Autopilot only supports the following data types:
-	// numeric, categorical, text, and datetime. In HPO mode, Autopilot can support
-	// numeric, categorical, text, datetime, and sequence. If only FeatureDataTypes is
-	// provided, the column keys (col1, col2,..) should be a subset of the column names
-	// in the input data. If both FeatureDataTypes and FeatureAttributeNames are
-	// provided, then the column keys should be a subset of the column names provided
-	// in FeatureAttributeNames. The key name FeatureAttributeNames is fixed. The
-	// values listed in ["col1", "col2", ...] are case sensitive and should be a list
-	// of strings containing unique values that are a subset of the column names in the
-	// input data. The list of columns provided must not include the target column.
+	// numeric , categorical , text , and datetime. In HPO mode, Autopilot can
+	// support numeric , categorical , text , datetime , and sequence . If only
+	// FeatureDataTypes is provided, the column keys ( col1 , col2,..) should be a
+	// subset of the column names in the input data. If both FeatureDataTypes  and
+	// FeatureAttributeNamesare provided, then the column keys should be a subset of
+	// the column names provided in FeatureAttributeNames . The key name
+	// FeatureAttributeNames is fixed. The values listed in ["col1", "col2", ...] are
+	// case sensitive and should be a list of strings containing unique values that are
+	// a subset of the column names in the input data. The list of columns provided
+	// must not include the target column.
 	FeatureSpecificationS3Uri *string
 
 	noSmithyDocumentSerde
@@ -1400,9 +1089,8 @@ type AutoMLCandidateStep struct {
 
 // A channel is a named input source that training algorithms can consume. The
 // validation dataset size is limited to less than 2 GB. The training dataset size
-// must be less than 100 GB. For more information, see  Channel
-// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Channel.html). A
-// validation dataset must contain the same headers as the training dataset.
+// must be less than 100 GB. For more information, see Channel (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Channel.html)
+// . A validation dataset must contain the same headers as the training dataset.
 type AutoMLChannel struct {
 
 	// The data source for an AutoML channel.
@@ -1416,46 +1104,46 @@ type AutoMLChannel struct {
 	// This member is required.
 	TargetAttributeName *string
 
-	// The channel type (optional) is an enum string. The default value is training.
-	// Channels for training and validation must share the same ContentType and
+	// The channel type (optional) is an enum  string. The default value is training.
+	// Channels for training and validation must share the same ContentType  and
 	// TargetAttributeName. For information on specifying training and validation
-	// channel types, see How to specify training and validation datasets
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-data-sources-training-or-validation).
+	// channel types, see How to specify training and validation datasets (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-data-sources-training-or-validation)
+	// .
 	ChannelType AutoMLChannelType
 
-	// You can use Gzip or None. The default value is None.
+	// You can use Gzip  or None . The default value is None .
 	CompressionType CompressionType
 
 	// The content type of the data from the input source. You can use
 	// text/csv;header=present or x-application/vnd.amazon+parquet. The default value
-	// is text/csv;header=present.
+	// is text/csv;header=present .
 	ContentType *string
 
 	noSmithyDocumentSerde
 }
 
-// A list of container definitions that describe the different containers that make
-// up an AutoML candidate. For more information, see  ContainerDefinition
-// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html).
+// A list of container definitions that describe the different containers that
+// make up an AutoML candidate. For more information, see ContainerDefinition (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html)
+// .
 type AutoMLContainerDefinition struct {
 
 	// The Amazon Elastic Container Registry (Amazon ECR) path of the container. For
-	// more information, see  ContainerDefinition
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html).
+	// more information, see ContainerDefinition (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html)
+	// .
 	//
 	// This member is required.
 	Image *string
 
 	// The location of the model artifacts. For more information, see
-	// ContainerDefinition
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html).
+	// ContainerDefinition (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html)
+	// .
 	//
 	// This member is required.
 	ModelDataUrl *string
 
 	// The environment variables to set in the container. For more information, see
-	// ContainerDefinition
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html).
+	// ContainerDefinition (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html)
+	// .
 	Environment map[string]string
 
 	noSmithyDocumentSerde
@@ -1474,16 +1162,16 @@ type AutoMLDataSource struct {
 
 // This structure specifies how to split the data into train and validation
 // datasets. If you are using the V1 API (for example CreateAutoMLJob) or the V2
-// API for Natural Language Processing problems (for example CreateAutoMLJobV2 with
-// a TextClassificationJobConfig problem type), the validation and training
+// API for Natural Language Processing problems (for example CreateAutoMLJobV2
+// with a TextClassificationJobConfig problem type), the validation and training
 // datasets must contain the same headers. Also, for V1 API jobs, the validation
 // dataset must be less than 2 GB in size.
 type AutoMLDataSplitConfig struct {
 
-	// The validation fraction (optional) is a float that specifies the portion of the
-	// training dataset to be used for validation. The default value is 0.2, and values
-	// must be greater than 0 and less than 1. We recommend setting this value to be
-	// less than 0.5.
+	// The validation fraction (optional) is a float that specifies the portion of
+	// the training dataset to be used for validation. The default value is 0.2, and
+	// values must be greater than 0 and less than 1. We recommend setting this value
+	// to be less than 0.5.
 	ValidationFraction *float32
 
 	noSmithyDocumentSerde
@@ -1503,30 +1191,26 @@ type AutoMLJobArtifacts struct {
 
 // A channel is a named input source that training algorithms can consume. This
 // channel is used for the non tabular training data of an AutoML job using the V2
-// API. For tabular training data, see  AutoMLChannel
-// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLChannel.html).
-// For more information, see  Channel
-// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Channel.html).
+// API. For tabular training data, see AutoMLChannel (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLChannel.html)
+// . For more information, see Channel (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Channel.html)
+// .
 type AutoMLJobChannel struct {
 
 	// The type of channel. Defines whether the data are used for training or
-	// validation. The default value is training. Channels for training and validation
-	// must share the same ContentType
+	// validation. The default value is training . Channels for training  and
+	// validation must share the same ContentType
 	ChannelType AutoMLChannelType
 
 	// The allowed compression types depend on the input format. We allow the
-	// compression type Gzip for S3Prefix inputs only. For all other inputs, the
-	// compression type should be None. If no compression type is provided, we default
-	// to None.
+	// compression type Gzip  for S3Prefix inputs only. For all other inputs, the
+	// compression type should be None. If no compression type is provided, we
+	// default to None .
 	CompressionType CompressionType
 
 	// The content type of the data from the input source. The following are the
 	// allowed content types for different problems:
-	//
-	// * ImageClassification: image/png,
-	// image/jpeg, image/*
-	//
-	// * TextClassification: text/csv;header=present
+	//     - ImageClassification: image/png , image/jpeg , image/*
+	//     - TextClassification: text/csv;header=present
 	ContentType *string
 
 	// The data source for an AutoML channel.
@@ -1539,23 +1223,22 @@ type AutoMLJobChannel struct {
 // generate.
 type AutoMLJobCompletionCriteria struct {
 
-	// The maximum runtime, in seconds, an AutoML job has to complete. If an AutoML job
-	// exceeds the maximum runtime, the job is stopped automatically and its processing
-	// is ended gracefully. The AutoML job identifies the best model whose training was
-	// completed and marks it as the best-performing model. Any unfinished steps of the
-	// job, such as automatic one-click Autopilot model deployment, are not completed.
+	// The maximum runtime, in seconds, an AutoML job has to complete. If an AutoML
+	// job exceeds the maximum runtime, the job is stopped automatically and its
+	// processing is ended gracefully. The AutoML job identifies the best model whose
+	// training was completed and marks it as the best-performing model. Any unfinished
+	// steps of the job, such as automatic one-click Autopilot model deployment, are
+	// not completed.
 	MaxAutoMLJobRuntimeInSeconds *int32
 
-	// The maximum number of times a training job is allowed to run. For V2 jobs (jobs
-	// created by calling CreateAutoMLJobV2), the supported value is 1.
+	// The maximum number of times a training job is allowed to run. For V2 jobs
+	// (jobs created by calling CreateAutoMLJobV2 ), the supported value is 1.
 	MaxCandidates *int32
 
 	// The maximum time, in seconds, that each training job executed inside
 	// hyperparameter tuning is allowed to run as part of a hyperparameter tuning job.
-	// For more information, see the StoppingCondition
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StoppingCondition.html)
-	// used by the CreateHyperParameterTuningJob
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateHyperParameterTuningJob.html)
+	// For more information, see the StoppingCondition (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StoppingCondition.html)
+	// used by the CreateHyperParameterTuningJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateHyperParameterTuningJob.html)
 	// action. For V2 jobs (jobs created by calling CreateAutoMLJobV2), this field
 	// controls the runtime of the job candidate.
 	MaxRuntimePerTrainingJobInSeconds *int32
@@ -1579,22 +1262,20 @@ type AutoMLJobConfig struct {
 
 	// The method that Autopilot uses to train the data. You can either specify the
 	// mode manually or let Autopilot choose for you based on the dataset size by
-	// selecting AUTO. In AUTO mode, Autopilot chooses ENSEMBLING for datasets smaller
-	// than 100 MB, and HYPERPARAMETER_TUNING for larger ones. The ENSEMBLING mode uses
-	// a multi-stack ensemble model to predict classification and regression tasks
-	// directly from your dataset. This machine learning mode combines several base
-	// models to produce an optimal predictive model. It then uses a stacking ensemble
-	// method to combine predictions from contributing members. A multi-stack ensemble
-	// model can provide better performance over a single model by combining the
-	// predictive capabilities of multiple models. See Autopilot algorithm support
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt)
-	// for a list of algorithms supported by ENSEMBLING mode. The HYPERPARAMETER_TUNING
-	// (HPO) mode uses the best hyperparameters to train the best version of a model.
-	// HPO automatically selects an algorithm for the type of problem you want to
-	// solve. Then HPO finds the best hyperparameters according to your objective
-	// metric. See Autopilot algorithm support
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt)
-	// for a list of algorithms supported by HYPERPARAMETER_TUNING mode.
+	// selecting AUTO . In AUTO  mode, Autopilot chooses ENSEMBLING for datasets
+	// smaller than 100 MB, and HYPERPARAMETER_TUNING  for larger ones. The ENSEMBLING
+	// mode uses a multi-stack ensemble model to predict classification and regression
+	// tasks directly from your dataset. This machine learning mode combines several
+	// base models to produce an optimal predictive model. It then uses a stacking
+	// ensemble method to combine predictions from contributing members. A multi-stack
+	// ensemble model can provide better performance over a single model by combining
+	// the predictive capabilities of multiple models. See Autopilot algorithm support (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt)
+	// for a list of algorithms supported by ENSEMBLING  mode. The
+	// HYPERPARAMETER_TUNING(HPO) mode uses the best hyperparameters to train the
+	// best version of a model. HPO automatically selects an algorithm for the type of
+	// problem you want to solve. Then HPO finds the best hyperparameters according to
+	// your objective metric. See Autopilot algorithm support (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt)
+	// for a list of algorithms supported by HYPERPARAMETER_TUNING  mode.
 	Mode AutoMLMode
 
 	// The security configuration for traffic encryption or Amazon VPC settings.
@@ -1604,7 +1285,7 @@ type AutoMLJobConfig struct {
 }
 
 // Specifies a metric to minimize or maximize as the objective of a job. V2 API
-// jobs (for example jobs created by calling CreateAutoMLJobV2), support Accuracy
+// jobs (for example jobs created by calling CreateAutoMLJobV2 ), support Accuracy
 // only.
 type AutoMLJobObjective struct {
 
@@ -1629,30 +1310,30 @@ type AutoMLJobObjective struct {
 	// classification thresholds. AUC scores vary between 0 and 1. A score of 1
 	// indicates perfect accuracy, and a score of one half (0.5) indicates that the
 	// prediction is not better than a random classifier. BalancedAccuracy
-	// BalancedAccuracy is a metric that measures the ratio of accurate predictions to
+	// BalancedAccuracyis a metric that measures the ratio of accurate predictions to
 	// all predictions. This ratio is calculated after normalizing true positives (TP)
 	// and true negatives (TN) by the total number of positive (P) and negative (N)
 	// values. It is used in both binary and multiclass classification and is defined
 	// as follows: 0.5*((TP/P)+(TN/N)), with values ranging from 0 to 1.
-	// BalancedAccuracy gives a better measure of accuracy when the number of positives
-	// or negatives differ greatly from each other in an imbalanced dataset. For
-	// example, when only 1% of email is spam. F1 The F1 score is the harmonic mean of
-	// the precision and recall, defined as follows: F1 = 2 * (precision * recall) /
-	// (precision + recall). It is used for binary classification into classes
-	// traditionally referred to as positive and negative. Predictions are said to be
-	// true when they match their actual (correct) class, and false when they do not.
-	// Precision is the ratio of the true positive predictions to all positive
+	// BalancedAccuracygives a better measure of accuracy when the number of
+	// positives or negatives differ greatly from each other in an imbalanced dataset.
+	// For example, when only 1% of email is spam. F1 The F1 score is the harmonic
+	// mean of the precision and recall, defined as follows: F1 = 2 * (precision *
+	// recall) / (precision + recall). It is used for binary classification into
+	// classes traditionally referred to as positive and negative. Predictions are said
+	// to be true when they match their actual (correct) class, and false when they do
+	// not. Precision is the ratio of the true positive predictions to all positive
 	// predictions, and it includes the false positives in a dataset. Precision
 	// measures the quality of the prediction when it predicts the positive class.
 	// Recall (or sensitivity) is the ratio of the true positive predictions to all
 	// actual positive instances. Recall measures how completely a model predicts the
 	// actual class members in a dataset. F1 scores vary between 0 and 1. A score of 1
 	// indicates the best possible performance, and 0 indicates the worst. F1macro The
-	// F1macro score applies F1 scoring to multiclass classification problems. It does
+	// F1macroscore applies F1 scoring to multiclass classification problems. It does
 	// this by calculating the precision and recall, and then taking their harmonic
 	// mean to calculate the F1 score for each class. Lastly, the F1macro averages the
-	// individual scores to obtain the F1macro score. F1macro scores vary between 0 and
-	// 1. A score of 1 indicates the best possible performance, and 0 indicates the
+	// individual scores to obtain the F1macro  score. F1macro scores vary between 0
+	// and 1. A score of 1 indicates the best possible performance, and 0 indicates the
 	// worst. MAE The mean absolute error (MAE) is a measure of how different the
 	// predicted and actual values are, when they're averaged over all values. MAE is
 	// commonly used in regression analysis to understand model prediction error. If
@@ -1707,10 +1388,9 @@ type AutoMLJobObjective struct {
 	// is dependent on scale, and should not be used to compare datasets of different
 	// sizes. If you do not specify a metric explicitly, the default behavior is to
 	// automatically use:
-	// - MSE: for regression.
-	// - F1: for binary classification
-	// -
-	// Accuracy: for multiclass classification.
+	//     - MSE : for regression.
+	//     - F1 : for binary classification
+	//     - Accuracy : for multiclass classification.
 	//
 	// This member is required.
 	MetricName AutoMLMetricEnum
@@ -1831,36 +1511,15 @@ func (*AutoMLProblemTypeConfigMemberTextClassificationJobConfig) isAutoMLProblem
 type AutoMLS3DataSource struct {
 
 	// The data type.
-	//
-	// * If you choose S3Prefix, S3Uri identifies a key name prefix.
-	// SageMaker uses all objects that match the specified key name prefix for model
-	// training. The S3Prefix should have the following format:
-	// s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER-OR-FILE
-	//
-	// * If you choose
-	// ManifestFile, S3Uri identifies an object that is a manifest file containing a
-	// list of object keys that you want SageMaker to use for model training. A
-	// ManifestFile should have the format shown below: [ {"prefix":
-	// "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/"},
-	// "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-1","DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-2",...
-	// "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-N" ]
-	//
-	// * If you choose
-	// AugmentedManifestFile, S3Uri identifies an object that is an augmented manifest
-	// file in JSON lines format. This file contains the data you want to use for model
-	// training. AugmentedManifestFile is available for V2 API jobs only (for example,
-	// for jobs created by calling CreateAutoMLJobV2). Here is a minimal, single-record
-	// example of an AugmentedManifestFile: {"source-ref":
-	// "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/cats/cat.jpg","label-metadata":
-	// {"class-name": "cat" } For more information on AugmentedManifestFile, see
-	// Provide Dataset Metadata to Training Jobs with an Augmented Manifest File
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/augmented-manifest.html).
+	//     - If you choose S3Prefix , S3Uri identifies a key name prefix. SageMaker uses all objects that match the specified key name prefix for model training. The S3Prefix should have the following format: s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER-OR-FILE
+	//     - If you choose ManifestFile , S3Uri identifies an object that is a manifest file containing a list of object keys that you want SageMaker to use for model training. A ManifestFile should have the format shown below: [ {"prefix": "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/"}, "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-1", "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-2", ... "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-N" ]
+	//     - If you choose AugmentedManifestFile , S3Uri identifies an object that is an augmented manifest file in JSON lines format. This file contains the data you want to use for model training. AugmentedManifestFile is available for V2 API jobs only (for example, for jobs created by calling CreateAutoMLJobV2 ). Here is a minimal, single-record example of an AugmentedManifestFile : {"source-ref": "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/cats/cat.jpg", "label-metadata": {"class-name": "cat" } For more information on AugmentedManifestFile , see Provide Dataset Metadata to Training Jobs with an Augmented Manifest File (https://docs.aws.amazon.com/sagemaker/latest/dg/augmented-manifest.html) .
 	//
 	// This member is required.
 	S3DataType AutoMLS3DataType
 
-	// The URL to the Amazon S3 data source. The Uri refers to the Amazon S3 prefix or
-	// ManifestFile depending on the data type.
+	// The URL to the Amazon S3 data source. The Uri refers to the Amazon S3 prefix
+	// or ManifestFile depending on the data type.
 	//
 	// This member is required.
 	S3Uri *string
@@ -1887,9 +1546,9 @@ type AutoMLSecurityConfig struct {
 // recovery.
 type AutoRollbackConfig struct {
 
-	// List of CloudWatch alarms in your account that are configured to monitor metrics
-	// on an endpoint. If any alarms are tripped during a deployment, SageMaker rolls
-	// back the deployment.
+	// List of CloudWatch alarms in your account that are configured to monitor
+	// metrics on an endpoint. If any alarms are tripped during a deployment, SageMaker
+	// rolls back the deployment.
 	Alarms []Alarm
 
 	noSmithyDocumentSerde
@@ -1911,13 +1570,10 @@ type BatchDataCaptureConfig struct {
 	// key that SageMaker uses to encrypt data on the storage volume attached to the ML
 	// compute instance that hosts the batch transform job. The KmsKeyId can be any of
 	// the following formats:
-	// - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	// - Key ARN:
-	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	// -
-	// Alias name: alias/ExampleAlias
-	// - Alias name ARN:
-	// arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
+	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//     - Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//     - Alias name: alias/ExampleAlias
+	//     - Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -2000,8 +1656,8 @@ type BatchTransformInput struct {
 
 	// If specified, monitoring jobs substract this time from the end time. For
 	// information about using offsets for scheduling monitoring jobs, see Schedule
-	// Model Quality Monitoring Jobs
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html).
+	// Model Quality Monitoring Jobs (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html)
+	// .
 	EndTimeOffset *string
 
 	// The attributes of the input data that are the input features.
@@ -2017,19 +1673,19 @@ type BatchTransformInput struct {
 	// The threshold for the class probability to be evaluated as a positive result.
 	ProbabilityThresholdAttribute *float64
 
-	// Whether input data distributed in Amazon S3 is fully replicated or sharded by an
-	// S3 key. Defaults to FullyReplicated
+	// Whether input data distributed in Amazon S3 is fully replicated or sharded by
+	// an S3 key. Defaults to FullyReplicated
 	S3DataDistributionType ProcessingS3DataDistributionType
 
-	// Whether the Pipe or File is used as the input mode for transferring data for the
-	// monitoring job. Pipe mode is recommended for large datasets. File mode is useful
-	// for small files that fit in memory. Defaults to File.
+	// Whether the Pipe  or File is used as the input mode for transferring data for
+	// the monitoring job. Pipe  mode is recommended for large datasets. File mode is
+	// useful for small files that fit in memory. Defaults to File .
 	S3InputMode ProcessingS3InputMode
 
 	// If specified, monitoring jobs substract this time from the start time. For
 	// information about using offsets for scheduling monitoring jobs, see Schedule
-	// Model Quality Monitoring Jobs
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html).
+	// Model Quality Monitoring Jobs (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html)
+	// .
 	StartTimeOffset *string
 
 	noSmithyDocumentSerde
@@ -2040,8 +1696,9 @@ type BatchTransformInput struct {
 // against an objective function.
 type BestObjectiveNotImproving struct {
 
-	// The number of training jobs that have failed to improve model performance by 1%
-	// or greater over prior training jobs as evaluated against an objective function.
+	// The number of training jobs that have failed to improve model performance by
+	// 1% or greater over prior training jobs as evaluated against an objective
+	// function.
 	MaxNumberOfTrainingJobsNotImproving *int32
 
 	noSmithyDocumentSerde
@@ -2070,15 +1727,15 @@ type Bias struct {
 // blue/green deployment strategy with all at once traffic shifting by default.
 type BlueGreenUpdatePolicy struct {
 
-	// Defines the traffic routing strategy to shift traffic from the old fleet to the
-	// new fleet during an endpoint deployment.
+	// Defines the traffic routing strategy to shift traffic from the old fleet to
+	// the new fleet during an endpoint deployment.
 	//
 	// This member is required.
 	TrafficRoutingConfiguration *TrafficRoutingConfig
 
-	// Maximum execution timeout for the deployment. Note that the timeout value should
-	// be larger than the total waiting time specified in TerminationWaitInSeconds and
-	// WaitIntervalInSeconds.
+	// Maximum execution timeout for the deployment. Note that the timeout value
+	// should be larger than the total waiting time specified in
+	// TerminationWaitInSeconds and WaitIntervalInSeconds .
 	MaximumExecutionTimeoutInSeconds *int32
 
 	// Additional waiting time in seconds after the completion of an endpoint
@@ -2154,10 +1811,8 @@ type CanvasAppSettings struct {
 type CapacitySize struct {
 
 	// Specifies the endpoint capacity type.
-	// - INSTANCE_COUNT: The endpoint activates
-	// based on the number of instances.
-	// - CAPACITY_PERCENT: The endpoint activates
-	// based on the specified percentage of capacity.
+	//     - INSTANCE_COUNT : The endpoint activates based on the number of instances.
+	//     - CAPACITY_PERCENT : The endpoint activates based on the specified percentage of capacity.
 	//
 	// This member is required.
 	Type CapacitySizeType
@@ -2253,37 +1908,37 @@ type Channel struct {
 	// This member is required.
 	DataSource *DataSource
 
-	// If training data is compressed, the compression type. The default value is None.
-	// CompressionType is used only in Pipe input mode. In File mode, leave this field
-	// unset or set it to None.
+	// If training data is compressed, the compression type. The default value is None
+	// . CompressionType is used only in Pipe input mode. In File mode, leave this
+	// field unset or set it to None.
 	CompressionType CompressionType
 
 	// The MIME type of the data.
 	ContentType *string
 
-	// (Optional) The input mode to use for the data channel in a training job. If you
-	// don't set a value for InputMode, SageMaker uses the value set for
-	// TrainingInputMode. Use this parameter to override the TrainingInputMode setting
-	// in a AlgorithmSpecification request when you have a channel that needs a
-	// different input mode from the training job's general setting. To download the
+	// (Optional) The input mode to use for the data channel in a training job. If
+	// you don't set a value for InputMode , SageMaker uses the value set for
+	// TrainingInputMode . Use this parameter to override the TrainingInputMode
+	// setting in a AlgorithmSpecification request when you have a channel that needs
+	// a different input mode from the training job's general setting. To download the
 	// data from Amazon Simple Storage Service (Amazon S3) to the provisioned ML
-	// storage volume, and mount the directory to a Docker volume, use File input mode.
-	// To stream data directly from Amazon S3 to the container, choose Pipe input mode.
-	// To use a model for incremental training, choose File input model.
+	// storage volume, and mount the directory to a Docker volume, use File input
+	// mode. To stream data directly from Amazon S3 to the container, choose Pipe
+	// input mode. To use a model for incremental training, choose File  input model.
 	InputMode TrainingInputMode
 
-	// Specify RecordIO as the value when input data is in raw format but the training
-	// algorithm requires the RecordIO format. In this case, SageMaker wraps each
-	// individual S3 object in a RecordIO record. If the input data is already in
+	// Specify RecordIO as the value when input data is in raw format but the
+	// training algorithm requires the RecordIO format. In this case, SageMaker wraps
+	// each individual S3 object in a RecordIO record. If the input data is already in
 	// RecordIO format, you don't need to set this attribute. For more information, see
-	// Create a Dataset Using RecordIO
-	// (https://mxnet.apache.org/api/architecture/note_data_loading#data-format). In
-	// File mode, leave this field unset or set it to None.
+	//
+	// Create a Dataset Using RecordIO (https://mxnet.apache.org/api/architecture/note_data_loading#data-format)
+	// . In File mode, leave this field unset or set it to None.
 	RecordWrapperType RecordWrapper
 
 	// A configuration for a shuffle option for input data in a channel. If you use
-	// S3Prefix for S3DataType, this shuffles the results of the S3 key prefix matches.
-	// If you use ManifestFile, the order of the S3 object references in the
+	// S3Prefix for S3DataType, this shuffles the results of the S3 key prefix
+	// matches. If you use ManifestFile , the order of the S3 object references in the
 	// ManifestFile is shuffled. If you use AugmentedManifestFile, the order of the
 	// JSON lines in the AugmentedManifestFile is shuffled. The shuffling order is
 	// determined using the Seed value. For Pipe input mode, shuffling is done at the
@@ -2337,21 +1992,20 @@ type ChannelSpecification struct {
 type CheckpointConfig struct {
 
 	// Identifies the S3 path where you want SageMaker to store checkpoints. For
-	// example, s3://bucket-name/key-name-prefix.
+	// example, s3://bucket-name/key-name-prefix .
 	//
 	// This member is required.
 	S3Uri *string
 
 	// (Optional) The local directory where checkpoints are written. The default
-	// directory is /opt/ml/checkpoints/.
+	// directory is /opt/ml/checkpoints/ .
 	LocalPath *string
 
 	noSmithyDocumentSerde
 }
 
-// The container for the metadata for the ClarifyCheck step. For more information,
-// see the topic on ClarifyCheck step
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/build-and-manage-steps.html#step-type-clarify-check)
+// The container for the metadata for the ClarifyCheck step. For more
+// information, see the topic on ClarifyCheck step (https://docs.aws.amazon.com/sagemaker/latest/dg/build-and-manage-steps.html#step-type-clarify-check)
 // in the Amazon SageMaker Developer Guide.
 type ClarifyCheckStepMetadata struct {
 
@@ -2361,8 +2015,8 @@ type ClarifyCheckStepMetadata struct {
 	// The Amazon S3 URI of the newly calculated baseline constraints file.
 	CalculatedBaselineConstraints *string
 
-	// The Amazon Resource Name (ARN) of the check processing job that was run by this
-	// step's execution.
+	// The Amazon Resource Name (ARN) of the check processing job that was run by
+	// this step's execution.
 	CheckJobArn *string
 
 	// The type of the Clarify Check step
@@ -2371,11 +2025,11 @@ type ClarifyCheckStepMetadata struct {
 	// The model package group name.
 	ModelPackageGroupName *string
 
-	// This flag indicates if a newly calculated baseline can be accessed through step
-	// properties BaselineUsedForDriftCheckConstraints and
-	// BaselineUsedForDriftCheckStatistics. If it is set to False, the previous
+	// This flag indicates if a newly calculated baseline can be accessed through
+	// step properties BaselineUsedForDriftCheckConstraints  and
+	// BaselineUsedForDriftCheckStatistics . If it is set to False, the previous
 	// baseline of the configured check type must also be available. These can be
-	// accessed through the BaselineUsedForDriftCheckConstraints property.
+	// accessed through the BaselineUsedForDriftCheckConstraints  property.
 	RegisterNewBaseline bool
 
 	// This flag indicates if the drift check against the previous baseline will be
@@ -2398,9 +2052,8 @@ type ClarifyExplainerConfig struct {
 	ShapConfig *ClarifyShapConfig
 
 	// A JMESPath boolean expression used to filter which records to explain.
-	// Explanations are activated by default. See EnableExplanations
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html#clarify-online-explainability-create-endpoint-enable)for
-	// additional information.
+	// Explanations are activated by default. See EnableExplanations (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html#clarify-online-explainability-create-endpoint-enable)
+	// for additional information.
 	EnableExplanations *string
 
 	// The inference configuration parameter for the model container.
@@ -2413,111 +2066,101 @@ type ClarifyExplainerConfig struct {
 type ClarifyInferenceConfig struct {
 
 	// A template string used to format a JSON record into an acceptable model
-	// container input. For example, a ContentTemplate string
+	// container input. For example, a ContentTemplate  string
 	// '{"myfeatures":$features}' will format a list of features [1,2,3] into the
 	// record string '{"myfeatures":[1,2,3]}'. Required only when the model container
 	// input is in JSON Lines format.
 	ContentTemplate *string
 
 	// The names of the features. If provided, these are included in the endpoint
-	// response payload to help readability of the InvokeEndpoint output. See the
-	// Response
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-invoke-endpoint.html#clarify-online-explainability-response)
+	// response payload to help readability of the InvokeEndpoint  output. See the
+	// Response (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-invoke-endpoint.html#clarify-online-explainability-response)
 	// section under Invoke the endpoint in the Developer Guide for more information.
 	FeatureHeaders []string
 
 	// A list of data types of the features (optional). Applicable only to NLP
-	// explainability. If provided, FeatureTypes must have at least one 'text' string
-	// (for example, ['text']). If FeatureTypes is not provided, the explainer infers
-	// the feature types based on the baseline data. The feature types are included in
-	// the endpoint response payload. For additional information see the response
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-invoke-endpoint.html#clarify-online-explainability-response)
+	// explainability. If provided, FeatureTypes  must have at least one 'text'
+	// string (for example, ['text'] ). If FeatureTypes is not provided, the
+	// explainer infers the feature types based on the baseline data. The feature types
+	// are included in the endpoint response payload. For additional information see
+	// the response (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-invoke-endpoint.html#clarify-online-explainability-response)
 	// section under Invoke the endpoint in the Developer Guide for more information.
 	FeatureTypes []ClarifyFeatureType
 
-	// Provides the JMESPath expression to extract the features from a model container
-	// input in JSON Lines format. For example, if FeaturesAttribute is the JMESPath
-	// expression 'myfeatures', it extracts a list of features [1,2,3] from request
-	// data '{"myfeatures":[1,2,3]}'.
+	// Provides the JMESPath expression to extract the features from a model
+	// container input in JSON Lines format. For example, if FeaturesAttribute is the
+	// JMESPath expression 'myfeatures' , it extracts a list of features [1,2,3] from
+	// request data '{"myfeatures":[1,2,3]}' .
 	FeaturesAttribute *string
 
 	// A JMESPath expression used to locate the list of label headers in the model
 	// container output. Example: If the model container output of a batch request is
-	// '{"labels":["cat","dog","fish"],"probability":[0.6,0.3,0.1]}', then set
-	// LabelAttribute to 'labels' to extract the list of label headers
+	// '{"labels":["cat","dog","fish"],"probability":[0.6,0.3,0.1]}' , then set
+	// LabelAttribute to 'labels'  to extract the list of label headers
 	// ["cat","dog","fish"]
 	LabelAttribute *string
 
 	// For multiclass classification problems, the label headers are the names of the
 	// classes. Otherwise, the label header is the name of the predicted label. These
-	// are used to help readability for the output of the InvokeEndpoint API. See the
-	// response
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-invoke-endpoint.html#clarify-online-explainability-response)
+	// are used to help readability for the output of the InvokeEndpoint  API. See the
+	// response (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-invoke-endpoint.html#clarify-online-explainability-response)
 	// section under Invoke the endpoint in the Developer Guide for more information.
 	// If there are no label headers in the model container output, provide them
 	// manually using this parameter.
 	LabelHeaders []string
 
-	// A zero-based index used to extract a label header or list of label headers from
-	// model container output in CSV format. Example for a multiclass model: If the
-	// model container output consists of label headers followed by probabilities:
-	// '"[\'cat\',\'dog\',\'fish\']","[0.1,0.6,0.3]"', set LabelIndex to 0 to select
-	// the label headers ['cat','dog','fish'].
+	// A zero-based index used to extract a label header or list of label headers
+	// from model container output in CSV format. Example for a multiclass model: If
+	// the model container output consists of label headers followed by probabilities:
+	// '"[\'cat\',\'dog\',\'fish\']","[0.1,0.6,0.3]"' , set LabelIndex  to 0 to
+	// select the label headers ['cat','dog','fish'] .
 	LabelIndex *int32
 
 	// The maximum payload size (MB) allowed of a request from the explainer to the
-	// model container. Defaults to 6 MB.
+	// model container. Defaults to 6  MB.
 	MaxPayloadInMB *int32
 
-	// The maximum number of records in a request that the model container can process
-	// when querying the model container for the predictions of a synthetic dataset
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html#clarify-online-explainability-create-endpoint-synthetic).
-	// A record is a unit of input data that inference can be made on, for example, a
-	// single line in CSV data. If MaxRecordCount is 1, the model container expects one
-	// record per request. A value of 2 or greater means that the model expects batch
-	// requests, which can reduce overhead and speed up the inferencing process. If
-	// this parameter is not provided, the explainer will tune the record count per
+	// The maximum number of records in a request that the model container can
+	// process when querying the model container for the predictions of a synthetic
+	// dataset (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html#clarify-online-explainability-create-endpoint-synthetic)
+	// . A record is a unit of input data that inference can be made on, for example, a
+	// single line in CSV data. If MaxRecordCount  is 1, the model container expects
+	// one record per request. A value of 2 or greater means that the model expects
+	// batch requests, which can reduce overhead and speed up the inferencing process.
+	// If this parameter is not provided, the explainer will tune the record count per
 	// request according to the model container's capacity at runtime.
 	MaxRecordCount *int32
 
-	// A JMESPath expression used to extract the probability (or score) from the model
-	// container output if the model container is in JSON Lines format. Example: If the
-	// model container output of a single request is
-	// '{"predicted_label":1,"probability":0.6}', then set ProbabilityAttribute to
-	// 'probability'.
+	// A JMESPath expression used to extract the probability (or score) from the
+	// model container output if the model container is in JSON Lines format. Example:
+	// If the model container output of a single request is
+	// '{"predicted_label":1,"probability":0.6}' , then set ProbabilityAttribute  to
+	// 'probability' .
 	ProbabilityAttribute *string
 
 	// A zero-based index used to extract a probability value (score) or list from
 	// model container output in CSV format. If this value is not provided, the entire
 	// model container output will be treated as a probability value (score) or list.
 	// Example for a single class model: If the model container output consists of a
-	// string-formatted prediction label followed by its probability: '1,0.6', set
-	// ProbabilityIndex to 1 to select the probability value 0.6. Example for a
+	// string-formatted prediction label followed by its probability: '1,0.6' , set
+	// ProbabilityIndex to 1  to select the probability value 0.6. Example for a
 	// multiclass model: If the model container output consists of a string-formatted
 	// prediction label followed by its probability:
-	// '"[\'cat\',\'dog\',\'fish\']","[0.1,0.6,0.3]"', set ProbabilityIndex to 1 to
-	// select the probability values [0.1,0.6,0.3].
+	// '"[\'cat\',\'dog\',\'fish\']","[0.1,0.6,0.3]"' , set ProbabilityIndex  to 1 to
+	// select the probability values [0.1,0.6,0.3] .
 	ProbabilityIndex *int32
 
 	noSmithyDocumentSerde
 }
 
-// The configuration for the SHAP baseline
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-feature-attribute-shap-baselines.html)
-// (also called the background or reference dataset) of the Kernal SHAP
-// algorithm.
-// - The number of records in the baseline data determines the size of
-// the synthetic dataset, which has an impact on latency of explainability
-// requests. For more information, see the Synthetic data of Configure and create
-// an endpoint
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html).
-// -
-// ShapBaseline and ShapBaselineUri are mutually exclusive parameters. One or the
-// either is required to configure a SHAP baseline.
+// The configuration for the SHAP baseline (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-feature-attribute-shap-baselines.html)
+// (also called the background or reference dataset) of the Kernal SHAP algorithm.
+//   - The number of records in the baseline data determines the size of the synthetic dataset, which has an impact on latency of explainability requests. For more information, see the Synthetic data of Configure and create an endpoint (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html) .
+//   - ShapBaseline and ShapBaselineUri are mutually exclusive parameters. One or the either is required to configure a SHAP baseline.
 type ClarifyShapBaselineConfig struct {
 
-	// The MIME type of the baseline data. Choose from 'text/csv' or
-	// 'application/jsonlines'. Defaults to 'text/csv'.
+	// The MIME type of the baseline data. Choose from 'text/csv'  or
+	// 'application/jsonlines' . Defaults to 'text/csv' .
 	MimeType *string
 
 	// The inline SHAP baseline data in string format. ShapBaseline can have one or
@@ -2527,7 +2170,7 @@ type ClarifyShapBaselineConfig struct {
 	// and all features are numerical, then the format of the baseline data should also
 	// share these characteristics. For natural language processing (NLP) of text
 	// columns, the baseline value should be the value used to replace the unit of text
-	// specified by the Granularity of the TextConfig parameter. The size limit for
+	// specified by the Granularity  of the TextConfig  parameter. The size limit for
 	// ShapBasline is 4 KB. Use the ShapBaselineUri parameter if you want to provide
 	// more than 4 KB of baseline data.
 	ShapBaseline *string
@@ -2540,8 +2183,8 @@ type ClarifyShapBaselineConfig struct {
 	// format. Each record should contain only the features. If you are using a virtual
 	// private cloud (VPC), the ShapBaselineUri should be accessible to the VPC. For
 	// more information about setting up endpoints with Amazon Virtual Private Cloud,
-	// see Give SageMaker access to Resources in your Amazon Virtual Private Cloud
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html).
+	// see Give SageMaker access to Resources in your Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html)
+	// .
 	ShapBaselineUri *string
 
 	noSmithyDocumentSerde
@@ -2555,11 +2198,11 @@ type ClarifyShapConfig struct {
 	// This member is required.
 	ShapBaselineConfig *ClarifyShapBaselineConfig
 
-	// The number of samples to be used for analysis by the Kernal SHAP algorithm. The
-	// number of samples determines the size of the synthetic dataset, which has an
+	// The number of samples to be used for analysis by the Kernal SHAP algorithm.
+	// The number of samples determines the size of the synthetic dataset, which has an
 	// impact on latency of explainability requests. For more information, see the
-	// Synthetic data of Configure and create an endpoint
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html).
+	// Synthetic data of Configure and create an endpoint (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html)
+	// .
 	NumberOfSamples *int32
 
 	// The starting value used to initialize the random number generator in the
@@ -2567,9 +2210,9 @@ type ClarifyShapConfig struct {
 	// result.
 	Seed *int32
 
-	// A parameter that indicates if text features are treated as text and explanations
-	// are provided for individual units of text. Required for natural language
-	// processing (NLP) explainability only.
+	// A parameter that indicates if text features are treated as text and
+	// explanations are provided for individual units of text. Required for natural
+	// language processing (NLP) explainability only.
 	TextConfig *ClarifyTextConfig
 
 	// A Boolean toggle to indicate if you want to use the logit function (true) or
@@ -2585,16 +2228,15 @@ type ClarifyShapConfig struct {
 type ClarifyTextConfig struct {
 
 	// The unit of granularity for the analysis of text features. For example, if the
-	// unit is 'token', then each token (like a word in English) of the text is treated
-	// as a feature. SHAP values are computed for each unit/feature.
+	// unit is 'token', then each token (like a word in English) of the text is
+	// treated as a feature. SHAP values are computed for each unit/feature.
 	//
 	// This member is required.
 	Granularity ClarifyTextGranularity
 
-	// Specifies the language of the text features in ISO 639-1
-	// (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) or ISO 639-3
-	// (https://en.wikipedia.org/wiki/ISO_639-3) code of a supported language. For a
-	// mix of multiple languages, use code 'xx'.
+	// Specifies the language of the text features in ISO 639-1 (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+	// or ISO 639-3 (https://en.wikipedia.org/wiki/ISO_639-3) code of a supported
+	// language. For a mix of multiple languages, use code 'xx' .
 	//
 	// This member is required.
 	Language ClarifyTextLanguage
@@ -2645,9 +2287,10 @@ type CodeRepositorySummary struct {
 	noSmithyDocumentSerde
 }
 
-// Use this parameter to configure your Amazon Cognito workforce. A single Cognito
-// workforce is created using and corresponds to a single  Amazon Cognito user pool
-// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html).
+// Use this parameter to configure your Amazon Cognito workforce. A single
+// Cognito workforce is created using and corresponds to a single Amazon Cognito
+// user pool (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html)
+// .
 type CognitoConfig struct {
 
 	// The client ID for your Amazon Cognito user pool.
@@ -2655,8 +2298,7 @@ type CognitoConfig struct {
 	// This member is required.
 	ClientId *string
 
-	// A  user pool
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html)
+	// A  user pool (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html)
 	// is a user directory in Amazon Cognito. With a user pool, your users can sign in
 	// to your web or mobile app through Amazon Cognito. Your users can also sign in
 	// through social identity providers like Google, Facebook, Amazon, or Apple, and
@@ -2672,8 +2314,8 @@ type CognitoConfig struct {
 // work teams.
 type CognitoMemberDefinition struct {
 
-	// An identifier for an application client. You must create the app client ID using
-	// Amazon Cognito.
+	// An identifier for an application client. You must create the app client ID
+	// using Amazon Cognito.
 	//
 	// This member is required.
 	ClientId *string
@@ -2700,9 +2342,9 @@ type CollectionConfiguration struct {
 	// rule configuration names.
 	CollectionName *string
 
-	// Parameter values for the tensor collection. The allowed parameters are "name",
-	// "include_regex", "reduction_config", "save_config", "tensor_names", and
-	// "save_histogram".
+	// Parameter values for the tensor collection. The allowed parameters are "name" ,
+	// "include_regex" , "reduction_config" , "save_config" , "tensor_names" , and
+	// "save_histogram" .
 	CollectionParameters map[string]string
 
 	noSmithyDocumentSerde
@@ -2741,8 +2383,8 @@ type CompilationJobSummary struct {
 	// completed.
 	CompilationTargetDevice TargetDevice
 
-	// The type of accelerator that the model will run on after the compilation job has
-	// completed.
+	// The type of accelerator that the model will run on after the compilation job
+	// has completed.
 	CompilationTargetPlatformAccelerator TargetPlatformAccelerator
 
 	// The type of architecture that the model will run on after the compilation job
@@ -2771,40 +2413,37 @@ type ConditionStepMetadata struct {
 // Describes the container, as part of model definition.
 type ContainerDefinition struct {
 
-	// This parameter is ignored for models that contain only a PrimaryContainer. When
-	// a ContainerDefinition is part of an inference pipeline, the value of the
+	// This parameter is ignored for models that contain only a PrimaryContainer.
+	// When a ContainerDefinition is part of an inference pipeline, the value of the
 	// parameter uniquely identifies the container for the purposes of logging and
 	// metrics. For information, see Use Logs and Metrics to Monitor an Inference
-	// Pipeline
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html).
-	// If you don't specify a value for this parameter for a ContainerDefinition that
-	// is part of an inference pipeline, a unique name is automatically assigned based
-	// on the position of the ContainerDefinition in the pipeline. If you specify a
-	// value for the ContainerHostName for any ContainerDefinition that is part of an
-	// inference pipeline, you must specify a value for the ContainerHostName parameter
-	// of every ContainerDefinition in that pipeline.
+	// Pipeline (https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html)
+	// . If you don't specify a value for this parameter for a ContainerDefinition
+	// that is part of an inference pipeline, a unique name is automatically assigned
+	// based on the position of the ContainerDefinition in the pipeline. If you
+	// specify a value for the ContainerHostName  for any ContainerDefinition that is
+	// part of an inference pipeline, you must specify a value for the
+	// ContainerHostName parameter of every ContainerDefinition  in that pipeline.
 	ContainerHostname *string
 
-	// The environment variables to set in the Docker container. Each key and value in
-	// the Environment string to string map can have length of up to 1024. We support
-	// up to 16 entries in the map.
+	// The environment variables to set in the Docker container. Each key and value
+	// in the Environment string to string map can have length of up to 1024. We
+	// support up to 16 entries in the map.
 	Environment map[string]string
 
 	// The path where inference code is stored. This can be either in Amazon EC2
 	// Container Registry or in a Docker registry that is accessible from the same VPC
 	// that you configure for your endpoint. If you are using your own custom algorithm
 	// instead of an algorithm provided by SageMaker, the inference code must meet
-	// SageMaker requirements. SageMaker supports both registry/repository[:tag] and
-	// registry/repository[@digest] image path formats. For more information, see Using
-	// Your Own Algorithms with Amazon SageMaker
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html)
+	// SageMaker requirements. SageMaker supports both registry/repository[:tag]  and
+	// registry/repository[@digest] image path formats. For more information, see
+	// Using Your Own Algorithms with Amazon SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html)
 	Image *string
 
 	// Specifies whether the model container is in Amazon ECR or a private Docker
 	// registry accessible from your Amazon Virtual Private Cloud (VPC). For
 	// information about storing containers in a private Docker registry, see Use a
-	// Private Docker Registry for Real-Time Inference Containers
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-containers-inference-private.html)
+	// Private Docker Registry for Real-Time Inference Containers (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-containers-inference-private.html)
 	ImageConfig *ImageConfig
 
 	// The inference specification name in the model package version.
@@ -2817,24 +2456,22 @@ type ContainerDefinition struct {
 	// stored. This path must point to a single gzip compressed tar archive (.tar.gz
 	// suffix). The S3 path is required for SageMaker built-in algorithms, but not if
 	// you use your own algorithms. For more information on built-in algorithms, see
-	// Common Parameters
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html).
-	// The model artifacts must be in an S3 bucket that is in the same region as the
+	// Common Parameters (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html)
+	// . The model artifacts must be in an S3 bucket that is in the same region as the
 	// model or endpoint you are creating. If you provide a value for this parameter,
 	// SageMaker uses Amazon Web Services Security Token Service to download model
 	// artifacts from the S3 path you provide. Amazon Web Services STS is activated in
 	// your Amazon Web Services account by default. If you previously deactivated
 	// Amazon Web Services STS for a region, you need to reactivate Amazon Web Services
 	// STS for that region. For more information, see Activating and Deactivating
-	// Amazon Web Services STS in an Amazon Web Services Region
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
+	// Amazon Web Services STS in an Amazon Web Services Region (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
 	// in the Amazon Web Services Identity and Access Management User Guide. If you use
 	// a built-in algorithm to create a model, SageMaker requires that you provide a S3
-	// path to the model artifacts in ModelDataUrl.
+	// path to the model artifacts in ModelDataUrl .
 	ModelDataUrl *string
 
-	// The name or Amazon Resource Name (ARN) of the model package to use to create the
-	// model.
+	// The name or Amazon Resource Name (ARN) of the model package to use to create
+	// the model.
 	ModelPackageName *string
 
 	// Specifies additional configuration for multi-model endpoints.
@@ -2889,13 +2526,13 @@ type ContextSummary struct {
 type ContinuousParameterRange struct {
 
 	// The maximum value for the hyperparameter. The tuning job uses floating-point
-	// values between MinValue value and this value for tuning.
+	// values between MinValue  value and this value for tuning.
 	//
 	// This member is required.
 	MaxValue *string
 
 	// The minimum value for the hyperparameter. The tuning job uses floating-point
-	// values between this value and MaxValuefor tuning.
+	// values between this value and MaxValue for tuning.
 	//
 	// This member is required.
 	MinValue *string
@@ -2907,9 +2544,8 @@ type ContinuousParameterRange struct {
 
 	// The scale that hyperparameter tuning uses to search the hyperparameter range.
 	// For information about choosing a hyperparameter scale, see Hyperparameter
-	// Scaling
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
-	// One of the following values: Auto SageMaker hyperparameter tuning chooses the
+	// Scaling (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type)
+	// . One of the following values: Auto SageMaker hyperparameter tuning chooses the
 	// best scale for the hyperparameter. Linear Hyperparameter tuning searches the
 	// values in the hyperparameter range by using a linear scale. Logarithmic
 	// Hyperparameter tuning searches the values in the hyperparameter range by using a
@@ -2951,7 +2587,7 @@ type ConvergenceDetected struct {
 }
 
 // A custom SageMaker image. For more information, see Bring your own SageMaker
-// image (https://docs.aws.amazon.com/sagemaker/latest/dg/studio-byoi.html).
+// image (https://docs.aws.amazon.com/sagemaker/latest/dg/studio-byoi.html) .
 type CustomImage struct {
 
 	// The name of the AppImageConfig.
@@ -2973,8 +2609,8 @@ type CustomImage struct {
 // Configuration to control how SageMaker captures inference data.
 type DataCaptureConfig struct {
 
-	// Specifies data Model Monitor will capture. You can configure whether to collect
-	// only input, only output, or both
+	// Specifies data Model Monitor will capture. You can configure whether to
+	// collect only input, only output, or both
 	//
 	// This member is required.
 	CaptureOptions []CaptureOption
@@ -2984,8 +2620,8 @@ type DataCaptureConfig struct {
 	// This member is required.
 	DestinationS3Uri *string
 
-	// The percentage of requests SageMaker will capture. A lower value is recommended
-	// for Endpoints with high traffic.
+	// The percentage of requests SageMaker will capture. A lower value is
+	// recommended for Endpoints with high traffic.
 	//
 	// This member is required.
 	InitialSamplingPercentage *int32
@@ -3000,14 +2636,10 @@ type DataCaptureConfig struct {
 	// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service
 	// key that SageMaker uses to encrypt the captured data at rest using Amazon S3
 	// server-side encryption. The KmsKeyId can be any of the following formats:
-	// - Key
-	// ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	// - Key ARN:
-	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	// -
-	// Alias name: alias/ExampleAlias
-	// - Alias name ARN:
-	// arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
+	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//     - Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//     - Alias name: alias/ExampleAlias
+	//     - Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -3045,7 +2677,7 @@ type DataCaptureConfigSummary struct {
 }
 
 // The meta data of the Glue table which serves as data catalog for the
-// OfflineStore.
+// OfflineStore .
 type DataCatalogConfig struct {
 
 	// The name of the Glue table catalog.
@@ -3066,50 +2698,48 @@ type DataCatalogConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The data structure used to specify the data to be used for inference in a batch
-// transform job and to associate the data that is relevant to the prediction
+// The data structure used to specify the data to be used for inference in a
+// batch transform job and to associate the data that is relevant to the prediction
 // results in the output. The input filter provided allows you to exclude input
 // data that is not needed for inference in a batch transform job. The output
 // filter provided allows you to include input data relevant to interpreting the
 // predictions in the output from the job. For more information, see Associate
-// Prediction Results with their Corresponding Input Records
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html).
+// Prediction Results with their Corresponding Input Records (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html)
+// .
 type DataProcessing struct {
 
-	// A JSONPath
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators)
+	// A JSONPath (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators)
 	// expression used to select a portion of the input data to pass to the algorithm.
-	// Use the InputFilter parameter to exclude fields, such as an ID column, from the
-	// input. If you want SageMaker to pass the entire input dataset to the algorithm,
-	// accept the default value $. Examples: "$", "$[1:]", "$.features"
+	// Use the InputFilter parameter to exclude fields, such as an ID column, from
+	// the input. If you want SageMaker to pass the entire input dataset to the
+	// algorithm, accept the default value $ . Examples: "$" , "$[1:]" , "$.features"
 	InputFilter *string
 
 	// Specifies the source of the data to join with the transformed data. The valid
-	// values are None and Input. The default value is None, which specifies not to
+	// values are None  and Input . The default value is None, which specifies not to
 	// join the input with the transformed data. If you want the batch transform job to
-	// join the original input data with the transformed data, set JoinSource to Input.
-	// You can specify OutputFilter as an additional filter to select a portion of the
-	// joined dataset and store it in the output file. For JSON or JSONLines objects,
-	// such as a JSON array, SageMaker adds the transformed data to the input JSON
-	// object in an attribute called SageMakerOutput. The joined result for JSON must
-	// be a key-value pair object. If the input is not a key-value pair object,
-	// SageMaker creates a new JSON file. In the new JSON file, and the input data is
-	// stored under the SageMakerInput key and the results are stored in
-	// SageMakerOutput. For CSV data, SageMaker takes each row as a JSON array and
+	// join the original input data with the transformed data, set JoinSource  to
+	// Input . You can specify OutputFilter as an additional filter to select a
+	// portion of the joined dataset and store it in the output file. For JSON or
+	// JSONLines objects, such as a JSON array, SageMaker adds the transformed data to
+	// the input JSON object in an attribute called SageMakerOutput. The joined
+	// result for JSON must be a key-value pair object. If the input is not a key-value
+	// pair object, SageMaker creates a new JSON file. In the new JSON file, and the
+	// input data is stored under the SageMakerInput key and the results are stored
+	// in SageMakerOutput. For CSV data, SageMaker takes each row as a JSON array and
 	// joins the transformed data with the input by appending each transformed row to
 	// the end of the input. The joined data has the original input data followed by
 	// the transformed data and the output is a CSV file. For information on how
-	// joining in applied, see Workflow for Associating Inferences with Input Records
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#batch-transform-data-processing-workflow).
+	// joining in applied, see Workflow for Associating Inferences with Input Records (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#batch-transform-data-processing-workflow)
+	// .
 	JoinSource JoinSource
 
-	// A JSONPath
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators)
+	// A JSONPath (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators)
 	// expression used to select a portion of the joined dataset to save in the output
 	// file for a batch transform job. If you want SageMaker to store the entire input
 	// dataset in the output file, leave the default value, $. If you specify indexes
 	// that aren't within the dimension size of the joined dataset, you get an error.
-	// Examples: "$", "$[0,5:]", "$['id','SageMakerOutput']"
+	// Examples: "$" , "$[0,5:]" , "$['id','SageMakerOutput']"
 	OutputFilter *string
 
 	noSmithyDocumentSerde
@@ -3163,8 +2793,8 @@ type DataQualityBaselineConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The input for the data quality monitoring job. Currently endpoints are supported
-// for input.
+// The input for the data quality monitoring job. Currently endpoints are
+// supported for input.
 type DataQualityJobInput struct {
 
 	// Input object for the batch transform job.
@@ -3177,26 +2807,28 @@ type DataQualityJobInput struct {
 }
 
 // Configuration for Dataset Definition inputs. The Dataset Definition input must
-// specify exactly one of either AthenaDatasetDefinition or
+// specify exactly one of either AthenaDatasetDefinition  or
 // RedshiftDatasetDefinition types.
 type DatasetDefinition struct {
 
 	// Configuration for Athena Dataset Definition input.
 	AthenaDatasetDefinition *AthenaDatasetDefinition
 
-	// Whether the generated dataset is FullyReplicated or ShardedByS3Key (default).
+	// Whether the generated dataset is FullyReplicated  or ShardedByS3Key  (default).
 	DataDistributionType DataDistributionType
 
-	// Whether to use File or Pipe input mode. In File (default) mode, Amazon SageMaker
-	// copies the data from the input source onto the local Amazon Elastic Block Store
-	// (Amazon EBS) volumes before starting your training algorithm. This is the most
-	// commonly used input mode. In Pipe mode, Amazon SageMaker streams input data from
-	// the source directly to your algorithm without using the EBS volume.
+	// Whether to use File  or Pipe  input mode. In File (default) mode, Amazon
+	// SageMaker copies the data from the input source onto the local Amazon Elastic
+	// Block Store (Amazon EBS) volumes before starting your training algorithm. This
+	// is the most commonly used input mode. In Pipe mode, Amazon SageMaker streams
+	// input data from the source directly to your algorithm without using the EBS
+	// volume.
 	InputMode InputMode
 
 	// The local path where you want Amazon SageMaker to download the Dataset
-	// Definition inputs to run a processing job. LocalPath is an absolute path to the
-	// input data. This is a required parameter when AppManaged is False (default).
+	// Definition inputs to run a processing job. LocalPath is an absolute path to
+	// the input data. This is a required parameter when AppManaged  is False
+	// (default).
 	LocalPath *string
 
 	// Configuration for Redshift Dataset Definition input.
@@ -3219,9 +2851,9 @@ type DataSource struct {
 
 // Configuration information for the Amazon SageMaker Debugger hook parameters,
 // metric and tensor collections, and storage paths. To learn more about how to
-// configure the DebugHookConfig parameter, see Use the SageMaker and Debugger
-// Configuration API Operations to Create, Update, and Debug Your Training Job
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html).
+// configure the DebugHookConfig  parameter, see Use the SageMaker and Debugger
+// Configuration API Operations to Create, Update, and Debug Your Training Job (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html)
+// .
 type DebugHookConfig struct {
 
 	// Path to Amazon S3 storage location for metrics and tensors.
@@ -3230,27 +2862,27 @@ type DebugHookConfig struct {
 	S3OutputPath *string
 
 	// Configuration information for Amazon SageMaker Debugger tensor collections. To
-	// learn more about how to configure the CollectionConfiguration parameter, see Use
-	// the SageMaker and Debugger Configuration API Operations to Create, Update, and
-	// Debug Your Training Job
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html).
+	// learn more about how to configure the CollectionConfiguration  parameter, see
+	// Use the SageMaker and Debugger Configuration API Operations to Create, Update,
+	// and Debug Your Training Job (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html)
+	// .
 	CollectionConfigurations []CollectionConfiguration
 
 	// Configuration information for the Amazon SageMaker Debugger hook parameters.
 	HookParameters map[string]string
 
 	// Path to local storage location for metrics and tensors. Defaults to
-	// /opt/ml/output/tensors/.
+	// /opt/ml/output/tensors/ .
 	LocalPath *string
 
 	noSmithyDocumentSerde
 }
 
 // Configuration information for SageMaker Debugger rules for debugging. To learn
-// more about how to configure the DebugRuleConfiguration parameter, see Use the
+// more about how to configure the DebugRuleConfiguration  parameter, see Use the
 // SageMaker and Debugger Configuration API Operations to Create, Update, and Debug
-// Your Training Job
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html).
+// Your Training Job (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html)
+// .
 type DebugRuleConfiguration struct {
 
 	// The name of the rule configuration. It must be unique relative to other rule
@@ -3268,7 +2900,7 @@ type DebugRuleConfiguration struct {
 	InstanceType ProcessingInstanceType
 
 	// Path to local storage location for output of rules. Defaults to
-	// /opt/ml/processing/output/rule/.
+	// /opt/ml/processing/output/rule/ .
 	LocalPath *string
 
 	// Runtime configuration for rule container.
@@ -3316,21 +2948,20 @@ type DefaultSpaceSettings struct {
 	// The KernelGateway app settings.
 	KernelGatewayAppSettings *KernelGatewayAppSettings
 
-	// The security groups for the Amazon Virtual Private Cloud that the space uses for
-	// communication.
+	// The security groups for the Amazon Virtual Private Cloud that the space uses
+	// for communication.
 	SecurityGroups []string
 
 	noSmithyDocumentSerde
 }
 
 // Gets the Amazon EC2 Container Registry path of the docker image of the model
-// that is hosted in this ProductionVariant. If you used the
-// registry/repository[:tag] form to specify the image path of the primary
-// container when you created the model hosted in this ProductionVariant, the path
-// resolves to a path of the form registry/repository[@digest]. A digest is a hash
-// value that identifies a specific version of an image. For information about
-// Amazon ECR paths, see Pulling an Image
-// (https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-pull-ecr-image.html)
+// that is hosted in this ProductionVariant . If you used the
+// registry/repository[:tag]form to specify the image path of the primary
+// container when you created the model hosted in this ProductionVariant, the
+// path resolves to a path of the form registry/repository[@digest]. A digest is
+// a hash value that identifies a specific version of an image. For information
+// about Amazon ECR paths, see Pulling an Image (https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-pull-ecr-image.html)
 // in the Amazon ECR User Guide.
 type DeployedImage struct {
 
@@ -3338,7 +2969,7 @@ type DeployedImage struct {
 	// ResolvedImage
 	ResolutionTime *time.Time
 
-	// The specific digest path of the image hosted in this ProductionVariant.
+	// The specific digest path of the image hosted in this ProductionVariant .
 	ResolvedImage *string
 
 	// The image path you specified when you created the model.
@@ -3619,16 +3250,16 @@ type DomainDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of settings that apply to the SageMaker Domain. These settings are
-// specified through the CreateDomain API call.
+// A collection of settings that apply to the SageMaker Domain. These settings
+// are specified through the CreateDomain  API call.
 type DomainSettings struct {
 
 	// The configuration for attaching a SageMaker user profile name to the execution
-	// role as a sts:SourceIdentity key
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html).
+	// role as a sts:SourceIdentity key (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html)
+	// .
 	ExecutionRoleIdentityConfig ExecutionRoleIdentityConfig
 
-	// A collection of settings that configure the RStudioServerPro Domain-level app.
+	// A collection of settings that configure the RStudioServerPro  Domain-level app.
 	RStudioServerProDomainSettings *RStudioServerProDomainSettings
 
 	// The security groups for the Amazon Virtual Private Cloud that the Domain uses
@@ -3638,17 +3269,16 @@ type DomainSettings struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of Domain configuration settings to update.
+// A collection of Domain  configuration settings to update.
 type DomainSettingsForUpdate struct {
 
 	// The configuration for attaching a SageMaker user profile name to the execution
-	// role as a sts:SourceIdentity key
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html).
-	// This configuration can only be modified if there are no apps in the InService or
-	// Pending state.
+	// role as a sts:SourceIdentity key (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html)
+	// . This configuration can only be modified if there are no apps in the InService
+	// or Pending  state.
 	ExecutionRoleIdentityConfig ExecutionRoleIdentityConfig
 
-	// A collection of RStudioServerPro Domain-level app settings to update.
+	// A collection of RStudioServerPro  Domain-level app settings to update.
 	RStudioServerProDomainSettingsForUpdate *RStudioServerProDomainSettingsForUpdate
 
 	// The security groups for the Amazon Virtual Private Cloud that the Domain uses
@@ -3658,8 +3288,8 @@ type DomainSettingsForUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the drift check baselines that can be used when the model monitor is
-// set using the model package.
+// Represents the drift check baselines that can be used when the model monitor
+// is set using the model package.
 type DriftCheckBaselines struct {
 
 	// Represents the drift check bias baselines that can be used when the model
@@ -3740,11 +3370,11 @@ type DriftCheckModelQuality struct {
 type Edge struct {
 
 	// The type of the Association(Edge) between the source and destination. For
-	// example ContributedTo, Produced, or DerivedFrom.
+	// example ContributedTo , Produced , or DerivedFrom .
 	AssociationType AssociationEdgeType
 
-	// The Amazon Resource Name (ARN) of the destination lineage entity of the directed
-	// edge.
+	// The Amazon Resource Name (ARN) of the destination lineage entity of the
+	// directed edge.
 	DestinationArn *string
 
 	// The Amazon Resource Name (ARN) of the source lineage entity of the directed
@@ -3833,8 +3463,8 @@ type EdgeDeploymentStatus struct {
 	// This member is required.
 	EdgeDeploymentFailedInStage int32
 
-	// The number of edge devices yet to pick up the deployment in current stage, or in
-	// progress.
+	// The number of edge devices yet to pick up the deployment in current stage, or
+	// in progress.
 	//
 	// This member is required.
 	EdgeDeploymentPendingInStage int32
@@ -3904,7 +3534,8 @@ type EdgeModelStat struct {
 	// This member is required.
 	ModelVersion *string
 
-	// The number of devices that have this model version and do not have a heart beat.
+	// The number of devices that have this model version and do not have a heart
+	// beat.
 	//
 	// This member is required.
 	OfflineDeviceCount int64
@@ -3950,27 +3581,15 @@ type EdgeOutputConfig struct {
 	// The configuration used to create deployment artifacts. Specify configuration
 	// options with a JSON string. The available configuration options for each type
 	// are:
-	// - ComponentName (optional) - Name of the GreenGrass V2 component. If not
-	// specified, the default name generated consists of "SagemakerEdgeManager" and the
-	// name of your SageMaker Edge Manager packaging job.
-	// - ComponentDescription
-	// (optional) - Description of the component.
-	// - ComponentVersion (optional) - The
-	// version of the component. Amazon Web Services IoT Greengrass uses semantic
-	// versions for components. Semantic versions follow a major.minor.patch number
-	// system. For example, version 1.0.0 represents the first major release for a
-	// component. For more information, see the semantic version specification
-	// (https://semver.org/).
-	// - PlatformOS (optional) - The name of the operating
-	// system for the platform. Supported platforms include Windows and Linux.
-	// -
-	// PlatformArchitecture (optional) - The processor architecture for the platform.
-	// Supported architectures Windows include: Windows32_x86, Windows64_x64. Supported
-	// architectures for Linux include: Linux x86_64, Linux ARMV8.
+	//     - ComponentName (optional) - Name of the GreenGrass V2 component. If not specified, the default name generated consists of "SagemakerEdgeManager" and the name of your SageMaker Edge Manager packaging job.
+	//     - ComponentDescription (optional) - Description of the component.
+	//     - ComponentVersion (optional) - The version of the component. Amazon Web Services IoT Greengrass uses semantic versions for components. Semantic versions follow a major.minor.patch number system. For example, version 1.0.0 represents the first major release for a component. For more information, see the semantic version specification (https://semver.org/) .
+	//     - PlatformOS (optional) - The name of the operating system for the platform. Supported platforms include Windows and Linux.
+	//     - PlatformArchitecture (optional) - The processor architecture for the platform. Supported architectures Windows include: Windows32_x86, Windows64_x64. Supported architectures for Linux include: Linux x86_64, Linux ARMV8.
 	PresetDeploymentConfig *string
 
-	// The deployment type SageMaker Edge Manager will create. Currently only supports
-	// Amazon Web Services IoT Greengrass Version 2 components.
+	// The deployment type SageMaker Edge Manager will create. Currently only
+	// supports Amazon Web Services IoT Greengrass Version 2 components.
 	PresetDeploymentType EdgePresetDeploymentType
 
 	noSmithyDocumentSerde
@@ -4092,8 +3711,8 @@ type Endpoint struct {
 	FailureReason *string
 
 	// A list of monitoring schedules for the endpoint. For information about model
-	// monitoring, see Amazon SageMaker Model Monitor
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html).
+	// monitoring, see Amazon SageMaker Model Monitor (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html)
+	// .
 	MonitoringSchedules []MonitoringSchedule
 
 	// A list of the production variants hosted on the endpoint. Each production
@@ -4106,9 +3725,8 @@ type Endpoint struct {
 	ShadowProductionVariants []ProductionVariantSummary
 
 	// A list of the tags associated with the endpoint. For more information, see
-	// Tagging Amazon Web Services resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-	// Web Services General Reference Guide.
+	// Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the Amazon Web Services General Reference Guide.
 	Tags []Tag
 
 	noSmithyDocumentSerde
@@ -4135,8 +3753,8 @@ type EndpointConfigSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Details about a customer endpoint that was compared in an Inference Recommender
-// job.
+// Details about a customer endpoint that was compared in an Inference
+// Recommender job.
 type EndpointInfo struct {
 
 	// The name of a customer's endpoint.
@@ -4150,7 +3768,7 @@ type EndpointInfo struct {
 // Input object for the endpoint
 type EndpointInput struct {
 
-	// An endpoint in customer's account which has enabled DataCaptureConfig enabled.
+	// An endpoint in customer's account which has enabled DataCaptureConfig  enabled.
 	//
 	// This member is required.
 	EndpointName *string
@@ -4162,8 +3780,8 @@ type EndpointInput struct {
 
 	// If specified, monitoring jobs substract this time from the end time. For
 	// information about using offsets for scheduling monitoring jobs, see Schedule
-	// Model Quality Monitoring Jobs
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html).
+	// Model Quality Monitoring Jobs (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html)
+	// .
 	EndTimeOffset *string
 
 	// The attributes of the input data that are the input features.
@@ -4179,19 +3797,19 @@ type EndpointInput struct {
 	// The threshold for the class probability to be evaluated as a positive result.
 	ProbabilityThresholdAttribute *float64
 
-	// Whether input data distributed in Amazon S3 is fully replicated or sharded by an
-	// S3 key. Defaults to FullyReplicated
+	// Whether input data distributed in Amazon S3 is fully replicated or sharded by
+	// an S3 key. Defaults to FullyReplicated
 	S3DataDistributionType ProcessingS3DataDistributionType
 
-	// Whether the Pipe or File is used as the input mode for transferring data for the
-	// monitoring job. Pipe mode is recommended for large datasets. File mode is useful
-	// for small files that fit in memory. Defaults to File.
+	// Whether the Pipe  or File is used as the input mode for transferring data for
+	// the monitoring job. Pipe  mode is recommended for large datasets. File mode is
+	// useful for small files that fit in memory. Defaults to File .
 	S3InputMode ProcessingS3InputMode
 
 	// If specified, monitoring jobs substract this time from the start time. For
 	// information about using offsets for scheduling monitoring jobs, see Schedule
-	// Model Quality Monitoring Jobs
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html).
+	// Model Quality Monitoring Jobs (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html)
+	// .
 	StartTimeOffset *string
 
 	noSmithyDocumentSerde
@@ -4226,18 +3844,18 @@ type EndpointMetadata struct {
 	EndpointConfigName *string
 
 	// The status of the endpoint. For possible values of the status of an endpoint,
-	// see EndpointSummary$EndpointStatus.
+	// see EndpointSummary$EndpointStatus .
 	EndpointStatus EndpointStatus
 
-	// If the status of the endpoint is Failed, or the status is InService but update
-	// operation fails, this provides the reason why it failed.
+	// If the status of the endpoint is Failed , or the status is InService but
+	// update operation fails, this provides the reason why it failed.
 	FailureReason *string
 
 	noSmithyDocumentSerde
 }
 
-// The endpoint configuration made by Inference Recommender during a recommendation
-// job.
+// The endpoint configuration made by Inference Recommender during a
+// recommendation job.
 type EndpointOutputConfiguration struct {
 
 	// The name of the endpoint made during a recommendation job.
@@ -4255,8 +3873,8 @@ type EndpointOutputConfiguration struct {
 	// This member is required.
 	InstanceType ProductionVariantInstanceType
 
-	// The name of the production variant (deployed model) made during a recommendation
-	// job.
+	// The name of the production variant (deployed model) made during a
+	// recommendation job.
 	//
 	// This member is required.
 	VariantName *string
@@ -4264,12 +3882,12 @@ type EndpointOutputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The performance results from running an Inference Recommender job on an existing
-// endpoint.
+// The performance results from running an Inference Recommender job on an
+// existing endpoint.
 type EndpointPerformance struct {
 
-	// Details about a customer endpoint that was compared in an Inference Recommender
-	// job.
+	// Details about a customer endpoint that was compared in an Inference
+	// Recommender job.
 	//
 	// This member is required.
 	EndpointInfo *EndpointInfo
@@ -4301,31 +3919,14 @@ type EndpointSummary struct {
 	EndpointName *string
 
 	// The status of the endpoint.
-	// - OutOfService: Endpoint is not available to take
-	// incoming requests.
-	// - Creating: CreateEndpoint is executing.
-	// - Updating:
-	// UpdateEndpoint or UpdateEndpointWeightsAndCapacities is executing.
-	// -
-	// SystemUpdating: Endpoint is undergoing maintenance and cannot be updated or
-	// deleted or re-scaled until it has completed. This maintenance operation does not
-	// change any customer-specified values such as VPC config, KMS encryption, model,
-	// instance type, or instance count.
-	// - RollingBack: Endpoint fails to scale up or
-	// down or change its variant weight and is in the process of rolling back to its
-	// previous configuration. Once the rollback completes, endpoint returns to an
-	// InService status. This transitional status only applies to an endpoint that has
-	// autoscaling enabled and is undergoing variant weight or capacity changes as part
-	// of an UpdateEndpointWeightsAndCapacities call or when the
-	// UpdateEndpointWeightsAndCapacities operation is called explicitly.
-	// - InService:
-	// Endpoint is available to process incoming requests.
-	// - Deleting: DeleteEndpoint
-	// is executing.
-	// - Failed: Endpoint could not be created, updated, or re-scaled.
-	// Use DescribeEndpointOutput$FailureReason for information about the failure.
-	// DeleteEndpoint is the only operation that can be performed on a failed
-	// endpoint.
+	//     - OutOfService : Endpoint is not available to take incoming requests.
+	//     - Creating : CreateEndpoint is executing.
+	//     - Updating : UpdateEndpoint or UpdateEndpointWeightsAndCapacities is executing.
+	//     - SystemUpdating : Endpoint is undergoing maintenance and cannot be updated or deleted or re-scaled until it has completed. This maintenance operation does not change any customer-specified values such as VPC config, KMS encryption, model, instance type, or instance count.
+	//     - RollingBack : Endpoint fails to scale up or down or change its variant weight and is in the process of rolling back to its previous configuration. Once the rollback completes, endpoint returns to an InService status. This transitional status only applies to an endpoint that has autoscaling enabled and is undergoing variant weight or capacity changes as part of an UpdateEndpointWeightsAndCapacities call or when the UpdateEndpointWeightsAndCapacities operation is called explicitly.
+	//     - InService : Endpoint is available to process incoming requests.
+	//     - Deleting : DeleteEndpoint is executing.
+	//     - Failed : Endpoint could not be created, updated, or re-scaled. Use DescribeEndpointOutput$FailureReason for information about the failure. DeleteEndpoint is the only operation that can be performed on a failed endpoint.
 	//
 	// To get a list of endpoints with a specified status, use the
 	// ListEndpointsInput$StatusEquals filter.
@@ -4372,7 +3973,7 @@ type EnvironmentParameterRanges struct {
 	noSmithyDocumentSerde
 }
 
-// The properties of an experiment as returned by the Search API.
+// The properties of an experiment as returned by the Search  API.
 type Experiment struct {
 
 	// Who created the experiment.
@@ -4384,7 +3985,7 @@ type Experiment struct {
 	// The description of the experiment.
 	Description *string
 
-	// The name of the experiment as displayed. If DisplayName isn't specified,
+	// The name of the experiment as displayed. If DisplayName  isn't specified,
 	// ExperimentName is displayed.
 	DisplayName *string
 
@@ -4404,8 +4005,8 @@ type Experiment struct {
 	// The source of the experiment.
 	Source *ExperimentSource
 
-	// The list of tags that are associated with the experiment. You can use Search API
-	// to search on the tags.
+	// The list of tags that are associated with the experiment. You can use Search
+	// API to search on the tags.
 	Tags []Tag
 
 	noSmithyDocumentSerde
@@ -4413,10 +4014,9 @@ type Experiment struct {
 
 // Associates a SageMaker job as a trial component with an experiment and trial.
 // Specified when you call the following APIs:
-// - CreateProcessingJob
-// -
-// CreateTrainingJob
-// - CreateTransformJob
+//   - CreateProcessingJob
+//   - CreateTrainingJob
+//   - CreateTransformJob
 type ExperimentConfig struct {
 
 	// The name of an existing experiment to associate with the trial component.
@@ -4451,13 +4051,13 @@ type ExperimentSource struct {
 }
 
 // A summary of the properties of an experiment. To get the complete set of
-// properties, call the DescribeExperiment API and provide the ExperimentName.
+// properties, call the DescribeExperiment  API and provide the ExperimentName .
 type ExperimentSummary struct {
 
 	// When the experiment was created.
 	CreationTime *time.Time
 
-	// The name of the experiment as displayed. If DisplayName isn't specified,
+	// The name of the experiment as displayed. If DisplayName  isn't specified,
 	// ExperimentName is displayed.
 	DisplayName *string
 
@@ -4505,12 +4105,12 @@ type FailStepMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// A list of features. You must include FeatureName and FeatureType. Valid feature
-// FeatureTypes are Integral, Fractional and String.
+// A list of features. You must include FeatureName  and FeatureType. Valid
+// feature FeatureType s are Integral , Fractional  and String .
 type FeatureDefinition struct {
 
 	// The name of a feature. The type must be a string. FeatureName cannot be any of
-	// the following: is_deleted, write_time, api_invocation_time.
+	// the following: is_deleted , write_time , api_invocation_time .
 	FeatureName *string
 
 	// The value type of a feature. Valid values are Integral, Fractional, or String.
@@ -4525,36 +4125,37 @@ type FeatureDefinition struct {
 // principle, a Feature Group is composed of features and values per features.
 type FeatureGroup struct {
 
-	// The time a FeatureGroup was created.
+	// The time a FeatureGroup  was created.
 	CreationTime *time.Time
 
-	// A free form description of a FeatureGroup.
+	// A free form description of a FeatureGroup .
 	Description *string
 
-	// The name of the feature that stores the EventTime of a Record in a FeatureGroup.
-	// A EventTime is point in time when a new event occurs that corresponds to the
-	// creation or update of a Record in FeatureGroup. All Records in the FeatureGroup
-	// must have a corresponding EventTime.
+	// The name of the feature that stores the EventTime  of a Record in a
+	// FeatureGroup . A EventTime is point in time when a new event occurs that
+	// corresponds to the creation or update of a Record  in FeatureGroup . All
+	// Records in the FeatureGroup  must have a corresponding EventTime .
 	EventTimeFeatureName *string
 
-	// The reason that the FeatureGroup failed to be replicated in the OfflineStore.
-	// This is failure may be due to a failure to create a FeatureGroup in or delete a
-	// FeatureGroup from the OfflineStore.
+	// The reason that the FeatureGroup  failed to be replicated in the OfflineStore.
+	// This is failure may be due to a failure to create a FeatureGroup in or delete
+	// a FeatureGroup  from the OfflineStore .
 	FailureReason *string
 
-	// A list of Features. Each Feature must include a FeatureName and a FeatureType.
-	// Valid FeatureTypes are Integral, Fractional and String. FeatureNames cannot be
-	// any of the following: is_deleted, write_time, api_invocation_time. You can
-	// create up to 2,500 FeatureDefinitions per FeatureGroup.
+	// A list of Feature s. Each Feature  must include a FeatureName  and a
+	// FeatureType . Valid FeatureType s are Integral , Fractional  and String .
+	// FeatureName s cannot be any of the following: is_deleted , write_time ,
+	// api_invocation_time . You can create up to 2,500 FeatureDefinition s per
+	// FeatureGroup .
 	FeatureDefinitions []FeatureDefinition
 
-	// The Amazon Resource Name (ARN) of a FeatureGroup.
+	// The Amazon Resource Name (ARN) of a FeatureGroup .
 	FeatureGroupArn *string
 
-	// The name of the FeatureGroup.
+	// The name of the FeatureGroup .
 	FeatureGroupName *string
 
-	// A FeatureGroup status.
+	// A FeatureGroup  status.
 	FeatureGroupStatus FeatureGroupStatus
 
 	// A timestamp indicating the last time you updated the feature group.
@@ -4563,60 +4164,60 @@ type FeatureGroup struct {
 	// A value that indicates whether the feature group was updated successfully.
 	LastUpdateStatus *LastUpdateStatus
 
-	// The configuration of an OfflineStore. Provide an OfflineStoreConfig in a request
-	// to CreateFeatureGroup to create an OfflineStore. To encrypt an OfflineStore
-	// using at rest data encryption, specify Amazon Web Services Key Management
-	// Service (KMS) key ID, or KMSKeyId, in S3StorageConfig.
+	// The configuration of an OfflineStore . Provide an OfflineStoreConfig in a
+	// request to CreateFeatureGroup  to create an OfflineStore . To encrypt an
+	// OfflineStoreusing at rest data encryption, specify Amazon Web Services Key
+	// Management Service (KMS) key ID, or KMSKeyId , in S3StorageConfig .
 	OfflineStoreConfig *OfflineStoreConfig
 
-	// The status of OfflineStore.
+	// The status of OfflineStore .
 	OfflineStoreStatus *OfflineStoreStatus
 
-	// Use this to specify the Amazon Web Services Key Management Service (KMS) Key ID,
-	// or KMSKeyId, for at rest data encryption. You can turn OnlineStore on or off by
-	// specifying the EnableOnlineStore flag at General Assembly; the default value is
-	// False.
+	// Use this to specify the Amazon Web Services Key Management Service (KMS) Key
+	// ID, or KMSKeyId , for at rest data encryption. You can turn OnlineStore on or
+	// off by specifying the EnableOnlineStore flag at General Assembly; the default
+	// value is False .
 	OnlineStoreConfig *OnlineStoreConfig
 
-	// The name of the Feature whose value uniquely identifies a Record defined in the
-	// FeatureGroupFeatureDefinitions.
+	// The name of the Feature  whose value uniquely identifies a Record defined in
+	// the FeatureGroup FeatureDefinitions .
 	RecordIdentifierFeatureName *string
 
 	// The Amazon Resource Name (ARN) of the IAM execution role used to create the
 	// feature group.
 	RoleArn *string
 
-	// Tags used to define a FeatureGroup.
+	// Tags used to define a FeatureGroup .
 	Tags []Tag
 
 	noSmithyDocumentSerde
 }
 
-// The name, Arn, CreationTime, FeatureGroup values, LastUpdatedTime and
-// EnableOnlineStorage status of a FeatureGroup.
+// The name, Arn, CreationTime , FeatureGroup  values, LastUpdatedTime  and
+// EnableOnlineStorage status of a FeatureGroup .
 type FeatureGroupSummary struct {
 
-	// A timestamp indicating the time of creation time of the FeatureGroup.
+	// A timestamp indicating the time of creation time of the FeatureGroup .
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// Unique identifier for the FeatureGroup.
+	// Unique identifier for the FeatureGroup .
 	//
 	// This member is required.
 	FeatureGroupArn *string
 
-	// The name of FeatureGroup.
+	// The name of FeatureGroup .
 	//
 	// This member is required.
 	FeatureGroupName *string
 
-	// The status of a FeatureGroup. The status can be any of the following: Creating,
-	// Created, CreateFail, Deleting or DetailFail.
+	// The status of a FeatureGroup. The status can be any of the following: Creating
+	// , Created , CreateFail , Deleting  or DetailFail .
 	FeatureGroupStatus FeatureGroupStatus
 
 	// Notifies you if replicating data into the OfflineStore has failed. Returns
-	// either: Active or Blocked.
+	// either: Active  or Blocked .
 	OfflineStoreStatus *OfflineStoreStatus
 
 	noSmithyDocumentSerde
@@ -4686,14 +4287,14 @@ type FileSource struct {
 // image.
 type FileSystemConfig struct {
 
-	// The default POSIX group ID (GID). If not specified, defaults to 100.
+	// The default POSIX group ID (GID). If not specified, defaults to 100 .
 	DefaultGid *int32
 
-	// The default POSIX user ID (UID). If not specified, defaults to 1000.
+	// The default POSIX user ID (UID). If not specified, defaults to 1000 .
 	DefaultUid *int32
 
-	// The path within the image to mount the user's EFS home directory. The directory
-	// should be empty. If not specified, defaults to /home/sagemaker-user.
+	// The path within the image to mount the user's EFS home directory. The
+	// directory should be empty. If not specified, defaults to /home/sagemaker-user.
 	MountPath *string
 
 	noSmithyDocumentSerde
@@ -4708,7 +4309,7 @@ type FileSystemDataSource struct {
 	DirectoryPath *string
 
 	// The access mode of the mount of the directory associated with the channel. A
-	// directory can be mounted either in ro (read-only) or rw (read-write) mode.
+	// directory can be mounted either in ro  (read-only) or rw  (read-write) mode.
 	//
 	// This member is required.
 	FileSystemAccessMode FileSystemAccessMode
@@ -4728,87 +4329,75 @@ type FileSystemDataSource struct {
 
 // A conditional statement for a search expression that includes a resource
 // property, a Boolean operator, and a value. Resources that match the statement
-// are returned in the results from the Search API. If you specify a Value, but not
-// an Operator, SageMaker uses the equals operator. In search, there are several
-// property types: Metrics To define a metric filter, enter a value using the form
-// "Metrics.", where  is a metric name. For example, the following filter searches
+// are returned in the results from the Search  API. If you specify a Value, but
+// not an Operator, SageMaker uses the equals operator. In search, there are
+// several property types: Metrics To define a metric filter, enter a value using
+// the form "Metrics." , where  is a metric name. For example, the following
+// filter searches for training jobs with an "accuracy"  metric greater than "0.9"
 //
-//	for training jobs with an "accuracy" metric greater than "0.9": {
+//	: {
+//	     "Name": "Metrics.accuracy",
+//
+//	    "Operator": "GreaterThan",
+//
+//	    "Value": "0.9"
+//	 } HyperParameters To define a hyperparameter filter, enter a value with the
+//
+// form "HyperParameters.". Decimal hyperparameter values are treated as a
+// decimal in a comparison if the specified Value is also a decimal value. If the
+// specified Value is an integer, the decimal hyperparameter values are treated
+// as integers. For example, the following filter is satisfied by training jobs
+//
+//	with a "learning_rate"  hyperparameter that is less than "0.5" :  {
 //	    "Name":
+//	    "HyperParameters.learning_rate",
 //
-// "Metrics.accuracy",
+//	    "Operator": "LessThan",
 //
-//	"Operator": "GreaterThan",
-//
-//	"Value": "0.9"
-//
-// }
-// HyperParameters To define a hyperparameter filter, enter a value with the form
-// "HyperParameters.". Decimal hyperparameter values are treated as a decimal in a
-// comparison if the specified Value is also a decimal value. If the specified
-// Value is an integer, the decimal hyperparameter values are treated as integers.
-// For example, the following filter is satisfied by training jobs with a
-//
-//	"learning_rate" hyperparameter that is less than "0.5":  {
-//	    "Name":
-//
-// "HyperParameters.learning_rate",
-//
-//	"Operator": "LessThan",
-//
-//	"Value":
-//
-// "0.5"
-//
-// } Tags To define a tag filter, enter a value with the form Tags..
+//	    "Value": "0.5"
+//	 }  Tags To define a tag filter, enter a value with the form Tags. .
 type Filter struct {
 
 	// A resource property name. For example, TrainingJobName. For valid property
-	// names, see SearchRecord. You must specify a valid property for the resource.
+	// names, see SearchRecord . You must specify a valid property for the resource.
 	//
 	// This member is required.
 	Name *string
 
 	// A Boolean binary operator that is used to evaluate the filter. The operator
-	// field contains one of the following values: Equals The value of Name equals
-	// Value. NotEquals The value of Name doesn't equal Value. Exists The Name property
-	// exists. NotExists The Name property does not exist. GreaterThan The value of
-	// Name is greater than Value. Not supported for text properties.
-	// GreaterThanOrEqualTo The value of Name is greater than or equal to Value. Not
-	// supported for text properties. LessThan The value of Name is less than Value.
+	// field contains one of the following values: Equals The value of Name  equals
+	// Value . NotEquals The value of Name  doesn't equal Value . Exists The Name
+	// property exists. NotExists The Name property does not exist. GreaterThan The
+	// value of Name  is greater than Value. Not supported for text properties.
+	// GreaterThanOrEqualTo The value of Name  is greater than or equal to Value. Not
+	// supported for text properties. LessThan The value of Name  is less than Value.
 	// Not supported for text properties. LessThanOrEqualTo The value of Name is less
-	// than or equal to Value. Not supported for text properties. In The value of Name
-	// is one of the comma delimited strings in Value. Only supported for text
-	// properties. Contains The value of Name contains the string Value. Only supported
-	// for text properties. A SearchExpression can include the Contains operator
-	// multiple times when the value of Name is one of the following:
-	// -
-	// Experiment.DisplayName
-	// - Experiment.ExperimentName
-	// - Experiment.Tags
-	// -
-	// Trial.DisplayName
-	// - Trial.TrialName
-	// - Trial.Tags
-	// - TrialComponent.DisplayName
-	// -
-	// TrialComponent.TrialComponentName
-	// - TrialComponent.Tags
-	// -
-	// TrialComponent.InputArtifacts
-	// - TrialComponent.OutputArtifacts
-	//
-	// A
-	// SearchExpression can include only one Contains operator for all other values of
-	// Name. In these cases, if you include multiple Contains operators in the
-	// SearchExpression, the result is the following error message: "'CONTAINS'
-	// operator usage limit of 1 exceeded."
+	// than or equal to Value . Not supported for text properties. In The value of
+	// Name is one of the comma delimited strings in Value. Only supported for text
+	// properties. Contains The value of Name  contains the string Value. Only
+	// supported for text properties. A SearchExpression  can include the Contains
+	// operator multiple times when the value of Name  is one of the following:
+	//     - Experiment.DisplayName
+	//     - Experiment.ExperimentName
+	//     - Experiment.Tags
+	//     - Trial.DisplayName
+	//     - Trial.TrialName
+	//     - Trial.Tags
+	//     - TrialComponent.DisplayName
+	//     - TrialComponent.TrialComponentName
+	//     - TrialComponent.Tags
+	//     - TrialComponent.InputArtifacts
+	//     - TrialComponent.OutputArtifacts
+	//  A SearchExpression  can include only one Contains operator for all other
+	// values of Name . In these cases, if you include multiple Contains operators in
+	// the SearchExpression , the result is the following error message: "'CONTAINS'
+	// operator usage limit of 1 exceeded. "
 	Operator Operator
 
-	// A value used with Name and Operator to determine which resources satisfy the
+	// A value used with Name  and Operator to determine which resources satisfy the
 	// filter's condition. For numerical properties, Value must be an integer or
 	// floating-point decimal. For timestamp properties, Value must be an ISO 8601
-	// date-time string of the following format: YYYY-mm-dd'T'HH:MM:SS.
+	// date-time string of the following format: YYYY-mm-dd'T'HH:MM:SS .
 	Value *string
 
 	noSmithyDocumentSerde
@@ -4818,8 +4407,8 @@ type Filter struct {
 type FinalAutoMLJobObjectiveMetric struct {
 
 	// The name of the metric with the best result. For a description of the possible
-	// objective metrics, see AutoMLJobObjective$MetricName
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html).
+	// objective metrics, see AutoMLJobObjective$MetricName (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html)
+	// .
 	//
 	// This member is required.
 	MetricName AutoMLMetricEnum
@@ -4829,9 +4418,9 @@ type FinalAutoMLJobObjectiveMetric struct {
 	// This member is required.
 	Value float32
 
-	// The name of the standard metric. For a description of the standard metrics, see
-	// Autopilot candidate metrics
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics).
+	// The name of the standard metric. For a description of the standard metrics,
+	// see Autopilot candidate metrics (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics)
+	// .
 	StandardMetricName AutoMLMetricEnum
 
 	// The type of metric with the best result.
@@ -4840,17 +4429,16 @@ type FinalAutoMLJobObjectiveMetric struct {
 	noSmithyDocumentSerde
 }
 
-// Shows the latest objective metric emitted by a training job that was launched by
-// a hyperparameter tuning job. You define the objective metric in the
-// HyperParameterTuningJobObjective parameter of HyperParameterTuningJobConfig.
+// Shows the latest objective metric emitted by a training job that was launched
+// by a hyperparameter tuning job. You define the objective metric in the
+// HyperParameterTuningJobObjective parameter of HyperParameterTuningJobConfig .
 type FinalHyperParameterTuningJobObjectiveMetric struct {
 
-	// The name of the objective metric. For SageMaker built-in algorithms, metrics are
-	// defined per algorithm. See the metrics for XGBoost
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/xgboost-tuning.html) as an
-	// example. You can also use a custom algorithm for training and define your own
-	// metrics. For more information, see Define metrics and environment variables
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html).
+	// The name of the objective metric. For SageMaker built-in algorithms, metrics
+	// are defined per algorithm. See the metrics for XGBoost (https://docs.aws.amazon.com/sagemaker/latest/dg/xgboost-tuning.html)
+	// as an example. You can also use a custom algorithm for training and define your
+	// own metrics. For more information, see Define metrics and environment variables (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html)
+	// .
 	//
 	// This member is required.
 	MetricName *string
@@ -4871,9 +4459,9 @@ type FinalHyperParameterTuningJobObjectiveMetric struct {
 type FlowDefinitionOutputConfig struct {
 
 	// The Amazon S3 path where the object containing human output will be made
-	// available. To learn more about the format of Amazon A2I output data, see Amazon
-	// A2I Output Data
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-output-data.html).
+	// available. To learn more about the format of Amazon A2I output data, see
+	// Amazon A2I Output Data (https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-output-data.html)
+	// .
 	//
 	// This member is required.
 	S3OutputPath *string
@@ -4907,15 +4495,15 @@ type FlowDefinitionSummary struct {
 	// This member is required.
 	FlowDefinitionStatus FlowDefinitionStatus
 
-	// The reason why the flow definition creation failed. A failure reason is returned
-	// only when the flow definition status is Failed.
+	// The reason why the flow definition creation failed. A failure reason is
+	// returned only when the flow definition status is Failed .
 	FailureReason *string
 
 	noSmithyDocumentSerde
 }
 
-// Specifies configuration details for a Git repository in your Amazon Web Services
-// account.
+// Specifies configuration details for a Git repository in your Amazon Web
+// Services account.
 type GitConfig struct {
 
 	// The URL where the Git repository is located.
@@ -4926,10 +4514,10 @@ type GitConfig struct {
 	// The default branch for the Git repository.
 	Branch *string
 
-	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret
-	// that contains the credentials used to access the git repository. The secret must
-	// have a staging label of AWSCURRENT and must be in the following format:
-	// {"username": UserName, "password": Password}
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret that contains the credentials used to access the git repository. The
+	// secret must have a staging label of AWSCURRENT and must be in the following
+	// format: {"username": UserName, "password": Password}
 	SecretArn *string
 
 	noSmithyDocumentSerde
@@ -4939,10 +4527,10 @@ type GitConfig struct {
 // updated.
 type GitConfigForUpdate struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret
-	// that contains the credentials used to access the git repository. The secret must
-	// have a staging label of AWSCURRENT and must be in the following format:
-	// {"username": UserName, "password": Password}
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret that contains the credentials used to access the git repository. The
+	// secret must have a staging label of AWSCURRENT and must be in the following
+	// format: {"username": UserName, "password": Password}
 	SecretArn *string
 
 	noSmithyDocumentSerde
@@ -5060,16 +4648,15 @@ type HubS3StorageConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Defines under what conditions SageMaker creates a human loop. Used within . See
-// for the required format of activation conditions.
+// Defines under what conditions SageMaker creates a human loop. Used within .
+// See for the required format of activation conditions.
 type HumanLoopActivationConditionsConfig struct {
 
-	// JSON expressing use-case specific conditions declaratively. If any condition is
-	// matched, atomic tasks are created against the configured work team. The set of
-	// conditions is different for Rekognition and Textract. For more information about
-	// how to structure the JSON, see JSON Schema for Human Loop Activation Conditions
-	// in Amazon Augmented AI
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-human-fallback-conditions-json-schema.html)
+	// JSON expressing use-case specific conditions declaratively. If any condition
+	// is matched, atomic tasks are created against the configured work team. The set
+	// of conditions is different for Rekognition and Textract. For more information
+	// about how to structure the JSON, see JSON Schema for Human Loop Activation
+	// Conditions in Amazon Augmented AI (https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-human-fallback-conditions-json-schema.html)
 	// in the Amazon SageMaker Developer Guide.
 	//
 	// This value conforms to the media type: application/json
@@ -5085,8 +4672,8 @@ type HumanLoopActivationConditionsConfig struct {
 // humans.
 type HumanLoopActivationConfig struct {
 
-	// Container structure for defining under what conditions SageMaker creates a human
-	// loop.
+	// Container structure for defining under what conditions SageMaker creates a
+	// human loop.
 	//
 	// This member is required.
 	HumanLoopActivationConditionsConfig *HumanLoopActivationConditionsConfig
@@ -5100,19 +4687,18 @@ type HumanLoopConfig struct {
 	// The Amazon Resource Name (ARN) of the human task user interface. You can use
 	// standard HTML and Crowd HTML Elements to create a custom worker task template.
 	// You use this template to create a human task UI. To learn how to create a custom
-	// HTML template, see Create Custom Worker Task Template
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-custom-templates.html). To
-	// learn how to create a human task UI, which is a worker task template that can be
-	// used in a flow definition, see Create and Delete a Worker Task Templates
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-worker-template-console.html).
+	// HTML template, see Create Custom Worker Task Template (https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-custom-templates.html)
+	// . To learn how to create a human task UI, which is a worker task template that
+	// can be used in a flow definition, see Create and Delete a Worker Task Templates (https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-worker-template-console.html)
+	// .
 	//
 	// This member is required.
 	HumanTaskUiArn *string
 
 	// The number of distinct workers who will perform the same task on each object.
-	// For example, if TaskCount is set to 3 for an image classification labeling job,
-	// three workers will classify each input image. Increasing TaskCount can improve
-	// label accuracy.
+	// For example, if TaskCount  is set to 3 for an image classification labeling
+	// job, three workers will classify each input image. Increasing TaskCount can
+	// improve label accuracy.
 	//
 	// This member is required.
 	TaskCount *int32
@@ -5128,9 +4714,9 @@ type HumanLoopConfig struct {
 	TaskTitle *string
 
 	// Amazon Resource Name (ARN) of a team of workers. To learn more about the types
-	// of workforces and work teams you can create and use with Amazon A2I, see Create
-	// and Manage Workforces
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-management.html).
+	// of workforces and work teams you can create and use with Amazon A2I, see
+	// Create and Manage Workforces (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-management.html)
+	// .
 	//
 	// This member is required.
 	WorkteamArn *string
@@ -5139,125 +4725,109 @@ type HumanLoopConfig struct {
 	// task performed. Use one of the following prices for bounding box tasks. Prices
 	// are in US dollars and should be based on the complexity of the task; the longer
 	// it takes in your initial testing, the more you should offer.
-	// - 0.036
-	// - 0.048
-	// -
-	// 0.060
-	// - 0.072
-	// - 0.120
-	// - 0.240
-	// - 0.360
-	// - 0.480
-	// - 0.600
-	// - 0.720
-	// - 0.840
-	// - 0.960
-	// -
-	// 1.080
-	// - 1.200
-	//
+	//     - 0.036
+	//     - 0.048
+	//     - 0.060
+	//     - 0.072
+	//     - 0.120
+	//     - 0.240
+	//     - 0.360
+	//     - 0.480
+	//     - 0.600
+	//     - 0.720
+	//     - 0.840
+	//     - 0.960
+	//     - 1.080
+	//     - 1.200
 	// Use one of the following prices for image classification, text
 	// classification, and custom tasks. Prices are in US dollars.
-	// - 0.012
-	// - 0.024
-	// -
-	// 0.036
-	// - 0.048
-	// - 0.060
-	// - 0.072
-	// - 0.120
-	// - 0.240
-	// - 0.360
-	// - 0.480
-	// - 0.600
-	// - 0.720
-	// -
-	// 0.840
-	// - 0.960
-	// - 1.080
-	// - 1.200
-	//
-	// Use one of the following prices for semantic
-	// segmentation tasks. Prices are in US dollars.
-	// - 0.840
-	// - 0.960
-	// - 1.080
-	// -
-	// 1.200
-	//
-	// Use one of the following prices for Textract AnalyzeDocument Important
-	// Form Key Amazon Augmented AI review tasks. Prices are in US dollars.
-	// - 2.400
-	// -
-	// 2.280
-	// - 2.160
-	// - 2.040
-	// - 1.920
-	// - 1.800
-	// - 1.680
-	// - 1.560
-	// - 1.440
-	// - 1.320
-	// - 1.200
-	// -
-	// 1.080
-	// - 0.960
-	// - 0.840
-	// - 0.720
-	// - 0.600
-	// - 0.480
-	// - 0.360
-	// - 0.240
-	// - 0.120
-	// - 0.072
-	// -
-	// 0.060
-	// - 0.048
-	// - 0.036
-	// - 0.024
-	// - 0.012
-	//
-	// Use one of the following prices for
-	// Rekognition DetectModerationLabels Amazon Augmented AI review tasks. Prices are
-	// in US dollars.
-	// - 1.200
-	// - 1.080
-	// - 0.960
-	// - 0.840
-	// - 0.720
-	// - 0.600
-	// - 0.480
-	// - 0.360
-	// -
-	// 0.240
-	// - 0.120
-	// - 0.072
-	// - 0.060
-	// - 0.048
-	// - 0.036
-	// - 0.024
-	// - 0.012
-	//
-	// Use one of the
-	// following prices for Amazon Augmented AI custom human review tasks. Prices are
-	// in US dollars.
-	// - 1.200
-	// - 1.080
-	// - 0.960
-	// - 0.840
-	// - 0.720
-	// - 0.600
-	// - 0.480
-	// - 0.360
-	// -
-	// 0.240
-	// - 0.120
-	// - 0.072
-	// - 0.060
-	// - 0.048
-	// - 0.036
-	// - 0.024
-	// - 0.012
+	//     - 0.012
+	//     - 0.024
+	//     - 0.036
+	//     - 0.048
+	//     - 0.060
+	//     - 0.072
+	//     - 0.120
+	//     - 0.240
+	//     - 0.360
+	//     - 0.480
+	//     - 0.600
+	//     - 0.720
+	//     - 0.840
+	//     - 0.960
+	//     - 1.080
+	//     - 1.200
+	// Use one of the following prices for semantic segmentation tasks.
+	// Prices are in US dollars.
+	//     - 0.840
+	//     - 0.960
+	//     - 1.080
+	//     - 1.200
+	// Use one of the following prices for Textract AnalyzeDocument
+	// Important Form Key Amazon Augmented AI review tasks. Prices are in US dollars.
+	//     - 2.400
+	//     - 2.280
+	//     - 2.160
+	//     - 2.040
+	//     - 1.920
+	//     - 1.800
+	//     - 1.680
+	//     - 1.560
+	//     - 1.440
+	//     - 1.320
+	//     - 1.200
+	//     - 1.080
+	//     - 0.960
+	//     - 0.840
+	//     - 0.720
+	//     - 0.600
+	//     - 0.480
+	//     - 0.360
+	//     - 0.240
+	//     - 0.120
+	//     - 0.072
+	//     - 0.060
+	//     - 0.048
+	//     - 0.036
+	//     - 0.024
+	//     - 0.012
+	// Use one of the following prices for Rekognition
+	// DetectModerationLabels Amazon Augmented AI review tasks. Prices are in US
+	// dollars.
+	//     - 1.200
+	//     - 1.080
+	//     - 0.960
+	//     - 0.840
+	//     - 0.720
+	//     - 0.600
+	//     - 0.480
+	//     - 0.360
+	//     - 0.240
+	//     - 0.120
+	//     - 0.072
+	//     - 0.060
+	//     - 0.048
+	//     - 0.036
+	//     - 0.024
+	//     - 0.012
+	// Use one of the following prices for Amazon Augmented AI custom
+	// human review tasks. Prices are in US dollars.
+	//     - 1.200
+	//     - 1.080
+	//     - 0.960
+	//     - 0.840
+	//     - 0.720
+	//     - 0.600
+	//     - 0.480
+	//     - 0.360
+	//     - 0.240
+	//     - 0.120
+	//     - 0.072
+	//     - 0.060
+	//     - 0.048
+	//     - 0.036
+	//     - 0.024
+	//     - 0.012
 	PublicWorkforceTaskPrice *PublicWorkforceTaskPrice
 
 	// The length of time that a task remains available for review by human workers.
@@ -5301,652 +4871,367 @@ type HumanTaskConfig struct {
 
 	// The Amazon Resource Name (ARN) of a Lambda function that is run before a data
 	// object is sent to a human worker. Use this function to provide input to a custom
-	// labeling job. For built-in task types
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html), use one
-	// of the following Amazon SageMaker Ground Truth Lambda function ARNs for
-	// PreHumanTaskLambdaArn. For custom labeling workflows, see Pre-annotation Lambda
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step3.html#sms-custom-templates-step3-prelambda).
-	// Bounding box - Finds the most similar boxes from different workers based on the
-	// Jaccard index of the boxes.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-BoundingBox
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-BoundingBox
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-BoundingBox
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-BoundingBox
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-BoundingBox
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-BoundingBox
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-BoundingBox
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-BoundingBox
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-BoundingBox
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-BoundingBox
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-BoundingBox
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-BoundingBox
-	//
+	// labeling job. For built-in task types (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html)
+	// , use one of the following Amazon SageMaker Ground Truth Lambda function ARNs
+	// for PreHumanTaskLambdaArn . For custom labeling workflows, see Pre-annotation
+	// Lambda (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step3.html#sms-custom-templates-step3-prelambda)
+	// . Bounding box - Finds the most similar boxes from different workers based on
+	// the Jaccard index of the boxes.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-BoundingBox
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-BoundingBox
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-BoundingBox
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-BoundingBox
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-BoundingBox
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-BoundingBox
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-BoundingBox
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-BoundingBox
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-BoundingBox
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-BoundingBox
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-BoundingBox
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-BoundingBox
 	// Image
 	// classification - Uses a variant of the Expectation Maximization approach to
 	// estimate the true class of an image based on annotations from individual
 	// workers.
-	// - arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClass
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClass
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClass
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-ImageMultiClass
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClass
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClass
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-ImageMultiClass
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClass
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClass
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-ImageMultiClass
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClass
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-ImageMultiClass
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClass
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClass
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClass
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-ImageMultiClass
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClass
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClass
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-ImageMultiClass
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClass
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClass
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-ImageMultiClass
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClass
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-ImageMultiClass
 	//
-	// Multi-label
-	// image classification - Uses a variant of the Expectation Maximization approach
-	// to estimate the true classes of an image based on annotations from individual
-	// workers.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-ImageMultiClassMultiLabel
+	// Multi-label image classification - Uses a variant of the Expectation
+	// Maximization approach to estimate the true classes of an image based on
+	// annotations from individual workers.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-ImageMultiClassMultiLabel
 	//
-	// Semantic
-	// segmentation - Treats each pixel in an image as a multi-class classification and
-	// treats pixel annotations from workers as "votes" for the correct label.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-SemanticSegmentation
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-SemanticSegmentation
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-SemanticSegmentation
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-SemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-SemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-SemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-SemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-SemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-SemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-SemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-SemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-SemanticSegmentation
+	// Semantic segmentation - Treats each pixel in an image as a multi-class
+	// classification and treats pixel annotations from workers as "votes" for the
+	// correct label.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-SemanticSegmentation
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-SemanticSegmentation
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-SemanticSegmentation
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-SemanticSegmentation
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-SemanticSegmentation
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-SemanticSegmentation
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-SemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-SemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-SemanticSegmentation
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-SemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-SemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-SemanticSegmentation
 	//
-	// Text
-	// classification - Uses a variant of the Expectation Maximization approach to
+	// Text classification - Uses a variant of the Expectation Maximization approach to
 	// estimate the true class of text based on annotations from individual workers.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClass
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClass
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClass
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-TextMultiClass
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClass
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClass
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-TextMultiClass
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClass
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-TextMultiClass
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClass
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-TextMultiClass
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClass
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClass
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClass
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClass
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-TextMultiClass
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClass
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClass
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-TextMultiClass
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClass
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-TextMultiClass
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClass
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-TextMultiClass
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClass
 	//
-	// Multi-label
-	// text classification - Uses a variant of the Expectation Maximization approach to
-	// estimate the true classes of text based on annotations from individual
-	// workers.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-TextMultiClassMultiLabel
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClassMultiLabel
+	// Multi-label text classification - Uses a variant of the Expectation Maximization
+	// approach to estimate the true classes of text based on annotations from
+	// individual workers.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-TextMultiClassMultiLabel
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClassMultiLabel
 	//
-	// Named
-	// entity recognition - Groups similar selections and calculates aggregate
+	// Named entity recognition - Groups similar selections and calculates aggregate
 	// boundaries, resolving to most-assigned label.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-NamedEntityRecognition
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-NamedEntityRecognition
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-NamedEntityRecognition
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-NamedEntityRecognition
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-NamedEntityRecognition
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-NamedEntityRecognition
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-NamedEntityRecognition
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-NamedEntityRecognition
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-NamedEntityRecognition
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-NamedEntityRecognition
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-NamedEntityRecognition
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-NamedEntityRecognition
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-NamedEntityRecognition
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-NamedEntityRecognition
 	//
-	// Video
-	// Classification - Use this task type when you need workers to classify videos
-	// using predefined labels that you specify. Workers are shown videos and are asked
-	// to choose one label for each video.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-VideoMultiClass
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-VideoMultiClass
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-VideoMultiClass
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-VideoMultiClass
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VideoMultiClass
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VideoMultiClass
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-VideoMultiClass
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-VideoMultiClass
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VideoMultiClass
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-VideoMultiClass
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VideoMultiClass
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-VideoMultiClass
+	// Video Classification - Use this task type when you need workers to classify
+	// videos using predefined labels that you specify. Workers are shown videos and
+	// are asked to choose one label for each video.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-VideoMultiClass
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-VideoMultiClass
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-VideoMultiClass
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-VideoMultiClass
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VideoMultiClass
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VideoMultiClass
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-VideoMultiClass
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-VideoMultiClass
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VideoMultiClass
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-VideoMultiClass
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VideoMultiClass
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-VideoMultiClass
 	//
-	// Video
-	// Frame Object Detection - Use this task type to have workers identify and locate
-	// objects in a sequence of video frames (images extracted from a video) using
-	// bounding boxes. For example, you can use this task to ask workers to identify
-	// and localize various objects in a series of video frames, such as cars, bikes,
-	// and pedestrians.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-VideoObjectDetection
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-VideoObjectDetection
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-VideoObjectDetection
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-VideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-VideoObjectDetection
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-VideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VideoObjectDetection
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-VideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VideoObjectDetection
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-VideoObjectDetection
+	// Video Frame Object Detection - Use this task type to have workers identify and
+	// locate objects in a sequence of video frames (images extracted from a video)
+	// using bounding boxes. For example, you can use this task to ask workers to
+	// identify and localize various objects in a series of video frames, such as cars,
+	// bikes, and pedestrians.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-VideoObjectDetection
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-VideoObjectDetection
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-VideoObjectDetection
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-VideoObjectDetection
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VideoObjectDetection
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VideoObjectDetection
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-VideoObjectDetection
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-VideoObjectDetection
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VideoObjectDetection
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-VideoObjectDetection
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VideoObjectDetection
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-VideoObjectDetection
 	//
-	// Video
-	// Frame Object Tracking - Use this task type to have workers track the movement of
-	// objects in a sequence of video frames (images extracted from a video) using
-	// bounding boxes. For example, you can use this task to ask workers to track the
-	// movement of objects, such as cars, bikes, and pedestrians.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-VideoObjectTracking
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-VideoObjectTracking
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-VideoObjectTracking
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-VideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-VideoObjectTracking
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-VideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VideoObjectTracking
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-VideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VideoObjectTracking
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-VideoObjectTracking
+	// Video Frame Object Tracking - Use this task type to have workers track the
+	// movement of objects in a sequence of video frames (images extracted from a
+	// video) using bounding boxes. For example, you can use this task to ask workers
+	// to track the movement of objects, such as cars, bikes, and pedestrians.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-VideoObjectTracking
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-VideoObjectTracking
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-VideoObjectTracking
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-VideoObjectTracking
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VideoObjectTracking
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VideoObjectTracking
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-VideoObjectTracking
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-VideoObjectTracking
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VideoObjectTracking
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-VideoObjectTracking
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VideoObjectTracking
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-VideoObjectTracking
 	//
-	// 3D
-	// Point Cloud Modalities Use the following pre-annotation lambdas for 3D point
-	// cloud labeling modality tasks. See 3D Point Cloud Task types
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-task-types.html)
+	// 3D Point Cloud Modalities Use the following pre-annotation lambdas for 3D point
+	// cloud labeling modality tasks. See 3D Point Cloud Task types  (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-task-types.html)
 	// to learn more. 3D Point Cloud Object Detection - Use this task type when you
 	// want workers to classify objects in a 3D point cloud by drawing 3D cuboids
 	// around objects. For example, you can use this task type to ask workers to
 	// identify different types of objects in a point cloud, such as cars, bikes, and
 	// pedestrians.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-3DPointCloudObjectDetection
 	//
-	// 3D
-	// Point Cloud Object Tracking - Use this task type when you want workers to draw
-	// 3D cuboids around objects that appear in a sequence of 3D point cloud frames.
-	// For example, you can use this task type to ask workers to track the movement of
-	// vehicles across multiple point cloud frames.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-3DPointCloudObjectTracking
+	// 3D Point Cloud Object Tracking - Use this task type when you want workers to
+	// draw 3D cuboids around objects that appear in a sequence of 3D point cloud
+	// frames. For example, you can use this task type to ask workers to track the
+	// movement of vehicles across multiple point cloud frames.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-3DPointCloudObjectTracking
 	//
-	// 3D
-	// Point Cloud Semantic Segmentation - Use this task type when you want workers to
-	// create a point-level semantic segmentation masks by painting objects in a 3D
+	// 3D Point Cloud Semantic Segmentation - Use this task type when you want workers
+	// to create a point-level semantic segmentation masks by painting objects in a 3D
 	// point cloud using different colors where each color is assigned to one of the
 	// classes you specify.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-3DPointCloudSemanticSegmentation
 	//
-	// Use
-	// the following ARNs for Label Verification and Adjustment Jobs Use label
+	// Use the following ARNs for Label Verification and Adjustment Jobs Use label
 	// verification and adjustment jobs to review and adjust labels. To learn more, see
-	// Verify and Adjust Labels
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-verification-data.html).
-	// Bounding box verification - Uses a variant of the Expectation Maximization
+	//
+	// Verify and Adjust Labels  (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-verification-data.html)
+	// . Bounding box verification - Uses a variant of the Expectation Maximization
 	// approach to estimate the true class of verification judgement for bounding box
 	// labels based on annotations from individual workers.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VerificationBoundingBox
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-VerificationBoundingBox
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-VerificationBoundingBox
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-VerificationBoundingBox
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-VerificationBoundingBox
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-VerificationBoundingBox
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VerificationBoundingBox
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VerificationBoundingBox
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-VerificationBoundingBox
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-VerificationBoundingBox
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VerificationBoundingBox
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-VerificationBoundingBox
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VerificationBoundingBox
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-VerificationBoundingBox
 	//
-	// Bounding
-	// box adjustment - Finds the most similar boxes from different workers based on
-	// the Jaccard index of the adjusted annotations.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentBoundingBox
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentBoundingBox
+	// Bounding box adjustment - Finds the most similar boxes from different workers
+	// based on the Jaccard index of the adjusted annotations.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentBoundingBox
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentBoundingBox
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentBoundingBox
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentBoundingBox
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentBoundingBox
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentBoundingBox
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentBoundingBox
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentBoundingBox
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentBoundingBox
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentBoundingBox
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentBoundingBox
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentBoundingBox
 	//
-	// Semantic
-	// segmentation verification - Uses a variant of the Expectation Maximization
-	// approach to estimate the true class of verification judgment for semantic
-	// segmentation labels based on annotations from individual workers.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VerificationSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VerificationSemanticSegmentation
+	// Semantic segmentation verification - Uses a variant of the Expectation
+	// Maximization approach to estimate the true class of verification judgment for
+	// semantic segmentation labels based on annotations from individual workers.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VerificationSemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VerificationSemanticSegmentation
 	//
-	// Semantic
-	// segmentation adjustment - Treats each pixel in an image as a multi-class
-	// classification and treats pixel adjusted annotations from workers as "votes" for
-	// the correct label.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentSemanticSegmentation
+	// Semantic segmentation adjustment - Treats each pixel in an image as a
+	// multi-class classification and treats pixel adjusted annotations from workers as
+	// "votes" for the correct label.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentSemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentSemanticSegmentation
 	//
-	// Video
-	// Frame Object Detection Adjustment - Use this task type when you want workers to
-	// adjust bounding boxes that workers have added to video frames to classify and
-	// localize objects in a sequence of video frames.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentVideoObjectDetection
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentVideoObjectDetection
+	// Video Frame Object Detection Adjustment - Use this task type when you want
+	// workers to adjust bounding boxes that workers have added to video frames to
+	// classify and localize objects in a sequence of video frames.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentVideoObjectDetection
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentVideoObjectDetection
 	//
-	// Video
-	// Frame Object Tracking Adjustment - Use this task type when you want workers to
-	// adjust bounding boxes that workers have added to video frames to track object
-	// movement across a sequence of video frames.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentVideoObjectTracking
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentVideoObjectTracking
+	// Video Frame Object Tracking Adjustment - Use this task type when you want
+	// workers to adjust bounding boxes that workers have added to video frames to
+	// track object movement across a sequence of video frames.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentVideoObjectTracking
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentVideoObjectTracking
 	//
-	// 3D
-	// point cloud object detection adjustment - Adjust 3D cuboids in a point cloud
+	// 3D point cloud object detection adjustment - Adjust 3D cuboids in a point cloud
 	// frame.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudObjectDetection
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudObjectDetection
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudObjectDetection
 	//
-	// 3D
-	// point cloud object tracking adjustment - Adjust 3D cuboids across a sequence of
-	// point cloud frames.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudObjectTracking
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudObjectTracking
+	// 3D point cloud object tracking adjustment - Adjust 3D cuboids across a sequence
+	// of point cloud frames.
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudObjectTracking
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudObjectTracking
 	//
-	// 3D
-	// point cloud semantic segmentation adjustment - Adjust semantic segmentation
+	// 3D point cloud semantic segmentation adjustment - Adjust semantic segmentation
 	// masks in a 3D point cloud.
-	// -
-	// arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudSemanticSegmentation
-	// -
-	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//     - arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudSemanticSegmentation
 	//
 	// This member is required.
 	PreHumanTaskLambdaArn *string
@@ -5956,20 +5241,12 @@ type HumanTaskConfig struct {
 	// This member is required.
 	TaskDescription *string
 
-	// The amount of time that a worker has to complete a task. If you create a custom
-	// labeling job, the maximum value for this parameter is 8 hours (28,800 seconds).
-	// If you create a labeling job using a built-in task type
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html) the
-	// maximum for this parameter depends on the task type you use:
-	// - For image
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-images.html) and text
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-text.html) labeling
-	// jobs, the maximum is 8 hours (28,800 seconds).
-	// - For 3D point cloud
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud.html) and video
-	// frame (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-video.html) labeling
-	// jobs, the maximum is 30 days (2952,000 seconds) for non-AL mode. For most users,
-	// the maximum is also 30 days.
+	// The amount of time that a worker has to complete a task. If you create a
+	// custom labeling job, the maximum value for this parameter is 8 hours (28,800
+	// seconds). If you create a labeling job using a built-in task type (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html)
+	// the maximum for this parameter depends on the task type you use:
+	//     - For image (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-images.html) and text (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-text.html) labeling jobs, the maximum is 8 hours (28,800 seconds).
+	//     - For 3D point cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud.html) and video frame (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-video.html) labeling jobs, the maximum is 30 days (2952,000 seconds) for non-AL mode. For most users, the maximum is also 30 days.
 	//
 	// This member is required.
 	TaskTimeLimitInSeconds *int32
@@ -5990,28 +5267,25 @@ type HumanTaskConfig struct {
 	// This member is required.
 	WorkteamArn *string
 
-	// Defines the maximum number of data objects that can be labeled by human workers
-	// at the same time. Also referred to as batch size. Each object may have more than
-	// one worker at one time. The default value is 1000 objects. To increase the
-	// maximum value to 5000 objects, contact Amazon Web Services Support.
+	// Defines the maximum number of data objects that can be labeled by human
+	// workers at the same time. Also referred to as batch size. Each object may have
+	// more than one worker at one time. The default value is 1000 objects. To increase
+	// the maximum value to 5000 objects, contact Amazon Web Services Support.
 	MaxConcurrentTaskCount *int32
 
 	// The price that you pay for each task performed by an Amazon Mechanical Turk
 	// worker.
 	PublicWorkforceTaskPrice *PublicWorkforceTaskPrice
 
-	// The length of time that a task remains available for labeling by human workers.
-	// The default and maximum values for this parameter depend on the type of
+	// The length of time that a task remains available for labeling by human
+	// workers. The default and maximum values for this parameter depend on the type of
 	// workforce you use.
-	// - If you choose the Amazon Mechanical Turk workforce, the
-	// maximum is 12 hours (43,200 seconds). The default is 6 hours (21,600 seconds).
-	// -
-	// If you choose a private or vendor workforce, the default value is 30 days
-	// (2592,000 seconds) for non-AL mode. For most users, the maximum is also 30 days.
+	//     - If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours (43,200 seconds). The default is 6 hours (21,600 seconds).
+	//     - If you choose a private or vendor workforce, the default value is 30 days (2592,000 seconds) for non-AL mode. For most users, the maximum is also 30 days.
 	TaskAvailabilityLifetimeInSeconds *int32
 
-	// Keywords used to describe the task so that workers on Amazon Mechanical Turk can
-	// discover the task.
+	// Keywords used to describe the task so that workers on Amazon Mechanical Turk
+	// can discover the task.
 	TaskKeywords []string
 
 	noSmithyDocumentSerde
@@ -6039,43 +5313,39 @@ type HumanTaskUiSummary struct {
 }
 
 // The configuration for Hyperband, a multi-fidelity based hyperparameter tuning
-// strategy. Hyperband uses the final and intermediate results of a training job to
-// dynamically allocate resources to utilized hyperparameter configurations while
-// automatically stopping under-performing configurations. This parameter should be
-// provided only if Hyperband is selected as the StrategyConfig under the
-// HyperParameterTuningJobConfig API.
+// strategy. Hyperband uses the final and intermediate results of a training job
+// to dynamically allocate resources to utilized hyperparameter configurations
+// while automatically stopping under-performing configurations. This parameter
+// should be provided only if Hyperband  is selected as the StrategyConfig under
+// the HyperParameterTuningJobConfig  API.
 type HyperbandStrategyConfig struct {
 
-	// The maximum number of resources (such as epochs) that can be used by a training
-	// job launched by a hyperparameter tuning job. Once a job reaches the MaxResource
-	// value, it is stopped. If a value for MaxResource is not provided, and Hyperband
-	// is selected as the hyperparameter tuning strategy, HyperbandTrainingJ attempts
-	// to infer MaxResource from the following keys (if present) in
-	// StaticsHyperParameters
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-StaticHyperParameters):
-	// -
-	// epochs
-	// - numepochs
-	// - n-epochs
-	// - n_epochs
-	// - num_epochs
-	//
-	// If
-	// HyperbandStrategyConfig is unable to infer a value for MaxResource, it generates
-	// a validation error. The maximum value is 20,000 epochs. All metrics that
-	// correspond to an objective metric are used to derive early stopping decisions
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html).
-	// For distributive
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/distributed-training.html)
+	// The maximum number of resources (such as epochs) that can be used by a
+	// training job launched by a hyperparameter tuning job. Once a job reaches the
+	// MaxResource value, it is stopped. If a value for MaxResource is not provided,
+	// and Hyperband  is selected as the hyperparameter tuning strategy,
+	// HyperbandTrainingJ attempts to infer MaxResource from the following keys (if
+	// present) in StaticsHyperParameters (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-StaticHyperParameters)
+	// :
+	//     - epochs
+	//     - numepochs
+	//     - n-epochs
+	//     - n_epochs
+	//     - num_epochs
+	//  If HyperbandStrategyConfig  is unable to infer a value for MaxResource, it
+	// generates a validation error. The maximum value is 20,000 epochs. All metrics
+	// that correspond to an objective metric are used to derive early stopping
+	// decisions (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html)
+	// . For distributive (https://docs.aws.amazon.com/sagemaker/latest/dg/distributed-training.html)
 	// training jobs, ensure that duplicate metrics are not printed in the logs across
 	// the individual nodes in a training job. If multiple nodes are publishing
 	// duplicate or incorrect metrics, training jobs may make an incorrect stopping
 	// decision and stop the job prematurely.
 	MaxResource *int32
 
-	// The minimum number of resources (such as epochs) that can be used by a training
-	// job launched by a hyperparameter tuning job. If the value for MinResource has
-	// not been reached, the training job is not stopped by Hyperband.
+	// The minimum number of resources (such as epochs) that can be used by a
+	// training job launched by a hyperparameter tuning job. If the value for
+	// MinResource has not been reached, the training job is not stopped by Hyperband .
 	MinResource *int32
 
 	noSmithyDocumentSerde
@@ -6085,49 +5355,48 @@ type HyperbandStrategyConfig struct {
 // hyperparameter tuning job launches and the metrics to monitor.
 type HyperParameterAlgorithmSpecification struct {
 
-	// The training input mode that the algorithm supports. For more information about
-	// input modes, see Algorithms
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html). Pipe mode If an
-	// algorithm supports Pipe mode, Amazon SageMaker streams data directly from Amazon
-	// S3 to the container. File mode If an algorithm supports File mode, SageMaker
-	// downloads the training data from S3 to the provisioned ML storage volume, and
-	// mounts the directory to the Docker volume for the training container. You must
-	// provision the ML storage volume with sufficient capacity to accommodate the data
-	// downloaded from S3. In addition to the training data, the ML storage volume also
-	// stores the output model. The algorithm container uses the ML storage volume to
-	// also store intermediate information, if any. For distributed algorithms,
-	// training data is distributed uniformly. Your training duration is predictable if
-	// the input data objects sizes are approximately the same. SageMaker does not
-	// split the files any further for model training. If the object sizes are skewed,
-	// training won't be optimal as the data distribution is also skewed when one host
-	// in a training cluster is overloaded, thus becoming a bottleneck in training.
-	// FastFile mode If an algorithm supports FastFile mode, SageMaker streams data
-	// directly from S3 to the container with no code changes, and provides file system
-	// access to the data. Users can author their training script to interact with
-	// these files as if they were stored on disk. FastFile mode works best when the
-	// data is read sequentially. Augmented manifest files aren't supported. The
-	// startup time is lower when there are fewer files in the S3 bucket provided.
+	// The training input mode that the algorithm supports. For more information
+	// about input modes, see Algorithms (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html)
+	// . Pipe mode If an algorithm supports Pipe mode, Amazon SageMaker streams data
+	// directly from Amazon S3 to the container. File mode If an algorithm supports
+	// Filemode, SageMaker downloads the training data from S3 to the provisioned ML
+	// storage volume, and mounts the directory to the Docker volume for the training
+	// container. You must provision the ML storage volume with sufficient capacity to
+	// accommodate the data downloaded from S3. In addition to the training data, the
+	// ML storage volume also stores the output model. The algorithm container uses the
+	// ML storage volume to also store intermediate information, if any. For
+	// distributed algorithms, training data is distributed uniformly. Your training
+	// duration is predictable if the input data objects sizes are approximately the
+	// same. SageMaker does not split the files any further for model training. If the
+	// object sizes are skewed, training won't be optimal as the data distribution is
+	// also skewed when one host in a training cluster is overloaded, thus becoming a
+	// bottleneck in training. FastFile mode If an algorithm supports FastFile mode,
+	// SageMaker streams data directly from S3 to the container with no code changes,
+	// and provides file system access to the data. Users can author their training
+	// script to interact with these files as if they were stored on disk. FastFile
+	// mode works best when the data is read sequentially. Augmented manifest files
+	// aren't supported. The startup time is lower when there are fewer files in the S3
+	// bucket provided.
 	//
 	// This member is required.
 	TrainingInputMode TrainingInputMode
 
-	// The name of the resource algorithm to use for the hyperparameter tuning job. If
-	// you specify a value for this parameter, do not specify a value for
-	// TrainingImage.
+	// The name of the resource algorithm to use for the hyperparameter tuning job.
+	// If you specify a value for this parameter, do not specify a value for
+	// TrainingImage .
 	AlgorithmName *string
 
-	// An array of MetricDefinition objects that specify the metrics that the algorithm
-	// emits.
+	// An array of MetricDefinition objects that specify the metrics that the
+	// algorithm emits.
 	MetricDefinitions []MetricDefinition
 
-	// The registry path of the Docker image that contains the training algorithm. For
-	// information about Docker registry paths for built-in algorithms, see Algorithms
-	// Provided by Amazon SageMaker: Common Parameters
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html).
-	// SageMaker supports both registry/repository[:tag] and
-	// registry/repository[@digest] image path formats. For more information, see Using
-	// Your Own Algorithms with Amazon SageMaker
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html).
+	// The registry path of the Docker image that contains the training algorithm.
+	// For information about Docker registry paths for built-in algorithms, see
+	// Algorithms Provided by Amazon SageMaker: Common Parameters (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html)
+	// . SageMaker supports both registry/repository[:tag]  and
+	// registry/repository[@digest] image path formats. For more information, see
+	// Using Your Own Algorithms with Amazon SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html)
+	// .
 	TrainingImage *string
 
 	noSmithyDocumentSerde
@@ -6141,8 +5410,8 @@ type HyperParameterSpecification struct {
 	// This member is required.
 	Name *string
 
-	// The type of this hyperparameter. The valid types are Integer, Continuous,
-	// Categorical, and FreeText.
+	// The type of this hyperparameter. The valid types are Integer , Continuous ,
+	// Categorical , and FreeText .
 	//
 	// This member is required.
 	Type ParameterType
@@ -6157,7 +5426,8 @@ type HyperParameterSpecification struct {
 	// Indicates whether this hyperparameter is required.
 	IsRequired bool
 
-	// Indicates whether this hyperparameter is tunable in a hyperparameter tuning job.
+	// Indicates whether this hyperparameter is tunable in a hyperparameter tuning
+	// job.
 	IsTunable bool
 
 	// The allowed range for this hyperparameter.
@@ -6175,14 +5445,14 @@ type HyperParameterTrainingJobDefinition struct {
 	// This member is required.
 	AlgorithmSpecification *HyperParameterAlgorithmSpecification
 
-	// Specifies the path to the Amazon S3 bucket where you store model artifacts from
-	// the training jobs that the tuning job launches.
+	// Specifies the path to the Amazon S3 bucket where you store model artifacts
+	// from the training jobs that the tuning job launches.
 	//
 	// This member is required.
 	OutputDataConfig *OutputDataConfig
 
-	// The Amazon Resource Name (ARN) of the IAM role associated with the training jobs
-	// that the tuning job launches.
+	// The Amazon Resource Name (ARN) of the IAM role associated with the training
+	// jobs that the tuning job launches.
 	//
 	// This member is required.
 	RoleArn *string
@@ -6209,8 +5479,8 @@ type HyperParameterTrainingJobDefinition struct {
 	// learning algorithm in distributed training.
 	EnableInterContainerTrafficEncryption bool
 
-	// A Boolean indicating whether managed spot training is enabled (True) or not
-	// (False).
+	// A Boolean indicating whether managed spot training is enabled ( True ) or not (
+	// False ).
 	EnableManagedSpotTraining bool
 
 	// Isolates the training container. No inbound or outbound network calls can be
@@ -6221,35 +5491,32 @@ type HyperParameterTrainingJobDefinition struct {
 	// access.
 	EnableNetworkIsolation bool
 
-	// An environment variable that you can pass into the SageMaker CreateTrainingJob
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
-	// API. You can use an existing environment variable from the training container
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html#sagemaker-CreateTrainingJob-request-Environment)
-	// or use your own. See Define metrics and variables
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html)
+	// An environment variable that you can pass into the SageMaker CreateTrainingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
+	// API. You can use an existing environment variable from the training container (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html#sagemaker-CreateTrainingJob-request-Environment)
+	// or use your own. See Define metrics and variables (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html)
 	// for more information. The maximum number of items specified for Map Entries
 	// refers to the maximum number of environment variables for each
-	// TrainingJobDefinition and also the maximum for the hyperparameter tuning job
+	// TrainingJobDefinitionand also the maximum for the hyperparameter tuning job
 	// itself. That is, the sum of the number of environment variables for all the
 	// training job definitions can't exceed the maximum number specified.
 	Environment map[string]string
 
-	// Specifies ranges of integer, continuous, and categorical hyperparameters that a
-	// hyperparameter tuning job searches. The hyperparameter tuning job launches
+	// Specifies ranges of integer, continuous, and categorical hyperparameters that
+	// a hyperparameter tuning job searches. The hyperparameter tuning job launches
 	// training jobs with hyperparameter values within these ranges to find the
 	// combination of values that result in the training job with the best performance
 	// as measured by the objective metric of the hyperparameter tuning job. The
-	// maximum number of items specified for Array Members refers to the maximum number
-	// of hyperparameters for each range and also the maximum for the hyperparameter
-	// tuning job itself. That is, the sum of the number of hyperparameters for all the
-	// ranges can't exceed the maximum number specified.
+	// maximum number of items specified for Array Members refers to the maximum
+	// number of hyperparameters for each range and also the maximum for the
+	// hyperparameter tuning job itself. That is, the sum of the number of
+	// hyperparameters for all the ranges can't exceed the maximum number specified.
 	HyperParameterRanges *ParameterRanges
 
-	// The configuration for the hyperparameter tuning resources, including the compute
-	// instances and storage volumes, used for training jobs launched by the tuning
-	// job. By default, storage volumes hold model artifacts and incremental states.
-	// Choose File for TrainingInputMode in the AlgorithmSpecification parameter to
-	// additionally store training data in the storage volume (optional).
+	// The configuration for the hyperparameter tuning resources, including the
+	// compute instances and storage volumes, used for training jobs launched by the
+	// tuning job. By default, storage volumes hold model artifacts and incremental
+	// states. Choose File  for TrainingInputMode  in the AlgorithmSpecification
+	// parameter to additionally store training data in the storage volume (optional).
 	HyperParameterTuningResourceConfig *HyperParameterTuningResourceConfig
 
 	// An array of Channel objects that specify the input for the training jobs that
@@ -6260,14 +5527,14 @@ type HyperParameterTrainingJobDefinition struct {
 	// the training jobs that the tuning job launches. Storage volumes store model
 	// artifacts and incremental states. Training algorithms might also use storage
 	// volumes for scratch space. If you want SageMaker to use the storage volume to
-	// store the training data, choose File as the TrainingInputMode in the algorithm
-	// specification. For distributed training algorithms, specify an instance count
-	// greater than 1. If you want to use hyperparameter optimization with instance
-	// type flexibility, use HyperParameterTuningResourceConfig instead.
+	// store the training data, choose File  as the TrainingInputMode in the
+	// algorithm specification. For distributed training algorithms, specify an
+	// instance count greater than 1. If you want to use hyperparameter optimization
+	// with instance type flexibility, use HyperParameterTuningResourceConfig  instead.
 	ResourceConfig *ResourceConfig
 
 	// The number of times to retry the job when the job fails due to an
-	// InternalServerError.
+	// InternalServerError .
 	RetryStrategy *RetryStrategy
 
 	// Specifies the values of hyperparameters that do not change for the tuning job.
@@ -6276,14 +5543,14 @@ type HyperParameterTrainingJobDefinition struct {
 	// Defines the objective metric for a hyperparameter tuning job. Hyperparameter
 	// tuning uses the value of this metric to evaluate the training jobs it launches,
 	// and returns the training job that results in either the highest or lowest value
-	// for this metric, depending on the value you specify for the Type parameter.
+	// for this metric, depending on the value you specify for the Type  parameter.
 	TuningObjective *HyperParameterTuningJobObjective
 
-	// The VpcConfig object that specifies the VPC that you want the training jobs that
-	// this hyperparameter tuning job launches to connect to. Control access to and
-	// from your training container by configuring the VPC. For more information, see
-	// Protect Training Jobs by Using an Amazon Virtual Private Cloud
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
+	// The VpcConfig object that specifies the VPC that you want the training jobs
+	// that this hyperparameter tuning job launches to connect to. Control access to
+	// and from your training container by configuring the VPC. For more information,
+	// see Protect Training Jobs by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html)
+	// .
 	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
@@ -6320,22 +5587,16 @@ type HyperParameterTrainingJobSummary struct {
 	// The reason that the training job failed.
 	FailureReason *string
 
-	// The FinalHyperParameterTuningJobObjectiveMetric object that specifies the value
-	// of the objective metric of the tuning job that launched this training job.
+	// The FinalHyperParameterTuningJobObjectiveMetric object that specifies the
+	// value of the objective metric of the tuning job that launched this training job.
 	FinalHyperParameterTuningJobObjectiveMetric *FinalHyperParameterTuningJobObjectiveMetric
 
 	// The status of the objective metric for the training job:
-	// - Succeeded: The final
-	// objective metric for the training job was evaluated by the hyperparameter tuning
-	// job and used in the hyperparameter tuning process.
+	//     - Succeeded: The final objective metric for the training job was evaluated by the hyperparameter tuning job and used in the hyperparameter tuning process.
 	//
-	// - Pending: The training job
-	// is in progress and evaluation of its final objective metric is pending.
+	//     - Pending: The training job is in progress and evaluation of its final objective metric is pending.
 	//
-	// -
-	// Failed: The final objective metric for the training job was not evaluated, and
-	// was not used in the hyperparameter tuning process. This typically occurs when
-	// the training job failed or did not emit an objective metric.
+	//     - Failed: The final objective metric for the training job was not evaluated, and was not used in the hyperparameter tuning process. This typically occurs when the training job failed or did not emit an objective metric.
 	ObjectiveStatus ObjectiveStatus
 
 	// Specifies the time when the training job ends on training instances. You are
@@ -6364,9 +5625,9 @@ type HyperParameterTrainingJobSummary struct {
 type HyperParameterTuningInstanceConfig struct {
 
 	// The number of instances of the type specified by InstanceType. Choose an
-	// instance count larger than 1 for distributed training algorithms. See SageMaker
-	// distributed training jobs
-	// (https://docs.aws.amazon.com/data-parallel-use-api.html) for more information.
+	// instance count larger than 1 for distributed training algorithms. See
+	// SageMaker distributed training jobs (https://docs.aws.amazon.com/data-parallel-use-api.html)
+	// for more information.
 	//
 	// This member is required.
 	InstanceCount int32
@@ -6375,8 +5636,8 @@ type HyperParameterTuningInstanceConfig struct {
 	// Choose from general purpose (no GPUs) instance types: ml.m5.xlarge,
 	// ml.m5.2xlarge, and ml.m5.4xlarge or compute optimized (no GPUs) instance types:
 	// ml.c5.xlarge and ml.c5.2xlarge. For more information about instance types, see
-	// instance type descriptions
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/notebooks-available-instance-types.html).
+	// instance type descriptions (https://docs.aws.amazon.com/sagemaker/latest/dg/notebooks-available-instance-types.html)
+	// .
 	//
 	// This member is required.
 	InstanceType TrainingInstanceType
@@ -6394,13 +5655,13 @@ type HyperParameterTuningInstanceConfig struct {
 // hyperparameter tuning jobs.
 type HyperParameterTuningJobCompletionDetails struct {
 
-	// The time in timestamp format that AMT detected model convergence, as defined by
-	// a lack of significant improvement over time based on criteria developed over a
-	// wide range of diverse benchmarking tests.
+	// The time in timestamp format that AMT detected model convergence, as defined
+	// by a lack of significant improvement over time based on criteria developed over
+	// a wide range of diverse benchmarking tests.
 	ConvergenceDetectedTime *time.Time
 
-	// The number of training jobs launched by a tuning job that are not improving (1%
-	// or less) as measured by model performance evaluated against an objective
+	// The number of training jobs launched by a tuning job that are not improving
+	// (1% or less) as measured by model performance evaluated against an objective
 	// function.
 	NumberOfTrainingJobsObjectiveNotImproving int32
 
@@ -6418,8 +5679,8 @@ type HyperParameterTuningJobConfig struct {
 
 	// Specifies how hyperparameter tuning chooses the combinations of hyperparameter
 	// values to use for the training job it launches. For information about search
-	// strategies, see How Hyperparameter Tuning Works
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html).
+	// strategies, see How Hyperparameter Tuning Works (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html)
+	// .
 	//
 	// This member is required.
 	Strategy HyperParameterTuningJobStrategyType
@@ -6439,21 +5700,21 @@ type HyperParameterTuningJobConfig struct {
 	// configuration between the two runs.
 	RandomSeed *int32
 
-	// The configuration for the Hyperband optimization strategy. This parameter should
-	// be provided only if Hyperband is selected as the strategy for
-	// HyperParameterTuningJobConfig.
+	// The configuration for the Hyperband optimization strategy. This parameter
+	// should be provided only if Hyperband  is selected as the strategy for
+	// HyperParameterTuningJobConfig .
 	StrategyConfig *HyperParameterTuningJobStrategyConfig
 
 	// Specifies whether to use early stopping for training jobs launched by the
 	// hyperparameter tuning job. Because the Hyperband strategy has its own advanced
-	// internal early stopping mechanism, TrainingJobEarlyStoppingType must be OFF to
-	// use Hyperband. This parameter can take on one of the following values (the
+	// internal early stopping mechanism, TrainingJobEarlyStoppingType  must be OFF
+	// to use Hyperband. This parameter can take on one of the following values (the
 	// default value is OFF): OFF Training jobs launched by the hyperparameter tuning
 	// job do not use early stopping. AUTO SageMaker stops training jobs launched by
 	// the hyperparameter tuning job when they are unlikely to perform better than
-	// previously completed training jobs. For more information, see Stop Training Jobs
-	// Early
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html).
+	// previously completed training jobs. For more information, see Stop Training
+	// Jobs Early (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html)
+	// .
 	TrainingJobEarlyStoppingType TrainingJobEarlyStoppingType
 
 	// The tuning job's completion criteria.
@@ -6474,7 +5735,7 @@ type HyperParameterTuningJobConsumedResources struct {
 // Defines the objective metric for a hyperparameter tuning job. Hyperparameter
 // tuning uses the value of this metric to evaluate the training jobs it launches,
 // and returns the training job that results in either the highest or lowest value
-// for this metric, depending on the value you specify for the Type parameter.
+// for this metric, depending on the value you specify for the Type  parameter.
 type HyperParameterTuningJobObjective struct {
 
 	// The name of the metric to use for the objective metric.
@@ -6490,8 +5751,7 @@ type HyperParameterTuningJobObjective struct {
 	noSmithyDocumentSerde
 }
 
-// An entity returned by the SearchRecord
-// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_SearchRecord.html)
+// An entity returned by the SearchRecord (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_SearchRecord.html)
 // API containing the properties of a hyperparameter tuning job.
 type HyperParameterTuningJobSearchEntity struct {
 
@@ -6535,8 +5795,8 @@ type HyperParameterTuningJobSearchEntity struct {
 	OverallBestTrainingJob *HyperParameterTrainingJobSummary
 
 	// The tags associated with a hyperparameter tuning job. For more information see
-	// Tagging Amazon Web Services resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	// Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// .
 	Tags []Tag
 
 	// Defines the training jobs launched by a hyperparameter tuning job.
@@ -6569,16 +5829,16 @@ type HyperParameterTuningJobSearchEntity struct {
 }
 
 // The configuration for a training job launched by a hyperparameter tuning job.
-// Choose Bayesian for Bayesian optimization, and Random for random search
+// Choose Bayesian  for Bayesian optimization, and Random for random search
 // optimization. For more advanced use cases, use Hyperband, which evaluates
 // objective metrics for training jobs after every epoch. For more information
-// about strategies, see How Hyperparameter Tuning Works
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html).
+// about strategies, see How Hyperparameter Tuning Works (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html)
+// .
 type HyperParameterTuningJobStrategyConfig struct {
 
 	// The configuration for the object that specifies the Hyperband strategy. This
-	// parameter is only supported for the Hyperband selection for Strategy within the
-	// HyperParameterTuningJobConfig API.
+	// parameter is only supported for the Hyperband  selection for Strategy within
+	// the HyperParameterTuningJobConfig  API.
 	HyperbandStrategyConfig *HyperbandStrategyConfig
 
 	noSmithyDocumentSerde
@@ -6607,8 +5867,8 @@ type HyperParameterTuningJobSummary struct {
 	// This member is required.
 	HyperParameterTuningJobStatus HyperParameterTuningJobStatus
 
-	// The ObjectiveStatusCounters object that specifies the numbers of training jobs,
-	// categorized by objective metric status, that this tuning job launched.
+	// The ObjectiveStatusCounters object that specifies the numbers of training
+	// jobs, categorized by objective metric status, that this tuning job launched.
 	//
 	// This member is required.
 	ObjectiveStatusCounters *ObjectiveStatusCounters
@@ -6631,8 +5891,8 @@ type HyperParameterTuningJobSummary struct {
 	// The date and time that the tuning job was modified.
 	LastModifiedTime *time.Time
 
-	// The ResourceLimits object that specifies the maximum number of training jobs and
-	// parallel training jobs allowed for this tuning job.
+	// The ResourceLimits object that specifies the maximum number of training jobs
+	// and parallel training jobs allowed for this tuning job.
 	ResourceLimits *ResourceLimits
 
 	noSmithyDocumentSerde
@@ -6654,9 +5914,8 @@ type HyperParameterTuningJobWarmStartConfig struct {
 	// An array of hyperparameter tuning jobs that are used as the starting point for
 	// the new hyperparameter tuning job. For more information about warm starting a
 	// hyperparameter tuning job, see Using a Previous Hyperparameter Tuning Job as a
-	// Starting Point
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-warm-start.html).
-	// Hyperparameter tuning jobs created before October 1, 2018 cannot be used as
+	// Starting Point (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-warm-start.html)
+	// . Hyperparameter tuning jobs created before October 1, 2018 cannot be used as
 	// parent jobs for warm start tuning jobs.
 	//
 	// This member is required.
@@ -6688,58 +5947,54 @@ type HyperParameterTuningJobWarmStartConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration of resources, including compute instances and storage volumes
-// for use in training jobs launched by hyperparameter tuning jobs.
+// The configuration of resources, including compute instances and storage
+// volumes for use in training jobs launched by hyperparameter tuning jobs.
 // HyperParameterTuningResourceConfig is similar to ResourceConfig, but has the
-// additional InstanceConfigs and AllocationStrategy fields to allow for flexible
-// instance management. Specify one or more instance types, count, and the
+// additional InstanceConfigs  and AllocationStrategy fields to allow for
+// flexible instance management. Specify one or more instance types, count, and the
 // allocation strategy for instance selection. HyperParameterTuningResourceConfig
-// supports the capabilities of ResourceConfig with the exception of
-// KeepAlivePeriodInSeconds. Hyperparameter tuning jobs use warm pools by default,
-// which reuse clusters between training jobs.
+// supports the capabilities of ResourceConfig  with the exception of
+// KeepAlivePeriodInSeconds. Hyperparameter tuning jobs use warm pools by
+// default, which reuse clusters between training jobs.
 type HyperParameterTuningResourceConfig struct {
 
-	// The strategy that determines the order of preference for resources specified in
-	// InstanceConfigs used in hyperparameter optimization.
+	// The strategy that determines the order of preference for resources specified
+	// in InstanceConfigs  used in hyperparameter optimization.
 	AllocationStrategy HyperParameterTuningAllocationStrategy
 
-	// A list containing the configuration(s) for one or more resources for processing
-	// hyperparameter jobs. These resources include compute instances and storage
-	// volumes to use in model training jobs launched by hyperparameter tuning jobs.
-	// The AllocationStrategy controls the order in which multiple configurations
-	// provided in InstanceConfigs are used. If you only want to use a single instance
-	// configuration inside the HyperParameterTuningResourceConfig API, do not provide
-	// a value for InstanceConfigs. Instead, use InstanceType, VolumeSizeInGB and
-	// InstanceCount. If you use InstanceConfigs, do not provide values for
-	// InstanceType, VolumeSizeInGB or InstanceCount.
+	// A list containing the configuration(s) for one or more resources for
+	// processing hyperparameter jobs. These resources include compute instances and
+	// storage volumes to use in model training jobs launched by hyperparameter tuning
+	// jobs. The AllocationStrategy controls the order in which multiple
+	// configurations provided in InstanceConfigs are used. If you only want to use a
+	// single instance configuration inside the HyperParameterTuningResourceConfig
+	// API, do not provide a value for InstanceConfigs . Instead, use InstanceType ,
+	// VolumeSizeInGB and InstanceCount . If you use InstanceConfigs, do not provide
+	// values for InstanceType , VolumeSizeInGB  or InstanceCount .
 	InstanceConfigs []HyperParameterTuningInstanceConfig
 
-	// The number of compute instances of type InstanceType to use. For distributed
-	// training
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/data-parallel-use-api.html),
-	// select a value greater than 1.
+	// The number of compute instances of type InstanceType  to use. For distributed
+	// training (https://docs.aws.amazon.com/sagemaker/latest/dg/data-parallel-use-api.html)
+	// , select a value greater than 1.
 	InstanceCount int32
 
 	// The instance type used to run hyperparameter optimization tuning jobs. See
-	// descriptions of instance types
-	// (https://docs.aws.amazon.com/notebooks-available-instance-types.html) for more
-	// information.
+	// descriptions of instance types (https://docs.aws.amazon.com/notebooks-available-instance-types.html)
+	// for more information.
 	InstanceType TrainingInstanceType
 
-	// A key used by Amazon Web Services Key Management Service to encrypt data on the
-	// storage volume attached to the compute instances used to run the training job.
-	// You can use either of the following formats to specify a key. KMS Key ID:
+	// A key used by Amazon Web Services Key Management Service to encrypt data on
+	// the storage volume attached to the compute instances used to run the training
+	// job. You can use either of the following formats to specify a key. KMS Key ID:
 	// "1234abcd-12ab-34cd-56ef-1234567890ab" Amazon Resource Name (ARN) of a KMS key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
-	// Some instances use local storage, which use a hardware module to encrypt
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html)
+	// Some instances use local storage, which use a hardware module to encrypt (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html)
 	// storage volumes. If you choose one of these instance types, you cannot request a
-	// VolumeKmsKeyId. For a list of instance types that use local storage, see
-	// instance store volumes
-	// (http://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/). For
-	// more information about Amazon Web Services Key Management Service, see KMS
-	// encryption
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-kms-permissions.html)
+	//
+	// VolumeKmsKeyId . For a list of instance types that use local storage, see
+	// instance store volumes (http://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/)
+	// . For more information about Amazon Web Services Key Management Service, see
+	// KMS encryption (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-kms-permissions.html)
 	// for more information.
 	VolumeKmsKeyId *string
 
@@ -6747,21 +6002,19 @@ type HyperParameterTuningResourceConfig struct {
 	// hyperparameter optimization jobs (optional). These volumes store model
 	// artifacts, incremental states and optionally, scratch space for training
 	// algorithms. Do not provide a value for this parameter if a value for
-	// InstanceConfigs is also specified. Some instance types have a fixed total local
+	// InstanceConfigsis also specified. Some instance types have a fixed total local
 	// storage size. If you select one of these instances for training, VolumeSizeInGB
 	// cannot be greater than this total size. For a list of instance types with local
-	// instance storage and their sizes, see instance store volumes
-	// (http://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/).
-	// SageMaker supports only the General Purpose SSD (gp2)
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html)
+	// instance storage and their sizes, see instance store volumes (http://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/)
+	// . SageMaker supports only the General Purpose SSD (gp2) (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html)
 	// storage volume type.
 	VolumeSizeInGB int32
 
 	noSmithyDocumentSerde
 }
 
-// The IAM Identity details associated with the user. These details are associated
-// with model package groups, model packages and project entities only.
+// The IAM Identity details associated with the user. These details are
+// associated with model package groups, model packages and project entities only.
 type IamIdentity struct {
 
 	// The Amazon Resource Name (ARN) of the IAM identity.
@@ -6778,7 +6031,7 @@ type IamIdentity struct {
 
 // A SageMaker image. A SageMaker image represents a set of container images that
 // are derived from a common base container image. Each of these container images
-// is represented by a SageMaker ImageVersion.
+// is represented by a SageMaker ImageVersion .
 type Image struct {
 
 	// When the image was created.
@@ -6818,8 +6071,8 @@ type Image struct {
 	noSmithyDocumentSerde
 }
 
-// Stores the configuration information for the image classification problem of an
-// AutoML job using the V2 API.
+// Stores the configuration information for the image classification problem of
+// an AutoML job using the V2 API.
 type ImageClassificationJobConfig struct {
 
 	// How long a job is allowed to run, or how many candidates a job is allowed to
@@ -6834,18 +6087,16 @@ type ImageClassificationJobConfig struct {
 type ImageConfig struct {
 
 	// Set this to one of the following values:
-	// - Platform - The model image is hosted
-	// in Amazon ECR.
-	// - Vpc - The model image is hosted in a private Docker registry in
-	// your VPC.
+	//     - Platform - The model image is hosted in Amazon ECR.
+	//     - Vpc - The model image is hosted in a private Docker registry in your VPC.
 	//
 	// This member is required.
 	RepositoryAccessMode RepositoryAccessMode
 
 	// (Optional) Specifies an authentication configuration for the private docker
 	// registry where your model image is hosted. Specify a value for this property
-	// only if you specified Vpc as the value for the RepositoryAccessMode field, and
-	// the private Docker registry where the model image is hosted requires
+	// only if you specified Vpc  as the value for the RepositoryAccessMode field,
+	// and the private Docker registry where the model image is hosted requires
 	// authentication.
 	RepositoryAuthConfig *RepositoryAuthConfig
 
@@ -6896,10 +6147,8 @@ type ImageVersion struct {
 type InferenceExecutionConfig struct {
 
 	// How containers in a multi-container are run. The following values are valid.
-	// -
-	// SERIAL - Containers run as a serial pipeline.
-	// - DIRECT - Only the individual
-	// container that you specify is run.
+	//     - SERIAL - Containers run as a serial pipeline.
+	//     - DIRECT - Only the individual container that you specify is run.
 	//
 	// This member is required.
 	Mode InferenceExecutionMode
@@ -6920,8 +6169,8 @@ type InferenceExperimentDataStorageConfig struct {
 	// specified SageMaker will by default base64 encode when capturing the data.
 	ContentType *CaptureContentTypeHeader
 
-	// The Amazon Web Services Key Management Service key that Amazon SageMaker uses to
-	// encrypt captured data at rest using Amazon S3 server-side encryption.
+	// The Amazon Web Services Key Management Service key that Amazon SageMaker uses
+	// to encrypt captured data at rest using Amazon S3 server-side encryption.
 	KmsKey *string
 
 	noSmithyDocumentSerde
@@ -7082,9 +6331,8 @@ type InferenceRecommendationsJob struct {
 	noSmithyDocumentSerde
 }
 
-// A returned array object for the Steps response field in the
-// ListInferenceRecommendationsJobSteps
-// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListInferenceRecommendationsJobSteps.html)
+// A returned array object for the Steps  response field in the
+// ListInferenceRecommendationsJobSteps (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListInferenceRecommendationsJobSteps.html)
 // API command.
 type InferenceRecommendationsJobStep struct {
 
@@ -7129,9 +6377,9 @@ type InferenceSpecification struct {
 	// This member is required.
 	SupportedResponseMIMETypes []string
 
-	// A list of the instance types that are used to generate inferences in real-time.
-	// This parameter is required for unversioned models, and optional for versioned
-	// models.
+	// A list of the instance types that are used to generate inferences in
+	// real-time. This parameter is required for unversioned models, and optional for
+	// versioned models.
 	SupportedRealtimeInferenceInstanceTypes []ProductionVariantInstanceType
 
 	// A list of the instance types on which a transformation job can be run or on
@@ -7147,161 +6395,73 @@ type InferenceSpecification struct {
 // trained.
 type InputConfig struct {
 
-	// Specifies the name and shape of the expected data inputs for your trained model
-	// with a JSON dictionary form. The data inputs are InputConfig$Framework
+	// Specifies the name and shape of the expected data inputs for your trained
+	// model with a JSON dictionary form. The data inputs are InputConfig$Framework
 	// specific.
-	// - TensorFlow: You must specify the name and shape (NHWC format) of the
-	// expected data inputs using a dictionary format for your trained model. The
-	// dictionary formats required for the console and CLI are different.
-	// - Examples
-	// for one input:
-	// - If using the console, {"input":[1,1024,1024,3]}
-	// - If using the
-	// CLI, {\"input\":[1,1024,1024,3]}
+	//     - TensorFlow : You must specify the name and shape (NHWC format) of the expected data inputs using a dictionary format for your trained model. The dictionary formats required for the console and CLI are different.
+	//         - Examples for one input:
+	//             - If using the console, {"input":[1,1024,1024,3]}
+	//             - If using the CLI, {\"input\":[1,1024,1024,3]}
+	//         - Examples for two inputs:
+	//             - If using the console, {"data1": [1,28,28,1], "data2":[1,28,28,1]}
+	//             - If using the CLI, {\"data1\": [1,28,28,1], \"data2\":[1,28,28,1]}
+	//     - KERAS : You must specify the name and shape (NCHW format) of expected data inputs using a dictionary format for your trained model. Note that while Keras model artifacts should be uploaded in NHWC (channel-last) format, DataInputConfig should be specified in NCHW (channel-first) format. The dictionary formats required for the console and CLI are different.
+	//         - Examples for one input:
+	//             - If using the console, {"input_1":[1,3,224,224]}
+	//             - If using the CLI, {\"input_1\":[1,3,224,224]}
+	//         - Examples for two inputs:
+	//             - If using the console, {"input_1": [1,3,224,224], "input_2":[1,3,224,224]}
+	//             - If using the CLI, {\"input_1\": [1,3,224,224], \"input_2\":[1,3,224,224]}
+	//     - MXNET/ONNX/DARKNET : You must specify the name and shape (NCHW format) of the expected data inputs in order using a dictionary format for your trained model. The dictionary formats required for the console and CLI are different.
+	//         - Examples for one input:
+	//             - If using the console, {"data":[1,3,1024,1024]}
+	//             - If using the CLI, {\"data\":[1,3,1024,1024]}
+	//         - Examples for two inputs:
+	//             - If using the console, {"var1": [1,1,28,28], "var2":[1,1,28,28]}
+	//             - If using the CLI, {\"var1\": [1,1,28,28], \"var2\":[1,1,28,28]}
+	//     - PyTorch : You can either specify the name and shape (NCHW format) of expected data inputs in order using a dictionary format for your trained model or you can specify the shape only using a list format. The dictionary formats required for the console and CLI are different. The list formats for the console and CLI are the same.
+	//         - Examples for one input in dictionary format:
+	//             - If using the console, {"input0":[1,3,224,224]}
+	//             - If using the CLI, {\"input0\":[1,3,224,224]}
+	//         - Example for one input in list format: [[1,3,224,224]]
+	//         - Examples for two inputs in dictionary format:
+	//             - If using the console, {"input0":[1,3,224,224], "input1":[1,3,224,224]}
+	//             - If using the CLI, {\"input0\":[1,3,224,224], \"input1\":[1,3,224,224]}
+	//         - Example for two inputs in list format: [[1,3,224,224], [1,3,224,224]]
+	//     - XGBOOST : input data name and shape are not needed.
+	// DataInputConfig  supports the following parameters for CoreML
+	// OutputConfig$TargetDevice (ML Model format):
+	//     - shape : Input shape, for example {"input_1": {"shape": [1,224,224,3]}} . In addition to static input shapes, CoreML converter supports Flexible input shapes:
+	//         - Range Dimension. You can use the Range Dimension feature if you know the input shape will be within some specific interval in that dimension, for example: {"input_1": {"shape": ["1..10", 224, 224, 3]}}
+	//         - Enumerated shapes. Sometimes, the models are trained to work only on a select set of inputs. You can enumerate all supported input shapes, for example: {"input_1": {"shape": [[1, 224, 224, 3], [1, 160, 160, 3]]}}
+	//     - default_shape : Default input shape. You can set a default shape during conversion for both Range Dimension and Enumerated Shapes. For example {"input_1": {"shape": ["1..10", 224, 224, 3], "default_shape": [1, 224, 224, 3]}}
+	//     - type : Input type. Allowed values: Image and Tensor . By default, the converter generates an ML Model with inputs of type Tensor (MultiArray). User can set input type to be Image. Image input type requires additional input parameters such as bias and scale .
+	//     - bias : If the input type is an Image, you need to provide the bias vector.
+	//     - scale : If the input type is an Image, you need to provide a scale factor.
 	//
-	// - Examples for two inputs:
-	// - If using the
-	// console, {"data1": [1,28,28,1], "data2":[1,28,28,1]}
-	// - If using the CLI,
-	// {\"data1\": [1,28,28,1], \"data2\":[1,28,28,1]}
+	// CoreML ClassifierConfig  parameters can be specified using
+	// OutputConfig$CompilerOptions. CoreML converter supports Tensorflow and PyTorch
+	// models. CoreML conversion examples:
+	//     - Tensor type input:
+	//         - "DataInputConfig": {"input_1": {"shape": [[1,224,224,3], [1,160,160,3]], "default_shape": [1,224,224,3]}}
+	//     - Tensor type input without input name (PyTorch):
+	//         - "DataInputConfig": [{"shape": [[1,3,224,224], [1,3,160,160]], "default_shape": [1,3,224,224]}]
+	//     - Image type input:
+	//         - "DataInputConfig": {"input_1": {"shape": [[1,224,224,3], [1,160,160,3]], "default_shape": [1,224,224,3], "type": "Image", "bias": [-1,-1,-1], "scale": 0.007843137255}}
+	//         - "CompilerOptions": {"class_labels": "imagenet_labels_1000.txt"}
+	//     - Image type input without input name (PyTorch):
+	//         - "DataInputConfig": [{"shape": [[1,3,224,224], [1,3,160,160]], "default_shape": [1,3,224,224], "type": "Image", "bias": [-1,-1,-1], "scale": 0.007843137255}]
+	//         - "CompilerOptions": {"class_labels": "imagenet_labels_1000.txt"}
 	//
-	// - KERAS: You must specify the
-	// name and shape (NCHW format) of expected data inputs using a dictionary format
-	// for your trained model. Note that while Keras model artifacts should be uploaded
-	// in NHWC (channel-last) format, DataInputConfig should be specified in NCHW
-	// (channel-first) format. The dictionary formats required for the console and CLI
-	// are different.
-	// - Examples for one input:
-	// - If using the console,
-	// {"input_1":[1,3,224,224]}
-	// - If using the CLI, {\"input_1\":[1,3,224,224]}
-	//
-	// -
-	// Examples for two inputs:
-	// - If using the console, {"input_1": [1,3,224,224],
-	// "input_2":[1,3,224,224]}
-	// - If using the CLI, {\"input_1\": [1,3,224,224],
-	// \"input_2\":[1,3,224,224]}
-	//
-	// - MXNET/ONNX/DARKNET: You must specify the name and
-	// shape (NCHW format) of the expected data inputs in order using a dictionary
-	// format for your trained model. The dictionary formats required for the console
-	// and CLI are different.
-	// - Examples for one input:
-	// - If using the console,
-	// {"data":[1,3,1024,1024]}
-	// - If using the CLI, {\"data\":[1,3,1024,1024]}
-	//
-	// -
-	// Examples for two inputs:
-	// - If using the console, {"var1": [1,1,28,28],
-	// "var2":[1,1,28,28]}
-	// - If using the CLI, {\"var1\": [1,1,28,28],
-	// \"var2\":[1,1,28,28]}
-	//
-	// - PyTorch: You can either specify the name and shape
-	// (NCHW format) of expected data inputs in order using a dictionary format for
-	// your trained model or you can specify the shape only using a list format. The
-	// dictionary formats required for the console and CLI are different. The list
-	// formats for the console and CLI are the same.
-	// - Examples for one input in
-	// dictionary format:
-	// - If using the console, {"input0":[1,3,224,224]}
-	// - If using
-	// the CLI, {\"input0\":[1,3,224,224]}
-	//
-	// - Example for one input in list format:
-	// [[1,3,224,224]]
-	// - Examples for two inputs in dictionary format:
-	// - If using the
-	// console, {"input0":[1,3,224,224], "input1":[1,3,224,224]}
-	// - If using the CLI,
-	// {\"input0\":[1,3,224,224], \"input1\":[1,3,224,224]}
-	//
-	// - Example for two inputs
-	// in list format: [[1,3,224,224], [1,3,224,224]]
-	//
-	// - XGBOOST: input data name and
-	// shape are not needed.
-	//
-	// DataInputConfig supports the following parameters for
-	// CoreMLOutputConfig$TargetDevice (ML Model format):
-	// - shape: Input shape, for
-	// example {"input_1": {"shape": [1,224,224,3]}}. In addition to static input
-	// shapes, CoreML converter supports Flexible input shapes:
-	// - Range Dimension. You
-	// can use the Range Dimension feature if you know the input shape will be within
-	// some specific interval in that dimension, for example: {"input_1": {"shape":
-	// ["1..10", 224, 224, 3]}}
-	// - Enumerated shapes. Sometimes, the models are trained
-	// to work only on a select set of inputs. You can enumerate all supported input
-	// shapes, for example: {"input_1": {"shape": [[1, 224, 224, 3], [1, 160, 160,
-	// 3]]}}
-	//
-	// - default_shape: Default input shape. You can set a default shape during
-	// conversion for both Range Dimension and Enumerated Shapes. For example
-	// {"input_1": {"shape": ["1..10", 224, 224, 3], "default_shape": [1, 224, 224,
-	// 3]}}
-	// - type: Input type. Allowed values: Image and Tensor. By default, the
-	// converter generates an ML Model with inputs of type Tensor (MultiArray). User
-	// can set input type to be Image. Image input type requires additional input
-	// parameters such as bias and scale.
-	// - bias: If the input type is an Image, you
-	// need to provide the bias vector.
-	// - scale: If the input type is an Image, you
-	// need to provide a scale factor.
-	//
-	// CoreML ClassifierConfig parameters can be
-	// specified using OutputConfig$CompilerOptions. CoreML converter supports
-	// Tensorflow and PyTorch models. CoreML conversion examples:
-	// - Tensor type
-	// input:
-	// - "DataInputConfig": {"input_1": {"shape": [[1,224,224,3],
-	// [1,160,160,3]], "default_shape": [1,224,224,3]}}
-	//
-	// - Tensor type input without
-	// input name (PyTorch):
-	// - "DataInputConfig": [{"shape": [[1,3,224,224],
-	// [1,3,160,160]], "default_shape": [1,3,224,224]}]
-	//
-	// - Image type input:
-	// -
-	// "DataInputConfig": {"input_1": {"shape": [[1,224,224,3], [1,160,160,3]],
-	// "default_shape": [1,224,224,3], "type": "Image", "bias": [-1,-1,-1], "scale":
-	// 0.007843137255}}
-	// - "CompilerOptions": {"class_labels":
-	// "imagenet_labels_1000.txt"}
-	//
-	// - Image type input without input name (PyTorch):
-	// -
-	// "DataInputConfig": [{"shape": [[1,3,224,224], [1,3,160,160]], "default_shape":
-	// [1,3,224,224], "type": "Image", "bias": [-1,-1,-1], "scale": 0.007843137255}]
-	// -
-	// "CompilerOptions": {"class_labels": "imagenet_labels_1000.txt"}
-	//
-	// Depending on
-	// the model format, DataInputConfig requires the following parameters for
-	// ml_eia2OutputConfig:TargetDevice
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OutputConfig.html#sagemaker-Type-OutputConfig-TargetDevice).
-	// -
-	// For TensorFlow models saved in the SavedModel format, specify the input names
-	// from signature_def_key and the input model shapes for DataInputConfig. Specify
-	// the signature_def_key in OutputConfig:CompilerOptions
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OutputConfig.html#sagemaker-Type-OutputConfig-CompilerOptions)
-	// if the model does not use TensorFlow's default signature def key. For example:
-	// -
-	// "DataInputConfig": {"inputs": [1, 224, 224, 3]}
-	// - "CompilerOptions":
-	// {"signature_def_key": "serving_custom"}
-	//
-	// - For TensorFlow models saved as a
-	// frozen graph, specify the input tensor names and shapes in DataInputConfig and
-	// the output tensor names for output_names in OutputConfig:CompilerOptions
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OutputConfig.html#sagemaker-Type-OutputConfig-CompilerOptions).
-	// For example:
-	// - "DataInputConfig": {"input_tensor:0": [1, 224, 224, 3]}
-	// -
-	// "CompilerOptions": {"output_names": ["output_tensor:0"]}
+	// Depending on the model format, DataInputConfig requires the following
+	// parameters for ml_eia2 OutputConfig:TargetDevice (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OutputConfig.html#sagemaker-Type-OutputConfig-TargetDevice)
+	// .
+	//     - For TensorFlow models saved in the SavedModel format, specify the input names from signature_def_key and the input model shapes for DataInputConfig . Specify the signature_def_key in OutputConfig:CompilerOptions (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OutputConfig.html#sagemaker-Type-OutputConfig-CompilerOptions) if the model does not use TensorFlow's default signature def key. For example:
+	//         - "DataInputConfig": {"inputs": [1, 224, 224, 3]}
+	//         - "CompilerOptions": {"signature_def_key": "serving_custom"}
+	//     - For TensorFlow models saved as a frozen graph, specify the input tensor names and shapes in DataInputConfig and the output tensor names for output_names in OutputConfig:CompilerOptions (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OutputConfig.html#sagemaker-Type-OutputConfig-CompilerOptions) . For example:
+	//         - "DataInputConfig": {"input_tensor:0": [1, 224, 224, 3]}
+	//         - "CompilerOptions": {"output_names": ["output_tensor:0"]}
 	//
 	// This member is required.
 	DataInputConfig *string
@@ -7319,21 +6479,19 @@ type InputConfig struct {
 	// This member is required.
 	S3Uri *string
 
-	// Specifies the framework version to use. This API field is only supported for the
-	// MXNet, PyTorch, TensorFlow and TensorFlow Lite frameworks. For information about
-	// framework versions supported for cloud targets and edge devices, see Cloud
-	// Supported Instance Types and Frameworks
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-cloud.html) and
-	// Edge Supported Frameworks
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-devices-edge-frameworks.html).
+	// Specifies the framework version to use. This API field is only supported for
+	// the MXNet, PyTorch, TensorFlow and TensorFlow Lite frameworks. For information
+	// about framework versions supported for cloud targets and edge devices, see
+	// Cloud Supported Instance Types and Frameworks (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-cloud.html)
+	// and Edge Supported Frameworks (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-devices-edge-frameworks.html)
+	// .
 	FrameworkVersion *string
 
 	noSmithyDocumentSerde
 }
 
-// Defines an instance group for heterogeneous cluster training. When requesting a
-// training job using the CreateTrainingJob
-// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
+// Defines an instance group for heterogeneous cluster training. When requesting
+// a training job using the CreateTrainingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
 // API, you can configure multiple instance groups .
 type InstanceGroup struct {
 
@@ -7361,7 +6519,7 @@ type InstanceMetadataServiceConfiguration struct {
 	// Indicates the minimum IMDS version that the notebook instance supports. When
 	// passed as part of CreateNotebookInstance, if no value is selected, then it
 	// defaults to IMDSv1. This means that both IMDSv1 and IMDSv2 are supported. If
-	// passed as part of UpdateNotebookInstance, there is no default.
+	// passed as part of UpdateNotebookInstance , there is no default.
 	//
 	// This member is required.
 	MinimumInstanceMetadataServiceVersion *string
@@ -7390,9 +6548,8 @@ type IntegerParameterRange struct {
 
 	// The scale that hyperparameter tuning uses to search the hyperparameter range.
 	// For information about choosing a hyperparameter scale, see Hyperparameter
-	// Scaling
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
-	// One of the following values: Auto SageMaker hyperparameter tuning chooses the
+	// Scaling (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type)
+	// . One of the following values: Auto SageMaker hyperparameter tuning chooses the
 	// best scale for the hyperparameter. Linear Hyperparameter tuning searches the
 	// values in the hyperparameter range by using a linear scale. Logarithmic
 	// Hyperparameter tuning searches the values in the hyperparameter range by using a
@@ -7433,8 +6590,8 @@ type JupyterServerAppSettings struct {
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations attached to the
 	// JupyterServerApp. If you use this parameter, the DefaultResourceSpec parameter
-	// is also required. To remove a Lifecycle Config, you must set LifecycleConfigArns
-	// to an empty list.
+	// is also required. To remove a Lifecycle Config, you must set
+	// LifecycleConfigArns to an empty list.
 	LifecycleConfigArns []string
 
 	noSmithyDocumentSerde
@@ -7443,8 +6600,8 @@ type JupyterServerAppSettings struct {
 // The KernelGateway app settings.
 type KernelGatewayAppSettings struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway
-	// app.
+	// A list of custom SageMaker images that are configured to run as a
+	// KernelGateway app.
 	CustomImages []CustomImage
 
 	// The default instance type and the Amazon Resource Name (ARN) of the default
@@ -7530,23 +6687,16 @@ type LabelCountersForWorkteam struct {
 }
 
 // Provides configuration information for auto-labeling of your data objects. A
-// LabelingJobAlgorithmsConfig object must be supplied in order to use
+// LabelingJobAlgorithmsConfigobject must be supplied in order to use
 // auto-labeling.
 type LabelingJobAlgorithmsConfig struct {
 
 	// Specifies the Amazon Resource Name (ARN) of the algorithm used for
 	// auto-labeling. You must select one of the following ARNs:
-	// - Image classification
-	// arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/image-classification
-	// -
-	// Text classification
-	// arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/text-classification
-	// -
-	// Object detection
-	// arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/object-detection
-	// -
-	// Semantic Segmentation
-	// arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/semantic-segmentation
+	//     - Image classification arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/image-classification
+	//     - Text classification arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/text-classification
+	//     - Object detection arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/object-detection
+	//     - Semantic Segmentation arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/semantic-segmentation
 	//
 	// This member is required.
 	LabelingJobAlgorithmSpecificationArn *string
@@ -7563,8 +6713,8 @@ type LabelingJobAlgorithmsConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Attributes of the data specified by the customer. Use these to describe the data
-// to be labeled.
+// Attributes of the data specified by the customer. Use these to describe the
+// data to be labeled.
 type LabelingJobDataAttributes struct {
 
 	// Declares that your content is free of personally identifiable information or
@@ -7575,21 +6725,21 @@ type LabelingJobDataAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about the location of input data. You must specify at least
-// one of the following: S3DataSource or SnsDataSource. Use SnsDataSource to
-// specify an SNS input topic for a streaming labeling job. If you do not specify
-// and SNS input topic ARN, Ground Truth will create a one-time labeling job. Use
-// S3DataSource to specify an input manifest file for both streaming and one-time
-// labeling jobs. Adding an S3DataSource is optional if you use SnsDataSource to
-// create a streaming labeling job.
+// Provides information about the location of input data. You must specify at
+// least one of the following: S3DataSource  or SnsDataSource . Use SnsDataSource
+// to specify an SNS input topic for a streaming labeling job. If you do not
+// specify and SNS input topic ARN, Ground Truth will create a one-time labeling
+// job. Use S3DataSource to specify an input manifest file for both streaming and
+// one-time labeling jobs. Adding an S3DataSource  is optional if you use
+// SnsDataSource to create a streaming labeling job.
 type LabelingJobDataSource struct {
 
 	// The Amazon S3 location of the input data objects.
 	S3DataSource *LabelingJobS3DataSource
 
 	// An Amazon SNS data source used for streaming labeling jobs. To learn more, see
-	// Send Data to a Streaming Labeling Job
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-send-data).
+	// Send Data to a Streaming Labeling Job (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-send-data)
+	// .
 	SnsDataSource *LabelingJobSnsDataSource
 
 	noSmithyDocumentSerde
@@ -7603,8 +6753,8 @@ type LabelingJobForWorkteamSummary struct {
 	// This member is required.
 	CreationTime *time.Time
 
-	// A unique identifier for a labeling job. You can use this to refer to a specific
-	// labeling job.
+	// A unique identifier for a labeling job. You can use this to refer to a
+	// specific labeling job.
 	//
 	// This member is required.
 	JobReferenceCode *string
@@ -7664,29 +6814,27 @@ type LabelingJobOutputConfig struct {
 	// This member is required.
 	S3OutputPath *string
 
-	// The Amazon Web Services Key Management Service ID of the key used to encrypt the
-	// output data, if any. If you provide your own KMS key ID, you must add the
+	// The Amazon Web Services Key Management Service ID of the key used to encrypt
+	// the output data, if any. If you provide your own KMS key ID, you must add the
 	// required permissions to your KMS key described in Encrypt Output Data and
-	// Storage Volume with Amazon Web Services KMS
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-permission.html#sms-security-kms-permissions).
-	// If you don't provide a KMS key ID, Amazon SageMaker uses the default Amazon Web
-	// Services KMS key for Amazon S3 for your role's account to encrypt your output
-	// data. If you use a bucket policy with an s3:PutObject permission that only
-	// allows objects with server-side encryption, set the condition key of
-	// s3:x-amz-server-side-encryption to "aws:kms". For more information, see
-	// KMS-Managed Encryption Keys
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) in the
-	// Amazon Simple Storage Service Developer Guide.
+	// Storage Volume with Amazon Web Services KMS (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-permission.html#sms-security-kms-permissions)
+	// . If you don't provide a KMS key ID, Amazon SageMaker uses the default Amazon
+	// Web Services KMS key for Amazon S3 for your role's account to encrypt your
+	// output data. If you use a bucket policy with an s3:PutObject permission that
+	// only allows objects with server-side encryption, set the condition key of
+	// s3:x-amz-server-side-encryption to "aws:kms" . For more information, see
+	// KMS-Managed Encryption Keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
+	// in the Amazon Simple Storage Service Developer Guide.
 	KmsKeyId *string
 
 	// An Amazon Simple Notification Service (Amazon SNS) output topic ARN. Provide a
-	// SnsTopicArn if you want to do real time chaining to another streaming job and
+	// SnsTopicArnif you want to do real time chaining to another streaming job and
 	// receive an Amazon SNS notifications each time a data object is submitted by a
-	// worker. If you provide an SnsTopicArn in OutputConfig, when workers complete
+	// worker. If you provide an SnsTopicArn  in OutputConfig, when workers complete
 	// labeling tasks, Ground Truth will send labeling task output data to the SNS
 	// output topic you specify here. To learn more, see Receive Output Data from a
-	// Streaming Labeling Job
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-output-data).
+	// Streaming Labeling Job (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-output-data)
+	// .
 	SnsTopicArn *string
 
 	noSmithyDocumentSerde
@@ -7699,26 +6847,23 @@ type LabelingJobResourceConfig struct {
 	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
 	// that Amazon SageMaker uses to encrypt data on the storage volume attached to the
 	// ML compute instance(s) that run the training and inference jobs used for
-	// automated data labeling. You can only specify a VolumeKmsKeyId when you create a
-	// labeling job with automated data labeling enabled using the API operation
-	// CreateLabelingJob. You cannot specify an Amazon Web Services KMS key to encrypt
-	// the storage volume used for automated data labeling model training and inference
-	// when you create a labeling job using the console. To learn more, see Output Data
-	// and Storage Volume Encryption
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security.html). The
-	// VolumeKmsKeyId can be any of the following formats:
-	// - KMS Key ID
-	// "1234abcd-12ab-34cd-56ef-1234567890ab"
-	// - Amazon Resource Name (ARN) of a KMS Key
-	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	// automated data labeling. You can only specify a VolumeKmsKeyId when you create
+	// a labeling job with automated data labeling enabled using the API operation
+	// CreateLabelingJob. You cannot specify an Amazon Web Services KMS key to
+	// encrypt the storage volume used for automated data labeling model training and
+	// inference when you create a labeling job using the console. To learn more, see
+	// Output Data and Storage Volume Encryption (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security.html)
+	// . The VolumeKmsKeyId  can be any of the following formats:
+	//     - KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//     - Amazon Resource Name (ARN) of a KMS Key "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
 	// Specifies a VPC that your training jobs and hosted models have access to.
 	// Control access to and from your training and model containers by configuring the
 	// VPC. For more information, see Protect Endpoints by Using an Amazon Virtual
 	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
-	// and Protect Training Jobs by Using an Amazon Virtual Private Cloud
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
+	// and Protect Training Jobs by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html)
+	// .
 	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
@@ -7728,18 +6873,14 @@ type LabelingJobResourceConfig struct {
 type LabelingJobS3DataSource struct {
 
 	// The Amazon S3 location of the manifest file that describes the input data
-	// objects. The input manifest file referenced in ManifestS3Uri must contain one of
-	// the following keys: source-ref or source. The value of the keys are interpreted
-	// as follows:
-	// - source-ref: The source of the object is the Amazon S3 object
-	// specified in the value. Use this value when the object is a binary object, such
-	// as an image.
-	// - source: The source of the object is the value. Use this value
-	// when the object is a text value.
+	// objects. The input manifest file referenced in ManifestS3Uri must contain one
+	// of the following keys: source-ref  or source. The value of the keys are
+	// interpreted as follows:
+	//     - source-ref : The source of the object is the Amazon S3 object specified in the value. Use this value when the object is a binary object, such as an image.
+	//     - source : The source of the object is the value. Use this value when the object is a text value.
 	//
-	// If you are a new user of Ground Truth, it is
-	// recommended you review Use an Input Manifest File
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-input-data-input-manifest.html)
+	// If you are a new user of Ground Truth, it is recommended you review Use an
+	// Input Manifest File  (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-input-data-input-manifest.html)
 	// in the Amazon SageMaker Developer Guide to learn how to create an input manifest
 	// file.
 	//
@@ -7789,7 +6930,8 @@ type LabelingJobSummary struct {
 	// This member is required.
 	LabelCounters *LabelCounters
 
-	// The Amazon Resource Name (ARN) assigned to the labeling job when it was created.
+	// The Amazon Resource Name (ARN) assigned to the labeling job when it was
+	// created.
 	//
 	// This member is required.
 	LabelingJobArn *string
@@ -7809,8 +6951,8 @@ type LabelingJobSummary struct {
 	// This member is required.
 	LastModifiedTime *time.Time
 
-	// The Amazon Resource Name (ARN) of a Lambda function. The function is run before
-	// each data object is sent to a worker.
+	// The Amazon Resource Name (ARN) of a Lambda function. The function is run
+	// before each data object is sent to a worker.
 	//
 	// This member is required.
 	PreHumanTaskLambdaArn *string
@@ -7822,12 +6964,12 @@ type LabelingJobSummary struct {
 
 	// The Amazon Resource Name (ARN) of the Lambda function used to consolidate the
 	// annotations from individual workers into a label for a data object. For more
-	// information, see Annotation Consolidation
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html).
+	// information, see Annotation Consolidation (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html)
+	// .
 	AnnotationConsolidationLambdaArn *string
 
-	// If the LabelingJobStatus field is Failed, this field contains a description of
-	// the error.
+	// If the LabelingJobStatus  field is Failed, this field contains a description
+	// of the error.
 	FailureReason *string
 
 	// Input configuration for the labeling job.
@@ -7842,8 +6984,8 @@ type LabelingJobSummary struct {
 // Metadata for a Lambda step.
 type LambdaStepMetadata struct {
 
-	// The Amazon Resource Name (ARN) of the Lambda function that was run by this step
-	// execution.
+	// The Amazon Resource Name (ARN) of the Lambda function that was run by this
+	// step execution.
 	Arn *string
 
 	// A list of the output parameters of the Lambda step.
@@ -7866,8 +7008,8 @@ type LastUpdateStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Lists a summary of the properties of a lineage group. A lineage group provides a
-// group of shareable lineage entity resources.
+// Lists a summary of the properties of a lineage group. A lineage group provides
+// a group of shareable lineage entity resources.
 type LineageGroupSummary struct {
 
 	// The creation time of the lineage group summary.
@@ -7888,8 +7030,8 @@ type LineageGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Defines an Amazon Cognito or your own OIDC IdP user group that is part of a work
-// team.
+// Defines an Amazon Cognito or your own OIDC IdP user group that is part of a
+// work team.
 type MemberDefinition struct {
 
 	// The Amazon Cognito user group that is part of the work team.
@@ -7897,9 +7039,9 @@ type MemberDefinition struct {
 
 	// A list user groups that exist in your OIDC Identity Provider (IdP). One to ten
 	// groups can be used to create a single private work team. When you add a user
-	// group to the list of Groups, you can add that user group to one or more private
-	// work teams. If you add a user group to a private work team, all workers in that
-	// user group are added to the work team.
+	// group to the list of Groups, you can add that user group to one or more
+	// private work teams. If you add a user group to a private work team, all workers
+	// in that user group are added to the work team.
 	OidcMemberDefinition *OidcMemberDefinition
 
 	noSmithyDocumentSerde
@@ -7949,8 +7091,8 @@ type MetricDatum struct {
 	Set MetricSetSource
 
 	// The name of the standard metric. For definitions of the standard metrics, see
-	// Autopilot candidate metrics
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-metrics).
+	// Autopilot candidate metrics (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-metrics)
+	// .
 	StandardMetricName AutoMLMetricExtendedEnum
 
 	// The value of the metric.
@@ -7959,12 +7101,11 @@ type MetricDatum struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a metric that the training algorithm writes to stderr or stdout. You
-// can view these logs to understand how your training job performs and check for
-// any errors encountered during training. SageMaker hyperparameter tuning captures
-// all defined metrics. Specify one of the defined metrics to use as an objective
-// metric using the TuningObjective
-// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-TuningObjective)
+// Specifies a metric that the training algorithm writes to stderr  or stdout.
+// You can view these logs to understand how your training job performs and check
+// for any errors encountered during training. SageMaker hyperparameter tuning
+// captures all defined metrics. Specify one of the defined metrics to use as an
+// objective metric using the TuningObjective (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-TuningObjective)
 // parameter in the HyperParameterTrainingJobDefinition API to evaluate job
 // performance during hyperparameter tuning.
 type MetricDefinition struct {
@@ -7976,8 +7117,8 @@ type MetricDefinition struct {
 
 	// A regular expression that searches the output of a training job and gets the
 	// value of the metric. For more information about using regular expressions to
-	// define metrics, see Defining metrics and environment variables
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html).
+	// define metrics, see Defining metrics and environment variables (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html)
+	// .
 	//
 	// This member is required.
 	Regex *string
@@ -8004,7 +7145,7 @@ type MetricsSource struct {
 	noSmithyDocumentSerde
 }
 
-// The properties of a model as returned by the Search API.
+// The properties of a model as returned by the Search  API.
 type Model struct {
 
 	// The containers in the inference pipeline.
@@ -8017,7 +7158,8 @@ type Model struct {
 	// to or from the model container.
 	EnableNetworkIsolation bool
 
-	// The Amazon Resource Name (ARN) of the IAM role that you specified for the model.
+	// The Amazon Resource Name (ARN) of the IAM role that you specified for the
+	// model.
 	ExecutionRoleArn *string
 
 	// Specifies details about how containers in a multi-container endpoint are run.
@@ -8033,17 +7175,16 @@ type Model struct {
 	PrimaryContainer *ContainerDefinition
 
 	// A list of key-value pairs associated with the model. For more information, see
-	// Tagging Amazon Web Services resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-	// Web Services General Reference Guide.
+	// Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the Amazon Web Services General Reference Guide.
 	Tags []Tag
 
 	// Specifies a VPC that your training jobs and hosted models have access to.
 	// Control access to and from your training and model containers by configuring the
 	// VPC. For more information, see Protect Endpoints by Using an Amazon Virtual
 	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
-	// and Protect Training Jobs by Using an Amazon Virtual Private Cloud
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
+	// and Protect Training Jobs by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html)
+	// .
 	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
@@ -8056,7 +7197,7 @@ type Model struct {
 type ModelArtifacts struct {
 
 	// The path of the S3 object that contains the model artifacts. For example,
-	// s3://bucket-name/keynameprefix/model.tar.gz.
+	// s3://bucket-name/keynameprefix/model.tar.gz .
 	//
 	// This member is required.
 	S3ModelArtifacts *string
@@ -8068,8 +7209,8 @@ type ModelArtifacts struct {
 type ModelBiasAppSpecification struct {
 
 	// JSON formatted S3 file that defines bias parameters. For more information on
-	// this JSON configuration file, see Configure bias parameters
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-config-json-monitor-bias-parameters.html).
+	// this JSON configuration file, see Configure bias parameters (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-config-json-monitor-bias-parameters.html)
+	// .
 	//
 	// This member is required.
 	ConfigUri *string
@@ -8117,8 +7258,7 @@ type ModelBiasJobInput struct {
 // An Amazon SageMaker Model Card.
 type ModelCard struct {
 
-	// The content of the model card. Content uses the model card JSON schema
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-api-json-schema.html)
+	// The content of the model card. Content uses the model card JSON schema (https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-api-json-schema.html)
 	// and provided as a string.
 	Content *string
 
@@ -8143,15 +7283,11 @@ type ModelCard struct {
 	ModelCardName *string
 
 	// The approval status of the model card within your organization. Different
-	// organizations might have different criteria for model card review and
-	// approval.
-	// - Draft: The model card is a work in progress.
-	// - PendingReview: The
-	// model card is pending review.
-	// - Approved: The model card is approved.
-	// -
-	// Archived: The model card is archived. No more updates should be made to the
-	// model card, but it can still be exported.
+	// organizations might have different criteria for model card review and approval.
+	//     - Draft : The model card is a work in progress.
+	//     - PendingReview : The model card is pending review.
+	//     - Approved : The model card is approved.
+	//     - Archived : The model card is archived. No more updates should be made to the model card, but it can still be exported.
 	ModelCardStatus ModelCardStatus
 
 	// The version of the model card.
@@ -8161,8 +7297,8 @@ type ModelCard struct {
 	ModelId *string
 
 	// The risk rating of the model. Different organizations might have different
-	// criteria for model card risk ratings. For more information, see Risk ratings
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-risk-rating.html).
+	// criteria for model card risk ratings. For more information, see Risk ratings (https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-risk-rating.html)
+	// .
 	RiskRating *string
 
 	// The security configuration used to protect model card data.
@@ -8240,8 +7376,7 @@ type ModelCardExportOutputConfig struct {
 // Configure the security settings to protect model card data.
 type ModelCardSecurityConfig struct {
 
-	// A Key Management Service key ID
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id)
+	// A Key Management Service key ID (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id)
 	// to use for encrypting a model card.
 	KmsKeyId *string
 
@@ -8267,15 +7402,11 @@ type ModelCardSummary struct {
 	ModelCardName *string
 
 	// The approval status of the model card within your organization. Different
-	// organizations might have different criteria for model card review and
-	// approval.
-	// - Draft: The model card is a work in progress.
-	// - PendingReview: The
-	// model card is pending review.
-	// - Approved: The model card is approved.
-	// -
-	// Archived: The model card is archived. No more updates should be made to the
-	// model card, but it can still be exported.
+	// organizations might have different criteria for model card review and approval.
+	//     - Draft : The model card is a work in progress.
+	//     - PendingReview : The model card is pending review.
+	//     - Approved : The model card is approved.
+	//     - Archived : The model card is archived. No more updates should be made to the model card, but it can still be exported.
 	//
 	// This member is required.
 	ModelCardStatus ModelCardStatus
@@ -8307,13 +7438,10 @@ type ModelCardVersionSummary struct {
 	// The approval status of the model card version within your organization.
 	// Different organizations might have different criteria for model card review and
 	// approval.
-	// - Draft: The model card is a work in progress.
-	// - PendingReview: The
-	// model card is pending review.
-	// - Approved: The model card is approved.
-	// -
-	// Archived: The model card is archived. No more updates should be made to the
-	// model card, but it can still be exported.
+	//     - Draft : The model card is a work in progress.
+	//     - PendingReview : The model card is pending review.
+	//     - Approved : The model card is approved.
+	//     - Archived : The model card is archived. No more updates should be made to the model card, but it can still be exported.
 	//
 	// This member is required.
 	ModelCardStatus ModelCardStatus
@@ -8329,12 +7457,12 @@ type ModelCardVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Configures the timeout and maximum number of retries for processing a transform
-// job invocation.
+// Configures the timeout and maximum number of retries for processing a
+// transform job invocation.
 type ModelClientConfig struct {
 
-	// The maximum number of retries when invocation requests are failing. The default
-	// value is 3.
+	// The maximum number of retries when invocation requests are failing. The
+	// default value is 3.
 	InvocationsMaxRetries *int32
 
 	// The timeout value in seconds for an invocation request. The default value is
@@ -8344,8 +7472,8 @@ type ModelClientConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Defines the model configuration. Includes the specification name and environment
-// parameters.
+// Defines the model configuration. Includes the specification name and
+// environment parameters.
 type ModelConfiguration struct {
 
 	// The name of the compilation job used to create the recommended model artifacts.
@@ -8393,7 +7521,7 @@ type ModelDashboardEndpoint struct {
 }
 
 // An alert action taken to light up an icon on the Amazon SageMaker Model
-// Dashboard when an alert goes into InAlert status.
+// Dashboard when an alert goes into InAlert  status.
 type ModelDashboardIndicatorAction struct {
 
 	// Indicates whether the alert action is turned on.
@@ -8408,9 +7536,9 @@ type ModelDashboardModel struct {
 	// The endpoints that host a model.
 	Endpoints []ModelDashboardEndpoint
 
-	// A batch transform job. For information about SageMaker batch transform, see Use
-	// Batch Transform
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html).
+	// A batch transform job. For information about SageMaker batch transform, see
+	// Use Batch Transform (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html)
+	// .
 	LastBatchTransformJob *TransformJob
 
 	// A model displayed in the Model Dashboard.
@@ -8461,7 +7589,7 @@ type ModelDashboardModelCard struct {
 	// A model card's risk rating. Can be low, medium, or high.
 	RiskRating *string
 
-	// The KMS Key ID (KMSKeyId) for encryption of model card information.
+	// The KMS Key ID ( KMSKeyId ) for encryption of model card information.
 	SecurityConfig *ModelCardSecurityConfig
 
 	// The tags associated with a model card.
@@ -8522,20 +7650,20 @@ type ModelDataQuality struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies how to generate the endpoint name for an automatic one-click Autopilot
-// model deployment.
+// Specifies how to generate the endpoint name for an automatic one-click
+// Autopilot model deployment.
 type ModelDeployConfig struct {
 
-	// Set to True to automatically generate an endpoint name for a one-click Autopilot
-	// model deployment; set to False otherwise. The default value is False. If you set
-	// AutoGenerateEndpointName to True, do not specify the EndpointName; otherwise a
-	// 400 error is thrown.
+	// Set to True to automatically generate an endpoint name for a one-click
+	// Autopilot model deployment; set to False  otherwise. The default value is False
+	// . If you set AutoGenerateEndpointName  to True , do not specify the
+	// EndpointName ; otherwise a 400 error is thrown.
 	AutoGenerateEndpointName bool
 
-	// Specifies the endpoint name to use for a one-click Autopilot model deployment if
-	// the endpoint name is not generated automatically. Specify the EndpointName if
-	// and only if you set AutoGenerateEndpointName to False; otherwise a 400 error is
-	// thrown.
+	// Specifies the endpoint name to use for a one-click Autopilot model deployment
+	// if the endpoint name is not generated automatically. Specify the EndpointName
+	// if and only if you set AutoGenerateEndpointName  to False; otherwise a 400
+	// error is thrown.
 	EndpointName *string
 
 	noSmithyDocumentSerde
@@ -8564,9 +7692,9 @@ type ModelDigests struct {
 type ModelExplainabilityAppSpecification struct {
 
 	// JSON formatted S3 file that defines explainability parameters. For more
-	// information on this JSON configuration file, see Configure model explainability
-	// parameters
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-config-json-monitor-model-explainability-parameters.html).
+	// information on this JSON configuration file, see Configure model
+	// explainability parameters (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-config-json-monitor-model-explainability-parameters.html)
+	// .
 	//
 	// This member is required.
 	ConfigUri *string
@@ -8611,12 +7739,13 @@ type ModelInfrastructureConfig struct {
 
 	// The inference option to which to deploy your model. Possible values are the
 	// following:
-	// - RealTime: Deploy to real-time inference.
+	//     - RealTime : Deploy to real-time inference.
 	//
 	// This member is required.
 	InfrastructureType ModelInfrastructureType
 
-	// The infrastructure configuration for deploying the model to real-time inference.
+	// The infrastructure configuration for deploying the model to real-time
+	// inference.
 	//
 	// This member is required.
 	RealTimeInferenceConfig *RealTimeInferenceConfig
@@ -8647,8 +7776,8 @@ type ModelLatencyThreshold struct {
 	noSmithyDocumentSerde
 }
 
-// Part of the search expression. You can specify the name and value (domain, task,
-// framework, framework version, task, and model).
+// Part of the search expression. You can specify the name and value (domain,
+// task, framework, framework version, task, and model).
 type ModelMetadataFilter struct {
 
 	// The name of the of the model to filter by.
@@ -8733,11 +7862,11 @@ type ModelPackage struct {
 	// A description provided when the model approval is set.
 	ApprovalDescription *string
 
-	// Whether the model package is to be certified to be listed on Amazon Web Services
-	// Marketplace. For information about listing model packages on Amazon Web Services
-	// Marketplace, see List Your Algorithm or Model Package on Amazon Web Services
-	// Marketplace
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-mkt-list.html).
+	// Whether the model package is to be certified to be listed on Amazon Web
+	// Services Marketplace. For information about listing model packages on Amazon Web
+	// Services Marketplace, see List Your Algorithm or Model Package on Amazon Web
+	// Services Marketplace (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-mkt-list.html)
+	// .
 	CertifyForMarketplace bool
 
 	// Information about the user who created or modified an experiment, trial, trial
@@ -8755,8 +7884,8 @@ type ModelPackage struct {
 	// processing.
 	Domain *string
 
-	// Represents the drift check baselines that can be used when the model monitor is
-	// set using the model package.
+	// Represents the drift check baselines that can be used when the model monitor
+	// is set using the model package.
 	DriftCheckBaselines *DriftCheckBaselines
 
 	// Defines how to perform inference generation after a training job is run.
@@ -8773,11 +7902,9 @@ type ModelPackage struct {
 	MetadataProperties *MetadataProperties
 
 	// The approval status of the model. This can be one of the following values.
-	// -
-	// APPROVED - The model is approved
-	// - REJECTED - The model is rejected.
-	// -
-	// PENDING_MANUAL_APPROVAL - The model is waiting for manual approval.
+	//     - APPROVED - The model is approved
+	//     - REJECTED - The model is rejected.
+	//     - PENDING_MANUAL_APPROVAL - The model is waiting for manual approval.
 	ModelApprovalStatus ModelApprovalStatus
 
 	// Metrics for the model.
@@ -8796,15 +7923,11 @@ type ModelPackage struct {
 	ModelPackageName *string
 
 	// The status of the model package. This can be one of the following values.
-	// -
-	// PENDING - The model package is pending being created.
-	// - IN_PROGRESS - The model
-	// package is in the process of being created.
-	// - COMPLETED - The model package was
-	// successfully created.
-	// - FAILED - The model package failed.
-	// - DELETING - The
-	// model package is in the process of being deleted.
+	//     - PENDING - The model package is pending being created.
+	//     - IN_PROGRESS - The model package is in the process of being created.
+	//     - COMPLETED - The model package was successfully created.
+	//     - FAILED - The model package failed.
+	//     - DELETING - The model package is in the process of being deleted.
 	ModelPackageStatus ModelPackageStatus
 
 	// Specifies the validation and image scan statuses of the model package.
@@ -8813,17 +7936,16 @@ type ModelPackage struct {
 	// The version number of a versioned model.
 	ModelPackageVersion *int32
 
-	// The Amazon Simple Storage Service path where the sample payload are stored. This
-	// path must point to a single gzip compressed tar archive (.tar.gz suffix).
+	// The Amazon Simple Storage Service path where the sample payload are stored.
+	// This path must point to a single gzip compressed tar archive (.tar.gz suffix).
 	SamplePayloadUrl *string
 
 	// A list of algorithms that were used to create a model package.
 	SourceAlgorithmSpecification *SourceAlgorithmSpecification
 
-	// A list of the tags associated with the model package. For more information, see
-	// Tagging Amazon Web Services resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-	// Web Services General Reference Guide.
+	// A list of the tags associated with the model package. For more information,
+	// see Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the Amazon Web Services General Reference Guide.
 	Tags []Tag
 
 	// The machine learning task your model package accomplishes. Common machine
@@ -8843,10 +7965,10 @@ type ModelPackageContainerDefinition struct {
 	// The Amazon EC2 Container Registry (Amazon ECR) path where inference code is
 	// stored. If you are using your own custom algorithm instead of an algorithm
 	// provided by SageMaker, the inference code must meet SageMaker requirements.
-	// SageMaker supports both registry/repository[:tag] and
-	// registry/repository[@digest] image path formats. For more information, see Using
-	// Your Own Algorithms with Amazon SageMaker
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html).
+	// SageMaker supports both registry/repository[:tag]  and
+	// registry/repository[@digest] image path formats. For more information, see
+	// Using Your Own Algorithms with Amazon SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html)
+	// .
 	//
 	// This member is required.
 	Image *string
@@ -8854,9 +7976,9 @@ type ModelPackageContainerDefinition struct {
 	// The DNS host name for the Docker container.
 	ContainerHostname *string
 
-	// The environment variables to set in the Docker container. Each key and value in
-	// the Environment string to string map can have length of up to 1024. We support
-	// up to 16 entries in the map.
+	// The environment variables to set in the Docker container. Each key and value
+	// in the Environment string to string map can have length of up to 1024. We
+	// support up to 16 entries in the map.
 	Environment map[string]string
 
 	// The machine learning framework of the model package container image.
@@ -8865,14 +7987,14 @@ type ModelPackageContainerDefinition struct {
 	// The framework version of the Model Package Container Image.
 	FrameworkVersion *string
 
-	// An MD5 hash of the training algorithm that identifies the Docker image used for
-	// training.
+	// An MD5 hash of the training algorithm that identifies the Docker image used
+	// for training.
 	ImageDigest *string
 
-	// The Amazon S3 path where the model artifacts, which result from model training,
-	// are stored. This path must point to a single gzip compressed tar archive
-	// (.tar.gz suffix). The model artifacts must be in an S3 bucket that is in the
-	// same region as the model package.
+	// The Amazon S3 path where the model artifacts, which result from model
+	// training, are stored. This path must point to a single gzip compressed tar
+	// archive ( .tar.gz suffix). The model artifacts must be in an S3 bucket that is
+	// in the same region as the model package.
 	ModelDataUrl *string
 
 	// A structure with Model Input details.
@@ -8880,7 +8002,7 @@ type ModelPackageContainerDefinition struct {
 
 	// The name of a pre-trained machine learning benchmarked by Amazon SageMaker
 	// Inference Recommender model that matches your model. You can find a list of
-	// benchmarked models by calling ListModelMetadata.
+	// benchmarked models by calling ListModelMetadata .
 	NearestModelName *string
 
 	// The Amazon Web Services Marketplace product ID of the model package.
@@ -8909,23 +8031,17 @@ type ModelPackageGroup struct {
 	ModelPackageGroupName *string
 
 	// The status of the model group. This can be one of the following values.
-	// -
-	// PENDING - The model group is pending being created.
-	// - IN_PROGRESS - The model
-	// group is in the process of being created.
-	// - COMPLETED - The model group was
-	// successfully created.
-	// - FAILED - The model group failed.
-	// - DELETING - The model
-	// group is in the process of being deleted.
-	// - DELETE_FAILED - SageMaker failed to
-	// delete the model group.
+	//     - PENDING - The model group is pending being created.
+	//     - IN_PROGRESS - The model group is in the process of being created.
+	//     - COMPLETED - The model group was successfully created.
+	//     - FAILED - The model group failed.
+	//     - DELETING - The model group is in the process of being deleted.
+	//     - DELETE_FAILED - SageMaker failed to delete the model group.
 	ModelPackageGroupStatus ModelPackageGroupStatus
 
 	// A list of the tags associated with the model group. For more information, see
-	// Tagging Amazon Web Services resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-	// Web Services General Reference Guide.
+	// Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the Amazon Web Services General Reference Guide.
 	Tags []Tag
 
 	noSmithyDocumentSerde
@@ -8987,7 +8103,7 @@ type ModelPackageStatusItem struct {
 	// This member is required.
 	Status DetailedModelPackageStatus
 
-	// if the overall status is Failed, the reason for the failure.
+	// if the overall status is Failed , the reason for the failure.
 	FailureReason *string
 
 	noSmithyDocumentSerde
@@ -9017,11 +8133,9 @@ type ModelPackageSummary struct {
 	ModelPackageStatus ModelPackageStatus
 
 	// The approval status of the model. This can be one of the following values.
-	// -
-	// APPROVED - The model is approved
-	// - REJECTED - The model is rejected.
-	// -
-	// PENDING_MANUAL_APPROVAL - The model is waiting for manual approval.
+	//     - APPROVED - The model is approved
+	//     - REJECTED - The model is rejected.
+	//     - PENDING_MANUAL_APPROVAL - The model is waiting for manual approval.
 	ModelApprovalStatus ModelApprovalStatus
 
 	// A brief description of the model package.
@@ -9047,8 +8161,8 @@ type ModelPackageValidationProfile struct {
 	// This member is required.
 	ProfileName *string
 
-	// The TransformJobDefinition object that describes the transform job used for the
-	// validation of the model package.
+	// The TransformJobDefinition object that describes the transform job used for
+	// the validation of the model package.
 	//
 	// This member is required.
 	TransformJobDefinition *TransformJobDefinition
@@ -9107,7 +8221,8 @@ type ModelQualityAppSpecification struct {
 	// Applicable only for the built-in (first party) containers.
 	PostAnalyticsProcessorSourceUri *string
 
-	// The machine learning problem type of the model that the monitoring job monitors.
+	// The machine learning problem type of the model that the monitoring job
+	// monitors.
 	ProblemType MonitoringProblemType
 
 	// An Amazon S3 URI to a script that is called per row prior to running analysis.
@@ -9133,8 +8248,8 @@ type ModelQualityBaselineConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The input for the model quality monitoring job. Currently endponts are supported
-// for input for model quality monitoring jobs.
+// The input for the model quality monitoring job. Currently endponts are
+// supported for input for model quality monitoring jobs.
 type ModelQualityJobInput struct {
 
 	// The ground truth label provided for the model.
@@ -9217,17 +8332,11 @@ type ModelVariantConfigSummary struct {
 
 	// The status of deployment for the model variant on the hosted inference
 	// endpoint.
-	// - Creating - Amazon SageMaker is preparing the model variant on the
-	// hosted inference endpoint.
-	// - InService - The model variant is running on the
-	// hosted inference endpoint.
-	// - Updating - Amazon SageMaker is updating the model
-	// variant on the hosted inference endpoint.
-	// - Deleting - Amazon SageMaker is
-	// deleting the model variant on the hosted inference endpoint.
-	// - Deleted - The
-	// model variant has been deleted on the hosted inference endpoint. This can only
-	// happen after stopping the experiment.
+	//     - Creating - Amazon SageMaker is preparing the model variant on the hosted inference endpoint.
+	//     - InService - The model variant is running on the hosted inference endpoint.
+	//     - Updating - Amazon SageMaker is updating the model variant on the hosted inference endpoint.
+	//     - Deleting - Amazon SageMaker is deleting the model variant on the hosted inference endpoint.
+	//     - Deleted - The model variant has been deleted on the hosted inference endpoint. This can only happen after stopping the experiment.
 	//
 	// This member is required.
 	Status ModelVariantStatus
@@ -9240,11 +8349,12 @@ type ModelVariantConfigSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A list of alert actions taken in response to an alert going into InAlert status.
+// A list of alert actions taken in response to an alert going into InAlert
+// status.
 type MonitoringAlertActions struct {
 
 	// An alert action taken to light up an icon on the Model Dashboard when an alert
-	// goes into InAlert status.
+	// goes into InAlert  status.
 	ModelDashboardIndicator *ModelDashboardIndicatorAction
 
 	noSmithyDocumentSerde
@@ -9258,9 +8368,9 @@ type MonitoringAlertHistorySummary struct {
 	// This member is required.
 	AlertStatus MonitoringAlertStatus
 
-	// A timestamp that indicates when the first alert transition occurred in an alert
-	// history. An alert transition can be from status InAlert to OK, or from OK to
-	// InAlert.
+	// A timestamp that indicates when the first alert transition occurred in an
+	// alert history. An alert transition can be from status InAlert  to OK , or from
+	// OK to InAlert .
 	//
 	// This member is required.
 	CreationTime *time.Time
@@ -9281,7 +8391,8 @@ type MonitoringAlertHistorySummary struct {
 // Provides summary information about a monitor alert.
 type MonitoringAlertSummary struct {
 
-	// A list of alert actions taken in response to an alert going into InAlert status.
+	// A list of alert actions taken in response to an alert going into InAlert
+	// status.
 	//
 	// This member is required.
 	Actions *MonitoringAlertActions
@@ -9296,7 +8407,7 @@ type MonitoringAlertSummary struct {
 	// This member is required.
 	CreationTime *time.Time
 
-	// Within EvaluationPeriod, how many execution failures will raise an alert.
+	// Within EvaluationPeriod , how many execution failures will raise an alert.
 	//
 	// This member is required.
 	DatapointsToAlert *int32
@@ -9355,12 +8466,12 @@ type MonitoringBaselineConfig struct {
 	// The name of the job that performs baselining for the monitoring job.
 	BaseliningJobName *string
 
-	// The baseline constraint file in Amazon S3 that the current monitoring job should
-	// validated against.
+	// The baseline constraint file in Amazon S3 that the current monitoring job
+	// should validated against.
 	ConstraintsResource *MonitoringConstraintsResource
 
-	// The baseline statistics file in Amazon S3 that the current monitoring job should
-	// be validated against.
+	// The baseline statistics file in Amazon S3 that the current monitoring job
+	// should be validated against.
 	StatisticsResource *MonitoringStatisticsResource
 
 	noSmithyDocumentSerde
@@ -9381,8 +8492,8 @@ type MonitoringClusterConfig struct {
 	// This member is required.
 	InstanceType ProcessingInstanceType
 
-	// The size of the ML storage volume, in gigabytes, that you want to provision. You
-	// must specify sufficient ML storage for your scenario.
+	// The size of the ML storage volume, in gigabytes, that you want to provision.
+	// You must specify sufficient ML storage for your scenario.
 	//
 	// This member is required.
 	VolumeSizeInGB *int32
@@ -9515,9 +8626,9 @@ type MonitoringJobDefinition struct {
 	// This member is required.
 	MonitoringOutputConfig *MonitoringOutputConfig
 
-	// Identifies the resources, ML compute instances, and ML storage volumes to deploy
-	// for a monitoring job. In distributed processing, you specify more than one
-	// instance.
+	// Identifies the resources, ML compute instances, and ML storage volumes to
+	// deploy for a monitoring job. In distributed processing, you specify more than
+	// one instance.
 	//
 	// This member is required.
 	MonitoringResources *MonitoringResources
@@ -9528,8 +8639,8 @@ type MonitoringJobDefinition struct {
 	// This member is required.
 	RoleArn *string
 
-	// Baseline configuration used to validate that the data conforms to the specified
-	// constraints and statistics
+	// Baseline configuration used to validate that the data conforms to the
+	// specified constraints and statistics
 	BaselineConfig *MonitoringBaselineConfig
 
 	// Sets the environment variables in the Docker container.
@@ -9595,8 +8706,8 @@ type MonitoringNetworkConfig struct {
 	// Control access to and from your training and model containers by configuring the
 	// VPC. For more information, see Protect Endpoints by Using an Amazon Virtual
 	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
-	// and Protect Training Jobs by Using an Amazon Virtual Private Cloud
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
+	// and Protect Training Jobs by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html)
+	// .
 	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
@@ -9616,8 +8727,8 @@ type MonitoringOutput struct {
 // The output configuration for monitoring jobs.
 type MonitoringOutputConfig struct {
 
-	// Monitoring outputs for monitoring jobs. This is where the output of the periodic
-	// monitoring jobs is uploaded.
+	// Monitoring outputs for monitoring jobs. This is where the output of the
+	// periodic monitoring jobs is uploaded.
 	//
 	// This member is required.
 	MonitoringOutputs []MonitoringOutput
@@ -9670,9 +8781,9 @@ type MonitoringS3Output struct {
 	noSmithyDocumentSerde
 }
 
-// A schedule for a model monitoring job. For information about model monitor, see
-// Amazon SageMaker Model Monitor
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html).
+// A schedule for a model monitoring job. For information about model monitor,
+// see Amazon SageMaker Model Monitor (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html)
+// .
 type MonitoringSchedule struct {
 
 	// The time that the monitoring schedule was created.
@@ -9701,21 +8812,18 @@ type MonitoringSchedule struct {
 
 	// The status of the monitoring schedule. This can be one of the following
 	// values.
-	// - PENDING - The schedule is pending being created.
-	// - FAILED - The
-	// schedule failed.
-	// - SCHEDULED - The schedule was successfully created.
-	// - STOPPED
-	// - The schedule was stopped.
+	//     - PENDING - The schedule is pending being created.
+	//     - FAILED - The schedule failed.
+	//     - SCHEDULED - The schedule was successfully created.
+	//     - STOPPED - The schedule was stopped.
 	MonitoringScheduleStatus ScheduleStatus
 
 	// The type of the monitoring job definition to schedule.
 	MonitoringType MonitoringType
 
 	// A list of the tags associated with the monitoring schedlue. For more
-	// information, see Tagging Amazon Web Services resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-	// Web Services General Reference Guide.
+	// information, see Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the Amazon Web Services General Reference Guide.
 	Tags []Tag
 
 	noSmithyDocumentSerde
@@ -9810,7 +8918,7 @@ type MultiModelConfig struct {
 	// each time it is invoked. Some use cases do not benefit from model caching. For
 	// example, if an endpoint hosts a large number of models that are each invoked
 	// infrequently, the endpoint might perform better if you disable model caching. To
-	// disable model caching, set the value of this parameter to Disabled.
+	// disable model caching, set the value of this parameter to Disabled .
 	ModelCacheSetting ModelCacheSetting
 
 	noSmithyDocumentSerde
@@ -9819,18 +8927,18 @@ type MultiModelConfig struct {
 // The VpcConfig configuration object that specifies the VPC that you want the
 // compilation jobs to connect to. For more information on controlling access to
 // your Amazon S3 buckets used for compilation job, see Give Amazon SageMaker
-// Compilation Jobs Access to Resources in Your Amazon VPC
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html).
+// Compilation Jobs Access to Resources in Your Amazon VPC (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html)
+// .
 type NeoVpcConfig struct {
 
 	// The VPC security group IDs. IDs have the form of sg-xxxxxxxx. Specify the
-	// security groups for the VPC that is specified in the Subnets field.
+	// security groups for the VPC that is specified in the Subnets  field.
 	//
 	// This member is required.
 	SecurityGroupIds []string
 
-	// The ID of the subnets in the VPC that you want to connect the compilation job to
-	// for accessing the model in Amazon S3.
+	// The ID of the subnets in the VPC that you want to connect the compilation job
+	// to for accessing the model in Amazon S3.
 	//
 	// This member is required.
 	Subnets []string
@@ -9839,26 +8947,23 @@ type NeoVpcConfig struct {
 }
 
 // A list of nested Filter objects. A resource must satisfy the conditions of all
-// filters to be included in the results returned from the Search API. For example,
-// to filter on a training job's InputDataConfig property with a specific channel
-// name and S3Uri prefix, define the following filters:
-// -
-// '{Name:"InputDataConfig.ChannelName", "Operator":"Equals", "Value":"train"}',
-// -
-// '{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri", "Operator":"Contains",
-// "Value":"mybucket/catdata"}'
+// filters to be included in the results returned from the Search API. For
+// example, to filter on a training job's InputDataConfig property with a
+// specific channel name and S3Uri  prefix, define the following filters:
+//   - '{Name:"InputDataConfig.ChannelName", "Operator":"Equals", "Value":"train"}',
+//   - '{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri", "Operator":"Contains", "Value":"mybucket/catdata"}'
 type NestedFilters struct {
 
-	// A list of filters. Each filter acts on a property. Filters must contain at least
-	// one Filters value. For example, a NestedFilters call might include a filter on
-	// the PropertyName parameter of the InputDataConfig property:
-	// InputDataConfig.DataSource.S3DataSource.S3Uri.
+	// A list of filters. Each filter acts on a property. Filters must contain at
+	// least one Filters  value. For example, a NestedFilters call might include a
+	// filter on the PropertyName  parameter of the InputDataConfig  property:
+	// InputDataConfig.DataSource.S3DataSource.S3Uri .
 	//
 	// This member is required.
 	Filters []Filter
 
 	// The name of the property to use in the nested filters. The value must match a
-	// listed property name, such as InputDataConfig.
+	// listed property name, such as InputDataConfig .
 	//
 	// This member is required.
 	NestedPropertyName *string
@@ -9872,8 +8977,8 @@ type NestedFilters struct {
 type NetworkConfig struct {
 
 	// Whether to encrypt all communications between distributed processing jobs.
-	// Choose True to encrypt communications. Encryption provides greater security for
-	// distributed processing jobs, but the processing might take longer.
+	// Choose True to encrypt communications. Encryption provides greater security
+	// for distributed processing jobs, but the processing might take longer.
 	EnableInterContainerTrafficEncryption bool
 
 	// Whether to allow inbound and outbound network calls to and from the containers
@@ -9884,8 +8989,8 @@ type NetworkConfig struct {
 	// Control access to and from your training and model containers by configuring the
 	// VPC. For more information, see Protect Endpoints by Using an Amazon Virtual
 	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
-	// and Protect Training Jobs by Using an Amazon Virtual Private Cloud
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
+	// and Protect Training Jobs by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html)
+	// .
 	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
@@ -9922,8 +9027,8 @@ type NotebookInstanceLifecycleConfigSummary struct {
 // scripts cannot run for longer than 5 minutes. If a script runs for longer than 5
 // minutes, it fails and the notebook instance is not created or started. For
 // information about notebook instance lifestyle configurations, see Step 2.1:
-// (Optional) Customize a Notebook Instance
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html).
+// (Optional) Customize a Notebook Instance (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html)
+// .
 type NotebookInstanceLifecycleHook struct {
 
 	// A base64-encoded string that contains a shell script for a notebook instance
@@ -9946,14 +9051,14 @@ type NotebookInstanceSummary struct {
 	// This member is required.
 	NotebookInstanceName *string
 
-	// An array of up to three Git repositories associated with the notebook instance.
-	// These can be either the names of Git repositories stored as resources in your
-	// account, or the URL of Git repositories in Amazon Web Services CodeCommit
-	// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
-	// other Git repository. These repositories are cloned at the same level as the
-	// default repository of your notebook instance. For more information, see
-	// Associating Git Repositories with SageMaker Notebook Instances
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	// An array of up to three Git repositories associated with the notebook
+	// instance. These can be either the names of Git repositories stored as resources
+	// in your account, or the URL of Git repositories in Amazon Web Services
+	// CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// or in any other Git repository. These repositories are cloned at the same level
+	// as the default repository of your notebook instance. For more information, see
+	// Associating Git Repositories with SageMaker Notebook Instances (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html)
+	// .
 	AdditionalCodeRepositories []string
 
 	// A timestamp that shows when the notebook instance was created.
@@ -9962,12 +9067,11 @@ type NotebookInstanceSummary struct {
 	// The Git repository associated with the notebook instance as its default code
 	// repository. This can be either the name of a Git repository stored as a resource
 	// in your account, or the URL of a Git repository in Amazon Web Services
-	// CodeCommit
-	// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
-	// other Git repository. When you open a notebook instance, it opens in the
-	// directory that contains this repository. For more information, see Associating
-	// Git Repositories with SageMaker Notebook Instances
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	// CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// or in any other Git repository. When you open a notebook instance, it opens in
+	// the directory that contains this repository. For more information, see
+	// Associating Git Repositories with SageMaker Notebook Instances (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html)
+	// .
 	DefaultCodeRepository *string
 
 	// The type of ML compute instance that the notebook instance is running on.
@@ -9978,22 +9082,22 @@ type NotebookInstanceSummary struct {
 
 	// The name of a notebook instance lifecycle configuration associated with this
 	// notebook instance. For information about notebook instance lifestyle
-	// configurations, see Step 2.1: (Optional) Customize a Notebook Instance
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html).
+	// configurations, see Step 2.1: (Optional) Customize a Notebook Instance (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html)
+	// .
 	NotebookInstanceLifecycleConfigName *string
 
 	// The status of the notebook instance.
 	NotebookInstanceStatus NotebookInstanceStatus
 
-	// The URL that you use to connect to the Jupyter notebook running in your notebook
-	// instance.
+	// The URL that you use to connect to the Jupyter notebook running in your
+	// notebook instance.
 	Url *string
 
 	noSmithyDocumentSerde
 }
 
-// Configures Amazon SNS notifications of available or expiring work items for work
-// teams.
+// Configures Amazon SNS notifications of available or expiring work items for
+// work teams.
 type NotificationConfiguration struct {
 
 	// The ARN for the Amazon SNS topic to which notifications should be published.
@@ -10013,8 +9117,8 @@ type ObjectiveStatusCounters struct {
 	// training job failed or did not emit an objective metric.
 	Failed int32
 
-	// The number of training jobs that are in progress and pending evaluation of their
-	// final objective metric.
+	// The number of training jobs that are in progress and pending evaluation of
+	// their final objective metric.
 	Pending int32
 
 	// The number of training jobs whose final objective metric was evaluated by the
@@ -10024,13 +9128,13 @@ type ObjectiveStatusCounters struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration of an OfflineStore. Provide an OfflineStoreConfig in a request
-// to CreateFeatureGroup to create an OfflineStore. To encrypt an OfflineStore
-// using at rest data encryption, specify Amazon Web Services Key Management
-// Service (KMS) key ID, or KMSKeyId, in S3StorageConfig.
+// The configuration of an OfflineStore . Provide an OfflineStoreConfig in a
+// request to CreateFeatureGroup  to create an OfflineStore . To encrypt an
+// OfflineStoreusing at rest data encryption, specify Amazon Web Services Key
+// Management Service (KMS) key ID, or KMSKeyId , in S3StorageConfig .
 type OfflineStoreConfig struct {
 
-	// The Amazon Simple Storage (Amazon S3) location of OfflineStore.
+	// The Amazon Simple Storage (Amazon S3) location of OfflineStore .
 	//
 	// This member is required.
 	S3StorageConfig *S3StorageConfig
@@ -10040,20 +9144,20 @@ type OfflineStoreConfig struct {
 	DataCatalogConfig *DataCatalogConfig
 
 	// Set to True to disable the automatic creation of an Amazon Web Services Glue
-	// table when configuring an OfflineStore.
+	// table when configuring an OfflineStore .
 	DisableGlueTableCreation bool
 
 	// Format for the offline store table. Supported formats are Glue (Default) and
-	// Apache Iceberg (https://iceberg.apache.org/).
+	// Apache Iceberg (https://iceberg.apache.org/) .
 	TableFormat TableFormat
 
 	noSmithyDocumentSerde
 }
 
-// The status of OfflineStore.
+// The status of OfflineStore .
 type OfflineStoreStatus struct {
 
-	// An OfflineStore status.
+	// An OfflineStore  status.
 	//
 	// This member is required.
 	Status OfflineStoreStatusValue
@@ -10103,7 +9207,8 @@ type OidcConfig struct {
 	// This member is required.
 	TokenEndpoint *string
 
-	// The OIDC IdP user information endpoint used to configure your private workforce.
+	// The OIDC IdP user information endpoint used to configure your private
+	// workforce.
 	//
 	// This member is required.
 	UserInfoEndpoint *string
@@ -10133,7 +9238,8 @@ type OidcConfigForResponse struct {
 	// The OIDC IdP token endpoint used to configure your private workforce.
 	TokenEndpoint *string
 
-	// The OIDC IdP user information endpoint used to configure your private workforce.
+	// The OIDC IdP user information endpoint used to configure your private
+	// workforce.
 	UserInfoEndpoint *string
 
 	noSmithyDocumentSerde
@@ -10141,13 +9247,13 @@ type OidcConfigForResponse struct {
 
 // A list of user groups that exist in your OIDC Identity Provider (IdP). One to
 // ten groups can be used to create a single private work team. When you add a user
-// group to the list of Groups, you can add that user group to one or more private
-// work teams. If you add a user group to a private work team, all workers in that
-// user group are added to the work team.
+// group to the list of Groups, you can add that user group to one or more
+// private work teams. If you add a user group to a private work team, all workers
+// in that user group are added to the work team.
 type OidcMemberDefinition struct {
 
-	// A list of comma seperated strings that identifies user groups in your OIDC IdP.
-	// Each user group is made up of a group of private workers.
+	// A list of comma seperated strings that identifies user groups in your OIDC
+	// IdP. Each user group is made up of a group of private workers.
 	//
 	// This member is required.
 	Groups []string
@@ -10155,66 +9261,62 @@ type OidcMemberDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// Use this to specify the Amazon Web Services Key Management Service (KMS) Key ID,
-// or KMSKeyId, for at rest data encryption. You can turn OnlineStore on or off by
-// specifying the EnableOnlineStore flag at General Assembly; the default value is
-// False.
+// Use this to specify the Amazon Web Services Key Management Service (KMS) Key
+// ID, or KMSKeyId , for at rest data encryption. You can turn OnlineStore on or
+// off by specifying the EnableOnlineStore flag at General Assembly; the default
+// value is False .
 type OnlineStoreConfig struct {
 
-	// Turn OnlineStore off by specifying False for the EnableOnlineStore flag. Turn
-	// OnlineStore on by specifying True for the EnableOnlineStore flag. The default
-	// value is False.
+	// Turn OnlineStore  off by specifying False  for the EnableOnlineStore flag.
+	// Turn OnlineStore  on by specifying True  for the EnableOnlineStore flag. The
+	// default value is False .
 	EnableOnlineStore bool
 
-	// Use to specify KMS Key ID (KMSKeyId) for at-rest encryption of your OnlineStore.
+	// Use to specify KMS Key ID ( KMSKeyId ) for at-rest encryption of your
+	// OnlineStore .
 	SecurityConfig *OnlineStoreSecurityConfig
 
 	noSmithyDocumentSerde
 }
 
-// The security configuration for OnlineStore.
+// The security configuration for OnlineStore .
 type OnlineStoreSecurityConfig struct {
 
 	// The Amazon Web Services Key Management Service (KMS) key ARN that SageMaker
 	// Feature Store uses to encrypt the Amazon S3 objects at rest using Amazon S3
 	// server-side encryption. The caller (either user or IAM role) of
-	// CreateFeatureGroup must have below permissions to the OnlineStoreKmsKeyId:
-	// -
-	// "kms:Encrypt"
-	// - "kms:Decrypt"
-	// - "kms:DescribeKey"
-	// - "kms:CreateGrant"
-	// -
-	// "kms:RetireGrant"
-	// - "kms:ReEncryptFrom"
-	// - "kms:ReEncryptTo"
-	// -
-	// "kms:GenerateDataKey"
-	// - "kms:ListAliases"
-	// - "kms:ListGrants"
-	// -
-	// "kms:RevokeGrant"
-	//
+	// CreateFeatureGroup must have below permissions to the OnlineStore KmsKeyId :
+	//     - "kms:Encrypt"
+	//     - "kms:Decrypt"
+	//     - "kms:DescribeKey"
+	//     - "kms:CreateGrant"
+	//     - "kms:RetireGrant"
+	//     - "kms:ReEncryptFrom"
+	//     - "kms:ReEncryptTo"
+	//     - "kms:GenerateDataKey"
+	//     - "kms:ListAliases"
+	//     - "kms:ListGrants"
+	//     - "kms:RevokeGrant"
 	// The caller (either user or IAM role) to all DataPlane
-	// operations (PutRecord, GetRecord, DeleteRecord) must have the following
-	// permissions to the KmsKeyId:
-	// - "kms:Decrypt"
+	// operations ( PutRecord , GetRecord , DeleteRecord) must have the following
+	// permissions to the KmsKeyId :
+	//     - "kms:Decrypt"
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
 }
 
 // Contains information about the output location for the compiled model and the
-// target device that the model runs on. TargetDevice and TargetPlatform are
+// target device that the model runs on. TargetDevice  and TargetPlatform are
 // mutually exclusive, so you need to choose one between the two to specify your
 // target device or platform. If you cannot find your device you want to use from
-// the TargetDevice list, use TargetPlatform to describe the platform of your edge
-// device and CompilerOptions if there are specific settings that are required or
-// recommended to use for particular TargetPlatform.
+// the TargetDevice  list, use TargetPlatform to describe the platform of your
+// edge device and CompilerOptions if there are specific settings that are
+// required or recommended to use for particular TargetPlatform.
 type OutputConfig struct {
 
 	// Identifies the S3 bucket where you want Amazon SageMaker to store the model
-	// artifacts. For example, s3://bucket-name/key-name-prefix.
+	// artifacts. For example, s3://bucket-name/key-name-prefix .
 	//
 	// This member is required.
 	S3OutputLocation *string
@@ -10223,119 +9325,59 @@ type OutputConfig struct {
 	// compiler options are TargetPlatform specific. It is required for NVIDIA
 	// accelerators and highly recommended for CPU compilations. For any other cases,
 	// it is optional to specify CompilerOptions.
-	// - DTYPE: Specifies the data type for
-	// the input. When compiling for ml_* (except for ml_inf) instances using PyTorch
-	// framework, provide the data type (dtype) of the model's input. "float32" is used
-	// if "DTYPE" is not specified. Options for data type are:
-	// - float32: Use either
-	// "float" or "float32".
-	// - int64: Use either "int64" or "long".
-	//
-	// For example,
-	// {"dtype" : "float32"}.
-	// - CPU: Compilation for CPU supports the following
-	// compiler options.
-	// - mcpu: CPU micro-architecture. For example, {'mcpu':
-	// 'skylake-avx512'}
-	// - mattr: CPU flags. For example, {'mattr': ['+neon',
-	// '+vfpv4']}
-	//
-	// - ARM: Details of ARM CPU compilations.
-	// - NEON: NEON is an
-	// implementation of the Advanced SIMD extension used in ARMv7 processors. For
-	// example, add {'mattr': ['+neon']} to the compiler options if compiling for ARM
-	// 32-bit platform with the NEON support.
-	//
-	// - NVIDIA: Compilation for NVIDIA GPU
-	// supports the following compiler options.
-	// - gpu_code: Specifies the targeted
-	// architecture.
-	// - trt-ver: Specifies the TensorRT versions in x.y.z. format.
-	// -
-	// cuda-ver: Specifies the CUDA version in x.y format.
-	//
-	// For example, {'gpu-code':
-	// 'sm_72', 'trt-ver': '6.0.1', 'cuda-ver': '10.1'}
-	// - ANDROID: Compilation for the
-	// Android OS supports the following compiler options:
-	// - ANDROID_PLATFORM:
-	// Specifies the Android API levels. Available levels range from 21 to 29. For
-	// example, {'ANDROID_PLATFORM': 28}.
-	// - mattr: Add {'mattr': ['+neon']} to compiler
-	// options if compiling for ARM 32-bit platform with NEON support.
-	//
-	// - INFERENTIA:
-	// Compilation for target ml_inf1 uses compiler options passed in as a JSON string.
-	// For example, "CompilerOptions": "\"--verbose 1 --num-neuroncores 2 -O2\"". For
-	// information about supported compiler options, see  Neuron Compiler CLI
-	// (https://github.com/aws/aws-neuron-sdk/blob/master/docs/neuron-cc/command-line-reference.md).
-	// -
-	// CoreML: Compilation for the CoreML OutputConfig$TargetDevice supports the
-	// following compiler options:
-	// - class_labels: Specifies the classification labels
-	// file name inside input tar.gz file. For example, {"class_labels":
-	// "imagenet_labels_1000.txt"}. Labels inside the txt file should be separated by
-	// newlines.
-	//
-	// - EIA: Compilation for the Elastic Inference Accelerator supports the
-	// following compiler options:
-	// - precision_mode: Specifies the precision of
-	// compiled artifacts. Supported values are "FP16" and "FP32". Default is "FP32".
-	// -
-	// signature_def_key: Specifies the signature to use for models in SavedModel
-	// format. Defaults is TensorFlow's default signature def key.
-	// - output_names:
-	// Specifies a list of output tensor names for models in FrozenGraph format. Set at
-	// most one API field, either: signature_def_key or output_names.
-	//
-	// For example:
-	// {"precision_mode": "FP32", "output_names": ["output:0"]}
+	//     - DTYPE : Specifies the data type for the input. When compiling for ml_* (except for ml_inf ) instances using PyTorch framework, provide the data type (dtype) of the model's input. "float32" is used if "DTYPE" is not specified. Options for data type are:
+	//         - float32: Use either "float" or "float32" .
+	//         - int64: Use either "int64" or "long" . For example, {"dtype" : "float32"} .
+	//     - CPU : Compilation for CPU supports the following compiler options.
+	//         - mcpu : CPU micro-architecture. For example, {'mcpu': 'skylake-avx512'}
+	//         - mattr : CPU flags. For example, {'mattr': ['+neon', '+vfpv4']}
+	//     - ARM : Details of ARM CPU compilations.
+	//         - NEON : NEON is an implementation of the Advanced SIMD extension used in ARMv7 processors. For example, add {'mattr': ['+neon']} to the compiler options if compiling for ARM 32-bit platform with the NEON support.
+	//     - NVIDIA : Compilation for NVIDIA GPU supports the following compiler options.
+	//         - gpu_code : Specifies the targeted architecture.
+	//         - trt-ver : Specifies the TensorRT versions in x.y.z. format.
+	//         - cuda-ver : Specifies the CUDA version in x.y format. For example, {'gpu-code': 'sm_72', 'trt-ver': '6.0.1', 'cuda-ver': '10.1'}
+	//     - ANDROID : Compilation for the Android OS supports the following compiler options:
+	//         - ANDROID_PLATFORM : Specifies the Android API levels. Available levels range from 21 to 29. For example, {'ANDROID_PLATFORM': 28} .
+	//         - mattr : Add {'mattr': ['+neon']} to compiler options if compiling for ARM 32-bit platform with NEON support.
+	//     - INFERENTIA : Compilation for target ml_inf1 uses compiler options passed in as a JSON string. For example, "CompilerOptions": "\"--verbose 1 --num-neuroncores 2 -O2\"" . For information about supported compiler options, see Neuron Compiler CLI (https://github.com/aws/aws-neuron-sdk/blob/master/docs/neuron-cc/command-line-reference.md) .
+	//     - CoreML : Compilation for the CoreML OutputConfig$TargetDevice supports the following compiler options:
+	//         - class_labels : Specifies the classification labels file name inside input tar.gz file. For example, {"class_labels": "imagenet_labels_1000.txt"} . Labels inside the txt file should be separated by newlines.
+	//     - EIA : Compilation for the Elastic Inference Accelerator supports the following compiler options:
+	//         - precision_mode : Specifies the precision of compiled artifacts. Supported values are "FP16" and "FP32" . Default is "FP32" .
+	//         - signature_def_key : Specifies the signature to use for models in SavedModel format. Defaults is TensorFlow's default signature def key.
+	//         - output_names : Specifies a list of output tensor names for models in FrozenGraph format. Set at most one API field, either: signature_def_key or output_names . For example: {"precision_mode": "FP32", "output_names": ["output:0"]}
 	CompilerOptions *string
 
 	// The Amazon Web Services Key Management Service key (Amazon Web Services KMS)
 	// that Amazon SageMaker uses to encrypt your output models with Amazon S3
 	// server-side encryption after compilation job. If you don't provide a KMS key ID,
 	// Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account.
-	// For more information, see KMS-Managed Encryption Keys
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)
+	// For more information, see KMS-Managed Encryption Keys (https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)
 	// in the Amazon Simple Storage Service Developer Guide. The KmsKeyId can be any of
 	// the following formats:
-	// - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	// - Key ARN:
-	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	// -
-	// Alias name: alias/ExampleAlias
-	// - Alias name ARN:
-	// arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
+	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//     - Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//     - Alias name: alias/ExampleAlias
+	//     - Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
 	KmsKeyId *string
 
 	// Identifies the target device or the machine learning instance that you want to
 	// run your model on after the compilation has completed. Alternatively, you can
-	// specify OS, architecture, and accelerator using TargetPlatform fields. It can be
-	// used instead of TargetPlatform.
+	// specify OS, architecture, and accelerator using TargetPlatform fields. It can
+	// be used instead of TargetPlatform .
 	TargetDevice TargetDevice
 
-	// Contains information about a target platform that you want your model to run on,
-	// such as OS, architecture, and accelerators. It is an alternative of
-	// TargetDevice. The following examples show how to configure the TargetPlatform
-	// and CompilerOptions JSON strings for popular target platforms:
-	// - Raspberry Pi 3
-	// Model B+ "TargetPlatform": {"Os": "LINUX", "Arch": "ARM_EABIHF"},
-	// "CompilerOptions": {'mattr': ['+neon']}
-	// - Jetson TX2 "TargetPlatform": {"Os":
-	// "LINUX", "Arch": "ARM64", "Accelerator": "NVIDIA"}, "CompilerOptions":
-	// {'gpu-code': 'sm_62', 'trt-ver': '6.0.1', 'cuda-ver': '10.0'}
-	// - EC2 m5.2xlarge
-	// instance OS "TargetPlatform": {"Os": "LINUX", "Arch": "X86_64", "Accelerator":
-	// "NVIDIA"}, "CompilerOptions": {'mcpu': 'skylake-avx512'}
-	// - RK3399
-	// "TargetPlatform": {"Os": "LINUX", "Arch": "ARM64", "Accelerator": "MALI"}
-	// -
-	// ARMv7 phone (CPU) "TargetPlatform": {"Os": "ANDROID", "Arch": "ARM_EABI"},
-	// "CompilerOptions": {'ANDROID_PLATFORM': 25, 'mattr': ['+neon']}
-	// - ARMv8 phone
-	// (CPU) "TargetPlatform": {"Os": "ANDROID", "Arch": "ARM64"}, "CompilerOptions":
-	// {'ANDROID_PLATFORM': 29}
+	// Contains information about a target platform that you want your model to run
+	// on, such as OS, architecture, and accelerators. It is an alternative of
+	// TargetDevice . The following examples show how to configure the TargetPlatform
+	// and CompilerOptions  JSON strings for popular target platforms:
+	//     - Raspberry Pi 3 Model B+ "TargetPlatform": {"Os": "LINUX", "Arch": "ARM_EABIHF"}, "CompilerOptions": {'mattr': ['+neon']}
+	//     - Jetson TX2 "TargetPlatform": {"Os": "LINUX", "Arch": "ARM64", "Accelerator": "NVIDIA"}, "CompilerOptions": {'gpu-code': 'sm_62', 'trt-ver': '6.0.1', 'cuda-ver': '10.0'}
+	//     - EC2 m5.2xlarge instance OS "TargetPlatform": {"Os": "LINUX", "Arch": "X86_64", "Accelerator": "NVIDIA"}, "CompilerOptions": {'mcpu': 'skylake-avx512'}
+	//     - RK3399 "TargetPlatform": {"Os": "LINUX", "Arch": "ARM64", "Accelerator": "MALI"}
+	//     - ARMv7 phone (CPU) "TargetPlatform": {"Os": "ANDROID", "Arch": "ARM_EABI"}, "CompilerOptions": {'ANDROID_PLATFORM': 25, 'mattr': ['+neon']}
+	//     - ARMv8 phone (CPU) "TargetPlatform": {"Os": "ANDROID", "Arch": "ARM64"}, "CompilerOptions": {'ANDROID_PLATFORM': 29}
 	TargetPlatform *TargetPlatform
 
 	noSmithyDocumentSerde
@@ -10346,40 +9388,32 @@ type OutputConfig struct {
 type OutputDataConfig struct {
 
 	// Identifies the S3 path where you want SageMaker to store the model artifacts.
-	// For example, s3://bucket-name/key-name-prefix.
+	// For example, s3://bucket-name/key-name-prefix .
 	//
 	// This member is required.
 	S3OutputPath *string
 
 	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
 	// that SageMaker uses to encrypt the model artifacts at rest using Amazon S3
-	// server-side encryption. The KmsKeyId can be any of the following formats:
-	// - //
-	// KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
-	// - // Amazon Resource Name
-	// (ARN) of a KMS Key
-	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
-	// -
-	// // KMS Key Alias "alias/ExampleAlias"
-	// - // Amazon Resource Name (ARN) of a KMS
-	// Key Alias "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
+	// server-side encryption. The KmsKeyId  can be any of the following formats:
+	//     - // KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//     - // Amazon Resource Name (ARN) of a KMS Key "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	//     - // KMS Key Alias "alias/ExampleAlias"
+	//     - // Amazon Resource Name (ARN) of a KMS Key Alias "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
 	//
-	// If you use a
-	// KMS key ID or an alias of your KMS key, the SageMaker execution role must
-	// include permissions to call kms:Encrypt. If you don't provide a KMS key ID,
-	// SageMaker uses the default KMS key for Amazon S3 for your role's account.
-	// SageMaker uses server-side encryption with KMS-managed keys for
-	// OutputDataConfig. If you use a bucket policy with an s3:PutObject permission
+	// If you use a KMS key ID or an alias of your KMS key, the SageMaker execution
+	// role must include permissions to call kms:Encrypt. If you don't provide a KMS
+	// key ID, SageMaker uses the default KMS key for Amazon S3 for your role's
+	// account. SageMaker uses server-side encryption with KMS-managed keys for
+	// OutputDataConfig . If you use a bucket policy with an s3:PutObject permission
 	// that only allows objects with server-side encryption, set the condition key of
-	// s3:x-amz-server-side-encryption to "aws:kms". For more information, see
-	// KMS-Managed Encryption Keys
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)
+	// s3:x-amz-server-side-encryption to "aws:kms" . For more information, see
+	// KMS-Managed Encryption Keys (https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)
 	// in the Amazon Simple Storage Service Developer Guide. The KMS key policy must
-	// grant permission to the IAM role that you specify in your CreateTrainingJob,
-	// CreateTransformJob, or CreateHyperParameterTuningJob requests. For more
-	// information, see Using Key Policies in Amazon Web Services KMS
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
-	// Amazon Web Services Key Management Service Developer Guide.
+	// grant permission to the IAM role that you specify in your CreateTrainingJob ,
+	// CreateTransformJob , or CreateHyperParameterTuningJob requests. For more
+	// information, see Using Key Policies in Amazon Web Services KMS (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
+	// in the Amazon Web Services Key Management Service Developer Guide.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -10417,8 +9451,8 @@ type ParallelismConfiguration struct {
 // Assigns a value to a named Pipeline parameter.
 type Parameter struct {
 
-	// The name of the parameter to assign a value to. This parameter name must match a
-	// named parameter in the pipeline definition.
+	// The name of the parameter to assign a value to. This parameter name must match
+	// a named parameter in the pipeline definition.
 	//
 	// This member is required.
 	Name *string
@@ -10435,38 +9469,38 @@ type Parameter struct {
 // hyperparameters to be used by an algorithm.
 type ParameterRange struct {
 
-	// A CategoricalParameterRangeSpecification object that defines the possible values
-	// for a categorical hyperparameter.
+	// A CategoricalParameterRangeSpecification object that defines the possible
+	// values for a categorical hyperparameter.
 	CategoricalParameterRangeSpecification *CategoricalParameterRangeSpecification
 
-	// A ContinuousParameterRangeSpecification object that defines the possible values
-	// for a continuous hyperparameter.
+	// A ContinuousParameterRangeSpecification object that defines the possible
+	// values for a continuous hyperparameter.
 	ContinuousParameterRangeSpecification *ContinuousParameterRangeSpecification
 
-	// A IntegerParameterRangeSpecification object that defines the possible values for
-	// an integer hyperparameter.
+	// A IntegerParameterRangeSpecification object that defines the possible values
+	// for an integer hyperparameter.
 	IntegerParameterRangeSpecification *IntegerParameterRangeSpecification
 
 	noSmithyDocumentSerde
 }
 
-// Specifies ranges of integer, continuous, and categorical hyperparameters that a
-// hyperparameter tuning job searches. The hyperparameter tuning job launches
+// Specifies ranges of integer, continuous, and categorical hyperparameters that
+// a hyperparameter tuning job searches. The hyperparameter tuning job launches
 // training jobs with hyperparameter values within these ranges to find the
 // combination of values that result in the training job with the best performance
 // as measured by the objective metric of the hyperparameter tuning job. The
-// maximum number of items specified for Array Members refers to the maximum number
-// of hyperparameters for each range and also the maximum for the hyperparameter
-// tuning job itself. That is, the sum of the number of hyperparameters for all the
-// ranges can't exceed the maximum number specified.
+// maximum number of items specified for Array Members refers to the maximum
+// number of hyperparameters for each range and also the maximum for the
+// hyperparameter tuning job itself. That is, the sum of the number of
+// hyperparameters for all the ranges can't exceed the maximum number specified.
 type ParameterRanges struct {
 
 	// The array of CategoricalParameterRange objects that specify ranges of
 	// categorical hyperparameters that a hyperparameter tuning job searches.
 	CategoricalParameterRanges []CategoricalParameterRange
 
-	// The array of ContinuousParameterRange objects that specify ranges of continuous
-	// hyperparameters that a hyperparameter tuning job searches.
+	// The array of ContinuousParameterRange objects that specify ranges of
+	// continuous hyperparameters that a hyperparameter tuning job searches.
 	ContinuousParameterRanges []ContinuousParameterRange
 
 	// The array of IntegerParameterRange objects that specify ranges of integer
@@ -10476,9 +9510,9 @@ type ParameterRanges struct {
 	noSmithyDocumentSerde
 }
 
-// The trial that a trial component is associated with and the experiment the trial
-// is part of. A component might not be associated with a trial. A component can be
-// associated with multiple trials.
+// The trial that a trial component is associated with and the experiment the
+// trial is part of. A component might not be associated with a trial. A component
+// can be associated with multiple trials.
 type Parent struct {
 
 	// The name of the experiment.
@@ -10516,7 +9550,7 @@ type PendingDeploymentSummary struct {
 
 	// An array of PendingProductionVariantSummary objects, one for each model hosted
 	// behind this endpoint in shadow mode with production traffic replicated from the
-	// model specified on ProductionVariants for the in-progress deployment.
+	// model specified on ProductionVariants  for the in-progress deployment.
 	ShadowProductionVariants []PendingProductionVariantSummary
 
 	// The start time of the deployment.
@@ -10525,10 +9559,10 @@ type PendingDeploymentSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The production variant summary for a deployment when an endpoint is creating or
-// updating with the CreateEndpoint or UpdateEndpoint operations. Describes the
-// VariantStatus , weight and capacity for a production variant associated with an
-// endpoint.
+// The production variant summary for a deployment when an endpoint is creating
+// or updating with the CreateEndpoint  or UpdateEndpoint operations. Describes
+// the VariantStatus , weight and capacity for a production variant associated
+// with an endpoint.
 type PendingProductionVariantSummary struct {
 
 	// The name of the variant.
@@ -10538,8 +9572,8 @@ type PendingProductionVariantSummary struct {
 
 	// The size of the Elastic Inference (EI) instance to use for the production
 	// variant. EI instances provide on-demand GPU computing for inference. For more
-	// information, see Using Elastic Inference in Amazon SageMaker
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html).
+	// information, see Using Elastic Inference in Amazon SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html)
+	// .
 	AcceleratorType ProductionVariantAcceleratorType
 
 	// The number of instances associated with the variant.
@@ -10551,29 +9585,30 @@ type PendingProductionVariantSummary struct {
 	// The weight associated with the variant.
 	CurrentWeight *float32
 
-	// An array of DeployedImage objects that specify the Amazon EC2 Container Registry
-	// paths of the inference images deployed on instances of this ProductionVariant.
+	// An array of DeployedImage objects that specify the Amazon EC2 Container
+	// Registry paths of the inference images deployed on instances of this
+	// ProductionVariant .
 	DeployedImages []DeployedImage
 
 	// The number of instances requested in this deployment, as specified in the
 	// endpoint configuration for the endpoint. The value is taken from the request to
-	// the CreateEndpointConfig operation.
+	// the CreateEndpointConfig  operation.
 	DesiredInstanceCount *int32
 
-	// The serverless configuration requested for this deployment, as specified in the
-	// endpoint configuration for the endpoint.
+	// The serverless configuration requested for this deployment, as specified in
+	// the endpoint configuration for the endpoint.
 	DesiredServerlessConfig *ProductionVariantServerlessConfig
 
 	// The requested weight for the variant in this deployment, as specified in the
 	// endpoint configuration for the endpoint. The value is taken from the request to
-	// the CreateEndpointConfig operation.
+	// the CreateEndpointConfig  operation.
 	DesiredWeight *float32
 
 	// The type of instances associated with the variant.
 	InstanceType ProductionVariantInstanceType
 
-	// The endpoint variant status which describes the current deployment stage status
-	// or operational status.
+	// The endpoint variant status which describes the current deployment stage
+	// status or operational status.
 	VariantStatus []ProductionVariantStatus
 
 	noSmithyDocumentSerde
@@ -10712,8 +9747,8 @@ type PipelineExecution struct {
 type PipelineExecutionStep struct {
 
 	// The current attempt of the execution step. For more information, see Retry
-	// Policy for SageMaker Pipelines steps
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-retry-policy.html).
+	// Policy for SageMaker Pipelines steps (https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-retry-policy.html)
+	// .
 	AttemptCount int32
 
 	// If this pipeline execution step was cached, details on the cache hit.
@@ -10759,21 +9794,14 @@ type PipelineExecutionStepMetadata struct {
 
 	// Container for the metadata for a Clarify check step. The configurations and
 	// outcomes of the check step execution. This includes:
-	// - The type of the check
-	// conducted,
-	// - The Amazon S3 URIs of baseline constraints and statistics files to
-	// be used for the drift check.
-	// - The Amazon S3 URIs of newly calculated baseline
-	// constraints and statistics.
-	// - The model package group name provided.
-	// - The
-	// Amazon S3 URI of the violation report if violations detected.
-	// - The Amazon
-	// Resource Name (ARN) of check processing job initiated by the step execution.
-	// -
-	// The boolean flags indicating if the drift check is skipped.
-	// - If step property
-	// BaselineUsedForDriftCheck is set the same as CalculatedBaseline.
+	//     - The type of the check conducted,
+	//     - The Amazon S3 URIs of baseline constraints and statistics files to be used for the drift check.
+	//     - The Amazon S3 URIs of newly calculated baseline constraints and statistics.
+	//     - The model package group name provided.
+	//     - The Amazon S3 URI of the violation report if violations detected.
+	//     - The Amazon Resource Name (ARN) of check processing job initiated by the step execution.
+	//     - The boolean flags indicating if the drift check is skipped.
+	//     - If step property BaselineUsedForDriftCheck is set the same as CalculatedBaseline .
 	ClarifyCheck *ClarifyCheckStepMetadata
 
 	// The outcome of the condition evaluation that was run by this step execution.
@@ -10785,8 +9813,8 @@ type PipelineExecutionStepMetadata struct {
 	// The configurations and outcomes of a Fail step execution.
 	Fail *FailStepMetadata
 
-	// The Amazon Resource Name (ARN) of the Lambda function that was run by this step
-	// execution and a list of output parameters.
+	// The Amazon Resource Name (ARN) of the Lambda function that was run by this
+	// step execution and a list of output parameters.
 	Lambda *LambdaStepMetadata
 
 	// The Amazon Resource Name (ARN) of the model that was created by this step
@@ -10798,22 +9826,14 @@ type PipelineExecutionStepMetadata struct {
 	ProcessingJob *ProcessingJobStepMetadata
 
 	// The configurations and outcomes of the check step execution. This includes:
-	// -
-	// The type of the check conducted.
-	// - The Amazon S3 URIs of baseline constraints
-	// and statistics files to be used for the drift check.
-	// - The Amazon S3 URIs of
-	// newly calculated baseline constraints and statistics.
-	// - The model package group
-	// name provided.
-	// - The Amazon S3 URI of the violation report if violations
-	// detected.
-	// - The Amazon Resource Name (ARN) of check processing job initiated by
-	// the step execution.
-	// - The Boolean flags indicating if the drift check is
-	// skipped.
-	// - If step property BaselineUsedForDriftCheck is set the same as
-	// CalculatedBaseline.
+	//     - The type of the check conducted.
+	//     - The Amazon S3 URIs of baseline constraints and statistics files to be used for the drift check.
+	//     - The Amazon S3 URIs of newly calculated baseline constraints and statistics.
+	//     - The model package group name provided.
+	//     - The Amazon S3 URI of the violation report if violations detected.
+	//     - The Amazon Resource Name (ARN) of check processing job initiated by the step execution.
+	//     - The Boolean flags indicating if the drift check is skipped.
+	//     - If step property BaselineUsedForDriftCheck is set the same as CalculatedBaseline .
 	QualityCheck *QualityCheckStepMetadata
 
 	// The Amazon Resource Name (ARN) of the model package that the model was
@@ -10847,8 +9867,8 @@ type PipelineExecutionSummary struct {
 	// The display name of the pipeline execution.
 	PipelineExecutionDisplayName *string
 
-	// A message generated by SageMaker Pipelines describing why the pipeline execution
-	// failed.
+	// A message generated by SageMaker Pipelines describing why the pipeline
+	// execution failed.
 	PipelineExecutionFailureReason *string
 
 	// The status of the pipeline execution.
@@ -10905,8 +9925,9 @@ type PipelineSummary struct {
 // Configuration for the cluster used to run a processing job.
 type ProcessingClusterConfig struct {
 
-	// The number of ML compute instances to use in the processing job. For distributed
-	// processing jobs, specify a value greater than 1. The default value is 1.
+	// The number of ML compute instances to use in the processing job. For
+	// distributed processing jobs, specify a value greater than 1. The default value
+	// is 1.
 	//
 	// This member is required.
 	InstanceCount *int32
@@ -10923,8 +9944,8 @@ type ProcessingClusterConfig struct {
 	// mounts the local instance storage instead of Amazon EBS gp2 storage. You can't
 	// request a VolumeSizeInGB greater than the total size of the local instance
 	// storage. For a list of instance types that support local instance storage,
-	// including the total size per instance type, see Instance Store Volumes
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes).
+	// including the total size per instance type, see Instance Store Volumes (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes)
+	// .
 	//
 	// This member is required.
 	VolumeSizeInGB *int32
@@ -10935,11 +9956,10 @@ type ProcessingClusterConfig struct {
 	// instances include local storage, dependent on the instance type. Local storage
 	// volumes are encrypted using a hardware module on the instance. You can't request
 	// a VolumeKmsKeyId when using an instance type with local storage. For a list of
-	// instance types that support local instance storage, see Instance Store Volumes
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes).
-	// For more information about local instance storage encryption, see SSD Instance
-	// Store Volumes
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html).
+	// instance types that support local instance storage, see Instance Store Volumes (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes)
+	// . For more information about local instance storage encryption, see SSD
+	// Instance Store Volumes (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html)
+	// .
 	VolumeKmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -10959,7 +9979,7 @@ type ProcessingFeatureStoreOutput struct {
 }
 
 // The inputs for a processing job. The processing input must specify exactly one
-// of either S3Input or DatasetDefinition types.
+// of either S3Input  or DatasetDefinition  types.
 type ProcessingInput struct {
 
 	// The name for the processing job input.
@@ -10983,15 +10003,15 @@ type ProcessingInput struct {
 }
 
 // An Amazon SageMaker processing job that is used to analyze data and evaluate
-// models. For more information, see Process Data and Evaluate Models
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/processing-job.html).
+// models. For more information, see Process Data and Evaluate Models (https://docs.aws.amazon.com/sagemaker/latest/dg/processing-job.html)
+// .
 type ProcessingJob struct {
 
 	// Configuration to run a processing job in a specified container image.
 	AppSpecification *AppSpecification
 
-	// The Amazon Resource Name (ARN) of the AutoML job associated with this processing
-	// job.
+	// The Amazon Resource Name (ARN) of the AutoML job associated with this
+	// processing job.
 	AutoMLJobArn *string
 
 	// The time the processing job was created.
@@ -11006,10 +10026,9 @@ type ProcessingJob struct {
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
-	// - CreateProcessingJob
-	// -
-	// CreateTrainingJob
-	// - CreateTransformJob
+	//     - CreateProcessingJob
+	//     - CreateTrainingJob
+	//     - CreateTransformJob
 	ExperimentConfig *ExperimentConfig
 
 	// A string, up to one KB in size, that contains the reason a processing job
@@ -11019,8 +10038,8 @@ type ProcessingJob struct {
 	// The time the processing job was last modified.
 	LastModifiedTime *time.Time
 
-	// The ARN of a monitoring schedule for an endpoint associated with this processing
-	// job.
+	// The ARN of a monitoring schedule for an endpoint associated with this
+	// processing job.
 	MonitoringScheduleArn *string
 
 	// Networking options for a job, such as network traffic encryption between
@@ -11046,8 +10065,8 @@ type ProcessingJob struct {
 	// Configuration for uploading output from the processing container.
 	ProcessingOutputConfig *ProcessingOutputConfig
 
-	// Identifies the resources, ML compute instances, and ML storage volumes to deploy
-	// for a processing job. In distributed training, you specify more than one
+	// Identifies the resources, ML compute instances, and ML storage volumes to
+	// deploy for a processing job. In distributed training, you specify more than one
 	// instance.
 	ProcessingResources *ProcessingResources
 
@@ -11057,14 +10076,13 @@ type ProcessingJob struct {
 	// The ARN of the role used to create the processing job.
 	RoleArn *string
 
-	// Configures conditions under which the processing job should be stopped, such as
-	// how long the processing job has been running. After the condition is met, the
+	// Configures conditions under which the processing job should be stopped, such
+	// as how long the processing job has been running. After the condition is met, the
 	// processing job is stopped.
 	StoppingCondition *ProcessingStoppingCondition
 
 	// An array of key-value pairs. For more information, see Using Cost Allocation
-	// Tags
-	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
+	// Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
 	// in the Amazon Web Services Billing and Cost Management User Guide.
 	Tags []Tag
 
@@ -11124,7 +10142,7 @@ type ProcessingJobSummary struct {
 }
 
 // Describes the results of a processing job. The processing output must specify
-// exactly one of either S3Output or FeatureStoreOutput types.
+// exactly one of either S3Output  or FeatureStoreOutput  types.
 type ProcessingOutput struct {
 
 	// The name for the processing job output.
@@ -11133,12 +10151,12 @@ type ProcessingOutput struct {
 	OutputName *string
 
 	// When True, output operations such as data upload are managed natively by the
-	// processing job application. When False (default), output operations are managed
-	// by Amazon SageMaker.
+	// processing job application. When False (default), output operations are
+	// managed by Amazon SageMaker.
 	AppManaged bool
 
-	// Configuration for processing job outputs in Amazon SageMaker Feature Store. This
-	// processing output type is only supported when AppManaged is specified.
+	// Configuration for processing job outputs in Amazon SageMaker Feature Store.
+	// This processing output type is only supported when AppManaged  is specified.
 	FeatureStoreOutput *ProcessingFeatureStoreOutput
 
 	// Configuration for processing job outputs in Amazon S3.
@@ -11157,20 +10175,21 @@ type ProcessingOutputConfig struct {
 	Outputs []ProcessingOutput
 
 	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
-	// that Amazon SageMaker uses to encrypt the processing job output. KmsKeyId can be
-	// an ID of a KMS key, ARN of a KMS key, alias of a KMS key, or alias of a KMS key.
-	// The KmsKeyId is applied to all outputs.
+	// that Amazon SageMaker uses to encrypt the processing job output. KmsKeyId can
+	// be an ID of a KMS key, ARN of a KMS key, alias of a KMS key, or alias of a KMS
+	// key. The KmsKeyId  is applied to all outputs.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
 }
 
-// Identifies the resources, ML compute instances, and ML storage volumes to deploy
-// for a processing job. In distributed training, you specify more than one
+// Identifies the resources, ML compute instances, and ML storage volumes to
+// deploy for a processing job. In distributed training, you specify more than one
 // instance.
 type ProcessingResources struct {
 
-	// The configuration for the resources in a cluster used to run the processing job.
+	// The configuration for the resources in a cluster used to run the processing
+	// job.
 	//
 	// This member is required.
 	ClusterConfig *ProcessingClusterConfig
@@ -11182,40 +10201,40 @@ type ProcessingResources struct {
 // container.
 type ProcessingS3Input struct {
 
-	// Whether you use an S3Prefix or a ManifestFile for the data type. If you choose
-	// S3Prefix, S3Uri identifies a key name prefix. Amazon SageMaker uses all objects
-	// with the specified key name prefix for the processing job. If you choose
-	// ManifestFile, S3Uri identifies an object that is a manifest file containing a
-	// list of object keys that you want Amazon SageMaker to use for the processing
-	// job.
+	// Whether you use an S3Prefix  or a ManifestFile for the data type. If you
+	// choose S3Prefix , S3Uri identifies a key name prefix. Amazon SageMaker uses
+	// all objects with the specified key name prefix for the processing job. If you
+	// choose ManifestFile , S3Uri identifies an object that is a manifest file
+	// containing a list of object keys that you want Amazon SageMaker to use for the
+	// processing job.
 	//
 	// This member is required.
 	S3DataType ProcessingS3DataType
 
-	// The URI of the Amazon S3 prefix Amazon SageMaker downloads data required to run
-	// a processing job.
+	// The URI of the Amazon S3 prefix Amazon SageMaker downloads data required to
+	// run a processing job.
 	//
 	// This member is required.
 	S3Uri *string
 
-	// The local path in your container where you want Amazon SageMaker to write input
-	// data to. LocalPath is an absolute path to the input data and must begin with
-	// /opt/ml/processing/. LocalPath is a required parameter when AppManaged is False
-	// (default).
+	// The local path in your container where you want Amazon SageMaker to write
+	// input data to. LocalPath is an absolute path to the input data and must begin
+	// with /opt/ml/processing/ . LocalPath  is a required parameter when AppManaged
+	// is False  (default).
 	LocalPath *string
 
 	// Whether to GZIP-decompress the data in Amazon S3 as it is streamed into the
-	// processing container. Gzip can only be used when Pipe mode is specified as the
-	// S3InputMode. In Pipe mode, Amazon SageMaker streams input data from the source
-	// directly to your container without using the EBS volume.
+	// processing container. Gzip  can only be used when Pipe mode is specified as
+	// the S3InputMode . In Pipe mode, Amazon SageMaker streams input data from the
+	// source directly to your container without using the EBS volume.
 	S3CompressionType ProcessingS3CompressionType
 
 	// Whether to distribute the data from Amazon S3 to all processing instances with
-	// FullyReplicated, or whether the data from Amazon S3 is shared by Amazon S3 key,
-	// downloading one shard of data to each processing instance.
+	// FullyReplicated, or whether the data from Amazon S3 is shared by Amazon S3
+	// key, downloading one shard of data to each processing instance.
 	S3DataDistributionType ProcessingS3DataDistributionType
 
-	// Whether to use File or Pipe input mode. In File mode, Amazon SageMaker copies
+	// Whether to use File  or Pipe input mode. In File mode, Amazon SageMaker copies
 	// the data from the input source onto the local ML storage volume before starting
 	// your processing container. This is the most commonly used input mode. In Pipe
 	// mode, Amazon SageMaker streams input data from the source directly to your
@@ -11252,8 +10271,8 @@ type ProcessingS3Output struct {
 	noSmithyDocumentSerde
 }
 
-// Configures conditions under which the processing job should be stopped, such as
-// how long the processing job has been running. After the condition is met, the
+// Configures conditions under which the processing job should be stopped, such
+// as how long the processing job has been running. After the condition is met, the
 // processing job is stopped.
 type ProcessingStoppingCondition struct {
 
@@ -11265,15 +10284,15 @@ type ProcessingStoppingCondition struct {
 	noSmithyDocumentSerde
 }
 
-// Identifies a model that you want to host and the resources chosen to deploy for
-// hosting it. If you are deploying multiple models, tell SageMaker how to
+// Identifies a model that you want to host and the resources chosen to deploy
+// for hosting it. If you are deploying multiple models, tell SageMaker how to
 // distribute traffic among the models by specifying variant weights. For more
-// information on production variants, check  Production variants
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-ab-testing.html).
+// information on production variants, check Production variants (https://docs.aws.amazon.com/sagemaker/latest/dg/model-ab-testing.html)
+// .
 type ProductionVariant struct {
 
-	// The name of the model that you want to host. This is the name that you specified
-	// when creating the model.
+	// The name of the model that you want to host. This is the name that you
+	// specified when creating the model.
 	//
 	// This member is required.
 	ModelName *string
@@ -11285,34 +10304,34 @@ type ProductionVariant struct {
 
 	// The size of the Elastic Inference (EI) instance to use for the production
 	// variant. EI instances provide on-demand GPU computing for inference. For more
-	// information, see Using Elastic Inference in Amazon SageMaker
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html).
+	// information, see Using Elastic Inference in Amazon SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html)
+	// .
 	AcceleratorType ProductionVariantAcceleratorType
 
-	// The timeout value, in seconds, for your inference container to pass health check
-	// by SageMaker Hosting. For more information about health check, see How Your
-	// Container Should Respond to Health Check (Ping) Requests
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-algo-ping-requests).
+	// The timeout value, in seconds, for your inference container to pass health
+	// check by SageMaker Hosting. For more information about health check, see How
+	// Your Container Should Respond to Health Check (Ping) Requests (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-algo-ping-requests)
+	// .
 	ContainerStartupHealthCheckTimeoutInSeconds *int32
 
 	// Specifies configuration for a core dump from the model container when the
 	// process crashes.
 	CoreDumpConfig *ProductionVariantCoreDumpConfig
 
-	// You can use this parameter to turn on native Amazon Web Services Systems Manager
-	// (SSM) access for a production variant behind an endpoint. By default, SSM access
-	// is disabled for all production variants behind an endpoint. You can turn on or
-	// turn off SSM access for a production variant behind an existing endpoint by
-	// creating a new endpoint configuration and calling UpdateEndpoint.
+	// You can use this parameter to turn on native Amazon Web Services Systems
+	// Manager (SSM) access for a production variant behind an endpoint. By default,
+	// SSM access is disabled for all production variants behind an endpoint. You can
+	// turn on or turn off SSM access for a production variant behind an existing
+	// endpoint by creating a new endpoint configuration and calling UpdateEndpoint .
 	EnableSSMAccess *bool
 
 	// Number of instances to launch initially.
 	InitialInstanceCount *int32
 
-	// Determines initial traffic distribution among all of the models that you specify
-	// in the endpoint configuration. The traffic to a production variant is determined
-	// by the ratio of the VariantWeight to the sum of all VariantWeight values across
-	// all ProductionVariants. If unspecified, it defaults to 1.0.
+	// Determines initial traffic distribution among all of the models that you
+	// specify in the endpoint configuration. The traffic to a production variant is
+	// determined by the ratio of the VariantWeight  to the sum of all VariantWeight
+	// values across all ProductionVariants. If unspecified, it defaults to 1.0.
 	InitialVariantWeight *float32
 
 	// The ML compute instance type.
@@ -11346,33 +10365,25 @@ type ProductionVariantCoreDumpConfig struct {
 
 	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
 	// that SageMaker uses to encrypt the core dump data at rest using Amazon S3
-	// server-side encryption. The KmsKeyId can be any of the following formats:
-	// - //
-	// KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
-	// - // Amazon Resource Name
-	// (ARN) of a KMS Key
-	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
-	// -
-	// // KMS Key Alias "alias/ExampleAlias"
-	// - // Amazon Resource Name (ARN) of a KMS
-	// Key Alias "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
+	// server-side encryption. The KmsKeyId  can be any of the following formats:
+	//     - // KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//     - // Amazon Resource Name (ARN) of a KMS Key "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	//     - // KMS Key Alias "alias/ExampleAlias"
+	//     - // Amazon Resource Name (ARN) of a KMS Key Alias "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
 	//
-	// If you use a
-	// KMS key ID or an alias of your KMS key, the SageMaker execution role must
-	// include permissions to call kms:Encrypt. If you don't provide a KMS key ID,
-	// SageMaker uses the default KMS key for Amazon S3 for your role's account.
-	// SageMaker uses server-side encryption with KMS-managed keys for
-	// OutputDataConfig. If you use a bucket policy with an s3:PutObject permission
+	// If you use a KMS key ID or an alias of your KMS key, the SageMaker execution
+	// role must include permissions to call kms:Encrypt. If you don't provide a KMS
+	// key ID, SageMaker uses the default KMS key for Amazon S3 for your role's
+	// account. SageMaker uses server-side encryption with KMS-managed keys for
+	// OutputDataConfig . If you use a bucket policy with an s3:PutObject permission
 	// that only allows objects with server-side encryption, set the condition key of
-	// s3:x-amz-server-side-encryption to "aws:kms". For more information, see
-	// KMS-Managed Encryption Keys
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) in the
-	// Amazon Simple Storage Service Developer Guide. The KMS key policy must grant
-	// permission to the IAM role that you specify in your CreateEndpoint and
-	// UpdateEndpoint requests. For more information, see Using Key Policies in Amazon
-	// Web Services KMS
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
-	// Amazon Web Services Key Management Service Developer Guide.
+	// s3:x-amz-server-side-encryption to "aws:kms" . For more information, see
+	// KMS-Managed Encryption Keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
+	// in the Amazon Simple Storage Service Developer Guide. The KMS key policy must
+	// grant permission to the IAM role that you specify in your CreateEndpoint  and
+	// UpdateEndpoint requests. For more information, see Using Key Policies in
+	// Amazon Web Services KMS (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
+	// in the Amazon Web Services Key Management Service Developer Guide.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -11399,18 +10410,13 @@ type ProductionVariantServerlessConfig struct {
 // Describes the status of the production variant.
 type ProductionVariantStatus struct {
 
-	// The endpoint variant status which describes the current deployment stage status
-	// or operational status.
-	// - Creating: Creating inference resources for the
-	// production variant.
-	// - Deleting: Terminating inference resources for the
-	// production variant.
-	// - Updating: Updating capacity for the production variant.
-	// -
-	// ActivatingTraffic: Turning on traffic for the production variant.
-	// - Baking:
-	// Waiting period to monitor the CloudWatch alarms in the automatic rollback
-	// configuration.
+	// The endpoint variant status which describes the current deployment stage
+	// status or operational status.
+	//     - Creating : Creating inference resources for the production variant.
+	//     - Deleting : Terminating inference resources for the production variant.
+	//     - Updating : Updating capacity for the production variant.
+	//     - ActivatingTraffic : Turning on traffic for the production variant.
+	//     - Baking : Waiting period to monitor the CloudWatch alarms in the automatic rollback configuration.
 	//
 	// This member is required.
 	Status VariantStatus
@@ -11444,8 +10450,9 @@ type ProductionVariantSummary struct {
 	// The weight associated with the variant.
 	CurrentWeight *float32
 
-	// An array of DeployedImage objects that specify the Amazon EC2 Container Registry
-	// paths of the inference images deployed on instances of this ProductionVariant.
+	// An array of DeployedImage objects that specify the Amazon EC2 Container
+	// Registry paths of the inference images deployed on instances of this
+	// ProductionVariant .
 	DeployedImages []DeployedImage
 
 	// The number of instances requested in the UpdateEndpointWeightsAndCapacities
@@ -11459,8 +10466,8 @@ type ProductionVariantSummary struct {
 	// request.
 	DesiredWeight *float32
 
-	// The endpoint variant status which describes the current deployment stage status
-	// or operational status.
+	// The endpoint variant status which describes the current deployment stage
+	// status or operational status.
 	VariantStatus []ProductionVariantStatus
 
 	noSmithyDocumentSerde
@@ -11471,7 +10478,7 @@ type ProductionVariantSummary struct {
 type ProfilerConfig struct {
 
 	// Configuration to turn off Amazon SageMaker Debugger's system monitoring and
-	// profiling functionality. To turn it off, set to True.
+	// profiling functionality. To turn it off, set to True .
 	DisableProfiler bool
 
 	// A time interval for capturing system metrics in milliseconds. Available values
@@ -11479,14 +10486,14 @@ type ProfilerConfig struct {
 	// milliseconds. The default value is 500 milliseconds.
 	ProfilingIntervalInMilliseconds *int64
 
-	// Configuration information for capturing framework metrics. Available key strings
-	// for different profiling options are DetailedProfilingConfig,
-	// PythonProfilingConfig, and DataLoaderProfilingConfig. The following codes are
+	// Configuration information for capturing framework metrics. Available key
+	// strings for different profiling options are DetailedProfilingConfig ,
+	// PythonProfilingConfig , and DataLoaderProfilingConfig. The following codes are
 	// configuration structures for the ProfilingParameters parameter. To learn more
-	// about how to configure the ProfilingParameters parameter, see Use the SageMaker
-	// and Debugger Configuration API Operations to Create, Update, and Debug Your
-	// Training Job
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html).
+	// about how to configure the ProfilingParameters  parameter, see Use the
+	// SageMaker and Debugger Configuration API Operations to Create, Update, and Debug
+	// Your Training Job (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html)
+	// .
 	ProfilingParameters map[string]string
 
 	// Path to Amazon S3 storage location for system and framework metrics.
@@ -11499,8 +10506,8 @@ type ProfilerConfig struct {
 // parameters, system and framework metrics configurations, and storage paths.
 type ProfilerConfigForUpdate struct {
 
-	// To turn off Amazon SageMaker Debugger monitoring and profiling while a training
-	// job is in progress, set to True.
+	// To turn off Amazon SageMaker Debugger monitoring and profiling while a
+	// training job is in progress, set to True .
 	DisableProfiler bool
 
 	// A time interval for capturing system metrics in milliseconds. Available values
@@ -11508,14 +10515,14 @@ type ProfilerConfigForUpdate struct {
 	// milliseconds. The default value is 500 milliseconds.
 	ProfilingIntervalInMilliseconds *int64
 
-	// Configuration information for capturing framework metrics. Available key strings
-	// for different profiling options are DetailedProfilingConfig,
-	// PythonProfilingConfig, and DataLoaderProfilingConfig. The following codes are
+	// Configuration information for capturing framework metrics. Available key
+	// strings for different profiling options are DetailedProfilingConfig ,
+	// PythonProfilingConfig , and DataLoaderProfilingConfig. The following codes are
 	// configuration structures for the ProfilingParameters parameter. To learn more
-	// about how to configure the ProfilingParameters parameter, see Use the SageMaker
-	// and Debugger Configuration API Operations to Create, Update, and Debug Your
-	// Training Job
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html).
+	// about how to configure the ProfilingParameters  parameter, see Use the
+	// SageMaker and Debugger Configuration API Operations to Create, Update, and Debug
+	// Your Training Job (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html)
+	// .
 	ProfilingParameters map[string]string
 
 	// Path to Amazon S3 storage location for system and framework metrics.
@@ -11542,7 +10549,7 @@ type ProfilerRuleConfiguration struct {
 	InstanceType ProcessingInstanceType
 
 	// Path to local storage location for output of rules. Defaults to
-	// /opt/ml/processing/output/rule/.
+	// /opt/ml/processing/output/rule/ .
 	LocalPath *string
 
 	// Runtime configuration for rule container.
@@ -11609,20 +10616,21 @@ type Project struct {
 	// The status of the project.
 	ProjectStatus ProjectStatus
 
-	// Details of a provisioned service catalog product. For information about service
-	// catalog, see What is Amazon Web Services Service Catalog
-	// (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html).
+	// Details of a provisioned service catalog product. For information about
+	// service catalog, see What is Amazon Web Services Service Catalog (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html)
+	// .
 	ServiceCatalogProvisionedProductDetails *ServiceCatalogProvisionedProductDetails
 
-	// Details that you specify to provision a service catalog product. For information
-	// about service catalog, see What is Amazon Web Services Service Catalog
-	// (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html).
+	// Details that you specify to provision a service catalog product. For
+	// information about service catalog, see What is Amazon Web Services Service
+	// Catalog (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html)
+	// .
 	ServiceCatalogProvisioningDetails *ServiceCatalogProvisioningDetails
 
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or
-	// environment. For more information, see Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	// environment. For more information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// .
 	Tags []Tag
 
 	noSmithyDocumentSerde
@@ -11662,8 +10670,8 @@ type ProjectSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Part of the SuggestionQuery type. Specifies a hint for retrieving property names
-// that begin with the specified text.
+// Part of the SuggestionQuery type. Specifies a hint for retrieving property
+// names that begin with the specified text.
 type PropertyNameQuery struct {
 
 	// Text that begins a property's name.
@@ -11674,20 +10682,20 @@ type PropertyNameQuery struct {
 	noSmithyDocumentSerde
 }
 
-// A property name returned from a GetSearchSuggestions call that specifies a value
-// in the PropertyNameQuery field.
+// A property name returned from a GetSearchSuggestions call that specifies a
+// value in the PropertyNameQuery  field.
 type PropertyNameSuggestion struct {
 
-	// A suggested property name based on what you entered in the search textbox in the
-	// SageMaker console.
+	// A suggested property name based on what you entered in the search textbox in
+	// the SageMaker console.
 	PropertyName *string
 
 	noSmithyDocumentSerde
 }
 
-// A key value pair used when you provision a project as a service catalog product.
-// For information, see What is Amazon Web Services Service Catalog
-// (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html).
+// A key value pair used when you provision a project as a service catalog
+// product. For information, see What is Amazon Web Services Service Catalog (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html)
+// .
 type ProvisioningParameter struct {
 
 	// The key that identifies a provisioning parameter.
@@ -11703,125 +10711,114 @@ type ProvisioningParameter struct {
 // task performed. Use one of the following prices for bounding box tasks. Prices
 // are in US dollars and should be based on the complexity of the task; the longer
 // it takes in your initial testing, the more you should offer.
-// - 0.036
-// - 0.048
-// -
-// 0.060
-// - 0.072
-// - 0.120
-// - 0.240
-// - 0.360
-// - 0.480
-// - 0.600
-// - 0.720
-// - 0.840
-// - 0.960
-// -
-// 1.080
-// - 1.200
+//   - 0.036
+//   - 0.048
+//   - 0.060
+//   - 0.072
+//   - 0.120
+//   - 0.240
+//   - 0.360
+//   - 0.480
+//   - 0.600
+//   - 0.720
+//   - 0.840
+//   - 0.960
+//   - 1.080
+//   - 1.200
 //
 // Use one of the following prices for image classification, text
 // classification, and custom tasks. Prices are in US dollars.
-// - 0.012
-// - 0.024
-// -
-// 0.036
-// - 0.048
-// - 0.060
-// - 0.072
-// - 0.120
-// - 0.240
-// - 0.360
-// - 0.480
-// - 0.600
-// - 0.720
-// -
-// 0.840
-// - 0.960
-// - 1.080
-// - 1.200
+//   - 0.012
+//   - 0.024
+//   - 0.036
+//   - 0.048
+//   - 0.060
+//   - 0.072
+//   - 0.120
+//   - 0.240
+//   - 0.360
+//   - 0.480
+//   - 0.600
+//   - 0.720
+//   - 0.840
+//   - 0.960
+//   - 1.080
+//   - 1.200
 //
-// Use one of the following prices for semantic
-// segmentation tasks. Prices are in US dollars.
-// - 0.840
-// - 0.960
-// - 1.080
-// -
-// 1.200
+// Use one of the following prices for semantic segmentation tasks.
+// Prices are in US dollars.
+//   - 0.840
+//   - 0.960
+//   - 1.080
+//   - 1.200
 //
-// Use one of the following prices for Textract AnalyzeDocument Important
-// Form Key Amazon Augmented AI review tasks. Prices are in US dollars.
-// - 2.400
-// -
-// 2.280
-// - 2.160
-// - 2.040
-// - 1.920
-// - 1.800
-// - 1.680
-// - 1.560
-// - 1.440
-// - 1.320
-// - 1.200
-// -
-// 1.080
-// - 0.960
-// - 0.840
-// - 0.720
-// - 0.600
-// - 0.480
-// - 0.360
-// - 0.240
-// - 0.120
-// - 0.072
-// -
-// 0.060
-// - 0.048
-// - 0.036
-// - 0.024
-// - 0.012
+// Use one of the following prices for Textract AnalyzeDocument
+// Important Form Key Amazon Augmented AI review tasks. Prices are in US dollars.
+//   - 2.400
+//   - 2.280
+//   - 2.160
+//   - 2.040
+//   - 1.920
+//   - 1.800
+//   - 1.680
+//   - 1.560
+//   - 1.440
+//   - 1.320
+//   - 1.200
+//   - 1.080
+//   - 0.960
+//   - 0.840
+//   - 0.720
+//   - 0.600
+//   - 0.480
+//   - 0.360
+//   - 0.240
+//   - 0.120
+//   - 0.072
+//   - 0.060
+//   - 0.048
+//   - 0.036
+//   - 0.024
+//   - 0.012
 //
-// Use one of the following prices for
-// Rekognition DetectModerationLabels Amazon Augmented AI review tasks. Prices are
-// in US dollars.
-// - 1.200
-// - 1.080
-// - 0.960
-// - 0.840
-// - 0.720
-// - 0.600
-// - 0.480
-// - 0.360
-// -
-// 0.240
-// - 0.120
-// - 0.072
-// - 0.060
-// - 0.048
-// - 0.036
-// - 0.024
-// - 0.012
+// Use one of the following prices for Rekognition
+// DetectModerationLabels Amazon Augmented AI review tasks. Prices are in US
+// dollars.
+//   - 1.200
+//   - 1.080
+//   - 0.960
+//   - 0.840
+//   - 0.720
+//   - 0.600
+//   - 0.480
+//   - 0.360
+//   - 0.240
+//   - 0.120
+//   - 0.072
+//   - 0.060
+//   - 0.048
+//   - 0.036
+//   - 0.024
+//   - 0.012
 //
-// Use one of the
-// following prices for Amazon Augmented AI custom human review tasks. Prices are
-// in US dollars.
-// - 1.200
-// - 1.080
-// - 0.960
-// - 0.840
-// - 0.720
-// - 0.600
-// - 0.480
-// - 0.360
-// -
-// 0.240
-// - 0.120
-// - 0.072
-// - 0.060
-// - 0.048
-// - 0.036
-// - 0.024
-// - 0.012
+// Use one of the following prices for Amazon Augmented AI custom
+// human review tasks. Prices are in US dollars.
+//   - 1.200
+//   - 1.080
+//   - 0.960
+//   - 0.840
+//   - 0.720
+//   - 0.600
+//   - 0.480
+//   - 0.360
+//   - 0.240
+//   - 0.120
+//   - 0.072
+//   - 0.060
+//   - 0.048
+//   - 0.036
+//   - 0.024
+//   - 0.012
 type PublicWorkforceTaskPrice struct {
 
 	// Defines the amount of money paid to an Amazon Mechanical Turk worker in United
@@ -11832,8 +10829,7 @@ type PublicWorkforceTaskPrice struct {
 }
 
 // Container for the metadata for a Quality check step. For more information, see
-// the topic on QualityCheck step
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/build-and-manage-steps.html#step-type-quality-check)
+// the topic on QualityCheck step (https://docs.aws.amazon.com/sagemaker/latest/dg/build-and-manage-steps.html#step-type-quality-check)
 // in the Amazon SageMaker Developer Guide.
 type QualityCheckStepMetadata struct {
 
@@ -11849,8 +10845,8 @@ type QualityCheckStepMetadata struct {
 	// The Amazon S3 URI of the newly calculated baseline statistics file.
 	CalculatedBaselineStatistics *string
 
-	// The Amazon Resource Name (ARN) of the Quality check processing job that was run
-	// by this step execution.
+	// The Amazon Resource Name (ARN) of the Quality check processing job that was
+	// run by this step execution.
 	CheckJobArn *string
 
 	// The type of the Quality check step.
@@ -11859,11 +10855,11 @@ type QualityCheckStepMetadata struct {
 	// The model package group name.
 	ModelPackageGroupName *string
 
-	// This flag indicates if a newly calculated baseline can be accessed through step
-	// properties BaselineUsedForDriftCheckConstraints and
-	// BaselineUsedForDriftCheckStatistics. If it is set to False, the previous
+	// This flag indicates if a newly calculated baseline can be accessed through
+	// step properties BaselineUsedForDriftCheckConstraints  and
+	// BaselineUsedForDriftCheckStatistics . If it is set to False, the previous
 	// baseline of the configured check type must also be available. These can be
-	// accessed through the BaselineUsedForDriftCheckConstraints and
+	// accessed through the BaselineUsedForDriftCheckConstraints  and
 	// BaselineUsedForDriftCheckStatistics properties.
 	RegisterNewBaseline bool
 
@@ -11879,21 +10875,21 @@ type QualityCheckStepMetadata struct {
 }
 
 // A set of filters to narrow the set of lineage entities connected to the
-// StartArn(s) returned by the QueryLineage API action.
+// StartArn (s) returned by the QueryLineage  API action.
 type QueryFilters struct {
 
-	// Filter the lineage entities connected to the StartArn(s) after the create date.
+	// Filter the lineage entities connected to the StartArn (s) after the create date.
 	CreatedAfter *time.Time
 
-	// Filter the lineage entities connected to the StartArn(s) by created date.
+	// Filter the lineage entities connected to the StartArn (s) by created date.
 	CreatedBefore *time.Time
 
 	// Filter the lineage entities connected to the StartArn(s) by the type of the
 	// lineage entity.
 	LineageTypes []LineageType
 
-	// Filter the lineage entities connected to the StartArn(s) after the last modified
-	// date.
+	// Filter the lineage entities connected to the StartArn(s) after the last
+	// modified date.
 	ModifiedAfter *time.Time
 
 	// Filter the lineage entities connected to the StartArn(s) before the last
@@ -11905,8 +10901,8 @@ type QueryFilters struct {
 	// results if it matches any of the provided pairs.
 	Properties map[string]string
 
-	// Filter the lineage entities connected to the StartArn by type. For example:
-	// DataSet, Model, Endpoint, or ModelDeployment.
+	// Filter the lineage entities connected to the StartArn  by type. For example:
+	// DataSet , Model , Endpoint , or ModelDeployment .
 	Types []string
 
 	noSmithyDocumentSerde
@@ -11916,7 +10912,7 @@ type QueryFilters struct {
 // inference endpoint.
 type RealTimeInferenceConfig struct {
 
-	// The number of instances of the type specified by InstanceType.
+	// The number of instances of the type specified by InstanceType .
 	//
 	// This member is required.
 	InstanceCount *int32
@@ -11939,40 +10935,39 @@ type RecommendationJobCompiledOutputConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies mandatory fields for running an Inference Recommender job directly in
-// the CreateInferenceRecommendationsJob
-// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html)
+// Specifies mandatory fields for running an Inference Recommender job directly
+// in the CreateInferenceRecommendationsJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html)
 // API. The fields specified in ContainerConfig override the corresponding fields
 // in the model package. Use ContainerConfig if you want to specify these fields
 // for the recommendation job but don't want to edit them in your model package.
 type RecommendationJobContainerConfig struct {
 
-	// Specifies the name and shape of the expected data inputs for your trained model
-	// with a JSON dictionary form. This field is used for optimizing your model using
-	// SageMaker Neo. For more information, see DataInputConfig
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InputConfig.html#sagemaker-Type-InputConfig-DataInputConfig).
+	// Specifies the name and shape of the expected data inputs for your trained
+	// model with a JSON dictionary form. This field is used for optimizing your model
+	// using SageMaker Neo. For more information, see DataInputConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InputConfig.html#sagemaker-Type-InputConfig-DataInputConfig)
+	// .
 	DataInputConfig *string
 
 	// The machine learning domain of the model and its components. Valid Values:
 	// COMPUTER_VISION | NATURAL_LANGUAGE_PROCESSING | MACHINE_LEARNING
 	Domain *string
 
-	// The machine learning framework of the container image. Valid Values: TENSORFLOW
-	// | PYTORCH | XGBOOST | SAGEMAKER-SCIKIT-LEARN
+	// The machine learning framework of the container image. Valid Values:
+	// TENSORFLOW | PYTORCH | XGBOOST | SAGEMAKER-SCIKIT-LEARN
 	Framework *string
 
 	// The framework version of the container image.
 	FrameworkVersion *string
 
-	// The name of a pre-trained machine learning model benchmarked by Amazon SageMaker
-	// Inference Recommender that matches your model. Valid Values: efficientnetb7 |
-	// unet | xgboost | faster-rcnn-resnet101 | nasnetlarge | vgg16 | inception-v3 |
-	// mask-rcnn | sagemaker-scikit-learn | densenet201-gluon | resnet18v2-gluon |
-	// xception | densenet201 | yolov4 | resnet152 | bert-base-cased | xceptionV1-keras
-	// | resnet50 | retinanet
+	// The name of a pre-trained machine learning model benchmarked by Amazon
+	// SageMaker Inference Recommender that matches your model. Valid Values:
+	// efficientnetb7 | unet | xgboost | faster-rcnn-resnet101 | nasnetlarge | vgg16 |
+	// inception-v3 | mask-rcnn | sagemaker-scikit-learn | densenet201-gluon |
+	// resnet18v2-gluon | xception | densenet201 | yolov4 | resnet152 | bert-base-cased
+	// | xceptionV1-keras | resnet50 | retinanet
 	NearestModelName *string
 
-	// Specifies the SamplePayloadUrl and all other sample payload-related fields.
+	// Specifies the SamplePayloadUrl  and all other sample payload-related fields.
 	PayloadConfig *RecommendationJobPayloadConfig
 
 	// A list of the instance types that are used to generate inferences in real-time.
@@ -11989,14 +10984,14 @@ type RecommendationJobContainerConfig struct {
 // The details for a specific benchmark from an Inference Recommender job.
 type RecommendationJobInferenceBenchmark struct {
 
-	// Defines the model configuration. Includes the specification name and environment
-	// parameters.
+	// Defines the model configuration. Includes the specification name and
+	// environment parameters.
 	//
 	// This member is required.
 	ModelConfiguration *ModelConfiguration
 
-	// The endpoint configuration made by Inference Recommender during a recommendation
-	// job.
+	// The endpoint configuration made by Inference Recommender during a
+	// recommendation job.
 	EndpointConfiguration *EndpointOutputConfiguration
 
 	// The metrics for an existing endpoint compared in an Inference Recommender job.
@@ -12014,9 +11009,9 @@ type RecommendationJobInferenceBenchmark struct {
 // The input configuration of the recommendation job.
 type RecommendationJobInputConfig struct {
 
-	// Specifies mandatory fields for running an Inference Recommender job. The fields
-	// specified in ContainerConfig override the corresponding fields in the model
-	// package.
+	// Specifies mandatory fields for running an Inference Recommender job. The
+	// fields specified in ContainerConfig override the corresponding fields in the
+	// model package.
 	ContainerConfig *RecommendationJobContainerConfig
 
 	// Specifies the endpoint configuration to use for a job.
@@ -12044,22 +11039,17 @@ type RecommendationJobInputConfig struct {
 	// (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data on the
 	// storage volume attached to the ML compute instance that hosts the endpoint. This
 	// key will be passed to SageMaker Hosting for endpoint creation. The SageMaker
-	// execution role must have kms:CreateGrant permission in order to encrypt data on
-	// the storage volume of the endpoints created for inference recommendation. The
+	// execution role must have kms:CreateGrant permission in order to encrypt data
+	// on the storage volume of the endpoints created for inference recommendation. The
 	// inference recommendation job will fail asynchronously during endpoint
 	// configuration creation if the role passed does not have kms:CreateGrant
-	// permission. The KmsKeyId can be any of the following formats:
-	// - // KMS Key ID
-	// "1234abcd-12ab-34cd-56ef-1234567890ab"
-	// - // Amazon Resource Name (ARN) of a KMS
-	// Key "arn:aws:kms:::key/"
-	// - // KMS Key Alias "alias/ExampleAlias"
-	// - // Amazon
-	// Resource Name (ARN) of a KMS Key Alias "arn:aws:kms:::alias/"
+	// permission. The KmsKeyId  can be any of the following formats:
+	//     - // KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//     - // Amazon Resource Name (ARN) of a KMS Key "arn:aws:kms:::key/"
+	//     - // KMS Key Alias "alias/ExampleAlias"
+	//     - // Amazon Resource Name (ARN) of a KMS Key Alias "arn:aws:kms:::alias/"
 	//
-	// For more
-	// information about key identifiers, see Key identifiers (KeyID)
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id)
+	// For more information about key identifiers, see Key identifiers (KeyID) (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id)
 	// in the Amazon Web Services Key Management Service (Amazon Web Services KMS)
 	// documentation.
 	VolumeKmsKeyId *string
@@ -12080,19 +11070,14 @@ type RecommendationJobOutputConfig struct {
 	// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service
 	// (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt your output
 	// artifacts with Amazon S3 server-side encryption. The SageMaker execution role
-	// must have kms:GenerateDataKey permission. The KmsKeyId can be any of the
+	// must have kms:GenerateDataKey  permission. The KmsKeyId can be any of the
 	// following formats:
-	// - // KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
-	// - //
-	// Amazon Resource Name (ARN) of a KMS Key "arn:aws:kms:::key/"
-	// - // KMS Key Alias
-	// "alias/ExampleAlias"
-	// - // Amazon Resource Name (ARN) of a KMS Key Alias
-	// "arn:aws:kms:::alias/"
+	//     - // KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//     - // Amazon Resource Name (ARN) of a KMS Key "arn:aws:kms:::key/"
+	//     - // KMS Key Alias "alias/ExampleAlias"
+	//     - // Amazon Resource Name (ARN) of a KMS Key Alias "arn:aws:kms:::alias/"
 	//
-	// For more information about key identifiers, see Key
-	// identifiers (KeyID)
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id)
+	// For more information about key identifiers, see Key identifiers (KeyID) (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id)
 	// in the Amazon Web Services Key Management Service (Amazon Web Services KMS)
 	// documentation.
 	KmsKeyId *string
@@ -12127,8 +11112,8 @@ type RecommendationJobResourceLimit struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies conditions for stopping a job. When a job reaches a stopping condition
-// limit, SageMaker ends the job.
+// Specifies conditions for stopping a job. When a job reaches a stopping
+// condition limit, SageMaker ends the job.
 type RecommendationJobStoppingConditions struct {
 
 	// The maximum number of requests per minute expected for the endpoint.
@@ -12148,7 +11133,7 @@ type RecommendationJobStoppingConditions struct {
 type RecommendationJobVpcConfig struct {
 
 	// The VPC security group IDs. IDs have the form of sg-xxxxxxxx. Specify the
-	// security groups for the VPC that is specified in the Subnets field.
+	// security groups for the VPC that is specified in the Subnets  field.
 	//
 	// This member is required.
 	SecurityGroupIds []string
@@ -12184,12 +11169,12 @@ type RecommendationMetrics struct {
 	// This member is required.
 	ModelLatency int32
 
-	// The expected CPU utilization at maximum invocations per minute for the instance.
-	// NaN indicates that the value is not available.
+	// The expected CPU utilization at maximum invocations per minute for the
+	// instance. NaN  indicates that the value is not available.
 	CpuUtilization *float32
 
 	// The expected memory utilization at maximum invocations per minute for the
-	// instance. NaN indicates that the value is not available.
+	// instance. NaN  indicates that the value is not available.
 	MemoryUtilization *float32
 
 	noSmithyDocumentSerde
@@ -12256,10 +11241,10 @@ type RegisterModelStepMetadata struct {
 // Contains input values for a task.
 type RenderableTask struct {
 
-	// A JSON object that contains values for the variables defined in the template. It
-	// is made available to the template under the substitution variable task.input.
-	// For example, if you define a variable task.input.text in your template, you can
-	// supply the variable in the JSON object as "text": "sample text".
+	// A JSON object that contains values for the variables defined in the template.
+	// It is made available to the template under the substitution variable task.input
+	// . For example, if you define a variable task.input.text in your template, you
+	// can supply the variable in the JSON object as "text": "sample text" .
 	//
 	// This member is required.
 	Input *string
@@ -12283,18 +11268,17 @@ type RenderingError struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies an authentication configuration for the private docker registry where
-// your model image is hosted. Specify a value for this property only if you
-// specified Vpc as the value for the RepositoryAccessMode field of the ImageConfig
-// object that you passed to a call to CreateModel and the private Docker registry
-// where the model image is hosted requires authentication.
+// Specifies an authentication configuration for the private docker registry
+// where your model image is hosted. Specify a value for this property only if you
+// specified Vpc  as the value for the RepositoryAccessMode  field of the
+// ImageConfig object that you passed to a call to CreateModel and the private
+// Docker registry where the model image is hosted requires authentication.
 type RepositoryAuthConfig struct {
 
 	// The Amazon Resource Name (ARN) of an Amazon Web Services Lambda function that
 	// provides credentials to authenticate to the private Docker registry where your
 	// model image is hosted. For information about how to create an Amazon Web
-	// Services Lambda function, see Create a Lambda function with the console
-	// (https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html)
+	// Services Lambda function, see Create a Lambda function with the console (https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html)
 	// in the Amazon Web Services Lambda Developer Guide.
 	//
 	// This member is required.
@@ -12307,7 +11291,7 @@ type RepositoryAuthConfig struct {
 type ResolvedAttributes struct {
 
 	// Specifies a metric to minimize or maximize as the objective of a job. V2 API
-	// jobs (for example jobs created by calling CreateAutoMLJobV2), support Accuracy
+	// jobs (for example jobs created by calling CreateAutoMLJobV2 ), support Accuracy
 	// only.
 	AutoMLJobObjective *AutoMLJobObjective
 
@@ -12325,26 +11309,26 @@ type ResolvedAttributes struct {
 // ML storage volumes, to use for model training.
 type ResourceConfig struct {
 
-	// The size of the ML storage volume that you want to provision. ML storage volumes
-	// store model artifacts and incremental states. Training algorithms might also use
-	// the ML storage volume for scratch space. If you want to store the training data
-	// in the ML storage volume, choose File as the TrainingInputMode in the algorithm
-	// specification. When using an ML instance with NVMe SSD volumes
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes),
-	// SageMaker doesn't provision Amazon EBS General Purpose SSD (gp2) storage.
+	// The size of the ML storage volume that you want to provision. ML storage
+	// volumes store model artifacts and incremental states. Training algorithms might
+	// also use the ML storage volume for scratch space. If you want to store the
+	// training data in the ML storage volume, choose File  as the TrainingInputMode
+	// in the algorithm specification. When using an ML instance with NVMe SSD volumes (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes)
+	// , SageMaker doesn't provision Amazon EBS General Purpose SSD (gp2) storage.
 	// Available storage is fixed to the NVMe-type instance's storage capacity.
 	// SageMaker configures storage paths for training datasets, checkpoints, model
 	// artifacts, and outputs to use the entire capacity of the instance storage. For
 	// example, ML instance families with the NVMe-type instance storage include
-	// ml.p4d, ml.g4dn, and ml.g5. When using an ML instance with the EBS-only storage
-	// option and without instance storage, you must define the size of EBS volume
-	// through VolumeSizeInGB in the ResourceConfig API. For example, ML instance
-	// families that use EBS volumes include ml.c5 and ml.p2. To look up instance types
-	// and their instance storage types and volumes, see Amazon EC2 Instance Types
-	// (http://aws.amazon.com/ec2/instance-types/). To find the default local paths
-	// defined by the SageMaker training platform, see Amazon SageMaker Training
-	// Storage Folders for Training Datasets, Checkpoints, Model Artifacts, and Outputs
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-train-storage.html).
+	// ml.p4d , ml.g4dn , and ml.g5. When using an ML instance with the EBS-only
+	// storage option and without instance storage, you must define the size of EBS
+	// volume through VolumeSizeInGB  in the ResourceConfig API. For example, ML
+	// instance families that use EBS volumes include ml.c5  and ml.p2. To look up
+	// instance types and their instance storage types and volumes, see Amazon EC2
+	// Instance Types (http://aws.amazon.com/ec2/instance-types/). To find the
+	// default local paths defined by the SageMaker training platform, see Amazon
+	// SageMaker Training Storage Folders for Training Datasets, Checkpoints, Model
+	// Artifacts, and Outputs (https://docs.aws.amazon.com/sagemaker/latest/dg/model-train-storage.html)
+	// .
 	//
 	// This member is required.
 	VolumeSizeInGB int32
@@ -12356,22 +11340,21 @@ type ResourceConfig struct {
 	// The configuration of a heterogeneous cluster in JSON format.
 	InstanceGroups []InstanceGroup
 
-	// The ML compute instance type. SageMaker Training on Amazon Elastic Compute Cloud
-	// (EC2) P4de instances is in preview release starting December 9th, 2022. Amazon
-	// EC2 P4de instances (http://aws.amazon.com/ec2/instance-types/p4/) (currently in
-	// preview) are powered by 8 NVIDIA A100 GPUs with 80GB high-performance HBM2e GPU
-	// memory, which accelerate the speed of training ML models that need to be trained
-	// on large datasets of high-resolution data. In this preview release, Amazon
-	// SageMaker supports ML training jobs on P4de instances (ml.p4de.24xlarge) to
-	// reduce model training time. The ml.p4de.24xlarge instances are available in the
-	// following Amazon Web Services Regions.
-	// - US East (N. Virginia) (us-east-1)
-	// - US
-	// West (Oregon) (us-west-2)
-	//
-	// To request quota limit increase and start using P4de
-	// instances, contact the SageMaker Training service team through your account
-	// team.
+	// The ML compute instance type. SageMaker Training on Amazon Elastic Compute
+	// Cloud (EC2) P4de instances is in preview release starting December 9th, 2022.
+	// Amazon EC2 P4de instances (http://aws.amazon.com/ec2/instance-types/p4/)
+	// (currently in preview) are powered by 8 NVIDIA A100 GPUs with 80GB
+	// high-performance HBM2e GPU memory, which accelerate the speed of training ML
+	// models that need to be trained on large datasets of high-resolution data. In
+	// this preview release, Amazon SageMaker supports ML training jobs on P4de
+	// instances ( ml.p4de.24xlarge ) to reduce model training time. The
+	// ml.p4de.24xlargeinstances are available in the following Amazon Web Services
+	// Regions.
+	//     - US East (N. Virginia) (us-east-1)
+	//     - US West (Oregon) (us-west-2)
+	// To request quota limit increase and start
+	// using P4de instances, contact the SageMaker Training service team through your
+	// account team.
 	InstanceType TrainingInstanceType
 
 	// The duration of time in seconds to retain configured resources in a warm pool
@@ -12384,27 +11367,22 @@ type ResourceConfig struct {
 	// type. Local storage volumes are encrypted using a hardware module on the
 	// instance. You can't request a VolumeKmsKeyId when using an instance type with
 	// local storage. For a list of instance types that support local instance storage,
-	// see Instance Store Volumes
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes).
-	// For more information about local instance storage encryption, see SSD Instance
-	// Store Volumes
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html).
-	// The VolumeKmsKeyId can be in any of the following formats:
-	// - // KMS Key ID
-	// "1234abcd-12ab-34cd-56ef-1234567890ab"
-	// - // Amazon Resource Name (ARN) of a KMS
-	// Key
-	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	// see Instance Store Volumes (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes)
+	// . For more information about local instance storage encryption, see SSD
+	// Instance Store Volumes (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html)
+	// . The VolumeKmsKeyId  can be in any of the following formats:
+	//     - // KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//     - // Amazon Resource Name (ARN) of a KMS Key "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
 	noSmithyDocumentSerde
 }
 
-// The ResourceConfig to update KeepAlivePeriodInSeconds. Other fields in the
+// The ResourceConfig  to update KeepAlivePeriodInSeconds . Other fields in the
 // ResourceConfig cannot be updated.
 type ResourceConfigForUpdate struct {
 
-	// The KeepAlivePeriodInSeconds value specified in the ResourceConfig to update.
+	// The KeepAlivePeriodInSeconds  value specified in the ResourceConfig  to update.
 	//
 	// This member is required.
 	KeepAlivePeriodInSeconds *int32
@@ -12412,17 +11390,18 @@ type ResourceConfigForUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the maximum number of training jobs and parallel training jobs that a
-// hyperparameter tuning job can launch.
+// Specifies the maximum number of training jobs and parallel training jobs that
+// a hyperparameter tuning job can launch.
 type ResourceLimits struct {
 
-	// The maximum number of concurrent training jobs that a hyperparameter tuning job
-	// can launch.
+	// The maximum number of concurrent training jobs that a hyperparameter tuning
+	// job can launch.
 	//
 	// This member is required.
 	MaxParallelTrainingJobs int32
 
-	// The maximum number of training jobs that a hyperparameter tuning job can launch.
+	// The maximum number of training jobs that a hyperparameter tuning job can
+	// launch.
 	MaxNumberOfTrainingJobs *int32
 
 	// The maximum time in seconds that a hyperparameter tuning job can run.
@@ -12436,9 +11415,9 @@ type ResourceLimits struct {
 type ResourceSpec struct {
 
 	// The instance type that the image version runs on. JupyterServer apps only
-	// support the system value. For KernelGateway apps, the system value is translated
-	// to ml.t3.medium. KernelGateway apps also support all other values for available
-	// instance types.
+	// support the system  value. For KernelGateway apps, the system value is
+	// translated to ml.t3.medium. KernelGateway apps also support all other values
+	// for available instance types.
 	InstanceType AppInstanceType
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the
@@ -12459,20 +11438,21 @@ type ResourceSpec struct {
 type RetentionPolicy struct {
 
 	// The default is Retain, which specifies to keep the data stored on the EFS
-	// volume. Specify Delete to delete the data stored on the EFS volume.
+	// volume. Specify Delete  to delete the data stored on the EFS volume.
 	HomeEfsFileSystem RetentionType
 
 	noSmithyDocumentSerde
 }
 
 // The retry strategy to use when a training job fails due to an
-// InternalServerError. RetryStrategy is specified as part of the CreateTrainingJob
-// and CreateHyperParameterTuningJob requests. You can add the StoppingCondition
-// parameter to the request to limit the training time for the complete job.
+// InternalServerError . RetryStrategy  is specified as part of the
+// CreateTrainingJob and CreateHyperParameterTuningJob  requests. You can add the
+// StoppingConditionparameter to the request to limit the training time for the
+// complete job.
 type RetryStrategy struct {
 
 	// The number of times to retry the job. When the job is retried, it's
-	// SecondaryStatus is changed to STARTING.
+	// SecondaryStatus is changed to STARTING .
 	//
 	// This member is required.
 	MaximumRetryAttempts int32
@@ -12480,7 +11460,7 @@ type RetryStrategy struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of settings that apply to an RSessionGateway app.
+// A collection of settings that apply to an RSessionGateway  app.
 type RSessionAppSettings struct {
 
 	// A list of custom SageMaker images that are configured to run as a RSession app.
@@ -12494,25 +11474,25 @@ type RSessionAppSettings struct {
 }
 
 // A collection of settings that configure user interaction with the
-// RStudioServerPro app. RStudioServerProAppSettings cannot be updated. The
+// RStudioServerPro app. RStudioServerProAppSettings  cannot be updated. The
 // RStudioServerPro app must be deleted and a new one created to make any changes.
 type RStudioServerProAppSettings struct {
 
-	// Indicates whether the current user has access to the RStudioServerPro app.
+	// Indicates whether the current user has access to the RStudioServerPro  app.
 	AccessStatus RStudioServerProAccessStatus
 
-	// The level of permissions that the user has within the RStudioServerPro app. This
-	// value defaults to `User`. The `Admin` value allows the user access to the
+	// The level of permissions that the user has within the RStudioServerPro app.
+	// This value defaults to `User`. The `Admin` value allows the user access to the
 	// RStudio Administrative Dashboard.
 	UserGroup RStudioServerProUserGroup
 
 	noSmithyDocumentSerde
 }
 
-// A collection of settings that configure the RStudioServerPro Domain-level app.
+// A collection of settings that configure the RStudioServerPro  Domain-level app.
 type RStudioServerProDomainSettings struct {
 
-	// The ARN of the execution role for the RStudioServerPro Domain-level app.
+	// The ARN of the execution role for the RStudioServerPro  Domain-level app.
 	//
 	// This member is required.
 	DomainExecutionRoleArn *string
@@ -12534,7 +11514,7 @@ type RStudioServerProDomainSettings struct {
 // RStudioServerPro Domain-level app.
 type RStudioServerProDomainSettingsForUpdate struct {
 
-	// The execution role for the RStudioServerPro Domain-level app.
+	// The execution role for the RStudioServerPro  Domain-level app.
 	//
 	// This member is required.
 	DomainExecutionRoleArn *string
@@ -12555,36 +11535,22 @@ type RStudioServerProDomainSettingsForUpdate struct {
 // Describes the S3 data source.
 type S3DataSource struct {
 
-	// If you choose S3Prefix, S3Uri identifies a key name prefix. SageMaker uses all
-	// objects that match the specified key name prefix for model training. If you
-	// choose ManifestFile, S3Uri identifies an object that is a manifest file
+	// If you choose S3Prefix , S3Uri identifies a key name prefix. SageMaker uses
+	// all objects that match the specified key name prefix for model training. If you
+	// choose ManifestFile , S3Uri identifies an object that is a manifest file
 	// containing a list of object keys that you want SageMaker to use for model
 	// training. If you choose AugmentedManifestFile, S3Uri identifies an object that
 	// is an augmented manifest file in JSON lines format. This file contains the data
 	// you want to use for model training. AugmentedManifestFile can only be used if
-	// the Channel's input mode is Pipe.
+	// the Channel's input mode is Pipe .
 	//
 	// This member is required.
 	S3DataType S3DataType
 
 	// Depending on the value specified for the S3DataType, identifies either a key
 	// name prefix or a manifest. For example:
-	// - A key name prefix might look like
-	// this: s3://bucketname/exampleprefix
-	// - A manifest might look like this:
-	// s3://bucketname/example.manifest A manifest is an S3 object which is a JSON file
-	// consisting of an array of elements. The first element is a prefix which is
-	// followed by one or more suffixes. SageMaker appends the suffix elements to the
-	// prefix to get a full set of S3Uri. Note that the prefix must be a valid
-	// non-empty S3Uri that precludes users from specifying a manifest whose individual
-	// S3Uri is sourced from different S3 buckets. The following code example shows a
-	// valid manifest format: [ {"prefix": "s3://customer_bucket/some/prefix/"},
-	// "relative/path/to/custdata-1", "relative/path/custdata-2", ...
-	// "relative/path/custdata-N"] This JSON is equivalent to the following S3Uri list:
-	// s3://customer_bucket/some/prefix/relative/path/to/custdata-1s3://customer_bucket/some/prefix/relative/path/custdata-2...s3://customer_bucket/some/prefix/relative/path/custdata-N
-	// The complete set of S3Uri in this manifest is the input data for the channel for
-	// this data source. The object that each S3Uri points to must be readable by the
-	// IAM role that SageMaker uses to perform tasks on your behalf.
+	//     - A key name prefix might look like this: s3://bucketname/exampleprefix
+	//     - A manifest might look like this: s3://bucketname/example.manifest A manifest is an S3 object which is a JSON file consisting of an array of elements. The first element is a prefix which is followed by one or more suffixes. SageMaker appends the suffix elements to the prefix to get a full set of S3Uri . Note that the prefix must be a valid non-empty S3Uri that precludes users from specifying a manifest whose individual S3Uri is sourced from different S3 buckets. The following code example shows a valid manifest format: [ {"prefix": "s3://customer_bucket/some/prefix/"}, "relative/path/to/custdata-1", "relative/path/custdata-2", ... "relative/path/custdata-N" ] This JSON is equivalent to the following S3Uri list: s3://customer_bucket/some/prefix/relative/path/to/custdata-1 s3://customer_bucket/some/prefix/relative/path/custdata-2 ... s3://customer_bucket/some/prefix/relative/path/custdata-N The complete set of S3Uri in this manifest is the input data for the channel for this data source. The object that each S3Uri points to must be readable by the IAM role that SageMaker uses to perform tasks on your behalf.
 	//
 	// This member is required.
 	S3Uri *string
@@ -12608,28 +11574,28 @@ type S3DataSource struct {
 	// and Pipe modes. Keep this in mind when developing algorithms. In distributed
 	// training, where you use multiple ML compute EC2 instances, you might choose
 	// ShardedByS3Key. If the algorithm requires copying training data to the ML
-	// storage volume (when TrainingInputMode is set to File), this copies 1/n of the
-	// number of objects.
+	// storage volume (when TrainingInputMode  is set to File), this copies 1/n of
+	// the number of objects.
 	S3DataDistributionType S3DataDistribution
 
 	noSmithyDocumentSerde
 }
 
 // The Amazon Simple Storage (Amazon S3) location and and security configuration
-// for OfflineStore.
+// for OfflineStore .
 type S3StorageConfig struct {
 
 	// The S3 URI, or location in Amazon S3, of OfflineStore. S3 URIs have a format
-	// similar to the following: s3://example-bucket/prefix/.
+	// similar to the following: s3://example-bucket/prefix/ .
 	//
 	// This member is required.
 	S3Uri *string
 
-	// The Amazon Web Services Key Management Service (KMS) key ARN of the key used to
-	// encrypt any objects written into the OfflineStore S3 location. The IAM roleARN
-	// that is passed as a parameter to CreateFeatureGroup must have below permissions
-	// to the KmsKeyId:
-	// - "kms:GenerateDataKey"
+	// The Amazon Web Services Key Management Service (KMS) key ARN of the key used
+	// to encrypt any objects written into the OfflineStore  S3 location. The IAM
+	// roleARN that is passed as a parameter to CreateFeatureGroup must have below
+	// permissions to the KmsKeyId :
+	//     - "kms:GenerateDataKey"
 	KmsKeyId *string
 
 	// The S3 path where offline records are written.
@@ -12643,30 +11609,20 @@ type ScheduleConfig struct {
 
 	// A cron expression that describes details about the monitoring schedule.
 	// Currently the only supported cron expressions are:
-	// - If you want to set the job
-	// to start every hour, please use the following: Hourly: cron(0 * ? * * *)
-	// - If
-	// you want to start the job daily: cron(0 [00-23] ? * * *)
-	//
-	// For example, the
-	// following are valid cron expressions:
-	// - Daily at noon UTC: cron(0 12 ? * * *)
-	// -
-	// Daily at midnight UTC: cron(0 0 ? * * *)
-	//
-	// To support running every 6, 12 hours,
-	// the following are also supported: cron(0 [00-23]/[01-24] ? * * *) For example,
+	//     - If you want to set the job to start every hour, please use the following: Hourly: cron(0 * ? * * *)
+	//     - If you want to start the job daily: cron(0 [00-23] ? * * *)
+	// For example,
 	// the following are valid cron expressions:
-	// - Every 12 hours, starting at 5pm UTC:
-	// cron(0 17/12 ? * * *)
-	// - Every two hours starting at midnight: cron(0 0/2 ? * *
-	// *)
+	//     - Daily at noon UTC: cron(0 12 ? * * *)
+	//     - Daily at midnight UTC: cron(0 0 ? * * *)
+	// To support running every 6, 12
+	// hours, the following are also supported: cron(0 [00-23]/[01-24] ? * * *) For
+	// example, the following are valid cron expressions:
+	//     - Every 12 hours, starting at 5pm UTC: cron(0 17/12 ? * * *)
+	//     - Every two hours starting at midnight: cron(0 0/2 ? * * *)
 	//
-	// - Even though the cron expression is set to start at 5PM UTC, note that
-	// there could be a delay of 0-20 minutes from the actual requested time to run the
-	// execution.
-	// - We recommend that if you would like a daily schedule, you do not
-	// provide this parameter. Amazon SageMaker will pick a time for running every day.
+	//     - Even though the cron expression is set to start at 5PM UTC, note that there could be a delay of 0-20 minutes from the actual requested time to run the execution.
+	//     - We recommend that if you would like a daily schedule, you do not provide this parameter. Amazon SageMaker will pick a time for running every day.
 	//
 	// This member is required.
 	ScheduleExpression *string
@@ -12677,19 +11633,12 @@ type ScheduleConfig struct {
 // A multi-expression that searches for the specified resource or resources in a
 // search. All resource objects that satisfy the expression's condition are
 // included in the search results. You must specify at least one subexpression,
-// filter, or nested filter. A SearchExpression can contain up to twenty elements.
-// A SearchExpression contains the following components:
-// - A list of Filter
-// objects. Each filter defines a simple Boolean expression comprised of a resource
-// property name, Boolean operator, and value.
-// - A list of NestedFilter objects.
-// Each nested filter defines a list of Boolean expressions using a list of
-// resource properties. A nested filter is satisfied if a single object in the list
-// satisfies all Boolean expressions.
-// - A list of SearchExpression objects. A
-// search expression object can be nested in a list of search expression objects.
-// -
-// A Boolean operator: And or Or.
+// filter, or nested filter. A SearchExpression can contain up to twenty
+// elements. A SearchExpression  contains the following components:
+//   - A list of Filter objects. Each filter defines a simple Boolean expression comprised of a resource property name, Boolean operator, and value.
+//   - A list of NestedFilter objects. Each nested filter defines a list of Boolean expressions using a list of resource properties. A nested filter is satisfied if a single object in the list satisfies all Boolean expressions.
+//   - A list of SearchExpression objects. A search expression object can be nested in a list of search expression objects.
+//   - A Boolean operator: And or Or .
 type SearchExpression struct {
 
 	// A list of filter objects.
@@ -12700,9 +11649,9 @@ type SearchExpression struct {
 
 	// A Boolean operator used to evaluate the search expression. If you want every
 	// conditional statement in all lists to be satisfied for the entire search
-	// expression to be true, specify And. If only a single conditional statement needs
-	// to be true for the entire search expression to be true, specify Or. The default
-	// value is And.
+	// expression to be true, specify And. If only a single conditional statement
+	// needs to be true for the entire search expression to be true, specify Or. The
+	// default value is And .
 	Operator BooleanOperator
 
 	// A list of search expression objects.
@@ -12711,7 +11660,7 @@ type SearchExpression struct {
 	noSmithyDocumentSerde
 }
 
-// A single resource returned as part of the Search API response.
+// A single resource returned as part of the Search  API response.
 type SearchRecord struct {
 
 	// A hosted endpoint for real-time inference.
@@ -12781,118 +11730,86 @@ type SecondaryStatusTransition struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// Contains a secondary status information from a training job. Status might be one
-	// of the following secondary statuses: InProgress
-	// - Starting - Starting the
-	// training job.
-	// - Downloading - An optional stage for algorithms that support File
-	// training input mode. It indicates that data is being downloaded to the ML
-	// storage volumes.
-	// - Training - Training is in progress.
-	// - Uploading - Training is
-	// complete and the model artifacts are being uploaded to the S3
-	// location.
+	// Contains a secondary status information from a training job. Status might be
+	// one of the following secondary statuses: InProgress
+	//     - Starting - Starting the training job.
+	//     - Downloading - An optional stage for algorithms that support File training input mode. It indicates that data is being downloaded to the ML storage volumes.
+	//     - Training - Training is in progress.
+	//     - Uploading - Training is complete and the model artifacts are being uploaded to the S3 location.
 	//
 	// Completed
-	// - Completed - The training job has completed.
-	//
+	//     - Completed - The training job has completed.
 	// Failed
-	// -
-	// Failed - The training job has failed. The reason for the failure is returned in
-	// the FailureReason field of DescribeTrainingJobResponse.
+	//     - Failed - The training job has failed. The reason for the failure is returned in the FailureReason field of DescribeTrainingJobResponse .
 	//
 	// Stopped
-	// -
-	// MaxRuntimeExceeded - The job stopped because it exceeded the maximum allowed
-	// runtime.
-	// - Stopped - The training job has stopped.
-	//
+	//     - MaxRuntimeExceeded - The job stopped because it exceeded the maximum allowed runtime.
+	//     - Stopped - The training job has stopped.
 	// Stopping
-	// - Stopping -
-	// Stopping the training job.
-	//
-	// We no longer support the following secondary
-	// statuses:
-	// - LaunchingMLInstances
-	// - PreparingTrainingStack
-	// -
-	// DownloadingTrainingImage
+	//     - Stopping - Stopping the training job.
+	// We no longer support the following
+	// secondary statuses:
+	//     - LaunchingMLInstances
+	//     - PreparingTrainingStack
+	//     - DownloadingTrainingImage
 	//
 	// This member is required.
 	Status SecondaryStatus
 
-	// A timestamp that shows when the training job transitioned out of this secondary
-	// status state into another secondary status state or when the training job has
-	// ended.
+	// A timestamp that shows when the training job transitioned out of this
+	// secondary status state into another secondary status state or when the training
+	// job has ended.
 	EndTime *time.Time
 
 	// A detailed description of the progress within a secondary status. SageMaker
 	// provides secondary statuses and status messages that apply to each of them:
 	// Starting
-	// - Starting the training job.
-	// - Launching requested ML instances.
-	// -
-	// Insufficient capacity error from EC2 while launching instances, retrying!
-	// -
-	// Launched instance was unhealthy, replacing it!
-	// - Preparing the instances for
-	// training.
-	//
+	//     - Starting the training job.
+	//     - Launching requested ML instances.
+	//     - Insufficient capacity error from EC2 while launching instances, retrying!
+	//     - Launched instance was unhealthy, replacing it!
+	//     - Preparing the instances for training.
 	// Training
-	// - Downloading the training image.
-	// - Training image download
-	// completed. Training in progress.
-	//
-	// Status messages are subject to change.
-	// Therefore, we recommend not including them in code that programmatically
-	// initiates actions. For examples, don't use status messages in if statements. To
-	// have an overview of your training job's progress, view TrainingJobStatus and
-	// SecondaryStatus in DescribeTrainingJob, and StatusMessage together. For example,
-	// at the start of a training job, you might see the following:
-	// - TrainingJobStatus
-	// - InProgress
-	// - SecondaryStatus - Training
-	// - StatusMessage - Downloading the
-	// training image
+	//     - Downloading the training image.
+	//     - Training image download completed. Training in progress.
+	// Status messages
+	// are subject to change. Therefore, we recommend not including them in code that
+	// programmatically initiates actions. For examples, don't use status messages in
+	// if statements. To have an overview of your training job's progress, view
+	// TrainingJobStatus and SecondaryStatus  in DescribeTrainingJob , and
+	// StatusMessagetogether. For example, at the start of a training job, you might
+	// see the following:
+	//     - TrainingJobStatus - InProgress
+	//     - SecondaryStatus - Training
+	//     - StatusMessage - Downloading the training image
 	StatusMessage *string
 
 	noSmithyDocumentSerde
 }
 
-// Details of a provisioned service catalog product. For information about service
-// catalog, see What is Amazon Web Services Service Catalog
-// (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html).
+// Details of a provisioned service catalog product. For information about
+// service catalog, see What is Amazon Web Services Service Catalog (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html)
+// .
 type ServiceCatalogProvisionedProductDetails struct {
 
 	// The ID of the provisioned product.
 	ProvisionedProductId *string
 
 	// The current status of the product.
-	// - AVAILABLE - Stable state, ready to perform
-	// any operation. The most recent operation succeeded and completed.
-	// - UNDER_CHANGE
-	// - Transitive state. Operations performed might not have valid results. Wait for
-	// an AVAILABLE status before performing operations.
-	// - TAINTED - Stable state,
-	// ready to perform any operation. The stack has completed the requested operation
-	// but is not exactly what was requested. For example, a request to update to a new
-	// version failed and the stack rolled back to the current version.
-	// - ERROR - An
-	// unexpected error occurred. The provisioned product exists but the stack is not
-	// running. For example, CloudFormation received a parameter value that was not
-	// valid and could not launch the stack.
-	// - PLAN_IN_PROGRESS - Transitive state. The
-	// plan operations were performed to provision a new product, but resources have
-	// not yet been created. After reviewing the list of resources to be created,
-	// execute the plan. Wait for an AVAILABLE status before performing operations.
+	//     - AVAILABLE - Stable state, ready to perform any operation. The most recent operation succeeded and completed.
+	//     - UNDER_CHANGE - Transitive state. Operations performed might not have valid results. Wait for an AVAILABLE status before performing operations.
+	//     - TAINTED - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version.
+	//     - ERROR - An unexpected error occurred. The provisioned product exists but the stack is not running. For example, CloudFormation received a parameter value that was not valid and could not launch the stack.
+	//     - PLAN_IN_PROGRESS - Transitive state. The plan operations were performed to provision a new product, but resources have not yet been created. After reviewing the list of resources to be created, execute the plan. Wait for an AVAILABLE status before performing operations.
 	ProvisionedProductStatusMessage *string
 
 	noSmithyDocumentSerde
 }
 
-// Details that you specify to provision a service catalog product. For information
-// about service catalog, see What is Amazon Web Services Service Catalog
-// (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html).
+// Details that you specify to provision a service catalog product. For
+// information about service catalog, see What is Amazon Web Services Service
+// Catalog (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html)
+// .
 type ServiceCatalogProvisioningDetails struct {
 
 	// The ID of the product to provision.
@@ -12900,8 +11817,8 @@ type ServiceCatalogProvisioningDetails struct {
 	// This member is required.
 	ProductId *string
 
-	// The path identifier of the product. This value is optional if the product has a
-	// default path, and required if the product has more than one path.
+	// The path identifier of the product. This value is optional if the product has
+	// a default path, and required if the product has more than one path.
 	PathId *string
 
 	// The ID of the provisioning artifact.
@@ -12913,9 +11830,10 @@ type ServiceCatalogProvisioningDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Details that you specify to provision a service catalog product. For information
-// about service catalog, see What is Amazon Web Services Service Catalog
-// (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html).
+// Details that you specify to provision a service catalog product. For
+// information about service catalog, see What is Amazon Web Services Service
+// Catalog (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html)
+// .
 type ServiceCatalogProvisioningUpdateDetails struct {
 
 	// The ID of the provisioning artifact.
@@ -12965,21 +11883,21 @@ type ShadowModelVariantConfig struct {
 }
 
 // Specifies options for sharing SageMaker Studio notebooks. These settings are
-// specified as part of DefaultUserSettings when the CreateDomain API is called,
-// and as part of UserSettings when the CreateUserProfile API is called. When
+// specified as part of DefaultUserSettings  when the CreateDomain API is called,
+// and as part of UserSettings  when the CreateUserProfile  API is called. When
 // SharingSettings is not specified, notebook sharing isn't allowed.
 type SharingSettings struct {
 
 	// Whether to include the notebook cell output when sharing the notebook. The
-	// default is Disabled.
+	// default is Disabled .
 	NotebookOutputOption NotebookOutputOption
 
-	// When NotebookOutputOption is Allowed, the Amazon Web Services Key Management
+	// When NotebookOutputOption  is Allowed, the Amazon Web Services Key Management
 	// Service (KMS) encryption key ID used to encrypt the notebook cell output in the
 	// Amazon S3 bucket.
 	S3KmsKeyId *string
 
-	// When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the
+	// When NotebookOutputOption  is Allowed, the Amazon S3 bucket used to store the
 	// shared notebook snapshots.
 	S3OutputPath *string
 
@@ -12987,20 +11905,20 @@ type SharingSettings struct {
 }
 
 // A configuration for a shuffle option for input data in a channel. If you use
-// S3Prefix for S3DataType, the results of the S3 key prefix matches are shuffled.
-// If you use ManifestFile, the order of the S3 object references in the
-// ManifestFile is shuffled. If you use AugmentedManifestFile, the order of the
-// JSON lines in the AugmentedManifestFile is shuffled. The shuffling order is
-// determined using the Seed value. For Pipe input mode, when ShuffleConfig is
-// specified shuffling is done at the start of every epoch. With large datasets,
+// S3Prefix for S3DataType, the results of the S3 key prefix matches are
+// shuffled. If you use ManifestFile, the order of the S3 object references in
+// the ManifestFile  is shuffled. If you use AugmentedManifestFile, the order of
+// the JSON lines in the AugmentedManifestFile is shuffled. The shuffling order
+// is determined using the Seed  value. For Pipe input mode, when ShuffleConfig
+// is specified shuffling is done at the start of every epoch. With large datasets,
 // this ensures that the order of the training data is different for each epoch,
 // and it helps reduce bias and possible overfitting. In a multi-node training job
-// when ShuffleConfig is combined with S3DataDistributionType of ShardedByS3Key,
-// the data is shuffled across nodes so that the content sent to a particular node
-// on the first epoch might be sent to a different node on the second epoch.
+// when ShuffleConfig  is combined with S3DataDistributionType  of ShardedByS3Key
+// , the data is shuffled across nodes so that the content sent to a particular
+// node on the first epoch might be sent to a different node on the second epoch.
 type ShuffleConfig struct {
 
-	// Determines the shuffling order in ShuffleConfig value.
+	// Determines the shuffling order in ShuffleConfig  value.
 	//
 	// This member is required.
 	Seed int64
@@ -13008,9 +11926,9 @@ type ShuffleConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies an algorithm that was used to create the model package. The algorithm
-// must be either an algorithm resource in your SageMaker account or an algorithm
-// in Amazon Web Services Marketplace that you are subscribed to.
+// Specifies an algorithm that was used to create the model package. The
+// algorithm must be either an algorithm resource in your SageMaker account or an
+// algorithm in Amazon Web Services Marketplace that you are subscribed to.
 type SourceAlgorithm struct {
 
 	// The name of an algorithm that was used to create the model package. The
@@ -13020,10 +11938,10 @@ type SourceAlgorithm struct {
 	// This member is required.
 	AlgorithmName *string
 
-	// The Amazon S3 path where the model artifacts, which result from model training,
-	// are stored. This path must point to a single gzip compressed tar archive
-	// (.tar.gz suffix). The model artifacts must be in an S3 bucket that is in the
-	// same region as the algorithm.
+	// The Amazon S3 path where the model artifacts, which result from model
+	// training, are stored. This path must point to a single gzip compressed tar
+	// archive ( .tar.gz suffix). The model artifacts must be in an S3 bucket that is
+	// in the same region as the algorithm.
 	ModelDataUrl *string
 
 	noSmithyDocumentSerde
@@ -13040,17 +11958,15 @@ type SourceAlgorithmSpecification struct {
 	noSmithyDocumentSerde
 }
 
-// A list of IP address ranges (CIDRs
-// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)). Used to
-// create an allow list of IP addresses for a private workforce. Workers will only
-// be able to login to their worker portal from an IP address within this range. By
-// default, a workforce isn't restricted to specific IP addresses.
+// A list of IP address ranges ( CIDRs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)
+// ). Used to create an allow list of IP addresses for a private workforce. Workers
+// will only be able to login to their worker portal from an IP address within this
+// range. By default, a workforce isn't restricted to specific IP addresses.
 type SourceIpConfig struct {
 
-	// A list of one to ten Classless Inter-Domain Routing
-	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html) (CIDR)
-	// values. Maximum: Ten CIDR values The following Length Constraints apply to
-	// individual CIDR values in the CIDR value list.
+	// A list of one to ten Classless Inter-Domain Routing (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)
+	// (CIDR) values. Maximum: Ten CIDR values The following Length Constraints apply
+	// to individual CIDR values in the CIDR value list.
 	//
 	// This member is required.
 	Cidrs []string
@@ -13091,8 +12007,8 @@ type SpaceSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a limit to how long a model training job or model compilation job can
-// run. It also specifies how long a managed spot training job has to complete.
+// Specifies a limit to how long a model training job or model compilation job
+// can run. It also specifies how long a managed spot training job has to complete.
 // When the job reaches the time limit, SageMaker ends the training or compilation
 // job. Use this API to cap model training costs. To stop a training job, SageMaker
 // sends the algorithm the SIGTERM signal, which delays job termination for 120
@@ -13103,9 +12019,9 @@ type SpaceSettings struct {
 // model might not be in a state from which it can be saved. For example, if
 // training has just started, the model might not be ready to save. When saved,
 // this intermediate data is a valid model artifact. You can use it to create a
-// model with CreateModel. The Neural Topic Model (NTM) currently does not support
-// saving intermediate model artifacts. When training NTMs, make sure that the
-// maximum runtime is sufficient for the training job to complete.
+// model with CreateModel. The Neural Topic Model (NTM) currently does not
+// support saving intermediate model artifacts. When training NTMs, make sure that
+// the maximum runtime is sufficient for the training job to complete.
 type StoppingCondition struct {
 
 	// The maximum length of time, in seconds, that a training or compilation job can
@@ -13113,19 +12029,19 @@ type StoppingCondition struct {
 	// during this time, a TimeOut error is generated. We recommend starting with 900
 	// seconds and increasing as necessary based on your model. For all other jobs, if
 	// the job does not complete during this time, SageMaker ends the job. When
-	// RetryStrategy is specified in the job request, MaxRuntimeInSeconds specifies the
-	// maximum time for all of the attempts in total, not each individual attempt. The
-	// default value is 1 day. The maximum value is 28 days. The maximum time that a
-	// TrainingJob can run in total, including any time spent publishing metrics or
+	// RetryStrategy is specified in the job request, MaxRuntimeInSeconds specifies
+	// the maximum time for all of the attempts in total, not each individual attempt.
+	// The default value is 1 day. The maximum value is 28 days. The maximum time that
+	// a TrainingJob can run in total, including any time spent publishing metrics or
 	// archiving and uploading models after it has been stopped, is 30 days.
 	MaxRuntimeInSeconds int32
 
-	// The maximum length of time, in seconds, that a managed Spot training job has to
-	// complete. It is the amount of time spent waiting for Spot capacity plus the
+	// The maximum length of time, in seconds, that a managed Spot training job has
+	// to complete. It is the amount of time spent waiting for Spot capacity plus the
 	// amount of time the job can run. It must be equal to or greater than
 	// MaxRuntimeInSeconds. If the job does not complete during this time, SageMaker
-	// ends the job. When RetryStrategy is specified in the job request,
-	// MaxWaitTimeInSeconds specifies the maximum time for all of the attempts in
+	// ends the job. When RetryStrategy  is specified in the job request,
+	// MaxWaitTimeInSecondsspecifies the maximum time for all of the attempts in
 	// total, not each individual attempt.
 	MaxWaitTimeInSeconds *int32
 
@@ -13138,8 +12054,8 @@ type StudioLifecycleConfigDetails struct {
 	// The creation time of the Studio Lifecycle Configuration.
 	CreationTime *time.Time
 
-	// This value is equivalent to CreationTime because Studio Lifecycle Configurations
-	// are immutable.
+	// This value is equivalent to CreationTime because Studio Lifecycle
+	// Configurations are immutable.
 	LastModifiedTime *time.Time
 
 	// The App type to which the Lifecycle Configuration is attached.
@@ -13181,8 +12097,8 @@ type SubscribedWorkteam struct {
 // are included in the response.
 type SuggestionQuery struct {
 
-	// Defines a property name hint. Only property names that begin with the specified
-	// hint are included in the response.
+	// Defines a property name hint. Only property names that begin with the
+	// specified hint are included in the response.
 	PropertyNameQuery *PropertyNameQuery
 
 	noSmithyDocumentSerde
@@ -13194,12 +12110,11 @@ type SuggestionQuery struct {
 // jobs, models, labeling jobs, work teams, endpoint configurations, and endpoints.
 // For more information on adding tags to SageMaker resources, see AddTags. For
 // more information on adding metadata to your Amazon Web Services resources with
-// tagging, see Tagging Amazon Web Services resources
-// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html). For advice on
-// best practices for managing Amazon Web Services resources with tagging, see
-// Tagging Best Practices: Implement an Effective Amazon Web Services Resource
-// Tagging Strategy
-// (https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf).
+// tagging, see Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+// . For advice on best practices for managing Amazon Web Services resources with
+// tagging, see Tagging Best Practices: Implement an Effective Amazon Web
+// Services Resource Tagging Strategy (https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf)
+// .
 type Tag struct {
 
 	// The tag key. Tag keys must be unique per resource.
@@ -13215,40 +12130,32 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a target platform that you want your model to run on,
-// such as OS, architecture, and accelerators. It is an alternative of
-// TargetDevice.
+// Contains information about a target platform that you want your model to run
+// on, such as OS, architecture, and accelerators. It is an alternative of
+// TargetDevice .
 type TargetPlatform struct {
 
 	// Specifies a target platform architecture.
-	// - X86_64: 64-bit version of the x86
-	// instruction set.
-	// - X86: 32-bit version of the x86 instruction set.
-	// - ARM64:
-	// ARMv8 64-bit CPU.
-	// - ARM_EABIHF: ARMv7 32-bit, Hard Float.
-	// - ARM_EABI: ARMv7
-	// 32-bit, Soft Float. Used by Android 32-bit ARM platform.
+	//     - X86_64 : 64-bit version of the x86 instruction set.
+	//     - X86 : 32-bit version of the x86 instruction set.
+	//     - ARM64 : ARMv8 64-bit CPU.
+	//     - ARM_EABIHF : ARMv7 32-bit, Hard Float.
+	//     - ARM_EABI : ARMv7 32-bit, Soft Float. Used by Android 32-bit ARM platform.
 	//
 	// This member is required.
 	Arch TargetPlatformArch
 
 	// Specifies a target platform OS.
-	// - LINUX: Linux-based operating systems.
-	// -
-	// ANDROID: Android operating systems. Android API level can be specified using the
-	// ANDROID_PLATFORM compiler option. For example, "CompilerOptions":
-	// {'ANDROID_PLATFORM': 28}
+	//     - LINUX : Linux-based operating systems.
+	//     - ANDROID : Android operating systems. Android API level can be specified using the ANDROID_PLATFORM compiler option. For example, "CompilerOptions": {'ANDROID_PLATFORM': 28}
 	//
 	// This member is required.
 	Os TargetPlatformOs
 
 	// Specifies a target platform accelerator (optional).
-	// - NVIDIA: Nvidia graphics
-	// processing unit. It also requires gpu-code, trt-ver, cuda-ver compiler options
-	// -
-	// MALI: ARM Mali graphics processor
-	// - INTEL_GRAPHICS: Integrated Intel graphics
+	//     - NVIDIA : Nvidia graphics processing unit. It also requires gpu-code , trt-ver , cuda-ver compiler options
+	//     - MALI : ARM Mali graphics processor
+	//     - INTEL_GRAPHICS : Integrated Intel graphics
 	Accelerator TargetPlatformAccelerator
 
 	noSmithyDocumentSerde
@@ -13264,8 +12171,8 @@ type TensorBoardAppSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration of storage locations for the Amazon SageMaker Debugger TensorBoard
-// output data.
+// Configuration of storage locations for the Amazon SageMaker Debugger
+// TensorBoard output data.
 type TensorBoardOutputConfig struct {
 
 	// Path to Amazon S3 storage location for TensorBoard output.
@@ -13274,7 +12181,7 @@ type TensorBoardOutputConfig struct {
 	S3OutputPath *string
 
 	// Path to local storage location for tensorBoard output. Defaults to
-	// /opt/ml/output/tensorboard.
+	// /opt/ml/output/tensorboard .
 	LocalPath *string
 
 	noSmithyDocumentSerde
@@ -13288,8 +12195,8 @@ type TextClassificationJobConfig struct {
 	// generate.
 	CompletionCriteria *AutoMLJobCompletionCriteria
 
-	// The name of the column used to provide the sentences to be classified. It should
-	// not be the same as the target column.
+	// The name of the column used to provide the sentences to be classified. It
+	// should not be the same as the target column.
 	ContentColumn *string
 
 	// The name of the column used to provide the class labels. It should not be same
@@ -13302,15 +12209,14 @@ type TextClassificationJobConfig struct {
 // Time series forecast settings for the SageMaker Canvas app.
 type TimeSeriesForecastingSettings struct {
 
-	// The IAM role that Canvas passes to Amazon Forecast for time series forecasting.
-	// By default, Canvas uses the execution role specified in the UserProfile that
-	// launches the Canvas app. If an execution role is not specified in the
-	// UserProfile, Canvas uses the execution role specified in the Domain that owns
-	// the UserProfile. To allow time series forecasting, this IAM role should have the
-	// AmazonSageMakerCanvasForecastAccess
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/security-iam-awsmanpol-canvas.html#security-iam-awsmanpol-AmazonSageMakerCanvasForecastAccess)
-	// policy attached and forecast.amazonaws.com added in the trust relationship as a
-	// service principal.
+	// The IAM role that Canvas passes to Amazon Forecast for time series
+	// forecasting. By default, Canvas uses the execution role specified in the
+	// UserProfilethat launches the Canvas app. If an execution role is not specified
+	// in the UserProfile, Canvas uses the execution role specified in the Domain
+	// that owns the UserProfile. To allow time series forecasting, this IAM role
+	// should have the AmazonSageMakerCanvasForecastAccess (https://docs.aws.amazon.com/sagemaker/latest/dg/security-iam-awsmanpol-canvas.html#security-iam-awsmanpol-AmazonSageMakerCanvasForecastAccess)
+	// policy attached and forecast.amazonaws.com added in the trust relationship as
+	// a service principal.
 	AmazonForecastRoleArn *string
 
 	// Describes whether time series forecasting is enabled or disabled in the Canvas
@@ -13337,13 +12243,9 @@ type TrafficPattern struct {
 type TrafficRoutingConfig struct {
 
 	// Traffic routing strategy type.
-	// - ALL_AT_ONCE: Endpoint traffic shifts to the new
-	// fleet in a single step.
-	// - CANARY: Endpoint traffic shifts to the new fleet in
-	// two steps. The first step is the canary, which is a small portion of the
-	// traffic. The second step is the remainder of the traffic.
-	// - LINEAR: Endpoint
-	// traffic shifts to the new fleet in n steps of a configurable size.
+	//     - ALL_AT_ONCE : Endpoint traffic shifts to the new fleet in a single step.
+	//     - CANARY : Endpoint traffic shifts to the new fleet in two steps. The first step is the canary, which is a small portion of the traffic. The second step is the remainder of the traffic.
+	//     - LINEAR : Endpoint traffic shifts to the new fleet in n steps of a configurable size.
 	//
 	// This member is required.
 	Type TrafficRoutingConfigType
@@ -13365,13 +12267,13 @@ type TrafficRoutingConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration to use an image from a private Docker registry for a training
-// job.
+// The configuration to use an image from a private Docker registry for a
+// training job.
 type TrainingImageConfig struct {
 
-	// The method that your training job will use to gain access to the images in your
-	// private Docker registry. For access to an image in a private Docker registry,
-	// set to Vpc.
+	// The method that your training job will use to gain access to the images in
+	// your private Docker registry. For access to an image in a private Docker
+	// registry, set to Vpc .
 	//
 	// This member is required.
 	TrainingRepositoryAccessMode TrainingRepositoryAccessMode
@@ -13404,9 +12306,9 @@ type TrainingJob struct {
 
 	// Configuration information for the Amazon SageMaker Debugger hook parameters,
 	// metric and tensor collections, and storage paths. To learn more about how to
-	// configure the DebugHookConfig parameter, see Use the SageMaker and Debugger
-	// Configuration API Operations to Create, Update, and Debug Your Training Job
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html).
+	// configure the DebugHookConfig  parameter, see Use the SageMaker and Debugger
+	// Configuration API Operations to Create, Update, and Debug Your Training Job (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html)
+	// .
 	DebugHookConfig *DebugHookConfig
 
 	// Information about the debug rule configuration.
@@ -13422,15 +12324,15 @@ type TrainingJob struct {
 	// learning algorithm in distributed training.
 	EnableInterContainerTrafficEncryption bool
 
-	// When true, enables managed spot training using Amazon EC2 Spot instances to run
-	// training jobs instead of on-demand instances. For more information, see Managed
-	// Spot Training
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html).
+	// When true, enables managed spot training using Amazon EC2 Spot instances to
+	// run training jobs instead of on-demand instances. For more information, see
+	// Managed Spot Training (https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html)
+	// .
 	EnableManagedSpotTraining bool
 
-	// If the TrainingJob was created with network isolation, the value is set to true.
-	// If network isolation is enabled, nodes can't communicate beyond the VPC they run
-	// in.
+	// If the TrainingJob  was created with network isolation, the value is set to
+	// true. If network isolation is enabled, nodes can't communicate beyond the VPC
+	// they run in.
 	EnableNetworkIsolation bool
 
 	// The environment variables to set in the Docker container.
@@ -13438,23 +12340,22 @@ type TrainingJob struct {
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
-	// - CreateProcessingJob
-	// -
-	// CreateTrainingJob
-	// - CreateTransformJob
+	//     - CreateProcessingJob
+	//     - CreateTrainingJob
+	//     - CreateTransformJob
 	ExperimentConfig *ExperimentConfig
 
 	// If the training job failed, the reason it failed.
 	FailureReason *string
 
-	// A list of final metric values that are set when the training job completes. Used
-	// only if the training job was configured to use metrics.
+	// A list of final metric values that are set when the training job completes.
+	// Used only if the training job was configured to use metrics.
 	FinalMetricDataList []MetricData
 
 	// Algorithm-specific parameters.
 	HyperParameters map[string]string
 
-	// An array of Channel objects that describes each data input channel.
+	// An array of Channel  objects that describes each data input channel.
 	InputDataConfig []Channel
 
 	// The Amazon Resource Name (ARN) of the labeling job.
@@ -13468,8 +12369,8 @@ type TrainingJob struct {
 	// artifacts.
 	ModelArtifacts *ModelArtifacts
 
-	// The S3 path where model artifacts that you configured when creating the job are
-	// stored. SageMaker creates subfolders for model artifacts.
+	// The S3 path where model artifacts that you configured when creating the job
+	// are stored. SageMaker creates subfolders for model artifacts.
 	OutputDataConfig *OutputDataConfig
 
 	// Resources, including ML compute instances and ML storage volumes, that are
@@ -13477,51 +12378,37 @@ type TrainingJob struct {
 	ResourceConfig *ResourceConfig
 
 	// The number of times to retry the job when the job fails due to an
-	// InternalServerError.
+	// InternalServerError .
 	RetryStrategy *RetryStrategy
 
-	// The Amazon Web Services Identity and Access Management (IAM) role configured for
-	// the training job.
+	// The Amazon Web Services Identity and Access Management (IAM) role configured
+	// for the training job.
 	RoleArn *string
 
-	// Provides detailed information about the state of the training job. For detailed
-	// information about the secondary status of the training job, see StatusMessage
-	// under SecondaryStatusTransition. SageMaker provides primary statuses and
-	// secondary statuses that apply to each of them: InProgress
-	// - Starting - Starting
-	// the training job.
-	// - Downloading - An optional stage for algorithms that support
-	// File training input mode. It indicates that data is being downloaded to the ML
-	// storage volumes.
-	// - Training - Training is in progress.
-	// - Uploading - Training is
-	// complete and the model artifacts are being uploaded to the S3
-	// location.
+	// Provides detailed information about the state of the training job. For
+	// detailed information about the secondary status of the training job, see
+	// StatusMessage under SecondaryStatusTransition. SageMaker provides primary
+	// statuses and secondary statuses that apply to each of them: InProgress
+	//     - Starting - Starting the training job.
+	//     - Downloading - An optional stage for algorithms that support File training input mode. It indicates that data is being downloaded to the ML storage volumes.
+	//     - Training - Training is in progress.
+	//     - Uploading - Training is complete and the model artifacts are being uploaded to the S3 location.
 	//
 	// Completed
-	// - Completed - The training job has completed.
-	//
+	//     - Completed - The training job has completed.
 	// Failed
-	// -
-	// Failed - The training job has failed. The reason for the failure is returned in
-	// the FailureReason field of DescribeTrainingJobResponse.
+	//     - Failed - The training job has failed. The reason for the failure is returned in the FailureReason field of DescribeTrainingJobResponse .
 	//
 	// Stopped
-	// -
-	// MaxRuntimeExceeded - The job stopped because it exceeded the maximum allowed
-	// runtime.
-	// - Stopped - The training job has stopped.
-	//
+	//     - MaxRuntimeExceeded - The job stopped because it exceeded the maximum allowed runtime.
+	//     - Stopped - The training job has stopped.
 	// Stopping
-	// - Stopping -
-	// Stopping the training job.
-	//
-	// Valid values for SecondaryStatus are subject to
-	// change. We no longer support the following secondary statuses:
-	// -
-	// LaunchingMLInstances
-	// - PreparingTrainingStack
-	// - DownloadingTrainingImage
+	//     - Stopping - Stopping the training job.
+	// Valid values for SecondaryStatus are subject to change. We no longer support
+	// the following secondary statuses:
+	//     - LaunchingMLInstances
+	//     - PreparingTrainingStack
+	//     - DownloadingTrainingImage
 	SecondaryStatus SecondaryStatus
 
 	// A history of all of the secondary statuses that the training job has
@@ -13538,12 +12425,12 @@ type TrainingJob struct {
 
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or
-	// environment. For more information, see Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	// environment. For more information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// .
 	Tags []Tag
 
-	// Configuration of storage locations for the Amazon SageMaker Debugger TensorBoard
-	// output data.
+	// Configuration of storage locations for the Amazon SageMaker Debugger
+	// TensorBoard output data.
 	TensorBoardOutputConfig *TensorBoardOutputConfig
 
 	// Indicates the time when the training job ends on training instances. You are
@@ -13560,25 +12447,20 @@ type TrainingJob struct {
 	TrainingJobName *string
 
 	// The status of the training job. Training job statuses are:
-	// - InProgress - The
-	// training is in progress.
-	// - Completed - The training job has completed.
-	// - Failed
-	// - The training job has failed. To see the reason for the failure, see the
-	// FailureReason field in the response to a DescribeTrainingJobResponse call.
-	// -
-	// Stopping - The training job is stopping.
-	// - Stopped - The training job has
-	// stopped.
-	//
-	// For more detailed information, see SecondaryStatus.
+	//     - InProgress - The training is in progress.
+	//     - Completed - The training job has completed.
+	//     - Failed - The training job has failed. To see the reason for the failure, see the FailureReason field in the response to a DescribeTrainingJobResponse call.
+	//     - Stopping - The training job is stopping.
+	//     - Stopped - The training job has stopped.
+	// For more detailed information,
+	// see SecondaryStatus .
 	TrainingJobStatus TrainingJobStatus
 
 	// Indicates the time when the training job starts on training instances. You are
-	// billed for the time interval between this time and the value of TrainingEndTime.
-	// The start time in CloudWatch Logs might be later than this time. The difference
-	// is due to the time it takes to download the training data and to the size of the
-	// training container.
+	// billed for the time interval between this time and the value of TrainingEndTime
+	// . The start time in CloudWatch Logs might be later than this time. The
+	// difference is due to the time it takes to download the training data and to the
+	// size of the training container.
 	TrainingStartTime *time.Time
 
 	// The training time in seconds.
@@ -13588,9 +12470,9 @@ type TrainingJob struct {
 	// the training job was launched by a hyperparameter tuning job.
 	TuningJobArn *string
 
-	// A VpcConfig object that specifies the VPC that this training job has access to.
-	// For more information, see Protect Training Jobs by Using an Amazon Virtual
-	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
+	// A VpcConfig object that specifies the VPC that this training job has access
+	// to. For more information, see Protect Training Jobs by Using an Amazon Virtual
+	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html) .
 	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
@@ -13599,7 +12481,7 @@ type TrainingJob struct {
 // Defines the input needed to run a training job using the algorithm.
 type TrainingJobDefinition struct {
 
-	// An array of Channel objects, each of which specifies an input source.
+	// An array of Channel  objects, each of which specifies an input source.
 	//
 	// This member is required.
 	InputDataConfig []Channel
@@ -13610,8 +12492,8 @@ type TrainingJobDefinition struct {
 	// This member is required.
 	OutputDataConfig *OutputDataConfig
 
-	// The resources, including the ML compute instances and ML storage volumes, to use
-	// for model training.
+	// The resources, including the ML compute instances and ML storage volumes, to
+	// use for model training.
 	//
 	// This member is required.
 	ResourceConfig *ResourceConfig
@@ -13626,28 +12508,28 @@ type TrainingJobDefinition struct {
 	// This member is required.
 	StoppingCondition *StoppingCondition
 
-	// The training input mode that the algorithm supports. For more information about
-	// input modes, see Algorithms
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html). Pipe mode If an
-	// algorithm supports Pipe mode, Amazon SageMaker streams data directly from Amazon
-	// S3 to the container. File mode If an algorithm supports File mode, SageMaker
-	// downloads the training data from S3 to the provisioned ML storage volume, and
-	// mounts the directory to the Docker volume for the training container. You must
-	// provision the ML storage volume with sufficient capacity to accommodate the data
-	// downloaded from S3. In addition to the training data, the ML storage volume also
-	// stores the output model. The algorithm container uses the ML storage volume to
-	// also store intermediate information, if any. For distributed algorithms,
-	// training data is distributed uniformly. Your training duration is predictable if
-	// the input data objects sizes are approximately the same. SageMaker does not
-	// split the files any further for model training. If the object sizes are skewed,
-	// training won't be optimal as the data distribution is also skewed when one host
-	// in a training cluster is overloaded, thus becoming a bottleneck in training.
-	// FastFile mode If an algorithm supports FastFile mode, SageMaker streams data
-	// directly from S3 to the container with no code changes, and provides file system
-	// access to the data. Users can author their training script to interact with
-	// these files as if they were stored on disk. FastFile mode works best when the
-	// data is read sequentially. Augmented manifest files aren't supported. The
-	// startup time is lower when there are fewer files in the S3 bucket provided.
+	// The training input mode that the algorithm supports. For more information
+	// about input modes, see Algorithms (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html)
+	// . Pipe mode If an algorithm supports Pipe mode, Amazon SageMaker streams data
+	// directly from Amazon S3 to the container. File mode If an algorithm supports
+	// Filemode, SageMaker downloads the training data from S3 to the provisioned ML
+	// storage volume, and mounts the directory to the Docker volume for the training
+	// container. You must provision the ML storage volume with sufficient capacity to
+	// accommodate the data downloaded from S3. In addition to the training data, the
+	// ML storage volume also stores the output model. The algorithm container uses the
+	// ML storage volume to also store intermediate information, if any. For
+	// distributed algorithms, training data is distributed uniformly. Your training
+	// duration is predictable if the input data objects sizes are approximately the
+	// same. SageMaker does not split the files any further for model training. If the
+	// object sizes are skewed, training won't be optimal as the data distribution is
+	// also skewed when one host in a training cluster is overloaded, thus becoming a
+	// bottleneck in training. FastFile mode If an algorithm supports FastFile mode,
+	// SageMaker streams data directly from S3 to the container with no code changes,
+	// and provides file system access to the data. Users can author their training
+	// script to interact with these files as if they were stored on disk. FastFile
+	// mode works best when the data is read sequentially. Augmented manifest files
+	// aren't supported. The startup time is lower when there are fewer files in the S3
+	// bucket provided.
 	//
 	// This member is required.
 	TrainingInputMode TrainingInputMode
@@ -13662,14 +12544,16 @@ type TrainingJobDefinition struct {
 // categorized by status.
 type TrainingJobStatusCounters struct {
 
-	// The number of completed training jobs launched by the hyperparameter tuning job.
+	// The number of completed training jobs launched by the hyperparameter tuning
+	// job.
 	Completed int32
 
-	// The number of in-progress training jobs launched by a hyperparameter tuning job.
+	// The number of in-progress training jobs launched by a hyperparameter tuning
+	// job.
 	InProgress int32
 
-	// The number of training jobs that failed and can't be retried. A failed training
-	// job can't be retried if it failed because a client error occurred.
+	// The number of training jobs that failed and can't be retried. A failed
+	// training job can't be retried if it failed because a client error occurred.
 	NonRetryableError int32
 
 	// The number of training jobs that failed, but can be retried. A failed training
@@ -13720,8 +12604,8 @@ type TrainingJobSummary struct {
 	LastModifiedTime *time.Time
 
 	// A timestamp that shows when the training job ended. This field is set only if
-	// the training job has one of the terminal statuses (Completed, Failed, or
-	// Stopped).
+	// the training job has one of the terminal statuses ( Completed , Failed , or
+	// Stopped ).
 	TrainingEndTime *time.Time
 
 	// The status of the warm pool associated with the training job.
@@ -13733,8 +12617,8 @@ type TrainingJobSummary struct {
 // An object containing authentication information for a private Docker registry.
 type TrainingRepositoryAuthConfig struct {
 
-	// The Amazon Resource Name (ARN) of an Amazon Web Services Lambda function used to
-	// give SageMaker access credentials to your private Docker registry.
+	// The Amazon Resource Name (ARN) of an Amazon Web Services Lambda function used
+	// to give SageMaker access credentials to your private Docker registry.
 	//
 	// This member is required.
 	TrainingRepositoryCredentialsProviderArn *string
@@ -13762,8 +12646,8 @@ type TrainingSpecification struct {
 	// This member is required.
 	TrainingImage *string
 
-	// A list of MetricDefinition objects, which are used for parsing metrics generated
-	// by the algorithm.
+	// A list of MetricDefinition objects, which are used for parsing metrics
+	// generated by the algorithm.
 	MetricDefinitions []MetricDefinition
 
 	// A list of the HyperParameterSpecification objects, that define the supported
@@ -13771,16 +12655,16 @@ type TrainingSpecification struct {
 	// tuning.>
 	SupportedHyperParameters []HyperParameterSpecification
 
-	// A list of the metrics that the algorithm emits that can be used as the objective
-	// metric in a hyperparameter tuning job.
+	// A list of the metrics that the algorithm emits that can be used as the
+	// objective metric in a hyperparameter tuning job.
 	SupportedTuningJobObjectiveMetrics []HyperParameterTuningJobObjective
 
-	// Indicates whether the algorithm supports distributed training. If set to false,
-	// buyers can't request more than one instance during training.
+	// Indicates whether the algorithm supports distributed training. If set to
+	// false, buyers can't request more than one instance during training.
 	SupportsDistributedTraining bool
 
-	// An MD5 hash of the training algorithm that identifies the Docker image used for
-	// training.
+	// An MD5 hash of the training algorithm that identifies the Docker image used
+	// for training.
 	TrainingImageDigest *string
 
 	noSmithyDocumentSerde
@@ -13809,7 +12693,7 @@ type TransformInput struct {
 
 	// If your transform data is compressed, specify the compression type. Amazon
 	// SageMaker automatically decompresses the data for the transform job accordingly.
-	// The default value is None.
+	// The default value is None .
 	CompressionType CompressionType
 
 	// The multipurpose internet mail extension (MIME) type of the data. Amazon
@@ -13817,61 +12701,60 @@ type TransformInput struct {
 	// transform job.
 	ContentType *string
 
-	// The method to use to split the transform job's data files into smaller batches.
-	// Splitting is necessary when the total size of each object is too large to fit in
-	// a single request. You can also use data splitting to improve performance by
-	// processing multiple concurrent mini-batches. The default value for SplitType is
-	// None, which indicates that input data files are not split, and request payloads
-	// contain the entire contents of an input object. Set the value of this parameter
-	// to Line to split records on a newline character boundary. SplitType also
-	// supports a number of record-oriented binary data formats. Currently, the
-	// supported record formats are:
-	// - RecordIO
-	// - TFRecord
-	//
-	// When splitting is enabled,
-	// the size of a mini-batch depends on the values of the BatchStrategy and
-	// MaxPayloadInMB parameters. When the value of BatchStrategy is MultiRecord,
-	// Amazon SageMaker sends the maximum number of records in each request, up to the
-	// MaxPayloadInMB limit. If the value of BatchStrategy is SingleRecord, Amazon
-	// SageMaker sends individual records in each request. Some data formats represent
-	// a record as a binary payload wrapped with extra padding bytes. When splitting is
-	// applied to a binary data format, padding is removed if the value of
-	// BatchStrategy is set to SingleRecord. Padding is not removed if the value of
-	// BatchStrategy is set to MultiRecord. For more information about RecordIO, see
-	// Create a Dataset Using RecordIO (https://mxnet.apache.org/api/faq/recordio) in
-	// the MXNet documentation. For more information about TFRecord, see Consuming
-	// TFRecord data (https://www.tensorflow.org/guide/data#consuming_tfrecord_data) in
-	// the TensorFlow documentation.
+	// The method to use to split the transform job's data files into smaller
+	// batches. Splitting is necessary when the total size of each object is too large
+	// to fit in a single request. You can also use data splitting to improve
+	// performance by processing multiple concurrent mini-batches. The default value
+	// for SplitType  is None, which indicates that input data files are not split,
+	// and request payloads contain the entire contents of an input object. Set the
+	// value of this parameter to Line to split records on a newline character
+	// boundary. SplitType also supports a number of record-oriented binary data
+	// formats. Currently, the supported record formats are:
+	//     - RecordIO
+	//     - TFRecord
+	// When splitting is enabled, the size of a mini-batch depends on
+	// the values of the BatchStrategy  and MaxPayloadInMB parameters. When the value
+	// of BatchStrategy  is MultiRecord, Amazon SageMaker sends the maximum number of
+	// records in each request, up to the MaxPayloadInMB  limit. If the value of
+	// BatchStrategy is SingleRecord, Amazon SageMaker sends individual records in
+	// each request. Some data formats represent a record as a binary payload wrapped
+	// with extra padding bytes. When splitting is applied to a binary data format,
+	// padding is removed if the value of BatchStrategy  is set to SingleRecord.
+	// Padding is not removed if the value of BatchStrategy  is set to MultiRecord.
+	// For more information about RecordIO , see Create a Dataset Using RecordIO (https://mxnet.apache.org/api/faq/recordio)
+	// in the MXNet documentation. For more information about TFRecord , see
+	// Consuming TFRecord data (https://www.tensorflow.org/guide/data#consuming_tfrecord_data)
+	// in the TensorFlow documentation.
 	SplitType SplitType
 
 	noSmithyDocumentSerde
 }
 
-// A batch transform job. For information about SageMaker batch transform, see Use
-// Batch Transform
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html).
+// A batch transform job. For information about SageMaker batch transform, see
+// Use Batch Transform (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html)
+// .
 type TransformJob struct {
 
-	// The Amazon Resource Name (ARN) of the AutoML job that created the transform job.
+	// The Amazon Resource Name (ARN) of the AutoML job that created the transform
+	// job.
 	AutoMLJobArn *string
 
-	// Specifies the number of records to include in a mini-batch for an HTTP inference
-	// request. A record is a single unit of input data that inference can be made on.
-	// For example, a single line in a CSV file is a record.
+	// Specifies the number of records to include in a mini-batch for an HTTP
+	// inference request. A record is a single unit of input data that inference can be
+	// made on. For example, a single line in a CSV file is a record.
 	BatchStrategy BatchStrategy
 
 	// A timestamp that shows when the transform Job was created.
 	CreationTime *time.Time
 
-	// The data structure used to specify the data to be used for inference in a batch
-	// transform job and to associate the data that is relevant to the prediction
+	// The data structure used to specify the data to be used for inference in a
+	// batch transform job and to associate the data that is relevant to the prediction
 	// results in the output. The input filter provided allows you to exclude input
 	// data that is not needed for inference in a batch transform job. The output
 	// filter provided allows you to include input data relevant to interpreting the
 	// predictions in the output from the job. For more information, see Associate
-	// Prediction Results with their Corresponding Input Records
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html).
+	// Prediction Results with their Corresponding Input Records (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html)
+	// .
 	DataProcessing *DataProcessing
 
 	// The environment variables to set in the Docker container. We support up to 16
@@ -13880,10 +12763,9 @@ type TransformJob struct {
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
-	// - CreateProcessingJob
-	// -
-	// CreateTrainingJob
-	// - CreateTransformJob
+	//     - CreateProcessingJob
+	//     - CreateTrainingJob
+	//     - CreateTransformJob
 	ExperimentConfig *ExperimentConfig
 
 	// If the transform job failed, the reason it failed.
@@ -13898,22 +12780,22 @@ type TransformJob struct {
 	// checks the optional execution-parameters to determine the settings for your
 	// chosen algorithm. If the execution-parameters endpoint is not enabled, the
 	// default value is 1. For built-in algorithms, you don't need to set a value for
-	// MaxConcurrentTransforms.
+	// MaxConcurrentTransforms .
 	MaxConcurrentTransforms *int32
 
-	// The maximum allowed size of the payload, in MB. A payload is the data portion of
-	// a record (without metadata). The value in MaxPayloadInMB must be greater than,
-	// or equal to, the size of a single record. To estimate the size of a record in
-	// MB, divide the size of your dataset by the number of records. To ensure that the
-	// records fit within the maximum payload size, we recommend using a slightly
+	// The maximum allowed size of the payload, in MB. A payload is the data portion
+	// of a record (without metadata). The value in MaxPayloadInMB must be greater
+	// than, or equal to, the size of a single record. To estimate the size of a record
+	// in MB, divide the size of your dataset by the number of records. To ensure that
+	// the records fit within the maximum payload size, we recommend using a slightly
 	// larger value. The default value is 6 MB. For cases where the payload might be
 	// arbitrarily large and is transmitted using HTTP chunked encoding, set the value
 	// to 0. This feature works only in supported algorithms. Currently, SageMaker
 	// built-in algorithms do not support HTTP chunked encoding.
 	MaxPayloadInMB *int32
 
-	// Configures the timeout and maximum number of retries for processing a transform
-	// job invocation.
+	// Configures the timeout and maximum number of retries for processing a
+	// transform job invocation.
 	ModelClientConfig *ModelClientConfig
 
 	// The name of the model associated with the transform job.
@@ -13924,7 +12806,7 @@ type TransformJob struct {
 
 	// Indicates when the transform job has been completed, or has stopped or failed.
 	// You are billed for the time interval between this time and the value of
-	// TransformStartTime.
+	// TransformStartTime .
 	TransformEndTime *time.Time
 
 	// Describes the input source of a transform job and the way the transform job
@@ -13938,15 +12820,11 @@ type TransformJob struct {
 	TransformJobName *string
 
 	// The status of the transform job. Transform job statuses are:
-	// - InProgress - The
-	// job is in progress.
-	// - Completed - The job has completed.
-	// - Failed - The
-	// transform job has failed. To see the reason for the failure, see the
-	// FailureReason field in the response to a DescribeTransformJob call.
-	// - Stopping -
-	// The transform job is stopping.
-	// - Stopped - The transform job has stopped.
+	//     - InProgress - The job is in progress.
+	//     - Completed - The job has completed.
+	//     - Failed - The transform job has failed. To see the reason for the failure, see the FailureReason field in the response to a DescribeTransformJob call.
+	//     - Stopping - The transform job is stopping.
+	//     - Stopped - The transform job has stopped.
 	TransformJobStatus TransformJobStatus
 
 	// Describes the results of a transform job.
@@ -13956,8 +12834,8 @@ type TransformJob struct {
 	// use for transform job.
 	TransformResources *TransformResources
 
-	// Indicates when the transform job starts on ML instances. You are billed for the
-	// time interval between this time and the value of TransformEndTime.
+	// Indicates when the transform job starts on ML instances. You are billed for
+	// the time interval between this time and the value of TransformEndTime .
 	TransformStartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -13983,10 +12861,10 @@ type TransformJobDefinition struct {
 	// This member is required.
 	TransformResources *TransformResources
 
-	// A string that determines the number of records included in a single mini-batch.
-	// SingleRecord means only one record is used per mini-batch. MultiRecord means a
-	// mini-batch is set to contain as many records that can fit within the
-	// MaxPayloadInMB limit.
+	// A string that determines the number of records included in a single
+	// mini-batch. SingleRecord  means only one record is used per mini-batch.
+	// MultiRecordmeans a mini-batch is set to contain as many records that can fit
+	// within the MaxPayloadInMB  limit.
 	BatchStrategy BatchStrategy
 
 	// The environment variables to set in the Docker container. We support up to 16
@@ -14014,8 +12892,8 @@ type TransformJobStepMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Provides a summary of a transform job. Multiple TransformJobSummary objects are
-// returned as a list after in response to a ListTransformJobs call.
+// Provides a summary of a transform job. Multiple TransformJobSummary objects
+// are returned as a list after in response to a ListTransformJobs  call.
 type TransformJobSummary struct {
 
 	// A timestamp that shows when the transform Job was created.
@@ -14044,8 +12922,8 @@ type TransformJobSummary struct {
 	// Indicates when the transform job was last modified.
 	LastModifiedTime *time.Time
 
-	// Indicates when the transform job ends on compute instances. For successful jobs
-	// and stopped jobs, this is the exact time recorded after the results are
+	// Indicates when the transform job ends on compute instances. For successful
+	// jobs and stopped jobs, this is the exact time recorded after the results are
 	// uploaded. For failed jobs, this is when Amazon SageMaker detected that the job
 	// failed.
 	TransformEndTime *time.Time
@@ -14059,13 +12937,13 @@ type TransformOutput struct {
 	// The Amazon S3 path where you want Amazon SageMaker to store the results of the
 	// transform job. For example, s3://bucket-name/key-name-prefix. For every S3
 	// object used as input for the transform job, batch transform stores the
-	// transformed data with an .out suffix in a corresponding subfolder in the
+	// transformed data with an . out suffix in a corresponding subfolder in the
 	// location in the output prefix. For example, for the input data stored at
 	// s3://bucket-name/input-name-prefix/dataset01/data.csv, batch transform stores
 	// the transformed data at
 	// s3://bucket-name/output-name-prefix/input-name-prefix/data.csv.out. Batch
 	// transform doesn't upload partially processed objects. For an input S3 object
-	// that contains multiple records, it creates an .out file only if the transform
+	// that contains multiple records, it creates an . out file only if the transform
 	// job succeeds on the entire file. When the input contains multiple S3 objects,
 	// the batch transform job processes the listed S3 objects and uploads only the
 	// output for successfully processed objects. If any object fails in the transform
@@ -14078,34 +12956,28 @@ type TransformOutput struct {
 	// type with each http call to transfer data from the transform job.
 	Accept *string
 
-	// Defines how to assemble the results of the transform job as a single S3 object.
-	// Choose a format that is most convenient to you. To concatenate the results in
-	// binary format, specify None. To add a newline character at the end of every
-	// transformed record, specify Line.
+	// Defines how to assemble the results of the transform job as a single S3
+	// object. Choose a format that is most convenient to you. To concatenate the
+	// results in binary format, specify None. To add a newline character at the end
+	// of every transformed record, specify Line .
 	AssembleWith AssemblyType
 
 	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
 	// that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon
-	// S3 server-side encryption. The KmsKeyId can be any of the following formats:
-	// -
-	// Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	// - Key ARN:
-	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	// -
-	// Alias name: alias/ExampleAlias
-	// - Alias name ARN:
-	// arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
-	//
-	// If you don't provide a
-	// KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your
-	// role's account. For more information, see KMS-Managed Encryption Keys
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) in the
-	// Amazon Simple Storage Service Developer Guide. The KMS key policy must grant
-	// permission to the IAM role that you specify in your CreateModel
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html)
-	// request. For more information, see Using Key Policies in Amazon Web Services KMS
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
-	// Amazon Web Services Key Management Service Developer Guide.
+	// S3 server-side encryption. The KmsKeyId  can be any of the following formats:
+	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//     - Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//     - Alias name: alias/ExampleAlias
+	//     - Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
+	// If
+	// you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for
+	// Amazon S3 for your role's account. For more information, see KMS-Managed
+	// Encryption Keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
+	// in the Amazon Simple Storage Service Developer Guide. The KMS key policy must
+	// grant permission to the IAM role that you specify in your CreateModel (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html)
+	// request. For more information, see Using Key Policies in Amazon Web Services
+	// KMS (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
+	// in the Amazon Web Services Key Management Service Developer Guide.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -14116,15 +12988,15 @@ type TransformOutput struct {
 type TransformResources struct {
 
 	// The number of ML compute instances to use in the transform job. The default
-	// value is 1, and the maximum is 100. For distributed transform jobs, specify a
-	// value greater than 1.
+	// value is 1 , and the maximum is 100. For distributed transform jobs, specify a
+	// value greater than 1 .
 	//
 	// This member is required.
 	InstanceCount *int32
 
 	// The ML compute instance type for the transform job. If you are using built-in
 	// algorithms to transform moderately sized datasets, we recommend using
-	// ml.m4.xlarge or ml.m5.largeinstance types.
+	// ml.m4.xlarge or ml.m5.large instance types.
 	//
 	// This member is required.
 	InstanceType TransformInstanceType
@@ -14136,20 +13008,14 @@ type TransformResources struct {
 	// Local storage volumes are encrypted using a hardware module on the instance. You
 	// can't request a VolumeKmsKeyId when using an instance type with local storage.
 	// For a list of instance types that support local instance storage, see Instance
-	// Store Volumes
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes).
-	// For more information about local instance storage encryption, see SSD Instance
-	// Store Volumes
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html).
-	// The VolumeKmsKeyId can be any of the following formats:
-	// - Key ID:
-	// 1234abcd-12ab-34cd-56ef-1234567890ab
-	// - Key ARN:
-	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	// -
-	// Alias name: alias/ExampleAlias
-	// - Alias name ARN:
-	// arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
+	// Store Volumes (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes)
+	// . For more information about local instance storage encryption, see SSD
+	// Instance Store Volumes (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html)
+	// . The VolumeKmsKeyId  can be any of the following formats:
+	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//     - Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//     - Alias name: alias/ExampleAlias
+	//     - Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
 	VolumeKmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -14158,11 +13024,11 @@ type TransformResources struct {
 // Describes the S3 data source.
 type TransformS3DataSource struct {
 
-	// If you choose S3Prefix, S3Uri identifies a key name prefix. Amazon SageMaker
+	// If you choose S3Prefix , S3Uri identifies a key name prefix. Amazon SageMaker
 	// uses all objects with the specified key name prefix for batch transform. If you
-	// choose ManifestFile, S3Uri identifies an object that is a manifest file
+	// choose ManifestFile , S3Uri identifies an object that is a manifest file
 	// containing a list of object keys that you want Amazon SageMaker to use for batch
-	// transform. The following values are compatible: ManifestFile, S3Prefix The
+	// transform. The following values are compatible: ManifestFile , S3Prefix The
 	// following value is not compatible: AugmentedManifestFile
 	//
 	// This member is required.
@@ -14170,18 +13036,8 @@ type TransformS3DataSource struct {
 
 	// Depending on the value specified for the S3DataType, identifies either a key
 	// name prefix or a manifest. For example:
-	// - A key name prefix might look like
-	// this: s3://bucketname/exampleprefix.
-	// - A manifest might look like this:
-	// s3://bucketname/example.manifest The manifest is an S3 object which is a JSON
-	// file with the following format: [ {"prefix":
-	// "s3://customer_bucket/some/prefix/"},"relative/path/to/custdata-1","relative/path/custdata-2",..."relative/path/custdata-N"]
-	// The preceding JSON matches the following S3Uris:
-	// s3://customer_bucket/some/prefix/relative/path/to/custdata-1s3://customer_bucket/some/prefix/relative/path/custdata-2...s3://customer_bucket/some/prefix/relative/path/custdata-N
-	// The complete set of S3Uris in this manifest constitutes the input data for the
-	// channel for this datasource. The object that each S3Uris points to must be
-	// readable by the IAM role that Amazon SageMaker uses to perform tasks on your
-	// behalf.
+	//     - A key name prefix might look like this: s3://bucketname/exampleprefix .
+	//     - A manifest might look like this: s3://bucketname/example.manifest The manifest is an S3 object which is a JSON file with the following format: [ {"prefix": "s3://customer_bucket/some/prefix/"}, "relative/path/to/custdata-1", "relative/path/custdata-2", ... "relative/path/custdata-N" ] The preceding JSON matches the following S3Uris : s3://customer_bucket/some/prefix/relative/path/to/custdata-1 s3://customer_bucket/some/prefix/relative/path/custdata-2 ... s3://customer_bucket/some/prefix/relative/path/custdata-N The complete set of S3Uris in this manifest constitutes the input data for the channel for this datasource. The object that each S3Uris points to must be readable by the IAM role that Amazon SageMaker uses to perform tasks on your behalf.
 	//
 	// This member is required.
 	S3Uri *string
@@ -14189,7 +13045,7 @@ type TransformS3DataSource struct {
 	noSmithyDocumentSerde
 }
 
-// The properties of a trial as returned by the Search API.
+// The properties of a trial as returned by the Search  API.
 type Trial struct {
 
 	// Who created the trial.
@@ -14198,8 +13054,8 @@ type Trial struct {
 	// When the trial was created.
 	CreationTime *time.Time
 
-	// The name of the trial as displayed. If DisplayName isn't specified, TrialName is
-	// displayed.
+	// The name of the trial as displayed. If DisplayName  isn't specified, TrialName
+	// is displayed.
 	DisplayName *string
 
 	// The name of the experiment the trial is part of.
@@ -14235,7 +13091,7 @@ type Trial struct {
 	noSmithyDocumentSerde
 }
 
-// The properties of a trial component as returned by the Search API.
+// The properties of a trial component as returned by the Search  API.
 type TrialComponent struct {
 
 	// Who created the trial component.
@@ -14244,7 +13100,7 @@ type TrialComponent struct {
 	// When the component was created.
 	CreationTime *time.Time
 
-	// The name of the component as displayed. If DisplayName isn't specified,
+	// The name of the component as displayed. If DisplayName  isn't specified,
 	// TrialComponentName is displayed.
 	DisplayName *string
 
@@ -14296,8 +13152,8 @@ type TrialComponent struct {
 	// The status of the trial component.
 	Status *TrialComponentStatus
 
-	// The list of tags that are associated with the component. You can use Search API
-	// to search on the tags.
+	// The list of tags that are associated with the component. You can use Search
+	// API to search on the tags.
 	Tags []Tag
 
 	// The Amazon Resource Name (ARN) of the trial component.
@@ -14310,10 +13166,10 @@ type TrialComponent struct {
 }
 
 // Represents an input or output artifact of a trial component. You specify
-// TrialComponentArtifact as part of the InputArtifacts and OutputArtifacts
-// parameters in the CreateTrialComponent request. Examples of input artifacts are
-// datasets, algorithms, hyperparameters, source code, and instance types. Examples
-// of output artifacts are metrics, snapshots, logs, and images.
+// TrialComponentArtifact as part of the InputArtifacts  and OutputArtifacts
+// parameters in the CreateTrialComponent request. Examples of input artifacts
+// are datasets, algorithms, hyperparameters, source code, and instance types.
+// Examples of output artifacts are metrics, snapshots, logs, and images.
 type TrialComponentArtifact struct {
 
 	// The location of the artifact.
@@ -14321,10 +13177,10 @@ type TrialComponentArtifact struct {
 	// This member is required.
 	Value *string
 
-	// The media type of the artifact, which indicates the type of data in the artifact
-	// file. The media type consists of a type and a subtype concatenated with a slash
-	// (/) character, for example, text/csv, image/jpeg, and s3/uri. The type specifies
-	// the category of the media. The subtype specifies the kind of data.
+	// The media type of the artifact, which indicates the type of data in the
+	// artifact file. The media type consists of a type and a subtype concatenated with
+	// a slash (/) character, for example, text/csv, image/jpeg, and s3/uri. The type
+	// specifies the category of the media. The subtype specifies the kind of data.
 	MediaType *string
 
 	noSmithyDocumentSerde
@@ -14363,8 +13219,8 @@ type TrialComponentMetricSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The value of a hyperparameter. Only one of NumberValue or StringValue can be
-// specified. This object is specified in the CreateTrialComponent request.
+// The value of a hyperparameter. Only one of NumberValue  or StringValue can be
+// specified. This object is specified in the CreateTrialComponent  request.
 //
 // The following types satisfy this interface:
 //
@@ -14375,7 +13231,7 @@ type TrialComponentParameterValue interface {
 }
 
 // The numeric value of a numeric hyperparameter. If you specify a value for this
-// parameter, you can't specify the StringValue parameter.
+// parameter, you can't specify the StringValue  parameter.
 type TrialComponentParameterValueMemberNumberValue struct {
 	Value float64
 
@@ -14385,7 +13241,7 @@ type TrialComponentParameterValueMemberNumberValue struct {
 func (*TrialComponentParameterValueMemberNumberValue) isTrialComponentParameterValue() {}
 
 // The string value of a categorical hyperparameter. If you specify a value for
-// this parameter, you can't specify the NumberValue parameter.
+// this parameter, you can't specify the NumberValue  parameter.
 type TrialComponentParameterValueMemberStringValue struct {
 	Value string
 
@@ -14430,8 +13286,8 @@ type TrialComponentSource struct {
 	noSmithyDocumentSerde
 }
 
-// Detailed information about the source of a trial component. Either ProcessingJob
-// or TrainingJob is returned.
+// Detailed information about the source of a trial component. Either
+// ProcessingJob or TrainingJob  is returned.
 type TrialComponentSourceDetail struct {
 
 	// Information about a processing job that's the source of a trial component.
@@ -14462,7 +13318,7 @@ type TrialComponentStatus struct {
 }
 
 // A summary of the properties of a trial component. To get all the properties,
-// call the DescribeTrialComponent API and provide the TrialComponentName.
+// call the DescribeTrialComponent  API and provide the TrialComponentName .
 type TrialComponentSummary struct {
 
 	// Who created the trial component.
@@ -14471,7 +13327,7 @@ type TrialComponentSummary struct {
 	// When the component was created.
 	CreationTime *time.Time
 
-	// The name of the component as displayed. If DisplayName isn't specified,
+	// The name of the component as displayed. If DisplayName  isn't specified,
 	// TrialComponentName is displayed.
 	DisplayName *string
 
@@ -14488,9 +13344,9 @@ type TrialComponentSummary struct {
 	StartTime *time.Time
 
 	// The status of the component. States include:
-	// - InProgress
-	// - Completed
-	// - Failed
+	//     - InProgress
+	//     - Completed
+	//     - Failed
 	Status *TrialComponentStatus
 
 	// The Amazon Resource Name (ARN) of the trial component.
@@ -14520,14 +13376,14 @@ type TrialSource struct {
 }
 
 // A summary of the properties of a trial. To get the complete set of properties,
-// call the DescribeTrial API and provide the TrialName.
+// call the DescribeTrial  API and provide the TrialName .
 type TrialSummary struct {
 
 	// When the trial was created.
 	CreationTime *time.Time
 
-	// The name of the trial as displayed. If DisplayName isn't specified, TrialName is
-	// displayed.
+	// The name of the trial as displayed. If DisplayName  isn't specified, TrialName
+	// is displayed.
 	DisplayName *string
 
 	// When the trial was last modified.
@@ -14552,8 +13408,8 @@ type TuningJobCompletionCriteria struct {
 	// improve as evaluated against an objective function.
 	BestObjectiveNotImproving *BestObjectiveNotImproving
 
-	// A flag to top your hyperparameter tuning job if automatic model tuning (AMT) has
-	// detected that your model has converged as evaluated against your objective
+	// A flag to top your hyperparameter tuning job if automatic model tuning (AMT)
+	// has detected that your model has converged as evaluated against your objective
 	// function.
 	ConvergenceDetected *ConvergenceDetected
 
@@ -14573,58 +13429,49 @@ type TuningJobStepMetaData struct {
 	noSmithyDocumentSerde
 }
 
-// Provided configuration information for the worker UI for a labeling job. Provide
-// either HumanTaskUiArn or UiTemplateS3Uri. For named entity recognition, 3D point
-// cloud and video frame labeling jobs, use HumanTaskUiArn. For all other Ground
-// Truth built-in task types and custom task types, use UiTemplateS3Uri to specify
-// the location of a worker task template in Amazon S3.
+// Provided configuration information for the worker UI for a labeling job.
+// Provide either HumanTaskUiArn  or UiTemplateS3Uri. For named entity
+// recognition, 3D point cloud and video frame labeling jobs, use HumanTaskUiArn.
+// For all other Ground Truth built-in task types and custom task types, use
+// UiTemplateS3Uri to specify the location of a worker task template in Amazon S3.
 type UiConfig struct {
 
 	// The ARN of the worker task template used to render the worker UI and tools for
 	// labeling job tasks. Use this parameter when you are creating a labeling job for
 	// named entity recognition, 3D point cloud and video frame labeling jobs. Use your
 	// labeling job task type to select one of the following ARNs and use it with this
-	// parameter when you create a labeling job. Replace aws-region with the Amazon Web
-	// Services Region you are creating your labeling job in. For example, replace
+	// parameter when you create a labeling job. Replace aws-region with the Amazon
+	// Web Services Region you are creating your labeling job in. For example, replace
 	// aws-region with us-west-1 if you create a labeling job in US West (N.
-	// California). Named Entity Recognition Use the following HumanTaskUiArn for named
-	// entity recognition labeling jobs:
+	// California). Named Entity Recognition Use the following HumanTaskUiArn for
+	// named entity recognition labeling jobs:
 	// arn:aws:sagemaker:aws-region:394669845002:human-task-ui/NamedEntityRecognition
-	// 3D Point Cloud HumanTaskUiArns Use this HumanTaskUiArn for 3D point cloud object
-	// detection and 3D point cloud object detection adjustment labeling jobs.
-	// -
-	// arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudObjectDetection
+	// 3D Point Cloud HumanTaskUiArns Use this HumanTaskUiArn for 3D point cloud
+	// object detection and 3D point cloud object detection adjustment labeling jobs.
+	//     - arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudObjectDetection
 	//
-	// Use
-	// this HumanTaskUiArn for 3D point cloud object tracking and 3D point cloud object
+	// Use this HumanTaskUiArn for 3D point cloud object tracking and 3D point cloud
+	// object tracking adjustment labeling jobs.
+	//     - arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudObjectTracking
+	//
+	// Use this HumanTaskUiArn for 3D point cloud semantic segmentation and 3D point
+	// cloud semantic segmentation adjustment labeling jobs.
+	//     - arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudSemanticSegmentation
+	//
+	// Video Frame HumanTaskUiArns Use this HumanTaskUiArn for video frame object
+	// detection and video frame object detection adjustment labeling jobs.
+	//     - arn:aws:sagemaker:region:394669845002:human-task-ui/VideoObjectDetection
+	//
+	// Use this HumanTaskUiArn for video frame object tracking and video frame object
 	// tracking adjustment labeling jobs.
-	// -
-	// arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudObjectTracking
-	//
-	// Use
-	// this HumanTaskUiArn for 3D point cloud semantic segmentation and 3D point cloud
-	// semantic segmentation adjustment labeling jobs.
-	// -
-	// arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudSemanticSegmentation
-	//
-	// Video
-	// Frame HumanTaskUiArns Use this HumanTaskUiArn for video frame object detection
-	// and video frame object detection adjustment labeling jobs.
-	// -
-	// arn:aws:sagemaker:region:394669845002:human-task-ui/VideoObjectDetection
-	//
-	// Use
-	// this HumanTaskUiArn for video frame object tracking and video frame object
-	// tracking adjustment labeling jobs.
-	// -
-	// arn:aws:sagemaker:aws-region:394669845002:human-task-ui/VideoObjectTracking
+	//     - arn:aws:sagemaker:aws-region:394669845002:human-task-ui/VideoObjectTracking
 	HumanTaskUiArn *string
 
-	// The Amazon S3 bucket location of the UI template, or worker task template. This
-	// is the template used to render the worker UI and tools for labeling job tasks.
-	// For more information about the contents of a UI template, see  Creating Your
-	// Custom Labeling Task Template
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step2.html).
+	// The Amazon S3 bucket location of the UI template, or worker task template.
+	// This is the template used to render the worker UI and tools for labeling job
+	// tasks. For more information about the contents of a UI template, see Creating
+	// Your Custom Labeling Task Template (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step2.html)
+	// .
 	UiTemplateS3Uri *string
 
 	noSmithyDocumentSerde
@@ -14675,8 +13522,8 @@ type UserContext struct {
 	// The domain associated with the user.
 	DomainId *string
 
-	// The IAM Identity details associated with the user. These details are associated
-	// with model package groups, model packages, and project entities only.
+	// The IAM Identity details associated with the user. These details are
+	// associated with model package groups, model packages, and project entities only.
 	IamIdentity *IamIdentity
 
 	// The Amazon Resource Name (ARN) of the user's profile.
@@ -14710,11 +13557,11 @@ type UserProfileDetails struct {
 }
 
 // A collection of settings that apply to users of Amazon SageMaker Studio. These
-// settings are specified when the CreateUserProfile API is called, and as
-// DefaultUserSettings when the CreateDomain API is called. SecurityGroups is
-// aggregated when specified in both calls. For all other settings in UserSettings,
-// the values specified in CreateUserProfile take precedence over those specified
-// in CreateDomain.
+// settings are specified when the CreateUserProfile  API is called, and as
+// DefaultUserSettings when the CreateDomain  API is called. SecurityGroups is
+// aggregated when specified in both calls. For all other settings in UserSettings
+// , the values specified in CreateUserProfile take precedence over those
+// specified in CreateDomain .
 type UserSettings struct {
 
 	// The Canvas app settings.
@@ -14729,20 +13576,20 @@ type UserSettings struct {
 	// The kernel gateway app settings.
 	KernelGatewayAppSettings *KernelGatewayAppSettings
 
-	// A collection of settings that configure the RSessionGateway app.
+	// A collection of settings that configure the RSessionGateway  app.
 	RSessionAppSettings *RSessionAppSettings
 
 	// A collection of settings that configure user interaction with the
 	// RStudioServerPro app.
 	RStudioServerProAppSettings *RStudioServerProAppSettings
 
-	// The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses
-	// for communication. Optional when the CreateDomain.AppNetworkAccessType parameter
-	// is set to PublicInternetOnly. Required when the
-	// CreateDomain.AppNetworkAccessType parameter is set to VpcOnly. Amazon SageMaker
-	// adds a security group to allow NFS traffic from SageMaker Studio. Therefore, the
-	// number of security groups that you can specify is one less than the maximum
-	// number shown.
+	// The security groups for the Amazon Virtual Private Cloud (VPC) that Studio
+	// uses for communication. Optional when the CreateDomain.AppNetworkAccessType
+	// parameter is set to PublicInternetOnly . Required when the
+	// CreateDomain.AppNetworkAccessType parameter is set to VpcOnly. Amazon
+	// SageMaker adds a security group to allow NFS traffic from SageMaker Studio.
+	// Therefore, the number of security groups that you can specify is one less than
+	// the maximum number shown.
 	SecurityGroups []string
 
 	// Specifies options for sharing SageMaker Studio notebooks.
@@ -14756,21 +13603,15 @@ type UserSettings struct {
 
 // Specifies a production variant property type for an Endpoint. If you are
 // updating an endpoint with the UpdateEndpointInput$RetainAllVariantProperties
-// option set to true, the VariantProperty objects listed in
-// UpdateEndpointInput$ExcludeRetainedVariantProperties override the existing
+// option set to true , the VariantProperty  objects listed in
+// UpdateEndpointInput$ExcludeRetainedVariantPropertiesoverride the existing
 // variant properties of the endpoint.
 type VariantProperty struct {
 
 	// The type of variant property. The supported values are:
-	// - DesiredInstanceCount:
-	// Overrides the existing variant instance counts using the
-	// ProductionVariant$InitialInstanceCount values in the
-	// CreateEndpointConfigInput$ProductionVariants.
-	// - DesiredWeight: Overrides the
-	// existing variant weights using the ProductionVariant$InitialVariantWeight values
-	// in the CreateEndpointConfigInput$ProductionVariants.
-	// - DataCaptureConfig: (Not
-	// currently supported.)
+	//     - DesiredInstanceCount : Overrides the existing variant instance counts using the ProductionVariant$InitialInstanceCount values in the CreateEndpointConfigInput$ProductionVariants .
+	//     - DesiredWeight : Overrides the existing variant weights using the ProductionVariant$InitialVariantWeight values in the CreateEndpointConfigInput$ProductionVariants .
+	//     - DataCaptureConfig : (Not currently supported.)
 	//
 	// This member is required.
 	VariantPropertyType VariantPropertyType
@@ -14787,8 +13628,8 @@ type Vertex struct {
 	// The type of resource of the lineage entity.
 	LineageType LineageType
 
-	// The type of the lineage entity resource. For example: DataSet, Model, Endpoint,
-	// etc...
+	// The type of the lineage entity resource. For example: DataSet , Model ,
+	// Endpoint , etc...
 	Type *string
 
 	noSmithyDocumentSerde
@@ -14798,20 +13639,20 @@ type Vertex struct {
 // Control access to and from your training and model containers by configuring the
 // VPC. For more information, see Protect Endpoints by Using an Amazon Virtual
 // Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
-// and Protect Training Jobs by Using an Amazon Virtual Private Cloud
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
+// and Protect Training Jobs by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html)
+// .
 type VpcConfig struct {
 
-	// The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups
-	// for the VPC that is specified in the Subnets field.
+	// The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security
+	// groups for the VPC that is specified in the Subnets  field.
 	//
 	// This member is required.
 	SecurityGroupIds []string
 
-	// The ID of the subnets in the VPC to which you want to connect your training job
-	// or model. For information about the availability of specific instance types, see
-	// Supported Instance Types and Availability Zones
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/instance-types-az.html).
+	// The ID of the subnets in the VPC to which you want to connect your training
+	// job or model. For information about the availability of specific instance types,
+	// see Supported Instance Types and Availability Zones (https://docs.aws.amazon.com/sagemaker/latest/dg/instance-types-az.html)
+	// .
 	//
 	// This member is required.
 	Subnets []string
@@ -14823,24 +13664,19 @@ type VpcConfig struct {
 type WarmPoolStatus struct {
 
 	// The status of the warm pool.
-	// - InUse: The warm pool is in use for the training
-	// job.
-	// - Available: The warm pool is available to reuse for a matching training
-	// job.
-	// - Reused: The warm pool moved to a matching training job for reuse.
-	// -
-	// Terminated: The warm pool is no longer available. Warm pools are unavailable if
-	// they are terminated by a user, terminated for a patch update, or terminated for
-	// exceeding the specified KeepAlivePeriodInSeconds.
+	//     - InUse : The warm pool is in use for the training job.
+	//     - Available : The warm pool is available to reuse for a matching training job.
+	//     - Reused : The warm pool moved to a matching training job for reuse.
+	//     - Terminated : The warm pool is no longer available. Warm pools are unavailable if they are terminated by a user, terminated for a patch update, or terminated for exceeding the specified KeepAlivePeriodInSeconds .
 	//
 	// This member is required.
 	Status WarmPoolResourceStatus
 
-	// The billable time in seconds used by the warm pool. Billable time refers to the
-	// absolute wall-clock time. Multiply ResourceRetainedBillableTimeInSeconds by the
-	// number of instances (InstanceCount) in your training cluster to get the total
-	// compute time SageMaker bills you if you run warm pool training. The formula is
-	// as follows: ResourceRetainedBillableTimeInSeconds * InstanceCount.
+	// The billable time in seconds used by the warm pool. Billable time refers to
+	// the absolute wall-clock time. Multiply ResourceRetainedBillableTimeInSeconds
+	// by the number of instances ( InstanceCount) in your training cluster to get
+	// the total compute time SageMaker bills you if you run warm pool training. The
+	// formula is as follows: ResourceRetainedBillableTimeInSeconds * InstanceCount .
 	ResourceRetainedBillableTimeInSeconds *int32
 
 	// The name of the matching training job that reused the warm pool.
@@ -14849,12 +13685,12 @@ type WarmPoolStatus struct {
 	noSmithyDocumentSerde
 }
 
-// A single private workforce, which is automatically created when you create your
-// first private work team. You can create one private work force in each Amazon
-// Web Services Region. By default, any workforce-related API operation used in a
-// specific region will apply to the workforce created in that region. To learn how
-// to create a private workforce, see Create a Private Workforce
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html).
+// A single private workforce, which is automatically created when you create
+// your first private work team. You can create one private work force in each
+// Amazon Web Services Region. By default, any workforce-related API operation used
+// in a specific region will apply to the workforce created in that region. To
+// learn how to create a private workforce, see Create a Private Workforce (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html)
+// .
 type Workforce struct {
 
 	// The Amazon Resource Name (ARN) of the private workforce.
@@ -14867,9 +13703,9 @@ type Workforce struct {
 	// This member is required.
 	WorkforceName *string
 
-	// The configuration of an Amazon Cognito workforce. A single Cognito workforce is
-	// created using and corresponds to a single  Amazon Cognito user pool
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html).
+	// The configuration of an Amazon Cognito workforce. A single Cognito workforce
+	// is created using and corresponds to a single Amazon Cognito user pool (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html)
+	// .
 	CognitoConfig *CognitoConfig
 
 	// The date that the workforce is created.
@@ -14879,18 +13715,16 @@ type Workforce struct {
 	FailureReason *string
 
 	// The most recent date that was used to successfully add one or more IP address
-	// ranges (CIDRs
-	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)) to a
-	// private workforce's allow list.
+	// ranges ( CIDRs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)
+	// ) to a private workforce's allow list.
 	LastUpdatedDate *time.Time
 
 	// The configuration of an OIDC Identity Provider (IdP) private workforce.
 	OidcConfig *OidcConfigForResponse
 
-	// A list of one to ten IP address ranges (CIDRs
-	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)) to be added
-	// to the workforce allow list. By default, a workforce isn't restricted to
-	// specific IP addresses.
+	// A list of one to ten IP address ranges ( CIDRs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)
+	// ) to be added to the workforce allow list. By default, a workforce isn't
+	// restricted to specific IP addresses.
 	SourceIpConfig *SourceIpConfig
 
 	// The status of your workforce.
@@ -14908,8 +13742,8 @@ type Workforce struct {
 // The VPC object you use to create or update a workforce.
 type WorkforceVpcConfigRequest struct {
 
-	// The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must be
-	// for the same VPC as specified in the subnet.
+	// The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must
+	// be for the same VPC as specified in the subnet.
 	SecurityGroupIds []string
 
 	// The ID of the subnets in the VPC that you want to connect.
@@ -14925,8 +13759,8 @@ type WorkforceVpcConfigRequest struct {
 // connect to.
 type WorkforceVpcConfigResponse struct {
 
-	// The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must be
-	// for the same VPC as specified in the subnet.
+	// The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must
+	// be for the same VPC as specified in the subnet.
 	//
 	// This member is required.
 	SecurityGroupIds []string
@@ -14960,7 +13794,7 @@ type Workteam struct {
 	// workers that make up the work team. Workforces can be created using Amazon
 	// Cognito or your own OIDC Identity Provider (IdP). For private workforces created
 	// using Amazon Cognito use CognitoMemberDefinition. For workforces created using
-	// your own OIDC identity provider (IdP) use OidcMemberDefinition.
+	// your own OIDC identity provider (IdP) use OidcMemberDefinition .
 	//
 	// This member is required.
 	MemberDefinitions []MemberDefinition
@@ -14981,7 +13815,8 @@ type Workteam struct {
 	// The date and time that the work team was last updated (timestamp).
 	LastUpdatedDate *time.Time
 
-	// Configures SNS notifications of available or expiring work items for work teams.
+	// Configures SNS notifications of available or expiring work items for work
+	// teams.
 	NotificationConfiguration *NotificationConfiguration
 
 	// The Amazon Marketplace identifier for a vendor's work team.

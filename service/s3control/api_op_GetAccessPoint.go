@@ -18,22 +18,15 @@ import (
 
 // Returns configuration information about the specified access point. All Amazon
 // S3 on Outposts REST API requests for this action require an additional parameter
-// of x-amz-outpost-id to be passed with the request. In addition, you must use an
-// S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of
-// the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts
-// endpoint hostname prefix and the x-amz-outpost-id derived by using the access
-// point ARN, see the Examples
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html#API_control_GetAccessPoint_Examples)
-// section. The following actions are related to GetAccessPoint:
-// -
-// CreateAccessPoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html)
-// -
-// DeleteAccessPoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html)
-// -
-// ListAccessPoints
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html)
+// of x-amz-outpost-id to be passed with the request. In addition, you must use
+// an S3 on Outposts endpoint hostname prefix instead of s3-control. For an
+// example of the request syntax for Amazon S3 on Outposts that uses the S3 on
+// Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using
+// the access point ARN, see the Examples (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html#API_control_GetAccessPoint_Examples)
+// section. The following actions are related to GetAccessPoint :
+//   - CreateAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html)
+//   - DeleteAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html)
+//   - ListAccessPoints (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html)
 func (c *Client) GetAccessPoint(ctx context.Context, params *GetAccessPointInput, optFns ...func(*Options)) (*GetAccessPointOutput, error) {
 	if params == nil {
 		params = &GetAccessPointInput{}
@@ -63,10 +56,10 @@ type GetAccessPointInput struct {
 	// parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must
 	// specify the ARN of the access point accessed in the format
 	// arn:aws:s3-outposts:::outpost//accesspoint/. For example, to access the access
-	// point reports-ap through Outpost my-outpost owned by account 123456789012 in
-	// Region us-west-2, use the URL encoding of
-	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap.
-	// The value must be URL encoded.
+	// point reports-ap  through Outpost my-outpost  owned by account 123456789012 in
+	// Region us-west-2 , use the URL encoding of
+	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap
+	// . The value must be URL encoded.
 	//
 	// This member is required.
 	Name *string
@@ -85,8 +78,8 @@ type GetAccessPointOutput struct {
 	// The name of the bucket associated with the specified access point.
 	Bucket *string
 
-	// The Amazon Web Services account ID associated with the S3 bucket associated with
-	// this access point.
+	// The Amazon Web Services account ID associated with the S3 bucket associated
+	// with this access point.
 	BucketAccountId *string
 
 	// The date and time when the specified access point was created.
@@ -99,8 +92,9 @@ type GetAccessPointOutput struct {
 	Name *string
 
 	// Indicates whether this access point allows access from the public internet. If
-	// VpcConfiguration is specified for this access point, then NetworkOrigin is VPC,
-	// and the access point doesn't allow access from the public internet. Otherwise,
+	// VpcConfiguration is specified for this access point, then NetworkOrigin  is VPC
+	// , and the access point doesn't allow access from the public internet. Otherwise,
+	//
 	// NetworkOrigin is Internet, and the access point allows access from the public
 	// internet, subject to the access point and bucket access policies. This will
 	// always be true for an Amazon S3 on Outposts access point
@@ -109,15 +103,14 @@ type GetAccessPointOutput struct {
 	// The PublicAccessBlock configuration that you want to apply to this Amazon S3
 	// account. You can enable the configuration options in any combination. For more
 	// information about when Amazon S3 considers a bucket or object public, see The
-	// Meaning of "Public"
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
+	// Meaning of "Public" (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
 	// in the Amazon S3 User Guide. This data type is not supported for Amazon S3 on
 	// Outposts.
 	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration
 
-	// Contains the virtual private cloud (VPC) configuration for the specified access
-	// point. This element is empty if this access point is an Amazon S3 on Outposts
-	// access point that is used by other Amazon Web Services.
+	// Contains the virtual private cloud (VPC) configuration for the specified
+	// access point. This element is empty if this access point is an Amazon S3 on
+	// Outposts access point that is used by other Amazon Web Services.
 	VpcConfiguration *types.VpcConfiguration
 
 	// Metadata pertaining to the operation's result.

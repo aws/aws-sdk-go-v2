@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the subscription filters for the specified log group. You can list all the
-// subscription filters or filter the results by prefix. The results are
+// Lists the subscription filters for the specified log group. You can list all
+// the subscription filters or filter the results by prefix. The results are
 // ASCII-sorted by filter name.
 func (c *Client) DescribeSubscriptionFilters(ctx context.Context, params *DescribeSubscriptionFiltersInput, optFns ...func(*Options)) (*DescribeSubscriptionFiltersOutput, error) {
 	if params == nil {
@@ -40,8 +40,8 @@ type DescribeSubscriptionFiltersInput struct {
 	// The prefix to match. If you don't specify a value, no prefix filter is applied.
 	FilterNamePrefix *string
 
-	// The maximum number of items returned. If you don't specify a value, the default
-	// is up to 50 items.
+	// The maximum number of items returned. If you don't specify a value, the
+	// default is up to 50 items.
 	Limit *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -53,7 +53,8 @@ type DescribeSubscriptionFiltersInput struct {
 
 type DescribeSubscriptionFiltersOutput struct {
 
-	// The token for the next set of items to return. The token expires after 24 hours.
+	// The token for the next set of items to return. The token expires after 24
+	// hours.
 	NextToken *string
 
 	// The subscription filters.
@@ -139,12 +140,12 @@ var _ DescribeSubscriptionFiltersAPIClient = (*Client)(nil)
 // DescribeSubscriptionFiltersPaginatorOptions is the paginator options for
 // DescribeSubscriptionFilters
 type DescribeSubscriptionFiltersPaginatorOptions struct {
-	// The maximum number of items returned. If you don't specify a value, the default
-	// is up to 50 items.
+	// The maximum number of items returned. If you don't specify a value, the
+	// default is up to 50 items.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

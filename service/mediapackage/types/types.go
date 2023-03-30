@@ -91,8 +91,8 @@ type CmafPackage struct {
 	// nearest multiple of the source segment duration.
 	SegmentDurationSeconds int32
 
-	// An optional custom string that is prepended to the name of each segment. If not
-	// specified, it defaults to the ChannelId.
+	// An optional custom string that is prepended to the name of each segment. If
+	// not specified, it defaults to the ChannelId.
 	SegmentPrefix *string
 
 	// A StreamSelection configuration.
@@ -114,8 +114,8 @@ type CmafPackageCreateOrUpdateParameters struct {
 	// nearest multiple of the source segment duration.
 	SegmentDurationSeconds int32
 
-	// An optional custom string that is prepended to the name of each segment. If not
-	// specified, it defaults to the ChannelId.
+	// An optional custom string that is prepended to the name of each segment. If
+	// not specified, it defaults to the ChannelId.
 	SegmentPrefix *string
 
 	// A StreamSelection configuration.
@@ -142,9 +142,9 @@ type DashEncryption struct {
 // A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
 type DashPackage struct {
 
-	// A list of SCTE-35 message types that are treated as ad markers in the output. If
-	// empty, no ad markers are output. Specify multiple items to create ad markers for
-	// all of the included message types.
+	// A list of SCTE-35 message types that are treated as ad markers in the output.
+	// If empty, no ad markers are output. Specify multiple items to create ad markers
+	// for all of the included message types.
 	AdTriggers []AdTriggersElement
 
 	// This setting allows the delivery restriction flags on SCTE-35 segmentation
@@ -178,8 +178,8 @@ type DashPackage struct {
 	// the presentation.
 	MinBufferTimeSeconds int32
 
-	// Minimum duration (in seconds) between potential changes to the Dynamic Adaptive
-	// Streaming over HTTP (DASH) Media Presentation Description (MPD).
+	// Minimum duration (in seconds) between potential changes to the Dynamic
+	// Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD).
 	MinUpdatePeriodSeconds int32
 
 	// A list of triggers that controls when the outgoing Dynamic Adaptive Streaming
@@ -202,8 +202,8 @@ type DashPackage struct {
 	// Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is
 	// presented in each SegmentTemplate, with $Number$ media URLs. When set to
 	// TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with
-	// $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included
-	// in each SegmentTemplate, with $Number$ media URLs.
+	// $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is
+	// included in each SegmentTemplate, with $Number$ media URLs.
 	SegmentTemplateFormat SegmentTemplateFormat
 
 	// A StreamSelection configuration.
@@ -212,8 +212,8 @@ type DashPackage struct {
 	// Duration (in seconds) to delay live content before presentation.
 	SuggestedPresentationDelaySeconds int32
 
-	// Determines the type of UTCTiming included in the Media Presentation Description
-	// (MPD)
+	// Determines the type of UTCTiming included in the Media Presentation
+	// Description (MPD)
 	UtcTiming UtcTiming
 
 	// Specifies the value attribute of the UTCTiming field when utcTiming is set to
@@ -232,10 +232,10 @@ type EgressAccessLogs struct {
 	noSmithyDocumentSerde
 }
 
-// Use encryptionContractConfiguration to configure one or more content encryption
-// keys for your endpoints that use SPEKE 2.0. The encryption contract defines
-// which content keys are used to encrypt the audio and video tracks in your
-// stream. To configure the encryption contract, specify which audio and video
+// Use encryptionContractConfiguration to configure one or more content
+// encryption keys for your endpoints that use SPEKE 2.0. The encryption contract
+// defines which content keys are used to encrypt the audio and video tracks in
+// your stream. To configure the encryption contract, specify which audio and video
 // encryption presets to use. Note the following considerations when using
 // encryptionContractConfiguration: encryptionContractConfiguration can be used for
 // DASH or CMAF endpoints that use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3
@@ -271,12 +271,12 @@ type HarvestJob struct {
 	// The end of the time-window which will be harvested.
 	EndTime *string
 
-	// The ID of the HarvestJob. The ID must be unique within the region and it cannot
-	// be changed after the HarvestJob is submitted.
+	// The ID of the HarvestJob. The ID must be unique within the region and it
+	// cannot be changed after the HarvestJob is submitted.
 	Id *string
 
-	// The ID of the OriginEndpoint that the HarvestJob will harvest from. This cannot
-	// be changed after the HarvestJob is submitted.
+	// The ID of the OriginEndpoint that the HarvestJob will harvest from. This
+	// cannot be changed after the HarvestJob is submitted.
 	OriginEndpointId *string
 
 	// Configuration parameters for where in an S3 bucket to place the harvested
@@ -286,8 +286,8 @@ type HarvestJob struct {
 	// The start of the time-window which will be harvested.
 	StartTime *string
 
-	// The current status of the HarvestJob. Consider setting up a CloudWatch Event to
-	// listen for HarvestJobs as they succeed or fail. In the event of failure, the
+	// The current status of the HarvestJob. Consider setting up a CloudWatch Event
+	// to listen for HarvestJobs as they succeed or fail. In the event of failure, the
 	// CloudWatch Event will include an explanation of why the HarvestJob failed.
 	Status Status
 
@@ -347,9 +347,9 @@ type HlsManifest struct {
 	// must set a programDateTimeIntervalSeconds value that is greater than 0.
 	AdMarkers AdMarkers
 
-	// A list of SCTE-35 message types that are treated as ad markers in the output. If
-	// empty, no ad markers are output. Specify multiple items to create ad markers for
-	// all of the included message types.
+	// A list of SCTE-35 message types that are treated as ad markers in the output.
+	// If empty, no ad markers are output. Specify multiple items to create ad markers
+	// for all of the included message types.
 	AdTriggers []AdTriggersElement
 
 	// This setting allows the delivery restriction flags on SCTE-35 segmentation
@@ -379,8 +379,8 @@ type HlsManifest struct {
 	// Time window (in seconds) contained in each parent manifest.
 	PlaylistWindowSeconds int32
 
-	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into
-	// manifests. Additionally, when an interval is specified ID3Timed Metadata
+	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted
+	// into manifests. Additionally, when an interval is specified ID3Timed Metadata
 	// messages will be generated every 5 seconds using the ingest time of the content.
 	// If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME
 	// tags will be inserted into manifests and no ID3Timed Metadata messages will be
@@ -414,9 +414,9 @@ type HlsManifestCreateOrUpdateParameters struct {
 	// must set a programDateTimeIntervalSeconds value that is greater than 0.
 	AdMarkers AdMarkers
 
-	// A list of SCTE-35 message types that are treated as ad markers in the output. If
-	// empty, no ad markers are output. Specify multiple items to create ad markers for
-	// all of the included message types.
+	// A list of SCTE-35 message types that are treated as ad markers in the output.
+	// If empty, no ad markers are output. Specify multiple items to create ad markers
+	// for all of the included message types.
 	AdTriggers []AdTriggersElement
 
 	// This setting allows the delivery restriction flags on SCTE-35 segmentation
@@ -446,8 +446,8 @@ type HlsManifestCreateOrUpdateParameters struct {
 	// Time window (in seconds) contained in each parent manifest.
 	PlaylistWindowSeconds int32
 
-	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into
-	// manifests. Additionally, when an interval is specified ID3Timed Metadata
+	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted
+	// into manifests. Additionally, when an interval is specified ID3Timed Metadata
 	// messages will be generated every 5 seconds using the ingest time of the content.
 	// If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME
 	// tags will be inserted into manifests and no ID3Timed Metadata messages will be
@@ -472,9 +472,9 @@ type HlsPackage struct {
 	// must set a programDateTimeIntervalSeconds value that is greater than 0.
 	AdMarkers AdMarkers
 
-	// A list of SCTE-35 message types that are treated as ad markers in the output. If
-	// empty, no ad markers are output. Specify multiple items to create ad markers for
-	// all of the included message types.
+	// A list of SCTE-35 message types that are treated as ad markers in the output.
+	// If empty, no ad markers are output. Specify multiple items to create ad markers
+	// for all of the included message types.
 	AdTriggers []AdTriggersElement
 
 	// This setting allows the delivery restriction flags on SCTE-35 segmentation
@@ -507,8 +507,8 @@ type HlsPackage struct {
 	// Time window (in seconds) contained in each parent manifest.
 	PlaylistWindowSeconds int32
 
-	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into
-	// manifests. Additionally, when an interval is specified ID3Timed Metadata
+	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted
+	// into manifests. Additionally, when an interval is specified ID3Timed Metadata
 	// messages will be generated every 5 seconds using the ingest time of the content.
 	// If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME
 	// tags will be inserted into manifests and no ID3Timed Metadata messages will be
@@ -517,8 +517,8 @@ type HlsPackage struct {
 	// output.
 	ProgramDateTimeIntervalSeconds int32
 
-	// Duration (in seconds) of each fragment. Actual fragments will be rounded to the
-	// nearest multiple of the source fragment duration.
+	// Duration (in seconds) of each fragment. Actual fragments will be rounded to
+	// the nearest multiple of the source fragment duration.
 	SegmentDurationSeconds int32
 
 	// A StreamSelection configuration.
@@ -623,8 +623,8 @@ type OriginEndpoint struct {
 	// A Microsoft Smooth Streaming (MSS) packaging configuration.
 	MssPackage *MssPackage
 
-	// Control whether origination of video is allowed for this OriginEndpoint. If set
-	// to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of
+	// Control whether origination of video is allowed for this OriginEndpoint. If
+	// set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of
 	// access control. If set to DENY, the OriginEndpoint may not be requested. This
 	// can be helpful for Live to VOD harvesting, or for temporarily disabling
 	// origination
@@ -704,10 +704,10 @@ type SpekeKeyProvider struct {
 	// provider service.
 	CertificateArn *string
 
-	// Use encryptionContractConfiguration to configure one or more content encryption
-	// keys for your endpoints that use SPEKE 2.0. The encryption contract defines
-	// which content keys are used to encrypt the audio and video tracks in your
-	// stream. To configure the encryption contract, specify which audio and video
+	// Use encryptionContractConfiguration to configure one or more content
+	// encryption keys for your endpoints that use SPEKE 2.0. The encryption contract
+	// defines which content keys are used to encrypt the audio and video tracks in
+	// your stream. To configure the encryption contract, specify which audio and video
 	// encryption presets to use. Note the following considerations when using
 	// encryptionContractConfiguration: encryptionContractConfiguration can be used for
 	// DASH or CMAF endpoints that use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3

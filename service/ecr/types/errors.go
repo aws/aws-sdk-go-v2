@@ -60,8 +60,8 @@ func (e *ImageAlreadyExistsException) ErrorCode() string {
 }
 func (e *ImageAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified image digest does not match the digest that Amazon ECR calculated
-// for the image.
+// The specified image digest does not match the digest that Amazon ECR
+// calculated for the image.
 type ImageDigestDoesNotMatchException struct {
 	Message *string
 
@@ -113,8 +113,8 @@ func (e *ImageNotFoundException) ErrorCode() string {
 }
 func (e *ImageNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified image is tagged with a tag that already exists. The repository is
-// configured for tag immutability.
+// The specified image is tagged with a tag that already exists. The repository
+// is configured for tag immutability.
 type ImageTagAlreadyExistsException struct {
 	Message *string
 
@@ -167,8 +167,8 @@ func (e *InvalidLayerException) ErrorCode() string {
 }
 func (e *InvalidLayerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The layer part size is not valid, or the first byte specified is not consecutive
-// to the last byte of a previous layer part upload.
+// The layer part size is not valid, or the first byte specified is not
+// consecutive to the last byte of a previous layer part upload.
 type InvalidLayerPartException struct {
 	Message *string
 
@@ -199,8 +199,8 @@ func (e *InvalidLayerPartException) ErrorCode() string {
 }
 func (e *InvalidLayerPartException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified parameter is invalid. Review the available parameters for the API
-// request.
+// The specified parameter is invalid. Review the available parameters for the
+// API request.
 type InvalidParameterException struct {
 	Message *string
 
@@ -308,8 +308,8 @@ func (e *LayerAlreadyExistsException) ErrorCode() string {
 }
 func (e *LayerAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified layer is not available because it is not associated with an image.
-// Unassociated image layers may be cleaned up at any time.
+// The specified layer is not available because it is not associated with an
+// image. Unassociated image layers may be cleaned up at any time.
 type LayerInaccessibleException struct {
 	Message *string
 
@@ -361,8 +361,8 @@ func (e *LayerPartTooSmallException) ErrorCode() string {
 }
 func (e *LayerPartTooSmallException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified layers could not be found, or the specified layer is not valid for
-// this repository.
+// The specified layers could not be found, or the specified layer is not valid
+// for this repository.
 type LayersNotFoundException struct {
 	Message *string
 
@@ -388,7 +388,8 @@ func (e *LayersNotFoundException) ErrorCode() string {
 }
 func (e *LayersNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The lifecycle policy could not be found, and no policy is set to the repository.
+// The lifecycle policy could not be found, and no policy is set to the
+// repository.
 type LifecyclePolicyNotFoundException struct {
 	Message *string
 
@@ -471,10 +472,9 @@ func (e *LifecyclePolicyPreviewNotFoundException) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
-// The operation did not succeed because it would have exceeded a service limit for
-// your account. For more information, see Amazon ECR service quotas
-// (https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html) in
-// the Amazon Elastic Container Registry User Guide.
+// The operation did not succeed because it would have exceeded a service limit
+// for your account. For more information, see Amazon ECR service quotas (https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html)
+// in the Amazon Elastic Container Registry User Guide.
 type LimitExceededException struct {
 	Message *string
 
@@ -637,7 +637,7 @@ func (e *RepositoryAlreadyExistsException) ErrorCode() string {
 func (e *RepositoryAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified repository contains images. To delete a repository that contains
-// images, you must force the deletion with the force parameter.
+// images, you must force the deletion with the force  parameter.
 type RepositoryNotEmptyException struct {
 	Message *string
 
@@ -663,9 +663,9 @@ func (e *RepositoryNotEmptyException) ErrorCode() string {
 }
 func (e *RepositoryNotEmptyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified repository could not be found. Check the spelling of the specified
-// repository and ensure that you are performing operations on the correct
-// registry.
+// The specified repository could not be found. Check the spelling of the
+// specified repository and ensure that you are performing operations on the
+// correct registry.
 type RepositoryNotFoundException struct {
 	Message *string
 
@@ -771,8 +771,8 @@ func (e *ServerException) ErrorCode() string {
 }
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The list of tags on the repository is over the limit. The maximum number of tags
-// that can be applied to a repository is 50.
+// The list of tags on the repository is over the limit. The maximum number of
+// tags that can be applied to a repository is 50.
 type TooManyTagsException struct {
 	Message *string
 
@@ -852,8 +852,8 @@ func (e *UnsupportedUpstreamRegistryException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The upload could not be found, or the specified upload ID is not valid for this
-// repository.
+// The upload could not be found, or the specified upload ID is not valid for
+// this repository.
 type UploadNotFoundException struct {
 	Message *string
 

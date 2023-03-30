@@ -30,10 +30,11 @@ func (c *Client) DescribeAutoScalingConfiguration(ctx context.Context, params *D
 
 type DescribeAutoScalingConfigurationInput struct {
 
-	// The Amazon Resource Name (ARN) of the App Runner auto scaling configuration that
-	// you want a description for. The ARN can be a full auto scaling configuration
-	// ARN, or a partial ARN ending with either .../name  or .../name/revision . If a
-	// revision isn't specified, the latest active revision is described.
+	// The Amazon Resource Name (ARN) of the App Runner auto scaling configuration
+	// that you want a description for. The ARN can be a full auto scaling
+	// configuration ARN, or a partial ARN ending with either .../name  or
+	// .../name/revision . If a revision isn't specified, the latest active revision
+	// is described.
 	//
 	// This member is required.
 	AutoScalingConfigurationArn *string

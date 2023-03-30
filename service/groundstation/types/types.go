@@ -52,7 +52,7 @@ type AggregateStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Details about an antenna demod decode Config used in a contact.
+// Details about an antenna demod decode Config  used in a contact.
 type AntennaDemodDecodeDetails struct {
 
 	// Name of an antenna demod decode output node used in a contact.
@@ -65,7 +65,7 @@ type AntennaDemodDecodeDetails struct {
 // downlink during a contact.
 type AntennaDownlinkConfig struct {
 
-	// Object that describes a spectral Config.
+	// Object that describes a spectral Config .
 	//
 	// This member is required.
 	SpectrumConfig *SpectrumConfig
@@ -73,21 +73,21 @@ type AntennaDownlinkConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Information about how AWS Ground Station should conﬁgure an antenna for downlink
-// demod decode during a contact.
+// Information about how AWS Ground Station should conﬁgure an antenna for
+// downlink demod decode during a contact.
 type AntennaDownlinkDemodDecodeConfig struct {
 
-	// Information about the decode Config.
+	// Information about the decode Config .
 	//
 	// This member is required.
 	DecodeConfig *DecodeConfig
 
-	// Information about the demodulation Config.
+	// Information about the demodulation Config .
 	//
 	// This member is required.
 	DemodulationConfig *DemodulationConfig
 
-	// Information about the spectral Config.
+	// Information about the spectral Config .
 	//
 	// This member is required.
 	SpectrumConfig *SpectrumConfig
@@ -95,10 +95,10 @@ type AntennaDownlinkDemodDecodeConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the uplink Config of an antenna.
+// Information about the uplink Config  of an antenna.
 type AntennaUplinkConfig struct {
 
-	// Information about the uplink spectral Config.
+	// Information about the uplink spectral Config .
 	//
 	// This member is required.
 	SpectrumConfig *UplinkSpectrumConfig
@@ -193,7 +193,7 @@ type ComponentVersion struct {
 	noSmithyDocumentSerde
 }
 
-// Details for certain Config object types in a contact.
+// Details for certain Config  object types in a contact.
 //
 // The following types satisfy this interface:
 //
@@ -204,7 +204,7 @@ type ConfigDetails interface {
 	isConfigDetails()
 }
 
-// Details for antenna demod decode Config in a contact.
+// Details for antenna demod decode Config  in a contact.
 type ConfigDetailsMemberAntennaDemodDecodeDetails struct {
 	Value AntennaDemodDecodeDetails
 
@@ -222,7 +222,7 @@ type ConfigDetailsMemberEndpointDetails struct {
 
 func (*ConfigDetailsMemberEndpointDetails) isConfigDetails() {}
 
-// Details for an S3 recording Config in a contact.
+// Details for an S3 recording Config  in a contact.
 type ConfigDetailsMemberS3RecordingDetails struct {
 	Value S3RecordingDetails
 
@@ -231,26 +231,26 @@ type ConfigDetailsMemberS3RecordingDetails struct {
 
 func (*ConfigDetailsMemberS3RecordingDetails) isConfigDetails() {}
 
-// An item in a list of Config objects.
+// An item in a list of Config  objects.
 type ConfigListItem struct {
 
-	// ARN of a Config.
+	// ARN of a Config .
 	ConfigArn *string
 
-	// UUID of a Config.
+	// UUID of a Config .
 	ConfigId *string
 
-	// Type of a Config.
+	// Type of a Config .
 	ConfigType ConfigCapabilityType
 
-	// Name of a Config.
+	// Name of a Config .
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
 // Object containing the parameters of a Config. See the subtype definitions for
-// what each type of Config contains.
+// what each type of Config  contains.
 //
 // The following types satisfy this interface:
 //
@@ -275,8 +275,8 @@ type ConfigTypeDataMemberAntennaDownlinkConfig struct {
 
 func (*ConfigTypeDataMemberAntennaDownlinkConfig) isConfigTypeData() {}
 
-// Information about how AWS Ground Station should conﬁgure an antenna for downlink
-// demod decode during a contact.
+// Information about how AWS Ground Station should conﬁgure an antenna for
+// downlink demod decode during a contact.
 type ConfigTypeDataMemberAntennaDownlinkDemodDecodeConfig struct {
 	Value AntennaDownlinkDemodDecodeConfig
 
@@ -295,7 +295,7 @@ type ConfigTypeDataMemberAntennaUplinkConfig struct {
 
 func (*ConfigTypeDataMemberAntennaUplinkConfig) isConfigTypeData() {}
 
-// Information about the dataflow endpoint Config.
+// Information about the dataflow endpoint Config .
 type ConfigTypeDataMemberDataflowEndpointConfig struct {
 	Value DataflowEndpointConfig
 
@@ -304,7 +304,7 @@ type ConfigTypeDataMemberDataflowEndpointConfig struct {
 
 func (*ConfigTypeDataMemberDataflowEndpointConfig) isConfigTypeData() {}
 
-// Information about an S3 recording Config.
+// Information about an S3 recording Config .
 type ConfigTypeDataMemberS3RecordingConfig struct {
 	Value S3RecordingConfig
 
@@ -313,8 +313,8 @@ type ConfigTypeDataMemberS3RecordingConfig struct {
 
 func (*ConfigTypeDataMemberS3RecordingConfig) isConfigTypeData() {}
 
-// Object that determines whether tracking should be used during a contact executed
-// with this Config in the mission profile.
+// Object that determines whether tracking should be used during a contact
+// executed with this Config  in the mission profile.
 type ConfigTypeDataMemberTrackingConfig struct {
 	Value TrackingConfig
 
@@ -323,9 +323,9 @@ type ConfigTypeDataMemberTrackingConfig struct {
 
 func (*ConfigTypeDataMemberTrackingConfig) isConfigTypeData() {}
 
-// Information about an uplink echo Config. Parameters from the
-// AntennaUplinkConfig, corresponding to the specified AntennaUplinkConfigArn, are
-// used when this UplinkEchoConfig is used in a contact.
+// Information about an uplink echo Config . Parameters from the
+// AntennaUplinkConfig , corresponding to the specified AntennaUplinkConfigArn,
+// are used when this UplinkEchoConfig  is used in a contact.
 type ConfigTypeDataMemberUplinkEchoConfig struct {
 	Value UplinkEchoConfig
 
@@ -428,7 +428,7 @@ type DataflowEndpoint struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the dataflow endpoint Config.
+// Information about the dataflow endpoint Config .
 type DataflowEndpointConfig struct {
 
 	// Name of a dataflow endpoint.
@@ -442,7 +442,7 @@ type DataflowEndpointConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Item in a list of DataflowEndpoint groups.
+// Item in a list of DataflowEndpoint  groups.
 type DataflowEndpointListItem struct {
 
 	// ARN of a dataflow endpoint group.
@@ -454,10 +454,10 @@ type DataflowEndpointListItem struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the decode Config.
+// Information about the decode Config .
 type DecodeConfig struct {
 
-	// Unvalidated JSON of a decode Config.
+	// Unvalidated JSON of a decode Config .
 	//
 	// This member is required.
 	UnvalidatedJSON *string
@@ -465,10 +465,10 @@ type DecodeConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the demodulation Config.
+// Information about the demodulation Config .
 type DemodulationConfig struct {
 
-	// Unvalidated JSON of a demodulation Config.
+	// Unvalidated JSON of a demodulation Config .
 	//
 	// This member is required.
 	UnvalidatedJSON *string
@@ -483,10 +483,10 @@ type Destination struct {
 	// decode.
 	ConfigDetails ConfigDetails
 
-	// UUID of a Config.
+	// UUID of a Config .
 	ConfigId *string
 
-	// Type of a Config.
+	// Type of a Config .
 	ConfigType ConfigCapabilityType
 
 	// Region of a dataflow destination.
@@ -557,8 +557,8 @@ type EndpointDetails struct {
 	// A dataflow endpoint.
 	Endpoint *DataflowEndpoint
 
-	// Endpoint security details including a list of subnets, a list of security groups
-	// and a role to connect streams to instances.
+	// Endpoint security details including a list of subnets, a list of security
+	// groups and a role to connect streams to instances.
 	SecurityDetails *SecurityDetails
 
 	noSmithyDocumentSerde
@@ -616,8 +616,8 @@ type EphemerisItem struct {
 	// The AWS Ground Station ephemeris ID.
 	EphemerisId *string
 
-	// A name string associated with the ephemeris. Used as a human-readable identifier
-	// for the ephemeris.
+	// A name string associated with the ephemeris. Used as a human-readable
+	// identifier for the ephemeris.
 	Name *string
 
 	// Customer-provided priority score to establish the order in which overlapping
@@ -637,7 +637,7 @@ type EphemerisItem struct {
 // Metadata describing a particular ephemeris.
 type EphemerisMetaData struct {
 
-	// The EphemerisSource that generated a given ephemeris.
+	// The EphemerisSource  that generated a given ephemeris.
 	//
 	// This member is required.
 	Source EphemerisSource
@@ -650,9 +650,9 @@ type EphemerisMetaData struct {
 	// populated for customer-provided ephemerides.
 	Epoch *time.Time
 
-	// A name string associated with the ephemeris. Used as a human-readable identifier
-	// for the ephemeris. A name is only returned for customer-provider ephemerides
-	// that have a name associated.
+	// A name string associated with the ephemeris. Used as a human-readable
+	// identifier for the ephemeris. A name is only returned for customer-provider
+	// ephemerides that have a name associated.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -692,8 +692,8 @@ type Frequency struct {
 	// This member is required.
 	Units FrequencyUnits
 
-	// Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz
-	// for downlink and 2025 to 2120 MHz for uplink.
+	// Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400
+	// MHz for downlink and 2025 to 2120 MHz for uplink.
 	//
 	// This member is required.
 	Value *float64
@@ -711,12 +711,9 @@ type FrequencyBandwidth struct {
 
 	// Frequency bandwidth value. AWS Ground Station currently has the following
 	// bandwidth limitations:
-	// - For AntennaDownlinkDemodDecodeconfig, valid values are
-	// between 125 kHz to 650 MHz.
-	// - For AntennaDownlinkconfig, valid values are
-	// between 10 kHz to 54 MHz.
-	// - For AntennaUplinkConfig, valid values are between 10
-	// kHz to 54 MHz.
+	//     - For AntennaDownlinkDemodDecodeconfig , valid values are between 125 kHz to 650 MHz.
+	//     - For AntennaDownlinkconfig , valid values are between 10 kHz to 54 MHz.
+	//     - For AntennaUplinkConfig , valid values are between 10 kHz to 54 MHz.
 	//
 	// This member is required.
 	Value *float64
@@ -859,7 +856,7 @@ type S3Object struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an S3 recording Config.
+// Information about an S3 recording Config .
 type S3RecordingConfig struct {
 
 	// ARN of the bucket to record to.
@@ -878,7 +875,7 @@ type S3RecordingConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Details about an S3 recording Config used in a contact.
+// Details about an S3 recording Config  used in a contact.
 type S3RecordingDetails struct {
 
 	// ARN of the bucket used.
@@ -924,8 +921,8 @@ type SecurityDetails struct {
 	// This member is required.
 	SecurityGroupIds []string
 
-	// A list of subnets where AWS Ground Station places elastic network interfaces to
-	// send streams to your instances.
+	// A list of subnets where AWS Ground Station places elastic network interfaces
+	// to send streams to your instances.
 	//
 	// This member is required.
 	SubnetIds []string
@@ -952,14 +949,14 @@ type SocketAddress struct {
 // Dataflow details for the source side.
 type Source struct {
 
-	// Additional details for a Config, if type is dataflow-endpoint or
+	// Additional details for a Config , if type is dataflow-endpoint  or
 	// antenna-downlink-demod-decode
 	ConfigDetails ConfigDetails
 
-	// UUID of a Config.
+	// UUID of a Config .
 	ConfigId *string
 
-	// Type of a Config.
+	// Type of a Config .
 	ConfigType ConfigCapabilityType
 
 	// Region of a dataflow source.
@@ -968,29 +965,26 @@ type Source struct {
 	noSmithyDocumentSerde
 }
 
-// Object that describes a spectral Config.
+// Object that describes a spectral Config .
 type SpectrumConfig struct {
 
 	// Bandwidth of a spectral Config. AWS Ground Station currently has the following
 	// bandwidth limitations:
-	// - For AntennaDownlinkDemodDecodeconfig, valid values are
-	// between 125 kHz to 650 MHz.
-	// - For AntennaDownlinkconfig valid values are between
-	// 10 kHz to 54 MHz.
-	// - For AntennaUplinkConfig, valid values are between 10 kHz to
-	// 54 MHz.
+	//     - For AntennaDownlinkDemodDecodeconfig , valid values are between 125 kHz to 650 MHz.
+	//     - For AntennaDownlinkconfig valid values are between 10 kHz to 54 MHz.
+	//     - For AntennaUplinkConfig , valid values are between 10 kHz to 54 MHz.
 	//
 	// This member is required.
 	Bandwidth *FrequencyBandwidth
 
-	// Center frequency of a spectral Config. Valid values are between 2200 to 2300 MHz
-	// and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
+	// Center frequency of a spectral Config. Valid values are between 2200 to 2300
+	// MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
 	//
 	// This member is required.
 	CenterFrequency *Frequency
 
-	// Polarization of a spectral Config. Capturing both "RIGHT_HAND" and "LEFT_HAND"
-	// polarization requires two separate configs.
+	// Polarization of a spectral Config . Capturing both "RIGHT_HAND"  and
+	// "LEFT_HAND" polarization requires two separate configs.
 	Polarization Polarization
 
 	noSmithyDocumentSerde
@@ -1046,8 +1040,8 @@ type TLEEphemeris struct {
 	noSmithyDocumentSerde
 }
 
-// Object that determines whether tracking should be used during a contact executed
-// with this Config in the mission profile.
+// Object that determines whether tracking should be used during a contact
+// executed with this Config  in the mission profile.
 type TrackingConfig struct {
 
 	// Current setting for autotrack.
@@ -1058,17 +1052,17 @@ type TrackingConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an uplink echo Config. Parameters from the
-// AntennaUplinkConfig, corresponding to the specified AntennaUplinkConfigArn, are
-// used when this UplinkEchoConfig is used in a contact.
+// Information about an uplink echo Config . Parameters from the
+// AntennaUplinkConfig , corresponding to the specified AntennaUplinkConfigArn,
+// are used when this UplinkEchoConfig  is used in a contact.
 type UplinkEchoConfig struct {
 
-	// ARN of an uplink Config.
+	// ARN of an uplink Config .
 	//
 	// This member is required.
 	AntennaUplinkConfigArn *string
 
-	// Whether or not an uplink Config is enabled.
+	// Whether or not an uplink Config  is enabled.
 	//
 	// This member is required.
 	Enabled *bool
@@ -1076,16 +1070,16 @@ type UplinkEchoConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the uplink spectral Config.
+// Information about the uplink spectral Config .
 type UplinkSpectrumConfig struct {
 
-	// Center frequency of an uplink spectral Config. Valid values are between 2025 to
-	// 2120 MHz.
+	// Center frequency of an uplink spectral Config. Valid values are between 2025
+	// to 2120 MHz.
 	//
 	// This member is required.
 	CenterFrequency *Frequency
 
-	// Polarization of an uplink spectral Config. Capturing both "RIGHT_HAND" and
+	// Polarization of an uplink spectral Config . Capturing both "RIGHT_HAND"  and
 	// "LEFT_HAND" polarization requires two separate configs.
 	Polarization Polarization
 

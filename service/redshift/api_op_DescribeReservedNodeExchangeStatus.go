@@ -32,17 +32,17 @@ func (c *Client) DescribeReservedNodeExchangeStatus(ctx context.Context, params 
 type DescribeReservedNodeExchangeStatusInput struct {
 
 	// An optional pagination token provided by a previous
-	// DescribeReservedNodeExchangeStatus request. If this parameter is specified, the
+	// DescribeReservedNodeExchangeStatusrequest. If this parameter is specified, the
 	// response includes only records beyond the marker, up to the value specified by
 	// the MaxRecords parameter. You can retrieve the next set of response records by
 	// providing the returned marker value in the Marker parameter and retrying the
 	// request.
 	Marker *string
 
-	// The maximum number of response records to return in each call. If the number of
-	// remaining response records exceeds the specified MaxRecords value, a value is
-	// returned in a Marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value.
+	// The maximum number of response records to return in each call. If the number
+	// of remaining response records exceeds the specified MaxRecords value, a value
+	// is returned in a Marker field of the response. You can retrieve the next set
+	// of records by retrying the command with the returned marker value.
 	MaxRecords *int32
 
 	// The identifier of the reserved-node exchange request.
@@ -60,8 +60,8 @@ type DescribeReservedNodeExchangeStatusOutput struct {
 	// request.
 	Marker *string
 
-	// The details of the reserved-node exchange request, including the status, request
-	// time, source reserved-node identifier, and additional details.
+	// The details of the reserved-node exchange request, including the status,
+	// request time, source reserved-node identifier, and additional details.
 	ReservedNodeExchangeStatusDetails []types.ReservedNodeExchangeStatus
 
 	// Metadata pertaining to the operation's result.
@@ -138,17 +138,17 @@ type DescribeReservedNodeExchangeStatusAPIClient interface {
 
 var _ DescribeReservedNodeExchangeStatusAPIClient = (*Client)(nil)
 
-// DescribeReservedNodeExchangeStatusPaginatorOptions is the paginator options for
-// DescribeReservedNodeExchangeStatus
+// DescribeReservedNodeExchangeStatusPaginatorOptions is the paginator options
+// for DescribeReservedNodeExchangeStatus
 type DescribeReservedNodeExchangeStatusPaginatorOptions struct {
-	// The maximum number of response records to return in each call. If the number of
-	// remaining response records exceeds the specified MaxRecords value, a value is
-	// returned in a Marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value.
+	// The maximum number of response records to return in each call. If the number
+	// of remaining response records exceeds the specified MaxRecords value, a value
+	// is returned in a Marker field of the response. You can retrieve the next set
+	// of records by retrying the command with the returned marker value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

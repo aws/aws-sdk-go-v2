@@ -12,7 +12,7 @@ import (
 )
 
 // Sends email to a maximum of 50 users, inviting them to the specified Amazon
-// Chime Team account. Only Team account types are currently supported for this
+// Chime Team  account. Only Team account types are currently supported for this
 // action.
 func (c *Client) InviteUsers(ctx context.Context, params *InviteUsersInput, optFns ...func(*Options)) (*InviteUsersOutput, error) {
 	if params == nil {

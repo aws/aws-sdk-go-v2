@@ -15,8 +15,8 @@ import (
 // items to receive in the response. If the total number of items in the list
 // exceeds the maximum that you specify, or the default maximum, the response is
 // paginated. To get the next page of items, send a subsequent request that
-// specifies the NextMarker value from the current response as the Marker value in
-// the subsequent request.
+// specifies the NextMarker  value from the current response as the Marker value
+// in the subsequent request.
 func (c *Client) ListKeyGroups(ctx context.Context, params *ListKeyGroupsInput, optFns ...func(*Options)) (*ListKeyGroupsOutput, error) {
 	if params == nil {
 		params = &ListKeyGroupsInput{}
@@ -37,6 +37,7 @@ type ListKeyGroupsInput struct {
 	// Use this field when paginating results to indicate where to begin in your list
 	// of key groups. The response includes key groups in the list that occur after the
 	// marker. To get the next page of the list, set this field's value to the value of
+	//
 	// NextMarker from the current page's response.
 	Marker *string
 

@@ -20,10 +20,9 @@ import (
 // available through the token. If you are using CloudWatch cross-account
 // observability, you can use this operation in a monitoring account and view data
 // from the linked source accounts. For more information, see CloudWatch
-// cross-account observability
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html).
-// You can specify the log group to search by using either logGroupIdentifier or
-// logGroupName. You must include one of these two parameters, but you can't
+// cross-account observability (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html)
+// . You can specify the log group to search by using either logGroupIdentifier
+// or logGroupName. You must include one of these two parameters, but you can't
 // include both.
 func (c *Client) GetLogEvents(ctx context.Context, params *GetLogEventsInput, optFns ...func(*Options)) (*GetLogEventsOutput, error) {
 	if params == nil {
@@ -47,9 +46,9 @@ type GetLogEventsInput struct {
 	// This member is required.
 	LogStreamName *string
 
-	// The end of the time range, expressed as the number of milliseconds after Jan 1,
-	// 1970 00:00:00 UTC. Events with a timestamp equal to or later than this time are
-	// not included.
+	// The end of the time range, expressed as the number of milliseconds after Jan
+	// 1, 1970 00:00:00 UTC. Events with a timestamp equal to or later than this time
+	// are not included.
 	EndTime *int64
 
 	// The maximum number of log events returned. If you don't specify a limit, the
@@ -57,14 +56,14 @@ type GetLogEventsInput struct {
 	// 10,000 log events).
 	Limit *int32
 
-	// Specify either the name or ARN of the log group to view events from. If the log
-	// group is in a source account and you are using a monitoring account, you must
-	// use the log group ARN. You must include either logGroupIdentifier or
-	// logGroupName, but not both.
+	// Specify either the name or ARN of the log group to view events from. If the
+	// log group is in a source account and you are using a monitoring account, you
+	// must use the log group ARN. You must include either logGroupIdentifier  or
+	// logGroupName , but not both.
 	LogGroupIdentifier *string
 
-	// The name of the log group. You must include either logGroupIdentifier or
-	// logGroupName, but not both.
+	// The name of the log group. You must include either logGroupIdentifier  or
+	// logGroupName , but not both.
 	LogGroupName *string
 
 	// The token for the next set of items to return. (You received this token from a
@@ -73,8 +72,8 @@ type GetLogEventsInput struct {
 
 	// If the value is true, the earliest log events are returned first. If the value
 	// is false, the latest log events are returned first. The default value is false.
-	// If you are using a previous nextForwardToken value as the nextToken in this
-	// operation, you must specify true for startFromHead.
+	// If you are using a previous nextForwardToken  value as the nextToken in this
+	// operation, you must specify true  for startFromHead .
 	StartFromHead *bool
 
 	// The start of the time range, expressed as the number of milliseconds after Jan
@@ -85,7 +84,7 @@ type GetLogEventsInput struct {
 
 	// Specify true to display the log event fields with all sensitive data unmasked
 	// and visible. The default is false. To use this operation with this parameter,
-	// you must be signed into an account with the logs:Unmask permission.
+	// you must be signed into an account with the logs:Unmask  permission.
 	Unmask bool
 
 	noSmithyDocumentSerde
@@ -96,14 +95,14 @@ type GetLogEventsOutput struct {
 	// The events.
 	Events []types.OutputLogEvent
 
-	// The token for the next set of items in the backward direction. The token expires
-	// after 24 hours. This token is not null. If you have reached the end of the
-	// stream, it returns the same token you passed in.
+	// The token for the next set of items in the backward direction. The token
+	// expires after 24 hours. This token is not null. If you have reached the end of
+	// the stream, it returns the same token you passed in.
 	NextBackwardToken *string
 
-	// The token for the next set of items in the forward direction. The token expires
-	// after 24 hours. If you have reached the end of the stream, it returns the same
-	// token you passed in.
+	// The token for the next set of items in the forward direction. The token
+	// expires after 24 hours. If you have reached the end of the stream, it returns
+	// the same token you passed in.
 	NextForwardToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -189,8 +188,8 @@ type GetLogEventsPaginatorOptions struct {
 	// 10,000 log events).
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

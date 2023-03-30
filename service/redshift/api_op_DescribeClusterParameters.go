@@ -19,8 +19,7 @@ import (
 // parameters of only specific type. For example, to retrieve parameters that were
 // modified by a user action such as from ModifyClusterParameterGroup, you can
 // specify source equal to user. For more information about parameters and
-// parameter groups, go to Amazon Redshift Parameter Groups
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
+// parameter groups, go to Amazon Redshift Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) DescribeClusterParameters(ctx context.Context, params *DescribeClusterParametersInput, optFns ...func(*Options)) (*DescribeClusterParametersOutput, error) {
 	if params == nil {
@@ -45,30 +44,30 @@ type DescribeClusterParametersInput struct {
 	ParameterGroupName *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterParameters request exceed
-	// the value specified in MaxRecords, Amazon Web Services returns a value in the
-	// Marker field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// response records. When the results of a DescribeClusterParameters request
+	// exceed the value specified in MaxRecords, Amazon Web Services returns a value
+	// in the Marker field of the response. You can retrieve the next set of response
+	// records by providing the returned marker value in the Marker parameter and
+	// retrying the request.
 	Marker *string
 
-	// The maximum number of response records to return in each call. If the number of
-	// remaining response records exceeds the specified MaxRecords value, a value is
-	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// The maximum number of response records to return in each call. If the number
+	// of remaining response records exceeds the specified MaxRecords value, a value
+	// is returned in a marker field of the response. You can retrieve the next set
+	// of records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The parameter types to return. Specify user to show parameters that are
-	// different form the default. Similarly, specify engine-default to show parameters
-	// that are the same as the default parameter group. Default: All parameter types
-	// returned. Valid Values: user | engine-default
+	// different form the default. Similarly, specify engine-default to show
+	// parameters that are the same as the default parameter group. Default: All
+	// parameter types returned. Valid Values: user  | engine-default
 	Source *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the output from the DescribeClusterParameters action.
+// Contains the output from the DescribeClusterParameters  action.
 type DescribeClusterParametersOutput struct {
 
 	// A value that indicates the starting point for the next set of response records
@@ -78,8 +77,8 @@ type DescribeClusterParametersOutput struct {
 	// records have been retrieved for the request.
 	Marker *string
 
-	// A list of Parameter instances. Each instance lists the parameters of one cluster
-	// parameter group.
+	// A list of Parameter instances. Each instance lists the parameters of one
+	// cluster parameter group.
 	Parameters []types.Parameter
 
 	// Metadata pertaining to the operation's result.
@@ -162,15 +161,15 @@ var _ DescribeClusterParametersAPIClient = (*Client)(nil)
 // DescribeClusterParametersPaginatorOptions is the paginator options for
 // DescribeClusterParameters
 type DescribeClusterParametersPaginatorOptions struct {
-	// The maximum number of response records to return in each call. If the number of
-	// remaining response records exceeds the specified MaxRecords value, a value is
-	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// The maximum number of response records to return in each call. If the number
+	// of remaining response records exceeds the specified MaxRecords value, a value
+	// is returned in a marker field of the response. You can retrieve the next set
+	// of records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

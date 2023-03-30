@@ -36,12 +36,12 @@ type ListIpRoutesInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// Maximum number of items to return. If this value is zero, the maximum number of
-	// items is specified by the limitations of the operation.
+	// Maximum number of items to return. If this value is zero, the maximum number
+	// of items is specified by the limitations of the operation.
 	Limit *int32
 
-	// The ListIpRoutes.NextToken value from a previous call to ListIpRoutes. Pass null
-	// if this is the first call.
+	// The ListIpRoutes.NextToken value from a previous call to ListIpRoutes. Pass
+	// null if this is the first call.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,7 +49,7 @@ type ListIpRoutesInput struct {
 
 type ListIpRoutesOutput struct {
 
-	// A list of IpRoutes.
+	// A list of IpRoute s.
 	IpRoutesInfo []types.IpRouteInfo
 
 	// If not null, more results are available. Pass this value for the NextToken
@@ -135,12 +135,12 @@ var _ ListIpRoutesAPIClient = (*Client)(nil)
 
 // ListIpRoutesPaginatorOptions is the paginator options for ListIpRoutes
 type ListIpRoutesPaginatorOptions struct {
-	// Maximum number of items to return. If this value is zero, the maximum number of
-	// items is specified by the limitations of the operation.
+	// Maximum number of items to return. If this value is zero, the maximum number
+	// of items is specified by the limitations of the operation.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

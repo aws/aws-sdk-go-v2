@@ -13,13 +13,13 @@ import (
 
 // Sets the user interface (UI) customization information for a user pool's
 // built-in app UI. You can specify app UI customization settings for a single
-// client (with a specific clientId) or for all clients (by setting the clientId to
-// ALL). If you specify ALL, the default configuration is used for every client
-// that has no previously set UI customization. If you specify UI customization
-// settings for a particular client, it will no longer return to the ALL
-// configuration. To use this API, your user pool must have a domain associated
-// with it. Otherwise, there is no place to host the app's pages, and the service
-// will throw an error.
+// client (with a specific clientId ) or for all clients (by setting the clientId
+// to ALL ). If you specify ALL, the default configuration is used for every
+// client that has no previously set UI customization. If you specify UI
+// customization settings for a particular client, it will no longer return to the
+// ALLconfiguration. To use this API, your user pool must have a domain
+// associated with it. Otherwise, there is no place to host the app's pages, and
+// the service will throw an error.
 func (c *Client) SetUICustomization(ctx context.Context, params *SetUICustomizationInput, optFns ...func(*Options)) (*SetUICustomizationOutput, error) {
 	if params == nil {
 		params = &SetUICustomizationInput{}

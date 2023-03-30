@@ -17,7 +17,7 @@ import (
 // copy a product to the same Region or another Region. If you copy a product to
 // another account, you must first share the product in a portfolio using
 // CreatePortfolioShare. This operation is performed asynchronously. To track the
-// progress of the operation, use DescribeCopyProductStatus.
+// progress of the operation, use DescribeCopyProductStatus .
 func (c *Client) CopyProduct(ctx context.Context, params *CopyProductInput, optFns ...func(*Options)) (*CopyProductOutput, error) {
 	if params == nil {
 		params = &CopyProductInput{}
@@ -35,9 +35,9 @@ func (c *Client) CopyProduct(ctx context.Context, params *CopyProductInput, optF
 
 type CopyProductInput struct {
 
-	// A unique identifier that you provide to ensure idempotency. If multiple requests
-	// differ only by the idempotency token, the same response is returned for each
-	// repeated request.
+	// A unique identifier that you provide to ensure idempotency. If multiple
+	// requests differ only by the idempotency token, the same response is returned for
+	// each repeated request.
 	//
 	// This member is required.
 	IdempotencyToken *string
@@ -48,13 +48,13 @@ type CopyProductInput struct {
 	SourceProductArn *string
 
 	// The language code.
-	// - en - English (default)
-	// - jp - Japanese
-	// - zh - Chinese
+	//     - en - English (default)
+	//     - jp - Japanese
+	//     - zh - Chinese
 	AcceptLanguage *string
 
-	// The copy options. If the value is CopyTags, the tags from the source product are
-	// copied to the target product.
+	// The copy options. If the value is CopyTags, the tags from the source product
+	// are copied to the target product.
 	CopyOptions []types.CopyOption
 
 	// The identifiers of the provisioning artifacts (also known as versions) of the

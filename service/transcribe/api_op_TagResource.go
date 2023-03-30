@@ -13,8 +13,8 @@ import (
 
 // Adds one or more custom tags, each in the form of a key:value pair, to the
 // specified resource. To learn more about using tags with Amazon Transcribe, refer
-// to Tagging resources
-// (https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html).
+// to Tagging resources (https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html)
+// .
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -35,18 +35,18 @@ type TagResourceInput struct {
 	// The Amazon Resource Name (ARN) of the resource you want to tag. ARNs have the
 	// format arn:partition:service:region:account-id:resource-type/resource-id. For
 	// example,
-	// arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name.
-	// Valid values for resource-type are: transcription-job,
-	// medical-transcription-job, vocabulary, medical-vocabulary, vocabulary-filter,
-	// and language-model.
+	// arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name
+	// . Valid values for resource-type  are: transcription-job ,
+	// medical-transcription-job , vocabulary , medical-vocabulary , vocabulary-filter
+	// , and language-model .
 	//
 	// This member is required.
 	ResourceArn *string
 
 	// Adds one or more custom tags, each in the form of a key:value pair, to the
 	// specified resource. To learn more about using tags with Amazon Transcribe, refer
-	// to Tagging resources
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html).
+	// to Tagging resources (https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html)
+	// .
 	//
 	// This member is required.
 	Tags []types.Tag

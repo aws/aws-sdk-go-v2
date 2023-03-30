@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the integration status of services that are integrated with DevOps Guru
-// as Consumer via EventBridge. The one service that can be integrated with DevOps
-// Guru is Amazon CodeGuru Profiler, which can produce proactive recommendations
-// which can be stored and viewed in DevOps Guru.
+// Returns the integration status of services that are integrated with DevOps
+// Guru as Consumer via EventBridge. The one service that can be integrated with
+// DevOps Guru is Amazon CodeGuru Profiler, which can produce proactive
+// recommendations which can be stored and viewed in DevOps Guru.
 func (c *Client) DescribeEventSourcesConfig(ctx context.Context, params *DescribeEventSourcesConfigInput, optFns ...func(*Options)) (*DescribeEventSourcesConfigOutput, error) {
 	if params == nil {
 		params = &DescribeEventSourcesConfigInput{}

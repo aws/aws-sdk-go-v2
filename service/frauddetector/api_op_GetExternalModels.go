@@ -12,12 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the details for one or more Amazon SageMaker models that have been imported
-// into the service. This is a paginated API. If you provide a null maxResults,
-// this actions retrieves a maximum of 10 records per page. If you provide a
-// maxResults, the value must be between 5 and 10. To get the next page results,
-// provide the pagination token from the GetExternalModelsResult as part of your
-// request. A null pagination token fetches the records from the beginning.
+// Gets the details for one or more Amazon SageMaker models that have been
+// imported into the service. This is a paginated API. If you provide a null
+// maxResults, this actions retrieves a maximum of 10 records per page. If you
+// provide a maxResults, the value must be between 5 and 10. To get the next page
+// results, provide the pagination token from the GetExternalModelsResult as part
+// of your request. A null pagination token fetches the records from the beginning.
 func (c *Client) GetExternalModels(ctx context.Context, params *GetExternalModelsInput, optFns ...func(*Options)) (*GetExternalModelsOutput, error) {
 	if params == nil {
 		params = &GetExternalModelsInput{}
@@ -129,13 +129,14 @@ type GetExternalModelsAPIClient interface {
 
 var _ GetExternalModelsAPIClient = (*Client)(nil)
 
-// GetExternalModelsPaginatorOptions is the paginator options for GetExternalModels
+// GetExternalModelsPaginatorOptions is the paginator options for
+// GetExternalModels
 type GetExternalModelsPaginatorOptions struct {
 	// The maximum number of objects to return for the request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

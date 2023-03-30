@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Evidently launch. The feature used for the launch is not deleted. To
-// stop a launch without deleting it, use StopLaunch
-// (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_StopLaunch.html).
+// Deletes an Evidently launch. The feature used for the launch is not deleted.
+// To stop a launch without deleting it, use StopLaunch (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_StopLaunch.html)
+// .
 func (c *Client) DeleteLaunch(ctx context.Context, params *DeleteLaunchInput, optFns ...func(*Options)) (*DeleteLaunchOutput, error) {
 	if params == nil {
 		params = &DeleteLaunchInput{}

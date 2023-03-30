@@ -40,8 +40,8 @@ type UpdateAssessmentTargetInput struct {
 	// This member is required.
 	AssessmentTargetName *string
 
-	// The ARN of the resource group that is used to specify the new resource group to
-	// associate with the assessment target.
+	// The ARN of the resource group that is used to specify the new resource group
+	// to associate with the assessment target.
 	ResourceGroupArn *string
 
 	noSmithyDocumentSerde

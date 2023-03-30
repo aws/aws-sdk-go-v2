@@ -15,8 +15,8 @@ import (
 // Returns the list of event trackers associated with the account. The response
 // provides the properties for each event tracker, including the Amazon Resource
 // Name (ARN) and tracking ID. For more information on event trackers, see
-// CreateEventTracker
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html).
+// CreateEventTracker (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html)
+// .
 func (c *Client) ListEventTrackers(ctx context.Context, params *ListEventTrackersInput, optFns ...func(*Options)) (*ListEventTrackersOutput, error) {
 	if params == nil {
 		params = &ListEventTrackersInput{}
@@ -129,13 +129,14 @@ type ListEventTrackersAPIClient interface {
 
 var _ ListEventTrackersAPIClient = (*Client)(nil)
 
-// ListEventTrackersPaginatorOptions is the paginator options for ListEventTrackers
+// ListEventTrackersPaginatorOptions is the paginator options for
+// ListEventTrackers
 type ListEventTrackersPaginatorOptions struct {
 	// The maximum number of event trackers to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

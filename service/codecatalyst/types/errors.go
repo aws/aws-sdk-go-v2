@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The request was denied because you don't have sufficient access to perform this
-// action. Verify that you are a member of a role that allows this action.
+// The request was denied because you don't have sufficient access to perform
+// this action. Verify that you are a member of a role that allows this action.
 type AccessDeniedException struct {
 	Message *string
 
@@ -63,8 +63,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was denied because the specified resource was not found. Verify that
-// the spelling is correct and that you have access to the resource.
+// The request was denied because the specified resource was not found. Verify
+// that the spelling is correct and that you have access to the resource.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -90,9 +90,9 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was denied because one or more resources has reached its limits for
-// the tier the space belongs to. Either reduce the number of resources, or change
-// the tier if applicable.
+// The request was denied because one or more resources has reached its limits
+// for the tier the space belongs to. Either reduce the number of resources, or
+// change the tier if applicable.
 type ServiceQuotaExceededException struct {
 	Message *string
 

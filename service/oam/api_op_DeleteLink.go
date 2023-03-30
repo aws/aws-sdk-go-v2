@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a link between a monitoring account sink and a source account. You must
-// run this operation in the source account.
+// Deletes a link between a monitoring account sink and a source account. You
+// must run this operation in the source account.
 func (c *Client) DeleteLink(ctx context.Context, params *DeleteLinkInput, optFns ...func(*Options)) (*DeleteLinkOutput, error) {
 	if params == nil {
 		params = &DeleteLinkInput{}

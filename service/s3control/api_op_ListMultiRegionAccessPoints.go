@@ -21,21 +21,13 @@ import (
 // that can be associated with a single account. This action will always be routed
 // to the US West (Oregon) Region. For more information about the restrictions
 // around managing Multi-Region Access Points, see Managing Multi-Region Access
-// Points
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
+// Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
 // in the Amazon S3 User Guide. The following actions are related to
-// ListMultiRegionAccessPoint:
-// - CreateMultiRegionAccessPoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html)
-// -
-// DeleteMultiRegionAccessPoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html)
-// -
-// DescribeMultiRegionAccessPointOperation
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html)
-// -
-// GetMultiRegionAccessPoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html)
+// ListMultiRegionAccessPoint :
+//   - CreateMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html)
+//   - DeleteMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html)
+//   - DescribeMultiRegionAccessPointOperation (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html)
+//   - GetMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html)
 func (c *Client) ListMultiRegionAccessPoints(ctx context.Context, params *ListMultiRegionAccessPointsInput, optFns ...func(*Options)) (*ListMultiRegionAccessPointsOutput, error) {
 	if params == nil {
 		params = &ListMultiRegionAccessPointsInput{}
@@ -73,10 +65,10 @@ type ListMultiRegionAccessPointsOutput struct {
 	// The list of Multi-Region Access Points associated with the user.
 	AccessPoints []types.MultiRegionAccessPointReport
 
-	// If the specified bucket has more Multi-Region Access Points than can be returned
-	// in one call to this action, this field contains a continuation token. You can
-	// use this token tin subsequent calls to this action to retrieve additional
-	// Multi-Region Access Points.
+	// If the specified bucket has more Multi-Region Access Points than can be
+	// returned in one call to this action, this field contains a continuation token.
+	// You can use this token tin subsequent calls to this action to retrieve
+	// additional Multi-Region Access Points.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -215,8 +207,8 @@ type ListMultiRegionAccessPointsPaginatorOptions struct {
 	// Not currently used. Do not use this parameter.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

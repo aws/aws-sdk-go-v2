@@ -27,7 +27,7 @@ func (c *Client) GetSnapshotLimits(ctx context.Context, params *GetSnapshotLimit
 	return out, nil
 }
 
-// Contains the inputs for the GetSnapshotLimits operation.
+// Contains the inputs for the GetSnapshotLimits  operation.
 type GetSnapshotLimitsInput struct {
 
 	// Contains the identifier of the directory to obtain the limits for.
@@ -38,7 +38,7 @@ type GetSnapshotLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the results of the GetSnapshotLimits operation.
+// Contains the results of the GetSnapshotLimits  operation.
 type GetSnapshotLimitsOutput struct {
 
 	// A SnapshotLimits object that contains the manual snapshot limits for the

@@ -10,19 +10,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Evaluation of an MLModel. An MLModel is evaluated on a set of
-// observations associated to a DataSource. Like a DataSource for an MLModel, the
-// DataSource for an Evaluation contains values for the Target Variable. The
-// Evaluation compares the predicted result for each observation to the actual
-// outcome and provides a summary so that you know how effective the MLModel
-// functions on the test data. Evaluation generates a relevant performance metric,
-// such as BinaryAUC, RegressionRMSE or MulticlassAvgFScore based on the
-// corresponding MLModelType: BINARY, REGRESSION or MULTICLASS. CreateEvaluation is
-// an asynchronous operation. In response to CreateEvaluation, Amazon Machine
-// Learning (Amazon ML) immediately returns and sets the evaluation status to
-// PENDING. After the Evaluation is created and ready for use, Amazon ML sets the
-// status to COMPLETED. You can use the GetEvaluation operation to check progress
-// of the evaluation during the creation operation.
+// Creates a new Evaluation  of an MLModel . An MLModel is evaluated on a set of
+// observations associated to a DataSource . Like a DataSource  for an MLModel,
+// the DataSource  for an Evaluation  contains values for the Target Variable.
+// The Evaluation compares the predicted result for each observation to the
+// actual outcome and provides a summary so that you know how effective the
+// MLModelfunctions on the test data. Evaluation generates a relevant performance
+// metric, such as BinaryAUC, RegressionRMSE or MulticlassAvgFScore based on the
+// corresponding MLModelType : BINARY , REGRESSION  or MULTICLASS .
+// CreateEvaluation is an asynchronous operation. In response to CreateEvaluation
+// , Amazon Machine Learning (Amazon ML) immediately returns and sets the
+// evaluation status to PENDING . After the Evaluation is created and ready for
+// use, Amazon ML sets the status to COMPLETED . You can use the GetEvaluation
+// operation to check progress of the evaluation during the creation operation.
 func (c *Client) CreateEvaluation(ctx context.Context, params *CreateEvaluationInput, optFns ...func(*Options)) (*CreateEvaluationOutput, error) {
 	if params == nil {
 		params = &CreateEvaluationInput{}
@@ -40,37 +40,37 @@ func (c *Client) CreateEvaluation(ctx context.Context, params *CreateEvaluationI
 
 type CreateEvaluationInput struct {
 
-	// The ID of the DataSource for the evaluation. The schema of the DataSource must
-	// match the schema used to create the MLModel.
+	// The ID of the DataSource  for the evaluation. The schema of the DataSource
+	// must match the schema used to create the MLModel .
 	//
 	// This member is required.
 	EvaluationDataSourceId *string
 
-	// A user-supplied ID that uniquely identifies the Evaluation.
+	// A user-supplied ID that uniquely identifies the Evaluation .
 	//
 	// This member is required.
 	EvaluationId *string
 
-	// The ID of the MLModel to evaluate. The schema used in creating the MLModel must
-	// match the schema of the DataSource used in the Evaluation.
+	// The ID of the MLModel  to evaluate. The schema used in creating the MLModel
+	// must match the schema of the DataSource  used in the Evaluation .
 	//
 	// This member is required.
 	MLModelId *string
 
-	// A user-supplied name or description of the Evaluation.
+	// A user-supplied name or description of the Evaluation .
 	EvaluationName *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a CreateEvaluation operation, and is an acknowledgement
-// that Amazon ML received the request. CreateEvaluation operation is asynchronous.
-// You can poll for status updates by using the GetEvcaluation operation and
-// checking the Status parameter.
+// Represents the output of a CreateEvaluation operation, and is an
+// acknowledgement that Amazon ML received the request. CreateEvaluation
+// operation is asynchronous. You can poll for status updates by using the
+// GetEvcaluation operation and checking the Status  parameter.
 type CreateEvaluationOutput struct {
 
-	// The user-supplied ID that uniquely identifies the Evaluation. This value should
-	// be identical to the value of the EvaluationId in the request.
+	// The user-supplied ID that uniquely identifies the Evaluation. This value
+	// should be identical to the value of the EvaluationId  in the request.
 	EvaluationId *string
 
 	// Metadata pertaining to the operation's result.

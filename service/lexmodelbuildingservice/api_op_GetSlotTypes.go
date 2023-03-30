@@ -13,14 +13,10 @@ import (
 )
 
 // Returns slot type information as follows:
-// - If you specify the nameContains
-// field, returns the $LATEST version of all slot types that contain the specified
-// string.
-// - If you don't specify the nameContains field, returns information about
-// the $LATEST version of all slot types.
+//   - If you specify the nameContains field, returns the $LATEST version of all slot types that contain the specified string.
+//   - If you don't specify the nameContains field, returns information about the $LATEST version of all slot types.
 //
-// The operation requires permission for
-// the lex:GetSlotTypes action.
+// The operation requires permission for the lex:GetSlotTypes  action.
 func (c *Client) GetSlotTypes(ctx context.Context, params *GetSlotTypesInput, optFns ...func(*Options)) (*GetSlotTypesOutput, error) {
 	if params == nil {
 		params = &GetSlotTypesInput{}
@@ -41,13 +37,13 @@ type GetSlotTypesInput struct {
 	// The maximum number of slot types to return in the response. The default is 10.
 	MaxResults *int32
 
-	// Substring to match in slot type names. A slot type will be returned if any part
-	// of its name matches the substring. For example, "xyz" matches both "xyzabc" and
-	// "abcxyz."
+	// Substring to match in slot type names. A slot type will be returned if any
+	// part of its name matches the substring. For example, "xyz" matches both "xyzabc"
+	// and "abcxyz."
 	NameContains *string
 
-	// A pagination token that fetches the next page of slot types. If the response to
-	// this API call is truncated, Amazon Lex returns a pagination token in the
+	// A pagination token that fetches the next page of slot types. If the response
+	// to this API call is truncated, Amazon Lex returns a pagination token in the
 	// response. To fetch next page of slot types, specify the pagination token in the
 	// next request.
 	NextToken *string
@@ -143,8 +139,8 @@ type GetSlotTypesPaginatorOptions struct {
 	// The maximum number of slot types to return in the response. The default is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

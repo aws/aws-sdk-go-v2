@@ -12,14 +12,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists custom tape pools. You specify custom tape pools to list by specifying one
-// or more custom tape pool Amazon Resource Names (ARNs). If you don't specify a
-// custom tape pool ARN, the operation lists all custom tape pools. This operation
-// supports pagination. You can optionally specify the Limit parameter in the body
-// to limit the number of tape pools in the response. If the number of tape pools
-// returned in the response is truncated, the response includes a Marker element
-// that you can use in your subsequent request to retrieve the next set of tape
-// pools.
+// Lists custom tape pools. You specify custom tape pools to list by specifying
+// one or more custom tape pool Amazon Resource Names (ARNs). If you don't specify
+// a custom tape pool ARN, the operation lists all custom tape pools. This
+// operation supports pagination. You can optionally specify the Limit parameter
+// in the body to limit the number of tape pools in the response. If the number of
+// tape pools returned in the response is truncated, the response includes a
+// Markerelement that you can use in your subsequent request to retrieve the next
+// set of tape pools.
 func (c *Client) ListTapePools(ctx context.Context, params *ListTapePoolsInput, optFns ...func(*Options)) (*ListTapePoolsOutput, error) {
 	if params == nil {
 		params = &ListTapePoolsInput{}
@@ -40,8 +40,8 @@ type ListTapePoolsInput struct {
 	// An optional number limit for the tape pools in the list returned by this call.
 	Limit *int32
 
-	// A string that indicates the position at which to begin the returned list of tape
-	// pools.
+	// A string that indicates the position at which to begin the returned list of
+	// tape pools.
 	Marker *string
 
 	// The Amazon Resource Name (ARN) of each of the custom tape pools you want to
@@ -54,14 +54,14 @@ type ListTapePoolsInput struct {
 
 type ListTapePoolsOutput struct {
 
-	// A string that indicates the position at which to begin the returned list of tape
-	// pools. Use the marker in your next request to continue pagination of tape pools.
-	// If there are no more tape pools to list, this element does not appear in the
-	// response body.
+	// A string that indicates the position at which to begin the returned list of
+	// tape pools. Use the marker in your next request to continue pagination of tape
+	// pools. If there are no more tape pools to list, this element does not appear in
+	// the response body.
 	Marker *string
 
 	// An array of PoolInfo objects, where each object describes a single custom tape
-	// pool. If there are no custom tape pools, the PoolInfos is an empty array.
+	// pool. If there are no custom tape pools, the PoolInfos  is an empty array.
 	PoolInfos []types.PoolInfo
 
 	// Metadata pertaining to the operation's result.
@@ -142,8 +142,8 @@ type ListTapePoolsPaginatorOptions struct {
 	// An optional number limit for the tape pools in the list returned by this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

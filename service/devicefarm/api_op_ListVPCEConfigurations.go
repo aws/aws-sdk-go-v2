@@ -30,12 +30,12 @@ func (c *Client) ListVPCEConfigurations(ctx context.Context, params *ListVPCECon
 
 type ListVPCEConfigurationsInput struct {
 
-	// An integer that specifies the maximum number of items you want to return in the
-	// API response.
+	// An integer that specifies the maximum number of items you want to return in
+	// the API response.
 	MaxResults *int32
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation,
+	// which can be used to return the next set of items in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -43,8 +43,8 @@ type ListVPCEConfigurationsInput struct {
 
 type ListVPCEConfigurationsOutput struct {
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation,
+	// which can be used to return the next set of items in the list.
 	NextToken *string
 
 	// An array of VPCEConfiguration objects that contain information about your VPC

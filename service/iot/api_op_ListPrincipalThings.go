@@ -13,8 +13,7 @@ import (
 
 // Lists the things associated with the specified principal. A principal can be
 // X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or
-// federated identities. Requires permission to access the ListPrincipalThings
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// federated identities. Requires permission to access the ListPrincipalThings (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListPrincipalThings(ctx context.Context, params *ListPrincipalThingsInput, optFns ...func(*Options)) (*ListPrincipalThingsOutput, error) {
 	if params == nil {
@@ -128,8 +127,8 @@ func (c *Client) addOperationListPrincipalThingsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListPrincipalThingsAPIClient is a client that implements the ListPrincipalThings
-// operation.
+// ListPrincipalThingsAPIClient is a client that implements the
+// ListPrincipalThings operation.
 type ListPrincipalThingsAPIClient interface {
 	ListPrincipalThings(context.Context, *ListPrincipalThingsInput, ...func(*Options)) (*ListPrincipalThingsOutput, error)
 }
@@ -142,8 +141,8 @@ type ListPrincipalThingsPaginatorOptions struct {
 	// The maximum number of results to return in this operation.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

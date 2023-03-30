@@ -46,8 +46,8 @@ type ListContactsInput struct {
 	// The number of contacts that may be returned at once, which is dependent on if
 	// there are more or less contacts than the value of the PageSize. Use this
 	// parameter to paginate results. If additional contacts exist beyond the specified
-	// limit, the NextToken element is sent in the response. Use the NextToken value in
-	// subsequent requests to retrieve additional contacts.
+	// limit, the NextToken  element is sent in the response. Use the NextToken value
+	// in subsequent requests to retrieve additional contacts.
 	PageSize *int32
 
 	noSmithyDocumentSerde
@@ -144,12 +144,12 @@ type ListContactsPaginatorOptions struct {
 	// The number of contacts that may be returned at once, which is dependent on if
 	// there are more or less contacts than the value of the PageSize. Use this
 	// parameter to paginate results. If additional contacts exist beyond the specified
-	// limit, the NextToken element is sent in the response. Use the NextToken value in
-	// subsequent requests to retrieve additional contacts.
+	// limit, the NextToken  element is sent in the response. Use the NextToken value
+	// in subsequent requests to retrieve additional contacts.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

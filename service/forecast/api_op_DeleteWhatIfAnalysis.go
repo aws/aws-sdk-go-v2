@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a what-if analysis created using the CreateWhatIfAnalysis operation. You
-// can delete only what-if analyses that have a status of ACTIVE or CREATE_FAILED.
-// To get the status, use the DescribeWhatIfAnalysis operation. You can't delete a
-// what-if analysis while any of its forecasts are being exported.
+// Deletes a what-if analysis created using the CreateWhatIfAnalysis operation.
+// You can delete only what-if analyses that have a status of ACTIVE  or
+// CREATE_FAILED . To get the status, use the DescribeWhatIfAnalysis operation.
+// You can't delete a what-if analysis while any of its forecasts are being
+// exported.
 func (c *Client) DeleteWhatIfAnalysis(ctx context.Context, params *DeleteWhatIfAnalysisInput, optFns ...func(*Options)) (*DeleteWhatIfAnalysisOutput, error) {
 	if params == nil {
 		params = &DeleteWhatIfAnalysisInput{}

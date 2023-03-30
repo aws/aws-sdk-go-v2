@@ -27,7 +27,7 @@ func (c *Client) PutActionRevision(ctx context.Context, params *PutActionRevisio
 	return out, nil
 }
 
-// Represents the input of a PutActionRevision action.
+// Represents the input of a PutActionRevision  action.
 type PutActionRevisionInput struct {
 
 	// The name of the action that processes the revision.
@@ -53,7 +53,7 @@ type PutActionRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a PutActionRevision action.
+// Represents the output of a PutActionRevision  action.
 type PutActionRevisionOutput struct {
 
 	// Indicates whether the artifact revision was previously used in an execution of

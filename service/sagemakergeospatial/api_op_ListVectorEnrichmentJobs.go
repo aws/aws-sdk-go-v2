@@ -41,7 +41,7 @@ type ListVectorEnrichmentJobsInput struct {
 	SortBy *string
 
 	// An optional value that specifies whether you want the results sorted in
-	// Ascending or Descending order.
+	// Ascending or Descending  order.
 	SortOrder types.SortOrder
 
 	// A filter that retrieves only jobs with a specific status.
@@ -138,8 +138,8 @@ var _ ListVectorEnrichmentJobsAPIClient = (*Client)(nil)
 // ListVectorEnrichmentJobsPaginatorOptions is the paginator options for
 // ListVectorEnrichmentJobs
 type ListVectorEnrichmentJobsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

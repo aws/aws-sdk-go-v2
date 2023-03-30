@@ -137,9 +137,9 @@ type ServiceCreatedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ServiceCreatedWaiter will use default max delay of 4999 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ServiceCreatedWaiter will use default max delay of 4999 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -179,9 +179,9 @@ func NewServiceCreatedWaiter(client GetServiceAPIClient, optFns ...func(*Service
 	}
 }
 
-// Wait calls the waiter function for ServiceCreated waiter. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// Wait calls the waiter function for ServiceCreated waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *ServiceCreatedWaiter) Wait(ctx context.Context, params *GetServiceInput, maxWaitDur time.Duration, optFns ...func(*ServiceCreatedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -348,9 +348,9 @@ type ServiceUpdatedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ServiceUpdatedWaiter will use default max delay of 4999 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ServiceUpdatedWaiter will use default max delay of 4999 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -390,9 +390,9 @@ func NewServiceUpdatedWaiter(client GetServiceAPIClient, optFns ...func(*Service
 	}
 }
 
-// Wait calls the waiter function for ServiceUpdated waiter. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// Wait calls the waiter function for ServiceUpdated waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *ServiceUpdatedWaiter) Wait(ctx context.Context, params *GetServiceInput, maxWaitDur time.Duration, optFns ...func(*ServiceUpdatedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -576,9 +576,9 @@ type ServiceDeletedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ServiceDeletedWaiter will use default max delay of 4999 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ServiceDeletedWaiter will use default max delay of 4999 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -618,9 +618,9 @@ func NewServiceDeletedWaiter(client GetServiceAPIClient, optFns ...func(*Service
 	}
 }
 
-// Wait calls the waiter function for ServiceDeleted waiter. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// Wait calls the waiter function for ServiceDeleted waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *ServiceDeletedWaiter) Wait(ctx context.Context, params *GetServiceInput, maxWaitDur time.Duration, optFns ...func(*ServiceDeletedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -744,8 +744,8 @@ type ServicePipelineDeployedWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ServicePipelineDeployedWaiter will use default max delay of 3600
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ServicePipelineDeployedWaiter will use default max delay of 3600
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration

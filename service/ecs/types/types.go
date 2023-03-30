@@ -18,11 +18,11 @@ type Attachment struct {
 	// The unique identifier for the attachment.
 	Id *string
 
-	// The status of the attachment. Valid values are PRECREATED, CREATED, ATTACHING,
-	// ATTACHED, DETACHING, DETACHED, DELETED, and FAILED.
+	// The status of the attachment. Valid values are PRECREATED , CREATED , ATTACHING
+	// , ATTACHED , DETACHING , DETACHED , DELETED , and FAILED .
 	Status *string
 
-	// The type of the attachment, such as ElasticNetworkInterface.
+	// The type of the attachment, such as ElasticNetworkInterface .
 	Type *string
 
 	noSmithyDocumentSerde
@@ -46,8 +46,7 @@ type AttachmentStateChange struct {
 
 // An attribute is a name-value pair that's associated with an Amazon ECS object.
 // Use attributes to extend the Amazon ECS data model by adding custom metadata to
-// your resources. For more information, see Attributes
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes)
+// your resources. For more information, see Attributes (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes)
 // in the Amazon Elastic Container Service Developer Guide.
 type Attribute struct {
 
@@ -62,14 +61,14 @@ type Attribute struct {
 	// full Amazon Resource Name (ARN).
 	TargetId *string
 
-	// The type of the target to attach the attribute with. This parameter is required
-	// if you use the short form ID for a resource instead of the full ARN.
+	// The type of the target to attach the attribute with. This parameter is
+	// required if you use the short form ID for a resource instead of the full ARN.
 	TargetType TargetType
 
-	// The value of the attribute. The value must contain between 1 and 128 characters.
-	// It can contain letters (uppercase and lowercase), numbers, hyphens (-),
-	// underscores (_), periods (.), at signs (@), forward slashes (/), back slashes
-	// (\), colons (:), or spaces. The value can't start or end with a space.
+	// The value of the attribute. The value must contain between 1 and 128
+	// characters. It can contain letters (uppercase and lowercase), numbers, hyphens
+	// (-), underscores (_), periods (.), at signs (@), forward slashes (/), back
+	// slashes (\), colons (:), or spaces. The value can't start or end with a space.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -94,8 +93,7 @@ type AutoScalingGroupProvider struct {
 	// prevents the Amazon EC2 instances in an Auto Scaling group that contain tasks
 	// from being terminated during a scale-in action. The Auto Scaling group and each
 	// instance in the Auto Scaling group must have instance protection from scale-in
-	// actions enabled as well. For more information, see Instance Protection
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection)
+	// actions enabled as well. For more information, see Instance Protection (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection)
 	// in the Auto Scaling User Guide. When managed termination protection is off, your
 	// Amazon EC2 instances aren't protected from termination when the Auto Scaling
 	// group scales in.
@@ -118,8 +116,7 @@ type AutoScalingGroupProviderUpdate struct {
 	// instances in an Auto Scaling group that contain tasks from being terminated
 	// during a scale-in action. The Auto Scaling group and each instance in the Auto
 	// Scaling group must have instance protection from scale-in actions on. For more
-	// information, see Instance Protection
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection)
+	// information, see Instance Protection (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection)
 	// in the Auto Scaling User Guide. When managed termination protection is off, your
 	// Amazon EC2 instances aren't protected from termination when the Auto Scaling
 	// group scales in.
@@ -132,20 +129,20 @@ type AutoScalingGroupProviderUpdate struct {
 type AwsVpcConfiguration struct {
 
 	// The IDs of the subnets associated with the task or service. There's a limit of
-	// 16 subnets that can be specified per AwsVpcConfiguration. All specified subnets
-	// must be from the same VPC.
+	// 16 subnets that can be specified per AwsVpcConfiguration. All specified
+	// subnets must be from the same VPC.
 	//
 	// This member is required.
 	Subnets []string
 
 	// Whether the task's elastic network interface receives a public IP address. The
-	// default value is DISABLED.
+	// default value is DISABLED .
 	AssignPublicIp AssignPublicIp
 
-	// The IDs of the security groups associated with the task or service. If you don't
-	// specify a security group, the default security group for the VPC is used.
+	// The IDs of the security groups associated with the task or service. If you
+	// don't specify a security group, the default security group for the VPC is used.
 	// There's a limit of 5 security groups that can be specified per
-	// AwsVpcConfiguration. All specified security groups must be from the same VPC.
+	// AwsVpcConfiguration . All specified security groups must be from the same VPC.
 	SecurityGroups []string
 
 	noSmithyDocumentSerde
@@ -164,61 +161,51 @@ type CapacityProvider struct {
 	Name *string
 
 	// The current status of the capacity provider. Only capacity providers in an
-	// ACTIVE state can be used in a cluster. When a capacity provider is successfully
-	// deleted, it has an INACTIVE status.
+	// ACTIVEstate can be used in a cluster. When a capacity provider is successfully
+	// deleted, it has an INACTIVE  status.
 	Status CapacityProviderStatus
 
-	// The metadata that you apply to the capacity provider to help you categorize and
-	// organize it. Each tag consists of a key and an optional value. You define both.
-	// The following basic restrictions apply to tags:
-	// - Maximum number of tags per
-	// resource - 50
-	// - For each resource, each tag key must be unique, and each tag key
-	// can have only one value.
-	// - Maximum key length - 128 Unicode characters in
-	// UTF-8
-	// - Maximum value length - 256 Unicode characters in UTF-8
-	// - If your tagging
-	// schema is used across multiple services and resources, remember that other
-	// services may have restrictions on allowed characters. Generally allowed
-	// characters are: letters, numbers, and spaces representable in UTF-8, and the
-	// following characters: + - = . _ : / @.
-	// - Tag keys and values are
-	// case-sensitive.
-	// - Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for either keys or values as it is reserved for Amazon Web
-	// Services use. You cannot edit or delete tag keys or values with this prefix.
-	// Tags with this prefix do not count against your tags per resource limit.
+	// The metadata that you apply to the capacity provider to help you categorize
+	// and organize it. Each tag consists of a key and an optional value. You define
+	// both. The following basic restrictions apply to tags:
+	//     - Maximum number of tags per resource - 50
+	//     - For each resource, each tag key must be unique, and each tag key can have only one value.
+	//     - Maximum key length - 128 Unicode characters in UTF-8
+	//     - Maximum value length - 256 Unicode characters in UTF-8
+	//     - If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
+	//     - Tag keys and values are case-sensitive.
+	//     - Do not use aws: , AWS: , or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.
 	Tags []Tag
 
 	// The update status of the capacity provider. The following are the possible
 	// states that is returned. DELETE_IN_PROGRESS The capacity provider is in the
 	// process of being deleted. DELETE_COMPLETE The capacity provider was successfully
-	// deleted and has an INACTIVE status. DELETE_FAILED The capacity provider can't be
-	// deleted. The update status reason provides further details about why the delete
-	// failed.
+	// deleted and has an INACTIVE status. DELETE_FAILED The capacity provider can't
+	// be deleted. The update status reason provides further details about why the
+	// delete failed.
 	UpdateStatus CapacityProviderUpdateStatus
 
-	// The update status reason. This provides further details about the update status
-	// for the capacity provider.
+	// The update status reason. This provides further details about the update
+	// status for the capacity provider.
 	UpdateStatusReason *string
 
 	noSmithyDocumentSerde
 }
 
-// The details of a capacity provider strategy. A capacity provider strategy can be
-// set when using the RunTask or CreateCluster APIs or as the default capacity
-// provider strategy for a cluster with the CreateCluster API. Only capacity
-// providers that are already associated with a cluster and have an ACTIVE or
-// UPDATING status can be used in a capacity provider strategy. The
-// PutClusterCapacityProviders API is used to associate a capacity provider with a
+// The details of a capacity provider strategy. A capacity provider strategy can
+// be set when using the RunTask  or CreateCluster APIs or as the default
+// capacity provider strategy for a cluster with the CreateCluster API. Only
+// capacity providers that are already associated with a cluster and have an
+// ACTIVE or UPDATING  status can be used in a capacity provider strategy. The
+// PutClusterCapacityProvidersAPI is used to associate a capacity provider with a
 // cluster. If specifying a capacity provider that uses an Auto Scaling group, the
 // capacity provider must already be created. New Auto Scaling group capacity
-// providers can be created with the CreateCapacityProvider API operation. To use a
-// Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT capacity
-// providers. The Fargate capacity providers are available to all accounts and only
-// need to be associated with a cluster to be used in a capacity provider strategy.
-// A capacity provider strategy may contain a maximum of 6 capacity providers.
+// providers can be created with the CreateCapacityProvider API operation. To use
+// a Fargate capacity provider, specify either the FARGATE  or FARGATE_SPOT
+// capacity providers. The Fargate capacity providers are available to all accounts
+// and only need to be associated with a cluster to be used in a capacity provider
+// strategy. A capacity provider strategy may contain a maximum of 6 capacity
+// providers.
 type CapacityProviderStrategyItem struct {
 
 	// The short name of the capacity provider.
@@ -226,27 +213,29 @@ type CapacityProviderStrategyItem struct {
 	// This member is required.
 	CapacityProvider *string
 
-	// The base value designates how many tasks, at a minimum, to run on the specified
-	// capacity provider. Only one capacity provider in a capacity provider strategy
-	// can have a base defined. If no value is specified, the default value of 0 is
-	// used.
+	// The base value designates how many tasks, at a minimum, to run on the
+	// specified capacity provider. Only one capacity provider in a capacity provider
+	// strategy can have a base defined. If no value is specified, the default value of
+	//
+	// 0 is used.
 	Base int32
 
-	// The weight value designates the relative percentage of the total number of tasks
-	// launched that should use the specified capacity provider. The weight value is
-	// taken into consideration after the base value, if defined, is satisfied. If no
-	// weight value is specified, the default value of 0 is used. When multiple
-	// capacity providers are specified within a capacity provider strategy, at least
-	// one of the capacity providers must have a weight value greater than zero and any
-	// capacity providers with a weight of 0 can't be used to place tasks. If you
-	// specify multiple capacity providers in a strategy that all have a weight of 0,
-	// any RunTask or CreateService actions using the capacity provider strategy will
-	// fail. An example scenario for using weights is defining a strategy that contains
-	// two capacity providers and both have a weight of 1, then when the base is
-	// satisfied, the tasks will be split evenly across the two capacity providers.
-	// Using that same logic, if you specify a weight of 1 for capacityProviderA and a
-	// weight of 4 for capacityProviderB, then for every one task that's run using
-	// capacityProviderA, four tasks would use capacityProviderB.
+	// The weight value designates the relative percentage of the total number of
+	// tasks launched that should use the specified capacity provider. The weight
+	// value is taken into consideration after the base value, if defined, is
+	// satisfied. If no weight  value is specified, the default value of 0 is used.
+	// When multiple capacity providers are specified within a capacity provider
+	// strategy, at least one of the capacity providers must have a weight value
+	// greater than zero and any capacity providers with a weight of 0 can't be used
+	// to place tasks. If you specify multiple capacity providers in a strategy that
+	// all have a weight of 0 , any RunTask  or CreateService actions using the
+	// capacity provider strategy will fail. An example scenario for using weights is
+	// defining a strategy that contains two capacity providers and both have a weight
+	// of 1 , then when the base is satisfied, the tasks will be split evenly across
+	// the two capacity providers. Using that same logic, if you specify a weight of 1
+	// for capacityProviderA and a weight of 4 for capacityProviderB, then for every
+	// one task that's run using capacityProviderA, four tasks would use
+	// capacityProviderB.
 	Weight int32
 
 	noSmithyDocumentSerde
@@ -259,7 +248,7 @@ type CapacityProviderStrategyItem struct {
 type Cluster struct {
 
 	// The number of services that are running on the cluster in an ACTIVE state. You
-	// can view these services with ListServices.
+	// can view these services with ListServices .
 	ActiveServicesCount int32
 
 	// The resources attached to a cluster. When using a capacity provider with a
@@ -267,18 +256,18 @@ type Cluster struct {
 	// attachments.
 	Attachments []Attachment
 
-	// The status of the capacity providers associated with the cluster. The following
-	// are the states that are returned. UPDATE_IN_PROGRESS The available capacity
-	// providers for the cluster are updating. UPDATE_COMPLETE The capacity providers
-	// have successfully updated. UPDATE_FAILED The capacity provider updates failed.
+	// The status of the capacity providers associated with the cluster. The
+	// following are the states that are returned. UPDATE_IN_PROGRESS The available
+	// capacity providers for the cluster are updating. UPDATE_COMPLETE The capacity
+	// providers have successfully updated. UPDATE_FAILED The capacity provider updates
+	// failed.
 	AttachmentsStatus *string
 
 	// The capacity providers associated with the cluster.
 	CapacityProviders []string
 
-	// The Amazon Resource Name (ARN) that identifies the cluster. For more information
-	// about the ARN format, see Amazon Resource Name (ARN)
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids)
+	// The Amazon Resource Name (ARN) that identifies the cluster. For more
+	// information about the ARN format, see Amazon Resource Name (ARN) (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids)
 	// in the Amazon ECS Developer Guide.
 	ClusterArn *string
 
@@ -293,29 +282,28 @@ type Cluster struct {
 	// specified, the default capacity provider strategy is used.
 	DefaultCapacityProviderStrategy []CapacityProviderStrategyItem
 
-	// The number of tasks in the cluster that are in the PENDING state.
+	// The number of tasks in the cluster that are in the PENDING  state.
 	PendingTasksCount int32
 
 	// The number of container instances registered into the cluster. This includes
-	// container instances in both ACTIVE and DRAINING status.
+	// container instances in both ACTIVE  and DRAINING  status.
 	RegisteredContainerInstancesCount int32
 
-	// The number of tasks in the cluster that are in the RUNNING state.
+	// The number of tasks in the cluster that are in the RUNNING  state.
 	RunningTasksCount int32
 
 	// Use this parameter to set a default Service Connect namespace. After you set a
 	// default Service Connect namespace, any new services with Service Connect turned
 	// on that are created in the cluster are added as client services in the
 	// namespace. This setting only applies to new services that set the enabled
-	// parameter to true in the ServiceConnectConfiguration. You can set the namespace
-	// of each service individually in the ServiceConnectConfiguration to override this
-	// default parameter. Tasks that run in a namespace can use short names to connect
-	// to services in the namespace. Tasks can connect to services across all of the
-	// clusters in the namespace. Tasks connect through a managed proxy container that
-	// collects logs and metrics for increased visibility. Only the tasks that Amazon
-	// ECS services create are supported with Service Connect. For more information,
-	// see Service Connect
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+	// parameter to true  in the ServiceConnectConfiguration. You can set the
+	// namespace of each service individually in the ServiceConnectConfiguration to
+	// override this default parameter. Tasks that run in a namespace can use short
+	// names to connect to services in the namespace. Tasks can connect to services
+	// across all of the clusters in the namespace. Tasks connect through a managed
+	// proxy container that collects logs and metrics for increased visibility. Only
+	// the tasks that Amazon ECS services create are supported with Service Connect.
+	// For more information, see Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	ServiceConnectDefaults *ClusterServiceConnectDefaults
 
@@ -325,17 +313,14 @@ type Cluster struct {
 
 	// Additional information about your clusters that are separated by launch type.
 	// They include the following:
-	// - runningEC2TasksCount
-	// - RunningFargateTasksCount
-	// -
-	// pendingEC2TasksCount
-	// - pendingFargateTasksCount
-	// - activeEC2ServiceCount
-	// -
-	// activeFargateServiceCount
-	// - drainingEC2ServiceCount
-	// -
-	// drainingFargateServiceCount
+	//     - runningEC2TasksCount
+	//     - RunningFargateTasksCount
+	//     - pendingEC2TasksCount
+	//     - pendingFargateTasksCount
+	//     - activeEC2ServiceCount
+	//     - activeFargateServiceCount
+	//     - drainingEC2ServiceCount
+	//     - drainingFargateServiceCount
 	Statistics []KeyValuePair
 
 	// The status of the cluster. The following are the possible states that are
@@ -347,32 +332,21 @@ type Cluster struct {
 	// provider are being deleted. FAILED The cluster has capacity providers that are
 	// associated with it and the resources needed for the capacity provider have
 	// failed to create. INACTIVE The cluster has been deleted. Clusters with an
-	// INACTIVE status may remain discoverable in your account for a period of time.
+	// INACTIVEstatus may remain discoverable in your account for a period of time.
 	// However, this behavior is subject to change in the future. We don't recommend
-	// that you rely on INACTIVE clusters persisting.
+	// that you rely on INACTIVE  clusters persisting.
 	Status *string
 
 	// The metadata that you apply to the cluster to help you categorize and organize
 	// them. Each tag consists of a key and an optional value. You define both. The
 	// following basic restrictions apply to tags:
-	// - Maximum number of tags per
-	// resource - 50
-	// - For each resource, each tag key must be unique, and each tag key
-	// can have only one value.
-	// - Maximum key length - 128 Unicode characters in
-	// UTF-8
-	// - Maximum value length - 256 Unicode characters in UTF-8
-	// - If your tagging
-	// schema is used across multiple services and resources, remember that other
-	// services may have restrictions on allowed characters. Generally allowed
-	// characters are: letters, numbers, and spaces representable in UTF-8, and the
-	// following characters: + - = . _ : / @.
-	// - Tag keys and values are
-	// case-sensitive.
-	// - Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for either keys or values as it is reserved for Amazon Web
-	// Services use. You cannot edit or delete tag keys or values with this prefix.
-	// Tags with this prefix do not count against your tags per resource limit.
+	//     - Maximum number of tags per resource - 50
+	//     - For each resource, each tag key must be unique, and each tag key can have only one value.
+	//     - Maximum key length - 128 Unicode characters in UTF-8
+	//     - Maximum value length - 256 Unicode characters in UTF-8
+	//     - If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
+	//     - Tag keys and values are case-sensitive.
+	//     - Do not use aws: , AWS: , or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.
 	Tags []Tag
 
 	noSmithyDocumentSerde
@@ -391,15 +365,14 @@ type ClusterConfiguration struct {
 // default Service Connect namespace, any new services with Service Connect turned
 // on that are created in the cluster are added as client services in the
 // namespace. This setting only applies to new services that set the enabled
-// parameter to true in the ServiceConnectConfiguration. You can set the namespace
-// of each service individually in the ServiceConnectConfiguration to override this
-// default parameter. Tasks that run in a namespace can use short names to connect
-// to services in the namespace. Tasks can connect to services across all of the
-// clusters in the namespace. Tasks connect through a managed proxy container that
-// collects logs and metrics for increased visibility. Only the tasks that Amazon
-// ECS services create are supported with Service Connect. For more information,
-// see Service Connect
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+// parameter to true  in the ServiceConnectConfiguration. You can set the
+// namespace of each service individually in the ServiceConnectConfiguration to
+// override this default parameter. Tasks that run in a namespace can use short
+// names to connect to services in the namespace. Tasks can connect to services
+// across all of the clusters in the namespace. Tasks connect through a managed
+// proxy container that collects logs and metrics for increased visibility. Only
+// the tasks that Amazon ECS services create are supported with Service Connect.
+// For more information, see Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type ClusterServiceConnectDefaults struct {
 
@@ -415,34 +388,33 @@ type ClusterServiceConnectDefaults struct {
 // default Service Connect namespace, any new services with Service Connect turned
 // on that are created in the cluster are added as client services in the
 // namespace. This setting only applies to new services that set the enabled
-// parameter to true in the ServiceConnectConfiguration. You can set the namespace
-// of each service individually in the ServiceConnectConfiguration to override this
-// default parameter. Tasks that run in a namespace can use short names to connect
-// to services in the namespace. Tasks can connect to services across all of the
-// clusters in the namespace. Tasks connect through a managed proxy container that
-// collects logs and metrics for increased visibility. Only the tasks that Amazon
-// ECS services create are supported with Service Connect. For more information,
-// see Service Connect
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+// parameter to true  in the ServiceConnectConfiguration. You can set the
+// namespace of each service individually in the ServiceConnectConfiguration to
+// override this default parameter. Tasks that run in a namespace can use short
+// names to connect to services in the namespace. Tasks can connect to services
+// across all of the clusters in the namespace. Tasks connect through a managed
+// proxy container that collects logs and metrics for increased visibility. Only
+// the tasks that Amazon ECS services create are supported with Service Connect.
+// For more information, see Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type ClusterServiceConnectDefaultsRequest struct {
 
-	// The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace
-	// that's used when you create a service and don't specify a Service Connect
-	// configuration. The namespace name can include up to 1024 characters. The name is
-	// case-sensitive. The name can't include hyphens (-), tilde (~), greater than (>),
-	// less than (<), or slash (/). If you enter an existing namespace name or ARN,
-	// then that namespace will be used. Any namespace type is supported. The namespace
-	// must be in this account and this Amazon Web Services Region. If you enter a new
-	// name, a Cloud Map namespace will be created. Amazon ECS creates a Cloud Map
-	// namespace with the "API calls" method of instance discovery only. This instance
-	// discovery method is the "HTTP" namespace type in the Command Line Interface.
-	// Other types of instance discovery aren't used by Service Connect. If you update
-	// the service with an empty string "" for the namespace name, the cluster
-	// configuration for Service Connect is removed. Note that the namespace will
-	// remain in Cloud Map and must be deleted separately. For more information about
-	// Cloud Map, see Working with Services (https://docs.aws.amazon.com/) in the Cloud
-	// Map Developer Guide.
+	// The namespace name or full Amazon Resource Name (ARN) of the Cloud Map
+	// namespace that's used when you create a service and don't specify a Service
+	// Connect configuration. The namespace name can include up to 1024 characters. The
+	// name is case-sensitive. The name can't include hyphens (-), tilde (~), greater
+	// than (>), less than (<), or slash (/). If you enter an existing namespace name
+	// or ARN, then that namespace will be used. Any namespace type is supported. The
+	// namespace must be in this account and this Amazon Web Services Region. If you
+	// enter a new name, a Cloud Map namespace will be created. Amazon ECS creates a
+	// Cloud Map namespace with the "API calls" method of instance discovery only. This
+	// instance discovery method is the "HTTP" namespace type in the Command Line
+	// Interface. Other types of instance discovery aren't used by Service Connect. If
+	// you update the service with an empty string "" for the namespace name, the
+	// cluster configuration for Service Connect is removed. Note that the namespace
+	// will remain in Cloud Map and must be deleted separately. For more information
+	// about Cloud Map, see Working with Services (https://docs.aws.amazon.com/) in
+	// the Cloud Map Developer Guide.
 	//
 	// This member is required.
 	Namespace *string
@@ -454,17 +426,16 @@ type ClusterServiceConnectDefaultsRequest struct {
 // CloudWatch Container Insights for a cluster.
 type ClusterSetting struct {
 
-	// The name of the cluster setting. The only supported value is containerInsights.
+	// The name of the cluster setting. The only supported value is containerInsights .
 	Name ClusterSettingName
 
-	// The value to set for the cluster setting. The supported values are enabled and
-	// disabled. If enabled is specified, CloudWatch Container Insights will be enabled
-	// for the cluster, otherwise it will be off unless the containerInsights account
-	// setting is turned on. If a cluster value is specified, it will override the
-	// containerInsights value set with PutAccountSetting
-	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html)
-	// or PutAccountSettingDefault
-	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html).
+	// The value to set for the cluster setting. The supported values are enabled  and
+	// disabled . If enabled is specified, CloudWatch Container Insights will be
+	// enabled for the cluster, otherwise it will be off unless the containerInsights
+	// account setting is turned on. If a cluster value is specified, it will override
+	// the containerInsights  value set with PutAccountSetting (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html)
+	// or PutAccountSettingDefault (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html)
+	// .
 	Value *string
 
 	noSmithyDocumentSerde
@@ -486,8 +457,9 @@ type Container struct {
 	// The IDs of each GPU assigned to the container.
 	GpuIds []string
 
-	// The health status of the container. If health checks aren't configured for this
-	// container in its task definition, then it reports the health status as UNKNOWN.
+	// The health status of the container. If health checks aren't configured for
+	// this container in its task definition, then it reports the health status as
+	// UNKNOWN .
 	HealthStatus HealthStatus
 
 	// The image used for the container.
@@ -518,8 +490,8 @@ type Container struct {
 	// The network interfaces associated with the container.
 	NetworkInterfaces []NetworkInterface
 
-	// A short (255 max characters) human-readable string to provide additional details
-	// about a running or stopped container.
+	// A short (255 max characters) human-readable string to provide additional
+	// details about a running or stopped container.
 	Reason *string
 
 	// The ID of the Docker container.
@@ -535,59 +507,50 @@ type Container struct {
 // containers that are launched as part of a task.
 type ContainerDefinition struct {
 
-	// The command that's passed to the container. This parameter maps to Cmd in the
-	// Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// COMMAND parameter to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). For more
-	// information, see https://docs.docker.com/engine/reference/builder/#cmd
-	// (https://docs.docker.com/engine/reference/builder/#cmd). If there are multiple
-	// arguments, each argument is a separated string in the array.
+	// The command that's passed to the container. This parameter maps to Cmd  in the
+	// Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the COMMAND  parameter to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . For more information, see
+	// https://docs.docker.com/engine/reference/builder/#cmd (https://docs.docker.com/engine/reference/builder/#cmd)
+	// . If there are multiple arguments, each argument is a separated string in the
+	// array.
 	Command []string
 
-	// The number of cpu units reserved for the container. This parameter maps to
-	// CpuShares in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --cpu-shares option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). This
-	// field is optional for tasks using the Fargate launch type, and the only
+	// The number of cpu  units reserved for the container. This parameter maps to
+	// CpuShares in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --cpu-shares  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . This field is optional for tasks using the Fargate launch type, and the only
 	// requirement is that the total amount of CPU reserved for all containers within a
-	// task be lower than the task-level cpu value. You can determine the number of CPU
-	// units that are available per EC2 instance type by multiplying the vCPUs listed
-	// for that instance type on the Amazon EC2 Instances
-	// (http://aws.amazon.com/ec2/instance-types/) detail page by 1,024. Linux
-	// containers share unallocated CPU units with other containers on the container
-	// instance with the same ratio as their allocated amount. For example, if you run
-	// a single-container task on a single-core instance type with 512 CPU units
-	// specified for that container, and that's the only task running on the container
-	// instance, that container could use the full 1,024 CPU unit share at any given
-	// time. However, if you launched another copy of the same task on that container
-	// instance, each task is guaranteed a minimum of 512 CPU units when needed.
-	// Moreover, each container could float to higher CPU usage if the other container
-	// was not using it. If both tasks were 100% active all of the time, they would be
-	// limited to 512 CPU units. On Linux container instances, the Docker daemon on the
-	// container instance uses the CPU value to calculate the relative CPU share ratios
-	// for running containers. For more information, see CPU share constraint
-	// (https://docs.docker.com/engine/reference/run/#cpu-share-constraint) in the
-	// Docker documentation. The minimum valid CPU share value that the Linux kernel
-	// allows is 2. However, the CPU parameter isn't required, and you can use CPU
-	// values below 2 in your container definitions. For CPU values below 2 (including
-	// null), the behavior varies based on your Amazon ECS container agent version:
-	// -
-	// Agent versions less than or equal to 1.1.0: Null and zero CPU values are passed
-	// to Docker as 0, which Docker then converts to 1,024 CPU shares. CPU values of 1
-	// are passed to Docker as 1, which the Linux kernel converts to two CPU shares.
-	// -
-	// Agent versions greater than or equal to 1.2.0: Null, zero, and CPU values of 1
-	// are passed to Docker as 2.
+	// task be lower than the task-level cpu value. You can determine the number of
+	// CPU units that are available per EC2 instance type by multiplying the vCPUs
+	// listed for that instance type on the Amazon EC2 Instances (http://aws.amazon.com/ec2/instance-types/)
+	// detail page by 1,024. Linux containers share unallocated CPU units with other
+	// containers on the container instance with the same ratio as their allocated
+	// amount. For example, if you run a single-container task on a single-core
+	// instance type with 512 CPU units specified for that container, and that's the
+	// only task running on the container instance, that container could use the full
+	// 1,024 CPU unit share at any given time. However, if you launched another copy of
+	// the same task on that container instance, each task is guaranteed a minimum of
+	// 512 CPU units when needed. Moreover, each container could float to higher CPU
+	// usage if the other container was not using it. If both tasks were 100% active
+	// all of the time, they would be limited to 512 CPU units. On Linux container
+	// instances, the Docker daemon on the container instance uses the CPU value to
+	// calculate the relative CPU share ratios for running containers. For more
+	// information, see CPU share constraint (https://docs.docker.com/engine/reference/run/#cpu-share-constraint)
+	// in the Docker documentation. The minimum valid CPU share value that the Linux
+	// kernel allows is 2. However, the CPU parameter isn't required, and you can use
+	// CPU values below 2 in your container definitions. For CPU values below 2
+	// (including null), the behavior varies based on your Amazon ECS container agent
+	// version:
+	//     - Agent versions less than or equal to 1.1.0: Null and zero CPU values are passed to Docker as 0, which Docker then converts to 1,024 CPU shares. CPU values of 1 are passed to Docker as 1, which the Linux kernel converts to two CPU shares.
+	//     - Agent versions greater than or equal to 1.2.0: Null, zero, and CPU values of 1 are passed to Docker as 2.
 	//
-	// On Windows container instances, the CPU limit is
-	// enforced as an absolute limit, or a quota. Windows containers only have access
-	// to the specified amount of CPU that's described in the task definition. A null
-	// or zero CPU value is passed to Docker as 0, which Windows interprets as 1% of
-	// one CPU.
+	// On Windows container instances, the CPU limit is enforced as an absolute limit,
+	// or a quota. Windows containers only have access to the specified amount of CPU
+	// that's described in the task definition. A null or zero CPU value is passed to
+	// Docker as 0 , which Windows interprets as 1% of one CPU.
 	Cpu int32
 
 	// The dependencies defined for container startup and shutdown. A container can
@@ -597,81 +560,65 @@ type ContainerDefinition struct {
 	// at least version 1.26.0 of the container agent to turn on container
 	// dependencies. However, we recommend using the latest container agent version.
 	// For information about checking your agent version and updating to the latest
-	// version, see Updating the Amazon ECS Container Agent
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
+	// version, see Updating the Amazon ECS Container Agent (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
 	// in the Amazon Elastic Container Service Developer Guide. If you're using an
 	// Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of
-	// the ecs-init package. If your container instances are launched from version
-	// 20190301 or later, then they contain the required versions of the container
-	// agent and ecs-init. For more information, see Amazon ECS-optimized Linux AMI
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
+	// the ecs-init  package. If your container instances are launched from version
+	// 20190301or later, then they contain the required versions of the container
+	// agent and ecs-init . For more information, see Amazon ECS-optimized Linux AMI (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 	// in the Amazon Elastic Container Service Developer Guide. For tasks using the
 	// Fargate launch type, the task or service requires the following platforms:
-	// -
-	// Linux platform version 1.3.0 or later.
-	// - Windows platform version 1.0.0 or
-	// later.
+	//     - Linux platform version 1.3.0 or later.
+	//     - Windows platform version 1.0.0 or later.
 	DependsOn []ContainerDependency
 
 	// When this parameter is true, networking is off within the container. This
-	// parameter maps to NetworkDisabled in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/). This
-	// parameter is not supported for Windows containers.
+	// parameter maps to NetworkDisabled  in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/).
+	// This parameter is not supported for Windows containers.
 	DisableNetworking *bool
 
-	// A list of DNS search domains that are presented to the container. This parameter
-	// maps to DnsSearch in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --dns-search option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). This
-	// parameter is not supported for Windows containers.
+	// A list of DNS search domains that are presented to the container. This
+	// parameter maps to DnsSearch  in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --dns-search  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . This parameter is not supported for Windows containers.
 	DnsSearchDomains []string
 
 	// A list of DNS servers that are presented to the container. This parameter maps
-	// to Dns in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the --dns
-	// option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). This
-	// parameter is not supported for Windows containers.
+	// to Dns  in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --dns  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . This parameter is not supported for Windows containers.
 	DnsServers []string
 
-	// A key/value map of labels to add to the container. This parameter maps to Labels
-	// in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --label option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). This
-	// parameter requires version 1.18 of the Docker Remote API or greater on your
-	// container instance. To check the Docker Remote API version on your container
-	// instance, log in to your container instance and run the following command: sudo
-	// docker version --format '{{.Server.APIVersion}}'
+	// A key/value map of labels to add to the container. This parameter maps to
+	// Labels in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --label  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . This parameter requires version 1.18 of the Docker Remote API or greater on
+	// your container instance. To check the Docker Remote API version on your
+	// container instance, log in to your container instance and run the following
+	// command: sudo docker version --format '{{.Server.APIVersion}}'
 	DockerLabels map[string]string
 
-	// A list of strings to provide custom labels for SELinux and AppArmor multi-level
-	// security systems. This field isn't valid for containers in tasks using the
-	// Fargate launch type. With Windows containers, this parameter can be used to
-	// reference a credential spec file when configuring a container for Active
+	// A list of strings to provide custom labels for SELinux and AppArmor
+	// multi-level security systems. This field isn't valid for containers in tasks
+	// using the Fargate launch type. With Windows containers, this parameter can be
+	// used to reference a credential spec file when configuring a container for Active
 	// Directory authentication. For more information, see Using gMSAs for Windows
-	// Containers
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows-gmsa.html)
+	// Containers (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows-gmsa.html)
 	// in the Amazon Elastic Container Service Developer Guide. This parameter maps to
-	// SecurityOpt in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --security-opt option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). The
-	// Amazon ECS container agent running on a container instance must register with
-	// the ECS_SELINUX_CAPABLE=true or ECS_APPARMOR_CAPABLE=true environment variables
-	// before containers placed on that instance can use these security options. For
-	// more information, see Amazon ECS Container Agent Configuration
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html)
+	// SecurityOpt in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --security-opt  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . The Amazon ECS container agent running on a container instance must register
+	// with the ECS_SELINUX_CAPABLE=true  or ECS_APPARMOR_CAPABLE=true environment
+	// variables before containers placed on that instance can use these security
+	// options. For more information, see Amazon ECS Container Agent Configuration (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html)
 	// in the Amazon Elastic Container Service Developer Guide. For more information
-	// about valid values, see Docker Run Security Configuration
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). Valid
-	// values: "no-new-privileges" | "apparmor:PROFILE" | "label:value" |
+	// about valid values, see Docker Run Security Configuration (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . Valid values: "no-new-privileges" | "apparmor:PROFILE" | "label:value" |
 	// "credentialspec:CredentialSpecFilePath"
 	DockerSecurityOptions []string
 
@@ -679,201 +626,169 @@ type ContainerDefinition struct {
 	// entryPoint parameters. If you have problems using entryPoint, update your
 	// container agent or enter your commands and arguments as command array items
 	// instead. The entry point that's passed to the container. This parameter maps to
-	// Entrypoint in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --entrypoint option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). For more
-	// information, see https://docs.docker.com/engine/reference/builder/#entrypoint
-	// (https://docs.docker.com/engine/reference/builder/#entrypoint).
+	// Entrypoint in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --entrypoint  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . For more information, see
+	// https://docs.docker.com/engine/reference/builder/#entrypoint (https://docs.docker.com/engine/reference/builder/#entrypoint)
+	// .
 	EntryPoint []string
 
-	// The environment variables to pass to a container. This parameter maps to Env in
-	// the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the --env
-	// option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). We don't
-	// recommend that you use plaintext environment variables for sensitive
+	// The environment variables to pass to a container. This parameter maps to Env
+	// in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --env  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . We don't recommend that you use plaintext environment variables for sensitive
 	// information, such as credential data.
 	Environment []KeyValuePair
 
 	// A list of files containing the environment variables to pass to a container.
-	// This parameter maps to the --env-file option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). You can
-	// specify up to ten environment files. The file must have a .env file extension.
-	// Each line in an environment file contains an environment variable in
+	// This parameter maps to the --env-file  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . You can specify up to ten environment files. The file must have a .env file
+	// extension. Each line in an environment file contains an environment variable in
 	// VARIABLE=VALUE format. Lines beginning with # are treated as comments and are
 	// ignored. For more information about the environment variable file syntax, see
-	// Declare default environment variables in file
-	// (https://docs.docker.com/compose/env-file/). If there are environment variables
-	// specified using the environment parameter in a container definition, they take
-	// precedence over the variables contained within an environment file. If multiple
-	// environment files are specified that contain the same variable, they're
-	// processed from the top down. We recommend that you use unique variable names.
-	// For more information, see Specifying Environment Variables
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html)
+	// Declare default environment variables in file (https://docs.docker.com/compose/env-file/)
+	// . If there are environment variables specified using the environment parameter
+	// in a container definition, they take precedence over the variables contained
+	// within an environment file. If multiple environment files are specified that
+	// contain the same variable, they're processed from the top down. We recommend
+	// that you use unique variable names. For more information, see Specifying
+	// Environment Variables (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnvironmentFiles []EnvironmentFile
 
-	// If the essential parameter of a container is marked as true, and that container
-	// fails or stops for any reason, all other containers that are part of the task
-	// are stopped. If the essential parameter of a container is marked as false, its
-	// failure doesn't affect the rest of the containers in a task. If this parameter
-	// is omitted, a container is assumed to be essential. All tasks must have at least
-	// one essential container. If you have an application that's composed of multiple
-	// containers, group containers that are used for a common purpose into components,
-	// and separate the different components into multiple task definitions. For more
-	// information, see Application Architecture
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/application_architecture.html)
+	// If the essential  parameter of a container is marked as true, and that
+	// container fails or stops for any reason, all other containers that are part of
+	// the task are stopped. If the essential  parameter of a container is marked as
+	// false, its failure doesn't affect the rest of the containers in a task. If
+	// this parameter is omitted, a container is assumed to be essential. All tasks
+	// must have at least one essential container. If you have an application that's
+	// composed of multiple containers, group containers that are used for a common
+	// purpose into components, and separate the different components into multiple
+	// task definitions. For more information, see Application Architecture (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/application_architecture.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Essential *bool
 
-	// A list of hostnames and IP address mappings to append to the /etc/hosts file on
-	// the container. This parameter maps to ExtraHosts in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --add-host option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). This
-	// parameter isn't supported for Windows containers or tasks that use the awsvpc
-	// network mode.
+	// A list of hostnames and IP address mappings to append to the /etc/hosts file
+	// on the container. This parameter maps to ExtraHosts  in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --add-host  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . This parameter isn't supported for Windows containers or tasks that use the
+	// awsvpc network mode.
 	ExtraHosts []HostEntry
 
 	// The FireLens configuration for the container. This is used to specify and
-	// configure a log router for container logs. For more information, see Custom Log
-	// Routing
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html)
+	// configure a log router for container logs. For more information, see Custom
+	// Log Routing (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	FirelensConfiguration *FirelensConfiguration
 
 	// The container health check command and associated configuration parameters for
-	// the container. This parameter maps to HealthCheck in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// HEALTHCHECK parameter of docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration).
+	// the container. This parameter maps to HealthCheck  in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the HEALTHCHECK  parameter of docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// .
 	HealthCheck *HealthCheck
 
-	// The hostname to use for your container. This parameter maps to Hostname in the
-	// Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --hostname option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). The
-	// hostname parameter is not supported if you're using the awsvpc network mode.
+	// The hostname to use for your container. This parameter maps to Hostname  in the
+	// Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --hostname  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . The hostname  parameter is not supported if you're using the awsvpc network
+	// mode.
 	Hostname *string
 
 	// The image used to start a container. This string is passed directly to the
 	// Docker daemon. By default, images in the Docker Hub registry are available.
-	// Other repositories are specified with either  repository-url/image:tag  or
+	// Other repositories are specified with either repository-url/image:tag  or
 	// repository-url/image@digest . Up to 255 letters (uppercase and lowercase),
 	// numbers, hyphens, underscores, colons, periods, forward slashes, and number
-	// signs are allowed. This parameter maps to Image in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the IMAGE
-	// parameter of docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration).
-	// - When a
-	// new task starts, the Amazon ECS container agent pulls the latest version of the
-	// specified image and tag for the container to use. However, subsequent updates to
-	// a repository image aren't propagated to already running tasks.
-	// - Images in
-	// Amazon ECR repositories can be specified by either using the full
-	// registry/repository:tag or registry/repository@digest. For example,
-	// 012345678910.dkr.ecr..amazonaws.com/:latest or
-	// 012345678910.dkr.ecr..amazonaws.com/@sha256:94afd1f2e64d908bc90dbca0035a5b567EXAMPLE.
-	// -
-	// Images in official repositories on Docker Hub use a single name (for example,
-	// ubuntu or mongo).
-	// - Images in other repositories on Docker Hub are qualified
-	// with an organization name (for example, amazon/amazon-ecs-agent).
-	// - Images in
-	// other online repositories are qualified further by a domain name (for example,
-	// quay.io/assemblyline/ubuntu).
+	// signs are allowed. This parameter maps to Image  in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the IMAGE  parameter of docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// .
+	//     - When a new task starts, the Amazon ECS container agent pulls the latest version of the specified image and tag for the container to use. However, subsequent updates to a repository image aren't propagated to already running tasks.
+	//     - Images in Amazon ECR repositories can be specified by either using the full registry/repository:tag or registry/repository@digest . For example, 012345678910.dkr.ecr..amazonaws.com/:latest or 012345678910.dkr.ecr..amazonaws.com/@sha256:94afd1f2e64d908bc90dbca0035a5b567EXAMPLE .
+	//     - Images in official repositories on Docker Hub use a single name (for example, ubuntu or mongo ).
+	//     - Images in other repositories on Docker Hub are qualified with an organization name (for example, amazon/amazon-ecs-agent ).
+	//     - Images in other online repositories are qualified further by a domain name (for example, quay.io/assemblyline/ubuntu ).
 	Image *string
 
 	// When this parameter is true, you can deploy containerized applications that
-	// require stdin or a tty to be allocated. This parameter maps to OpenStdin in the
-	// Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --interactive option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration).
+	// require stdin  or a tty  to be allocated. This parameter maps to OpenStdin in
+	// the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --interactive  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// .
 	Interactive *bool
 
-	// The links parameter allows containers to communicate with each other without the
-	// need for port mappings. This parameter is only supported if the network mode of
-	// a task definition is bridge. The name:internalName construct is analogous to
-	// name:alias in Docker links. Up to 255 letters (uppercase and lowercase),
+	// The links parameter allows containers to communicate with each other without
+	// the need for port mappings. This parameter is only supported if the network mode
+	// of a task definition is bridge . The name:internalName construct is analogous
+	// to name:alias in Docker links. Up to 255 letters (uppercase and lowercase),
 	// numbers, underscores, and hyphens are allowed. For more information about
-	// linking Docker containers, go to Legacy container links
-	// (https://docs.docker.com/network/links/) in the Docker documentation. This
-	// parameter maps to Links in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the --link
-	// option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). This
-	// parameter is not supported for Windows containers. Containers that are
+	// linking Docker containers, go to Legacy container links (https://docs.docker.com/network/links/)
+	// in the Docker documentation. This parameter maps to Links  in the Create a
+	// container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --link  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . This parameter is not supported for Windows containers. Containers that are
 	// collocated on a single container instance may be able to communicate with each
 	// other without requiring links or host port mappings. Network isolation is
 	// achieved on the container instance using security groups and VPC settings.
 	Links []string
 
 	// Linux-specific modifications that are applied to the container, such as Linux
-	// kernel capabilities. For more information see KernelCapabilities. This parameter
-	// is not supported for Windows containers.
+	// kernel capabilities. For more information see KernelCapabilities. This
+	// parameter is not supported for Windows containers.
 	LinuxParameters *LinuxParameters
 
 	// The log configuration specification for the container. This parameter maps to
-	// LogConfig in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --log-driver option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). By
-	// default, containers use the same logging driver that the Docker daemon uses.
-	// However the container can use a different logging driver than the Docker daemon
-	// by specifying a log driver with this parameter in the container definition. To
-	// use a different logging driver for a container, the log system must be
-	// configured properly on the container instance (or on a different log server for
-	// remote logging options). For more information about the options for different
-	// supported log drivers, see Configure logging drivers
-	// (https://docs.docker.com/engine/admin/logging/overview/) in the Docker
-	// documentation. Amazon ECS currently supports a subset of the logging drivers
-	// available to the Docker daemon (shown in the LogConfiguration data type).
-	// Additional log drivers may be available in future releases of the Amazon ECS
-	// container agent. This parameter requires version 1.18 of the Docker Remote API
-	// or greater on your container instance. To check the Docker Remote API version on
-	// your container instance, log in to your container instance and run the following
-	// command: sudo docker version --format '{{.Server.APIVersion}}' The Amazon ECS
-	// container agent running on a container instance must register the logging
-	// drivers available on that instance with the ECS_AVAILABLE_LOGGING_DRIVERS
-	// environment variable before containers placed on that instance can use these log
-	// configuration options. For more information, see Amazon ECS Container Agent
-	// Configuration
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html)
+	// LogConfig in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --log-driver  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . By default, containers use the same logging driver that the Docker daemon
+	// uses. However the container can use a different logging driver than the Docker
+	// daemon by specifying a log driver with this parameter in the container
+	// definition. To use a different logging driver for a container, the log system
+	// must be configured properly on the container instance (or on a different log
+	// server for remote logging options). For more information about the options for
+	// different supported log drivers, see Configure logging drivers (https://docs.docker.com/engine/admin/logging/overview/)
+	// in the Docker documentation. Amazon ECS currently supports a subset of the
+	// logging drivers available to the Docker daemon (shown in the LogConfiguration
+	// data type). Additional log drivers may be available in future releases of the
+	// Amazon ECS container agent. This parameter requires version 1.18 of the Docker
+	// Remote API or greater on your container instance. To check the Docker Remote API
+	// version on your container instance, log in to your container instance and run
+	// the following command: sudo docker version --format '{{.Server.APIVersion}}'
+	// The Amazon ECS container agent running on a container instance must register the
+	// logging drivers available on that instance with the
+	// ECS_AVAILABLE_LOGGING_DRIVERSenvironment variable before containers placed on
+	// that instance can use these log configuration options. For more information, see
+	//
+	// Amazon ECS Container Agent Configuration (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	LogConfiguration *LogConfiguration
 
 	// The amount (in MiB) of memory to present to the container. If your container
 	// attempts to exceed the memory specified here, the container is killed. The total
 	// amount of memory reserved for all containers within a task must be lower than
-	// the task memory value, if one is specified. This parameter maps to Memory in the
-	// Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --memory option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). If using
-	// the Fargate launch type, this parameter is optional. If using the EC2 launch
-	// type, you must specify either a task-level memory value or a container-level
-	// memory value. If you specify both a container-level memory and memoryReservation
-	// value, memory must be greater than memoryReservation. If you specify
-	// memoryReservation, then that value is subtracted from the available memory
-	// resources for the container instance where the container is placed. Otherwise,
-	// the value of memory is used. The Docker 20.10.0 or later daemon reserves a
-	// minimum of 6 MiB of memory for a container. So, don't specify less than 6 MiB of
-	// memory for your containers. The Docker 19.03.13-ce or earlier daemon reserves a
-	// minimum of 4 MiB of memory for a container. So, don't specify less than 4 MiB of
-	// memory for your containers.
+	// the task memory  value, if one is specified. This parameter maps to Memory in
+	// the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --memory  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . If using the Fargate launch type, this parameter is optional. If using the EC2
+	// launch type, you must specify either a task-level memory value or a
+	// container-level memory value. If you specify both a container-level memory  and
+	// memoryReservation value, memory  must be greater than memoryReservation. If
+	// you specify memoryReservation, then that value is subtracted from the
+	// available memory resources for the container instance where the container is
+	// placed. Otherwise, the value of memory is used. The Docker 20.10.0 or later
+	// daemon reserves a minimum of 6 MiB of memory for a container. So, don't specify
+	// less than 6 MiB of memory for your containers. The Docker 19.03.13-ce or earlier
+	// daemon reserves a minimum of 4 MiB of memory for a container. So, don't specify
+	// less than 4 MiB of memory for your containers.
 	Memory *int32
 
 	// The soft limit (in MiB) of memory to reserve for the container. When system
@@ -881,97 +796,89 @@ type ContainerDefinition struct {
 	// to this soft limit. However, your container can consume more memory when it
 	// needs to, up to either the hard limit specified with the memory parameter (if
 	// applicable), or all of the available memory on the container instance, whichever
-	// comes first. This parameter maps to MemoryReservation in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --memory-reservation option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). If a
-	// task-level memory value is not specified, you must specify a non-zero integer
-	// for one or both of memory or memoryReservation in a container definition. If you
-	// specify both, memory must be greater than memoryReservation. If you specify
-	// memoryReservation, then that value is subtracted from the available memory
-	// resources for the container instance where the container is placed. Otherwise,
-	// the value of memory is used. For example, if your container normally uses 128
-	// MiB of memory, but occasionally bursts to 256 MiB of memory for short periods of
-	// time, you can set a memoryReservation of 128 MiB, and a memory hard limit of 300
-	// MiB. This configuration would allow the container to only reserve 128 MiB of
-	// memory from the remaining resources on the container instance, but also allow
-	// the container to consume more memory resources when needed. The Docker 20.10.0
-	// or later daemon reserves a minimum of 6 MiB of memory for a container. So, don't
-	// specify less than 6 MiB of memory for your containers. The Docker 19.03.13-ce or
-	// earlier daemon reserves a minimum of 4 MiB of memory for a container. So, don't
-	// specify less than 4 MiB of memory for your containers.
+	// comes first. This parameter maps to MemoryReservation  in the Create a
+	// container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --memory-reservation  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . If a task-level memory value is not specified, you must specify a non-zero
+	// integer for one or both of memory  or memoryReservation in a container
+	// definition. If you specify both, memory  must be greater than memoryReservation
+	// . If you specify memoryReservation, then that value is subtracted from the
+	// available memory resources for the container instance where the container is
+	// placed. Otherwise, the value of memory is used. For example, if your container
+	// normally uses 128 MiB of memory, but occasionally bursts to 256 MiB of memory
+	// for short periods of time, you can set a memoryReservation  of 128 MiB, and a
+	// memoryhard limit of 300 MiB. This configuration would allow the container to
+	// only reserve 128 MiB of memory from the remaining resources on the container
+	// instance, but also allow the container to consume more memory resources when
+	// needed. The Docker 20.10.0 or later daemon reserves a minimum of 6 MiB of memory
+	// for a container. So, don't specify less than 6 MiB of memory for your
+	// containers. The Docker 19.03.13-ce or earlier daemon reserves a minimum of 4 MiB
+	// of memory for a container. So, don't specify less than 4 MiB of memory for your
+	// containers.
 	MemoryReservation *int32
 
 	// The mount points for data volumes in your container. This parameter maps to
-	// Volumes in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --volume option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). Windows
-	// containers can mount whole directories on the same drive as $env:ProgramData.
-	// Windows containers can't mount directories on a different drive, and mount point
-	// can't be across drives.
+	// Volumes in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --volume  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . Windows containers can mount whole directories on the same drive as
+	// $env:ProgramData. Windows containers can't mount directories on a different
+	// drive, and mount point can't be across drives.
 	MountPoints []MountPoint
 
 	// The name of a container. If you're linking multiple containers together in a
-	// task definition, the name of one container can be entered in the links of
+	// task definition, the name  of one container can be entered in the links of
 	// another container to connect the containers. Up to 255 letters (uppercase and
 	// lowercase), numbers, underscores, and hyphens are allowed. This parameter maps
-	// to name in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the --name
-	// option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration).
+	// to name  in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --name  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// .
 	Name *string
 
 	// The list of port mappings for the container. Port mappings allow containers to
 	// access ports on the host container instance to send or receive traffic. For task
-	// definitions that use the awsvpc network mode, only specify the containerPort.
-	// The hostPort can be left blank or it must be the same value as the
-	// containerPort. Port mappings on Windows use the NetNAT gateway address rather
+	// definitions that use the awsvpc  network mode, only specify the containerPort.
+	// The hostPort  can be left blank or it must be the same value as the
+	// containerPort . Port mappings on Windows use the NetNAT gateway address rather
 	// than localhost. There's no loopback for port mappings on Windows, so you can't
 	// access a container's mapped port from the host itself. This parameter maps to
-	// PortBindings in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --publish option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). If the
-	// network mode of a task definition is set to none, then you can't specify port
-	// mappings. If the network mode of a task definition is set to host, then host
-	// ports must either be undefined or they must match the container port in the port
-	// mapping. After a task reaches the RUNNING status, manual and automatic host and
-	// container port assignments are visible in the Network Bindings section of a
-	// container description for a selected task in the Amazon ECS console. The
-	// assignments are also visible in the networkBindings section DescribeTasks
-	// responses.
+	// PortBindings in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --publish  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . If the network mode of a task definition is set to none, then you can't
+	// specify port mappings. If the network mode of a task definition is set to host
+	// , then host ports must either be undefined or they must match the container port
+	// in the port mapping. After a task reaches the RUNNING status, manual and
+	// automatic host and container port assignments are visible in the Network
+	// Bindings section of a container description for a selected task in the Amazon
+	// ECS console. The assignments are also visible in the networkBindings  section
+	// DescribeTasks responses.
 	PortMappings []PortMapping
 
 	// When this parameter is true, the container is given elevated privileges on the
-	// host container instance (similar to the root user). This parameter maps to
-	// Privileged in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --privileged option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). This
-	// parameter is not supported for Windows containers or tasks run on Fargate.
+	// host container instance (similar to the root  user). This parameter maps to
+	// Privileged in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --privileged  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . This parameter is not supported for Windows containers or tasks run on
+	// Fargate.
 	Privileged *bool
 
-	// When this parameter is true, a TTY is allocated. This parameter maps to Tty in
-	// the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the --tty
-	// option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration).
+	// When this parameter is true , a TTY is allocated. This parameter maps to Tty
+	// in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --tty  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// .
 	PseudoTerminal *bool
 
-	// When this parameter is true, the container is given read-only access to its root
-	// file system. This parameter maps to ReadonlyRootfs in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --read-only option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). This
-	// parameter is not supported for Windows containers.
+	// When this parameter is true, the container is given read-only access to its
+	// root file system. This parameter maps to ReadonlyRootfs  in the Create a
+	// container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --read-only  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . This parameter is not supported for Windows containers.
 	ReadonlyRootFilesystem *bool
 
 	// The private repository authentication credentials to use.
@@ -982,137 +889,118 @@ type ContainerDefinition struct {
 	ResourceRequirements []ResourceRequirement
 
 	// The secrets to pass to the container. For more information, see Specifying
-	// Sensitive Data
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
+	// Sensitive Data (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Secrets []Secret
 
 	// Time duration (in seconds) to wait before giving up on resolving dependencies
 	// for a container. For example, you specify two containers in a task definition
-	// with containerA having a dependency on containerB reaching a COMPLETE, SUCCESS,
-	// or HEALTHY status. If a startTimeout value is specified for containerB and it
-	// doesn't reach the desired status within that time then containerA gives up and
-	// not start. This results in the task transitioning to a STOPPED state. When the
-	// ECS_CONTAINER_START_TIMEOUT container agent configuration variable is used, it's
-	// enforced independently from this start timeout value. For tasks using the
-	// Fargate launch type, the task or service requires the following platforms:
-	// -
-	// Linux platform version 1.3.0 or later.
-	// - Windows platform version 1.0.0 or
-	// later.
-	//
-	// For tasks using the EC2 launch type, your container instances require at
-	// least version 1.26.0 of the container agent to use a container start timeout
-	// value. However, we recommend using the latest container agent version. For
-	// information about checking your agent version and updating to the latest
-	// version, see Updating the Amazon ECS Container Agent
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
+	// with containerA having a dependency on containerB reaching a COMPLETE , SUCCESS
+	// , or HEALTHY  status. If a startTimeout value is specified for containerB and
+	// it doesn't reach the desired status within that time then containerA gives up
+	// and not start. This results in the task transitioning to a STOPPED state. When
+	// the ECS_CONTAINER_START_TIMEOUT container agent configuration variable is
+	// used, it's enforced independently from this start timeout value. For tasks using
+	// the Fargate launch type, the task or service requires the following platforms:
+	//     - Linux platform version 1.3.0 or later.
+	//     - Windows platform version 1.0.0 or later.
+	// For tasks using the EC2 launch
+	// type, your container instances require at least version 1.26.0 of the
+	// container agent to use a container start timeout value. However, we recommend
+	// using the latest container agent version. For information about checking your
+	// agent version and updating to the latest version, see Updating the Amazon ECS
+	// Container Agent (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
 	// in the Amazon Elastic Container Service Developer Guide. If you're using an
-	// Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of
-	// the ecs-init package. If your container instances are launched from version
-	// 20190301 or later, then they contain the required versions of the container
-	// agent and ecs-init. For more information, see Amazon ECS-optimized Linux AMI
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
+	// Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1
+	// of the ecs-init  package. If your container instances are launched from version
+	// 20190301or later, then they contain the required versions of the container
+	// agent and ecs-init . For more information, see Amazon ECS-optimized Linux AMI (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	StartTimeout *int32
 
-	// Time duration (in seconds) to wait before the container is forcefully killed if
-	// it doesn't exit normally on its own. For tasks using the Fargate launch type,
+	// Time duration (in seconds) to wait before the container is forcefully killed
+	// if it doesn't exit normally on its own. For tasks using the Fargate launch type,
 	// the task or service requires the following platforms:
-	// - Linux platform version
-	// 1.3.0 or later.
-	// - Windows platform version 1.0.0 or later.
-	//
-	// The max stop timeout
-	// value is 120 seconds and if the parameter is not specified, the default value of
-	// 30 seconds is used. For tasks that use the EC2 launch type, if the stopTimeout
+	//     - Linux platform version 1.3.0 or later.
+	//     - Windows platform version 1.0.0 or later.
+	// The max stop timeout value is
+	// 120 seconds and if the parameter is not specified, the default value of 30
+	// seconds is used. For tasks that use the EC2 launch type, if the stopTimeout
 	// parameter isn't specified, the value set for the Amazon ECS container agent
-	// configuration variable ECS_CONTAINER_STOP_TIMEOUT is used. If neither the
+	// configuration variable ECS_CONTAINER_STOP_TIMEOUT  is used. If neither the
 	// stopTimeout parameter or the ECS_CONTAINER_STOP_TIMEOUT agent configuration
 	// variable are set, then the default values of 30 seconds for Linux containers and
 	// 30 seconds on Windows containers are used. Your container instances require at
 	// least version 1.26.0 of the container agent to use a container stop timeout
 	// value. However, we recommend using the latest container agent version. For
 	// information about checking your agent version and updating to the latest
-	// version, see Updating the Amazon ECS Container Agent
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
+	// version, see Updating the Amazon ECS Container Agent (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
 	// in the Amazon Elastic Container Service Developer Guide. If you're using an
 	// Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of
-	// the ecs-init package. If your container instances are launched from version
-	// 20190301 or later, then they contain the required versions of the container
-	// agent and ecs-init. For more information, see Amazon ECS-optimized Linux AMI
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
+	// the ecs-init  package. If your container instances are launched from version
+	// 20190301or later, then they contain the required versions of the container
+	// agent and ecs-init . For more information, see Amazon ECS-optimized Linux AMI (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	StopTimeout *int32
 
 	// A list of namespaced kernel parameters to set in the container. This parameter
-	// maps to Sysctls in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --sysctl option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). We don't
-	// recommended that you specify network-related systemControls parameters for
-	// multiple containers in a single task that also uses either the awsvpc or host
-	// network modes. For tasks that use the awsvpc network mode, the container that's
-	// started last determines which systemControls parameters take effect. For tasks
-	// that use the host network mode, it changes the container instance's namespaced
-	// kernel parameters as well as the containers.
+	// maps to Sysctls  in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --sysctl  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . We don't recommended that you specify network-related systemControls
+	// parameters for multiple containers in a single task that also uses either the
+	// awsvpc or host  network modes. For tasks that use the awsvpc network mode, the
+	// container that's started last determines which systemControls parameters take
+	// effect. For tasks that use the host network mode, it changes the container
+	// instance's namespaced kernel parameters as well as the containers.
 	SystemControls []SystemControl
 
-	// A list of ulimits to set in the container. If a ulimit value is specified in a
-	// task definition, it overrides the default values set by Docker. This parameter
-	// maps to Ulimits in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --ulimit option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). Valid
-	// naming values are displayed in the Ulimit data type. Amazon ECS tasks hosted on
-	// Fargate use the default resource limit values set by the operating system with
-	// the exception of the nofile resource limit parameter which Fargate overrides.
-	// The nofile resource limit sets a restriction on the number of open files that a
-	// container can use. The default nofile soft limit is 1024 and the default hard
-	// limit is 4096. This parameter requires version 1.18 of the Docker Remote API or
-	// greater on your container instance. To check the Docker Remote API version on
-	// your container instance, log in to your container instance and run the following
-	// command: sudo docker version --format '{{.Server.APIVersion}}' This parameter is
-	// not supported for Windows containers.
+	// A list of ulimits  to set in the container. If a ulimit value is specified in
+	// a task definition, it overrides the default values set by Docker. This parameter
+	// maps to Ulimits  in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --ulimit  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . Valid naming values are displayed in the Ulimit data type. Amazon ECS tasks
+	// hosted on Fargate use the default resource limit values set by the operating
+	// system with the exception of the nofile resource limit parameter which Fargate
+	// overrides. The nofile resource limit sets a restriction on the number of open
+	// files that a container can use. The default nofile  soft limit is 1024 and the
+	// default hard limit is 4096. This parameter requires version 1.18 of the Docker
+	// Remote API or greater on your container instance. To check the Docker Remote API
+	// version on your container instance, log in to your container instance and run
+	// the following command: sudo docker version --format '{{.Server.APIVersion}}'
+	// This parameter is not supported for Windows containers.
 	Ulimits []Ulimit
 
-	// The user to use inside the container. This parameter maps to User in the Create
-	// a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the --user
-	// option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). When
-	// running tasks using the host network mode, don't run containers using the root
-	// user (UID 0). We recommend using a non-root user for better security. You can
-	// specify the user using the following formats. If specifying a UID or GID, you
-	// must specify it as a positive integer.
-	// - user
-	// - user:group
-	// - uid
-	// - uid:gid
-	// -
-	// user:gid
-	// - uid:group
-	//
-	// This parameter is not supported for Windows containers.
+	// The user to use inside the container. This parameter maps to User  in the
+	// Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --user  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . When running tasks using the host network mode, don't run containers using
+	// the root user (UID 0). We recommend using a non-root user for better security.
+	// You can specify the user using the following formats. If specifying a UID or
+	// GID, you must specify it as a positive integer.
+	//     - user
+	//     - user:group
+	//     - uid
+	//     - uid:gid
+	//     - user:gid
+	//     - uid:group
+	//  This parameter is not supported for Windows containers.
 	User *string
 
-	// Data volumes to mount from another container. This parameter maps to VolumesFrom
-	// in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --volumes-from option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration).
+	// Data volumes to mount from another container. This parameter maps to
+	// VolumesFrom in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --volumes-from  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// .
 	VolumesFrom []VolumeFrom
 
 	// The working directory to run commands inside the container in. This parameter
-	// maps to WorkingDir in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --workdir option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration).
+	// maps to WorkingDir  in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --workdir  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// .
 	WorkingDirectory *string
 
 	noSmithyDocumentSerde
@@ -1124,39 +1012,24 @@ type ContainerDefinition struct {
 // instances require at least version 1.26.0 of the container agent to use
 // container dependencies. However, we recommend using the latest container agent
 // version. For information about checking your agent version and updating to the
-// latest version, see Updating the Amazon ECS Container Agent
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
+// latest version, see Updating the Amazon ECS Container Agent (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
 // in the Amazon Elastic Container Service Developer Guide. If you're using an
 // Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of
-// the ecs-init package. If your container instances are launched from version
-// 20190301 or later, then they contain the required versions of the container
-// agent and ecs-init. For more information, see Amazon ECS-optimized Linux AMI
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
+// the ecs-init  package. If your container instances are launched from version
+// 20190301or later, then they contain the required versions of the container
+// agent and ecs-init . For more information, see Amazon ECS-optimized Linux AMI (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 // in the Amazon Elastic Container Service Developer Guide. For tasks that use the
 // Fargate launch type, the task or service requires the following platforms:
-// -
-// Linux platform version 1.3.0 or later.
-// - Windows platform version 1.0.0 or
-// later.
+//   - Linux platform version 1.3.0 or later.
+//   - Windows platform version 1.0.0 or later.
 type ContainerDependency struct {
 
 	// The dependency condition of the container. The following are the available
 	// conditions and their behavior:
-	// - START - This condition emulates the behavior of
-	// links and volumes today. It validates that a dependent container is started
-	// before permitting other containers to start.
-	// - COMPLETE - This condition
-	// validates that a dependent container runs to completion (exits) before
-	// permitting other containers to start. This can be useful for nonessential
-	// containers that run a script and then exit. This condition can't be set on an
-	// essential container.
-	// - SUCCESS - This condition is the same as COMPLETE, but it
-	// also requires that the container exits with a zero status. This condition can't
-	// be set on an essential container.
-	// - HEALTHY - This condition validates that the
-	// dependent container passes its Docker health check before permitting other
-	// containers to start. This requires that the dependent container has health
-	// checks configured. This condition is confirmed only at task startup.
+	//     - START - This condition emulates the behavior of links and volumes today. It validates that a dependent container is started before permitting other containers to start.
+	//     - COMPLETE - This condition validates that a dependent container runs to completion (exits) before permitting other containers to start. This can be useful for nonessential containers that run a script and then exit. This condition can't be set on an essential container.
+	//     - SUCCESS - This condition is the same as COMPLETE , but it also requires that the container exits with a zero status. This condition can't be set on an essential container.
+	//     - HEALTHY - This condition validates that the dependent container passes its Docker health check before permitting other containers to start. This requires that the dependent container has health checks configured. This condition is confirmed only at task startup.
 	//
 	// This member is required.
 	Condition ContainerCondition
@@ -1173,13 +1046,13 @@ type ContainerDependency struct {
 // been registered with a cluster.
 type ContainerInstance struct {
 
-	// This parameter returns true if the agent is connected to Amazon ECS. An instance
-	// with an agent that may be unhealthy or stopped return false. Only instances
-	// connected to an agent can accept task placement requests.
+	// This parameter returns true if the agent is connected to Amazon ECS. An
+	// instance with an agent that may be unhealthy or stopped return false. Only
+	// instances connected to an agent can accept task placement requests.
 	AgentConnected bool
 
-	// The status of the most recent agent update. If an update wasn't ever requested,
-	// this value is NULL.
+	// The status of the most recent agent update. If an update wasn't ever
+	// requested, this value is NULL .
 	AgentUpdateStatus AgentUpdateStatus
 
 	// The resources attached to a container instance, such as an elastic network
@@ -1195,8 +1068,7 @@ type ContainerInstance struct {
 	CapacityProviderName *string
 
 	// The Amazon Resource Name (ARN) of the container instance. For more information
-	// about the ARN format, see Amazon Resource Name (ARN)
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids)
+	// about the ARN format, see Amazon Resource Name (ARN) (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids)
 	// in the Amazon ECS Developer Guide.
 	ContainerInstanceArn *string
 
@@ -1208,7 +1080,7 @@ type ContainerInstance struct {
 	// An object representing the health status of the container instance.
 	HealthStatus *ContainerInstanceHealthStatus
 
-	// The number of tasks on the container instance that are in the PENDING status.
+	// The number of tasks on the container instance that are in the PENDING  status.
 	PendingTasksCount int32
 
 	// The Unix timestamp for the time when the container instance was registered.
@@ -1228,64 +1100,52 @@ type ContainerInstance struct {
 	// new tasks. For port resource types, this parameter describes the ports that were
 	// reserved by the Amazon ECS container agent (at instance registration time) and
 	// any task containers that have reserved port mappings on the host (with the host
-	// or bridge network mode). Any port that's not specified here is available for new
-	// tasks.
+	// or bridge network mode). Any port that's not specified here is available for
+	// new tasks.
 	RemainingResources []Resource
 
-	// The number of tasks on the container instance that are in the RUNNING status.
+	// The number of tasks on the container instance that are in the RUNNING  status.
 	RunningTasksCount int32
 
-	// The status of the container instance. The valid values are REGISTERING,
-	// REGISTRATION_FAILED, ACTIVE, INACTIVE, DEREGISTERING, or DRAINING. If your
+	// The status of the container instance. The valid values are REGISTERING ,
+	// REGISTRATION_FAILED , ACTIVE , INACTIVE , DEREGISTERING , or DRAINING. If your
 	// account has opted in to the awsvpcTrunking account setting, then any newly
-	// registered container instance will transition to a REGISTERING status while the
-	// trunk elastic network interface is provisioned for the instance. If the
+	// registered container instance will transition to a REGISTERING status while
+	// the trunk elastic network interface is provisioned for the instance. If the
 	// registration fails, the instance will transition to a REGISTRATION_FAILED
 	// status. You can describe the container instance and see the reason for failure
 	// in the statusReason parameter. Once the container instance is terminated, the
 	// instance transitions to a DEREGISTERING status while the trunk elastic network
-	// interface is deprovisioned. The instance then transitions to an INACTIVE status.
-	// The ACTIVE status indicates that the container instance can accept tasks. The
-	// DRAINING indicates that new tasks aren't placed on the container instance and
-	// any service tasks running on the container instance are removed if possible. For
-	// more information, see Container instance draining
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-draining.html)
+	// interface is deprovisioned. The instance then transitions to an INACTIVE
+	// status. The ACTIVE status indicates that the container instance can accept
+	// tasks. The DRAINING indicates that new tasks aren't placed on the container
+	// instance and any service tasks running on the container instance are removed if
+	// possible. For more information, see Container instance draining (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-draining.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Status *string
 
 	// The reason that the container instance reached its current status.
 	StatusReason *string
 
-	// The metadata that you apply to the container instance to help you categorize and
-	// organize them. Each tag consists of a key and an optional value. You define
+	// The metadata that you apply to the container instance to help you categorize
+	// and organize them. Each tag consists of a key and an optional value. You define
 	// both. The following basic restrictions apply to tags:
-	// - Maximum number of tags
-	// per resource - 50
-	// - For each resource, each tag key must be unique, and each tag
-	// key can have only one value.
-	// - Maximum key length - 128 Unicode characters in
-	// UTF-8
-	// - Maximum value length - 256 Unicode characters in UTF-8
-	// - If your tagging
-	// schema is used across multiple services and resources, remember that other
-	// services may have restrictions on allowed characters. Generally allowed
-	// characters are: letters, numbers, and spaces representable in UTF-8, and the
-	// following characters: + - = . _ : / @.
-	// - Tag keys and values are
-	// case-sensitive.
-	// - Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for either keys or values as it is reserved for Amazon Web
-	// Services use. You cannot edit or delete tag keys or values with this prefix.
-	// Tags with this prefix do not count against your tags per resource limit.
+	//     - Maximum number of tags per resource - 50
+	//     - For each resource, each tag key must be unique, and each tag key can have only one value.
+	//     - Maximum key length - 128 Unicode characters in UTF-8
+	//     - Maximum value length - 256 Unicode characters in UTF-8
+	//     - If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
+	//     - Tag keys and values are case-sensitive.
+	//     - Do not use aws: , AWS: , or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.
 	Tags []Tag
 
-	// The version counter for the container instance. Every time a container instance
-	// experiences a change that triggers a CloudWatch event, the version counter is
-	// incremented. If you're replicating your Amazon ECS container instance state with
-	// CloudWatch Events, you can compare the version of a container instance reported
-	// by the Amazon ECS APIs with the version reported in CloudWatch Events for the
-	// container instance (inside the detail object) to verify that the version in your
-	// event stream is current.
+	// The version counter for the container instance. Every time a container
+	// instance experiences a change that triggers a CloudWatch event, the version
+	// counter is incremented. If you're replicating your Amazon ECS container instance
+	// state with CloudWatch Events, you can compare the version of a container
+	// instance reported by the Amazon ECS APIs with the version reported in CloudWatch
+	// Events for the container instance (inside the detail object) to verify that
+	// the version in your event stream is current.
 	Version int64
 
 	// The version information for the Amazon ECS container agent and Docker daemon
@@ -1302,31 +1162,31 @@ type ContainerInstanceHealthStatus struct {
 	// status.
 	Details []InstanceHealthCheckResult
 
-	// The overall health status of the container instance. This is an aggregate status
-	// of all container instance health checks.
+	// The overall health status of the container instance. This is an aggregate
+	// status of all container instance health checks.
 	OverallStatus InstanceHealthCheckState
 
 	noSmithyDocumentSerde
 }
 
 // The overrides that are sent to a container. An empty container override can be
-// passed in. An example of an empty container override is {"containerOverrides": [
-// ] }. If a non-empty container override is specified, the name parameter must be
-// included.
+// passed in. An example of an empty container override is {"containerOverrides":
+// [ ] } . If a non-empty container override is specified, the name parameter
+// must be included.
 type ContainerOverride struct {
 
-	// The command to send to the container that overrides the default command from the
-	// Docker image or the task definition. You must also specify a container name.
+	// The command to send to the container that overrides the default command from
+	// the Docker image or the task definition. You must also specify a container name.
 	Command []string
 
-	// The number of cpu units reserved for the container, instead of the default value
-	// from the task definition. You must also specify a container name.
+	// The number of cpu units reserved for the container, instead of the default
+	// value from the task definition. You must also specify a container name.
 	Cpu *int32
 
-	// The environment variables to send to the container. You can add new environment
-	// variables, which are added to the container at launch, or you can override the
-	// existing environment variables from the Docker image or the task definition. You
-	// must also specify a container name.
+	// The environment variables to send to the container. You can add new
+	// environment variables, which are added to the container at launch, or you can
+	// override the existing environment variables from the Docker image or the task
+	// definition. You must also specify a container name.
 	Environment []KeyValuePair
 
 	// A list of files containing the environment variables to pass to a container,
@@ -1343,8 +1203,8 @@ type ContainerOverride struct {
 	// default value from the task definition. You must also specify a container name.
 	MemoryReservation *int32
 
-	// The name of the container that receives the override. This parameter is required
-	// if any override is specified.
+	// The name of the container that receives the override. This parameter is
+	// required if any override is specified.
 	Name *string
 
 	// The type and amount of a resource to assign to a container, instead of the
@@ -1383,7 +1243,7 @@ type ContainerStateChange struct {
 }
 
 // The details of an Amazon ECS service deployment. This is used only when a
-// service uses the ECS deployment controller type.
+// service uses the ECS  deployment controller type.
 type Deployment struct {
 
 	// The capacity provider strategy that the deployment is using.
@@ -1396,75 +1256,73 @@ type Deployment struct {
 	// deploy or maintain.
 	DesiredCount int32
 
-	// The number of consecutively failed tasks in the deployment. A task is considered
-	// a failure if the service scheduler can't launch the task, the task doesn't
-	// transition to a RUNNING state, or if it fails any of its defined health checks
-	// and is stopped. Once a service deployment has one or more successfully running
-	// tasks, the failed task count resets to zero and stops being evaluated.
+	// The number of consecutively failed tasks in the deployment. A task is
+	// considered a failure if the service scheduler can't launch the task, the task
+	// doesn't transition to a RUNNING state, or if it fails any of its defined
+	// health checks and is stopped. Once a service deployment has one or more
+	// successfully running tasks, the failed task count resets to zero and stops being
+	// evaluated.
 	FailedTasks int32
 
 	// The ID of the deployment.
 	Id *string
 
 	// The launch type the tasks in the service are using. For more information, see
-	// Amazon ECS Launch Types
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
+	// Amazon ECS Launch Types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	LaunchType LaunchType
 
-	// The VPC subnet and security group configuration for tasks that receive their own
-	// elastic network interface by using the awsvpc networking mode.
+	// The VPC subnet and security group configuration for tasks that receive their
+	// own elastic network interface by using the awsvpc  networking mode.
 	NetworkConfiguration *NetworkConfiguration
 
-	// The number of tasks in the deployment that are in the PENDING status.
+	// The number of tasks in the deployment that are in the PENDING  status.
 	PendingCount int32
 
-	// The operating system that your tasks in the service, or tasks are running on. A
-	// platform family is specified only for tasks using the Fargate launch type. All
-	// tasks that run as part of this service must use the same platformFamily value as
-	// the service, for example,  LINUX..
+	// The operating system that your tasks in the service, or tasks are running on.
+	// A platform family is specified only for tasks using the Fargate launch type. All
+	// tasks that run as part of this service must use the same platformFamily value
+	// as the service, for example, LINUX. .
 	PlatformFamily *string
 
 	// The platform version that your tasks in the service run on. A platform version
 	// is only specified for tasks using the Fargate launch type. If one isn't
-	// specified, the LATEST platform version is used. For more information, see
-	// Fargate Platform Versions
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
+	// specified, the LATEST  platform version is used. For more information, see
+	// Fargate Platform Versions (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
 
-	// The rolloutState of a service is only returned for services that use the rolling
-	// update (ECS) deployment type that aren't behind a Classic Load Balancer. The
-	// rollout state of the deployment. When a service deployment is started, it begins
-	// in an IN_PROGRESS state. When the service reaches a steady state, the deployment
-	// transitions to a COMPLETED state. If the service fails to reach a steady state
-	// and circuit breaker is enabled, the deployment transitions to a FAILED state. A
-	// deployment in FAILED state doesn't launch any new tasks. For more information,
-	// see DeploymentCircuitBreaker.
+	// The rolloutState of a service is only returned for services that use the
+	// rolling update ( ECS) deployment type that aren't behind a Classic Load
+	// Balancer. The rollout state of the deployment. When a service deployment is
+	// started, it begins in an IN_PROGRESS state. When the service reaches a steady
+	// state, the deployment transitions to a COMPLETED state. If the service fails
+	// to reach a steady state and circuit breaker is enabled, the deployment
+	// transitions to a FAILED  state. A deployment in FAILED state doesn't launch
+	// any new tasks. For more information, see DeploymentCircuitBreaker .
 	RolloutState DeploymentRolloutState
 
 	// A description of the rollout state of a deployment.
 	RolloutStateReason *string
 
-	// The number of tasks in the deployment that are in the RUNNING status.
+	// The number of tasks in the deployment that are in the RUNNING  status.
 	RunningCount int32
 
-	// The details of the Service Connect configuration that's used by this deployment.
-	// Compare the configuration between multiple deployments when troubleshooting
-	// issues with new deployments. The configuration for this service to discover and
-	// connect to services, and be discovered by, and connected from, other services
-	// within a namespace. Tasks that run in a namespace can use short names to connect
-	// to services in the namespace. Tasks can connect to services across all of the
-	// clusters in the namespace. Tasks connect through a managed proxy container that
-	// collects logs and metrics for increased visibility. Only the tasks that Amazon
-	// ECS services create are supported with Service Connect. For more information,
-	// see Service Connect
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+	// The details of the Service Connect configuration that's used by this
+	// deployment. Compare the configuration between multiple deployments when
+	// troubleshooting issues with new deployments. The configuration for this service
+	// to discover and connect to services, and be discovered by, and connected from,
+	// other services within a namespace. Tasks that run in a namespace can use short
+	// names to connect to services in the namespace. Tasks can connect to services
+	// across all of the clusters in the namespace. Tasks connect through a managed
+	// proxy container that collects logs and metrics for increased visibility. Only
+	// the tasks that Amazon ECS services create are supported with Service Connect.
+	// For more information, see Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	ServiceConnectConfiguration *ServiceConnectConfiguration
 
-	// The list of Service Connect resources that are associated with this deployment.
-	// Each list entry maps a discovery name to a Cloud Map service name.
+	// The list of Service Connect resources that are associated with this
+	// deployment. Each list entry maps a discovery name to a Cloud Map service name.
 	ServiceConnectResources []ServiceConnectServiceResource
 
 	// The status of the deployment. The following describes each state. PRIMARY The
@@ -1473,8 +1331,8 @@ type Deployment struct {
 	// deployment. INACTIVE A deployment that has been completely replaced.
 	Status *string
 
-	// The most recent task definition that was specified for the tasks in the service
-	// to use.
+	// The most recent task definition that was specified for the tasks in the
+	// service to use.
 	TaskDefinition *string
 
 	// The Unix timestamp for the time when the service deployment was last updated.
@@ -1488,9 +1346,8 @@ type Deployment struct {
 // working deployment. When the alarms are generated, Amazon ECS sets the service
 // deployment to failed. Set the rollback parameter to have Amazon ECS to roll back
 // your service to the last completed deployment after a failure. You can only use
-// the DeploymentAlarms method to detect failures when the DeploymentController is
-// set to ECS (rolling update). For more information, see Rolling update
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html)
+// the DeploymentAlarms  method to detect failures when the DeploymentController
+// is set to ECS  (rolling update). For more information, see Rolling update (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html)
 // in the Amazon Elastic Container Service Developer Guide .
 type DeploymentAlarms struct {
 
@@ -1499,15 +1356,15 @@ type DeploymentAlarms struct {
 	// This member is required.
 	AlarmNames []string
 
-	// Determines whether to use the CloudWatch alarm option in the service deployment
-	// process.
+	// Determines whether to use the CloudWatch alarm option in the service
+	// deployment process.
 	//
 	// This member is required.
 	Enable bool
 
-	// Determines whether to configure Amazon ECS to roll back the service if a service
-	// deployment fails. If rollback is used, when a service deployment fails, the
-	// service is rolled back to the last deployment that completed successfully.
+	// Determines whether to configure Amazon ECS to roll back the service if a
+	// service deployment fails. If rollback is used, when a service deployment fails,
+	// the service is rolled back to the last deployment that completed successfully.
 	//
 	// This member is required.
 	Rollback bool
@@ -1516,13 +1373,12 @@ type DeploymentAlarms struct {
 }
 
 // The deployment circuit breaker can only be used for services using the rolling
-// update (ECS) deployment type. The deployment circuit breaker determines whether
-// a service deployment will fail if the service can't reach a steady state. If
-// enabled, a service deployment will transition to a failed state and stop
-// launching new tasks. You can also configure Amazon ECS to roll back your service
-// to the last completed deployment after a failure. For more information, see
-// Rolling update
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html)
+// update ( ECS) deployment type. The deployment circuit breaker determines
+// whether a service deployment will fail if the service can't reach a steady
+// state. If enabled, a service deployment will transition to a failed state and
+// stop launching new tasks. You can also configure Amazon ECS to roll back your
+// service to the last completed deployment after a failure. For more information,
+// see Rolling update (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type DeploymentCircuitBreaker struct {
 
@@ -1531,9 +1387,9 @@ type DeploymentCircuitBreaker struct {
 	// This member is required.
 	Enable bool
 
-	// Determines whether to configure Amazon ECS to roll back the service if a service
-	// deployment fails. If rollback is on, when a service deployment fails, the
-	// service is rolled back to the last deployment that completed successfully.
+	// Determines whether to configure Amazon ECS to roll back the service if a
+	// service deployment fails. If rollback is on, when a service deployment fails,
+	// the service is rolled back to the last deployment that completed successfully.
 	//
 	// This member is required.
 	Rollback bool
@@ -1549,99 +1405,80 @@ type DeploymentConfiguration struct {
 	Alarms *DeploymentAlarms
 
 	// The deployment circuit breaker can only be used for services using the rolling
-	// update (ECS) deployment type. The deployment circuit breaker determines whether
-	// a service deployment will fail if the service can't reach a steady state. If you
-	// use the deployment circuit breaker, a service deployment will transition to a
-	// failed state and stop launching new tasks. If you use the rollback option, when
-	// a service deployment fails, the service is rolled back to the last deployment
-	// that completed successfully. For more information, see Rolling update
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html)
+	// update ( ECS) deployment type. The deployment circuit breaker determines
+	// whether a service deployment will fail if the service can't reach a steady
+	// state. If you use the deployment circuit breaker, a service deployment will
+	// transition to a failed state and stop launching new tasks. If you use the
+	// rollback option, when a service deployment fails, the service is rolled back to
+	// the last deployment that completed successfully. For more information, see
+	// Rolling update (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html)
 	// in the Amazon Elastic Container Service Developer Guide
 	DeploymentCircuitBreaker *DeploymentCircuitBreaker
 
-	// If a service is using the rolling update (ECS) deployment type, the
-	// maximumPercent parameter represents an upper limit on the number of your
-	// service's tasks that are allowed in the RUNNING or PENDING state during a
+	// If a service is using the rolling update ( ECS ) deployment type, the
+	// maximumPercentparameter represents an upper limit on the number of your
+	// service's tasks that are allowed in the RUNNING  or PENDING state during a
 	// deployment, as a percentage of the desiredCount (rounded down to the nearest
 	// integer). This parameter enables you to define the deployment batch size. For
-	// example, if your service is using the REPLICA service scheduler and has a
-	// desiredCount of four tasks and a maximumPercent value of 200%, the scheduler may
-	// start four new tasks before stopping the four older tasks (provided that the
-	// cluster resources required to do this are available). The default maximumPercent
-	// value for a service using the REPLICA service scheduler is 200%. If a service is
-	// using either the blue/green (CODE_DEPLOY) or EXTERNAL deployment types and tasks
-	// that use the EC2 launch type, the maximum percent value is set to the default
-	// value and is used to define the upper limit on the number of the tasks in the
-	// service that remain in the RUNNING state while the container instances are in
-	// the DRAINING state. If the tasks in the service use the Fargate launch type, the
-	// maximum percent value is not used, although it is returned when describing your
-	// service.
+	// example, if your service is using the REPLICA  service scheduler and has a
+	// desiredCount of four tasks and a maximumPercent value of 200%, the scheduler
+	// may start four new tasks before stopping the four older tasks (provided that the
+	// cluster resources required to do this are available). The default
+	// maximumPercent value for a service using the REPLICA service scheduler is
+	// 200%. If a service is using either the blue/green ( CODE_DEPLOY ) or EXTERNAL
+	// deployment types and tasks that use the EC2 launch type, the maximum percent
+	// value is set to the default value and is used to define the upper limit on the
+	// number of the tasks in the service that remain in the RUNNING state while the
+	// container instances are in the DRAINING state. If the tasks in the service use
+	// the Fargate launch type, the maximum percent value is not used, although it is
+	// returned when describing your service.
 	MaximumPercent *int32
 
-	// If a service is using the rolling update (ECS) deployment type, the
-	// minimumHealthyPercent represents a lower limit on the number of your service's
-	// tasks that must remain in the RUNNING state during a deployment, as a percentage
-	// of the desiredCount (rounded up to the nearest integer). This parameter enables
-	// you to deploy without using additional cluster capacity. For example, if your
-	// service has a desiredCount of four tasks and a minimumHealthyPercent of 50%, the
-	// service scheduler may stop two existing tasks to free up cluster capacity before
-	// starting two new tasks. For services that do not use a load balancer, the
-	// following should be noted:
-	// - A service is considered healthy if all essential
-	// containers within the tasks in the service pass their health checks.
-	// - If a task
-	// has no essential containers with a health check defined, the service scheduler
-	// will wait for 40 seconds after a task reaches a RUNNING state before the task is
-	// counted towards the minimum healthy percent total.
-	// - If a task has one or more
-	// essential containers with a health check defined, the service scheduler will
-	// wait for the task to reach a healthy status before counting it towards the
-	// minimum healthy percent total. A task is considered healthy when all essential
-	// containers within the task have passed their health checks. The amount of time
-	// the service scheduler can wait for is determined by the container health check
-	// settings.
+	// If a service is using the rolling update ( ECS ) deployment type, the
+	// minimumHealthyPercentrepresents a lower limit on the number of your service's
+	// tasks that must remain in the RUNNING state during a deployment, as a
+	// percentage of the desiredCount (rounded up to the nearest integer). This
+	// parameter enables you to deploy without using additional cluster capacity. For
+	// example, if your service has a desiredCount  of four tasks and a
+	// minimumHealthyPercentof 50%, the service scheduler may stop two existing tasks
+	// to free up cluster capacity before starting two new tasks. For services that do
+	// not use a load balancer, the following should be noted:
+	//     - A service is considered healthy if all essential containers within the tasks in the service pass their health checks.
+	//     - If a task has no essential containers with a health check defined, the service scheduler will wait for 40 seconds after a task reaches a RUNNING state before the task is counted towards the minimum healthy percent total.
+	//     - If a task has one or more essential containers with a health check defined, the service scheduler will wait for the task to reach a healthy status before counting it towards the minimum healthy percent total. A task is considered healthy when all essential containers within the task have passed their health checks. The amount of time the service scheduler can wait for is determined by the container health check settings.
 	//
-	// For services are that do use a load balancer, the following should be
-	// noted:
-	// - If a task has no essential containers with a health check defined, the
-	// service scheduler will wait for the load balancer target group health check to
-	// return a healthy status before counting the task towards the minimum healthy
-	// percent total.
-	// - If a task has an essential container with a health check
-	// defined, the service scheduler will wait for both the task to reach a healthy
-	// status and the load balancer target group health check to return a healthy
-	// status before counting the task towards the minimum healthy percent total.
+	// For services are that do use a load balancer, the following should be noted:
+	//     - If a task has no essential containers with a health check defined, the service scheduler will wait for the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.
+	//     - If a task has an essential container with a health check defined, the service scheduler will wait for both the task to reach a healthy status and the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.
 	//
-	// If a
-	// service is using either the blue/green (CODE_DEPLOY) or EXTERNAL deployment
-	// types and is running tasks that use the EC2 launch type, the minimum healthy
-	// percent value is set to the default value and is used to define the lower limit
-	// on the number of the tasks in the service that remain in the RUNNING state while
-	// the container instances are in the DRAINING state. If a service is using either
-	// the blue/green (CODE_DEPLOY) or EXTERNAL deployment types and is running tasks
-	// that use the Fargate launch type, the minimum healthy percent value is not used,
-	// although it is returned when describing your service.
+	// If a service is using either the blue/green ( CODE_DEPLOY ) or EXTERNAL
+	// deployment types and is running tasks that use the EC2 launch type, the minimum
+	// healthy percent value is set to the default value and is used to define the
+	// lower limit on the number of the tasks in the service that remain in the
+	// RUNNING state while the container instances are in the DRAINING state. If a
+	// service is using either the blue/green ( CODE_DEPLOY ) or EXTERNAL deployment
+	// types and is running tasks that use the Fargate launch type, the minimum healthy
+	// percent value is not used, although it is returned when describing your service.
 	MinimumHealthyPercent *int32
 
 	noSmithyDocumentSerde
 }
 
 // The deployment controller to use for the service. For more information, see
-// Amazon ECS deployment types
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
+// Amazon ECS deployment types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type DeploymentController struct {
 
 	// The deployment controller type to use. There are three deployment controller
-	// types available: ECS The rolling update (ECS) deployment type involves replacing
-	// the current running version of the container with the latest version. The number
-	// of containers Amazon ECS adds or removes from the service during a rolling
-	// update is controlled by adjusting the minimum and maximum number of healthy
-	// tasks allowed during a service deployment, as specified in the
-	// DeploymentConfiguration. CODE_DEPLOY The blue/green (CODE_DEPLOY) deployment
+	// types available: ECS The rolling update ( ECS) deployment type involves
+	// replacing the current running version of the container with the latest version.
+	// The number of containers Amazon ECS adds or removes from the service during a
+	// rolling update is controlled by adjusting the minimum and maximum number of
+	// healthy tasks allowed during a service deployment, as specified in the
+	// DeploymentConfiguration . CODE_DEPLOY The blue/green ( CODE_DEPLOY) deployment
 	// type uses the blue/green deployment model powered by CodeDeploy, which allows
 	// you to verify a new deployment of a service before sending production traffic to
-	// it. EXTERNAL The external (EXTERNAL) deployment type enables you to use any
+	// it. EXTERNAL The external ( EXTERNAL) deployment type enables you to use any
 	// third-party deployment controller for full control over the deployment process
 	// for an Amazon ECS service.
 	//
@@ -1662,20 +1499,22 @@ type Device struct {
 	// The path inside the container at which to expose the host device.
 	ContainerPath *string
 
-	// The explicit permissions to provide to the container for the device. By default,
-	// the container has permissions for read, write, and mknod for the device.
+	// The explicit permissions to provide to the container for the device. By
+	// default, the container has permissions for read , write , and mknod for the
+	// device.
 	Permissions []DeviceCgroupPermission
 
 	noSmithyDocumentSerde
 }
 
-// This parameter is specified when you're using Docker volumes. Docker volumes are
-// only supported when you're using the EC2 launch type. Windows containers only
-// support the use of the local driver. To use bind mounts, specify a host instead.
+// This parameter is specified when you're using Docker volumes. Docker volumes
+// are only supported when you're using the EC2 launch type. Windows containers
+// only support the use of the local  driver. To use bind mounts, specify a host
+// instead.
 type DockerVolumeConfiguration struct {
 
-	// If this value is true, the Docker volume is created if it doesn't already exist.
-	// This field is only used if the scope is shared.
+	// If this value is true, the Docker volume is created if it doesn't already
+	// exist. This field is only used if the scope  is shared .
 	Autoprovision *bool
 
 	// The Docker volume driver to use. The driver value must match the driver name
@@ -1683,35 +1522,31 @@ type DockerVolumeConfiguration struct {
 	// installed using the Docker plugin CLI, use docker plugin ls to retrieve the
 	// driver name from your container instance. If the driver was installed using
 	// another method, use Docker plugin discovery to retrieve the driver name. For
-	// more information, see Docker plugin discovery
-	// (https://docs.docker.com/engine/extend/plugin_api/#plugin-discovery). This
-	// parameter maps to Driver in the Create a volume
-	// (https://docs.docker.com/engine/api/v1.35/#operation/VolumeCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// xxdriver option to docker volume create
-	// (https://docs.docker.com/engine/reference/commandline/volume_create/).
+	// more information, see Docker plugin discovery (https://docs.docker.com/engine/extend/plugin_api/#plugin-discovery)
+	// . This parameter maps to Driver  in the Create a volume (https://docs.docker.com/engine/api/v1.35/#operation/VolumeCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the xxdriver  option to docker volume create (https://docs.docker.com/engine/reference/commandline/volume_create/)
+	// .
 	Driver *string
 
 	// A map of Docker driver-specific options passed through. This parameter maps to
-	// DriverOpts in the Create a volume
-	// (https://docs.docker.com/engine/api/v1.35/#operation/VolumeCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the xxopt
-	// option to docker volume create
-	// (https://docs.docker.com/engine/reference/commandline/volume_create/).
+	// DriverOpts in the Create a volume (https://docs.docker.com/engine/api/v1.35/#operation/VolumeCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the xxopt  option to docker volume create (https://docs.docker.com/engine/reference/commandline/volume_create/)
+	// .
 	DriverOpts map[string]string
 
 	// Custom metadata to add to your Docker volume. This parameter maps to Labels in
-	// the Create a volume
-	// (https://docs.docker.com/engine/api/v1.35/#operation/VolumeCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// xxlabel option to docker volume create
-	// (https://docs.docker.com/engine/reference/commandline/volume_create/).
+	// the Create a volume (https://docs.docker.com/engine/api/v1.35/#operation/VolumeCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the xxlabel  option to docker volume create (https://docs.docker.com/engine/reference/commandline/volume_create/)
+	// .
 	Labels map[string]string
 
 	// The scope for the Docker volume that determines its lifecycle. Docker volumes
-	// that are scoped to a task are automatically provisioned when the task starts and
-	// destroyed when the task stops. Docker volumes that are scoped as shared persist
-	// after the task stops.
+	// that are scoped to a task are automatically provisioned when the task starts
+	// and destroyed when the task stops. Docker volumes that are scoped as shared
+	// persist after the task stops.
 	Scope Scope
 
 	noSmithyDocumentSerde
@@ -1720,30 +1555,28 @@ type DockerVolumeConfiguration struct {
 // The authorization configuration details for the Amazon EFS file system.
 type EFSAuthorizationConfig struct {
 
-	// The Amazon EFS access point ID to use. If an access point is specified, the root
-	// directory value specified in the EFSVolumeConfiguration must either be omitted
-	// or set to / which will enforce the path set on the EFS access point. If an
-	// access point is used, transit encryption must be enabled in the
-	// EFSVolumeConfiguration. For more information, see Working with Amazon EFS access
-	// points (https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html) in the
-	// Amazon Elastic File System User Guide.
+	// The Amazon EFS access point ID to use. If an access point is specified, the
+	// root directory value specified in the EFSVolumeConfiguration must either be
+	// omitted or set to / which will enforce the path set on the EFS access point.
+	// If an access point is used, transit encryption must be enabled in the
+	// EFSVolumeConfiguration . For more information, see Working with Amazon EFS
+	// access points (https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html)
+	// in the Amazon Elastic File System User Guide.
 	AccessPointId *string
 
-	// Determines whether to use the Amazon ECS task role defined in a task definition
-	// when mounting the Amazon EFS file system. If enabled, transit encryption must be
-	// enabled in the EFSVolumeConfiguration. If this parameter is omitted, the default
-	// value of DISABLED is used. For more information, see Using Amazon EFS access
-	// points
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html#efs-volume-accesspoints)
+	// Determines whether to use the Amazon ECS task role defined in a task
+	// definition when mounting the Amazon EFS file system. If enabled, transit
+	// encryption must be enabled in the EFSVolumeConfiguration. If this parameter is
+	// omitted, the default value of DISABLED  is used. For more information, see
+	// Using Amazon EFS access points (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html#efs-volume-accesspoints)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Iam EFSAuthorizationConfigIAM
 
 	noSmithyDocumentSerde
 }
 
-// This parameter is specified when you're using an Amazon Elastic File System file
-// system for task storage. For more information, see Amazon EFS volumes
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html)
+// This parameter is specified when you're using an Amazon Elastic File System
+// file system for task storage. For more information, see Amazon EFS volumes (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type EFSVolumeConfiguration struct {
 
@@ -1757,53 +1590,49 @@ type EFSVolumeConfiguration struct {
 
 	// The directory within the Amazon EFS file system to mount as the root directory
 	// inside the host. If this parameter is omitted, the root of the Amazon EFS volume
-	// will be used. Specifying / will have the same effect as omitting this parameter.
-	// If an EFS access point is specified in the authorizationConfig, the root
-	// directory parameter must either be omitted or set to / which will enforce the
-	// path set on the EFS access point.
+	// will be used. Specifying / will have the same effect as omitting this
+	// parameter. If an EFS access point is specified in the authorizationConfig, the
+	// root directory parameter must either be omitted or set to / which will enforce
+	// the path set on the EFS access point.
 	RootDirectory *string
 
-	// Determines whether to use encryption for Amazon EFS data in transit between the
-	// Amazon ECS host and the Amazon EFS server. Transit encryption must be enabled if
-	// Amazon EFS IAM authorization is used. If this parameter is omitted, the default
-	// value of DISABLED is used. For more information, see Encrypting data in transit
-	// (https://docs.aws.amazon.com/efs/latest/ug/encryption-in-transit.html) in the
-	// Amazon Elastic File System User Guide.
+	// Determines whether to use encryption for Amazon EFS data in transit between
+	// the Amazon ECS host and the Amazon EFS server. Transit encryption must be
+	// enabled if Amazon EFS IAM authorization is used. If this parameter is omitted,
+	// the default value of DISABLED  is used. For more information, see Encrypting
+	// data in transit (https://docs.aws.amazon.com/efs/latest/ug/encryption-in-transit.html)
+	// in the Amazon Elastic File System User Guide.
 	TransitEncryption EFSTransitEncryption
 
-	// The port to use when sending encrypted data between the Amazon ECS host and the
-	// Amazon EFS server. If you do not specify a transit encryption port, it will use
-	// the port selection strategy that the Amazon EFS mount helper uses. For more
-	// information, see EFS mount helper
-	// (https://docs.aws.amazon.com/efs/latest/ug/efs-mount-helper.html) in the Amazon
-	// Elastic File System User Guide.
+	// The port to use when sending encrypted data between the Amazon ECS host and
+	// the Amazon EFS server. If you do not specify a transit encryption port, it will
+	// use the port selection strategy that the Amazon EFS mount helper uses. For more
+	// information, see EFS mount helper (https://docs.aws.amazon.com/efs/latest/ug/efs-mount-helper.html)
+	// in the Amazon Elastic File System User Guide.
 	TransitEncryptionPort *int32
 
 	noSmithyDocumentSerde
 }
 
-// A list of files containing the environment variables to pass to a container. You
-// can specify up to ten environment files. The file must have a .env file
+// A list of files containing the environment variables to pass to a container.
+// You can specify up to ten environment files. The file must have a .env file
 // extension. Each line in an environment file should contain an environment
-// variable in VARIABLE=VALUE format. Lines beginning with # are treated as
+// variable in VARIABLE=VALUE  format. Lines beginning with # are treated as
 // comments and are ignored. For more information about the environment variable
-// file syntax, see Declare default environment variables in file
-// (https://docs.docker.com/compose/env-file/). If there are environment variables
-// specified using the environment parameter in a container definition, they take
-// precedence over the variables contained within an environment file. If multiple
-// environment files are specified that contain the same variable, they're
-// processed from the top down. We recommend that you use unique variable names.
-// For more information, see Specifying environment variables
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html)
+// file syntax, see Declare default environment variables in file (https://docs.docker.com/compose/env-file/)
+// . If there are environment variables specified using the environment parameter
+// in a container definition, they take precedence over the variables contained
+// within an environment file. If multiple environment files are specified that
+// contain the same variable, they're processed from the top down. We recommend
+// that you use unique variable names. For more information, see Specifying
+// environment variables (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html)
 // in the Amazon Elastic Container Service Developer Guide. This parameter is only
 // supported for tasks hosted on Fargate using the following platform versions:
-// -
-// Linux platform version 1.4.0 or later.
-// - Windows platform version 1.0.0 or
-// later.
+//   - Linux platform version 1.4.0 or later.
+//   - Windows platform version 1.0.0 or later.
 type EnvironmentFile struct {
 
-	// The file type to use. The only supported value is s3.
+	// The file type to use. The only supported value is s3 .
 	//
 	// This member is required.
 	Type EnvironmentFileType
@@ -1817,18 +1646,17 @@ type EnvironmentFile struct {
 	noSmithyDocumentSerde
 }
 
-// The amount of ephemeral storage to allocate for the task. This parameter is used
-// to expand the total amount of ephemeral storage available, beyond the default
-// amount, for tasks hosted on Fargate. For more information, see Fargate task
-// storage
-// (https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html)
+// The amount of ephemeral storage to allocate for the task. This parameter is
+// used to expand the total amount of ephemeral storage available, beyond the
+// default amount, for tasks hosted on Fargate. For more information, see Fargate
+// task storage (https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html)
 // in the Amazon ECS User Guide for Fargate. This parameter is only supported for
 // tasks hosted on Fargate using Linux platform version 1.4.0 or later. This
 // parameter is not supported for Windows containers on Fargate.
 type EphemeralStorage struct {
 
-	// The total amount, in GiB, of ephemeral storage to set for the task. The minimum
-	// supported value is 21 GiB and the maximum supported value is 200 GiB.
+	// The total amount, in GiB, of ephemeral storage to set for the task. The
+	// minimum supported value is 21  GiB and the maximum supported value is 200  GiB.
 	//
 	// This member is required.
 	SizeInGiB int32
@@ -1844,20 +1672,15 @@ type ExecuteCommandConfiguration struct {
 	KmsKeyId *string
 
 	// The log configuration for the results of the execute command actions. The logs
-	// can be sent to CloudWatch Logs or an Amazon S3 bucket. When logging=OVERRIDE is
-	// specified, a logConfiguration must be provided.
+	// can be sent to CloudWatch Logs or an Amazon S3 bucket. When logging=OVERRIDE
+	// is specified, a logConfiguration  must be provided.
 	LogConfiguration *ExecuteCommandLogConfiguration
 
 	// The log setting to use for redirecting logs for your execute command results.
 	// The following log settings are available.
-	// - NONE: The execute command session is
-	// not logged.
-	// - DEFAULT: The awslogs configuration in the task definition is used.
-	// If no logging parameter is specified, it defaults to this value. If no awslogs
-	// log driver is configured in the task definition, the output won't be logged.
-	// -
-	// OVERRIDE: Specify the logging details as a part of logConfiguration. If the
-	// OVERRIDE logging option is specified, the logConfiguration is required.
+	//     - NONE : The execute command session is not logged.
+	//     - DEFAULT : The awslogs configuration in the task definition is used. If no logging parameter is specified, it defaults to this value. If no awslogs log driver is configured in the task definition, the output won't be logged.
+	//     - OVERRIDE : Specify the logging details as a part of logConfiguration . If the OVERRIDE logging option is specified, the logConfiguration is required.
 	Logging ExecuteCommandLogging
 
 	noSmithyDocumentSerde
@@ -1889,8 +1712,7 @@ type ExecuteCommandLogConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A failed resource. For a list of common causes, see API failure reasons
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html)
+// A failed resource. For a list of common causes, see API failure reasons (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type Failure struct {
 
@@ -1907,13 +1729,12 @@ type Failure struct {
 }
 
 // The FireLens configuration for the container. This is used to specify and
-// configure a log router for container logs. For more information, see Custom log
-// routing
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html)
+// configure a log router for container logs. For more information, see Custom
+// log routing (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type FirelensConfiguration struct {
 
-	// The log router to use. The valid values are fluentd or fluentbit.
+	// The log router to use. The valid values are fluentd  or fluentbit .
 	//
 	// This member is required.
 	Type FirelensConfigurationType
@@ -1922,36 +1743,32 @@ type FirelensConfiguration struct {
 	// can be used to specify a custom configuration file or to add additional
 	// metadata, such as the task, task definition, cluster, and container instance
 	// details to the log event. If specified, the syntax to use is
-	// "options":{"enable-ecs-log-metadata":"true|false","config-file-type:"s3|file","config-file-value":"arn:aws:s3:::mybucket/fluent.conf|filepath"}.
-	// For more information, see Creating a task definition that uses a FireLens
-	// configuration
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html#firelens-taskdef)
+	// "options":{"enable-ecs-log-metadata":"true|false","config-file-type:"s3|file","config-file-value":"arn:aws:s3:::mybucket/fluent.conf|filepath"}
+	// . For more information, see Creating a task definition that uses a FireLens
+	// configuration (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html#firelens-taskdef)
 	// in the Amazon Elastic Container Service Developer Guide. Tasks hosted on Fargate
-	// only support the file configuration file type.
+	// only support the file  configuration file type.
 	Options map[string]string
 
 	noSmithyDocumentSerde
 }
 
 // The authorization configuration details for Amazon FSx for Windows File Server
-// file system. See FSxWindowsFileServerVolumeConfiguration
-// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_FSxWindowsFileServerVolumeConfiguration.html)
+// file system. See FSxWindowsFileServerVolumeConfiguration (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_FSxWindowsFileServerVolumeConfiguration.html)
 // in the Amazon ECS API Reference. For more information and the input format, see
-// Amazon FSx for Windows File Server Volumes
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/wfsx-volumes.html)
+// Amazon FSx for Windows File Server Volumes (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/wfsx-volumes.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type FSxWindowsFileServerAuthorizationConfig struct {
 
-	// The authorization credential option to use. The authorization credential options
-	// can be provided using either the Amazon Resource Name (ARN) of an Secrets
-	// Manager secret or SSM Parameter Store parameter. The ARN refers to the stored
-	// credentials.
+	// The authorization credential option to use. The authorization credential
+	// options can be provided using either the Amazon Resource Name (ARN) of an
+	// Secrets Manager secret or SSM Parameter Store parameter. The ARN refers to the
+	// stored credentials.
 	//
 	// This member is required.
 	CredentialsParameter *string
 
-	// A fully qualified domain name hosted by an Directory Service
-	// (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html)
+	// A fully qualified domain name hosted by an Directory Service (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html)
 	// Managed Microsoft AD (Active Directory) or self-hosted AD on Amazon EC2.
 	//
 	// This member is required.
@@ -1960,11 +1777,10 @@ type FSxWindowsFileServerAuthorizationConfig struct {
 	noSmithyDocumentSerde
 }
 
-// This parameter is specified when you're using Amazon FSx for Windows File Server
-// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html) file system
-// for task storage. For more information and the input format, see Amazon FSx for
-// Windows File Server volumes
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/wfsx-volumes.html)
+// This parameter is specified when you're using Amazon FSx for Windows File
+// Server (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html)file
+// system for task storage. For more information and the input format, see Amazon
+// FSx for Windows File Server volumes (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/wfsx-volumes.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type FSxWindowsFileServerVolumeConfiguration struct {
 
@@ -1979,8 +1795,8 @@ type FSxWindowsFileServerVolumeConfiguration struct {
 	// This member is required.
 	FileSystemId *string
 
-	// The directory within the Amazon FSx for Windows File Server file system to mount
-	// as the root directory inside the host.
+	// The directory within the Amazon FSx for Windows File Server file system to
+	// mount as the root directory inside the host.
 	//
 	// This member is required.
 	RootDirectory *string
@@ -2000,66 +1816,49 @@ type FSxWindowsFileServerVolumeConfiguration struct {
 // containers and a task with the DescribeTasks API operation or when viewing the
 // task details in the console. The following describes the possible healthStatus
 // values for a container:
-// - HEALTHY-The container health check has passed
-// successfully.
-// - UNHEALTHY-The container health check has failed.
-// - UNKNOWN-The
-// container health check is being evaluated or there's no container health check
-// defined.
+//   - HEALTHY -The container health check has passed successfully.
+//   - UNHEALTHY -The container health check has failed.
+//   - UNKNOWN -The container health check is being evaluated or there's no container health check defined.
 //
-// The following describes the possible healthStatus values for a task.
-// The container health check status of nonessential containers only affects the
-// health status of a task if no essential containers have health checks defined.
-// -
-// HEALTHY-All essential containers within the task have passed their health
-// checks.
-// - UNHEALTHY-One or more essential containers have failed their health
-// check.
-// - UNKNOWN-The essential containers within the task are still having their
-// health checks evaluated or there are only nonessential containers with health
-// checks defined.
+// The following describes the possible healthStatus values for a task. The
+// container health check status of nonessential containers only affects the health
+// status of a task if no essential containers have health checks defined.
+//   - HEALTHY -All essential containers within the task have passed their health checks.
+//   - UNHEALTHY -One or more essential containers have failed their health check.
+//   - UNKNOWN -The essential containers within the task are still having their health checks evaluated or there are only nonessential containers with health checks defined.
 //
-// If a task is run manually, and not as part of a service, the
-// task will continue its lifecycle regardless of its health status. For tasks that
-// are part of a service, if the task reports as unhealthy then the task will be
-// stopped and the service scheduler will replace it. For tasks that are a part of
-// a service and the service uses the ECS rolling deployment type, the deployment
-// is paused while the new tasks have the UNKNOWN task health check status. For
-// example, tasks that define health checks for nonessential containers when no
-// essential containers have health checks will have the UNKNOWN health check
-// status indefinitely which prevents the deployment from completing. The following
-// are notes about container health check support:
-// - Container health checks
-// require version 1.17.0 or greater of the Amazon ECS container agent. For more
-// information, see Updating the Amazon ECS container agent
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html).
-// -
-// Container health checks are supported for Fargate tasks if you're using platform
-// version 1.1.0 or greater. For more information, see Fargate platform versions
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html).
-// -
-// Container health checks aren't supported for tasks that are part of a service
-// that's configured to use a Classic Load Balancer.
+// If a task is run manually, and not as part of a service, the task will continue
+// its lifecycle regardless of its health status. For tasks that are part of a
+// service, if the task reports as unhealthy then the task will be stopped and the
+// service scheduler will replace it. For tasks that are a part of a service and
+// the service uses the ECS rolling deployment type, the deployment is paused
+// while the new tasks have the UNKNOWN task health check status. For example,
+// tasks that define health checks for nonessential containers when no essential
+// containers have health checks will have the UNKNOWN health check status
+// indefinitely which prevents the deployment from completing. The following are
+// notes about container health check support:
+//   - Container health checks require version 1.17.0 or greater of the Amazon ECS container agent. For more information, see Updating the Amazon ECS container agent (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html) .
+//   - Container health checks are supported for Fargate tasks if you're using platform version 1.1.0 or greater. For more information, see Fargate platform versions (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html) .
+//   - Container health checks aren't supported for tasks that are part of a service that's configured to use a Classic Load Balancer.
 type HealthCheck struct {
 
-	// A string array representing the command that the container runs to determine if
-	// it is healthy. The string array must start with CMD to run the command arguments
-	// directly, or CMD-SHELL to run the command with the container's default shell.
-	// When you use the Amazon Web Services Management Console JSON panel, the Command
-	// Line Interface, or the APIs, enclose the list of commands in double quotes and
-	// brackets. [ "CMD-SHELL", "curl -f http://localhost/ || exit 1" ] You don't
-	// include the double quotes and brackets when you use the Amazon Web Services
-	// Management Console.  CMD-SHELL, curl -f http://localhost/ || exit 1 An exit code
-	// of 0 indicates success, and non-zero exit code indicates failure. For more
-	// information, see HealthCheck in the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/).
+	// A string array representing the command that the container runs to determine
+	// if it is healthy. The string array must start with CMD to run the command
+	// arguments directly, or CMD-SHELL to run the command with the container's
+	// default shell. When you use the Amazon Web Services Management Console JSON
+	// panel, the Command Line Interface, or the APIs, enclose the list of commands in
+	// double quotes and brackets. [ "CMD-SHELL", "curl -f http://localhost/ || exit
+	// 1" ]You don't include the double quotes and brackets when you use the Amazon
+	// Web Services Management Console. CMD-SHELL, curl -f http://localhost/ || exit 1
+	// An exit code of 0 indicates success, and non-zero exit code indicates failure.
+	// For more information, see HealthCheck  in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) .
 	//
 	// This member is required.
 	Command []string
 
-	// The time period in seconds between each health check execution. You may specify
-	// between 5 and 300 seconds. The default value is 30 seconds.
+	// The time period in seconds between each health check execution. You may
+	// specify between 5 and 300 seconds. The default value is 30 seconds.
 	Interval *int32
 
 	// The number of times to retry a failed health check before the container is
@@ -2067,11 +1866,11 @@ type HealthCheck struct {
 	// value is 3.
 	Retries *int32
 
-	// The optional grace period to provide containers time to bootstrap before failed
-	// health checks count towards the maximum number of retries. You can specify
-	// between 0 and 300 seconds. By default, the startPeriod is off. If a health check
-	// succeeds within the startPeriod, then the container is considered healthy and
-	// any subsequent failures count toward the maximum number of retries.
+	// The optional grace period to provide containers time to bootstrap before
+	// failed health checks count towards the maximum number of retries. You can
+	// specify between 0 and 300 seconds. By default, the startPeriod is off. If a
+	// health check succeeds within the startPeriod, then the container is considered
+	// healthy and any subsequent failures count toward the maximum number of retries.
 	StartPeriod *int32
 
 	// The time period in seconds to wait for a health check to succeed before it is
@@ -2083,15 +1882,15 @@ type HealthCheck struct {
 }
 
 // Hostnames and IP address entries that are added to the /etc/hosts file of a
-// container via the extraHosts parameter of its ContainerDefinition.
+// container via the extraHosts  parameter of its ContainerDefinition .
 type HostEntry struct {
 
-	// The hostname to use in the /etc/hosts entry.
+	// The hostname to use in the /etc/hosts  entry.
 	//
 	// This member is required.
 	Hostname *string
 
-	// The IP address to use in the /etc/hosts entry.
+	// The IP address to use in the /etc/hosts  entry.
 	//
 	// This member is required.
 	IpAddress *string
@@ -2102,28 +1901,27 @@ type HostEntry struct {
 // Details on a container instance bind mount host volume.
 type HostVolumeProperties struct {
 
-	// When the host parameter is used, specify a sourcePath to declare the path on the
-	// host container instance that's presented to the container. If this parameter is
-	// empty, then the Docker daemon has assigned a host path for you. If the host
-	// parameter contains a sourcePath file location, then the data volume persists at
-	// the specified location on the host container instance until you delete it
-	// manually. If the sourcePath value doesn't exist on the host container instance,
-	// the Docker daemon creates it. If the location does exist, the contents of the
-	// source path folder are exported. If you're using the Fargate launch type, the
-	// sourcePath parameter is not supported.
+	// When the host  parameter is used, specify a sourcePath to declare the path on
+	// the host container instance that's presented to the container. If this parameter
+	// is empty, then the Docker daemon has assigned a host path for you. If the host
+	// parameter contains a sourcePath file location, then the data volume persists
+	// at the specified location on the host container instance until you delete it
+	// manually. If the sourcePath value doesn't exist on the host container
+	// instance, the Docker daemon creates it. If the location does exist, the contents
+	// of the source path folder are exported. If you're using the Fargate launch type,
+	// the sourcePath  parameter is not supported.
 	SourcePath *string
 
 	noSmithyDocumentSerde
 }
 
 // Details on an Elastic Inference accelerator. For more information, see Working
-// with Amazon Elastic Inference on Amazon ECS
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html)
+// with Amazon Elastic Inference on Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type InferenceAccelerator struct {
 
 	// The Elastic Inference accelerator device name. The deviceName must also be
-	// referenced in a container definition as a ResourceRequirement.
+	// referenced in a container definition as a ResourceRequirement .
 	//
 	// This member is required.
 	DeviceName *string
@@ -2139,13 +1937,12 @@ type InferenceAccelerator struct {
 // Details on an Elastic Inference accelerator task override. This parameter is
 // used to override the Elastic Inference accelerator specified in the task
 // definition. For more information, see Working with Amazon Elastic Inference on
-// Amazon ECS
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html)
+// Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type InferenceAcceleratorOverride struct {
 
 	// The Elastic Inference accelerator device name to override for the task. This
-	// parameter must match a deviceName specified in the task definition.
+	// parameter must match a deviceName  specified in the task definition.
 	DeviceName *string
 
 	// The Elastic Inference accelerator type to use.
@@ -2176,39 +1973,36 @@ type InstanceHealthCheckResult struct {
 // The Linux capabilities for the container that are added to or dropped from the
 // default configuration provided by Docker. For more information about the default
 // capabilities and the non-default available capabilities, see Runtime privilege
-// and Linux capabilities
-// (https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities)
+// and Linux capabilities (https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities)
 // in the Docker run reference. For more detailed information about these Linux
-// capabilities, see the capabilities(7)
-// (http://man7.org/linux/man-pages/man7/capabilities.7.html) Linux manual page.
+// capabilities, see the capabilities(7) (http://man7.org/linux/man-pages/man7/capabilities.7.html)
+// Linux manual page.
 type KernelCapabilities struct {
 
 	// The Linux capabilities for the container that have been added to the default
-	// configuration provided by Docker. This parameter maps to CapAdd in the Create a
-	// container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
-	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and
-	// the --cap-add option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). Tasks
-	// launched on Fargate only support adding the SYS_PTRACE kernel capability. Valid
-	// values: "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" | "CHOWN" |
-	// "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK" |
-	// "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" |
-	// "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" |
-	// "NET_RAW" | "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" |
-	// "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" |
-	// "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" | "SYS_TTY_CONFIG" |
-	// "SYSLOG" | "WAKE_ALARM"
+	// configuration provided by Docker. This parameter maps to CapAdd  in the Create
+	// a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --cap-add  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . Tasks launched on Fargate only support adding the SYS_PTRACE kernel
+	// capability. Valid values: "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" |
+	// "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" |
+	// "FSETID" | "IPC_LOCK" | "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" |
+	// "MAC_ADMIN" | "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" |
+	// "NET_BROADCAST" | "NET_RAW" | "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" |
+	// "SYS_ADMIN" | "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" |
+	// "SYS_PACCT" | "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" |
+	// "SYS_TTY_CONFIG" | "SYSLOG" | "WAKE_ALARM"
 	Add []string
 
-	// The Linux capabilities for the container that have been removed from the default
-	// configuration provided by Docker. This parameter maps to CapDrop in the Create a
-	// container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
-	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and
-	// the --cap-drop option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). Valid
-	// values: "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" | "CHOWN" |
-	// "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK" |
-	// "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" |
+	// The Linux capabilities for the container that have been removed from the
+	// default configuration provided by Docker. This parameter maps to CapDrop in
+	// the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --cap-drop  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . Valid values: "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" |
+	// "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK"
+	// | "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" |
 	// "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" |
 	// "NET_RAW" | "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" |
 	// "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" |
@@ -2226,98 +2020,90 @@ type KeyValuePair struct {
 	// the environment variable.
 	Name *string
 
-	// The value of the key-value pair. For environment variables, this is the value of
-	// the environment variable.
+	// The value of the key-value pair. For environment variables, this is the value
+	// of the environment variable.
 	Value *string
 
 	noSmithyDocumentSerde
 }
 
 // Linux-specific options that are applied to the container, such as Linux
-// KernelCapabilities.
+// KernelCapabilities .
 type LinuxParameters struct {
 
 	// The Linux capabilities for the container that are added to or dropped from the
 	// default configuration provided by Docker. For tasks that use the Fargate launch
-	// type, capabilities is supported for all platform versions but the add parameter
-	// is only supported if using platform version 1.4.0 or later.
+	// type, capabilities  is supported for all platform versions but the add
+	// parameter is only supported if using platform version 1.4.0 or later.
 	Capabilities *KernelCapabilities
 
 	// Any host devices to expose to the container. This parameter maps to Devices in
-	// the Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --device option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). If
-	// you're using tasks that use the Fargate launch type, the devices parameter isn't
-	// supported.
+	// the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --device  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . If you're using tasks that use the Fargate launch type, the devices
+	// parameter isn't supported.
 	Devices []Device
 
 	// Run an init process inside the container that forwards signals and reaps
-	// processes. This parameter maps to the --init option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). This
-	// parameter requires version 1.25 of the Docker Remote API or greater on your
-	// container instance. To check the Docker Remote API version on your container
-	// instance, log in to your container instance and run the following command: sudo
-	// docker version --format '{{.Server.APIVersion}}'
+	// processes. This parameter maps to the --init  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . This parameter requires version 1.25 of the Docker Remote API or greater on
+	// your container instance. To check the Docker Remote API version on your
+	// container instance, log in to your container instance and run the following
+	// command: sudo docker version --format '{{.Server.APIVersion}}'
 	InitProcessEnabled *bool
 
 	// The total amount of swap memory (in MiB) a container can use. This parameter
-	// will be translated to the --memory-swap option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration) where the
-	// value would be the sum of the container memory plus the maxSwap value. If a
-	// maxSwap value of 0 is specified, the container will not use swap. Accepted
-	// values are 0 or any positive integer. If the maxSwap parameter is omitted, the
-	// container will use the swap configuration for the container instance it is
-	// running on. A maxSwap value must be set for the swappiness parameter to be used.
-	// If you're using tasks that use the Fargate launch type, the maxSwap parameter
-	// isn't supported.
+	// will be translated to the --memory-swap  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// where the value would be the sum of the container memory plus the maxSwap
+	// value. If a maxSwap  value of 0 is specified, the container will not use swap.
+	// Accepted values are 0  or any positive integer. If the maxSwap parameter is
+	// omitted, the container will use the swap configuration for the container
+	// instance it is running on. A maxSwap  value must be set for the swappiness
+	// parameter to be used. If you're using tasks that use the Fargate launch type,
+	// the maxSwap  parameter isn't supported.
 	MaxSwap *int32
 
 	// The value for the size (in MiB) of the /dev/shm volume. This parameter maps to
-	// the --shm-size option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). If you
-	// are using tasks that use the Fargate launch type, the sharedMemorySize parameter
-	// is not supported.
+	// the --shm-size  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . If you are using tasks that use the Fargate launch type, the sharedMemorySize
+	// parameter is not supported.
 	SharedMemorySize *int32
 
 	// This allows you to tune a container's memory swappiness behavior. A swappiness
-	// value of 0 will cause swapping to not happen unless absolutely necessary. A
+	// value of 0  will cause swapping to not happen unless absolutely necessary. A
 	// swappiness value of 100 will cause pages to be swapped very aggressively.
-	// Accepted values are whole numbers between 0 and 100. If the swappiness parameter
-	// is not specified, a default value of 60 is used. If a value is not specified for
-	// maxSwap then this parameter is ignored. This parameter maps to the
-	// --memory-swappiness option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). If
-	// you're using tasks that use the Fargate launch type, the swappiness parameter
-	// isn't supported.
+	// Accepted values are whole numbers between 0  and 100 . If the swappiness
+	// parameter is not specified, a default value of 60 is used. If a value is not
+	// specified for maxSwap then this parameter is ignored. This parameter maps to
+	// the --memory-swappiness  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . If you're using tasks that use the Fargate launch type, the swappiness
+	// parameter isn't supported.
 	Swappiness *int32
 
 	// The container path, mount options, and size (in MiB) of the tmpfs mount. This
-	// parameter maps to the --tmpfs option to docker run
-	// (https://docs.docker.com/engine/reference/run/#security-configuration). If
-	// you're using tasks that use the Fargate launch type, the tmpfs parameter isn't
-	// supported.
+	// parameter maps to the --tmpfs  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+	// . If you're using tasks that use the Fargate launch type, the tmpfs parameter
+	// isn't supported.
 	Tmpfs []Tmpfs
 
 	noSmithyDocumentSerde
 }
 
-// The load balancer configuration to use with a service or task set. For specific
-// notes and restrictions regarding the use of load balancers with services and
-// task sets, see the CreateService and CreateTaskSet actions. When you add,
-// update, or remove a load balancer configuration, Amazon ECS starts a new
-// deployment with the updated Elastic Load Balancing configuration. This causes
-// tasks to register to and deregister from load balancers. We recommend that you
-// verify this on a test environment before you update the Elastic Load Balancing
-// configuration. A service-linked role is required for services that use multiple
-// target groups. For more information, see Using service-linked roles
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
+// The load balancer configuration to use with a service or task set. For
+// specific notes and restrictions regarding the use of load balancers with
+// services and task sets, see the CreateService and CreateTaskSet actions. When
+// you add, update, or remove a load balancer configuration, Amazon ECS starts a
+// new deployment with the updated Elastic Load Balancing configuration. This
+// causes tasks to register to and deregister from load balancers. We recommend
+// that you verify this on a test environment before you update the Elastic Load
+// Balancing configuration. A service-linked role is required for services that use
+// multiple target groups. For more information, see Using service-linked roles (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type LoadBalancer struct {
 
-	// The name of the container (as it appears in a container definition) to associate
-	// with the load balancer.
+	// The name of the container (as it appears in a container definition) to
+	// associate with the load balancer.
 	ContainerName *string
 
 	// The port on the container to associate with the load balancer. This port must
@@ -2339,65 +2125,47 @@ type LoadBalancer struct {
 	// you're using a Classic Load Balancer, omit the target group ARN. For services
 	// using the ECS deployment controller, you can specify one or multiple target
 	// groups. For more information, see Registering multiple target groups with a
-	// service
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html)
+	// service (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html)
 	// in the Amazon Elastic Container Service Developer Guide. For services using the
-	// CODE_DEPLOY deployment controller, you're required to define two target groups
+	// CODE_DEPLOYdeployment controller, you're required to define two target groups
 	// for the load balancer. For more information, see Blue/green deployment with
-	// CodeDeploy
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html)
+	// CodeDeploy (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html)
 	// in the Amazon Elastic Container Service Developer Guide. If your service's task
-	// definition uses the awsvpc network mode, you must choose ip as the target type,
-	// not instance. Do this when creating your target groups because tasks that use
-	// the awsvpc network mode are associated with an elastic network interface, not an
-	// Amazon EC2 instance. This network mode is required for the Fargate launch type.
+	// definition uses the awsvpc  network mode, you must choose ip as the target
+	// type, not instance. Do this when creating your target groups because tasks
+	// that use the awsvpc network mode are associated with an elastic network
+	// interface, not an Amazon EC2 instance. This network mode is required for the
+	// Fargate launch type.
 	TargetGroupArn *string
 
 	noSmithyDocumentSerde
 }
 
-// The log configuration for the container. This parameter maps to LogConfig in the
-// Create a container
-// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-// --log-driver option to docker run
-// (https://docs.docker.com/engine/reference/commandline/run/). By default,
-// containers use the same logging driver that the Docker daemon uses. However, the
-// container might use a different logging driver than the Docker daemon by
-// specifying a log driver configuration in the container definition. For more
-// information about the options for different supported log drivers, see Configure
-// logging drivers (https://docs.docker.com/engine/admin/logging/overview/) in the
-// Docker documentation. Understand the following when specifying a log
+// The log configuration for the container. This parameter maps to LogConfig in
+// the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+// and the --log-driver  option to docker run (https://docs.docker.com/engine/reference/commandline/run/)
+// . By default, containers use the same logging driver that the Docker daemon
+// uses. However, the container might use a different logging driver than the
+// Docker daemon by specifying a log driver configuration in the container
+// definition. For more information about the options for different supported log
+// drivers, see Configure logging drivers (https://docs.docker.com/engine/admin/logging/overview/)
+// in the Docker documentation. Understand the following when specifying a log
 // configuration for your containers.
-// - Amazon ECS currently supports a subset of
-// the logging drivers available to the Docker daemon (shown in the valid values
-// below). Additional log drivers may be available in future releases of the Amazon
-// ECS container agent.
-// - This parameter requires version 1.18 of the Docker Remote
-// API or greater on your container instance.
-// - For tasks that are hosted on Amazon
-// EC2 instances, the Amazon ECS container agent must register the available
-// logging drivers with the ECS_AVAILABLE_LOGGING_DRIVERS environment variable
-// before containers placed on that instance can use these log configuration
-// options. For more information, see Amazon ECS container agent configuration
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html)
-// in the Amazon Elastic Container Service Developer Guide.
-// - For tasks that are on
-// Fargate, because you don't have access to the underlying infrastructure your
-// tasks are hosted on, any additional software needed must be installed outside of
-// the task. For example, the Fluentd output aggregators or a remote host running
-// Logstash to send Gelf logs to.
+//   - Amazon ECS currently supports a subset of the logging drivers available to the Docker daemon (shown in the valid values below). Additional log drivers may be available in future releases of the Amazon ECS container agent.
+//   - This parameter requires version 1.18 of the Docker Remote API or greater on your container instance.
+//   - For tasks that are hosted on Amazon EC2 instances, the Amazon ECS container agent must register the available logging drivers with the ECS_AVAILABLE_LOGGING_DRIVERS environment variable before containers placed on that instance can use these log configuration options. For more information, see Amazon ECS container agent configuration (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) in the Amazon Elastic Container Service Developer Guide.
+//   - For tasks that are on Fargate, because you don't have access to the underlying infrastructure your tasks are hosted on, any additional software needed must be installed outside of the task. For example, the Fluentd output aggregators or a remote host running Logstash to send Gelf logs to.
 type LogConfiguration struct {
 
-	// The log driver to use for the container. For tasks on Fargate, the supported log
-	// drivers are awslogs, splunk, and awsfirelens. For tasks hosted on Amazon EC2
-	// instances, the supported log drivers are awslogs, fluentd, gelf, json-file,
-	// journald, logentries,syslog, splunk, and awsfirelens. For more information about
-	// using the awslogs log driver, see Using the awslogs log driver
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html)
+	// The log driver to use for the container. For tasks on Fargate, the supported
+	// log drivers are awslogs , splunk , and awsfirelens. For tasks hosted on Amazon
+	// EC2 instances, the supported log drivers are awslogs , fluentd , gelf ,
+	// json-file , journald , logentries , syslog , splunk , and awsfirelens. For
+	// more information about using the awslogs  log driver, see Using the awslogs
+	// log driver (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html)
 	// in the Amazon Elastic Container Service Developer Guide. For more information
-	// about using the awsfirelens log driver, see Custom log routing
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html)
+	// about using the awsfirelens  log driver, see Custom log routing (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html)
 	// in the Amazon Elastic Container Service Developer Guide. If you have a custom
 	// driver that isn't listed, you can fork the Amazon ECS container agent project
 	// that's available on GitHub (https://github.com/aws/amazon-ecs-agent) and
@@ -2416,8 +2184,7 @@ type LogConfiguration struct {
 	Options map[string]string
 
 	// The secrets to pass to the log configuration. For more information, see
-	// Specifying sensitive data
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
+	// Specifying sensitive data (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	SecretOptions []Secret
 
@@ -2433,8 +2200,8 @@ type ManagedAgent struct {
 	// The last known status of the managed agent.
 	LastStatus *string
 
-	// The name of the managed agent. When the execute command feature is enabled, the
-	// managed agent name is ExecuteCommandAgent.
+	// The name of the managed agent. When the execute command feature is enabled,
+	// the managed agent name is ExecuteCommandAgent .
 	Name ManagedAgentName
 
 	// The reason for why the managed agent is in the state it is in.
@@ -2467,31 +2234,30 @@ type ManagedAgentStateChange struct {
 	noSmithyDocumentSerde
 }
 
-// The managed scaling settings for the Auto Scaling group capacity provider. When
-// managed scaling is enabled, Amazon ECS manages the scale-in and scale-out
+// The managed scaling settings for the Auto Scaling group capacity provider.
+// When managed scaling is enabled, Amazon ECS manages the scale-in and scale-out
 // actions of the Auto Scaling group. Amazon ECS manages a target tracking scaling
 // policy using an Amazon ECS managed CloudWatch metric with the specified
-// targetCapacity value as the target value for the metric. For more information,
-// see Using managed scaling
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers.html#asg-capacity-providers-managed-scaling)
+// targetCapacityvalue as the target value for the metric. For more information,
+// see Using managed scaling (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers.html#asg-capacity-providers-managed-scaling)
 // in the Amazon Elastic Container Service Developer Guide. If managed scaling is
 // off, the user must manage the scaling of the Auto Scaling group.
 type ManagedScaling struct {
 
 	// The period of time, in seconds, after a newly launched Amazon EC2 instance can
 	// contribute to CloudWatch metrics for Auto Scaling group. If this parameter is
-	// omitted, the default value of 300 seconds is used.
+	// omitted, the default value of 300  seconds is used.
 	InstanceWarmupPeriod *int32
 
-	// The maximum number of Amazon EC2 instances that Amazon ECS will scale out at one
-	// time. The scale in process is not affected by this parameter. If this parameter
-	// is omitted, the default value of 1 is used.
+	// The maximum number of Amazon EC2 instances that Amazon ECS will scale out at
+	// one time. The scale in process is not affected by this parameter. If this
+	// parameter is omitted, the default value of 1  is used.
 	MaximumScalingStepSize *int32
 
-	// The minimum number of Amazon EC2 instances that Amazon ECS will scale out at one
-	// time. The scale in process is not affected by this parameter If this parameter
-	// is omitted, the default value of 1 is used. When additional capacity is
-	// required, Amazon ECS will scale up the minimum scaling step size even if the
+	// The minimum number of Amazon EC2 instances that Amazon ECS will scale out at
+	// one time. The scale in process is not affected by this parameter If this
+	// parameter is omitted, the default value of 1 is used. When additional capacity
+	// is required, Amazon ECS will scale up the minimum scaling step size even if the
 	// actual demand is less than the minimum scaling step size. If you use a capacity
 	// provider with an Auto Scaling group configured with more than one Amazon EC2
 	// instance type or Availability Zone, Amazon ECS will scale up by the exact
@@ -2502,9 +2268,9 @@ type ManagedScaling struct {
 	// Determines whether to use managed scaling for the capacity provider.
 	Status ManagedScalingStatus
 
-	// The target capacity value for the capacity provider. The specified value must be
-	// greater than 0 and less than or equal to 100. A value of 100 results in the
-	// Amazon EC2 instances in your Auto Scaling group being completely used.
+	// The target capacity value for the capacity provider. The specified value must
+	// be greater than 0  and less than or equal to 100 . A value of 100 results in
+	// the Amazon EC2 instances in your Auto Scaling group being completely used.
 	TargetCapacity *int32
 
 	noSmithyDocumentSerde
@@ -2516,21 +2282,21 @@ type MountPoint struct {
 	// The path on the container to mount the host volume at.
 	ContainerPath *string
 
-	// If this value is true, the container has read-only access to the volume. If this
-	// value is false, then the container can write to the volume. The default value is
-	// false.
+	// If this value is true, the container has read-only access to the volume. If
+	// this value is false, then the container can write to the volume. The default
+	// value is false .
 	ReadOnly *bool
 
 	// The name of the volume to mount. Must be a volume name referenced in the name
-	// parameter of task definition volume.
+	// parameter of task definition volume .
 	SourceVolume *string
 
 	noSmithyDocumentSerde
 }
 
 // Details on the network bindings between a container and its host container
-// instance. After a task reaches the RUNNING status, manual and automatic host and
-// container port assignments are visible in the networkBindings section of
+// instance. After a task reaches the RUNNING status, manual and automatic host
+// and container port assignments are visible in the networkBindings  section of
 // DescribeTasks API responses.
 type NetworkBinding struct {
 
@@ -2542,45 +2308,22 @@ type NetworkBinding struct {
 
 	// The port number range on the container that's bound to the dynamically mapped
 	// host port range. The following rules apply when you specify a
-	// containerPortRange:
-	// - You must use either the bridge network mode or the awsvpc
-	// network mode.
-	// - This parameter is available for both the EC2 and Fargate launch
-	// types.
-	// - This parameter is available for both the Linux and Windows operating
-	// systems.
-	// - The container instance must have at least version 1.67.0 of the
-	// container agent and at least version 1.67.0-1 of the ecs-init package
-	// - You can
-	// specify a maximum of 100 port ranges per container.
-	// - You do not specify a
-	// hostPortRange. The value of the hostPortRange is set as follows:
-	// - For
-	// containers in a task with the awsvpc network mode, the hostPort is set to the
-	// same value as the containerPort. This is a static mapping strategy.
-	// - For
-	// containers in a task with the bridge network mode, the Amazon ECS agent finds
-	// open host ports from the default ephemeral range and passes it to docker to bind
-	// them to the container ports.
+	// containerPortRange :
+	//     - You must use either the bridge network mode or the awsvpc network mode.
+	//     - This parameter is available for both the EC2 and Fargate launch types.
+	//     - This parameter is available for both the Linux and Windows operating systems.
+	//     - The container instance must have at least version 1.67.0 of the container agent and at least version 1.67.0-1 of the ecs-init package
+	//     - You can specify a maximum of 100 port ranges per container.
+	//     - You do not specify a hostPortRange . The value of the hostPortRange is set as follows:
+	//         - For containers in a task with the awsvpc network mode, the hostPort is set to the same value as the containerPort . This is a static mapping strategy.
+	//         - For containers in a task with the bridge network mode, the Amazon ECS agent finds open host ports from the default ephemeral range and passes it to docker to bind them to the container ports.
+	//     - The containerPortRange valid values are between 1 and 65535.
+	//     - A port can only be included in one port mapping per container.
+	//     - You cannot specify overlapping port ranges.
+	//     - The first port in the range must be less than last port in the range.
+	//     - Docker recommends that you turn off the docker-proxy in the Docker daemon config file when you have a large number of ports. For more information, see Issue #11185 (https://github.com/moby/moby/issues/11185) on the Github website. For information about how to turn off the docker-proxy in the Docker daemon config file, see Docker daemon (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bootstrap_container_instance.html#bootstrap_docker_daemon) in the Amazon ECS Developer Guide.
 	//
-	// - The containerPortRange valid values are between
-	// 1 and 65535.
-	// - A port can only be included in one port mapping per container.
-	// -
-	// You cannot specify overlapping port ranges.
-	// - The first port in the range must
-	// be less than last port in the range.
-	// - Docker recommends that you turn off the
-	// docker-proxy in the Docker daemon config file when you have a large number of
-	// ports. For more information, see  Issue #11185
-	// (https://github.com/moby/moby/issues/11185) on the Github website. For
-	// information about how to turn off the docker-proxy in the Docker daemon config
-	// file, see Docker daemon
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bootstrap_container_instance.html#bootstrap_docker_daemon)
-	// in the Amazon ECS Developer Guide.
-	//
-	// You can call DescribeTasks
-	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html)
+	// You can call DescribeTasks (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html)
 	// to view the hostPortRange which are the host ports that are bound to the
 	// container ports.
 	ContainerPortRange *string
@@ -2588,8 +2331,8 @@ type NetworkBinding struct {
 	// The port number on the host that's used with the network binding.
 	HostPort *int32
 
-	// The port number range on the host that's used with the network binding. This is
-	// assigned is assigned by Docker and delivered by the Amazon ECS agent.
+	// The port number range on the host that's used with the network binding. This
+	// is assigned is assigned by Docker and delivered by the Amazon ECS agent.
 	HostPortRange *string
 
 	// The protocol used for the network binding.
@@ -2624,18 +2367,16 @@ type NetworkInterface struct {
 	noSmithyDocumentSerde
 }
 
-// An object representing a constraint on task placement. For more information, see
-// Task placement constraints
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
+// An object representing a constraint on task placement. For more information,
+// see Task placement constraints (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
 // in the Amazon Elastic Container Service Developer Guide. If you're using the
 // Fargate launch type, task placement constraints aren't supported.
 type PlacementConstraint struct {
 
 	// A cluster query language expression to apply to the constraint. The expression
 	// can have a maximum length of 2000 characters. You can't specify an expression if
-	// the constraint type is distinctInstance. For more information, see Cluster query
-	// language
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
+	// the constraint type is distinctInstance . For more information, see Cluster
+	// query language (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Expression *string
 
@@ -2648,22 +2389,21 @@ type PlacementConstraint struct {
 }
 
 // The task placement strategy for a task or service. For more information, see
-// Task placement strategies
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html)
+// Task placement strategies (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type PlacementStrategy struct {
 
 	// The field to apply the placement strategy against. For the spread placement
-	// strategy, valid values are instanceId (or host, which has the same effect), or
-	// any platform or custom attribute that's applied to a container instance, such as
-	// attribute:ecs.availability-zone. For the binpack placement strategy, valid
-	// values are cpu and memory. For the random placement strategy, this field is not
-	// used.
+	// strategy, valid values are instanceId  (or host, which has the same effect),
+	// or any platform or custom attribute that's applied to a container instance, such
+	// as attribute:ecs.availability-zone . For the binpack placement strategy, valid
+	// values are cpu  and memory . For the random placement strategy, this field is
+	// not used.
 	Field *string
 
 	// The type of placement strategy. The random placement strategy randomly places
 	// tasks on available candidates. The spread placement strategy spreads placement
-	// across available candidates evenly based on the field parameter. The binpack
+	// across available candidates evenly based on the field  parameter. The binpack
 	// strategy places tasks on available candidates that have the least available
 	// amount of the resource that's specified with the field parameter. For example,
 	// if you binpack on memory, a task is placed on the instance with the least amount
@@ -2677,15 +2417,15 @@ type PlacementStrategy struct {
 // device type is a GPU.
 type PlatformDevice struct {
 
-	// The ID for the GPUs on the container instance. The available GPU IDs can also be
-	// obtained on the container instance in the /var/lib/ecs/gpu/nvidia_gpu_info.json
-	// file.
+	// The ID for the GPUs on the container instance. The available GPU IDs can also
+	// be obtained on the container instance in the
+	// /var/lib/ecs/gpu/nvidia_gpu_info.json file.
 	//
 	// This member is required.
 	Id *string
 
 	// The type of device that's available on the container instance. The only
-	// supported value is GPU.
+	// supported value is GPU .
 	//
 	// This member is required.
 	Type PlatformDeviceType
@@ -2693,14 +2433,14 @@ type PlatformDevice struct {
 	noSmithyDocumentSerde
 }
 
-// Port mappings allow containers to access ports on the host container instance to
-// send or receive traffic. Port mappings are specified as part of the container
-// definition. If you use containers in a task with the awsvpc or host network
-// mode, specify the exposed ports using containerPort. The hostPort can be left
+// Port mappings allow containers to access ports on the host container instance
+// to send or receive traffic. Port mappings are specified as part of the container
+// definition. If you use containers in a task with the awsvpc  or host network
+// mode, specify the exposed ports using containerPort . The hostPort can be left
 // blank or it must be the same value as the containerPort. You can't expose the
 // same container port for multiple protocols. If you attempt this, an error is
-// returned. After a task reaches the RUNNING status, manual and automatic host and
-// container port assignments are visible in the networkBindings section of
+// returned. After a task reaches the RUNNING status, manual and automatic host
+// and container port assignments are visible in the networkBindings  section of
 // DescribeTasks API responses.
 type PortMapping struct {
 
@@ -2716,15 +2456,14 @@ type PortMapping struct {
 	// across all of the clusters in the namespace. Tasks connect through a managed
 	// proxy container that collects logs and metrics for increased visibility. Only
 	// the tasks that Amazon ECS services create are supported with Service Connect.
-	// For more information, see Service Connect
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+	// For more information, see Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	AppProtocol ApplicationProtocol
 
 	// The port number on the container that's bound to the user-specified or
 	// automatically assigned host port. If you use containers in a task with the
-	// awsvpc or host network mode, specify the exposed ports using containerPort. If
-	// you use containers in a task with the bridge network mode and you specify a
+	// awsvpc or host  network mode, specify the exposed ports using containerPort.
+	// If you use containers in a task with the bridge network mode and you specify a
 	// container port and not a host port, your container automatically receives a host
 	// port in the ephemeral port range. For more information, see hostPort. Port
 	// mappings that are automatically assigned in this way do not count toward the 100
@@ -2733,109 +2472,80 @@ type PortMapping struct {
 
 	// The port number range on the container that's bound to the dynamically mapped
 	// host port range. The following rules apply when you specify a
-	// containerPortRange:
-	// - You must use either the bridge network mode or the awsvpc
-	// network mode.
-	// - This parameter is available for both the EC2 and Fargate launch
-	// types.
-	// - This parameter is available for both the Linux and Windows operating
-	// systems.
-	// - The container instance must have at least version 1.67.0 of the
-	// container agent and at least version 1.67.0-1 of the ecs-init package
-	// - You can
-	// specify a maximum of 100 port ranges per container.
-	// - You do not specify a
-	// hostPortRange. The value of the hostPortRange is set as follows:
-	// - For
-	// containers in a task with the awsvpc network mode, the hostPort is set to the
-	// same value as the containerPort. This is a static mapping strategy.
-	// - For
-	// containers in a task with the bridge network mode, the Amazon ECS agent finds
-	// open host ports from the default ephemeral range and passes it to docker to bind
-	// them to the container ports.
+	// containerPortRange :
+	//     - You must use either the bridge network mode or the awsvpc network mode.
+	//     - This parameter is available for both the EC2 and Fargate launch types.
+	//     - This parameter is available for both the Linux and Windows operating systems.
+	//     - The container instance must have at least version 1.67.0 of the container agent and at least version 1.67.0-1 of the ecs-init package
+	//     - You can specify a maximum of 100 port ranges per container.
+	//     - You do not specify a hostPortRange . The value of the hostPortRange is set as follows:
+	//         - For containers in a task with the awsvpc network mode, the hostPort is set to the same value as the containerPort . This is a static mapping strategy.
+	//         - For containers in a task with the bridge network mode, the Amazon ECS agent finds open host ports from the default ephemeral range and passes it to docker to bind them to the container ports.
+	//     - The containerPortRange valid values are between 1 and 65535.
+	//     - A port can only be included in one port mapping per container.
+	//     - You cannot specify overlapping port ranges.
+	//     - The first port in the range must be less than last port in the range.
+	//     - Docker recommends that you turn off the docker-proxy in the Docker daemon config file when you have a large number of ports. For more information, see Issue #11185 (https://github.com/moby/moby/issues/11185) on the Github website. For information about how to turn off the docker-proxy in the Docker daemon config file, see Docker daemon (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bootstrap_container_instance.html#bootstrap_docker_daemon) in the Amazon ECS Developer Guide.
 	//
-	// - The containerPortRange valid values are between
-	// 1 and 65535.
-	// - A port can only be included in one port mapping per container.
-	// -
-	// You cannot specify overlapping port ranges.
-	// - The first port in the range must
-	// be less than last port in the range.
-	// - Docker recommends that you turn off the
-	// docker-proxy in the Docker daemon config file when you have a large number of
-	// ports. For more information, see  Issue #11185
-	// (https://github.com/moby/moby/issues/11185) on the Github website. For
-	// information about how to turn off the docker-proxy in the Docker daemon config
-	// file, see Docker daemon
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bootstrap_container_instance.html#bootstrap_docker_daemon)
-	// in the Amazon ECS Developer Guide.
-	//
-	// You can call DescribeTasks
-	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html)
+	// You can call DescribeTasks (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html)
 	// to view the hostPortRange which are the host ports that are bound to the
 	// container ports.
 	ContainerPortRange *string
 
-	// The port number on the container instance to reserve for your container. If you
-	// specify a containerPortRange, leave this field empty and the value of the
+	// The port number on the container instance to reserve for your container. If
+	// you specify a containerPortRange , leave this field empty and the value of the
 	// hostPort is set as follows:
-	// - For containers in a task with the awsvpc network
-	// mode, the hostPort is set to the same value as the containerPort. This is a
-	// static mapping strategy.
-	// - For containers in a task with the bridge network
-	// mode, the Amazon ECS agent finds open ports on the host and automaticaly binds
-	// them to the container ports. This is a dynamic mapping strategy.
+	//     - For containers in a task with the awsvpc network mode, the hostPort is set to the same value as the containerPort . This is a static mapping strategy.
+	//     - For containers in a task with the bridge network mode, the Amazon ECS agent finds open ports on the host and automaticaly binds them to the container ports. This is a dynamic mapping strategy.
 	//
-	// If you use
-	// containers in a task with the awsvpc or host network mode, the hostPort can
-	// either be left blank or set to the same value as the containerPort. If you use
-	// containers in a task with the bridge network mode, you can specify a
-	// non-reserved host port for your container port mapping, or you can omit the
-	// hostPort (or set it to 0) while specifying a containerPort and your container
-	// automatically receives a port in the ephemeral port range for your container
-	// instance operating system and Docker version. The default ephemeral port range
-	// for Docker version 1.6.0 and later is listed on the instance under
-	// /proc/sys/net/ipv4/ip_local_port_range. If this kernel parameter is unavailable,
-	// the default ephemeral port range from 49153 through 65535 is used. Do not
-	// attempt to specify a host port in the ephemeral port range as these are reserved
-	// for automatic assignment. In general, ports below 32768 are outside of the
-	// ephemeral port range. The default reserved ports are 22 for SSH, the Docker
+	// If you use containers in a task with the awsvpc  or host  network mode, the
+	// hostPort can either be left blank or set to the same value as the containerPort
+	// . If you use containers in a task with the bridge network mode, you can
+	// specify a non-reserved host port for your container port mapping, or you can
+	// omit the hostPort  (or set it to 0 ) while specifying a containerPort and your
+	// container automatically receives a port in the ephemeral port range for your
+	// container instance operating system and Docker version. The default ephemeral
+	// port range for Docker version 1.6.0 and later is listed on the instance under
+	// /proc/sys/net/ipv4/ip_local_port_range. If this kernel parameter is
+	// unavailable, the default ephemeral port range from 49153 through 65535 is used.
+	// Do not attempt to specify a host port in the ephemeral port range as these are
+	// reserved for automatic assignment. In general, ports below 32768 are outside of
+	// the ephemeral port range. The default reserved ports are 22 for SSH, the Docker
 	// ports 2375 and 2376, and the Amazon ECS container agent ports 51678-51680. Any
 	// host port that was previously specified in a running task is also reserved while
 	// the task is running. That is, after a task stops, the host port is released. The
-	// current reserved ports are displayed in the remainingResources of
-	// DescribeContainerInstances output. A container instance can have up to 100
+	// current reserved ports are displayed in the remainingResources  of
+	// DescribeContainerInstancesoutput. A container instance can have up to 100
 	// reserved ports at a time. This number includes the default reserved ports.
 	// Automatically assigned ports aren't included in the 100 reserved ports quota.
 	HostPort *int32
 
 	// The name that's used for the port mapping. This parameter only applies to
 	// Service Connect. This parameter is the name that you use in the
-	// serviceConnectConfiguration of a service. The name can include up to 64
+	// serviceConnectConfigurationof a service. The name can include up to 64
 	// characters. The characters can include lowercase letters, numbers, underscores
 	// (_), and hyphens (-). The name can't start with a hyphen. For more information,
-	// see Service Connect
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+	// see Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Name *string
 
-	// The protocol used for the port mapping. Valid values are tcp and udp. The
-	// default is tcp.
+	// The protocol used for the port mapping. Valid values are tcp  and udp. The
+	// default is tcp .
 	Protocol TransportProtocol
 
 	noSmithyDocumentSerde
 }
 
-// An object representing the protection status details for a task. You can set the
-// protection status with the UpdateTaskProtection API and get the status of tasks
-// with the GetTaskProtection API.
+// An object representing the protection status details for a task. You can set
+// the protection status with the UpdateTaskProtection API and get the status of
+// tasks with the GetTaskProtection  API.
 type ProtectedTask struct {
 
 	// The epoch time when protection for the task will expire.
 	ExpirationDate *time.Time
 
-	// The protection status of the task. If scale-in protection is on for a task, the
-	// value is true. Otherwise, it is false.
+	// The protection status of the task. If scale-in protection is on for a task,
+	// the value is true . Otherwise, it is false .
 	ProtectionEnabled bool
 
 	// The task ARN.
@@ -2849,9 +2559,8 @@ type ProtectedTask struct {
 // container agent and at least version 1.26.0-1 of the ecs-init package to use a
 // proxy configuration. If your container instances are launched from the Amazon
 // ECS optimized AMI version 20190301 or later, then they contain the required
-// versions of the container agent and ecs-init. For more information, see Amazon
-// ECS-optimized Linux AMI
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
+// versions of the container agent and ecs-init . For more information, see
+// Amazon ECS-optimized Linux AMI (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 type ProxyConfiguration struct {
 
 	// The name of the container that will serve as the App Mesh proxy.
@@ -2861,31 +2570,16 @@ type ProxyConfiguration struct {
 
 	// The set of network configuration parameters to provide the Container Network
 	// Interface (CNI) plugin, specified as key-value pairs.
-	// - IgnoredUID - (Required)
-	// The user ID (UID) of the proxy container as defined by the user parameter in a
-	// container definition. This is used to ensure the proxy ignores its own traffic.
-	// If IgnoredGID is specified, this field can be empty.
-	// - IgnoredGID - (Required)
-	// The group ID (GID) of the proxy container as defined by the user parameter in a
-	// container definition. This is used to ensure the proxy ignores its own traffic.
-	// If IgnoredUID is specified, this field can be empty.
-	// - AppPorts - (Required) The
-	// list of ports that the application uses. Network traffic to these ports is
-	// forwarded to the ProxyIngressPort and ProxyEgressPort.
-	// - ProxyIngressPort -
-	// (Required) Specifies the port that incoming traffic to the AppPorts is directed
-	// to.
-	// - ProxyEgressPort - (Required) Specifies the port that outgoing traffic from
-	// the AppPorts is directed to.
-	// - EgressIgnoredPorts - (Required) The egress
-	// traffic going to the specified ports is ignored and not redirected to the
-	// ProxyEgressPort. It can be an empty list.
-	// - EgressIgnoredIPs - (Required) The
-	// egress traffic going to the specified IP addresses is ignored and not redirected
-	// to the ProxyEgressPort. It can be an empty list.
+	//     - IgnoredUID - (Required) The user ID (UID) of the proxy container as defined by the user parameter in a container definition. This is used to ensure the proxy ignores its own traffic. If IgnoredGID is specified, this field can be empty.
+	//     - IgnoredGID - (Required) The group ID (GID) of the proxy container as defined by the user parameter in a container definition. This is used to ensure the proxy ignores its own traffic. If IgnoredUID is specified, this field can be empty.
+	//     - AppPorts - (Required) The list of ports that the application uses. Network traffic to these ports is forwarded to the ProxyIngressPort and ProxyEgressPort .
+	//     - ProxyIngressPort - (Required) Specifies the port that incoming traffic to the AppPorts is directed to.
+	//     - ProxyEgressPort - (Required) Specifies the port that outgoing traffic from the AppPorts is directed to.
+	//     - EgressIgnoredPorts - (Required) The egress traffic going to the specified ports is ignored and not redirected to the ProxyEgressPort . It can be an empty list.
+	//     - EgressIgnoredIPs - (Required) The egress traffic going to the specified IP addresses is ignored and not redirected to the ProxyEgressPort . It can be an empty list.
 	Properties []KeyValuePair
 
-	// The proxy type. The only supported value is APPMESH.
+	// The proxy type. The only supported value is APPMESH .
 	Type ProxyConfigurationType
 
 	noSmithyDocumentSerde
@@ -2914,22 +2608,23 @@ type Resource struct {
 	// precision floating-point type.
 	DoubleValue float64
 
-	// When the integerValue type is set, the value of the resource must be an integer.
+	// When the integerValue type is set, the value of the resource must be an
+	// integer.
 	IntegerValue int32
 
 	// When the longValue type is set, the value of the resource must be an extended
 	// precision floating-point type.
 	LongValue int64
 
-	// The name of the resource, such as CPU, MEMORY, PORTS, PORTS_UDP, or a
+	// The name of the resource, such as CPU , MEMORY , PORTS , PORTS_UDP, or a
 	// user-defined resource.
 	Name *string
 
-	// When the stringSetValue type is set, the value of the resource must be a string
-	// type.
+	// When the stringSetValue type is set, the value of the resource must be a
+	// string type.
 	StringSetValue []string
 
-	// The type of the resource. Valid values: INTEGER, DOUBLE, LONG, or STRINGSET.
+	// The type of the resource. Valid values: INTEGER , DOUBLE , LONG , or STRINGSET .
 	Type *string
 
 	noSmithyDocumentSerde
@@ -2937,25 +2632,23 @@ type Resource struct {
 
 // The type and amount of a resource to assign to a container. The supported
 // resource types are GPUs and Elastic Inference accelerators. For more
-// information, see Working with GPUs on Amazon ECS
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html) or
-// Working with Amazon Elastic Inference on Amazon ECS
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html)
+// information, see Working with GPUs on Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html)
+// or Working with Amazon Elastic Inference on Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html)
 // in the Amazon Elastic Container Service Developer Guide
 type ResourceRequirement struct {
 
-	// The type of resource to assign to a container. The supported values are GPU or
-	// InferenceAccelerator.
+	// The type of resource to assign to a container. The supported values are GPU  or
+	// InferenceAccelerator .
 	//
 	// This member is required.
 	Type ResourceType
 
-	// The value for the specified resource type. If the GPU type is used, the value is
-	// the number of physical GPUs the Amazon ECS container agent reserves for the
+	// The value for the specified resource type. If the GPU type is used, the value
+	// is the number of physical GPUs the Amazon ECS container agent reserves for the
 	// container. The number of GPUs that's reserved for all containers in a task can't
 	// exceed the number of available GPUs on the container instance that the task is
-	// launched on. If the InferenceAccelerator type is used, the value matches the
-	// deviceName for an InferenceAccelerator specified in a task definition.
+	// launched on. If the InferenceAccelerator  type is used, the value  matches the
+	// deviceName for an InferenceAccelerator  specified in a task definition.
 	//
 	// This member is required.
 	Value *string
@@ -2964,14 +2657,13 @@ type ResourceRequirement struct {
 }
 
 // Information about the platform for the Amazon ECS service or task. For more
-// information about RuntimePlatform, see RuntimePlatform
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#runtime-platform)
+// information about RuntimePlatform , see RuntimePlatform (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#runtime-platform)
 // in the Amazon Elastic Container Service Developer Guide.
 type RuntimePlatform struct {
 
 	// The CPU architecture. You can run your Linux tasks on an ARM-based platform by
-	// setting the value to ARM64. This option is available for tasks that run on Linux
-	// Amazon EC2 instance or Linux containers on Fargate.
+	// setting the value to ARM64. This option is available for tasks that run on
+	// Linux Amazon EC2 instance or Linux containers on Fargate.
 	CpuArchitecture CPUArchitecture
 
 	// The operating system.
@@ -2996,15 +2688,10 @@ type Scale struct {
 
 // An object representing the secret to expose to your container. Secrets can be
 // exposed to a container in the following ways:
-// - To inject sensitive data into
-// your containers as environment variables, use the secrets container definition
-// parameter.
-// - To reference sensitive information in the log configuration of a
-// container, use the secretOptions container definition parameter.
+//   - To inject sensitive data into your containers as environment variables, use the secrets container definition parameter.
+//   - To reference sensitive information in the log configuration of a container, use the secretOptions container definition parameter.
 //
-// For more
-// information, see Specifying sensitive data
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
+// For more information, see Specifying sensitive data (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type Secret struct {
 
@@ -3013,13 +2700,11 @@ type Secret struct {
 	// This member is required.
 	Name *string
 
-	// The secret to expose to the container. The supported values are either the full
-	// ARN of the Secrets Manager secret or the full ARN of the parameter in the SSM
-	// Parameter Store. For information about the require Identity and Access
-	// Management permissions, see Required IAM permissions for Amazon ECS secrets
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-secrets.html#secrets-iam)
-	// (for Secrets Manager) or Required IAM permissions for Amazon ECS secrets
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-parameters.html)
+	// The secret to expose to the container. The supported values are either the
+	// full ARN of the Secrets Manager secret or the full ARN of the parameter in the
+	// SSM Parameter Store. For information about the require Identity and Access
+	// Management permissions, see Required IAM permissions for Amazon ECS secrets (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-secrets.html#secrets-iam)
+	// (for Secrets Manager) or Required IAM permissions for Amazon ECS secrets (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-parameters.html)
 	// (for Systems Manager Parameter store) in the Amazon Elastic Container Service
 	// Developer Guide. If the SSM Parameter Store parameter exists in the same Region
 	// as the task you're launching, then you can use either the full ARN or name of
@@ -3035,8 +2720,9 @@ type Secret struct {
 // Details on a service within a cluster
 type Service struct {
 
-	// The capacity provider strategy the service uses. When using the DescribeServices
-	// API, this field is omitted if the service was created using a launch type.
+	// The capacity provider strategy the service uses. When using the
+	// DescribeServices API, this field is omitted if the service was created using a
+	// launch type.
 	CapacityProviderStrategy []CapacityProviderStrategyItem
 
 	// The Amazon Resource Name (ARN) of the cluster that hosts the service.
@@ -3060,18 +2746,17 @@ type Service struct {
 
 	// The desired number of instantiations of the task definition to keep running on
 	// the service. This value is specified when the service is created with
-	// CreateService, and it can be modified with UpdateService.
+	// CreateService , and it can be modified with UpdateService .
 	DesiredCount int32
 
-	// Determines whether to use Amazon ECS managed tags for the tasks in the service.
-	// For more information, see Tagging Your Amazon ECS Resources
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
+	// Determines whether to use Amazon ECS managed tags for the tasks in the
+	// service. For more information, see Tagging Your Amazon ECS Resources (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags bool
 
-	// Determines whether the execute command functionality is enabled for the service.
-	// If true, the execute command functionality is enabled for all containers in
-	// tasks as part of the service.
+	// Determines whether the execute command functionality is enabled for the
+	// service. If true, the execute command functionality is enabled for all
+	// containers in tasks as part of the service.
 	EnableExecuteCommand bool
 
 	// The event stream for your service. A maximum of 100 of the latest events are
@@ -3083,8 +2768,9 @@ type Service struct {
 	// started.
 	HealthCheckGracePeriodSeconds *int32
 
-	// The launch type the service is using. When using the DescribeServices API, this
-	// field is omitted if the service was created using a capacity provider strategy.
+	// The launch type the service is using. When using the DescribeServices API,
+	// this field is omitted if the service was created using a capacity provider
+	// strategy.
 	LaunchType LaunchType
 
 	// A list of Elastic Load Balancing load balancer objects. It contains the load
@@ -3092,11 +2778,11 @@ type Service struct {
 	// load balancer. The container name is as it appears in a container definition.
 	LoadBalancers []LoadBalancer
 
-	// The VPC subnet and security group configuration for tasks that receive their own
-	// elastic network interface by using the awsvpc networking mode.
+	// The VPC subnet and security group configuration for tasks that receive their
+	// own elastic network interface by using the awsvpc  networking mode.
 	NetworkConfiguration *NetworkConfiguration
 
-	// The number of tasks in the cluster that are in the PENDING state.
+	// The number of tasks in the cluster that are in the PENDING  state.
 	PendingCount int32
 
 	// The placement constraints for the tasks in the service.
@@ -3105,101 +2791,79 @@ type Service struct {
 	// The placement strategy that determines how tasks for the service are placed.
 	PlacementStrategy []PlacementStrategy
 
-	// The operating system that your tasks in the service run on. A platform family is
-	// specified only for tasks using the Fargate launch type. All tasks that run as
-	// part of this service must use the same platformFamily value as the service (for
-	// example, LINUX).
+	// The operating system that your tasks in the service run on. A platform family
+	// is specified only for tasks using the Fargate launch type. All tasks that run as
+	// part of this service must use the same platformFamily value as the service
+	// (for example, LINUX ).
 	PlatformFamily *string
 
 	// The platform version to run your service on. A platform version is only
 	// specified for tasks that are hosted on Fargate. If one isn't specified, the
 	// LATEST platform version is used. For more information, see Fargate Platform
-	// Versions
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
+	// Versions (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
 
-	// Determines whether to propagate the tags from the task definition or the service
-	// to the task. If no value is specified, the tags aren't propagated.
+	// Determines whether to propagate the tags from the task definition or the
+	// service to the task. If no value is specified, the tags aren't propagated.
 	PropagateTags PropagateTags
 
-	// The ARN of the IAM role that's associated with the service. It allows the Amazon
-	// ECS container agent to register container instances with an Elastic Load
+	// The ARN of the IAM role that's associated with the service. It allows the
+	// Amazon ECS container agent to register container instances with an Elastic Load
 	// Balancing load balancer.
 	RoleArn *string
 
-	// The number of tasks in the cluster that are in the RUNNING state.
+	// The number of tasks in the cluster that are in the RUNNING  state.
 	RunningCount int32
 
 	// The scheduling strategy to use for the service. For more information, see
-	// Services
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).
-	// There are two service scheduler strategies available.
-	// - REPLICA-The replica
-	// scheduling strategy places and maintains the desired number of tasks across your
-	// cluster. By default, the service scheduler spreads tasks across Availability
-	// Zones. You can use task placement strategies and constraints to customize task
-	// placement decisions.
-	// - DAEMON-The daemon scheduling strategy deploys exactly one
-	// task on each active container instance. This task meets all of the task
-	// placement constraints that you specify in your cluster. The service scheduler
-	// also evaluates the task placement constraints for running tasks. It stop tasks
-	// that don't meet the placement constraints. Fargate tasks don't support the
-	// DAEMON scheduling strategy.
+	// Services (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html)
+	// . There are two service scheduler strategies available.
+	//     - REPLICA -The replica scheduling strategy places and maintains the desired number of tasks across your cluster. By default, the service scheduler spreads tasks across Availability Zones. You can use task placement strategies and constraints to customize task placement decisions.
+	//     - DAEMON -The daemon scheduling strategy deploys exactly one task on each active container instance. This task meets all of the task placement constraints that you specify in your cluster. The service scheduler also evaluates the task placement constraints for running tasks. It stop tasks that don't meet the placement constraints. Fargate tasks don't support the DAEMON scheduling strategy.
 	SchedulingStrategy SchedulingStrategy
 
-	// The ARN that identifies the service. For more information about the ARN format,
-	// see Amazon Resource Name (ARN)
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids)
+	// The ARN that identifies the service. For more information about the ARN
+	// format, see Amazon Resource Name (ARN) (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids)
 	// in the Amazon ECS Developer Guide.
 	ServiceArn *string
 
-	// The name of your service. Up to 255 letters (uppercase and lowercase), numbers,
-	// underscores, and hyphens are allowed. Service names must be unique within a
-	// cluster. However, you can have similarly named services in multiple clusters
-	// within a Region or across multiple Regions.
+	// The name of your service. Up to 255 letters (uppercase and lowercase),
+	// numbers, underscores, and hyphens are allowed. Service names must be unique
+	// within a cluster. However, you can have similarly named services in multiple
+	// clusters within a Region or across multiple Regions.
 	ServiceName *string
 
-	// The details for the service discovery registries to assign to this service. For
-	// more information, see Service Discovery
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
+	// The details for the service discovery registries to assign to this service.
+	// For more information, see Service Discovery (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html)
+	// .
 	ServiceRegistries []ServiceRegistry
 
-	// The status of the service. The valid values are ACTIVE, DRAINING, or INACTIVE.
+	// The status of the service. The valid values are ACTIVE , DRAINING , or INACTIVE
+	// .
 	Status *string
 
 	// The metadata that you apply to the service to help you categorize and organize
 	// them. Each tag consists of a key and an optional value. You define bot the key
 	// and value. The following basic restrictions apply to tags:
-	// - Maximum number of
-	// tags per resource - 50
-	// - For each resource, each tag key must be unique, and
-	// each tag key can have only one value.
-	// - Maximum key length - 128 Unicode
-	// characters in UTF-8
-	// - Maximum value length - 256 Unicode characters in UTF-8
-	// -
-	// If your tagging schema is used across multiple services and resources, remember
-	// that other services may have restrictions on allowed characters. Generally
-	// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
-	// the following characters: + - = . _ : / @.
-	// - Tag keys and values are
-	// case-sensitive.
-	// - Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for either keys or values as it is reserved for Amazon Web
-	// Services use. You cannot edit or delete tag keys or values with this prefix.
-	// Tags with this prefix do not count against your tags per resource limit.
+	//     - Maximum number of tags per resource - 50
+	//     - For each resource, each tag key must be unique, and each tag key can have only one value.
+	//     - Maximum key length - 128 Unicode characters in UTF-8
+	//     - Maximum value length - 256 Unicode characters in UTF-8
+	//     - If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
+	//     - Tag keys and values are case-sensitive.
+	//     - Do not use aws: , AWS: , or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.
 	Tags []Tag
 
 	// The task definition to use for tasks in the service. This value is specified
-	// when the service is created with CreateService, and it can be modified with
-	// UpdateService.
+	// when the service is created with CreateService , and it can be modified with
+	// UpdateService .
 	TaskDefinition *string
 
 	// Information about a set of Amazon ECS tasks in either an CodeDeploy or an
-	// EXTERNAL deployment. An Amazon ECS task set includes details such as the desired
-	// number of tasks, how many tasks are running, and whether the task set serves
-	// production traffic.
+	// EXTERNALdeployment. An Amazon ECS task set includes details such as the
+	// desired number of tasks, how many tasks are running, and whether the task set
+	// serves production traffic.
 	TaskSets []TaskSet
 
 	noSmithyDocumentSerde
@@ -3212,16 +2876,15 @@ type Service struct {
 // across all of the clusters in the namespace. Tasks connect through a managed
 // proxy container that collects logs and metrics for increased visibility. Only
 // the tasks that Amazon ECS services create are supported with Service Connect.
-// For more information, see Service Connect
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+// For more information, see Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type ServiceConnectClientAlias struct {
 
-	// The listening port number for the Service Connect proxy. This port is available
-	// inside of all of the tasks within the same namespace. To avoid changing your
-	// applications in client Amazon ECS services, set this to the same port that the
-	// client application uses by default. For more information, see Service Connect
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+	// The listening port number for the Service Connect proxy. This port is
+	// available inside of all of the tasks within the same namespace. To avoid
+	// changing your applications in client Amazon ECS services, set this to the same
+	// port that the client application uses by default. For more information, see
+	// Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
 	// This member is required.
@@ -3232,28 +2895,26 @@ type ServiceConnectClientAlias struct {
 	// be fully-qualified. The name can include up to 127 characters. The name can
 	// include lowercase letters, numbers, underscores (_), hyphens (-), and periods
 	// (.). The name can't start with a hyphen. If this parameter isn't specified, the
-	// default value of discoveryName.namespace is used. If the discoveryName isn't
+	// default value of discoveryName.namespace  is used. If the discoveryName isn't
 	// specified, the port mapping name from the task definition is used in
 	// portName.namespace. To avoid changing your applications in client Amazon ECS
 	// services, set this to the same name that the client application uses by default.
-	// For example, a few common names are database, db, or the lowercase name of a
-	// database, such as mysql or redis. For more information, see Service Connect
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+	// For example, a few common names are database , db, or the lowercase name of a
+	// database, such as mysql  or redis . For more information, see Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	DnsName *string
 
 	noSmithyDocumentSerde
 }
 
-// The Service Connect configuration of your Amazon ECS service. The configuration
-// for this service to discover and connect to services, and be discovered by, and
-// connected from, other services within a namespace. Tasks that run in a namespace
-// can use short names to connect to services in the namespace. Tasks can connect
-// to services across all of the clusters in the namespace. Tasks connect through a
-// managed proxy container that collects logs and metrics for increased visibility.
-// Only the tasks that Amazon ECS services create are supported with Service
-// Connect. For more information, see Service Connect
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+// The Service Connect configuration of your Amazon ECS service. The
+// configuration for this service to discover and connect to services, and be
+// discovered by, and connected from, other services within a namespace. Tasks that
+// run in a namespace can use short names to connect to services in the namespace.
+// Tasks can connect to services across all of the clusters in the namespace. Tasks
+// connect through a managed proxy container that collects logs and metrics for
+// increased visibility. Only the tasks that Amazon ECS services create are
+// supported with Service Connect. For more information, see Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type ServiceConnectConfiguration struct {
 
@@ -3262,44 +2923,28 @@ type ServiceConnectConfiguration struct {
 	// This member is required.
 	Enabled bool
 
-	// The log configuration for the container. This parameter maps to LogConfig in the
-	// Create a container
-	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-	// --log-driver option to docker run
-	// (https://docs.docker.com/engine/reference/commandline/run/). By default,
-	// containers use the same logging driver that the Docker daemon uses. However, the
-	// container might use a different logging driver than the Docker daemon by
-	// specifying a log driver configuration in the container definition. For more
-	// information about the options for different supported log drivers, see Configure
-	// logging drivers (https://docs.docker.com/engine/admin/logging/overview/) in the
-	// Docker documentation. Understand the following when specifying a log
+	// The log configuration for the container. This parameter maps to LogConfig in
+	// the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+	// and the --log-driver  option to docker run (https://docs.docker.com/engine/reference/commandline/run/)
+	// . By default, containers use the same logging driver that the Docker daemon
+	// uses. However, the container might use a different logging driver than the
+	// Docker daemon by specifying a log driver configuration in the container
+	// definition. For more information about the options for different supported log
+	// drivers, see Configure logging drivers (https://docs.docker.com/engine/admin/logging/overview/)
+	// in the Docker documentation. Understand the following when specifying a log
 	// configuration for your containers.
-	// - Amazon ECS currently supports a subset of
-	// the logging drivers available to the Docker daemon (shown in the valid values
-	// below). Additional log drivers may be available in future releases of the Amazon
-	// ECS container agent.
-	// - This parameter requires version 1.18 of the Docker Remote
-	// API or greater on your container instance.
-	// - For tasks that are hosted on Amazon
-	// EC2 instances, the Amazon ECS container agent must register the available
-	// logging drivers with the ECS_AVAILABLE_LOGGING_DRIVERS environment variable
-	// before containers placed on that instance can use these log configuration
-	// options. For more information, see Amazon ECS container agent configuration
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html)
-	// in the Amazon Elastic Container Service Developer Guide.
-	// - For tasks that are on
-	// Fargate, because you don't have access to the underlying infrastructure your
-	// tasks are hosted on, any additional software needed must be installed outside of
-	// the task. For example, the Fluentd output aggregators or a remote host running
-	// Logstash to send Gelf logs to.
+	//     - Amazon ECS currently supports a subset of the logging drivers available to the Docker daemon (shown in the valid values below). Additional log drivers may be available in future releases of the Amazon ECS container agent.
+	//     - This parameter requires version 1.18 of the Docker Remote API or greater on your container instance.
+	//     - For tasks that are hosted on Amazon EC2 instances, the Amazon ECS container agent must register the available logging drivers with the ECS_AVAILABLE_LOGGING_DRIVERS environment variable before containers placed on that instance can use these log configuration options. For more information, see Amazon ECS container agent configuration (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) in the Amazon Elastic Container Service Developer Guide.
+	//     - For tasks that are on Fargate, because you don't have access to the underlying infrastructure your tasks are hosted on, any additional software needed must be installed outside of the task. For example, the Fluentd output aggregators or a remote host running Logstash to send Gelf logs to.
 	LogConfiguration *LogConfiguration
 
-	// The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace
-	// for use with Service Connect. The namespace must be in the same Amazon Web
-	// Services Region as the Amazon ECS service and cluster. The type of namespace
+	// The namespace name or full Amazon Resource Name (ARN) of the Cloud Map
+	// namespace for use with Service Connect. The namespace must be in the same Amazon
+	// Web Services Region as the Amazon ECS service and cluster. The type of namespace
 	// doesn't affect Service Connect. For more information about Cloud Map, see
-	// Working with Services (https://docs.aws.amazon.com/) in the Cloud Map Developer
+	// Working with Services (https://docs.aws.amazon.com/)in the Cloud Map Developer
 	// Guide.
 	Namespace *string
 
@@ -3318,12 +2963,11 @@ type ServiceConnectConfiguration struct {
 }
 
 // The Service Connect service object configuration. For more information, see
-// Service Connect
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+// Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type ServiceConnectService struct {
 
-	// The portName must match the name of one of the portMappings from all the
+	// The portName  must match the name of one of the portMappings from all the
 	// containers in the task definition of this Amazon ECS service.
 	//
 	// This member is required.
@@ -3334,8 +2978,8 @@ type ServiceConnectService struct {
 	// client aliases that you can have in this list is 1. Each alias ("endpoint") is a
 	// fully-qualified name and port number that other Amazon ECS tasks ("clients") can
 	// use to connect to this service. Each name and port mapping must be unique within
-	// the namespace. For each ServiceConnectService, you must provide at least one
-	// clientAlias with one port.
+	// the namespace. For each ServiceConnectService , you must provide at least one
+	// clientAlias with one port .
 	ClientAliases []ServiceConnectClientAlias
 
 	// The discoveryName is the name of the new Cloud Map service that Amazon ECS
@@ -3343,18 +2987,18 @@ type ServiceConnectService struct {
 	// namespace. The name can contain up to 64 characters. The name can include
 	// lowercase letters, numbers, underscores (_), and hyphens (-). The name can't
 	// start with a hyphen. If this parameter isn't specified, the default value of
-	// discoveryName.namespace is used. If the discoveryName isn't specified, the port
-	// mapping name from the task definition is used in portName.namespace.
+	// discoveryName.namespace is used. If the discoveryName isn't specified, the
+	// port mapping name from the task definition is used in portName.namespace .
 	DiscoveryName *string
 
 	// The port number for the Service Connect proxy to listen on. Use the value of
 	// this field to bypass the proxy for traffic on the port number specified in the
-	// named portMapping in the task definition of this application, and then use it in
-	// your VPC security groups to allow traffic into the proxy for this Amazon ECS
+	// named portMapping in the task definition of this application, and then use it
+	// in your VPC security groups to allow traffic into the proxy for this Amazon ECS
 	// service. In awsvpc mode and Fargate, the default value is the container port
-	// number. The container port number is in the portMapping in the task definition.
-	// In bridge mode, the default value is the ephemeral port of the Service Connect
-	// proxy.
+	// number. The container port number is in the portMapping in the task
+	// definition. In bridge mode, the default value is the ephemeral port of the
+	// Service Connect proxy.
 	IngressPortOverride *int32
 
 	noSmithyDocumentSerde
@@ -3363,9 +3007,9 @@ type ServiceConnectService struct {
 // The Service Connect resource. Each configuration maps a discovery name to a
 // Cloud Map service name. The data is stored in Cloud Map as part of the Service
 // Connect configuration for each discovery name of this Amazon ECS service. A task
-// can resolve the dnsName for each of the clientAliases of a service. However a
+// can resolve the dnsName  for each of the clientAliases of a service. However a
 // task can't resolve the discovery names. If you want to connect to a service,
-// refer to the ServiceConnectConfiguration of that service for the list of
+// refer to the ServiceConnectConfiguration  of that service for the list of
 // clientAliases that you can use.
 type ServiceConnectServiceResource struct {
 
@@ -3380,9 +3024,9 @@ type ServiceConnectServiceResource struct {
 	// service. This must be unique within the Cloud Map namespace. The name can
 	// contain up to 64 characters. The name can include lowercase letters, numbers,
 	// underscores (_), and hyphens (-). The name can't start with a hyphen. If this
-	// parameter isn't specified, the default value of discoveryName.namespace is used.
-	// If the discoveryName isn't specified, the port mapping name from the task
-	// definition is used in portName.namespace.
+	// parameter isn't specified, the default value of discoveryName.namespace is
+	// used. If the discoveryName isn't specified, the port mapping name from the
+	// task definition is used in portName.namespace .
 	DiscoveryName *string
 
 	noSmithyDocumentSerde
@@ -3412,20 +3056,21 @@ type ServiceRegistry struct {
 
 	// The container name value to be used for your service discovery service. It's
 	// already specified in the task definition. If the task definition that your
-	// service task specifies uses the bridge or host network mode, you must specify a
-	// containerName and containerPort combination from the task definition. If the
-	// task definition that your service task specifies uses the awsvpc network mode
-	// and a type SRV DNS record is used, you must specify either a containerName and
-	// containerPort combination or a port value. However, you can't specify both.
+	// service task specifies uses the bridge  or host network mode, you must specify
+	// a containerName  and containerPort combination from the task definition. If
+	// the task definition that your service task specifies uses the awsvpc network
+	// mode and a type SRV DNS record is used, you must specify either a containerName
+	// and containerPort  combination or a port value. However, you can't specify
+	// both.
 	ContainerName *string
 
 	// The port value to be used for your service discovery service. It's already
 	// specified in the task definition. If the task definition your service task
-	// specifies uses the bridge or host network mode, you must specify a containerName
-	// and containerPort combination from the task definition. If the task definition
-	// your service task specifies uses the awsvpc network mode and a type SRV DNS
-	// record is used, you must specify either a containerName and containerPort
-	// combination or a port value. However, you can't specify both.
+	// specifies uses the bridge  or host  network mode, you must specify a
+	// containerName and containerPort combination from the task definition. If the
+	// task definition your service task specifies uses the awsvpc network mode and a
+	// type SRV DNS record is used, you must specify either a containerName  and
+	// containerPort combination or a port  value. However, you can't specify both.
 	ContainerPort *int32
 
 	// The port value used if your service discovery service specified an SRV record.
@@ -3433,9 +3078,10 @@ type ServiceRegistry struct {
 	// used.
 	Port *int32
 
-	// The Amazon Resource Name (ARN) of the service registry. The currently supported
-	// service registry is Cloud Map. For more information, see CreateService
-	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html).
+	// The Amazon Resource Name (ARN) of the service registry. The currently
+	// supported service registry is Cloud Map. For more information, see
+	// CreateService (https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html)
+	// .
 	RegistryArn *string
 
 	noSmithyDocumentSerde
@@ -3447,12 +3093,12 @@ type Session struct {
 	// The ID of the execute command session.
 	SessionId *string
 
-	// A URL to the managed agent on the container that the SSM Session Manager client
-	// uses to send commands and receive output from the container.
+	// A URL to the managed agent on the container that the SSM Session Manager
+	// client uses to send commands and receive output from the container.
 	StreamUrl *string
 
-	// An encrypted token value containing session and caller information. It's used to
-	// authenticate the connection to the container.
+	// An encrypted token value containing session and caller information. It's used
+	// to authenticate the connection to the container.
 	TokenValue *string
 
 	noSmithyDocumentSerde
@@ -3475,28 +3121,20 @@ type Setting struct {
 }
 
 // A list of namespaced kernel parameters to set in the container. This parameter
-// maps to Sysctls in the Create a container
-// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
-// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
-// --sysctl option to docker run
-// (https://docs.docker.com/engine/reference/run/#security-configuration). We don't
-// recommend that you specify network-related systemControls parameters for
-// multiple containers in a single task. This task also uses either the awsvpc or
-// host network mode. It does it for the following reasons.
-// - For tasks that use
-// the awsvpc network mode, if you set systemControls for any container, it applies
-// to all containers in the task. If you set different systemControls for multiple
-// containers in a single task, the container that's started last determines which
-// systemControls take effect.
-// - For tasks that use the host network mode, the
-// systemControls parameter applies to the container instance's kernel parameter
-// and that of all containers of any tasks running on that container instance.
+// maps to Sysctls  in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
+// and the --sysctl  option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
+// . We don't recommend that you specify network-related systemControls
+// parameters for multiple containers in a single task. This task also uses either
+// the awsvpc  or host  network mode. It does it for the following reasons.
+//   - For tasks that use the awsvpc network mode, if you set systemControls for any container, it applies to all containers in the task. If you set different systemControls for multiple containers in a single task, the container that's started last determines which systemControls take effect.
+//   - For tasks that use the host network mode, the systemControls parameter applies to the container instance's kernel parameter and that of all containers of any tasks running on that container instance.
 type SystemControl struct {
 
-	// The namespaced kernel parameter to set a value for.
+	// The namespaced kernel parameter to set a value  for.
 	Namespace *string
 
-	// The value for the namespaced kernel parameter that's specified in namespace.
+	// The value for the namespaced kernel parameter that's specified in namespace .
 	Value *string
 
 	noSmithyDocumentSerde
@@ -3505,24 +3143,13 @@ type SystemControl struct {
 // The metadata that you apply to a resource to help you categorize and organize
 // them. Each tag consists of a key and an optional value. You define them. The
 // following basic restrictions apply to tags:
-// - Maximum number of tags per
-// resource - 50
-// - For each resource, each tag key must be unique, and each tag key
-// can have only one value.
-// - Maximum key length - 128 Unicode characters in
-// UTF-8
-// - Maximum value length - 256 Unicode characters in UTF-8
-// - If your tagging
-// schema is used across multiple services and resources, remember that other
-// services may have restrictions on allowed characters. Generally allowed
-// characters are: letters, numbers, and spaces representable in UTF-8, and the
-// following characters: + - = . _ : / @.
-// - Tag keys and values are
-// case-sensitive.
-// - Do not use aws:, AWS:, or any upper or lowercase combination
-// of such as a prefix for either keys or values as it is reserved for Amazon Web
-// Services use. You cannot edit or delete tag keys or values with this prefix.
-// Tags with this prefix do not count against your tags per resource limit.
+//   - Maximum number of tags per resource - 50
+//   - For each resource, each tag key must be unique, and each tag key can have only one value.
+//   - Maximum key length - 128 Unicode characters in UTF-8
+//   - Maximum value length - 256 Unicode characters in UTF-8
+//   - If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
+//   - Tag keys and values are case-sensitive.
+//   - Do not use aws: , AWS: , or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.
 type Tag struct {
 
 	// One part of a key-value pair that make up a tag. A key is a general label that
@@ -3539,8 +3166,8 @@ type Tag struct {
 // Details on a task in a cluster.
 type Task struct {
 
-	// The Elastic Network Adapter that's associated with the task if the task uses the
-	// awsvpc network mode.
+	// The Elastic Network Adapter that's associated with the task if the task uses
+	// the awsvpc  network mode.
 	Attachments []Attachment
 
 	// The attributes of the task
@@ -3558,7 +3185,7 @@ type Task struct {
 	// The connectivity status of a task.
 	Connectivity Connectivity
 
-	// The Unix timestamp for the time when the task last went into CONNECTED status.
+	// The Unix timestamp for the time when the task last went into CONNECTED  status.
 	ConnectivityAt *time.Time
 
 	// The ARN of the container instances that host the task.
@@ -3568,40 +3195,30 @@ type Task struct {
 	Containers []Container
 
 	// The number of CPU units used by the task as expressed in a task definition. It
-	// can be expressed as an integer using CPU units (for example, 1024). It can also
-	// be expressed as a string using vCPUs (for example, 1 vCPU or 1 vcpu). String
-	// values are converted to an integer that indicates the CPU units when the task
-	// definition is registered. If you use the EC2 launch type, this field is
-	// optional. Supported values are between 128 CPU units (0.125 vCPUs) and 10240 CPU
-	// units (10 vCPUs). If you use the Fargate launch type, this field is required.
-	// You must use one of the following values. These values determine the range of
-	// supported values for the memory parameter: The CPU units cannot be less than 1
-	// vCPU when you use Windows containers on Fargate.
-	// - 256 (.25 vCPU) - Available
-	// memory values: 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB)
-	// - 512 (.5 vCPU) -
-	// Available memory values: 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB)
-	// -
-	// 1024 (1 vCPU) - Available memory values: 2048 (2 GB), 3072 (3 GB), 4096 (4 GB),
-	// 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
-	// - 2048 (2 vCPU) - Available
-	// memory values: 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB)
-	// - 4096
-	// (4 vCPU) - Available memory values: 8192 (8 GB) and 30720 (30 GB) in increments
-	// of 1024 (1 GB)
-	// - 8192 (8 vCPU) - Available memory values: 16 GB and 60 GB in 4
-	// GB increments This option requires Linux platform 1.4.0 or later.
-	// - 16384
-	// (16vCPU) - Available memory values: 32GB and 120 GB in 8 GB increments This
-	// option requires Linux platform 1.4.0 or later.
+	// can be expressed as an integer using CPU units (for example, 1024). It can
+	// also be expressed as a string using vCPUs (for example, 1 vCPU  or 1 vcpu).
+	// String values are converted to an integer that indicates the CPU units when the
+	// task definition is registered. If you use the EC2 launch type, this field is
+	// optional. Supported values are between 128  CPU units ( 0.125  vCPUs) and 10240
+	// CPU units ( 10 vCPUs). If you use the Fargate launch type, this field is
+	// required. You must use one of the following values. These values determine the
+	// range of supported values for the memory parameter: The CPU units cannot be
+	// less than 1 vCPU when you use Windows containers on Fargate.
+	//     - 256 (.25 vCPU) - Available memory values: 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB)
+	//     - 512 (.5 vCPU) - Available memory values: 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB)
+	//     - 1024 (1 vCPU) - Available memory values: 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
+	//     - 2048 (2 vCPU) - Available memory values: 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB)
+	//     - 4096 (4 vCPU) - Available memory values: 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)
+	//     - 8192 (8 vCPU) - Available memory values: 16 GB and 60 GB in 4 GB increments This option requires Linux platform 1.4.0 or later.
+	//     - 16384 (16vCPU) - Available memory values: 32GB and 120 GB in 8 GB increments This option requires Linux platform 1.4.0 or later.
 	Cpu *string
 
 	// The Unix timestamp for the time when the task was created. More specifically,
-	// it's for the time when the task entered the PENDING state.
+	// it's for the time when the task entered the PENDING  state.
 	CreatedAt *time.Time
 
-	// The desired status of the task. For more information, see Task Lifecycle
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html).
+	// The desired status of the task. For more information, see Task Lifecycle (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html)
+	// .
 	DesiredStatus *string
 
 	// Determines whether execute command functionality is enabled for this task. If
@@ -3620,54 +3237,44 @@ type Task struct {
 
 	// The health status for the task. It's determined by the health of the essential
 	// containers in the task. If all essential containers in the task are reporting as
-	// HEALTHY, the task status also reports as HEALTHY. If any essential containers in
-	// the task are reporting as UNHEALTHY or UNKNOWN, the task status also reports as
-	// UNHEALTHY or UNKNOWN. The Amazon ECS container agent doesn't monitor or report
-	// on Docker health checks that are embedded in a container image and not specified
-	// in the container definition. For example, this includes those specified in a
-	// parent image or from the image's Dockerfile. Health check parameters that are
-	// specified in a container definition override any Docker health checks that are
-	// found in the container image.
+	//
+	// HEALTHY , the task status also reports as HEALTHY. If any essential containers
+	// in the task are reporting as UNHEALTHY  or UNKNOWN, the task status also
+	// reports as UNHEALTHY  or UNKNOWN. The Amazon ECS container agent doesn't
+	// monitor or report on Docker health checks that are embedded in a container image
+	// and not specified in the container definition. For example, this includes those
+	// specified in a parent image or from the image's Dockerfile. Health check
+	// parameters that are specified in a container definition override any Docker
+	// health checks that are found in the container image.
 	HealthStatus HealthStatus
 
 	// The Elastic Inference accelerator that's associated with the task.
 	InferenceAccelerators []InferenceAccelerator
 
-	// The last known status for the task. For more information, see Task Lifecycle
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html).
+	// The last known status for the task. For more information, see Task Lifecycle (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html)
+	// .
 	LastStatus *string
 
-	// The infrastructure where your task runs on. For more information, see Amazon ECS
-	// launch types
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
+	// The infrastructure where your task runs on. For more information, see Amazon
+	// ECS launch types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	LaunchType LaunchType
 
 	// The amount of memory (in MiB) that the task uses as expressed in a task
-	// definition. It can be expressed as an integer using MiB (for example, 1024). If
-	// it's expressed as a string using GB (for example, 1GB or 1 GB), it's converted
-	// to an integer indicating the MiB when the task definition is registered. If you
-	// use the EC2 launch type, this field is optional. If you use the Fargate launch
-	// type, this field is required. You must use one of the following values. The
-	// value that you choose determines the range of supported values for the cpu
-	// parameter.
-	// - 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available cpu values: 256
-	// (.25 vCPU)
-	// - 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available cpu
-	// values: 512 (.5 vCPU)
-	// - 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144
-	// (6 GB), 7168 (7 GB), 8192 (8 GB) - Available cpu values: 1024 (1 vCPU)
-	// - Between
-	// 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available cpu
-	// values: 2048 (2 vCPU)
-	// - Between 8192 (8 GB) and 30720 (30 GB) in increments of
-	// 1024 (1 GB) - Available cpu values: 4096 (4 vCPU)
-	// - Between 16 GB and 60 GB in 4
-	// GB increments - Available cpu values: 8192 (8 vCPU) This option requires Linux
-	// platform 1.4.0 or later.
-	// - Between 32GB and 120 GB in 8 GB increments -
-	// Available cpu values: 16384 (16 vCPU) This option requires Linux platform 1.4.0
-	// or later.
+	// definition. It can be expressed as an integer using MiB (for example, 1024).
+	// If it's expressed as a string using GB (for example, 1GB  or 1 GB), it's
+	// converted to an integer indicating the MiB when the task definition is
+	// registered. If you use the EC2 launch type, this field is optional. If you use
+	// the Fargate launch type, this field is required. You must use one of the
+	// following values. The value that you choose determines the range of supported
+	// values for the cpu  parameter.
+	//     - 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available cpu values: 256 (.25 vCPU)
+	//     - 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available cpu values: 512 (.5 vCPU)
+	//     - 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available cpu values: 1024 (1 vCPU)
+	//     - Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available cpu values: 2048 (2 vCPU)
+	//     - Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available cpu values: 4096 (4 vCPU)
+	//     - Between 16 GB and 60 GB in 4 GB increments - Available cpu values: 8192 (8 vCPU) This option requires Linux platform 1.4.0 or later.
+	//     - Between 32GB and 120 GB in 8 GB increments - Available cpu values: 16384 (16 vCPU) This option requires Linux platform 1.4.0 or later.
 	Memory *string
 
 	// One or more container overrides.
@@ -3675,15 +3282,14 @@ type Task struct {
 
 	// The operating system that your tasks are running on. A platform family is
 	// specified only for tasks that use the Fargate launch type. All tasks that run as
-	// part of this service must use the same platformFamily value as the service (for
-	// example, LINUX.).
+	// part of this service must use the same platformFamily value as the service
+	// (for example, LINUX. ).
 	PlatformFamily *string
 
 	// The platform version where your task runs on. A platform version is only
 	// specified for tasks that use the Fargate launch type. If you didn't specify one,
-	// the LATEST platform version is used. For more information, see Fargate Platform
-	// Versions
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
+	// the LATEST  platform version is used. For more information, see Fargate
+	// Platform Versions (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
 
@@ -3694,59 +3300,46 @@ type Task struct {
 	PullStoppedAt *time.Time
 
 	// The Unix timestamp for the time when the task started. More specifically, it's
-	// for the time when the task transitioned from the PENDING state to the RUNNING
+	// for the time when the task transitioned from the PENDING  state to the RUNNING
 	// state.
 	StartedAt *time.Time
 
 	// The tag specified when a task is started. If an Amazon ECS service started the
-	// task, the startedBy parameter contains the deployment ID of that service.
+	// task, the startedBy  parameter contains the deployment ID of that service.
 	StartedBy *string
 
-	// The stop code indicating why a task was stopped. The stoppedReason might contain
-	// additional details. The following are valid values:
-	// - TaskFailedToStart
-	// -
-	// EssentialContainerExited
-	// - UserInitiated
-	// - TerminationNotice
-	// -
-	// ServiceSchedulerInitiated
-	// - SpotInterruption
+	// The stop code indicating why a task was stopped. The stoppedReason might
+	// contain additional details. The following are valid values:
+	//     - TaskFailedToStart
+	//     - EssentialContainerExited
+	//     - UserInitiated
+	//     - TerminationNotice
+	//     - ServiceSchedulerInitiated
+	//     - SpotInterruption
 	StopCode TaskStopCode
 
 	// The Unix timestamp for the time when the task was stopped. More specifically,
-	// it's for the time when the task transitioned from the RUNNING state to the
+	// it's for the time when the task transitioned from the RUNNING  state to the
 	// STOPPED state.
 	StoppedAt *time.Time
 
 	// The reason that the task was stopped.
 	StoppedReason *string
 
-	// The Unix timestamp for the time when the task stops. More specifically, it's for
-	// the time when the task transitions from the RUNNING state to STOPPED.
+	// The Unix timestamp for the time when the task stops. More specifically, it's
+	// for the time when the task transitions from the RUNNING  state to STOPPED .
 	StoppingAt *time.Time
 
-	// The metadata that you apply to the task to help you categorize and organize the
-	// task. Each tag consists of a key and an optional value. You define both the key
-	// and value. The following basic restrictions apply to tags:
-	// - Maximum number of
-	// tags per resource - 50
-	// - For each resource, each tag key must be unique, and
-	// each tag key can have only one value.
-	// - Maximum key length - 128 Unicode
-	// characters in UTF-8
-	// - Maximum value length - 256 Unicode characters in UTF-8
-	// -
-	// If your tagging schema is used across multiple services and resources, remember
-	// that other services may have restrictions on allowed characters. Generally
-	// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
-	// the following characters: + - = . _ : / @.
-	// - Tag keys and values are
-	// case-sensitive.
-	// - Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for either keys or values as it is reserved for Amazon Web
-	// Services use. You cannot edit or delete tag keys or values with this prefix.
-	// Tags with this prefix do not count against your tags per resource limit.
+	// The metadata that you apply to the task to help you categorize and organize
+	// the task. Each tag consists of a key and an optional value. You define both the
+	// key and value. The following basic restrictions apply to tags:
+	//     - Maximum number of tags per resource - 50
+	//     - For each resource, each tag key must be unique, and each tag key can have only one value.
+	//     - Maximum key length - 128 Unicode characters in UTF-8
+	//     - Maximum value length - 256 Unicode characters in UTF-8
+	//     - If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
+	//     - Tag keys and values are case-sensitive.
+	//     - Do not use aws: , AWS: , or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.
 	Tags []Tag
 
 	// The Amazon Resource Name (ARN) of the task.
@@ -3773,15 +3366,13 @@ type Task struct {
 type TaskDefinition struct {
 
 	// The task launch types the task definition validated against during task
-	// definition registration. For more information, see Amazon ECS launch types
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
+	// definition registration. For more information, see Amazon ECS launch types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Compatibilities []Compatibility
 
 	// A list of container definitions in JSON format that describe the different
 	// containers that make up your task. For more information about container
-	// definition parameters and defaults, see Amazon ECS Task Definitions
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html)
+	// definition parameters and defaults, see Amazon ECS Task Definitions (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	ContainerDefinitions []ContainerDefinition
 
@@ -3789,24 +3380,15 @@ type TaskDefinition struct {
 	// field is optional. Any value can be used. If you use the Fargate launch type,
 	// this field is required. You must use one of the following values. The value that
 	// you choose determines your range of valid values for the memory parameter. The
-	// CPU units cannot be less than 1 vCPU when you use Windows containers on
-	// Fargate.
-	// - 256 (.25 vCPU) - Available memory values: 512 (0.5 GB), 1024 (1 GB),
-	// 2048 (2 GB)
-	// - 512 (.5 vCPU) - Available memory values: 1024 (1 GB), 2048 (2 GB),
-	// 3072 (3 GB), 4096 (4 GB)
-	// - 1024 (1 vCPU) - Available memory values: 2048 (2 GB),
-	// 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
-	// -
-	// 2048 (2 vCPU) - Available memory values: 4096 (4 GB) and 16384 (16 GB) in
-	// increments of 1024 (1 GB)
-	// - 4096 (4 vCPU) - Available memory values: 8192 (8 GB)
-	// and 30720 (30 GB) in increments of 1024 (1 GB)
-	// - 8192 (8 vCPU) - Available
-	// memory values: 16 GB and 60 GB in 4 GB increments This option requires Linux
-	// platform 1.4.0 or later.
-	// - 16384 (16vCPU) - Available memory values: 32GB and
-	// 120 GB in 8 GB increments This option requires Linux platform 1.4.0 or later.
+	// CPU units cannot be less than 1 vCPU when you use Windows containers on Fargate.
+	//
+	//     - 256 (.25 vCPU) - Available memory values: 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB)
+	//     - 512 (.5 vCPU) - Available memory values: 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB)
+	//     - 1024 (1 vCPU) - Available memory values: 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
+	//     - 2048 (2 vCPU) - Available memory values: 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB)
+	//     - 4096 (4 vCPU) - Available memory values: 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)
+	//     - 8192 (8 vCPU) - Available memory values: 16 GB and 60 GB in 4 GB increments This option requires Linux platform 1.4.0 or later.
+	//     - 16384 (16vCPU) - Available memory values: 32GB and 120 GB in 8 GB increments This option requires Linux platform 1.4.0 or later.
 	Cpu *string
 
 	// The Unix timestamp for the time when the task definition was deregistered.
@@ -3815,11 +3397,11 @@ type TaskDefinition struct {
 	// The ephemeral storage settings to use for tasks run with the task definition.
 	EphemeralStorage *EphemeralStorage
 
-	// The Amazon Resource Name (ARN) of the task execution role that grants the Amazon
-	// ECS container agent permission to make Amazon Web Services API calls on your
-	// behalf. The task execution IAM role is required depending on the requirements of
-	// your task. For more information, see Amazon ECS task execution IAM role
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html)
+	// The Amazon Resource Name (ARN) of the task execution role that grants the
+	// Amazon ECS container agent permission to make Amazon Web Services API calls on
+	// your behalf. The task execution IAM role is required depending on the
+	// requirements of your task. For more information, see Amazon ECS task execution
+	// IAM role (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	ExecutionRoleArn *string
 
@@ -3835,115 +3417,96 @@ type TaskDefinition struct {
 	InferenceAccelerators []InferenceAccelerator
 
 	// The IPC resource namespace to use for the containers in the task. The valid
-	// values are host, task, or none. If host is specified, then all containers within
-	// the tasks that specified the host IPC mode on the same container instance share
-	// the same IPC resources with the host Amazon EC2 instance. If task is specified,
-	// all containers within the specified task share the same IPC resources. If none
-	// is specified, then IPC resources within the containers of a task are private and
-	// not shared with other containers in a task or on the container instance. If no
-	// value is specified, then the IPC resource namespace sharing depends on the
-	// Docker daemon setting on the container instance. For more information, see IPC
-	// settings (https://docs.docker.com/engine/reference/run/#ipc-settings---ipc) in
-	// the Docker run reference. If the host IPC mode is used, be aware that there is a
-	// heightened risk of undesired IPC namespace expose. For more information, see
-	// Docker security (https://docs.docker.com/engine/security/security/). If you are
-	// setting namespaced kernel parameters using systemControls for the containers in
-	// the task, the following will apply to your IPC resource namespace. For more
-	// information, see System Controls
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html)
+	// values are host , task , or none . If host is specified, then all containers
+	// within the tasks that specified the host IPC mode on the same container
+	// instance share the same IPC resources with the host Amazon EC2 instance. If
+	// taskis specified, all containers within the specified task share the same IPC
+	// resources. If none is specified, then IPC resources within the containers of a
+	// task are private and not shared with other containers in a task or on the
+	// container instance. If no value is specified, then the IPC resource namespace
+	// sharing depends on the Docker daemon setting on the container instance. For more
+	// information, see IPC settings (https://docs.docker.com/engine/reference/run/#ipc-settings---ipc)
+	// in the Docker run reference. If the host IPC mode is used, be aware that there
+	// is a heightened risk of undesired IPC namespace expose. For more information,
+	// see Docker security (https://docs.docker.com/engine/security/security/). If
+	// you are setting namespaced kernel parameters using systemControls for the
+	// containers in the task, the following will apply to your IPC resource namespace.
+	// For more information, see System Controls (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html)
 	// in the Amazon Elastic Container Service Developer Guide.
-	// - For tasks that use
-	// the host IPC mode, IPC namespace related systemControls are not supported.
-	// - For
-	// tasks that use the task IPC mode, IPC namespace related systemControls will
-	// apply to all containers within a task.
+	//     - For tasks that use the host IPC mode, IPC namespace related systemControls are not supported.
+	//     - For tasks that use the task IPC mode, IPC namespace related systemControls will apply to all containers within a task.
 	//
-	// This parameter is not supported for
-	// Windows containers or tasks run on Fargate.
+	// This parameter is not supported for Windows containers or tasks run on Fargate.
 	IpcMode IpcMode
 
-	// The amount (in MiB) of memory used by the task. If your tasks runs on Amazon EC2
-	// instances, you must specify either a task-level memory value or a
+	// The amount (in MiB) of memory used by the task. If your tasks runs on Amazon
+	// EC2 instances, you must specify either a task-level memory value or a
 	// container-level memory value. This field is optional and any value can be used.
 	// If a task-level memory value is specified, the container-level memory value is
 	// optional. For more information regarding container-level memory and memory
-	// reservation, see ContainerDefinition
-	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html).
-	// If your tasks runs on Fargate, this field is required. You must use one of the
+	// reservation, see ContainerDefinition (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html)
+	// . If your tasks runs on Fargate, this field is required. You must use one of the
 	// following values. The value you choose determines your range of valid values for
-	// the cpu parameter.
-	// - 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available cpu
-	// values: 256 (.25 vCPU)
-	// - 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) -
-	// Available cpu values: 512 (.5 vCPU)
-	// - 2048 (2 GB), 3072 (3 GB), 4096 (4 GB),
-	// 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available cpu values: 1024
-	// (1 vCPU)
-	// - Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) -
-	// Available cpu values: 2048 (2 vCPU)
-	// - Between 8192 (8 GB) and 30720 (30 GB) in
-	// increments of 1024 (1 GB) - Available cpu values: 4096 (4 vCPU)
-	// - Between 16 GB
-	// and 60 GB in 4 GB increments - Available cpu values: 8192 (8 vCPU) This option
-	// requires Linux platform 1.4.0 or later.
-	// - Between 32GB and 120 GB in 8 GB
-	// increments - Available cpu values: 16384 (16 vCPU) This option requires Linux
-	// platform 1.4.0 or later.
+	// the cpu  parameter.
+	//     - 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available cpu values: 256 (.25 vCPU)
+	//     - 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available cpu values: 512 (.5 vCPU)
+	//     - 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available cpu values: 1024 (1 vCPU)
+	//     - Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available cpu values: 2048 (2 vCPU)
+	//     - Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available cpu values: 4096 (4 vCPU)
+	//     - Between 16 GB and 60 GB in 4 GB increments - Available cpu values: 8192 (8 vCPU) This option requires Linux platform 1.4.0 or later.
+	//     - Between 32GB and 120 GB in 8 GB increments - Available cpu values: 16384 (16 vCPU) This option requires Linux platform 1.4.0 or later.
 	Memory *string
 
 	// The Docker networking mode to use for the containers in the task. The valid
-	// values are none, bridge, awsvpc, and host. If no network mode is specified, the
-	// default is bridge. For Amazon ECS tasks on Fargate, the awsvpc network mode is
-	// required. For Amazon ECS tasks on Amazon EC2 Linux instances, any network mode
-	// can be used. For Amazon ECS tasks on Amazon EC2 Windows instances,  or awsvpc
-	// can be used. If the network mode is set to none, you cannot specify port
-	// mappings in your container definitions, and the tasks containers do not have
-	// external connectivity. The host and awsvpc network modes offer the highest
-	// networking performance for containers because they use the EC2 network stack
-	// instead of the virtualized network stack provided by the bridge mode. With the
-	// host and awsvpc network modes, exposed container ports are mapped directly to
-	// the corresponding host port (for the host network mode) or the attached elastic
-	// network interface port (for the awsvpc network mode), so you cannot take
-	// advantage of dynamic host port mappings. When using the host network mode, you
-	// should not run containers using the root user (UID 0). It is considered best
-	// practice to use a non-root user. If the network mode is awsvpc, the task is
-	// allocated an elastic network interface, and you must specify a
-	// NetworkConfiguration value when you create a service or run a task with the task
-	// definition. For more information, see Task Networking
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
+	// values are none , bridge , awsvpc , and host. If no network mode is specified,
+	// the default is bridge . For Amazon ECS tasks on Fargate, the awsvpc network
+	// mode is required. For Amazon ECS tasks on Amazon EC2 Linux instances, any
+	// network mode can be used. For Amazon ECS tasks on Amazon EC2 Windows instances,
+	// or awsvpc  can be used. If the network mode is set to none, you cannot specify
+	// port mappings in your container definitions, and the tasks containers do not
+	// have external connectivity. The host  and awsvpc network modes offer the
+	// highest networking performance for containers because they use the EC2 network
+	// stack instead of the virtualized network stack provided by the bridge mode.
+	// With the host  and awsvpc network modes, exposed container ports are mapped
+	// directly to the corresponding host port (for the host network mode) or the
+	// attached elastic network interface port (for the awsvpc network mode), so you
+	// cannot take advantage of dynamic host port mappings. When using the host
+	// network mode, you should not run containers using the root user (UID 0). It is
+	// considered best practice to use a non-root user. If the network mode is awsvpc
+	// , the task is allocated an elastic network interface, and you must specify a
+	// NetworkConfigurationvalue when you create a service or run a task with the
+	// task definition. For more information, see Task Networking (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
 	// in the Amazon Elastic Container Service Developer Guide. If the network mode is
 	// host, you cannot run multiple instantiations of the same task on a single
 	// container instance when port mappings are used. For more information, see
-	// Network settings
-	// (https://docs.docker.com/engine/reference/run/#network-settings) in the Docker
-	// run reference.
+	// Network settings (https://docs.docker.com/engine/reference/run/#network-settings)
+	// in the Docker run reference.
 	NetworkMode NetworkMode
 
 	// The process namespace to use for the containers in the task. The valid values
-	// are host or task. If host is specified, then all containers within the tasks
+	// are host  or task . If host is specified, then all containers within the tasks
 	// that specified the host PID mode on the same container instance share the same
 	// process namespace with the host Amazon EC2 instance. If task is specified, all
 	// containers within the specified task share the same process namespace. If no
 	// value is specified, the default is a private namespace. For more information,
-	// see PID settings
-	// (https://docs.docker.com/engine/reference/run/#pid-settings---pid) in the Docker
-	// run reference. If the host PID mode is used, be aware that there is a heightened
-	// risk of undesired process namespace expose. For more information, see Docker
-	// security (https://docs.docker.com/engine/security/security/). This parameter is
-	// not supported for Windows containers or tasks run on Fargate.
+	// see PID settings (https://docs.docker.com/engine/reference/run/#pid-settings---pid)
+	// in the Docker run reference. If the host PID mode is used, be aware that there
+	// is a heightened risk of undesired process namespace expose. For more
+	// information, see Docker security (https://docs.docker.com/engine/security/security/)
+	// . This parameter is not supported for Windows containers or tasks run on
+	// Fargate.
 	PidMode PidMode
 
-	// An array of placement constraint objects to use for tasks. This parameter isn't
-	// supported for tasks run on Fargate.
+	// An array of placement constraint objects to use for tasks. This parameter
+	// isn't supported for tasks run on Fargate.
 	PlacementConstraints []TaskDefinitionPlacementConstraint
 
 	// The configuration details for the App Mesh proxy. Your Amazon ECS container
 	// instances require at least version 1.26.0 of the container agent and at least
 	// version 1.26.0-1 of the ecs-init package to use a proxy configuration. If your
 	// container instances are launched from the Amazon ECS optimized AMI version
-	// 20190301 or later, they contain the required versions of the container agent and
-	// ecs-init. For more information, see Amazon ECS-optimized Linux AMI
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
+	// 20190301or later, they contain the required versions of the container agent
+	// and ecs-init . For more information, see Amazon ECS-optimized Linux AMI (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	ProxyConfiguration *ProxyConfiguration
 
@@ -3957,9 +3520,8 @@ type TaskDefinition struct {
 	// instance is registered to your cluster, the Amazon ECS container agent assigns
 	// some standard attributes to the instance. You can apply custom attributes. These
 	// are specified as key-value pairs using the Amazon ECS console or the
-	// PutAttributes API. These attributes are used when determining task placement for
-	// tasks hosted on Amazon EC2 instances. For more information, see Attributes
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes)
+	// PutAttributesAPI. These attributes are used when determining task placement
+	// for tasks hosted on Amazon EC2 instances. For more information, see Attributes (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes)
 	// in the Amazon Elastic Container Service Developer Guide. This parameter isn't
 	// supported for tasks run on Fargate.
 	RequiresAttributes []Attribute
@@ -3971,15 +3533,15 @@ type TaskDefinition struct {
 
 	// The revision of the task in a particular family. The revision is a version
 	// number of a task definition in a family. When you register a task definition for
-	// the first time, the revision is 1. Each time that you register a new revision of
-	// a task definition in the same family, the revision value always increases by
+	// the first time, the revision is 1. Each time that you register a new revision
+	// of a task definition in the same family, the revision value always increases by
 	// one. This is even if you deregistered previous revisions in this family.
 	Revision int32
 
 	// The operating system that your task definitions are running on. A platform
 	// family is specified only for tasks using the Fargate launch type. When you
-	// specify a task in a service, this value must match the runtimePlatform value of
-	// the service.
+	// specify a task in a service, this value must match the runtimePlatform value
+	// of the service.
 	RuntimePlatform *RuntimePlatform
 
 	// The status of the task definition.
@@ -3990,42 +3552,37 @@ type TaskDefinition struct {
 
 	// The short name or full Amazon Resource Name (ARN) of the Identity and Access
 	// Management role that grants containers in the task permission to call Amazon Web
-	// Services APIs on your behalf. For more information, see Amazon ECS Task Role
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html)
+	// Services APIs on your behalf. For more information, see Amazon ECS Task Role (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html)
 	// in the Amazon Elastic Container Service Developer Guide. IAM roles for tasks on
 	// Windows require that the -EnableTaskIAMRole option is set when you launch the
 	// Amazon ECS-optimized Windows AMI. Your containers must also run some
 	// configuration code to use the feature. For more information, see Windows IAM
-	// roles for tasks
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows_task_IAM_roles.html)
+	// roles for tasks (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows_task_IAM_roles.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	TaskRoleArn *string
 
 	// The list of data volume definitions for the task. For more information, see
-	// Using data volumes in tasks
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html)
-	// in the Amazon Elastic Container Service Developer Guide. The host and sourcePath
-	// parameters aren't supported for tasks run on Fargate.
+	// Using data volumes in tasks (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html)
+	// in the Amazon Elastic Container Service Developer Guide. The host  and
+	// sourcePath parameters aren't supported for tasks run on Fargate.
 	Volumes []Volume
 
 	noSmithyDocumentSerde
 }
 
 // An object representing a constraint on task placement in the task definition.
-// For more information, see Task placement constraints
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
+// For more information, see Task placement constraints (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
 // in the Amazon Elastic Container Service Developer Guide. Task placement
 // constraints aren't supported for tasks run on Fargate.
 type TaskDefinitionPlacementConstraint struct {
 
 	// A cluster query language expression to apply to the constraint. For more
-	// information, see Cluster query language
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
+	// information, see Cluster query language (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Expression *string
 
-	// The type of constraint. The MemberOf constraint restricts selection to be from a
-	// group of valid candidates.
+	// The type of constraint. The MemberOf constraint restricts selection to be from
+	// a group of valid candidates.
 	Type TaskDefinitionPlacementConstraintType
 
 	noSmithyDocumentSerde
@@ -4041,16 +3598,13 @@ type TaskOverride struct {
 	Cpu *string
 
 	// The ephemeral storage setting override for the task. This parameter is only
-	// supported for tasks hosted on Fargate that use the following platform
-	// versions:
-	// - Linux platform version 1.4.0 or later.
-	// - Windows platform version
-	// 1.0.0 or later.
+	// supported for tasks hosted on Fargate that use the following platform versions:
+	//     - Linux platform version 1.4.0 or later.
+	//     - Windows platform version 1.0.0 or later.
 	EphemeralStorage *EphemeralStorage
 
-	// The Amazon Resource Name (ARN) of the task execution role override for the task.
-	// For more information, see Amazon ECS task execution IAM role
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html)
+	// The Amazon Resource Name (ARN) of the task execution role override for the
+	// task. For more information, see Amazon ECS task execution IAM role (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	ExecutionRoleArn *string
 
@@ -4062,8 +3616,7 @@ type TaskOverride struct {
 
 	// The Amazon Resource Name (ARN) of the role that containers in this task can
 	// assume. All containers in this task are granted the permissions that are
-	// specified in this role. For more information, see IAM Role for Tasks
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html)
+	// specified in this role. For more information, see IAM Role for Tasks (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	TaskRoleArn *string
 
@@ -4071,9 +3624,9 @@ type TaskOverride struct {
 }
 
 // Information about a set of Amazon ECS tasks in either an CodeDeploy or an
-// EXTERNAL deployment. An Amazon ECS task set includes details such as the desired
-// number of tasks, how many tasks are running, and whether the task set serves
-// production traffic.
+// EXTERNALdeployment. An Amazon ECS task set includes details such as the
+// desired number of tasks, how many tasks are running, and whether the task set
+// serves production traffic.
 type TaskSet struct {
 
 	// The capacity provider strategy that are associated with the task set.
@@ -4084,7 +3637,7 @@ type TaskSet struct {
 	ClusterArn *string
 
 	// The computed desired count for the task set. This is calculated by multiplying
-	// the service's desiredCount by the task set's scale percentage. The result is
+	// the service's desiredCount  by the task set's scale percentage. The result is
 	// always rounded up. For example, if the computed desired count is 1.2, it rounds
 	// up to 2 tasks.
 	ComputedDesiredCount int32
@@ -4093,18 +3646,17 @@ type TaskSet struct {
 	CreatedAt *time.Time
 
 	// The external ID associated with the task set. If an CodeDeploy deployment
-	// created a task set, the externalId parameter contains the CodeDeploy deployment
-	// ID. If a task set is created for an external deployment and is associated with a
-	// service discovery registry, the externalId parameter contains the
-	// ECS_TASK_SET_EXTERNAL_ID Cloud Map attribute.
+	// created a task set, the externalId parameter contains the CodeDeploy
+	// deployment ID. If a task set is created for an external deployment and is
+	// associated with a service discovery registry, the externalId parameter
+	// contains the ECS_TASK_SET_EXTERNAL_ID  Cloud Map attribute.
 	ExternalId *string
 
 	// The ID of the task set.
 	Id *string
 
 	// The launch type the tasks in the task set are using. For more information, see
-	// Amazon ECS launch types
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
+	// Amazon ECS launch types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	LaunchType LaunchType
 
@@ -4115,9 +3667,9 @@ type TaskSet struct {
 	NetworkConfiguration *NetworkConfiguration
 
 	// The number of tasks in the task set that are in the PENDING status during a
-	// deployment. A task in the PENDING state is preparing to enter the RUNNING state.
-	// A task set enters the PENDING status when it launches for the first time or when
-	// it's restarted after being in the STOPPED state.
+	// deployment. A task in the PENDING  state is preparing to enter the RUNNING
+	// state. A task set enters the PENDING status when it launches for the first
+	// time or when it's restarted after being in the STOPPED  state.
 	PendingCount int32
 
 	// The operating system that your tasks in the set are running on. A platform
@@ -4127,13 +3679,12 @@ type TaskSet struct {
 
 	// The Fargate platform version where the tasks in the task set are running. A
 	// platform version is only specified for tasks run on Fargate. For more
-	// information, see Fargate platform versions
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
+	// information, see Fargate platform versions (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
 
 	// The number of tasks in the task set that are in the RUNNING status during a
-	// deployment. A task in the RUNNING state is running and ready for use.
+	// deployment. A task in the RUNNING  state is running and ready for use.
 	RunningCount int32
 
 	// A floating-point percentage of your desired number of tasks to place and keep
@@ -4143,24 +3694,20 @@ type TaskSet struct {
 	// The Amazon Resource Name (ARN) of the service the task set exists in.
 	ServiceArn *string
 
-	// The details for the service discovery registries to assign to this task set. For
-	// more information, see Service discovery
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
+	// The details for the service discovery registries to assign to this task set.
+	// For more information, see Service discovery (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html)
+	// .
 	ServiceRegistries []ServiceRegistry
 
 	// The stability status. This indicates whether the task set has reached a steady
-	// state. If the following conditions are met, the task set are in STEADY_STATE:
-	// -
-	// The task runningCount is equal to the computedDesiredCount.
-	// - The pendingCount
-	// is 0.
-	// - There are no tasks that are running on container instances in the
-	// DRAINING status.
-	// - All tasks are reporting a healthy status from the load
-	// balancers, service discovery, and container health checks.
+	// state. If the following conditions are met, the task set are in STEADY_STATE :
+	//     - The task runningCount is equal to the computedDesiredCount .
+	//     - The pendingCount is 0 .
+	//     - There are no tasks that are running on container instances in the DRAINING status.
+	//     - All tasks are reporting a healthy status from the load balancers, service discovery, and container health checks.
 	//
-	// If any of those
-	// conditions aren't met, the stability status returns STABILIZING.
+	// If any of those conditions aren't met, the stability status returns STABILIZING
+	// .
 	StabilityStatus StabilityStatus
 
 	// The Unix timestamp for the time when the task set stability status was
@@ -4168,37 +3715,26 @@ type TaskSet struct {
 	StabilityStatusAt *time.Time
 
 	// The tag specified when a task set is started. If an CodeDeploy deployment
-	// created the task set, the startedBy parameter is CODE_DEPLOY. If an external
-	// deployment created the task set, the startedBy field isn't used.
+	// created the task set, the startedBy  parameter is CODE_DEPLOY. If an external
+	// deployment created the task set, the startedBy  field isn't used.
 	StartedBy *string
 
-	// The status of the task set. The following describes each state. PRIMARY The task
-	// set is serving production traffic. ACTIVE The task set isn't serving production
-	// traffic. DRAINING The tasks in the task set are being stopped, and their
-	// corresponding targets are being deregistered from their target group.
+	// The status of the task set. The following describes each state. PRIMARY The
+	// task set is serving production traffic. ACTIVE The task set isn't serving
+	// production traffic. DRAINING The tasks in the task set are being stopped, and
+	// their corresponding targets are being deregistered from their target group.
 	Status *string
 
-	// The metadata that you apply to the task set to help you categorize and organize
-	// them. Each tag consists of a key and an optional value. You define both. The
-	// following basic restrictions apply to tags:
-	// - Maximum number of tags per
-	// resource - 50
-	// - For each resource, each tag key must be unique, and each tag key
-	// can have only one value.
-	// - Maximum key length - 128 Unicode characters in
-	// UTF-8
-	// - Maximum value length - 256 Unicode characters in UTF-8
-	// - If your tagging
-	// schema is used across multiple services and resources, remember that other
-	// services may have restrictions on allowed characters. Generally allowed
-	// characters are: letters, numbers, and spaces representable in UTF-8, and the
-	// following characters: + - = . _ : / @.
-	// - Tag keys and values are
-	// case-sensitive.
-	// - Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for either keys or values as it is reserved for Amazon Web
-	// Services use. You cannot edit or delete tag keys or values with this prefix.
-	// Tags with this prefix do not count against your tags per resource limit.
+	// The metadata that you apply to the task set to help you categorize and
+	// organize them. Each tag consists of a key and an optional value. You define
+	// both. The following basic restrictions apply to tags:
+	//     - Maximum number of tags per resource - 50
+	//     - For each resource, each tag key must be unique, and each tag key can have only one value.
+	//     - Maximum key length - 128 Unicode characters in UTF-8
+	//     - Maximum value length - 256 Unicode characters in UTF-8
+	//     - If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
+	//     - Tag keys and values are case-sensitive.
+	//     - Do not use aws: , AWS: , or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.
 	Tags []Tag
 
 	// The task definition that the task set is using.
@@ -4226,8 +3762,8 @@ type Tmpfs struct {
 	// This member is required.
 	Size int32
 
-	// The list of tmpfs volume mount options. Valid values: "defaults" | "ro" | "rw" |
-	// "suid" | "nosuid" | "dev" | "nodev" | "exec" | "noexec" | "sync" | "async" |
+	// The list of tmpfs volume mount options. Valid values: "defaults" | "ro" | "rw"
+	// | "suid" | "nosuid" | "dev" | "nodev" | "exec" | "noexec" | "sync" | "async" |
 	// "dirsync" | "remount" | "mand" | "nomand" | "atime" | "noatime" | "diratime" |
 	// "nodiratime" | "bind" | "rbind" | "unbindable" | "runbindable" | "private" |
 	// "rprivate" | "shared" | "rshared" | "slave" | "rslave" | "relatime" |
@@ -4238,26 +3774,26 @@ type Tmpfs struct {
 	noSmithyDocumentSerde
 }
 
-// The ulimit settings to pass to the container. Amazon ECS tasks hosted on Fargate
-// use the default resource limit values set by the operating system with the
-// exception of the nofile resource limit parameter which Fargate overrides. The
-// nofile resource limit sets a restriction on the number of open files that a
-// container can use. The default nofile soft limit is 1024 and the default hard
-// limit is 4096. You can specify the ulimit settings for a container in a task
-// definition.
+// The ulimit settings to pass to the container. Amazon ECS tasks hosted on
+// Fargate use the default resource limit values set by the operating system with
+// the exception of the nofile resource limit parameter which Fargate overrides.
+// The nofile resource limit sets a restriction on the number of open files that
+// a container can use. The default nofile  soft limit is 1024 and the default
+// hard limit is 4096 . You can specify the ulimit settings for a container in a
+// task definition.
 type Ulimit struct {
 
-	// The hard limit for the ulimit type.
+	// The hard limit for the ulimit  type.
 	//
 	// This member is required.
 	HardLimit int32
 
-	// The type of the ulimit.
+	// The type  of the ulimit .
 	//
 	// This member is required.
 	Name UlimitName
 
-	// The soft limit for the ulimit type.
+	// The soft limit for the ulimit  type.
 	//
 	// This member is required.
 	SoftLimit int32
@@ -4265,8 +3801,8 @@ type Ulimit struct {
 	noSmithyDocumentSerde
 }
 
-// The Docker and Amazon ECS container agent version information about a container
-// instance.
+// The Docker and Amazon ECS container agent version information about a
+// container instance.
 type VersionInfo struct {
 
 	// The Git commit hash for the Amazon ECS container agent build on the
@@ -4284,17 +3820,18 @@ type VersionInfo struct {
 }
 
 // A data volume that's used in a task definition. For tasks that use the Amazon
-// Elastic File System (Amazon EFS), specify an efsVolumeConfiguration. For Windows
-// tasks that use Amazon FSx for Windows File Server file system, specify a
+// Elastic File System (Amazon EFS), specify an efsVolumeConfiguration. For
+// Windows tasks that use Amazon FSx for Windows File Server file system, specify a
+//
 // fsxWindowsFileServerVolumeConfiguration. For tasks that use a Docker volume,
 // specify a DockerVolumeConfiguration. For tasks that use a bind mount host
-// volume, specify a host and optional sourcePath. For more information, see Using
-// Data Volumes in Tasks
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html).
+// volume, specify a host  and optional sourcePath . For more information, see
+// Using Data Volumes in Tasks (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html)
+// .
 type Volume struct {
 
-	// This parameter is specified when you use Docker volumes. Windows containers only
-	// support the use of the local driver. To use bind mounts, specify the host
+	// This parameter is specified when you use Docker volumes. Windows containers
+	// only support the use of the local  driver. To use bind mounts, specify the host
 	// parameter instead. Docker volumes aren't supported by tasks run on Fargate.
 	DockerVolumeConfiguration *DockerVolumeConfiguration
 
@@ -4302,25 +3839,25 @@ type Volume struct {
 	// system for task storage.
 	EfsVolumeConfiguration *EFSVolumeConfiguration
 
-	// This parameter is specified when you use Amazon FSx for Windows File Server file
-	// system for task storage.
+	// This parameter is specified when you use Amazon FSx for Windows File Server
+	// file system for task storage.
 	FsxWindowsFileServerVolumeConfiguration *FSxWindowsFileServerVolumeConfiguration
 
 	// This parameter is specified when you use bind mount host volumes. The contents
-	// of the host parameter determine whether your bind mount host volume persists on
-	// the host container instance and where it's stored. If the host parameter is
+	// of the host parameter determine whether your bind mount host volume persists
+	// on the host container instance and where it's stored. If the host parameter is
 	// empty, then the Docker daemon assigns a host path for your data volume. However,
 	// the data isn't guaranteed to persist after the containers that are associated
 	// with it stop running. Windows containers can mount whole directories on the same
 	// drive as $env:ProgramData. Windows containers can't mount directories on a
 	// different drive, and mount point can't be across drives. For example, you can
-	// mount C:\my\path:C:\my\path and D:\:D:\, but not D:\my\path:C:\my\path or
-	// D:\:C:\my\path.
+	// mount C:\my\path:C:\my\path  and D:\:D:\ , but not D:\my\path:C:\my\path  or
+	// D:\:C:\my\path .
 	Host *HostVolumeProperties
 
 	// The name of the volume. Up to 255 letters (uppercase and lowercase), numbers,
 	// underscores, and hyphens are allowed. This name is referenced in the
-	// sourceVolume parameter of container definition mountPoints.
+	// sourceVolume parameter of container definition mountPoints .
 	Name *string
 
 	noSmithyDocumentSerde
@@ -4329,9 +3866,9 @@ type Volume struct {
 // Details on a data volume from another container in the same task definition.
 type VolumeFrom struct {
 
-	// If this value is true, the container has read-only access to the volume. If this
-	// value is false, then the container can write to the volume. The default value is
-	// false.
+	// If this value is true, the container has read-only access to the volume. If
+	// this value is false, then the container can write to the volume. The default
+	// value is false .
 	ReadOnly *bool
 
 	// The name of another container within the same task definition to mount volumes

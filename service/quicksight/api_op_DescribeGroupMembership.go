@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use the DescribeGroupMembership operation to determine if a user is a member of
-// the specified group. If the user exists and is a member of the specified group,
-// an associated GroupMember object is returned.
+// Use the DescribeGroupMembership operation to determine if a user is a member
+// of the specified group. If the user exists and is a member of the specified
+// group, an associated GroupMember  object is returned.
 func (c *Client) DescribeGroupMembership(ctx context.Context, params *DescribeGroupMembershipInput, optFns ...func(*Options)) (*DescribeGroupMembershipOutput, error) {
 	if params == nil {
 		params = &DescribeGroupMembershipInput{}
@@ -31,8 +31,8 @@ func (c *Client) DescribeGroupMembership(ctx context.Context, params *DescribeGr
 
 type DescribeGroupMembershipInput struct {
 
-	// The ID for the Amazon Web Services account that the group is in. Currently, you
-	// use the ID for the Amazon Web Services account that contains your Amazon
+	// The ID for the Amazon Web Services account that the group is in. Currently,
+	// you use the ID for the Amazon Web Services account that contains your Amazon
 	// QuickSight account.
 	//
 	// This member is required.
@@ -58,8 +58,8 @@ type DescribeGroupMembershipInput struct {
 
 type DescribeGroupMembershipOutput struct {
 
-	// A member of an Amazon QuickSight group. Currently, group members must be users.
-	// Groups can't be members of another group. .
+	// A member of an Amazon QuickSight group. Currently, group members must be
+	// users. Groups can't be members of another group. .
 	GroupMember *types.GroupMember
 
 	// The Amazon Web Services request ID for this operation.

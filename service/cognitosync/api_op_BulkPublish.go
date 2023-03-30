@@ -34,8 +34,9 @@ func (c *Client) BulkPublish(ctx context.Context, params *BulkPublishInput, optF
 // The input for the BulkPublish operation.
 type BulkPublishInput struct {
 
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. GUID generation is unique within a region.
+	// A name-spaced GUID (for example,
+	// us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID
+	// generation is unique within a region.
 	//
 	// This member is required.
 	IdentityPoolId *string
@@ -46,8 +47,9 @@ type BulkPublishInput struct {
 // The output for the BulkPublish operation.
 type BulkPublishOutput struct {
 
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. GUID generation is unique within a region.
+	// A name-spaced GUID (for example,
+	// us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID
+	// generation is unique within a region.
 	IdentityPoolId *string
 
 	// Metadata pertaining to the operation's result.

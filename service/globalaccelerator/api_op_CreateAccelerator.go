@@ -42,9 +42,9 @@ type CreateAcceleratorInput struct {
 	// This member is required.
 	IdempotencyToken *string
 
-	// The name of the accelerator. The name can have a maximum of 64 characters, must
-	// contain only alphanumeric characters, periods (.), or hyphens (-), and must not
-	// begin or end with a hyphen or period.
+	// The name of the accelerator. The name can have a maximum of 64 characters,
+	// must contain only alphanumeric characters, periods (.), or hyphens (-), and must
+	// not begin or end with a hyphen or period.
 	//
 	// This member is required.
 	Name *string
@@ -71,14 +71,12 @@ type CreateAcceleratorInput struct {
 	// two addresses, separated by a space. Do not include the /32 suffix. Note that
 	// you can't update IP addresses for an existing accelerator. To change them, you
 	// must create a new accelerator with the new addresses. For more information, see
-	// Bring your own IP addresses (BYOIP)
-	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in
-	// the Global Accelerator Developer Guide.
+	// Bring your own IP addresses (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
+	// in the Global Accelerator Developer Guide.
 	IpAddresses []string
 
 	// Create tags for an accelerator. For more information, see Tagging in Global
-	// Accelerator
-	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html)
+	// Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html)
 	// in the Global Accelerator Developer Guide.
 	Tags []types.Tag
 

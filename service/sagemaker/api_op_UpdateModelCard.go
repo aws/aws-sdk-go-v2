@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update an Amazon SageMaker Model Card. You cannot update both model card content
-// and model card status in a single call.
+// Update an Amazon SageMaker Model Card. You cannot update both model card
+// content and model card status in a single call.
 func (c *Client) UpdateModelCard(ctx context.Context, params *UpdateModelCardInput, optFns ...func(*Options)) (*UpdateModelCardOutput, error) {
 	if params == nil {
 		params = &UpdateModelCardInput{}
@@ -35,22 +35,17 @@ type UpdateModelCardInput struct {
 	// This member is required.
 	ModelCardName *string
 
-	// The updated model card content. Content must be in model card JSON schema
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-api-json-schema.html)
+	// The updated model card content. Content must be in model card JSON schema (https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-api-json-schema.html)
 	// and provided as a string. When updating model card content, be sure to include
 	// the full content and not just updated content.
 	Content *string
 
 	// The approval status of the model card within your organization. Different
-	// organizations might have different criteria for model card review and
-	// approval.
-	// - Draft: The model card is a work in progress.
-	// - PendingReview: The
-	// model card is pending review.
-	// - Approved: The model card is approved.
-	// -
-	// Archived: The model card is archived. No more updates should be made to the
-	// model card, but it can still be exported.
+	// organizations might have different criteria for model card review and approval.
+	//     - Draft : The model card is a work in progress.
+	//     - PendingReview : The model card is pending review.
+	//     - Approved : The model card is approved.
+	//     - Archived : The model card is archived. No more updates should be made to the model card, but it can still be exported.
 	ModelCardStatus types.ModelCardStatus
 
 	noSmithyDocumentSerde

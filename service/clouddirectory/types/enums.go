@@ -66,9 +66,9 @@ const (
 	BatchWriteExceptionTypeUnsupportedIndexTypeException    BatchWriteExceptionType = "UnsupportedIndexTypeException"
 )
 
-// Values returns all known values for BatchWriteExceptionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BatchWriteExceptionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BatchWriteExceptionType) Values() []BatchWriteExceptionType {
 	return []BatchWriteExceptionType{
 		"InternalServiceException",
@@ -207,9 +207,9 @@ const (
 	RangeModeExclusive               RangeMode = "EXCLUSIVE"
 )
 
-// Values returns all known values for RangeMode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for RangeMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (RangeMode) Values() []RangeMode {
 	return []RangeMode{
 		"FIRST",
@@ -248,9 +248,9 @@ const (
 	RuleTypeStringLength     RuleType = "STRING_LENGTH"
 )
 
-// Values returns all known values for RuleType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for RuleType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (RuleType) Values() []RuleType {
 	return []RuleType{
 		"BINARY_LENGTH",

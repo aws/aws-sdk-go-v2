@@ -45,8 +45,9 @@ type DisassociatePhoneNumbersFromVoiceConnectorInput struct {
 
 type DisassociatePhoneNumbersFromVoiceConnectorOutput struct {
 
-	// If the action fails for one or more of the phone numbers in the request, a list
-	// of the phone numbers is returned, along with error codes and error messages.
+	// If the action fails for one or more of the phone numbers in the request, a
+	// list of the phone numbers is returned, along with error codes and error
+	// messages.
 	PhoneNumberErrors []types.PhoneNumberError
 
 	// Metadata pertaining to the operation's result.

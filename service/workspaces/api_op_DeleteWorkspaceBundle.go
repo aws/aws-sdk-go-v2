@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes the specified WorkSpace bundle. For more information about deleting
-// WorkSpace bundles, see  Delete a Custom WorkSpaces Bundle or Image
-// (https://docs.aws.amazon.com/workspaces/latest/adminguide/delete_bundle.html).
+// WorkSpace bundles, see Delete a Custom WorkSpaces Bundle or Image (https://docs.aws.amazon.com/workspaces/latest/adminguide/delete_bundle.html)
+// .
 func (c *Client) DeleteWorkspaceBundle(ctx context.Context, params *DeleteWorkspaceBundleInput, optFns ...func(*Options)) (*DeleteWorkspaceBundleOutput, error) {
 	if params == nil {
 		params = &DeleteWorkspaceBundleInput{}

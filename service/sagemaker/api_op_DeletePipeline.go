@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a pipeline if there are no running instances of the pipeline. To delete
-// a pipeline, you must stop all running instances of the pipeline using the
-// StopPipelineExecution API. When you delete a pipeline, all instances of the
+// Deletes a pipeline if there are no running instances of the pipeline. To
+// delete a pipeline, you must stop all running instances of the pipeline using the
+//
+// StopPipelineExecutionAPI. When you delete a pipeline, all instances of the
 // pipeline are deleted.
 func (c *Client) DeletePipeline(ctx context.Context, params *DeletePipelineInput, optFns ...func(*Options)) (*DeletePipelineOutput, error) {
 	if params == nil {

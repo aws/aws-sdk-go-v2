@@ -61,9 +61,9 @@ func TestClient_EmptyOperation_awsAwsjson11Serialize(t *testing.T) {
 			},
 		},
 		// Clients must always send an empty JSON object payload for operations with no
-		// input (that is, {}). While AWS service implementations support requests with no
-		// payload or requests that send {}, always sending {} from the client is preferred
-		// for forward compatibility in case input is ever added to an operation.
+		// input (that is, {}). While AWS service implementations support requests with
+		// no payload or requests that send {} , always sending {} from the client is
+		// preferred for forward compatibility in case input is ever added to an operation.
 		"json_1_1_client_sends_empty_payload_for_no_input_shape": {
 			Params:        &EmptyOperationInput{},
 			ExpectMethod:  "POST",

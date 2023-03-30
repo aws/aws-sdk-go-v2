@@ -55,9 +55,9 @@ const (
 	InferenceExecutionStatusFailed     InferenceExecutionStatus = "FAILED"
 )
 
-// Values returns all known values for InferenceExecutionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InferenceExecutionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InferenceExecutionStatus) Values() []InferenceExecutionStatus {
 	return []InferenceExecutionStatus{
 		"IN_PROGRESS",
@@ -76,9 +76,9 @@ const (
 	InferenceSchedulerStatusStopped  InferenceSchedulerStatus = "STOPPED"
 )
 
-// Values returns all known values for InferenceSchedulerStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InferenceSchedulerStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InferenceSchedulerStatus) Values() []InferenceSchedulerStatus {
 	return []InferenceSchedulerStatus{
 		"PENDING",
@@ -117,9 +117,9 @@ const (
 	LabelRatingNeutral   LabelRating = "NEUTRAL"
 )
 
-// Values returns all known values for LabelRating. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LabelRating. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LabelRating) Values() []LabelRating {
 	return []LabelRating{
 		"ANOMALY",
@@ -136,8 +136,8 @@ const (
 	LatestInferenceResultNormal    LatestInferenceResult = "NORMAL"
 )
 
-// Values returns all known values for LatestInferenceResult. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for LatestInferenceResult. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (LatestInferenceResult) Values() []LatestInferenceResult {
 	return []LatestInferenceResult{
@@ -155,9 +155,9 @@ const (
 	ModelStatusFailed     ModelStatus = "FAILED"
 )
 
-// Values returns all known values for ModelStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ModelStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ModelStatus) Values() []ModelStatus {
 	return []ModelStatus{
 		"IN_PROGRESS",
@@ -175,9 +175,9 @@ const (
 	MonotonicityStatic     Monotonicity = "STATIC"
 )
 
-// Values returns all known values for Monotonicity. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Monotonicity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (Monotonicity) Values() []Monotonicity {
 	return []Monotonicity{
 		"DECREASING",

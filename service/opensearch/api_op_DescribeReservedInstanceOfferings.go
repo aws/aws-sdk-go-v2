@@ -14,8 +14,8 @@ import (
 
 // Describes the available Amazon OpenSearch Service Reserved Instance offerings
 // for a given Region. For more information, see Reserved Instances in Amazon
-// OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ri.html).
+// OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ri.html)
+// .
 func (c *Client) DescribeReservedInstanceOfferings(ctx context.Context, params *DescribeReservedInstanceOfferingsInput, optFns ...func(*Options)) (*DescribeReservedInstanceOfferingsOutput, error) {
 	if params == nil {
 		params = &DescribeReservedInstanceOfferingsInput{}
@@ -36,12 +36,12 @@ func (c *Client) DescribeReservedInstanceOfferings(ctx context.Context, params *
 type DescribeReservedInstanceOfferingsInput struct {
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken  to get the next page of results.
 	MaxResults int32
 
-	// If your initial DescribeReservedInstanceOfferings operation returns a nextToken,
-	// you can include the returned nextToken in subsequent
-	// DescribeReservedInstanceOfferings operations, which returns results in the next
+	// If your initial DescribeReservedInstanceOfferings  operation returns a
+	// nextToken , you can include the returned nextToken  in subsequent
+	// DescribeReservedInstanceOfferingsoperations, which returns results in the next
 	// page.
 	NextToken *string
 
@@ -52,11 +52,11 @@ type DescribeReservedInstanceOfferingsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for results of a DescribeReservedInstanceOfferings request.
+// Container for results of a DescribeReservedInstanceOfferings  request.
 type DescribeReservedInstanceOfferingsOutput struct {
 
-	// When nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// When nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page.
 	NextToken *string
 
@@ -141,11 +141,11 @@ var _ DescribeReservedInstanceOfferingsAPIClient = (*Client)(nil)
 // DescribeReservedInstanceOfferings
 type DescribeReservedInstanceOfferingsPaginatorOptions struct {
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken  to get the next page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -12,7 +12,7 @@ import (
 )
 
 // Gets the channel configuration for the specified channel ARN. See also
-// BatchGetChannel.
+// BatchGetChannel .
 func (c *Client) GetChannel(ctx context.Context, params *GetChannelInput, optFns ...func(*Options)) (*GetChannelOutput, error) {
 	if params == nil {
 		params = &GetChannelInput{}

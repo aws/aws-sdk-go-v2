@@ -9,9 +9,9 @@ const (
 	ChecksumTypeSha1 ChecksumType = "SHA1"
 )
 
-// Values returns all known values for ChecksumType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChecksumType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ChecksumType) Values() []ChecksumType {
 	return []ChecksumType{
 		"SHA1",
@@ -60,8 +60,8 @@ const (
 	FailureHandlingPolicyDoNothing         FailureHandlingPolicy = "DO_NOTHING"
 )
 
-// Values returns all known values for FailureHandlingPolicy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for FailureHandlingPolicy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (FailureHandlingPolicy) Values() []FailureHandlingPolicy {
 	return []FailureHandlingPolicy{

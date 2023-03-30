@@ -45,8 +45,8 @@ type GetAppLaunchConfigurationOutput struct {
 	// replication is complete.
 	AutoLaunch *bool
 
-	// The name of the service role in the customer's account that CloudFormation uses
-	// to launch the application.
+	// The name of the service role in the customer's account that CloudFormation
+	// uses to launch the application.
 	RoleName *string
 
 	// The launch configurations for server groups in this application.

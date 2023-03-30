@@ -35,18 +35,20 @@ type UpdateTaskInput struct {
 	// This member is required.
 	TaskArn *string
 
-	// The Amazon Resource Name (ARN) of the resource name of the Amazon CloudWatch log
-	// group.
+	// The Amazon Resource Name (ARN) of the resource name of the Amazon CloudWatch
+	// log group.
 	CloudWatchLogGroupArn *string
 
 	// Specifies a list of filter rules that exclude specific data during your
 	// transfer. For more information and examples, see Filtering data transferred by
-	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html).
+	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)
+	// .
 	Excludes []types.FilterRule
 
 	// Specifies a list of filter rules that include specific data during your
 	// transfer. For more information and examples, see Filtering data transferred by
-	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html).
+	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)
+	// .
 	Includes []types.FilterRule
 
 	// The name of the task to update.
@@ -56,15 +58,15 @@ type UpdateTaskInput struct {
 	// handles files, objects, and their associated metadata. You also can specify how
 	// DataSync verifies data integrity, set bandwidth limits for your task, among
 	// other options. Each task setting has a default value. Unless you need to, you
-	// don't have to configure any of these Options before starting your task.
+	// don't have to configure any of these Options  before starting your task.
 	Options *types.Options
 
 	// Specifies a schedule used to periodically transfer files from a source to a
 	// destination location. You can configure your task to execute hourly, daily,
 	// weekly or on specific days of the week. You control when in the day or hour you
 	// want the task to execute. The time you specify is UTC time. For more
-	// information, see Scheduling your task
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html).
+	// information, see Scheduling your task (https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html)
+	// .
 	Schedule *types.TaskSchedule
 
 	noSmithyDocumentSerde

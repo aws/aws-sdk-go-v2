@@ -52,30 +52,29 @@ type CreateEndpointGroupInput struct {
 	// The list of endpoint objects.
 	EndpointConfigurations []types.EndpointConfiguration
 
-	// The time—10 seconds or 30 seconds—between each health check for an endpoint. The
-	// default value is 30.
+	// The time—10 seconds or 30 seconds—between each health check for an endpoint.
+	// The default value is 30.
 	HealthCheckIntervalSeconds *int32
 
-	// If the protocol is HTTP/S, then this specifies the path that is the destination
-	// for health check targets. The default value is slash (/).
+	// If the protocol is HTTP/S, then this specifies the path that is the
+	// destination for health check targets. The default value is slash (/).
 	HealthCheckPath *string
 
-	// The port that Global Accelerator uses to check the health of endpoints that are
-	// part of this endpoint group. The default port is the listener port that this
+	// The port that Global Accelerator uses to check the health of endpoints that
+	// are part of this endpoint group. The default port is the listener port that this
 	// endpoint group is associated with. If listener port is a list of ports, Global
 	// Accelerator uses the first port in the list.
 	HealthCheckPort *int32
 
-	// The protocol that Global Accelerator uses to check the health of endpoints that
-	// are part of this endpoint group. The default value is TCP.
+	// The protocol that Global Accelerator uses to check the health of endpoints
+	// that are part of this endpoint group. The default value is TCP.
 	HealthCheckProtocol types.HealthCheckProtocol
 
 	// Override specific listener ports used to route traffic to endpoints that are
 	// part of this endpoint group. For example, you can create a port override in
 	// which the listener receives user traffic on ports 80 and 443, but your
 	// accelerator routes that traffic to ports 1080 and 1443, respectively, on the
-	// endpoints. For more information, see  Overriding listener ports
-	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html)
+	// endpoints. For more information, see Overriding listener ports (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html)
 	// in the Global Accelerator Developer Guide.
 	PortOverrides []types.PortOverride
 

@@ -13,8 +13,8 @@ import (
 )
 
 // Specifies a security configuration for OpenSearch Serverless. For more
-// information, see SAML authentication for Amazon OpenSearch Serverless
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html).
+// information, see SAML authentication for Amazon OpenSearch Serverless (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html)
+// .
 func (c *Client) CreateSecurityConfig(ctx context.Context, params *CreateSecurityConfigInput, optFns ...func(*Options)) (*CreateSecurityConfigOutput, error) {
 	if params == nil {
 		params = &CreateSecurityConfigInput{}
@@ -48,8 +48,8 @@ type CreateSecurityConfigInput struct {
 	// A description of the security configuration.
 	Description *string
 
-	// Describes SAML options in in the form of a key-value map. This field is required
-	// if you specify saml for the type parameter.
+	// Describes SAML options in in the form of a key-value map. This field is
+	// required if you specify saml  for the type  parameter.
 	SamlOptions *types.SamlConfigOptions
 
 	noSmithyDocumentSerde

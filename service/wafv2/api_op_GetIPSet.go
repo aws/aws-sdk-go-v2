@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the specified IPSet.
+// Retrieves the specified IPSet .
 func (c *Client) GetIPSet(ctx context.Context, params *GetIPSetInput, optFns ...func(*Options)) (*GetIPSetOutput, error) {
 	if params == nil {
 		params = &GetIPSetInput{}
@@ -29,14 +29,14 @@ func (c *Client) GetIPSet(ctx context.Context, params *GetIPSetInput, optFns ...
 
 type GetIPSetInput struct {
 
-	// A unique identifier for the set. This ID is returned in the responses to create
-	// and list commands. You provide it to operations like update and delete.
+	// A unique identifier for the set. This ID is returned in the responses to
+	// create and list commands. You provide it to operations like update and delete.
 	//
 	// This member is required.
 	Id *string
 
-	// The name of the IP set. You cannot change the name of an IPSet after you create
-	// it.
+	// The name of the IP set. You cannot change the name of an IPSet after you
+	// create it.
 	//
 	// This member is required.
 	Name *string
@@ -46,10 +46,8 @@ type GetIPSetInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	// - CLI - Specify the Region
-	// when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.
-	// - API
-	// and SDKs - For all calls, use the Region endpoint us-east-1.
+	//     - CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1 .
+	//     - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
@@ -62,13 +60,13 @@ type GetIPSetOutput struct {
 	//
 	IPSet *types.IPSet
 
-	// A token used for optimistic locking. WAF returns a token to your get and list
+	// A token used for optimistic locking. WAF returns a token to your get  and list
 	// requests, to mark the state of the entity at the time of the request. To make
 	// changes to the entity associated with the token, you provide the token to
-	// operations like update and delete. WAF uses the token to ensure that no changes
-	// have been made to the entity since you last retrieved it. If a change has been
-	// made, the update fails with a WAFOptimisticLockException. If this happens,
-	// perform another get, and use the new token returned by that operation.
+	// operations like update  and delete. WAF uses the token to ensure that no
+	// changes have been made to the entity since you last retrieved it. If a change
+	// has been made, the update fails with a WAFOptimisticLockException. If this
+	// happens, perform another get , and use the new token returned by that operation.
 	LockToken *string
 
 	// Metadata pertaining to the operation's result.

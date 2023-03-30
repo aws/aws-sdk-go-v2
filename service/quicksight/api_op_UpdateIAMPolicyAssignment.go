@@ -13,7 +13,7 @@ import (
 
 // Updates an existing IAM policy assignment. This operation updates only the
 // optional parameter or parameters that are specified in the request. This
-// overwrites all of the users included in Identities.
+// overwrites all of the users included in Identities .
 func (c *Client) UpdateIAMPolicyAssignment(ctx context.Context, params *UpdateIAMPolicyAssignmentInput, optFns ...func(*Options)) (*UpdateIAMPolicyAssignmentOutput, error) {
 	if params == nil {
 		params = &UpdateIAMPolicyAssignmentInput{}
@@ -31,8 +31,8 @@ func (c *Client) UpdateIAMPolicyAssignment(ctx context.Context, params *UpdateIA
 
 type UpdateIAMPolicyAssignmentInput struct {
 
-	// The name of the assignment, also called a rule. This name must be unique within
-	// an Amazon Web Services account.
+	// The name of the assignment, also called a rule. This name must be unique
+	// within an Amazon Web Services account.
 	//
 	// This member is required.
 	AssignmentName *string
@@ -49,17 +49,13 @@ type UpdateIAMPolicyAssignmentInput struct {
 	Namespace *string
 
 	// The status of the assignment. Possible values are as follows:
-	// - ENABLED -
-	// Anything specified in this assignment is used when creating the data source.
-	// -
-	// DISABLED - This assignment isn't used when creating the data source.
-	// - DRAFT -
-	// This assignment is an unfinished draft and isn't used when creating the data
-	// source.
+	//     - ENABLED - Anything specified in this assignment is used when creating the data source.
+	//     - DISABLED - This assignment isn't used when creating the data source.
+	//     - DRAFT - This assignment is an unfinished draft and isn't used when creating the data source.
 	AssignmentStatus types.AssignmentStatus
 
-	// The Amazon QuickSight users, groups, or both that you want to assign the policy
-	// to.
+	// The Amazon QuickSight users, groups, or both that you want to assign the
+	// policy to.
 	Identities map[string][]string
 
 	// The ARN for the IAM policy to apply to the Amazon QuickSight users and groups
@@ -78,16 +74,13 @@ type UpdateIAMPolicyAssignmentOutput struct {
 	AssignmentName *string
 
 	// The status of the assignment. Possible values are as follows:
-	// - ENABLED -
-	// Anything specified in this assignment is used when creating the data source.
-	// -
-	// DISABLED - This assignment isn't used when creating the data source.
-	// - DRAFT -
-	// This assignment is an unfinished draft and isn't used when creating the data
-	// source.
+	//     - ENABLED - Anything specified in this assignment is used when creating the data source.
+	//     - DISABLED - This assignment isn't used when creating the data source.
+	//     - DRAFT - This assignment is an unfinished draft and isn't used when creating the data source.
 	AssignmentStatus types.AssignmentStatus
 
-	// The Amazon QuickSight users, groups, or both that the IAM policy is assigned to.
+	// The Amazon QuickSight users, groups, or both that the IAM policy is assigned
+	// to.
 	Identities map[string][]string
 
 	// The ARN for the IAM policy applied to the Amazon QuickSight users and groups

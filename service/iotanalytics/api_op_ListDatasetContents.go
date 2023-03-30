@@ -42,14 +42,14 @@ type ListDatasetContentsInput struct {
 	// The token for the next set of results.
 	NextToken *string
 
-	// A filter to limit results to those dataset contents whose creation is scheduled
-	// before the given time. See the field triggers.schedule in the CreateDataset
-	// request. (timestamp)
+	// A filter to limit results to those dataset contents whose creation is
+	// scheduled before the given time. See the field triggers.schedule  in the
+	// CreateDataset request. (timestamp)
 	ScheduledBefore *time.Time
 
-	// A filter to limit results to those dataset contents whose creation is scheduled
-	// on or after the given time. See the field triggers.schedule in the CreateDataset
-	// request. (timestamp)
+	// A filter to limit results to those dataset contents whose creation is
+	// scheduled on or after the given time. See the field triggers.schedule  in the
+	// CreateDataset request. (timestamp)
 	ScheduledOnOrAfter *time.Time
 
 	noSmithyDocumentSerde
@@ -133,8 +133,8 @@ func (c *Client) addOperationListDatasetContentsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListDatasetContentsAPIClient is a client that implements the ListDatasetContents
-// operation.
+// ListDatasetContentsAPIClient is a client that implements the
+// ListDatasetContents operation.
 type ListDatasetContentsAPIClient interface {
 	ListDatasetContents(context.Context, *ListDatasetContentsInput, ...func(*Options)) (*ListDatasetContentsOutput, error)
 }
@@ -147,8 +147,8 @@ type ListDatasetContentsPaginatorOptions struct {
 	// The maximum number of results to return in this request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

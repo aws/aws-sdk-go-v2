@@ -11,8 +11,8 @@ import (
 	"time"
 )
 
-// Describes an activity. This operation is eventually consistent. The results are
-// best effort and may not reflect very recent updates and changes.
+// Describes an activity. This operation is eventually consistent. The results
+// are best effort and may not reflect very recent updates and changes.
 func (c *Client) DescribeActivity(ctx context.Context, params *DescribeActivityInput, optFns ...func(*Options)) (*DescribeActivityOutput, error) {
 	if params == nil {
 		params = &DescribeActivityInput{}
@@ -51,14 +51,11 @@ type DescribeActivityOutput struct {
 	CreationDate *time.Time
 
 	// The name of the activity. A name must not contain:
-	// - white space
-	// - brackets < >
-	// { } [ ]
-	// - wildcard characters ? *
-	// - special characters " # % \ ^ | ~ ` $ & , ; :
-	// /
-	// - control characters (U+0000-001F, U+007F-009F)
-	//
+	//     - white space
+	//     - brackets < > { } [ ]
+	//     - wildcard characters ? *
+	//     - special characters " # % \ ^ | ~ ` $ & , ; : /
+	//     - control characters ( U+0000-001F , U+007F-009F )
 	// To enable logging with
 	// CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
 	//

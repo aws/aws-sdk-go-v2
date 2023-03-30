@@ -115,8 +115,8 @@ func (c *Client) addOperationListMulticastGroupsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListMulticastGroupsAPIClient is a client that implements the ListMulticastGroups
-// operation.
+// ListMulticastGroupsAPIClient is a client that implements the
+// ListMulticastGroups operation.
 type ListMulticastGroupsAPIClient interface {
 	ListMulticastGroups(context.Context, *ListMulticastGroupsInput, ...func(*Options)) (*ListMulticastGroupsOutput, error)
 }
@@ -129,8 +129,8 @@ type ListMulticastGroupsPaginatorOptions struct {
 	// The maximum number of results to return in this operation.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// There was a conflict when you attempted to modify a SageMaker entity such as an
-// Experiment or Artifact.
+// There was a conflict when you attempted to modify a SageMaker entity such as
+// an Experiment  or Artifact .
 type ConflictException struct {
 	Message *string
 

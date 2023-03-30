@@ -14,8 +14,8 @@ import (
 
 // Lists the iSCSI stored volumes of a gateway. Results are sorted by volume ARN.
 // The response includes only the volume ARNs. If you want additional volume
-// information, use the DescribeStorediSCSIVolumes or the
-// DescribeCachediSCSIVolumes API. The operation supports pagination. By default,
+// information, use the DescribeStorediSCSIVolumes  or the
+// DescribeCachediSCSIVolumesAPI. The operation supports pagination. By default,
 // the operation returns a maximum of up to 100 volumes. You can optionally specify
 // the Limit field in the body to limit the number of volumes in the response. If
 // the number of volumes returned in the response is truncated, the response
@@ -38,13 +38,12 @@ func (c *Client) ListVolumes(ctx context.Context, params *ListVolumesInput, optF
 }
 
 // A JSON object that contains one or more of the following fields:
-// -
-// ListVolumesInput$Limit
-// - ListVolumesInput$Marker
+//   - ListVolumesInput$Limit
+//   - ListVolumesInput$Marker
 type ListVolumesInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Specifies that the list of volumes returned be limited to the specified number
@@ -60,22 +59,22 @@ type ListVolumesInput struct {
 }
 
 // A JSON object containing the following fields:
-// - ListVolumesOutput$Marker
-// -
-// ListVolumesOutput$VolumeInfos
+//   - ListVolumesOutput$Marker
+//   - ListVolumesOutput$VolumeInfos
 type ListVolumesOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
-	// Use the marker in your next request to continue pagination of iSCSI volumes. If
-	// there are no more volumes to list, this field does not appear in the response
+	// Use the marker in your next request to continue pagination of iSCSI volumes.
+	// If there are no more volumes to list, this field does not appear in the response
 	// body.
 	Marker *string
 
-	// An array of VolumeInfo objects, where each object describes an iSCSI volume. If
-	// no volumes are defined for the gateway, then VolumeInfos is an empty array "[]".
+	// An array of VolumeInfo objects, where each object describes an iSCSI volume.
+	// If no volumes are defined for the gateway, then VolumeInfos is an empty array
+	// "[]".
 	VolumeInfos []types.VolumeInfo
 
 	// Metadata pertaining to the operation's result.
@@ -157,8 +156,8 @@ type ListVolumesPaginatorOptions struct {
 	// of items.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

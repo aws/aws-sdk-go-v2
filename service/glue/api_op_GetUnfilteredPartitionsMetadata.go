@@ -14,7 +14,7 @@ import (
 
 // Retrieves partition metadata from the Data Catalog that contains unfiltered
 // metadata. For IAM authorization, the public IAM action associated with this API
-// is glue:GetPartitions.
+// is glue:GetPartitions .
 func (c *Client) GetUnfilteredPartitionsMetadata(ctx context.Context, params *GetUnfilteredPartitionsMetadataInput, optFns ...func(*Options)) (*GetUnfilteredPartitionsMetadataOutput, error) {
 	if params == nil {
 		params = &GetUnfilteredPartitionsMetadataInput{}
@@ -57,8 +57,8 @@ type GetUnfilteredPartitionsMetadataInput struct {
 	AuditContext *types.AuditContext
 
 	// An expression that filters the partitions to be returned. The expression uses
-	// SQL syntax similar to the SQL WHERE filter clause. The SQL statement parser
-	// JSQLParser (http://jsqlparser.sourceforge.net/home.php) parses the expression.
+	// SQL syntax similar to the SQL WHERE  filter clause. The SQL statement parser
+	// JSQLParser (http://jsqlparser.sourceforge.net/home.php)parses the expression.
 	// Operators: The following are the operators that you can use in the Expression
 	// API call: = Checks whether the values of the two operands are equal; if yes,
 	// then the condition becomes true. Example: Assume 'variable a' holds 10 and
@@ -75,19 +75,17 @@ type GetUnfilteredPartitionsMetadataInput struct {
 	// right operand; if yes, then the condition becomes true. Example: (a <= b) is
 	// true. AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL Logical operators. Supported
 	// Partition Key Types: The following are the supported partition keys.
-	// - string
-	// -
-	// date
-	// - timestamp
-	// - int
-	// - bigint
-	// - long
-	// - tinyint
-	// - smallint
-	// - decimal
-	//
-	// If an
-	// type is encountered that is not valid, an exception is thrown.
+	//     - string
+	//     - date
+	//     - timestamp
+	//     - int
+	//     - bigint
+	//     - long
+	//     - tinyint
+	//     - smallint
+	//     - decimal
+	// If an type is encountered that is not valid, an exception is
+	// thrown.
 	Expression *string
 
 	// The maximum number of partitions to return in a single response.
@@ -195,8 +193,8 @@ type GetUnfilteredPartitionsMetadataPaginatorOptions struct {
 	// The maximum number of partitions to return in a single response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

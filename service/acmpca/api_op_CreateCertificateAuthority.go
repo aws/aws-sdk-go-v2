@@ -26,11 +26,10 @@ import (
 // principal must have permission to write to the S3 bucket that you specify. If
 // the IAM principal making the call does not have permission to write to the
 // bucket, then an exception is thrown. For more information, see Access policies
-// for CRLs in Amazon S3
-// (https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-policies).
-// Amazon Web Services Private CA assets that are stored in Amazon S3 can be
-// protected with encryption. For more information, see Encrypting Your CRLs
-// (https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#crl-encryption).
+// for CRLs in Amazon S3 (https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-policies)
+// . Amazon Web Services Private CA assets that are stored in Amazon S3 can be
+// protected with encryption. For more information, see Encrypting Your CRLs (https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#crl-encryption)
+// .
 func (c *Client) CreateCertificateAuthority(ctx context.Context, params *CreateCertificateAuthorityInput, optFns ...func(*Options)) (*CreateCertificateAuthorityOutput, error) {
 	if params == nil {
 		params = &CreateCertificateAuthorityInput{}
@@ -72,47 +71,33 @@ type CreateCertificateAuthorityInput struct {
 	// Specifies a cryptographic key management compliance standard used for handling
 	// CA keys. Default: FIPS_140_2_LEVEL_3_OR_HIGHER Note:
 	// FIPS_140_2_LEVEL_3_OR_HIGHER is not supported in the following Regions:
-	// -
-	// ap-northeast-3
-	// - ap-southeast-3
-	//
-	// When creating a CA in these Regions, you must
-	// provide FIPS_140_2_LEVEL_2_OR_HIGHER as the argument for
-	// KeyStorageSecurityStandard. Failure to do this results in an
-	// InvalidArgsException with the message, "A certificate authority cannot be
-	// created in this region with the specified security standard."
+	//     - ap-northeast-3
+	//     - ap-southeast-3
+	// When creating a CA in these Regions, you must provide
+	// FIPS_140_2_LEVEL_2_OR_HIGHER as the argument for KeyStorageSecurityStandard.
+	// Failure to do this results in an InvalidArgsException with the message, "A
+	// certificate authority cannot be created in this region with the specified
+	// security standard."
 	KeyStorageSecurityStandard types.KeyStorageSecurityStandard
 
 	// Contains information to enable Online Certificate Status Protocol (OCSP)
 	// support, to enable a certificate revocation list (CRL), to enable both, or to
 	// enable neither. The default is for both certificate validation mechanisms to be
 	// disabled. The following requirements apply to revocation configurations.
-	// - A
-	// configuration disabling CRLs or OCSP must contain only the Enabled=False
-	// parameter, and will fail if other parameters such as CustomCname or
-	// ExpirationInDays are included.
-	// - In a CRL configuration, the S3BucketName
-	// parameter must conform to Amazon S3 bucket naming rules
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html).
-	// -
-	// A configuration containing a custom Canonical Name (CNAME) parameter for CRLs or
-	// OCSP must conform to RFC2396 (https://www.ietf.org/rfc/rfc2396.txt) restrictions
-	// on the use of special characters in a CNAME.
-	// - In a CRL or OCSP configuration,
-	// the value of a CNAME parameter must not include a protocol prefix such as
-	// "http://" or "https://".
+	//     - A configuration disabling CRLs or OCSP must contain only the Enabled=False parameter, and will fail if other parameters such as CustomCname or ExpirationInDays are included.
+	//     - In a CRL configuration, the S3BucketName parameter must conform to Amazon S3 bucket naming rules (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html) .
+	//     - A configuration containing a custom Canonical Name (CNAME) parameter for CRLs or OCSP must conform to RFC2396 (https://www.ietf.org/rfc/rfc2396.txt) restrictions on the use of special characters in a CNAME.
+	//     - In a CRL or OCSP configuration, the value of a CNAME parameter must not include a protocol prefix such as "http://" or "https://".
 	//
-	// For more information, see the OcspConfiguration
-	// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_OcspConfiguration.html)
-	// and CrlConfiguration
-	// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CrlConfiguration.html)
+	// For more information, see the OcspConfiguration (https://docs.aws.amazon.com/privateca/latest/APIReference/API_OcspConfiguration.html)
+	// and CrlConfiguration (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CrlConfiguration.html)
 	// types.
 	RevocationConfiguration *types.RevocationConfiguration
 
 	// Key-value pairs that will be attached to the new private CA. You can associate
 	// up to 50 tags with a private CA. For information using tags with IAM to manage
-	// permissions, see Controlling Access Using IAM Tags
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
+	// permissions, see Controlling Access Using IAM Tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html)
+	// .
 	Tags []types.Tag
 
 	// Specifies whether the CA issues general-purpose certificates that typically
@@ -126,9 +111,10 @@ type CreateCertificateAuthorityInput struct {
 
 type CreateCertificateAuthorityOutput struct {
 
-	// If successful, the Amazon Resource Name (ARN) of the certificate authority (CA).
-	// This is of the form:
+	// If successful, the Amazon Resource Name (ARN) of the certificate authority
+	// (CA). This is of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	//
 	// .
 	CertificateAuthorityArn *string
 

@@ -42,8 +42,8 @@ type CreateGlobalClusterInput struct {
 	// cluster you are creating.
 	DatabaseName *string
 
-	// The deletion protection setting for the new global database. The global database
-	// can't be deleted when deletion protection is enabled.
+	// The deletion protection setting for the new global database. The global
+	// database can't be deleted when deletion protection is enabled.
 	DeletionProtection *bool
 
 	// The name of the database engine to be used for this DB cluster.

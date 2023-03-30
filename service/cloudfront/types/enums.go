@@ -132,9 +132,9 @@ const (
 	EventTypeOriginResponse EventType = "origin-response"
 )
 
-// Values returns all known values for EventType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for EventType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"viewer-request",
@@ -242,9 +242,9 @@ const (
 	HttpVersionHttp2and3 HttpVersion = "http2and3"
 )
 
-// Values returns all known values for HttpVersion. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for HttpVersion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (HttpVersion) Values() []HttpVersion {
 	return []HttpVersion{
 		"http1.1",
@@ -416,8 +416,8 @@ const (
 	OriginProtocolPolicyHttpsOnly   OriginProtocolPolicy = "https-only"
 )
 
-// Values returns all known values for OriginProtocolPolicy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for OriginProtocolPolicy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (OriginProtocolPolicy) Values() []OriginProtocolPolicy {
 	return []OriginProtocolPolicy{
@@ -437,8 +437,8 @@ const (
 	OriginRequestPolicyCookieBehaviorAllExcept OriginRequestPolicyCookieBehavior = "allExcept"
 )
 
-// Values returns all known values for OriginRequestPolicyCookieBehavior. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for OriginRequestPolicyCookieBehavior. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (OriginRequestPolicyCookieBehavior) Values() []OriginRequestPolicyCookieBehavior {
@@ -461,8 +461,8 @@ const (
 	OriginRequestPolicyHeaderBehaviorAllExcept                       OriginRequestPolicyHeaderBehavior = "allExcept"
 )
 
-// Values returns all known values for OriginRequestPolicyHeaderBehavior. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for OriginRequestPolicyHeaderBehavior. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (OriginRequestPolicyHeaderBehavior) Values() []OriginRequestPolicyHeaderBehavior {
@@ -485,9 +485,9 @@ const (
 	OriginRequestPolicyQueryStringBehaviorAllExcept OriginRequestPolicyQueryStringBehavior = "allExcept"
 )
 
-// Values returns all known values for OriginRequestPolicyQueryStringBehavior. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for OriginRequestPolicyQueryStringBehavior.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (OriginRequestPolicyQueryStringBehavior) Values() []OriginRequestPolicyQueryStringBehavior {
 	return []OriginRequestPolicyQueryStringBehavior{
@@ -506,9 +506,9 @@ const (
 	OriginRequestPolicyTypeCustom  OriginRequestPolicyType = "custom"
 )
 
-// Values returns all known values for OriginRequestPolicyType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OriginRequestPolicyType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OriginRequestPolicyType) Values() []OriginRequestPolicyType {
 	return []OriginRequestPolicyType{
 		"managed",
@@ -544,8 +544,8 @@ const (
 	RealtimeMetricsSubscriptionStatusDisabled RealtimeMetricsSubscriptionStatus = "Disabled"
 )
 
-// Values returns all known values for RealtimeMetricsSubscriptionStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for RealtimeMetricsSubscriptionStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (RealtimeMetricsSubscriptionStatus) Values() []RealtimeMetricsSubscriptionStatus {
@@ -644,9 +644,9 @@ const (
 	SslProtocolTLSv12 SslProtocol = "TLSv1.2"
 )
 
-// Values returns all known values for SslProtocol. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SslProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (SslProtocol) Values() []SslProtocol {
 	return []SslProtocol{
 		"SSLv3",
@@ -685,8 +685,8 @@ const (
 	ViewerProtocolPolicyRedirectToHttps ViewerProtocolPolicy = "redirect-to-https"
 )
 
-// Values returns all known values for ViewerProtocolPolicy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ViewerProtocolPolicy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ViewerProtocolPolicy) Values() []ViewerProtocolPolicy {
 	return []ViewerProtocolPolicy{

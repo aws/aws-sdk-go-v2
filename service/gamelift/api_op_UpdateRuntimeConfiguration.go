@@ -21,8 +21,7 @@ import (
 // retrieves updated runtime configurations. Instances immediately begin complying
 // with the new configuration by launching new server processes or not replacing
 // existing processes when they shut down. Updating a fleet's runtime configuration
-// never affects existing server processes. Learn more Setting up GameLift fleets
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// never affects existing server processes. Learn more Setting up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) UpdateRuntimeConfiguration(ctx context.Context, params *UpdateRuntimeConfigurationInput, optFns ...func(*Options)) (*UpdateRuntimeConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateRuntimeConfigurationInput{}
@@ -60,8 +59,8 @@ type UpdateRuntimeConfigurationInput struct {
 
 type UpdateRuntimeConfigurationOutput struct {
 
-	// The runtime configuration currently in use by all instances in the fleet. If the
-	// update was successful, all property changes are shown.
+	// The runtime configuration currently in use by all instances in the fleet. If
+	// the update was successful, all property changes are shown.
 	RuntimeConfiguration *types.RuntimeConfiguration
 
 	// Metadata pertaining to the operation's result.

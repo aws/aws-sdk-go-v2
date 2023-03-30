@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the Config used when scheduling contacts. Updating a Config will not
+// Updates the Config  used when scheduling contacts. Updating a Config will not
 // update the execution parameters for existing future contacts scheduled with this
-// Config.
+//
+// Config .
 func (c *Client) UpdateConfig(ctx context.Context, params *UpdateConfigInput, optFns ...func(*Options)) (*UpdateConfigOutput, error) {
 	if params == nil {
 		params = &UpdateConfigInput{}
@@ -31,22 +32,22 @@ func (c *Client) UpdateConfig(ctx context.Context, params *UpdateConfigInput, op
 
 type UpdateConfigInput struct {
 
-	// Parameters of a Config.
+	// Parameters of a Config .
 	//
 	// This member is required.
 	ConfigData types.ConfigTypeData
 
-	// UUID of a Config.
+	// UUID of a Config .
 	//
 	// This member is required.
 	ConfigId *string
 
-	// Type of a Config.
+	// Type of a Config .
 	//
 	// This member is required.
 	ConfigType types.ConfigCapabilityType
 
-	// Name of a Config.
+	// Name of a Config .
 	//
 	// This member is required.
 	Name *string
@@ -56,13 +57,13 @@ type UpdateConfigInput struct {
 
 type UpdateConfigOutput struct {
 
-	// ARN of a Config.
+	// ARN of a Config .
 	ConfigArn *string
 
-	// UUID of a Config.
+	// UUID of a Config .
 	ConfigId *string
 
-	// Type of a Config.
+	// Type of a Config .
 	ConfigType types.ConfigCapabilityType
 
 	// Metadata pertaining to the operation's result.

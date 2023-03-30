@@ -39,7 +39,7 @@ type UpdateOriginAccessControlInput struct {
 	// This member is required.
 	OriginAccessControlConfig *types.OriginAccessControlConfig
 
-	// The current version (ETag value) of the origin access control that you are
+	// The current version ( ETag value) of the origin access control that you are
 	// updating.
 	IfMatch *string
 

@@ -44,8 +44,8 @@ type AdminListGroupsForUserInput struct {
 	// The limit of the request to list groups.
 	Limit *int32
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation,
+	// which can be used to return the next set of items in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -56,8 +56,8 @@ type AdminListGroupsForUserOutput struct {
 	// The groups that the user belongs to.
 	Groups []types.GroupType
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation,
+	// which can be used to return the next set of items in the list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -143,8 +143,8 @@ type AdminListGroupsForUserPaginatorOptions struct {
 	// The limit of the request to list groups.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -157,7 +157,8 @@ type AdminListGroupsForUserPaginator struct {
 	firstPage bool
 }
 
-// NewAdminListGroupsForUserPaginator returns a new AdminListGroupsForUserPaginator
+// NewAdminListGroupsForUserPaginator returns a new
+// AdminListGroupsForUserPaginator
 func NewAdminListGroupsForUserPaginator(client AdminListGroupsForUserAPIClient, params *AdminListGroupsForUserInput, optFns ...func(*AdminListGroupsForUserPaginatorOptions)) *AdminListGroupsForUserPaginator {
 	if params == nil {
 		params = &AdminListGroupsForUserInput{}

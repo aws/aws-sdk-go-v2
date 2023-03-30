@@ -39,8 +39,8 @@ type DeleteDashboardInput struct {
 	// This member is required.
 	DashboardId *string
 
-	// The version number of the dashboard. If the version number property is provided,
-	// only the specified version of the dashboard is deleted.
+	// The version number of the dashboard. If the version number property is
+	// provided, only the specified version of the dashboard is deleted.
 	VersionNumber *int64
 
 	noSmithyDocumentSerde

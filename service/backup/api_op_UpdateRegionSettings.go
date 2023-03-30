@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the current service opt-in settings for the Region. If service-opt-in is
-// enabled for a service, Backup tries to protect that service's resources in this
-// Region, when the resource is included in an on-demand backup or scheduled backup
-// plan. Otherwise, Backup does not try to protect that service's resources in this
-// Region. Use the DescribeRegionSettings API to determine the resource types that
-// are supported.
+// Updates the current service opt-in settings for the Region. If service-opt-in
+// is enabled for a service, Backup tries to protect that service's resources in
+// this Region, when the resource is included in an on-demand backup or scheduled
+// backup plan. Otherwise, Backup does not try to protect that service's resources
+// in this Region. Use the DescribeRegionSettings API to determine the resource
+// types that are supported.
 func (c *Client) UpdateRegionSettings(ctx context.Context, params *UpdateRegionSettingsInput, optFns ...func(*Options)) (*UpdateRegionSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateRegionSettingsInput{}
@@ -34,11 +34,10 @@ func (c *Client) UpdateRegionSettings(ctx context.Context, params *UpdateRegionS
 type UpdateRegionSettingsInput struct {
 
 	// Enables or disables full Backup management of backups for a resource type. To
-	// enable full Backup management for DynamoDB along with  Backup's advanced
-	// DynamoDB backup features
-	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html),
-	// follow the procedure to  enable advanced DynamoDB backup programmatically
-	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli).
+	// enable full Backup management for DynamoDB along with Backup's advanced
+	// DynamoDB backup features (https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html)
+	// , follow the procedure to enable advanced DynamoDB backup programmatically (https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli)
+	// .
 	ResourceTypeManagementPreference map[string]bool
 
 	// Updates the list of services along with the opt-in preferences for the Region.

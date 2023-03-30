@@ -38,8 +38,8 @@ type SearchDashboardsInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The filters to apply to the search. Currently, you can search only by user name,
-	// for example, "Filters": [ { "Name": "QUICKSIGHT_USER", "Operator":
+	// The filters to apply to the search. Currently, you can search only by user
+	// name, for example, "Filters": [ { "Name": "QUICKSIGHT_USER", "Operator":
 	// "StringEquals", "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1"
 	// } ]
 	//
@@ -57,7 +57,7 @@ type SearchDashboardsInput struct {
 
 type SearchDashboardsOutput struct {
 
-	// The list of dashboards owned by the user specified in Filters in your request.
+	// The list of dashboards owned by the user specified in Filters  in your request.
 	DashboardSummaryList []types.DashboardSummary
 
 	// The token for the next set of results, or null if there are no more results.
@@ -151,8 +151,8 @@ type SearchDashboardsPaginatorOptions struct {
 	// The maximum number of results to be returned per request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

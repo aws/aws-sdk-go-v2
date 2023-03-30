@@ -28,8 +28,8 @@ func (c *Client) DescribeResourcePolicy(ctx context.Context, params *DescribeRes
 
 type DescribeResourcePolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
-	// is attached to.
+	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource
+	// policy is attached to.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -39,13 +39,13 @@ type DescribeResourcePolicyInput struct {
 
 type DescribeResourcePolicyOutput struct {
 
-	// The JSON structure that contains the resource policy. For more information about
-	// the contents of a JSON policy document, see  IAM JSON policy reference
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html).
+	// The JSON structure that contains the resource policy. For more information
+	// about the contents of a JSON policy document, see IAM JSON policy reference  (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html)
+	// .
 	Policy *string
 
-	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
-	// is attached to.
+	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource
+	// policy is attached to.
 	ResourceArn *string
 
 	// The current revision of the resource policy. Use the revision ID to make sure

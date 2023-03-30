@@ -50,11 +50,9 @@ type UpdateSubscriptionNotificationConfigurationInput struct {
 
 	// The Amazon Resource Name (ARN) specifying the role of the subscriber. For more
 	// information about ARNs and how to use them in policies, see, see the Managing
-	// data access
-	// (https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html)
-	// and Amazon Web Services Managed Policies
-	// (https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html)in
-	// the Amazon Security Lake User Guide.
+	// data access (https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html)
+	// and Amazon Web Services Managed Policies (https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html)
+	// in the Amazon Security Lake User Guide.
 	RoleArn *string
 
 	// The subscription endpoint in Security Lake.

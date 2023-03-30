@@ -53,8 +53,8 @@ type DescribeDeviceOutput struct {
 	// The type of Amazon Web Services Snow Family device.
 	DeviceType *string
 
-	// When the device last contacted the Amazon Web Services Cloud. Indicates that the
-	// device is online.
+	// When the device last contacted the Amazon Web Services Cloud. Indicates that
+	// the device is online.
 	LastReachedOutAt *time.Time
 
 	// When the device last pushed an update to the Amazon Web Services Cloud.
@@ -73,8 +73,9 @@ type DescribeDeviceOutput struct {
 	// The software installed on the device.
 	Software *types.SoftwareInformation
 
-	// Optional metadata that you assign to a resource. You can use tags to categorize
-	// a resource in different ways, such as by purpose, owner, or environment.
+	// Optional metadata that you assign to a resource. You can use tags to
+	// categorize a resource in different ways, such as by purpose, owner, or
+	// environment.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

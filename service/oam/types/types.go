@@ -6,8 +6,8 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// A structure that contains information about one link attached to this monitoring
-// account sink.
+// A structure that contains information about one link attached to this
+// monitoring account sink.
 type ListAttachedLinksItem struct {
 
 	// The label that was assigned to this link at creation, with the variables
@@ -30,7 +30,8 @@ type ListLinksItem struct {
 	// The ARN of the link.
 	Arn *string
 
-	// The random ID string that Amazon Web Services generated as part of the link ARN.
+	// The random ID string that Amazon Web Services generated as part of the link
+	// ARN.
 	Id *string
 
 	// The label that was assigned to this link at creation, with the variables
@@ -53,7 +54,8 @@ type ListSinksItem struct {
 	// The ARN of the sink.
 	Arn *string
 
-	// The random ID string that Amazon Web Services generated as part of the sink ARN.
+	// The random ID string that Amazon Web Services generated as part of the sink
+	// ARN.
 	Id *string
 
 	// The name of the sink.

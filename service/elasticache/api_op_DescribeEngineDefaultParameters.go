@@ -29,26 +29,26 @@ func (c *Client) DescribeEngineDefaultParameters(ctx context.Context, params *De
 	return out, nil
 }
 
-// Represents the input of a DescribeEngineDefaultParameters operation.
+// Represents the input of a DescribeEngineDefaultParameters  operation.
 type DescribeEngineDefaultParametersInput struct {
 
-	// The name of the cache parameter group family. Valid values are: memcached1.4 |
-	// memcached1.5 | memcached1.6 | redis2.6 | redis2.8 | redis3.2 | redis4.0 |
-	// redis5.0 | redis6.x | redis6.2 | redis7
+	// The name of the cache parameter group family. Valid values are: memcached1.4  |
+	// memcached1.5 | memcached1.6  | redis2.6  | redis2.8  | redis3.2  | redis4.0  |
+	// redis5.0 | redis6.x  | redis6.2  | redis7
 	//
 	// This member is required.
 	CacheParameterGroupFamily *string
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a marker is included in the
+	// response so that the remaining results can be retrieved. Default: 100
+	// Constraints: minimum 20; maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -56,7 +56,7 @@ type DescribeEngineDefaultParametersInput struct {
 
 type DescribeEngineDefaultParametersOutput struct {
 
-	// Represents the output of a DescribeEngineDefaultParameters operation.
+	// Represents the output of a DescribeEngineDefaultParameters  operation.
 	EngineDefaults *types.EngineDefaults
 
 	// Metadata pertaining to the operation's result.
@@ -139,14 +139,14 @@ var _ DescribeEngineDefaultParametersAPIClient = (*Client)(nil)
 // DescribeEngineDefaultParametersPaginatorOptions is the paginator options for
 // DescribeEngineDefaultParameters
 type DescribeEngineDefaultParametersPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a marker is included in the
+	// response so that the remaining results can be retrieved. Default: 100
+	// Constraints: minimum 20; maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

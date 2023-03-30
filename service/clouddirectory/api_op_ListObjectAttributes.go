@@ -31,7 +31,7 @@ func (c *Client) ListObjectAttributes(ctx context.Context, params *ListObjectAtt
 type ListObjectAttributesInput struct {
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where the
-	// object resides. For more information, see arns.
+	// object resides. For more information, see arns .
 	//
 	// This member is required.
 	DirectoryArn *string
@@ -45,8 +45,8 @@ type ListObjectAttributesInput struct {
 	// object is reflected in a subsequent read operation of that same object.
 	ConsistencyLevel types.ConsistencyLevel
 
-	// Used to filter the list of object attributes that are associated with a certain
-	// facet.
+	// Used to filter the list of object attributes that are associated with a
+	// certain facet.
 	FacetFilter *types.SchemaFacet
 
 	// The maximum number of items to be retrieved in a single call. This is an
@@ -61,8 +61,8 @@ type ListObjectAttributesInput struct {
 
 type ListObjectAttributesOutput struct {
 
-	// Attributes map that is associated with the object. AttributeArn is the key, and
-	// attribute value is the value.
+	// Attributes map that is associated with the object. AttributeArn is the key,
+	// and attribute value is the value.
 	Attributes []types.AttributeKeyAndValue
 
 	// The pagination token.
@@ -152,8 +152,8 @@ type ListObjectAttributesPaginatorOptions struct {
 	// approximate number.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

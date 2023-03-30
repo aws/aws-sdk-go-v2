@@ -30,7 +30,7 @@ func (c *Client) DescribeDeliveryChannels(ctx context.Context, params *DescribeD
 	return out, nil
 }
 
-// The input for the DescribeDeliveryChannels action.
+// The input for the DescribeDeliveryChannels  action.
 type DescribeDeliveryChannelsInput struct {
 
 	// A list of delivery channel names.
@@ -39,7 +39,7 @@ type DescribeDeliveryChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
-// The output for the DescribeDeliveryChannels action.
+// The output for the DescribeDeliveryChannels  action.
 type DescribeDeliveryChannelsOutput struct {
 
 	// A list that contains the descriptions of the specified delivery channel.

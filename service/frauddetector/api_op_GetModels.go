@@ -12,13 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets one or more models. Gets all models for the Amazon Web Services account if
-// no model type and no model id provided. Gets all models for the Amazon Web
+// Gets one or more models. Gets all models for the Amazon Web Services account
+// if no model type and no model id provided. Gets all models for the Amazon Web
 // Services account and model type, if the model type is specified but model id is
 // not provided. Gets a specific model if (model type, model id) tuple is
 // specified. This is a paginated API. If you provide a null maxResults, this
-// action retrieves a maximum of 10 records per page. If you provide a maxResults,
-// the value must be between 1 and 10. To get the next page results, provide the
+// action retrieves a maximum of 10 records per page. If you provide a maxResults
+// , the value must be between 1 and 10. To get the next page results, provide the
 // pagination token from the response as part of your request. A null pagination
 // token fetches the records from the beginning.
 func (c *Client) GetModels(ctx context.Context, params *GetModelsInput, optFns ...func(*Options)) (*GetModelsOutput, error) {
@@ -139,8 +139,8 @@ type GetModelsPaginatorOptions struct {
 	// The maximum number of objects to return for the request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a specified job and whether that job has been received
-// by the job worker. Used for custom actions only.
+// Returns information about a specified job and whether that job has been
+// received by the job worker. Used for custom actions only.
 func (c *Client) AcknowledgeJob(ctx context.Context, params *AcknowledgeJobInput, optFns ...func(*Options)) (*AcknowledgeJobOutput, error) {
 	if params == nil {
 		params = &AcknowledgeJobInput{}
@@ -31,14 +31,15 @@ func (c *Client) AcknowledgeJob(ctx context.Context, params *AcknowledgeJobInput
 // Represents the input of an AcknowledgeJob action.
 type AcknowledgeJobInput struct {
 
-	// The unique system-generated ID of the job for which you want to confirm receipt.
+	// The unique system-generated ID of the job for which you want to confirm
+	// receipt.
 	//
 	// This member is required.
 	JobId *string
 
 	// A system-generated random number that AWS CodePipeline uses to ensure that the
 	// job is being worked on by only one job worker. Get this number from the response
-	// of the PollForJobs request that returned this job.
+	// of the PollForJobs  request that returned this job.
 	//
 	// This member is required.
 	Nonce *string

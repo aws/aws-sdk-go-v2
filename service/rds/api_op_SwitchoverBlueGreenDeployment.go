@@ -15,11 +15,9 @@ import (
 // traffic is routed to the databases in the blue environment. After you switch
 // over, production traffic is routed to the databases in the green environment.
 // For more information, see Using Amazon RDS Blue/Green Deployments for database
-// updates
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
-// in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for
-// database updates
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
+// updates (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
+// in the Amazon RDS User Guide and Using Amazon RDS Blue/Green Deployments for
+// database updates (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
 // in the Amazon Aurora User Guide.
 func (c *Client) SwitchoverBlueGreenDeployment(ctx context.Context, params *SwitchoverBlueGreenDeploymentInput, optFns ...func(*Options)) (*SwitchoverBlueGreenDeploymentOutput, error) {
 	if params == nil {
@@ -39,8 +37,7 @@ func (c *Client) SwitchoverBlueGreenDeployment(ctx context.Context, params *Swit
 type SwitchoverBlueGreenDeploymentInput struct {
 
 	// The blue/green deployment identifier. Constraints:
-	// - Must match an existing
-	// blue/green deployment identifier.
+	//     - Must match an existing blue/green deployment identifier.
 	//
 	// This member is required.
 	BlueGreenDeploymentIdentifier *string
@@ -56,11 +53,9 @@ type SwitchoverBlueGreenDeploymentInput struct {
 type SwitchoverBlueGreenDeploymentOutput struct {
 
 	// Contains the details about a blue/green deployment. For more information, see
-	// Using Amazon RDS Blue/Green Deployments for database updates
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
-	// in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for
-	// database updates
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
+	// Using Amazon RDS Blue/Green Deployments for database updates (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
+	// in the Amazon RDS User Guide and Using Amazon RDS Blue/Green Deployments for
+	// database updates (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
 	// in the Amazon Aurora User Guide.
 	BlueGreenDeployment *types.BlueGreenDeployment
 

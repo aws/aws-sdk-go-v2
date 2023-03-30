@@ -31,8 +31,8 @@ func (c *Client) ListPartnerEventSources(ctx context.Context, params *ListPartne
 
 type ListPartnerEventSourcesInput struct {
 
-	// If you specify this, the results are limited to only those partner event sources
-	// that start with the string you specify.
+	// If you specify this, the results are limited to only those partner event
+	// sources that start with the string you specify.
 	//
 	// This member is required.
 	NamePrefix *string

@@ -34,8 +34,8 @@ type UpdatePartnerStatusInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The cluster identifier of the cluster whose partner integration status is being
-	// updated.
+	// The cluster identifier of the cluster whose partner integration status is
+	// being updated.
 	//
 	// This member is required.
 	ClusterIdentifier *string

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the EvaluationName of an Evaluation. You can use the GetEvaluation
+// Updates the EvaluationName  of an Evaluation . You can use the GetEvaluation
 // operation to view the contents of the updated data element.
 func (c *Client) UpdateEvaluation(ctx context.Context, params *UpdateEvaluationInput, optFns ...func(*Options)) (*UpdateEvaluationOutput, error) {
 	if params == nil {
@@ -29,13 +29,13 @@ func (c *Client) UpdateEvaluation(ctx context.Context, params *UpdateEvaluationI
 
 type UpdateEvaluationInput struct {
 
-	// The ID assigned to the Evaluation during creation.
+	// The ID assigned to the Evaluation  during creation.
 	//
 	// This member is required.
 	EvaluationId *string
 
-	// A new user-supplied name or description of the Evaluation that will replace the
-	// current content.
+	// A new user-supplied name or description of the Evaluation that will replace
+	// the current content.
 	//
 	// This member is required.
 	EvaluationName *string
@@ -43,12 +43,12 @@ type UpdateEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of an UpdateEvaluation operation. You can see the updated
-// content by using the GetEvaluation operation.
+// Represents the output of an UpdateEvaluation operation. You can see the
+// updated content by using the GetEvaluation  operation.
 type UpdateEvaluationOutput struct {
 
 	// The ID assigned to the Evaluation during creation. This value should be
-	// identical to the value of the Evaluation in the request.
+	// identical to the value of the Evaluation  in the request.
 	EvaluationId *string
 
 	// Metadata pertaining to the operation's result.

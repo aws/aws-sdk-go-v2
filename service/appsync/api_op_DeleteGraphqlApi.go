@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a GraphqlApi object.
+// Deletes a GraphqlApi  object.
 func (c *Client) DeleteGraphqlApi(ctx context.Context, params *DeleteGraphqlApiInput, optFns ...func(*Options)) (*DeleteGraphqlApiOutput, error) {
 	if params == nil {
 		params = &DeleteGraphqlApiInput{}

@@ -52,8 +52,8 @@ type GetCoreDefinitionVersionOutput struct {
 	// The ARN of the core definition version.
 	Arn *string
 
-	// The time, in milliseconds since the epoch, when the core definition version was
-	// created.
+	// The time, in milliseconds since the epoch, when the core definition version
+	// was created.
 	CreationTimestamp *string
 
 	// Information about the core definition version.

@@ -33,12 +33,9 @@ func (c *Client) CreateTracker(ctx context.Context, params *CreateTrackerInput, 
 type CreateTrackerInput struct {
 
 	// The name for the tracker resource. Requirements:
-	// - Contain only alphanumeric
-	// characters (A-Z, a-z, 0-9) , hyphens (-), periods (.), and underscores (_).
-	// -
-	// Must be a unique tracker resource name.
-	// - No spaces allowed. For example,
-	// ExampleTracker.
+	//     - Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-), periods (.), and underscores (_).
+	//     - Must be a unique tracker resource name.
+	//     - No spaces allowed. For example, ExampleTracker .
 	//
 	// This member is required.
 	TrackerName *string
@@ -46,37 +43,19 @@ type CreateTrackerInput struct {
 	// An optional description for the tracker resource.
 	Description *string
 
-	// A key identifier for an Amazon Web Services KMS customer managed key
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html). Enter
-	// a key ID, key ARN, alias name, or alias ARN.
+	// A key identifier for an Amazon Web Services KMS customer managed key (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)
+	// . Enter a key ID, key ARN, alias name, or alias ARN.
 	KmsKeyId *string
 
 	// Specifies the position filtering for the tracker resource. Valid values:
-	// -
-	// TimeBased - Location updates are evaluated against linked geofence collections,
-	// but not every location update is stored. If your update frequency is more often
-	// than 30 seconds, only one update per 30 seconds is stored for each unique device
-	// ID.
-	// - DistanceBased - If the device has moved less than 30 m (98.4 ft), location
-	// updates are ignored. Location updates within this area are neither evaluated
-	// against linked geofence collections, nor stored. This helps control costs by
-	// reducing the number of geofence evaluations and historical device positions to
-	// paginate through. Distance-based filtering can also reduce the effects of GPS
-	// noise when displaying device trajectories on a map.
-	// - AccuracyBased - If the
-	// device has moved less than the measured accuracy, location updates are ignored.
-	// For example, if two consecutive updates from a device have a horizontal accuracy
-	// of 5 m and 10 m, the second update is ignored if the device has moved less than
-	// 15 m. Ignored location updates are neither evaluated against linked geofence
-	// collections, nor stored. This can reduce the effects of GPS noise when
-	// displaying device trajectories on a map, and can help control your costs by
-	// reducing the number of geofence evaluations.
+	//     - TimeBased - Location updates are evaluated against linked geofence collections, but not every location update is stored. If your update frequency is more often than 30 seconds, only one update per 30 seconds is stored for each unique device ID.
+	//     - DistanceBased - If the device has moved less than 30 m (98.4 ft), location updates are ignored. Location updates within this area are neither evaluated against linked geofence collections, nor stored. This helps control costs by reducing the number of geofence evaluations and historical device positions to paginate through. Distance-based filtering can also reduce the effects of GPS noise when displaying device trajectories on a map.
+	//     - AccuracyBased - If the device has moved less than the measured accuracy, location updates are ignored. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is ignored if the device has moved less than 15 m. Ignored location updates are neither evaluated against linked geofence collections, nor stored. This can reduce the effects of GPS noise when displaying device trajectories on a map, and can help control your costs by reducing the number of geofence evaluations.
 	//
-	// This field is optional. If not
-	// specified, the default value is TimeBased.
+	// This field is optional. If not specified, the default value is TimeBased .
 	PositionFiltering types.PositionFiltering
 
-	// No longer used. If included, the only allowed value is RequestBasedUsage.
+	// No longer used. If included, the only allowed value is RequestBasedUsage .
 	//
 	// Deprecated: Deprecated. If included, the only allowed value is
 	// RequestBasedUsage.
@@ -89,17 +68,13 @@ type CreateTrackerInput struct {
 
 	// Applies one or more tags to the tracker resource. A tag is a key-value pair
 	// helps manage, identify, search, and filter your resources by labelling them.
-	// Format: "key" : "value" Restrictions:
-	// - Maximum 50 tags per resource
-	// - Each
-	// resource tag must be unique with a maximum of one value.
-	// - Maximum key length:
-	// 128 Unicode characters in UTF-8
-	// - Maximum value length: 256 Unicode characters
-	// in UTF-8
-	// - Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-	// characters: + - = . _ : / @.
-	// - Cannot use "aws:" as a prefix for a key.
+	// Format: "key" : "value"  Restrictions:
+	//     - Maximum 50 tags per resource
+	//     - Each resource tag must be unique with a maximum of one value.
+	//     - Maximum key length: 128 Unicode characters in UTF-8
+	//     - Maximum value length: 256 Unicode characters in UTF-8
+	//     - Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.
+	//     - Cannot use "aws:" as a prefix for a key.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -107,17 +82,15 @@ type CreateTrackerInput struct {
 
 type CreateTrackerOutput struct {
 
-	// The timestamp for when the tracker resource was created in  ISO 8601
-	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ.
+	// The timestamp for when the tracker resource was created in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format: YYYY-MM-DDThh:mm:ss.sssZ .
 	//
 	// This member is required.
 	CreateTime *time.Time
 
 	// The Amazon Resource Name (ARN) for the tracker resource. Used when you need to
 	// specify a resource across all Amazon Web Services.
-	// - Format example:
-	// arn:aws:geo:region:account-id:tracker/ExampleTracker
+	//     - Format example: arn:aws:geo:region:account-id:tracker/ExampleTracker
 	//
 	// This member is required.
 	TrackerArn *string

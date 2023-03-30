@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new event destination in a configuration set. An event destination is
-// a location where you send message events. The event options are Amazon
+// Creates a new event destination in a configuration set. An event destination
+// is a location where you send message events. The event options are Amazon
 // CloudWatch, Amazon Kinesis Data Firehose, or Amazon SNS. For example, when a
 // message is delivered successfully, you can send information about that event to
 // an event destination, or send notifications to endpoints that are subscribed to
@@ -39,7 +39,7 @@ type CreateEventDestinationInput struct {
 
 	// Either the name of the configuration set or the configuration set ARN to apply
 	// event logging to. The ConfigurateSetName and ConfigurationSetArn can be found
-	// using the DescribeConfigurationSets action.
+	// using the DescribeConfigurationSets  action.
 	//
 	// This member is required.
 	ConfigurationSetName *string
@@ -55,9 +55,9 @@ type CreateEventDestinationInput struct {
 	// This member is required.
 	MatchingEventTypes []types.EventType
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. If you don't specify a client token, a randomly generated token is
-	// used for the request to ensure idempotency.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If you don't specify a client token, a randomly generated token
+	// is used for the request to ensure idempotency.
 	ClientToken *string
 
 	// An object that contains information about an event destination for logging to

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all customer managed policies attached to a specified PermissionSet.
+// Lists all customer managed policies attached to a specified PermissionSet .
 func (c *Client) ListCustomerManagedPolicyReferencesInPermissionSet(ctx context.Context, params *ListCustomerManagedPolicyReferencesInPermissionSetInput, optFns ...func(*Options)) (*ListCustomerManagedPolicyReferencesInPermissionSetOutput, error) {
 	if params == nil {
 		params = &ListCustomerManagedPolicyReferencesInPermissionSetInput{}
@@ -36,7 +36,7 @@ type ListCustomerManagedPolicyReferencesInPermissionSetInput struct {
 	// This member is required.
 	InstanceArn *string
 
-	// The ARN of the PermissionSet.
+	// The ARN of the PermissionSet .
 	//
 	// This member is required.
 	PermissionSetArn *string
@@ -144,8 +144,8 @@ type ListCustomerManagedPolicyReferencesInPermissionSetPaginatorOptions struct {
 	// The maximum number of results to display for the list call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

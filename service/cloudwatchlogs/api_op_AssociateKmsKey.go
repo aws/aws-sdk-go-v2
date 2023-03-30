@@ -10,19 +10,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates the specified KMS key with the specified log group. Associating a KMS
-// key with a log group overrides any existing associations between the log group
-// and a KMS key. After a KMS key is associated with a log group, all newly
+// Associates the specified KMS key with the specified log group. Associating a
+// KMS key with a log group overrides any existing associations between the log
+// group and a KMS key. After a KMS key is associated with a log group, all newly
 // ingested data for the log group is encrypted using the KMS key. This association
 // is stored as long as the data encrypted with the KMS keyis still within
 // CloudWatch Logs. This enables CloudWatch Logs to decrypt this data whenever it
 // is requested. CloudWatch Logs supports only symmetric KMS keys. Do not use an
 // associate an asymmetric KMS key with your log group. For more information, see
-// Using Symmetric and Asymmetric Keys
-// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html).
-// It can take up to 5 minutes for this operation to take effect. If you attempt to
-// associate a KMS key with a log group but the KMS key does not exist or the KMS
-// key is disabled, you receive an InvalidParameterException error.
+// Using Symmetric and Asymmetric Keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
+// . It can take up to 5 minutes for this operation to take effect. If you attempt
+// to associate a KMS key with a log group but the KMS key does not exist or the
+// KMS key is disabled, you receive an InvalidParameterException  error.
 func (c *Client) AssociateKmsKey(ctx context.Context, params *AssociateKmsKeyInput, optFns ...func(*Options)) (*AssociateKmsKeyOutput, error) {
 	if params == nil {
 		params = &AssociateKmsKeyInput{}
@@ -42,10 +41,9 @@ type AssociateKmsKeyInput struct {
 
 	// The Amazon Resource Name (ARN) of the KMS key to use when encrypting log data.
 	// This must be a symmetric KMS key. For more information, see Amazon Resource
-	// Names
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms)
-	// and Using Symmetric and Asymmetric Keys
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html).
+	// Names (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms)
+	// and Using Symmetric and Asymmetric Keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
+	// .
 	//
 	// This member is required.
 	KmsKeyId *string

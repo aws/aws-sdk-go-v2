@@ -21,8 +21,8 @@ import (
 // resource-identifying parameter. Required Permissions: To use this action, an IAM
 // user must have a Show, Deploy, or Manage permissions level for the stack, or an
 // attached policy that explicitly grants permissions. For more information about
-// user permissions, see Managing User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) DescribeInstances(ctx context.Context, params *DescribeInstancesInput, optFns ...func(*Options)) (*DescribeInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeInstancesInput{}
@@ -41,25 +41,25 @@ func (c *Client) DescribeInstances(ctx context.Context, params *DescribeInstance
 type DescribeInstancesInput struct {
 
 	// An array of instance IDs to be described. If you use this parameter,
-	// DescribeInstances returns a description of the specified instances. Otherwise,
+	// DescribeInstancesreturns a description of the specified instances. Otherwise,
 	// it returns a description of every instance.
 	InstanceIds []string
 
-	// A layer ID. If you use this parameter, DescribeInstances returns descriptions of
-	// the instances associated with the specified layer.
+	// A layer ID. If you use this parameter, DescribeInstances returns descriptions
+	// of the instances associated with the specified layer.
 	LayerId *string
 
-	// A stack ID. If you use this parameter, DescribeInstances returns descriptions of
-	// the instances associated with the specified stack.
+	// A stack ID. If you use this parameter, DescribeInstances returns descriptions
+	// of the instances associated with the specified stack.
 	StackId *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeInstances request.
+// Contains the response to a DescribeInstances  request.
 type DescribeInstancesOutput struct {
 
-	// An array of Instance objects that describe the instances.
+	// An array of Instance  objects that describe the instances.
 	Instances []types.Instance
 
 	// Metadata pertaining to the operation's result.
@@ -149,9 +149,9 @@ type InstanceOnlineWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, InstanceOnlineWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, InstanceOnlineWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -191,9 +191,9 @@ func NewInstanceOnlineWaiter(client DescribeInstancesAPIClient, optFns ...func(*
 	}
 }
 
-// Wait calls the waiter function for InstanceOnline waiter. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// Wait calls the waiter function for InstanceOnline waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *InstanceOnlineWaiter) Wait(ctx context.Context, params *DescribeInstancesInput, maxWaitDur time.Duration, optFns ...func(*InstanceOnlineWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -516,8 +516,8 @@ type InstanceRegisteredWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, InstanceRegisteredWaiter will use default max delay of 120 seconds.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, InstanceRegisteredWaiter will use default max delay of 120 seconds.
 	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
@@ -558,9 +558,9 @@ func NewInstanceRegisteredWaiter(client DescribeInstancesAPIClient, optFns ...fu
 	}
 }
 
-// Wait calls the waiter function for InstanceRegistered waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for InstanceRegistered waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *InstanceRegisteredWaiter) Wait(ctx context.Context, params *DescribeInstancesInput, maxWaitDur time.Duration, optFns ...func(*InstanceRegisteredWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -859,9 +859,9 @@ type InstanceStoppedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, InstanceStoppedWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, InstanceStoppedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -901,9 +901,9 @@ func NewInstanceStoppedWaiter(client DescribeInstancesAPIClient, optFns ...func(
 	}
 }
 
-// Wait calls the waiter function for InstanceStopped waiter. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// Wait calls the waiter function for InstanceStopped waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *InstanceStoppedWaiter) Wait(ctx context.Context, params *DescribeInstancesInput, maxWaitDur time.Duration, optFns ...func(*InstanceStoppedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -1226,8 +1226,8 @@ type InstanceTerminatedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, InstanceTerminatedWaiter will use default max delay of 120 seconds.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, InstanceTerminatedWaiter will use default max delay of 120 seconds.
 	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
@@ -1268,9 +1268,9 @@ func NewInstanceTerminatedWaiter(client DescribeInstancesAPIClient, optFns ...fu
 	}
 }
 
-// Wait calls the waiter function for InstanceTerminated waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for InstanceTerminated waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *InstanceTerminatedWaiter) Wait(ctx context.Context, params *DescribeInstancesInput, maxWaitDur time.Duration, optFns ...func(*InstanceTerminatedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

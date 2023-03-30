@@ -33,8 +33,9 @@ type UpdateLongTermPricingInput struct {
 	// This member is required.
 	LongTermPricingId *string
 
-	// If set to true, specifies that the current long-term pricing type for the device
-	// should be automatically renewed before the long-term pricing contract expires.
+	// If set to true, specifies that the current long-term pricing type for the
+	// device should be automatically renewed before the long-term pricing contract
+	// expires.
 	IsLongTermPricingAutoRenew *bool
 
 	// Specifies that a device that is ordered with long-term pricing should be

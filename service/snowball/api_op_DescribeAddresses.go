@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a specified number of ADDRESS objects. Calling this API in one of the US
-// regions will return addresses from the list of all addresses associated with
+// Returns a specified number of ADDRESS objects. Calling this API in one of the
+// US regions will return addresses from the list of all addresses associated with
 // this account in all US regions.
 func (c *Client) DescribeAddresses(ctx context.Context, params *DescribeAddressesInput, optFns ...func(*Options)) (*DescribeAddressesOutput, error) {
 	if params == nil {
@@ -32,12 +32,12 @@ func (c *Client) DescribeAddresses(ctx context.Context, params *DescribeAddresse
 
 type DescribeAddressesInput struct {
 
-	// The number of ADDRESS objects to return.
+	// The number of ADDRESS  objects to return.
 	MaxResults *int32
 
-	// HTTP requests are stateless. To identify what object comes "next" in the list of
-	// ADDRESS objects, you have the option of specifying a value for NextToken as the
-	// starting point for your list of returned addresses.
+	// HTTP requests are stateless. To identify what object comes "next" in the list
+	// of ADDRESS  objects, you have the option of specifying a value for NextToken
+	// as the starting point for your list of returned addresses.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,8 +49,8 @@ type DescribeAddressesOutput struct {
 	Addresses []types.Address
 
 	// HTTP requests are stateless. If you use the automatically generated NextToken
-	// value in your next DescribeAddresses call, your list of returned addresses will
-	// start from this point in the array.
+	// value in your next DescribeAddresses call, your list of returned addresses
+	// will start from this point in the array.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -127,13 +127,14 @@ type DescribeAddressesAPIClient interface {
 
 var _ DescribeAddressesAPIClient = (*Client)(nil)
 
-// DescribeAddressesPaginatorOptions is the paginator options for DescribeAddresses
+// DescribeAddressesPaginatorOptions is the paginator options for
+// DescribeAddresses
 type DescribeAddressesPaginatorOptions struct {
-	// The number of ADDRESS objects to return.
+	// The number of ADDRESS  objects to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

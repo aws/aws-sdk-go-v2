@@ -33,8 +33,8 @@ type ListMissionProfilesInput struct {
 	// Maximum number of mission profiles returned.
 	MaxResults *int32
 
-	// Next token returned in the request of a previous ListMissionProfiles call. Used
-	// to get the next page of results.
+	// Next token returned in the request of a previous ListMissionProfiles call.
+	// Used to get the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,8 +45,8 @@ type ListMissionProfilesOutput struct {
 	// List of mission profiles.
 	MissionProfileList []types.MissionProfileListItem
 
-	// Next token returned in the response of a previous ListMissionProfiles call. Used
-	// to get the next page of results.
+	// Next token returned in the response of a previous ListMissionProfiles call.
+	// Used to get the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -115,8 +115,8 @@ func (c *Client) addOperationListMissionProfilesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListMissionProfilesAPIClient is a client that implements the ListMissionProfiles
-// operation.
+// ListMissionProfilesAPIClient is a client that implements the
+// ListMissionProfiles operation.
 type ListMissionProfilesAPIClient interface {
 	ListMissionProfiles(context.Context, *ListMissionProfilesInput, ...func(*Options)) (*ListMissionProfilesOutput, error)
 }
@@ -129,8 +129,8 @@ type ListMissionProfilesPaginatorOptions struct {
 	// Maximum number of mission profiles returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -63,8 +63,8 @@ type GetFuotaTaskOutput struct {
 	// delay with the cloud.
 	FragmentIntervalMS *int32
 
-	// The size of each fragment in bytes. Currently only supported in fuota tasks with
-	// multicast groups.
+	// The size of each fragment in bytes. Currently only supported in fuota tasks
+	// with multicast groups.
 	FragmentSizeBytes *int32
 
 	// The ID of a FUOTA task.

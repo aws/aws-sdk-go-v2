@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the configuration of an event destination for a configuration set. Events
-// include message sends, deliveries, opens, clicks, bounces, and complaints. Event
-// destinations are places that you can send information about these events to. For
-// example, you can send event data to Amazon SNS to receive notifications when you
-// receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to
-// stream data to Amazon S3 for long-term storage.
+// Update the configuration of an event destination for a configuration set.
+// Events include message sends, deliveries, opens, clicks, bounces, and
+// complaints. Event destinations are places that you can send information about
+// these events to. For example, you can send event data to Amazon SNS to receive
+// notifications when you receive bounces or complaints, or you can use Amazon
+// Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.
 func (c *Client) UpdateConfigurationSetEventDestination(ctx context.Context, params *UpdateConfigurationSetEventDestinationInput, optFns ...func(*Options)) (*UpdateConfigurationSetEventDestinationOutput, error) {
 	if params == nil {
 		params = &UpdateConfigurationSetEventDestinationInput{}
@@ -36,7 +36,8 @@ func (c *Client) UpdateConfigurationSetEventDestination(ctx context.Context, par
 // set.
 type UpdateConfigurationSetEventDestinationInput struct {
 
-	// The name of the configuration set that contains the event destination to modify.
+	// The name of the configuration set that contains the event destination to
+	// modify.
 	//
 	// This member is required.
 	ConfigurationSetName *string
@@ -54,8 +55,8 @@ type UpdateConfigurationSetEventDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type UpdateConfigurationSetEventDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

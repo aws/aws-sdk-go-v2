@@ -32,8 +32,9 @@ func (c *Client) ListEmailTemplates(ctx context.Context, params *ListEmailTempla
 
 // Represents a request to list the email templates present in your Amazon SES
 // account in the current Amazon Web Services Region. For more information, see the
-// Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
+//
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
+// .
 type ListEmailTemplatesInput struct {
 
 	// A token returned from a previous call to ListEmailTemplates to indicate the
@@ -54,12 +55,12 @@ type ListEmailTemplatesInput struct {
 type ListEmailTemplatesOutput struct {
 
 	// A token indicating that there are additional email templates available to be
-	// listed. Pass this token to a subsequent ListEmailTemplates call to retrieve the
-	// next 10 email templates.
+	// listed. Pass this token to a subsequent ListEmailTemplates call to retrieve
+	// the next 10 email templates.
 	NextToken *string
 
-	// An array the contains the name and creation time stamp for each template in your
-	// Amazon SES account.
+	// An array the contains the name and creation time stamp for each template in
+	// your Amazon SES account.
 	TemplatesMetadata []types.EmailTemplateMetadata
 
 	// Metadata pertaining to the operation's result.
@@ -146,8 +147,8 @@ type ListEmailTemplatesPaginatorOptions struct {
 	// more than 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

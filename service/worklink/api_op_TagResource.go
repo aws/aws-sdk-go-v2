@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or overwrites one or more tags for the specified resource, such as a fleet.
-// Each tag consists of a key and an optional value. If a resource already has a
-// tag with the same key, this operation updates its value.
+// Adds or overwrites one or more tags for the specified resource, such as a
+// fleet. Each tag consists of a key and an optional value. If a resource already
+// has a tag with the same key, this operation updates its value.
 //
 // Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
 // future version of the SDK.

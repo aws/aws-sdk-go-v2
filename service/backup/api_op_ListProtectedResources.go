@@ -36,7 +36,7 @@ type ListProtectedResourcesInput struct {
 	MaxResults *int32
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return maxResults  number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -47,7 +47,7 @@ type ListProtectedResourcesInput struct {
 type ListProtectedResourcesOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return maxResults  number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -137,8 +137,8 @@ type ListProtectedResourcesPaginatorOptions struct {
 	// The maximum number of items to be returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -151,7 +151,8 @@ type ListProtectedResourcesPaginator struct {
 	firstPage bool
 }
 
-// NewListProtectedResourcesPaginator returns a new ListProtectedResourcesPaginator
+// NewListProtectedResourcesPaginator returns a new
+// ListProtectedResourcesPaginator
 func NewListProtectedResourcesPaginator(client ListProtectedResourcesAPIClient, params *ListProtectedResourcesInput, optFns ...func(*ListProtectedResourcesPaginatorOptions)) *ListProtectedResourcesPaginator {
 	if params == nil {
 		params = &ListProtectedResourcesInput{}

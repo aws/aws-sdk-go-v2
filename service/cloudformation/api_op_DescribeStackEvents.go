@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns all stack related events for a specified stack in reverse chronological
-// order. For more information about a stack's event history, go to Stacks
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concept-stack.html)
+// Returns all stack related events for a specified stack in reverse
+// chronological order. For more information about a stack's event history, go to
+// Stacks (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concept-stack.html)
 // in the CloudFormation User Guide. You can list events for stacks that have
 // failed to create or have been deleted by specifying the unique stack identifier
 // (stack ID).
@@ -33,7 +33,7 @@ func (c *Client) DescribeStackEvents(ctx context.Context, params *DescribeStackE
 	return out, nil
 }
 
-// The input for DescribeStackEvents action.
+// The input for DescribeStackEvents  action.
 type DescribeStackEventsInput struct {
 
 	// A string that identifies the next page of events that you want to retrieve.
@@ -41,25 +41,23 @@ type DescribeStackEventsInput struct {
 
 	// The name or the unique stack ID that's associated with the stack, which aren't
 	// always interchangeable:
-	// - Running stacks: You can specify either the stack's
-	// name or its unique stack ID.
-	// - Deleted stacks: You must specify the unique stack
-	// ID.
-	//
-	// Default: There is no default value.
+	//     - Running stacks: You can specify either the stack's name or its unique stack ID.
+	//     - Deleted stacks: You must specify the unique stack ID.
+	// Default: There is
+	// no default value.
 	StackName *string
 
 	noSmithyDocumentSerde
 }
 
-// The output for a DescribeStackEvents action.
+// The output for a DescribeStackEvents  action.
 type DescribeStackEventsOutput struct {
 
 	// If the output exceeds 1 MB in size, a string that identifies the next page of
 	// events. If no additional page exists, this value is null.
 	NextToken *string
 
-	// A list of StackEvents structures.
+	// A list of StackEvents  structures.
 	StackEvents []types.StackEvent
 
 	// Metadata pertaining to the operation's result.
@@ -128,8 +126,8 @@ func (c *Client) addOperationDescribeStackEventsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeStackEventsAPIClient is a client that implements the DescribeStackEvents
-// operation.
+// DescribeStackEventsAPIClient is a client that implements the
+// DescribeStackEvents operation.
 type DescribeStackEventsAPIClient interface {
 	DescribeStackEvents(context.Context, *DescribeStackEventsInput, ...func(*Options)) (*DescribeStackEventsOutput, error)
 }
@@ -139,8 +137,8 @@ var _ DescribeStackEventsAPIClient = (*Client)(nil)
 // DescribeStackEventsPaginatorOptions is the paginator options for
 // DescribeStackEvents
 type DescribeStackEventsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

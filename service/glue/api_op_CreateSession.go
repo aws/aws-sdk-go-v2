@@ -30,7 +30,7 @@ func (c *Client) CreateSession(ctx context.Context, params *CreateSessionInput, 
 // Request to create a new session.
 type CreateSessionInput struct {
 
-	// The SessionCommand that runs the job.
+	// The SessionCommand  that runs the job.
 	//
 	// This member is required.
 	Command *types.SessionCommand
@@ -66,7 +66,7 @@ type CreateSessionInput struct {
 	// vCPUs of compute capacity and 16 GB memory.
 	MaxCapacity *float64
 
-	// The number of workers of a defined WorkerType to use for the session.
+	// The number of workers of a defined WorkerType  to use for the session.
 	NumberOfWorkers *int32
 
 	// The origin of the request.
@@ -81,22 +81,12 @@ type CreateSessionInput struct {
 	// The number of seconds before request times out.
 	Timeout *int32
 
-	// The type of predefined worker that is allocated to use for the session. Accepts
-	// a value of Standard, G.1X, G.2X, or G.025X.
-	// - For the Standard worker type, each
-	// worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per
-	// worker.
-	// - For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of
-	// memory, 64 GB disk), and provides 1 executor per worker. We recommend this
-	// worker type for memory-intensive jobs.
-	// - For the G.2X worker type, each worker
-	// maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor
-	// per worker. We recommend this worker type for memory-intensive jobs.
-	// - For the
-	// G.025X worker type, each worker maps to 0.25 DPU (2 vCPU, 4 GB of memory, 64 GB
-	// disk), and provides 1 executor per worker. We recommend this worker type for low
-	// volume streaming jobs. This worker type is only available for Glue version 3.0
-	// streaming jobs.
+	// The type of predefined worker that is allocated to use for the session.
+	// Accepts a value of Standard, G.1X, G.2X, or G.025X.
+	//     - For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
+	//     - For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.
+	//     - For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.
+	//     - For the G.025X worker type, each worker maps to 0.25 DPU (2 vCPU, 4 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for low volume streaming jobs. This worker type is only available for Glue version 3.0 streaming jobs.
 	WorkerType types.WorkerType
 
 	noSmithyDocumentSerde

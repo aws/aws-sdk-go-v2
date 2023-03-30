@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of ledger summaries that are associated with the current Amazon
-// Web Services account and Region. This action returns a maximum of 100 items and
-// is paginated so that you can retrieve all the items by calling ListLedgers
-// multiple times.
+// Returns an array of ledger summaries that are associated with the current
+// Amazon Web Services account and Region. This action returns a maximum of 100
+// items and is paginated so that you can retrieve all the items by calling
+// ListLedgers multiple times.
 func (c *Client) ListLedgers(ctx context.Context, params *ListLedgersInput, optFns ...func(*Options)) (*ListLedgersOutput, error) {
 	if params == nil {
 		params = &ListLedgersInput{}
@@ -38,7 +38,7 @@ type ListLedgersInput struct {
 	MaxResults *int32
 
 	// A pagination token, indicating that you want to retrieve the next page of
-	// results. If you received a value for NextToken in the response from a previous
+	// results. If you received a value for NextToken  in the response from a previous
 	// ListLedgers call, then you should use that value as input here.
 	NextToken *string
 
@@ -52,12 +52,8 @@ type ListLedgersOutput struct {
 	Ledgers []types.LedgerSummary
 
 	// A pagination token, indicating whether there are more results available:
-	// - If
-	// NextToken is empty, then the last page of results has been processed and there
-	// are no more results to be retrieved.
-	// - If NextToken is not empty, then there are
-	// more results available. To retrieve the next page of results, use the value of
-	// NextToken in a subsequent ListLedgers call.
+	//     - If NextToken is empty, then the last page of results has been processed and there are no more results to be retrieved.
+	//     - If NextToken is not empty, then there are more results available. To retrieve the next page of results, use the value of NextToken in a subsequent ListLedgers call.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -139,8 +135,8 @@ type ListLedgersPaginatorOptions struct {
 	// actual number of results returned might be fewer.)
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

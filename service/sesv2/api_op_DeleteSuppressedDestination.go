@@ -26,7 +26,8 @@ func (c *Client) DeleteSuppressedDestination(ctx context.Context, params *Delete
 	return out, nil
 }
 
-// A request to remove an email address from the suppression list for your account.
+// A request to remove an email address from the suppression list for your
+// account.
 type DeleteSuppressedDestinationInput struct {
 
 	// The suppressed email destination to remove from the account suppression list.
@@ -37,8 +38,8 @@ type DeleteSuppressedDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type DeleteSuppressedDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

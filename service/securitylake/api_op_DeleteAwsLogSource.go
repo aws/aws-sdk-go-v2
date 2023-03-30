@@ -66,8 +66,8 @@ type DeleteAwsLogSourceInput struct {
 
 type DeleteAwsLogSourceOutput struct {
 
-	// Deletion of the Amazon Web Services sources failed as the account is not a part
-	// of the organization.
+	// Deletion of the Amazon Web Services sources failed as the account is not a
+	// part of the organization.
 	Failed []string
 
 	// Deletion of the Amazon Web Services sources is in progress.

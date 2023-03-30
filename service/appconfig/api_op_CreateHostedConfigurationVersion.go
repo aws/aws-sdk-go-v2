@@ -44,8 +44,8 @@ type CreateHostedConfigurationVersionInput struct {
 	Content []byte
 
 	// A standard MIME type describing the format of the configuration content. For
-	// more information, see Content-Type
-	// (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
+	// more information, see Content-Type (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17)
+	// .
 	//
 	// This member is required.
 	ContentType *string
@@ -60,9 +60,9 @@ type CreateHostedConfigurationVersionInput struct {
 	// version.
 	LatestVersionNumber *int32
 
-	// An optional, user-defined label for the AppConfig hosted configuration version.
-	// This value must contain at least one non-numeric character. For example,
-	// "v2.2.0".
+	// An optional, user-defined label for the AppConfig hosted configuration
+	// version. This value must contain at least one non-numeric character. For
+	// example, "v2.2.0".
 	VersionLabel *string
 
 	noSmithyDocumentSerde
@@ -80,8 +80,8 @@ type CreateHostedConfigurationVersionOutput struct {
 	Content []byte
 
 	// A standard MIME type describing the format of the configuration content. For
-	// more information, see Content-Type
-	// (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
+	// more information, see Content-Type (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17)
+	// .
 	ContentType *string
 
 	// A description of the configuration.

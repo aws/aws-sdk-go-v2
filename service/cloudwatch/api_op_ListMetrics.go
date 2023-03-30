@@ -12,27 +12,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the specified metrics. You can use the returned metrics with GetMetricData
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html)
-// or GetMetricStatistics
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html)
+// List the specified metrics. You can use the returned metrics with GetMetricData (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html)
+// or GetMetricStatistics (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html)
 // to get statistical data. Up to 500 results are returned for any one call. To
 // retrieve additional results, use the returned token with subsequent calls. After
 // you create a metric, allow up to 15 minutes for the metric to appear. To see
-// metric statistics sooner, use GetMetricData
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html)
-// or GetMetricStatistics
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html).
-// If you are using CloudWatch cross-account observability, you can use this
+// metric statistics sooner, use GetMetricData (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html)
+// or GetMetricStatistics (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html)
+// . If you are using CloudWatch cross-account observability, you can use this
 // operation in a monitoring account and view metrics from the linked source
-// accounts. For more information, see CloudWatch cross-account observability
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html).
-// ListMetrics doesn't return information about metrics if those metrics haven't
-// reported data in the past two weeks. To retrieve those metrics, use
-// GetMetricData
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html)
-// or GetMetricStatistics
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html).
+// accounts. For more information, see CloudWatch cross-account observability (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html)
+// . ListMetrics doesn't return information about metrics if those metrics
+// haven't reported data in the past two weeks. To retrieve those metrics, use
+// GetMetricData (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html)
+// or GetMetricStatistics (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html)
+// .
 func (c *Client) ListMetrics(ctx context.Context, params *ListMetricsInput, optFns ...func(*Options)) (*ListMetricsOutput, error) {
 	if params == nil {
 		params = &ListMetricsInput{}
@@ -50,20 +44,21 @@ func (c *Client) ListMetrics(ctx context.Context, params *ListMetricsInput, optF
 
 type ListMetricsInput struct {
 
-	// The dimensions to filter against. Only the dimensions that match exactly will be
-	// returned.
+	// The dimensions to filter against. Only the dimensions that match exactly will
+	// be returned.
 	Dimensions []types.DimensionFilter
 
-	// If you are using this operation in a monitoring account, specify true to include
-	// metrics from source accounts in the returned data. The default is false.
+	// If you are using this operation in a monitoring account, specify true to
+	// include metrics from source accounts in the returned data. The default is false
+	// .
 	IncludeLinkedAccounts bool
 
-	// The name of the metric to filter against. Only the metrics with names that match
-	// exactly will be returned.
+	// The name of the metric to filter against. Only the metrics with names that
+	// match exactly will be returned.
 	MetricName *string
 
-	// The metric namespace to filter against. Only the namespace that matches exactly
-	// will be returned.
+	// The metric namespace to filter against. Only the namespace that matches
+	// exactly will be returned.
 	Namespace *string
 
 	// The token returned by a previous call to indicate that there is more data
@@ -72,7 +67,7 @@ type ListMetricsInput struct {
 
 	// When you use this operation in a monitoring account, use this field to return
 	// metrics only from one source account. To do so, specify that source account ID
-	// in this field, and also specify true for IncludeLinkedAccounts.
+	// in this field, and also specify true  for IncludeLinkedAccounts .
 	OwningAccount *string
 
 	// To filter the results to show only metrics that have had data points published
@@ -94,10 +89,10 @@ type ListMetricsOutput struct {
 	// The token that marks the start of the next batch of returned results.
 	NextToken *string
 
-	// If you are using this operation in a monitoring account, this array contains the
-	// account IDs of the source accounts where the metrics in the returned data are
-	// from. This field is a 1:1 mapping between each metric that is returned and the
-	// ID of the owning account.
+	// If you are using this operation in a monitoring account, this array contains
+	// the account IDs of the source accounts where the metrics in the returned data
+	// are from. This field is a 1:1 mapping between each metric that is returned and
+	// the ID of the owning account.
 	OwningAccounts []string
 
 	// Metadata pertaining to the operation's result.
@@ -178,8 +173,8 @@ var _ ListMetricsAPIClient = (*Client)(nil)
 
 // ListMetricsPaginatorOptions is the paginator options for ListMetrics
 type ListMetricsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

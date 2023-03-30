@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new configuration set. After you create the configuration set, you can
-// add one or more event destinations to it.
+// Create a new configuration set. After you create the configuration set, you
+// can add one or more event destinations to it.
 func (c *Client) CreateConfigurationSet(ctx context.Context, params *CreateConfigurationSetInput, optFns ...func(*Options)) (*CreateConfigurationSetOutput, error) {
 	if params == nil {
 		params = &CreateConfigurationSetInput{}

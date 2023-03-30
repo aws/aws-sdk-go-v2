@@ -44,12 +44,12 @@ type UpdateGroupInput struct {
 	Description *string
 
 	// The new precedence value for the group. For more information about this
-	// parameter, see CreateGroup
-	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_CreateGroup.html).
+	// parameter, see CreateGroup (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_CreateGroup.html)
+	// .
 	Precedence *int32
 
-	// The new role Amazon Resource Name (ARN) for the group. This is used for setting
-	// the cognito:roles and cognito:preferred_role claims in the token.
+	// The new role Amazon Resource Name (ARN) for the group. This is used for
+	// setting the cognito:roles  and cognito:preferred_role  claims in the token.
 	RoleArn *string
 
 	noSmithyDocumentSerde

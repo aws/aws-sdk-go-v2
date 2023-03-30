@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a GraphqlApi object.
+// Updates a GraphqlApi  object.
 func (c *Client) UpdateGraphqlApi(ctx context.Context, params *UpdateGraphqlApiInput, optFns ...func(*Options)) (*UpdateGraphqlApiOutput, error) {
 	if params == nil {
 		params = &UpdateGraphqlApiInput{}
@@ -34,30 +34,30 @@ type UpdateGraphqlApiInput struct {
 	// This member is required.
 	ApiId *string
 
-	// The new name for the GraphqlApi object.
+	// The new name for the GraphqlApi  object.
 	//
 	// This member is required.
 	Name *string
 
-	// A list of additional authentication providers for the GraphqlApi API.
+	// A list of additional authentication providers for the GraphqlApi  API.
 	AdditionalAuthenticationProviders []types.AdditionalAuthenticationProvider
 
-	// The new authentication type for the GraphqlApi object.
+	// The new authentication type for the GraphqlApi  object.
 	AuthenticationType types.AuthenticationType
 
 	// Configuration for Lambda function authorization.
 	LambdaAuthorizerConfig *types.LambdaAuthorizerConfig
 
-	// The Amazon CloudWatch Logs configuration for the GraphqlApi object.
+	// The Amazon CloudWatch Logs configuration for the GraphqlApi  object.
 	LogConfig *types.LogConfig
 
-	// The OpenID Connect configuration for the GraphqlApi object.
+	// The OpenID Connect configuration for the GraphqlApi  object.
 	OpenIDConnectConfig *types.OpenIDConnectConfig
 
-	// The new Amazon Cognito user pool configuration for the ~GraphqlApi object.
+	// The new Amazon Cognito user pool configuration for the ~GraphqlApi  object.
 	UserPoolConfig *types.UserPoolConfig
 
-	// A flag indicating whether to use X-Ray tracing for the GraphqlApi.
+	// A flag indicating whether to use X-Ray tracing for the GraphqlApi .
 	XrayEnabled bool
 
 	noSmithyDocumentSerde
@@ -65,7 +65,7 @@ type UpdateGraphqlApiInput struct {
 
 type UpdateGraphqlApiOutput struct {
 
-	// The updated GraphqlApi object.
+	// The updated GraphqlApi  object.
 	GraphqlApi *types.GraphqlApi
 
 	// Metadata pertaining to the operation's result.

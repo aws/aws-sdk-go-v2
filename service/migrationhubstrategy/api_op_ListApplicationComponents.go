@@ -33,10 +33,10 @@ type ListApplicationComponentsInput struct {
 	// Criteria for filtering the list of application components.
 	ApplicationComponentCriteria types.ApplicationComponentCriteria
 
-	// Specify the value based on the application component criteria type. For example,
-	// if applicationComponentCriteria is set to SERVER_ID and filterValue is set to
-	// server1, then ListApplicationComponents returns all the application components
-	// running on server1.
+	// Specify the value based on the application component criteria type. For
+	// example, if applicationComponentCriteria  is set to SERVER_ID  and filterValue
+	// is set to server1 , then ListApplicationComponents returns all the application
+	// components running on server1.
 	FilterValue *string
 
 	// The group ID specified in to filter on.
@@ -46,13 +46,13 @@ type ListApplicationComponentsInput struct {
 	// 100.
 	MaxResults *int32
 
-	// The token from a previous call that you use to retrieve the next set of results.
-	// For example, if a previous call to this action returned 100 items, but you set
-	// maxResults to 10. You'll receive a set of 10 results along with a token. You
-	// then use the returned token to retrieve the next set of 10.
+	// The token from a previous call that you use to retrieve the next set of
+	// results. For example, if a previous call to this action returned 100 items, but
+	// you set maxResults to 10. You'll receive a set of 10 results along with a
+	// token. You then use the returned token to retrieve the next set of 10.
 	NextToken *string
 
-	// Specifies whether to sort by ascending (ASC) or descending (DESC) order.
+	// Specifies whether to sort by ascending ( ASC ) or descending ( DESC ) order.
 	Sort types.SortOrder
 
 	noSmithyDocumentSerde
@@ -149,8 +149,8 @@ type ListApplicationComponentsPaginatorOptions struct {
 	// 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

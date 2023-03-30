@@ -33,9 +33,9 @@ const (
 	DataSetTypeUsSalesAndUseTaxRecords                      DataSetType = "us_sales_and_use_tax_records"
 )
 
-// Values returns all known values for DataSetType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DataSetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DataSetType) Values() []DataSetType {
 	return []DataSetType{
 		"customer_subscriber_hourly_monthly_subscriptions",

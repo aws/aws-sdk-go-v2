@@ -34,7 +34,8 @@ type UpdateDirectorySetupInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// The type of update that needs to be performed on the directory. For example, OS.
+	// The type of update that needs to be performed on the directory. For example,
+	// OS.
 	//
 	// This member is required.
 	UpdateType types.UpdateType

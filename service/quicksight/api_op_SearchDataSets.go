@@ -52,7 +52,7 @@ type SearchDataSetsInput struct {
 
 type SearchDataSetsOutput struct {
 
-	// A DataSetSummaries object that returns a summary of a dataset.
+	// A DataSetSummaries  object that returns a summary of a dataset.
 	DataSetSummaries []types.DataSetSummary
 
 	// A pagination token that can be used in a subsequent request.
@@ -146,8 +146,8 @@ type SearchDataSetsPaginatorOptions struct {
 	// The maximum number of results to be returned per request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

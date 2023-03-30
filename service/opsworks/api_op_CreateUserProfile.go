@@ -12,8 +12,8 @@ import (
 
 // Creates a new user profile. Required Permissions: To use this action, an IAM
 // user must have an attached policy that explicitly grants permissions. For more
-// information about user permissions, see Managing User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// information about user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) CreateUserProfile(ctx context.Context, params *CreateUserProfileInput, optFns ...func(*Options)) (*CreateUserProfileOutput, error) {
 	if params == nil {
 		params = &CreateUserProfileInput{}
@@ -36,25 +36,25 @@ type CreateUserProfileInput struct {
 	// This member is required.
 	IamUserArn *string
 
-	// Whether users can specify their own SSH public key through the My Settings page.
-	// For more information, see Setting an IAM User's Public SSH Key
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html).
+	// Whether users can specify their own SSH public key through the My Settings
+	// page. For more information, see Setting an IAM User's Public SSH Key (https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html)
+	// .
 	AllowSelfManagement *bool
 
 	// The user's public SSH key.
 	SshPublicKey *string
 
-	// The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9], '-',
-	// and '_'. If the specified name includes other punctuation marks, AWS OpsWorks
-	// Stacks removes them. For example, my.name will be changed to myname. If you do
-	// not specify an SSH user name, AWS OpsWorks Stacks generates one from the IAM
-	// user name.
+	// The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9],
+	// '-', and '_'. If the specified name includes other punctuation marks, AWS
+	// OpsWorks Stacks removes them. For example, my.name  will be changed to myname.
+	// If you do not specify an SSH user name, AWS OpsWorks Stacks generates one from
+	// the IAM user name.
 	SshUsername *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a CreateUserProfile request.
+// Contains the response to a CreateUserProfile  request.
 type CreateUserProfileOutput struct {
 
 	// The user's IAM ARN.

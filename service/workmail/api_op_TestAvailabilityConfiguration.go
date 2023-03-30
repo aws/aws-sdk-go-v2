@@ -15,10 +15,10 @@ import (
 // For EWS, it verifies the provided credentials can be used to successfully log
 // in. For Lambda, it verifies that the Lambda function can be invoked and that the
 // resource access policy was configured to deny anonymous access. An anonymous
-// invocation is one done without providing either a SourceArn or SourceAccount
-// header. The request must contain either one provider definition (EwsProvider or
-// LambdaProvider) or the DomainName parameter. If the DomainName parameter is
-// provided, the configuration stored under the DomainName will be tested.
+// invocation is one done without providing either a SourceArn  or SourceAccount
+// header. The request must contain either one provider definition ( EwsProvider
+// or LambdaProvider ) or the DomainName  parameter. If the DomainName parameter
+// is provided, the configuration stored under the DomainName  will be tested.
 func (c *Client) TestAvailabilityConfiguration(ctx context.Context, params *TestAvailabilityConfigurationInput, optFns ...func(*Options)) (*TestAvailabilityConfigurationOutput, error) {
 	if params == nil {
 		params = &TestAvailabilityConfigurationInput{}
@@ -45,8 +45,8 @@ type TestAvailabilityConfigurationInput struct {
 	// availability provider associated to this domain name will be tested.
 	DomainName *string
 
-	// Describes an EWS based availability provider. This is only used as input to the
-	// service.
+	// Describes an EWS based availability provider. This is only used as input to
+	// the service.
 	EwsProvider *types.EwsAvailabilityProvider
 
 	// Describes a Lambda based availability provider.
@@ -57,7 +57,7 @@ type TestAvailabilityConfigurationInput struct {
 
 type TestAvailabilityConfigurationOutput struct {
 
-	// String containing the reason for a failed test if TestPassed is false.
+	// String containing the reason for a failed test if TestPassed  is false.
 	FailureReason *string
 
 	// Boolean indicating whether the test passed or failed.

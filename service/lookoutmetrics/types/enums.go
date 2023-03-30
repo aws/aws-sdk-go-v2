@@ -28,9 +28,9 @@ const (
 	AlertStatusInactive AlertStatus = "INACTIVE"
 )
 
-// Values returns all known values for AlertStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AlertStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AlertStatus) Values() []AlertStatus {
 	return []AlertStatus{
 		"ACTIVE",
@@ -46,9 +46,9 @@ const (
 	AlertTypeLambda AlertType = "LAMBDA"
 )
 
-// Values returns all known values for AlertType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for AlertType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AlertType) Values() []AlertType {
 	return []AlertType{
 		"SNS",
@@ -119,8 +119,8 @@ const (
 	AnomalyDetectorStatusDeactivating       AnomalyDetectorStatus = "DEACTIVATING"
 )
 
-// Values returns all known values for AnomalyDetectorStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AnomalyDetectorStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AnomalyDetectorStatus) Values() []AnomalyDetectorStatus {
 	return []AnomalyDetectorStatus{
@@ -192,8 +192,8 @@ const (
 	DataQualityMetricTypeBacktestInferenceDataEndTimeStamp   DataQualityMetricType = "BACKTEST_INFERENCE_DATA_END_TIME_STAMP"
 )
 
-// Values returns all known values for DataQualityMetricType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DataQualityMetricType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DataQualityMetricType) Values() []DataQualityMetricType {
 	return []DataQualityMetricType{
@@ -236,9 +236,9 @@ const (
 	FrequencyPt5m  Frequency = "PT5M"
 )
 
-// Values returns all known values for Frequency. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Frequency. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Frequency) Values() []Frequency {
 	return []Frequency{
 		"P1D",
@@ -293,9 +293,9 @@ const (
 	SnsFormatJson      SnsFormat = "JSON"
 )
 
-// Values returns all known values for SnsFormat. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SnsFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SnsFormat) Values() []SnsFormat {
 	return []SnsFormat{
 		"LONG_TEXT",

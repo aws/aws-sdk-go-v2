@@ -88,9 +88,9 @@ func (e *InvalidArgumentException) ErrorCode() string {
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Status Code: 400, Caller used wrong endpoint to write data to a stream. On
-// receiving such an exception, the user must call GetDataEndpoint with AccessMode
-// set to "READ" and use the endpoint Kinesis Video returns in the next GetMedia
-// call.
+// receiving such an exception, the user must call GetDataEndpoint  with
+// AccessMode set to "READ" and use the endpoint Kinesis Video returns in the next
+// GetMedia call.
 type InvalidEndpointException struct {
 	Message *string
 

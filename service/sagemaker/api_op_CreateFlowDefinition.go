@@ -46,14 +46,16 @@ type CreateFlowDefinitionInput struct {
 	// This member is required.
 	OutputConfig *types.FlowDefinitionOutputConfig
 
-	// The Amazon Resource Name (ARN) of the role needed to call other services on your
-	// behalf. For example,
-	// arn:aws:iam::1234567890:role/service-role/AmazonSageMaker-ExecutionRole-20180111T151298.
+	// The Amazon Resource Name (ARN) of the role needed to call other services on
+	// your behalf. For example,
+	// arn:aws:iam::1234567890:role/service-role/AmazonSageMaker-ExecutionRole-20180111T151298
+	// .
 	//
 	// This member is required.
 	RoleArn *string
 
-	// An object containing information about the events that trigger a human workflow.
+	// An object containing information about the events that trigger a human
+	// workflow.
 	HumanLoopActivationConfig *types.HumanLoopActivationConfig
 
 	// Container for configuring the source of human task requests. Use to specify if

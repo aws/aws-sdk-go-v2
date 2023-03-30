@@ -14,9 +14,9 @@ import (
 // Attaches a block storage disk to a running or stopped Lightsail instance and
 // exposes it to the instance with the specified disk name. The attach disk
 // operation supports tag-based access control via resource tags applied to the
-// resource identified by disk name. For more information, see the Amazon Lightsail
-// Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// resource identified by disk name . For more information, see the Amazon
+// Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) AttachDisk(ctx context.Context, params *AttachDiskInput, optFns ...func(*Options)) (*AttachDiskOutput, error) {
 	if params == nil {
 		params = &AttachDiskInput{}
@@ -34,12 +34,12 @@ func (c *Client) AttachDisk(ctx context.Context, params *AttachDiskInput, optFns
 
 type AttachDiskInput struct {
 
-	// The unique Lightsail disk name (e.g., my-disk).
+	// The unique Lightsail disk name (e.g., my-disk ).
 	//
 	// This member is required.
 	DiskName *string
 
-	// The disk path to expose to the instance (e.g., /dev/xvdf).
+	// The disk path to expose to the instance (e.g., /dev/xvdf ).
 	//
 	// This member is required.
 	DiskPath *string
@@ -49,8 +49,8 @@ type AttachDiskInput struct {
 	// This member is required.
 	InstanceName *string
 
-	// A Boolean value used to determine the automatic mounting of a storage volume to
-	// a virtual computer. The default value is False. This value only applies to
+	// A Boolean value used to determine the automatic mounting of a storage volume
+	// to a virtual computer. The default value is False. This value only applies to
 	// Lightsail for Research resources.
 	AutoMounting *bool
 

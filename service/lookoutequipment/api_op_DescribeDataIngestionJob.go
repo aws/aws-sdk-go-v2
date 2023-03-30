@@ -79,11 +79,11 @@ type DescribeDataIngestionJobOutput struct {
 	// Indicates the job ID of the data ingestion job.
 	JobId *string
 
-	// The Amazon Resource Name (ARN) of an IAM role with permission to access the data
-	// source being ingested.
+	// The Amazon Resource Name (ARN) of an IAM role with permission to access the
+	// data source being ingested.
 	RoleArn *string
 
-	// Indicates the status of the DataIngestionJob operation.
+	// Indicates the status of the DataIngestionJob  operation.
 	Status types.IngestionJobStatus
 
 	// Provides details about status of the ingestion job that is currently in

@@ -13,21 +13,17 @@ import (
 )
 
 // Returns all tags on the specified KMS key. For general information about tags,
-// including the format and syntax, see Tagging Amazon Web Services resources
-// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-// Web Services General Reference. For information about using tags in KMS, see
-// Tagging keys
-// (https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html).
-// Cross-account use: No. You cannot perform this operation on a KMS key in a
+// including the format and syntax, see Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+// in the Amazon Web Services General Reference. For information about using tags
+// in KMS, see Tagging keys (https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html)
+// . Cross-account use: No. You cannot perform this operation on a KMS key in a
 // different Amazon Web Services account. Required permissions:
-// kms:ListResourceTags
-// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// kms:ListResourceTags (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
-// - CreateKey
-// - ReplicateKey
-// - TagResource
-// -
-// UntagResource
+//   - CreateKey
+//   - ReplicateKey
+//   - TagResource
+//   - UntagResource
 func (c *Client) ListResourceTags(ctx context.Context, params *ListResourceTagsInput, optFns ...func(*Options)) (*ListResourceTagsOutput, error) {
 	if params == nil {
 		params = &ListResourceTagsInput{}
@@ -47,12 +43,10 @@ type ListResourceTagsInput struct {
 
 	// Gets tags on the specified KMS key. Specify the key ID or key ARN of the KMS
 	// key. For example:
-	// - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	// - Key ARN:
-	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//     - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//     - Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	// To
-	// get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey.
+	// To get the key ID and key ARN for a KMS key, use ListKeys  or DescribeKey .
 	//
 	// This member is required.
 	KeyId *string
@@ -65,9 +59,9 @@ type ListResourceTagsInput struct {
 	Limit *int32
 
 	// Use this parameter in a subsequent request after you receive a response with
-	// truncated results. Set it to the value of NextMarker from the truncated response
-	// you just received. Do not attempt to construct this value. Use only the value of
-	// NextMarker from the truncated response you just received.
+	// truncated results. Set it to the value of NextMarker from the truncated
+	// response you just received. Do not attempt to construct this value. Use only the
+	// value of NextMarker  from the truncated response you just received.
 	Marker *string
 
 	noSmithyDocumentSerde
@@ -82,15 +76,14 @@ type ListResourceTagsOutput struct {
 
 	// A list of tags. Each tag consists of a tag key and a tag value. Tagging or
 	// untagging a KMS key can allow or deny permission to the KMS key. For details,
-	// see ABAC for KMS
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the Key
-	// Management Service Developer Guide.
+	// see ABAC for KMS (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html)
+	// in the Key Management Service Developer Guide.
 	Tags []types.Tag
 
-	// A flag that indicates whether there are more items in the list. When this value
-	// is true, the list in this response is truncated. To get more items, pass the
-	// value of the NextMarker element in thisresponse to the Marker parameter in a
-	// subsequent request.
+	// A flag that indicates whether there are more items in the list. When this
+	// value is true, the list in this response is truncated. To get more items, pass
+	// the value of the NextMarker  element in thisresponse to the Marker parameter
+	// in a subsequent request.
 	Truncated bool
 
 	// Metadata pertaining to the operation's result.
@@ -179,8 +172,8 @@ type ListResourceTagsPaginatorOptions struct {
 	// to 50.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

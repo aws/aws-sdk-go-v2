@@ -31,8 +31,8 @@ func (c *Client) DeleteResourcePolicyStatement(ctx context.Context, params *Dele
 
 type DeleteResourcePolicyStatementInput struct {
 
-	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
-	// is attached to.
+	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource
+	// policy is attached to.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -53,8 +53,8 @@ type DeleteResourcePolicyStatementInput struct {
 
 type DeleteResourcePolicyStatementOutput struct {
 
-	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
-	// statement was removed from.
+	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource
+	// policy statement was removed from.
 	ResourceArn *string
 
 	// The current revision of the resource policy. Use the revision ID to make sure

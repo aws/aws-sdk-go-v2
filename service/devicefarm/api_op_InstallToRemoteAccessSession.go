@@ -29,8 +29,8 @@ func (c *Client) InstallToRemoteAccessSession(ctx context.Context, params *Insta
 	return out, nil
 }
 
-// Represents the request to install an Android application (in .apk format) or an
-// iOS application (in .ipa format) as part of a remote access session.
+// Represents the request to install an Android application (in .apk format) or
+// an iOS application (in .ipa format) as part of a remote access session.
 type InstallToRemoteAccessSessionInput struct {
 
 	// The ARN of the app about which you are requesting information.
@@ -38,8 +38,8 @@ type InstallToRemoteAccessSessionInput struct {
 	// This member is required.
 	AppArn *string
 
-	// The Amazon Resource Name (ARN) of the remote access session about which you are
-	// requesting information.
+	// The Amazon Resource Name (ARN) of the remote access session about which you
+	// are requesting information.
 	//
 	// This member is required.
 	RemoteAccessSessionArn *string
@@ -47,8 +47,8 @@ type InstallToRemoteAccessSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the response from the server after AWS Device Farm makes a request to
-// install to a remote access session.
+// Represents the response from the server after AWS Device Farm makes a request
+// to install to a remote access session.
 type InstallToRemoteAccessSessionOutput struct {
 
 	// An app to upload or that has been uploaded.

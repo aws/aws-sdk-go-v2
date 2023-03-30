@@ -33,14 +33,11 @@ type ActivityListItem struct {
 	CreationDate *time.Time
 
 	// The name of the activity. A name must not contain:
-	// - white space
-	// - brackets < >
-	// { } [ ]
-	// - wildcard characters ? *
-	// - special characters " # % \ ^ | ~ ` $ & , ; :
-	// /
-	// - control characters (U+0000-001F, U+007F-009F)
-	//
+	//     - white space
+	//     - brackets < > { } [ ]
+	//     - wildcard characters ? *
+	//     - special characters " # % \ ^ | ~ ` $ & , ; : /
+	//     - control characters ( U+0000-001F , U+007F-009F )
 	// To enable logging with
 	// CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
 	//
@@ -90,8 +87,8 @@ type ActivityScheduleFailedEventDetails struct {
 // Contains details about the start of an activity during an execution.
 type ActivityStartedEventDetails struct {
 
-	// The name of the worker that the task is assigned to. These names are provided by
-	// the workers when calling GetActivityTask.
+	// The name of the worker that the task is assigned to. These names are provided
+	// by the workers when calling GetActivityTask .
 	WorkerName *string
 
 	noSmithyDocumentSerde
@@ -138,8 +135,8 @@ type BillingDetails struct {
 // Provides details about execution input or output.
 type CloudWatchEventsExecutionDataDetails struct {
 
-	// Indicates whether input or output was included in the response. Always true for
-	// API calls.
+	// Indicates whether input or output was included in the response. Always true
+	// for API calls.
 	Included bool
 
 	noSmithyDocumentSerde
@@ -147,8 +144,8 @@ type CloudWatchEventsExecutionDataDetails struct {
 
 type CloudWatchLogsLogGroup struct {
 
-	// The ARN of the the CloudWatch log group to which you want your logs emitted to.
-	// The ARN must end with :*
+	// The ARN of the the CloudWatch log group to which you want your logs emitted
+	// to. The ARN must end with :*
 	LogGroupArn *string
 
 	noSmithyDocumentSerde
@@ -187,14 +184,11 @@ type ExecutionListItem struct {
 	ExecutionArn *string
 
 	// The name of the execution. A name must not contain:
-	// - white space
-	// - brackets < >
-	// { } [ ]
-	// - wildcard characters ? *
-	// - special characters " # % \ ^ | ~ ` $ & , ; :
-	// /
-	// - control characters (U+0000-001F, U+007F-009F)
-	//
+	//     - white space
+	//     - brackets < > { } [ ]
+	//     - wildcard characters ? *
+	//     - special characters " # % \ ^ | ~ ` $ & , ; : /
+	//     - control characters ( U+0000-001F , U+007F-009F )
 	// To enable logging with
 	// CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
 	//
@@ -216,15 +210,15 @@ type ExecutionListItem struct {
 	// This member is required.
 	Status ExecutionStatus
 
-	// The total number of items processed in a child workflow execution. This field is
-	// returned only if mapRunArn was specified in the ListExecutions API action. If
-	// stateMachineArn was specified in ListExecutions, the itemCount field isn't
-	// returned.
+	// The total number of items processed in a child workflow execution. This field
+	// is returned only if mapRunArn  was specified in the ListExecutions API action.
+	// If stateMachineArn  was specified in ListExecutions , the itemCount field
+	// isn't returned.
 	ItemCount *int32
 
 	// The Amazon Resource Name (ARN) of a Map Run. This field is returned only if
-	// mapRunArn was specified in the ListExecutions API action. If stateMachineArn was
-	// specified in ListExecutions, the mapRunArn isn't returned.
+	// mapRunArn was specified in the ListExecutions  API action. If stateMachineArn
+	// was specified in ListExecutions , the mapRunArn  isn't returned.
 	MapRunArn *string
 
 	// If the execution already ended, the date the execution stopped.
@@ -262,7 +256,8 @@ type ExecutionSucceededEventDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about the execution timeout that occurred during the execution.
+// Contains details about the execution timeout that occurred during the
+// execution.
 type ExecutionTimedOutEventDetails struct {
 
 	// A more detailed explanation of the cause of the timeout.
@@ -324,7 +319,8 @@ type HistoryEvent struct {
 	// Contains details about the successful termination of the execution.
 	ExecutionSucceededEventDetails *ExecutionSucceededEventDetails
 
-	// Contains details about the execution timeout that occurred during the execution.
+	// Contains details about the execution timeout that occurred during the
+	// execution.
 	ExecutionTimedOutEventDetails *ExecutionTimedOutEventDetails
 
 	// Contains details about a Lambda function that failed during an execution.
@@ -341,8 +337,8 @@ type HistoryEvent struct {
 	// execution.
 	LambdaFunctionStartFailedEventDetails *LambdaFunctionStartFailedEventDetails
 
-	// Contains details about a Lambda function that terminated successfully during an
-	// execution.
+	// Contains details about a Lambda function that terminated successfully during
+	// an execution.
 	LambdaFunctionSucceededEventDetails *LambdaFunctionSucceededEventDetails
 
 	// Contains details about a Lambda function timeout that occurred during an
@@ -364,7 +360,7 @@ type HistoryEvent struct {
 	// Contains error and cause details about a Map Run that failed.
 	MapRunFailedEventDetails *MapRunFailedEventDetails
 
-	// Contains details, such as mapRunArn, and the start date and time of a Map Run.
+	// Contains details, such as mapRunArn , and the start date and time of a Map Run.
 	// mapRunArn is the Amazon Resource Name (ARN) of the Map Run that was started.
 	MapRunStartedEventDetails *MapRunStartedEventDetails
 
@@ -479,8 +475,8 @@ type LambdaFunctionStartFailedEventDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about a Lambda function that successfully terminated during an
-// execution.
+// Contains details about a Lambda function that successfully terminated during
+// an execution.
 type LambdaFunctionSucceededEventDetails struct {
 
 	// The JSON data output by the Lambda function. Length constraints apply to the
@@ -509,19 +505,18 @@ type LambdaFunctionTimedOutEventDetails struct {
 type LogDestination struct {
 
 	// An object describing a CloudWatch log group. For more information, see
-	// AWS::Logs::LogGroup
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html)
+	// AWS::Logs::LogGroup (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html)
 	// in the CloudFormation User Guide.
 	CloudWatchLogsLogGroup *CloudWatchLogsLogGroup
 
 	noSmithyDocumentSerde
 }
 
-// The LoggingConfiguration data type is used to set CloudWatch Logs options.
+// The LoggingConfiguration  data type is used to set CloudWatch Logs options.
 type LoggingConfiguration struct {
 
 	// An array of objects that describes where your execution history events will be
-	// logged. Limited to size 1. Required, if your log level is not set to OFF.
+	// logged. Limited to size 1. Required, if your log level is not set to OFF .
 	Destinations []LogDestination
 
 	// Determines whether execution data is included in your log. When set to false,
@@ -550,9 +545,9 @@ type MapIterationEventDetails struct {
 // Run.
 type MapRunExecutionCounts struct {
 
-	// The total number of child workflow executions that were started by a Map Run and
-	// were running, but were either stopped by the user or by Step Functions because
-	// the Map Run failed.
+	// The total number of child workflow executions that were started by a Map Run
+	// and were running, but were either stopped by the user or by Step Functions
+	// because the Map Run failed.
 	//
 	// This member is required.
 	Aborted int64
@@ -570,27 +565,26 @@ type MapRunExecutionCounts struct {
 	Pending int64
 
 	// Returns the count of child workflow executions whose results were written by
-	// ResultWriter. For more information, see ResultWriter
-	// (https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html)
+	// ResultWriter . For more information, see ResultWriter (https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html)
 	// in the Step Functions Developer Guide.
 	//
 	// This member is required.
 	ResultsWritten int64
 
-	// The total number of child workflow executions that were started by a Map Run and
-	// are currently in-progress.
+	// The total number of child workflow executions that were started by a Map Run
+	// and are currently in-progress.
 	//
 	// This member is required.
 	Running int64
 
-	// The total number of child workflow executions that were started by a Map Run and
-	// have completed successfully.
+	// The total number of child workflow executions that were started by a Map Run
+	// and have completed successfully.
 	//
 	// This member is required.
 	Succeeded int64
 
-	// The total number of child workflow executions that were started by a Map Run and
-	// have timed out.
+	// The total number of child workflow executions that were started by a Map Run
+	// and have timed out.
 	//
 	// This member is required.
 	TimedOut int64
@@ -638,16 +632,15 @@ type MapRunItemCounts struct {
 	// This member is required.
 	Pending int64
 
-	// Returns the count of items whose results were written by ResultWriter. For more
-	// information, see ResultWriter
-	// (https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html)
+	// Returns the count of items whose results were written by ResultWriter. For
+	// more information, see ResultWriter (https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html)
 	// in the Step Functions Developer Guide.
 	//
 	// This member is required.
 	ResultsWritten int64
 
-	// The total number of items being processed in child workflow executions that are
-	// currently in-progress.
+	// The total number of items being processed in child workflow executions that
+	// are currently in-progress.
 	//
 	// This member is required.
 	Running int64
@@ -658,14 +651,14 @@ type MapRunItemCounts struct {
 	// This member is required.
 	Succeeded int64
 
-	// The total number of items processed in child workflow executions that have timed
-	// out.
+	// The total number of items processed in child workflow executions that have
+	// timed out.
 	//
 	// This member is required.
 	TimedOut int64
 
-	// The total number of items processed in all the child workflow executions started
-	// by a Map Run.
+	// The total number of items processed in all the child workflow executions
+	// started by a Map Run.
 	//
 	// This member is required.
 	Total int64
@@ -676,7 +669,7 @@ type MapRunItemCounts struct {
 // Contains details about a specific Map Run.
 type MapRunListItem struct {
 
-	// The executionArn of the execution from which the Map Run was started.
+	// The executionArn  of the execution from which the Map Run was started.
 	//
 	// This member is required.
 	ExecutionArn *string
@@ -743,22 +736,19 @@ type StateEnteredEventDetails struct {
 type StateExitedEventDetails struct {
 
 	// The name of the state. A name must not contain:
-	// - white space
-	// - brackets < > { }
-	// [ ]
-	// - wildcard characters ? *
-	// - special characters " # % \ ^ | ~ ` $ & , ; : /
-	// -
-	// control characters (U+0000-001F, U+007F-009F)
-	//
-	// To enable logging with CloudWatch
-	// Logs, the name should only contain 0-9, A-Z, a-z, - and _.
+	//     - white space
+	//     - brackets < > { } [ ]
+	//     - wildcard characters ? *
+	//     - special characters " # % \ ^ | ~ ` $ & , ; : /
+	//     - control characters ( U+0000-001F , U+007F-009F )
+	// To enable logging with
+	// CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
 	//
 	// This member is required.
 	Name *string
 
-	// The JSON output data of the state. Length constraints apply to the payload size,
-	// and are expressed as bytes in UTF-8 encoding.
+	// The JSON output data of the state. Length constraints apply to the payload
+	// size, and are expressed as bytes in UTF-8 encoding.
 	Output *string
 
 	// Contains details about the output of an execution history event.
@@ -776,14 +766,11 @@ type StateMachineListItem struct {
 	CreationDate *time.Time
 
 	// The name of the state machine. A name must not contain:
-	// - white space
-	// - brackets
-	// < > { } [ ]
-	// - wildcard characters ? *
-	// - special characters " # % \ ^ | ~ ` $ & ,
-	// ; : /
-	// - control characters (U+0000-001F, U+007F-009F)
-	//
+	//     - white space
+	//     - brackets < > { } [ ]
+	//     - wildcard characters ? *
+	//     - special characters " # % \ ^ | ~ ` $ & , ; : /
+	//     - control characters ( U+0000-001F , U+007F-009F )
 	// To enable logging with
 	// CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
 	//
@@ -805,13 +792,11 @@ type StateMachineListItem struct {
 
 // Tags are key-value pairs that can be associated with Step Functions state
 // machines and activities. An array of key-value pairs. For more information, see
-// Using Cost Allocation Tags
-// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+// Using Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
 // in the Amazon Web Services Billing and Cost Management User Guide, and
-// Controlling Access Using IAM Tags
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html). Tags
-// may only contain Unicode letters, digits, white space, or these symbols: _ . : /
-// = + - @.
+// Controlling Access Using IAM Tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html)
+// . Tags may only contain Unicode letters, digits, white space, or these symbols:
+// _ . : / = + - @ .
 type Tag struct {
 
 	// The key of a tag.
@@ -988,9 +973,9 @@ type TaskSucceededEventDetails struct {
 	// This member is required.
 	ResourceType *string
 
-	// The full JSON response from a resource when a task has succeeded. This response
-	// becomes the output of the related task. Length constraints apply to the payload
-	// size, and are expressed as bytes in UTF-8 encoding.
+	// The full JSON response from a resource when a task has succeeded. This
+	// response becomes the output of the related task. Length constraints apply to the
+	// payload size, and are expressed as bytes in UTF-8 encoding.
 	Output *string
 
 	// Contains details about the output of an execution history event.
@@ -1021,11 +1006,11 @@ type TaskTimedOutEventDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Selects whether or not the state machine's X-Ray tracing is enabled. Default is
-// false
+// Selects whether or not the state machine's X-Ray tracing is enabled. Default
+// is false
 type TracingConfiguration struct {
 
-	// When set to true, X-Ray tracing is enabled.
+	// When set to true , X-Ray tracing is enabled.
 	Enabled bool
 
 	noSmithyDocumentSerde

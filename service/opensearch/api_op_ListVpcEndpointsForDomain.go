@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves all Amazon OpenSearch Service-managed VPC endpoints associated with a
-// particular domain.
+// Retrieves all Amazon OpenSearch Service-managed VPC endpoints associated with
+// a particular domain.
 func (c *Client) ListVpcEndpointsForDomain(ctx context.Context, params *ListVpcEndpointsForDomainInput, optFns ...func(*Options)) (*ListVpcEndpointsForDomainOutput, error) {
 	if params == nil {
 		params = &ListVpcEndpointsForDomainInput{}
@@ -35,9 +35,9 @@ type ListVpcEndpointsForDomainInput struct {
 	// This member is required.
 	DomainName *string
 
-	// If your initial ListEndpointsForDomain operation returns a nextToken, you can
-	// include the returned nextToken in subsequent ListEndpointsForDomain operations,
-	// which returns results in the next page.
+	// If your initial ListEndpointsForDomain  operation returns a nextToken, you can
+	// include the returned nextToken  in subsequent ListEndpointsForDomain
+	// operations, which returns results in the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,8 +45,8 @@ type ListVpcEndpointsForDomainInput struct {
 
 type ListVpcEndpointsForDomainOutput struct {
 
-	// When nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// When nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page.
 	//
 	// This member is required.

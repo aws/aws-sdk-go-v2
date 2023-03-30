@@ -30,7 +30,7 @@ func (c *Client) RemoveFromGlobalCluster(ctx context.Context, params *RemoveFrom
 	return out, nil
 }
 
-// Represents the input to RemoveFromGlobalCluster.
+// Represents the input to RemoveFromGlobalCluster .
 type RemoveFromGlobalClusterInput struct {
 
 	// The Amazon Resource Name (ARN) identifying the cluster that was detached from

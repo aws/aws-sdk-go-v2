@@ -37,20 +37,13 @@ type CreateAlgorithmInput struct {
 
 	// Specifies details about training jobs run by this algorithm, including the
 	// following:
-	// - The Amazon ECR path of the container and the version digest of the
-	// algorithm.
-	// - The hyperparameters that the algorithm supports.
-	// - The instance
-	// types that the algorithm supports for training.
-	// - Whether the algorithm supports
-	// distributed training.
-	// - The metrics that the algorithm emits to Amazon
-	// CloudWatch.
-	// - Which metrics that the algorithm emits can be used as the
-	// objective metric for hyperparameter tuning jobs.
-	// - The input channels that the
-	// algorithm supports for training data. For example, an algorithm might support
-	// train, validation, and test channels.
+	//     - The Amazon ECR path of the container and the version digest of the algorithm.
+	//     - The hyperparameters that the algorithm supports.
+	//     - The instance types that the algorithm supports for training.
+	//     - Whether the algorithm supports distributed training.
+	//     - The metrics that the algorithm emits to Amazon CloudWatch.
+	//     - Which metrics that the algorithm emits can be used as the objective metric for hyperparameter tuning jobs.
+	//     - The input channels that the algorithm supports for training data. For example, an algorithm might support train , validation , and test channels.
 	//
 	// This member is required.
 	TrainingSpecification *types.TrainingSpecification
@@ -58,24 +51,21 @@ type CreateAlgorithmInput struct {
 	// A description of the algorithm.
 	AlgorithmDescription *string
 
-	// Whether to certify the algorithm so that it can be listed in Amazon Web Services
-	// Marketplace.
+	// Whether to certify the algorithm so that it can be listed in Amazon Web
+	// Services Marketplace.
 	CertifyForMarketplace bool
 
 	// Specifies details about inference jobs that the algorithm runs, including the
 	// following:
-	// - The Amazon ECR paths of containers that contain the inference code
-	// and model artifacts.
-	// - The instance types that the algorithm supports for
-	// transform jobs and real-time endpoints used for inference.
-	// - The input and
-	// output content formats that the algorithm supports for inference.
+	//     - The Amazon ECR paths of containers that contain the inference code and model artifacts.
+	//     - The instance types that the algorithm supports for transform jobs and real-time endpoints used for inference.
+	//     - The input and output content formats that the algorithm supports for inference.
 	InferenceSpecification *types.InferenceSpecification
 
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or
-	// environment. For more information, see Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	// environment. For more information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// .
 	Tags []types.Tag
 
 	// Specifies configurations for one or more training jobs and that SageMaker runs

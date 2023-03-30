@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets an application registered with AWS Systems Manager for SAP. It also returns
-// the components of the application.
+// Gets an application registered with AWS Systems Manager for SAP. It also
+// returns the components of the application.
 func (c *Client) GetApplication(ctx context.Context, params *GetApplicationInput, optFns ...func(*Options)) (*GetApplicationOutput, error) {
 	if params == nil {
 		params = &GetApplicationInput{}

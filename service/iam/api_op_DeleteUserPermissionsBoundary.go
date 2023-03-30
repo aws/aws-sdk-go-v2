@@ -30,8 +30,8 @@ func (c *Client) DeleteUserPermissionsBoundary(ctx context.Context, params *Dele
 
 type DeleteUserPermissionsBoundaryInput struct {
 
-	// The name (friendly name, not ARN) of the IAM user from which you want to remove
-	// the permissions boundary.
+	// The name (friendly name, not ARN) of the IAM user from which you want to
+	// remove the permissions boundary.
 	//
 	// This member is required.
 	UserName *string

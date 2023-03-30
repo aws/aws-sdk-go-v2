@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists network sites. Add filters to your request to return a more specific list
-// of results. Use filters to match the status of the network site.
+// Lists network sites. Add filters to your request to return a more specific
+// list of results. Use filters to match the status of the network site.
 func (c *Client) ListNetworkSites(ctx context.Context, params *ListNetworkSitesInput, optFns ...func(*Options)) (*ListNetworkSitesOutput, error) {
 	if params == nil {
 		params = &ListNetworkSitesInput{}
@@ -38,13 +38,11 @@ type ListNetworkSitesInput struct {
 
 	// The filters. Add filters to your request to return a more specific list of
 	// results. Use filters to match the status of the network sites.
-	// - STATUS - The
-	// status (AVAILABLE | CREATED | DELETED | DEPROVISIONING | PROVISIONING).
+	//     - STATUS - The status ( AVAILABLE | CREATED | DELETED | DEPROVISIONING | PROVISIONING ).
 	//
-	// Filter
-	// values are case sensitive. If you specify multiple values for a filter, the
-	// values are joined with an OR, and the request returns all results that match any
-	// of the specified values.
+	// Filter values are case sensitive. If you specify multiple values for a filter,
+	// the values are joined with an OR, and the request returns all results that
+	// match any of the specified values.
 	Filters map[string][]string
 
 	// The maximum number of results to return.
@@ -146,8 +144,8 @@ type ListNetworkSitesPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

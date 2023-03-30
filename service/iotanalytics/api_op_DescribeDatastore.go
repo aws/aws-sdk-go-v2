@@ -34,9 +34,9 @@ type DescribeDatastoreInput struct {
 	// This member is required.
 	DatastoreName *string
 
-	// If true, additional statistical information about the data store is included in
-	// the response. This feature can't be used with a data store whose S3 storage is
-	// customer-managed.
+	// If true, additional statistical information about the data store is included
+	// in the response. This feature can't be used with a data store whose S3 storage
+	// is customer-managed.
 	IncludeStatistics bool
 
 	noSmithyDocumentSerde
@@ -48,7 +48,7 @@ type DescribeDatastoreOutput struct {
 	Datastore *types.Datastore
 
 	// Additional statistical information about the data store. Included if the
-	// includeStatistics parameter is set to true in the request.
+	// includeStatistics parameter is set to true  in the request.
 	Statistics *types.DatastoreStatistics
 
 	// Metadata pertaining to the operation's result.

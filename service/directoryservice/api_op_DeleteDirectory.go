@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Directory Service directory. Before you call DeleteDirectory, ensure
-// that all of the required permissions have been explicitly granted through a
-// policy. For details about what permissions are required to run the
+// Deletes an Directory Service directory. Before you call DeleteDirectory,
+// ensure that all of the required permissions have been explicitly granted through
+// a policy. For details about what permissions are required to run the
 // DeleteDirectory operation, see Directory Service API Permissions: Actions,
-// Resources, and Conditions Reference
-// (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html).
+// Resources, and Conditions Reference (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html)
+// .
 func (c *Client) DeleteDirectory(ctx context.Context, params *DeleteDirectoryInput, optFns ...func(*Options)) (*DeleteDirectoryOutput, error) {
 	if params == nil {
 		params = &DeleteDirectoryInput{}
@@ -31,7 +31,7 @@ func (c *Client) DeleteDirectory(ctx context.Context, params *DeleteDirectoryInp
 	return out, nil
 }
 
-// Contains the inputs for the DeleteDirectory operation.
+// Contains the inputs for the DeleteDirectory  operation.
 type DeleteDirectoryInput struct {
 
 	// The identifier of the directory to delete.
@@ -42,7 +42,7 @@ type DeleteDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the results of the DeleteDirectory operation.
+// Contains the results of the DeleteDirectory  operation.
 type DeleteDirectoryOutput struct {
 
 	// The directory identifier.

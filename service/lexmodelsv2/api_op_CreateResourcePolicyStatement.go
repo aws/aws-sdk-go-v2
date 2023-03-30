@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a new resource policy statement to a bot or bot alias. If a resource policy
-// exists, the statement is added to the current resource policy. If a policy
-// doesn't exist, a new policy is created. You can't create a resource policy
-// statement that allows cross-account access.
+// Adds a new resource policy statement to a bot or bot alias. If a resource
+// policy exists, the statement is added to the current resource policy. If a
+// policy doesn't exist, a new policy is created. You can't create a resource
+// policy statement that allows cross-account access.
 func (c *Client) CreateResourcePolicyStatement(ctx context.Context, params *CreateResourcePolicyStatementInput, optFns ...func(*Options)) (*CreateResourcePolicyStatementOutput, error) {
 	if params == nil {
 		params = &CreateResourcePolicyStatementInput{}
@@ -32,10 +32,10 @@ func (c *Client) CreateResourcePolicyStatement(ctx context.Context, params *Crea
 
 type CreateResourcePolicyStatementInput struct {
 
-	// The Amazon Lex action that this policy either allows or denies. The action must
-	// apply to the resource type of the specified ARN. For more information, see
-	// Actions, resources, and condition keys for Amazon Lex V2
-	// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonlexv2.html).
+	// The Amazon Lex action that this policy either allows or denies. The action
+	// must apply to the resource type of the specified ARN. For more information, see
+	// Actions, resources, and condition keys for Amazon Lex V2 (https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonlexv2.html)
+	// .
 	//
 	// This member is required.
 	Action []string
@@ -47,22 +47,22 @@ type CreateResourcePolicyStatementInput struct {
 
 	// An IAM principal, such as an IAM users, IAM roles, or AWS services that is
 	// allowed or denied access to a resource. For more information, see AWS JSON
-	// policy elements: Principal
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html).
+	// policy elements: Principal (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html)
+	// .
 	//
 	// This member is required.
 	Principal []types.Principal
 
-	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
-	// is attached to.
+	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource
+	// policy is attached to.
 	//
 	// This member is required.
 	ResourceArn *string
 
 	// The name of the statement. The ID is the same as the Sid IAM property. The
 	// statement name must be unique within the policy. For more information, see IAM
-	// JSON policy elements: Sid
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_sid.html).
+	// JSON policy elements: Sid (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_sid.html)
+	// .
 	//
 	// This member is required.
 	StatementId *string
@@ -70,8 +70,8 @@ type CreateResourcePolicyStatementInput struct {
 	// Specifies a condition when the policy is in effect. If the principal of the
 	// policy is a service principal, you must provide two condition blocks, one with a
 	// SourceAccount global condition key and one with a SourceArn global condition
-	// key. For more information, see IAM JSON policy elements: Condition
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html).
+	// key. For more information, see IAM JSON policy elements: Condition  (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html)
+	// .
 	Condition map[string]map[string]string
 
 	// The identifier of the revision of the policy to edit. If this revision ID
@@ -85,8 +85,8 @@ type CreateResourcePolicyStatementInput struct {
 
 type CreateResourcePolicyStatementOutput struct {
 
-	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
-	// is attached to.
+	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource
+	// policy is attached to.
 	ResourceArn *string
 
 	// The current revision of the resource policy. Use the revision ID to make sure

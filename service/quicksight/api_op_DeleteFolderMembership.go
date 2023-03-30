@@ -45,7 +45,7 @@ type DeleteFolderMembershipInput struct {
 	// This member is required.
 	MemberId *string
 
-	// The type of the member, including DASHBOARD, ANALYSIS, and DATASET
+	// The type of the member, including DASHBOARD , ANALYSIS , and DATASET
 	//
 	// This member is required.
 	MemberType types.MemberType

@@ -33,8 +33,8 @@ func (c *Client) DeleteFlowTemplate(ctx context.Context, params *DeleteFlowTempl
 
 type DeleteFlowTemplateInput struct {
 
-	// The ID of the workflow to be deleted. The ID should be in the following format.
-	// urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME
+	// The ID of the workflow to be deleted. The ID should be in the following
+	// format. urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME
 	//
 	// This member is required.
 	Id *string

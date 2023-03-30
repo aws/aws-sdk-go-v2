@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables an Amazon Web Services account within the Organization as the GuardDuty
-// delegated administrator.
+// Disables an Amazon Web Services account within the Organization as the
+// GuardDuty delegated administrator.
 func (c *Client) DisableOrganizationAdminAccount(ctx context.Context, params *DisableOrganizationAdminAccountInput, optFns ...func(*Options)) (*DisableOrganizationAdminAccountOutput, error) {
 	if params == nil {
 		params = &DisableOrganizationAdminAccountInput{}
@@ -29,8 +29,8 @@ func (c *Client) DisableOrganizationAdminAccount(ctx context.Context, params *Di
 
 type DisableOrganizationAdminAccountInput struct {
 
-	// The Amazon Web Services Account ID for the organizations account to be disabled
-	// as a GuardDuty delegated administrator.
+	// The Amazon Web Services Account ID for the organizations account to be
+	// disabled as a GuardDuty delegated administrator.
 	//
 	// This member is required.
 	AdminAccountId *string

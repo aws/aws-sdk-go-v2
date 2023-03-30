@@ -28,8 +28,8 @@ func (c *Client) GetMailboxDetails(ctx context.Context, params *GetMailboxDetail
 
 type GetMailboxDetailsInput struct {
 
-	// The identifier for the organization that contains the user whose mailbox details
-	// are being requested.
+	// The identifier for the organization that contains the user whose mailbox
+	// details are being requested.
 	//
 	// This member is required.
 	OrganizationId *string

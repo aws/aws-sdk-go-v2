@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the policy definition containing the logic for your organization Config
-// Custom Policy rule.
+// Returns the policy definition containing the logic for your organization
+// Config Custom Policy rule.
 func (c *Client) GetOrganizationCustomRulePolicy(ctx context.Context, params *GetOrganizationCustomRulePolicyInput, optFns ...func(*Options)) (*GetOrganizationCustomRulePolicyOutput, error) {
 	if params == nil {
 		params = &GetOrganizationCustomRulePolicyInput{}

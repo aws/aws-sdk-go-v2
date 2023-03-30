@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds one or more tags to a trail, event data store, or channel, up to a limit of
-// 50. Overwrites an existing tag's value when a new value is specified for an
+// Adds one or more tags to a trail, event data store, or channel, up to a limit
+// of 50. Overwrites an existing tag's value when a new value is specified for an
 // existing tag key. Tag key names must be unique; you cannot have two keys with
 // the same name but different values. If you specify a key without a value, the
 // tag will be created with the specified key and a value of null. You can tag a
@@ -39,7 +39,7 @@ type AddTagsInput struct {
 
 	// Specifies the ARN of the trail, event data store, or channel to which one or
 	// more tags will be added. The format of a trail ARN is:
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail The format of an event
+	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrailThe format of an event
 	// data store ARN is:
 	// arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE
 	// The format of a channel ARN is:

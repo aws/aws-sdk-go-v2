@@ -52,8 +52,8 @@ type GetMetricStreamOutput struct {
 	// stream.
 	ExcludeFilters []types.MetricStreamFilter
 
-	// The ARN of the Amazon Kinesis Data Firehose delivery stream that is used by this
-	// metric stream.
+	// The ARN of the Amazon Kinesis Data Firehose delivery stream that is used by
+	// this metric stream.
 	FirehoseArn *string
 
 	// If this array of metric namespaces is present, then these namespaces are the
@@ -71,22 +71,22 @@ type GetMetricStreamOutput struct {
 	// The name of the metric stream.
 	Name *string
 
-	// The output format for the stream. Valid values are json and opentelemetry0.7.
+	// The output format for the stream. Valid values are json  and opentelemetry0.7.
 	// For more information about metric stream output formats, see Metric streams
-	// output formats
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html).
+	// output formats (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html)
+	// .
 	OutputFormat types.MetricStreamOutputFormat
 
 	// The ARN of the IAM role that is used by this metric stream.
 	RoleArn *string
 
-	// The state of the metric stream. The possible values are running and stopped.
+	// The state of the metric stream. The possible values are running  and stopped .
 	State *string
 
 	// Each entry in this array displays information about one or more metrics that
 	// include additional statistics in the metric stream. For more information about
-	// the additional statistics, see  CloudWatch statistics definitions
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html).
+	// the additional statistics, see CloudWatch statistics definitions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html)
+	// .
 	StatisticsConfigurations []types.MetricStreamStatisticsConfiguration
 
 	// Metadata pertaining to the operation's result.

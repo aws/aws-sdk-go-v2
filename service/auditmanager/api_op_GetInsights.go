@@ -33,7 +33,7 @@ type GetInsightsInput struct {
 
 type GetInsightsOutput struct {
 
-	// The analytics data that the GetInsights API returned.
+	// The analytics data that the GetInsights  API returned.
 	Insights *types.Insights
 
 	// Metadata pertaining to the operation's result.

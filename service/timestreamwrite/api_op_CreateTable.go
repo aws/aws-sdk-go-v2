@@ -18,10 +18,8 @@ import (
 // are in the same database. You might have identical table names in the same
 // Region if the tables are in separate databases. While creating the table, you
 // must specify the table name, database name, and the retention properties.
-// Service quotas apply
-// (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html).
-// See code sample
-// (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-table.html)
+// Service quotas apply (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html)
+// . See code sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-table.html)
 // for details.
 func (c *Client) CreateTable(ctx context.Context, params *CreateTableInput, optFns ...func(*Options)) (*CreateTableOutput, error) {
 	if params == nil {
@@ -53,8 +51,8 @@ type CreateTableInput struct {
 	// Contains properties to set on the table when enabling magnetic store writes.
 	MagneticStoreWriteProperties *types.MagneticStoreWriteProperties
 
-	// The duration for which your time-series data must be stored in the memory store
-	// and the magnetic store.
+	// The duration for which your time-series data must be stored in the memory
+	// store and the magnetic store.
 	RetentionProperties *types.RetentionProperties
 
 	// A list of key-value pairs to label the table.

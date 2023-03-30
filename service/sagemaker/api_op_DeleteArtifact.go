@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an artifact. Either ArtifactArn or Source must be specified.
+// Deletes an artifact. Either ArtifactArn  or Source  must be specified.
 func (c *Client) DeleteArtifact(ctx context.Context, params *DeleteArtifactInput, optFns ...func(*Options)) (*DeleteArtifactOutput, error) {
 	if params == nil {
 		params = &DeleteArtifactInput{}

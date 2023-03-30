@@ -14,7 +14,7 @@ type CognitoIdentityProvider struct {
 	ClientId *string
 
 	// The provider name for an Amazon Cognito user pool. For example,
-	// cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789.
+	// cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789 .
 	ProviderName *string
 
 	// TRUE if server-side token validation is enabled for the identity provider’s
@@ -85,8 +85,8 @@ type MappingRule struct {
 	// This member is required.
 	Claim *string
 
-	// The match condition that specifies how closely the claim value in the IdP token
-	// must match Value.
+	// The match condition that specifies how closely the claim value in the IdP
+	// token must match Value .
 	//
 	// This member is required.
 	MatchType MappingRuleMatchType
@@ -107,21 +107,21 @@ type MappingRule struct {
 // A role mapping.
 type RoleMapping struct {
 
-	// The role mapping type. Token will use cognito:roles and cognito:preferred_role
+	// The role mapping type. Token will use cognito:roles  and cognito:preferred_role
 	// claims from the Cognito identity provider token to map groups to roles. Rules
 	// will attempt to match claims from the token to map to a role.
 	//
 	// This member is required.
 	Type RoleMappingType
 
-	// If you specify Token or Rules as the Type, AmbiguousRoleResolution is required.
-	// Specifies the action to be taken if either no rules match the claim value for
-	// the Rules type, or there is no cognito:preferred_role claim and there are
-	// multiple cognito:roles matches for the Token type.
+	// If you specify Token or Rules as the Type , AmbiguousRoleResolution is
+	// required. Specifies the action to be taken if either no rules match the claim
+	// value for the Rules  type, or there is no cognito:preferred_role claim and
+	// there are multiple cognito:roles  matches for the Token  type.
 	AmbiguousRoleResolution AmbiguousRoleResolutionType
 
 	// The rules to be used for mapping users to roles. If you specify Rules as the
-	// role mapping type, RulesConfiguration is required.
+	// role mapping type, RulesConfiguration  is required.
 	RulesConfiguration *RulesConfigurationType
 
 	noSmithyDocumentSerde

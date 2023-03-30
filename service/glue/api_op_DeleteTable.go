@@ -14,9 +14,9 @@ import (
 // operation, you no longer have access to the table versions and partitions that
 // belong to the deleted table. Glue deletes these "orphaned" resources
 // asynchronously in a timely manner, at the discretion of the service. To ensure
-// the immediate deletion of all related resources, before calling DeleteTable, use
-// DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or
-// BatchDeletePartition, to delete any resources that belong to the table.
+// the immediate deletion of all related resources, before calling DeleteTable,
+// use DeleteTableVersion  or BatchDeleteTableVersion , and DeletePartition  or
+// BatchDeletePartition , to delete any resources that belong to the table.
 func (c *Client) DeleteTable(ctx context.Context, params *DeleteTableInput, optFns ...func(*Options)) (*DeleteTableOutput, error) {
 	if params == nil {
 		params = &DeleteTableInput{}

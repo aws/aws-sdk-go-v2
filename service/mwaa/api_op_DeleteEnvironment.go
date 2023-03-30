@@ -29,7 +29,7 @@ func (c *Client) DeleteEnvironment(ctx context.Context, params *DeleteEnvironmen
 
 type DeleteEnvironmentInput struct {
 
-	// The name of the Amazon MWAA environment. For example, MyMWAAEnvironment.
+	// The name of the Amazon MWAA environment. For example, MyMWAAEnvironment .
 	//
 	// This member is required.
 	Name *string

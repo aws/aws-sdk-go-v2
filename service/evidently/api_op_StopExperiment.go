@@ -41,8 +41,8 @@ type StopExperimentInput struct {
 	// This member is required.
 	Project *string
 
-	// Specify whether the experiment is to be considered COMPLETED or CANCELLED after
-	// it stops.
+	// Specify whether the experiment is to be considered COMPLETED  or CANCELLED
+	// after it stops.
 	DesiredState types.ExperimentStopDesiredState
 
 	// A string that describes why you are stopping the experiment.

@@ -11,17 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the enrollment (opt in and opt out) status of an account to the Compute
-// Optimizer service. If the account is a management account of an organization,
-// this action can also be used to enroll member accounts of the organization. You
-// must have the appropriate permissions to opt in to Compute Optimizer, to view
-// its recommendations, and to opt out. For more information, see Controlling
-// access with Amazon Web Services Identity and Access Management
-// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html) in
-// the Compute Optimizer User Guide. When you opt in, Compute Optimizer
+// Updates the enrollment (opt in and opt out) status of an account to the
+// Compute Optimizer service. If the account is a management account of an
+// organization, this action can also be used to enroll member accounts of the
+// organization. You must have the appropriate permissions to opt in to Compute
+// Optimizer, to view its recommendations, and to opt out. For more information,
+// see Controlling access with Amazon Web Services Identity and Access Management (https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html)
+// in the Compute Optimizer User Guide. When you opt in, Compute Optimizer
 // automatically creates a service-linked role in your account to access its data.
-// For more information, see Using Service-Linked Roles for Compute Optimizer
-// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/using-service-linked-roles.html)
+// For more information, see Using Service-Linked Roles for Compute Optimizer (https://docs.aws.amazon.com/compute-optimizer/latest/ug/using-service-linked-roles.html)
 // in the Compute Optimizer User Guide.
 func (c *Client) UpdateEnrollmentStatus(ctx context.Context, params *UpdateEnrollmentStatusInput, optFns ...func(*Options)) (*UpdateEnrollmentStatusOutput, error) {
 	if params == nil {
@@ -42,20 +40,12 @@ type UpdateEnrollmentStatusInput struct {
 
 	// The new enrollment status of the account. The following status options are
 	// available:
-	// - Active - Opts in your account to the Compute Optimizer service.
-	// Compute Optimizer begins analyzing the configuration and utilization metrics of
-	// your Amazon Web Services resources after you opt in. For more information, see
-	// Metrics analyzed by Compute Optimizer
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html) in the
-	// Compute Optimizer User Guide.
-	// - Inactive - Opts out your account from the
-	// Compute Optimizer service. Your account's recommendations and related metrics
-	// data will be deleted from Compute Optimizer after you opt out.
+	//     - Active - Opts in your account to the Compute Optimizer service. Compute Optimizer begins analyzing the configuration and utilization metrics of your Amazon Web Services resources after you opt in. For more information, see Metrics analyzed by Compute Optimizer (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html) in the Compute Optimizer User Guide.
+	//     - Inactive - Opts out your account from the Compute Optimizer service. Your account's recommendations and related metrics data will be deleted from Compute Optimizer after you opt out.
 	//
-	// The Pending and
-	// Failed options cannot be used to update the enrollment status of an account.
-	// They are returned in the response of a request to update the enrollment status
-	// of an account.
+	// The Pending  and Failed options cannot be used to update the enrollment status
+	// of an account. They are returned in the response of a request to update the
+	// enrollment status of an account.
 	//
 	// This member is required.
 	Status types.Status

@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a public IPv4 pool. A public IPv4 pool is an EC2 IP address pool required
-// for the public IPv4 CIDRs that you own and bring to Amazon Web Services to
-// manage with IPAM. IPv6 addresses you bring to Amazon Web Services, however, use
-// IPAM pools only.
+// Delete a public IPv4 pool. A public IPv4 pool is an EC2 IP address pool
+// required for the public IPv4 CIDRs that you own and bring to Amazon Web Services
+// to manage with IPAM. IPv6 addresses you bring to Amazon Web Services, however,
+// use IPAM pools only.
 func (c *Client) DeletePublicIpv4Pool(ctx context.Context, params *DeletePublicIpv4PoolInput, optFns ...func(*Options)) (*DeletePublicIpv4PoolOutput, error) {
 	if params == nil {
 		params = &DeletePublicIpv4PoolInput{}
@@ -38,8 +38,8 @@ type DeletePublicIpv4PoolInput struct {
 
 	// A check for whether you have the required permissions for the action without
 	// actually making the request and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

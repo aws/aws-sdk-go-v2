@@ -32,7 +32,7 @@ func (c *Client) CreateAccessor(ctx context.Context, params *CreateAccessorInput
 
 type CreateAccessorInput struct {
 
-	// The type of accessor. Currently accessor type is restricted to BILLING_TOKEN.
+	// The type of accessor. Currently accessor type is restricted to BILLING_TOKEN .
 	//
 	// This member is required.
 	AccessorType types.AccessorType
@@ -49,10 +49,8 @@ type CreateAccessorInput struct {
 	// Tags to assign to the Accessor. Each tag consists of a key and an optional
 	// value. You can specify multiple key-value pairs in a single request with an
 	// overall maximum of 50 tags allowed per resource. For more information about
-	// tags, see Tagging Resources
-	// (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
-	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
 	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
 	Tags map[string]string
 
@@ -64,9 +62,10 @@ type CreateAccessorOutput struct {
 	// The unique identifier of the accessor.
 	AccessorId *string
 
-	// The billing token is a property of the Accessor. Use this token to make Ethereum
-	// API calls to your Ethereum node. The billing token is used to track your
-	// accessor object for billing Ethereum API requests made to your Ethereum nodes.
+	// The billing token is a property of the Accessor. Use this token to make
+	// Ethereum API calls to your Ethereum node. The billing token is used to track
+	// your accessor object for billing Ethereum API requests made to your Ethereum
+	// nodes.
 	BillingToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -38,8 +38,8 @@ func (c *Client) DescribeProjectVersions(ctx context.Context, params *DescribePr
 
 type DescribeProjectVersionsInput struct {
 
-	// The Amazon Resource Name (ARN) of the project that contains the models you want
-	// to describe.
+	// The Amazon Resource Name (ARN) of the project that contains the models you
+	// want to describe.
 	//
 	// This member is required.
 	ProjectArn *string
@@ -59,7 +59,8 @@ type DescribeProjectVersionsInput struct {
 	// descriptions are returned. A version name is part of a model (ProjectVersion)
 	// ARN. For example, my-model.2020-01-21T09.10.15 is the version name in the
 	// following ARN.
-	// arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/my-model.2020-01-21T09.10.15/1234567890123.
+	// arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/my-model.2020-01-21T09.10.15/1234567890123
+	// .
 	VersionNames []string
 
 	noSmithyDocumentSerde
@@ -161,8 +162,8 @@ type DescribeProjectVersionsPaginatorOptions struct {
 	// ValidationException error occurs. The default value is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -253,9 +254,10 @@ type ProjectVersionRunningWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ProjectVersionRunningWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ProjectVersionRunningWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -295,9 +297,9 @@ func NewProjectVersionRunningWaiter(client DescribeProjectVersionsAPIClient, opt
 	}
 }
 
-// Wait calls the waiter function for ProjectVersionRunning waiter. The maxWaitDur
-// is the maximum wait duration the waiter will wait. The maxWaitDur is required
-// and must be greater than zero.
+// Wait calls the waiter function for ProjectVersionRunning waiter. The
+// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
+// required and must be greater than zero.
 func (w *ProjectVersionRunningWaiter) Wait(ctx context.Context, params *DescribeProjectVersionsInput, maxWaitDur time.Duration, optFns ...func(*ProjectVersionRunningWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -454,10 +456,10 @@ type ProjectVersionTrainingCompletedWaiterOptions struct {
 	// MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ProjectVersionTrainingCompletedWaiter will use default max delay of 120
-	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
-	// MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ProjectVersionTrainingCompletedWaiter will use default max delay of
+	// 120 seconds. Note that MaxDelay must resolve to value greater than or equal to
+	// the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

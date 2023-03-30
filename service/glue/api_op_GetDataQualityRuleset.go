@@ -46,7 +46,8 @@ type GetDataQualityRulesetOutput struct {
 	// A description of the ruleset.
 	Description *string
 
-	// A timestamp. The last point in time when this data quality ruleset was modified.
+	// A timestamp. The last point in time when this data quality ruleset was
+	// modified.
 	LastModifiedOn *time.Time
 
 	// The name of the ruleset.
@@ -56,8 +57,8 @@ type GetDataQualityRulesetOutput struct {
 	// to link the two together.
 	RecommendationRunId *string
 
-	// A Data Quality Definition Language (DQDL) ruleset. For more information, see the
-	// Glue developer guide.
+	// A Data Quality Definition Language (DQDL) ruleset. For more information, see
+	// the Glue developer guide.
 	Ruleset *string
 
 	// The name and database name of the target table.

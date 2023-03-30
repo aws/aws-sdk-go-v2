@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of App Runner VPC connectors in your Amazon Web Services account.
+// Returns a list of App Runner VPC connectors in your Amazon Web Services
+// account.
 func (c *Client) ListVpcConnectors(ctx context.Context, params *ListVpcConnectorsInput, optFns ...func(*Options)) (*ListVpcConnectorsOutput, error) {
 	if params == nil {
 		params = &ListVpcConnectorsInput{}
@@ -38,7 +39,7 @@ type ListVpcConnectorsInput struct {
 	// A token from a previous result page. It's used for a paginated request. The
 	// request retrieves the next result page. All other parameter values must be
 	// identical to the ones that are specified in the initial request. If you don't
-	// specify NextToken, the request retrieves the first result page.
+	// specify NextToken , the request retrieves the first result page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,13 +48,13 @@ type ListVpcConnectorsInput struct {
 type ListVpcConnectorsOutput struct {
 
 	// A list of information records for VPC connectors. In a paginated request, the
-	// request returns up to MaxResults records for each call.
+	// request returns up to MaxResults  records for each call.
 	//
 	// This member is required.
 	VpcConnectors []types.VpcConnector
 
-	// The token that you can pass in a subsequent request to get the next result page.
-	// It's returned in a paginated request.
+	// The token that you can pass in a subsequent request to get the next result
+	// page. It's returned in a paginated request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -130,15 +131,16 @@ type ListVpcConnectorsAPIClient interface {
 
 var _ ListVpcConnectorsAPIClient = (*Client)(nil)
 
-// ListVpcConnectorsPaginatorOptions is the paginator options for ListVpcConnectors
+// ListVpcConnectorsPaginatorOptions is the paginator options for
+// ListVpcConnectors
 type ListVpcConnectorsPaginatorOptions struct {
 	// The maximum number of results to include in each response (result page). It's
 	// used for a paginated request. If you don't specify MaxResults, the request
 	// retrieves all available results in a single response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

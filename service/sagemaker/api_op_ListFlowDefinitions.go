@@ -31,8 +31,8 @@ func (c *Client) ListFlowDefinitions(ctx context.Context, params *ListFlowDefini
 
 type ListFlowDefinitionsInput struct {
 
-	// A filter that returns only flow definitions with a creation time greater than or
-	// equal to the specified timestamp.
+	// A filter that returns only flow definitions with a creation time greater than
+	// or equal to the specified timestamp.
 	CreationTimeAfter *time.Time
 
 	// A filter that returns only flow definitions that were created before the
@@ -40,15 +40,15 @@ type ListFlowDefinitionsInput struct {
 	CreationTimeBefore *time.Time
 
 	// The total number of items to return. If the total number of available items is
-	// more than the value specified in MaxResults, then a NextToken will be provided
-	// in the output that you can use to resume pagination.
+	// more than the value specified in MaxResults , then a NextToken will be
+	// provided in the output that you can use to resume pagination.
 	MaxResults *int32
 
 	// A token to resume pagination.
 	NextToken *string
 
 	// An optional value that specifies whether you want the results sorted in
-	// Ascending or Descending order.
+	// Ascending or Descending  order.
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -130,8 +130,8 @@ func (c *Client) addOperationListFlowDefinitionsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListFlowDefinitionsAPIClient is a client that implements the ListFlowDefinitions
-// operation.
+// ListFlowDefinitionsAPIClient is a client that implements the
+// ListFlowDefinitions operation.
 type ListFlowDefinitionsAPIClient interface {
 	ListFlowDefinitions(context.Context, *ListFlowDefinitionsInput, ...func(*Options)) (*ListFlowDefinitionsOutput, error)
 }
@@ -142,12 +142,12 @@ var _ ListFlowDefinitionsAPIClient = (*Client)(nil)
 // ListFlowDefinitions
 type ListFlowDefinitionsPaginatorOptions struct {
 	// The total number of items to return. If the total number of available items is
-	// more than the value specified in MaxResults, then a NextToken will be provided
-	// in the output that you can use to resume pagination.
+	// more than the value specified in MaxResults , then a NextToken will be
+	// provided in the output that you can use to resume pagination.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

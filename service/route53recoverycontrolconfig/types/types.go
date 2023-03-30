@@ -48,15 +48,15 @@ type AssertionRule struct {
 	// This member is required.
 	SafetyRuleArn *string
 
-	// The deployment status of an assertion rule. Status can be one of the following:
-	// PENDING, DEPLOYED, PENDING_DELETION.
+	// The deployment status of an assertion rule. Status can be one of the
+	// following: PENDING, DEPLOYED, PENDING_DELETION.
 	//
 	// This member is required.
 	Status Status
 
-	// An evaluation period, in milliseconds (ms), during which any request against the
-	// target routing controls will fail. This helps prevent "flapping" of state. The
-	// wait period is 5000 ms by default, but you can choose a custom value.
+	// An evaluation period, in milliseconds (ms), during which any request against
+	// the target routing controls will fail. This helps prevent "flapping" of state.
+	// The wait period is 5000 ms by default, but you can choose a custom value.
 	//
 	// This member is required.
 	WaitPeriodMs int32
@@ -64,13 +64,13 @@ type AssertionRule struct {
 	noSmithyDocumentSerde
 }
 
-// An update to an assertion rule. You can update the name or the evaluation period
-// (wait period). If you don't specify one of the items to update, the item is
-// unchanged.
+// An update to an assertion rule. You can update the name or the evaluation
+// period (wait period). If you don't specify one of the items to update, the item
+// is unchanged.
 type AssertionRuleUpdate struct {
 
-	// The name of the assertion rule. You can use any non-white space character in the
-	// name.
+	// The name of the assertion rule. You can use any non-white space character in
+	// the name.
 	//
 	// This member is required.
 	Name *string
@@ -80,9 +80,9 @@ type AssertionRuleUpdate struct {
 	// This member is required.
 	SafetyRuleArn *string
 
-	// An evaluation period, in milliseconds (ms), during which any request against the
-	// target routing controls will fail. This helps prevent "flapping" of state. The
-	// wait period is 5000 ms by default, but you can choose a custom value.
+	// An evaluation period, in milliseconds (ms), during which any request against
+	// the target routing controls will fail. This helps prevent "flapping" of state.
+	// The wait period is 5000 ms by default, but you can choose a custom value.
 	//
 	// This member is required.
 	WaitPeriodMs int32
@@ -98,8 +98,8 @@ type Cluster struct {
 	// The Amazon Resource Name (ARN) of the cluster.
 	ClusterArn *string
 
-	// Endpoints for a cluster. Specify one of these endpoints when you want to set or
-	// retrieve a routing control state in the cluster. To get or update the routing
+	// Endpoints for a cluster. Specify one of these endpoints when you want to set
+	// or retrieve a routing control state in the cluster. To get or update the routing
 	// control state, see the Amazon Route 53 Application Recovery Controller Routing
 	// Control Actions.
 	ClusterEndpoints []ClusterEndpoint
@@ -118,9 +118,9 @@ type Cluster struct {
 // routing control state in the cluster.
 type ClusterEndpoint struct {
 
-	// A cluster endpoint. Specify an endpoint and Amazon Web Services Region when you
-	// want to set or retrieve a routing control state in the cluster. To get or update
-	// the routing control state, see the Amazon Route 53 Application Recovery
+	// A cluster endpoint. Specify an endpoint and Amazon Web Services Region when
+	// you want to set or retrieve a routing control state in the cluster. To get or
+	// update the routing control state, see the Amazon Route 53 Application Recovery
 	// Controller Routing Control Actions.
 	Endpoint *string
 
@@ -147,8 +147,8 @@ type ControlPanel struct {
 	// this flag is set to false.
 	DefaultControlPanel bool
 
-	// The name of the control panel. You can use any non-white space character in the
-	// name.
+	// The name of the control panel. You can use any non-white space character in
+	// the name.
 	Name *string
 
 	// The number of routing controls in the control panel.
@@ -190,8 +190,8 @@ type GatingRule struct {
 	// This member is required.
 	Name *string
 
-	// The criteria that you set for gating routing controls that designate how many of
-	// the routing control states must be ON to allow you to update target routing
+	// The criteria that you set for gating routing controls that designate how many
+	// of the routing control states must be ON to allow you to update target routing
 	// control states.
 	//
 	// This member is required.
@@ -218,9 +218,9 @@ type GatingRule struct {
 	// This member is required.
 	TargetControls []string
 
-	// An evaluation period, in milliseconds (ms), during which any request against the
-	// target routing controls will fail. This helps prevent "flapping" of state. The
-	// wait period is 5000 ms by default, but you can choose a custom value.
+	// An evaluation period, in milliseconds (ms), during which any request against
+	// the target routing controls will fail. This helps prevent "flapping" of state.
+	// The wait period is 5000 ms by default, but you can choose a custom value.
 	//
 	// This member is required.
 	WaitPeriodMs int32
@@ -228,8 +228,9 @@ type GatingRule struct {
 	noSmithyDocumentSerde
 }
 
-// Update to a gating rule. You can update the name or the evaluation period (wait
-// period). If you don't specify one of the items to update, the item is unchanged.
+// Update to a gating rule. You can update the name or the evaluation period
+// (wait period). If you don't specify one of the items to update, the item is
+// unchanged.
 type GatingRuleUpdate struct {
 
 	// The name for the gating rule. You can use any non-white space character in the
@@ -243,9 +244,9 @@ type GatingRuleUpdate struct {
 	// This member is required.
 	SafetyRuleArn *string
 
-	// An evaluation period, in milliseconds (ms), during which any request against the
-	// target routing controls will fail. This helps prevent "flapping" of state. The
-	// wait period is 5000 ms by default, but you can choose a custom value.
+	// An evaluation period, in milliseconds (ms), during which any request against
+	// the target routing controls will fail. This helps prevent "flapping" of state.
+	// The wait period is 5000 ms by default, but you can choose a custom value.
 	//
 	// This member is required.
 	WaitPeriodMs int32
@@ -269,8 +270,8 @@ type NewAssertionRule struct {
 	// This member is required.
 	ControlPanelArn *string
 
-	// The name of the assertion rule. You can use any non-white space character in the
-	// name.
+	// The name of the assertion rule. You can use any non-white space character in
+	// the name.
 	//
 	// This member is required.
 	Name *string
@@ -285,9 +286,9 @@ type NewAssertionRule struct {
 	// This member is required.
 	RuleConfig *RuleConfig
 
-	// An evaluation period, in milliseconds (ms), during which any request against the
-	// target routing controls will fail. This helps prevent "flapping" of state. The
-	// wait period is 5000 ms by default, but you can choose a custom value.
+	// An evaluation period, in milliseconds (ms), during which any request against
+	// the target routing controls will fail. This helps prevent "flapping" of state.
+	// The wait period is 5000 ms by default, but you can choose a custom value.
 	//
 	// This member is required.
 	WaitPeriodMs int32
@@ -303,8 +304,8 @@ type NewGatingRule struct {
 	// This member is required.
 	ControlPanelArn *string
 
-	// The gating controls for the new gating rule. That is, routing controls that are
-	// evaluated by the rule configuration that you specify.
+	// The gating controls for the new gating rule. That is, routing controls that
+	// are evaluated by the rule configuration that you specify.
 	//
 	// This member is required.
 	GatingControls []string
@@ -333,9 +334,9 @@ type NewGatingRule struct {
 	// This member is required.
 	TargetControls []string
 
-	// An evaluation period, in milliseconds (ms), during which any request against the
-	// target routing controls will fail. This helps prevent "flapping" of state. The
-	// wait period is 5000 ms by default, but you can choose a custom value.
+	// An evaluation period, in milliseconds (ms), during which any request against
+	// the target routing controls will fail. This helps prevent "flapping" of state.
+	// The wait period is 5000 ms by default, but you can choose a custom value.
 	//
 	// This member is required.
 	WaitPeriodMs int32
@@ -358,8 +359,8 @@ type RoutingControl struct {
 	// The Amazon Resource Name (ARN) of the routing control.
 	RoutingControlArn *string
 
-	// The deployment status of a routing control. Status can be one of the following:
-	// PENDING, DEPLOYED, PENDING_DELETION.
+	// The deployment status of a routing control. Status can be one of the
+	// following: PENDING, DEPLOYED, PENDING_DELETION.
 	Status Status
 
 	noSmithyDocumentSerde
@@ -389,9 +390,9 @@ type Rule struct {
 	noSmithyDocumentSerde
 }
 
-// The rule configuration for an assertion rule. That is, the criteria that you set
-// for specific assertion controls (routing controls) that specify how many control
-// states must be ON after a transaction completes.
+// The rule configuration for an assertion rule. That is, the criteria that you
+// set for specific assertion controls (routing controls) that specify how many
+// control states must be ON after a transaction completes.
 type RuleConfig struct {
 
 	// Logical negation of the rule. If the rule would usually evaluate true, it's
@@ -400,8 +401,8 @@ type RuleConfig struct {
 	// This member is required.
 	Inverted bool
 
-	// The value of N, when you specify an ATLEAST rule type. That is, Threshold is the
-	// number of controls that must be set when you specify an ATLEAST type.
+	// The value of N, when you specify an ATLEAST rule type. That is, Threshold is
+	// the number of controls that must be set when you specify an ATLEAST type.
 	//
 	// This member is required.
 	Threshold int32

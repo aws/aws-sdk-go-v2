@@ -14,7 +14,7 @@ import (
 
 // Sends telemetry events about your application performance and user behavior to
 // CloudWatch RUM. The code snippet that RUM generates for you to add to your
-// application includes PutRumEvents operations to send this data to RUM. Each
+// application includes PutRumEvents  operations to send this data to RUM. Each
 // PutRumEvents operation can send a batch of events from one user session.
 func (c *Client) PutRumEvents(ctx context.Context, params *PutRumEventsInput, optFns ...func(*Options)) (*PutRumEventsOutput, error) {
 	if params == nil {
@@ -33,8 +33,8 @@ func (c *Client) PutRumEvents(ctx context.Context, params *PutRumEventsInput, op
 
 type PutRumEventsInput struct {
 
-	// A structure that contains information about the app monitor that collected this
-	// telemetry information.
+	// A structure that contains information about the app monitor that collected
+	// this telemetry information.
 	//
 	// This member is required.
 	AppMonitorDetails *types.AppMonitorDetails
@@ -54,8 +54,8 @@ type PutRumEventsInput struct {
 	// This member is required.
 	RumEvents []types.RumEvent
 
-	// A structure that contains information about the user session that this batch of
-	// events was collected from.
+	// A structure that contains information about the user session that this batch
+	// of events was collected from.
 	//
 	// This member is required.
 	UserDetails *types.UserDetails

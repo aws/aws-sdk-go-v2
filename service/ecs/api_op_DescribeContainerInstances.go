@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes one or more container instances. Returns metadata about each container
-// instance requested.
+// Describes one or more container instances. Returns metadata about each
+// container instance requested.
 func (c *Client) DescribeContainerInstances(ctx context.Context, params *DescribeContainerInstancesInput, optFns ...func(*Options)) (*DescribeContainerInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeContainerInstancesInput{}
@@ -36,16 +36,16 @@ type DescribeContainerInstancesInput struct {
 	// This member is required.
 	ContainerInstances []string
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
-	// container instances to describe. If you do not specify a cluster, the default
-	// cluster is assumed. This parameter is required if the container instance or
-	// container instances you are describing were launched in any cluster other than
-	// the default cluster.
+	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
+	// the container instances to describe. If you do not specify a cluster, the
+	// default cluster is assumed. This parameter is required if the container instance
+	// or container instances you are describing were launched in any cluster other
+	// than the default cluster.
 	Cluster *string
 
-	// Specifies whether you want to see the resource tags for the container instance.
-	// If TAGS is specified, the tags are included in the response. If
-	// CONTAINER_INSTANCE_HEALTH is specified, the container instance health is
+	// Specifies whether you want to see the resource tags for the container
+	// instance. If TAGS  is specified, the tags are included in the response. If
+	// CONTAINER_INSTANCE_HEALTHis specified, the container instance health is
 	// included in the response. If this field is omitted, tags and container instance
 	// health status aren't included in the response.
 	Include []types.ContainerInstanceField

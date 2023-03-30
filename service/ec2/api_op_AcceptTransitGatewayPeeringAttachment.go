@@ -12,7 +12,7 @@ import (
 )
 
 // Accepts a transit gateway peering attachment request. The peering attachment
-// must be in the pendingAcceptance state.
+// must be in the pendingAcceptance  state.
 func (c *Client) AcceptTransitGatewayPeeringAttachment(ctx context.Context, params *AcceptTransitGatewayPeeringAttachmentInput, optFns ...func(*Options)) (*AcceptTransitGatewayPeeringAttachmentOutput, error) {
 	if params == nil {
 		params = &AcceptTransitGatewayPeeringAttachmentInput{}
@@ -37,8 +37,8 @@ type AcceptTransitGatewayPeeringAttachmentInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

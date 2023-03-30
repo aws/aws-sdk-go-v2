@@ -39,7 +39,7 @@ type GetTemporaryGluePartitionCredentialsInput struct {
 	Partition *types.PartitionValueList
 
 	// A list of supported permission types for the partition. Valid values are
-	// COLUMN_PERMISSION and CELL_FILTER_PERMISSION.
+	// COLUMN_PERMISSION and CELL_FILTER_PERMISSION .
 	//
 	// This member is required.
 	SupportedPermissionTypes []types.PermissionType

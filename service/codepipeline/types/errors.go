@@ -352,8 +352,8 @@ func (e *InvalidJobStateException) ErrorCode() string {
 }
 func (e *InvalidJobStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The next token was specified in an invalid format. Make sure that the next token
-// you provide is the token returned by a previous call.
+// The next token was specified in an invalid format. Make sure that the next
+// token you provide is the token returned by a previous call.
 type InvalidNextTokenException struct {
 	Message *string
 
@@ -592,8 +592,8 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The stage has failed in a later run of the pipeline and the pipelineExecutionId
-// associated with the request is out of date.
+// The stage has failed in a later run of the pipeline and the
+// pipelineExecutionId associated with the request is out of date.
 type NotLatestPipelineExecutionException struct {
 	Message *string
 
@@ -649,8 +649,8 @@ func (e *OutputVariablesSizeExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The pipeline execution was specified in an invalid format or cannot be found, or
-// an execution ID does not belong to the specified pipeline.
+// The pipeline execution was specified in an invalid format or cannot be found,
+// or an execution ID does not belong to the specified pipeline.
 type PipelineExecutionNotFoundException struct {
 	Message *string
 
@@ -863,8 +863,8 @@ func (e *StageNotFoundException) ErrorCode() string {
 }
 func (e *StageNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Unable to retry. The pipeline structure or stage state might have changed while
-// actions awaited retry, or the stage contains no failed actions.
+// Unable to retry. The pipeline structure or stage state might have changed
+// while actions awaited retry, or the stage contains no failed actions.
 type StageNotRetryableException struct {
 	Message *string
 

@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a job in an Batch job queue. Jobs that are in the SUBMITTED or PENDING
-// are canceled. A job inRUNNABLE remains in RUNNABLE until it reaches the head of
-// the job queue. Then the job status is updated to FAILED. Jobs that progressed to
-// the STARTING or RUNNING state aren't canceled. However, the API operation still
-// succeeds, even if no job is canceled. These jobs must be terminated with the
-// TerminateJob operation.
+// Cancels a job in an Batch job queue. Jobs that are in the SUBMITTED  or PENDING
+// are canceled. A job in RUNNABLE  remains in RUNNABLE until it reaches the head
+// of the job queue. Then the job status is updated to FAILED. Jobs that
+// progressed to the STARTING  or RUNNING state aren't canceled. However, the API
+// operation still succeeds, even if no job is canceled. These jobs must be
+// terminated with the TerminateJob  operation.
 func (c *Client) CancelJob(ctx context.Context, params *CancelJobInput, optFns ...func(*Options)) (*CancelJobOutput, error) {
 	if params == nil {
 		params = &CancelJobInput{}
@@ -31,7 +31,7 @@ func (c *Client) CancelJob(ctx context.Context, params *CancelJobInput, optFns .
 	return out, nil
 }
 
-// Contains the parameters for CancelJob.
+// Contains the parameters for CancelJob .
 type CancelJobInput struct {
 
 	// The Batch job ID of the job to cancel.

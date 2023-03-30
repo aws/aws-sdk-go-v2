@@ -11,12 +11,10 @@ import (
 	"time"
 )
 
-// Get a URL to upload content to a knowledge base. To upload content, first make a
-// PUT request to the returned URL with your file, making sure to include the
-// required headers. Then use CreateContent
-// (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_CreateContent.html)
-// to finalize the content creation process or UpdateContent
-// (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_UpdateContent.html)
+// Get a URL to upload content to a knowledge base. To upload content, first make
+// a PUT request to the returned URL with your file, making sure to include the
+// required headers. Then use CreateContent (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_CreateContent.html)
+// to finalize the content creation process or UpdateContent (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_UpdateContent.html)
 // to modify an existing resource. You can only upload content to a knowledge base
 // of type CUSTOM.
 func (c *Client) StartContentUpload(ctx context.Context, params *StartContentUploadInput, optFns ...func(*Options)) (*StartContentUploadOutput, error) {

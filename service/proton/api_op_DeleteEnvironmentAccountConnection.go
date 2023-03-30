@@ -17,8 +17,7 @@ import (
 // environment account connection is accepted for the environment account and
 // associated environment. You're responsible for cleaning up provisioned resources
 // that remain without an environment connection. For more information, see
-// Environment account connections
-// (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html)
+// Environment account connections (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html)
 // in the Proton User guide.
 func (c *Client) DeleteEnvironmentAccountConnection(ctx context.Context, params *DeleteEnvironmentAccountConnectionInput, optFns ...func(*Options)) (*DeleteEnvironmentAccountConnectionOutput, error) {
 	if params == nil {

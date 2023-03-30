@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the current data access role for the given resource registered in Lake
-// Formation.
+// Retrieves the current data access role for the given resource registered in
+// Lake Formation.
 func (c *Client) DescribeResource(ctx context.Context, params *DescribeResourceInput, optFns ...func(*Options)) (*DescribeResourceOutput, error) {
 	if params == nil {
 		params = &DescribeResourceInput{}

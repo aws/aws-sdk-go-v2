@@ -37,15 +37,15 @@ type CreateDatastoreInput struct {
 	// Contains information about the partition dimensions in a data store.
 	DatastorePartitions *types.DatastorePartitions
 
-	// Where data in a data store is stored.. You can choose serviceManagedS3 storage,
-	// customerManagedS3 storage, or iotSiteWiseMultiLayerStorage storage. The default
-	// is serviceManagedS3. You can't change the choice of Amazon S3 storage after your
-	// data store is created.
+	// Where data in a data store is stored.. You can choose serviceManagedS3
+	// storage, customerManagedS3  storage, or iotSiteWiseMultiLayerStorage storage.
+	// The default is serviceManagedS3. You can't change the choice of Amazon S3
+	// storage after your data store is created.
 	DatastoreStorage types.DatastoreStorage
 
 	// Contains the configuration information of file formats. IoT Analytics data
-	// stores support JSON and Parquet (https://parquet.apache.org/). The default file
-	// format is JSON. You can specify only one format. You can't change the file
+	// stores support JSON and Parquet (https://parquet.apache.org/). The default
+	// file format is JSON. You can specify only one format. You can't change the file
 	// format after you create the data store.
 	FileFormatConfiguration *types.FileFormatConfiguration
 

@@ -30,9 +30,8 @@ func (c *Client) RejectResourceShareInvitation(ctx context.Context, params *Reje
 
 type RejectResourceShareInvitationInput struct {
 
-	// Specifies the Amazon Resoure Name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the invitation that you want to reject.
+	// Specifies the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the invitation that you want to reject.
 	//
 	// This member is required.
 	ResourceShareInvitationArn *string
@@ -41,9 +40,9 @@ type RejectResourceShareInvitationInput struct {
 	// idempotency of the request. This lets you safely retry the request without
 	// accidentally performing the same operation a second time. Passing the same value
 	// to a later call to an operation requires that you also pass the same value for
-	// all other parameters. We recommend that you use a UUID type of value.
-	// (https://wikipedia.org/wiki/Universally_unique_identifier). If you don't provide
-	// this value, then Amazon Web Services generates a random one for you.
+	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
+	// . If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -53,8 +52,8 @@ type RejectResourceShareInvitationOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat
 	// the same operation in an idempotent manner then you must include this value in
-	// the clientToken request parameter of that later call. All other parameters must
-	// also have the same values that you used in the first call.
+	// the clientToken request parameter of that later call. All other parameters
+	// must also have the same values that you used in the first call.
 	ClientToken *string
 
 	// An object that contains the details about the rejected invitation.

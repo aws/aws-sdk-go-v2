@@ -13,7 +13,7 @@ import (
 
 // Enables enhanced Kinesis data stream monitoring for shard-level metrics. When
 // invoking this API, it is recommended you use the StreamARN input parameter
-// rather than the StreamName input parameter.
+// rather than the StreamName  input parameter.
 func (c *Client) EnableEnhancedMonitoring(ctx context.Context, params *EnableEnhancedMonitoringInput, optFns ...func(*Options)) (*EnableEnhancedMonitoringOutput, error) {
 	if params == nil {
 		params = &EnableEnhancedMonitoringInput{}
@@ -29,26 +29,21 @@ func (c *Client) EnableEnhancedMonitoring(ctx context.Context, params *EnableEnh
 	return out, nil
 }
 
-// Represents the input for EnableEnhancedMonitoring.
+// Represents the input for EnableEnhancedMonitoring .
 type EnableEnhancedMonitoringInput struct {
 
 	// List of shard-level metrics to enable. The following are the valid shard-level
-	// metrics. The value "ALL" enables every metric.
-	// - IncomingBytes
-	// -
-	// IncomingRecords
-	// - OutgoingBytes
-	// - OutgoingRecords
-	// -
-	// WriteProvisionedThroughputExceeded
-	// - ReadProvisionedThroughputExceeded
-	// -
-	// IteratorAgeMilliseconds
-	// - ALL
-	//
-	// For more information, see Monitoring the Amazon
-	// Kinesis Data Streams Service with Amazon CloudWatch
-	// (https://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html)
+	// metrics. The value " ALL " enables every metric.
+	//     - IncomingBytes
+	//     - IncomingRecords
+	//     - OutgoingBytes
+	//     - OutgoingRecords
+	//     - WriteProvisionedThroughputExceeded
+	//     - ReadProvisionedThroughputExceeded
+	//     - IteratorAgeMilliseconds
+	//     - ALL
+	//  For more information, see Monitoring the Amazon Kinesis Data Streams Service
+	// with Amazon CloudWatch (https://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html)
 	// in the Amazon Kinesis Data Streams Developer Guide.
 	//
 	// This member is required.
@@ -63,16 +58,16 @@ type EnableEnhancedMonitoringInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output for EnableEnhancedMonitoring and
-// DisableEnhancedMonitoring.
+// Represents the output for EnableEnhancedMonitoring  and
+// DisableEnhancedMonitoring .
 type EnableEnhancedMonitoringOutput struct {
 
 	// Represents the current state of the metrics that are in the enhanced state
 	// before the operation.
 	CurrentShardLevelMetrics []types.MetricsName
 
-	// Represents the list of all the metrics that would be in the enhanced state after
-	// the operation.
+	// Represents the list of all the metrics that would be in the enhanced state
+	// after the operation.
 	DesiredShardLevelMetrics []types.MetricsName
 
 	// The ARN of the stream.

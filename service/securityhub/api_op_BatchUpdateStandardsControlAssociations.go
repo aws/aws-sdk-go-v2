@@ -40,9 +40,9 @@ type BatchUpdateStandardsControlAssociationsInput struct {
 
 type BatchUpdateStandardsControlAssociationsOutput struct {
 
-	// A security control (identified with SecurityControlId, SecurityControlArn, or a
-	// mix of both parameters) whose enablement status in a specified standard couldn't
-	// be updated.
+	// A security control (identified with SecurityControlId , SecurityControlArn, or
+	// a mix of both parameters) whose enablement status in a specified standard
+	// couldn't be updated.
 	UnprocessedAssociationUpdates []types.UnprocessedStandardsControlAssociationUpdate
 
 	// Metadata pertaining to the operation's result.

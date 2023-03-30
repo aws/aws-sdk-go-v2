@@ -30,13 +30,11 @@ func (c *Client) DescribePatchBaselines(ctx context.Context, params *DescribePat
 
 type DescribePatchBaselinesInput struct {
 
-	// Each element in the array is a structure containing a key-value pair. Supported
-	// keys for DescribePatchBaselines include the following:
-	// - NAME_PREFIX Sample
-	// values: AWS- | My-
-	// - OWNER Sample values: AWS | Self
-	// - OPERATING_SYSTEM Sample
-	// values: AMAZON_LINUX | SUSE | WINDOWS
+	// Each element in the array is a structure containing a key-value pair.
+	// Supported keys for DescribePatchBaselines  include the following:
+	//     - NAME_PREFIX Sample values: AWS- | My-
+	//     - OWNER Sample values: AWS | Self
+	//     - OPERATING_SYSTEM Sample values: AMAZON_LINUX | SUSE | WINDOWS
 	Filters []types.PatchOrchestratorFilter
 
 	// The maximum number of patch baselines to return (per page).
@@ -51,7 +49,7 @@ type DescribePatchBaselinesInput struct {
 
 type DescribePatchBaselinesOutput struct {
 
-	// An array of PatchBaselineIdentity elements.
+	// An array of PatchBaselineIdentity  elements.
 	BaselineIdentities []types.PatchBaselineIdentity
 
 	// The token to use when requesting the next set of items. If there are no
@@ -138,8 +136,8 @@ type DescribePatchBaselinesPaginatorOptions struct {
 	// The maximum number of patch baselines to return (per page).
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -152,7 +150,8 @@ type DescribePatchBaselinesPaginator struct {
 	firstPage bool
 }
 
-// NewDescribePatchBaselinesPaginator returns a new DescribePatchBaselinesPaginator
+// NewDescribePatchBaselinesPaginator returns a new
+// DescribePatchBaselinesPaginator
 func NewDescribePatchBaselinesPaginator(client DescribePatchBaselinesAPIClient, params *DescribePatchBaselinesInput, optFns ...func(*DescribePatchBaselinesPaginatorOptions)) *DescribePatchBaselinesPaginator {
 	if params == nil {
 		params = &DescribePatchBaselinesInput{}

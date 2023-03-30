@@ -39,8 +39,8 @@ const (
 	PeriodTriggersElementAds PeriodTriggersElement = "ADS"
 )
 
-// Values returns all known values for PeriodTriggersElement. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PeriodTriggersElement. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PeriodTriggersElement) Values() []PeriodTriggersElement {
 	return []PeriodTriggersElement{
@@ -58,9 +58,9 @@ const (
 	AdMarkersDaterange      AdMarkers = "DATERANGE"
 )
 
-// Values returns all known values for AdMarkers. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for AdMarkers. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AdMarkers) Values() []AdMarkers {
 	return []AdMarkers{
 		"NONE",
@@ -100,8 +100,8 @@ const (
 	CmafEncryptionMethodAesCtr    CmafEncryptionMethod = "AES_CTR"
 )
 
-// Values returns all known values for CmafEncryptionMethod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for CmafEncryptionMethod. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (CmafEncryptionMethod) Values() []CmafEncryptionMethod {
 	return []CmafEncryptionMethod{
@@ -154,9 +154,9 @@ const (
 	OriginationDeny  Origination = "DENY"
 )
 
-// Values returns all known values for Origination. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Origination. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (Origination) Values() []Origination {
 	return []Origination{
 		"ALLOW",
@@ -173,9 +173,9 @@ const (
 	PlaylistTypeVod   PlaylistType = "VOD"
 )
 
-// Values returns all known values for PlaylistType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PlaylistType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PlaylistType) Values() []PlaylistType {
 	return []PlaylistType{
 		"NONE",
@@ -273,8 +273,8 @@ const (
 	SegmentTemplateFormatNumberWithDuration SegmentTemplateFormat = "NUMBER_WITH_DURATION"
 )
 
-// Values returns all known values for SegmentTemplateFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SegmentTemplateFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SegmentTemplateFormat) Values() []SegmentTemplateFormat {
 	return []SegmentTemplateFormat{
@@ -313,9 +313,9 @@ const (
 	StreamOrderVideoBitrateDescending StreamOrder = "VIDEO_BITRATE_DESCENDING"
 )
 
-// Values returns all known values for StreamOrder. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StreamOrder. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (StreamOrder) Values() []StreamOrder {
 	return []StreamOrder{
 		"ORIGINAL",
@@ -334,9 +334,9 @@ const (
 	UtcTimingHttpXsdate UtcTiming = "HTTP-XSDATE"
 )
 
-// Values returns all known values for UtcTiming. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for UtcTiming. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (UtcTiming) Values() []UtcTiming {
 	return []UtcTiming{
 		"NONE",

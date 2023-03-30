@@ -48,16 +48,16 @@ type EntitlementValue struct {
 	// entitlement is a boolean type. Otherwise, the field will not be set.
 	BooleanValue *bool
 
-	// The DoubleValue field will be populated with a double value when the entitlement
-	// is a double type. Otherwise, the field will not be set.
+	// The DoubleValue field will be populated with a double value when the
+	// entitlement is a double type. Otherwise, the field will not be set.
 	DoubleValue *float64
 
 	// The IntegerValue field will be populated with an integer value when the
 	// entitlement is an integer type. Otherwise, the field will not be set.
 	IntegerValue *int32
 
-	// The StringValue field will be populated with a string value when the entitlement
-	// is a string type. Otherwise, the field will not be set.
+	// The StringValue field will be populated with a string value when the
+	// entitlement is a string type. Otherwise, the field will not be set.
 	StringValue *string
 
 	noSmithyDocumentSerde

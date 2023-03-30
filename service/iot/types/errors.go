@@ -7,9 +7,9 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Unable to verify the CA certificate used to sign the device certificate you are
-// attempting to register. This is happens when you have registered more than one
-// CA certificate that has the same subject field and public key.
+// Unable to verify the CA certificate used to sign the device certificate you
+// are attempting to register. This is happens when you have registered more than
+// one CA certificate that has the same subject field and public key.
 type CertificateConflictException struct {
 	Message *string
 
@@ -377,8 +377,9 @@ func (e *InvalidResponseException) ErrorCode() string {
 }
 func (e *InvalidResponseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An attempt was made to change to an invalid state, for example by deleting a job
-// or a job execution which is "IN_PROGRESS" without setting the force parameter.
+// An attempt was made to change to an invalid state, for example by deleting a
+// job or a job execution which is "IN_PROGRESS" without setting the force
+// parameter.
 type InvalidStateTransitionException struct {
 	Message *string
 
@@ -645,8 +646,8 @@ func (e *SqlParseException) ErrorCode() string {
 }
 func (e *SqlParseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception occurs if you attempt to start a task with the same task-id as an
-// existing task but with a different clientRequestToken.
+// This exception occurs if you attempt to start a task with the same task-id as
+// an existing task but with a different clientRequestToken.
 type TaskAlreadyExistsException struct {
 	Message *string
 

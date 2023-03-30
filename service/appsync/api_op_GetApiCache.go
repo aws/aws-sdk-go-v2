@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves an ApiCache object.
+// Retrieves an ApiCache  object.
 func (c *Client) GetApiCache(ctx context.Context, params *GetApiCacheInput, optFns ...func(*Options)) (*GetApiCacheOutput, error) {
 	if params == nil {
 		params = &GetApiCacheInput{}
@@ -27,7 +27,7 @@ func (c *Client) GetApiCache(ctx context.Context, params *GetApiCacheInput, optF
 	return out, nil
 }
 
-// Represents the input of a GetApiCache operation.
+// Represents the input of a GetApiCache  operation.
 type GetApiCacheInput struct {
 
 	// The API ID.
@@ -38,10 +38,10 @@ type GetApiCacheInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a GetApiCache operation.
+// Represents the output of a GetApiCache  operation.
 type GetApiCacheOutput struct {
 
-	// The ApiCache object.
+	// The ApiCache  object.
 	ApiCache *types.ApiCache
 
 	// Metadata pertaining to the operation's result.

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an AppInstance and all associated data asynchronously.
+// Deletes an AppInstance  and all associated data asynchronously.
 func (c *Client) DeleteAppInstance(ctx context.Context, params *DeleteAppInstanceInput, optFns ...func(*Options)) (*DeleteAppInstanceOutput, error) {
 	if params == nil {
 		params = &DeleteAppInstanceInput{}
@@ -29,7 +29,7 @@ func (c *Client) DeleteAppInstance(ctx context.Context, params *DeleteAppInstanc
 
 type DeleteAppInstanceInput struct {
 
-	// The ARN of the AppInstance.
+	// The ARN of the AppInstance .
 	//
 	// This member is required.
 	AppInstanceArn *string

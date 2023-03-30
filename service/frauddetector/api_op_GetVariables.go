@@ -14,9 +14,9 @@ import (
 
 // Gets all of the variables or the specific variable. This is a paginated API.
 // Providing null maxSizePerPage results in retrieving maximum of 100 records per
-// page. If you provide maxSizePerPage the value must be between 50 and 100. To get
-// the next page result, a provide a pagination token from GetVariablesResult as
-// part of your request. Null pagination token fetches the records from the
+// page. If you provide maxSizePerPage the value must be between 50 and 100. To
+// get the next page result, a provide a pagination token from GetVariablesResult
+// as part of your request. Null pagination token fetches the records from the
 // beginning.
 func (c *Client) GetVariables(ctx context.Context, params *GetVariablesInput, optFns ...func(*Options)) (*GetVariablesOutput, error) {
 	if params == nil {
@@ -133,8 +133,8 @@ type GetVariablesPaginatorOptions struct {
 	// The max size per page determined for the get variable request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

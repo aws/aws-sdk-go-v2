@@ -30,8 +30,8 @@ func (c *Client) ListAppMonitors(ctx context.Context, params *ListAppMonitorsInp
 
 type ListAppMonitorsInput struct {
 
-	// The maximum number of results to return in one operation. The default is 50. The
-	// maximum that you can specify is 100.
+	// The maximum number of results to return in one operation. The default is 50.
+	// The maximum that you can specify is 100.
 	MaxResults *int32
 
 	// Use the token returned by the previous operation to request the next page of
@@ -43,7 +43,8 @@ type ListAppMonitorsInput struct {
 
 type ListAppMonitorsOutput struct {
 
-	// An array of structures that contain information about the returned app monitors.
+	// An array of structures that contain information about the returned app
+	// monitors.
 	AppMonitorSummaries []types.AppMonitorSummary
 
 	// A token that you can use in a subsequent operation to retrieve the next set of
@@ -126,12 +127,12 @@ var _ ListAppMonitorsAPIClient = (*Client)(nil)
 
 // ListAppMonitorsPaginatorOptions is the paginator options for ListAppMonitors
 type ListAppMonitorsPaginatorOptions struct {
-	// The maximum number of results to return in one operation. The default is 50. The
-	// maximum that you can specify is 100.
+	// The maximum number of results to return in one operation. The default is 50.
+	// The maximum that you can specify is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

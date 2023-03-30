@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a specified signaling channel. DeleteSignalingChannel is an asynchronous
-// operation. If you don't specify the channel's current version, the most recent
-// version is deleted.
+// Deletes a specified signaling channel. DeleteSignalingChannel is an
+// asynchronous operation. If you don't specify the channel's current version, the
+// most recent version is deleted.
 func (c *Client) DeleteSignalingChannel(ctx context.Context, params *DeleteSignalingChannelInput, optFns ...func(*Options)) (*DeleteSignalingChannelOutput, error) {
 	if params == nil {
 		params = &DeleteSignalingChannelInput{}
@@ -30,13 +30,14 @@ func (c *Client) DeleteSignalingChannel(ctx context.Context, params *DeleteSigna
 
 type DeleteSignalingChannelInput struct {
 
-	// The Amazon Resource Name (ARN) of the signaling channel that you want to delete.
+	// The Amazon Resource Name (ARN) of the signaling channel that you want to
+	// delete.
 	//
 	// This member is required.
 	ChannelARN *string
 
 	// The current version of the signaling channel that you want to delete. You can
-	// obtain the current version by invoking the DescribeSignalingChannel or
+	// obtain the current version by invoking the DescribeSignalingChannel  or
 	// ListSignalingChannels API operations.
 	CurrentVersion *string
 

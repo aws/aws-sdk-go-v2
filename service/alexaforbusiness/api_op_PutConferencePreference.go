@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the conference preferences on a specific conference provider at the account
-// level.
+// Sets the conference preferences on a specific conference provider at the
+// account level.
 func (c *Client) PutConferencePreference(ctx context.Context, params *PutConferencePreferenceInput, optFns ...func(*Options)) (*PutConferencePreferenceOutput, error) {
 	if params == nil {
 		params = &PutConferencePreferenceInput{}

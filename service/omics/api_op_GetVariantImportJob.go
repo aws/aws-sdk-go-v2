@@ -191,8 +191,8 @@ func addEndpointPrefix_opGetVariantImportJobMiddleware(stack *middleware.Stack) 
 	return stack.Serialize.Insert(&endpointPrefix_opGetVariantImportJobMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
-// GetVariantImportJobAPIClient is a client that implements the GetVariantImportJob
-// operation.
+// GetVariantImportJobAPIClient is a client that implements the
+// GetVariantImportJob operation.
 type GetVariantImportJobAPIClient interface {
 	GetVariantImportJob(context.Context, *GetVariantImportJobInput, ...func(*Options)) (*GetVariantImportJobOutput, error)
 }
@@ -213,8 +213,8 @@ type VariantImportJobCreatedWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, VariantImportJobCreatedWaiter will use default max delay of 600
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, VariantImportJobCreatedWaiter will use default max delay of 600
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration

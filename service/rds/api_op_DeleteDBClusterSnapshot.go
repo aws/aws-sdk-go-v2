@@ -12,13 +12,11 @@ import (
 )
 
 // Deletes a DB cluster snapshot. If the snapshot is being copied, the copy
-// operation is terminated. The DB cluster snapshot must be in the available state
-// to be deleted. For more information on Amazon Aurora, see  What is Amazon
-// Aurora?
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// operation is terminated. The DB cluster snapshot must be in the available
+// state to be deleted. For more information on Amazon Aurora, see What is Amazon
+// Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-// see  Multi-AZ DB cluster deployments
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+// see Multi-AZ DB cluster deployments (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 // in the Amazon RDS User Guide.
 func (c *Client) DeleteDBClusterSnapshot(ctx context.Context, params *DeleteDBClusterSnapshotInput, optFns ...func(*Options)) (*DeleteDBClusterSnapshotOutput, error) {
 	if params == nil {
@@ -38,7 +36,7 @@ func (c *Client) DeleteDBClusterSnapshot(ctx context.Context, params *DeleteDBCl
 type DeleteDBClusterSnapshotInput struct {
 
 	// The identifier of the DB cluster snapshot to delete. Constraints: Must be the
-	// name of an existing DB cluster snapshot in the available state.
+	// name of an existing DB cluster snapshot in the available  state.
 	//
 	// This member is required.
 	DBClusterSnapshotIdentifier *string
@@ -49,7 +47,7 @@ type DeleteDBClusterSnapshotInput struct {
 type DeleteDBClusterSnapshotOutput struct {
 
 	// Contains the details for an Amazon RDS DB cluster snapshot This data type is
-	// used as a response element in the DescribeDBClusterSnapshots action.
+	// used as a response element in the DescribeDBClusterSnapshots  action.
 	DBClusterSnapshot *types.DBClusterSnapshot
 
 	// Metadata pertaining to the operation's result.

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets event data results of a query. You must specify the QueryID value returned
-// by the StartQuery operation, and an ARN for EventDataStore.
+// Gets event data results of a query. You must specify the QueryID value
+// returned by the StartQuery  operation, and an ARN for EventDataStore .
 func (c *Client) GetQueryResults(ctx context.Context, params *GetQueryResultsInput, optFns ...func(*Options)) (*GetQueryResultsOutput, error) {
 	if params == nil {
 		params = &GetQueryResultsInput{}
@@ -65,8 +65,8 @@ type GetQueryResultsOutput struct {
 	// Shows the count of query results.
 	QueryStatistics *types.QueryStatistics
 
-	// The status of the query. Values include QUEUED, RUNNING, FINISHED, FAILED,
-	// TIMED_OUT, or CANCELLED.
+	// The status of the query. Values include QUEUED , RUNNING , FINISHED , FAILED ,
+	// TIMED_OUT , or CANCELLED .
 	QueryStatus types.QueryStatus
 
 	// Metadata pertaining to the operation's result.
@@ -148,8 +148,8 @@ var _ GetQueryResultsAPIClient = (*Client)(nil)
 
 // GetQueryResultsPaginatorOptions is the paginator options for GetQueryResults
 type GetQueryResultsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

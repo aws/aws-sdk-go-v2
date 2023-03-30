@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a version of an Lambda layer
-// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html), with a
-// link to download the layer archive that's valid for 10 minutes.
+// Returns information about a version of an Lambda layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
+// , with a link to download the layer archive that's valid for 10 minutes.
 func (c *Client) GetLayerVersionByArn(ctx context.Context, params *GetLayerVersionByArnInput, optFns ...func(*Options)) (*GetLayerVersionByArnOutput, error) {
 	if params == nil {
 		params = &GetLayerVersionByArnInput{}
@@ -41,8 +40,8 @@ type GetLayerVersionByArnInput struct {
 
 type GetLayerVersionByArnOutput struct {
 
-	// A list of compatible instruction set architectures
-	// (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
+	// A list of compatible instruction set architectures (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)
+	// .
 	CompatibleArchitectures []types.Architecture
 
 	// The layer's compatible runtimes.
@@ -51,8 +50,8 @@ type GetLayerVersionByArnOutput struct {
 	// Details about the layer version.
 	Content *types.LayerVersionContentOutput
 
-	// The date that the layer version was created, in ISO-8601 format
-	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
+	// The date that the layer version was created, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
+	// (YYYY-MM-DDThh:mm:ss.sTZD).
 	CreatedDate *string
 
 	// The description of the version.

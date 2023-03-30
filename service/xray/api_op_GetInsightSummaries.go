@@ -65,9 +65,9 @@ type GetInsightSummariesInput struct {
 
 type GetInsightSummariesOutput struct {
 
-	// The summary of each insight within the group matching the provided filters. The
-	// summary contains the InsightID, start and end time, the root cause service, the
-	// root cause and client impact statistics, the top anomalous services, and the
+	// The summary of each insight within the group matching the provided filters.
+	// The summary contains the InsightID, start and end time, the root cause service,
+	// the root cause and client impact statistics, the top anomalous services, and the
 	// status of the insight.
 	InsightSummaries []types.InsightSummary
 
@@ -143,8 +143,8 @@ func (c *Client) addOperationGetInsightSummariesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// GetInsightSummariesAPIClient is a client that implements the GetInsightSummaries
-// operation.
+// GetInsightSummariesAPIClient is a client that implements the
+// GetInsightSummaries operation.
 type GetInsightSummariesAPIClient interface {
 	GetInsightSummaries(context.Context, *GetInsightSummariesInput, ...func(*Options)) (*GetInsightSummariesOutput, error)
 }
@@ -157,8 +157,8 @@ type GetInsightSummariesPaginatorOptions struct {
 	// The maximum number of results to display.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

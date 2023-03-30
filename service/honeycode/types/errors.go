@@ -141,8 +141,8 @@ func (e *RequestTimeoutException) ErrorCode() string {
 }
 func (e *RequestTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// A Workbook, Table, App, Screen or Screen Automation was not found with the given
-// ID.
+// A Workbook, Table, App, Screen or Screen Automation was not found with the
+// given ID.
 type ResourceNotFoundException struct {
 	Message *string
 

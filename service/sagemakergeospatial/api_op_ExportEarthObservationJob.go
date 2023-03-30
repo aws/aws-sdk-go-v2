@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Use this operation to export results of an Earth Observation job and optionally
-// source images used as input to the EOJ to an S3 location.
+// Use this operation to export results of an Earth Observation job and
+// optionally source images used as input to the EOJ to an S3 location.
 func (c *Client) ExportEarthObservationJob(ctx context.Context, params *ExportEarthObservationJobInput, optFns ...func(*Options)) (*ExportEarthObservationJobOutput, error) {
 	if params == nil {
 		params = &ExportEarthObservationJobInput{}

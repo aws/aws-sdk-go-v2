@@ -31,17 +31,17 @@ func (c *Client) UpdateLensReview(ctx context.Context, params *UpdateLensReviewI
 type UpdateLensReviewInput struct {
 
 	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless, or the lens ARN, such as
+	// the lens alias, such as serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
 	// the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
-	// identified by its LensSummary$LensAlias.
+	// identified by its LensSummary$LensAlias .
 	//
 	// This member is required.
 	LensAlias *string
 
-	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
-	// Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web
+	// Services Region.
 	//
 	// This member is required.
 	WorkloadId *string
@@ -61,8 +61,8 @@ type UpdateLensReviewOutput struct {
 	// A lens review of a question.
 	LensReview *types.LensReview
 
-	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
-	// Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web
+	// Services Region.
 	WorkloadId *string
 
 	// Metadata pertaining to the operation's result.

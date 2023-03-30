@@ -12,21 +12,16 @@ import (
 )
 
 // Deleting a Global datastore is a two-step process:
-// - First, you must
-// DisassociateGlobalReplicationGroup to remove the secondary clusters in the
-// Global datastore.
-// - Once the Global datastore contains only the primary cluster,
-// you can use the DeleteGlobalReplicationGroup API to delete the Global datastore
-// while retainining the primary cluster using
-// RetainPrimaryReplicationGroup=true.
+//   - First, you must DisassociateGlobalReplicationGroup to remove the secondary clusters in the Global datastore.
+//   - Once the Global datastore contains only the primary cluster, you can use the DeleteGlobalReplicationGroup API to delete the Global datastore while retainining the primary cluster using RetainPrimaryReplicationGroup=true .
 //
-// Since the Global Datastore has only a
-// primary cluster, you can delete the Global Datastore while retaining the primary
-// by setting RetainPrimaryReplicationGroup=true. The primary cluster is never
-// deleted when deleting a Global Datastore. It can only be deleted when it no
-// longer is associated with any Global Datastore. When you receive a successful
-// response from this operation, Amazon ElastiCache immediately begins deleting the
-// selected resources; you cannot cancel or revert this operation.
+// Since the Global Datastore has only a primary cluster, you can delete the Global
+// Datastore while retaining the primary by setting
+// RetainPrimaryReplicationGroup=true. The primary cluster is never deleted when
+// deleting a Global Datastore. It can only be deleted when it no longer is
+// associated with any Global Datastore. When you receive a successful response
+// from this operation, Amazon ElastiCache immediately begins deleting the selected
+// resources; you cannot cancel or revert this operation.
 func (c *Client) DeleteGlobalReplicationGroup(ctx context.Context, params *DeleteGlobalReplicationGroupInput, optFns ...func(*Options)) (*DeleteGlobalReplicationGroupOutput, error) {
 	if params == nil {
 		params = &DeleteGlobalReplicationGroupInput{}
@@ -63,8 +58,7 @@ type DeleteGlobalReplicationGroupOutput struct {
 	// cluster that resides in a different Amazon region. The secondary cluster accepts
 	// only reads. The primary cluster automatically replicates updates to the
 	// secondary cluster.
-	// - The GlobalReplicationGroupIdSuffix represents the name of
-	// the Global datastore, which is what you use to associate a secondary cluster.
+	//     - The GlobalReplicationGroupIdSuffix represents the name of the Global datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *types.GlobalReplicationGroup
 
 	// Metadata pertaining to the operation's result.

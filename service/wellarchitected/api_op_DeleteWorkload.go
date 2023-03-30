@@ -42,8 +42,8 @@ type DeleteWorkloadInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
-	// Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web
+	// Services Region.
 	//
 	// This member is required.
 	WorkloadId *string

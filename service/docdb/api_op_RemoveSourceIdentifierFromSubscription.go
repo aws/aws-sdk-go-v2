@@ -28,17 +28,17 @@ func (c *Client) RemoveSourceIdentifierFromSubscription(ctx context.Context, par
 	return out, nil
 }
 
-// Represents the input to RemoveSourceIdentifierFromSubscription.
+// Represents the input to RemoveSourceIdentifierFromSubscription .
 type RemoveSourceIdentifierFromSubscriptionInput struct {
 
-	// The source identifier to be removed from the subscription, such as the instance
-	// identifier for an instance, or the name of a security group.
+	// The source identifier to be removed from the subscription, such as the
+	// instance identifier for an instance, or the name of a security group.
 	//
 	// This member is required.
 	SourceIdentifier *string
 
-	// The name of the Amazon DocumentDB event notification subscription that you want
-	// to remove a source identifier from.
+	// The name of the Amazon DocumentDB event notification subscription that you
+	// want to remove a source identifier from.
 	//
 	// This member is required.
 	SubscriptionName *string

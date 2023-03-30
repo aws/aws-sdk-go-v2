@@ -36,12 +36,12 @@ type ListRegistriesInput struct {
 	// be shared with other accounts.
 	NextToken *string
 
-	// Specifying this limits the results to only those registry names that start with
-	// the specified prefix.
+	// Specifying this limits the results to only those registry names that start
+	// with the specified prefix.
 	RegistryNamePrefix *string
 
-	// Can be set to Local or AWS to limit responses to your custom registries, or the
-	// ones provided by AWS.
+	// Can be set to Local or AWS to limit responses to your custom registries, or
+	// the ones provided by AWS.
 	Scope *string
 
 	noSmithyDocumentSerde
@@ -135,8 +135,8 @@ var _ ListRegistriesAPIClient = (*Client)(nil)
 type ListRegistriesPaginatorOptions struct {
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

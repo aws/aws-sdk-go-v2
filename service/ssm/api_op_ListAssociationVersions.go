@@ -47,8 +47,8 @@ type ListAssociationVersionsInput struct {
 
 type ListAssociationVersionsOutput struct {
 
-	// Information about all versions of the association for the specified association
-	// ID.
+	// Information about all versions of the association for the specified
+	// association ID.
 	AssociationVersions []types.AssociationVersionInfo
 
 	// The token for the next set of items to return. Use this token to get the next
@@ -139,8 +139,8 @@ type ListAssociationVersionsPaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

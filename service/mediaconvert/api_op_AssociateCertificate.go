@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates an AWS Certificate Manager (ACM) Amazon Resource Name (ARN) with AWS
-// Elemental MediaConvert.
+// Associates an AWS Certificate Manager (ACM) Amazon Resource Name (ARN) with
+// AWS Elemental MediaConvert.
 func (c *Client) AssociateCertificate(ctx context.Context, params *AssociateCertificateInput, optFns ...func(*Options)) (*AssociateCertificateOutput, error) {
 	if params == nil {
 		params = &AssociateCertificateInput{}
@@ -29,8 +29,8 @@ func (c *Client) AssociateCertificate(ctx context.Context, params *AssociateCert
 
 type AssociateCertificateInput struct {
 
-	// The ARN of the ACM certificate that you want to associate with your MediaConvert
-	// resource.
+	// The ARN of the ACM certificate that you want to associate with your
+	// MediaConvert resource.
 	//
 	// This member is required.
 	Arn *string

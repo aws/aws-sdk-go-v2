@@ -80,15 +80,16 @@ type DeviceSummary struct {
 	// The ID of the device.
 	ManagedDeviceId *string
 
-	// Optional metadata that you assign to a resource. You can use tags to categorize
-	// a resource in different ways, such as by purpose, owner, or environment.
+	// Optional metadata that you assign to a resource. You can use tags to
+	// categorize a resource in different ways, such as by purpose, owner, or
+	// environment.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Describes a parameter used to set up an Amazon Elastic Block Store (Amazon EBS)
-// volume in a block device mapping.
+// Describes a parameter used to set up an Amazon Elastic Block Store (Amazon
+// EBS) volume in a block device mapping.
 type EbsInstanceBlockDevice struct {
 
 	// When the attachment was initiated.
@@ -156,7 +157,7 @@ type Instance struct {
 	// The public IPv4 address assigned to the instance.
 	PublicIpAddress *string
 
-	// The device name of the root device volume (for example, /dev/sda1).
+	// The device name of the root device volume (for example, /dev/sda1 ).
 	RootDeviceName *string
 
 	// The security groups for the instance.
@@ -187,23 +188,20 @@ type InstanceBlockDeviceMapping struct {
 // The description of the current state of an instance.
 type InstanceState struct {
 
-	// The state of the instance as a 16-bit unsigned integer. The high byte is all of
-	// the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and
-	// 65,535. These numerical values are used for internal purposes and should be
+	// The state of the instance as a 16-bit unsigned integer. The high byte is all
+	// of the bits between 2^8 and (2^16)-1, which equals decimal values between 256
+	// and 65,535. These numerical values are used for internal purposes and should be
 	// ignored. The low byte is all of the bits between 2^0 and (2^8)-1, which equals
 	// decimal values between 0 and 255. The valid values for the instance state code
 	// are all in the range of the low byte. These values are:
-	// - 0 : pending
-	// - 16 :
-	// running
-	// - 32 : shutting-down
-	// - 48 : terminated
-	// - 64 : stopping
-	// - 80 :
-	// stopped
-	//
-	// You can ignore the high byte value by zeroing out all of the bits above
-	// 2^8 or 256 in decimal.
+	//     - 0 : pending
+	//     - 16 : running
+	//     - 32 : shutting-down
+	//     - 48 : terminated
+	//     - 64 : stopping
+	//     - 80 : stopped
+	// You can ignore the high byte value by zeroing out all of the
+	// bits above 2^8 or 256 in decimal.
 	Code *int32
 
 	// The current state of the instance.
@@ -312,8 +310,9 @@ type TaskSummary struct {
 	// The state of the task assigned to one or many devices.
 	State TaskState
 
-	// Optional metadata that you assign to a resource. You can use tags to categorize
-	// a resource in different ways, such as by purpose, owner, or environment.
+	// Optional metadata that you assign to a resource. You can use tags to
+	// categorize a resource in different ways, such as by purpose, owner, or
+	// environment.
 	Tags map[string]string
 
 	// The Amazon Resource Name (ARN) of the task.

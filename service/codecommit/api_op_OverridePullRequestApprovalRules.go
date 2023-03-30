@@ -38,7 +38,7 @@ type OverridePullRequestApprovalRulesInput struct {
 	OverrideStatus types.OverrideStatus
 
 	// The system-generated ID of the pull request for which you want to override all
-	// approval rule requirements. To get this information, use GetPullRequest.
+	// approval rule requirements. To get this information, use GetPullRequest .
 	//
 	// This member is required.
 	PullRequestId *string

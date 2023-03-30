@@ -31,7 +31,7 @@ func (c *Client) ListDeviceProfiles(ctx context.Context, params *ListDeviceProfi
 type ListDeviceProfilesInput struct {
 
 	// A filter to list only device profiles that use this type, which can be LoRaWAN
-	// or Sidewalk.
+	// or Sidewalk .
 	DeviceProfileType types.DeviceProfileType
 
 	// The maximum number of results to return in this operation.
@@ -133,8 +133,8 @@ type ListDeviceProfilesPaginatorOptions struct {
 	// The maximum number of results to return in this operation.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

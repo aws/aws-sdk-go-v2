@@ -28,7 +28,8 @@ func (c *Client) DeleteCustomDataIdentifier(ctx context.Context, params *DeleteC
 
 type DeleteCustomDataIdentifierInput struct {
 
-	// The unique identifier for the Amazon Macie resource that the request applies to.
+	// The unique identifier for the Amazon Macie resource that the request applies
+	// to.
 	//
 	// This member is required.
 	Id *string

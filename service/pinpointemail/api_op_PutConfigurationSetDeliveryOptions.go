@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associate a configuration set with a dedicated IP pool. You can use dedicated IP
-// pools to create groups of dedicated IP addresses for sending specific types of
-// email.
+// Associate a configuration set with a dedicated IP pool. You can use dedicated
+// IP pools to create groups of dedicated IP addresses for sending specific types
+// of email.
 func (c *Client) PutConfigurationSetDeliveryOptions(ctx context.Context, params *PutConfigurationSetDeliveryOptionsInput, optFns ...func(*Options)) (*PutConfigurationSetDeliveryOptionsOutput, error) {
 	if params == nil {
 		params = &PutConfigurationSetDeliveryOptionsInput{}
@@ -32,8 +32,8 @@ func (c *Client) PutConfigurationSetDeliveryOptions(ctx context.Context, params 
 // A request to associate a configuration set with a dedicated IP pool.
 type PutConfigurationSetDeliveryOptionsInput struct {
 
-	// The name of the configuration set that you want to associate with a dedicated IP
-	// pool.
+	// The name of the configuration set that you want to associate with a dedicated
+	// IP pool.
 	//
 	// This member is required.
 	ConfigurationSetName *string
@@ -52,8 +52,8 @@ type PutConfigurationSetDeliveryOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type PutConfigurationSetDeliveryOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

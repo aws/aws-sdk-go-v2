@@ -30,8 +30,8 @@ func (c *Client) DescribeWorkerConfiguration(ctx context.Context, params *Descri
 
 type DescribeWorkerConfigurationInput struct {
 
-	// The Amazon Resource Name (ARN) of the worker configuration that you want to get
-	// information about.
+	// The Amazon Resource Name (ARN) of the worker configuration that you want to
+	// get information about.
 	//
 	// This member is required.
 	WorkerConfigurationArn *string

@@ -28,9 +28,9 @@ const (
 	ApplicationMicrosoftOffice2019 Application = "Microsoft_Office_2019"
 )
 
-// Values returns all known values for Application. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Application. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (Application) Values() []Application {
 	return []Application{
 		"Microsoft_Office_2016",
@@ -166,8 +166,8 @@ const (
 	ConnectionAliasStateDeleting ConnectionAliasState = "DELETING"
 )
 
-// Values returns all known values for ConnectionAliasState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ConnectionAliasState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectionAliasState) Values() []ConnectionAliasState {
 	return []ConnectionAliasState{
@@ -206,9 +206,9 @@ const (
 	DedicatedTenancyModificationStateEnumFailed    DedicatedTenancyModificationStateEnum = "FAILED"
 )
 
-// Values returns all known values for DedicatedTenancyModificationStateEnum. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for DedicatedTenancyModificationStateEnum.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (DedicatedTenancyModificationStateEnum) Values() []DedicatedTenancyModificationStateEnum {
 	return []DedicatedTenancyModificationStateEnum{
@@ -225,9 +225,10 @@ const (
 	DedicatedTenancySupportEnumEnabled DedicatedTenancySupportEnum = "ENABLED"
 )
 
-// Values returns all known values for DedicatedTenancySupportEnum. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DedicatedTenancySupportEnum. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (DedicatedTenancySupportEnum) Values() []DedicatedTenancySupportEnum {
 	return []DedicatedTenancySupportEnum{
 		"ENABLED",
@@ -242,8 +243,8 @@ const (
 	DedicatedTenancySupportResultEnumDisabled DedicatedTenancySupportResultEnum = "DISABLED"
 )
 
-// Values returns all known values for DedicatedTenancySupportResultEnum. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for DedicatedTenancySupportResultEnum. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (DedicatedTenancySupportResultEnum) Values() []DedicatedTenancySupportResultEnum {
@@ -260,9 +261,9 @@ const (
 	DeletableCertificateBasedAuthPropertyCertificateBasedAuthPropertiesCertificateAuthorityArn DeletableCertificateBasedAuthProperty = "CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN"
 )
 
-// Values returns all known values for DeletableCertificateBasedAuthProperty. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for DeletableCertificateBasedAuthProperty.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (DeletableCertificateBasedAuthProperty) Values() []DeletableCertificateBasedAuthProperty {
 	return []DeletableCertificateBasedAuthProperty{
@@ -278,8 +279,8 @@ const (
 	DeletableSamlPropertySamlPropertiesRelayStateParameterName DeletableSamlProperty = "SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME"
 )
 
-// Values returns all known values for DeletableSamlProperty. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DeletableSamlProperty. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DeletableSamlProperty) Values() []DeletableSamlProperty {
 	return []DeletableSamlProperty{
@@ -296,9 +297,9 @@ const (
 	ImageTypeShared ImageType = "SHARED"
 )
 
-// Values returns all known values for ImageType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ImageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ImageType) Values() []ImageType {
 	return []ImageType{
 		"OWNED",
@@ -333,9 +334,9 @@ const (
 	ModificationResourceEnumComputeType ModificationResourceEnum = "COMPUTE_TYPE"
 )
 
-// Values returns all known values for ModificationResourceEnum. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ModificationResourceEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModificationResourceEnum) Values() []ModificationResourceEnum {
 	return []ModificationResourceEnum{
 		"ROOT_VOLUME",
@@ -352,8 +353,8 @@ const (
 	ModificationStateEnumUpdateInProgress ModificationStateEnum = "UPDATE_IN_PROGRESS"
 )
 
-// Values returns all known values for ModificationStateEnum. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ModificationStateEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ModificationStateEnum) Values() []ModificationStateEnum {
 	return []ModificationStateEnum{
@@ -388,9 +389,9 @@ const (
 	ProtocolWsp   Protocol = "WSP"
 )
 
-// Values returns all known values for Protocol. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Protocol. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Protocol) Values() []Protocol {
 	return []Protocol{
 		"PCOIP",
@@ -425,9 +426,9 @@ const (
 	RunningModeManual   RunningMode = "MANUAL"
 )
 
-// Values returns all known values for RunningMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RunningMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (RunningMode) Values() []RunningMode {
 	return []RunningMode{
 		"AUTO_STOP",
@@ -464,8 +465,8 @@ const (
 	StandbyWorkspaceRelationshipTypeStandby StandbyWorkspaceRelationshipType = "STANDBY"
 )
 
-// Values returns all known values for StandbyWorkspaceRelationshipType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for StandbyWorkspaceRelationshipType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (StandbyWorkspaceRelationshipType) Values() []StandbyWorkspaceRelationshipType {
@@ -483,8 +484,8 @@ const (
 	TargetWorkspaceStateAdminMaintenance TargetWorkspaceState = "ADMIN_MAINTENANCE"
 )
 
-// Values returns all known values for TargetWorkspaceState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TargetWorkspaceState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TargetWorkspaceState) Values() []TargetWorkspaceState {
 	return []TargetWorkspaceState{
@@ -520,8 +521,8 @@ const (
 	WorkspaceBundleStateError     WorkspaceBundleState = "ERROR"
 )
 
-// Values returns all known values for WorkspaceBundleState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for WorkspaceBundleState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (WorkspaceBundleState) Values() []WorkspaceBundleState {
 	return []WorkspaceBundleState{
@@ -542,9 +543,9 @@ const (
 	WorkspaceDirectoryStateError         WorkspaceDirectoryState = "ERROR"
 )
 
-// Values returns all known values for WorkspaceDirectoryState. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for WorkspaceDirectoryState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkspaceDirectoryState) Values() []WorkspaceDirectoryState {
 	return []WorkspaceDirectoryState{
 		"REGISTERING",

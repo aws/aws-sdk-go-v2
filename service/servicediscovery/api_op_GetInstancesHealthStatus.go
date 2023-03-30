@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the current health status (Healthy, Unhealthy, or Unknown) of one or more
-// instances that are associated with a specified service. There's a brief delay
-// between when you register an instance and when the health status for the
+// Gets the current health status ( Healthy , Unhealthy , or Unknown) of one or
+// more instances that are associated with a specified service. There's a brief
+// delay between when you register an instance and when the health status for the
 // instance is available.
 func (c *Client) GetInstancesHealthStatus(ctx context.Context, params *GetInstancesHealthStatusInput, optFns ...func(*Options)) (*GetInstancesHealthStatusOutput, error) {
 	if params == nil {
@@ -42,20 +42,19 @@ type GetInstancesHealthStatusInput struct {
 	// health status for. If you omit Instances, Cloud Map returns the health status
 	// for all the instances that are associated with the specified service. To get the
 	// IDs for the instances that you've registered by using a specified service,
-	// submit a ListInstances
-	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_ListInstances.html)
+	// submit a ListInstances (https://docs.aws.amazon.com/cloud-map/latest/api/API_ListInstances.html)
 	// request.
 	Instances []string
 
 	// The maximum number of instances that you want Cloud Map to return in the
-	// response to a GetInstancesHealthStatus request. If you don't specify a value for
-	// MaxResults, Cloud Map returns up to 100 instances.
+	// response to a GetInstancesHealthStatus request. If you don't specify a value
+	// for MaxResults , Cloud Map returns up to 100 instances.
 	MaxResults *int32
 
-	// For the first GetInstancesHealthStatus request, omit this value. If more than
+	// For the first GetInstancesHealthStatus  request, omit this value. If more than
 	// MaxResults instances match the specified criteria, you can submit another
-	// GetInstancesHealthStatus request to get the next group of results. Specify the
-	// value of NextToken from the previous response in the next request.
+	// GetInstancesHealthStatusrequest to get the next group of results. Specify the
+	// value of NextToken  from the previous response in the next request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -65,11 +64,11 @@ type GetInstancesHealthStatusOutput struct {
 
 	// If more than MaxResults instances match the specified criteria, you can submit
 	// another GetInstancesHealthStatus request to get the next group of results.
-	// Specify the value of NextToken from the previous response in the next request.
+	// Specify the value of NextToken  from the previous response in the next request.
 	NextToken *string
 
-	// A complex type that contains the IDs and the health status of the instances that
-	// you specified in the GetInstancesHealthStatus request.
+	// A complex type that contains the IDs and the health status of the instances
+	// that you specified in the GetInstancesHealthStatus  request.
 	Status map[string]types.HealthStatus
 
 	// Metadata pertaining to the operation's result.
@@ -153,12 +152,12 @@ var _ GetInstancesHealthStatusAPIClient = (*Client)(nil)
 // GetInstancesHealthStatus
 type GetInstancesHealthStatusPaginatorOptions struct {
 	// The maximum number of instances that you want Cloud Map to return in the
-	// response to a GetInstancesHealthStatus request. If you don't specify a value for
-	// MaxResults, Cloud Map returns up to 100 instances.
+	// response to a GetInstancesHealthStatus request. If you don't specify a value
+	// for MaxResults , Cloud Map returns up to 100 instances.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

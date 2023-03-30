@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a repository. If the repository contains images, you must either delete
-// all images in the repository or use the force option to delete the repository.
+// Deletes a repository. If the repository contains images, you must either
+// delete all images in the repository or use the force option to delete the
+// repository.
 func (c *Client) DeleteRepository(ctx context.Context, params *DeleteRepositoryInput, optFns ...func(*Options)) (*DeleteRepositoryOutput, error) {
 	if params == nil {
 		params = &DeleteRepositoryInput{}

@@ -32,9 +32,9 @@ func (c *Client) ResetServiceSpecificCredential(ctx context.Context, params *Res
 
 type ResetServiceSpecificCredentialInput struct {
 
-	// The unique identifier of the service-specific credential. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters that can consist of any upper or lowercased letter or digit.
+	// The unique identifier of the service-specific credential. This parameter
+	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string
+	// of characters that can consist of any upper or lowercased letter or digit.
 	//
 	// This member is required.
 	ServiceSpecificCredentialId *string

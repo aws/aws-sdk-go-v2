@@ -11,13 +11,12 @@ import (
 	"time"
 )
 
-// This test case serializes JSON lists for the following cases for both input and
-// output:
-// - Normal JSON lists.
-// - Normal JSON sets.
-// - JSON lists of lists.
-// - Lists
-// of structures.
+// This test case serializes JSON lists for the following cases for both input
+// and output:
+//   - Normal JSON lists.
+//   - Normal JSON sets.
+//   - JSON lists of lists.
+//   - Lists of structures.
 func (c *Client) JsonLists(ctx context.Context, params *JsonListsInput, optFns ...func(*Options)) (*JsonListsOutput, error) {
 	if params == nil {
 		params = &JsonListsInput{}

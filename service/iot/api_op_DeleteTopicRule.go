@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the rule. Requires permission to access the DeleteTopicRule
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Deletes the rule. Requires permission to access the DeleteTopicRule (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DeleteTopicRule(ctx context.Context, params *DeleteTopicRuleInput, optFns ...func(*Options)) (*DeleteTopicRuleOutput, error) {
 	if params == nil {

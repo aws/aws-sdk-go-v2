@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an application that has one configuration template named default and no
-// application versions.
+// Creates an application that has one configuration template named default and
+// no application versions.
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}
@@ -54,7 +54,7 @@ type CreateApplicationInput struct {
 // Result message containing a single description of an application.
 type CreateApplicationOutput struct {
 
-	// The ApplicationDescription of the application.
+	// The ApplicationDescription  of the application.
 	Application *types.ApplicationDescription
 
 	// Metadata pertaining to the operation's result.

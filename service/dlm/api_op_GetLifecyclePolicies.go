@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets summary information about all or the specified data lifecycle policies. To
-// get complete information about a policy, use GetLifecyclePolicy.
+// Gets summary information about all or the specified data lifecycle policies.
+// To get complete information about a policy, use GetLifecyclePolicy .
 func (c *Client) GetLifecyclePolicies(ctx context.Context, params *GetLifecyclePoliciesInput, optFns ...func(*Options)) (*GetLifecyclePoliciesOutput, error) {
 	if params == nil {
 		params = &GetLifecyclePoliciesInput{}
@@ -39,12 +39,12 @@ type GetLifecyclePoliciesInput struct {
 	// The activation state.
 	State types.GettablePolicyStateValues
 
-	// The tags to add to objects created by the policy. Tags are strings in the format
-	// key=value. These user-defined tags are added in addition to the Amazon Web
-	// Services-added lifecycle tags.
+	// The tags to add to objects created by the policy. Tags are strings in the
+	// format key=value. These user-defined tags are added in addition to the Amazon
+	// Web Services-added lifecycle tags.
 	TagsToAdd []string
 
-	// The target tag for a policy. Tags are strings in the format key=value.
+	// The target tag for a policy. Tags are strings in the format key=value .
 	TargetTags []string
 
 	noSmithyDocumentSerde

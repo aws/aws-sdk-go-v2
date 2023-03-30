@@ -17,8 +17,8 @@ import (
 // you provide a sample message that contains the content that you plan to send to
 // your customers. Amazon SES then sends that message to special email addresses
 // spread across several major email providers. After about 24 hours, the test is
-// complete, and you can use the GetDeliverabilityTestReport operation to view the
-// results of the test.
+// complete, and you can use the GetDeliverabilityTestReport operation to view
+// the results of the test.
 func (c *Client) CreateDeliverabilityTestReport(ctx context.Context, params *CreateDeliverabilityTestReportInput, optFns ...func(*Options)) (*CreateDeliverabilityTestReportOutput, error) {
 	if params == nil {
 		params = &CreateDeliverabilityTestReportInput{}
@@ -69,10 +69,10 @@ type CreateDeliverabilityTestReportInput struct {
 // Information about the predictive inbox placement test that you created.
 type CreateDeliverabilityTestReportOutput struct {
 
-	// The status of the predictive inbox placement test. If the status is IN_PROGRESS,
-	// then the predictive inbox placement test is currently running. Predictive inbox
-	// placement tests are usually complete within 24 hours of creating the test. If
-	// the status is COMPLETE, then the test is finished, and you can use the
+	// The status of the predictive inbox placement test. If the status is IN_PROGRESS
+	// , then the predictive inbox placement test is currently running. Predictive
+	// inbox placement tests are usually complete within 24 hours of creating the test.
+	// If the status is COMPLETE , then the test is finished, and you can use the
 	// GetDeliverabilityTestReport to view the results of the test.
 	//
 	// This member is required.

@@ -12,9 +12,10 @@ import (
 )
 
 // Returns a list of resource metadata for a given list of development endpoint
-// names. After calling the ListDevEndpoints operation, you can call this operation
-// to access the data to which you have been granted permissions. This operation
-// supports all IAM permissions, including permission conditions that uses tags.
+// names. After calling the ListDevEndpoints operation, you can call this
+// operation to access the data to which you have been granted permissions. This
+// operation supports all IAM permissions, including permission conditions that
+// uses tags.
 func (c *Client) BatchGetDevEndpoints(ctx context.Context, params *BatchGetDevEndpointsInput, optFns ...func(*Options)) (*BatchGetDevEndpointsOutput, error) {
 	if params == nil {
 		params = &BatchGetDevEndpointsInput{}
@@ -32,7 +33,7 @@ func (c *Client) BatchGetDevEndpoints(ctx context.Context, params *BatchGetDevEn
 
 type BatchGetDevEndpointsInput struct {
 
-	// The list of DevEndpoint names, which might be the names returned from the
+	// The list of DevEndpoint  names, which might be the names returned from the
 	// ListDevEndpoint operation.
 	//
 	// This member is required.
@@ -43,10 +44,10 @@ type BatchGetDevEndpointsInput struct {
 
 type BatchGetDevEndpointsOutput struct {
 
-	// A list of DevEndpoint definitions.
+	// A list of DevEndpoint  definitions.
 	DevEndpoints []types.DevEndpoint
 
-	// A list of DevEndpoints not found.
+	// A list of DevEndpoints  not found.
 	DevEndpointsNotFound []string
 
 	// Metadata pertaining to the operation's result.

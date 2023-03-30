@@ -32,8 +32,7 @@ func (c *Client) ListAnalyzedResources(ctx context.Context, params *ListAnalyzed
 // Retrieves a list of resources that have been analyzed.
 type ListAnalyzedResourcesInput struct {
 
-	// The ARN of the analyzer
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
+	// The ARN of the analyzer (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
 	// to retrieve a list of analyzed resources from.
 	//
 	// This member is required.
@@ -145,8 +144,8 @@ type ListAnalyzedResourcesPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

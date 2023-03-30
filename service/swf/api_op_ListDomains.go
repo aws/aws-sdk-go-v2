@@ -12,27 +12,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the list of domains registered in the account. The results may be split
-// into multiple pages. To retrieve subsequent pages, make the call again using the
-// nextPageToken returned by the initial call. This operation is eventually
-// consistent. The results are best effort and may not exactly reflect recent
-// updates and changes. Access Control You can use IAM policies to control this
-// action's access to Amazon SWF resources as follows:
-// - Use a Resource element
-// with the domain name to limit the action to only specified domains. The element
-// must be set to arn:aws:swf::AccountID:domain/*, where AccountID is the account
-// ID, with no dashes.
-// - Use an Action element to allow or deny permission to call
-// this action.
-// - You cannot use an IAM policy to constrain this action's
-// parameters.
+// Returns the list of domains registered in the account. The results may be
+// split into multiple pages. To retrieve subsequent pages, make the call again
+// using the nextPageToken returned by the initial call. This operation is
+// eventually consistent. The results are best effort and may not exactly reflect
+// recent updates and changes. Access Control You can use IAM policies to control
+// this action's access to Amazon SWF resources as follows:
+//   - Use a Resource element with the domain name to limit the action to only specified domains. The element must be set to arn:aws:swf::AccountID:domain/* , where AccountID is the account ID, with no dashes.
+//   - Use an Action element to allow or deny permission to call this action.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
-// If the caller doesn't have sufficient permissions to invoke the
-// action, or the parameter values fall outside the specified constraints, the
-// action fails. The associated event attribute's cause parameter is set to
-// OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to
-// Manage Access to Amazon SWF Workflows
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// If
+// the caller doesn't have sufficient permissions to invoke the action, or the
+// parameter values fall outside the specified constraints, the action fails. The
+// associated event attribute's cause  parameter is set to OPERATION_NOT_PERMITTED
+// . For details and example IAM policies, see Using IAM to Manage Access to
+// Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optFns ...func(*Options)) (*ListDomainsOutput, error) {
 	if params == nil {
@@ -60,17 +55,17 @@ type ListDomainsInput struct {
 	// obtain further pages of results.
 	MaximumPageSize int32
 
-	// If NextPageToken is returned there are more results available. The value of
-	// NextPageToken is a unique pagination token for each page. Make the call again
+	// If NextPageToken  is returned there are more results available. The value of
+	// NextPageTokenis a unique pagination token for each page. Make the call again
 	// using the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 60 seconds. Using an expired
-	// pagination token will return a 400 error: "Specified token has exceeded its
-	// maximum lifetime". The configured maximumPageSize determines how many results
+	// pagination token will return a 400  error: "Specified token has exceeded its
+	// maximum lifetime ". The configured maximumPageSize determines how many results
 	// can be returned in a single call.
 	NextPageToken *string
 
-	// When set to true, returns the results in reverse order. By default, the results
-	// are returned in ascending alphabetical order by name of the domains.
+	// When set to true, returns the results in reverse order. By default, the
+	// results are returned in ascending alphabetical order by name  of the domains.
 	ReverseOrder bool
 
 	noSmithyDocumentSerde
@@ -173,8 +168,8 @@ type ListDomainsPaginatorOptions struct {
 	// obtain further pages of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

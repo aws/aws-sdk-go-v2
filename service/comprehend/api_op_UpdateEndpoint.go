@@ -11,8 +11,8 @@ import (
 )
 
 // Updates information about the specified endpoint. For information about
-// endpoints, see Managing endpoints
-// (https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html).
+// endpoints, see Managing endpoints (https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html)
+// .
 func (c *Client) UpdateEndpoint(ctx context.Context, params *UpdateEndpointInput, optFns ...func(*Options)) (*UpdateEndpointOutput, error) {
 	if params == nil {
 		params = &UpdateEndpointInput{}

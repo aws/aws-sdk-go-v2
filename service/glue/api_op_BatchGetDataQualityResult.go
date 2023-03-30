@@ -39,7 +39,7 @@ type BatchGetDataQualityResultInput struct {
 
 type BatchGetDataQualityResultOutput struct {
 
-	// A list of DataQualityResult objects representing the data quality results.
+	// A list of DataQualityResult  objects representing the data quality results.
 	//
 	// This member is required.
 	Results []types.DataQualityResult

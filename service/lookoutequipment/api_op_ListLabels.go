@@ -64,7 +64,8 @@ type ListLabelsOutput struct {
 	// A summary of the items in the label group.
 	LabelSummaries []types.LabelSummary
 
-	// An opaque pagination token indicating where to continue the listing of datasets.
+	// An opaque pagination token indicating where to continue the listing of
+	// datasets.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -148,8 +149,8 @@ type ListLabelsPaginatorOptions struct {
 	// Specifies the maximum number of labels to list.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

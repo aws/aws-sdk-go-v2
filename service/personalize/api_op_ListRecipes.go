@@ -39,11 +39,11 @@ type ListRecipesInput struct {
 	// The maximum number of recipes to return.
 	MaxResults *int32
 
-	// A token returned from the previous call to ListRecipes for getting the next set
-	// of recipes (if they exist).
+	// A token returned from the previous call to ListRecipes for getting the next
+	// set of recipes (if they exist).
 	NextToken *string
 
-	// The default is SERVICE.
+	// The default is SERVICE .
 	RecipeProvider types.RecipeProvider
 
 	noSmithyDocumentSerde
@@ -135,8 +135,8 @@ type ListRecipesPaginatorOptions struct {
 	// The maximum number of recipes to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

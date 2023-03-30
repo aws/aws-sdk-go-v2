@@ -40,15 +40,15 @@ type ListHumanTaskUisInput struct {
 	CreationTimeBefore *time.Time
 
 	// The total number of items to return. If the total number of available items is
-	// more than the value specified in MaxResults, then a NextToken will be provided
-	// in the output that you can use to resume pagination.
+	// more than the value specified in MaxResults , then a NextToken will be
+	// provided in the output that you can use to resume pagination.
 	MaxResults *int32
 
 	// A token to resume pagination.
 	NextToken *string
 
 	// An optional value that specifies whether you want the results sorted in
-	// Ascending or Descending order.
+	// Ascending or Descending  order.
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -141,12 +141,12 @@ var _ ListHumanTaskUisAPIClient = (*Client)(nil)
 // ListHumanTaskUisPaginatorOptions is the paginator options for ListHumanTaskUis
 type ListHumanTaskUisPaginatorOptions struct {
 	// The total number of items to return. If the total number of available items is
-	// more than the value specified in MaxResults, then a NextToken will be provided
-	// in the output that you can use to resume pagination.
+	// more than the value specified in MaxResults , then a NextToken will be
+	// provided in the output that you can use to resume pagination.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

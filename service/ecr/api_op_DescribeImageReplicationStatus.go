@@ -29,7 +29,8 @@ func (c *Client) DescribeImageReplicationStatus(ctx context.Context, params *Des
 
 type DescribeImageReplicationStatusInput struct {
 
-	// An object with identifying information for an image in an Amazon ECR repository.
+	// An object with identifying information for an image in an Amazon ECR
+	// repository.
 	//
 	// This member is required.
 	ImageId *types.ImageIdentifier
@@ -48,7 +49,8 @@ type DescribeImageReplicationStatusInput struct {
 
 type DescribeImageReplicationStatusOutput struct {
 
-	// An object with identifying information for an image in an Amazon ECR repository.
+	// An object with identifying information for an image in an Amazon ECR
+	// repository.
 	ImageId *types.ImageIdentifier
 
 	// The replication status details for the images in the specified repository.

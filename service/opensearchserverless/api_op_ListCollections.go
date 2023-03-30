@@ -12,10 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all OpenSearch Serverless collections. For more information, see Creating
-// and managing Amazon OpenSearch Serverless collections
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html).
-// Make sure to include an empty request body {} if you don't include any
+// Lists all OpenSearch Serverless collections. For more information, see
+// Creating and managing Amazon OpenSearch Serverless collections (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html)
+// . Make sure to include an empty request body {} if you don't include any
 // collection filters in the request.
 func (c *Client) ListCollections(ctx context.Context, params *ListCollectionsInput, optFns ...func(*Options)) (*ListCollectionsOutput, error) {
 	if params == nil {
@@ -37,13 +36,13 @@ type ListCollectionsInput struct {
 	// List of filter names and values that you can use for requests.
 	CollectionFilters *types.CollectionFilters
 
-	// The maximum number of results to return. Default is 20. You can use nextToken to
-	// get the next page of results.
+	// The maximum number of results to return. Default is 20. You can use nextToken
+	// to get the next page of results.
 	MaxResults *int32
 
-	// If your initial ListCollections operation returns a nextToken, you can include
-	// the returned nextToken in subsequent ListCollections operations, which returns
-	// results in the next page.
+	// If your initial ListCollections  operation returns a nextToken, you can
+	// include the returned nextToken  in subsequent ListCollections operations,
+	// which returns results in the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -54,8 +53,8 @@ type ListCollectionsOutput struct {
 	// Details about each collection.
 	CollectionSummaries []types.CollectionSummary
 
-	// When nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// When nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page.
 	NextToken *string
 
@@ -135,8 +134,8 @@ var _ ListCollectionsAPIClient = (*Client)(nil)
 
 // ListCollectionsPaginatorOptions is the paginator options for ListCollections
 type ListCollectionsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

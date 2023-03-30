@@ -37,8 +37,8 @@ func (c *Client) CreateTemplate(ctx context.Context, params *CreateTemplateInput
 
 type CreateTemplateInput struct {
 
-	// The ID for the Amazon Web Services account that the group is in. You use the ID
-	// for the Amazon Web Services account that contains your Amazon QuickSight
+	// The ID for the Amazon Web Services account that the group is in. You use the
+	// ID for the Amazon Web Services account that contains your Amazon QuickSight
 	// account.
 	//
 	// This member is required.
@@ -50,9 +50,9 @@ type CreateTemplateInput struct {
 	// This member is required.
 	TemplateId *string
 
-	// The definition of a template. A definition is the data model of all features in
-	// a Dashboard, Template, or Analysis. Either a SourceEntity or a Definition must
-	// be provided in order for the request to be valid.
+	// The definition of a template. A definition is the data model of all features
+	// in a Dashboard, Template, or Analysis. Either a SourceEntity  or a Definition
+	// must be provided in order for the request to be valid.
 	Definition *types.TemplateVersionDefinition
 
 	// A display name for the template.
@@ -62,15 +62,15 @@ type CreateTemplateInput struct {
 	Permissions []types.ResourcePermission
 
 	// The entity that you are using as a source when you create the template. In
-	// SourceEntity, you specify the type of object you're using as source:
+	// SourceEntity , you specify the type of object you're using as source:
 	// SourceTemplate for a template or SourceAnalysis for an analysis. Both of these
 	// require an Amazon Resource Name (ARN). For SourceTemplate, specify the ARN of
-	// the source template. For SourceAnalysis, specify the ARN of the source analysis.
-	// The SourceTemplate ARN can contain any Amazon Web Services account and any
-	// Amazon QuickSight-supported Amazon Web Services Region. Use the
-	// DataSetReferences entity within SourceTemplate or SourceAnalysis to list the
+	// the source template. For SourceAnalysis, specify the ARN of the source
+	// analysis. The SourceTemplate ARN can contain any Amazon Web Services account
+	// and any Amazon QuickSight-supported Amazon Web Services Region. Use the
+	// DataSetReferences entity within SourceTemplate  or SourceAnalysis to list the
 	// replacement datasets for the placeholders listed in the original. The schema in
-	// each dataset must match its placeholder. Either a SourceEntity or a Definition
+	// each dataset must match its placeholder. Either a SourceEntity  or a Definition
 	// must be provided in order for the request to be valid.
 	SourceEntity *types.TemplateSourceEntity
 
@@ -78,10 +78,10 @@ type CreateTemplateInput struct {
 	// the resource.
 	Tags []types.Tag
 
-	// A description of the current template version being created. This API operation
-	// creates the first version of the template. Every time UpdateTemplate is called,
-	// a new version is created. Each version of the template maintains a description
-	// of the version in the VersionDescription field.
+	// A description of the current template version being created. This API
+	// operation creates the first version of the template. Every time UpdateTemplate
+	// is called, a new version is created. Each version of the template maintains a
+	// description of the version in the VersionDescription  field.
 	VersionDescription *string
 
 	noSmithyDocumentSerde

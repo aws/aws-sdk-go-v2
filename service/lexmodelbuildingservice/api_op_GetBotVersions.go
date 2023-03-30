@@ -14,11 +14,11 @@ import (
 
 // Gets information about all of the versions of a bot. The GetBotVersions
 // operation returns a BotMetadata object for each version of a bot. For example,
-// if a bot has three numbered versions, the GetBotVersions operation returns four
-// BotMetadata objects in the response, one for each numbered version and one for
-// the $LATEST version. The GetBotVersions operation always returns at least one
-// version, the $LATEST version. This operation requires permissions for the
-// lex:GetBotVersions action.
+// if a bot has three numbered versions, the GetBotVersions operation returns
+// four BotMetadata objects in the response, one for each numbered version and
+// one for the $LATEST  version. The GetBotVersions operation always returns at
+// least one version, the $LATEST version. This operation requires permissions
+// for the lex:GetBotVersions  action.
 func (c *Client) GetBotVersions(ctx context.Context, params *GetBotVersionsInput, optFns ...func(*Options)) (*GetBotVersionsOutput, error) {
 	if params == nil {
 		params = &GetBotVersionsInput{}
@@ -41,7 +41,8 @@ type GetBotVersionsInput struct {
 	// This member is required.
 	Name *string
 
-	// The maximum number of bot versions to return in the response. The default is 10.
+	// The maximum number of bot versions to return in the response. The default is
+	// 10.
 	MaxResults *int32
 
 	// A pagination token for fetching the next page of bot versions. If the response
@@ -56,7 +57,7 @@ type GetBotVersionsInput struct {
 type GetBotVersionsOutput struct {
 
 	// An array of BotMetadata objects, one for each numbered version of the bot plus
-	// one for the $LATEST version.
+	// one for the $LATEST  version.
 	Bots []types.BotMetadata
 
 	// A pagination token for fetching the next page of bot versions. If the response
@@ -144,11 +145,12 @@ var _ GetBotVersionsAPIClient = (*Client)(nil)
 
 // GetBotVersionsPaginatorOptions is the paginator options for GetBotVersions
 type GetBotVersionsPaginatorOptions struct {
-	// The maximum number of bot versions to return in the response. The default is 10.
+	// The maximum number of bot versions to return in the response. The default is
+	// 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

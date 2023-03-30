@@ -28,88 +28,46 @@ func (c *Client) DescribeReservedCacheNodesOfferings(ctx context.Context, params
 	return out, nil
 }
 
-// Represents the input of a DescribeReservedCacheNodesOfferings operation.
+// Represents the input of a DescribeReservedCacheNodesOfferings  operation.
 type DescribeReservedCacheNodesOfferingsInput struct {
 
-	// The cache node type filter value. Use this parameter to show only the available
-	// offerings matching the specified cache node type. The following node types are
-	// supported by ElastiCache. Generally speaking, the current generation types
-	// provide more memory and computational power at lower cost when compared to their
-	// equivalent previous generation counterparts.
-	// - General purpose:
-	// - Current
-	// generation: M6g node types (available only for Redis engine version 5.0.6 onward
-	// and for Memcached engine version 1.5.16 onward): cache.m6g.large,
-	// cache.m6g.xlarge, cache.m6g.2xlarge, cache.m6g.4xlarge, cache.m6g.8xlarge,
-	// cache.m6g.12xlarge, cache.m6g.16xlarge For region availability, see Supported
-	// Node Types
-	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	// M5 node types: cache.m5.large, cache.m5.xlarge, cache.m5.2xlarge,
-	// cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge M4 node types:
-	// cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge,
-	// cache.m4.10xlarge T4g node types (available only for Redis engine version 5.0.6
-	// onward and Memcached engine version 1.5.16 onward): cache.t4g.micro,
-	// cache.t4g.small, cache.t4g.medium T3 node types: cache.t3.micro, cache.t3.small,
-	// cache.t3.medium T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium
-	// -
-	// Previous generation: (not recommended. Existing clusters are still supported but
-	// creation of new clusters is not supported for these types.) T1 node types:
-	// cache.t1.micro M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large,
-	// cache.m1.xlarge M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge,
-	// cache.m3.2xlarge
+	// The cache node type filter value. Use this parameter to show only the
+	// available offerings matching the specified cache node type. The following node
+	// types are supported by ElastiCache. Generally speaking, the current generation
+	// types provide more memory and computational power at lower cost when compared to
+	// their equivalent previous generation counterparts.
+	//     - General purpose:
+	//         - Current generation: M6g node types (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward): cache.m6g.large , cache.m6g.xlarge , cache.m6g.2xlarge , cache.m6g.4xlarge , cache.m6g.8xlarge , cache.m6g.12xlarge , cache.m6g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion) M5 node types: cache.m5.large , cache.m5.xlarge , cache.m5.2xlarge , cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge M4 node types: cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge , cache.m4.4xlarge , cache.m4.10xlarge T4g node types (available only for Redis engine version 5.0.6 onward and Memcached engine version 1.5.16 onward): cache.t4g.micro , cache.t4g.small , cache.t4g.medium T3 node types: cache.t3.micro , cache.t3.small , cache.t3.medium T2 node types: cache.t2.micro , cache.t2.small , cache.t2.medium
+	//         - Previous generation: (not recommended. Existing clusters are still supported but creation of new clusters is not supported for these types.) T1 node types: cache.t1.micro M1 node types: cache.m1.small , cache.m1.medium , cache.m1.large , cache.m1.xlarge M3 node types: cache.m3.medium , cache.m3.large , cache.m3.xlarge , cache.m3.2xlarge
+	//     - Compute optimized:
+	//         - Previous generation: (not recommended. Existing clusters are still supported but creation of new clusters is not supported for these types.) C1 node types: cache.c1.xlarge
+	//     - Memory optimized:
+	//         - Current generation: R6g node types (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward). cache.r6g.large , cache.r6g.xlarge , cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge , cache.r6g.12xlarge , cache.r6g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion) R5 node types: cache.r5.large , cache.r5.xlarge , cache.r5.2xlarge , cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge R4 node types: cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge , cache.r4.4xlarge , cache.r4.8xlarge , cache.r4.16xlarge
+	//         - Previous generation: (not recommended. Existing clusters are still supported but creation of new clusters is not supported for these types.) M2 node types: cache.m2.xlarge , cache.m2.2xlarge , cache.m2.4xlarge R3 node types: cache.r3.large , cache.r3.xlarge , cache.r3.2xlarge ,
 	//
-	// - Compute optimized:
-	// - Previous generation: (not recommended.
-	// Existing clusters are still supported but creation of new clusters is not
-	// supported for these types.) C1 node types: cache.c1.xlarge
-	//
-	// - Memory
-	// optimized:
-	// - Current generation: R6g node types (available only for Redis engine
-	// version 5.0.6 onward and for Memcached engine version 1.5.16 onward).
-	// cache.r6g.large, cache.r6g.xlarge, cache.r6g.2xlarge, cache.r6g.4xlarge,
-	// cache.r6g.8xlarge, cache.r6g.12xlarge, cache.r6g.16xlarge For region
-	// availability, see Supported Node Types
-	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	// R5 node types: cache.r5.large, cache.r5.xlarge, cache.r5.2xlarge,
-	// cache.r5.4xlarge, cache.r5.12xlarge, cache.r5.24xlarge R4 node types:
-	// cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge,
-	// cache.r4.8xlarge, cache.r4.16xlarge
-	// - Previous generation: (not recommended.
-	// Existing clusters are still supported but creation of new clusters is not
-	// supported for these types.) M2 node types: cache.m2.xlarge, cache.m2.2xlarge,
-	// cache.m2.4xlarge R3 node types: cache.r3.large, cache.r3.xlarge,
-	// cache.r3.2xlarge,
-	//
-	// cache.r3.4xlarge, cache.r3.8xlarge
-	//
-	// Additional node type
-	// info
-	// - All current generation instance types are created in Amazon VPC by
-	// default.
-	// - Redis append-only files (AOF) are not supported for T1 or T2
-	// instances.
-	// - Redis Multi-AZ with automatic failover is not supported on T1
-	// instances.
-	// - Redis configuration variables appendonly and appendfsync are not
-	// supported on Redis version 2.8.22 and later.
+	//  cache.r3.4xlarge , cache.r3.8xlarge
+	//  Additional node type info
+	//     - All current generation instance types are created in Amazon VPC by default.
+	//     - Redis append-only files (AOF) are not supported for T1 or T2 instances.
+	//     - Redis Multi-AZ with automatic failover is not supported on T1 instances.
+	//     - Redis configuration variables appendonly and appendfsync are not supported on Redis version 2.8.22 and later.
 	CacheNodeType *string
 
-	// Duration filter value, specified in years or seconds. Use this parameter to show
-	// only reservations for a given duration. Valid Values: 1 | 3 | 31536000 |
+	// Duration filter value, specified in years or seconds. Use this parameter to
+	// show only reservations for a given duration. Valid Values: 1 | 3 | 31536000 |
 	// 94608000
 	Duration *string
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a marker is included in the
+	// response so that the remaining results can be retrieved. Default: 100
+	// Constraints: minimum 20; maximum 100.
 	MaxRecords *int32
 
 	// The offering type filter value. Use this parameter to show only the available
@@ -130,7 +88,7 @@ type DescribeReservedCacheNodesOfferingsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a DescribeReservedCacheNodesOfferings operation.
+// Represents the output of a DescribeReservedCacheNodesOfferings  operation.
 type DescribeReservedCacheNodesOfferingsOutput struct {
 
 	// Provides an identifier to allow retrieval of paginated results.
@@ -214,17 +172,17 @@ type DescribeReservedCacheNodesOfferingsAPIClient interface {
 
 var _ DescribeReservedCacheNodesOfferingsAPIClient = (*Client)(nil)
 
-// DescribeReservedCacheNodesOfferingsPaginatorOptions is the paginator options for
-// DescribeReservedCacheNodesOfferings
+// DescribeReservedCacheNodesOfferingsPaginatorOptions is the paginator options
+// for DescribeReservedCacheNodesOfferings
 type DescribeReservedCacheNodesOfferingsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a marker is included in the
+	// response so that the remaining results can be retrieved. Default: 100
+	// Constraints: minimum 20; maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

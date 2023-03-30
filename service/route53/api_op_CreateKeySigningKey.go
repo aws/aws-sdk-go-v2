@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new key-signing key (KSK) associated with a hosted zone. You can only
-// have two KSKs per hosted zone.
+// Creates a new key-signing key (KSK) associated with a hosted zone. You can
+// only have two KSKs per hosted zone.
 func (c *Client) CreateKeySigningKey(ctx context.Context, params *CreateKeySigningKeyInput, optFns ...func(*Options)) (*CreateKeySigningKeyOutput, error) {
 	if params == nil {
 		params = &CreateKeySigningKeyInput{}
@@ -47,19 +47,15 @@ type CreateKeySigningKeyInput struct {
 	// configure the customer managed customer managed key as follows: Status Enabled
 	// Key spec ECC_NIST_P256 Key usage Sign and verify Key policy The key policy must
 	// give permission for the following actions:
-	// - DescribeKey
-	// - GetPublicKey
-	// -
-	// Sign
-	//
+	//     - DescribeKey
+	//     - GetPublicKey
+	//     - Sign
 	// The key policy must also include the Amazon Route 53 service in the
 	// principal for your account. Specify the following:
-	// - "Service":
-	// "dnssec-route53.amazonaws.com"
-	//
-	// For more information about working with a
-	// customer managed key in KMS, see Key Management Service concepts
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html).
+	//     - "Service": "dnssec-route53.amazonaws.com"
+	// For more information about
+	// working with a customer managed key in KMS, see Key Management Service concepts (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html)
+	// .
 	//
 	// This member is required.
 	KeyManagementServiceArn *string
@@ -71,8 +67,8 @@ type CreateKeySigningKeyInput struct {
 	// This member is required.
 	Name *string
 
-	// A string specifying the initial status of the key-signing key (KSK). You can set
-	// the value to ACTIVE or INACTIVE.
+	// A string specifying the initial status of the key-signing key (KSK). You can
+	// set the value to ACTIVE  or INACTIVE .
 	//
 	// This member is required.
 	Status *string

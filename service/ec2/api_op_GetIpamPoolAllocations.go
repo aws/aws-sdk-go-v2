@@ -13,12 +13,9 @@ import (
 )
 
 // Get a list of all the CIDR allocations in an IPAM pool. If you use this action
-// after AllocateIpamPoolCidr
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AllocateIpamPoolCidr.html)
-// or ReleaseIpamPoolAllocation
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseIpamPoolAllocation.html),
-// note that all EC2 API actions follow an eventual consistency
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/query-api-troubleshooting.html#eventual-consistency)
+// after AllocateIpamPoolCidr (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AllocateIpamPoolCidr.html)
+// or ReleaseIpamPoolAllocation (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseIpamPoolAllocation.html)
+// , note that all EC2 API actions follow an eventual consistency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/query-api-troubleshooting.html#eventual-consistency)
 // model.
 func (c *Client) GetIpamPoolAllocations(ctx context.Context, params *GetIpamPoolAllocationsInput, optFns ...func(*Options)) (*GetIpamPoolAllocationsOutput, error) {
 	if params == nil {
@@ -44,13 +41,13 @@ type GetIpamPoolAllocationsInput struct {
 
 	// A check for whether you have the required permissions for the action without
 	// actually making the request and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// One or more filters for the request. For more information about filtering, see
-	// Filtering CLI output
-	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html).
+	// Filtering CLI output (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html)
+	// .
 	Filters []types.Filter
 
 	// The ID of the allocation.
@@ -157,8 +154,8 @@ type GetIpamPoolAllocationsPaginatorOptions struct {
 	// The maximum number of results you would like returned per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -171,7 +168,8 @@ type GetIpamPoolAllocationsPaginator struct {
 	firstPage bool
 }
 
-// NewGetIpamPoolAllocationsPaginator returns a new GetIpamPoolAllocationsPaginator
+// NewGetIpamPoolAllocationsPaginator returns a new
+// GetIpamPoolAllocationsPaginator
 func NewGetIpamPoolAllocationsPaginator(client GetIpamPoolAllocationsAPIClient, params *GetIpamPoolAllocationsInput, optFns ...func(*GetIpamPoolAllocationsPaginatorOptions)) *GetIpamPoolAllocationsPaginator {
 	if params == nil {
 		params = &GetIpamPoolAllocationsInput{}

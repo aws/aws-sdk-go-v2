@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a gateway's weekly maintenance start time information, including day and
-// time of the week. The maintenance time is the time in your gateway's time zone.
+// Updates a gateway's weekly maintenance start time information, including day
+// and time of the week. The maintenance time is the time in your gateway's time
+// zone.
 func (c *Client) UpdateMaintenanceStartTime(ctx context.Context, params *UpdateMaintenanceStartTimeInput, optFns ...func(*Options)) (*UpdateMaintenanceStartTimeOutput, error) {
 	if params == nil {
 		params = &UpdateMaintenanceStartTimeInput{}
@@ -28,24 +29,20 @@ func (c *Client) UpdateMaintenanceStartTime(ctx context.Context, params *UpdateM
 }
 
 // A JSON object containing the following fields:
-// -
-// UpdateMaintenanceStartTimeInput$DayOfMonth
-// -
-// UpdateMaintenanceStartTimeInput$DayOfWeek
-// -
-// UpdateMaintenanceStartTimeInput$HourOfDay
-// -
-// UpdateMaintenanceStartTimeInput$MinuteOfHour
+//   - UpdateMaintenanceStartTimeInput$DayOfMonth
+//   - UpdateMaintenanceStartTimeInput$DayOfWeek
+//   - UpdateMaintenanceStartTimeInput$HourOfDay
+//   - UpdateMaintenanceStartTimeInput$MinuteOfHour
 type UpdateMaintenanceStartTimeInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
 
-	// The hour component of the maintenance start time represented as hh, where hh is
-	// the hour (00 to 23). The hour of the day is in the time zone of the gateway.
+	// The hour component of the maintenance start time represented as hh, where hh
+	// is the hour (00 to 23). The hour of the day is in the time zone of the gateway.
 	//
 	// This member is required.
 	HourOfDay *int32
@@ -62,8 +59,8 @@ type UpdateMaintenanceStartTimeInput struct {
 	// 28 represents the last day of the month.
 	DayOfMonth *int32
 
-	// The day of the week component of the maintenance start time week represented as
-	// an ordinal number from 0 to 6, where 0 represents Sunday and 6 Saturday.
+	// The day of the week component of the maintenance start time week represented
+	// as an ordinal number from 0 to 6, where 0 represents Sunday and 6 Saturday.
 	DayOfWeek *int32
 
 	noSmithyDocumentSerde
@@ -73,8 +70,8 @@ type UpdateMaintenanceStartTimeInput struct {
 // maintenance start time is updated.
 type UpdateMaintenanceStartTimeOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

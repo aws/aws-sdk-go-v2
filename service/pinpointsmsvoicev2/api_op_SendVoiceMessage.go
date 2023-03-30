@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows you to send a request that sends a text message through Amazon Pinpoint.
-// This operation uses Amazon Polly (http://aws.amazon.com/polly/) to convert a
-// text script into a voice message.
+// Allows you to send a request that sends a text message through Amazon
+// Pinpoint. This operation uses Amazon Polly (http://aws.amazon.com/polly/) to
+// convert a text script into a voice message.
 func (c *Client) SendVoiceMessage(ctx context.Context, params *SendVoiceMessageInput, optFns ...func(*Options)) (*SendVoiceMessageOutput, error) {
 	if params == nil {
 		params = &SendVoiceMessageInput{}
@@ -36,8 +36,8 @@ type SendVoiceMessageInput struct {
 	// This member is required.
 	DestinationPhoneNumber *string
 
-	// The origination identity to use for the voice call. This can be the PhoneNumber,
-	// PhoneNumberId, PhoneNumberArn, PoolId, or PoolArn.
+	// The origination identity to use for the voice call. This can be the
+	// PhoneNumber, PhoneNumberId, PhoneNumberArn, PoolId, or PoolArn.
 	//
 	// This member is required.
 	OriginationIdentity *string
@@ -46,8 +46,8 @@ type SendVoiceMessageInput struct {
 	// ConfigurationSetName or ConfigurationSetArn.
 	ConfigurationSetName *string
 
-	// You can specify custom data in this field. If you do, that data is logged to the
-	// event destination.
+	// You can specify custom data in this field. If you do, that data is logged to
+	// the event destination.
 	Context map[string]string
 
 	// When set to true, the message is checked and validated, but isn't sent to the
@@ -61,20 +61,16 @@ type SendVoiceMessageInput struct {
 	MessageBody *string
 
 	// Specifies if the MessageBody field contains text or speech synthesis markup
-	// language (SSML) (https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
-	// -
-	// TEXT: This is the default value. When used the maximum character limit is
-	// 3000.
-	// - SSML: When used the maximum character limit is 6000 including SSML
-	// tagging.
+	// language (SSML) (https://docs.aws.amazon.com/polly/latest/dg/what-is.html) .
+	//     - TEXT: This is the default value. When used the maximum character limit is 3000.
+	//     - SSML: When used the maximum character limit is 6000 including SSML tagging.
 	MessageBodyTextType types.VoiceMessageBodyTextType
 
 	// How long the voice message is valid for. By default this is 72 hours.
 	TimeToLive *int32
 
-	// The voice for the Amazon Polly
-	// (https://docs.aws.amazon.com/polly/latest/dg/what-is.html) service to use. By
-	// default this is set to "MATTHEW".
+	// The voice for the Amazon Polly (https://docs.aws.amazon.com/polly/latest/dg/what-is.html)
+	// service to use. By default this is set to "MATTHEW".
 	VoiceId types.VoiceId
 
 	noSmithyDocumentSerde

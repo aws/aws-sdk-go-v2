@@ -42,9 +42,9 @@ type UpdateRevisionInput struct {
 	// An optional comment about the revision.
 	Comment *string
 
-	// Finalizing a revision tells AWS Data Exchange that your changes to the assets in
-	// the revision are complete. After it's in this read-only state, you can publish
-	// the revision to your products.
+	// Finalizing a revision tells AWS Data Exchange that your changes to the assets
+	// in the revision are complete. After it's in this read-only state, you can
+	// publish the revision to your products.
 	Finalized bool
 
 	noSmithyDocumentSerde

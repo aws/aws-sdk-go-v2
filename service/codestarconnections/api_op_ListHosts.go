@@ -31,11 +31,11 @@ func (c *Client) ListHosts(ctx context.Context, params *ListHostsInput, optFns .
 type ListHostsInput struct {
 
 	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	MaxResults int32
 
-	// The token that was returned from the previous ListHosts call, which can be used
-	// to return the next set of hosts in the list.
+	// The token that was returned from the previous ListHosts call, which can be
+	// used to return the next set of hosts in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -128,11 +128,11 @@ var _ ListHostsAPIClient = (*Client)(nil)
 // ListHostsPaginatorOptions is the paginator options for ListHosts
 type ListHostsPaginatorOptions struct {
 	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

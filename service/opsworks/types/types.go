@@ -24,7 +24,7 @@ type App struct {
 	// The app ID.
 	AppId *string
 
-	// A Source object that describes the app repository.
+	// A Source  object that describes the app repository.
 	AppSource *Source
 
 	// The stack attributes.
@@ -46,13 +46,12 @@ type App struct {
 	// Whether to enable SSL for the app.
 	EnableSsl *bool
 
-	// An array of EnvironmentVariable objects that specify environment variables to be
-	// associated with the app. After you deploy the app, these variables are defined
-	// on the associated app server instances. For more information, see  Environment
-	// Variables
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment).
-	// There is no specific limit on the number of environment variables. However, the
-	// size of the associated data structure - which includes the variable names,
+	// An array of EnvironmentVariable objects that specify environment variables to
+	// be associated with the app. After you deploy the app, these variables are
+	// defined on the associated app server instances. For more information, see
+	// Environment Variables (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment)
+	// . There is no specific limit on the number of environment variables. However,
+	// the size of the associated data structure - which includes the variable names,
 	// values, and protected flag values - cannot exceed 20 KB. This limit should
 	// accommodate most if not all use cases, but if you do exceed it, you will cause
 	// an exception (API) with an "Environment: is too large (maximum is 20 KB)"
@@ -65,7 +64,7 @@ type App struct {
 	// The app's short name.
 	Shortname *string
 
-	// An SslConfiguration object with the SSL configuration.
+	// An SslConfiguration  object with the SSL configuration.
 	SslConfiguration *SslConfiguration
 
 	// The app stack ID.
@@ -82,18 +81,18 @@ type App struct {
 // load-based instances.
 type AutoScalingThresholds struct {
 
-	// Custom Cloudwatch auto scaling alarms, to be used as thresholds. This parameter
-	// takes a list of up to five alarm names, which are case sensitive and must be in
-	// the same region as the stack. To use custom alarms, you must update your service
-	// role to allow cloudwatch:DescribeAlarms. You can either have AWS OpsWorks Stacks
-	// update the role for you when you first use this feature or you can edit the role
-	// manually. For more information, see Allowing AWS OpsWorks Stacks to Act on Your
-	// Behalf
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-servicerole.html).
+	// Custom Cloudwatch auto scaling alarms, to be used as thresholds. This
+	// parameter takes a list of up to five alarm names, which are case sensitive and
+	// must be in the same region as the stack. To use custom alarms, you must update
+	// your service role to allow cloudwatch:DescribeAlarms. You can either have AWS
+	// OpsWorks Stacks update the role for you when you first use this feature or you
+	// can edit the role manually. For more information, see Allowing AWS OpsWorks
+	// Stacks to Act on Your Behalf (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-servicerole.html)
+	// .
 	Alarms []string
 
-	// The CPU utilization threshold, as a percent of the available CPU. A value of -1
-	// disables the threshold.
+	// The CPU utilization threshold, as a percent of the available CPU. A value of
+	// -1 disables the threshold.
 	CpuThreshold *float64
 
 	// The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks
@@ -110,12 +109,12 @@ type AutoScalingThresholds struct {
 	InstanceCount *int32
 
 	// The load threshold. A value of -1 disables the threshold. For more information
-	// about how load is computed, see Load (computing)
-	// (http://en.wikipedia.org/wiki/Load_%28computing%29).
+	// about how load is computed, see Load (computing) (http://en.wikipedia.org/wiki/Load_%28computing%29)
+	// .
 	LoadThreshold *float64
 
-	// The memory utilization threshold, as a percent of the available memory. A value
-	// of -1 disables the threshold.
+	// The memory utilization threshold, as a percent of the available memory. A
+	// value of -1 disables the threshold.
 	MemoryThreshold *float64
 
 	// The amount of time, in minutes, that the load must exceed a threshold before
@@ -125,15 +124,14 @@ type AutoScalingThresholds struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a block device mapping. This data type maps directly to the Amazon EC2
-// BlockDeviceMapping
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html)
+// Describes a block device mapping. This data type maps directly to the Amazon
+// EC2 BlockDeviceMapping (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html)
 // data type.
 type BlockDeviceMapping struct {
 
-	// The device name that is exposed to the instance, such as /dev/sdh. For the root
-	// device, you can use the explicit device name or you can set this parameter to
-	// ROOT_DEVICE and AWS OpsWorks Stacks will provide the correct device name.
+	// The device name that is exposed to the instance, such as /dev/sdh. For the
+	// root device, you can use the explicit device name or you can set this parameter
+	// to ROOT_DEVICE  and AWS OpsWorks Stacks will provide the correct device name.
 	DeviceName *string
 
 	// An EBSBlockDevice that defines how to configure an Amazon EBS volume when the
@@ -143,8 +141,8 @@ type BlockDeviceMapping struct {
 	// Suppresses the specified device included in the AMI's block device mapping.
 	NoDevice *string
 
-	// The virtual device name. For more information, see BlockDeviceMapping
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html).
+	// The virtual device name. For more information, see BlockDeviceMapping (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html)
+	// .
 	VirtualName *string
 
 	noSmithyDocumentSerde
@@ -176,8 +174,8 @@ type CloudWatchLogsConfiguration struct {
 
 // Describes the Amazon CloudWatch logs configuration for a layer. For detailed
 // information about members of this data type, see the CloudWatch Logs Agent
-// Reference
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html).
+// Reference (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html)
+// .
 type CloudWatchLogsLogStream struct {
 
 	// Specifies the max number of log events in a batch, up to 10000. The default
@@ -189,27 +187,27 @@ type CloudWatchLogsLogStream struct {
 	// all event messages in UTF-8, plus 26 bytes for each log event.
 	BatchSize *int32
 
-	// Specifies the time duration for the batching of log events. The minimum value is
-	// 5000ms and default value is 5000ms.
+	// Specifies the time duration for the batching of log events. The minimum value
+	// is 5000ms and default value is 5000ms.
 	BufferDuration *int32
 
 	// Specifies how the time stamp is extracted from logs. For more information, see
-	// the CloudWatch Logs Agent Reference
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html).
+	// the CloudWatch Logs Agent Reference (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html)
+	// .
 	DatetimeFormat *string
 
 	// Specifies the encoding of the log file so that the file can be read correctly.
-	// The default is utf_8. Encodings supported by Python codecs.decode() can be used
-	// here.
+	// The default is utf_8 . Encodings supported by Python codecs.decode() can be
+	// used here.
 	Encoding CloudWatchLogsEncoding
 
-	// Specifies log files that you want to push to CloudWatch Logs. File can point to
-	// a specific file or multiple files (by using wild card characters such as
-	// /var/log/system.log*). Only the latest file is pushed to CloudWatch Logs, based
-	// on file modification time. We recommend that you use wild card characters to
-	// specify a series of files of the same type, such as access_log.2014-06-01-01,
-	// access_log.2014-06-01-02, and so on by using a pattern like access_log.*. Don't
-	// use a wildcard to match multiple file types, such as access_log_80 and
+	// Specifies log files that you want to push to CloudWatch Logs. File can point
+	// to a specific file or multiple files (by using wild card characters such as
+	// /var/log/system.log*). Only the latest file is pushed to CloudWatch Logs,
+	// based on file modification time. We recommend that you use wild card characters
+	// to specify a series of files of the same type, such as access_log.2014-06-01-01
+	// , access_log.2014-06-01-02 , and so on by using a pattern like access_log.*.
+	// Don't use a wildcard to match multiple file types, such as access_log_80  and
 	// access_log_443. To specify multiple, different file types, add another log
 	// stream entry to the configuration file, so that each log file type is stored in
 	// a different log group. Zipped files are not supported.
@@ -226,10 +224,10 @@ type CloudWatchLogsLogStream struct {
 	// persisted for that log stream.
 	InitialPosition CloudWatchLogsInitialPosition
 
-	// Specifies the destination log group. A log group is created automatically if it
-	// doesn't already exist. Log group names can be between 1 and 512 characters long.
-	// Allowed characters include a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/'
-	// (forward slash), and '.' (period).
+	// Specifies the destination log group. A log group is created automatically if
+	// it doesn't already exist. Log group names can be between 1 and 512 characters
+	// long. Allowed characters include a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen),
+	// '/' (forward slash), and '.' (period).
 	LogGroupName *string
 
 	// Specifies the pattern for identifying the start of a log message.
@@ -269,27 +267,25 @@ type Command struct {
 	LogUrl *string
 
 	// The command status:
-	// - failed
-	// - successful
-	// - skipped
-	// - pending
+	//     - failed
+	//     - successful
+	//     - skipped
+	//     - pending
 	Status *string
 
 	// The command type:
-	// - configure
-	// - deploy
-	// - execute_recipes
-	// -
-	// install_dependencies
-	// - restart
-	// - rollback
-	// - setup
-	// - start
-	// - stop
-	// - undeploy
-	// -
-	// update_custom_cookbooks
-	// - update_dependencies
+	//     - configure
+	//     - deploy
+	//     - execute_recipes
+	//     - install_dependencies
+	//     - restart
+	//     - rollback
+	//     - setup
+	//     - start
+	//     - stop
+	//     - undeploy
+	//     - update_custom_cookbooks
+	//     - update_dependencies
 	Type *string
 
 	noSmithyDocumentSerde
@@ -304,8 +300,8 @@ type DataSource struct {
 	// The database name.
 	DatabaseName *string
 
-	// The data source's type, AutoSelectOpsworksMysqlInstance, OpsworksMysqlInstance,
-	// RdsDbInstance, or None.
+	// The data source's type, AutoSelectOpsworksMysqlInstance , OpsworksMysqlInstance
+	// , RdsDbInstance , or None .
 	Type *string
 
 	noSmithyDocumentSerde
@@ -329,12 +325,12 @@ type Deployment struct {
 	// Date when the deployment was created.
 	CreatedAt *string
 
-	// A string that contains user-defined custom JSON. It can be used to override the
-	// corresponding default stack configuration attribute values for stack or to pass
-	// data to recipes. The string should be in the following format: "{\"key1\":
-	// \"value1\", \"key2\": \"value2\",...}" For more information on custom JSON, see
-	// Use Custom JSON to Modify the Stack Configuration Attributes
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html).
+	// A string that contains user-defined custom JSON. It can be used to override
+	// the corresponding default stack configuration attribute values for stack or to
+	// pass data to recipes. The string should be in the following format:
+	// "{\"key1\": \"value1\", \"key2\": \"value2\",...}"For more information on
+	// custom JSON, see Use Custom JSON to Modify the Stack Configuration Attributes (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html)
+	// .
 	CustomJson *string
 
 	// The deployment ID.
@@ -353,9 +349,9 @@ type Deployment struct {
 	StackId *string
 
 	// The deployment status:
-	// - running
-	// - successful
-	// - failed
+	//     - running
+	//     - successful
+	//     - failed
 	Status *string
 
 	noSmithyDocumentSerde
@@ -366,61 +362,41 @@ type DeploymentCommand struct {
 
 	// Specifies the operation. You can specify only one command. For stacks, the
 	// following commands are available:
-	// - execute_recipes: Execute one or more
-	// recipes. To specify the recipes, set an Args parameter named recipes to the list
-	// of recipes to be executed. For example, to execute phpapp::appsetup, set Args to
-	// {"recipes":["phpapp::appsetup"]}.
-	// - install_dependencies: Install the stack's
-	// dependencies.
-	// - update_custom_cookbooks: Update the stack's custom cookbooks.
-	// -
-	// update_dependencies: Update the stack's dependencies.
-	//
-	// The update_dependencies
-	// and install_dependencies commands are supported only for Linux instances. You
-	// can run the commands successfully on Windows instances, but they do nothing. For
-	// apps, the following commands are available:
-	// - deploy: Deploy an app. Ruby on
-	// Rails apps have an optional Args parameter named migrate. Set Args to
-	// {"migrate":["true"]} to migrate the database. The default setting is
-	// {"migrate":["false"]}.
-	// - rollback Roll the app back to the previous version.
-	// When you update an app, AWS OpsWorks Stacks stores the previous version, up to a
-	// maximum of five versions. You can use this command to roll an app back as many
-	// as four versions.
-	// - start: Start the app's web or application server.
-	// - stop:
-	// Stop the app's web or application server.
-	// - restart: Restart the app's web or
-	// application server.
-	// - undeploy: Undeploy the app.
+	//     - execute_recipes : Execute one or more recipes. To specify the recipes, set an Args parameter named recipes to the list of recipes to be executed. For example, to execute phpapp::appsetup , set Args to {"recipes":["phpapp::appsetup"]} .
+	//     - install_dependencies : Install the stack's dependencies.
+	//     - update_custom_cookbooks : Update the stack's custom cookbooks.
+	//     - update_dependencies : Update the stack's dependencies.
+	// The
+	// update_dependencies and install_dependencies commands are supported only for
+	// Linux instances. You can run the commands successfully on Windows instances, but
+	// they do nothing. For apps, the following commands are available:
+	//     - deploy : Deploy an app. Ruby on Rails apps have an optional Args parameter named migrate . Set Args to {"migrate":["true"]} to migrate the database. The default setting is {"migrate":["false"]}.
+	//     - rollback Roll the app back to the previous version. When you update an app, AWS OpsWorks Stacks stores the previous version, up to a maximum of five versions. You can use this command to roll an app back as many as four versions.
+	//     - start : Start the app's web or application server.
+	//     - stop : Stop the app's web or application server.
+	//     - restart : Restart the app's web or application server.
+	//     - undeploy : Undeploy the app.
 	//
 	// This member is required.
 	Name DeploymentCommandName
 
-	// The arguments of those commands that take arguments. It should be set to a JSON
-	// object with the following format: {"arg_name1" : ["value1", "value2", ...],
-	// "arg_name2" : ["value1", "value2", ...], ...} The update_dependencies command
-	// takes two arguments:
-	// - upgrade_os_to - Specifies the desired Amazon Linux
-	// version for instances whose OS you want to upgrade, such as Amazon Linux
-	// 2016.09. You must also set the allow_reboot argument to true.
-	// - allow_reboot -
-	// Specifies whether to allow AWS OpsWorks Stacks to reboot the instances if
-	// necessary, after installing the updates. This argument can be set to either true
-	// or false. The default value is false.
+	// The arguments of those commands that take arguments. It should be set to a
+	// JSON object with the following format: {"arg_name1" : ["value1", "value2",
+	// ...], "arg_name2" : ["value1", "value2", ...], ...} The update_dependencies
+	// command takes two arguments:
+	//     - upgrade_os_to - Specifies the desired Amazon Linux version for instances whose OS you want to upgrade, such as Amazon Linux 2016.09 . You must also set the allow_reboot argument to true.
+	//     - allow_reboot - Specifies whether to allow AWS OpsWorks Stacks to reboot the instances if necessary, after installing the updates. This argument can be set to either true or false . The default value is false .
 	//
-	// For example, to upgrade an instance to
-	// Amazon Linux 2016.09, set Args to the following.  { "upgrade_os_to":["Amazon
-	// Linux 2016.09"], "allow_reboot":["true"] }
+	// For example, to upgrade an instance to Amazon Linux 2016.09, set Args to the
+	// following. { "upgrade_os_to":["Amazon Linux 2016.09"], "allow_reboot":["true"]
+	// }
 	Args map[string][]string
 
 	noSmithyDocumentSerde
 }
 
 // Describes an Amazon EBS volume. This data type maps directly to the Amazon EC2
-// EbsBlockDevice
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html)
+// EbsBlockDevice (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html)
 // data type.
 type EbsBlockDevice struct {
 
@@ -428,24 +404,24 @@ type EbsBlockDevice struct {
 	DeleteOnTermination *bool
 
 	// The number of I/O operations per second (IOPS) that the volume supports. For
-	// more information, see EbsBlockDevice
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html).
+	// more information, see EbsBlockDevice (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html)
+	// .
 	Iops *int32
 
 	// The snapshot ID.
 	SnapshotId *string
 
-	// The volume size, in GiB. For more information, see EbsBlockDevice
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html).
+	// The volume size, in GiB. For more information, see EbsBlockDevice (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html)
+	// .
 	VolumeSize *int32
 
-	// The volume type. gp2 for General Purpose (SSD) volumes, io1 for Provisioned IOPS
-	// (SSD) volumes, st1 for Throughput Optimized hard disk drives (HDD), sc1 for Cold
-	// HDD,and standard for Magnetic volumes. If you specify the io1 volume type, you
-	// must also specify a value for the Iops attribute. The maximum ratio of
-	// provisioned IOPS to requested volume size (in GiB) is 50:1. AWS uses the default
-	// volume size (in GiB) specified in the AMI attributes to set IOPS to 50 x (volume
-	// size).
+	// The volume type. gp2  for General Purpose (SSD) volumes, io1 for Provisioned
+	// IOPS (SSD) volumes, st1  for Throughput Optimized hard disk drives (HDD), sc1
+	// for Cold HDD,and standard  for Magnetic volumes. If you specify the io1 volume
+	// type, you must also specify a value for the Iops attribute. The maximum ratio
+	// of provisioned IOPS to requested volume size (in GiB) is 50:1. AWS uses the
+	// default volume size (in GiB) specified in the AMI attributes to set IOPS to 50 x
+	// (volume size).
 	VolumeType VolumeType
 
 	noSmithyDocumentSerde
@@ -484,8 +460,8 @@ type ElasticIp struct {
 	// The name.
 	Name *string
 
-	// The AWS region. For more information, see Regions and Endpoints
-	// (https://docs.aws.amazon.com/general/latest/gr/rande.html).
+	// The AWS region. For more information, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html)
+	// .
 	Region *string
 
 	noSmithyDocumentSerde
@@ -500,8 +476,8 @@ type ElasticLoadBalancer struct {
 	// The instance's public DNS name.
 	DnsName *string
 
-	// A list of the EC2 instances that the Elastic Load Balancing instance is managing
-	// traffic for.
+	// A list of the EC2 instances that the Elastic Load Balancing instance is
+	// managing traffic for.
 	Ec2InstanceIds []string
 
 	// The Elastic Load Balancing instance's name.
@@ -544,9 +520,9 @@ type EnvironmentVariable struct {
 	Value *string
 
 	// (Optional) Whether the variable's value will be returned by the DescribeApps
-	// action. To conceal an environment variable's value, set Secure to true.
+	// action. To conceal an environment variable's value, set Secure  to true .
 	// DescribeApps then returns *****FILTERED***** instead of the actual value. The
-	// default value for Secure is false.
+	// default value for Secure  is false .
 	Secure *bool
 
 	noSmithyDocumentSerde
@@ -555,13 +531,12 @@ type EnvironmentVariable struct {
 // Describes an instance.
 type Instance struct {
 
-	// The agent version. This parameter is set to INHERIT if the instance inherits the
-	// default stack setting or to a a version number for a fixed agent version.
+	// The agent version. This parameter is set to INHERIT if the instance inherits
+	// the default stack setting or to a a version number for a fixed agent version.
 	AgentVersion *string
 
 	// A custom AMI ID to be used to create the instance. For more information, see
-	// Instances
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html)
+	// Instances (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html)
 	AmiId *string
 
 	// The instance architecture: "i386" or "x86_64".
@@ -573,12 +548,12 @@ type Instance struct {
 	// For load-based or time-based instances, the type.
 	AutoScalingType AutoScalingType
 
-	// The instance Availability Zone. For more information, see Regions and Endpoints
-	// (https://docs.aws.amazon.com/general/latest/gr/rande.html).
+	// The instance Availability Zone. For more information, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html)
+	// .
 	AvailabilityZone *string
 
-	// An array of BlockDeviceMapping objects that specify the instance's block device
-	// mappings.
+	// An array of BlockDeviceMapping objects that specify the instance's block
+	// device mappings.
 	BlockDeviceMappings []BlockDeviceMapping
 
 	// The time that the instance was created.
@@ -596,37 +571,37 @@ type Instance struct {
 	// For container instances, the instance's ARN.
 	EcsContainerInstanceArn *string
 
-	// The instance Elastic IP address
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html).
+	// The instance Elastic IP address  (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
+	// .
 	ElasticIp *string
 
 	// The instance host name.
 	Hostname *string
 
-	// For registered instances, the infrastructure class: ec2 or on-premises.
+	// For registered instances, the infrastructure class: ec2  or on-premises .
 	InfrastructureClass *string
 
-	// Whether to install operating system and package updates when the instance boots.
-	// The default value is true. If this value is set to false, you must then update
-	// your instances manually by using CreateDeployment to run the update_dependencies
-	// stack command or by manually running yum (Amazon Linux) or apt-get (Ubuntu) on
-	// the instances. We strongly recommend using the default value of true, to ensure
-	// that your instances have the latest security updates.
+	// Whether to install operating system and package updates when the instance
+	// boots. The default value is true . If this value is set to false, you must
+	// then update your instances manually by using CreateDeployment  to run the
+	// update_dependencies stack command or by manually running yum  (Amazon Linux) or
+	// apt-get(Ubuntu) on the instances. We strongly recommend using the default
+	// value of true , to ensure that your instances have the latest security updates.
 	InstallUpdatesOnBoot *bool
 
 	// The instance ID.
 	InstanceId *string
 
-	// The ARN of the instance's IAM profile. For more information about IAM ARNs, see
-	// Using Identifiers
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
+	// The ARN of the instance's IAM profile. For more information about IAM ARNs,
+	// see Using Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
+	// .
 	InstanceProfileArn *string
 
-	// The instance type, such as t2.micro.
+	// The instance type, such as t2.micro .
 	InstanceType *string
 
 	// The ID of the last service error. For more information, call
-	// DescribeServiceErrors.
+	// DescribeServiceErrors .
 	LastServiceErrorId *string
 
 	// An array containing the instance layer IDs.
@@ -659,9 +634,9 @@ type Instance struct {
 	// For registered instances, the reported operating system.
 	ReportedOs *ReportedOs
 
-	// The instance's root device type. For more information, see Storage for the Root
-	// Device
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
+	// The instance's root device type. For more information, see Storage for the
+	// Root Device (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device)
+	// .
 	RootDeviceType RootDeviceType
 
 	// The root device volume ID.
@@ -683,46 +658,45 @@ type Instance struct {
 	StackId *string
 
 	// The instance status:
-	// - booting
-	// - connection_lost
-	// - online
-	// - pending
-	// -
-	// rebooting
-	// - requested
-	// - running_setup
-	// - setup_failed
-	// - shutting_down
-	// -
-	// start_failed
-	// - stop_failed
-	// - stopped
-	// - stopping
-	// - terminated
-	// - terminating
+	//     - booting
+	//     - connection_lost
+	//     - online
+	//     - pending
+	//     - rebooting
+	//     - requested
+	//     - running_setup
+	//     - setup_failed
+	//     - shutting_down
+	//     - start_failed
+	//     - stop_failed
+	//     - stopped
+	//     - stopping
+	//     - terminated
+	//     - terminating
 	Status *string
 
 	// The instance's subnet ID; applicable only if the stack is running in a VPC.
 	SubnetId *string
 
-	// The instance's tenancy option, such as dedicated or host.
+	// The instance's tenancy option, such as dedicated  or host .
 	Tenancy *string
 
-	// The instance's virtualization type: paravirtual or hvm.
+	// The instance's virtualization type: paravirtual  or hvm .
 	VirtualizationType VirtualizationType
 
 	noSmithyDocumentSerde
 }
 
 // Contains a description of an Amazon EC2 instance from the Amazon EC2 metadata
-// service. For more information, see Instance Metadata and User Data
-// (https://docs.aws.amazon.com/sdkfornet/latest/apidocs/Index.html).
+// service. For more information, see Instance Metadata and User Data (https://docs.aws.amazon.com/sdkfornet/latest/apidocs/Index.html)
+// .
 type InstanceIdentity struct {
 
 	// A JSON document that contains the metadata.
 	Document *string
 
-	// A signature that can be used to verify the document's accuracy and authenticity.
+	// A signature that can be used to verify the document's accuracy and
+	// authenticity.
 	Signature *string
 
 	noSmithyDocumentSerde
@@ -734,22 +708,22 @@ type InstancesCount struct {
 	// The number of instances in the Assigning state.
 	Assigning *int32
 
-	// The number of instances with booting status.
+	// The number of instances with booting  status.
 	Booting *int32
 
-	// The number of instances with connection_lost status.
+	// The number of instances with connection_lost  status.
 	ConnectionLost *int32
 
 	// The number of instances in the Deregistering state.
 	Deregistering *int32
 
-	// The number of instances with online status.
+	// The number of instances with online  status.
 	Online *int32
 
-	// The number of instances with pending status.
+	// The number of instances with pending  status.
 	Pending *int32
 
-	// The number of instances with rebooting status.
+	// The number of instances with rebooting  status.
 	Rebooting *int32
 
 	// The number of instances in the Registered state.
@@ -758,34 +732,34 @@ type InstancesCount struct {
 	// The number of instances in the Registering state.
 	Registering *int32
 
-	// The number of instances with requested status.
+	// The number of instances with requested  status.
 	Requested *int32
 
-	// The number of instances with running_setup status.
+	// The number of instances with running_setup  status.
 	RunningSetup *int32
 
-	// The number of instances with setup_failed status.
+	// The number of instances with setup_failed  status.
 	SetupFailed *int32
 
-	// The number of instances with shutting_down status.
+	// The number of instances with shutting_down  status.
 	ShuttingDown *int32
 
-	// The number of instances with start_failed status.
+	// The number of instances with start_failed  status.
 	StartFailed *int32
 
-	// The number of instances with stop_failed status.
+	// The number of instances with stop_failed  status.
 	StopFailed *int32
 
-	// The number of instances with stopped status.
+	// The number of instances with stopped  status.
 	Stopped *int32
 
-	// The number of instances with stopping status.
+	// The number of instances with stopping  status.
 	Stopping *int32
 
-	// The number of instances with terminated status.
+	// The number of instances with terminated  status.
 	Terminated *int32
 
-	// The number of instances with terminating status.
+	// The number of instances with terminating  status.
 	Terminating *int32
 
 	// The number of instances in the Unassigning state.
@@ -800,22 +774,21 @@ type Layer struct {
 	// The Amazon Resource Number (ARN) of a layer.
 	Arn *string
 
-	// The layer attributes. For the HaproxyStatsPassword, MysqlRootPassword, and
+	// The layer attributes. For the HaproxyStatsPassword , MysqlRootPassword , and
 	// GangliaPassword attributes, AWS OpsWorks Stacks returns *****FILTERED*****
 	// instead of the actual value For an ECS Cluster layer, AWS OpsWorks Stacks the
 	// EcsClusterArn attribute is set to the cluster's ARN.
 	Attributes map[string]string
 
-	// Whether to automatically assign an Elastic IP address
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
-	// to the layer's instances. For more information, see How to Edit a Layer
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
+	// Whether to automatically assign an Elastic IP address (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
+	// to the layer's instances. For more information, see How to Edit a Layer (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html)
+	// .
 	AutoAssignElasticIps *bool
 
 	// For stacks that are running in a VPC, whether to automatically assign a public
 	// IP address to the layer's instances. For more information, see How to Edit a
-	// Layer
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
+	// Layer (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html)
+	// .
 	AutoAssignPublicIps *bool
 
 	// The Amazon CloudWatch Logs configuration settings for the layer.
@@ -824,16 +797,16 @@ type Layer struct {
 	// Date when the layer was created.
 	CreatedAt *string
 
-	// The ARN of the default IAM profile to be used for the layer's EC2 instances. For
-	// more information about IAM ARNs, see Using Identifiers
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
+	// The ARN of the default IAM profile to be used for the layer's EC2 instances.
+	// For more information about IAM ARNs, see Using Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
+	// .
 	CustomInstanceProfileArn *string
 
 	// A JSON formatted string containing the layer's custom stack configuration and
 	// deployment attributes.
 	CustomJson *string
 
-	// A LayerCustomRecipes object that specifies the layer's custom recipes.
+	// A LayerCustomRecipes  object that specifies the layer's custom recipes.
 	CustomRecipes *Recipes
 
 	// An array containing the layer's custom security group IDs.
@@ -847,8 +820,8 @@ type Layer struct {
 	// particular layer to be run in response to each of the five events. To specify a
 	// recipe, use the cookbook's directory name in the repository followed by two
 	// colons and the recipe name, which is the recipe's file name without the .rb
-	// extension. For example: phpapp2::dbsetup specifies the dbsetup.rb recipe in the
-	// repository's phpapp2 folder.
+	// extension. For example: phpapp2::dbsetup  specifies the dbsetup.rb recipe in
+	// the repository's phpapp2  folder.
 	DefaultRecipes *Recipes
 
 	// An array containing the layer's security group names.
@@ -857,12 +830,12 @@ type Layer struct {
 	// Whether auto healing is disabled for the layer.
 	EnableAutoHealing *bool
 
-	// Whether to install operating system and package updates when the instance boots.
-	// The default value is true. If this value is set to false, you must then update
-	// your instances manually by using CreateDeployment to run the update_dependencies
-	// stack command or manually running yum (Amazon Linux) or apt-get (Ubuntu) on the
-	// instances. We strongly recommend using the default value of true, to ensure that
-	// your instances have the latest security updates.
+	// Whether to install operating system and package updates when the instance
+	// boots. The default value is true . If this value is set to false, you must
+	// then update your instances manually by using CreateDeployment  to run the
+	// update_dependencies stack command or manually running yum  (Amazon Linux) or
+	// apt-get(Ubuntu) on the instances. We strongly recommend using the default
+	// value of true , to ensure that your instances have the latest security updates.
 	InstallUpdatesOnBoot *bool
 
 	// The layer ID.
@@ -875,7 +848,7 @@ type Layer struct {
 	// The layer name.
 	Name *string
 
-	// An array of Package objects that describe the layer's packages.
+	// An array of Package  objects that describe the layer's packages.
 	Packages []string
 
 	// The layer short name.
@@ -890,7 +863,7 @@ type Layer struct {
 	// Whether the layer uses Amazon EBS-optimized instances.
 	UseEbsOptimizedInstances *bool
 
-	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
+	// A VolumeConfigurations  object that describes the layer's Amazon EBS volumes.
 	VolumeConfigurations []VolumeConfiguration
 
 	noSmithyDocumentSerde
@@ -934,10 +907,10 @@ type OperatingSystem struct {
 	// operating system.
 	ConfigurationManagers []OperatingSystemConfigurationManager
 
-	// The ID of a supported operating system, such as Amazon Linux 2018.03.
+	// The ID of a supported operating system, such as Amazon Linux 2018.03 .
 	Id *string
 
-	// The name of the operating system, such as Amazon Linux 2018.03.
+	// The name of the operating system, such as Amazon Linux 2018.03 .
 	Name *string
 
 	// A short name for the operating system manufacturer.
@@ -950,14 +923,14 @@ type OperatingSystem struct {
 	// Indicates that an operating system is not supported for new instances.
 	Supported *bool
 
-	// The type of a supported operating system, either Linux or Windows.
+	// The type of a supported operating system, either Linux  or Windows .
 	Type *string
 
 	noSmithyDocumentSerde
 }
 
-// A block that contains information about the configuration manager (Chef) and the
-// versions of the configuration manager that are supported for an operating
+// A block that contains information about the configuration manager (Chef) and
+// the versions of the configuration manager that are supported for an operating
 // system.
 type OperatingSystemConfigurationManager struct {
 
@@ -981,21 +954,18 @@ type Permission struct {
 	AllowSudo *bool
 
 	// The Amazon Resource Name (ARN) for an AWS Identity and Access Management (IAM)
-	// role. For more information about IAM ARNs, see Using Identifiers
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
+	// role. For more information about IAM ARNs, see Using Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
+	// .
 	IamUserArn *string
 
 	// The user's permission level, which must be the following:
-	// - deny
-	// - show
-	// -
-	// deploy
-	// - manage
-	// - iam_only
-	//
-	// For more information on the permissions associated
-	// with these levels, see Managing User Permissions
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+	//     - deny
+	//     - show
+	//     - deploy
+	//     - manage
+	//     - iam_only
+	// For more information on the permissions associated with these
+	// levels, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
 	Level *string
 
 	// A stack ID.
@@ -1007,8 +977,8 @@ type Permission struct {
 // Describes an instance's RAID array.
 type RaidArray struct {
 
-	// The array's Availability Zone. For more information, see Regions and Endpoints
-	// (https://docs.aws.amazon.com/general/latest/gr/rande.html).
+	// The array's Availability Zone. For more information, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html)
+	// .
 	AvailabilityZone *string
 
 	// When the RAID array was created.
@@ -1035,7 +1005,7 @@ type RaidArray struct {
 	// The array ID.
 	RaidArrayId *string
 
-	// The RAID level (http://en.wikipedia.org/wiki/Standard_RAID_levels).
+	// The RAID level (http://en.wikipedia.org/wiki/Standard_RAID_levels) .
 	RaidLevel *int32
 
 	// The array's size.
@@ -1059,7 +1029,7 @@ type RdsDbInstance struct {
 	// The DB instance identifier.
 	DbInstanceIdentifier *string
 
-	// AWS OpsWorks Stacks returns *****FILTERED***** instead of the actual value.
+	// AWS OpsWorks Stacks returns *****FILTERED*****  instead of the actual value.
 	DbPassword *string
 
 	// The master user name.
@@ -1090,27 +1060,27 @@ type RdsDbInstance struct {
 // deploy, undeploy, and shutdown. For each layer, AWS OpsWorks Stacks runs a set
 // of standard recipes for each event. In addition, you can provide custom recipes
 // for any or all layers and events. AWS OpsWorks Stacks runs custom event recipes
-// after the standard recipes. LayerCustomRecipes specifies the custom recipes for
-// a particular layer to be run in response to each of the five events. To specify
-// a recipe, use the cookbook's directory name in the repository followed by two
-// colons and the recipe name, which is the recipe's file name without the .rb
-// extension. For example: phpapp2::dbsetup specifies the dbsetup.rb recipe in the
-// repository's phpapp2 folder.
+// after the standard recipes. LayerCustomRecipes specifies the custom recipes
+// for a particular layer to be run in response to each of the five events. To
+// specify a recipe, use the cookbook's directory name in the repository followed
+// by two colons and the recipe name, which is the recipe's file name without the
+// .rb extension. For example: phpapp2::dbsetup specifies the dbsetup.rb recipe in
+// the repository's phpapp2 folder.
 type Recipes struct {
 
-	// An array of custom recipe names to be run following a configure event.
+	// An array of custom recipe names to be run following a configure  event.
 	Configure []string
 
-	// An array of custom recipe names to be run following a deploy event.
+	// An array of custom recipe names to be run following a deploy  event.
 	Deploy []string
 
-	// An array of custom recipe names to be run following a setup event.
+	// An array of custom recipe names to be run following a setup  event.
 	Setup []string
 
-	// An array of custom recipe names to be run following a shutdown event.
+	// An array of custom recipe names to be run following a shutdown  event.
 	Shutdown []string
 
-	// An array of custom recipe names to be run following a undeploy event.
+	// An array of custom recipe names to be run following a undeploy  event.
 	Undeploy []string
 
 	noSmithyDocumentSerde
@@ -1177,8 +1147,7 @@ type ServiceError struct {
 type ShutdownEventConfiguration struct {
 
 	// Whether to enable Elastic Load Balancing connection draining. For more
-	// information, see Connection Draining
-	// (https://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#conn-drain)
+	// information, see Connection Draining (https://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#conn-drain)
 	DelayUntilElbConnectionsDrained *bool
 
 	// The time, in seconds, that AWS OpsWorks Stacks will wait after triggering a
@@ -1189,48 +1158,41 @@ type ShutdownEventConfiguration struct {
 }
 
 // Contains the information required to retrieve an app or cookbook from a
-// repository. For more information, see Creating Apps
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html)
-// or Custom Recipes and Cookbooks
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html).
+// repository. For more information, see Creating Apps (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html)
+// or Custom Recipes and Cookbooks (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html)
+// .
 type Source struct {
 
 	// When included in a request, the parameter depends on the repository type.
-	// - For
-	// Amazon S3 bundles, set Password to the appropriate IAM secret access key.
-	// - For
-	// HTTP bundles and Subversion repositories, set Password to the password.
+	//     - For Amazon S3 bundles, set Password to the appropriate IAM secret access key.
+	//     - For HTTP bundles and Subversion repositories, set Password to the password.
 	//
-	// For
-	// more information on how to safely handle IAM credentials, see
-	// https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html).
-	// In responses, AWS OpsWorks Stacks returns *****FILTERED***** instead of the
+	// For more information on how to safely handle IAM credentials, see
+	// https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html (https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html)
+	// . In responses, AWS OpsWorks Stacks returns *****FILTERED***** instead of the
 	// actual value.
 	Password *string
 
-	// The application's version. AWS OpsWorks Stacks enables you to easily deploy new
-	// versions of an application. One of the simplest approaches is to have branches
-	// or revisions in your repository that represent different versions that can
-	// potentially be deployed.
+	// The application's version. AWS OpsWorks Stacks enables you to easily deploy
+	// new versions of an application. One of the simplest approaches is to have
+	// branches or revisions in your repository that represent different versions that
+	// can potentially be deployed.
 	Revision *string
 
-	// In requests, the repository's SSH key. In responses, AWS OpsWorks Stacks returns
-	// *****FILTERED***** instead of the actual value.
+	// In requests, the repository's SSH key. In responses, AWS OpsWorks Stacks
+	// returns *****FILTERED*****  instead of the actual value.
 	SshKey *string
 
 	// The repository type.
 	Type SourceType
 
 	// The source URL. The following is an example of an Amazon S3 source URL:
-	// https://s3.amazonaws.com/opsworks-demo-bucket/opsworks_cookbook_demo.tar.gz.
+	// https://s3.amazonaws.com/opsworks-demo-bucket/opsworks_cookbook_demo.tar.gz .
 	Url *string
 
 	// This parameter depends on the repository type.
-	// - For Amazon S3 bundles, set
-	// Username to the appropriate IAM access key ID.
-	// - For HTTP bundles, Git
-	// repositories, and Subversion repositories, set Username to the user name.
+	//     - For Amazon S3 bundles, set Username to the appropriate IAM access key ID.
+	//     - For HTTP bundles, Git repositories, and Subversion repositories, set Username to the user name.
 	Username *string
 
 	noSmithyDocumentSerde
@@ -1259,8 +1221,8 @@ type SslConfiguration struct {
 // Describes a stack.
 type Stack struct {
 
-	// The agent version. This parameter is set to LATEST for auto-update. or a version
-	// number for a fixed agent version.
+	// The agent version. This parameter is set to LATEST for auto-update. or a
+	// version number for a fixed agent version.
 	AgentVersion *string
 
 	// The stack's ARN.
@@ -1270,8 +1232,8 @@ type Stack struct {
 	Attributes map[string]string
 
 	// A ChefConfiguration object that specifies whether to enable Berkshelf and the
-	// Berkshelf version. For more information, see Create a New Stack
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html).
+	// Berkshelf version. For more information, see Create a New Stack (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html)
+	// .
 	ChefConfiguration *ChefConfiguration
 
 	// The configuration manager.
@@ -1281,10 +1243,9 @@ type Stack struct {
 	CreatedAt *string
 
 	// Contains the information required to retrieve an app or cookbook from a
-	// repository. For more information, see Adding Apps
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html)
-	// or Cookbooks and Recipes
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html).
+	// repository. For more information, see Adding Apps (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html)
+	// or Cookbooks and Recipes (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html)
+	// .
 	CustomCookbooksSource *Source
 
 	// A JSON object that contains user-defined attributes to be added to the stack
@@ -1292,26 +1253,26 @@ type Stack struct {
 	// corresponding default stack configuration attribute values or to pass data to
 	// recipes. The string should be in the following format: "{\"key1\": \"value1\",
 	// \"key2\": \"value2\",...}" For more information on custom JSON, see Use Custom
-	// JSON to Modify the Stack Configuration Attributes
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html).
+	// JSON to Modify the Stack Configuration Attributes (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html)
+	// .
 	CustomJson *string
 
 	// The stack's default Availability Zone. For more information, see Regions and
-	// Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html).
+	// Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html) .
 	DefaultAvailabilityZone *string
 
-	// The ARN of an IAM profile that is the default profile for all of the stack's EC2
-	// instances. For more information about IAM ARNs, see Using Identifiers
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
+	// The ARN of an IAM profile that is the default profile for all of the stack's
+	// EC2 instances. For more information about IAM ARNs, see Using Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
+	// .
 	DefaultInstanceProfileArn *string
 
 	// The stack's default operating system.
 	DefaultOs *string
 
-	// The default root device type. This value is used by default for all instances in
-	// the stack, but you can override it when you create an instance. For more
-	// information, see Storage for the Root Device
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
+	// The default root device type. This value is used by default for all instances
+	// in the stack, but you can override it when you create an instance. For more
+	// information, see Storage for the Root Device (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device)
+	// .
 	DefaultRootDeviceType RootDeviceType
 
 	// A default Amazon EC2 key pair for the stack's instances. You can override this
@@ -1328,8 +1289,8 @@ type Stack struct {
 	Name *string
 
 	// The stack AWS region, such as "ap-northeast-2". For more information about AWS
-	// regions, see Regions and Endpoints
-	// (https://docs.aws.amazon.com/general/latest/gr/rande.html).
+	// regions, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html)
+	// .
 	Region *string
 
 	// The stack AWS Identity and Access Management (IAM) role.
@@ -1374,7 +1335,7 @@ type StackSummary struct {
 	// The stack's ARN.
 	Arn *string
 
-	// An InstancesCount object with the number of instances in each status.
+	// An InstancesCount  object with the number of instances in each status.
 	InstancesCount *InstancesCount
 
 	// The number of layers.
@@ -1402,8 +1363,8 @@ type TemporaryCredential struct {
 	// The user name.
 	Username *string
 
-	// The length of time (in minutes) that the grant is valid. When the grant expires,
-	// at the end of this period, the user will no longer be able to use the
+	// The length of time (in minutes) that the grant is valid. When the grant
+	// expires, at the end of this period, the user will no longer be able to use the
 	// credentials to log in. If they are logged in at the time, they will be
 	// automatically logged out.
 	ValidForInMinutes *int32
@@ -1414,7 +1375,7 @@ type TemporaryCredential struct {
 // Describes an instance's time-based auto scaling configuration.
 type TimeBasedAutoScalingConfiguration struct {
 
-	// A WeeklyAutoScalingSchedule object with the instance schedule.
+	// A WeeklyAutoScalingSchedule  object with the instance schedule.
 	AutoScalingSchedule *WeeklyAutoScalingSchedule
 
 	// The instance ID.
@@ -1426,9 +1387,9 @@ type TimeBasedAutoScalingConfiguration struct {
 // Describes a user's SSH information.
 type UserProfile struct {
 
-	// Whether users can specify their own SSH public key through the My Settings page.
-	// For more information, see Managing User Permissions
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html).
+	// Whether users can specify their own SSH public key through the My Settings
+	// page. For more information, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html)
+	// .
 	AllowSelfManagement *bool
 
 	// The user's IAM ARN.
@@ -1449,8 +1410,8 @@ type UserProfile struct {
 // Describes an instance's Amazon EBS volume.
 type Volume struct {
 
-	// The volume Availability Zone. For more information, see Regions and Endpoints
-	// (https://docs.aws.amazon.com/general/latest/gr/rande.html).
+	// The volume Availability Zone. For more information, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html)
+	// .
 	AvailabilityZone *string
 
 	// The device name.
@@ -1460,8 +1421,8 @@ type Volume struct {
 	Ec2VolumeId *string
 
 	// Specifies whether an Amazon EBS volume is encrypted. For more information, see
-	// Amazon EBS Encryption
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html).
+	// Amazon EBS Encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)
+	// .
 	Encrypted *bool
 
 	// The instance ID.
@@ -1480,34 +1441,26 @@ type Volume struct {
 	RaidArrayId *string
 
 	// The AWS region. For more information about AWS regions, see Regions and
-	// Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html).
+	// Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html) .
 	Region *string
 
 	// The volume size.
 	Size *int32
 
-	// The value returned by DescribeVolumes
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeVolumes.html).
+	// The value returned by DescribeVolumes (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeVolumes.html)
+	// .
 	Status *string
 
 	// The volume ID.
 	VolumeId *string
 
-	// The volume type. For more information, see  Amazon EBS Volume Types
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
-	// -
-	// standard - Magnetic. Magnetic volumes must have a minimum size of 1 GiB and a
-	// maximum size of 1024 GiB.
-	// - io1 - Provisioned IOPS (SSD). PIOPS volumes must
-	// have a minimum size of 4 GiB and a maximum size of 16384 GiB.
-	// - gp2 - General
-	// Purpose (SSD). General purpose volumes must have a minimum size of 1 GiB and a
-	// maximum size of 16384 GiB.
-	// - st1 - Throughput Optimized hard disk drive (HDD).
-	// Throughput optimized HDD volumes must have a minimum size of 500 GiB and a
-	// maximum size of 16384 GiB.
-	// - sc1 - Cold HDD. Cold HDD volumes must have a
-	// minimum size of 500 GiB and a maximum size of 16384 GiB.
+	// The volume type. For more information, see  Amazon EBS Volume Types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
+	// .
+	//     - standard - Magnetic. Magnetic volumes must have a minimum size of 1 GiB and a maximum size of 1024 GiB.
+	//     - io1 - Provisioned IOPS (SSD). PIOPS volumes must have a minimum size of 4 GiB and a maximum size of 16384 GiB.
+	//     - gp2 - General Purpose (SSD). General purpose volumes must have a minimum size of 1 GiB and a maximum size of 16384 GiB.
+	//     - st1 - Throughput Optimized hard disk drive (HDD). Throughput optimized HDD volumes must have a minimum size of 500 GiB and a maximum size of 16384 GiB.
+	//     - sc1 - Cold HDD. Cold HDD volumes must have a minimum size of 500 GiB and a maximum size of 16384 GiB.
 	VolumeType *string
 
 	noSmithyDocumentSerde
@@ -1532,31 +1485,23 @@ type VolumeConfiguration struct {
 	Size *int32
 
 	// Specifies whether an Amazon EBS volume is encrypted. For more information, see
-	// Amazon EBS Encryption
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html).
+	// Amazon EBS Encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)
+	// .
 	Encrypted *bool
 
 	// For PIOPS volumes, the IOPS per disk.
 	Iops *int32
 
-	// The volume RAID level (http://en.wikipedia.org/wiki/Standard_RAID_levels).
+	// The volume RAID level (http://en.wikipedia.org/wiki/Standard_RAID_levels) .
 	RaidLevel *int32
 
-	// The volume type. For more information, see  Amazon EBS Volume Types
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
-	// -
-	// standard - Magnetic. Magnetic volumes must have a minimum size of 1 GiB and a
-	// maximum size of 1024 GiB.
-	// - io1 - Provisioned IOPS (SSD). PIOPS volumes must
-	// have a minimum size of 4 GiB and a maximum size of 16384 GiB.
-	// - gp2 - General
-	// Purpose (SSD). General purpose volumes must have a minimum size of 1 GiB and a
-	// maximum size of 16384 GiB.
-	// - st1 - Throughput Optimized hard disk drive (HDD).
-	// Throughput optimized HDD volumes must have a minimum size of 500 GiB and a
-	// maximum size of 16384 GiB.
-	// - sc1 - Cold HDD. Cold HDD volumes must have a
-	// minimum size of 500 GiB and a maximum size of 16384 GiB.
+	// The volume type. For more information, see  Amazon EBS Volume Types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
+	// .
+	//     - standard - Magnetic. Magnetic volumes must have a minimum size of 1 GiB and a maximum size of 1024 GiB.
+	//     - io1 - Provisioned IOPS (SSD). PIOPS volumes must have a minimum size of 4 GiB and a maximum size of 16384 GiB.
+	//     - gp2 - General Purpose (SSD). General purpose volumes must have a minimum size of 1 GiB and a maximum size of 16384 GiB.
+	//     - st1 - Throughput Optimized hard disk drive (HDD). Throughput optimized HDD volumes must have a minimum size of 500 GiB and a maximum size of 16384 GiB.
+	//     - sc1 - Cold HDD. Cold HDD volumes must have a minimum size of 500 GiB and a maximum size of 16384 GiB.
 	VolumeType *string
 
 	noSmithyDocumentSerde
@@ -1564,11 +1509,8 @@ type VolumeConfiguration struct {
 
 // Describes a time-based instance's auto scaling schedule. The schedule consists
 // of a set of key-value pairs.
-// - The key is the time period (a UTC hour) and must
-// be an integer from 0 - 23.
-// - The value indicates whether the instance should be
-// online or offline for the specified period, and must be set to "on" or
-// "off"
+//   - The key is the time period (a UTC hour) and must be an integer from 0 - 23.
+//   - The value indicates whether the instance should be online or offline for the specified period, and must be set to "on" or "off"
 //
 // The default setting for all time periods is off, so you use the following
 // parameters primarily to specify the online periods. You don't have to explicitly

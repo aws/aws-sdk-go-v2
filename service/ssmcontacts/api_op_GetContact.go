@@ -56,7 +56,7 @@ type GetContactOutput struct {
 	// This member is required.
 	Plan *types.Plan
 
-	// The type of contact, either PERSONAL or ESCALATION.
+	// The type of contact, either PERSONAL  or ESCALATION .
 	//
 	// This member is required.
 	Type types.ContactType

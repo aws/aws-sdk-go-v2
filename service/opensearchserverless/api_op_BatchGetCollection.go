@@ -13,8 +13,8 @@ import (
 
 // Returns attributes for one or more collections, including the collection
 // endpoint and the OpenSearch Dashboards endpoint. For more information, see
-// Creating and managing Amazon OpenSearch Serverless collections
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html).
+// Creating and managing Amazon OpenSearch Serverless collections (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html)
+// .
 func (c *Client) BatchGetCollection(ctx context.Context, params *BatchGetCollectionInput, optFns ...func(*Options)) (*BatchGetCollectionOutput, error) {
 	if params == nil {
 		params = &BatchGetCollectionInput{}
@@ -34,12 +34,12 @@ type BatchGetCollectionInput struct {
 
 	// A list of collection IDs. You can't provide names and IDs in the same request.
 	// The ID is part of the collection endpoint. You can also retrieve it using the
-	// ListCollections
-	// (https://docs.aws.amazon.com/opensearch-service/latest/ServerlessAPIReference/API_ListCollections.html)
+	// ListCollections (https://docs.aws.amazon.com/opensearch-service/latest/ServerlessAPIReference/API_ListCollections.html)
 	// API.
 	Ids []string
 
-	// A list of collection names. You can't provide names and IDs in the same request.
+	// A list of collection names. You can't provide names and IDs in the same
+	// request.
 	Names []string
 
 	noSmithyDocumentSerde

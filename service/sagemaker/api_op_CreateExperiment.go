@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a SageMaker experiment. An experiment is a collection of trials that are
-// observed, compared and evaluated as a group. A trial is a set of steps, called
-// trial components, that produce a machine learning model. In the Studio UI,
-// trials are referred to as run groups and trial components are referred to as
+// Creates a SageMaker experiment. An experiment is a collection of trials that
+// are observed, compared and evaluated as a group. A trial is a set of steps,
+// called trial components, that produce a machine learning model. In the Studio
+// UI, trials are referred to as run groups and trial components are referred to as
 // runs. The goal of an experiment is to determine the components that produce the
 // best model. Multiple trials are performed, each one isolating and measuring the
 // impact of a change to one or more inputs, while keeping the remaining inputs
@@ -22,13 +22,14 @@ import (
 // experiments, trials, and trial components are automatically tracked, logged, and
 // indexed. When you use the Amazon Web Services SDK for Python (Boto), you must
 // use the logging APIs provided by the SDK. You can add tags to experiments,
-// trials, trial components and then use the Search API to search for the tags. To
-// add a description to an experiment, specify the optional Description parameter.
-// To add a description later, or to change the description, call the
+// trials, trial components and then use the Search API to search for the tags.
+// To add a description to an experiment, specify the optional Description
+// parameter. To add a description later, or to change the description, call the
 // UpdateExperiment API. To get a list of all your experiments, call the
 // ListExperiments API. To view an experiment's properties, call the
-// DescribeExperiment API. To get a list of all the trials associated with an
-// experiment, call the ListTrials API. To create a trial call the CreateTrial API.
+// DescribeExperimentAPI. To get a list of all the trials associated with an
+// experiment, call the ListTrials  API. To create a trial call the CreateTrial
+// API.
 func (c *Client) CreateExperiment(ctx context.Context, params *CreateExperimentInput, optFns ...func(*Options)) (*CreateExperimentOutput, error) {
 	if params == nil {
 		params = &CreateExperimentInput{}
@@ -46,8 +47,8 @@ func (c *Client) CreateExperiment(ctx context.Context, params *CreateExperimentI
 
 type CreateExperimentInput struct {
 
-	// The name of the experiment. The name must be unique in your Amazon Web Services
-	// account and is not case-sensitive.
+	// The name of the experiment. The name must be unique in your Amazon Web
+	// Services account and is not case-sensitive.
 	//
 	// This member is required.
 	ExperimentName *string
@@ -55,8 +56,8 @@ type CreateExperimentInput struct {
 	// The description of the experiment.
 	Description *string
 
-	// The name of the experiment as displayed. The name doesn't need to be unique. If
-	// you don't specify DisplayName, the value in ExperimentName is displayed.
+	// The name of the experiment as displayed. The name doesn't need to be unique.
+	// If you don't specify DisplayName , the value in ExperimentName  is displayed.
 	DisplayName *string
 
 	// A list of tags to associate with the experiment. You can use Search API to

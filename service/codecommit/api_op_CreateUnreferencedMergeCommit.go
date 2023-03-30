@@ -58,8 +58,8 @@ type CreateUnreferencedMergeCommitInput struct {
 	// This member is required.
 	SourceCommitSpecifier *string
 
-	// The name of the author who created the unreferenced commit. This information is
-	// used as both the author and committer for the commit.
+	// The name of the author who created the unreferenced commit. This information
+	// is used as both the author and committer for the commit.
 	AuthorName *string
 
 	// The commit message for the unreferenced commit.
@@ -97,8 +97,8 @@ type CreateUnreferencedMergeCommitOutput struct {
 	// The full commit ID of the commit that contains your merge results.
 	CommitId *string
 
-	// The full SHA-1 pointer of the tree information for the commit that contains the
-	// merge results.
+	// The full SHA-1 pointer of the tree information for the commit that contains
+	// the merge results.
 	TreeId *string
 
 	// Metadata pertaining to the operation's result.

@@ -13,7 +13,7 @@ import (
 )
 
 // Returns information about the specified human loop. If the human loop was
-// deleted, this operation will return a ResourceNotFoundException error.
+// deleted, this operation will return a ResourceNotFoundException  error.
 func (c *Client) DescribeHumanLoop(ctx context.Context, params *DescribeHumanLoopInput, optFns ...func(*Options)) (*DescribeHumanLoopOutput, error) {
 	if params == nil {
 		params = &DescribeHumanLoopInput{}
@@ -56,9 +56,9 @@ type DescribeHumanLoopOutput struct {
 	// This member is required.
 	HumanLoopArn *string
 
-	// The name of the human loop. The name must be lowercase, unique within the Region
-	// in your account, and can have up to 63 characters. Valid characters: a-z, 0-9,
-	// and - (hyphen).
+	// The name of the human loop. The name must be lowercase, unique within the
+	// Region in your account, and can have up to 63 characters. Valid characters: a-z,
+	// 0-9, and - (hyphen).
 	//
 	// This member is required.
 	HumanLoopName *string
@@ -69,11 +69,11 @@ type DescribeHumanLoopOutput struct {
 	HumanLoopStatus types.HumanLoopStatus
 
 	// A failure code that identifies the type of failure. Possible values:
-	// ValidationError, Expired, InternalError
+	// ValidationError , Expired , InternalError
 	FailureCode *string
 
 	// The reason why a human loop failed. The failure reason is returned when the
-	// status of the human loop is Failed.
+	// status of the human loop is Failed .
 	FailureReason *string
 
 	// An object that contains information about the output of the human loop.

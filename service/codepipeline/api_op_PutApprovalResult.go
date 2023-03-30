@@ -29,7 +29,7 @@ func (c *Client) PutApprovalResult(ctx context.Context, params *PutApprovalResul
 	return out, nil
 }
 
-// Represents the input of a PutApprovalResult action.
+// Represents the input of a PutApprovalResult  action.
 type PutApprovalResultInput struct {
 
 	// The name of the action for which approval is requested.
@@ -52,8 +52,8 @@ type PutApprovalResultInput struct {
 	// This member is required.
 	StageName *string
 
-	// The system-generated token used to identify a unique approval request. The token
-	// for each open approval request can be obtained using the GetPipelineState
+	// The system-generated token used to identify a unique approval request. The
+	// token for each open approval request can be obtained using the GetPipelineState
 	// action. It is used to validate that the approval request corresponding to this
 	// token is still valid.
 	//
@@ -63,7 +63,7 @@ type PutApprovalResultInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a PutApprovalResult action.
+// Represents the output of a PutApprovalResult  action.
 type PutApprovalResultOutput struct {
 
 	// The timestamp showing when the approval or rejection was submitted.

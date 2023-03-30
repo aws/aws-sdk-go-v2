@@ -13,9 +13,9 @@ import (
 	"time"
 )
 
-// Lists the AppImageConfigs in your account and their properties. The list can be
-// filtered by creation time or modified time, and whether the AppImageConfig name
-// contains a specified string.
+// Lists the AppImageConfigs in your account and their properties. The list can
+// be filtered by creation time or modified time, and whether the AppImageConfig
+// name contains a specified string.
 func (c *Client) ListAppImageConfigs(ctx context.Context, params *ListAppImageConfigsInput, optFns ...func(*Options)) (*ListAppImageConfigsOutput, error) {
 	if params == nil {
 		params = &ListAppImageConfigsInput{}
@@ -62,10 +62,10 @@ type ListAppImageConfigsInput struct {
 	// AppImageConfigs.
 	NextToken *string
 
-	// The property used to sort results. The default value is CreationTime.
+	// The property used to sort results. The default value is CreationTime .
 	SortBy types.AppImageConfigSortKey
 
-	// The sort order. The default value is Descending.
+	// The sort order. The default value is Descending .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -145,8 +145,8 @@ func (c *Client) addOperationListAppImageConfigsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListAppImageConfigsAPIClient is a client that implements the ListAppImageConfigs
-// operation.
+// ListAppImageConfigsAPIClient is a client that implements the
+// ListAppImageConfigs operation.
 type ListAppImageConfigsAPIClient interface {
 	ListAppImageConfigs(context.Context, *ListAppImageConfigsInput, ...func(*Options)) (*ListAppImageConfigsOutput, error)
 }
@@ -160,8 +160,8 @@ type ListAppImageConfigsPaginatorOptions struct {
 	// value is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

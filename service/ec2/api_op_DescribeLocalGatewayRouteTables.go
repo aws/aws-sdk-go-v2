@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes one or more local gateway route tables. By default, all local gateway
-// route tables are described. Alternatively, you can filter the results.
+// Describes one or more local gateway route tables. By default, all local
+// gateway route tables are described. Alternatively, you can filter the results.
 func (c *Client) DescribeLocalGatewayRouteTables(ctx context.Context, params *DescribeLocalGatewayRouteTablesInput, optFns ...func(*Options)) (*DescribeLocalGatewayRouteTablesOutput, error) {
 	if params == nil {
 		params = &DescribeLocalGatewayRouteTablesInput{}
@@ -33,29 +33,24 @@ type DescribeLocalGatewayRouteTablesInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// One or more filters.
-	// - local-gateway-id - The ID of a local gateway.
-	// -
-	// local-gateway-route-table-arn - The Amazon Resource Name (ARN) of the local
-	// gateway route table.
-	// - local-gateway-route-table-id - The ID of a local gateway
-	// route table.
-	// - outpost-arn - The Amazon Resource Name (ARN) of the Outpost.
-	// -
-	// owner-id - The ID of the Amazon Web Services account that owns the local gateway
-	// route table.
-	// - state - The state of the local gateway route table.
+	//     - local-gateway-id - The ID of a local gateway.
+	//     - local-gateway-route-table-arn - The Amazon Resource Name (ARN) of the local gateway route table.
+	//     - local-gateway-route-table-id - The ID of a local gateway route table.
+	//     - outpost-arn - The Amazon Resource Name (ARN) of the Outpost.
+	//     - owner-id - The ID of the Amazon Web Services account that owns the local gateway route table.
+	//     - state - The state of the local gateway route table.
 	Filters []types.Filter
 
 	// The IDs of the local gateway route tables.
 	LocalGatewayRouteTableIds []string
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -151,11 +146,11 @@ var _ DescribeLocalGatewayRouteTablesAPIClient = (*Client)(nil)
 // DescribeLocalGatewayRouteTables
 type DescribeLocalGatewayRouteTablesPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

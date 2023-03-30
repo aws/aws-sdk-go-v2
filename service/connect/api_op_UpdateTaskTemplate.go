@@ -32,8 +32,7 @@ func (c *Client) UpdateTaskTemplate(ctx context.Context, params *UpdateTaskTempl
 
 type UpdateTaskTemplateInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -64,9 +63,9 @@ type UpdateTaskTemplateInput struct {
 	// The name of the task template.
 	Name *string
 
-	// Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can only
-	// be created from ACTIVE templates. If a template is marked as INACTIVE, then a
-	// task that refers to this template cannot be created.
+	// Marks a template as ACTIVE  or INACTIVE for a task to refer to it. Tasks can
+	// only be created from ACTIVE  templates. If a template is marked as INACTIVE,
+	// then a task that refers to this template cannot be created.
 	Status types.TaskTemplateStatus
 
 	noSmithyDocumentSerde
@@ -100,8 +99,7 @@ type UpdateTaskTemplateOutput struct {
 	// The identifier of the task template resource.
 	Id *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	InstanceId *string
 
@@ -111,9 +109,9 @@ type UpdateTaskTemplateOutput struct {
 	// The name of the task template.
 	Name *string
 
-	// Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can only
-	// be created from ACTIVE templates. If a template is marked as INACTIVE, then a
-	// task that refers to this template cannot be created.
+	// Marks a template as ACTIVE  or INACTIVE for a task to refer to it. Tasks can
+	// only be created from ACTIVE  templates. If a template is marked as INACTIVE,
+	// then a task that refers to this template cannot be created.
 	Status types.TaskTemplateStatus
 
 	// Metadata pertaining to the operation's result.

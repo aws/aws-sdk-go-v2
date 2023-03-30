@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends a message. ConnectionToken is used for invoking this API instead of
-// ParticipantToken. The Amazon Connect Participant Service APIs do not use
-// Signature Version 4 authentication
-// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+// Sends a message. ConnectionToken  is used for invoking this API instead of
+// ParticipantToken . The Amazon Connect Participant Service APIs do not use
+// Signature Version 4 authentication (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
+// .
 func (c *Client) SendMessage(ctx context.Context, params *SendMessageInput, optFns ...func(*Options)) (*SendMessageOutput, error) {
 	if params == nil {
 		params = &SendMessageInput{}
@@ -38,21 +38,16 @@ type SendMessageInput struct {
 	ConnectionToken *string
 
 	// The content of the message.
-	// - For text/plain and text/markdown, the Length
-	// Constraints are Minimum of 1, Maximum of 1024.
-	// - For application/json, the
-	// Length Constraints are Minimum of 1, Maximum of 12000.
-	//
-	// * For
-	// application/vnd.amazonaws.connect.message.interactive.response, the Length
-	// Constraints are Minimum of 1, Maximum of 12288.
+	//     - For text/plain and text/markdown , the Length Constraints are Minimum of 1, Maximum of 1024.
+	//     - For application/json , the Length Constraints are Minimum of 1, Maximum of 12000.
+	//     - For application/vnd.amazonaws.connect.message.interactive.response , the Length Constraints are Minimum of 1, Maximum of 12288.
 	//
 	// This member is required.
 	Content *string
 
-	// The type of the content. Supported types are text/plain, text/markdown,
-	// application/json, and
-	// application/vnd.amazonaws.connect.message.interactive.response.
+	// The type of the content. Supported types are text/plain , text/markdown ,
+	// application/json , and
+	// application/vnd.amazonaws.connect.message.interactive.response .
 	//
 	// This member is required.
 	ContentType *string
@@ -60,8 +55,8 @@ type SendMessageInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// .
 	ClientToken *string
 
 	noSmithyDocumentSerde

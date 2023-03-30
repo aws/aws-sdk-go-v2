@@ -13,10 +13,8 @@ import (
 
 // Updates a custom connector that you've previously registered. This operation
 // updates the connector with one of the following:
-// - The latest version of the AWS
-// Lambda function that's assigned to the connector
-// - A new AWS Lambda function
-// that you specify
+//   - The latest version of the AWS Lambda function that's assigned to the connector
+//   - A new AWS Lambda function that you specify
 func (c *Client) UpdateConnectorRegistration(ctx context.Context, params *UpdateConnectorRegistrationInput, optFns ...func(*Options)) (*UpdateConnectorRegistrationOutput, error) {
 	if params == nil {
 		params = &UpdateConnectorRegistrationInput{}
@@ -34,8 +32,8 @@ func (c *Client) UpdateConnectorRegistration(ctx context.Context, params *Update
 
 type UpdateConnectorRegistrationInput struct {
 
-	// The name of the connector. The name is unique for each connector registration in
-	// your AWS account.
+	// The name of the connector. The name is unique for each connector registration
+	// in your AWS account.
 	//
 	// This member is required.
 	ConnectorLabel *string

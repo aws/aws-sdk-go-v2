@@ -27,7 +27,7 @@ func (c *Client) StopConfigurationRecorder(ctx context.Context, params *StopConf
 	return out, nil
 }
 
-// The input for the StopConfigurationRecorder action.
+// The input for the StopConfigurationRecorder  action.
 type StopConfigurationRecorderInput struct {
 
 	// The name of the recorder object that records each configuration change made to

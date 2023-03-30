@@ -30,8 +30,9 @@ func (c *Client) DeleteInvitations(ctx context.Context, params *DeleteInvitation
 
 type DeleteInvitationsInput struct {
 
-	// A list of account IDs of the Amazon Web Services accounts that sent invitations
-	// to the current member account that you want to delete invitations from.
+	// A list of account IDs of the Amazon Web Services accounts that sent
+	// invitations to the current member account that you want to delete invitations
+	// from.
 	//
 	// This member is required.
 	AccountIds []string
@@ -41,8 +42,8 @@ type DeleteInvitationsInput struct {
 
 type DeleteInvitationsOutput struct {
 
-	// A list of objects that contain the unprocessed account and a result string that
-	// explains why it was unprocessed.
+	// A list of objects that contain the unprocessed account and a result string
+	// that explains why it was unprocessed.
 	//
 	// This member is required.
 	UnprocessedAccounts []types.UnprocessedAccount

@@ -31,8 +31,8 @@ func (c *Client) ListAssessmentRuns(ctx context.Context, params *ListAssessmentR
 
 type ListAssessmentRunsInput struct {
 
-	// The ARNs that specify the assessment templates whose assessment runs you want to
-	// list.
+	// The ARNs that specify the assessment templates whose assessment runs you want
+	// to list.
 	AssessmentTemplateArns []string
 
 	// You can use this parameter to specify a subset of data to be included in the
@@ -41,8 +41,8 @@ type ListAssessmentRunsInput struct {
 	// attribute, any of the values can match.
 	Filter *types.AssessmentRunFilter
 
-	// You can use this parameter to indicate the maximum number of items that you want
-	// in the response. The default value is 10. The maximum value is 500.
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response. The default value is 10. The maximum value is 500.
 	MaxResults *int32
 
 	// You can use this parameter when paginating results. Set the value of this
@@ -62,10 +62,10 @@ type ListAssessmentRunsOutput struct {
 	// This member is required.
 	AssessmentRunArns []string
 
-	// When a response is generated, if there is more data to be listed, this parameter
-	// is present in the response and contains the value to use for the nextToken
-	// parameter in a subsequent pagination request. If there is no more data to be
-	// listed, this parameter is set to null.
+	// When a response is generated, if there is more data to be listed, this
+	// parameter is present in the response and contains the value to use for the
+	// nextToken parameter in a subsequent pagination request. If there is no more data
+	// to be listed, this parameter is set to null.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -145,12 +145,12 @@ var _ ListAssessmentRunsAPIClient = (*Client)(nil)
 // ListAssessmentRunsPaginatorOptions is the paginator options for
 // ListAssessmentRuns
 type ListAssessmentRunsPaginatorOptions struct {
-	// You can use this parameter to indicate the maximum number of items that you want
-	// in the response. The default value is 10. The maximum value is 500.
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response. The default value is 10. The maximum value is 500.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

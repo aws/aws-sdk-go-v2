@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This example serializes enums as top level properties, in lists, sets, and maps.
+// This example serializes enums as top level properties, in lists, sets, and
+// maps.
 func (c *Client) XmlEnums(ctx context.Context, params *XmlEnumsInput, optFns ...func(*Options)) (*XmlEnumsOutput, error) {
 	if params == nil {
 		params = &XmlEnumsInput{}

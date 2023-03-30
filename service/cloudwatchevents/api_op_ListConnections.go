@@ -50,7 +50,8 @@ type ListConnectionsOutput struct {
 	// An array of connections objects that include details about the connections.
 	Connections []types.Connection
 
-	// A token you can use in a subsequent request to retrieve the next set of results.
+	// A token you can use in a subsequent request to retrieve the next set of
+	// results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

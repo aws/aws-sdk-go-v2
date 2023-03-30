@@ -34,9 +34,9 @@ func (e *CodeValidationException) ErrorCode() string {
 }
 func (e *CodeValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception thrown as a result of concurrent modifications to an application. This
-// error can be the result of attempting to modify an application without using the
-// current application ID.
+// Exception thrown as a result of concurrent modifications to an application.
+// This error can be the result of attempting to modify an application without
+// using the current application ID.
 type ConcurrentModificationException struct {
 	Message *string
 
@@ -222,9 +222,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 
 // Discovery failed to get a record from the streaming source because of the
 // Kinesis Streams ProvisionedThroughputExceededException. For more information,
-// see GetRecords
-// (http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetRecords.html) in
-// the Amazon Kinesis Streams API Reference.
+// see GetRecords (http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetRecords.html)
+// in the Amazon Kinesis Streams API Reference.
 type ResourceProvisionedThroughputExceededException struct {
 	Message *string
 

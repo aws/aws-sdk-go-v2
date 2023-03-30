@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all of the tags for a DAX cluster. You can call ListTags up to 10 times per
-// second, per account.
+// List all of the tags for a DAX cluster. You can call ListTags up to 10 times
+// per second, per account.
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
 		params = &ListTagsInput{}
@@ -46,7 +46,7 @@ type ListTagsInput struct {
 type ListTagsOutput struct {
 
 	// If this value is present, there are additional results to be displayed. To
-	// retrieve them, call ListTags again, with NextToken set to this value.
+	// retrieve them, call ListTags  again, with NextToken  set to this value.
 	NextToken *string
 
 	// A list of tags currently associated with the DAX cluster.

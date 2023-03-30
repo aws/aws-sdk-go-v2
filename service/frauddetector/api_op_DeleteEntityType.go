@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an entity type. You cannot delete an entity type that is included in an
-// event type. When you delete an entity type, Amazon Fraud Detector permanently
+// Deletes an entity type. You cannot delete an entity type that is included in
+// an event type. When you delete an entity type, Amazon Fraud Detector permanently
 // deletes that entity type and the data is no longer stored in Amazon Fraud
 // Detector.
 func (c *Client) DeleteEntityType(ctx context.Context, params *DeleteEntityTypeInput, optFns ...func(*Options)) (*DeleteEntityTypeOutput, error) {

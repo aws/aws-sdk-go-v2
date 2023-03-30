@@ -31,7 +31,7 @@ func (c *Client) DescribeNamespace(ctx context.Context, params *DescribeNamespac
 
 type DescribeNamespaceInput struct {
 
-	// The name of the user's namespace. Set this to aws to get the public namespace.
+	// The name of the user's namespace. Set this to aws  to get the public namespace.
 	NamespaceName *string
 
 	noSmithyDocumentSerde

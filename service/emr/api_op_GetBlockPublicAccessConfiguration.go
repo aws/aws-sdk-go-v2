@@ -12,9 +12,8 @@ import (
 )
 
 // Returns the Amazon EMR block public access configuration for your Amazon Web
-// Services account in the current Region. For more information see Configure Block
-// Public Access for Amazon EMR
-// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html)
+// Services account in the current Region. For more information see Configure
+// Block Public Access for Amazon EMR (https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html)
 // in the Amazon EMR Management Guide.
 func (c *Client) GetBlockPublicAccessConfiguration(ctx context.Context, params *GetBlockPublicAccessConfigurationInput, optFns ...func(*Options)) (*GetBlockPublicAccessConfigurationOutput, error) {
 	if params == nil {
@@ -37,12 +36,12 @@ type GetBlockPublicAccessConfigurationInput struct {
 
 type GetBlockPublicAccessConfigurationOutput struct {
 
-	// A configuration for Amazon EMR block public access. The configuration applies to
-	// all clusters created in your account for the current Region. The configuration
-	// specifies whether block public access is enabled. If block public access is
-	// enabled, security groups associated with the cluster cannot have rules that
-	// allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is
-	// specified as an exception using PermittedPublicSecurityGroupRuleRanges in the
+	// A configuration for Amazon EMR block public access. The configuration applies
+	// to all clusters created in your account for the current Region. The
+	// configuration specifies whether block public access is enabled. If block public
+	// access is enabled, security groups associated with the cluster cannot have rules
+	// that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is
+	// specified as an exception using PermittedPublicSecurityGroupRuleRanges  in the
 	// BlockPublicAccessConfiguration. By default, Port 22 (SSH) is an exception, and
 	// public access is allowed on this port. You can change this by updating the block
 	// public access configuration to remove the exception. For accounts that created

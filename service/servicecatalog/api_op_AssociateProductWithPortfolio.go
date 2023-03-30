@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates the specified product with the specified portfolio. A delegated admin
-// is authorized to invoke this command.
+// Associates the specified product with the specified portfolio. A delegated
+// admin is authorized to invoke this command.
 func (c *Client) AssociateProductWithPortfolio(ctx context.Context, params *AssociateProductWithPortfolioInput, optFns ...func(*Options)) (*AssociateProductWithPortfolioOutput, error) {
 	if params == nil {
 		params = &AssociateProductWithPortfolioInput{}
@@ -40,9 +40,9 @@ type AssociateProductWithPortfolioInput struct {
 	ProductId *string
 
 	// The language code.
-	// - en - English (default)
-	// - jp - Japanese
-	// - zh - Chinese
+	//     - en - English (default)
+	//     - jp - Japanese
+	//     - zh - Chinese
 	AcceptLanguage *string
 
 	// The identifier of the source portfolio.

@@ -25,8 +25,9 @@ type CellOutput struct {
 	// This member is required.
 	Cells []string
 
-	// The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN)
-	// or a recovery group ARN. This is a list but currently can have only one element.
+	// The readiness scope for the cell, which can be a cell Amazon Resource Name
+	// (ARN) or a recovery group ARN. This is a list but currently can have only one
+	// element.
 	//
 	// This member is required.
 	ParentReadinessScopes []string
@@ -44,8 +45,8 @@ type DNSTargetResource struct {
 	// application.
 	DomainName *string
 
-	// The hosted zone Amazon Resource Name (ARN) that contains the DNS record with the
-	// provided name of the target resource.
+	// The hosted zone Amazon Resource Name (ARN) that contains the DNS record with
+	// the provided name of the target resource.
 	HostedZoneArn *string
 
 	// The Route 53 record set ID that uniquely identifies a DNS record, given a name
@@ -188,8 +189,8 @@ type RecoveryGroupOutput struct {
 // The resource element of a resource set.
 type Resource struct {
 
-	// The component identifier of the resource, generated when DNS target resource is
-	// used.
+	// The component identifier of the resource, generated when DNS target resource
+	// is used.
 	ComponentId *string
 
 	// The DNS target resource.

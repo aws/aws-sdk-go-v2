@@ -12,9 +12,9 @@ const (
 	AnalysisTypeBinaryAnalysis     AnalysisType = "BINARY_ANALYSIS"
 )
 
-// Values returns all known values for AnalysisType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AnalysisType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AnalysisType) Values() []AnalysisType {
 	return []AnalysisType{
 		"SOURCE_CODE_ANALYSIS",
@@ -33,9 +33,9 @@ const (
 	AntipatternReportStatusSuccess    AntipatternReportStatus = "SUCCESS"
 )
 
-// Values returns all known values for AntipatternReportStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AntipatternReportStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AntipatternReportStatus) Values() []AntipatternReportStatus {
 	return []AntipatternReportStatus{
 		"FAILED",
@@ -58,9 +58,10 @@ const (
 	ApplicationComponentCriteriaErrorCategory  ApplicationComponentCriteria = "ERROR_CATEGORY"
 )
 
-// Values returns all known values for ApplicationComponentCriteria. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ApplicationComponentCriteria. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ApplicationComponentCriteria) Values() []ApplicationComponentCriteria {
 	return []ApplicationComponentCriteria{
 		"NOT_DEFINED",
@@ -163,8 +164,8 @@ const (
 	AppUnitErrorCategoryOtherError        AppUnitErrorCategory = "OTHER_ERROR"
 )
 
-// Values returns all known values for AppUnitErrorCategory. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AppUnitErrorCategory. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AppUnitErrorCategory) Values() []AppUnitErrorCategory {
 	return []AppUnitErrorCategory{
@@ -207,9 +208,9 @@ const (
 	AuthTypeCert AuthType = "CERT"
 )
 
-// Values returns all known values for AuthType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for AuthType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AuthType) Values() []AuthType {
 	return []AuthType{
 		"NTLM",
@@ -227,9 +228,10 @@ const (
 	AwsManagedTargetDestinationAwsFargate          AwsManagedTargetDestination = "AWS Fargate"
 )
 
-// Values returns all known values for AwsManagedTargetDestination. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AwsManagedTargetDestination. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (AwsManagedTargetDestination) Values() []AwsManagedTargetDestination {
 	return []AwsManagedTargetDestination{
 		"None specified",
@@ -284,9 +286,9 @@ const (
 	ConditionNotContains Condition = "NOT_CONTAINS"
 )
 
-// Values returns all known values for Condition. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Condition. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Condition) Values() []Condition {
 	return []Condition{
 		"EQUALS",
@@ -305,9 +307,10 @@ const (
 	DatabaseManagementPreferenceNoPreference DatabaseManagementPreference = "No preference"
 )
 
-// Values returns all known values for DatabaseManagementPreference. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DatabaseManagementPreference. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (DatabaseManagementPreference) Values() []DatabaseManagementPreference {
 	return []DatabaseManagementPreference{
 		"AWS-managed",
@@ -344,9 +347,9 @@ const (
 	GroupNameExternalSourceType GroupName = "ExternalSourceType"
 )
 
-// Values returns all known values for GroupName. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for GroupName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (GroupName) Values() []GroupName {
 	return []GroupName{
 		"ExternalId",
@@ -370,8 +373,8 @@ const (
 	HeterogeneousTargetDatabaseEngineMongoDb            HeterogeneousTargetDatabaseEngine = "MongoDB"
 )
 
-// Values returns all known values for HeterogeneousTargetDatabaseEngine. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for HeterogeneousTargetDatabaseEngine. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (HeterogeneousTargetDatabaseEngine) Values() []HeterogeneousTargetDatabaseEngine {
@@ -420,8 +423,8 @@ const (
 	ImportFileTaskStatusDeleteSuccess        ImportFileTaskStatus = "DeleteSuccess"
 )
 
-// Values returns all known values for ImportFileTaskStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ImportFileTaskStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ImportFileTaskStatus) Values() []ImportFileTaskStatus {
 	return []ImportFileTaskStatus{
@@ -507,9 +510,9 @@ const (
 	OutputFormatJson  OutputFormat = "Json"
 )
 
-// Values returns all known values for OutputFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OutputFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (OutputFormat) Values() []OutputFormat {
 	return []OutputFormat{
 		"Excel",
@@ -524,9 +527,9 @@ const (
 	PipelineTypeAzureDevops PipelineType = "AZURE_DEVOPS"
 )
 
-// Values returns all known values for PipelineType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PipelineType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PipelineType) Values() []PipelineType {
 	return []PipelineType{
 		"AZURE_DEVOPS",
@@ -583,8 +586,8 @@ const (
 	RuntimeAnalysisStatusAnalysisFailed        RuntimeAnalysisStatus = "ANALYSIS_FAILED"
 )
 
-// Values returns all known values for RuntimeAnalysisStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RuntimeAnalysisStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RuntimeAnalysisStatus) Values() []RuntimeAnalysisStatus {
 	return []RuntimeAnalysisStatus{
@@ -632,9 +635,9 @@ const (
 	RunTimeAssessmentStatusDcPartialSuccess RunTimeAssessmentStatus = "dataCollectionTaskPartialSuccess"
 )
 
-// Values returns all known values for RunTimeAssessmentStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RunTimeAssessmentStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RunTimeAssessmentStatus) Values() []RunTimeAssessmentStatus {
 	return []RunTimeAssessmentStatus{
 		"dataCollectionTaskToBeScheduled",
@@ -657,9 +660,10 @@ const (
 	SelfManageTargetDestinationAmazonElasticKubernetesService SelfManageTargetDestination = "Amazon Elastic Kubernetes Service (EKS)"
 )
 
-// Values returns all known values for SelfManageTargetDestination. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SelfManageTargetDestination. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (SelfManageTargetDestination) Values() []SelfManageTargetDestination {
 	return []SelfManageTargetDestination{
 		"None specified",
@@ -732,9 +736,9 @@ const (
 	ServerOsTypeOther                     ServerOsType = "Other"
 )
 
-// Values returns all known values for ServerOsType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ServerOsType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ServerOsType) Values() []ServerOsType {
 	return []ServerOsType{
 		"WindowsServer",
@@ -754,9 +758,9 @@ const (
 	SeverityLow    Severity = "LOW"
 )
 
-// Values returns all known values for Severity. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Severity. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Severity) Values() []Severity {
 	return []Severity{
 		"HIGH",
@@ -773,9 +777,9 @@ const (
 	SortOrderDesc SortOrder = "DESC"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASC",
@@ -846,9 +850,9 @@ const (
 	StrategyRepurchase Strategy = "Repurchase"
 )
 
-// Values returns all known values for Strategy. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Strategy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Strategy) Values() []Strategy {
 	return []Strategy{
 		"Rehost",
@@ -899,8 +903,8 @@ const (
 	TargetDatabaseEngineMongoDb            TargetDatabaseEngine = "MongoDB"
 )
 
-// Values returns all known values for TargetDatabaseEngine. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TargetDatabaseEngine. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TargetDatabaseEngine) Values() []TargetDatabaseEngine {
 	return []TargetDatabaseEngine{

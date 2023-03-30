@@ -12,8 +12,7 @@ import (
 )
 
 // Backtracks a DB cluster to a specific time, without creating a new DB cluster.
-// For more information on backtracking, see  Backtracking an Aurora DB Cluster
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html)
+// For more information on backtracking, see Backtracking an Aurora DB Cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html)
 // in the Amazon Aurora User Guide. This action applies only to Aurora MySQL DB
 // clusters.
 func (c *Client) BacktrackDBCluster(ctx context.Context, params *BacktrackDBClusterInput, optFns ...func(*Options)) (*BacktrackDBClusterOutput, error) {
@@ -33,36 +32,31 @@ func (c *Client) BacktrackDBCluster(ctx context.Context, params *BacktrackDBClus
 
 type BacktrackDBClusterInput struct {
 
-	// The timestamp of the time to backtrack the DB cluster to, specified in ISO 8601
-	// format. For more information about ISO 8601, see the ISO8601 Wikipedia page.
-	// (http://en.wikipedia.org/wiki/ISO_8601) If the specified time isn't a consistent
-	// time for the DB cluster, Aurora automatically chooses the nearest possible
-	// consistent time for the DB cluster. Constraints:
-	// - Must contain a valid ISO 8601
-	// timestamp.
-	// - Can't contain a timestamp set in the future.
-	//
-	// Example:
-	// 2017-07-08T18:00Z
+	// The timestamp of the time to backtrack the DB cluster to, specified in ISO
+	// 8601 format. For more information about ISO 8601, see the ISO8601 Wikipedia
+	// page. (http://en.wikipedia.org/wiki/ISO_8601)If the specified time isn't a
+	// consistent time for the DB cluster, Aurora automatically chooses the nearest
+	// possible consistent time for the DB cluster. Constraints:
+	//     - Must contain a valid ISO 8601 timestamp.
+	//     - Can't contain a timestamp set in the future.
+	// Example: 2017-07-08T18:00Z
 	//
 	// This member is required.
 	BacktrackTo *time.Time
 
-	// The DB cluster identifier of the DB cluster to be backtracked. This parameter is
-	// stored as a lowercase string. Constraints:
-	// - Must contain from 1 to 63
-	// alphanumeric characters or hyphens.
-	// - First character must be a letter.
-	// - Can't
-	// end with a hyphen or contain two consecutive hyphens.
-	//
+	// The DB cluster identifier of the DB cluster to be backtracked. This parameter
+	// is stored as a lowercase string. Constraints:
+	//     - Must contain from 1 to 63 alphanumeric characters or hyphens.
+	//     - First character must be a letter.
+	//     - Can't end with a hyphen or contain two consecutive hyphens.
 	// Example: my-cluster1
 	//
 	// This member is required.
 	DBClusterIdentifier *string
 
-	// A value that indicates whether to force the DB cluster to backtrack when binary
-	// logging is enabled. Otherwise, an error occurs when binary logging is enabled.
+	// A value that indicates whether to force the DB cluster to backtrack when
+	// binary logging is enabled. Otherwise, an error occurs when binary logging is
+	// enabled.
 	Force *bool
 
 	// A value that indicates whether to backtrack the DB cluster to the earliest
@@ -96,14 +90,10 @@ type BacktrackDBClusterOutput struct {
 
 	// The status of the backtrack. This property returns one of the following
 	// values:
-	// - applying - The backtrack is currently being applied to or rolled back
-	// from the DB cluster.
-	// - completed - The backtrack has successfully been applied
-	// to or rolled back from the DB cluster.
-	// - failed - An error occurred while the
-	// backtrack was applied to or rolled back from the DB cluster.
-	// - pending - The
-	// backtrack is currently pending application to or rollback from the DB cluster.
+	//     - applying - The backtrack is currently being applied to or rolled back from the DB cluster.
+	//     - completed - The backtrack has successfully been applied to or rolled back from the DB cluster.
+	//     - failed - An error occurred while the backtrack was applied to or rolled back from the DB cluster.
+	//     - pending - The backtrack is currently pending application to or rollback from the DB cluster.
 	Status *string
 
 	// Metadata pertaining to the operation's result.

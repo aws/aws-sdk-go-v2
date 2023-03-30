@@ -14,24 +14,16 @@ import (
 
 // Retrieves information about a fleet's instances, including instance IDs,
 // connection data, and status. This operation can be used in the following ways:
-// -
-// To get information on all instances that are deployed to a fleet's home Region,
-// provide the fleet ID.
-// - To get information on all instances that are deployed to
-// a fleet's remote location, provide the fleet ID and location name.
-// - To get
-// information on a specific instance in a fleet, provide the fleet ID and instance
-// ID.
+//   - To get information on all instances that are deployed to a fleet's home Region, provide the fleet ID.
+//   - To get information on all instances that are deployed to a fleet's remote location, provide the fleet ID and location name.
+//   - To get information on a specific instance in a fleet, provide the fleet ID and instance ID.
 //
-// Use the pagination parameters to retrieve results as a set of sequential
-// pages. If successful, an Instance object is returned for each requested
-// instance. Instances are not returned in any particular order. Learn more
-// Remotely Access Fleet Instances
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html)Debug
-// Fleet Issues
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html)
-// Related actions All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// Use the pagination parameters to retrieve results as a set of sequential pages.
+// If successful, an Instance object is returned for each requested instance.
+// Instances are not returned in any particular order. Learn more Remotely Access
+// Fleet Instances (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html)
+// Debug Fleet Issues (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html)
+// Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeInstances(ctx context.Context, params *DescribeInstancesInput, optFns ...func(*Options)) (*DescribeInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeInstancesInput{}
@@ -49,14 +41,14 @@ func (c *Client) DescribeInstances(ctx context.Context, params *DescribeInstance
 
 type DescribeInstancesInput struct {
 
-	// A unique identifier for the fleet to retrieve instance information for. You can
-	// use either the fleet ID or ARN value.
+	// A unique identifier for the fleet to retrieve instance information for. You
+	// can use either the fleet ID or ARN value.
 	//
 	// This member is required.
 	FleetId *string
 
-	// A unique identifier for an instance to retrieve. Specify an instance ID or leave
-	// blank to retrieve all instances in the fleet.
+	// A unique identifier for an instance to retrieve. Specify an instance ID or
+	// leave blank to retrieve all instances in the fleet.
 	InstanceId *string
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -64,12 +56,12 @@ type DescribeInstancesInput struct {
 	Limit *int32
 
 	// The name of a location to retrieve instance information for, in the form of an
-	// Amazon Web Services Region code such as us-west-2.
+	// Amazon Web Services Region code such as us-west-2 .
 	Location *string
 
-	// A token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this operation. To start at the
-	// beginning of the result set, do not specify a value.
+	// A token that indicates the start of the next sequential page of results. Use
+	// the token that is returned with a previous call to this operation. To start at
+	// the beginning of the result set, do not specify a value.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -162,14 +154,15 @@ type DescribeInstancesAPIClient interface {
 
 var _ DescribeInstancesAPIClient = (*Client)(nil)
 
-// DescribeInstancesPaginatorOptions is the paginator options for DescribeInstances
+// DescribeInstancesPaginatorOptions is the paginator options for
+// DescribeInstances
 type DescribeInstancesPaginatorOptions struct {
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

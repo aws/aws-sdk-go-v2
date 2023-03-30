@@ -18,14 +18,9 @@ import (
 // all the fields are updated with the values that are provided in the request. You
 // cannot update some fields independent of others. To update a continuous
 // deployment policy configuration:
-// - Use GetContinuousDeploymentPolicyConfig to
-// get the current configuration.
-// - Locally modify the fields in the continuous
-// deployment policy configuration that you want to update.
-// - Use
-// UpdateContinuousDeploymentPolicy, providing the entire continuous deployment
-// policy configuration, including the fields that you modified and those that you
-// didn't.
+//   - Use GetContinuousDeploymentPolicyConfig to get the current configuration.
+//   - Locally modify the fields in the continuous deployment policy configuration that you want to update.
+//   - Use UpdateContinuousDeploymentPolicy , providing the entire continuous deployment policy configuration, including the fields that you modified and those that you didn't.
 func (c *Client) UpdateContinuousDeploymentPolicy(ctx context.Context, params *UpdateContinuousDeploymentPolicyInput, optFns ...func(*Options)) (*UpdateContinuousDeploymentPolicyOutput, error) {
 	if params == nil {
 		params = &UpdateContinuousDeploymentPolicyInput{}
@@ -53,7 +48,7 @@ type UpdateContinuousDeploymentPolicyInput struct {
 	// This member is required.
 	Id *string
 
-	// The current version (ETag value) of the continuous deployment policy that you
+	// The current version ( ETag value) of the continuous deployment policy that you
 	// are updating.
 	IfMatch *string
 

@@ -12,16 +12,8 @@ import (
 )
 
 // Promotes a read replica DB instance to a standalone DB instance.
-// - Backup
-// duration is a function of the amount of changes to the database since the
-// previous backup. If you plan to promote a read replica to a standalone instance,
-// we recommend that you enable backups and complete at least one backup prior to
-// promotion. In addition, a read replica cannot be promoted to a standalone
-// instance when it is in the backing-up status. If you have enabled backups on
-// your read replica, configure the automated backup window so that daily backups
-// do not interfere with read replica promotion.
-// - This command doesn't apply to
-// Aurora MySQL, Aurora PostgreSQL, or RDS Custom.
+//   - Backup duration is a function of the amount of changes to the database since the previous backup. If you plan to promote a read replica to a standalone instance, we recommend that you enable backups and complete at least one backup prior to promotion. In addition, a read replica cannot be promoted to a standalone instance when it is in the backing-up status. If you have enabled backups on your read replica, configure the automated backup window so that daily backups do not interfere with read replica promotion.
+//   - This command doesn't apply to Aurora MySQL, Aurora PostgreSQL, or RDS Custom.
 func (c *Client) PromoteReadReplica(ctx context.Context, params *PromoteReadReplicaInput, optFns ...func(*Options)) (*PromoteReadReplicaOutput, error) {
 	if params == nil {
 		params = &PromoteReadReplicaInput{}
@@ -41,8 +33,7 @@ type PromoteReadReplicaInput struct {
 
 	// The DB instance identifier. This value is stored as a lowercase string.
 	// Constraints:
-	// - Must match the identifier of an existing read replica DB
-	// instance.
+	//     - Must match the identifier of an existing read replica DB instance.
 	//
 	// Example: mydbinstance
 	//
@@ -52,24 +43,20 @@ type PromoteReadReplicaInput struct {
 	// The number of days for which automated backups are retained. Setting this
 	// parameter to a positive number enables backups. Setting this parameter to 0
 	// disables automated backups. Default: 1 Constraints:
-	// - Must be a value from 0 to
-	// 35.
-	// - Can't be set to 0 if the DB instance is a source to read replicas.
+	//     - Must be a value from 0 to 35.
+	//     - Can't be set to 0 if the DB instance is a source to read replicas.
 	BackupRetentionPeriod *int32
 
 	// The daily time range during which automated backups are created if automated
-	// backups are enabled, using the BackupRetentionPeriod parameter. The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each Amazon
-	// Web Services Region. To see the time blocks available, see  Adjusting the
-	// Preferred Maintenance Window
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html)
+	// backups are enabled, using the BackupRetentionPeriod parameter. The default is
+	// a 30-minute window selected at random from an 8-hour block of time for each
+	// Amazon Web Services Region. To see the time blocks available, see Adjusting
+	// the Preferred Maintenance Window (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html)
 	// in the Amazon RDS User Guide. Constraints:
-	// - Must be in the format
-	// hh24:mi-hh24:mi.
-	// - Must be in Universal Coordinated Time (UTC).
-	// - Must not
-	// conflict with the preferred maintenance window.
-	// - Must be at least 30 minutes.
+	//     - Must be in the format hh24:mi-hh24:mi .
+	//     - Must be in Universal Coordinated Time (UTC).
+	//     - Must not conflict with the preferred maintenance window.
+	//     - Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	noSmithyDocumentSerde
@@ -78,11 +65,11 @@ type PromoteReadReplicaInput struct {
 type PromoteReadReplicaOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a
-	// response element in the operations CreateDBInstance,
-	// CreateDBInstanceReadReplica, DeleteDBInstance, DescribeDBInstances,
-	// ModifyDBInstance, PromoteReadReplica, RebootDBInstance,
-	// RestoreDBInstanceFromDBSnapshot, RestoreDBInstanceFromS3,
-	// RestoreDBInstanceToPointInTime, StartDBInstance, and StopDBInstance.
+	// response element in the operations CreateDBInstance ,
+	// CreateDBInstanceReadReplica , DeleteDBInstance , DescribeDBInstances ,
+	// ModifyDBInstance , PromoteReadReplica , RebootDBInstance ,
+	// RestoreDBInstanceFromDBSnapshot , RestoreDBInstanceFromS3 ,
+	// RestoreDBInstanceToPointInTime , StartDBInstance , and StopDBInstance .
 	DBInstance *types.DBInstance
 
 	// Metadata pertaining to the operation's result.

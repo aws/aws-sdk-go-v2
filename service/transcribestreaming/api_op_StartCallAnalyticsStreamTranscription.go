@@ -17,17 +17,15 @@ import (
 
 // Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to
 // Amazon Transcribe and the transcription results are streamed to your
-// application. Use this operation for Call Analytics
-// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html)
+// application. Use this operation for Call Analytics (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html)
 // transcriptions. The following parameters are required:
-// - language-code
-// -
-// media-encoding
-// - sample-rate
+//   - language-code
+//   - media-encoding
+//   - sample-rate
+//     For more information on streaming with Amazon Transcribe, see Transcribing
 //
-// For more information on streaming with Amazon
-// Transcribe, see Transcribing streaming audio
-// (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html).
+// streaming audio (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html)
+// .
 func (c *Client) StartCallAnalyticsStreamTranscription(ctx context.Context, params *StartCallAnalyticsStreamTranscriptionInput, optFns ...func(*Options)) (*StartCallAnalyticsStreamTranscriptionOutput, error) {
 	if params == nil {
 		params = &StartCallAnalyticsStreamTranscriptionInput{}
@@ -45,27 +43,23 @@ func (c *Client) StartCallAnalyticsStreamTranscription(ctx context.Context, para
 
 type StartCallAnalyticsStreamTranscriptionInput struct {
 
-	// Specify the language code that represents the language spoken in your audio. If
-	// you're unsure of the language spoken in your audio, consider using
-	// IdentifyLanguage to enable automatic language identification. For a list of
+	// Specify the language code that represents the language spoken in your audio.
+	// If you're unsure of the language spoken in your audio, consider using
+	// IdentifyLanguageto enable automatic language identification. For a list of
 	// languages supported with streaming Call Analytics, refer to the Supported
-	// languages
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+	// languages (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
 	// table.
 	//
 	// This member is required.
 	LanguageCode types.CallAnalyticsLanguageCode
 
 	// Specify the encoding of your input audio. Supported formats are:
-	// - FLAC
-	// -
-	// OPUS-encoded audio in an Ogg container
-	// - PCM (only signed 16-bit little-endian
-	// audio formats, which does not include WAV)
+	//     - FLAC
+	//     - OPUS-encoded audio in an Ogg container
+	//     - PCM (only signed 16-bit little-endian audio formats, which does not include WAV)
 	//
-	// For more information, see Media
-	// formats
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio).
+	// For more information, see Media formats (https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio)
+	// .
 	//
 	// This member is required.
 	MediaEncoding types.MediaEncoding
@@ -81,26 +75,26 @@ type StartCallAnalyticsStreamTranscriptionInput struct {
 	// Labels all personally identifiable information (PII) identified in your
 	// transcript. Content identification is performed at the segment level; PII
 	// specified in PiiEntityTypes is flagged upon complete transcription of an audio
-	// segment. You can’t set ContentIdentificationType and ContentRedactionType in the
-	// same request. If you set both, your request returns a BadRequestException. For
-	// more information, see Redacting or identifying personally identifiable
-	// information
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html).
+	// segment. You can’t set ContentIdentificationType  and ContentRedactionType in
+	// the same request. If you set both, your request returns a BadRequestException.
+	// For more information, see Redacting or identifying personally identifiable
+	// information (https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html)
+	// .
 	ContentIdentificationType types.ContentIdentificationType
 
 	// Redacts all personally identifiable information (PII) identified in your
 	// transcript. Content redaction is performed at the segment level; PII specified
 	// in PiiEntityTypes is redacted upon complete transcription of an audio segment.
-	// You can’t set ContentRedactionType and ContentIdentificationType in the same
+	// You can’t set ContentRedactionType  and ContentIdentificationType in the same
 	// request. If you set both, your request returns a BadRequestException. For more
-	// information, see Redacting or identifying personally identifiable information
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html).
+	// information, see Redacting or identifying personally identifiable information (https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html)
+	// .
 	ContentRedactionType types.ContentRedactionType
 
 	// Enables partial result stabilization for your transcription. Partial result
 	// stabilization can reduce latency in your output, but may impact accuracy. For
-	// more information, see Partial-result stabilization
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization).
+	// more information, see Partial-result stabilization (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization)
+	// .
 	EnablePartialResultsStabilization bool
 
 	// Specify the name of the custom language model that you want to use when
@@ -109,24 +103,24 @@ type StartCallAnalyticsStreamTranscriptionInput struct {
 	// code you specify in your transcription request. If the languages don't match,
 	// the custom language model isn't applied. There are no errors or warnings
 	// associated with a language mismatch. For more information, see Custom language
-	// models
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html).
+	// models (https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html)
+	// .
 	LanguageModelName *string
 
 	// Specify the level of stability to use when you enable partial results
-	// stabilization (EnablePartialResultsStabilization). Low stability provides the
+	// stabilization ( EnablePartialResultsStabilization). Low stability provides the
 	// highest accuracy. High stability transcribes faster, but with slightly lower
-	// accuracy. For more information, see Partial-result stabilization
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization).
+	// accuracy. For more information, see Partial-result stabilization (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization)
+	// .
 	PartialResultsStability types.PartialResultsStability
 
 	// Specify which types of personally identifiable information (PII) you want to
 	// redact in your transcript. You can include as many types as you'd like, or you
-	// can select ALL. To include PiiEntityTypes in your Call Analytics request, you
-	// must also include either ContentIdentificationType or ContentRedactionType.
-	// Values must be comma-separated and can include: BANK_ACCOUNT_NUMBER,
-	// BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN,
-	// EMAIL, ADDRESS, NAME, PHONE, SSN, or ALL.
+	// can select ALL . To include PiiEntityTypes in your Call Analytics request, you
+	// must also include either ContentIdentificationType  or ContentRedactionType.
+	// Values must be comma-separated and can include: BANK_ACCOUNT_NUMBER ,
+	// BANK_ROUTING , CREDIT_DEBIT_NUMBER , CREDIT_DEBIT_CVV , CREDIT_DEBIT_EXPIRY ,
+	// PIN , EMAIL , ADDRESS , NAME , PHONE , SSN , or ALL .
 	PiiEntityTypes *string
 
 	// Specify a name for your Call Analytics transcription session. If you don't
@@ -136,8 +130,8 @@ type StartCallAnalyticsStreamTranscriptionInput struct {
 	SessionId *string
 
 	// Specify how you want your vocabulary filter applied to your transcript. To
-	// replace words with ***, choose mask. To delete words, choose remove. To flag
-	// words without changing them, choose tag.
+	// replace words with *** , choose mask . To delete words, choose remove. To flag
+	// words without changing them, choose tag .
 	VocabularyFilterMethod types.VocabularyFilterMethod
 
 	// Specify the name of the custom vocabulary filter that you want to use when
@@ -145,16 +139,16 @@ type StartCallAnalyticsStreamTranscriptionInput struct {
 	// sensitive. If the language of the specified custom vocabulary filter doesn't
 	// match the language identified in your media, the vocabulary filter is not
 	// applied to your transcription. For more information, see Using vocabulary
-	// filtering with unwanted words
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html).
+	// filtering with unwanted words (https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html)
+	// .
 	VocabularyFilterName *string
 
 	// Specify the name of the custom vocabulary that you want to use when processing
 	// your transcription. Note that vocabulary names are case sensitive. If the
 	// language of the specified custom vocabulary doesn't match the language
 	// identified in your media, the custom vocabulary is not applied to your
-	// transcription. For more information, see Custom vocabularies
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html).
+	// transcription. For more information, see Custom vocabularies (https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html)
+	// .
 	VocabularyName *string
 
 	noSmithyDocumentSerde
@@ -170,8 +164,8 @@ type StartCallAnalyticsStreamTranscriptionOutput struct {
 	// transcription.
 	ContentRedactionType types.ContentRedactionType
 
-	// Shows whether partial results stabilization was enabled for your Call Analytics
-	// transcription.
+	// Shows whether partial results stabilization was enabled for your Call
+	// Analytics transcription.
 	EnablePartialResultsStabilization bool
 
 	// Provides the language code that you specified in your Call Analytics request.
@@ -385,8 +379,8 @@ func (es *StartCallAnalyticsStreamTranscriptionEventStream) safeClose() {
 	es.Reader.Close()
 }
 
-// Err returns any error that occurred while reading or writing EventStream Events
-// from the service API's response. Returns nil if there were no errors.
+// Err returns any error that occurred while reading or writing EventStream
+// Events from the service API's response. Returns nil if there were no errors.
 func (es *StartCallAnalyticsStreamTranscriptionEventStream) Err() error {
 	if err := es.err.Err(); err != nil {
 		return err

@@ -41,22 +41,22 @@ type Api struct {
 	// This member is required.
 	RouteSelectionExpression *string
 
-	// The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The
-	// stage name is typically appended to this URI to form a complete path to a
+	// The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com.
+	// The stage name is typically appended to this URI to form a complete path to a
 	// deployed API stage.
 	ApiEndpoint *string
 
-	// Specifies whether an API is managed by API Gateway. You can't update or delete a
-	// managed API by using API Gateway. A managed API can be deleted only through the
-	// tooling or service that created it.
+	// Specifies whether an API is managed by API Gateway. You can't update or delete
+	// a managed API by using API Gateway. A managed API can be deleted only through
+	// the tooling or service that created it.
 	ApiGatewayManaged bool
 
 	// The API ID.
 	ApiId *string
 
-	// An API key selection expression. Supported only for WebSocket APIs. See API Key
-	// Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions).
+	// An API key selection expression. Supported only for WebSocket APIs. See API
+	// Key Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
+	// .
 	ApiKeySelectionExpression *string
 
 	// A CORS configuration. Supported only for HTTP APIs.
@@ -75,8 +75,8 @@ type Api struct {
 	// endpoint.
 	DisableExecuteApiEndpoint bool
 
-	// Avoid validating models when creating a deployment. Supported only for WebSocket
-	// APIs.
+	// Avoid validating models when creating a deployment. Supported only for
+	// WebSocket APIs.
 	DisableSchemaValidation bool
 
 	// The validation information during API import. This may include particular
@@ -127,8 +127,8 @@ type Authorizer struct {
 	// This member is required.
 	Name *string
 
-	// Specifies the required credentials as an IAM role for API Gateway to invoke the
-	// authorizer. To specify an IAM role for API Gateway to assume, use the role's
+	// Specifies the required credentials as an IAM role for API Gateway to invoke
+	// the authorizer. To specify an IAM role for API Gateway to assume, use the role's
 	// Amazon Resource Name (ARN). To use resource-based permissions on the Lambda
 	// function, don't specify this parameter. Supported only for REQUEST authorizers.
 	AuthorizerCredentialsArn *string
@@ -138,8 +138,8 @@ type Authorizer struct {
 
 	// Specifies the format of the payload sent to an HTTP API Lambda authorizer.
 	// Required for HTTP API Lambda authorizers. Supported values are 1.0 and 2.0. To
-	// learn more, see Working with AWS Lambda authorizers for HTTP APIs
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html).
+	// learn more, see Working with AWS Lambda authorizers for HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
+	// .
 	AuthorizerPayloadFormatVersion *string
 
 	// The time to live (TTL) for cached authorizer results, in seconds. If it equals
@@ -165,11 +165,10 @@ type Authorizer struct {
 	// authorizers.
 	AuthorizerUri *string
 
-	// Specifies whether a Lambda authorizer returns a response in a simple format. If
-	// enabled, the Lambda authorizer can return a boolean value instead of an IAM
-	// policy. Supported only for HTTP APIs. To learn more, see Working with AWS Lambda
-	// authorizers for HTTP APIs
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
+	// Specifies whether a Lambda authorizer returns a response in a simple format.
+	// If enabled, the Lambda authorizer can return a boolean value instead of an IAM
+	// policy. Supported only for HTTP APIs. To learn more, see Working with AWS
+	// Lambda authorizers for HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
 	EnableSimpleResponses bool
 
 	// The identity source for which authorization is requested. For a REQUEST
@@ -187,11 +186,11 @@ type Authorizer struct {
 	// Otherwise, it returns a 401 Unauthorized response without calling the Lambda
 	// function. For HTTP APIs, identity sources are also used as the cache key when
 	// caching is enabled. To learn more, see Working with AWS Lambda authorizers for
-	// HTTP APIs
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html).
-	// For JWT, a single entry that specifies where to extract the JSON Web Token (JWT)
-	// from inbound requests. Currently only header-based and query parameter-based
-	// selections are supported, for example $request.header.Authorization.
+	// HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
+	// . For JWT, a single entry that specifies where to extract the JSON Web Token
+	// (JWT) from inbound requests. Currently only header-based and query
+	// parameter-based selections are supported, for example
+	// $request.header.Authorization.
 	IdentitySource []string
 
 	// The validation expression does not apply to the REQUEST authorizer.
@@ -205,8 +204,7 @@ type Authorizer struct {
 }
 
 // Represents a CORS configuration. Supported only for HTTP APIs. See Configuring
-// CORS
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html)
+// CORS (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html)
 // for more information.
 type Cors struct {
 
@@ -233,8 +231,9 @@ type Cors struct {
 	noSmithyDocumentSerde
 }
 
-// An immutable representation of an API that can be called by users. A Deployment
-// must be associated with a Stage for it to be callable over the internet.
+// An immutable representation of an API that can be called by users. A
+// Deployment must be associated with a Stage for it to be callable over the
+// internet.
 type Deployment struct {
 
 	// Specifies whether a deployment was automatically released.
@@ -287,16 +286,16 @@ type DomainNameConfiguration struct {
 	// A domain name for the API.
 	ApiGatewayDomainName *string
 
-	// An AWS-managed certificate that will be used by the edge-optimized endpoint for
-	// this domain name. AWS Certificate Manager is the only supported source.
+	// An AWS-managed certificate that will be used by the edge-optimized endpoint
+	// for this domain name. AWS Certificate Manager is the only supported source.
 	CertificateArn *string
 
 	// The user-friendly name of the certificate that will be used by the
 	// edge-optimized endpoint for this domain name.
 	CertificateName *string
 
-	// The timestamp when the certificate that was used by edge-optimized endpoint for
-	// this domain name was uploaded.
+	// The timestamp when the certificate that was used by edge-optimized endpoint
+	// for this domain name was uploaded.
 	CertificateUploadDate *time.Time
 
 	// The status of the domain name migration. The valid values are AVAILABLE,
@@ -338,10 +337,10 @@ type Integration struct {
 	// The ID of the VPC link for a private integration. Supported only for HTTP APIs.
 	ConnectionId *string
 
-	// The type of the network connection to the integration endpoint. Specify INTERNET
-	// for connections through the public routable internet or VPC_LINK for private
-	// connections between API Gateway and resources in a VPC. The default value is
-	// INTERNET.
+	// The type of the network connection to the integration endpoint. Specify
+	// INTERNET for connections through the public routable internet or VPC_LINK for
+	// private connections between API Gateway and resources in a VPC. The default
+	// value is INTERNET.
 	ConnectionType ConnectionType
 
 	// Supported only for WebSocket APIs. Specifies how to handle response payload
@@ -372,13 +371,13 @@ type Integration struct {
 	IntegrationMethod *string
 
 	// The integration response selection expression for the integration. Supported
-	// only for WebSocket APIs. See Integration Response Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions).
+	// only for WebSocket APIs. See Integration Response Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions)
+	// .
 	IntegrationResponseSelectionExpression *string
 
 	// Supported only for HTTP API AWS_PROXY integrations. Specifies the AWS service
-	// action to invoke. To learn more, see Integration subtype reference
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services-reference.html).
+	// action to invoke. To learn more, see Integration subtype reference (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services-reference.html)
+	// .
 	IntegrationSubtype *string
 
 	// The integration type of an integration. One of the following: AWS: for
@@ -403,9 +402,8 @@ type Integration struct {
 	// listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map
 	// service, API Gateway uses DiscoverInstances to identify resources. You can use
 	// query parameters to target specific resources. To learn more, see
-	// DiscoverInstances
-	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html).
-	// For private integrations, all resources must be owned by the same AWS account.
+	// DiscoverInstances (https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html)
+	// . For private integrations, all resources must be owned by the same AWS account.
 	IntegrationUri *string
 
 	// Specifies the pass-through behavior for incoming requests based on the
@@ -436,16 +434,15 @@ type Integration struct {
 	// parameters are a key-value map specifying parameters that are passed to
 	// AWS_PROXY integrations. You can provide static values, or map request data,
 	// stage variables, or context variables that are evaluated at runtime. To learn
-	// more, see Working with AWS service integrations for HTTP APIs
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html).
-	// For HTTP API itegrations, without a specified integrationSubtype request
+	// more, see Working with AWS service integrations for HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html)
+	// . For HTTP API itegrations, without a specified integrationSubtype request
 	// parameters are a key-value map specifying how to transform HTTP requests before
 	// sending them to backend integrations. The key should follow the pattern
 	// <action>:<header|querystring|path>.<location>. The action can be append,
 	// overwrite or remove. For values, you can provide static values, or map request
 	// data, stage variables, or context variables that are evaluated at runtime. To
-	// learn more, see Transforming API requests and responses
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html).
+	// learn more, see Transforming API requests and responses (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html)
+	// .
 	RequestParameters map[string]string
 
 	// Represents a map of Velocity templates that are applied on the request payload
@@ -454,25 +451,25 @@ type Integration struct {
 	// Supported only for WebSocket APIs.
 	RequestTemplates map[string]string
 
-	// Supported only for HTTP APIs. You use response parameters to transform the HTTP
-	// response from a backend integration before returning the response to clients.
-	// Specify a key-value map from a selection key to response parameters. The
-	// selection key must be a valid HTTP status code within the range of 200-599.
+	// Supported only for HTTP APIs. You use response parameters to transform the
+	// HTTP response from a backend integration before returning the response to
+	// clients. Specify a key-value map from a selection key to response parameters.
+	// The selection key must be a valid HTTP status code within the range of 200-599.
 	// Response parameters are a key-value map. The key must match pattern
 	// <action>:<header>.<location> or overwrite.statuscode. The action can be append,
 	// overwrite or remove. The value can be a static value, or map to response data,
 	// stage variables, or context variables that are evaluated at runtime. To learn
-	// more, see Transforming API requests and responses
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html).
+	// more, see Transforming API requests and responses (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html)
+	// .
 	ResponseParameters map[string]map[string]string
 
 	// The template selection expression for the integration. Supported only for
 	// WebSocket APIs.
 	TemplateSelectionExpression *string
 
-	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between
-	// 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for
-	// WebSocket APIs and 30 seconds for HTTP APIs.
+	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and
+	// between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29
+	// seconds for WebSocket APIs and 30 seconds for HTTP APIs.
 	TimeoutInMillis int32
 
 	// The TLS configuration for a private integration. If you specify a TLS
@@ -533,9 +530,8 @@ type IntegrationResponse struct {
 type JWTConfiguration struct {
 
 	// A list of the intended recipients of the JWT. A valid JWT must provide an aud
-	// that matches at least one entry in this list. See RFC 7519
-	// (https://tools.ietf.org/html/rfc7519#section-4.1.3). Supported only for HTTP
-	// APIs.
+	// that matches at least one entry in this list. See RFC 7519 (https://tools.ietf.org/html/rfc7519#section-4.1.3)
+	// . Supported only for HTTP APIs.
 	Audience []string
 
 	// The base domain of the identity provider that issues JSON Web Tokens. For
@@ -548,8 +544,8 @@ type JWTConfiguration struct {
 }
 
 // Represents a data model for an API. Supported only for WebSocket APIs. See
-// Create Models and Mapping Templates for Request and Response Mappings
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html).
+// Create Models and Mapping Templates for Request and Response Mappings (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html)
+// .
 type Model struct {
 
 	// The name of the model. Must be alphanumeric.
@@ -631,17 +627,17 @@ type Route struct {
 	// This member is required.
 	RouteKey *string
 
-	// Specifies whether a route is managed by API Gateway. If you created an API using
-	// quick create, the $default route is managed by API Gateway. You can't modify the
-	// $default route key.
+	// Specifies whether a route is managed by API Gateway. If you created an API
+	// using quick create, the $default route is managed by API Gateway. You can't
+	// modify the $default route key.
 	ApiGatewayManaged bool
 
 	// Specifies whether an API key is required for this route. Supported only for
 	// WebSocket APIs.
 	ApiKeyRequired bool
 
-	// A list of authorization scopes configured on a route. The scopes are used with a
-	// JWT authorizer to authorize the method invocation. The authorization works by
+	// A list of authorization scopes configured on a route. The scopes are used with
+	// a JWT authorizer to authorize the method invocation. The authorization works by
 	// matching the route scopes against the scopes parsed from the access token in the
 	// incoming request. The method invocation is authorized if any route scope matches
 	// a claimed scope in the access token. Otherwise, the invocation is not
@@ -649,19 +645,20 @@ type Route struct {
 	// access token instead of an identity token for authorization purposes.
 	AuthorizationScopes []string
 
-	// The authorization type for the route. For WebSocket APIs, valid values are NONE
-	// for open access, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a
-	// Lambda authorizer For HTTP APIs, valid values are NONE for open access, JWT for
-	// using JSON Web Tokens, AWS_IAM for using AWS IAM permissions, and CUSTOM for
-	// using a Lambda authorizer.
+	// The authorization type for the route. For WebSocket APIs, valid values are
+	// NONE for open access, AWS_IAM for using AWS IAM permissions, and CUSTOM for
+	// using a Lambda authorizer For HTTP APIs, valid values are NONE for open access,
+	// JWT for using JSON Web Tokens, AWS_IAM for using AWS IAM permissions, and CUSTOM
+	// for using a Lambda authorizer.
 	AuthorizationType AuthorizationType
 
-	// The identifier of the Authorizer resource to be associated with this route. The
-	// authorizer identifier is generated by API Gateway when you created the
+	// The identifier of the Authorizer resource to be associated with this route.
+	// The authorizer identifier is generated by API Gateway when you created the
 	// authorizer.
 	AuthorizerId *string
 
-	// The model selection expression for the route. Supported only for WebSocket APIs.
+	// The model selection expression for the route. Supported only for WebSocket
+	// APIs.
 	ModelSelectionExpression *string
 
 	// The operation name for the route.
@@ -746,17 +743,17 @@ type Stage struct {
 	// Settings for logging access in this stage.
 	AccessLogSettings *AccessLogSettings
 
-	// Specifies whether a stage is managed by API Gateway. If you created an API using
-	// quick create, the $default stage is managed by API Gateway. You can't modify the
-	// $default stage.
+	// Specifies whether a stage is managed by API Gateway. If you created an API
+	// using quick create, the $default stage is managed by API Gateway. You can't
+	// modify the $default stage.
 	ApiGatewayManaged bool
 
-	// Specifies whether updates to an API automatically trigger a new deployment. The
-	// default value is false.
+	// Specifies whether updates to an API automatically trigger a new deployment.
+	// The default value is false.
 	AutoDeploy bool
 
-	// The identifier of a client certificate for a Stage. Supported only for WebSocket
-	// APIs.
+	// The identifier of a client certificate for a Stage. Supported only for
+	// WebSocket APIs.
 	ClientCertificateId *string
 
 	// The timestamp when the stage was created.
@@ -782,8 +779,8 @@ type Stage struct {
 	// Route settings for the stage, by routeKey.
 	RouteSettings map[string]RouteSettings
 
-	// A map that defines the stage variables for a stage resource. Variable names can
-	// have alphanumeric and underscore characters, and the values must match
+	// A map that defines the stage variables for a stage resource. Variable names
+	// can have alphanumeric and underscore characters, and the values must match
 	// [A-Za-z0-9-._~:/?#&=,]+.
 	StageVariables map[string]string
 
@@ -798,9 +795,9 @@ type Stage struct {
 // only for HTTP APIs.
 type TlsConfig struct {
 
-	// If you specify a server name, API Gateway uses it to verify the hostname on the
-	// integration's certificate. The server name is also included in the TLS handshake
-	// to support Server Name Indication (SNI) or virtual hosting.
+	// If you specify a server name, API Gateway uses it to verify the hostname on
+	// the integration's certificate. The server name is also included in the TLS
+	// handshake to support Server Name Indication (SNI) or virtual hosting.
 	ServerNameToVerify *string
 
 	noSmithyDocumentSerde
@@ -811,9 +808,9 @@ type TlsConfig struct {
 // only for HTTP APIs.
 type TlsConfigInput struct {
 
-	// If you specify a server name, API Gateway uses it to verify the hostname on the
-	// integration's certificate. The server name is also included in the TLS handshake
-	// to support Server Name Indication (SNI) or virtual hosting.
+	// If you specify a server name, API Gateway uses it to verify the hostname on
+	// the integration's certificate. The server name is also included in the TLS
+	// handshake to support Server Name Indication (SNI) or virtual hosting.
 	ServerNameToVerify *string
 
 	noSmithyDocumentSerde

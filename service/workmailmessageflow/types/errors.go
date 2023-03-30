@@ -8,17 +8,9 @@ import (
 )
 
 // WorkMail could not access the updated email content. Possible reasons:
-// - You
-// made the request in a region other than your S3 bucket region.
-// - The S3 bucket
-// owner
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-owner-condition.html) is
-// not the same as the calling AWS account.
-// - You have an incomplete or missing S3
-// bucket policy. For more information about policies, see  Updating message
-// content with AWS Lambda
-// (https://docs.aws.amazon.com/workmail/latest/adminguide/update-with-lambda.html)
-// in the WorkMail Administrator Guide.
+//   - You made the request in a region other than your S3 bucket region.
+//   - The S3 bucket owner (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-owner-condition.html) is not the same as the calling AWS account.
+//   - You have an incomplete or missing S3 bucket policy. For more information about policies, see Updating message content with AWS Lambda  (https://docs.aws.amazon.com/workmail/latest/adminguide/update-with-lambda.html) in the WorkMail Administrator Guide.
 type InvalidContentLocation struct {
 	Message *string
 

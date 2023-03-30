@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Configures a suggester for a domain. A suggester enables you to display possible
-// matches before users finish typing their queries. When you configure a
+// Configures a suggester for a domain. A suggester enables you to display
+// possible matches before users finish typing their queries. When you configure a
 // suggester, you must specify the name of the text field you want to search for
 // possible matches and a unique name for the suggester. For more information, see
-// Getting Search Suggestions
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
+// Getting Search Suggestions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DefineSuggester(ctx context.Context, params *DefineSuggesterInput, optFns ...func(*Options)) (*DefineSuggesterOutput, error) {
 	if params == nil {
@@ -47,7 +46,7 @@ type DefineSuggesterInput struct {
 
 	// Configuration information for a search suggester. Each suggester has a unique
 	// name and specifies the text field you want to use for suggestions. The following
-	// options can be configured for a suggester: FuzzyMatching, SortExpression.
+	// options can be configured for a suggester: FuzzyMatching , SortExpression .
 	//
 	// This member is required.
 	Suggester *types.Suggester
@@ -59,7 +58,7 @@ type DefineSuggesterInput struct {
 // newly-configured suggester.
 type DefineSuggesterOutput struct {
 
-	// The value of a Suggester and its current status.
+	// The value of a Suggester  and its current status.
 	//
 	// This member is required.
 	Suggester *types.SuggesterStatus

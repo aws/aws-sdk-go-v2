@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing site. The site cannot be associated with any device or link.
+// Deletes an existing site. The site cannot be associated with any device or
+// link.
 func (c *Client) DeleteSite(ctx context.Context, params *DeleteSiteInput, optFns ...func(*Options)) (*DeleteSiteOutput, error) {
 	if params == nil {
 		params = &DeleteSiteInput{}

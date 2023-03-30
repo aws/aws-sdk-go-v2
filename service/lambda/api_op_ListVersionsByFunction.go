@@ -12,10 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of versions
-// (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html), with the
-// version-specific configuration of each. Lambda returns up to 50 versions per
-// call.
+// Returns a list of versions (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)
+// , with the version-specific configuration of each. Lambda returns up to 50
+// versions per call.
 func (c *Client) ListVersionsByFunction(ctx context.Context, params *ListVersionsByFunctionInput, optFns ...func(*Options)) (*ListVersionsByFunctionOutput, error) {
 	if params == nil {
 		params = &ListVersionsByFunctionInput{}
@@ -34,15 +33,12 @@ func (c *Client) ListVersionsByFunction(ctx context.Context, params *ListVersion
 type ListVersionsByFunctionInput struct {
 
 	// The name of the Lambda function. Name formats
-	// - Function name - MyFunction.
-	// -
-	// Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.
-	// -
-	// Partial ARN - 123456789012:function:MyFunction.
-	//
-	// The length constraint applies
-	// only to the full ARN. If you specify only the function name, it is limited to 64
-	// characters in length.
+	//     - Function name - MyFunction .
+	//     - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
+	//     - Partial ARN - 123456789012:function:MyFunction .
+	// The length constraint
+	// applies only to the full ARN. If you specify only the function name, it is
+	// limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
@@ -152,8 +148,8 @@ type ListVersionsByFunctionPaginatorOptions struct {
 	// higher.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -166,7 +162,8 @@ type ListVersionsByFunctionPaginator struct {
 	firstPage bool
 }
 
-// NewListVersionsByFunctionPaginator returns a new ListVersionsByFunctionPaginator
+// NewListVersionsByFunctionPaginator returns a new
+// ListVersionsByFunctionPaginator
 func NewListVersionsByFunctionPaginator(client ListVersionsByFunctionAPIClient, params *ListVersionsByFunctionInput, optFns ...func(*ListVersionsByFunctionPaginatorOptions)) *ListVersionsByFunctionPaginator {
 	if params == nil {
 		params = &ListVersionsByFunctionInput{}

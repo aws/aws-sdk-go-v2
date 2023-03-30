@@ -13,7 +13,7 @@ import (
 )
 
 // Returns a list of all user or group session mappings for the Amazon EMR Studio
-// specified by StudioId.
+// specified by StudioId .
 func (c *Client) ListStudioSessionMappings(ctx context.Context, params *ListStudioSessionMappingsInput, optFns ...func(*Options)) (*ListStudioSessionMappingsOutput, error) {
 	if params == nil {
 		params = &ListStudioSessionMappingsInput{}
@@ -50,9 +50,9 @@ type ListStudioSessionMappingsOutput struct {
 	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string
 
-	// A list of session mapping summary objects. Each object includes session mapping
-	// details such as creation time, identity type (user or group), and Amazon EMR
-	// Studio ID.
+	// A list of session mapping summary objects. Each object includes session
+	// mapping details such as creation time, identity type (user or group), and Amazon
+	// EMR Studio ID.
 	SessionMappings []types.SessionMappingSummary
 
 	// Metadata pertaining to the operation's result.
@@ -132,8 +132,8 @@ var _ ListStudioSessionMappingsAPIClient = (*Client)(nil)
 // ListStudioSessionMappingsPaginatorOptions is the paginator options for
 // ListStudioSessionMappings
 type ListStudioSessionMappingsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

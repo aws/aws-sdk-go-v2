@@ -16,8 +16,9 @@ import (
 // are allowed in each CancelSteps request. CancelSteps is idempotent but
 // asynchronous; it does not guarantee that a step will be canceled, even if the
 // request is successfully submitted. When you use Amazon EMR versions 5.28.0 and
-// later, you can cancel steps that are in a PENDING or RUNNING state. In earlier
-// versions of Amazon EMR, you can only cancel steps that are in a PENDING state.
+// later, you can cancel steps that are in a PENDING  or RUNNING state. In
+// earlier versions of Amazon EMR, you can only cancel steps that are in a PENDING
+// state.
 func (c *Client) CancelSteps(ctx context.Context, params *CancelStepsInput, optFns ...func(*Options)) (*CancelStepsOutput, error) {
 	if params == nil {
 		params = &CancelStepsInput{}
@@ -33,33 +34,33 @@ func (c *Client) CancelSteps(ctx context.Context, params *CancelStepsInput, optF
 	return out, nil
 }
 
-// The input argument to the CancelSteps operation.
+// The input argument to the CancelSteps  operation.
 type CancelStepsInput struct {
 
-	// The ClusterID for the specified steps that will be canceled. Use RunJobFlow and
-	// ListClusters to get ClusterIDs.
+	// The ClusterID  for the specified steps that will be canceled. Use RunJobFlow
+	// and ListClusters  to get ClusterIDs.
 	//
 	// This member is required.
 	ClusterId *string
 
-	// The list of StepIDs to cancel. Use ListSteps to get steps and their states for
-	// the specified cluster.
+	// The list of StepIDs  to cancel. Use ListSteps to get steps and their states
+	// for the specified cluster.
 	//
 	// This member is required.
 	StepIds []string
 
-	// The option to choose to cancel RUNNING steps. By default, the value is
-	// SEND_INTERRUPT.
+	// The option to choose to cancel RUNNING  steps. By default, the value is
+	// SEND_INTERRUPT .
 	StepCancellationOption types.StepCancellationOption
 
 	noSmithyDocumentSerde
 }
 
-// The output for the CancelSteps operation.
+// The output for the CancelSteps  operation.
 type CancelStepsOutput struct {
 
 	// A list of CancelStepsInfo, which shows the status of specified cancel requests
-	// for each StepID specified.
+	// for each StepID  specified.
 	CancelStepsInfoList []types.CancelStepsInfo
 
 	// Metadata pertaining to the operation's result.

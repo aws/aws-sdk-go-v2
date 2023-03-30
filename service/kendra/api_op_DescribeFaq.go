@@ -51,8 +51,8 @@ type DescribeFaqOutput struct {
 	// The description of the FAQ that you provided when it was created.
 	Description *string
 
-	// If the Status field is FAILED, the ErrorMessage field contains the reason why
-	// the FAQ failed.
+	// If the Status  field is FAILED , the ErrorMessage field contains the reason
+	// why the FAQ failed.
 	ErrorMessage *string
 
 	// The file format used by the input files for the FAQ.
@@ -66,21 +66,21 @@ type DescribeFaqOutput struct {
 
 	// The code for a language. This shows a supported language for the FAQ document.
 	// English is supported by default. For more information on supported languages,
-	// including their codes, see Adding documents in languages other than English
-	// (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
+	// including their codes, see Adding documents in languages other than English (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html)
+	// .
 	LanguageCode *string
 
 	// The name that you gave the FAQ when it was created.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the role that provides access to the S3 bucket
-	// containing the input files for the FAQ.
+	// The Amazon Resource Name (ARN) of the role that provides access to the S3
+	// bucket containing the input files for the FAQ.
 	RoleArn *string
 
 	// Information required to find a specific file in an Amazon S3 bucket.
 	S3Path *types.S3Path
 
-	// The status of the FAQ. It is ready to use when the status is ACTIVE.
+	// The status of the FAQ. It is ready to use when the status is ACTIVE .
 	Status types.FaqStatus
 
 	// The date and time that the FAQ was last updated.

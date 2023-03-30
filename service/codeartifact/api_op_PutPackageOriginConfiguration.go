@@ -16,15 +16,14 @@ import (
 // repository. You can allow or block direct publishing of new package versions, or
 // ingestion and retaining of new package versions from an external connection or
 // upstream source. For more information about package origin controls and
-// configuration, see Editing package origin controls
-// (https://docs.aws.amazon.com/codeartifact/latest/ug/package-origin-controls.html)
-// in the CodeArtifact User Guide. PutPackageOriginConfiguration can be called on a
-// package that doesn't yet exist in the repository. When called on a package that
-// does not exist, a package is created in the repository with no versions and the
-// requested restrictions are set on the package. This can be used to preemptively
-// block ingesting or retaining any versions from external connections or upstream
-// repositories, or to block publishing any versions of the package into the
-// repository before connecting any package managers or publishers to the
+// configuration, see Editing package origin controls (https://docs.aws.amazon.com/codeartifact/latest/ug/package-origin-controls.html)
+// in the CodeArtifact User Guide. PutPackageOriginConfiguration can be called on
+// a package that doesn't yet exist in the repository. When called on a package
+// that does not exist, a package is created in the repository with no versions and
+// the requested restrictions are set on the package. This can be used to
+// preemptively block ingesting or retaining any versions from external connections
+// or upstream repositories, or to block publishing any versions of the package
+// into the repository before connecting any package managers or publishers to the
 // repository.
 func (c *Client) PutPackageOriginConfiguration(ctx context.Context, params *PutPackageOriginConfigurationInput, optFns ...func(*Options)) (*PutPackageOriginConfigurationOutput, error) {
 	if params == nil {
@@ -63,14 +62,13 @@ type PutPackageOriginConfigurationInput struct {
 	// This member is required.
 	Repository *string
 
-	// A PackageOriginRestrictions
-	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html)
-	// object that contains information about the upstream and publish package origin
-	// restrictions. The upstream restriction determines if new package versions can be
-	// ingested or retained from external connections or upstream repositories. The
-	// publish restriction determines if new package versions can be published directly
-	// to the repository. You must include both the desired upstream and publish
-	// restrictions.
+	// A PackageOriginRestrictions (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html)
+	// object that contains information about the upstream  and publish package
+	// origin restrictions. The upstream restriction determines if new package
+	// versions can be ingested or retained from external connections or upstream
+	// repositories. The publish restriction determines if new package versions can
+	// be published directly to the repository. You must include both the desired
+	// upstream and publish  restrictions.
 	//
 	// This member is required.
 	Restrictions *types.PackageOriginRestrictions
@@ -79,20 +77,12 @@ type PutPackageOriginConfigurationInput struct {
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The namespace of the package to be updated. The package component that specifies
-	// its namespace depends on its type. For example:
-	//
-	// * The namespace of a Maven
-	// package is its groupId.
-	//
-	// * The namespace of an npm package is its scope.
-	//
-	// *
-	// Python and NuGet packages do not contain a corresponding component, packages of
-	// those formats do not have a namespace.
-	//
-	// * The namespace of a generic package is
-	// its namespace.
+	// The namespace of the package to be updated. The package component that
+	// specifies its namespace depends on its type. For example:
+	//     - The namespace of a Maven package is its groupId .
+	//     - The namespace of an npm package is its scope .
+	//     - Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.
+	//     - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	noSmithyDocumentSerde
@@ -100,11 +90,9 @@ type PutPackageOriginConfigurationInput struct {
 
 type PutPackageOriginConfigurationOutput struct {
 
-	// A PackageOriginConfiguration
-	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginConfiguration.html)
+	// A PackageOriginConfiguration (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginConfiguration.html)
 	// object that describes the origin configuration set for the package. It contains
-	// a PackageOriginRestrictions
-	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html)
+	// a PackageOriginRestrictions (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html)
 	// object that describes how new versions of the package can be introduced to the
 	// repository.
 	OriginConfiguration *types.PackageOriginConfiguration

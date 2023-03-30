@@ -14,7 +14,7 @@ import (
 
 // Provides details about how an DataSync location for an Amazon FSx for OpenZFS
 // file system is configured. Response elements related to SMB aren't supported
-// with the DescribeLocationFsxOpenZfs operation.
+// with the DescribeLocationFsxOpenZfs  operation.
 func (c *Client) DescribeLocationFsxOpenZfs(ctx context.Context, params *DescribeLocationFsxOpenZfsInput, optFns ...func(*Options)) (*DescribeLocationFsxOpenZfsOutput, error) {
 	if params == nil {
 		params = &DescribeLocationFsxOpenZfsInput{}
@@ -55,8 +55,8 @@ type DescribeLocationFsxOpenZfsOutput struct {
 	// The type of protocol that DataSync uses to access your file system.
 	Protocol *types.FsxProtocol
 
-	// The ARNs of the security groups that are configured for the FSx for OpenZFS file
-	// system.
+	// The ARNs of the security groups that are configured for the FSx for OpenZFS
+	// file system.
 	SecurityGroupArns []string
 
 	// Metadata pertaining to the operation's result.

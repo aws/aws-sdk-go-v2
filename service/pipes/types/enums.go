@@ -47,9 +47,10 @@ const (
 	BatchResourceRequirementTypeVcpu   BatchResourceRequirementType = "VCPU"
 )
 
-// Values returns all known values for BatchResourceRequirementType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BatchResourceRequirementType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (BatchResourceRequirementType) Values() []BatchResourceRequirementType {
 	return []BatchResourceRequirementType{
 		"GPU",
@@ -66,9 +67,10 @@ const (
 	DynamoDBStreamStartPositionLatest      DynamoDBStreamStartPosition = "LATEST"
 )
 
-// Values returns all known values for DynamoDBStreamStartPosition. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DynamoDBStreamStartPosition. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (DynamoDBStreamStartPosition) Values() []DynamoDBStreamStartPosition {
 	return []DynamoDBStreamStartPosition{
 		"TRIM_HORIZON",
@@ -175,8 +177,8 @@ const (
 	OnPartialBatchItemFailureStreamsAutomaticBisect OnPartialBatchItemFailureStreams = "AUTOMATIC_BISECT"
 )
 
-// Values returns all known values for OnPartialBatchItemFailureStreams. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for OnPartialBatchItemFailureStreams. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (OnPartialBatchItemFailureStreams) Values() []OnPartialBatchItemFailureStreams {
@@ -202,9 +204,9 @@ const (
 	PipeStateStopFailed   PipeState = "STOP_FAILED"
 )
 
-// Values returns all known values for PipeState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for PipeState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (PipeState) Values() []PipeState {
 	return []PipeState{
 		"RUNNING",
@@ -229,9 +231,9 @@ const (
 	PipeTargetInvocationTypeFireAndForget   PipeTargetInvocationType = "FIRE_AND_FORGET"
 )
 
-// Values returns all known values for PipeTargetInvocationType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PipeTargetInvocationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PipeTargetInvocationType) Values() []PipeTargetInvocationType {
 	return []PipeTargetInvocationType{
 		"REQUEST_RESPONSE",
@@ -247,9 +249,9 @@ const (
 	PlacementConstraintTypeMemberOf         PlacementConstraintType = "memberOf"
 )
 
-// Values returns all known values for PlacementConstraintType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PlacementConstraintType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PlacementConstraintType) Values() []PlacementConstraintType {
 	return []PlacementConstraintType{
 		"distinctInstance",
@@ -266,8 +268,8 @@ const (
 	PlacementStrategyTypeBinpack PlacementStrategyType = "binpack"
 )
 
-// Values returns all known values for PlacementStrategyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PlacementStrategyType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PlacementStrategyType) Values() []PlacementStrategyType {
 	return []PlacementStrategyType{

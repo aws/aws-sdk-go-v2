@@ -16,8 +16,7 @@ import (
 	"time"
 )
 
-// Returns a RepositoryAssociation
-// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
+// Returns a RepositoryAssociation (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
 // object that contains information about the requested repository association.
 func (c *Client) DescribeRepositoryAssociation(ctx context.Context, params *DescribeRepositoryAssociationInput, optFns ...func(*Options)) (*DescribeRepositoryAssociationOutput, error) {
 	if params == nil {
@@ -36,10 +35,9 @@ func (c *Client) DescribeRepositoryAssociation(ctx context.Context, params *Desc
 
 type DescribeRepositoryAssociationInput struct {
 
-	// The Amazon Resource Name (ARN) of the RepositoryAssociation
-	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
-	// object. You can retrieve this ARN by calling ListRepositoryAssociations
-	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html).
+	// The Amazon Resource Name (ARN) of the RepositoryAssociation (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
+	// object. You can retrieve this ARN by calling ListRepositoryAssociations (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html)
+	// .
 	//
 	// This member is required.
 	AssociationArn *string
@@ -54,12 +52,8 @@ type DescribeRepositoryAssociationOutput struct {
 
 	// An array of key-value pairs used to tag an associated repository. A tag is a
 	// custom attribute label with two parts:
-	// - A tag key (for example, CostCenter,
-	// Environment, Project, or Secret). Tag keys are case sensitive.
-	// - An optional
-	// field known as a tag value (for example, 111122223333, Production, or a team
-	// name). Omitting the tag value is the same as using an empty string. Like tag
-	// keys, tag values are case sensitive.
+	//     - A tag key (for example, CostCenter , Environment , Project , or Secret ). Tag keys are case sensitive.
+	//     - An optional field known as a tag value (for example, 111122223333 , Production , or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case sensitive.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
@@ -154,10 +148,10 @@ type RepositoryAssociationSucceededWaiterOptions struct {
 	// MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, RepositoryAssociationSucceededWaiter will use default max delay of 120
-	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
-	// MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, RepositoryAssociationSucceededWaiter will use default max delay of
+	// 120 seconds. Note that MaxDelay must resolve to value greater than or equal to
+	// the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

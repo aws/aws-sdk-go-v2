@@ -41,8 +41,8 @@ type AcceptVpcEndpointConnectionsInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde
@@ -50,7 +50,8 @@ type AcceptVpcEndpointConnectionsInput struct {
 
 type AcceptVpcEndpointConnectionsOutput struct {
 
-	// Information about the interface endpoints that were not accepted, if applicable.
+	// Information about the interface endpoints that were not accepted, if
+	// applicable.
 	Unsuccessful []types.UnsuccessfulItem
 
 	// Metadata pertaining to the operation's result.

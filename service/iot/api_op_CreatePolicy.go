@@ -11,11 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an IoT policy. The created policy is the default version for the policy.
-// This operation creates a policy version with a version identifier of 1 and sets
-// 1 as the policy's default version. Requires permission to access the
-// CreatePolicy
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Creates an IoT policy. The created policy is the default version for the
+// policy. This operation creates a policy version with a version identifier of 1
+// and sets 1 as the policy's default version. Requires permission to access the
+// CreatePolicy (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, optFns ...func(*Options)) (*CreatePolicyOutput, error) {
 	if params == nil {
@@ -35,8 +34,8 @@ func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, op
 // The input for the CreatePolicy operation.
 type CreatePolicyInput struct {
 
-	// The JSON document that describes the policy. policyDocument must have a minimum
-	// length of 1, with a maximum length of 2048, excluding whitespace.
+	// The JSON document that describes the policy. policyDocument must have a
+	// minimum length of 1, with a maximum length of 2048, excluding whitespace.
 	//
 	// This member is required.
 	PolicyDocument *string
@@ -46,8 +45,8 @@ type CreatePolicyInput struct {
 	// This member is required.
 	PolicyName *string
 
-	// Metadata which can be used to manage the policy. For URI Request parameters use
-	// format: ...key1=value1&key2=value2... For the CLI command-line parameter use
+	// Metadata which can be used to manage the policy. For URI Request parameters
+	// use format: ...key1=value1&key2=value2... For the CLI command-line parameter use
 	// format: &&tags "key1=value1&key2=value2..." For the cli-input-json file use
 	// format: "tags": "key1=value1&key2=value2..."
 	Tags []types.Tag

@@ -40,10 +40,10 @@ type DescribeTasksInput struct {
 	// This member is required.
 	Tasks []string
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
-	// task or tasks to describe. If you do not specify a cluster, the default cluster
-	// is assumed. This parameter is required if the task or tasks you are describing
-	// were launched in any cluster other than the default cluster.
+	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
+	// the task or tasks to describe. If you do not specify a cluster, the default
+	// cluster is assumed. This parameter is required if the task or tasks you are
+	// describing were launched in any cluster other than the default cluster.
 	Cluster *string
 
 	// Specifies whether you want to see the resource tags for the task. If TAGS is
@@ -151,9 +151,9 @@ type TasksRunningWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, TasksRunningWaiter will use default max delay of 120 seconds. Note that
-	// MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, TasksRunningWaiter will use default max delay of 120 seconds. Note
+	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -201,9 +201,10 @@ func (w *TasksRunningWaiter) Wait(ctx context.Context, params *DescribeTasksInpu
 	return err
 }
 
-// WaitForOutput calls the waiter function for TasksRunning waiter and returns the
-// output of the successful operation. The maxWaitDur is the maximum wait duration
-// the waiter will wait. The maxWaitDur is required and must be greater than zero.
+// WaitForOutput calls the waiter function for TasksRunning waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
 func (w *TasksRunningWaiter) WaitForOutput(ctx context.Context, params *DescribeTasksInput, maxWaitDur time.Duration, optFns ...func(*TasksRunningWaiterOptions)) (*DescribeTasksOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
@@ -373,9 +374,9 @@ type TasksStoppedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, TasksStoppedWaiter will use default max delay of 120 seconds. Note that
-	// MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, TasksStoppedWaiter will use default max delay of 120 seconds. Note
+	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -423,9 +424,10 @@ func (w *TasksStoppedWaiter) Wait(ctx context.Context, params *DescribeTasksInpu
 	return err
 }
 
-// WaitForOutput calls the waiter function for TasksStopped waiter and returns the
-// output of the successful operation. The maxWaitDur is the maximum wait duration
-// the waiter will wait. The maxWaitDur is required and must be greater than zero.
+// WaitForOutput calls the waiter function for TasksStopped waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
 func (w *TasksStoppedWaiter) WaitForOutput(ctx context.Context, params *DescribeTasksInput, maxWaitDur time.Duration, optFns ...func(*TasksStoppedWaiterOptions)) (*DescribeTasksOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

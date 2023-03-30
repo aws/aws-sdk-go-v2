@@ -31,15 +31,14 @@ func (c *Client) UpdateBot(ctx context.Context, params *UpdateBotInput, optFns .
 type UpdateBotInput struct {
 
 	// The unique identifier of the bot to update. This identifier is returned by the
-	// CreateBot
-	// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html)
+	// CreateBot (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html)
 	// operation.
 	//
 	// This member is required.
 	BotId *string
 
-	// The new name of the bot. The name must be unique in the account that creates the
-	// bot.
+	// The new name of the bot. The name must be unique in the account that creates
+	// the bot.
 	//
 	// This member is required.
 	BotName *string
@@ -59,8 +58,8 @@ type UpdateBotInput struct {
 	// This member is required.
 	IdleSessionTTLInSeconds *int32
 
-	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access the
-	// bot.
+	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access
+	// the bot.
 	//
 	// This member is required.
 	RoleArn *string
@@ -89,8 +88,8 @@ type UpdateBotOutput struct {
 	BotName *string
 
 	// Shows the current status of the bot. The bot is first in the Creating status.
-	// Once the bot is read for use, it changes to the Available status. After the bot
-	// is created, you can use the DRAFT version of the bot.
+	// Once the bot is read for use, it changes to the Available status. After the
+	// bot is created, you can use the DRAFT  version of the bot.
 	BotStatus types.BotStatus
 
 	// The type of the bot that was updated.
@@ -111,7 +110,8 @@ type UpdateBotOutput struct {
 	// A timestamp of the date and time that the bot was last updated.
 	LastUpdatedDateTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the IAM role used by the bot after the update.
+	// The Amazon Resource Name (ARN) of the IAM role used by the bot after the
+	// update.
 	RoleArn *string
 
 	// Metadata pertaining to the operation's result.

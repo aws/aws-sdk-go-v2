@@ -13,7 +13,7 @@ import (
 )
 
 // Returns information about cluster or replication group snapshots. By default,
-// DescribeSnapshots lists all of your snapshots; it can optionally describe a
+// DescribeSnapshotslists all of your snapshots; it can optionally describe a
 // single snapshot, or just the snapshots associated with a particular cache
 // cluster. This operation is valid for Redis only.
 func (c *Client) DescribeSnapshots(ctx context.Context, params *DescribeSnapshotsInput, optFns ...func(*Options)) (*DescribeSnapshotsOutput, error) {
@@ -31,39 +31,39 @@ func (c *Client) DescribeSnapshots(ctx context.Context, params *DescribeSnapshot
 	return out, nil
 }
 
-// Represents the input of a DescribeSnapshotsMessage operation.
+// Represents the input of a DescribeSnapshotsMessage  operation.
 type DescribeSnapshotsInput struct {
 
 	// A user-supplied cluster identifier. If this parameter is specified, only
 	// snapshots associated with that specific cluster are described.
 	CacheClusterId *string
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 50 Constraints: minimum
-	// 20; maximum 50.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a marker is included in the
+	// response so that the remaining results can be retrieved. Default: 50
+	// Constraints: minimum 20; maximum 50.
 	MaxRecords *int32
 
 	// A user-supplied replication group identifier. If this parameter is specified,
 	// only snapshots associated with that specific replication group are described.
 	ReplicationGroupId *string
 
-	// A Boolean value which if true, the node group (shard) configuration is included
-	// in the snapshot description.
+	// A Boolean value which if true, the node group (shard) configuration is
+	// included in the snapshot description.
 	ShowNodeGroupConfig *bool
 
-	// A user-supplied name of the snapshot. If this parameter is specified, only this
-	// snapshot are described.
+	// A user-supplied name of the snapshot. If this parameter is specified, only
+	// this snapshot are described.
 	SnapshotName *string
 
-	// If set to system, the output shows snapshots that were automatically created by
-	// ElastiCache. If set to user the output shows snapshots that were manually
+	// If set to system, the output shows snapshots that were automatically created
+	// by ElastiCache. If set to user the output shows snapshots that were manually
 	// created. If omitted, the output shows both automatically and manually created
 	// snapshots.
 	SnapshotSource *string
@@ -71,13 +71,13 @@ type DescribeSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a DescribeSnapshots operation.
+// Represents the output of a DescribeSnapshots  operation.
 type DescribeSnapshotsOutput struct {
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// MaxRecords .
 	Marker *string
 
 	// A list of snapshots. Each item in the list contains detailed information about
@@ -158,16 +158,17 @@ type DescribeSnapshotsAPIClient interface {
 
 var _ DescribeSnapshotsAPIClient = (*Client)(nil)
 
-// DescribeSnapshotsPaginatorOptions is the paginator options for DescribeSnapshots
+// DescribeSnapshotsPaginatorOptions is the paginator options for
+// DescribeSnapshots
 type DescribeSnapshotsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 50 Constraints: minimum
-	// 20; maximum 50.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a marker is included in the
+	// response so that the remaining results can be retrieved. Default: 50
+	// Constraints: minimum 20; maximum 50.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

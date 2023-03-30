@@ -26,8 +26,8 @@ func (c *Client) PutEmailIdentityDkimAttributes(ctx context.Context, params *Put
 	return out, nil
 }
 
-// A request to enable or disable DKIM signing of email that you send from an email
-// identity.
+// A request to enable or disable DKIM signing of email that you send from an
+// email identity.
 type PutEmailIdentityDkimAttributesInput struct {
 
 	// The email identity.
@@ -37,14 +37,14 @@ type PutEmailIdentityDkimAttributesInput struct {
 
 	// Sets the DKIM signing configuration for the identity. When you set this value
 	// true, then the messages that are sent from the identity are signed using DKIM.
-	// If you set this value to false, your messages are sent without DKIM signing.
+	// If you set this value to false , your messages are sent without DKIM signing.
 	SigningEnabled bool
 
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type PutEmailIdentityDkimAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

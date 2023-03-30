@@ -29,7 +29,7 @@ func (c *Client) DeleteIdentities(ctx context.Context, params *DeleteIdentitiesI
 	return out, nil
 }
 
-// Input to the DeleteIdentities action.
+// Input to the DeleteIdentities  action.
 type DeleteIdentitiesInput struct {
 
 	// A list of 1-60 identities that you want to delete.
@@ -40,7 +40,7 @@ type DeleteIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Returned in response to a successful DeleteIdentities operation.
+// Returned in response to a successful DeleteIdentities  operation.
 type DeleteIdentitiesOutput struct {
 
 	// An array of UnprocessedIdentityId objects, each of which contains an ErrorCode

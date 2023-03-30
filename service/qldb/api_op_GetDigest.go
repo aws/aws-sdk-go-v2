@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the digest of a ledger at the latest committed block in the journal. The
-// response includes a 256-bit hash value and a block address.
+// Returns the digest of a ledger at the latest committed block in the journal.
+// The response includes a 256-bit hash value and a block address.
 func (c *Client) GetDigest(ctx context.Context, params *GetDigestInput, optFns ...func(*Options)) (*GetDigestOutput, error) {
 	if params == nil {
 		params = &GetDigestInput{}
@@ -40,13 +40,13 @@ type GetDigestInput struct {
 
 type GetDigestOutput struct {
 
-	// The 256-bit hash value representing the digest returned by a GetDigest request.
+	// The 256-bit hash value representing the digest returned by a GetDigest  request.
 	//
 	// This member is required.
 	Digest []byte
 
 	// The latest block location covered by the digest that you requested. An address
-	// is an Amazon Ion structure that has two fields: strandId and sequenceNo.
+	// is an Amazon Ion structure that has two fields: strandId  and sequenceNo .
 	//
 	// This member is required.
 	DigestTipAddress *types.ValueHolder

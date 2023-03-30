@@ -39,8 +39,8 @@ func (e *AlreadyExistsException) ErrorCode() string {
 }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Backup can't perform the action that you requested until it finishes performing
-// a previous action. Try again later.
+// Backup can't perform the action that you requested until it finishes
+// performing a previous action. Try again later.
 type ConflictException struct {
 	Message *string
 
@@ -132,8 +132,8 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that something is wrong with the input to the request. For example, a
-// parameter is of the wrong type.
+// Indicates that something is wrong with the input to the request. For example,
+// a parameter is of the wrong type.
 type InvalidRequestException struct {
 	Message *string
 
@@ -163,8 +163,9 @@ func (e *InvalidRequestException) ErrorCode() string {
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Backup is already performing an action on this recovery point. It can't perform
-// the action you requested until the first action finishes. Try again later.
+// Backup is already performing an action on this recovery point. It can't
+// perform the action you requested until the first action finishes. Try again
+// later.
 type InvalidResourceStateException struct {
 	Message *string
 
@@ -194,8 +195,8 @@ func (e *InvalidResourceStateException) ErrorCode() string {
 }
 func (e *InvalidResourceStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A limit in the request has been exceeded; for example, a maximum number of items
-// allowed in a request.
+// A limit in the request has been exceeded; for example, a maximum number of
+// items allowed in a request.
 type LimitExceededException struct {
 	Message *string
 

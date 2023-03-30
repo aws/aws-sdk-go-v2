@@ -57,8 +57,8 @@ type ListCasesForContactOutput struct {
 	// This member is required.
 	Cases []types.CaseSummary
 
-	// The token for the next set of results. This is null if there are no more results
-	// to return.
+	// The token for the next set of results. This is null if there are no more
+	// results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -130,8 +130,8 @@ func (c *Client) addOperationListCasesForContactMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListCasesForContactAPIClient is a client that implements the ListCasesForContact
-// operation.
+// ListCasesForContactAPIClient is a client that implements the
+// ListCasesForContact operation.
 type ListCasesForContactAPIClient interface {
 	ListCasesForContact(context.Context, *ListCasesForContactInput, ...func(*Options)) (*ListCasesForContactOutput, error)
 }
@@ -144,8 +144,8 @@ type ListCasesForContactPaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

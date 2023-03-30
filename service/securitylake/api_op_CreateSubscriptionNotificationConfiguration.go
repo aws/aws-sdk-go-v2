@@ -48,12 +48,10 @@ type CreateSubscriptionNotificationConfigurationInput struct {
 	// The HTTPS method used for the notification subscription.
 	HttpsMethod types.HttpsMethod
 
-	// The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that
-	// you created. For more information about ARNs and how to use them in policies,
-	// see Managing data access
-	// (https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html)
-	// and Amazon Web Services Managed Policies
-	// (https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html)
+	// The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role
+	// that you created. For more information about ARNs and how to use them in
+	// policies, see Managing data access (https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html)
+	// and Amazon Web Services Managed Policies (https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html)
 	// in the Amazon Security Lake User Guide.
 	RoleArn *string
 

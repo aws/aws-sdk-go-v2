@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes an Explainability resource. You can delete only predictor that have a
-// status of ACTIVE or CREATE_FAILED. To get the status, use the
+// status of ACTIVE  or CREATE_FAILED . To get the status, use the
 // DescribeExplainability operation.
 func (c *Client) DeleteExplainability(ctx context.Context, params *DeleteExplainabilityInput, optFns ...func(*Options)) (*DeleteExplainabilityOutput, error) {
 	if params == nil {

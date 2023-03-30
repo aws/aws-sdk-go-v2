@@ -21,8 +21,7 @@ import (
 // routing control state is On, traffic flows to a cell. When the state is Off,
 // traffic does not flow. Before you can create a routing control, you must first
 // create a cluster, and then host the control in a control panel on the cluster.
-// For more information, see  Create routing control structures
-// (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.create.html)
+// For more information, see Create routing control structures (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.create.html)
 // in the Amazon Route 53 Application Recovery Controller Developer Guide. You
 // access one of the endpoints for the cluster to get or update the routing control
 // state to redirect traffic for your application. You must specify Regional
@@ -30,11 +29,8 @@ import (
 // list routing controls in Route 53 ARC. Learn more about working with routing
 // controls in the following topics in the Amazon Route 53 Application Recovery
 // Controller Developer Guide:
-// - Viewing and updating routing control states
-// (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.update.html)
-// -
-// Working with routing controls in Route 53 ARC
-// (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html)
+//   - Viewing and updating routing control states (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.update.html)
+//   - Working with routing controls in Route 53 ARC (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html)
 func (c *Client) ListRoutingControls(ctx context.Context, params *ListRoutingControlsInput, optFns ...func(*Options)) (*ListRoutingControlsOutput, error) {
 	if params == nil {
 		params = &ListRoutingControlsInput{}
@@ -144,8 +140,8 @@ func (c *Client) addOperationListRoutingControlsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListRoutingControlsAPIClient is a client that implements the ListRoutingControls
-// operation.
+// ListRoutingControlsAPIClient is a client that implements the
+// ListRoutingControls operation.
 type ListRoutingControlsAPIClient interface {
 	ListRoutingControls(context.Context, *ListRoutingControlsInput, ...func(*Options)) (*ListRoutingControlsOutput, error)
 }
@@ -159,8 +155,8 @@ type ListRoutingControlsPaginatorOptions struct {
 	// The default value is 500.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

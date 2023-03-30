@@ -63,7 +63,7 @@ func (e *InvalidClientTokenException) ErrorCode() string {
 }
 func (e *InvalidClientTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified value for MaxResults is not valid.
+// The specified value for MaxResults  is not valid.
 type InvalidMaxResultsException struct {
 	Message *string
 
@@ -89,7 +89,7 @@ func (e *InvalidMaxResultsException) ErrorCode() string {
 }
 func (e *InvalidMaxResultsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified value for NextToken is not valid.
+// The specified value for NextToken  is not valid.
 type InvalidNextTokenException struct {
 	Message *string
 
@@ -541,8 +541,8 @@ func (e *TagPolicyViolationException) ErrorCode() string {
 }
 func (e *TagPolicyViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You exceeded the rate at which you are allowed to perform this operation. Please
-// try again later.
+// You exceeded the rate at which you are allowed to perform this operation.
+// Please try again later.
 type ThrottlingException struct {
 	Message *string
 

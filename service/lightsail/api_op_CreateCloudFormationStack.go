@@ -14,8 +14,8 @@ import (
 // Creates an AWS CloudFormation stack, which creates a new Amazon EC2 instance
 // from an exported Amazon Lightsail snapshot. This operation results in a
 // CloudFormation stack record that can be used to track the AWS CloudFormation
-// stack created. Use the get cloud formation stack records operation to get a list
-// of the CloudFormation stacks created. Wait until after your new Amazon EC2
+// stack created. Use the get cloud formation stack records operation to get a
+// list of the CloudFormation stacks created. Wait until after your new Amazon EC2
 // instance is created before running the create cloud formation stack operation
 // again with the same export snapshot record.
 func (c *Client) CreateCloudFormationStack(ctx context.Context, params *CreateCloudFormationStackInput, optFns ...func(*Options)) (*CreateCloudFormationStackOutput, error) {
@@ -35,9 +35,10 @@ func (c *Client) CreateCloudFormationStack(ctx context.Context, params *CreateCl
 
 type CreateCloudFormationStackInput struct {
 
-	// An array of parameters that will be used to create the new Amazon EC2 instance.
-	// You can only pass one instance entry at a time in this array. You will get an
-	// invalid parameter error if you pass more than one instance entry in this array.
+	// An array of parameters that will be used to create the new Amazon EC2
+	// instance. You can only pass one instance entry at a time in this array. You will
+	// get an invalid parameter error if you pass more than one instance entry in this
+	// array.
 	//
 	// This member is required.
 	Instances []types.InstanceEntry

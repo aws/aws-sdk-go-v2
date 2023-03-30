@@ -15,8 +15,7 @@ import (
 // Retrieves the properties for one or more game session queues. When requesting
 // multiple queues, use the pagination parameters to retrieve results as a set of
 // sequential pages. When specifying a list of queues, objects are returned only
-// for queues that currently exist in the Region. Learn more  View Your Queues
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-console.html)
+// for queues that currently exist in the Region. Learn more View Your Queues (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-console.html)
 func (c *Client) DescribeGameSessionQueues(ctx context.Context, params *DescribeGameSessionQueuesInput, optFns ...func(*Options)) (*DescribeGameSessionQueuesOutput, error) {
 	if params == nil {
 		params = &DescribeGameSessionQueuesInput{}
@@ -38,13 +37,14 @@ type DescribeGameSessionQueuesInput struct {
 	// get results as a set of sequential pages. You can request up to 50 results.
 	Limit *int32
 
-	// A list of queue names to retrieve information for. You can use either the queue
-	// ID or ARN value. To request settings for all queues, leave this parameter empty.
+	// A list of queue names to retrieve information for. You can use either the
+	// queue ID or ARN value. To request settings for all queues, leave this parameter
+	// empty.
 	Names []string
 
-	// A token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this operation. To start at the
-	// beginning of the result set, do not specify a value.
+	// A token that indicates the start of the next sequential page of results. Use
+	// the token that is returned with a previous call to this operation. To start at
+	// the beginning of the result set, do not specify a value.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -141,8 +141,8 @@ type DescribeGameSessionQueuesPaginatorOptions struct {
 	// get results as a set of sequential pages. You can request up to 50 results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -15,7 +15,7 @@ import (
 // be 20971520 bytes (or about 20MB). The UploadLayerPart API is called once per
 // each new image layer part. This operation is used by the Amazon ECR proxy and is
 // not generally used by customers for pulling and pushing images. In most cases,
-// you should use the docker CLI to pull, tag, and push images.
+// you should use the docker  CLI to pull, tag, and push images.
 func (c *Client) UploadLayerPart(ctx context.Context, params *UploadLayerPartInput, optFns ...func(*Options)) (*UploadLayerPartOutput, error) {
 	if params == nil {
 		params = &UploadLayerPartInput{}
@@ -59,9 +59,9 @@ type UploadLayerPartInput struct {
 	// This member is required.
 	UploadId *string
 
-	// The Amazon Web Services account ID associated with the registry to which you are
-	// uploading layer parts. If you do not specify a registry, the default registry is
-	// assumed.
+	// The Amazon Web Services account ID associated with the registry to which you
+	// are uploading layer parts. If you do not specify a registry, the default
+	// registry is assumed.
 	RegistryId *string
 
 	noSmithyDocumentSerde

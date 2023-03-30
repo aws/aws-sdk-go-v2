@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates and updates a set of field options for a single select field in a Cases
-// domain.
+// Creates and updates a set of field options for a single select field in a
+// Cases domain.
 func (c *Client) BatchPutFieldOptions(ctx context.Context, params *BatchPutFieldOptionsInput, optFns ...func(*Options)) (*BatchPutFieldOptionsOutput, error) {
 	if params == nil {
 		params = &BatchPutFieldOptionsInput{}
@@ -40,7 +40,7 @@ type BatchPutFieldOptionsInput struct {
 	// This member is required.
 	FieldId *string
 
-	// A list of FieldOption objects.
+	// A list of FieldOption  objects.
 	//
 	// This member is required.
 	Options []types.FieldOption

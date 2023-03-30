@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a routing control. You can only update the name of the routing control.
-// To get or update the routing control state, see the Recovery Cluster (data
-// plane) API actions for Amazon Route 53 Application Recovery Controller.
+// Updates a routing control. You can only update the name of the routing
+// control. To get or update the routing control state, see the Recovery Cluster
+// (data plane) API actions for Amazon Route 53 Application Recovery Controller.
 func (c *Client) UpdateRoutingControl(ctx context.Context, params *UpdateRoutingControlInput, optFns ...func(*Options)) (*UpdateRoutingControlOutput, error) {
 	if params == nil {
 		params = &UpdateRoutingControlInput{}

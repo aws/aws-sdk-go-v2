@@ -29,15 +29,14 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The ARN of the resource that you want to view tags for. The ARN format of a sink
-	// is arn:aws:oam:Region:account-id:sink/sink-id  The ARN format of a link is
-	// arn:aws:oam:Region:account-id:link/link-id  For more information about ARN
-	// format, see CloudWatch Logs resources and operations
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html).
-	// Unlike tagging permissions in other Amazon Web Services services, to retrieve
-	// the list of tags for links or sinks you must have the oam:RequestTag permission.
-	// The aws:ReguestTag permission does not allow you to tag and untag links and
-	// sinks.
+	// The ARN of the resource that you want to view tags for. The ARN format of a
+	// sink is arn:aws:oam:Region:account-id:sink/sink-id  The ARN format of a link
+	// is arn:aws:oam:Region:account-id:link/link-id  For more information about ARN
+	// format, see CloudWatch Logs resources and operations (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html)
+	// . Unlike tagging permissions in other Amazon Web Services services, to retrieve
+	// the list of tags for links or sinks you must have the oam:RequestTag
+	// permission. The aws:ReguestTag permission does not allow you to tag and untag
+	// links and sinks.
 	//
 	// This member is required.
 	ResourceArn *string

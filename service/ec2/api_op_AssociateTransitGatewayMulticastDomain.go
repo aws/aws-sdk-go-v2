@@ -14,8 +14,7 @@ import (
 // Associates the specified subnets and transit gateway attachments with the
 // specified transit gateway multicast domain. The transit gateway attachment must
 // be in the available state before you can add a resource. Use
-// DescribeTransitGatewayAttachments
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTransitGatewayAttachments.html)
+// DescribeTransitGatewayAttachments (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTransitGatewayAttachments.html)
 // to see the state of the attachment.
 func (c *Client) AssociateTransitGatewayMulticastDomain(ctx context.Context, params *AssociateTransitGatewayMulticastDomainInput, optFns ...func(*Options)) (*AssociateTransitGatewayMulticastDomainOutput, error) {
 	if params == nil {
@@ -52,8 +51,8 @@ type AssociateTransitGatewayMulticastDomainInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

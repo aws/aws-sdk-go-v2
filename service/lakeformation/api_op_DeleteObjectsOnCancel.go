@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For a specific governed table, provides a list of Amazon S3 objects that will be
-// written during the current transaction and that can be automatically deleted if
-// the transaction is canceled. Without this call, no Amazon S3 objects are
+// For a specific governed table, provides a list of Amazon S3 objects that will
+// be written during the current transaction and that can be automatically deleted
+// if the transaction is canceled. Without this call, no Amazon S3 objects are
 // automatically deleted when a transaction cancels. The Glue ETL library function
 // write_dynamic_frame.from_catalog() includes an option to automatically call
 // DeleteObjectsOnCancel before writes. For more information, see Rolling Back
-// Amazon S3 Writes
-// (https://docs.aws.amazon.com/lake-formation/latest/dg/transactions-data-operations.html#rolling-back-writes).
+// Amazon S3 Writes (https://docs.aws.amazon.com/lake-formation/latest/dg/transactions-data-operations.html#rolling-back-writes)
+// .
 func (c *Client) DeleteObjectsOnCancel(ctx context.Context, params *DeleteObjectsOnCancelInput, optFns ...func(*Options)) (*DeleteObjectsOnCancelOutput, error) {
 	if params == nil {
 		params = &DeleteObjectsOnCancelInput{}
@@ -41,8 +41,8 @@ type DeleteObjectsOnCancelInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// A list of VirtualObject structures, which indicates the Amazon S3 objects to be
-	// deleted if the transaction cancels.
+	// A list of VirtualObject structures, which indicates the Amazon S3 objects to
+	// be deleted if the transaction cancels.
 	//
 	// This member is required.
 	Objects []types.VirtualObject
@@ -57,8 +57,8 @@ type DeleteObjectsOnCancelInput struct {
 	// This member is required.
 	TransactionId *string
 
-	// The Glue data catalog that contains the governed table. Defaults to the current
-	// account ID.
+	// The Glue data catalog that contains the governed table. Defaults to the
+	// current account ID.
 	CatalogId *string
 
 	noSmithyDocumentSerde

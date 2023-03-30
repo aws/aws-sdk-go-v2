@@ -12,8 +12,7 @@ import (
 
 // Adds a domain to the list of identities for your Amazon SES account in the
 // current AWS Region and attempts to verify it. For more information about
-// verifying domains, see Verifying Email Addresses and Domains
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
+// verifying domains, see Verifying Email Addresses and Domains (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
 // in the Amazon SES Developer Guide. You can execute this operation no more than
 // once per second.
 func (c *Client) VerifyDomainIdentity(ctx context.Context, params *VerifyDomainIdentityInput, optFns ...func(*Options)) (*VerifyDomainIdentityOutput, error) {
@@ -31,11 +30,11 @@ func (c *Client) VerifyDomainIdentity(ctx context.Context, params *VerifyDomainI
 	return out, nil
 }
 
-// Represents a request to begin Amazon SES domain verification and to generate the
-// TXT records that you must publish to the DNS server of your domain to complete
-// the verification. For information about domain verification, see the Amazon SES
-// Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-domains.html).
+// Represents a request to begin Amazon SES domain verification and to generate
+// the TXT records that you must publish to the DNS server of your domain to
+// complete the verification. For information about domain verification, see the
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-domains.html)
+// .
 type VerifyDomainIdentityInput struct {
 
 	// The domain to be verified.

@@ -13,7 +13,7 @@ import (
 
 // Reverts the application to the previous running version. You can roll back an
 // application if you suspect it is stuck in a transient status. You can roll back
-// an application only if it is in the UPDATING or AUTOSCALING status. When you
+// an application only if it is in the UPDATING  or AUTOSCALING status. When you
 // rollback an application, it loads state data from the last successful snapshot.
 // If the application has no snapshots, Kinesis Data Analytics rejects the rollback
 // request. This action is not supported for Kinesis Data Analytics for SQL
@@ -40,8 +40,8 @@ type RollbackApplicationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// The current application version ID. You can retrieve the application version ID
-	// using DescribeApplication.
+	// The current application version ID. You can retrieve the application version
+	// ID using DescribeApplication .
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
@@ -51,8 +51,8 @@ type RollbackApplicationInput struct {
 
 type RollbackApplicationOutput struct {
 
-	// Describes the application, including the application Amazon Resource Name (ARN),
-	// status, latest version, and input and output configurations.
+	// Describes the application, including the application Amazon Resource Name
+	// (ARN), status, latest version, and input and output configurations.
 	//
 	// This member is required.
 	ApplicationDetail *types.ApplicationDetail

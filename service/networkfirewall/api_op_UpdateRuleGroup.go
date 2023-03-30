@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the rule settings for the specified rule group. You use a rule group by
-// reference in one or more firewall policies. When you modify a rule group, you
+// Updates the rule settings for the specified rule group. You use a rule group
+// by reference in one or more firewall policies. When you modify a rule group, you
 // modify all firewall policies that use the rule group. To update a rule group,
-// first call DescribeRuleGroup to retrieve the current RuleGroup object, update
+// first call DescribeRuleGroup  to retrieve the current RuleGroup object, update
 // the object as needed, and then provide the updated object to this call.
 func (c *Client) UpdateRuleGroup(ctx context.Context, params *UpdateRuleGroupInput, optFns ...func(*Options)) (*UpdateRuleGroupOutput, error) {
 	if params == nil {
@@ -56,7 +56,7 @@ type UpdateRuleGroupInput struct {
 	// you ran it with dry run set to FALSE, but doesn't make additions or changes to
 	// your resources. This option allows you to make sure that you have the required
 	// permissions to run the request and that your request parameters are valid. If
-	// set to FALSE, Network Firewall makes the requested changes to your resources.
+	// set to FALSE , Network Firewall makes the requested changes to your resources.
 	DryRun bool
 
 	// A complex type that contains settings for encryption of your rule group
@@ -64,7 +64,7 @@ type UpdateRuleGroupInput struct {
 	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// An object that defines the rule group rules. You must provide either this rule
-	// group setting or a Rules setting, but not both.
+	// group setting or a Rules  setting, but not both.
 	RuleGroup *types.RuleGroup
 
 	// The Amazon Resource Name (ARN) of the rule group. You must specify the ARN or
@@ -90,10 +90,10 @@ type UpdateRuleGroupInput struct {
 	// the originating rule group.
 	SourceMetadata *types.SourceMetadata
 
-	// Indicates whether the rule group is stateless or stateful. If the rule group is
-	// stateless, it contains stateless rules. If it is stateful, it contains stateful
-	// rules. This setting is required for requests that do not include the
-	// RuleGroupARN.
+	// Indicates whether the rule group is stateless or stateful. If the rule group
+	// is stateless, it contains stateless rules. If it is stateful, it contains
+	// stateful rules. This setting is required for requests that do not include the
+	// RuleGroupARN .
 	Type types.RuleGroupType
 
 	noSmithyDocumentSerde
@@ -103,7 +103,7 @@ type UpdateRuleGroupOutput struct {
 
 	// The high-level properties of a rule group. This, along with the RuleGroup,
 	// define the rule group. You can retrieve all objects for a rule group by calling
-	// DescribeRuleGroup.
+	// DescribeRuleGroup .
 	//
 	// This member is required.
 	RuleGroupResponse *types.RuleGroupResponse

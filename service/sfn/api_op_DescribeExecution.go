@@ -80,19 +80,16 @@ type DescribeExecutionOutput struct {
 	// Provides details about execution input or output.
 	InputDetails *types.CloudWatchEventsExecutionDataDetails
 
-	// The Amazon Resource Name (ARN) that identifies a Map Run, which dispatched this
-	// execution.
+	// The Amazon Resource Name (ARN) that identifies a Map Run, which dispatched
+	// this execution.
 	MapRunArn *string
 
 	// The name of the execution. A name must not contain:
-	// - white space
-	// - brackets < >
-	// { } [ ]
-	// - wildcard characters ? *
-	// - special characters " # % \ ^ | ~ ` $ & , ; :
-	// /
-	// - control characters (U+0000-001F, U+007F-009F)
-	//
+	//     - white space
+	//     - brackets < > { } [ ]
+	//     - wildcard characters ? *
+	//     - special characters " # % \ ^ | ~ ` $ & , ; : /
+	//     - control characters ( U+0000-001F , U+007F-009F )
 	// To enable logging with
 	// CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
 	Name *string

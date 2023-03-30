@@ -16,8 +16,8 @@ import (
 // single metric anomaly detectors, you can list all of the models in your account
 // or filter the results to only the models that are related to a certain
 // namespace, metric name, or metric dimension. For metric math anomaly detectors,
-// you can list them by adding METRIC_MATH to the AnomalyDetectorTypes array. This
-// will return all metric math anomaly detectors in your account.
+// you can list them by adding METRIC_MATH  to the AnomalyDetectorTypes array.
+// This will return all metric math anomaly detectors in your account.
 func (c *Client) DescribeAnomalyDetectors(ctx context.Context, params *DescribeAnomalyDetectorsInput, optFns ...func(*Options)) (*DescribeAnomalyDetectorsOutput, error) {
 	if params == nil {
 		params = &DescribeAnomalyDetectorsInput{}
@@ -35,27 +35,28 @@ func (c *Client) DescribeAnomalyDetectors(ctx context.Context, params *DescribeA
 
 type DescribeAnomalyDetectorsInput struct {
 
-	// The anomaly detector types to request when using DescribeAnomalyDetectorsInput.
-	// If empty, defaults to SINGLE_METRIC.
+	// The anomaly detector types to request when using DescribeAnomalyDetectorsInput
+	// . If empty, defaults to SINGLE_METRIC .
 	AnomalyDetectorTypes []types.AnomalyDetectorType
 
-	// Limits the results to only the anomaly detection models that are associated with
-	// the specified metric dimensions. If there are multiple metrics that have these
-	// dimensions and have anomaly detection models associated, they're all returned.
+	// Limits the results to only the anomaly detection models that are associated
+	// with the specified metric dimensions. If there are multiple metrics that have
+	// these dimensions and have anomaly detection models associated, they're all
+	// returned.
 	Dimensions []types.Dimension
 
-	// The maximum number of results to return in one operation. The maximum value that
-	// you can specify is 100. To retrieve the remaining results, make another call
-	// with the returned NextToken value.
+	// The maximum number of results to return in one operation. The maximum value
+	// that you can specify is 100. To retrieve the remaining results, make another
+	// call with the returned NextToken  value.
 	MaxResults *int32
 
-	// Limits the results to only the anomaly detection models that are associated with
-	// the specified metric name. If there are multiple metrics with this name in
+	// Limits the results to only the anomaly detection models that are associated
+	// with the specified metric name. If there are multiple metrics with this name in
 	// different namespaces that have anomaly detection models, they're all returned.
 	MetricName *string
 
-	// Limits the results to only the anomaly detection models that are associated with
-	// the specified namespace.
+	// Limits the results to only the anomaly detection models that are associated
+	// with the specified namespace.
 	Namespace *string
 
 	// Use the token returned by the previous operation to request the next page of
@@ -154,13 +155,13 @@ var _ DescribeAnomalyDetectorsAPIClient = (*Client)(nil)
 // DescribeAnomalyDetectorsPaginatorOptions is the paginator options for
 // DescribeAnomalyDetectors
 type DescribeAnomalyDetectorsPaginatorOptions struct {
-	// The maximum number of results to return in one operation. The maximum value that
-	// you can specify is 100. To retrieve the remaining results, make another call
-	// with the returned NextToken value.
+	// The maximum number of results to return in one operation. The maximum value
+	// that you can specify is 100. To retrieve the remaining results, make another
+	// call with the returned NextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

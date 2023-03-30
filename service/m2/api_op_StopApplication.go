@@ -33,8 +33,8 @@ type StopApplicationInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// Stopping an application process can take a long time. Setting this parameter to
-	// true lets you force stop the application so you don't need to wait until the
+	// Stopping an application process can take a long time. Setting this parameter
+	// to true lets you force stop the application so you don't need to wait until the
 	// process finishes to apply another action on the application. The default value
 	// is false.
 	ForceStop bool

@@ -12,8 +12,7 @@ import (
 
 // Returns the custom email verification template for the template name you
 // specify. For more information about custom verification email templates, see
-// Using custom verification email templates
-// (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom)
+// Using custom verification email templates (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom)
 // in the Amazon SES Developer Guide. You can execute this operation no more than
 // once per second.
 func (c *Client) GetCustomVerificationEmailTemplate(ctx context.Context, params *GetCustomVerificationEmailTemplateInput, optFns ...func(*Options)) (*GetCustomVerificationEmailTemplateOutput, error) {
@@ -31,7 +30,8 @@ func (c *Client) GetCustomVerificationEmailTemplate(ctx context.Context, params 
 	return out, nil
 }
 
-// Represents a request to retrieve an existing custom verification email template.
+// Represents a request to retrieve an existing custom verification email
+// template.
 type GetCustomVerificationEmailTemplateInput struct {
 
 	// The name of the custom verification email template that you want to retrieve.

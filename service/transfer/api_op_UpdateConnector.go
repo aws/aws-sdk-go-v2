@@ -12,8 +12,8 @@ import (
 )
 
 // Updates some of the parameters for an existing connector. Provide the
-// ConnectorId for the connector that you want to update, along with the new values
-// for the parameters to update.
+// ConnectorIdfor the connector that you want to update, along with the new
+// values for the parameters to update.
 func (c *Client) UpdateConnector(ctx context.Context, params *UpdateConnectorInput, optFns ...func(*Options)) (*UpdateConnectorOutput, error) {
 	if params == nil {
 		params = &UpdateConnectorInput{}
@@ -45,15 +45,15 @@ type UpdateConnectorInput struct {
 	// provide read and write access to the parent directory of the file location used
 	// in the StartFileTransfer request. Additionally, you need to provide read and
 	// write access to the parent directory of the files that you intend to send with
-	// StartFileTransfer.
+	// StartFileTransfer .
 	AccessRole *string
 
 	// A structure that contains the parameters for a connector object.
 	As2Config *types.As2ConnectorConfig
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-	// that allows a connector to turn on CloudWatch logging for Amazon S3 events. When
-	// set, you can view connector activity in your CloudWatch logs.
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
+	// role that allows a connector to turn on CloudWatch logging for Amazon S3 events.
+	// When set, you can view connector activity in your CloudWatch logs.
 	LoggingRole *string
 
 	// The URL of the partner's AS2 endpoint.

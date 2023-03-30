@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the parameters of a parameter group. You can modify up to 20 parameters
-// in a single request by submitting a list parameter name and value pairs.
+// Modifies the parameters of a parameter group. You can modify up to 20
+// parameters in a single request by submitting a list parameter name and value
+// pairs.
 func (c *Client) UpdateParameterGroup(ctx context.Context, params *UpdateParameterGroupInput, optFns ...func(*Options)) (*UpdateParameterGroupOutput, error) {
 	if params == nil {
 		params = &UpdateParameterGroupInput{}
@@ -36,10 +37,10 @@ type UpdateParameterGroupInput struct {
 	ParameterGroupName *string
 
 	// An array of name-value pairs for the parameters in the group. Each element in
-	// the array represents a single parameter. record-ttl-millis and query-ttl-millis
-	// are the only supported parameter names. For more details, see Configuring TTL
-	// Settings
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.cluster-management.html#DAX.cluster-management.custom-settings.ttl).
+	// the array represents a single parameter. record-ttl-millis  and
+	// query-ttl-millis are the only supported parameter names. For more details, see
+	// Configuring TTL Settings (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.cluster-management.html#DAX.cluster-management.custom-settings.ttl)
+	// .
 	//
 	// This member is required.
 	ParameterNameValues []types.ParameterNameValue

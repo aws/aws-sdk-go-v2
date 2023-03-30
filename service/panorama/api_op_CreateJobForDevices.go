@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a job to run on a device. A job can update a device's software or reboot
-// it.
+// Creates a job to run on a device. A job can update a device's software or
+// reboot it.
 func (c *Client) CreateJobForDevices(ctx context.Context, params *CreateJobForDevicesInput, optFns ...func(*Options)) (*CreateJobForDevicesOutput, error) {
 	if params == nil {
 		params = &CreateJobForDevicesInput{}

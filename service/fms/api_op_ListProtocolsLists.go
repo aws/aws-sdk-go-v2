@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of ProtocolsListDataSummary objects.
+// Returns an array of ProtocolsListDataSummary  objects.
 func (c *Client) ListProtocolsLists(ctx context.Context, params *ListProtocolsListsInput, optFns ...func(*Options)) (*ListProtocolsListsOutput, error) {
 	if params == nil {
 		params = &ListProtocolsListsInput{}
@@ -30,10 +30,10 @@ func (c *Client) ListProtocolsLists(ctx context.Context, params *ListProtocolsLi
 
 type ListProtocolsListsInput struct {
 
-	// The maximum number of objects that you want Firewall Manager to return for this
-	// request. If more objects are available, in the response, Firewall Manager
-	// provides a NextToken value that you can use in a subsequent call to get the next
-	// batch of objects. If you don't specify this, Firewall Manager returns all
+	// The maximum number of objects that you want Firewall Manager to return for
+	// this request. If more objects are available, in the response, Firewall Manager
+	// provides a NextToken value that you can use in a subsequent call to get the
+	// next batch of objects. If you don't specify this, Firewall Manager returns all
 	// available objects.
 	//
 	// This member is required.
@@ -60,7 +60,7 @@ type ListProtocolsListsOutput struct {
 	// objects.
 	NextToken *string
 
-	// An array of ProtocolsListDataSummary objects.
+	// An array of ProtocolsListDataSummary  objects.
 	ProtocolsLists []types.ProtocolsListDataSummary
 
 	// Metadata pertaining to the operation's result.
@@ -143,15 +143,15 @@ var _ ListProtocolsListsAPIClient = (*Client)(nil)
 // ListProtocolsListsPaginatorOptions is the paginator options for
 // ListProtocolsLists
 type ListProtocolsListsPaginatorOptions struct {
-	// The maximum number of objects that you want Firewall Manager to return for this
-	// request. If more objects are available, in the response, Firewall Manager
-	// provides a NextToken value that you can use in a subsequent call to get the next
-	// batch of objects. If you don't specify this, Firewall Manager returns all
+	// The maximum number of objects that you want Firewall Manager to return for
+	// this request. If more objects are available, in the response, Firewall Manager
+	// provides a NextToken value that you can use in a subsequent call to get the
+	// next batch of objects. If you don't specify this, Firewall Manager returns all
 	// available objects.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

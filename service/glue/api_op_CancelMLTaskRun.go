@@ -14,7 +14,7 @@ import (
 // Cancels (stops) a task run. Machine learning task runs are asynchronous tasks
 // that Glue runs on your behalf as part of various machine learning workflows. You
 // can cancel a machine learning task run at any time by calling CancelMLTaskRun
-// with a task run's parent transform's TransformID and the task run's TaskRunId.
+// with a task run's parent transform's TransformID  and the task run's TaskRunId .
 func (c *Client) CancelMLTaskRun(ctx context.Context, params *CancelMLTaskRunInput, optFns ...func(*Options)) (*CancelMLTaskRunOutput, error) {
 	if params == nil {
 		params = &CancelMLTaskRunInput{}

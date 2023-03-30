@@ -39,8 +39,8 @@ type DeleteScheduleInput struct {
 	// randomly generated token for the request to ensure idempotency.
 	ClientToken *string
 
-	// The name of the schedule group associated with this schedule. If you omit this,
-	// the default schedule group is used.
+	// The name of the schedule group associated with this schedule. If you omit
+	// this, the default schedule group is used.
 	GroupName *string
 
 	noSmithyDocumentSerde

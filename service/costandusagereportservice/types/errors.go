@@ -34,8 +34,8 @@ func (e *DuplicateReportNameException) ErrorCode() string {
 }
 func (e *DuplicateReportNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An error on the server occurred during the processing of your request. Try again
-// later.
+// An error on the server occurred during the processing of your request. Try
+// again later.
 type InternalErrorException struct {
 	Message *string
 
@@ -61,8 +61,8 @@ func (e *InternalErrorException) ErrorCode() string {
 }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// This account already has five reports defined. To define a new report, you must
-// delete an existing report.
+// This account already has five reports defined. To define a new report, you
+// must delete an existing report.
 type ReportLimitReachedException struct {
 	Message *string
 

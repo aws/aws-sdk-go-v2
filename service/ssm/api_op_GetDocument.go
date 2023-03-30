@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Gets the contents of the specified Amazon Web Services Systems Manager document
-// (SSM document).
+// Gets the contents of the specified Amazon Web Services Systems Manager
+// document (SSM document).
 func (c *Client) GetDocument(ctx context.Context, params *GetDocumentInput, optFns ...func(*Options)) (*GetDocumentOutput, error) {
 	if params == nil {
 		params = &GetDocumentInput{}
@@ -36,8 +36,8 @@ type GetDocumentInput struct {
 	// This member is required.
 	Name *string
 
-	// Returns the document in the specified format. The document format can be either
-	// JSON or YAML. JSON is the default format.
+	// Returns the document in the specified format. The document format can be
+	// either JSON or YAML. JSON is the default format.
 	DocumentFormat types.DocumentFormat
 
 	// The document version for which you want information.
@@ -63,8 +63,8 @@ type GetDocumentOutput struct {
 	// The date the SSM document was created.
 	CreatedDate *time.Time
 
-	// The friendly name of the SSM document. This value can differ for each version of
-	// the document. If you want to update this value, see UpdateDocument.
+	// The friendly name of the SSM document. This value can differ for each version
+	// of the document. If you want to update this value, see UpdateDocument .
 	DisplayName *string
 
 	// The document format, either JSON or YAML.
@@ -92,19 +92,19 @@ type GetDocumentOutput struct {
 	// in review, or PENDING, at a time.
 	ReviewStatus types.ReviewStatus
 
-	// The status of the SSM document, such as Creating, Active, Updating, Failed, and
-	// Deleting.
+	// The status of the SSM document, such as Creating , Active , Updating , Failed,
+	// and Deleting .
 	Status types.DocumentStatus
 
 	// A message returned by Amazon Web Services Systems Manager that explains the
-	// Status value. For example, a Failed status might be explained by the
-	// StatusInformation message, "The specified S3 bucket doesn't exist. Verify that
+	// Status value. For example, a Failed  status might be explained by the
+	// StatusInformationmessage, "The specified S3 bucket doesn't exist. Verify that
 	// the URL of the S3 bucket is correct."
 	StatusInformation *string
 
-	// The version of the artifact associated with the document. For example, "Release
-	// 12, Update 6". This value is unique across all versions of a document, and can't
-	// be changed.
+	// The version of the artifact associated with the document. For example,
+	// "Release 12, Update 6". This value is unique across all versions of a document,
+	// and can't be changed.
 	VersionName *string
 
 	// Metadata pertaining to the operation's result.

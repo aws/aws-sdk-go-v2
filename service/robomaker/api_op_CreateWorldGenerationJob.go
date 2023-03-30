@@ -42,8 +42,8 @@ type CreateWorldGenerationJobInput struct {
 	// This member is required.
 	WorldCount *types.WorldCount
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
 	// A map that contains tag keys and tag values that are attached to the world
@@ -62,8 +62,8 @@ type CreateWorldGenerationJobOutput struct {
 	// The Amazon Resource Name (ARN) of the world generator job.
 	Arn *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
 	// The time, in milliseconds since the epoch, when the world generator job was

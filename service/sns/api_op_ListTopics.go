@@ -14,7 +14,7 @@ import (
 
 // Returns a list of the requester's topics. Each call returns a limited list of
 // topics, up to 100. If there are more topics, a NextToken is also returned. Use
-// the NextToken parameter in a new ListTopics call to get further results. This
+// the NextToken  parameter in a new ListTopics call to get further results. This
 // action is throttled at 30 transactions per second (TPS).
 func (c *Client) ListTopics(ctx context.Context, params *ListTopicsInput, optFns ...func(*Options)) (*ListTopicsOutput, error) {
 	if params == nil {
@@ -33,7 +33,7 @@ func (c *Client) ListTopics(ctx context.Context, params *ListTopicsInput, optFns
 
 type ListTopicsInput struct {
 
-	// Token returned by the previous ListTopics request.
+	// Token returned by the previous ListTopics  request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -42,8 +42,8 @@ type ListTopicsInput struct {
 // Response for ListTopics action.
 type ListTopicsOutput struct {
 
-	// Token to pass along to the next ListTopics request. This element is returned if
-	// there are additional topics to retrieve.
+	// Token to pass along to the next ListTopics request. This element is returned
+	// if there are additional topics to retrieve.
 	NextToken *string
 
 	// A list of topic ARNs.
@@ -124,8 +124,8 @@ var _ ListTopicsAPIClient = (*Client)(nil)
 
 // ListTopicsPaginatorOptions is the paginator options for ListTopics
 type ListTopicsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

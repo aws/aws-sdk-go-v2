@@ -36,8 +36,8 @@ type UpdateDataQualityRulesetInput struct {
 	// A description of the ruleset.
 	Description *string
 
-	// A Data Quality Definition Language (DQDL) ruleset. For more information, see the
-	// Glue developer guide.
+	// A Data Quality Definition Language (DQDL) ruleset. For more information, see
+	// the Glue developer guide.
 	Ruleset *string
 
 	// The new name of the ruleset, if you are renaming it.
@@ -54,8 +54,8 @@ type UpdateDataQualityRulesetOutput struct {
 	// The name of the data quality ruleset.
 	Name *string
 
-	// A Data Quality Definition Language (DQDL) ruleset. For more information, see the
-	// Glue developer guide.
+	// A Data Quality Definition Language (DQDL) ruleset. For more information, see
+	// the Glue developer guide.
 	Ruleset *string
 
 	// Metadata pertaining to the operation's result.

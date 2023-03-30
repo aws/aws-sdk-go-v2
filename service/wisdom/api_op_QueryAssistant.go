@@ -13,8 +13,8 @@ import (
 )
 
 // Performs a manual search against the specified assistant. To retrieve
-// recommendations for an assistant, use GetRecommendations
-// (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetRecommendations.html).
+// recommendations for an assistant, use GetRecommendations (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetRecommendations.html)
+// .
 func (c *Client) QueryAssistant(ctx context.Context, params *QueryAssistantInput, optFns ...func(*Options)) (*QueryAssistantOutput, error) {
 	if params == nil {
 		params = &QueryAssistantInput{}
@@ -145,8 +145,8 @@ type QueryAssistantPaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

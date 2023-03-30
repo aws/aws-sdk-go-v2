@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Retrieves the definition of a report already configured in AWS Application Cost
-// Profiler.
+// Retrieves the definition of a report already configured in AWS Application
+// Cost Profiler.
 func (c *Client) GetReportDefinition(ctx context.Context, params *GetReportDefinitionInput, optFns ...func(*Options)) (*GetReportDefinitionOutput, error) {
 	if params == nil {
 		params = &GetReportDefinitionInput{}
@@ -46,7 +46,8 @@ type GetReportDefinitionOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Amazon Simple Storage Service (Amazon S3) location where the report is uploaded.
+	// Amazon Simple Storage Service (Amazon S3) location where the report is
+	// uploaded.
 	//
 	// This member is required.
 	DestinationS3Location *types.S3Location

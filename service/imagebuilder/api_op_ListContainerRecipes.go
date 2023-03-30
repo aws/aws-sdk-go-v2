@@ -31,18 +31,17 @@ func (c *Client) ListContainerRecipes(ctx context.Context, params *ListContainer
 type ListContainerRecipesInput struct {
 
 	// Use the following filters to streamline results:
-	// - containerType
-	// - name
-	// -
-	// parentImage
-	// - platform
+	//     - containerType
+	//     - name
+	//     - parentImage
+	//     - platform
 	Filters []types.Filter
 
 	// The maximum number of results to return in the list.
 	MaxResults *int32
 
-	// Provides a token for pagination, which determines where to begin the next set of
-	// results when the current set reaches the maximum for one request.
+	// Provides a token for pagination, which determines where to begin the next set
+	// of results when the current set reaches the maximum for one request.
 	NextToken *string
 
 	// Returns container recipes belonging to the specified owner, that have been
@@ -147,8 +146,8 @@ type ListContainerRecipesPaginatorOptions struct {
 	// The maximum number of results to return in the list.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

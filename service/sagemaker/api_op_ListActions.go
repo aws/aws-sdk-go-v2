@@ -48,10 +48,10 @@ type ListActionsInput struct {
 	// call returns a token for getting the next set of actions.
 	NextToken *string
 
-	// The property used to sort results. The default value is CreationTime.
+	// The property used to sort results. The default value is CreationTime .
 	SortBy types.SortActionsBy
 
-	// The sort order. The default value is Descending.
+	// The sort order. The default value is Descending .
 	SortOrder types.SortOrder
 
 	// A filter that returns only actions with the specified source URI.
@@ -147,8 +147,8 @@ type ListActionsPaginatorOptions struct {
 	// 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

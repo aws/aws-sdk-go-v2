@@ -15,23 +15,15 @@ import (
 	"strings"
 )
 
-// Retrieves the status of an asynchronous request to manage a Multi-Region Access
-// Point. For more information about managing Multi-Region Access Points and how
-// asynchronous requests work, see Managing Multi-Region Access Points
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
+// Retrieves the status of an asynchronous request to manage a Multi-Region
+// Access Point. For more information about managing Multi-Region Access Points and
+// how asynchronous requests work, see Managing Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
 // in the Amazon S3 User Guide. The following actions are related to
-// GetMultiRegionAccessPoint:
-// - CreateMultiRegionAccessPoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html)
-// -
-// DeleteMultiRegionAccessPoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html)
-// -
-// GetMultiRegionAccessPoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html)
-// -
-// ListMultiRegionAccessPoints
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html)
+// GetMultiRegionAccessPoint :
+//   - CreateMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html)
+//   - DeleteMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html)
+//   - GetMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html)
+//   - ListMultiRegionAccessPoints (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html)
 func (c *Client) DescribeMultiRegionAccessPointOperation(ctx context.Context, params *DescribeMultiRegionAccessPointOperationInput, optFns ...func(*Options)) (*DescribeMultiRegionAccessPointOperationOutput, error) {
 	if params == nil {
 		params = &DescribeMultiRegionAccessPointOperationInput{}

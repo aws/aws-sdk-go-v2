@@ -16,7 +16,7 @@ import (
 // the CompleteLayerUpload API is called once per each new image layer to verify
 // that the upload has completed. This operation is used by the Amazon ECR proxy
 // and is not generally used by customers for pulling and pushing images. In most
-// cases, you should use the docker CLI to pull, tag, and push images.
+// cases, you should use the docker  CLI to pull, tag, and push images.
 func (c *Client) CompleteLayerUpload(ctx context.Context, params *CompleteLayerUploadInput, optFns ...func(*Options)) (*CompleteLayerUploadOutput, error) {
 	if params == nil {
 		params = &CompleteLayerUploadInput{}
@@ -34,7 +34,7 @@ func (c *Client) CompleteLayerUpload(ctx context.Context, params *CompleteLayerU
 
 type CompleteLayerUploadInput struct {
 
-	// The sha256 digest of the image layer.
+	// The sha256  digest of the image layer.
 	//
 	// This member is required.
 	LayerDigests []string
@@ -60,7 +60,7 @@ type CompleteLayerUploadInput struct {
 
 type CompleteLayerUploadOutput struct {
 
-	// The sha256 digest of the image layer.
+	// The sha256  digest of the image layer.
 	LayerDigest *string
 
 	// The registry ID associated with the request.

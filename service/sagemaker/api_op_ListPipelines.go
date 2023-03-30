@@ -40,15 +40,15 @@ type ListPipelinesInput struct {
 	// The maximum number of pipelines to return in the response.
 	MaxResults *int32
 
-	// If the result of the previous ListPipelines request was truncated, the response
-	// includes a NextToken. To retrieve the next set of pipelines, use the token in
-	// the next request.
+	// If the result of the previous ListPipelines request was truncated, the
+	// response includes a NextToken. To retrieve the next set of pipelines, use the
+	// token in the next request.
 	NextToken *string
 
 	// The prefix of the pipeline name.
 	PipelineNamePrefix *string
 
-	// The field by which to sort results. The default is CreatedTime.
+	// The field by which to sort results. The default is CreatedTime .
 	SortBy types.SortPipelinesBy
 
 	// The sort order for results.
@@ -59,9 +59,9 @@ type ListPipelinesInput struct {
 
 type ListPipelinesOutput struct {
 
-	// If the result of the previous ListPipelines request was truncated, the response
-	// includes a NextToken. To retrieve the next set of pipelines, use the token in
-	// the next request.
+	// If the result of the previous ListPipelines request was truncated, the
+	// response includes a NextToken. To retrieve the next set of pipelines, use the
+	// token in the next request.
 	NextToken *string
 
 	// Contains a sorted list of PipelineSummary objects matching the specified
@@ -148,8 +148,8 @@ type ListPipelinesPaginatorOptions struct {
 	// The maximum number of pipelines to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

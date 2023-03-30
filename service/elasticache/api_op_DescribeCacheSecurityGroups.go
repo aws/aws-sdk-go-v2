@@ -30,28 +30,28 @@ func (c *Client) DescribeCacheSecurityGroups(ctx context.Context, params *Descri
 	return out, nil
 }
 
-// Represents the input of a DescribeCacheSecurityGroups operation.
+// Represents the input of a DescribeCacheSecurityGroups  operation.
 type DescribeCacheSecurityGroupsInput struct {
 
 	// The name of the cache security group to return details for.
 	CacheSecurityGroupName *string
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a marker is included in the
+	// response so that the remaining results can be retrieved. Default: 100
+	// Constraints: minimum 20; maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a DescribeCacheSecurityGroups operation.
+// Represents the output of a DescribeCacheSecurityGroups  operation.
 type DescribeCacheSecurityGroupsOutput struct {
 
 	// A list of cache security groups. Each element in the list contains detailed
@@ -138,14 +138,14 @@ var _ DescribeCacheSecurityGroupsAPIClient = (*Client)(nil)
 // DescribeCacheSecurityGroupsPaginatorOptions is the paginator options for
 // DescribeCacheSecurityGroups
 type DescribeCacheSecurityGroupsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a marker is included in the
+	// response so that the remaining results can be retrieved. Default: 100
+	// Constraints: minimum 20; maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

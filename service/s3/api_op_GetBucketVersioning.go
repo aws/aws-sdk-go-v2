@@ -12,18 +12,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the versioning state of a bucket. To retrieve the versioning state of a
-// bucket, you must be the bucket owner. This implementation also returns the MFA
-// Delete status of the versioning state. If the MFA Delete status is enabled, the
-// bucket owner must use an authentication device to change the versioning state of
-// the bucket. The following operations are related to GetBucketVersioning:
-// -
-// GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
-// -
-// PutObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
-// -
-// DeleteObject
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
+// Returns the versioning state of a bucket. To retrieve the versioning state of
+// a bucket, you must be the bucket owner. This implementation also returns the MFA
+// Delete status of the versioning state. If the MFA Delete status is enabled,
+// the bucket owner must use an authentication device to change the versioning
+// state of the bucket. The following operations are related to
+// GetBucketVersioning :
+//   - GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
+//   - PutObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
+//   - DeleteObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
 func (c *Client) GetBucketVersioning(ctx context.Context, params *GetBucketVersioningInput, optFns ...func(*Options)) (*GetBucketVersioningOutput, error) {
 	if params == nil {
 		params = &GetBucketVersioningInput{}
@@ -56,9 +53,10 @@ type GetBucketVersioningInput struct {
 
 type GetBucketVersioningOutput struct {
 
-	// Specifies whether MFA delete is enabled in the bucket versioning configuration.
-	// This element is only returned if the bucket has been configured with MFA delete.
-	// If the bucket has never been so configured, this element is not returned.
+	// Specifies whether MFA delete is enabled in the bucket versioning
+	// configuration. This element is only returned if the bucket has been configured
+	// with MFA delete. If the bucket has never been so configured, this element is not
+	// returned.
 	MFADelete types.MFADeleteStatus
 
 	// The versioning state of the bucket.

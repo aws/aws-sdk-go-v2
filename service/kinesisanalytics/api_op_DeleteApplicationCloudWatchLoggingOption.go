@@ -15,8 +15,8 @@ import (
 // applications. For more information about version 2, see Amazon Kinesis Data
 // Analytics API V2 Documentation. Deletes a CloudWatch log stream from an
 // application. For more information about using CloudWatch log streams with Amazon
-// Kinesis Analytics applications, see Working with Amazon CloudWatch Logs
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
+// Kinesis Analytics applications, see Working with Amazon CloudWatch Logs (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html)
+// .
 func (c *Client) DeleteApplicationCloudWatchLoggingOption(ctx context.Context, params *DeleteApplicationCloudWatchLoggingOptionInput, optFns ...func(*Options)) (*DeleteApplicationCloudWatchLoggingOptionOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationCloudWatchLoggingOptionInput{}
@@ -40,8 +40,7 @@ type DeleteApplicationCloudWatchLoggingOptionInput struct {
 	ApplicationName *string
 
 	// The CloudWatchLoggingOptionId of the CloudWatch logging option to delete. You
-	// can get the CloudWatchLoggingOptionId by using the DescribeApplication
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// can get the CloudWatchLoggingOptionId  by using the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation.
 	//
 	// This member is required.

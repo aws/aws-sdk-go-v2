@@ -47,9 +47,9 @@ const (
 	StateEnumActive   StateEnum = "ACTIVE"
 )
 
-// Values returns all known values for StateEnum. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for StateEnum. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (StateEnum) Values() []StateEnum {
 	return []StateEnum{
 		"CREATED",
@@ -70,9 +70,9 @@ const (
 	TelemetryHttp Telemetry = "http"
 )
 
-// Values returns all known values for Telemetry. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Telemetry. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Telemetry) Values() []Telemetry {
 	return []Telemetry{
 		"errors",

@@ -51,8 +51,8 @@ type ListUserImportJobsInput struct {
 // jobs.
 type ListUserImportJobsOutput struct {
 
-	// An identifier that can be used to return the next set of user import jobs in the
-	// list.
+	// An identifier that can be used to return the next set of user import jobs in
+	// the list.
 	PaginationToken *string
 
 	// The user import jobs.

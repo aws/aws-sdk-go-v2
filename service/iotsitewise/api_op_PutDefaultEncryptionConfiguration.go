@@ -13,8 +13,7 @@ import (
 )
 
 // Sets the default encryption configuration for the Amazon Web Services account.
-// For more information, see Key management
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html)
+// For more information, see Key management (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html)
 // in the IoT SiteWise User Guide.
 func (c *Client) PutDefaultEncryptionConfiguration(ctx context.Context, params *PutDefaultEncryptionConfigurationInput, optFns ...func(*Options)) (*PutDefaultEncryptionConfigurationOutput, error) {
 	if params == nil {
@@ -38,8 +37,8 @@ type PutDefaultEncryptionConfigurationInput struct {
 	// This member is required.
 	EncryptionType types.EncryptionType
 
-	// The Key ID of the customer managed key used for KMS encryption. This is required
-	// if you use KMS_BASED_ENCRYPTION.
+	// The Key ID of the customer managed key used for KMS encryption. This is
+	// required if you use KMS_BASED_ENCRYPTION .
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -48,7 +47,7 @@ type PutDefaultEncryptionConfigurationInput struct {
 type PutDefaultEncryptionConfigurationOutput struct {
 
 	// The status of the account configuration. This contains the ConfigurationState.
-	// If there is an error, it also contains the ErrorDetails.
+	// If there is an error, it also contains the ErrorDetails .
 	//
 	// This member is required.
 	ConfigurationStatus *types.ConfigurationStatus
@@ -59,7 +58,7 @@ type PutDefaultEncryptionConfigurationOutput struct {
 	EncryptionType types.EncryptionType
 
 	// The Key ARN of the KMS key used for KMS encryption if you use
-	// KMS_BASED_ENCRYPTION.
+	// KMS_BASED_ENCRYPTION .
 	KmsKeyArn *string
 
 	// Metadata pertaining to the operation's result.

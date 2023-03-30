@@ -16,7 +16,7 @@ import (
 // can be specified by its ARN, ID, or name (which is unique within one account in
 // one region at a given point in time). Specify by ARN or ID in automated
 // workflows if you want to make sure that the exact same application is returned
-// or a ResourceNotFoundException is thrown, avoiding the ABA addressing problem.
+// or a ResourceNotFoundException  is thrown, avoiding the ABA addressing problem.
 func (c *Client) GetApplication(ctx context.Context, params *GetApplicationInput, optFns ...func(*Options)) (*GetApplicationOutput, error) {
 	if params == nil {
 		params = &GetApplicationInput{}
@@ -51,7 +51,8 @@ type GetApplicationOutput struct {
 	// application.
 	AssociatedResourceCount int32
 
-	// The ISO-8601 formatted timestamp of the moment when the application was created.
+	// The ISO-8601 formatted timestamp of the moment when the application was
+	// created.
 	CreationTime *time.Time
 
 	// The description of the application.
@@ -68,8 +69,8 @@ type GetApplicationOutput struct {
 	// updated.
 	LastUpdateTime *time.Time
 
-	// The name of the application. The name must be unique in the region in which you
-	// are creating the application.
+	// The name of the application. The name must be unique in the region in which
+	// you are creating the application.
 	Name *string
 
 	// Key-value pairs associated with the application.

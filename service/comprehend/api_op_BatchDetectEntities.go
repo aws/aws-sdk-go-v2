@@ -12,9 +12,8 @@ import (
 )
 
 // Inspects the text of a batch of documents for named entities and returns
-// information about them. For more information about named entities, see Entities
-// (https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html) in the
-// Comprehend Developer Guide.
+// information about them. For more information about named entities, see Entities (https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html)
+// in the Comprehend Developer Guide.
 func (c *Client) BatchDetectEntities(ctx context.Context, params *BatchDetectEntitiesInput, optFns ...func(*Options)) (*BatchDetectEntitiesOutput, error) {
 	if params == nil {
 		params = &BatchDetectEntitiesInput{}
@@ -51,8 +50,8 @@ type BatchDetectEntitiesInput struct {
 type BatchDetectEntitiesOutput struct {
 
 	// A list containing one object for each document that contained an error. The
-	// results are sorted in ascending order by the Index field and match the order of
-	// the documents in the input list. If there are no errors in the batch, the
+	// results are sorted in ascending order by the Index field and match the order
+	// of the documents in the input list. If there are no errors in the batch, the
 	// ErrorList is empty.
 	//
 	// This member is required.

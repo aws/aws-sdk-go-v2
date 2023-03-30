@@ -84,8 +84,8 @@ type PostCommentForComparedCommitOutput struct {
 	// The location of the comment in the comparison between the two commits.
 	Location *types.Location
 
-	// The name of the repository where you posted a comment on the comparison between
-	// commits.
+	// The name of the repository where you posted a comment on the comparison
+	// between commits.
 	RepositoryName *string
 
 	// Metadata pertaining to the operation's result.

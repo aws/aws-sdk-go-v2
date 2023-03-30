@@ -34,12 +34,12 @@ type ListEventTypesInput struct {
 	// The filters to use to return information by service or resource type.
 	Filters []types.ListEventTypesFilter
 
-	// A non-negative integer used to limit the number of returned results. The default
-	// number is 50. The maximum number of results that can be returned is 100.
+	// A non-negative integer used to limit the number of returned results. The
+	// default number is 50. The maximum number of results that can be returned is 100.
 	MaxResults *int32
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
+	// An enumeration token that, when provided in a request, returns the next batch
+	// of the results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -134,12 +134,12 @@ var _ ListEventTypesAPIClient = (*Client)(nil)
 
 // ListEventTypesPaginatorOptions is the paginator options for ListEventTypes
 type ListEventTypesPaginatorOptions struct {
-	// A non-negative integer used to limit the number of returned results. The default
-	// number is 50. The maximum number of results that can be returned is 100.
+	// A non-negative integer used to limit the number of returned results. The
+	// default number is 50. The maximum number of results that can be returned is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

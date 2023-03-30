@@ -35,7 +35,7 @@ type ListSnapshotsInput struct {
 	EndTime *time.Time
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to display the next page of results.
+	// You can use nextToken  to display the next page of results.
 	MaxResults *int32
 
 	// The Amazon Resource Name (ARN) of the namespace from which to list all
@@ -45,8 +45,8 @@ type ListSnapshotsInput struct {
 	// The namespace from which to list all snapshots.
 	NamespaceName *string
 
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// If nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page.
 	NextToken *string
 
@@ -61,8 +61,8 @@ type ListSnapshotsInput struct {
 
 type ListSnapshotsOutput struct {
 
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// If nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page.
 	NextToken *string
 
@@ -145,11 +145,11 @@ var _ ListSnapshotsAPIClient = (*Client)(nil)
 // ListSnapshotsPaginatorOptions is the paginator options for ListSnapshots
 type ListSnapshotsPaginatorOptions struct {
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to display the next page of results.
+	// You can use nextToken  to display the next page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

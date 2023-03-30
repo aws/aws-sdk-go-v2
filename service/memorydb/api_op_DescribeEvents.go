@@ -38,13 +38,13 @@ type DescribeEventsInput struct {
 	// The number of minutes worth of events to retrieve.
 	Duration *int32
 
-	// The end of the time interval for which to retrieve events, specified in ISO 8601
-	// format. Example: 2017-03-30T07:03:49.555Z
+	// The end of the time interval for which to retrieve events, specified in ISO
+	// 8601 format. Example: 2017-03-30T07:03:49.555Z
 	EndTime *time.Time
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxResults value, a token is included in the response
+	// so that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// An optional argument to pass in case the total number of records exceeds the
@@ -62,8 +62,8 @@ type DescribeEventsInput struct {
 	// are returned.
 	SourceType types.SourceType
 
-	// The beginning of the time interval to retrieve events for, specified in ISO 8601
-	// format. Example: 2017-03-30T07:03:49.555Z
+	// The beginning of the time interval to retrieve events for, specified in ISO
+	// 8601 format. Example: 2017-03-30T07:03:49.555Z
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -158,13 +158,13 @@ var _ DescribeEventsAPIClient = (*Client)(nil)
 
 // DescribeEventsPaginatorOptions is the paginator options for DescribeEvents
 type DescribeEventsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxResults value, a token is included in the response
+	// so that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

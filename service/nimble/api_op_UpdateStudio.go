@@ -36,12 +36,12 @@ type UpdateStudioInput struct {
 	// This member is required.
 	StudioId *string
 
-	// The IAM role that Studio Admins will assume when logging in to the Nimble Studio
-	// portal.
+	// The IAM role that Studio Admins will assume when logging in to the Nimble
+	// Studio portal.
 	AdminRoleArn *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. If you don’t specify a client token, the Amazon Web Services SDK
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
 	ClientToken *string
@@ -49,8 +49,8 @@ type UpdateStudioInput struct {
 	// A friendly name for the studio.
 	DisplayName *string
 
-	// The IAM role that Studio Users will assume when logging in to the Nimble Studio
-	// portal.
+	// The IAM role that Studio Users will assume when logging in to the Nimble
+	// Studio portal.
 	UserRoleArn *string
 
 	noSmithyDocumentSerde

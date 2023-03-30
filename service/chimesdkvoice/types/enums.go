@@ -82,9 +82,9 @@ const (
 	ErrorCodeGone                                 ErrorCode = "Gone"
 )
 
-// Values returns all known values for ErrorCode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"BadRequest",
@@ -131,9 +131,9 @@ const (
 	LanguageCodeEnUs LanguageCode = "en-US"
 )
 
-// Values returns all known values for LanguageCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LanguageCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LanguageCode) Values() []LanguageCode {
 	return []LanguageCode{
 		"en-US",
@@ -168,9 +168,9 @@ const (
 	NumberSelectionBehaviorAvoidSticky  NumberSelectionBehavior = "AvoidSticky"
 )
 
-// Values returns all known values for NumberSelectionBehavior. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NumberSelectionBehavior. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NumberSelectionBehavior) Values() []NumberSelectionBehavior {
 	return []NumberSelectionBehavior{
 		"PreferSticky",
@@ -187,9 +187,9 @@ const (
 	OrderedPhoneNumberStatusFailed     OrderedPhoneNumberStatus = "Failed"
 )
 
-// Values returns all known values for OrderedPhoneNumberStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OrderedPhoneNumberStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrderedPhoneNumberStatus) Values() []OrderedPhoneNumberStatus {
 	return []OrderedPhoneNumberStatus{
 		"Processing",
@@ -206,9 +206,9 @@ const (
 	OriginationRouteProtocolUdp OriginationRouteProtocol = "UDP"
 )
 
-// Values returns all known values for OriginationRouteProtocol. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OriginationRouteProtocol. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OriginationRouteProtocol) Values() []OriginationRouteProtocol {
 	return []OriginationRouteProtocol{
 		"TCP",
@@ -280,8 +280,8 @@ const (
 	PhoneNumberOrderTypePorting PhoneNumberOrderType = "Porting"
 )
 
-// Values returns all known values for PhoneNumberOrderType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PhoneNumberOrderType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PhoneNumberOrderType) Values() []PhoneNumberOrderType {
 	return []PhoneNumberOrderType{
@@ -416,9 +416,9 @@ const (
 	VoiceConnectorAwsRegionApSoutheast2 VoiceConnectorAwsRegion = "ap-southeast-2"
 )
 
-// Values returns all known values for VoiceConnectorAwsRegion. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for VoiceConnectorAwsRegion. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VoiceConnectorAwsRegion) Values() []VoiceConnectorAwsRegion {
 	return []VoiceConnectorAwsRegion{
 		"us-east-1",

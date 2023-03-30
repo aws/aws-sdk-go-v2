@@ -32,19 +32,17 @@ type DescribeOptionGroupsInput struct {
 
 	// Filters the list of option groups to only include groups associated with a
 	// specific database engine. Valid Values:
-	// - mariadb
-	// - mysql
-	// - oracle-ee
-	// -
-	// oracle-ee-cdb
-	// - oracle-se2
-	// - oracle-se2-cdb
-	// - postgres
-	// - sqlserver-ee
-	// -
-	// sqlserver-se
-	// - sqlserver-ex
-	// - sqlserver-web
+	//     - mariadb
+	//     - mysql
+	//     - oracle-ee
+	//     - oracle-ee-cdb
+	//     - oracle-se2
+	//     - oracle-se2-cdb
+	//     - postgres
+	//     - sqlserver-ee
+	//     - sqlserver-se
+	//     - sqlserver-ex
+	//     - sqlserver-web
 	EngineName *string
 
 	// This parameter isn't currently supported.
@@ -57,12 +55,12 @@ type DescribeOptionGroupsInput struct {
 
 	// An optional pagination token provided by a previous DescribeOptionGroups
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that you can retrieve the remaining results.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that you can retrieve the remaining results.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -78,7 +76,7 @@ type DescribeOptionGroupsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// List of option groups.
@@ -164,14 +162,14 @@ var _ DescribeOptionGroupsAPIClient = (*Client)(nil)
 // DescribeOptionGroupsPaginatorOptions is the paginator options for
 // DescribeOptionGroups
 type DescribeOptionGroupsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that you can retrieve the remaining results.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that you can retrieve the remaining results.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -15,9 +15,9 @@ const (
 	ActionPointOnDeploymentRolledBack              ActionPoint = "ON_DEPLOYMENT_ROLLED_BACK"
 )
 
-// Values returns all known values for ActionPoint. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ActionPoint. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ActionPoint) Values() []ActionPoint {
 	return []ActionPoint{
 		"PRE_CREATE_HOSTED_CONFIGURATION_VERSION",
@@ -53,9 +53,9 @@ const (
 	BytesMeasureKilobytes BytesMeasure = "KILOBYTES"
 )
 
-// Values returns all known values for BytesMeasure. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BytesMeasure. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (BytesMeasure) Values() []BytesMeasure {
 	return []BytesMeasure{
 		"KILOBYTES",
@@ -162,9 +162,9 @@ const (
 	ReplicateToSsmDocument ReplicateTo = "SSM_DOCUMENT"
 )
 
-// Values returns all known values for ReplicateTo. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReplicateTo. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicateTo) Values() []ReplicateTo {
 	return []ReplicateTo{
 		"NONE",
@@ -182,9 +182,9 @@ const (
 	TriggeredByInternalError   TriggeredBy = "INTERNAL_ERROR"
 )
 
-// Values returns all known values for TriggeredBy. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TriggeredBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TriggeredBy) Values() []TriggeredBy {
 	return []TriggeredBy{
 		"USER",

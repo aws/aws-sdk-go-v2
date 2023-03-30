@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the actions taken in a TestGridSession.
+// Returns a list of the actions taken in a TestGridSession .
 func (c *Client) ListTestGridSessionActions(ctx context.Context, params *ListTestGridSessionActionsInput, optFns ...func(*Options)) (*ListTestGridSessionActionsOutput, error) {
 	if params == nil {
 		params = &ListTestGridSessionActionsInput{}
@@ -135,8 +135,8 @@ type ListTestGridSessionActionsPaginatorOptions struct {
 	// The maximum number of sessions to return per response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

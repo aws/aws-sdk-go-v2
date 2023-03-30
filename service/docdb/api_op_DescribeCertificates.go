@@ -33,9 +33,9 @@ type DescribeCertificatesInput struct {
 
 	// The user-supplied certificate identifier. If this parameter is specified,
 	// information for only the specified certificate is returned. If this parameter is
-	// omitted, a list of up to MaxRecords certificates is returned. This parameter is
-	// not case sensitive. Constraints
-	// - Must match an existing CertificateIdentifier.
+	// omitted, a list of up to MaxRecords certificates is returned. This parameter
+	// is not case sensitive. Constraints
+	//     - Must match an existing CertificateIdentifier .
 	CertificateIdentifier *string
 
 	// This parameter is not currently supported.
@@ -43,15 +43,15 @@ type DescribeCertificatesInput struct {
 
 	// An optional pagination token provided by a previous DescribeCertificates
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints:
-	// - Minimum: 20
-	// - Maximum: 100
+	//     - Minimum: 20
+	//     - Maximum: 100
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -64,7 +64,7 @@ type DescribeCertificatesOutput struct {
 
 	// An optional pagination token provided if the number of records retrieved is
 	// greater than MaxRecords. If this parameter is specified, the marker specifies
-	// the next record in the list. Including the value of Marker in the next call to
+	// the next record in the list. Including the value of Marker  in the next call to
 	// DescribeCertificates results in the next page of certificates.
 	Marker *string
 
@@ -148,16 +148,16 @@ var _ DescribeCertificatesAPIClient = (*Client)(nil)
 // DescribeCertificatesPaginatorOptions is the paginator options for
 // DescribeCertificates
 type DescribeCertificatesPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints:
-	// - Minimum: 20
-	// - Maximum: 100
+	//     - Minimum: 20
+	//     - Maximum: 100
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

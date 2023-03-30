@@ -17,7 +17,7 @@ import (
 // conformance pack. Also returns the total rule count which includes compliant
 // rules, noncompliant rules, and rules that cannot be evaluated due to
 // insufficient data. The results can return an empty result page, but if you have
-// a nextToken, the results are displayed on the next page.
+// a nextToken , the results are displayed on the next page.
 func (c *Client) DescribeAggregateComplianceByConformancePacks(ctx context.Context, params *DescribeAggregateComplianceByConformancePacksInput, optFns ...func(*Options)) (*DescribeAggregateComplianceByConformancePacksOutput, error) {
 	if params == nil {
 		params = &DescribeAggregateComplianceByConformancePacksInput{}
@@ -40,7 +40,7 @@ type DescribeAggregateComplianceByConformancePacksInput struct {
 	// This member is required.
 	ConfigurationAggregatorName *string
 
-	// Filters the result by AggregateConformancePackComplianceFilters object.
+	// Filters the result by AggregateConformancePackComplianceFilters  object.
 	Filters *types.AggregateConformancePackComplianceFilters
 
 	// The maximum number of conformance packs compliance details returned on each
@@ -56,7 +56,7 @@ type DescribeAggregateComplianceByConformancePacksInput struct {
 
 type DescribeAggregateComplianceByConformancePacksOutput struct {
 
-	// Returns the AggregateComplianceByConformancePack object.
+	// Returns the AggregateComplianceByConformancePack  object.
 	AggregateComplianceByConformancePacks []types.AggregateComplianceByConformancePack
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -147,8 +147,8 @@ type DescribeAggregateComplianceByConformancePacksPaginatorOptions struct {
 	// page. The default is maximum. If you specify 0, Config uses the default.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

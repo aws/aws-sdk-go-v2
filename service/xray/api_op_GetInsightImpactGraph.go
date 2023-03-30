@@ -39,20 +39,20 @@ type GetInsightImpactGraphInput struct {
 	// This member is required.
 	EndTime *time.Time
 
-	// The insight's unique identifier. Use the GetInsightSummaries action to retrieve
-	// an InsightId.
+	// The insight's unique identifier. Use the GetInsightSummaries action to
+	// retrieve an InsightId.
 	//
 	// This member is required.
 	InsightId *string
 
-	// The estimated start time of the insight, in Unix time seconds. The StartTime is
-	// inclusive of the value provided and can't be more than 30 days old.
+	// The estimated start time of the insight, in Unix time seconds. The StartTime
+	// is inclusive of the value provided and can't be more than 30 days old.
 	//
 	// This member is required.
 	StartTime *time.Time
 
-	// Specify the pagination token returned by a previous request to retrieve the next
-	// page of results.
+	// Specify the pagination token returned by a previous request to retrieve the
+	// next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde

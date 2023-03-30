@@ -12,8 +12,8 @@ import (
 )
 
 // Deploys a snapshot to the stage and creates a new game runtime. After you call
-// this operation, you can check the deployment status by using GetStageDeployment.
-// If there are any players connected to the previous game runtime, then both
+// this operation, you can check the deployment status by using GetStageDeployment
+// . If there are any players connected to the previous game runtime, then both
 // runtimes persist. Existing connections to the previous runtime are maintained.
 // When players disconnect and reconnect, they connect to the new runtime. After
 // there are no connections to the previous game runtime, it is deleted.
@@ -49,8 +49,8 @@ type StartStageDeploymentInput struct {
 	// This member is required.
 	StageName *string
 
-	// A client-defined token. With an active client token in the request, this action
-	// is idempotent.
+	// A client-defined token. With an active client token in the request, this
+	// action is idempotent.
 	ClientToken *string
 
 	noSmithyDocumentSerde

@@ -45,18 +45,19 @@ type GetExportInput struct {
 	// This member is required.
 	StageName *string
 
-	// The content-type of the export, for example application/json. Currently
-	// application/json and application/yaml are supported for exportType ofoas30 and
-	// swagger. This should be specified in the Accept header for direct API requests.
+	// The content-type of the export, for example application/json . Currently
+	// application/json and application/yaml  are supported for exportType  of oas30
+	// and swagger . This should be specified in the Accept header for direct API
+	// requests.
 	Accepts *string
 
 	// A key-value map of query string parameters that specify properties of the
-	// export, depending on the requested exportType. For exportTypeoas30 and swagger,
-	// any combination of the following parameters are supported:
+	// export, depending on the requested exportType . For exportType oas30  and
+	// swagger , any combination of the following parameters are supported:
 	// extensions='integrations' or extensions='apigateway' will export the API with
-	// x-amazon-apigateway-integration extensions. extensions='authorizers' will export
-	// the API with x-amazon-apigateway-authorizer extensions. postman will export the
-	// API with Postman extensions, allowing for import to the Postman tool
+	// x-amazon-apigateway-integration extensions. extensions='authorizers' will
+	// export the API with x-amazon-apigateway-authorizer extensions. postman will
+	// export the API with Postman extensions, allowing for import to the Postman tool
 	Parameters map[string]string
 
 	noSmithyDocumentSerde

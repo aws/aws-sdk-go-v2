@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of RecommendationFeedbackSummary
-// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RecommendationFeedbackSummary.html)
+// Returns a list of RecommendationFeedbackSummary (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RecommendationFeedbackSummary.html)
 // objects that contain customer recommendation feedback for all CodeGuru Reviewer
 // users.
 func (c *Client) ListRecommendationFeedback(ctx context.Context, params *ListRecommendationFeedbackInput, optFns ...func(*Options)) (*ListRecommendationFeedbackOutput, error) {
@@ -33,8 +32,7 @@ func (c *Client) ListRecommendationFeedback(ctx context.Context, params *ListRec
 
 type ListRecommendationFeedbackInput struct {
 
-	// The Amazon Resource Name (ARN) of the CodeReview
-	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
+	// The Amazon Resource Name (ARN) of the CodeReview (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
 	// object.
 	//
 	// This member is required.
@@ -43,8 +41,8 @@ type ListRecommendationFeedbackInput struct {
 	// The maximum number of results that are returned per call. The default is 100.
 	MaxResults *int32
 
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// If nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged.
 	NextToken *string
@@ -52,12 +50,11 @@ type ListRecommendationFeedbackInput struct {
 	// Used to query the recommendation feedback for a given recommendation.
 	RecommendationIds []string
 
-	// An Amazon Web Services user's account ID or Amazon Resource Name (ARN). Use this
-	// ID to query the recommendation feedback for a code review from that user. The
-	// UserId is an IAM principal that can be specified as an Amazon Web Services
+	// An Amazon Web Services user's account ID or Amazon Resource Name (ARN). Use
+	// this ID to query the recommendation feedback for a code review from that user.
+	// The UserId is an IAM principal that can be specified as an Amazon Web Services
 	// account ID or an Amazon Resource Name (ARN). For more information, see
-	// Specifying a Principal
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
+	// Specifying a Principal (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
 	// in the Amazon Web Services Identity and Access Management User Guide.
 	UserIds []string
 
@@ -66,8 +63,8 @@ type ListRecommendationFeedbackInput struct {
 
 type ListRecommendationFeedbackOutput struct {
 
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// If nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged.
 	NextToken *string
@@ -158,8 +155,8 @@ type ListRecommendationFeedbackPaginatorOptions struct {
 	// The maximum number of results that are returned per call. The default is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

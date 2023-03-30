@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified RegexPatternSet.
+// Deletes the specified RegexPatternSet .
 func (c *Client) DeleteRegexPatternSet(ctx context.Context, params *DeleteRegexPatternSetInput, optFns ...func(*Options)) (*DeleteRegexPatternSetOutput, error) {
 	if params == nil {
 		params = &DeleteRegexPatternSetInput{}
@@ -29,19 +29,19 @@ func (c *Client) DeleteRegexPatternSet(ctx context.Context, params *DeleteRegexP
 
 type DeleteRegexPatternSetInput struct {
 
-	// A unique identifier for the set. This ID is returned in the responses to create
-	// and list commands. You provide it to operations like update and delete.
+	// A unique identifier for the set. This ID is returned in the responses to
+	// create and list commands. You provide it to operations like update and delete.
 	//
 	// This member is required.
 	Id *string
 
-	// A token used for optimistic locking. WAF returns a token to your get and list
+	// A token used for optimistic locking. WAF returns a token to your get  and list
 	// requests, to mark the state of the entity at the time of the request. To make
 	// changes to the entity associated with the token, you provide the token to
-	// operations like update and delete. WAF uses the token to ensure that no changes
-	// have been made to the entity since you last retrieved it. If a change has been
-	// made, the update fails with a WAFOptimisticLockException. If this happens,
-	// perform another get, and use the new token returned by that operation.
+	// operations like update  and delete. WAF uses the token to ensure that no
+	// changes have been made to the entity since you last retrieved it. If a change
+	// has been made, the update fails with a WAFOptimisticLockException. If this
+	// happens, perform another get , and use the new token returned by that operation.
 	//
 	// This member is required.
 	LockToken *string
@@ -56,10 +56,8 @@ type DeleteRegexPatternSetInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	// - CLI - Specify the Region
-	// when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.
-	// - API
-	// and SDKs - For all calls, use the Region endpoint us-east-1.
+	//     - CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1 .
+	//     - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope

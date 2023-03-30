@@ -17,9 +17,8 @@ type AttachmentItem struct {
 	AttachmentName *string
 
 	// Describes the MIME file type of the attachment. For a list of supported file
-	// types, see Feature specifications
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html) in
-	// the Amazon Connect Administrator Guide.
+	// types, see Feature specifications (https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html)
+	// in the Amazon Connect Administrator Guide.
 	ContentType *string
 
 	// Status of the attachment.
@@ -44,8 +43,8 @@ type ConnectionCredentials struct {
 // An item - message or event - that has been sent.
 type Item struct {
 
-	// The time when the message or event was sent. It's specified in ISO 8601 format:
-	// yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+	// The time when the message or event was sent. It's specified in ISO 8601
+	// format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
 	AbsoluteTime *string
 
 	// Provides information about the attachments.
@@ -79,8 +78,8 @@ type Item struct {
 
 	// The contactId on which the transcript item was originally sent. This field is
 	// only populated for persistent chats when the transcript item is from the past
-	// chat session. For more information, see Enable persistent chat
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html).
+	// chat session. For more information, see Enable persistent chat (https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html)
+	// .
 	RelatedContactId *string
 
 	// Type of the item: message or event.
@@ -139,9 +138,9 @@ type UploadMetadata struct {
 	// The headers to be provided while uploading the file to the URL.
 	HeadersToInclude map[string]string
 
-	// This is the pre-signed URL that can be used for uploading the file to Amazon S3
-	// when used in response to StartAttachmentUpload
-	// (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_StartAttachmentUpload.html).
+	// This is the pre-signed URL that can be used for uploading the file to Amazon
+	// S3 when used in response to StartAttachmentUpload (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_StartAttachmentUpload.html)
+	// .
 	Url *string
 
 	// The expiration time of the URL in ISO timestamp. It's specified in ISO 8601

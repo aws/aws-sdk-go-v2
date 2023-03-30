@@ -43,7 +43,7 @@ type DisassociateChannelFlowInput struct {
 	// This member is required.
 	ChannelFlowArn *string
 
-	// The AppInstanceUserArn of the user making the API call.
+	// The AppInstanceUserArn  of the user making the API call.
 	//
 	// This member is required.
 	ChimeBearer *string

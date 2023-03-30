@@ -36,10 +36,10 @@ func (c *Client) ModifySnapshotCopyRetentionPeriod(ctx context.Context, params *
 
 type ModifySnapshotCopyRetentionPeriodInput struct {
 
-	// The unique identifier of the cluster for which you want to change the retention
-	// period for either automated or manual snapshots that are copied to a destination
-	// Amazon Web Services Region. Constraints: Must be the valid name of an existing
-	// cluster that has cross-region snapshot copy enabled.
+	// The unique identifier of the cluster for which you want to change the
+	// retention period for either automated or manual snapshots that are copied to a
+	// destination Amazon Web Services Region. Constraints: Must be the valid name of
+	// an existing cluster that has cross-region snapshot copy enabled.
 	//
 	// This member is required.
 	ClusterIdentifier *string
@@ -60,8 +60,8 @@ type ModifySnapshotCopyRetentionPeriodInput struct {
 	// This member is required.
 	RetentionPeriod int32
 
-	// Indicates whether to apply the snapshot retention period to newly copied manual
-	// snapshots instead of automated snapshots.
+	// Indicates whether to apply the snapshot retention period to newly copied
+	// manual snapshots instead of automated snapshots.
 	Manual bool
 
 	noSmithyDocumentSerde

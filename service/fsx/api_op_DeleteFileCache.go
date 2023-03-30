@@ -15,11 +15,10 @@ import (
 // Deletes an Amazon File Cache resource. After deletion, the cache no longer
 // exists, and its data is gone. The DeleteFileCache operation returns while the
 // cache has the DELETING status. You can check the cache deletion status by
-// calling the DescribeFileCaches
-// (https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileCaches.html)
+// calling the DescribeFileCaches (https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileCaches.html)
 // operation, which returns a list of caches in your account. If you pass the cache
-// ID for a deleted cache, the DescribeFileCaches operation returns a
-// FileCacheNotFound error. The data in a deleted cache is also deleted and can't
+// ID for a deleted cache, the DescribeFileCaches  operation returns a
+// FileCacheNotFounderror. The data in a deleted cache is also deleted and can't
 // be recovered by any means.
 func (c *Client) DeleteFileCache(ctx context.Context, params *DeleteFileCacheInput, optFns ...func(*Options)) (*DeleteFileCacheOutput, error) {
 	if params == nil {
@@ -57,7 +56,7 @@ type DeleteFileCacheOutput struct {
 	FileCacheId *string
 
 	// The cache lifecycle for the deletion request. If the DeleteFileCache operation
-	// is successful, this status is DELETING.
+	// is successful, this status is DELETING .
 	Lifecycle types.FileCacheLifecycle
 
 	// Metadata pertaining to the operation's result.

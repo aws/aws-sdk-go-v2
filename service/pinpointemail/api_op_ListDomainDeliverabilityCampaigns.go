@@ -15,8 +15,8 @@ import (
 
 // Retrieve deliverability data for all the campaigns that used a specific domain
 // to send email during a specified time range. This data is available for a domain
-// only if you enabled the Deliverability dashboard
-// (PutDeliverabilityDashboardOption operation) for the domain.
+// only if you enabled the Deliverability dashboard (
+// PutDeliverabilityDashboardOption operation) for the domain.
 func (c *Client) ListDomainDeliverabilityCampaigns(ctx context.Context, params *ListDomainDeliverabilityCampaignsInput, optFns ...func(*Options)) (*ListDomainDeliverabilityCampaignsOutput, error) {
 	if params == nil {
 		params = &ListDomainDeliverabilityCampaignsInput{}
@@ -34,8 +34,8 @@ func (c *Client) ListDomainDeliverabilityCampaigns(ctx context.Context, params *
 
 // Retrieve deliverability data for all the campaigns that used a specific domain
 // to send email during a specified time range. This data is available for a domain
-// only if you enabled the Deliverability dashboard
-// (PutDeliverabilityDashboardOption operation) for the domain.
+// only if you enabled the Deliverability dashboard (
+// PutDeliverabilityDashboardOption operation) for the domain.
 type ListDomainDeliverabilityCampaignsInput struct {
 
 	// The last day, in Unix time format, that you want to obtain deliverability data
@@ -45,8 +45,8 @@ type ListDomainDeliverabilityCampaignsInput struct {
 	// This member is required.
 	EndDate *time.Time
 
-	// The first day, in Unix time format, that you want to obtain deliverability data
-	// for.
+	// The first day, in Unix time format, that you want to obtain deliverability
+	// data for.
 	//
 	// This member is required.
 	StartDate *time.Time
@@ -57,12 +57,12 @@ type ListDomainDeliverabilityCampaignsInput struct {
 	SubscribedDomain *string
 
 	// A token that’s returned from a previous call to the
-	// ListDomainDeliverabilityCampaigns operation. This token indicates the position
+	// ListDomainDeliverabilityCampaignsoperation. This token indicates the position
 	// of a campaign in the list of campaigns.
 	NextToken *string
 
 	// The maximum number of results to include in response to a single call to the
-	// ListDomainDeliverabilityCampaigns operation. If the number of results is larger
+	// ListDomainDeliverabilityCampaignsoperation. If the number of results is larger
 	// than the number that you specify in this parameter, the response includes a
 	// NextToken element, which you can use to obtain additional results.
 	PageSize *int32
@@ -70,20 +70,20 @@ type ListDomainDeliverabilityCampaignsInput struct {
 	noSmithyDocumentSerde
 }
 
-// An array of objects that provide deliverability data for all the campaigns that
-// used a specific domain to send email during a specified time range. This data is
-// available for a domain only if you enabled the Deliverability dashboard
-// (PutDeliverabilityDashboardOption operation) for the domain.
+// An array of objects that provide deliverability data for all the campaigns
+// that used a specific domain to send email during a specified time range. This
+// data is available for a domain only if you enabled the Deliverability dashboard
+// ( PutDeliverabilityDashboardOption  operation) for the domain.
 type ListDomainDeliverabilityCampaignsOutput struct {
 
-	// An array of responses, one for each campaign that used the domain to send email
-	// during the specified time range.
+	// An array of responses, one for each campaign that used the domain to send
+	// email during the specified time range.
 	//
 	// This member is required.
 	DomainDeliverabilityCampaigns []types.DomainDeliverabilityCampaign
 
 	// A token that’s returned from a previous call to the
-	// ListDomainDeliverabilityCampaigns operation. This token indicates the position
+	// ListDomainDeliverabilityCampaignsoperation. This token indicates the position
 	// of the campaign in the list of campaigns.
 	NextToken *string
 
@@ -168,13 +168,13 @@ var _ ListDomainDeliverabilityCampaignsAPIClient = (*Client)(nil)
 // ListDomainDeliverabilityCampaigns
 type ListDomainDeliverabilityCampaignsPaginatorOptions struct {
 	// The maximum number of results to include in response to a single call to the
-	// ListDomainDeliverabilityCampaigns operation. If the number of results is larger
+	// ListDomainDeliverabilityCampaignsoperation. If the number of results is larger
 	// than the number that you specify in this parameter, the response includes a
 	// NextToken element, which you can use to obtain additional results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

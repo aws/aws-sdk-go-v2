@@ -13,11 +13,11 @@ import (
 
 // Updates a stack as specified in the template. After the call completes
 // successfully, the stack update starts. You can check the status of the stack
-// through the DescribeStacks action. To get a copy of the template for an existing
-// stack, you can use the GetTemplate action. For more information about creating
-// an update template, updating a stack, and monitoring the progress of the update,
-// see Updating a Stack
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html).
+// through the DescribeStacks action. To get a copy of the template for an
+// existing stack, you can use the GetTemplate action. For more information about
+// creating an update template, updating a stack, and monitoring the progress of
+// the update, see Updating a Stack (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html)
+// .
 func (c *Client) UpdateStack(ctx context.Context, params *UpdateStackInput, optFns ...func(*Options)) (*UpdateStackOutput, error) {
 	if params == nil {
 		params = &UpdateStackInput{}
@@ -33,7 +33,7 @@ func (c *Client) UpdateStack(ctx context.Context, params *UpdateStackInput, optF
 	return out, nil
 }
 
-// The input for an UpdateStack action.
+// The input for an UpdateStack  action.
 type UpdateStackInput struct {
 
 	// The name or unique stack ID of the stack to update.
@@ -41,92 +41,39 @@ type UpdateStackInput struct {
 	// This member is required.
 	StackName *string
 
-	// In some cases, you must explicitly acknowledge that your stack template contains
-	// certain capabilities in order for CloudFormation to update the stack.
-	// -
-	// CAPABILITY_IAM and CAPABILITY_NAMED_IAM Some stack templates might include
-	// resources that can affect permissions in your Amazon Web Services account; for
-	// example, by creating new Identity and Access Management (IAM) users. For those
-	// stacks, you must explicitly acknowledge this by specifying one of these
-	// capabilities. The following IAM resources require you to specify either the
-	// CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.
-	// - If you have IAM resources,
-	// you can specify either capability.
-	// - If you have IAM resources with custom
-	// names, you must specify CAPABILITY_NAMED_IAM.
-	// - If you don't specify either of
-	// these capabilities, CloudFormation returns an InsufficientCapabilities
-	// error.
-	//
-	// If your stack template contains these resources, we suggest that you
-	// review all permissions associated with them and edit their permissions if
-	// necessary.
-	// - AWS::IAM::AccessKey
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html)
-	// -
-	// AWS::IAM::Group
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html)
-	// -
-	// AWS::IAM::InstanceProfile
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html)
-	// -
-	// AWS::IAM::Policy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html)
-	// -
-	// AWS::IAM::Role
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html)
-	// -
-	// AWS::IAM::User
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html)
-	// -
-	// AWS::IAM::UserToGroupAddition
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html)
-	//
-	// For
-	// more information, see Acknowledging IAM Resources in CloudFormation Templates
-	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
-	// -
-	// CAPABILITY_AUTO_EXPAND Some template contain macros. Macros perform custom
-	// processing on templates; this can include simple actions like find-and-replace
-	// operations, all the way to extensive transformations of entire templates.
-	// Because of this, users typically create a change set from the processed
-	// template, so that they can review the changes resulting from the macros before
-	// actually updating the stack. If your stack template contains one or more macros,
-	// and you choose to update a stack directly from the processed template, without
-	// first reviewing the resulting changes in a change set, you must acknowledge this
-	// capability. This includes the AWS::Include
-	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html)
-	// and AWS::Serverless
-	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html)
-	// transforms, which are macros hosted by CloudFormation. If you want to update a
-	// stack from a stack template that contains macros and nested stacks, you must
-	// update the stack directly from the template using this capability. You should
-	// only update stacks directly from a stack template that contains macros if you
-	// know what processing the macro performs. Each macro relies on an underlying
-	// Lambda service function for processing stack templates. Be aware that the Lambda
-	// function owner can update the function operation without CloudFormation being
-	// notified. For more information, see Using CloudFormation Macros to Perform
-	// Custom Processing on Templates
-	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html).
+	// In some cases, you must explicitly acknowledge that your stack template
+	// contains certain capabilities in order for CloudFormation to update the stack.
+	//     - CAPABILITY_IAM and CAPABILITY_NAMED_IAM Some stack templates might include resources that can affect permissions in your Amazon Web Services account; for example, by creating new Identity and Access Management (IAM) users. For those stacks, you must explicitly acknowledge this by specifying one of these capabilities. The following IAM resources require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.
+	//         - If you have IAM resources, you can specify either capability.
+	//         - If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM .
+	//         - If you don't specify either of these capabilities, CloudFormation returns an InsufficientCapabilities error. If your stack template contains these resources, we suggest that you review all permissions associated with them and edit their permissions if necessary.
+	//         - AWS::IAM::AccessKey (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html)
+	//         - AWS::IAM::Group (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html)
+	//         - AWS::IAM::InstanceProfile (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html)
+	//         - AWS::IAM::Policy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html)
+	//         - AWS::IAM::Role (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html)
+	//         - AWS::IAM::User (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html)
+	//         - AWS::IAM::UserToGroupAddition (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html) For more information, see Acknowledging IAM Resources in CloudFormation Templates (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities) .
+	//     - CAPABILITY_AUTO_EXPAND Some template contain macros. Macros perform custom processing on templates; this can include simple actions like find-and-replace operations, all the way to extensive transformations of entire templates. Because of this, users typically create a change set from the processed template, so that they can review the changes resulting from the macros before actually updating the stack. If your stack template contains one or more macros, and you choose to update a stack directly from the processed template, without first reviewing the resulting changes in a change set, you must acknowledge this capability. This includes the AWS::Include (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html) and AWS::Serverless (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html) transforms, which are macros hosted by CloudFormation. If you want to update a stack from a stack template that contains macros and nested stacks, you must update the stack directly from the template using this capability. You should only update stacks directly from a stack template that contains macros if you know what processing the macro performs. Each macro relies on an underlying Lambda service function for processing stack templates. Be aware that the Lambda function owner can update the function operation without CloudFormation being notified. For more information, see Using CloudFormation Macros to Perform Custom Processing on Templates (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html) .
 	Capabilities []types.Capability
 
-	// A unique identifier for this UpdateStack request. Specify this token if you plan
-	// to retry requests so that CloudFormation knows that you're not attempting to
-	// update a stack with the same name. You might retry UpdateStack requests to
+	// A unique identifier for this UpdateStack request. Specify this token if you
+	// plan to retry requests so that CloudFormation knows that you're not attempting
+	// to update a stack with the same name. You might retry UpdateStack requests to
 	// ensure that CloudFormation successfully received them. All events triggered by a
 	// given stack operation are assigned the same client request token, which you can
 	// use to track operations. For example, if you execute a CreateStack operation
-	// with the token token1, then all the StackEvents generated by that operation will
-	// have ClientRequestToken set as token1. In the console, stack operations display
-	// the client request token on the Events tab. Stack operations that are initiated
-	// from the console use the token format Console-StackOperation-ID, which helps you
-	// easily identify the stack operation . For example, if you create a stack using
-	// the console, each stack event would be assigned the same token in the following
-	// format: Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002.
+	// with the token token1 , then all the StackEvents generated by that operation
+	// will have ClientRequestToken  set as token1. In the console, stack operations
+	// display the client request token on the Events tab. Stack operations that are
+	// initiated from the console use the token format Console-StackOperation-ID, which
+	// helps you easily identify the stack operation . For example, if you create a
+	// stack using the console, each stack event would be assigned the same token in
+	// the following format: Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002 .
 	ClientRequestToken *string
 
-	// Preserve the state of previously provisioned resources when an operation fails.
-	// Default: False
+	// Preserve the state of previously provisioned resources when an operation
+	// fails. Default: False
 	DisableRollback *bool
 
 	// Amazon Simple Notification Service topic Amazon Resource Names (ARNs) that
@@ -134,21 +81,20 @@ type UpdateStackInput struct {
 	// notification topics.
 	NotificationARNs []string
 
-	// A list of Parameter structures that specify input parameters for the stack. For
-	// more information, see the Parameter
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
+	// A list of Parameter structures that specify input parameters for the stack.
+	// For more information, see the Parameter (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
 	// data type.
 	Parameters []types.Parameter
 
 	// The template resource types that you have permissions to work with for this
-	// update stack action, such as AWS::EC2::Instance, AWS::EC2::*, or
+	// update stack action, such as AWS::EC2::Instance , AWS::EC2::* , or
 	// Custom::MyCustomInstance. If the list of resource types doesn't include a
 	// resource that you're updating, the stack update fails. By default,
 	// CloudFormation grants permissions to all resource types. Identity and Access
 	// Management (IAM) uses this parameter for CloudFormation-specific condition keys
-	// in IAM policies. For more information, see Controlling Access with Identity and
-	// Access Management
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html).
+	// in IAM policies. For more information, see Controlling Access with Identity
+	// and Access Management (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html)
+	// .
 	ResourceTypes []string
 
 	// The Amazon Resource Name (ARN) of an Identity and Access Management (IAM) role
@@ -167,17 +113,18 @@ type UpdateStackInput struct {
 	RollbackConfiguration *types.RollbackConfiguration
 
 	// Structure containing a new stack policy body. You can specify either the
-	// StackPolicyBody or the StackPolicyURL parameter, but not both. You might update
-	// the stack policy, for example, in order to protect a new resource that you
-	// created during a stack update. If you don't specify a stack policy, the current
-	// policy that is associated with the stack is unchanged.
+	// StackPolicyBody or the StackPolicyURL parameter, but not both. You might
+	// update the stack policy, for example, in order to protect a new resource that
+	// you created during a stack update. If you don't specify a stack policy, the
+	// current policy that is associated with the stack is unchanged.
 	StackPolicyBody *string
 
-	// Structure containing the temporary overriding stack policy body. You can specify
-	// either the StackPolicyDuringUpdateBody or the StackPolicyDuringUpdateURL
-	// parameter, but not both. If you want to update protected resources, specify a
-	// temporary overriding stack policy during this update. If you don't specify a
-	// stack policy, the current policy that is associated with the stack will be used.
+	// Structure containing the temporary overriding stack policy body. You can
+	// specify either the StackPolicyDuringUpdateBody  or the
+	// StackPolicyDuringUpdateURLparameter, but not both. If you want to update
+	// protected resources, specify a temporary overriding stack policy during this
+	// update. If you don't specify a stack policy, the current policy that is
+	// associated with the stack will be used.
 	StackPolicyDuringUpdateBody *string
 
 	// Location of a file containing the temporary overriding stack policy. The URL
@@ -189,12 +136,13 @@ type UpdateStackInput struct {
 	// associated with the stack will be used.
 	StackPolicyDuringUpdateURL *string
 
-	// Location of a file containing the updated stack policy. The URL must point to a
-	// policy (max size: 16KB) located in an S3 bucket in the same Region as the stack.
-	// You can specify either the StackPolicyBody or the StackPolicyURL parameter, but
-	// not both. You might update the stack policy, for example, in order to protect a
-	// new resource that you created during a stack update. If you don't specify a
-	// stack policy, the current policy that is associated with the stack is unchanged.
+	// Location of a file containing the updated stack policy. The URL must point to
+	// a policy (max size: 16KB) located in an S3 bucket in the same Region as the
+	// stack. You can specify either the StackPolicyBody  or the StackPolicyURL
+	// parameter, but not both. You might update the stack policy, for example, in
+	// order to protect a new resource that you created during a stack update. If you
+	// don't specify a stack policy, the current policy that is associated with the
+	// stack is unchanged.
 	StackPolicyURL *string
 
 	// Key-value pairs to associate with this stack. CloudFormation also propagates
@@ -205,31 +153,29 @@ type UpdateStackInput struct {
 	Tags []types.Tag
 
 	// Structure containing the template body with a minimum length of 1 byte and a
-	// maximum length of 51,200 bytes. (For more information, go to Template Anatomy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
+	// maximum length of 51,200 bytes. (For more information, go to Template Anatomy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
 	// in the CloudFormation User Guide.) Conditional: You must specify only one of the
-	// following parameters: TemplateBody, TemplateURL, or set the UsePreviousTemplate
-	// to true.
+	// following parameters: TemplateBody , TemplateURL , or set the
+	// UsePreviousTemplate to true .
 	TemplateBody *string
 
-	// Location of file containing the template body. The URL must point to a template
-	// that's located in an Amazon S3 bucket or a Systems Manager document. For more
-	// information, go to Template Anatomy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
+	// Location of file containing the template body. The URL must point to a
+	// template that's located in an Amazon S3 bucket or a Systems Manager document.
+	// For more information, go to Template Anatomy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
 	// in the CloudFormation User Guide. Conditional: You must specify only one of the
-	// following parameters: TemplateBody, TemplateURL, or set the UsePreviousTemplate
-	// to true.
+	// following parameters: TemplateBody , TemplateURL , or set the
+	// UsePreviousTemplate to true .
 	TemplateURL *string
 
 	// Reuse the existing template that is associated with the stack that you are
 	// updating. Conditional: You must specify only one of the following parameters:
-	// TemplateBody, TemplateURL, or set the UsePreviousTemplate to true.
+	// TemplateBody , TemplateURL , or set the UsePreviousTemplate  to true .
 	UsePreviousTemplate *bool
 
 	noSmithyDocumentSerde
 }
 
-// The output for an UpdateStack action.
+// The output for an UpdateStack  action.
 type UpdateStackOutput struct {
 
 	// Unique identifier of the stack.

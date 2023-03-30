@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all readiness rules, or lists the readiness rules for a specific resource
-// type.
+// Lists all readiness rules, or lists the readiness rules for a specific
+// resource type.
 func (c *Client) ListRules(ctx context.Context, params *ListRulesInput, optFns ...func(*Options)) (*ListRulesOutput, error) {
 	if params == nil {
 		params = &ListRulesInput{}
@@ -129,8 +129,8 @@ type ListRulesPaginatorOptions struct {
 	// The number of objects that you want to return with this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

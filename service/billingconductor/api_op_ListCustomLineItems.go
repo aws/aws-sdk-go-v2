@@ -51,7 +51,7 @@ type ListCustomLineItemsInput struct {
 
 type ListCustomLineItemsOutput struct {
 
-	// A list of FreeFormLineItemListElements received.
+	// A list of FreeFormLineItemListElements  received.
 	CustomLineItems []types.CustomLineItemListElement
 
 	// The pagination token that's used on subsequent calls to get custom line items
@@ -124,8 +124,8 @@ func (c *Client) addOperationListCustomLineItemsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListCustomLineItemsAPIClient is a client that implements the ListCustomLineItems
-// operation.
+// ListCustomLineItemsAPIClient is a client that implements the
+// ListCustomLineItems operation.
 type ListCustomLineItemsAPIClient interface {
 	ListCustomLineItems(context.Context, *ListCustomLineItemsInput, ...func(*Options)) (*ListCustomLineItemsOutput, error)
 }
@@ -138,8 +138,8 @@ type ListCustomLineItemsPaginatorOptions struct {
 	// The maximum number of billing groups to retrieve.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

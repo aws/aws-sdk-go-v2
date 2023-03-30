@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists Amazon Web Services Migration Hub Refactor Spaces environments owned by a
-// caller account or shared with the caller account.
+// Lists Amazon Web Services Migration Hub Refactor Spaces environments owned by
+// a caller account or shared with the caller account.
 func (c *Client) ListEnvironments(ctx context.Context, params *ListEnvironmentsInput, optFns ...func(*Options)) (*ListEnvironmentsOutput, error) {
 	if params == nil {
 		params = &ListEnvironmentsInput{}
@@ -32,7 +32,7 @@ func (c *Client) ListEnvironments(ctx context.Context, params *ListEnvironmentsI
 type ListEnvironmentsInput struct {
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -43,7 +43,7 @@ type ListEnvironmentsInput struct {
 
 type ListEnvironmentsOutput struct {
 
-	// The list of EnvironmentSummary objects.
+	// The list of EnvironmentSummary  objects.
 	EnvironmentSummaryList []types.EnvironmentSummary
 
 	// The token for the next page of results.
@@ -126,11 +126,11 @@ var _ ListEnvironmentsAPIClient = (*Client)(nil)
 // ListEnvironmentsPaginatorOptions is the paginator options for ListEnvironments
 type ListEnvironmentsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

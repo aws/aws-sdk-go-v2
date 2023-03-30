@@ -14,13 +14,13 @@ import (
 // Creates a new recording configuration, used to enable recording to Amazon S3.
 // Known issue: In the us-east-1 region, if you use the Amazon Web Services CLI to
 // create a recording configuration, it returns success even if the S3 bucket is in
-// a different region. In this case, the state of the recording configuration is
-// CREATE_FAILED (instead of ACTIVE). (In other regions, the CLI correctly returns
-// failure if the bucket is in a different region.) Workaround: Ensure that your S3
-// bucket is in the same region as the recording configuration. If you create a
-// recording configuration in a different region as your S3 bucket, delete that
-// recording configuration and create a new one with an S3 bucket from the correct
-// region.
+// a different region. In this case, the state  of the recording configuration is
+// CREATE_FAILED (instead of ACTIVE). (In other regions, the CLI correctly
+// returns failure if the bucket is in a different region.) Workaround: Ensure that
+// your S3 bucket is in the same region as the recording configuration. If you
+// create a recording configuration in a different region as your S3 bucket, delete
+// that recording configuration and create a new one with an S3 bucket from the
+// correct region.
 func (c *Client) CreateRecordingConfiguration(ctx context.Context, params *CreateRecordingConfigurationInput, optFns ...func(*Options)) (*CreateRecordingConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateRecordingConfigurationInput{}
@@ -52,17 +52,16 @@ type CreateRecordingConfigurationInput struct {
 	// Default: 0.
 	RecordingReconnectWindowSeconds int32
 
-	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
-	// Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
-	// information, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
-	// documented there.
+	// Array of 1-50 maps, each of the form string:string (key:value) . See Tagging
+	// Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for more information, including restrictions that apply to tags and "Tag naming
+	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
+	// what is documented there.
 	Tags map[string]string
 
-	// A complex type that allows you to enable/disable the recording of thumbnails for
-	// a live session and modify the interval at which thumbnails are generated for the
-	// live session.
+	// A complex type that allows you to enable/disable the recording of thumbnails
+	// for a live session and modify the interval at which thumbnails are generated for
+	// the live session.
 	ThumbnailConfiguration *types.ThumbnailConfiguration
 
 	noSmithyDocumentSerde

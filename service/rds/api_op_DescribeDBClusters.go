@@ -20,11 +20,9 @@ import (
 
 // Returns information about Amazon Aurora DB clusters and Multi-AZ DB clusters.
 // This API supports pagination. For more information on Amazon Aurora DB clusters,
-// see  What is Amazon Aurora?
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// see What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-// see  Multi-AZ DB cluster deployments
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+// see Multi-AZ DB cluster deployments (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 // in the Amazon RDS User Guide. This operation can also return information for
 // Amazon Neptune DB instances and Amazon DocumentDB instances.
 func (c *Client) DescribeDBClusters(ctx context.Context, params *DescribeDBClustersInput, optFns ...func(*Options)) (*DescribeDBClustersOutput, error) {
@@ -44,47 +42,41 @@ func (c *Client) DescribeDBClusters(ctx context.Context, params *DescribeDBClust
 
 type DescribeDBClustersInput struct {
 
-	// The user-supplied DB cluster identifier or the Amazon Resource Name (ARN) of the
-	// DB cluster. If this parameter is specified, information from only the specific
-	// DB cluster is returned. This parameter isn't case-sensitive. Constraints:
-	// - If
-	// supplied, must match an existing DBClusterIdentifier.
+	// The user-supplied DB cluster identifier or the Amazon Resource Name (ARN) of
+	// the DB cluster. If this parameter is specified, information from only the
+	// specific DB cluster is returned. This parameter isn't case-sensitive.
+	// Constraints:
+	//     - If supplied, must match an existing DBClusterIdentifier.
 	DBClusterIdentifier *string
 
 	// A filter that specifies one or more DB clusters to describe. Supported
 	// filters:
-	// - clone-group-id - Accepts clone group identifiers. The results list
-	// only includes information about the DB clusters associated with these clone
-	// groups.
-	// - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
-	// Resource Names (ARNs). The results list only includes information about the DB
-	// clusters identified by these ARNs.
-	// - domain - Accepts Active Directory directory
-	// IDs. The results list only includes information about the DB clusters associated
-	// with these domains.
-	// - engine - Accepts engine names. The results list only
-	// includes information about the DB clusters for these engines.
+	//     - clone-group-id - Accepts clone group identifiers. The results list only includes information about the DB clusters associated with these clone groups.
+	//     - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list only includes information about the DB clusters identified by these ARNs.
+	//     - domain - Accepts Active Directory directory IDs. The results list only includes information about the DB clusters associated with these domains.
+	//     - engine - Accepts engine names. The results list only includes information about the DB clusters for these engines.
 	Filters []types.Filter
 
 	// Optional Boolean parameter that specifies whether the output includes
 	// information about clusters shared from other Amazon Web Services accounts.
 	IncludeShared bool
 
-	// An optional pagination token provided by a previous DescribeDBClusters request.
-	// If this parameter is specified, the response includes only records beyond the
-	// marker, up to the value specified by MaxRecords.
+	// An optional pagination token provided by a previous DescribeDBClusters
+	// request. If this parameter is specified, the response includes only records
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
-	// Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so you can retrieve the remaining results. Default:
+	// 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
 }
 
-// Contains the result of a successful invocation of the DescribeDBClusters action.
+// Contains the result of a successful invocation of the DescribeDBClusters
+// action.
 type DescribeDBClustersOutput struct {
 
 	// Contains a list of DB clusters for the user.
@@ -173,14 +165,14 @@ var _ DescribeDBClustersAPIClient = (*Client)(nil)
 // DescribeDBClustersPaginatorOptions is the paginator options for
 // DescribeDBClusters
 type DescribeDBClustersPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
-	// Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so you can retrieve the remaining results. Default:
+	// 100 Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -269,8 +261,8 @@ type DBClusterAvailableWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, DBClusterAvailableWaiter will use default max delay of 120 seconds.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, DBClusterAvailableWaiter will use default max delay of 120 seconds.
 	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
@@ -311,9 +303,9 @@ func NewDBClusterAvailableWaiter(client DescribeDBClustersAPIClient, optFns ...f
 	}
 }
 
-// Wait calls the waiter function for DBClusterAvailable waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for DBClusterAvailable waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *DBClusterAvailableWaiter) Wait(ctx context.Context, params *DescribeDBClustersInput, maxWaitDur time.Duration, optFns ...func(*DBClusterAvailableWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -564,9 +556,9 @@ type DBClusterDeletedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, DBClusterDeletedWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, DBClusterDeletedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -614,10 +606,10 @@ func (w *DBClusterDeletedWaiter) Wait(ctx context.Context, params *DescribeDBClu
 	return err
 }
 
-// WaitForOutput calls the waiter function for DBClusterDeleted waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for DBClusterDeleted waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
 func (w *DBClusterDeletedWaiter) WaitForOutput(ctx context.Context, params *DescribeDBClustersInput, maxWaitDur time.Duration, optFns ...func(*DBClusterDeletedWaiterOptions)) (*DescribeDBClustersOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

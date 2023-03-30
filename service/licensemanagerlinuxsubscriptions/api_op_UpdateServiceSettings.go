@@ -34,8 +34,8 @@ type UpdateServiceSettingsInput struct {
 	// This member is required.
 	LinuxSubscriptionsDiscovery types.LinuxSubscriptionsDiscovery
 
-	// The settings defined for Linux subscriptions discovery. The settings include if
-	// Organizations integration has been enabled, and which Regions data will be
+	// The settings defined for Linux subscriptions discovery. The settings include
+	// if Organizations integration has been enabled, and which Regions data will be
 	// aggregated from.
 	//
 	// This member is required.
@@ -58,15 +58,16 @@ type UpdateServiceSettingsOutput struct {
 	// Lists if discovery has been enabled for Linux subscriptions.
 	LinuxSubscriptionsDiscovery types.LinuxSubscriptionsDiscovery
 
-	// The settings defined for Linux subscriptions discovery. The settings include if
-	// Organizations integration has been enabled, and which Regions data will be
+	// The settings defined for Linux subscriptions discovery. The settings include
+	// if Organizations integration has been enabled, and which Regions data will be
 	// aggregated from.
 	LinuxSubscriptionsDiscoverySettings *types.LinuxSubscriptionsDiscoverySettings
 
 	// Indicates the status of Linux subscriptions settings being applied.
 	Status types.Status
 
-	// A message which details the Linux subscriptions service settings current status.
+	// A message which details the Linux subscriptions service settings current
+	// status.
 	StatusMessage map[string]string
 
 	// Metadata pertaining to the operation's result.

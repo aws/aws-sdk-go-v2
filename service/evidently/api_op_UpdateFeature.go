@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing feature. You can't use this operation to update the tags of
-// an existing feature. Instead, use TagResource
-// (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html).
+// Updates an existing feature. You can't use this operation to update the tags
+// of an existing feature. Instead, use TagResource (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html)
+// .
 func (c *Client) UpdateFeature(ctx context.Context, params *UpdateFeatureInput, optFns ...func(*Options)) (*UpdateFeatureOutput, error) {
 	if params == nil {
 		params = &UpdateFeatureInput{}
@@ -48,20 +48,20 @@ type UpdateFeatureInput struct {
 	// new variation.
 	AddOrUpdateVariations []types.VariationConfig
 
-	// The name of the variation to use as the default variation. The default variation
-	// is served to users who are not allocated to any ongoing launches or experiments
-	// of this feature.
+	// The name of the variation to use as the default variation. The default
+	// variation is served to users who are not allocated to any ongoing launches or
+	// experiments of this feature.
 	DefaultVariation *string
 
 	// An optional description of the feature.
 	Description *string
 
-	// Specified users that should always be served a specific variation of a feature.
-	// Each user is specified by a key-value pair . For each key, specify a user by
-	// entering their user ID, account ID, or some other identifier. For the value,
-	// specify the name of the variation that they are to be served. This parameter is
-	// limited to 2500 overrides or a total of 40KB. The 40KB limit includes an
-	// overhead of 6 bytes per override.
+	// Specified users that should always be served a specific variation of a
+	// feature. Each user is specified by a key-value pair . For each key, specify a
+	// user by entering their user ID, account ID, or some other identifier. For the
+	// value, specify the name of the variation that they are to be served. This
+	// parameter is limited to 2500 overrides or a total of 40KB. The 40KB limit
+	// includes an overhead of 6 bytes per override.
 	EntityOverrides map[string]string
 
 	// Specify ALL_RULES to activate the traffic allocation specified by any ongoing

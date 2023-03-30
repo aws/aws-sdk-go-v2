@@ -33,7 +33,8 @@ type DescribeResourcePoliciesInput struct {
 	// API.
 	Limit *int32
 
-	// The token for the next set of items to return. The token expires after 24 hours.
+	// The token for the next set of items to return. The token expires after 24
+	// hours.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -41,7 +42,8 @@ type DescribeResourcePoliciesInput struct {
 
 type DescribeResourcePoliciesOutput struct {
 
-	// The token for the next set of items to return. The token expires after 24 hours.
+	// The token for the next set of items to return. The token expires after 24
+	// hours.
 	NextToken *string
 
 	// The resource policies that exist in this account.

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified ingress or egress entry (rule) from the specified network
-// ACL.
+// Deletes the specified ingress or egress entry (rule) from the specified
+// network ACL.
 func (c *Client) DeleteNetworkAclEntry(ctx context.Context, params *DeleteNetworkAclEntryInput, optFns ...func(*Options)) (*DeleteNetworkAclEntryOutput, error) {
 	if params == nil {
 		params = &DeleteNetworkAclEntryInput{}
@@ -46,8 +46,8 @@ type DeleteNetworkAclEntryInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

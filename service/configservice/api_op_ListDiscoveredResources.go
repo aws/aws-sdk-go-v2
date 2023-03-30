@@ -20,9 +20,9 @@ import (
 // specific resource IDs or a resource name. You can specify either resource IDs or
 // a resource name, but not both, in the same request. The response is paginated.
 // By default, Config lists 100 resource identifiers on each page. You can
-// customize this number with the limit parameter. The response includes a
-// nextToken string. To get the next page of results, run the request again and
-// specify the string for the nextToken parameter.
+// customize this number with the limit  parameter. The response includes a
+// nextTokenstring. To get the next page of results, run the request again and
+// specify the string for the nextToken  parameter.
 func (c *Client) ListDiscoveredResources(ctx context.Context, params *ListDiscoveredResourcesInput, optFns ...func(*Options)) (*ListDiscoveredResourcesOutput, error) {
 	if params == nil {
 		params = &ListDiscoveredResourcesInput{}
@@ -45,23 +45,23 @@ type ListDiscoveredResourcesInput struct {
 	// This member is required.
 	ResourceType types.ResourceType
 
-	// Specifies whether Config includes deleted resources in the results. By default,
-	// deleted resources are not included.
+	// Specifies whether Config includes deleted resources in the results. By
+	// default, deleted resources are not included.
 	IncludeDeletedResources bool
 
-	// The maximum number of resource identifiers returned on each page. The default is
-	// 100. You cannot specify a number greater than 100. If you specify 0, Config uses
-	// the default.
+	// The maximum number of resource identifiers returned on each page. The default
+	// is 100. You cannot specify a number greater than 100. If you specify 0, Config
+	// uses the default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
 
-	// The IDs of only those resources that you want Config to list in the response. If
-	// you do not specify this parameter, Config lists all resources of the specified
-	// type that it has discovered. You can list a minimum of 1 resourceID and a
-	// maximum of 20 resourceIds.
+	// The IDs of only those resources that you want Config to list in the response.
+	// If you do not specify this parameter, Config lists all resources of the
+	// specified type that it has discovered. You can list a minimum of 1 resourceID
+	// and a maximum of 20 resourceIds.
 	ResourceIds []string
 
 	// The custom name of only those resources that you want Config to list in the
@@ -74,12 +74,12 @@ type ListDiscoveredResourcesInput struct {
 
 type ListDiscoveredResourcesOutput struct {
 
-	// The string that you use in a subsequent request to get the next page of results
-	// in a paginated response.
+	// The string that you use in a subsequent request to get the next page of
+	// results in a paginated response.
 	NextToken *string
 
-	// The details that identify a resource that is discovered by Config, including the
-	// resource type, ID, and (if available) the custom resource name.
+	// The details that identify a resource that is discovered by Config, including
+	// the resource type, ID, and (if available) the custom resource name.
 	ResourceIdentifiers []types.ResourceIdentifier
 
 	// Metadata pertaining to the operation's result.
@@ -162,13 +162,13 @@ var _ ListDiscoveredResourcesAPIClient = (*Client)(nil)
 // ListDiscoveredResourcesPaginatorOptions is the paginator options for
 // ListDiscoveredResources
 type ListDiscoveredResourcesPaginatorOptions struct {
-	// The maximum number of resource identifiers returned on each page. The default is
-	// 100. You cannot specify a number greater than 100. If you specify 0, Config uses
-	// the default.
+	// The maximum number of resource identifiers returned on each page. The default
+	// is 100. You cannot specify a number greater than 100. If you specify 0, Config
+	// uses the default.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

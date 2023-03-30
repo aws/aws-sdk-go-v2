@@ -15,7 +15,7 @@ import (
 // events, you an keep them and analyze them on your own. If you choose not to
 // store evaluation events, Evidently deletes them after using them to produce
 // metrics and other experiment results that you can view. You can't specify both
-// cloudWatchLogs and s3Destination in the same operation.
+// cloudWatchLogs and s3Destination  in the same operation.
 func (c *Client) UpdateProjectDataDelivery(ctx context.Context, params *UpdateProjectDataDeliveryInput, optFns ...func(*Options)) (*UpdateProjectDataDeliveryOutput, error) {
 	if params == nil {
 		params = &UpdateProjectDataDeliveryInput{}
@@ -33,8 +33,8 @@ func (c *Client) UpdateProjectDataDelivery(ctx context.Context, params *UpdatePr
 
 type UpdateProjectDataDeliveryInput struct {
 
-	// The name or ARN of the project that you want to modify the data storage options
-	// for.
+	// The name or ARN of the project that you want to modify the data storage
+	// options for.
 	//
 	// This member is required.
 	Project *string

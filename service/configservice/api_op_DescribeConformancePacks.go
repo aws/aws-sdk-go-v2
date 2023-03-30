@@ -38,8 +38,8 @@ type DescribeConformancePacksInput struct {
 	// The maximum number of conformance packs returned on each page.
 	Limit int32
 
-	// The nextToken string returned in a previous request that you use to request the
-	// next page of results in a paginated response.
+	// The nextToken string returned in a previous request that you use to request
+	// the next page of results in a paginated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,11 +47,11 @@ type DescribeConformancePacksInput struct {
 
 type DescribeConformancePacksOutput struct {
 
-	// Returns a list of ConformancePackDetail objects.
+	// Returns a list of ConformancePackDetail  objects.
 	ConformancePackDetails []types.ConformancePackDetail
 
-	// The nextToken string returned in a previous request that you use to request the
-	// next page of results in a paginated response.
+	// The nextToken string returned in a previous request that you use to request
+	// the next page of results in a paginated response.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -134,8 +134,8 @@ type DescribeConformancePacksPaginatorOptions struct {
 	// The maximum number of conformance packs returned on each page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

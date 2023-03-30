@@ -35,8 +35,8 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request contains invalid parameters for the ARN or tags. This exception also
-// occurs when you call a tagging API on a cancelled signing profile.
+// The request contains invalid parameters for the ARN or tags. This exception
+// also occurs when you call a tagging API on a cancelled signing profile.
 type BadRequestException struct {
 	Message *string
 
@@ -234,7 +234,7 @@ func (e *ThrottlingException) ErrorCode() string {
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The allowed number of job-signing requests has been exceeded. This error
-// supersedes the error ThrottlingException.
+// supersedes the error ThrottlingException .
 type TooManyRequestsException struct {
 	Message *string
 

@@ -30,8 +30,8 @@ func (c *Client) ListDiscoverers(ctx context.Context, params *ListDiscoverersInp
 
 type ListDiscoverersInput struct {
 
-	// Specifying this limits the results to only those discoverer IDs that start with
-	// the specified prefix.
+	// Specifying this limits the results to only those discoverer IDs that start
+	// with the specified prefix.
 	DiscovererIdPrefix *string
 
 	Limit int32
@@ -136,8 +136,8 @@ var _ ListDiscoverersAPIClient = (*Client)(nil)
 type ListDiscoverersPaginatorOptions struct {
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

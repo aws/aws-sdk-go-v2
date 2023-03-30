@@ -37,15 +37,14 @@ type PutGeofenceInput struct {
 	// This member is required.
 	CollectionName *string
 
-	// An identifier for the geofence. For example, ExampleGeofence-1.
+	// An identifier for the geofence. For example, ExampleGeofence-1 .
 	//
 	// This member is required.
 	GeofenceId *string
 
 	// Contains the details to specify the position of the geofence. Can be either a
 	// polygon or a circle. Including both will return a validation error. Each
-	// geofence polygon
-	// (https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html)
+	// geofence polygon (https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html)
 	// can have a maximum of 1,000 vertices.
 	//
 	// This member is required.
@@ -56,9 +55,8 @@ type PutGeofenceInput struct {
 
 type PutGeofenceOutput struct {
 
-	// The timestamp for when the geofence was created in ISO 8601
-	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp for when the geofence was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format: YYYY-MM-DDThh:mm:ss.sssZ
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -68,9 +66,8 @@ type PutGeofenceOutput struct {
 	// This member is required.
 	GeofenceId *string
 
-	// The timestamp for when the geofence was last updated in ISO 8601
-	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp for when the geofence was last updated in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format: YYYY-MM-DDThh:mm:ss.sssZ
 	//
 	// This member is required.
 	UpdateTime *time.Time

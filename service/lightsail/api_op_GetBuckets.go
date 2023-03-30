@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about one or more Amazon Lightsail buckets. The information
-// returned includes the synchronization status of the Amazon Simple Storage
-// Service (Amazon S3) account-level block public access feature for your Lightsail
-// buckets. For more information about buckets, see Buckets in Amazon Lightsail
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/buckets-in-amazon-lightsail)
+// Returns information about one or more Amazon Lightsail buckets. The
+// information returned includes the synchronization status of the Amazon Simple
+// Storage Service (Amazon S3) account-level block public access feature for your
+// Lightsail buckets. For more information about buckets, see Buckets in Amazon
+// Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/buckets-in-amazon-lightsail)
 // in the Amazon Lightsail Developer Guide.
 func (c *Client) GetBuckets(ctx context.Context, params *GetBucketsInput, optFns ...func(*Options)) (*GetBucketsOutput, error) {
 	if params == nil {
@@ -39,9 +39,8 @@ type GetBucketsInput struct {
 	// the request is made.
 	BucketName *string
 
-	// A Boolean value that indicates whether to include Lightsail instances that were
-	// given access to the bucket using the SetResourceAccessForBucket
-	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html)
+	// A Boolean value that indicates whether to include Lightsail instances that
+	// were given access to the bucket using the SetResourceAccessForBucket (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html)
 	// action.
 	IncludeConnectedResources *bool
 
@@ -59,17 +58,17 @@ type GetBucketsOutput struct {
 	// An object that describes the synchronization status of the Amazon S3
 	// account-level block public access feature for your Lightsail buckets. For more
 	// information about this feature and how it affects Lightsail buckets, see Block
-	// public access for buckets in Amazon Lightsail
-	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-block-public-access-for-buckets).
+	// public access for buckets in Amazon Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-block-public-access-for-buckets)
+	// .
 	AccountLevelBpaSync *types.AccountLevelBpaSync
 
 	// An array of objects that describe buckets.
 	Buckets []types.Bucket
 
-	// The token to advance to the next page of results from your request. A next page
-	// token is not returned if there are no more results to display. To get the next
-	// page of results, perform another GetBuckets request and specify the next page
-	// token using the pageToken parameter.
+	// The token to advance to the next page of results from your request. A next
+	// page token is not returned if there are no more results to display. To get the
+	// next page of results, perform another GetBuckets request and specify the next
+	// page token using the pageToken  parameter.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

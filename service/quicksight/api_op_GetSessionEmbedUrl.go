@@ -11,23 +11,18 @@ import (
 )
 
 // Generates a session URL and authorization code that you can use to embed the
-// Amazon Amazon QuickSight console in your web server code. Use GetSessionEmbedUrl
-// where you want to provide an authoring portal that allows users to create data
-// sources, datasets, analyses, and dashboards. The users who access an embedded
-// Amazon QuickSight console need belong to the author or admin security cohort. If
-// you want to restrict permissions to some of these features, add a custom
-// permissions profile to the user with the UpdateUser
-// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html)
-// API operation. Use RegisterUser
-// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_RegisterUser.html)
+// Amazon Amazon QuickSight console in your web server code. Use
+// GetSessionEmbedUrlwhere you want to provide an authoring portal that allows
+// users to create data sources, datasets, analyses, and dashboards. The users who
+// access an embedded Amazon QuickSight console need belong to the author or admin
+// security cohort. If you want to restrict permissions to some of these features,
+// add a custom permissions profile to the user with the UpdateUser (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html)
+// API operation. Use RegisterUser (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_RegisterUser.html)
 // API operation to add a new user with a custom permission profile attached. For
 // more information, see the following sections in the Amazon QuickSight User
 // Guide:
-// - Embedding Analytics
-// (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html)
-// -
-// Customizing Access to the Amazon QuickSight Console
-// (https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html)
+//   - Embedding Analytics (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html)
+//   - Customizing Access to the Amazon QuickSight Console (https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html)
 func (c *Client) GetSessionEmbedUrl(ctx context.Context, params *GetSessionEmbedUrlInput, optFns ...func(*Options)) (*GetSessionEmbedUrlOutput, error) {
 	if params == nil {
 		params = &GetSessionEmbedUrlInput{}
@@ -53,34 +48,27 @@ type GetSessionEmbedUrlInput struct {
 
 	// The URL you use to access the embedded session. The entry point URL is
 	// constrained to the following paths:
-	// - /start
-	// - /start/analyses
-	// -
-	// /start/dashboards
-	// - /start/favorites
-	// - /dashboards/DashboardId  - where
-	// DashboardId is the actual ID key from the Amazon QuickSight console URL of the
-	// dashboard
-	// - /analyses/AnalysisId  - where AnalysisId is the actual ID key from
-	// the Amazon QuickSight console URL of the analysis
+	//     - /start
+	//     - /start/analyses
+	//     - /start/dashboards
+	//     - /start/favorites
+	//     - /dashboards/DashboardId - where DashboardId is the actual ID key from the Amazon QuickSight console URL of the dashboard
+	//     - /analyses/AnalysisId - where AnalysisId is the actual ID key from the Amazon QuickSight console URL of the analysis
 	EntryPoint *string
 
 	// How many minutes the session is valid. The session lifetime must be 15-600
 	// minutes.
 	SessionLifetimeInMinutes *int64
 
-	// The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT
-	// identity type. You can use this for any type of Amazon QuickSight users in your
-	// account (readers, authors, or admins). They need to be authenticated as one of
-	// the following:
-	// - Active Directory (AD) users or group members
-	// - Invited
-	// nonfederated users
-	// - IAM users and IAM role-based sessions authenticated through
-	// Federated Single Sign-On using SAML, OpenID Connect, or IAM federation
+	// The Amazon QuickSight user's Amazon Resource Name (ARN), for use with
+	// QUICKSIGHTidentity type. You can use this for any type of Amazon QuickSight
+	// users in your account (readers, authors, or admins). They need to be
+	// authenticated as one of the following:
+	//     - Active Directory (AD) users or group members
+	//     - Invited nonfederated users
+	//     - IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation
 	//
-	// Omit
-	// this parameter for users in the third group, IAM users and IAM role-based
+	// Omit this parameter for users in the third group, IAM users and IAM role-based
 	// sessions.
 	UserArn *string
 
@@ -91,8 +79,8 @@ type GetSessionEmbedUrlOutput struct {
 
 	// A single-use URL that you can put into your server-side web page to embed your
 	// Amazon QuickSight session. This URL is valid for 5 minutes. The API operation
-	// provides the URL with an auth_code value that enables one (and only one) sign-on
-	// to a user session that is valid for 10 hours.
+	// provides the URL with an auth_code value that enables one (and only one)
+	// sign-on to a user session that is valid for 10 hours.
 	EmbedUrl *string
 
 	// The Amazon Web Services request ID for this operation.

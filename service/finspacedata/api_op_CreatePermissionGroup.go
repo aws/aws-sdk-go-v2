@@ -36,22 +36,13 @@ type CreatePermissionGroupInput struct {
 	// permission ManageUsersAndGroups allows users to grant themselves or others
 	// access to any functionality in their FinSpace environment's application. It
 	// should only be granted to trusted users.
-	// - CreateDataset – Group members can
-	// create new datasets.
-	// - ManageClusters – Group members can manage Apache Spark
-	// clusters from FinSpace notebooks.
-	// - ManageUsersAndGroups – Group members can
-	// manage users and permission groups. This is a privileged permission that allows
-	// users to grant themselves or others access to any functionality in the
-	// application. It should only be granted to trusted users.
-	// - ManageAttributeSets –
-	// Group members can manage attribute sets.
-	// - ViewAuditData – Group members can
-	// view audit data.
-	// - AccessNotebooks – Group members will have access to FinSpace
-	// notebooks.
-	// - GetTemporaryCredentials – Group members can get temporary API
-	// credentials.
+	//     - CreateDataset – Group members can create new datasets.
+	//     - ManageClusters – Group members can manage Apache Spark clusters from FinSpace notebooks.
+	//     - ManageUsersAndGroups – Group members can manage users and permission groups. This is a privileged permission that allows users to grant themselves or others access to any functionality in the application. It should only be granted to trusted users.
+	//     - ManageAttributeSets – Group members can manage attribute sets.
+	//     - ViewAuditData – Group members can view audit data.
+	//     - AccessNotebooks – Group members will have access to FinSpace notebooks.
+	//     - GetTemporaryCredentials – Group members can get temporary API credentials.
 	//
 	// This member is required.
 	ApplicationPermissions []types.ApplicationPermission

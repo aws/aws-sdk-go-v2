@@ -35,15 +35,15 @@ type UpdateSlotTypeInput struct {
 	// This member is required.
 	BotId *string
 
-	// The version of the bot that contains the slot type. Must be DRAFT.
+	// The version of the bot that contains the slot type. Must be DRAFT .
 	//
 	// This member is required.
 	BotVersion *string
 
 	// The identifier of the language and locale that contains the slot type. The
 	// string must match one of the supported locales. For more information, see
-	// Supported languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	//
 	// This member is required.
 	LocaleId *string
@@ -70,8 +70,8 @@ type UpdateSlotTypeInput struct {
 	// The new built-in slot type that should be used as the parent of this slot type.
 	ParentSlotTypeSignature *string
 
-	// A new list of values and their optional synonyms that define the values that the
-	// slot type can take.
+	// A new list of values and their optional synonyms that define the values that
+	// the slot type can take.
 	SlotTypeValues []types.SlotTypeValue
 
 	// The strategy that Amazon Lex should use when deciding on a value from the list
@@ -86,7 +86,7 @@ type UpdateSlotTypeOutput struct {
 	// The identifier of the bot that contains the slot type.
 	BotId *string
 
-	// The version of the bot that contains the slot type. This is always DRAFT.
+	// The version of the bot that contains the slot type. This is always DRAFT .
 	BotVersion *string
 
 	// Specifications for a composite slot type.
@@ -107,8 +107,8 @@ type UpdateSlotTypeOutput struct {
 	// The language and locale of the updated slot type.
 	LocaleId *string
 
-	// The updated signature of the built-in slot type that is the parent of this slot
-	// type.
+	// The updated signature of the built-in slot type that is the parent of this
+	// slot type.
 	ParentSlotTypeSignature *string
 
 	// The unique identifier of the updated slot type.

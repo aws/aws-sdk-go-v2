@@ -34,7 +34,7 @@ func (c *Client) ListRecommendations(ctx context.Context, params *ListRecommenda
 type ListRecommendationsInput struct {
 
 	// Filters applied when retrieving recommendations. Can eiter be an individual
-	// filter, or combinations of STATUS and IMPACT or STATUS and TYPE
+	// filter, or combinations of STATUS  and IMPACT  or STATUS  and TYPE
 	Filter map[string]string
 
 	// A token returned from a previous call to ListRecommendations to indicate the
@@ -57,8 +57,9 @@ type ListRecommendationsOutput struct {
 
 	// A string token indicating that there might be additional recommendations
 	// available to be listed. Use the token provided in the
-	// ListRecommendationsResponse to use in the subsequent call to ListRecommendations
-	// with the same parameters to retrieve the next page of recommendations.
+	// ListRecommendationsResponse to use in the subsequent call to
+	// ListRecommendationswith the same parameters to retrieve the next page of
+	// recommendations.
 	NextToken *string
 
 	// The recommendations applicable to your account.
@@ -130,8 +131,8 @@ func (c *Client) addOperationListRecommendationsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListRecommendationsAPIClient is a client that implements the ListRecommendations
-// operation.
+// ListRecommendationsAPIClient is a client that implements the
+// ListRecommendations operation.
 type ListRecommendationsAPIClient interface {
 	ListRecommendations(context.Context, *ListRecommendationsInput, ...func(*Options)) (*ListRecommendationsOutput, error)
 }
@@ -148,8 +149,8 @@ type ListRecommendationsPaginatorOptions struct {
 	// more than 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

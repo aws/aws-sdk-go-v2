@@ -41,7 +41,7 @@ type GetDelegationsInput struct {
 
 type GetDelegationsOutput struct {
 
-	// The list of delegations that the GetDelegations API returned.
+	// The list of delegations that the GetDelegations  API returned.
 	Delegations []types.DelegationMetadata
 
 	// The pagination token that's used to fetch the next set of results.
@@ -126,8 +126,8 @@ type GetDelegationsPaginatorOptions struct {
 	// Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

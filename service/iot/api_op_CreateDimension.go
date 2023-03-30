@@ -16,8 +16,7 @@ import (
 // security profile for IoT Device Defender. For example, using a TOPIC_FILTER
 // dimension, you can narrow down the scope of the metric only to MQTT topics whose
 // name match the pattern specified in the dimension. Requires permission to access
-// the CreateDimension
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// the CreateDimension (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateDimension(ctx context.Context, params *CreateDimensionInput, optFns ...func(*Options)) (*CreateDimensionOutput, error) {
 	if params == nil {
@@ -44,8 +43,8 @@ type CreateDimensionInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// A unique identifier for the dimension. Choose something that describes the type
-	// and value to make it easy to remember what it does.
+	// A unique identifier for the dimension. Choose something that describes the
+	// type and value to make it easy to remember what it does.
 	//
 	// This member is required.
 	Name *string

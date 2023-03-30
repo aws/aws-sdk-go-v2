@@ -68,8 +68,8 @@ type GetMergeConflictsInput struct {
 	// The maximum number of files to include in the output.
 	MaxConflictFiles *int32
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
+	// An enumeration token that, when provided in a request, returns the next batch
+	// of the results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -77,8 +77,8 @@ type GetMergeConflictsInput struct {
 
 type GetMergeConflictsOutput struct {
 
-	// A list of metadata for any conflicting files. If the specified merge strategy is
-	// FAST_FORWARD_MERGE, this list is always empty.
+	// A list of metadata for any conflicting files. If the specified merge strategy
+	// is FAST_FORWARD_MERGE, this list is always empty.
 	//
 	// This member is required.
 	ConflictMetadataList []types.ConflictMetadata
@@ -185,13 +185,14 @@ type GetMergeConflictsAPIClient interface {
 
 var _ GetMergeConflictsAPIClient = (*Client)(nil)
 
-// GetMergeConflictsPaginatorOptions is the paginator options for GetMergeConflicts
+// GetMergeConflictsPaginatorOptions is the paginator options for
+// GetMergeConflicts
 type GetMergeConflictsPaginatorOptions struct {
 	// The maximum number of files to include in the output.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

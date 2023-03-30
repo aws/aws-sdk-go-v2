@@ -17,8 +17,7 @@ import (
 // path also determines the constraints that are put on a product. A path is
 // dependent on a specific product, porfolio, and principal. When provisioning a
 // product that's been added to a portfolio, you must grant your user, group, or
-// role access to the portfolio. For more information, see Granting users access
-// (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/catalogs_portfolios_users.html)
+// role access to the portfolio. For more information, see Granting users access (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/catalogs_portfolios_users.html)
 // in the Service Catalog User Guide.
 func (c *Client) ListLaunchPaths(ctx context.Context, params *ListLaunchPathsInput, optFns ...func(*Options)) (*ListLaunchPathsOutput, error) {
 	if params == nil {
@@ -43,9 +42,9 @@ type ListLaunchPathsInput struct {
 	ProductId *string
 
 	// The language code.
-	// - en - English (default)
-	// - jp - Japanese
-	// - zh - Chinese
+	//     - en - English (default)
+	//     - jp - Japanese
+	//     - zh - Chinese
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.
@@ -149,8 +148,8 @@ type ListLaunchPathsPaginatorOptions struct {
 	// The maximum number of items to return with this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

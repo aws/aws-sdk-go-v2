@@ -10,9 +10,9 @@ const (
 	ChangeActionDelete ChangeAction = "DELETE"
 )
 
-// Values returns all known values for ChangeAction. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChangeAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeAction) Values() []ChangeAction {
 	return []ChangeAction{
 		"INSERT",
@@ -337,9 +337,9 @@ const (
 	GeoMatchConstraintValueZw GeoMatchConstraintValue = "ZW"
 )
 
-// Values returns all known values for GeoMatchConstraintValue. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for GeoMatchConstraintValue. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GeoMatchConstraintValue) Values() []GeoMatchConstraintValue {
 	return []GeoMatchConstraintValue{
 		"AF",
@@ -692,9 +692,9 @@ const (
 	ParameterExceptionFieldTagKeys                          ParameterExceptionField = "TAG_KEYS"
 )
 
-// Values returns all known values for ParameterExceptionField. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ParameterExceptionField. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ParameterExceptionField) Values() []ParameterExceptionField {
 	return []ParameterExceptionField{
 		"CHANGE_ACTION",
@@ -728,9 +728,9 @@ const (
 	ParameterExceptionReasonInvalidTagKey      ParameterExceptionReason = "INVALID_TAG_KEY"
 )
 
-// Values returns all known values for ParameterExceptionReason. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ParameterExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ParameterExceptionReason) Values() []ParameterExceptionReason {
 	return []ParameterExceptionReason{
 		"INVALID_OPTION",
@@ -751,8 +751,8 @@ const (
 	PositionalConstraintContainsWord PositionalConstraint = "CONTAINS_WORD"
 )
 
-// Values returns all known values for PositionalConstraint. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PositionalConstraint. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PositionalConstraint) Values() []PositionalConstraint {
 	return []PositionalConstraint{
@@ -816,9 +816,9 @@ const (
 	ResourceTypeApiGateway              ResourceType = "API_GATEWAY"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"APPLICATION_LOAD_BALANCER",
@@ -880,8 +880,8 @@ const (
 	WafOverrideActionTypeCount WafOverrideActionType = "COUNT"
 )
 
-// Values returns all known values for WafOverrideActionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for WafOverrideActionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (WafOverrideActionType) Values() []WafOverrideActionType {
 	return []WafOverrideActionType{
@@ -899,9 +899,9 @@ const (
 	WafRuleTypeGroup     WafRuleType = "GROUP"
 )
 
-// Values returns all known values for WafRuleType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for WafRuleType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (WafRuleType) Values() []WafRuleType {
 	return []WafRuleType{
 		"REGULAR",

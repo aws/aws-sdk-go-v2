@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list that describes the available WorkSpace bundles. You can filter
-// the results using either bundle ID or owner, but not both.
+// Retrieves a list that describes the available WorkSpace bundles. You can
+// filter the results using either bundle ID or owner, but not both.
 func (c *Client) DescribeWorkspaceBundles(ctx context.Context, params *DescribeWorkspaceBundlesInput, optFns ...func(*Options)) (*DescribeWorkspaceBundlesOutput, error) {
 	if params == nil {
 		params = &DescribeWorkspaceBundlesInput{}
@@ -31,17 +31,17 @@ func (c *Client) DescribeWorkspaceBundles(ctx context.Context, params *DescribeW
 
 type DescribeWorkspaceBundlesInput struct {
 
-	// The identifiers of the bundles. You cannot combine this parameter with any other
-	// filter.
+	// The identifiers of the bundles. You cannot combine this parameter with any
+	// other filter.
 	BundleIds []string
 
-	// The token for the next set of results. (You received this token from a previous
-	// call.)
+	// The token for the next set of results. (You received this token from a
+	// previous call.)
 	NextToken *string
 
 	// The owner of the bundles. You cannot combine this parameter with any other
-	// filter. To describe the bundles provided by Amazon Web Services, specify AMAZON.
-	// To describe the bundles that belong to your account, don't specify a value.
+	// filter. To describe the bundles provided by Amazon Web Services, specify AMAZON
+	// . To describe the bundles that belong to your account, don't specify a value.
 	Owner *string
 
 	noSmithyDocumentSerde
@@ -134,8 +134,8 @@ var _ DescribeWorkspaceBundlesAPIClient = (*Client)(nil)
 // DescribeWorkspaceBundlesPaginatorOptions is the paginator options for
 // DescribeWorkspaceBundles
 type DescribeWorkspaceBundlesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

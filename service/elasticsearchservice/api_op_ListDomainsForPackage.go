@@ -28,7 +28,7 @@ func (c *Client) ListDomainsForPackage(ctx context.Context, params *ListDomainsF
 	return out, nil
 }
 
-// Container for request parameters to ListDomainsForPackage operation.
+// Container for request parameters to ListDomainsForPackage  operation.
 type ListDomainsForPackageInput struct {
 
 	// The package for which to list domains.
@@ -46,10 +46,10 @@ type ListDomainsForPackageInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response parameters to ListDomainsForPackage operation.
+// Container for response parameters to ListDomainsForPackage  operation.
 type ListDomainsForPackageOutput struct {
 
-	// List of DomainPackageDetails objects.
+	// List of DomainPackageDetails  objects.
 	DomainPackageDetailsList []types.DomainPackageDetails
 
 	NextToken *string
@@ -137,8 +137,8 @@ type ListDomainsForPackagePaginatorOptions struct {
 	// Limits results to a maximum number of domains.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

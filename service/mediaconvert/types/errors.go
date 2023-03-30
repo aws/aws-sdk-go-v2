@@ -34,8 +34,8 @@ func (e *BadRequestException) ErrorCode() string {
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The service couldn't complete your request because there is a conflict with the
-// current state of the resource.
+// The service couldn't complete your request because there is a conflict with
+// the current state of the resource.
 type ConflictException struct {
 	Message *string
 
@@ -139,8 +139,8 @@ func (e *NotFoundException) ErrorCode() string {
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Too many requests have been sent in too short of a time. The service limits the
-// rate at which it will accept requests.
+// Too many requests have been sent in too short of a time. The service limits
+// the rate at which it will accept requests.
 type TooManyRequestsException struct {
 	Message *string
 

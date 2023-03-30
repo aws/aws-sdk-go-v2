@@ -12,9 +12,9 @@ const (
 	BackupStatusDeleting   BackupStatus = "DELETING"
 )
 
-// Values returns all known values for BackupStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BackupStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (BackupStatus) Values() []BackupStatus {
 	return []BackupStatus{
 		"IN_PROGRESS",
@@ -69,8 +69,8 @@ const (
 	NodeAssociationStatusInProgress NodeAssociationStatus = "IN_PROGRESS"
 )
 
-// Values returns all known values for NodeAssociationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for NodeAssociationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (NodeAssociationStatus) Values() []NodeAssociationStatus {
 	return []NodeAssociationStatus{
@@ -99,9 +99,9 @@ const (
 	ServerStatusTerminated       ServerStatus = "TERMINATED"
 )
 
-// Values returns all known values for ServerStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ServerStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ServerStatus) Values() []ServerStatus {
 	return []ServerStatus{
 		"BACKING_UP",

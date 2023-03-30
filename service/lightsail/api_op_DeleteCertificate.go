@@ -13,8 +13,8 @@ import (
 
 // Deletes an SSL/TLS certificate for your Amazon Lightsail content delivery
 // network (CDN) distribution. Certificates that are currently attached to a
-// distribution cannot be deleted. Use the DetachCertificateFromDistribution action
-// to detach a certificate from a distribution.
+// distribution cannot be deleted. Use the DetachCertificateFromDistribution
+// action to detach a certificate from a distribution.
 func (c *Client) DeleteCertificate(ctx context.Context, params *DeleteCertificateInput, optFns ...func(*Options)) (*DeleteCertificateOutput, error) {
 	if params == nil {
 		params = &DeleteCertificateInput{}

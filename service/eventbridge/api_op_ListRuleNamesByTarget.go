@@ -49,8 +49,8 @@ type ListRuleNamesByTargetInput struct {
 
 type ListRuleNamesByTargetOutput struct {
 
-	// Indicates whether there are additional results to retrieve. If there are no more
-	// results, the value is null.
+	// Indicates whether there are additional results to retrieve. If there are no
+	// more results, the value is null.
 	NextToken *string
 
 	// The names of the rules that can invoke the given target.

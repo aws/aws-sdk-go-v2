@@ -46,8 +46,8 @@ const (
 	AggregatedUtterancesSortAttributeMissedCount AggregatedUtterancesSortAttribute = "MissedCount"
 )
 
-// Values returns all known values for AggregatedUtterancesSortAttribute. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for AggregatedUtterancesSortAttribute. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (AggregatedUtterancesSortAttribute) Values() []AggregatedUtterancesSortAttribute {
@@ -83,9 +83,9 @@ const (
 	AudioRecognitionStrategyUseSlotValuesAsCustomVocabulary AudioRecognitionStrategy = "UseSlotValuesAsCustomVocabulary"
 )
 
-// Values returns all known values for AudioRecognitionStrategy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AudioRecognitionStrategy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AudioRecognitionStrategy) Values() []AudioRecognitionStrategy {
 	return []AudioRecognitionStrategy{
 		"UseSlotValuesAsCustomVocabulary",
@@ -176,9 +176,9 @@ const (
 	BotLocaleFilterOperatorEquals   BotLocaleFilterOperator = "EQ"
 )
 
-// Values returns all known values for BotLocaleFilterOperator. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BotLocaleFilterOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BotLocaleFilterOperator) Values() []BotLocaleFilterOperator {
 	return []BotLocaleFilterOperator{
 		"CO",
@@ -249,9 +249,9 @@ const (
 	BotRecommendationStatusStopped     BotRecommendationStatus = "Stopped"
 )
 
-// Values returns all known values for BotRecommendationStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BotRecommendationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BotRecommendationStatus) Values() []BotRecommendationStatus {
 	return []BotRecommendationStatus{
 		"Processing",
@@ -296,9 +296,9 @@ const (
 	BotStatusUpdating   BotStatus = "Updating"
 )
 
-// Values returns all known values for BotStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for BotStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (BotStatus) Values() []BotStatus {
 	return []BotStatus{
 		"Creating",
@@ -337,9 +337,9 @@ const (
 	BotVersionSortAttributeBotVersion BotVersionSortAttribute = "BotVersion"
 )
 
-// Values returns all known values for BotVersionSortAttribute. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BotVersionSortAttribute. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BotVersionSortAttribute) Values() []BotVersionSortAttribute {
 	return []BotVersionSortAttribute{
 		"BotVersion",
@@ -369,9 +369,10 @@ const (
 	BuiltInSlotTypeSortAttributeSlotTypeSignature BuiltInSlotTypeSortAttribute = "SlotTypeSignature"
 )
 
-// Values returns all known values for BuiltInSlotTypeSortAttribute. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BuiltInSlotTypeSortAttribute. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (BuiltInSlotTypeSortAttribute) Values() []BuiltInSlotTypeSortAttribute {
 	return []BuiltInSlotTypeSortAttribute{
 		"SlotTypeSignature",
@@ -462,9 +463,9 @@ const (
 	ErrorCodeInternalServerFailure ErrorCode = "INTERNAL_SERVER_FAILURE"
 )
 
-// Values returns all known values for ErrorCode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"DUPLICATE_INPUT",
@@ -498,8 +499,8 @@ const (
 	ExportFilterOperatorEquals   ExportFilterOperator = "EQ"
 )
 
-// Values returns all known values for ExportFilterOperator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ExportFilterOperator. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ExportFilterOperator) Values() []ExportFilterOperator {
 	return []ExportFilterOperator{
@@ -534,9 +535,9 @@ const (
 	ExportStatusDeleting   ExportStatus = "Deleting"
 )
 
-// Values returns all known values for ExportStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ExportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ExportStatus) Values() []ExportStatus {
 	return []ExportStatus{
 		"InProgress",
@@ -588,8 +589,8 @@ const (
 	ImportFilterOperatorEquals   ImportFilterOperator = "EQ"
 )
 
-// Values returns all known values for ImportFilterOperator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ImportFilterOperator. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ImportFilterOperator) Values() []ImportFilterOperator {
 	return []ImportFilterOperator{
@@ -644,9 +645,9 @@ const (
 	ImportStatusDeleting   ImportStatus = "Deleting"
 )
 
-// Values returns all known values for ImportStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ImportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ImportStatus) Values() []ImportStatus {
 	return []ImportStatus{
 		"InProgress",
@@ -680,8 +681,8 @@ const (
 	IntentFilterOperatorEquals   IntentFilterOperator = "EQ"
 )
 
-// Values returns all known values for IntentFilterOperator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for IntentFilterOperator. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (IntentFilterOperator) Values() []IntentFilterOperator {
 	return []IntentFilterOperator{
@@ -736,9 +737,9 @@ const (
 	MessageSelectionStrategyOrdered MessageSelectionStrategy = "Ordered"
 )
 
-// Values returns all known values for MessageSelectionStrategy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MessageSelectionStrategy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MessageSelectionStrategy) Values() []MessageSelectionStrategy {
 	return []MessageSelectionStrategy{
 		"Random",
@@ -798,9 +799,9 @@ const (
 	SearchOrderDescending SearchOrder = "Descending"
 )
 
-// Values returns all known values for SearchOrder. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SearchOrder. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (SearchOrder) Values() []SearchOrder {
 	return []SearchOrder{
 		"Ascending",
@@ -868,9 +869,9 @@ const (
 	SlotShapeList   SlotShape = "List"
 )
 
-// Values returns all known values for SlotShape. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SlotShape. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SlotShape) Values() []SlotShape {
 	return []SlotShape{
 		"Scalar",
@@ -962,8 +963,8 @@ const (
 	SlotTypeSortAttributeLastUpdatedDateTime SlotTypeSortAttribute = "LastUpdatedDateTime"
 )
 
-// Values returns all known values for SlotTypeSortAttribute. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SlotTypeSortAttribute. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SlotTypeSortAttribute) Values() []SlotTypeSortAttribute {
 	return []SlotTypeSortAttribute{
@@ -981,9 +982,10 @@ const (
 	SlotValueResolutionStrategyConcatenation SlotValueResolutionStrategy = "Concatenation"
 )
 
-// Values returns all known values for SlotValueResolutionStrategy. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SlotValueResolutionStrategy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (SlotValueResolutionStrategy) Values() []SlotValueResolutionStrategy {
 	return []SlotValueResolutionStrategy{
 		"OriginalValue",
@@ -1000,9 +1002,9 @@ const (
 	SortOrderDescending SortOrder = "Descending"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"Ascending",
@@ -1054,9 +1056,9 @@ const (
 	VoiceEngineNeural   VoiceEngine = "neural"
 )
 
-// Values returns all known values for VoiceEngine. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for VoiceEngine. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (VoiceEngine) Values() []VoiceEngine {
 	return []VoiceEngine{
 		"standard",

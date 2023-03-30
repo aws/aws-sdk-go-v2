@@ -35,8 +35,7 @@ type CreateTaskTemplateInput struct {
 	// This member is required.
 	Fields []types.TaskTemplateField
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -50,8 +49,8 @@ type CreateTaskTemplateInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// .
 	ClientToken *string
 
 	// Constraints that are applicable to the fields listed.
@@ -68,9 +67,9 @@ type CreateTaskTemplateInput struct {
 	// The description of the task template.
 	Description *string
 
-	// Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can only
-	// be created from ACTIVE templates. If a template is marked as INACTIVE, then a
-	// task that refers to this template cannot be created.
+	// Marks a template as ACTIVE  or INACTIVE for a task to refer to it. Tasks can
+	// only be created from ACTIVE  templates. If a template is marked as INACTIVE,
+	// then a task that refers to this template cannot be created.
 	Status types.TaskTemplateStatus
 
 	noSmithyDocumentSerde

@@ -43,8 +43,8 @@ type DescribeJobExecutionInput struct {
 	// device. If not specified, the latest job execution is returned.
 	ExecutionNumber *int64
 
-	// Optional. When set to true, the response contains the job document. The default
-	// is false.
+	// Optional. When set to true, the response contains the job document. The
+	// default is false.
 	IncludeJobDocument *bool
 
 	noSmithyDocumentSerde

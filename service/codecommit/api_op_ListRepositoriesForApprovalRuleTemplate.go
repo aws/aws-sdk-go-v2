@@ -38,8 +38,8 @@ type ListRepositoriesForApprovalRuleTemplateInput struct {
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	MaxResults *int32
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
+	// An enumeration token that, when provided in a request, returns the next batch
+	// of the results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,12 +47,12 @@ type ListRepositoriesForApprovalRuleTemplateInput struct {
 
 type ListRepositoriesForApprovalRuleTemplateOutput struct {
 
-	// An enumeration token that allows the operation to batch the next results of the
-	// operation.
+	// An enumeration token that allows the operation to batch the next results of
+	// the operation.
 	NextToken *string
 
-	// A list of repository names that are associated with the specified approval rule
-	// template.
+	// A list of repository names that are associated with the specified approval
+	// rule template.
 	RepositoryNames []string
 
 	// Metadata pertaining to the operation's result.
@@ -124,22 +124,22 @@ func (c *Client) addOperationListRepositoriesForApprovalRuleTemplateMiddlewares(
 	return nil
 }
 
-// ListRepositoriesForApprovalRuleTemplateAPIClient is a client that implements the
-// ListRepositoriesForApprovalRuleTemplate operation.
+// ListRepositoriesForApprovalRuleTemplateAPIClient is a client that implements
+// the ListRepositoriesForApprovalRuleTemplate operation.
 type ListRepositoriesForApprovalRuleTemplateAPIClient interface {
 	ListRepositoriesForApprovalRuleTemplate(context.Context, *ListRepositoriesForApprovalRuleTemplateInput, ...func(*Options)) (*ListRepositoriesForApprovalRuleTemplateOutput, error)
 }
 
 var _ ListRepositoriesForApprovalRuleTemplateAPIClient = (*Client)(nil)
 
-// ListRepositoriesForApprovalRuleTemplatePaginatorOptions is the paginator options
-// for ListRepositoriesForApprovalRuleTemplate
+// ListRepositoriesForApprovalRuleTemplatePaginatorOptions is the paginator
+// options for ListRepositoriesForApprovalRuleTemplate
 type ListRepositoriesForApprovalRuleTemplatePaginatorOptions struct {
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

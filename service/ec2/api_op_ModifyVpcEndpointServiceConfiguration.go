@@ -54,8 +54,8 @@ type ModifyVpcEndpointServiceConfigurationInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// (Interface endpoint configuration) The private DNS name to assign to the
@@ -70,8 +70,8 @@ type ModifyVpcEndpointServiceConfigurationInput struct {
 	// service configuration.
 	RemoveNetworkLoadBalancerArns []string
 
-	// (Interface endpoint configuration) Removes the private DNS name of the endpoint
-	// service.
+	// (Interface endpoint configuration) Removes the private DNS name of the
+	// endpoint service.
 	RemovePrivateDnsName *bool
 
 	// The IP address types to remove from your service configuration.
@@ -82,7 +82,7 @@ type ModifyVpcEndpointServiceConfigurationInput struct {
 
 type ModifyVpcEndpointServiceConfigurationOutput struct {
 
-	// Returns true if the request succeeds; otherwise, it returns an error.
+	// Returns true  if the request succeeds; otherwise, it returns an error.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

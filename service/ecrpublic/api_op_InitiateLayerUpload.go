@@ -15,7 +15,7 @@ import (
 // hasn't already been uploaded. Whether an image layer uploads is determined by
 // the BatchCheckLayerAvailability API action. This operation is used by the Amazon
 // ECR proxy and is not generally used by customers for pulling and pushing images.
-// In most cases, you should use the docker CLI to pull, tag, and push images.
+// In most cases, you should use the docker  CLI to pull, tag, and push images.
 func (c *Client) InitiateLayerUpload(ctx context.Context, params *InitiateLayerUploadInput, optFns ...func(*Options)) (*InitiateLayerUploadOutput, error) {
 	if params == nil {
 		params = &InitiateLayerUploadInput{}
@@ -52,7 +52,7 @@ type InitiateLayerUploadOutput struct {
 	PartSize *int64
 
 	// The upload ID for the layer upload. This parameter is passed to further
-	// UploadLayerPart and CompleteLayerUpload operations.
+	// UploadLayerPart and CompleteLayerUpload  operations.
 	UploadId *string
 
 	// Metadata pertaining to the operation's result.

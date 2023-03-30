@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change. Adds
-// or updates user-defined contact information associated with the specified
+// This API is in preview release for Amazon Connect and is subject to change.
+// Adds or updates user-defined contact information associated with the specified
 // contact. At least one field to be updated must be present in the request. You
 // can add or update user-defined contact information for both ongoing and
 // completed contacts.
@@ -33,14 +33,13 @@ func (c *Client) UpdateContact(ctx context.Context, params *UpdateContactInput, 
 
 type UpdateContactInput struct {
 
-	// The identifier of the contact. This is the identifier of the contact associated
-	// with the first interaction with your contact center.
+	// The identifier of the contact. This is the identifier of the contact
+	// associated with the first interaction with your contact center.
 	//
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.

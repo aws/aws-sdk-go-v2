@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of PolicySummary objects.
+// Returns an array of PolicySummary  objects.
 func (c *Client) ListPolicies(ctx context.Context, params *ListPoliciesInput, optFns ...func(*Options)) (*ListPoliciesOutput, error) {
 	if params == nil {
 		params = &ListPoliciesInput{}
@@ -30,18 +30,18 @@ func (c *Client) ListPolicies(ctx context.Context, params *ListPoliciesInput, op
 
 type ListPoliciesInput struct {
 
-	// Specifies the number of PolicySummary objects that you want Firewall Manager to
-	// return for this request. If you have more PolicySummary objects than the number
-	// that you specify for MaxResults, the response includes a NextToken value that
-	// you can use to get another batch of PolicySummary objects.
+	// Specifies the number of PolicySummary objects that you want Firewall Manager
+	// to return for this request. If you have more PolicySummary objects than the
+	// number that you specify for MaxResults , the response includes a NextToken
+	// value that you can use to get another batch of PolicySummary  objects.
 	MaxResults *int32
 
-	// If you specify a value for MaxResults and you have more PolicySummary objects
-	// than the number that you specify for MaxResults, Firewall Manager returns a
+	// If you specify a value for MaxResults  and you have more PolicySummary objects
+	// than the number that you specify for MaxResults , Firewall Manager returns a
 	// NextToken value in the response that allows you to list another group of
 	// PolicySummary objects. For the second and subsequent ListPolicies requests,
 	// specify the value of NextToken from the previous response to get information
-	// about another batch of PolicySummary objects.
+	// about another batch of PolicySummary  objects.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,13 +49,14 @@ type ListPoliciesInput struct {
 
 type ListPoliciesOutput struct {
 
-	// If you have more PolicySummary objects than the number that you specified for
-	// MaxResults in the request, the response includes a NextToken value. To list more
-	// PolicySummary objects, submit another ListPolicies request, and specify the
-	// NextToken value from the response in the NextToken value in the next request.
+	// If you have more PolicySummary  objects than the number that you specified for
+	// MaxResults in the request, the response includes a NextToken value. To list
+	// more PolicySummary  objects, submit another ListPolicies request, and specify
+	// the NextToken  value from the response in the NextToken value in the next
+	// request.
 	NextToken *string
 
-	// An array of PolicySummary objects.
+	// An array of PolicySummary  objects.
 	PolicyList []types.PolicySummary
 
 	// Metadata pertaining to the operation's result.
@@ -133,14 +134,14 @@ var _ ListPoliciesAPIClient = (*Client)(nil)
 
 // ListPoliciesPaginatorOptions is the paginator options for ListPolicies
 type ListPoliciesPaginatorOptions struct {
-	// Specifies the number of PolicySummary objects that you want Firewall Manager to
-	// return for this request. If you have more PolicySummary objects than the number
-	// that you specify for MaxResults, the response includes a NextToken value that
-	// you can use to get another batch of PolicySummary objects.
+	// Specifies the number of PolicySummary objects that you want Firewall Manager
+	// to return for this request. If you have more PolicySummary objects than the
+	// number that you specify for MaxResults , the response includes a NextToken
+	// value that you can use to get another batch of PolicySummary  objects.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

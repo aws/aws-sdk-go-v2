@@ -12,12 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an asset model. This action can't be undone. You must delete all assets
-// created from an asset model before you can delete the model. Also, you can't
-// delete an asset model if a parent asset model exists that contains a property
-// formula expression that depends on the asset model that you want to delete. For
-// more information, see Deleting assets and models
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/delete-assets-and-models.html)
+// Deletes an asset model. This action can't be undone. You must delete all
+// assets created from an asset model before you can delete the model. Also, you
+// can't delete an asset model if a parent asset model exists that contains a
+// property formula expression that depends on the asset model that you want to
+// delete. For more information, see Deleting assets and models (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/delete-assets-and-models.html)
 // in the IoT SiteWise User Guide.
 func (c *Client) DeleteAssetModel(ctx context.Context, params *DeleteAssetModelInput, optFns ...func(*Options)) (*DeleteAssetModelOutput, error) {
 	if params == nil {
@@ -51,7 +50,7 @@ type DeleteAssetModelInput struct {
 
 type DeleteAssetModelOutput struct {
 
-	// The status of the asset model, which contains a state (DELETING after
+	// The status of the asset model, which contains a state ( DELETING after
 	// successfully calling this operation) and any error message.
 	//
 	// This member is required.

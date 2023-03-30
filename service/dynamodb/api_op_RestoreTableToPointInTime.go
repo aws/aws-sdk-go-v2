@@ -22,25 +22,19 @@ import (
 // to the state based on the selected date and time (day:hour:minute:second) to a
 // new table. Along with data, the following are also included on the new restored
 // table using point in time recovery:
-// - Global secondary indexes (GSIs)
-// - Local
-// secondary indexes (LSIs)
-// - Provisioned read and write capacity
-// - Encryption
-// settings All these settings come from the current settings of the source table
-// at the time of restore.
+//   - Global secondary indexes (GSIs)
+//   - Local secondary indexes (LSIs)
+//   - Provisioned read and write capacity
+//   - Encryption settings All these settings come from the current settings of the source table at the time of restore.
 //
-// You must manually set up the following on the restored
-// table:
-// - Auto scaling policies
-// - IAM policies
-// - Amazon CloudWatch metrics and
-// alarms
-// - Tags
-// - Stream settings
-// - Time to Live (TTL) settings
-// - Point in time
-// recovery settings
+// You must manually set up the following on the restored table:
+//   - Auto scaling policies
+//   - IAM policies
+//   - Amazon CloudWatch metrics and alarms
+//   - Tags
+//   - Stream settings
+//   - Time to Live (TTL) settings
+//   - Point in time recovery settings
 func (c *Client) RestoreTableToPointInTime(ctx context.Context, params *RestoreTableToPointInTimeInput, optFns ...func(*Options)) (*RestoreTableToPointInTimeOutput, error) {
 	if params == nil {
 		params = &RestoreTableToPointInTimeInput{}
@@ -85,8 +79,8 @@ type RestoreTableToPointInTimeInput struct {
 	// The new server-side encryption settings for the restored table.
 	SSESpecificationOverride *types.SSESpecification
 
-	// The DynamoDB table that will be restored. This value is an Amazon Resource Name
-	// (ARN).
+	// The DynamoDB table that will be restored. This value is an Amazon Resource
+	// Name (ARN).
 	SourceTableArn *string
 
 	// Name of the source table that is being restored.

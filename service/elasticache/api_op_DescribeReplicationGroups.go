@@ -35,30 +35,30 @@ func (c *Client) DescribeReplicationGroups(ctx context.Context, params *Describe
 	return out, nil
 }
 
-// Represents the input of a DescribeReplicationGroups operation.
+// Represents the input of a DescribeReplicationGroups  operation.
 type DescribeReplicationGroupsInput struct {
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a marker is included in the
+	// response so that the remaining results can be retrieved. Default: 100
+	// Constraints: minimum 20; maximum 100.
 	MaxRecords *int32
 
-	// The identifier for the replication group to be described. This parameter is not
-	// case sensitive. If you do not specify this parameter, information about all
+	// The identifier for the replication group to be described. This parameter is
+	// not case sensitive. If you do not specify this parameter, information about all
 	// replication groups is returned.
 	ReplicationGroupId *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a DescribeReplicationGroups operation.
+// Represents the output of a DescribeReplicationGroups  operation.
 type DescribeReplicationGroupsOutput struct {
 
 	// Provides an identifier to allow retrieval of paginated results.
@@ -145,14 +145,14 @@ var _ DescribeReplicationGroupsAPIClient = (*Client)(nil)
 // DescribeReplicationGroupsPaginatorOptions is the paginator options for
 // DescribeReplicationGroups
 type DescribeReplicationGroupsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a marker is included in the
+	// response so that the remaining results can be retrieved. Default: 100
+	// Constraints: minimum 20; maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -243,8 +243,8 @@ type ReplicationGroupAvailableWaiterOptions struct {
 	// Note that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ReplicationGroupAvailableWaiter will use default max delay of 120
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ReplicationGroupAvailableWaiter will use default max delay of 120
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration
@@ -271,7 +271,8 @@ type ReplicationGroupAvailableWaiter struct {
 	options ReplicationGroupAvailableWaiterOptions
 }
 
-// NewReplicationGroupAvailableWaiter constructs a ReplicationGroupAvailableWaiter.
+// NewReplicationGroupAvailableWaiter constructs a
+// ReplicationGroupAvailableWaiter.
 func NewReplicationGroupAvailableWaiter(client DescribeReplicationGroupsAPIClient, optFns ...func(*ReplicationGroupAvailableWaiterOptions)) *ReplicationGroupAvailableWaiter {
 	options := ReplicationGroupAvailableWaiterOptions{}
 	options.MinDelay = 15 * time.Second
@@ -295,10 +296,10 @@ func (w *ReplicationGroupAvailableWaiter) Wait(ctx context.Context, params *Desc
 	return err
 }
 
-// WaitForOutput calls the waiter function for ReplicationGroupAvailable waiter and
-// returns the output of the successful operation. The maxWaitDur is the maximum
-// wait duration the waiter will wait. The maxWaitDur is required and must be
-// greater than zero.
+// WaitForOutput calls the waiter function for ReplicationGroupAvailable waiter
+// and returns the output of the successful operation. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *ReplicationGroupAvailableWaiter) WaitForOutput(ctx context.Context, params *DescribeReplicationGroupsInput, maxWaitDur time.Duration, optFns ...func(*ReplicationGroupAvailableWaiterOptions)) (*DescribeReplicationGroupsOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
@@ -445,8 +446,8 @@ type ReplicationGroupDeletedWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ReplicationGroupDeletedWaiter will use default max delay of 120
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ReplicationGroupDeletedWaiter will use default max delay of 120
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration

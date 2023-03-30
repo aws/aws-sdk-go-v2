@@ -18,6 +18,7 @@ import (
 // Kinesis Analytics halts application execution and deletes the application,
 // including any application artifacts (such as in-application streams, reference
 // table, and application code). This operation requires permissions to perform the
+//
 // kinesisanalytics:DeleteApplication action.
 func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicationInput, optFns ...func(*Options)) (*DeleteApplicationOutput, error) {
 	if params == nil {
@@ -41,7 +42,7 @@ type DeleteApplicationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// You can use the DescribeApplication operation to get this value.
+	// You can use the DescribeApplication  operation to get this value.
 	//
 	// This member is required.
 	CreateTimestamp *time.Time

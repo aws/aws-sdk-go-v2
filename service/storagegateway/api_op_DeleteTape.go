@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified virtual tape. This operation is only supported in the tape
-// gateway type.
+// Deletes the specified virtual tape. This operation is only supported in the
+// tape gateway type.
 func (c *Client) DeleteTape(ctx context.Context, params *DeleteTapeInput, optFns ...func(*Options)) (*DeleteTapeOutput, error) {
 	if params == nil {
 		params = &DeleteTapeInput{}
@@ -44,8 +44,8 @@ type DeleteTapeInput struct {
 
 	// Set to TRUE to delete an archived tape that belongs to a custom pool with tape
 	// retention lock. Only archived tapes with tape retention lock set to governance
-	// can be deleted. Archived tapes with tape retention lock set to compliance can't
-	// be deleted.
+	// can be deleted. Archived tapes with tape retention lock set to compliance
+	// can't be deleted.
 	BypassGovernanceRetention bool
 
 	noSmithyDocumentSerde

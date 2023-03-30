@@ -31,20 +31,20 @@ func (c *Client) ListServiceActionsForProvisioningArtifact(ctx context.Context, 
 
 type ListServiceActionsForProvisioningArtifactInput struct {
 
-	// The product identifier. For example, prod-abcdzk7xy33qa.
+	// The product identifier. For example, prod-abcdzk7xy33qa .
 	//
 	// This member is required.
 	ProductId *string
 
-	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne .
 	//
 	// This member is required.
 	ProvisioningArtifactId *string
 
 	// The language code.
-	// - en - English (default)
-	// - jp - Japanese
-	// - zh - Chinese
+	//     - en - English (default)
+	//     - jp - Japanese
+	//     - zh - Chinese
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.
@@ -63,8 +63,8 @@ type ListServiceActionsForProvisioningArtifactOutput struct {
 	// additional results, this value is null.
 	NextPageToken *string
 
-	// An object containing information about the self-service actions associated with
-	// the provisioning artifact.
+	// An object containing information about the self-service actions associated
+	// with the provisioning artifact.
 	ServiceActionSummaries []types.ServiceActionSummary
 
 	// Metadata pertaining to the operation's result.
@@ -150,8 +150,8 @@ type ListServiceActionsForProvisioningArtifactPaginatorOptions struct {
 	// The maximum number of items to return with this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

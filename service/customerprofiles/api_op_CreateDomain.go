@@ -17,13 +17,10 @@ import (
 // create multiple domains, and each domain can have multiple third-party
 // integrations. Each Amazon Connect instance can be associated with only one
 // domain. Multiple Amazon Connect instances can be associated with one domain. Use
-// this API or UpdateDomain
-// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html)
-// to enable identity resolution
-// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html):
-// set Matching to true. To prevent cross-service impersonation when you call this
-// API, see Cross-service confused deputy prevention
-// (https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html)
+// this API or UpdateDomain (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html)
+// to enable identity resolution (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
+// : set Matching to true. To prevent cross-service impersonation when you call
+// this API, see Cross-service confused deputy prevention (https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html)
 // for sample policies that you should apply.
 func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, optFns ...func(*Options)) (*CreateDomainOutput, error) {
 	if params == nil {
@@ -63,14 +60,14 @@ type CreateDomainInput struct {
 	// before it is placed in permanent or semi-permanent storage.
 	DefaultEncryptionKey *string
 
-	// The process of matching duplicate profiles. If Matching = true, Amazon Connect
-	// Customer Profiles starts a weekly batch process called Identity Resolution Job.
-	// If you do not specify a date and time for Identity Resolution Job to run, by
-	// default it runs every Saturday at 12AM UTC to detect duplicate profiles in your
-	// domains. After the Identity Resolution Job completes, use the GetMatches
-	// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
-	// API to return and review the results. Or, if you have configured ExportingConfig
-	// in the MatchingRequest, you can download the results from S3.
+	// The process of matching duplicate profiles. If Matching  = true, Amazon
+	// Connect Customer Profiles starts a weekly batch process called Identity
+	// Resolution Job. If you do not specify a date and time for Identity Resolution
+	// Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate
+	// profiles in your domains. After the Identity Resolution Job completes, use the
+	// GetMatches (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
+	// API to return and review the results. Or, if you have configured
+	// ExportingConfig in the MatchingRequest , you can download the results from S3.
 	Matching *types.MatchingRequest
 
 	// The tags used to organize, track, or control access for this resource.
@@ -110,14 +107,14 @@ type CreateDomainOutput struct {
 	// before it is placed in permanent or semi-permanent storage.
 	DefaultEncryptionKey *string
 
-	// The process of matching duplicate profiles. If Matching = true, Amazon Connect
-	// Customer Profiles starts a weekly batch process called Identity Resolution Job.
-	// If you do not specify a date and time for Identity Resolution Job to run, by
-	// default it runs every Saturday at 12AM UTC to detect duplicate profiles in your
-	// domains. After the Identity Resolution Job completes, use the GetMatches
-	// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
-	// API to return and review the results. Or, if you have configured ExportingConfig
-	// in the MatchingRequest, you can download the results from S3.
+	// The process of matching duplicate profiles. If Matching  = true, Amazon
+	// Connect Customer Profiles starts a weekly batch process called Identity
+	// Resolution Job. If you do not specify a date and time for Identity Resolution
+	// Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate
+	// profiles in your domains. After the Identity Resolution Job completes, use the
+	// GetMatches (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
+	// API to return and review the results. Or, if you have configured
+	// ExportingConfig in the MatchingRequest , you can download the results from S3.
 	Matching *types.MatchingResponse
 
 	// The tags used to organize, track, or control access for this resource.

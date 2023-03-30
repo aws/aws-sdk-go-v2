@@ -29,8 +29,7 @@ func (c *Client) CreateSecurityProfile(ctx context.Context, params *CreateSecuri
 
 type CreateSecurityProfileInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -41,21 +40,21 @@ type CreateSecurityProfileInput struct {
 	// This member is required.
 	SecurityProfileName *string
 
-	// The list of tags that a security profile uses to restrict access to resources in
-	// Amazon Connect.
+	// The list of tags that a security profile uses to restrict access to resources
+	// in Amazon Connect.
 	AllowedAccessControlTags map[string]string
 
 	// The description of the security profile.
 	Description *string
 
 	// Permissions assigned to the security profile. For a list of valid permissions,
-	// see List of security profile permissions
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html).
+	// see List of security profile permissions (https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html)
+	// .
 	Permissions []string
 
 	// The list of resources that a security profile applies tag restrictions to in
-	// Amazon Connect. Following are acceptable ResourceNames: User | SecurityProfile |
-	// Queue | RoutingProfile
+	// Amazon Connect. Following are acceptable ResourceNames: User  | SecurityProfile
+	// | Queue  | RoutingProfile
 	TagRestrictedResources []string
 
 	// The tags used to organize, track, or control access for this resource. For

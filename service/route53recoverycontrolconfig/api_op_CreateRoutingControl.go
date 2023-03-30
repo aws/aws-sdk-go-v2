@@ -35,7 +35,8 @@ func (c *Client) CreateRoutingControl(ctx context.Context, params *CreateRouting
 // The details of the routing control that you're creating.
 type CreateRoutingControlInput struct {
 
-	// The Amazon Resource Name (ARN) of the cluster that includes the routing control.
+	// The Amazon Resource Name (ARN) of the cluster that includes the routing
+	// control.
 	//
 	// This member is required.
 	ClusterArn *string

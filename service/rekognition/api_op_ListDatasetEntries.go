@@ -14,9 +14,8 @@ import (
 // Lists the entries (images) within a dataset. An entry is a JSON Line that
 // contains the information for a single image, including the image location,
 // assigned labels, and object location bounding boxes. For more information, see
-// Creating a manifest file
-// (https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-manifest-files.html).
-// JSON Lines in the response include information about non-terminal errors found
+// Creating a manifest file (https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-manifest-files.html)
+// . JSON Lines in the response include information about non-terminal errors found
 // in the dataset. Non terminal errors are reported in errors lists within each
 // JSON Line. The same information is reported in the training and testing
 // validation result manifests that Amazon Rekognition Custom Labels creates during
@@ -47,17 +46,17 @@ type ListDatasetEntriesInput struct {
 	DatasetArn *string
 
 	// Specifies a label filter for the response. The response includes an entry only
-	// if one or more of the labels in ContainsLabels exist in the entry.
+	// if one or more of the labels in ContainsLabels  exist in the entry.
 	ContainsLabels []string
 
-	// Specifies an error filter for the response. Specify True to only include entries
-	// that have errors.
+	// Specifies an error filter for the response. Specify True to only include
+	// entries that have errors.
 	HasErrors *bool
 
-	// Specify true to get only the JSON Lines where the image is labeled. Specify
-	// false to get only the JSON Lines where the image isn't labeled. If you don't
-	// specify Labeled, ListDatasetEntries returns JSON Lines for labeled and unlabeled
-	// images.
+	// Specify true  to get only the JSON Lines where the image is labeled. Specify
+	// falseto get only the JSON Lines where the image isn't labeled. If you don't
+	// specify Labeled , ListDatasetEntries returns JSON Lines for labeled and
+	// unlabeled images.
 	Labeled *bool
 
 	// The maximum number of results to return per paginated call. The largest value
@@ -70,11 +69,11 @@ type ListDatasetEntriesInput struct {
 	// response. You can use this pagination token to retrieve the next set of results.
 	NextToken *string
 
-	// If specified, ListDatasetEntries only returns JSON Lines where the value of
-	// SourceRefContains is part of the source-ref field. The source-ref field contains
-	// the Amazon S3 location of the image. You can use SouceRefContains for tasks such
-	// as getting the JSON Line for a single image, or gettting JSON Lines for all
-	// images within a specific folder.
+	// If specified, ListDatasetEntries  only returns JSON Lines where the value of
+	// SourceRefContains is part of the source-ref  field. The source-ref field
+	// contains the Amazon S3 location of the image. You can use SouceRefContains for
+	// tasks such as getting the JSON Line for a single image, or gettting JSON Lines
+	// for all images within a specific folder.
 	SourceRefContains *string
 
 	noSmithyDocumentSerde
@@ -175,8 +174,8 @@ type ListDatasetEntriesPaginatorOptions struct {
 	// ValidationException error occurs. The default value is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

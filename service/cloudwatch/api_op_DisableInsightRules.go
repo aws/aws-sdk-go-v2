@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables the specified Contributor Insights rules. When rules are disabled, they
-// do not analyze log groups and do not incur costs.
+// Disables the specified Contributor Insights rules. When rules are disabled,
+// they do not analyze log groups and do not incur costs.
 func (c *Client) DisableInsightRules(ctx context.Context, params *DisableInsightRulesInput, optFns ...func(*Options)) (*DisableInsightRulesOutput, error) {
 	if params == nil {
 		params = &DisableInsightRulesInput{}
@@ -30,9 +30,9 @@ func (c *Client) DisableInsightRules(ctx context.Context, params *DisableInsight
 
 type DisableInsightRulesInput struct {
 
-	// An array of the rule names to disable. If you need to find out the names of your
-	// rules, use DescribeInsightRules
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html).
+	// An array of the rule names to disable. If you need to find out the names of
+	// your rules, use DescribeInsightRules (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html)
+	// .
 	//
 	// This member is required.
 	RuleNames []string

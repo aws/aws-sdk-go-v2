@@ -12,13 +12,13 @@ import (
 )
 
 // Modifies the specified EC2 Fleet. You can only modify an EC2 Fleet request of
-// type maintain. While the EC2 Fleet is being modified, it is in the modifying
+// type maintain . While the EC2 Fleet is being modified, it is in the modifying
 // state. To scale up your EC2 Fleet, increase its target capacity. The EC2 Fleet
 // launches the additional Spot Instances according to the allocation strategy for
-// the EC2 Fleet request. If the allocation strategy is lowest-price, the EC2 Fleet
-// launches instances using the Spot Instance pool with the lowest price. If the
-// allocation strategy is diversified, the EC2 Fleet distributes the instances
-// across the Spot Instance pools. If the allocation strategy is
+// the EC2 Fleet request. If the allocation strategy is lowest-price, the EC2
+// Fleet launches instances using the Spot Instance pool with the lowest price. If
+// the allocation strategy is diversified, the EC2 Fleet distributes the
+// instances across the Spot Instance pools. If the allocation strategy is
 // capacity-optimized, EC2 Fleet launches instances from Spot Instance pools with
 // optimal capacity for the number of instances that are launching. To scale down
 // your EC2 Fleet, decrease its target capacity. First, the EC2 Fleet cancels any
@@ -61,13 +61,13 @@ type ModifyFleetInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// Indicates whether running instances should be terminated if the total target
 	// capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
-	// Supported only for fleets of type maintain.
+	// Supported only for fleets of type maintain .
 	ExcessCapacityTerminationPolicy types.FleetExcessCapacityTerminationPolicy
 
 	// The launch template and overrides.

@@ -31,11 +31,10 @@ func (c *Client) DescribeResiliencyPolicy(ctx context.Context, params *DescribeR
 
 type DescribeResiliencyPolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN
-	// is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For
-	// more information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the resiliency policy. The format for this
+	// ARN is: arn: partition :resiliencehub: region : account :resiliency-policy/
+	// policy-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	PolicyArn *string

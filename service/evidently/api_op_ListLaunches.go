@@ -39,7 +39,7 @@ type ListLaunchesInput struct {
 	MaxResults *int32
 
 	// The token to use when requesting the next set of results. You received this
-	// token from a previous ListLaunches operation.
+	// token from a previous ListLaunches  operation.
 	NextToken *string
 
 	// Use this optional parameter to limit the returned results to only the launches
@@ -51,8 +51,8 @@ type ListLaunchesInput struct {
 
 type ListLaunchesOutput struct {
 
-	// An array of structures that contain the configuration details of the launches in
-	// the specified project.
+	// An array of structures that contain the configuration details of the launches
+	// in the specified project.
 	Launches []types.Launch
 
 	// The token to use in a subsequent ListLaunches operation to return the next set
@@ -140,8 +140,8 @@ type ListLaunchesPaginatorOptions struct {
 	// The maximum number of results to include in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

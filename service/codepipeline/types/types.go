@@ -34,8 +34,8 @@ type ActionConfigurationProperty struct {
 	// This member is required.
 	Required bool
 
-	// Whether the configuration property is secret. Secrets are hidden from all calls
-	// except for GetJobDetails, GetThirdPartyJobDetails, PollForJobs, and
+	// Whether the configuration property is secret. Secrets are hidden from all
+	// calls except for GetJobDetails , GetThirdPartyJobDetails , PollForJobs , and
 	// PollForThirdPartyJobs. When updating a pipeline, passing * * * * * without
 	// changing any other values of the action preserves the previous value of the
 	// secret.
@@ -43,7 +43,8 @@ type ActionConfigurationProperty struct {
 	// This member is required.
 	Secret bool
 
-	// The description of the action configuration property that is displayed to users.
+	// The description of the action configuration property that is displayed to
+	// users.
 	Description *string
 
 	// Indicates that the property is used with PollForJobs. When creating a custom
@@ -86,16 +87,13 @@ type ActionDeclaration struct {
 	// This member is required.
 	Name *string
 
-	// The action's configuration. These are key-value pairs that specify input values
-	// for an action. For more information, see Action Structure Requirements in
-	// CodePipeline
-	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements).
-	// For the list of configuration properties for the AWS CloudFormation action type
-	// in CodePipeline, see Configuration Properties Reference
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html)
+	// The action's configuration. These are key-value pairs that specify input
+	// values for an action. For more information, see Action Structure Requirements
+	// in CodePipeline (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements)
+	// . For the list of configuration properties for the AWS CloudFormation action
+	// type in CodePipeline, see Configuration Properties Reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html)
 	// in the AWS CloudFormation User Guide. For template snippets with examples, see
-	// Using Parameter Override Functions with CodePipeline Pipelines
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-parameter-override-functions.html)
+	// Using Parameter Override Functions with CodePipeline Pipelines (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-parameter-override-functions.html)
 	// in the AWS CloudFormation User Guide. The values can be represented in either
 	// JSON or YAML format. For example, the JSON configuration item format is as
 	// follows: JSON: "Configuration" : { Key : Value },
@@ -109,8 +107,8 @@ type ActionDeclaration struct {
 	// output by this action fall under this namespace.
 	Namespace *string
 
-	// The name or ID of the result of the action declaration, such as a test or build
-	// artifact.
+	// The name or ID of the result of the action declaration, such as a test or
+	// build artifact.
 	OutputArtifacts []OutputArtifact
 
 	// The action declaration's AWS Region, such as us-east-1.
@@ -130,7 +128,7 @@ type ActionDeclaration struct {
 type ActionExecution struct {
 
 	// ID of the workflow action execution in the current stage. Use the
-	// GetPipelineState action to retrieve the current action execution details of the
+	// GetPipelineStateaction to retrieve the current action execution details of the
 	// current stage. For older executions, this field might be empty. The action
 	// execution ID is available for executions run on or after March 2020.
 	ActionExecutionId *string
@@ -141,8 +139,8 @@ type ActionExecution struct {
 	// The external ID of the run of the action.
 	ExternalExecutionId *string
 
-	// The URL of a resource external to AWS that is used when running the action (for
-	// example, an external repository URL).
+	// The URL of a resource external to AWS that is used when running the action
+	// (for example, an external repository URL).
 	ExternalExecutionUrl *string
 
 	// The last status change of the action.
@@ -161,8 +159,8 @@ type ActionExecution struct {
 	// A summary of the run of the action.
 	Summary *string
 
-	// The system-generated token used to identify a unique approval request. The token
-	// for each open approval request can be obtained using the GetPipelineState
+	// The system-generated token used to identify a unique approval request. The
+	// token for each open approval request can be obtained using the GetPipelineState
 	// command. It is used to validate that the approval request corresponding to this
 	// token is still valid.
 	Token *string
@@ -202,8 +200,8 @@ type ActionExecutionDetail struct {
 	// The start time of the action execution.
 	StartTime *time.Time
 
-	// The status of the action execution. Status categories are InProgress, Succeeded,
-	// and Failed.
+	// The status of the action execution. Status categories are InProgress ,
+	// Succeeded , and Failed .
 	Status ActionExecutionStatus
 
 	noSmithyDocumentSerde
@@ -238,8 +236,8 @@ type ActionExecutionInput struct {
 	// The AWS Region for the action, such as us-east-1.
 	Region *string
 
-	// Configuration data for an action execution with all variable references replaced
-	// with their real values for the execution.
+	// Configuration data for an action execution with all variable references
+	// replaced with their real values for the execution.
 	ResolvedConfiguration map[string]string
 
 	// The ARN of the IAM service role that performs the declared action. This is
@@ -261,8 +259,8 @@ type ActionExecutionOutput struct {
 	// execution.
 	OutputArtifacts []ArtifactDetail
 
-	// The outputVariables field shows the key-value pairs that were output as part of
-	// that execution.
+	// The outputVariables field shows the key-value pairs that were output as part
+	// of that execution.
 	OutputVariables map[string]string
 
 	noSmithyDocumentSerde
@@ -358,20 +356,20 @@ type ActionType struct {
 	noSmithyDocumentSerde
 }
 
-// Information about parameters for artifacts associated with the action type, such
-// as the minimum and maximum artifacts allowed.
+// Information about parameters for artifacts associated with the action type,
+// such as the minimum and maximum artifacts allowed.
 type ActionTypeArtifactDetails struct {
 
 	// The maximum number of artifacts that can be used with the actiontype. For
 	// example, you should specify a minimum and maximum of zero input artifacts for an
-	// action type with a category of source.
+	// action type with a category of source .
 	//
 	// This member is required.
 	MaximumCount int32
 
 	// The minimum number of artifacts that can be used with the action type. For
 	// example, you should specify a minimum and maximum of zero input artifacts for an
-	// action type with a category of source.
+	// action type with a category of source .
 	//
 	// This member is required.
 	MinimumCount int32
@@ -379,8 +377,8 @@ type ActionTypeArtifactDetails struct {
 	noSmithyDocumentSerde
 }
 
-// The parameters for the action type definition that are provided when the action
-// type is created or updated.
+// The parameters for the action type definition that are provided when the
+// action type is created or updated.
 type ActionTypeDeclaration struct {
 
 	// Information about the executor for an action type that was created with any
@@ -423,9 +421,9 @@ type ActionTypeDeclaration struct {
 	noSmithyDocumentSerde
 }
 
-// The action engine, or executor, for an action type created for a provider, where
-// the action is to be used by customers of the provider. The action engine is
-// associated with the model used to create and update the action, such as the
+// The action engine, or executor, for an action type created for a provider,
+// where the action is to be used by customers of the provider. The action engine
+// is associated with the model used to create and update the action, such as the
 // Lambda integration model.
 type ActionTypeExecutor struct {
 
@@ -435,14 +433,14 @@ type ActionTypeExecutor struct {
 	// This member is required.
 	Configuration *ExecutorConfiguration
 
-	// The integration model used to create and update the action type, Lambda or
-	// JobWorker.
+	// The integration model used to create and update the action type, Lambda  or
+	// JobWorker .
 	//
 	// This member is required.
 	Type ExecutorType
 
-	// The timeout in seconds for the job. An action execution can have multiple jobs.
-	// This is the timeout for a single job, not the entire action execution.
+	// The timeout in seconds for the job. An action execution can have multiple
+	// jobs. This is the timeout for a single job, not the entire action execution.
 	JobTimeout *int32
 
 	// The policy statement that specifies the permissions in the CodePipeline
@@ -459,24 +457,24 @@ type ActionTypeExecutor struct {
 // Represents information about an action type.
 type ActionTypeId struct {
 
-	// A category defines what kind of action can be taken in the stage, and constrains
-	// the provider type for the action. Valid categories are limited to one of the
-	// following values.
-	// - Source
-	// - Build
-	// - Test
-	// - Deploy
-	// - Invoke
-	// - Approval
+	// A category defines what kind of action can be taken in the stage, and
+	// constrains the provider type for the action. Valid categories are limited to one
+	// of the following values.
+	//     - Source
+	//     - Build
+	//     - Test
+	//     - Deploy
+	//     - Invoke
+	//     - Approval
 	//
 	// This member is required.
 	Category ActionCategory
 
 	// The creator of the action being called. There are three valid values for the
-	// Owner field in the action category section within your pipeline structure: AWS,
-	// ThirdParty, and Custom. For more information, see Valid Action Types and
-	// Providers in CodePipeline
-	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers).
+	// Owner field in the action category section within your pipeline structure: AWS
+	// , ThirdParty , and Custom . For more information, see Valid Action Types and
+	// Providers in CodePipeline (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers)
+	// .
 	//
 	// This member is required.
 	Owner ActionOwner
@@ -485,8 +483,8 @@ type ActionTypeId struct {
 	// determined by the action category. For example, an action in the Deploy category
 	// type might have a provider of AWS CodeDeploy, which would be specified as
 	// CodeDeploy. For more information, see Valid Action Types and Providers in
-	// CodePipeline
-	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers).
+	// CodePipeline (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers)
+	// .
 	//
 	// This member is required.
 	Provider *string
@@ -503,24 +501,23 @@ type ActionTypeId struct {
 type ActionTypeIdentifier struct {
 
 	// Defines what kind of action can be taken in the stage, one of the following:
-	// -
-	// Source
-	// - Build
-	// - Test
-	// - Deploy
-	// - Approval
-	// - Invoke
+	//     - Source
+	//     - Build
+	//     - Test
+	//     - Deploy
+	//     - Approval
+	//     - Invoke
 	//
 	// This member is required.
 	Category ActionCategory
 
-	// The creator of the action type being called: AWS or ThirdParty.
+	// The creator of the action type being called: AWS  or ThirdParty .
 	//
 	// This member is required.
 	Owner *string
 
-	// The provider of the action type being called. The provider name is supplied when
-	// the action type is created.
+	// The provider of the action type being called. The provider name is supplied
+	// when the action type is created.
 	//
 	// This member is required.
 	Provider *string
@@ -536,7 +533,8 @@ type ActionTypeIdentifier struct {
 // Details identifying the users with permissions to use the action type.
 type ActionTypePermissions struct {
 
-	// A list of AWS account IDs with access to use the action type in their pipelines.
+	// A list of AWS account IDs with access to use the action type in their
+	// pipelines.
 	//
 	// This member is required.
 	AllowedAccounts []string
@@ -559,8 +557,8 @@ type ActionTypeProperty struct {
 	// This member is required.
 	Name *string
 
-	// Whether to omit the field value entered by the customer in the log. If true, the
-	// value is not saved in CloudTrail logs for the action execution.
+	// Whether to omit the field value entered by the customer in the log. If true,
+	// the value is not saved in CloudTrail logs for the action execution.
 	//
 	// This member is required.
 	NoEcho bool
@@ -573,9 +571,9 @@ type ActionTypeProperty struct {
 	// The description of the property that is displayed to users.
 	Description *string
 
-	// Indicates that the property is used with polling. An action type can have up to
-	// one queryable property. If it has one, that property must be both required and
-	// not secret.
+	// Indicates that the property is used with polling. An action type can have up
+	// to one queryable property. If it has one, that property must be both required
+	// and not secret.
 	Queryable bool
 
 	noSmithyDocumentSerde
@@ -608,9 +606,9 @@ type ActionTypeSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Returns information about URLs for web pages that display to customers as links
-// on the pipeline view, such as an external configuration page for the action
-// type.
+// Returns information about URLs for web pages that display to customers as
+// links on the pipeline view, such as an external configuration page for the
+// action type.
 type ActionTypeUrls struct {
 
 	// The URL returned to the CodePipeline console that contains a link to the page
@@ -622,8 +620,8 @@ type ActionTypeUrls struct {
 	// as part of the action display in the pipeline.
 	EntityUrlTemplate *string
 
-	// The link to an execution page for the action type in progress. For example, for
-	// a CodeDeploy action, this link is shown on the pipeline view page in the
+	// The link to an execution page for the action type in progress. For example,
+	// for a CodeDeploy action, this link is shown on the pipeline view page in the
 	// CodePipeline console, and it links to a CodeDeploy status page.
 	ExecutionUrlTemplate *string
 
@@ -710,16 +708,16 @@ type ArtifactLocation struct {
 // Represents revision details of an artifact.
 type ArtifactRevision struct {
 
-	// The date and time when the most recent revision of the artifact was created, in
-	// timestamp format.
+	// The date and time when the most recent revision of the artifact was created,
+	// in timestamp format.
 	Created *time.Time
 
 	// The name of an artifact. This name might be system-generated, such as "MyApp",
 	// or defined by the user when an action is created.
 	Name *string
 
-	// An additional identifier for a revision, such as a commit date or, for artifacts
-	// stored in Amazon S3 buckets, the ETag value.
+	// An additional identifier for a revision, such as a commit date or, for
+	// artifacts stored in Amazon S3 buckets, the ETag value.
 	RevisionChangeIdentifier *string
 
 	// The revision ID of the artifact.
@@ -739,13 +737,13 @@ type ArtifactRevision struct {
 }
 
 // The S3 bucket where artifacts for the pipeline are stored. You must include
-// either artifactStore or artifactStores in your pipeline, but you cannot use
+// either artifactStore  or artifactStores in your pipeline, but you cannot use
 // both. If you create a cross-region action in your pipeline, you must use
-// artifactStores.
+// artifactStores .
 type ArtifactStore struct {
 
-	// The S3 bucket used for storing the artifacts for a pipeline. You can specify the
-	// name of an S3 bucket but not a folder in the bucket. A folder to contain the
+	// The S3 bucket used for storing the artifacts for a pipeline. You can specify
+	// the name of an S3 bucket but not a folder in the bucket. A folder to contain the
 	// pipeline artifacts is created for you based on the name of the pipeline. You can
 	// use any S3 bucket in the same AWS Region as the pipeline to store your pipeline
 	// artifacts.
@@ -819,8 +817,8 @@ type CurrentRevision struct {
 	// This member is required.
 	Revision *string
 
-	// The date and time when the most recent revision of the artifact was created, in
-	// timestamp format.
+	// The date and time when the most recent revision of the artifact was created,
+	// in timestamp format.
 	Created *time.Time
 
 	// The summary of the most recent revision of the artifact.
@@ -829,20 +827,20 @@ type CurrentRevision struct {
 	noSmithyDocumentSerde
 }
 
-// Represents information about the key used to encrypt data in the artifact store,
-// such as an AWS Key Management Service (AWS KMS) key.
+// Represents information about the key used to encrypt data in the artifact
+// store, such as an AWS Key Management Service (AWS KMS) key.
 type EncryptionKey struct {
 
-	// The ID used to identify the key. For an AWS KMS key, you can use the key ID, the
-	// key ARN, or the alias ARN. Aliases are recognized only in the account that
+	// The ID used to identify the key. For an AWS KMS key, you can use the key ID,
+	// the key ARN, or the alias ARN. Aliases are recognized only in the account that
 	// created the customer master key (CMK). For cross-account actions, you can only
 	// use the key ID or key ARN to identify the key.
 	//
 	// This member is required.
 	Id *string
 
-	// The type of encryption key, such as an AWS Key Management Service (AWS KMS) key.
-	// When creating or updating a pipeline, the value must be set to 'KMS'.
+	// The type of encryption key, such as an AWS Key Management Service (AWS KMS)
+	// key. When creating or updating a pipeline, the value must be set to 'KMS'.
 	//
 	// This member is required.
 	Type EncryptionKeyType
@@ -885,25 +883,25 @@ type ExecutionTrigger struct {
 
 	// Detail related to the event that started a pipeline execution, such as the
 	// webhook ARN of the webhook that triggered the pipeline execution or the user ARN
-	// for a user-initiated start-pipeline-execution CLI command.
+	// for a user-initiated start-pipeline-execution  CLI command.
 	TriggerDetail *string
 
-	// The type of change-detection method, command, or user interaction that started a
-	// pipeline execution.
+	// The type of change-detection method, command, or user interaction that started
+	// a pipeline execution.
 	TriggerType TriggerType
 
 	noSmithyDocumentSerde
 }
 
-// The action engine, or executor, related to the supported integration model used
-// to create and update the action type. The available executor types are Lambda
-// and JobWorker.
+// The action engine, or executor, related to the supported integration model
+// used to create and update the action type. The available executor types are
+// Lambda and JobWorker .
 type ExecutorConfiguration struct {
 
-	// Details about the JobWorker executor of the action type.
+	// Details about the JobWorker  executor of the action type.
 	JobWorkerExecutorConfiguration *JobWorkerExecutorConfiguration
 
-	// Details about the Lambda executor of the action type.
+	// Details about the Lambda  executor of the action type.
 	LambdaExecutorConfiguration *LambdaExecutorConfiguration
 
 	noSmithyDocumentSerde
@@ -981,12 +979,12 @@ type JobData struct {
 	// for the pipeline in AWS CodePipeline.
 	ArtifactCredentials *AWSSessionCredentials
 
-	// A system-generated token, such as a AWS CodeDeploy deployment ID, required by a
-	// job to continue the job asynchronously.
+	// A system-generated token, such as a AWS CodeDeploy deployment ID, required by
+	// a job to continue the job asynchronously.
 	ContinuationToken *string
 
-	// Represents information about the key used to encrypt data in the artifact store,
-	// such as an AWS Key Management Service (AWS KMS) key.
+	// Represents information about the key used to encrypt data in the artifact
+	// store, such as an AWS Key Management Service (AWS KMS) key.
 	EncryptionKey *EncryptionKey
 
 	// The artifact supplied to the job.
@@ -996,7 +994,7 @@ type JobData struct {
 	OutputArtifacts []Artifact
 
 	// Represents information about a pipeline to a job worker. Includes pipelineArn
-	// and pipelineExecutionId for custom jobs.
+	// and pipelineExecutionId  for custom jobs.
 	PipelineContext *PipelineContext
 
 	noSmithyDocumentSerde
@@ -1026,14 +1024,14 @@ type JobWorkerExecutorConfiguration struct {
 	// part of the action execution.
 	PollingAccounts []string
 
-	// The service Principals in which the job worker is configured and might poll for
-	// jobs as part of the action execution.
+	// The service Principals in which the job worker is configured and might poll
+	// for jobs as part of the action execution.
 	PollingServicePrincipals []string
 
 	noSmithyDocumentSerde
 }
 
-// Details about the configuration for the Lambda action engine, or executor.
+// Details about the configuration for the Lambda  action engine, or executor.
 type LambdaExecutorConfiguration struct {
 
 	// The ARN of the Lambda function used by the action engine.
@@ -1044,8 +1042,8 @@ type LambdaExecutorConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The detail returned for each webhook after listing webhooks, such as the webhook
-// URL, the webhook name, and the webhook ARN.
+// The detail returned for each webhook after listing webhooks, such as the
+// webhook URL, the webhook name, and the webhook ARN.
 type ListWebhookItem struct {
 
 	// The detail returned for each webhook, such as the webhook authentication type
@@ -1054,8 +1052,8 @@ type ListWebhookItem struct {
 	// This member is required.
 	Definition *WebhookDefinition
 
-	// A unique URL generated by CodePipeline. When a POST request is made to this URL,
-	// the defined pipeline is started as long as the body of the post request
+	// A unique URL generated by CodePipeline. When a POST request is made to this
+	// URL, the defined pipeline is started as long as the body of the post request
 	// satisfies the defined authentication and filtering conditions. Deleting and
 	// re-creating a webhook makes the old URL invalid and generates a new one.
 	//
@@ -1098,7 +1096,7 @@ type OutputArtifact struct {
 }
 
 // Represents information about a pipeline to a job worker. PipelineContext
-// contains pipelineArn and pipelineExecutionId for custom action jobs. The
+// contains pipelineArn  and pipelineExecutionId  for custom action jobs. The
 // pipelineArn and pipelineExecutionId fields are not populated for ThirdParty
 // action jobs.
 type PipelineContext struct {
@@ -1112,8 +1110,8 @@ type PipelineContext struct {
 	// The execution ID of the pipeline.
 	PipelineExecutionId *string
 
-	// The name of the pipeline. This is a user-specified value. Pipeline names must be
-	// unique across all pipeline names under an Amazon Web Services account.
+	// The name of the pipeline. This is a user-specified value. Pipeline names must
+	// be unique across all pipeline names under an Amazon Web Services account.
 	PipelineName *string
 
 	// The stage of the pipeline.
@@ -1131,8 +1129,8 @@ type PipelineDeclaration struct {
 	Name *string
 
 	// The Amazon Resource Name (ARN) for AWS CodePipeline to use to either perform
-	// actions with no actionRoleArn, or to use to assume roles for actions with an
-	// actionRoleArn.
+	// actions with no actionRoleArn , or to use to assume roles for actions with an
+	// actionRoleArn .
 	//
 	// This member is required.
 	RoleArn *string
@@ -1143,16 +1141,16 @@ type PipelineDeclaration struct {
 	Stages []StageDeclaration
 
 	// Represents information about the S3 bucket where artifacts are stored for the
-	// pipeline. You must include either artifactStore or artifactStores in your
+	// pipeline. You must include either artifactStore  or artifactStores in your
 	// pipeline, but you cannot use both. If you create a cross-region action in your
-	// pipeline, you must use artifactStores.
+	// pipeline, you must use artifactStores .
 	ArtifactStore *ArtifactStore
 
 	// A mapping of artifactStore objects and their corresponding AWS Regions. There
 	// must be an artifact store for the pipeline Region and for each cross-region
-	// action in the pipeline. You must include either artifactStore or artifactStores
-	// in your pipeline, but you cannot use both. If you create a cross-region action
-	// in your pipeline, you must use artifactStores.
+	// action in the pipeline. You must include either artifactStore  or
+	// artifactStoresin your pipeline, but you cannot use both. If you create a
+	// cross-region action in your pipeline, you must use artifactStores .
 	ArtifactStores map[string]ArtifactStore
 
 	// The version number of the pipeline. A new pipeline always has a version number
@@ -1165,7 +1163,7 @@ type PipelineDeclaration struct {
 // Represents information about an execution of a pipeline.
 type PipelineExecution struct {
 
-	// A list of ArtifactRevision objects included in a pipeline execution.
+	// A list of ArtifactRevision  objects included in a pipeline execution.
 	ArtifactRevisions []ArtifactRevision
 
 	// The ID of the pipeline execution.
@@ -1178,27 +1176,13 @@ type PipelineExecution struct {
 	PipelineVersion *int32
 
 	// The status of the pipeline execution.
-	// - Cancelled: The pipeline’s definition was
-	// updated before the pipeline execution could be completed.
-	// - InProgress: The
-	// pipeline execution is currently running.
-	// - Stopped: The pipeline execution was
-	// manually stopped. For more information, see Stopped Executions
-	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped).
-	// -
-	// Stopping: The pipeline execution received a request to be manually stopped.
-	// Depending on the selected stop mode, the execution is either completing or
-	// abandoning in-progress actions. For more information, see Stopped Executions
-	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped).
-	// -
-	// Succeeded: The pipeline execution was completed successfully.
-	// - Superseded:
-	// While this pipeline execution was waiting for the next stage to be completed, a
-	// newer pipeline execution advanced and continued through the pipeline instead.
-	// For more information, see Superseded Executions
-	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded).
-	// -
-	// Failed: The pipeline execution was not completed successfully.
+	//     - Cancelled: The pipeline’s definition was updated before the pipeline execution could be completed.
+	//     - InProgress: The pipeline execution is currently running.
+	//     - Stopped: The pipeline execution was manually stopped. For more information, see Stopped Executions (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped) .
+	//     - Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode, the execution is either completing or abandoning in-progress actions. For more information, see Stopped Executions (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped) .
+	//     - Succeeded: The pipeline execution was completed successfully.
+	//     - Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead. For more information, see Superseded Executions (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded) .
+	//     - Failed: The pipeline execution was not completed successfully.
 	Status PipelineExecutionStatus
 
 	// A summary that contains a description of the pipeline execution status.
@@ -1224,32 +1208,19 @@ type PipelineExecutionSummary struct {
 	StartTime *time.Time
 
 	// The status of the pipeline execution.
-	// - InProgress: The pipeline execution is
-	// currently running.
-	// - Stopped: The pipeline execution was manually stopped. For
-	// more information, see Stopped Executions
-	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped).
-	// -
-	// Stopping: The pipeline execution received a request to be manually stopped.
-	// Depending on the selected stop mode, the execution is either completing or
-	// abandoning in-progress actions. For more information, see Stopped Executions
-	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped).
-	// -
-	// Succeeded: The pipeline execution was completed successfully.
-	// - Superseded:
-	// While this pipeline execution was waiting for the next stage to be completed, a
-	// newer pipeline execution advanced and continued through the pipeline instead.
-	// For more information, see Superseded Executions
-	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded).
-	// -
-	// Failed: The pipeline execution was not completed successfully.
+	//     - InProgress: The pipeline execution is currently running.
+	//     - Stopped: The pipeline execution was manually stopped. For more information, see Stopped Executions (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped) .
+	//     - Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode, the execution is either completing or abandoning in-progress actions. For more information, see Stopped Executions (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped) .
+	//     - Succeeded: The pipeline execution was completed successfully.
+	//     - Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead. For more information, see Superseded Executions (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded) .
+	//     - Failed: The pipeline execution was not completed successfully.
 	Status PipelineExecutionStatus
 
 	// The interaction that stopped a pipeline execution.
 	StopTrigger *StopExecutionTrigger
 
 	// The interaction or event that started a pipeline execution, such as automated
-	// change detection or a StartPipelineExecution API call.
+	// change detection or a StartPipelineExecution  API call.
 	Trigger *ExecutionTrigger
 
 	noSmithyDocumentSerde
@@ -1296,8 +1267,8 @@ type S3ArtifactLocation struct {
 	// This member is required.
 	BucketName *string
 
-	// The key of the object in the S3 bucket, which uniquely identifies the object in
-	// the bucket.
+	// The key of the object in the S3 bucket, which uniquely identifies the object
+	// in the bucket.
 	//
 	// This member is required.
 	ObjectKey *string
@@ -1317,8 +1288,8 @@ type S3Location struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the version (or revision) of a source artifact that initiated
-// a pipeline execution.
+// Information about the version (or revision) of a source artifact that
+// initiated a pipeline execution.
 type SourceRevision struct {
 
 	// The name of the action that processed the revision to the source artifact.
@@ -1379,9 +1350,9 @@ type StageExecution struct {
 	// This member is required.
 	PipelineExecutionId *string
 
-	// The status of the stage, or for a completed stage, the last status of the stage.
-	// A status of cancelled means that the pipeline’s definition was updated before
-	// the stage execution could be completed.
+	// The status of the stage, or for a completed stage, the last status of the
+	// stage. A status of cancelled means that the pipeline’s definition was updated
+	// before the stage execution could be completed.
 	//
 	// This member is required.
 	Status StageExecutionStatus
@@ -1436,12 +1407,12 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// A response to a PollForThirdPartyJobs request returned by AWS CodePipeline when
-// there is a job to be worked on by a partner action.
+// A response to a PollForThirdPartyJobs request returned by AWS CodePipeline
+// when there is a job to be worked on by a partner action.
 type ThirdPartyJob struct {
 
-	// The clientToken portion of the clientId and clientToken pair used to verify that
-	// the calling entity is allowed access to the job and its details.
+	// The clientToken  portion of the clientId  and clientToken pair used to verify
+	// that the calling entity is allowed access to the job and its details.
 	ClientId *string
 
 	// The identifier used to identify the job in AWS CodePipeline.
@@ -1487,13 +1458,13 @@ type ThirdPartyJobData struct {
 	OutputArtifacts []Artifact
 
 	// Represents information about a pipeline to a job worker. Does not include
-	// pipelineArn and pipelineExecutionId for ThirdParty jobs.
+	// pipelineArn and pipelineExecutionId  for ThirdParty jobs.
 	PipelineContext *PipelineContext
 
 	noSmithyDocumentSerde
 }
 
-// The details of a job sent in response to a GetThirdPartyJobDetails request.
+// The details of a job sent in response to a GetThirdPartyJobDetails  request.
 type ThirdPartyJobDetails struct {
 
 	// The data to be returned by the third party job worker.
@@ -1534,12 +1505,12 @@ type TransitionState struct {
 type WebhookAuthConfiguration struct {
 
 	// The property used to configure acceptance of webhooks in an IP address range.
-	// For IP, only the AllowedIPRange property must be set. This property must be set
-	// to a valid CIDR range.
+	// For IP, only the AllowedIPRange property must be set. This property must be
+	// set to a valid CIDR range.
 	AllowedIPRange *string
 
-	// The property used to configure GitHub authentication. For GITHUB_HMAC, only the
-	// SecretToken property must be set.
+	// The property used to configure GitHub authentication. For GITHUB_HMAC, only
+	// the SecretToken  property must be set.
 	SecretToken *string
 
 	noSmithyDocumentSerde
@@ -1549,24 +1520,18 @@ type WebhookAuthConfiguration struct {
 type WebhookDefinition struct {
 
 	// Supported options are GITHUB_HMAC, IP, and UNAUTHENTICATED.
-	// - For information
-	// about the authentication scheme implemented by GITHUB_HMAC, see Securing your
-	// webhooks (https://developer.github.com/webhooks/securing/) on the GitHub
-	// Developer website.
-	// - IP rejects webhooks trigger requests unless they originate
-	// from an IP address in the IP range whitelisted in the authentication
-	// configuration.
-	// - UNAUTHENTICATED accepts all webhook trigger requests regardless
-	// of origin.
+	//     - For information about the authentication scheme implemented by GITHUB_HMAC, see Securing your webhooks (https://developer.github.com/webhooks/securing/) on the GitHub Developer website.
+	//     - IP rejects webhooks trigger requests unless they originate from an IP address in the IP range whitelisted in the authentication configuration.
+	//     - UNAUTHENTICATED accepts all webhook trigger requests regardless of origin.
 	//
 	// This member is required.
 	Authentication WebhookAuthenticationType
 
-	// Properties that configure the authentication applied to incoming webhook trigger
-	// requests. The required properties depend on the authentication type. For
+	// Properties that configure the authentication applied to incoming webhook
+	// trigger requests. The required properties depend on the authentication type. For
 	// GITHUB_HMAC, only the SecretToken property must be set. For IP, only the
-	// AllowedIPRange property must be set to a valid CIDR range. For UNAUTHENTICATED,
-	// no properties can be set.
+	// AllowedIPRange property must be set to a valid CIDR range. For
+	// UNAUTHENTICATED, no properties can be set.
 	//
 	// This member is required.
 	AuthenticationConfiguration *WebhookAuthConfiguration
@@ -1597,7 +1562,8 @@ type WebhookDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// The event criteria that specify when a webhook notification is sent to your URL.
+// The event criteria that specify when a webhook notification is sent to your
+// URL.
 type WebhookFilterRule struct {
 
 	// A JsonPath expression that is applied to the body/payload of the webhook. The
@@ -1608,16 +1574,16 @@ type WebhookFilterRule struct {
 	// This member is required.
 	JsonPath *string
 
-	// The value selected by the JsonPath expression must match what is supplied in the
-	// MatchEquals field. Otherwise, the request is ignored. Properties from the target
-	// action configuration can be included as placeholders in this value by
+	// The value selected by the JsonPath expression must match what is supplied in
+	// the MatchEquals field. Otherwise, the request is ignored. Properties from the
+	// target action configuration can be included as placeholders in this value by
 	// surrounding the action configuration key with curly brackets. For example, if
 	// the value supplied here is "refs/heads/{Branch}" and the target action has an
 	// action configuration property called "Branch" with a value of "master", the
-	// MatchEquals value is evaluated as "refs/heads/master". For a list of action
+	// MatchEqualsvalue is evaluated as "refs/heads/master". For a list of action
 	// configuration properties for built-in action types, see Pipeline Structure
-	// Reference Action Requirements
-	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements).
+	// Reference Action Requirements (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements)
+	// .
 	MatchEquals *string
 
 	noSmithyDocumentSerde

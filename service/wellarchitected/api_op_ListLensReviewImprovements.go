@@ -32,17 +32,17 @@ func (c *Client) ListLensReviewImprovements(ctx context.Context, params *ListLen
 type ListLensReviewImprovementsInput struct {
 
 	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless, or the lens ARN, such as
+	// the lens alias, such as serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
 	// the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
-	// identified by its LensSummary$LensAlias.
+	// identified by its LensSummary$LensAlias .
 	//
 	// This member is required.
 	LensAlias *string
 
-	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
-	// Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web
+	// Services Region.
 	//
 	// This member is required.
 	WorkloadId *string
@@ -56,8 +56,8 @@ type ListLensReviewImprovementsInput struct {
 	// The token to use to retrieve the next set of results.
 	NextToken *string
 
-	// The ID used to identify a pillar, for example, security. A pillar is identified
-	// by its PillarReviewSummary$PillarId.
+	// The ID used to identify a pillar, for example, security. A pillar is
+	// identified by its PillarReviewSummary$PillarId .
 	PillarId *string
 
 	noSmithyDocumentSerde
@@ -70,11 +70,11 @@ type ListLensReviewImprovementsOutput struct {
 	ImprovementSummaries []types.ImprovementSummary
 
 	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless, or the lens ARN, such as
+	// the lens alias, such as serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
 	// the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
-	// identified by its LensSummary$LensAlias.
+	// identified by its LensSummary$LensAlias .
 	LensAlias *string
 
 	// The ARN for the lens.
@@ -86,8 +86,8 @@ type ListLensReviewImprovementsOutput struct {
 	// The token to use to retrieve the next set of results.
 	NextToken *string
 
-	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
-	// Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web
+	// Services Region.
 	WorkloadId *string
 
 	// Metadata pertaining to the operation's result.
@@ -173,8 +173,8 @@ type ListLensReviewImprovementsPaginatorOptions struct {
 	// The maximum number of results to return for this request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -28,12 +28,11 @@ import (
 // receive SMS messages might not be able to sign up, activate their accounts, or
 // sign in. If you have never used SMS text messages with Amazon Cognito or any
 // other Amazon Web Service, Amazon Simple Notification Service might place your
-// account in the SMS sandbox. In sandbox mode
-// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you can send
-// messages only to verified phone numbers. After you test your app while in the
-// sandbox environment, you can move out of the sandbox and into production. For
-// more information, see  SMS message settings for Amazon Cognito user pools
-// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
+// account in the SMS sandbox. In sandbox mode (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html)
+// , you can send messages only to verified phone numbers. After you test your app
+// while in the sandbox environment, you can move out of the sandbox and into
+// production. For more information, see SMS message settings for Amazon Cognito
+// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
 // in the Amazon Cognito Developer Guide. Calling this action requires developer
 // credentials.
 func (c *Client) AdminResetUserPassword(ctx context.Context, params *AdminResetUserPasswordInput, optFns ...func(*Options)) (*AdminResetUserPasswordOutput, error) {
@@ -70,22 +69,16 @@ type AdminResetUserPasswordInput struct {
 	// API action, Amazon Cognito invokes the function that is assigned to the custom
 	// message trigger. When Amazon Cognito invokes this function, it passes a JSON
 	// payload, which the function receives as input. This payload contains a
-	// clientMetadata attribute, which provides the data that you assigned to the
+	// clientMetadataattribute, which provides the data that you assigned to the
 	// ClientMetadata parameter in your AdminResetUserPassword request. In your
 	// function code in Lambda, you can process the clientMetadata value to enhance
-	// your workflow for your specific needs. For more information, see  Customizing
-	// user pool Workflows with Lambda Triggers
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
+	// your workflow for your specific needs. For more information, see Customizing
+	// user pool Workflows with Lambda Triggers (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
 	// parameter, remember that Amazon Cognito won't do the following:
-	// - Store the
-	// ClientMetadata value. This data is available only to Lambda triggers that are
-	// assigned to a user pool to support custom workflows. If your user pool
-	// configuration doesn't include triggers, the ClientMetadata parameter serves no
-	// purpose.
-	// - Validate the ClientMetadata value.
-	// - Encrypt the ClientMetadata
-	// value. Don't use Amazon Cognito to provide sensitive information.
+	//     - Store the ClientMetadata value. This data is available only to Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration doesn't include triggers, the ClientMetadata parameter serves no purpose.
+	//     - Validate the ClientMetadata value.
+	//     - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide sensitive information.
 	ClientMetadata map[string]string
 
 	noSmithyDocumentSerde

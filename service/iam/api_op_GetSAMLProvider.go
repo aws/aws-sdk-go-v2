@@ -14,8 +14,8 @@ import (
 
 // Returns the SAML provider metadocument that was uploaded when the IAM SAML
 // provider resource object was created or updated. This operation requires
-// Signature Version 4
-// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+// Signature Version 4 (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
+// .
 func (c *Client) GetSAMLProvider(ctx context.Context, params *GetSAMLProviderInput, optFns ...func(*Options)) (*GetSAMLProviderOutput, error) {
 	if params == nil {
 		params = &GetSAMLProviderInput{}
@@ -35,9 +35,8 @@ type GetSAMLProviderInput struct {
 
 	// The Amazon Resource Name (ARN) of the SAML provider resource object in IAM to
 	// get information about. For more information about ARNs, see Amazon Resource
-	// Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the Amazon Web Services General Reference.
+	// Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	SAMLProviderArn *string
@@ -45,7 +44,7 @@ type GetSAMLProviderInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetSAMLProvider request.
+// Contains the response to a successful GetSAMLProvider  request.
 type GetSAMLProviderOutput struct {
 
 	// The date and time when the SAML provider was created.
@@ -56,9 +55,8 @@ type GetSAMLProviderOutput struct {
 
 	// A list of tags that are attached to the specified IAM SAML provider. The
 	// returned list of tags is sorted by tag key. For more information about tagging,
-	// see Tagging IAM resources
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
-	// Guide.
+	// see Tagging IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
+	// in the IAM User Guide.
 	Tags []types.Tag
 
 	// The expiration date and time for the SAML provider.

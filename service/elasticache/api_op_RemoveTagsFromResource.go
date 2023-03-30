@@ -16,8 +16,8 @@ import (
 // to categorize and track all your ElastiCache resources, with the exception of
 // global replication group. When you add or remove tags on replication groups,
 // those actions will be replicated to all nodes in the replication group. For more
-// information, see Resource-level permissions
-// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html).
+// information, see Resource-level permissions (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html)
+// .
 func (c *Client) RemoveTagsFromResource(ctx context.Context, params *RemoveTagsFromResourceInput, optFns ...func(*Options)) (*RemoveTagsFromResourceOutput, error) {
 	if params == nil {
 		params = &RemoveTagsFromResourceInput{}
@@ -33,20 +33,21 @@ func (c *Client) RemoveTagsFromResource(ctx context.Context, params *RemoveTagsF
 	return out, nil
 }
 
-// Represents the input of a RemoveTagsFromResource operation.
+// Represents the input of a RemoveTagsFromResource  operation.
 type RemoveTagsFromResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource from which you want the tags
 	// removed, for example arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster
 	// or arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot. For more
 	// information about ARNs, see Amazon Resource Names (ARNs) and Amazon Service
-	// Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// .
 	//
 	// This member is required.
 	ResourceName *string
 
-	// A list of TagKeys identifying the tags you want removed from the named resource.
+	// A list of TagKeys identifying the tags you want removed from the named
+	// resource.
 	//
 	// This member is required.
 	TagKeys []string
@@ -54,7 +55,7 @@ type RemoveTagsFromResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output from the AddTagsToResource, ListTagsForResource, and
+// Represents the output from the AddTagsToResource , ListTagsForResource , and
 // RemoveTagsFromResource operations.
 type RemoveTagsFromResourceOutput struct {
 

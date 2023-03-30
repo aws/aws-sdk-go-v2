@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists specific permissions of users and groups with access to your Amazon Kendra
-// experience.
+// Lists specific permissions of users and groups with access to your Amazon
+// Kendra experience.
 func (c *Client) ListEntityPersonas(ctx context.Context, params *ListEntityPersonasInput, optFns ...func(*Options)) (*ListEntityPersonasOutput, error) {
 	if params == nil {
 		params = &ListEntityPersonasInput{}
@@ -144,8 +144,8 @@ type ListEntityPersonasPaginatorOptions struct {
 	// The maximum number of returned users or groups.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

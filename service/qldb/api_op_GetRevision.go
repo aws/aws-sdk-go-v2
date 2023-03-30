@@ -32,8 +32,8 @@ func (c *Client) GetRevision(ctx context.Context, params *GetRevisionInput, optF
 type GetRevisionInput struct {
 
 	// The block location of the document revision to be verified. An address is an
-	// Amazon Ion structure that has two fields: strandId and sequenceNo. For example:
-	// {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}.
+	// Amazon Ion structure that has two fields: strandId  and sequenceNo. For
+	// example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14} .
 	//
 	// This member is required.
 	BlockAddress *types.ValueHolder
@@ -48,9 +48,9 @@ type GetRevisionInput struct {
 	// This member is required.
 	Name *string
 
-	// The latest block location covered by the digest for which to request a proof. An
-	// address is an Amazon Ion structure that has two fields: strandId and sequenceNo.
-	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}.
+	// The latest block location covered by the digest for which to request a proof.
+	// An address is an Amazon Ion structure that has two fields: strandId  and
+	// sequenceNo . For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49} .
 	DigestTipAddress *types.ValueHolder
 
 	noSmithyDocumentSerde
@@ -63,9 +63,10 @@ type GetRevisionOutput struct {
 	// This member is required.
 	Revision *types.ValueHolder
 
-	// The proof object in Amazon Ion format returned by a GetRevision request. A proof
-	// contains the list of hash values that are required to recalculate the specified
-	// digest using a Merkle tree, starting with the specified document revision.
+	// The proof object in Amazon Ion format returned by a GetRevision request. A
+	// proof contains the list of hash values that are required to recalculate the
+	// specified digest using a Merkle tree, starting with the specified document
+	// revision.
 	Proof *types.ValueHolder
 
 	// Metadata pertaining to the operation's result.

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the differences in a valid commit specifier (such as a
-// branch, tag, HEAD, commit ID, or other fully qualified reference). Results can
+// Returns information about the differences in a valid commit specifier (such as
+// a branch, tag, HEAD, commit ID, or other fully qualified reference). Results can
 // be limited to a specified path.
 func (c *Client) GetDifferences(ctx context.Context, params *GetDifferencesInput, optFns ...func(*Options)) (*GetDifferencesOutput, error) {
 	if params == nil {
@@ -50,21 +50,23 @@ type GetDifferencesInput struct {
 
 	// The branch, tag, HEAD, or other fully qualified reference used to identify a
 	// commit (for example, the full commit ID). Optional. If not specified, all
-	// changes before the afterCommitSpecifier value are shown. If you do not use
+	// changes before the afterCommitSpecifier  value are shown. If you do not use
 	// beforeCommitSpecifier in your request, consider limiting the results with
-	// maxResults.
+	// maxResults .
 	BeforeCommitSpecifier *string
 
 	// The file path in which to check for differences. Limits the results to this
 	// path. Can also be used to specify the previous name of a directory or folder. If
-	// beforePath and afterPath are not specified, differences are shown for all paths.
+	//
+	// beforePath and afterPath are not specified, differences are shown for all
+	// paths.
 	BeforePath *string
 
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	MaxResults *int32
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
+	// An enumeration token that, when provided in a request, returns the next batch
+	// of the results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -162,8 +164,8 @@ type GetDifferencesPaginatorOptions struct {
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -14,8 +14,7 @@ import (
 // Revokes an ingress rule in an Amazon Redshift security group for a previously
 // authorized IP range or Amazon EC2 security group. To add an ingress rule, see
 // AuthorizeClusterSecurityGroupIngress. For information about managing security
-// groups, go to Amazon Redshift Cluster Security Groups
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
+// groups, go to Amazon Redshift Cluster Security Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) RevokeClusterSecurityGroupIngress(ctx context.Context, params *RevokeClusterSecurityGroupIngressInput, optFns ...func(*Options)) (*RevokeClusterSecurityGroupIngressOutput, error) {
 	if params == nil {
@@ -40,20 +39,20 @@ type RevokeClusterSecurityGroupIngressInput struct {
 	ClusterSecurityGroupName *string
 
 	// The IP range for which to revoke access. This range must be a valid Classless
-	// Inter-Domain Routing (CIDR) block of IP addresses. If CIDRIP is specified,
-	// EC2SecurityGroupName and EC2SecurityGroupOwnerId cannot be provided.
+	// Inter-Domain Routing (CIDR) block of IP addresses. If CIDRIP  is specified,
+	// EC2SecurityGroupName and EC2SecurityGroupOwnerId  cannot be provided.
 	CIDRIP *string
 
 	// The name of the EC2 Security Group whose access is to be revoked. If
-	// EC2SecurityGroupName is specified, EC2SecurityGroupOwnerId must also be provided
-	// and CIDRIP cannot be provided.
+	// EC2SecurityGroupName is specified, EC2SecurityGroupOwnerId must also be
+	// provided and CIDRIP  cannot be provided.
 	EC2SecurityGroupName *string
 
 	// The Amazon Web Services account number of the owner of the security group
-	// specified in the EC2SecurityGroupName parameter. The Amazon Web Services access
-	// key ID is not an acceptable value. If EC2SecurityGroupOwnerId is specified,
-	// EC2SecurityGroupName must also be provided. and CIDRIP cannot be provided.
-	// Example: 111122223333
+	// specified in the EC2SecurityGroupName parameter. The Amazon Web Services
+	// access key ID is not an acceptable value. If EC2SecurityGroupOwnerId is
+	// specified, EC2SecurityGroupName  must also be provided. and CIDRIP cannot be
+	// provided. Example: 111122223333
 	EC2SecurityGroupOwnerId *string
 
 	noSmithyDocumentSerde

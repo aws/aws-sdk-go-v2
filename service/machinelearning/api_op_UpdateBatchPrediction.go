@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the BatchPredictionName of a BatchPrediction. You can use the
+// Updates the BatchPredictionName  of a BatchPrediction . You can use the
 // GetBatchPrediction operation to view the contents of the updated data element.
 func (c *Client) UpdateBatchPrediction(ctx context.Context, params *UpdateBatchPredictionInput, optFns ...func(*Options)) (*UpdateBatchPredictionOutput, error) {
 	if params == nil {
@@ -29,12 +29,12 @@ func (c *Client) UpdateBatchPrediction(ctx context.Context, params *UpdateBatchP
 
 type UpdateBatchPredictionInput struct {
 
-	// The ID assigned to the BatchPrediction during creation.
+	// The ID assigned to the BatchPrediction  during creation.
 	//
 	// This member is required.
 	BatchPredictionId *string
 
-	// A new user-supplied name or description of the BatchPrediction.
+	// A new user-supplied name or description of the BatchPrediction .
 	//
 	// This member is required.
 	BatchPredictionName *string
@@ -43,11 +43,11 @@ type UpdateBatchPredictionInput struct {
 }
 
 // Represents the output of an UpdateBatchPrediction operation. You can see the
-// updated content by using the GetBatchPrediction operation.
+// updated content by using the GetBatchPrediction  operation.
 type UpdateBatchPredictionOutput struct {
 
 	// The ID assigned to the BatchPrediction during creation. This value should be
-	// identical to the value of the BatchPredictionId in the request.
+	// identical to the value of the BatchPredictionId  in the request.
 	BatchPredictionId *string
 
 	// Metadata pertaining to the operation's result.

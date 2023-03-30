@@ -50,14 +50,14 @@ type GetReservedNodeExchangeOfferingsInput struct {
 type GetReservedNodeExchangeOfferingsOutput struct {
 
 	// An optional parameter that specifies the starting point for returning a set of
-	// response records. When the results of a GetReservedNodeExchangeOfferings request
-	// exceed the value specified in MaxRecords, Amazon Redshift returns a value in the
-	// marker field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the marker parameter and retrying the
-	// request.
+	// response records. When the results of a GetReservedNodeExchangeOfferings
+	// request exceed the value specified in MaxRecords, Amazon Redshift returns a
+	// value in the marker field of the response. You can retrieve the next set of
+	// response records by providing the returned marker value in the marker parameter
+	// and retrying the request.
 	Marker *string
 
-	// Returns an array of ReservedNodeOffering objects.
+	// Returns an array of ReservedNodeOffering  objects.
 	ReservedNodeOfferings []types.ReservedNodeOffering
 
 	// Metadata pertaining to the operation's result.
@@ -143,8 +143,8 @@ type GetReservedNodeExchangeOfferingsPaginatorOptions struct {
 	// An integer setting the maximum number of ReservedNodeOfferings to retrieve.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

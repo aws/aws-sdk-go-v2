@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a TagKey configuration to an account.
+// Associates a TagKey  configuration to an account.
 func (c *Client) PutConfiguration(ctx context.Context, params *PutConfigurationInput, optFns ...func(*Options)) (*PutConfigurationOutput, error) {
 	if params == nil {
 		params = &PutConfigurationInput{}
@@ -29,7 +29,7 @@ func (c *Client) PutConfiguration(ctx context.Context, params *PutConfigurationI
 
 type PutConfigurationInput struct {
 
-	// Associates a TagKey configuration to an account.
+	// Associates a TagKey  configuration to an account.
 	//
 	// This member is required.
 	Configuration *types.AppRegistryConfiguration

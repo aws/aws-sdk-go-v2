@@ -51,9 +51,9 @@ type ListModelCardExportJobsInput struct {
 	// List export jobs for the model card with the specified version.
 	ModelCardVersion int32
 
-	// If the response to a previous ListModelCardExportJobs request was truncated, the
-	// response includes a NextToken. To retrieve the next set of model card export
-	// jobs, use the token in the next request.
+	// If the response to a previous ListModelCardExportJobs request was truncated,
+	// the response includes a NextToken. To retrieve the next set of model card
+	// export jobs, use the token in the next request.
 	NextToken *string
 
 	// Sort model card export jobs by either name or creation time. Sorts by creation
@@ -76,8 +76,8 @@ type ListModelCardExportJobsOutput struct {
 	// This member is required.
 	ModelCardExportJobSummaries []types.ModelCardExportJobSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of model card export jobs, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of model card export jobs, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -163,8 +163,8 @@ type ListModelCardExportJobsPaginatorOptions struct {
 	// The maximum number of model card export jobs to list.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

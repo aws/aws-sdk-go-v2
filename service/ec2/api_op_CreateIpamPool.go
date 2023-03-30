@@ -17,9 +17,8 @@ import (
 // organize your IP addresses according to your routing and security needs. For
 // example, if you have separate routing and security needs for development and
 // production applications, you can create a pool for each. For more information,
-// see Create a top-level pool
-// (https://docs.aws.amazon.com/vpc/latest/ipam/create-top-ipam.html) in the Amazon
-// VPC IPAM User Guide.
+// see Create a top-level pool (https://docs.aws.amazon.com/vpc/latest/ipam/create-top-ipam.html)
+// in the Amazon VPC IPAM User Guide.
 func (c *Client) CreateIpamPool(ctx context.Context, params *CreateIpamPoolInput, optFns ...func(*Options)) (*CreateIpamPoolOutput, error) {
 	if params == nil {
 		params = &CreateIpamPoolInput{}
@@ -37,8 +36,8 @@ func (c *Client) CreateIpamPool(ctx context.Context, params *CreateIpamPoolInput
 
 type CreateIpamPoolInput struct {
 
-	// The IP protocol assigned to this IPAM pool. You must choose either IPv4 or IPv6
-	// protocol for a pool.
+	// The IP protocol assigned to this IPAM pool. You must choose either IPv4 or
+	// IPv6 protocol for a pool.
 	//
 	// This member is required.
 	AddressFamily types.AddressFamily
@@ -48,19 +47,19 @@ type CreateIpamPoolInput struct {
 	// This member is required.
 	IpamScopeId *string
 
-	// The default netmask length for allocations added to this pool. If, for example,
-	// the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new
+	// The default netmask length for allocations added to this pool. If, for
+	// example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new
 	// allocations will default to 10.0.0.0/16.
 	AllocationDefaultNetmaskLength *int32
 
-	// The maximum netmask length possible for CIDR allocations in this IPAM pool to be
-	// compliant. The maximum netmask length must be greater than the minimum netmask
-	// length. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask
-	// lengths for IPv6 addresses are 0 - 128.
+	// The maximum netmask length possible for CIDR allocations in this IPAM pool to
+	// be compliant. The maximum netmask length must be greater than the minimum
+	// netmask length. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible
+	// netmask lengths for IPv6 addresses are 0 - 128.
 	AllocationMaxNetmaskLength *int32
 
-	// The minimum netmask length required for CIDR allocations in this IPAM pool to be
-	// compliant. The minimum netmask length must be less than the maximum netmask
+	// The minimum netmask length required for CIDR allocations in this IPAM pool to
+	// be compliant. The minimum netmask length must be less than the maximum netmask
 	// length. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask
 	// lengths for IPv6 addresses are 0 - 128.
 	AllocationMinNetmaskLength *int32
@@ -72,10 +71,10 @@ type CreateIpamPoolInput struct {
 	// resource may be marked as noncompliant.
 	AllocationResourceTags []types.RequestIpamResourceTag
 
-	// If selected, IPAM will continuously look for resources within the CIDR range of
-	// this pool and automatically import them as allocations into your IPAM. The CIDRs
-	// that will be allocated for these resources must not already be allocated to
-	// other resources in order for the import to succeed. IPAM will import a CIDR
+	// If selected, IPAM will continuously look for resources within the CIDR range
+	// of this pool and automatically import them as allocations into your IPAM. The
+	// CIDRs that will be allocated for these resources must not already be allocated
+	// to other resources in order for the import to succeed. IPAM will import a CIDR
 	// regardless of its compliance with the pool's allocation rules, so a resource
 	// might be imported and subsequently marked as noncompliant. If IPAM discovers
 	// multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM
@@ -83,13 +82,13 @@ type CreateIpamPoolInput struct {
 	// them only. A locale must be set on the pool for this feature to work.
 	AutoImport *bool
 
-	// Limits which service in Amazon Web Services that the pool can be used in. "ec2",
-	// for example, allows users to use space for Elastic IP addresses and VPCs.
+	// Limits which service in Amazon Web Services that the pool can be used in.
+	// "ec2", for example, allows users to use space for Elastic IP addresses and VPCs.
 	AwsService types.IpamPoolAwsService
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see Ensuring Idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	// of the request. For more information, see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// .
 	ClientToken *string
 
 	// A description for the IPAM pool.
@@ -97,12 +96,12 @@ type CreateIpamPoolInput struct {
 
 	// A check for whether you have the required permissions for the action without
 	// actually making the request and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
-	// In IPAM, the locale is the Amazon Web Services Region where you want to make an
-	// IPAM pool available for allocations. Only resources in the same Region as the
+	// In IPAM, the locale is the Amazon Web Services Region where you want to make
+	// an IPAM pool available for allocations. Only resources in the same Region as the
 	// locale of the pool can get IP address allocations from the pool. You can only
 	// allocate a CIDR for a VPC, for example, from an IPAM pool that shares a locale
 	// with the VPC’s Region. Note that once you choose a Locale for a pool, you cannot
@@ -111,19 +110,18 @@ type CreateIpamPoolInput struct {
 	// Web Services Region, such as us-east-1.
 	Locale *string
 
-	// The IP address source for pools in the public scope. Only used for provisioning
-	// IP address CIDRs to pools in the public scope. Default is byoip. For more
-	// information, see Create IPv6 pools
-	// (https://docs.aws.amazon.com/vpc/latest/ipam/intro-create-ipv6-pools.html) in
-	// the Amazon VPC IPAM User Guide. By default, you can add only one Amazon-provided
-	// IPv6 CIDR block to a top-level IPv6 pool if PublicIpSource is amazon. For
-	// information on increasing the default limit, see  Quotas for your IPAM
-	// (https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html) in the Amazon VPC
-	// IPAM User Guide.
+	// The IP address source for pools in the public scope. Only used for
+	// provisioning IP address CIDRs to pools in the public scope. Default is byoip.
+	// For more information, see Create IPv6 pools (https://docs.aws.amazon.com/vpc/latest/ipam/intro-create-ipv6-pools.html)
+	// in the Amazon VPC IPAM User Guide. By default, you can add only one
+	// Amazon-provided IPv6 CIDR block to a top-level IPv6 pool if PublicIpSource is
+	// amazon . For information on increasing the default limit, see  Quotas for your
+	// IPAM (https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html)in the
+	// Amazon VPC IPAM User Guide.
 	PublicIpSource types.IpamPoolPublicIpSource
 
 	// Determines if the pool is publicly advertisable. This option is not available
-	// for pools with AddressFamily set to ipv4.
+	// for pools with AddressFamily set to ipv4 .
 	PubliclyAdvertisable *bool
 
 	// The ID of the source IPAM pool. Use this option to create a pool within an
@@ -131,10 +129,10 @@ type CreateIpamPoolInput struct {
 	// pool must be available in the source pool's CIDR range.
 	SourceIpamPoolId *string
 
-	// The key/value combination of a tag assigned to the resource. Use the tag key in
-	// the filter name and the tag value as the filter value. For example, to find all
-	// resources that have a tag with the key Owner and the value TeamA, specify
-	// tag:Owner for the filter name and TeamA for the filter value.
+	// The key/value combination of a tag assigned to the resource. Use the tag key
+	// in the filter name and the tag value as the filter value. For example, to find
+	// all resources that have a tag with the key Owner  and the value TeamA , specify
+	// tag:Owner for the filter name and TeamA  for the filter value.
 	TagSpecifications []types.TagSpecification
 
 	noSmithyDocumentSerde

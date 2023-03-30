@@ -127,8 +127,8 @@ func (c *Client) addOperationListRecommendationsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListRecommendationsAPIClient is a client that implements the ListRecommendations
-// operation.
+// ListRecommendationsAPIClient is a client that implements the
+// ListRecommendations operation.
 type ListRecommendationsAPIClient interface {
 	ListRecommendations(context.Context, *ListRecommendationsInput, ...func(*Options)) (*ListRecommendationsOutput, error)
 }
@@ -138,8 +138,8 @@ var _ ListRecommendationsAPIClient = (*Client)(nil)
 // ListRecommendationsPaginatorOptions is the paginator options for
 // ListRecommendations
 type ListRecommendationsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

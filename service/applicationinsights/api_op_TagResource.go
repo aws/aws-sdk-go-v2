@@ -41,9 +41,9 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceARN *string
 
-	// A list of tags that to add to the application. A tag consists of a required tag
-	// key (Key) and an associated tag value (Value). The maximum length of a tag key
-	// is 128 characters. The maximum length of a tag value is 256 characters.
+	// A list of tags that to add to the application. A tag consists of a required
+	// tag key ( Key ) and an associated tag value ( Value). The maximum length of a
+	// tag key is 128 characters. The maximum length of a tag value is 256 characters.
 	//
 	// This member is required.
 	Tags []types.Tag

@@ -12,19 +12,18 @@ import (
 
 // Retrieves the specified inline policy document that is embedded with the
 // specified IAM role. Policies returned by this operation are URL-encoded
-// compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986). You can use a URL
-// decoding method to convert the policy back to plain JSON text. For example, if
-// you use Java, you can use the decode method of the java.net.URLDecoder utility
-// class in the Java SDK. Other languages and SDKs provide similar functionality.
-// An IAM role can also have managed policies attached to it. To retrieve a managed
-// policy document that is attached to a role, use GetPolicy to determine the
-// policy's default version, then use GetPolicyVersion to retrieve the policy
-// document. For more information about policies, see Managed policies and inline
-// policies
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986). You can use a
+// URL decoding method to convert the policy back to plain JSON text. For example,
+// if you use Java, you can use the decode  method of the java.net.URLDecoder
+// utility class in the Java SDK. Other languages and SDKs provide similar
+// functionality. An IAM role can also have managed policies attached to it. To
+// retrieve a managed policy document that is attached to a role, use GetPolicy
+// to determine the policy's default version, then use GetPolicyVersion to
+// retrieve the policy document. For more information about policies, see Managed
+// policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide. For more information about roles, see Using roles to
-// delegate permissions and federate identities
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html).
+// delegate permissions and federate identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html)
+// .
 func (c *Client) GetRolePolicy(ctx context.Context, params *GetRolePolicyInput, optFns ...func(*Options)) (*GetRolePolicyOutput, error) {
 	if params == nil {
 		params = &GetRolePolicyInput{}
@@ -42,18 +41,18 @@ func (c *Client) GetRolePolicy(ctx context.Context, params *GetRolePolicyInput, 
 
 type GetRolePolicyInput struct {
 
-	// The name of the policy document to get. This parameter allows (through its regex
-	// pattern (http://wikipedia.org/wiki/regex)) a string of characters consisting of
-	// upper and lowercase alphanumeric characters with no spaces. You can also include
-	// any of the following characters: _+=,.@-
+	// The name of the policy document to get. This parameter allows (through its
+	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
+	// consisting of upper and lowercase alphanumeric characters with no spaces. You
+	// can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.
 	PolicyName *string
 
-	// The name of the role associated with the policy. This parameter allows (through
-	// its regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
-	// consisting of upper and lowercase alphanumeric characters with no spaces. You
-	// can also include any of the following characters: _+=,.@-
+	// The name of the role associated with the policy. This parameter allows
+	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// characters consisting of upper and lowercase alphanumeric characters with no
+	// spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.
 	RoleName *string
@@ -61,11 +60,11 @@ type GetRolePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetRolePolicy request.
+// Contains the response to a successful GetRolePolicy  request.
 type GetRolePolicyOutput struct {
 
-	// The policy document. IAM stores policies in JSON format. However, resources that
-	// were created using CloudFormation templates can be formatted in YAML.
+	// The policy document. IAM stores policies in JSON format. However, resources
+	// that were created using CloudFormation templates can be formatted in YAML.
 	// CloudFormation always converts a YAML policy to JSON format before submitting it
 	// to IAM.
 	//

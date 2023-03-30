@@ -58,9 +58,9 @@ const (
 	DataTypeBoolean DataType = "BOOLEAN"
 )
 
-// Values returns all known values for DataType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for DataType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (DataType) Values() []DataType {
 	return []DataType{
 		"STRING",
@@ -79,8 +79,8 @@ const (
 	DetectorVersionStatusInactive DetectorVersionStatus = "INACTIVE"
 )
 
-// Values returns all known values for DetectorVersionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DetectorVersionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DetectorVersionStatus) Values() []DetectorVersionStatus {
 	return []DetectorVersionStatus{
@@ -115,9 +115,9 @@ const (
 	LanguageDetectorpl Language = "DETECTORPL"
 )
 
-// Values returns all known values for Language. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Language. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Language) Values() []Language {
 	return []Language{
 		"DETECTORPL",
@@ -170,8 +170,8 @@ const (
 	ModelInputDataFormatJson ModelInputDataFormat = "APPLICATION_JSON"
 )
 
-// Values returns all known values for ModelInputDataFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ModelInputDataFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ModelInputDataFormat) Values() []ModelInputDataFormat {
 	return []ModelInputDataFormat{
@@ -188,8 +188,8 @@ const (
 	ModelOutputDataFormatJsonlines ModelOutputDataFormat = "APPLICATION_JSONLINES"
 )
 
-// Values returns all known values for ModelOutputDataFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ModelOutputDataFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ModelOutputDataFormat) Values() []ModelOutputDataFormat {
 	return []ModelOutputDataFormat{
@@ -205,9 +205,9 @@ const (
 	ModelSourceSagemaker ModelSource = "SAGEMAKER"
 )
 
-// Values returns all known values for ModelSource. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ModelSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ModelSource) Values() []ModelSource {
 	return []ModelSource{
 		"SAGEMAKER",
@@ -300,9 +300,9 @@ const (
 	UnlabeledEventsTreatmentAuto   UnlabeledEventsTreatment = "AUTO"
 )
 
-// Values returns all known values for UnlabeledEventsTreatment. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UnlabeledEventsTreatment. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UnlabeledEventsTreatment) Values() []UnlabeledEventsTreatment {
 	return []UnlabeledEventsTreatment{
 		"IGNORE",

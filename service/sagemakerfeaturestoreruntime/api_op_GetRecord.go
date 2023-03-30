@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use for OnlineStore serving from a FeatureStore. Only the latest records stored
-// in the OnlineStore can be retrieved. If no Record with RecordIdentifierValue is
-// found, then an empty result is returned.
+// Use for OnlineStore  serving from a FeatureStore. Only the latest records
+// stored in the OnlineStore  can be retrieved. If no Record with
+// RecordIdentifierValue is found, then an empty result is returned.
 func (c *Client) GetRecord(ctx context.Context, params *GetRecordInput, optFns ...func(*Options)) (*GetRecordOutput, error) {
 	if params == nil {
 		params = &GetRecordInput{}
@@ -36,8 +36,8 @@ type GetRecordInput struct {
 	// This member is required.
 	FeatureGroupName *string
 
-	// The value that corresponds to RecordIdentifier type and uniquely identifies the
-	// record in the FeatureGroup.
+	// The value that corresponds to RecordIdentifier type and uniquely identifies
+	// the record in the FeatureGroup .
 	//
 	// This member is required.
 	RecordIdentifierValueAsString *string
@@ -51,7 +51,7 @@ type GetRecordInput struct {
 
 type GetRecordOutput struct {
 
-	// The record you requested. A list of FeatureValues.
+	// The record you requested. A list of FeatureValues .
 	Record []types.FeatureValue
 
 	// Metadata pertaining to the operation's result.

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves settings for one or more trails associated with the current region for
-// your account.
+// Retrieves settings for one or more trails associated with the current region
+// for your account.
 func (c *Client) DescribeTrails(ctx context.Context, params *DescribeTrailsInput, optFns ...func(*Options)) (*DescribeTrailsOutput, error) {
 	if params == nil {
 		params = &DescribeTrailsInput{}
@@ -39,22 +39,17 @@ type DescribeTrailsInput struct {
 	// The default is true.
 	IncludeShadowTrails *bool
 
-	// Specifies a list of trail names, trail ARNs, or both, of the trails to describe.
-	// The format of a trail ARN is:
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail If an empty list is
+	// Specifies a list of trail names, trail ARNs, or both, of the trails to
+	// describe. The format of a trail ARN is:
+	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrailIf an empty list is
 	// specified, information for the trail in the current region is returned.
-	// - If an
-	// empty list is specified and IncludeShadowTrails is false, then information for
-	// all trails in the current region is returned.
-	// - If an empty list is specified
-	// and IncludeShadowTrails is null or true, then information for all trails in the
-	// current region and any associated shadow trails in other regions is
-	// returned.
+	//     - If an empty list is specified and IncludeShadowTrails is false, then information for all trails in the current region is returned.
+	//     - If an empty list is specified and IncludeShadowTrails is null or true, then information for all trails in the current region and any associated shadow trails in other regions is returned.
 	//
-	// If one or more trail names are specified, information is returned
-	// only if the names match the names of trails belonging only to the current region
-	// and current account. To return information about a trail in another region, you
-	// must specify its trail ARN.
+	// If one or more trail names are specified, information is returned only if the
+	// names match the names of trails belonging only to the current region and current
+	// account. To return information about a trail in another region, you must specify
+	// its trail ARN.
 	TrailNameList []string
 
 	noSmithyDocumentSerde
@@ -64,8 +59,8 @@ type DescribeTrailsInput struct {
 // error.
 type DescribeTrailsOutput struct {
 
-	// The list of trail objects. Trail objects with string values are only returned if
-	// values for the objects exist in a trail's configuration. For example,
+	// The list of trail objects. Trail objects with string values are only returned
+	// if values for the objects exist in a trail's configuration. For example,
 	// SNSTopicName and SNSTopicARN are only returned in results if a trail is
 	// configured to send SNS notifications. Similarly, KMSKeyId only appears in
 	// results if a trail's log files are encrypted with KMS customer managed keys.

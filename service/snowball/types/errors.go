@@ -91,8 +91,8 @@ func (e *Ec2RequestFailedException) ErrorCode() string {
 }
 func (e *Ec2RequestFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The address provided was invalid. Check the address with your region's carrier,
-// and try again.
+// The address provided was invalid. Check the address with your region's
+// carrier, and try again.
 type InvalidAddressException struct {
 	Message *string
 
@@ -119,8 +119,8 @@ func (e *InvalidAddressException) ErrorCode() string {
 func (e *InvalidAddressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Job or cluster creation failed. One or more inputs were invalid. Confirm that
-// the CreateClusterRequest$SnowballType value supports your
-// CreateJobRequest$JobType, and try again.
+// the CreateClusterRequest$SnowballType  value supports your
+// CreateJobRequest$JobType , and try again.
 type InvalidInputCombinationException struct {
 	Message *string
 
@@ -146,8 +146,8 @@ func (e *InvalidInputCombinationException) ErrorCode() string {
 }
 func (e *InvalidInputCombinationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The action can't be performed because the job's current state doesn't allow that
-// action to be performed.
+// The action can't be performed because the job's current state doesn't allow
+// that action to be performed.
 type InvalidJobStateException struct {
 	Message *string
 
@@ -174,7 +174,7 @@ func (e *InvalidJobStateException) ErrorCode() string {
 func (e *InvalidJobStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The NextToken string was altered unexpectedly, and the operation has stopped.
-// Run the operation without changing the NextToken string, and try again.
+// Run the operation without changing the NextToken  string, and try again.
 type InvalidNextTokenException struct {
 	Message *string
 
@@ -230,7 +230,7 @@ func (e *InvalidResourceException) ErrorCode() string {
 func (e *InvalidResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The provided Key Management Service key lacks the permissions to perform the
-// specified CreateJob or UpdateJob action.
+// specified CreateJob  or UpdateJob  action.
 type KMSRequestFailedException struct {
 	Message *string
 
@@ -256,9 +256,9 @@ func (e *KMSRequestFailedException) ErrorCode() string {
 }
 func (e *KMSRequestFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You get this exception if you call CreateReturnShippingLabel and a valid return
-// shipping label already exists. In this case, use DescribeReturnShippingLabel to
-// get the URL.
+// You get this exception if you call CreateReturnShippingLabel and a valid
+// return shipping label already exists. In this case, use
+// DescribeReturnShippingLabel to get the URL.
 type ReturnShippingLabelAlreadyExistsException struct {
 	Message *string
 
@@ -286,9 +286,9 @@ func (e *ReturnShippingLabelAlreadyExistsException) ErrorFault() smithy.ErrorFau
 	return smithy.FaultClient
 }
 
-// The address is either outside the serviceable area for your region, or an error
-// occurred. Check the address with your region's carrier and try again. If the
-// issue persists, contact Amazon Web Services Support.
+// The address is either outside the serviceable area for your region, or an
+// error occurred. Check the address with your region's carrier and try again. If
+// the issue persists, contact Amazon Web Services Support.
 type UnsupportedAddressException struct {
 	Message *string
 

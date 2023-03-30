@@ -18,8 +18,8 @@ import (
 // replaces the DetectEntities operation. This new action uses a different model
 // for determining the entities in your medical text and changes the way that some
 // entities are returned in the output. You should use the DetectEntitiesV2
-// operation in all new applications. The DetectEntitiesV2 operation returns the
-// Acuity and Direction entities as attributes instead of types.
+// operation in all new applications. The DetectEntitiesV2  operation returns the
+// Acuity and Direction  entities as attributes instead of types.
 func (c *Client) DetectEntitiesV2(ctx context.Context, params *DetectEntitiesV2Input, optFns ...func(*Options)) (*DetectEntitiesV2Output, error) {
 	if params == nil {
 		params = &DetectEntitiesV2Input{}
@@ -37,8 +37,8 @@ func (c *Client) DetectEntitiesV2(ctx context.Context, params *DetectEntitiesV2I
 
 type DetectEntitiesV2Input struct {
 
-	// A UTF-8 string containing the clinical content being examined for entities. Each
-	// string must contain fewer than 20,000 bytes of characters.
+	// A UTF-8 string containing the clinical content being examined for entities.
+	// Each string must contain fewer than 20,000 bytes of characters.
 	//
 	// This member is required.
 	Text *string
@@ -57,14 +57,14 @@ type DetectEntitiesV2Output struct {
 	// This member is required.
 	Entities []types.Entity
 
-	// The version of the model used to analyze the documents. The version number looks
-	// like X.X.X. You can use this information to track the model used for a
+	// The version of the model used to analyze the documents. The version number
+	// looks like X.X.X. You can use this information to track the model used for a
 	// particular batch of documents.
 	//
 	// This member is required.
 	ModelVersion *string
 
-	// If the result to the DetectEntitiesV2 operation was truncated, include the
+	// If the result to the DetectEntitiesV2  operation was truncated, include the
 	// PaginationToken to fetch the next page of entities.
 	PaginationToken *string
 

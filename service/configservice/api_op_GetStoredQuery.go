@@ -39,7 +39,7 @@ type GetStoredQueryInput struct {
 
 type GetStoredQueryOutput struct {
 
-	// Returns a StoredQuery object.
+	// Returns a StoredQuery  object.
 	StoredQuery *types.StoredQuery
 
 	// Metadata pertaining to the operation's result.

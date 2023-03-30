@@ -49,17 +49,17 @@ type DescribeNotebookInstanceOutput struct {
 	// A list of the Elastic Inference (EI) instance types associated with this
 	// notebook instance. Currently only one EI instance type can be associated with a
 	// notebook instance. For more information, see Using Elastic Inference in Amazon
-	// SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html).
+	// SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html) .
 	AcceleratorTypes []types.NotebookInstanceAcceleratorType
 
-	// An array of up to three Git repositories associated with the notebook instance.
-	// These can be either the names of Git repositories stored as resources in your
-	// account, or the URL of Git repositories in Amazon Web Services CodeCommit
-	// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
-	// other Git repository. These repositories are cloned at the same level as the
-	// default repository of your notebook instance. For more information, see
-	// Associating Git Repositories with SageMaker Notebook Instances
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	// An array of up to three Git repositories associated with the notebook
+	// instance. These can be either the names of Git repositories stored as resources
+	// in your account, or the URL of Git repositories in Amazon Web Services
+	// CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// or in any other Git repository. These repositories are cloned at the same level
+	// as the default repository of your notebook instance. For more information, see
+	// Associating Git Repositories with SageMaker Notebook Instances (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html)
+	// .
 	AdditionalCodeRepositories []string
 
 	// A timestamp. Use this parameter to return the time when the notebook instance
@@ -69,22 +69,21 @@ type DescribeNotebookInstanceOutput struct {
 	// The Git repository associated with the notebook instance as its default code
 	// repository. This can be either the name of a Git repository stored as a resource
 	// in your account, or the URL of a Git repository in Amazon Web Services
-	// CodeCommit
-	// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
-	// other Git repository. When you open a notebook instance, it opens in the
-	// directory that contains this repository. For more information, see Associating
-	// Git Repositories with SageMaker Notebook Instances
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	// CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// or in any other Git repository. When you open a notebook instance, it opens in
+	// the directory that contains this repository. For more information, see
+	// Associating Git Repositories with SageMaker Notebook Instances (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html)
+	// .
 	DefaultCodeRepository *string
 
 	// Describes whether SageMaker provides internet access to the notebook instance.
 	// If this value is set to Disabled, the notebook instance does not have internet
 	// access, and cannot connect to SageMaker training and endpoint services. For more
-	// information, see Notebook Instances Are Internet-Enabled by Default
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access).
+	// information, see Notebook Instances Are Internet-Enabled by Default (https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access)
+	// .
 	DirectInternetAccess types.DirectInternetAccess
 
-	// If status is Failed, the reason it failed.
+	// If status is Failed , the reason it failed.
 	FailureReason *string
 
 	// Information on the IMDS configuration of the notebook instance
@@ -97,8 +96,8 @@ type DescribeNotebookInstanceOutput struct {
 	// it on the ML storage volume attached to the instance.
 	KmsKeyId *string
 
-	// A timestamp. Use this parameter to retrieve the time when the notebook instance
-	// was last modified.
+	// A timestamp. Use this parameter to retrieve the time when the notebook
+	// instance was last modified.
 	LastModifiedTime *time.Time
 
 	// The network interface IDs that SageMaker created at the time of creating the
@@ -108,10 +107,9 @@ type DescribeNotebookInstanceOutput struct {
 	// The Amazon Resource Name (ARN) of the notebook instance.
 	NotebookInstanceArn *string
 
-	// Returns the name of a notebook instance lifecycle configuration. For information
-	// about notebook instance lifestyle configurations, see Step 2.1: (Optional)
-	// Customize a Notebook Instance
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html)
+	// Returns the name of a notebook instance lifecycle configuration. For
+	// information about notebook instance lifestyle configurations, see Step 2.1:
+	// (Optional) Customize a Notebook Instance (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html)
 	NotebookInstanceLifecycleConfigName *string
 
 	// The name of the SageMaker notebook instance.
@@ -138,8 +136,8 @@ type DescribeNotebookInstanceOutput struct {
 	// The ID of the VPC subnet.
 	SubnetId *string
 
-	// The URL that you use to connect to the Jupyter notebook that is running in your
-	// notebook instance.
+	// The URL that you use to connect to the Jupyter notebook that is running in
+	// your notebook instance.
 	Url *string
 
 	// The size, in GB, of the ML storage volume attached to the notebook instance.
@@ -236,8 +234,8 @@ type NotebookInstanceDeletedWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, NotebookInstanceDeletedWaiter will use default max delay of 120
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, NotebookInstanceDeletedWaiter will use default max delay of 120
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration
@@ -410,8 +408,8 @@ type NotebookInstanceInServiceWaiterOptions struct {
 	// Note that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, NotebookInstanceInServiceWaiter will use default max delay of 120
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, NotebookInstanceInServiceWaiter will use default max delay of 120
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration
@@ -438,7 +436,8 @@ type NotebookInstanceInServiceWaiter struct {
 	options NotebookInstanceInServiceWaiterOptions
 }
 
-// NewNotebookInstanceInServiceWaiter constructs a NotebookInstanceInServiceWaiter.
+// NewNotebookInstanceInServiceWaiter constructs a
+// NotebookInstanceInServiceWaiter.
 func NewNotebookInstanceInServiceWaiter(client DescribeNotebookInstanceAPIClient, optFns ...func(*NotebookInstanceInServiceWaiterOptions)) *NotebookInstanceInServiceWaiter {
 	options := NotebookInstanceInServiceWaiterOptions{}
 	options.MinDelay = 30 * time.Second
@@ -462,10 +461,10 @@ func (w *NotebookInstanceInServiceWaiter) Wait(ctx context.Context, params *Desc
 	return err
 }
 
-// WaitForOutput calls the waiter function for NotebookInstanceInService waiter and
-// returns the output of the successful operation. The maxWaitDur is the maximum
-// wait duration the waiter will wait. The maxWaitDur is required and must be
-// greater than zero.
+// WaitForOutput calls the waiter function for NotebookInstanceInService waiter
+// and returns the output of the successful operation. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *NotebookInstanceInServiceWaiter) WaitForOutput(ctx context.Context, params *DescribeNotebookInstanceInput, maxWaitDur time.Duration, optFns ...func(*NotebookInstanceInServiceWaiterOptions)) (*DescribeNotebookInstanceOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
@@ -590,8 +589,8 @@ type NotebookInstanceStoppedWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, NotebookInstanceStoppedWaiter will use default max delay of 120
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, NotebookInstanceStoppedWaiter will use default max delay of 120
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration

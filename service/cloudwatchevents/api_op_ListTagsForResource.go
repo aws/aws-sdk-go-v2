@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays the tags associated with an EventBridge resource. In EventBridge, rules
-// and event buses can be tagged.
+// Displays the tags associated with an EventBridge resource. In EventBridge,
+// rules and event buses can be tagged.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

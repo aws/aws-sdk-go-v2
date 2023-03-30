@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all Amazon EMR Studios associated with the Amazon Web Services
-// account. The list includes details such as ID, Studio Access URL, and creation
-// time for each Studio.
+// Returns a list of all Amazon EMR Studios associated with the Amazon Web
+// Services account. The list includes details such as ID, Studio Access URL, and
+// creation time for each Studio.
 func (c *Client) ListStudios(ctx context.Context, params *ListStudiosInput, optFns ...func(*Options)) (*ListStudiosOutput, error) {
 	if params == nil {
 		params = &ListStudiosInput{}
@@ -121,8 +121,8 @@ var _ ListStudiosAPIClient = (*Client)(nil)
 
 // ListStudiosPaginatorOptions is the paginator options for ListStudios
 type ListStudiosPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -31,8 +31,7 @@ func (c *Client) ListAgentStatuses(ctx context.Context, params *ListAgentStatuse
 
 type ListAgentStatusesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -136,13 +135,14 @@ type ListAgentStatusesAPIClient interface {
 
 var _ ListAgentStatusesAPIClient = (*Client)(nil)
 
-// ListAgentStatusesPaginatorOptions is the paginator options for ListAgentStatuses
+// ListAgentStatusesPaginatorOptions is the paginator options for
+// ListAgentStatuses
 type ListAgentStatusesPaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

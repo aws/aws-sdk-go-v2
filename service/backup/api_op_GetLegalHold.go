@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// This action returns details for a specified legal hold. The details are the body
-// of a legal hold in JSON format, in addition to metadata.
+// This action returns details for a specified legal hold. The details are the
+// body of a legal hold in JSON format, in addition to metadata.
 func (c *Client) GetLegalHold(ctx context.Context, params *GetLegalHoldInput, optFns ...func(*Options)) (*GetLegalHoldOutput, error) {
 	if params == nil {
 		params = &GetLegalHoldInput{}
@@ -31,8 +31,8 @@ func (c *Client) GetLegalHold(ctx context.Context, params *GetLegalHoldInput, op
 
 type GetLegalHoldInput struct {
 
-	// This is the ID required to use GetLegalHold. This unique ID is associated with a
-	// specific legal hold.
+	// This is the ID required to use GetLegalHold. This unique ID is associated with
+	// a specific legal hold.
 	//
 	// This member is required.
 	LegalHoldId *string
@@ -62,15 +62,15 @@ type GetLegalHoldOutput struct {
 	// This is the returned ID associated with a specified legal hold.
 	LegalHoldId *string
 
-	// This specifies criteria to assign a set of resources, such as resource types or
-	// backup vaults.
+	// This specifies criteria to assign a set of resources, such as resource types
+	// or backup vaults.
 	RecoveryPointSelection *types.RecoveryPointSelection
 
 	// This is the date and time until which the legal hold record will be retained.
 	RetainRecordUntil *time.Time
 
-	// This is the status of the legal hold. Statuses can be ACTIVE, CREATING,
-	// CANCELED, and CANCELING.
+	// This is the status of the legal hold. Statuses can be ACTIVE , CREATING ,
+	// CANCELED , and CANCELING .
 	Status types.LegalHoldStatus
 
 	// This is the string title of the legal hold.

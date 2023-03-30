@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-// An Amazon Web Services account within your environment that Amazon Inspector has
-// been enabled for.
+// An Amazon Web Services account within your environment that Amazon Inspector
+// has been enabled for.
 type Account struct {
 
 	// The ID of the Amazon Web Services account.
@@ -60,8 +60,8 @@ type AccountAggregationResponse struct {
 	noSmithyDocumentSerde
 }
 
-// An object with details the status of an Amazon Web Services account within your
-// Amazon Inspector environment.
+// An object with details the status of an Amazon Web Services account within
+// your Amazon Inspector environment.
 type AccountState struct {
 
 	// The Amazon Web Services account ID.
@@ -69,8 +69,8 @@ type AccountState struct {
 	// This member is required.
 	AccountId *string
 
-	// An object detailing which resources Amazon Inspector is enabled to scan for the
-	// account.
+	// An object detailing which resources Amazon Inspector is enabled to scan for
+	// the account.
 	//
 	// This member is required.
 	ResourceState *ResourceState
@@ -102,8 +102,8 @@ type AggregationRequest interface {
 	isAggregationRequest()
 }
 
-// An object that contains details about an aggregation request based on Amazon Web
-// Services account IDs.
+// An object that contains details about an aggregation request based on Amazon
+// Web Services account IDs.
 type AggregationRequestMemberAccountAggregation struct {
 	Value AccountAggregation
 
@@ -122,8 +122,8 @@ type AggregationRequestMemberAmiAggregation struct {
 
 func (*AggregationRequestMemberAmiAggregation) isAggregationRequest() {}
 
-// An object that contains details about an aggregation request based on Amazon ECR
-// container images.
+// An object that contains details about an aggregation request based on Amazon
+// ECR container images.
 type AggregationRequestMemberAwsEcrContainerAggregation struct {
 	Value AwsEcrContainerAggregation
 
@@ -132,8 +132,8 @@ type AggregationRequestMemberAwsEcrContainerAggregation struct {
 
 func (*AggregationRequestMemberAwsEcrContainerAggregation) isAggregationRequest() {}
 
-// An object that contains details about an aggregation request based on Amazon EC2
-// instances.
+// An object that contains details about an aggregation request based on Amazon
+// EC2 instances.
 type AggregationRequestMemberEc2InstanceAggregation struct {
 	Value Ec2InstanceAggregation
 
@@ -152,8 +152,8 @@ type AggregationRequestMemberFindingTypeAggregation struct {
 
 func (*AggregationRequestMemberFindingTypeAggregation) isAggregationRequest() {}
 
-// An object that contains details about an aggregation request based on container
-// image layers.
+// An object that contains details about an aggregation request based on
+// container image layers.
 type AggregationRequestMemberImageLayerAggregation struct {
 	Value ImageLayerAggregation
 
@@ -180,8 +180,8 @@ type AggregationRequestMemberLambdaLayerAggregation struct {
 
 func (*AggregationRequestMemberLambdaLayerAggregation) isAggregationRequest() {}
 
-// An object that contains details about an aggregation request based on operating
-// system package type.
+// An object that contains details about an aggregation request based on
+// operating system package type.
 type AggregationRequestMemberPackageAggregation struct {
 	Value PackageAggregation
 
@@ -190,8 +190,8 @@ type AggregationRequestMemberPackageAggregation struct {
 
 func (*AggregationRequestMemberPackageAggregation) isAggregationRequest() {}
 
-// An object that contains details about an aggregation request based on Amazon ECR
-// repositories.
+// An object that contains details about an aggregation request based on Amazon
+// ECR repositories.
 type AggregationRequestMemberRepositoryAggregation struct {
 	Value RepositoryAggregation
 
@@ -279,8 +279,8 @@ type AggregationResponseMemberFindingTypeAggregation struct {
 
 func (*AggregationResponseMemberFindingTypeAggregation) isAggregationResponse() {}
 
-// An object that contains details about an aggregation response based on container
-// image layers.
+// An object that contains details about an aggregation response based on
+// container image layers.
 type AggregationResponseMemberImageLayerAggregation struct {
 	Value ImageLayerAggregationResponse
 
@@ -307,8 +307,8 @@ type AggregationResponseMemberLambdaLayerAggregation struct {
 
 func (*AggregationResponseMemberLambdaLayerAggregation) isAggregationResponse() {}
 
-// An object that contains details about an aggregation response based on operating
-// system package type.
+// An object that contains details about an aggregation response based on
+// operating system package type.
 type AggregationResponseMemberPackageAggregation struct {
 	Value PackageAggregationResponse
 
@@ -376,20 +376,20 @@ type AmiAggregationResponse struct {
 // Amazon Inspector organization.
 type AutoEnable struct {
 
-	// Represents whether Amazon EC2 scans are automatically enabled for new members of
-	// your Amazon Inspector organization.
+	// Represents whether Amazon EC2 scans are automatically enabled for new members
+	// of your Amazon Inspector organization.
 	//
 	// This member is required.
 	Ec2 *bool
 
-	// Represents whether Amazon ECR scans are automatically enabled for new members of
-	// your Amazon Inspector organization.
+	// Represents whether Amazon ECR scans are automatically enabled for new members
+	// of your Amazon Inspector organization.
 	//
 	// This member is required.
 	Ecr *bool
 
-	// Represents whether AWS Lambda scans are automatically enabled for new members of
-	// your Amazon Inspector organization.
+	// Represents whether AWS Lambda scans are automatically enabled for new members
+	// of your Amazon Inspector organization.
 	Lambda *bool
 
 	noSmithyDocumentSerde
@@ -553,20 +553,19 @@ type AwsLambdaFunctionDetails struct {
 
 	// The instruction set architecture that the AWS Lambda function supports.
 	// Architecture is a string array with one of the valid values. The default
-	// architecture value is x86_64.
+	// architecture value is x86_64 .
 	Architectures []Architecture
 
-	// The date and time that a user last updated the configuration, in ISO 8601 format
-	// (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// The date and time that a user last updated the configuration, in ISO 8601
+	// format (https://www.iso.org/iso-8601-date-and-time-format.html)
 	LastModifiedAt *time.Time
 
-	// The AWS Lambda function's  layers
-	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html). A
-	// Lambda function can have up to five layers.
+	// The AWS Lambda function's  layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
+	// . A Lambda function can have up to five layers.
 	Layers []string
 
-	// The type of deployment package. Set to Image for container image and set Zip for
-	// .zip file archive.
+	// The type of deployment package. Set to Image  for container image and set Zip
+	// for .zip file archive.
 	PackageType PackageType
 
 	// The AWS Lambda function's networking configuration.
@@ -587,7 +586,7 @@ type Counts struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that identifies filter criteria for GetCoverageStatistics.
+// A structure that identifies filter criteria for GetCoverageStatistics .
 type CoverageFilterCriteria struct {
 
 	// An array of Amazon Web Services account IDs to return coverage statistics for.
@@ -602,7 +601,8 @@ type CoverageFilterCriteria struct {
 	// The Amazon ECR repository name to filter on.
 	EcrRepositoryName []CoverageStringFilter
 
-	// Returns coverage statistics for AWS Lambda functions filtered by function names.
+	// Returns coverage statistics for AWS Lambda functions filtered by function
+	// names.
 	LambdaFunctionName []CoverageStringFilter
 
 	// Returns coverage statistics for AWS Lambda functions filtered by runtime.
@@ -615,7 +615,7 @@ type CoverageFilterCriteria struct {
 	ResourceId []CoverageStringFilter
 
 	// An array of Amazon Web Services resource types to return coverage statistics
-	// for. The values can be AWS_EC2_INSTANCE or AWS_ECR_REPOSITORY.
+	// for. The values can be AWS_EC2_INSTANCE  or AWS_ECR_REPOSITORY .
 	ResourceType []CoverageStringFilter
 
 	// The scan status code to filter on.
@@ -842,8 +842,8 @@ type Ec2InstanceAggregation struct {
 	InstanceTags []MapFilter
 
 	// The operating system types to aggregate findings for. Valid values must be
-	// uppercase and underscore separated, examples are ORACLE_LINUX_7 and
-	// ALPINE_LINUX_3_8.
+	// uppercase and underscore separated, examples are ORACLE_LINUX_7  and
+	// ALPINE_LINUX_3_8 .
 	OperatingSystems []StringFilter
 
 	// The value to sort results by.
@@ -906,7 +906,7 @@ type EcrConfiguration struct {
 	// The ECR automated re-scan duration defines how long an ECR image will be
 	// actively scanned by Amazon Inspector. When the number of days since an image was
 	// last pushed exceeds the automated re-scan duration the monitoring state of that
-	// image becomes inactive and all associated findings are scheduled for closure.
+	// image becomes inactive  and all associated findings are scheduled for closure.
 	//
 	// This member is required.
 	RescanDuration EcrRescanDuration
@@ -952,7 +952,7 @@ type EcrRescanDurationState struct {
 	// The ECR automated re-scan duration defines how long an ECR image will be
 	// actively scanned by Amazon Inspector. When the number of days since an image was
 	// last pushed exceeds the automated re-scan duration the monitoring state of that
-	// image becomes inactive and all associated findings are scheduled for closure.
+	// image becomes inactive  and all associated findings are scheduled for closure.
 	RescanDuration EcrRescanDuration
 
 	// The status of changes to the ECR automated re-scan duration.
@@ -994,8 +994,8 @@ type FailedAccount struct {
 	// This member is required.
 	ErrorMessage *string
 
-	// An object detailing which resources Amazon Inspector is enabled to scan for the
-	// account.
+	// An object detailing which resources Amazon Inspector is enabled to scan for
+	// the account.
 	ResourceStatus *ResourceStatus
 
 	// The status of Amazon Inspector for the account.
@@ -1109,7 +1109,7 @@ type FilterCriteria struct {
 	FirstObservedAt []DateFilter
 
 	// Details on whether a fix is available through a version update. This value can
-	// be YES, NO, or PARTIAL. A PARTIAL fix means that some, but not all, of the
+	// be YES , NO , or PARTIAL . A PARTIAL fix means that some, but not all, of the
 	// packages identified in the finding have fixes available through updated
 	// versions.
 	FixAvailable []StringFilter
@@ -1121,13 +1121,11 @@ type FilterCriteria struct {
 	LambdaFunctionExecutionRoleArn []StringFilter
 
 	// Filters the list of AWS Lambda functions by the date and time that a user last
-	// updated the configuration, in ISO 8601 format
-	// (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// updated the configuration, in ISO 8601 format (https://www.iso.org/iso-8601-date-and-time-format.html)
 	LambdaFunctionLastModifiedAt []DateFilter
 
-	// Filters the list of AWS Lambda functions by the function's  layers
-	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html). A
-	// Lambda function can have up to five layers.
+	// Filters the list of AWS Lambda functions by the function's  layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
+	// . A Lambda function can have up to five layers.
 	LambdaFunctionLayers []StringFilter
 
 	// Filters the list of AWS Lambda functions by the name of the function.
@@ -1244,7 +1242,7 @@ type Finding struct {
 	ExploitabilityDetails *ExploitabilityDetails
 
 	// Details on whether a fix is available through a version update. This value can
-	// be YES, NO, or PARTIAL. A PARTIAL fix means that some, but not all, of the
+	// be YES , NO , or PARTIAL . A PARTIAL fix means that some, but not all, of the
 	// packages identified in the finding have fixes available through updated
 	// versions.
 	FixAvailable FixAvailable
@@ -1316,11 +1314,12 @@ type FreeTrialAccountInfo struct {
 	noSmithyDocumentSerde
 }
 
-// An object that contains information about the Amazon Inspector free trial for an
-// account.
+// An object that contains information about the Amazon Inspector free trial for
+// an account.
 type FreeTrialInfo struct {
 
-	// The date and time that the Amazon Inspector free trail ends for a given account.
+	// The date and time that the Amazon Inspector free trail ends for a given
+	// account.
 	//
 	// This member is required.
 	End *time.Time
@@ -1390,8 +1389,8 @@ type ImageLayerAggregation struct {
 // A response that contains the results of a finding aggregation by image layer.
 type ImageLayerAggregationResponse struct {
 
-	// The ID of the Amazon Web Services account that owns the container image hosting
-	// the layer image.
+	// The ID of the Amazon Web Services account that owns the container image
+	// hosting the layer image.
 	//
 	// This member is required.
 	AccountId *string
@@ -1500,8 +1499,8 @@ type LambdaFunctionMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// The details that define a findings aggregation based on an AWS Lambda function's
-// layers.
+// The details that define a findings aggregation based on an AWS Lambda
+// function's layers.
 type LambdaLayerAggregation struct {
 
 	// The names of the AWS Lambda functions associated with the layers.
@@ -1552,14 +1551,14 @@ type LambdaLayerAggregationResponse struct {
 	noSmithyDocumentSerde
 }
 
-// The VPC security groups and subnets that are attached to an AWS Lambda function.
-// For more information, see VPC Settings
-// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html).
+// The VPC security groups and subnets that are attached to an AWS Lambda
+// function. For more information, see VPC Settings (https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html)
+// .
 type LambdaVpcConfig struct {
 
-	// The VPC security groups and subnets that are attached to an AWS Lambda function.
-	// For more information, see VPC Settings
-	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html).
+	// The VPC security groups and subnets that are attached to an AWS Lambda
+	// function. For more information, see VPC Settings (https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html)
+	// .
 	SecurityGroupIds []string
 
 	// A list of VPC subnet IDs.
@@ -1890,11 +1889,12 @@ type ResourceDetails struct {
 	// finding.
 	AwsEc2Instance *AwsEc2InstanceDetails
 
-	// An object that contains details about the Amazon ECR container image involved in
-	// the finding.
+	// An object that contains details about the Amazon ECR container image involved
+	// in the finding.
 	AwsEcrContainerImage *AwsEcrContainerImageDetails
 
-	// A summary of the information about an AWS Lambda function affected by a finding.
+	// A summary of the information about an AWS Lambda function affected by a
+	// finding.
 	AwsLambdaFunction *AwsLambdaFunctionDetails
 
 	noSmithyDocumentSerde
@@ -1910,8 +1910,8 @@ type ResourceScanMetadata struct {
 	// image.
 	EcrImage *EcrContainerImageMetadata
 
-	// An object that contains details about the repository an Amazon ECR image resides
-	// in.
+	// An object that contains details about the repository an Amazon ECR image
+	// resides in.
 	EcrRepository *EcrRepositoryMetadata
 
 	// An object that contains metadata details for an AWS Lambda function.

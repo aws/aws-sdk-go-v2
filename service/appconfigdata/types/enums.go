@@ -32,9 +32,9 @@ const (
 	InvalidParameterProblemPollIntervalNotSatisfied InvalidParameterProblem = "PollIntervalNotSatisfied"
 )
 
-// Values returns all known values for InvalidParameterProblem. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InvalidParameterProblem. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InvalidParameterProblem) Values() []InvalidParameterProblem {
 	return []InvalidParameterProblem{
 		"Corrupted",
@@ -59,9 +59,9 @@ const (
 	ResourceTypeConfiguration ResourceType = "Configuration"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"Application",

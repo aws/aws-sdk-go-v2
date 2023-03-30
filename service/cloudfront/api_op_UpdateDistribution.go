@@ -15,22 +15,11 @@ import (
 // includes getting the current distribution configuration, updating it to make
 // your changes, and then submitting an UpdateDistribution request to make the
 // updates. To update a web distribution using the CloudFront API
-// - Use
-// GetDistributionConfig to get the current configuration, including the version
-// identifier (ETag).
-// - Update the distribution configuration that was returned in
-// the response. Note the following important requirements and restrictions:
-// - You
-// must rename the ETag field to IfMatch, leaving the value unchanged. (Set the
-// value of IfMatch to the value of ETag, then remove the ETag field.)
-// - You can't
-// change the value of CallerReference.
-//
-// - Submit an UpdateDistribution request,
-// providing the distribution configuration. The new configuration replaces the
-// existing configuration. The values that you specify in an UpdateDistribution
-// request are not merged into your existing configuration. Make sure to include
-// all fields: the ones that you modified and also the ones that you didn't.
+//   - Use GetDistributionConfig to get the current configuration, including the version identifier ( ETag ).
+//   - Update the distribution configuration that was returned in the response. Note the following important requirements and restrictions:
+//   - You must rename the ETag field to IfMatch , leaving the value unchanged. (Set the value of IfMatch to the value of ETag , then remove the ETag field.)
+//   - You can't change the value of CallerReference .
+//   - Submit an UpdateDistribution request, providing the distribution configuration. The new configuration replaces the existing configuration. The values that you specify in an UpdateDistribution request are not merged into your existing configuration. Make sure to include all fields: the ones that you modified and also the ones that you didn't.
 func (c *Client) UpdateDistribution(ctx context.Context, params *UpdateDistributionInput, optFns ...func(*Options)) (*UpdateDistributionOutput, error) {
 	if params == nil {
 		params = &UpdateDistributionInput{}
@@ -60,7 +49,7 @@ type UpdateDistributionInput struct {
 	Id *string
 
 	// The value of the ETag header that you received when retrieving the
-	// distribution's configuration. For example: E2QWRUHAPOMQZL.
+	// distribution's configuration. For example: E2QWRUHAPOMQZL .
 	IfMatch *string
 
 	noSmithyDocumentSerde
@@ -72,7 +61,7 @@ type UpdateDistributionOutput struct {
 	// The distribution's information.
 	Distribution *types.Distribution
 
-	// The current version of the configuration. For example: E2QWRUHAPOMQZL.
+	// The current version of the configuration. For example: E2QWRUHAPOMQZL .
 	ETag *string
 
 	// Metadata pertaining to the operation's result.

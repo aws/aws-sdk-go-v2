@@ -36,8 +36,8 @@ type ListReplaysInput struct {
 	// The maximum number of replays to retrieve.
 	Limit *int32
 
-	// A name prefix to filter the replays returned. Only replays with name that match
-	// the prefix are returned.
+	// A name prefix to filter the replays returned. Only replays with name that
+	// match the prefix are returned.
 	NamePrefix *string
 
 	// The token returned by a previous call to retrieve the next set of results.
@@ -54,7 +54,7 @@ type ListReplaysOutput struct {
 	// The token returned by a previous call to retrieve the next set of results.
 	NextToken *string
 
-	// An array of Replay objects that contain information about the replay.
+	// An array of Replay  objects that contain information about the replay.
 	Replays []types.Replay
 
 	// Metadata pertaining to the operation's result.

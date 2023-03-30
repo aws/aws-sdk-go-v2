@@ -16,8 +16,7 @@ import (
 // groups. Retrieves information on all game servers that are currently active in a
 // specified game server group. You can opt to sort the list by game server age.
 // Use the pagination parameters to retrieve results in a set of sequential
-// segments. Learn more GameLift FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+// segments. Learn more GameLift FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 func (c *Client) ListGameServers(ctx context.Context, params *ListGameServersInput, optFns ...func(*Options)) (*ListGameServersOutput, error) {
 	if params == nil {
 		params = &ListGameServersInput{}
@@ -35,8 +34,8 @@ func (c *Client) ListGameServers(ctx context.Context, params *ListGameServersInp
 
 type ListGameServersInput struct {
 
-	// An identifier for the game server group to retrieve a list of game servers from.
-	// Use either the name or ARN value.
+	// An identifier for the game server group to retrieve a list of game servers
+	// from. Use either the name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string
@@ -45,14 +44,14 @@ type ListGameServersInput struct {
 	// get results as a set of sequential pages.
 	Limit *int32
 
-	// A token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this operation. To start at the
-	// beginning of the result set, do not specify a value.
+	// A token that indicates the start of the next sequential page of results. Use
+	// the token that is returned with a previous call to this operation. To start at
+	// the beginning of the result set, do not specify a value.
 	NextToken *string
 
 	// Indicates how to sort the returned data based on game server registration
-	// timestamp. Use ASCENDING to retrieve oldest game servers first, or use
-	// DESCENDING to retrieve newest game servers first. If this parameter is left
+	// timestamp. Use ASCENDING  to retrieve oldest game servers first, or use
+	// DESCENDINGto retrieve newest game servers first. If this parameter is left
 	// empty, game servers are returned in no particular order.
 	SortOrder types.SortOrder
 
@@ -152,8 +151,8 @@ type ListGameServersPaginatorOptions struct {
 	// get results as a set of sequential pages.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

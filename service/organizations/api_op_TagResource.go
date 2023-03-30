@@ -11,16 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds one or more tags to the specified resource. Currently, you can attach tags
-// to the following resources in Organizations.
-// - Amazon Web Services account
-// -
-// Organization root
-// - Organizational unit (OU)
-// - Policy (any type)
+// Adds one or more tags to the specified resource. Currently, you can attach
+// tags to the following resources in Organizations.
+//   - Amazon Web Services account
+//   - Organization root
+//   - Organizational unit (OU)
+//   - Policy (any type)
 //
-// This operation
-// can be called only from the organization's management account.
+// This operation can be called only from the
+// organization's management account.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -40,14 +39,10 @@ type TagResourceInput struct {
 
 	// The ID of the resource to add a tag to. You can specify any of the following
 	// taggable resources.
-	// - Amazon Web Services account – specify the account ID
-	// number.
-	// - Organizational unit – specify the OU ID that begins with ou- and looks
-	// similar to: ou-1a2b-34uvwxyz
-	// - Root – specify the root ID that begins with r-
-	// and looks similar to: r-1a2b
-	// - Policy – specify the policy ID that begins with
-	// p- andlooks similar to: p-12abcdefg3
+	//     - Amazon Web Services account – specify the account ID number.
+	//     - Organizational unit – specify the OU ID that begins with ou- and looks similar to: ou-1a2b-34uvwxyz
+	//     - Root – specify the root ID that begins with r- and looks similar to: r-1a2b
+	//     - Policy – specify the policy ID that begins with p- andlooks similar to: p-12abcdefg3
 	//
 	// This member is required.
 	ResourceId *string

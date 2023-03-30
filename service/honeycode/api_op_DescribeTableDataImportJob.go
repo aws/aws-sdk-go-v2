@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The DescribeTableDataImportJob API allows you to retrieve the status and details
-// of a table data import job.
+// The DescribeTableDataImportJob API allows you to retrieve the status and
+// details of a table data import job.
 func (c *Client) DescribeTableDataImportJob(ctx context.Context, params *DescribeTableDataImportJobInput, optFns ...func(*Options)) (*DescribeTableDataImportJobOutput, error) {
 	if params == nil {
 		params = &DescribeTableDataImportJobInput{}
@@ -30,15 +30,15 @@ func (c *Client) DescribeTableDataImportJob(ctx context.Context, params *Describ
 
 type DescribeTableDataImportJobInput struct {
 
-	// The ID of the job that was returned by the StartTableDataImportJob request. If a
-	// job with the specified id could not be found, this API throws
+	// The ID of the job that was returned by the StartTableDataImportJob request. If
+	// a job with the specified id could not be found, this API throws
 	// ResourceNotFoundException.
 	//
 	// This member is required.
 	JobId *string
 
-	// The ID of the table into which data was imported. If a table with the specified
-	// id could not be found, this API throws ResourceNotFoundException.
+	// The ID of the table into which data was imported. If a table with the
+	// specified id could not be found, this API throws ResourceNotFoundException.
 	//
 	// This member is required.
 	TableId *string

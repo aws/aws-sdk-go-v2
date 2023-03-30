@@ -16,8 +16,8 @@ import (
 	"time"
 )
 
-// Returns the current status of an existing association or disassociation request.
-// A ResourceNotFoundException is thrown when no recent association or
+// Returns the current status of an existing association or disassociation
+// request. A ResourceNotFoundException is thrown when no recent association or
 // disassociation request with the specified token is found, or when the server
 // does not exist. A ValidationException is raised when parameters of the request
 // are not valid.
@@ -59,12 +59,9 @@ type DescribeNodeAssociationStatusOutput struct {
 	EngineAttributes []types.EngineAttribute
 
 	// The status of the association or disassociation request. Possible values:
-	// -
-	// SUCCESS: The association or disassociation succeeded.
-	// - FAILED: The association
-	// or disassociation failed.
-	// - IN_PROGRESS: The association or disassociation is
-	// still in progress.
+	//     - SUCCESS : The association or disassociation succeeded.
+	//     - FAILED : The association or disassociation failed.
+	//     - IN_PROGRESS : The association or disassociation is still in progress.
 	NodeAssociationStatus types.NodeAssociationStatus
 
 	// Metadata pertaining to the operation's result.
@@ -157,9 +154,9 @@ type NodeAssociatedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, NodeAssociatedWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, NodeAssociatedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -199,9 +196,9 @@ func NewNodeAssociatedWaiter(client DescribeNodeAssociationStatusAPIClient, optF
 	}
 }
 
-// Wait calls the waiter function for NodeAssociated waiter. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// Wait calls the waiter function for NodeAssociated waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *NodeAssociatedWaiter) Wait(ctx context.Context, params *DescribeNodeAssociationStatusInput, maxWaitDur time.Duration, optFns ...func(*NodeAssociatedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

@@ -33,8 +33,8 @@ func (c *Client) DescribeVTLDevices(ctx context.Context, params *DescribeVTLDevi
 // DescribeVTLDevicesInput
 type DescribeVTLDevicesInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -47,10 +47,10 @@ type DescribeVTLDevicesInput struct {
 	// VTL devices.
 	Marker *string
 
-	// An array of strings, where each string represents the Amazon Resource Name (ARN)
-	// of a VTL device. All of the specified VTL devices must be from the same gateway.
-	// If no VTL devices are specified, the result will contain all devices on the
-	// specified gateway.
+	// An array of strings, where each string represents the Amazon Resource Name
+	// (ARN) of a VTL device. All of the specified VTL devices must be from the same
+	// gateway. If no VTL devices are specified, the result will contain all devices on
+	// the specified gateway.
 	VTLDeviceARNs []string
 
 	noSmithyDocumentSerde
@@ -59,18 +59,18 @@ type DescribeVTLDevicesInput struct {
 // DescribeVTLDevicesOutput
 type DescribeVTLDevicesOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
-	// An opaque string that indicates the position at which the VTL devices that were
-	// fetched for description ended. Use the marker in your next request to fetch the
-	// next set of VTL devices in the list. If there are no more VTL devices to
+	// An opaque string that indicates the position at which the VTL devices that
+	// were fetched for description ended. Use the marker in your next request to fetch
+	// the next set of VTL devices in the list. If there are no more VTL devices to
 	// describe, this field does not appear in the response.
 	Marker *string
 
-	// An array of VTL device objects composed of the Amazon Resource Name (ARN) of the
-	// VTL devices.
+	// An array of VTL device objects composed of the Amazon Resource Name (ARN) of
+	// the VTL devices.
 	VTLDevices []types.VTLDevice
 
 	// Metadata pertaining to the operation's result.
@@ -157,8 +157,8 @@ type DescribeVTLDevicesPaginatorOptions struct {
 	// number.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

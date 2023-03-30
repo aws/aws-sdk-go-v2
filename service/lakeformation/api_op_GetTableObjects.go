@@ -13,8 +13,8 @@ import (
 	"time"
 )
 
-// Returns the set of Amazon S3 objects that make up the specified governed table.
-// A transaction ID or timestamp can be specified for time-travel queries.
+// Returns the set of Amazon S3 objects that make up the specified governed
+// table. A transaction ID or timestamp can be specified for time-travel queries.
 func (c *Client) GetTableObjects(ctx context.Context, params *GetTableObjectsInput, optFns ...func(*Options)) (*GetTableObjectsOutput, error) {
 	if params == nil {
 		params = &GetTableObjectsInput{}
@@ -53,22 +53,19 @@ type GetTableObjectsInput struct {
 
 	// A predicate to filter the objects returned based on the partition keys defined
 	// in the governed table.
-	// - The comparison operators supported are: =, >, <, >=,
-	// <=
-	// - The logical operators supported are: AND
-	// - The data types supported are
-	// integer, long, date(yyyy-MM-dd), timestamp(yyyy-MM-dd HH:mm:ssXXX or yyyy-MM-dd
-	// HH:mm:ss"), string and decimal.
+	//     - The comparison operators supported are: =, >, <, >=, <=
+	//     - The logical operators supported are: AND
+	//     - The data types supported are integer, long, date(yyyy-MM-dd), timestamp(yyyy-MM-dd HH:mm:ssXXX or yyyy-MM-dd HH:mm:ss"), string and decimal.
 	PartitionPredicate *string
 
 	// The time as of when to read the governed table contents. If not set, the most
 	// recent transaction commit time is used. Cannot be specified along with
-	// TransactionId.
+	// TransactionId .
 	QueryAsOfTime *time.Time
 
 	// The transaction ID at which to read the governed table contents. If this
 	// transaction has aborted, an error is returned. If not set, defaults to the most
-	// recent committed transaction. Cannot be specified along with QueryAsOfTime.
+	// recent committed transaction. Cannot be specified along with QueryAsOfTime .
 	TransactionId *string
 
 	noSmithyDocumentSerde
@@ -164,8 +161,8 @@ type GetTableObjectsPaginatorOptions struct {
 	// Specifies how many values to return in a page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

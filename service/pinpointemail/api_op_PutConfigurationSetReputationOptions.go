@@ -31,21 +31,21 @@ func (c *Client) PutConfigurationSetReputationOptions(ctx context.Context, param
 // configuration set.
 type PutConfigurationSetReputationOptionsInput struct {
 
-	// The name of the configuration set that you want to enable or disable reputation
-	// metric tracking for.
+	// The name of the configuration set that you want to enable or disable
+	// reputation metric tracking for.
 	//
 	// This member is required.
 	ConfigurationSetName *string
 
-	// If true, tracking of reputation metrics is enabled for the configuration set. If
-	// false, tracking of reputation metrics is disabled for the configuration set.
+	// If true, tracking of reputation metrics is enabled for the configuration set.
+	// If false , tracking of reputation metrics is disabled for the configuration set.
 	ReputationMetricsEnabled bool
 
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type PutConfigurationSetReputationOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

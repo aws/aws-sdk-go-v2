@@ -13,8 +13,7 @@ import (
 
 // Attaches tags to an existing Elasticsearch domain. Tags are a set of
 // case-sensitive key value pairs. An Elasticsearch domain may have up to 10 tags.
-// See  Tagging Amazon Elasticsearch Service Domains for more information.
-// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-awsresorcetagging)
+// See Tagging Amazon Elasticsearch Service Domains for more information. (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-awsresorcetagging)
 func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...func(*Options)) (*AddTagsOutput, error) {
 	if params == nil {
 		params = &AddTagsInput{}
@@ -30,16 +29,16 @@ func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...fu
 	return out, nil
 }
 
-// Container for the parameters to the AddTags operation. Specify the tags that you
-// want to attach to the Elasticsearch domain.
+// Container for the parameters to the AddTags operation. Specify the tags that
+// you want to attach to the Elasticsearch domain.
 type AddTagsInput struct {
 
-	// Specify the ARN for which you want to add the tags.
+	// Specify the ARN  for which you want to add the tags.
 	//
 	// This member is required.
 	ARN *string
 
-	// List of Tag that need to be added for the Elasticsearch domain.
+	// List of Tag  that need to be added for the Elasticsearch domain.
 	//
 	// This member is required.
 	TagList []types.Tag

@@ -13,10 +13,9 @@ import (
 
 // Update an existing App Runner VPC Ingress Connection resource. The VPC Ingress
 // Connection must be in one of the following states to be updated:
-// - AVAILABLE
-// -
-// FAILED_CREATION
-// - FAILED_UPDATE
+//   - AVAILABLE
+//   - FAILED_CREATION
+//   - FAILED_UPDATE
 func (c *Client) UpdateVpcIngressConnection(ctx context.Context, params *UpdateVpcIngressConnectionInput, optFns ...func(*Options)) (*UpdateVpcIngressConnectionOutput, error) {
 	if params == nil {
 		params = &UpdateVpcIngressConnectionInput{}
@@ -34,9 +33,9 @@ func (c *Client) UpdateVpcIngressConnection(ctx context.Context, params *UpdateV
 
 type UpdateVpcIngressConnectionInput struct {
 
-	// Specifications for the customer’s Amazon VPC and the related Amazon Web Services
-	// PrivateLink VPC endpoint that are used to update the VPC Ingress Connection
-	// resource.
+	// Specifications for the customer’s Amazon VPC and the related Amazon Web
+	// Services PrivateLink VPC endpoint that are used to update the VPC Ingress
+	// Connection resource.
 	//
 	// This member is required.
 	IngressVpcConfiguration *types.IngressVpcConfiguration

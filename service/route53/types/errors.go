@@ -33,8 +33,8 @@ func (e *CidrBlockInUseException) ErrorCode() string {
 }
 func (e *CidrBlockInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A CIDR collection with this name and a different caller reference already exists
-// in this account.
+// A CIDR collection with this name and a different caller reference already
+// exists in this account.
 type CidrCollectionAlreadyExistsException struct {
 	Message *string
 
@@ -117,8 +117,8 @@ func (e *CidrCollectionVersionMismatchException) ErrorFault() smithy.ErrorFault 
 	return smithy.FaultClient
 }
 
-// Another user submitted a request to create, update, or delete the object at the
-// same time that you did. Retry the request.
+// Another user submitted a request to create, update, or delete the object at
+// the same time that you did. Retry the request.
 type ConcurrentModification struct {
 	Message *string
 
@@ -145,21 +145,9 @@ func (e *ConcurrentModification) ErrorCode() string {
 func (e *ConcurrentModification) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The cause of this error depends on the operation that you're performing:
-// -
-// Create a public hosted zone: Two hosted zones that have the same name or that
-// have a parent/child relationship (example.com and test.example.com) can't have
-// any common name servers. You tried to create a hosted zone that has the same
-// name as an existing hosted zone or that's the parent or child of an existing
-// hosted zone, and you specified a delegation set that shares one or more name
-// servers with the existing hosted zone. For more information, see
-// CreateReusableDelegationSet
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html).
-// -
-// Create a private hosted zone: A hosted zone with the specified name already
-// exists and is already associated with the Amazon VPC that you specified.
-// -
-// Associate VPCs with a private hosted zone: The VPC that you specified is already
-// associated with another hosted zone that has the same name.
+//   - Create a public hosted zone: Two hosted zones that have the same name or that have a parent/child relationship (example.com and test.example.com) can't have any common name servers. You tried to create a hosted zone that has the same name as an existing hosted zone or that's the parent or child of an existing hosted zone, and you specified a delegation set that shares one or more name servers with the existing hosted zone. For more information, see CreateReusableDelegationSet (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html) .
+//   - Create a private hosted zone: A hosted zone with the specified name already exists and is already associated with the Amazon VPC that you specified.
+//   - Associate VPCs with a private hosted zone: The VPC that you specified is already associated with another hosted zone that has the same name.
 type ConflictingDomainExists struct {
 	Message *string
 
@@ -185,10 +173,10 @@ func (e *ConflictingDomainExists) ErrorCode() string {
 }
 func (e *ConflictingDomainExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You tried to update a traffic policy instance by using a traffic policy version
-// that has a different DNS type than the current type for the instance. You
-// specified the type in the JSON document in the CreateTrafficPolicy or
-// CreateTrafficPolicyVersionrequest.
+// You tried to update a traffic policy instance by using a traffic policy
+// version that has a different DNS type than the current type for the instance.
+// You specified the type in the JSON document in the CreateTrafficPolicy  or
+// CreateTrafficPolicyVersion request.
 type ConflictingTypes struct {
 	Message *string
 
@@ -267,8 +255,8 @@ func (e *DelegationSetAlreadyReusable) ErrorCode() string {
 }
 func (e *DelegationSetAlreadyReusable) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified delegation contains associated hosted zones which must be deleted
-// before the reusable delegation set can be deleted.
+// The specified delegation contains associated hosted zones which must be
+// deleted before the reusable delegation set can be deleted.
 type DelegationSetInUse struct {
 	Message *string
 
@@ -378,12 +366,8 @@ func (e *DNSSECNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultCli
 
 // The health check you're attempting to create already exists. Amazon Route 53
 // returns this error when you submit a request that has the following values:
-// -
-// The same value for CallerReference as an existing health check, and one or more
-// values that differ from the existing health check that has the same caller
-// reference.
-// - The same value for CallerReference as a health check that you
-// created and later deleted, regardless of the other settings in the request.
+//   - The same value for CallerReference as an existing health check, and one or more values that differ from the existing health check that has the same caller reference.
+//   - The same value for CallerReference as a health check that you created and later deleted, regardless of the other settings in the request.
 type HealthCheckAlreadyExists struct {
 	Message *string
 
@@ -435,7 +419,7 @@ func (e *HealthCheckInUse) ErrorCode() string {
 }
 func (e *HealthCheckInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The value of HealthCheckVersion in the request doesn't match the value of
+// The value of HealthCheckVersion  in the request doesn't match the value of
 // HealthCheckVersion in the health check.
 type HealthCheckVersionMismatch struct {
 	Message *string
@@ -462,9 +446,9 @@ func (e *HealthCheckVersionMismatch) ErrorCode() string {
 }
 func (e *HealthCheckVersionMismatch) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The hosted zone you're trying to create already exists. Amazon Route 53 returns
-// this error when a hosted zone has already been created with the specified
-// CallerReference.
+// The hosted zone you're trying to create already exists. Amazon Route 53
+// returns this error when a hosted zone has already been created with the
+// specified CallerReference .
 type HostedZoneAlreadyExists struct {
 	Message *string
 
@@ -568,8 +552,8 @@ func (e *HostedZoneNotPrivate) ErrorCode() string {
 }
 func (e *HostedZoneNotPrivate) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The hosted zone nameservers don't match the parent nameservers. The hosted zone
-// and parent must have the same nameservers.
+// The hosted zone nameservers don't match the parent nameservers. The hosted
+// zone and parent must have the same nameservers.
 type HostedZonePartiallyDelegated struct {
 	Message *string
 
@@ -622,22 +606,13 @@ func (e *IncompatibleVersion) ErrorCode() string {
 }
 func (e *IncompatibleVersion) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Amazon Route 53 doesn't have the permissions required to create log streams and
-// send query logs to log streams. Possible causes include the following:
-// - There
-// is no resource policy that specifies the log group ARN in the value for
-// Resource.
-// - The resource policy that includes the log group ARN in the value for
-// Resource doesn't have the necessary permissions.
-// - The resource policy hasn't
-// finished propagating yet.
-// - The Key management service (KMS) key you specified
-// doesn’t exist or it can’t be used with the log group associated with query log.
-// Update or provide a resource policy to grant permissions for the KMS key.
-// - The
-// Key management service (KMS) key you specified is marked as disabled for the log
-// group associated with query log. Update or provide a resource policy to grant
-// permissions for the KMS key.
+// Amazon Route 53 doesn't have the permissions required to create log streams
+// and send query logs to log streams. Possible causes include the following:
+//   - There is no resource policy that specifies the log group ARN in the value for Resource .
+//   - The resource policy that includes the log group ARN in the value for Resource doesn't have the necessary permissions.
+//   - The resource policy hasn't finished propagating yet.
+//   - The Key management service (KMS) key you specified doesn’t exist or it can’t be used with the log group associated with query log. Update or provide a resource policy to grant permissions for the KMS key.
+//   - The Key management service (KMS) key you specified is marked as disabled for the log group associated with query log. Update or provide a resource policy to grant permissions for the KMS key.
 type InsufficientCloudWatchLogsResourcePolicy struct {
 	Message *string
 
@@ -691,8 +666,8 @@ func (e *InvalidArgument) ErrorCode() string {
 }
 func (e *InvalidArgument) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception contains a list of messages that might contain one or more error
-// messages. Each error message indicates one error in the change batch.
+// This exception contains a list of messages that might contain one or more
+// error messages. Each error message indicates one error in the change batch.
 type InvalidChangeBatch struct {
 	Message *string
 
@@ -799,7 +774,7 @@ func (e *InvalidKeySigningKeyName) ErrorCode() string {
 func (e *InvalidKeySigningKeyName) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The key-signing key (KSK) status isn't valid or another KSK has the status
-// INTERNAL_FAILURE.
+// INTERNAL_FAILURE .
 type InvalidKeySigningKeyStatus struct {
 	Message *string
 
@@ -852,8 +827,8 @@ func (e *InvalidKMSArn) ErrorCode() string {
 }
 func (e *InvalidKMSArn) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The value that you specified to get the second or subsequent page of results is
-// invalid.
+// The value that you specified to get the second or subsequent page of results
+// is invalid.
 type InvalidPaginationToken struct {
 	Message *string
 
@@ -880,7 +855,7 @@ func (e *InvalidPaginationToken) ErrorCode() string {
 func (e *InvalidPaginationToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Your hosted zone status isn't valid for this operation. In the hosted zone,
-// change the status to enable DNSSEC or disable DNSSEC.
+// change the status to enable DNSSEC  or disable DNSSEC .
 type InvalidSigningStatus struct {
 	Message *string
 
@@ -933,8 +908,8 @@ func (e *InvalidTrafficPolicyDocument) ErrorCode() string {
 }
 func (e *InvalidTrafficPolicyDocument) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The VPC ID that you specified either isn't a valid ID or the current account is
-// not authorized to access this VPC.
+// The VPC ID that you specified either isn't a valid ID or the current account
+// is not authorized to access this VPC.
 type InvalidVPCId struct {
 	Message *string
 
@@ -1041,7 +1016,7 @@ func (e *KeySigningKeyInUse) ErrorCode() string {
 }
 func (e *KeySigningKeyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A key-signing key (KSK) with ACTIVE status wasn't found.
+// A key-signing key (KSK) with ACTIVE  status wasn't found.
 type KeySigningKeyWithActiveStatusNotFound struct {
 	Message *string
 
@@ -1099,7 +1074,7 @@ func (e *LastVPCAssociation) ErrorFault() smithy.ErrorFault { return smithy.Faul
 
 // This operation can't be completed because the current account has reached the
 // limit on the resource you are trying to create. To request a higher limit,
-// create a case (http://aws.amazon.com/route53-request) with the Amazon Web
+// create a case (http://aws.amazon.com/route53-request)with the Amazon Web
 // Services Support Center.
 type LimitsExceeded struct {
 	Message *string
@@ -1256,9 +1231,8 @@ func (e *NoSuchDelegationSet) ErrorCode() string {
 }
 func (e *NoSuchDelegationSet) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Amazon Route 53 doesn't support the specified geographic location. For a list of
-// supported geolocation codes, see the GeoLocation
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GeoLocation.html)
+// Amazon Route 53 doesn't support the specified geographic location. For a list
+// of supported geolocation codes, see the GeoLocation (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GeoLocation.html)
 // data type.
 type NoSuchGeoLocation struct {
 	Message *string
@@ -1469,10 +1443,10 @@ func (e *NotAuthorizedException) ErrorCode() string {
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // If Amazon Route 53 can't process a request before the next request arrives, it
-// will reject subsequent requests for the same hosted zone and return an HTTP 400
-// error (Bad request). If Route 53 returns this error repeatedly for the same
-// request, we recommend that you wait, in intervals of increasing duration, before
-// you try the request again.
+// will reject subsequent requests for the same hosted zone and return an HTTP
+// 400 error ( Bad request). If Route 53 returns this error repeatedly for the
+// same request, we recommend that you wait, in intervals of increasing duration,
+// before you try the request again.
 type PriorRequestNotComplete struct {
 	Message *string
 
@@ -1580,16 +1554,14 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 
 // This health check can't be created because the current account has reached the
 // limit on the number of active health checks. For information about default
-// limits, see Limits
-// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html)
+// limits, see Limits (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html)
 // in the Amazon Route 53 Developer Guide. For information about how to get the
-// current limit for an account, see GetAccountLimit
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html).
-// To request a higher limit, create a case (http://aws.amazon.com/route53-request)
+// current limit for an account, see GetAccountLimit (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html)
+// . To request a higher limit, create a case (http://aws.amazon.com/route53-request)
 // with the Amazon Web Services Support Center. You have reached the maximum number
 // of active health checks for an Amazon Web Services account. To request a higher
-// limit, create a case (http://aws.amazon.com/route53-request) with the Amazon Web
-// Services Support Center.
+// limit, create a case (http://aws.amazon.com/route53-request) with the Amazon
+// Web Services Support Center.
 type TooManyHealthChecks struct {
 	Message *string
 
@@ -1615,18 +1587,15 @@ func (e *TooManyHealthChecks) ErrorCode() string {
 }
 func (e *TooManyHealthChecks) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This operation can't be completed either because the current account has reached
-// the limit on the number of hosted zones or because you've reached the limit on
-// the number of hosted zones that can be associated with a reusable delegation
-// set. For information about default limits, see Limits
-// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html)
+// This operation can't be completed either because the current account has
+// reached the limit on the number of hosted zones or because you've reached the
+// limit on the number of hosted zones that can be associated with a reusable
+// delegation set. For information about default limits, see Limits (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html)
 // in the Amazon Route 53 Developer Guide. To get the current limit on hosted zones
-// that can be created by an account, see GetAccountLimit
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html).
-// To get the current limit on hosted zones that can be associated with a reusable
-// delegation set, see GetReusableDelegationSetLimit
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetReusableDelegationSetLimit.html).
-// To request a higher limit, create a case (http://aws.amazon.com/route53-request)
+// that can be created by an account, see GetAccountLimit (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html)
+// . To get the current limit on hosted zones that can be associated with a
+// reusable delegation set, see GetReusableDelegationSetLimit (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetReusableDelegationSetLimit.html)
+// . To request a higher limit, create a case (http://aws.amazon.com/route53-request)
 // with the Amazon Web Services Support Center.
 type TooManyHostedZones struct {
 	Message *string
@@ -1680,14 +1649,12 @@ func (e *TooManyKeySigningKeys) ErrorCode() string {
 }
 func (e *TooManyKeySigningKeys) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This traffic policy can't be created because the current account has reached the
-// limit on the number of traffic policies. For information about default limits,
-// see Limits
-// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html)
+// This traffic policy can't be created because the current account has reached
+// the limit on the number of traffic policies. For information about default
+// limits, see Limits (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html)
 // in the Amazon Route 53 Developer Guide. To get the current limit for an account,
-// see GetAccountLimit
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html).
-// To request a higher limit, create a case (http://aws.amazon.com/route53-request)
+// see GetAccountLimit (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html)
+// . To request a higher limit, create a case (http://aws.amazon.com/route53-request)
 // with the Amazon Web Services Support Center.
 type TooManyTrafficPolicies struct {
 	Message *string
@@ -1716,12 +1683,10 @@ func (e *TooManyTrafficPolicies) ErrorFault() smithy.ErrorFault { return smithy.
 
 // This traffic policy instance can't be created because the current account has
 // reached the limit on the number of traffic policy instances. For information
-// about default limits, see Limits
-// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html)
+// about default limits, see Limits (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html)
 // in the Amazon Route 53 Developer Guide. For information about how to get the
-// current limit for an account, see GetAccountLimit
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html).
-// To request a higher limit, create a case (http://aws.amazon.com/route53-request)
+// current limit for an account, see GetAccountLimit (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html)
+// . To request a higher limit, create a case (http://aws.amazon.com/route53-request)
 // with the Amazon Web Services Support Center.
 type TooManyTrafficPolicyInstances struct {
 	Message *string
@@ -1748,13 +1713,11 @@ func (e *TooManyTrafficPolicyInstances) ErrorCode() string {
 }
 func (e *TooManyTrafficPolicyInstances) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This traffic policy version can't be created because you've reached the limit of
-// 1000 on the number of versions that you can create for the current traffic
-// policy. To create more traffic policy versions, you can use GetTrafficPolicy
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetTrafficPolicy.html)
+// This traffic policy version can't be created because you've reached the limit
+// of 1000 on the number of versions that you can create for the current traffic
+// policy. To create more traffic policy versions, you can use GetTrafficPolicy (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetTrafficPolicy.html)
 // to get the traffic policy document for a specified traffic policy version, and
-// then use CreateTrafficPolicy
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateTrafficPolicy.html)
+// then use CreateTrafficPolicy (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateTrafficPolicy.html)
 // to create a new traffic policy using the traffic policy document.
 type TooManyTrafficPolicyVersionsForCurrentPolicy struct {
 	Message *string
@@ -1783,10 +1746,10 @@ func (e *TooManyTrafficPolicyVersionsForCurrentPolicy) ErrorFault() smithy.Error
 	return smithy.FaultClient
 }
 
-// You've created the maximum number of authorizations that can be created for the
-// specified hosted zone. To authorize another VPC to be associated with the hosted
-// zone, submit a DeleteVPCAssociationAuthorization request to remove an existing
-// authorization. To get a list of existing authorizations, submit a
+// You've created the maximum number of authorizations that can be created for
+// the specified hosted zone. To authorize another VPC to be associated with the
+// hosted zone, submit a DeleteVPCAssociationAuthorization request to remove an
+// existing authorization. To get a list of existing authorizations, submit a
 // ListVPCAssociationAuthorizations request.
 type TooManyVPCAssociationAuthorizations struct {
 	Message *string
@@ -1815,7 +1778,7 @@ func (e *TooManyVPCAssociationAuthorizations) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// A traffic policy that has the same value for Name already exists.
+// A traffic policy that has the same value for Name  already exists.
 type TrafficPolicyAlreadyExists struct {
 	Message *string
 
@@ -1869,8 +1832,8 @@ func (e *TrafficPolicyInstanceAlreadyExists) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// One or more traffic policy instances were created by using the specified traffic
-// policy.
+// One or more traffic policy instances were created by using the specified
+// traffic policy.
 type TrafficPolicyInUse struct {
 	Message *string
 

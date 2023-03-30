@@ -14,7 +14,7 @@ import (
 
 // Returns a description of specified virtual tapes in the virtual tape shelf
 // (VTS). This operation is only supported in the tape gateway type. If a specific
-// TapeARN is not specified, Storage Gateway returns a description of all virtual
+// TapeARNis not specified, Storage Gateway returns a description of all virtual
 // tapes found in the VTS associated with your account.
 func (c *Client) DescribeTapeArchives(ctx context.Context, params *DescribeTapeArchivesInput, optFns ...func(*Options)) (*DescribeTapeArchivesOutput, error) {
 	if params == nil {
@@ -34,8 +34,8 @@ func (c *Client) DescribeTapeArchives(ctx context.Context, params *DescribeTapeA
 // DescribeTapeArchivesInput
 type DescribeTapeArchivesInput struct {
 
-	// Specifies that the number of virtual tapes described be limited to the specified
-	// number.
+	// Specifies that the number of virtual tapes described be limited to the
+	// specified number.
 	Limit *int32
 
 	// An opaque string that indicates the position at which to begin describing
@@ -143,12 +143,12 @@ var _ DescribeTapeArchivesAPIClient = (*Client)(nil)
 // DescribeTapeArchivesPaginatorOptions is the paginator options for
 // DescribeTapeArchives
 type DescribeTapeArchivesPaginatorOptions struct {
-	// Specifies that the number of virtual tapes described be limited to the specified
-	// number.
+	// Specifies that the number of virtual tapes described be limited to the
+	// specified number.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

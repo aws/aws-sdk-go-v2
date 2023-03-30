@@ -31,14 +31,14 @@ func (c *Client) CancelArchival(ctx context.Context, params *CancelArchivalInput
 // CancelArchivalInput
 type CancelArchivalInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
 
-	// The Amazon Resource Name (ARN) of the virtual tape you want to cancel archiving
-	// for.
+	// The Amazon Resource Name (ARN) of the virtual tape you want to cancel
+	// archiving for.
 	//
 	// This member is required.
 	TapeARN *string

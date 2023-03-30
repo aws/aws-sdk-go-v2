@@ -16,7 +16,6 @@
 // Profiler supports both visualizations and recommendations for applications
 // written in Java, it can also generate visualizations and a subset of
 // recommendations for applications written in other JVM languages and Python. For
-// more information, see What is Amazon CodeGuru Profiler
-// (https://docs.aws.amazon.com/codeguru/latest/profiler-ug/what-is-codeguru-profiler.html)
+// more information, see What is Amazon CodeGuru Profiler (https://docs.aws.amazon.com/codeguru/latest/profiler-ug/what-is-codeguru-profiler.html)
 // in the Amazon CodeGuru Profiler User Guide.
 package codeguruprofiler

@@ -12,12 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of insights in your organization. You can specify which insights
-// are returned by their start time, one or more statuses (ONGOING, CLOSED, and
-// CLOSED), one or more severities (LOW, MEDIUM, and HIGH), and type (REACTIVE or
-// PROACTIVE). Use the Filters parameter to specify status and severity search
-// parameters. Use the Type parameter to specify REACTIVE or PROACTIVE in your
-// search.
+// Returns a list of insights in your organization. You can specify which
+// insights are returned by their start time, one or more statuses ( ONGOING ,
+// CLOSED , and CLOSED ), one or more severities ( LOW , MEDIUM , and HIGH), and
+// type ( REACTIVE  or PROACTIVE ). Use the Filters parameter to specify status
+// and severity search parameters. Use the Type  parameter to specify REACTIVE  or
+// PROACTIVE in your search.
 func (c *Client) SearchOrganizationInsights(ctx context.Context, params *SearchOrganizationInsightsInput, optFns ...func(*Options)) (*SearchOrganizationInsightsOutput, error) {
 	if params == nil {
 		params = &SearchOrganizationInsightsInput{}
@@ -40,22 +40,23 @@ type SearchOrganizationInsightsInput struct {
 	// This member is required.
 	AccountIds []string
 
-	// A time range used to specify when the behavior of an insight or anomaly started.
+	// A time range used to specify when the behavior of an insight or anomaly
+	// started.
 	//
 	// This member is required.
 	StartTimeRange *types.StartTimeRange
 
-	// The type of insights you are searching for (REACTIVE or PROACTIVE).
+	// The type of insights you are searching for ( REACTIVE  or PROACTIVE ).
 	//
 	// This member is required.
 	Type types.InsightType
 
-	// A SearchOrganizationInsightsFilters object that is used to set the severity and
-	// status filters on your insight search.
+	// A SearchOrganizationInsightsFilters object that is used to set the severity
+	// and status filters on your insight search.
 	Filters *types.SearchOrganizationInsightsFilters
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	MaxResults *int32
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -160,11 +161,11 @@ var _ SearchOrganizationInsightsAPIClient = (*Client)(nil)
 // SearchOrganizationInsights
 type SearchOrganizationInsightsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

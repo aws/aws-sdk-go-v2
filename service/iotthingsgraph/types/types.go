@@ -10,7 +10,7 @@ import (
 // A document that defines an entity.
 type DefinitionDocument struct {
 
-	// The language used to define the entity. GRAPHQL is the only valid value.
+	// The language used to define the entity. GRAPHQL  is the only valid value.
 	//
 	// This member is required.
 	Language DefinitionLanguage
@@ -23,8 +23,8 @@ type DefinitionDocument struct {
 	noSmithyDocumentSerde
 }
 
-// An object that contains the ID and revision number of a workflow or system that
-// is part of a deployment.
+// An object that contains the ID and revision number of a workflow or system
+// that is part of a deployment.
 type DependencyRevision struct {
 
 	// The ID of the workflow or system.
@@ -58,9 +58,9 @@ type EntityDescription struct {
 }
 
 // An object that filters an entity search. Multiple filters function as OR
-// criteria in the search. For example a search that includes a NAMESPACE and a
-// REFERENCED_ENTITY_ID filter searches for entities in the specified namespace
-// that use the entity specified by the value of REFERENCED_ENTITY_ID.
+// criteria in the search. For example a search that includes a NAMESPACE  and a
+// REFERENCED_ENTITY_IDfilter searches for entities in the specified namespace
+// that use the entity specified by the value of REFERENCED_ENTITY_ID .
 type EntityFilter struct {
 
 	// The name of the entity search filter field. REFERENCED_ENTITY_ID filters on
@@ -68,8 +68,8 @@ type EntityFilter struct {
 	// filter on the ID of a property that is used in a state.
 	Name EntityFilterName
 
-	// An array of string values for the search filter field. Multiple values function
-	// as AND criteria in the search.
+	// An array of string values for the search filter field. Multiple values
+	// function as AND criteria in the search.
 	Value []string
 
 	noSmithyDocumentSerde
@@ -141,8 +141,8 @@ type FlowTemplateFilter struct {
 	// This member is required.
 	Name FlowTemplateFilterName
 
-	// An array of string values for the search filter field. Multiple values function
-	// as AND criteria in the search.
+	// An array of string values for the search filter field. Multiple values
+	// function as AND criteria in the search.
 	//
 	// This member is required.
 	Value []string
@@ -204,8 +204,8 @@ type SystemInstanceDescription struct {
 	// An object that contains summary information about a system instance.
 	Summary *SystemInstanceSummary
 
-	// A list of objects that contain all of the IDs and revision numbers of workflows
-	// and systems that are used in a system instance.
+	// A list of objects that contain all of the IDs and revision numbers of
+	// workflows and systems that are used in a system instance.
 	ValidatedDependencyRevisions []DependencyRevision
 
 	// The version of the user's namespace against which the system instance was
@@ -215,8 +215,8 @@ type SystemInstanceDescription struct {
 	noSmithyDocumentSerde
 }
 
-// An object that filters a system instance search. Multiple filters function as OR
-// criteria in the search. For example a search that includes a
+// An object that filters a system instance search. Multiple filters function as
+// OR criteria in the search. For example a search that includes a
 // GREENGRASS_GROUP_NAME and a STATUS filter searches for system instances in the
 // specified Greengrass group that have the specified status.
 type SystemInstanceFilter struct {
@@ -224,8 +224,8 @@ type SystemInstanceFilter struct {
 	// The name of the search filter field.
 	Name SystemInstanceFilterName
 
-	// An array of string values for the search filter field. Multiple values function
-	// as AND criteria in the search.
+	// An array of string values for the search filter field. Multiple values
+	// function as AND criteria in the search.
 	Value []string
 
 	noSmithyDocumentSerde
@@ -273,8 +273,8 @@ type SystemTemplateDescription struct {
 	// An object that contains summary information about a system.
 	Summary *SystemTemplateSummary
 
-	// The namespace version against which the system was validated. Use this value in
-	// your system instance.
+	// The namespace version against which the system was validated. Use this value
+	// in your system instance.
 	ValidatedNamespaceVersion *int64
 
 	noSmithyDocumentSerde
@@ -288,8 +288,8 @@ type SystemTemplateFilter struct {
 	// This member is required.
 	Name SystemTemplateFilterName
 
-	// An array of string values for the search filter field. Multiple values function
-	// as AND criteria in the search.
+	// An array of string values for the search filter field. Multiple values
+	// function as AND criteria in the search.
 	//
 	// This member is required.
 	Value []string
@@ -315,8 +315,8 @@ type SystemTemplateSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata assigned to an AWS IoT Things Graph resource consisting of a key-value
-// pair.
+// Metadata assigned to an AWS IoT Things Graph resource consisting of a
+// key-value pair.
 type Tag struct {
 
 	// The required name of the tag. The string value can be from 1 to 128 Unicode

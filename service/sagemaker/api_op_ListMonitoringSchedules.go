@@ -34,13 +34,15 @@ type ListMonitoringSchedulesInput struct {
 	// A filter that returns only monitoring schedules created after a specified time.
 	CreationTimeAfter *time.Time
 
-	// A filter that returns only monitoring schedules created before a specified time.
+	// A filter that returns only monitoring schedules created before a specified
+	// time.
 	CreationTimeBefore *time.Time
 
 	// Name of a specific endpoint to fetch schedules for.
 	EndpointName *string
 
-	// A filter that returns only monitoring schedules modified after a specified time.
+	// A filter that returns only monitoring schedules modified after a specified
+	// time.
 	LastModifiedTimeAfter *time.Time
 
 	// A filter that returns only monitoring schedules modified before a specified
@@ -54,23 +56,23 @@ type ListMonitoringSchedulesInput struct {
 	// definition.
 	MonitoringJobDefinitionName *string
 
-	// A filter that returns only the monitoring schedules for the specified monitoring
-	// type.
+	// A filter that returns only the monitoring schedules for the specified
+	// monitoring type.
 	MonitoringTypeEquals types.MonitoringType
 
 	// Filter for monitoring schedules whose name contains a specified string.
 	NameContains *string
 
-	// The token returned if the response is truncated. To retrieve the next set of job
-	// executions, use it in the next request.
+	// The token returned if the response is truncated. To retrieve the next set of
+	// job executions, use it in the next request.
 	NextToken *string
 
-	// Whether to sort results by Status, CreationTime, ScheduledTime field. The
-	// default is CreationTime.
+	// Whether to sort results by Status , CreationTime , ScheduledTime field. The
+	// default is CreationTime .
 	SortBy types.MonitoringScheduleSortKey
 
-	// Whether to sort the results in Ascending or Descending order. The default is
-	// Descending.
+	// Whether to sort the results in Ascending  or Descending  order. The default is
+	// Descending .
 	SortOrder types.SortOrder
 
 	// A filter that returns only monitoring schedules modified before a specified
@@ -171,8 +173,8 @@ type ListMonitoringSchedulesPaginatorOptions struct {
 	// The maximum number of jobs to return in the response. The default value is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

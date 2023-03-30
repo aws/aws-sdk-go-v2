@@ -37,15 +37,15 @@ type ListArtifactsInput struct {
 	Arn *string
 
 	// The artifacts' type. Allowed values include:
-	// - FILE
-	// - LOG
-	// - SCREENSHOT
+	//     - FILE
+	//     - LOG
+	//     - SCREENSHOT
 	//
 	// This member is required.
 	Type types.ArtifactCategory
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation,
+	// which can be used to return the next set of items in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -140,8 +140,8 @@ var _ ListArtifactsAPIClient = (*Client)(nil)
 
 // ListArtifactsPaginatorOptions is the paginator options for ListArtifacts
 type ListArtifactsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

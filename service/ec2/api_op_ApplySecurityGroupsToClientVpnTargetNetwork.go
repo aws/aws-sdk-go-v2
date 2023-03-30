@@ -35,8 +35,8 @@ type ApplySecurityGroupsToClientVpnTargetNetworkInput struct {
 	// This member is required.
 	ClientVpnEndpointId *string
 
-	// The IDs of the security groups to apply to the associated target network. Up to
-	// 5 security groups can be applied to an associated target network.
+	// The IDs of the security groups to apply to the associated target network. Up
+	// to 5 security groups can be applied to an associated target network.
 	//
 	// This member is required.
 	SecurityGroupIds []string
@@ -48,8 +48,8 @@ type ApplySecurityGroupsToClientVpnTargetNetworkInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

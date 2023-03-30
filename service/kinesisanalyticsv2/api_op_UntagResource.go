@@ -11,8 +11,8 @@ import (
 )
 
 // Removes one or more tags from a Kinesis Data Analytics application. For more
-// information, see Using Tagging
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html).
+// information, see Using Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html)
+// .
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -30,7 +30,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The ARN of the Kinesis Data Analytics application from which to remove the tags.
+	// The ARN of the Kinesis Data Analytics application from which to remove the
+	// tags.
 	//
 	// This member is required.
 	ResourceARN *string

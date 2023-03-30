@@ -32,9 +32,9 @@ const (
 	CompressionSnappy Compression = "SNAPPY"
 )
 
-// Values returns all known values for Compression. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Compression. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (Compression) Values() []Compression {
 	return []Compression{
 		"OFF",
@@ -131,8 +131,8 @@ const (
 	NetworkInterfaceTypeObdInterface NetworkInterfaceType = "OBD_INTERFACE"
 )
 
-// Values returns all known values for NetworkInterfaceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for NetworkInterfaceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkInterfaceType) Values() []NetworkInterfaceType {
 	return []NetworkInterfaceType{
@@ -174,9 +174,9 @@ const (
 	NodeDataTypeUnknown            NodeDataType = "UNKNOWN"
 )
 
-// Values returns all known values for NodeDataType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NodeDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (NodeDataType) Values() []NodeDataType {
 	return []NodeDataType{
 		"INT8",
@@ -287,9 +287,9 @@ const (
 	SpoolingModeToDisk SpoolingMode = "TO_DISK"
 )
 
-// Values returns all known values for SpoolingMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SpoolingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (SpoolingMode) Values() []SpoolingMode {
 	return []SpoolingMode{
 		"OFF",
@@ -305,9 +305,9 @@ const (
 	TriggerModeRisingEdge TriggerMode = "RISING_EDGE"
 )
 
-// Values returns all known values for TriggerMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TriggerMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TriggerMode) Values() []TriggerMode {
 	return []TriggerMode{
 		"ALWAYS",
@@ -325,8 +325,8 @@ const (
 	UpdateCampaignActionUpdate  UpdateCampaignAction = "UPDATE"
 )
 
-// Values returns all known values for UpdateCampaignAction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for UpdateCampaignAction. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateCampaignAction) Values() []UpdateCampaignAction {
 	return []UpdateCampaignAction{
@@ -406,9 +406,9 @@ const (
 	VehicleStateDeleting  VehicleState = "DELETING"
 )
 
-// Values returns all known values for VehicleState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for VehicleState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (VehicleState) Values() []VehicleState {
 	return []VehicleState{
 		"CREATED",

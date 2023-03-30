@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all profiles in the authenticated account and Amazon Web Services Region.
-// Required permissions: rolesanywhere:ListProfiles.
+// Lists all profiles in the authenticated account and Amazon Web Services
+// Region. Required permissions: rolesanywhere:ListProfiles .
 func (c *Client) ListProfiles(ctx context.Context, params *ListProfilesInput, optFns ...func(*Options)) (*ListProfilesOutput, error) {
 	if params == nil {
 		params = &ListProfilesInput{}
@@ -127,8 +127,8 @@ var _ ListProfilesAPIClient = (*Client)(nil)
 
 // ListProfilesPaginatorOptions is the paginator options for ListProfiles
 type ListProfilesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

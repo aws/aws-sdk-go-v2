@@ -12,13 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all available signing profiles in your AWS account. Returns only profiles
-// with an ACTIVE status unless the includeCanceled request field is set to true.
-// If additional jobs remain to be listed, code signing returns a nextToken value.
-// Use this value in subsequent calls to ListSigningJobs to fetch the remaining
-// values. You can continue calling ListSigningJobs with your maxResults parameter
-// and with new values that code signing returns in the nextToken parameter until
-// all of your signing jobs have been returned.
+// Lists all available signing profiles in your AWS account. Returns only
+// profiles with an ACTIVE  status unless the includeCanceled request field is
+// set to true . If additional jobs remain to be listed, code signing returns a
+// nextToken value. Use this value in subsequent calls to ListSigningJobs to
+// fetch the remaining values. You can continue calling ListSigningJobs  with your
+// maxResults parameter and with new values that code signing returns in the
+// nextToken parameter until all of your signing jobs have been returned.
 func (c *Client) ListSigningProfiles(ctx context.Context, params *ListSigningProfilesInput, optFns ...func(*Options)) (*ListSigningProfilesOutput, error) {
 	if params == nil {
 		params = &ListSigningProfilesInput{}
@@ -36,7 +36,7 @@ func (c *Client) ListSigningProfiles(ctx context.Context, params *ListSigningPro
 
 type ListSigningProfilesInput struct {
 
-	// Designates whether to include profiles with the status of CANCELED.
+	// Designates whether to include profiles with the status of CANCELED .
 	IncludeCanceled bool
 
 	// The maximum number of profiles to be returned.
@@ -52,7 +52,8 @@ type ListSigningProfilesInput struct {
 	// platform.
 	PlatformId *string
 
-	// Filters results to return only signing jobs with statuses in the specified list.
+	// Filters results to return only signing jobs with statuses in the specified
+	// list.
 	Statuses []types.SigningProfileStatus
 
 	noSmithyDocumentSerde
@@ -63,8 +64,9 @@ type ListSigningProfilesOutput struct {
 	// Value for specifying the next set of paginated results to return.
 	NextToken *string
 
-	// A list of profiles that are available in the AWS account. This includes profiles
-	// with the status of CANCELED if the includeCanceled parameter is set to true.
+	// A list of profiles that are available in the AWS account. This includes
+	// profiles with the status of CANCELED  if the includeCanceled parameter is set
+	// to true .
 	Profiles []types.SigningProfile
 
 	// Metadata pertaining to the operation's result.
@@ -133,8 +135,8 @@ func (c *Client) addOperationListSigningProfilesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListSigningProfilesAPIClient is a client that implements the ListSigningProfiles
-// operation.
+// ListSigningProfilesAPIClient is a client that implements the
+// ListSigningProfiles operation.
 type ListSigningProfilesAPIClient interface {
 	ListSigningProfiles(context.Context, *ListSigningProfilesInput, ...func(*Options)) (*ListSigningProfilesOutput, error)
 }
@@ -147,8 +149,8 @@ type ListSigningProfilesPaginatorOptions struct {
 	// The maximum number of profiles to be returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

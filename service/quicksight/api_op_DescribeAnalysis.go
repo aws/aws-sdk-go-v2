@@ -29,8 +29,8 @@ func (c *Client) DescribeAnalysis(ctx context.Context, params *DescribeAnalysisI
 
 type DescribeAnalysisInput struct {
 
-	// The ID of the analysis that you're describing. The ID is part of the URL of the
-	// analysis.
+	// The ID of the analysis that you're describing. The ID is part of the URL of
+	// the analysis.
 	//
 	// This member is required.
 	AnalysisId *string

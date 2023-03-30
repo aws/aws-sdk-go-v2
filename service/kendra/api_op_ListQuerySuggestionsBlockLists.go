@@ -13,9 +13,8 @@ import (
 )
 
 // Lists the block lists used for query suggestions for an index. For information
-// on the current quota limits for block lists, see Quotas for Amazon Kendra
-// (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
-// ListQuerySuggestionsBlockLists is currently not supported in the Amazon Web
+// on the current quota limits for block lists, see Quotas for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html)
+// . ListQuerySuggestionsBlockLists is currently not supported in the Amazon Web
 // Services GovCloud (US-West) region.
 func (c *Client) ListQuerySuggestionsBlockLists(ctx context.Context, params *ListQuerySuggestionsBlockListsInput, optFns ...func(*Options)) (*ListQuerySuggestionsBlockListsOutput, error) {
 	if params == nil {
@@ -36,7 +35,7 @@ type ListQuerySuggestionsBlockListsInput struct {
 
 	// The identifier of the index for a list of all block lists that exist for that
 	// index. For information on the current quota limits for block lists, see Quotas
-	// for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
+	// for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html) .
 	//
 	// This member is required.
 	IndexId *string
@@ -46,8 +45,8 @@ type ListQuerySuggestionsBlockListsInput struct {
 
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Kendra returns a pagination token in the response. You can use
-	// this pagination token to retrieve the next set of block lists
-	// (BlockListSummaryItems).
+	// this pagination token to retrieve the next set of block lists (
+	// BlockListSummaryItems ).
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -59,11 +58,11 @@ type ListQuerySuggestionsBlockListsOutput struct {
 	// ID, block list name, when the block list was created, when the block list was
 	// last updated, and the count of block words/phrases in the block list. For
 	// information on the current quota limits for block lists, see Quotas for Amazon
-	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
+	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html) .
 	BlockListSummaryItems []types.QuerySuggestionsBlockListSummary
 
-	// If the response is truncated, Amazon Kendra returns this token that you can use
-	// in the subsequent request to retrieve the next set of block lists.
+	// If the response is truncated, Amazon Kendra returns this token that you can
+	// use in the subsequent request to retrieve the next set of block lists.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -149,8 +148,8 @@ type ListQuerySuggestionsBlockListsPaginatorOptions struct {
 	// The maximum number of block lists to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

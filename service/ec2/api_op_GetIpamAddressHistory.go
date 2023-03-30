@@ -14,9 +14,8 @@ import (
 )
 
 // Retrieve historical information about a CIDR within an IPAM scope. For more
-// information, see View the history of IP addresses
-// (https://docs.aws.amazon.com/vpc/latest/ipam/view-history-cidr-ipam.html) in the
-// Amazon VPC IPAM User Guide.
+// information, see View the history of IP addresses (https://docs.aws.amazon.com/vpc/latest/ipam/view-history-cidr-ipam.html)
+// in the Amazon VPC IPAM User Guide.
 func (c *Client) GetIpamAddressHistory(ctx context.Context, params *GetIpamAddressHistoryInput, optFns ...func(*Options)) (*GetIpamAddressHistoryOutput, error) {
 	if params == nil {
 		params = &GetIpamAddressHistoryInput{}
@@ -48,8 +47,8 @@ type GetIpamAddressHistoryInput struct {
 
 	// A check for whether you have the required permissions for the action without
 	// actually making the request and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The end of the time period for which you are looking for history. If you omit
@@ -63,8 +62,8 @@ type GetIpamAddressHistoryInput struct {
 	// The token for the next page of results.
 	NextToken *string
 
-	// The start of the time period for which you are looking for history. If you omit
-	// this option, it will default to the value of EndTime.
+	// The start of the time period for which you are looking for history. If you
+	// omit this option, it will default to the value of EndTime.
 	StartTime *time.Time
 
 	// The ID of the VPC you want your history records filtered by.
@@ -168,8 +167,8 @@ type GetIpamAddressHistoryPaginatorOptions struct {
 	// Defaults to 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -32,65 +32,53 @@ func (c *Client) DescribeEngineDefaultParameters(ctx context.Context, params *De
 type DescribeEngineDefaultParametersInput struct {
 
 	// The name of the DB parameter group family. Valid Values:
-	// - aurora5.6
-	// -
-	// aurora-mysql5.7
-	// - aurora-mysql8.0
-	// - aurora-postgresql10
-	// - aurora-postgresql11
-	// -
-	// aurora-postgresql12
-	// - aurora-postgresql13
-	// - aurora-postgresql14
-	// -
-	// custom-oracle-ee-19
-	// - mariadb10.2
-	// - mariadb10.3
-	// - mariadb10.4
-	// - mariadb10.5
-	// -
-	// mariadb10.6
-	// - mysql5.7
-	// - mysql8.0
-	// - oracle-ee-19
-	// - oracle-ee-cdb-19
-	// -
-	// oracle-ee-cdb-21
-	// - oracle-se2-19
-	// - oracle-se2-cdb-19
-	// - oracle-se2-cdb-21
-	// -
-	// postgres10
-	// - postgres11
-	// - postgres12
-	// - postgres13
-	// - postgres14
-	// -
-	// sqlserver-ee-11.0
-	// - sqlserver-ee-12.0
-	// - sqlserver-ee-13.0
-	// - sqlserver-ee-14.0
-	// -
-	// sqlserver-ee-15.0
-	// - sqlserver-ex-11.0
-	// - sqlserver-ex-12.0
-	// - sqlserver-ex-13.0
-	// -
-	// sqlserver-ex-14.0
-	// - sqlserver-ex-15.0
-	// - sqlserver-se-11.0
-	// - sqlserver-se-12.0
-	// -
-	// sqlserver-se-13.0
-	// - sqlserver-se-14.0
-	// - sqlserver-se-15.0
-	// - sqlserver-web-11.0
-	// -
-	// sqlserver-web-12.0
-	// - sqlserver-web-13.0
-	// - sqlserver-web-14.0
-	// -
-	// sqlserver-web-15.0
+	//     - aurora5.6
+	//     - aurora-mysql5.7
+	//     - aurora-mysql8.0
+	//     - aurora-postgresql10
+	//     - aurora-postgresql11
+	//     - aurora-postgresql12
+	//     - aurora-postgresql13
+	//     - aurora-postgresql14
+	//     - custom-oracle-ee-19
+	//     - mariadb10.2
+	//     - mariadb10.3
+	//     - mariadb10.4
+	//     - mariadb10.5
+	//     - mariadb10.6
+	//     - mysql5.7
+	//     - mysql8.0
+	//     - oracle-ee-19
+	//     - oracle-ee-cdb-19
+	//     - oracle-ee-cdb-21
+	//     - oracle-se2-19
+	//     - oracle-se2-cdb-19
+	//     - oracle-se2-cdb-21
+	//     - postgres10
+	//     - postgres11
+	//     - postgres12
+	//     - postgres13
+	//     - postgres14
+	//     - sqlserver-ee-11.0
+	//     - sqlserver-ee-12.0
+	//     - sqlserver-ee-13.0
+	//     - sqlserver-ee-14.0
+	//     - sqlserver-ee-15.0
+	//     - sqlserver-ex-11.0
+	//     - sqlserver-ex-12.0
+	//     - sqlserver-ex-13.0
+	//     - sqlserver-ex-14.0
+	//     - sqlserver-ex-15.0
+	//     - sqlserver-se-11.0
+	//     - sqlserver-se-12.0
+	//     - sqlserver-se-13.0
+	//     - sqlserver-se-14.0
+	//     - sqlserver-se-15.0
+	//     - sqlserver-web-11.0
+	//     - sqlserver-web-12.0
+	//     - sqlserver-web-13.0
+	//     - sqlserver-web-14.0
+	//     - sqlserver-web-15.0
 	//
 	// This member is required.
 	DBParameterGroupFamily *string
@@ -99,15 +87,15 @@ type DescribeEngineDefaultParametersInput struct {
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous
-	// DescribeEngineDefaultParameters request. If this parameter is specified, the
+	// DescribeEngineDefaultParametersrequest. If this parameter is specified, the
 	// response includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
-	// Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so you can retrieve the remaining results. Default:
+	// 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -199,14 +187,14 @@ var _ DescribeEngineDefaultParametersAPIClient = (*Client)(nil)
 // DescribeEngineDefaultParametersPaginatorOptions is the paginator options for
 // DescribeEngineDefaultParameters
 type DescribeEngineDefaultParametersPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
-	// Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so you can retrieve the remaining results. Default:
+	// 100 Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

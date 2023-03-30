@@ -30,14 +30,14 @@ func (c *Client) UpdateJobShipmentState(ctx context.Context, params *UpdateJobSh
 type UpdateJobShipmentStateInput struct {
 
 	// The job ID of the job whose shipment date you want to update, for example
-	// JID123e4567-e89b-12d3-a456-426655440000.
+	// JID123e4567-e89b-12d3-a456-426655440000 .
 	//
 	// This member is required.
 	JobId *string
 
-	// The state of a device when it is being shipped. Set to RECEIVED when the device
-	// arrives at your location. Set to RETURNED when you have returned the device to
-	// Amazon Web Services.
+	// The state of a device when it is being shipped. Set to RECEIVED when the
+	// device arrives at your location. Set to RETURNED when you have returned the
+	// device to Amazon Web Services.
 	//
 	// This member is required.
 	ShipmentState types.ShipmentState

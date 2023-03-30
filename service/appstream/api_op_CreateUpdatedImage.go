@@ -14,9 +14,8 @@ import (
 // Creates a new image with the latest Windows operating system updates, driver
 // updates, and AppStream 2.0 agent software. For more information, see the "Update
 // an Image by Using Managed AppStream 2.0 Image Updates" section in Administer
-// Your AppStream 2.0 Images
-// (https://docs.aws.amazon.com/appstream2/latest/developerguide/administer-images.html),
-// in the Amazon AppStream 2.0 Administration Guide.
+// Your AppStream 2.0 Images (https://docs.aws.amazon.com/appstream2/latest/developerguide/administer-images.html)
+// , in the Amazon AppStream 2.0 Administration Guide.
 func (c *Client) CreateUpdatedImage(ctx context.Context, params *CreateUpdatedImageInput, optFns ...func(*Options)) (*CreateUpdatedImageOutput, error) {
 	if params == nil {
 		params = &CreateUpdatedImageInput{}
@@ -48,8 +47,8 @@ type CreateUpdatedImageInput struct {
 	// Indicates whether to display the status of image update availability before
 	// AppStream 2.0 initiates the process of creating a new updated image. If this
 	// value is set to true, AppStream 2.0 displays whether image updates are
-	// available. If this value is set to false, AppStream 2.0 initiates the process of
-	// creating a new updated image without displaying whether image updates are
+	// available. If this value is set to false, AppStream 2.0 initiates the process
+	// of creating a new updated image without displaying whether image updates are
 	// available.
 	DryRun bool
 
@@ -64,8 +63,7 @@ type CreateUpdatedImageInput struct {
 	// Environment=. Generally allowed characters are: letters, numbers, and spaces
 	// representable in UTF-8, and the following special characters: _ . : / = + \ - @
 	// If you do not specify a value, the value is set to an empty string. For more
-	// information about tags, see Tagging Your Resources
-	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
+	// information about tags, see Tagging Your Resources (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
 	// in the Amazon AppStream 2.0 Administration Guide.
 	NewImageTags map[string]string
 

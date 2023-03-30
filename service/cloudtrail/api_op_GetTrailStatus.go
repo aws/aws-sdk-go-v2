@@ -49,7 +49,8 @@ type GetTrailStatusInput struct {
 // error.
 type GetTrailStatusOutput struct {
 
-	// Whether the CloudTrail trail is currently logging Amazon Web Services API calls.
+	// Whether the CloudTrail trail is currently logging Amazon Web Services API
+	// calls.
 	IsLogging *bool
 
 	// Displays any CloudWatch Logs error that CloudTrail encountered when attempting
@@ -71,9 +72,9 @@ type GetTrailStatusOutput struct {
 	// Responses (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)
 	// in the Amazon S3 API Reference. This error occurs only when there is a problem
 	// with the destination S3 bucket, and does not occur for requests that time out.
-	// To resolve the issue, create a new bucket, and then call UpdateTrail to specify
-	// the new bucket; or fix the existing objects so that CloudTrail can again write
-	// to the bucket.
+	// To resolve the issue, create a new bucket, and then call UpdateTrail to
+	// specify the new bucket; or fix the existing objects so that CloudTrail can again
+	// write to the bucket.
 	LatestDeliveryError *string
 
 	// Specifies the date and time that CloudTrail last delivered log files to an
@@ -81,13 +82,13 @@ type GetTrailStatusOutput struct {
 	LatestDeliveryTime *time.Time
 
 	// Displays any Amazon S3 error that CloudTrail encountered when attempting to
-	// deliver a digest file to the designated bucket. For more information, see Error
-	// Responses (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)
+	// deliver a digest file to the designated bucket. For more information, see
+	// Error Responses (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)
 	// in the Amazon S3 API Reference. This error occurs only when there is a problem
 	// with the destination S3 bucket, and does not occur for requests that time out.
-	// To resolve the issue, create a new bucket, and then call UpdateTrail to specify
-	// the new bucket; or fix the existing objects so that CloudTrail can again write
-	// to the bucket.
+	// To resolve the issue, create a new bucket, and then call UpdateTrail to
+	// specify the new bucket; or fix the existing objects so that CloudTrail can again
+	// write to the bucket.
 	LatestDigestDeliveryError *string
 
 	// Specifies the date and time that CloudTrail last delivered a digest file to an
@@ -102,8 +103,8 @@ type GetTrailStatusOutput struct {
 
 	// Displays any Amazon SNS error that CloudTrail encountered when attempting to
 	// send a notification. For more information about Amazon SNS errors, see the
-	// Amazon SNS Developer Guide
-	// (https://docs.aws.amazon.com/sns/latest/dg/welcome.html).
+	// Amazon SNS Developer Guide (https://docs.aws.amazon.com/sns/latest/dg/welcome.html)
+	// .
 	LatestNotificationError *string
 
 	// Specifies the date and time of the most recent Amazon SNS notification that

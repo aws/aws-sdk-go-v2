@@ -12,12 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of active App Runner observability configurations in your Amazon
-// Web Services account. You can query the revisions for a specific configuration
-// name or the revisions for all active configurations in your account. You can
-// optionally query only the latest revision of each requested name. To retrieve a
-// full description of a particular configuration revision, call and provide one of
-// the ARNs returned by ListObservabilityConfigurations.
+// Returns a list of active App Runner observability configurations in your
+// Amazon Web Services account. You can query the revisions for a specific
+// configuration name or the revisions for all active configurations in your
+// account. You can optionally query only the latest revision of each requested
+// name. To retrieve a full description of a particular configuration revision,
+// call and provide one of the ARNs returned by ListObservabilityConfigurations .
 func (c *Client) ListObservabilityConfigurations(ctx context.Context, params *ListObservabilityConfigurationsInput, optFns ...func(*Options)) (*ListObservabilityConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListObservabilityConfigurationsInput{}
@@ -36,8 +36,8 @@ func (c *Client) ListObservabilityConfigurations(ctx context.Context, params *Li
 type ListObservabilityConfigurationsInput struct {
 
 	// Set to true to list only the latest revision for each requested configuration
-	// name. Set to false to list all revisions for each requested configuration name.
-	// Default: true
+	// name. Set to false to list all revisions for each requested configuration
+	// name. Default: true
 	LatestOnly bool
 
 	// The maximum number of results to include in each response (result page). It's
@@ -48,11 +48,11 @@ type ListObservabilityConfigurationsInput struct {
 	// A token from a previous result page. It's used for a paginated request. The
 	// request retrieves the next result page. All other parameter values must be
 	// identical to the ones that are specified in the initial request. If you don't
-	// specify NextToken, the request retrieves the first result page.
+	// specify NextToken , the request retrieves the first result page.
 	NextToken *string
 
-	// The name of the App Runner observability configuration that you want to list. If
-	// specified, App Runner lists revisions that share this name. If not specified,
+	// The name of the App Runner observability configuration that you want to list.
+	// If specified, App Runner lists revisions that share this name. If not specified,
 	// App Runner returns revisions of all active configurations.
 	ObservabilityConfigurationName *string
 
@@ -62,13 +62,13 @@ type ListObservabilityConfigurationsInput struct {
 type ListObservabilityConfigurationsOutput struct {
 
 	// A list of summary information records for observability configurations. In a
-	// paginated request, the request returns up to MaxResults records for each call.
+	// paginated request, the request returns up to MaxResults  records for each call.
 	//
 	// This member is required.
 	ObservabilityConfigurationSummaryList []types.ObservabilityConfigurationSummary
 
-	// The token that you can pass in a subsequent request to get the next result page.
-	// It's returned in a paginated request.
+	// The token that you can pass in a subsequent request to get the next result
+	// page. It's returned in a paginated request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -153,8 +153,8 @@ type ListObservabilityConfigurationsPaginatorOptions struct {
 	// retrieves all available results in a single response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

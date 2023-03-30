@@ -47,13 +47,11 @@ type ListBuildsForProjectInput struct {
 	// The order to sort the results in. The results are sorted by build number, not
 	// the build identifier. If this is not specified, the results are sorted in
 	// descending order. Valid values include:
-	// - ASCENDING: List the build identifiers
-	// in ascending order, by build number.
-	// - DESCENDING: List the build identifiers in
-	// descending order, by build number.
+	//     - ASCENDING : List the build identifiers in ascending order, by build number.
+	//     - DESCENDING : List the build identifiers in descending order, by build number.
 	//
-	// If the project has more than 100 builds,
-	// setting the sort order will result in an error.
+	// If the project has more than 100 builds, setting the sort order will result in
+	// an error.
 	SortOrder types.SortOrderType
 
 	noSmithyDocumentSerde
@@ -61,8 +59,8 @@ type ListBuildsForProjectInput struct {
 
 type ListBuildsForProjectOutput struct {
 
-	// A list of build identifiers for the specified build project, with each build ID
-	// representing a single build.
+	// A list of build identifiers for the specified build project, with each build
+	// ID representing a single build.
 	Ids []string
 
 	// If there are more than 100 items in the list, only the first 100 items are
@@ -151,8 +149,8 @@ var _ ListBuildsForProjectAPIClient = (*Client)(nil)
 // ListBuildsForProjectPaginatorOptions is the paginator options for
 // ListBuildsForProject
 type ListBuildsForProjectPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

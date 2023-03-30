@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a permission for a network interface. By default, you cannot delete the
-// permission if the account for which you're removing the permission has attached
-// the network interface to an instance. However, you can force delete the
+// Deletes a permission for a network interface. By default, you cannot delete
+// the permission if the account for which you're removing the permission has
+// attached the network interface to an instance. However, you can force delete the
 // permission, regardless of any attachment.
 func (c *Client) DeleteNetworkInterfacePermission(ctx context.Context, params *DeleteNetworkInterfacePermissionInput, optFns ...func(*Options)) (*DeleteNetworkInterfacePermissionOutput, error) {
 	if params == nil {
@@ -39,12 +39,12 @@ type DeleteNetworkInterfacePermissionInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
-	// Specify true to remove the permission even if the network interface is attached
-	// to an instance.
+	// Specify true to remove the permission even if the network interface is
+	// attached to an instance.
 	Force *bool
 
 	noSmithyDocumentSerde
@@ -53,7 +53,7 @@ type DeleteNetworkInterfacePermissionInput struct {
 // Contains the output for DeleteNetworkInterfacePermission.
 type DeleteNetworkInterfacePermissionOutput struct {
 
-	// Returns true if the request succeeds, otherwise returns an error.
+	// Returns true  if the request succeeds, otherwise returns an error.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

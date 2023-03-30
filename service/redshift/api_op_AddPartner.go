@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a partner integration to a cluster. This operation authorizes a partner to
-// push status updates for the specified database. To complete the integration, you
-// also set up the integration on the partner website.
+// Adds a partner integration to a cluster. This operation authorizes a partner
+// to push status updates for the specified database. To complete the integration,
+// you also set up the integration on the partner website.
 func (c *Client) AddPartner(ctx context.Context, params *AddPartnerInput, optFns ...func(*Options)) (*AddPartnerOutput, error) {
 	if params == nil {
 		params = &AddPartnerInput{}

@@ -12,20 +12,19 @@ import (
 )
 
 // Creates a Slack channel configuration for your Amazon Web Services account.
-// -
-// You can add up to 5 Slack workspaces for your account.
-// - You can add up to 20
-// Slack channels for your account.
+//   - You can add up to 5 Slack workspaces for your account.
+//   - You can add up to 20 Slack channels for your account.
 //
-// A Slack channel can have up to 100 Amazon Web
-// Services accounts. This means that only 100 accounts can add the same Slack
-// channel to the Amazon Web Services Support App. We recommend that you only add
-// the accounts that you need to manage support cases for your organization. This
-// can reduce the notifications about case updates that you receive in the Slack
-// channel. We recommend that you choose a private Slack channel so that only
-// members in that channel have read and write access to your support cases. Anyone
-// in your Slack channel can create, update, or resolve support cases for your
-// account. Users require an invitation to join private channels.
+// A Slack channel
+// can have up to 100 Amazon Web Services accounts. This means that only 100
+// accounts can add the same Slack channel to the Amazon Web Services Support App.
+// We recommend that you only add the accounts that you need to manage support
+// cases for your organization. This can reduce the notifications about case
+// updates that you receive in the Slack channel. We recommend that you choose a
+// private Slack channel so that only members in that channel have read and write
+// access to your support cases. Anyone in your Slack channel can create, update,
+// or resolve support cases for your account. Users require an invitation to join
+// private channels.
 func (c *Client) CreateSlackChannelConfiguration(ctx context.Context, params *CreateSlackChannelConfigurationInput, optFns ...func(*Options)) (*CreateSlackChannelConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateSlackChannelConfigurationInput{}
@@ -49,37 +48,31 @@ type CreateSlackChannelConfigurationInput struct {
 	ChannelId *string
 
 	// The Amazon Resource Name (ARN) of an IAM role that you want to use to perform
-	// operations on Amazon Web Services. For more information, see Managing access to
-	// the Amazon Web Services Support App
-	// (https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html)
+	// operations on Amazon Web Services. For more information, see Managing access
+	// to the Amazon Web Services Support App (https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html)
 	// in the Amazon Web Services Support User Guide.
 	//
 	// This member is required.
 	ChannelRoleArn *string
 
-	// The case severity for a support case that you want to receive notifications. If
-	// you specify high or all, you must specify true for at least one of the following
-	// parameters:
-	// - notifyOnAddCorrespondenceToCase
-	// - notifyOnCreateOrReopenCase
-	// -
-	// notifyOnResolveCase
-	//
-	// If you specify none, the following parameters must be null
-	// or false:
-	// - notifyOnAddCorrespondenceToCase
-	// - notifyOnCreateOrReopenCase
-	// -
-	// notifyOnResolveCase
-	//
-	// If you don't specify these parameters in your request, they
-	// default to false.
+	// The case severity for a support case that you want to receive notifications.
+	// If you specify high  or all , you must specify true for at least one of the
+	// following parameters:
+	//     - notifyOnAddCorrespondenceToCase
+	//     - notifyOnCreateOrReopenCase
+	//     - notifyOnResolveCase
+	//  If you specify none , the following parameters must be null or false :
+	//     - notifyOnAddCorrespondenceToCase
+	//     - notifyOnCreateOrReopenCase
+	//     - notifyOnResolveCase
+	// If you don't specify these parameters in your
+	// request, they default to false .
 	//
 	// This member is required.
 	NotifyOnCaseSeverity types.NotificationSeverityLevel
 
 	// The team ID in Slack. This ID uniquely identifies a Slack workspace, such as
-	// T012ABCDEFG.
+	// T012ABCDEFG .
 	//
 	// This member is required.
 	TeamId *string

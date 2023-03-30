@@ -30,8 +30,8 @@ func (c *Client) StartPolicyGeneration(ctx context.Context, params *StartPolicyG
 
 type StartPolicyGenerationInput struct {
 
-	// Contains the ARN of the IAM entity (user or role) for which you are generating a
-	// policy.
+	// Contains the ARN of the IAM entity (user or role) for which you are generating
+	// a policy.
 	//
 	// This member is required.
 	PolicyGenerationDetails *types.PolicyGenerationDetails
@@ -45,8 +45,8 @@ type StartPolicyGenerationInput struct {
 	// Services SDK.
 	ClientToken *string
 
-	// A CloudTrailDetails object that contains details about a Trail that you want to
-	// analyze to generate policies.
+	// A CloudTrailDetails  object that contains details about a Trail that you want
+	// to analyze to generate policies.
 	CloudTrailDetails *types.CloudTrailDetails
 
 	noSmithyDocumentSerde
@@ -54,9 +54,9 @@ type StartPolicyGenerationInput struct {
 
 type StartPolicyGenerationOutput struct {
 
-	// The JobId that is returned by the StartPolicyGeneration operation. The JobId can
-	// be used with GetGeneratedPolicy to retrieve the generated policies or used with
-	// CancelPolicyGeneration to cancel the policy generation request.
+	// The JobId  that is returned by the StartPolicyGeneration  operation. The JobId
+	// can be used with GetGeneratedPolicy to retrieve the generated policies or used
+	// with CancelPolicyGeneration  to cancel the policy generation request.
 	//
 	// This member is required.
 	JobId *string

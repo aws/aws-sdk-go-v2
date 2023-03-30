@@ -28,8 +28,8 @@ func (c *Client) DeleteReplicationConfigurationTemplate(ctx context.Context, par
 
 type DeleteReplicationConfigurationTemplateInput struct {
 
-	// Request to delete Replication Configuration Template from service by Replication
-	// Configuration Template ID.
+	// Request to delete Replication Configuration Template from service by
+	// Replication Configuration Template ID.
 	//
 	// This member is required.
 	ReplicationConfigurationTemplateID *string

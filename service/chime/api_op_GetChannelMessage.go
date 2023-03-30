@@ -42,7 +42,7 @@ type GetChannelMessageInput struct {
 	// This member is required.
 	MessageId *string
 
-	// The AppInstanceUserArn of the user that makes the API call.
+	// The AppInstanceUserArn  of the user that makes the API call.
 	ChimeBearer *string
 
 	noSmithyDocumentSerde

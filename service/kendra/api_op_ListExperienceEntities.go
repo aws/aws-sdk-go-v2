@@ -15,8 +15,8 @@ import (
 // Lists users or groups in your IAM Identity Center identity source that are
 // granted access to your Amazon Kendra experience. You can create an Amazon Kendra
 // experience such as a search application. For more information on creating a
-// search application experience, see Building a search experience with no code
-// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
+// search application experience, see Building a search experience with no code (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html)
+// .
 func (c *Client) ListExperienceEntities(ctx context.Context, params *ListExperienceEntitiesInput, optFns ...func(*Options)) (*ListExperienceEntitiesOutput, error) {
 	if params == nil {
 		params = &ListExperienceEntitiesInput{}
@@ -141,8 +141,8 @@ var _ ListExperienceEntitiesAPIClient = (*Client)(nil)
 // ListExperienceEntitiesPaginatorOptions is the paginator options for
 // ListExperienceEntities
 type ListExperienceEntitiesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -155,7 +155,8 @@ type ListExperienceEntitiesPaginator struct {
 	firstPage bool
 }
 
-// NewListExperienceEntitiesPaginator returns a new ListExperienceEntitiesPaginator
+// NewListExperienceEntitiesPaginator returns a new
+// ListExperienceEntitiesPaginator
 func NewListExperienceEntitiesPaginator(client ListExperienceEntitiesAPIClient, params *ListExperienceEntitiesInput, optFns ...func(*ListExperienceEntitiesPaginatorOptions)) *ListExperienceEntitiesPaginator {
 	if params == nil {
 		params = &ListExperienceEntitiesInput{}

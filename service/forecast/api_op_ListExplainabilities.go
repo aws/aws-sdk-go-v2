@@ -13,10 +13,10 @@ import (
 )
 
 // Returns a list of Explainability resources created using the
-// CreateExplainability operation. This operation returns a summary for each
+// CreateExplainabilityoperation. This operation returns a summary for each
 // Explainability. You can filter the list using an array of Filter objects. To
 // retrieve the complete set of properties for a particular Explainability
-// resource, use the ARN with the DescribeExplainability operation.
+// resource, use the ARN with the DescribeExplainability  operation.
 func (c *Client) ListExplainabilities(ctx context.Context, params *ListExplainabilitiesInput, optFns ...func(*Options)) (*ListExplainabilitiesOutput, error) {
 	if params == nil {
 		params = &ListExplainabilitiesInput{}
@@ -34,16 +34,13 @@ func (c *Client) ListExplainabilities(ctx context.Context, params *ListExplainab
 
 type ListExplainabilitiesInput struct {
 
-	// An array of filters. For each filter, provide a condition and a match statement.
-	// The condition is either IS or IS_NOT, which specifies whether to include or
-	// exclude the resources that match the statement from the list. The match
-	// statement consists of a key and a value. Filter properties
-	// - Condition - The
-	// condition to apply. Valid values are IS and IS_NOT.
-	// - Key - The name of the
-	// parameter to filter on. Valid values are ResourceArn and Status.
-	// - Value - The
-	// value to match.
+	// An array of filters. For each filter, provide a condition and a match
+	// statement. The condition is either IS  or IS_NOT, which specifies whether to
+	// include or exclude the resources that match the statement from the list. The
+	// match statement consists of a key and a value. Filter properties
+	//     - Condition - The condition to apply. Valid values are IS and IS_NOT .
+	//     - Key - The name of the parameter to filter on. Valid values are ResourceArn and Status .
+	//     - Value - The value to match.
 	Filters []types.Filter
 
 	// The number of items returned in the response.
@@ -150,8 +147,8 @@ type ListExplainabilitiesPaginatorOptions struct {
 	// The number of items returned in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

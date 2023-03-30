@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all channels associated with a specified channel flow. You can associate a
-// channel flow with multiple channels, but you can only associate a channel with
+// Lists all channels associated with a specified channel flow. You can associate
+// a channel flow with multiple channels, but you can only associate a channel with
 // one channel flow. This is a developer API.
 func (c *Client) ListChannelsAssociatedWithChannelFlow(ctx context.Context, params *ListChannelsAssociatedWithChannelFlowInput, optFns ...func(*Options)) (*ListChannelsAssociatedWithChannelFlowOutput, error) {
 	if params == nil {
@@ -139,8 +139,8 @@ type ListChannelsAssociatedWithChannelFlowPaginatorOptions struct {
 	// The maximum number of channels that you want to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

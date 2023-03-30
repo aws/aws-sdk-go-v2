@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the alarms for the specified metric. To filter the results, specify a
-// statistic, period, or unit. This operation retrieves only standard alarms that
+// Retrieves the alarms for the specified metric. To filter the results, specify
+// a statistic, period, or unit. This operation retrieves only standard alarms that
 // are based on the specified metric. It does not return alarms based on math
 // expressions that use the specified metric, or composite alarms that use the
 // specified metric.
@@ -53,8 +53,8 @@ type DescribeAlarmsForMetricInput struct {
 	// The period, in seconds, over which the statistic is applied.
 	Period *int32
 
-	// The statistic for the metric, other than percentiles. For percentile statistics,
-	// use ExtendedStatistics.
+	// The statistic for the metric, other than percentiles. For percentile
+	// statistics, use ExtendedStatistics .
 	Statistic types.Statistic
 
 	// The unit for the metric.

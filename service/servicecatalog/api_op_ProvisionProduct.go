@@ -12,17 +12,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provisions the specified product. A provisioned product is a resourced instance
-// of a product. For example, provisioning a product that's based on an
+// Provisions the specified product. A provisioned product is a resourced
+// instance of a product. For example, provisioning a product that's based on an
 // CloudFormation template launches an CloudFormation stack and its underlying
-// resources. You can check the status of this request using DescribeRecord. If the
-// request contains a tag key with an empty list of values, there's a tag conflict
-// for that key. Don't include conflicted keys as tags, or this will cause the
-// error "Parameter validation failed: Missing required parameter in
+// resources. You can check the status of this request using DescribeRecord. If
+// the request contains a tag key with an empty list of values, there's a tag
+// conflict for that key. Don't include conflicted keys as tags, or this will cause
+// the error "Parameter validation failed: Missing required parameter in
 // Tags[N]:Value". When provisioning a product that's been added to a portfolio,
 // you must grant your user, group, or role access to the portfolio. For more
-// information, see Granting users access
-// (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/catalogs_portfolios_users.html)
+// information, see Granting users access (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/catalogs_portfolios_users.html)
 // in the Service Catalog User Guide.
 func (c *Client) ProvisionProduct(ctx context.Context, params *ProvisionProductInput, optFns ...func(*Options)) (*ProvisionProductOutput, error) {
 	if params == nil {
@@ -46,25 +45,25 @@ type ProvisionProductInput struct {
 	// This member is required.
 	ProvisionToken *string
 
-	// A user-friendly name for the provisioned product. This value must be unique for
-	// the Amazon Web Services account and cannot be updated after the product is
+	// A user-friendly name for the provisioned product. This value must be unique
+	// for the Amazon Web Services account and cannot be updated after the product is
 	// provisioned.
 	//
 	// This member is required.
 	ProvisionedProductName *string
 
 	// The language code.
-	// - en - English (default)
-	// - jp - Japanese
-	// - zh - Chinese
+	//     - en - English (default)
+	//     - jp - Japanese
+	//     - zh - Chinese
 	AcceptLanguage *string
 
 	// Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related
 	// events.
 	NotificationArns []string
 
-	// The path identifier of the product. This value is optional if the product has a
-	// default path, and required if the product has more than one path. To list the
+	// The path identifier of the product. This value is optional if the product has
+	// a default path, and required if the product has more than one path. To list the
 	// paths for a product, use ListLaunchPaths. You must provide the name or ID, but
 	// not both.
 	PathId *string
@@ -82,12 +81,12 @@ type ProvisionProductInput struct {
 	// but not both.
 	ProvisioningArtifactId *string
 
-	// The name of the provisioning artifact. You must provide the name or ID, but not
-	// both.
+	// The name of the provisioning artifact. You must provide the name or ID, but
+	// not both.
 	ProvisioningArtifactName *string
 
-	// Parameters specified by the administrator that are required for provisioning the
-	// product.
+	// Parameters specified by the administrator that are required for provisioning
+	// the product.
 	ProvisioningParameters []types.ProvisioningParameter
 
 	// An object that contains information about the provisioning preferences for a

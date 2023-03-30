@@ -12,9 +12,8 @@ import (
 
 // Deletes the specified Amazon Web Services account alias. For information about
 // using an Amazon Web Services account alias, see Using an alias for your Amazon
-// Web Services account ID
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html) in the IAM
-// User Guide.
+// Web Services account ID (https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html)
+// in the IAM User Guide.
 func (c *Client) DeleteAccountAlias(ctx context.Context, params *DeleteAccountAliasInput, optFns ...func(*Options)) (*DeleteAccountAliasOutput, error) {
 	if params == nil {
 		params = &DeleteAccountAliasInput{}

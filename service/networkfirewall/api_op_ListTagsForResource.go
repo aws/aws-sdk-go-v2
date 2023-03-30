@@ -41,10 +41,10 @@ type ListTagsForResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The maximum number of objects that you want Network Firewall to return for this
-	// request. If more objects are available, in the response, Network Firewall
-	// provides a NextToken value that you can use in a subsequent call to get the next
-	// batch of objects.
+	// The maximum number of objects that you want Network Firewall to return for
+	// this request. If more objects are available, in the response, Network Firewall
+	// provides a NextToken value that you can use in a subsequent call to get the
+	// next batch of objects.
 	MaxResults *int32
 
 	// When you request a list of objects with a MaxResults setting, if the number of
@@ -138,8 +138,8 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListTagsForResourceAPIClient is a client that implements the ListTagsForResource
-// operation.
+// ListTagsForResourceAPIClient is a client that implements the
+// ListTagsForResource operation.
 type ListTagsForResourceAPIClient interface {
 	ListTagsForResource(context.Context, *ListTagsForResourceInput, ...func(*Options)) (*ListTagsForResourceOutput, error)
 }
@@ -149,14 +149,14 @@ var _ ListTagsForResourceAPIClient = (*Client)(nil)
 // ListTagsForResourcePaginatorOptions is the paginator options for
 // ListTagsForResource
 type ListTagsForResourcePaginatorOptions struct {
-	// The maximum number of objects that you want Network Firewall to return for this
-	// request. If more objects are available, in the response, Network Firewall
-	// provides a NextToken value that you can use in a subsequent call to get the next
-	// batch of objects.
+	// The maximum number of objects that you want Network Firewall to return for
+	// this request. If more objects are available, in the response, Network Firewall
+	// provides a NextToken value that you can use in a subsequent call to get the
+	// next batch of objects.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

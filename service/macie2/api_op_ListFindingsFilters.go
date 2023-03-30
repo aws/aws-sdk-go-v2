@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a subset of information about all the findings filters for an account.
+// Retrieves a subset of information about all the findings filters for an
+// account.
 func (c *Client) ListFindingsFilters(ctx context.Context, params *ListFindingsFiltersInput, optFns ...func(*Options)) (*ListFindingsFiltersOutput, error) {
 	if params == nil {
 		params = &ListFindingsFiltersInput{}
@@ -115,8 +116,8 @@ func (c *Client) addOperationListFindingsFiltersMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListFindingsFiltersAPIClient is a client that implements the ListFindingsFilters
-// operation.
+// ListFindingsFiltersAPIClient is a client that implements the
+// ListFindingsFilters operation.
 type ListFindingsFiltersAPIClient interface {
 	ListFindingsFilters(context.Context, *ListFindingsFiltersInput, ...func(*Options)) (*ListFindingsFiltersOutput, error)
 }
@@ -129,8 +130,8 @@ type ListFindingsFiltersPaginatorOptions struct {
 	// The maximum number of items to include in each page of a paginated response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

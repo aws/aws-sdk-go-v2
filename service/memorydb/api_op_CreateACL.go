@@ -12,8 +12,8 @@ import (
 )
 
 // Creates an Access Control List. For more information, see Authenticating users
-// with Access Contol Lists (ACLs)
-// (https://docs.aws.amazon.com/MemoryDB/latest/devguide/clusters.acls.html).
+// with Access Contol Lists (ACLs) (https://docs.aws.amazon.com/MemoryDB/latest/devguide/clusters.acls.html)
+// .
 func (c *Client) CreateACL(ctx context.Context, params *CreateACLInput, optFns ...func(*Options)) (*CreateACLOutput, error) {
 	if params == nil {
 		params = &CreateACLInput{}

@@ -13,28 +13,19 @@ import (
 
 // Creates an Firewall Manager policy. Firewall Manager provides the following
 // types of policies:
-// - An WAF policy (type WAFV2), which defines rule groups to
-// run first in the corresponding WAF web ACL and rule groups to run last in the
-// web ACL.
-// - An WAF Classic policy (type WAF), which defines a rule group.
-// - A
-// Shield Advanced policy, which applies Shield Advanced protection to specified
-// accounts and resources.
-// - A security group policy, which manages VPC security
-// groups across your Amazon Web Services organization.
-// - An Network Firewall
-// policy, which provides firewall rules to filter network traffic in specified
-// Amazon VPCs.
-// - A DNS Firewall policy, which provides Route 53 Resolver DNS
-// Firewall rules to filter DNS queries for specified VPCs.
+//   - An WAF policy (type WAFV2), which defines rule groups to run first in the corresponding WAF web ACL and rule groups to run last in the web ACL.
+//   - An WAF Classic policy (type WAF), which defines a rule group.
+//   - A Shield Advanced policy, which applies Shield Advanced protection to specified accounts and resources.
+//   - A security group policy, which manages VPC security groups across your Amazon Web Services organization.
+//   - An Network Firewall policy, which provides firewall rules to filter network traffic in specified Amazon VPCs.
+//   - A DNS Firewall policy, which provides Route 53 Resolver DNS Firewall rules to filter DNS queries for specified VPCs.
 //
-// Each policy is
-// specific to one of the types. If you want to enforce more than one policy type
-// across accounts, create multiple policies. You can create multiple policies for
-// each type. You must be subscribed to Shield Advanced to create a Shield Advanced
-// policy. For more information about subscribing to Shield Advanced, see
-// CreateSubscription
-// (https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_CreateSubscription.html).
+// Each policy is specific to one of the types. If you want to enforce more than
+// one policy type across accounts, create multiple policies. You can create
+// multiple policies for each type. You must be subscribed to Shield Advanced to
+// create a Shield Advanced policy. For more information about subscribing to
+// Shield Advanced, see CreateSubscription (https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_CreateSubscription.html)
+// .
 func (c *Client) PutPolicy(ctx context.Context, params *PutPolicyInput, optFns ...func(*Options)) (*PutPolicyOutput, error) {
 	if params == nil {
 		params = &PutPolicyInput{}

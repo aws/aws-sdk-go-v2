@@ -10,9 +10,9 @@ const (
 	ProtocolMqttV5   Protocol = "MqttV5"
 )
 
-// Values returns all known values for Protocol. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Protocol. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Protocol) Values() []Protocol {
 	return []Protocol{
 		"MqttV3_1_1",
@@ -124,8 +124,8 @@ const (
 	TestCaseScenarioTypeBasic    TestCaseScenarioType = "Basic"
 )
 
-// Values returns all known values for TestCaseScenarioType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TestCaseScenarioType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TestCaseScenarioType) Values() []TestCaseScenarioType {
 	return []TestCaseScenarioType{

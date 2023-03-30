@@ -38,7 +38,7 @@ type ListCommandInvocationsInput struct {
 	CommandId *string
 
 	// (Optional) If set this returns the response of the command executions and any
-	// command output. The default value is false.
+	// command output. The default value is false .
 	Details bool
 
 	// (Optional) One or more filters. Use a filter to return a more specific list of
@@ -154,8 +154,8 @@ type ListCommandInvocationsPaginatorOptions struct {
 	// results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -168,7 +168,8 @@ type ListCommandInvocationsPaginator struct {
 	firstPage bool
 }
 
-// NewListCommandInvocationsPaginator returns a new ListCommandInvocationsPaginator
+// NewListCommandInvocationsPaginator returns a new
+// ListCommandInvocationsPaginator
 func NewListCommandInvocationsPaginator(client ListCommandInvocationsAPIClient, params *ListCommandInvocationsInput, optFns ...func(*ListCommandInvocationsPaginatorOptions)) *ListCommandInvocationsPaginator {
 	if params == nil {
 		params = &ListCommandInvocationsInput{}

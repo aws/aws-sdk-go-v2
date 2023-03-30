@@ -80,14 +80,14 @@ type DescribeAutoMLJobOutput struct {
 	// This member is required.
 	OutputDataConfig *types.AutoMLOutputDataConfig
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-	// that has read permission to the input data location and write permission to the
-	// output data location in Amazon S3.
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
+	// role that has read permission to the input data location and write permission to
+	// the output data location in Amazon S3.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// Returns information on the job's artifacts found in AutoMLJobArtifacts.
+	// Returns information on the job's artifacts found in AutoMLJobArtifacts .
 	AutoMLJobArtifacts *types.AutoMLJobArtifacts
 
 	// Returns the configuration for the AutoML job.
@@ -97,8 +97,7 @@ type DescribeAutoMLJobOutput struct {
 	AutoMLJobObjective *types.AutoMLJobObjective
 
 	// The best model candidate selected by SageMaker Autopilot using both the best
-	// objective metric and lowest InferenceLatency
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html)
+	// objective metric and lowest InferenceLatency (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html)
 	// for an experiment.
 	BestCandidate *types.AutoMLCandidate
 
@@ -125,9 +124,9 @@ type DescribeAutoMLJobOutput struct {
 	// Returns the job's problem type.
 	ProblemType types.ProblemType
 
-	// Contains ProblemType, AutoMLJobObjective, and CompletionCriteria. If you do not
-	// provide these values, they are auto-inferred. If you do provide them, the values
-	// used are the ones you provide.
+	// Contains ProblemType , AutoMLJobObjective , and CompletionCriteria. If you do
+	// not provide these values, they are auto-inferred. If you do provide them, the
+	// values used are the ones you provide.
 	ResolvedAttributes *types.ResolvedAttributes
 
 	// Metadata pertaining to the operation's result.

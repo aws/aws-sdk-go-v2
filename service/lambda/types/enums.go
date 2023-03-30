@@ -10,9 +10,9 @@ const (
 	ArchitectureArm64 Architecture = "arm64"
 )
 
-// Values returns all known values for Architecture. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Architecture. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (Architecture) Values() []Architecture {
 	return []Architecture{
 		"x86_64",
@@ -45,9 +45,9 @@ const (
 	EndPointTypeKafkaBootstrapServers EndPointType = "KAFKA_BOOTSTRAP_SERVERS"
 )
 
-// Values returns all known values for EndPointType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EndPointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (EndPointType) Values() []EndPointType {
 	return []EndPointType{
 		"KAFKA_BOOTSTRAP_SERVERS",
@@ -82,9 +82,9 @@ const (
 	FullDocumentDefault      FullDocument = "Default"
 )
 
-// Values returns all known values for FullDocument. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FullDocument. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (FullDocument) Values() []FullDocument {
 	return []FullDocument{
 		"UpdateLookup",
@@ -99,8 +99,8 @@ const (
 	FunctionResponseTypeReportBatchItemFailures FunctionResponseType = "ReportBatchItemFailures"
 )
 
-// Values returns all known values for FunctionResponseType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for FunctionResponseType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (FunctionResponseType) Values() []FunctionResponseType {
 	return []FunctionResponseType{
@@ -264,9 +264,9 @@ const (
 	PackageTypeImage PackageType = "Image"
 )
 
-// Values returns all known values for PackageType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PackageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PackageType) Values() []PackageType {
 	return []PackageType{
 		"Zip",
@@ -283,8 +283,8 @@ const (
 	ProvisionedConcurrencyStatusEnumFailed     ProvisionedConcurrencyStatusEnum = "FAILED"
 )
 
-// Values returns all known values for ProvisionedConcurrencyStatusEnum. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for ProvisionedConcurrencyStatusEnum. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (ProvisionedConcurrencyStatusEnum) Values() []ProvisionedConcurrencyStatusEnum {
@@ -391,9 +391,10 @@ const (
 	SnapStartOptimizationStatusOff SnapStartOptimizationStatus = "Off"
 )
 
-// Values returns all known values for SnapStartOptimizationStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SnapStartOptimizationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (SnapStartOptimizationStatus) Values() []SnapStartOptimizationStatus {
 	return []SnapStartOptimizationStatus{
 		"On",
@@ -441,8 +442,8 @@ const (
 	StateFailed   State = "Failed"
 )
 
-// Values returns all known values for State. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for State. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (State) Values() []State {
 	return []State{
@@ -549,9 +550,9 @@ const (
 	TracingModePassThrough TracingMode = "PassThrough"
 )
 
-// Values returns all known values for TracingMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TracingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TracingMode) Values() []TracingMode {
 	return []TracingMode{
 		"Active",

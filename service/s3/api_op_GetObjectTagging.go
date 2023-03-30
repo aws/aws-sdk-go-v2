@@ -14,23 +14,17 @@ import (
 
 // Returns the tag-set of an object. You send the GET request against the tagging
 // subresource associated with the object. To use this operation, you must have
-// permission to perform the s3:GetObjectTagging action. By default, the GET action
-// returns information about current version of an object. For a versioned bucket,
-// you can have multiple versions of an object in your bucket. To retrieve tags of
-// any other version, use the versionId query parameter. You also need permission
-// for the s3:GetObjectVersionTagging action. By default, the bucket owner has this
-// permission and can grant this permission to others. For information about the
-// Amazon S3 object tagging feature, see Object Tagging
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html). The
-// following actions are related to GetObjectTagging:
-// - DeleteObjectTagging
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html)
-// -
-// GetObjectAttributes
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html)
-// -
-// PutObjectTagging
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html)
+// permission to perform the s3:GetObjectTagging action. By default, the GET
+// action returns information about current version of an object. For a versioned
+// bucket, you can have multiple versions of an object in your bucket. To retrieve
+// tags of any other version, use the versionId query parameter. You also need
+// permission for the s3:GetObjectVersionTagging action. By default, the bucket
+// owner has this permission and can grant this permission to others. For
+// information about the Amazon S3 object tagging feature, see Object Tagging (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html)
+// . The following actions are related to GetObjectTagging :
+//   - DeleteObjectTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html)
+//   - GetObjectAttributes (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html)
+//   - PutObjectTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html)
 func (c *Client) GetObjectTagging(ctx context.Context, params *GetObjectTaggingInput, optFns ...func(*Options)) (*GetObjectTaggingOutput, error) {
 	if params == nil {
 		params = &GetObjectTaggingInput{}
@@ -48,23 +42,21 @@ func (c *Client) GetObjectTagging(ctx context.Context, params *GetObjectTaggingI
 
 type GetObjectTaggingInput struct {
 
-	// The bucket name containing the object for which to get the tagging information.
-	// When using this action with an access point, you must direct requests to the
-	// access point hostname. The access point hostname takes the form
+	// The bucket name containing the object for which to get the tagging
+	// information. When using this action with an access point, you must direct
+	// requests to the access point hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
 	// action with an access point through the Amazon Web Services SDKs, you provide
 	// the access point ARN in place of the bucket name. For more information about
-	// access point ARNs, see Using access points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// access point ARNs, see Using access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this action with S3 on Outposts through the Amazon Web Services SDKs, you
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
-	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
-	// Amazon S3 User Guide.
+	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
+	// in the Amazon S3 User Guide.
 	//
 	// This member is required.
 	Bucket *string
@@ -82,8 +74,7 @@ type GetObjectTaggingInput struct {
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information
 	// about downloading objects from Requester Pays buckets, see Downloading Objects
-	// in Requester Pays Buckets
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
+	// in Requester Pays Buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
 	// in the Amazon S3 User Guide.
 	RequestPayer types.RequestPayer
 
@@ -193,9 +184,9 @@ func newServiceMetadataMiddleware_opGetObjectTagging(region string) *awsmiddlewa
 	}
 }
 
-// getGetObjectTaggingBucketMember returns a pointer to string denoting a provided
-// bucket member valueand a boolean indicating if the input has a modeled bucket
-// name,
+// getGetObjectTaggingBucketMember returns a pointer to string denoting a
+// provided bucket member valueand a boolean indicating if the input has a modeled
+// bucket name,
 func getGetObjectTaggingBucketMember(input interface{}) (*string, bool) {
 	in := input.(*GetObjectTaggingInput)
 	if in.Bucket == nil {

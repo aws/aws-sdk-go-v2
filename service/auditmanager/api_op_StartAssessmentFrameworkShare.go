@@ -20,17 +20,13 @@ import (
 // same snapshot in the US West (Oregon) Amazon Web Services Region. Audit Manager
 // deletes the snapshot and the backup snapshot when one of the following events
 // occurs:
-// - The sender revokes the share request.
-// - The recipient declines the
-// share request.
-// - The recipient encounters an error and doesn't successfully
-// accept the share request.
-// - The share request expires before the recipient
-// responds to the request.
+//   - The sender revokes the share request.
+//   - The recipient declines the share request.
+//   - The recipient encounters an error and doesn't successfully accept the share request.
+//   - The share request expires before the recipient responds to the request.
 //
-// When a sender resends a share request
-// (https://docs.aws.amazon.com/audit-manager/latest/userguide/framework-sharing.html#framework-sharing-resend),
-// the snapshot is replaced with an updated version that corresponds with the
+// When a sender resends a share request (https://docs.aws.amazon.com/audit-manager/latest/userguide/framework-sharing.html#framework-sharing-resend)
+// , the snapshot is replaced with an updated version that corresponds with the
 // latest version of the custom framework. When a recipient accepts a share
 // request, the snapshot is replicated into their Amazon Web Services account under
 // the Amazon Web Services Region that was specified in the share request. When you
@@ -40,8 +36,7 @@ import (
 // designated as not eligible for sharing by Amazon Web Services, unless you have
 // obtained permission to do so from the owner of the standard framework. To learn
 // more about which standard frameworks are eligible for sharing, see Framework
-// sharing eligibility
-// (https://docs.aws.amazon.com/audit-manager/latest/userguide/share-custom-framework-concepts-and-terminology.html#eligibility)
+// sharing eligibility (https://docs.aws.amazon.com/audit-manager/latest/userguide/share-custom-framework-concepts-and-terminology.html#eligibility)
 // in the Audit Manager User Guide.
 func (c *Client) StartAssessmentFrameworkShare(ctx context.Context, params *StartAssessmentFrameworkShareInput, optFns ...func(*Options)) (*StartAssessmentFrameworkShareOutput, error) {
 	if params == nil {
@@ -83,7 +78,7 @@ type StartAssessmentFrameworkShareInput struct {
 
 type StartAssessmentFrameworkShareOutput struct {
 
-	// The share request that's created by the StartAssessmentFrameworkShare API.
+	// The share request that's created by the StartAssessmentFrameworkShare  API.
 	AssessmentFrameworkShareRequest *types.AssessmentFrameworkShareRequest
 
 	// Metadata pertaining to the operation's result.

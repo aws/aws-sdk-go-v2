@@ -11,11 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Uploads a public key to CloudFront that you can use with signed URLs and signed
-// cookies
-// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html),
-// or with field-level encryption
-// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).
+// Uploads a public key to CloudFront that you can use with signed URLs and
+// signed cookies (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
+// , or with field-level encryption (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html)
+// .
 func (c *Client) CreatePublicKey(ctx context.Context, params *CreatePublicKeyInput, optFns ...func(*Options)) (*CreatePublicKeyOutput, error) {
 	if params == nil {
 		params = &CreatePublicKeyInput{}

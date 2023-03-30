@@ -32,7 +32,7 @@ func (c *Client) ListObjectChildren(ctx context.Context, params *ListObjectChild
 type ListObjectChildrenInput struct {
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where the
-	// object resides. For more information, see arns.
+	// object resides. For more information, see arns .
 	//
 	// This member is required.
 	DirectoryArn *string
@@ -59,8 +59,8 @@ type ListObjectChildrenInput struct {
 
 type ListObjectChildrenOutput struct {
 
-	// Children structure, which is a map with key as the LinkName and ObjectIdentifier
-	// as the value.
+	// Children structure, which is a map with key as the LinkName  and
+	// ObjectIdentifier as the value.
 	Children map[string]string
 
 	// The pagination token.
@@ -150,8 +150,8 @@ type ListObjectChildrenPaginatorOptions struct {
 	// approximate number.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

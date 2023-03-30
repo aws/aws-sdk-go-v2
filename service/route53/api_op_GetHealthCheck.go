@@ -40,7 +40,7 @@ type GetHealthCheckInput struct {
 	noSmithyDocumentSerde
 }
 
-// A complex type that contains the response to a GetHealthCheck request.
+// A complex type that contains the response to a GetHealthCheck  request.
 type GetHealthCheckOutput struct {
 
 	// A complex type that contains information about one health check that is

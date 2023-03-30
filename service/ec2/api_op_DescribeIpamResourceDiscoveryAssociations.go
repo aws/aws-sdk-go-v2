@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes resource discovery association with an Amazon VPC IPAM. An associated
-// resource discovery is a resource discovery that has been associated with an
-// IPAM..
+// Describes resource discovery association with an Amazon VPC IPAM. An
+// associated resource discovery is a resource discovery that has been associated
+// with an IPAM..
 func (c *Client) DescribeIpamResourceDiscoveryAssociations(ctx context.Context, params *DescribeIpamResourceDiscoveryAssociationsInput, optFns ...func(*Options)) (*DescribeIpamResourceDiscoveryAssociationsOutput, error) {
 	if params == nil {
 		params = &DescribeIpamResourceDiscoveryAssociationsInput{}
@@ -34,8 +34,8 @@ type DescribeIpamResourceDiscoveryAssociationsInput struct {
 
 	// A check for whether you have the required permissions for the action without
 	// actually making the request and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The resource discovery association filters.
@@ -145,8 +145,8 @@ type DescribeIpamResourceDiscoveryAssociationsPaginatorOptions struct {
 	// results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -29,7 +29,8 @@ func (c *Client) GetSensitivityInspectionTemplate(ctx context.Context, params *G
 
 type GetSensitivityInspectionTemplateInput struct {
 
-	// The unique identifier for the Amazon Macie resource that the request applies to.
+	// The unique identifier for the Amazon Macie resource that the request applies
+	// to.
 	//
 	// This member is required.
 	Id *string
@@ -46,8 +47,8 @@ type GetSensitivityInspectionTemplateOutput struct {
 	// analyzing data.
 	Excludes *types.SensitivityInspectionTemplateExcludes
 
-	// The allow lists, custom data identifiers, and managed data identifiers that are
-	// included (used) when analyzing data.
+	// The allow lists, custom data identifiers, and managed data identifiers that
+	// are included (used) when analyzing data.
 	Includes *types.SensitivityInspectionTemplateIncludes
 
 	// The name of the template: automated-sensitive-data-discovery.

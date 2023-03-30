@@ -12,7 +12,7 @@ import (
 )
 
 // Returns the most current information about the specified stream. You must
-// specify either the StreamName or the StreamARN.
+// specify either the StreamName  or the StreamARN .
 func (c *Client) DescribeStream(ctx context.Context, params *DescribeStreamInput, optFns ...func(*Options)) (*DescribeStreamOutput, error) {
 	if params == nil {
 		params = &DescribeStreamInput{}

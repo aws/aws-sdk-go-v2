@@ -125,8 +125,8 @@ func (c *Client) addOperationListPageResolutionsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListPageResolutionsAPIClient is a client that implements the ListPageResolutions
-// operation.
+// ListPageResolutionsAPIClient is a client that implements the
+// ListPageResolutions operation.
 type ListPageResolutionsAPIClient interface {
 	ListPageResolutions(context.Context, *ListPageResolutionsInput, ...func(*Options)) (*ListPageResolutionsOutput, error)
 }
@@ -136,8 +136,8 @@ var _ ListPageResolutionsAPIClient = (*Client)(nil)
 // ListPageResolutionsPaginatorOptions is the paginator options for
 // ListPageResolutions
 type ListPageResolutionsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

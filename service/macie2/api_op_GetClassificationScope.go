@@ -29,7 +29,8 @@ func (c *Client) GetClassificationScope(ctx context.Context, params *GetClassifi
 
 type GetClassificationScopeInput struct {
 
-	// The unique identifier for the Amazon Macie resource that the request applies to.
+	// The unique identifier for the Amazon Macie resource that the request applies
+	// to.
 	//
 	// This member is required.
 	Id *string

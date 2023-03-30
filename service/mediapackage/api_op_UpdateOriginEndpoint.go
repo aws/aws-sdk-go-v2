@@ -56,8 +56,8 @@ type UpdateOriginEndpointInput struct {
 	// A Microsoft Smooth Streaming (MSS) packaging configuration.
 	MssPackage *types.MssPackage
 
-	// Control whether origination of video is allowed for this OriginEndpoint. If set
-	// to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of
+	// Control whether origination of video is allowed for this OriginEndpoint. If
+	// set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of
 	// access control. If set to DENY, the OriginEndpoint may not be requested. This
 	// can be helpful for Live to VOD harvesting, or for temporarily disabling
 	// origination
@@ -67,8 +67,8 @@ type UpdateOriginEndpointInput struct {
 	// not specified, startover playback will be disabled for the OriginEndpoint.
 	StartoverWindowSeconds int32
 
-	// Amount of delay (in seconds) to enforce on the playback of live content. If not
-	// specified, there will be no time delay in effect for the OriginEndpoint.
+	// Amount of delay (in seconds) to enforce on the playback of live content. If
+	// not specified, there will be no time delay in effect for the OriginEndpoint.
 	TimeDelaySeconds int32
 
 	// A list of source IP CIDR blocks that will be allowed to access the
@@ -113,8 +113,8 @@ type UpdateOriginEndpointOutput struct {
 	// A Microsoft Smooth Streaming (MSS) packaging configuration.
 	MssPackage *types.MssPackage
 
-	// Control whether origination of video is allowed for this OriginEndpoint. If set
-	// to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of
+	// Control whether origination of video is allowed for this OriginEndpoint. If
+	// set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of
 	// access control. If set to DENY, the OriginEndpoint may not be requested. This
 	// can be helpful for Live to VOD harvesting, or for temporarily disabling
 	// origination

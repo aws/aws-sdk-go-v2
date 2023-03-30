@@ -17,19 +17,10 @@ import (
 // that do not comply with the rule. A rule is compliant if all of the evaluated
 // resources comply with it. It is noncompliant if any of these resources do not
 // comply. If Config has no current evaluation results for the rule, it returns
-// INSUFFICIENT_DATA. This result might indicate one of the following conditions:
-// -
-// Config has never invoked an evaluation for the rule. To check whether it has,
-// use the DescribeConfigRuleEvaluationStatus action to get the
-// LastSuccessfulInvocationTime and LastFailedInvocationTime.
-// - The rule's Lambda
-// function is failing to send evaluation results to Config. Verify that the role
-// you assigned to your configuration recorder includes the config:PutEvaluations
-// permission. If the rule is a custom rule, verify that the Lambda execution role
-// includes the config:PutEvaluations permission.
-// - The rule's Lambda function has
-// returned NOT_APPLICABLE for all evaluation results. This can occur if the
-// resources were deleted or removed from the rule's scope.
+// INSUFFICIENT_DATA . This result might indicate one of the following conditions:
+//   - Config has never invoked an evaluation for the rule. To check whether it has, use the DescribeConfigRuleEvaluationStatus action to get the LastSuccessfulInvocationTime and LastFailedInvocationTime .
+//   - The rule's Lambda function is failing to send evaluation results to Config. Verify that the role you assigned to your configuration recorder includes the config:PutEvaluations permission. If the rule is a custom rule, verify that the Lambda execution role includes the config:PutEvaluations permission.
+//   - The rule's Lambda function has returned NOT_APPLICABLE for all evaluation results. This can occur if the resources were deleted or removed from the rule's scope.
 func (c *Client) DescribeComplianceByConfigRule(ctx context.Context, params *DescribeComplianceByConfigRuleInput, optFns ...func(*Options)) (*DescribeComplianceByConfigRuleOutput, error) {
 	if params == nil {
 		params = &DescribeComplianceByConfigRuleInput{}
@@ -65,8 +56,8 @@ type DescribeComplianceByConfigRuleOutput struct {
 	// Indicates whether each of the specified Config rules is compliant.
 	ComplianceByConfigRules []types.ComplianceByConfigRule
 
-	// The string that you use in a subsequent request to get the next page of results
-	// in a paginated response.
+	// The string that you use in a subsequent request to get the next page of
+	// results in a paginated response.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -146,8 +137,8 @@ var _ DescribeComplianceByConfigRuleAPIClient = (*Client)(nil)
 // DescribeComplianceByConfigRulePaginatorOptions is the paginator options for
 // DescribeComplianceByConfigRule
 type DescribeComplianceByConfigRulePaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

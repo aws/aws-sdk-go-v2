@@ -12,18 +12,13 @@ import (
 )
 
 // Attempts to cancel a service instance deployment on an UpdateServiceInstance
-// action, if the deployment is IN_PROGRESS. For more information, see Update a
-// service instance
-// (https://docs.aws.amazon.com/proton/latest/userguide/ag-svc-instance-update.html)
+// action, if the deployment is IN_PROGRESS . For more information, see Update a
+// service instance (https://docs.aws.amazon.com/proton/latest/userguide/ag-svc-instance-update.html)
 // in the Proton User guide. The following list includes potential cancellation
 // scenarios.
-// - If the cancellation attempt succeeds, the resulting deployment
-// state is CANCELLED.
-// - If the cancellation attempt fails, the resulting
-// deployment state is FAILED.
-// - If the current UpdateServiceInstance action
-// succeeds before the cancellation attempt starts, the resulting deployment state
-// is SUCCEEDED and the cancellation attempt has no effect.
+//   - If the cancellation attempt succeeds, the resulting deployment state is CANCELLED .
+//   - If the cancellation attempt fails, the resulting deployment state is FAILED .
+//   - If the current UpdateServiceInstance action succeeds before the cancellation attempt starts, the resulting deployment state is SUCCEEDED and the cancellation attempt has no effect.
 func (c *Client) CancelServiceInstanceDeployment(ctx context.Context, params *CancelServiceInstanceDeploymentInput, optFns ...func(*Options)) (*CancelServiceInstanceDeploymentOutput, error) {
 	if params == nil {
 		params = &CancelServiceInstanceDeploymentInput{}

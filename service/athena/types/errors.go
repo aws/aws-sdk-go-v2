@@ -7,7 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Indicates a platform issue, which may be due to a transient condition or outage.
+// Indicates a platform issue, which may be due to a transient condition or
+// outage.
 type InternalServerException struct {
 	Message *string
 
@@ -33,8 +34,8 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Indicates that something is wrong with the input to the request. For example, a
-// required parameter may be missing or out of range.
+// Indicates that something is wrong with the input to the request. For example,
+// a required parameter may be missing or out of range.
 type InvalidRequestException struct {
 	Message *string
 
@@ -63,10 +64,10 @@ func (e *InvalidRequestException) ErrorCode() string {
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An exception that Athena received when it called a custom metastore. Occurs if
-// the error is not caused by user input (InvalidRequestException) or from the
-// Athena platform (InternalServerException). For example, if a user-created Lambda
-// function is missing permissions, the Lambda 4XX exception is returned in a
-// MetadataException.
+// the error is not caused by user input ( InvalidRequestException) or from the
+// Athena platform ( InternalServerException). For example, if a user-created
+// Lambda function is missing permissions, the Lambda 4XX exception is returned
+// in a MetadataException .
 type MetadataException struct {
 	Message *string
 

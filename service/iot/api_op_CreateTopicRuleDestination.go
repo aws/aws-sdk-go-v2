@@ -12,8 +12,7 @@ import (
 )
 
 // Creates a topic rule destination. The destination must be confirmed prior to
-// use. Requires permission to access the CreateTopicRuleDestination
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// use. Requires permission to access the CreateTopicRuleDestination (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateTopicRuleDestination(ctx context.Context, params *CreateTopicRuleDestinationInput, optFns ...func(*Options)) (*CreateTopicRuleDestinationOutput, error) {
 	if params == nil {

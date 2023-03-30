@@ -30,13 +30,13 @@ func (c *Client) DescribeAutoScalingInstances(ctx context.Context, params *Descr
 
 type DescribeAutoScalingInstancesInput struct {
 
-	// The IDs of the instances. If you omit this property, all Auto Scaling instances
-	// are described. If you specify an ID that does not exist, it is ignored with no
-	// error. Array Members: Maximum number of 50 items.
+	// The IDs of the instances. If you omit this property, all Auto Scaling
+	// instances are described. If you specify an ID that does not exist, it is ignored
+	// with no error. Array Members: Maximum number of 50 items.
 	InstanceIds []string
 
 	// The maximum number of items to return with this call. The default value is 50
-	// and the maximum value is 50.
+	// and the maximum value is 50 .
 	MaxRecords *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -135,11 +135,11 @@ var _ DescribeAutoScalingInstancesAPIClient = (*Client)(nil)
 // DescribeAutoScalingInstances
 type DescribeAutoScalingInstancesPaginatorOptions struct {
 	// The maximum number of items to return with this call. The default value is 50
-	// and the maximum value is 50.
+	// and the maximum value is 50 .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

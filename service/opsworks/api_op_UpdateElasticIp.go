@@ -11,12 +11,12 @@ import (
 )
 
 // Updates a registered Elastic IP address's name. For more information, see
-// Resource Management
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html). Required
-// Permissions: To use this action, an IAM user must have a Manage permissions
-// level for the stack, or an attached policy that explicitly grants permissions.
-// For more information on user permissions, see Managing User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Resource Management (https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html)
+// . Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) UpdateElasticIp(ctx context.Context, params *UpdateElasticIpInput, optFns ...func(*Options)) (*UpdateElasticIpOutput, error) {
 	if params == nil {
 		params = &UpdateElasticIpInput{}

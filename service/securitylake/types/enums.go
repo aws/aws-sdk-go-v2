@@ -51,9 +51,9 @@ const (
 	DimensionMember     Dimension = "MEMBER"
 )
 
-// Values returns all known values for Dimension. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Dimension. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Dimension) Values() []Dimension {
 	return []Dimension{
 		"REGION",
@@ -88,9 +88,9 @@ const (
 	HttpsMethodPut  HttpsMethod = "PUT"
 )
 
-// Values returns all known values for HttpsMethod. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for HttpsMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (HttpsMethod) Values() []HttpsMethod {
 	return []HttpsMethod{
 		"POST",
@@ -237,9 +237,9 @@ const (
 	SourceStatusPending     SourceStatus = "PENDING"
 )
 
-// Values returns all known values for SourceStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SourceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (SourceStatus) Values() []SourceStatus {
 	return []SourceStatus{
 		"ACTIVE",
@@ -261,9 +261,9 @@ const (
 	StorageClassExpire             StorageClass = "EXPIRE"
 )
 
-// Values returns all known values for StorageClass. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StorageClass. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (StorageClass) Values() []StorageClass {
 	return []StorageClass{
 		"STANDARD_IA",
@@ -291,9 +291,9 @@ const (
 	SubscriptionProtocolTypeFirehose  SubscriptionProtocolType = "FIREHOSE"
 )
 
-// Values returns all known values for SubscriptionProtocolType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SubscriptionProtocolType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SubscriptionProtocolType) Values() []SubscriptionProtocolType {
 	return []SubscriptionProtocolType{
 		"HTTP",

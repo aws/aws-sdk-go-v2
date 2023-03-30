@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates stack instances for the specified accounts, within the specified Amazon
-// Web Services Regions. A stack instance refers to a stack in a specific account
-// and Region. You must specify at least one value for either Accounts or
-// DeploymentTargets, and you must specify at least one value for Regions.
+// Creates stack instances for the specified accounts, within the specified
+// Amazon Web Services Regions. A stack instance refers to a stack in a specific
+// account and Region. You must specify at least one value for either Accounts  or
+// DeploymentTargets , and you must specify at least one value for Regions .
 func (c *Client) CreateStackInstances(ctx context.Context, params *CreateStackInstancesInput, optFns ...func(*Options)) (*CreateStackInstancesOutput, error) {
 	if params == nil {
 		params = &CreateStackInstancesInput{}
@@ -45,28 +45,22 @@ type CreateStackInstancesInput struct {
 	// This member is required.
 	StackSetName *string
 
-	// [Self-managed permissions] The names of one or more Amazon Web Services accounts
-	// that you want to create stack instances in the specified Region(s) for. You can
-	// specify Accounts or DeploymentTargets, but not both.
+	// [Self-managed permissions] The names of one or more Amazon Web Services
+	// accounts that you want to create stack instances in the specified Region(s) for.
+	// You can specify Accounts  or DeploymentTargets , but not both.
 	Accounts []string
 
 	// [Service-managed permissions] Specifies whether you are acting as an account
 	// administrator in the organization's management account or as a delegated
-	// administrator in a member account. By default, SELF is specified. Use SELF for
-	// stack sets with self-managed permissions.
-	// - If you are signed in to the
-	// management account, specify SELF.
-	// - If you are signed in to a delegated
-	// administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account
-	// must be registered as a delegated administrator in the management account. For
-	// more information, see Register a delegated administrator
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
-	// in the CloudFormation User Guide.
+	// administrator in a member account. By default, SELF  is specified. Use SELF
+	// for stack sets with self-managed permissions.
+	//     - If you are signed in to the management account, specify SELF .
+	//     - If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN . Your Amazon Web Services account must be registered as a delegated administrator in the management account. For more information, see Register a delegated administrator (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html) in the CloudFormation User Guide.
 	CallAs types.CallAs
 
 	// [Service-managed permissions] The Organizations accounts for which to create
 	// stack instances in the specified Amazon Web Services Regions. You can specify
-	// Accounts or DeploymentTargets, but not both.
+	// Accounts or DeploymentTargets , but not both.
 	DeploymentTargets *types.DeploymentTargets
 
 	// The unique identifier for this stack set operation. The operation ID also
@@ -75,34 +69,26 @@ type CreateStackInstancesInput struct {
 	// might retry stack set operation requests to ensure that CloudFormation
 	// successfully received them. If you don't specify an operation ID, the SDK
 	// generates one automatically. Repeating this stack set operation with a new
-	// operation ID retries all stack instances whose status is OUTDATED.
+	// operation ID retries all stack instances whose status is OUTDATED .
 	OperationId *string
 
 	// Preferences for how CloudFormation performs this stack set operation.
 	OperationPreferences *types.StackSetOperationPreferences
 
-	// A list of stack set parameters whose values you want to override in the selected
-	// stack instances. Any overridden parameter values will be applied to all stack
-	// instances in the specified accounts and Amazon Web Services Regions. When
+	// A list of stack set parameters whose values you want to override in the
+	// selected stack instances. Any overridden parameter values will be applied to all
+	// stack instances in the specified accounts and Amazon Web Services Regions. When
 	// specifying parameters and their values, be aware of how CloudFormation sets
 	// parameter values during stack instance operations:
-	// - To override the current
-	// value for a parameter, include the parameter and specify its value.
-	// - To leave
-	// an overridden parameter set to its present value, include the parameter and
-	// specify UsePreviousValue as true. (You can't specify both a value and set
-	// UsePreviousValue to true.)
-	// - To set an overridden parameter back to the value
-	// specified in the stack set, specify a parameter list but don't include the
-	// parameter in the list.
-	// - To leave all parameters set to their present values,
-	// don't specify this property at all.
+	//     - To override the current value for a parameter, include the parameter and specify its value.
+	//     - To leave an overridden parameter set to its present value, include the parameter and specify UsePreviousValue as true . (You can't specify both a value and set UsePreviousValue to true .)
+	//     - To set an overridden parameter back to the value specified in the stack set, specify a parameter list but don't include the parameter in the list.
+	//     - To leave all parameters set to their present values, don't specify this property at all.
 	//
-	// During stack set updates, any parameter
-	// values overridden for a stack instance aren't updated, but retain their
-	// overridden value. You can only override the parameter values that are specified
-	// in the stack set; to add or delete a parameter itself, use UpdateStackSet
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html)
+	// During stack set updates, any parameter values overridden for a stack instance
+	// aren't updated, but retain their overridden value. You can only override the
+	// parameter values that are specified in the stack set; to add or delete a
+	// parameter itself, use UpdateStackSet (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html)
 	// to update the stack set template.
 	ParameterOverrides []types.Parameter
 

@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about the specified request operation. Use this operation after
-// calling a request operation (for example, ProvisionProduct,
-// TerminateProvisionedProduct, or UpdateProvisionedProduct). If a provisioned
-// product was transferred to a new owner using UpdateProvisionedProductProperties,
-// the new owner will be able to describe all past records for that product. The
+// Gets information about the specified request operation. Use this operation
+// after calling a request operation (for example, ProvisionProduct ,
+// TerminateProvisionedProduct , or UpdateProvisionedProduct). If a provisioned
+// product was transferred to a new owner using UpdateProvisionedProductProperties
+// , the new owner will be able to describe all past records for that product. The
 // previous owner will no longer be able to describe the records, but will be able
 // to use ListRecordHistory to see the product's history from when he was the
 // owner.
@@ -36,16 +36,16 @@ func (c *Client) DescribeRecord(ctx context.Context, params *DescribeRecordInput
 
 type DescribeRecordInput struct {
 
-	// The record identifier of the provisioned product. This identifier is returned by
-	// the request operation.
+	// The record identifier of the provisioned product. This identifier is returned
+	// by the request operation.
 	//
 	// This member is required.
 	Id *string
 
 	// The language code.
-	// - en - English (default)
-	// - jp - Japanese
-	// - zh - Chinese
+	//     - en - English (default)
+	//     - jp - Japanese
+	//     - zh - Chinese
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.

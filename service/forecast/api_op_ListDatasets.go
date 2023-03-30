@@ -12,12 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of datasets created using the CreateDataset
-// (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html)
+// Returns a list of datasets created using the CreateDataset (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html)
 // operation. For each dataset, a summary of its properties, including its Amazon
 // Resource Name (ARN), is returned. To retrieve the complete set of properties,
-// use the ARN with the DescribeDataset
-// (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDataset.html)
+// use the ARN with the DescribeDataset (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDataset.html)
 // operation.
 func (c *Client) ListDatasets(ctx context.Context, params *ListDatasetsInput, optFns ...func(*Options)) (*ListDatasetsOutput, error) {
 	if params == nil {
@@ -134,8 +132,8 @@ type ListDatasetsPaginatorOptions struct {
 	// The number of items to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

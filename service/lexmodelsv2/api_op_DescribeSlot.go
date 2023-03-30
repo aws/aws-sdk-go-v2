@@ -47,7 +47,7 @@ type DescribeSlotInput struct {
 
 	// The identifier of the language and locale of the slot to describe. The string
 	// must match one of the supported locales. For more information, see Supported
-	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html) .
 	//
 	// This member is required.
 	LocaleId *string
@@ -83,8 +83,8 @@ type DescribeSlotOutput struct {
 	// The language and locale specified for the slot.
 	LocaleId *string
 
-	// Indicates whether the slot accepts multiple values in a single utterance. If the
-	// multipleValuesSetting is not set, the default value is false.
+	// Indicates whether the slot accepts multiple values in a single utterance. If
+	// the multipleValuesSetting  is not set, the default value is false .
 	MultipleValuesSetting *types.MultipleValuesSetting
 
 	// Whether slot values are shown in Amazon CloudWatch logs. If the value is None,

@@ -30,8 +30,8 @@ func (c *Client) CreateBot(ctx context.Context, params *CreateBotInput, optFns .
 
 type CreateBotInput struct {
 
-	// The name of the bot. The bot name must be unique in the account that creates the
-	// bot.
+	// The name of the bot. The bot name must be unique in the account that creates
+	// the bot.
 	//
 	// This member is required.
 	BotName *string
@@ -51,8 +51,8 @@ type CreateBotInput struct {
 	// This member is required.
 	IdleSessionTTLInSeconds *int32
 
-	// The Amazon Resource Name (ARN) of an IAM role that has permission to access the
-	// bot.
+	// The Amazon Resource Name (ARN) of an IAM role that has permission to access
+	// the bot.
 	//
 	// This member is required.
 	RoleArn *string
@@ -61,20 +61,20 @@ type CreateBotInput struct {
 	BotMembers []types.BotMember
 
 	// A list of tags to add to the bot. You can only add tags when you create a bot.
-	// You can't use the UpdateBot operation to update tags. To update tags, use the
+	// You can't use the UpdateBot  operation to update tags. To update tags, use the
 	// TagResource operation.
 	BotTags map[string]string
 
 	// The type of a bot to create.
 	BotType types.BotType
 
-	// A description of the bot. It appears in lists to help you identify a particular
-	// bot.
+	// A description of the bot. It appears in lists to help you identify a
+	// particular bot.
 	Description *string
 
 	// A list of tags to add to the test alias for a bot. You can only add tags when
 	// you create a bot. You can't use the UpdateAlias operation to update tags. To
-	// update tags on the test alias, use the TagResource operation.
+	// update tags on the test alias, use the TagResource  operation.
 	TestBotAliasTags map[string]string
 
 	noSmithyDocumentSerde
@@ -82,8 +82,8 @@ type CreateBotInput struct {
 
 type CreateBotOutput struct {
 
-	// A unique identifier for a particular bot. You use this to identify the bot when
-	// you call other Amazon Lex API operations.
+	// A unique identifier for a particular bot. You use this to identify the bot
+	// when you call other Amazon Lex API operations.
 	BotId *string
 
 	// The list of bots in a network that was created.
@@ -93,8 +93,8 @@ type CreateBotOutput struct {
 	BotName *string
 
 	// Shows the current status of the bot. The bot is first in the Creating status.
-	// Once the bot is read for use, it changes to the Available status. After the bot
-	// is created, you can use the DRAFT version of the bot.
+	// Once the bot is read for use, it changes to the Available status. After the
+	// bot is created, you can use the DRAFT  version of the bot.
 	BotStatus types.BotStatus
 
 	// A list of tags associated with the bot.

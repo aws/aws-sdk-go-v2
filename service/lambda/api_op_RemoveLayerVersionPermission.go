@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a statement from the permissions policy for a version of an Lambda layer
-// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html). For
-// more information, see AddLayerVersionPermission.
+// Removes a statement from the permissions policy for a version of an Lambda
+// layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
+// . For more information, see AddLayerVersionPermission .
 func (c *Client) RemoveLayerVersionPermission(ctx context.Context, params *RemoveLayerVersionPermissionInput, optFns ...func(*Options)) (*RemoveLayerVersionPermissionOutput, error) {
 	if params == nil {
 		params = &RemoveLayerVersionPermissionInput{}

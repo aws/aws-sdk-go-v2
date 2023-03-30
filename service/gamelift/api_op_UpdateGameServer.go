@@ -17,23 +17,13 @@ import (
 // server process that is running on an instance in a game server group. Use this
 // operation to update the following types of game server information. You can make
 // all three types of updates in the same request:
-// - To update the game server's
-// utilization status, identify the game server and game server group and specify
-// the current utilization status. Use this status to identify when game servers
-// are currently hosting games and when they are available to be claimed.
-// - To
-// report health status, identify the game server and game server group and set
-// health check to HEALTHY. If a game server does not report health status for a
-// certain length of time, the game server is no longer considered healthy. As a
-// result, it will be eventually deregistered from the game server group to avoid
-// affecting utilization metrics. The best practice is to report health every 60
-// seconds.
-// - To change game server metadata, provide updated game server
-// data.
+//   - To update the game server's utilization status, identify the game server and game server group and specify the current utilization status. Use this status to identify when game servers are currently hosting games and when they are available to be claimed.
+//   - To report health status, identify the game server and game server group and set health check to HEALTHY . If a game server does not report health status for a certain length of time, the game server is no longer considered healthy. As a result, it will be eventually deregistered from the game server group to avoid affecting utilization metrics. The best practice is to report health every 60 seconds.
+//   - To change game server metadata, provide updated game server data.
 //
-// Once a game server is successfully updated, the relevant statuses and
-// timestamps are updated. Learn more GameLift FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+// Once a
+// game server is successfully updated, the relevant statuses and timestamps are
+// updated. Learn more GameLift FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 func (c *Client) UpdateGameServer(ctx context.Context, params *UpdateGameServerInput, optFns ...func(*Options)) (*UpdateGameServerOutput, error) {
 	if params == nil {
 		params = &UpdateGameServerInput{}
@@ -61,16 +51,17 @@ type UpdateGameServerInput struct {
 	// This member is required.
 	GameServerId *string
 
-	// A set of custom game server properties, formatted as a single string value. This
-	// data is passed to a game client or service when it requests information on game
-	// servers.
+	// A set of custom game server properties, formatted as a single string value.
+	// This data is passed to a game client or service when it requests information on
+	// game servers.
 	GameServerData *string
 
 	// Indicates health status of the game server. A request that includes this
 	// parameter updates the game server's LastHealthCheckTime timestamp.
 	HealthCheck types.GameServerHealthCheck
 
-	// Indicates whether the game server is available or is currently hosting gameplay.
+	// Indicates whether the game server is available or is currently hosting
+	// gameplay.
 	UtilizationStatus types.GameServerUtilizationStatus
 
 	noSmithyDocumentSerde

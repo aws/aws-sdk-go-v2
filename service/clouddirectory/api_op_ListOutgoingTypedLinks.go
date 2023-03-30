@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a paginated list of all the outgoing TypedLinkSpecifier information for
-// an object. It also supports filtering by typed link facet and identity
-// attributes. For more information, see Typed Links
-// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
+// Returns a paginated list of all the outgoing TypedLinkSpecifier information
+// for an object. It also supports filtering by typed link facet and identity
+// attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
+// .
 func (c *Client) ListOutgoingTypedLinks(ctx context.Context, params *ListOutgoingTypedLinksInput, optFns ...func(*Options)) (*ListOutgoingTypedLinksOutput, error) {
 	if params == nil {
 		params = &ListOutgoingTypedLinksInput{}
@@ -32,8 +32,8 @@ func (c *Client) ListOutgoingTypedLinks(ctx context.Context, params *ListOutgoin
 
 type ListOutgoingTypedLinksInput struct {
 
-	// The Amazon Resource Name (ARN) of the directory where you want to list the typed
-	// links.
+	// The Amazon Resource Name (ARN) of the directory where you want to list the
+	// typed links.
 	//
 	// This member is required.
 	DirectoryArn *string
@@ -51,8 +51,8 @@ type ListOutgoingTypedLinksInput struct {
 	// that do not have a range specified are presumed to match the entire range.
 	FilterAttributeRanges []types.TypedLinkAttributeRange
 
-	// Filters are interpreted in the order of the attributes defined on the typed link
-	// facet, not the order they are supplied to any API calls.
+	// Filters are interpreted in the order of the attributes defined on the typed
+	// link facet, not the order they are supplied to any API calls.
 	FilterTypedLink *types.TypedLinkSchemaAndFacetName
 
 	// The maximum number of results to retrieve.

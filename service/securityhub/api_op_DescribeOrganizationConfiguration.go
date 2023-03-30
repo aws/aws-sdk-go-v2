@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the Organizations configuration for Security Hub. Can
-// only be called from a Security Hub administrator account.
+// Returns information about the Organizations configuration for Security Hub.
+// Can only be called from a Security Hub administrator account.
 func (c *Client) DescribeOrganizationConfiguration(ctx context.Context, params *DescribeOrganizationConfigurationInput, optFns ...func(*Options)) (*DescribeOrganizationConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationConfigurationInput{}
@@ -35,14 +35,13 @@ type DescribeOrganizationConfigurationInput struct {
 type DescribeOrganizationConfigurationOutput struct {
 
 	// Whether to automatically enable Security Hub for new accounts in the
-	// organization. If set to true, then Security Hub is enabled for new accounts. If
-	// set to false, then new accounts are not added automatically.
+	// organization. If set to true, then Security Hub is enabled for new accounts.
+	// If set to false, then new accounts are not added automatically.
 	AutoEnable bool
 
-	// Whether to automatically enable Security Hub default standards
-	// (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html)
+	// Whether to automatically enable Security Hub default standards (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html)
 	// for new member accounts in the organization. The default value of this parameter
-	// is equal to DEFAULT. If equal to DEFAULT, then Security Hub default standards
+	// is equal to DEFAULT . If equal to DEFAULT, then Security Hub default standards
 	// are automatically enabled for new member accounts. If equal to NONE, then
 	// default standards are not automatically enabled for new member accounts.
 	AutoEnableStandards types.AutoEnableStandards

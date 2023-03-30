@@ -13,8 +13,8 @@ import (
 // Deletes a specified app. Required Permissions: To use this action, an IAM user
 // must have a Manage permissions level for the stack, or an attached policy that
 // explicitly grants permissions. For more information on user permissions, see
-// Managing User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) DeleteApp(ctx context.Context, params *DeleteAppInput, optFns ...func(*Options)) (*DeleteAppOutput, error) {
 	if params == nil {
 		params = &DeleteAppInput{}

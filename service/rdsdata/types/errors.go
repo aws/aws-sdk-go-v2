@@ -111,7 +111,7 @@ func (e *InternalServerErrorException) ErrorCode() string {
 }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The resourceArn, secretArn, or transactionId value can't be found.
+// The resourceArn , secretArn , or transactionId  value can't be found.
 type NotFoundException struct {
 	Message *string
 
@@ -137,7 +137,7 @@ func (e *NotFoundException) ErrorCode() string {
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The service specified by the resourceArn parameter is not available.
+// The service specified by the resourceArn  parameter is not available.
 type ServiceUnavailableError struct {
 	Message *string
 

@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a job template. Requires permission to access the CreateJobTemplate
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Creates a job template. Requires permission to access the CreateJobTemplate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateJobTemplate(ctx context.Context, params *CreateJobTemplateInput, optFns ...func(*Options)) (*CreateJobTemplateOutput, error) {
 	if params == nil {
@@ -45,14 +44,14 @@ type CreateJobTemplateInput struct {
 	// The criteria that determine when and how a job abort takes place.
 	AbortConfig *types.AbortConfig
 
-	// The job document. Required if you don't specify a value for documentSource.
+	// The job document. Required if you don't specify a value for documentSource .
 	Document *string
 
 	// An S3 link to the job document to use in the template. Required if you don't
 	// specify a value for document. If the job document resides in an S3 bucket, you
 	// must use a placeholder link when specifying the document. The placeholder link
 	// is of the following form:
-	// ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key} where bucket is
+	// ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key}where bucket is
 	// your bucket name and key is the object in the bucket to which you are linking.
 	DocumentSource *string
 
@@ -65,8 +64,8 @@ type CreateJobTemplateInput struct {
 	// Allows you to create a staged rollout of a job.
 	JobExecutionsRolloutConfig *types.JobExecutionsRolloutConfig
 
-	// Allows you to configure an optional maintenance window for the rollout of a job
-	// document to all devices in the target group for a job.
+	// Allows you to configure an optional maintenance window for the rollout of a
+	// job document to all devices in the target group for a job.
 	MaintenanceWindows []types.MaintenanceWindow
 
 	// Configuration for pre-signed S3 URLs.
@@ -75,10 +74,10 @@ type CreateJobTemplateInput struct {
 	// Metadata that can be used to manage the job template.
 	Tags []types.Tag
 
-	// Specifies the amount of time each device has to finish its execution of the job.
-	// A timer is started when the job execution status is set to IN_PROGRESS. If the
-	// job execution status is not set to another terminal state before the timer
-	// expires, it will be automatically set to TIMED_OUT.
+	// Specifies the amount of time each device has to finish its execution of the
+	// job. A timer is started when the job execution status is set to IN_PROGRESS.
+	// If the job execution status is not set to another terminal state before the
+	// timer expires, it will be automatically set to TIMED_OUT .
 	TimeoutConfig *types.TimeoutConfig
 
 	noSmithyDocumentSerde

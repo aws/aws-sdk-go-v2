@@ -11,7 +11,7 @@ import (
 // bucket.
 type Destination struct {
 
-	// The S3Destination object.
+	// The S3Destination  object.
 	S3 *S3Destination
 
 	noSmithyDocumentSerde
@@ -75,8 +75,8 @@ type S3Destination struct {
 	// Name of the S3 bucket.
 	BucketName *string
 
-	// An Amazon S3 prefix that you can use to limit responses to those that begin with
-	// the specified prefix.
+	// An Amazon S3 prefix that you can use to limit responses to those that begin
+	// with the specified prefix.
 	Prefix *string
 
 	noSmithyDocumentSerde
@@ -131,7 +131,7 @@ type SignatureValidityPeriod struct {
 // code image.
 type SignedObject struct {
 
-	// The S3SignedObject.
+	// The S3SignedObject .
 	S3 *S3SignedObject
 
 	noSmithyDocumentSerde
@@ -153,12 +153,12 @@ type SigningConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A signing configuration that overrides the default encryption or hash algorithm
-// of a signing job.
+// A signing configuration that overrides the default encryption or hash
+// algorithm of a signing job.
 type SigningConfigurationOverrides struct {
 
-	// A specified override of the default encryption algorithm that is used in a code
-	// signing job.
+	// A specified override of the default encryption algorithm that is used in a
+	// code signing job.
 	EncryptionAlgorithm EncryptionAlgorithm
 
 	// A specified override of the default hash algorithm that is used in a code
@@ -217,15 +217,15 @@ type SigningJob struct {
 	// The time when the signature of a signing job expires.
 	SignatureExpiresAt *time.Time
 
-	// A SignedObject structure that contains information about a signing job's signed
-	// code image.
+	// A SignedObject structure that contains information about a signing job's
+	// signed code image.
 	SignedObject *SignedObject
 
 	// A SigningMaterial object that contains the Amazon Resource Name (ARN) of the
 	// certificate used for the signing job.
 	SigningMaterial *SigningMaterial
 
-	// A Source that contains information about a signing job's code image source.
+	// A Source  that contains information about a signing job's code image source.
 	Source *Source
 
 	// The status of the signing job.
@@ -283,8 +283,8 @@ type SigningPlatform struct {
 	// Indicates whether revocation is supported for the platform.
 	RevocationSupported bool
 
-	// The configuration of a code signing platform. This includes the designated hash
-	// algorithm and encryption algorithm of a signing platform.
+	// The configuration of a code signing platform. This includes the designated
+	// hash algorithm and encryption algorithm of a signing platform.
 	SigningConfiguration *SigningConfiguration
 
 	// The image format of a code signing platform or profile.
@@ -300,15 +300,15 @@ type SigningPlatform struct {
 // platform.
 type SigningPlatformOverrides struct {
 
-	// A signing configuration that overrides the default encryption or hash algorithm
-	// of a signing job.
+	// A signing configuration that overrides the default encryption or hash
+	// algorithm of a signing job.
 	SigningConfiguration *SigningConfigurationOverrides
 
 	// A signed image is a JSON object. When overriding the default signing platform
-	// configuration, a customer can select either of two signing formats, JSONEmbedded
-	// or JSONDetached. (A third format value, JSON, is reserved for future use.) With
-	// JSONEmbedded, the signing image has the payload embedded in it. With
-	// JSONDetached, the payload is not be embedded in the signing image.
+	// configuration, a customer can select either of two signing formats,
+	// JSONEmbedded or JSONDetached . (A third format value, JSON, is reserved for
+	// future use.) With JSONEmbedded, the signing image has the payload embedded in
+	// it. With JSONDetached , the payload is not be embedded in the signing image.
 	SigningImageFormat ImageFormat
 
 	noSmithyDocumentSerde
@@ -369,11 +369,11 @@ type SigningProfileRevocationRecord struct {
 	noSmithyDocumentSerde
 }
 
-// An S3Source object that contains information about the S3 bucket where you saved
-// your unsigned code.
+// An S3Source object that contains information about the S3 bucket where you
+// saved your unsigned code.
 type Source struct {
 
-	// The S3Source object.
+	// The S3Source  object.
 	S3 *S3Source
 
 	noSmithyDocumentSerde

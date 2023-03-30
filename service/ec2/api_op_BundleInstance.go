@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Bundles an Amazon instance store-backed Windows instance. During bundling, only
-// the root device volume (C:\) is bundled. Data on other instance store volumes is
-// not preserved. This action is not applicable for Linux/Unix instances or Windows
-// instances that are backed by Amazon EBS.
+// Bundles an Amazon instance store-backed Windows instance. During bundling,
+// only the root device volume (C:\) is bundled. Data on other instance store
+// volumes is not preserved. This action is not applicable for Linux/Unix instances
+// or Windows instances that are backed by Amazon EBS.
 func (c *Client) BundleInstance(ctx context.Context, params *BundleInstanceInput, optFns ...func(*Options)) (*BundleInstanceOutput, error) {
 	if params == nil {
 		params = &BundleInstanceInput{}
@@ -38,17 +38,17 @@ type BundleInstanceInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The bucket in which to store the AMI. You can specify a bucket that you already
-	// own or a new bucket that Amazon EC2 creates on your behalf. If you specify a
-	// bucket that belongs to someone else, Amazon EC2 returns an error.
+	// The bucket in which to store the AMI. You can specify a bucket that you
+	// already own or a new bucket that Amazon EC2 creates on your behalf. If you
+	// specify a bucket that belongs to someone else, Amazon EC2 returns an error.
 	//
 	// This member is required.
 	Storage *types.Storage
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

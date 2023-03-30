@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the most recent status of the last upgrade or upgrade eligibility check
-// performed on an Amazon OpenSearch Service domain.
+// Returns the most recent status of the last upgrade or upgrade eligibility
+// check performed on an Amazon OpenSearch Service domain.
 func (c *Client) GetUpgradeStatus(ctx context.Context, params *GetUpgradeStatusInput, optFns ...func(*Options)) (*GetUpgradeStatusOutput, error) {
 	if params == nil {
 		params = &GetUpgradeStatusInput{}
@@ -28,7 +28,7 @@ func (c *Client) GetUpgradeStatus(ctx context.Context, params *GetUpgradeStatusI
 	return out, nil
 }
 
-// Container for the request parameters to the GetUpgradeStatus operation.
+// Container for the request parameters to the GetUpgradeStatus  operation.
 type GetUpgradeStatusInput struct {
 
 	// The domain of the domain to get upgrade status information for.
@@ -39,7 +39,7 @@ type GetUpgradeStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for the response returned by the GetUpgradeStatus operation.
+// Container for the response returned by the GetUpgradeStatus  operation.
 type GetUpgradeStatusOutput struct {
 
 	// The status of the current step that an upgrade is on.

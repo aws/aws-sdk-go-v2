@@ -10,17 +10,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates a stickiness policy with sticky session lifetimes that follow that of
-// an application-generated cookie. This policy can be associated only with
+// Generates a stickiness policy with sticky session lifetimes that follow that
+// of an application-generated cookie. This policy can be associated only with
 // HTTP/HTTPS listeners. This policy is similar to the policy created by
-// CreateLBCookieStickinessPolicy, except that the lifetime of the special Elastic
-// Load Balancing cookie, AWSELB, follows the lifetime of the application-generated
-// cookie specified in the policy configuration. The load balancer only inserts a
-// new stickiness cookie when the application response includes a new application
-// cookie. If the application cookie is explicitly removed or expires, the session
-// stops being sticky until a new application cookie is issued. For more
-// information, see Application-Controlled Session Stickiness
-// (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application)
+// CreateLBCookieStickinessPolicy, except that the lifetime of the special
+// Elastic Load Balancing cookie, AWSELB, follows the lifetime of the
+// application-generated cookie specified in the policy configuration. The load
+// balancer only inserts a new stickiness cookie when the application response
+// includes a new application cookie. If the application cookie is explicitly
+// removed or expires, the session stops being sticky until a new application
+// cookie is issued. For more information, see Application-Controlled Session
+// Stickiness (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application)
 // in the Classic Load Balancers Guide.
 func (c *Client) CreateAppCookieStickinessPolicy(ctx context.Context, params *CreateAppCookieStickinessPolicyInput, optFns ...func(*Options)) (*CreateAppCookieStickinessPolicyOutput, error) {
 	if params == nil {
@@ -50,9 +50,9 @@ type CreateAppCookieStickinessPolicyInput struct {
 	// This member is required.
 	LoadBalancerName *string
 
-	// The name of the policy being created. Policy names must consist of alphanumeric
-	// characters and dashes (-). This name must be unique within the set of policies
-	// for this load balancer.
+	// The name of the policy being created. Policy names must consist of
+	// alphanumeric characters and dashes (-). This name must be unique within the set
+	// of policies for this load balancer.
 	//
 	// This member is required.
 	PolicyName *string

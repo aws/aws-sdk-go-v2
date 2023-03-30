@@ -30,8 +30,7 @@ func (c *Client) ListSecurityProfilePermissions(ctx context.Context, params *Lis
 
 type ListSecurityProfilePermissionsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -58,8 +57,8 @@ type ListSecurityProfilePermissionsOutput struct {
 	NextToken *string
 
 	// The permissions granted to the security profile. For a complete list of valid
-	// permissions, see List of security profile permissions
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html).
+	// permissions, see List of security profile permissions (https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html)
+	// .
 	Permissions []string
 
 	// Metadata pertaining to the operation's result.
@@ -145,8 +144,8 @@ type ListSecurityProfilePermissionsPaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

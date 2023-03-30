@@ -13,17 +13,15 @@ import (
 // Attaches an Elastic Load Balancing load balancer to a specified layer. AWS
 // OpsWorks Stacks does not support Application Load Balancer. You can only use
 // Classic Load Balancer with AWS OpsWorks Stacks. For more information, see
-// Elastic Load Balancing
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/layers-elb.html). You
-// must create the Elastic Load Balancing instance separately, by using the Elastic
-// Load Balancing console, API, or CLI. For more information, see  Elastic Load
-// Balancing Developer Guide
-// (https://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/Welcome.html).
-// Required Permissions: To use this action, an IAM user must have a Manage
+// Elastic Load Balancing (https://docs.aws.amazon.com/opsworks/latest/userguide/layers-elb.html)
+// . You must create the Elastic Load Balancing instance separately, by using the
+// Elastic Load Balancing console, API, or CLI. For more information, see Elastic
+// Load Balancing Developer Guide (https://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/Welcome.html)
+// . Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see Managing User
-// Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) AttachElasticLoadBalancer(ctx context.Context, params *AttachElasticLoadBalancerInput, optFns ...func(*Options)) (*AttachElasticLoadBalancerOutput, error) {
 	if params == nil {
 		params = &AttachElasticLoadBalancerInput{}

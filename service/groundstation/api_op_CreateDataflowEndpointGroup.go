@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a DataflowEndpoint group containing the specified list of
+// Creates a DataflowEndpoint  group containing the specified list of
 // DataflowEndpoint objects. The name field in each endpoint is used in your
-// mission profile DataflowEndpointConfig to specify which endpoints to use during
-// a contact. When a contact uses multiple DataflowEndpointConfig objects, each
-// Config must match a DataflowEndpoint in the same group.
+// mission profile DataflowEndpointConfig to specify which endpoints to use
+// during a contact. When a contact uses multiple DataflowEndpointConfig objects,
+// each Config  must match a DataflowEndpoint  in the same group.
 func (c *Client) CreateDataflowEndpointGroup(ctx context.Context, params *CreateDataflowEndpointGroupInput, optFns ...func(*Options)) (*CreateDataflowEndpointGroupOutput, error) {
 	if params == nil {
 		params = &CreateDataflowEndpointGroupInput{}
@@ -38,14 +38,14 @@ type CreateDataflowEndpointGroupInput struct {
 	// This member is required.
 	EndpointDetails []types.EndpointDetails
 
-	// Amount of time, in seconds, after a contact ends for the contact to remain in a
-	// POSTPASS state. A CloudWatch event is emitted when the contact enters and exits
-	// the POSTPASS state.
+	// Amount of time, in seconds, after a contact ends for the contact to remain in
+	// a POSTPASS state. A CloudWatch event is emitted when the contact enters and
+	// exits the POSTPASS  state.
 	ContactPostPassDurationSeconds *int32
 
-	// Amount of time, in seconds, prior to contact start for the contact to remain in
-	// a PREPASS state. A CloudWatch event is emitted when the contact enters and exits
-	// the PREPASS state.
+	// Amount of time, in seconds, prior to contact start for the contact to remain
+	// in a PREPASS state. A CloudWatch event is emitted when the contact enters and
+	// exits the PREPASS  state.
 	ContactPrePassDurationSeconds *int32
 
 	// Tags of a dataflow endpoint group.

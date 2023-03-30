@@ -46,8 +46,8 @@ type UpdateDiscovererInput struct {
 
 type UpdateDiscovererOutput struct {
 
-	// The Status if the discoverer will discover schemas from events sent from another
-	// account.
+	// The Status if the discoverer will discover schemas from events sent from
+	// another account.
 	CrossAccount bool
 
 	// The description of the discoverer.

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the names of all job resources in this Amazon Web Services account, or
-// the resources with the specified tag. This operation allows you to see which
+// Retrieves the names of all job resources in this Amazon Web Services account,
+// or the resources with the specified tag. This operation allows you to see which
 // resources are available in your account, and their names. This operation takes
 // the optional Tags field, which you can use as a filter on the response so that
 // tagged resources can be retrieved as a group. If you choose to use tags
@@ -133,8 +133,8 @@ type ListJobsPaginatorOptions struct {
 	// The maximum size of a list to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

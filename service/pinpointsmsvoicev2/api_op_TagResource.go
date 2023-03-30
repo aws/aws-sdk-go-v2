@@ -11,13 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or overwrites only the specified tags for the specified Amazon Pinpoint SMS
-// Voice, version 2 resource. When you specify an existing tag key, the value is
-// overwritten with the new value. Each resource can have a maximum of 50 tags.
+// Adds or overwrites only the specified tags for the specified Amazon Pinpoint
+// SMS Voice, version 2 resource. When you specify an existing tag key, the value
+// is overwritten with the new value. Each resource can have a maximum of 50 tags.
 // Each tag consists of a key and an optional value. Tag keys must be unique per
-// resource. For more information about tags, see  Tagging Amazon Pinpoint
-// resources
-// (https://docs.aws.amazon.com/pinpoint/latest/developerguide/tagging-resources.html)
+// resource. For more information about tags, see Tagging Amazon Pinpoint
+// resources (https://docs.aws.amazon.com/pinpoint/latest/developerguide/tagging-resources.html)
 // in the Amazon Pinpoint Developer Guide.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {

@@ -29,13 +29,13 @@ func (c *Client) GetUpgradeHistory(ctx context.Context, params *GetUpgradeHistor
 	return out, nil
 }
 
-// Container for request parameters to GetUpgradeHistory operation.
+// Container for request parameters to GetUpgradeHistory  operation.
 type GetUpgradeHistoryInput struct {
 
-	// The name of an Elasticsearch domain. Domain names are unique across the domains
-	// owned by an account within an AWS region. Domain names start with a letter or
-	// number and can contain the following characters: a-z (lowercase), 0-9, and -
-	// (hyphen).
+	// The name of an Elasticsearch domain. Domain names are unique across the
+	// domains owned by an account within an AWS region. Domain names start with a
+	// letter or number and can contain the following characters: a-z (lowercase), 0-9,
+	// and - (hyphen).
 	//
 	// This member is required.
 	DomainName *string
@@ -43,19 +43,19 @@ type GetUpgradeHistoryInput struct {
 	// Set this value to limit the number of results returned.
 	MaxResults int32
 
-	// Paginated APIs accepts NextToken input to returns next page results and provides
-	// a NextToken output in the response which can be used by the client to retrieve
-	// more results.
+	// Paginated APIs accepts NextToken input to returns next page results and
+	// provides a NextToken output in the response which can be used by the client to
+	// retrieve more results.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// Container for response returned by GetUpgradeHistory operation.
+// Container for response returned by GetUpgradeHistory  operation.
 type GetUpgradeHistoryOutput struct {
 
-	// Pagination token that needs to be supplied to the next call to get the next page
-	// of results
+	// Pagination token that needs to be supplied to the next call to get the next
+	// page of results
 	NextToken *string
 
 	// A list of UpgradeHistory objects corresponding to each Upgrade or Upgrade
@@ -140,13 +140,14 @@ type GetUpgradeHistoryAPIClient interface {
 
 var _ GetUpgradeHistoryAPIClient = (*Client)(nil)
 
-// GetUpgradeHistoryPaginatorOptions is the paginator options for GetUpgradeHistory
+// GetUpgradeHistoryPaginatorOptions is the paginator options for
+// GetUpgradeHistory
 type GetUpgradeHistoryPaginatorOptions struct {
 	// Set this value to limit the number of results returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

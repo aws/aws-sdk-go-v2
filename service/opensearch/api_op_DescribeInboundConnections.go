@@ -14,8 +14,8 @@ import (
 
 // Lists all the inbound cross-cluster search connections for a destination
 // (remote) Amazon OpenSearch Service domain. For more information, see
-// Cross-cluster search for Amazon OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html).
+// Cross-cluster search for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html)
+// .
 func (c *Client) DescribeInboundConnections(ctx context.Context, params *DescribeInboundConnectionsInput, optFns ...func(*Options)) (*DescribeInboundConnectionsOutput, error) {
 	if params == nil {
 		params = &DescribeInboundConnectionsInput{}
@@ -31,7 +31,7 @@ func (c *Client) DescribeInboundConnections(ctx context.Context, params *Describ
 	return out, nil
 }
 
-// Container for the parameters to the DescribeInboundConnections operation.
+// Container for the parameters to the DescribeInboundConnections  operation.
 type DescribeInboundConnectionsInput struct {
 
 	// A list of filters used to match properties for inbound cross-cluster
@@ -39,11 +39,11 @@ type DescribeInboundConnectionsInput struct {
 	Filters []types.Filter
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken  to get the next page of results.
 	MaxResults int32
 
-	// If your initial DescribeInboundConnections operation returns a nextToken, you
-	// can include the returned nextToken in subsequent DescribeInboundConnections
+	// If your initial DescribeInboundConnections  operation returns a nextToken, you
+	// can include the returned nextToken  in subsequent DescribeInboundConnections
 	// operations, which returns results in the next page.
 	NextToken *string
 
@@ -56,8 +56,8 @@ type DescribeInboundConnectionsOutput struct {
 	// List of inbound connections.
 	Connections []types.InboundConnection
 
-	// When nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// When nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page.
 	NextToken *string
 
@@ -139,11 +139,11 @@ var _ DescribeInboundConnectionsAPIClient = (*Client)(nil)
 // DescribeInboundConnections
 type DescribeInboundConnectionsPaginatorOptions struct {
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken  to get the next page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

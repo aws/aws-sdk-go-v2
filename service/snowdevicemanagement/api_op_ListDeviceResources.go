@@ -125,8 +125,8 @@ func (c *Client) addOperationListDeviceResourcesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListDeviceResourcesAPIClient is a client that implements the ListDeviceResources
-// operation.
+// ListDeviceResourcesAPIClient is a client that implements the
+// ListDeviceResources operation.
 type ListDeviceResourcesAPIClient interface {
 	ListDeviceResources(context.Context, *ListDeviceResourcesInput, ...func(*Options)) (*ListDeviceResourcesOutput, error)
 }
@@ -139,8 +139,8 @@ type ListDeviceResourcesPaginatorOptions struct {
 	// The maximum number of resources per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

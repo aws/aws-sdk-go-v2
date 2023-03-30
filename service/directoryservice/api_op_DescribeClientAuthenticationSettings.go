@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the type of client authentication for the specified
-// directory, if the type is specified. If no type is specified, information about
-// all client authentication types that are supported for the specified directory
-// is retrieved. Currently, only SmartCard is supported.
+// Retrieves information about the type of client authentication for the
+// specified directory, if the type is specified. If no type is specified,
+// information about all client authentication types that are supported for the
+// specified directory is retrieved. Currently, only SmartCard  is supported.
 func (c *Client) DescribeClientAuthenticationSettings(ctx context.Context, params *DescribeClientAuthenticationSettingsInput, optFns ...func(*Options)) (*DescribeClientAuthenticationSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeClientAuthenticationSettingsInput{}
@@ -38,8 +38,8 @@ type DescribeClientAuthenticationSettingsInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// The maximum number of items to return. If this value is zero, the maximum number
-	// of items is specified by the limitations of the operation.
+	// The maximum number of items to return. If this value is zero, the maximum
+	// number of items is specified by the limitations of the operation.
 	Limit *int32
 
 	// The DescribeClientAuthenticationSettingsResult.NextToken value from a previous
@@ -47,9 +47,9 @@ type DescribeClientAuthenticationSettingsInput struct {
 	// call.
 	NextToken *string
 
-	// The type of client authentication for which to retrieve information. If no type
-	// is specified, a list of all client authentication types that are supported for
-	// the specified directory is retrieved.
+	// The type of client authentication for which to retrieve information. If no
+	// type is specified, a list of all client authentication types that are supported
+	// for the specified directory is retrieved.
 	Type types.ClientAuthenticationType
 
 	noSmithyDocumentSerde
@@ -57,14 +57,15 @@ type DescribeClientAuthenticationSettingsInput struct {
 
 type DescribeClientAuthenticationSettingsOutput struct {
 
-	// Information about the type of client authentication for the specified directory.
-	// The following information is retrieved: The date and time when the status of the
-	// client authentication type was last updated, whether the client authentication
-	// type is enabled or disabled, and the type of client authentication.
+	// Information about the type of client authentication for the specified
+	// directory. The following information is retrieved: The date and time when the
+	// status of the client authentication type was last updated, whether the client
+	// authentication type is enabled or disabled, and the type of client
+	// authentication.
 	ClientAuthenticationSettingsInfo []types.ClientAuthenticationSettingInfo
 
-	// The next token used to retrieve the client authentication settings if the number
-	// of setting types exceeds page limit and there is another page.
+	// The next token used to retrieve the client authentication settings if the
+	// number of setting types exceeds page limit and there is another page.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -147,12 +148,12 @@ var _ DescribeClientAuthenticationSettingsAPIClient = (*Client)(nil)
 // DescribeClientAuthenticationSettingsPaginatorOptions is the paginator options
 // for DescribeClientAuthenticationSettings
 type DescribeClientAuthenticationSettingsPaginatorOptions struct {
-	// The maximum number of items to return. If this value is zero, the maximum number
-	// of items is specified by the limitations of the operation.
+	// The maximum number of items to return. If this value is zero, the maximum
+	// number of items is specified by the limitations of the operation.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

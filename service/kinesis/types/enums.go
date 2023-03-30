@@ -54,9 +54,9 @@ const (
 	MetricsNameAll                                MetricsName = "ALL"
 )
 
-// Values returns all known values for MetricsName. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MetricsName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (MetricsName) Values() []MetricsName {
 	return []MetricsName{
 		"IncomingBytes",
@@ -77,9 +77,9 @@ const (
 	ScalingTypeUniformScaling ScalingType = "UNIFORM_SCALING"
 )
 
-// Values returns all known values for ScalingType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ScalingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ScalingType) Values() []ScalingType {
 	return []ScalingType{
 		"UNIFORM_SCALING",
@@ -164,9 +164,9 @@ const (
 	StreamStatusUpdating StreamStatus = "UPDATING"
 )
 
-// Values returns all known values for StreamStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StreamStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (StreamStatus) Values() []StreamStatus {
 	return []StreamStatus{
 		"CREATING",

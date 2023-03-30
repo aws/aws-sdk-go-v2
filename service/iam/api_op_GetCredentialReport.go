@@ -13,9 +13,8 @@ import (
 )
 
 // Retrieves a credential report for the Amazon Web Services account. For more
-// information about the credential report, see Getting credential reports
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html) in
-// the IAM User Guide.
+// information about the credential report, see Getting credential reports (https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html)
+// in the IAM User Guide.
 func (c *Client) GetCredentialReport(ctx context.Context, params *GetCredentialReportInput, optFns ...func(*Options)) (*GetCredentialReportOutput, error) {
 	if params == nil {
 		params = &GetCredentialReportInput{}
@@ -35,14 +34,14 @@ type GetCredentialReportInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetCredentialReport request.
+// Contains the response to a successful GetCredentialReport  request.
 type GetCredentialReportOutput struct {
 
 	// Contains the credential report. The report is Base64-encoded.
 	Content []byte
 
-	// The date and time when the credential report was created, in ISO 8601 date-time
-	// format (http://www.iso.org/iso/iso8601).
+	// The date and time when the credential report was created, in ISO 8601
+	// date-time format (http://www.iso.org/iso/iso8601) .
 	GeneratedTime *time.Time
 
 	// The format (MIME type) of the credential report.

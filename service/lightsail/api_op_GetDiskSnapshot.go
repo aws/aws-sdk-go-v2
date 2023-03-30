@@ -29,7 +29,7 @@ func (c *Client) GetDiskSnapshot(ctx context.Context, params *GetDiskSnapshotInp
 
 type GetDiskSnapshotInput struct {
 
-	// The name of the disk snapshot (e.g., my-disk-snapshot).
+	// The name of the disk snapshot (e.g., my-disk-snapshot ).
 	//
 	// This member is required.
 	DiskSnapshotName *string

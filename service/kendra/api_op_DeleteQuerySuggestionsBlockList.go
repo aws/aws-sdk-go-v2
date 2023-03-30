@@ -13,7 +13,7 @@ import (
 // Deletes a block list used for query suggestions for an index. A deleted block
 // list might not take effect right away. Amazon Kendra needs to refresh the entire
 // suggestions list to add back the queries that were previously blocked.
-// DeleteQuerySuggestionsBlockList is currently not supported in the Amazon Web
+// DeleteQuerySuggestionsBlockListis currently not supported in the Amazon Web
 // Services GovCloud (US-West) region.
 func (c *Client) DeleteQuerySuggestionsBlockList(ctx context.Context, params *DeleteQuerySuggestionsBlockListInput, optFns ...func(*Options)) (*DeleteQuerySuggestionsBlockListOutput, error) {
 	if params == nil {

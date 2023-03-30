@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates a target change set for a currently launched stack and writes it to an
-// Amazon S3 object in the customer’s Amazon S3 bucket.
+// Generates a target change set for a currently launched stack and writes it to
+// an Amazon S3 object in the customer’s Amazon S3 bucket.
 func (c *Client) GenerateChangeSet(ctx context.Context, params *GenerateChangeSetInput, optFns ...func(*Options)) (*GenerateChangeSetOutput, error) {
 	if params == nil {
 		params = &GenerateChangeSetInput{}

@@ -114,8 +114,8 @@ func (c *Client) addOperationListAttributeGroupsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListAttributeGroupsAPIClient is a client that implements the ListAttributeGroups
-// operation.
+// ListAttributeGroupsAPIClient is a client that implements the
+// ListAttributeGroups operation.
 type ListAttributeGroupsAPIClient interface {
 	ListAttributeGroups(context.Context, *ListAttributeGroupsInput, ...func(*Options)) (*ListAttributeGroupsOutput, error)
 }
@@ -129,8 +129,8 @@ type ListAttributeGroupsPaginatorOptions struct {
 	// parameter is omitted, it defaults to 25. This value is optional.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

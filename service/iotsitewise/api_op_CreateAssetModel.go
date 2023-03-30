@@ -16,8 +16,7 @@ import (
 // create assets from asset models. With asset models, you can easily create assets
 // of the same type that have standardized definitions. Each asset created from a
 // model inherits the asset model's property and hierarchy definitions. For more
-// information, see Defining asset models
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/define-models.html)
+// information, see Defining asset models (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/define-models.html)
 // in the IoT SiteWise User Guide.
 func (c *Client) CreateAssetModel(ctx context.Context, params *CreateAssetModelInput, optFns ...func(*Options)) (*CreateAssetModelOutput, error) {
 	if params == nil {
@@ -50,23 +49,19 @@ type CreateAssetModelInput struct {
 	// A description for the asset model.
 	AssetModelDescription *string
 
-	// The hierarchy definitions of the asset model. Each hierarchy specifies an asset
-	// model whose assets can be children of any other assets created from this asset
-	// model. For more information, see Asset hierarchies
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
+	// The hierarchy definitions of the asset model. Each hierarchy specifies an
+	// asset model whose assets can be children of any other assets created from this
+	// asset model. For more information, see Asset hierarchies (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
 	// in the IoT SiteWise User Guide. You can specify up to 10 hierarchies per asset
-	// model. For more information, see Quotas
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
-	// IoT SiteWise User Guide.
+	// model. For more information, see Quotas (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html)
+	// in the IoT SiteWise User Guide.
 	AssetModelHierarchies []types.AssetModelHierarchyDefinition
 
 	// The property definitions of the asset model. For more information, see Asset
-	// properties
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html)
+	// properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html)
 	// in the IoT SiteWise User Guide. You can specify up to 200 properties per asset
-	// model. For more information, see Quotas
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
-	// IoT SiteWise User Guide.
+	// model. For more information, see Quotas (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html)
+	// in the IoT SiteWise User Guide.
 	AssetModelProperties []types.AssetModelPropertyDefinition
 
 	// A unique case-sensitive identifier that you can provide to ensure the
@@ -75,8 +70,7 @@ type CreateAssetModelInput struct {
 	ClientToken *string
 
 	// A list of key-value pairs that contain metadata for the asset model. For more
-	// information, see Tagging your IoT SiteWise resources
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
+	// information, see Tagging your IoT SiteWise resources (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
 	// in the IoT SiteWise User Guide.
 	Tags map[string]string
 
@@ -85,21 +79,20 @@ type CreateAssetModelInput struct {
 
 type CreateAssetModelOutput struct {
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the asset model, which has the following format.
+	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the asset model, which has the following format.
 	// arn:${Partition}:iotsitewise:${Region}:${Account}:asset-model/${AssetModelId}
 	//
 	// This member is required.
 	AssetModelArn *string
 
-	// The ID of the asset model. You can use this ID when you call other IoT SiteWise
-	// APIs.
+	// The ID of the asset model. You can use this ID when you call other IoT
+	// SiteWise APIs.
 	//
 	// This member is required.
 	AssetModelId *string
 
-	// The status of the asset model, which contains a state (CREATING after
+	// The status of the asset model, which contains a state ( CREATING after
 	// successfully calling this operation) and any error message.
 	//
 	// This member is required.

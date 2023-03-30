@@ -98,9 +98,9 @@ const (
 	ManagedCredentialsActionDisable ManagedCredentialsAction = "DISABLE"
 )
 
-// Values returns all known values for ManagedCredentialsAction. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ManagedCredentialsAction. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ManagedCredentialsAction) Values() []ManagedCredentialsAction {
 	return []ManagedCredentialsAction{
 		"ENABLE",
@@ -125,9 +125,9 @@ const (
 	ManagedCredentialsStatusFailedRemovalByOwner              ManagedCredentialsStatus = "FAILED_REMOVAL_BY_OWNER"
 )
 
-// Values returns all known values for ManagedCredentialsStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ManagedCredentialsStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ManagedCredentialsStatus) Values() []ManagedCredentialsStatus {
 	return []ManagedCredentialsStatus{
 		"ENABLED_ON_CREATE",
@@ -171,9 +171,9 @@ const (
 	PermissionsReadOnly  Permissions = "read-only"
 )
 
-// Values returns all known values for Permissions. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Permissions. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (Permissions) Values() []Permissions {
 	return []Permissions{
 		"owner",

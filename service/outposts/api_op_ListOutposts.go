@@ -34,10 +34,10 @@ func (c *Client) ListOutposts(ctx context.Context, params *ListOutpostsInput, op
 
 type ListOutpostsInput struct {
 
-	// Filters the results by Availability Zone (for example, us-east-1a).
+	// Filters the results by Availability Zone (for example, us-east-1a ).
 	AvailabilityZoneFilter []string
 
-	// Filters the results by AZ ID (for example, use1-az1).
+	// Filters the results by AZ ID (for example, use1-az1 ).
 	AvailabilityZoneIdFilter []string
 
 	// Filters the results by the lifecycle status.
@@ -138,8 +138,8 @@ type ListOutpostsPaginatorOptions struct {
 	// The maximum page size.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -11,18 +11,15 @@ import (
 )
 
 // This is documentation for AWS CloudHSM Classic. For more information, see AWS
-// CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/), the AWS
-// CloudHSM Classic User Guide
-// (https://docs.aws.amazon.com/cloudhsm/classic/userguide/), and the AWS CloudHSM
-// Classic API Reference
-// (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/). For information
-// about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide
-// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/), and the AWS CloudHSM
-// API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
-// Modifies an HSM. This operation can result in the HSM being offline for up to 15
-// minutes while the AWS CloudHSM service is reconfigured. If you are modifying a
-// production HSM, you should ensure that your AWS CloudHSM service is configured
+// CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/) , the AWS
+// CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/)
+// , and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/)
+// . For information about the current version of AWS CloudHSM, see AWS CloudHSM (http://aws.amazon.com/cloudhsm/)
+// , the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/)
+// , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
+// . Modifies an HSM. This operation can result in the HSM being offline for up to
+// 15 minutes while the AWS CloudHSM service is reconfigured. If you are modifying
+// a production HSM, you should ensure that your AWS CloudHSM service is configured
 // for high availability, and consider executing this operation during a
 // maintenance window.
 func (c *Client) ModifyHsm(ctx context.Context, params *ModifyHsmInput, optFns ...func(*Options)) (*ModifyHsmOutput, error) {
@@ -40,7 +37,7 @@ func (c *Client) ModifyHsm(ctx context.Context, params *ModifyHsmInput, optFns .
 	return out, nil
 }
 
-// Contains the inputs for the ModifyHsm operation.
+// Contains the inputs for the ModifyHsm  operation.
 type ModifyHsmInput struct {
 
 	// The ARN of the HSM to modify.
@@ -48,9 +45,10 @@ type ModifyHsmInput struct {
 	// This member is required.
 	HsmArn *string
 
-	// The new IP address for the elastic network interface (ENI) attached to the HSM.
-	// If the HSM is moved to a different subnet, and an IP address is not specified,
-	// an IP address will be randomly chosen from the CIDR range of the new subnet.
+	// The new IP address for the elastic network interface (ENI) attached to the
+	// HSM. If the HSM is moved to a different subnet, and an IP address is not
+	// specified, an IP address will be randomly chosen from the CIDR range of the new
+	// subnet.
 	EniIp *string
 
 	// The new external ID.
@@ -70,7 +68,7 @@ type ModifyHsmInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the output of the ModifyHsm operation.
+// Contains the output of the ModifyHsm  operation.
 type ModifyHsmOutput struct {
 
 	// The ARN of the HSM.

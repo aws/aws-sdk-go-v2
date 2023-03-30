@@ -29,12 +29,12 @@ func (c *Client) ListInstanceProfiles(ctx context.Context, params *ListInstanceP
 
 type ListInstanceProfilesInput struct {
 
-	// An integer that specifies the maximum number of items you want to return in the
-	// API response.
+	// An integer that specifies the maximum number of items you want to return in
+	// the API response.
 	MaxResults *int32
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation,
+	// which can be used to return the next set of items in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,8 +45,8 @@ type ListInstanceProfilesOutput struct {
 	// An object that contains information about your instance profiles.
 	InstanceProfiles []types.InstanceProfile
 
-	// An identifier that can be used in the next call to this operation to return the
-	// next set of items in the list.
+	// An identifier that can be used in the next call to this operation to return
+	// the next set of items in the list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

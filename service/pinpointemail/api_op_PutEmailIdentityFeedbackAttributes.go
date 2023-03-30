@@ -36,8 +36,8 @@ func (c *Client) PutEmailIdentityFeedbackAttributes(ctx context.Context, params 
 	return out, nil
 }
 
-// A request to set the attributes that control how bounce and complaint events are
-// processed.
+// A request to set the attributes that control how bounce and complaint events
+// are processed.
 type PutEmailIdentityFeedbackAttributesInput struct {
 
 	// The email identity that you want to configure bounce and complaint feedback
@@ -61,8 +61,8 @@ type PutEmailIdentityFeedbackAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type PutEmailIdentityFeedbackAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

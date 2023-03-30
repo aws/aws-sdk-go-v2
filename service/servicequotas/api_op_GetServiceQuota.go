@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the applied quota value for the specified quota. For some quotas, only
-// the default values are available. If the applied quota value is not available
-// for a quota, the quota is not retrieved.
+// Retrieves the applied quota value for the specified quota. For some quotas,
+// only the default values are available. If the applied quota value is not
+// available for a quota, the quota is not retrieved.
 func (c *Client) GetServiceQuota(ctx context.Context, params *GetServiceQuotaInput, optFns ...func(*Options)) (*GetServiceQuotaOutput, error) {
 	if params == nil {
 		params = &GetServiceQuotaInput{}

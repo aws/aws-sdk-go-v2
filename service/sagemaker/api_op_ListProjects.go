@@ -44,14 +44,14 @@ type ListProjectsInput struct {
 	NameContains *string
 
 	// If the result of the previous ListProjects request was truncated, the response
-	// includes a NextToken. To retrieve the next set of projects, use the token in the
-	// next request.
+	// includes a NextToken. To retrieve the next set of projects, use the token in
+	// the next request.
 	NextToken *string
 
-	// The field by which to sort results. The default is CreationTime.
+	// The field by which to sort results. The default is CreationTime .
 	SortBy types.ProjectSortBy
 
-	// The sort order for results. The default is Ascending.
+	// The sort order for results. The default is Ascending .
 	SortOrder types.ProjectSortOrder
 
 	noSmithyDocumentSerde
@@ -147,8 +147,8 @@ type ListProjectsPaginatorOptions struct {
 	// The maximum number of projects to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

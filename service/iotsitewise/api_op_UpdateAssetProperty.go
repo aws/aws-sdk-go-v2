@@ -16,8 +16,8 @@ import (
 // overwrites the property's existing alias and notification state. To keep your
 // existing property's alias or notification state, you must include the existing
 // values in the UpdateAssetProperty request. For more information, see
-// DescribeAssetProperty
-// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetProperty.html).
+// DescribeAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetProperty.html)
+// .
 func (c *Client) UpdateAssetProperty(ctx context.Context, params *UpdateAssetPropertyInput, optFns ...func(*Options)) (*UpdateAssetPropertyOutput, error) {
 	if params == nil {
 		params = &UpdateAssetPropertyInput{}
@@ -52,23 +52,21 @@ type UpdateAssetPropertyInput struct {
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
 	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
-	// information, see Mapping industrial data streams to asset properties
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
+	// information, see Mapping industrial data streams to asset properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the IoT SiteWise User Guide. If you omit this parameter, the alias is removed
 	// from the property.
 	PropertyAlias *string
 
-	// The MQTT notification state (enabled or disabled) for this asset property. When
-	// the notification state is enabled, IoT SiteWise publishes property value updates
-	// to a unique MQTT topic. For more information, see Interacting with other
-	// services
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/interact-with-other-services.html)
+	// The MQTT notification state (enabled or disabled) for this asset property.
+	// When the notification state is enabled, IoT SiteWise publishes property value
+	// updates to a unique MQTT topic. For more information, see Interacting with
+	// other services (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/interact-with-other-services.html)
 	// in the IoT SiteWise User Guide. If you omit this parameter, the notification
-	// state is set to DISABLED.
+	// state is set to DISABLED .
 	PropertyNotificationState types.PropertyNotificationState
 
-	// The unit of measure (such as Newtons or RPM) of the asset property. If you don't
-	// specify a value for this parameter, the service uses the value of the
+	// The unit of measure (such as Newtons or RPM) of the asset property. If you
+	// don't specify a value for this parameter, the service uses the value of the
 	// assetModelProperty in the asset model.
 	PropertyUnit *string
 

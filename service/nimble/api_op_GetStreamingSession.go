@@ -122,8 +122,8 @@ func (c *Client) addOperationGetStreamingSessionMiddlewares(stack *middleware.St
 	return nil
 }
 
-// GetStreamingSessionAPIClient is a client that implements the GetStreamingSession
-// operation.
+// GetStreamingSessionAPIClient is a client that implements the
+// GetStreamingSession operation.
 type GetStreamingSessionAPIClient interface {
 	GetStreamingSession(context.Context, *GetStreamingSessionInput, ...func(*Options)) (*GetStreamingSessionOutput, error)
 }
@@ -144,9 +144,10 @@ type StreamingSessionReadyWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, StreamingSessionReadyWaiter will use default max delay of 1800 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, StreamingSessionReadyWaiter will use default max delay of 1800
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -186,9 +187,9 @@ func NewStreamingSessionReadyWaiter(client GetStreamingSessionAPIClient, optFns 
 	}
 }
 
-// Wait calls the waiter function for StreamingSessionReady waiter. The maxWaitDur
-// is the maximum wait duration the waiter will wait. The maxWaitDur is required
-// and must be greater than zero.
+// Wait calls the waiter function for StreamingSessionReady waiter. The
+// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
+// required and must be greater than zero.
 func (w *StreamingSessionReadyWaiter) Wait(ctx context.Context, params *GetStreamingSessionInput, maxWaitDur time.Duration, optFns ...func(*StreamingSessionReadyWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -339,8 +340,8 @@ type StreamingSessionStoppedWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, StreamingSessionStoppedWaiter will use default max delay of 900
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, StreamingSessionStoppedWaiter will use default max delay of 900
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration
@@ -518,8 +519,8 @@ type StreamingSessionDeletedWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, StreamingSessionDeletedWaiter will use default max delay of 900
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, StreamingSessionDeletedWaiter will use default max delay of 900
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration

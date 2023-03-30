@@ -31,7 +31,7 @@ func (c *Client) CreateEnvironmentEC2(ctx context.Context, params *CreateEnviron
 
 type CreateEnvironmentEC2Input struct {
 
-	// The type of instance to connect to the environment (for example, t2.micro).
+	// The type of instance to connect to the environment (for example, t2.micro ).
 	//
 	// This member is required.
 	InstanceType *string
@@ -47,17 +47,15 @@ type CreateEnvironmentEC2Input struct {
 	AutomaticStopTimeMinutes *int32
 
 	// A unique, case-sensitive string that helps Cloud9 to ensure this operation
-	// completes no more than one time. For more information, see Client Tokens
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// completes no more than one time. For more information, see Client Tokens (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
 	// in the Amazon EC2 API Reference.
 	ClientRequestToken *string
 
 	// The connection type used for connecting to an Amazon EC2 environment. Valid
-	// values are CONNECT_SSH (default) and CONNECT_SSM (connected through Amazon EC2
-	// Systems Manager). For more information, see Accessing no-ingress EC2 instances
-	// with Amazon EC2 Systems Manager
-	// (https://docs.aws.amazon.com/cloud9/latest/user-guide/ec2-ssm.html) in the
-	// Cloud9 User Guide.
+	// values are CONNECT_SSH  (default) and CONNECT_SSM (connected through Amazon
+	// EC2 Systems Manager). For more information, see Accessing no-ingress EC2
+	// instances with Amazon EC2 Systems Manager (https://docs.aws.amazon.com/cloud9/latest/user-guide/ec2-ssm.html)
+	// in the Cloud9 User Guide.
 	ConnectionType types.ConnectionType
 
 	// The description of the environment to create.
@@ -65,40 +63,34 @@ type CreateEnvironmentEC2Input struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The identifier for the Amazon Machine Image (AMI) that's used to create the EC2
-	// instance. To choose an AMI for the instance, you must specify a valid AMI alias
-	// or a valid Amazon EC2 Systems Manager (SSM) path. The default Amazon Linux AMI
-	// is currently used if the parameter isn't explicitly assigned a value in the
+	// The identifier for the Amazon Machine Image (AMI) that's used to create the
+	// EC2 instance. To choose an AMI for the instance, you must specify a valid AMI
+	// alias or a valid Amazon EC2 Systems Manager (SSM) path. The default Amazon Linux
+	// AMI is currently used if the parameter isn't explicitly assigned a value in the
 	// request. In the future the parameter for Amazon Linux will no longer be
 	// available when you specify an AMI for your instance. Amazon Linux 2 will then
 	// become the default AMI, which is used to launch your instance if no parameter is
 	// explicitly defined. AMI aliases
-	// - Amazon Linux (default): amazonlinux-1-x86_64
-	// -
-	// Amazon Linux 2: amazonlinux-2-x86_64
-	// - Ubuntu 18.04: ubuntu-18.04-x86_64
-	//
-	// SSM
-	// paths
-	// - Amazon Linux (default):
-	// resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64
-	// - Amazon Linux 2:
-	// resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64
-	// - Ubuntu 18.04:
-	// resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64
+	//     - Amazon Linux (default): amazonlinux-1-x86_64
+	//     - Amazon Linux 2: amazonlinux-2-x86_64
+	//     - Ubuntu 18.04: ubuntu-18.04-x86_64
+	//  SSM paths
+	//     - Amazon Linux (default): resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64
+	//     - Amazon Linux 2: resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64
+	//     - Ubuntu 18.04: resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64
 	ImageId *string
 
-	// The Amazon Resource Name (ARN) of the environment owner. This ARN can be the ARN
-	// of any IAM principal. If this value is not specified, the ARN defaults to this
-	// environment's creator.
+	// The Amazon Resource Name (ARN) of the environment owner. This ARN can be the
+	// ARN of any IAM principal. If this value is not specified, the ARN defaults to
+	// this environment's creator.
 	OwnerArn *string
 
-	// The ID of the subnet in Amazon VPC that Cloud9 will use to communicate with the
-	// Amazon EC2 instance.
+	// The ID of the subnet in Amazon VPC that Cloud9 will use to communicate with
+	// the Amazon EC2 instance.
 	SubnetId *string
 
 	// An array of key-value pairs that will be associated with the new Cloud9

@@ -13,9 +13,9 @@ import (
 
 // Gets a list of the VPCs that were created by other accounts and that can be
 // associated with a specified hosted zone because you've submitted one or more
-// CreateVPCAssociationAuthorization requests. The response includes a VPCs element
-// with a VPC child element for each VPC that can be associated with the hosted
-// zone.
+// CreateVPCAssociationAuthorization requests. The response includes a VPCs
+// element with a VPC child element for each VPC that can be associated with the
+// hosted zone.
 func (c *Client) ListVPCAssociationAuthorizations(ctx context.Context, params *ListVPCAssociationAuthorizationsInput, optFns ...func(*Options)) (*ListVPCAssociationAuthorizationsOutput, error) {
 	if params == nil {
 		params = &ListVPCAssociationAuthorizationsInput{}
@@ -31,8 +31,8 @@ func (c *Client) ListVPCAssociationAuthorizations(ctx context.Context, params *L
 	return out, nil
 }
 
-// A complex type that contains information about that can be associated with your
-// hosted zone.
+// A complex type that contains information about that can be associated with
+// your hosted zone.
 type ListVPCAssociationAuthorizationsInput struct {
 
 	// The ID of the hosted zone for which you want a list of VPCs that can be
@@ -42,15 +42,15 @@ type ListVPCAssociationAuthorizationsInput struct {
 	HostedZoneId *string
 
 	// Optional: An integer that specifies the maximum number of VPCs that you want
-	// Amazon Route 53 to return. If you don't specify a value for MaxResults, Route 53
-	// returns up to 50 VPCs per page.
+	// Amazon Route 53 to return. If you don't specify a value for MaxResults, Route
+	// 53 returns up to 50 VPCs per page.
 	MaxResults *int32
 
 	// Optional: If a response includes a NextToken element, there are more VPCs that
 	// can be associated with the specified hosted zone. To get the next page of
 	// results, submit another request, and include the value of NextToken from the
-	// response in the nexttoken parameter in another ListVPCAssociationAuthorizations
-	// request.
+	// response in the nexttoken  parameter in another
+	// ListVPCAssociationAuthorizations request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -64,16 +64,16 @@ type ListVPCAssociationAuthorizationsOutput struct {
 	// This member is required.
 	HostedZoneId *string
 
-	// The list of VPCs that are authorized to be associated with the specified hosted
-	// zone.
+	// The list of VPCs that are authorized to be associated with the specified
+	// hosted zone.
 	//
 	// This member is required.
 	VPCs []types.VPC
 
-	// When the response includes a NextToken element, there are more VPCs that can be
-	// associated with the specified hosted zone. To get the next page of VPCs, submit
-	// another ListVPCAssociationAuthorizations request, and include the value of the
-	// NextToken element from the response in the nexttoken request parameter.
+	// When the response includes a NextToken element, there are more VPCs that can
+	// be associated with the specified hosted zone. To get the next page of VPCs,
+	// submit another ListVPCAssociationAuthorizations request, and include the value
+	// of the NextToken  element from the response in the nexttoken  request parameter.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

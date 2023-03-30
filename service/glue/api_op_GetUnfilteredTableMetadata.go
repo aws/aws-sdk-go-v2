@@ -13,7 +13,7 @@ import (
 
 // Retrieves table metadata from the Data Catalog that contains unfiltered
 // metadata. For IAM authorization, the public IAM action associated with this API
-// is glue:GetTable.
+// is glue:GetTable .
 func (c *Client) GetUnfilteredTableMetadata(ctx context.Context, params *GetUnfilteredTableMetadataInput, optFns ...func(*Options)) (*GetUnfilteredTableMetadataOutput, error) {
 	if params == nil {
 		params = &GetUnfilteredTableMetadataInput{}
@@ -65,8 +65,8 @@ type GetUnfilteredTableMetadataOutput struct {
 	// A list of column row filters.
 	CellFilters []types.ColumnRowFilter
 
-	// A Boolean value that indicates whether the partition location is registered with
-	// Lake Formation.
+	// A Boolean value that indicates whether the partition location is registered
+	// with Lake Formation.
 	IsRegisteredWithLakeFormation bool
 
 	// A Table object containing the table metadata.

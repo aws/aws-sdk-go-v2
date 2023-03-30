@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a role alias Requires permission to access the DeleteRoleAlias
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Deletes a role alias Requires permission to access the DeleteRoleAlias (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DeleteRoleAlias(ctx context.Context, params *DeleteRoleAliasInput, optFns ...func(*Options)) (*DeleteRoleAliasOutput, error) {
 	if params == nil {

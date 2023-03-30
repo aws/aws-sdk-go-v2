@@ -45,9 +45,10 @@ type DescribeIntentInput struct {
 	// This member is required.
 	IntentId *string
 
-	// The identifier of the language and locale of the intent to describe. The string
-	// must match one of the supported locales. For more information, see Supported
-	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// The identifier of the language and locale of the intent to describe. The
+	// string must match one of the supported locales. For more information, see
+	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	//
 	// This member is required.
 	LocaleId *string
@@ -95,7 +96,7 @@ type DescribeIntentOutput struct {
 	// The name specified for the intent.
 	IntentName *string
 
-	// Configuration information required to use the AMAZON.KendraSearchIntent intent.
+	// Configuration information required to use the AMAZON.KendraSearchIntent  intent.
 	KendraConfiguration *types.KendraConfiguration
 
 	// A timestamp of the date and time that the intent was last updated.

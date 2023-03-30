@@ -13,8 +13,7 @@ import (
 // Deletes an existing matchmaking rule set. To delete the rule set, provide the
 // rule set name. Rule sets cannot be deleted if they are currently being used by a
 // matchmaking configuration. Learn more
-// - Build a rule set
-// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
+//   - Build a rule set (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
 func (c *Client) DeleteMatchmakingRuleSet(ctx context.Context, params *DeleteMatchmakingRuleSetInput, optFns ...func(*Options)) (*DeleteMatchmakingRuleSetOutput, error) {
 	if params == nil {
 		params = &DeleteMatchmakingRuleSetInput{}
@@ -32,9 +31,9 @@ func (c *Client) DeleteMatchmakingRuleSet(ctx context.Context, params *DeleteMat
 
 type DeleteMatchmakingRuleSetInput struct {
 
-	// A unique identifier for the matchmaking rule set to be deleted. (Note: The rule
-	// set name is different from the optional "name" field in the rule set body.) You
-	// can use either the rule set name or ARN value.
+	// A unique identifier for the matchmaking rule set to be deleted. (Note: The
+	// rule set name is different from the optional "name" field in the rule set body.)
+	// You can use either the rule set name or ARN value.
 	//
 	// This member is required.
 	Name *string

@@ -11,8 +11,8 @@ import (
 )
 
 // Removes a member from a channel. The x-amz-chime-bearer request header is
-// mandatory. Use the AppInstanceUserArn of the user that makes the API call as the
-// value in the header.
+// mandatory. Use the AppInstanceUserArn of the user that makes the API call as
+// the value in the header.
 func (c *Client) DeleteChannelMembership(ctx context.Context, params *DeleteChannelMembershipInput, optFns ...func(*Options)) (*DeleteChannelMembershipOutput, error) {
 	if params == nil {
 		params = &DeleteChannelMembershipInput{}
@@ -35,12 +35,12 @@ type DeleteChannelMembershipInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
+	// The ARN of the AppInstanceUser  or AppInstanceBot  that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string
 
-	// The AppInstanceUserArn of the member that you're removing from the channel.
+	// The AppInstanceUserArn  of the member that you're removing from the channel.
 	//
 	// This member is required.
 	MemberArn *string

@@ -39,8 +39,9 @@ type ListDevicePositionsInput struct {
 	// value: 100
 	MaxResults *int32
 
-	// The pagination token specifying which page of results to return in the response.
-	// If no token is provided, the default page is the first page. Default value: null
+	// The pagination token specifying which page of results to return in the
+	// response. If no token is provided, the default page is the first page. Default
+	// value: null
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -48,15 +49,15 @@ type ListDevicePositionsInput struct {
 
 type ListDevicePositionsOutput struct {
 
-	// Contains details about each device's last known position. These details includes
-	// the device ID, the time when the position was sampled on the device, the time
-	// that the service received the update, and the most recent coordinates.
+	// Contains details about each device's last known position. These details
+	// includes the device ID, the time when the position was sampled on the device,
+	// the time that the service received the update, and the most recent coordinates.
 	//
 	// This member is required.
 	Entries []types.ListDevicePositionsResponseEntry
 
-	// A pagination token indicating there are additional pages available. You can use
-	// the token in a following request to fetch the next set of results.
+	// A pagination token indicating there are additional pages available. You can
+	// use the token in a following request to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -158,8 +159,8 @@ func addEndpointPrefix_opListDevicePositionsMiddleware(stack *middleware.Stack) 
 	return stack.Serialize.Insert(&endpointPrefix_opListDevicePositionsMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
-// ListDevicePositionsAPIClient is a client that implements the ListDevicePositions
-// operation.
+// ListDevicePositionsAPIClient is a client that implements the
+// ListDevicePositions operation.
 type ListDevicePositionsAPIClient interface {
 	ListDevicePositions(context.Context, *ListDevicePositionsInput, ...func(*Options)) (*ListDevicePositionsOutput, error)
 }
@@ -173,8 +174,8 @@ type ListDevicePositionsPaginatorOptions struct {
 	// value: 100
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

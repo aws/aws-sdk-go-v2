@@ -27,8 +27,8 @@ func (c *Client) GetDocumentationParts(ctx context.Context, params *GetDocumenta
 	return out, nil
 }
 
-// Gets the documentation parts of an API. The result may be filtered by the type,
-// name, or path of API entities (targets).
+// Gets the documentation parts of an API. The result may be filtered by the
+// type, name, or path of API entities (targets).
 type GetDocumentationPartsInput struct {
 
 	// The string identifier of the associated RestApi.
@@ -36,8 +36,8 @@ type GetDocumentationPartsInput struct {
 	// This member is required.
 	RestApiId *string
 
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
+	// The maximum number of returned results per page. The default value is 25 and
+	// the maximum value is 500.
 	Limit *int32
 
 	// The status of the API documentation parts to retrieve. Valid values are

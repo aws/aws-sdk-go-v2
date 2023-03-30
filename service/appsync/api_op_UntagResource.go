@@ -28,12 +28,12 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The GraphqlApi Amazon Resource Name (ARN).
+	// The GraphqlApi  Amazon Resource Name (ARN).
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// A list of TagKey objects.
+	// A list of TagKey  objects.
 	//
 	// This member is required.
 	TagKeys []string

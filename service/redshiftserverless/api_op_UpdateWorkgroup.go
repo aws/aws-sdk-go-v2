@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a workgroup with the specified configuration settings. You can't update
-// multiple parameters in one request. For example, you can update baseCapacity or
-// port in a single request, but you can't update both in the same request.
+// Updates a workgroup with the specified configuration settings. You can't
+// update multiple parameters in one request. For example, you can update
+// baseCapacity or port in a single request, but you can't update both in the
+// same request.
 func (c *Client) UpdateWorkgroup(ctx context.Context, params *UpdateWorkgroupInput, optFns ...func(*Options)) (*UpdateWorkgroupOutput, error) {
 	if params == nil {
 		params = &UpdateWorkgroupInput{}
@@ -40,18 +41,18 @@ type UpdateWorkgroupInput struct {
 	// The new base data warehouse capacity in Redshift Processing Units (RPUs).
 	BaseCapacity *int32
 
-	// An array of parameters to set for advanced control over a database. The options
-	// are auto_mv, datestyle, enable_case_sensitivity_identifier,
-	// enable_user_activity_logging, query_group, search_path, and query monitoring
+	// An array of parameters to set for advanced control over a database. The
+	// options are auto_mv , datestyle , enable_case_sensitivity_identifier ,
+	// enable_user_activity_logging , query_group , search_path, and query monitoring
 	// metrics that let you define performance boundaries. For more information about
-	// query monitoring rules and available metrics, see  Query monitoring metrics for
-	// Amazon Redshift Serverless
-	// (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless).
+	// query monitoring rules and available metrics, see Query monitoring metrics for
+	// Amazon Redshift Serverless (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless)
+	// .
 	ConfigParameters []types.ConfigParameter
 
-	// The value that specifies whether to turn on enhanced virtual private cloud (VPC)
-	// routing, which forces Amazon Redshift Serverless to route traffic through your
-	// VPC.
+	// The value that specifies whether to turn on enhanced virtual private cloud
+	// (VPC) routing, which forces Amazon Redshift Serverless to route traffic through
+	// your VPC.
 	EnhancedVpcRouting *bool
 
 	// The custom port to use when connecting to a workgroup. Valid port ranges are

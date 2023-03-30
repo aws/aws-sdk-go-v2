@@ -44,9 +44,9 @@ type ListTemplatesInput struct {
 	// whose names begin with the value that you specify.
 	Prefix *string
 
-	// The type of message template to include in the results. Valid values are: EMAIL,
-	// PUSH, SMS, and VOICE. To include all types of templates in the results, don't
-	// include this parameter in your request.
+	// The type of message template to include in the results. Valid values are:
+	// EMAIL, PUSH, SMS, and VOICE. To include all types of templates in the results,
+	// don't include this parameter in your request.
 	TemplateType *string
 
 	noSmithyDocumentSerde

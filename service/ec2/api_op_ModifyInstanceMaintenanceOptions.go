@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the recovery behavior of your instance to disable simplified automatic
-// recovery or set the recovery behavior to default. The default configuration will
-// not enable simplified automatic recovery for an unsupported instance type. For
-// more information, see Simplified automatic recovery
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-recover.html#instance-configuration-recovery).
+// Modifies the recovery behavior of your instance to disable simplified
+// automatic recovery or set the recovery behavior to default. The default
+// configuration will not enable simplified automatic recovery for an unsupported
+// instance type. For more information, see Simplified automatic recovery (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-recover.html#instance-configuration-recovery)
+// .
 func (c *Client) ModifyInstanceMaintenanceOptions(ctx context.Context, params *ModifyInstanceMaintenanceOptionsInput, optFns ...func(*Options)) (*ModifyInstanceMaintenanceOptionsOutput, error) {
 	if params == nil {
 		params = &ModifyInstanceMaintenanceOptionsInput{}
@@ -38,13 +38,14 @@ type ModifyInstanceMaintenanceOptionsInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// Disables the automatic recovery behavior of your instance or sets it to default.
+	// Disables the automatic recovery behavior of your instance or sets it to
+	// default.
 	AutoRecovery types.InstanceAutoRecoveryState
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

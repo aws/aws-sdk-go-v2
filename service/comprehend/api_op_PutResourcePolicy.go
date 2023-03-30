@@ -35,14 +35,14 @@ type PutResourcePolicyInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The JSON resource-based policy to attach to your custom model. Provide your JSON
-	// as a UTF-8 encoded string without line breaks. To provide valid JSON for your
-	// policy, enclose the attribute names and values in double quotes. If the JSON
-	// body is also enclosed in double quotes, then you must escape the double quotes
-	// that are inside the policy: "{\"attribute\": \"value\", \"attribute\":
-	// [\"value\"]}" To avoid escaping quotes, you can use single quotes to enclose the
-	// policy and double quotes to enclose the JSON names and values: '{"attribute":
-	// "value", "attribute": ["value"]}'
+	// The JSON resource-based policy to attach to your custom model. Provide your
+	// JSON as a UTF-8 encoded string without line breaks. To provide valid JSON for
+	// your policy, enclose the attribute names and values in double quotes. If the
+	// JSON body is also enclosed in double quotes, then you must escape the double
+	// quotes that are inside the policy: "{\"attribute\": \"value\", \"attribute\":
+	// [\"value\"]}"To avoid escaping quotes, you can use single quotes to enclose
+	// the policy and double quotes to enclose the JSON names and values:
+	// '{"attribute": "value", "attribute": ["value"]}'
 	//
 	// This member is required.
 	ResourcePolicy *string
@@ -57,8 +57,9 @@ type PutResourcePolicyInput struct {
 
 type PutResourcePolicyOutput struct {
 
-	// The revision ID of the policy. Each time you modify a policy, Amazon Comprehend
-	// assigns a new revision ID, and it deletes the prior version of the policy.
+	// The revision ID of the policy. Each time you modify a policy, Amazon
+	// Comprehend assigns a new revision ID, and it deletes the prior version of the
+	// policy.
 	PolicyRevisionId *string
 
 	// Metadata pertaining to the operation's result.

@@ -10,23 +10,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
-// (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
-// the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Permanently deletes a ByteMatchSet. You can't delete a ByteMatchSet
-// if it's still used in any Rules or if it still includes any ByteMatchTuple
-// objects (any filters). If you just want to remove a ByteMatchSet from a Rule,
-// use UpdateRule. To permanently delete a ByteMatchSet, perform the following
-// steps:
-// - Update the ByteMatchSet to remove filters, if any. For more
-// information, see UpdateByteMatchSet.
-// - Use GetChangeToken to get the change
-// token that you provide in the ChangeToken parameter of a DeleteByteMatchSet
-// request.
-// - Submit a DeleteByteMatchSet request.
+// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+// . With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use. Permanently deletes a ByteMatchSet . You can't delete a
+// ByteMatchSet if it's still used in any Rules  or if it still includes any
+// ByteMatchTuple objects (any filters). If you just want to remove a ByteMatchSet
+// from a Rule , use UpdateRule . To permanently delete a ByteMatchSet, perform
+// the following steps:
+//   - Update the ByteMatchSet to remove filters, if any. For more information, see UpdateByteMatchSet .
+//   - Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteByteMatchSet request.
+//   - Submit a DeleteByteMatchSet request.
 func (c *Client) DeleteByteMatchSet(ctx context.Context, params *DeleteByteMatchSetInput, optFns ...func(*Options)) (*DeleteByteMatchSetOutput, error) {
 	if params == nil {
 		params = &DeleteByteMatchSetInput{}
@@ -44,13 +40,13 @@ func (c *Client) DeleteByteMatchSet(ctx context.Context, params *DeleteByteMatch
 
 type DeleteByteMatchSetInput struct {
 
-	// The ByteMatchSetId of the ByteMatchSet that you want to delete. ByteMatchSetId
-	// is returned by CreateByteMatchSet and by ListByteMatchSets.
+	// The ByteMatchSetId  of the ByteMatchSet  that you want to delete.
+	// ByteMatchSetId is returned by CreateByteMatchSet  and by ListByteMatchSets .
 	//
 	// This member is required.
 	ByteMatchSetId *string
 
-	// The value returned by the most recent call to GetChangeToken.
+	// The value returned by the most recent call to GetChangeToken .
 	//
 	// This member is required.
 	ChangeToken *string
@@ -60,9 +56,9 @@ type DeleteByteMatchSetInput struct {
 
 type DeleteByteMatchSetOutput struct {
 
-	// The ChangeToken that you used to submit the DeleteByteMatchSet request. You can
-	// also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
+	// The ChangeToken  that you used to submit the DeleteByteMatchSet request. You
+	// can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus .
 	ChangeToken *string
 
 	// Metadata pertaining to the operation's result.

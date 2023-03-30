@@ -12,7 +12,7 @@ import (
 )
 
 // Creates or updates table statistics of columns. The Identity and Access
-// Management (IAM) permission required for this operation is UpdateTable.
+// Management (IAM) permission required for this operation is UpdateTable .
 func (c *Client) UpdateColumnStatisticsForTable(ctx context.Context, params *UpdateColumnStatisticsForTableInput, optFns ...func(*Options)) (*UpdateColumnStatisticsForTableOutput, error) {
 	if params == nil {
 		params = &UpdateColumnStatisticsForTableInput{}

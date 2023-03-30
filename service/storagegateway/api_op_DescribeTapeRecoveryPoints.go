@@ -35,14 +35,14 @@ func (c *Client) DescribeTapeRecoveryPoints(ctx context.Context, params *Describ
 // DescribeTapeRecoveryPointsInput
 type DescribeTapeRecoveryPointsInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
 
-	// Specifies that the number of virtual tape recovery points that are described be
-	// limited to the specified number.
+	// Specifies that the number of virtual tape recovery points that are described
+	// be limited to the specified number.
 	Limit *int32
 
 	// An opaque string that indicates the position at which to begin describing the
@@ -55,18 +55,19 @@ type DescribeTapeRecoveryPointsInput struct {
 // DescribeTapeRecoveryPointsOutput
 type DescribeTapeRecoveryPointsOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
-	// An opaque string that indicates the position at which the virtual tape recovery
-	// points that were listed for description ended. Use this marker in your next
-	// request to list the next set of virtual tape recovery points in the list. If
-	// there are no more recovery points to describe, this field does not appear in the
-	// response.
+	// An opaque string that indicates the position at which the virtual tape
+	// recovery points that were listed for description ended. Use this marker in your
+	// next request to list the next set of virtual tape recovery points in the list.
+	// If there are no more recovery points to describe, this field does not appear in
+	// the response.
 	Marker *string
 
-	// An array of TapeRecoveryPointInfos that are available for the specified gateway.
+	// An array of TapeRecoveryPointInfos that are available for the specified
+	// gateway.
 	TapeRecoveryPointInfos []types.TapeRecoveryPointInfo
 
 	// Metadata pertaining to the operation's result.
@@ -149,12 +150,12 @@ var _ DescribeTapeRecoveryPointsAPIClient = (*Client)(nil)
 // DescribeTapeRecoveryPointsPaginatorOptions is the paginator options for
 // DescribeTapeRecoveryPoints
 type DescribeTapeRecoveryPointsPaginatorOptions struct {
-	// Specifies that the number of virtual tape recovery points that are described be
-	// limited to the specified number.
+	// Specifies that the number of virtual tape recovery points that are described
+	// be limited to the specified number.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

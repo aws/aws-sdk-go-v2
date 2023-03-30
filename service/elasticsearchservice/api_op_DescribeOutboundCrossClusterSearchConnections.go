@@ -33,38 +33,35 @@ func (c *Client) DescribeOutboundCrossClusterSearchConnections(ctx context.Conte
 type DescribeOutboundCrossClusterSearchConnectionsInput struct {
 
 	// A list of filters used to match properties for outbound cross-cluster search
-	// connection. Available Filter names for this operation are:
-	// -
-	// cross-cluster-search-connection-id
-	// - destination-domain-info.domain-name
-	// -
-	// destination-domain-info.owner-id
-	// - destination-domain-info.region
-	// -
-	// source-domain-info.domain-name
+	// connection. Available Filter  names for this operation are:
+	//     - cross-cluster-search-connection-id
+	//     - destination-domain-info.domain-name
+	//     - destination-domain-info.owner-id
+	//     - destination-domain-info.region
+	//     - source-domain-info.domain-name
 	Filters []types.Filter
 
 	// Set this value to limit the number of results returned. If not specified,
 	// defaults to 100.
 	MaxResults int32
 
-	// NextToken is sent in case the earlier API call results contain the NextToken. It
-	// is used for pagination.
+	// NextToken is sent in case the earlier API call results contain the NextToken.
+	// It is used for pagination.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// The result of a DescribeOutboundCrossClusterSearchConnections request. Contains
-// the list of connections matching the filter criteria.
+// The result of a DescribeOutboundCrossClusterSearchConnections request.
+// Contains the list of connections matching the filter criteria.
 type DescribeOutboundCrossClusterSearchConnectionsOutput struct {
 
-	// Consists of list of OutboundCrossClusterSearchConnection matching the specified
-	// filter criteria.
+	// Consists of list of OutboundCrossClusterSearchConnection matching the
+	// specified filter criteria.
 	CrossClusterSearchConnections []types.OutboundCrossClusterSearchConnection
 
-	// If more results are available and NextToken is present, make the next request to
-	// the same API with the received NextToken to paginate the remaining results.
+	// If more results are available and NextToken is present, make the next request
+	// to the same API with the received NextToken to paginate the remaining results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -148,8 +145,8 @@ type DescribeOutboundCrossClusterSearchConnectionsPaginatorOptions struct {
 	// defaults to 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -13,7 +13,7 @@ import (
 )
 
 // Creates a user under an Amazon Chime AppInstance. The request consists of a
-// unique appInstanceUserId and Name for that user.
+// unique appInstanceUserId  and Name  for that user.
 func (c *Client) CreateAppInstanceUser(ctx context.Context, params *CreateAppInstanceUserInput, optFns ...func(*Options)) (*CreateAppInstanceUserOutput, error) {
 	if params == nil {
 		params = &CreateAppInstanceUserInput{}
@@ -31,18 +31,18 @@ func (c *Client) CreateAppInstanceUser(ctx context.Context, params *CreateAppIns
 
 type CreateAppInstanceUserInput struct {
 
-	// The ARN of the AppInstance request.
+	// The ARN of the AppInstance  request.
 	//
 	// This member is required.
 	AppInstanceArn *string
 
-	// The user ID of the AppInstance.
+	// The user ID of the AppInstance .
 	//
 	// This member is required.
 	AppInstanceUserId *string
 
 	// The unique ID of the request. Use different tokens to request additional
-	// AppInstances.
+	// AppInstances .
 	//
 	// This member is required.
 	ClientRequestToken *string
@@ -59,7 +59,7 @@ type CreateAppInstanceUserInput struct {
 	// The request's metadata. Limited to a 1KB string in UTF-8.
 	Metadata *string
 
-	// Tags assigned to the AppInstanceUser.
+	// Tags assigned to the AppInstanceUser .
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

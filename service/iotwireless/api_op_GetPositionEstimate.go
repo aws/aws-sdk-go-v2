@@ -46,9 +46,9 @@ type GetPositionEstimateInput struct {
 	// from the device. The position is resolved using MaxMind's IP-based solver.
 	Ip *types.Ip
 
-	// Optional information that specifies the time when the position information will
-	// be resolved. It uses the Unix timestamp format. If not specified, the time at
-	// which the request was received will be used.
+	// Optional information that specifies the time when the position information
+	// will be resolved. It uses the Unix timestamp format. If not specified, the time
+	// at which the request was received will be used.
 	Timestamp *time.Time
 
 	// Retrieves an estimated device position by resolving WLAN measurement data. The
@@ -62,7 +62,7 @@ type GetPositionEstimateOutput struct {
 
 	// The position information of the resource, displayed as a JSON payload. The
 	// payload uses the GeoJSON format, which a format that's used to encode geographic
-	// data structures. For more information, see GeoJSON (https://geojson.org/).
+	// data structures. For more information, see GeoJSON (https://geojson.org/) .
 	GeoJsonPayload []byte
 
 	// Metadata pertaining to the operation's result.

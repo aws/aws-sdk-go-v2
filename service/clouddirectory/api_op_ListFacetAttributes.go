@@ -126,8 +126,8 @@ func (c *Client) addOperationListFacetAttributesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListFacetAttributesAPIClient is a client that implements the ListFacetAttributes
-// operation.
+// ListFacetAttributesAPIClient is a client that implements the
+// ListFacetAttributes operation.
 type ListFacetAttributesAPIClient interface {
 	ListFacetAttributes(context.Context, *ListFacetAttributesInput, ...func(*Options)) (*ListFacetAttributesOutput, error)
 }
@@ -140,8 +140,8 @@ type ListFacetAttributesPaginatorOptions struct {
 	// The maximum number of results to retrieve.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

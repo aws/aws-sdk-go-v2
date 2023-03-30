@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists devices allocated to the stage, containing detailed device information and
-// deployment status.
+// Lists devices allocated to the stage, containing detailed device information
+// and deployment status.
 func (c *Client) ListStageDevices(ctx context.Context, params *ListStageDevicesInput, optFns ...func(*Options)) (*ListStageDevicesOutput, error) {
 	if params == nil {
 		params = &ListStageDevicesInput{}
@@ -146,8 +146,8 @@ type ListStageDevicesPaginatorOptions struct {
 	// The maximum number of requests to select.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

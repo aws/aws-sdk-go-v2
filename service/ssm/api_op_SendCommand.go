@@ -32,9 +32,8 @@ type SendCommandInput struct {
 	// The name of the Amazon Web Services Systems Manager document (SSM document) to
 	// run. This can be a public document or a custom document. To run a shared
 	// document belonging to another account, specify the document Amazon Resource Name
-	// (ARN). For more information about how to use shared documents, see Using shared
-	// SSM documents
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html)
+	// (ARN). For more information about how to use shared documents, see Using
+	// shared SSM documents (https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html)
 	// in the Amazon Web Services Systems Manager User Guide. If you specify a document
 	// name or ARN that hasn't been shared with your account, you receive an
 	// InvalidDocument error.
@@ -45,9 +44,9 @@ type SendCommandInput struct {
 	// The CloudWatch alarm you want to apply to your command.
 	AlarmConfiguration *types.AlarmConfiguration
 
-	// Enables Amazon Web Services Systems Manager to send Run Command output to Amazon
-	// CloudWatch Logs. Run Command is a capability of Amazon Web Services Systems
-	// Manager.
+	// Enables Amazon Web Services Systems Manager to send Run Command output to
+	// Amazon CloudWatch Logs. Run Command is a capability of Amazon Web Services
+	// Systems Manager.
 	CloudWatchOutputConfig *types.CloudWatchOutputConfig
 
 	// User-specified information about the command, such as a brief description of
@@ -76,16 +75,14 @@ type SendCommandInput struct {
 	// Targets option instead. Using Targets, which accepts tag key-value pairs to
 	// identify the managed nodes to send commands to, you can a send command to tens,
 	// hundreds, or thousands of nodes at once. For more information about how to use
-	// targets, see Using targets and rate controls to send commands to a fleet
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
+	// targets, see Using targets and rate controls to send commands to a fleet (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	InstanceIds []string
 
 	// (Optional) The maximum number of managed nodes that are allowed to run the
 	// command at the same time. You can specify a number such as 10 or a percentage
-	// such as 10%. The default value is 50. For more information about how to use
-	// MaxConcurrency, see Using concurrency controls
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-velocity)
+	// such as 10%. The default value is 50 . For more information about how to use
+	// MaxConcurrency , see Using concurrency controls (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-velocity)
 	// in the Amazon Web Services Systems Manager User Guide.
 	MaxConcurrency *string
 
@@ -93,8 +90,7 @@ type SendCommandInput struct {
 	// command fails one more time beyond the value of MaxErrors, the systems stops
 	// sending the command to additional targets. You can specify a number like 10 or a
 	// percentage like 10%. The default value is 0. For more information about how to
-	// use MaxErrors, see Using error controls
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-maxerrors)
+	// use MaxErrors , see Using error controls (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-maxerrors)
 	// in the Amazon Web Services Systems Manager User Guide.
 	MaxErrors *string
 
@@ -120,24 +116,22 @@ type SendCommandInput struct {
 	// publish Amazon Simple Notification Service (Amazon SNS) notifications for Run
 	// Command commands. This role must provide the sns:Publish permission for your
 	// notification topic. For information about creating and using this service role,
-	// see Monitoring Systems Manager status changes using Amazon SNS notifications
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-notifications.html)
+	// see Monitoring Systems Manager status changes using Amazon SNS notifications (https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-notifications.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	ServiceRoleArn *string
 
 	// An array of search criteria that targets managed nodes using a Key,Value
 	// combination that you specify. Specifying targets is most useful when you want to
-	// send a command to a large number of managed nodes at once. Using Targets, which
-	// accepts tag key-value pairs to identify managed nodes, you can send a command to
-	// tens, hundreds, or thousands of nodes at once. To send a command to a smaller
-	// number of managed nodes, you can use the InstanceIds option instead. For more
-	// information about how to use targets, see Sending commands to a fleet
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
+	// send a command to a large number of managed nodes at once. Using Targets,
+	// which accepts tag key-value pairs to identify managed nodes, you can send a
+	// command to tens, hundreds, or thousands of nodes at once. To send a command to a
+	// smaller number of managed nodes, you can use the InstanceIds option instead.
+	// For more information about how to use targets, see Sending commands to a fleet (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	Targets []types.Target
 
-	// If this time is reached and the command hasn't already started running, it won't
-	// run.
+	// If this time is reached and the command hasn't already started running, it
+	// won't run.
 	TimeoutSeconds *int32
 
 	noSmithyDocumentSerde
@@ -145,8 +139,8 @@ type SendCommandInput struct {
 
 type SendCommandOutput struct {
 
-	// The request as it was received by Systems Manager. Also provides the command ID
-	// which can be used future references to this request.
+	// The request as it was received by Systems Manager. Also provides the command
+	// ID which can be used future references to this request.
 	Command *types.Command
 
 	// Metadata pertaining to the operation's result.

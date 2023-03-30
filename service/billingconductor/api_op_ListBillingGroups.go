@@ -50,7 +50,7 @@ type ListBillingGroupsInput struct {
 
 type ListBillingGroupsOutput struct {
 
-	// A list of BillingGroupListElement retrieved.
+	// A list of BillingGroupListElement  retrieved.
 	BillingGroups []types.BillingGroupListElement
 
 	// The pagination token that's used on subsequent calls to get billing groups.
@@ -130,13 +130,14 @@ type ListBillingGroupsAPIClient interface {
 
 var _ ListBillingGroupsAPIClient = (*Client)(nil)
 
-// ListBillingGroupsPaginatorOptions is the paginator options for ListBillingGroups
+// ListBillingGroupsPaginatorOptions is the paginator options for
+// ListBillingGroups
 type ListBillingGroupsPaginatorOptions struct {
 	// The maximum number of billing groups to retrieve.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

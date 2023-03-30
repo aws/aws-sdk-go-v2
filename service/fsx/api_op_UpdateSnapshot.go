@@ -36,7 +36,7 @@ type UpdateSnapshotInput struct {
 	Name *string
 
 	// The ID of the snapshot that you want to update, in the format
-	// fsvolsnap-0123456789abcdef0.
+	// fsvolsnap-0123456789abcdef0 .
 	//
 	// This member is required.
 	SnapshotId *string

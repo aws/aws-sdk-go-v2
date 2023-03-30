@@ -63,8 +63,8 @@ type GetEmailIdentityOutput struct {
 	// supported.
 	IdentityType types.IdentityType
 
-	// An object that contains information about the Mail-From attributes for the email
-	// identity.
+	// An object that contains information about the Mail-From attributes for the
+	// email identity.
 	MailFromAttributes *types.MailFromAttributes
 
 	// A map of policy names to policies.
@@ -76,22 +76,17 @@ type GetEmailIdentityOutput struct {
 
 	// The verification status of the identity. The status can be one of the
 	// following:
-	// - PENDING – The verification process was initiated, but Amazon SES
-	// hasn't yet been able to verify the identity.
-	// - SUCCESS – The verification
-	// process completed successfully.
-	// - FAILED – The verification process failed.
-	// -
-	// TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from determining
-	// the verification status of the identity.
-	// - NOT_STARTED – The verification
-	// process hasn't been initiated for the identity.
+	//     - PENDING – The verification process was initiated, but Amazon SES hasn't yet been able to verify the identity.
+	//     - SUCCESS – The verification process completed successfully.
+	//     - FAILED – The verification process failed.
+	//     - TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from determining the verification status of the identity.
+	//     - NOT_STARTED – The verification process hasn't been initiated for the identity.
 	VerificationStatus types.VerificationStatus
 
-	// Specifies whether or not the identity is verified. You can only send email from
-	// verified email addresses or domains. For more information about verifying
-	// identities, see the Amazon Pinpoint User Guide
-	// (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html).
+	// Specifies whether or not the identity is verified. You can only send email
+	// from verified email addresses or domains. For more information about verifying
+	// identities, see the Amazon Pinpoint User Guide (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html)
+	// .
 	VerifiedForSendingStatus bool
 
 	// Metadata pertaining to the operation's result.

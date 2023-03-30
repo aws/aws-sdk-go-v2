@@ -42,7 +42,7 @@ type GetUserInput struct {
 type GetUserOutput struct {
 
 	// An array of name-value pairs representing user attributes. For custom
-	// attributes, you must prepend the custom: prefix to the attribute name.
+	// attributes, you must prepend the custom:  prefix to the attribute name.
 	//
 	// This member is required.
 	UserAttributes []types.AttributeType
@@ -63,7 +63,7 @@ type GetUserOutput struct {
 	PreferredMfaSetting *string
 
 	// The MFA options that are activated for the user. The possible values in this
-	// list are SMS_MFA and SOFTWARE_TOKEN_MFA.
+	// list are SMS_MFA  and SOFTWARE_TOKEN_MFA .
 	UserMFASettingList []string
 
 	// Metadata pertaining to the operation's result.

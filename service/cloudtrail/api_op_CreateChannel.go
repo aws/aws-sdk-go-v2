@@ -31,8 +31,8 @@ func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, 
 
 type CreateChannelInput struct {
 
-	// One or more event data stores to which events arriving through a channel will be
-	// logged.
+	// One or more event data stores to which events arriving through a channel will
+	// be logged.
 	//
 	// This member is required.
 	Destinations []types.Destination
@@ -44,10 +44,9 @@ type CreateChannelInput struct {
 
 	// The name of the partner or external event source. You cannot change this name
 	// after you create the channel. A maximum of one channel is allowed per source. A
-	// source can be either Custom for all valid non-Amazon Web Services events, or the
-	// name of a partner event source. For information about the source names for
-	// available partners, see Additional information about integration partners
-	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-event-data-store-integration.html#cloudtrail-lake-partner-information)
+	// source can be either Custom for all valid non-Amazon Web Services events, or
+	// the name of a partner event source. For information about the source names for
+	// available partners, see Additional information about integration partners (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-event-data-store-integration.html#cloudtrail-lake-partner-information)
 	// in the CloudTrail User Guide.
 	//
 	// This member is required.

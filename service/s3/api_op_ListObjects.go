@@ -17,23 +17,14 @@ import (
 // bucket. A 200 OK response can contain valid or invalid XML. Be sure to design
 // your application to parse the contents of the response and handle it
 // appropriately. This action has been revised. We recommend that you use the newer
-// version, ListObjectsV2
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html), when
-// developing applications. For backward compatibility, Amazon S3 continues to
-// support ListObjects. The following operations are related to ListObjects:
-// -
-// ListObjectsV2
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html)
-// -
-// GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
-// -
-// PutObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
-// -
-// CreateBucket
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
-// -
-// ListBuckets
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html)
+// version, ListObjectsV2 (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html)
+// , when developing applications. For backward compatibility, Amazon S3 continues
+// to support ListObjects . The following operations are related to ListObjects :
+//   - ListObjectsV2 (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html)
+//   - GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
+//   - PutObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
+//   - CreateBucket (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
+//   - ListBuckets (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html)
 func (c *Client) ListObjects(ctx context.Context, params *ListObjectsInput, optFns ...func(*Options)) (*ListObjectsOutput, error) {
 	if params == nil {
 		params = &ListObjectsInput{}
@@ -57,17 +48,15 @@ type ListObjectsInput struct {
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
 	// action with an access point through the Amazon Web Services SDKs, you provide
 	// the access point ARN in place of the bucket name. For more information about
-	// access point ARNs, see Using access points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// access point ARNs, see Using access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this action with S3 on Outposts through the Amazon Web Services SDKs, you
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
-	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
-	// Amazon S3 User Guide.
+	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
+	// in the Amazon S3 User Guide.
 	//
 	// This member is required.
 	Bucket *string
@@ -92,9 +81,9 @@ type ListObjectsInput struct {
 	// listing after this specified key. Marker can be any key in the bucket.
 	Marker *string
 
-	// Sets the maximum number of keys returned in the response. By default the action
-	// returns up to 1,000 key names. The response might contain fewer keys but will
-	// never contain more.
+	// Sets the maximum number of keys returned in the response. By default the
+	// action returns up to 1,000 key names. The response might contain fewer keys but
+	// will never contain more.
 	MaxKeys int32
 
 	// Limits the response to keys that begin with the specified prefix.
@@ -126,7 +115,7 @@ type ListObjectsOutput struct {
 
 	// Causes keys that contain the same string between the prefix and the first
 	// occurrence of the delimiter to be rolled up into a single result element in the
-	// CommonPrefixes collection. These rolled-up keys are not returned elsewhere in
+	// CommonPrefixescollection. These rolled-up keys are not returned elsewhere in
 	// the response. Each rolled-up result counts as only one return against the
 	// MaxKeys value.
 	Delimiter *string
@@ -138,8 +127,8 @@ type ListObjectsOutput struct {
 	// satisfied the search criteria.
 	IsTruncated bool
 
-	// Indicates where in the bucket listing begins. Marker is included in the response
-	// if it was sent with the request.
+	// Indicates where in the bucket listing begins. Marker is included in the
+	// response if it was sent with the request.
 	Marker *string
 
 	// The maximum number of keys returned in the response body.

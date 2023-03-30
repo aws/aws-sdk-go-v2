@@ -16,10 +16,9 @@ import (
 // Resolver to save DNS query logs that originate in your VPCs. Resolver can log
 // queries only for VPCs that are in the same Region as the query logging
 // configuration. To specify which VPCs you want to log queries for, you use
-// AssociateResolverQueryLogConfig. For more information, see
-// AssociateResolverQueryLogConfig
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverQueryLogConfig.html).
-// You can optionally use Resource Access Manager (RAM) to share a query logging
+// AssociateResolverQueryLogConfig . For more information, see
+// AssociateResolverQueryLogConfig (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverQueryLogConfig.html)
+// . You can optionally use Resource Access Manager (RAM) to share a query logging
 // configuration with other Amazon Web Services accounts. The other accounts can
 // then associate VPCs with the configuration. The query logs that Resolver creates
 // for a configuration include all DNS queries that originate in all VPCs that are
@@ -42,24 +41,18 @@ func (c *Client) CreateResolverQueryLogConfig(ctx context.Context, params *Creat
 type CreateResolverQueryLogConfigInput struct {
 
 	// A unique string that identifies the request and that allows failed requests to
-	// be retried without the risk of running the operation twice. CreatorRequestId can
-	// be any unique string, for example, a date/time stamp.
+	// be retried without the risk of running the operation twice. CreatorRequestId
+	// can be any unique string, for example, a date/time stamp.
 	//
 	// This member is required.
 	CreatorRequestId *string
 
-	// The ARN of the resource that you want Resolver to send query logs. You can send
-	// query logs to an S3 bucket, a CloudWatch Logs log group, or a Kinesis Data
+	// The ARN of the resource that you want Resolver to send query logs. You can
+	// send query logs to an S3 bucket, a CloudWatch Logs log group, or a Kinesis Data
 	// Firehose delivery stream. Examples of valid values include the following:
-	// - S3
-	// bucket: arn:aws:s3:::examplebucket You can optionally append a file prefix to
-	// the end of the ARN. arn:aws:s3:::examplebucket/development/
-	// - CloudWatch Logs
-	// log group:
-	// arn:aws:logs:us-west-1:123456789012:log-group:/mystack-testgroup-12ABC1AB12A1:*
-	// -
-	// Kinesis Data Firehose delivery stream:
-	// arn:aws:kinesis:us-east-2:0123456789:stream/my_stream_name
+	//     - S3 bucket: arn:aws:s3:::examplebucket You can optionally append a file prefix to the end of the ARN. arn:aws:s3:::examplebucket/development/
+	//     - CloudWatch Logs log group: arn:aws:logs:us-west-1:123456789012:log-group:/mystack-testgroup-12ABC1AB12A1:*
+	//     - Kinesis Data Firehose delivery stream: arn:aws:kinesis:us-east-2:0123456789:stream/my_stream_name
 	//
 	// This member is required.
 	DestinationArn *string
@@ -78,8 +71,8 @@ type CreateResolverQueryLogConfigInput struct {
 
 type CreateResolverQueryLogConfigOutput struct {
 
-	// Information about the CreateResolverQueryLogConfig request, including the status
-	// of the request.
+	// Information about the CreateResolverQueryLogConfig request, including the
+	// status of the request.
 	ResolverQueryLogConfig *types.ResolverQueryLogConfig
 
 	// Metadata pertaining to the operation's result.

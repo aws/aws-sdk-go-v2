@@ -28,7 +28,7 @@ func (c *Client) UpdateRadius(ctx context.Context, params *UpdateRadiusInput, op
 	return out, nil
 }
 
-// Contains the inputs for the UpdateRadius operation.
+// Contains the inputs for the UpdateRadius  operation.
 type UpdateRadiusInput struct {
 
 	// The identifier of the directory for which to update the RADIUS server
@@ -37,7 +37,7 @@ type UpdateRadiusInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// A RadiusSettings object that contains information about the RADIUS server.
+	// A RadiusSettings  object that contains information about the RADIUS server.
 	//
 	// This member is required.
 	RadiusSettings *types.RadiusSettings
@@ -45,7 +45,7 @@ type UpdateRadiusInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the results of the UpdateRadius operation.
+// Contains the results of the UpdateRadius  operation.
 type UpdateRadiusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

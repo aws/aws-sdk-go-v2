@@ -44,8 +44,8 @@ type DeleteProjectOutput struct {
 	// Resources which were deleted.
 	DeletedResources []types.Resource
 
-	// Resources which were not deleted, due to a risk of losing potentially important
-	// data or files.
+	// Resources which were not deleted, due to a risk of losing potentially
+	// important data or files.
 	OrphanedResources []types.Resource
 
 	// Metadata pertaining to the operation's result.

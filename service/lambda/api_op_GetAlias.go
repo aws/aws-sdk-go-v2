@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns details about a Lambda function alias
-// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
+// Returns details about a Lambda function alias (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html)
+// .
 func (c *Client) GetAlias(ctx context.Context, params *GetAliasInput, optFns ...func(*Options)) (*GetAliasOutput, error) {
 	if params == nil {
 		params = &GetAliasInput{}
@@ -31,15 +31,12 @@ func (c *Client) GetAlias(ctx context.Context, params *GetAliasInput, optFns ...
 type GetAliasInput struct {
 
 	// The name of the Lambda function. Name formats
-	// - Function name - MyFunction.
-	// -
-	// Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.
-	// -
-	// Partial ARN - 123456789012:function:MyFunction.
-	//
-	// The length constraint applies
-	// only to the full ARN. If you specify only the function name, it is limited to 64
-	// characters in length.
+	//     - Function name - MyFunction .
+	//     - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
+	//     - Partial ARN - 123456789012:function:MyFunction .
+	// The length constraint
+	// applies only to the full ARN. If you specify only the function name, it is
+	// limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
@@ -52,8 +49,8 @@ type GetAliasInput struct {
 	noSmithyDocumentSerde
 }
 
-// Provides configuration information about a Lambda function alias
-// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
+// Provides configuration information about a Lambda function alias (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html)
+// .
 type GetAliasOutput struct {
 
 	// The Amazon Resource Name (ARN) of the alias.
@@ -71,8 +68,7 @@ type GetAliasOutput struct {
 	// A unique identifier that changes when you update the alias.
 	RevisionId *string
 
-	// The routing configuration
-	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html)
+	// The routing configuration (https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html)
 	// of the alias.
 	RoutingConfig *types.AliasRoutingConfiguration
 

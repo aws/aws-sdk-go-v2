@@ -26,8 +26,8 @@ type CommitTransactionRequest struct {
 	// Specifies the commit digest for the transaction to commit. For every active
 	// transaction, the commit digest must be passed. QLDB validates CommitDigest and
 	// rejects the commit with an error if the digest computed on the client does not
-	// match the digest computed by QLDB. The purpose of the CommitDigest parameter is
-	// to ensure that QLDB commits a transaction if and only if the server has
+	// match the digest computed by QLDB. The purpose of the CommitDigest parameter
+	// is to ensure that QLDB commits a transaction if and only if the server has
 	// processed the exact set of statements sent by the client, in the same order that
 	// client sent them, and with no duplicates.
 	//
@@ -204,9 +204,9 @@ type StartTransactionResult struct {
 	noSmithyDocumentSerde
 }
 
-// Contains server-side performance information for a command. Amazon QLDB captures
-// timing information between the times when it receives the request and when it
-// sends the corresponding response.
+// Contains server-side performance information for a command. Amazon QLDB
+// captures timing information between the times when it receives the request and
+// when it sends the corresponding response.
 type TimingInformation struct {
 
 	// The amount of time that QLDB spent on processing the command, measured in
@@ -219,10 +219,10 @@ type TimingInformation struct {
 // A structure that can contain a value in multiple encoding formats.
 type ValueHolder struct {
 
-	// An Amazon Ion binary value contained in a ValueHolder structure.
+	// An Amazon Ion binary value contained in a ValueHolder  structure.
 	IonBinary []byte
 
-	// An Amazon Ion plaintext value contained in a ValueHolder structure.
+	// An Amazon Ion plaintext value contained in a ValueHolder  structure.
 	IonText *string
 
 	noSmithyDocumentSerde

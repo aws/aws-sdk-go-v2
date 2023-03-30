@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the Baidu channel for an application or updates the status and settings
-// of the Baidu channel for an application.
+// Enables the Baidu channel for an application or updates the status and
+// settings of the Baidu channel for an application.
 func (c *Client) UpdateBaiduChannel(ctx context.Context, params *UpdateBaiduChannelInput, optFns ...func(*Options)) (*UpdateBaiduChannelOutput, error) {
 	if params == nil {
 		params = &UpdateBaiduChannelInput{}
@@ -36,8 +36,8 @@ type UpdateBaiduChannelInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// Specifies the status and settings of the Baidu (Baidu Cloud Push) channel for an
-	// application.
+	// Specifies the status and settings of the Baidu (Baidu Cloud Push) channel for
+	// an application.
 	//
 	// This member is required.
 	BaiduChannelRequest *types.BaiduChannelRequest

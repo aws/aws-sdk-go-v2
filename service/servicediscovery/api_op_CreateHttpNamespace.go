@@ -12,12 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an HTTP namespace. Service instances registered using an HTTP namespace
-// can be discovered using a DiscoverInstances request but can't be discovered
-// using DNS. For the current quota on the number of namespaces that you can create
-// using the same Amazon Web Services account, see Cloud Map quotas
-// (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html) in the
-// Cloud Map Developer Guide.
+// Creates an HTTP namespace. Service instances registered using an HTTP
+// namespace can be discovered using a DiscoverInstances request but can't be
+// discovered using DNS. For the current quota on the number of namespaces that you
+// can create using the same Amazon Web Services account, see Cloud Map quotas (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// in the Cloud Map Developer Guide.
 func (c *Client) CreateHttpNamespace(ctx context.Context, params *CreateHttpNamespaceInput, optFns ...func(*Options)) (*CreateHttpNamespaceOutput, error) {
 	if params == nil {
 		params = &CreateHttpNamespaceInput{}
@@ -41,7 +40,7 @@ type CreateHttpNamespaceInput struct {
 	Name *string
 
 	// A unique string that identifies the request and that allows failed
-	// CreateHttpNamespace requests to be retried without the risk of running the
+	// CreateHttpNamespacerequests to be retried without the risk of running the
 	// operation twice. CreatorRequestId can be any unique string (for example, a
 	// date/time stamp).
 	CreatorRequestId *string
@@ -60,8 +59,8 @@ type CreateHttpNamespaceInput struct {
 type CreateHttpNamespaceOutput struct {
 
 	// A value that you can use to determine whether the request completed
-	// successfully. To get the status of the operation, see GetOperation
-	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
+	// successfully. To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html)
+	// .
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

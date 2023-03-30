@@ -17,8 +17,8 @@ import (
 	"time"
 )
 
-// Returns information about replication instances for your account in the current
-// region.
+// Returns information about replication instances for your account in the
+// current region.
 func (c *Client) DescribeReplicationInstances(ctx context.Context, params *DescribeReplicationInstancesInput, optFns ...func(*Options)) (*DescribeReplicationInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeReplicationInstancesInput{}
@@ -43,12 +43,12 @@ type DescribeReplicationInstancesInput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -59,7 +59,7 @@ type DescribeReplicationInstancesOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The replication instances described.
@@ -145,14 +145,14 @@ var _ DescribeReplicationInstancesAPIClient = (*Client)(nil)
 // DescribeReplicationInstancesPaginatorOptions is the paginator options for
 // DescribeReplicationInstances
 type DescribeReplicationInstancesPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -244,10 +244,10 @@ type ReplicationInstanceAvailableWaiterOptions struct {
 	// Note that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ReplicationInstanceAvailableWaiter will use default max delay of 120
-	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
-	// MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ReplicationInstanceAvailableWaiter will use default max delay of
+	// 120 seconds. Note that MaxDelay must resolve to value greater than or equal to
+	// the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -297,8 +297,8 @@ func (w *ReplicationInstanceAvailableWaiter) Wait(ctx context.Context, params *D
 	return err
 }
 
-// WaitForOutput calls the waiter function for ReplicationInstanceAvailable waiter
-// and returns the output of the successful operation. The maxWaitDur is the
+// WaitForOutput calls the waiter function for ReplicationInstanceAvailable
+// waiter and returns the output of the successful operation. The maxWaitDur is the
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *ReplicationInstanceAvailableWaiter) WaitForOutput(ctx context.Context, params *DescribeReplicationInstancesInput, maxWaitDur time.Duration, optFns ...func(*ReplicationInstanceAvailableWaiterOptions)) (*DescribeReplicationInstancesOutput, error) {
@@ -519,8 +519,8 @@ type ReplicationInstanceDeletedWaiterOptions struct {
 	// Note that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ReplicationInstanceDeletedWaiter will use default max delay of 120
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ReplicationInstanceDeletedWaiter will use default max delay of 120
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration

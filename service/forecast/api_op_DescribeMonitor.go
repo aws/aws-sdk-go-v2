@@ -12,17 +12,15 @@ import (
 	"time"
 )
 
-// Describes a monitor resource. In addition to listing the properties provided in
-// the CreateMonitor request, this operation lists the following properties:
-// -
-// Baseline
-// - CreationTime
-// - LastEvaluationTime
-// - LastEvaluationState
-// -
-// LastModificationTime
-// - Message
-// - Status
+// Describes a monitor resource. In addition to listing the properties provided
+// in the CreateMonitor  request, this operation lists the following properties:
+//   - Baseline
+//   - CreationTime
+//   - LastEvaluationTime
+//   - LastEvaluationState
+//   - LastModificationTime
+//   - Message
+//   - Status
 func (c *Client) DescribeMonitor(ctx context.Context, params *DescribeMonitorInput, optFns ...func(*Options)) (*DescribeMonitorOutput, error) {
 	if params == nil {
 		params = &DescribeMonitorInput{}
@@ -50,8 +48,8 @@ type DescribeMonitorInput struct {
 
 type DescribeMonitorOutput struct {
 
-	// Metrics you can use as a baseline for comparison purposes. Use these values you
-	// interpret monitoring results for an auto predictor.
+	// Metrics you can use as a baseline for comparison purposes. Use these values
+	// you interpret monitoring results for an auto predictor.
 	Baseline *types.Baseline
 
 	// The timestamp for when the monitor resource was created.

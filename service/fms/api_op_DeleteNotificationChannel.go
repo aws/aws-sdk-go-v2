@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Firewall Manager association with the IAM role and the Amazon Simple
-// Notification Service (SNS) topic that is used to record Firewall Manager SNS
-// logs.
+// Deletes an Firewall Manager association with the IAM role and the Amazon
+// Simple Notification Service (SNS) topic that is used to record Firewall Manager
+// SNS logs.
 func (c *Client) DeleteNotificationChannel(ctx context.Context, params *DeleteNotificationChannelInput, optFns ...func(*Options)) (*DeleteNotificationChannelOutput, error) {
 	if params == nil {
 		params = &DeleteNotificationChannelInput{}

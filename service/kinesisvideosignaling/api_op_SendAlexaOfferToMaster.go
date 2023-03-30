@@ -33,7 +33,8 @@ func (c *Client) SendAlexaOfferToMaster(ctx context.Context, params *SendAlexaOf
 
 type SendAlexaOfferToMasterInput struct {
 
-	// The ARN of the signaling channel by which Alexa and the master peer communicate.
+	// The ARN of the signaling channel by which Alexa and the master peer
+	// communicate.
 	//
 	// This member is required.
 	ChannelARN *string

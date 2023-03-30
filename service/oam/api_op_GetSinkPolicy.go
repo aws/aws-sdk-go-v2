@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the current sink policy attached to this sink. The sink policy specifies
-// what accounts can attach to this sink as source accounts, and what types of data
-// they can share.
+// Returns the current sink policy attached to this sink. The sink policy
+// specifies what accounts can attach to this sink as source accounts, and what
+// types of data they can share.
 func (c *Client) GetSinkPolicy(ctx context.Context, params *GetSinkPolicyInput, optFns ...func(*Options)) (*GetSinkPolicyOutput, error) {
 	if params == nil {
 		params = &GetSinkPolicyInput{}
@@ -46,7 +46,8 @@ type GetSinkPolicyOutput struct {
 	// The ARN of the sink.
 	SinkArn *string
 
-	// The random ID string that Amazon Web Services generated as part of the sink ARN.
+	// The random ID string that Amazon Web Services generated as part of the sink
+	// ARN.
 	SinkId *string
 
 	// Metadata pertaining to the operation's result.

@@ -10,15 +10,13 @@ import (
 )
 
 // This operation has three possible return values:
-// - A successful response in the
-// form of GreetingWithErrorsOutput
-// - An InvalidGreeting error.
-// - A BadRequest
-// error.
+//   - A successful response in the form of GreetingWithErrorsOutput
+//   - An InvalidGreeting error.
+//   - A BadRequest error.
 //
-// Implementations must be able to successfully take a response and
-// properly (de)serialize successful and error responses based on the the presence
-// of the
+// Implementations must be able to successfully take a
+// response and properly (de)serialize successful and error responses based on the
+// the presence of the
 func (c *Client) GreetingWithErrors(ctx context.Context, params *GreetingWithErrorsInput, optFns ...func(*Options)) (*GreetingWithErrorsOutput, error) {
 	if params == nil {
 		params = &GreetingWithErrorsInput{}

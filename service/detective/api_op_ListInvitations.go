@@ -35,14 +35,14 @@ func (c *Client) ListInvitations(ctx context.Context, params *ListInvitationsInp
 
 type ListInvitationsInput struct {
 
-	// The maximum number of behavior graph invitations to return in the response. The
-	// total must be less than the overall limit on the number of results to return,
-	// which is currently 200.
+	// The maximum number of behavior graph invitations to return in the response.
+	// The total must be less than the overall limit on the number of results to
+	// return, which is currently 200.
 	MaxResults *int32
 
-	// For requests to retrieve the next page of results, the pagination token that was
-	// returned with the previous page of results. The initial request does not include
-	// a pagination token.
+	// For requests to retrieve the next page of results, the pagination token that
+	// was returned with the previous page of results. The initial request does not
+	// include a pagination token.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -134,13 +134,13 @@ var _ ListInvitationsAPIClient = (*Client)(nil)
 
 // ListInvitationsPaginatorOptions is the paginator options for ListInvitations
 type ListInvitationsPaginatorOptions struct {
-	// The maximum number of behavior graph invitations to return in the response. The
-	// total must be less than the overall limit on the number of results to return,
-	// which is currently 200.
+	// The maximum number of behavior graph invitations to return in the response.
+	// The total must be less than the overall limit on the number of results to
+	// return, which is currently 200.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

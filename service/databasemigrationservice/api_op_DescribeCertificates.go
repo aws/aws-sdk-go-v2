@@ -31,17 +31,17 @@ func (c *Client) DescribeCertificates(ctx context.Context, params *DescribeCerti
 type DescribeCertificatesInput struct {
 
 	// Filters applied to the certificates described in the form of key-value pairs.
-	// Valid values are certificate-arn and certificate-id.
+	// Valid values are certificate-arn  and certificate-id .
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
 	// Default: 10
 	MaxRecords *int32
 
@@ -137,14 +137,14 @@ var _ DescribeCertificatesAPIClient = (*Client)(nil)
 // DescribeCertificatesPaginatorOptions is the paginator options for
 // DescribeCertificates
 type DescribeCertificatesPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
 	// Default: 10
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

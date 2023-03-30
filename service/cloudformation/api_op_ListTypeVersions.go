@@ -31,45 +31,41 @@ func (c *Client) ListTypeVersions(ctx context.Context, params *ListTypeVersionsI
 type ListTypeVersionsInput struct {
 
 	// The Amazon Resource Name (ARN) of the extension for which you want version
-	// summary information. Conditional: You must specify either TypeName and Type, or
-	// Arn.
+	// summary information. Conditional: You must specify either TypeName  and Type,
+	// or Arn .
 	Arn *string
 
 	// The deprecation status of the extension versions that you want to get summary
 	// information about. Valid values include:
-	// - LIVE: The extension version is
-	// registered and can be used in CloudFormation operations, dependent on its
-	// provisioning behavior and visibility scope.
-	// - DEPRECATED: The extension version
-	// has been deregistered and can no longer be used in CloudFormation
-	// operations.
+	//     - LIVE : The extension version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.
+	//     - DEPRECATED : The extension version has been deregistered and can no longer be used in CloudFormation operations.
 	//
-	// The default is LIVE.
+	// The default is LIVE .
 	DeprecatedStatus types.DeprecatedStatus
 
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken
-	// value that you can assign to the NextToken request parameter to get the next set
-	// of results.
+	// value that you can assign to the NextToken request parameter to get the next
+	// set of results.
 	MaxResults *int32
 
 	// If the previous paginated request didn't return all of the remaining results,
 	// the response object's NextToken parameter value is set to a token. To retrieve
 	// the next set of results, call this action again and assign that token to the
 	// request object's NextToken parameter. If there are no remaining results, the
-	// previous response object's NextToken parameter is set to null.
+	// previous response object's NextToken  parameter is set to null .
 	NextToken *string
 
 	// The publisher ID of the extension publisher. Extensions published by Amazon
 	// aren't assigned a publisher ID.
 	PublisherId *string
 
-	// The kind of the extension. Conditional: You must specify either TypeName and
-	// Type, or Arn.
+	// The kind of the extension. Conditional: You must specify either TypeName  and
+	// Type , or Arn .
 	Type types.RegistryType
 
 	// The name of the extension for which you want version summary information.
-	// Conditional: You must specify either TypeName and Type, or Arn.
+	// Conditional: You must specify either TypeName  and Type , or Arn .
 	TypeName *string
 
 	noSmithyDocumentSerde
@@ -77,10 +73,10 @@ type ListTypeVersionsInput struct {
 
 type ListTypeVersionsOutput struct {
 
-	// If the request doesn't return all of the remaining results, NextToken is set to
-	// a token. To retrieve the next set of results, call this action again and assign
-	// that token to the request object's NextToken parameter. If the request returns
-	// all results, NextToken is set to null.
+	// If the request doesn't return all of the remaining results, NextToken is set
+	// to a token. To retrieve the next set of results, call this action again and
+	// assign that token to the request object's NextToken parameter. If the request
+	// returns all results, NextToken  is set to null .
 	NextToken *string
 
 	// A list of TypeVersionSummary structures that contain information about the
@@ -165,12 +161,12 @@ var _ ListTypeVersionsAPIClient = (*Client)(nil)
 type ListTypeVersionsPaginatorOptions struct {
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken
-	// value that you can assign to the NextToken request parameter to get the next set
-	// of results.
+	// value that you can assign to the NextToken request parameter to get the next
+	// set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

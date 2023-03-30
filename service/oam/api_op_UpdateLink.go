@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use this operation to change what types of data are shared from a source account
-// to its linked monitoring account sink. You can't change the sink or change the
-// monitoring account with this operation. To update the list of tags associated
-// with the sink, use TagResource
-// (https://docs.aws.amazon.com/OAM/latest/APIReference/API_TagResource.html).
+// Use this operation to change what types of data are shared from a source
+// account to its linked monitoring account sink. You can't change the sink or
+// change the monitoring account with this operation. To update the list of tags
+// associated with the sink, use TagResource (https://docs.aws.amazon.com/OAM/latest/APIReference/API_TagResource.html)
+// .
 func (c *Client) UpdateLink(ctx context.Context, params *UpdateLinkInput, optFns ...func(*Options)) (*UpdateLinkOutput, error) {
 	if params == nil {
 		params = &UpdateLinkInput{}
@@ -38,9 +38,9 @@ type UpdateLinkInput struct {
 	// This member is required.
 	Identifier *string
 
-	// An array of strings that define which types of data that the source account will
-	// send to the monitoring account. Your input here replaces the current set of data
-	// types that are shared.
+	// An array of strings that define which types of data that the source account
+	// will send to the monitoring account. Your input here replaces the current set of
+	// data types that are shared.
 	//
 	// This member is required.
 	ResourceTypes []types.ResourceType
@@ -53,15 +53,16 @@ type UpdateLinkOutput struct {
 	// The ARN of the link that you have updated.
 	Arn *string
 
-	// The random ID string that Amazon Web Services generated as part of the sink ARN.
+	// The random ID string that Amazon Web Services generated as part of the sink
+	// ARN.
 	Id *string
 
 	// The label assigned to this link, with the variables resolved to their actual
 	// values.
 	Label *string
 
-	// The exact label template that was specified when the link was created, with the
-	// template variables not resolved.
+	// The exact label template that was specified when the link was created, with
+	// the template variables not resolved.
 	LabelTemplate *string
 
 	// The resource types now supported by this link.

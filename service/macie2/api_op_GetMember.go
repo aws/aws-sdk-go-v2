@@ -31,7 +31,8 @@ func (c *Client) GetMember(ctx context.Context, params *GetMemberInput, optFns .
 
 type GetMemberInput struct {
 
-	// The unique identifier for the Amazon Macie resource that the request applies to.
+	// The unique identifier for the Amazon Macie resource that the request applies
+	// to.
 	//
 	// This member is required.
 	Id *string
@@ -64,8 +65,8 @@ type GetMemberOutput struct {
 	// retained only for backward compatibility.
 	MasterAccountId *string
 
-	// The current status of the relationship between the account and the administrator
-	// account.
+	// The current status of the relationship between the account and the
+	// administrator account.
 	RelationshipStatus types.RelationshipStatus
 
 	// A map of key-value pairs that specifies which tags (keys and values) are

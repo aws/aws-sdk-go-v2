@@ -14,7 +14,7 @@ import (
 // Imports the certificate revocation list (CRL). CRl is a list of certificates
 // that have been revoked by the issuing certificate Authority (CA). IAM Roles
 // Anywhere validates against the crl list before issuing credentials. Required
-// permissions: rolesanywhere:ImportCrl.
+// permissions: rolesanywhere:ImportCrl .
 func (c *Client) ImportCrl(ctx context.Context, params *ImportCrlInput, optFns ...func(*Options)) (*ImportCrlOutput, error) {
 	if params == nil {
 		params = &ImportCrlInput{}

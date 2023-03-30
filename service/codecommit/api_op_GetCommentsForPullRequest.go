@@ -33,7 +33,7 @@ func (c *Client) GetCommentsForPullRequest(ctx context.Context, params *GetComme
 type GetCommentsForPullRequestInput struct {
 
 	// The system-generated ID of the pull request. To get this ID, use
-	// ListPullRequests.
+	// ListPullRequests .
 	//
 	// This member is required.
 	PullRequestId *string
@@ -51,8 +51,8 @@ type GetCommentsForPullRequestInput struct {
 	// request.
 	MaxResults *int32
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
+	// An enumeration token that, when provided in a request, returns the next batch
+	// of the results.
 	NextToken *string
 
 	// The name of the repository that contains the pull request.
@@ -155,8 +155,8 @@ type GetCommentsForPullRequestPaginatorOptions struct {
 	// request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

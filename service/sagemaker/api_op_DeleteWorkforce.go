@@ -10,13 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use this operation to delete a workforce. If you want to create a new workforce
-// in an Amazon Web Services Region where a workforce already exists, use this
-// operation to delete the existing workforce and then use to create a new
+// Use this operation to delete a workforce. If you want to create a new
+// workforce in an Amazon Web Services Region where a workforce already exists, use
+// this operation to delete the existing workforce and then use to create a new
 // workforce. If a private workforce contains one or more work teams, you must use
 // the operation to delete all work teams before you delete the workforce. If you
 // try to delete a workforce that contains one or more work teams, you will recieve
-// a ResourceInUse error.
+// a ResourceInUse  error.
 func (c *Client) DeleteWorkforce(ctx context.Context, params *DeleteWorkforceInput, optFns ...func(*Options)) (*DeleteWorkforceOutput, error) {
 	if params == nil {
 		params = &DeleteWorkforceInput{}

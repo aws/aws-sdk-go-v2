@@ -36,15 +36,15 @@ func (c *Client) DescribeClusters(ctx context.Context, params *DescribeClustersI
 type DescribeClustersInput struct {
 
 	// One or more filters to limit the items returned in the response. Use the
-	// clusterIds filter to return only the specified clusters. Specify clusters by
-	// their cluster identifier (ID). Use the vpcIds filter to return only the clusters
-	// in the specified virtual private clouds (VPCs). Specify VPCs by their VPC
-	// identifier (ID). Use the states filter to return only clusters that match the
-	// specified state.
+	// clusterIdsfilter to return only the specified clusters. Specify clusters by
+	// their cluster identifier (ID). Use the vpcIds filter to return only the
+	// clusters in the specified virtual private clouds (VPCs). Specify VPCs by their
+	// VPC identifier (ID). Use the states filter to return only clusters that match
+	// the specified state.
 	Filters map[string][]string
 
 	// The maximum number of clusters to return in the response. When there are more
-	// clusters than the number you specify, the response contains a NextToken value.
+	// clusters than the number you specify, the response contains a NextToken  value.
 	MaxResults *int32
 
 	// The NextToken value that you received in the previous response. Use this value
@@ -141,11 +141,11 @@ var _ DescribeClustersAPIClient = (*Client)(nil)
 // DescribeClustersPaginatorOptions is the paginator options for DescribeClusters
 type DescribeClustersPaginatorOptions struct {
 	// The maximum number of clusters to return in the response. When there are more
-	// clusters than the number you specify, the response contains a NextToken value.
+	// clusters than the number you specify, the response contains a NextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

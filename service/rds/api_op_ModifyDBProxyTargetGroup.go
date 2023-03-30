@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the properties of a DBProxyTargetGroup.
+// Modifies the properties of a DBProxyTargetGroup .
 func (c *Client) ModifyDBProxyTargetGroup(ctx context.Context, params *ModifyDBProxyTargetGroupInput, optFns ...func(*Options)) (*ModifyDBProxyTargetGroupOutput, error) {
 	if params == nil {
 		params = &ModifyDBProxyTargetGroupInput{}
@@ -39,8 +39,8 @@ type ModifyDBProxyTargetGroupInput struct {
 	// This member is required.
 	TargetGroupName *string
 
-	// The settings that determine the size and behavior of the connection pool for the
-	// target group.
+	// The settings that determine the size and behavior of the connection pool for
+	// the target group.
 	ConnectionPoolConfig *types.ConnectionPoolConfiguration
 
 	// The new name for the modified DBProxyTarget. An identifier must begin with a
@@ -53,7 +53,7 @@ type ModifyDBProxyTargetGroupInput struct {
 
 type ModifyDBProxyTargetGroupOutput struct {
 
-	// The settings of the modified DBProxyTarget.
+	// The settings of the modified DBProxyTarget .
 	DBProxyTargetGroup *types.DBProxyTargetGroup
 
 	// Metadata pertaining to the operation's result.

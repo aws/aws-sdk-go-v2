@@ -11,11 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the count, average, sum, minimum, maximum, sum of squares, variance, and
-// standard deviation for the specified aggregated field. If the aggregation field
-// is of type String, only the count statistic is returned. Requires permission to
-// access the GetStatistics
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Returns the count, average, sum, minimum, maximum, sum of squares, variance,
+// and standard deviation for the specified aggregated field. If the aggregation
+// field is of type String, only the count statistic is returned. Requires
+// permission to access the GetStatistics (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) GetStatistics(ctx context.Context, params *GetStatisticsInput, optFns ...func(*Options)) (*GetStatisticsOutput, error) {
 	if params == nil {
@@ -43,7 +42,7 @@ type GetStatisticsInput struct {
 	// The aggregation field name.
 	AggregationField *string
 
-	// The name of the index to search. The default value is AWS_Things.
+	// The name of the index to search. The default value is AWS_Things .
 	IndexName *string
 
 	// The version of the query used to search.

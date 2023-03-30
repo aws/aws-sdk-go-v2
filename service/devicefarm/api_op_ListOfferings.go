@@ -14,10 +14,10 @@ import (
 
 // Returns a list of products or offerings that the user can manage through the
 // API. Each offering record indicates the recurring price per unit and the
-// frequency for that offering. The API returns a NotEligible error if the user is
-// not permitted to invoke the operation. If you must be able to invoke this
-// operation, contact aws-devicefarm-support@amazon.com
-// (mailto:aws-devicefarm-support@amazon.com).
+// frequency for that offering. The API returns a NotEligible error if the user
+// is not permitted to invoke the operation. If you must be able to invoke this
+// operation, contact aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com)
+// .
 func (c *Client) ListOfferings(ctx context.Context, params *ListOfferingsInput, optFns ...func(*Options)) (*ListOfferingsOutput, error) {
 	if params == nil {
 		params = &ListOfferingsInput{}
@@ -36,8 +36,8 @@ func (c *Client) ListOfferings(ctx context.Context, params *ListOfferingsInput, 
 // Represents the request to list all offerings.
 type ListOfferingsInput struct {
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation,
+	// which can be used to return the next set of items in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,8 +46,8 @@ type ListOfferingsInput struct {
 // Represents the return values of the list of offerings.
 type ListOfferingsOutput struct {
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation,
+	// which can be used to return the next set of items in the list.
 	NextToken *string
 
 	// A value that represents the list offering results.
@@ -128,8 +128,8 @@ var _ ListOfferingsAPIClient = (*Client)(nil)
 
 // ListOfferingsPaginatorOptions is the paginator options for ListOfferings
 type ListOfferingsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

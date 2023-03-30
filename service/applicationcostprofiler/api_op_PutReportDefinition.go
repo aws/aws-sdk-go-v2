@@ -50,8 +50,8 @@ type PutReportDefinitionInput struct {
 	// This member is required.
 	ReportFrequency types.ReportFrequency
 
-	// Required. ID of the report. You can choose any valid string matching the pattern
-	// for the ID.
+	// Required. ID of the report. You can choose any valid string matching the
+	// pattern for the ID.
 	//
 	// This member is required.
 	ReportId *string

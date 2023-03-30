@@ -40,8 +40,8 @@ type GetApplicationSettingsInput struct {
 
 type GetApplicationSettingsOutput struct {
 
-	// Provides information about an application, including the default settings for an
-	// application.
+	// Provides information about an application, including the default settings for
+	// an application.
 	//
 	// This member is required.
 	ApplicationSettingsResource *types.ApplicationSettingsResource

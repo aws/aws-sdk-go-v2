@@ -30,8 +30,8 @@ const (
 	CertificateValidationRecordStatusFailed            CertificateValidationRecordStatus = "FAILED"
 )
 
-// Values returns all known values for CertificateValidationRecordStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for CertificateValidationRecordStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (CertificateValidationRecordStatus) Values() []CertificateValidationRecordStatus {
@@ -173,8 +173,8 @@ const (
 	ObservabilityConfigurationStatusInactive ObservabilityConfigurationStatus = "INACTIVE"
 )
 
-// Values returns all known values for ObservabilityConfigurationStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for ObservabilityConfigurationStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (ObservabilityConfigurationStatus) Values() []ObservabilityConfigurationStatus {
@@ -245,9 +245,9 @@ const (
 	ProviderTypeGithub ProviderType = "GITHUB"
 )
 
-// Values returns all known values for ProviderType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ProviderType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ProviderType) Values() []ProviderType {
 	return []ProviderType{
 		"GITHUB",
@@ -321,8 +321,8 @@ const (
 	SourceCodeVersionTypeBranch SourceCodeVersionType = "BRANCH"
 )
 
-// Values returns all known values for SourceCodeVersionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SourceCodeVersionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SourceCodeVersionType) Values() []SourceCodeVersionType {
 	return []SourceCodeVersionType{

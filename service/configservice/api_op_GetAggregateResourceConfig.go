@@ -45,7 +45,7 @@ type GetAggregateResourceConfigInput struct {
 
 type GetAggregateResourceConfigOutput struct {
 
-	// Returns a ConfigurationItem object.
+	// Returns a ConfigurationItem  object.
 	ConfigurationItem *types.ConfigurationItem
 
 	// Metadata pertaining to the operation's result.

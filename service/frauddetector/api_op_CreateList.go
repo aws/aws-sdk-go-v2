@@ -13,8 +13,8 @@ import (
 
 // Creates a list. List is a set of input data for a variable in your event
 // dataset. You use the input data in a rule that's associated with your detector.
-// For more information, see Lists
-// (https://docs.aws.amazon.com/frauddetector/latest/ug/lists.html).
+// For more information, see Lists (https://docs.aws.amazon.com/frauddetector/latest/ug/lists.html)
+// .
 func (c *Client) CreateList(ctx context.Context, params *CreateListInput, optFns ...func(*Options)) (*CreateListOutput, error) {
 	if params == nil {
 		params = &CreateListInput{}
@@ -41,16 +41,16 @@ type CreateListInput struct {
 	Description *string
 
 	// The names of the elements, if providing. You can also create an empty list and
-	// add elements later using the UpdateList
-	// (https://docs.aws.amazon.com/frauddetector/latest/api/API_Updatelist.html) API.
+	// add elements later using the UpdateList (https://docs.aws.amazon.com/frauddetector/latest/api/API_Updatelist.html)
+	// API.
 	Elements []string
 
 	// A collection of the key and value pairs.
 	Tags []types.Tag
 
-	// The variable type of the list. You can only assign the variable type with String
-	// data type. For more information, see Variable types
-	// (https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types).
+	// The variable type of the list. You can only assign the variable type with
+	// String data type. For more information, see Variable types (https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types)
+	// .
 	VariableType *string
 
 	noSmithyDocumentSerde

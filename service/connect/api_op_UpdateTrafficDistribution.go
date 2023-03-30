@@ -13,8 +13,7 @@ import (
 
 // Updates the traffic distribution for a given traffic distribution group. For
 // more information about updating a traffic distribution group, see Update
-// telephony traffic distribution across Amazon Web Services Regions
-// (https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html)
+// telephony traffic distribution across Amazon Web Services Regions  (https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) UpdateTrafficDistribution(ctx context.Context, params *UpdateTrafficDistributionInput, optFns ...func(*Options)) (*UpdateTrafficDistributionOutput, error) {
 	if params == nil {
@@ -33,9 +32,10 @@ func (c *Client) UpdateTrafficDistribution(ctx context.Context, params *UpdateTr
 
 type UpdateTrafficDistributionInput struct {
 
-	// The identifier of the traffic distribution group. This can be the ID or the ARN
-	// if the API is being called in the Region where the traffic distribution group
-	// was created. The ARN must be provided if the call is from the replicated Region.
+	// The identifier of the traffic distribution group. This can be the ID or the
+	// ARN if the API is being called in the Region where the traffic distribution
+	// group was created. The ARN must be provided if the call is from the replicated
+	// Region.
 	//
 	// This member is required.
 	Id *string

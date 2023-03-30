@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists network packages. A network package is a .zip file in CSAR (Cloud Service
-// Archive) format defines the function packages you want to deploy and the Amazon
-// Web Services infrastructure you want to deploy them on.
+// Lists network packages. A network package is a .zip file in CSAR (Cloud
+// Service Archive) format defines the function packages you want to deploy and the
+// Amazon Web Services infrastructure you want to deploy them on.
 func (c *Client) ListSolNetworkPackages(ctx context.Context, params *ListSolNetworkPackagesInput, optFns ...func(*Options)) (*ListSolNetworkPackagesOutput, error) {
 	if params == nil {
 		params = &ListSolNetworkPackagesInput{}
@@ -134,8 +134,8 @@ type ListSolNetworkPackagesPaginatorOptions struct {
 	// The maximum number of results to include in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -148,7 +148,8 @@ type ListSolNetworkPackagesPaginator struct {
 	firstPage bool
 }
 
-// NewListSolNetworkPackagesPaginator returns a new ListSolNetworkPackagesPaginator
+// NewListSolNetworkPackagesPaginator returns a new
+// ListSolNetworkPackagesPaginator
 func NewListSolNetworkPackagesPaginator(client ListSolNetworkPackagesAPIClient, params *ListSolNetworkPackagesInput, optFns ...func(*ListSolNetworkPackagesPaginatorOptions)) *ListSolNetworkPackagesPaginator {
 	if params == nil {
 		params = &ListSolNetworkPackagesInput{}

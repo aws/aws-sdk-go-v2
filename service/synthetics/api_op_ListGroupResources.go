@@ -31,18 +31,18 @@ func (c *Client) ListGroupResources(ctx context.Context, params *ListGroupResour
 type ListGroupResourcesInput struct {
 
 	// Specifies the group to return information for. You can specify the group name,
-	// the ARN, or the group ID as the GroupIdentifier.
+	// the ARN, or the group ID as the GroupIdentifier .
 	//
 	// This member is required.
 	GroupIdentifier *string
 
-	// Specify this parameter to limit how many canary ARNs are returned each time you
-	// use the ListGroupResources operation. If you omit this parameter, the default of
-	// 20 is used.
+	// Specify this parameter to limit how many canary ARNs are returned each time
+	// you use the ListGroupResources operation. If you omit this parameter, the
+	// default of 20 is used.
 	MaxResults *int32
 
-	// A token that indicates that there is more data available. You can use this token
-	// in a subsequent operation to retrieve the next set of results.
+	// A token that indicates that there is more data available. You can use this
+	// token in a subsequent operation to retrieve the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -50,8 +50,8 @@ type ListGroupResourcesInput struct {
 
 type ListGroupResourcesOutput struct {
 
-	// A token that indicates that there is more data available. You can use this token
-	// in a subsequent ListGroupResources operation to retrieve the next set of
+	// A token that indicates that there is more data available. You can use this
+	// token in a subsequent ListGroupResources operation to retrieve the next set of
 	// results.
 	NextToken *string
 
@@ -139,13 +139,13 @@ var _ ListGroupResourcesAPIClient = (*Client)(nil)
 // ListGroupResourcesPaginatorOptions is the paginator options for
 // ListGroupResources
 type ListGroupResourcesPaginatorOptions struct {
-	// Specify this parameter to limit how many canary ARNs are returned each time you
-	// use the ListGroupResources operation. If you omit this parameter, the default of
-	// 20 is used.
+	// Specify this parameter to limit how many canary ARNs are returned each time
+	// you use the ListGroupResources operation. If you omit this parameter, the
+	// default of 20 is used.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

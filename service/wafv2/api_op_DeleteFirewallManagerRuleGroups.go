@@ -12,7 +12,7 @@ import (
 
 // Deletes all rule groups that are managed by Firewall Manager for the specified
 // web ACL. You can only use this if ManagedByFirewallManager is false in the
-// specified WebACL.
+// specified WebACL .
 func (c *Client) DeleteFirewallManagerRuleGroups(ctx context.Context, params *DeleteFirewallManagerRuleGroupsInput, optFns ...func(*Options)) (*DeleteFirewallManagerRuleGroupsOutput, error) {
 	if params == nil {
 		params = &DeleteFirewallManagerRuleGroupsInput{}
@@ -35,13 +35,13 @@ type DeleteFirewallManagerRuleGroupsInput struct {
 	// This member is required.
 	WebACLArn *string
 
-	// A token used for optimistic locking. WAF returns a token to your get and list
+	// A token used for optimistic locking. WAF returns a token to your get  and list
 	// requests, to mark the state of the entity at the time of the request. To make
 	// changes to the entity associated with the token, you provide the token to
-	// operations like update and delete. WAF uses the token to ensure that no changes
-	// have been made to the entity since you last retrieved it. If a change has been
-	// made, the update fails with a WAFOptimisticLockException. If this happens,
-	// perform another get, and use the new token returned by that operation.
+	// operations like update  and delete. WAF uses the token to ensure that no
+	// changes have been made to the entity since you last retrieved it. If a change
+	// has been made, the update fails with a WAFOptimisticLockException. If this
+	// happens, perform another get , and use the new token returned by that operation.
 	//
 	// This member is required.
 	WebACLLockToken *string
@@ -51,13 +51,13 @@ type DeleteFirewallManagerRuleGroupsInput struct {
 
 type DeleteFirewallManagerRuleGroupsOutput struct {
 
-	// A token used for optimistic locking. WAF returns a token to your get and list
+	// A token used for optimistic locking. WAF returns a token to your get  and list
 	// requests, to mark the state of the entity at the time of the request. To make
 	// changes to the entity associated with the token, you provide the token to
-	// operations like update and delete. WAF uses the token to ensure that no changes
-	// have been made to the entity since you last retrieved it. If a change has been
-	// made, the update fails with a WAFOptimisticLockException. If this happens,
-	// perform another get, and use the new token returned by that operation.
+	// operations like update  and delete. WAF uses the token to ensure that no
+	// changes have been made to the entity since you last retrieved it. If a change
+	// has been made, the update fails with a WAFOptimisticLockException. If this
+	// happens, perform another get , and use the new token returned by that operation.
 	NextWebACLLockToken *string
 
 	// Metadata pertaining to the operation's result.

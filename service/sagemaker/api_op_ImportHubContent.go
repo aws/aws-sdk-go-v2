@@ -61,8 +61,8 @@ type ImportHubContentInput struct {
 	// The display name of the hub content to import.
 	HubContentDisplayName *string
 
-	// A string that provides a description of the hub content. This string can include
-	// links, tables, and standard markdown formating.
+	// A string that provides a description of the hub content. This string can
+	// include links, tables, and standard markdown formating.
 	HubContentMarkdown *string
 
 	// The searchable keywords of the hub content.

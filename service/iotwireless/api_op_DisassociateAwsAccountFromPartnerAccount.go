@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates your AWS account from a partner account. If PartnerAccountId and
-// PartnerType are null, disassociates your AWS account from all partner accounts.
+// Disassociates your AWS account from a partner account. If PartnerAccountId  and
+// PartnerType are null , disassociates your AWS account from all partner accounts.
 func (c *Client) DisassociateAwsAccountFromPartnerAccount(ctx context.Context, params *DisassociateAwsAccountFromPartnerAccountInput, optFns ...func(*Options)) (*DisassociateAwsAccountFromPartnerAccountOutput, error) {
 	if params == nil {
 		params = &DisassociateAwsAccountFromPartnerAccountInput{}

@@ -29,8 +29,8 @@ func (c *Client) DetachManagedPolicyFromPermissionSet(ctx context.Context, param
 type DetachManagedPolicyFromPermissionSetInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// AWS Service Namespaces in the AWS General Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs)
+	// and AWS Service Namespaces in the AWS General Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -40,7 +40,7 @@ type DetachManagedPolicyFromPermissionSetInput struct {
 	// This member is required.
 	ManagedPolicyArn *string
 
-	// The ARN of the PermissionSet from which the policy should be detached.
+	// The ARN of the PermissionSet  from which the policy should be detached.
 	//
 	// This member is required.
 	PermissionSetArn *string

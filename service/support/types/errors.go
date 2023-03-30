@@ -166,7 +166,7 @@ func (e *CaseCreationLimitExceeded) ErrorCode() string {
 }
 func (e *CaseCreationLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested caseId couldn't be located.
+// The requested caseId  couldn't be located.
 type CaseIdNotFound struct {
 	Message *string
 

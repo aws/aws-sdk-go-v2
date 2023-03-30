@@ -33,9 +33,9 @@ func (c *Client) ListFindingsReports(ctx context.Context, params *ListFindingsRe
 type ListFindingsReportsInput struct {
 
 	// The end time of the profile to get analysis data about. You must specify
-	// startTime and endTime. This is specified using the ISO 8601 format. For example,
-	// 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM
-	// UTC.
+	// startTime and endTime. This is specified using the ISO 8601 format. For
+	// example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020
+	// 1:15:02 PM UTC.
 	//
 	// This member is required.
 	EndTime *time.Time
@@ -46,32 +46,32 @@ type ListFindingsReportsInput struct {
 	ProfilingGroupName *string
 
 	// The start time of the profile to get analysis data about. You must specify
-	// startTime and endTime. This is specified using the ISO 8601 format. For example,
-	// 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM
-	// UTC.
+	// startTime and endTime. This is specified using the ISO 8601 format. For
+	// example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020
+	// 1:15:02 PM UTC.
 	//
 	// This member is required.
 	StartTime *time.Time
 
 	// A Boolean value indicating whether to only return reports from daily profiles.
-	// If set to True, only analysis data from daily profiles is returned. If set to
+	// If set to True , only analysis data from daily profiles is returned. If set to
 	// False, analysis data is returned from smaller time windows (for example, one
 	// hour).
 	DailyReportsOnly *bool
 
 	// The maximum number of report results returned by ListFindingsReports in
-	// paginated output. When this parameter is used, ListFindingsReports only returns
-	// maxResults results in a single page along with a nextToken response element. The
-	// remaining results of the initial request can be seen by sending another
-	// ListFindingsReports request with the returned nextToken value.
+	// paginated output. When this parameter is used, ListFindingsReports only
+	// returns maxResults  results in a single page along with a nextToken response
+	// element. The remaining results of the initial request can be seen by sending
+	// another ListFindingsReports  request with the returned nextToken  value.
 	MaxResults *int32
 
-	// The nextToken value returned from a previous paginated
+	// The nextToken  value returned from a previous paginated
 	// ListFindingsReportsRequest request where maxResults was used and the results
 	// exceeded the value of that parameter. Pagination continues from the end of the
-	// previous results that returned the nextToken value. This token should be treated
-	// as an opaque identifier that is only used to retrieve the next items in a list
-	// and not for other programmatic purposes.
+	// previous results that returned the nextToken value. This token should be
+	// treated as an opaque identifier that is only used to retrieve the next items in
+	// a list and not for other programmatic purposes.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -85,10 +85,10 @@ type ListFindingsReportsOutput struct {
 	// This member is required.
 	FindingsReportSummaries []types.FindingsReportSummary
 
-	// The nextToken value to include in a future ListFindingsReports request. When the
-	// results of a ListFindingsReports request exceed maxResults, this value can be
-	// used to retrieve the next page of results. This value is null when there are no
-	// more results to return.
+	// The nextToken  value to include in a future ListFindingsReports request. When
+	// the results of a ListFindingsReports  request exceed maxResults, this value
+	// can be used to retrieve the next page of results. This value is null when
+	// there are no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -160,8 +160,8 @@ func (c *Client) addOperationListFindingsReportsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListFindingsReportsAPIClient is a client that implements the ListFindingsReports
-// operation.
+// ListFindingsReportsAPIClient is a client that implements the
+// ListFindingsReports operation.
 type ListFindingsReportsAPIClient interface {
 	ListFindingsReports(context.Context, *ListFindingsReportsInput, ...func(*Options)) (*ListFindingsReportsOutput, error)
 }
@@ -172,14 +172,14 @@ var _ ListFindingsReportsAPIClient = (*Client)(nil)
 // ListFindingsReports
 type ListFindingsReportsPaginatorOptions struct {
 	// The maximum number of report results returned by ListFindingsReports in
-	// paginated output. When this parameter is used, ListFindingsReports only returns
-	// maxResults results in a single page along with a nextToken response element. The
-	// remaining results of the initial request can be seen by sending another
-	// ListFindingsReports request with the returned nextToken value.
+	// paginated output. When this parameter is used, ListFindingsReports only
+	// returns maxResults  results in a single page along with a nextToken response
+	// element. The remaining results of the initial request can be seen by sending
+	// another ListFindingsReports  request with the returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

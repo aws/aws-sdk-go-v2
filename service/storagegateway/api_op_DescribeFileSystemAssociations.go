@@ -41,8 +41,8 @@ type DescribeFileSystemAssociationsInput struct {
 
 type DescribeFileSystemAssociationsOutput struct {
 
-	// An array containing the FileSystemAssociationInfo data type of each file system
-	// association to be described.
+	// An array containing the FileSystemAssociationInfo data type of each file
+	// system association to be described.
 	FileSystemAssociationInfoList []types.FileSystemAssociationInfo
 
 	// Metadata pertaining to the operation's result.

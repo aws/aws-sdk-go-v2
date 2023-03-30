@@ -44,9 +44,10 @@ type CreateContactInput struct {
 	// The last name of the contact that is used to call the contact on the device.
 	LastName *string
 
-	// The phone number of the contact in E.164 format. The phone number type defaults
-	// to WORK. You can specify PhoneNumber or PhoneNumbers. We recommend that you use
-	// PhoneNumbers, which lets you specify the phone number type and multiple numbers.
+	// The phone number of the contact in E.164 format. The phone number type
+	// defaults to WORK. You can specify PhoneNumber or PhoneNumbers. We recommend that
+	// you use PhoneNumbers, which lets you specify the phone number type and multiple
+	// numbers.
 	PhoneNumber *string
 
 	// The list of phone numbers for the contact.

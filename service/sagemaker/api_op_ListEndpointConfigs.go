@@ -31,12 +31,12 @@ func (c *Client) ListEndpointConfigs(ctx context.Context, params *ListEndpointCo
 
 type ListEndpointConfigsInput struct {
 
-	// A filter that returns only endpoint configurations with a creation time greater
-	// than or equal to the specified time (timestamp).
+	// A filter that returns only endpoint configurations with a creation time
+	// greater than or equal to the specified time (timestamp).
 	CreationTimeAfter *time.Time
 
-	// A filter that returns only endpoint configurations created before the specified
-	// time (timestamp).
+	// A filter that returns only endpoint configurations created before the
+	// specified time (timestamp).
 	CreationTimeBefore *time.Time
 
 	// The maximum number of training jobs to return in the response.
@@ -51,10 +51,10 @@ type ListEndpointConfigsInput struct {
 	// configurations, use the token in the next request.
 	NextToken *string
 
-	// The field to sort results by. The default is CreationTime.
+	// The field to sort results by. The default is CreationTime .
 	SortBy types.EndpointConfigSortKey
 
-	// The sort order for results. The default is Descending.
+	// The sort order for results. The default is Descending .
 	SortOrder types.OrderKey
 
 	noSmithyDocumentSerde
@@ -67,8 +67,8 @@ type ListEndpointConfigsOutput struct {
 	// This member is required.
 	EndpointConfigs []types.EndpointConfigSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of endpoint configurations, use it in the subsequent request
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of endpoint configurations, use it in the subsequent request
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -137,8 +137,8 @@ func (c *Client) addOperationListEndpointConfigsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListEndpointConfigsAPIClient is a client that implements the ListEndpointConfigs
-// operation.
+// ListEndpointConfigsAPIClient is a client that implements the
+// ListEndpointConfigs operation.
 type ListEndpointConfigsAPIClient interface {
 	ListEndpointConfigs(context.Context, *ListEndpointConfigsInput, ...func(*Options)) (*ListEndpointConfigsOutput, error)
 }
@@ -151,8 +151,8 @@ type ListEndpointConfigsPaginatorOptions struct {
 	// The maximum number of training jobs to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

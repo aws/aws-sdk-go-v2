@@ -19,12 +19,11 @@ import (
 // is used to improve the connectivity of peer-to-peer applications. By providing a
 // cloud-based relay service, TURN ensures that a connection can be established
 // even when one or more peers are incapable of a direct peer-to-peer connection.
-// For more information, see A REST API For Access To TURN Services
-// (https://tools.ietf.org/html/draft-uberti-rtcweb-turn-rest-00). You can invoke
-// this API to establish a fallback mechanism in case either of the peers is unable
-// to establish a direct peer-to-peer connection over a signaling channel. You must
-// specify either a signaling channel ARN or the client ID in order to invoke this
-// API.
+// For more information, see A REST API For Access To TURN Services (https://tools.ietf.org/html/draft-uberti-rtcweb-turn-rest-00)
+// . You can invoke this API to establish a fallback mechanism in case either of
+// the peers is unable to establish a direct peer-to-peer connection over a
+// signaling channel. You must specify either a signaling channel ARN or the client
+// ID in order to invoke this API.
 func (c *Client) GetIceServerConfig(ctx context.Context, params *GetIceServerConfigInput, optFns ...func(*Options)) (*GetIceServerConfigOutput, error) {
 	if params == nil {
 		params = &GetIceServerConfigInput{}
@@ -51,7 +50,7 @@ type GetIceServerConfigInput struct {
 	// Unique identifier for the viewer. Must be unique within the signaling channel.
 	ClientId *string
 
-	// Specifies the desired service. Currently, TURN is the only valid value.
+	// Specifies the desired service. Currently, TURN  is the only valid value.
 	Service types.Service
 
 	// An optional user ID to be associated with the credentials.

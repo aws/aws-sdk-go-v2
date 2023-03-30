@@ -16,20 +16,20 @@ import (
 // control mode.
 type AacSettings struct {
 
-	// Choose BROADCASTER_MIXED_AD when the input contains pre-mixed main audio + audio
-	// description (AD) as a stereo pair. The value for AudioType will be set to 3,
-	// which signals to downstream systems that this stream contains "broadcaster mixed
-	// AD". Note that the input received by the encoder must contain pre-mixed audio;
-	// the encoder does not perform the mixing. When you choose BROADCASTER_MIXED_AD,
-	// the encoder ignores any values you provide in AudioType and
-	// FollowInputAudioType. Choose NORMAL when the input does not contain pre-mixed
-	// audio + audio description (AD). In this case, the encoder will use any values
-	// you provide for AudioType and FollowInputAudioType.
+	// Choose BROADCASTER_MIXED_AD when the input contains pre-mixed main audio +
+	// audio description (AD) as a stereo pair. The value for AudioType will be set to
+	// 3, which signals to downstream systems that this stream contains "broadcaster
+	// mixed AD". Note that the input received by the encoder must contain pre-mixed
+	// audio; the encoder does not perform the mixing. When you choose
+	// BROADCASTER_MIXED_AD, the encoder ignores any values you provide in AudioType
+	// and FollowInputAudioType. Choose NORMAL when the input does not contain
+	// pre-mixed audio + audio description (AD). In this case, the encoder will use any
+	// values you provide for AudioType and FollowInputAudioType.
 	AudioDescriptionBroadcasterMix AacAudioDescriptionBroadcasterMix
 
-	// Specify the average bitrate in bits per second. The set of valid values for this
-	// setting is: 6000, 8000, 10000, 12000, 14000, 16000, 20000, 24000, 28000, 32000,
-	// 40000, 48000, 56000, 64000, 80000, 96000, 112000, 128000, 160000, 192000,
+	// Specify the average bitrate in bits per second. The set of valid values for
+	// this setting is: 6000, 8000, 10000, 12000, 14000, 16000, 20000, 24000, 28000,
+	// 32000, 40000, 48000, 56000, 64000, 80000, 96000, 112000, 128000, 160000, 192000,
 	// 224000, 256000, 288000, 320000, 384000, 448000, 512000, 576000, 640000, 768000,
 	// 896000, 1024000. The value you set is also constrained by the values that you
 	// choose for Profile (codecProfile), Bitrate control mode (codingMode), and Sample
@@ -39,14 +39,14 @@ type AacSettings struct {
 	// AAC Profile.
 	CodecProfile AacCodecProfile
 
-	// The Coding mode that you specify determines the number of audio channels and the
-	// audio channel layout metadata in your AAC output. Valid coding modes depend on
-	// the Rate control mode and Profile that you select. The following list shows the
-	// number of audio channels and channel layout for each coding mode. * 1.0 Audio
-	// Description (Receiver Mix): One channel, C. Includes audio description data from
-	// your stereo input. For more information see ETSI TS 101 154 Annex E. * 1.0 Mono:
-	// One channel, C. * 2.0 Stereo: Two channels, L, R. * 5.1 Surround: Five channels,
-	// C, L, R, Ls, Rs, LFE.
+	// The Coding mode that you specify determines the number of audio channels and
+	// the audio channel layout metadata in your AAC output. Valid coding modes depend
+	// on the Rate control mode and Profile that you select. The following list shows
+	// the number of audio channels and channel layout for each coding mode. * 1.0
+	// Audio Description (Receiver Mix): One channel, C. Includes audio description
+	// data from your stereo input. For more information see ETSI TS 101 154 Annex E. *
+	// 1.0 Mono: One channel, C. * 2.0 Stereo: Two channels, L, R. * 5.1 Surround: Five
+	// channels, C, L, R, Ls, Rs, LFE.
 	CodingMode AacCodingMode
 
 	// Rate Control Mode.
@@ -90,8 +90,8 @@ type Ac3Settings struct {
 	// Default: 384000. Minimum: 384000. Maximum: 640000.
 	Bitrate int32
 
-	// Specify the bitstream mode for the AC-3 stream that the encoder emits. For more
-	// information about the AC3 bitstream mode, see ATSC A/52-2012 (Annex E).
+	// Specify the bitstream mode for the AC-3 stream that the encoder emits. For
+	// more information about the AC3 bitstream mode, see ATSC A/52-2012 (Annex E).
 	BitstreamMode Ac3BitstreamMode
 
 	// Dolby Digital coding mode. Determines number of channels.
@@ -134,13 +134,13 @@ type Ac3Settings struct {
 	// https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.
 	DynamicRangeCompressionRf Ac3DynamicRangeCompressionRf
 
-	// Applies a 120Hz lowpass filter to the LFE channel prior to encoding. Only valid
-	// with 3_2_LFE coding mode.
+	// Applies a 120Hz lowpass filter to the LFE channel prior to encoding. Only
+	// valid with 3_2_LFE coding mode.
 	LfeFilter Ac3LfeFilter
 
-	// When set to FOLLOW_INPUT, encoder metadata will be sourced from the DD, DD+, or
-	// DolbyE decoder that supplied this audio data. If audio was not supplied from one
-	// of these streams, then the static metadata settings will be used.
+	// When set to FOLLOW_INPUT, encoder metadata will be sourced from the DD, DD+,
+	// or DolbyE decoder that supplied this audio data. If audio was not supplied from
+	// one of these streams, then the static metadata settings will be used.
 	MetadataControl Ac3MetadataControl
 
 	// This value is always 48000. It represents the sample rate in Hz.
@@ -166,8 +166,8 @@ type AccelerationSettings struct {
 // value AIFF.
 type AiffSettings struct {
 
-	// Specify Bit depth (BitDepth), in bits per sample, to choose the encoding quality
-	// for this audio track.
+	// Specify Bit depth (BitDepth), in bits per sample, to choose the encoding
+	// quality for this audio track.
 	BitDepth int32
 
 	// Specify the number of channels in this output audio track. Valid values are 1
@@ -216,9 +216,9 @@ type AncillarySourceSettings struct {
 	// extract captions. Unused for passthrough.
 	SourceAncillaryChannelNumber int32
 
-	// By default, the service terminates any unterminated captions at the end of each
-	// input. If you want the caption to continue onto your next input, disable this
-	// setting.
+	// By default, the service terminates any unterminated captions at the end of
+	// each input. If you want the caption to continue onto your next input, disable
+	// this setting.
 	TerminateCaptions AncillaryTerminateCaptions
 
 	noSmithyDocumentSerde
@@ -233,16 +233,16 @@ type AncillarySourceSettings struct {
 // AIFF; and you must set up your audio track to have only one channel.
 type AudioChannelTaggingSettings struct {
 
-	// You can add a tag for this mono-channel audio track to mimic its placement in a
-	// multi-channel layout. For example, if this track is the left surround channel,
+	// You can add a tag for this mono-channel audio track to mimic its placement in
+	// a multi-channel layout. For example, if this track is the left surround channel,
 	// choose Left surround (LS).
 	ChannelTag AudioChannelTag
 
 	noSmithyDocumentSerde
 }
 
-// Settings related to audio encoding. The settings in this group vary depending on
-// the value that you choose for your audio codec.
+// Settings related to audio encoding. The settings in this group vary depending
+// on the value that you choose for your audio codec.
 type AudioCodecSettings struct {
 
 	// Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the
@@ -287,16 +287,16 @@ type AudioCodecSettings struct {
 	// value MP2.
 	Mp2Settings *Mp2Settings
 
-	// Required when you set Codec, under AudioDescriptions>CodecSettings, to the value
-	// MP3.
+	// Required when you set Codec, under AudioDescriptions>CodecSettings, to the
+	// value MP3.
 	Mp3Settings *Mp3Settings
 
-	// Required when you set Codec, under AudioDescriptions>CodecSettings, to the value
-	// OPUS.
+	// Required when you set Codec, under AudioDescriptions>CodecSettings, to the
+	// value OPUS.
 	OpusSettings *OpusSettings
 
-	// Required when you set Codec, under AudioDescriptions>CodecSettings, to the value
-	// Vorbis.
+	// Required when you set Codec, under AudioDescriptions>CodecSettings, to the
+	// value Vorbis.
 	VorbisSettings *VorbisSettings
 
 	// Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the
@@ -306,11 +306,11 @@ type AudioCodecSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Settings related to one audio tab on the MediaConvert console. In your job JSON,
-// an instance of AudioDescription is equivalent to one audio tab in the console.
-// Usually, one audio tab corresponds to one output audio track. Depending on how
-// you set up your input audio selectors and whether you use audio selector groups,
-// one audio tab can correspond to a group of output audio tracks.
+// Settings related to one audio tab on the MediaConvert console. In your job
+// JSON, an instance of AudioDescription is equivalent to one audio tab in the
+// console. Usually, one audio tab corresponds to one output audio track. Depending
+// on how you set up your input audio selectors and whether you use audio selector
+// groups, one audio tab can correspond to a group of output audio tracks.
 type AudioDescription struct {
 
 	// When you mimic a multi-channel audio layout with multiple mono-channel tracks,
@@ -322,14 +322,14 @@ type AudioDescription struct {
 	// AIFF; and you must set up your audio track to have only one channel.
 	AudioChannelTaggingSettings *AudioChannelTaggingSettings
 
-	// Advanced audio normalization settings. Ignore these settings unless you need to
-	// comply with a loudness standard.
+	// Advanced audio normalization settings. Ignore these settings unless you need
+	// to comply with a loudness standard.
 	AudioNormalizationSettings *AudioNormalizationSettings
 
-	// Specifies which audio data to use from each input. In the simplest case, specify
-	// an "Audio Selector":#inputs-audio_selector by name based on its order within
-	// each input. For example if you specify "Audio Selector 3", then the third audio
-	// selector will be used from each input. If an input does not have an "Audio
+	// Specifies which audio data to use from each input. In the simplest case,
+	// specify an "Audio Selector":#inputs-audio_selector by name based on its order
+	// within each input. For example if you specify "Audio Selector 3", then the third
+	// audio selector will be used from each input. If an input does not have an "Audio
 	// Selector 3", then the audio selector marked as "default" in that input will be
 	// used. If there is no audio selector marked as "default", silence will be
 	// inserted for the duration of that input. Alternatively, an "Audio Selector
@@ -338,26 +338,26 @@ type AudioDescription struct {
 	// Selector 1" will be chosen automatically.
 	AudioSourceName *string
 
-	// Applies only if Follow Input Audio Type is unchecked (false). A number between 0
-	// and 255. The following are defined in ISO-IEC 13818-1: 0 = Undefined, 1 = Clean
-	// Effects, 2 = Hearing Impaired, 3 = Visually Impaired Commentary, 4-255 =
+	// Applies only if Follow Input Audio Type is unchecked (false). A number between
+	// 0 and 255. The following are defined in ISO-IEC 13818-1: 0 = Undefined, 1 =
+	// Clean Effects, 2 = Hearing Impaired, 3 = Visually Impaired Commentary, 4-255 =
 	// Reserved.
 	AudioType int32
 
-	// When set to FOLLOW_INPUT, if the input contains an ISO 639 audio_type, then that
-	// value is passed through to the output. If the input contains no ISO 639
+	// When set to FOLLOW_INPUT, if the input contains an ISO 639 audio_type, then
+	// that value is passed through to the output. If the input contains no ISO 639
 	// audio_type, the value in Audio Type is included in the output. Otherwise the
 	// value in Audio Type is included in the output. Note that this field and
 	// audioType are both ignored if audioDescriptionBroadcasterMix is set to
 	// BROADCASTER_MIXED_AD.
 	AudioTypeControl AudioTypeControl
 
-	// Settings related to audio encoding. The settings in this group vary depending on
-	// the value that you choose for your audio codec.
+	// Settings related to audio encoding. The settings in this group vary depending
+	// on the value that you choose for your audio codec.
 	CodecSettings *AudioCodecSettings
 
-	// Specify the language for this audio output track. The service puts this language
-	// code into your output audio track when you set Language code control
+	// Specify the language for this audio output track. The service puts this
+	// language code into your output audio track when you set Language code control
 	// (AudioLanguageCodeControl) to Use configured (USE_CONFIGURED). The service also
 	// uses your specified custom language code when you set Language code control
 	// (AudioLanguageCodeControl) to Follow input (FOLLOW_INPUT), but your input file
@@ -368,10 +368,10 @@ type AudioDescription struct {
 	// Streaming.
 	CustomLanguageCode *string
 
-	// Indicates the language of the audio output track. The ISO 639 language specified
-	// in the 'Language Code' drop down will be used when 'Follow Input Language Code'
-	// is not selected or when 'Follow Input Language Code' is selected but there is no
-	// ISO 639 language code specified by the input.
+	// Indicates the language of the audio output track. The ISO 639 language
+	// specified in the 'Language Code' drop down will be used when 'Follow Input
+	// Language Code' is not selected or when 'Follow Input Language Code' is selected
+	// but there is no ISO 639 language code specified by the input.
 	LanguageCode LanguageCode
 
 	// Specify which source for language code takes precedence for this audio track.
@@ -385,17 +385,18 @@ type AudioDescription struct {
 	// Advanced audio remixing settings.
 	RemixSettings *RemixSettings
 
-	// Specify a label for this output audio stream. For example, "English", "Director
-	// commentary", or "track_2". For streaming outputs, MediaConvert passes this
-	// information into destination manifests for display on the end-viewer's player
-	// device. For outputs in other output groups, the service ignores this setting.
+	// Specify a label for this output audio stream. For example, "English",
+	// "Director commentary", or "track_2". For streaming outputs, MediaConvert passes
+	// this information into destination manifests for display on the end-viewer's
+	// player device. For outputs in other output groups, the service ignores this
+	// setting.
 	StreamName *string
 
 	noSmithyDocumentSerde
 }
 
-// Advanced audio normalization settings. Ignore these settings unless you need to
-// comply with a loudness standard.
+// Advanced audio normalization settings. Ignore these settings unless you need
+// to comply with a loudness standard.
 type AudioNormalizationSettings struct {
 
 	// Choose one of the following audio normalization algorithms: ITU-R BS.1770-1:
@@ -466,20 +467,20 @@ type AudioSelector struct {
 	// 639-2 or ISO 639-3 three-letter language code
 	CustomLanguageCode *string
 
-	// Enable this setting on one audio selector to set it as the default for the job.
-	// The service uses this default for outputs where it can't find the specified
+	// Enable this setting on one audio selector to set it as the default for the
+	// job. The service uses this default for outputs where it can't find the specified
 	// input audio. If you don't set a default, those outputs have no audio.
 	DefaultSelection AudioDefaultSelection
 
 	// Specifies audio data from an external file source.
 	ExternalAudioFileInput *string
 
-	// Settings specific to audio sources in an HLS alternate rendition group. Specify
-	// the properties (renditionGroupId, renditionName or renditionLanguageCode) to
-	// identify the unique audio track among the alternative rendition groups present
-	// in the HLS manifest. If no unique track is found, or multiple tracks match the
-	// properties provided, the job fails. If no properties in
-	// hlsRenditionGroupSettings are specified, the default audio track within the
+	// Settings specific to audio sources in an HLS alternate rendition group.
+	// Specify the properties (renditionGroupId, renditionName or
+	// renditionLanguageCode) to identify the unique audio track among the alternative
+	// rendition groups present in the HLS manifest. If no unique track is found, or
+	// multiple tracks match the properties provided, the job fails. If no properties
+	// in hlsRenditionGroupSettings are specified, the default audio track within the
 	// video segment is chosen. If there is no audio within video segment, the
 	// alternative audio with DEFAULT=YES is chosen instead.
 	HlsRenditionGroupSettings *HlsRenditionGroupSettings
@@ -487,10 +488,12 @@ type AudioSelector struct {
 	// Selects a specific language code from within an audio source.
 	LanguageCode LanguageCode
 
-	// Specifies a time delta in milliseconds to offset the audio from the input video.
+	// Specifies a time delta in milliseconds to offset the audio from the input
+	// video.
 	Offset int32
 
-	// Selects a specific PID from within an audio source (e.g. 257 selects PID 0x101).
+	// Selects a specific PID from within an audio source (e.g. 257 selects PID
+	// 0x101).
 	Pids []int32
 
 	// Use this setting for input streams that contain Dolby E, to have the service
@@ -504,8 +507,8 @@ type AudioSelector struct {
 	// track.
 	ProgramSelection int32
 
-	// Use these settings to reorder the audio channels of one input to match those of
-	// another input. This allows you to combine the two files into a single output,
+	// Use these settings to reorder the audio channels of one input to match those
+	// of another input. This allows you to combine the two files into a single output,
 	// one after the other.
 	RemixSettings *RemixSettings
 
@@ -559,20 +562,20 @@ type AutomatedAbrRule struct {
 	// rendition size.
 	MinBottomRenditionSize *MinBottomRenditionSize
 
-	// Use Min top rendition size to specify a minimum size for the highest resolution
-	// in your ABR stack. * The highest resolution in your ABR stack will be equal to
-	// or greater than the value that you enter. For example: If you specify 1280x720
-	// the highest resolution in your ABR stack will be equal to or greater than
-	// 1280x720. * If you specify a value for Max resolution, the value that you
+	// Use Min top rendition size to specify a minimum size for the highest
+	// resolution in your ABR stack. * The highest resolution in your ABR stack will be
+	// equal to or greater than the value that you enter. For example: If you specify
+	// 1280x720 the highest resolution in your ABR stack will be equal to or greater
+	// than 1280x720. * If you specify a value for Max resolution, the value that you
 	// specify for Min top rendition size must be less than, or equal to, Max
 	// resolution.
 	MinTopRenditionSize *MinTopRenditionSize
 
-	// Use Min top rendition size to specify a minimum size for the highest resolution
-	// in your ABR stack. * The highest resolution in your ABR stack will be equal to
-	// or greater than the value that you enter. For example: If you specify 1280x720
-	// the highest resolution in your ABR stack will be equal to or greater than
-	// 1280x720. * If you specify a value for Max resolution, the value that you
+	// Use Min top rendition size to specify a minimum size for the highest
+	// resolution in your ABR stack. * The highest resolution in your ABR stack will be
+	// equal to or greater than the value that you enter. For example: If you specify
+	// 1280x720 the highest resolution in your ABR stack will be equal to or greater
+	// than 1280x720. * If you specify a value for Max resolution, the value that you
 	// specify for Min top rendition size must be less than, or equal to, Max
 	// resolution. Use Min bottom rendition size to specify a minimum size for the
 	// lowest resolution in your ABR stack. * The lowest resolution in your ABR stack
@@ -605,29 +608,29 @@ type AutomatedAbrRule struct {
 	noSmithyDocumentSerde
 }
 
-// Use automated ABR to have MediaConvert set up the renditions in your ABR package
-// for you automatically, based on characteristics of your input video. This
-// feature optimizes video quality while minimizing the overall size of your ABR
-// package.
+// Use automated ABR to have MediaConvert set up the renditions in your ABR
+// package for you automatically, based on characteristics of your input video.
+// This feature optimizes video quality while minimizing the overall size of your
+// ABR package.
 type AutomatedAbrSettings struct {
 
-	// Optional. The maximum target bit rate used in your automated ABR stack. Use this
-	// value to set an upper limit on the bandwidth consumed by the highest-quality
-	// rendition. This is the rendition that is delivered to viewers with the fastest
-	// internet connections. If you don't specify a value, MediaConvert uses 8,000,000
-	// (8 mb/s) by default.
+	// Optional. The maximum target bit rate used in your automated ABR stack. Use
+	// this value to set an upper limit on the bandwidth consumed by the
+	// highest-quality rendition. This is the rendition that is delivered to viewers
+	// with the fastest internet connections. If you don't specify a value,
+	// MediaConvert uses 8,000,000 (8 mb/s) by default.
 	MaxAbrBitrate int32
 
-	// Optional. The maximum number of renditions that MediaConvert will create in your
-	// automated ABR stack. The number of renditions is determined automatically, based
-	// on analysis of each job, but will never exceed this limit. When you set this to
-	// Auto in the console, which is equivalent to excluding it from your JSON job
-	// specification, MediaConvert defaults to a limit of 15.
+	// Optional. The maximum number of renditions that MediaConvert will create in
+	// your automated ABR stack. The number of renditions is determined automatically,
+	// based on analysis of each job, but will never exceed this limit. When you set
+	// this to Auto in the console, which is equivalent to excluding it from your JSON
+	// job specification, MediaConvert defaults to a limit of 15.
 	MaxRenditions int32
 
-	// Optional. The minimum target bitrate used in your automated ABR stack. Use this
-	// value to set a lower limit on the bitrate of video delivered to viewers with
-	// slow internet connections. If you don't specify a value, MediaConvert uses
+	// Optional. The minimum target bitrate used in your automated ABR stack. Use
+	// this value to set a lower limit on the bitrate of video delivered to viewers
+	// with slow internet connections. If you don't specify a value, MediaConvert uses
 	// 600,000 (600 kb/s) by default.
 	MinAbrBitrate int32
 
@@ -644,10 +647,10 @@ type AutomatedAbrSettings struct {
 // you, based on characteristics of your input video.
 type AutomatedEncodingSettings struct {
 
-	// Use automated ABR to have MediaConvert set up the renditions in your ABR package
-	// for you automatically, based on characteristics of your input video. This
-	// feature optimizes video quality while minimizing the overall size of your ABR
-	// package.
+	// Use automated ABR to have MediaConvert set up the renditions in your ABR
+	// package for you automatically, based on characteristics of your input video.
+	// This feature optimizes video quality while minimizing the overall size of your
+	// ABR package.
 	AbrSettings *AutomatedAbrSettings
 
 	noSmithyDocumentSerde
@@ -657,9 +660,9 @@ type AutomatedEncodingSettings struct {
 // these settings only when you set QVBR for Rate control mode (RateControlMode).
 type Av1QvbrSettings struct {
 
-	// Use this setting only when you set Rate control mode (RateControlMode) to QVBR.
-	// Specify the target quality level for this output. MediaConvert determines the
-	// right number of bits to use for each part of the video to maintain the video
+	// Use this setting only when you set Rate control mode (RateControlMode) to
+	// QVBR. Specify the target quality level for this output. MediaConvert determines
+	// the right number of bits to use for each part of the video to maintain the video
 	// quality that you specify. When you keep the default value, AUTO, MediaConvert
 	// picks a quality level for you, based on characteristics of your input video. If
 	// you prefer to specify a quality level, specify a number from 1 through 10. Use
@@ -720,20 +723,20 @@ type Av1Settings struct {
 	// transcoding time and incurs a significant add-on cost.
 	FramerateConversionAlgorithm Av1FramerateConversionAlgorithm
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateDenominator to specify the denominator of this fraction. In this
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateDenominator to specify the denominator of this fraction. In this
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Framerate. In this example, specify 23.976.
 	FramerateDenominator int32
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateNumerator to specify the numerator of this fraction. In this example,
-	// use 24000 for the value of FramerateNumerator. When you use the console for
-	// transcode jobs that use frame rate conversion, provide the value as a decimal
-	// number for Framerate. In this example, specify 23.976.
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateNumerator to specify the numerator of this fraction. In this
+	// example, use 24000 for the value of FramerateNumerator. When you use the console
+	// for transcode jobs that use frame rate conversion, provide the value as a
+	// decimal number for Framerate. In this example, specify 23.976.
 	FramerateNumerator int32
 
 	// Specify the GOP length (keyframe interval) in frames. With AV1, MediaConvert
@@ -745,21 +748,22 @@ type Av1Settings struct {
 	// 5000000. Required when Rate control mode is QVBR.
 	MaxBitrate int32
 
-	// Specify from the number of B-frames, in the range of 0-15. For AV1 encoding, we
-	// recommend using 7 or 15. Choose a larger number for a lower bitrate and smaller
-	// file size; choose a smaller number for better video quality.
+	// Specify from the number of B-frames, in the range of 0-15. For AV1 encoding,
+	// we recommend using 7 or 15. Choose a larger number for a lower bitrate and
+	// smaller file size; choose a smaller number for better video quality.
 	NumberBFramesBetweenReferenceFrames int32
 
-	// Settings for quality-defined variable bitrate encoding with the H.265 codec. Use
-	// these settings only when you set QVBR for Rate control mode (RateControlMode).
+	// Settings for quality-defined variable bitrate encoding with the H.265 codec.
+	// Use these settings only when you set QVBR for Rate control mode
+	// (RateControlMode).
 	QvbrSettings *Av1QvbrSettings
 
 	// 'With AV1 outputs, for rate control mode, MediaConvert supports only
 	// quality-defined variable bitrate (QVBR). You can''t use CBR or VBR.'
 	RateControlMode Av1RateControlMode
 
-	// Specify the number of slices per picture. This value must be 1, 2, 4, 8, 16, or
-	// 32. For progressive pictures, this value must be less than or equal to the
+	// Specify the number of slices per picture. This value must be 1, 2, 4, 8, 16,
+	// or 32. For progressive pictures, this value must be less than or equal to the
 	// number of macroblock rows. For interlaced pictures, this value must be less than
 	// or equal to half the number of macroblock rows.
 	Slices int32
@@ -790,8 +794,8 @@ type Av1Settings struct {
 // https://docs.aws.amazon.com/mediaconvert/latest/ug/ad-avail-blanking.html.
 type AvailBlanking struct {
 
-	// Blanking image to be used. Leave empty for solid black. Only bmp and png images
-	// are supported.
+	// Blanking image to be used. Leave empty for solid black. Only bmp and png
+	// images are supported.
 	AvailBlankingImage *string
 
 	noSmithyDocumentSerde
@@ -841,20 +845,20 @@ type AvcIntraSettings struct {
 	// transcoding time and incurs a significant add-on cost.
 	FramerateConversionAlgorithm AvcIntraFramerateConversionAlgorithm
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateDenominator to specify the denominator of this fraction. In this
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateDenominator to specify the denominator of this fraction. In this
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Framerate. In this example, specify 23.976.
 	FramerateDenominator int32
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateNumerator to specify the numerator of this fraction. In this example,
-	// use 24000 for the value of FramerateNumerator. When you use the console for
-	// transcode jobs that use frame rate conversion, provide the value as a decimal
-	// number for Framerate. In this example, specify 23.976.
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateNumerator to specify the numerator of this fraction. In this
+	// example, use 24000 for the value of FramerateNumerator. When you use the console
+	// for transcode jobs that use frame rate conversion, provide the value as a
+	// decimal number for Framerate. In this example, specify 23.976.
 	FramerateNumerator int32
 
 	// Choose the scan line type for the output. Keep the default value, Progressive
@@ -871,8 +875,8 @@ type AvcIntraSettings struct {
 	// options you choose.
 	InterlaceMode AvcIntraInterlaceMode
 
-	// Use this setting for interlaced outputs, when your output frame rate is half of
-	// your input frame rate. In this situation, choose Optimized interlacing
+	// Use this setting for interlaced outputs, when your output frame rate is half
+	// of your input frame rate. In this situation, choose Optimized interlacing
 	// (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this
 	// case, each progressive frame from the input corresponds to an interlaced field
 	// in the output. Keep the default value, Basic interlacing (INTERLACED), for all
@@ -989,9 +993,9 @@ type BurninDestinationSettings struct {
 	// backgrounds from your output captions.
 	BackgroundOpacity int32
 
-	// Specify the font that you want the service to use for your burn in captions when
-	// your input captions specify a font that MediaConvert doesn't support. When you
-	// set Fallback font (FallbackFont) to best match (BEST_MATCH), or leave blank,
+	// Specify the font that you want the service to use for your burn in captions
+	// when your input captions specify a font that MediaConvert doesn't support. When
+	// you set Fallback font (FallbackFont) to best match (BEST_MATCH), or leave blank,
 	// MediaConvert uses a supported font that most closely matches the font that your
 	// input captions specify. When there are multiple unsupported fonts in your input
 	// captions, MediaConvert matches each font with the supported font that matches
@@ -1049,25 +1053,26 @@ type BurninDestinationSettings struct {
 	// shadows from your output captions.
 	ShadowOpacity int32
 
-	// Specify the horizontal offset of the shadow, relative to the captions in pixels.
-	// A value of -2 would result in a shadow offset 2 pixels to the left.
+	// Specify the horizontal offset of the shadow, relative to the captions in
+	// pixels. A value of -2 would result in a shadow offset 2 pixels to the left.
 	ShadowXOffset int32
 
-	// Specify the vertical offset of the shadow relative to the captions in pixels. A
-	// value of -2 would result in a shadow offset 2 pixels above the text. Leave
+	// Specify the vertical offset of the shadow relative to the captions in pixels.
+	// A value of -2 would result in a shadow offset 2 pixels above the text. Leave
 	// Shadow y-offset (ShadowYOffset) blank and set Style passthrough
 	// (StylePassthrough) to enabled to use the shadow y-offset data from your input
 	// captions, if present.
 	ShadowYOffset int32
 
-	// Set Style passthrough (StylePassthrough) to ENABLED to use the available style,
-	// color, and position information from your input captions. MediaConvert uses
-	// default settings for any missing style and position information in your input
-	// captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style
-	// and position information from your input captions and use default settings:
-	// white text with black outlining, bottom-center positioning, and automatic
-	// sizing. Whether you set Style passthrough to enabled or not, you can also choose
-	// to manually override any of the individual style and position settings.
+	// Set Style passthrough (StylePassthrough) to ENABLED to use the available
+	// style, color, and position information from your input captions. MediaConvert
+	// uses default settings for any missing style and position information in your
+	// input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the
+	// style and position information from your input captions and use default
+	// settings: white text with black outlining, bottom-center positioning, and
+	// automatic sizing. Whether you set Style passthrough to enabled or not, you can
+	// also choose to manually override any of the individual style and position
+	// settings.
 	StylePassthrough BurnInSubtitleStylePassthrough
 
 	// Specify whether the text spacing (TeletextSpacing) in your captions is set by
@@ -1205,8 +1210,8 @@ type CaptionDestinationSettings struct {
 	// plus SCTE-20 (EMBEDDED_PLUS_SCTE20).
 	DestinationType CaptionDestinationType
 
-	// Settings related to DVB-Sub captions. Set up DVB-Sub captions in the same output
-	// as your video. For more information, see
+	// Settings related to DVB-Sub captions. Set up DVB-Sub captions in the same
+	// output as your video. For more information, see
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/dvb-sub-output-captions.html.
 	// When you work directly in your JSON job specification, include this object and
 	// any required children when you set destinationType to DVB_SUB.
@@ -1221,29 +1226,29 @@ type CaptionDestinationSettings struct {
 	// EMBEDDED_PLUS_SCTE20, or SCTE20_PLUS_EMBEDDED.
 	EmbeddedDestinationSettings *EmbeddedDestinationSettings
 
-	// Settings related to IMSC captions. IMSC is a sidecar format that holds captions
-	// in a file that is separate from the video container. Set up sidecar captions in
-	// the same output group, but different output from your video. For more
-	// information, see
+	// Settings related to IMSC captions. IMSC is a sidecar format that holds
+	// captions in a file that is separate from the video container. Set up sidecar
+	// captions in the same output group, but different output from your video. For
+	// more information, see
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html.
 	// When you work directly in your JSON job specification, include this object and
 	// any required children when you set destinationType to IMSC.
 	ImscDestinationSettings *ImscDestinationSettings
 
-	// Settings related to SCC captions. SCC is a sidecar format that holds captions in
-	// a file that is separate from the video container. Set up sidecar captions in the
-	// same output group, but different output from your video. For more information,
-	// see
+	// Settings related to SCC captions. SCC is a sidecar format that holds captions
+	// in a file that is separate from the video container. Set up sidecar captions in
+	// the same output group, but different output from your video. For more
+	// information, see
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/scc-srt-output-captions.html.
 	// When you work directly in your JSON job specification, include this object and
 	// any required children when you set destinationType to SCC.
 	SccDestinationSettings *SccDestinationSettings
 
-	// Settings related to SRT captions. SRT is a sidecar format that holds captions in
-	// a file that is separate from the video container. Set up sidecar captions in the
-	// same output group, but different output from your video. When you work directly
-	// in your JSON job specification, include this object and any required children
-	// when you set destinationType to SRT.
+	// Settings related to SRT captions. SRT is a sidecar format that holds captions
+	// in a file that is separate from the video container. Set up sidecar captions in
+	// the same output group, but different output from your video. When you work
+	// directly in your JSON job specification, include this object and any required
+	// children when you set destinationType to SRT.
 	SrtDestinationSettings *SrtDestinationSettings
 
 	// Settings related to teletext captions. Set up teletext captions in the same
@@ -1253,10 +1258,10 @@ type CaptionDestinationSettings struct {
 	// any required children when you set destinationType to TELETEXT.
 	TeletextDestinationSettings *TeletextDestinationSettings
 
-	// Settings related to TTML captions. TTML is a sidecar format that holds captions
-	// in a file that is separate from the video container. Set up sidecar captions in
-	// the same output group, but different output from your video. For more
-	// information, see
+	// Settings related to TTML captions. TTML is a sidecar format that holds
+	// captions in a file that is separate from the video container. Set up sidecar
+	// captions in the same output group, but different output from your video. For
+	// more information, see
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html.
 	// When you work directly in your JSON job specification, include this object and
 	// any required children when you set destinationType to TTML.
@@ -1274,8 +1279,8 @@ type CaptionDestinationSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Use captions selectors to specify the captions data from your input that you use
-// in your outputs. You can use up to 20 captions selectors per input.
+// Use captions selectors to specify the captions data from your input that you
+// use in your outputs. You can use up to 20 captions selectors per input.
 type CaptionSelector struct {
 
 	// The specific language to extract from source, using the ISO 639-2 or ISO 639-3
@@ -1287,12 +1292,12 @@ type CaptionSelector struct {
 	// pass-through captions.
 	CustomLanguageCode *string
 
-	// The specific language to extract from source. If input is SCTE-27, complete this
-	// field and/or PID to select the caption language to extract. If input is DVB-Sub
-	// and output is Burn-in or SMPTE-TT, complete this field and/or PID to select the
-	// caption language to extract. If input is DVB-Sub that is being passed through,
-	// omit this field (and PID field); there is no way to extract a specific language
-	// with pass-through captions.
+	// The specific language to extract from source. If input is SCTE-27, complete
+	// this field and/or PID to select the caption language to extract. If input is
+	// DVB-Sub and output is Burn-in or SMPTE-TT, complete this field and/or PID to
+	// select the caption language to extract. If input is DVB-Sub that is being passed
+	// through, omit this field (and PID field); there is no way to extract a specific
+	// language with pass-through captions.
 	LanguageCode LanguageCode
 
 	// If your input captions are SCC, TTML, STL, SMI, SRT, or IMSC in an xml file,
@@ -1358,14 +1363,14 @@ type CaptionSourceSettings struct {
 	// TrackSourceSettings.
 	TrackSourceSettings *TrackSourceSettings
 
-	// Settings specific to WebVTT sources in HLS alternative rendition group. Specify
-	// the properties (renditionGroupId, renditionName or renditionLanguageCode) to
-	// identify the unique subtitle track among the alternative rendition groups
-	// present in the HLS manifest. If no unique track is found, or multiple tracks
-	// match the specified properties, the job fails. If there is only one subtitle
-	// track in the rendition group, the settings can be left empty and the default
-	// subtitle track will be chosen. If your caption source is a sidecar file, use
-	// FileSourceSettings instead of WebvttHlsSourceSettings.
+	// Settings specific to WebVTT sources in HLS alternative rendition group.
+	// Specify the properties (renditionGroupId, renditionName or
+	// renditionLanguageCode) to identify the unique subtitle track among the
+	// alternative rendition groups present in the HLS manifest. If no unique track is
+	// found, or multiple tracks match the specified properties, the job fails. If
+	// there is only one subtitle track in the rendition group, the settings can be
+	// left empty and the default subtitle track will be chosen. If your caption source
+	// is a sidecar file, use FileSourceSettings instead of WebvttHlsSourceSettings.
 	WebvttHlsSourceSettings *WebvttHlsSourceSettings
 
 	noSmithyDocumentSerde
@@ -1404,8 +1409,8 @@ type ClipLimits struct {
 	// set Sample range conversion to Limited range clip.
 	MaximumRGBTolerance int32
 
-	// Specify the Maximum YUV color sample limit. MediaConvert conforms any pixels in
-	// your input above the value that you specify to typical limited range bounds.
+	// Specify the Maximum YUV color sample limit. MediaConvert conforms any pixels
+	// in your input above the value that you specify to typical limited range bounds.
 	// Enter an integer from 920 to 1023. Leave blank to use the default value 940. The
 	// value that you enter applies to 10-bit ranges. For 8-bit ranges, MediaConvert
 	// automatically scales this value down. When you specify a value for Maximum YUV,
@@ -1420,8 +1425,8 @@ type ClipLimits struct {
 	// set Sample range conversion to Limited range clip.
 	MinimumRGBTolerance int32
 
-	// Specify the Minimum YUV color sample limit. MediaConvert conforms any pixels in
-	// your input below the value that you specify to typical limited range bounds.
+	// Specify the Minimum YUV color sample limit. MediaConvert conforms any pixels
+	// in your input below the value that you specify to typical limited range bounds.
 	// Enter an integer from 0 to 128. Leave blank to use the default value 64. The
 	// value that you enter applies to 10-bit ranges. For 8-bit ranges, MediaConvert
 	// automatically scales this value down. When you specify a value for Minumum YUV,
@@ -1431,9 +1436,9 @@ type ClipLimits struct {
 	noSmithyDocumentSerde
 }
 
-// Specify the details for each pair of HLS and DASH additional manifests that you
-// want the service to generate for this CMAF output group. Each pair of manifests
-// can reference a different subset of outputs in the group.
+// Specify the details for each pair of HLS and DASH additional manifests that
+// you want the service to generate for this CMAF output group. Each pair of
+// manifests can reference a different subset of outputs in the group.
 type CmafAdditionalManifest struct {
 
 	// Specify a name modifier that the service adds to the name of this manifest to
@@ -1456,9 +1461,9 @@ type CmafAdditionalManifest struct {
 // Settings for CMAF encryption
 type CmafEncryptionSettings struct {
 
-	// This is a 128-bit, 16-byte hex value represented by a 32-character text string.
-	// If this parameter is not set then the Initialization Vector will follow the
-	// segment number by default.
+	// This is a 128-bit, 16-byte hex value represented by a 32-character text
+	// string. If this parameter is not set then the Initialization Vector will follow
+	// the segment number by default.
 	ConstantInitializationVector *string
 
 	// Specify the encryption scheme that you want the service to use when encrypting
@@ -1469,9 +1474,9 @@ type CmafEncryptionSettings struct {
 	// 128-bit encryption initialization vector in the HLS and DASH manifests.
 	InitializationVectorInManifest CmafInitializationVectorInManifest
 
-	// If your output group type is CMAF, use these settings when doing DRM encryption
-	// with a SPEKE-compliant key provider. If your output group type is HLS, DASH, or
-	// Microsoft Smooth, use the SpekeKeyProvider settings instead.
+	// If your output group type is CMAF, use these settings when doing DRM
+	// encryption with a SPEKE-compliant key provider. If your output group type is
+	// HLS, DASH, or Microsoft Smooth, use the SpekeKeyProvider settings instead.
 	SpekeKeyProvider *SpekeKeyProviderCmaf
 
 	// Use these settings to set up encryption with a static key provider.
@@ -1505,17 +1510,18 @@ type CmafGroupSettings struct {
 	// the manifest file.
 	BaseUrl *string
 
-	// Disable this setting only when your workflow requires the #EXT-X-ALLOW-CACHE:no
-	// tag. Otherwise, keep the default value Enabled (ENABLED) and control caching in
-	// your video distribution set up. For example, use the Cache-Control http header.
+	// Disable this setting only when your workflow requires the
+	// #EXT-X-ALLOW-CACHE:no tag. Otherwise, keep the default value Enabled (ENABLED)
+	// and control caching in your video distribution set up. For example, use the
+	// Cache-Control http header.
 	ClientCache CmafClientCache
 
 	// Specification to use (RFC-6381 or the default RFC-4281) during m3u8 playlist
 	// generation.
 	CodecSpecification CmafCodecSpecification
 
-	// Specify how MediaConvert writes SegmentTimeline in your output DASH manifest. To
-	// write a SegmentTimeline in each video Representation: Keep the default value,
+	// Specify how MediaConvert writes SegmentTimeline in your output DASH manifest.
+	// To write a SegmentTimeline in each video Representation: Keep the default value,
 	// Basic. To write a common SegmentTimeline in the video AdaptationSet: Choose
 	// Compact. Note that MediaConvert will still write a SegmentTimeline in any
 	// Representation that does not share a common timeline. To write a video
@@ -1585,12 +1591,12 @@ type CmafGroupSettings struct {
 	// is 3.5 seconds.
 	MinFinalSegmentLength float64
 
-	// Specify how the value for bandwidth is determined for each video Representation
-	// in your output MPD manifest. We recommend that you choose a MPD manifest
-	// bandwidth type that is compatible with your downstream player configuration.
-	// Max: Use the same value that you specify for Max bitrate in the video output, in
-	// bits per second. Average: Use the calculated average bitrate of the encoded
-	// video output, in bits per second.
+	// Specify how the value for bandwidth is determined for each video
+	// Representation in your output MPD manifest. We recommend that you choose a MPD
+	// manifest bandwidth type that is compatible with your downstream player
+	// configuration. Max: Use the same value that you specify for Max bitrate in the
+	// video output, in bits per second. Average: Use the calculated average bitrate of
+	// the encoded video output, in bits per second.
 	MpdManifestBandwidthType CmafMpdManifestBandwidthType
 
 	// Specify whether your DASH profile is on-demand or main. When you choose Main
@@ -1613,21 +1619,21 @@ type CmafGroupSettings struct {
 	// manifests start at zero regardless of your choice here.
 	PtsOffsetHandlingForBFrames CmafPtsOffsetHandlingForBFrames
 
-	// When set to SINGLE_FILE, a single output file is generated, which is internally
-	// segmented using the Fragment Length and Segment Length. When set to
+	// When set to SINGLE_FILE, a single output file is generated, which is
+	// internally segmented using the Fragment Length and Segment Length. When set to
 	// SEGMENTED_FILES, separate segment files will be created.
 	SegmentControl CmafSegmentControl
 
-	// Specify the length, in whole seconds, of each segment. When you don't specify a
-	// value, MediaConvert defaults to 10. Related settings: Use Segment length control
-	// (SegmentLengthControl) to specify whether the encoder enforces this value
-	// strictly. Use Segment control (CmafSegmentControl) to specify whether
+	// Specify the length, in whole seconds, of each segment. When you don't specify
+	// a value, MediaConvert defaults to 10. Related settings: Use Segment length
+	// control (SegmentLengthControl) to specify whether the encoder enforces this
+	// value strictly. Use Segment control (CmafSegmentControl) to specify whether
 	// MediaConvert creates separate segment files or one content file that has
 	// metadata to mark the segment boundaries.
 	SegmentLength int32
 
-	// Specify how you want MediaConvert to determine the segment length. Choose Exact
-	// (EXACT) to have the encoder use the exact length that you specify with the
+	// Specify how you want MediaConvert to determine the segment length. Choose
+	// Exact (EXACT) to have the encoder use the exact length that you specify with the
 	// setting Segment length (SegmentLength). This might result in extra I-frames.
 	// Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment
 	// lengths to match the next GOP boundary.
@@ -1697,15 +1703,16 @@ type CmafImageBasedTrickPlaySettings struct {
 	// MediaConvert uses a 150 frame interval to generate thumbnails.
 	ThumbnailInterval float64
 
-	// Width of each thumbnail within each tile image, in pixels. Default is 312. Must
-	// be divisible by 8.
+	// Width of each thumbnail within each tile image, in pixels. Default is 312.
+	// Must be divisible by 8.
 	ThumbnailWidth int32
 
 	// Number of thumbnails in each column of a tile image. Set a value between 2 and
 	// 2048. Must be divisible by 2.
 	TileHeight int32
 
-	// Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
+	// Number of thumbnails in each row of a tile image. Set a value between 1 and
+	// 512.
 	TileWidth int32
 
 	noSmithyDocumentSerde
@@ -1759,11 +1766,11 @@ type CmfcSettings struct {
 	// #EXT-X-STREAM-INF:AUDIO="audio_dolby"... amazing_video_1.m3u8
 	AudioRenditionSets *string
 
-	// Use this setting to control the values that MediaConvert puts in your HLS parent
-	// playlist to control how the client player selects which audio track to play. The
-	// other options for this setting determine the values that MediaConvert writes for
-	// the DEFAULT and AUTOSELECT attributes of the EXT-X-MEDIA entry for the audio
-	// variant. For more information about these attributes, see the Apple
+	// Use this setting to control the values that MediaConvert puts in your HLS
+	// parent playlist to control how the client player selects which audio track to
+	// play. The other options for this setting determine the values that MediaConvert
+	// writes for the DEFAULT and AUTOSELECT attributes of the EXT-X-MEDIA entry for
+	// the audio variant. For more information about these attributes, see the Apple
 	// documentation article
 	// https://developer.apple.com/documentation/http_live_streaming/example_playlists_for_http_live_streaming/adding_alternate_media_to_a_playlist.
 	// Choose Alternate audio, auto select, default
@@ -1795,15 +1802,15 @@ type CmfcSettings struct {
 	// value Exclude (EXCLUDE).
 	IFrameOnlyManifest CmfcIFrameOnlyManifest
 
-	// To include key-length-value metadata in this output: Set KLV metadata insertion
-	// to Passthrough. MediaConvert reads KLV metadata present in your input and writes
-	// each instance to a separate event message box in the output, according to MISB
-	// ST1910.1. To exclude this KLV metadata: Set KLV metadata insertion to None or
-	// leave blank.
+	// To include key-length-value metadata in this output: Set KLV metadata
+	// insertion to Passthrough. MediaConvert reads KLV metadata present in your input
+	// and writes each instance to a separate event message box in the output,
+	// according to MISB ST1910.1. To exclude this KLV metadata: Set KLV metadata
+	// insertion to None or leave blank.
 	KlvMetadata CmfcKlvMetadata
 
-	// To add an InbandEventStream element in your output MPD manifest for each type of
-	// event message, set Manifest metadata signaling to Enabled. For ID3 event
+	// To add an InbandEventStream element in your output MPD manifest for each type
+	// of event message, set Manifest metadata signaling to Enabled. For ID3 event
 	// messages, the InbandEventStream element schemeIdUri will be same value that you
 	// specify for ID3 metadata scheme ID URI. For SCTE35 event messages, the
 	// InbandEventStream element schemeIdUri will be "urn:scte:scte35:2013:bin". To
@@ -1813,9 +1820,10 @@ type CmfcSettings struct {
 	// (TimedMetadata) to Passthrough.
 	ManifestMetadataSignaling CmfcManifestMetadataSignaling
 
-	// Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT
-	// to put SCTE-35 markers in this output at the insertion points that you specify
-	// in an ESAM XML document. Provide the document in the setting SCC XML (sccXml).
+	// Use this setting only when you specify SCTE-35 markers from ESAM. Choose
+	// INSERT to put SCTE-35 markers in this output at the insertion points that you
+	// specify in an ESAM XML document. Provide the document in the setting SCC XML
+	// (sccXml).
 	Scte35Esam CmfcScte35Esam
 
 	// Ignore this setting unless you have SCTE-35 markers in your input video file.
@@ -1837,9 +1845,9 @@ type CmfcSettings struct {
 	// 1, you must also set ID3 metadata (timedMetadata) to Passthrough.
 	TimedMetadataBoxVersion CmfcTimedMetadataBoxVersion
 
-	// Specify the event message box (eMSG) scheme ID URI (scheme_id_uri) for ID3 timed
-	// metadata in your output. For more information, see ISO/IEC 23009-1:2022 section
-	// 5.10.3.3.4 Semantics. Leave blank to use the default value:
+	// Specify the event message box (eMSG) scheme ID URI (scheme_id_uri) for ID3
+	// timed metadata in your output. For more information, see ISO/IEC 23009-1:2022
+	// section 5.10.3.3.4 Semantics. Leave blank to use the default value:
 	// https://aomedia.org/emsg/ID3 When you specify a value for ID3 metadata scheme ID
 	// URI, you must also set ID3 metadata (timedMetadata) to Passthrough.
 	TimedMetadataSchemeIdUri *string
@@ -1871,35 +1879,32 @@ type ColorCorrector struct {
 	// outcome of manually regrading from HDR to SDR. When you specify an output color
 	// space, MediaConvert uses the following color space metadata, which includes
 	// color primaries, transfer characteristics, and matrix coefficients:
-	// - HDR 10:
-	// BT.2020, PQ, BT.2020 non-constant
-	// - HLG 2020: BT.2020, HLG, BT.2020
-	// non-constant
-	// - P3DCI (Theater): DCIP3, SMPTE 428M, BT.709
-	// - P3D65 (SDR): Display
-	// P3, sRGB, BT.709
-	// - P3D65 (HDR): Display P3, PQ, BT.709
+	//     - HDR 10: BT.2020, PQ, BT.2020 non-constant
+	//     - HLG 2020: BT.2020, HLG, BT.2020 non-constant
+	//     - P3DCI (Theater): DCIP3, SMPTE 428M, BT.709
+	//     - P3D65 (SDR): Display P3, sRGB, BT.709
+	//     - P3D65 (HDR): Display P3, PQ, BT.709
 	ColorSpaceConversion ColorSpaceConversion
 
 	// Contrast level.
 	Contrast int32
 
-	// Use these settings when you convert to the HDR 10 color space. Specify the SMPTE
-	// ST 2086 Mastering Display Color Volume static metadata that you want signaled in
-	// the output. These values don't affect the pixel values that are encoded in the
-	// video stream. They are intended to help the downstream video player display
-	// content in a way that reflects the intentions of the the content creator. When
-	// you set Color space conversion (ColorSpaceConversion) to HDR 10 (FORCE_HDR10),
-	// these settings are required. You must set values for Max frame average light
-	// level (maxFrameAverageLightLevel) and Max content light level
+	// Use these settings when you convert to the HDR 10 color space. Specify the
+	// SMPTE ST 2086 Mastering Display Color Volume static metadata that you want
+	// signaled in the output. These values don't affect the pixel values that are
+	// encoded in the video stream. They are intended to help the downstream video
+	// player display content in a way that reflects the intentions of the the content
+	// creator. When you set Color space conversion (ColorSpaceConversion) to HDR 10
+	// (FORCE_HDR10), these settings are required. You must set values for Max frame
+	// average light level (maxFrameAverageLightLevel) and Max content light level
 	// (maxContentLightLevel); these settings don't have a default value. The default
 	// values for the other HDR 10 metadata settings are defined by the P3D65 color
 	// space. For more information about MediaConvert HDR jobs, see
 	// https://docs.aws.amazon.com/console/mediaconvert/hdr.
 	Hdr10Metadata *Hdr10Metadata
 
-	// Specify how MediaConvert maps brightness and colors from your HDR input to your
-	// SDR output. The mode that you select represents a creative choice, with
+	// Specify how MediaConvert maps brightness and colors from your HDR input to
+	// your SDR output. The mode that you select represents a creative choice, with
 	// different tradeoffs in the details and tones of your output. To maintain details
 	// in bright or saturated areas of your output: Choose Preserve details. For some
 	// sources, your SDR output may look less bright and less saturated when compared
@@ -1953,23 +1958,23 @@ type ContainerSettings struct {
 	// CMAF outputs.
 	CmfcSettings *CmfcSettings
 
-	// Container for this output. Some containers require a container settings object.
-	// If not specified, the default object will be created.
+	// Container for this output. Some containers require a container settings
+	// object. If not specified, the default object will be created.
 	Container ContainerType
 
 	// Settings for F4v container
 	F4vSettings *F4vSettings
 
-	// MPEG-2 TS container settings. These apply to outputs in a File output group when
-	// the output's container (ContainerType) is MPEG-2 Transport Stream (M2TS). In
-	// these assets, data is organized by the program map table (PMT). Each transport
-	// stream program contains subsets of data, including audio, video, and metadata.
-	// Each of these subsets of data has a numerical label called a packet identifier
-	// (PID). Each transport stream program corresponds to one MediaConvert output. The
-	// PMT lists the types of data in a program along with their PID. Downstream
-	// systems and players use the program map table to look up the PID for each type
-	// of data it accesses and then uses the PIDs to locate specific data within the
-	// asset.
+	// MPEG-2 TS container settings. These apply to outputs in a File output group
+	// when the output's container (ContainerType) is MPEG-2 Transport Stream (M2TS).
+	// In these assets, data is organized by the program map table (PMT). Each
+	// transport stream program contains subsets of data, including audio, video, and
+	// metadata. Each of these subsets of data has a numerical label called a packet
+	// identifier (PID). Each transport stream program corresponds to one MediaConvert
+	// output. The PMT lists the types of data in a program along with their PID.
+	// Downstream systems and players use the program map table to look up the PID for
+	// each type of data it accesses and then uses the PIDs to locate specific data
+	// within the asset.
 	M2tsSettings *M2tsSettings
 
 	// These settings relate to the MPEG-2 transport stream (MPEG2-TS) container for
@@ -1994,9 +1999,9 @@ type ContainerSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Specify the details for each additional DASH manifest that you want the service
-// to generate for this output group. Each manifest can reference a different
-// subset of outputs in the group.
+// Specify the details for each additional DASH manifest that you want the
+// service to generate for this output group. Each manifest can reference a
+// different subset of outputs in the group.
 type DashAdditionalManifest struct {
 
 	// Specify a name modifier that the service adds to the name of this manifest to
@@ -2016,17 +2021,17 @@ type DashAdditionalManifest struct {
 // Specifies DRM settings for DASH outputs.
 type DashIsoEncryptionSettings struct {
 
-	// This setting can improve the compatibility of your output with video players on
-	// obsolete devices. It applies only to DASH H.264 outputs with DRM encryption.
+	// This setting can improve the compatibility of your output with video players
+	// on obsolete devices. It applies only to DASH H.264 outputs with DRM encryption.
 	// Choose Unencrypted SEI (UNENCRYPTED_SEI) only to correct problems with playback
 	// on older devices. Otherwise, keep the default setting CENC v1 (CENC_V1). If you
 	// choose Unencrypted SEI, for that output, the service will exclude the access
 	// unit delimiter and will leave the SEI NAL units unencrypted.
 	PlaybackDeviceCompatibility DashIsoPlaybackDeviceCompatibility
 
-	// If your output group type is HLS, DASH, or Microsoft Smooth, use these settings
-	// when doing DRM encryption with a SPEKE-compliant key provider. If your output
-	// group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
+	// If your output group type is HLS, DASH, or Microsoft Smooth, use these
+	// settings when doing DRM encryption with a SPEKE-compliant key provider. If your
+	// output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
 	SpekeKeyProvider *SpekeKeyProvider
 
 	noSmithyDocumentSerde
@@ -2039,21 +2044,22 @@ type DashIsoEncryptionSettings struct {
 // DASH_ISO_GROUP_SETTINGS.
 type DashIsoGroupSettings struct {
 
-	// By default, the service creates one .mpd DASH manifest for each DASH ISO output
-	// group in your job. This default manifest references every output in the output
-	// group. To create additional DASH manifests that reference a subset of the
+	// By default, the service creates one .mpd DASH manifest for each DASH ISO
+	// output group in your job. This default manifest references every output in the
+	// output group. To create additional DASH manifests that reference a subset of the
 	// outputs in the output group, specify a list of them here.
 	AdditionalManifests []DashAdditionalManifest
 
-	// Use this setting only when your audio codec is a Dolby one (AC3, EAC3, or Atmos)
-	// and your downstream workflow requires that your DASH manifest use the Dolby
-	// channel configuration tag, rather than the MPEG one. For example, you might need
-	// to use this to make dynamic ad insertion work. Specify which audio channel
-	// configuration scheme ID URI MediaConvert writes in your DASH manifest. Keep the
-	// default value, MPEG channel configuration (MPEG_CHANNEL_CONFIGURATION), to have
-	// MediaConvert write this: urn:mpeg:mpegB:cicp:ChannelConfiguration. Choose Dolby
-	// channel configuration (DOLBY_CHANNEL_CONFIGURATION) to have MediaConvert write
-	// this instead: tag:dolby.com,2014:dash:audio_channel_configuration:2011.
+	// Use this setting only when your audio codec is a Dolby one (AC3, EAC3, or
+	// Atmos) and your downstream workflow requires that your DASH manifest use the
+	// Dolby channel configuration tag, rather than the MPEG one. For example, you
+	// might need to use this to make dynamic ad insertion work. Specify which audio
+	// channel configuration scheme ID URI MediaConvert writes in your DASH manifest.
+	// Keep the default value, MPEG channel configuration (MPEG_CHANNEL_CONFIGURATION),
+	// to have MediaConvert write this: urn:mpeg:mpegB:cicp:ChannelConfiguration.
+	// Choose Dolby channel configuration (DOLBY_CHANNEL_CONFIGURATION) to have
+	// MediaConvert write this instead:
+	// tag:dolby.com,2014:dash:audio_channel_configuration:2011.
 	AudioChannelConfigSchemeIdUri DashIsoGroupAudioChannelConfigSchemeIdUri
 
 	// A partial URI prefix that will be put in the manifest (.mpd) file at the top
@@ -2061,8 +2067,8 @@ type DashIsoGroupSettings struct {
 	// than the manifest file.
 	BaseUrl *string
 
-	// Specify how MediaConvert writes SegmentTimeline in your output DASH manifest. To
-	// write a SegmentTimeline in each video Representation: Keep the default value,
+	// Specify how MediaConvert writes SegmentTimeline in your output DASH manifest.
+	// To write a SegmentTimeline in each video Representation: Keep the default value,
 	// Basic. To write a common SegmentTimeline in the video AdaptationSet: Choose
 	// Compact. Note that MediaConvert will still write a SegmentTimeline in any
 	// Representation that does not share a common timeline. To write a video
@@ -2084,12 +2090,12 @@ type DashIsoGroupSettings struct {
 	// DRM settings.
 	Encryption *DashIsoEncryptionSettings
 
-	// Length of fragments to generate (in seconds). Fragment length must be compatible
-	// with GOP size and Framerate. Note that fragments will end on the next keyframe
-	// after this number of seconds, so actual fragment length may be longer. When Emit
-	// Single File is checked, the fragmentation is internal to a single output file
-	// and it does not cause the creation of many output files as in other output
-	// types.
+	// Length of fragments to generate (in seconds). Fragment length must be
+	// compatible with GOP size and Framerate. Note that fragments will end on the next
+	// keyframe after this number of seconds, so actual fragment length may be longer.
+	// When Emit Single File is checked, the fragmentation is internal to a single
+	// output file and it does not cause the creation of many output files as in other
+	// output types.
 	FragmentLength int32
 
 	// Supports HbbTV specification as indicated
@@ -2126,12 +2132,12 @@ type DashIsoGroupSettings struct {
 	// is 3.5 seconds.
 	MinFinalSegmentLength float64
 
-	// Specify how the value for bandwidth is determined for each video Representation
-	// in your output MPD manifest. We recommend that you choose a MPD manifest
-	// bandwidth type that is compatible with your downstream player configuration.
-	// Max: Use the same value that you specify for Max bitrate in the video output, in
-	// bits per second. Average: Use the calculated average bitrate of the encoded
-	// video output, in bits per second.
+	// Specify how the value for bandwidth is determined for each video
+	// Representation in your output MPD manifest. We recommend that you choose a MPD
+	// manifest bandwidth type that is compatible with your downstream player
+	// configuration. Max: Use the same value that you specify for Max bitrate in the
+	// video output, in bits per second. Average: Use the calculated average bitrate of
+	// the encoded video output, in bits per second.
 	MpdManifestBandwidthType DashIsoMpdManifestBandwidthType
 
 	// Specify whether your DASH profile is on-demand or main. When you choose Main
@@ -2154,21 +2160,21 @@ type DashIsoGroupSettings struct {
 	// manifests start at zero regardless of your choice here.
 	PtsOffsetHandlingForBFrames DashIsoPtsOffsetHandlingForBFrames
 
-	// When set to SINGLE_FILE, a single output file is generated, which is internally
-	// segmented using the Fragment Length and Segment Length. When set to
+	// When set to SINGLE_FILE, a single output file is generated, which is
+	// internally segmented using the Fragment Length and Segment Length. When set to
 	// SEGMENTED_FILES, separate segment files will be created.
 	SegmentControl DashIsoSegmentControl
 
-	// Specify the length, in whole seconds, of each segment. When you don't specify a
-	// value, MediaConvert defaults to 30. Related settings: Use Segment length control
-	// (SegmentLengthControl) to specify whether the encoder enforces this value
-	// strictly. Use Segment control (DashIsoSegmentControl) to specify whether
+	// Specify the length, in whole seconds, of each segment. When you don't specify
+	// a value, MediaConvert defaults to 30. Related settings: Use Segment length
+	// control (SegmentLengthControl) to specify whether the encoder enforces this
+	// value strictly. Use Segment control (DashIsoSegmentControl) to specify whether
 	// MediaConvert creates separate segment files or one content file that has
 	// metadata to mark the segment boundaries.
 	SegmentLength int32
 
-	// Specify how you want MediaConvert to determine the segment length. Choose Exact
-	// (EXACT) to have the encoder use the exact length that you specify with the
+	// Specify how you want MediaConvert to determine the segment length. Choose
+	// Exact (EXACT) to have the encoder use the exact length that you specify with the
 	// setting Segment length (SegmentLength). This might result in extra I-frames.
 	// Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment
 	// lengths to match the next GOP boundary.
@@ -2216,15 +2222,16 @@ type DashIsoImageBasedTrickPlaySettings struct {
 	// MediaConvert uses a 150 frame interval to generate thumbnails.
 	ThumbnailInterval float64
 
-	// Width of each thumbnail within each tile image, in pixels. Default is 312. Must
-	// be divisible by 8.
+	// Width of each thumbnail within each tile image, in pixels. Default is 312.
+	// Must be divisible by 8.
 	ThumbnailWidth int32
 
 	// Number of thumbnails in each column of a tile image. Set a value between 2 and
 	// 2048. Must be divisible by 2.
 	TileHeight int32
 
-	// Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
+	// Number of thumbnails in each row of a tile image. Set a value between 1 and
+	// 512.
 	TileWidth int32
 
 	noSmithyDocumentSerde
@@ -2240,14 +2247,7 @@ type Deinterlacer struct {
 	// such as a scrolling headline at the bottom of the frame.
 	Algorithm DeinterlaceAlgorithm
 
-	// - When set to NORMAL (default), the deinterlacer does not convert frames that
-	// are tagged in metadata as progressive. It will only convert those that are
-	// tagged as some other type. - When set to FORCE_ALL_FRAMES, the deinterlacer
-	// converts every frame to progressive - even those that are already tagged as
-	// progressive. Turn Force mode on only if there is a good chance that the metadata
-	// has tagged frames as progressive when they are not progressive. Do not turn on
-	// otherwise; processing frames that are already progressive into progressive will
-	// probably result in lower quality video.
+	//     - When set to NORMAL (default), the deinterlacer does not convert frames that are tagged in metadata as progressive. It will only convert those that are tagged as some other type. - When set to FORCE_ALL_FRAMES, the deinterlacer converts every frame to progressive - even those that are already tagged as progressive. Turn Force mode on only if there is a good chance that the metadata has tagged frames as progressive when they are not progressive. Do not turn on otherwise; processing frames that are already progressive into progressive will probably result in lower quality video.
 	Control DeinterlacerControl
 
 	// Use Deinterlacer (DeinterlaceMode) to choose how the service will do
@@ -2272,21 +2272,21 @@ type DestinationSettings struct {
 // Create Dolby Vision Profile 5 or Profile 8.1 compatible video output.
 type DolbyVision struct {
 
-	// Use these settings when you set DolbyVisionLevel6Mode to SPECIFY to override the
-	// MaxCLL and MaxFALL values in your input with new values.
+	// Use these settings when you set DolbyVisionLevel6Mode to SPECIFY to override
+	// the MaxCLL and MaxFALL values in your input with new values.
 	L6Metadata *DolbyVisionLevel6Metadata
 
-	// Use Dolby Vision Mode to choose how the service will handle Dolby Vision MaxCLL
-	// and MaxFALL properies.
+	// Use Dolby Vision Mode to choose how the service will handle Dolby Vision
+	// MaxCLL and MaxFALL properies.
 	L6Mode DolbyVisionLevel6Mode
 
-	// Required when you set Dolby Vision Profile to Profile 8.1. When you set Content
-	// mapping to None, content mapping is not applied to the HDR10-compatible signal.
-	// Depending on the source peak nit level, clipping might occur on HDR devices
-	// without Dolby Vision. When you set Content mapping to HDR10 1000, the transcoder
-	// creates a 1,000 nits peak HDR10-compatible signal by applying static content
-	// mapping to the source. This mode is speed-optimized for PQ10 sources with
-	// metadata that is created from analysis. For graded Dolby Vision content, be
+	// Required when you set Dolby Vision Profile to Profile 8.1. When you set
+	// Content mapping to None, content mapping is not applied to the HDR10-compatible
+	// signal. Depending on the source peak nit level, clipping might occur on HDR
+	// devices without Dolby Vision. When you set Content mapping to HDR10 1000, the
+	// transcoder creates a 1,000 nits peak HDR10-compatible signal by applying static
+	// content mapping to the source. This mode is speed-optimized for PQ10 sources
+	// with metadata that is created from analysis. For graded Dolby Vision content, be
 	// aware that creative intent might not be guaranteed with extreme 1,000 nits
 	// trims.
 	Mapping DolbyVisionMapping
@@ -2301,8 +2301,8 @@ type DolbyVision struct {
 	noSmithyDocumentSerde
 }
 
-// Use these settings when you set DolbyVisionLevel6Mode to SPECIFY to override the
-// MaxCLL and MaxFALL values in your input with new values.
+// Use these settings when you set DolbyVisionLevel6Mode to SPECIFY to override
+// the MaxCLL and MaxFALL values in your input with new values.
 type DolbyVisionLevel6Metadata struct {
 
 	// Maximum Content Light Level. Static HDR metadata that corresponds to the
@@ -2365,8 +2365,8 @@ type DvbSdtSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Settings related to DVB-Sub captions. Set up DVB-Sub captions in the same output
-// as your video. For more information, see
+// Settings related to DVB-Sub captions. Set up DVB-Sub captions in the same
+// output as your video. For more information, see
 // https://docs.aws.amazon.com/mediaconvert/latest/ug/dvb-sub-output-captions.html.
 // When you work directly in your JSON job specification, include this object and
 // any required children when you set destinationType to DVB_SUB.
@@ -2438,9 +2438,9 @@ type DvbSubDestinationSettings struct {
 	// and DVB-Sub font settings must match.
 	DdsYCoordinate int32
 
-	// Specify the font that you want the service to use for your burn in captions when
-	// your input captions specify a font that MediaConvert doesn't support. When you
-	// set Fallback font (FallbackFont) to best match (BEST_MATCH), or leave blank,
+	// Specify the font that you want the service to use for your burn in captions
+	// when your input captions specify a font that MediaConvert doesn't support. When
+	// you set Fallback font (FallbackFont) to best match (BEST_MATCH), or leave blank,
 	// MediaConvert uses a supported font that most closely matches the font that your
 	// input captions specify. When there are multiple unsupported fonts in your input
 	// captions, MediaConvert matches each font with the supported font that matches
@@ -2454,12 +2454,13 @@ type DvbSubDestinationSettings struct {
 	// DVB-Sub settings must be identical.
 	FontColor DvbSubtitleFontColor
 
-	// Specify the opacity of the burned-in captions. 255 is opaque; 0 is transparent.
-	// Within your job settings, all of your DVB-Sub settings must be identical.
+	// Specify the opacity of the burned-in captions. 255 is opaque; 0 is
+	// transparent. Within your job settings, all of your DVB-Sub settings must be
+	// identical.
 	FontOpacity int32
 
-	// Specify the Font resolution (FontResolution) in DPI (dots per inch). Within your
-	// job settings, all of your DVB-Sub settings must be identical.
+	// Specify the Font resolution (FontResolution) in DPI (dots per inch). Within
+	// your job settings, all of your DVB-Sub settings must be identical.
 	FontResolution int32
 
 	// Set Font script (FontScript) to Automatically determined (AUTOMATIC), or leave
@@ -2513,32 +2514,33 @@ type DvbSubDestinationSettings struct {
 	// settings must be identical.
 	ShadowOpacity int32
 
-	// Specify the horizontal offset of the shadow, relative to the captions in pixels.
-	// A value of -2 would result in a shadow offset 2 pixels to the left. Within your
-	// job settings, all of your DVB-Sub settings must be identical.
+	// Specify the horizontal offset of the shadow, relative to the captions in
+	// pixels. A value of -2 would result in a shadow offset 2 pixels to the left.
+	// Within your job settings, all of your DVB-Sub settings must be identical.
 	ShadowXOffset int32
 
-	// Specify the vertical offset of the shadow relative to the captions in pixels. A
-	// value of -2 would result in a shadow offset 2 pixels above the text. Leave
+	// Specify the vertical offset of the shadow relative to the captions in pixels.
+	// A value of -2 would result in a shadow offset 2 pixels above the text. Leave
 	// Shadow y-offset (ShadowYOffset) blank and set Style passthrough
 	// (StylePassthrough) to enabled to use the shadow y-offset data from your input
 	// captions, if present. Within your job settings, all of your DVB-Sub settings
 	// must be identical.
 	ShadowYOffset int32
 
-	// Set Style passthrough (StylePassthrough) to ENABLED to use the available style,
-	// color, and position information from your input captions. MediaConvert uses
-	// default settings for any missing style and position information in your input
-	// captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style
-	// and position information from your input captions and use default settings:
-	// white text with black outlining, bottom-center positioning, and automatic
-	// sizing. Whether you set Style passthrough to enabled or not, you can also choose
-	// to manually override any of the individual style and position settings.
+	// Set Style passthrough (StylePassthrough) to ENABLED to use the available
+	// style, color, and position information from your input captions. MediaConvert
+	// uses default settings for any missing style and position information in your
+	// input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the
+	// style and position information from your input captions and use default
+	// settings: white text with black outlining, bottom-center positioning, and
+	// automatic sizing. Whether you set Style passthrough to enabled or not, you can
+	// also choose to manually override any of the individual style and position
+	// settings.
 	StylePassthrough DvbSubtitleStylePassthrough
 
-	// Specify whether your DVB subtitles are standard or for hearing impaired. Choose
-	// hearing impaired if your subtitles include audio descriptions and dialogue.
-	// Choose standard if your subtitles include only dialogue.
+	// Specify whether your DVB subtitles are standard or for hearing impaired.
+	// Choose hearing impaired if your subtitles include audio descriptions and
+	// dialogue. Choose standard if your subtitles include only dialogue.
 	SubtitlingType DvbSubtitlingType
 
 	// Specify whether the Text spacing (TeletextSpacing) in your captions is set by
@@ -2549,9 +2551,9 @@ type DvbSubDestinationSettings struct {
 	// be identical.
 	TeletextSpacing DvbSubtitleTeletextSpacing
 
-	// Specify the width, in pixels, of this set of DVB-Sub captions. The default value
-	// is 720 pixels. Related setting: When you use this setting, you must set DDS
-	// handling (ddsHandling) to a value other than None (NONE). All burn-in and
+	// Specify the width, in pixels, of this set of DVB-Sub captions. The default
+	// value is 720 pixels. Related setting: When you use this setting, you must set
+	// DDS handling (ddsHandling) to a value other than None (NONE). All burn-in and
 	// DVB-Sub font settings must match.
 	Width int32
 
@@ -2631,11 +2633,11 @@ type Eac3AtmosSettings struct {
 	// MediaConvert uses default values for those settings.
 	DownmixControl Eac3AtmosDownmixControl
 
-	// Choose the Dolby dynamic range control (DRC) profile that MediaConvert uses when
-	// encoding the metadata in the Dolby stream for the line operating mode. Default
-	// value: Film light (ATMOS_STORAGE_DDP_COMPR_FILM_LIGHT) Related setting: To have
-	// MediaConvert use the value you specify here, keep the default value, Custom
-	// (SPECIFIED) for the setting Dynamic range control (DynamicRangeControl).
+	// Choose the Dolby dynamic range control (DRC) profile that MediaConvert uses
+	// when encoding the metadata in the Dolby stream for the line operating mode.
+	// Default value: Film light (ATMOS_STORAGE_DDP_COMPR_FILM_LIGHT) Related setting:
+	// To have MediaConvert use the value you specify here, keep the default value,
+	// Custom (SPECIFIED) for the setting Dynamic range control (DynamicRangeControl).
 	// Otherwise, MediaConvert ignores Dynamic range compression line
 	// (DynamicRangeCompressionLine). For information about the Dolby DRC operating
 	// modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata
@@ -2643,11 +2645,11 @@ type Eac3AtmosSettings struct {
 	// https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.
 	DynamicRangeCompressionLine Eac3AtmosDynamicRangeCompressionLine
 
-	// Choose the Dolby dynamic range control (DRC) profile that MediaConvert uses when
-	// encoding the metadata in the Dolby stream for the RF operating mode. Default
-	// value: Film light (ATMOS_STORAGE_DDP_COMPR_FILM_LIGHT) Related setting: To have
-	// MediaConvert use the value you specify here, keep the default value, Custom
-	// (SPECIFIED) for the setting Dynamic range control (DynamicRangeControl).
+	// Choose the Dolby dynamic range control (DRC) profile that MediaConvert uses
+	// when encoding the metadata in the Dolby stream for the RF operating mode.
+	// Default value: Film light (ATMOS_STORAGE_DDP_COMPR_FILM_LIGHT) Related setting:
+	// To have MediaConvert use the value you specify here, keep the default value,
+	// Custom (SPECIFIED) for the setting Dynamic range control (DynamicRangeControl).
 	// Otherwise, MediaConvert ignores Dynamic range compression RF
 	// (DynamicRangeCompressionRf). For information about the Dolby DRC operating modes
 	// and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide
@@ -2655,9 +2657,9 @@ type Eac3AtmosSettings struct {
 	// https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.
 	DynamicRangeCompressionRf Eac3AtmosDynamicRangeCompressionRf
 
-	// Specify whether MediaConvert should use any dynamic range control metadata from
-	// your input file. Keep the default value, Custom (SPECIFIED), to provide dynamic
-	// range control values in your job settings. Choose Follow source
+	// Specify whether MediaConvert should use any dynamic range control metadata
+	// from your input file. Keep the default value, Custom (SPECIFIED), to provide
+	// dynamic range control values in your job settings. Choose Follow source
 	// (INITIALIZE_FROM_SOURCE) to use the metadata from your input. Related
 	// settings--Use these settings to specify your dynamic range control values:
 	// Dynamic range compression line (DynamicRangeCompressionLine) and Dynamic range
@@ -2717,9 +2719,9 @@ type Eac3AtmosSettings struct {
 	// This value is always 48000. It represents the sample rate in Hz.
 	SampleRate int32
 
-	// Specify the percentage of audio content, from 0% to 100%, that must be speech in
-	// order for the encoder to use the measured speech loudness as the overall program
-	// loudness. Default value: 15%
+	// Specify the percentage of audio content, from 0% to 100%, that must be speech
+	// in order for the encoder to use the measured speech loudness as the overall
+	// program loudness. Default value: 15%
 	SpeechThreshold int32
 
 	// Choose how the service does stereo downmixing. Default value: Not indicated
@@ -2729,8 +2731,8 @@ type Eac3AtmosSettings struct {
 	// (StereoDownmix).
 	StereoDownmix Eac3AtmosStereoDownmix
 
-	// Specify whether your input audio has an additional center rear surround channel
-	// matrix encoded into your left and right surround channels.
+	// Specify whether your input audio has an additional center rear surround
+	// channel matrix encoded into your left and right surround channels.
 	SurroundExMode Eac3AtmosSurroundExMode
 
 	noSmithyDocumentSerde
@@ -2790,8 +2792,8 @@ type Eac3Settings struct {
 	// When encoding 3/2 audio, controls whether the LFE channel is enabled
 	LfeControl Eac3LfeControl
 
-	// Applies a 120Hz lowpass filter to the LFE channel prior to encoding. Only valid
-	// with 3_2_LFE coding mode.
+	// Applies a 120Hz lowpass filter to the LFE channel prior to encoding. Only
+	// valid with 3_2_LFE coding mode.
 	LfeFilter Eac3LfeFilter
 
 	// Specify a value for the following Dolby Digital Plus setting: Left only/Right
@@ -2834,9 +2836,9 @@ type Eac3Settings struct {
 	// the service ignores Left total/Right total surround (ltRtSurroundMixLevel).
 	LtRtSurroundMixLevel float64
 
-	// When set to FOLLOW_INPUT, encoder metadata will be sourced from the DD, DD+, or
-	// DolbyE decoder that supplied this audio data. If audio was not supplied from one
-	// of these streams, then the static metadata settings will be used.
+	// When set to FOLLOW_INPUT, encoder metadata will be sourced from the DD, DD+,
+	// or DolbyE decoder that supplied this audio data. If audio was not supplied from
+	// one of these streams, then the static metadata settings will be used.
 	MetadataControl Eac3MetadataControl
 
 	// When set to WHEN_POSSIBLE, input DD+ audio will be passed through if it is
@@ -2852,8 +2854,8 @@ type Eac3Settings struct {
 	// This value is always 48000. It represents the sample rate in Hz.
 	SampleRate int32
 
-	// Choose how the service does stereo downmixing. This setting only applies if you
-	// keep the default value of 3/2 - L, R, C, Ls, Rs (CODING_MODE_3_2) for the
+	// Choose how the service does stereo downmixing. This setting only applies if
+	// you keep the default value of 3/2 - L, R, C, Ls, Rs (CODING_MODE_3_2) for the
 	// setting Coding mode (Eac3CodingMode). If you choose a different value for Coding
 	// mode, the service ignores Stereo downmix (Eac3StereoDownmix).
 	StereoDownmix Eac3StereoDownmix
@@ -2862,8 +2864,8 @@ type Eac3Settings struct {
 	// matrix encoded into the left and right surround channels.
 	SurroundExMode Eac3SurroundExMode
 
-	// When encoding 2/0 audio, sets whether Dolby Surround is matrix encoded into the
-	// two channels.
+	// When encoding 2/0 audio, sets whether Dolby Surround is matrix encoded into
+	// the two channels.
 	SurroundMode Eac3SurroundMode
 
 	noSmithyDocumentSerde
@@ -2885,13 +2887,13 @@ type EmbeddedDestinationSettings struct {
 	// https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.
 	Destination608ChannelNumber int32
 
-	// Ignore this setting unless your input captions are SCC format and you want both
-	// 608 and 708 captions embedded in your output stream. Optionally, specify the 708
-	// service number for each output captions channel. Choose a different number for
-	// each channel. To use this setting, also set Force 608 to 708 upconvert
-	// (Convert608To708) to Upconvert (UPCONVERT) in your input captions selector
-	// settings. If you choose to upconvert but don't specify a 708 service number,
-	// MediaConvert uses the number that you specify for CC channel number
+	// Ignore this setting unless your input captions are SCC format and you want
+	// both 608 and 708 captions embedded in your output stream. Optionally, specify
+	// the 708 service number for each output captions channel. Choose a different
+	// number for each channel. To use this setting, also set Force 608 to 708
+	// upconvert (Convert608To708) to Upconvert (UPCONVERT) in your input captions
+	// selector settings. If you choose to upconvert but don't specify a 708 service
+	// number, MediaConvert uses the number that you specify for CC channel number
 	// (destination608ChannelNumber) for the 708 service number. For more information,
 	// see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.
 	Destination708ServiceNumber int32
@@ -2917,9 +2919,9 @@ type EmbeddedSourceSettings struct {
 	// supports one input video track, so this should always be set to '1'.
 	Source608TrackNumber int32
 
-	// By default, the service terminates any unterminated captions at the end of each
-	// input. If you want the caption to continue onto your next input, disable this
-	// setting.
+	// By default, the service terminates any unterminated captions at the end of
+	// each input. If you want the caption to continue onto your next input, disable
+	// this setting.
 	TerminateCaptions EmbeddedTerminateCaptions
 
 	noSmithyDocumentSerde
@@ -2937,17 +2939,17 @@ type Endpoint struct {
 // ESAM ManifestConfirmConditionNotification defined by OC-SP-ESAM-API-I03-131025.
 type EsamManifestConfirmConditionNotification struct {
 
-	// Provide your ESAM ManifestConfirmConditionNotification XML document inside your
-	// JSON job settings. Form the XML document as per OC-SP-ESAM-API-I03-131025. The
-	// transcoder will use the Manifest Conditioning instructions in the message that
-	// you supply.
+	// Provide your ESAM ManifestConfirmConditionNotification XML document inside
+	// your JSON job settings. Form the XML document as per OC-SP-ESAM-API-I03-131025.
+	// The transcoder will use the Manifest Conditioning instructions in the message
+	// that you supply.
 	MccXml *string
 
 	noSmithyDocumentSerde
 }
 
-// Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion,
-// you can ignore these settings.
+// Settings for Event Signaling And Messaging (ESAM). If you don't do ad
+// insertion, you can ignore these settings.
 type EsamSettings struct {
 
 	// Specifies an ESAM ManifestConfirmConditionNotification XML as per
@@ -2972,29 +2974,29 @@ type EsamSettings struct {
 // ESAM SignalProcessingNotification data defined by OC-SP-ESAM-API-I03-131025.
 type EsamSignalProcessingNotification struct {
 
-	// Provide your ESAM SignalProcessingNotification XML document inside your JSON job
-	// settings. Form the XML document as per OC-SP-ESAM-API-I03-131025. The transcoder
-	// will use the signal processing instructions in the message that you supply.
-	// Provide your ESAM SignalProcessingNotification XML document inside your JSON job
-	// settings. For your MPEG2-TS file outputs, if you want the service to place
-	// SCTE-35 markers at the insertion points you specify in the XML document, you
-	// must also enable SCTE-35 ESAM (scte35Esam). Note that you can either specify an
-	// ESAM XML document or enable SCTE-35 passthrough. You can't do both.
+	// Provide your ESAM SignalProcessingNotification XML document inside your JSON
+	// job settings. Form the XML document as per OC-SP-ESAM-API-I03-131025. The
+	// transcoder will use the signal processing instructions in the message that you
+	// supply. Provide your ESAM SignalProcessingNotification XML document inside your
+	// JSON job settings. For your MPEG2-TS file outputs, if you want the service to
+	// place SCTE-35 markers at the insertion points you specify in the XML document,
+	// you must also enable SCTE-35 ESAM (scte35Esam). Note that you can either specify
+	// an ESAM XML document or enable SCTE-35 passthrough. You can't do both.
 	SccXml *string
 
 	noSmithyDocumentSerde
 }
 
-// If your source content has EIA-608 Line 21 Data Services, enable this feature to
-// specify what MediaConvert does with the Extended Data Services (XDS) packets.
+// If your source content has EIA-608 Line 21 Data Services, enable this feature
+// to specify what MediaConvert does with the Extended Data Services (XDS) packets.
 // You can choose to pass through XDS packets, or remove them from the output. For
 // more information about XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h
 // Content Advisory.
 type ExtendedDataServices struct {
 
-	// The action to take on copy and redistribution control XDS packets. If you select
-	// PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will
-	// be removed in output captions.
+	// The action to take on copy and redistribution control XDS packets. If you
+	// select PASSTHROUGH, packets will not be changed. If you select STRIP, any
+	// packets will be removed in output captions.
 	CopyProtectionAction CopyProtectionAction
 
 	// The action to take on content advisory XDS packets. If you select PASSTHROUGH,
@@ -3063,8 +3065,8 @@ type FileSourceSettings struct {
 	// 'scc', 'ttml', 'dfxp', 'stl', 'srt', 'xml', 'smi', 'webvtt', and 'vtt'.
 	SourceFile *string
 
-	// Optional. Use this setting when you need to adjust the sync between your sidecar
-	// captions and your video. For more information, see
+	// Optional. Use this setting when you need to adjust the sync between your
+	// sidecar captions and your video. For more information, see
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/time-delta-use-cases.html.
 	// Enter a positive or negative number to modify the times in the captions file.
 	// For example, type 15 to add 15 seconds to all the times in the captions file.
@@ -3078,21 +3080,21 @@ type FileSourceSettings struct {
 	// 1010ms for time delta, MediaConvert delays your captions by 1000 ms.
 	TimeDelta int32
 
-	// When you use the setting Time delta (TimeDelta) to adjust the sync between your
-	// sidecar captions and your video, use this setting to specify the units for the
-	// delta that you specify. When you don't specify a value for Time delta units
+	// When you use the setting Time delta (TimeDelta) to adjust the sync between
+	// your sidecar captions and your video, use this setting to specify the units for
+	// the delta that you specify. When you don't specify a value for Time delta units
 	// (TimeDeltaUnits), MediaConvert uses seconds by default.
 	TimeDeltaUnits FileSourceTimeDeltaUnits
 
 	noSmithyDocumentSerde
 }
 
-// Use Force include renditions to specify one or more resolutions to include your
-// ABR stack. * (Recommended) To optimize automated ABR, specify as few resolutions
-// as possible. * (Required) The number of resolutions that you specify must be
-// equal to, or less than, the Max renditions setting. * If you specify a Min top
-// rendition size rule, specify at least one resolution that is equal to, or
-// greater than, Min top rendition size. * If you specify a Min bottom rendition
+// Use Force include renditions to specify one or more resolutions to include
+// your ABR stack. * (Recommended) To optimize automated ABR, specify as few
+// resolutions as possible. * (Required) The number of resolutions that you specify
+// must be equal to, or less than, the Max renditions setting. * If you specify a
+// Min top rendition size rule, specify at least one resolution that is equal to,
+// or greater than, Min top rendition size. * If you specify a Min bottom rendition
 // size rule, only specify resolutions that are equal to, or greater than, Min
 // bottom rendition size. * If you specify a Force include renditions rule, do not
 // specify a separate rule for Allowed renditions. * Note: The ABR stack may
@@ -3137,21 +3139,22 @@ type FrameCaptureSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Settings for quality-defined variable bitrate encoding with the H.264 codec. Use
-// these settings only when you set QVBR for Rate control mode (RateControlMode).
+// Settings for quality-defined variable bitrate encoding with the H.264 codec.
+// Use these settings only when you set QVBR for Rate control mode
+// (RateControlMode).
 type H264QvbrSettings struct {
 
-	// Use this setting only when Rate control mode is QVBR and Quality tuning level is
-	// Multi-pass HQ. For Max average bitrate values suited to the complexity of your
-	// input video, the service limits the average bitrate of the video part of this
-	// output to the value that you choose. That is, the total size of the video
+	// Use this setting only when Rate control mode is QVBR and Quality tuning level
+	// is Multi-pass HQ. For Max average bitrate values suited to the complexity of
+	// your input video, the service limits the average bitrate of the video part of
+	// this output to the value that you choose. That is, the total size of the video
 	// element is less than or equal to the value you set multiplied by the number of
 	// seconds of encoded output.
 	MaxAverageBitrate int32
 
-	// Use this setting only when you set Rate control mode (RateControlMode) to QVBR.
-	// Specify the target quality level for this output. MediaConvert determines the
-	// right number of bits to use for each part of the video to maintain the video
+	// Use this setting only when you set Rate control mode (RateControlMode) to
+	// QVBR. Specify the target quality level for this output. MediaConvert determines
+	// the right number of bits to use for each part of the video to maintain the video
 	// quality that you specify. When you keep the default value, AUTO, MediaConvert
 	// picks a quality level for you, based on characteristics of your input video. If
 	// you prefer to specify a quality level, specify a number from 1 through 10. Use
@@ -3200,8 +3203,8 @@ type H264Settings struct {
 	// reducer preprocessor.
 	BandwidthReductionFilter *BandwidthReductionFilter
 
-	// Specify the average bitrate in bits per second. Required for VBR and CBR. For MS
-	// Smooth outputs, bitrates must be unique when rounded down to the nearest
+	// Specify the average bitrate in bits per second. Required for VBR and CBR. For
+	// MS Smooth outputs, bitrates must be unique when rounded down to the nearest
 	// multiple of 1000.
 	Bitrate int32
 
@@ -3209,8 +3212,8 @@ type H264Settings struct {
 	// you aren't sure what level to specify, choose Auto (AUTO).
 	CodecLevel H264CodecLevel
 
-	// H.264 Profile. High 4:2:2 and 10-bit profiles are only available with the AVC-I
-	// License.
+	// H.264 Profile. High 4:2:2 and 10-bit profiles are only available with the
+	// AVC-I License.
 	CodecProfile H264CodecProfile
 
 	// Choose Adaptive to improve subjective video quality for high-motion content.
@@ -3271,20 +3274,20 @@ type H264Settings struct {
 	// transcoding time and incurs a significant add-on cost.
 	FramerateConversionAlgorithm H264FramerateConversionAlgorithm
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateDenominator to specify the denominator of this fraction. In this
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateDenominator to specify the denominator of this fraction. In this
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Framerate. In this example, specify 23.976.
 	FramerateDenominator int32
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateNumerator to specify the numerator of this fraction. In this example,
-	// use 24000 for the value of FramerateNumerator. When you use the console for
-	// transcode jobs that use frame rate conversion, provide the value as a decimal
-	// number for Framerate. In this example, specify 23.976.
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateNumerator to specify the numerator of this fraction. In this
+	// example, use 24000 for the value of FramerateNumerator. When you use the console
+	// for transcode jobs that use frame rate conversion, provide the value as a
+	// decimal number for Framerate. In this example, specify 23.976.
 	FramerateNumerator int32
 
 	// If enable, use reference B frames for GOP structures that have B frames > 1.
@@ -3300,14 +3303,15 @@ type H264Settings struct {
 	// this value to 0.
 	GopClosedCadence int32
 
-	// Use this setting only when you set GOP mode control (GopSizeUnits) to Specified,
-	// frames (FRAMES) or Specified, seconds (SECONDS). Specify the GOP length using a
-	// whole number of frames or a decimal value of seconds. MediaConvert will
-	// interpret this value as frames or seconds depending on the value you choose for
-	// GOP mode control (GopSizeUnits). If you want to allow MediaConvert to
-	// automatically determine GOP size, leave GOP size blank and set GOP mode control
-	// to Auto (AUTO). If your output group specifies HLS, DASH, or CMAF, leave GOP
-	// size blank and set GOP mode control to Auto in each output in your output group.
+	// Use this setting only when you set GOP mode control (GopSizeUnits) to
+	// Specified, frames (FRAMES) or Specified, seconds (SECONDS). Specify the GOP
+	// length using a whole number of frames or a decimal value of seconds.
+	// MediaConvert will interpret this value as frames or seconds depending on the
+	// value you choose for GOP mode control (GopSizeUnits). If you want to allow
+	// MediaConvert to automatically determine GOP size, leave GOP size blank and set
+	// GOP mode control to Auto (AUTO). If your output group specifies HLS, DASH, or
+	// CMAF, leave GOP size blank and set GOP mode control to Auto in each output in
+	// your output group.
 	GopSize float64
 
 	// Specify how the transcoder determines GOP size for this output. We recommend
@@ -3322,10 +3326,10 @@ type H264Settings struct {
 	// setting GOP size (GopSize).
 	GopSizeUnits H264GopSizeUnits
 
-	// If your downstream systems have strict buffer requirements: Specify the minimum
-	// percentage of the HRD buffer that's available at the end of each encoded video
-	// segment. For the best video quality: Set to 0 or leave blank to automatically
-	// determine the final buffer fill percentage.
+	// If your downstream systems have strict buffer requirements: Specify the
+	// minimum percentage of the HRD buffer that's available at the end of each encoded
+	// video segment. For the best video quality: Set to 0 or leave blank to
+	// automatically determine the final buffer fill percentage.
 	HrdBufferFinalFillPercentage int32
 
 	// Percentage of the buffer that should initially be filled (HRD buffer model).
@@ -3371,13 +3375,13 @@ type H264Settings struct {
 	// change are smaller than the usual cadence GOPs.
 	MinIInterval int32
 
-	// This setting to determines the number of B-frames that MediaConvert puts between
-	// reference frames in this output. We recommend that you use automatic behavior to
-	// allow the transcoder to choose the best value based on characteristics of your
-	// input video. In the console, choose AUTO to select this automatic behavior. When
-	// you manually edit your JSON job specification, leave this setting out to choose
-	// automatic behavior. When you want to specify this number explicitly, choose a
-	// whole number from 0 through 7.
+	// This setting to determines the number of B-frames that MediaConvert puts
+	// between reference frames in this output. We recommend that you use automatic
+	// behavior to allow the transcoder to choose the best value based on
+	// characteristics of your input video. In the console, choose AUTO to select this
+	// automatic behavior. When you manually edit your JSON job specification, leave
+	// this setting out to choose automatic behavior. When you want to specify this
+	// number explicitly, choose a whole number from 0 through 7.
 	NumberBFramesBetweenReferenceFrames int32
 
 	// Number of reference frames to use. The encoder may use more than requested if
@@ -3414,8 +3418,9 @@ type H264Settings struct {
 	// faster, lower quality, single-pass encoding.
 	QualityTuningLevel H264QualityTuningLevel
 
-	// Settings for quality-defined variable bitrate encoding with the H.265 codec. Use
-	// these settings only when you set QVBR for Rate control mode (RateControlMode).
+	// Settings for quality-defined variable bitrate encoding with the H.265 codec.
+	// Use these settings only when you set QVBR for Rate control mode
+	// (RateControlMode).
 	QvbrSettings *H264QvbrSettings
 
 	// Use this setting to specify whether this output has a variable bitrate (VBR),
@@ -3425,8 +3430,8 @@ type H264Settings struct {
 	// Places a PPS header on each encoded picture, even if repeated.
 	RepeatPps H264RepeatPps
 
-	// Use this setting for interlaced outputs, when your output frame rate is half of
-	// your input frame rate. In this situation, choose Optimized interlacing
+	// Use this setting for interlaced outputs, when your output frame rate is half
+	// of your input frame rate. In this situation, choose Optimized interlacing
 	// (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this
 	// case, each progressive frame from the input corresponds to an interlaced field
 	// in the output. Keep the default value, Basic interlacing (INTERLACED), for all
@@ -3461,10 +3466,10 @@ type H264Settings struct {
 	// (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.
 	SlowPal H264SlowPal
 
-	// Ignore this setting unless you need to comply with a specification that requires
-	// a specific value. If you don't have a specification requirement, we recommend
-	// that you adjust the softness of your output by using a lower value for the
-	// setting Sharpness (sharpness) or by enabling a noise reducer filter
+	// Ignore this setting unless you need to comply with a specification that
+	// requires a specific value. If you don't have a specification requirement, we
+	// recommend that you adjust the softness of your output by using a lower value for
+	// the setting Sharpness (sharpness) or by enabling a noise reducer filter
 	// (noiseReducerFilter). The Softness (softness) setting specifies the quantization
 	// matrices that the encoder uses. Keep the default value, 0, for flat
 	// quantization. Choose the value 1 or 16 to use the default JVT softening
@@ -3541,21 +3546,22 @@ type H264Settings struct {
 	noSmithyDocumentSerde
 }
 
-// Settings for quality-defined variable bitrate encoding with the H.265 codec. Use
-// these settings only when you set QVBR for Rate control mode (RateControlMode).
+// Settings for quality-defined variable bitrate encoding with the H.265 codec.
+// Use these settings only when you set QVBR for Rate control mode
+// (RateControlMode).
 type H265QvbrSettings struct {
 
-	// Use this setting only when Rate control mode is QVBR and Quality tuning level is
-	// Multi-pass HQ. For Max average bitrate values suited to the complexity of your
-	// input video, the service limits the average bitrate of the video part of this
-	// output to the value that you choose. That is, the total size of the video
+	// Use this setting only when Rate control mode is QVBR and Quality tuning level
+	// is Multi-pass HQ. For Max average bitrate values suited to the complexity of
+	// your input video, the service limits the average bitrate of the video part of
+	// this output to the value that you choose. That is, the total size of the video
 	// element is less than or equal to the value you set multiplied by the number of
 	// seconds of encoded output.
 	MaxAverageBitrate int32
 
-	// Use this setting only when you set Rate control mode (RateControlMode) to QVBR.
-	// Specify the target quality level for this output. MediaConvert determines the
-	// right number of bits to use for each part of the video to maintain the video
+	// Use this setting only when you set Rate control mode (RateControlMode) to
+	// QVBR. Specify the target quality level for this output. MediaConvert determines
+	// the right number of bits to use for each part of the video to maintain the video
 	// quality that you specify. When you keep the default value, AUTO, MediaConvert
 	// picks a quality level for you, based on characteristics of your input video. If
 	// you prefer to specify a quality level, specify a number from 1 through 10. Use
@@ -3581,8 +3587,8 @@ type H265QvbrSettings struct {
 // Settings for H265 codec
 type H265Settings struct {
 
-	// When you set Adaptive Quantization (H265AdaptiveQuantization) to Auto (AUTO), or
-	// leave blank, MediaConvert automatically applies quantization to improve the
+	// When you set Adaptive Quantization (H265AdaptiveQuantization) to Auto (AUTO),
+	// or leave blank, MediaConvert automatically applies quantization to improve the
 	// video quality of your output. Set Adaptive Quantization to Low (LOW), Medium
 	// (MEDIUM), High (HIGH), Higher (HIGHER), or Max (MAX) to manually control the
 	// strength of the quantization filter. When you do, you can specify a value for
@@ -3597,17 +3603,18 @@ type H265Settings struct {
 	// Gamma (HLG) Electro-Optical Transfer Function (EOTF).
 	AlternateTransferFunctionSei H265AlternateTransferFunctionSei
 
-	// Specify the average bitrate in bits per second. Required for VBR and CBR. For MS
-	// Smooth outputs, bitrates must be unique when rounded down to the nearest
+	// Specify the average bitrate in bits per second. Required for VBR and CBR. For
+	// MS Smooth outputs, bitrates must be unique when rounded down to the nearest
 	// multiple of 1000.
 	Bitrate int32
 
 	// H.265 Level.
 	CodecLevel H265CodecLevel
 
-	// Represents the Profile and Tier, per the HEVC (H.265) specification. Selections
-	// are grouped as [Profile] / [Tier], so "Main/High" represents Main Profile with
-	// High Tier. 4:2:2 profiles are only available with the HEVC 4:2:2 License.
+	// Represents the Profile and Tier, per the HEVC (H.265) specification.
+	// Selections are grouped as [Profile] / [Tier], so "Main/High" represents Main
+	// Profile with High Tier. 4:2:2 profiles are only available with the HEVC 4:2:2
+	// License.
 	CodecProfile H265CodecProfile
 
 	// Choose Adaptive to improve subjective video quality for high-motion content.
@@ -3618,13 +3625,13 @@ type H265Settings struct {
 	// (numberBFramesBetweenReferenceFrames).
 	DynamicSubGop H265DynamicSubGop
 
-	// Enable this setting to have the encoder reduce I-frame pop. I-frame pop appears
-	// as a visual flicker that can arise when the encoder saves bits by copying some
-	// macroblocks many times from frame to frame, and then refreshes them at the
-	// I-frame. When you enable this setting, the encoder updates these macroblocks
-	// slightly more often to smooth out the flicker. This setting is disabled by
-	// default. Related setting: In addition to enabling this setting, you must also
-	// set adaptiveQuantization to a value other than Off (OFF).
+	// Enable this setting to have the encoder reduce I-frame pop. I-frame pop
+	// appears as a visual flicker that can arise when the encoder saves bits by
+	// copying some macroblocks many times from frame to frame, and then refreshes them
+	// at the I-frame. When you enable this setting, the encoder updates these
+	// macroblocks slightly more often to smooth out the flicker. This setting is
+	// disabled by default. Related setting: In addition to enabling this setting, you
+	// must also set adaptiveQuantization to a value other than Off (OFF).
 	FlickerAdaptiveQuantization H265FlickerAdaptiveQuantization
 
 	// If you are using the console, use the Framerate setting to specify the frame
@@ -3652,20 +3659,20 @@ type H265Settings struct {
 	// transcoding time and incurs a significant add-on cost.
 	FramerateConversionAlgorithm H265FramerateConversionAlgorithm
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateDenominator to specify the denominator of this fraction. In this
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateDenominator to specify the denominator of this fraction. In this
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Framerate. In this example, specify 23.976.
 	FramerateDenominator int32
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateNumerator to specify the numerator of this fraction. In this example,
-	// use 24000 for the value of FramerateNumerator. When you use the console for
-	// transcode jobs that use frame rate conversion, provide the value as a decimal
-	// number for Framerate. In this example, specify 23.976.
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateNumerator to specify the numerator of this fraction. In this
+	// example, use 24000 for the value of FramerateNumerator. When you use the console
+	// for transcode jobs that use frame rate conversion, provide the value as a
+	// decimal number for Framerate. In this example, specify 23.976.
 	FramerateNumerator int32
 
 	// If enable, use reference B frames for GOP structures that have B frames > 1.
@@ -3681,14 +3688,15 @@ type H265Settings struct {
 	// this value to 0.
 	GopClosedCadence int32
 
-	// Use this setting only when you set GOP mode control (GopSizeUnits) to Specified,
-	// frames (FRAMES) or Specified, seconds (SECONDS). Specify the GOP length using a
-	// whole number of frames or a decimal value of seconds. MediaConvert will
-	// interpret this value as frames or seconds depending on the value you choose for
-	// GOP mode control (GopSizeUnits). If you want to allow MediaConvert to
-	// automatically determine GOP size, leave GOP size blank and set GOP mode control
-	// to Auto (AUTO). If your output group specifies HLS, DASH, or CMAF, leave GOP
-	// size blank and set GOP mode control to Auto in each output in your output group.
+	// Use this setting only when you set GOP mode control (GopSizeUnits) to
+	// Specified, frames (FRAMES) or Specified, seconds (SECONDS). Specify the GOP
+	// length using a whole number of frames or a decimal value of seconds.
+	// MediaConvert will interpret this value as frames or seconds depending on the
+	// value you choose for GOP mode control (GopSizeUnits). If you want to allow
+	// MediaConvert to automatically determine GOP size, leave GOP size blank and set
+	// GOP mode control to Auto (AUTO). If your output group specifies HLS, DASH, or
+	// CMAF, leave GOP size blank and set GOP mode control to Auto in each output in
+	// your output group.
 	GopSize float64
 
 	// Specify how the transcoder determines GOP size for this output. We recommend
@@ -3703,10 +3711,10 @@ type H265Settings struct {
 	// setting GOP size (GopSize).
 	GopSizeUnits H265GopSizeUnits
 
-	// If your downstream systems have strict buffer requirements: Specify the minimum
-	// percentage of the HRD buffer that's available at the end of each encoded video
-	// segment. For the best video quality: Set to 0 or leave blank to automatically
-	// determine the final buffer fill percentage.
+	// If your downstream systems have strict buffer requirements: Specify the
+	// minimum percentage of the HRD buffer that's available at the end of each encoded
+	// video segment. For the best video quality: Set to 0 or leave blank to
+	// automatically determine the final buffer fill percentage.
 	HrdBufferFinalFillPercentage int32
 
 	// Percentage of the buffer that should initially be filled (HRD buffer model).
@@ -3791,20 +3799,21 @@ type H265Settings struct {
 	// faster, lower quality, single-pass encoding.
 	QualityTuningLevel H265QualityTuningLevel
 
-	// Settings for quality-defined variable bitrate encoding with the H.265 codec. Use
-	// these settings only when you set QVBR for Rate control mode (RateControlMode).
+	// Settings for quality-defined variable bitrate encoding with the H.265 codec.
+	// Use these settings only when you set QVBR for Rate control mode
+	// (RateControlMode).
 	QvbrSettings *H265QvbrSettings
 
 	// Use this setting to specify whether this output has a variable bitrate (VBR),
 	// constant bitrate (CBR) or quality-defined variable bitrate (QVBR).
 	RateControlMode H265RateControlMode
 
-	// Specify Sample Adaptive Offset (SAO) filter strength. Adaptive mode dynamically
-	// selects best strength based on content
+	// Specify Sample Adaptive Offset (SAO) filter strength. Adaptive mode
+	// dynamically selects best strength based on content
 	SampleAdaptiveOffsetFilterMode H265SampleAdaptiveOffsetFilterMode
 
-	// Use this setting for interlaced outputs, when your output frame rate is half of
-	// your input frame rate. In this situation, choose Optimized interlacing
+	// Use this setting for interlaced outputs, when your output frame rate is half
+	// of your input frame rate. In this situation, choose Optimized interlacing
 	// (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this
 	// case, each progressive frame from the input corresponds to an interlaced field
 	// in the output. Keep the default value, Basic interlacing (INTERLACED), for all
@@ -3855,13 +3864,13 @@ type H265Settings struct {
 	// Low. For content with a wider variety of textures, set it to High or Higher.
 	SpatialAdaptiveQuantization H265SpatialAdaptiveQuantization
 
-	// This field applies only if the Streams > Advanced > Framerate (framerate) field
-	// is set to 29.970. This field works with the Streams > Advanced > Preprocessors >
-	// Deinterlacer field (deinterlace_mode) and the Streams > Advanced > Interlaced
-	// Mode field (interlace_mode) to identify the scan type for the output:
-	// Progressive, Interlaced, Hard Telecine or Soft Telecine. - Hard: produces 29.97i
-	// output from 23.976 input. - Soft: produces 23.976; the player converts this
-	// output to 29.97i.
+	// This field applies only if the Streams > Advanced > Framerate (framerate)
+	// field is set to 29.970. This field works with the Streams > Advanced >
+	// Preprocessors > Deinterlacer field (deinterlace_mode) and the Streams > Advanced
+	// > Interlaced Mode field (interlace_mode) to identify the scan type for the
+	// output: Progressive, Interlaced, Hard Telecine or Soft Telecine. - Hard:
+	// produces 29.97i output from 23.976 input. - Soft: produces 23.976; the player
+	// converts this output to 29.97i.
 	Telecine H265Telecine
 
 	// Keep the default value, Enabled (ENABLED), to adjust quantization within each
@@ -3879,18 +3888,18 @@ type H265Settings struct {
 	// (adaptiveQuantization).
 	TemporalAdaptiveQuantization H265TemporalAdaptiveQuantization
 
-	// Enables temporal layer identifiers in the encoded bitstream. Up to 3 layers are
-	// supported depending on GOP structure: I- and P-frames form one layer, reference
-	// B-frames can form a second layer and non-reference b-frames can form a third
-	// layer. Decoders can optionally decode only the lower temporal layers to generate
-	// a lower frame rate output. For example, given a bitstream with temporal IDs and
-	// with b-frames = 1 (i.e. IbPbPb display order), a decoder could decode all the
-	// frames for full frame rate output or only the I and P frames (lowest temporal
-	// layer) for a half frame rate output.
+	// Enables temporal layer identifiers in the encoded bitstream. Up to 3 layers
+	// are supported depending on GOP structure: I- and P-frames form one layer,
+	// reference B-frames can form a second layer and non-reference b-frames can form a
+	// third layer. Decoders can optionally decode only the lower temporal layers to
+	// generate a lower frame rate output. For example, given a bitstream with temporal
+	// IDs and with b-frames = 1 (i.e. IbPbPb display order), a decoder could decode
+	// all the frames for full frame rate output or only the I and P frames (lowest
+	// temporal layer) for a half frame rate output.
 	TemporalIds H265TemporalIds
 
-	// Enable use of tiles, allowing horizontal as well as vertical subdivision of the
-	// encoded pictures.
+	// Enable use of tiles, allowing horizontal as well as vertical subdivision of
+	// the encoded pictures.
 	Tiles H265Tiles
 
 	// Inserts timecode for each frame as 4 bytes of an unregistered SEI message.
@@ -3981,9 +3990,9 @@ type Hdr10Metadata struct {
 // Setting for HDR10+ metadata insertion
 type Hdr10Plus struct {
 
-	// Specify the HDR10+ mastering display normalized peak luminance, in nits. This is
-	// the normalized actual peak luminance of the mastering display, as defined by ST
-	// 2094-40.
+	// Specify the HDR10+ mastering display normalized peak luminance, in nits. This
+	// is the normalized actual peak luminance of the mastering display, as defined by
+	// ST 2094-40.
 	MasteringMonitorNits int32
 
 	// Specify the HDR10+ target display nominal peak luminance, in nits. This is the
@@ -4021,8 +4030,8 @@ type HlsCaptionLanguageMapping struct {
 	// Caption channel.
 	CaptionChannel int32
 
-	// Specify the language for this captions channel, using the ISO 639-2 or ISO 639-3
-	// three-letter language code
+	// Specify the language for this captions channel, using the ISO 639-2 or ISO
+	// 639-3 three-letter language code
 	CustomLanguageCode *string
 
 	// Specify the language, using the ISO 639-2 three-letter code listed at
@@ -4038,13 +4047,13 @@ type HlsCaptionLanguageMapping struct {
 // Settings for HLS encryption
 type HlsEncryptionSettings struct {
 
-	// This is a 128-bit, 16-byte hex value represented by a 32-character text string.
-	// If this parameter is not set then the Initialization Vector will follow the
-	// segment number by default.
+	// This is a 128-bit, 16-byte hex value represented by a 32-character text
+	// string. If this parameter is not set then the Initialization Vector will follow
+	// the segment number by default.
 	ConstantInitializationVector *string
 
-	// Encrypts the segments with the given encryption scheme. Leave blank to disable.
-	// Selecting 'Disabled' in the web interface also disables encryption.
+	// Encrypts the segments with the given encryption scheme. Leave blank to
+	// disable. Selecting 'Disabled' in the web interface also disables encryption.
 	EncryptionMethod HlsEncryptionType
 
 	// The Initialization Vector is a 128-bit number used in conjunction with the key
@@ -4056,9 +4065,9 @@ type HlsEncryptionSettings struct {
 	// playlist. This allows for offline Apple HLS FairPlay content protection.
 	OfflineEncrypted HlsOfflineEncrypted
 
-	// If your output group type is HLS, DASH, or Microsoft Smooth, use these settings
-	// when doing DRM encryption with a SPEKE-compliant key provider. If your output
-	// group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
+	// If your output group type is HLS, DASH, or Microsoft Smooth, use these
+	// settings when doing DRM encryption with a SPEKE-compliant key provider. If your
+	// output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
 	SpekeKeyProvider *SpekeKeyProvider
 
 	// Use these settings to set up encryption with a static key provider.
@@ -4115,17 +4124,18 @@ type HlsGroupSettings struct {
 	// from the manifest.
 	CaptionLanguageSetting HlsCaptionLanguageSetting
 
-	// Set Caption segment length control (CaptionSegmentLengthControl) to Match video
-	// (MATCH_VIDEO) to create caption segments that align with the video segments from
-	// the first video output in this output group. For example, if the video segments
-	// are 2 seconds long, your WebVTT segments will also be 2 seconds long. Keep the
-	// default setting, Large segments (LARGE_SEGMENTS) to create caption segments that
-	// are 300 seconds long.
+	// Set Caption segment length control (CaptionSegmentLengthControl) to Match
+	// video (MATCH_VIDEO) to create caption segments that align with the video
+	// segments from the first video output in this output group. For example, if the
+	// video segments are 2 seconds long, your WebVTT segments will also be 2 seconds
+	// long. Keep the default setting, Large segments (LARGE_SEGMENTS) to create
+	// caption segments that are 300 seconds long.
 	CaptionSegmentLengthControl HlsCaptionSegmentLengthControl
 
-	// Disable this setting only when your workflow requires the #EXT-X-ALLOW-CACHE:no
-	// tag. Otherwise, keep the default value Enabled (ENABLED) and control caching in
-	// your video distribution set up. For example, use the Cache-Control http header.
+	// Disable this setting only when your workflow requires the
+	// #EXT-X-ALLOW-CACHE:no tag. Otherwise, keep the default value Enabled (ENABLED)
+	// and control caching in your video distribution set up. For example, use the
+	// Cache-Control http header.
 	ClientCache HlsClientCache
 
 	// Specification to use (RFC-6381 or the default RFC-4281) during m3u8 playlist
@@ -4184,8 +4194,8 @@ type HlsGroupSettings struct {
 	// is 3.5 seconds.
 	MinFinalSegmentLength float64
 
-	// When set, Minimum Segment Size is enforced by looking ahead and back within the
-	// specified range for a nearby avail and extending the segment size if needed.
+	// When set, Minimum Segment Size is enforced by looking ahead and back within
+	// the specified range for a nearby avail and extending the segment size if needed.
 	MinSegmentLength int32
 
 	// Indicates whether the .m3u8 manifest file should be generated for this HLS
@@ -4205,16 +4215,16 @@ type HlsGroupSettings struct {
 	// uses #EXT-X-BYTERANGE tags to index segment for playback.
 	SegmentControl HlsSegmentControl
 
-	// Specify the length, in whole seconds, of each segment. When you don't specify a
-	// value, MediaConvert defaults to 10. Related settings: Use Segment length control
-	// (SegmentLengthControl) to specify whether the encoder enforces this value
-	// strictly. Use Segment control (HlsSegmentControl) to specify whether
+	// Specify the length, in whole seconds, of each segment. When you don't specify
+	// a value, MediaConvert defaults to 10. Related settings: Use Segment length
+	// control (SegmentLengthControl) to specify whether the encoder enforces this
+	// value strictly. Use Segment control (HlsSegmentControl) to specify whether
 	// MediaConvert creates separate segment files or one content file that has
 	// metadata to mark the segment boundaries.
 	SegmentLength int32
 
-	// Specify how you want MediaConvert to determine the segment length. Choose Exact
-	// (EXACT) to have the encoder use the exact length that you specify with the
+	// Specify how you want MediaConvert to determine the segment length. Choose
+	// Exact (EXACT) to have the encoder use the exact length that you specify with the
 	// setting Segment length (SegmentLength). This might result in extra I-frames.
 	// Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment
 	// lengths to match the next GOP boundary.
@@ -4282,26 +4292,27 @@ type HlsImageBasedTrickPlaySettings struct {
 	// MediaConvert uses a 150 frame interval to generate thumbnails.
 	ThumbnailInterval float64
 
-	// Width of each thumbnail within each tile image, in pixels. Default is 312. Must
-	// be divisible by 8.
+	// Width of each thumbnail within each tile image, in pixels. Default is 312.
+	// Must be divisible by 8.
 	ThumbnailWidth int32
 
 	// Number of thumbnails in each column of a tile image. Set a value between 2 and
 	// 2048. Must be divisible by 2.
 	TileHeight int32
 
-	// Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
+	// Number of thumbnails in each row of a tile image. Set a value between 1 and
+	// 512.
 	TileWidth int32
 
 	noSmithyDocumentSerde
 }
 
-// Settings specific to audio sources in an HLS alternate rendition group. Specify
-// the properties (renditionGroupId, renditionName or renditionLanguageCode) to
-// identify the unique audio track among the alternative rendition groups present
-// in the HLS manifest. If no unique track is found, or multiple tracks match the
-// properties provided, the job fails. If no properties in
-// hlsRenditionGroupSettings are specified, the default audio track within the
+// Settings specific to audio sources in an HLS alternate rendition group.
+// Specify the properties (renditionGroupId, renditionName or
+// renditionLanguageCode) to identify the unique audio track among the alternative
+// rendition groups present in the HLS manifest. If no unique track is found, or
+// multiple tracks match the properties provided, the job fails. If no properties
+// in hlsRenditionGroupSettings are specified, the default audio track within the
 // video segment is chosen. If there is no audio within video segment, the
 // alternative audio with DEFAULT=YES is chosen instead.
 type HlsRenditionGroupSettings struct {
@@ -4331,8 +4342,8 @@ type HlsSettings struct {
 	// service will place the output into an MPEG2-TS container.
 	AudioOnlyContainer HlsAudioOnlyContainer
 
-	// List all the audio groups that are used with the video output stream. Input all
-	// the audio GROUP-IDs that are associated to the video, separate by ','.
+	// List all the audio groups that are used with the video output stream. Input
+	// all the audio GROUP-IDs that are associated to the video, separate by ','.
 	AudioRenditionSets *string
 
 	// Four types of audio-only tracks are supported: Audio-Only Variant Stream The
@@ -4375,8 +4386,8 @@ type HlsSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Optional. Configuration for a destination queue to which the job can hop once a
-// customer-defined minimum wait time has passed.
+// Optional. Configuration for a destination queue to which the job can hop once
+// a customer-defined minimum wait time has passed.
 type HopDestination struct {
 
 	// Optional. When you set up a job to use queue hopping, you can specify a
@@ -4384,15 +4395,15 @@ type HopDestination struct {
 	// specify, the relative priority will remain the same as in the previous queue.
 	Priority int32
 
-	// Optional unless the job is submitted on the default queue. When you set up a job
-	// to use queue hopping, you can specify a destination queue. This queue cannot be
-	// the original queue to which the job is submitted. If the original queue isn't
+	// Optional unless the job is submitted on the default queue. When you set up a
+	// job to use queue hopping, you can specify a destination queue. This queue cannot
+	// be the original queue to which the job is submitted. If the original queue isn't
 	// the default queue and you don't specify the destination queue, the job will move
 	// to the default queue.
 	Queue *string
 
-	// Required for setting up a job to use queue hopping. Minimum wait time in minutes
-	// until the job can hop to the destination queue. Valid range is 1 to 1440
+	// Required for setting up a job to use queue hopping. Minimum wait time in
+	// minutes until the job can hop to the destination queue. Valid range is 1 to 1440
 	// minutes, inclusive.
 	WaitMinutes int32
 
@@ -4435,10 +4446,10 @@ type ImageInserter struct {
 	noSmithyDocumentSerde
 }
 
-// Settings related to IMSC captions. IMSC is a sidecar format that holds captions
-// in a file that is separate from the video container. Set up sidecar captions in
-// the same output group, but different output from your video. For more
-// information, see
+// Settings related to IMSC captions. IMSC is a sidecar format that holds
+// captions in a file that is separate from the video container. Set up sidecar
+// captions in the same output group, but different output from your video. For
+// more information, see
 // https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html.
 // When you work directly in your JSON job specification, include this object and
 // any required children when you set destinationType to IMSC.
@@ -4482,8 +4493,8 @@ type Input struct {
 	// selectors per input.
 	AudioSelectors map[string]AudioSelector
 
-	// Use captions selectors to specify the captions data from your input that you use
-	// in your outputs. You can use up to 20 captions selectors per input.
+	// Use captions selectors to specify the captions data from your input that you
+	// use in your outputs. You can use up to 20 captions selectors per input.
 	CaptionSelectors map[string]CaptionSelector
 
 	// Use Cropping selection (crop) to specify the video area that the service will
@@ -4496,8 +4507,8 @@ type Input struct {
 	// inputs.
 	DeblockFilter InputDeblockFilter
 
-	// Settings for decrypting any input files that you encrypt before you upload them
-	// to Amazon S3. MediaConvert can decrypt files only when you use AWS Key
+	// Settings for decrypting any input files that you encrypt before you upload
+	// them to Amazon S3. MediaConvert can decrypt files only when you use AWS Key
 	// Management Service (KMS) to encrypt the data key that you use to encrypt your
 	// content.
 	DecryptionSettings *InputDecryptionSettings
@@ -4517,8 +4528,8 @@ type Input struct {
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.
 	DolbyVisionMetadataXml *string
 
-	// Specify the source file for your transcoding job. You can use multiple inputs in
-	// a single job. The service concatenates these inputs, in the order that you
+	// Specify the source file for your transcoding job. You can use multiple inputs
+	// in a single job. The service concatenates these inputs, in the order that you
 	// specify them in the job, to create the outputs. If your input format is IMF,
 	// specify your input by providing the path to your CPL. For example,
 	// "s3://bucket/vf/cpl.xml". If the CPL is in an incomplete IMP, make sure to use
@@ -4526,9 +4537,9 @@ type Input struct {
 	// contain assets referenced by the CPL.
 	FileInput *string
 
-	// Specify how the transcoding service applies the denoise and deblock filters. You
-	// must also enable the filters separately, with Denoise (InputDenoiseFilter) and
-	// Deblock (InputDeblockFilter). * Auto - The transcoding service determines
+	// Specify how the transcoding service applies the denoise and deblock filters.
+	// You must also enable the filters separately, with Denoise (InputDenoiseFilter)
+	// and Deblock (InputDeblockFilter). * Auto - The transcoding service determines
 	// whether to apply filtering, depending on input type and quality. * Disable - The
 	// input is not filtered. This is true even if you use the API to enable them in
 	// (InputDeblockFilter) and (InputDeblockFilter). * Force - The input is filtered
@@ -4582,12 +4593,12 @@ type Input struct {
 	// video. * Use PSI - Scan only PSI data.
 	PsiControl InputPsiControl
 
-	// Provide a list of any necessary supplemental IMPs. You need supplemental IMPs if
-	// the CPL that you're using for your input is in an incomplete IMP. Specify either
-	// the supplemental IMP directories with a trailing slash or the ASSETMAP.xml
-	// files. For example ["s3://bucket/ov/", "s3://bucket/vf2/ASSETMAP.xml"]. You
-	// don't need to specify the IMP that contains your input CPL, because the service
-	// automatically detects it.
+	// Provide a list of any necessary supplemental IMPs. You need supplemental IMPs
+	// if the CPL that you're using for your input is in an incomplete IMP. Specify
+	// either the supplemental IMP directories with a trailing slash or the
+	// ASSETMAP.xml files. For example ["s3://bucket/ov/",
+	// "s3://bucket/vf2/ASSETMAP.xml"]. You don't need to specify the IMP that contains
+	// your input CPL, because the service automatically detects it.
 	SupplementalImps []string
 
 	// Use this Timecode source setting, located under the input settings
@@ -4610,9 +4621,9 @@ type Input struct {
 	// https://docs.aws.amazon.com/console/mediaconvert/timecode.
 	TimecodeStart *string
 
-	// When you include Video generator, MediaConvert creates a video input with black
-	// frames. Use this setting if you do not have a video input or if you want to add
-	// black video frames before, or after, other inputs. You can specify Video
+	// When you include Video generator, MediaConvert creates a video input with
+	// black frames. Use this setting if you do not have a video input or if you want
+	// to add black video frames before, or after, other inputs. You can specify Video
 	// generator, or you can specify an Input file, but you cannot specify both. For
 	// more information, see
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/video-generator.html
@@ -4642,8 +4653,8 @@ type InputClipping struct {
 	// 01:06:00:00.
 	EndTimecode *string
 
-	// Set Start timecode (StartTimecode) to the beginning of the portion of the input
-	// you are clipping. The frame corresponding to the Start timecode value is
+	// Set Start timecode (StartTimecode) to the beginning of the portion of the
+	// input you are clipping. The frame corresponding to the Start timecode value is
 	// included in the clip. Start timecode or End timecode may be left blank, but not
 	// both. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the
 	// minute, SS is the second, and FF is the frame number. When choosing this value,
@@ -4655,8 +4666,8 @@ type InputClipping struct {
 	noSmithyDocumentSerde
 }
 
-// Settings for decrypting any input files that you encrypt before you upload them
-// to Amazon S3. MediaConvert can decrypt files only when you use AWS Key
+// Settings for decrypting any input files that you encrypt before you upload
+// them to Amazon S3. MediaConvert can decrypt files only when you use AWS Key
 // Management Service (KMS) to encrypt the data key that you use to encrypt your
 // content.
 type InputDecryptionSettings struct {
@@ -4664,17 +4675,17 @@ type InputDecryptionSettings struct {
 	// Specify the encryption mode that you used to encrypt your input files.
 	DecryptionMode DecryptionMode
 
-	// Warning! Don't provide your encryption key in plaintext. Your job settings could
-	// be intercepted, making your encrypted content vulnerable. Specify the encrypted
-	// version of the data key that you used to encrypt your content. The data key must
-	// be encrypted by AWS Key Management Service (KMS). The key can be 128, 192, or
-	// 256 bits.
+	// Warning! Don't provide your encryption key in plaintext. Your job settings
+	// could be intercepted, making your encrypted content vulnerable. Specify the
+	// encrypted version of the data key that you used to encrypt your content. The
+	// data key must be encrypted by AWS Key Management Service (KMS). The key can be
+	// 128, 192, or 256 bits.
 	EncryptedDecryptionKey *string
 
-	// Specify the initialization vector that you used when you encrypted your content
-	// before uploading it to Amazon S3. You can use a 16-byte initialization vector
-	// with any encryption mode. Or, you can use a 12-byte initialization vector with
-	// GCM or CTR. MediaConvert accepts only initialization vectors that are
+	// Specify the initialization vector that you used when you encrypted your
+	// content before uploading it to Amazon S3. You can use a 16-byte initialization
+	// vector with any encryption mode. Or, you can use a 12-byte initialization vector
+	// with GCM or CTR. MediaConvert accepts only initialization vectors that are
 	// base64-encoded.
 	InitializationVector *string
 
@@ -4700,8 +4711,8 @@ type InputTemplate struct {
 	// selectors per input.
 	AudioSelectors map[string]AudioSelector
 
-	// Use captions selectors to specify the captions data from your input that you use
-	// in your outputs. You can use up to 20 captions selectors per input.
+	// Use captions selectors to specify the captions data from your input that you
+	// use in your outputs. You can use up to 20 captions selectors per input.
 	CaptionSelectors map[string]CaptionSelector
 
 	// Use Cropping selection (crop) to specify the video area that the service will
@@ -4729,9 +4740,9 @@ type InputTemplate struct {
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.
 	DolbyVisionMetadataXml *string
 
-	// Specify how the transcoding service applies the denoise and deblock filters. You
-	// must also enable the filters separately, with Denoise (InputDenoiseFilter) and
-	// Deblock (InputDeblockFilter). * Auto - The transcoding service determines
+	// Specify how the transcoding service applies the denoise and deblock filters.
+	// You must also enable the filters separately, with Denoise (InputDenoiseFilter)
+	// and Deblock (InputDeblockFilter). * Auto - The transcoding service determines
 	// whether to apply filtering, depending on input type and quality. * Disable - The
 	// input is not filtered. This is true even if you use the API to enable them in
 	// (InputDeblockFilter) and (InputDeblockFilter). * Force - The input is filtered
@@ -4812,9 +4823,9 @@ type InputTemplate struct {
 	noSmithyDocumentSerde
 }
 
-// When you include Video generator, MediaConvert creates a video input with black
-// frames. Use this setting if you do not have a video input or if you want to add
-// black video frames before, or after, other inputs. You can specify Video
+// When you include Video generator, MediaConvert creates a video input with
+// black frames. Use this setting if you do not have a video input or if you want
+// to add black video frames before, or after, other inputs. You can specify Video
 // generator, or you can specify an Input file, but you cannot specify both. For
 // more information, see
 // https://docs.aws.amazon.com/mediaconvert/latest/ug/video-generator.html
@@ -4832,8 +4843,8 @@ type InputVideoGenerator struct {
 // overlays in your job.
 type InsertableImage struct {
 
-	// Specify the time, in milliseconds, for the image to remain on the output video.
-	// This duration includes fade-in time but not fade-out time.
+	// Specify the time, in milliseconds, for the image to remain on the output
+	// video. This duration includes fade-in time but not fade-out time.
 	Duration int32
 
 	// Specify the length of time, in milliseconds, between the Start time that you
@@ -4859,30 +4870,32 @@ type InsertableImage struct {
 	// overlay on the video. Use a PNG or TGA file.
 	ImageInserterInput *string
 
-	// Specify the distance, in pixels, between the inserted image and the left edge of
-	// the video frame. Required for any image overlay that you specify.
+	// Specify the distance, in pixels, between the inserted image and the left edge
+	// of the video frame. Required for any image overlay that you specify.
 	ImageX int32
 
-	// Specify the distance, in pixels, between the overlaid image and the top edge of
-	// the video frame. Required for any image overlay that you specify.
+	// Specify the distance, in pixels, between the overlaid image and the top edge
+	// of the video frame. Required for any image overlay that you specify.
 	ImageY int32
 
 	// Specify how overlapping inserted images appear. Images with higher values for
 	// Layer appear on top of images with lower values for Layer.
 	Layer int32
 
-	// Use Opacity (Opacity) to specify how much of the underlying video shows through
-	// the inserted image. 0 is transparent and 100 is fully opaque. Default is 50.
+	// Use Opacity (Opacity) to specify how much of the underlying video shows
+	// through the inserted image. 0 is transparent and 100 is fully opaque. Default is
+	// 50.
 	Opacity int32
 
-	// Specify the timecode of the frame that you want the overlay to first appear on.
-	// This must be in timecode (HH:MM:SS:FF or HH:MM:SS;FF) format. Remember to take
-	// into account your timecode source settings.
+	// Specify the timecode of the frame that you want the overlay to first appear
+	// on. This must be in timecode (HH:MM:SS:FF or HH:MM:SS;FF) format. Remember to
+	// take into account your timecode source settings.
 	StartTime *string
 
-	// Specify the width of the inserted image in pixels. If you specify a value that's
-	// larger than the video resolution width, the service will crop your overlaid
-	// image to fit. To use the native width of the image, keep this setting blank.
+	// Specify the width of the inserted image in pixels. If you specify a value
+	// that's larger than the video resolution width, the service will crop your
+	// overlaid image to fit. To use the native width of the image, keep this setting
+	// blank.
 	Width int32
 
 	noSmithyDocumentSerde
@@ -4962,8 +4975,8 @@ type Job struct {
 	// template.
 	JobTemplate *string
 
-	// Provides messages from the service about jobs that you have already successfully
-	// submitted.
+	// Provides messages from the service about jobs that you have already
+	// successfully submitted.
 	Messages *JobMessages
 
 	// List of output group details
@@ -4981,8 +4994,8 @@ type Job struct {
 	// The job's queue hopping history.
 	QueueTransitions []QueueTransition
 
-	// The number of times that the service automatically attempted to process your job
-	// after encountering an error.
+	// The number of times that the service automatically attempted to process your
+	// job after encountering an error.
 	RetryCount int32
 
 	// Enable this setting when you run a test job to estimate how many reserved
@@ -5000,8 +5013,8 @@ type Job struct {
 	// to the time it completes the transcode or encounters an error.
 	StatusUpdateInterval StatusUpdateInterval
 
-	// Information about when jobs are submitted, started, and finished is specified in
-	// Unix epoch format in seconds.
+	// Information about when jobs are submitted, started, and finished is specified
+	// in Unix epoch format in seconds.
 	Timing *Timing
 
 	// User-defined metadata that you want to associate with an MediaConvert job. You
@@ -5011,16 +5024,16 @@ type Job struct {
 	noSmithyDocumentSerde
 }
 
-// Provides messages from the service about jobs that you have already successfully
-// submitted.
+// Provides messages from the service about jobs that you have already
+// successfully submitted.
 type JobMessages struct {
 
 	// List of messages that are informational only and don't indicate a problem with
 	// your job.
 	Info []string
 
-	// List of messages that warn about conditions that might cause your job not to run
-	// or to fail.
+	// List of messages that warn about conditions that might cause your job not to
+	// run or to fail.
 	Warning []string
 
 	noSmithyDocumentSerde
@@ -5029,20 +5042,20 @@ type JobMessages struct {
 // JobSettings contains all the transcode settings for a job.
 type JobSettings struct {
 
-	// When specified, this offset (in milliseconds) is added to the input Ad Avail PTS
-	// time.
+	// When specified, this offset (in milliseconds) is added to the input Ad Avail
+	// PTS time.
 	AdAvailOffset int32
 
-	// Settings for ad avail blanking. Video can be blanked or overlaid with an image,
-	// and audio muted during SCTE-35 triggered ad avails.
+	// Settings for ad avail blanking. Video can be blanked or overlaid with an
+	// image, and audio muted during SCTE-35 triggered ad avails.
 	AvailBlanking *AvailBlanking
 
-	// Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion,
-	// you can ignore these settings.
+	// Settings for Event Signaling And Messaging (ESAM). If you don't do ad
+	// insertion, you can ignore these settings.
 	Esam *EsamSettings
 
-	// If your source content has EIA-608 Line 21 Data Services, enable this feature to
-	// specify what MediaConvert does with the Extended Data Services (XDS) packets.
+	// If your source content has EIA-608 Line 21 Data Services, enable this feature
+	// to specify what MediaConvert does with the Extended Data Services (XDS) packets.
 	// You can choose to pass through XDS packets, or remove them from the output. For
 	// more information about XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h
 	// Content Advisory.
@@ -5067,8 +5080,8 @@ type JobSettings struct {
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html.
 	MotionImageInserter *MotionImageInserter
 
-	// Settings for your Nielsen configuration. If you don't do Nielsen measurement and
-	// analytics, ignore these settings. When you enable Nielsen configuration
+	// Settings for your Nielsen configuration. If you don't do Nielsen measurement
+	// and analytics, ignore these settings. When you enable Nielsen configuration
 	// (nielsenConfiguration), MediaConvert enables PCM to ID3 tagging for all outputs
 	// in the job. To enable Nielsen configuration programmatically, include an
 	// instance of nielsenConfiguration in your JSON job specification. Even if you
@@ -5085,9 +5098,9 @@ type JobSettings struct {
 	// Engine Version 1.2.7 Nielsen Watermark Authenticator [SID_TIC] Version [5.0.0]
 	NielsenNonLinearWatermark *NielsenNonLinearWatermarkSettings
 
-	// (OutputGroups) contains one group of settings for each set of outputs that share
-	// a common package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime, MXF,
-	// and no container) are grouped in a single output group as well. Required in
+	// (OutputGroups) contains one group of settings for each set of outputs that
+	// share a common package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime,
+	// MXF, and no container) are grouped in a single output group as well. Required in
 	// (OutputGroups) is a group of settings that apply to the whole group. This
 	// required object depends on the value you set for (Type) under
 	// (OutputGroups)>(OutputGroupSettings). Type, settings object pairs are as
@@ -5150,8 +5163,8 @@ type JobTemplate struct {
 	// Relative priority on the job.
 	Priority int32
 
-	// Optional. The queue that jobs created from this template are assigned to. If you
-	// don't specify this, jobs will go to the default queue.
+	// Optional. The queue that jobs created from this template are assigned to. If
+	// you don't specify this, jobs will go to the default queue.
 	Queue *string
 
 	// Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch
@@ -5171,20 +5184,20 @@ type JobTemplate struct {
 // that will be applied to jobs created from it.
 type JobTemplateSettings struct {
 
-	// When specified, this offset (in milliseconds) is added to the input Ad Avail PTS
-	// time.
+	// When specified, this offset (in milliseconds) is added to the input Ad Avail
+	// PTS time.
 	AdAvailOffset int32
 
-	// Settings for ad avail blanking. Video can be blanked or overlaid with an image,
-	// and audio muted during SCTE-35 triggered ad avails.
+	// Settings for ad avail blanking. Video can be blanked or overlaid with an
+	// image, and audio muted during SCTE-35 triggered ad avails.
 	AvailBlanking *AvailBlanking
 
-	// Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion,
-	// you can ignore these settings.
+	// Settings for Event Signaling And Messaging (ESAM). If you don't do ad
+	// insertion, you can ignore these settings.
 	Esam *EsamSettings
 
-	// If your source content has EIA-608 Line 21 Data Services, enable this feature to
-	// specify what MediaConvert does with the Extended Data Services (XDS) packets.
+	// If your source content has EIA-608 Line 21 Data Services, enable this feature
+	// to specify what MediaConvert does with the Extended Data Services (XDS) packets.
 	// You can choose to pass through XDS packets, or remove them from the output. For
 	// more information about XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h
 	// Content Advisory.
@@ -5209,8 +5222,8 @@ type JobTemplateSettings struct {
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html.
 	MotionImageInserter *MotionImageInserter
 
-	// Settings for your Nielsen configuration. If you don't do Nielsen measurement and
-	// analytics, ignore these settings. When you enable Nielsen configuration
+	// Settings for your Nielsen configuration. If you don't do Nielsen measurement
+	// and analytics, ignore these settings. When you enable Nielsen configuration
 	// (nielsenConfiguration), MediaConvert enables PCM to ID3 tagging for all outputs
 	// in the job. To enable Nielsen configuration programmatically, include an
 	// instance of nielsenConfiguration in your JSON job specification. Even if you
@@ -5227,9 +5240,9 @@ type JobTemplateSettings struct {
 	// Engine Version 1.2.7 Nielsen Watermark Authenticator [SID_TIC] Version [5.0.0]
 	NielsenNonLinearWatermark *NielsenNonLinearWatermarkSettings
 
-	// (OutputGroups) contains one group of settings for each set of outputs that share
-	// a common package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime, MXF,
-	// and no container) are grouped in a single output group as well. Required in
+	// (OutputGroups) contains one group of settings for each set of outputs that
+	// share a common package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime,
+	// MXF, and no container) are grouped in a single output group as well. Required in
 	// (OutputGroups) is a group of settings that apply to the whole group. This
 	// required object depends on the value you set for (Type) under
 	// (OutputGroups)>(OutputGroupSettings). Type, settings object pairs are as
@@ -5265,17 +5278,17 @@ type KantarWatermarkSettings struct {
 	// Specify a unique identifier for Kantar to use for this piece of content.
 	ContentReference *string
 
-	// Provide the name of the AWS Secrets Manager secret where your Kantar credentials
-	// are stored. Note that your MediaConvert service role must provide access to this
-	// secret. For more information, see
+	// Provide the name of the AWS Secrets Manager secret where your Kantar
+	// credentials are stored. Note that your MediaConvert service role must provide
+	// access to this secret. For more information, see
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/granting-permissions-for-mediaconvert-to-access-secrets-manager-secret.html.
 	// For instructions on creating a secret, see
 	// https://docs.aws.amazon.com/secretsmanager/latest/userguide/tutorials_basic.html,
 	// in the AWS Secrets Manager User Guide.
 	CredentialsSecretName *string
 
-	// Optional. Specify an offset, in whole seconds, from the start of your output and
-	// the beginning of the watermarking. When you don't specify an offset, Kantar
+	// Optional. Specify an offset, in whole seconds, from the start of your output
+	// and the beginning of the watermarking. When you don't specify an offset, Kantar
 	// defaults to zero.
 	FileOffset float64
 
@@ -5286,10 +5299,10 @@ type KantarWatermarkSettings struct {
 	// from Kantar.
 	KantarServerUrl *string
 
-	// Optional. Specify the Amazon S3 bucket where you want MediaConvert to store your
-	// Kantar watermark XML logs. When you don't specify a bucket, MediaConvert doesn't
-	// save these logs. Note that your MediaConvert service role must provide access to
-	// this location. For more information, see
+	// Optional. Specify the Amazon S3 bucket where you want MediaConvert to store
+	// your Kantar watermark XML logs. When you don't specify a bucket, MediaConvert
+	// doesn't save these logs. Note that your MediaConvert service role must provide
+	// access to this location. For more information, see
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html
 	LogDestination *string
 
@@ -5323,29 +5336,29 @@ type KantarWatermarkSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Settings for SCTE-35 signals from ESAM. Include this in your job settings to put
-// SCTE-35 markers in your HLS and transport stream outputs at the insertion points
-// that you specify in an ESAM XML document. Provide the document in the setting
-// SCC XML (sccXml).
+// Settings for SCTE-35 signals from ESAM. Include this in your job settings to
+// put SCTE-35 markers in your HLS and transport stream outputs at the insertion
+// points that you specify in an ESAM XML document. Provide the document in the
+// setting SCC XML (sccXml).
 type M2tsScte35Esam struct {
 
-	// Packet Identifier (PID) of the SCTE-35 stream in the transport stream generated
-	// by ESAM.
+	// Packet Identifier (PID) of the SCTE-35 stream in the transport stream
+	// generated by ESAM.
 	Scte35EsamPid int32
 
 	noSmithyDocumentSerde
 }
 
-// MPEG-2 TS container settings. These apply to outputs in a File output group when
-// the output's container (ContainerType) is MPEG-2 Transport Stream (M2TS). In
-// these assets, data is organized by the program map table (PMT). Each transport
-// stream program contains subsets of data, including audio, video, and metadata.
-// Each of these subsets of data has a numerical label called a packet identifier
-// (PID). Each transport stream program corresponds to one MediaConvert output. The
-// PMT lists the types of data in a program along with their PID. Downstream
-// systems and players use the program map table to look up the PID for each type
-// of data it accesses and then uses the PIDs to locate specific data within the
-// asset.
+// MPEG-2 TS container settings. These apply to outputs in a File output group
+// when the output's container (ContainerType) is MPEG-2 Transport Stream (M2TS).
+// In these assets, data is organized by the program map table (PMT). Each
+// transport stream program contains subsets of data, including audio, video, and
+// metadata. Each of these subsets of data has a numerical label called a packet
+// identifier (PID). Each transport stream program corresponds to one MediaConvert
+// output. The PMT lists the types of data in a program along with their PID.
+// Downstream systems and players use the program map table to look up the PID for
+// each type of data it accesses and then uses the PIDs to locate specific data
+// within the asset.
 type M2tsSettings struct {
 
 	// Selects between the DVB and ATSC buffer models for Dolby Digital audio.
@@ -5385,9 +5398,9 @@ type M2tsSettings struct {
 	// interruptions.
 	BufferModel M2tsBufferModel
 
-	// If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets with
-	// Presentation Timestamp (PTS) values greater than or equal to the first video
-	// packet PTS (MediaConvert drops captions and data packets with lesser PTS
+	// If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets
+	// with Presentation Timestamp (PTS) values greater than or equal to the first
+	// video packet PTS (MediaConvert drops captions and data packets with lesser PTS
 	// values). Keep the default value (AUTO) to allow all PTS values.
 	DataPTSControl M2tsDataPtsControl
 
@@ -5434,30 +5447,31 @@ type M2tsSettings struct {
 	// Controls whether to include the ES Rate field in the PES header.
 	EsRateInPes M2tsEsRateInPes
 
-	// Keep the default value (DEFAULT) unless you know that your audio EBP markers are
-	// incorrectly appearing before your video EBP markers. To correct this problem,
-	// set this value to Force (FORCE).
+	// Keep the default value (DEFAULT) unless you know that your audio EBP markers
+	// are incorrectly appearing before your video EBP markers. To correct this
+	// problem, set this value to Force (FORCE).
 	ForceTsVideoEbpOrder M2tsForceTsVideoEbpOrder
 
 	// The length, in seconds, of each fragment. Only used with EBP markers.
 	FragmentTime float64
 
-	// To include key-length-value metadata in this output: Set KLV metadata insertion
-	// to Passthrough. MediaConvert reads KLV metadata present in your input and passes
-	// it through to the output transport stream. To exclude this KLV metadata: Set KLV
-	// metadata insertion to None or leave blank.
+	// To include key-length-value metadata in this output: Set KLV metadata
+	// insertion to Passthrough. MediaConvert reads KLV metadata present in your input
+	// and passes it through to the output transport stream. To exclude this KLV
+	// metadata: Set KLV metadata insertion to None or leave blank.
 	KlvMetadata M2tsKlvMetadata
 
 	// Specify the maximum time, in milliseconds, between Program Clock References
 	// (PCRs) inserted into the transport stream.
 	MaxPcrInterval int32
 
-	// When set, enforces that Encoder Boundary Points do not come within the specified
-	// time interval of each other by looking ahead at input video. If another EBP is
-	// going to come in within the specified time interval, the current EBP is not
-	// emitted, and the segment is "stretched" to the next marker. The lookahead value
-	// does not add latency to the system. The Live Event must be configured elsewhere
-	// to create sufficient latency to make the lookahead accurate.
+	// When set, enforces that Encoder Boundary Points do not come within the
+	// specified time interval of each other by looking ahead at input video. If
+	// another EBP is going to come in within the specified time interval, the current
+	// EBP is not emitted, and the segment is "stretched" to the next marker. The
+	// lookahead value does not add latency to the system. The Live Event must be
+	// configured elsewhere to create sufficient latency to make the lookahead
+	// accurate.
 	MinEbpInterval int32
 
 	// If INSERT, Nielsen inaudible tones for media tracking will be detected in the
@@ -5523,20 +5537,20 @@ type M2tsSettings struct {
 	// enable ESAM SCTE-35 (include the property scte35Esam).
 	Scte35Source M2tsScte35Source
 
-	// Inserts segmentation markers at each segmentation_time period. rai_segstart sets
-	// the Random Access Indicator bit in the adaptation field. rai_adapt sets the RAI
-	// bit and adds the current timecode in the private data bytes. psi_segstart
+	// Inserts segmentation markers at each segmentation_time period. rai_segstart
+	// sets the Random Access Indicator bit in the adaptation field. rai_adapt sets the
+	// RAI bit and adds the current timecode in the private data bytes. psi_segstart
 	// inserts PAT and PMT tables at the start of segments. ebp adds Encoder Boundary
 	// Point information to the adaptation field as per OpenCable specification
 	// OC-SP-EBP-I01-130118. ebp_legacy adds Encoder Boundary Point information to the
 	// adaptation field using a legacy proprietary format.
 	SegmentationMarkers M2tsSegmentationMarkers
 
-	// The segmentation style parameter controls how segmentation markers are inserted
-	// into the transport stream. With avails, it is possible that segments may be
-	// truncated, which can influence where future segmentation markers are inserted.
-	// When a segmentation style of "reset_cadence" is selected and a segment is
-	// truncated due to an avail, we will reset the segmentation cadence. This means
+	// The segmentation style parameter controls how segmentation markers are
+	// inserted into the transport stream. With avails, it is possible that segments
+	// may be truncated, which can influence where future segmentation markers are
+	// inserted. When a segmentation style of "reset_cadence" is selected and a segment
+	// is truncated due to an avail, we will reset the segmentation cadence. This means
 	// the subsequent segment will have a duration of of $segmentation_time seconds.
 	// When a segmentation style of "maintain_cadence" is selected and a segment is
 	// truncated due to an avail, we will not reset the segmentation cadence. This
@@ -5545,15 +5559,15 @@ type M2tsSettings struct {
 	// that EBP lookahead is a slight exception to this rule.
 	SegmentationStyle M2tsSegmentationStyle
 
-	// Specify the length, in seconds, of each segment. Required unless markers is set
-	// to none.
+	// Specify the length, in seconds, of each segment. Required unless markers is
+	// set to none.
 	SegmentationTime float64
 
 	// Packet Identifier (PID) of the ID3 metadata stream in the transport stream.
 	TimedMetadataPid int32
 
-	// Specify the ID for the transport stream itself in the program map table for this
-	// output. Transport stream IDs and program map tables are parts of MPEG-2
+	// Specify the ID for the transport stream itself in the program map table for
+	// this output. Transport stream IDs and program map tables are parts of MPEG-2
 	// transport stream containers, used for organizing data.
 	TransportStreamId int32
 
@@ -5591,9 +5605,9 @@ type M3u8Settings struct {
 	// comma separation.
 	AudioPids []int32
 
-	// If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets with
-	// Presentation Timestamp (PTS) values greater than or equal to the first video
-	// packet PTS (MediaConvert drops captions and data packets with lesser PTS
+	// If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets
+	// with Presentation Timestamp (PTS) values greater than or equal to the first
+	// video packet PTS (MediaConvert drops captions and data packets with lesser PTS
 	// values). Keep the default value (AUTO) to allow all PTS values.
 	DataPTSControl M3u8DataPtsControl
 
@@ -5609,8 +5623,8 @@ type M3u8Settings struct {
 	// transport stream.
 	PatInterval int32
 
-	// When set to PCR_EVERY_PES_PACKET a Program Clock Reference value is inserted for
-	// every Packetized Elementary Stream (PES) header. This parameter is effective
+	// When set to PCR_EVERY_PES_PACKET a Program Clock Reference value is inserted
+	// for every Packetized Elementary Stream (PES) header. This parameter is effective
 	// only when the PCR PID is the same as the video or audio elementary stream.
 	PcrControl M3u8PcrControl
 
@@ -5623,7 +5637,8 @@ type M3u8Settings struct {
 	// transport stream.
 	PmtInterval int32
 
-	// Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream.
+	// Packet Identifier (PID) for the Program Map Table (PMT) in the transport
+	// stream.
 	PmtPid int32
 
 	// Packet Identifier (PID) of the private metadata stream in the transport stream.
@@ -5682,11 +5697,11 @@ type MinBottomRenditionSize struct {
 	noSmithyDocumentSerde
 }
 
-// Use Min top rendition size to specify a minimum size for the highest resolution
-// in your ABR stack. * The highest resolution in your ABR stack will be equal to
-// or greater than the value that you enter. For example: If you specify 1280x720
-// the highest resolution in your ABR stack will be equal to or greater than
-// 1280x720. * If you specify a value for Max resolution, the value that you
+// Use Min top rendition size to specify a minimum size for the highest
+// resolution in your ABR stack. * The highest resolution in your ABR stack will be
+// equal to or greater than the value that you enter. For example: If you specify
+// 1280x720 the highest resolution in your ABR stack will be equal to or greater
+// than 1280x720. * If you specify a value for Max resolution, the value that you
 // specify for Min top rendition size must be less than, or equal to, Max
 // resolution.
 type MinTopRenditionSize struct {
@@ -5727,13 +5742,13 @@ type MotionImageInserter struct {
 	// can be 100 images in the sequence.
 	Input *string
 
-	// Choose the type of motion graphic asset that you are providing for your overlay.
-	// You can choose either a .mov file or a series of .png files.
+	// Choose the type of motion graphic asset that you are providing for your
+	// overlay. You can choose either a .mov file or a series of .png files.
 	InsertionMode MotionImageInsertionMode
 
-	// Use Offset to specify the placement of your motion graphic overlay on the video
-	// frame. Specify in pixels, from the upper-left corner of the frame. If you don't
-	// specify an offset, the service scales your overlay to the full size of the
+	// Use Offset to specify the placement of your motion graphic overlay on the
+	// video frame. Specify in pixels, from the upper-left corner of the frame. If you
+	// don't specify an offset, the service scales your overlay to the full size of the
 	// frame. Otherwise, the service inserts the overlay at its native resolution and
 	// scales the size up or down with any video scaling.
 	Offset *MotionImageInsertionOffset
@@ -5764,23 +5779,23 @@ type MotionImageInserter struct {
 // underlying video.
 type MotionImageInsertionFramerate struct {
 
-	// The bottom of the fraction that expresses your overlay frame rate. For example,
-	// if your frame rate is 24 fps, set this value to 1.
+	// The bottom of the fraction that expresses your overlay frame rate. For
+	// example, if your frame rate is 24 fps, set this value to 1.
 	FramerateDenominator int32
 
-	// The top of the fraction that expresses your overlay frame rate. For example, if
-	// your frame rate is 24 fps, set this value to 24.
+	// The top of the fraction that expresses your overlay frame rate. For example,
+	// if your frame rate is 24 fps, set this value to 24.
 	FramerateNumerator int32
 
 	noSmithyDocumentSerde
 }
 
-// Specify the offset between the upper-left corner of the video frame and the top
-// left corner of the overlay.
+// Specify the offset between the upper-left corner of the video frame and the
+// top left corner of the overlay.
 type MotionImageInsertionOffset struct {
 
-	// Set the distance, in pixels, between the overlay and the left edge of the video
-	// frame.
+	// Set the distance, in pixels, between the overlay and the left edge of the
+	// video frame.
 	ImageX int32
 
 	// Set the distance, in pixels, between the overlay and the top edge of the video
@@ -5808,8 +5823,8 @@ type MovSettings struct {
 	// video codec is MPEG2.
 	Mpeg2FourCCControl MovMpeg2FourCCControl
 
-	// Unless you need Omneon compatibility: Keep the default value, None. To make this
-	// output compatible with Omneon: Choose Omneon. When you do, MediaConvert
+	// Unless you need Omneon compatibility: Keep the default value, None. To make
+	// this output compatible with Omneon: Choose Omneon. When you do, MediaConvert
 	// increases the length of the 'elst' edit list atom. Note that this might cause
 	// file rejections when a recipient of the output file doesn't expect this extra
 	// padding.
@@ -5839,15 +5854,15 @@ type Mp2Settings struct {
 	noSmithyDocumentSerde
 }
 
-// Required when you set Codec, under AudioDescriptions>CodecSettings, to the value
-// MP3.
+// Required when you set Codec, under AudioDescriptions>CodecSettings, to the
+// value MP3.
 type Mp3Settings struct {
 
 	// Specify the average bitrate in bits per second.
 	Bitrate int32
 
-	// Specify the number of channels in this output audio track. Choosing Mono on the
-	// console gives you 1 output channel; choosing Stereo gives you 2. In the API,
+	// Specify the number of channels in this output audio track. Choosing Mono on
+	// the console gives you 1 output channel; choosing Stereo gives you 2. In the API,
 	// valid values are 1 and 2.
 	Channels int32
 
@@ -5858,8 +5873,9 @@ type Mp3Settings struct {
 	// Sample rate in hz.
 	SampleRate int32
 
-	// Required when you set Bitrate control mode (rateControlMode) to VBR. Specify the
-	// audio quality of this MP3 output from 0 (highest quality) to 9 (lowest quality).
+	// Required when you set Bitrate control mode (rateControlMode) to VBR. Specify
+	// the audio quality of this MP3 output from 0 (highest quality) to 9 (lowest
+	// quality).
 	VbrQuality int32
 
 	noSmithyDocumentSerde
@@ -5949,15 +5965,15 @@ type MpdSettings struct {
 	// your video and audio fragmented MP4 files.
 	CaptionContainerType MpdCaptionContainerType
 
-	// To include key-length-value metadata in this output: Set KLV metadata insertion
-	// to Passthrough. MediaConvert reads KLV metadata present in your input and writes
-	// each instance to a separate event message box in the output, according to MISB
-	// ST1910.1. To exclude this KLV metadata: Set KLV metadata insertion to None or
-	// leave blank.
+	// To include key-length-value metadata in this output: Set KLV metadata
+	// insertion to Passthrough. MediaConvert reads KLV metadata present in your input
+	// and writes each instance to a separate event message box in the output,
+	// according to MISB ST1910.1. To exclude this KLV metadata: Set KLV metadata
+	// insertion to None or leave blank.
 	KlvMetadata MpdKlvMetadata
 
-	// To add an InbandEventStream element in your output MPD manifest for each type of
-	// event message, set Manifest metadata signaling to Enabled. For ID3 event
+	// To add an InbandEventStream element in your output MPD manifest for each type
+	// of event message, set Manifest metadata signaling to Enabled. For ID3 event
 	// messages, the InbandEventStream element schemeIdUri will be same value that you
 	// specify for ID3 metadata scheme ID URI. For SCTE35 event messages, the
 	// InbandEventStream element schemeIdUri will be "urn:scte:scte35:2013:bin". To
@@ -5967,9 +5983,10 @@ type MpdSettings struct {
 	// (TimedMetadata) to Passthrough.
 	ManifestMetadataSignaling MpdManifestMetadataSignaling
 
-	// Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT
-	// to put SCTE-35 markers in this output at the insertion points that you specify
-	// in an ESAM XML document. Provide the document in the setting SCC XML (sccXml).
+	// Use this setting only when you specify SCTE-35 markers from ESAM. Choose
+	// INSERT to put SCTE-35 markers in this output at the insertion points that you
+	// specify in an ESAM XML document. Provide the document in the setting SCC XML
+	// (sccXml).
 	Scte35Esam MpdScte35Esam
 
 	// Ignore this setting unless you have SCTE-35 markers in your input video file.
@@ -5991,9 +6008,9 @@ type MpdSettings struct {
 	// 1, you must also set ID3 metadata (timedMetadata) to Passthrough.
 	TimedMetadataBoxVersion MpdTimedMetadataBoxVersion
 
-	// Specify the event message box (eMSG) scheme ID URI (scheme_id_uri) for ID3 timed
-	// metadata in your output. For more information, see ISO/IEC 23009-1:2022 section
-	// 5.10.3.3.4 Semantics. Leave blank to use the default value:
+	// Specify the event message box (eMSG) scheme ID URI (scheme_id_uri) for ID3
+	// timed metadata in your output. For more information, see ISO/IEC 23009-1:2022
+	// section 5.10.3.3.4 Semantics. Leave blank to use the default value:
 	// https://aomedia.org/emsg/ID3 When you specify a value for ID3 metadata scheme ID
 	// URI, you must also set ID3 metadata (timedMetadata) to Passthrough.
 	TimedMetadataSchemeIdUri *string
@@ -6017,8 +6034,8 @@ type Mpeg2Settings struct {
 	// (temporalAdaptiveQuantization).
 	AdaptiveQuantization Mpeg2AdaptiveQuantization
 
-	// Specify the average bitrate in bits per second. Required for VBR and CBR. For MS
-	// Smooth outputs, bitrates must be unique when rounded down to the nearest
+	// Specify the average bitrate in bits per second. Required for VBR and CBR. For
+	// MS Smooth outputs, bitrates must be unique when rounded down to the nearest
 	// multiple of 1000.
 	Bitrate int32
 
@@ -6061,20 +6078,20 @@ type Mpeg2Settings struct {
 	// transcoding time and incurs a significant add-on cost.
 	FramerateConversionAlgorithm Mpeg2FramerateConversionAlgorithm
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateDenominator to specify the denominator of this fraction. In this
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateDenominator to specify the denominator of this fraction. In this
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Framerate. In this example, specify 23.976.
 	FramerateDenominator int32
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateNumerator to specify the numerator of this fraction. In this example,
-	// use 24000 for the value of FramerateNumerator. When you use the console for
-	// transcode jobs that use frame rate conversion, provide the value as a decimal
-	// number for Framerate. In this example, specify 23.976.
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateNumerator to specify the numerator of this fraction. In this
+	// example, use 24000 for the value of FramerateNumerator. When you use the console
+	// for transcode jobs that use frame rate conversion, provide the value as a
+	// decimal number for Framerate. In this example, specify 23.976.
 	FramerateNumerator int32
 
 	// Specify the relative frequency of open to closed GOPs in this output. For
@@ -6091,14 +6108,14 @@ type Mpeg2Settings struct {
 	// for GOP mode control (GopSizeUnits) is Frames (FRAMES).
 	GopSize float64
 
-	// Specify the units for GOP size (GopSize). If you don't specify a value here, by
-	// default the encoder measures GOP size in frames.
+	// Specify the units for GOP size (GopSize). If you don't specify a value here,
+	// by default the encoder measures GOP size in frames.
 	GopSizeUnits Mpeg2GopSizeUnits
 
-	// If your downstream systems have strict buffer requirements: Specify the minimum
-	// percentage of the HRD buffer that's available at the end of each encoded video
-	// segment. For the best video quality: Set to 0 or leave blank to automatically
-	// determine the final buffer fill percentage.
+	// If your downstream systems have strict buffer requirements: Specify the
+	// minimum percentage of the HRD buffer that's available at the end of each encoded
+	// video segment. For the best video quality: Set to 0 or leave blank to
+	// automatically determine the final buffer fill percentage.
 	HrdBufferFinalFillPercentage int32
 
 	// Percentage of the buffer that should initially be filled (HRD buffer model).
@@ -6122,8 +6139,8 @@ type Mpeg2Settings struct {
 	// options you choose.
 	InterlaceMode Mpeg2InterlaceMode
 
-	// Use Intra DC precision (Mpeg2IntraDcPrecision) to set quantization precision for
-	// intra-block DC coefficients. If you choose the value auto, the service will
+	// Use Intra DC precision (Mpeg2IntraDcPrecision) to set quantization precision
+	// for intra-block DC coefficients. If you choose the value auto, the service will
 	// automatically select the precision based on the per-frame compression ratio.
 	IntraDcPrecision Mpeg2IntraDcPrecision
 
@@ -6184,8 +6201,8 @@ type Mpeg2Settings struct {
 	// variable (vbr) or constant (cbr).
 	RateControlMode Mpeg2RateControlMode
 
-	// Use this setting for interlaced outputs, when your output frame rate is half of
-	// your input frame rate. In this situation, choose Optimized interlacing
+	// Use this setting for interlaced outputs, when your output frame rate is half
+	// of your input frame rate. In this situation, choose Optimized interlacing
 	// (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this
 	// case, each progressive frame from the input corresponds to an interlaced field
 	// in the output. Keep the default value, Basic interlacing (INTERLACED), for all
@@ -6212,10 +6229,10 @@ type Mpeg2Settings struct {
 	// (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.
 	SlowPal Mpeg2SlowPal
 
-	// Ignore this setting unless you need to comply with a specification that requires
-	// a specific value. If you don't have a specification requirement, we recommend
-	// that you adjust the softness of your output by using a lower value for the
-	// setting Sharpness (sharpness) or by enabling a noise reducer filter
+	// Ignore this setting unless you need to comply with a specification that
+	// requires a specific value. If you don't have a specification requirement, we
+	// recommend that you adjust the softness of your output by using a lower value for
+	// the setting Sharpness (sharpness) or by enabling a noise reducer filter
 	// (noiseReducerFilter). The Softness (softness) setting specifies the quantization
 	// matrices that the encoder uses. Keep the default value, 0, to use the AWS
 	// Elemental default matrices. Choose a value from 17 to 128 to use planar
@@ -6239,9 +6256,9 @@ type Mpeg2Settings struct {
 	// Low. For content with a wider variety of textures, set it to High or Higher.
 	SpatialAdaptiveQuantization Mpeg2SpatialAdaptiveQuantization
 
-	// Specify whether this output's video uses the D10 syntax. Keep the default value
-	// to not use the syntax. Related settings: When you choose D10 (D_10) for your MXF
-	// profile (profile), you must also set this value to D10 (D_10).
+	// Specify whether this output's video uses the D10 syntax. Keep the default
+	// value to not use the syntax. Related settings: When you choose D10 (D_10) for
+	// your MXF profile (profile), you must also set this value to D10 (D_10).
 	Syntax Mpeg2Syntax
 
 	// When you do frame rate conversion from 23.976 frames per second (fps) to 29.97
@@ -6272,8 +6289,8 @@ type Mpeg2Settings struct {
 	noSmithyDocumentSerde
 }
 
-// Specify the details for each additional Microsoft Smooth Streaming manifest that
-// you want the service to generate for this output group. Each manifest can
+// Specify the details for each additional Microsoft Smooth Streaming manifest
+// that you want the service to generate for this output group. Each manifest can
 // reference a different subset of outputs in the group.
 type MsSmoothAdditionalManifest struct {
 
@@ -6292,13 +6309,13 @@ type MsSmoothAdditionalManifest struct {
 	noSmithyDocumentSerde
 }
 
-// If you are using DRM, set DRM System (MsSmoothEncryptionSettings) to specify the
-// value SpekeKeyProvider.
+// If you are using DRM, set DRM System (MsSmoothEncryptionSettings) to specify
+// the value SpekeKeyProvider.
 type MsSmoothEncryptionSettings struct {
 
-	// If your output group type is HLS, DASH, or Microsoft Smooth, use these settings
-	// when doing DRM encryption with a SPEKE-compliant key provider. If your output
-	// group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
+	// If your output group type is HLS, DASH, or Microsoft Smooth, use these
+	// settings when doing DRM encryption with a SPEKE-compliant key provider. If your
+	// output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
 	SpekeKeyProvider *SpekeKeyProvider
 
 	noSmithyDocumentSerde
@@ -6312,11 +6329,11 @@ type MsSmoothEncryptionSettings struct {
 // MS_SMOOTH_GROUP_SETTINGS.
 type MsSmoothGroupSettings struct {
 
-	// By default, the service creates one .ism Microsoft Smooth Streaming manifest for
-	// each Microsoft Smooth Streaming output group in your job. This default manifest
-	// references every output in the output group. To create additional manifests that
-	// reference a subset of the outputs in the output group, specify a list of them
-	// here.
+	// By default, the service creates one .ism Microsoft Smooth Streaming manifest
+	// for each Microsoft Smooth Streaming output group in your job. This default
+	// manifest references every output in the output group. To create additional
+	// manifests that reference a subset of the outputs in the output group, specify a
+	// list of them here.
 	AdditionalManifests []MsSmoothAdditionalManifest
 
 	// COMBINE_DUPLICATE_STREAMS combines identical audio encoding settings across a
@@ -6334,26 +6351,26 @@ type MsSmoothGroupSettings struct {
 	// destination
 	DestinationSettings *DestinationSettings
 
-	// If you are using DRM, set DRM System (MsSmoothEncryptionSettings) to specify the
-	// value SpekeKeyProvider.
+	// If you are using DRM, set DRM System (MsSmoothEncryptionSettings) to specify
+	// the value SpekeKeyProvider.
 	Encryption *MsSmoothEncryptionSettings
 
-	// Specify how you want MediaConvert to determine the fragment length. Choose Exact
-	// (EXACT) to have the encoder use the exact length that you specify with the
+	// Specify how you want MediaConvert to determine the fragment length. Choose
+	// Exact (EXACT) to have the encoder use the exact length that you specify with the
 	// setting Fragment length (FragmentLength). This might result in extra I-frames.
 	// Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment
 	// lengths to match the next GOP boundary.
 	FragmentLength int32
 
-	// Specify how you want MediaConvert to determine the fragment length. Choose Exact
-	// (EXACT) to have the encoder use the exact length that you specify with the
+	// Specify how you want MediaConvert to determine the fragment length. Choose
+	// Exact (EXACT) to have the encoder use the exact length that you specify with the
 	// setting Fragment length (FragmentLength). This might result in extra I-frames.
 	// Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment
 	// lengths to match the next GOP boundary.
 	FragmentLengthControl MsSmoothFragmentLengthControl
 
-	// Use Manifest encoding (MsSmoothManifestEncoding) to specify the encoding format
-	// for the server and client manifest. Valid options are utf8 and utf16.
+	// Use Manifest encoding (MsSmoothManifestEncoding) to specify the encoding
+	// format for the server and client manifest. Valid options are utf8 and utf16.
 	ManifestEncoding MsSmoothManifestEncoding
 
 	noSmithyDocumentSerde
@@ -6380,15 +6397,15 @@ type MxfSettings struct {
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html.
 	Profile MxfProfile
 
-	// Specify the XAVC profile settings for MXF outputs when you set your MXF profile
-	// to XAVC.
+	// Specify the XAVC profile settings for MXF outputs when you set your MXF
+	// profile to XAVC.
 	XavcProfileSettings *MxfXavcProfileSettings
 
 	noSmithyDocumentSerde
 }
 
-// Specify the XAVC profile settings for MXF outputs when you set your MXF profile
-// to XAVC.
+// Specify the XAVC profile settings for MXF outputs when you set your MXF
+// profile to XAVC.
 type MxfXavcProfileSettings struct {
 
 	// To create an output that complies with the XAVC file format guidelines for
@@ -6416,8 +6433,8 @@ type MxfXavcProfileSettings struct {
 // OTT Streaming workflows.
 type NexGuardFileMarkerSettings struct {
 
-	// Use the base64 license string that Nagra provides you. Enter it directly in your
-	// JSON job specification or in the console. Required when you include Nagra
+	// Use the base64 license string that Nagra provides you. Enter it directly in
+	// your JSON job specification or in the console. Required when you include Nagra
 	// NexGuard File Marker watermarking (NexGuardWatermarkingSettings) in your job.
 	License *string
 
@@ -6448,8 +6465,8 @@ type NexGuardFileMarkerSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Settings for your Nielsen configuration. If you don't do Nielsen measurement and
-// analytics, ignore these settings. When you enable Nielsen configuration
+// Settings for your Nielsen configuration. If you don't do Nielsen measurement
+// and analytics, ignore these settings. When you enable Nielsen configuration
 // (nielsenConfiguration), MediaConvert enables PCM to ID3 tagging for all outputs
 // in the job. To enable Nielsen configuration programmatically, include an
 // instance of nielsenConfiguration in your JSON job specification. Even if you
@@ -6495,26 +6512,26 @@ type NielsenNonLinearWatermarkSettings struct {
 	// Required for all Nielsen non-linear watermarking.
 	AssetId *string
 
-	// Use the asset name that you provide to Nielsen for this asset. Required for all
-	// Nielsen non-linear watermarking.
+	// Use the asset name that you provide to Nielsen for this asset. Required for
+	// all Nielsen non-linear watermarking.
 	AssetName *string
 
-	// Use the CSID that Nielsen provides to you. This CBET source ID should be unique
-	// to your Nielsen account but common to all of your output assets that have CBET
-	// watermarking. Required when you choose a value for the setting Watermark types
-	// (ActiveWatermarkProcess) that includes CBET.
+	// Use the CSID that Nielsen provides to you. This CBET source ID should be
+	// unique to your Nielsen account but common to all of your output assets that have
+	// CBET watermarking. Required when you choose a value for the setting Watermark
+	// types (ActiveWatermarkProcess) that includes CBET.
 	CbetSourceId *string
 
 	// Optional. If this asset uses an episode ID with Nielsen, provide it here.
 	EpisodeId *string
 
-	// Specify the Amazon S3 location where you want MediaConvert to save your Nielsen
-	// non-linear metadata .zip file. This Amazon S3 bucket must be in the same Region
-	// as the one where you do your MediaConvert transcoding. If you want to include an
-	// ADI file in this .zip file, use the setting ADI file (adiFilename) to specify
-	// it. MediaConvert delivers the Nielsen metadata .zip files only to your metadata
-	// destination Amazon S3 bucket. It doesn't deliver the .zip files to Nielsen. You
-	// are responsible for delivering the metadata .zip files to Nielsen.
+	// Specify the Amazon S3 location where you want MediaConvert to save your
+	// Nielsen non-linear metadata .zip file. This Amazon S3 bucket must be in the same
+	// Region as the one where you do your MediaConvert transcoding. If you want to
+	// include an ADI file in this .zip file, use the setting ADI file (adiFilename) to
+	// specify it. MediaConvert delivers the Nielsen metadata .zip files only to your
+	// metadata destination Amazon S3 bucket. It doesn't deliver the .zip files to
+	// Nielsen. You are responsible for delivering the metadata .zip files to Nielsen.
 	MetadataDestination *string
 
 	// Use the SID that Nielsen provides to you. This source ID should be unique to
@@ -6530,8 +6547,8 @@ type NielsenNonLinearWatermarkSettings struct {
 	// only clean content that doesn't already have non-linear Nielsen watermarks.
 	SourceWatermarkStatus NielsenSourceWatermarkStatusType
 
-	// Specify the endpoint for the TIC server that you have deployed and configured in
-	// the AWS Cloud. Required for all Nielsen non-linear watermarking. MediaConvert
+	// Specify the endpoint for the TIC server that you have deployed and configured
+	// in the AWS Cloud. Required for all Nielsen non-linear watermarking. MediaConvert
 	// can't connect directly to a TIC server. Instead, you must use API Gateway to
 	// provide a RESTful interface between MediaConvert and a TIC server that you
 	// deploy in your AWS account. For more information on deploying a TIC server in
@@ -6588,12 +6605,12 @@ type NoiseReducerFilterSettings struct {
 // Noise reducer filter settings for spatial filter.
 type NoiseReducerSpatialFilterSettings struct {
 
-	// Specify strength of post noise reduction sharpening filter, with 0 disabling the
-	// filter and 3 enabling it at maximum strength.
+	// Specify strength of post noise reduction sharpening filter, with 0 disabling
+	// the filter and 3 enabling it at maximum strength.
 	PostFilterSharpenStrength int32
 
-	// The speed of the filter, from -2 (lower speed) to 3 (higher speed), with 0 being
-	// the nominal value.
+	// The speed of the filter, from -2 (lower speed) to 3 (higher speed), with 0
+	// being the nominal value.
 	Speed int32
 
 	// Relative strength of noise reducing filter. Higher values produce stronger
@@ -6611,10 +6628,10 @@ type NoiseReducerTemporalFilterSettings struct {
 	// aggressively and creates better VQ for low bitrate outputs.
 	AggressiveMode int32
 
-	// When you set Noise reducer (noiseReducer) to Temporal (TEMPORAL), the bandwidth
-	// and sharpness of your output is reduced. You can optionally use Post temporal
-	// sharpening (postTemporalSharpening) to apply sharpening to the edges of your
-	// output. Note that Post temporal sharpening will also make the bandwidth
+	// When you set Noise reducer (noiseReducer) to Temporal (TEMPORAL), the
+	// bandwidth and sharpness of your output is reduced. You can optionally use Post
+	// temporal sharpening (postTemporalSharpening) to apply sharpening to the edges of
+	// your output. Note that Post temporal sharpening will also make the bandwidth
 	// reduction from the Noise reducer smaller. The default behavior, Auto (AUTO),
 	// allows the transcoder to determine whether to apply sharpening, depending on
 	// your input type and quality. When you set Post temporal sharpening to Enabled
@@ -6623,29 +6640,29 @@ type NoiseReducerTemporalFilterSettings struct {
 	// Disabled (DISABLED) to not apply sharpening.
 	PostTemporalSharpening NoiseFilterPostTemporalSharpening
 
-	// Use Post temporal sharpening strength (postTemporalSharpeningStrength) to define
-	// the amount of sharpening the transcoder applies to your output. Set Post
+	// Use Post temporal sharpening strength (postTemporalSharpeningStrength) to
+	// define the amount of sharpening the transcoder applies to your output. Set Post
 	// temporal sharpening strength to Low (LOW), Medium (MEDIUM), or High (HIGH) to
 	// indicate the amount of sharpening.
 	PostTemporalSharpeningStrength NoiseFilterPostTemporalSharpeningStrength
 
-	// The speed of the filter (higher number is faster). Low setting reduces bit rate
-	// at the cost of transcode time, high setting improves transcode time at the cost
-	// of bit rate.
+	// The speed of the filter (higher number is faster). Low setting reduces bit
+	// rate at the cost of transcode time, high setting improves transcode time at the
+	// cost of bit rate.
 	Speed int32
 
-	// Specify the strength of the noise reducing filter on this output. Higher values
-	// produce stronger filtering. We recommend the following value ranges, depending
-	// on the result that you want: * 0-2 for complexity reduction with minimal
-	// sharpness loss * 2-8 for complexity reduction with image preservation * 8-16 for
-	// a high level of complexity reduction
+	// Specify the strength of the noise reducing filter on this output. Higher
+	// values produce stronger filtering. We recommend the following value ranges,
+	// depending on the result that you want: * 0-2 for complexity reduction with
+	// minimal sharpness loss * 2-8 for complexity reduction with image preservation *
+	// 8-16 for a high level of complexity reduction
 	Strength int32
 
 	noSmithyDocumentSerde
 }
 
-// Required when you set Codec, under AudioDescriptions>CodecSettings, to the value
-// OPUS.
+// Required when you set Codec, under AudioDescriptions>CodecSettings, to the
+// value OPUS.
 type OpusSettings struct {
 
 	// Optional. Specify the average bitrate in bits per second. Valid values are
@@ -6653,8 +6670,8 @@ type OpusSettings struct {
 	// we recommend for quality and bandwidth.
 	Bitrate int32
 
-	// Specify the number of channels in this output audio track. Choosing Mono on the
-	// console gives you 1 output channel; choosing Stereo gives you 2. In the API,
+	// Specify the number of channels in this output audio track. Choosing Mono on
+	// the console gives you 1 output channel; choosing Stereo gives you 2. In the API,
 	// valid values are 1 and 2.
 	Channels int32
 
@@ -6665,8 +6682,9 @@ type OpusSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Each output in your job is a collection of settings that describes how you want
-// MediaConvert to encode a single output file or stream. For more information, see
+// Each output in your job is a collection of settings that describes how you
+// want MediaConvert to encode a single output file or stream. For more
+// information, see
 // https://docs.aws.amazon.com/mediaconvert/latest/ug/create-outputs.html.
 type Output struct {
 
@@ -6675,8 +6693,8 @@ type Output struct {
 	// (AudioDescriptions) can contain multiple groups of encoding settings.
 	AudioDescriptions []AudioDescription
 
-	// (CaptionDescriptions) contains groups of captions settings. For each output that
-	// has captions, include one instance of (CaptionDescriptions).
+	// (CaptionDescriptions) contains groups of captions settings. For each output
+	// that has captions, include one instance of (CaptionDescriptions).
 	// (CaptionDescriptions) can contain multiple groups of captions settings.
 	CaptionDescriptions []CaptionDescription
 
@@ -6691,12 +6709,13 @@ type Output struct {
 	// H265, AC3)
 	Extension *string
 
-	// Use Name modifier (NameModifier) to have the service add a string to the end of
-	// each output filename. You specify the base filename as part of your destination
-	// URI. When you create multiple outputs in the same output group, Name modifier
-	// (NameModifier) is required. Name modifier also accepts format identifiers. For
-	// DASH ISO outputs, if you use the format identifiers $Number$ or $Time$ in one
-	// output, you must use them in the same way in all outputs of the output group.
+	// Use Name modifier (NameModifier) to have the service add a string to the end
+	// of each output filename. You specify the base filename as part of your
+	// destination URI. When you create multiple outputs in the same output group, Name
+	// modifier (NameModifier) is required. Name modifier also accepts format
+	// identifiers. For DASH ISO outputs, if you use the format identifiers $Number$
+	// or $Time$ in one output, you must use them in the same way in all outputs of
+	// the output group.
 	NameModifier *string
 
 	// Specific settings for this type of output.
@@ -6707,8 +6726,8 @@ type Output struct {
 	// Container settings (ContainerSettings), but not both.
 	Preset *string
 
-	// VideoDescription contains a group of video encoding settings. The specific video
-	// settings depend on the video codec that you choose for the property codec.
+	// VideoDescription contains a group of video encoding settings. The specific
+	// video settings depend on the video codec that you choose for the property codec.
 	// Include one instance of VideoDescription per output.
 	VideoDescription *VideoDescription
 
@@ -6749,8 +6768,8 @@ type OutputGroup struct {
 	// you, based on characteristics of your input video.
 	AutomatedEncodingSettings *AutomatedEncodingSettings
 
-	// Use Custom Group Name (CustomName) to specify a name for the output group. This
-	// value is displayed on the console and can make your job settings JSON more
+	// Use Custom Group Name (CustomName) to specify a name for the output group.
+	// This value is displayed on the console and can make your job settings JSON more
 	// human-readable. It does not affect your outputs. Use up to twelve characters
 	// that are either letters, numbers, spaces, or underscores.
 	CustomName *string
@@ -6761,7 +6780,8 @@ type OutputGroup struct {
 	// Output Group settings, including type
 	OutputGroupSettings *OutputGroupSettings
 
-	// This object holds groups of encoding settings, one group of settings per output.
+	// This object holds groups of encoding settings, one group of settings per
+	// output.
 	Outputs []Output
 
 	noSmithyDocumentSerde
@@ -6865,7 +6885,8 @@ type Policy struct {
 // want MediaConvert to apply to the output during the conversion process.
 type Preset struct {
 
-	// A name you create for each preset. Each name must be unique within your account.
+	// A name you create for each preset. Each name must be unique within your
+	// account.
 	//
 	// This member is required.
 	Name *string
@@ -6890,8 +6911,8 @@ type Preset struct {
 	// The timestamp in epoch seconds when the preset was last updated.
 	LastUpdated *time.Time
 
-	// A preset can be of two types: system or custom. System or built-in preset can't
-	// be modified or deleted by the user.
+	// A preset can be of two types: system or custom. System or built-in preset
+	// can't be modified or deleted by the user.
 	Type Type
 
 	noSmithyDocumentSerde
@@ -6912,8 +6933,8 @@ type PresetSettings struct {
 	// Container specific settings.
 	ContainerSettings *ContainerSettings
 
-	// VideoDescription contains a group of video encoding settings. The specific video
-	// settings depend on the video codec that you choose for the property codec.
+	// VideoDescription contains a group of video encoding settings. The specific
+	// video settings depend on the video codec that you choose for the property codec.
 	// Include one instance of VideoDescription per output.
 	VideoDescription *VideoDescription
 
@@ -6969,20 +6990,20 @@ type ProresSettings struct {
 	// transcoding time and incurs a significant add-on cost.
 	FramerateConversionAlgorithm ProresFramerateConversionAlgorithm
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateDenominator to specify the denominator of this fraction. In this
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateDenominator to specify the denominator of this fraction. In this
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Framerate. In this example, specify 23.976.
 	FramerateDenominator int32
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateNumerator to specify the numerator of this fraction. In this example,
-	// use 24000 for the value of FramerateNumerator. When you use the console for
-	// transcode jobs that use frame rate conversion, provide the value as a decimal
-	// number for Framerate. In this example, specify 23.976.
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateNumerator to specify the numerator of this fraction. In this
+	// example, use 24000 for the value of FramerateNumerator. When you use the console
+	// for transcode jobs that use frame rate conversion, provide the value as a
+	// decimal number for Framerate. In this example, specify 23.976.
 	FramerateNumerator int32
 
 	// Choose the scan line type for the output. Keep the default value, Progressive
@@ -7024,8 +7045,8 @@ type ProresSettings struct {
 	// parNumerator is 40.
 	ParNumerator int32
 
-	// Use this setting for interlaced outputs, when your output frame rate is half of
-	// your input frame rate. In this situation, choose Optimized interlacing
+	// Use this setting for interlaced outputs, when your output frame rate is half
+	// of your input frame rate. In this situation, choose Optimized interlacing
 	// (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this
 	// case, each progressive frame from the input corresponds to an interlaced field
 	// in the output. Keep the default value, Basic interlacing (INTERLACED), for all
@@ -7122,8 +7143,8 @@ type QueueTransition struct {
 	// The queue that the job was on before the transition.
 	SourceQueue *string
 
-	// The time, in Unix epoch format, that the job moved from the source queue to the
-	// destination queue.
+	// The time, in Unix epoch format, that the job moved from the source queue to
+	// the destination queue.
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
@@ -7149,9 +7170,9 @@ type Rectangle struct {
 	noSmithyDocumentSerde
 }
 
-// Use Manual audio remixing (RemixSettings) to adjust audio levels for each audio
-// channel in each output of your job. With audio remixing, you can output more or
-// fewer audio channels than your input audio source provides.
+// Use Manual audio remixing (RemixSettings) to adjust audio levels for each
+// audio channel in each output of your job. With audio remixing, you can output
+// more or fewer audio channels than your input audio source provides.
 type RemixSettings struct {
 
 	// Channel mapping (ChannelMapping) contains the group of fields that hold the
@@ -7196,12 +7217,12 @@ type ReservationPlan struct {
 	// reserved queue expires.
 	ExpiresAt *time.Time
 
-	// The timestamp in epoch seconds for when you set up the current pricing plan for
-	// this reserved queue.
+	// The timestamp in epoch seconds for when you set up the current pricing plan
+	// for this reserved queue.
 	PurchasedAt *time.Time
 
-	// Specifies whether the term of your reserved queue pricing plan is automatically
-	// extended (AUTO_RENEW) or expires (EXPIRE) at the end of the term.
+	// Specifies whether the term of your reserved queue pricing plan is
+	// automatically extended (AUTO_RENEW) or expires (EXPIRE) at the end of the term.
 	RenewalType RenewalType
 
 	// Specifies the number of reserved transcode slots (RTS) for this queue. The
@@ -7212,7 +7233,8 @@ type ReservationPlan struct {
 	// can't decrease the number of RTS in your reserved queue.
 	ReservedSlots int32
 
-	// Specifies whether the pricing plan for your reserved queue is ACTIVE or EXPIRED.
+	// Specifies whether the pricing plan for your reserved queue is ACTIVE or
+	// EXPIRED.
 	Status ReservationPlanStatus
 
 	noSmithyDocumentSerde
@@ -7227,10 +7249,10 @@ type ReservationPlanSettings struct {
 	// This member is required.
 	Commitment Commitment
 
-	// Specifies whether the term of your reserved queue pricing plan is automatically
-	// extended (AUTO_RENEW) or expires (EXPIRE) at the end of the term. When your term
-	// is auto renewed, you extend your commitment by 12 months from the auto renew
-	// date. You can cancel this commitment.
+	// Specifies whether the term of your reserved queue pricing plan is
+	// automatically extended (AUTO_RENEW) or expires (EXPIRE) at the end of the term.
+	// When your term is auto renewed, you extend your commitment by 12 months from the
+	// auto renew date. You can cancel this commitment.
 	//
 	// This member is required.
 	RenewalType RenewalType
@@ -7263,9 +7285,9 @@ type ResourceTags struct {
 	noSmithyDocumentSerde
 }
 
-// Optional. Have MediaConvert automatically apply Amazon S3 access control for the
-// outputs in this output group. When you don't use this setting, S3 automatically
-// applies the default access control list PRIVATE.
+// Optional. Have MediaConvert automatically apply Amazon S3 access control for
+// the outputs in this output group. When you don't use this setting, S3
+// automatically applies the default access control list PRIVATE.
 type S3DestinationAccessControl struct {
 
 	// Choose an Amazon S3 canned ACL for MediaConvert to apply to this output.
@@ -7277,9 +7299,9 @@ type S3DestinationAccessControl struct {
 // Settings associated with S3 destination
 type S3DestinationSettings struct {
 
-	// Optional. Have MediaConvert automatically apply Amazon S3 access control for the
-	// outputs in this output group. When you don't use this setting, S3 automatically
-	// applies the default access control list PRIVATE.
+	// Optional. Have MediaConvert automatically apply Amazon S3 access control for
+	// the outputs in this output group. When you don't use this setting, S3
+	// automatically applies the default access control list PRIVATE.
 	AccessControl *S3DestinationAccessControl
 
 	// Settings for how your job outputs are encrypted as they are uploaded to Amazon
@@ -7293,17 +7315,17 @@ type S3DestinationSettings struct {
 // S3.
 type S3EncryptionSettings struct {
 
-	// Specify how you want your data keys managed. AWS uses data keys to encrypt your
-	// content. AWS also encrypts the data keys themselves, using a customer master key
-	// (CMK), and then stores the encrypted data keys alongside your encrypted content.
-	// Use this setting to specify which AWS service manages the CMK. For simplest set
-	// up, choose Amazon S3 (SERVER_SIDE_ENCRYPTION_S3). If you want your master key to
-	// be managed by AWS Key Management Service (KMS), choose AWS KMS
-	// (SERVER_SIDE_ENCRYPTION_KMS). By default, when you choose AWS KMS, KMS uses the
-	// AWS managed customer master key (CMK) associated with Amazon S3 to encrypt your
-	// data keys. You can optionally choose to specify a different, customer managed
-	// CMK. Do so by specifying the Amazon Resource Name (ARN) of the key for the
-	// setting KMS ARN (kmsKeyArn).
+	// Specify how you want your data keys managed. AWS uses data keys to encrypt
+	// your content. AWS also encrypts the data keys themselves, using a customer
+	// master key (CMK), and then stores the encrypted data keys alongside your
+	// encrypted content. Use this setting to specify which AWS service manages the
+	// CMK. For simplest set up, choose Amazon S3 (SERVER_SIDE_ENCRYPTION_S3). If you
+	// want your master key to be managed by AWS Key Management Service (KMS), choose
+	// AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). By default, when you choose AWS KMS, KMS
+	// uses the AWS managed customer master key (CMK) associated with Amazon S3 to
+	// encrypt your data keys. You can optionally choose to specify a different,
+	// customer managed CMK. Do so by specifying the Amazon Resource Name (ARN) of the
+	// key for the setting KMS ARN (kmsKeyArn).
 	EncryptionType S3ServerSideEncryptionType
 
 	// Optionally, specify the encryption context that you want to use alongside your
@@ -7328,10 +7350,10 @@ type S3EncryptionSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Settings related to SCC captions. SCC is a sidecar format that holds captions in
-// a file that is separate from the video container. Set up sidecar captions in the
-// same output group, but different output from your video. For more information,
-// see
+// Settings related to SCC captions. SCC is a sidecar format that holds captions
+// in a file that is separate from the video container. Set up sidecar captions in
+// the same output group, but different output from your video. For more
+// information, see
 // https://docs.aws.amazon.com/mediaconvert/latest/ug/scc-srt-output-captions.html.
 // When you work directly in your JSON job specification, include this object and
 // any required children when you set destinationType to SCC.
@@ -7348,9 +7370,9 @@ type SccDestinationSettings struct {
 	noSmithyDocumentSerde
 }
 
-// If your output group type is HLS, DASH, or Microsoft Smooth, use these settings
-// when doing DRM encryption with a SPEKE-compliant key provider. If your output
-// group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
+// If your output group type is HLS, DASH, or Microsoft Smooth, use these
+// settings when doing DRM encryption with a SPEKE-compliant key provider. If your
+// output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
 type SpekeKeyProvider struct {
 
 	// If you want your key provider to encrypt the content keys that it provides to
@@ -7358,8 +7380,8 @@ type SpekeKeyProvider struct {
 	// Manager. Specify the certificate's Amazon Resource Name (ARN) here.
 	CertificateArn *string
 
-	// Specify the resource ID that your SPEKE-compliant key provider uses to identify
-	// this content.
+	// Specify the resource ID that your SPEKE-compliant key provider uses to
+	// identify this content.
 	ResourceId *string
 
 	// Relates to SPEKE implementation. DRM system identifiers. DASH output groups
@@ -7374,9 +7396,9 @@ type SpekeKeyProvider struct {
 	noSmithyDocumentSerde
 }
 
-// If your output group type is CMAF, use these settings when doing DRM encryption
-// with a SPEKE-compliant key provider. If your output group type is HLS, DASH, or
-// Microsoft Smooth, use the SpekeKeyProvider settings instead.
+// If your output group type is CMAF, use these settings when doing DRM
+// encryption with a SPEKE-compliant key provider. If your output group type is
+// HLS, DASH, or Microsoft Smooth, use the SpekeKeyProvider settings instead.
 type SpekeKeyProviderCmaf struct {
 
 	// If you want your key provider to encrypt the content keys that it provides to
@@ -7396,8 +7418,8 @@ type SpekeKeyProviderCmaf struct {
 	// https://dashif.org/identifiers/content_protection/.
 	HlsSignaledSystemIds []string
 
-	// Specify the resource ID that your SPEKE-compliant key provider uses to identify
-	// this content.
+	// Specify the resource ID that your SPEKE-compliant key provider uses to
+	// identify this content.
 	ResourceId *string
 
 	// Specify the URL to the key server that your SPEKE-compliant DRM key provider
@@ -7407,19 +7429,19 @@ type SpekeKeyProviderCmaf struct {
 	noSmithyDocumentSerde
 }
 
-// Settings related to SRT captions. SRT is a sidecar format that holds captions in
-// a file that is separate from the video container. Set up sidecar captions in the
-// same output group, but different output from your video. When you work directly
-// in your JSON job specification, include this object and any required children
-// when you set destinationType to SRT.
+// Settings related to SRT captions. SRT is a sidecar format that holds captions
+// in a file that is separate from the video container. Set up sidecar captions in
+// the same output group, but different output from your video. When you work
+// directly in your JSON job specification, include this object and any required
+// children when you set destinationType to SRT.
 type SrtDestinationSettings struct {
 
-	// Set Style passthrough (StylePassthrough) to ENABLED to use the available style,
-	// color, and position information from your input captions. MediaConvert uses
-	// default settings for any missing style and position information in your input
-	// captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style
-	// and position information from your input captions and use simplified output
-	// captions.
+	// Set Style passthrough (StylePassthrough) to ENABLED to use the available
+	// style, color, and position information from your input captions. MediaConvert
+	// uses default settings for any missing style and position information in your
+	// input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the
+	// style and position information from your input captions and use simplified
+	// output captions.
 	StylePassthrough SrtStylePassthrough
 
 	noSmithyDocumentSerde
@@ -7433,12 +7455,12 @@ type StaticKeyProvider struct {
 	// value of 'identity'.
 	KeyFormat *string
 
-	// Relates to DRM implementation. Either a single positive integer version value or
-	// a slash delimited list of version values (1/2/3).
+	// Relates to DRM implementation. Either a single positive integer version value
+	// or a slash delimited list of version values (1/2/3).
 	KeyFormatVersions *string
 
-	// Relates to DRM implementation. Use a 32-character hexidecimal string to specify
-	// Key Value (StaticKeyValue).
+	// Relates to DRM implementation. Use a 32-character hexidecimal string to
+	// specify Key Value (StaticKeyValue).
 	StaticKeyValue *string
 
 	// Relates to DRM implementation. The location of the license server used for
@@ -7455,10 +7477,10 @@ type StaticKeyProvider struct {
 // any required children when you set destinationType to TELETEXT.
 type TeletextDestinationSettings struct {
 
-	// Set pageNumber to the Teletext page number for the destination captions for this
-	// output. This value must be a three-digit hexadecimal string; strings ending in
-	// -FF are invalid. If you are passing through the entire set of Teletext data, do
-	// not use this field.
+	// Set pageNumber to the Teletext page number for the destination captions for
+	// this output. This value must be a three-digit hexadecimal string; strings ending
+	// in -FF are invalid. If you are passing through the entire set of Teletext data,
+	// do not use this field.
 	PageNumber *string
 
 	// Specify the page types for this Teletext page. If you don't specify a value
@@ -7474,9 +7496,9 @@ type TeletextDestinationSettings struct {
 // Settings specific to Teletext caption sources, including Page number.
 type TeletextSourceSettings struct {
 
-	// Use Page Number (PageNumber) to specify the three-digit hexadecimal page number
-	// that will be used for Teletext captions. Do not use this setting if you are
-	// passing through teletext from the input source to output.
+	// Use Page Number (PageNumber) to specify the three-digit hexadecimal page
+	// number that will be used for Teletext captions. Do not use this setting if you
+	// are passing through teletext from the input source to output.
 	PageNumber *string
 
 	noSmithyDocumentSerde
@@ -7489,15 +7511,15 @@ type TimecodeBurnin struct {
 	// values are 10, 16, 32, 48.
 	FontSize int32
 
-	// Use Position (Position) under under Timecode burn-in (TimecodeBurnIn) to specify
-	// the location the burned-in timecode on output video.
+	// Use Position (Position) under under Timecode burn-in (TimecodeBurnIn) to
+	// specify the location the burned-in timecode on output video.
 	Position TimecodeBurninPosition
 
-	// Use Prefix (Prefix) to place ASCII characters before any burned-in timecode. For
-	// example, a prefix of "EZ-" will result in the timecode "EZ-00:00:00:00". Provide
-	// either the characters themselves or the ASCII code equivalents. The supported
-	// range of characters is 0x20 through 0x7e. This includes letters, numbers, and
-	// all special characters represented on a standard English keyboard.
+	// Use Prefix (Prefix) to place ASCII characters before any burned-in timecode.
+	// For example, a prefix of "EZ-" will result in the timecode "EZ-00:00:00:00".
+	// Provide either the characters themselves or the ASCII code equivalents. The
+	// supported range of characters is 0x20 through 0x7e. This includes letters,
+	// numbers, and all special characters represented on a standard English keyboard.
 	Prefix *string
 
 	noSmithyDocumentSerde
@@ -7520,8 +7542,8 @@ type TimecodeConfig struct {
 	// first frame is the timecode value on the first input frame of the input.
 	Anchor *string
 
-	// Use Source (TimecodeSource) to set how timecodes are handled within this job. To
-	// make sure that your video, audio, captions, and markers are synchronized and
+	// Use Source (TimecodeSource) to set how timecodes are handled within this job.
+	// To make sure that your video, audio, captions, and markers are synchronized and
 	// that time-based features, such as image inserter, work correctly, choose the
 	// Timecode source option that matches your assets. All timecodes are in a 24-hour
 	// format with frame number (HH:MM:SS:FF). * Embedded (EMBEDDED) - Use the timecode
@@ -7561,8 +7583,8 @@ type TimedMetadataInsertion struct {
 	noSmithyDocumentSerde
 }
 
-// Information about when jobs are submitted, started, and finished is specified in
-// Unix epoch format in seconds.
+// Information about when jobs are submitted, started, and finished is specified
+// in Unix epoch format in seconds.
 type Timing struct {
 
 	// The time, in Unix epoch format, that the transcoding job finished
@@ -7583,9 +7605,9 @@ type Timing struct {
 // TrackSourceSettings.
 type TrackSourceSettings struct {
 
-	// Use this setting to select a single captions track from a source. Track numbers
-	// correspond to the order in the captions source file. For IMF sources, track
-	// numbering is based on the order that the captions appear in the CPL. For
+	// Use this setting to select a single captions track from a source. Track
+	// numbers correspond to the order in the captions source file. For IMF sources,
+	// track numbering is based on the order that the captions appear in the CPL. For
 	// example, use 1 to select the captions asset that is listed first in the CPL. To
 	// include more than one captions track in your job outputs, create multiple input
 	// captions selectors. Specify one track per selector.
@@ -7594,17 +7616,17 @@ type TrackSourceSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Settings related to TTML captions. TTML is a sidecar format that holds captions
-// in a file that is separate from the video container. Set up sidecar captions in
-// the same output group, but different output from your video. For more
-// information, see
+// Settings related to TTML captions. TTML is a sidecar format that holds
+// captions in a file that is separate from the video container. Set up sidecar
+// captions in the same output group, but different output from your video. For
+// more information, see
 // https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html.
 // When you work directly in your JSON job specification, include this object and
 // any required children when you set destinationType to TTML.
 type TtmlDestinationSettings struct {
 
-	// Pass through style and position information from a TTML-like input source (TTML,
-	// IMSC, SMPTE-TT) to the TTML output.
+	// Pass through style and position information from a TTML-like input source
+	// (TTML, IMSC, SMPTE-TT) to the TTML output.
 	StylePassthrough TtmlStylePassthrough
 
 	noSmithyDocumentSerde
@@ -7639,28 +7661,28 @@ type Vc3Settings struct {
 	// transcoding time and incurs a significant add-on cost.
 	FramerateConversionAlgorithm Vc3FramerateConversionAlgorithm
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateDenominator to specify the denominator of this fraction. In this
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateDenominator to specify the denominator of this fraction. In this
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Framerate. In this example, specify 23.976.
 	FramerateDenominator int32
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateNumerator to specify the numerator of this fraction. In this example,
-	// use 24000 for the value of FramerateNumerator. When you use the console for
-	// transcode jobs that use frame rate conversion, provide the value as a decimal
-	// number for Framerate. In this example, specify 23.976.
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateNumerator to specify the numerator of this fraction. In this
+	// example, use 24000 for the value of FramerateNumerator. When you use the console
+	// for transcode jobs that use frame rate conversion, provide the value as a
+	// decimal number for Framerate. In this example, specify 23.976.
 	FramerateNumerator int32
 
 	// Optional. Choose the scan line type for this output. If you don't specify a
 	// value, MediaConvert will create a progressive output.
 	InterlaceMode Vc3InterlaceMode
 
-	// Use this setting for interlaced outputs, when your output frame rate is half of
-	// your input frame rate. In this situation, choose Optimized interlacing
+	// Use this setting for interlaced outputs, when your output frame rate is half
+	// of your input frame rate. In this situation, choose Optimized interlacing
 	// (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this
 	// case, each progressive frame from the input corresponds to an interlaced field
 	// in the output. Keep the default value, Basic interlacing (INTERLACED), for all
@@ -7689,8 +7711,8 @@ type Vc3Settings struct {
 	// doing anything with the field polarity to create a smoother picture.
 	Telecine Vc3Telecine
 
-	// Specify the VC3 class to choose the quality characteristics for this output. VC3
-	// class, together with the settings Framerate (framerateNumerator and
+	// Specify the VC3 class to choose the quality characteristics for this output.
+	// VC3 class, together with the settings Framerate (framerateNumerator and
 	// framerateDenominator) and Resolution (height and width), determine your output
 	// bitrate. For example, say that your video resolution is 1920x1080 and your
 	// framerate is 29.97. Then Class 145 (CLASS_145) gives you an output with a
@@ -7723,8 +7745,8 @@ type VideoCodecSettings struct {
 	// AVC-Intra, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf.
 	AvcIntraSettings *AvcIntraSettings
 
-	// Specifies the video codec. This must be equal to one of the enum values defined
-	// by the object VideoCodec.
+	// Specifies the video codec. This must be equal to one of the enum values
+	// defined by the object VideoCodec.
 	Codec VideoCodec
 
 	// Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the
@@ -7809,9 +7831,9 @@ type VideoDescription struct {
 	// by default when Timecode insertion (TimecodeInsertion) is enabled.
 	DropFrameTimecode DropFrameTimecode
 
-	// Applies only if you set AFD Signaling(AfdSignaling) to Fixed (FIXED). Use Fixed
-	// (FixedAfd) to specify a four-bit AFD value which the service will write on all
-	// frames of this video output.
+	// Applies only if you set AFD Signaling(AfdSignaling) to Fixed (FIXED). Use
+	// Fixed (FixedAfd) to specify a four-bit AFD value which the service will write on
+	// all frames of this video output.
 	FixedAfd int32
 
 	// Use the Height (Height) setting to define the video resolution height for this
@@ -7833,15 +7855,16 @@ type VideoDescription struct {
 	// output.
 	RespondToAfd RespondToAfd
 
-	// Specify how the service handles outputs that have a different aspect ratio from
-	// the input aspect ratio. Choose Stretch to output (STRETCH_TO_OUTPUT) to have the
-	// service stretch your video image to fit. Keep the setting Default (DEFAULT) to
-	// have the service letterbox your video instead. This setting overrides any value
-	// that you specify for the setting Selection placement (position) in this output.
+	// Specify how the service handles outputs that have a different aspect ratio
+	// from the input aspect ratio. Choose Stretch to output (STRETCH_TO_OUTPUT) to
+	// have the service stretch your video image to fit. Keep the setting Default
+	// (DEFAULT) to have the service letterbox your video instead. This setting
+	// overrides any value that you specify for the setting Selection placement
+	// (position) in this output.
 	ScalingBehavior ScalingBehavior
 
-	// Use Sharpness (Sharpness) setting to specify the strength of anti-aliasing. This
-	// setting changes the width of the anti-alias filter kernel used for scaling.
+	// Use Sharpness (Sharpness) setting to specify the strength of anti-aliasing.
+	// This setting changes the width of the anti-alias filter kernel used for scaling.
 	// Sharpness only applies if your output resolution is different from your input
 	// resolution. 0 is the softest setting, 100 the sharpest, and 50 recommended for
 	// most content.
@@ -7896,8 +7919,8 @@ type VideoPreprocessor struct {
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/converting-the-color-space.html.
 	ColorCorrector *ColorCorrector
 
-	// Use the deinterlacer to produce smoother motion and a clearer picture. For more
-	// information, see
+	// Use the deinterlacer to produce smoother motion and a clearer picture. For
+	// more information, see
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-scan-type.html.
 	Deinterlacer *Deinterlacer
 
@@ -7954,13 +7977,11 @@ type VideoSelector struct {
 	// an input color space, MediaConvert uses the following color space metadata,
 	// which includes color primaries, transfer characteristics, and matrix
 	// coefficients:
-	// - HDR 10: BT.2020, PQ, BT.2020 non-constant
-	// - HLG 2020: BT.2020,
-	// HLG, BT.2020 non-constant
-	// - P3DCI (Theater): DCIP3, SMPTE 428M, BT.709
-	// - P3D65
-	// (SDR): Display P3, sRGB, BT.709
-	// - P3D65 (HDR): Display P3, PQ, BT.709
+	//     - HDR 10: BT.2020, PQ, BT.2020 non-constant
+	//     - HLG 2020: BT.2020, HLG, BT.2020 non-constant
+	//     - P3DCI (Theater): DCIP3, SMPTE 428M, BT.709
+	//     - P3D65 (SDR): Display P3, sRGB, BT.709
+	//     - P3D65 (HDR): Display P3, PQ, BT.709
 	ColorSpace ColorSpace
 
 	// There are two sources for color metadata, the input file and the job input
@@ -7974,11 +7995,12 @@ type VideoSelector struct {
 	// input settings.
 	ColorSpaceUsage ColorSpaceUsage
 
-	// Set Embedded timecode override (embeddedTimecodeOverride) to Use MDPM (USE_MDPM)
-	// when your AVCHD input contains timecode tag data in the Modified Digital Video
-	// Pack Metadata (MDPM). When you do, we recommend you also set Timecode source
-	// (inputTimecodeSource) to Embedded (EMBEDDED). Leave Embedded timecode override
-	// blank, or set to None (NONE), when your input does not contain MDPM timecode.
+	// Set Embedded timecode override (embeddedTimecodeOverride) to Use MDPM
+	// (USE_MDPM) when your AVCHD input contains timecode tag data in the Modified
+	// Digital Video Pack Metadata (MDPM). When you do, we recommend you also set
+	// Timecode source (inputTimecodeSource) to Embedded (EMBEDDED). Leave Embedded
+	// timecode override blank, or set to None (NONE), when your input does not contain
+	// MDPM timecode.
 	EmbeddedTimecodeOverride EmbeddedTimecodeOverride
 
 	// Use these settings to provide HDR 10 metadata that is missing or inaccurate in
@@ -8015,8 +8037,8 @@ type VideoSelector struct {
 	// that Quad 4K is not currently supported.
 	ProgramNumber int32
 
-	// Use Rotate (InputRotate) to specify how the service rotates your video. You can
-	// choose automatic rotation or specify a rotation. You can specify a clockwise
+	// Use Rotate (InputRotate) to specify how the service rotates your video. You
+	// can choose automatic rotation or specify a rotation. You can specify a clockwise
 	// rotation of 0, 90, 180, or 270 degrees. If your input video container is .mov or
 	// .mp4 and your input has rotation metadata, you can choose Automatic to have the
 	// service rotate your video according to the rotation specified in the metadata.
@@ -8039,8 +8061,8 @@ type VideoSelector struct {
 	noSmithyDocumentSerde
 }
 
-// Required when you set Codec, under AudioDescriptions>CodecSettings, to the value
-// Vorbis.
+// Required when you set Codec, under AudioDescriptions>CodecSettings, to the
+// value Vorbis.
 type VorbisSettings struct {
 
 	// Optional. Specify the number of channels in this output audio track. Choosing
@@ -8094,20 +8116,20 @@ type Vp8Settings struct {
 	// transcoding time and incurs a significant add-on cost.
 	FramerateConversionAlgorithm Vp8FramerateConversionAlgorithm
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateDenominator to specify the denominator of this fraction. In this
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateDenominator to specify the denominator of this fraction. In this
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Framerate. In this example, specify 23.976.
 	FramerateDenominator int32
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateNumerator to specify the numerator of this fraction. In this example,
-	// use 24000 for the value of FramerateNumerator. When you use the console for
-	// transcode jobs that use frame rate conversion, provide the value as a decimal
-	// number for Framerate. In this example, specify 23.976.
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateNumerator to specify the numerator of this fraction. In this
+	// example, use 24000 for the value of FramerateNumerator. When you use the console
+	// for transcode jobs that use frame rate conversion, provide the value as a
+	// decimal number for Framerate. In this example, specify 23.976.
 	FramerateNumerator int32
 
 	// GOP Length (keyframe interval) in frames. Must be greater than zero.
@@ -8193,20 +8215,20 @@ type Vp9Settings struct {
 	// transcoding time and incurs a significant add-on cost.
 	FramerateConversionAlgorithm Vp9FramerateConversionAlgorithm
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateDenominator to specify the denominator of this fraction. In this
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateDenominator to specify the denominator of this fraction. In this
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Framerate. In this example, specify 23.976.
 	FramerateDenominator int32
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateNumerator to specify the numerator of this fraction. In this example,
-	// use 24000 for the value of FramerateNumerator. When you use the console for
-	// transcode jobs that use frame rate conversion, provide the value as a decimal
-	// number for Framerate. In this example, specify 23.976.
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateNumerator to specify the numerator of this fraction. In this
+	// example, use 24000 for the value of FramerateNumerator. When you use the console
+	// for transcode jobs that use frame rate conversion, provide the value as a
+	// decimal number for Framerate. In this example, specify 23.976.
 	FramerateNumerator int32
 
 	// GOP Length (keyframe interval) in frames. Must be greater than zero.
@@ -8259,8 +8281,8 @@ type Vp9Settings struct {
 // value WAV.
 type WavSettings struct {
 
-	// Specify Bit depth (BitDepth), in bits per sample, to choose the encoding quality
-	// for this audio track.
+	// Specify Bit depth (BitDepth), in bits per sample, to choose the encoding
+	// quality for this audio track.
 	BitDepth int32
 
 	// Specify the number of channels in this output audio track. Valid values are 1
@@ -8311,14 +8333,14 @@ type WebvttDestinationSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Settings specific to WebVTT sources in HLS alternative rendition group. Specify
-// the properties (renditionGroupId, renditionName or renditionLanguageCode) to
-// identify the unique subtitle track among the alternative rendition groups
-// present in the HLS manifest. If no unique track is found, or multiple tracks
-// match the specified properties, the job fails. If there is only one subtitle
-// track in the rendition group, the settings can be left empty and the default
-// subtitle track will be chosen. If your caption source is a sidecar file, use
-// FileSourceSettings instead of WebvttHlsSourceSettings.
+// Settings specific to WebVTT sources in HLS alternative rendition group.
+// Specify the properties (renditionGroupId, renditionName or
+// renditionLanguageCode) to identify the unique subtitle track among the
+// alternative rendition groups present in the HLS manifest. If no unique track is
+// found, or multiple tracks match the specified properties, the job fails. If
+// there is only one subtitle track in the rendition group, the settings can be
+// left empty and the default subtitle track will be chosen. If your caption source
+// is a sidecar file, use FileSourceSettings instead of WebvttHlsSourceSettings.
 type WebvttHlsSourceSettings struct {
 
 	// Optional. Specify alternative group ID
@@ -8338,9 +8360,9 @@ type WebvttHlsSourceSettings struct {
 // XAVC_4K_INTRA_CBG.
 type Xavc4kIntraCbgProfileSettings struct {
 
-	// Specify the XAVC Intra 4k (CBG) Class to set the bitrate of your output. Outputs
-	// of the same class have similar image quality over the operating points that are
-	// valid for that class.
+	// Specify the XAVC Intra 4k (CBG) Class to set the bitrate of your output.
+	// Outputs of the same class have similar image quality over the operating points
+	// that are valid for that class.
 	XavcClass Xavc4kIntraCbgProfileClass
 
 	noSmithyDocumentSerde
@@ -8351,9 +8373,9 @@ type Xavc4kIntraCbgProfileSettings struct {
 // XAVC_4K_INTRA_VBR.
 type Xavc4kIntraVbrProfileSettings struct {
 
-	// Specify the XAVC Intra 4k (VBR) Class to set the bitrate of your output. Outputs
-	// of the same class have similar image quality over the operating points that are
-	// valid for that class.
+	// Specify the XAVC Intra 4k (VBR) Class to set the bitrate of your output.
+	// Outputs of the same class have similar image quality over the operating points
+	// that are valid for that class.
 	XavcClass Xavc4kIntraVbrProfileClass
 
 	noSmithyDocumentSerde
@@ -8363,40 +8385,40 @@ type Xavc4kIntraVbrProfileSettings struct {
 // (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_4K.
 type Xavc4kProfileSettings struct {
 
-	// Specify the XAVC 4k (Long GOP) Bitrate Class to set the bitrate of your output.
-	// Outputs of the same class have similar image quality over the operating points
-	// that are valid for that class.
+	// Specify the XAVC 4k (Long GOP) Bitrate Class to set the bitrate of your
+	// output. Outputs of the same class have similar image quality over the operating
+	// points that are valid for that class.
 	BitrateClass Xavc4kProfileBitrateClass
 
 	// Specify the codec profile for this output. Choose High, 8-bit, 4:2:0 (HIGH) or
 	// High, 10-bit, 4:2:2 (HIGH_422). These profiles are specified in ITU-T H.264.
 	CodecProfile Xavc4kProfileCodecProfile
 
-	// The best way to set up adaptive quantization is to keep the default value, Auto
-	// (AUTO), for the setting Adaptive quantization (XavcAdaptiveQuantization). When
-	// you do so, MediaConvert automatically applies the best types of quantization for
-	// your video content. Include this setting in your JSON job specification only
-	// when you choose to change the default value for Adaptive quantization. Enable
-	// this setting to have the encoder reduce I-frame pop. I-frame pop appears as a
-	// visual flicker that can arise when the encoder saves bits by copying some
-	// macroblocks many times from frame to frame, and then refreshes them at the
-	// I-frame. When you enable this setting, the encoder updates these macroblocks
-	// slightly more often to smooth out the flicker. This setting is disabled by
-	// default. Related setting: In addition to enabling this setting, you must also
-	// set Adaptive quantization (adaptiveQuantization) to a value other than Off (OFF)
-	// or Auto (AUTO). Use Adaptive quantization to adjust the degree of smoothing that
-	// Flicker adaptive quantization provides.
+	// The best way to set up adaptive quantization is to keep the default value,
+	// Auto (AUTO), for the setting Adaptive quantization (XavcAdaptiveQuantization).
+	// When you do so, MediaConvert automatically applies the best types of
+	// quantization for your video content. Include this setting in your JSON job
+	// specification only when you choose to change the default value for Adaptive
+	// quantization. Enable this setting to have the encoder reduce I-frame pop.
+	// I-frame pop appears as a visual flicker that can arise when the encoder saves
+	// bits by copying some macroblocks many times from frame to frame, and then
+	// refreshes them at the I-frame. When you enable this setting, the encoder updates
+	// these macroblocks slightly more often to smooth out the flicker. This setting is
+	// disabled by default. Related setting: In addition to enabling this setting, you
+	// must also set Adaptive quantization (adaptiveQuantization) to a value other than
+	// Off (OFF) or Auto (AUTO). Use Adaptive quantization to adjust the degree of
+	// smoothing that Flicker adaptive quantization provides.
 	FlickerAdaptiveQuantization XavcFlickerAdaptiveQuantization
 
-	// Specify whether the encoder uses B-frames as reference frames for other pictures
-	// in the same GOP. Choose Allow (ENABLED) to allow the encoder to use B-frames as
-	// reference frames. Choose Don't allow (DISABLED) to prevent the encoder from
-	// using B-frames as reference frames.
+	// Specify whether the encoder uses B-frames as reference frames for other
+	// pictures in the same GOP. Choose Allow (ENABLED) to allow the encoder to use
+	// B-frames as reference frames. Choose Don't allow (DISABLED) to prevent the
+	// encoder from using B-frames as reference frames.
 	GopBReference XavcGopBReference
 
-	// Frequency of closed GOPs. In streaming applications, it is recommended that this
-	// be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly
-	// as possible. Setting this value to 0 will break output segmenting.
+	// Frequency of closed GOPs. In streaming applications, it is recommended that
+	// this be set to 1 so a decoder joining mid-stream will receive an IDR frame as
+	// quickly as possible. Setting this value to 0 will break output segmenting.
 	GopClosedCadence int32
 
 	// Specify the size of the buffer that MediaConvert uses in the HRD buffer model
@@ -8423,9 +8445,9 @@ type Xavc4kProfileSettings struct {
 // XAVC_HD_INTRA_CBG.
 type XavcHdIntraCbgProfileSettings struct {
 
-	// Specify the XAVC Intra HD (CBG) Class to set the bitrate of your output. Outputs
-	// of the same class have similar image quality over the operating points that are
-	// valid for that class.
+	// Specify the XAVC Intra HD (CBG) Class to set the bitrate of your output.
+	// Outputs of the same class have similar image quality over the operating points
+	// that are valid for that class.
 	XavcClass XavcHdIntraCbgProfileClass
 
 	noSmithyDocumentSerde
@@ -8435,36 +8457,36 @@ type XavcHdIntraCbgProfileSettings struct {
 // (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_HD.
 type XavcHdProfileSettings struct {
 
-	// Specify the XAVC HD (Long GOP) Bitrate Class to set the bitrate of your output.
-	// Outputs of the same class have similar image quality over the operating points
-	// that are valid for that class.
+	// Specify the XAVC HD (Long GOP) Bitrate Class to set the bitrate of your
+	// output. Outputs of the same class have similar image quality over the operating
+	// points that are valid for that class.
 	BitrateClass XavcHdProfileBitrateClass
 
-	// The best way to set up adaptive quantization is to keep the default value, Auto
-	// (AUTO), for the setting Adaptive quantization (XavcAdaptiveQuantization). When
-	// you do so, MediaConvert automatically applies the best types of quantization for
-	// your video content. Include this setting in your JSON job specification only
-	// when you choose to change the default value for Adaptive quantization. Enable
-	// this setting to have the encoder reduce I-frame pop. I-frame pop appears as a
-	// visual flicker that can arise when the encoder saves bits by copying some
-	// macroblocks many times from frame to frame, and then refreshes them at the
-	// I-frame. When you enable this setting, the encoder updates these macroblocks
-	// slightly more often to smooth out the flicker. This setting is disabled by
-	// default. Related setting: In addition to enabling this setting, you must also
-	// set Adaptive quantization (adaptiveQuantization) to a value other than Off (OFF)
-	// or Auto (AUTO). Use Adaptive quantization to adjust the degree of smoothing that
-	// Flicker adaptive quantization provides.
+	// The best way to set up adaptive quantization is to keep the default value,
+	// Auto (AUTO), for the setting Adaptive quantization (XavcAdaptiveQuantization).
+	// When you do so, MediaConvert automatically applies the best types of
+	// quantization for your video content. Include this setting in your JSON job
+	// specification only when you choose to change the default value for Adaptive
+	// quantization. Enable this setting to have the encoder reduce I-frame pop.
+	// I-frame pop appears as a visual flicker that can arise when the encoder saves
+	// bits by copying some macroblocks many times from frame to frame, and then
+	// refreshes them at the I-frame. When you enable this setting, the encoder updates
+	// these macroblocks slightly more often to smooth out the flicker. This setting is
+	// disabled by default. Related setting: In addition to enabling this setting, you
+	// must also set Adaptive quantization (adaptiveQuantization) to a value other than
+	// Off (OFF) or Auto (AUTO). Use Adaptive quantization to adjust the degree of
+	// smoothing that Flicker adaptive quantization provides.
 	FlickerAdaptiveQuantization XavcFlickerAdaptiveQuantization
 
-	// Specify whether the encoder uses B-frames as reference frames for other pictures
-	// in the same GOP. Choose Allow (ENABLED) to allow the encoder to use B-frames as
-	// reference frames. Choose Don't allow (DISABLED) to prevent the encoder from
-	// using B-frames as reference frames.
+	// Specify whether the encoder uses B-frames as reference frames for other
+	// pictures in the same GOP. Choose Allow (ENABLED) to allow the encoder to use
+	// B-frames as reference frames. Choose Don't allow (DISABLED) to prevent the
+	// encoder from using B-frames as reference frames.
 	GopBReference XavcGopBReference
 
-	// Frequency of closed GOPs. In streaming applications, it is recommended that this
-	// be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly
-	// as possible. Setting this value to 0 will break output segmenting.
+	// Frequency of closed GOPs. In streaming applications, it is recommended that
+	// this be set to 1 so a decoder joining mid-stream will receive an IDR frame as
+	// quickly as possible. Setting this value to 0 will break output segmenting.
 	GopClosedCadence int32
 
 	// Specify the size of the buffer that MediaConvert uses in the HRD buffer model
@@ -8523,9 +8545,10 @@ type XavcSettings struct {
 	// (temporalAdaptiveQuantization).
 	AdaptiveQuantization XavcAdaptiveQuantization
 
-	// Optional. Choose a specific entropy encoding mode only when you want to override
-	// XAVC recommendations. If you choose the value auto, MediaConvert uses the mode
-	// that the XAVC file format specifies given this output's operating point.
+	// Optional. Choose a specific entropy encoding mode only when you want to
+	// override XAVC recommendations. If you choose the value auto, MediaConvert uses
+	// the mode that the XAVC file format specifies given this output's operating
+	// point.
 	EntropyEncoding XavcEntropyEncoding
 
 	// If you are using the console, use the Frame rate setting to specify the frame
@@ -8552,20 +8575,20 @@ type XavcSettings struct {
 	// transcoding time and incurs a significant add-on cost.
 	FramerateConversionAlgorithm XavcFramerateConversionAlgorithm
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateDenominator to specify the denominator of this fraction. In this
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateDenominator to specify the denominator of this fraction. In this
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Frame rate. In this example, specify 23.976.
 	FramerateDenominator int32
 
-	// When you use the API for transcode jobs that use frame rate conversion, specify
-	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
-	// FramerateNumerator to specify the numerator of this fraction. In this example,
-	// use 24000 for the value of FramerateNumerator. When you use the console for
-	// transcode jobs that use frame rate conversion, provide the value as a decimal
-	// number for Framerate. In this example, specify 23.976.
+	// When you use the API for transcode jobs that use frame rate conversion,
+	// specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps.
+	// Use FramerateNumerator to specify the numerator of this fraction. In this
+	// example, use 24000 for the value of FramerateNumerator. When you use the console
+	// for transcode jobs that use frame rate conversion, provide the value as a
+	// decimal number for Framerate. In this example, specify 23.976.
 	FramerateNumerator int32
 
 	// Specify the XAVC profile for this output. For more information, see the Sony
@@ -8582,21 +8605,21 @@ type XavcSettings struct {
 	// (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.
 	SlowPal XavcSlowPal
 
-	// Ignore this setting unless your downstream workflow requires that you specify it
-	// explicitly. Otherwise, we recommend that you adjust the softness of your output
-	// by using a lower value for the setting Sharpness (sharpness) or by enabling a
-	// noise reducer filter (noiseReducerFilter). The Softness (softness) setting
-	// specifies the quantization matrices that the encoder uses. Keep the default
-	// value, 0, for flat quantization. Choose the value 1 or 16 to use the default JVT
-	// softening quantization matricies from the H.264 specification. Choose a value
-	// from 17 to 128 to use planar interpolation. Increasing values from 17 to 128
-	// result in increasing reduction of high-frequency data. The value 128 results in
-	// the softest video.
+	// Ignore this setting unless your downstream workflow requires that you specify
+	// it explicitly. Otherwise, we recommend that you adjust the softness of your
+	// output by using a lower value for the setting Sharpness (sharpness) or by
+	// enabling a noise reducer filter (noiseReducerFilter). The Softness (softness)
+	// setting specifies the quantization matrices that the encoder uses. Keep the
+	// default value, 0, for flat quantization. Choose the value 1 or 16 to use the
+	// default JVT softening quantization matricies from the H.264 specification.
+	// Choose a value from 17 to 128 to use planar interpolation. Increasing values
+	// from 17 to 128 result in increasing reduction of high-frequency data. The value
+	// 128 results in the softest video.
 	Softness int32
 
-	// The best way to set up adaptive quantization is to keep the default value, Auto
-	// (AUTO), for the setting Adaptive quantization (adaptiveQuantization). When you
-	// do so, MediaConvert automatically applies the best types of quantization for
+	// The best way to set up adaptive quantization is to keep the default value,
+	// Auto (AUTO), for the setting Adaptive quantization (adaptiveQuantization). When
+	// you do so, MediaConvert automatically applies the best types of quantization for
 	// your video content. Include this setting in your JSON job specification only
 	// when you choose to change the default value for Adaptive quantization. For this
 	// setting, keep the default value, Enabled (ENABLED), to adjust quantization
@@ -8616,9 +8639,9 @@ type XavcSettings struct {
 	// High or Higher.
 	SpatialAdaptiveQuantization XavcSpatialAdaptiveQuantization
 
-	// The best way to set up adaptive quantization is to keep the default value, Auto
-	// (AUTO), for the setting Adaptive quantization (adaptiveQuantization). When you
-	// do so, MediaConvert automatically applies the best types of quantization for
+	// The best way to set up adaptive quantization is to keep the default value,
+	// Auto (AUTO), for the setting Adaptive quantization (adaptiveQuantization). When
+	// you do so, MediaConvert automatically applies the best types of quantization for
 	// your video content. Include this setting in your JSON job specification only
 	// when you choose to change the default value for Adaptive quantization. For this
 	// setting, keep the default value, Enabled (ENABLED), to adjust quantization

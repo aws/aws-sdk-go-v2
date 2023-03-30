@@ -45,8 +45,8 @@ type PutVoiceConnectorProxyInput struct {
 	// This member is required.
 	VoiceConnectorId *string
 
-	// When true, stops proxy sessions from being created on the specified Amazon Chime
-	// Voice Connector.
+	// When true, stops proxy sessions from being created on the specified Amazon
+	// Chime Voice Connector.
 	Disabled *bool
 
 	// The phone number to route calls to after a proxy session expires.

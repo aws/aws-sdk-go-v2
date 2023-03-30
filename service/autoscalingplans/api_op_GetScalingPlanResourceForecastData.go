@@ -43,29 +43,23 @@ type GetScalingPlanResourceForecastDataInput struct {
 	EndTime *time.Time
 
 	// The type of forecast data to get.
-	// - LoadForecast: The load metric forecast.
-	// -
-	// CapacityForecast: The capacity forecast.
-	// - ScheduledActionMinCapacity: The
-	// minimum capacity for each scheduled scaling action. This data is calculated as
-	// the larger of two values: the capacity forecast or the minimum capacity in the
-	// scaling instruction.
-	// - ScheduledActionMaxCapacity: The maximum capacity for each
-	// scheduled scaling action. The calculation used is determined by the predictive
-	// scaling maximum capacity behavior setting in the scaling instruction.
+	//     - LoadForecast : The load metric forecast.
+	//     - CapacityForecast : The capacity forecast.
+	//     - ScheduledActionMinCapacity : The minimum capacity for each scheduled scaling action. This data is calculated as the larger of two values: the capacity forecast or the minimum capacity in the scaling instruction.
+	//     - ScheduledActionMaxCapacity : The maximum capacity for each scheduled scaling action. The calculation used is determined by the predictive scaling maximum capacity behavior setting in the scaling instruction.
 	//
 	// This member is required.
 	ForecastDataType types.ForecastDataType
 
-	// The ID of the resource. This string consists of a prefix (autoScalingGroup)
-	// followed by the name of a specified Auto Scaling group (my-asg). Example:
-	// autoScalingGroup/my-asg.
+	// The ID of the resource. This string consists of a prefix ( autoScalingGroup)
+	// followed by the name of a specified Auto Scaling group ( my-asg ). Example:
+	// autoScalingGroup/my-asg .
 	//
 	// This member is required.
 	ResourceId *string
 
 	// The scalable dimension for the resource. The only valid value is
-	// autoscaling:autoScalingGroup:DesiredCapacity.
+	// autoscaling:autoScalingGroup:DesiredCapacity .
 	//
 	// This member is required.
 	ScalableDimension types.ScalableDimension
@@ -75,12 +69,12 @@ type GetScalingPlanResourceForecastDataInput struct {
 	// This member is required.
 	ScalingPlanName *string
 
-	// The version number of the scaling plan. Currently, the only valid value is 1.
+	// The version number of the scaling plan. Currently, the only valid value is 1 .
 	//
 	// This member is required.
 	ScalingPlanVersion *int64
 
-	// The namespace of the AWS service. The only valid value is autoscaling.
+	// The namespace of the AWS service. The only valid value is autoscaling .
 	//
 	// This member is required.
 	ServiceNamespace types.ServiceNamespace

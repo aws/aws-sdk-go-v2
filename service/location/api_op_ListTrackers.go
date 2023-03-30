@@ -30,12 +30,13 @@ func (c *Client) ListTrackers(ctx context.Context, params *ListTrackersInput, op
 
 type ListTrackersInput struct {
 
-	// An optional limit for the number of resources returned in a single call. Default
-	// value: 100
+	// An optional limit for the number of resources returned in a single call.
+	// Default value: 100
 	MaxResults *int32
 
-	// The pagination token specifying which page of results to return in the response.
-	// If no token is provided, the default page is the first page. Default value: null
+	// The pagination token specifying which page of results to return in the
+	// response. If no token is provided, the default page is the first page. Default
+	// value: null
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -43,15 +44,15 @@ type ListTrackersInput struct {
 
 type ListTrackersOutput struct {
 
-	// Contains tracker resources in your Amazon Web Services account. Details include
-	// tracker name, description and timestamps for when the tracker was created and
-	// last updated.
+	// Contains tracker resources in your Amazon Web Services account. Details
+	// include tracker name, description and timestamps for when the tracker was
+	// created and last updated.
 	//
 	// This member is required.
 	Entries []types.ListTrackersResponseEntry
 
-	// A pagination token indicating there are additional pages available. You can use
-	// the token in a following request to fetch the next set of results.
+	// A pagination token indicating there are additional pages available. You can
+	// use the token in a following request to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -159,12 +160,12 @@ var _ ListTrackersAPIClient = (*Client)(nil)
 
 // ListTrackersPaginatorOptions is the paginator options for ListTrackers
 type ListTrackersPaginatorOptions struct {
-	// An optional limit for the number of resources returned in a single call. Default
-	// value: 100
+	// An optional limit for the number of resources returned in a single call.
+	// Default value: 100
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

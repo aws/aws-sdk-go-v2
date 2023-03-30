@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the roles in a profile to receive session credentials in CreateSession
-// (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html).
-// Required permissions: rolesanywhere:EnableProfile.
+// Enables the roles in a profile to receive session credentials in CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
+// . Required permissions: rolesanywhere:EnableProfile .
 func (c *Client) EnableProfile(ctx context.Context, params *EnableProfileInput, optFns ...func(*Options)) (*EnableProfileOutput, error) {
 	if params == nil {
 		params = &EnableProfileInput{}

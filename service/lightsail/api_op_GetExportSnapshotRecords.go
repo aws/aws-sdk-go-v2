@@ -13,8 +13,7 @@ import (
 
 // Returns all export snapshot records created as a result of the export snapshot
 // operation. An export snapshot record can be used to create a new Amazon EC2
-// instance and its related resources with the CreateCloudFormationStack
-// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateCloudFormationStack.html)
+// instance and its related resources with the CreateCloudFormationStack (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateCloudFormationStack.html)
 // action.
 func (c *Client) GetExportSnapshotRecords(ctx context.Context, params *GetExportSnapshotRecordsInput, optFns ...func(*Options)) (*GetExportSnapshotRecordsOutput, error) {
 	if params == nil {
@@ -34,9 +33,9 @@ func (c *Client) GetExportSnapshotRecords(ctx context.Context, params *GetExport
 type GetExportSnapshotRecordsInput struct {
 
 	// The token to advance to the next page of results from your request. To get a
-	// page token, perform an initial GetExportSnapshotRecords request. If your results
-	// are paginated, the response will return a next page token that you can specify
-	// as the page token in a subsequent request.
+	// page token, perform an initial GetExportSnapshotRecords request. If your
+	// results are paginated, the response will return a next page token that you can
+	// specify as the page token in a subsequent request.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -47,10 +46,10 @@ type GetExportSnapshotRecordsOutput struct {
 	// A list of objects describing the export snapshot records.
 	ExportSnapshotRecords []types.ExportSnapshotRecord
 
-	// The token to advance to the next page of results from your request. A next page
-	// token is not returned if there are no more results to display. To get the next
-	// page of results, perform another GetExportSnapshotRecords request and specify
-	// the next page token using the pageToken parameter.
+	// The token to advance to the next page of results from your request. A next
+	// page token is not returned if there are no more results to display. To get the
+	// next page of results, perform another GetExportSnapshotRecords request and
+	// specify the next page token using the pageToken  parameter.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

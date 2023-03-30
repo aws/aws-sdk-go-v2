@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the ImageGenerationConfiguration for a given Kinesis video stream.
+// Gets the ImageGenerationConfiguration  for a given Kinesis video stream.
 func (c *Client) DescribeImageGenerationConfiguration(ctx context.Context, params *DescribeImageGenerationConfigurationInput, optFns ...func(*Options)) (*DescribeImageGenerationConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeImageGenerationConfigurationInput{}
@@ -31,11 +31,11 @@ type DescribeImageGenerationConfigurationInput struct {
 
 	// The Amazon Resource Name (ARN) of the Kinesis video stream from which to
 	// retrieve the image generation configuration. You must specify either the
-	// StreamName or the StreamARN.
+	// StreamName or the StreamARN .
 	StreamARN *string
 
 	// The name of the stream from which to retrieve the image generation
-	// configuration. You must specify either the StreamName or the StreamARN.
+	// configuration. You must specify either the StreamName  or the StreamARN .
 	StreamName *string
 
 	noSmithyDocumentSerde

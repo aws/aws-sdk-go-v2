@@ -50,7 +50,7 @@ type CreateProfilingGroupInput struct {
 	// The compute platform of the profiling group. Use AWSLambda if your application
 	// runs on AWS Lambda. Use Default if your application runs on a compute platform
 	// that is not AWS Lambda, such an Amazon EC2 instance, an on-premises server, or a
-	// different platform. If not specified, Default is used.
+	// different platform. If not specified, Default  is used.
 	ComputePlatform types.ComputePlatform
 
 	// A list of tags to add to the created profiling group.
@@ -62,8 +62,7 @@ type CreateProfilingGroupInput struct {
 // The structure representing the createProfilingGroupResponse.
 type CreateProfilingGroupOutput struct {
 
-	// The returned ProfilingGroupDescription
-	// (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+	// The returned ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
 	// object that contains information about the created profiling group.
 	//
 	// This member is required.

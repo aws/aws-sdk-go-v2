@@ -15,7 +15,7 @@ import (
 // Creates and persists a DataIntegration resource. You cannot create a
 // DataIntegration association for a DataIntegration that has been previously
 // associated. Use a different DataIntegration, or recreate the DataIntegration
-// using the CreateDataIntegration API.
+// using the CreateDataIntegration  API.
 func (c *Client) CreateDataIntegration(ctx context.Context, params *CreateDataIntegrationInput, optFns ...func(*Options)) (*CreateDataIntegrationOutput, error) {
 	if params == nil {
 		params = &CreateDataIntegrationInput{}
@@ -56,8 +56,8 @@ type CreateDataIntegrationInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// .
 	ClientToken *string
 
 	// A description of the DataIntegration.
@@ -84,8 +84,8 @@ type CreateDataIntegrationOutput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// .
 	ClientToken *string
 
 	// A description of the DataIntegration.

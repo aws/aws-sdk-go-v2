@@ -16,10 +16,10 @@ import (
 	"time"
 )
 
-// Gets information about a deployment. The content property of the appSpecContent
-// object in the returned revision is always null. Use GetApplicationRevision and
-// the sha256 property of the returned appSpecContent object to get the content of
-// the deployment’s AppSpec file.
+// Gets information about a deployment. The content  property of the
+// appSpecContent object in the returned revision is always null. Use
+// GetApplicationRevision and the sha256  property of the returned appSpecContent
+// object to get the content of the deployment’s AppSpec file.
 func (c *Client) GetDeployment(ctx context.Context, params *GetDeploymentInput, optFns ...func(*Options)) (*GetDeploymentOutput, error) {
 	if params == nil {
 		params = &GetDeploymentInput{}
@@ -35,7 +35,7 @@ func (c *Client) GetDeployment(ctx context.Context, params *GetDeploymentInput, 
 	return out, nil
 }
 
-// Represents the input of a GetDeployment operation.
+// Represents the input of a GetDeployment  operation.
 type GetDeploymentInput struct {
 
 	// The unique ID of a deployment associated with the IAM user or Amazon Web
@@ -47,7 +47,7 @@ type GetDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a GetDeployment operation.
+// Represents the output of a GetDeployment  operation.
 type GetDeploymentOutput struct {
 
 	// Information about the deployment.
@@ -143,9 +143,10 @@ type DeploymentSuccessfulWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, DeploymentSuccessfulWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, DeploymentSuccessfulWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

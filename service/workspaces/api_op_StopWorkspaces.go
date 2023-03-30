@@ -12,8 +12,8 @@ import (
 )
 
 // Stops the specified WorkSpaces. You cannot stop a WorkSpace unless it has a
-// running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or
-// ERROR.
+// running mode of AutoStop  and a state of AVAILABLE , IMPAIRED , UNHEALTHY , or
+// ERROR .
 func (c *Client) StopWorkspaces(ctx context.Context, params *StopWorkspacesInput, optFns ...func(*Options)) (*StopWorkspacesOutput, error) {
 	if params == nil {
 		params = &StopWorkspacesInput{}

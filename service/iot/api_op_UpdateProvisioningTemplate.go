@@ -12,8 +12,7 @@ import (
 )
 
 // Updates a provisioning template. Requires permission to access the
-// UpdateProvisioningTemplate
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// UpdateProvisioningTemplate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) UpdateProvisioningTemplate(ctx context.Context, params *UpdateProvisioningTemplateInput, optFns ...func(*Options)) (*UpdateProvisioningTemplateOutput, error) {
 	if params == nil {
@@ -47,9 +46,9 @@ type UpdateProvisioningTemplateInput struct {
 	Enabled bool
 
 	// Updates the pre-provisioning hook template. Only supports template of type
-	// FLEET_PROVISIONING. For more information about provisioning template types, see
-	// type
-	// (https://docs.aws.amazon.com/iot/latest/apireference/API_CreateProvisioningTemplate.html#iot-CreateProvisioningTemplate-request-type).
+	// FLEET_PROVISIONING. For more information about provisioning template types,
+	// see type (https://docs.aws.amazon.com/iot/latest/apireference/API_CreateProvisioningTemplate.html#iot-CreateProvisioningTemplate-request-type)
+	// .
 	PreProvisioningHook *types.ProvisioningHook
 
 	// The ARN of the role associated with the provisioning template. This IoT role

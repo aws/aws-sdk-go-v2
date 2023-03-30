@@ -22,7 +22,7 @@ import (
 // pagination token expires after 24 hours. Using an expired pagination token will
 // return an HTTP 400 InvalidToken error. This operation is eventually consistent.
 // The results are best effort and may not reflect very recent updates and changes.
-// This API action is not supported by EXPRESS state machines.
+// This API action is not supported by EXPRESS  state machines.
 func (c *Client) ListExecutions(ctx context.Context, params *ListExecutionsInput, optFns ...func(*Options)) (*ListExecutionsOutput, error) {
 	if params == nil {
 		params = &ListExecutionsInput{}
@@ -43,10 +43,9 @@ type ListExecutionsInput struct {
 	// The Amazon Resource Name (ARN) of the Map Run that started the child workflow
 	// executions. If the mapRunArn field is specified, a list of all of the child
 	// workflow executions started by a Map Run is returned. For more information, see
-	// Examining Map Run
-	// (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html)
-	// in the Step Functions Developer Guide. You can specify either a mapRunArn or a
-	// stateMachineArn, but not both.
+	// Examining Map Run (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html)
+	// in the Step Functions Developer Guide. You can specify either a mapRunArn  or a
+	// stateMachineArn , but not both.
 	MapRunArn *string
 
 	// The maximum number of results that are returned per call. You can use nextToken
@@ -56,15 +55,15 @@ type ListExecutionsInput struct {
 	// maximum.
 	MaxResults int32
 
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// If nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 24 hours. Using an expired
 	// pagination token will return an HTTP 400 InvalidToken error.
 	NextToken *string
 
-	// The Amazon Resource Name (ARN) of the state machine whose executions is listed.
-	// You can specify either a mapRunArn or a stateMachineArn, but not both.
+	// The Amazon Resource Name (ARN) of the state machine whose executions is
+	// listed. You can specify either a mapRunArn  or a stateMachineArn , but not both.
 	StateMachineArn *string
 
 	// If specified, only list the executions whose current execution status matches
@@ -81,8 +80,8 @@ type ListExecutionsOutput struct {
 	// This member is required.
 	Executions []types.ExecutionListItem
 
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// If nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 24 hours. Using an expired
 	// pagination token will return an HTTP 400 InvalidToken error.
@@ -171,8 +170,8 @@ type ListExecutionsPaginatorOptions struct {
 	// maximum.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

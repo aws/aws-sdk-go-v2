@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the streaming configurations of an AppInstance.
+// Deletes the streaming configurations of an AppInstance .
 func (c *Client) DeleteAppInstanceStreamingConfigurations(ctx context.Context, params *DeleteAppInstanceStreamingConfigurationsInput, optFns ...func(*Options)) (*DeleteAppInstanceStreamingConfigurationsOutput, error) {
 	if params == nil {
 		params = &DeleteAppInstanceStreamingConfigurationsInput{}

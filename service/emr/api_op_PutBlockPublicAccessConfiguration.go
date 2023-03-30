@@ -13,8 +13,7 @@ import (
 
 // Creates or updates an Amazon EMR block public access configuration for your
 // Amazon Web Services account in the current Region. For more information see
-// Configure Block Public Access for Amazon EMR
-// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html)
+// Configure Block Public Access for Amazon EMR (https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html)
 // in the Amazon EMR Management Guide.
 func (c *Client) PutBlockPublicAccessConfiguration(ctx context.Context, params *PutBlockPublicAccessConfigurationInput, optFns ...func(*Options)) (*PutBlockPublicAccessConfigurationOutput, error) {
 	if params == nil {
@@ -33,19 +32,20 @@ func (c *Client) PutBlockPublicAccessConfiguration(ctx context.Context, params *
 
 type PutBlockPublicAccessConfigurationInput struct {
 
-	// A configuration for Amazon EMR block public access. The configuration applies to
-	// all clusters created in your account for the current Region. The configuration
-	// specifies whether block public access is enabled. If block public access is
-	// enabled, security groups associated with the cluster cannot have rules that
-	// allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is
-	// specified as an exception using PermittedPublicSecurityGroupRuleRanges in the
+	// A configuration for Amazon EMR block public access. The configuration applies
+	// to all clusters created in your account for the current Region. The
+	// configuration specifies whether block public access is enabled. If block public
+	// access is enabled, security groups associated with the cluster cannot have rules
+	// that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is
+	// specified as an exception using PermittedPublicSecurityGroupRuleRanges  in the
 	// BlockPublicAccessConfiguration. By default, Port 22 (SSH) is an exception, and
 	// public access is allowed on this port. You can change this by updating
-	// BlockPublicSecurityGroupRules to remove the exception. For accounts that created
-	// clusters in a Region before November 25, 2019, block public access is disabled
-	// by default in that Region. To use this feature, you must manually enable and
-	// configure it. For accounts that did not create an EMR cluster in a Region before
-	// this date, block public access is enabled by default in that Region.
+	// BlockPublicSecurityGroupRulesto remove the exception. For accounts that
+	// created clusters in a Region before November 25, 2019, block public access is
+	// disabled by default in that Region. To use this feature, you must manually
+	// enable and configure it. For accounts that did not create an EMR cluster in a
+	// Region before this date, block public access is enabled by default in that
+	// Region.
 	//
 	// This member is required.
 	BlockPublicAccessConfiguration *types.BlockPublicAccessConfiguration

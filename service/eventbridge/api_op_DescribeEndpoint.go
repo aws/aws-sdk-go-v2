@@ -14,8 +14,7 @@ import (
 
 // Get the information about an existing global endpoint. For more information
 // about global endpoints, see Making applications Regional-fault tolerant with
-// global endpoints and event replication
-// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html)
+// global endpoints and event replication (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html)
 // in the Amazon EventBridge User Guide..
 func (c *Client) DescribeEndpoint(ctx context.Context, params *DescribeEndpointInput, optFns ...func(*Options)) (*DescribeEndpointOutput, error) {
 	if params == nil {
@@ -35,13 +34,13 @@ func (c *Client) DescribeEndpoint(ctx context.Context, params *DescribeEndpointI
 type DescribeEndpointInput struct {
 
 	// The name of the endpoint you want to get information about. For example,
-	// "Name":"us-east-2-custom_bus_A-endpoint".
+	// "Name":"us-east-2-custom_bus_A-endpoint" .
 	//
 	// This member is required.
 	Name *string
 
 	// The primary Region of the endpoint you want to get information about. For
-	// example "HomeRegion": "us-east-1".
+	// example "HomeRegion": "us-east-1" .
 	HomeRegion *string
 
 	noSmithyDocumentSerde
@@ -86,7 +85,8 @@ type DescribeEndpointOutput struct {
 	// The current state of the endpoint you asked for information about.
 	State types.EndpointState
 
-	// The reason the endpoint you asked for information about is in its current state.
+	// The reason the endpoint you asked for information about is in its current
+	// state.
 	StateReason *string
 
 	// Metadata pertaining to the operation's result.

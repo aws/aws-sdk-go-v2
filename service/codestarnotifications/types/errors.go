@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// AWS CodeStar Notifications can't create the notification rule because you do not
-// have sufficient permissions.
+// AWS CodeStar Notifications can't create the notification rule because you do
+// not have sufficient permissions.
 type AccessDeniedException struct {
 	Message *string
 
@@ -87,8 +87,8 @@ func (e *ConfigurationException) ErrorCode() string {
 }
 func (e *ConfigurationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The value for the enumeration token used in the request to return the next batch
-// of the results is not valid.
+// The value for the enumeration token used in the request to return the next
+// batch of the results is not valid.
 type InvalidNextTokenException struct {
 	Message *string
 
@@ -114,8 +114,8 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// One of the AWS CodeStar Notifications limits has been exceeded. Limits apply to
-// accounts, notification rules, notifications, resources, and targets. For more
+// One of the AWS CodeStar Notifications limits has been exceeded. Limits apply
+// to accounts, notification rules, notifications, resources, and targets. For more
 // information, see Limits.
 type LimitExceededException struct {
 	Message *string
@@ -142,8 +142,8 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A resource with the same name or ID already exists. Notification rule names must
-// be unique in your Amazon Web Services account.
+// A resource with the same name or ID already exists. Notification rule names
+// must be unique in your Amazon Web Services account.
 type ResourceAlreadyExistsException struct {
 	Message *string
 

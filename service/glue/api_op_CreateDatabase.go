@@ -34,8 +34,8 @@ type CreateDatabaseInput struct {
 	// This member is required.
 	DatabaseInput *types.DatabaseInput
 
-	// The ID of the Data Catalog in which to create the database. If none is provided,
-	// the Amazon Web Services account ID is used by default.
+	// The ID of the Data Catalog in which to create the database. If none is
+	// provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
 
 	// The tags you assign to the database.

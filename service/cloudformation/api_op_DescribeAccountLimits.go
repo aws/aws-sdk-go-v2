@@ -14,8 +14,7 @@ import (
 
 // Retrieves your account's CloudFormation limits, such as the maximum number of
 // stacks that you can create in your account. For more information about account
-// limits, see CloudFormation Quotas
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)
+// limits, see CloudFormation Quotas (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)
 // in the CloudFormation User Guide.
 func (c *Client) DescribeAccountLimits(ctx context.Context, params *DescribeAccountLimitsInput, optFns ...func(*Options)) (*DescribeAccountLimitsOutput, error) {
 	if params == nil {
@@ -32,7 +31,7 @@ func (c *Client) DescribeAccountLimits(ctx context.Context, params *DescribeAcco
 	return out, nil
 }
 
-// The input for the DescribeAccountLimits action.
+// The input for the DescribeAccountLimits  action.
 type DescribeAccountLimitsInput struct {
 
 	// A string that identifies the next page of limits that you want to retrieve.
@@ -41,11 +40,11 @@ type DescribeAccountLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
-// The output for the DescribeAccountLimits action.
+// The output for the DescribeAccountLimits  action.
 type DescribeAccountLimitsOutput struct {
 
-	// An account limit structure that contain a list of CloudFormation account limits
-	// and their values.
+	// An account limit structure that contain a list of CloudFormation account
+	// limits and their values.
 	AccountLimits []types.AccountLimit
 
 	// If the output exceeds 1 MB in size, a string that identifies the next page of
@@ -129,8 +128,8 @@ var _ DescribeAccountLimitsAPIClient = (*Client)(nil)
 // DescribeAccountLimitsPaginatorOptions is the paginator options for
 // DescribeAccountLimits
 type DescribeAccountLimitsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

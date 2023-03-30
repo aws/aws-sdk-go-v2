@@ -36,8 +36,8 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that a request to authorize a client with an access user session token
-// is pending.
+// Indicates that a request to authorize a client with an access user session
+// token is pending.
 type AuthorizationPendingException struct {
 	Message *string
 
@@ -126,9 +126,9 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Indicates that the clientId or clientSecret in the request is invalid. For
-// example, this can occur when a client sends an incorrect clientId or an expired
-// clientSecret.
+// Indicates that the clientId  or clientSecret in the request is invalid. For
+// example, this can occur when a client sends an incorrect clientId or an
+// expired clientSecret .
 type InvalidClientException struct {
 	Message *string
 
@@ -157,8 +157,8 @@ func (e *InvalidClientException) ErrorCode() string {
 }
 func (e *InvalidClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that the client information sent in the request during registration is
-// invalid.
+// Indicates that the client information sent in the request during registration
+// is invalid.
 type InvalidClientMetadataException struct {
 	Message *string
 
@@ -188,7 +188,7 @@ func (e *InvalidClientMetadataException) ErrorCode() string {
 func (e *InvalidClientMetadataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that a request contains an invalid grant. This can occur if a client
-// makes a CreateToken request with an invalid grant type.
+// makes a CreateToken  request with an invalid grant type.
 type InvalidGrantException struct {
 	Message *string
 
@@ -217,8 +217,8 @@ func (e *InvalidGrantException) ErrorCode() string {
 }
 func (e *InvalidGrantException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that something is wrong with the input to the request. For example, a
-// required parameter might be missing or out of range.
+// Indicates that something is wrong with the input to the request. For example,
+// a required parameter might be missing or out of range.
 type InvalidRequestException struct {
 	Message *string
 
@@ -276,8 +276,8 @@ func (e *InvalidScopeException) ErrorCode() string {
 }
 func (e *InvalidScopeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that the client is making the request too frequently and is more than
-// the service can handle.
+// Indicates that the client is making the request too frequently and is more
+// than the service can handle.
 type SlowDownException struct {
 	Message *string
 
@@ -306,8 +306,8 @@ func (e *SlowDownException) ErrorCode() string {
 }
 func (e *SlowDownException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that the client is not currently authorized to make the request. This
-// can happen when a clientId is not issued for a public client.
+// Indicates that the client is not currently authorized to make the request.
+// This can happen when a clientId  is not issued for a public client.
 type UnauthorizedClientException struct {
 	Message *string
 

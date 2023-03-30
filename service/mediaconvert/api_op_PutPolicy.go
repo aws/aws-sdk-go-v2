@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create or change your policy. For more information about policies, see the user
-// guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+// Create or change your policy. For more information about policies, see the
+// user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
 func (c *Client) PutPolicy(ctx context.Context, params *PutPolicyInput, optFns ...func(*Options)) (*PutPolicyOutput, error) {
 	if params == nil {
 		params = &PutPolicyInput{}

@@ -11,8 +11,7 @@ import (
 )
 
 // Deletes a Device Advisor test suite. Requires permission to access the
-// DeleteSuiteDefinition
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// DeleteSuiteDefinition (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DeleteSuiteDefinition(ctx context.Context, params *DeleteSuiteDefinitionInput, optFns ...func(*Options)) (*DeleteSuiteDefinitionOutput, error) {
 	if params == nil {

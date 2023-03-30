@@ -7,9 +7,9 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The action that you tried to perform couldn't be completed because the resource
-// is in a conflicting state. For example, deleting a bot that is in the CREATING
-// state. Try your request again.
+// The action that you tried to perform couldn't be completed because the
+// resource is in a conflicting state. For example, deleting a bot that is in the
+// CREATING state. Try your request again.
 type ConflictException struct {
 	Message *string
 
@@ -88,8 +88,8 @@ func (e *PreconditionFailedException) ErrorCode() string {
 }
 func (e *PreconditionFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You asked to describe a resource that doesn't exist. Check the resource that you
-// are requesting and try again.
+// You asked to describe a resource that doesn't exist. Check the resource that
+// you are requesting and try again.
 type ResourceNotFoundException struct {
 	Message *string
 

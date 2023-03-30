@@ -15,14 +15,13 @@ import (
 // instances. The default credit option is set at the account level per Amazon Web
 // Services Region, and is specified per instance family. All new burstable
 // performance instances in the account launch using the default credit option.
-// ModifyDefaultCreditSpecification is an asynchronous operation, which works at an
-// Amazon Web Services Region level and modifies the credit option for each
+// ModifyDefaultCreditSpecificationis an asynchronous operation, which works at
+// an Amazon Web Services Region level and modifies the credit option for each
 // Availability Zone. All zones in a Region are updated within five minutes. But if
 // instances are launched during this operation, they might not get the new credit
 // option until the zone is updated. To verify whether the update has occurred, you
-// can call GetDefaultCreditSpecification and check DefaultCreditSpecification for
-// updates. For more information, see Burstable performance instances
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html)
+// can call GetDefaultCreditSpecification  and check DefaultCreditSpecification
+// for updates. For more information, see Burstable performance instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html)
 // in the Amazon EC2 User Guide.
 func (c *Client) ModifyDefaultCreditSpecification(ctx context.Context, params *ModifyDefaultCreditSpecificationInput, optFns ...func(*Options)) (*ModifyDefaultCreditSpecificationOutput, error) {
 	if params == nil {
@@ -41,8 +40,8 @@ func (c *Client) ModifyDefaultCreditSpecification(ctx context.Context, params *M
 
 type ModifyDefaultCreditSpecificationInput struct {
 
-	// The credit option for CPU usage of the instance family. Valid Values: standard |
-	// unlimited
+	// The credit option for CPU usage of the instance family. Valid Values: standard
+	// | unlimited
 	//
 	// This member is required.
 	CpuCredits *string
@@ -54,8 +53,8 @@ type ModifyDefaultCreditSpecificationInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

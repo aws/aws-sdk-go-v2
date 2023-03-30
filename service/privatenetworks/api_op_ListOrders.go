@@ -40,14 +40,12 @@ type ListOrdersInput struct {
 	NetworkArn *string
 
 	// The filters.
-	// - NETWORK_SITE - The Amazon Resource Name (ARN) of the network
-	// site.
-	// - STATUS - The status (ACKNOWLEDGING | ACKNOWLEDGED |
-	// UNACKNOWLEDGED).
+	//     - NETWORK_SITE - The Amazon Resource Name (ARN) of the network site.
+	//     - STATUS - The status ( ACKNOWLEDGING | ACKNOWLEDGED | UNACKNOWLEDGED ).
 	//
-	// Filter values are case sensitive. If you specify multiple
-	// values for a filter, the values are joined with an OR, and the request returns
-	// all results that match any of the specified values.
+	// Filter values are case sensitive. If you specify multiple values for a filter,
+	// the values are joined with an OR, and the request returns all results that
+	// match any of the specified values.
 	Filters map[string][]string
 
 	// The maximum number of results to return.
@@ -148,8 +146,8 @@ type ListOrdersPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

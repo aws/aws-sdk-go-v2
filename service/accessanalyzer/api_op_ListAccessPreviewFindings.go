@@ -36,8 +36,7 @@ type ListAccessPreviewFindingsInput struct {
 	// This member is required.
 	AccessPreviewId *string
 
-	// The ARN of the analyzer
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
+	// The ARN of the analyzer (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
 	// used to generate the access.
 	//
 	// This member is required.
@@ -148,8 +147,8 @@ type ListAccessPreviewFindingsPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

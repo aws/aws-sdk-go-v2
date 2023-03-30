@@ -15,8 +15,7 @@ import (
 
 // Lists the findings (results) of a Device Defender audit or of the audits
 // performed during a specified time period. (Findings are retained for 90 days.)
-// Requires permission to access the ListAuditFindings
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Requires permission to access the ListAuditFindings (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListAuditFindings(ctx context.Context, params *ListAuditFindingsInput, optFns ...func(*Options)) (*ListAuditFindingsOutput, error) {
 	if params == nil {
@@ -42,9 +41,9 @@ type ListAuditFindingsInput struct {
 	// specify either the startTime and endTime or the taskId, but not both.
 	EndTime *time.Time
 
-	// Boolean flag indicating whether only the suppressed findings or the unsuppressed
-	// findings should be listed. If this parameter isn't provided, the response will
-	// list both suppressed and unsuppressed findings.
+	// Boolean flag indicating whether only the suppressed findings or the
+	// unsuppressed findings should be listed. If this parameter isn't provided, the
+	// response will list both suppressed and unsuppressed findings.
 	ListSuppressedFindings bool
 
 	// The maximum number of results to return at one time. The default is 25.
@@ -150,13 +149,14 @@ type ListAuditFindingsAPIClient interface {
 
 var _ ListAuditFindingsAPIClient = (*Client)(nil)
 
-// ListAuditFindingsPaginatorOptions is the paginator options for ListAuditFindings
+// ListAuditFindingsPaginatorOptions is the paginator options for
+// ListAuditFindings
 type ListAuditFindingsPaginatorOptions struct {
 	// The maximum number of results to return at one time. The default is 25.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

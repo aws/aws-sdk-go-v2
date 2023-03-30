@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a resource from a list of tags. The resource is identified by the
-// ResourceArn input parameter. The tags are identified by the list of keys in the
-// TagKeys input parameter.
+// Disassociates a resource from a list of tags. The resource is identified by
+// the ResourceArn input parameter. The tags are identified by the list of keys
+// in the TagKeys  input parameter.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -31,13 +31,13 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 type UntagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) that specifies from which resource to
-	// disassociate the tags with the keys in the TagKeys input parameter.
+	// disassociate the tags with the keys in the TagKeys  input parameter.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// A list of keys of Tag objects. The Tag objects identified by the keys are
-	// disassociated from the resource specified by the ResourceArn input parameter.
+	// A list of keys of Tag  objects. The Tag objects identified by the keys are
+	// disassociated from the resource specified by the ResourceArn  input parameter.
 	//
 	// This member is required.
 	TagKeys []string

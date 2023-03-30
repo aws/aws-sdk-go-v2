@@ -11,8 +11,8 @@ import (
 // When the state is Off, traffic does not flow.
 type RoutingControl struct {
 
-	// The Amazon Resource Name (ARN) of the control panel where the routing control is
-	// located.
+	// The Amazon Resource Name (ARN) of the control panel where the routing control
+	// is located.
 	ControlPanelArn *string
 
 	// The name of the control panel where the routing control is located.

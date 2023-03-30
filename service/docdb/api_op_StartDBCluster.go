@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Restarts the stopped cluster that is specified by DBClusterIdentifier. For more
-// information, see Stopping and Starting an Amazon DocumentDB Cluster
-// (https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html).
+// Restarts the stopped cluster that is specified by DBClusterIdentifier. For
+// more information, see Stopping and Starting an Amazon DocumentDB Cluster (https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html)
+// .
 func (c *Client) StartDBCluster(ctx context.Context, params *StartDBClusterInput, optFns ...func(*Options)) (*StartDBClusterOutput, error) {
 	if params == nil {
 		params = &StartDBClusterInput{}

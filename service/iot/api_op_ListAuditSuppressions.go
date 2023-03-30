@@ -13,8 +13,7 @@ import (
 )
 
 // Lists your Device Defender audit listings. Requires permission to access the
-// ListAuditSuppressions
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// ListAuditSuppressions (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListAuditSuppressions(ctx context.Context, params *ListAuditSuppressionsInput, optFns ...func(*Options)) (*ListAuditSuppressionsOutput, error) {
 	if params == nil {
@@ -33,14 +32,14 @@ func (c *Client) ListAuditSuppressions(ctx context.Context, params *ListAuditSup
 
 type ListAuditSuppressionsInput struct {
 
-	// Determines whether suppressions are listed in ascending order by expiration date
-	// or not. If parameter isn't provided, ascendingOrder=true.
+	// Determines whether suppressions are listed in ascending order by expiration
+	// date or not. If parameter isn't provided, ascendingOrder=true .
 	AscendingOrder bool
 
 	// An audit check name. Checks must be enabled for your account. (Use
-	// DescribeAccountAuditConfiguration to see the list of all checks, including those
-	// that are enabled or use UpdateAccountAuditConfiguration to select which checks
-	// are enabled.)
+	// DescribeAccountAuditConfigurationto see the list of all checks, including
+	// those that are enabled or use UpdateAccountAuditConfiguration to select which
+	// checks are enabled.)
 	CheckName *string
 
 	// The maximum number of results to return at one time. The default is 25.
@@ -144,8 +143,8 @@ type ListAuditSuppressionsPaginatorOptions struct {
 	// The maximum number of results to return at one time. The default is 25.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

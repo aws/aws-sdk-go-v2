@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a group, or batch, of vehicles. You must specify a decoder manifest and
-// a vehicle model (model manifest) for each vehicle. For more information, see
-// Update multiple vehicles (AWS CLI)
-// (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/update-vehicles-cli.html)
+// Updates a group, or batch, of vehicles. You must specify a decoder manifest
+// and a vehicle model (model manifest) for each vehicle. For more information, see
+//
+// Update multiple vehicles (AWS CLI) (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/update-vehicles-cli.html)
 // in the Amazon Web Services IoT FleetWise Developer Guide.
 func (c *Client) BatchUpdateVehicle(ctx context.Context, params *BatchUpdateVehicleInput, optFns ...func(*Options)) (*BatchUpdateVehicleOutput, error) {
 	if params == nil {
@@ -44,8 +44,8 @@ type BatchUpdateVehicleInput struct {
 
 type BatchUpdateVehicleOutput struct {
 
-	// A list of information about errors returned while updating a batch of vehicles,
-	// or, if there aren't any errors, an empty list.
+	// A list of information about errors returned while updating a batch of
+	// vehicles, or, if there aren't any errors, an empty list.
 	Errors []types.UpdateVehicleError
 
 	// A list of information about the batch of updated vehicles. This list contains

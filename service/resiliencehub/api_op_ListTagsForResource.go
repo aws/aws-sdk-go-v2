@@ -39,8 +39,8 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// The tags assigned to the resource. A tag is a label that you assign to an Amazon
-	// Web Services resource. Each tag consists of a key/value pair.
+	// The tags assigned to the resource. A tag is a label that you assign to an
+	// Amazon Web Services resource. Each tag consists of a key/value pair.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

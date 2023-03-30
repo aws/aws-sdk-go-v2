@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops sharing the specified portfolio with the specified account or organization
-// node. Shares to an organization node can only be deleted by the management
-// account of an organization or by a delegated administrator. Note that if a
-// delegated admin is de-registered, portfolio shares created from that account are
-// removed.
+// Stops sharing the specified portfolio with the specified account or
+// organization node. Shares to an organization node can only be deleted by the
+// management account of an organization or by a delegated administrator. Note that
+// if a delegated admin is de-registered, portfolio shares created from that
+// account are removed.
 func (c *Client) DeletePortfolioShare(ctx context.Context, params *DeletePortfolioShareInput, optFns ...func(*Options)) (*DeletePortfolioShareOutput, error) {
 	if params == nil {
 		params = &DeletePortfolioShareInput{}
@@ -39,9 +39,9 @@ type DeletePortfolioShareInput struct {
 	PortfolioId *string
 
 	// The language code.
-	// - en - English (default)
-	// - jp - Japanese
-	// - zh - Chinese
+	//     - en - English (default)
+	//     - jp - Japanese
+	//     - zh - Chinese
 	AcceptLanguage *string
 
 	// The Amazon Web Services account ID.

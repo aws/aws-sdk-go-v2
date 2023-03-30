@@ -60,8 +60,8 @@ func (e *EC2InstanceNotFoundException) ErrorCode() string {
 }
 func (e *EC2InstanceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Unable to connect because the instance is not in a valid state. Connecting to a
-// stopped or terminated instance is not supported. If the instance is stopped,
+// Unable to connect because the instance is not in a valid state. Connecting to
+// a stopped or terminated instance is not supported. If the instance is stopped,
 // start your instance, and try to connect again.
 type EC2InstanceStateInvalidException struct {
 	Message *string
@@ -167,10 +167,9 @@ func (e *InvalidArgsException) ErrorCode() string {
 }
 func (e *InvalidArgsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Your account is not authorized to use the EC2 Serial Console. To authorize your
-// account, run the EnableSerialConsoleAccess API. For more information, see
-// EnableSerialConsoleAccess
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EnableSerialConsoleAccess.html)
+// Your account is not authorized to use the EC2 Serial Console. To authorize
+// your account, run the EnableSerialConsoleAccess API. For more information, see
+// EnableSerialConsoleAccess (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EnableSerialConsoleAccess.html)
 // in the Amazon EC2 API Reference.
 type SerialConsoleAccessDisabledException struct {
 	Message *string
@@ -283,8 +282,9 @@ func (e *ServiceException) ErrorCode() string {
 }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The requests were made too frequently and have been throttled. Wait a while and
-// try again. To increase the limit on your request frequency, contact AWS Support.
+// The requests were made too frequently and have been throttled. Wait a while
+// and try again. To increase the limit on your request frequency, contact AWS
+// Support.
 type ThrottlingException struct {
 	Message *string
 

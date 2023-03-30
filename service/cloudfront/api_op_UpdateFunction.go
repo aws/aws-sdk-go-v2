@@ -13,9 +13,9 @@ import (
 
 // Updates a CloudFront function. You can update a function's code or the comment
 // that describes the function. You cannot update a function's name. To update a
-// function, you provide the function's name and version (ETag value) along with
+// function, you provide the function's name and version ( ETag value) along with
 // the updated function code. To get the name and version, you can use
-// ListFunctions and DescribeFunction.
+// ListFunctions and DescribeFunction .
 func (c *Client) UpdateFunction(ctx context.Context, params *UpdateFunctionInput, optFns ...func(*Options)) (*UpdateFunctionOutput, error) {
 	if params == nil {
 		params = &UpdateFunctionInput{}
@@ -33,9 +33,8 @@ func (c *Client) UpdateFunction(ctx context.Context, params *UpdateFunctionInput
 
 type UpdateFunctionInput struct {
 
-	// The function code. For more information about writing a CloudFront function, see
-	// Writing function code for CloudFront Functions
-	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html)
+	// The function code. For more information about writing a CloudFront function,
+	// see Writing function code for CloudFront Functions (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// This member is required.
@@ -46,8 +45,8 @@ type UpdateFunctionInput struct {
 	// This member is required.
 	FunctionConfig *types.FunctionConfig
 
-	// The current version (ETag value) of the function that you are updating, which
-	// you can get using DescribeFunction.
+	// The current version ( ETag value) of the function that you are updating, which
+	// you can get using DescribeFunction .
 	//
 	// This member is required.
 	IfMatch *string

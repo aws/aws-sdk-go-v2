@@ -41,8 +41,8 @@ type AdminListUserAuthEventsInput struct {
 	// This member is required.
 	Username *string
 
-	// The maximum number of authentication events to return. Returns 60 events if you
-	// set MaxResults to 0, or if you don't include a MaxResults parameter.
+	// The maximum number of authentication events to return. Returns 60 events if
+	// you set MaxResults  to 0, or if you don't include a MaxResults  parameter.
 	MaxResults *int32
 
 	// A pagination token.
@@ -53,8 +53,8 @@ type AdminListUserAuthEventsInput struct {
 
 type AdminListUserAuthEventsOutput struct {
 
-	// The response object. It includes the EventID, EventType, CreationDate,
-	// EventRisk, and EventResponse.
+	// The response object. It includes the EventID , EventType , CreationDate ,
+	// EventRisk , and EventResponse .
 	AuthEvents []types.AuthEventType
 
 	// A pagination token.
@@ -140,12 +140,12 @@ var _ AdminListUserAuthEventsAPIClient = (*Client)(nil)
 // AdminListUserAuthEventsPaginatorOptions is the paginator options for
 // AdminListUserAuthEvents
 type AdminListUserAuthEventsPaginatorOptions struct {
-	// The maximum number of authentication events to return. Returns 60 events if you
-	// set MaxResults to 0, or if you don't include a MaxResults parameter.
+	// The maximum number of authentication events to return. Returns 60 events if
+	// you set MaxResults  to 0, or if you don't include a MaxResults  parameter.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -44,8 +44,8 @@ type ListAliasesInput struct {
 	// call returns a token for retrieving the next set of aliases.
 	NextToken *string
 
-	// The version of the image. If image version is not specified, the aliases of all
-	// versions of the image are listed.
+	// The version of the image. If image version is not specified, the aliases of
+	// all versions of the image are listed.
 	Version *int32
 
 	noSmithyDocumentSerde
@@ -140,8 +140,8 @@ type ListAliasesPaginatorOptions struct {
 	// The maximum number of aliases to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

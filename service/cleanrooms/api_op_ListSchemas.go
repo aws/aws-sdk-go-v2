@@ -30,8 +30,8 @@ func (c *Client) ListSchemas(ctx context.Context, params *ListSchemasInput, optF
 
 type ListSchemasInput struct {
 
-	// A unique identifier for the collaboration that the schema belongs to. Currently
-	// accepts a collaboration ID.
+	// A unique identifier for the collaboration that the schema belongs to.
+	// Currently accepts a collaboration ID.
 	//
 	// This member is required.
 	CollaborationIdentifier *string
@@ -142,8 +142,8 @@ type ListSchemasPaginatorOptions struct {
 	// The maximum size of the results that is returned per call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

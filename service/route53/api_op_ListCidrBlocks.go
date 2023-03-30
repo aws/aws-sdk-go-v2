@@ -41,8 +41,8 @@ type ListCidrBlocksInput struct {
 	// Maximum number of results you want returned.
 	MaxResults *int32
 
-	// An opaque pagination token to indicate where the service is to begin enumerating
-	// results.
+	// An opaque pagination token to indicate where the service is to begin
+	// enumerating results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -53,9 +53,9 @@ type ListCidrBlocksOutput struct {
 	// A complex type that contains information about the CIDR blocks.
 	CidrBlocks []types.CidrBlockSummary
 
-	// An opaque pagination token to indicate where the service is to begin enumerating
-	// results. If no value is provided, the listing of results starts from the
-	// beginning.
+	// An opaque pagination token to indicate where the service is to begin
+	// enumerating results. If no value is provided, the listing of results starts from
+	// the beginning.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -140,8 +140,8 @@ type ListCidrBlocksPaginatorOptions struct {
 	// Maximum number of results you want returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

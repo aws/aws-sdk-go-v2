@@ -12,12 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of runs for a machine learning transform. Machine learning task runs
-// are asynchronous tasks that Glue runs on your behalf as part of various machine
-// learning workflows. You can get a sortable, filterable list of machine learning
-// task runs by calling GetMLTaskRuns with their parent transform's TransformID and
-// other optional parameters as documented in this section. This operation returns
-// a list of historic runs and must be paginated.
+// Gets a list of runs for a machine learning transform. Machine learning task
+// runs are asynchronous tasks that Glue runs on your behalf as part of various
+// machine learning workflows. You can get a sortable, filterable list of machine
+// learning task runs by calling GetMLTaskRuns  with their parent transform's
+// TransformIDand other optional parameters as documented in this section. This
+// operation returns a list of historic runs and must be paginated.
 func (c *Client) GetMLTaskRuns(ctx context.Context, params *GetMLTaskRunsInput, optFns ...func(*Options)) (*GetMLTaskRunsOutput, error) {
 	if params == nil {
 		params = &GetMLTaskRunsInput{}
@@ -40,7 +40,7 @@ type GetMLTaskRunsInput struct {
 	// This member is required.
 	TransformId *string
 
-	// The filter criteria, in the TaskRunFilterCriteria structure, for the task run.
+	// The filter criteria, in the TaskRunFilterCriteria  structure, for the task run.
 	Filter *types.TaskRunFilterCriteria
 
 	// The maximum number of results to return.
@@ -49,7 +49,7 @@ type GetMLTaskRunsInput struct {
 	// A token for pagination of the results. The default is empty.
 	NextToken *string
 
-	// The sorting criteria, in the TaskRunSortCriteria structure, for the task run.
+	// The sorting criteria, in the TaskRunSortCriteria  structure, for the task run.
 	Sort *types.TaskRunSortCriteria
 
 	noSmithyDocumentSerde
@@ -144,8 +144,8 @@ type GetMLTaskRunsPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

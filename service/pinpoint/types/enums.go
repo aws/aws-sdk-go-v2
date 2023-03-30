@@ -21,8 +21,8 @@ const (
 	EndpointTypesElementInApp           EndpointTypesElement = "IN_APP"
 )
 
-// Values returns all known values for EndpointTypesElement. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for EndpointTypesElement. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointTypesElement) Values() []EndpointTypesElement {
 	return []EndpointTypesElement{
@@ -71,9 +71,9 @@ const (
 	AlignmentRight  Alignment = "RIGHT"
 )
 
-// Values returns all known values for Alignment. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Alignment. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Alignment) Values() []Alignment {
 	return []Alignment{
 		"LEFT",
@@ -119,9 +119,9 @@ const (
 	ButtonActionClose    ButtonAction = "CLOSE"
 )
 
-// Values returns all known values for ButtonAction. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ButtonAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ButtonAction) Values() []ButtonAction {
 	return []ButtonAction{
 		"LINK",
@@ -177,9 +177,9 @@ const (
 	ChannelTypeInApp           ChannelType = "IN_APP"
 )
 
-// Values returns all known values for ChannelType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChannelType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ChannelType) Values() []ChannelType {
 	return []ChannelType{
 		"PUSH",
@@ -211,9 +211,9 @@ const (
 	DayOfWeekSunday    DayOfWeek = "SUNDAY"
 )
 
-// Values returns all known values for DayOfWeek. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for DayOfWeek. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (DayOfWeek) Values() []DayOfWeek {
 	return []DayOfWeek{
 		"MONDAY",
@@ -282,9 +282,9 @@ const (
 	DurationDay30 Duration = "DAY_30"
 )
 
-// Values returns all known values for Duration. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Duration. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Duration) Values() []Duration {
 	return []Duration{
 		"HR_24",
@@ -343,9 +343,9 @@ const (
 	FrequencyInAppEvent Frequency = "IN_APP_EVENT"
 )
 
-// Values returns all known values for Frequency. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Frequency. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Frequency) Values() []Frequency {
 	return []Frequency{
 		"ONCE",
@@ -393,9 +393,9 @@ const (
 	JobStatusFailed                     JobStatus = "FAILED"
 )
 
-// Values returns all known values for JobStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"CREATED",
@@ -444,9 +444,9 @@ const (
 	MessageTypePromotional   MessageType = "PROMOTIONAL"
 )
 
-// Values returns all known values for MessageType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MessageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (MessageType) Values() []MessageType {
 	return []MessageType{
 		"TRANSACTIONAL",
@@ -462,8 +462,8 @@ const (
 	ModeFilter   Mode = "FILTER"
 )
 
-// Values returns all known values for Mode. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Mode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Mode) Values() []Mode {
 	return []Mode{
@@ -480,9 +480,9 @@ const (
 	OperatorAny Operator = "ANY"
 )
 
-// Values returns all known values for Operator. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Operator. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Operator) Values() []Operator {
 	return []Operator{
 		"ALL",
@@ -498,9 +498,9 @@ const (
 	RecencyTypeInactive RecencyType = "INACTIVE"
 )
 
-// Values returns all known values for RecencyType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RecencyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (RecencyType) Values() []RecencyType {
 	return []RecencyType{
 		"ACTIVE",
@@ -516,9 +516,9 @@ const (
 	SegmentTypeImport      SegmentType = "IMPORT"
 )
 
-// Values returns all known values for SegmentType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SegmentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (SegmentType) Values() []SegmentType {
 	return []SegmentType{
 		"DIMENSIONAL",
@@ -558,8 +558,8 @@ const (
 	StatePaused    State = "PAUSED"
 )
 
-// Values returns all known values for State. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for State. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (State) Values() []State {
 	return []State{
@@ -583,9 +583,9 @@ const (
 	TemplateTypeInapp TemplateType = "INAPP"
 )
 
-// Values returns all known values for TemplateType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TemplateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TemplateType) Values() []TemplateType {
 	return []TemplateType{
 		"EMAIL",
@@ -605,8 +605,8 @@ const (
 	TypeNone Type = "NONE"
 )
 
-// Values returns all known values for Type. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Type. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{

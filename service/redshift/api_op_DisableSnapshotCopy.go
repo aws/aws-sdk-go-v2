@@ -14,7 +14,7 @@ import (
 // Disables the automatic copying of snapshots from one region to another region
 // for a specified cluster. If your cluster and its snapshots are encrypted using
 // an encrypted symmetric key from Key Management Service, use
-// DeleteSnapshotCopyGrant to delete the grant that grants Amazon Redshift
+// DeleteSnapshotCopyGrantto delete the grant that grants Amazon Redshift
 // permission to the key in the destination region.
 func (c *Client) DisableSnapshotCopy(ctx context.Context, params *DisableSnapshotCopyInput, optFns ...func(*Options)) (*DisableSnapshotCopyOutput, error) {
 	if params == nil {
@@ -33,8 +33,8 @@ func (c *Client) DisableSnapshotCopy(ctx context.Context, params *DisableSnapsho
 
 type DisableSnapshotCopyInput struct {
 
-	// The unique identifier of the source cluster that you want to disable copying of
-	// snapshots to a destination region. Constraints: Must be the valid name of an
+	// The unique identifier of the source cluster that you want to disable copying
+	// of snapshots to a destination region. Constraints: Must be the valid name of an
 	// existing cluster that has cross-region snapshot copy enabled.
 	//
 	// This member is required.

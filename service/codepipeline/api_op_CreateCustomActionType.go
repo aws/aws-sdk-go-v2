@@ -60,8 +60,8 @@ type CreateCustomActionTypeInput struct {
 	// the configuration properties of the custom action within the URL templates by
 	// following the format of {Config:name}, as long as the configuration property is
 	// both required and not secret. For more information, see Create a Custom Action
-	// for a Pipeline
-	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html).
+	// for a Pipeline (https://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html)
+	// .
 	ConfigurationProperties []types.ActionConfigurationProperty
 
 	// URLs that provide users information about this custom action.
@@ -73,7 +73,7 @@ type CreateCustomActionTypeInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a CreateCustomActionType operation.
+// Represents the output of a CreateCustomActionType  operation.
 type CreateCustomActionTypeOutput struct {
 
 	// Returns information about the details of an action type.

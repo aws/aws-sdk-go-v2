@@ -12,10 +12,10 @@ import (
 )
 
 // Creates a block storage disk that can be attached to an Amazon Lightsail
-// instance in the same Availability Zone (e.g., us-east-2a). The create disk
+// instance in the same Availability Zone (e.g., us-east-2a ). The create disk
 // operation supports tag-based access control via request tags. For more
-// information, see the Amazon Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) CreateDisk(ctx context.Context, params *CreateDiskInput, optFns ...func(*Options)) (*CreateDiskOutput, error) {
 	if params == nil {
 		params = &CreateDiskInput{}
@@ -33,20 +33,20 @@ func (c *Client) CreateDisk(ctx context.Context, params *CreateDiskInput, optFns
 
 type CreateDiskInput struct {
 
-	// The Availability Zone where you want to create the disk (e.g., us-east-2a). Use
-	// the same Availability Zone as the Lightsail instance to which you want to attach
-	// the disk. Use the get regions operation to list the Availability Zones where
-	// Lightsail is currently available.
+	// The Availability Zone where you want to create the disk (e.g., us-east-2a).
+	// Use the same Availability Zone as the Lightsail instance to which you want to
+	// attach the disk. Use the get regions operation to list the Availability Zones
+	// where Lightsail is currently available.
 	//
 	// This member is required.
 	AvailabilityZone *string
 
-	// The unique Lightsail disk name (e.g., my-disk).
+	// The unique Lightsail disk name (e.g., my-disk ).
 	//
 	// This member is required.
 	DiskName *string
 
-	// The size of the disk in GB (e.g., 32).
+	// The size of the disk in GB (e.g., 32 ).
 	//
 	// This member is required.
 	SizeInGb *int32

@@ -13,8 +13,8 @@ import (
 
 // Inspects a batch of documents and returns a sentiment analysis for each entity
 // identified in the documents. For more information about targeted sentiment, see
-// Targeted sentiment
-// (https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html).
+// Targeted sentiment (https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html)
+// .
 func (c *Client) BatchDetectTargetedSentiment(ctx context.Context, params *BatchDetectTargetedSentimentInput, optFns ...func(*Options)) (*BatchDetectTargetedSentimentOutput, error) {
 	if params == nil {
 		params = &BatchDetectTargetedSentimentInput{}

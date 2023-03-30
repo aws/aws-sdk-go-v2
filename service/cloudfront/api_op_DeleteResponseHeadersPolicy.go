@@ -15,7 +15,7 @@ import (
 // the response headers policy from all cache behaviors, then delete the response
 // headers policy. To delete a response headers policy, you must provide the
 // policy's identifier and version. To get these values, you can use
-// ListResponseHeadersPolicies or GetResponseHeadersPolicy.
+// ListResponseHeadersPolicies or GetResponseHeadersPolicy .
 func (c *Client) DeleteResponseHeadersPolicy(ctx context.Context, params *DeleteResponseHeadersPolicyInput, optFns ...func(*Options)) (*DeleteResponseHeadersPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteResponseHeadersPolicyInput{}
@@ -33,16 +33,16 @@ func (c *Client) DeleteResponseHeadersPolicy(ctx context.Context, params *Delete
 
 type DeleteResponseHeadersPolicyInput struct {
 
-	// The identifier for the response headers policy that you are deleting. To get the
-	// identifier, you can use ListResponseHeadersPolicies.
+	// The identifier for the response headers policy that you are deleting. To get
+	// the identifier, you can use ListResponseHeadersPolicies .
 	//
 	// This member is required.
 	Id *string
 
-	// The version of the response headers policy that you are deleting. The version is
-	// the response headers policy's ETag value, which you can get using
-	// ListResponseHeadersPolicies, GetResponseHeadersPolicy, or
-	// GetResponseHeadersPolicyConfig.
+	// The version of the response headers policy that you are deleting. The version
+	// is the response headers policy's ETag  value, which you can get using
+	// ListResponseHeadersPolicies , GetResponseHeadersPolicy , or
+	// GetResponseHeadersPolicyConfig .
 	IfMatch *string
 
 	noSmithyDocumentSerde

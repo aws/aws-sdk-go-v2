@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a transit gateway Connect peer with a device, and optionally, with a
-// link. If you specify a link, it must be associated with the specified device.
+// Associates a transit gateway Connect peer with a device, and optionally, with
+// a link. If you specify a link, it must be associated with the specified device.
 // You can only associate transit gateway Connect peers that have been created on a
 // transit gateway that's registered in your global network. You cannot associate a
 // transit gateway Connect peer with more than one device and link.

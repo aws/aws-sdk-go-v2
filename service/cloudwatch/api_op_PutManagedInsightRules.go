@@ -11,13 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a managed Contributor Insights rule for a specified Amazon Web Services
-// resource. When you enable a managed rule, you create a Contributor Insights rule
-// that collects data from Amazon Web Services services. You cannot edit these
-// rules with PutInsightRule. The rules can be enabled, disabled, and deleted using
-// EnableInsightRules, DisableInsightRules, and DeleteInsightRules. If a previously
-// created managed rule is currently disabled, a subsequent call to this API will
-// re-enable it. Use ListManagedInsightRules to describe all available rules.
+// Creates a managed Contributor Insights rule for a specified Amazon Web
+// Services resource. When you enable a managed rule, you create a Contributor
+// Insights rule that collects data from Amazon Web Services services. You cannot
+// edit these rules with PutInsightRule. The rules can be enabled, disabled, and
+// deleted using EnableInsightRules , DisableInsightRules , and DeleteInsightRules
+// . If a previously created managed rule is currently disabled, a subsequent call
+// to this API will re-enable it. Use ListManagedInsightRules to describe all
+// available rules.
 func (c *Client) PutManagedInsightRules(ctx context.Context, params *PutManagedInsightRulesInput, optFns ...func(*Options)) (*PutManagedInsightRulesOutput, error) {
 	if params == nil {
 		params = &PutManagedInsightRulesInput{}
@@ -35,7 +36,7 @@ func (c *Client) PutManagedInsightRules(ctx context.Context, params *PutManagedI
 
 type PutManagedInsightRulesInput struct {
 
-	// A list of ManagedRules to enable.
+	// A list of ManagedRules  to enable.
 	//
 	// This member is required.
 	ManagedRules []types.ManagedRule

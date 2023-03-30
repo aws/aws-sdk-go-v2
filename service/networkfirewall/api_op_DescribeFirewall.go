@@ -29,8 +29,8 @@ func (c *Client) DescribeFirewall(ctx context.Context, params *DescribeFirewallI
 
 type DescribeFirewallInput struct {
 
-	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or the
-	// name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or
+	// the name, and you can specify both.
 	FirewallArn *string
 
 	// The descriptive name of the firewall. You can't change the name of a firewall
@@ -43,13 +43,13 @@ type DescribeFirewallInput struct {
 
 type DescribeFirewallOutput struct {
 
-	// The configuration settings for the firewall. These settings include the firewall
-	// policy and the subnets in your VPC to use for the firewall endpoints.
+	// The configuration settings for the firewall. These settings include the
+	// firewall policy and the subnets in your VPC to use for the firewall endpoints.
 	Firewall *types.Firewall
 
 	// Detailed information about the current status of a Firewall. You can retrieve
-	// this for a firewall by calling DescribeFirewall and providing the firewall name
-	// and ARN.
+	// this for a firewall by calling DescribeFirewall and providing the firewall
+	// name and ARN.
 	FirewallStatus *types.FirewallStatus
 
 	// An optional token that you can use for optimistic locking. Network Firewall

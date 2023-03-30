@@ -43,8 +43,8 @@ type UpdateImagePipelineInput struct {
 	// This member is required.
 	ImagePipelineArn *string
 
-	// The Amazon Resource Name (ARN) of the infrastructure configuration that will be
-	// used to build images updated by this image pipeline.
+	// The Amazon Resource Name (ARN) of the infrastructure configuration that will
+	// be used to build images updated by this image pipeline.
 	//
 	// This member is required.
 	InfrastructureConfigurationArn *string

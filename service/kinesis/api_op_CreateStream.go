@@ -28,27 +28,24 @@ import (
 // the stream. The name is scoped to the Amazon Web Services account used by the
 // application. It is also scoped by Amazon Web Services Region. That is, two
 // streams in two different accounts can have the same name, and two streams in the
-// same account, but in two different Regions, can have the same name. CreateStream
-// is an asynchronous operation. Upon receiving a CreateStream request, Kinesis
-// Data Streams immediately returns and sets the stream status to CREATING. After
-// the stream is created, Kinesis Data Streams sets the stream status to ACTIVE.
-// You should perform read and write operations only on an ACTIVE stream. You
-// receive a LimitExceededException when making a CreateStream request when you try
-// to do one of the following:
-// - Have more than five streams in the CREATING state
-// at any point in time.
-// - Create more shards than are authorized for your
-// account.
+// same account, but in two different Regions, can have the same name.
+// CreateStream is an asynchronous operation. Upon receiving a CreateStream
+// request, Kinesis Data Streams immediately returns and sets the stream status to
+// CREATING. After the stream is created, Kinesis Data Streams sets the stream
+// status to ACTIVE . You should perform read and write operations only on an
+// ACTIVE stream. You receive a LimitExceededException  when making a CreateStream
+// request when you try to do one of the following:
+//   - Have more than five streams in the CREATING state at any point in time.
+//   - Create more shards than are authorized for your account.
 //
-// For the default shard limit for an Amazon Web Services account, see
-// Amazon Kinesis Data Streams Limits
-// (https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
+// For the default
+// shard limit for an Amazon Web Services account, see Amazon Kinesis Data
+// Streams Limits (https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
 // in the Amazon Kinesis Data Streams Developer Guide. To increase this limit,
-// contact Amazon Web Services Support
-// (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html). You can
-// use DescribeStreamSummary to check the stream status, which is returned in
-// StreamStatus. CreateStream has a limit of five transactions per second per
-// account.
+// contact Amazon Web Services Support (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
+// . You can use DescribeStreamSummary to check the stream status, which is
+// returned in StreamStatus . CreateStream has a limit of five transactions per
+// second per account.
 func (c *Client) CreateStream(ctx context.Context, params *CreateStreamInput, optFns ...func(*Options)) (*CreateStreamOutput, error) {
 	if params == nil {
 		params = &CreateStreamInput{}
@@ -64,7 +61,7 @@ func (c *Client) CreateStream(ctx context.Context, params *CreateStreamInput, op
 	return out, nil
 }
 
-// Represents the input for CreateStream.
+// Represents the input for CreateStream .
 type CreateStreamInput struct {
 
 	// A name to identify the stream. The stream name is scoped to the Amazon Web
@@ -77,8 +74,8 @@ type CreateStreamInput struct {
 	// This member is required.
 	StreamName *string
 
-	// The number of shards that the stream will use. The throughput of the stream is a
-	// function of the number of shards; more shards are required for greater
+	// The number of shards that the stream will use. The throughput of the stream is
+	// a function of the number of shards; more shards are required for greater
 	// provisioned throughput.
 	ShardCount *int32
 

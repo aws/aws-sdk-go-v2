@@ -30,8 +30,8 @@ func (c *Client) UpdateLicenseManagerReportGenerator(ctx context.Context, params
 
 type UpdateLicenseManagerReportGeneratorInput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	//
 	// This member is required.
 	ClientToken *string
@@ -57,11 +57,8 @@ type UpdateLicenseManagerReportGeneratorInput struct {
 	ReportGeneratorName *string
 
 	// Type of reports to generate. The following report types are supported:
-	// - License
-	// configuration report - Reports the number and details of consumed licenses for a
-	// license configuration.
-	// - Resource report - Reports the tracked licenses and
-	// resource consumption for a license configuration.
+	//     - License configuration report - Reports the number and details of consumed licenses for a license configuration.
+	//     - Resource report - Reports the tracked licenses and resource consumption for a license configuration.
 	//
 	// This member is required.
 	Type []types.ReportType

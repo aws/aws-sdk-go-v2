@@ -14,8 +14,7 @@ import (
 // specified load balancer in EC2-Classic or a default VPC. For load balancers in a
 // non-default VPC, use AttachLoadBalancerToSubnets. The load balancer evenly
 // distributes requests across all its registered Availability Zones that contain
-// instances. For more information, see Add or Remove Availability Zones
-// (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html)
+// instances. For more information, see Add or Remove Availability Zones (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html)
 // in the Classic Load Balancers Guide.
 func (c *Client) EnableAvailabilityZonesForLoadBalancer(ctx context.Context, params *EnableAvailabilityZonesForLoadBalancerInput, optFns ...func(*Options)) (*EnableAvailabilityZonesForLoadBalancerOutput, error) {
 	if params == nil {

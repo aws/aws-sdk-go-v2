@@ -32,21 +32,21 @@ func (c *Client) ListStacks(ctx context.Context, params *ListStacksInput, optFns
 	return out, nil
 }
 
-// The input for ListStacks action.
+// The input for ListStacks  action.
 type ListStacksInput struct {
 
 	// A string that identifies the next page of stacks that you want to retrieve.
 	NextToken *string
 
-	// Stack status to use as a filter. Specify one or more stack status codes to list
-	// only stacks with the specified status codes. For a complete list of stack status
-	// codes, see the StackStatus parameter of the Stack data type.
+	// Stack status to use as a filter. Specify one or more stack status codes to
+	// list only stacks with the specified status codes. For a complete list of stack
+	// status codes, see the StackStatus  parameter of the Stack  data type.
 	StackStatusFilter []types.StackStatus
 
 	noSmithyDocumentSerde
 }
 
-// The output for ListStacks action.
+// The output for ListStacks  action.
 type ListStacksOutput struct {
 
 	// If the output exceeds 1 MB in size, a string that identifies the next page of
@@ -132,8 +132,8 @@ var _ ListStacksAPIClient = (*Client)(nil)
 
 // ListStacksPaginatorOptions is the paginator options for ListStacks
 type ListStacksPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

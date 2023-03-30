@@ -18,25 +18,17 @@ import (
 // session. To create a new script record, specify a script name and provide the
 // script file(s). The script files and all dependencies must be zipped into a
 // single file. You can pull the zip file from either of these locations:
-// - A
-// locally available directory. Use the ZipFile parameter for this option.
-// - An
-// Amazon Simple Storage Service (Amazon S3) bucket under your Amazon Web Services
-// account. Use the StorageLocation parameter for this option. You'll need to have
-// an Identity Access Management (IAM) role that allows the Amazon GameLift service
-// to access your S3 bucket.
+//   - A locally available directory. Use the ZipFile parameter for this option.
+//   - An Amazon Simple Storage Service (Amazon S3) bucket under your Amazon Web Services account. Use the StorageLocation parameter for this option. You'll need to have an Identity Access Management (IAM) role that allows the Amazon GameLift service to access your S3 bucket.
 //
-// If the call is successful, a new script record is
-// created with a unique script ID. If the script file is provided as a local file,
-// the file is uploaded to an Amazon GameLift-owned S3 bucket and the script
-// record's storage location reflects this location. If the script file is provided
-// as an S3 bucket, Amazon GameLift accesses the file at this storage location as
-// needed for deployment. Learn more Amazon GameLift Realtime Servers
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)Set
-// Up a Role for Amazon GameLift Access
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-role.html)
-// Related actions All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// If the call is successful, a new script record is created with a unique script
+// ID. If the script file is provided as a local file, the file is uploaded to an
+// Amazon GameLift-owned S3 bucket and the script record's storage location
+// reflects this location. If the script file is provided as an S3 bucket, Amazon
+// GameLift accesses the file at this storage location as needed for deployment.
+// Learn more Amazon GameLift Realtime Servers (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)
+// Set Up a Role for Amazon GameLift Access (https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-role.html)
+// Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateScript(ctx context.Context, params *CreateScriptInput, optFns ...func(*Options)) (*CreateScriptOutput, error) {
 	if params == nil {
 		params = &CreateScriptInput{}
@@ -55,8 +47,7 @@ func (c *Client) CreateScript(ctx context.Context, params *CreateScriptInput, op
 type CreateScriptInput struct {
 
 	// A descriptive label that is associated with a script. Script names do not need
-	// to be unique. You can use UpdateScript
-	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateScript.html)
+	// to be unique. You can use UpdateScript (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateScript.html)
 	// to change this value later.
 	Name *string
 
@@ -73,22 +64,17 @@ type CreateScriptInput struct {
 	// A list of labels to assign to the new script resource. Tags are
 	// developer-defined key-value pairs. Tagging Amazon Web Services resources are
 	// useful for resource management, access management and cost allocation. For more
-	// information, see  Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-	// Web Services General Reference. Once the resource is created, you can use
-	// TagResource
-	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_TagResource.html),
-	// UntagResource
-	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UntagResource.html),
-	// and ListTagsForResource
-	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListTagsForResource.html)
+	// information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the Amazon Web Services General Reference. Once the resource is created, you
+	// can use TagResource (https://docs.aws.amazon.com/gamelift/latest/apireference/API_TagResource.html)
+	// , UntagResource (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UntagResource.html)
+	// , and ListTagsForResource (https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListTagsForResource.html)
 	// to add, remove, and view tags. The maximum tag limit may be lower than stated.
 	// See the Amazon Web Services General Reference for actual tagging limits.
 	Tags []types.Tag
 
 	// Version information associated with a build or script. Version strings do not
-	// need to be unique. You can use UpdateScript
-	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateScript.html)
+	// need to be unique. You can use UpdateScript (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateScript.html)
 	// to change this value later.
 	Version *string
 
@@ -97,7 +83,7 @@ type CreateScriptInput struct {
 	// When using the Amazon Web Services CLI tool to create a script, this parameter
 	// is set to the zip file name. It must be prepended with the string "fileb://" to
 	// indicate that the file data is a binary object. For example: --zip-file
-	// fileb://myRealtimeScript.zip.
+	// fileb://myRealtimeScript.zip .
 	ZipFile []byte
 
 	noSmithyDocumentSerde

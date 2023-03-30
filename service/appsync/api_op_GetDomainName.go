@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a custom DomainName object.
+// Retrieves a custom DomainName  object.
 func (c *Client) GetDomainName(ctx context.Context, params *GetDomainNameInput, optFns ...func(*Options)) (*GetDomainNameOutput, error) {
 	if params == nil {
 		params = &GetDomainNameInput{}
@@ -39,7 +39,7 @@ type GetDomainNameInput struct {
 
 type GetDomainNameOutput struct {
 
-	// The configuration for the DomainName.
+	// The configuration for the DomainName .
 	DomainNameConfig *types.DomainNameConfig
 
 	// Metadata pertaining to the operation's result.

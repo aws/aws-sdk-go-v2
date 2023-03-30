@@ -14,8 +14,7 @@ import (
 
 // Lists the calling Amazon Web Services account's dedicated origination numbers
 // and their metadata. For more information about origination numbers, see
-// Origination numbers
-// (https://docs.aws.amazon.com/sns/latest/dg/channels-sms-originating-identities-origination-numbers.html)
+// Origination numbers (https://docs.aws.amazon.com/sns/latest/dg/channels-sms-originating-identities-origination-numbers.html)
 // in the Amazon SNS Developer Guide.
 func (c *Client) ListOriginationNumbers(ctx context.Context, params *ListOriginationNumbersInput, optFns ...func(*Options)) (*ListOriginationNumbersOutput, error) {
 	if params == nil {
@@ -37,7 +36,7 @@ type ListOriginationNumbersInput struct {
 	// The maximum number of origination numbers to return.
 	MaxResults *int32
 
-	// Token that the previous ListOriginationNumbers request returns.
+	// Token that the previous ListOriginationNumbers  request returns.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,7 +44,7 @@ type ListOriginationNumbersInput struct {
 
 type ListOriginationNumbersOutput struct {
 
-	// A NextToken string is returned when you call the ListOriginationNumbers
+	// A NextToken  string is returned when you call the ListOriginationNumbers
 	// operation if additional pages of records are available.
 	NextToken *string
 
@@ -132,8 +131,8 @@ type ListOriginationNumbersPaginatorOptions struct {
 	// The maximum number of origination numbers to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -146,7 +145,8 @@ type ListOriginationNumbersPaginator struct {
 	firstPage bool
 }
 
-// NewListOriginationNumbersPaginator returns a new ListOriginationNumbersPaginator
+// NewListOriginationNumbersPaginator returns a new
+// ListOriginationNumbersPaginator
 func NewListOriginationNumbersPaginator(client ListOriginationNumbersAPIClient, params *ListOriginationNumbersInput, optFns ...func(*ListOriginationNumbersPaginatorOptions)) *ListOriginationNumbersPaginator {
 	if params == nil {
 		params = &ListOriginationNumbersInput{}

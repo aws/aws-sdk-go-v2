@@ -34,8 +34,8 @@ type DescribeChangeSetInput struct {
 	// This member is required.
 	Catalog *string
 
-	// Required. The unique identifier for the StartChangeSet request that you want to
-	// describe the details for.
+	// Required. The unique identifier for the StartChangeSet request that you want
+	// to describe the details for.
 	//
 	// This member is required.
 	ChangeSetId *string
@@ -45,7 +45,7 @@ type DescribeChangeSetInput struct {
 
 type DescribeChangeSetOutput struct {
 
-	// An array of ChangeSummary objects.
+	// An array of ChangeSummary  objects.
 	ChangeSet []types.ChangeSummary
 
 	// The ARN associated with the unique identifier for the change set referenced in
@@ -55,8 +55,8 @@ type DescribeChangeSetOutput struct {
 	// Required. The unique identifier for the change set referenced in this request.
 	ChangeSetId *string
 
-	// The optional name provided in the StartChangeSet request. If you do not provide
-	// a name, one is set by default.
+	// The optional name provided in the StartChangeSet request. If you do not
+	// provide a name, one is set by default.
 	ChangeSetName *string
 
 	// The date and time, in ISO 8601 format (2018-02-27T13:45:22Z), the request
@@ -64,10 +64,10 @@ type DescribeChangeSetOutput struct {
 	// state. Null if the request is not in a terminal state.
 	EndTime *string
 
-	// Returned if the change set is in FAILED status. Can be either CLIENT_ERROR,
-	// which means that there are issues with the request (see the ErrorDetailList), or
-	// SERVER_FAULT, which means that there is a problem in the system, and you should
-	// retry your request.
+	// Returned if the change set is in FAILED  status. Can be either CLIENT_ERROR,
+	// which means that there are issues with the request (see the ErrorDetailList),
+	// or SERVER_FAULT, which means that there is a problem in the system, and you
+	// should retry your request.
 	FailureCode types.FailureCode
 
 	// Returned if there is a failure on the change set, but that failure is not

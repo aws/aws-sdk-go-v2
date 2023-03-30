@@ -34,11 +34,11 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because the most recent credential report has expired.
-// To generate a new credential report, use GenerateCredentialReport. For more
-// information about credential report expiration, see Getting credential reports
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html) in
-// the IAM User Guide.
+// The request was rejected because the most recent credential report has
+// expired. To generate a new credential report, use GenerateCredentialReport.
+// For more information about credential report expiration, see Getting
+// credential reports (https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html)
+// in the IAM User Guide.
 type CredentialReportExpiredException struct {
 	Message *string
 
@@ -65,7 +65,7 @@ func (e *CredentialReportExpiredException) ErrorCode() string {
 func (e *CredentialReportExpiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the credential report does not exist. To
-// generate a credential report, use GenerateCredentialReport.
+// generate a credential report, use GenerateCredentialReport .
 type CredentialReportNotPresentException struct {
 	Message *string
 
@@ -93,7 +93,8 @@ func (e *CredentialReportNotPresentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The request was rejected because the credential report is still being generated.
+// The request was rejected because the credential report is still being
+// generated.
 type CredentialReportNotReadyException struct {
 	Message *string
 
@@ -146,8 +147,8 @@ func (e *DeleteConflictException) ErrorCode() string {
 }
 func (e *DeleteConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because the same certificate is associated with an IAM
-// user in the account.
+// The request was rejected because the same certificate is associated with an
+// IAM user in the account.
 type DuplicateCertificateException struct {
 	Message *string
 
@@ -200,8 +201,8 @@ func (e *DuplicateSSHPublicKeyException) ErrorCode() string {
 }
 func (e *DuplicateSSHPublicKeyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because it attempted to create a resource that already
-// exists.
+// The request was rejected because it attempted to create a resource that
+// already exists.
 type EntityAlreadyExistsException struct {
 	Message *string
 
@@ -258,8 +259,8 @@ func (e *EntityTemporarilyUnmodifiableException) ErrorFault() smithy.ErrorFault 
 	return smithy.FaultClient
 }
 
-// The request was rejected because the authentication code was not recognized. The
-// error message describes the specific error.
+// The request was rejected because the authentication code was not recognized.
+// The error message describes the specific error.
 type InvalidAuthenticationCodeException struct {
 	Message *string
 
@@ -394,8 +395,8 @@ func (e *InvalidUserTypeException) ErrorCode() string {
 }
 func (e *InvalidUserTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because the public key certificate and the private key
-// do not match.
+// The request was rejected because the public key certificate and the private
+// key do not match.
 type KeyPairMismatchException struct {
 	Message *string
 
@@ -584,8 +585,8 @@ func (e *PolicyEvaluationException) ErrorCode() string {
 }
 func (e *PolicyEvaluationException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The request failed because Amazon Web Services service role policies can only be
-// attached to the service-linked role for that service.
+// The request failed because Amazon Web Services service role policies can only
+// be attached to the service-linked role for that service.
 type PolicyNotAttachableException struct {
 	Message *string
 

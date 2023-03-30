@@ -12,9 +12,9 @@ import (
 )
 
 // Retrieves the Savings Plans recommendations for your account. First use
-// StartSavingsPlansPurchaseRecommendationGeneration to generate a new set of
-// recommendations, and then use GetSavingsPlansPurchaseRecommendation to retrieve
-// them.
+// StartSavingsPlansPurchaseRecommendationGenerationto generate a new set of
+// recommendations, and then use GetSavingsPlansPurchaseRecommendation to
+// retrieve them.
 func (c *Client) GetSavingsPlansPurchaseRecommendation(ctx context.Context, params *GetSavingsPlansPurchaseRecommendationInput, optFns ...func(*Options)) (*GetSavingsPlansPurchaseRecommendationOutput, error) {
 	if params == nil {
 		params = &GetSavingsPlansPurchaseRecommendationInput{}
@@ -55,24 +55,24 @@ type GetSavingsPlansPurchaseRecommendationInput struct {
 
 	// The account scope that you want your recommendations for. Amazon Web Services
 	// calculates recommendations including the management account and member accounts
-	// if the value is set to PAYER. If the value is LINKED, recommendations are
+	// if the value is set to PAYER . If the value is LINKED, recommendations are
 	// calculated for individual member accounts only.
 	AccountScope types.AccountScope
 
 	// You can filter your recommendations by Account ID with the LINKED_ACCOUNT
-	// dimension. To filter your recommendations by Account ID, specify Key as
+	// dimension. To filter your recommendations by Account ID, specify Key  as
 	// LINKED_ACCOUNT and Value as the comma-separated Acount ID(s) that you want to
 	// see Savings Plans purchase recommendations for. For
-	// GetSavingsPlansPurchaseRecommendation, the Filter doesn't include CostCategories
-	// or Tags. It only includes Dimensions. With Dimensions, Key must be
-	// LINKED_ACCOUNT and Value can be a single Account ID or multiple comma-separated
-	// Account IDs that you want to see Savings Plans Purchase Recommendations for. AND
-	// and OR operators are not supported.
+	// GetSavingsPlansPurchaseRecommendation, the Filter  doesn't include
+	// CostCategories or Tags . It only includes Dimensions . With Dimensions , Key
+	// must be LINKED_ACCOUNT  and Value can be a single Account ID or multiple
+	// comma-separated Account IDs that you want to see Savings Plans Purchase
+	// Recommendations for. AND  and OR  operators are not supported.
 	Filter *types.Expression
 
-	// The token to retrieve the next set of results. Amazon Web Services provides the
-	// token when the response from a previous call has more results than the maximum
-	// page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides
+	// the token when the response from a previous call has more results than the
+	// maximum page size.
 	NextPageToken *string
 
 	// The number of recommendations that you want returned in a single response
@@ -87,9 +87,9 @@ type GetSavingsPlansPurchaseRecommendationOutput struct {
 	// Information that regards this specific recommendation set.
 	Metadata *types.SavingsPlansPurchaseRecommendationMetadata
 
-	// The token for the next set of retrievable results. Amazon Web Services provides
-	// the token when the response from a previous call has more results than the
-	// maximum page size.
+	// The token for the next set of retrievable results. Amazon Web Services
+	// provides the token when the response from a previous call has more results than
+	// the maximum page size.
 	NextPageToken *string
 
 	// Contains your request parameters, Savings Plan Recommendations Summary, and

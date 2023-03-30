@@ -11,14 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a domain, which is a container for all case data, such as cases, fields,
-// templates and layouts. Each Amazon Connect instance can be associated with only
-// one Cases domain. This will not associate your connect instance to Cases domain.
-// Instead, use the Amazon Connect CreateIntegrationAssociation
-// (https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateIntegrationAssociation.html)
+// Creates a domain, which is a container for all case data, such as cases,
+// fields, templates and layouts. Each Amazon Connect instance can be associated
+// with only one Cases domain. This will not associate your connect instance to
+// Cases domain. Instead, use the Amazon Connect CreateIntegrationAssociation (https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateIntegrationAssociation.html)
 // API. You need specific IAM permissions to successfully associate the Cases
-// domain. For more information, see Onboard to Cases
-// (https://docs.aws.amazon.com/connect/latest/adminguide/required-permissions-iam-cases.html#onboard-cases-iam).
+// domain. For more information, see Onboard to Cases (https://docs.aws.amazon.com/connect/latest/adminguide/required-permissions-iam-cases.html#onboard-cases-iam)
+// .
 func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, optFns ...func(*Options)) (*CreateDomainOutput, error) {
 	if params == nil {
 		params = &CreateDomainInput{}

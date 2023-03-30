@@ -14,16 +14,14 @@ import (
 // Creates an Amazon Aurora DB cluster from MySQL data stored in an Amazon S3
 // bucket. Amazon RDS must be authorized to access the Amazon S3 bucket and the
 // data must be created using the Percona XtraBackup utility as described in
-// Migrating Data from MySQL by Using an Amazon S3 Bucket
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html#AuroraMySQL.Migrating.ExtMySQL.S3)
+// Migrating Data from MySQL by Using an Amazon S3 Bucket (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html#AuroraMySQL.Migrating.ExtMySQL.S3)
 // in the Amazon Aurora User Guide. This action only restores the DB cluster, not
 // the DB instances for that DB cluster. You must invoke the CreateDBInstance
 // action to create DB instances for the restored DB cluster, specifying the
-// identifier of the restored DB cluster in DBClusterIdentifier. You can create DB
-// instances only after the RestoreDBClusterFromS3 action has completed and the DB
-// cluster is available. For more information on Amazon Aurora, see  What is Amazon
-// Aurora?
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// identifier of the restored DB cluster in DBClusterIdentifier. You can create
+// DB instances only after the RestoreDBClusterFromS3 action has completed and
+// the DB cluster is available. For more information on Amazon Aurora, see What
+// is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
 // The source DB engine must be MySQL.
 func (c *Client) RestoreDBClusterFromS3(ctx context.Context, params *RestoreDBClusterFromS3Input, optFns ...func(*Options)) (*RestoreDBClusterFromS3Output, error) {
@@ -45,12 +43,9 @@ type RestoreDBClusterFromS3Input struct {
 
 	// The name of the DB cluster to create from the source data in the Amazon S3
 	// bucket. This parameter isn't case-sensitive. Constraints:
-	// - Must contain from 1
-	// to 63 letters, numbers, or hyphens.
-	// - First character must be a letter.
-	// - Can't
-	// end with a hyphen or contain two consecutive hyphens.
-	//
+	//     - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//     - First character must be a letter.
+	//     - Can't end with a hyphen or contain two consecutive hyphens.
 	// Example: my-cluster1
 	//
 	// This member is required.
@@ -63,11 +58,9 @@ type RestoreDBClusterFromS3Input struct {
 	Engine *string
 
 	// The name of the master user for the restored DB cluster. Constraints:
-	// - Must be
-	// 1 to 16 letters or numbers.
-	// - First character must be a letter.
-	// - Can't be a
-	// reserved word for the chosen database engine.
+	//     - Must be 1 to 16 letters or numbers.
+	//     - First character must be a letter.
+	//     - Can't be a reserved word for the chosen database engine.
 	//
 	// This member is required.
 	MasterUsername *string
@@ -92,7 +85,7 @@ type RestoreDBClusterFromS3Input struct {
 	SourceEngine *string
 
 	// The version of the database that the backup files were created from. MySQL
-	// versions 5.5, 5.6, and 5.7 are supported. Example: 5.6.40, 5.7.28
+	// versions 5.5, 5.6, and 5.7 are supported. Example: 5.6.40 , 5.7.28
 	//
 	// This member is required.
 	SourceEngineVersion *string
@@ -101,31 +94,28 @@ type RestoreDBClusterFromS3Input struct {
 	// can be created.
 	AvailabilityZones []string
 
-	// The target backtrack window, in seconds. To disable backtracking, set this value
-	// to 0. Currently, Backtrack is only supported for Aurora MySQL DB clusters.
+	// The target backtrack window, in seconds. To disable backtracking, set this
+	// value to 0. Currently, Backtrack is only supported for Aurora MySQL DB clusters.
 	// Default: 0 Constraints:
-	// - If specified, this value must be set to a number from
-	// 0 to 259,200 (72 hours).
+	//     - If specified, this value must be set to a number from 0 to 259,200 (72 hours).
 	BacktrackWindow *int64
 
 	// The number of days for which automated backups of the restored DB cluster are
 	// retained. You must specify a minimum value of 1. Default: 1 Constraints:
-	// - Must
-	// be a value from 1 to 35
+	//     - Must be a value from 1 to 35
 	BackupRetentionPeriod *int32
 
 	// A value that indicates that the restored DB cluster should be associated with
 	// the specified CharacterSet.
 	CharacterSetName *string
 
-	// A value that indicates whether to copy all tags from the restored DB cluster to
-	// snapshots of the restored DB cluster. The default is not to copy them.
+	// A value that indicates whether to copy all tags from the restored DB cluster
+	// to snapshots of the restored DB cluster. The default is not to copy them.
 	CopyTagsToSnapshot *bool
 
 	// The name of the DB cluster parameter group to associate with the restored DB
-	// cluster. If this argument is omitted, default.aurora5.6 is used. Constraints:
-	// -
-	// If supplied, must match the name of an existing DBClusterParameterGroup.
+	// cluster. If this argument is omitted, default.aurora5.6  is used. Constraints:
+	//     - If supplied, must match the name of an existing DBClusterParameterGroup.
 	DBClusterParameterGroupName *string
 
 	// A DB subnet group to associate with the restored DB cluster. Constraints: If
@@ -144,8 +134,7 @@ type RestoreDBClusterFromS3Input struct {
 	// Specify the Active Directory directory ID to restore the DB cluster in. The
 	// domain must be created prior to this operation. For Amazon Aurora DB clusters,
 	// Amazon RDS can use Kerberos Authentication to authenticate users that connect to
-	// the DB cluster. For more information, see Kerberos Authentication
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html)
+	// the DB cluster. For more information, see Kerberos Authentication (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html)
 	// in the Amazon Aurora User Guide.
 	Domain *string
 
@@ -155,56 +144,49 @@ type RestoreDBClusterFromS3Input struct {
 
 	// The list of logs that the restored DB cluster is to export to CloudWatch Logs.
 	// The values in the list depend on the DB engine being used. Aurora MySQL Possible
-	// values are audit, error, general, and slowquery. For more information about
+	// values are audit , error , general , and slowquery. For more information about
 	// exporting CloudWatch Logs for Amazon Aurora, see Publishing Database Logs to
-	// Amazon CloudWatch Logs
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
+	// Amazon CloudWatch Logs (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon Aurora User Guide.
 	EnableCloudwatchLogsExports []string
 
-	// A value that indicates whether to enable mapping of Amazon Web Services Identity
-	// and Access Management (IAM) accounts to database accounts. By default, mapping
-	// isn't enabled. For more information, see  IAM Database Authentication
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
+	// A value that indicates whether to enable mapping of Amazon Web Services
+	// Identity and Access Management (IAM) accounts to database accounts. By default,
+	// mapping isn't enabled. For more information, see IAM Database Authentication (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon Aurora User Guide.
 	EnableIAMDatabaseAuthentication *bool
 
 	// The version number of the database engine to use. To list all of the available
-	// engine versions for aurora-mysql (MySQL 5.7-compatible and MySQL 8.0-compatible
-	// Aurora), use the following command: aws rds describe-db-engine-versions --engine
-	// aurora-mysql --query "DBEngineVersions[].EngineVersion" Aurora MySQL Examples:
-	// 5.7.mysql_aurora.2.07.1, 8.0.mysql_aurora.3.02.0
+	// engine versions for aurora-mysql (MySQL 5.7-compatible and MySQL
+	// 8.0-compatible Aurora), use the following command: aws rds
+	// describe-db-engine-versions --engine aurora-mysql --query
+	// "DBEngineVersions[].EngineVersion" Aurora MySQL Examples:
+	// 5.7.mysql_aurora.2.07.1 , 8.0.mysql_aurora.3.02.0
 	EngineVersion *string
 
 	// The Amazon Web Services KMS key identifier for an encrypted DB cluster. The
 	// Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or
 	// alias name for the KMS key. To use a KMS key in a different Amazon Web Services
 	// account, specify the key ARN or alias ARN. If the StorageEncrypted parameter is
-	// enabled, and you do not specify a value for the KmsKeyId parameter, then Amazon
-	// RDS will use your default KMS key. There is a default KMS key for your Amazon
-	// Web Services account. Your Amazon Web Services account has a different default
-	// KMS key for each Amazon Web Services Region.
+	// enabled, and you do not specify a value for the KmsKeyId parameter, then
+	// Amazon RDS will use your default KMS key. There is a default KMS key for your
+	// Amazon Web Services account. Your Amazon Web Services account has a different
+	// default KMS key for each Amazon Web Services Region.
 	KmsKeyId *string
 
 	// A value that indicates whether to manage the master user password with Amazon
-	// Web Services Secrets Manager. For more information, see Password management with
-	// Amazon Web Services Secrets Manager
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
+	// Web Services Secrets Manager. For more information, see Password management
+	// with Amazon Web Services Secrets Manager (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
 	// in the Amazon RDS User Guide and Password management with Amazon Web Services
-	// Secrets Manager
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html)
+	// Secrets Manager (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html)
 	// in the Amazon Aurora User Guide. Constraints:
-	// - Can't manage the master user
-	// password with Amazon Web Services Secrets Manager if MasterUserPassword is
-	// specified.
+	//     - Can't manage the master user password with Amazon Web Services Secrets Manager if MasterUserPassword is specified.
 	ManageMasterUserPassword *bool
 
 	// The password for the master database user. This password can contain any
 	// printable ASCII character except "/", """, or "@". Constraints:
-	// - Must contain
-	// from 8 to 41 characters.
-	// - Can't be specified if ManageMasterUserPassword is
-	// turned on.
+	//     - Must contain from 8 to 41 characters.
+	//     - Can't be specified if ManageMasterUserPassword is turned on.
 	MasterUserPassword *string
 
 	// The Amazon Web Services KMS key identifier to encrypt a secret that is
@@ -213,24 +195,22 @@ type RestoreDBClusterFromS3Input struct {
 	// Web Services Secrets Manager for the DB cluster. The Amazon Web Services KMS key
 	// identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To
 	// use a KMS key in a different Amazon Web Services account, specify the key ARN or
-	// alias ARN. If you don't specify MasterUserSecretKmsKeyId, then the
-	// aws/secretsmanager KMS key is used to encrypt the secret. If the secret is in a
-	// different Amazon Web Services account, then you can't use the aws/secretsmanager
-	// KMS key to encrypt the secret, and you must use a customer managed KMS key.
-	// There is a default KMS key for your Amazon Web Services account. Your Amazon Web
-	// Services account has a different default KMS key for each Amazon Web Services
-	// Region.
+	// alias ARN. If you don't specify MasterUserSecretKmsKeyId , then the
+	// aws/secretsmanagerKMS key is used to encrypt the secret. If the secret is in a
+	// different Amazon Web Services account, then you can't use the
+	// aws/secretsmanagerKMS key to encrypt the secret, and you must use a customer
+	// managed KMS key. There is a default KMS key for your Amazon Web Services
+	// account. Your Amazon Web Services account has a different default KMS key for
+	// each Amazon Web Services Region.
 	MasterUserSecretKmsKeyId *string
 
 	// The network type of the DB cluster. Valid values:
-	// - IPV4
-	// - DUAL
-	//
-	// The network
-	// type is determined by the DBSubnetGroup specified for the DB cluster. A
-	// DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6
-	// protocols (DUAL). For more information, see  Working with a DB instance in a VPC
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
+	//     - IPV4
+	//     - DUAL
+	//  The network type is determined by the DBSubnetGroup specified for the DB
+	// cluster. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and
+	// the IPv6 protocols ( DUAL ). For more information, see  Working with a DB
+	// instance in a VPC (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
 	// in the Amazon Aurora User Guide.
 	NetworkType *string
 
@@ -245,25 +225,22 @@ type RestoreDBClusterFromS3Input struct {
 	Port *int32
 
 	// The daily time range during which automated backups are created if automated
-	// backups are enabled using the BackupRetentionPeriod parameter. The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each Amazon
-	// Web Services Region. To view the time blocks available, see  Backup window
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow)
+	// backups are enabled using the BackupRetentionPeriod parameter. The default is
+	// a 30-minute window selected at random from an 8-hour block of time for each
+	// Amazon Web Services Region. To view the time blocks available, see Backup
+	// window (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow)
 	// in the Amazon Aurora User Guide. Constraints:
-	// - Must be in the format
-	// hh24:mi-hh24:mi.
-	// - Must be in Universal Coordinated Time (UTC).
-	// - Must not
-	// conflict with the preferred maintenance window.
-	// - Must be at least 30 minutes.
+	//     - Must be in the format hh24:mi-hh24:mi .
+	//     - Must be in Universal Coordinated Time (UTC).
+	//     - Must not conflict with the preferred maintenance window.
+	//     - Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default is a
 	// 30-minute window selected at random from an 8-hour block of time for each Amazon
 	// Web Services Region, occurring on a random day of the week. To see the time
-	// blocks available, see  Adjusting the Preferred Maintenance Window
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora)
+	// blocks available, see Adjusting the Preferred Maintenance Window (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora)
 	// in the Amazon Aurora User Guide. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
 	// Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
@@ -275,17 +252,15 @@ type RestoreDBClusterFromS3Input struct {
 	S3Prefix *string
 
 	// Contains the scaling configuration of an Aurora Serverless v2 DB cluster. For
-	// more information, see Using Amazon Aurora Serverless v2
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)
+	// more information, see Using Amazon Aurora Serverless v2 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)
 	// in the Amazon Aurora User Guide.
 	ServerlessV2ScalingConfiguration *types.ServerlessV2ScalingConfiguration
 
 	// A value that indicates whether the restored DB cluster is encrypted.
 	StorageEncrypted *bool
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
-	// the Amazon RDS User Guide.
+	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
+	// in the Amazon RDS User Guide.
 	Tags []types.Tag
 
 	// A list of EC2 VPC security groups to associate with the restored DB cluster.
@@ -296,21 +271,19 @@ type RestoreDBClusterFromS3Input struct {
 
 type RestoreDBClusterFromS3Output struct {
 
-	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For
-	// an Amazon Aurora DB cluster, this data type is used as a response element in the
-	// operations CreateDBCluster, DeleteDBCluster, DescribeDBClusters,
-	// FailoverDBCluster, ModifyDBCluster, PromoteReadReplicaDBCluster,
-	// RestoreDBClusterFromS3, RestoreDBClusterFromSnapshot,
-	// RestoreDBClusterToPointInTime, StartDBCluster, and StopDBCluster. For a Multi-AZ
-	// DB cluster, this data type is used as a response element in the operations
-	// CreateDBCluster, DeleteDBCluster, DescribeDBClusters, FailoverDBCluster,
-	// ModifyDBCluster, RebootDBCluster, RestoreDBClusterFromSnapshot, and
-	// RestoreDBClusterToPointInTime. For more information on Amazon Aurora DB
-	// clusters, see  What is Amazon Aurora?
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster.
+	// For an Amazon Aurora DB cluster, this data type is used as a response element in
+	// the operations CreateDBCluster , DeleteDBCluster , DescribeDBClusters ,
+	// FailoverDBCluster , ModifyDBCluster , PromoteReadReplicaDBCluster ,
+	// RestoreDBClusterFromS3 , RestoreDBClusterFromSnapshot ,
+	// RestoreDBClusterToPointInTime , StartDBCluster , and StopDBCluster. For a
+	// Multi-AZ DB cluster, this data type is used as a response element in the
+	// operations CreateDBCluster , DeleteDBCluster , DescribeDBClusters ,
+	// FailoverDBCluster , ModifyDBCluster , RebootDBCluster ,
+	// RestoreDBClusterFromSnapshot , and RestoreDBClusterToPointInTime. For more
+	// information on Amazon Aurora DB clusters, see What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 	// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-	// see  Multi-AZ deployments with two readable standby DB instances
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+	// see Multi-AZ deployments with two readable standby DB instances (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 	// in the Amazon RDS User Guide.
 	DBCluster *types.DBCluster
 

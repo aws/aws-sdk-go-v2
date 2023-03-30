@@ -123,13 +123,14 @@ type ListResponsePlansAPIClient interface {
 
 var _ ListResponsePlansAPIClient = (*Client)(nil)
 
-// ListResponsePlansPaginatorOptions is the paginator options for ListResponsePlans
+// ListResponsePlansPaginatorOptions is the paginator options for
+// ListResponsePlans
 type ListResponsePlansPaginatorOptions struct {
 	// The maximum number of response plans per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

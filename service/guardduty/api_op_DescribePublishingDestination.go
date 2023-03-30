@@ -12,7 +12,7 @@ import (
 )
 
 // Returns information about the publishing destination specified by the provided
-// destinationId.
+// destinationId .
 func (c *Client) DescribePublishingDestination(ctx context.Context, params *DescribePublishingDestinationInput, optFns ...func(*Options)) (*DescribePublishingDestinationOutput, error) {
 	if params == nil {
 		params = &DescribePublishingDestinationInput{}
@@ -51,8 +51,8 @@ type DescribePublishingDestinationOutput struct {
 	// This member is required.
 	DestinationId *string
 
-	// A DestinationProperties object that includes the DestinationArn and KmsKeyArn of
-	// the publishing destination.
+	// A DestinationProperties  object that includes the DestinationArn  and KmsKeyArn
+	// of the publishing destination.
 	//
 	// This member is required.
 	DestinationProperties *types.DestinationProperties

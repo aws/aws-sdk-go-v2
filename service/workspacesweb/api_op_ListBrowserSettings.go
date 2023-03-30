@@ -115,8 +115,8 @@ func (c *Client) addOperationListBrowserSettingsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListBrowserSettingsAPIClient is a client that implements the ListBrowserSettings
-// operation.
+// ListBrowserSettingsAPIClient is a client that implements the
+// ListBrowserSettings operation.
 type ListBrowserSettingsAPIClient interface {
 	ListBrowserSettings(context.Context, *ListBrowserSettingsInput, ...func(*Options)) (*ListBrowserSettingsOutput, error)
 }
@@ -129,8 +129,8 @@ type ListBrowserSettingsPaginatorOptions struct {
 	// The maximum number of results to be included in the next page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

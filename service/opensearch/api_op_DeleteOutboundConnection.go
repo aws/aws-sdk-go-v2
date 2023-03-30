@@ -13,8 +13,8 @@ import (
 
 // Allows the source Amazon OpenSearch Service domain owner to delete an existing
 // outbound cross-cluster search connection. For more information, see
-// Cross-cluster search for Amazon OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html).
+// Cross-cluster search for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html)
+// .
 func (c *Client) DeleteOutboundConnection(ctx context.Context, params *DeleteOutboundConnectionInput, optFns ...func(*Options)) (*DeleteOutboundConnectionOutput, error) {
 	if params == nil {
 		params = &DeleteOutboundConnectionInput{}
@@ -30,7 +30,7 @@ func (c *Client) DeleteOutboundConnection(ctx context.Context, params *DeleteOut
 	return out, nil
 }
 
-// Container for the parameters to the DeleteOutboundConnection operation.
+// Container for the parameters to the DeleteOutboundConnection  operation.
 type DeleteOutboundConnectionInput struct {
 
 	// The ID of the outbound connection you want to permanently delete.

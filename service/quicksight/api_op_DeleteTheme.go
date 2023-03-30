@@ -40,8 +40,8 @@ type DeleteThemeInput struct {
 	ThemeId *string
 
 	// The version of the theme that you want to delete. Note: If you don't provide a
-	// version number, you're using this call to DeleteTheme to delete all versions of
-	// the theme.
+	// version number, you're using this call to DeleteTheme to delete all versions
+	// of the theme.
 	VersionNumber *int64
 
 	noSmithyDocumentSerde

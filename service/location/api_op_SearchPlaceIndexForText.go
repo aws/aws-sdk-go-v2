@@ -12,13 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Geocodes free-form text, such as an address, name, city, or region to allow you
-// to search for Places or points of interest. Optional parameters let you narrow
-// your search results by bounding box or country, or bias your search toward a
-// specific position on the globe. You can search for places near a given position
-// using BiasPosition, or filter results within a bounding box using FilterBBox.
-// Providing both parameters simultaneously returns an error. Search results are
-// returned in order of highest to lowest relevance.
+// Geocodes free-form text, such as an address, name, city, or region to allow
+// you to search for Places or points of interest. Optional parameters let you
+// narrow your search results by bounding box or country, or bias your search
+// toward a specific position on the globe. You can search for places near a given
+// position using BiasPosition , or filter results within a bounding box using
+// FilterBBox. Providing both parameters simultaneously returns an error. Search
+// results are returned in order of highest to lowest relevance.
 func (c *Client) SearchPlaceIndexForText(ctx context.Context, params *SearchPlaceIndexForTextInput, optFns ...func(*Options)) (*SearchPlaceIndexForTextOutput, error) {
 	if params == nil {
 		params = &SearchPlaceIndexForTextInput{}
@@ -42,17 +42,17 @@ type SearchPlaceIndexForTextInput struct {
 	IndexName *string
 
 	// The address, name, city, or region to be used in the search in free-form text
-	// format. For example, 123 Any Street.
+	// format. For example, 123 Any Street .
 	//
 	// This member is required.
 	Text *string
 
-	// An optional parameter that indicates a preference for places that are closer to
-	// a specified position. If provided, this parameter must contain a pair of
+	// An optional parameter that indicates a preference for places that are closer
+	// to a specified position. If provided, this parameter must contain a pair of
 	// numbers. The first number represents the X coordinate, or longitude; the second
 	// number represents the Y coordinate, or latitude. For example, [-123.1174,
-	// 49.2847] represents the position with longitude -123.1174 and latitude 49.2847.
-	// BiasPosition and FilterBBox are mutually exclusive. Specifying both options
+	// 49.2847] represents the position with longitude -123.1174  and latitude 49.2847
+	// . BiasPosition  and FilterBBox are mutually exclusive. Specifying both options
 	// results in an error.
 	BiasPosition []float64
 
@@ -63,30 +63,28 @@ type SearchPlaceIndexForTextInput struct {
 	// respectively) of the southwest corner of the bounding box; the second pair of
 	// numbers represents the X and Y coordinates (longitude and latitude,
 	// respectively) of the northeast corner of the bounding box. For example,
-	// [-12.7935, -37.4835, -12.0684, -36.9542] represents a bounding box where the
-	// southwest corner has longitude -12.7935 and latitude -37.4835, and the northeast
-	// corner has longitude -12.0684 and latitude -36.9542. FilterBBox and BiasPosition
-	// are mutually exclusive. Specifying both options results in an error.
+	// [-12.7935, -37.4835, -12.0684, -36.9542]represents a bounding box where the
+	// southwest corner has longitude -12.7935  and latitude -37.4835, and the
+	// northeast corner has longitude -12.0684  and latitude -36.9542 . FilterBBox
+	// and BiasPosition are mutually exclusive. Specifying both options results in an
+	// error.
 	FilterBBox []float64
 
 	// An optional parameter that limits the search results by returning only places
 	// that are in a specified list of countries.
-	// - Valid values include ISO 3166
-	// (https://www.iso.org/iso-3166-country-codes.html) 3-digit country codes. For
-	// example, Australia uses three upper-case characters: AUS.
+	//     - Valid values include ISO 3166 (https://www.iso.org/iso-3166-country-codes.html) 3-digit country codes. For example, Australia uses three upper-case characters: AUS .
 	FilterCountries []string
 
-	// The preferred language used to return results. The value must be a valid BCP 47
-	// (https://tools.ietf.org/search/bcp47) language tag, for example, en for English.
-	// This setting affects the languages used in the results, but not the results
-	// themselves. If no language is specified, or not supported for a particular
-	// result, the partner automatically chooses a language for the result. For an
-	// example, we'll use the Greek language. You search for Athens, Greece, with the
-	// language parameter set to en. The result found will most likely be returned as
-	// Athens. If you set the language parameter to el, for Greek, then the result
-	// found will more likely be returned as Αθήνα. If the data provider does not have
-	// a value for Greek, the result will be in a language that the provider does
-	// support.
+	// The preferred language used to return results. The value must be a valid BCP 47 (https://tools.ietf.org/search/bcp47)
+	// language tag, for example, en for English. This setting affects the languages
+	// used in the results, but not the results themselves. If no language is
+	// specified, or not supported for a particular result, the partner automatically
+	// chooses a language for the result. For an example, we'll use the Greek language.
+	// You search for Athens, Greece , with the language  parameter set to en. The
+	// result found will most likely be returned as Athens . If you set the language
+	// parameter to el, for Greek, then the result found will more likely be returned
+	// as Αθήνα. If the data provider does not have a value for Greek, the result
+	// will be in a language that the provider does support.
 	Language *string
 
 	// An optional parameter. The maximum number of results returned per request. The
@@ -106,10 +104,10 @@ type SearchPlaceIndexForTextOutput struct {
 	// This member is required.
 	Results []types.SearchForTextResult
 
-	// Contains a summary of the request. Echoes the input values for BiasPosition,
-	// FilterBBox, FilterCountries, Language, MaxResults, and Text. Also includes the
-	// DataSource of the place index and the bounding box, ResultBBox, which surrounds
-	// the search results.
+	// Contains a summary of the request. Echoes the input values for BiasPosition ,
+	// FilterBBox , FilterCountries , Language , MaxResults , and Text. Also includes
+	// the DataSource  of the place index and the bounding box, ResultBBox, which
+	// surrounds the search results.
 	//
 	// This member is required.
 	Summary *types.SearchPlaceIndexForTextSummary

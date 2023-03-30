@@ -42,9 +42,9 @@ type BatchGetCustomDataIdentifiersOutput struct {
 	// criteria specified in the request.
 	CustomDataIdentifiers []types.BatchGetCustomDataIdentifierSummary
 
-	// An array of custom data identifier IDs, one for each custom data identifier that
-	// was specified in the request but doesn't correlate to an existing custom data
-	// identifier.
+	// An array of custom data identifier IDs, one for each custom data identifier
+	// that was specified in the request but doesn't correlate to an existing custom
+	// data identifier.
 	NotFoundIdentifierIds []string
 
 	// Metadata pertaining to the operation's result.

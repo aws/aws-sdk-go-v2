@@ -12,10 +12,10 @@ import (
 )
 
 // Terminates an active session. A TerminateSession call on a session that is
-// already inactive (for example, in a FAILED, TERMINATED or TERMINATING state)
+// already inactive (for example, in a FAILED , TERMINATED  or TERMINATING state)
 // succeeds but has no effect. Calculations running in the session when
 // TerminateSession is called are forcefully stopped, but may display as FAILED
-// instead of STOPPED.
+// instead of STOPPED .
 func (c *Client) TerminateSession(ctx context.Context, params *TerminateSessionInput, optFns ...func(*Options)) (*TerminateSessionOutput, error) {
 	if params == nil {
 		params = &TerminateSessionInput{}
@@ -45,8 +45,8 @@ type TerminateSessionOutput struct {
 
 	// The state of the session. A description of each state follows. CREATING - The
 	// session is being started, including acquiring resources. CREATED - The session
-	// has been started. IDLE - The session is able to accept a calculation. BUSY - The
-	// session is processing another task and is unable to accept a calculation.
+	// has been started. IDLE  - The session is able to accept a calculation. BUSY -
+	// The session is processing another task and is unable to accept a calculation.
 	// TERMINATING - The session is in the process of shutting down. TERMINATED - The
 	// session and its resources are no longer running. DEGRADED - The session has no
 	// healthy coordinators. FAILED - Due to a failure, the session and its resources

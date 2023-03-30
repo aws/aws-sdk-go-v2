@@ -47,8 +47,8 @@ type CreateWorldExportJobInput struct {
 	// This member is required.
 	Worlds []string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
 	// A map that contains tag keys and tag values that are attached to the world
@@ -63,8 +63,8 @@ type CreateWorldExportJobOutput struct {
 	// The Amazon Resource Name (ARN) of the world export job.
 	Arn *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
 	// The time, in milliseconds since the epoch, when the world export job was
@@ -77,10 +77,10 @@ type CreateWorldExportJobOutput struct {
 	// number allowed. ResourceNotFound The specified resource could not be found.
 	// RequestThrottled The request was throttled. InvalidInput An input parameter in
 	// the request is not valid. AllWorldGenerationFailed All of the worlds in the
-	// world generation job failed. This can happen if your worldCount is greater than
-	// 50 or less than 1. For more information about troubleshooting WorldForge, see
-	// Troubleshooting Simulation WorldForge
-	// (https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting-worldforge.html).
+	// world generation job failed. This can happen if your worldCount is greater
+	// than 50 or less than 1. For more information about troubleshooting WorldForge,
+	// see Troubleshooting Simulation WorldForge (https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting-worldforge.html)
+	// .
 	FailureCode types.WorldExportJobErrorCode
 
 	// The IAM role that the world export process uses to access the Amazon S3 bucket

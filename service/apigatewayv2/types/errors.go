@@ -32,8 +32,8 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request is not valid, for example, the input is incomplete or incorrect. See
-// the accompanying error message for details.
+// The request is not valid, for example, the input is incomplete or incorrect.
+// See the accompanying error message for details.
 type BadRequestException struct {
 	Message *string
 

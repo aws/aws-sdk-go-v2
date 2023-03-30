@@ -62,8 +62,8 @@ type DescribeProjectOutput struct {
 	// The ID for the AWS CodeStar project template used to create the project.
 	ProjectTemplateId *string
 
-	// The ID of the primary stack in AWS CloudFormation used to generate resources for
-	// the project.
+	// The ID of the primary stack in AWS CloudFormation used to generate resources
+	// for the project.
 	StackId *string
 
 	// The project creation or deletion status.

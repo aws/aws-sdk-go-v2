@@ -19,52 +19,32 @@ import (
 // device type is supported when ordering clustered jobs. The device capacity is
 // optional. Availability of device types differ by Amazon Web Services Region. For
 // more information about Region availability, see Amazon Web Services Regional
-// Services
-// (https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&loc=4).
-// Snow Family devices and their capacities.
-// - Snow Family device type: SNC1_SSD
-// -
-// Capacity: T14
-// - Description: Snowcone
-//
-// - Snow Family device type: SNC1_HDD
-// -
-// Capacity: T8
-// - Description: Snowcone
-//
-// - Device type: EDGE_S
-// - Capacity: T98
-// -
-// Description: Snowball Edge Storage Optimized for data transfer only
-//
-// - Device
-// type: EDGE_CG
-// - Capacity: T42
-// - Description: Snowball Edge Compute Optimized
-// with GPU
-//
-// - Device type: EDGE_C
-// - Capacity: T42
-// - Description: Snowball Edge
-// Compute Optimized without GPU
-//
-// - Device type: EDGE
-// - Capacity: T100
-// -
-// Description: Snowball Edge Storage Optimized with EC2 Compute
-//
-// - Device type:
-// STANDARD
-// - Capacity: T50
-// - Description: Original Snowball device This device is
-// only available in the Ningxia, Beijing, and Singapore Amazon Web Services
-// Region
-//
-// - Device type: STANDARD
-// - Capacity: T80
-// - Description: Original Snowball
-// device This device is only available in the Ningxia, Beijing, and Singapore
-// Amazon Web Services Region.
+// Services (https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&loc=4)
+// . Snow Family devices and their capacities.
+//   - Snow Family device type: SNC1_SSD
+//   - Capacity: T14
+//   - Description: Snowcone
+//   - Snow Family device type: SNC1_HDD
+//   - Capacity: T8
+//   - Description: Snowcone
+//   - Device type: EDGE_S
+//   - Capacity: T98
+//   - Description: Snowball Edge Storage Optimized for data transfer only
+//   - Device type: EDGE_CG
+//   - Capacity: T42
+//   - Description: Snowball Edge Compute Optimized with GPU
+//   - Device type: EDGE_C
+//   - Capacity: T42
+//   - Description: Snowball Edge Compute Optimized without GPU
+//   - Device type: EDGE
+//   - Capacity: T100
+//   - Description: Snowball Edge Storage Optimized with EC2 Compute
+//   - Device type: STANDARD
+//   - Capacity: T50
+//   - Description: Original Snowball device This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region
+//   - Device type: STANDARD
+//   - Capacity: T80
+//   - Description: Original Snowball device This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region.
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	if params == nil {
 		params = &CreateJobInput{}
@@ -85,16 +65,17 @@ type CreateJobInput struct {
 	// The ID for the address that you want the Snow device shipped to.
 	AddressId *string
 
-	// The ID of a cluster. If you're creating a job for a node in a cluster, you need
-	// to provide only this clusterId value. The other job attributes are inherited
-	// from the cluster.
+	// The ID of a cluster. If you're creating a job for a node in a cluster, you
+	// need to provide only this clusterId value. The other job attributes are
+	// inherited from the cluster.
 	ClusterId *string
 
 	// Defines an optional description of this specific job, for example Important
-	// Photos 2016-08-11.
+	// Photos 2016-08-11 .
 	Description *string
 
-	// Defines the device configuration for an Snowcone job. For more information, see
+	// Defines the device configuration for an Snowcone job. For more information,
+	// see
 	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
 	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
 	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
@@ -108,10 +89,9 @@ type CreateJobInput struct {
 	// Defines the type of job that you're creating.
 	JobType types.JobType
 
-	// The KmsKeyARN that you want to associate with this job. KmsKeyARNs are created
-	// using the CreateKey
-	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html) Key
-	// Management Service (KMS) API action.
+	// The KmsKeyARN  that you want to associate with this job. KmsKeyARNs are
+	// created using the CreateKey (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
+	// Key Management Service (KMS) API action.
 	KmsKeyARN *string
 
 	// The ID of the long-term pricing type for the device.
@@ -127,41 +107,33 @@ type CreateJobInput struct {
 	// Services Storage Gateway service Tape Gateway type.
 	OnDeviceServiceConfiguration *types.OnDeviceServiceConfiguration
 
-	// Allows you to securely operate and manage Snowcone devices remotely from outside
-	// of your internal network. When set to INSTALLED_AUTOSTART, remote management
-	// will automatically be available when the device arrives at your location.
-	// Otherwise, you need to use the Snowball Client to manage the device.
+	// Allows you to securely operate and manage Snowcone devices remotely from
+	// outside of your internal network. When set to INSTALLED_AUTOSTART, remote
+	// management will automatically be available when the device arrives at your
+	// location. Otherwise, you need to use the Snowball Client to manage the device.
 	RemoteManagement types.RemoteManagement
 
 	// Defines the Amazon S3 buckets associated with this job. With IMPORT jobs, you
 	// specify the bucket or buckets that your transferred data will be imported into.
 	// With EXPORT jobs, you specify the bucket or buckets that your transferred data
-	// will be exported from. Optionally, you can also specify a KeyRange value. If you
-	// choose to export a range, you define the length of the range by providing either
-	// an inclusive BeginMarker value, an inclusive EndMarker value, or both. Ranges
-	// are UTF-8 binary sorted.
+	// will be exported from. Optionally, you can also specify a KeyRange value. If
+	// you choose to export a range, you define the length of the range by providing
+	// either an inclusive BeginMarker  value, an inclusive EndMarker value, or both.
+	// Ranges are UTF-8 binary sorted.
 	Resources *types.JobResource
 
-	// The RoleARN that you want to associate with this job. RoleArns are created using
-	// the CreateRole
-	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
+	// The RoleARN  that you want to associate with this job. RoleArns are created
+	// using the CreateRole (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
 	// Identity and Access Management (IAM) API action.
 	RoleARN *string
 
-	// The shipping speed for this job. This speed doesn't dictate how soon you'll get
-	// the Snow device, rather it represents how quickly the Snow device moves to its
-	// destination while in transit. Regional shipping speeds are as follows:
-	// - In
-	// Australia, you have access to express shipping. Typically, Snow devices shipped
-	// express are delivered in about a day.
-	// - In the European Union (EU), you have
-	// access to express shipping. Typically, Snow devices shipped express are
-	// delivered in about a day. In addition, most countries in the EU have access to
-	// standard shipping, which typically takes less than a week, one way.
-	// - In India,
-	// Snow devices are delivered in one to seven days.
-	// - In the US, you have access to
-	// one-day shipping and two-day shipping.
+	// The shipping speed for this job. This speed doesn't dictate how soon you'll
+	// get the Snow device, rather it represents how quickly the Snow device moves to
+	// its destination while in transit. Regional shipping speeds are as follows:
+	//     - In Australia, you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day.
+	//     - In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.
+	//     - In India, Snow devices are delivered in one to seven days.
+	//     - In the US, you have access to one-day shipping and two-day shipping.
 	ShippingOption types.ShippingOption
 
 	// If your job is being created in one of the US regions, you have the option of
@@ -174,11 +146,10 @@ type CreateJobInput struct {
 	SnowballCapacityPreference types.SnowballCapacity
 
 	// The type of Snow Family devices to use for this job. For cluster jobs, Amazon
-	// Web Services Snow Family currently supports only the EDGE device type. The type
-	// of Amazon Web Services Snow device to use for this job. Currently, the only
-	// supported device type for cluster jobs is EDGE. For more information, see
-	// Snowball Edge Device Options
-	// (https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html)
+	// Web Services Snow Family currently supports only the EDGE device type. The
+	// type of Amazon Web Services Snow device to use for this job. Currently, the only
+	// supported device type for cluster jobs is EDGE . For more information, see
+	// Snowball Edge Device Options (https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html)
 	// in the Snowball Edge Developer Guide. For more information, see
 	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
 	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
@@ -195,7 +166,7 @@ type CreateJobInput struct {
 type CreateJobOutput struct {
 
 	// The automatically generated ID for a job, for example
-	// JID123e4567-e89b-12d3-a456-426655440000.
+	// JID123e4567-e89b-12d3-a456-426655440000 .
 	JobId *string
 
 	// Metadata pertaining to the operation's result.

@@ -30,30 +30,20 @@ func (c *Client) ListTimelineEvents(ctx context.Context, params *ListTimelineEve
 
 type ListTimelineEventsInput struct {
 
-	// The Amazon Resource Name (ARN) of the incident that includes the timeline event.
+	// The Amazon Resource Name (ARN) of the incident that includes the timeline
+	// event.
 	//
 	// This member is required.
 	IncidentRecordArn *string
 
 	// Filters the timeline events based on the provided conditional values. You can
 	// filter timeline events with the following keys:
-	//
-	// * eventTime
-	//
-	// * eventType
-	//
-	// Note
-	// the following when deciding how to use Filters:
-	//
-	// * If you don't specify a
-	// Filter, the response includes all timeline events.
-	//
-	// * If you specify more than
-	// one filter in a single request, the response returns timeline events that match
-	// all filters.
-	//
-	// * If you specify a filter with more than one value, the response
-	// returns timeline events that match any of the values provided.
+	//     - eventTime
+	//     - eventType
+	//  Note the following when deciding how to use Filters:
+	//     - If you don't specify a Filter, the response includes all timeline events.
+	//     - If you specify more than one filter in a single request, the response returns timeline events that match all filters.
+	//     - If you specify a filter with more than one value, the response returns timeline events that match any of the values provided.
 	Filters []types.Filter
 
 	// The maximum number of results per page.
@@ -65,7 +55,7 @@ type ListTimelineEventsInput struct {
 	// Sort timeline events by the specified key value pair.
 	SortBy types.TimelineEventSort
 
-	// Sorts the order of timeline events by the value specified in the sortBy field.
+	// Sorts the order of timeline events by the value specified in the sortBy  field.
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -164,8 +154,8 @@ type ListTimelineEventsPaginatorOptions struct {
 	// The maximum number of results per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

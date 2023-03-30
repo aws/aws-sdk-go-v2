@@ -45,10 +45,9 @@ type StopBotRecommendationInput struct {
 	// This member is required.
 	BotVersion *string
 
-	// The identifier of the language and locale of the bot recommendation to stop. The
-	// string must match one of the supported locales. For more information, see
-	// Supported languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// The identifier of the language and locale of the bot recommendation to stop.
+	// The string must match one of the supported locales. For more information, see
+	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
 	//
 	// This member is required.
 	LocaleId *string
@@ -58,15 +57,15 @@ type StopBotRecommendationInput struct {
 
 type StopBotRecommendationOutput struct {
 
-	// The unique identifier of the bot containing the bot recommendation that is being
-	// stopped.
+	// The unique identifier of the bot containing the bot recommendation that is
+	// being stopped.
 	BotId *string
 
 	// The unique identifier of the bot recommendation that is being stopped.
 	BotRecommendationId *string
 
-	// The status of the bot recommendation. If the status is Failed, then the reasons
-	// for the failure are listed in the failureReasons field.
+	// The status of the bot recommendation. If the status is Failed, then the
+	// reasons for the failure are listed in the failureReasons field.
 	BotRecommendationStatus types.BotRecommendationStatus
 
 	// The version of the bot containing the recommendation that is being stopped.
@@ -74,8 +73,7 @@ type StopBotRecommendationOutput struct {
 
 	// The identifier of the language and locale of the bot response to stop. The
 	// string must match one of the supported locales. For more information, see
-	// Supported languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
 	LocaleId *string
 
 	// Metadata pertaining to the operation's result.

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the delegates associated with a resource. Users and groups can be resource
-// delegates and answer requests on behalf of the resource.
+// Lists the delegates associated with a resource. Users and groups can be
+// resource delegates and answer requests on behalf of the resource.
 func (c *Client) ListResourceDelegates(ctx context.Context, params *ListResourceDelegatesInput, optFns ...func(*Options)) (*ListResourceDelegatesOutput, error) {
 	if params == nil {
 		params = &ListResourceDelegatesInput{}
@@ -144,8 +144,8 @@ type ListResourceDelegatesPaginatorOptions struct {
 	// The number of maximum results in a page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

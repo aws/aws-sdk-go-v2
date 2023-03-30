@@ -12,13 +12,13 @@ import (
 )
 
 // Stops a targeted sentiment detection job in progress. If the job state is
-// IN_PROGRESS, the job is marked for termination and put into the STOP_REQUESTED
+// IN_PROGRESS , the job is marked for termination and put into the STOP_REQUESTED
 // state. If the job completes before it can be stopped, it is put into the
-// COMPLETED state; otherwise the job is be stopped and put into the STOPPED state.
-// If the job is in the COMPLETED or FAILED state when you call the
-// StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal
-// Request Exception. When a job is stopped, any documents already processed are
-// written to the output location.
+// COMPLETED state; otherwise the job is be stopped and put into the STOPPED
+// state. If the job is in the COMPLETED  or FAILED  state when you call the
+// StopDominantLanguageDetectionJoboperation, the operation returns a 400
+// Internal Request Exception. When a job is stopped, any documents already
+// processed are written to the output location.
 func (c *Client) StopTargetedSentimentDetectionJob(ctx context.Context, params *StopTargetedSentimentDetectionJobInput, optFns ...func(*Options)) (*StopTargetedSentimentDetectionJobOutput, error) {
 	if params == nil {
 		params = &StopTargetedSentimentDetectionJobInput{}
@@ -49,8 +49,8 @@ type StopTargetedSentimentDetectionJobOutput struct {
 	// The identifier of the targeted sentiment detection job to stop.
 	JobId *string
 
-	// Either STOP_REQUESTED if the job is currently running, or STOPPED if the job was
-	// previously stopped with the StopSentimentDetectionJob operation.
+	// Either STOP_REQUESTED  if the job is currently running, or STOPPED if the job
+	// was previously stopped with the StopSentimentDetectionJob  operation.
 	JobStatus types.JobStatus
 
 	// Metadata pertaining to the operation's result.

@@ -41,7 +41,7 @@ type CancelReplicationTaskAssessmentRunInput struct {
 
 type CancelReplicationTaskAssessmentRunOutput struct {
 
-	// The ReplicationTaskAssessmentRun object for the canceled assessment run.
+	// The ReplicationTaskAssessmentRun  object for the canceled assessment run.
 	ReplicationTaskAssessmentRun *types.ReplicationTaskAssessmentRun
 
 	// Metadata pertaining to the operation's result.

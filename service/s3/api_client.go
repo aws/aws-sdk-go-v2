@@ -32,8 +32,8 @@ import (
 const ServiceID = "S3"
 const ServiceAPIVersion = "2006-03-01"
 
-// Client provides the API client to make operations call for Amazon Simple Storage
-// Service.
+// Client provides the API client to make operations call for Amazon Simple
+// Storage Service.
 type Client struct {
 	options Options
 }
@@ -134,8 +134,8 @@ type Options struct {
 	// option.
 	Retryer aws.Retryer
 
-	// The RuntimeEnvironment configuration, only populated if the DefaultsMode is set
-	// to DefaultsModeAuto and is initialized using config.LoadDefaultConfig. You
+	// The RuntimeEnvironment configuration, only populated if the DefaultsMode is
+	// set to DefaultsModeAuto and is initialized using config.LoadDefaultConfig. You
 	// should not populate this structure programmatically, or rely on the values here
 	// within your applications.
 	RuntimeEnvironment aws.RuntimeEnvironment
@@ -159,8 +159,9 @@ type Options struct {
 	UseDualstack bool
 
 	// Allows you to enable the client to use path-style addressing, i.e.,
-	// https://s3.amazonaws.com/BUCKET/KEY. By default, the S3 client will use virtual
-	// hosted bucket addressing when possible(https://BUCKET.s3.amazonaws.com/KEY).
+	// https://s3.amazonaws.com/BUCKET/KEY. By default, the S3 client will use
+	// virtual hosted bucket addressing when possible(
+	// https://BUCKET.s3.amazonaws.com/KEY ).
 	UsePathStyle bool
 
 	// Signature Version 4a (SigV4a) Signer
@@ -539,16 +540,16 @@ func add100Continue(stack *middleware.Stack, options Options) error {
 	return s3shared.Add100Continue(stack, options.ContinueHeaderThresholdBytes)
 }
 
-// ComputedInputChecksumsMetadata provides information about the algorithms used to
-// compute the checksum(s) of the input payload.
+// ComputedInputChecksumsMetadata provides information about the algorithms used
+// to compute the checksum(s) of the input payload.
 type ComputedInputChecksumsMetadata struct {
 	// ComputedChecksums is a map of algorithm name to checksum value of the computed
 	// input payload's checksums.
 	ComputedChecksums map[string]string
 }
 
-// GetComputedInputChecksumsMetadata retrieves from the result metadata the map of
-// algorithms and input payload checksums values.
+// GetComputedInputChecksumsMetadata retrieves from the result metadata the map
+// of algorithms and input payload checksums values.
 func GetComputedInputChecksumsMetadata(m middleware.Metadata) (ComputedInputChecksumsMetadata, bool) {
 	values, ok := internalChecksum.GetComputedInputChecksums(m)
 	if !ok {
@@ -560,8 +561,8 @@ func GetComputedInputChecksumsMetadata(m middleware.Metadata) (ComputedInputChec
 
 }
 
-// ChecksumValidationMetadata contains metadata such as the checksum algorithm used
-// for data integrity validation.
+// ChecksumValidationMetadata contains metadata such as the checksum algorithm
+// used for data integrity validation.
 type ChecksumValidationMetadata struct {
 	// AlgorithmsUsed is the set of the checksum algorithms used to validate the
 	// response payload. The response payload must be completely read in order for the
@@ -570,10 +571,10 @@ type ChecksumValidationMetadata struct {
 	AlgorithmsUsed []string
 }
 
-// GetChecksumValidationMetadata returns the set of algorithms that will be used to
-// validate the response payload with. The response payload must be completely read
-// in order for the checksum validation to be performed. An error is returned by
-// the operation output's response io.ReadCloser if the computed checksums are
+// GetChecksumValidationMetadata returns the set of algorithms that will be used
+// to validate the response payload with. The response payload must be completely
+// read in order for the checksum validation to be performed. An error is returned
+// by the operation output's response io.ReadCloser if the computed checksums are
 // invalid. Returns false if no checksum algorithm used metadata was found.
 func GetChecksumValidationMetadata(m middleware.Metadata) (ChecksumValidationMetadata, bool) {
 	values, ok := internalChecksum.GetOutputValidationAlgorithmsUsed(m)
@@ -600,8 +601,8 @@ func disableAcceptEncodingGzip(stack *middleware.Stack) error {
 	return acceptencodingcust.AddAcceptEncodingGzip(stack, acceptencodingcust.AddAcceptEncodingGzipOptions{})
 }
 
-// ResponseError provides the HTTP centric error type wrapping the underlying error
-// with the HTTP response value and the deserialized RequestID.
+// ResponseError provides the HTTP centric error type wrapping the underlying
+// error with the HTTP response value and the deserialized RequestID.
 type ResponseError interface {
 	error
 
@@ -611,8 +612,8 @@ type ResponseError interface {
 
 var _ ResponseError = (*s3shared.ResponseError)(nil)
 
-// GetHostIDMetadata retrieves the host id from middleware metadata returns host id
-// as string along with a boolean indicating presence of hostId on middleware
+// GetHostIDMetadata retrieves the host id from middleware metadata returns host
+// id as string along with a boolean indicating presence of hostId on middleware
 // metadata.
 func GetHostIDMetadata(metadata middleware.Metadata) (string, bool) {
 	return s3shared.GetHostIDMetadata(metadata)
@@ -647,9 +648,10 @@ type PresignOptions struct {
 	// Presigner is the presigner used by the presign url client
 	Presigner HTTPPresignerV4
 
-	// Expires sets the expiration duration for the generated presign url. This should
-	// be the duration in seconds the presigned URL should be considered valid for. If
-	// not set or set to zero, presign url would default to expire after 900 seconds.
+	// Expires sets the expiration duration for the generated presign url. This
+	// should be the duration in seconds the presigned URL should be considered valid
+	// for. If not set or set to zero, presign url would default to expire after 900
+	// seconds.
 	Expires time.Duration
 
 	// presignerV4a is the presigner used by the presign url client

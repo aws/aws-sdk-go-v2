@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the full details of an AppInstance.
+// Returns the full details of an AppInstance .
 func (c *Client) DescribeAppInstance(ctx context.Context, params *DescribeAppInstanceInput, optFns ...func(*Options)) (*DescribeAppInstanceOutput, error) {
 	if params == nil {
 		params = &DescribeAppInstanceInput{}
@@ -30,7 +30,7 @@ func (c *Client) DescribeAppInstance(ctx context.Context, params *DescribeAppIns
 
 type DescribeAppInstanceInput struct {
 
-	// The ARN of the AppInstance.
+	// The ARN of the AppInstance .
 	//
 	// This member is required.
 	AppInstanceArn *string
@@ -41,7 +41,7 @@ type DescribeAppInstanceInput struct {
 type DescribeAppInstanceOutput struct {
 
 	// The ARN, metadata, created and last-updated timestamps, and the name of the
-	// AppInstance. All timestamps use epoch milliseconds.
+	// AppInstance . All timestamps use epoch milliseconds.
 	AppInstance *types.AppInstance
 
 	// Metadata pertaining to the operation's result.

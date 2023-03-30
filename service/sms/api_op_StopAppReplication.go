@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops replicating the specified application by deleting the replication job for
-// each server in the application.
+// Stops replicating the specified application by deleting the replication job
+// for each server in the application.
 func (c *Client) StopAppReplication(ctx context.Context, params *StopAppReplicationInput, optFns ...func(*Options)) (*StopAppReplicationOutput, error) {
 	if params == nil {
 		params = &StopAppReplicationInput{}

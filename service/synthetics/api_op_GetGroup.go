@@ -31,7 +31,7 @@ func (c *Client) GetGroup(ctx context.Context, params *GetGroupInput, optFns ...
 type GetGroupInput struct {
 
 	// Specifies the group to return information for. You can specify the group name,
-	// the ARN, or the group ID as the GroupIdentifier.
+	// the ARN, or the group ID as the GroupIdentifier .
 	//
 	// This member is required.
 	GroupIdentifier *string

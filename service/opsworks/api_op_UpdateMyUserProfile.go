@@ -13,8 +13,8 @@ import (
 // Updates a user's SSH public key. Required Permissions: To use this action, an
 // IAM user must have self-management enabled or an attached policy that explicitly
 // grants permissions. For more information about user permissions, see Managing
-// User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) UpdateMyUserProfile(ctx context.Context, params *UpdateMyUserProfileInput, optFns ...func(*Options)) (*UpdateMyUserProfileOutput, error) {
 	if params == nil {
 		params = &UpdateMyUserProfileInput{}

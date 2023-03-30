@@ -58,27 +58,22 @@ type GetNetworkResourceRelationshipsInput struct {
 
 	// The resource type. The following are the supported resource types for Direct
 	// Connect:
-	// - dxcon
-	// - dx-gateway
-	// - dx-vif
-	//
-	// The following are the supported resource
-	// types for Network Manager:
-	// - connection
-	// - device
-	// - link
-	// - site
-	//
-	// The following
-	// are the supported resource types for Amazon VPC:
-	// - customer-gateway
-	// -
-	// transit-gateway
-	// - transit-gateway-attachment
-	// - transit-gateway-connect-peer
-	// -
-	// transit-gateway-route-table
-	// - vpn-connection
+	//     - dxcon
+	//     - dx-gateway
+	//     - dx-vif
+	// The following are the supported resource types for Network
+	// Manager:
+	//     - connection
+	//     - device
+	//     - link
+	//     - site
+	//  The following are the supported resource types for Amazon VPC:
+	//     - customer-gateway
+	//     - transit-gateway
+	//     - transit-gateway-attachment
+	//     - transit-gateway-connect-peer
+	//     - transit-gateway-route-table
+	//     - vpn-connection
 	ResourceType *string
 
 	noSmithyDocumentSerde
@@ -175,8 +170,8 @@ type GetNetworkResourceRelationshipsPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

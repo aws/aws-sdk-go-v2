@@ -16,7 +16,7 @@ import (
 // the response. If the total number of items in the list exceeds the maximum that
 // you specify, or the default maximum, the response is paginated. To get the next
 // page of items, send a subsequent request that specifies the NextMarker value
-// from the current response as the Marker value in the subsequent request.
+// from the current response as the Marker  value in the subsequent request.
 func (c *Client) ListContinuousDeploymentPolicies(ctx context.Context, params *ListContinuousDeploymentPoliciesInput, optFns ...func(*Options)) (*ListContinuousDeploymentPoliciesOutput, error) {
 	if params == nil {
 		params = &ListContinuousDeploymentPoliciesInput{}
@@ -37,7 +37,7 @@ type ListContinuousDeploymentPoliciesInput struct {
 	// Use this field when paginating results to indicate where to begin in your list
 	// of continuous deployment policies. The response includes policies in the list
 	// that occur after the marker. To get the next page of the list, set this field's
-	// value to the value of NextMarker from the current page's response.
+	// value to the value of NextMarker  from the current page's response.
 	Marker *string
 
 	// The maximum number of continuous deployment policies that you want returned in

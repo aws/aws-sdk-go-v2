@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of Config objects.
+// Returns a list of Config  objects.
 func (c *Client) ListConfigs(ctx context.Context, params *ListConfigsInput, optFns ...func(*Options)) (*ListConfigsOutput, error) {
 	if params == nil {
 		params = &ListConfigsInput{}
@@ -30,7 +30,7 @@ func (c *Client) ListConfigs(ctx context.Context, params *ListConfigsInput, optF
 
 type ListConfigsInput struct {
 
-	// Maximum number of Configs returned.
+	// Maximum number of Configs  returned.
 	MaxResults *int32
 
 	// Next token returned in the request of a previous ListConfigs call. Used to get
@@ -42,11 +42,11 @@ type ListConfigsInput struct {
 
 type ListConfigsOutput struct {
 
-	// List of Config items.
+	// List of Config  items.
 	ConfigList []types.ConfigListItem
 
-	// Next token returned in the response of a previous ListConfigs call. Used to get
-	// the next page of results.
+	// Next token returned in the response of a previous ListConfigs call. Used to
+	// get the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -124,11 +124,11 @@ var _ ListConfigsAPIClient = (*Client)(nil)
 
 // ListConfigsPaginatorOptions is the paginator options for ListConfigs
 type ListConfigsPaginatorOptions struct {
-	// Maximum number of Configs returned.
+	// Maximum number of Configs  returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

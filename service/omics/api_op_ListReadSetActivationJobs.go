@@ -38,7 +38,8 @@ type ListReadSetActivationJobsInput struct {
 	// A filter to apply to the list.
 	Filter *types.ActivateReadSetFilter
 
-	// The maximum number of read set activation jobs to return in one page of results.
+	// The maximum number of read set activation jobs to return in one page of
+	// results.
 	MaxResults *int32
 
 	// Specify the pagination token from a previous request to retrieve the next page
@@ -166,11 +167,12 @@ var _ ListReadSetActivationJobsAPIClient = (*Client)(nil)
 // ListReadSetActivationJobsPaginatorOptions is the paginator options for
 // ListReadSetActivationJobs
 type ListReadSetActivationJobsPaginatorOptions struct {
-	// The maximum number of read set activation jobs to return in one page of results.
+	// The maximum number of read set activation jobs to return in one page of
+	// results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

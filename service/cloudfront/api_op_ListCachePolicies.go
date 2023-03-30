@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of cache policies. You can optionally apply a filter to return only
-// the managed policies created by Amazon Web Services, or only the custom policies
-// created in your Amazon Web Services account. You can optionally specify the
-// maximum number of items to receive in the response. If the total number of items
-// in the list exceeds the maximum that you specify, or the default maximum, the
-// response is paginated. To get the next page of items, send a subsequent request
-// that specifies the NextMarker value from the current response as the Marker
-// value in the subsequent request.
+// Gets a list of cache policies. You can optionally apply a filter to return
+// only the managed policies created by Amazon Web Services, or only the custom
+// policies created in your Amazon Web Services account. You can optionally specify
+// the maximum number of items to receive in the response. If the total number of
+// items in the list exceeds the maximum that you specify, or the default maximum,
+// the response is paginated. To get the next page of items, send a subsequent
+// request that specifies the NextMarker  value from the current response as the
+// Marker value in the subsequent request.
 func (c *Client) ListCachePolicies(ctx context.Context, params *ListCachePoliciesInput, optFns ...func(*Options)) (*ListCachePoliciesOutput, error) {
 	if params == nil {
 		params = &ListCachePoliciesInput{}
@@ -39,7 +39,7 @@ type ListCachePoliciesInput struct {
 	// Use this field when paginating results to indicate where to begin in your list
 	// of cache policies. The response includes cache policies in the list that occur
 	// after the marker. To get the next page of the list, set this field's value to
-	// the value of NextMarker from the current page's response.
+	// the value of NextMarker  from the current page's response.
 	Marker *string
 
 	// The maximum number of cache policies that you want in the response.
@@ -47,10 +47,8 @@ type ListCachePoliciesInput struct {
 
 	// A filter to return only the specified kinds of cache policies. Valid values
 	// are:
-	// - managed – Returns only the managed policies created by Amazon Web
-	// Services.
-	// - custom – Returns only the custom policies created in your Amazon Web
-	// Services account.
+	//     - managed – Returns only the managed policies created by Amazon Web Services.
+	//     - custom – Returns only the custom policies created in your Amazon Web Services account.
 	Type types.CachePolicyType
 
 	noSmithyDocumentSerde

@@ -12,13 +12,12 @@ import (
 )
 
 // Removes the suspension from up to 50 previously suspended users for the
-// specified Amazon Chime EnterpriseLWA account. Only users on EnterpriseLWA
+// specified Amazon Chime EnterpriseLWA  account. Only users on EnterpriseLWA
 // accounts can be unsuspended using this action. For more information about
-// different account types, see  Managing Your Amazon Chime Accounts
-// (https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html) in the
-// account types, in the Amazon Chime Administration Guide. Previously suspended
-// users who are unsuspended using this action are returned to Registered status.
-// Users who are not previously suspended are ignored.
+// different account types, see Managing Your Amazon Chime Accounts  (https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html)
+// in the account types, in the Amazon Chime Administration Guide. Previously
+// suspended users who are unsuspended using this action are returned to
+// Registered status. Users who are not previously suspended are ignored.
 func (c *Client) BatchUnsuspendUser(ctx context.Context, params *BatchUnsuspendUserInput, optFns ...func(*Options)) (*BatchUnsuspendUserOutput, error) {
 	if params == nil {
 		params = &BatchUnsuspendUserInput{}

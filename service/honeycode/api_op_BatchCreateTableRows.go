@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The BatchCreateTableRows API allows you to create one or more rows at the end of
-// a table in a workbook. The API allows you to specify the values to set in some
-// or all of the columns in the new rows. If a column is not explicitly set in a
-// specific row, then the column level formula specified in the table will be
+// The BatchCreateTableRows API allows you to create one or more rows at the end
+// of a table in a workbook. The API allows you to specify the values to set in
+// some or all of the columns in the new rows. If a column is not explicitly set in
+// a specific row, then the column level formula specified in the table will be
 // applied to the new row. If there is no column level formula but the last row of
 // the table has a formula, then that formula will be copied down to the new row.
 // If there is no column level formula and no formula in the last row of the table,
@@ -36,12 +36,12 @@ func (c *Client) BatchCreateTableRows(ctx context.Context, params *BatchCreateTa
 
 type BatchCreateTableRowsInput struct {
 
-	// The list of rows to create at the end of the table. Each item in this list needs
-	// to have a batch item id to uniquely identify the element in the request and the
-	// cells to create for that row. You need to specify at least one item in this
-	// list. Note that if one of the column ids in any of the rows in the request does
-	// not exist in the table, then the request fails and no updates are made to the
-	// table.
+	// The list of rows to create at the end of the table. Each item in this list
+	// needs to have a batch item id to uniquely identify the element in the request
+	// and the cells to create for that row. You need to specify at least one item in
+	// this list. Note that if one of the column ids in any of the rows in the request
+	// does not exist in the table, then the request fails and no updates are made to
+	// the table.
 	//
 	// This member is required.
 	RowsToCreate []types.CreateRowData
@@ -58,13 +58,13 @@ type BatchCreateTableRowsInput struct {
 	// This member is required.
 	WorkbookId *string
 
-	// The request token for performing the batch create operation. Request tokens help
-	// to identify duplicate requests. If a call times out or fails due to a transient
-	// error like a failed network connection, you can retry the call with the same
-	// request token. The service ensures that if the first call using that request
-	// token is successfully performed, the second call will not perform the operation
-	// again. Note that request tokens are valid only for a few minutes. You cannot use
-	// request tokens to dedupe requests spanning hours or days.
+	// The request token for performing the batch create operation. Request tokens
+	// help to identify duplicate requests. If a call times out or fails due to a
+	// transient error like a failed network connection, you can retry the call with
+	// the same request token. The service ensures that if the first call using that
+	// request token is successfully performed, the second call will not perform the
+	// operation again. Note that request tokens are valid only for a few minutes. You
+	// cannot use request tokens to dedupe requests spanning hours or days.
 	ClientRequestToken *string
 
 	noSmithyDocumentSerde

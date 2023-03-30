@@ -185,8 +185,8 @@ type ApplicationComponentDetail struct {
 // Summary of the analysis status of the application component.
 type ApplicationComponentStatusSummary struct {
 
-	// The number of application components successfully analyzed, partially successful
-	// or failed analysis.
+	// The number of application components successfully analyzed, partially
+	// successful or failed analysis.
 	Count *int32
 
 	// The status of database analysis.
@@ -301,8 +301,8 @@ type AssessmentTarget struct {
 	noSmithyDocumentSerde
 }
 
-// Object containing details about applications as defined in Application Discovery
-// Service.
+// Object containing details about applications as defined in Application
+// Discovery Service.
 type AssociatedApplication struct {
 
 	// ID of the application as defined in Application Discovery Service.
@@ -400,8 +400,8 @@ type ConfigurationSummary struct {
 // Configuration information used for assessing databases.
 type DatabaseConfigDetail struct {
 
-	// AWS Secrets Manager key that holds the credentials that you use to connect to a
-	// database.
+	// AWS Secrets Manager key that holds the credentials that you use to connect to
+	// a database.
 	SecretName *string
 
 	noSmithyDocumentSerde
@@ -428,8 +428,8 @@ type DatabaseMigrationPreferenceMemberHeterogeneous struct {
 
 func (*DatabaseMigrationPreferenceMemberHeterogeneous) isDatabaseMigrationPreference() {}
 
-// Indicates whether you are interested in moving to the same type of database into
-// AWS. For example, from SQL Server in your environment to SQL Server on AWS.
+// Indicates whether you are interested in moving to the same type of database
+// into AWS. For example, from SQL Server in your environment to SQL Server on AWS.
 type DatabaseMigrationPreferenceMemberHomogeneous struct {
 	Value Homogeneous
 
@@ -469,7 +469,7 @@ type DataCollectionDetails struct {
 	// The number of failed servers in the assessment.
 	Failed *int32
 
-	// The number of servers with the assessment status IN_PROGESS.
+	// The number of servers with the assessment status IN_PROGESS .
 	InProgress *int32
 
 	// The total number of servers in the assessment.
@@ -490,8 +490,8 @@ type DataCollectionDetails struct {
 	noSmithyDocumentSerde
 }
 
-// The object containing information about distinct imports or groups for Strategy
-// Recommendations.
+// The object containing information about distinct imports or groups for
+// Strategy Recommendations.
 type Group struct {
 
 	// The key of the specific import group.
@@ -532,7 +532,7 @@ type ImportFileTaskInformation struct {
 	// The ID of the import file task.
 	Id *string
 
-	// The name of the import task given in StartImportFileTask.
+	// The name of the import task given in StartImportFileTask .
 	ImportName *string
 
 	// The S3 bucket where the import file is located.
@@ -625,7 +625,8 @@ type NetworkInfo struct {
 	// This member is required.
 	InterfaceName *string
 
-	// Information about the IP address of the server for which the assessment was run.
+	// Information about the IP address of the server for which the assessment was
+	// run.
 	//
 	// This member is required.
 	IpAddress *string
@@ -942,7 +943,7 @@ type StrategyOption struct {
 	Strategy Strategy
 
 	// Destination information about where the application component can migrate to.
-	// For example, EC2, ECS, and so on.
+	// For example, EC2 , ECS , and so on.
 	TargetDestination TargetDestination
 
 	// The name of the tool that can be used to transform an application component
@@ -982,8 +983,8 @@ type SystemInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Information of the transformation tool that can be used to migrate and modernize
-// the application.
+// Information of the transformation tool that can be used to migrate and
+// modernize the application.
 type TransformationTool struct {
 
 	// Description of the tool.

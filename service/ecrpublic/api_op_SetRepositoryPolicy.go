@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Applies a repository policy to the specified public repository to control access
-// permissions. For more information, see Amazon ECR Repository Policies
-// (https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html)
+// Applies a repository policy to the specified public repository to control
+// access permissions. For more information, see Amazon ECR Repository Policies (https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html)
 // in the Amazon Elastic Container Registry User Guide.
 func (c *Client) SetRepositoryPolicy(ctx context.Context, params *SetRepositoryPolicyInput, optFns ...func(*Options)) (*SetRepositoryPolicyOutput, error) {
 	if params == nil {
@@ -32,8 +31,7 @@ func (c *Client) SetRepositoryPolicy(ctx context.Context, params *SetRepositoryP
 type SetRepositoryPolicyInput struct {
 
 	// The JSON repository policy text to apply to the repository. For more
-	// information, see Amazon ECR Repository Policies
-	// (https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html)
+	// information, see Amazon ECR Repository Policies (https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html)
 	// in the Amazon Elastic Container Registry User Guide.
 	//
 	// This member is required.
@@ -44,9 +42,9 @@ type SetRepositoryPolicyInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// If the policy that you want to set on a repository policy would prevent you from
-	// setting another policy in the future, you must force the SetRepositoryPolicy
-	// operation. This prevents accidental repository lockouts.
+	// If the policy that you want to set on a repository policy would prevent you
+	// from setting another policy in the future, you must force the
+	// SetRepositoryPolicy operation. This prevents accidental repository lockouts.
 	Force bool
 
 	// The Amazon Web Services account ID that's associated with the registry that

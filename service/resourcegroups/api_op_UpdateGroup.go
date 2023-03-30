@@ -14,7 +14,7 @@ import (
 // Updates the description for an existing group. You cannot update the name of a
 // resource group. Minimum permissions To run this command, you must have the
 // following permissions:
-// - resource-groups:UpdateGroup
+//   - resource-groups:UpdateGroup
 func (c *Client) UpdateGroup(ctx context.Context, params *UpdateGroupInput, optFns ...func(*Options)) (*UpdateGroupOutput, error) {
 	if params == nil {
 		params = &UpdateGroupInput{}
@@ -40,7 +40,7 @@ type UpdateGroupInput struct {
 	// The name or the ARN of the resource group to modify.
 	Group *string
 
-	// Don't use this parameter. Use Group instead.
+	// Don't use this parameter. Use Group  instead.
 	//
 	// Deprecated: This field is deprecated, use Group instead.
 	GroupName *string

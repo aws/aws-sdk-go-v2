@@ -13,8 +13,7 @@ import (
 
 // Replicates an Amazon Connect instance in the specified Amazon Web Services
 // Region. For more information about replicating an Amazon Connect instance, see
-// Create a replica of your existing Amazon Connect instance
-// (https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html)
+// Create a replica of your existing Amazon Connect instance (https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) ReplicateInstance(ctx context.Context, params *ReplicateInstanceInput, optFns ...func(*Options)) (*ReplicateInstanceOutput, error) {
 	if params == nil {
@@ -33,15 +32,14 @@ func (c *Client) ReplicateInstance(ctx context.Context, params *ReplicateInstanc
 
 type ReplicateInstanceInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance. You can provide the
-	// InstanceId, or the entire ARN.
+	// InstanceId , or the entire ARN.
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The alias for the replicated instance. The ReplicaAlias must be unique.
+	// The alias for the replicated instance. The ReplicaAlias  must be unique.
 	//
 	// This member is required.
 	ReplicaAlias *string
@@ -54,8 +52,8 @@ type ReplicateInstanceInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// .
 	ClientToken *string
 
 	noSmithyDocumentSerde

@@ -44,7 +44,7 @@ type DescribeMaintenanceWindowScheduleInput struct {
 	NextToken *string
 
 	// The type of resource you want to retrieve information about. For example,
-	// INSTANCE.
+	// INSTANCE .
 	ResourceType types.MaintenanceWindowResourceType
 
 	// The managed node ID or key-value pair to retrieve information about.
@@ -62,8 +62,8 @@ type DescribeMaintenanceWindowScheduleOutput struct {
 	// call.)
 	NextToken *string
 
-	// Information about maintenance window executions scheduled for the specified time
-	// range.
+	// Information about maintenance window executions scheduled for the specified
+	// time range.
 	ScheduledWindowExecutions []types.ScheduledWindowExecution
 
 	// Metadata pertaining to the operation's result.
@@ -147,8 +147,8 @@ type DescribeMaintenanceWindowSchedulePaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

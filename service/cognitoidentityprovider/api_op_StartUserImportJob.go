@@ -43,8 +43,8 @@ type StartUserImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the response from the server to the request to start the user import
-// job.
+// Represents the response from the server to the request to start the user
+// import job.
 type StartUserImportJobOutput struct {
 
 	// The job object that represents the user import job.

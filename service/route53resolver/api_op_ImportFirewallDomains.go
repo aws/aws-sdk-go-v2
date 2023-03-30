@@ -14,12 +14,9 @@ import (
 // Imports domain names from a file into a domain list, for use in a DNS firewall
 // rule group. Each domain specification in your domain list must satisfy the
 // following requirements:
-// - It can optionally start with * (asterisk).
-// - With the
-// exception of the optional starting asterisk, it must only contain the following
-// characters: A-Z, a-z, 0-9, - (hyphen).
-// - It must be from 1-255 characters in
-// length.
+//   - It can optionally start with * (asterisk).
+//   - With the exception of the optional starting asterisk, it must only contain the following characters: A-Z , a-z , 0-9 , - (hyphen).
+//   - It must be from 1-255 characters in length.
 func (c *Client) ImportFirewallDomains(ctx context.Context, params *ImportFirewallDomainsInput, optFns ...func(*Options)) (*ImportFirewallDomainsOutput, error) {
 	if params == nil {
 		params = &ImportFirewallDomainsInput{}
@@ -51,8 +48,8 @@ type ImportFirewallDomainsInput struct {
 	FirewallDomainListId *string
 
 	// What you want DNS Firewall to do with the domains that are listed in the file.
-	// This must be set to REPLACE, which updates the domain list to exactly match the
-	// list in the file.
+	// This must be set to REPLACE, which updates the domain list to exactly match
+	// the list in the file.
 	//
 	// This member is required.
 	Operation types.FirewallDomainImportOperation

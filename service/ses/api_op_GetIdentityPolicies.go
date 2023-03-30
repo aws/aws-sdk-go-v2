@@ -10,15 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the requested sending authorization policies for the given identity (an
-// email address or a domain). The policies are returned as a map of policy names
-// to policy contents. You can retrieve a maximum of 20 policies at a time. This
-// API is for the identity owner only. If you have not verified the identity, this
-// API will return an error. Sending authorization is a feature that enables an
-// identity owner to authorize other senders to use its identities. For information
-// about using sending authorization, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
-// You can execute this operation no more than once per second.
+// Returns the requested sending authorization policies for the given identity
+// (an email address or a domain). The policies are returned as a map of policy
+// names to policy contents. You can retrieve a maximum of 20 policies at a time.
+// This API is for the identity owner only. If you have not verified the identity,
+// this API will return an error. Sending authorization is a feature that enables
+// an identity owner to authorize other senders to use its identities. For
+// information about using sending authorization, see the Amazon SES Developer
+// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
+// . You can execute this operation no more than once per second.
 func (c *Client) GetIdentityPolicies(ctx context.Context, params *GetIdentityPoliciesInput, optFns ...func(*Options)) (*GetIdentityPoliciesOutput, error) {
 	if params == nil {
 		params = &GetIdentityPoliciesInput{}
@@ -34,16 +34,17 @@ func (c *Client) GetIdentityPolicies(ctx context.Context, params *GetIdentityPol
 	return out, nil
 }
 
-// Represents a request to return the requested sending authorization policies for
-// an identity. Sending authorization is an Amazon SES feature that enables you to
-// authorize other senders to use your identities. For information, see the Amazon
-// SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+// Represents a request to return the requested sending authorization policies
+// for an identity. Sending authorization is an Amazon SES feature that enables you
+// to authorize other senders to use your identities. For information, see the
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
+// .
 type GetIdentityPoliciesInput struct {
 
 	// The identity for which the policies will be retrieved. You can specify an
 	// identity by using its name or by using its Amazon Resource Name (ARN). Examples:
-	// user@example.com, example.com,
+	//
+	// user@example.com , example.com ,
 	// arn:aws:ses:us-east-1:123456789012:identity/example.com. To successfully call
 	// this API, you must own the identity.
 	//
@@ -52,7 +53,7 @@ type GetIdentityPoliciesInput struct {
 
 	// A list of the names of policies to be retrieved. You can retrieve a maximum of
 	// 20 policies at a time. If you do not know the names of the policies that are
-	// attached to the identity, you can use ListIdentityPolicies.
+	// attached to the identity, you can use ListIdentityPolicies .
 	//
 	// This member is required.
 	PolicyNames []string

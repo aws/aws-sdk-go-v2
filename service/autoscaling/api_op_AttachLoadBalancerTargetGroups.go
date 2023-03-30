@@ -12,21 +12,17 @@ import (
 
 // Attaches one or more target groups to the specified Auto Scaling group. This
 // operation is used with the following load balancer types:
-// - Application Load
-// Balancer - Operates at the application layer (layer 7) and supports HTTP and
-// HTTPS.
-// - Network Load Balancer - Operates at the transport layer (layer 4) and
-// supports TCP, TLS, and UDP.
-// - Gateway Load Balancer - Operates at the network
-// layer (layer 3).
+//   - Application Load Balancer - Operates at the application layer (layer 7) and supports HTTP and HTTPS.
+//   - Network Load Balancer - Operates at the transport layer (layer 4) and supports TCP, TLS, and UDP.
+//   - Gateway Load Balancer - Operates at the network layer (layer 3).
 //
-// To describe the target groups for an Auto Scaling group, call
-// the DescribeLoadBalancerTargetGroups API. To detach the target group from the
-// Auto Scaling group, call the DetachLoadBalancerTargetGroups API. This operation
-// is additive and does not detach existing target groups or Classic Load Balancers
+// To
+// describe the target groups for an Auto Scaling group, call the
+// DescribeLoadBalancerTargetGroupsAPI. To detach the target group from the Auto
+// Scaling group, call the DetachLoadBalancerTargetGroups API. This operation is
+// additive and does not detach existing target groups or Classic Load Balancers
 // from the Auto Scaling group. For more information, see Use Elastic Load
-// Balancing to distribute traffic across the instances in your Auto Scaling group
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)
+// Balancing to distribute traffic across the instances in your Auto Scaling group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) AttachLoadBalancerTargetGroups(ctx context.Context, params *AttachLoadBalancerTargetGroupsInput, optFns ...func(*Options)) (*AttachLoadBalancerTargetGroupsOutput, error) {
 	if params == nil {
@@ -50,10 +46,9 @@ type AttachLoadBalancerTargetGroupsInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// The Amazon Resource Names (ARNs) of the target groups. You can specify up to 10
-	// target groups. To get the ARN of a target group, use the Elastic Load Balancing
-	// DescribeTargetGroups
-	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
+	// The Amazon Resource Names (ARNs) of the target groups. You can specify up to
+	// 10 target groups. To get the ARN of a target group, use the Elastic Load
+	// Balancing DescribeTargetGroups (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
 	// API operation.
 	//
 	// This member is required.

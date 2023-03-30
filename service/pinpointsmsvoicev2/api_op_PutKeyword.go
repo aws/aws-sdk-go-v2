@@ -41,19 +41,17 @@ type PutKeywordInput struct {
 	Keyword *string
 
 	// The message associated with the keyword.
-	// - AUTOMATIC_RESPONSE: A message is sent
-	// to the recipient.
-	// - OPT_OUT: Keeps the recipient from receiving future
-	// messages.
-	// - OPT_IN: The recipient wants to receive future messages.
+	//     - AUTOMATIC_RESPONSE: A message is sent to the recipient.
+	//     - OPT_OUT: Keeps the recipient from receiving future messages.
+	//     - OPT_IN: The recipient wants to receive future messages.
 	//
 	// This member is required.
 	KeywordMessage *string
 
 	// The origination identity to use such as a PhoneNumberId, PhoneNumberArn,
 	// SenderId or SenderIdArn. You can use DescribePhoneNumbers get the values for
-	// PhoneNumberId and PhoneNumberArn while DescribeSenderIds can be used to get the
-	// values for SenderId and SenderIdArn.
+	// PhoneNumberId and PhoneNumberArn while DescribeSenderIds can be used to get
+	// the values for SenderId and SenderIdArn.
 	//
 	// This member is required.
 	OriginationIdentity *string

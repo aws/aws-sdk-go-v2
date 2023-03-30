@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Traffic Mirror filter rule. A Traffic Mirror rule defines the Traffic
-// Mirror source traffic to mirror. You need the Traffic Mirror filter ID when you
-// create the rule.
+// Creates a Traffic Mirror filter rule. A Traffic Mirror rule defines the
+// Traffic Mirror source traffic to mirror. You need the Traffic Mirror filter ID
+// when you create the rule.
 func (c *Client) CreateTrafficMirrorFilterRule(ctx context.Context, params *CreateTrafficMirrorFilterRuleInput, optFns ...func(*Options)) (*CreateTrafficMirrorFilterRuleOutput, error) {
 	if params == nil {
 		params = &CreateTrafficMirrorFilterRuleInput{}
@@ -64,9 +64,9 @@ type CreateTrafficMirrorFilterRuleInput struct {
 	// This member is required.
 	TrafficMirrorFilterId *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to ensure idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// .
 	ClientToken *string
 
 	// The description of the Traffic Mirror rule.
@@ -77,14 +77,13 @@ type CreateTrafficMirrorFilterRuleInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The protocol, for example UDP, to assign to the Traffic Mirror rule. For
-	// information about the protocol value, see Protocol Numbers
-	// (https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml) on
-	// the Internet Assigned Numbers Authority (IANA) website.
+	// information about the protocol value, see Protocol Numbers (https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)
+	// on the Internet Assigned Numbers Authority (IANA) website.
 	Protocol *int32
 
 	// The source port range.
@@ -95,9 +94,9 @@ type CreateTrafficMirrorFilterRuleInput struct {
 
 type CreateTrafficMirrorFilterRuleOutput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to ensure idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// .
 	ClientToken *string
 
 	// The Traffic Mirror rule.

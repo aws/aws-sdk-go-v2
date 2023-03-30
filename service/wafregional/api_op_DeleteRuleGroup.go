@@ -10,22 +10,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
-// (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
-// the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Permanently deletes a RuleGroup. You can't delete a RuleGroup if
-// it's still used in any WebACL objects or if it still includes any rules. If you
-// just want to remove a RuleGroup from a WebACL, use UpdateWebACL. To permanently
-// delete a RuleGroup from AWS WAF, perform the following steps:
-// - Update the
-// RuleGroup to remove rules, if any. For more information, see UpdateRuleGroup.
-// -
-// Use GetChangeToken to get the change token that you provide in the ChangeToken
-// parameter of a DeleteRuleGroup request.
-// - Submit a DeleteRuleGroup request.
+// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+// . With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use. Permanently deletes a RuleGroup . You can't delete a RuleGroup
+// if it's still used in any WebACL objects or if it still includes any rules. If
+// you just want to remove a RuleGroup  from a WebACL , use UpdateWebACL. To
+// permanently delete a RuleGroup  from AWS WAF, perform the following steps:
+//   - Update the RuleGroup to remove rules, if any. For more information, see UpdateRuleGroup .
+//   - Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteRuleGroup request.
+//   - Submit a DeleteRuleGroup request.
 func (c *Client) DeleteRuleGroup(ctx context.Context, params *DeleteRuleGroupInput, optFns ...func(*Options)) (*DeleteRuleGroupOutput, error) {
 	if params == nil {
 		params = &DeleteRuleGroupInput{}
@@ -43,13 +39,13 @@ func (c *Client) DeleteRuleGroup(ctx context.Context, params *DeleteRuleGroupInp
 
 type DeleteRuleGroupInput struct {
 
-	// The value returned by the most recent call to GetChangeToken.
+	// The value returned by the most recent call to GetChangeToken .
 	//
 	// This member is required.
 	ChangeToken *string
 
-	// The RuleGroupId of the RuleGroup that you want to delete. RuleGroupId is
-	// returned by CreateRuleGroup and by ListRuleGroups.
+	// The RuleGroupId  of the RuleGroup  that you want to delete. RuleGroupId is
+	// returned by CreateRuleGroup  and by ListRuleGroups .
 	//
 	// This member is required.
 	RuleGroupId *string
@@ -59,9 +55,9 @@ type DeleteRuleGroupInput struct {
 
 type DeleteRuleGroupOutput struct {
 
-	// The ChangeToken that you used to submit the DeleteRuleGroup request. You can
+	// The ChangeToken  that you used to submit the DeleteRuleGroup request. You can
 	// also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
+	// see GetChangeTokenStatus .
 	ChangeToken *string
 
 	// Metadata pertaining to the operation's result.

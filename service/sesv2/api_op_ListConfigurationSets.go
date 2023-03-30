@@ -32,16 +32,16 @@ func (c *Client) ListConfigurationSets(ctx context.Context, params *ListConfigur
 	return out, nil
 }
 
-// A request to obtain a list of configuration sets for your Amazon SES account in
-// the current Amazon Web Services Region.
+// A request to obtain a list of configuration sets for your Amazon SES account
+// in the current Amazon Web Services Region.
 type ListConfigurationSetsInput struct {
 
 	// A token returned from a previous call to ListConfigurationSets to indicate the
 	// position in the list of configuration sets.
 	NextToken *string
 
-	// The number of results to show in a single call to ListConfigurationSets. If the
-	// number of results is larger than the number you specified in this parameter,
+	// The number of results to show in a single call to ListConfigurationSets. If
+	// the number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results.
 	PageSize *int32
@@ -53,13 +53,13 @@ type ListConfigurationSetsInput struct {
 // Web Services Region.
 type ListConfigurationSetsOutput struct {
 
-	// An array that contains all of the configuration sets in your Amazon SES account
-	// in the current Amazon Web Services Region.
+	// An array that contains all of the configuration sets in your Amazon SES
+	// account in the current Amazon Web Services Region.
 	ConfigurationSets []string
 
-	// A token that indicates that there are additional configuration sets to list. To
-	// view additional configuration sets, issue another request to
-	// ListConfigurationSets, and pass this token in the NextToken parameter.
+	// A token that indicates that there are additional configuration sets to list.
+	// To view additional configuration sets, issue another request to
+	// ListConfigurationSets , and pass this token in the NextToken  parameter.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -139,14 +139,14 @@ var _ ListConfigurationSetsAPIClient = (*Client)(nil)
 // ListConfigurationSetsPaginatorOptions is the paginator options for
 // ListConfigurationSets
 type ListConfigurationSetsPaginatorOptions struct {
-	// The number of results to show in a single call to ListConfigurationSets. If the
-	// number of results is larger than the number you specified in this parameter,
+	// The number of results to show in a single call to ListConfigurationSets. If
+	// the number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

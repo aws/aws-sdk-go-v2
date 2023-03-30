@@ -31,7 +31,7 @@ func (c *Client) DescribeDocumentClassificationJob(ctx context.Context, params *
 type DescribeDocumentClassificationJobInput struct {
 
 	// The identifier that Amazon Comprehend generated for the job. The
-	// StartDocumentClassificationJob operation returns this identifier in its
+	// StartDocumentClassificationJoboperation returns this identifier in its
 	// response.
 	//
 	// This member is required.

@@ -33,31 +33,25 @@ type DescribeLocalGatewayRouteTableVpcAssociationsInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// One or more filters.
-	// - local-gateway-id - The ID of a local gateway.
-	// -
-	// local-gateway-route-table-arn - The Amazon Resource Name (ARN) of the local
-	// gateway route table for the association.
-	// - local-gateway-route-table-id - The ID
-	// of the local gateway route table.
-	// - local-gateway-route-table-vpc-association-id
-	// - The ID of the association.
-	// - owner-id - The ID of the Amazon Web Services
-	// account that owns the local gateway route table for the association.
-	// - state -
-	// The state of the association.
-	// - vpc-id - The ID of the VPC.
+	//     - local-gateway-id - The ID of a local gateway.
+	//     - local-gateway-route-table-arn - The Amazon Resource Name (ARN) of the local gateway route table for the association.
+	//     - local-gateway-route-table-id - The ID of the local gateway route table.
+	//     - local-gateway-route-table-vpc-association-id - The ID of the association.
+	//     - owner-id - The ID of the Amazon Web Services account that owns the local gateway route table for the association.
+	//     - state - The state of the association.
+	//     - vpc-id - The ID of the VPC.
 	Filters []types.Filter
 
 	// The IDs of the associations.
 	LocalGatewayRouteTableVpcAssociationIds []string
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -153,11 +147,11 @@ var _ DescribeLocalGatewayRouteTableVpcAssociationsAPIClient = (*Client)(nil)
 // options for DescribeLocalGatewayRouteTableVpcAssociations
 type DescribeLocalGatewayRouteTableVpcAssociationsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

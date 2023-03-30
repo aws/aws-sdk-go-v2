@@ -30,8 +30,8 @@ func (c *Client) ListTagOptions(ctx context.Context, params *ListTagOptionsInput
 
 type ListTagOptionsInput struct {
 
-	// The search filters. If no search filters are specified, the output includes all
-	// TagOptions.
+	// The search filters. If no search filters are specified, the output includes
+	// all TagOptions.
 	Filters *types.ListTagOptionsFilters
 
 	// The maximum number of items to return with this call.
@@ -132,8 +132,8 @@ type ListTagOptionsPaginatorOptions struct {
 	// The maximum number of items to return with this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

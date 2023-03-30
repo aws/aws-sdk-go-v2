@@ -35,16 +35,16 @@ type CreateTapePoolInput struct {
 	// This member is required.
 	PoolName *string
 
-	// The storage class that is associated with the new custom pool. When you use your
-	// backup application to eject the tape, the tape is archived directly into the
-	// storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the
-	// pool.
+	// The storage class that is associated with the new custom pool. When you use
+	// your backup application to eject the tape, the tape is archived directly into
+	// the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to
+	// the pool.
 	//
 	// This member is required.
 	StorageClass types.TapeStorageClass
 
-	// Tape retention lock time is set in days. Tape retention lock can be enabled for
-	// up to 100 years (36,500 days).
+	// Tape retention lock time is set in days. Tape retention lock can be enabled
+	// for up to 100 years (36,500 days).
 	RetentionLockTimeInDays *int32
 
 	// Tape retention lock can be configured in two modes. When configured in
@@ -66,9 +66,9 @@ type CreateTapePoolInput struct {
 
 type CreateTapePoolOutput struct {
 
-	// The unique Amazon Resource Name (ARN) that represents the custom tape pool. Use
-	// the ListTapePools operation to return a list of tape pools for your account and
-	// Amazon Web Services Region.
+	// The unique Amazon Resource Name (ARN) that represents the custom tape pool.
+	// Use the ListTapePools operation to return a list of tape pools for your
+	// account and Amazon Web Services Region.
 	PoolARN *string
 
 	// Metadata pertaining to the operation's result.

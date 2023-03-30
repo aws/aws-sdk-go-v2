@@ -19,8 +19,7 @@ import (
 // specify the game server group ID and provide the updated values. Before applying
 // the updates, the new values are validated to ensure that GameLift FleetIQ can
 // continue to perform instance balancing activity. If successful, a
-// GameServerGroup object is returned. Learn more GameLift FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+// GameServerGroup object is returned. Learn more GameLift FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 func (c *Client) UpdateGameServerGroup(ctx context.Context, params *UpdateGameServerGroupInput, optFns ...func(*Options)) (*UpdateGameServerGroupOutput, error) {
 	if params == nil {
 		params = &UpdateGameServerGroupInput{}
@@ -38,28 +37,18 @@ func (c *Client) UpdateGameServerGroup(ctx context.Context, params *UpdateGameSe
 
 type UpdateGameServerGroupInput struct {
 
-	// A unique identifier for the game server group. Use either the name or ARN value.
+	// A unique identifier for the game server group. Use either the name or ARN
+	// value.
 	//
 	// This member is required.
 	GameServerGroupName *string
 
-	// Indicates how GameLift FleetIQ balances the use of Spot Instances and On-Demand
-	// Instances in the game server group. Method options include the following:
-	// -
-	// SPOT_ONLY - Only Spot Instances are used in the game server group. If Spot
-	// Instances are unavailable or not viable for game hosting, the game server group
-	// provides no hosting capacity until Spot Instances can again be used. Until then,
-	// no new instances are started, and the existing nonviable Spot Instances are
-	// terminated (after current gameplay ends) and are not replaced.
-	// - SPOT_PREFERRED
-	// - (default value) Spot Instances are used whenever available in the game server
-	// group. If Spot Instances are unavailable, the game server group continues to
-	// provide hosting capacity by falling back to On-Demand Instances. Existing
-	// nonviable Spot Instances are terminated (after current gameplay ends) and are
-	// replaced with new On-Demand Instances.
-	// - ON_DEMAND_ONLY - Only On-Demand
-	// Instances are used in the game server group. No Spot Instances are used, even
-	// when available, while this balancing strategy is in force.
+	// Indicates how GameLift FleetIQ balances the use of Spot Instances and
+	// On-Demand Instances in the game server group. Method options include the
+	// following:
+	//     - SPOT_ONLY - Only Spot Instances are used in the game server group. If Spot Instances are unavailable or not viable for game hosting, the game server group provides no hosting capacity until Spot Instances can again be used. Until then, no new instances are started, and the existing nonviable Spot Instances are terminated (after current gameplay ends) and are not replaced.
+	//     - SPOT_PREFERRED - (default value) Spot Instances are used whenever available in the game server group. If Spot Instances are unavailable, the game server group continues to provide hosting capacity by falling back to On-Demand Instances. Existing nonviable Spot Instances are terminated (after current gameplay ends) and are replaced with new On-Demand Instances.
+	//     - ON_DEMAND_ONLY - Only On-Demand Instances are used in the game server group. No Spot Instances are used, even when available, while this balancing strategy is in force.
 	BalancingStrategy types.BalancingStrategy
 
 	// A flag that indicates whether instances in the game server group are protected
@@ -69,26 +58,25 @@ type UpdateGameServerGroupInput struct {
 	// active game servers running except in the event of a forced game server group
 	// deletion (see ). An exception to this is with Spot Instances, which can be
 	// terminated by Amazon Web Services regardless of protection status. This property
-	// is set to NO_PROTECTION by default.
+	// is set to NO_PROTECTION  by default.
 	GameServerProtectionPolicy types.GameServerProtectionPolicy
 
 	// An updated list of Amazon EC2 instance types to use in the Auto Scaling group.
 	// The instance definitions must specify at least two different instance types that
 	// are supported by GameLift FleetIQ. This updated list replaces the entire current
 	// list of instance definitions for the game server group. For more information on
-	// instance types, see EC2 Instance Types
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
-	// Amazon EC2 User Guide. You can optionally specify capacity weighting for each
-	// instance type. If no weight value is specified for an instance type, it is set
-	// to the default value "1". For more information about capacity weighting, see
-	// Instance Weighting for Amazon EC2 Auto Scaling
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html)
+	// instance types, see EC2 Instance Types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html)
+	// in the Amazon EC2 User Guide. You can optionally specify capacity weighting for
+	// each instance type. If no weight value is specified for an instance type, it is
+	// set to the default value "1". For more information about capacity weighting, see
+	//
+	// Instance Weighting for Amazon EC2 Auto Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	InstanceDefinitions []types.InstanceDefinition
 
-	// The Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM
-	// role that allows Amazon GameLift to access your Amazon EC2 Auto Scaling groups.
+	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
+	// ) for an IAM role that allows Amazon GameLift to access your Amazon EC2 Auto
+	// Scaling groups.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -96,7 +84,8 @@ type UpdateGameServerGroupInput struct {
 
 type UpdateGameServerGroupOutput struct {
 
-	// An object that describes the game server group resource with updated properties.
+	// An object that describes the game server group resource with updated
+	// properties.
 	GameServerGroup *types.GameServerGroup
 
 	// Metadata pertaining to the operation's result.

@@ -33,9 +33,9 @@ type ListCustomPluginsInput struct {
 	// The maximum number of custom plugins to list in one response.
 	MaxResults int32
 
-	// If the response of a ListCustomPlugins operation is truncated, it will include a
-	// NextToken. Send this NextToken in a subsequent request to continue listing from
-	// where the previous operation left off.
+	// If the response of a ListCustomPlugins operation is truncated, it will include
+	// a NextToken. Send this NextToken in a subsequent request to continue listing
+	// from where the previous operation left off.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,9 +46,9 @@ type ListCustomPluginsOutput struct {
 	// An array of custom plugin descriptions.
 	CustomPlugins []types.CustomPluginSummary
 
-	// If the response of a ListCustomPlugins operation is truncated, it will include a
-	// NextToken. Send this NextToken in a subsequent request to continue listing from
-	// where the previous operation left off.
+	// If the response of a ListCustomPlugins operation is truncated, it will include
+	// a NextToken. Send this NextToken in a subsequent request to continue listing
+	// from where the previous operation left off.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -125,13 +125,14 @@ type ListCustomPluginsAPIClient interface {
 
 var _ ListCustomPluginsAPIClient = (*Client)(nil)
 
-// ListCustomPluginsPaginatorOptions is the paginator options for ListCustomPlugins
+// ListCustomPluginsPaginatorOptions is the paginator options for
+// ListCustomPlugins
 type ListCustomPluginsPaginatorOptions struct {
 	// The maximum number of custom plugins to list in one response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

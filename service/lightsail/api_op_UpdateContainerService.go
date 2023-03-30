@@ -40,18 +40,18 @@ type UpdateContainerServiceInput struct {
 
 	// The power for the container service. The power specifies the amount of memory,
 	// vCPUs, and base monthly cost of each node of the container service. The power
-	// and scale of a container service makes up its configured capacity. To determine
-	// the monthly price of your container service, multiply the base price of the
-	// power with the scale (the number of nodes) of the service. Use the
-	// GetContainerServicePowers action to view the specifications of each power
+	// and scale of a container service makes up its configured capacity. To
+	// determine the monthly price of your container service, multiply the base price
+	// of the power  with the scale  (the number of nodes) of the service. Use the
+	// GetContainerServicePowersaction to view the specifications of each power
 	// option.
 	Power types.ContainerServicePowerName
 
 	// An object to describe the configuration for the container service to access
 	// private container image repositories, such as Amazon Elastic Container Registry
-	// (Amazon ECR) private repositories. For more information, see Configuring access
-	// to an Amazon ECR private repository for an Amazon Lightsail container service
-	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access)
+	// (Amazon ECR) private repositories. For more information, see Configuring
+	// access to an Amazon ECR private repository for an Amazon Lightsail container
+	// service (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access)
 	// in the Amazon Lightsail Developer Guide.
 	PrivateRegistryAccess *types.PrivateRegistryAccessRequest
 
@@ -68,10 +68,10 @@ type UpdateContainerServiceInput struct {
 	PublicDomainNames map[string][]string
 
 	// The scale for the container service. The scale specifies the allocated compute
-	// nodes of the container service. The power and scale of a container service makes
-	// up its configured capacity. To determine the monthly price of your container
-	// service, multiply the base price of the power with the scale (the number of
-	// nodes) of the service.
+	// nodes of the container service. The power  and scale of a container service
+	// makes up its configured capacity. To determine the monthly price of your
+	// container service, multiply the base price of the power  with the scale (the
+	// number of nodes) of the service.
 	Scale *int32
 
 	noSmithyDocumentSerde

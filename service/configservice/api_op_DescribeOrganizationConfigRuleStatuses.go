@@ -44,8 +44,8 @@ type DescribeOrganizationConfigRuleStatusesInput struct {
 	// page of results in a paginated response.
 	NextToken *string
 
-	// The names of organization Config rules for which you want status details. If you
-	// do not specify any names, Config returns details for all your organization
+	// The names of organization Config rules for which you want status details. If
+	// you do not specify any names, Config returns details for all your organization
 	// Config rules.
 	OrganizationConfigRuleNames []string
 
@@ -58,7 +58,7 @@ type DescribeOrganizationConfigRuleStatusesOutput struct {
 	// page of results in a paginated response.
 	NextToken *string
 
-	// A list of OrganizationConfigRuleStatus objects.
+	// A list of OrganizationConfigRuleStatus  objects.
 	OrganizationConfigRuleStatuses []types.OrganizationConfigRuleStatus
 
 	// Metadata pertaining to the operation's result.
@@ -127,23 +127,23 @@ func (c *Client) addOperationDescribeOrganizationConfigRuleStatusesMiddlewares(s
 	return nil
 }
 
-// DescribeOrganizationConfigRuleStatusesAPIClient is a client that implements the
-// DescribeOrganizationConfigRuleStatuses operation.
+// DescribeOrganizationConfigRuleStatusesAPIClient is a client that implements
+// the DescribeOrganizationConfigRuleStatuses operation.
 type DescribeOrganizationConfigRuleStatusesAPIClient interface {
 	DescribeOrganizationConfigRuleStatuses(context.Context, *DescribeOrganizationConfigRuleStatusesInput, ...func(*Options)) (*DescribeOrganizationConfigRuleStatusesOutput, error)
 }
 
 var _ DescribeOrganizationConfigRuleStatusesAPIClient = (*Client)(nil)
 
-// DescribeOrganizationConfigRuleStatusesPaginatorOptions is the paginator options
-// for DescribeOrganizationConfigRuleStatuses
+// DescribeOrganizationConfigRuleStatusesPaginatorOptions is the paginator
+// options for DescribeOrganizationConfigRuleStatuses
 type DescribeOrganizationConfigRuleStatusesPaginatorOptions struct {
 	// The maximum number of OrganizationConfigRuleStatuses returned on each page. If
 	// you do no specify a number, Config uses the default. The default is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

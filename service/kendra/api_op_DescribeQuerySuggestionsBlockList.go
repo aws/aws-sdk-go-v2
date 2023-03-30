@@ -14,7 +14,7 @@ import (
 
 // Gets information about a block list used for query suggestions for an index.
 // This is used to check the current settings that are applied to a block list.
-// DescribeQuerySuggestionsBlockList is currently not supported in the Amazon Web
+// DescribeQuerySuggestionsBlockListis currently not supported in the Amazon Web
 // Services GovCloud (US-West) region.
 func (c *Client) DescribeQuerySuggestionsBlockList(ctx context.Context, params *DescribeQuerySuggestionsBlockListInput, optFns ...func(*Options)) (*DescribeQuerySuggestionsBlockListOutput, error) {
 	if params == nil {
@@ -83,7 +83,7 @@ type DescribeQuerySuggestionsBlockListOutput struct {
 	// Shows the current S3 path to your block list text file in your S3 bucket. Each
 	// block word or phrase should be on a separate line in a text file. For
 	// information on the current quota limits for block lists, see Quotas for Amazon
-	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
+	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html) .
 	SourceS3Path *types.S3Path
 
 	// The current status of the block list. When the value is ACTIVE, the block list

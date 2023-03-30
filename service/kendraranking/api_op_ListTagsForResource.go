@@ -30,7 +30,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 // The request information for listing tags associated with a rescore execution
 // plan. A rescore execution plan is an Amazon Kendra Intelligent Ranking resource
-// used for provisioning the Rescore API.
+// used for provisioning the Rescore  API.
 type ListTagsForResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the rescore execution plan to get a list of

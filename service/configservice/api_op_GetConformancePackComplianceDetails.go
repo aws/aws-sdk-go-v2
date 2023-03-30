@@ -36,15 +36,15 @@ type GetConformancePackComplianceDetailsInput struct {
 	// This member is required.
 	ConformancePackName *string
 
-	// A ConformancePackEvaluationFilters object.
+	// A ConformancePackEvaluationFilters  object.
 	Filters *types.ConformancePackEvaluationFilters
 
 	// The maximum number of evaluation results returned on each page. If you do no
 	// specify a number, Config uses the default. The default is 100.
 	Limit int32
 
-	// The nextToken string returned in a previous request that you use to request the
-	// next page of results in a paginated response.
+	// The nextToken string returned in a previous request that you use to request
+	// the next page of results in a paginated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -57,11 +57,11 @@ type GetConformancePackComplianceDetailsOutput struct {
 	// This member is required.
 	ConformancePackName *string
 
-	// Returns a list of ConformancePackEvaluationResult objects.
+	// Returns a list of ConformancePackEvaluationResult  objects.
 	ConformancePackRuleEvaluationResults []types.ConformancePackEvaluationResult
 
-	// The nextToken string returned in a previous request that you use to request the
-	// next page of results in a paginated response.
+	// The nextToken string returned in a previous request that you use to request
+	// the next page of results in a paginated response.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -141,15 +141,15 @@ type GetConformancePackComplianceDetailsAPIClient interface {
 
 var _ GetConformancePackComplianceDetailsAPIClient = (*Client)(nil)
 
-// GetConformancePackComplianceDetailsPaginatorOptions is the paginator options for
-// GetConformancePackComplianceDetails
+// GetConformancePackComplianceDetailsPaginatorOptions is the paginator options
+// for GetConformancePackComplianceDetails
 type GetConformancePackComplianceDetailsPaginatorOptions struct {
 	// The maximum number of evaluation results returned on each page. If you do no
 	// specify a number, Config uses the default. The default is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

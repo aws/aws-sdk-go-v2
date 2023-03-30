@@ -57,8 +57,8 @@ type GetFunctionDefinitionVersionOutput struct {
 	// The ARN of the function definition version.
 	Arn *string
 
-	// The time, in milliseconds since the epoch, when the function definition version
-	// was created.
+	// The time, in milliseconds since the epoch, when the function definition
+	// version was created.
 	CreationTimestamp *string
 
 	// Information on the definition.

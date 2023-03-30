@@ -44,7 +44,7 @@ type GetBlueprintRunInput struct {
 
 type GetBlueprintRunOutput struct {
 
-	// Returns a BlueprintRun object.
+	// Returns a BlueprintRun  object.
 	BlueprintRun *types.BlueprintRun
 
 	// Metadata pertaining to the operation's result.

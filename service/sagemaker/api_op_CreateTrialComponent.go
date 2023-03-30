@@ -12,14 +12,14 @@ import (
 	"time"
 )
 
-// Creates a trial component, which is a stage of a machine learning trial. A trial
-// is composed of one or more trial components. A trial component can be used in
-// multiple trials. Trial components include pre-processing jobs, training jobs,
+// Creates a trial component, which is a stage of a machine learning trial. A
+// trial is composed of one or more trial components. A trial component can be used
+// in multiple trials. Trial components include pre-processing jobs, training jobs,
 // and batch transform jobs. When you use SageMaker Studio or the SageMaker Python
 // SDK, all experiments, trials, and trial components are automatically tracked,
 // logged, and indexed. When you use the Amazon Web Services SDK for Python (Boto),
 // you must use the logging APIs provided by the SDK. You can add tags to a trial
-// component and then use the Search API to search for the tags.
+// component and then use the Search  API to search for the tags.
 func (c *Client) CreateTrialComponent(ctx context.Context, params *CreateTrialComponentInput, optFns ...func(*Options)) (*CreateTrialComponentOutput, error) {
 	if params == nil {
 		params = &CreateTrialComponentInput{}
@@ -44,14 +44,14 @@ type CreateTrialComponentInput struct {
 	TrialComponentName *string
 
 	// The name of the component as displayed. The name doesn't need to be unique. If
-	// DisplayName isn't specified, TrialComponentName is displayed.
+	// DisplayName isn't specified, TrialComponentName  is displayed.
 	DisplayName *string
 
 	// When the component ended.
 	EndTime *time.Time
 
-	// The input artifacts for the component. Examples of input artifacts are datasets,
-	// algorithms, hyperparameters, source code, and instance types.
+	// The input artifacts for the component. Examples of input artifacts are
+	// datasets, algorithms, hyperparameters, source code, and instance types.
 	InputArtifacts map[string]types.TrialComponentArtifact
 
 	// Metadata properties of the tracking entity, trial, or trial component.
@@ -68,13 +68,13 @@ type CreateTrialComponentInput struct {
 	StartTime *time.Time
 
 	// The status of the component. States include:
-	// - InProgress
-	// - Completed
-	// - Failed
+	//     - InProgress
+	//     - Completed
+	//     - Failed
 	Status *types.TrialComponentStatus
 
-	// A list of tags to associate with the component. You can use Search API to search
-	// on the tags.
+	// A list of tags to associate with the component. You can use Search API to
+	// search on the tags.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

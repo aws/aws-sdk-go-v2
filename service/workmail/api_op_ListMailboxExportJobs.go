@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the mailbox export jobs started for the specified organization within the
-// last seven days.
+// Lists the mailbox export jobs started for the specified organization within
+// the last seven days.
 func (c *Client) ListMailboxExportJobs(ctx context.Context, params *ListMailboxExportJobsInput, optFns ...func(*Options)) (*ListMailboxExportJobsOutput, error) {
 	if params == nil {
 		params = &ListMailboxExportJobsInput{}
@@ -136,8 +136,8 @@ type ListMailboxExportJobsPaginatorOptions struct {
 	// The maximum number of results to return in a single call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

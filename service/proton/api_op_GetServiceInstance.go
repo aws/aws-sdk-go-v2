@@ -16,8 +16,8 @@ import (
 	"time"
 )
 
-// Get detailed data for a service instance. A service instance is an instantiation
-// of service template and it runs in a specific environment.
+// Get detailed data for a service instance. A service instance is an
+// instantiation of service template and it runs in a specific environment.
 func (c *Client) GetServiceInstance(ctx context.Context, params *GetServiceInstanceInput, optFns ...func(*Options)) (*GetServiceInstanceOutput, error) {
 	if params == nil {
 		params = &GetServiceInstanceInput{}
@@ -146,8 +146,8 @@ type ServiceInstanceDeployedWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ServiceInstanceDeployedWaiter will use default max delay of 4999
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ServiceInstanceDeployedWaiter will use default max delay of 4999
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Demotes an AppInstanceAdmin to an AppInstanceUser or AppInstanceBot. This action
-// does not delete the user.
+// Demotes an AppInstanceAdmin  to an AppInstanceUser  or AppInstanceBot. This
+// action does not delete the user.
 func (c *Client) DeleteAppInstanceAdmin(ctx context.Context, params *DeleteAppInstanceAdminInput, optFns ...func(*Options)) (*DeleteAppInstanceAdminOutput, error) {
 	if params == nil {
 		params = &DeleteAppInstanceAdminInput{}
@@ -29,12 +29,12 @@ func (c *Client) DeleteAppInstanceAdmin(ctx context.Context, params *DeleteAppIn
 
 type DeleteAppInstanceAdminInput struct {
 
-	// The ARN of the AppInstance's administrator.
+	// The ARN of the AppInstance 's administrator.
 	//
 	// This member is required.
 	AppInstanceAdminArn *string
 
-	// The ARN of the AppInstance.
+	// The ARN of the AppInstance .
 	//
 	// This member is required.
 	AppInstanceArn *string

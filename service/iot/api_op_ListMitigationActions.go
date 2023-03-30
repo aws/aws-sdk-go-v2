@@ -12,9 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of all mitigation actions that match the specified filter criteria.
-// Requires permission to access the ListMitigationActions
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Gets a list of all mitigation actions that match the specified filter
+// criteria. Requires permission to access the ListMitigationActions (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListMitigationActions(ctx context.Context, params *ListMitigationActionsInput, optFns ...func(*Options)) (*ListMitigationActionsOutput, error) {
 	if params == nil {
@@ -33,8 +32,8 @@ func (c *Client) ListMitigationActions(ctx context.Context, params *ListMitigati
 
 type ListMitigationActionsInput struct {
 
-	// Specify a value to limit the result to mitigation actions with a specific action
-	// type.
+	// Specify a value to limit the result to mitigation actions with a specific
+	// action type.
 	ActionType types.MitigationActionType
 
 	// The maximum number of results to return at one time. The default is 25.
@@ -134,8 +133,8 @@ type ListMitigationActionsPaginatorOptions struct {
 	// The maximum number of results to return at one time. The default is 25.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

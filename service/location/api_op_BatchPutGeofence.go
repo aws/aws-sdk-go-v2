@@ -47,8 +47,8 @@ type BatchPutGeofenceInput struct {
 
 type BatchPutGeofenceOutput struct {
 
-	// Contains additional error details for each geofence that failed to be stored in
-	// a geofence collection.
+	// Contains additional error details for each geofence that failed to be stored
+	// in a geofence collection.
 	//
 	// This member is required.
 	Errors []types.BatchPutGeofenceError

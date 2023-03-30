@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// You can change an entitlement's description, subscribers, and encryption. If you
-// change the subscribers, the service will remove the outputs that are are used by
-// the subscribers that are removed.
+// You can change an entitlement's description, subscribers, and encryption. If
+// you change the subscribers, the service will remove the outputs that are are
+// used by the subscribers that are removed.
 func (c *Client) UpdateFlowEntitlement(ctx context.Context, params *UpdateFlowEntitlementInput, optFns ...func(*Options)) (*UpdateFlowEntitlementOutput, error) {
 	if params == nil {
 		params = &UpdateFlowEntitlementInput{}
@@ -51,8 +51,8 @@ type UpdateFlowEntitlementInput struct {
 	// entitlement.
 	Encryption *types.UpdateEncryption
 
-	// An indication of whether you want to enable the entitlement to allow access, or
-	// disable it to stop streaming content to the subscriber’s flow temporarily. If
+	// An indication of whether you want to enable the entitlement to allow access,
+	// or disable it to stop streaming content to the subscriber’s flow temporarily. If
 	// you don’t specify the entitlementStatus field in your request, MediaConnect
 	// leaves the value unchanged.
 	EntitlementStatus types.EntitlementStatus

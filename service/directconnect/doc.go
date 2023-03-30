@@ -3,8 +3,8 @@
 // Package directconnect provides the API client, operations, and parameter types
 // for AWS Direct Connect.
 //
-// Direct Connect links your internal network to an Direct Connect location over a
-// standard Ethernet fiber-optic cable. One end of the cable is connected to your
+// Direct Connect links your internal network to an Direct Connect location over
+// a standard Ethernet fiber-optic cable. One end of the cable is connected to your
 // router, the other to an Direct Connect router. With this connection in place,
 // you can create virtual interfaces directly to the Amazon Web Services Cloud (for
 // example, to Amazon EC2 and Amazon S3) and to Amazon VPC, bypassing Internet

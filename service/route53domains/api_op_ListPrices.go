@@ -12,14 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the following prices for either all the TLDs supported by Route 53, or the
-// specified TLD:
-// - Registration
-// - Transfer
-// - Owner change
-// - Domain renewal
-// -
-// Domain restoration
+// Lists the following prices for either all the TLDs supported by Route 53, or
+// the specified TLD:
+//   - Registration
+//   - Transfer
+//   - Owner change
+//   - Domain renewal
+//   - Domain restoration
 func (c *Client) ListPrices(ctx context.Context, params *ListPricesInput, optFns ...func(*Options)) (*ListPricesOutput, error) {
 	if params == nil {
 		params = &ListPricesInput{}
@@ -37,21 +36,21 @@ func (c *Client) ListPrices(ctx context.Context, params *ListPricesInput, optFns
 
 type ListPricesInput struct {
 
-	// For an initial request for a list of prices, omit this element. If the number of
-	// prices that are not yet complete is greater than the value that you specified
-	// for MaxItems, you can use Marker to return additional prices. Get the value of
-	// NextPageMarker from the previous response, and submit another request that
-	// includes the value of NextPageMarker in the Marker element. Used only for all
-	// TLDs. If you specify a TLD, don't specify a Marker.
+	// For an initial request for a list of prices, omit this element. If the number
+	// of prices that are not yet complete is greater than the value that you specified
+	// for MaxItems , you can use Marker to return additional prices. Get the value
+	// of NextPageMarker from the previous response, and submit another request that
+	// includes the value of NextPageMarker  in the Marker element. Used only for all
+	// TLDs. If you specify a TLD, don't specify a Marker .
 	Marker *string
 
 	// Number of Prices to be returned. Used only for all TLDs. If you specify a TLD,
-	// don't specify a MaxItems.
+	// don't specify a MaxItems .
 	MaxItems *int32
 
 	// The TLD for which you want to receive the pricing information. For example.
-	// .net. If a Tld value is not provided, a list of prices for all TLDs supported by
-	// Route 53 is returned.
+	// .net . If a Tld value is not provided, a list of prices for all TLDs supported
+	// by Route 53 is returned.
 	Tld *string
 
 	noSmithyDocumentSerde
@@ -59,13 +58,14 @@ type ListPricesInput struct {
 
 type ListPricesOutput struct {
 
-	// If there are more prices than you specified for MaxItems in the request, submit
-	// another request and include the value of NextPageMarker in the value of Marker.
-	// Used only for all TLDs. If you specify a TLD, don't specify a NextPageMarker.
+	// If there are more prices than you specified for MaxItems in the request,
+	// submit another request and include the value of NextPageMarker  in the value of
+	// Marker . Used only for all TLDs. If you specify a TLD, don't specify a
+	// NextPageMarker .
 	NextPageMarker *string
 
-	// A complex type that includes all the pricing information. If you specify a TLD,
-	// this array contains only the pricing for that TLD.
+	// A complex type that includes all the pricing information. If you specify a
+	// TLD, this array contains only the pricing for that TLD.
 	Prices []types.DomainPrice
 
 	// Metadata pertaining to the operation's result.
@@ -144,11 +144,11 @@ var _ ListPricesAPIClient = (*Client)(nil)
 // ListPricesPaginatorOptions is the paginator options for ListPrices
 type ListPricesPaginatorOptions struct {
 	// Number of Prices to be returned. Used only for all TLDs. If you specify a TLD,
-	// don't specify a MaxItems.
+	// don't specify a MaxItems .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

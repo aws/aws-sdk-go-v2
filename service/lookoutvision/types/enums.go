@@ -70,9 +70,9 @@ const (
 	ModelPackagingJobStatusFailed    ModelPackagingJobStatus = "FAILED"
 )
 
-// Values returns all known values for ModelPackagingJobStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ModelPackagingJobStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelPackagingJobStatus) Values() []ModelPackagingJobStatus {
 	return []ModelPackagingJobStatus{
 		"CREATED",
@@ -97,9 +97,9 @@ const (
 	ModelStatusDeleting        ModelStatus = "DELETING"
 )
 
-// Values returns all known values for ModelStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ModelStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ModelStatus) Values() []ModelStatus {
 	return []ModelStatus{
 		"TRAINING",
@@ -125,9 +125,9 @@ const (
 	ResourceTypeModelPackageJob ResourceType = "MODEL_PACKAGE_JOB"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"PROJECT",
@@ -145,9 +145,9 @@ const (
 	TargetDeviceJetsonXavier TargetDevice = "jetson_xavier"
 )
 
-// Values returns all known values for TargetDevice. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TargetDevice. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TargetDevice) Values() []TargetDevice {
 	return []TargetDevice{
 		"jetson_xavier",

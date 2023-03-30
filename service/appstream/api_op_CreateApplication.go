@@ -45,8 +45,8 @@ type CreateApplicationInput struct {
 	// This member is required.
 	IconS3Location *types.S3Location
 
-	// The instance families the application supports. Valid values are GENERAL_PURPOSE
-	// and GRAPHICS_G4.
+	// The instance families the application supports. Valid values are
+	// GENERAL_PURPOSE and GRAPHICS_G4.
 	//
 	// This member is required.
 	InstanceFamilies []string
@@ -56,8 +56,8 @@ type CreateApplicationInput struct {
 	// This member is required.
 	LaunchPath *string
 
-	// The name of the application. This name is visible to users when display name is
-	// not specified.
+	// The name of the application. This name is visible to users when display name
+	// is not specified.
 	//
 	// This member is required.
 	Name *string

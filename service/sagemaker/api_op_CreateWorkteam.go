@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new work team for labeling your data. A work team is defined by one or
-// more Amazon Cognito user pools. You must first create the user pools before you
-// can create a work team. You cannot create more than 25 work teams in an account
-// and region.
+// Creates a new work team for labeling your data. A work team is defined by one
+// or more Amazon Cognito user pools. You must first create the user pools before
+// you can create a work team. You cannot create more than 25 work teams in an
+// account and region.
 func (c *Client) CreateWorkteam(ctx context.Context, params *CreateWorkteamInput, optFns ...func(*Options)) (*CreateWorkteamOutput, error) {
 	if params == nil {
 		params = &CreateWorkteamInput{}
@@ -45,14 +45,13 @@ type CreateWorkteamInput struct {
 	// input for both of these parameters in a single request. For workforces created
 	// using Amazon Cognito, private work teams correspond to Amazon Cognito user
 	// groups within the user pool used to create a workforce. All of the
-	// CognitoMemberDefinition objects that make up the member definition must have the
-	// same ClientId and UserPool values. To add a Amazon Cognito user group to an
-	// existing worker pool, see Adding groups to a User Pool. For more information
-	// about user pools, see Amazon Cognito User Pools
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html).
-	// For workforces created using your own OIDC IdP, specify the user groups that you
-	// want to include in your private work team in OidcMemberDefinition by listing
-	// those groups in Groups.
+	// CognitoMemberDefinitionobjects that make up the member definition must have
+	// the same ClientId  and UserPool values. To add a Amazon Cognito user group to
+	// an existing worker pool, see Adding groups to a User Pool. For more
+	// information about user pools, see Amazon Cognito User Pools (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html)
+	// . For workforces created using your own OIDC IdP, specify the user groups that
+	// you want to include in your private work team in OidcMemberDefinition by
+	// listing those groups in Groups .
 	//
 	// This member is required.
 	MemberDefinitions []types.MemberDefinition
@@ -65,10 +64,8 @@ type CreateWorkteamInput struct {
 	// Configures notification of workers regarding available or expiring work items.
 	NotificationConfiguration *types.NotificationConfiguration
 
-	// An array of key-value pairs. For more information, see Resource Tag
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html)
-	// and Using Cost Allocation Tags
-	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
+	// An array of key-value pairs. For more information, see Resource Tag (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html)
+	// and Using Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 	// in the Amazon Web Services Billing and Cost Management User Guide.
 	Tags []types.Tag
 

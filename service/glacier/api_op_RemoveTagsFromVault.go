@@ -12,10 +12,9 @@ import (
 )
 
 // This operation removes one or more tags from the set of tags attached to a
-// vault. For more information about tags, see Tagging Amazon S3 Glacier Resources
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html). This
-// operation is idempotent. The operation will be successful, even if there are no
-// tags attached to the vault.
+// vault. For more information about tags, see Tagging Amazon S3 Glacier Resources (https://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html)
+// . This operation is idempotent. The operation will be successful, even if there
+// are no tags attached to the vault.
 func (c *Client) RemoveTagsFromVault(ctx context.Context, params *RemoveTagsFromVaultInput, optFns ...func(*Options)) (*RemoveTagsFromVaultOutput, error) {
 	if params == nil {
 		params = &RemoveTagsFromVaultInput{}
@@ -31,12 +30,12 @@ func (c *Client) RemoveTagsFromVault(ctx context.Context, params *RemoveTagsFrom
 	return out, nil
 }
 
-// The input value for RemoveTagsFromVaultInput.
+// The input value for RemoveTagsFromVaultInput .
 type RemoveTagsFromVaultInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
-	// which case Amazon S3 Glacier uses the AWS account ID associated with the
+	// You can either specify an AWS account ID or optionally a single ' -' (hyphen),
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//

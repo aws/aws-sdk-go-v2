@@ -11,7 +11,7 @@ import (
 )
 
 // The TestRole operation tests the IAM role used to create the pipeline. The
-// TestRole action lets you determine whether the IAM role you are using has
+// TestRoleaction lets you determine whether the IAM role you are using has
 // sufficient permissions to let Elastic Transcoder perform tasks associated with
 // the transcoding process. The action attempts to assume the specified IAM role,
 // checks read access to the input and output buckets, and tries to send a test
@@ -33,7 +33,7 @@ func (c *Client) TestRole(ctx context.Context, params *TestRoleInput, optFns ...
 	return out, nil
 }
 
-// The TestRoleRequest structure.
+// The TestRoleRequest  structure.
 type TestRoleInput struct {
 
 	// The Amazon S3 bucket that contains media files to be transcoded. The action
@@ -48,8 +48,8 @@ type TestRoleInput struct {
 	// This member is required.
 	OutputBucket *string
 
-	// The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder
-	// to test.
+	// The IAM Amazon Resource Name (ARN) for the role that you want Elastic
+	// Transcoder to test.
 	//
 	// This member is required.
 	Role *string
@@ -63,15 +63,15 @@ type TestRoleInput struct {
 	noSmithyDocumentSerde
 }
 
-// The TestRoleResponse structure.
+// The TestRoleResponse  structure.
 type TestRoleOutput struct {
 
-	// If the Success element contains false, this value is an array of one or more
+	// If the Success  element contains false, this value is an array of one or more
 	// error messages that were generated during the test process.
 	Messages []string
 
-	// If the operation is successful, this value is true; otherwise, the value is
-	// false.
+	// If the operation is successful, this value is true ; otherwise, the value is
+	// false .
 	Success *string
 
 	// Metadata pertaining to the operation's result.

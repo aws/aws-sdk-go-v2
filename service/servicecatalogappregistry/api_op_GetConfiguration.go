@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a TagKey configuration from an account.
+// Retrieves a TagKey  configuration from an account.
 func (c *Client) GetConfiguration(ctx context.Context, params *GetConfigurationInput, optFns ...func(*Options)) (*GetConfigurationOutput, error) {
 	if params == nil {
 		params = &GetConfigurationInput{}
@@ -33,7 +33,7 @@ type GetConfigurationInput struct {
 
 type GetConfigurationOutput struct {
 
-	// Retrieves TagKey configuration from an account.
+	// Retrieves TagKey  configuration from an account.
 	Configuration *types.AppRegistryConfiguration
 
 	// Metadata pertaining to the operation's result.

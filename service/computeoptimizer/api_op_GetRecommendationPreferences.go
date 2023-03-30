@@ -13,11 +13,10 @@ import (
 )
 
 // Returns existing recommendation preferences, such as enhanced infrastructure
-// metrics. Use the scope parameter to specify which preferences to return. You can
-// specify to return preferences for an organization, a specific account ID, or a
-// specific EC2 instance or Auto Scaling group Amazon Resource Name (ARN). For more
-// information, see Activating enhanced infrastructure metrics
-// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
+// metrics. Use the scope parameter to specify which preferences to return. You
+// can specify to return preferences for an organization, a specific account ID, or
+// a specific EC2 instance or Auto Scaling group Amazon Resource Name (ARN). For
+// more information, see Activating enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
 // in the Compute Optimizer User Guide.
 func (c *Client) GetRecommendationPreferences(ctx context.Context, params *GetRecommendationPreferencesInput, optFns ...func(*Options)) (*GetRecommendationPreferencesOutput, error) {
 	if params == nil {
@@ -40,14 +39,14 @@ type GetRecommendationPreferencesInput struct {
 	// preferences. The Ec2Instance option encompasses standalone instances and
 	// instances that are part of Auto Scaling groups. The AutoScalingGroup option
 	// encompasses only instances that are part of an Auto Scaling group. The valid
-	// values for this parameter are Ec2Instance and AutoScalingGroup.
+	// values for this parameter are Ec2Instance  and AutoScalingGroup .
 	//
 	// This member is required.
 	ResourceType types.ResourceType
 
 	// The maximum number of recommendation preferences to return with a single
 	// request. To retrieve the remaining results, make another request with the
-	// returned nextToken value.
+	// returned nextToken  value.
 	MaxResults *int32
 
 	// The token to advance to the next page of recommendation preferences.
@@ -57,8 +56,7 @@ type GetRecommendationPreferencesInput struct {
 	// You can return recommendation preferences that are created at the organization
 	// level (for management accounts of an organization only), account level, and
 	// resource level. For more information, see Activating enhanced infrastructure
-	// metrics
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
+	// metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
 	// in the Compute Optimizer User Guide.
 	Scope *types.Scope
 
@@ -67,8 +65,8 @@ type GetRecommendationPreferencesInput struct {
 
 type GetRecommendationPreferencesOutput struct {
 
-	// The token to use to advance to the next page of recommendation preferences. This
-	// value is null when there are no more pages of recommendation preferences to
+	// The token to use to advance to the next page of recommendation preferences.
+	// This value is null when there are no more pages of recommendation preferences to
 	// return.
 	NextToken *string
 
@@ -157,11 +155,11 @@ var _ GetRecommendationPreferencesAPIClient = (*Client)(nil)
 type GetRecommendationPreferencesPaginatorOptions struct {
 	// The maximum number of recommendation preferences to return with a single
 	// request. To retrieve the remaining results, make another request with the
-	// returned nextToken value.
+	// returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

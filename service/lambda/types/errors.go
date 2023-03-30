@@ -38,8 +38,8 @@ func (e *CodeSigningConfigNotFoundException) ErrorFault() smithy.ErrorFault {
 }
 
 // Your Amazon Web Services account has exceeded its maximum total code size. For
-// more information, see Lambda quotas
-// (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html).
+// more information, see Lambda quotas (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
+// .
 type CodeStorageExceededException struct {
 	Message *string
 
@@ -270,8 +270,8 @@ func (e *EFSMountFailureException) ErrorCode() string {
 }
 func (e *EFSMountFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Lambda function made a network connection to the configured file system, but
-// the mount operation timed out.
+// The Lambda function made a network connection to the configured file system,
+// but the mount operation timed out.
 type EFSMountTimeoutException struct {
 	Message *string
 
@@ -301,8 +301,8 @@ func (e *EFSMountTimeoutException) ErrorFault() smithy.ErrorFault { return smith
 
 // Lambda couldn't create an elastic network interface in the VPC, specified as
 // part of Lambda function configuration, because the limit for network interfaces
-// has been reached. For more information, see Lambda quotas
-// (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html).
+// has been reached. For more information, see Lambda quotas (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
+// .
 type ENILimitReachedException struct {
 	Message *string
 
@@ -528,8 +528,8 @@ func (e *InvalidZipFileException) ErrorCode() string {
 }
 func (e *InvalidZipFileException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Lambda couldn't decrypt the environment variables because KMS access was denied.
-// Check the Lambda function's KMS permissions.
+// Lambda couldn't decrypt the environment variables because KMS access was
+// denied. Check the Lambda function's KMS permissions.
 type KMSAccessDeniedException struct {
 	Message *string
 
@@ -644,9 +644,9 @@ func (e *KMSNotFoundException) ErrorCode() string {
 }
 func (e *KMSNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The permissions policy for the resource is too large. For more information, see
-// Lambda quotas
-// (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html).
+// The permissions policy for the resource is too large. For more information,
+// see Lambda quotas (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
+// .
 type PolicyLengthExceededException struct {
 	Message *string
 
@@ -675,7 +675,7 @@ func (e *PolicyLengthExceededException) ErrorCode() string {
 func (e *PolicyLengthExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The RevisionId provided does not match the latest RevisionId for the Lambda
-// function or alias. Call the GetFunction or the GetAlias API operation to
+// function or alias. Call the GetFunction  or the GetAlias API operation to
 // retrieve the latest RevisionId for your resource.
 type PreconditionFailedException struct {
 	Message *string
@@ -734,9 +734,9 @@ func (e *ProvisionedConcurrencyConfigNotFoundException) ErrorFault() smithy.Erro
 	return smithy.FaultClient
 }
 
-// The request payload exceeded the Invoke request body JSON input quota. For more
-// information, see Lambda quotas
-// (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html).
+// The request payload exceeded the Invoke request body JSON input quota. For
+// more information, see Lambda quotas (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
+// .
 type RequestTooLargeException struct {
 	Message *string
 
@@ -792,9 +792,9 @@ func (e *ResourceConflictException) ErrorCode() string {
 }
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation conflicts with the resource's availability. For example, you tried
-// to update an event source mapping in the CREATING state, or you tried to delete
-// an event source mapping currently UPDATING.
+// The operation conflicts with the resource's availability. For example, you
+// tried to update an event source mapping in the CREATING state, or you tried to
+// delete an event source mapping currently UPDATING.
 type ResourceInUseException struct {
 	Message *string
 
@@ -850,8 +850,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The function is inactive and its VPC connection is no longer available. Wait for
-// the VPC connection to reestablish and try again.
+// The function is inactive and its VPC connection is no longer available. Wait
+// for the VPC connection to reestablish and try again.
 type ResourceNotReadyException struct {
 	Message *string
 
@@ -907,8 +907,7 @@ func (e *ServiceException) ErrorCode() string {
 }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The afterRestore()runtime hook
-// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-runtime-hooks.html)
+// The afterRestore() runtime hook (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-runtime-hooks.html)
 // encountered an error. For more information, check the Amazon CloudWatch logs.
 type SnapStartException struct {
 	Message *string
@@ -938,9 +937,8 @@ func (e *SnapStartException) ErrorCode() string {
 func (e *SnapStartException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Lambda is initializing your function. You can invoke the function when the
-// function state
-// (https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html) becomes
-// Active.
+// function state (https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html)
+// becomes Active .
 type SnapStartNotReadyException struct {
 	Message *string
 
@@ -1028,8 +1026,8 @@ func (e *SubnetIPAddressLimitReachedException) ErrorFault() smithy.ErrorFault {
 }
 
 // The request throughput limit was exceeded. For more information, see Lambda
-// quotas
-// (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#api-requests).
+// quotas (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#api-requests)
+// .
 type TooManyRequestsException struct {
 	Message *string
 
@@ -1059,7 +1057,7 @@ func (e *TooManyRequestsException) ErrorCode() string {
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The content type of the Invoke request body is not JSON.
+// The content type of the Invoke  request body is not JSON.
 type UnsupportedMediaTypeException struct {
 	Message *string
 

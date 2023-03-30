@@ -21,26 +21,23 @@ import (
 // client service by calling this operation with a GameSessions ID. You also have
 // the option of making backfill requests directly from your game server. In
 // response to a request, FlexMatch creates player sessions for the new players,
-// updates the GameSession resource, and sends updated matchmaking data to the game
-// server. You can request a backfill match at any point after a game session is
-// started. Each game session can have only one active backfill request at a time;
-// a subsequent request automatically replaces the earlier request. When using
-// FlexMatch as a standalone component, request a backfill match by calling this
-// operation without a game session identifier. As with newly formed matches,
+// updates the GameSession resource, and sends updated matchmaking data to the
+// game server. You can request a backfill match at any point after a game session
+// is started. Each game session can have only one active backfill request at a
+// time; a subsequent request automatically replaces the earlier request. When
+// using FlexMatch as a standalone component, request a backfill match by calling
+// this operation without a game session identifier. As with newly formed matches,
 // matchmaking results are returned in a matchmaking event so that your game can
 // update the game session that is being backfilled. To request a backfill match,
 // specify a unique ticket ID, the original matchmaking configuration, and
 // matchmaking data for all current players in the game session being backfilled.
-// Optionally, specify the GameSession ARN. If successful, a match backfill ticket
-// is created and returned with status set to QUEUED. Track the status of backfill
-// tickets using the same method for tracking tickets for new matches. Only game
-// sessions created by FlexMatch are supported for match backfill. Learn more
-// Backfill existing games with FlexMatch
-// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-backfill.html)
-// Matchmaking events
-// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html)
-// (reference)  How GameLift FlexMatch works
-// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/gamelift-match.html)
+// Optionally, specify the GameSession ARN. If successful, a match backfill
+// ticket is created and returned with status set to QUEUED. Track the status of
+// backfill tickets using the same method for tracking tickets for new matches.
+// Only game sessions created by FlexMatch are supported for match backfill. Learn
+// more Backfill existing games with FlexMatch (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-backfill.html)
+// Matchmaking events (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html)
+// (reference) How GameLift FlexMatch works (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/gamelift-match.html)
 func (c *Client) StartMatchBackfill(ctx context.Context, params *StartMatchBackfillInput, optFns ...func(*Options)) (*StartMatchBackfillOutput, error) {
 	if params == nil {
 		params = &StartMatchBackfillInput{}
@@ -60,7 +57,7 @@ type StartMatchBackfillInput struct {
 
 	// Name of the matchmaker to use for this request. You can use either the
 	// configuration name or ARN value. The ARN of the matchmaker that was used with
-	// the original game session is listed in the GameSession object, MatchmakerData
+	// the original game session is listed in the GameSession  object, MatchmakerData
 	// property.
 	//
 	// This member is required.
@@ -68,19 +65,10 @@ type StartMatchBackfillInput struct {
 
 	// Match information on all players that are currently assigned to the game
 	// session. This information is used by the matchmaker to find new players and add
-	// them to the existing game. You can include up to 199 Players in a
+	// them to the existing game. You can include up to 199 Players  in a
 	// StartMatchBackfill request.
-	// - PlayerID, PlayerAttributes, Team -- This
-	// information is maintained in the GameSession object, MatchmakerData property,
-	// for all players who are currently assigned to the game session. The matchmaker
-	// data is in JSON syntax, formatted as a string. For more details, see  Match Data
-	// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data).
-	// The backfill request must specify the team membership for every player. Do not
-	// specify team if you are not using backfill.
-	// - LatencyInMs -- If the matchmaker
-	// uses player latency, include a latency value, in milliseconds, for the Region
-	// that the game session is currently in. Do not include latency values for any
-	// other Region.
+	//     - PlayerID, PlayerAttributes, Team -- This information is maintained in the GameSession object, MatchmakerData property, for all players who are currently assigned to the game session. The matchmaker data is in JSON syntax, formatted as a string. For more details, see Match Data (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data) . The backfill request must specify the team membership for every player. Do not specify team if you are not using backfill.
+	//     - LatencyInMs -- If the matchmaker uses player latency, include a latency value, in milliseconds, for the Region that the game session is currently in. Do not include latency values for any other Region.
 	//
 	// This member is required.
 	Players []types.Player
@@ -89,9 +77,9 @@ type StartMatchBackfillInput struct {
 	// FlexMatch as a standalone matchmaking solution, this parameter is not needed.
 	GameSessionArn *string
 
-	// A unique identifier for a matchmaking ticket. If no ticket ID is specified here,
-	// Amazon GameLift will generate one in the form of a UUID. Use this identifier to
-	// track the match backfill ticket status and retrieve match results.
+	// A unique identifier for a matchmaking ticket. If no ticket ID is specified
+	// here, Amazon GameLift will generate one in the form of a UUID. Use this
+	// identifier to track the match backfill ticket status and retrieve match results.
 	TicketId *string
 
 	noSmithyDocumentSerde

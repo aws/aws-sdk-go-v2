@@ -13,7 +13,7 @@ import (
 )
 
 // Returns information about an Amazon Lex bot alias. For more information about
-// aliases, see versioning-aliases. This operation requires permissions for the
+// aliases, see versioning-aliases . This operation requires permissions for the
 // lex:GetBotAlias action.
 func (c *Client) GetBotAlias(ctx context.Context, params *GetBotAliasInput, optFns ...func(*Options)) (*GetBotAliasOutput, error) {
 	if params == nil {
@@ -56,7 +56,8 @@ type GetBotAliasOutput struct {
 	// Checksum of the bot alias.
 	Checksum *string
 
-	// The settings that determine how Amazon Lex uses conversation logs for the alias.
+	// The settings that determine how Amazon Lex uses conversation logs for the
+	// alias.
 	ConversationLogs *types.ConversationLogsResponse
 
 	// The date that the bot alias was created.

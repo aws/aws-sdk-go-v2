@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds an existing external connection to a repository. One external connection is
-// allowed per repository. A repository can have one or more upstream repositories,
-// or an external connection.
+// Adds an existing external connection to a repository. One external connection
+// is allowed per repository. A repository can have one or more upstream
+// repositories, or an external connection.
 func (c *Client) AssociateExternalConnection(ctx context.Context, params *AssociateExternalConnectionInput, optFns ...func(*Options)) (*AssociateExternalConnectionOutput, error) {
 	if params == nil {
 		params = &AssociateExternalConnectionInput{}
@@ -38,21 +38,14 @@ type AssociateExternalConnectionInput struct {
 
 	// The name of the external connection to add to the repository. The following
 	// values are supported:
-	// - public:npmjs - for the npm public repository.
-	// -
-	// public:nuget-org - for the NuGet Gallery.
-	// - public:pypi - for the Python Package
-	// Index.
-	// - public:maven-central - for Maven Central.
-	// - public:maven-googleandroid
-	// - for the Google Android repository.
-	// - public:maven-gradleplugins - for the
-	// Gradle plugins repository.
-	// - public:maven-commonsware - for the CommonsWare
-	// Android repository.
-	//
-	// *
-	// public:maven-clojars - for the Clojars repository.
+	//     - public:npmjs - for the npm public repository.
+	//     - public:nuget-org - for the NuGet Gallery.
+	//     - public:pypi - for the Python Package Index.
+	//     - public:maven-central - for Maven Central.
+	//     - public:maven-googleandroid - for the Google Android repository.
+	//     - public:maven-gradleplugins - for the Gradle plugins repository.
+	//     - public:maven-commonsware - for the CommonsWare Android repository.
+	//     - public:maven-clojars - for the Clojars repository.
 	//
 	// This member is required.
 	ExternalConnection *string

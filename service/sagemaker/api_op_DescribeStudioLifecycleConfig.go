@@ -43,8 +43,8 @@ type DescribeStudioLifecycleConfigOutput struct {
 	// The creation time of the Studio Lifecycle Configuration.
 	CreationTime *time.Time
 
-	// This value is equivalent to CreationTime because Studio Lifecycle Configurations
-	// are immutable.
+	// This value is equivalent to CreationTime because Studio Lifecycle
+	// Configurations are immutable.
 	LastModifiedTime *time.Time
 
 	// The App type that the Lifecycle Configuration is attached to.

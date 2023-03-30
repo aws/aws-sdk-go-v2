@@ -27,8 +27,8 @@ func (c *Client) GetDataView(ctx context.Context, params *GetDataViewInput, optF
 	return out, nil
 }
 
-// Request for retrieving a data view detail. Grouped / accessible within a dataset
-// by its dataset id.
+// Request for retrieving a data view detail. Grouped / accessible within a
+// dataset by its dataset id.
 type GetDataViewInput struct {
 
 	// The unique identifier for the Dataview.
@@ -88,19 +88,14 @@ type GetDataViewOutput struct {
 	SortColumns []string
 
 	// The status of a Dataview creation.
-	// - RUNNING – Dataview creation is running.
-	// -
-	// STARTING – Dataview creation is starting.
-	// - FAILED – Dataview creation has
-	// failed.
-	// - CANCELLED – Dataview creation has been cancelled.
-	// - TIMEOUT – Dataview
-	// creation has timed out.
-	// - SUCCESS – Dataview creation has succeeded.
-	// - PENDING –
-	// Dataview creation is pending.
-	// - FAILED_CLEANUP_FAILED – Dataview creation failed
-	// and resource cleanup failed.
+	//     - RUNNING – Dataview creation is running.
+	//     - STARTING – Dataview creation is starting.
+	//     - FAILED – Dataview creation has failed.
+	//     - CANCELLED – Dataview creation has been cancelled.
+	//     - TIMEOUT – Dataview creation has timed out.
+	//     - SUCCESS – Dataview creation has succeeded.
+	//     - PENDING – Dataview creation is pending.
+	//     - FAILED_CLEANUP_FAILED – Dataview creation failed and resource cleanup failed.
 	Status types.DataViewStatus
 
 	// Metadata pertaining to the operation's result.

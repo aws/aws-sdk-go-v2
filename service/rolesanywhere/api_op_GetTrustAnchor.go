@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a trust anchor. Required permissions: rolesanywhere:GetTrustAnchor.
+// Gets a trust anchor. Required permissions: rolesanywhere:GetTrustAnchor .
 func (c *Client) GetTrustAnchor(ctx context.Context, params *GetTrustAnchorInput, optFns ...func(*Options)) (*GetTrustAnchorOutput, error) {
 	if params == nil {
 		params = &GetTrustAnchorInput{}

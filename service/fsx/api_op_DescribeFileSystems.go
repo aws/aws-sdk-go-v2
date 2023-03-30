@@ -18,20 +18,16 @@ import (
 // Services Region of the endpoint that you're calling. When retrieving all file
 // system descriptions, you can optionally specify the MaxResults parameter to
 // limit the number of descriptions in a response. If more file system descriptions
-// remain, Amazon FSx returns a NextToken value in the response. In this case, send
-// a later request with the NextToken request parameter set to the value of
-// NextToken from the last response. This operation is used in an iterative process
-// to retrieve a list of your file system descriptions. DescribeFileSystems is
-// called first without a NextTokenvalue. Then the operation continues to be called
-// with the NextToken parameter set to the value of the last NextToken value until
-// a response has no NextToken. When using this operation, keep the following in
-// mind:
-// - The implementation might return fewer than MaxResults file system
-// descriptions while still including a NextToken value.
-// - The order of file
-// systems returned in the response of one DescribeFileSystems call and the order
-// of file systems returned across the responses of a multicall iteration is
-// unspecified.
+// remain, Amazon FSx returns a NextToken value in the response. In this case,
+// send a later request with the NextToken  request parameter set to the value of
+// NextTokenfrom the last response. This operation is used in an iterative
+// process to retrieve a list of your file system descriptions.
+// DescribeFileSystems is called first without a NextTokenvalue. Then the
+// operation continues to be called with the NextToken parameter set to the value
+// of the last NextToken  value until a response has no NextToken. When using
+// this operation, keep the following in mind:
+//   - The implementation might return fewer than MaxResults file system descriptions while still including a NextToken value.
+//   - The order of file systems returned in the response of one DescribeFileSystems call and the order of file systems returned across the responses of a multicall iteration is unspecified.
 func (c *Client) DescribeFileSystems(ctx context.Context, params *DescribeFileSystemsInput, optFns ...func(*Options)) (*DescribeFileSystemsOutput, error) {
 	if params == nil {
 		params = &DescribeFileSystemsInput{}
@@ -47,7 +43,7 @@ func (c *Client) DescribeFileSystems(ctx context.Context, params *DescribeFileSy
 	return out, nil
 }
 
-// The request object for DescribeFileSystems operation.
+// The request object for DescribeFileSystems  operation.
 type DescribeFileSystemsInput struct {
 
 	// IDs of the file systems whose descriptions you want to retrieve (String).
@@ -55,8 +51,8 @@ type DescribeFileSystemsInput struct {
 
 	// Maximum number of file systems to return in the response (integer). This
 	// parameter value must be greater than 0. The number of items that Amazon FSx
-	// returns is the minimum of the MaxResults parameter specified in the request and
-	// the service's internal maximum number of items per page.
+	// returns is the minimum of the MaxResults parameter specified in the request
+	// and the service's internal maximum number of items per page.
 	MaxResults *int32
 
 	// Opaque pagination token returned from a previous DescribeFileSystems operation
@@ -67,14 +63,14 @@ type DescribeFileSystemsInput struct {
 	noSmithyDocumentSerde
 }
 
-// The response object for DescribeFileSystems operation.
+// The response object for DescribeFileSystems  operation.
 type DescribeFileSystemsOutput struct {
 
 	// An array of file system descriptions.
 	FileSystems []types.FileSystem
 
 	// Present if there are more file systems than returned in the response (String).
-	// You can use the NextToken value in the later request to fetch the descriptions.
+	// You can use the NextToken  value in the later request to fetch the descriptions.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -143,8 +139,8 @@ func (c *Client) addOperationDescribeFileSystemsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeFileSystemsAPIClient is a client that implements the DescribeFileSystems
-// operation.
+// DescribeFileSystemsAPIClient is a client that implements the
+// DescribeFileSystems operation.
 type DescribeFileSystemsAPIClient interface {
 	DescribeFileSystems(context.Context, *DescribeFileSystemsInput, ...func(*Options)) (*DescribeFileSystemsOutput, error)
 }
@@ -156,12 +152,12 @@ var _ DescribeFileSystemsAPIClient = (*Client)(nil)
 type DescribeFileSystemsPaginatorOptions struct {
 	// Maximum number of file systems to return in the response (integer). This
 	// parameter value must be greater than 0. The number of items that Amazon FSx
-	// returns is the minimum of the MaxResults parameter specified in the request and
-	// the service's internal maximum number of items per page.
+	// returns is the minimum of the MaxResults parameter specified in the request
+	// and the service's internal maximum number of items per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -46,16 +46,16 @@ type ListMonitoringAlertHistoryInput struct {
 	// The name of a monitoring schedule.
 	MonitoringScheduleName *string
 
-	// If the result of the previous ListMonitoringAlertHistory request was truncated,
-	// the response includes a NextToken. To retrieve the next set of alerts in the
-	// history, use the token in the next request.
+	// If the result of the previous ListMonitoringAlertHistory request was
+	// truncated, the response includes a NextToken. To retrieve the next set of
+	// alerts in the history, use the token in the next request.
 	NextToken *string
 
-	// The field used to sort results. The default is CreationTime.
+	// The field used to sort results. The default is CreationTime .
 	SortBy types.MonitoringAlertHistorySortKey
 
-	// The sort order, whether Ascending or Descending, of the alert history. The
-	// default is Descending.
+	// The sort order, whether Ascending  or Descending, of the alert history. The
+	// default is Descending .
 	SortOrder types.SortOrder
 
 	// A filter that retrieves only alerts with a specific status.
@@ -69,8 +69,8 @@ type ListMonitoringAlertHistoryOutput struct {
 	// An alert history for a model monitoring schedule.
 	MonitoringAlertHistory []types.MonitoringAlertHistorySummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of alerts, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of alerts, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -153,8 +153,8 @@ type ListMonitoringAlertHistoryPaginatorOptions struct {
 	// The maximum number of results to display. The default is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

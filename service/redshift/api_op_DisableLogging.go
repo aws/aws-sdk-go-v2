@@ -55,14 +55,14 @@ type DisableLoggingOutput struct {
 	// The last time that logs were delivered.
 	LastSuccessfulDeliveryTime *time.Time
 
-	// The log destination type. An enum with possible values of s3 and cloudwatch.
+	// The log destination type. An enum with possible values of s3  and cloudwatch .
 	LogDestinationType types.LogDestinationType
 
-	// The collection of exported log types. Possible values are connectionlog,
-	// useractivitylog, and userlog.
+	// The collection of exported log types. Possible values are connectionlog ,
+	// useractivitylog , and userlog .
 	LogExports []string
 
-	// true if logging is on, false if logging is off.
+	// true  if logging is on, false  if logging is off.
 	LoggingEnabled bool
 
 	// The prefix applied to the log file names.

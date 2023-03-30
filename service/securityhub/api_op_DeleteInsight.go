@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the insight specified by the InsightArn.
+// Deletes the insight specified by the InsightArn .
 func (c *Client) DeleteInsight(ctx context.Context, params *DeleteInsightInput, optFns ...func(*Options)) (*DeleteInsightOutput, error) {
 	if params == nil {
 		params = &DeleteInsightInput{}

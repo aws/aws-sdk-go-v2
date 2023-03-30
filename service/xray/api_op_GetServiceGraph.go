@@ -13,12 +13,12 @@ import (
 	"time"
 )
 
-// Retrieves a document that describes services that process incoming requests, and
-// downstream services that they call as a result. Root services process incoming
-// requests and make calls to downstream services. Root services are applications
-// that use the Amazon Web Services X-Ray SDK
-// (https://docs.aws.amazon.com/xray/index.html). Downstream services can be other
-// applications, Amazon Web Services resources, HTTP web APIs, or SQL databases.
+// Retrieves a document that describes services that process incoming requests,
+// and downstream services that they call as a result. Root services process
+// incoming requests and make calls to downstream services. Root services are
+// applications that use the Amazon Web Services X-Ray SDK (https://docs.aws.amazon.com/xray/index.html)
+// . Downstream services can be other applications, Amazon Web Services resources,
+// HTTP web APIs, or SQL databases.
 func (c *Client) GetServiceGraph(ctx context.Context, params *GetServiceGraphInput, optFns ...func(*Options)) (*GetServiceGraphOutput, error) {
 	if params == nil {
 		params = &GetServiceGraphInput{}
@@ -46,8 +46,8 @@ type GetServiceGraphInput struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// The Amazon Resource Name (ARN) of a group based on which you want to generate a
-	// graph.
+	// The Amazon Resource Name (ARN) of a group based on which you want to generate
+	// a graph.
 	GroupARN *string
 
 	// The name of a group based on which you want to generate a graph.
@@ -61,8 +61,8 @@ type GetServiceGraphInput struct {
 
 type GetServiceGraphOutput struct {
 
-	// A flag indicating whether the group's filter expression has been consistent, or
-	// if the returned service graph may show traces from an older version of the
+	// A flag indicating whether the group's filter expression has been consistent,
+	// or if the returned service graph may show traces from an older version of the
 	// group's filter expression.
 	ContainsOldGroupVersions bool
 
@@ -158,8 +158,8 @@ var _ GetServiceGraphAPIClient = (*Client)(nil)
 
 // GetServiceGraphPaginatorOptions is the paginator options for GetServiceGraph
 type GetServiceGraphPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -15,7 +15,7 @@ import (
 // High-level information about a rule group, returned by operations like create
 // and describe. You can use the information provided in the metadata to retrieve
 // and manage a rule group. You can retrieve all objects for a rule group by
-// calling DescribeRuleGroup.
+// calling DescribeRuleGroup .
 func (c *Client) DescribeRuleGroupMetadata(ctx context.Context, params *DescribeRuleGroupMetadataInput, optFns ...func(*Options)) (*DescribeRuleGroupMetadataOutput, error) {
 	if params == nil {
 		params = &DescribeRuleGroupMetadataInput{}
@@ -43,10 +43,10 @@ type DescribeRuleGroupMetadataInput struct {
 	// specify both.
 	RuleGroupName *string
 
-	// Indicates whether the rule group is stateless or stateful. If the rule group is
-	// stateless, it contains stateless rules. If it is stateful, it contains stateful
-	// rules. This setting is required for requests that do not include the
-	// RuleGroupARN.
+	// Indicates whether the rule group is stateless or stateful. If the rule group
+	// is stateless, it contains stateless rules. If it is stateful, it contains
+	// stateful rules. This setting is required for requests that do not include the
+	// RuleGroupARN .
 	Type types.RuleGroupType
 
 	noSmithyDocumentSerde
@@ -73,7 +73,7 @@ type DescribeRuleGroupMetadataOutput struct {
 	// this capacity. When you reference a rule group from a firewall policy, Network
 	// Firewall reserves this capacity for the rule group. You can retrieve the
 	// capacity that would be required for a rule group before you create the rule
-	// group by calling CreateRuleGroup with DryRun set to TRUE.
+	// group by calling CreateRuleGroup  with DryRun  set to TRUE .
 	Capacity *int32
 
 	// Returns the metadata objects for the specified rule group.
@@ -86,10 +86,10 @@ type DescribeRuleGroupMetadataOutput struct {
 	// can only use these for stateful rule groups.
 	StatefulRuleOptions *types.StatefulRuleOptions
 
-	// Indicates whether the rule group is stateless or stateful. If the rule group is
-	// stateless, it contains stateless rules. If it is stateful, it contains stateful
-	// rules. This setting is required for requests that do not include the
-	// RuleGroupARN.
+	// Indicates whether the rule group is stateless or stateful. If the rule group
+	// is stateless, it contains stateless rules. If it is stateful, it contains
+	// stateful rules. This setting is required for requests that do not include the
+	// RuleGroupARN .
 	Type types.RuleGroupType
 
 	// Metadata pertaining to the operation's result.

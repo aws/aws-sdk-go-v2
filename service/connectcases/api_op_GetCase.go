@@ -64,12 +64,12 @@ type GetCaseOutput struct {
 	// This member is required.
 	TemplateId *string
 
-	// The token for the next set of results. This is null if there are no more results
-	// to return.
+	// The token for the next set of results. This is null if there are no more
+	// results to return.
 	NextToken *string
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
-	// organize, track, or control access for this resource.
+	// A map of of key-value pairs that represent tags on a resource. Tags are used
+	// to organize, track, or control access for this resource.
 	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
@@ -150,8 +150,8 @@ var _ GetCaseAPIClient = (*Client)(nil)
 
 // GetCasePaginatorOptions is the paginator options for GetCase
 type GetCasePaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

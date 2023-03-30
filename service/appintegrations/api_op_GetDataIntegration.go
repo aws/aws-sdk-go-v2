@@ -14,8 +14,7 @@ import (
 // Returns information about the DataIntegration. You cannot create a
 // DataIntegration association for a DataIntegration that has been previously
 // associated. Use a different DataIntegration, or recreate the DataIntegration
-// using the CreateDataIntegration
-// (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html)
+// using the CreateDataIntegration (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html)
 // API.
 func (c *Client) GetDataIntegration(ctx context.Context, params *GetDataIntegrationInput, optFns ...func(*Options)) (*GetDataIntegrationOutput, error) {
 	if params == nil {

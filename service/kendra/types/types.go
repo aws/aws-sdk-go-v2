@@ -8,8 +8,8 @@ import (
 	"time"
 )
 
-// Summary information on an access control configuration that you created for your
-// documents in an index.
+// Summary information on an access control configuration that you created for
+// your documents in an index.
 type AccessControlConfigurationSummary struct {
 
 	// The identifier of the access control configuration.
@@ -20,9 +20,9 @@ type AccessControlConfigurationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Access Control List files for the documents in a data source. For the format of
-// the file, see Access control for S3 data sources
-// (https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html).
+// Access Control List files for the documents in a data source. For the format
+// of the file, see Access control for S3 data sources (https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html)
+// .
 type AccessControlListConfiguration struct {
 
 	// Path to the Amazon S3 bucket that contains the ACL files.
@@ -35,9 +35,9 @@ type AccessControlListConfiguration struct {
 // query response by groups.
 type AclConfiguration struct {
 
-	// A list of groups, separated by semi-colons, that filters a query response based
-	// on user context. The document is only returned to users that are in one of the
-	// groups specified in the UserContext field of the Query API.
+	// A list of groups, separated by semi-colons, that filters a query response
+	// based on user context. The document is only returned to users that are in one of
+	// the groups specified in the UserContext  field of the Query  API.
 	//
 	// This member is required.
 	AllowedGroupsColumnName *string
@@ -58,7 +58,7 @@ type AdditionalResultAttribute struct {
 	// This member is required.
 	Value *AdditionalResultAttributeValue
 
-	// The data type of the Value property.
+	// The data type of the Value  property.
 	//
 	// This member is required.
 	ValueType AdditionalResultAttributeValueType
@@ -79,15 +79,14 @@ type AdditionalResultAttributeValue struct {
 // Provides the configuration information to connect to Alfresco as your data
 // source. Alfresco data source connector is currently in preview mode. Basic
 // authentication is currently supported. If you would like to use Alfresco
-// connector in production, contact Support (http://aws.amazon.com/contact-us/).
+// connector in production, contact Support (http://aws.amazon.com/contact-us/) .
 type AlfrescoConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
 	// key-value pairs required to connect to your Alfresco data source. The secret
 	// must contain a JSON structure with the following keys:
-	// - username—The user name
-	// of the Alfresco account.
-	// - password—The password of the Alfresco account.
+	//     - username—The user name of the Alfresco account.
+	//     - password—The password of the Alfresco account.
 	//
 	// This member is required.
 	SecretArn *string
@@ -106,8 +105,8 @@ type AlfrescoConfiguration struct {
 	// connect to Alfresco if you require a secure SSL connection. You can simply
 	// generate a self-signed X509 certificate on any computer using OpenSSL. For an
 	// example of using OpenSSL to create an X509 certificate, see Create and sign an
-	// X509 certificate
-	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html).
+	// X509 certificate (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html)
+	// .
 	//
 	// This member is required.
 	SslCertificateS3Path *S3Path
@@ -115,130 +114,128 @@ type AlfrescoConfiguration struct {
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of Alfresco blogs to Amazon Kendra index field names. To create custom
 	// fields, use the UpdateIndex API before you map to Alfresco fields. For more
-	// information, see  Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Alfresco
-	// data source field names must exist in your Alfresco custom metadata.
+	// information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Alfresco data source field names must exist in your Alfresco custom
+	// metadata.
 	BlogFieldMappings []DataSourceToIndexFieldMapping
 
-	// TRUE to index comments of blogs and other content.
+	// TRUE  to index comments of blogs and other content.
 	CrawlComments bool
 
-	// TRUE to index shared files.
+	// TRUE  to index shared files.
 	CrawlSystemFolders bool
 
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of Alfresco document libraries to Amazon Kendra index field names. To
-	// create custom fields, use the UpdateIndex API before you map to Alfresco fields.
-	// For more information, see  Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Alfresco
-	// data source field names must exist in your Alfresco custom metadata.
+	// create custom fields, use the UpdateIndex API before you map to Alfresco
+	// fields. For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Alfresco data source field names must exist in your Alfresco custom
+	// metadata.
 	DocumentLibraryFieldMappings []DataSourceToIndexFieldMapping
 
 	// Specify whether to index document libraries, wikis, or blogs. You can specify
 	// one or more of these options.
 	EntityFilter []AlfrescoEntity
 
-	// A list of regular expression patterns to exclude certain files in your Alfresco
-	// data source. Files that match the patterns are excluded from the index. Files
-	// that don't match the patterns are included in the index. If a file matches both
-	// an inclusion pattern and an exclusion pattern, the exclusion pattern takes
+	// A list of regular expression patterns to exclude certain files in your
+	// Alfresco data source. Files that match the patterns are excluded from the index.
+	// Files that don't match the patterns are included in the index. If a file matches
+	// both an inclusion pattern and an exclusion pattern, the exclusion pattern takes
 	// precedence and the file isn't included in the index.
 	ExclusionPatterns []string
 
-	// A list of regular expression patterns to include certain files in your Alfresco
-	// data source. Files that match the patterns are included in the index. Files that
-	// don't match the patterns are excluded from the index. If a file matches both an
-	// inclusion pattern and an exclusion pattern, the exclusion pattern takes
-	// precedence and the file isn't included in the index.
+	// A list of regular expression patterns to include certain files in your
+	// Alfresco data source. Files that match the patterns are included in the index.
+	// Files that don't match the patterns are excluded from the index. If a file
+	// matches both an inclusion pattern and an exclusion pattern, the exclusion
+	// pattern takes precedence and the file isn't included in the index.
 	InclusionPatterns []string
 
-	// Configuration information for an Amazon Virtual Private Cloud to connect to your
-	// Alfresco. For more information, see Configuring a VPC
-	// (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
+	// Configuration information for an Amazon Virtual Private Cloud to connect to
+	// your Alfresco. For more information, see Configuring a VPC (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html)
+	// .
 	VpcConfiguration *DataSourceVpcConfiguration
 
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of Alfresco wikis to Amazon Kendra index field names. To create custom
 	// fields, use the UpdateIndex API before you map to Alfresco fields. For more
-	// information, see  Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Alfresco
-	// data source field names must exist in your Alfresco custom metadata.
+	// information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Alfresco data source field names must exist in your Alfresco custom
+	// metadata.
 	WikiFieldMappings []DataSourceToIndexFieldMapping
 
 	noSmithyDocumentSerde
 }
 
 // Provides filtering the query results based on document attributes or metadata
-// fields. When you use the AndAllFilters or OrAllFilters, filters you can use 2
+// fields. When you use the AndAllFilters  or OrAllFilters, filters you can use 2
 // layers under the first attribute filter. For example, you can use:
-//
 // If you use
-// more than 2 layers, you receive a ValidationException exception with the message
-// "AttributeFilter cannot have a depth of more than 2." If you use more than 10
-// attribute filters in a given list for AndAllFilters or OrAllFilters, you receive
-// a ValidationException with the message "AttributeFilter cannot have a length of
-// more than 10".
+// more than 2 layers, you receive a ValidationException exception with the
+// message " AttributeFilter cannot have a depth of more than 2." If you use more
+// than 10 attribute filters in a given list for AndAllFilters  or OrAllFilters,
+// you receive a ValidationException  with the message " AttributeFilter cannot
+// have a length of more than 10".
 type AttributeFilter struct {
 
-	// Performs a logical AND operation on all supplied filters.
+	// Performs a logical AND  operation on all supplied filters.
 	AndAllFilters []AttributeFilter
 
 	// Returns true when a document contains all of the specified document attributes
-	// or metadata fields. This filter is only applicable to StringListValue metadata.
+	// or metadata fields. This filter is only applicable to StringListValue  metadata.
 	ContainsAll *DocumentAttribute
 
 	// Returns true when a document contains any of the specified document attributes
-	// or metadata fields. This filter is only applicable to StringListValue metadata.
+	// or metadata fields. This filter is only applicable to StringListValue  metadata.
 	ContainsAny *DocumentAttribute
 
 	// Performs an equals operation on two document attributes or metadata fields.
 	EqualsTo *DocumentAttribute
 
-	// Performs a greater than operation on two document attributes or metadata fields.
-	// Use with a document attribute of type Date or Long.
+	// Performs a greater than operation on two document attributes or metadata
+	// fields. Use with a document attribute of type Date  or Long .
 	GreaterThan *DocumentAttribute
 
 	// Performs a greater or equals than operation on two document attributes or
-	// metadata fields. Use with a document attribute of type Date or Long.
+	// metadata fields. Use with a document attribute of type Date  or Long .
 	GreaterThanOrEquals *DocumentAttribute
 
 	// Performs a less than operation on two document attributes or metadata fields.
-	// Use with a document attribute of type Date or Long.
+	// Use with a document attribute of type Date  or Long .
 	LessThan *DocumentAttribute
 
-	// Performs a less than or equals operation on two document attributes or metadata
-	// fields. Use with a document attribute of type Date or Long.
+	// Performs a less than or equals operation on two document attributes or
+	// metadata fields. Use with a document attribute of type Date  or Long .
 	LessThanOrEquals *DocumentAttribute
 
-	// Performs a logical NOT operation on all supplied filters.
+	// Performs a logical NOT  operation on all supplied filters.
 	NotFilter *AttributeFilter
 
-	// Performs a logical OR operation on all supplied filters.
+	// Performs a logical OR  operation on all supplied filters.
 	OrAllFilters []AttributeFilter
 
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information to connect to websites that require user
-// authentication.
+// Provides the configuration information to connect to websites that require
+// user authentication.
 type AuthenticationConfiguration struct {
 
-	// The list of configuration information that's required to connect to and crawl a
-	// website host using basic authentication credentials. The list includes the name
-	// and port number of the website host.
+	// The list of configuration information that's required to connect to and crawl
+	// a website host using basic authentication credentials. The list includes the
+	// name and port number of the website host.
 	BasicAuthentication []BasicAuthenticationConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information to connect to websites that require basic
-// user authentication.
+// Provides the configuration information to connect to websites that require
+// basic user authentication.
 type BasicAuthenticationConfiguration struct {
 
-	// Your secret ARN, which you can create in Secrets Manager
-	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) You use
-	// a secret if basic authentication credentials are required to connect to a
-	// website. The secret stores your credentials of user name and password.
+	// Your secret ARN, which you can create in Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html)
+	// You use a secret if basic authentication credentials are required to connect to
+	// a website. The secret stores your credentials of user name and password.
 	//
 	// This member is required.
 	Credentials *string
@@ -250,9 +247,9 @@ type BasicAuthenticationConfiguration struct {
 	// This member is required.
 	Host *string
 
-	// The port number of the website host you want to connect to using authentication
-	// credentials. For example, the port for https://a.example.com/page1.html is 443,
-	// the standard port for HTTPS.
+	// The port number of the website host you want to connect to using
+	// authentication credentials. For example, the port for
+	// https://a.example.com/page1.html is 443, the standard port for HTTPS.
 	//
 	// This member is required.
 	Port *int32
@@ -260,8 +257,8 @@ type BasicAuthenticationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about documents that could not be removed from an index by
-// the BatchDeleteDocument API.
+// Provides information about documents that could not be removed from an index
+// by the BatchDeleteDocument  API.
 type BatchDeleteDocumentResponseFailedDocument struct {
 
 	// The error code for why the document couldn't be removed from the index.
@@ -310,9 +307,9 @@ type BatchPutDocumentResponseFailedDocument struct {
 // Provides the configuration information to connect to Box as your data source.
 type BoxConfiguration struct {
 
-	// The identifier of the Box Enterprise platform. You can find the enterprise ID in
-	// the Box Developer Console settings or when you create an app in Box and download
-	// your authentication credentials. For example, 801234567.
+	// The identifier of the Box Enterprise platform. You can find the enterprise ID
+	// in the Box Developer Console settings or when you create an app in Box and
+	// download your authentication credentials. For example, 801234567.
 	//
 	// This member is required.
 	EnterpriseId *string
@@ -320,21 +317,15 @@ type BoxConfiguration struct {
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
 	// key-value pairs required to connect to your Box platform. The secret must
 	// contain a JSON structure with the following keys:
-	// - clientID—The identifier of
-	// the client OAuth 2.0 authentication application created in Box.
-	// - clientSecret—A
-	// set of characters known only to the OAuth 2.0 authentication application created
-	// in Box.
-	// - publicKeyId—The identifier of the public key contained within an
-	// identity certificate.
-	// - privateKey—A set of characters that make up an
-	// encryption key.
-	// - passphrase—A set of characters that act like a password.
-	//
-	// You
-	// create an application in Box to generate the keys or credentials required for
-	// the secret. For more information, see Using a Box data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-box.html).
+	//     - clientID—The identifier of the client OAuth 2.0 authentication application created in Box.
+	//     - clientSecret—A set of characters known only to the OAuth 2.0 authentication application created in Box.
+	//     - publicKeyId—The identifier of the public key contained within an identity certificate.
+	//     - privateKey—A set of characters that make up an encryption key.
+	//     - passphrase—A set of characters that act like a password.
+	// You create an
+	// application in Box to generate the keys or credentials required for the secret.
+	// For more information, see Using a Box data source (https://docs.aws.amazon.com/kendra/latest/dg/data-source-box.html)
+	// .
 	//
 	// This member is required.
 	SecretArn *string
@@ -342,34 +333,32 @@ type BoxConfiguration struct {
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of Box comments to Amazon Kendra index field names. To create custom
 	// fields, use the UpdateIndex API before you map to Box fields. For more
-	// information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Box field
-	// names must exist in your Box custom metadata.
+	// information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Box field names must exist in your Box custom metadata.
 	CommentFieldMappings []DataSourceToIndexFieldMapping
 
-	// TRUE to index comments.
+	// TRUE  to index comments.
 	CrawlComments bool
 
-	// TRUE to index the contents of tasks.
+	// TRUE  to index the contents of tasks.
 	CrawlTasks bool
 
-	// TRUE to index web links.
+	// TRUE  to index web links.
 	CrawlWebLinks bool
 
-	// A list of regular expression patterns to exclude certain files and folders from
-	// your Box platform. Files and folders that match the patterns are excluded from
-	// the index.Files and folders that don't match the patterns are included in the
-	// index. If a file or folder matches both an inclusion and exclusion pattern, the
-	// exclusion pattern takes precedence and the file or folder isn't included in the
-	// index.
+	// A list of regular expression patterns to exclude certain files and folders
+	// from your Box platform. Files and folders that match the patterns are excluded
+	// from the index.Files and folders that don't match the patterns are included in
+	// the index. If a file or folder matches both an inclusion and exclusion pattern,
+	// the exclusion pattern takes precedence and the file or folder isn't included in
+	// the index.
 	ExclusionPatterns []string
 
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of Box files to Amazon Kendra index field names. To create custom fields,
-	// use the UpdateIndex API before you map to Box fields. For more information, see
-	// Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Box field
-	// names must exist in your Box custom metadata.
+	// use the UpdateIndex API before you map to Box fields. For more information,
+	// see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Box field names must exist in your Box custom metadata.
 	FileFieldMappings []DataSourceToIndexFieldMapping
 
 	// A list of regular expression patterns to include certain files and folders in
@@ -382,10 +371,9 @@ type BoxConfiguration struct {
 
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of Box tasks to Amazon Kendra index field names. To create custom fields,
-	// use the UpdateIndex API before you map to Box fields. For more information, see
-	// Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Box field
-	// names must exist in your Box custom metadata.
+	// use the UpdateIndex API before you map to Box fields. For more information,
+	// see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Box field names must exist in your Box custom metadata.
 	TaskFieldMappings []DataSourceToIndexFieldMapping
 
 	// TRUE to use the Slack change log to determine which documents require updating
@@ -394,16 +382,15 @@ type BoxConfiguration struct {
 	UseChangeLog bool
 
 	// Configuration information for an Amazon VPC to connect to your Box. For more
-	// information, see Configuring a VPC
-	// (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
+	// information, see Configuring a VPC (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html)
+	// .
 	VpcConfiguration *DataSourceVpcConfiguration
 
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of Box web links to Amazon Kendra index field names. To create custom
 	// fields, use the UpdateIndex API before you map to Box fields. For more
-	// information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Box field
-	// names must exist in your Box custom metadata.
+	// information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Box field names must exist in your Box custom metadata.
 	WebLinkFieldMappings []DataSourceToIndexFieldMapping
 
 	noSmithyDocumentSerde
@@ -413,17 +400,16 @@ type BoxConfiguration struct {
 // index. You can add and remove capacity units to fit your usage requirements.
 type CapacityUnitsConfiguration struct {
 
-	// The amount of extra query capacity for an index and GetQuerySuggestions
-	// (https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html)
+	// The amount of extra query capacity for an index and GetQuerySuggestions (https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html)
 	// capacity. A single extra capacity unit for an index provides 0.1 queries per
 	// second or approximately 8,000 queries per day. You can add up to 100 extra
-	// capacity units. GetQuerySuggestions capacity is five times the provisioned query
-	// capacity for an index, or the base capacity of 2.5 calls per second, whichever
-	// is higher. For example, the base capacity for an index is 0.1 queries per
-	// second, and GetQuerySuggestions capacity has a base of 2.5 calls per second. If
-	// you add another 0.1 queries per second to total 0.2 queries per second for an
-	// index, the GetQuerySuggestions capacity is 2.5 calls per second (higher than
-	// five times 0.2 queries per second).
+	// capacity units. GetQuerySuggestions capacity is five times the provisioned
+	// query capacity for an index, or the base capacity of 2.5 calls per second,
+	// whichever is higher. For example, the base capacity for an index is 0.1 queries
+	// per second, and GetQuerySuggestions capacity has a base of 2.5 calls per
+	// second. If you add another 0.1 queries per second to total 0.2 queries per
+	// second for an index, the GetQuerySuggestions capacity is 2.5 calls per second
+	// (higher than five times 0.2 queries per second).
 	//
 	// This member is required.
 	QueryCapacityUnits *int32
@@ -439,7 +425,7 @@ type CapacityUnitsConfiguration struct {
 }
 
 // Gathers information about when a particular result was clicked by a user. Your
-// application uses the SubmitFeedback API to provide click information.
+// application uses the SubmitFeedback  API to provide click information.
 type ClickFeedback struct {
 
 	// The Unix timestamp of the date and time that the result was clicked.
@@ -478,46 +464,45 @@ type ColumnConfiguration struct {
 	DocumentTitleColumnName *string
 
 	// An array of objects that map database column names to the corresponding fields
-	// in an index. You must first create the fields in the index using the UpdateIndex
-	// API.
+	// in an index. You must first create the fields in the index using the
+	// UpdateIndex API.
 	FieldMappings []DataSourceToIndexFieldMapping
 
 	noSmithyDocumentSerde
 }
 
-// Configuration of attachment settings for the Confluence data source. Attachment
-// settings are optional, if you don't specify settings attachments, Amazon Kendra
-// won't index them.
+// Configuration of attachment settings for the Confluence data source.
+// Attachment settings are optional, if you don't specify settings attachments,
+// Amazon Kendra won't index them.
 type ConfluenceAttachmentConfiguration struct {
 
-	// Maps attributes or field names of Confluence attachments to Amazon Kendra index
-	// field names. To create custom fields, use the UpdateIndex API before you map to
-	// Confluence fields. For more information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The
-	// Confluence data source field names must exist in your Confluence custom
-	// metadata. If you specify the AttachentFieldMappings parameter, you must specify
-	// at least one field mapping.
+	// Maps attributes or field names of Confluence attachments to Amazon Kendra
+	// index field names. To create custom fields, use the UpdateIndex API before you
+	// map to Confluence fields. For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Confluence data source field names must exist in your Confluence custom
+	// metadata. If you specify the AttachentFieldMappings parameter, you must
+	// specify at least one field mapping.
 	AttachmentFieldMappings []ConfluenceAttachmentToIndexFieldMapping
 
-	// TRUE to index attachments of pages and blogs in Confluence.
+	// TRUE  to index attachments of pages and blogs in Confluence.
 	CrawlAttachments bool
 
 	noSmithyDocumentSerde
 }
 
-// Maps attributes or field names of Confluence attachments to Amazon Kendra index
-// field names. To create custom fields, use the UpdateIndex API before you map to
-// Confluence fields. For more information, see Mapping data source fields
-// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Confuence
-// data source field names must exist in your Confluence custom metadata.
+// Maps attributes or field names of Confluence attachments to Amazon Kendra
+// index field names. To create custom fields, use the UpdateIndex API before you
+// map to Confluence fields. For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+// . The Confuence data source field names must exist in your Confluence custom
+// metadata.
 type ConfluenceAttachmentToIndexFieldMapping struct {
 
-	// The name of the field in the data source. You must first create the index field
-	// using the UpdateIndex API.
+	// The name of the field in the data source. You must first create the index
+	// field using the UpdateIndex  API.
 	DataSourceFieldName ConfluenceAttachmentFieldName
 
 	// The format for date fields in the data source. If the field specified in
-	// DataSourceFieldName is a date field you must specify the date format. If the
+	// DataSourceFieldNameis a date field you must specify the date format. If the
 	// field is not a date field, an exception is thrown.
 	DateFieldFormat *string
 
@@ -528,16 +513,15 @@ type ConfluenceAttachmentToIndexFieldMapping struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration of blog settings for the Confluence data source. Blogs are always
-// indexed unless filtered from the index by the ExclusionPatterns or
-// InclusionPatterns fields in the ConfluenceConfiguration object.
+// Configuration of blog settings for the Confluence data source. Blogs are
+// always indexed unless filtered from the index by the ExclusionPatterns  or
+// InclusionPatterns fields in the ConfluenceConfiguration  object.
 type ConfluenceBlogConfiguration struct {
 
-	// Maps attributes or field names of Confluence blogs to Amazon Kendra index field
-	// names. To create custom fields, use the UpdateIndex API before you map to
-	// Confluence fields. For more information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The
-	// Confluence data source field names must exist in your Confluence custom
+	// Maps attributes or field names of Confluence blogs to Amazon Kendra index
+	// field names. To create custom fields, use the UpdateIndex API before you map
+	// to Confluence fields. For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Confluence data source field names must exist in your Confluence custom
 	// metadata. If you specify the BlogFieldMappings parameter, you must specify at
 	// least one field mapping.
 	BlogFieldMappings []ConfluenceBlogToIndexFieldMapping
@@ -547,9 +531,8 @@ type ConfluenceBlogConfiguration struct {
 
 // Maps attributes or field names of Confluence blog to Amazon Kendra index field
 // names. To create custom fields, use the UpdateIndex API before you map to
-// Confluence fields. For more information, see Mapping data source fields
-// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The
-// Confluence data source field names must exist in your Confluence custom
+// Confluence fields. For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+// . The Confluence data source field names must exist in your Confluence custom
 // metadata.
 type ConfluenceBlogToIndexFieldMapping struct {
 
@@ -557,7 +540,7 @@ type ConfluenceBlogToIndexFieldMapping struct {
 	DataSourceFieldName ConfluenceBlogFieldName
 
 	// The format for date fields in the data source. If the field specified in
-	// DataSourceFieldName is a date field you must specify the date format. If the
+	// DataSourceFieldNameis a date field you must specify the date format. If the
 	// field is not a date field, an exception is thrown.
 	DateFieldFormat *string
 
@@ -576,8 +559,8 @@ type ConfluenceConfiguration struct {
 	// user name and password required to connect to the Confluence instance. If you
 	// use Confluence Cloud, you use a generated API token as the password. You can
 	// also provide authentication credentials in the form of a personal access token.
-	// For more information, see Using a Confluence data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html).
+	// For more information, see Using a Confluence data source (https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html)
+	// .
 	//
 	// This member is required.
 	SecretArn *string
@@ -641,9 +624,9 @@ type ConfluenceConfiguration struct {
 	// Configuration information for indexing Confluence spaces.
 	SpaceConfiguration *ConfluenceSpaceConfiguration
 
-	// Configuration information for an Amazon Virtual Private Cloud to connect to your
-	// Confluence. For more information, see Configuring a VPC
-	// (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
+	// Configuration information for an Amazon Virtual Private Cloud to connect to
+	// your Confluence. For more information, see Configuring a VPC (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html)
+	// .
 	VpcConfiguration *DataSourceVpcConfiguration
 
 	noSmithyDocumentSerde
@@ -652,11 +635,10 @@ type ConfluenceConfiguration struct {
 // Configuration of the page settings for the Confluence data source.
 type ConfluencePageConfiguration struct {
 
-	// Maps attributes or field names of Confluence pages to Amazon Kendra index field
-	// names. To create custom fields, use the UpdateIndex API before you map to
-	// Confluence fields. For more information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The
-	// Confluence data source field names must exist in your Confluence custom
+	// Maps attributes or field names of Confluence pages to Amazon Kendra index
+	// field names. To create custom fields, use the UpdateIndex API before you map
+	// to Confluence fields. For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Confluence data source field names must exist in your Confluence custom
 	// metadata. If you specify the PageFieldMappings parameter, you must specify at
 	// least one field mapping.
 	PageFieldMappings []ConfluencePageToIndexFieldMapping
@@ -664,11 +646,10 @@ type ConfluencePageConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Maps attributes or field names of Confluence pages to Amazon Kendra index field
-// names. To create custom fields, use the UpdateIndex API before you map to
-// Confluence fields. For more information, see Mapping data source fields
-// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The
-// Confluence data source field names must exist in your Confluence custom
+// Maps attributes or field names of Confluence pages to Amazon Kendra index
+// field names. To create custom fields, use the UpdateIndex API before you map
+// to Confluence fields. For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+// . The Confluence data source field names must exist in your Confluence custom
 // metadata.
 type ConfluencePageToIndexFieldMapping struct {
 
@@ -676,7 +657,7 @@ type ConfluencePageToIndexFieldMapping struct {
 	DataSourceFieldName ConfluencePageFieldName
 
 	// The format for date fields in the data source. If the field specified in
-	// DataSourceFieldName is a date field you must specify the date format. If the
+	// DataSourceFieldNameis a date field you must specify the date format. If the
 	// field is not a date field, an exception is thrown.
 	DateFieldFormat *string
 
@@ -690,33 +671,32 @@ type ConfluencePageToIndexFieldMapping struct {
 // Configuration information for indexing Confluence spaces.
 type ConfluenceSpaceConfiguration struct {
 
-	// TRUE to index archived spaces.
+	// TRUE  to index archived spaces.
 	CrawlArchivedSpaces bool
 
 	// TRUE to index personal spaces. You can add restrictions to items in personal
 	// spaces. If personal spaces are indexed, queries without user context information
 	// may return restricted items from a personal space in their results. For more
-	// information, see Filtering on user context
-	// (https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html).
+	// information, see Filtering on user context (https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html)
+	// .
 	CrawlPersonalSpaces bool
 
 	// A list of space keys of Confluence spaces. If you include a key, the blogs,
 	// documents, and attachments in the space are not indexed. If a space is in both
-	// the ExcludeSpaces and the IncludeSpaces list, the space is excluded.
+	// the ExcludeSpaces  and the IncludeSpaces  list, the space is excluded.
 	ExcludeSpaces []string
 
 	// A list of space keys for Confluence spaces. If you include a key, the blogs,
 	// documents, and attachments in the space are indexed. Spaces that aren't in the
 	// list aren't indexed. A space in the list must exist. Otherwise, Amazon Kendra
 	// logs an error when the data source is synchronized. If a space is in both the
-	// IncludeSpaces and the ExcludeSpaces list, the space is excluded.
+	// IncludeSpaces and the ExcludeSpaces  list, the space is excluded.
 	IncludeSpaces []string
 
-	// Maps attributes or field names of Confluence spaces to Amazon Kendra index field
-	// names. To create custom fields, use the UpdateIndex API before you map to
-	// Confluence fields. For more information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The
-	// Confluence data source field names must exist in your Confluence custom
+	// Maps attributes or field names of Confluence spaces to Amazon Kendra index
+	// field names. To create custom fields, use the UpdateIndex API before you map
+	// to Confluence fields. For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Confluence data source field names must exist in your Confluence custom
 	// metadata. If you specify the SpaceFieldMappings parameter, you must specify at
 	// least one field mapping.
 	SpaceFieldMappings []ConfluenceSpaceToIndexFieldMapping
@@ -724,11 +704,10 @@ type ConfluenceSpaceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Maps attributes or field names of Confluence spaces to Amazon Kendra index field
-// names. To create custom fields, use the UpdateIndex API before you map to
-// Confluence fields. For more information, see Mapping data source fields
-// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The
-// Confluence data source field names must exist in your Confluence custom
+// Maps attributes or field names of Confluence spaces to Amazon Kendra index
+// field names. To create custom fields, use the UpdateIndex API before you map
+// to Confluence fields. For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+// . The Confluence data source field names must exist in your Confluence custom
 // metadata.
 type ConfluenceSpaceToIndexFieldMapping struct {
 
@@ -736,7 +715,7 @@ type ConfluenceSpaceToIndexFieldMapping struct {
 	DataSourceFieldName ConfluenceSpaceFieldName
 
 	// The format for date fields in the data source. If the field specified in
-	// DataSourceFieldName is a date field you must specify the date format. If the
+	// DataSourceFieldNameis a date field you must specify the date format. If the
 	// field is not a date field, an exception is thrown.
 	DateFieldFormat *string
 
@@ -747,7 +726,8 @@ type ConfluenceSpaceToIndexFieldMapping struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information that's required to connect to a database.
+// Provides the configuration information that's required to connect to a
+// database.
 type ConnectionConfiguration struct {
 
 	// The name of the host for the database. Can be either a string
@@ -768,11 +748,9 @@ type ConnectionConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of credentials stored in Secrets Manager. The
 	// credentials should be a user/password pair. For more information, see Using a
-	// Database Data Source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html). For
-	// more information about Secrets Manager, see  What Is Secrets Manager
-	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the
-	// Secrets Manager user guide.
+	// Database Data Source (https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html)
+	// . For more information about Secrets Manager, see What Is Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html)
+	// in the Secrets Manager user guide.
 	//
 	// This member is required.
 	SecretArn *string
@@ -786,15 +764,15 @@ type ConnectionConfiguration struct {
 }
 
 // Provides the configuration information for your content sources, such as data
-// sources, FAQs, and content indexed directly via BatchPutDocument
-// (https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html).
+// sources, FAQs, and content indexed directly via BatchPutDocument (https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html)
+// .
 type ContentSourceConfiguration struct {
 
 	// The identifier of the data sources you want to use for your Amazon Kendra
 	// experience.
 	DataSourceIds []string
 
-	// TRUE to use documents you indexed directly using the BatchPutDocument API.
+	// TRUE  to use documents you indexed directly using the BatchPutDocument  API.
 	DirectPutContent bool
 
 	// The identifier of the FAQs that you want to use for your Amazon Kendra
@@ -807,15 +785,15 @@ type ContentSourceConfiguration struct {
 // A corrected misspelled word in a query.
 type Correction struct {
 
-	// The zero-based location in the response string or text where the corrected word
-	// starts.
+	// The zero-based location in the response string or text where the corrected
+	// word starts.
 	BeginOffset *int32
 
 	// The string or text of a corrected misspelled word in a query.
 	CorrectedTerm *string
 
-	// The zero-based location in the response string or text where the corrected word
-	// ends.
+	// The zero-based location in the response string or text where the corrected
+	// word ends.
 	EndOffset *int32
 
 	// The string or text of a misspelled word in a query.
@@ -826,8 +804,8 @@ type Correction struct {
 
 // Provides the configuration information for altering document metadata and
 // content during the document ingestion process. For more information, see
-// Customizing document metadata during the ingestion process
-// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html).
+// Customizing document metadata during the ingestion process (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html)
+// .
 type CustomDocumentEnrichmentConfiguration struct {
 
 	// Configuration information to alter document attributes or metadata fields and
@@ -838,23 +816,23 @@ type CustomDocumentEnrichmentConfiguration struct {
 	// structured documents with their metadata and text extracted. You can use a
 	// Lambda function to apply advanced logic for creating, modifying, or deleting
 	// document metadata and content. For more information, see Advanced data
-	// manipulation
-	// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#advanced-data-manipulation).
+	// manipulation (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#advanced-data-manipulation)
+	// .
 	PostExtractionHookConfiguration *HookConfiguration
 
 	// Configuration information for invoking a Lambda function in Lambda on the
 	// original or raw documents before extracting their metadata and text. You can use
 	// a Lambda function to apply advanced logic for creating, modifying, or deleting
 	// document metadata and content. For more information, see Advanced data
-	// manipulation
-	// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#advanced-data-manipulation).
+	// manipulation (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#advanced-data-manipulation)
+	// .
 	PreExtractionHookConfiguration *HookConfiguration
 
 	// The Amazon Resource Name (ARN) of a role with permission to run
-	// PreExtractionHookConfiguration and PostExtractionHookConfiguration for altering
-	// document metadata and content during the document ingestion process. For more
-	// information, see IAM roles for Amazon Kendra
-	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
+	// PreExtractionHookConfiguration and PostExtractionHookConfiguration for
+	// altering document metadata and content during the document ingestion process.
+	// For more information, see IAM roles for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html)
+	// .
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -879,8 +857,8 @@ type DatabaseConfiguration struct {
 	// This member is required.
 	DatabaseEngineType DatabaseEngineType
 
-	// Information about the database column that provides information for user context
-	// filtering.
+	// Information about the database column that provides information for user
+	// context filtering.
 	AclConfiguration *AclConfiguration
 
 	// Provides information about how Amazon Kendra uses quote marks around SQL
@@ -915,7 +893,8 @@ type DataSourceConfiguration struct {
 	// source.
 	FsxConfiguration *FsxConfiguration
 
-	// Provides the configuration information to connect to GitHub as your data source.
+	// Provides the configuration information to connect to GitHub as your data
+	// source.
 	GitHubConfiguration *GitHubConfiguration
 
 	// Provides the configuration information to connect to Google Drive as your data
@@ -925,15 +904,15 @@ type DataSourceConfiguration struct {
 	// Provides the configuration information to connect to Jira as your data source.
 	JiraConfiguration *JiraConfiguration
 
-	// Provides the configuration information to connect to Microsoft OneDrive as your
-	// data source.
+	// Provides the configuration information to connect to Microsoft OneDrive as
+	// your data source.
 	OneDriveConfiguration *OneDriveConfiguration
 
 	// Provides the configuration information to connect to Quip as your data source.
 	QuipConfiguration *QuipConfiguration
 
-	// Provides the configuration information to connect to an Amazon S3 bucket as your
-	// data source.
+	// Provides the configuration information to connect to an Amazon S3 bucket as
+	// your data source.
 	S3Configuration *S3DataSourceConfiguration
 
 	// Provides the configuration information to connect to Salesforce as your data
@@ -975,8 +954,8 @@ type DataSourceGroup struct {
 	// This member is required.
 	DataSourceId *string
 
-	// The identifier of the group you want to add to your list of groups. This is for
-	// filtering search results based on the groups' access to documents.
+	// The identifier of the group you want to add to your list of groups. This is
+	// for filtering search results based on the groups' access to documents.
 	//
 	// This member is required.
 	GroupId *string
@@ -996,8 +975,8 @@ type DataSourceSummary struct {
 	// The code for a language. This shows a supported language for all documents in
 	// the data source. English is supported by default. For more information on
 	// supported languages, including their codes, see Adding documents in languages
-	// other than English
-	// (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
+	// other than English (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html)
+	// .
 	LanguageCode *string
 
 	// The name of the data source.
@@ -1026,40 +1005,41 @@ type DataSourceSyncJob struct {
 	// The UNIX datetime that the synchronization job completed.
 	EndTime *time.Time
 
-	// If the Status field is set to FAILED, the ErrorCode field indicates the reason
-	// the synchronization failed.
+	// If the Status  field is set to FAILED , the ErrorCode field indicates the
+	// reason the synchronization failed.
 	ErrorCode ErrorCode
 
-	// If the Status field is set to ERROR, the ErrorMessage field contains a
+	// If the Status  field is set to ERROR , the ErrorMessage field contains a
 	// description of the error that caused the synchronization to fail.
 	ErrorMessage *string
 
 	// A identifier for the synchronization job.
 	ExecutionId *string
 
-	// Maps a batch delete document request to a specific data source sync job. This is
-	// optional and should only be supplied when documents are deleted by a data source
-	// connector.
+	// Maps a batch delete document request to a specific data source sync job. This
+	// is optional and should only be supplied when documents are deleted by a data
+	// source connector.
 	Metrics *DataSourceSyncJobMetrics
 
 	// The UNIX datetime that the synchronization job started.
 	StartTime *time.Time
 
-	// The execution status of the synchronization job. When the Status field is set to
-	// SUCCEEDED, the synchronization job is done. If the status code is set to FAILED,
-	// the ErrorCode and ErrorMessage fields give you the reason for the failure.
+	// The execution status of the synchronization job. When the Status field is set
+	// to SUCCEEDED , the synchronization job is done. If the status code is set to
+	// FAILED , the ErrorCode  and ErrorMessage fields give you the reason for the
+	// failure.
 	Status DataSourceSyncJobStatus
 
 	noSmithyDocumentSerde
 }
 
-// Maps a batch delete document request to a specific data source sync job. This is
-// optional and should only be supplied when documents are deleted by a data source
-// connector.
+// Maps a batch delete document request to a specific data source sync job. This
+// is optional and should only be supplied when documents are deleted by a data
+// source connector.
 type DataSourceSyncJobMetrics struct {
 
-	// The number of documents added from the data source up to now in the data source
-	// sync.
+	// The number of documents added from the data source up to now in the data
+	// source sync.
 	DocumentsAdded *string
 
 	// The number of documents deleted from the data source up to now in the data
@@ -1070,8 +1050,8 @@ type DataSourceSyncJobMetrics struct {
 	// the data source sync run.
 	DocumentsFailed *string
 
-	// The number of documents modified in the data source up to now in the data source
-	// sync run.
+	// The number of documents modified in the data source up to now in the data
+	// source sync run.
 	DocumentsModified *string
 
 	// The current number of documents crawled by the current sync job in the data
@@ -1100,8 +1080,8 @@ type DataSourceSyncJobMetricTarget struct {
 	noSmithyDocumentSerde
 }
 
-// Maps a column or attribute in the data source to an index field. You must first
-// create the fields in the index using the UpdateIndex API.
+// Maps a column or attribute in the data source to an index field. You must
+// first create the fields in the index using the UpdateIndex  API.
 type DataSourceToIndexFieldMapping struct {
 
 	// The name of the column or attribute in the data source.
@@ -1129,9 +1109,9 @@ type DataSourceVpcConfiguration struct {
 	// This member is required.
 	SecurityGroupIds []string
 
-	// A list of identifiers for subnets within your Amazon VPC. The subnets should be
-	// able to connect to each other in the VPC, and they should have outgoing access
-	// to the Internet through a NAT device.
+	// A list of identifiers for subnets within your Amazon VPC. The subnets should
+	// be able to connect to each other in the VPC, and they should have outgoing
+	// access to the Internet through a NAT device.
 	//
 	// This member is required.
 	SubnetIds []string
@@ -1142,31 +1122,31 @@ type DataSourceVpcConfiguration struct {
 // A document in an index.
 type Document struct {
 
-	// A identifier of the document in the index. Note, each document ID must be unique
-	// per index. You cannot create a data source to index your documents with their
-	// unique IDs and then use the BatchPutDocument API to index the same documents, or
-	// vice versa. You can delete a data source and then use the BatchPutDocument API
-	// to index the same documents, or vice versa.
+	// A identifier of the document in the index. Note, each document ID must be
+	// unique per index. You cannot create a data source to index your documents with
+	// their unique IDs and then use the BatchPutDocument API to index the same
+	// documents, or vice versa. You can delete a data source and then use the
+	// BatchPutDocument API to index the same documents, or vice versa.
 	//
 	// This member is required.
 	Id *string
 
-	// The identifier of the access control configuration that you want to apply to the
-	// document.
+	// The identifier of the access control configuration that you want to apply to
+	// the document.
 	AccessControlConfigurationId *string
 
-	// Information on principals (users and/or groups) and which documents they should
-	// have access to. This is useful for user context filtering, where search results
-	// are filtered based on the user or their group access to documents.
+	// Information on principals (users and/or groups) and which documents they
+	// should have access to. This is useful for user context filtering, where search
+	// results are filtered based on the user or their group access to documents.
 	AccessControlList []Principal
 
-	// Custom attributes to apply to the document. Use the custom attributes to provide
-	// additional information for searching, to provide facets for refining searches,
-	// and to provide additional information in the query response. For example,
-	// 'DataSourceId' and 'DataSourceSyncJobId' are custom attributes that provide
-	// information on the synchronization of documents running on a data source. Note,
-	// 'DataSourceSyncJobId' could be an optional custom attribute as Amazon Kendra
-	// will use the ID of a running sync job.
+	// Custom attributes to apply to the document. Use the custom attributes to
+	// provide additional information for searching, to provide facets for refining
+	// searches, and to provide additional information in the query response. For
+	// example, 'DataSourceId' and 'DataSourceSyncJobId' are custom attributes that
+	// provide information on the synchronization of documents running on a data
+	// source. Note, 'DataSourceSyncJobId' could be an optional custom attribute as
+	// Amazon Kendra will use the ID of a running sync job.
 	Attributes []DocumentAttribute
 
 	// The contents of the document. Documents passed to the Blob parameter must be
@@ -1176,12 +1156,11 @@ type Document struct {
 	// the contents before sending.
 	Blob []byte
 
-	// The file type of the document in the Blob field.
+	// The file type of the document in the Blob  field.
 	ContentType ContentType
 
-	// The list of principal
-	// (https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html) lists that
-	// define the hierarchy for which documents users should have access to.
+	// The list of principal (https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html)
+	// lists that define the hierarchy for which documents users should have access to.
 	HierarchicalAccessControlList []HierarchicalPrincipal
 
 	// Information required to find a specific file in an Amazon S3 bucket.
@@ -1194,8 +1173,8 @@ type Document struct {
 }
 
 // A document attribute or metadata field. To create custom document attributes,
-// see Custom attributes
-// (https://docs.aws.amazon.com/kendra/latest/dg/custom-attributes.html).
+// see Custom attributes (https://docs.aws.amazon.com/kendra/latest/dg/custom-attributes.html)
+// .
 type DocumentAttribute struct {
 
 	// The identifier for the attribute.
@@ -1213,29 +1192,28 @@ type DocumentAttribute struct {
 
 // The condition used for the target document attribute or metadata field when
 // ingesting documents into Amazon Kendra. You use this with
-// DocumentAttributeTarget to apply the condition
-// (https://docs.aws.amazon.com/kendra/latest/dg/API_DocumentAttributeTarget.html).
-// For example, you can create the 'Department' target field and have it prefill
+// DocumentAttributeTarget to apply the condition (https://docs.aws.amazon.com/kendra/latest/dg/API_DocumentAttributeTarget.html)
+// . For example, you can create the 'Department' target field and have it prefill
 // department names associated with the documents based on information in the
 // 'Source_URI' field. Set the condition that if the 'Source_URI' field contains
 // 'financial' in its URI value, then prefill the target field 'Department' with
 // the target value 'Finance' for the document. Amazon Kendra cannot create a
 // target field if it has not already been created as an index field. After you
 // create your index field, you can create a document metadata field using
-// DocumentAttributeTarget. Amazon Kendra then will map your newly created metadata
-// field to your index field.
+// DocumentAttributeTarget. Amazon Kendra then will map your newly created
+// metadata field to your index field.
 type DocumentAttributeCondition struct {
 
 	// The identifier of the document attribute used for the condition. For example,
 	// 'Source_URI' could be an identifier for the attribute or metadata field that
 	// contains source URIs associated with the documents. Amazon Kendra currently does
-	// not support _document_body as an attribute key used for the condition.
+	// not support _document_body  as an attribute key used for the condition.
 	//
 	// This member is required.
 	ConditionDocumentAttributeKey *string
 
-	// The condition operator. For example, you can use 'Contains' to partially match a
-	// string.
+	// The condition operator. For example, you can use 'Contains' to partially match
+	// a string.
 	//
 	// This member is required.
 	Operator ConditionOperator
@@ -1248,8 +1226,8 @@ type DocumentAttributeCondition struct {
 	noSmithyDocumentSerde
 }
 
-// The target document attribute or metadata field you want to alter when ingesting
-// documents into Amazon Kendra. For example, you can delete customer
+// The target document attribute or metadata field you want to alter when
+// ingesting documents into Amazon Kendra. For example, you can delete customer
 // identification numbers associated with the documents, stored in the document
 // metadata field called 'Customer_ID'. You set the target key as 'Customer_ID' and
 // the deletion flag to TRUE. This removes all customer ID values in the field
@@ -1258,13 +1236,13 @@ type DocumentAttributeCondition struct {
 // already been created as an index field. After you create your index field, you
 // can create a document metadata field using DocumentAttributeTarget. Amazon
 // Kendra then will map your newly created metadata field to your index field. You
-// can also use this with DocumentAttributeCondition
-// (https://docs.aws.amazon.com/kendra/latest/dg/API_DocumentAttributeCondition.html).
+// can also use this with DocumentAttributeCondition (https://docs.aws.amazon.com/kendra/latest/dg/API_DocumentAttributeCondition.html)
+// .
 type DocumentAttributeTarget struct {
 
-	// The identifier of the target document attribute or metadata field. For example,
-	// 'Department' could be an identifier for the target attribute or metadata field
-	// that includes the department names associated with the documents.
+	// The identifier of the target document attribute or metadata field. For
+	// example, 'Department' could be an identifier for the target attribute or
+	// metadata field that includes the department names associated with the documents.
 	TargetDocumentAttributeKey *string
 
 	// The target value you want to create for the target attribute. For example,
@@ -1273,18 +1251,18 @@ type DocumentAttributeTarget struct {
 
 	// TRUE to delete the existing target value for your specified target attribute
 	// key. You cannot create a target value and set this to TRUE. To create a target
-	// value (TargetDocumentAttributeValue), set this to FALSE.
+	// value ( TargetDocumentAttributeValue ), set this to FALSE .
 	TargetDocumentAttributeValueDeletion bool
 
 	noSmithyDocumentSerde
 }
 
-// The value of a document attribute. You can only provide one value for a document
-// attribute.
+// The value of a document attribute. You can only provide one value for a
+// document attribute.
 type DocumentAttributeValue struct {
 
-	// A date expressed as an ISO 8601 string. It is important for the time zone to be
-	// included in the ISO 8601 date-time format. For example,
+	// A date expressed as an ISO 8601 string. It is important for the time zone to
+	// be included in the ISO 8601 date-time format. For example,
 	// 2012-03-25T12:30:10+01:00 is the ISO 8601 date-time format for March 25th 2012
 	// at 12:30PM (plus 10 seconds) in Central European Time.
 	DateValue *time.Time
@@ -1313,7 +1291,7 @@ type DocumentAttributeValueCountPair struct {
 	DocumentAttributeValue *DocumentAttributeValue
 
 	// Contains the results of a document attribute that is a nested facet. A
-	// FacetResult contains the counts for each facet nested within a facet. For
+	// FacetResultcontains the counts for each facet nested within a facet. For
 	// example, the document attribute or facet "Department" includes a value called
 	// "Engineering". In addition, the document attribute or facet "SubDepartment"
 	// includes the values "Frontend" and "Backend" for documents assigned to
@@ -1336,18 +1314,13 @@ type DocumentInfo struct {
 
 	// Attributes that identify a specific version of a document to check. The only
 	// valid attributes are:
-	// - version
-	// - datasourceId
-	// - jobExecutionId
-	//
-	// The attributes
-	// follow these rules:
-	// - dataSourceId and jobExecutionId must be used together.
-	// -
-	// version is ignored if dataSourceId and jobExecutionId are not provided.
-	// - If
-	// dataSourceId and jobExecutionId are provided, but version is not, the version
-	// defaults to "0".
+	//     - version
+	//     - datasourceId
+	//     - jobExecutionId
+	// The attributes follow these rules:
+	//     - dataSourceId and jobExecutionId must be used together.
+	//     - version is ignored if dataSourceId and jobExecutionId are not provided.
+	//     - If dataSourceId and jobExecutionId are provided, but version is not, the version defaults to "0".
 	Attributes []DocumentAttribute
 
 	noSmithyDocumentSerde
@@ -1400,16 +1373,16 @@ type DocumentRelevanceConfiguration struct {
 // metadata file contains metadata about a single document.
 type DocumentsMetadataConfiguration struct {
 
-	// A prefix used to filter metadata configuration files in the Amazon Web Services
-	// S3 bucket. The S3 bucket might contain multiple metadata files. Use S3Prefix to
-	// include only the desired metadata files.
+	// A prefix used to filter metadata configuration files in the Amazon Web
+	// Services S3 bucket. The S3 bucket might contain multiple metadata files. Use
+	// S3Prefix to include only the desired metadata files.
 	S3Prefix *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information for users or groups in your IAM Identity
-// Center identity source to grant access your Amazon Kendra experience.
+// Provides the configuration information for users or groups in your IAM
+// Identity Center identity source to grant access your Amazon Kendra experience.
 type EntityConfiguration struct {
 
 	// The identifier of a user or group in your IAM Identity Center identity source.
@@ -1418,7 +1391,7 @@ type EntityConfiguration struct {
 	// This member is required.
 	EntityId *string
 
-	// Specifies whether you are configuring a User or a Group.
+	// Specifies whether you are configuring a User  or a Group .
 	//
 	// This member is required.
 	EntityType EntityType
@@ -1447,10 +1420,10 @@ type EntityDisplayData struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information for users or groups in your IAM Identity
-// Center identity source for access to your Amazon Kendra experience. Specific
-// permissions are defined for each user or group once they are granted access to
-// your Amazon Kendra experience.
+// Provides the configuration information for users or groups in your IAM
+// Identity Center identity source for access to your Amazon Kendra experience.
+// Specific permissions are defined for each user or group once they are granted
+// access to your Amazon Kendra experience.
 type EntityPersonaConfiguration struct {
 
 	// The identifier of a user or group in your IAM Identity Center identity source.
@@ -1461,9 +1434,9 @@ type EntityPersonaConfiguration struct {
 
 	// The persona that defines the specific permissions of the user or group in your
 	// IAM Identity Center identity source. The available personas or access roles are
-	// Owner and Viewer. For more information on these personas, see Providing access
-	// to your search page
-	// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience).
+	// Owner and Viewer . For more information on these personas, see Providing
+	// access to your search page (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience)
+	// .
 	//
 	// This member is required.
 	Persona Persona
@@ -1476,13 +1449,13 @@ type EntityPersonaConfiguration struct {
 // grant access to your Amazon Kendra experience.
 type ExperienceConfiguration struct {
 
-	// The identifiers of your data sources and FAQs. Or, you can specify that you want
-	// to use documents indexed via the BatchPutDocument API. This is the content you
-	// want to use for your Amazon Kendra experience.
+	// The identifiers of your data sources and FAQs. Or, you can specify that you
+	// want to use documents indexed via the BatchPutDocument API. This is the
+	// content you want to use for your Amazon Kendra experience.
 	ContentSourceConfiguration *ContentSourceConfiguration
 
-	// The IAM Identity Center field name that contains the identifiers of your users,
-	// such as their emails.
+	// The IAM Identity Center field name that contains the identifiers of your
+	// users, such as their emails.
 	UserIdentityConfiguration *UserIdentityConfiguration
 
 	noSmithyDocumentSerde
@@ -1506,9 +1479,9 @@ type ExperienceEndpoint struct {
 // Summary information for users or groups in your IAM Identity Center identity
 // source with granted access to your Amazon Kendra experience. You can create an
 // Amazon Kendra experience such as a search application. For more information on
-// creating a search application experience, see Building a search experience with
-// no code
-// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
+// creating a search application experience, see Building a search experience
+// with no code (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html)
+// .
 type ExperienceEntitiesSummary struct {
 
 	// Information about the user entity.
@@ -1518,16 +1491,17 @@ type ExperienceEntitiesSummary struct {
 	// For example, a user ID could be an email.
 	EntityId *string
 
-	// Shows the type as User or Group.
+	// Shows the type as User  or Group .
 	EntityType EntityType
 
 	noSmithyDocumentSerde
 }
 
-// Summary information for your Amazon Kendra experience. You can create an Amazon
-// Kendra experience such as a search application. For more information on creating
-// a search application experience, see Building a search experience with no code
-// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
+// Summary information for your Amazon Kendra experience. You can create an
+// Amazon Kendra experience such as a search application. For more information on
+// creating a search application experience, see Building a search experience
+// with no code (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html)
+// .
 type ExperiencesSummary struct {
 
 	// The date-time your Amazon Kendra experience was created.
@@ -1554,7 +1528,7 @@ type ExperiencesSummary struct {
 // values "HR", "Engineering", and "Accounting". You can display these values in
 // the search results so that documents can be searched by department. You can
 // display up to 10 facet values per facet for a query. If you want to increase
-// this limit, contact Support (http://aws.amazon.com/contact-us/).
+// this limit, contact Support (http://aws.amazon.com/contact-us/) .
 type Facet struct {
 
 	// The unique key for the document attribute.
@@ -1568,12 +1542,12 @@ type Facet struct {
 	// documents can be searched not only by department but also by a sub department
 	// within a department. This helps your users further narrow their search. You can
 	// only have one nested facet within a facet. If you want to increase this limit,
-	// contact Support (http://aws.amazon.com/contact-us/).
+	// contact Support (http://aws.amazon.com/contact-us/) .
 	Facets []Facet
 
-	// Maximum number of facet values per facet. The default is 10. You can use this to
-	// limit the number of facet values to less than 10. If you want to increase the
-	// default, contact Support (http://aws.amazon.com/contact-us/).
+	// Maximum number of facet values per facet. The default is 10. You can use this
+	// to limit the number of facet values to less than 10. If you want to increase the
+	// default, contact Support (http://aws.amazon.com/contact-us/) .
 	MaxResults int32
 
 	noSmithyDocumentSerde
@@ -1586,8 +1560,8 @@ type FacetResult struct {
 	// provided in the query.
 	DocumentAttributeKey *string
 
-	// An array of key/value pairs, where the key is the value of the attribute and the
-	// count is the number of documents that share the key value.
+	// An array of key/value pairs, where the key is the value of the attribute and
+	// the count is the number of documents that share the key value.
 	DocumentAttributeValueCountPairs []DocumentAttributeValueCountPair
 
 	// The data type of the facet value. This is the same as the type defined for the
@@ -1601,12 +1575,12 @@ type FacetResult struct {
 // that failed to properly configure with your Amazon Kendra experience.
 type FailedEntity struct {
 
-	// The identifier of the user or group in your IAM Identity Center identity source.
-	// For example, a user ID could be an email.
+	// The identifier of the user or group in your IAM Identity Center identity
+	// source. For example, a user ID could be an email.
 	EntityId *string
 
-	// The reason the user or group in your IAM Identity Center identity source failed
-	// to properly configure with your Amazon Kendra experience.
+	// The reason the user or group in your IAM Identity Center identity source
+	// failed to properly configure with your Amazon Kendra experience.
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
@@ -1637,11 +1611,11 @@ type FaqSummary struct {
 	// The identifier of the FAQ.
 	Id *string
 
-	// The code for a language. This shows a supported language for the FAQ document as
-	// part of the summary information for FAQs. English is supported by default. For
-	// more information on supported languages, including their codes, see Adding
-	// documents in languages other than English
-	// (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
+	// The code for a language. This shows a supported language for the FAQ document
+	// as part of the summary information for FAQs. English is supported by default.
+	// For more information on supported languages, including their codes, see Adding
+	// documents in languages other than English (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html)
+	// .
 	LanguageCode *string
 
 	// The name that you assigned the FAQ when you created or updated the FAQ.
@@ -1664,8 +1638,8 @@ type FsxConfiguration struct {
 	// The identifier of the Amazon FSx file system. You can find your file system ID
 	// on the file system dashboard in the Amazon FSx console. For information on how
 	// to create a file system in Amazon FSx console, using Windows File Server as an
-	// example, see Amazon FSx Getting started guide
-	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/getting-started-step1.html).
+	// example, see Amazon FSx Getting started guide (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/getting-started-step1.html)
+	// .
 	//
 	// This member is required.
 	FileSystemId *string
@@ -1675,8 +1649,8 @@ type FsxConfiguration struct {
 	// This member is required.
 	FileSystemType FsxFileSystemType
 
-	// Configuration information for an Amazon Virtual Private Cloud to connect to your
-	// Amazon FSx. Your Amazon FSx instance must reside inside your VPC.
+	// Configuration information for an Amazon Virtual Private Cloud to connect to
+	// your Amazon FSx. Your Amazon FSx instance must reside inside your VPC.
 	//
 	// This member is required.
 	VpcConfiguration *DataSourceVpcConfiguration
@@ -1688,12 +1662,12 @@ type FsxConfiguration struct {
 	// and the file isn't included in the index.
 	ExclusionPatterns []string
 
-	// A list of DataSourceToIndexFieldMapping objects that map Amazon FSx data source
-	// attributes or field names to Amazon Kendra index field names. To create custom
-	// fields, use the UpdateIndex API before you map to Amazon FSx fields. For more
-	// information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Amazon
-	// FSx data source field names must exist in your Amazon FSx custom metadata.
+	// A list of DataSourceToIndexFieldMapping objects that map Amazon FSx data
+	// source attributes or field names to Amazon Kendra index field names. To create
+	// custom fields, use the UpdateIndex API before you map to Amazon FSx fields.
+	// For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Amazon FSx data source field names must exist in your Amazon FSx custom
+	// metadata.
 	FieldMappings []DataSourceToIndexFieldMapping
 
 	// A list of regular expression patterns to include certain files in your Amazon
@@ -1707,28 +1681,21 @@ type FsxConfiguration struct {
 	// key-value pairs required to connect to your Amazon FSx file system. Windows is
 	// currently the only supported type. The secret must contain a JSON structure with
 	// the following keys:
-	// - username—The Active Directory user name, along with the
-	// Domain Name System (DNS) domain name. For example, user@corp.example.com. The
-	// Active Directory user account must have read and mounting access to the Amazon
-	// FSx file system for Windows.
-	// - password—The password of the Active Directory
-	// user account with read and mounting access to the Amazon FSx Windows file
-	// system.
+	//     - username—The Active Directory user name, along with the Domain Name System (DNS) domain name. For example, user@corp.example.com. The Active Directory user account must have read and mounting access to the Amazon FSx file system for Windows.
+	//     - password—The password of the Active Directory user account with read and mounting access to the Amazon FSx Windows file system.
 	SecretArn *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information to connect to GitHub as your data source.
+// Provides the configuration information to connect to GitHub as your data
+// source.
 type GitHubConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
 	// key-value pairs required to connect to your GitHub. The secret must contain a
 	// JSON structure with the following keys:
-	// - personalToken—The access token created
-	// in GitHub. For more information on creating a token in GitHub, see Using a
-	// GitHub data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-github.html).
+	//     - personalToken—The access token created in GitHub. For more information on creating a token in GitHub, see Using a GitHub data source (https://docs.aws.amazon.com/kendra/latest/dg/data-source-github.html) .
 	//
 	// This member is required.
 	SecretArn *string
@@ -1757,9 +1724,8 @@ type GitHubConfiguration struct {
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of GitHub commits to Amazon Kendra index field names. To create custom
 	// fields, use the UpdateIndex API before you map to GitHub fields. For more
-	// information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The GitHub
-	// data source field names must exist in your GitHub custom metadata.
+	// information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The GitHub data source field names must exist in your GitHub custom metadata.
 	GitHubCommitConfigurationFieldMappings []DataSourceToIndexFieldMapping
 
 	// Configuration information to include certain types of GitHub content. You can
@@ -1769,58 +1735,51 @@ type GitHubConfiguration struct {
 
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of GitHub issue attachments to Amazon Kendra index field names. To create
-	// custom fields, use the UpdateIndex API before you map to GitHub fields. For more
-	// information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The GitHub
-	// data source field names must exist in your GitHub custom metadata.
+	// custom fields, use the UpdateIndex API before you map to GitHub fields. For
+	// more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The GitHub data source field names must exist in your GitHub custom metadata.
 	GitHubIssueAttachmentConfigurationFieldMappings []DataSourceToIndexFieldMapping
 
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of GitHub issue comments to Amazon Kendra index field names. To create
-	// custom fields, use the UpdateIndex API before you map to GitHub fields. For more
-	// information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The GitHub
-	// data source field names must exist in your GitHub custom metadata.
+	// custom fields, use the UpdateIndex API before you map to GitHub fields. For
+	// more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The GitHub data source field names must exist in your GitHub custom metadata.
 	GitHubIssueCommentConfigurationFieldMappings []DataSourceToIndexFieldMapping
 
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of GitHub issues to Amazon Kendra index field names. To create custom
 	// fields, use the UpdateIndex API before you map to GitHub fields. For more
-	// information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The GitHub
-	// data source field names must exist in your GitHub custom metadata.
+	// information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The GitHub data source field names must exist in your GitHub custom metadata.
 	GitHubIssueDocumentConfigurationFieldMappings []DataSourceToIndexFieldMapping
 
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of GitHub pull request comments to Amazon Kendra index field names. To
 	// create custom fields, use the UpdateIndex API before you map to GitHub fields.
-	// For more information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The GitHub
-	// data source field names must exist in your GitHub custom metadata.
+	// For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The GitHub data source field names must exist in your GitHub custom metadata.
 	GitHubPullRequestCommentConfigurationFieldMappings []DataSourceToIndexFieldMapping
 
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of GitHub pull request attachments to Amazon Kendra index field names. To
 	// create custom fields, use the UpdateIndex API before you map to GitHub fields.
-	// For more information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The GitHub
-	// data source field names must exist in your GitHub custom metadata.
+	// For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The GitHub data source field names must exist in your GitHub custom metadata.
 	GitHubPullRequestDocumentAttachmentConfigurationFieldMappings []DataSourceToIndexFieldMapping
 
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of GitHub pull requests to Amazon Kendra index field names. To create
-	// custom fields, use the UpdateIndex API before you map to GitHub fields. For more
-	// information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The GitHub
-	// data source field names must exist in your GitHub custom metadata.
+	// custom fields, use the UpdateIndex API before you map to GitHub fields. For
+	// more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The GitHub data source field names must exist in your GitHub custom metadata.
 	GitHubPullRequestDocumentConfigurationFieldMappings []DataSourceToIndexFieldMapping
 
 	// A list of DataSourceToIndexFieldMapping objects that map GitHub repository
 	// attributes or field names to Amazon Kendra index field names. To create custom
 	// fields, use the UpdateIndex API before you map to GitHub fields. For more
-	// information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The GitHub
-	// data source field names must exist in your GitHub custom metadata.
+	// information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The GitHub data source field names must exist in your GitHub custom metadata.
 	GitHubRepositoryConfigurationFieldMappings []DataSourceToIndexFieldMapping
 
 	// A list of regular expression patterns to include certain file names in your
@@ -1853,19 +1812,19 @@ type GitHubConfiguration struct {
 	// Configuration information to connect to GitHub Enterprise Cloud (SaaS).
 	SaaSConfiguration *SaaSConfiguration
 
-	// The type of GitHub service you want to connect to—GitHub Enterprise Cloud (SaaS)
-	// or GitHub Enterprise Server (on premises).
+	// The type of GitHub service you want to connect to—GitHub Enterprise Cloud
+	// (SaaS) or GitHub Enterprise Server (on premises).
 	Type Type
 
-	// TRUE to use the GitHub change log to determine which documents require updating
-	// in the index. Depending on the GitHub change log's size, it may take longer for
-	// Amazon Kendra to use the change log than to scan all of your documents in
-	// GitHub.
+	// TRUE to use the GitHub change log to determine which documents require
+	// updating in the index. Depending on the GitHub change log's size, it may take
+	// longer for Amazon Kendra to use the change log than to scan all of your
+	// documents in GitHub.
 	UseChangeLog bool
 
-	// Configuration information of an Amazon Virtual Private Cloud to connect to your
-	// GitHub. For more information, see Configuring a VPC
-	// (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
+	// Configuration information of an Amazon Virtual Private Cloud to connect to
+	// your GitHub. For more information, see Configuring a VPC (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html)
+	// .
 	VpcConfiguration *DataSourceVpcConfiguration
 
 	noSmithyDocumentSerde
@@ -1876,25 +1835,25 @@ type GitHubConfiguration struct {
 // issues and pull requests, comments, and comment attachments.
 type GitHubDocumentCrawlProperties struct {
 
-	// TRUE to index all issues within a repository.
+	// TRUE  to index all issues within a repository.
 	CrawlIssue bool
 
-	// TRUE to index all comments on issues.
+	// TRUE  to index all comments on issues.
 	CrawlIssueComment bool
 
-	// TRUE to include all comment attachments for issues.
+	// TRUE  to include all comment attachments for issues.
 	CrawlIssueCommentAttachment bool
 
-	// TRUE to index all pull requests within a repository.
+	// TRUE  to index all pull requests within a repository.
 	CrawlPullRequest bool
 
-	// TRUE to index all comments on pull requests.
+	// TRUE  to index all comments on pull requests.
 	CrawlPullRequestComment bool
 
-	// TRUE to include all comment attachments for pull requests.
+	// TRUE  to include all comment attachments for pull requests.
 	CrawlPullRequestCommentAttachment bool
 
-	// TRUE to index all files with a repository.
+	// TRUE  to index all files with a repository.
 	CrawlRepositoryDocuments bool
 
 	noSmithyDocumentSerde
@@ -1905,21 +1864,21 @@ type GitHubDocumentCrawlProperties struct {
 type GoogleDriveConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of a Secrets Managersecret that contains the
-	// credentials required to connect to Google Drive. For more information, see Using
-	// a Google Workspace Drive data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html).
+	// credentials required to connect to Google Drive. For more information, see
+	// Using a Google Workspace Drive data source (https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html)
+	// .
 	//
 	// This member is required.
 	SecretArn *string
 
 	// A list of MIME types to exclude from the index. All documents matching the
 	// specified MIME type are excluded. For a list of MIME types, see Using a Google
-	// Workspace Drive data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html).
+	// Workspace Drive data source (https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html)
+	// .
 	ExcludeMimeTypes []string
 
-	// A list of identifiers or shared drives to exclude from the index. All files and
-	// folders stored on the shared drive are excluded.
+	// A list of identifiers or shared drives to exclude from the index. All files
+	// and folders stored on the shared drive are excluded.
 	ExcludeSharedDrives []string
 
 	// A list of email addresses of the users. Documents owned by these users are
@@ -1936,10 +1895,10 @@ type GoogleDriveConfiguration struct {
 	ExclusionPatterns []string
 
 	// Maps Google Drive data source attributes or field names to Amazon Kendra index
-	// field names. To create custom fields, use the UpdateIndex API before you map to
-	// Google Drive fields. For more information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Google
-	// Drive data source field names must exist in your Google Drive custom metadata.
+	// field names. To create custom fields, use the UpdateIndex API before you map
+	// to Google Drive fields. For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Google Drive data source field names must exist in your Google Drive
+	// custom metadata.
 	FieldMappings []DataSourceToIndexFieldMapping
 
 	// A list of regular expression patterns to include certain items in your Google
@@ -1967,42 +1926,42 @@ type GroupMembers struct {
 	// belong to the "Interns" group.
 	MemberUsers []MemberUser
 
-	// If you have more than 1000 users and/or sub groups for a single group, you need
-	// to provide the path to the S3 file that lists your users and sub groups for a
-	// group. Your sub groups can contain more than 1000 users, but the list of sub
+	// If you have more than 1000 users and/or sub groups for a single group, you
+	// need to provide the path to the S3 file that lists your users and sub groups for
+	// a group. Your sub groups can contain more than 1000 users, but the list of sub
 	// groups that belong to a group (and/or users) must be no more than 1000. You can
-	// download this example S3 file
-	// (https://docs.aws.amazon.com/kendra/latest/dg/samples/group_members.zip) that
-	// uses the correct format for listing group members. Note, dataSourceId is
-	// optional. The value of type for a group is always GROUP and for a user it is
-	// always USER.
+	// download this example S3 file (https://docs.aws.amazon.com/kendra/latest/dg/samples/group_members.zip)
+	// that uses the correct format for listing group members. Note, dataSourceId is
+	// optional. The value of type  for a group is always GROUP and for a user it is
+	// always USER .
 	S3PathforGroupMembers *S3Path
 
 	noSmithyDocumentSerde
 }
 
-// Summary information on the processing of PUT and DELETE actions for mapping
+// Summary information on the processing of PUT  and DELETE actions for mapping
 // users to their groups.
 type GroupOrderingIdSummary struct {
 
-	// The reason an action could not be processed. An action can be a PUT or DELETE
+	// The reason an action could not be processed. An action can be a PUT  or DELETE
 	// action for mapping users to their groups.
 	FailureReason *string
 
-	// The last date-time an action was updated. An action can be a PUT or DELETE
+	// The last date-time an action was updated. An action can be a PUT  or DELETE
 	// action for mapping users to their groups.
 	LastUpdatedAt *time.Time
 
-	// The order in which actions should complete processing. An action can be a PUT or
-	// DELETE action for mapping users to their groups.
+	// The order in which actions should complete processing. An action can be a PUT
+	// or DELETE  action for mapping users to their groups.
 	OrderingId *int64
 
-	// The date-time an action was received by Amazon Kendra. An action can be a PUT or
-	// DELETE action for mapping users to their groups.
+	// The date-time an action was received by Amazon Kendra. An action can be a PUT
+	// or DELETE  action for mapping users to their groups.
 	ReceivedAt *time.Time
 
-	// The current processing status of actions for mapping users to their groups. The
-	// status can be either PROCESSING, SUCCEEDED, DELETING, DELETED, or FAILED.
+	// The current processing status of actions for mapping users to their groups.
+	// The status can be either PROCESSING , SUCCEEDED , DELETING , DELETED , or
+	// FAILED .
 	Status PrincipalMappingStatus
 
 	noSmithyDocumentSerde
@@ -2014,21 +1973,20 @@ type GroupSummary struct {
 	// The identifier of the group you want group summary information on.
 	GroupId *string
 
-	// The timestamp identifier used for the latest PUT or DELETE action.
+	// The timestamp identifier used for the latest PUT  or DELETE  action.
 	OrderingId *int64
 
 	noSmithyDocumentSerde
 }
 
-// Information to define the hierarchy for which documents users should have access
-// to.
+// Information to define the hierarchy for which documents users should have
+// access to.
 type HierarchicalPrincipal struct {
 
-	// A list of principal
-	// (https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html) lists that
-	// define the hierarchy for which documents users should have access to. Each
-	// hierarchical list specifies which user or group has allow or deny access for
-	// each document.
+	// A list of principal (https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html)
+	// lists that define the hierarchy for which documents users should have access to.
+	// Each hierarchical list specifies which user or group has allow or deny access
+	// for each document.
 	//
 	// This member is required.
 	PrincipalList []Principal
@@ -2036,8 +1994,8 @@ type HierarchicalPrincipal struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information that you can use to highlight a search result so that your
-// users can quickly identify terms in the response.
+// Provides information that you can use to highlight a search result so that
+// your users can quickly identify terms in the response.
 type Highlight struct {
 
 	// The zero-based location in the response string where the highlight starts.
@@ -2060,33 +2018,31 @@ type Highlight struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information for invoking a Lambda function in Lambda
-// to alter document metadata and content when ingesting documents into Amazon
-// Kendra. You can configure your Lambda function using
-// PreExtractionHookConfiguration
-// (https://docs.aws.amazon.com/kendra/latest/dg/API_CustomDocumentEnrichmentConfiguration.html)
+// Provides the configuration information for invoking a Lambda function in
+// Lambda to alter document metadata and content when ingesting documents into
+// Amazon Kendra. You can configure your Lambda function using
+// PreExtractionHookConfiguration (https://docs.aws.amazon.com/kendra/latest/dg/API_CustomDocumentEnrichmentConfiguration.html)
 // if you want to apply advanced alterations on the original or raw documents. If
 // you want to apply advanced alterations on the Amazon Kendra structured
 // documents, you must configure your Lambda function using
-// PostExtractionHookConfiguration
-// (https://docs.aws.amazon.com/kendra/latest/dg/API_CustomDocumentEnrichmentConfiguration.html).
-// You can only invoke one Lambda function. However, this function can invoke other
-// functions it requires. For more information, see Customizing document metadata
-// during the ingestion process
-// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html).
+// PostExtractionHookConfiguration (https://docs.aws.amazon.com/kendra/latest/dg/API_CustomDocumentEnrichmentConfiguration.html)
+// . You can only invoke one Lambda function. However, this function can invoke
+// other functions it requires. For more information, see Customizing document
+// metadata during the ingestion process (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html)
+// .
 type HookConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of a role with permission to run a Lambda
-	// function during ingestion. For more information, see IAM roles for Amazon Kendra
-	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
+	// function during ingestion. For more information, see IAM roles for Amazon
+	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html) .
 	//
 	// This member is required.
 	LambdaArn *string
 
 	// Stores the original, raw documents or the structured, parsed documents before
 	// and after altering them. For more information, see Data contracts for Lambda
-	// functions
-	// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#cde-data-contracts-lambda).
+	// functions (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#cde-data-contracts-lambda)
+	// .
 	//
 	// This member is required.
 	S3Bucket *string
@@ -2113,17 +2069,17 @@ type IndexConfigurationSummary struct {
 	// This member is required.
 	Status IndexStatus
 
-	// The Unix timestamp when the index was last updated by the UpdateIndex API.
+	// The Unix timestamp when the index was last updated by the UpdateIndex  API.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Indicates whether the index is a Enterprise Edition index or a Developer Edition
-	// index.
+	// Indicates whether the index is a Enterprise Edition index or a Developer
+	// Edition index.
 	Edition IndexEdition
 
 	// A identifier for the index. Use this to identify the index when you are using
-	// APIs such as Query, DescribeIndex, UpdateIndex, and DeleteIndex.
+	// APIs such as Query , DescribeIndex , UpdateIndex , and DeleteIndex .
 	Id *string
 
 	// The name of the index.
@@ -2152,21 +2108,21 @@ type IndexStatistics struct {
 // Provides the configuration information for applying basic logic to alter
 // document metadata and content when ingesting documents into Amazon Kendra. To
 // apply advanced logic, to go beyond what you can do with basic logic, see
-// HookConfiguration
-// (https://docs.aws.amazon.com/kendra/latest/dg/API_HookConfiguration.html). For
-// more information, see Customizing document metadata during the ingestion process
-// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html).
+// HookConfiguration (https://docs.aws.amazon.com/kendra/latest/dg/API_HookConfiguration.html)
+// . For more information, see Customizing document metadata during the ingestion
+// process (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html)
+// .
 type InlineCustomDocumentEnrichmentConfiguration struct {
 
 	// Configuration of the condition used for the target document attribute or
 	// metadata field when ingesting documents into Amazon Kendra.
 	Condition *DocumentAttributeCondition
 
-	// TRUE to delete content if the condition used for the target attribute is met.
+	// TRUE  to delete content if the condition used for the target attribute is met.
 	DocumentContentDeletion bool
 
-	// Configuration of the target document attribute or metadata field when ingesting
-	// documents into Amazon Kendra. You can also include a value.
+	// Configuration of the target document attribute or metadata field when
+	// ingesting documents into Amazon Kendra. You can also include a value.
 	Target *DocumentAttributeTarget
 
 	noSmithyDocumentSerde
@@ -2183,11 +2139,8 @@ type JiraConfiguration struct {
 	// The Amazon Resource Name (ARN) of a secret in Secrets Manager contains the
 	// key-value pairs required to connect to your Jira data source. The secret must
 	// contain a JSON structure with the following keys:
-	// - jiraId—The Jira user name or
-	// email.
-	// - jiraCredentials—The Jira API token. For more information, see Using a
-	// Jira data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html).
+	//     - jiraId—The Jira user name or email.
+	//     - jiraCredentials—The Jira API token. For more information, see Using a Jira data source (https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html) .
 	//
 	// This member is required.
 	SecretArn *string
@@ -2195,81 +2148,76 @@ type JiraConfiguration struct {
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of Jira attachments to Amazon Kendra index field names. To create custom
 	// fields, use the UpdateIndex API before you map to Jira fields. For more
-	// information, see  Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Jira data
-	// source field names must exist in your Jira custom metadata.
+	// information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Jira data source field names must exist in your Jira custom metadata.
 	AttachmentFieldMappings []DataSourceToIndexFieldMapping
 
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of Jira comments to Amazon Kendra index field names. To create custom
 	// fields, use the UpdateIndex API before you map to Jira fields. For more
-	// information, see  Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Jira data
-	// source field names must exist in your Jira custom metadata.
+	// information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Jira data source field names must exist in your Jira custom metadata.
 	CommentFieldMappings []DataSourceToIndexFieldMapping
 
-	// A list of regular expression patterns to exclude certain file paths, file names,
-	// and file types in your Jira data source. Files that match the patterns are
-	// excluded from the index. Files that don’t match the patterns are included in the
-	// index. If a file matches both an inclusion pattern and an exclusion pattern, the
-	// exclusion pattern takes precedence and the file isn't included in the index.
+	// A list of regular expression patterns to exclude certain file paths, file
+	// names, and file types in your Jira data source. Files that match the patterns
+	// are excluded from the index. Files that don’t match the patterns are included in
+	// the index. If a file matches both an inclusion pattern and an exclusion pattern,
+	// the exclusion pattern takes precedence and the file isn't included in the index.
 	ExclusionPatterns []string
 
-	// A list of regular expression patterns to include certain file paths, file names,
-	// and file types in your Jira data source. Files that match the patterns are
-	// included in the index. Files that don't match the patterns are excluded from the
-	// index. If a file matches both an inclusion pattern and an exclusion pattern, the
-	// exclusion pattern takes precedence and the file isn't included in the index.
+	// A list of regular expression patterns to include certain file paths, file
+	// names, and file types in your Jira data source. Files that match the patterns
+	// are included in the index. Files that don't match the patterns are excluded from
+	// the index. If a file matches both an inclusion pattern and an exclusion pattern,
+	// the exclusion pattern takes precedence and the file isn't included in the index.
 	InclusionPatterns []string
 
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of Jira issues to Amazon Kendra index field names. To create custom
 	// fields, use the UpdateIndex API before you map to Jira fields. For more
-	// information, see  Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Jira data
-	// source field names must exist in your Jira custom metadata.
+	// information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Jira data source field names must exist in your Jira custom metadata.
 	IssueFieldMappings []DataSourceToIndexFieldMapping
 
 	// Specify whether to crawl comments, attachments, and work logs. You can specify
 	// one or more of these options.
 	IssueSubEntityFilter []IssueSubEntity
 
-	// Specify which issue types to crawl in your Jira data source. You can specify one
-	// or more of these options to crawl.
+	// Specify which issue types to crawl in your Jira data source. You can specify
+	// one or more of these options to crawl.
 	IssueType []string
 
-	// Specify which projects to crawl in your Jira data source. You can specify one or
-	// more Jira project IDs.
+	// Specify which projects to crawl in your Jira data source. You can specify one
+	// or more Jira project IDs.
 	Project []string
 
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of Jira projects to Amazon Kendra index field names. To create custom
 	// fields, use the UpdateIndex API before you map to Jira fields. For more
-	// information, see  Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Jira data
-	// source field names must exist in your Jira custom metadata.
+	// information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Jira data source field names must exist in your Jira custom metadata.
 	ProjectFieldMappings []DataSourceToIndexFieldMapping
 
-	// Specify which statuses to crawl in your Jira data source. You can specify one or
-	// more of these options to crawl.
+	// Specify which statuses to crawl in your Jira data source. You can specify one
+	// or more of these options to crawl.
 	Status []string
 
-	// TRUE to use the Jira change log to determine which documents require updating in
-	// the index. Depending on the change log's size, it may take longer for Amazon
+	// TRUE to use the Jira change log to determine which documents require updating
+	// in the index. Depending on the change log's size, it may take longer for Amazon
 	// Kendra to use the change log than to scan all of your documents in Jira.
 	UseChangeLog bool
 
-	// Configuration information for an Amazon Virtual Private Cloud to connect to your
-	// Jira. For more information, see Configuring a VPC
-	// (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
+	// Configuration information for an Amazon Virtual Private Cloud to connect to
+	// your Jira. For more information, see Configuring a VPC (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html)
+	// .
 	VpcConfiguration *DataSourceVpcConfiguration
 
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of Jira work logs to Amazon Kendra index field names. To create custom
 	// fields, use the UpdateIndex API before you map to Jira fields. For more
-	// information, see  Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Jira data
-	// source field names must exist in your Jira custom metadata.
+	// information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Jira data source field names must exist in your Jira custom metadata.
 	WorkLogFieldMappings []DataSourceToIndexFieldMapping
 
 	noSmithyDocumentSerde
@@ -2367,7 +2315,7 @@ type OneDriveConfiguration struct {
 	// This member is required.
 	TenantDomain *string
 
-	// TRUE to disable local groups information.
+	// TRUE  to disable local groups information.
 	DisableLocalGroups bool
 
 	// A list of regular expression patterns to exclude certain documents in your
@@ -2381,9 +2329,9 @@ type OneDriveConfiguration struct {
 	// A list of DataSourceToIndexFieldMapping objects that map OneDrive data source
 	// attributes or field names to Amazon Kendra index field names. To create custom
 	// fields, use the UpdateIndex API before you map to OneDrive fields. For more
-	// information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The OneDrive
-	// data source field names must exist in your OneDrive custom metadata.
+	// information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The OneDrive data source field names must exist in your OneDrive custom
+	// metadata.
 	FieldMappings []DataSourceToIndexFieldMapping
 
 	// A list of regular expression patterns to include certain documents in your
@@ -2435,8 +2383,8 @@ type OnPremiseConfiguration struct {
 	// connect to GitHub if you require a secure SSL connection. You can simply
 	// generate a self-signed X509 certificate on any computer using OpenSSL. For an
 	// example of using OpenSSL to create an X509 certificate, see Create and sign an
-	// X509 certificate
-	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html).
+	// X509 certificate (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html)
+	// .
 	//
 	// This member is required.
 	SslCertificateS3Path *S3Path
@@ -2448,8 +2396,8 @@ type OnPremiseConfiguration struct {
 // source. This applies to users and groups with specific permissions that define
 // their level of access to your Amazon Kendra experience. You can create an Amazon
 // Kendra experience such as a search application. For more information on creating
-// a search application experience, see Building a search experience with no code
-// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
+// a search application experience, see Building a search experience with no code (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html)
+// .
 type PersonasSummary struct {
 
 	// The date-time the summary information was created.
@@ -2461,9 +2409,9 @@ type PersonasSummary struct {
 
 	// The persona that defines the specific permissions of the user or group in your
 	// IAM Identity Center identity source. The available personas or access roles are
-	// Owner and Viewer. For more information on these personas, see Providing access
-	// to your search page
-	// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience).
+	// Owner and Viewer . For more information on these personas, see Providing
+	// access to your search page (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience)
+	// .
 	Persona Persona
 
 	// The date-time the summary information was last updated.
@@ -2472,8 +2420,8 @@ type PersonasSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Provides user and group information for user context filtering
-// (https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html).
+// Provides user and group information for user context filtering (https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html)
+// .
 type Principal struct {
 
 	// Whether to allow or deny document access to the principal.
@@ -2501,8 +2449,9 @@ type Principal struct {
 // hosts.
 type ProxyConfiguration struct {
 
-	// The name of the website host you want to connect to via a web proxy server. For
-	// example, the host name of https://a.example.com/page1.html is "a.example.com".
+	// The name of the website host you want to connect to via a web proxy server.
+	// For example, the host name of https://a.example.com/page1.html is
+	// "a.example.com".
 	//
 	// This member is required.
 	Host *string
@@ -2514,10 +2463,9 @@ type ProxyConfiguration struct {
 	// This member is required.
 	Port *int32
 
-	// Your secret ARN, which you can create in Secrets Manager
-	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) The
-	// credentials are optional. You use a secret if web proxy credentials are required
-	// to connect to a website host. Amazon Kendra currently support basic
+	// Your secret ARN, which you can create in Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html)
+	// The credentials are optional. You use a secret if web proxy credentials are
+	// required to connect to a website host. Amazon Kendra currently support basic
 	// authentication to connect to a web proxy server. The secret stores your
 	// credentials.
 	Credentials *string
@@ -2535,12 +2483,12 @@ type QueryResultItem struct {
 	AdditionalAttributes []AdditionalResultAttribute
 
 	// An array of document attributes assigned to a document in the search results.
-	// For example, the document author (_author) or the source URI (_source_uri) of
-	// the document.
+	// For example, the document author ( _author ) or the source URI ( _source_uri)
+	// of the document.
 	DocumentAttributes []DocumentAttribute
 
-	// An extract of the text in the document. Contains information about highlighting
-	// the relevant terms in the excerpt.
+	// An extract of the text in the document. Contains information about
+	// highlighting the relevant terms in the excerpt.
 	DocumentExcerpt *TextWithHighlights
 
 	// The identifier for the document.
@@ -2555,42 +2503,43 @@ type QueryResultItem struct {
 
 	// A token that identifies a particular result from a particular query. Use this
 	// token to provide click-through feedback for the result. For more information,
-	// see Submitting feedback
-	// (https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html).
+	// see Submitting feedback  (https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html)
+	// .
 	FeedbackToken *string
 
-	// If the Type of document within the response is ANSWER, then it is either a TABLE
-	// answer or TEXT answer. If it's a table answer, a table excerpt is returned in
-	// TableExcerpt. If it's a text answer, a text excerpt is returned in
-	// DocumentExcerpt.
+	// If the Type  of document within the response is ANSWER , then it is either a
+	// TABLE answer or TEXT answer. If it's a table answer, a table excerpt is
+	// returned in TableExcerpt . If it's a text answer, a text excerpt is returned in
+	// DocumentExcerpt .
 	Format QueryResultFormat
 
 	// The identifier for the query result.
 	Id *string
 
-	// Indicates the confidence that Amazon Kendra has that a result matches the query
-	// that you provided. Each result is placed into a bin that indicates the
-	// confidence, VERY_HIGH, HIGH, MEDIUM and LOW. You can use the score to determine
-	// if a response meets the confidence needed for your application. The field is
-	// only set to LOW when the Type field is set to DOCUMENT and Amazon Kendra is not
-	// confident that the result matches the query.
+	// Indicates the confidence that Amazon Kendra has that a result matches the
+	// query that you provided. Each result is placed into a bin that indicates the
+	// confidence, VERY_HIGH , HIGH , MEDIUM  and LOW. You can use the score to
+	// determine if a response meets the confidence needed for your application. The
+	// field is only set to LOW  when the Type  field is set to DOCUMENT and Amazon
+	// Kendra is not confident that the result matches the query.
 	ScoreAttributes *ScoreAttributes
 
 	// An excerpt from a table within a document.
 	TableExcerpt *TableExcerpt
 
-	// The type of document within the response. For example, a response could include
-	// a question-answer that's relevant to the query.
+	// The type of document within the response. For example, a response could
+	// include a question-answer that's relevant to the query.
 	Type QueryResultType
 
 	noSmithyDocumentSerde
 }
 
-// Summary information on a query suggestions block list. This includes information
-// on the block list ID, block list name, when the block list was created, when the
-// block list was last updated, and the count of block words/phrases in the block
-// list. For information on the current quota limits for block lists, see Quotas
-// for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
+// Summary information on a query suggestions block list. This includes
+// information on the block list ID, block list name, when the block list was
+// created, when the block list was last updated, and the count of block
+// words/phrases in the block list. For information on the current quota limits for
+// block lists, see Quotas for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html)
+// .
 type QuerySuggestionsBlockListSummary struct {
 
 	// The date-time summary information for a query suggestions block list was last
@@ -2627,9 +2576,7 @@ type QuipConfiguration struct {
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
 	// key-value pairs that are required to connect to your Quip. The secret must
 	// contain a JSON structure with the following keys:
-	// - accessToken—The token
-	// created in Quip. For more information, see Using a Quip data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-slack.html).
+	//     - accessToken—The token created in Quip. For more information, see Using a Quip data source (https://docs.aws.amazon.com/kendra/latest/dg/data-source-slack.html) .
 	//
 	// This member is required.
 	SecretArn *string
@@ -2637,24 +2584,23 @@ type QuipConfiguration struct {
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of Quip attachments to Amazon Kendra index field names. To create custom
 	// fields, use the UpdateIndex API before you map to Quip fields. For more
-	// information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Quip
-	// field names must exist in your Quip custom metadata.
+	// information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Quip field names must exist in your Quip custom metadata.
 	AttachmentFieldMappings []DataSourceToIndexFieldMapping
 
-	// TRUE to index attachments.
+	// TRUE  to index attachments.
 	CrawlAttachments bool
 
-	// TRUE to index the contents of chat rooms.
+	// TRUE  to index the contents of chat rooms.
 	CrawlChatRooms bool
 
-	// TRUE to index file comments.
+	// TRUE  to index file comments.
 	CrawlFileComments bool
 
-	// A list of regular expression patterns to exclude certain files in your Quip file
-	// system. Files that match the patterns are excluded from the index. Files that
-	// don’t match the patterns are included in the index. If a file matches both an
-	// inclusion pattern and an exclusion pattern, the exclusion pattern takes
+	// A list of regular expression patterns to exclude certain files in your Quip
+	// file system. Files that match the patterns are excluded from the index. Files
+	// that don’t match the patterns are included in the index. If a file matches both
+	// an inclusion pattern and an exclusion pattern, the exclusion pattern takes
 	// precedence, and the file isn't included in the index.
 	ExclusionPatterns []string
 
@@ -2664,8 +2610,8 @@ type QuipConfiguration struct {
 	// this example is "zlLuOVNSarTL".
 	FolderIds []string
 
-	// A list of regular expression patterns to include certain files in your Quip file
-	// system. Files that match the patterns are included in the index. Files that
+	// A list of regular expression patterns to include certain files in your Quip
+	// file system. Files that match the patterns are included in the index. Files that
 	// don't match the patterns are excluded from the index. If a file matches both an
 	// inclusion pattern and an exclusion pattern, the exclusion pattern takes
 	// precedence, and the file isn't included in the index.
@@ -2674,22 +2620,20 @@ type QuipConfiguration struct {
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of Quip messages to Amazon Kendra index field names. To create custom
 	// fields, use the UpdateIndex API before you map to Quip fields. For more
-	// information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Quip
-	// field names must exist in your Quip custom metadata.
+	// information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Quip field names must exist in your Quip custom metadata.
 	MessageFieldMappings []DataSourceToIndexFieldMapping
 
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
 	// names of Quip threads to Amazon Kendra index field names. To create custom
 	// fields, use the UpdateIndex API before you map to Quip fields. For more
-	// information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Quip
-	// field names must exist in your Quip custom metadata.
+	// information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Quip field names must exist in your Quip custom metadata.
 	ThreadFieldMappings []DataSourceToIndexFieldMapping
 
 	// Configuration information for an Amazon Virtual Private Cloud (VPC) to connect
-	// to your Quip. For more information, see Configuring a VPC
-	// (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
+	// to your Quip. For more information, see Configuring a VPC (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html)
+	// .
 	VpcConfiguration *DataSourceVpcConfiguration
 
 	noSmithyDocumentSerde
@@ -2706,42 +2650,44 @@ type Relevance struct {
 	// of the boost drops off. The higher the importance, the faster the effect drops
 	// off. If you don't specify a value, the default is 3 months. The value of the
 	// field is a numeric string followed by the character "s", for example "86400s"
-	// for one day, or "604800s" for one week. Only applies to DATE fields.
+	// for one day, or "604800s" for one week. Only applies to DATE  fields.
 	Duration *string
 
-	// Indicates that this field determines how "fresh" a document is. For example, if
-	// document 1 was created on November 5, and document 2 was created on October 31,
-	// document 1 is "fresher" than document 2. You can only set the Freshness field on
-	// one DATE type field. Only applies to DATE fields.
+	// Indicates that this field determines how "fresh" a document is. For example,
+	// if document 1 was created on November 5, and document 2 was created on October
+	// 31, document 1 is "fresher" than document 2. You can only set the Freshness
+	// field on one DATE  type field. Only applies to DATE  fields.
 	Freshness *bool
 
-	// The relative importance of the field in the search. Larger numbers provide more
-	// of a boost than smaller numbers.
+	// The relative importance of the field in the search. Larger numbers provide
+	// more of a boost than smaller numbers.
 	Importance *int32
 
-	// Determines how values should be interpreted. When the RankOrder field is
+	// Determines how values should be interpreted. When the RankOrder  field is
 	// ASCENDING, higher numbers are better. For example, a document with a rating
 	// score of 10 is higher ranking than a document with a rating score of 1. When the
-	// RankOrder field is DESCENDING, lower numbers are better. For example, in a task
-	// tracking application, a priority 1 task is more important than a priority 5
-	// task. Only applies to LONG and DOUBLE fields.
+	//
+	// RankOrder field is DESCENDING, lower numbers are better. For example, in a
+	// task tracking application, a priority 1 task is more important than a priority 5
+	// task. Only applies to LONG  and DOUBLE  fields.
 	RankOrder Order
 
-	// A list of values that should be given a different boost when they appear in the
-	// result list. For example, if you are boosting a field called "department," query
-	// terms that match the department field are boosted in the result. However, you
-	// can add entries from the department field to boost documents with those values
-	// higher. For example, you can add entries to the map with names of departments.
-	// If you add "HR",5 and "Legal",3 those departments are given special attention
-	// when they appear in the metadata of a document. When those terms appear they are
-	// given the specified importance instead of the regular importance for the boost.
+	// A list of values that should be given a different boost when they appear in
+	// the result list. For example, if you are boosting a field called "department,"
+	// query terms that match the department field are boosted in the result. However,
+	// you can add entries from the department field to boost documents with those
+	// values higher. For example, you can add entries to the map with names of
+	// departments. If you add "HR",5 and "Legal",3 those departments are given special
+	// attention when they appear in the metadata of a document. When those terms
+	// appear they are given the specified importance instead of the regular importance
+	// for the boost.
 	ValueImportanceMap map[string]int32
 
 	noSmithyDocumentSerde
 }
 
 // Provides feedback on how relevant a document is to a search. Your application
-// uses the SubmitFeedback API to provide relevance information.
+// uses the SubmitFeedback  API to provide relevance information.
 type RelevanceFeedback struct {
 
 	// Whether to document was relevant or not relevant to the search.
@@ -2767,8 +2713,8 @@ type S3DataSourceConfiguration struct {
 	BucketName *string
 
 	// Provides the path to the S3 bucket that contains the user context filtering
-	// files for the data source. For the format of the file, see Access control for S3
-	// data sources (https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html).
+	// files for the data source. For the format of the file, see Access control for
+	// S3 data sources (https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html) .
 	AccessControlListConfiguration *AccessControlListConfiguration
 
 	// Document metadata files that contain information such as the document access
@@ -2776,31 +2722,22 @@ type S3DataSourceConfiguration struct {
 	// metadata file contains metadata about a single document.
 	DocumentsMetadataConfiguration *DocumentsMetadataConfiguration
 
-	// A list of glob patterns for documents that should not be indexed. If a document
-	// that matches an inclusion prefix or inclusion pattern also matches an exclusion
-	// pattern, the document is not indexed. Some examples
-	// (https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters)
+	// A list of glob patterns for documents that should not be indexed. If a
+	// document that matches an inclusion prefix or inclusion pattern also matches an
+	// exclusion pattern, the document is not indexed. Some examples (https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters)
 	// are:
-	// - *.png , *.jpg will exclude all PNG and JPEG image files in a directory
-	// (files with the extensions .png and .jpg).
-	// - *internal* will exclude all files
-	// in a directory that contain 'internal' in the file name, such as 'internal',
-	// 'internal_only', 'company_internal'.
-	// - **/*internal* will exclude all
-	// internal-related files in a directory and its subdirectories.
+	//     - *.png , *.jpg will exclude all PNG and JPEG image files in a directory (files with the extensions .png and .jpg).
+	//     - *internal* will exclude all files in a directory that contain 'internal' in the file name, such as 'internal', 'internal_only', 'company_internal'.
+	//     - **/*internal* will exclude all internal-related files in a directory and its subdirectories.
 	ExclusionPatterns []string
 
-	// A list of glob patterns for documents that should be indexed. If a document that
-	// matches an inclusion pattern also matches an exclusion pattern, the document is
-	// not indexed. Some examples
-	// (https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters)
+	// A list of glob patterns for documents that should be indexed. If a document
+	// that matches an inclusion pattern also matches an exclusion pattern, the
+	// document is not indexed. Some examples (https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters)
 	// are:
-	// - *.txt will include all text files in a directory (files with the
-	// extension .txt).
-	// - **/*.txt will include all text files in a directory and its
-	// subdirectories.
-	// - *tax* will include all files in a directory that contain 'tax'
-	// in the file name, such as 'tax', 'taxes', 'income_tax'.
+	//     - *.txt will include all text files in a directory (files with the extension .txt).
+	//     - **/*.txt will include all text files in a directory and its subdirectories.
+	//     - *tax* will include all files in a directory that contain 'tax' in the file name, such as 'tax', 'taxes', 'income_tax'.
 	InclusionPatterns []string
 
 	// A list of S3 prefixes for the documents that should be included in the index.
@@ -2849,22 +2786,22 @@ type SaaSConfiguration struct {
 type SalesforceChatterFeedConfiguration struct {
 
 	// The name of the column in the Salesforce FeedItem table that contains the
-	// content to index. Typically this is the Body column.
+	// content to index. Typically this is the Body  column.
 	//
 	// This member is required.
 	DocumentDataFieldName *string
 
-	// The name of the column in the Salesforce FeedItem table that contains the title
-	// of the document. This is typically the Title column.
+	// The name of the column in the Salesforce FeedItem table that contains the
+	// title of the document. This is typically the Title  column.
 	DocumentTitleFieldName *string
 
 	// Maps fields from a Salesforce chatter feed into Amazon Kendra index fields.
 	FieldMappings []DataSourceToIndexFieldMapping
 
-	// Filters the documents in the feed based on status of the user. When you specify
-	// ACTIVE_USERS only documents from users who have an active account are indexed.
-	// When you specify STANDARD_USER only documents for Salesforce standard users are
-	// documented. You can specify both.
+	// Filters the documents in the feed based on status of the user. When you
+	// specify ACTIVE_USERS only documents from users who have an active account are
+	// indexed. When you specify STANDARD_USER only documents for Salesforce standard
+	// users are documented. You can specify both.
 	IncludeFilterTypes []SalesforceChatterFeedIncludeFilterType
 
 	noSmithyDocumentSerde
@@ -2877,19 +2814,12 @@ type SalesforceConfiguration struct {
 	// The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the
 	// key/value pairs required to connect to your Salesforce instance. The secret must
 	// contain a JSON structure with the following keys:
-	// - authenticationUrl - The
-	// OAUTH endpoint that Amazon Kendra connects to get an OAUTH token.
-	// - consumerKey
-	// - The application public key generated when you created your Salesforce
-	// application.
-	// - consumerSecret - The application private key generated when you
-	// created your Salesforce application.
-	// - password - The password associated with
-	// the user logging in to the Salesforce instance.
-	// - securityToken - The token
-	// associated with the user account logging in to the Salesforce instance.
-	// -
-	// username - The user name of the user logging in to the Salesforce instance.
+	//     - authenticationUrl - The OAUTH endpoint that Amazon Kendra connects to get an OAUTH token.
+	//     - consumerKey - The application public key generated when you created your Salesforce application.
+	//     - consumerSecret - The application private key generated when you created your Salesforce application.
+	//     - password - The password associated with the user logging in to the Salesforce instance.
+	//     - securityToken - The token associated with the user account logging in to the Salesforce instance.
+	//     - username - The user name of the user logging in to the Salesforce instance.
 	//
 	// This member is required.
 	SecretArn *string
@@ -2940,8 +2870,8 @@ type SalesforceConfiguration struct {
 // Provides the configuration information for indexing Salesforce custom articles.
 type SalesforceCustomKnowledgeArticleTypeConfiguration struct {
 
-	// The name of the field in the custom knowledge article that contains the document
-	// data to index.
+	// The name of the field in the custom knowledge article that contains the
+	// document data to index.
 	//
 	// This member is required.
 	DocumentDataFieldName *string
@@ -2951,15 +2881,15 @@ type SalesforceCustomKnowledgeArticleTypeConfiguration struct {
 	// This member is required.
 	Name *string
 
-	// The name of the field in the custom knowledge article that contains the document
-	// title.
+	// The name of the field in the custom knowledge article that contains the
+	// document title.
 	DocumentTitleFieldName *string
 
-	// Maps attributes or field names of the custom knowledge article to Amazon Kendra
-	// index field names. To create custom fields, use the UpdateIndex API before you
-	// map to Salesforce fields. For more information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The
-	// Salesforce data source field names must exist in your Salesforce custom
+	// Maps attributes or field names of the custom knowledge article to Amazon
+	// Kendra index field names. To create custom fields, use the UpdateIndex API
+	// before you map to Salesforce fields. For more information, see Mapping data
+	// source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Salesforce data source field names must exist in your Salesforce custom
 	// metadata.
 	FieldMappings []DataSourceToIndexFieldMapping
 
@@ -2972,8 +2902,8 @@ type SalesforceCustomKnowledgeArticleTypeConfiguration struct {
 // articles, but not both
 type SalesforceKnowledgeArticleConfiguration struct {
 
-	// Specifies the document states that should be included when Amazon Kendra indexes
-	// knowledge articles. You must specify at least one state.
+	// Specifies the document states that should be included when Amazon Kendra
+	// indexes knowledge articles. You must specify at least one state.
 	//
 	// This member is required.
 	IncludedStates []SalesforceKnowledgeArticleState
@@ -3000,18 +2930,17 @@ type SalesforceStandardKnowledgeArticleTypeConfiguration struct {
 	DocumentTitleFieldName *string
 
 	// Maps attributes or field names of the knowledge article to Amazon Kendra index
-	// field names. To create custom fields, use the UpdateIndex API before you map to
-	// Salesforce fields. For more information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The
-	// Salesforce data source field names must exist in your Salesforce custom
+	// field names. To create custom fields, use the UpdateIndex API before you map
+	// to Salesforce fields. For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Salesforce data source field names must exist in your Salesforce custom
 	// metadata.
 	FieldMappings []DataSourceToIndexFieldMapping
 
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information for processing attachments to Salesforce
-// standard objects.
+// Provides the configuration information for processing attachments to
+// Salesforce standard objects.
 type SalesforceStandardObjectAttachmentConfiguration struct {
 
 	// The name of the field used for the document title.
@@ -3043,10 +2972,9 @@ type SalesforceStandardObjectConfiguration struct {
 	DocumentTitleFieldName *string
 
 	// Maps attributes or field names of the standard object to Amazon Kendra index
-	// field names. To create custom fields, use the UpdateIndex API before you map to
-	// Salesforce fields. For more information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The
-	// Salesforce data source field names must exist in your Salesforce custom
+	// field names. To create custom fields, use the UpdateIndex API before you map
+	// to Salesforce fields. For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Salesforce data source field names must exist in your Salesforce custom
 	// metadata.
 	FieldMappings []DataSourceToIndexFieldMapping
 
@@ -3067,22 +2995,22 @@ type ScoreAttributes struct {
 type Search struct {
 
 	// Determines whether the field is returned in the query response. The default is
-	// true.
+	// true .
 	Displayable bool
 
-	// Indicates that the field can be used to create search facets, a count of results
-	// for each value in the field. The default is false .
+	// Indicates that the field can be used to create search facets, a count of
+	// results for each value in the field. The default is false  .
 	Facetable bool
 
-	// Determines whether the field is used in the search. If the Searchable field is
+	// Determines whether the field is used in the search. If the Searchable  field is
 	// true, you can use relevance tuning to manually tune how Amazon Kendra weights
-	// the field in the search. The default is true for string fields and false for
+	// the field in the search. The default is true  for string fields and false for
 	// number and date fields.
 	Searchable bool
 
-	// Determines whether the field can be used to sort the results of a query. If you
-	// specify sorting on a field that does not have Sortable set to true, Amazon
-	// Kendra returns an exception. The default is false.
+	// Determines whether the field can be used to sort the results of a query. If
+	// you specify sorting on a field that does not have Sortable  set to true,
+	// Amazon Kendra returns an exception. The default is false .
 	Sortable bool
 
 	noSmithyDocumentSerde
@@ -3090,7 +3018,7 @@ type Search struct {
 
 // Provides the configuration information for the seed or starting point URLs to
 // crawl. When selecting websites to index, you must adhere to the Amazon
-// Acceptable Use Policy (https://aws.amazon.com/aup/) and all other Amazon terms.
+// Acceptable Use Policy (https://aws.amazon.com/aup/)and all other Amazon terms.
 // Remember that you must only use Amazon Kendra Web Crawler to index your own
 // webpages, or webpages that you have authorization to index.
 type SeedUrlConfiguration struct {
@@ -3102,17 +3030,11 @@ type SeedUrlConfiguration struct {
 	SeedUrls []string
 
 	// You can choose one of the following modes:
-	// - HOST_ONLY – crawl only the website
-	// host names. For example, if the seed URL is "abc.example.com", then only URLs
-	// with host name "abc.example.com" are crawled.
-	// - SUBDOMAINS – crawl the website
-	// host names with subdomains. For example, if the seed URL is "abc.example.com",
-	// then "a.abc.example.com" and "b.abc.example.com" are also crawled.
-	// - EVERYTHING
-	// – crawl the website host names with subdomains and other domains that the
-	// webpages link to.
+	//     - HOST_ONLY – crawl only the website host names. For example, if the seed URL is "abc.example.com", then only URLs with host name "abc.example.com" are crawled.
+	//     - SUBDOMAINS – crawl the website host names with subdomains. For example, if the seed URL is "abc.example.com", then "a.abc.example.com" and "b.abc.example.com" are also crawled.
+	//     - EVERYTHING – crawl the website host names with subdomains and other domains that the webpages link to.
 	//
-	// The default mode is set to HOST_ONLY.
+	// The default mode is set to HOST_ONLY .
 	WebCrawlerMode WebCrawlerMode
 
 	noSmithyDocumentSerde
@@ -3141,14 +3063,14 @@ type ServiceNowConfiguration struct {
 	// The Amazon Resource Name (ARN) of the Secrets Manager secret that contains the
 	// user name and password required to connect to the ServiceNow instance. You can
 	// also provide OAuth authentication credentials of user name, password, client ID,
-	// and client secret. For more information, see Using a ServiceNow data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html).
+	// and client secret. For more information, see Using a ServiceNow data source (https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html)
+	// .
 	//
 	// This member is required.
 	SecretArn *string
 
 	// The identifier of the release that the ServiceNow host is running. If the host
-	// is not running the LONDON release, use OTHERS.
+	// is not running the LONDON  release, use OTHERS .
 	//
 	// This member is required.
 	ServiceNowBuildVersion ServiceNowBuildVersionType
@@ -3159,8 +3081,8 @@ type ServiceNowConfiguration struct {
 	// choose OAUTH2, Amazon Kendra is authenticated using the credentials of client
 	// ID, client secret, user name and password. When you use OAUTH2 authentication,
 	// you must generate a token and a client secret using the ServiceNow console. For
-	// more information, see Using a ServiceNow data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html).
+	// more information, see Using a ServiceNow data source (https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html)
+	// .
 	AuthenticationType ServiceNowAuthenticationType
 
 	// Configuration information for crawling knowledge articles in the ServiceNow
@@ -3183,7 +3105,7 @@ type ServiceNowKnowledgeArticleConfiguration struct {
 	// This member is required.
 	DocumentDataFieldName *string
 
-	// TRUE to index attachments to knowledge articles.
+	// TRUE  to index attachments to knowledge articles.
 	CrawlAttachments bool
 
 	// The name of the ServiceNow field that is mapped to the index document title
@@ -3195,22 +3117,21 @@ type ServiceNowKnowledgeArticleConfiguration struct {
 	// from the index. Items that don't match the patterns are included in the index.
 	// If an item matches both an inclusion and exclusion pattern, the exclusion
 	// pattern takes precedence and the item isn't included in the index. The regex is
-	// applied to the field specified in the PatternTargetField.
+	// applied to the field specified in the PatternTargetField .
 	ExcludeAttachmentFilePatterns []string
 
 	// Maps attributes or field names of knoweldge articles to Amazon Kendra index
-	// field names. To create custom fields, use the UpdateIndex API before you map to
-	// ServiceNow fields. For more information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The
-	// ServiceNow data source field names must exist in your ServiceNow custom
+	// field names. To create custom fields, use the UpdateIndex API before you map
+	// to ServiceNow fields. For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The ServiceNow data source field names must exist in your ServiceNow custom
 	// metadata.
 	FieldMappings []DataSourceToIndexFieldMapping
 
 	// A query that selects the knowledge articles to index. The query can return
 	// articles from multiple knowledge bases, and the knowledge bases can be public or
 	// private. The query string must be one generated by the ServiceNow console. For
-	// more information, see Specifying documents to index with a query
-	// (https://docs.aws.amazon.com/kendra/latest/dg/servicenow-query.html).
+	// more information, see Specifying documents to index with a query (https://docs.aws.amazon.com/kendra/latest/dg/servicenow-query.html)
+	// .
 	FilterQuery *string
 
 	// A list of regular expression patterns to include certain attachments of
@@ -3218,14 +3139,14 @@ type ServiceNowKnowledgeArticleConfiguration struct {
 	// in the index. Items that don't match the patterns are excluded from the index.
 	// If an item matches both an inclusion and exclusion pattern, the exclusion
 	// pattern takes precedence and the item isn't included in the index. The regex is
-	// applied to the field specified in the PatternTargetField.
+	// applied to the field specified in the PatternTargetField .
 	IncludeAttachmentFilePatterns []string
 
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information for crawling service catalog items in the
-// ServiceNow site
+// Provides the configuration information for crawling service catalog items in
+// the ServiceNow site
 type ServiceNowServiceCatalogConfiguration struct {
 
 	// The name of the ServiceNow field that is mapped to the index document contents
@@ -3234,16 +3155,16 @@ type ServiceNowServiceCatalogConfiguration struct {
 	// This member is required.
 	DocumentDataFieldName *string
 
-	// TRUE to index attachments to service catalog items.
+	// TRUE  to index attachments to service catalog items.
 	CrawlAttachments bool
 
 	// The name of the ServiceNow field that is mapped to the index document title
 	// field.
 	DocumentTitleFieldName *string
 
-	// A list of regular expression patterns to exclude certain attachments of catalogs
-	// in your ServiceNow. Item that match the patterns are excluded from the index.
-	// Items that don't match the patterns are included in the index. If an item
+	// A list of regular expression patterns to exclude certain attachments of
+	// catalogs in your ServiceNow. Item that match the patterns are excluded from the
+	// index. Items that don't match the patterns are included in the index. If an item
 	// matches both an inclusion and exclusion pattern, the exclusion pattern takes
 	// precedence and the item isn't included in the index. The regex is applied to the
 	// file name of the attachment.
@@ -3251,18 +3172,17 @@ type ServiceNowServiceCatalogConfiguration struct {
 
 	// Maps attributes or field names of catalogs to Amazon Kendra index field names.
 	// To create custom fields, use the UpdateIndex API before you map to ServiceNow
-	// fields. For more information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The
-	// ServiceNow data source field names must exist in your ServiceNow custom
+	// fields. For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The ServiceNow data source field names must exist in your ServiceNow custom
 	// metadata.
 	FieldMappings []DataSourceToIndexFieldMapping
 
-	// A list of regular expression patterns to include certain attachments of catalogs
-	// in your ServiceNow. Item that match the patterns are included in the index.
-	// Items that don't match the patterns are excluded from the index. If an item
-	// matches both an inclusion and exclusion pattern, the exclusion pattern takes
-	// precedence and the item isn't included in the index. The regex is applied to the
-	// file name of the attachment.
+	// A list of regular expression patterns to include certain attachments of
+	// catalogs in your ServiceNow. Item that match the patterns are included in the
+	// index. Items that don't match the patterns are excluded from the index. If an
+	// item matches both an inclusion and exclusion pattern, the exclusion pattern
+	// takes precedence and the item isn't included in the index. The regex is applied
+	// to the file name of the attachment.
 	IncludeAttachmentFilePatterns []string
 
 	noSmithyDocumentSerde
@@ -3276,11 +3196,11 @@ type SharePointConfiguration struct {
 	// user name and password required to connect to the SharePoint instance. If you
 	// use SharePoint Server, you also need to provide the sever domain name as part of
 	// the credentials. For more information, see Using a Microsoft SharePoint Data
-	// Source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html). You
-	// can also provide OAuth authentication credentials of user name, password, client
-	// ID, and client secret. For more information, see Using a SharePoint data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html).
+	// Source (https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html)
+	// . You can also provide OAuth authentication credentials of user name, password,
+	// client ID, and client secret. For more information, see Using a SharePoint
+	// data source (https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html)
+	// .
 	//
 	// This member is required.
 	SecretArn *string
@@ -3300,10 +3220,10 @@ type SharePointConfiguration struct {
 	// and client secret. You can use OAuth authentication for SharePoint Online.
 	AuthenticationType SharePointOnlineAuthenticationType
 
-	// TRUE to index document attachments.
+	// TRUE  to index document attachments.
 	CrawlAttachments bool
 
-	// TRUE to disable local groups information.
+	// TRUE  to disable local groups information.
 	DisableLocalGroups bool
 
 	// The Microsoft SharePoint attribute field that contains the title of the
@@ -3318,12 +3238,11 @@ type SharePointConfiguration struct {
 	// the display URL of the SharePoint document.
 	ExclusionPatterns []string
 
-	// A list of DataSourceToIndexFieldMapping objects that map SharePoint data source
-	// attributes or field names to Amazon Kendra index field names. To create custom
-	// fields, use the UpdateIndex API before you map to SharePoint fields. For more
-	// information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The
-	// SharePoint data source field names must exist in your SharePoint custom
+	// A list of DataSourceToIndexFieldMapping objects that map SharePoint data
+	// source attributes or field names to Amazon Kendra index field names. To create
+	// custom fields, use the UpdateIndex API before you map to SharePoint fields.
+	// For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The SharePoint data source field names must exist in your SharePoint custom
 	// metadata.
 	FieldMappings []DataSourceToIndexFieldMapping
 
@@ -3335,8 +3254,8 @@ type SharePointConfiguration struct {
 	// to the display URL of the SharePoint document.
 	InclusionPatterns []string
 
-	// Configuration information to connect to your Microsoft SharePoint site URLs via
-	// instance via a web proxy. You can use this option for SharePoint Server. You
+	// Configuration information to connect to your Microsoft SharePoint site URLs
+	// via instance via a web proxy. You can use this option for SharePoint Server. You
 	// must provide the website host name and port number. For example, the host name
 	// of https://a.example.com/page1.html is "a.example.com" and the port is 443, the
 	// standard port for HTTPS. Web proxy credentials are optional and you can use them
@@ -3354,8 +3273,8 @@ type SharePointConfiguration struct {
 	// connect to SharePoint Server if you require a secure SSL connection. You can
 	// simply generate a self-signed X509 certificate on any computer using OpenSSL.
 	// For an example of using OpenSSL to create an X509 certificate, see Create and
-	// sign an X509 certificate
-	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html).
+	// sign an X509 certificate (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html)
+	// .
 	SslCertificateS3Path *S3Path
 
 	// TRUE to use the SharePoint change log to determine which documents require
@@ -3364,23 +3283,23 @@ type SharePointConfiguration struct {
 	// SharePoint.
 	UseChangeLog bool
 
-	// Configuration information for an Amazon Virtual Private Cloud to connect to your
-	// Microsoft SharePoint. For more information, see Configuring a VPC
-	// (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
+	// Configuration information for an Amazon Virtual Private Cloud to connect to
+	// your Microsoft SharePoint. For more information, see Configuring a VPC (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html)
+	// .
 	VpcConfiguration *DataSourceVpcConfiguration
 
 	noSmithyDocumentSerde
 }
 
 // Provides the configuration information for the sitemap URLs to crawl. When
-// selecting websites to index, you must adhere to the Amazon Acceptable Use Policy
-// (https://aws.amazon.com/aup/) and all other Amazon terms. Remember that you must
-// only use Amazon Kendra Web Crawler to index your own webpages, or webpages that
-// you have authorization to index.
+// selecting websites to index, you must adhere to the Amazon Acceptable Use
+// Policy (https://aws.amazon.com/aup/)and all other Amazon terms. Remember that
+// you must only use Amazon Kendra Web Crawler to index your own webpages, or
+// webpages that you have authorization to index.
 type SiteMapsConfiguration struct {
 
-	// The list of sitemap URLs of the websites you want to crawl. The list can include
-	// a maximum of three sitemap URLs.
+	// The list of sitemap URLs of the websites you want to crawl. The list can
+	// include a maximum of three sitemap URLs.
 	//
 	// This member is required.
 	SiteMaps []string
@@ -3394,68 +3313,65 @@ type SlackConfiguration struct {
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
 	// key-value pairs required to connect to your Slack workspace team. The secret
 	// must contain a JSON structure with the following keys:
-	// - slackToken—The user or
-	// bot token created in Slack. For more information on creating a token in Slack,
-	// see Authentication for a Slack data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-slack.html#slack-authentication).
+	//     - slackToken—The user or bot token created in Slack. For more information on creating a token in Slack, see Authentication for a Slack data source (https://docs.aws.amazon.com/kendra/latest/dg/data-source-slack.html#slack-authentication) .
 	//
 	// This member is required.
 	SecretArn *string
 
 	// The date to start crawling your data from your Slack workspace team. The date
-	// must follow this format: yyyy-mm-dd.
+	// must follow this format: yyyy-mm-dd .
 	//
 	// This member is required.
 	SinceCrawlDate *string
 
-	// Specify whether to index public channels, private channels, group messages, and
-	// direct messages. You can specify one or more of these options.
+	// Specify whether to index public channels, private channels, group messages,
+	// and direct messages. You can specify one or more of these options.
 	//
 	// This member is required.
 	SlackEntityList []SlackEntity
 
-	// The identifier of the team in the Slack workspace. For example, T0123456789. You
-	// can find your team ID in the URL of the main page of your Slack workspace. When
-	// you log in to Slack via a browser, you are directed to the URL of the main page.
-	// For example, https://app.slack.com/client/T0123456789/....
+	// The identifier of the team in the Slack workspace. For example, T0123456789.
+	// You can find your team ID in the URL of the main page of your Slack workspace.
+	// When you log in to Slack via a browser, you are directed to the URL of the main
+	// page. For example, https://app.slack.com/client/T0123456789/....
 	//
 	// This member is required.
 	TeamId *string
 
-	// TRUE to index bot messages from your Slack workspace team.
+	// TRUE  to index bot messages from your Slack workspace team.
 	CrawlBotMessage bool
 
-	// TRUE to exclude archived messages to index from your Slack workspace team.
+	// TRUE  to exclude archived messages to index from your Slack workspace team.
 	ExcludeArchived bool
 
-	// A list of regular expression patterns to exclude certain attached files in your
-	// Slack workspace team. Files that match the patterns are excluded from the index.
-	// Files that don’t match the patterns are included in the index. If a file matches
-	// both an inclusion and exclusion pattern, the exclusion pattern takes precedence
-	// and the file isn't included in the index.
+	// A list of regular expression patterns to exclude certain attached files in
+	// your Slack workspace team. Files that match the patterns are excluded from the
+	// index. Files that don’t match the patterns are included in the index. If a file
+	// matches both an inclusion and exclusion pattern, the exclusion pattern takes
+	// precedence and the file isn't included in the index.
 	ExclusionPatterns []string
 
 	// A list of DataSourceToIndexFieldMapping objects that map Slack data source
 	// attributes or field names to Amazon Kendra index field names. To create custom
 	// fields, use the UpdateIndex API before you map to Slack fields. For more
-	// information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Slack
-	// data source field names must exist in your Slack custom metadata.
+	// information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Slack data source field names must exist in your Slack custom metadata.
 	FieldMappings []DataSourceToIndexFieldMapping
 
-	// A list of regular expression patterns to include certain attached files in your
-	// Slack workspace team. Files that match the patterns are included in the index.
-	// Files that don't match the patterns are excluded from the index. If a file
-	// matches both an inclusion and exclusion pattern, the exclusion pattern takes
-	// precedence and the file isn't included in the index.
+	// A list of regular expression patterns to include certain attached files in
+	// your Slack workspace team. Files that match the patterns are included in the
+	// index. Files that don't match the patterns are excluded from the index. If a
+	// file matches both an inclusion and exclusion pattern, the exclusion pattern
+	// takes precedence and the file isn't included in the index.
 	InclusionPatterns []string
 
-	// The number of hours for change log to look back from when you last synchronized
-	// your data. You can look back up to 7 days or 168 hours. Change log updates your
-	// index only if new content was added since you last synced your data. Updated or
-	// deleted content from before you last synced does not get updated in your index.
-	// To capture updated or deleted content before you last synced, set the
-	// LookBackPeriod to the number of hours you want change log to look back.
+	// The number of hours for change log to look back from when you last
+	// synchronized your data. You can look back up to 7 days or 168 hours. Change log
+	// updates your index only if new content was added since you last synced your
+	// data. Updated or deleted content from before you last synced does not get
+	// updated in your index. To capture updated or deleted content before you last
+	// synced, set the LookBackPeriod to the number of hours you want change log to
+	// look back.
 	LookBackPeriod *int32
 
 	// The list of private channel names from your Slack workspace team. You use this
@@ -3473,42 +3389,40 @@ type SlackConfiguration struct {
 	// Amazon Kendra to use the change log than to scan all of your documents in Slack.
 	UseChangeLog bool
 
-	// Configuration information for an Amazon Virtual Private Cloud to connect to your
-	// Slack. For more information, see Configuring a VPC
-	// (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
+	// Configuration information for an Amazon Virtual Private Cloud to connect to
+	// your Slack. For more information, see Configuring a VPC (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html)
+	// .
 	VpcConfiguration *DataSourceVpcConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Specifies the document attribute to use to sort the response to a Amazon Kendra
-// query. You can specify a single attribute for sorting. The attribute must have
-// the Sortable flag set to true, otherwise Amazon Kendra returns an exception. You
-// can sort attributes of the following types.
-// - Date value
-// - Long value
-// - String
-// value
+// Specifies the document attribute to use to sort the response to a Amazon
+// Kendra query. You can specify a single attribute for sorting. The attribute must
+// have the Sortable  flag set to true, otherwise Amazon Kendra returns an
+// exception. You can sort attributes of the following types.
+//   - Date value
+//   - Long value
+//   - String value
 //
 // You can't sort attributes of the following type.
-// - String list value
+//   - String list value
 type SortingConfiguration struct {
 
 	// The name of the document attribute used to sort the response. You can use any
 	// field that has the Sortable flag set to true. You can also sort by any of the
 	// following built-in attributes:
-	// - _category
-	// - _created_at
-	// - _last_updated_at
-	// -
-	// _version
-	// - _view_count
+	//     - _category
+	//     - _created_at
+	//     - _last_updated_at
+	//     - _version
+	//     - _view_count
 	//
 	// This member is required.
 	DocumentAttributeKey *string
 
-	// The order that the results should be returned in. In case of ties, the relevance
-	// assigned to the result by Amazon Kendra is used as the tie-breaker.
+	// The order that the results should be returned in. In case of ties, the
+	// relevance assigned to the result by Amazon Kendra is used as the tie-breaker.
 	//
 	// This member is required.
 	SortOrder SortOrder
@@ -3533,11 +3447,11 @@ type SpellCorrectedQuery struct {
 // documents and how closely a corrected word matches a misspelled word. This
 // feature is designed with certain defaults or limits. For information on the
 // current limits and how to request more support for some limits, see the Spell
-// Checker documentation
-// (https://docs.aws.amazon.com/kendra/latest/dg/query-spell-check.html).
+// Checker documentation (https://docs.aws.amazon.com/kendra/latest/dg/query-spell-check.html)
+// .
 type SpellCorrectionConfiguration struct {
 
-	// TRUE to suggest spell corrections for queries.
+	// TRUE  to suggest spell corrections for queries.
 	//
 	// This member is required.
 	IncludeQuerySpellCheckSuggestions bool
@@ -3548,15 +3462,15 @@ type SpellCorrectionConfiguration struct {
 // Provides the configuration information to use a SQL database.
 type SqlConfiguration struct {
 
-	// Determines whether Amazon Kendra encloses SQL identifiers for tables and column
-	// names in double quotes (") when making a database query. By default, Amazon
-	// Kendra passes SQL identifiers the way that they are entered into the data source
-	// configuration. It does not change the case of identifiers or enclose them in
-	// quotes. PostgreSQL internally converts uppercase characters to lower case
+	// Determines whether Amazon Kendra encloses SQL identifiers for tables and
+	// column names in double quotes (") when making a database query. By default,
+	// Amazon Kendra passes SQL identifiers the way that they are entered into the data
+	// source configuration. It does not change the case of identifiers or enclose them
+	// in quotes. PostgreSQL internally converts uppercase characters to lower case
 	// characters in identifiers unless they are quoted. Choosing this option encloses
 	// identifiers in quotes so that PostgreSQL does not convert the character's case.
 	// For MySQL databases, you must enable the ansi_quotes option when you set this
-	// field to DOUBLE_QUOTES.
+	// field to DOUBLE_QUOTES .
 	QueryIdentifiersEnclosingOption QueryIdentifiersEnclosingOption
 
 	noSmithyDocumentSerde
@@ -3569,7 +3483,7 @@ type Status struct {
 	DocumentId *string
 
 	// The current status of a document. If the document was submitted for deletion,
-	// the status is NOT_FOUND after the document is deleted.
+	// the status is NOT_FOUND  after the document is deleted.
 	DocumentStatus DocumentStatus
 
 	// Indicates the source of the error.
@@ -3621,7 +3535,7 @@ type SuggestionTextWithHighlights struct {
 	noSmithyDocumentSerde
 }
 
-// The SuggestionTextWithHighlights structure information.
+// The SuggestionTextWithHighlights  structure information.
 type SuggestionValue struct {
 
 	// The SuggestionTextWithHighlights structure that contains the query suggestion
@@ -3634,16 +3548,16 @@ type SuggestionValue struct {
 // Provides information about a table cell in a table excerpt.
 type TableCell struct {
 
-	// TRUE means that the table cell should be treated as a header.
+	// TRUE  means that the table cell should be treated as a header.
 	Header bool
 
 	// TRUE means that the table cell has a high enough confidence and is relevant to
 	// the query, so the value or content should be highlighted.
 	Highlighted bool
 
-	// TRUE if the response of the table cell is the top answer. This is the cell value
-	// or content with the highest confidence score or is the most relevant to the
-	// query.
+	// TRUE if the response of the table cell is the top answer. This is the cell
+	// value or content with the highest confidence score or is the most relevant to
+	// the query.
 	TopAnswer bool
 
 	// The actual value or content within a table cell. A table cell could contain a
@@ -3653,9 +3567,9 @@ type TableCell struct {
 	noSmithyDocumentSerde
 }
 
-// An excerpt from a table within a document. The table excerpt displays up to five
-// columns and three rows, depending on how many table cells are relevant to the
-// query and how many columns are available in the original table. The top most
+// An excerpt from a table within a document. The table excerpt displays up to
+// five columns and three rows, depending on how many table cells are relevant to
+// the query and how many columns are available in the original table. The top most
 // relevant cell is displayed in the table excerpt, along with the next most
 // relevant cells.
 type TableExcerpt struct {
@@ -3678,9 +3592,9 @@ type TableRow struct {
 	noSmithyDocumentSerde
 }
 
-// A list of key/value pairs that identify an index, FAQ, or data source. Tag keys
-// and values can consist of Unicode letters, digits, white space, and any of the
-// following symbols: _ . : / = + - @.
+// A list of key/value pairs that identify an index, FAQ, or data source. Tag
+// keys and values can consist of Unicode letters, digits, white space, and any of
+// the following symbols: _ . : / = + - @.
 type Tag struct {
 
 	// The key for the tag. Keys are not case sensitive and must be unique for the
@@ -3689,8 +3603,8 @@ type Tag struct {
 	// This member is required.
 	Key *string
 
-	// The value associated with the tag. The value may be an empty string but it can't
-	// be null.
+	// The value associated with the tag. The value may be an empty string but it
+	// can't be null.
 	//
 	// This member is required.
 	Value *string
@@ -3703,8 +3617,8 @@ type Tag struct {
 type TemplateConfiguration struct {
 
 	// The template schema used for the data source, where templates schemas are
-	// supported. See Data source template schemas
-	// (https://docs.aws.amazon.com/kendra/latest/dg/ds-schemas.html).
+	// supported. See Data source template schemas (https://docs.aws.amazon.com/kendra/latest/dg/ds-schemas.html)
+	// .
 	Template document.Interface
 
 	noSmithyDocumentSerde
@@ -3771,11 +3685,11 @@ type TimeRange struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information of the URLs to crawl. You can only crawl
-// websites that use the secure communication protocol, Hypertext Transfer Protocol
-// Secure (HTTPS). If you receive an error when crawling a website, it could be
-// that the website is blocked from crawling. When selecting websites to index, you
-// must adhere to the Amazon Acceptable Use Policy (https://aws.amazon.com/aup/)
+// Provides the configuration information of the URLs to crawl. You can only
+// crawl websites that use the secure communication protocol, Hypertext Transfer
+// Protocol Secure (HTTPS). If you receive an error when crawling a website, it
+// could be that the website is blocked from crawling. When selecting websites to
+// index, you must adhere to the Amazon Acceptable Use Policy (https://aws.amazon.com/aup/)
 // and all other Amazon terms. Remember that you must only use Amazon Kendra Web
 // Crawler to index your own webpages, or webpages that you have authorization to
 // index.
@@ -3802,24 +3716,22 @@ type Urls struct {
 // are these documents relevant to all users. Only specific users or groups of
 // teams given access to top-secret documents should see these documents in their
 // search results. You provide one of the following:
-// - User token
-// - User ID, the
-// groups the user belongs to, and any data sources the groups can access.
+//   - User token
+//   - User ID, the groups the user belongs to, and any data sources the groups can access.
 //
-// If you
-// provide both, an exception is thrown.
+// If you provide both, an exception is thrown.
 type UserContext struct {
 
 	// The list of data source groups you want to filter search results based on
 	// groups' access to documents in that data source.
 	DataSourceGroups []DataSourceGroup
 
-	// The list of groups you want to filter search results based on the groups' access
-	// to documents.
+	// The list of groups you want to filter search results based on the groups'
+	// access to documents.
 	Groups []string
 
-	// The user context token for filtering search results for a user. It must be a JWT
-	// or a JSON token.
+	// The user context token for filtering search results for a user. It must be a
+	// JWT or a JSON token.
 	Token *string
 
 	// The identifier of the user you want to filter search results based on their
@@ -3833,20 +3745,18 @@ type UserContext struct {
 // users from an IAM Identity Center (successor to Single Sign-On) identity source.
 // This is useful for user context filtering, where search results are filtered
 // based on the user or their group access to documents. You can also use the
-// PutPrincipalMapping
-// (https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html) API
-// to map users to their groups so that you only need to provide the user ID when
-// you issue the query. To set up an IAM Identity Center identity source in the
-// console to use with Amazon Kendra, see Getting started with an IAM Identity
-// Center identity source
-// (https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html). You
-// must also grant the required permissions to use IAM Identity Center with Amazon
-// Kendra. For more information, see IAM roles for IAM Identity Center
-// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso).
-// Amazon Kendra currently does not support using UserGroupResolutionConfiguration
-// with an Amazon Web Services organization member account for your IAM Identity
-// Center identify source. You must create your index in the management account for
-// the organization in order to use UserGroupResolutionConfiguration.
+// PutPrincipalMapping (https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html)
+// API to map users to their groups so that you only need to provide the user ID
+// when you issue the query. To set up an IAM Identity Center identity source in
+// the console to use with Amazon Kendra, see Getting started with an IAM
+// Identity Center identity source (https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html)
+// . You must also grant the required permissions to use IAM Identity Center with
+// Amazon Kendra. For more information, see IAM roles for IAM Identity Center (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso)
+// . Amazon Kendra currently does not support using
+// UserGroupResolutionConfigurationwith an Amazon Web Services organization
+// member account for your IAM Identity Center identify source. You must create
+// your index in the management account for the organization in order to use
+// UserGroupResolutionConfiguration .
 type UserGroupResolutionConfiguration struct {
 
 	// The identity store provider (mode) you want to use to fetch access levels of
@@ -3863,14 +3773,13 @@ type UserGroupResolutionConfiguration struct {
 // Provides the configuration information for the identifiers of your users.
 type UserIdentityConfiguration struct {
 
-	// The IAM Identity Center field name that contains the identifiers of your users,
-	// such as their emails. This is used for user context filtering
-	// (https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html) and for
-	// granting access to your Amazon Kendra experience. You must set up IAM Identity
-	// Center with Amazon Kendra. You must include your users and groups in your Access
-	// Control List when you ingest documents into your index. For more information,
-	// see Getting started with an IAM Identity Center identity source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html).
+	// The IAM Identity Center field name that contains the identifiers of your
+	// users, such as their emails. This is used for user context filtering (https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html)
+	// and for granting access to your Amazon Kendra experience. You must set up IAM
+	// Identity Center with Amazon Kendra. You must include your users and groups in
+	// your Access Control List when you ingest documents into your index. For more
+	// information, see Getting started with an IAM Identity Center identity source (https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html)
+	// .
 	IdentityAttributeName *string
 
 	noSmithyDocumentSerde
@@ -3903,24 +3812,24 @@ type Warning struct {
 // Provides the configuration information required for Amazon Kendra Web Crawler.
 type WebCrawlerConfiguration struct {
 
-	// Specifies the seed or starting point URLs of the websites or the sitemap URLs of
-	// the websites you want to crawl. You can include website subdomains. You can list
-	// up to 100 seed URLs and up to three sitemap URLs. You can only crawl websites
-	// that use the secure communication protocol, Hypertext Transfer Protocol Secure
-	// (HTTPS). If you receive an error when crawling a website, it could be that the
-	// website is blocked from crawling. When selecting websites to index, you must
-	// adhere to the Amazon Acceptable Use Policy (https://aws.amazon.com/aup/) and all
-	// other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to
-	// index your own webpages, or webpages that you have authorization to index.
+	// Specifies the seed or starting point URLs of the websites or the sitemap URLs
+	// of the websites you want to crawl. You can include website subdomains. You can
+	// list up to 100 seed URLs and up to three sitemap URLs. You can only crawl
+	// websites that use the secure communication protocol, Hypertext Transfer Protocol
+	// Secure (HTTPS). If you receive an error when crawling a website, it could be
+	// that the website is blocked from crawling. When selecting websites to index, you
+	// must adhere to the Amazon Acceptable Use Policy (https://aws.amazon.com/aup/)
+	// and all other Amazon terms. Remember that you must only use Amazon Kendra Web
+	// Crawler to index your own webpages, or webpages that you have authorization to
+	// index.
 	//
 	// This member is required.
 	Urls *Urls
 
-	// Configuration information required to connect to websites using authentication.
-	// You can connect to websites using basic authentication of user name and
-	// password. You use a secret in Secrets Manager
-	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) to
-	// store your authentication credentials. You must provide the website host name
+	// Configuration information required to connect to websites using
+	// authentication. You can connect to websites using basic authentication of user
+	// name and password. You use a secret in Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html)
+	// to store your authentication credentials. You must provide the website host name
 	// and port number. For example, the host name of https://a.example.com/page1.html
 	// is "a.example.com" and the port is 443, the standard port for HTTPS.
 	AuthenticationConfiguration *AuthenticationConfiguration
@@ -3933,20 +3842,20 @@ type WebCrawlerConfiguration struct {
 	// default crawl depth is set to 2.
 	CrawlDepth *int32
 
-	// The maximum size (in MB) of a webpage or attachment to crawl. Files larger than
-	// this size (in MB) are skipped/not crawled. The default maximum size of a webpage
-	// or attachment is set to 50 MB.
+	// The maximum size (in MB) of a webpage or attachment to crawl. Files larger
+	// than this size (in MB) are skipped/not crawled. The default maximum size of a
+	// webpage or attachment is set to 50 MB.
 	MaxContentSizePerPageInMegaBytes *float32
 
-	// The maximum number of URLs on a webpage to include when crawling a website. This
-	// number is per webpage. As a website’s webpages are crawled, any URLs the
+	// The maximum number of URLs on a webpage to include when crawling a website.
+	// This number is per webpage. As a website’s webpages are crawled, any URLs the
 	// webpages link to are also crawled. URLs on a webpage are crawled in order of
 	// appearance. The default maximum links per page is 100.
 	MaxLinksPerPage *int32
 
-	// The maximum number of URLs crawled per website host per minute. A minimum of one
-	// URL is required. The default maximum number of URLs crawled per website host per
-	// minute is 300.
+	// The maximum number of URLs crawled per website host per minute. A minimum of
+	// one URL is required. The default maximum number of URLs crawled per website host
+	// per minute is 300.
 	MaxUrlsPerMinuteCrawlRate *int32
 
 	// Configuration information required to connect to your internal websites via a
@@ -3955,8 +3864,8 @@ type WebCrawlerConfiguration struct {
 	// port is 443, the standard port for HTTPS. Web proxy credentials are optional and
 	// you can use them to connect to a web proxy server that requires basic
 	// authentication. To store web proxy credentials, you use a secret in Secrets
-	// Manager
-	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html).
+	// Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html)
+	// .
 	ProxyConfiguration *ProxyConfiguration
 
 	// A list of regular expression patterns to exclude certain URLs to crawl. URLs
@@ -3982,19 +3891,18 @@ type WebCrawlerConfiguration struct {
 type WorkDocsConfiguration struct {
 
 	// The identifier of the directory corresponding to your Amazon WorkDocs site
-	// repository. You can find the organization ID in the Directory Service
-	// (https://console.aws.amazon.com/directoryservicev2/) by going to Active
-	// Directory, then Directories. Your Amazon WorkDocs site directory has an ID,
-	// which is the organization ID. You can also set up a new Amazon WorkDocs
-	// directory in the Directory Service console and enable a Amazon WorkDocs site for
-	// the directory in the Amazon WorkDocs console.
+	// repository. You can find the organization ID in the Directory Service (https://console.aws.amazon.com/directoryservicev2/)
+	// by going to Active Directory, then Directories. Your Amazon WorkDocs site
+	// directory has an ID, which is the organization ID. You can also set up a new
+	// Amazon WorkDocs directory in the Directory Service console and enable a Amazon
+	// WorkDocs site for the directory in the Amazon WorkDocs console.
 	//
 	// This member is required.
 	OrganizationId *string
 
-	// TRUE to include comments on documents in your index. Including comments in your
-	// index means each comment is a document that can be searched on. The default is
-	// set to FALSE.
+	// TRUE to include comments on documents in your index. Including comments in
+	// your index means each comment is a document that can be searched on. The default
+	// is set to FALSE .
 	CrawlComments bool
 
 	// A list of regular expression patterns to exclude certain files in your Amazon
@@ -4006,11 +3914,10 @@ type WorkDocsConfiguration struct {
 
 	// A list of DataSourceToIndexFieldMapping objects that map Amazon WorkDocs data
 	// source attributes or field names to Amazon Kendra index field names. To create
-	// custom fields, use the UpdateIndex API before you map to Amazon WorkDocs fields.
-	// For more information, see Mapping data source fields
-	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Amazon
-	// WorkDocs data source field names must exist in your Amazon WorkDocs custom
-	// metadata.
+	// custom fields, use the UpdateIndex API before you map to Amazon WorkDocs
+	// fields. For more information, see Mapping data source fields (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html)
+	// . The Amazon WorkDocs data source field names must exist in your Amazon WorkDocs
+	// custom metadata.
 	FieldMappings []DataSourceToIndexFieldMapping
 
 	// A list of regular expression patterns to include certain files in your Amazon
@@ -4020,10 +3927,10 @@ type WorkDocsConfiguration struct {
 	// takes precedence and the file isn't included in the index.
 	InclusionPatterns []string
 
-	// TRUE to use the Amazon WorkDocs change log to determine which documents require
-	// updating in the index. Depending on the change log's size, it may take longer
-	// for Amazon Kendra to use the change log than to scan all of your documents in
-	// Amazon WorkDocs.
+	// TRUE to use the Amazon WorkDocs change log to determine which documents
+	// require updating in the index. Depending on the change log's size, it may take
+	// longer for Amazon Kendra to use the change log than to scan all of your
+	// documents in Amazon WorkDocs.
 	UseChangeLog bool
 
 	noSmithyDocumentSerde

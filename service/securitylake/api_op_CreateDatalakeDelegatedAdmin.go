@@ -31,7 +31,8 @@ func (c *Client) CreateDatalakeDelegatedAdmin(ctx context.Context, params *Creat
 
 type CreateDatalakeDelegatedAdminInput struct {
 
-	// The Amazon Web Services account ID of the Security Lake delegated administrator.
+	// The Amazon Web Services account ID of the Security Lake delegated
+	// administrator.
 	//
 	// This member is required.
 	Account *string

@@ -7,17 +7,17 @@ import (
 	"time"
 )
 
-// Information about the gateway's automatic tape creation policies, including the
-// automatic tape creation rules and the gateway that is using the policies.
+// Information about the gateway's automatic tape creation policies, including
+// the automatic tape creation rules and the gateway that is using the policies.
 type AutomaticTapeCreationPolicyInfo struct {
 
-	// An automatic tape creation policy consists of a list of automatic tape creation
-	// rules. This returns the rules that determine when and how to automatically
-	// create new tapes.
+	// An automatic tape creation policy consists of a list of automatic tape
+	// creation rules. This returns the rules that determine when and how to
+	// automatically create new tapes.
 	AutomaticTapeCreationRules []AutomaticTapeCreationRule
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	noSmithyDocumentSerde
@@ -25,23 +25,23 @@ type AutomaticTapeCreationPolicyInfo struct {
 
 // An automatic tape creation policy consists of automatic tape creation rules
 // where each rule defines when and how to create new tapes. For more information
-// about automatic tape creation, see Creating Tapes Automatically
-// (https://docs.aws.amazon.com/storagegateway/latest/userguide/GettingStartedCreateTapes.html#CreateTapesAutomatically).
+// about automatic tape creation, see Creating Tapes Automatically (https://docs.aws.amazon.com/storagegateway/latest/userguide/GettingStartedCreateTapes.html#CreateTapesAutomatically)
+// .
 type AutomaticTapeCreationRule struct {
 
-	// The minimum number of available virtual tapes that the gateway maintains at all
-	// times. If the number of tapes on the gateway goes below this value, the gateway
-	// creates as many new tapes as are needed to have MinimumNumTapes on the gateway.
-	// For more information about automatic tape creation, see Creating Tapes
-	// Automatically
-	// (https://docs.aws.amazon.com/storagegateway/latest/userguide/GettingStartedCreateTapes.html#CreateTapesAutomatically).
+	// The minimum number of available virtual tapes that the gateway maintains at
+	// all times. If the number of tapes on the gateway goes below this value, the
+	// gateway creates as many new tapes as are needed to have MinimumNumTapes on the
+	// gateway. For more information about automatic tape creation, see Creating
+	// Tapes Automatically (https://docs.aws.amazon.com/storagegateway/latest/userguide/GettingStartedCreateTapes.html#CreateTapesAutomatically)
+	// .
 	//
 	// This member is required.
 	MinimumNumTapes *int32
 
-	// The ID of the pool that you want to add your tape to for archiving. The tape in
-	// this pool is archived in the Amazon S3 storage class that is associated with the
-	// pool. When you use your backup application to eject the tape, the tape is
+	// The ID of the pool that you want to add your tape to for archiving. The tape
+	// in this pool is archived in the Amazon S3 storage class that is associated with
+	// the pool. When you use your backup application to eject the tape, the tape is
 	// archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive)
 	// that corresponds to the pool.
 	//
@@ -61,22 +61,22 @@ type AutomaticTapeCreationRule struct {
 	TapeSizeInBytes *int64
 
 	// Set to true to indicate that tapes are to be archived as write-once-read-many
-	// (WORM). Set to false when WORM is not enabled for tapes.
+	// (WORM). Set to false  when WORM is not enabled for tapes.
 	Worm bool
 
 	noSmithyDocumentSerde
 }
 
-// Describes a bandwidth rate limit interval for a gateway. A bandwidth rate limit
-// schedule consists of one or more bandwidth rate limit intervals. A bandwidth
-// rate limit interval defines a period of time on one or more days of the week,
-// during which bandwidth rate limits are specified for uploading, downloading, or
-// both.
+// Describes a bandwidth rate limit interval for a gateway. A bandwidth rate
+// limit schedule consists of one or more bandwidth rate limit intervals. A
+// bandwidth rate limit interval defines a period of time on one or more days of
+// the week, during which bandwidth rate limits are specified for uploading,
+// downloading, or both.
 type BandwidthRateLimitInterval struct {
 
-	// The days of the week component of the bandwidth rate limit interval, represented
-	// as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 represents
-	// Saturday.
+	// The days of the week component of the bandwidth rate limit interval,
+	// represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6
+	// represents Saturday.
 	//
 	// This member is required.
 	DaysOfWeek []int32
@@ -88,7 +88,7 @@ type BandwidthRateLimitInterval struct {
 
 	// The minute of the hour to end the bandwidth rate limit interval. The bandwidth
 	// rate limit interval ends at the end of the minute. To end an interval at the end
-	// of an hour, use the value 59.
+	// of an hour, use the value 59 .
 	//
 	// This member is required.
 	EndMinuteOfHour *int32
@@ -98,21 +98,21 @@ type BandwidthRateLimitInterval struct {
 	// This member is required.
 	StartHourOfDay *int32
 
-	// The minute of the hour to start the bandwidth rate limit interval. The interval
-	// begins at the start of that minute. To begin an interval exactly at the start of
-	// the hour, use the value 0.
+	// The minute of the hour to start the bandwidth rate limit interval. The
+	// interval begins at the start of that minute. To begin an interval exactly at the
+	// start of the hour, use the value 0 .
 	//
 	// This member is required.
 	StartMinuteOfHour *int32
 
-	// The average download rate limit component of the bandwidth rate limit interval,
-	// in bits per second. This field does not appear in the response if the download
-	// rate limit is not set.
+	// The average download rate limit component of the bandwidth rate limit
+	// interval, in bits per second. This field does not appear in the response if the
+	// download rate limit is not set.
 	AverageDownloadRateLimitInBitsPerSec *int64
 
-	// The average upload rate limit component of the bandwidth rate limit interval, in
-	// bits per second. This field does not appear in the response if the upload rate
-	// limit is not set.
+	// The average upload rate limit component of the bandwidth rate limit interval,
+	// in bits per second. This field does not appear in the response if the upload
+	// rate limit is not set.
 	AverageUploadRateLimitInBitsPerSec *int64
 
 	noSmithyDocumentSerde
@@ -121,9 +121,9 @@ type BandwidthRateLimitInterval struct {
 // The refresh cache information for the file share or FSx file systems.
 type CacheAttributes struct {
 
-	// Refreshes a file share's cache by using Time To Live (TTL). TTL is the length of
-	// time since the last refresh after which access to the directory would cause the
-	// file gateway to first refresh that directory's contents from the Amazon S3
+	// Refreshes a file share's cache by using Time To Live (TTL). TTL is the length
+	// of time since the last refresh after which access to the directory would cause
+	// the file gateway to first refresh that directory's contents from the Amazon S3
 	// bucket or Amazon FSx file system. The TTL duration is in seconds. Valid
 	// Values:0, 300 to 2,592,000 seconds (5 minutes to 30 days)
 	CacheStaleTimeoutInSeconds *int32
@@ -138,9 +138,10 @@ type CachediSCSIVolume struct {
 	// have this timestamp.
 	CreatedDate *time.Time
 
-	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
-	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
-	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
+	// for Amazon S3 server-side encryption. Storage Gateway does not support
+	// asymmetric CMKs. This value can only be set when KMSEncrypted  is true.
+	// Optional.
 	KMSKey *string
 
 	// If the cached volume was created from a snapshot, this field contains the
@@ -150,8 +151,8 @@ type CachediSCSIVolume struct {
 	// The name of the iSCSI target used by an initiator to connect to a volume and
 	// used as a suffix for the target ARN. For example, specifying TargetName as
 	// myvolume results in the target ARN of
-	// arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume.
-	// The target name must be unique across all volumes on a gateway. If you don't
+	// arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume
+	// . The target name must be unique across all volumes on a gateway. If you don't
 	// specify a value, Storage Gateway uses the value that was previously used for
 	// this volume as the new target name.
 	TargetName *string
@@ -159,9 +160,10 @@ type CachediSCSIVolume struct {
 	// The Amazon Resource Name (ARN) of the storage volume.
 	VolumeARN *string
 
-	// A value that indicates whether a storage volume is attached to or detached from
-	// a gateway. For more information, see Moving your volumes to a different gateway
-	// (https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#attach-detach-volume).
+	// A value that indicates whether a storage volume is attached to or detached
+	// from a gateway. For more information, see Moving your volumes to a different
+	// gateway (https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#attach-detach-volume)
+	// .
 	VolumeAttachmentStatus *string
 
 	// The unique identifier of the volume, e.g., vol-AE4B946D.
@@ -194,8 +196,8 @@ type CachediSCSIVolume struct {
 	// compress the data to a negligible amount of actual storage.
 	VolumeUsedInBytes *int64
 
-	// An VolumeiSCSIAttributes object that represents a collection of iSCSI attributes
-	// for one stored volume.
+	// An VolumeiSCSIAttributes object that represents a collection of iSCSI
+	// attributes for one stored volume.
 	VolumeiSCSIAttributes *VolumeiSCSIAttributes
 
 	noSmithyDocumentSerde
@@ -208,16 +210,16 @@ type ChapInfo struct {
 	// The iSCSI initiator that connects to the target.
 	InitiatorName *string
 
-	// The secret key that the initiator (for example, the Windows client) must provide
-	// to participate in mutual CHAP with the target.
+	// The secret key that the initiator (for example, the Windows client) must
+	// provide to participate in mutual CHAP with the target.
 	SecretToAuthenticateInitiator *string
 
 	// The secret key that the target must provide to participate in mutual CHAP with
 	// the initiator (e.g., Windows client).
 	SecretToAuthenticateTarget *string
 
-	// The Amazon Resource Name (ARN) of the volume. Valid Values: 50 to 500 lowercase
-	// letters, numbers, periods (.), and hyphens (-).
+	// The Amazon Resource Name (ARN) of the volume. Valid Values: 50 to 500
+	// lowercase letters, numbers, periods (.), and hyphens (-).
 	TargetARN *string
 
 	noSmithyDocumentSerde
@@ -235,8 +237,8 @@ type DeviceiSCSIAttributes struct {
 	// The port used to communicate with iSCSI VTL device targets.
 	NetworkInterfacePort int32
 
-	// Specifies the unique Amazon Resource Name (ARN) that encodes the iSCSI qualified
-	// name(iqn) of a tape drive or media changer target.
+	// Specifies the unique Amazon Resource Name (ARN) that encodes the iSCSI
+	// qualified name(iqn) of a tape drive or media changer target.
 	TargetARN *string
 
 	noSmithyDocumentSerde
@@ -251,7 +253,7 @@ type Disk struct {
 	DiskAllocationResource *string
 
 	// One of the DiskAllocationType enumeration values that identifies how a local
-	// disk is used. Valid Values: UPLOAD_BUFFER | CACHE_STORAGE
+	// disk is used. Valid Values: UPLOAD_BUFFER  | CACHE_STORAGE
 	DiskAllocationType *string
 
 	// A list of values that represents attributes of a local disk.
@@ -275,13 +277,13 @@ type Disk struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies network configuration information for the gateway associated with the
-// Amazon FSx file system.
+// Specifies network configuration information for the gateway associated with
+// the Amazon FSx file system.
 type EndpointNetworkConfiguration struct {
 
-	// A list of gateway IP addresses on which the associated Amazon FSx file system is
-	// available. If multiple file systems are associated with this gateway, this field
-	// is required.
+	// A list of gateway IP addresses on which the associated Amazon FSx file system
+	// is available. If multiple file systems are associated with this gateway, this
+	// field is required.
 	IpAddresses []string
 
 	noSmithyDocumentSerde
@@ -296,22 +298,22 @@ type FileShareInfo struct {
 	// The ID of the file share.
 	FileShareId *string
 
-	// The status of the file share. Valid Values: CREATING | UPDATING | AVAILABLE |
-	// DELETING
+	// The status of the file share. Valid Values: CREATING  | UPDATING  | AVAILABLE
+	// | DELETING
 	FileShareStatus *string
 
 	// The type of the file share.
 	FileShareType FileShareType
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	noSmithyDocumentSerde
 }
 
-// Describes the object returned by DescribeFileSystemAssociations that describes a
-// created file system association.
+// Describes the object returned by DescribeFileSystemAssociations that describes
+// a created file system association.
 type FileSystemAssociationInfo struct {
 
 	// The Amazon Resource Name (ARN) of the storage used for the audit logs.
@@ -320,34 +322,33 @@ type FileSystemAssociationInfo struct {
 	// The refresh cache information for the file share or FSx file systems.
 	CacheAttributes *CacheAttributes
 
-	// Specifies network configuration information for the gateway associated with the
-	// Amazon FSx file system. If multiple file systems are associated with this
-	// gateway, this parameter's IpAddresses field is required.
+	// Specifies network configuration information for the gateway associated with
+	// the Amazon FSx file system. If multiple file systems are associated with this
+	// gateway, this parameter's IpAddresses  field is required.
 	EndpointNetworkConfiguration *EndpointNetworkConfiguration
 
 	// The Amazon Resource Name (ARN) of the file system association.
 	FileSystemAssociationARN *string
 
-	// The status of the file system association. Valid Values: AVAILABLE | CREATING |
-	// DELETING | FORCE_DELETING | UPDATING | ERROR
+	// The status of the file system association. Valid Values: AVAILABLE  | CREATING
+	// | DELETING  | FORCE_DELETING  | UPDATING  | ERROR
 	FileSystemAssociationStatus *string
 
 	// An array containing the FileSystemAssociationStatusDetail data type, which
 	// provides detailed information on file system association status.
 	FileSystemAssociationStatusDetails []FileSystemAssociationStatusDetail
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// The ARN of the backend Amazon FSx file system used for storing file data. For
-	// information, see FileSystem
-	// (https://docs.aws.amazon.com/fsx/latest/APIReference/API_FileSystem.html) in the
-	// Amazon FSx API Reference.
+	// information, see FileSystem (https://docs.aws.amazon.com/fsx/latest/APIReference/API_FileSystem.html)
+	// in the Amazon FSx API Reference.
 	LocationARN *string
 
-	// A list of up to 50 tags assigned to the SMB file share, sorted alphabetically by
-	// key name. Each tag is a key-value pair.
+	// A list of up to 50 tags assigned to the SMB file share, sorted alphabetically
+	// by key name. Each tag is a key-value pair.
 	Tags []Tag
 
 	noSmithyDocumentSerde
@@ -362,8 +363,8 @@ type FileSystemAssociationStatusDetail struct {
 	noSmithyDocumentSerde
 }
 
-// Gets the summary returned by ListFileSystemAssociation, which is a summary of a
-// created file system association.
+// Gets the summary returned by ListFileSystemAssociation, which is a summary of
+// a created file system association.
 type FileSystemAssociationSummary struct {
 
 	// The Amazon Resource Name (ARN) of the file system association.
@@ -372,12 +373,12 @@ type FileSystemAssociationSummary struct {
 	// The ID of the file system association.
 	FileSystemAssociationId *string
 
-	// The status of the file share. Valid Values: AVAILABLE | CREATING | DELETING |
-	// FORCE_DELETING | UPDATING | ERROR
+	// The status of the file share. Valid Values: AVAILABLE  | CREATING  | DELETING
+	// | FORCE_DELETING  | UPDATING  | ERROR
 	FileSystemAssociationStatus *string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	noSmithyDocumentSerde
@@ -392,8 +393,8 @@ type GatewayInfo struct {
 	// The Amazon Web Services Region where the Amazon EC2 instance is located.
 	Ec2InstanceRegion *string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// The unique identifier assigned to your gateway during activation. This ID
@@ -404,7 +405,7 @@ type GatewayInfo struct {
 	// The name of the gateway.
 	GatewayName *string
 
-	// The state of the gateway. Valid Values: DISABLED | ACTIVE
+	// The state of the gateway. Valid Values: DISABLED  | ACTIVE
 	GatewayOperationalState *string
 
 	// The type of the gateway.
@@ -438,28 +439,28 @@ type NetworkInterface struct {
 	noSmithyDocumentSerde
 }
 
-// Describes Network File System (NFS) file share default values. Files and folders
-// stored as Amazon S3 objects in S3 buckets don't, by default, have Unix file
-// permissions assigned to them. Upon discovery in an S3 bucket by Storage Gateway,
-// the S3 objects that represent files and folders are assigned these default Unix
-// permissions. This operation is only supported for S3 File Gateways.
+// Describes Network File System (NFS) file share default values. Files and
+// folders stored as Amazon S3 objects in S3 buckets don't, by default, have Unix
+// file permissions assigned to them. Upon discovery in an S3 bucket by Storage
+// Gateway, the S3 objects that represent files and folders are assigned these
+// default Unix permissions. This operation is only supported for S3 File Gateways.
 type NFSFileShareDefaults struct {
 
 	// The Unix directory mode in the form "nnnn". For example, 0666 represents the
 	// default access mode for all directories inside the file share. The default value
-	// is 0777.
+	// is 0777 .
 	DirectoryMode *string
 
-	// The Unix file mode in the form "nnnn". For example, 0666 represents the default
-	// file mode inside the file share. The default value is 0666.
+	// The Unix file mode in the form "nnnn". For example, 0666 represents the
+	// default file mode inside the file share. The default value is 0666 .
 	FileMode *string
 
-	// The default group ID for the file share (unless the files have another group ID
-	// specified). The default value is nfsnobody.
+	// The default group ID for the file share (unless the files have another group
+	// ID specified). The default value is nfsnobody .
 	GroupId *int64
 
-	// The default owner ID for files in the file share (unless the files have another
-	// owner ID specified). The default value is nfsnobody.
+	// The default owner ID for files in the file share (unless the files have
+	// another owner ID specified). The default value is nfsnobody .
 	OwnerId *int64
 
 	noSmithyDocumentSerde
@@ -487,8 +488,8 @@ type NFSFileShareInfo struct {
 	ClientList []string
 
 	// The default storage class for objects put into an Amazon S3 bucket by the S3
-	// File Gateway. The default value is S3_STANDARD. Optional. Valid Values:
-	// S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
+	// File Gateway. The default value is S3_STANDARD . Optional. Valid Values:
+	// S3_STANDARD | S3_INTELLIGENT_TIERING  | S3_STANDARD_IA  | S3_ONEZONE_IA
 	DefaultStorageClass *string
 
 	// The Amazon Resource Name (ARN) of the file share.
@@ -497,84 +498,87 @@ type NFSFileShareInfo struct {
 	// The ID of the file share.
 	FileShareId *string
 
-	// The name of the file share. Optional. FileShareName must be set if an S3 prefix
-	// name is set in LocationARN, or if an access point or access point alias is used.
+	// The name of the file share. Optional. FileShareName must be set if an S3
+	// prefix name is set in LocationARN, or if an access point or access point alias
+	// is used.
 	FileShareName *string
 
-	// The status of the file share. Valid Values: CREATING | UPDATING | AVAILABLE |
-	// DELETING
+	// The status of the file share. Valid Values: CREATING  | UPDATING  | AVAILABLE
+	// | DELETING
 	FileShareStatus *string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// A value that enables guessing of the MIME type for uploaded objects based on
-	// file extensions. Set this value to true to enable MIME type guessing, otherwise
-	// set to false. The default value is true. Valid Values: true | false
+	// file extensions. Set this value to true to enable MIME type guessing,
+	// otherwise set to false . The default value is true . Valid Values: true  |
+	// false
 	GuessMIMETypeEnabled *bool
 
-	// Set to true to use Amazon S3 server-side encryption with your own KMS key, or
-	// false to use a key managed by Amazon S3. Optional. Valid Values: true | false
+	// Set to true  to use Amazon S3 server-side encryption with your own KMS key, or
+	// false to use a key managed by Amazon S3. Optional. Valid Values: true  | false
 	KMSEncrypted bool
 
-	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
-	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
-	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
+	// for Amazon S3 server-side encryption. Storage Gateway does not support
+	// asymmetric CMKs. This value can only be set when KMSEncrypted  is true.
+	// Optional.
 	KMSKey *string
 
 	// A custom ARN for the backend storage used for storing data for file shares. It
 	// includes a resource ARN with an optional prefix concatenation. The prefix must
 	// end with a forward slash (/). You can specify LocationARN as a bucket ARN,
 	// access point ARN or access point alias, as shown in the following examples.
-	// Bucket ARN: arn:aws:s3:::my-bucket/prefix/ Access point ARN:
-	// arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/ If you
+	// Bucket ARN: arn:aws:s3:::my-bucket/prefix/  Access point ARN:
+	// arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/If you
 	// specify an access point, the bucket policy must be configured to delegate access
 	// control to the access point. For information, see Delegating access control to
-	// access points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control)
+	// access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control)
 	// in the Amazon S3 User Guide. Access point alias:
 	// test-ap-ab123cdef4gehijklmn5opqrstuvuse1a-s3alias
 	LocationARN *string
 
-	// Describes Network File System (NFS) file share default values. Files and folders
-	// stored as Amazon S3 objects in S3 buckets don't, by default, have Unix file
-	// permissions assigned to them. Upon discovery in an S3 bucket by Storage Gateway,
-	// the S3 objects that represent files and folders are assigned these default Unix
-	// permissions. This operation is only supported for S3 File Gateways.
+	// Describes Network File System (NFS) file share default values. Files and
+	// folders stored as Amazon S3 objects in S3 buckets don't, by default, have Unix
+	// file permissions assigned to them. Upon discovery in an S3 bucket by Storage
+	// Gateway, the S3 objects that represent files and folders are assigned these
+	// default Unix permissions. This operation is only supported for S3 File Gateways.
 	NFSFileShareDefaults *NFSFileShareDefaults
 
 	// The notification policy of the file share. SettlingTimeInSeconds controls the
 	// number of seconds to wait after the last point in time a client wrote to a file
-	// before generating an ObjectUploaded notification. Because clients can make many
-	// small writes to files, it's best to set this parameter for as long as possible
-	// to avoid generating multiple notifications for the same file in a small time
-	// period. SettlingTimeInSeconds has no effect on the timing of the object
+	// before generating an ObjectUploaded notification. Because clients can make
+	// many small writes to files, it's best to set this parameter for as long as
+	// possible to avoid generating multiple notifications for the same file in a small
+	// time period. SettlingTimeInSeconds has no effect on the timing of the object
 	// uploading to Amazon S3, only the timing of the notification. The following
-	// example sets NotificationPolicy on with SettlingTimeInSeconds set to 60.
+	// example sets NotificationPolicy  on with SettlingTimeInSeconds  set to 60.
 	// {"Upload": {"SettlingTimeInSeconds": 60}} The following example sets
 	// NotificationPolicy off. {}
 	NotificationPolicy *string
 
-	// A value that sets the access control list (ACL) permission for objects in the S3
-	// bucket that an S3 File Gateway puts objects into. The default value is private.
+	// A value that sets the access control list (ACL) permission for objects in the
+	// S3 bucket that an S3 File Gateway puts objects into. The default value is
+	// private .
 	ObjectACL ObjectACL
 
 	// The file share path used by the NFS client to identify the mount point.
 	Path *string
 
 	// A value that sets the write status of a file share. Set this value to true to
-	// set the write status to read-only, otherwise set to false. Valid Values: true |
-	// false
+	// set the write status to read-only, otherwise set to false . Valid Values: true
+	// | false
 	ReadOnly *bool
 
-	// A value that sets who pays the cost of the request and the cost associated with
-	// data download from the S3 bucket. If this value is set to true, the requester
-	// pays the costs; otherwise, the S3 bucket owner pays. However, the S3 bucket
-	// owner always pays the cost of storing data. RequesterPays is a configuration for
-	// the S3 bucket that backs the file share, so make sure that the configuration on
-	// the file share is the same as the S3 bucket configuration. Valid Values: true |
-	// false
+	// A value that sets who pays the cost of the request and the cost associated
+	// with data download from the S3 bucket. If this value is set to true, the
+	// requester pays the costs; otherwise, the S3 bucket owner pays. However, the S3
+	// bucket owner always pays the cost of storing data. RequesterPays is a
+	// configuration for the S3 bucket that backs the file share, so make sure that the
+	// configuration on the file share is the same as the S3 bucket configuration.
+	// Valid Values: true  | false
 	RequesterPays *bool
 
 	// The ARN of the IAM role that an S3 File Gateway assumes when it accesses the
@@ -582,16 +586,14 @@ type NFSFileShareInfo struct {
 	Role *string
 
 	// The user mapped to anonymous user. Valid options are the following:
-	// -
-	// RootSquash: Only root is mapped to anonymous user.
-	// - NoSquash: No one is mapped
-	// to anonymous user.
-	// - AllSquash: Everyone is mapped to anonymous user.
+	//     - RootSquash : Only root is mapped to anonymous user.
+	//     - NoSquash : No one is mapped to anonymous user.
+	//     - AllSquash : Everyone is mapped to anonymous user.
 	Squash *string
 
-	// A list of up to 50 tags assigned to the NFS file share, sorted alphabetically by
-	// key name. Each tag is a key-value pair. For a gateway with more than 10 tags
-	// assigned, you can view all tags using the ListTagsForResource API operation.
+	// A list of up to 50 tags assigned to the NFS file share, sorted alphabetically
+	// by key name. Each tag is a key-value pair. For a gateway with more than 10 tags
+	// assigned, you can view all tags using the ListTagsForResource  API operation.
 	Tags []Tag
 
 	// Specifies the DNS name for the VPC endpoint that the NFS file share uses to
@@ -611,22 +613,22 @@ type PoolInfo struct {
 	// Services Region.
 	PoolARN *string
 
-	// The name of the custom tape pool. PoolName can use all ASCII characters, except
-	// '/' and '\'.
+	// The name of the custom tape pool. PoolName can use all ASCII characters,
+	// except '/' and '\'.
 	PoolName *string
 
-	// Status of the custom tape pool. Pool can be ACTIVE or DELETED.
+	// Status of the custom tape pool. Pool can be ACTIVE  or DELETED .
 	PoolStatus PoolStatus
 
-	// Tape retention lock time is set in days. Tape retention lock can be enabled for
-	// up to 100 years (36,500 days).
+	// Tape retention lock time is set in days. Tape retention lock can be enabled
+	// for up to 100 years (36,500 days).
 	RetentionLockTimeInDays *int32
 
-	// Tape retention lock type, which can be configured in two modes. When configured
-	// in governance mode, Amazon Web Services accounts with specific IAM permissions
-	// are authorized to remove the tape retention lock from archived virtual tapes.
-	// When configured in compliance mode, the tape retention lock cannot be removed by
-	// any user, including the root Amazon Web Services account.
+	// Tape retention lock type, which can be configured in two modes. When
+	// configured in governance mode, Amazon Web Services accounts with specific IAM
+	// permissions are authorized to remove the tape retention lock from archived
+	// virtual tapes. When configured in compliance mode, the tape retention lock
+	// cannot be removed by any user, including the root Amazon Web Services account.
 	RetentionLockType RetentionLockType
 
 	// The storage class that is associated with the custom pool. When you use your
@@ -638,25 +640,25 @@ type PoolInfo struct {
 	noSmithyDocumentSerde
 }
 
-// The Windows file permissions and ownership information assigned, by default, to
-// native S3 objects when S3 File Gateway discovers them in S3 buckets. This
+// The Windows file permissions and ownership information assigned, by default,
+// to native S3 objects when S3 File Gateway discovers them in S3 buckets. This
 // operation is only supported for S3 File Gateways.
 type SMBFileShareInfo struct {
 
-	// Indicates whether AccessBasedEnumeration is enabled.
+	// Indicates whether AccessBasedEnumeration  is enabled.
 	AccessBasedEnumeration *bool
 
-	// A list of users or groups in the Active Directory that have administrator rights
-	// to the file share. A group must be prefixed with the @ character. Acceptable
-	// formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be
-	// set if Authentication is set to ActiveDirectory.
+	// A list of users or groups in the Active Directory that have administrator
+	// rights to the file share. A group must be prefixed with the @ character.
+	// Acceptable formats include: DOMAIN\User1 , user1 , @group1 , and @DOMAIN\group1
+	// . Can only be set if Authentication is set to ActiveDirectory .
 	AdminUserList []string
 
 	// The Amazon Resource Name (ARN) of the storage used for audit logs.
 	AuditDestinationARN *string
 
 	// The authentication method of the file share. The default is ActiveDirectory.
-	// Valid Values: ActiveDirectory | GuestAccess
+	// Valid Values: ActiveDirectory  | GuestAccess
 	Authentication *string
 
 	// Specifies the Region of the S3 bucket where the SMB file share stores files.
@@ -670,12 +672,12 @@ type SMBFileShareInfo struct {
 
 	// The case of an object name in an Amazon S3 bucket. For ClientSpecified, the
 	// client determines the case sensitivity. For CaseSensitive, the gateway
-	// determines the case sensitivity. The default value is ClientSpecified.
+	// determines the case sensitivity. The default value is ClientSpecified .
 	CaseSensitivity CaseSensitivity
 
 	// The default storage class for objects put into an Amazon S3 bucket by the S3
-	// File Gateway. The default value is S3_STANDARD. Optional. Valid Values:
-	// S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
+	// File Gateway. The default value is S3_STANDARD . Optional. Valid Values:
+	// S3_STANDARD | S3_INTELLIGENT_TIERING  | S3_STANDARD_IA  | S3_ONEZONE_IA
 	DefaultStorageClass *string
 
 	// The Amazon Resource Name (ARN) of the file share.
@@ -684,89 +686,92 @@ type SMBFileShareInfo struct {
 	// The ID of the file share.
 	FileShareId *string
 
-	// The name of the file share. Optional. FileShareName must be set if an S3 prefix
-	// name is set in LocationARN, or if an access point or access point alias is used.
+	// The name of the file share. Optional. FileShareName must be set if an S3
+	// prefix name is set in LocationARN, or if an access point or access point alias
+	// is used.
 	FileShareName *string
 
-	// The status of the file share. Valid Values: CREATING | UPDATING | AVAILABLE |
-	// DELETING
+	// The status of the file share. Valid Values: CREATING  | UPDATING  | AVAILABLE
+	// | DELETING
 	FileShareStatus *string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// A value that enables guessing of the MIME type for uploaded objects based on
-	// file extensions. Set this value to true to enable MIME type guessing, otherwise
-	// set to false. The default value is true. Valid Values: true | false
+	// file extensions. Set this value to true to enable MIME type guessing,
+	// otherwise set to false . The default value is true . Valid Values: true  |
+	// false
 	GuessMIMETypeEnabled *bool
 
-	// A list of users or groups in the Active Directory that are not allowed to access
-	// the file share. A group must be prefixed with the @ character. Acceptable
-	// formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be
-	// set if Authentication is set to ActiveDirectory.
+	// A list of users or groups in the Active Directory that are not allowed to
+	// access the file share. A group must be prefixed with the @ character. Acceptable
+	// formats include: DOMAIN\User1 , user1 , @group1 , and @DOMAIN\group1. Can only
+	// be set if Authentication is set to ActiveDirectory .
 	InvalidUserList []string
 
-	// Set to true to use Amazon S3 server-side encryption with your own KMS key, or
-	// false to use a key managed by Amazon S3. Optional. Valid Values: true | false
+	// Set to true  to use Amazon S3 server-side encryption with your own KMS key, or
+	// false to use a key managed by Amazon S3. Optional. Valid Values: true  | false
 	KMSEncrypted bool
 
-	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
-	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
-	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
+	// for Amazon S3 server-side encryption. Storage Gateway does not support
+	// asymmetric CMKs. This value can only be set when KMSEncrypted  is true.
+	// Optional.
 	KMSKey *string
 
 	// A custom ARN for the backend storage used for storing data for file shares. It
 	// includes a resource ARN with an optional prefix concatenation. The prefix must
 	// end with a forward slash (/). You can specify LocationARN as a bucket ARN,
 	// access point ARN or access point alias, as shown in the following examples.
-	// Bucket ARN: arn:aws:s3:::my-bucket/prefix/ Access point ARN:
-	// arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/ If you
+	// Bucket ARN: arn:aws:s3:::my-bucket/prefix/  Access point ARN:
+	// arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/If you
 	// specify an access point, the bucket policy must be configured to delegate access
 	// control to the access point. For information, see Delegating access control to
-	// access points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control)
+	// access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control)
 	// in the Amazon S3 User Guide. Access point alias:
 	// test-ap-ab123cdef4gehijklmn5opqrstuvuse1a-s3alias
 	LocationARN *string
 
 	// The notification policy of the file share. SettlingTimeInSeconds controls the
 	// number of seconds to wait after the last point in time a client wrote to a file
-	// before generating an ObjectUploaded notification. Because clients can make many
-	// small writes to files, it's best to set this parameter for as long as possible
-	// to avoid generating multiple notifications for the same file in a small time
-	// period. SettlingTimeInSeconds has no effect on the timing of the object
+	// before generating an ObjectUploaded notification. Because clients can make
+	// many small writes to files, it's best to set this parameter for as long as
+	// possible to avoid generating multiple notifications for the same file in a small
+	// time period. SettlingTimeInSeconds has no effect on the timing of the object
 	// uploading to Amazon S3, only the timing of the notification. The following
-	// example sets NotificationPolicy on with SettlingTimeInSeconds set to 60.
+	// example sets NotificationPolicy  on with SettlingTimeInSeconds  set to 60.
 	// {"Upload": {"SettlingTimeInSeconds": 60}} The following example sets
 	// NotificationPolicy off. {}
 	NotificationPolicy *string
 
-	// A value that sets the access control list (ACL) permission for objects in the S3
-	// bucket that an S3 File Gateway puts objects into. The default value is private.
+	// A value that sets the access control list (ACL) permission for objects in the
+	// S3 bucket that an S3 File Gateway puts objects into. The default value is
+	// private .
 	ObjectACL ObjectACL
 
 	// Specifies whether opportunistic locking is enabled for the SMB file share.
 	// Enabling opportunistic locking on case-sensitive shares is not recommended for
 	// workloads that involve access to files with the same name in different case.
-	// Valid Values: true | false
+	// Valid Values: true  | false
 	OplocksEnabled *bool
 
 	// The file share path used by the SMB client to identify the mount point.
 	Path *string
 
 	// A value that sets the write status of a file share. Set this value to true to
-	// set the write status to read-only, otherwise set to false. Valid Values: true |
-	// false
+	// set the write status to read-only, otherwise set to false . Valid Values: true
+	// | false
 	ReadOnly *bool
 
-	// A value that sets who pays the cost of the request and the cost associated with
-	// data download from the S3 bucket. If this value is set to true, the requester
-	// pays the costs; otherwise, the S3 bucket owner pays. However, the S3 bucket
-	// owner always pays the cost of storing data. RequesterPays is a configuration for
-	// the S3 bucket that backs the file share, so make sure that the configuration on
-	// the file share is the same as the S3 bucket configuration. Valid Values: true |
-	// false
+	// A value that sets who pays the cost of the request and the cost associated
+	// with data download from the S3 bucket. If this value is set to true, the
+	// requester pays the costs; otherwise, the S3 bucket owner pays. However, the S3
+	// bucket owner always pays the cost of storing data. RequesterPays is a
+	// configuration for the S3 bucket that backs the file share, so make sure that the
+	// configuration on the file share is the same as the S3 bucket configuration.
+	// Valid Values: true  | false
 	RequesterPays *bool
 
 	// The ARN of the IAM role that an S3 File Gateway assumes when it accesses the
@@ -774,16 +779,16 @@ type SMBFileShareInfo struct {
 	Role *string
 
 	// If this value is set to true, it indicates that access control list (ACL) is
-	// enabled on the SMB file share. If it is set to false, it indicates that file and
-	// directory permissions are mapped to the POSIX permission. For more information,
-	// see Using Microsoft Windows ACLs to control access to an SMB file share
-	// (https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html) in
-	// the Storage Gateway User Guide.
+	// enabled on the SMB file share. If it is set to false, it indicates that file
+	// and directory permissions are mapped to the POSIX permission. For more
+	// information, see Using Microsoft Windows ACLs to control access to an SMB file
+	// share (https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html)
+	// in the Storage Gateway User Guide.
 	SMBACLEnabled *bool
 
-	// A list of up to 50 tags assigned to the SMB file share, sorted alphabetically by
-	// key name. Each tag is a key-value pair. For a gateway with more than 10 tags
-	// assigned, you can view all tags using the ListTagsForResource API operation.
+	// A list of up to 50 tags assigned to the SMB file share, sorted alphabetically
+	// by key name. Each tag is a key-value pair. For a gateway with more than 10 tags
+	// assigned, you can view all tags using the ListTagsForResource  API operation.
 	Tags []Tag
 
 	// Specifies the DNS name for the VPC endpoint that the SMB file share uses to
@@ -792,10 +797,10 @@ type SMBFileShareInfo struct {
 	// point alias that points to a VPC access point.
 	VPCEndpointDNSName *string
 
-	// A list of users or groups in the Active Directory that are allowed to access the
-	// file share. A group must be prefixed with the @ character. Acceptable formats
-	// include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if
-	// Authentication is set to ActiveDirectory.
+	// A list of users or groups in the Active Directory that are allowed to access
+	// the file share. A group must be prefixed with the @ character. Acceptable
+	// formats include: DOMAIN\User1 , user1 , @group1 , and @DOMAIN\group1. Can only
+	// be set if Authentication is set to ActiveDirectory .
 	ValidUserList []string
 
 	noSmithyDocumentSerde
@@ -806,16 +811,17 @@ type SMBFileShareInfo struct {
 type SMBLocalGroups struct {
 
 	// A list of Active Directory users and groups that have local Gateway Admin
-	// permissions. Acceptable formats include: DOMAIN\User1, user1, DOMAIN\group1, and
-	// group1. Gateway Admins can use the Shared Folders Microsoft Management Console
-	// snap-in to force-close files that are open and locked.
+	// permissions. Acceptable formats include: DOMAIN\User1 , user1 , DOMAIN\group1,
+	// and group1. Gateway Admins can use the Shared Folders Microsoft Management
+	// Console snap-in to force-close files that are open and locked.
 	GatewayAdmins []string
 
 	noSmithyDocumentSerde
 }
 
-// Provides additional information about an error that was returned by the service.
-// See the errorCode and errorDetails members for more information about the error.
+// Provides additional information about an error that was returned by the
+// service. See the errorCode  and errorDetails members for more information
+// about the error.
 type StorageGatewayError struct {
 
 	// Additional information about the error.
@@ -834,13 +840,14 @@ type StorediSCSIVolume struct {
 	// have this timestamp.
 	CreatedDate *time.Time
 
-	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
-	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
-	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
+	// for Amazon S3 server-side encryption. Storage Gateway does not support
+	// asymmetric CMKs. This value can only be set when KMSEncrypted  is true.
+	// Optional.
 	KMSKey *string
 
-	// Indicates if when the stored volume was created, existing data on the underlying
-	// local disk was preserved. Valid Values: true | false
+	// Indicates if when the stored volume was created, existing data on the
+	// underlying local disk was preserved. Valid Values: true  | false
 	PreservedExistingData bool
 
 	// If the stored volume was created from a snapshot, this field contains the
@@ -850,8 +857,8 @@ type StorediSCSIVolume struct {
 	// The name of the iSCSI target used by an initiator to connect to a volume and
 	// used as a suffix for the target ARN. For example, specifying TargetName as
 	// myvolume results in the target ARN of
-	// arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume.
-	// The target name must be unique across all volumes on a gateway. If you don't
+	// arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume
+	// . The target name must be unique across all volumes on a gateway. If you don't
 	// specify a value, Storage Gateway uses the value that was previously used for
 	// this volume as the new target name.
 	TargetName *string
@@ -861,8 +868,8 @@ type StorediSCSIVolume struct {
 
 	// A value that indicates whether a storage volume is attached to, detached from,
 	// or is in the process of detaching from a gateway. For more information, see
-	// Moving your volumes to a different gateway
-	// (https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#attach-detach-volume).
+	// Moving your volumes to a different gateway (https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#attach-detach-volume)
+	// .
 	VolumeAttachmentStatus *string
 
 	// The ID of the local disk that was specified in the CreateStorediSCSIVolume
@@ -895,8 +902,8 @@ type StorediSCSIVolume struct {
 	// until you store data on the volume.
 	VolumeUsedInBytes *int64
 
-	// An VolumeiSCSIAttributes object that represents a collection of iSCSI attributes
-	// for one stored volume.
+	// An VolumeiSCSIAttributes object that represents a collection of iSCSI
+	// attributes for one stored volume.
 	VolumeiSCSIAttributes *VolumeiSCSIAttributes
 
 	noSmithyDocumentSerde
@@ -923,19 +930,20 @@ type Tag struct {
 // Describes a virtual tape object.
 type Tape struct {
 
-	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
-	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
-	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
+	// for Amazon S3 server-side encryption. Storage Gateway does not support
+	// asymmetric CMKs. This value can only be set when KMSEncrypted  is true.
+	// Optional.
 	KMSKey *string
 
 	// The date that the tape enters a custom tape pool.
 	PoolEntryDate *time.Time
 
-	// The ID of the pool that contains tapes that will be archived. The tapes in this
-	// pool are archived in the S3 storage class that is associated with the pool. When
-	// you use your backup application to eject the tape, the tape is archived directly
-	// into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds
-	// to the pool.
+	// The ID of the pool that contains tapes that will be archived. The tapes in
+	// this pool are archived in the S3 storage class that is associated with the pool.
+	// When you use your backup application to eject the tape, the tape is archived
+	// directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that
+	// corresponds to the pool.
 	PoolId *string
 
 	// For archiving virtual tapes, indicates how much data remains to be uploaded
@@ -967,7 +975,7 @@ type Tape struct {
 	// The virtual tape library (VTL) device that the virtual tape is associated with.
 	VTLDevice *string
 
-	// If the tape is archived as write-once-read-many (WORM), this value is true.
+	// If the tape is archived as write-once-read-many (WORM), this value is true .
 	Worm bool
 
 	noSmithyDocumentSerde
@@ -980,17 +988,18 @@ type TapeArchive struct {
 	// timestamp format is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
 	CompletionTime *time.Time
 
-	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
-	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
-	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
+	// for Amazon S3 server-side encryption. Storage Gateway does not support
+	// asymmetric CMKs. This value can only be set when KMSEncrypted  is true.
+	// Optional.
 	KMSKey *string
 
 	// The time that the tape entered the custom tape pool. The default timestamp
 	// format is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
 	PoolEntryDate *time.Time
 
-	// The ID of the pool that was used to archive the tape. The tapes in this pool are
-	// archived in the S3 storage class that is associated with the pool.
+	// The ID of the pool that was used to archive the tape. The tapes in this pool
+	// are archived in the S3 storage class that is associated with the pool.
 	PoolId *string
 
 	// If the archived tape is subject to tape retention lock, the date that the
@@ -1021,7 +1030,7 @@ type TapeArchive struct {
 	// available for tapes created prior to May 13, 2015.
 	TapeUsedInBytes *int64
 
-	// Set to true if the archived tape is stored as write-once-read-many (WORM).
+	// Set to true  if the archived tape is stored as write-once-read-many (WORM).
 	Worm bool
 
 	noSmithyDocumentSerde
@@ -1030,19 +1039,19 @@ type TapeArchive struct {
 // Describes a virtual tape.
 type TapeInfo struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// The date that the tape entered the custom tape pool with tape retention lock
 	// enabled.
 	PoolEntryDate *time.Time
 
-	// The ID of the pool that you want to add your tape to for archiving. The tape in
-	// this pool is archived in the S3 storage class that is associated with the pool.
-	// When you use your backup application to eject the tape, the tape is archived
-	// directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that
-	// corresponds to the pool.
+	// The ID of the pool that you want to add your tape to for archiving. The tape
+	// in this pool is archived in the S3 storage class that is associated with the
+	// pool. When you use your backup application to eject the tape, the tape is
+	// archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive)
+	// that corresponds to the pool.
 	PoolId *string
 
 	// The date that the tape became subject to tape retention lock.
@@ -1086,8 +1095,8 @@ type TapeRecoveryPointInfo struct {
 // Describes a storage volume object.
 type VolumeInfo struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// The unique identifier assigned to your gateway during activation. This ID
@@ -1106,9 +1115,10 @@ type VolumeInfo struct {
 	// One of the VolumeStatus values that indicates the state of the storage volume.
 	VolumeAttachmentStatus *string
 
-	// The unique identifier assigned to the volume. This ID becomes part of the volume
-	// Amazon Resource Name (ARN), which you use as input for other operations. Valid
-	// Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens (-).
+	// The unique identifier assigned to the volume. This ID becomes part of the
+	// volume Amazon Resource Name (ARN), which you use as input for other operations.
+	// Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens
+	// (-).
 	VolumeId *string
 
 	// The size of the volume in bytes. Valid Values: 50 to 500 lowercase letters,
@@ -1154,8 +1164,9 @@ type VolumeRecoveryPointInfo struct {
 	// The size of the volume in bytes.
 	VolumeSizeInBytes int64
 
-	// The size of the data stored on the volume in bytes. This value is not available
-	// for volumes created prior to May 13, 2015, until you store data on the volume.
+	// The size of the data stored on the volume in bytes. This value is not
+	// available for volumes created prior to May 13, 2015, until you store data on the
+	// volume.
 	VolumeUsageInBytes int64
 
 	noSmithyDocumentSerde

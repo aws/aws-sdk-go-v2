@@ -12,9 +12,9 @@ import (
 )
 
 // Configures the access rules that control access to the domain's document and
-// search endpoints. For more information, see  Configuring Access for an Amazon
-// CloudSearch Domain
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html).
+// search endpoints. For more information, see Configuring Access for an Amazon
+// CloudSearch Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html)
+// .
 func (c *Client) UpdateServiceAccessPolicies(ctx context.Context, params *UpdateServiceAccessPoliciesInput, optFns ...func(*Options)) (*UpdateServiceAccessPoliciesOutput, error) {
 	if params == nil {
 		params = &UpdateServiceAccessPoliciesInput{}

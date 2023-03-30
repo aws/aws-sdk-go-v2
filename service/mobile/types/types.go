@@ -82,11 +82,12 @@ type Resource struct {
 	// Key-value attribute pairs.
 	Attributes map[string]string
 
-	// Identifies which feature in AWS Mobile Hub is associated with this AWS resource.
+	// Identifies which feature in AWS Mobile Hub is associated with this AWS
+	// resource.
 	Feature *string
 
-	// Name of the AWS resource (e.g., for an Amazon S3 bucket this is the name of the
-	// bucket).
+	// Name of the AWS resource (e.g., for an Amazon S3 bucket this is the name of
+	// the bucket).
 	Name *string
 
 	// Simplified name for type of AWS resource (e.g., bucket is an Amazon S3 bucket).

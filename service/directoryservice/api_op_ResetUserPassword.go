@@ -13,17 +13,8 @@ import (
 // Resets the password for any user in your Managed Microsoft AD or Simple AD
 // directory. You can reset the password for any user in your directory with the
 // following exceptions:
-// - For Simple AD, you cannot reset the password for any
-// user that is a member of either the Domain Admins or Enterprise Admins group
-// except for the administrator user.
-// - For Managed Microsoft AD, you can only
-// reset the password for a user that is in an OU based off of the NetBIOS name
-// that you typed when you created your directory. For example, you cannot reset
-// the password for a user in the Amazon Web Services Reserved OU. For more
-// information about the OU structure for an Managed Microsoft AD directory, see
-// What Gets Created
-// (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_what_gets_created.html)
-// in the Directory Service Administration Guide.
+//   - For Simple AD, you cannot reset the password for any user that is a member of either the Domain Admins or Enterprise Admins group except for the administrator user.
+//   - For Managed Microsoft AD, you can only reset the password for a user that is in an OU based off of the NetBIOS name that you typed when you created your directory. For example, you cannot reset the password for a user in the Amazon Web Services Reserved OU. For more information about the OU structure for an Managed Microsoft AD directory, see What Gets Created (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_what_gets_created.html) in the Directory Service Administration Guide.
 func (c *Client) ResetUserPassword(ctx context.Context, params *ResetUserPasswordInput, optFns ...func(*Options)) (*ResetUserPasswordOutput, error) {
 	if params == nil {
 		params = &ResetUserPasswordInput{}
@@ -41,8 +32,8 @@ func (c *Client) ResetUserPassword(ctx context.Context, params *ResetUserPasswor
 
 type ResetUserPasswordInput struct {
 
-	// Identifier of the Managed Microsoft AD or Simple AD directory in which the user
-	// resides.
+	// Identifier of the Managed Microsoft AD or Simple AD directory in which the
+	// user resides.
 	//
 	// This member is required.
 	DirectoryId *string

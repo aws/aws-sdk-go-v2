@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Revokes function-use permission from an Amazon Web Service or another Amazon Web
-// Services account. You can get the ID of the statement from the output of
-// GetPolicy.
+// Revokes function-use permission from an Amazon Web Service or another Amazon
+// Web Services account. You can get the ID of the statement from the output of
+// GetPolicy .
 func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionInput, optFns ...func(*Options)) (*RemovePermissionOutput, error) {
 	if params == nil {
 		params = &RemovePermissionInput{}
@@ -31,16 +31,13 @@ func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionI
 type RemovePermissionInput struct {
 
 	// The name of the Lambda function, version, or alias. Name formats
-	// - Function name
-	// – my-function (name-only), my-function:v1 (with alias).
-	// - Function ARN –
-	// arn:aws:lambda:us-west-2:123456789012:function:my-function.
-	// - Partial ARN –
-	// 123456789012:function:my-function.
-	//
-	// You can append a version number or alias to
-	// any of the formats. The length constraint applies only to the full ARN. If you
-	// specify only the function name, it is limited to 64 characters in length.
+	//     - Function name – my-function (name-only), my-function:v1 (with alias).
+	//     - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//     - Partial ARN – 123456789012:function:my-function .
+	// You can append a
+	// version number or alias to any of the formats. The length constraint applies
+	// only to the full ARN. If you specify only the function name, it is limited to 64
+	// characters in length.
 	//
 	// This member is required.
 	FunctionName *string
@@ -50,8 +47,8 @@ type RemovePermissionInput struct {
 	// This member is required.
 	StatementId *string
 
-	// Specify a version or alias to remove permissions from a published version of the
-	// function.
+	// Specify a version or alias to remove permissions from a published version of
+	// the function.
 	Qualifier *string
 
 	// Update the policy only if the revision ID matches the ID that's specified. Use

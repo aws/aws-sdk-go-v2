@@ -50,10 +50,10 @@ type GetDocumentationPartOutput struct {
 	// DocumentationPart is created.
 	Id *string
 
-	// The location of the API entity to which the documentation applies. Valid fields
-	// depend on the targeted API entity type. All the valid location fields are not
-	// required. If not explicitly specified, a valid location field is treated as a
-	// wildcard and associated documentation content may be inherited by matching
+	// The location of the API entity to which the documentation applies. Valid
+	// fields depend on the targeted API entity type. All the valid location fields are
+	// not required. If not explicitly specified, a valid location field is treated as
+	// a wildcard and associated documentation content may be inherited by matching
 	// entities, unless overridden.
 	Location *types.DocumentationPartLocation
 
@@ -62,7 +62,7 @@ type GetDocumentationPartOutput struct {
 	// \"The API does ...\" }". Only OpenAPI-compliant documentation-related fields
 	// from the properties map are exported and, hence, published as part of the API
 	// entity definitions, while the original documentation parts are exported in a
-	// OpenAPI extension of x-amazon-apigateway-documentation.
+	// OpenAPI extension of x-amazon-apigateway-documentation .
 	Properties *string
 
 	// Metadata pertaining to the operation's result.

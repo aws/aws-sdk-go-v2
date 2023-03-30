@@ -40,22 +40,22 @@ type GetApiInput struct {
 
 type GetApiOutput struct {
 
-	// The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The
-	// stage name is typically appended to this URI to form a complete path to a
+	// The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com.
+	// The stage name is typically appended to this URI to form a complete path to a
 	// deployed API stage.
 	ApiEndpoint *string
 
-	// Specifies whether an API is managed by API Gateway. You can't update or delete a
-	// managed API by using API Gateway. A managed API can be deleted only through the
-	// tooling or service that created it.
+	// Specifies whether an API is managed by API Gateway. You can't update or delete
+	// a managed API by using API Gateway. A managed API can be deleted only through
+	// the tooling or service that created it.
 	ApiGatewayManaged bool
 
 	// The API ID.
 	ApiId *string
 
-	// An API key selection expression. Supported only for WebSocket APIs. See API Key
-	// Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions).
+	// An API key selection expression. Supported only for WebSocket APIs. See API
+	// Key Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
+	// .
 	ApiKeySelectionExpression *string
 
 	// A CORS configuration. Supported only for HTTP APIs.
@@ -74,8 +74,8 @@ type GetApiOutput struct {
 	// endpoint.
 	DisableExecuteApiEndpoint bool
 
-	// Avoid validating models when creating a deployment. Supported only for WebSocket
-	// APIs.
+	// Avoid validating models when creating a deployment. Supported only for
+	// WebSocket APIs.
 	DisableSchemaValidation bool
 
 	// The validation information during API import. This may include particular

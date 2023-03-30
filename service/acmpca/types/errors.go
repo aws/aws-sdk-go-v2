@@ -86,7 +86,8 @@ func (e *InvalidArgsException) ErrorCode() string {
 }
 func (e *InvalidArgsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested Amazon Resource Name (ARN) does not refer to an existing resource.
+// The requested Amazon Resource Name (ARN) does not refer to an existing
+// resource.
 type InvalidArnException struct {
 	Message *string
 
@@ -113,8 +114,8 @@ func (e *InvalidArnException) ErrorCode() string {
 func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The token specified in the NextToken argument is not valid. Use the token
-// returned from your previous call to ListCertificateAuthorities
-// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html).
+// returned from your previous call to ListCertificateAuthorities (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html)
+// .
 type InvalidNextTokenException struct {
 	Message *string
 
@@ -142,8 +143,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 
 // The resource policy is invalid or is missing a required statement. For general
 // information about IAM policy and statement structure, see Overview of JSON
-// Policies
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json).
+// Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json)
+// .
 type InvalidPolicyException struct {
 	Message *string
 
@@ -459,8 +460,8 @@ func (e *RequestInProgressException) ErrorCode() string {
 }
 func (e *RequestInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A resource such as a private CA, S3 bucket, certificate, audit report, or policy
-// cannot be found.
+// A resource such as a private CA, S3 bucket, certificate, audit report, or
+// policy cannot be found.
 type ResourceNotFoundException struct {
 	Message *string
 

@@ -13,7 +13,7 @@ import (
 )
 
 // Returns the list of change sets owned by the account being used to make the
-// call. You can filter this list by providing any combination of entityId,
+// call. You can filter this list by providing any combination of entityId ,
 // ChangeSetName, and status. If you provide more than one filter, the API
 // operation applies a logical AND between the filters. You can describe a change
 // during the 60-day request history retention period for API calls.
@@ -51,7 +51,7 @@ type ListChangeSetsInput struct {
 	// results.
 	NextToken *string
 
-	// An object that contains two attributes, SortBy and SortOrder.
+	// An object that contains two attributes, SortBy  and SortOrder .
 	Sort *types.Sort
 
 	noSmithyDocumentSerde
@@ -59,7 +59,7 @@ type ListChangeSetsInput struct {
 
 type ListChangeSetsOutput struct {
 
-	// Array of ChangeSetSummaryListItem objects.
+	// Array of ChangeSetSummaryListItem  objects.
 	ChangeSetSummaryList []types.ChangeSetSummaryListItem
 
 	// The value of the next token, if it exists. Null if there are no more results.
@@ -149,8 +149,8 @@ type ListChangeSetsPaginatorOptions struct {
 	// value is 20.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

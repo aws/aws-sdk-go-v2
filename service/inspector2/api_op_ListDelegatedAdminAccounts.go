@@ -34,10 +34,10 @@ type ListDelegatedAdminAccountsInput struct {
 	// The maximum number of results to return in the response.
 	MaxResults *int32
 
-	// A token to use for paginating results that are returned in the response. Set the
-	// value of this parameter to null for the first request to a list action. For
-	// subsequent calls, use the NextToken value returned from the previous request to
-	// continue listing results after the first page.
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request to a list action. For
+	// subsequent calls, use the NextToken value returned from the previous request
+	// to continue listing results after the first page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -48,10 +48,10 @@ type ListDelegatedAdminAccountsOutput struct {
 	// Details of the Amazon Inspector delegated administrator of your organization.
 	DelegatedAdminAccounts []types.DelegatedAdminAccount
 
-	// A token to use for paginating results that are returned in the response. Set the
-	// value of this parameter to null for the first request to a list action. For
-	// subsequent calls, use the NextToken value returned from the previous request to
-	// continue listing results after the first page.
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request to a list action. For
+	// subsequent calls, use the NextToken value returned from the previous request
+	// to continue listing results after the first page.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -134,8 +134,8 @@ type ListDelegatedAdminAccountsPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

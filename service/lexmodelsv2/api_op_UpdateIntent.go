@@ -35,7 +35,7 @@ type UpdateIntentInput struct {
 	// This member is required.
 	BotId *string
 
-	// The version of the bot that contains the intent. Must be DRAFT.
+	// The version of the bot that contains the intent. Must be DRAFT .
 	//
 	// This member is required.
 	BotVersion *string
@@ -50,9 +50,10 @@ type UpdateIntentInput struct {
 	// This member is required.
 	IntentName *string
 
-	// The identifier of the language and locale where this intent is used. The string
-	// must match one of the supported locales. For more information, see Supported
-	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// The identifier of the language and locale where this intent is used. The
+	// string must match one of the supported locales. For more information, see
+	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	//
 	// This member is required.
 	LocaleId *string
@@ -105,7 +106,7 @@ type UpdateIntentOutput struct {
 	// The identifier of the bot that contains the intent.
 	BotId *string
 
-	// The version of the bot that contains the intent. Will always be DRAFT.
+	// The version of the bot that contains the intent. Will always be DRAFT .
 	BotVersion *string
 
 	// A timestamp of when the intent was created.
@@ -114,8 +115,8 @@ type UpdateIntentOutput struct {
 	// The updated description of the intent.
 	Description *string
 
-	// The updated Lambda function called during each turn of the conversation with the
-	// user.
+	// The updated Lambda function called during each turn of the conversation with
+	// the user.
 	DialogCodeHook *types.DialogCodeHookSettings
 
 	// The updated Lambda function called when the intent is ready for fulfillment.
@@ -124,15 +125,15 @@ type UpdateIntentOutput struct {
 	//
 	InitialResponseSetting *types.InitialResponseSetting
 
-	// The updated list of contexts that must be active for the intent to be considered
-	// by Amazon Lex.
+	// The updated list of contexts that must be active for the intent to be
+	// considered by Amazon Lex.
 	InputContexts []types.InputContext
 
 	// The updated response that Amazon Lex sends the user when the intent is closed.
 	IntentClosingSetting *types.IntentClosingSetting
 
-	// The updated prompts that Amazon Lex sends to the user to confirm the completion
-	// of an intent.
+	// The updated prompts that Amazon Lex sends to the user to confirm the
+	// completion of an intent.
 	IntentConfirmationSetting *types.IntentConfirmationSetting
 
 	// The identifier of the intent that was updated.

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the health checks used when evaluating the health state of the targets
-// in the specified target group.
+// Modifies the health checks used when evaluating the health state of the
+// targets in the specified target group.
 func (c *Client) ModifyTargetGroup(ctx context.Context, params *ModifyTargetGroupInput, optFns ...func(*Options)) (*ModifyTargetGroupOutput, error) {
 	if params == nil {
 		params = &ModifyTargetGroupInput{}
@@ -64,8 +64,8 @@ type ModifyTargetGroupInput struct {
 	// response means a failed health check.
 	HealthCheckTimeoutSeconds *int32
 
-	// The number of consecutive health checks successes required before considering an
-	// unhealthy target healthy.
+	// The number of consecutive health checks successes required before considering
+	// an unhealthy target healthy.
 	HealthyThresholdCount *int32
 
 	// [HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a
@@ -75,8 +75,8 @@ type ModifyTargetGroupInput struct {
 	// GENEVE, the range is 200-399.
 	Matcher *types.Matcher
 
-	// The number of consecutive health check failures required before considering the
-	// target unhealthy.
+	// The number of consecutive health check failures required before considering
+	// the target unhealthy.
 	UnhealthyThresholdCount *int32
 
 	noSmithyDocumentSerde

@@ -11,11 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes one or more detectors that were created. When a detector is deleted, its
-// state will be cleared and the detector will be removed from the list of
+// Deletes one or more detectors that were created. When a detector is deleted,
+// its state will be cleared and the detector will be removed from the list of
 // detectors. The deleted detector will no longer appear if referenced in the
-// ListDetectors
-// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_ListDetectors.html)
+// ListDetectors (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_ListDetectors.html)
 // API call.
 func (c *Client) BatchDeleteDetector(ctx context.Context, params *BatchDeleteDetectorInput, optFns ...func(*Options)) (*BatchDeleteDetectorOutput, error) {
 	if params == nil {
@@ -44,9 +43,9 @@ type BatchDeleteDetectorInput struct {
 
 type BatchDeleteDetectorOutput struct {
 
-	// A list of errors associated with the request, or an empty array ([]) if there
-	// are no errors. Each error entry contains a messageId that helps you identify the
-	// entry that failed.
+	// A list of errors associated with the request, or an empty array ( []) if there
+	// are no errors. Each error entry contains a messageId that helps you identify
+	// the entry that failed.
 	BatchDeleteDetectorErrorEntries []types.BatchDeleteDetectorErrorEntry
 
 	// Metadata pertaining to the operation's result.

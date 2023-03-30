@@ -29,12 +29,12 @@ func (c *Client) UpdateEnvironmentTemplateVersion(ctx context.Context, params *U
 
 type UpdateEnvironmentTemplateVersionInput struct {
 
-	// To update a major version of an environment template, include major Version.
+	// To update a major version of an environment template, include major Version .
 	//
 	// This member is required.
 	MajorVersion *string
 
-	// To update a minor version of an environment template, include minorVersion.
+	// To update a minor version of an environment template, include minorVersion .
 	//
 	// This member is required.
 	MinorVersion *string

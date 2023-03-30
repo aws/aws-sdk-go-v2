@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a configuration set. Configuration sets are groups of rules that you can
-// apply to the emails that you send. You apply a configuration set to an email by
-// specifying the name of the configuration set when you call the Amazon SES API
+// Create a configuration set. Configuration sets are groups of rules that you
+// can apply to the emails that you send. You apply a configuration set to an email
+// by specifying the name of the configuration set when you call the Amazon SES API
 // v2. When you apply a configuration set to an email, all of the rules in that
 // configuration set are applied to the email.
 func (c *Client) CreateConfigurationSet(ctx context.Context, params *CreateConfigurationSetInput, optFns ...func(*Options)) (*CreateConfigurationSetOutput, error) {
@@ -44,8 +44,8 @@ type CreateConfigurationSetInput struct {
 	// you send using the configuration set.
 	DeliveryOptions *types.DeliveryOptions
 
-	// An object that defines whether or not Amazon SES collects reputation metrics for
-	// the emails that you send that use the configuration set.
+	// An object that defines whether or not Amazon SES collects reputation metrics
+	// for the emails that you send that use the configuration set.
 	ReputationOptions *types.ReputationOptions
 
 	// An object that defines whether or not Amazon SES can send email that you send
@@ -56,8 +56,8 @@ type CreateConfigurationSetInput struct {
 	// your account.
 	SuppressionOptions *types.SuppressionOptions
 
-	// An array of objects that define the tags (keys and values) to associate with the
-	// configuration set.
+	// An array of objects that define the tags (keys and values) to associate with
+	// the configuration set.
 	Tags []types.Tag
 
 	// An object that defines the open and click tracking options for emails that you
@@ -71,8 +71,8 @@ type CreateConfigurationSetInput struct {
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type CreateConfigurationSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

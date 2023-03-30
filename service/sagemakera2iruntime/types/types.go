@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-// Attributes of the data specified by the customer. Use these to describe the data
-// to be labeled.
+// Attributes of the data specified by the customer. Use these to describe the
+// data to be labeled.
 type HumanLoopDataAttributes struct {
 
 	// Declares that your content is free of personally identifiable information or
@@ -24,8 +24,8 @@ type HumanLoopDataAttributes struct {
 // An object containing the human loop input in JSON format.
 type HumanLoopInput struct {
 
-	// Serialized input from the human loop. The input must be a string representation
-	// of a file in JSON format.
+	// Serialized input from the human loop. The input must be a string
+	// representation of a file in JSON format.
 	//
 	// This member is required.
 	InputContent *string
@@ -36,8 +36,8 @@ type HumanLoopInput struct {
 // Information about where the human output will be stored.
 type HumanLoopOutput struct {
 
-	// The location of the Amazon S3 object where Amazon Augmented AI stores your human
-	// loop output.
+	// The location of the Amazon S3 object where Amazon Augmented AI stores your
+	// human loop output.
 	//
 	// This member is required.
 	OutputS3Uri *string
@@ -52,7 +52,7 @@ type HumanLoopSummary struct {
 	CreationTime *time.Time
 
 	// The reason why the human loop failed. A failure reason is returned when the
-	// status of the human loop is Failed.
+	// status of the human loop is Failed .
 	FailureReason *string
 
 	// The Amazon Resource Name (ARN) of the flow definition used to configure the

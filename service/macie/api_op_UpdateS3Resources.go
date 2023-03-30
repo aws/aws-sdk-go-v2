@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// (Discontinued) Updates the classification types for the specified S3 resources.
-// If memberAccountId isn't specified, the action updates the classification types
-// of the S3 resources associated with Amazon Macie Classic for the current Macie
-// Classic administrator account. If memberAccountId is specified, the action
-// updates the classification types of the S3 resources associated with Macie
-// Classic for the specified member account.
+// (Discontinued) Updates the classification types for the specified S3
+// resources. If memberAccountId isn't specified, the action updates the
+// classification types of the S3 resources associated with Amazon Macie Classic
+// for the current Macie Classic administrator account. If memberAccountId is
+// specified, the action updates the classification types of the S3 resources
+// associated with Macie Classic for the specified member account.
 func (c *Client) UpdateS3Resources(ctx context.Context, params *UpdateS3ResourcesInput, optFns ...func(*Options)) (*UpdateS3ResourcesOutput, error) {
 	if params == nil {
 		params = &UpdateS3ResourcesInput{}
@@ -48,8 +48,8 @@ type UpdateS3ResourcesInput struct {
 
 type UpdateS3ResourcesOutput struct {
 
-	// (Discontinued) The S3 resources whose classification types can't be updated. An
-	// error code and an error message are provided for each failed item.
+	// (Discontinued) The S3 resources whose classification types can't be updated.
+	// An error code and an error message are provided for each failed item.
 	FailedS3Resources []types.FailedS3Resource
 
 	// Metadata pertaining to the operation's result.

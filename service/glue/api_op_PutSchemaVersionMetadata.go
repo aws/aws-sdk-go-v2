@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Puts the metadata key value pair for a specified schema version ID. A maximum of
-// 10 key value pairs will be allowed per schema version. They can be added over
+// Puts the metadata key value pair for a specified schema version ID. A maximum
+// of 10 key value pairs will be allowed per schema version. They can be added over
 // one or more calls.
 func (c *Client) PutSchemaVersionMetadata(ctx context.Context, params *PutSchemaVersionMetadataInput, optFns ...func(*Options)) (*PutSchemaVersionMetadataOutput, error) {
 	if params == nil {

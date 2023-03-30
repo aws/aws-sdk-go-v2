@@ -19,8 +19,7 @@ import (
 // pagination parameters to retrieve results as a set of sequential pages. If
 // successful, a configuration is returned for each requested name. When specifying
 // a list of names, only configurations that currently exist are returned. Learn
-// more  Setting up FlexMatch matchmakers
-// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/matchmaker-build.html)
+// more Setting up FlexMatch matchmakers (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/matchmaker-build.html)
 func (c *Client) DescribeMatchmakingConfigurations(ctx context.Context, params *DescribeMatchmakingConfigurationsInput, optFns ...func(*Options)) (*DescribeMatchmakingConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeMatchmakingConfigurationsInput{}
@@ -47,9 +46,9 @@ type DescribeMatchmakingConfigurationsInput struct {
 	// configurations, leave this parameter empty.
 	Names []string
 
-	// A token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this operation. To start at the
-	// beginning of the result set, do not specify a value.
+	// A token that indicates the start of the next sequential page of results. Use
+	// the token that is returned with a previous call to this operation. To start at
+	// the beginning of the result set, do not specify a value.
 	NextToken *string
 
 	// A unique identifier for the matchmaking rule set. You can use either the rule
@@ -151,8 +150,8 @@ type DescribeMatchmakingConfigurationsPaginatorOptions struct {
 	// get results as a set of sequential pages. This parameter is limited to 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

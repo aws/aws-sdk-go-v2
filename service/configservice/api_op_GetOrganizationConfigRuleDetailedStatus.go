@@ -31,13 +31,13 @@ func (c *Client) GetOrganizationConfigRuleDetailedStatus(ctx context.Context, pa
 
 type GetOrganizationConfigRuleDetailedStatusInput struct {
 
-	// The name of your organization Config rule for which you want status details for
-	// member accounts.
+	// The name of your organization Config rule for which you want status details
+	// for member accounts.
 	//
 	// This member is required.
 	OrganizationConfigRuleName *string
 
-	// A StatusDetailFilters object.
+	// A StatusDetailFilters  object.
 	Filters *types.StatusDetailFilters
 
 	// The maximum number of OrganizationConfigRuleDetailedStatus returned on each
@@ -58,7 +58,7 @@ type GetOrganizationConfigRuleDetailedStatusOutput struct {
 	// page of results in a paginated response.
 	NextToken *string
 
-	// A list of MemberAccountStatus objects.
+	// A list of MemberAccountStatus  objects.
 	OrganizationConfigRuleDetailedStatus []types.MemberAccountStatus
 
 	// Metadata pertaining to the operation's result.
@@ -130,24 +130,24 @@ func (c *Client) addOperationGetOrganizationConfigRuleDetailedStatusMiddlewares(
 	return nil
 }
 
-// GetOrganizationConfigRuleDetailedStatusAPIClient is a client that implements the
-// GetOrganizationConfigRuleDetailedStatus operation.
+// GetOrganizationConfigRuleDetailedStatusAPIClient is a client that implements
+// the GetOrganizationConfigRuleDetailedStatus operation.
 type GetOrganizationConfigRuleDetailedStatusAPIClient interface {
 	GetOrganizationConfigRuleDetailedStatus(context.Context, *GetOrganizationConfigRuleDetailedStatusInput, ...func(*Options)) (*GetOrganizationConfigRuleDetailedStatusOutput, error)
 }
 
 var _ GetOrganizationConfigRuleDetailedStatusAPIClient = (*Client)(nil)
 
-// GetOrganizationConfigRuleDetailedStatusPaginatorOptions is the paginator options
-// for GetOrganizationConfigRuleDetailedStatus
+// GetOrganizationConfigRuleDetailedStatusPaginatorOptions is the paginator
+// options for GetOrganizationConfigRuleDetailedStatus
 type GetOrganizationConfigRuleDetailedStatusPaginatorOptions struct {
 	// The maximum number of OrganizationConfigRuleDetailedStatus returned on each
 	// page. If you do not specify a number, Config uses the default. The default is
 	// 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

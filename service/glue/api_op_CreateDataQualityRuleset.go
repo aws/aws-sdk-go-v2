@@ -36,8 +36,8 @@ type CreateDataQualityRulesetInput struct {
 	// This member is required.
 	Name *string
 
-	// A Data Quality Definition Language (DQDL) ruleset. For more information, see the
-	// Glue developer guide.
+	// A Data Quality Definition Language (DQDL) ruleset. For more information, see
+	// the Glue developer guide.
 	//
 	// This member is required.
 	Ruleset *string

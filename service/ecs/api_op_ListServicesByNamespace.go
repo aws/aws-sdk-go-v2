@@ -13,10 +13,9 @@ import (
 
 // This operation lists all of the services that are associated with a Cloud Map
 // namespace. This list might include services in different clusters. In contrast,
-// ListServices can only list services in one cluster at a time. If you need to
+// ListServicescan only list services in one cluster at a time. If you need to
 // filter the list of services in a single cluster by various parameters, use
-// ListServices. For more information, see Service Connect
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+// ListServices . For more information, see Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) ListServicesByNamespace(ctx context.Context, params *ListServicesByNamespaceInput, optFns ...func(*Options)) (*ListServicesByNamespaceOutput, error) {
 	if params == nil {
@@ -35,14 +34,13 @@ func (c *Client) ListServicesByNamespace(ctx context.Context, params *ListServic
 
 type ListServicesByNamespaceInput struct {
 
-	// The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace
-	// to list the services in. Tasks that run in a namespace can use short names to
-	// connect to services in the namespace. Tasks can connect to services across all
-	// of the clusters in the namespace. Tasks connect through a managed proxy
-	// container that collects logs and metrics for increased visibility. Only the
-	// tasks that Amazon ECS services create are supported with Service Connect. For
-	// more information, see Service Connect
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+	// The namespace name or full Amazon Resource Name (ARN) of the Cloud Map
+	// namespace to list the services in. Tasks that run in a namespace can use short
+	// names to connect to services in the namespace. Tasks can connect to services
+	// across all of the clusters in the namespace. Tasks connect through a managed
+	// proxy container that collects logs and metrics for increased visibility. Only
+	// the tasks that Amazon ECS services create are supported with Service Connect.
+	// For more information, see Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
 	// This member is required.
@@ -50,18 +48,18 @@ type ListServicesByNamespaceInput struct {
 
 	// The maximum number of service results that ListServicesByNamespace returns in
 	// paginated output. When this parameter is used, ListServicesByNamespace only
-	// returns maxResults results in a single page along with a nextToken response
+	// returns maxResults  results in a single page along with a nextToken response
 	// element. The remaining results of the initial request can be seen by sending
-	// another ListServicesByNamespace request with the returned nextToken value. This
-	// value can be between 1 and 100. If this parameter isn't used, then
+	// another ListServicesByNamespace  request with the returned nextToken value.
+	// This value can be between 1 and 100. If this parameter isn't used, then
 	// ListServicesByNamespace returns up to 10 results and a nextToken value if
 	// applicable.
 	MaxResults *int32
 
-	// The nextToken value that's returned from a ListServicesByNamespace request. It
-	// indicates that more results are available to fulfill the request and further
+	// The nextToken  value that's returned from a ListServicesByNamespace request.
+	// It indicates that more results are available to fulfill the request and further
 	// calls are needed. If maxResults is returned, it is possible the number of
-	// results is less than maxResults.
+	// results is less than maxResults .
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -69,10 +67,10 @@ type ListServicesByNamespaceInput struct {
 
 type ListServicesByNamespaceOutput struct {
 
-	// The nextToken value to include in a future ListServicesByNamespace request. When
-	// the results of a ListServicesByNamespace request exceed maxResults, this value
-	// can be used to retrieve the next page of results. When there are no more results
-	// to return, this value is null.
+	// The nextToken  value to include in a future ListServicesByNamespace request.
+	// When the results of a ListServicesByNamespace  request exceed maxResults, this
+	// value can be used to retrieve the next page of results. When there are no more
+	// results to return, this value is null .
 	NextToken *string
 
 	// The list of full ARN entries for each service that's associated with the
@@ -161,16 +159,16 @@ var _ ListServicesByNamespaceAPIClient = (*Client)(nil)
 type ListServicesByNamespacePaginatorOptions struct {
 	// The maximum number of service results that ListServicesByNamespace returns in
 	// paginated output. When this parameter is used, ListServicesByNamespace only
-	// returns maxResults results in a single page along with a nextToken response
+	// returns maxResults  results in a single page along with a nextToken response
 	// element. The remaining results of the initial request can be seen by sending
-	// another ListServicesByNamespace request with the returned nextToken value. This
-	// value can be between 1 and 100. If this parameter isn't used, then
+	// another ListServicesByNamespace  request with the returned nextToken value.
+	// This value can be between 1 and 100. If this parameter isn't used, then
 	// ListServicesByNamespace returns up to 10 results and a nextToken value if
 	// applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

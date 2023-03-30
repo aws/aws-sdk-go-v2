@@ -15,9 +15,8 @@ import (
 // (default) or unlocked. A locked policy is read-only, whereas an unlocked policy
 // is read/write. If your activity stream is started and locked, you can unlock it,
 // customize your audit policy, and then lock your activity stream. Restarting the
-// activity stream isn't required. For more information, see  Modifying a database
-// activity stream
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.Modifying.html)
+// activity stream isn't required. For more information, see Modifying a database
+// activity stream (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.Modifying.html)
 // in the Amazon RDS User Guide. This operation is supported for RDS for Oracle and
 // Microsoft SQL Server.
 func (c *Client) ModifyActivityStream(ctx context.Context, params *ModifyActivityStreamInput, optFns ...func(*Options)) (*ModifyActivityStreamOutput, error) {
@@ -37,13 +36,14 @@ func (c *Client) ModifyActivityStream(ctx context.Context, params *ModifyActivit
 
 type ModifyActivityStreamInput struct {
 
-	// The audit policy state. When a policy is unlocked, it is read/write. When it is
-	// locked, it is read-only. You can edit your audit policy only when the activity
-	// stream is unlocked or stopped.
+	// The audit policy state. When a policy is unlocked, it is read/write. When it
+	// is locked, it is read-only. You can edit your audit policy only when the
+	// activity stream is unlocked or stopped.
 	AuditPolicyState types.AuditPolicyState
 
-	// The Amazon Resource Name (ARN) of the RDS for Oracle or Microsoft SQL Server DB
-	// instance. For example, arn:aws:rds:us-east-1:12345667890:instance:my-orcl-db.
+	// The Amazon Resource Name (ARN) of the RDS for Oracle or Microsoft SQL Server
+	// DB instance. For example, arn:aws:rds:us-east-1:12345667890:instance:my-orcl-db
+	// .
 	ResourceArn *string
 
 	noSmithyDocumentSerde
@@ -55,8 +55,8 @@ type ModifyActivityStreamOutput struct {
 	// activity stream.
 	EngineNativeAuditFieldsIncluded *bool
 
-	// The name of the Amazon Kinesis data stream to be used for the database activity
-	// stream.
+	// The name of the Amazon Kinesis data stream to be used for the database
+	// activity stream.
 	KinesisStreamName *string
 
 	// The Amazon Web Services KMS key identifier for encryption of messages in the

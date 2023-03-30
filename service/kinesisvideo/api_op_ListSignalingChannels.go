@@ -14,7 +14,7 @@ import (
 
 // Returns an array of ChannelInfo objects. Each object describes a signaling
 // channel. To retrieve only those channels that satisfy a specific condition, you
-// can specify a ChannelNameCondition.
+// can specify a ChannelNameCondition .
 func (c *Client) ListSignalingChannels(ctx context.Context, params *ListSignalingChannelsInput, optFns ...func(*Options)) (*ListSignalingChannelsOutput, error) {
 	if params == nil {
 		params = &ListSignalingChannelsInput{}
@@ -48,11 +48,11 @@ type ListSignalingChannelsInput struct {
 
 type ListSignalingChannelsOutput struct {
 
-	// An array of ChannelInfo objects.
+	// An array of ChannelInfo  objects.
 	ChannelInfoList []types.ChannelInfo
 
-	// If the response is truncated, the call returns this element with a token. To get
-	// the next batch of streams, use this token in your next request.
+	// If the response is truncated, the call returns this element with a token. To
+	// get the next batch of streams, use this token in your next request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -135,8 +135,8 @@ type ListSignalingChannelsPaginatorOptions struct {
 	// The maximum number of channels to return in the response. The default is 500.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

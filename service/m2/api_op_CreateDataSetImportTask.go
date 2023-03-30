@@ -30,7 +30,8 @@ func (c *Client) CreateDataSetImportTask(ctx context.Context, params *CreateData
 
 type CreateDataSetImportTaskInput struct {
 
-	// The unique identifier of the application for which you want to import data sets.
+	// The unique identifier of the application for which you want to import data
+	// sets.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -53,7 +54,7 @@ type CreateDataSetImportTaskInput struct {
 type CreateDataSetImportTaskOutput struct {
 
 	// The task identifier. This operation is asynchronous. Use this identifier with
-	// the GetDataSetImportTask operation to obtain the status of this task.
+	// the GetDataSetImportTask  operation to obtain the status of this task.
 	//
 	// This member is required.
 	TaskId *string

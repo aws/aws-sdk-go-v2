@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Retrieves the definitions of some or all of the tables in a given Database.
+// Retrieves the definitions of some or all of the tables in a given Database .
 func (c *Client) GetTables(ctx context.Context, params *GetTablesInput, optFns ...func(*Options)) (*GetTablesOutput, error) {
 	if params == nil {
 		params = &GetTablesInput{}
@@ -53,7 +53,7 @@ type GetTablesInput struct {
 
 	// The time as of when to read the table contents. If not set, the most recent
 	// transaction commit time will be used. Cannot be specified along with
-	// TransactionId.
+	// TransactionId .
 	QueryAsOfTime *time.Time
 
 	// The transaction ID at which to read the table contents.
@@ -67,7 +67,7 @@ type GetTablesOutput struct {
 	// A continuation token, present if the current list segment is not the last.
 	NextToken *string
 
-	// A list of the requested Table objects.
+	// A list of the requested Table  objects.
 	TableList []types.Table
 
 	// Metadata pertaining to the operation's result.
@@ -151,8 +151,8 @@ type GetTablesPaginatorOptions struct {
 	// The maximum number of tables to return in a single response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

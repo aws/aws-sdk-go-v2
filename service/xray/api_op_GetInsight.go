@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the summary information of an insight. This includes impact to clients
-// and root cause services, the top anomalous services, the category, the state of
-// the insight, and the start and end time of the insight.
+// Retrieves the summary information of an insight. This includes impact to
+// clients and root cause services, the top anomalous services, the category, the
+// state of the insight, and the start and end time of the insight.
 func (c *Client) GetInsight(ctx context.Context, params *GetInsightInput, optFns ...func(*Options)) (*GetInsightOutput, error) {
 	if params == nil {
 		params = &GetInsightInput{}
@@ -31,8 +31,8 @@ func (c *Client) GetInsight(ctx context.Context, params *GetInsightInput, optFns
 
 type GetInsightInput struct {
 
-	// The insight's unique identifier. Use the GetInsightSummaries action to retrieve
-	// an InsightId.
+	// The insight's unique identifier. Use the GetInsightSummaries action to
+	// retrieve an InsightId.
 	//
 	// This member is required.
 	InsightId *string

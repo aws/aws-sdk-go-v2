@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a schema. For more information on schemas, see CreateSchema
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSchema.html).
+// Describes a schema. For more information on schemas, see CreateSchema (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSchema.html)
+// .
 func (c *Client) DescribeSchema(ctx context.Context, params *DescribeSchemaInput, optFns ...func(*Options)) (*DescribeSchemaOutput, error) {
 	if params == nil {
 		params = &DescribeSchemaInput{}

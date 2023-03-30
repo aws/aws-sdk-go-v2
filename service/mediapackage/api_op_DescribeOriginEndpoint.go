@@ -72,8 +72,8 @@ type DescribeOriginEndpointOutput struct {
 	// A Microsoft Smooth Streaming (MSS) packaging configuration.
 	MssPackage *types.MssPackage
 
-	// Control whether origination of video is allowed for this OriginEndpoint. If set
-	// to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of
+	// Control whether origination of video is allowed for this OriginEndpoint. If
+	// set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of
 	// access control. If set to DENY, the OriginEndpoint may not be requested. This
 	// can be helpful for Live to VOD harvesting, or for temporarily disabling
 	// origination

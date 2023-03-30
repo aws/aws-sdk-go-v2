@@ -36,7 +36,7 @@ type DeleteContinuousDeploymentPolicyInput struct {
 	// This member is required.
 	Id *string
 
-	// The current version (ETag value) of the continuous deployment policy that you
+	// The current version ( ETag value) of the continuous deployment policy that you
 	// are deleting.
 	IfMatch *string
 

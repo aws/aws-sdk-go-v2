@@ -30,25 +30,25 @@ func (c *Client) DescribeRepositories(ctx context.Context, params *DescribeRepos
 
 type DescribeRepositoriesInput struct {
 
-	// The maximum number of repository results that's returned by DescribeRepositories
-	// in paginated output. When this parameter is used, DescribeRepositories only
-	// returns maxResults results in a single page along with a nextToken response
-	// element. You can see the remaining results of the initial request by sending
-	// another DescribeRepositories request with the returned nextToken value. This
-	// value can be between 1 and 1000. If this parameter isn't used, then
-	// DescribeRepositories returns up to 100 results and a nextToken value, if
-	// applicable. If you specify repositories with repositoryNames, you can't use this
-	// option.
+	// The maximum number of repository results that's returned by
+	// DescribeRepositories in paginated output. When this parameter is used,
+	// DescribeRepositories only returns maxResults results in a single page along
+	// with a nextToken response element. You can see the remaining results of the
+	// initial request by sending another DescribeRepositories request with the
+	// returned nextToken value. This value can be between 1 and 1000. If this
+	// parameter isn't used, then DescribeRepositories returns up to 100 results and
+	// a nextToken  value, if applicable. If you specify repositories with
+	// repositoryNames , you can't use this option.
 	MaxResults *int32
 
-	// The nextToken value that's returned from a previous paginated
-	// DescribeRepositories request where maxResults was used and the results exceeded
-	// the value of that parameter. Pagination continues from the end of the previous
-	// results that returned the nextToken value. If there are no more results to
-	// return, this value is null. If you specify repositories with repositoryNames,
-	// you can't use this option. This token should be treated as an opaque identifier
-	// that is only used to retrieve the next items in a list and not for other
-	// programmatic purposes.
+	// The nextToken  value that's returned from a previous paginated
+	// DescribeRepositories request where maxResults was used and the results
+	// exceeded the value of that parameter. Pagination continues from the end of the
+	// previous results that returned the nextToken value. If there are no more
+	// results to return, this value is null . If you specify repositories with
+	// repositoryNames, you can't use this option. This token should be treated as an
+	// opaque identifier that is only used to retrieve the next items in a list and not
+	// for other programmatic purposes.
 	NextToken *string
 
 	// The Amazon Web Services account ID that's associated with the registry that
@@ -65,10 +65,10 @@ type DescribeRepositoriesInput struct {
 
 type DescribeRepositoriesOutput struct {
 
-	// The nextToken value to include in a future DescribeRepositories request. When
-	// the results of a DescribeRepositories request exceed maxResults, this value can
-	// be used to retrieve the next page of results. If there are no more results to
-	// return, this value is null.
+	// The nextToken  value to include in a future DescribeRepositories request. When
+	// the results of a DescribeRepositories  request exceed maxResults, this value
+	// can be used to retrieve the next page of results. If there are no more results
+	// to return, this value is null .
 	NextToken *string
 
 	// A list of repository objects corresponding to valid repositories.
@@ -151,19 +151,19 @@ var _ DescribeRepositoriesAPIClient = (*Client)(nil)
 // DescribeRepositoriesPaginatorOptions is the paginator options for
 // DescribeRepositories
 type DescribeRepositoriesPaginatorOptions struct {
-	// The maximum number of repository results that's returned by DescribeRepositories
-	// in paginated output. When this parameter is used, DescribeRepositories only
-	// returns maxResults results in a single page along with a nextToken response
-	// element. You can see the remaining results of the initial request by sending
-	// another DescribeRepositories request with the returned nextToken value. This
-	// value can be between 1 and 1000. If this parameter isn't used, then
-	// DescribeRepositories returns up to 100 results and a nextToken value, if
-	// applicable. If you specify repositories with repositoryNames, you can't use this
-	// option.
+	// The maximum number of repository results that's returned by
+	// DescribeRepositories in paginated output. When this parameter is used,
+	// DescribeRepositories only returns maxResults results in a single page along
+	// with a nextToken response element. You can see the remaining results of the
+	// initial request by sending another DescribeRepositories request with the
+	// returned nextToken value. This value can be between 1 and 1000. If this
+	// parameter isn't used, then DescribeRepositories returns up to 100 results and
+	// a nextToken  value, if applicable. If you specify repositories with
+	// repositoryNames , you can't use this option.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

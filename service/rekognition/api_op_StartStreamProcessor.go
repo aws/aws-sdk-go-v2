@@ -12,10 +12,10 @@ import (
 )
 
 // Starts processing a stream processor. You create a stream processor by calling
-// CreateStreamProcessor. To tell StartStreamProcessor which stream processor to
-// start, use the value of the Name field specified in the call to
+// CreateStreamProcessor . To tell StartStreamProcessor which stream processor to
+// start, use the value of the Name  field specified in the call to
 // CreateStreamProcessor. If you are using a label detection stream processor to
-// detect labels, you need to provide a Start selector and a Stop selector to
+// detect labels, you need to provide a Start selector  and a Stop selector to
 // determine the length of the stream processing time.
 func (c *Client) StartStreamProcessor(ctx context.Context, params *StartStreamProcessorInput, optFns ...func(*Options)) (*StartStreamProcessorOutput, error) {
 	if params == nil {
@@ -39,12 +39,11 @@ type StartStreamProcessorInput struct {
 	// This member is required.
 	Name *string
 
-	// Specifies the starting point in the Kinesis stream to start processing. You can
-	// use the producer timestamp or the fragment number. If you use the producer
+	// Specifies the starting point in the Kinesis stream to start processing. You
+	// can use the producer timestamp or the fragment number. If you use the producer
 	// timestamp, you must put the time in milliseconds. For more information about
-	// fragment numbers, see Fragment
-	// (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_reader_Fragment.html).
-	// This is a required parameter for label detection stream processors and should
+	// fragment numbers, see Fragment (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_reader_Fragment.html)
+	// . This is a required parameter for label detection stream processors and should
 	// not be used to start a face search stream processor.
 	StartSelector *types.StreamProcessingStartSelector
 

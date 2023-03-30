@@ -13,8 +13,7 @@ import (
 )
 
 // Lists the Device Advisor test suites you have created. Requires permission to
-// access the ListSuiteDefinitions
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// access the ListSuiteDefinitions (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListSuiteDefinitions(ctx context.Context, params *ListSuiteDefinitionsInput, optFns ...func(*Options)) (*ListSuiteDefinitionsOutput, error) {
 	if params == nil {
@@ -131,8 +130,8 @@ type ListSuiteDefinitionsPaginatorOptions struct {
 	// The maximum number of results to return at once.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

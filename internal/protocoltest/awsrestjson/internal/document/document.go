@@ -77,8 +77,8 @@ func NewDocumentMarshaler(v interface{}) Interface {
 	}
 }
 
-// NewDocumentUnmarshaler creates a new document unmarshaler for the given service
-// response
+// NewDocumentUnmarshaler creates a new document unmarshaler for the given
+// service response
 func NewDocumentUnmarshaler(v interface{}) Interface {
 	return &documentUnmarshaler{
 		value: v,

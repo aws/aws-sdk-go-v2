@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Requests the validation of a policy and returns a list of findings. The findings
-// help you identify issues and provide actionable recommendations to resolve the
-// issue and enable you to author functional policies that meet security best
-// practices.
+// Requests the validation of a policy and returns a list of findings. The
+// findings help you identify issues and provide actionable recommendations to
+// resolve the issue and enable you to author functional policies that meet
+// security best practices.
 func (c *Client) ValidatePolicy(ctx context.Context, params *ValidatePolicyInput, optFns ...func(*Options)) (*ValidatePolicyOutput, error) {
 	if params == nil {
 		params = &ValidatePolicyInput{}
@@ -60,15 +60,15 @@ type ValidatePolicyInput struct {
 	// A token used for pagination of results returned.
 	NextToken *string
 
-	// The type of resource to attach to your resource policy. Specify a value for the
-	// policy validation resource type only if the policy type is RESOURCE_POLICY. For
-	// example, to validate a resource policy to attach to an Amazon S3 bucket, you can
-	// choose AWS::S3::Bucket for the policy validation resource type. For resource
-	// types not supported as valid values, IAM Access Analyzer runs policy checks that
-	// apply to all resource policies. For example, to validate a resource policy to
-	// attach to a KMS key, do not specify a value for the policy validation resource
-	// type and IAM Access Analyzer will run policy checks that apply to all resource
-	// policies.
+	// The type of resource to attach to your resource policy. Specify a value for
+	// the policy validation resource type only if the policy type is RESOURCE_POLICY
+	// . For example, to validate a resource policy to attach to an Amazon S3 bucket,
+	// you can choose AWS::S3::Bucket for the policy validation resource type. For
+	// resource types not supported as valid values, IAM Access Analyzer runs policy
+	// checks that apply to all resource policies. For example, to validate a resource
+	// policy to attach to a KMS key, do not specify a value for the policy validation
+	// resource type and IAM Access Analyzer will run policy checks that apply to all
+	// resource policies.
 	ValidatePolicyResourceType types.ValidatePolicyResourceType
 
 	noSmithyDocumentSerde
@@ -167,8 +167,8 @@ type ValidatePolicyPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

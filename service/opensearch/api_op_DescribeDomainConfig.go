@@ -27,7 +27,7 @@ func (c *Client) DescribeDomainConfig(ctx context.Context, params *DescribeDomai
 	return out, nil
 }
 
-// Container for the parameters to the DescribeDomainConfig operation.
+// Container for the parameters to the DescribeDomainConfig  operation.
 type DescribeDomainConfigInput struct {
 
 	// Name of the OpenSearch Service domain configuration that you want to describe.

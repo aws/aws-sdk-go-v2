@@ -45,9 +45,9 @@ type ListPublicKeysInput struct {
 	// Reserved for future use.
 	NextToken *string
 
-	// Optionally specifies, in UTC, the start of the time range to look up public keys
-	// for CloudTrail digest files. If not specified, the current time is used, and the
-	// current public key is returned.
+	// Optionally specifies, in UTC, the start of the time range to look up public
+	// keys for CloudTrail digest files. If not specified, the current time is used,
+	// and the current public key is returned.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -140,8 +140,8 @@ var _ ListPublicKeysAPIClient = (*Client)(nil)
 
 // ListPublicKeysPaginatorOptions is the paginator options for ListPublicKeys
 type ListPublicKeysPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -13,9 +13,9 @@ import (
 
 // Updates a domain recordset after it is created. The update domain entry
 // operation supports tag-based access control via resource tags applied to the
-// resource identified by domain name. For more information, see the Amazon
-// Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// resource identified by domain name . For more information, see the Amazon
+// Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) UpdateDomainEntry(ctx context.Context, params *UpdateDomainEntryInput, optFns ...func(*Options)) (*UpdateDomainEntryOutput, error) {
 	if params == nil {
 		params = &UpdateDomainEntryInput{}

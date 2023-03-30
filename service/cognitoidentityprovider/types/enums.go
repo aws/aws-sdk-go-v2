@@ -34,9 +34,9 @@ const (
 	AdvancedSecurityModeTypeEnforced AdvancedSecurityModeType = "ENFORCED"
 )
 
-// Values returns all known values for AdvancedSecurityModeType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AdvancedSecurityModeType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AdvancedSecurityModeType) Values() []AdvancedSecurityModeType {
 	return []AdvancedSecurityModeType{
 		"OFF",
@@ -100,9 +100,9 @@ const (
 	AuthFlowTypeAdminUserPasswordAuth AuthFlowType = "ADMIN_USER_PASSWORD_AUTH"
 )
 
-// Values returns all known values for AuthFlowType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AuthFlowType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AuthFlowType) Values() []AuthFlowType {
 	return []AuthFlowType{
 		"USER_SRP_AUTH",
@@ -193,9 +193,9 @@ const (
 	CompromisedCredentialsEventActionTypeNoAction CompromisedCredentialsEventActionType = "NO_ACTION"
 )
 
-// Values returns all known values for CompromisedCredentialsEventActionType. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for CompromisedCredentialsEventActionType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (CompromisedCredentialsEventActionType) Values() []CompromisedCredentialsEventActionType {
 	return []CompromisedCredentialsEventActionType{
@@ -228,8 +228,8 @@ const (
 	CustomSMSSenderLambdaVersionTypeV10 CustomSMSSenderLambdaVersionType = "V1_0"
 )
 
-// Values returns all known values for CustomSMSSenderLambdaVersionType. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for CustomSMSSenderLambdaVersionType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (CustomSMSSenderLambdaVersionType) Values() []CustomSMSSenderLambdaVersionType {
@@ -342,9 +342,9 @@ const (
 	EmailSendingAccountTypeDeveloper      EmailSendingAccountType = "DEVELOPER"
 )
 
-// Values returns all known values for EmailSendingAccountType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EmailSendingAccountType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EmailSendingAccountType) Values() []EmailSendingAccountType {
 	return []EmailSendingAccountType{
 		"COGNITO_DEFAULT",
@@ -403,9 +403,9 @@ const (
 	EventTypeResendCode     EventType = "ResendCode"
 )
 
-// Values returns all known values for EventType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for EventType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"SignIn",
@@ -430,8 +430,8 @@ const (
 	ExplicitAuthFlowsTypeAllowRefreshTokenAuth      ExplicitAuthFlowsType = "ALLOW_REFRESH_TOKEN_AUTH"
 )
 
-// Values returns all known values for ExplicitAuthFlowsType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ExplicitAuthFlowsType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ExplicitAuthFlowsType) Values() []ExplicitAuthFlowsType {
 	return []ExplicitAuthFlowsType{
@@ -476,9 +476,9 @@ const (
 	IdentityProviderTypeTypeOidc            IdentityProviderTypeType = "OIDC"
 )
 
-// Values returns all known values for IdentityProviderTypeType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IdentityProviderTypeType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IdentityProviderTypeType) Values() []IdentityProviderTypeType {
 	return []IdentityProviderTypeType{
 		"SAML",
@@ -661,9 +661,9 @@ const (
 	UserImportJobStatusTypeSucceeded  UserImportJobStatusType = "Succeeded"
 )
 
-// Values returns all known values for UserImportJobStatusType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UserImportJobStatusType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UserImportJobStatusType) Values() []UserImportJobStatusType {
 	return []UserImportJobStatusType{
 		"Created",
@@ -685,8 +685,8 @@ const (
 	UsernameAttributeTypeEmail       UsernameAttributeType = "email"
 )
 
-// Values returns all known values for UsernameAttributeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for UsernameAttributeType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (UsernameAttributeType) Values() []UsernameAttributeType {
 	return []UsernameAttributeType{
@@ -751,8 +751,8 @@ const (
 	VerifiedAttributeTypeEmail       VerifiedAttributeType = "email"
 )
 
-// Values returns all known values for VerifiedAttributeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for VerifiedAttributeType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (VerifiedAttributeType) Values() []VerifiedAttributeType {
 	return []VerifiedAttributeType{

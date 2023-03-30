@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A list of the channels moderated by an AppInstanceUser. The x-amz-chime-bearer
+// A list of the channels moderated by an AppInstanceUser . The x-amz-chime-bearer
 // request header is mandatory. Use the AppInstanceUserArn of the user that makes
 // the API call as the value in the header.
 func (c *Client) ListChannelsModeratedByAppInstanceUser(ctx context.Context, params *ListChannelsModeratedByAppInstanceUserInput, optFns ...func(*Options)) (*ListChannelsModeratedByAppInstanceUserOutput, error) {
@@ -35,7 +35,7 @@ type ListChannelsModeratedByAppInstanceUserInput struct {
 	// The ARN of the user in the moderated channel.
 	AppInstanceUserArn *string
 
-	// The AppInstanceUserArn of the user that makes the API call.
+	// The AppInstanceUserArn  of the user that makes the API call.
 	ChimeBearer *string
 
 	// The maximum number of channels in the request.
@@ -153,22 +153,22 @@ func addEndpointPrefix_opListChannelsModeratedByAppInstanceUserMiddleware(stack 
 	return stack.Serialize.Insert(&endpointPrefix_opListChannelsModeratedByAppInstanceUserMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
-// ListChannelsModeratedByAppInstanceUserAPIClient is a client that implements the
-// ListChannelsModeratedByAppInstanceUser operation.
+// ListChannelsModeratedByAppInstanceUserAPIClient is a client that implements
+// the ListChannelsModeratedByAppInstanceUser operation.
 type ListChannelsModeratedByAppInstanceUserAPIClient interface {
 	ListChannelsModeratedByAppInstanceUser(context.Context, *ListChannelsModeratedByAppInstanceUserInput, ...func(*Options)) (*ListChannelsModeratedByAppInstanceUserOutput, error)
 }
 
 var _ ListChannelsModeratedByAppInstanceUserAPIClient = (*Client)(nil)
 
-// ListChannelsModeratedByAppInstanceUserPaginatorOptions is the paginator options
-// for ListChannelsModeratedByAppInstanceUser
+// ListChannelsModeratedByAppInstanceUserPaginatorOptions is the paginator
+// options for ListChannelsModeratedByAppInstanceUser
 type ListChannelsModeratedByAppInstanceUserPaginatorOptions struct {
 	// The maximum number of channels in the request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

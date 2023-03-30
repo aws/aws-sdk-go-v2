@@ -80,8 +80,8 @@ type GetComponentTypeOutput struct {
 	// The name of the parent component type that this component type extends.
 	ExtendsFrom []string
 
-	// An object that maps strings to the functions in the component type. Each string
-	// in the mapping must be unique to this object.
+	// An object that maps strings to the functions in the component type. Each
+	// string in the mapping must be unique to this object.
 	Functions map[string]types.FunctionResponse
 
 	// A Boolean value that specifies whether the component type is abstract.

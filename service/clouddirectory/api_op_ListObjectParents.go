@@ -32,7 +32,7 @@ func (c *Client) ListObjectParents(ctx context.Context, params *ListObjectParent
 type ListObjectParentsInput struct {
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where the
-	// object resides. For more information, see arns.
+	// object resides. For more information, see arns .
 	//
 	// This member is required.
 	DirectoryArn *string
@@ -47,8 +47,8 @@ type ListObjectParentsInput struct {
 	// object is reflected in a subsequent read operation of that same object.
 	ConsistencyLevel types.ConsistencyLevel
 
-	// When set to True, returns all ListObjectParentsResponse$ParentLinks. There could
-	// be multiple links between a parent-child pair.
+	// When set to True, returns all ListObjectParentsResponse$ParentLinks. There
+	// could be multiple links between a parent-child pair.
 	IncludeAllLinksToEachParent bool
 
 	// The maximum number of items to be retrieved in a single call. This is an
@@ -150,14 +150,15 @@ type ListObjectParentsAPIClient interface {
 
 var _ ListObjectParentsAPIClient = (*Client)(nil)
 
-// ListObjectParentsPaginatorOptions is the paginator options for ListObjectParents
+// ListObjectParentsPaginatorOptions is the paginator options for
+// ListObjectParents
 type ListObjectParentsPaginatorOptions struct {
 	// The maximum number of items to be retrieved in a single call. This is an
 	// approximate number.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

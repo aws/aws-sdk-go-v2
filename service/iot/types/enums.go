@@ -9,9 +9,9 @@ const (
 	AbortActionCancel AbortAction = "CANCEL"
 )
 
-// Values returns all known values for AbortAction. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AbortAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AbortAction) Values() []AbortAction {
 	return []AbortAction{
 		"CANCEL",
@@ -112,8 +112,8 @@ const (
 	AuditFindingSeverityLow      AuditFindingSeverity = "LOW"
 )
 
-// Values returns all known values for AuditFindingSeverity. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AuditFindingSeverity. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AuditFindingSeverity) Values() []AuditFindingSeverity {
 	return []AuditFindingSeverity{
@@ -158,9 +158,9 @@ const (
 	AuditMitigationActionsExecutionStatusPending    AuditMitigationActionsExecutionStatus = "PENDING"
 )
 
-// Values returns all known values for AuditMitigationActionsExecutionStatus. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for AuditMitigationActionsExecutionStatus.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (AuditMitigationActionsExecutionStatus) Values() []AuditMitigationActionsExecutionStatus {
 	return []AuditMitigationActionsExecutionStatus{
@@ -183,8 +183,8 @@ const (
 	AuditMitigationActionsTaskStatusCanceled   AuditMitigationActionsTaskStatus = "CANCELED"
 )
 
-// Values returns all known values for AuditMitigationActionsTaskStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for AuditMitigationActionsTaskStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (AuditMitigationActionsTaskStatus) Values() []AuditMitigationActionsTaskStatus {
@@ -203,8 +203,8 @@ const (
 	AuditNotificationTypeSns AuditNotificationType = "SNS"
 )
 
-// Values returns all known values for AuditNotificationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AuditNotificationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AuditNotificationType) Values() []AuditNotificationType {
 	return []AuditNotificationType{
@@ -261,9 +261,9 @@ const (
 	AuthDecisionImplicitDeny AuthDecision = "IMPLICIT_DENY"
 )
 
-// Values returns all known values for AuthDecision. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AuthDecision. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AuthDecision) Values() []AuthDecision {
 	return []AuthDecision{
 		"ALLOWED",
@@ -357,8 +357,8 @@ const (
 	BehaviorCriteriaTypeMachineLearning BehaviorCriteriaType = "MACHINE_LEARNING"
 )
 
-// Values returns all known values for BehaviorCriteriaType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for BehaviorCriteriaType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (BehaviorCriteriaType) Values() []BehaviorCriteriaType {
 	return []BehaviorCriteriaType{
@@ -416,9 +416,9 @@ const (
 	CannedAccessControlListLogDeliveryWrite       CannedAccessControlList = "log-delivery-write"
 )
 
-// Values returns all known values for CannedAccessControlList. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CannedAccessControlList. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CannedAccessControlList) Values() []CannedAccessControlList {
 	return []CannedAccessControlList{
 		"private",
@@ -565,9 +565,9 @@ const (
 	DayOfWeekSat DayOfWeek = "SAT"
 )
 
-// Values returns all known values for DayOfWeek. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for DayOfWeek. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (DayOfWeek) Values() []DayOfWeek {
 	return []DayOfWeek{
 		"SUN",
@@ -590,9 +590,9 @@ const (
 	DetectMitigationActionExecutionStatusSkipped    DetectMitigationActionExecutionStatus = "SKIPPED"
 )
 
-// Values returns all known values for DetectMitigationActionExecutionStatus. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for DetectMitigationActionExecutionStatus.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (DetectMitigationActionExecutionStatus) Values() []DetectMitigationActionExecutionStatus {
 	return []DetectMitigationActionExecutionStatus{
@@ -613,8 +613,8 @@ const (
 	DetectMitigationActionsTaskStatusCanceled   DetectMitigationActionsTaskStatus = "CANCELED"
 )
 
-// Values returns all known values for DetectMitigationActionsTaskStatus. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for DetectMitigationActionsTaskStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (DetectMitigationActionsTaskStatus) Values() []DetectMitigationActionsTaskStatus {
@@ -788,9 +788,9 @@ const (
 	EventTypeCaCertificate        EventType = "CA_CERTIFICATE"
 )
 
-// Values returns all known values for EventType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for EventType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"THING",
@@ -816,9 +816,9 @@ const (
 	FieldTypeBoolean FieldType = "Boolean"
 )
 
-// Values returns all known values for FieldType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for FieldType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (FieldType) Values() []FieldType {
 	return []FieldType{
 		"Number",
@@ -904,9 +904,9 @@ const (
 	IndexStatusRebuilding IndexStatus = "REBUILDING"
 )
 
-// Values returns all known values for IndexStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IndexStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (IndexStatus) Values() []IndexStatus {
 	return []IndexStatus{
 		"ACTIVE",
@@ -945,9 +945,9 @@ const (
 	JobExecutionFailureTypeAll      JobExecutionFailureType = "ALL"
 )
 
-// Values returns all known values for JobExecutionFailureType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobExecutionFailureType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobExecutionFailureType) Values() []JobExecutionFailureType {
 	return []JobExecutionFailureType{
 		"FAILED",
@@ -998,9 +998,9 @@ const (
 	JobStatusScheduled          JobStatus = "SCHEDULED"
 )
 
-// Values returns all known values for JobStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"IN_PROGRESS",
@@ -1022,9 +1022,9 @@ const (
 	LogLevelDisabled LogLevel = "DISABLED"
 )
 
-// Values returns all known values for LogLevel. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for LogLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (LogLevel) Values() []LogLevel {
 	return []LogLevel{
 		"DEBUG",
@@ -1089,8 +1089,8 @@ const (
 	MitigationActionTypePublishFindingToSns         MitigationActionType = "PUBLISH_FINDING_TO_SNS"
 )
 
-// Values returns all known values for MitigationActionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for MitigationActionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (MitigationActionType) Values() []MitigationActionType {
 	return []MitigationActionType{
@@ -1112,9 +1112,9 @@ const (
 	ModelStatusExpired      ModelStatus = "EXPIRED"
 )
 
-// Values returns all known values for ModelStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ModelStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ModelStatus) Values() []ModelStatus {
 	return []ModelStatus{
 		"PENDING_BUILD",
@@ -1131,9 +1131,9 @@ const (
 	NamedShadowIndexingModeOn  NamedShadowIndexingMode = "ON"
 )
 
-// Values returns all known values for NamedShadowIndexingMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NamedShadowIndexingMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NamedShadowIndexingMode) Values() []NamedShadowIndexingMode {
 	return []NamedShadowIndexingMode{
 		"OFF",
@@ -1187,9 +1187,9 @@ const (
 	ProtocolHttp Protocol = "HTTP"
 )
 
-// Values returns all known values for Protocol. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Protocol. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Protocol) Values() []Protocol {
 	return []Protocol{
 		"MQTT",
@@ -1230,9 +1230,9 @@ const (
 	ResourceTypeIssuerCertificate   ResourceType = "ISSUER_CERTIFICATE"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"DEVICE_CERTIFICATE",
@@ -1256,8 +1256,8 @@ const (
 	RetryableFailureTypeAll      RetryableFailureType = "ALL"
 )
 
-// Values returns all known values for RetryableFailureType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RetryableFailureType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RetryableFailureType) Values() []RetryableFailureType {
 	return []RetryableFailureType{
@@ -1275,9 +1275,9 @@ const (
 	ServerCertificateStatusValid   ServerCertificateStatus = "VALID"
 )
 
-// Values returns all known values for ServerCertificateStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ServerCertificateStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServerCertificateStatus) Values() []ServerCertificateStatus {
 	return []ServerCertificateStatus{
 		"INVALID",
@@ -1294,9 +1294,9 @@ const (
 	ServiceTypeJobs               ServiceType = "JOBS"
 )
 
-// Values returns all known values for ServiceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ServiceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceType) Values() []ServiceType {
 	return []ServiceType{
 		"DATA",
@@ -1355,9 +1355,9 @@ const (
 	TemplateTypeJitp              TemplateType = "JITP"
 )
 
-// Values returns all known values for TemplateType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TemplateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TemplateType) Values() []TemplateType {
 	return []TemplateType{
 		"FLEET_PROVISIONING",

@@ -10,15 +10,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a stack using the input information that was provided when the specified
-// change set was created. After the call successfully completes, CloudFormation
-// starts updating the stack. Use the DescribeStacks action to view the status of
-// the update. When you execute a change set, CloudFormation deletes all other
-// change sets associated with the stack because they aren't valid for the updated
-// stack. If a stack policy is associated with the stack, CloudFormation enforces
-// the policy during the update. You can't specify a temporary stack policy that
-// overrides the current policy. To create a change set for the entire stack
-// hierarchy, IncludeNestedStacks must have been set to True.
+// Updates a stack using the input information that was provided when the
+// specified change set was created. After the call successfully completes,
+// CloudFormation starts updating the stack. Use the DescribeStacks action to
+// view the status of the update. When you execute a change set, CloudFormation
+// deletes all other change sets associated with the stack because they aren't
+// valid for the updated stack. If a stack policy is associated with the stack,
+// CloudFormation enforces the policy during the update. You can't specify a
+// temporary stack policy that overrides the current policy. To create a change set
+// for the entire stack hierarchy, IncludeNestedStacks  must have been set to True
+// .
 func (c *Client) ExecuteChangeSet(ctx context.Context, params *ExecuteChangeSetInput, optFns ...func(*Options)) (*ExecuteChangeSetOutput, error) {
 	if params == nil {
 		params = &ExecuteChangeSetInput{}
@@ -34,7 +35,7 @@ func (c *Client) ExecuteChangeSet(ctx context.Context, params *ExecuteChangeSetI
 	return out, nil
 }
 
-// The input for the ExecuteChangeSet action.
+// The input for the ExecuteChangeSet  action.
 type ExecuteChangeSetInput struct {
 
 	// The name or Amazon Resource Name (ARN) of the change set that you want use to
@@ -43,15 +44,15 @@ type ExecuteChangeSetInput struct {
 	// This member is required.
 	ChangeSetName *string
 
-	// A unique identifier for this ExecuteChangeSet request. Specify this token if you
-	// plan to retry requests so that CloudFormation knows that you're not attempting
-	// to execute a change set to update a stack with the same name. You might retry
-	// ExecuteChangeSet requests to ensure that CloudFormation successfully received
-	// them.
+	// A unique identifier for this ExecuteChangeSet request. Specify this token if
+	// you plan to retry requests so that CloudFormation knows that you're not
+	// attempting to execute a change set to update a stack with the same name. You
+	// might retry ExecuteChangeSet requests to ensure that CloudFormation
+	// successfully received them.
 	ClientRequestToken *string
 
-	// Preserves the state of previously provisioned resources when an operation fails.
-	// Default: True
+	// Preserves the state of previously provisioned resources when an operation
+	// fails. Default: True
 	DisableRollback *bool
 
 	// If you specified the name of a change set, specify the stack name or Amazon
@@ -61,7 +62,7 @@ type ExecuteChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
-// The output for the ExecuteChangeSet action.
+// The output for the ExecuteChangeSet  action.
 type ExecuteChangeSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

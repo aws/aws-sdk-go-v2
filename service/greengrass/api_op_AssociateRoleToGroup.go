@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a role with a group. Your Greengrass core will use the role to access
-// AWS cloud services. The role's permissions should allow Greengrass core Lambda
-// functions to perform actions against the cloud.
+// Associates a role with a group. Your Greengrass core will use the role to
+// access AWS cloud services. The role's permissions should allow Greengrass core
+// Lambda functions to perform actions against the cloud.
 func (c *Client) AssociateRoleToGroup(ctx context.Context, params *AssociateRoleToGroupInput, optFns ...func(*Options)) (*AssociateRoleToGroupOutput, error) {
 	if params == nil {
 		params = &AssociateRoleToGroupInput{}
@@ -35,8 +35,8 @@ type AssociateRoleToGroupInput struct {
 	// This member is required.
 	GroupId *string
 
-	// The ARN of the role you wish to associate with this group. The existence of the
-	// role is not validated.
+	// The ARN of the role you wish to associate with this group. The existence of
+	// the role is not validated.
 	//
 	// This member is required.
 	RoleArn *string
@@ -46,8 +46,8 @@ type AssociateRoleToGroupInput struct {
 
 type AssociateRoleToGroupOutput struct {
 
-	// The time, in milliseconds since the epoch, when the role ARN was associated with
-	// the group.
+	// The time, in milliseconds since the epoch, when the role ARN was associated
+	// with the group.
 	AssociatedAt *string
 
 	// Metadata pertaining to the operation's result.

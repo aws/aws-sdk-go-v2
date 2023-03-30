@@ -34,11 +34,11 @@ type DescribeClusterTracksInput struct {
 	MaintenanceTrackName *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterTracks request exceed the
-	// value specified in MaxRecords, Amazon Redshift returns a value in the Marker
-	// field of the response. You can retrieve the next set of response records by
-	// providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// response records. When the results of a DescribeClusterTracks request exceed
+	// the value specified in MaxRecords , Amazon Redshift returns a value in the
+	// Markerfield of the response. You can retrieve the next set of response records
+	// by providing the returned marker value in the Marker parameter and retrying
+	// the request.
 	Marker *string
 
 	// An integer value for the maximum number of maintenance tracks to return.
@@ -49,12 +49,12 @@ type DescribeClusterTracksInput struct {
 
 type DescribeClusterTracksOutput struct {
 
-	// A list of maintenance tracks output by the DescribeClusterTracks operation.
+	// A list of maintenance tracks output by the DescribeClusterTracks  operation.
 	MaintenanceTracks []types.MaintenanceTrack
 
 	// The starting point to return a set of response tracklist records. You can
 	// retrieve the next set of response records by providing the returned marker value
-	// in the Marker parameter and retrying the request.
+	// in the Marker  parameter and retrying the request.
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -137,8 +137,8 @@ type DescribeClusterTracksPaginatorOptions struct {
 	// An integer value for the maximum number of maintenance tracks to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

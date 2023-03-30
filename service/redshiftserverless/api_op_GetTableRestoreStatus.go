@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a TableRestoreStatus object.
+// Returns information about a TableRestoreStatus  object.
 func (c *Client) GetTableRestoreStatus(ctx context.Context, params *GetTableRestoreStatusInput, optFns ...func(*Options)) (*GetTableRestoreStatusOutput, error) {
 	if params == nil {
 		params = &GetTableRestoreStatusInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetTableRestoreStatus(ctx context.Context, params *GetTableRest
 
 type GetTableRestoreStatusInput struct {
 
-	// The ID of the RestoreTableFromSnapshot request to return status for.
+	// The ID of the RestoreTableFromSnapshot  request to return status for.
 	//
 	// This member is required.
 	TableRestoreRequestId *string
@@ -40,7 +40,7 @@ type GetTableRestoreStatusInput struct {
 type GetTableRestoreStatusOutput struct {
 
 	// The returned TableRestoreStatus object that contains information about the
-	// status of your RestoreTableFromSnapshot request.
+	// status of your RestoreTableFromSnapshot  request.
 	TableRestoreStatus *types.TableRestoreStatus
 
 	// Metadata pertaining to the operation's result.

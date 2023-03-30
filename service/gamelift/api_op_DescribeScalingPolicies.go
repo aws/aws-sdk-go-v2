@@ -16,7 +16,7 @@ import (
 // policies, specify the fleet ID. You can filter this request by policy status,
 // such as to retrieve only active scaling policies. Use the pagination parameters
 // to retrieve results as a set of sequential pages. If successful, set of
-// ScalingPolicy objects is returned for the fleet. A fleet may have all of its
+// ScalingPolicyobjects is returned for the fleet. A fleet may have all of its
 // scaling policies suspended. This operation does not affect the status of the
 // scaling policies, which remains ACTIVE.
 func (c *Client) DescribeScalingPolicies(ctx context.Context, params *DescribeScalingPoliciesInput, optFns ...func(*Options)) (*DescribeScalingPoliciesOutput, error) {
@@ -50,26 +50,20 @@ type DescribeScalingPoliciesInput struct {
 	// scaling policies of every location in the fleet.
 	Location *string
 
-	// A token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this operation. To start at the
-	// beginning of the result set, do not specify a value.
+	// A token that indicates the start of the next sequential page of results. Use
+	// the token that is returned with a previous call to this operation. To start at
+	// the beginning of the result set, do not specify a value.
 	NextToken *string
 
 	// Scaling policy status to filter results on. A scaling policy is only in force
-	// when in an ACTIVE status.
-	// - ACTIVE -- The scaling policy is currently in
-	// force.
-	// - UPDATEREQUESTED -- A request to update the scaling policy has been
-	// received.
-	// - UPDATING -- A change is being made to the scaling policy.
-	// -
-	// DELETEREQUESTED -- A request to delete the scaling policy has been received.
-	// -
-	// DELETING -- The scaling policy is being deleted.
-	// - DELETED -- The scaling policy
-	// has been deleted.
-	// - ERROR -- An error occurred in creating the policy. It should
-	// be removed and recreated.
+	// when in an ACTIVE  status.
+	//     - ACTIVE -- The scaling policy is currently in force.
+	//     - UPDATEREQUESTED -- A request to update the scaling policy has been received.
+	//     - UPDATING -- A change is being made to the scaling policy.
+	//     - DELETEREQUESTED -- A request to delete the scaling policy has been received.
+	//     - DELETING -- The scaling policy is being deleted.
+	//     - DELETED -- The scaling policy has been deleted.
+	//     - ERROR -- An error occurred in creating the policy. It should be removed and recreated.
 	StatusFilter types.ScalingStatusType
 
 	noSmithyDocumentSerde
@@ -169,8 +163,8 @@ type DescribeScalingPoliciesPaginatorOptions struct {
 	// get results as a set of sequential pages.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

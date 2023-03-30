@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Client VPN endpoint. A Client VPN endpoint is the resource you create
-// and configure to enable and manage client VPN sessions. It is the destination
-// endpoint at which all client VPN sessions are terminated.
+// Creates a Client VPN endpoint. A Client VPN endpoint is the resource you
+// create and configure to enable and manage client VPN sessions. It is the
+// destination endpoint at which all client VPN sessions are terminated.
 func (c *Client) CreateClientVpnEndpoint(ctx context.Context, params *CreateClientVpnEndpointInput, optFns ...func(*Options)) (*CreateClientVpnEndpointOutput, error) {
 	if params == nil {
 		params = &CreateClientVpnEndpointInput{}
@@ -50,18 +50,16 @@ type CreateClientVpnEndpointInput struct {
 	// Information about the client connection logging options. If you enable client
 	// connection logging, data about client connections is sent to a Cloudwatch Logs
 	// log stream. The following information is logged:
-	// - Client connection requests
-	// -
-	// Client connection results (successful and unsuccessful)
-	// - Reasons for
-	// unsuccessful client connection requests
-	// - Client connection termination time
+	//     - Client connection requests
+	//     - Client connection results (successful and unsuccessful)
+	//     - Reasons for unsuccessful client connection requests
+	//     - Client connection termination time
 	//
 	// This member is required.
 	ConnectionLogOptions *types.ConnectionLogOptions
 
 	// The ARN of the server certificate. For more information, see the Certificate
-	// Manager User Guide (https://docs.aws.amazon.com/acm/latest/userguide/).
+	// Manager User Guide (https://docs.aws.amazon.com/acm/latest/userguide/) .
 	//
 	// This member is required.
 	ServerCertificateArn *string
@@ -69,13 +67,13 @@ type CreateClientVpnEndpointInput struct {
 	// The options for managing connection authorization for new client connections.
 	ClientConnectOptions *types.ClientConnectOptions
 
-	// Options for enabling a customizable text banner that will be displayed on Amazon
-	// Web Services provided clients when a VPN session is established.
+	// Options for enabling a customizable text banner that will be displayed on
+	// Amazon Web Services provided clients when a VPN session is established.
 	ClientLoginBannerOptions *types.ClientLoginBannerOptions
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to ensure idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// .
 	ClientToken *string
 
 	// A brief description of the Client VPN endpoint.
@@ -88,12 +86,12 @@ type CreateClientVpnEndpointInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The IDs of one or more security groups to apply to the target network. You must
-	// also specify the ID of the VPC that contains the security groups.
+	// The IDs of one or more security groups to apply to the target network. You
+	// must also specify the ID of the VPC that contains the security groups.
 	SecurityGroupIds []string
 
 	// Specify whether to enable the self-service portal for the Client VPN endpoint.
@@ -106,8 +104,7 @@ type CreateClientVpnEndpointInput struct {
 
 	// Indicates whether split-tunnel is enabled on the Client VPN endpoint. By
 	// default, split-tunnel on a VPN endpoint is disabled. For information about
-	// split-tunnel VPN endpoints, see Split-tunnel Client VPN endpoint
-	// (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html)
+	// split-tunnel VPN endpoints, see Split-tunnel Client VPN endpoint (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html)
 	// in the Client VPN Administrator Guide.
 	SplitTunnel *bool
 
@@ -123,7 +120,7 @@ type CreateClientVpnEndpointInput struct {
 	VpcId *string
 
 	// The port number to assign to the Client VPN endpoint for TCP and UDP traffic.
-	// Valid Values: 443 | 1194 Default Value: 443
+	// Valid Values: 443  | 1194  Default Value: 443
 	VpnPort *int32
 
 	noSmithyDocumentSerde

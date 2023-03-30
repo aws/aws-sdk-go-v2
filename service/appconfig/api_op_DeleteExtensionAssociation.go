@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an extension association. This action doesn't delete extensions defined
-// in the association.
+// Deletes an extension association. This action doesn't delete extensions
+// defined in the association.
 func (c *Client) DeleteExtensionAssociation(ctx context.Context, params *DeleteExtensionAssociationInput, optFns ...func(*Options)) (*DeleteExtensionAssociationOutput, error) {
 	if params == nil {
 		params = &DeleteExtensionAssociationInput{}

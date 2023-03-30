@@ -12,8 +12,8 @@ const (
 	DataProtectionStatusDisabled  DataProtectionStatus = "DISABLED"
 )
 
-// Values returns all known values for DataProtectionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DataProtectionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DataProtectionStatus) Values() []DataProtectionStatus {
 	return []DataProtectionStatus{
@@ -32,9 +32,9 @@ const (
 	DistributionByLogStream Distribution = "ByLogStream"
 )
 
-// Values returns all known values for Distribution. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Distribution. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (Distribution) Values() []Distribution {
 	return []Distribution{
 		"Random",
@@ -54,8 +54,8 @@ const (
 	ExportTaskStatusCodeRunning       ExportTaskStatusCode = "RUNNING"
 )
 
-// Values returns all known values for ExportTaskStatusCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ExportTaskStatusCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ExportTaskStatusCode) Values() []ExportTaskStatusCode {
 	return []ExportTaskStatusCode{
@@ -99,9 +99,9 @@ const (
 	QueryStatusUnknown   QueryStatus = "Unknown"
 )
 
-// Values returns all known values for QueryStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for QueryStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (QueryStatus) Values() []QueryStatus {
 	return []QueryStatus{
 		"Scheduled",
@@ -147,9 +147,9 @@ const (
 	StandardUnitNone            StandardUnit = "None"
 )
 
-// Values returns all known values for StandardUnit. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StandardUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (StandardUnit) Values() []StandardUnit {
 	return []StandardUnit{
 		"Seconds",

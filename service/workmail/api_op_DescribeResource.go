@@ -49,8 +49,8 @@ type DescribeResourceOutput struct {
 	// The booking options for the described resource.
 	BookingOptions *types.BookingOptions
 
-	// The date and time when a resource was disabled from WorkMail, in UNIX epoch time
-	// format.
+	// The date and time when a resource was disabled from WorkMail, in UNIX epoch
+	// time format.
 	DisabledDate *time.Time
 
 	// The email of the described resource.

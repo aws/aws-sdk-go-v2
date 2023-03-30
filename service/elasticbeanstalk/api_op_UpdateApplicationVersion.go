@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified application version to have the specified properties. If a
-// property (for example, description) is not provided, the value remains
+// Updates the specified application version to have the specified properties. If
+// a property (for example, description) is not provided, the value remains
 // unchanged. To clear properties, specify an empty string.
 func (c *Client) UpdateApplicationVersion(ctx context.Context, params *UpdateApplicationVersionInput, optFns ...func(*Options)) (*UpdateApplicationVersionOutput, error) {
 	if params == nil {
@@ -32,13 +32,14 @@ func (c *Client) UpdateApplicationVersion(ctx context.Context, params *UpdateApp
 type UpdateApplicationVersionInput struct {
 
 	// The name of the application associated with this version. If no application is
-	// found with this name, UpdateApplication returns an InvalidParameterValue error.
+	// found with this name, UpdateApplication  returns an InvalidParameterValue
+	// error.
 	//
 	// This member is required.
 	ApplicationName *string
 
-	// The name of the version to update. If no application version is found with this
-	// label, UpdateApplication returns an InvalidParameterValue error.
+	// The name of the version to update. If no application version is found with
+	// this label, UpdateApplication  returns an InvalidParameterValue  error.
 	//
 	// This member is required.
 	VersionLabel *string
@@ -52,7 +53,7 @@ type UpdateApplicationVersionInput struct {
 // Result message wrapping a single description of an application version.
 type UpdateApplicationVersionOutput struct {
 
-	// The ApplicationVersionDescription of the application version.
+	// The ApplicationVersionDescription  of the application version.
 	ApplicationVersion *types.ApplicationVersionDescription
 
 	// Metadata pertaining to the operation's result.

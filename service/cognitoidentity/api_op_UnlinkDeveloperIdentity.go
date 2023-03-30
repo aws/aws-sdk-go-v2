@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Unlinks a DeveloperUserIdentifier from an existing identity. Unlinked developer
-// users will be considered new identities next time they are seen. If, for a given
-// Cognito identity, you remove all federated identities as well as the developer
-// user identifier, the Cognito identity becomes inaccessible. You must use AWS
-// Developer credentials to call this API.
+// Unlinks a DeveloperUserIdentifier from an existing identity. Unlinked
+// developer users will be considered new identities next time they are seen. If,
+// for a given Cognito identity, you remove all federated identities as well as the
+// developer user identifier, the Cognito identity becomes inaccessible. You must
+// use AWS Developer credentials to call this API.
 func (c *Client) UnlinkDeveloperIdentity(ctx context.Context, params *UnlinkDeveloperIdentityInput, optFns ...func(*Options)) (*UnlinkDeveloperIdentityOutput, error) {
 	if params == nil {
 		params = &UnlinkDeveloperIdentityInput{}
@@ -30,7 +30,7 @@ func (c *Client) UnlinkDeveloperIdentity(ctx context.Context, params *UnlinkDeve
 	return out, nil
 }
 
-// Input to the UnlinkDeveloperIdentity action.
+// Input to the UnlinkDeveloperIdentity  action.
 type UnlinkDeveloperIdentityInput struct {
 
 	// The "domain" by which Cognito will refer to your users.

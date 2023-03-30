@@ -11,12 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a database activity stream to monitor activity on the database. For more
-// information, see  Monitoring Amazon Aurora with Database Activity Streams
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)
-// in the Amazon Aurora User Guide or  Monitoring Amazon RDS with Database Activity
-// Streams
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.html)
+// Starts a database activity stream to monitor activity on the database. For
+// more information, see Monitoring Amazon Aurora with Database Activity Streams (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)
+// in the Amazon Aurora User Guide or Monitoring Amazon RDS with Database
+// Activity Streams (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.html)
 // in the Amazon RDS User Guide.
 func (c *Client) StartActivityStream(ctx context.Context, params *StartActivityStreamInput, optFns ...func(*Options)) (*StartActivityStreamOutput, error) {
 	if params == nil {
@@ -50,7 +48,7 @@ type StartActivityStreamInput struct {
 	Mode types.ActivityStreamMode
 
 	// The Amazon Resource Name (ARN) of the DB cluster, for example,
-	// arn:aws:rds:us-east-1:12345667890:cluster:das-cluster.
+	// arn:aws:rds:us-east-1:12345667890:cluster:das-cluster .
 	//
 	// This member is required.
 	ResourceArn *string
@@ -77,8 +75,8 @@ type StartActivityStreamOutput struct {
 	// activity stream.
 	EngineNativeAuditFieldsIncluded *bool
 
-	// The name of the Amazon Kinesis data stream to be used for the database activity
-	// stream.
+	// The name of the Amazon Kinesis data stream to be used for the database
+	// activity stream.
 	KinesisStreamName *string
 
 	// The Amazon Web Services KMS key identifier for encryption of messages in the

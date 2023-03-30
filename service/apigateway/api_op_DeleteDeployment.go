@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Deployment resource. Deleting a deployment will only succeed if there
-// are no Stage resources associated with it.
+// Deletes a Deployment resource. Deleting a deployment will only succeed if
+// there are no Stage resources associated with it.
 func (c *Client) DeleteDeployment(ctx context.Context, params *DeleteDeploymentInput, optFns ...func(*Options)) (*DeleteDeploymentOutput, error) {
 	if params == nil {
 		params = &DeleteDeploymentInput{}

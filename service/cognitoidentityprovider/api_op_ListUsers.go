@@ -43,56 +43,43 @@ type ListUsersInput struct {
 
 	// A filter string of the form "AttributeName Filter-Type "AttributeValue"".
 	// Quotation marks within the filter string must be escaped using the backslash (\)
-	// character. For example, "family_name = \"Reddy\"".
-	// - AttributeName: The name of
-	// the attribute to search for. You can only search for one attribute at a time.
-	// -
-	// Filter-Type: For an exact match, use =, for example, "given_name = \"Jon\"". For
-	// a prefix ("starts with") match, use ^=, for example, "given_name ^= \"Jon\"".
-	// -
-	// AttributeValue: The attribute value that must be matched for each user.
+	// character. For example, " family_name  = \"Reddy\"".
+	//     - AttributeName: The name of the attribute to search for. You can only search for one attribute at a time.
+	//     - Filter-Type: For an exact match, use =, for example, " given_name = \"Jon\"". For a prefix ("starts with") match, use ^=, for example, " given_name ^= \"Jon\"".
+	//     - AttributeValue: The attribute value that must be matched for each user.
 	//
-	// If the
-	// filter string is empty, ListUsers returns all users in the user pool. You can
-	// only search for the following standard attributes:
-	// - username (case-sensitive)
-	// -
-	// email
-	// - phone_number
-	// - name
-	// - given_name
-	// - family_name
-	// - preferred_username
-	// -
-	// cognito:user_status (called Status in the Console) (case-insensitive)
-	// - status
-	// (called Enabled in the Console) (case-sensitive)
-	// - sub
-	//
-	// Custom attributes aren't
-	// searchable. You can also list users with a client-side filter. The server-side
-	// filter matches no more than one attribute. For an advanced search, use a
-	// client-side filter with the --query parameter of the list-users action in the
-	// CLI. When you use a client-side filter, ListUsers returns a paginated list of
-	// zero or more users. You can receive multiple pages in a row with zero results.
-	// Repeat the query with each pagination token that is returned until you receive a
-	// null pagination token value, and then review the combined result. For more
-	// information about server-side and client-side filtering, see FilteringCLI output
-	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html) in the
-	// Command Line Interface User Guide
-	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html). For
-	// more information, see Searching for Users Using the ListUsers API
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-using-listusers-api)
-	// and Examples of Using the ListUsers API
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-listusers-api-examples)
+	// If the filter string is empty, ListUsers returns all users in the user pool.
+	// You can only search for the following standard attributes:
+	//     - username (case-sensitive)
+	//     - email
+	//     - phone_number
+	//     - name
+	//     - given_name
+	//     - family_name
+	//     - preferred_username
+	//     - cognito:user_status (called Status in the Console) (case-insensitive)
+	//     - status (called Enabled in the Console) (case-sensitive)
+	//     - sub
+	// Custom attributes aren't searchable. You can also list users with a
+	// client-side filter. The server-side filter matches no more than one attribute.
+	// For an advanced search, use a client-side filter with the --query parameter of
+	// the list-users action in the CLI. When you use a client-side filter, ListUsers
+	// returns a paginated list of zero or more users. You can receive multiple pages
+	// in a row with zero results. Repeat the query with each pagination token that is
+	// returned until you receive a null pagination token value, and then review the
+	// combined result. For more information about server-side and client-side
+	// filtering, see FilteringCLI output (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html)
+	// in the Command Line Interface User Guide (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html)
+	// . For more information, see Searching for Users Using the ListUsers API (https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-using-listusers-api)
+	// and Examples of Using the ListUsers API (https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-listusers-api-examples)
 	// in the Amazon Cognito Developer Guide.
 	Filter *string
 
 	// Maximum number of users to be returned.
 	Limit *int32
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation,
+	// which can be used to return the next set of items in the list.
 	PaginationToken *string
 
 	noSmithyDocumentSerde
@@ -101,8 +88,8 @@ type ListUsersInput struct {
 // The response from the request to list users.
 type ListUsersOutput struct {
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation,
+	// which can be used to return the next set of items in the list.
 	PaginationToken *string
 
 	// The users returned in the request to list users.
@@ -189,8 +176,8 @@ type ListUsersPaginatorOptions struct {
 	// Maximum number of users to be returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -35,7 +35,7 @@ type GetComplianceSummaryByResourceTypeInput struct {
 	// compliant and the number that are noncompliant for each resource type. For this
 	// request, you can specify an Amazon Web Services resource type such as
 	// AWS::EC2::Instance. You can specify that the resource type is an Amazon Web
-	// Services account by specifying AWS::::Account.
+	// Services account by specifying AWS::::Account .
 	ResourceTypes []string
 
 	noSmithyDocumentSerde
@@ -43,9 +43,9 @@ type GetComplianceSummaryByResourceTypeInput struct {
 
 type GetComplianceSummaryByResourceTypeOutput struct {
 
-	// The number of resources that are compliant and the number that are noncompliant.
-	// If one or more resource types were provided with the request, the numbers are
-	// returned for each resource type. The maximum number returned is 100.
+	// The number of resources that are compliant and the number that are
+	// noncompliant. If one or more resource types were provided with the request, the
+	// numbers are returned for each resource type. The maximum number returned is 100.
 	ComplianceSummariesByResourceType []types.ComplianceSummaryByResourceType
 
 	// Metadata pertaining to the operation's result.

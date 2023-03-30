@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes tags from an Application Auto Scaling scalable target. To delete a tag,
-// specify the tag key and the Application Auto Scaling scalable target.
+// Deletes tags from an Application Auto Scaling scalable target. To delete a
+// tag, specify the tag key and the Application Auto Scaling scalable target.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -32,7 +32,7 @@ type UntagResourceInput struct {
 	// Identifies the Application Auto Scaling scalable target from which to remove
 	// tags. For example:
 	// arn:aws:application-autoscaling:us-east-1:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123
-	// To get the ARN for a scalable target, use DescribeScalableTargets.
+	// To get the ARN for a scalable target, use DescribeScalableTargets .
 	//
 	// This member is required.
 	ResourceARN *string

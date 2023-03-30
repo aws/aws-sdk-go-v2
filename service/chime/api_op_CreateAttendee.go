@@ -12,9 +12,8 @@ import (
 )
 
 // Creates a new attendee for an active Amazon Chime SDK meeting. For more
-// information about the Amazon Chime SDK, see Using the Amazon Chime SDK
-// (https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html) in the Amazon
-// Chime Developer Guide.
+// information about the Amazon Chime SDK, see Using the Amazon Chime SDK (https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html)
+// in the Amazon Chime Developer Guide.
 func (c *Client) CreateAttendee(ctx context.Context, params *CreateAttendeeInput, optFns ...func(*Options)) (*CreateAttendeeOutput, error) {
 	if params == nil {
 		params = &CreateAttendeeInput{}
@@ -32,8 +31,8 @@ func (c *Client) CreateAttendee(ctx context.Context, params *CreateAttendeeInput
 
 type CreateAttendeeInput struct {
 
-	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
-	// to an identity managed by a builder application.
+	// The Amazon Chime SDK external user ID. An idempotency token. Links the
+	// attendee to an identity managed by a builder application.
 	//
 	// This member is required.
 	ExternalUserId *string

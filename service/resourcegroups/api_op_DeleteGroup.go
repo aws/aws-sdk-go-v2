@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified resource group. Deleting a resource group does not delete
-// any resources that are members of the group; it only deletes the group
+// Deletes the specified resource group. Deleting a resource group does not
+// delete any resources that are members of the group; it only deletes the group
 // structure. Minimum permissions To run this command, you must have the following
 // permissions:
-// - resource-groups:DeleteGroup
+//   - resource-groups:DeleteGroup
 func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optFns ...func(*Options)) (*DeleteGroupOutput, error) {
 	if params == nil {
 		params = &DeleteGroupInput{}
@@ -36,7 +36,7 @@ type DeleteGroupInput struct {
 	// The name or the ARN of the resource group to delete.
 	Group *string
 
-	// Deprecated - don't use this parameter. Use Group instead.
+	// Deprecated - don't use this parameter. Use Group  instead.
 	//
 	// Deprecated: This field is deprecated, use Group instead.
 	GroupName *string

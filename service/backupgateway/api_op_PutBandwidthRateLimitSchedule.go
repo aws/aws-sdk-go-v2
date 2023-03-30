@@ -32,14 +32,13 @@ func (c *Client) PutBandwidthRateLimitSchedule(ctx context.Context, params *PutB
 
 type PutBandwidthRateLimitScheduleInput struct {
 
-	// An array containing bandwidth rate limit schedule intervals for a gateway. When
-	// no bandwidth rate limit intervals have been scheduled, the array is empty.
+	// An array containing bandwidth rate limit schedule intervals for a gateway.
+	// When no bandwidth rate limit intervals have been scheduled, the array is empty.
 	//
 	// This member is required.
 	BandwidthRateLimitIntervals []types.BandwidthRateLimitInterval
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html)
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html)
 	// operation to return a list of gateways for your account and Amazon Web Services
 	// Region.
 	//
@@ -51,8 +50,7 @@ type PutBandwidthRateLimitScheduleInput struct {
 
 type PutBandwidthRateLimitScheduleOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html)
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html)
 	// operation to return a list of gateways for your account and Amazon Web Services
 	// Region.
 	GatewayArn *string

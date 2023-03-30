@@ -33,7 +33,7 @@ type ListWirelessDeviceImportTasksInput struct {
 	MaxResults int32
 
 	// To retrieve the next set of results, the nextToken value from a previous
-	// response; otherwise null to receive the first set of results.
+	// response; otherwise null  to receive the first set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,8 +45,8 @@ type ListWirelessDeviceImportTasksOutput struct {
 	// additional results.
 	NextToken *string
 
-	// List of import tasks and summary information of onboarding status of devices in
-	// each import task.
+	// List of import tasks and summary information of onboarding status of devices
+	// in each import task.
 	WirelessDeviceImportTaskList []types.WirelessDeviceImportTask
 
 	// Metadata pertaining to the operation's result.

@@ -7,15 +7,15 @@ import (
 	"time"
 )
 
-// An object representing a device for a placement template (see
-// PlacementTemplate).
+// An object representing a device for a placement template (see PlacementTemplate
+// ).
 type DeviceTemplate struct {
 
 	// An optional Lambda function to invoke instead of the default Lambda function
 	// provided by the placement template.
 	CallbackOverrides map[string]string
 
-	// The device type, which currently must be "button".
+	// The device type, which currently must be "button" .
 	DeviceType *string
 
 	noSmithyDocumentSerde
@@ -44,8 +44,8 @@ type PlacementDescription struct {
 	// This member is required.
 	ProjectName *string
 
-	// The date when the placement was last updated, in UNIX epoch time format. If the
-	// placement was not updated, then createdDate and updatedDate are the same.
+	// The date when the placement was last updated, in UNIX epoch time format. If
+	// the placement was not updated, then createdDate  and updatedDate  are the same.
 	//
 	// This member is required.
 	UpdatedDate *time.Time
@@ -71,8 +71,8 @@ type PlacementSummary struct {
 	// This member is required.
 	ProjectName *string
 
-	// The date when the placement was last updated, in UNIX epoch time format. If the
-	// placement was not updated, then createdDate and updatedDate are the same.
+	// The date when the placement was last updated, in UNIX epoch time format. If
+	// the placement was not updated, then createdDate  and updatedDate  are the same.
 	//
 	// This member is required.
 	UpdatedDate *time.Time
@@ -87,8 +87,8 @@ type PlacementTemplate struct {
 	// this template.
 	DefaultAttributes map[string]string
 
-	// An object specifying the DeviceTemplate for all placements using this
-	// (PlacementTemplate) template.
+	// An object specifying the DeviceTemplate  for all placements using this (
+	// PlacementTemplate ) template.
 	DeviceTemplates map[string]DeviceTemplate
 
 	noSmithyDocumentSerde
@@ -109,7 +109,7 @@ type ProjectDescription struct {
 	ProjectName *string
 
 	// The date when the project was last updated, in UNIX epoch time format. If the
-	// project was not updated, then createdDate and updatedDate are the same.
+	// project was not updated, then createdDate  and updatedDate  are the same.
 	//
 	// This member is required.
 	UpdatedDate *time.Time
@@ -144,7 +144,7 @@ type ProjectSummary struct {
 	ProjectName *string
 
 	// The date when the project was last updated, in UNIX epoch time format. If the
-	// project was not updated, then createdDate and updatedDate are the same.
+	// project was not updated, then createdDate  and updatedDate  are the same.
 	//
 	// This member is required.
 	UpdatedDate *time.Time

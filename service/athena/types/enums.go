@@ -127,9 +127,9 @@ const (
 	ExecutorTypeWorker      ExecutorType = "WORKER"
 )
 
-// Values returns all known values for ExecutorType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ExecutorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ExecutorType) Values() []ExecutorType {
 	return []ExecutorType{
 		"COORDINATOR",
@@ -145,9 +145,9 @@ const (
 	NotebookTypeIpynb NotebookType = "IPYNB"
 )
 
-// Values returns all known values for NotebookType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NotebookType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (NotebookType) Values() []NotebookType {
 	return []NotebookType{
 		"IPYNB",
@@ -185,9 +185,9 @@ const (
 	S3AclOptionBucketOwnerFullControl S3AclOption = "BUCKET_OWNER_FULL_CONTROL"
 )
 
-// Values returns all known values for S3AclOption. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for S3AclOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (S3AclOption) Values() []S3AclOption {
 	return []S3AclOption{
 		"BUCKET_OWNER_FULL_CONTROL",
@@ -208,9 +208,9 @@ const (
 	SessionStateFailed      SessionState = "FAILED"
 )
 
-// Values returns all known values for SessionState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SessionState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (SessionState) Values() []SessionState {
 	return []SessionState{
 		"CREATING",

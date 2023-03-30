@@ -14,22 +14,22 @@ import (
 // Use this operation to update your workforce. You can use this operation to
 // require that workers use specific IP addresses to work on tasks and to update
 // your OpenID Connect (OIDC) Identity Provider (IdP) workforce configuration. The
-// worker portal is now supported in VPC and public internet. Use SourceIpConfig to
-// restrict worker access to tasks to a specific range of IP addresses. You specify
-// allowed IP addresses by creating a list of up to ten CIDRs
-// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html). By default,
-// a workforce isn't restricted to specific IP addresses. If you specify a range of
-// IP addresses, workers who attempt to access tasks using any IP address outside
-// the specified range are denied and get a Not Found error message on the worker
-// portal. To restrict access to all the workers in public internet, add the
-// SourceIpConfig CIDR value as "10.0.0.0/16". Amazon SageMaker does not support
-// Source Ip restriction for worker portals in VPC. Use OidcConfig to update the
-// configuration of a workforce created using your own OIDC IdP. You can only
-// update your OIDC IdP configuration when there are no work teams associated with
-// your workforce. You can delete work teams using the operation. After restricting
-// access to a range of IP addresses or updating your OIDC IdP configuration with
-// this operation, you can view details about your update workforce using the
-// operation. This operation only applies to private workforces.
+// worker portal is now supported in VPC and public internet. Use SourceIpConfig
+// to restrict worker access to tasks to a specific range of IP addresses. You
+// specify allowed IP addresses by creating a list of up to ten CIDRs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)
+// . By default, a workforce isn't restricted to specific IP addresses. If you
+// specify a range of IP addresses, workers who attempt to access tasks using any
+// IP address outside the specified range are denied and get a Not Found error
+// message on the worker portal. To restrict access to all the workers in public
+// internet, add the SourceIpConfig CIDR value as "10.0.0.0/16". Amazon SageMaker
+// does not support Source Ip restriction for worker portals in VPC. Use
+// OidcConfigto update the configuration of a workforce created using your own
+// OIDC IdP. You can only update your OIDC IdP configuration when there are no work
+// teams associated with your workforce. You can delete work teams using the
+// operation. After restricting access to a range of IP addresses or updating your
+// OIDC IdP configuration with this operation, you can view details about your
+// update workforce using the operation. This operation only applies to private
+// workforces.
 func (c *Client) UpdateWorkforce(ctx context.Context, params *UpdateWorkforceInput, optFns ...func(*Options)) (*UpdateWorkforceOutput, error) {
 	if params == nil {
 		params = &UpdateWorkforceInput{}
@@ -53,13 +53,13 @@ type UpdateWorkforceInput struct {
 	// This member is required.
 	WorkforceName *string
 
-	// Use this parameter to update your OIDC Identity Provider (IdP) configuration for
-	// a workforce made using your own IdP.
+	// Use this parameter to update your OIDC Identity Provider (IdP) configuration
+	// for a workforce made using your own IdP.
 	OidcConfig *types.OidcConfig
 
-	// A list of one to ten worker IP address ranges (CIDRs
-	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)) that can be
-	// used to access tasks assigned to this workforce. Maximum: Ten CIDR values
+	// A list of one to ten worker IP address ranges ( CIDRs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)
+	// ) that can be used to access tasks assigned to this workforce. Maximum: Ten CIDR
+	// values
 	SourceIpConfig *types.SourceIpConfig
 
 	// Use this parameter to update your VPC configuration for a workforce.
@@ -70,11 +70,11 @@ type UpdateWorkforceInput struct {
 
 type UpdateWorkforceOutput struct {
 
-	// A single private workforce. You can create one private work force in each Amazon
-	// Web Services Region. By default, any workforce-related API operation used in a
-	// specific region will apply to the workforce created in that region. To learn how
-	// to create a private workforce, see Create a Private Workforce
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html).
+	// A single private workforce. You can create one private work force in each
+	// Amazon Web Services Region. By default, any workforce-related API operation used
+	// in a specific region will apply to the workforce created in that region. To
+	// learn how to create a private workforce, see Create a Private Workforce (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html)
+	// .
 	//
 	// This member is required.
 	Workforce *types.Workforce

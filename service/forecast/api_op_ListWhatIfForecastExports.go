@@ -13,10 +13,10 @@ import (
 )
 
 // Returns a list of what-if forecast exports created using the
-// CreateWhatIfForecastExport operation. For each what-if forecast export, this
+// CreateWhatIfForecastExportoperation. For each what-if forecast export, this
 // operation returns a summary of its properties, including its Amazon Resource
 // Name (ARN). You can retrieve the complete set of properties by using the what-if
-// forecast export ARN with the DescribeWhatIfForecastExport operation.
+// forecast export ARN with the DescribeWhatIfForecastExport  operation.
 func (c *Client) ListWhatIfForecastExports(ctx context.Context, params *ListWhatIfForecastExportsInput, optFns ...func(*Options)) (*ListWhatIfForecastExportsOutput, error) {
 	if params == nil {
 		params = &ListWhatIfForecastExportsInput{}
@@ -35,20 +35,15 @@ func (c *Client) ListWhatIfForecastExports(ctx context.Context, params *ListWhat
 type ListWhatIfForecastExportsInput struct {
 
 	// An array of filters. For each filter, you provide a condition and a match
-	// statement. The condition is either IS or IS_NOT, which specifies whether to
+	// statement. The condition is either IS  or IS_NOT, which specifies whether to
 	// include or exclude the what-if forecast export jobs that match the statement
 	// from the list, respectively. The match statement consists of a key and a value.
 	// Filter properties
-	// - Condition - The condition to apply. Valid values are IS and
-	// IS_NOT. To include the forecast export jobs that match the statement, specify
-	// IS. To exclude matching forecast export jobs, specify IS_NOT.
-	// - Key - The name
-	// of the parameter to filter on. Valid values are WhatIfForecastExportArn and
-	// Status.
-	// - Value - The value to match.
-	//
-	// For example, to list all jobs that export
-	// a forecast named electricityWIFExport, specify the following filter: "Filters":
+	//     - Condition - The condition to apply. Valid values are IS and IS_NOT . To include the forecast export jobs that match the statement, specify IS . To exclude matching forecast export jobs, specify IS_NOT .
+	//     - Key - The name of the parameter to filter on. Valid values are WhatIfForecastExportArn and Status .
+	//     - Value - The value to match.
+	// For example, to list all jobs that export a
+	// forecast named electricityWIFExport, specify the following filter: "Filters":
 	// [ { "Condition": "IS", "Key": "WhatIfForecastExportArn", "Value":
 	// "arn:aws:forecast:us-west-2::forecast/electricityWIFExport" } ]
 	Filters []types.Filter
@@ -66,8 +61,8 @@ type ListWhatIfForecastExportsInput struct {
 
 type ListWhatIfForecastExportsOutput struct {
 
-	// If the response is truncated, Forecast returns this token. To retrieve the next
-	// set of results, use the token in the next request.
+	// If the response is truncated, Forecast returns this token. To retrieve the
+	// next set of results, use the token in the next request.
 	NextToken *string
 
 	// An array of WhatIfForecastExports objects that describe the matched forecast
@@ -157,8 +152,8 @@ type ListWhatIfForecastExportsPaginatorOptions struct {
 	// The number of items to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

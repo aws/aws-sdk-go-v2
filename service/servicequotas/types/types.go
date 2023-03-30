@@ -11,16 +11,10 @@ import (
 type ErrorReason struct {
 
 	// Service Quotas returns the following error values:
-	// -
-	// DEPENDENCY_ACCESS_DENIED_ERROR - The caller does not have the required
-	// permissions to complete the action. To resolve the error, you must have
-	// permission to access the service or quota.
-	// - DEPENDENCY_THROTTLING_ERROR - The
-	// service is throttling Service Quotas.
-	// - DEPENDENCY_SERVICE_ERROR - The service
-	// is not available.
-	// - SERVICE_QUOTA_NOT_AVAILABLE_ERROR - There was an error in
-	// Service Quotas.
+	//     - DEPENDENCY_ACCESS_DENIED_ERROR - The caller does not have the required permissions to complete the action. To resolve the error, you must have permission to access the service or quota.
+	//     - DEPENDENCY_THROTTLING_ERROR - The service is throttling Service Quotas.
+	//     - DEPENDENCY_SERVICE_ERROR - The service is not available.
+	//     - SERVICE_QUOTA_NOT_AVAILABLE_ERROR - There was an error in Service Quotas.
 	ErrorCode ErrorCode
 
 	// The error message.
@@ -32,8 +26,8 @@ type ErrorReason struct {
 // Information about the CloudWatch metric that reflects quota usage.
 type MetricInfo struct {
 
-	// The metric dimension. This is a name/value pair that is part of the identity of
-	// a metric.
+	// The metric dimension. This is a name/value pair that is part of the identity
+	// of a metric.
 	MetricDimensions map[string]string
 
 	// The name of the metric.
@@ -196,8 +190,8 @@ type ServiceQuotaIncreaseRequestInTemplate struct {
 // A complex data type that contains a tag key and tag value.
 type Tag struct {
 
-	// A string that contains a tag key. The string length should be between 1 and 128
-	// characters. Valid characters include a-z, A-Z, 0-9, space, and the special
+	// A string that contains a tag key. The string length should be between 1 and
+	// 128 characters. Valid characters include a-z, A-Z, 0-9, space, and the special
 	// characters _ - . : / = + @.
 	//
 	// This member is required.

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Exports theme configurations to code that is ready to integrate into an Amplify
-// app.
+// Exports theme configurations to code that is ready to integrate into an
+// Amplify app.
 func (c *Client) ExportThemes(ctx context.Context, params *ExportThemesInput, optFns ...func(*Options)) (*ExportThemesOutput, error) {
 	if params == nil {
 		params = &ExportThemesInput{}
@@ -135,8 +135,8 @@ var _ ExportThemesAPIClient = (*Client)(nil)
 
 // ExportThemesPaginatorOptions is the paginator options for ExportThemes
 type ExportThemesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

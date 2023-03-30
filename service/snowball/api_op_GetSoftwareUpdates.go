@@ -11,7 +11,7 @@ import (
 )
 
 // Returns an Amazon S3 presigned URL for an update file associated with a
-// specified JobId.
+// specified JobId .
 func (c *Client) GetSoftwareUpdates(ctx context.Context, params *GetSoftwareUpdatesInput, optFns ...func(*Options)) (*GetSoftwareUpdatesOutput, error) {
 	if params == nil {
 		params = &GetSoftwareUpdatesInput{}
@@ -29,8 +29,8 @@ func (c *Client) GetSoftwareUpdates(ctx context.Context, params *GetSoftwareUpda
 
 type GetSoftwareUpdatesInput struct {
 
-	// The ID for a job that you want to get the software update file for, for example
-	// JID123e4567-e89b-12d3-a456-426655440000.
+	// The ID for a job that you want to get the software update file for, for
+	// example JID123e4567-e89b-12d3-a456-426655440000 .
 	//
 	// This member is required.
 	JobId *string
@@ -41,9 +41,9 @@ type GetSoftwareUpdatesInput struct {
 type GetSoftwareUpdatesOutput struct {
 
 	// The Amazon S3 presigned URL for the update file associated with the specified
-	// JobId value. The software update will be available for 2 days after this request
-	// is made. To access an update after the 2 days have passed, you'll have to make
-	// another call to GetSoftwareUpdates.
+	// JobIdvalue. The software update will be available for 2 days after this
+	// request is made. To access an update after the 2 days have passed, you'll have
+	// to make another call to GetSoftwareUpdates .
 	UpdatesURI *string
 
 	// Metadata pertaining to the operation's result.

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the publishing definition with the specified destinationId.
+// Deletes the publishing definition with the specified destinationId .
 func (c *Client) DeletePublishingDestination(ctx context.Context, params *DeletePublishingDestinationInput, optFns ...func(*Options)) (*DeletePublishingDestinationOutput, error) {
 	if params == nil {
 		params = &DeletePublishingDestinationInput{}

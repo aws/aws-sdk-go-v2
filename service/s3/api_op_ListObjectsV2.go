@@ -13,37 +13,29 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns some or all (up to 1,000) of the objects in a bucket with each request.
-// You can use the request parameters as selection criteria to return a subset of
-// the objects in a bucket. A 200 OK response can contain valid or invalid XML.
-// Make sure to design your application to parse the contents of the response and
-// handle it appropriately. Objects are returned sorted in an ascending order of
-// the respective key names in the list. For more information about listing
-// objects, see Listing object keys programmatically
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ListingKeysUsingAPIs.html)
+// Returns some or all (up to 1,000) of the objects in a bucket with each
+// request. You can use the request parameters as selection criteria to return a
+// subset of the objects in a bucket. A 200 OK response can contain valid or
+// invalid XML. Make sure to design your application to parse the contents of the
+// response and handle it appropriately. Objects are returned sorted in an
+// ascending order of the respective key names in the list. For more information
+// about listing objects, see Listing object keys programmatically (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ListingKeysUsingAPIs.html)
 // To use this operation, you must have READ access to the bucket. To use this
 // action in an Identity and Access Management (IAM) policy, you must have
 // permissions to perform the s3:ListBucket action. The bucket owner has this
 // permission by default and can grant this permission to others. For more
 // information about permissions, see Permissions Related to Bucket Subresource
-// Operations
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
-// and Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
-// This section describes the latest revision of this action. We recommend that you
-// use this revised API for application development. For backward compatibility,
-// Amazon S3 continues to support the prior version of this API, ListObjects
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html). To get a
-// list of your buckets, see ListBuckets
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html). The
-// following operations are related to ListObjectsV2:
-// - GetObject
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
-// - PutObject
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
-// -
-// CreateBucket
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
+// Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
+// . This section describes the latest revision of this action. We recommend that
+// you use this revised API for application development. For backward
+// compatibility, Amazon S3 continues to support the prior version of this API,
+// ListObjects (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html)
+// . To get a list of your buckets, see ListBuckets (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html)
+// . The following operations are related to ListObjectsV2 :
+//   - GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
+//   - PutObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
+//   - CreateBucket (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 func (c *Client) ListObjectsV2(ctx context.Context, params *ListObjectsV2Input, optFns ...func(*Options)) (*ListObjectsV2Output, error) {
 	if params == nil {
 		params = &ListObjectsV2Input{}
@@ -66,17 +58,15 @@ type ListObjectsV2Input struct {
 	// the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When
 	// using this action with an access point through the Amazon Web Services SDKs, you
 	// provide the access point ARN in place of the bucket name. For more information
-	// about access point ARNs, see Using access points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// about access point ARNs, see Using access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this action with S3 on Outposts through the Amazon Web Services SDKs, you
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
-	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
-	// Amazon S3 User Guide.
+	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
+	// in the Amazon S3 User Guide.
 	//
 	// This member is required.
 	Bucket *string
@@ -96,13 +86,13 @@ type ListObjectsV2Input struct {
 	// (access denied).
 	ExpectedBucketOwner *string
 
-	// The owner field is not present in listV2 by default, if you want to return owner
-	// field with each key in the result then set the fetch owner field to true.
+	// The owner field is not present in listV2 by default, if you want to return
+	// owner field with each key in the result then set the fetch owner field to true.
 	FetchOwner bool
 
-	// Sets the maximum number of keys returned in the response. By default the action
-	// returns up to 1,000 key names. The response might contain fewer keys but will
-	// never contain more.
+	// Sets the maximum number of keys returned in the response. By default the
+	// action returns up to 1,000 key names. The response might contain fewer keys but
+	// will never contain more.
 	MaxKeys int32
 
 	// Limits the response to keys that begin with the specified prefix.
@@ -124,13 +114,13 @@ type ListObjectsV2Output struct {
 
 	// All of the keys (up to 1,000) rolled up into a common prefix count as a single
 	// return when calculating the number of returns. A response can contain
-	// CommonPrefixes only if you specify a delimiter. CommonPrefixes contains all (if
-	// there are any) keys between Prefix and the next occurrence of the string
-	// specified by a delimiter. CommonPrefixes lists keys that act like subdirectories
-	// in the directory specified by Prefix. For example, if the prefix is notes/ and
-	// the delimiter is a slash (/) as in notes/summer/july, the common prefix is
-	// notes/summer/. All of the keys that roll up into a common prefix count as a
-	// single return when calculating the number of returns.
+	// CommonPrefixes only if you specify a delimiter. CommonPrefixes contains all
+	// (if there are any) keys between Prefix and the next occurrence of the string
+	// specified by a delimiter. CommonPrefixes lists keys that act like
+	// subdirectories in the directory specified by Prefix. For example, if the
+	// prefix is notes/  and the delimiter is a slash ( / ) as in notes/summer/july,
+	// the common prefix is notes/summer/. All of the keys that roll up into a common
+	// prefix count as a single return when calculating the number of returns.
 	CommonPrefixes []types.CommonPrefix
 
 	// Metadata about each object returned.
@@ -146,10 +136,10 @@ type ListObjectsV2Output struct {
 	// MaxKeys value.
 	Delimiter *string
 
-	// Encoding type used by Amazon S3 to encode object key names in the XML response.
-	// If you specify the encoding-type request parameter, Amazon S3 includes this
-	// element in the response, and returns encoded key name values in the following
-	// response elements: Delimiter, Prefix, Key, and StartAfter.
+	// Encoding type used by Amazon S3 to encode object key names in the XML
+	// response. If you specify the encoding-type request parameter, Amazon S3 includes
+	// this element in the response, and returns encoded key name values in the
+	// following response elements: Delimiter, Prefix, Key,  and StartAfter .
 	EncodingType types.EncodingType
 
 	// Set to false if all of the results were returned. Set to true if more keys are
@@ -157,14 +147,14 @@ type ListObjectsV2Output struct {
 	// all of the results might not be returned.
 	IsTruncated bool
 
-	// KeyCount is the number of keys returned with this request. KeyCount will always
-	// be less than or equals to MaxKeys field. Say you ask for 50 keys, your result
-	// will include less than equals 50 keys
+	// KeyCount is the number of keys returned with this request. KeyCount will
+	// always be less than or equals to MaxKeys field. Say you ask for 50 keys, your
+	// result will include less than equals 50 keys
 	KeyCount int32
 
-	// Sets the maximum number of keys returned in the response. By default the action
-	// returns up to 1,000 key names. The response might contain fewer keys but will
-	// never contain more.
+	// Sets the maximum number of keys returned in the response. By default the
+	// action returns up to 1,000 key names. The response might contain fewer keys but
+	// will never contain more.
 	MaxKeys int32
 
 	// The bucket name. When using this action with an access point, you must direct
@@ -172,22 +162,20 @@ type ListObjectsV2Output struct {
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
 	// action with an access point through the Amazon Web Services SDKs, you provide
 	// the access point ARN in place of the bucket name. For more information about
-	// access point ARNs, see Using access points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// access point ARNs, see Using access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
-	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this action with S3 on Outposts through the Amazon Web Services SDKs, you
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When
+	// using this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
-	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
-	// Amazon S3 User Guide.
+	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
+	// in the Amazon S3 User Guide.
 	Name *string
 
-	// NextContinuationToken is sent when isTruncated is true, which means there are
+	// NextContinuationToken  is sent when isTruncated is true, which means there are
 	// more keys in the bucket that can be listed. The next list requests to Amazon S3
-	// can be continued with this NextContinuationToken. NextContinuationToken is
+	// can be continued with this NextContinuationToken . NextContinuationToken is
 	// obfuscated and is not a real key
 	NextContinuationToken *string
 
@@ -287,13 +275,13 @@ var _ ListObjectsV2APIClient = (*Client)(nil)
 
 // ListObjectsV2PaginatorOptions is the paginator options for ListObjectsV2
 type ListObjectsV2PaginatorOptions struct {
-	// Sets the maximum number of keys returned in the response. By default the action
-	// returns up to 1,000 key names. The response might contain fewer keys but will
-	// never contain more.
+	// Sets the maximum number of keys returned in the response. By default the
+	// action returns up to 1,000 key names. The response might contain fewer keys but
+	// will never contain more.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

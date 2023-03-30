@@ -31,17 +31,16 @@ func (c *Client) ListRecommendationTemplates(ctx context.Context, params *ListRe
 type ListRecommendationTemplatesInput struct {
 
 	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn:partition:resiliencehub:region:account:app-assessment/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// arn: partition :resiliencehub: region : account :app-assessment/ app-id. For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
 
-	// The maximum number of results to include in the response. If more results exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved.
+	// The maximum number of results to include in the response. If more results
+	// exist than the specified MaxResults value, a token is included in the response
+	// so that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// The name for one of the listed recommendation templates.
@@ -53,8 +52,8 @@ type ListRecommendationTemplatesInput struct {
 	// The Amazon Resource Name (ARN) for a recommendation template.
 	RecommendationTemplateArn *string
 
-	// The default is to sort by ascending startTime. To sort by descending startTime,
-	// set reverseOrder to true.
+	// The default is to sort by ascending startTime. To sort by descending
+	// startTime, set reverseOrder to true .
 	ReverseOrder *bool
 
 	// The status of the action.
@@ -151,13 +150,13 @@ var _ ListRecommendationTemplatesAPIClient = (*Client)(nil)
 // ListRecommendationTemplatesPaginatorOptions is the paginator options for
 // ListRecommendationTemplates
 type ListRecommendationTemplatesPaginatorOptions struct {
-	// The maximum number of results to include in the response. If more results exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved.
+	// The maximum number of results to include in the response. If more results
+	// exist than the specified MaxResults value, a token is included in the response
+	// so that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

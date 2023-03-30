@@ -13,10 +13,9 @@ import (
 
 // Gets the expressions configured for the search domain. Can be limited to
 // specific expressions by name. By default, shows all expressions and includes any
-// pending changes to the configuration. Set the Deployed option to true to show
+// pending changes to the configuration. Set the Deployed  option to true to show
 // the active configuration and exclude pending changes. For more information, see
-// Configuring Expressions
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
+// Configuring Expressions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DescribeExpressions(ctx context.Context, params *DescribeExpressionsInput, optFns ...func(*Options)) (*DescribeExpressionsOutput, error) {
 	if params == nil {
@@ -37,7 +36,7 @@ func (c *Client) DescribeExpressions(ctx context.Context, params *DescribeExpres
 // name of the domain you want to describe. To restrict the response to particular
 // expressions, specify the names of the expressions you want to describe. To show
 // the active configuration and exclude any pending changes, set the Deployed
-// option to true.
+// option to true .
 type DescribeExpressionsInput struct {
 
 	// The name of the domain you want to describe.
@@ -45,8 +44,8 @@ type DescribeExpressionsInput struct {
 	// This member is required.
 	DomainName *string
 
-	// Whether to display the deployed configuration (true) or include any pending
-	// changes (false). Defaults to false.
+	// Whether to display the deployed configuration ( true) or include any pending
+	// changes ( false ). Defaults to false .
 	Deployed *bool
 
 	// Limits the DescribeExpressions response to the specified expressions. If not
@@ -56,8 +55,8 @@ type DescribeExpressionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a DescribeExpressions request. Contains the expressions configured
-// for the domain specified in the request.
+// The result of a DescribeExpressions request. Contains the expressions
+// configured for the domain specified in the request.
 type DescribeExpressionsOutput struct {
 
 	// The expressions configured for the domain.

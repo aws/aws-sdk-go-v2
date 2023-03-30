@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the history for DAILY, MONTHLY, and QUARTERLY budgets. Budget history
-// isn't available for ANNUAL budgets.
+// Describes the history for DAILY , MONTHLY , and QUARTERLY budgets. Budget
+// history isn't available for ANNUAL  budgets.
 func (c *Client) DescribeBudgetPerformanceHistory(ctx context.Context, params *DescribeBudgetPerformanceHistoryInput, optFns ...func(*Options)) (*DescribeBudgetPerformanceHistoryOutput, error) {
 	if params == nil {
 		params = &DescribeBudgetPerformanceHistoryInput{}
@@ -58,11 +58,11 @@ type DescribeBudgetPerformanceHistoryInput struct {
 
 type DescribeBudgetPerformanceHistoryOutput struct {
 
-	// The history of how often the budget has gone into an ALARM state. For DAILY
+	// The history of how often the budget has gone into an ALARM  state. For DAILY
 	// budgets, the history saves the state of the budget for the last 60 days. For
-	// MONTHLY budgets, the history saves the state of the budget for the current month
-	// plus the last 12 months. For QUARTERLY budgets, the history saves the state of
-	// the budget for the last four quarters.
+	// MONTHLYbudgets, the history saves the state of the budget for the current
+	// month plus the last 12 months. For QUARTERLY budgets, the history saves the
+	// state of the budget for the last four quarters.
 	BudgetPerformanceHistory *types.BudgetPerformanceHistory
 
 	// A generic string.
@@ -152,8 +152,8 @@ type DescribeBudgetPerformanceHistoryPaginatorOptions struct {
 	// maximum is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

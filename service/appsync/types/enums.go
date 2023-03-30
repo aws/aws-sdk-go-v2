@@ -47,9 +47,9 @@ const (
 	ApiCacheTypeLarge12x  ApiCacheType = "LARGE_12X"
 )
 
-// Values returns all known values for ApiCacheType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ApiCacheType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ApiCacheType) Values() []ApiCacheType {
 	return []ApiCacheType{
 		"T2_SMALL",
@@ -172,8 +172,8 @@ const (
 	ConflictDetectionTypeNone    ConflictDetectionType = "NONE"
 )
 
-// Values returns all known values for ConflictDetectionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ConflictDetectionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ConflictDetectionType) Values() []ConflictDetectionType {
 	return []ConflictDetectionType{
@@ -297,9 +297,10 @@ const (
 	RelationalDatabaseSourceTypeRdsHttpEndpoint RelationalDatabaseSourceType = "RDS_HTTP_ENDPOINT"
 )
 
-// Values returns all known values for RelationalDatabaseSourceType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RelationalDatabaseSourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (RelationalDatabaseSourceType) Values() []RelationalDatabaseSourceType {
 	return []RelationalDatabaseSourceType{
 		"RDS_HTTP_ENDPOINT",
@@ -314,9 +315,9 @@ const (
 	ResolverKindPipeline ResolverKind = "PIPELINE"
 )
 
-// Values returns all known values for ResolverKind. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResolverKind. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResolverKind) Values() []ResolverKind {
 	return []ResolverKind{
 		"UNIT",
@@ -331,9 +332,9 @@ const (
 	RuntimeNameAppsyncJs RuntimeName = "APPSYNC_JS"
 )
 
-// Values returns all known values for RuntimeName. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RuntimeName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (RuntimeName) Values() []RuntimeName {
 	return []RuntimeName{
 		"APPSYNC_JS",
@@ -352,9 +353,9 @@ const (
 	SchemaStatusNotApplicable SchemaStatus = "NOT_APPLICABLE"
 )
 
-// Values returns all known values for SchemaStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SchemaStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (SchemaStatus) Values() []SchemaStatus {
 	return []SchemaStatus{
 		"PROCESSING",
@@ -374,8 +375,8 @@ const (
 	TypeDefinitionFormatJson TypeDefinitionFormat = "JSON"
 )
 
-// Values returns all known values for TypeDefinitionFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TypeDefinitionFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TypeDefinitionFormat) Values() []TypeDefinitionFormat {
 	return []TypeDefinitionFormat{

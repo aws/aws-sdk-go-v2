@@ -41,8 +41,8 @@ type GetGatewayResponsesInput struct {
 	// This member is required.
 	RestApiId *string
 
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500. The GatewayResponses collection does not support
+	// The maximum number of returned results per page. The default value is 25 and
+	// the maximum value is 500. The GatewayResponses collection does not support
 	// pagination and the limit does not apply here.
 	Limit *int32
 
@@ -53,9 +53,9 @@ type GetGatewayResponsesInput struct {
 	noSmithyDocumentSerde
 }
 
-// The collection of the GatewayResponse instances of a RestApi as a
-// responseType-to-GatewayResponse object map of key-value pairs. As such,
-// pagination is not supported for querying this collection.
+// The collection of the GatewayResponse instances of a RestApi as a responseType
+// -to-GatewayResponse object map of key-value pairs. As such, pagination is not
+// supported for querying this collection.
 type GetGatewayResponsesOutput struct {
 
 	// Returns the entire collection, because of no pagination support.

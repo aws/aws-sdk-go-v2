@@ -31,7 +31,7 @@ func (c *Client) DescribeJob(ctx context.Context, params *DescribeJobInput, optF
 type DescribeJobInput struct {
 
 	// The automatically generated ID for a job, for example
-	// JID123e4567-e89b-12d3-a456-426655440000.
+	// JID123e4567-e89b-12d3-a456-426655440000 .
 	//
 	// This member is required.
 	JobId *string
@@ -45,8 +45,8 @@ type DescribeJobOutput struct {
 	// and other important metadata.
 	JobMetadata *types.JobMetadata
 
-	// Information about a specific job part (in the case of an export job), including
-	// shipping information, job status, and other important metadata.
+	// Information about a specific job part (in the case of an export job),
+	// including shipping information, job status, and other important metadata.
 	SubJobMetadata []types.JobMetadata
 
 	// Metadata pertaining to the operation's result.

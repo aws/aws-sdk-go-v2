@@ -37,8 +37,8 @@ type DeleteMembersInput struct {
 	// This member is required.
 	AccountIds []string
 
-	// The unique ID of the detector of the GuardDuty account whose members you want to
-	// delete.
+	// The unique ID of the detector of the GuardDuty account whose members you want
+	// to delete.
 	//
 	// This member is required.
 	DetectorId *string

@@ -13,7 +13,7 @@ import (
 
 // Creates a permission set within a specified IAM Identity Center instance. To
 // grant users and groups access to AWS account resources, use
-// CreateAccountAssignment.
+// CreateAccountAssignment .
 func (c *Client) CreatePermissionSet(ctx context.Context, params *CreatePermissionSetInput, optFns ...func(*Options)) (*CreatePermissionSetOutput, error) {
 	if params == nil {
 		params = &CreatePermissionSetInput{}
@@ -32,29 +32,29 @@ func (c *Client) CreatePermissionSet(ctx context.Context, params *CreatePermissi
 type CreatePermissionSetInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// AWS Service Namespaces in the AWS General Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs)
+	// and AWS Service Namespaces in the AWS General Reference.
 	//
 	// This member is required.
 	InstanceArn *string
 
-	// The name of the PermissionSet.
+	// The name of the PermissionSet .
 	//
 	// This member is required.
 	Name *string
 
-	// The description of the PermissionSet.
+	// The description of the PermissionSet .
 	Description *string
 
 	// Used to redirect users within the application during the federation
 	// authentication process.
 	RelayState *string
 
-	// The length of time that the application user sessions are valid in the ISO-8601
-	// standard.
+	// The length of time that the application user sessions are valid in the
+	// ISO-8601 standard.
 	SessionDuration *string
 
-	// The tags to attach to the new PermissionSet.
+	// The tags to attach to the new PermissionSet .
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

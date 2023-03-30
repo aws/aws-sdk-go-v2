@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Activates a partner event source that has been deactivated. Once activated, your
-// matching event bus will start receiving events from the event source.
+// Activates a partner event source that has been deactivated. Once activated,
+// your matching event bus will start receiving events from the event source.
 func (c *Client) ActivateEventSource(ctx context.Context, params *ActivateEventSourceInput, optFns ...func(*Options)) (*ActivateEventSourceOutput, error) {
 	if params == nil {
 		params = &ActivateEventSourceInput{}

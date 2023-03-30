@@ -525,8 +525,8 @@ func TestClient_JsonMaps_awsRestjson1Deserialize(t *testing.T) {
 				},
 			},
 		},
-		// Clients SHOULD tolerate seeing a null value in a dense map, and they SHOULD drop
-		// the null key-value pair.
+		// Clients SHOULD tolerate seeing a null value in a dense map, and they SHOULD
+		// drop the null key-value pair.
 		"RestJsonDeserializesDenseSetMapAndSkipsNull": {
 			StatusCode: 200,
 			Header: http.Header{

@@ -35,8 +35,8 @@ type UnshareDirectoryInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// Identifier for the directory consumer account with whom the directory has to be
-	// unshared.
+	// Identifier for the directory consumer account with whom the directory has to
+	// be unshared.
 	//
 	// This member is required.
 	UnshareTarget *types.UnshareTarget
@@ -46,8 +46,8 @@ type UnshareDirectoryInput struct {
 
 type UnshareDirectoryOutput struct {
 
-	// Identifier of the directory stored in the directory consumer account that is to
-	// be unshared from the specified directory (DirectoryId).
+	// Identifier of the directory stored in the directory consumer account that is
+	// to be unshared from the specified directory ( DirectoryId ).
 	SharedDirectoryId *string
 
 	// Metadata pertaining to the operation's result.

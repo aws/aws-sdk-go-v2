@@ -14,14 +14,12 @@ import (
 
 // Gets a list of all KMS keys in the caller's Amazon Web Services account and
 // Region. Cross-account use: No. You cannot perform this operation on a KMS key in
-// a different Amazon Web Services account. Required permissions: kms:ListKeys
-// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// a different Amazon Web Services account. Required permissions: kms:ListKeys (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (IAM policy) Related operations:
-// - CreateKey
-// - DescribeKey
-// - ListAliases
-// -
-// ListResourceTags
+//   - CreateKey
+//   - DescribeKey
+//   - ListAliases
+//   - ListResourceTags
 func (c *Client) ListKeys(ctx context.Context, params *ListKeysInput, optFns ...func(*Options)) (*ListKeysOutput, error) {
 	if params == nil {
 		params = &ListKeysInput{}
@@ -47,8 +45,8 @@ type ListKeysInput struct {
 	Limit *int32
 
 	// Use this parameter in a subsequent request after you receive a response with
-	// truncated results. Set it to the value of NextMarker from the truncated response
-	// you just received.
+	// truncated results. Set it to the value of NextMarker from the truncated
+	// response you just received.
 	Marker *string
 
 	noSmithyDocumentSerde
@@ -60,13 +58,13 @@ type ListKeysOutput struct {
 	Keys []types.KeyListEntry
 
 	// When Truncated is true, this element is present and contains the value to use
-	// for the Marker parameter in a subsequent request.
+	// for the Marker  parameter in a subsequent request.
 	NextMarker *string
 
-	// A flag that indicates whether there are more items in the list. When this value
-	// is true, the list in this response is truncated. To get more items, pass the
-	// value of the NextMarker element in thisresponse to the Marker parameter in a
-	// subsequent request.
+	// A flag that indicates whether there are more items in the list. When this
+	// value is true, the list in this response is truncated. To get more items, pass
+	// the value of the NextMarker  element in thisresponse to the Marker parameter
+	// in a subsequent request.
 	Truncated bool
 
 	// Metadata pertaining to the operation's result.
@@ -151,8 +149,8 @@ type ListKeysPaginatorOptions struct {
 	// defaults to 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

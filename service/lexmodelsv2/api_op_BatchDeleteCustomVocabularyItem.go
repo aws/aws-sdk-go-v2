@@ -35,7 +35,8 @@ type BatchDeleteCustomVocabularyItemInput struct {
 	// This member is required.
 	BotId *string
 
-	// The identifier of the version of the bot associated with this custom vocabulary.
+	// The identifier of the version of the bot associated with this custom
+	// vocabulary.
 	//
 	// This member is required.
 	BotVersion *string
@@ -46,10 +47,10 @@ type BatchDeleteCustomVocabularyItemInput struct {
 	// This member is required.
 	CustomVocabularyItemList []types.CustomVocabularyEntryId
 
-	// The identifier of the language and locale where this custom vocabulary is used.
-	// The string must match one of the supported locales. For more information, see
-	// Supported Languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// The identifier of the language and locale where this custom vocabulary is
+	// used. The string must match one of the supported locales. For more information,
+	// see Supported Languages  (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	//
 	// This member is required.
 	LocaleId *string
@@ -62,16 +63,17 @@ type BatchDeleteCustomVocabularyItemOutput struct {
 	// The identifier of the bot associated with this custom vocabulary.
 	BotId *string
 
-	// The identifier of the version of the bot associated with this custom vocabulary.
+	// The identifier of the version of the bot associated with this custom
+	// vocabulary.
 	BotVersion *string
 
 	// A list of custom vocabulary items that failed to delete during the operation.
 	// The reason for the error is contained within each error object.
 	Errors []types.FailedCustomVocabularyItem
 
-	// The identifier of the language and locale where this custom vocabulary is used.
-	// The string must match one of the supported locales. For more information, see
-	// Supported languages
+	// The identifier of the language and locale where this custom vocabulary is
+	// used. The string must match one of the supported locales. For more information,
+	// see Supported languages
 	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
 	LocaleId *string
 

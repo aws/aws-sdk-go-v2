@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a subnet group. You cannot delete a default subnet group or one that is
-// associated with any clusters.
+// Deletes a subnet group. You cannot delete a default subnet group or one that
+// is associated with any clusters.
 func (c *Client) DeleteSubnetGroup(ctx context.Context, params *DeleteSubnetGroupInput, optFns ...func(*Options)) (*DeleteSubnetGroupOutput, error) {
 	if params == nil {
 		params = &DeleteSubnetGroupInput{}

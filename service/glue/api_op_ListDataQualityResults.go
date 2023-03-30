@@ -44,7 +44,7 @@ type ListDataQualityResultsInput struct {
 
 type ListDataQualityResultsOutput struct {
 
-	// A list of DataQualityResultDescription objects.
+	// A list of DataQualityResultDescription  objects.
 	//
 	// This member is required.
 	Results []types.DataQualityResultDescription
@@ -135,8 +135,8 @@ type ListDataQualityResultsPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -149,7 +149,8 @@ type ListDataQualityResultsPaginator struct {
 	firstPage bool
 }
 
-// NewListDataQualityResultsPaginator returns a new ListDataQualityResultsPaginator
+// NewListDataQualityResultsPaginator returns a new
+// ListDataQualityResultsPaginator
 func NewListDataQualityResultsPaginator(client ListDataQualityResultsAPIClient, params *ListDataQualityResultsInput, optFns ...func(*ListDataQualityResultsPaginatorOptions)) *ListDataQualityResultsPaginator {
 	if params == nil {
 		params = &ListDataQualityResultsInput{}

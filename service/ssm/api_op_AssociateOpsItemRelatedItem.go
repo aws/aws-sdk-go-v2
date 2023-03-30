@@ -32,7 +32,7 @@ func (c *Client) AssociateOpsItemRelatedItem(ctx context.Context, params *Associ
 type AssociateOpsItemRelatedItemInput struct {
 
 	// The type of association that you want to create between an OpsItem and a
-	// resource. OpsCenter supports IsParentOf and RelatesTo association types.
+	// resource. OpsCenter supports IsParentOf  and RelatesTo  association types.
 	//
 	// This member is required.
 	AssociationType *string
@@ -45,13 +45,13 @@ type AssociateOpsItemRelatedItemInput struct {
 
 	// The type of resource that you want to associate with an OpsItem. OpsCenter
 	// supports the following types: AWS::SSMIncidents::IncidentRecord: an Incident
-	// Manager incident. AWS::SSM::Document: a Systems Manager (SSM) document.
+	// Manager incident. AWS::SSM::Document : a Systems Manager (SSM) document.
 	//
 	// This member is required.
 	ResourceType *string
 
-	// The Amazon Resource Name (ARN) of the Amazon Web Services resource that you want
-	// to associate with the OpsItem.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services resource that you
+	// want to associate with the OpsItem.
 	//
 	// This member is required.
 	ResourceUri *string

@@ -25,20 +25,16 @@ type AdditionalAuthenticationProvider struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an ApiAssociation object.
+// Describes an ApiAssociation  object.
 type ApiAssociation struct {
 
 	// The API ID.
 	ApiId *string
 
 	// Identifies the status of an association.
-	// - PROCESSING: The API association is
-	// being created. You cannot modify association requests during processing.
-	// -
-	// SUCCESS: The API association was successful. You can modify associations after
-	// success.
-	// - FAILED: The API association has failed. You can modify associations
-	// after failure.
+	//     - PROCESSING: The API association is being created. You cannot modify association requests during processing.
+	//     - SUCCESS: The API association was successful. You can modify associations after success.
+	//     - FAILED: The API association has failed. You can modify associations after failure.
 	AssociationStatus AssociationStatus
 
 	// Details about the last deployment status.
@@ -50,13 +46,12 @@ type ApiAssociation struct {
 	noSmithyDocumentSerde
 }
 
-// The ApiCache object.
+// The ApiCache  object.
 type ApiCache struct {
 
 	// Caching behavior.
-	// - FULL_REQUEST_CACHING: All requests are fully cached.
-	// -
-	// PER_RESOLVER_CACHING: Individual resolvers that you specify are cached.
+	//     - FULL_REQUEST_CACHING: All requests are fully cached.
+	//     - PER_RESOLVER_CACHING: Individual resolvers that you specify are cached.
 	ApiCachingBehavior ApiCachingBehavior
 
 	// At-rest encryption flag for cache. You cannot update this setting after
@@ -64,49 +59,40 @@ type ApiCache struct {
 	AtRestEncryptionEnabled bool
 
 	// The cache instance status.
-	// - AVAILABLE: The instance is available for use.
-	// -
-	// CREATING: The instance is currently creating.
-	// - DELETING: The instance is
-	// currently deleting.
-	// - MODIFYING: The instance is currently modifying.
-	// - FAILED:
-	// The instance has failed creation.
+	//     - AVAILABLE: The instance is available for use.
+	//     - CREATING: The instance is currently creating.
+	//     - DELETING: The instance is currently deleting.
+	//     - MODIFYING: The instance is currently modifying.
+	//     - FAILED: The instance has failed creation.
 	Status ApiCacheStatus
 
-	// Transit encryption flag when connecting to cache. You cannot update this setting
-	// after creation.
+	// Transit encryption flag when connecting to cache. You cannot update this
+	// setting after creation.
 	TransitEncryptionEnabled bool
 
 	// TTL in seconds for cache entries. Valid values are 1–3,600 seconds.
 	Ttl int64
 
 	// The cache instance type. Valid values are
-	// - SMALL
-	// - MEDIUM
-	// - LARGE
-	// - XLARGE
-	// -
-	// LARGE_2X
-	// - LARGE_4X
-	// - LARGE_8X (not available in all regions)
-	// -
-	// LARGE_12X
-	//
-	// Historically, instance types were identified by an EC2-style value.
-	// As of July 2020, this is deprecated, and the generic identifiers above should be
-	// used. The following legacy instance types are available, but their use is
-	// discouraged:
-	// - T2_SMALL: A t2.small instance type.
-	// - T2_MEDIUM: A t2.medium
-	// instance type.
-	// - R4_LARGE: A r4.large instance type.
-	// - R4_XLARGE: A r4.xlarge
-	// instance type.
-	// - R4_2XLARGE: A r4.2xlarge instance type.
-	// - R4_4XLARGE: A
-	// r4.4xlarge instance type.
-	// - R4_8XLARGE: A r4.8xlarge instance type.
+	//     - SMALL
+	//     - MEDIUM
+	//     - LARGE
+	//     - XLARGE
+	//     - LARGE_2X
+	//     - LARGE_4X
+	//     - LARGE_8X (not available in all regions)
+	//     - LARGE_12X
+	// Historically, instance types were identified by an EC2-style
+	// value. As of July 2020, this is deprecated, and the generic identifiers above
+	// should be used. The following legacy instance types are available, but their use
+	// is discouraged:
+	//     - T2_SMALL: A t2.small instance type.
+	//     - T2_MEDIUM: A t2.medium instance type.
+	//     - R4_LARGE: A r4.large instance type.
+	//     - R4_XLARGE: A r4.xlarge instance type.
+	//     - R4_2XLARGE: A r4.2xlarge instance type.
+	//     - R4_4XLARGE: A r4.4xlarge instance type.
+	//     - R4_8XLARGE: A r4.8xlarge instance type.
 	Type ApiCacheType
 
 	noSmithyDocumentSerde
@@ -117,40 +103,24 @@ type ApiCache struct {
 // this version at launch in November 2017. These keys always expire after 7 days.
 // Amazon DynamoDB TTL manages key expiration. These keys ceased to be valid after
 // February 21, 2018, and they should no longer be used.
-// - ListApiKeys returns the
-// expiration time in milliseconds.
-// - CreateApiKey returns the expiration time in
-// milliseconds.
-// - UpdateApiKey is not available for this key version.
-// -
-// DeleteApiKey deletes the item from the table.
-// - Expiration is stored in DynamoDB
-// as milliseconds. This results in a bug where keys are not automatically deleted
-// because DynamoDB expects the TTL to be stored in seconds. As a one-time action,
-// we deleted these keys from the table on February 21, 2018.
+//   - ListApiKeys returns the expiration time in milliseconds.
+//   - CreateApiKey returns the expiration time in milliseconds.
+//   - UpdateApiKey is not available for this key version.
+//   - DeleteApiKey deletes the item from the table.
+//   - Expiration is stored in DynamoDB as milliseconds. This results in a bug where keys are not automatically deleted because DynamoDB expects the TTL to be stored in seconds. As a one-time action, we deleted these keys from the table on February 21, 2018.
 //
-// da2: We introduced
-// this version in February 2018 when AppSync added support to extend key
-// expiration.
-// - ListApiKeys returns the expiration time and deletion time in
-// seconds.
-// - CreateApiKey returns the expiration time and deletion time in seconds
-// and accepts a user-provided expiration time in seconds.
-// - UpdateApiKey returns
-// the expiration time and and deletion time in seconds and accepts a user-provided
-// expiration time in seconds. Expired API keys are kept for 60 days after the
-// expiration time. You can update the key expiration time as long as the key isn't
-// deleted.
-// - DeleteApiKey deletes the item from the table.
-// - Expiration is stored
-// in DynamoDB as seconds. After the expiration time, using the key to authenticate
-// will fail. However, you can reinstate the key before deletion.
-// - Deletion is
-// stored in DynamoDB as seconds. The key is deleted after deletion time.
+// da2: We introduced this version in February 2018 when AppSync added support to
+// extend key expiration.
+//   - ListApiKeys returns the expiration time and deletion time in seconds.
+//   - CreateApiKey returns the expiration time and deletion time in seconds and accepts a user-provided expiration time in seconds.
+//   - UpdateApiKey returns the expiration time and and deletion time in seconds and accepts a user-provided expiration time in seconds. Expired API keys are kept for 60 days after the expiration time. You can update the key expiration time as long as the key isn't deleted.
+//   - DeleteApiKey deletes the item from the table.
+//   - Expiration is stored in DynamoDB as seconds. After the expiration time, using the key to authenticate will fail. However, you can reinstate the key before deletion.
+//   - Deletion is stored in DynamoDB as seconds. The key is deleted after deletion time.
 type ApiKey struct {
 
-	// The time after which the API key is deleted. The date is represented as seconds
-	// since the epoch, rounded down to the nearest hour.
+	// The time after which the API key is deleted. The date is represented as
+	// seconds since the epoch, rounded down to the nearest hour.
 	Deletes int64
 
 	// A description of the purpose of the API key.
@@ -166,18 +136,20 @@ type ApiKey struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a runtime used by an Amazon Web Services AppSync pipeline resolver or
-// Amazon Web Services AppSync function. Specifies the name and version of the
+// Describes a runtime used by an Amazon Web Services AppSync pipeline resolver
+// or Amazon Web Services AppSync function. Specifies the name and version of the
 // runtime to use. Note that if a runtime is specified, code must also be
 // specified.
 type AppSyncRuntime struct {
 
-	// The name of the runtime to use. Currently, the only allowed value is APPSYNC_JS.
+	// The name  of the runtime to use. Currently, the only allowed value is
+	// APPSYNC_JS .
 	//
 	// This member is required.
 	Name RuntimeName
 
-	// The version of the runtime to use. Currently, the only allowed version is 1.0.0.
+	// The version  of the runtime to use. Currently, the only allowed version is
+	// 1.0.0 .
 	//
 	// This member is required.
 	RuntimeVersion *string
@@ -190,8 +162,7 @@ type AppSyncRuntime struct {
 type AuthorizationConfig struct {
 
 	// The authorization type that the HTTP endpoint requires.
-	// - AWS_IAM: The
-	// authorization type is Signature Version 4 (SigV4).
+	//     - AWS_IAM: The authorization type is Signature Version 4 (SigV4).
 	//
 	// This member is required.
 	AuthorizationType AuthorizationType
@@ -214,8 +185,8 @@ type AwsIamConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Provides further details for the reason behind the bad request. For reason type
-// CODE_ERROR, the detail will contain a list of code errors.
+// Provides further details for the reason behind the bad request. For reason
+// type CODE_ERROR , the detail will contain a list of code errors.
 type BadRequestDetail struct {
 
 	// Contains the list of errors in the request.
@@ -234,7 +205,7 @@ type CachingConfig struct {
 	Ttl int64
 
 	// The caching keys for a resolver that has caching activated. Valid values are
-	// entries from the $context.arguments, $context.source, and $context.identity
+	// entries from the $context.arguments , $context.source , and $context.identity
 	// maps.
 	CachingKeys []string
 
@@ -244,15 +215,15 @@ type CachingConfig struct {
 // Describes an AppSync error.
 type CodeError struct {
 
-	// The type of code error. Examples include, but aren't limited to: LINT_ERROR,
-	// PARSER_ERROR.
+	// The type of code error. Examples include, but aren't limited to: LINT_ERROR ,
+	// PARSER_ERROR .
 	ErrorType *string
 
 	// The line, column, and span location of the error in the code.
 	Location *CodeErrorLocation
 
 	// A user presentable error. Examples include, but aren't limited to: Parsing
-	// error: Unterminated string literal.
+	// error: Unterminated string literal .
 	Value *string
 
 	noSmithyDocumentSerde
@@ -261,13 +232,13 @@ type CodeError struct {
 // Describes the location of the error in a code sample.
 type CodeErrorLocation struct {
 
-	// The column number in the code. Defaults to 0 if unknown.
+	// The column number in the code. Defaults to 0  if unknown.
 	Column int32
 
-	// The line number in the code. Defaults to 0 if unknown.
+	// The line number in the code. Defaults to 0  if unknown.
 	Line int32
 
-	// The span/length of the error. Defaults to -1 if unknown.
+	// The span/length of the error. Defaults to -1  if unknown.
 	Span int32
 
 	noSmithyDocumentSerde
@@ -326,29 +297,20 @@ type DataSource struct {
 	// Relational database settings.
 	RelationalDatabaseConfig *RelationalDatabaseDataSourceConfig
 
-	// The Identity and Access Management (IAM) service role Amazon Resource Name (ARN)
-	// for the data source. The system assumes this role when accessing the data
+	// The Identity and Access Management (IAM) service role Amazon Resource Name
+	// (ARN) for the data source. The system assumes this role when accessing the data
 	// source.
 	ServiceRoleArn *string
 
 	// The type of the data source.
-	// - AWS_LAMBDA: The data source is an Lambda
-	// function.
-	// - AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.
-	// -
-	// AMAZON_ELASTICSEARCH: The data source is an Amazon OpenSearch Service domain.
-	// -
-	// AMAZON_OPENSEARCH_SERVICE: The data source is an Amazon OpenSearch Service
-	// domain.
-	// - AMAZON_EVENTBRIDGE: The data source is an Amazon EventBridge
-	// configuration.
-	// - NONE: There is no data source. Use this type when you want to
-	// invoke a GraphQL operation without connecting to a data source, such as when
-	// you're performing data transformation with resolvers or invoking a subscription
-	// from a mutation.
-	// - HTTP: The data source is an HTTP endpoint.
-	// -
-	// RELATIONAL_DATABASE: The data source is a relational database.
+	//     - AWS_LAMBDA: The data source is an Lambda function.
+	//     - AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.
+	//     - AMAZON_ELASTICSEARCH: The data source is an Amazon OpenSearch Service domain.
+	//     - AMAZON_OPENSEARCH_SERVICE: The data source is an Amazon OpenSearch Service domain.
+	//     - AMAZON_EVENTBRIDGE: The data source is an Amazon EventBridge configuration.
+	//     - NONE: There is no data source. Use this type when you want to invoke a GraphQL operation without connecting to a data source, such as when you're performing data transformation with resolvers or invoking a subscription from a mutation.
+	//     - HTTP: The data source is an HTTP endpoint.
+	//     - RELATIONAL_DATABASE: The data source is a relational database.
 	Type DataSourceType
 
 	noSmithyDocumentSerde
@@ -381,7 +343,7 @@ type DomainNameConfig struct {
 	// certificate.
 	CertificateArn *string
 
-	// A description of the DomainName configuration.
+	// A description of the DomainName  configuration.
 	Description *string
 
 	// The domain name.
@@ -406,7 +368,7 @@ type DynamodbDataSourceConfig struct {
 	// This member is required.
 	TableName *string
 
-	// The DeltaSyncConfig for a versioned data source.
+	// The DeltaSyncConfig  for a versioned data source.
 	DeltaSyncConfig *DeltaSyncConfig
 
 	// Set to TRUE to use Amazon Cognito credentials with this data source.
@@ -418,8 +380,8 @@ type DynamodbDataSourceConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an OpenSearch data source configuration. As of September 2021, Amazon
-// Elasticsearch service is Amazon OpenSearch Service. This configuration is
+// Describes an OpenSearch data source configuration. As of September 2021,
+// Amazon Elasticsearch service is Amazon OpenSearch Service. This configuration is
 // deprecated. For new data sources, use OpenSearchServiceDataSourceConfig to
 // specify an OpenSearch data source.
 type ElasticsearchDataSourceConfig struct {
@@ -437,8 +399,8 @@ type ElasticsearchDataSourceConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the list of errors generated. When using JavaScript, this will apply to
-// the request or response function evaluation.
+// Contains the list of errors generated. When using JavaScript, this will apply
+// to the request or response function evaluation.
 type ErrorDetail struct {
 
 	// The error payload.
@@ -450,7 +412,7 @@ type ErrorDetail struct {
 // Contains the list of errors from a code evaluation response.
 type EvaluateCodeErrorDetail struct {
 
-	// Contains the list of CodeError objects.
+	// Contains the list of CodeError  objects.
 	CodeErrors []CodeError
 
 	// The error payload.
@@ -463,8 +425,8 @@ type EvaluateCodeErrorDetail struct {
 type EventBridgeDataSourceConfig struct {
 
 	// The ARN of the event bus. For more information about event buses, see Amazon
-	// EventBridge event buses
-	// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus.html).
+	// EventBridge event buses (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus.html)
+	// .
 	//
 	// This member is required.
 	EventBusArn *string
@@ -476,20 +438,20 @@ type EventBridgeDataSourceConfig struct {
 // resolver logic.
 type FunctionConfiguration struct {
 
-	// The function code that contains the request and response functions. When code is
-	// used, the runtime is required. The runtime value must be APPSYNC_JS.
+	// The function code that contains the request and response functions. When code
+	// is used, the runtime  is required. The runtime  value must be APPSYNC_JS .
 	Code *string
 
-	// The name of the DataSource.
+	// The name of the DataSource .
 	DataSourceName *string
 
-	// The Function description.
+	// The Function  description.
 	Description *string
 
-	// The Amazon Resource Name (ARN) of the Function object.
+	// The Amazon Resource Name (ARN) of the Function  object.
 	FunctionArn *string
 
-	// A unique ID representing the Function object.
+	// A unique ID representing the Function  object.
 	FunctionId *string
 
 	// The version of the request mapping template. Currently, only the 2018-05-29
@@ -499,18 +461,18 @@ type FunctionConfiguration struct {
 	// The maximum batching size for a resolver.
 	MaxBatchSize int32
 
-	// The name of the Function object.
+	// The name of the Function  object.
 	Name *string
 
 	// The Function request mapping template. Functions support only the 2018-05-29
 	// version of the request mapping template.
 	RequestMappingTemplate *string
 
-	// The Function response mapping template.
+	// The Function  response mapping template.
 	ResponseMappingTemplate *string
 
-	// Describes a runtime used by an Amazon Web Services AppSync pipeline resolver or
-	// Amazon Web Services AppSync function. Specifies the name and version of the
+	// Describes a runtime used by an Amazon Web Services AppSync pipeline resolver
+	// or Amazon Web Services AppSync function. Specifies the name and version of the
 	// runtime to use. Note that if a runtime is specified, code must also be
 	// specified.
 	Runtime *AppSyncRuntime
@@ -525,7 +487,7 @@ type FunctionConfiguration struct {
 // Describes a GraphQL API.
 type GraphqlApi struct {
 
-	// A list of additional authentication providers for the GraphqlApi API.
+	// A list of additional authentication providers for the GraphqlApi  API.
 	AdditionalAuthenticationProviders []AdditionalAuthenticationProvider
 
 	// The API ID.
@@ -558,11 +520,11 @@ type GraphqlApi struct {
 	// The Amazon Cognito user pool configuration.
 	UserPoolConfig *UserPoolConfig
 
-	// The ARN of the WAF access control list (ACL) associated with this GraphqlApi, if
-	// one exists.
+	// The ARN of the WAF access control list (ACL) associated with this GraphqlApi,
+	// if one exists.
 	WafWebAclArn *string
 
-	// A flag indicating whether to use X-Ray tracing for this GraphqlApi.
+	// A flag indicating whether to use X-Ray tracing for this GraphqlApi .
 	XrayEnabled bool
 
 	noSmithyDocumentSerde
@@ -585,25 +547,25 @@ type HttpDataSourceConfig struct {
 }
 
 // A LambdaAuthorizerConfig specifies how to authorize AppSync API access when
-// using the AWS_LAMBDA authorizer mode. Be aware that an AppSync API can have only
-// one Lambda authorizer configured at a time.
+// using the AWS_LAMBDA authorizer mode. Be aware that an AppSync API can have
+// only one Lambda authorizer configured at a time.
 type LambdaAuthorizerConfig struct {
 
 	// The Amazon Resource Name (ARN) of the Lambda function to be called for
-	// authorization. This can be a standard Lambda ARN, a version ARN (.../v3), or an
-	// alias ARN. Note: This Lambda function must have the following resource-based
+	// authorization. This can be a standard Lambda ARN, a version ARN ( .../v3), or
+	// an alias ARN. Note: This Lambda function must have the following resource-based
 	// policy assigned to it. When configuring Lambda authorizers in the console, this
-	// is done for you. To use the Command Line Interface (CLI), run the following: aws
-	// lambda add-permission --function-name
+	// is done for you. To use the Command Line Interface (CLI), run the following:
+	// aws lambda add-permission --function-name
 	// "arn:aws:lambda:us-east-2:111122223333:function:my-function" --statement-id
 	// "appsync" --principal appsync.amazonaws.com --action lambda:InvokeFunction
 	//
 	// This member is required.
 	AuthorizerUri *string
 
-	// The number of seconds a response should be cached for. The default is 5 minutes
-	// (300 seconds). The Lambda function can override this by returning a ttlOverride
-	// key in its response. A value of 0 disables caching of responses.
+	// The number of seconds a response should be cached for. The default is 5
+	// minutes (300 seconds). The Lambda function can override this by returning a
+	// ttlOverride key in its response. A value of 0 disables caching of responses.
 	AuthorizerResultTtlInSeconds int32
 
 	// A regular expression for validation of tokens before the Lambda function is
@@ -613,8 +575,8 @@ type LambdaAuthorizerConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The LambdaConflictHandlerConfig object when configuring LAMBDA as the Conflict
-// Handler.
+// The LambdaConflictHandlerConfig  object when configuring LAMBDA as the
+// Conflict Handler.
 type LambdaConflictHandlerConfig struct {
 
 	// The Amazon Resource Name (ARN) for the Lambda function to use as the Conflict
@@ -645,21 +607,14 @@ type LogConfig struct {
 	CloudWatchLogsRoleArn *string
 
 	// The field logging level. Values can be NONE, ERROR, or ALL.
-	// - NONE: No
-	// field-level logs are captured.
-	// - ERROR: Logs the following information only for
-	// the fields that are in error:
-	// - The error section in the server response.
-	// -
-	// Field-level errors.
-	// - The generated request/response functions that got resolved
-	// for error fields.
-	//
-	// - ALL: The following information is logged for all fields in
-	// the query:
-	// - Field-level tracing information.
-	// - The generated request/response
-	// functions that got resolved for each field.
+	//     - NONE: No field-level logs are captured.
+	//     - ERROR: Logs the following information only for the fields that are in error:
+	//         - The error section in the server response.
+	//         - Field-level errors.
+	//         - The generated request/response functions that got resolved for error fields.
+	//     - ALL: The following information is logged for all fields in the query:
+	//         - Field-level tracing information.
+	//         - The generated request/response functions that got resolved for each field.
 	//
 	// This member is required.
 	FieldLogLevel FieldLogLevel
@@ -675,7 +630,7 @@ type LogConfig struct {
 type OpenIDConnectConfig struct {
 
 	// The issuer for the OIDC configuration. The issuer returned by discovery must
-	// exactly match the value of iss in the ID token.
+	// exactly match the value of iss  in the ID token.
 	//
 	// This member is required.
 	Issuer *string
@@ -683,10 +638,10 @@ type OpenIDConnectConfig struct {
 	// The number of milliseconds that a token is valid after being authenticated.
 	AuthTTL int64
 
-	// The client identifier of the relying party at the OpenID identity provider. This
-	// identifier is typically obtained when the relying party is registered with the
-	// OpenID identity provider. You can specify a regular expression so that AppSync
-	// can validate against multiple client identifiers at a time.
+	// The client identifier of the relying party at the OpenID identity provider.
+	// This identifier is typically obtained when the relying party is registered with
+	// the OpenID identity provider. You can specify a regular expression so that
+	// AppSync can validate against multiple client identifiers at a time.
 	ClientId *string
 
 	// The number of milliseconds that a token is valid after it's issued to a user.
@@ -711,16 +666,17 @@ type OpenSearchServiceDataSourceConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The pipeline configuration for a resolver of kind PIPELINE.
+// The pipeline configuration for a resolver of kind PIPELINE .
 type PipelineConfig struct {
 
-	// A list of Function objects.
+	// A list of Function  objects.
 	Functions []string
 
 	noSmithyDocumentSerde
 }
 
-// The Amazon Relational Database Service (Amazon RDS) HTTP endpoint configuration.
+// The Amazon Relational Database Service (Amazon RDS) HTTP endpoint
+// configuration.
 type RdsHttpEndpointConfig struct {
 
 	// Amazon Web Services Region for Amazon RDS HTTP endpoint.
@@ -749,9 +705,7 @@ type RelationalDatabaseDataSourceConfig struct {
 	RdsHttpEndpointConfig *RdsHttpEndpointConfig
 
 	// Source type for the relational database.
-	// - RDS_HTTP_ENDPOINT: The relational
-	// database source type is an Amazon Relational Database Service (Amazon RDS) HTTP
-	// endpoint.
+	//     - RDS_HTTP_ENDPOINT: The relational database source type is an Amazon Relational Database Service (Amazon RDS) HTTP endpoint.
 	RelationalDatabaseSourceType RelationalDatabaseSourceType
 
 	noSmithyDocumentSerde
@@ -763,8 +717,8 @@ type Resolver struct {
 	// The caching configuration for the resolver.
 	CachingConfig *CachingConfig
 
-	// The resolver code that contains the request and response functions. When code is
-	// used, the runtime is required. The runtime value must be APPSYNC_JS.
+	// The resolver code that contains the request and response functions. When code
+	// is used, the runtime  is required. The runtime  value must be APPSYNC_JS .
 	Code *string
 
 	// The resolver data source name.
@@ -774,18 +728,14 @@ type Resolver struct {
 	FieldName *string
 
 	// The resolver type.
-	// - UNIT: A UNIT resolver type. A UNIT resolver is the default
-	// resolver type. You can use a UNIT resolver to run a GraphQL query against a
-	// single data source.
-	// - PIPELINE: A PIPELINE resolver type. You can use a PIPELINE
-	// resolver to invoke a series of Function objects in a serial manner. You can use
-	// a pipeline resolver to run a GraphQL query against multiple data sources.
+	//     - UNIT: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.
+	//     - PIPELINE: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of Function objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.
 	Kind ResolverKind
 
 	// The maximum batching size for a resolver.
 	MaxBatchSize int32
 
-	// The PipelineConfig.
+	// The PipelineConfig .
 	PipelineConfig *PipelineConfig
 
 	// The request mapping template.
@@ -797,13 +747,13 @@ type Resolver struct {
 	// The response mapping template.
 	ResponseMappingTemplate *string
 
-	// Describes a runtime used by an Amazon Web Services AppSync pipeline resolver or
-	// Amazon Web Services AppSync function. Specifies the name and version of the
+	// Describes a runtime used by an Amazon Web Services AppSync pipeline resolver
+	// or Amazon Web Services AppSync function. Specifies the name and version of the
 	// runtime to use. Note that if a runtime is specified, code must also be
 	// specified.
 	Runtime *AppSyncRuntime
 
-	// The SyncConfig for a resolver attached to a versioned data source.
+	// The SyncConfig  for a resolver attached to a versioned data source.
 	SyncConfig *SyncConfig
 
 	// The resolver type name.
@@ -817,23 +767,18 @@ type Resolver struct {
 type SyncConfig struct {
 
 	// The Conflict Detection strategy to use.
-	// - VERSION: Detect conflicts based on
-	// object versions for this resolver.
-	// - NONE: Do not detect conflicts when invoking
-	// this resolver.
+	//     - VERSION: Detect conflicts based on object versions for this resolver.
+	//     - NONE: Do not detect conflicts when invoking this resolver.
 	ConflictDetection ConflictDetectionType
 
 	// The Conflict Resolution strategy to perform in the event of a conflict.
-	// -
-	// OPTIMISTIC_CONCURRENCY: Resolve conflicts by rejecting mutations when versions
-	// don't match the latest version at the server.
-	// - AUTOMERGE: Resolve conflicts
-	// with the Automerge conflict resolution strategy.
-	// - LAMBDA: Resolve conflicts
-	// with an Lambda function supplied in the LambdaConflictHandlerConfig.
+	//     - OPTIMISTIC_CONCURRENCY: Resolve conflicts by rejecting mutations when versions don't match the latest version at the server.
+	//     - AUTOMERGE: Resolve conflicts with the Automerge conflict resolution strategy.
+	//     - LAMBDA: Resolve conflicts with an Lambda function supplied in the LambdaConflictHandlerConfig .
 	ConflictHandler ConflictHandlerType
 
-	// The LambdaConflictHandlerConfig when configuring LAMBDA as the Conflict Handler.
+	// The LambdaConflictHandlerConfig  when configuring LAMBDA as the Conflict
+	// Handler.
 	LambdaConflictHandlerConfig *LambdaConflictHandlerConfig
 
 	noSmithyDocumentSerde

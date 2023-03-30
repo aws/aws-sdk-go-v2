@@ -35,9 +35,9 @@ type UpdateServiceActionInput struct {
 	Id *string
 
 	// The language code.
-	// - en - English (default)
-	// - jp - Japanese
-	// - zh - Chinese
+	//     - en - English (default)
+	//     - jp - Japanese
+	//     - zh - Chinese
 	AcceptLanguage *string
 
 	// A map that defines the self-service action.

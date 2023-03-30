@@ -34,10 +34,11 @@ type CreateDBProxyInput struct {
 	// This member is required.
 	Auth []types.UserAuthConfig
 
-	// The identifier for the proxy. This name must be unique for all proxies owned by
-	// your Amazon Web Services account in the specified Amazon Web Services Region. An
-	// identifier must begin with a letter and must contain only ASCII letters, digits,
-	// and hyphens; it can't end with a hyphen or contain two consecutive hyphens.
+	// The identifier for the proxy. This name must be unique for all proxies owned
+	// by your Amazon Web Services account in the specified Amazon Web Services Region.
+	// An identifier must begin with a letter and must contain only ASCII letters,
+	// digits, and hyphens; it can't end with a hyphen or contain two consecutive
+	// hyphens.
 	//
 	// This member is required.
 	DBProxyName *string
@@ -46,8 +47,8 @@ type CreateDBProxyInput struct {
 	// which database network protocol the proxy recognizes when it interprets network
 	// traffic to and from the database. For Aurora MySQL, RDS for MariaDB, and RDS for
 	// MySQL databases, specify MYSQL. For Aurora PostgreSQL and RDS for PostgreSQL
-	// databases, specify POSTGRESQL. For RDS for Microsoft SQL Server, specify
-	// SQLSERVER.
+	// databases, specify POSTGRESQL . For RDS for Microsoft SQL Server, specify
+	// SQLSERVER .
 	//
 	// This member is required.
 	EngineFamily types.EngineFamily
@@ -72,9 +73,9 @@ type CreateDBProxyInput struct {
 	// in the logs.
 	DebugLogging bool
 
-	// The number of seconds that a connection to the proxy can be inactive before the
-	// proxy disconnects it. You can set this value higher or lower than the connection
-	// timeout limit for the associated database.
+	// The number of seconds that a connection to the proxy can be inactive before
+	// the proxy disconnects it. You can set this value higher or lower than the
+	// connection timeout limit for the associated database.
 	IdleClientTimeout *int32
 
 	// A Boolean parameter that specifies whether Transport Layer Security (TLS)
@@ -82,8 +83,8 @@ type CreateDBProxyInput struct {
 	// you can enforce encrypted TLS connections to the proxy.
 	RequireTLS bool
 
-	// An optional set of key-value pairs to associate arbitrary data of your choosing
-	// with the proxy.
+	// An optional set of key-value pairs to associate arbitrary data of your
+	// choosing with the proxy.
 	Tags []types.Tag
 
 	// One or more VPC security group IDs to associate with the new proxy.
@@ -94,7 +95,7 @@ type CreateDBProxyInput struct {
 
 type CreateDBProxyOutput struct {
 
-	// The DBProxy structure corresponding to the new proxy.
+	// The DBProxy  structure corresponding to the new proxy.
 	DBProxy *types.DBProxy
 
 	// Metadata pertaining to the operation's result.

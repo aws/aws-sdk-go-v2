@@ -89,8 +89,8 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The operation did not succeed because the resource requested is not found in the
-// service.
+// The operation did not succeed because the resource requested is not found in
+// the service.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -119,8 +119,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation did not succeed because it would have exceeded a service limit for
-// your account.
+// The operation did not succeed because it would have exceeded a service limit
+// for your account.
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -149,7 +149,8 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation did not succeed because too many requests are sent to the service.
+// The operation did not succeed because too many requests are sent to the
+// service.
 type ThrottlingException struct {
 	Message *string
 

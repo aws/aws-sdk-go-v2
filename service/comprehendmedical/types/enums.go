@@ -179,8 +179,8 @@ const (
 	ICD10CMAttributeTypeTimeExpression  ICD10CMAttributeType = "TIME_EXPRESSION"
 )
 
-// Values returns all known values for ICD10CMAttributeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ICD10CMAttributeType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ICD10CMAttributeType) Values() []ICD10CMAttributeType {
 	return []ICD10CMAttributeType{
@@ -201,8 +201,8 @@ const (
 	ICD10CMEntityCategoryMedicalCondition ICD10CMEntityCategory = "MEDICAL_CONDITION"
 )
 
-// Values returns all known values for ICD10CMEntityCategory. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ICD10CMEntityCategory. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ICD10CMEntityCategory) Values() []ICD10CMEntityCategory {
 	return []ICD10CMEntityCategory{
@@ -236,9 +236,9 @@ const (
 	ICD10CMRelationshipTypeSystemOrganSite ICD10CMRelationshipType = "SYSTEM_ORGAN_SITE"
 )
 
-// Values returns all known values for ICD10CMRelationshipType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ICD10CMRelationshipType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ICD10CMRelationshipType) Values() []ICD10CMRelationshipType {
 	return []ICD10CMRelationshipType{
 		"OVERLAP",
@@ -287,9 +287,9 @@ const (
 	JobStatusStopped        JobStatus = "STOPPED"
 )
 
-// Values returns all known values for JobStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"SUBMITTED",
@@ -309,9 +309,9 @@ const (
 	LanguageCodeEn LanguageCode = "en"
 )
 
-// Values returns all known values for LanguageCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LanguageCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LanguageCode) Values() []LanguageCode {
 	return []LanguageCode{
 		"en",
@@ -407,8 +407,8 @@ const (
 	RxNormEntityCategoryMedication RxNormEntityCategory = "MEDICATION"
 )
 
-// Values returns all known values for RxNormEntityCategory. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RxNormEntityCategory. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RxNormEntityCategory) Values() []RxNormEntityCategory {
 	return []RxNormEntityCategory{
@@ -462,8 +462,8 @@ const (
 	SNOMEDCTAttributeTypeTestUnit        SNOMEDCTAttributeType = "TEST_UNIT"
 )
 
-// Values returns all known values for SNOMEDCTAttributeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SNOMEDCTAttributeType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SNOMEDCTAttributeType) Values() []SNOMEDCTAttributeType {
 	return []SNOMEDCTAttributeType{
@@ -530,9 +530,9 @@ const (
 	SNOMEDCTRelationshipTypeSystemOrganSite SNOMEDCTRelationshipType = "SYSTEM_ORGAN_SITE"
 )
 
-// Values returns all known values for SNOMEDCTRelationshipType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SNOMEDCTRelationshipType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SNOMEDCTRelationshipType) Values() []SNOMEDCTRelationshipType {
 	return []SNOMEDCTRelationshipType{
 		"ACUITY",

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a replication subnet group given a list of the subnet IDs in a VPC. The
-// VPC needs to have at least one subnet in at least two availability zones in the
-// Amazon Web Services Region, otherwise the service will throw a
+// Creates a replication subnet group given a list of the subnet IDs in a VPC.
+// The VPC needs to have at least one subnet in at least two availability zones in
+// the Amazon Web Services Region, otherwise the service will throw a
 // ReplicationSubnetGroupDoesNotCoverEnoughAZs exception.
 func (c *Client) CreateReplicationSubnetGroup(ctx context.Context, params *CreateReplicationSubnetGroupInput, optFns ...func(*Options)) (*CreateReplicationSubnetGroupOutput, error) {
 	if params == nil {

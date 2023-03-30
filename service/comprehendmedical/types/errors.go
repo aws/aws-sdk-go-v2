@@ -114,8 +114,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Comprehend Medical; service is temporarily unavailable. Please wait and then
-// retry your request.
+// The Comprehend Medical; service is temporarily unavailable. Please wait and
+// then retry your request.
 type ServiceUnavailableException struct {
 	Message *string
 
@@ -168,8 +168,8 @@ func (e *TextSizeLimitExceededException) ErrorCode() string {
 }
 func (e *TextSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have made too many requests within a short period of time. Wait for a short
-// time and then try your request again. Contact customer support for more
+// You have made too many requests within a short period of time. Wait for a
+// short time and then try your request again. Contact customer support for more
 // information about a service limit increase.
 type TooManyRequestsException struct {
 	Message *string

@@ -121,8 +121,8 @@ func (c *Client) addOperationDescribeJobLogItemsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeJobLogItemsAPIClient is a client that implements the DescribeJobLogItems
-// operation.
+// DescribeJobLogItemsAPIClient is a client that implements the
+// DescribeJobLogItems operation.
 type DescribeJobLogItemsAPIClient interface {
 	DescribeJobLogItems(context.Context, *DescribeJobLogItemsInput, ...func(*Options)) (*DescribeJobLogItemsOutput, error)
 }
@@ -135,8 +135,8 @@ type DescribeJobLogItemsPaginatorOptions struct {
 	// Maximum number of Job log items to retrieve.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

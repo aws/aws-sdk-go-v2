@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the IPSet specified by the ipSetId.
+// Retrieves the IPSet specified by the ipSetId .
 func (c *Client) GetIPSet(ctx context.Context, params *GetIPSetInput, optFns ...func(*Options)) (*GetIPSetOutput, error) {
 	if params == nil {
 		params = &GetIPSetInput{}

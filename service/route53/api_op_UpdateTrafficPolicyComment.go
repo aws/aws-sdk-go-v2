@@ -27,8 +27,8 @@ func (c *Client) UpdateTrafficPolicyComment(ctx context.Context, params *UpdateT
 	return out, nil
 }
 
-// A complex type that contains information about the traffic policy that you want
-// to update the comment for.
+// A complex type that contains information about the traffic policy that you
+// want to update the comment for.
 type UpdateTrafficPolicyCommentInput struct {
 
 	// The new comment for the specified traffic policy and version.
@@ -36,13 +36,13 @@ type UpdateTrafficPolicyCommentInput struct {
 	// This member is required.
 	Comment *string
 
-	// The value of Id for the traffic policy that you want to update the comment for.
+	// The value of Id  for the traffic policy that you want to update the comment for.
 	//
 	// This member is required.
 	Id *string
 
-	// The value of Version for the traffic policy that you want to update the comment
-	// for.
+	// The value of Version for the traffic policy that you want to update the
+	// comment for.
 	//
 	// This member is required.
 	Version *int32

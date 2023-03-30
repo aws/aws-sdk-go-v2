@@ -12,7 +12,7 @@ import (
 
 // Disassociates an attribute group from an application to remove the extra
 // attributes contained in the attribute group from the application's metadata.
-// This operation reverts AssociateAttributeGroup.
+// This operation reverts AssociateAttributeGroup .
 func (c *Client) DisassociateAttributeGroup(ctx context.Context, params *DisassociateAttributeGroupInput, optFns ...func(*Options)) (*DisassociateAttributeGroupOutput, error) {
 	if params == nil {
 		params = &DisassociateAttributeGroupInput{}

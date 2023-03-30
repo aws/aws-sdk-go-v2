@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified cache parameter group. You cannot delete a cache parameter
-// group if it is associated with any cache clusters. You cannot delete the default
-// cache parameter groups in your account.
+// Deletes the specified cache parameter group. You cannot delete a cache
+// parameter group if it is associated with any cache clusters. You cannot delete
+// the default cache parameter groups in your account.
 func (c *Client) DeleteCacheParameterGroup(ctx context.Context, params *DeleteCacheParameterGroupInput, optFns ...func(*Options)) (*DeleteCacheParameterGroupOutput, error) {
 	if params == nil {
 		params = &DeleteCacheParameterGroupInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteCacheParameterGroup(ctx context.Context, params *DeleteCa
 	return out, nil
 }
 
-// Represents the input of a DeleteCacheParameterGroup operation.
+// Represents the input of a DeleteCacheParameterGroup  operation.
 type DeleteCacheParameterGroupInput struct {
 
 	// The name of the cache parameter group to delete. The specified cache security

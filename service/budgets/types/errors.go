@@ -111,8 +111,8 @@ func (e *ExpiredNextTokenException) ErrorCode() string {
 }
 func (e *ExpiredNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An error on the server occurred during the processing of your request. Try again
-// later.
+// An error on the server occurred during the processing of your request. Try
+// again later.
 type InternalErrorException struct {
 	Message *string
 
@@ -164,7 +164,8 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An error on the client occurred. Typically, the cause is an invalid input value.
+// An error on the client occurred. Typically, the cause is an invalid input
+// value.
 type InvalidParameterException struct {
 	Message *string
 

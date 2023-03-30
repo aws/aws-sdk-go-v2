@@ -30,9 +30,9 @@ const (
 	AccountTypeEnterpriseOIDC      AccountType = "EnterpriseOIDC"
 )
 
-// Values returns all known values for AccountType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AccountType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AccountType) Values() []AccountType {
 	return []AccountType{
 		"Team",
@@ -86,9 +86,9 @@ const (
 	AudioMuxTypeAudioWithActiveSpeakerVideo AudioMuxType = "AudioWithActiveSpeakerVideo"
 )
 
-// Values returns all known values for AudioMuxType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AudioMuxType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AudioMuxType) Values() []AudioMuxType {
 	return []AudioMuxType{
 		"AudioOnly",
@@ -160,8 +160,8 @@ const (
 	ChannelMembershipTypeHidden  ChannelMembershipType = "HIDDEN"
 )
 
-// Values returns all known values for ChannelMembershipType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ChannelMembershipType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ChannelMembershipType) Values() []ChannelMembershipType {
 	return []ChannelMembershipType{
@@ -215,9 +215,9 @@ const (
 	ChannelModeRestricted   ChannelMode = "RESTRICTED"
 )
 
-// Values returns all known values for ChannelMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChannelMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ChannelMode) Values() []ChannelMode {
 	return []ChannelMode{
 		"UNRESTRICTED",
@@ -268,9 +268,9 @@ const (
 	EmailStatusFailed  EmailStatus = "Failed"
 )
 
-// Values returns all known values for EmailStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EmailStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (EmailStatus) Values() []EmailStatus {
 	return []EmailStatus{
 		"NotSent",
@@ -300,9 +300,9 @@ const (
 	ErrorCodePhoneNumberAssociationsExist         ErrorCode = "PhoneNumberAssociationsExist"
 )
 
-// Values returns all known values for ErrorCode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"BadRequest",
@@ -350,9 +350,9 @@ const (
 	InviteStatusFailed   InviteStatus = "Failed"
 )
 
-// Values returns all known values for InviteStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InviteStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (InviteStatus) Values() []InviteStatus {
 	return []InviteStatus{
 		"Pending",
@@ -390,8 +390,8 @@ const (
 	MediaPipelineSinkTypeS3Bucket MediaPipelineSinkType = "S3Bucket"
 )
 
-// Values returns all known values for MediaPipelineSinkType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for MediaPipelineSinkType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (MediaPipelineSinkType) Values() []MediaPipelineSinkType {
 	return []MediaPipelineSinkType{
@@ -406,9 +406,9 @@ const (
 	MediaPipelineSourceTypeChimeSdkMeeting MediaPipelineSourceType = "ChimeSdkMeeting"
 )
 
-// Values returns all known values for MediaPipelineSourceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MediaPipelineSourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MediaPipelineSourceType) Values() []MediaPipelineSourceType {
 	return []MediaPipelineSourceType{
 		"ChimeSdkMeeting",
@@ -487,9 +487,9 @@ const (
 	NumberSelectionBehaviorAvoidSticky  NumberSelectionBehavior = "AvoidSticky"
 )
 
-// Values returns all known values for NumberSelectionBehavior. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NumberSelectionBehavior. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NumberSelectionBehavior) Values() []NumberSelectionBehavior {
 	return []NumberSelectionBehavior{
 		"PreferSticky",
@@ -506,9 +506,9 @@ const (
 	OrderedPhoneNumberStatusFailed     OrderedPhoneNumberStatus = "Failed"
 )
 
-// Values returns all known values for OrderedPhoneNumberStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OrderedPhoneNumberStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrderedPhoneNumberStatus) Values() []OrderedPhoneNumberStatus {
 	return []OrderedPhoneNumberStatus{
 		"Processing",
@@ -525,9 +525,9 @@ const (
 	OriginationRouteProtocolUdp OriginationRouteProtocol = "UDP"
 )
 
-// Values returns all known values for OriginationRouteProtocol. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OriginationRouteProtocol. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OriginationRouteProtocol) Values() []OriginationRouteProtocol {
 	return []OriginationRouteProtocol{
 		"TCP",
@@ -733,9 +733,9 @@ const (
 	SortOrderDescending SortOrder = "DESCENDING"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
@@ -822,10 +822,10 @@ const (
 	TranscribeMedicalContentIdentificationTypePhi TranscribeMedicalContentIdentificationType = "PHI"
 )
 
-// Values returns all known values for TranscribeMedicalContentIdentificationType.
-// Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for
+// TranscribeMedicalContentIdentificationType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (TranscribeMedicalContentIdentificationType) Values() []TranscribeMedicalContentIdentificationType {
 	return []TranscribeMedicalContentIdentificationType{
 		"PHI",
@@ -862,9 +862,9 @@ const (
 	TranscribeMedicalRegionAuto         TranscribeMedicalRegion = "auto"
 )
 
-// Values returns all known values for TranscribeMedicalRegion. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TranscribeMedicalRegion. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TranscribeMedicalRegion) Values() []TranscribeMedicalRegion {
 	return []TranscribeMedicalRegion{
 		"us-east-1",
@@ -911,8 +911,8 @@ const (
 	TranscribeMedicalTypeDictation    TranscribeMedicalType = "DICTATION"
 )
 
-// Values returns all known values for TranscribeMedicalType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TranscribeMedicalType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TranscribeMedicalType) Values() []TranscribeMedicalType {
 	return []TranscribeMedicalType{
@@ -930,8 +930,8 @@ const (
 	TranscribePartialResultsStabilityHigh   TranscribePartialResultsStability = "high"
 )
 
-// Values returns all known values for TranscribePartialResultsStability. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for TranscribePartialResultsStability. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (TranscribePartialResultsStability) Values() []TranscribePartialResultsStability {
@@ -989,8 +989,8 @@ const (
 	TranscribeVocabularyFilterMethodTag    TranscribeVocabularyFilterMethod = "tag"
 )
 
-// Values returns all known values for TranscribeVocabularyFilterMethod. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for TranscribeVocabularyFilterMethod. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (TranscribeVocabularyFilterMethod) Values() []TranscribeVocabularyFilterMethod {
@@ -1009,9 +1009,9 @@ const (
 	UserTypeSharedDevice UserType = "SharedDevice"
 )
 
-// Values returns all known values for UserType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for UserType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (UserType) Values() []UserType {
 	return []UserType{
 		"PrivateUser",
@@ -1026,9 +1026,9 @@ const (
 	VideoMuxTypeVideoOnly VideoMuxType = "VideoOnly"
 )
 
-// Values returns all known values for VideoMuxType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for VideoMuxType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (VideoMuxType) Values() []VideoMuxType {
 	return []VideoMuxType{
 		"VideoOnly",
@@ -1043,9 +1043,9 @@ const (
 	VoiceConnectorAwsRegionUsWest2 VoiceConnectorAwsRegion = "us-west-2"
 )
 
-// Values returns all known values for VoiceConnectorAwsRegion. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for VoiceConnectorAwsRegion. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VoiceConnectorAwsRegion) Values() []VoiceConnectorAwsRegion {
 	return []VoiceConnectorAwsRegion{
 		"us-east-1",

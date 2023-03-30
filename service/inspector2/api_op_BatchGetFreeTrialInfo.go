@@ -39,8 +39,8 @@ type BatchGetFreeTrialInfoInput struct {
 
 type BatchGetFreeTrialInfoOutput struct {
 
-	// An array of objects that provide Amazon Inspector free trial details for each of
-	// the requested accounts.
+	// An array of objects that provide Amazon Inspector free trial details for each
+	// of the requested accounts.
 	//
 	// This member is required.
 	Accounts []types.FreeTrialAccountInfo

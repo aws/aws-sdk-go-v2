@@ -18,8 +18,7 @@ import (
 // mirror, for example all TCP traffic. The Traffic Mirror source and the Traffic
 // Mirror target (monitoring appliances) can be in the same VPC, or in a different
 // VPC connected via VPC peering or a transit gateway. By default, no traffic is
-// mirrored. Use CreateTrafficMirrorFilter
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilter.htm)
+// mirrored. Use CreateTrafficMirrorFilter (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilter.htm)
 // to create filter rules that specify the traffic to mirror.
 func (c *Client) CreateTrafficMirrorSession(ctx context.Context, params *CreateTrafficMirrorSessionInput, optFns ...func(*Options)) (*CreateTrafficMirrorSessionOutput, error) {
 	if params == nil {
@@ -43,9 +42,9 @@ type CreateTrafficMirrorSessionInput struct {
 	// This member is required.
 	NetworkInterfaceId *string
 
-	// The session number determines the order in which sessions are evaluated when an
-	// interface is used by multiple sessions. The first session with a matching filter
-	// is the one that mirrors the packets. Valid values are 1-32766.
+	// The session number determines the order in which sessions are evaluated when
+	// an interface is used by multiple sessions. The first session with a matching
+	// filter is the one that mirrors the packets. Valid values are 1-32766.
 	//
 	// This member is required.
 	SessionNumber *int32
@@ -60,9 +59,9 @@ type CreateTrafficMirrorSessionInput struct {
 	// This member is required.
 	TrafficMirrorTargetId *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to ensure idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// .
 	ClientToken *string
 
 	// The description of the Traffic Mirror session.
@@ -70,8 +69,8 @@ type CreateTrafficMirrorSessionInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The number of bytes in each packet to mirror. These are bytes after the VXLAN
@@ -88,7 +87,7 @@ type CreateTrafficMirrorSessionInput struct {
 
 	// The VXLAN ID for the Traffic Mirror session. For more information about the
 	// VXLAN protocol, see RFC 7348 (https://tools.ietf.org/html/rfc7348). If you do
-	// not specify a VirtualNetworkId, an account-wide unique id is chosen at random.
+	// not specify a VirtualNetworkId , an account-wide unique id is chosen at random.
 	VirtualNetworkId *int32
 
 	noSmithyDocumentSerde
@@ -96,9 +95,9 @@ type CreateTrafficMirrorSessionInput struct {
 
 type CreateTrafficMirrorSessionOutput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to ensure idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// .
 	ClientToken *string
 
 	// Information about the Traffic Mirror session.

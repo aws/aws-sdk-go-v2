@@ -45,7 +45,8 @@ type DeleteUserEndpointsInput struct {
 
 type DeleteUserEndpointsOutput struct {
 
-	// Provides information about all the endpoints that are associated with a user ID.
+	// Provides information about all the endpoints that are associated with a user
+	// ID.
 	//
 	// This member is required.
 	EndpointsResponse *types.EndpointsResponse

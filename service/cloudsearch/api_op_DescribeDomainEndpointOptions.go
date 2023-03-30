@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the domain's endpoint options, specifically whether all requests to the
-// domain must arrive over HTTPS. For more information, see Configuring Domain
-// Endpoint Options
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html)
+// Returns the domain's endpoint options, specifically whether all requests to
+// the domain must arrive over HTTPS. For more information, see Configuring
+// Domain Endpoint Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DescribeDomainEndpointOptions(ctx context.Context, params *DescribeDomainEndpointOptionsInput, optFns ...func(*Options)) (*DescribeDomainEndpointOptionsOutput, error) {
 	if params == nil {
@@ -33,7 +32,7 @@ func (c *Client) DescribeDomainEndpointOptions(ctx context.Context, params *Desc
 
 // Container for the parameters to the DescribeDomainEndpointOptions operation.
 // Specify the name of the domain you want to describe. To show the active
-// configuration and exclude any pending changes, set the Deployed option to true.
+// configuration and exclude any pending changes, set the Deployed option to true .
 type DescribeDomainEndpointOptionsInput struct {
 
 	// A string that represents the name of a domain.
@@ -42,7 +41,7 @@ type DescribeDomainEndpointOptionsInput struct {
 	DomainName *string
 
 	// Whether to retrieve the latest configuration (which might be in a Processing
-	// state) or the current, active configuration. Defaults to false.
+	// state) or the current, active configuration. Defaults to false .
 	Deployed *bool
 
 	noSmithyDocumentSerde

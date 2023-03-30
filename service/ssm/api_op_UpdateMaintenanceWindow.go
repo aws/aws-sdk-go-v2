@@ -10,13 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing maintenance window. Only specified parameters are modified.
-// The value you specify for Duration determines the specific end time for the
-// maintenance window based on the time it begins. No maintenance window tasks are
-// permitted to start after the resulting endtime minus the number of hours you
-// specify for Cutoff. For example, if the maintenance window starts at 3 PM, the
-// duration is three hours, and the value you specify for Cutoff is one hour, no
-// maintenance window tasks can start after 5 PM.
+// Updates an existing maintenance window. Only specified parameters are
+// modified. The value you specify for Duration determines the specific end time
+// for the maintenance window based on the time it begins. No maintenance window
+// tasks are permitted to start after the resulting endtime minus the number of
+// hours you specify for Cutoff. For example, if the maintenance window starts at
+// 3 PM, the duration is three hours, and the value you specify for Cutoff is one
+// hour, no maintenance window tasks can start after 5 PM.
 func (c *Client) UpdateMaintenanceWindow(ctx context.Context, params *UpdateMaintenanceWindowInput, optFns ...func(*Options)) (*UpdateMaintenanceWindowOutput, error) {
 	if params == nil {
 		params = &UpdateMaintenanceWindowInput{}
@@ -39,8 +39,8 @@ type UpdateMaintenanceWindowInput struct {
 	// This member is required.
 	WindowId *string
 
-	// Whether targets must be registered with the maintenance window before tasks can
-	// be defined for those targets.
+	// Whether targets must be registered with the maintenance window before tasks
+	// can be defined for those targets.
 	AllowUnassociatedTargets *bool
 
 	// The number of hours before the end of the maintenance window that Amazon Web
@@ -57,37 +57,38 @@ type UpdateMaintenanceWindowInput struct {
 	Enabled *bool
 
 	// The date and time, in ISO-8601 Extended format, for when you want the
-	// maintenance window to become inactive. EndDate allows you to set a date and time
-	// in the future when the maintenance window will no longer run.
+	// maintenance window to become inactive. EndDate allows you to set a date and
+	// time in the future when the maintenance window will no longer run.
 	EndDate *string
 
 	// The name of the maintenance window.
 	Name *string
 
-	// If True, then all fields that are required by the CreateMaintenanceWindow
+	// If True , then all fields that are required by the CreateMaintenanceWindow
 	// operation are also required for this API request. Optional fields that aren't
 	// specified are set to null.
 	Replace *bool
 
-	// The schedule of the maintenance window in the form of a cron or rate expression.
+	// The schedule of the maintenance window in the form of a cron or rate
+	// expression.
 	Schedule *string
 
 	// The number of days to wait after the date and time specified by a cron
 	// expression before running the maintenance window. For example, the following
 	// cron expression schedules a maintenance window to run the third Tuesday of every
-	// month at 11:30 PM. cron(30 23 ? * TUE#3 *) If the schedule offset is 2, the
+	// month at 11:30 PM. cron(30 23 ? * TUE#3 *)  If the schedule offset is 2, the
 	// maintenance window won't run until two days later.
 	ScheduleOffset *int32
 
-	// The time zone that the scheduled maintenance window executions are based on, in
-	// Internet Assigned Numbers Authority (IANA) format. For example:
+	// The time zone that the scheduled maintenance window executions are based on,
+	// in Internet Assigned Numbers Authority (IANA) format. For example:
 	// "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the
 	// Time Zone Database (https://www.iana.org/time-zones) on the IANA website.
 	ScheduleTimezone *string
 
 	// The date and time, in ISO-8601 Extended format, for when you want the
-	// maintenance window to become active. StartDate allows you to delay activation of
-	// the maintenance window until the specified future date.
+	// maintenance window to become active. StartDate allows you to delay activation
+	// of the maintenance window until the specified future date.
 	StartDate *string
 
 	noSmithyDocumentSerde
@@ -95,8 +96,8 @@ type UpdateMaintenanceWindowInput struct {
 
 type UpdateMaintenanceWindowOutput struct {
 
-	// Whether targets must be registered with the maintenance window before tasks can
-	// be defined for those targets.
+	// Whether targets must be registered with the maintenance window before tasks
+	// can be defined for those targets.
 	AllowUnassociatedTargets bool
 
 	// The number of hours before the end of the maintenance window that Amazon Web
@@ -112,30 +113,31 @@ type UpdateMaintenanceWindowOutput struct {
 	// Whether the maintenance window is enabled.
 	Enabled bool
 
-	// The date and time, in ISO-8601 Extended format, for when the maintenance window
-	// is scheduled to become inactive. The maintenance window won't run after this
-	// specified time.
+	// The date and time, in ISO-8601 Extended format, for when the maintenance
+	// window is scheduled to become inactive. The maintenance window won't run after
+	// this specified time.
 	EndDate *string
 
 	// The name of the maintenance window.
 	Name *string
 
-	// The schedule of the maintenance window in the form of a cron or rate expression.
+	// The schedule of the maintenance window in the form of a cron or rate
+	// expression.
 	Schedule *string
 
-	// The number of days to wait to run a maintenance window after the scheduled cron
-	// expression date and time.
+	// The number of days to wait to run a maintenance window after the scheduled
+	// cron expression date and time.
 	ScheduleOffset *int32
 
-	// The time zone that the scheduled maintenance window executions are based on, in
-	// Internet Assigned Numbers Authority (IANA) format. For example:
+	// The time zone that the scheduled maintenance window executions are based on,
+	// in Internet Assigned Numbers Authority (IANA) format. For example:
 	// "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the
 	// Time Zone Database (https://www.iana.org/time-zones) on the IANA website.
 	ScheduleTimezone *string
 
-	// The date and time, in ISO-8601 Extended format, for when the maintenance window
-	// is scheduled to become active. The maintenance window won't run before this
-	// specified time.
+	// The date and time, in ISO-8601 Extended format, for when the maintenance
+	// window is scheduled to become active. The maintenance window won't run before
+	// this specified time.
 	StartDate *string
 
 	// The ID of the created maintenance window.

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets summary information about all your logging configurations in the AWS region
-// where the API request is processed.
+// Gets summary information about all your logging configurations in the AWS
+// region where the API request is processed.
 func (c *Client) ListLoggingConfigurations(ctx context.Context, params *ListLoggingConfigurationsInput, optFns ...func(*Options)) (*ListLoggingConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListLoggingConfigurationsInput{}
@@ -35,7 +35,7 @@ type ListLoggingConfigurationsInput struct {
 	MaxResults int32
 
 	// The first logging configurations to retrieve. This is used for pagination; see
-	// the nextToken response field.
+	// the nextToken  response field.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -43,15 +43,15 @@ type ListLoggingConfigurationsInput struct {
 
 type ListLoggingConfigurationsOutput struct {
 
-	// List of the matching logging configurations (summary information only). There is
-	// only one type of destination (cloudWatchLogs, firehose, or s3) in a
-	// destinationConfiguration.
+	// List of the matching logging configurations (summary information only). There
+	// is only one type of destination ( cloudWatchLogs , firehose , or s3 ) in a
+	// destinationConfiguration .
 	//
 	// This member is required.
 	LoggingConfigurations []types.LoggingConfigurationSummary
 
-	// If there are more logging configurations than maxResults, use nextToken in the
-	// request to get the next set.
+	// If there are more logging configurations than maxResults , use nextToken in
+	// the request to get the next set.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -134,8 +134,8 @@ type ListLoggingConfigurationsPaginatorOptions struct {
 	// Maximum number of logging configurations to return. Default: 50.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

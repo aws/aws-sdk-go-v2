@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a message template for messages that are sent through the voice channel.
+// Creates a message template for messages that are sent through the voice
+// channel.
 func (c *Client) CreateVoiceTemplate(ctx context.Context, params *CreateVoiceTemplateInput, optFns ...func(*Options)) (*CreateVoiceTemplateOutput, error) {
 	if params == nil {
 		params = &CreateVoiceTemplateInput{}

@@ -14,14 +14,13 @@ import (
 
 // Retrieves all available parent paths for any object type such as node, leaf
 // node, policy node, and index node objects. For more information about objects,
-// see Directory Structure
-// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html).
-// Use this API to evaluate all parents for an object. The call returns all objects
-// from the root of the directory up to the requested object. The API returns the
-// number of paths based on user-defined MaxResults, in case there are multiple
-// paths to the parent. The order of the paths and nodes returned is consistent
-// among multiple API calls unless the objects are deleted or moved. Paths not
-// leading to the directory root are ignored from the target object.
+// see Directory Structure (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html)
+// . Use this API to evaluate all parents for an object. The call returns all
+// objects from the root of the directory up to the requested object. The API
+// returns the number of paths based on user-defined MaxResults, in case there
+// are multiple paths to the parent. The order of the paths and nodes returned is
+// consistent among multiple API calls unless the objects are deleted or moved.
+// Paths not leading to the directory root are ignored from the target object.
 func (c *Client) ListObjectParentPaths(ctx context.Context, params *ListObjectParentPathsInput, optFns ...func(*Options)) (*ListObjectParentPathsOutput, error) {
 	if params == nil {
 		params = &ListObjectParentPathsInput{}
@@ -152,8 +151,8 @@ type ListObjectParentPathsPaginatorOptions struct {
 	// approximate number.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -11,15 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets details and status of a phone number that’s claimed to your Amazon Connect
-// instance or traffic distribution group. If the number is claimed to a traffic
-// distribution group, and you are calling in the Amazon Web Services Region where
-// the traffic distribution group was created, you can use either a phone number
-// ARN or UUID value for the PhoneNumberId URI request parameter. However, if the
-// number is claimed to a traffic distribution group and you are calling this API
-// in the alternate Amazon Web Services Region associated with the traffic
-// distribution group, you must provide a full phone number ARN. If a UUID is
-// provided in this scenario, you will receive a ResourceNotFoundException.
+// Gets details and status of a phone number that’s claimed to your Amazon
+// Connect instance or traffic distribution group. If the number is claimed to a
+// traffic distribution group, and you are calling in the Amazon Web Services
+// Region where the traffic distribution group was created, you can use either a
+// phone number ARN or UUID value for the PhoneNumberId URI request parameter.
+// However, if the number is claimed to a traffic distribution group and you are
+// calling this API in the alternate Amazon Web Services Region associated with the
+// traffic distribution group, you must provide a full phone number ARN. If a UUID
+// is provided in this scenario, you will receive a ResourceNotFoundException .
 func (c *Client) DescribePhoneNumber(ctx context.Context, params *DescribePhoneNumberInput, optFns ...func(*Options)) (*DescribePhoneNumberOutput, error) {
 	if params == nil {
 		params = &DescribePhoneNumberInput{}

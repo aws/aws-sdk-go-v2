@@ -30,14 +30,14 @@ func (c *Client) CreateLaunchProfile(ctx context.Context, params *CreateLaunchPr
 
 type CreateLaunchProfileInput struct {
 
-	// Specifies the IDs of the EC2 subnets where streaming sessions will be accessible
-	// from. These subnets must support the specified instance types.
+	// Specifies the IDs of the EC2 subnets where streaming sessions will be
+	// accessible from. These subnets must support the specified instance types.
 	//
 	// This member is required.
 	Ec2SubnetIds []string
 
-	// The version number of the protocol that is used by the launch profile. The only
-	// valid version is "2021-03-31".
+	// The version number of the protocol that is used by the launch profile. The
+	// only valid version is "2021-03-31".
 	//
 	// This member is required.
 	LaunchProfileProtocolVersions []string
@@ -63,8 +63,8 @@ type CreateLaunchProfileInput struct {
 	// This member is required.
 	StudioId *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. If you don’t specify a client token, the Amazon Web Services SDK
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
 	ClientToken *string

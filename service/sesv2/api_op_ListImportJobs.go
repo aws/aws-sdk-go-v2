@@ -33,7 +33,7 @@ func (c *Client) ListImportJobs(ctx context.Context, params *ListImportJobsInput
 type ListImportJobsInput struct {
 
 	// The destination of the import job, which can be used to list import jobs that
-	// have a certain ImportDestinationType.
+	// have a certain ImportDestinationType .
 	ImportDestinationType types.ImportDestinationType
 
 	// A string token indicating that there might be additional import jobs available
@@ -41,17 +41,17 @@ type ListImportJobsInput struct {
 	// same parameters to retrieve the next page of import jobs.
 	NextToken *string
 
-	// Maximum number of import jobs to return at once. Use this parameter to paginate
-	// results. If additional import jobs exist beyond the specified limit, the
-	// NextToken element is sent in the response. Use the NextToken value in subsequent
-	// requests to retrieve additional addresses.
+	// Maximum number of import jobs to return at once. Use this parameter to
+	// paginate results. If additional import jobs exist beyond the specified limit,
+	// the NextToken  element is sent in the response. Use the NextToken value in
+	// subsequent requests to retrieve additional addresses.
 	PageSize *int32
 
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type ListImportJobsOutput struct {
 
 	// A list of the import job summaries.
@@ -138,14 +138,14 @@ var _ ListImportJobsAPIClient = (*Client)(nil)
 
 // ListImportJobsPaginatorOptions is the paginator options for ListImportJobs
 type ListImportJobsPaginatorOptions struct {
-	// Maximum number of import jobs to return at once. Use this parameter to paginate
-	// results. If additional import jobs exist beyond the specified limit, the
-	// NextToken element is sent in the response. Use the NextToken value in subsequent
-	// requests to retrieve additional addresses.
+	// Maximum number of import jobs to return at once. Use this parameter to
+	// paginate results. If additional import jobs exist beyond the specified limit,
+	// the NextToken  element is sent in the response. Use the NextToken value in
+	// subsequent requests to retrieve additional addresses.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

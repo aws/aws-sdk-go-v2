@@ -36,13 +36,13 @@ type UpdateMonitorInput struct {
 	// This member is required.
 	MonitorName *string
 
-	// A unique, case-sensitive string of up to 64 ASCII characters that you specify to
-	// make an idempotent API request. You should not reuse the same client token for
-	// other API requests.
+	// A unique, case-sensitive string of up to 64 ASCII characters that you specify
+	// to make an idempotent API request. You should not reuse the same client token
+	// for other API requests.
 	ClientToken *string
 
-	// The maximum number of city-network combinations (that is, combinations of a city
-	// location and network, such as an ISP) to be monitored for your resources.
+	// The maximum number of city-network combinations (that is, combinations of a
+	// city location and network, such as an ISP) to be monitored for your resources.
 	MaxCityNetworksToMonitor int32
 
 	// The resources to include in a monitor, which you provide as a set of Amazon
@@ -57,9 +57,9 @@ type UpdateMonitorInput struct {
 	// Resource Names (ARNs).
 	ResourcesToRemove []string
 
-	// The status for a monitor. The accepted values for Status with the UpdateMonitor
-	// API call are the following: ACTIVE and INACTIVE. The following values are not
-	// accepted: PENDING, and ERROR.
+	// The status for a monitor. The accepted values for Status  with the
+	// UpdateMonitor API call are the following: ACTIVE  and INACTIVE. The following
+	// values are not accepted: PENDING , and ERROR .
 	Status types.MonitorConfigState
 
 	noSmithyDocumentSerde

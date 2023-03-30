@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the S3 Intelligent-Tiering configuration from the specified bucket. The S3
-// Intelligent-Tiering storage class is designed to optimize storage costs by
+// Lists the S3 Intelligent-Tiering configuration from the specified bucket. The
+// S3 Intelligent-Tiering storage class is designed to optimize storage costs by
 // automatically moving data to the most cost-effective storage access tier,
 // without performance impact or operational overhead. S3 Intelligent-Tiering
 // delivers automatic cost savings in three low latency and high throughput access
@@ -25,18 +25,11 @@ import (
 // monitored and not eligible for auto-tiering. Smaller objects can be stored, but
 // they are always charged at the Frequent Access tier rates in the S3
 // Intelligent-Tiering storage class. For more information, see Storage class for
-// automatically optimizing frequently and infrequently accessed objects
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access).
-// Operations related to ListBucketIntelligentTieringConfigurations include:
-// -
-// DeleteBucketIntelligentTieringConfiguration
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html)
-// -
-// PutBucketIntelligentTieringConfiguration
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html)
-// -
-// GetBucketIntelligentTieringConfiguration
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html)
+// automatically optimizing frequently and infrequently accessed objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access)
+// . Operations related to ListBucketIntelligentTieringConfigurations  include:
+//   - DeleteBucketIntelligentTieringConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html)
+//   - PutBucketIntelligentTieringConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html)
+//   - GetBucketIntelligentTieringConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html)
 func (c *Client) ListBucketIntelligentTieringConfigurations(ctx context.Context, params *ListBucketIntelligentTieringConfigurationsInput, optFns ...func(*Options)) (*ListBucketIntelligentTieringConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListBucketIntelligentTieringConfigurationsInput{}
@@ -77,13 +70,14 @@ type ListBucketIntelligentTieringConfigurationsOutput struct {
 	IntelligentTieringConfigurationList []types.IntelligentTieringConfiguration
 
 	// Indicates whether the returned list of analytics configurations is complete. A
-	// value of true indicates that the list is not complete and the
+	// value of true  indicates that the list is not complete and the
 	// NextContinuationToken will be provided for a subsequent request.
 	IsTruncated bool
 
 	// The marker used to continue this inventory configuration listing. Use the
-	// NextContinuationToken from this response to continue the listing in a subsequent
-	// request. The continuation token is an opaque value that Amazon S3 understands.
+	// NextContinuationTokenfrom this response to continue the listing in a
+	// subsequent request. The continuation token is an opaque value that Amazon S3
+	// understands.
 	NextContinuationToken *string
 
 	// Metadata pertaining to the operation's result.

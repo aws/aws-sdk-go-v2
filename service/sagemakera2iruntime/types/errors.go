@@ -35,8 +35,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// We couldn't process your request because of an issue with the server. Try again
-// later.
+// We couldn't process your request because of an issue with the server. Try
+// again later.
 type InternalServerException struct {
 	Message *string
 
@@ -89,15 +89,13 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You exceeded your service quota. Service quotas, also referred to as limits, are
-// the maximum number of service resources or operations for your AWS account. For
-// a list of Amazon A2I service quotes, see Amazon Augmented AI Service Quotes
-// (https://docs.aws.amazon.com/general/latest/gr/a2i.html). Delete some resources
-// or request an increase in your service quota. You can request a quota increase
-// using Service Quotas or the AWS Support Center. To request an increase, see AWS
-// Service Quotas
-// (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) in the
-// AWS General Reference.
+// You exceeded your service quota. Service quotas, also referred to as limits,
+// are the maximum number of service resources or operations for your AWS account.
+// For a list of Amazon A2I service quotes, see Amazon Augmented AI Service Quotes (https://docs.aws.amazon.com/general/latest/gr/a2i.html)
+// . Delete some resources or request an increase in your service quota. You can
+// request a quota increase using Service Quotas or the AWS Support Center. To
+// request an increase, see AWS Service Quotas (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
+// in the AWS General Reference.
 type ServiceQuotaExceededException struct {
 	Message *string
 

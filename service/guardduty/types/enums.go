@@ -10,9 +10,9 @@ const (
 	AdminStatusDisableInProgress AdminStatus = "DISABLE_IN_PROGRESS"
 )
 
-// Values returns all known values for AdminStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AdminStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AdminStatus) Values() []AdminStatus {
 	return []AdminStatus{
 		"ENABLED",
@@ -52,9 +52,9 @@ const (
 	CriterionKeyScanStatus         CriterionKey = "SCAN_STATUS"
 )
 
-// Values returns all known values for CriterionKey. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CriterionKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (CriterionKey) Values() []CriterionKey {
 	return []CriterionKey{
 		"EC2_INSTANCE_ARN",
@@ -161,8 +161,8 @@ const (
 	DetectorFeatureResultRdsLoginEvents       DetectorFeatureResult = "RDS_LOGIN_EVENTS"
 )
 
-// Values returns all known values for DetectorFeatureResult. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DetectorFeatureResult. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DetectorFeatureResult) Values() []DetectorFeatureResult {
 	return []DetectorFeatureResult{
@@ -202,9 +202,9 @@ const (
 	EbsSnapshotPreservationRetentionWithFinding EbsSnapshotPreservation = "RETENTION_WITH_FINDING"
 )
 
-// Values returns all known values for EbsSnapshotPreservation. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EbsSnapshotPreservation. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EbsSnapshotPreservation) Values() []EbsSnapshotPreservation {
 	return []EbsSnapshotPreservation{
 		"NO_RETENTION",
@@ -238,9 +238,9 @@ const (
 	FeedbackNotUseful Feedback = "NOT_USEFUL"
 )
 
-// Values returns all known values for Feedback. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Feedback. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Feedback) Values() []Feedback {
 	return []Feedback{
 		"USEFUL",
@@ -256,9 +256,9 @@ const (
 	FilterActionArchive FilterAction = "ARCHIVE"
 )
 
-// Values returns all known values for FilterAction. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FilterAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (FilterAction) Values() []FilterAction {
 	return []FilterAction{
 		"NOOP",
@@ -293,8 +293,8 @@ const (
 	FindingStatisticTypeCountBySeverity FindingStatisticType = "COUNT_BY_SEVERITY"
 )
 
-// Values returns all known values for FindingStatisticType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for FindingStatisticType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (FindingStatisticType) Values() []FindingStatisticType {
 	return []FindingStatisticType{
@@ -342,9 +342,9 @@ const (
 	IpSetFormatFireEye    IpSetFormat = "FIRE_EYE"
 )
 
-// Values returns all known values for IpSetFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IpSetFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (IpSetFormat) Values() []IpSetFormat {
 	return []IpSetFormat{
 		"TXT",
@@ -369,9 +369,9 @@ const (
 	IpSetStatusDeleted       IpSetStatus = "DELETED"
 )
 
-// Values returns all known values for IpSetStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IpSetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (IpSetStatus) Values() []IpSetStatus {
 	return []IpSetStatus{
 		"INACTIVE",
@@ -530,8 +530,8 @@ const (
 	ThreatIntelSetFormatFireEye    ThreatIntelSetFormat = "FIRE_EYE"
 )
 
-// Values returns all known values for ThreatIntelSetFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ThreatIntelSetFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ThreatIntelSetFormat) Values() []ThreatIntelSetFormat {
 	return []ThreatIntelSetFormat{
@@ -557,8 +557,8 @@ const (
 	ThreatIntelSetStatusDeleted       ThreatIntelSetStatus = "DELETED"
 )
 
-// Values returns all known values for ThreatIntelSetStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ThreatIntelSetStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ThreatIntelSetStatus) Values() []ThreatIntelSetStatus {
 	return []ThreatIntelSetStatus{
@@ -587,9 +587,9 @@ const (
 	UsageFeatureEksRuntimeMonitoring UsageFeature = "EKS_RUNTIME_MONITORING"
 )
 
-// Values returns all known values for UsageFeature. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UsageFeature. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (UsageFeature) Values() []UsageFeature {
 	return []UsageFeature{
 		"FLOW_LOGS",

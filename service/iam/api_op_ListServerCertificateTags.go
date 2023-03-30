@@ -13,13 +13,11 @@ import (
 
 // Lists the tags that are attached to the specified IAM server certificate. The
 // returned list of tags is sorted by tag key. For more information about tagging,
-// see Tagging IAM resources
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
-// Guide. For certificates in a Region supported by Certificate Manager (ACM), we
-// recommend that you don't use IAM server certificates. Instead, use ACM to
-// provision, manage, and deploy your server certificates. For more information
-// about IAM server certificates, Working with server certificates
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
+// see Tagging IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
+// in the IAM User Guide. For certificates in a Region supported by Certificate
+// Manager (ACM), we recommend that you don't use IAM server certificates. Instead,
+// use ACM to provision, manage, and deploy your server certificates. For more
+// information about IAM server certificates, Working with server certificates (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
 // in the IAM User Guide.
 func (c *Client) ListServerCertificateTags(ctx context.Context, params *ListServerCertificateTagsInput, optFns ...func(*Options)) (*ListServerCertificateTagsOutput, error) {
 	if params == nil {
@@ -39,8 +37,8 @@ func (c *Client) ListServerCertificateTags(ctx context.Context, params *ListServ
 type ListServerCertificateTagsInput struct {
 
 	// The name of the IAM server certificate whose tags you want to see. This
-	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a
-	// string of characters consisting of upper and lowercase alphanumeric characters
+	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
+	// a string of characters consisting of upper and lowercase alphanumeric characters
 	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.
@@ -48,16 +46,16 @@ type ListServerCertificateTagsInput struct {
 
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
-	// Marker element in the response that you received to indicate where the next call
-	// should start.
+	// Markerelement in the response that you received to indicate where the next
+	// call should start.
 	Marker *string
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true. If you do not include this
+	// specify, the IsTruncated  response element is true. If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true, and Marker contains a value to
+	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
 
@@ -66,9 +64,9 @@ type ListServerCertificateTagsInput struct {
 
 type ListServerCertificateTagsOutput struct {
 
-	// The list of tags that are currently attached to the IAM server certificate. Each
-	// tag consists of a key name and an associated value. If no tags are attached to
-	// the specified resource, the response contains an empty list.
+	// The list of tags that are currently attached to the IAM server certificate.
+	// Each tag consists of a key name and an associated value. If no tags are attached
+	// to the specified resource, the response contains an empty list.
 	//
 	// This member is required.
 	Tags []types.Tag
@@ -77,12 +75,12 @@ type ListServerCertificateTagsOutput struct {
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than
 	// the MaxItems number of results even when there are more results available. We
-	// recommend that you check IsTruncated after every call to ensure that you receive
-	// all your results.
+	// recommend that you check IsTruncated after every call to ensure that you
+	// receive all your results.
 	IsTruncated bool
 
-	// When IsTruncated is true, this element is present and contains the value to use
-	// for the Marker parameter in a subsequent pagination request.
+	// When IsTruncated  is true, this element is present and contains the value to
+	// use for the Marker  parameter in a subsequent pagination request.
 	Marker *string
 
 	// Metadata pertaining to the operation's result.

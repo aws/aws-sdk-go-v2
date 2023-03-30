@@ -47,8 +47,8 @@ type DescribeActionTargetsInput struct {
 
 type DescribeActionTargetsOutput struct {
 
-	// A list of ActionTarget objects. Each object includes the ActionTargetArn,
-	// Description, and Name of a custom action target available in Security Hub.
+	// A list of ActionTarget  objects. Each object includes the ActionTargetArn ,
+	// Description , and Name  of a custom action target available in Security Hub.
 	//
 	// This member is required.
 	ActionTargets []types.ActionTarget
@@ -136,8 +136,8 @@ type DescribeActionTargetsPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

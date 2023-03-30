@@ -38,14 +38,14 @@ type ViewBillingInput struct {
 	// time (UTC).
 	End *time.Time
 
-	// For an initial request for a list of billing records, omit this element. If the
-	// number of billing records that are associated with the current Amazon Web
+	// For an initial request for a list of billing records, omit this element. If
+	// the number of billing records that are associated with the current Amazon Web
 	// Services account during the specified period is greater than the value that you
-	// specified for MaxItems, you can use Marker to return additional billing records.
-	// Get the value of NextPageMarker from the previous response, and submit another
-	// request that includes the value of NextPageMarker in the Marker element.
-	// Constraints: The marker must match the value of NextPageMarker that was returned
-	// in the previous response.
+	// specified for MaxItems , you can use Marker to return additional billing
+	// records. Get the value of NextPageMarker from the previous response, and
+	// submit another request that includes the value of NextPageMarker  in the Marker
+	// element. Constraints: The marker must match the value of NextPageMarker that
+	// was returned in the previous response.
 	Marker *string
 
 	// The number of billing records to be returned. Default: 20
@@ -67,7 +67,7 @@ type ViewBillingOutput struct {
 
 	// If there are more billing records than you specified for MaxItems in the
 	// request, submit another request and include the value of NextPageMarker in the
-	// value of Marker.
+	// value of Marker .
 	NextPageMarker *string
 
 	// Metadata pertaining to the operation's result.
@@ -148,8 +148,8 @@ type ViewBillingPaginatorOptions struct {
 	// The number of billing records to be returned. Default: 20
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -12,7 +12,7 @@ import (
 )
 
 // Associates the list of tags in the input Tags parameter with the resource
-// identified by the ResourceArn input parameter.
+// identified by the ResourceArn  input parameter.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -36,7 +36,7 @@ type TagResourceInput struct {
 	ResourceArn *string
 
 	// A list of tags that TagResource associates with a resource. The resource is
-	// identified by the ResourceArn input parameter.
+	// identified by the ResourceArn  input parameter.
 	//
 	// This member is required.
 	Tags []types.Tag

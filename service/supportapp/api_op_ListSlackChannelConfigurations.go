@@ -47,8 +47,8 @@ type ListSlackChannelConfigurationsOutput struct {
 	// This member is required.
 	SlackChannelConfigurations []types.SlackChannelConfiguration
 
-	// The point where pagination should resume when the response returns only partial
-	// results.
+	// The point where pagination should resume when the response returns only
+	// partial results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -128,8 +128,8 @@ var _ ListSlackChannelConfigurationsAPIClient = (*Client)(nil)
 // ListSlackChannelConfigurationsPaginatorOptions is the paginator options for
 // ListSlackChannelConfigurations
 type ListSlackChannelConfigurationsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

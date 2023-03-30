@@ -29,12 +29,12 @@ func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optF
 	return out, nil
 }
 
-// Contains the inputs for the CreateAlias operation.
+// Contains the inputs for the CreateAlias  operation.
 type CreateAliasInput struct {
 
-	// The requested alias. The alias must be unique amongst all aliases in Amazon Web
-	// Services. This operation throws an EntityAlreadyExistsException error if the
-	// alias already exists.
+	// The requested alias. The alias must be unique amongst all aliases in Amazon
+	// Web Services. This operation throws an EntityAlreadyExistsException error if
+	// the alias already exists.
 	//
 	// This member is required.
 	Alias *string
@@ -47,7 +47,7 @@ type CreateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the results of the CreateAlias operation.
+// Contains the results of the CreateAlias  operation.
 type CreateAliasOutput struct {
 
 	// The alias for the directory.

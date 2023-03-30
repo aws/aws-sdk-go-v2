@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get all users in a given studio membership. ListStudioMembers only returns admin
-// members.
+// Get all users in a given studio membership. ListStudioMembers only returns
+// admin members.
 func (c *Client) ListStudioMembers(ctx context.Context, params *ListStudioMembersInput, optFns ...func(*Options)) (*ListStudioMembersOutput, error) {
 	if params == nil {
 		params = &ListStudioMembersInput{}
@@ -130,13 +130,14 @@ type ListStudioMembersAPIClient interface {
 
 var _ ListStudioMembersAPIClient = (*Client)(nil)
 
-// ListStudioMembersPaginatorOptions is the paginator options for ListStudioMembers
+// ListStudioMembersPaginatorOptions is the paginator options for
+// ListStudioMembers
 type ListStudioMembersPaginatorOptions struct {
 	// The max number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

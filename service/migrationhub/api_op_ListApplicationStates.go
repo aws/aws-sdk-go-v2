@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the migration statuses for your applications. If you use the optional
-// ApplicationIds parameter, only the migration statuses for those applications
-// will be returned.
+// Lists all the migration statuses for your applications. If you use the
+// optional ApplicationIds parameter, only the migration statuses for those
+// applications will be returned.
 func (c *Client) ListApplicationStates(ctx context.Context, params *ListApplicationStatesInput, optFns ...func(*Options)) (*ListApplicationStatesOutput, error) {
 	if params == nil {
 		params = &ListApplicationStatesInput{}
@@ -41,7 +41,7 @@ type ListApplicationStatesInput struct {
 
 	// If a NextToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the
-	// returned token in NextToken.
+	// returned token in NextToken .
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -54,7 +54,7 @@ type ListApplicationStatesOutput struct {
 
 	// If a NextToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the
-	// returned token in NextToken.
+	// returned token in NextToken .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -137,8 +137,8 @@ type ListApplicationStatesPaginatorOptions struct {
 	// Maximum number of results to be returned per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

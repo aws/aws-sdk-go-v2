@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a signing certificate associated with the specified IAM user. If you do
-// not specify a user name, IAM determines the user name implicitly based on the
+// Deletes a signing certificate associated with the specified IAM user. If you
+// do not specify a user name, IAM determines the user name implicitly based on the
 // Amazon Web Services access key ID signing the request. This operation works for
 // access keys under the Amazon Web Services account. Consequently, you can use
 // this operation to manage Amazon Web Services account root user credentials even
@@ -34,8 +34,8 @@ func (c *Client) DeleteSigningCertificate(ctx context.Context, params *DeleteSig
 type DeleteSigningCertificateInput struct {
 
 	// The ID of the signing certificate to delete. The format of this parameter, as
-	// described by its regex (http://wikipedia.org/wiki/regex) pattern, is a string of
-	// characters that can be upper- or lower-cased letters or digits.
+	// described by its regex (http://wikipedia.org/wiki/regex) pattern, is a string
+	// of characters that can be upper- or lower-cased letters or digits.
 	//
 	// This member is required.
 	CertificateId *string

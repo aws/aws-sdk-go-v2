@@ -45,7 +45,7 @@ type GetBlueprintInput struct {
 
 type GetBlueprintOutput struct {
 
-	// Returns a Blueprint object.
+	// Returns a Blueprint  object.
 	Blueprint *types.Blueprint
 
 	// Metadata pertaining to the operation's result.

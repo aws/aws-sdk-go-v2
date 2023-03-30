@@ -42,8 +42,8 @@ type GetTransitGatewayRegistrationsInput struct {
 	// The token for the next page of results.
 	NextToken *string
 
-	// The Amazon Resource Names (ARNs) of one or more transit gateways. The maximum is
-	// 10.
+	// The Amazon Resource Names (ARNs) of one or more transit gateways. The maximum
+	// is 10.
 	TransitGatewayArns []string
 
 	noSmithyDocumentSerde
@@ -140,8 +140,8 @@ type GetTransitGatewayRegistrationsPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieve the dimensions that can be queried for each specified metric type on a
-// specified DB instance.
+// Retrieve the dimensions that can be queried for each specified metric type on
+// a specified DB instance.
 func (c *Client) ListAvailableResourceDimensions(ctx context.Context, params *ListAvailableResourceDimensionsInput, optFns ...func(*Options)) (*ListAvailableResourceDimensionsOutput, error) {
 	if params == nil {
 		params = &ListAvailableResourceDimensionsInput{}
@@ -33,14 +33,14 @@ type ListAvailableResourceDimensionsInput struct {
 
 	// An immutable identifier for a data source that is unique within an Amazon Web
 	// Services Region. Performance Insights gathers metrics from this data source. To
-	// use an Amazon RDS DB instance as a data source, specify its DbiResourceId value.
-	// For example, specify db-ABCDEFGHIJKLMNOPQRSTU1VWZ.
+	// use an Amazon RDS DB instance as a data source, specify its DbiResourceId
+	// value. For example, specify db-ABCDEFGHIJKLMNOPQRSTU1VWZ .
 	//
 	// This member is required.
 	Identifier *string
 
 	// The types of metrics for which to retrieve dimensions. Valid values include
-	// db.load.
+	// db.load .
 	//
 	// This member is required.
 	Metrics []string
@@ -50,14 +50,14 @@ type ListAvailableResourceDimensionsInput struct {
 	// This member is required.
 	ServiceType types.ServiceType
 
-	// The maximum number of items to return in the response. If more items exist than
-	// the specified MaxRecords value, a pagination token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of items to return in the response. If more items exist
+	// than the specified MaxRecords value, a pagination token is included in the
+	// response so that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the token, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -70,7 +70,7 @@ type ListAvailableResourceDimensionsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the token, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -153,13 +153,13 @@ var _ ListAvailableResourceDimensionsAPIClient = (*Client)(nil)
 // ListAvailableResourceDimensionsPaginatorOptions is the paginator options for
 // ListAvailableResourceDimensions
 type ListAvailableResourceDimensionsPaginatorOptions struct {
-	// The maximum number of items to return in the response. If more items exist than
-	// the specified MaxRecords value, a pagination token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of items to return in the response. If more items exist
+	// than the specified MaxRecords value, a pagination token is included in the
+	// response so that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Your request was throttled because you have exceeded the limit of allowed client
-// calls. Try making the call later.
+// Your request was throttled because you have exceeded the limit of allowed
+// client calls. Try making the call later.
 type ClientLimitExceededException struct {
 	Message *string
 

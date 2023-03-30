@@ -44,18 +44,18 @@ type UpdateInferenceSchedulerInput struct {
 	// when uploading new data.
 	DataDelayOffsetInMinutes *int64
 
-	// Specifies information for the input data for the inference scheduler, including
-	// delimiter, format, and dataset location.
+	// Specifies information for the input data for the inference scheduler,
+	// including delimiter, format, and dataset location.
 	DataInputConfiguration *types.InferenceInputConfiguration
 
 	// Specifies information for the output results from the inference scheduler,
 	// including the output S3 location.
 	DataOutputConfiguration *types.InferenceOutputConfiguration
 
-	// How often data is uploaded to the source S3 bucket for the input data. The value
-	// chosen is the length of time between data uploads. For instance, if you select 5
-	// minutes, Amazon Lookout for Equipment will upload the real-time data to the
-	// source bucket once every 5 minutes. This frequency also determines how often
+	// How often data is uploaded to the source S3 bucket for the input data. The
+	// value chosen is the length of time between data uploads. For instance, if you
+	// select 5 minutes, Amazon Lookout for Equipment will upload the real-time data to
+	// the source bucket once every 5 minutes. This frequency also determines how often
 	// Amazon Lookout for Equipment starts a scheduled inference on your data. In this
 	// example, it starts once every 5 minutes.
 	DataUploadFrequency types.DataUploadFrequency

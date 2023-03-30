@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the property values for a component, component type, entity, or workspace.
-// You must specify a value for either componentName, componentTypeId, entityId, or
-// workspaceId.
+// Gets the property values for a component, component type, entity, or
+// workspace. You must specify a value for either componentName , componentTypeId
+// , entityId , or workspaceId .
 func (c *Client) GetPropertyValue(ctx context.Context, params *GetPropertyValueInput, optFns ...func(*Options)) (*GetPropertyValueOutput, error) {
 	if params == nil {
 		params = &GetPropertyValueInput{}
@@ -72,8 +72,8 @@ type GetPropertyValueOutput struct {
 	// The string that specifies the next page of results.
 	NextToken *string
 
-	// An object that maps strings to the properties and latest property values in the
-	// response. Each string in the mapping must be unique to this object.
+	// An object that maps strings to the properties and latest property values in
+	// the response. Each string in the mapping must be unique to this object.
 	PropertyValues map[string]types.PropertyLatestValue
 
 	// A table of property values.
@@ -192,8 +192,8 @@ type GetPropertyValuePaginatorOptions struct {
 	// Range: Minimum value of 1. Maximum value of 250.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

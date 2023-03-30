@@ -74,12 +74,12 @@ type CreateDataSetOutput struct {
 	// The name of the data set.
 	Name *string
 
-	// A property that defines the data set as OWNED by the account (for providers) or
-	// ENTITLED to the account (for subscribers).
+	// A property that defines the data set as OWNED by the account (for providers)
+	// or ENTITLED to the account (for subscribers).
 	Origin types.Origin
 
-	// If the origin of this data set is ENTITLED, includes the details for the product
-	// on AWS Marketplace.
+	// If the origin of this data set is ENTITLED, includes the details for the
+	// product on AWS Marketplace.
 	OriginDetails *types.OriginDetails
 
 	// The data set ID of the owned data set corresponding to the entitled data set

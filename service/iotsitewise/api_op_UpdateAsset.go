@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an asset's name. For more information, see Updating assets and models
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html)
+// Updates an asset's name. For more information, see Updating assets and models (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html)
 // in the IoT SiteWise User Guide.
 func (c *Client) UpdateAsset(ctx context.Context, params *UpdateAssetInput, optFns ...func(*Options)) (*UpdateAssetOutput, error) {
 	if params == nil {
@@ -55,7 +54,7 @@ type UpdateAssetInput struct {
 
 type UpdateAssetOutput struct {
 
-	// The status of the asset, which contains a state (UPDATING after successfully
+	// The status of the asset, which contains a state ( UPDATING after successfully
 	// calling this operation) and any error message.
 	//
 	// This member is required.

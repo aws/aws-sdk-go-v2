@@ -77,16 +77,17 @@ func NewDocumentMarshaler(v interface{}) Interface {
 	}
 }
 
-// NewDocumentUnmarshaler creates a new document unmarshaler for the given service
-// response
+// NewDocumentUnmarshaler creates a new document unmarshaler for the given
+// service response
 func NewDocumentUnmarshaler(v interface{}) Interface {
 	return &documentUnmarshaler{
 		value: v,
 	}
 }
 
-// github.com/aws/aws-sdk-go-v2/service/omics/internal/document.IsInterface returns
-// whether the given Interface implementation is a valid client implementation
+// github.com/aws/aws-sdk-go-v2/service/omics/internal/document.IsInterface
+// returns whether the given Interface implementation is a valid client
+// implementation
 func IsInterface(v Interface) (ok bool) {
 	defer func() {
 		if err := recover(); err != nil {

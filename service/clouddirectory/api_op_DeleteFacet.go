@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a given Facet. All attributes and Rules that are associated with the
+// Deletes a given Facet . All attributes and Rules that are associated with the
 // facet will be deleted. Only development schema facets are allowed deletion.
 func (c *Client) DeleteFacet(ctx context.Context, params *DeleteFacetInput, optFns ...func(*Options)) (*DeleteFacetOutput, error) {
 	if params == nil {
@@ -35,7 +35,7 @@ type DeleteFacetInput struct {
 	Name *string
 
 	// The Amazon Resource Name (ARN) that is associated with the Facet. For more
-	// information, see arns.
+	// information, see arns .
 	//
 	// This member is required.
 	SchemaArn *string

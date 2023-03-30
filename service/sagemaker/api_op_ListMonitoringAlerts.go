@@ -51,8 +51,8 @@ type ListMonitoringAlertsOutput struct {
 	// A JSON array where each element is a summary for a monitoring alert.
 	MonitoringAlertSummaries []types.MonitoringAlertSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of alerts, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of alerts, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -138,8 +138,8 @@ type ListMonitoringAlertsPaginatorOptions struct {
 	// The maximum number of results to display. The default is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -13,9 +13,8 @@ import (
 
 // Creates a fleet that represents a group of vehicles. You must create both a
 // signal catalog and vehicles before you can create a fleet. For more information,
-// see Fleets
-// (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleets.html) in
-// the Amazon Web Services IoT FleetWise Developer Guide.
+// see Fleets (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleets.html)
+// in the Amazon Web Services IoT FleetWise Developer Guide.
 func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optFns ...func(*Options)) (*CreateFleetOutput, error) {
 	if params == nil {
 		params = &CreateFleetInput{}

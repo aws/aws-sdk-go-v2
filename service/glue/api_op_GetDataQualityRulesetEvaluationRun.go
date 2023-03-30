@@ -59,7 +59,7 @@ type GetDataQualityRulesetEvaluationRunOutput struct {
 	// run was modified.
 	LastModifiedOn *time.Time
 
-	// The number of G.1X workers to be used in the run. The default is 5.
+	// The number of G.1X  workers to be used in the run. The default is 5.
 	NumberOfWorkers *int32
 
 	// A list of result IDs for the data quality results for the run.
@@ -81,8 +81,8 @@ type GetDataQualityRulesetEvaluationRunOutput struct {
 	Status types.TaskStatusType
 
 	// The timeout for a run in minutes. This is the maximum time that a run can
-	// consume resources before it is terminated and enters TIMEOUT status. The default
-	// is 2,880 minutes (48 hours).
+	// consume resources before it is terminated and enters TIMEOUT status. The
+	// default is 2,880 minutes (48 hours).
 	Timeout *int32
 
 	// Metadata pertaining to the operation's result.

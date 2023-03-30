@@ -39,7 +39,7 @@ type StopRxNormInferenceJobInput struct {
 type StopRxNormInferenceJobOutput struct {
 
 	// The identifier generated for the job. To get the status of job, use this
-	// identifier with the DescribeRxNormInferenceJob operation.
+	// identifier with the DescribeRxNormInferenceJob  operation.
 	JobId *string
 
 	// Metadata pertaining to the operation's result.

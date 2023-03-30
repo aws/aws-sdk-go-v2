@@ -27,8 +27,8 @@ func (c *Client) UpdateStorage(ctx context.Context, params *UpdateStorageInput, 
 	return out, nil
 }
 
-// Request object for UpdateStorage api. Its used to update the storage attributes
-// for the cluster.
+// Request object for UpdateStorage api. Its used to update the storage
+// attributes for the cluster.
 type UpdateStorageInput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster to be updated.
@@ -36,8 +36,8 @@ type UpdateStorageInput struct {
 	// This member is required.
 	ClusterArn *string
 
-	// The version of cluster to update from. A successful operation will then generate
-	// a new version.
+	// The version of cluster to update from. A successful operation will then
+	// generate a new version.
 	//
 	// This member is required.
 	CurrentVersion *string

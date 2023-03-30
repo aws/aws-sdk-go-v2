@@ -45,7 +45,7 @@ type ListTestGridProjectsOutput struct {
 	// paginated request.
 	NextToken *string
 
-	// The list of TestGridProjects, based on a ListTestGridProjectsRequest.
+	// The list of TestGridProjects, based on a ListTestGridProjectsRequest .
 	TestGridProjects []types.TestGridProject
 
 	// Metadata pertaining to the operation's result.
@@ -128,8 +128,8 @@ type ListTestGridProjectsPaginatorOptions struct {
 	// Return no more than this number of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

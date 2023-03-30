@@ -12,9 +12,8 @@ import (
 )
 
 // Creates a new IAM user for your Amazon Web Services account. For information
-// about quotas for the number of IAM users you can create, see IAM and STS quotas
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in
-// the IAM User Guide.
+// about quotas for the number of IAM users you can create, see IAM and STS quotas (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html)
+// in the IAM User Guide.
 func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns ...func(*Options)) (*CreateUserOutput, error) {
 	if params == nil {
 		params = &CreateUserInput{}
@@ -32,23 +31,21 @@ func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns
 
 type CreateUserInput struct {
 
-	// The name of the user to create. IAM user, group, role, and policy names must be
-	// unique within the account. Names are not distinguished by case. For example, you
-	// cannot create resources named both "MyResource" and "myresource".
+	// The name of the user to create. IAM user, group, role, and policy names must
+	// be unique within the account. Names are not distinguished by case. For example,
+	// you cannot create resources named both "MyResource" and "myresource".
 	//
 	// This member is required.
 	UserName *string
 
 	// The path for the user name. For more information about paths, see IAM
-	// identifiers
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
-	// IAM User Guide. This parameter is optional. If it is not included, it defaults
-	// to a slash (/). This parameter allows (through its regex pattern
-	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of either a
-	// forward slash (/) by itself or a string that must begin and end with forward
-	// slashes. In addition, it can contain any ASCII character from the ! (\u0021)
-	// through the DEL character (\u007F), including most punctuation characters,
-	// digits, and upper and lowercased letters.
+	// identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
+	// in the IAM User Guide. This parameter is optional. If it is not included, it
+	// defaults to a slash (/). This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
+	// ) a string of characters consisting of either a forward slash (/) by itself or a
+	// string that must begin and end with forward slashes. In addition, it can contain
+	// any ASCII character from the ! ( \u0021 ) through the DEL character ( \u007F),
+	// including most punctuation characters, digits, and upper and lowercased letters.
 	Path *string
 
 	// The ARN of the managed policy that is used to set the permissions boundary for
@@ -56,25 +53,24 @@ type CreateUserInput struct {
 	// identity-based policies can grant to an entity, but does not grant permissions.
 	// Permissions boundaries do not define the maximum permissions that a
 	// resource-based policy can grant to an entity. To learn more, see Permissions
-	// boundaries for IAM entities
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
-	// in the IAM User Guide. For more information about policy types, see Policy types
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policy-types)
+	// boundaries for IAM entities (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+	// in the IAM User Guide. For more information about policy types, see Policy
+	// types  (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policy-types)
 	// in the IAM User Guide.
 	PermissionsBoundary *string
 
 	// A list of tags that you want to attach to the new user. Each tag consists of a
 	// key name and an associated value. For more information about tagging, see
-	// Tagging IAM resources
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
-	// Guide. If any one of the tags is invalid or if you exceed the allowed maximum
-	// number of tags, then the entire request fails and the resource is not created.
+	// Tagging IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
+	// in the IAM User Guide. If any one of the tags is invalid or if you exceed the
+	// allowed maximum number of tags, then the entire request fails and the resource
+	// is not created.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful CreateUser request.
+// Contains the response to a successful CreateUser  request.
 type CreateUserOutput struct {
 
 	// A structure with details about the new IAM user.

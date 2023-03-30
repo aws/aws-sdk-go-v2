@@ -16,10 +16,8 @@ import (
 // fleet. To get the runtime configuration that is currently in forces for a fleet,
 // provide the fleet ID. If successful, a RuntimeConfiguration object is returned
 // for the requested fleet. If the requested fleet has been deleted, the result set
-// is empty. Learn more Setting up GameLift fleets
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)Running
-// multiple processes on a fleet
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-multiprocess.html)
+// is empty. Learn more Setting up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// Running multiple processes on a fleet (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-multiprocess.html)
 func (c *Client) DescribeRuntimeConfiguration(ctx context.Context, params *DescribeRuntimeConfigurationInput, optFns ...func(*Options)) (*DescribeRuntimeConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeRuntimeConfigurationInput{}
@@ -37,8 +35,8 @@ func (c *Client) DescribeRuntimeConfiguration(ctx context.Context, params *Descr
 
 type DescribeRuntimeConfigurationInput struct {
 
-	// A unique identifier for the fleet to get the runtime configuration for. You can
-	// use either the fleet ID or ARN value.
+	// A unique identifier for the fleet to get the runtime configuration for. You
+	// can use either the fleet ID or ARN value.
 	//
 	// This member is required.
 	FleetId *string

@@ -12,14 +12,11 @@ import (
 )
 
 // Cancels an existing Amazon FSx for Lustre data repository task if that task is
-// in either the PENDING or EXECUTING state. When you cancel a task, Amazon FSx
+// in either the PENDING  or EXECUTING state. When you cancel a task, Amazon FSx
 // does the following.
-// - Any files that FSx has already exported are not
-// reverted.
-// - FSx continues to export any files that are "in-flight" when the
-// cancel operation is received.
-// - FSx does not export any files that have not yet
-// been exported.
+//   - Any files that FSx has already exported are not reverted.
+//   - FSx continues to export any files that are "in-flight" when the cancel operation is received.
+//   - FSx does not export any files that have not yet been exported.
 func (c *Client) CancelDataRepositoryTask(ctx context.Context, params *CancelDataRepositoryTaskInput, optFns ...func(*Options)) (*CancelDataRepositoryTaskOutput, error) {
 	if params == nil {
 		params = &CancelDataRepositoryTaskInput{}
@@ -49,18 +46,12 @@ type CancelDataRepositoryTaskInput struct {
 type CancelDataRepositoryTaskOutput struct {
 
 	// The lifecycle status of the data repository task, as follows:
-	// - PENDING - Amazon
-	// FSx has not started the task.
-	// - EXECUTING - Amazon FSx is processing the task.
-	// -
-	// FAILED - Amazon FSx was not able to complete the task. For example, there may be
-	// files the task failed to process. The DataRepositoryTaskFailureDetails property
-	// provides more information about task failures.
-	// - SUCCEEDED - FSx completed the
-	// task successfully.
-	// - CANCELED - Amazon FSx canceled the task and it did not
-	// complete.
-	// - CANCELING - FSx is in process of canceling the task.
+	//     - PENDING - Amazon FSx has not started the task.
+	//     - EXECUTING - Amazon FSx is processing the task.
+	//     - FAILED - Amazon FSx was not able to complete the task. For example, there may be files the task failed to process. The DataRepositoryTaskFailureDetails property provides more information about task failures.
+	//     - SUCCEEDED - FSx completed the task successfully.
+	//     - CANCELED - Amazon FSx canceled the task and it did not complete.
+	//     - CANCELING - FSx is in process of canceling the task.
 	Lifecycle types.DataRepositoryTaskLifecycle
 
 	// The ID of the task being canceled.

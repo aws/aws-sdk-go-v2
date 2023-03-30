@@ -33,7 +33,7 @@ func (c *Client) PollForJobs(ctx context.Context, params *PollForJobsInput, optF
 	return out, nil
 }
 
-// Represents the input of a PollForJobs action.
+// Represents the input of a PollForJobs  action.
 type PollForJobsInput struct {
 
 	// Represents information about an action type.
@@ -53,7 +53,7 @@ type PollForJobsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a PollForJobs action.
+// Represents the output of a PollForJobs  action.
 type PollForJobsOutput struct {
 
 	// Information about the jobs to take action on.

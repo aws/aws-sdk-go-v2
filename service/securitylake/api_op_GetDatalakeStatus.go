@@ -139,14 +139,15 @@ type GetDatalakeStatusAPIClient interface {
 
 var _ GetDatalakeStatusAPIClient = (*Client)(nil)
 
-// GetDatalakeStatusPaginatorOptions is the paginator options for GetDatalakeStatus
+// GetDatalakeStatusPaginatorOptions is the paginator options for
+// GetDatalakeStatus
 type GetDatalakeStatusPaginatorOptions struct {
 	// The maximum limit of accounts for which the static snapshot of the current
 	// Region, including enabled accounts and log sources, is retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

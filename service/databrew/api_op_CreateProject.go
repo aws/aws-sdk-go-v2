@@ -34,8 +34,8 @@ type CreateProjectInput struct {
 	// This member is required.
 	DatasetName *string
 
-	// A unique name for the new project. Valid characters are alphanumeric (A-Z, a-z,
-	// 0-9), hyphen (-), period (.), and space.
+	// A unique name for the new project. Valid characters are alphanumeric (A-Z,
+	// a-z, 0-9), hyphen (-), period (.), and space.
 	//
 	// This member is required.
 	Name *string
@@ -45,14 +45,14 @@ type CreateProjectInput struct {
 	// This member is required.
 	RecipeName *string
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-	// to be assumed for this request.
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
+	// role to be assumed for this request.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// Represents the sample size and sampling type for DataBrew to use for interactive
-	// data analysis.
+	// Represents the sample size and sampling type for DataBrew to use for
+	// interactive data analysis.
 	Sample *types.Sample
 
 	// Metadata tags to apply to this project.

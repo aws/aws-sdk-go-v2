@@ -48,11 +48,10 @@ type AlarmRecommendation struct {
 // Defines an Resilience Hub application.
 type App struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The
+	// format for this ARN is: arn: partition :resiliencehub: region : account :app/
+	// app-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
@@ -82,11 +81,10 @@ type App struct {
 	// The timestamp for the most recent resiliency score evaluation.
 	LastResiliencyScoreEvaluationTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN
-	// is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For
-	// more information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the resiliency policy. The format for this
+	// ARN is: arn: partition :resiliencehub: region : account :resiliency-policy/
+	// policy-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	PolicyArn *string
 
 	// The current resiliency score for the application.
@@ -95,8 +93,8 @@ type App struct {
 	// The status of the application.
 	Status AppStatusType
 
-	// The tags assigned to the resource. A tag is a label that you assign to an Amazon
-	// Web Services resource. Each tag consists of a key/value pair.
+	// The tags assigned to the resource. A tag is a label that you assign to an
+	// Amazon Web Services resource. Each tag consists of a key/value pair.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -106,10 +104,9 @@ type App struct {
 type AppAssessment struct {
 
 	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn:partition:resiliencehub:region:account:app-assessment/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// arn: partition :resiliencehub: region : account :app-assessment/ app-id. For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
@@ -124,11 +121,10 @@ type AppAssessment struct {
 	// This member is required.
 	Invoker AssessmentInvoker
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The
+	// format for this ARN is: arn: partition :resiliencehub: region : account :app/
+	// app-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	AppArn *string
 
 	// The version of the application.
@@ -158,15 +154,15 @@ type AppAssessment struct {
 	// The current resiliency score for the application.
 	ResiliencyScore *ResiliencyScore
 
-	// A resource error object containing a list of errors retrieving an application's
-	// resources.
+	// A resource error object containing a list of errors retrieving an
+	// application's resources.
 	ResourceErrorsDetails *ResourceErrorsDetails
 
 	// The starting time for the action.
 	StartTime *time.Time
 
-	// The tags assigned to the resource. A tag is a label that you assign to an Amazon
-	// Web Services resource. Each tag consists of a key/value pair.
+	// The tags assigned to the resource. A tag is a label that you assign to an
+	// Amazon Web Services resource. Each tag consists of a key/value pair.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -176,10 +172,9 @@ type AppAssessment struct {
 type AppAssessmentSummary struct {
 
 	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn:partition:resiliencehub:region:account:app-assessment/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// arn: partition :resiliencehub: region : account :app-assessment/ app-id. For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
@@ -189,11 +184,10 @@ type AppAssessmentSummary struct {
 	// This member is required.
 	AssessmentStatus AssessmentStatus
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The
+	// format for this ARN is: arn: partition :resiliencehub: region : account :app/
+	// app-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	AppArn *string
 
 	// The version of the application.
@@ -291,9 +285,8 @@ type AppInputSource struct {
 	ResourceCount int32
 
 	// The Amazon Resource Name (ARN) of the input source. For more information about
-	// ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	SourceArn *string
 
 	// The name of the input source.
@@ -308,11 +301,10 @@ type AppInputSource struct {
 // Defines an application summary.
 type AppSummary struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The
+	// format for this ARN is: arn: partition :resiliencehub: region : account :app/
+	// app-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
@@ -356,9 +348,9 @@ type AppVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Defines recommendations for an Resilience Hub Application Component, returned as
-// an object. This object contains component names, configuration recommendations,
-// and recommendation statuses.
+// Defines recommendations for an Resilience Hub Application Component, returned
+// as an object. This object contains component names, configuration
+// recommendations, and recommendation statuses.
 type ComponentRecommendation struct {
 
 	// The name of the Application Component.
@@ -431,7 +423,7 @@ type Cost struct {
 	// This member is required.
 	Amount float64
 
-	// The cost currency, for example USD.
+	// The cost currency, for example USD .
 	//
 	// This member is required.
 	Currency *string
@@ -485,11 +477,11 @@ type DisruptionCompliance struct {
 // The input source of the Amazon Elastic Kubernetes Service cluster.
 type EksSource struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service cluster.
-	// The format for this ARN is: arn:aws:eks:region:account-id:cluster/cluster-name.
-	// For more information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service
+	// cluster. The format for this ARN is: arn: aws :eks: region : account-id
+	// :cluster/ cluster-name . For more information about ARNs, see  Amazon Resource
+	// Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	EksClusterArn *string
@@ -507,17 +499,17 @@ type EksSource struct {
 // Kubernetes Service cluster.
 type EksSourceClusterNamespace struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service cluster.
-	// The format for this ARN is: arn:aws:eks:region:account-id:cluster/cluster-name.
-	// For more information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service
+	// cluster. The format for this ARN is: arn: aws :eks: region : account-id
+	// :cluster/ cluster-name . For more information about ARNs, see  Amazon Resource
+	// Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	EksClusterArn *string
 
-	// Name of the namespace that is located on your Amazon Elastic Kubernetes Service
-	// cluster.
+	// Name of the namespace that is located on your Amazon Elastic Kubernetes
+	// Service cluster.
 	//
 	// This member is required.
 	Namespace *string
@@ -612,9 +604,9 @@ type PhysicalResourceId struct {
 	// This member is required.
 	Identifier *string
 
-	// Specifies the type of physical resource identifier. Arn The resource identifier
-	// is an Amazon Resource Name (ARN) . Native The resource identifier is an
-	// Resilience Hub-native identifier.
+	// Specifies the type of physical resource identifier. Arn The resource
+	// identifier is an Amazon Resource Name (ARN) . Native The resource identifier is
+	// an Resilience Hub-native identifier.
 	//
 	// This member is required.
 	Type PhysicalIdentifierType
@@ -677,10 +669,9 @@ type RecommendationItem struct {
 type RecommendationTemplate struct {
 
 	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn:partition:resiliencehub:region:account:app-assessment/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// arn: partition :resiliencehub: region : account :app-assessment/ app-id. For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
@@ -702,8 +693,8 @@ type RecommendationTemplate struct {
 	RecommendationTemplateArn *string
 
 	// An array of strings that specify the recommendation template type or types.
-	// Alarm The template is an AlarmRecommendation template. Sop The template is a
-	// SopRecommendation template. Test The template is a TestRecommendation template.
+	// Alarm The template is an AlarmRecommendation  template. Sop The template is a
+	// SopRecommendation template. Test The template is a TestRecommendation  template.
 	//
 	// This member is required.
 	RecommendationTypes []RenderRecommendationType
@@ -713,11 +704,10 @@ type RecommendationTemplate struct {
 	// This member is required.
 	Status RecommendationTemplateStatus
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The
+	// format for this ARN is: arn: partition :resiliencehub: region : account :app/
+	// app-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	AppArn *string
 
 	// The end time for the action.
@@ -735,8 +725,8 @@ type RecommendationTemplate struct {
 	// The start time for the action.
 	StartTime *time.Time
 
-	// The tags assigned to the resource. A tag is a label that you assign to an Amazon
-	// Web Services resource. Each tag consists of a key/value pair.
+	// The tags assigned to the resource. A tag is a label that you assign to an
+	// Amazon Web Services resource. Each tag consists of a key/value pair.
 	Tags map[string]string
 
 	// The file location of the template.
@@ -761,11 +751,10 @@ type ResiliencyPolicy struct {
 	// The resiliency policy.
 	Policy map[string]FailurePolicy
 
-	// The Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN
-	// is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For
-	// more information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the resiliency policy. The format for this
+	// ARN is: arn: partition :resiliencehub: region : account :resiliency-policy/
+	// policy-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	PolicyArn *string
 
 	// The description for the policy.
@@ -774,19 +763,19 @@ type ResiliencyPolicy struct {
 	// The name of the policy
 	PolicyName *string
 
-	// The tags assigned to the resource. A tag is a label that you assign to an Amazon
-	// Web Services resource. Each tag consists of a key/value pair.
+	// The tags assigned to the resource. A tag is a label that you assign to an
+	// Amazon Web Services resource. Each tag consists of a key/value pair.
 	Tags map[string]string
 
-	// The tier for this resiliency policy, ranging from the highest severity
-	// (MissionCritical) to lowest (NonCritical).
+	// The tier for this resiliency policy, ranging from the highest severity (
+	// MissionCritical ) to lowest ( NonCritical ).
 	Tier ResiliencyPolicyTier
 
 	noSmithyDocumentSerde
 }
 
-// The overall resiliency score, returned as an object that includes the disruption
-// score and outage score.
+// The overall resiliency score, returned as an object that includes the
+// disruption score and outage score.
 type ResiliencyScore struct {
 
 	// The disruption score for a valid key.
@@ -832,14 +821,14 @@ type ResourceErrorsDetails struct {
 // Defines a resource mapping.
 type ResourceMapping struct {
 
-	// Specifies the type of resource mapping. AppRegistryApp The resource is mapped to
-	// another application. The name of the application is contained in the
-	// appRegistryAppName property. CfnStack The resource is mapped to a CloudFormation
-	// stack. The name of the CloudFormation stack is contained in the logicalStackName
-	// property. Resource The resource is mapped to another resource. The name of the
-	// resource is contained in the resourceName property. ResourceGroup The resource
-	// is mapped to an Resource Groups. The name of the resource group is contained in
-	// the resourceGroupName property.
+	// Specifies the type of resource mapping. AppRegistryApp The resource is mapped
+	// to another application. The name of the application is contained in the
+	// appRegistryAppNameproperty. CfnStack The resource is mapped to a
+	// CloudFormation stack. The name of the CloudFormation stack is contained in the
+	// logicalStackNameproperty. Resource The resource is mapped to another resource.
+	// The name of the resource is contained in the resourceName property.
+	// ResourceGroup The resource is mapped to an Resource Groups. The name of the
+	// resource group is contained in the resourceGroupName  property.
 	//
 	// This member is required.
 	MappingType ResourceMappingType

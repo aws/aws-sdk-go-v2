@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends custom events to Amazon EventBridge so that they can be matched to rules.
-// PutEvents will only process nested JSON up to 1100 levels deep.
+// Sends custom events to Amazon EventBridge so that they can be matched to
+// rules. PutEvents will only process nested JSON up to 1100 levels deep.
 func (c *Client) PutEvents(ctx context.Context, params *PutEventsInput, optFns ...func(*Options)) (*PutEventsOutput, error) {
 	if params == nil {
 		params = &PutEventsInput{}
@@ -40,7 +40,7 @@ type PutEventsInput struct {
 
 	// The URL subdomain of the endpoint. For example, if the URL for Endpoint is
 	// https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is
-	// abcde.veo. When using Java, you must include auth-crt on the class path.
+	// abcde.veo . When using Java, you must include auth-crt  on the class path.
 	EndpointId *string
 
 	noSmithyDocumentSerde

@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an association. For more information about extensions and associations,
-// see Working with AppConfig extensions
-// (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
+// Updates an association. For more information about extensions and
+// associations, see Working with AppConfig extensions (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
 // in the AppConfig User Guide.
 func (c *Client) UpdateExtensionAssociation(ctx context.Context, params *UpdateExtensionAssociationInput, optFns ...func(*Options)) (*UpdateExtensionAssociationOutput, error) {
 	if params == nil {
@@ -59,8 +58,8 @@ type UpdateExtensionAssociationOutput struct {
 	// The parameter names and values defined in the association.
 	Parameters map[string]string
 
-	// The ARNs of applications, configuration profiles, or environments defined in the
-	// association.
+	// The ARNs of applications, configuration profiles, or environments defined in
+	// the association.
 	ResourceArn *string
 
 	// Metadata pertaining to the operation's result.

@@ -43,8 +43,8 @@ type DescribeSimulationJobOutput struct {
 	// The Amazon Resource Name (ARN) of the simulation job.
 	Arn *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
 	// Compute information for the simulation job.
@@ -75,8 +75,8 @@ type DescribeSimulationJobOutput struct {
 	FailureCode types.SimulationJobErrorCode
 
 	// Details about why the simulation job failed. For more information about
-	// troubleshooting, see Troubleshooting
-	// (https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting.html).
+	// troubleshooting, see Troubleshooting (https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting.html)
+	// .
 	FailureReason *string
 
 	// The IAM role that allows the simulation instance to call the AWS APIs that are
@@ -94,8 +94,8 @@ type DescribeSimulationJobOutput struct {
 	// The logging configuration.
 	LoggingConfig *types.LoggingConfig
 
-	// The maximum job duration in seconds. The value must be 8 days (691,200 seconds)
-	// or less.
+	// The maximum job duration in seconds. The value must be 8 days (691,200
+	// seconds) or less.
 	MaxJobDurationInSeconds int64
 
 	// The name of the simulation job.

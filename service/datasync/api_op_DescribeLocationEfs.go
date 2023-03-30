@@ -50,8 +50,8 @@ type DescribeLocationEfsOutput struct {
 	// The time that the location was created.
 	CreationTime *time.Time
 
-	// The subnet and security groups that DataSync uses to access your Amazon EFS file
-	// system.
+	// The subnet and security groups that DataSync uses to access your Amazon EFS
+	// file system.
 	Ec2Config *types.Ec2Config
 
 	// The Identity and Access Management (IAM) role that DataSync assumes when

@@ -12,7 +12,7 @@ import (
 )
 
 // Retrieves a collection of resources, including folders and documents. The only
-// CollectionType supported is SHARED_WITH_ME.
+// CollectionType supported is SHARED_WITH_ME .
 func (c *Client) GetResources(ctx context.Context, params *GetResourcesInput, optFns ...func(*Options)) (*GetResourcesOutput, error) {
 	if params == nil {
 		params = &GetResourcesInput{}
@@ -40,12 +40,12 @@ type GetResourcesInput struct {
 	// The maximum number of resources to return.
 	Limit *int32
 
-	// The marker for the next set of results. This marker was received from a previous
-	// call.
+	// The marker for the next set of results. This marker was received from a
+	// previous call.
 	Marker *string
 
-	// The user ID for the resource collection. This is a required field for accessing
-	// the API operation using IAM credentials.
+	// The user ID for the resource collection. This is a required field for
+	// accessing the API operation using IAM credentials.
 	UserId *string
 
 	noSmithyDocumentSerde

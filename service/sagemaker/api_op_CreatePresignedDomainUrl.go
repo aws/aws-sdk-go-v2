@@ -21,8 +21,7 @@ import (
 // attempts to connect to the app. You can restrict access to this API and to the
 // URL that it returns to a list of IP addresses, Amazon VPCs or Amazon VPC
 // Endpoints that you specify. For more information, see Connect to SageMaker
-// Studio Through an Interface VPC Endpoint
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/studio-interface-endpoint.html)
+// Studio Through an Interface VPC Endpoint (https://docs.aws.amazon.com/sagemaker/latest/dg/studio-interface-endpoint.html)
 // . The URL that you get from a call to CreatePresignedDomainUrl has a default
 // timeout of 5 minutes. You can configure this value using ExpiresInSeconds. If
 // you try to use the URL after the timeout limit expires, you are directed to the

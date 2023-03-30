@@ -23,6 +23,6 @@
 // expiration. You can also cancel a zonal shift, before it expires, for example,
 // if you're ready to restore traffic to the Availability Zone. For more
 // information about using zonal shift, see the Amazon Route 53 Application
-// Recovery Controller Developer Guide
-// (https://docs.aws.amazon.com/r53recovery/latest/dg/what-is-route53-recovery.html).
+// Recovery Controller Developer Guide (https://docs.aws.amazon.com/r53recovery/latest/dg/what-is-route53-recovery.html)
+// .
 package arczonalshift

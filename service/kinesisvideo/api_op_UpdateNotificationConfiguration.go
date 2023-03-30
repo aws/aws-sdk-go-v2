@@ -34,12 +34,12 @@ type UpdateNotificationConfigurationInput struct {
 	NotificationConfiguration *types.NotificationConfiguration
 
 	// The Amazon Resource Name (ARN) of the Kinesis video stream from where you want
-	// to update the notification configuration. You must specify either the StreamName
-	// or the StreamARN.
+	// to update the notification configuration. You must specify either the
+	// StreamName or the StreamARN .
 	StreamARN *string
 
-	// The name of the stream from which to update the notification configuration. You
-	// must specify either the StreamName or the StreamARN.
+	// The name of the stream from which to update the notification configuration.
+	// You must specify either the StreamName  or the StreamARN .
 	StreamName *string
 
 	noSmithyDocumentSerde

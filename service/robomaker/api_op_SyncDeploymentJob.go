@@ -38,8 +38,8 @@ func (c *Client) SyncDeploymentJob(ctx context.Context, params *SyncDeploymentJo
 
 type SyncDeploymentJobInput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	//
 	// This member is required.
 	ClientRequestToken *string
@@ -66,8 +66,8 @@ type SyncDeploymentJobOutput struct {
 	// Information about the deployment configuration.
 	DeploymentConfig *types.DeploymentConfig
 
-	// The failure code if the job fails: InternalServiceError Internal service error.
-	// RobotApplicationCrash Robot application exited abnormally.
+	// The failure code if the job fails: InternalServiceError Internal service
+	// error. RobotApplicationCrash Robot application exited abnormally.
 	// SimulationApplicationCrash Simulation application exited abnormally.
 	// BadPermissionsRobotApplication Robot application bundle could not be downloaded.
 	// BadPermissionsSimulationApplication Simulation application bundle could not be

@@ -19,15 +19,10 @@ import (
 // Lambda Access Point per call. If there are more access points than what can be
 // returned in one call, the response will include a continuation token that you
 // can use to list the additional access points. The following actions are related
-// to ListAccessPointsForObjectLambda:
-// - CreateAccessPointForObjectLambda
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html)
-// -
-// DeleteAccessPointForObjectLambda
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html)
-// -
-// GetAccessPointForObjectLambda
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html)
+// to ListAccessPointsForObjectLambda :
+//   - CreateAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html)
+//   - DeleteAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html)
+//   - GetAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html)
 func (c *Client) ListAccessPointsForObjectLambda(ctx context.Context, params *ListAccessPointsForObjectLambdaInput, optFns ...func(*Options)) (*ListAccessPointsForObjectLambdaOutput, error) {
 	if params == nil {
 		params = &ListAccessPointsForObjectLambdaInput{}
@@ -54,12 +49,12 @@ type ListAccessPointsForObjectLambdaInput struct {
 	// The maximum number of access points that you want to include in the list. The
 	// response may contain fewer access points but will never contain more. If there
 	// are more than this number of access points, then the response will include a
-	// continuation token in the NextToken field that you can use to retrieve the next
-	// page of access points.
+	// continuation token in the NextToken field that you can use to retrieve the
+	// next page of access points.
 	MaxResults int32
 
-	// If the list has more access points than can be returned in one call to this API,
-	// this field contains a continuation token that you can provide in subsequent
+	// If the list has more access points than can be returned in one call to this
+	// API, this field contains a continuation token that you can provide in subsequent
 	// calls to this API to retrieve additional access points.
 	NextToken *string
 
@@ -68,8 +63,8 @@ type ListAccessPointsForObjectLambdaInput struct {
 
 type ListAccessPointsForObjectLambdaOutput struct {
 
-	// If the list has more access points than can be returned in one call to this API,
-	// this field contains a continuation token that you can provide in subsequent
+	// If the list has more access points than can be returned in one call to this
+	// API, this field contains a continuation token that you can provide in subsequent
 	// calls to this API to retrieve additional access points.
 	NextToken *string
 
@@ -209,12 +204,12 @@ type ListAccessPointsForObjectLambdaPaginatorOptions struct {
 	// The maximum number of access points that you want to include in the list. The
 	// response may contain fewer access points but will never contain more. If there
 	// are more than this number of access points, then the response will include a
-	// continuation token in the NextToken field that you can use to retrieve the next
-	// page of access points.
+	// continuation token in the NextToken field that you can use to retrieve the
+	// next page of access points.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

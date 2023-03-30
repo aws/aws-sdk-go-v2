@@ -39,8 +39,8 @@ type ModifyTrafficMirrorSessionInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The number of bytes in each packet to mirror. These are bytes after the VXLAN
@@ -50,21 +50,21 @@ type ModifyTrafficMirrorSessionInput struct {
 	// want to mirror the entire packet.
 	PacketLength *int32
 
-	// The properties that you want to remove from the Traffic Mirror session. When you
-	// remove a property from a Traffic Mirror session, the property is set to the
+	// The properties that you want to remove from the Traffic Mirror session. When
+	// you remove a property from a Traffic Mirror session, the property is set to the
 	// default.
 	RemoveFields []types.TrafficMirrorSessionField
 
-	// The session number determines the order in which sessions are evaluated when an
-	// interface is used by multiple sessions. The first session with a matching filter
-	// is the one that mirrors the packets. Valid values are 1-32766.
+	// The session number determines the order in which sessions are evaluated when
+	// an interface is used by multiple sessions. The first session with a matching
+	// filter is the one that mirrors the packets. Valid values are 1-32766.
 	SessionNumber *int32
 
 	// The ID of the Traffic Mirror filter.
 	TrafficMirrorFilterId *string
 
-	// The Traffic Mirror target. The target must be in the same VPC as the source, or
-	// have a VPC peering connection with the source.
+	// The Traffic Mirror target. The target must be in the same VPC as the source,
+	// or have a VPC peering connection with the source.
 	TrafficMirrorTargetId *string
 
 	// The virtual network ID of the Traffic Mirror session.

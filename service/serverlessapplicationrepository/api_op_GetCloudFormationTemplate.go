@@ -51,11 +51,11 @@ type GetCloudFormationTemplateOutput struct {
 	// The date and time this resource was created.
 	CreationTime *string
 
-	// The date and time this template expires. Templates expire 1 hour after creation.
+	// The date and time this template expires. Templates expire 1 hour after
+	// creation.
 	ExpirationTime *string
 
-	// The semantic version of the application: https://semver.org/
-	// (https://semver.org/)
+	// The semantic version of the application: https://semver.org/ (https://semver.org/)
 	SemanticVersion *string
 
 	// Status of the template creation workflow.Possible values: PREPARING | ACTIVE |

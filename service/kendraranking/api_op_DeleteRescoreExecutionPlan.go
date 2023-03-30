@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes a rescore execution plan. A rescore execution plan is an Amazon Kendra
-// Intelligent Ranking resource used for provisioning the Rescore API.
+// Intelligent Ranking resource used for provisioning the Rescore  API.
 func (c *Client) DeleteRescoreExecutionPlan(ctx context.Context, params *DeleteRescoreExecutionPlanInput, optFns ...func(*Options)) (*DeleteRescoreExecutionPlanOutput, error) {
 	if params == nil {
 		params = &DeleteRescoreExecutionPlanInput{}

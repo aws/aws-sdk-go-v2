@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Imports the source repository credentials for an CodeBuild project that has its
-// source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository.
+// Imports the source repository credentials for an CodeBuild project that has
+// its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository.
 func (c *Client) ImportSourceCredentials(ctx context.Context, params *ImportSourceCredentialsInput, optFns ...func(*Options)) (*ImportSourceCredentialsOutput, error) {
 	if params == nil {
 		params = &ImportSourceCredentialsInput{}
@@ -48,8 +48,8 @@ type ImportSourceCredentialsInput struct {
 	// This member is required.
 	Token *string
 
-	// Set to false to prevent overwriting the repository source credentials. Set to
-	// true to overwrite the repository source credentials. The default value is true.
+	// Set to false  to prevent overwriting the repository source credentials. Set to
+	// true to overwrite the repository source credentials. The default value is true .
 	ShouldOverwrite *bool
 
 	// The Bitbucket username when the authType is BASIC_AUTH. This parameter is not

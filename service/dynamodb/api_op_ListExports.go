@@ -34,8 +34,8 @@ type ListExportsInput struct {
 	MaxResults *int32
 
 	// An optional string that, if supplied, must be copied from the output of a
-	// previous call to ListExports. When provided in this manner, the API fetches the
-	// next page of results.
+	// previous call to ListExports. When provided in this manner, the API fetches
+	// the next page of results.
 	NextToken *string
 
 	// The Amazon Resource Name (ARN) associated with the exported table.
@@ -46,11 +46,11 @@ type ListExportsInput struct {
 
 type ListExportsOutput struct {
 
-	// A list of ExportSummary objects.
+	// A list of ExportSummary  objects.
 	ExportSummaries []types.ExportSummary
 
 	// If this value is returned, there are additional results to be displayed. To
-	// retrieve them, call ListExports again, with NextToken set to this value.
+	// retrieve them, call ListExports  again, with NextToken  set to this value.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -137,8 +137,8 @@ type ListExportsPaginatorOptions struct {
 	// Maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

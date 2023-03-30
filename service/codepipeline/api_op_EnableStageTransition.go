@@ -27,11 +27,11 @@ func (c *Client) EnableStageTransition(ctx context.Context, params *EnableStageT
 	return out, nil
 }
 
-// Represents the input of an EnableStageTransition action.
+// Represents the input of an EnableStageTransition  action.
 type EnableStageTransitionInput struct {
 
-	// The name of the pipeline in which you want to enable the flow of artifacts from
-	// one stage to another.
+	// The name of the pipeline in which you want to enable the flow of artifacts
+	// from one stage to another.
 	//
 	// This member is required.
 	PipelineName *string

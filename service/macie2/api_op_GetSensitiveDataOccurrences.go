@@ -50,19 +50,15 @@ type GetSensitiveDataOccurrencesOutput struct {
 	// or SUCCESS.
 	Error *string
 
-	// A map that specifies 1-100 types of sensitive data reported by the finding and,
-	// for each type, 1-10 occurrences of sensitive data.
+	// A map that specifies 1-100 types of sensitive data reported by the finding
+	// and, for each type, 1-10 occurrences of sensitive data.
 	SensitiveDataOccurrences map[string][]types.DetectedDataDetails
 
-	// The status of the request to retrieve occurrences of sensitive data reported by
-	// the finding. Possible values are:
-	// - ERROR - An error occurred when Amazon Macie
-	// attempted to locate, retrieve, or encrypt the sensitive data. The error value
-	// indicates the nature of the error that occurred.
-	// - PROCESSING - Macie is
-	// processing the request.
-	// - SUCCESS - Macie successfully located, retrieved, and
-	// encrypted the sensitive data.
+	// The status of the request to retrieve occurrences of sensitive data reported
+	// by the finding. Possible values are:
+	//     - ERROR - An error occurred when Amazon Macie attempted to locate, retrieve, or encrypt the sensitive data. The error value indicates the nature of the error that occurred.
+	//     - PROCESSING - Macie is processing the request.
+	//     - SUCCESS - Macie successfully located, retrieved, and encrypted the sensitive data.
 	Status types.RevealRequestStatus
 
 	// Metadata pertaining to the operation's result.
@@ -155,9 +151,9 @@ type FindingRevealedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, FindingRevealedWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, FindingRevealedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -197,9 +193,9 @@ func NewFindingRevealedWaiter(client GetSensitiveDataOccurrencesAPIClient, optFn
 	}
 }
 
-// Wait calls the waiter function for FindingRevealed waiter. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// Wait calls the waiter function for FindingRevealed waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *FindingRevealedWaiter) Wait(ctx context.Context, params *GetSensitiveDataOccurrencesInput, maxWaitDur time.Duration, optFns ...func(*FindingRevealedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

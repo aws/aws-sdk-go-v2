@@ -35,8 +35,8 @@ type DeleteResourcePolicyInput struct {
 
 	// Specifies a specific policy revision to delete. Provide a PolicyRevisionId to
 	// ensure an atomic delete operation. If the provided revision id does not match
-	// the latest policy revision id, an InvalidPolicyRevisionIdException exception is
-	// returned.
+	// the latest policy revision id, an InvalidPolicyRevisionIdException exception
+	// is returned.
 	PolicyRevisionId *string
 
 	noSmithyDocumentSerde

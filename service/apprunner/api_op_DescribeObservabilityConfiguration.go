@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Return a full description of an App Runner observability configuration resource.
+// Return a full description of an App Runner observability configuration
+// resource.
 func (c *Client) DescribeObservabilityConfiguration(ctx context.Context, params *DescribeObservabilityConfigurationInput, optFns ...func(*Options)) (*DescribeObservabilityConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeObservabilityConfigurationInput{}
@@ -32,8 +33,8 @@ type DescribeObservabilityConfigurationInput struct {
 	// The Amazon Resource Name (ARN) of the App Runner observability configuration
 	// that you want a description for. The ARN can be a full observability
 	// configuration ARN, or a partial ARN ending with either .../name  or
-	// .../name/revision . If a revision isn't specified, the latest active revision is
-	// described.
+	// .../name/revision . If a revision isn't specified, the latest active revision
+	// is described.
 	//
 	// This member is required.
 	ObservabilityConfigurationArn *string

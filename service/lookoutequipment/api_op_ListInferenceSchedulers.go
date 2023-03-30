@@ -40,8 +40,8 @@ type ListInferenceSchedulersInput struct {
 	// The name of the ML model used by the inference scheduler to be listed.
 	ModelName *string
 
-	// An opaque pagination token indicating where to continue the listing of inference
-	// schedulers.
+	// An opaque pagination token indicating where to continue the listing of
+	// inference schedulers.
 	NextToken *string
 
 	// Specifies the current status of the inference schedulers to list.
@@ -56,8 +56,8 @@ type ListInferenceSchedulersOutput struct {
 	// upload frequency, model name and ARN, and status.
 	InferenceSchedulerSummaries []types.InferenceSchedulerSummary
 
-	// An opaque pagination token indicating where to continue the listing of inference
-	// schedulers.
+	// An opaque pagination token indicating where to continue the listing of
+	// inference schedulers.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -140,8 +140,8 @@ type ListInferenceSchedulersPaginatorOptions struct {
 	// Specifies the maximum number of inference schedulers to list.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -30,14 +30,13 @@ func (c *Client) DescribeConfigRules(ctx context.Context, params *DescribeConfig
 
 type DescribeConfigRulesInput struct {
 
-	// The names of the Config rules for which you want details. If you do not specify
-	// any names, Config returns details for all your rules.
+	// The names of the Config rules for which you want details. If you do not
+	// specify any names, Config returns details for all your rules.
 	ConfigRuleNames []string
 
 	// Returns a list of Detective or Proactive Config rules. By default, this API
 	// returns an unfiltered list. For more information on Detective or Proactive
-	// Config rules, see  Evaluation Mode
-	// (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config-rules.html)
+	// Config rules, see Evaluation Mode  (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config-rules.html)
 	// in the Config Developer Guide.
 	Filters *types.DescribeConfigRulesFilters
 
@@ -53,8 +52,8 @@ type DescribeConfigRulesOutput struct {
 	// The details about your Config rules.
 	ConfigRules []types.ConfigRule
 
-	// The string that you use in a subsequent request to get the next page of results
-	// in a paginated response.
+	// The string that you use in a subsequent request to get the next page of
+	// results in a paginated response.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -123,8 +122,8 @@ func (c *Client) addOperationDescribeConfigRulesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeConfigRulesAPIClient is a client that implements the DescribeConfigRules
-// operation.
+// DescribeConfigRulesAPIClient is a client that implements the
+// DescribeConfigRules operation.
 type DescribeConfigRulesAPIClient interface {
 	DescribeConfigRules(context.Context, *DescribeConfigRulesInput, ...func(*Options)) (*DescribeConfigRulesOutput, error)
 }
@@ -134,8 +133,8 @@ var _ DescribeConfigRulesAPIClient = (*Client)(nil)
 // DescribeConfigRulesPaginatorOptions is the paginator options for
 // DescribeConfigRules
 type DescribeConfigRulesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

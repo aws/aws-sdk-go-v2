@@ -33,7 +33,8 @@ func (c *Client) DeleteInvitations(ctx context.Context, params *DeleteInvitation
 
 type DeleteInvitationsInput struct {
 
-	// The list of member account IDs that received the invitations you want to delete.
+	// The list of member account IDs that received the invitations you want to
+	// delete.
 	//
 	// This member is required.
 	AccountIds []string

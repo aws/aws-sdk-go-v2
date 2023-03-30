@@ -34,8 +34,8 @@ type CreateRegistryInput struct {
 	// This member is required.
 	RegistryName *string
 
-	// A description of the registry. If description is not provided, there will not be
-	// any default value for this.
+	// A description of the registry. If description is not provided, there will not
+	// be any default value for this.
 	Description *string
 
 	// Amazon Web Services tags that contain a key value pair and may be searched by

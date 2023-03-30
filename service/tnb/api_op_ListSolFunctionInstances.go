@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists network function instances. A network function instance is a function in a
-// function package .
+// Lists network function instances. A network function instance is a function in
+// a function package .
 func (c *Client) ListSolFunctionInstances(ctx context.Context, params *ListSolFunctionInstancesInput, optFns ...func(*Options)) (*ListSolFunctionInstancesOutput, error) {
 	if params == nil {
 		params = &ListSolFunctionInstancesInput{}
@@ -129,8 +129,8 @@ type ListSolFunctionInstancesPaginatorOptions struct {
 	// The maximum number of results to include in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

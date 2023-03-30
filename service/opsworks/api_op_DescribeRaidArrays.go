@@ -15,8 +15,8 @@ import (
 // resource-identifying parameter. Required Permissions: To use this action, an IAM
 // user must have a Show, Deploy, or Manage permissions level for the stack, or an
 // attached policy that explicitly grants permissions. For more information about
-// user permissions, see Managing User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) DescribeRaidArrays(ctx context.Context, params *DescribeRaidArraysInput, optFns ...func(*Options)) (*DescribeRaidArraysOutput, error) {
 	if params == nil {
 		params = &DescribeRaidArraysInput{}
@@ -49,10 +49,10 @@ type DescribeRaidArraysInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeRaidArrays request.
+// Contains the response to a DescribeRaidArrays  request.
 type DescribeRaidArraysOutput struct {
 
-	// A RaidArrays object that describes the specified RAID arrays.
+	// A RaidArrays  object that describes the specified RAID arrays.
 	RaidArrays []types.RaidArray
 
 	// Metadata pertaining to the operation's result.

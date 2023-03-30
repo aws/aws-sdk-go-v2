@@ -59,8 +59,8 @@ type GetNetworkRoutesInput struct {
 	// The routes with a subnet that match the specified CIDR filter.
 	SubnetOfMatches []string
 
-	// The routes with a CIDR that encompasses the CIDR filter. Example: If you specify
-	// 10.0.1.0/30, then the result returns 10.0.1.0/29.
+	// The routes with a CIDR that encompasses the CIDR filter. Example: If you
+	// specify 10.0.1.0/30, then the result returns 10.0.1.0/29.
 	SupernetOfMatches []string
 
 	// The route types.

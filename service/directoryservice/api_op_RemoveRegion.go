@@ -12,7 +12,7 @@ import (
 
 // Stops all replication and removes the domain controllers from the specified
 // Region. You cannot remove the primary Region with this operation. Instead, use
-// the DeleteDirectory API.
+// the DeleteDirectory  API.
 func (c *Client) RemoveRegion(ctx context.Context, params *RemoveRegionInput, optFns ...func(*Options)) (*RemoveRegionOutput, error) {
 	if params == nil {
 		params = &RemoveRegionInput{}
@@ -30,7 +30,8 @@ func (c *Client) RemoveRegion(ctx context.Context, params *RemoveRegionInput, op
 
 type RemoveRegionInput struct {
 
-	// The identifier of the directory for which you want to remove Region replication.
+	// The identifier of the directory for which you want to remove Region
+	// replication.
 	//
 	// This member is required.
 	DirectoryId *string

@@ -35,8 +35,8 @@ type DescribeDataSetInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID for the dataset that you want to create. This ID is unique per Amazon Web
-	// Services Region for each Amazon Web Services account.
+	// The ID for the dataset that you want to create. This ID is unique per Amazon
+	// Web Services Region for each Amazon Web Services account.
 	//
 	// This member is required.
 	DataSetId *string

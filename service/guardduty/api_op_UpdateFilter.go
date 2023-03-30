@@ -44,10 +44,10 @@ type UpdateFilterInput struct {
 	// filter.
 	Action types.FilterAction
 
-	// The description of the filter. Valid characters include alphanumeric characters,
-	// and special characters such as hyphen, period, colon, underscore, parentheses ({
-	// }, [ ], and ( )), forward slash, horizontal tab, vertical tab, newline, form
-	// feed, return, and whitespace.
+	// The description of the filter. Valid characters include alphanumeric
+	// characters, and special characters such as hyphen, period, colon, underscore,
+	// parentheses ( { } , [ ] , and ( )), forward slash, horizontal tab, vertical
+	// tab, newline, form feed, return, and whitespace.
 	Description *string
 
 	// Represents the criteria to be used in the filter for querying findings.

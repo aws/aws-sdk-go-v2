@@ -28,7 +28,7 @@ func (c *Client) DeleteDomain(ctx context.Context, params *DeleteDomainInput, op
 	return out, nil
 }
 
-// Container for the parameters to the DeleteDomain operation.
+// Container for the parameters to the DeleteDomain  operation.
 type DeleteDomainInput struct {
 
 	// The name of the domain you want to permanently delete.

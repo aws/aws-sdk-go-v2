@@ -20,14 +20,15 @@ type AdditionalInstanceConfiguration struct {
 	// Contains settings for the Systems Manager agent on your build instance.
 	SystemsManagerAgent *SystemsManagerAgent
 
-	// Use this property to provide commands or a command script to run when you launch
-	// your build instance. The userDataOverride property replaces any commands that
-	// Image Builder might have added to ensure that Systems Manager is installed on
-	// your Linux build instance. If you override the user data, make sure that you add
-	// commands to install Systems Manager, if it is not pre-installed on your base
+	// Use this property to provide commands or a command script to run when you
+	// launch your build instance. The userDataOverride property replaces any commands
+	// that Image Builder might have added to ensure that Systems Manager is installed
+	// on your Linux build instance. If you override the user data, make sure that you
+	// add commands to install Systems Manager, if it is not pre-installed on your base
 	// image. The user data is always base 64 encoded. For example, the following
-	// commands are encoded as IyEvYmluL2Jhc2gKbWtkaXIgLXAgL3Zhci9iYi8KdG91Y2ggL3Zhci$:
-	// #!/bin/bash mkdir -p /var/bb/ touch /var
+	// commands are encoded as
+	// IyEvYmluL2Jhc2gKbWtkaXIgLXAgL3Zhci9iYi8KdG91Y2ggL3Zhci$: #!/bin/bash mkdir -p
+	// /var/bb/ touch /var
 	UserDataOverride *string
 
 	noSmithyDocumentSerde
@@ -111,8 +112,8 @@ type Component struct {
 	// The name of the component.
 	Name *string
 
-	// Indicates whether component source is hidden from view in the console, and from
-	// component detail results for API, CLI, or SDK operations.
+	// Indicates whether component source is hidden from view in the console, and
+	// from component detail results for API, CLI, or SDK operations.
 	Obfuscate bool
 
 	// The owner of the component.
@@ -129,8 +130,8 @@ type Component struct {
 	// Otherwise, this property is empty.
 	Publisher *string
 
-	// Describes the current status of the component. This is used for components that
-	// are no longer active.
+	// Describes the current status of the component. This is used for components
+	// that are no longer active.
 	State *ComponentState
 
 	// The operating system (OS) version supported by the component. If the OS
@@ -159,8 +160,8 @@ type ComponentConfiguration struct {
 	// This member is required.
 	ComponentArn *string
 
-	// A group of parameter settings that Image Builder uses to configure the component
-	// for a specific recipe.
+	// A group of parameter settings that Image Builder uses to configure the
+	// component for a specific recipe.
 	Parameters []ComponentParameter
 
 	noSmithyDocumentSerde
@@ -237,8 +238,8 @@ type ComponentSummary struct {
 	// The name of the component.
 	Name *string
 
-	// Indicates whether component source is hidden from view in the console, and from
-	// component detail results for API, CLI, or SDK operations.
+	// Indicates whether component source is hidden from view in the console, and
+	// from component detail results for API, CLI, or SDK operations.
 	Obfuscate bool
 
 	// The owner of the component.
@@ -272,20 +273,16 @@ type ComponentSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The defining characteristics of a specific version of an Amazon Web Services TOE
-// component.
+// The defining characteristics of a specific version of an Amazon Web Services
+// TOE component.
 type ComponentVersion struct {
 
-	// The Amazon Resource Name (ARN) of the component. Semantic versioning is included
-	// in each object's Amazon Resource Name (ARN), at the level that applies to that
-	// object as follows:
-	// - Versionless ARNs and Name ARNs do not include specific
-	// values in any of the nodes. The nodes are either left off entirely, or they are
-	// specified as wildcards, for example: x.x.x.
-	// - Version ARNs have only the first
-	// three nodes: ..
-	// - Build version ARNs have all four nodes, and point to a
-	// specific build for a specific version of an object.
+	// The Amazon Resource Name (ARN) of the component. Semantic versioning is
+	// included in each object's Amazon Resource Name (ARN), at the level that applies
+	// to that object as follows:
+	//     - Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are either left off entirely, or they are specified as wildcards, for example: x.x.x.
+	//     - Version ARNs have only the first three nodes: ..
+	//     - Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.
 	Arn *string
 
 	// The date that the component was created.
@@ -312,8 +309,8 @@ type ComponentVersion struct {
 	// image or only to test it.
 	Type ComponentType
 
-	// The semantic version of the component. The semantic version has four nodes: ../.
-	// You can assign values for the first three, and can filter on all of them.
+	// The semantic version of the component. The semantic version has four nodes:
+	// ../. You can assign values for the first three, and can filter on all of them.
 	// Assignment: For the first three nodes you can assign any positive integer value,
 	// including zero, with an upper limit of 2^30-1, or 1073741823 for each node.
 	// Image Builder automatically assigns the build number to the fourth node.
@@ -335,8 +332,8 @@ type Container struct {
 	// A list of URIs for containers created in the context Region.
 	ImageUris []string
 
-	// Containers and container images are Region-specific. This is the Region context
-	// for the container.
+	// Containers and container images are Region-specific. This is the Region
+	// context for the container.
 	Region *string
 
 	noSmithyDocumentSerde
@@ -366,13 +363,9 @@ type ContainerRecipe struct {
 	// The Amazon Resource Name (ARN) of the container recipe. Semantic versioning is
 	// included in each object's Amazon Resource Name (ARN), at the level that applies
 	// to that object as follows:
-	// - Versionless ARNs and Name ARNs do not include
-	// specific values in any of the nodes. The nodes are either left off entirely, or
-	// they are specified as wildcards, for example: x.x.x.
-	// - Version ARNs have only
-	// the first three nodes: ..
-	// - Build version ARNs have all four nodes, and point to
-	// a specific build for a specific version of an object.
+	//     - Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are either left off entirely, or they are specified as wildcards, for example: x.x.x.
+	//     - Version ARNs have only the first three nodes: ..
+	//     - Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.
 	Arn *string
 
 	// Build and test components that are included in the container recipe. Recipes
@@ -402,8 +395,8 @@ type ContainerRecipe struct {
 	// testing container images.
 	InstanceConfiguration *InstanceConfiguration
 
-	// Identifies which KMS key is used to encrypt the container image for distribution
-	// to the target Region.
+	// Identifies which KMS key is used to encrypt the container image for
+	// distribution to the target Region.
 	KmsKeyId *string
 
 	// The name of the container recipe.
@@ -492,16 +485,16 @@ type Distribution struct {
 	// The Windows faster-launching configurations to use for AMI distribution.
 	FastLaunchConfigurations []FastLaunchConfiguration
 
-	// A group of launchTemplateConfiguration settings that apply to image distribution
-	// for specified accounts.
+	// A group of launchTemplateConfiguration settings that apply to image
+	// distribution for specified accounts.
 	LaunchTemplateConfigurations []LaunchTemplateConfiguration
 
 	// The License Manager Configuration to associate with the AMI in the specified
 	// Region.
 	LicenseConfigurationArns []string
 
-	// Configure export settings to deliver disk images created from your image build,
-	// using a file format that is compatible with your VMs in that Region.
+	// Configure export settings to deliver disk images created from your image
+	// build, using a file format that is compatible with your VMs in that Region.
 	S3ExportConfiguration *S3ExportConfiguration
 
 	noSmithyDocumentSerde
@@ -527,8 +520,8 @@ type DistributionConfiguration struct {
 	// The description of the distribution configuration.
 	Description *string
 
-	// The distribution objects that apply Region-specific settings for the deployment
-	// of the image to targeted Regions.
+	// The distribution objects that apply Region-specific settings for the
+	// deployment of the image to targeted Regions.
 	Distributions []Distribution
 
 	// The name of the distribution configuration.
@@ -600,9 +593,9 @@ type EbsInstanceBlockDeviceSpecification struct {
 // Define and configure faster launching for output Windows AMIs.
 type FastLaunchConfiguration struct {
 
-	// A Boolean that represents the current state of faster launching for the Windows
-	// AMI. Set to true to start using Windows faster launching, or false to stop using
-	// it.
+	// A Boolean that represents the current state of faster launching for the
+	// Windows AMI. Set to true  to start using Windows faster launching, or false to
+	// stop using it.
 	//
 	// This member is required.
 	Enabled bool
@@ -628,7 +621,7 @@ type FastLaunchConfiguration struct {
 
 // Identifies the launch template that the associated Windows AMI uses for
 // launching an instance when faster launching is enabled. You can specify either
-// the launchTemplateName or the launchTemplateId, but not both.
+// the launchTemplateName  or the launchTemplateId , but not both.
 type FastLaunchLaunchTemplateSpecification struct {
 
 	// The ID of the launch template to use for faster launching for a Windows AMI.
@@ -644,8 +637,8 @@ type FastLaunchLaunchTemplateSpecification struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration settings for creating and managing pre-provisioned snapshots for a
-// fast-launch enabled Windows AMI.
+// Configuration settings for creating and managing pre-provisioned snapshots for
+// a fast-launch enabled Windows AMI.
 type FastLaunchSnapshotConfiguration struct {
 
 	// The number of pre-provisioned snapshots to keep on hand for a fast-launch
@@ -670,30 +663,23 @@ type Filter struct {
 }
 
 // An Image Builder image. You must specify exactly one recipe for the image –
-// either a container recipe (containerRecipe), which creates a container image, or
-// an image recipe (imageRecipe), which creates an AMI.
+// either a container recipe ( containerRecipe), which creates a container image,
+// or an image recipe ( imageRecipe ), which creates an AMI.
 type Image struct {
 
-	// The Amazon Resource Name (ARN) of the image. Semantic versioning is included in
-	// each object's Amazon Resource Name (ARN), at the level that applies to that
+	// The Amazon Resource Name (ARN) of the image. Semantic versioning is included
+	// in each object's Amazon Resource Name (ARN), at the level that applies to that
 	// object as follows:
-	// - Versionless ARNs and Name ARNs do not include specific
-	// values in any of the nodes. The nodes are either left off entirely, or they are
-	// specified as wildcards, for example: x.x.x.
-	// - Version ARNs have only the first
-	// three nodes: ..
-	// - Build version ARNs have all four nodes, and point to a
-	// specific build for a specific version of an object.
+	//     - Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are either left off entirely, or they are specified as wildcards, for example: x.x.x.
+	//     - Version ARNs have only the first three nodes: ..
+	//     - Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.
 	Arn *string
 
-	// Indicates the type of build that created this image. The build can be initiated
-	// in the following ways:
-	// - USER_INITIATED – A manual pipeline build request.
-	// -
-	// SCHEDULED – A pipeline build initiated by a cron expression in the Image Builder
-	// pipeline, or from EventBridge.
-	// - IMPORT – A VM import created the image to use
-	// as the base image for the recipe.
+	// Indicates the type of build that created this image. The build can be
+	// initiated in the following ways:
+	//     - USER_INITIATED – A manual pipeline build request.
+	//     - SCHEDULED – A pipeline build initiated by a cron expression in the Image Builder pipeline, or from EventBridge.
+	//     - IMPORT – A VM import created the image to use as the base image for the recipe.
 	BuildType BuildType
 
 	// For container images, this is the container recipe that Image Builder used to
@@ -706,8 +692,8 @@ type Image struct {
 	// The distribution configuration that Image Builder used to create this image.
 	DistributionConfiguration *DistributionConfiguration
 
-	// Indicates whether Image Builder collects additional information about the image,
-	// such as the operating system (OS) version and package list.
+	// Indicates whether Image Builder collects additional information about the
+	// image, such as the operating system (OS) version and package list.
 	EnhancedImageMetadataEnabled *bool
 
 	// For images that distribute an AMI, this is the image recipe that Image Builder
@@ -751,8 +737,8 @@ type Image struct {
 	// Specifies whether this image produces an AMI or a container image.
 	Type ImageType
 
-	// The semantic version of the image. The semantic version has four nodes: ../. You
-	// can assign values for the first three, and can filter on all of them.
+	// The semantic version of the image. The semantic version has four nodes: ../.
+	// You can assign values for the first three, and can filter on all of them.
 	// Assignment: For the first three nodes you can assign any positive integer value,
 	// including zero, with an upper limit of 2^30-1, or 1073741823 for each node.
 	// Image Builder automatically assigns the build number to the fourth node.
@@ -805,8 +791,8 @@ type ImagePipeline struct {
 	// The description of the image pipeline.
 	Description *string
 
-	// The Amazon Resource Name (ARN) of the distribution configuration associated with
-	// this image pipeline.
+	// The Amazon Resource Name (ARN) of the distribution configuration associated
+	// with this image pipeline.
 	DistributionConfigurationArn *string
 
 	// Collects additional information about the image being created, including the
@@ -858,9 +844,9 @@ type ImageRecipe struct {
 	// The block device mappings to apply when creating images from this recipe.
 	BlockDeviceMappings []InstanceBlockDeviceMapping
 
-	// The components that are included in the image recipe. Recipes require a minimum
-	// of one build component, and can have a maximum of 20 build and test components
-	// in any combination.
+	// The components that are included in the image recipe. Recipes require a
+	// minimum of one build component, and can have a maximum of 20 build and test
+	// components in any combination.
 	Components []ComponentConfiguration
 
 	// The date on which this image recipe was created.
@@ -942,14 +928,11 @@ type ImageSummary struct {
 	// The Amazon Resource Name (ARN) of the image.
 	Arn *string
 
-	// Indicates the type of build that created this image. The build can be initiated
-	// in the following ways:
-	// - USER_INITIATED – A manual pipeline build request.
-	// -
-	// SCHEDULED – A pipeline build initiated by a cron expression in the Image Builder
-	// pipeline, or from EventBridge.
-	// - IMPORT – A VM import created the image to use
-	// as the base image for the recipe.
+	// Indicates the type of build that created this image. The build can be
+	// initiated in the following ways:
+	//     - USER_INITIATED – A manual pipeline build request.
+	//     - SCHEDULED – A pipeline build initiated by a cron expression in the Image Builder pipeline, or from EventBridge.
+	//     - IMPORT – A VM import created the image to use as the base image for the recipe.
 	BuildType BuildType
 
 	// The date on which Image Builder created this image.
@@ -994,12 +977,13 @@ type ImageSummary struct {
 // it.
 type ImageTestsConfiguration struct {
 
-	// Determines if tests should run after building the image. Image Builder defaults
-	// to enable tests to run following the image build, before image distribution.
+	// Determines if tests should run after building the image. Image Builder
+	// defaults to enable tests to run following the image build, before image
+	// distribution.
 	ImageTestsEnabled *bool
 
-	// The maximum time in minutes that tests are permitted to run. The timeoutMinutes
-	// attribute is not currently active. This value is ignored.
+	// The maximum time in minutes that tests are permitted to run. The
+	// timeoutMinutes attribute is not currently active. This value is ignored.
 	TimeoutMinutes *int32
 
 	noSmithyDocumentSerde
@@ -1008,26 +992,19 @@ type ImageTestsConfiguration struct {
 // The defining characteristics of a specific version of an Image Builder image.
 type ImageVersion struct {
 
-	// The Amazon Resource Name (ARN) of a specific version of an Image Builder image.
-	// Semantic versioning is included in each object's Amazon Resource Name (ARN), at
-	// the level that applies to that object as follows:
-	// - Versionless ARNs and Name
-	// ARNs do not include specific values in any of the nodes. The nodes are either
-	// left off entirely, or they are specified as wildcards, for example: x.x.x.
-	// -
-	// Version ARNs have only the first three nodes: ..
-	// - Build version ARNs have all
-	// four nodes, and point to a specific build for a specific version of an object.
+	// The Amazon Resource Name (ARN) of a specific version of an Image Builder
+	// image. Semantic versioning is included in each object's Amazon Resource Name
+	// (ARN), at the level that applies to that object as follows:
+	//     - Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are either left off entirely, or they are specified as wildcards, for example: x.x.x.
+	//     - Version ARNs have only the first three nodes: ..
+	//     - Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.
 	Arn *string
 
-	// Indicates the type of build that created this image. The build can be initiated
-	// in the following ways:
-	// - USER_INITIATED – A manual pipeline build request.
-	// -
-	// SCHEDULED – A pipeline build initiated by a cron expression in the Image Builder
-	// pipeline, or from EventBridge.
-	// - IMPORT – A VM import created the image to use
-	// as the base image for the recipe.
+	// Indicates the type of build that created this image. The build can be
+	// initiated in the following ways:
+	//     - USER_INITIATED – A manual pipeline build request.
+	//     - SCHEDULED – A pipeline build initiated by a cron expression in the Image Builder pipeline, or from EventBridge.
+	//     - IMPORT – A VM import created the image to use as the base image for the recipe.
 	BuildType BuildType
 
 	// The date on which this specific version of the Image Builder image was created.
@@ -1181,16 +1158,16 @@ type InstanceBlockDeviceMapping struct {
 	noSmithyDocumentSerde
 }
 
-// Defines a custom base AMI and block device mapping configurations of an instance
-// used for building and testing container images.
+// Defines a custom base AMI and block device mapping configurations of an
+// instance used for building and testing container images.
 type InstanceConfiguration struct {
 
 	// Defines the block devices to attach for building an instance from this Image
 	// Builder AMI.
 	BlockDeviceMappings []InstanceBlockDeviceMapping
 
-	// The AMI ID to use as the base image for a container build and test instance. If
-	// not specified, Image Builder will use the appropriate ECS-optimized AMI as a
+	// The AMI ID to use as the base image for a container build and test instance.
+	// If not specified, Image Builder will use the appropriate ECS-optimized AMI as a
 	// base image.
 	Image *string
 
@@ -1199,28 +1176,21 @@ type InstanceConfiguration struct {
 
 // The instance metadata options that apply to the HTTP requests that pipeline
 // builds use to launch EC2 build and test instances. For more information about
-// instance metadata options, see Configure the instance metadata options
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html)
+// instance metadata options, see Configure the instance metadata options (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html)
 // in the Amazon EC2 User Guide for Linux instances, or Configure the instance
-// metadata options
-// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html)
+// metadata options (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html)
 // in the Amazon EC2 Windows Guide for Windows instances.
 type InstanceMetadataOptions struct {
 
-	// Limit the number of hops that an instance metadata request can traverse to reach
-	// its destination. The default is one hop. However, if HTTP tokens are required,
-	// container image builds need a minimum of two hops.
+	// Limit the number of hops that an instance metadata request can traverse to
+	// reach its destination. The default is one hop. However, if HTTP tokens are
+	// required, container image builds need a minimum of two hops.
 	HttpPutResponseHopLimit *int32
 
 	// Indicates whether a signed token header is required for instance metadata
 	// retrieval requests. The values affect the response as follows:
-	// - required – When
-	// you retrieve the IAM role credentials, version 2.0 credentials are returned in
-	// all cases.
-	// - optional – You can include a signed token header in your request to
-	// retrieve instance metadata, or you can leave it out. If you include it, version
-	// 2.0 credentials are returned for the IAM role. Otherwise, version 1.0
-	// credentials are returned.
+	//     - required – When you retrieve the IAM role credentials, version 2.0 credentials are returned in all cases.
+	//     - optional – You can include a signed token header in your request to retrieve instance metadata, or you can leave it out. If you include it, version 2.0 credentials are returned for the IAM role. Otherwise, version 1.0 credentials are returned.
 	//
 	// The default setting is optional.
 	HttpTokens *string
@@ -1229,24 +1199,23 @@ type InstanceMetadataOptions struct {
 }
 
 // Describes the configuration for a launch permission. The launch permission
-// modification request is sent to the Amazon EC2 ModifyImageAttribute
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html)
+// modification request is sent to the Amazon EC2 ModifyImageAttribute (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html)
 // API on behalf of the user for each Region they have selected to distribute the
 // AMI. To make an AMI public, set the launch permission authorized accounts to
-// all. See the examples for making an AMI public at Amazon EC2
-// ModifyImageAttribute
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html).
+// all . See the examples for making an AMI public at Amazon EC2
+// ModifyImageAttribute (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html)
+// .
 type LaunchPermissionConfiguration struct {
 
-	// The ARN for an Amazon Web Services Organization that you want to share your AMI
-	// with. For more information, see What is Organizations?
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html).
+	// The ARN for an Amazon Web Services Organization that you want to share your
+	// AMI with. For more information, see What is Organizations? (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html)
+	// .
 	OrganizationArns []string
 
 	// The ARN for an Organizations organizational unit (OU) that you want to share
 	// your AMI with. For more information about key concepts for Organizations, see
-	// Organizations terminology and concepts
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html).
+	// Organizations terminology and concepts (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html)
+	// .
 	OrganizationalUnitArns []string
 
 	// The name of the group.
@@ -1269,8 +1238,8 @@ type LaunchTemplateConfiguration struct {
 	// The account ID that this configuration applies to.
 	AccountId *string
 
-	// Set the specified Amazon EC2 launch template as the default launch template for
-	// the specified account.
+	// Set the specified Amazon EC2 launch template as the default launch template
+	// for the specified account.
 	SetDefaultVersion bool
 
 	noSmithyDocumentSerde
@@ -1303,19 +1272,15 @@ type OutputResources struct {
 type S3ExportConfiguration struct {
 
 	// Export the updated image to one of the following supported disk image formats:
-	// -
-	// Virtual Hard Disk (VHD) – Compatible with Citrix Xen and Microsoft Hyper-V
-	// virtualization products.
-	// - Stream-optimized ESX Virtual Machine Disk (VMDK) –
-	// Compatible with VMware ESX and VMware vSphere versions 4, 5, and 6.
-	// - Raw – Raw
-	// format.
+	//     - Virtual Hard Disk (VHD) – Compatible with Citrix Xen and Microsoft Hyper-V virtualization products.
+	//     - Stream-optimized ESX Virtual Machine Disk (VMDK) – Compatible with VMware ESX and VMware vSphere versions 4, 5, and 6.
+	//     - Raw – Raw format.
 	//
 	// This member is required.
 	DiskImageFormat DiskImageFormat
 
-	// The name of the role that grants VM Import/Export permission to export images to
-	// your S3 bucket.
+	// The name of the role that grants VM Import/Export permission to export images
+	// to your S3 bucket.
 	//
 	// This member is required.
 	RoleName *string
@@ -1344,33 +1309,31 @@ type S3Logs struct {
 	noSmithyDocumentSerde
 }
 
-// A schedule configures how often and when a pipeline will automatically create a
-// new image.
+// A schedule configures how often and when a pipeline will automatically create
+// a new image.
 type Schedule struct {
 
 	// The condition configures when the pipeline should trigger a new image build.
-	// When the pipelineExecutionStartCondition is set to
-	// EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE, and you use semantic version
-	// filters on the base image or components in your image recipe, EC2 Image Builder
-	// will build a new image only when there are new versions of the image or
+	// When the pipelineExecutionStartCondition  is set to
+	// EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE, and you use semantic
+	// version filters on the base image or components in your image recipe, EC2 Image
+	// Builder will build a new image only when there are new versions of the image or
 	// components in your recipe that match the semantic version filter. When it is set
 	// to EXPRESSION_MATCH_ONLY, it will build a new image every time the CRON
 	// expression matches the current time. For semantic version syntax, see
-	// CreateComponent
-	// (https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html)
+	// CreateComponent (https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html)
 	// in the EC2 Image Builder API Reference.
 	PipelineExecutionStartCondition PipelineExecutionStartCondition
 
 	// The cron expression determines how often EC2 Image Builder evaluates your
 	// pipelineExecutionStartCondition. For information on how to format a cron
-	// expression in Image Builder, see Use cron expressions in EC2 Image Builder
-	// (https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-cron.html).
+	// expression in Image Builder, see Use cron expressions in EC2 Image Builder (https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-cron.html)
+	// .
 	ScheduleExpression *string
 
-	// The timezone that applies to the scheduling expression. For example, "Etc/UTC",
-	// "America/Los_Angeles" in the IANA timezone format
-	// (https://www.joda.org/joda-time/timezones.html). If not specified this defaults
-	// to UTC.
+	// The timezone that applies to the scheduling expression. For example,
+	// "Etc/UTC", "America/Los_Angeles" in the IANA timezone format (https://www.joda.org/joda-time/timezones.html)
+	// . If not specified this defaults to UTC.
 	Timezone *string
 
 	noSmithyDocumentSerde
@@ -1391,8 +1354,8 @@ type SystemsManagerAgent struct {
 // The container repository where the output container image is stored.
 type TargetContainerRepository struct {
 
-	// The name of the container repository where the output container image is stored.
-	// This name is prefixed by the repository location.
+	// The name of the container repository where the output container image is
+	// stored. This name is prefixed by the repository location.
 	//
 	// This member is required.
 	RepositoryName *string

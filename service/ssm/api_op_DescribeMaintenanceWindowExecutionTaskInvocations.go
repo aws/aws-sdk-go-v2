@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the individual task executions (one per target) for a particular task
-// run as part of a maintenance window execution.
+// Retrieves the individual task executions (one per target) for a particular
+// task run as part of a maintenance window execution.
 func (c *Client) DescribeMaintenanceWindowExecutionTaskInvocations(ctx context.Context, params *DescribeMaintenanceWindowExecutionTaskInvocationsInput, optFns ...func(*Options)) (*DescribeMaintenanceWindowExecutionTaskInvocationsOutput, error) {
 	if params == nil {
 		params = &DescribeMaintenanceWindowExecutionTaskInvocationsInput{}
@@ -42,9 +42,9 @@ type DescribeMaintenanceWindowExecutionTaskInvocationsInput struct {
 	// This member is required.
 	WindowExecutionId *string
 
-	// Optional filters used to scope down the returned task invocations. The supported
-	// filter key is STATUS with the corresponding values PENDING, IN_PROGRESS,
-	// SUCCESS, FAILED, TIMED_OUT, CANCELLING, and CANCELLED.
+	// Optional filters used to scope down the returned task invocations. The
+	// supported filter key is STATUS  with the corresponding values PENDING ,
+	// IN_PROGRESS , SUCCESS , FAILED , TIMED_OUT , CANCELLING , and CANCELLED .
 	Filters []types.MaintenanceWindowFilter
 
 	// The maximum number of items to return for this call. The call also returns a
@@ -151,8 +151,8 @@ type DescribeMaintenanceWindowExecutionTaskInvocationsPaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

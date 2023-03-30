@@ -41,7 +41,7 @@ type DescribeEventsInput struct {
 	// To receive a paginated response, use this parameter to specify the maximum
 	// number of results to be returned with a single call. If the number of available
 	// results exceeds this maximum, the response includes a NextToken value that you
-	// can assign to the NextToken request parameter to get the next set of results.
+	// can assign to the NextToken  request parameter to get the next set of results.
 	MaxResults *int32
 
 	// NextToken is a string that is returned in some command responses. It indicates
@@ -49,8 +49,8 @@ type DescribeEventsInput struct {
 	// request to get remaining items. To get remaining results, call DescribeEvents
 	// again, and assign the token from the previous results as the value of the
 	// nextToken parameter. If there are no more results, the response object's
-	// nextToken parameter value is null. Setting a nextToken value that was not
-	// returned in your previous results causes an InvalidNextTokenException to occur.
+	// nextToken parameter value is null . Setting a nextToken value that was not
+	// returned in your previous results causes an InvalidNextTokenException  to occur.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -63,11 +63,11 @@ type DescribeEventsOutput struct {
 	// request to get remaining items. To get remaining results, call DescribeEvents
 	// again, and assign the token from the previous results as the value of the
 	// nextToken parameter. If there are no more results, the response object's
-	// nextToken parameter value is null. Setting a nextToken value that was not
-	// returned in your previous results causes an InvalidNextTokenException to occur.
+	// nextToken parameter value is null . Setting a nextToken value that was not
+	// returned in your previous results causes an InvalidNextTokenException  to occur.
 	NextToken *string
 
-	// Contains the response to a DescribeEvents request.
+	// Contains the response to a DescribeEvents  request.
 	ServerEvents []types.ServerEvent
 
 	// Metadata pertaining to the operation's result.
@@ -152,11 +152,11 @@ type DescribeEventsPaginatorOptions struct {
 	// To receive a paginated response, use this parameter to specify the maximum
 	// number of results to be returned with a single call. If the number of available
 	// results exceeds this maximum, the response includes a NextToken value that you
-	// can assign to the NextToken request parameter to get the next set of results.
+	// can assign to the NextToken  request parameter to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

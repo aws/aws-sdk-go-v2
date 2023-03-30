@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Return a list of App Runner VPC Ingress Connections in your Amazon Web Services
-// account.
+// Return a list of App Runner VPC Ingress Connections in your Amazon Web
+// Services account.
 func (c *Client) ListVpcIngressConnections(ctx context.Context, params *ListVpcIngressConnectionsInput, optFns ...func(*Options)) (*ListVpcIngressConnectionsOutput, error) {
 	if params == nil {
 		params = &ListVpcIngressConnectionsInput{}
@@ -31,8 +31,8 @@ func (c *Client) ListVpcIngressConnections(ctx context.Context, params *ListVpcI
 
 type ListVpcIngressConnectionsInput struct {
 
-	// The VPC Ingress Connections to be listed based on either the Service Arn or Vpc
-	// Endpoint Id, or both.
+	// The VPC Ingress Connections to be listed based on either the Service Arn or
+	// Vpc Endpoint Id, or both.
 	Filter *types.ListVpcIngressConnectionsFilter
 
 	// The maximum number of results to include in each response (result page). It's
@@ -43,7 +43,7 @@ type ListVpcIngressConnectionsInput struct {
 	// A token from a previous result page. It's used for a paginated request. The
 	// request retrieves the next result page. All other parameter values must be
 	// identical to the ones that are specified in the initial request. If you don't
-	// specify NextToken, the request retrieves the first result page.
+	// specify NextToken , the request retrieves the first result page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,13 +52,13 @@ type ListVpcIngressConnectionsInput struct {
 type ListVpcIngressConnectionsOutput struct {
 
 	// A list of summary information records for VPC Ingress Connections. In a
-	// paginated request, the request returns up to MaxResults records for each call.
+	// paginated request, the request returns up to MaxResults  records for each call.
 	//
 	// This member is required.
 	VpcIngressConnectionSummaryList []types.VpcIngressConnectionSummary
 
-	// The token that you can pass in a subsequent request to get the next result page.
-	// It's returned in a paginated request.
+	// The token that you can pass in a subsequent request to get the next result
+	// page. It's returned in a paginated request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -143,8 +143,8 @@ type ListVpcIngressConnectionsPaginatorOptions struct {
 	// retrieves all available results in a single response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -21,10 +21,8 @@ type Environment struct {
 	OwnerArn *string
 
 	// The type of environment. Valid values include the following:
-	// - ec2: An Amazon
-	// Elastic Compute Cloud (Amazon EC2) instance connects to the environment.
-	// - ssh:
-	// Your own server connects to the environment.
+	//     - ec2 : An Amazon Elastic Compute Cloud (Amazon EC2) instance connects to the environment.
+	//     - ssh : Your own server connects to the environment.
 	//
 	// This member is required.
 	Type EnvironmentType
@@ -44,20 +42,16 @@ type Environment struct {
 
 	// Describes the status of Amazon Web Services managed temporary credentials for
 	// the Cloud9 environment. Available values are:
-	// - ENABLED_ON_CREATE
-	// -
-	// ENABLED_BY_OWNER
-	// - DISABLED_BY_DEFAULT
-	// - DISABLED_BY_OWNER
-	// -
-	// DISABLED_BY_COLLABORATOR
-	// - PENDING_REMOVAL_BY_COLLABORATOR
-	// -
-	// PENDING_REMOVAL_BY_OWNER
-	// - FAILED_REMOVAL_BY_COLLABORATOR
-	// - ENABLED_BY_OWNER
-	// -
-	// DISABLED_BY_DEFAULT
+	//     - ENABLED_ON_CREATE
+	//     - ENABLED_BY_OWNER
+	//     - DISABLED_BY_DEFAULT
+	//     - DISABLED_BY_OWNER
+	//     - DISABLED_BY_COLLABORATOR
+	//     - PENDING_REMOVAL_BY_COLLABORATOR
+	//     - PENDING_REMOVAL_BY_OWNER
+	//     - FAILED_REMOVAL_BY_COLLABORATOR
+	//     - ENABLED_BY_OWNER
+	//     - DISABLED_BY_DEFAULT
 	ManagedCredentialsStatus ManagedCredentialsStatus
 
 	// The name of the environment.
@@ -66,8 +60,8 @@ type Environment struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the current creation or deletion lifecycle state of an Cloud9
-// development environment.
+// Information about the current creation or deletion lifecycle state of an
+// Cloud9 development environment.
 type EnvironmentLifecycle struct {
 
 	// If the environment failed to delete, the Amazon Resource Name (ARN) of the
@@ -78,15 +72,11 @@ type EnvironmentLifecycle struct {
 	Reason *string
 
 	// The current creation or deletion lifecycle state of the environment.
-	// - CREATING:
-	// The environment is in the process of being created.
-	// - CREATED: The environment
-	// was successfully created.
-	// - CREATE_FAILED: The environment failed to be
-	// created.
-	// - DELETING: The environment is in the process of being deleted.
-	// -
-	// DELETE_FAILED: The environment failed to delete.
+	//     - CREATING : The environment is in the process of being created.
+	//     - CREATED : The environment was successfully created.
+	//     - CREATE_FAILED : The environment failed to be created.
+	//     - DELETING : The environment is in the process of being deleted.
+	//     - DELETE_FAILED : The environment failed to delete.
 	Status EnvironmentLifecycleStatus
 
 	noSmithyDocumentSerde
@@ -102,11 +92,9 @@ type EnvironmentMember struct {
 
 	// The type of environment member permissions associated with this environment
 	// member. Available values include:
-	// - owner: Owns the environment.
-	// - read-only:
-	// Has read-only access to the environment.
-	// - read-write: Has read-write access to
-	// the environment.
+	//     - owner : Owns the environment.
+	//     - read-only : Has read-only access to the environment.
+	//     - read-write : Has read-write access to the environment.
 	//
 	// This member is required.
 	Permissions Permissions
@@ -128,11 +116,11 @@ type EnvironmentMember struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata that is associated with Amazon Web Services resources. In particular, a
-// name-value pair that can be associated with an Cloud9 development environment.
+// Metadata that is associated with Amazon Web Services resources. In particular,
+// a name-value pair that can be associated with an Cloud9 development environment.
 // There are two types of tags: user tags and system tags. A user tag is created by
 // the user. A system tag is automatically created by Amazon Web Services services.
-// A system tag is prefixed with "aws:" and cannot be modified by the user.
+// A system tag is prefixed with "aws:"  and cannot be modified by the user.
 type Tag struct {
 
 	// The name part of a tag.

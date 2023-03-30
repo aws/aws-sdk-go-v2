@@ -38,8 +38,8 @@ type UpdateAppInput struct {
 	// The new name of the application.
 	Name *string
 
-	// The name of the service role in the customer's account used by Server Migration
-	// Service.
+	// The name of the service role in the customer's account used by Server
+	// Migration Service.
 	RoleName *string
 
 	// The server groups in the application to update.

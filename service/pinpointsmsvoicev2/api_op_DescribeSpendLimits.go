@@ -12,12 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the current Amazon Pinpoint monthly spend limits for sending voice and
-// text messages. When you establish an Amazon Web Services account, the account
-// has initial monthly spend limit in a given Region. For more information on
-// increasing your monthly spend limit, see  Requesting increases to your monthly
-// SMS spending quota for Amazon Pinpoint
-// (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-spend-threshold.html)
+// Describes the current Amazon Pinpoint monthly spend limits for sending voice
+// and text messages. When you establish an Amazon Web Services account, the
+// account has initial monthly spend limit in a given Region. For more information
+// on increasing your monthly spend limit, see Requesting increases to your
+// monthly SMS spending quota for Amazon Pinpoint  (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-spend-threshold.html)
 // in the Amazon Pinpoint User Guide.
 func (c *Client) DescribeSpendLimits(ctx context.Context, params *DescribeSpendLimitsInput, optFns ...func(*Options)) (*DescribeSpendLimitsOutput, error) {
 	if params == nil {
@@ -52,8 +51,8 @@ type DescribeSpendLimitsOutput struct {
 	// empty then there are no more results.
 	NextToken *string
 
-	// An array of SpendLimit objects that contain the details for the requested spend
-	// limits.
+	// An array of SpendLimit objects that contain the details for the requested
+	// spend limits.
 	SpendLimits []types.SpendLimit
 
 	// Metadata pertaining to the operation's result.
@@ -122,8 +121,8 @@ func (c *Client) addOperationDescribeSpendLimitsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeSpendLimitsAPIClient is a client that implements the DescribeSpendLimits
-// operation.
+// DescribeSpendLimitsAPIClient is a client that implements the
+// DescribeSpendLimits operation.
 type DescribeSpendLimitsAPIClient interface {
 	DescribeSpendLimits(context.Context, *DescribeSpendLimitsInput, ...func(*Options)) (*DescribeSpendLimitsOutput, error)
 }
@@ -136,8 +135,8 @@ type DescribeSpendLimitsPaginatorOptions struct {
 	// The maximum number of results to return per each request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -11,50 +11,24 @@ import (
 // content.
 type AppIntegrationsConfiguration struct {
 
-	// The Amazon Resource Name (ARN) of the AppIntegrations DataIntegration to use for
-	// ingesting content.
-	// - For  Salesforce
-	// (https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm),
-	// your AppIntegrations DataIntegration must have an ObjectConfiguration if
-	// objectFields is not provided, including at least Id, ArticleNumber,
-	// VersionNumber, Title, PublishStatus, and IsDeleted as source fields.
-	// - For
-	// ServiceNow
-	// (https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api),
-	// your AppIntegrations DataIntegration must have an ObjectConfiguration if
-	// objectFields is not provided, including at least number, short_description,
-	// sys_mod_count, workflow_state, and active as source fields.
-	// - For  Zendesk
-	// (https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/),
-	// your AppIntegrations DataIntegration must have an ObjectConfiguration if
-	// objectFields is not provided, including at least id, title, updated_at, and
-	// draft as source fields.
-	// - For  SharePoint
-	// (https://learn.microsoft.com/en-us/sharepoint/dev/sp-add-ins/sharepoint-net-server-csom-jsom-and-rest-api-index),
-	// your AppIntegrations DataIntegration must have a FileConfiguration, including
-	// only file extensions that are among docx, pdf, html, htm, and txt.
+	// The Amazon Resource Name (ARN) of the AppIntegrations DataIntegration to use
+	// for ingesting content.
+	//     - For Salesforce (https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm) , your AppIntegrations DataIntegration must have an ObjectConfiguration if objectFields is not provided, including at least Id , ArticleNumber , VersionNumber , Title , PublishStatus , and IsDeleted as source fields.
+	//     - For ServiceNow (https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api) , your AppIntegrations DataIntegration must have an ObjectConfiguration if objectFields is not provided, including at least number , short_description , sys_mod_count , workflow_state , and active as source fields.
+	//     - For Zendesk (https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/) , your AppIntegrations DataIntegration must have an ObjectConfiguration if objectFields is not provided, including at least id , title , updated_at , and draft as source fields.
+	//     - For SharePoint (https://learn.microsoft.com/en-us/sharepoint/dev/sp-add-ins/sharepoint-net-server-csom-jsom-and-rest-api-index) , your AppIntegrations DataIntegration must have a FileConfiguration, including only file extensions that are among docx , pdf , html , htm , and txt .
 	//
 	// This member is required.
 	AppIntegrationArn *string
 
 	// The fields from the source that are made available to your agents in Wisdom.
 	// Optional if ObjectConfiguration is included in the provided DataIntegration.
-	// -
-	// For  Salesforce
-	// (https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm),
-	// you must include at least Id, ArticleNumber, VersionNumber, Title,
-	// PublishStatus, and IsDeleted.
-	// - For  ServiceNow
-	// (https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api),
-	// you must include at least number, short_description, sys_mod_count,
-	// workflow_state, and active.
-	// - For  Zendesk
-	// (https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/),
-	// you must include at least id, title, updated_at, and draft.
+	//     - For Salesforce (https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm) , you must include at least Id , ArticleNumber , VersionNumber , Title , PublishStatus , and IsDeleted .
+	//     - For ServiceNow (https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api) , you must include at least number , short_description , sys_mod_count , workflow_state , and active .
+	//     - For Zendesk (https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/) , you must include at least id , title , updated_at , and draft .
 	//
-	// Make sure to
-	// include additional fields. These fields are indexed and used to source
-	// recommendations.
+	// Make sure to include additional fields. These fields are indexed and used to
+	// source recommendations.
 	ObjectFields []string
 
 	noSmithyDocumentSerde
@@ -460,8 +434,8 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
-// Offset specification to describe highlighting of document excerpts for rendering
-// search results and recommendations.
+// Offset specification to describe highlighting of document excerpts for
+// rendering search results and recommendations.
 type Highlight struct {
 
 	// The offset for the start of the highlight.
@@ -648,10 +622,8 @@ type RecommendationTrigger struct {
 	RecommendationIds []string
 
 	// The source of the recommendation trigger.
-	// - ISSUE_DETECTION: The corresponding
-	// recommendations were triggered by a Contact Lens issue.
-	// - RULE_EVALUATION: The
-	// corresponding recommendations were triggered by a Contact Lens rule.
+	//     - ISSUE_DETECTION: The corresponding recommendations were triggered by a Contact Lens issue.
+	//     - RULE_EVALUATION: The corresponding recommendations were triggered by a Contact Lens rule.
 	//
 	// This member is required.
 	Source RecommendationSourceType
@@ -688,16 +660,12 @@ type RenderingConfiguration struct {
 	// A URI template containing exactly one variable in ${variableName} format. This
 	// can only be set for EXTERNAL knowledge bases. For Salesforce, ServiceNow, and
 	// Zendesk, the variable must be one of the following:
-	// - Salesforce: Id,
-	// ArticleNumber, VersionNumber, Title, PublishStatus, or IsDeleted
-	// - ServiceNow:
-	// number, short_description, sys_mod_count, workflow_state, or active
-	// - Zendesk:
-	// id, title, updated_at, or draft
-	//
-	// The variable is replaced with the actual value
-	// for a piece of content when calling GetContent
-	// (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetContent.html).
+	//     - Salesforce: Id , ArticleNumber , VersionNumber , Title , PublishStatus , or IsDeleted
+	//     - ServiceNow: number , short_description , sys_mod_count , workflow_state , or active
+	//     - Zendesk: id , title , updated_at , or draft
+	// The variable is replaced with
+	// the actual value for a piece of content when calling GetContent (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetContent.html)
+	// .
 	TemplateUri *string
 
 	noSmithyDocumentSerde
@@ -736,8 +704,8 @@ type SearchExpression struct {
 // The KMS key used for encryption.
 type ServerSideEncryptionConfiguration struct {
 
-	// The KMS key. For information about valid ID values, see Key identifiers (KeyId)
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id).
+	// The KMS key. For information about valid ID values, see Key identifiers (KeyId) (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id)
+	// .
 	KmsKeyId *string
 
 	noSmithyDocumentSerde

@@ -18,14 +18,8 @@ import (
 // depending on the Amazon Web Services service. Events that have impact beyond
 // that of the affected entities, or where the extent of impact is unknown, include
 // at least one entity indicating this. At least one event ARN is required.
-// - This
-// API operation uses pagination. Specify the nextToken parameter in the next
-// request to return more results.
-// - This operation supports resource-level
-// permissions. You can use this operation to allow or deny access to specific
-// Health events. For more information, see Resource- and action-based conditions
-// (https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions)
-// in the Health User Guide.
+//   - This API operation uses pagination. Specify the nextToken parameter in the next request to return more results.
+//   - This operation supports resource-level permissions. You can use this operation to allow or deny access to specific Health events. For more information, see Resource- and action-based conditions (https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions) in the Health User Guide.
 func (c *Client) DescribeAffectedEntities(ctx context.Context, params *DescribeAffectedEntitiesInput, optFns ...func(*Options)) (*DescribeAffectedEntitiesOutput, error) {
 	if params == nil {
 		params = &DescribeAffectedEntitiesInput{}
@@ -48,8 +42,8 @@ type DescribeAffectedEntitiesInput struct {
 	// This member is required.
 	Filter *types.EntityFilter
 
-	// The locale (language) to return information in. English (en) is the default and
-	// the only supported value at this time.
+	// The locale (language) to return information in. English (en) is the default
+	// and the only supported value at this time.
 	Locale *string
 
 	// The maximum number of items to return in one batch, between 10 and 100,
@@ -162,8 +156,8 @@ type DescribeAffectedEntitiesPaginatorOptions struct {
 	// inclusive.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -12,13 +12,11 @@ import (
 )
 
 // Activates a public third-party extension, making it available for use in stack
-// templates. For more information, see Using public extensions
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html)
+// templates. For more information, see Using public extensions (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html)
 // in the CloudFormation User Guide. Once you have activated a public third-party
 // extension in your account and region, use SetTypeConfiguration to specify
 // configuration properties for the extension. For more information, see
-// Configuring extensions at the account level
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
+// Configuring extensions at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
 // in the CloudFormation User Guide.
 func (c *Client) ActivateType(ctx context.Context, params *ActivateTypeInput, optFns ...func(*Options)) (*ActivateTypeOutput, error) {
 	if params == nil {
@@ -37,9 +35,9 @@ func (c *Client) ActivateType(ctx context.Context, params *ActivateTypeInput, op
 
 type ActivateTypeInput struct {
 
-	// Whether to automatically update the extension in this account and region when a
-	// new minor version is published by the extension publisher. Major versions
-	// released by the publisher must be manually updated. The default is true.
+	// Whether to automatically update the extension in this account and region when
+	// a new minor version is published by the extension publisher. Major versions
+	// released by the publisher must be manually updated. The default is true .
 	AutoUpdate *bool
 
 	// The name of the IAM execution role to use to activate the extension.
@@ -51,23 +49,23 @@ type ActivateTypeInput struct {
 	// The major version of this extension you want to activate, if multiple major
 	// versions are available. The default is the latest major version. CloudFormation
 	// uses the latest available minor version of the major version selected. You can
-	// specify MajorVersion or VersionBump, but not both.
+	// specify MajorVersion  or VersionBump , but not both.
 	MajorVersion *int64
 
 	// The Amazon Resource Name (ARN) of the public extension. Conditional: You must
-	// specify PublicTypeArn, or TypeName, Type, and PublisherId.
+	// specify PublicTypeArn , or TypeName , Type , and PublisherId .
 	PublicTypeArn *string
 
-	// The ID of the extension publisher. Conditional: You must specify PublicTypeArn,
-	// or TypeName, Type, and PublisherId.
+	// The ID of the extension publisher. Conditional: You must specify PublicTypeArn
+	// , or TypeName , Type , and PublisherId .
 	PublisherId *string
 
-	// The extension type. Conditional: You must specify PublicTypeArn, or TypeName,
-	// Type, and PublisherId.
+	// The extension type. Conditional: You must specify PublicTypeArn , or TypeName ,
+	// Type , and PublisherId .
 	Type types.ThirdPartyType
 
-	// The name of the extension. Conditional: You must specify PublicTypeArn, or
-	// TypeName, Type, and PublisherId.
+	// The name of the extension. Conditional: You must specify PublicTypeArn , or
+	// TypeName , Type , and PublisherId .
 	TypeName *string
 
 	// An alias to assign to the public extension, in this account and region. If you
@@ -79,13 +77,11 @@ type ActivateTypeInput struct {
 	// using different type name aliases.
 	TypeNameAlias *string
 
-	// Manually updates a previously-activated type to a new major or minor version, if
-	// available. You can also use this parameter to update the value of AutoUpdate.
-	// -
-	// MAJOR: CloudFormation updates the extension to the newest major version, if one
-	// is available.
-	// - MINOR: CloudFormation updates the extension to the newest minor
-	// version, if one is available.
+	// Manually updates a previously-activated type to a new major or minor version,
+	// if available. You can also use this parameter to update the value of AutoUpdate
+	// .
+	//     - MAJOR : CloudFormation updates the extension to the newest major version, if one is available.
+	//     - MINOR : CloudFormation updates the extension to the newest minor version, if one is available.
 	VersionBump types.VersionBump
 
 	noSmithyDocumentSerde

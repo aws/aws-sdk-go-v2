@@ -18,10 +18,9 @@ import (
 	"time"
 )
 
-// Returns the inputs for the change set and a list of changes that CloudFormation
-// will make if you execute the change set. For more information, see Updating
-// Stacks Using Change Sets
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html)
+// Returns the inputs for the change set and a list of changes that
+// CloudFormation will make if you execute the change set. For more information,
+// see Updating Stacks Using Change Sets (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html)
 // in the CloudFormation User Guide.
 func (c *Client) DescribeChangeSet(ctx context.Context, params *DescribeChangeSetInput, optFns ...func(*Options)) (*DescribeChangeSetOutput, error) {
 	if params == nil {
@@ -38,7 +37,7 @@ func (c *Client) DescribeChangeSet(ctx context.Context, params *DescribeChangeSe
 	return out, nil
 }
 
-// The input for the DescribeChangeSet action.
+// The input for the DescribeChangeSet  action.
 type DescribeChangeSetInput struct {
 
 	// The name or Amazon Resource Name (ARN) of the change set that you want to
@@ -47,18 +46,18 @@ type DescribeChangeSetInput struct {
 	// This member is required.
 	ChangeSetName *string
 
-	// A string (provided by the DescribeChangeSet response output) that identifies the
-	// next page of information that you want to retrieve.
+	// A string (provided by the DescribeChangeSet response output) that identifies
+	// the next page of information that you want to retrieve.
 	NextToken *string
 
-	// If you specified the name of a change set, specify the stack name or ID (ARN) of
-	// the change set you want to describe.
+	// If you specified the name of a change set, specify the stack name or ID (ARN)
+	// of the change set you want to describe.
 	StackName *string
 
 	noSmithyDocumentSerde
 }
 
-// The output for the DescribeChangeSet action.
+// The output for the DescribeChangeSet  action.
 type DescribeChangeSetOutput struct {
 
 	// If you execute the change set, the list of capabilities that were explicitly
@@ -71,8 +70,8 @@ type DescribeChangeSetOutput struct {
 	// The name of the change set.
 	ChangeSetName *string
 
-	// A list of Change structures that describes the resources CloudFormation changes
-	// if you execute the change set.
+	// A list of Change structures that describes the resources CloudFormation
+	// changes if you execute the change set.
 	Changes []types.Change
 
 	// The start time when the change set was created, in UTC.
@@ -81,26 +80,25 @@ type DescribeChangeSetOutput struct {
 	// Information about the change set.
 	Description *string
 
-	// If the change set execution status is AVAILABLE, you can execute the change set.
-	// If you can't execute the change set, the status indicates why. For example, a
-	// change set might be in an UNAVAILABLE state because CloudFormation is still
-	// creating it or in an OBSOLETE state because the stack was already updated.
+	// If the change set execution status is AVAILABLE, you can execute the change
+	// set. If you can't execute the change set, the status indicates why. For example,
+	// a change set might be in an UNAVAILABLE state because CloudFormation is still
+	// creating it or in an OBSOLETE  state because the stack was already updated.
 	ExecutionStatus types.ExecutionStatus
 
-	// Verifies if IncludeNestedStacks is set to True.
+	// Verifies if IncludeNestedStacks  is set to True .
 	IncludeNestedStacks *bool
 
 	// If the output exceeds 1 MB, a string that identifies the next page of changes.
 	// If there is no additional page, this value is null.
 	NextToken *string
 
-	// The ARNs of the Amazon Simple Notification Service (Amazon SNS) topics that will
-	// be associated with the stack if you execute the change set.
+	// The ARNs of the Amazon Simple Notification Service (Amazon SNS) topics that
+	// will be associated with the stack if you execute the change set.
 	NotificationARNs []string
 
 	// A list of Parameter structures that describes the input parameters and their
-	// values used to create the change set. For more information, see the Parameter
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
+	// values used to create the change set. For more information, see the Parameter (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
 	// data type.
 	Parameters []types.Parameter
 
@@ -112,8 +110,8 @@ type DescribeChangeSetOutput struct {
 	// updating operations, and for the specified monitoring period afterwards.
 	RollbackConfiguration *types.RollbackConfiguration
 
-	// Specifies the change set ID of the root change set in the current nested change
-	// set hierarchy.
+	// Specifies the change set ID of the root change set in the current nested
+	// change set hierarchy.
 	RootChangeSetId *string
 
 	// The Amazon Resource Name (ARN) of the stack that's associated with the change
@@ -123,12 +121,12 @@ type DescribeChangeSetOutput struct {
 	// The name of the stack that's associated with the change set.
 	StackName *string
 
-	// The current status of the change set, such as CREATE_IN_PROGRESS,
-	// CREATE_COMPLETE, or FAILED.
+	// The current status of the change set, such as CREATE_IN_PROGRESS ,
+	// CREATE_COMPLETE , or FAILED .
 	Status types.ChangeSetStatus
 
-	// A description of the change set's status. For example, if your attempt to create
-	// a change set failed, CloudFormation shows the error message.
+	// A description of the change set's status. For example, if your attempt to
+	// create a change set failed, CloudFormation shows the error message.
 	StatusReason *string
 
 	// If you execute the change set, the tags that will be associated with the stack.
@@ -225,8 +223,8 @@ type ChangeSetCreateCompleteWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ChangeSetCreateCompleteWaiter will use default max delay of 120
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ChangeSetCreateCompleteWaiter will use default max delay of 120
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration

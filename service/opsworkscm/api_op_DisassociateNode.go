@@ -15,10 +15,10 @@ import (
 // the server's managed nodes. After a node is disassociated, the node key pair is
 // no longer valid for accessing the configuration manager's API. For more
 // information about how to associate a node, see AssociateNode. A node can can
-// only be disassociated from a server that is in a HEALTHY state. Otherwise, an
-// InvalidStateException is thrown. A ResourceNotFoundException is thrown when the
-// server does not exist. A ValidationException is raised when parameters of the
-// request are not valid.
+// only be disassociated from a server that is in a HEALTHY  state. Otherwise, an
+// InvalidStateException is thrown. A ResourceNotFoundException is thrown when
+// the server does not exist. A ValidationException is raised when parameters of
+// the request are not valid.
 func (c *Client) DisassociateNode(ctx context.Context, params *DisassociateNodeInput, optFns ...func(*Options)) (*DisassociateNodeOutput, error) {
 	if params == nil {
 		params = &DisassociateNodeInput{}
@@ -47,10 +47,8 @@ type DisassociateNodeInput struct {
 	ServerName *string
 
 	// Engine attributes that are used for disassociating the node. No attributes are
-	// required for Puppet. Attributes required in a DisassociateNode request for
-	// Chef
-	// - CHEF_ORGANIZATION: The Chef organization with which the node was
-	// associated. By default only one organization named default can exist.
+	// required for Puppet. Attributes required in a DisassociateNode request for Chef
+	//     - CHEF_ORGANIZATION : The Chef organization with which the node was associated. By default only one organization named default can exist.
 	EngineAttributes []types.EngineAttribute
 
 	noSmithyDocumentSerde

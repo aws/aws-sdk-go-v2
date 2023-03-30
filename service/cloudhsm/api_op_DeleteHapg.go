@@ -11,16 +11,13 @@ import (
 )
 
 // This is documentation for AWS CloudHSM Classic. For more information, see AWS
-// CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/), the AWS
-// CloudHSM Classic User Guide
-// (https://docs.aws.amazon.com/cloudhsm/classic/userguide/), and the AWS CloudHSM
-// Classic API Reference
-// (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/). For information
-// about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide
-// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/), and the AWS CloudHSM
-// API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
-// Deletes a high-availability partition group.
+// CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/) , the AWS
+// CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/)
+// , and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/)
+// . For information about the current version of AWS CloudHSM, see AWS CloudHSM (http://aws.amazon.com/cloudhsm/)
+// , the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/)
+// , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
+// . Deletes a high-availability partition group.
 func (c *Client) DeleteHapg(ctx context.Context, params *DeleteHapgInput, optFns ...func(*Options)) (*DeleteHapgOutput, error) {
 	if params == nil {
 		params = &DeleteHapgInput{}
@@ -36,7 +33,7 @@ func (c *Client) DeleteHapg(ctx context.Context, params *DeleteHapgInput, optFns
 	return out, nil
 }
 
-// Contains the inputs for the DeleteHapg action.
+// Contains the inputs for the DeleteHapg  action.
 type DeleteHapgInput struct {
 
 	// The ARN of the high-availability partition group to delete.
@@ -47,7 +44,7 @@ type DeleteHapgInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the output of the DeleteHapg action.
+// Contains the output of the DeleteHapg  action.
 type DeleteHapgOutput struct {
 
 	// The status of the action.

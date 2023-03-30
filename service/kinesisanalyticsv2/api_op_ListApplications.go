@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of Kinesis Data Analytics applications in your account. For each
-// application, the response includes the application name, Amazon Resource Name
-// (ARN), and status. If you want detailed information about a specific
-// application, use DescribeApplication.
+// Returns a list of Kinesis Data Analytics applications in your account. For
+// each application, the response includes the application name, Amazon Resource
+// Name (ARN), and status. If you want detailed information about a specific
+// application, use DescribeApplication .
 func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsInput, optFns ...func(*Options)) (*ListApplicationsOutput, error) {
 	if params == nil {
 		params = &ListApplicationsInput{}
@@ -37,8 +37,8 @@ type ListApplicationsInput struct {
 
 	// If a previous command returned a pagination token, pass it into this value to
 	// retrieve the next set of results. For more information about pagination, see
-	// Using the Amazon Command Line Interface's Pagination Options
-	// (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html).
+	// Using the Amazon Command Line Interface's Pagination Options (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html)
+	// .
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,7 +46,7 @@ type ListApplicationsInput struct {
 
 type ListApplicationsOutput struct {
 
-	// A list of ApplicationSummary objects.
+	// A list of ApplicationSummary  objects.
 	//
 	// This member is required.
 	ApplicationSummaries []types.ApplicationSummary
@@ -54,8 +54,8 @@ type ListApplicationsOutput struct {
 	// The pagination token for the next set of results, or null if there are no
 	// additional results. Pass this token into a subsequent command to retrieve the
 	// next set of items For more information about pagination, see Using the Amazon
-	// Command Line Interface's Pagination Options
-	// (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html).
+	// Command Line Interface's Pagination Options (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html)
+	// .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

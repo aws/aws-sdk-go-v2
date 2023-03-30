@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a detector version. The detector version starts in a DRAFT status.
+// Creates a detector version. The detector version starts in a DRAFT  status.
 func (c *Client) CreateDetectorVersion(ctx context.Context, params *CreateDetectorVersionInput, optFns ...func(*Options)) (*CreateDetectorVersionOutput, error) {
 	if params == nil {
 		params = &CreateDetectorVersionInput{}
@@ -48,13 +48,14 @@ type CreateDetectorVersionInput struct {
 	// The model versions to include in the detector version.
 	ModelVersions []types.ModelVersion
 
-	// The rule execution mode for the rules included in the detector version. You can
-	// define and edit the rule mode at the detector version level, when it is in draft
-	// status. If you specify FIRST_MATCHED, Amazon Fraud Detector evaluates rules
-	// sequentially, first to last, stopping at the first matched rule. Amazon Fraud
-	// dectector then provides the outcomes for that single rule. If you specifiy
-	// ALL_MATCHED, Amazon Fraud Detector evaluates all rules and returns the outcomes
-	// for all matched rules. The default behavior is FIRST_MATCHED.
+	// The rule execution mode for the rules included in the detector version. You
+	// can define and edit the rule mode at the detector version level, when it is in
+	// draft status. If you specify FIRST_MATCHED, Amazon Fraud Detector evaluates
+	// rules sequentially, first to last, stopping at the first matched rule. Amazon
+	// Fraud dectector then provides the outcomes for that single rule. If you specifiy
+	//
+	// ALL_MATCHED, Amazon Fraud Detector evaluates all rules and returns the
+	// outcomes for all matched rules. The default behavior is FIRST_MATCHED .
 	RuleExecutionMode types.RuleExecutionMode
 
 	// A collection of key and value pairs.

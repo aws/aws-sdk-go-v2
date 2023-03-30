@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the SubscriptionState, either Active or Inactive.
+// Returns the SubscriptionState , either Active  or Inactive .
 func (c *Client) GetSubscriptionState(ctx context.Context, params *GetSubscriptionStateInput, optFns ...func(*Options)) (*GetSubscriptionStateOutput, error) {
 	if params == nil {
 		params = &GetSubscriptionStateInput{}

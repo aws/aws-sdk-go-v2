@@ -14,7 +14,7 @@ import (
 
 // Gets the retention settings for the specified Amazon Chime Enterprise account.
 // For more information about retention settings, see Managing Chat Retention
-// Policies (https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html) in
+// Policies (https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html)in
 // the Amazon Chime Administration Guide.
 func (c *Client) GetRetentionSettings(ctx context.Context, params *GetRetentionSettingsInput, optFns ...func(*Options)) (*GetRetentionSettingsOutput, error) {
 	if params == nil {
@@ -43,8 +43,8 @@ type GetRetentionSettingsInput struct {
 
 type GetRetentionSettingsOutput struct {
 
-	// The timestamp representing the time at which the specified items are permanently
-	// deleted, in ISO 8601 format.
+	// The timestamp representing the time at which the specified items are
+	// permanently deleted, in ISO 8601 format.
 	InitiateDeletionTimestamp *time.Time
 
 	// The retention settings.

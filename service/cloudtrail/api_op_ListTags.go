@@ -32,8 +32,8 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 // Specifies a list of tags to return.
 type ListTagsInput struct {
 
-	// Specifies a list of trail, event data store, or channel ARNs whose tags will be
-	// listed. The list has a limit of 20 ARNs.
+	// Specifies a list of trail, event data store, or channel ARNs whose tags will
+	// be listed. The list has a limit of 20 ARNs.
 	//
 	// This member is required.
 	ResourceIdList []string
@@ -132,8 +132,8 @@ var _ ListTagsAPIClient = (*Client)(nil)
 
 // ListTagsPaginatorOptions is the paginator options for ListTags
 type ListTagsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -16,9 +16,8 @@ import (
 // (DNS) aliases from an Amazon FSx for Windows File Server file system. If you
 // attempt to disassociate a DNS alias that is not associated with the file system,
 // Amazon FSx responds with a 400 Bad Request. For more information, see Working
-// with DNS Aliases
-// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html).
-// The system generated response showing the DNS aliases that Amazon FSx is
+// with DNS Aliases (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html)
+// . The system generated response showing the DNS aliases that Amazon FSx is
 // attempting to disassociate from the file system. Use the API operation to
 // monitor the status of the aliases Amazon FSx is disassociating with the file
 // system.
@@ -37,8 +36,8 @@ func (c *Client) DisassociateFileSystemAliases(ctx context.Context, params *Disa
 	return out, nil
 }
 
-// The request object of DNS aliases to disassociate from an Amazon FSx for Windows
-// File Server file system.
+// The request object of DNS aliases to disassociate from an Amazon FSx for
+// Windows File Server file system.
 type DisassociateFileSystemAliasesInput struct {
 
 	// An array of one or more DNS alias names to disassociate, or remove, from the

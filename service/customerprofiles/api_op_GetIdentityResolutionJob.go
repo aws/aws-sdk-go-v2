@@ -14,8 +14,8 @@ import (
 
 // Returns information about an Identity Resolution Job in a specific domain.
 // Identity Resolution Jobs are set up using the Amazon Connect admin console. For
-// more information, see Use Identity Resolution to consolidate similar profiles
-// (https://docs.aws.amazon.com/connect/latest/adminguide/use-identity-resolution.html).
+// more information, see Use Identity Resolution to consolidate similar profiles (https://docs.aws.amazon.com/connect/latest/adminguide/use-identity-resolution.html)
+// .
 func (c *Client) GetIdentityResolutionJob(ctx context.Context, params *GetIdentityResolutionJobInput, optFns ...func(*Options)) (*GetIdentityResolutionJobOutput, error) {
 	if params == nil {
 		params = &GetIdentityResolutionJobInput{}
@@ -80,23 +80,13 @@ type GetIdentityResolutionJobOutput struct {
 	Message *string
 
 	// The status of the Identity Resolution Job.
-	// - PENDING: The Identity Resolution
-	// Job is scheduled but has not started yet. If you turn off the Identity
-	// Resolution feature in your domain, jobs in the PENDING state are deleted.
-	// -
-	// PREPROCESSING: The Identity Resolution Job is loading your data.
-	// -
-	// FIND_MATCHING: The Identity Resolution Job is using the machine learning model
-	// to identify profiles that belong to the same matching group.
-	// - MERGING: The
-	// Identity Resolution Job is merging duplicate profiles.
-	// - COMPLETED: The Identity
-	// Resolution Job completed successfully.
-	// - PARTIAL_SUCCESS: There's a system error
-	// and not all of the data is merged. The Identity Resolution Job writes a message
-	// indicating the source of the problem.
-	// - FAILED: The Identity Resolution Job did
-	// not merge any data. It writes a message indicating the source of the problem.
+	//     - PENDING : The Identity Resolution Job is scheduled but has not started yet. If you turn off the Identity Resolution feature in your domain, jobs in the PENDING state are deleted.
+	//     - PREPROCESSING : The Identity Resolution Job is loading your data.
+	//     - FIND_MATCHING : The Identity Resolution Job is using the machine learning model to identify profiles that belong to the same matching group.
+	//     - MERGING : The Identity Resolution Job is merging duplicate profiles.
+	//     - COMPLETED : The Identity Resolution Job completed successfully.
+	//     - PARTIAL_SUCCESS : There's a system error and not all of the data is merged. The Identity Resolution Job writes a message indicating the source of the problem.
+	//     - FAILED : The Identity Resolution Job did not merge any data. It writes a message indicating the source of the problem.
 	Status types.IdentityResolutionJobStatus
 
 	// Metadata pertaining to the operation's result.

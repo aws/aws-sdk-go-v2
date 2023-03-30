@@ -7,11 +7,11 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You don't have permissions to perform the requested operation. The user or role
-// that is making the request must have at least one IAM permissions policy
-// attached that grants the required permissions. For more information, see Access
-// Management (https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the
-// IAM User Guide.
+// You don't have permissions to perform the requested operation. The user or
+// role that is making the request must have at least one IAM permissions policy
+// attached that grants the required permissions. For more information, see
+// Access Management (https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html)
+// in the IAM User Guide.
 type AccessDeniedException struct {
 	Message *string
 
@@ -64,9 +64,9 @@ func (e *BadRequestException) ErrorCode() string {
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// These errors are usually caused by a client action. Actions can include using an
-// action or resource on behalf of a user that doesn't have permissions to use the
-// action or resource or specifying an identifier that is not valid.
+// These errors are usually caused by a client action. Actions can include using
+// an action or resource on behalf of a user that doesn't have permissions to use
+// the action or resource or specifying an identifier that is not valid.
 type ClientException struct {
 	Message *string
 
@@ -96,8 +96,8 @@ func (e *ClientException) ErrorCode() string {
 }
 func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified parameter is invalid. Review the available parameters for the API
-// request.
+// The specified parameter is invalid. Review the available parameters for the
+// API request.
 type InvalidParameterException struct {
 	Message *string
 
@@ -245,9 +245,9 @@ func (e *ResourceLimitExceededException) ErrorCode() string {
 }
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified resource could not be found. You can view your available clusters
-// with ListClusters. You can view your available managed node groups with
-// ListNodegroups. Amazon EKS clusters and node groups are Region-specific.
+// The specified resource could not be found. You can view your available
+// clusters with ListClusters. You can view your available managed node groups
+// with ListNodegroups . Amazon EKS clusters and node groups are Region-specific.
 type ResourceNotFoundException struct {
 	Message *string
 

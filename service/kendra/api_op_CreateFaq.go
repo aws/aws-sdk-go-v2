@@ -14,8 +14,8 @@ import (
 
 // Creates an new set of frequently asked question (FAQ) questions and answers.
 // Adding FAQs to an index is an asynchronous operation. For an example of adding
-// an FAQ to an index using Python and Java SDKs, see Using your FAQ file
-// (https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html#using-faq-file).
+// an FAQ to an index using Python and Java SDKs, see Using your FAQ file (https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html#using-faq-file)
+// .
 func (c *Client) CreateFaq(ctx context.Context, params *CreateFaqInput, optFns ...func(*Options)) (*CreateFaqOutput, error) {
 	if params == nil {
 		params = &CreateFaqInput{}
@@ -43,9 +43,9 @@ type CreateFaqInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of a role with permission to access the S3 bucket
-	// that contains the FAQs. For more information, see IAM Roles for Amazon Kendra
-	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
+	// The Amazon Resource Name (ARN) of a role with permission to access the S3
+	// bucket that contains the FAQs. For more information, see IAM Roles for Amazon
+	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html) .
 	//
 	// This member is required.
 	RoleArn *string
@@ -55,8 +55,9 @@ type CreateFaqInput struct {
 	// This member is required.
 	S3Path *types.S3Path
 
-	// A token that you provide to identify the request to create a FAQ. Multiple calls
-	// to the CreateFaqRequest API with the same client token will create only one FAQ.
+	// A token that you provide to identify the request to create a FAQ. Multiple
+	// calls to the CreateFaqRequest API with the same client token will create only
+	// one FAQ.
 	ClientToken *string
 
 	// A description for the FAQ.
@@ -65,15 +66,16 @@ type CreateFaqInput struct {
 	// The format of the FAQ input file. You can choose between a basic CSV format, a
 	// CSV format that includes customs attributes in a header, and a JSON format that
 	// includes custom attributes. The format must match the format of the file stored
-	// in the S3 bucket identified in the S3Path parameter. For more information, see
-	// Adding questions and answers
-	// (https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html).
+	// in the S3 bucket identified in the S3Path  parameter. For more information, see
+	// Adding questions and answers (https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html)
+	// .
 	FileFormat types.FaqFileFormat
 
 	// The code for a language. This allows you to support a language for the FAQ
 	// document. English is supported by default. For more information on supported
 	// languages, including their codes, see Adding documents in languages other than
-	// English (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
+	// English (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html)
+	// .
 	LanguageCode *string
 
 	// A list of key-value pairs that identify the FAQ. You can use the tags to

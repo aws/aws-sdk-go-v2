@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Used for data ingestion into the FeatureStore. The PutRecord API writes to both
-// the OnlineStore and OfflineStore. If the record is the latest record for the
-// recordIdentifier, the record is written to both the OnlineStore and
-// OfflineStore. If the record is a historic record, it is written only to the
-// OfflineStore.
+// Used for data ingestion into the FeatureStore . The PutRecord API writes to
+// both the OnlineStore  and OfflineStore. If the record is the latest record for
+// the recordIdentifier , the record is written to both the OnlineStore  and
+// OfflineStore . If the record is a historic record, it is written only to the
+// OfflineStore .
 func (c *Client) PutRecord(ctx context.Context, params *PutRecordInput, optFns ...func(*Options)) (*PutRecordOutput, error) {
 	if params == nil {
 		params = &PutRecordInput{}
@@ -40,17 +40,15 @@ type PutRecordInput struct {
 
 	// List of FeatureValues to be inserted. This will be a full over-write. If you
 	// only want to update few of the feature values, do the following:
-	// - Use GetRecord
-	// to retrieve the latest record.
-	// - Update the record returned from GetRecord.
-	// -
-	// Use PutRecord to update feature values.
+	//     - Use GetRecord to retrieve the latest record.
+	//     - Update the record returned from GetRecord .
+	//     - Use PutRecord to update feature values.
 	//
 	// This member is required.
 	Record []types.FeatureValue
 
 	// A list of stores to which you're adding the record. By default, Feature Store
-	// adds the record to all of the stores that you're using for the FeatureGroup.
+	// adds the record to all of the stores that you're using for the FeatureGroup .
 	TargetStores []types.TargetStore
 
 	noSmithyDocumentSerde

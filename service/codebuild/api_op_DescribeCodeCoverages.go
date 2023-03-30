@@ -44,14 +44,14 @@ type DescribeCodeCoveragesInput struct {
 	// The minimum line coverage percentage to report.
 	MinLineCoveragePercentage *float64
 
-	// The nextToken value returned from a previous call to DescribeCodeCoverages. This
-	// specifies the next item to return. To return the beginning of the list, exclude
-	// this parameter.
+	// The nextToken  value returned from a previous call to DescribeCodeCoverages.
+	// This specifies the next item to return. To return the beginning of the list,
+	// exclude this parameter.
 	NextToken *string
 
-	// Specifies how the results are sorted. Possible values are: FILE_PATH The results
-	// are sorted by file path. LINE_COVERAGE_PERCENTAGE The results are sorted by the
-	// percentage of lines that are covered.
+	// Specifies how the results are sorted. Possible values are: FILE_PATH The
+	// results are sorted by file path. LINE_COVERAGE_PERCENTAGE The results are sorted
+	// by the percentage of lines that are covered.
 	SortBy types.ReportCodeCoverageSortByType
 
 	// Specifies if the results are sorted in ascending or descending order.
@@ -62,11 +62,11 @@ type DescribeCodeCoveragesInput struct {
 
 type DescribeCodeCoveragesOutput struct {
 
-	// An array of CodeCoverage objects that contain the results.
+	// An array of CodeCoverage  objects that contain the results.
 	CodeCoverages []types.CodeCoverage
 
 	// If there are more items to return, this contains a token that is passed to a
-	// subsequent call to DescribeCodeCoverages to retrieve the next set of items.
+	// subsequent call to DescribeCodeCoverages  to retrieve the next set of items.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -152,8 +152,8 @@ type DescribeCodeCoveragesPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

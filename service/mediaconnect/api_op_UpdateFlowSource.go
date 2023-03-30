@@ -58,8 +58,8 @@ type UpdateFlowSourceInput struct {
 	// The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
 	MaxBitrate int32
 
-	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
-	// Zixi-based, and Fujitsu-based streams.
+	// The maximum latency in milliseconds. This parameter applies only to
+	// RIST-based, Zixi-based, and Fujitsu-based streams.
 	MaxLatency int32
 
 	// The size of the buffer (in milliseconds) to use to sync incoming source data.

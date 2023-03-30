@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a CA for the group. If a CA already exists, it will rotate the existing
-// CA.
+// Creates a CA for the group. If a CA already exists, it will rotate the
+// existing CA.
 func (c *Client) CreateGroupCertificateAuthority(ctx context.Context, params *CreateGroupCertificateAuthorityInput, optFns ...func(*Options)) (*CreateGroupCertificateAuthorityOutput, error) {
 	if params == nil {
 		params = &CreateGroupCertificateAuthorityInput{}

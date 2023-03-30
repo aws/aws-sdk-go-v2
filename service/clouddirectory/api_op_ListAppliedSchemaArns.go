@@ -41,8 +41,8 @@ type ListAppliedSchemaArnsInput struct {
 	// The pagination token.
 	NextToken *string
 
-	// The response for ListAppliedSchemaArns when this parameter is used will list all
-	// minor version ARNs for a major version.
+	// The response for ListAppliedSchemaArns when this parameter is used will list
+	// all minor version ARNs for a major version.
 	SchemaArn *string
 
 	noSmithyDocumentSerde
@@ -139,8 +139,8 @@ type ListAppliedSchemaArnsPaginatorOptions struct {
 	// The maximum number of results to retrieve.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

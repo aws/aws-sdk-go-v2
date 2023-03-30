@@ -12,8 +12,8 @@ import (
 )
 
 // Updates the specified Call Analytics category with new rules. Note that the
-// UpdateCallAnalyticsCategory operation overwrites all existing rules contained in
-// the specified category. You cannot append additional rules onto an existing
+// UpdateCallAnalyticsCategoryoperation overwrites all existing rules contained
+// in the specified category. You cannot append additional rules onto an existing
 // category. To create a new category, see .
 func (c *Client) UpdateCallAnalyticsCategory(ctx context.Context, params *UpdateCallAnalyticsCategoryInput, optFns ...func(*Options)) (*UpdateCallAnalyticsCategoryOutput, error) {
 	if params == nil {
@@ -38,17 +38,17 @@ type UpdateCallAnalyticsCategoryInput struct {
 	// This member is required.
 	CategoryName *string
 
-	// The rules used for the updated Call Analytics category. The rules you provide in
-	// this field replace the ones that are currently being used in the specified
+	// The rules used for the updated Call Analytics category. The rules you provide
+	// in this field replace the ones that are currently being used in the specified
 	// category.
 	//
 	// This member is required.
 	Rules []types.Rule
 
-	// Choose whether you want to update a real-time or a post-call category. The input
-	// type you specify must match the input type specified when the category was
+	// Choose whether you want to update a real-time or a post-call category. The
+	// input type you specify must match the input type specified when the category was
 	// created. For example, if you created a category with the POST_CALL input type,
-	// you must use POST_CALL as the input type when updating this category.
+	// you must use POST_CALL  as the input type when updating this category.
 	InputType types.InputType
 
 	noSmithyDocumentSerde
@@ -56,8 +56,8 @@ type UpdateCallAnalyticsCategoryInput struct {
 
 type UpdateCallAnalyticsCategoryOutput struct {
 
-	// Provides you with the properties of the Call Analytics category you specified in
-	// your UpdateCallAnalyticsCategory request.
+	// Provides you with the properties of the Call Analytics category you specified
+	// in your UpdateCallAnalyticsCategory  request.
 	CategoryProperties *types.CategoryProperties
 
 	// Metadata pertaining to the operation's result.

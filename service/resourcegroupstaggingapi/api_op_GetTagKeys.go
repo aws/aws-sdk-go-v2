@@ -16,8 +16,9 @@ import (
 // response can be sent in multiple pages. You should check the PaginationToken
 // response parameter to determine if there are additional results available to
 // return. Repeat the query, passing the PaginationToken response parameter value
-// as an input to the next request until you recieve a null value. A null value for
-// PaginationToken indicates that there are no more results waiting to be returned.
+// as an input to the next request until you recieve a null value. A null value
+// for PaginationToken indicates that there are no more results waiting to be
+// returned.
 func (c *Client) GetTagKeys(ctx context.Context, params *GetTagKeysInput, optFns ...func(*Options)) (*GetTagKeysOutput, error) {
 	if params == nil {
 		params = &GetTagKeysInput{}
@@ -47,7 +48,7 @@ type GetTagKeysOutput struct {
 
 	// A string that indicates that there is more data available than this response
 	// contains. To receive the next part of the response, specify this response value
-	// as the PaginationToken value in the request for the next page.
+	// as the PaginationToken  value in the request for the next page.
 	PaginationToken *string
 
 	// A list of all tag keys in the Amazon Web Services account.
@@ -128,8 +129,8 @@ var _ GetTagKeysAPIClient = (*Client)(nil)
 
 // GetTagKeysPaginatorOptions is the paginator options for GetTagKeys
 type GetTagKeysPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

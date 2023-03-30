@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the resource policies attached to the specified contact or escalation
-// plan.
+// Retrieves the resource policies attached to the specified contact or
+// escalation plan.
 func (c *Client) GetContactPolicy(ctx context.Context, params *GetContactPolicyInput, optFns ...func(*Options)) (*GetContactPolicyOutput, error) {
 	if params == nil {
 		params = &GetContactPolicyInput{}

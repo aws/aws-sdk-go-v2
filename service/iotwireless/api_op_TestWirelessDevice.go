@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Simulates a provisioned device by sending an uplink data payload of Hello.
+// Simulates a provisioned device by sending an uplink data payload of Hello .
 func (c *Client) TestWirelessDevice(ctx context.Context, params *TestWirelessDeviceInput, optFns ...func(*Options)) (*TestWirelessDeviceOutput, error) {
 	if params == nil {
 		params = &TestWirelessDeviceInput{}

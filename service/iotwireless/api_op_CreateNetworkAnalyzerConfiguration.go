@@ -44,19 +44,19 @@ type CreateNetworkAnalyzerConfigurationInput struct {
 	// The description of the new resource.
 	Description *string
 
-	// The tag to attach to the specified resource. Tags are metadata that you can use
-	// to manage a resource.
+	// The tag to attach to the specified resource. Tags are metadata that you can
+	// use to manage a resource.
 	Tags []types.Tag
 
 	// Trace content for your wireless gateway and wireless device resources.
 	TraceContent *types.TraceContent
 
-	// Wireless device resources to add to the network analyzer configuration. Provide
-	// the WirelessDeviceId of the resource to add in the input array.
+	// Wireless device resources to add to the network analyzer configuration.
+	// Provide the WirelessDeviceId  of the resource to add in the input array.
 	WirelessDevices []string
 
-	// Wireless gateway resources to add to the network analyzer configuration. Provide
-	// the WirelessGatewayId of the resource to add in the input array.
+	// Wireless gateway resources to add to the network analyzer configuration.
+	// Provide the WirelessGatewayId  of the resource to add in the input array.
 	WirelessGateways []string
 
 	noSmithyDocumentSerde

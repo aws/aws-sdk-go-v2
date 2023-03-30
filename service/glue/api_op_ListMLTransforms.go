@@ -35,7 +35,7 @@ func (c *Client) ListMLTransforms(ctx context.Context, params *ListMLTransformsI
 
 type ListMLTransformsInput struct {
 
-	// A TransformFilterCriteria used to filter the machine learning transforms.
+	// A TransformFilterCriteria  used to filter the machine learning transforms.
 	Filter *types.TransformFilterCriteria
 
 	// The maximum size of a list to return.
@@ -44,7 +44,7 @@ type ListMLTransformsInput struct {
 	// A continuation token, if this is a continuation request.
 	NextToken *string
 
-	// A TransformSortCriteria used to sort the machine learning transforms.
+	// A TransformSortCriteria  used to sort the machine learning transforms.
 	Sort *types.TransformSortCriteria
 
 	// Specifies to return only these tagged resources.
@@ -147,8 +147,8 @@ type ListMLTransformsPaginatorOptions struct {
 	// The maximum size of a list to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

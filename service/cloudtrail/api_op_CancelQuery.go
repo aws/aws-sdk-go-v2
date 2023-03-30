@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a query if the query is not in a terminated state, such as CANCELLED,
-// FAILED, TIMED_OUT, or FINISHED. You must specify an ARN value for
+// Cancels a query if the query is not in a terminated state, such as CANCELLED ,
+// FAILED , TIMED_OUT , or FINISHED . You must specify an ARN value for
 // EventDataStore. The ID of the query that you want to cancel is also required.
-// When you run CancelQuery, the query status might show as CANCELLED even if the
-// operation is not yet finished.
+// When you run CancelQuery , the query status might show as CANCELLED even if
+// the operation is not yet finished.
 func (c *Client) CancelQuery(ctx context.Context, params *CancelQueryInput, optFns ...func(*Options)) (*CancelQueryOutput, error) {
 	if params == nil {
 		params = &CancelQueryInput{}
@@ -33,8 +33,8 @@ func (c *Client) CancelQuery(ctx context.Context, params *CancelQueryInput, optF
 
 type CancelQueryInput struct {
 
-	// The ID of the query that you want to cancel. The QueryId comes from the response
-	// of a StartQuery operation.
+	// The ID of the query that you want to cancel. The QueryId comes from the
+	// response of a StartQuery  operation.
 	//
 	// This member is required.
 	QueryId *string
@@ -56,7 +56,7 @@ type CancelQueryOutput struct {
 	QueryId *string
 
 	// Shows the status of a query after a CancelQuery request. Typically, the values
-	// shown are either RUNNING or CANCELLED.
+	// shown are either RUNNING  or CANCELLED .
 	//
 	// This member is required.
 	QueryStatus types.QueryStatus

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing link. You must first disassociate the link from any devices
-// and customer gateways.
+// Deletes an existing link. You must first disassociate the link from any
+// devices and customer gateways.
 func (c *Client) DeleteLink(ctx context.Context, params *DeleteLinkInput, optFns ...func(*Options)) (*DeleteLinkOutput, error) {
 	if params == nil {
 		params = &DeleteLinkInput{}

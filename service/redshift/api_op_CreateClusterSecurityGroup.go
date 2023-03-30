@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Amazon Redshift security group. You use security groups to control
-// access to non-VPC clusters. For information about managing security groups, go
-// to Amazon Redshift Cluster Security Groups
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
+// Creates a new Amazon Redshift security group. You use security groups to
+// control access to non-VPC clusters. For information about managing security
+// groups, go to Amazon Redshift Cluster Security Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) CreateClusterSecurityGroup(ctx context.Context, params *CreateClusterSecurityGroupInput, optFns ...func(*Options)) (*CreateClusterSecurityGroupOutput, error) {
 	if params == nil {
@@ -33,13 +32,11 @@ func (c *Client) CreateClusterSecurityGroup(ctx context.Context, params *CreateC
 
 type CreateClusterSecurityGroupInput struct {
 
-	// The name for the security group. Amazon Redshift stores the value as a lowercase
-	// string. Constraints:
-	// - Must contain no more than 255 alphanumeric characters or
-	// hyphens.
-	// - Must not be "Default".
-	// - Must be unique for all security groups that
-	// are created by your Amazon Web Services account.
+	// The name for the security group. Amazon Redshift stores the value as a
+	// lowercase string. Constraints:
+	//     - Must contain no more than 255 alphanumeric characters or hyphens.
+	//     - Must not be "Default".
+	//     - Must be unique for all security groups that are created by your Amazon Web Services account.
 	//
 	// Example: examplesecuritygroup
 	//

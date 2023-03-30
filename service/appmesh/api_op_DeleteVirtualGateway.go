@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing virtual gateway. You cannot delete a virtual gateway if any
-// gateway routes are associated to it.
+// Deletes an existing virtual gateway. You cannot delete a virtual gateway if
+// any gateway routes are associated to it.
 func (c *Client) DeleteVirtualGateway(ctx context.Context, params *DeleteVirtualGatewayInput, optFns ...func(*Options)) (*DeleteVirtualGatewayOutput, error) {
 	if params == nil {
 		params = &DeleteVirtualGatewayInput{}
@@ -40,10 +40,11 @@ type DeleteVirtualGatewayInput struct {
 	// This member is required.
 	VirtualGatewayName *string
 
-	// The Amazon Web Services IAM account ID of the service mesh owner. If the account
-	// ID is not your own, then it's the ID of the account that shared the mesh with
-	// your account. For more information about mesh sharing, see Working with shared
-	// meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
+	// The Amazon Web Services IAM account ID of the service mesh owner. If the
+	// account ID is not your own, then it's the ID of the account that shared the mesh
+	// with your account. For more information about mesh sharing, see Working with
+	// shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
+	// .
 	MeshOwner *string
 
 	noSmithyDocumentSerde

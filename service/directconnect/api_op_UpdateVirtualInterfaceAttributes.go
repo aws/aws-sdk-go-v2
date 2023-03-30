@@ -18,7 +18,7 @@ import (
 // virtual interfaces associated with the connection for up to 30 seconds. To check
 // whether your connection supports jumbo frames, call DescribeConnections. To
 // check whether your virtual q interface supports jumbo frames, call
-// DescribeVirtualInterfaces.
+// DescribeVirtualInterfaces .
 func (c *Client) UpdateVirtualInterfaceAttributes(ctx context.Context, params *UpdateVirtualInterfaceAttributesInput, optFns ...func(*Options)) (*UpdateVirtualInterfaceAttributesOutput, error) {
 	if params == nil {
 		params = &UpdateVirtualInterfaceAttributesInput{}
@@ -44,8 +44,8 @@ type UpdateVirtualInterfaceAttributesInput struct {
 	// Indicates whether to enable or disable SiteLink.
 	EnableSiteLink *bool
 
-	// The maximum transmission unit (MTU), in bytes. The supported values are 1500 and
-	// 9001. The default value is 1500.
+	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
+	// and 9001. The default value is 1500.
 	Mtu *int32
 
 	// The name of the virtual private interface.
@@ -77,8 +77,9 @@ type UpdateVirtualInterfaceAttributesOutput struct {
 	// The Direct Connect endpoint that terminates the physical connection.
 	AwsDeviceV2 *string
 
-	// The Direct Connect endpoint that terminates the logical connection. This device
-	// might be different than the device that terminates the physical connection.
+	// The Direct Connect endpoint that terminates the logical connection. This
+	// device might be different than the device that terminates the physical
+	// connection.
 	AwsLogicalDeviceId *string
 
 	// The BGP peers configured on this virtual interface.
@@ -102,8 +103,8 @@ type UpdateVirtualInterfaceAttributesOutput struct {
 	// The location of the connection.
 	Location *string
 
-	// The maximum transmission unit (MTU), in bytes. The supported values are 1500 and
-	// 9001. The default value is 1500.
+	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
+	// and 9001. The default value is 1500.
 	Mtu *int32
 
 	// The ID of the Amazon Web Services account that owns the virtual interface.
@@ -129,40 +130,24 @@ type UpdateVirtualInterfaceAttributesOutput struct {
 	// The ID of the virtual interface.
 	VirtualInterfaceId *string
 
-	// The name of the virtual interface assigned by the customer network. The name has
-	// a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a
-	// hyphen (-).
+	// The name of the virtual interface assigned by the customer network. The name
+	// has a maximum of 100 characters. The following are valid characters: a-z, 0-9
+	// and a hyphen (-).
 	VirtualInterfaceName *string
 
 	// The state of the virtual interface. The following are the possible values:
-	// -
-	// confirming: The creation of the virtual interface is pending confirmation from
-	// the virtual interface owner. If the owner of the virtual interface is different
-	// from the owner of the connection on which it is provisioned, then the virtual
-	// interface will remain in this state until it is confirmed by the virtual
-	// interface owner.
-	// - verifying: This state only applies to public virtual
-	// interfaces. Each public virtual interface needs validation before the virtual
-	// interface can be created.
-	// - pending: A virtual interface is in this state from
-	// the time that it is created until the virtual interface is ready to forward
-	// traffic.
-	// - available: A virtual interface that is able to forward traffic.
-	// -
-	// down: A virtual interface that is BGP down.
-	// - deleting: A virtual interface is
-	// in this state immediately after calling DeleteVirtualInterface until it can no
-	// longer forward traffic.
-	// - deleted: A virtual interface that cannot forward
-	// traffic.
-	// - rejected: The virtual interface owner has declined creation of the
-	// virtual interface. If a virtual interface in the Confirming state is deleted by
-	// the virtual interface owner, the virtual interface enters the Rejected state.
-	// -
-	// unknown: The state of the virtual interface is not available.
+	//     - confirming : The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner.
+	//     - verifying : This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.
+	//     - pending : A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.
+	//     - available : A virtual interface that is able to forward traffic.
+	//     - down : A virtual interface that is BGP down.
+	//     - deleting : A virtual interface is in this state immediately after calling DeleteVirtualInterface until it can no longer forward traffic.
+	//     - deleted : A virtual interface that cannot forward traffic.
+	//     - rejected : The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the Confirming state is deleted by the virtual interface owner, the virtual interface enters the Rejected state.
+	//     - unknown : The state of the virtual interface is not available.
 	VirtualInterfaceState types.VirtualInterfaceState
 
-	// The type of virtual interface. The possible values are private and public.
+	// The type of virtual interface. The possible values are private  and public .
 	VirtualInterfaceType *string
 
 	// The ID of the VLAN.

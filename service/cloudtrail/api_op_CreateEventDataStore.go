@@ -35,19 +35,16 @@ type CreateEventDataStoreInput struct {
 	// This member is required.
 	Name *string
 
-	// The advanced event selectors to use to select the events for the data store. You
-	// can configure up to five advanced event selectors for each event data store. For
-	// more information about how to use advanced event selectors to log CloudTrail
-	// events, see Log events by using advanced event selectors
-	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced)
+	// The advanced event selectors to use to select the events for the data store.
+	// You can configure up to five advanced event selectors for each event data store.
+	// For more information about how to use advanced event selectors to log CloudTrail
+	// events, see Log events by using advanced event selectors (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced)
 	// in the CloudTrail User Guide. For more information about how to use advanced
 	// event selectors to include Config configuration items in your event data store,
-	// see Create an event data store for Config configuration items
-	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-eds-config)
+	// see Create an event data store for Config configuration items (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-eds-config)
 	// in the CloudTrail User Guide. For more information about how to use advanced
 	// event selectors to include non-Amazon Web Services events in your event data
-	// store, see Create an integration to log events from outside Amazon Web Services
-	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-integration)
+	// store, see Create an integration to log events from outside Amazon Web Services (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-integration)
 	// in the CloudTrail User Guide.
 	AdvancedEventSelectors []types.AdvancedEventSelector
 
@@ -61,24 +58,20 @@ type CreateEventDataStoreInput struct {
 	// key cannot be removed or changed. Before you disable or delete a KMS key that
 	// you are using with an event data store, delete or back up your event data store.
 	// CloudTrail also supports KMS multi-Region keys. For more information about
-	// multi-Region keys, see Using multi-Region keys
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
+	// multi-Region keys, see Using multi-Region keys (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
 	// in the Key Management Service Developer Guide. Examples:
-	// - alias/MyAliasName
-	// -
-	// arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
-	// -
-	// arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
-	// -
-	// 12345678-1234-1234-1234-123456789012
+	//     - alias/MyAliasName
+	//     - arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
+	//     - arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
+	//     - 12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
 
-	// Specifies whether the event data store includes events from all regions, or only
-	// from the region in which the event data store is created.
+	// Specifies whether the event data store includes events from all regions, or
+	// only from the region in which the event data store is created.
 	MultiRegionEnabled *bool
 
-	// Specifies whether an event data store collects events logged for an organization
-	// in Organizations.
+	// Specifies whether an event data store collects events logged for an
+	// organization in Organizations.
 	OrganizationEnabled *bool
 
 	// The retention period of the event data store, in days. You can set a retention
@@ -88,9 +81,9 @@ type CreateEventDataStoreInput struct {
 	// A list of tags.
 	TagsList []types.Tag
 
-	// Specifies whether termination protection is enabled for the event data store. If
-	// termination protection is enabled, you cannot delete the event data store until
-	// termination protection is disabled.
+	// Specifies whether termination protection is enabled for the event data store.
+	// If termination protection is enabled, you cannot delete the event data store
+	// until termination protection is disabled.
 	TerminationProtectionEnabled *bool
 
 	noSmithyDocumentSerde
@@ -113,8 +106,8 @@ type CreateEventDataStoreOutput struct {
 	// arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
 
-	// Indicates whether the event data store collects events from all regions, or only
-	// from the region in which it was created.
+	// Indicates whether the event data store collects events from all regions, or
+	// only from the region in which it was created.
 	MultiRegionEnabled *bool
 
 	// The name of the event data store.
@@ -138,7 +131,7 @@ type CreateEventDataStoreOutput struct {
 
 	// The timestamp that shows when an event data store was updated, if applicable.
 	// UpdatedTimestamp is always either the same or newer than the time shown in
-	// CreatedTimestamp.
+	// CreatedTimestamp .
 	UpdatedTimestamp *time.Time
 
 	// Metadata pertaining to the operation's result.

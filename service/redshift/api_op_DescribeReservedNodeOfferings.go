@@ -12,15 +12,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the available reserved node offerings by Amazon Redshift with
-// their descriptions including the node type, the fixed and recurring costs of
-// reserving the node and duration the node will be reserved for you. These
+// Returns a list of the available reserved node offerings by Amazon Redshift
+// with their descriptions including the node type, the fixed and recurring costs
+// of reserving the node and duration the node will be reserved for you. These
 // descriptions help you determine which reserve node offering you want to
 // purchase. You then use the unique offering ID in you call to
-// PurchaseReservedNodeOffering to reserve one or more nodes for your Amazon
+// PurchaseReservedNodeOfferingto reserve one or more nodes for your Amazon
 // Redshift cluster. For more information about reserved node offerings, go to
-// Purchasing Reserved Nodes
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html)
+// Purchasing Reserved Nodes (https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) DescribeReservedNodeOfferings(ctx context.Context, params *DescribeReservedNodeOfferingsInput, optFns ...func(*Options)) (*DescribeReservedNodeOfferingsOutput, error) {
 	if params == nil {
@@ -41,16 +40,16 @@ type DescribeReservedNodeOfferingsInput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeReservedNodeOfferings request
-	// exceed the value specified in MaxRecords, Amazon Web Services returns a value in
-	// the Marker field of the response. You can retrieve the next set of response
+	// exceed the value specified in MaxRecords, Amazon Web Services returns a value
+	// in the Marker field of the response. You can retrieve the next set of response
 	// records by providing the returned marker value in the Marker parameter and
 	// retrying the request.
 	Marker *string
 
-	// The maximum number of response records to return in each call. If the number of
-	// remaining response records exceeds the specified MaxRecords value, a value is
-	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// The maximum number of response records to return in each call. If the number
+	// of remaining response records exceeds the specified MaxRecords value, a value
+	// is returned in a marker field of the response. You can retrieve the next set
+	// of records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -69,7 +68,7 @@ type DescribeReservedNodeOfferingsOutput struct {
 	// records have been retrieved for the request.
 	Marker *string
 
-	// A list of ReservedNodeOffering objects.
+	// A list of ReservedNodeOffering  objects.
 	ReservedNodeOfferings []types.ReservedNodeOffering
 
 	// Metadata pertaining to the operation's result.
@@ -149,15 +148,15 @@ var _ DescribeReservedNodeOfferingsAPIClient = (*Client)(nil)
 // DescribeReservedNodeOfferingsPaginatorOptions is the paginator options for
 // DescribeReservedNodeOfferings
 type DescribeReservedNodeOfferingsPaginatorOptions struct {
-	// The maximum number of response records to return in each call. If the number of
-	// remaining response records exceeds the specified MaxRecords value, a value is
-	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// The maximum number of response records to return in each call. If the number
+	// of remaining response records exceeds the specified MaxRecords value, a value
+	// is returned in a marker field of the response. You can retrieve the next set
+	// of records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

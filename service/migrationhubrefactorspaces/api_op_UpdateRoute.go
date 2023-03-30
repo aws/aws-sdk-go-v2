@@ -61,9 +61,8 @@ type UpdateRouteOutput struct {
 
 	// The Amazon Resource Name (ARN) of the route. The format for this ARN is
 	// arn:aws:refactor-spaces:region:account-id:resource-type/resource-id . For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the Amazon Web Services General Reference.
+	// information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the Amazon Web Services General Reference.
 	Arn *string
 
 	// A timestamp that indicates when the route was last updated.

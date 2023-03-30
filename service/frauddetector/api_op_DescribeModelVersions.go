@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets all of the model versions for the specified model type or for the specified
-// model type and model ID. You can also get details for a single, specified model
-// version.
+// Gets all of the model versions for the specified model type or for the
+// specified model type and model ID. You can also get details for a single,
+// specified model version.
 func (c *Client) DescribeModelVersions(ctx context.Context, params *DescribeModelVersionsInput, optFns ...func(*Options)) (*DescribeModelVersionsOutput, error) {
 	if params == nil {
 		params = &DescribeModelVersionsInput{}
@@ -138,8 +138,8 @@ type DescribeModelVersionsPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

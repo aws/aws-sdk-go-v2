@@ -17,8 +17,7 @@ import (
 // account from a management account. An environment account connection is a secure
 // bi-directional connection between a management account and an environment
 // account that maintains authorization and permissions. For more information, see
-// Environment account connections
-// (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html)
+// Environment account connections (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html)
 // in the Proton User guide.
 func (c *Client) CreateEnvironmentAccountConnection(ctx context.Context, params *CreateEnvironmentAccountConnectionInput, optFns ...func(*Options)) (*CreateEnvironmentAccountConnectionOutput, error) {
 	if params == nil {
@@ -43,11 +42,11 @@ type CreateEnvironmentAccountConnectionInput struct {
 	// This member is required.
 	EnvironmentName *string
 
-	// The ID of the management account that accepts or rejects the environment account
-	// connection. You create and manage the Proton environment in this account. If the
-	// management account accepts the environment account connection, Proton can use
-	// the associated IAM role to provision environment infrastructure resources in the
-	// associated environment account.
+	// The ID of the management account that accepts or rejects the environment
+	// account connection. You create and manage the Proton environment in this
+	// account. If the management account accepts the environment account connection,
+	// Proton can use the associated IAM role to provision environment infrastructure
+	// resources in the associated environment account.
 	//
 	// This member is required.
 	ManagementAccountId *string
@@ -65,11 +64,10 @@ type CreateEnvironmentAccountConnectionInput struct {
 	// The Amazon Resource Name (ARN) of the IAM service role that Proton uses when
 	// provisioning directly defined components in the associated environment account.
 	// It determines the scope of infrastructure that a component can provision in the
-	// account. You must specify componentRoleArn to allow directly defined components
-	// to be associated with any environments running in this account. For more
-	// information about components, see Proton components
-	// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
-	// Proton User Guide.
+	// account. You must specify componentRoleArn to allow directly defined
+	// components to be associated with any environments running in this account. For
+	// more information about components, see Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
+	// in the Proton User Guide.
 	ComponentRoleArn *string
 
 	// The Amazon Resource Name (ARN) of the IAM service role that's created in the
@@ -79,9 +77,8 @@ type CreateEnvironmentAccountConnectionInput struct {
 
 	// An optional list of metadata items that you can associate with the Proton
 	// environment account connection. A tag is a key-value pair. For more information,
-	// see Proton resources and tagging
-	// (https://docs.aws.amazon.com/proton/latest/userguide/resources.html) in the
-	// Proton User Guide.
+	// see Proton resources and tagging (https://docs.aws.amazon.com/proton/latest/userguide/resources.html)
+	// in the Proton User Guide.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

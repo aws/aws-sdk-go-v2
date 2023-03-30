@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// [VPC only] Updates the description of an egress (outbound) security group rule.
-// You can replace an existing description, or add a description to a rule that did
-// not have one previously. You can remove a description for a security group rule
-// by omitting the description parameter in the request.
+// [VPC only] Updates the description of an egress (outbound) security group
+// rule. You can replace an existing description, or add a description to a rule
+// that did not have one previously. You can remove a description for a security
+// group rule by omitting the description parameter in the request.
 func (c *Client) UpdateSecurityGroupRuleDescriptionsEgress(ctx context.Context, params *UpdateSecurityGroupRuleDescriptionsEgressInput, optFns ...func(*Options)) (*UpdateSecurityGroupRuleDescriptionsEgressOutput, error) {
 	if params == nil {
 		params = &UpdateSecurityGroupRuleDescriptionsEgressInput{}
@@ -34,8 +34,8 @@ type UpdateSecurityGroupRuleDescriptionsEgressInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The ID of the security group. You must specify either the security group ID or
@@ -51,8 +51,8 @@ type UpdateSecurityGroupRuleDescriptionsEgressInput struct {
 	// permissions or the description.
 	IpPermissions []types.IpPermission
 
-	// The description for the egress security group rules. You must specify either the
-	// description or the IP permissions.
+	// The description for the egress security group rules. You must specify either
+	// the description or the IP permissions.
 	SecurityGroupRuleDescriptions []types.SecurityGroupRuleDescription
 
 	noSmithyDocumentSerde
@@ -60,7 +60,7 @@ type UpdateSecurityGroupRuleDescriptionsEgressInput struct {
 
 type UpdateSecurityGroupRuleDescriptionsEgressOutput struct {
 
-	// Returns true if the request succeeds; otherwise, returns an error.
+	// Returns true  if the request succeeds; otherwise, returns an error.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

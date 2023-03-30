@@ -14,13 +14,13 @@ type Cell struct {
 	// specified in the workbook or the format is set to AUTO.
 	Format Format
 
-	// The formatted value of the cell. This is the value that you see displayed in the
-	// cell in the UI. Note that the formatted value of a cell is always represented as
-	// a string irrespective of the data that is stored in the cell. For example, if a
-	// cell contains a date, the formatted value of the cell is the string
-	// representation of the formatted date being shown in the cell in the UI. See
-	// details in the rawValue field below for how cells of different formats will have
-	// different raw and formatted values.
+	// The formatted value of the cell. This is the value that you see displayed in
+	// the cell in the UI. Note that the formatted value of a cell is always
+	// represented as a string irrespective of the data that is stored in the cell. For
+	// example, if a cell contains a date, the formatted value of the cell is the
+	// string representation of the formatted date being shown in the cell in the UI.
+	// See details in the rawValue field below for how cells of different formats will
+	// have different raw and formatted values.
 	FormattedValue *string
 
 	// A list of formatted values of the cell. This field is only returned when the
@@ -29,8 +29,8 @@ type Cell struct {
 	// if this field is returned.
 	FormattedValues []string
 
-	// The formula contained in the cell. This field is empty if a cell does not have a
-	// formula.
+	// The formula contained in the cell. This field is empty if a cell does not have
+	// a formula.
 	Formula *string
 
 	// The raw value of the data contained in the cell. The raw value depends on the
@@ -47,19 +47,19 @@ type Cell struct {
 	// representing the data being displayed. For example, the number 1.325 with two
 	// decimal places in the format will have it's raw value as "1.325" and formatted
 	// value as "1.33". A currency value for $10 will have the raw value as "10" and
-	// formatted value as "$10.00". A value representing 20% with two decimal places in
-	// the format will have its raw value as "0.2" and the formatted value as "20.00%".
-	// An accounting value of -$25 will have "-25" as the raw value and "$ (25.00)" as
-	// the formatted value. Cells with format TEXT will have the raw text as the raw
-	// value. For example, a cell with text "John Smith" will have "John Smith" as both
-	// the raw value and the formatted value. Cells with format CONTACT will have the
-	// name of the contact as a formatted value and the email address of the contact as
-	// the raw value. For example, a contact for John Smith will have "John Smith" as
-	// the formatted value and "john.smith@example.com" as the raw value. Cells with
-	// format ROWLINK (aka picklist) will have the first column of the linked row as
-	// the formatted value and the row id of the linked row as the raw value. For
-	// example, a cell containing a picklist to a table that displays task status might
-	// have "Completed" as the formatted value and
+	// formatted value as "$10.00". A value representing 20% with two decimal places
+	// in the format will have its raw value as "0.2" and the formatted value as
+	// "20.00%". An accounting value of -$25 will have "-25" as the raw value and "$
+	// (25.00)" as the formatted value. Cells with format TEXT will have the raw text
+	// as the raw value. For example, a cell with text "John Smith" will have "John
+	// Smith" as both the raw value and the formatted value. Cells with format CONTACT
+	// will have the name of the contact as a formatted value and the email address of
+	// the contact as the raw value. For example, a contact for John Smith will have
+	// "John Smith" as the formatted value and "john.smith@example.com" as the raw
+	// value. Cells with format ROWLINK (aka picklist) will have the first column of
+	// the linked row as the formatted value and the row id of the linked row as the
+	// raw value. For example, a cell containing a picklist to a table that displays
+	// task status might have "Completed" as the formatted value and
 	// "row:dfcefaee-5b37-4355-8f28-40c3e4ff5dd4/ca432b2f-b8eb-431d-9fb5-cbe0342f9f03"
 	// as the raw value. Cells with format ROWSET (aka multi-select or multi-record
 	// picklist) will by default have the first column of each of the linked rows as
@@ -82,13 +82,13 @@ type Cell struct {
 	noSmithyDocumentSerde
 }
 
-// CellInput object contains the data needed to create or update cells in a table.
-// CellInput object has only a facts field or a fact field, but not both. A 400 bad
-// request will be thrown if both fact and facts field are present.
+// CellInput object contains the data needed to create or update cells in a
+// table. CellInput object has only a facts field or a fact field, but not both. A
+// 400 bad request will be thrown if both fact and facts field are present.
 type CellInput struct {
 
-	// Fact represents the data that is entered into a cell. This data can be free text
-	// or a formula. Formulas need to start with the equals (=) sign.
+	// Fact represents the data that is entered into a cell. This data can be free
+	// text or a formula. Formulas need to start with the equals (=) sign.
 	Fact *string
 
 	// A list representing the values that are entered into a ROWSET cell. Facts list
@@ -127,8 +127,8 @@ type CreateRowData struct {
 	// This member is required.
 	BatchItemId *string
 
-	// A map representing the cells to create in the new row. The key is the column id
-	// of the cell and the value is the CellInput object that represents the data to
+	// A map representing the cells to create in the new row. The key is the column
+	// id of the cell and the value is the CellInput object that represents the data to
 	// set in that cell.
 	//
 	// This member is required.
@@ -143,8 +143,8 @@ type DataItem struct {
 	// The formatted value of the data. e.g. John Smith.
 	FormattedValue *string
 
-	// The overrideFormat is optional and is specified only if a particular row of data
-	// has a different format for the data than the default format defined on the
+	// The overrideFormat is optional and is specified only if a particular row of
+	// data has a different format for the data than the default format defined on the
 	// screen or the table.
 	OverrideFormat Format
 
@@ -206,16 +206,16 @@ type FailedBatchItem struct {
 	noSmithyDocumentSerde
 }
 
-// An object that represents a filter formula along with the id of the context row
-// under which the filter function needs to evaluate.
+// An object that represents a filter formula along with the id of the context
+// row under which the filter function needs to evaluate.
 type Filter struct {
 
-	// A formula representing a filter function that returns zero or more matching rows
-	// from a table. Valid formulas in this field return a list of rows from a table.
-	// The most common ways of writing a formula to return a list of rows are to use
-	// the FindRow() or Filter() functions. Any other formula that returns zero or more
-	// rows is also acceptable. For example, you can use a formula that points to a
-	// cell that contains a filter function.
+	// A formula representing a filter function that returns zero or more matching
+	// rows from a table. Valid formulas in this field return a list of rows from a
+	// table. The most common ways of writing a formula to return a list of rows are to
+	// use the FindRow() or Filter() functions. Any other formula that returns zero or
+	// more rows is also acceptable. For example, you can use a formula that points to
+	// a cell that contains a filter function.
 	//
 	// This member is required.
 	Formula *string
@@ -290,8 +290,8 @@ type ResultRow struct {
 	noSmithyDocumentSerde
 }
 
-// ResultSet contains the results of the request for a single block or list defined
-// on the screen.
+// ResultSet contains the results of the request for a single block or list
+// defined on the screen.
 type ResultSet struct {
 
 	// List of headers for all the data cells in the block. The header identifies the
@@ -432,18 +432,18 @@ type UpsertRowData struct {
 	// This member is required.
 	BatchItemId *string
 
-	// A map representing the cells to update for the matching rows or an appended row.
-	// The key is the column id of the cell and the value is the CellInput object that
-	// represents the data to set in that cell.
+	// A map representing the cells to update for the matching rows or an appended
+	// row. The key is the column id of the cell and the value is the CellInput object
+	// that represents the data to set in that cell.
 	//
 	// This member is required.
 	CellsToUpdate map[string]CellInput
 
-	// The filter formula to use to find existing matching rows to update. The formula
-	// needs to return zero or more rows. If the formula returns 0 rows, then a new row
-	// will be appended in the target table. If the formula returns one or more rows,
-	// then the returned rows will be updated. Note that the filter formula needs to
-	// return rows from the target table for the upsert operation to succeed. If the
+	// The filter formula to use to find existing matching rows to update. The
+	// formula needs to return zero or more rows. If the formula returns 0 rows, then a
+	// new row will be appended in the target table. If the formula returns one or more
+	// rows, then the returned rows will be updated. Note that the filter formula needs
+	// to return rows from the target table for the upsert operation to succeed. If the
 	// filter formula has a syntax error or it doesn't evaluate to zero or more rows in
 	// the target table for any one item in the input list, then the entire
 	// BatchUpsertTableRows request fails and no updates are made to the table.
@@ -457,9 +457,9 @@ type UpsertRowData struct {
 // An object that represents the result of a single upsert row request.
 type UpsertRowsResult struct {
 
-	// The list of row ids that were changed as part of an upsert row operation. If the
-	// upsert resulted in an update, this list could potentially contain multiple rows
-	// that matched the filter and hence got updated. If the upsert resulted in an
+	// The list of row ids that were changed as part of an upsert row operation. If
+	// the upsert resulted in an update, this list could potentially contain multiple
+	// rows that matched the filter and hence got updated. If the upsert resulted in an
 	// append, this list would only have the single row that was appended.
 	//
 	// This member is required.

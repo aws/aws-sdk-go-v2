@@ -39,7 +39,7 @@ type ListProblemsInput struct {
 	EndTime *time.Time
 
 	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value.
+	// remaining results, make another call with the returned NextToken  value.
 	MaxResults *int32
 
 	// The token to request the next page of results.
@@ -48,8 +48,8 @@ type ListProblemsInput struct {
 	// The name of the resource group.
 	ResourceGroupName *string
 
-	// The time when the problem was detected, in epoch seconds. If you don't specify a
-	// time frame for the request, problems within the past seven days are returned.
+	// The time when the problem was detected, in epoch seconds. If you don't specify
+	// a time frame for the request, problems within the past seven days are returned.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -143,11 +143,11 @@ var _ ListProblemsAPIClient = (*Client)(nil)
 // ListProblemsPaginatorOptions is the paginator options for ListProblems
 type ListProblemsPaginatorOptions struct {
 	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value.
+	// remaining results, make another call with the returned NextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

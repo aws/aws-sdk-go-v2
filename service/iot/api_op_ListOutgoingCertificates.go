@@ -13,8 +13,7 @@ import (
 )
 
 // Lists certificates that are being transferred but not yet accepted. Requires
-// permission to access the ListOutgoingCertificates
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// permission to access the ListOutgoingCertificates (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListOutgoingCertificates(ctx context.Context, params *ListOutgoingCertificatesInput, optFns ...func(*Options)) (*ListOutgoingCertificatesOutput, error) {
 	if params == nil {
@@ -34,8 +33,8 @@ func (c *Client) ListOutgoingCertificates(ctx context.Context, params *ListOutgo
 // The input to the ListOutgoingCertificates operation.
 type ListOutgoingCertificatesInput struct {
 
-	// Specifies the order for results. If True, the results are returned in ascending
-	// order, based on the creation date.
+	// Specifies the order for results. If True, the results are returned in
+	// ascending order, based on the creation date.
 	AscendingOrder bool
 
 	// The marker for the next set of results.
@@ -136,8 +135,8 @@ type ListOutgoingCertificatesPaginatorOptions struct {
 	// The result page size.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

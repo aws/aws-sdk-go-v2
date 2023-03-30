@@ -43,17 +43,17 @@ type GetReservedNodeExchangeConfigurationOptionsInput struct {
 	ClusterIdentifier *string
 
 	// An optional pagination token provided by a previous
-	// GetReservedNodeExchangeConfigurationOptions request. If this parameter is
+	// GetReservedNodeExchangeConfigurationOptionsrequest. If this parameter is
 	// specified, the response includes only records beyond the marker, up to the value
-	// specified by the MaxRecords parameter. You can retrieve the next set of response
-	// records by providing the returned marker value in the Marker parameter and
-	// retrying the request.
+	// specified by the MaxRecords parameter. You can retrieve the next set of
+	// response records by providing the returned marker value in the Marker
+	// parameter and retrying the request.
 	Marker *string
 
-	// The maximum number of response records to return in each call. If the number of
-	// remaining response records exceeds the specified MaxRecords value, a value is
-	// returned in a Marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value.
+	// The maximum number of response records to return in each call. If the number
+	// of remaining response records exceeds the specified MaxRecords value, a value
+	// is returned in a Marker field of the response. You can retrieve the next set
+	// of records by retrying the command with the returned marker value.
 	MaxRecords *int32
 
 	// The identifier for the snapshot that is the source for the reserved-node
@@ -69,9 +69,9 @@ type GetReservedNodeExchangeConfigurationOptionsOutput struct {
 	// GetReservedNodeExchangeConfigurationOptions request.
 	Marker *string
 
-	// the configuration options for the reserved-node exchange. These options include
-	// information about the source reserved node and target reserved node. Details
-	// include the node type, the price, the node count, and the offering type.
+	// the configuration options for the reserved-node exchange. These options
+	// include information about the source reserved node and target reserved node.
+	// Details include the node type, the price, the node count, and the offering type.
 	ReservedNodeConfigurationOptionList []types.ReservedNodeConfigurationOption
 
 	// Metadata pertaining to the operation's result.
@@ -143,8 +143,8 @@ func (c *Client) addOperationGetReservedNodeExchangeConfigurationOptionsMiddlewa
 	return nil
 }
 
-// GetReservedNodeExchangeConfigurationOptionsAPIClient is a client that implements
-// the GetReservedNodeExchangeConfigurationOptions operation.
+// GetReservedNodeExchangeConfigurationOptionsAPIClient is a client that
+// implements the GetReservedNodeExchangeConfigurationOptions operation.
 type GetReservedNodeExchangeConfigurationOptionsAPIClient interface {
 	GetReservedNodeExchangeConfigurationOptions(context.Context, *GetReservedNodeExchangeConfigurationOptionsInput, ...func(*Options)) (*GetReservedNodeExchangeConfigurationOptionsOutput, error)
 }
@@ -154,14 +154,14 @@ var _ GetReservedNodeExchangeConfigurationOptionsAPIClient = (*Client)(nil)
 // GetReservedNodeExchangeConfigurationOptionsPaginatorOptions is the paginator
 // options for GetReservedNodeExchangeConfigurationOptions
 type GetReservedNodeExchangeConfigurationOptionsPaginatorOptions struct {
-	// The maximum number of response records to return in each call. If the number of
-	// remaining response records exceeds the specified MaxRecords value, a value is
-	// returned in a Marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value.
+	// The maximum number of response records to return in each call. If the number
+	// of remaining response records exceeds the specified MaxRecords value, a value
+	// is returned in a Marker field of the response. You can retrieve the next set
+	// of records by retrying the command with the returned marker value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

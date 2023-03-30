@@ -15,7 +15,7 @@ import (
 // Lists the JSON Lines within a dataset. An Amazon Lookout for Vision JSON Line
 // contains the anomaly information for a single image, including the image
 // location and the assigned label. This operation requires permissions to perform
-// the lookoutvision:ListDatasetEntries operation.
+// the lookoutvision:ListDatasetEntries  operation.
 func (c *Client) ListDatasetEntries(ctx context.Context, params *ListDatasetEntriesInput, optFns ...func(*Options)) (*ListDatasetEntriesOutput, error) {
 	if params == nil {
 		params = &ListDatasetEntriesInput{}
@@ -35,7 +35,7 @@ type ListDatasetEntriesInput struct {
 
 	// The type of the dataset that you want to list. Specify train to list the
 	// training dataset. Specify test to list the test dataset. If you have a single
-	// dataset project, specify train.
+	// dataset project, specify train .
 	//
 	// This member is required.
 	DatasetType *string
@@ -46,20 +46,20 @@ type ListDatasetEntriesInput struct {
 	ProjectName *string
 
 	// Only includes entries after the specified date in the response. For example,
-	// 2020-06-23T00:00:00.
+	// 2020-06-23T00:00:00 .
 	AfterCreationDate *time.Time
 
-	// Specify normal to include only normal images. Specify anomaly to only include
+	// Specify normal  to include only normal images. Specify anomaly to only include
 	// anomalous entries. If you don't specify a value, Amazon Lookout for Vision
 	// returns normal and anomalous images.
 	AnomalyClass *string
 
 	// Only includes entries before the specified date in the response. For example,
-	// 2020-06-23T00:00:00.
+	// 2020-06-23T00:00:00 .
 	BeforeCreationDate *time.Time
 
-	// Specify true to include labeled entries, otherwise specify false. If you don't
-	// specify a value, Lookout for Vision returns all entries.
+	// Specify true  to include labeled entries, otherwise specify false. If you
+	// don't specify a value, Lookout for Vision returns all entries.
 	Labeled *bool
 
 	// The maximum number of results to return per paginated call. The largest value
@@ -85,8 +85,8 @@ type ListDatasetEntriesOutput struct {
 	// A list of the entries (JSON Lines) within the dataset.
 	DatasetEntries []string
 
-	// If the response is truncated, Amazon Lookout for Vision returns this token that
-	// you can use in the subsequent request to retrieve the next set ofdataset
+	// If the response is truncated, Amazon Lookout for Vision returns this token
+	// that you can use in the subsequent request to retrieve the next set ofdataset
 	// entries.
 	NextToken *string
 
@@ -175,8 +175,8 @@ type ListDatasetEntriesPaginatorOptions struct {
 	// ValidationException error occurs. The default value is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

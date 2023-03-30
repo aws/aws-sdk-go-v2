@@ -12,7 +12,7 @@ import (
 )
 
 // Delivers up to ten messages to the specified queue. This is a batch version of
-// SendMessage. For a FIFO queue, multiple messages within a single batch are
+// SendMessage . For a FIFO queue, multiple messages within a single batch are
 // enqueued in the order they are sent. The result of sending each message is
 // reported individually in the response. Because the batch request can result in a
 // combination of successful and unsuccessful actions, you should check for batch
@@ -20,16 +20,17 @@ import (
 // allowed individual message size and the maximum total payload size (the sum of
 // the individual lengths of all of the batched messages) are both 256 KB (262,144
 // bytes). A message can include only XML, JSON, and unformatted text. The
-// following Unicode characters are allowed: #x9 | #xA | #xD | #x20 to #xD7FF |
-// #xE000 to #xFFFD | #x10000 to #x10FFFF Any characters not included in this list
-// will be rejected. For more information, see the W3C specification for characters
-// (http://www.w3.org/TR/REC-xml/#charsets). If you don't specify the DelaySeconds
-// parameter for an entry, Amazon SQS uses the default value for the queue. Some
-// actions take lists of parameters. These lists are specified using the param.n
-// notation. Values of n are integers starting from 1. For example, a parameter
-// list with two elements looks like this: &AttributeName.1=first
+// following Unicode characters are allowed: #x9  | #xA  | #xD  | #x20  to #xD7FF
+// | #xE000  to #xFFFD  | #x10000  to #x10FFFF Any characters not included in
+// this list will be rejected. For more information, see the W3C specification
+// for characters (http://www.w3.org/TR/REC-xml/#charsets). If you don't specify
+// the DelaySeconds parameter for an entry, Amazon SQS uses the default value for
+// the queue. Some actions take lists of parameters. These lists are specified
+// using the param.n  notation. Values of n are integers starting from 1. For
+// example, a parameter list with two elements looks like this:
+// &AttributeName.1=first
 //
-// &AttributeName.2=second
+//	&AttributeName.2=second
 func (c *Client) SendMessageBatch(ctx context.Context, params *SendMessageBatchInput, optFns ...func(*Options)) (*SendMessageBatchOutput, error) {
 	if params == nil {
 		params = &SendMessageBatchInput{}
@@ -47,7 +48,7 @@ func (c *Client) SendMessageBatch(ctx context.Context, params *SendMessageBatchI
 
 type SendMessageBatchInput struct {
 
-	// A list of SendMessageBatchRequestEntry items.
+	// A list of SendMessageBatchRequestEntry  items.
 	//
 	// This member is required.
 	Entries []types.SendMessageBatchRequestEntry
@@ -66,13 +67,13 @@ type SendMessageBatchInput struct {
 // BatchResultErrorEntry tag if the message fails.
 type SendMessageBatchOutput struct {
 
-	// A list of BatchResultErrorEntry items with error details about each message that
-	// can't be enqueued.
+	// A list of BatchResultErrorEntry items with error details about each message
+	// that can't be enqueued.
 	//
 	// This member is required.
 	Failed []types.BatchResultErrorEntry
 
-	// A list of SendMessageBatchResultEntry items.
+	// A list of SendMessageBatchResultEntry  items.
 	//
 	// This member is required.
 	Successful []types.SendMessageBatchResultEntry

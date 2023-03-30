@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the ThreatIntelSets of the GuardDuty service specified by the detector ID.
-// If you use this operation from a member account, the ThreatIntelSets associated
-// with the administrator account are returned.
+// Lists the ThreatIntelSets of the GuardDuty service specified by the detector
+// ID. If you use this operation from a member account, the ThreatIntelSets
+// associated with the administrator account are returned.
 func (c *Client) ListThreatIntelSets(ctx context.Context, params *ListThreatIntelSetsInput, optFns ...func(*Options)) (*ListThreatIntelSetsOutput, error) {
 	if params == nil {
 		params = &ListThreatIntelSetsInput{}
@@ -36,12 +36,12 @@ type ListThreatIntelSetsInput struct {
 	// This member is required.
 	DetectorId *string
 
-	// You can use this parameter to indicate the maximum number of items that you want
-	// in the response. The default value is 50. The maximum value is 50.
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response. The default value is 50. The maximum value is 50.
 	MaxResults int32
 
-	// You can use this parameter to paginate results in the response. Set the value of
-	// this parameter to null on your first call to the list action. For subsequent
+	// You can use this parameter to paginate results in the response. Set the value
+	// of this parameter to null on your first call to the list action. For subsequent
 	// calls to the action, fill nextToken in the request with the value of NextToken
 	// from the previous response to continue listing data.
 	NextToken *string
@@ -56,8 +56,8 @@ type ListThreatIntelSetsOutput struct {
 	// This member is required.
 	ThreatIntelSetIds []string
 
-	// The pagination parameter to be used on the next list operation to retrieve more
-	// items.
+	// The pagination parameter to be used on the next list operation to retrieve
+	// more items.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -129,8 +129,8 @@ func (c *Client) addOperationListThreatIntelSetsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListThreatIntelSetsAPIClient is a client that implements the ListThreatIntelSets
-// operation.
+// ListThreatIntelSetsAPIClient is a client that implements the
+// ListThreatIntelSets operation.
 type ListThreatIntelSetsAPIClient interface {
 	ListThreatIntelSets(context.Context, *ListThreatIntelSetsInput, ...func(*Options)) (*ListThreatIntelSetsOutput, error)
 }
@@ -140,12 +140,12 @@ var _ ListThreatIntelSetsAPIClient = (*Client)(nil)
 // ListThreatIntelSetsPaginatorOptions is the paginator options for
 // ListThreatIntelSets
 type ListThreatIntelSetsPaginatorOptions struct {
-	// You can use this parameter to indicate the maximum number of items that you want
-	// in the response. The default value is 50. The maximum value is 50.
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response. The default value is 50. The maximum value is 50.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -12,14 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of dataset import jobs that use the given dataset. When a dataset
-// is not specified, all the dataset import jobs associated with the account are
-// listed. The response provides the properties for each dataset import job,
-// including the Amazon Resource Name (ARN). For more information on dataset import
-// jobs, see CreateDatasetImportJob
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html).
-// For more information on datasets, see CreateDataset
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html).
+// Returns a list of dataset import jobs that use the given dataset. When a
+// dataset is not specified, all the dataset import jobs associated with the
+// account are listed. The response provides the properties for each dataset import
+// job, including the Amazon Resource Name (ARN). For more information on dataset
+// import jobs, see CreateDatasetImportJob (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html)
+// . For more information on datasets, see CreateDataset (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html)
+// .
 func (c *Client) ListDatasetImportJobs(ctx context.Context, params *ListDatasetImportJobsInput, optFns ...func(*Options)) (*ListDatasetImportJobsOutput, error) {
 	if params == nil {
 		params = &ListDatasetImportJobsInput{}
@@ -44,8 +43,8 @@ type ListDatasetImportJobsInput struct {
 	// The maximum number of dataset import jobs to return.
 	MaxResults *int32
 
-	// A token returned from the previous call to ListDatasetImportJobs for getting the
-	// next set of dataset import jobs (if they exist).
+	// A token returned from the previous call to ListDatasetImportJobs for getting
+	// the next set of dataset import jobs (if they exist).
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -139,8 +138,8 @@ type ListDatasetImportJobsPaginatorOptions struct {
 	// The maximum number of dataset import jobs to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -39,9 +39,9 @@ func TestClient_NoInputAndNoOutput_awsAwsjson10Serialize(t *testing.T) {
 		BodyAssert    func(io.Reader) error
 	}{
 		// Clients must always send an empty JSON object payload for operations with no
-		// input (that is, {}). While AWS service implementations support requests with no
-		// payload or requests that send {}, always sending {} from the client is preferred
-		// for forward compatibility in case input is ever added to an operation.
+		// input (that is, {}). While AWS service implementations support requests with
+		// no payload or requests that send {} , always sending {} from the client is
+		// preferred for forward compatibility in case input is ever added to an operation.
 		"AwsJson10MustAlwaysSendEmptyJsonPayload": {
 			Params:        &NoInputAndNoOutputInput{},
 			ExpectMethod:  "POST",

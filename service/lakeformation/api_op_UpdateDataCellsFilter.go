@@ -29,7 +29,7 @@ func (c *Client) UpdateDataCellsFilter(ctx context.Context, params *UpdateDataCe
 
 type UpdateDataCellsFilterInput struct {
 
-	// A DataCellsFilter structure containing information about the data cells filter.
+	// A DataCellsFilter  structure containing information about the data cells filter.
 	//
 	// This member is required.
 	TableData *types.DataCellsFilter

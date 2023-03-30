@@ -11,13 +11,11 @@ import (
 )
 
 // Deletes a Device Defender detect custom metric. Requires permission to access
-// the DeleteCustomMetric
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// the DeleteCustomMetric (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action. Before you can delete a custom metric, you must first remove the custom
 // metric from all security profiles it's a part of. The security profile
-// associated with the custom metric can be found using the ListSecurityProfiles
-// (https://docs.aws.amazon.com/iot/latest/apireference/API_ListSecurityProfiles.html)
-// API with metricName set to your custom metric name.
+// associated with the custom metric can be found using the ListSecurityProfiles (https://docs.aws.amazon.com/iot/latest/apireference/API_ListSecurityProfiles.html)
+// API with metricName  set to your custom metric name.
 func (c *Client) DeleteCustomMetric(ctx context.Context, params *DeleteCustomMetricInput, optFns ...func(*Options)) (*DeleteCustomMetricOutput, error) {
 	if params == nil {
 		params = &DeleteCustomMetricInput{}

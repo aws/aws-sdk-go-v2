@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows you to either upgrade your Amazon OpenSearch Service domain or perform an
-// upgrade eligibility check to a compatible version of OpenSearch or
+// Allows you to either upgrade your Amazon OpenSearch Service domain or perform
+// an upgrade eligibility check to a compatible version of OpenSearch or
 // Elasticsearch.
 func (c *Client) UpgradeDomain(ctx context.Context, params *UpgradeDomainInput, optFns ...func(*Options)) (*UpgradeDomainOutput, error) {
 	if params == nil {
@@ -29,7 +29,7 @@ func (c *Client) UpgradeDomain(ctx context.Context, params *UpgradeDomainInput, 
 	return out, nil
 }
 
-// Container for the request parameters to the UpgradeDomain operation.
+// Container for the request parameters to the UpgradeDomain  operation.
 type UpgradeDomainInput struct {
 
 	// Name of the OpenSearch Service domain that you want to upgrade.
@@ -37,8 +37,8 @@ type UpgradeDomainInput struct {
 	// This member is required.
 	DomainName *string
 
-	// OpenSearch or Elasticsearch version to which you want to upgrade, in the format
-	// Opensearch_X.Y or Elasticsearch_X.Y.
+	// OpenSearch or Elasticsearch version to which you want to upgrade, in the
+	// format Opensearch_X.Y or Elasticsearch_X.Y.
 	//
 	// This member is required.
 	TargetVersion *string
@@ -56,7 +56,7 @@ type UpgradeDomainInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for the response returned by UpgradeDomain operation.
+// Container for the response returned by UpgradeDomain  operation.
 type UpgradeDomainOutput struct {
 
 	// The advanced options configuration for the domain.

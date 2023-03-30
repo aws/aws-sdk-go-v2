@@ -12,8 +12,8 @@ import (
 )
 
 // Gets information about the specified product. Running this operation with
-// administrator access results in a failure. DescribeProductAsAdmin should be used
-// instead.
+// administrator access results in a failure. DescribeProductAsAdmin should be
+// used instead.
 func (c *Client) DescribeProduct(ctx context.Context, params *DescribeProductInput, optFns ...func(*Options)) (*DescribeProductOutput, error) {
 	if params == nil {
 		params = &DescribeProductInput{}
@@ -32,9 +32,9 @@ func (c *Client) DescribeProduct(ctx context.Context, params *DescribeProductInp
 type DescribeProductInput struct {
 
 	// The language code.
-	// - en - English (default)
-	// - jp - Japanese
-	// - zh - Chinese
+	//     - en - English (default)
+	//     - jp - Japanese
+	//     - zh - Chinese
 	AcceptLanguage *string
 
 	// The product identifier.

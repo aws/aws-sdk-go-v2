@@ -10,15 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// ResolveCustomer is called by a SaaS application during the registration process.
-// When a buyer visits your website during the registration process, the buyer
-// submits a registration token through their browser. The registration token is
-// resolved through this API to obtain a CustomerIdentifier along with the
+// ResolveCustomer is called by a SaaS application during the registration
+// process. When a buyer visits your website during the registration process, the
+// buyer submits a registration token through their browser. The registration token
+// is resolved through this API to obtain a CustomerIdentifier  along with the
 // CustomerAWSAccountId and ProductCode. The API needs to called from the seller
 // account id used to publish the SaaS application to successfully resolve the
-// token. For an example of using ResolveCustomer, see  ResolveCustomer code
-// example
-// (https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-resolvecustomer-example)
+// token. For an example of using ResolveCustomer , see  ResolveCustomer code
+// example (https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-resolvecustomer-example)
 // in the AWS Marketplace Seller Guide.
 func (c *Client) ResolveCustomer(ctx context.Context, params *ResolveCustomerInput, optFns ...func(*Options)) (*ResolveCustomerOutput, error) {
 	if params == nil {
@@ -35,13 +34,13 @@ func (c *Client) ResolveCustomer(ctx context.Context, params *ResolveCustomerInp
 	return out, nil
 }
 
-// Contains input to the ResolveCustomer operation.
+// Contains input to the ResolveCustomer  operation.
 type ResolveCustomerInput struct {
 
 	// When a buyer visits your website during the registration process, the buyer
 	// submits a registration token through the browser. The registration token is
-	// resolved to obtain a CustomerIdentifier along with the CustomerAWSAccountId and
-	// ProductCode.
+	// resolved to obtain a CustomerIdentifier  along with the CustomerAWSAccountId
+	// and ProductCode .
 	//
 	// This member is required.
 	RegistrationToken *string
@@ -49,17 +48,17 @@ type ResolveCustomerInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of the ResolveCustomer operation. Contains the CustomerIdentifier
-// along with the CustomerAWSAccountId and ProductCode.
+// The result of the ResolveCustomer  operation. Contains the CustomerIdentifier
+// along with the CustomerAWSAccountId  and ProductCode .
 type ResolveCustomerOutput struct {
 
-	// The CustomerAWSAccountId provides the AWS account ID associated with the
+	// The CustomerAWSAccountId  provides the AWS account ID associated with the
 	// CustomerIdentifier for the individual customer.
 	CustomerAWSAccountId *string
 
 	// The CustomerIdentifier is used to identify an individual customer in your
-	// application. Calls to BatchMeterUsage require CustomerIdentifiers for each
-	// UsageRecord.
+	// application. Calls to BatchMeterUsage  require CustomerIdentifiers  for each
+	// UsageRecord .
 	CustomerIdentifier *string
 
 	// The product code is returned to confirm that the buyer is registering for your

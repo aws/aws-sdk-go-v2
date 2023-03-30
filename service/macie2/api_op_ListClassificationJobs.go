@@ -48,8 +48,8 @@ type ListClassificationJobsInput struct {
 
 type ListClassificationJobsOutput struct {
 
-	// An array of objects, one for each job that matches the filter criteria specified
-	// in the request.
+	// An array of objects, one for each job that matches the filter criteria
+	// specified in the request.
 	Items []types.JobSummary
 
 	// The string to use in a subsequent request to get the next page of results in a
@@ -136,8 +136,8 @@ type ListClassificationJobsPaginatorOptions struct {
 	// The maximum number of items to include in each page of the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -150,7 +150,8 @@ type ListClassificationJobsPaginator struct {
 	firstPage bool
 }
 
-// NewListClassificationJobsPaginator returns a new ListClassificationJobsPaginator
+// NewListClassificationJobsPaginator returns a new
+// ListClassificationJobsPaginator
 func NewListClassificationJobsPaginator(client ListClassificationJobsAPIClient, params *ListClassificationJobsInput, optFns ...func(*ListClassificationJobsPaginatorOptions)) *ListClassificationJobsPaginator {
 	if params == nil {
 		params = &ListClassificationJobsInput{}

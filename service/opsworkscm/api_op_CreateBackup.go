@@ -12,14 +12,15 @@ import (
 )
 
 // Creates an application-level backup of a server. While the server is in the
-// BACKING_UP state, the server cannot be changed, and no additional backup can be
-// created. Backups can be created for servers in RUNNING, HEALTHY, and UNHEALTHY
-// states. By default, you can create a maximum of 50 manual backups. This
-// operation is asynchronous. A LimitExceededException is thrown when the maximum
-// number of manual backups is reached. An InvalidStateException is thrown when the
-// server is not in any of the following states: RUNNING, HEALTHY, or UNHEALTHY. A
-// ResourceNotFoundException is thrown when the server is not found. A
-// ValidationException is thrown when parameters of the request are not valid.
+// BACKING_UPstate, the server cannot be changed, and no additional backup can be
+// created. Backups can be created for servers in RUNNING , HEALTHY , and
+// UNHEALTHYstates. By default, you can create a maximum of 50 manual backups.
+// This operation is asynchronous. A LimitExceededException is thrown when the
+// maximum number of manual backups is reached. An InvalidStateException is
+// thrown when the server is not in any of the following states: RUNNING, HEALTHY,
+// or UNHEALTHY. A ResourceNotFoundException is thrown when the server is not
+// found. A ValidationException is thrown when parameters of the request are not
+// valid.
 func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, optFns ...func(*Options)) (*CreateBackupOutput, error) {
 	if params == nil {
 		params = &CreateBackupInput{}
@@ -47,17 +48,11 @@ type CreateBackupInput struct {
 
 	// A map that contains tag keys and tag values to attach to an AWS OpsWorks-CM
 	// server backup.
-	// - The key cannot be empty.
-	// - The key can be a maximum of 127
-	// characters, and can contain only Unicode letters, numbers, or separators, or the
-	// following special characters: + - = . _ : /
-	// - The value can be a maximum 255
-	// characters, and contain only Unicode letters, numbers, or separators, or the
-	// following special characters: + - = . _ : /
-	// - Leading and trailing white spaces
-	// are trimmed from both the key and value.
-	// - A maximum of 50 user-applied tags is
-	// allowed for tag-supported AWS OpsWorks-CM resources.
+	//     - The key cannot be empty.
+	//     - The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : /
+	//     - The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : /
+	//     - Leading and trailing white spaces are trimmed from both the key and value.
+	//     - A maximum of 50 user-applied tags is allowed for tag-supported AWS OpsWorks-CM resources.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

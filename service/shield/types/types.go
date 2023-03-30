@@ -7,10 +7,10 @@ import (
 	"time"
 )
 
-// The automatic application layer DDoS mitigation settings for a Protection. This
-// configuration determines whether Shield Advanced automatically manages rules in
-// the web ACL in order to respond to application layer events that Shield Advanced
-// determines to be DDoS attacks.
+// The automatic application layer DDoS mitigation settings for a Protection.
+// This configuration determines whether Shield Advanced automatically manages
+// rules in the web ACL in order to respond to application layer events that Shield
+// Advanced determines to be DDoS attacks.
 type ApplicationLayerAutomaticResponseConfiguration struct {
 
 	// Specifies the action setting that Shield Advanced should use in the WAF rules
@@ -23,8 +23,8 @@ type ApplicationLayerAutomaticResponseConfiguration struct {
 	// This member is required.
 	Action *ResponseAction
 
-	// Indicates whether automatic application layer DDoS mitigation is enabled for the
-	// protection.
+	// Indicates whether automatic application layer DDoS mitigation is enabled for
+	// the protection.
 	//
 	// This member is required.
 	Status ApplicationLayerAutomaticResponseStatus
@@ -44,8 +44,7 @@ type AttackDetail struct {
 	// The array of objects that provide details of the Shield event. For
 	// infrastructure layer events (L3 and L4 events), you can view metrics for top
 	// contributors in Amazon CloudWatch metrics. For more information, see Shield
-	// metrics and alarms
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms)
+	// metrics and alarms (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms)
 	// in the WAF Developer Guide.
 	AttackProperties []AttackProperty
 
@@ -61,27 +60,26 @@ type AttackDetail struct {
 	// The time the attack started, in Unix time in seconds.
 	StartTime *time.Time
 
-	// If applicable, additional detail about the resource being attacked, for example,
-	// IP address or URL.
+	// If applicable, additional detail about the resource being attacked, for
+	// example, IP address or URL.
 	SubResources []SubResourceSummary
 
 	noSmithyDocumentSerde
 }
 
-// Details of a Shield event. This is provided as part of an AttackDetail.
+// Details of a Shield event. This is provided as part of an AttackDetail .
 type AttackProperty struct {
 
-	// The type of Shield event that was observed. NETWORK indicates layer 3 and layer
-	// 4 events and APPLICATION indicates layer 7 events. For infrastructure layer
-	// events (L3 and L4 events), you can view metrics for top contributors in Amazon
-	// CloudWatch metrics. For more information, see Shield metrics and alarms
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms)
+	// The type of Shield event that was observed. NETWORK indicates layer 3 and
+	// layer 4 events and APPLICATION indicates layer 7 events. For infrastructure
+	// layer events (L3 and L4 events), you can view metrics for top contributors in
+	// Amazon CloudWatch metrics. For more information, see Shield metrics and alarms (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms)
 	// in the WAF Developer Guide.
 	AttackLayer AttackLayer
 
 	// Defines the Shield event property information that is provided. The
-	// WORDPRESS_PINGBACK_REFLECTOR and WORDPRESS_PINGBACK_SOURCE values are valid only
-	// for WordPress reflective pingback events.
+	// WORDPRESS_PINGBACK_REFLECTOR and WORDPRESS_PINGBACK_SOURCE values are valid
+	// only for WordPress reflective pingback events.
 	AttackPropertyIdentifier AttackPropertyIdentifier
 
 	// Contributor objects for the top five contributors to a Shield event. A
@@ -92,15 +90,15 @@ type AttackProperty struct {
 	// The total contributions made to this Shield event by all contributors.
 	Total int64
 
-	// The unit used for the ContributorValue property.
+	// The unit used for the Contributor Value  property.
 	Unit Unit
 
 	noSmithyDocumentSerde
 }
 
 // A single attack statistics data record. This is returned by
-// DescribeAttackStatistics along with a time range indicating the time period that
-// the attack statistics apply to.
+// DescribeAttackStatisticsalong with a time range indicating the time period
+// that the attack statistics apply to.
 type AttackStatisticsDataItem struct {
 
 	// The number of attacks detected during the time period. This is always present,
@@ -110,7 +108,7 @@ type AttackStatisticsDataItem struct {
 	AttackCount int64
 
 	// Information about the volume of attacks during the time period. If the
-	// accompanying AttackCount is zero, this setting might be empty.
+	// accompanying AttackCount  is zero, this setting might be empty.
 	AttackVolume *AttackVolume
 
 	noSmithyDocumentSerde
@@ -141,28 +139,24 @@ type AttackSummary struct {
 type AttackVectorDescription struct {
 
 	// The attack type. Valid values:
-	// - UDP_TRAFFIC
-	// - UDP_FRAGMENT
-	// -
-	// GENERIC_UDP_REFLECTION
-	// - DNS_REFLECTION
-	// - NTP_REFLECTION
-	// - CHARGEN_REFLECTION
-	// -
-	// SSDP_REFLECTION
-	// - PORT_MAPPER
-	// - RIP_REFLECTION
-	// - SNMP_REFLECTION
-	// -
-	// MSSQL_REFLECTION
-	// - NET_BIOS_REFLECTION
-	// - SYN_FLOOD
-	// - ACK_FLOOD
-	// - REQUEST_FLOOD
-	// -
-	// HTTP_REFLECTION
-	// - UDS_REFLECTION
-	// - MEMCACHED_REFLECTION
+	//     - UDP_TRAFFIC
+	//     - UDP_FRAGMENT
+	//     - GENERIC_UDP_REFLECTION
+	//     - DNS_REFLECTION
+	//     - NTP_REFLECTION
+	//     - CHARGEN_REFLECTION
+	//     - SSDP_REFLECTION
+	//     - PORT_MAPPER
+	//     - RIP_REFLECTION
+	//     - SNMP_REFLECTION
+	//     - MSSQL_REFLECTION
+	//     - NET_BIOS_REFLECTION
+	//     - SYN_FLOOD
+	//     - ACK_FLOOD
+	//     - REQUEST_FLOOD
+	//     - HTTP_REFLECTION
+	//     - UDS_REFLECTION
+	//     - MEMCACHED_REFLECTION
 	//
 	// This member is required.
 	VectorType *string
@@ -171,27 +165,27 @@ type AttackVectorDescription struct {
 }
 
 // Information about the volume of attacks during the time period, included in an
-// AttackStatisticsDataItem. If the accompanying AttackCount in the statistics
+// AttackStatisticsDataItem . If the accompanying AttackCount in the statistics
 // object is zero, this setting might be empty.
 type AttackVolume struct {
 
-	// A statistics object that uses bits per second as the unit. This is included for
-	// network level attacks.
+	// A statistics object that uses bits per second as the unit. This is included
+	// for network level attacks.
 	BitsPerSecond *AttackVolumeStatistics
 
 	// A statistics object that uses packets per second as the unit. This is included
 	// for network level attacks.
 	PacketsPerSecond *AttackVolumeStatistics
 
-	// A statistics object that uses requests per second as the unit. This is included
-	// for application level attacks, and is only available for accounts that are
-	// subscribed to Shield Advanced.
+	// A statistics object that uses requests per second as the unit. This is
+	// included for application level attacks, and is only available for accounts that
+	// are subscribed to Shield Advanced.
 	RequestsPerSecond *AttackVolumeStatistics
 
 	noSmithyDocumentSerde
 }
 
-// Statistics objects for the various data types in AttackVolume.
+// Statistics objects for the various data types in AttackVolume .
 type AttackVolumeStatistics struct {
 
 	// The maximum attack volume observed for the given unit.
@@ -202,9 +196,9 @@ type AttackVolumeStatistics struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies that Shield Advanced should configure its WAF rules with the WAF Block
-// action. This is only used in the context of the ResponseAction setting. JSON
-// specification: "Block": {}
+// Specifies that Shield Advanced should configure its WAF rules with the WAF
+// Block action. This is only used in the context of the ResponseAction setting.
+// JSON specification: "Block": {}
 type BlockAction struct {
 	noSmithyDocumentSerde
 }
@@ -213,21 +207,21 @@ type BlockAction struct {
 type Contributor struct {
 
 	// The name of the contributor. The type of name that you'll find here depends on
-	// the AttackPropertyIdentifier setting in the AttackProperty where this
-	// contributor is defined. For example, if the AttackPropertyIdentifier is
-	// SOURCE_COUNTRY, the Name could be United States.
+	// the AttackPropertyIdentifier  setting in the AttackProperty where this
+	// contributor is defined. For example, if the AttackPropertyIdentifier  is
+	// SOURCE_COUNTRY , the Name  could be United States .
 	Name *string
 
-	// The contribution of this contributor expressed in Protection units. For example
-	// 10,000.
+	// The contribution of this contributor expressed in Protection units. For
+	// example 10,000 .
 	Value int64
 
 	noSmithyDocumentSerde
 }
 
-// Specifies that Shield Advanced should configure its WAF rules with the WAF Count
-// action. This is only used in the context of the ResponseAction setting. JSON
-// specification: "Count": {}
+// Specifies that Shield Advanced should configure its WAF rules with the WAF
+// Count action. This is only used in the context of the ResponseAction setting.
+// JSON specification: "Count": {}
 type CountAction struct {
 	noSmithyDocumentSerde
 }
@@ -272,8 +266,8 @@ type InclusionProtectionFilters struct {
 	noSmithyDocumentSerde
 }
 
-// Narrows the set of protection groups that the call retrieves. You can retrieve a
-// single protection group by its name and you can retrieve all protection groups
+// Narrows the set of protection groups that the call retrieves. You can retrieve
+// a single protection group by its name and you can retrieve all protection groups
 // that are configured with a specific pattern, aggregation, or resource type. You
 // can provide up to one criteria per filter type. Shield Advanced returns the
 // protection groups that exactly match all of the search criteria that you
@@ -291,7 +285,7 @@ type InclusionProtectionGroupFilters struct {
 
 	// The resource type configuration of the protection groups that you want to
 	// retrieve. In the protection group configuration, you specify the resource type
-	// when you set the group's Pattern to BY_RESOURCE_TYPE.
+	// when you set the group's Pattern  to BY_RESOURCE_TYPE .
 	ResourceTypes []ProtectedResourceType
 
 	noSmithyDocumentSerde
@@ -300,7 +294,7 @@ type InclusionProtectionGroupFilters struct {
 // Specifies how many protections of a given type you can create.
 type Limit struct {
 
-	// The maximum number of protections that can be created for the specified Type.
+	// The maximum number of protections that can be created for the specified Type .
 	Max int64
 
 	// The type of protection.
@@ -327,14 +321,14 @@ type Protection struct {
 	// Advanced determines to be DDoS attacks.
 	ApplicationLayerAutomaticResponseConfiguration *ApplicationLayerAutomaticResponseConfiguration
 
-	// The unique identifier (ID) for the Route 53 health check that's associated with
-	// the protection.
+	// The unique identifier (ID) for the Route 53 health check that's associated
+	// with the protection.
 	HealthCheckIds []string
 
 	// The unique identifier (ID) of the protection.
 	Id *string
 
-	// The name of the protection. For example, My CloudFront distributions.
+	// The name of the protection. For example, My CloudFront distributions .
 	Name *string
 
 	// The ARN (Amazon Resource Name) of the protection.
@@ -347,31 +341,23 @@ type Protection struct {
 	noSmithyDocumentSerde
 }
 
-// A grouping of protected resources that you and Shield Advanced can monitor as a
-// collective. This resource grouping improves the accuracy of detection and
+// A grouping of protected resources that you and Shield Advanced can monitor as
+// a collective. This resource grouping improves the accuracy of detection and
 // reduces false positives.
 type ProtectionGroup struct {
 
 	// Defines how Shield combines resource data for the group in order to detect,
 	// mitigate, and report events.
-	// - Sum - Use the total traffic across the group.
-	// This is a good choice for most cases. Examples include Elastic IP addresses for
-	// EC2 instances that scale manually or automatically.
-	// - Mean - Use the average of
-	// the traffic across the group. This is a good choice for resources that share
-	// traffic uniformly. Examples include accelerators and load balancers.
-	// - Max - Use
-	// the highest traffic from each resource. This is useful for resources that don't
-	// share traffic and for resources that share that traffic in a non-uniform way.
-	// Examples include Amazon CloudFront distributions and origin resources for
-	// CloudFront distributions.
+	//     - Sum - Use the total traffic across the group. This is a good choice for most cases. Examples include Elastic IP addresses for EC2 instances that scale manually or automatically.
+	//     - Mean - Use the average of the traffic across the group. This is a good choice for resources that share traffic uniformly. Examples include accelerators and load balancers.
+	//     - Max - Use the highest traffic from each resource. This is useful for resources that don't share traffic and for resources that share that traffic in a non-uniform way. Examples include Amazon CloudFront distributions and origin resources for CloudFront distributions.
 	//
 	// This member is required.
 	Aggregation ProtectionGroupAggregation
 
 	// The ARNs (Amazon Resource Names) of the resources to include in the protection
-	// group. You must set this when you set Pattern to ARBITRARY and you must not set
-	// it for any other Pattern setting.
+	// group. You must set this when you set Pattern  to ARBITRARY and you must not
+	// set it for any other Pattern  setting.
 	//
 	// This member is required.
 	Members []string
@@ -384,9 +370,9 @@ type ProtectionGroup struct {
 	// This member is required.
 	Pattern ProtectionGroupPattern
 
-	// The name of the protection group. You use this to identify the protection group
-	// in lists and to manage the protection group, for example to update, delete, or
-	// describe it.
+	// The name of the protection group. You use this to identify the protection
+	// group in lists and to manage the protection group, for example to update,
+	// delete, or describe it.
 	//
 	// This member is required.
 	ProtectionGroupId *string
@@ -394,9 +380,9 @@ type ProtectionGroup struct {
 	// The ARN (Amazon Resource Name) of the protection group.
 	ProtectionGroupArn *string
 
-	// The resource type to include in the protection group. All protected resources of
-	// this type are included in the protection group. You must set this when you set
-	// Pattern to BY_RESOURCE_TYPE and you must not set it for any other Pattern
+	// The resource type to include in the protection group. All protected resources
+	// of this type are included in the protection group. You must set this when you
+	// set Pattern  to BY_RESOURCE_TYPE  and you must not set it for any other Pattern
 	// setting.
 	ResourceType ProtectedResourceType
 
@@ -461,12 +447,12 @@ type ProtectionLimits struct {
 // inside the web ACL that you have associated with the resource.
 type ResponseAction struct {
 
-	// Specifies that Shield Advanced should configure its WAF rules with the WAF Block
-	// action. You must specify exactly one action, either Block or Count.
+	// Specifies that Shield Advanced should configure its WAF rules with the WAF
+	// Block action. You must specify exactly one action, either Block  or Count .
 	Block *BlockAction
 
-	// Specifies that Shield Advanced should configure its WAF rules with the WAF Count
-	// action. You must specify exactly one action, either Block or Count.
+	// Specifies that Shield Advanced should configure its WAF rules with the WAF
+	// Count action. You must specify exactly one action, either Block  or Count .
 	Count *CountAction
 
 	noSmithyDocumentSerde
@@ -481,10 +467,10 @@ type SubResourceSummary struct {
 	// The counters that describe the details of the attack.
 	Counters []SummarizedCounter
 
-	// The unique identifier (ID) of the SubResource.
+	// The unique identifier (ID) of the SubResource .
 	Id *string
 
-	// The SubResource type.
+	// The SubResource  type.
 	Type SubResourceType
 
 	noSmithyDocumentSerde
@@ -499,10 +485,11 @@ type Subscription struct {
 	SubscriptionLimits *SubscriptionLimits
 
 	// If ENABLED, the subscription will be automatically renewed at the end of the
-	// existing subscription period. When you initally create a subscription, AutoRenew
-	// is set to ENABLED. You can change this by submitting an UpdateSubscription
-	// request. If the UpdateSubscription request does not included a value for
-	// AutoRenew, the existing value for AutoRenew remains unchanged.
+	// existing subscription period. When you initally create a subscription,
+	// AutoRenew is set to ENABLED . You can change this by submitting an
+	// UpdateSubscription request. If the UpdateSubscription request does not
+	// included a value for AutoRenew , the existing value for AutoRenew remains
+	// unchanged.
 	AutoRenew AutoRenew
 
 	// The date and time your subscription will end.
@@ -513,10 +500,10 @@ type Subscription struct {
 
 	// If ENABLED, the Shield Response Team (SRT) will use email and phone to notify
 	// contacts about escalations to the SRT and to initiate proactive customer
-	// support. If PENDING, you have requested proactive engagement and the request is
-	// pending. The status changes to ENABLED when your request is fully processed. If
-	// DISABLED, the SRT will not proactively notify contacts about escalations or to
-	// initiate proactive customer support.
+	// support. If PENDING, you have requested proactive engagement and the request
+	// is pending. The status changes to ENABLED when your request is fully
+	// processed. If DISABLED, the SRT will not proactively notify contacts about
+	// escalations or to initiate proactive customer support.
 	ProactiveEngagementStatus ProactiveEngagementStatus
 
 	// The start time of the subscription, in Unix time in seconds.
@@ -585,18 +572,19 @@ type SummarizedCounter struct {
 	noSmithyDocumentSerde
 }
 
-// A tag associated with an Amazon Web Services resource. Tags are key:value pairs
-// that you can use to categorize and manage your resources, for purposes like
-// billing or other management. Typically, the tag key represents a category, such
-// as "environment", and the tag value represents a specific value within that
+// A tag associated with an Amazon Web Services resource. Tags are key:value
+// pairs that you can use to categorize and manage your resources, for purposes
+// like billing or other management. Typically, the tag key represents a category,
+// such as "environment", and the tag value represents a specific value within that
 // category, such as "test," "development," or "production". Or you might set the
 // tag key to "customer" and the value to the customer name or ID. You can specify
 // one or more tags to add to each Amazon Web Services resource, up to 50 tags for
 // a resource.
 type Tag struct {
 
-	// Part of the key:value pair that defines a tag. You can use a tag key to describe
-	// a category of information, such as "customer." Tag keys are case-sensitive.
+	// Part of the key:value pair that defines a tag. You can use a tag key to
+	// describe a category of information, such as "customer." Tag keys are
+	// case-sensitive.
 	Key *string
 
 	// Part of the key:value pair that defines a tag. You can use a tag value to

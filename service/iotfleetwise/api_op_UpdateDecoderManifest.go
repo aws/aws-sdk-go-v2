@@ -12,7 +12,8 @@ import (
 )
 
 // Updates a decoder manifest. A decoder manifest can only be updated when the
-// status is DRAFT. Only ACTIVE decoder manifests can be associated with vehicles.
+// status is DRAFT . Only ACTIVE decoder manifests can be associated with
+// vehicles.
 func (c *Client) UpdateDecoderManifest(ctx context.Context, params *UpdateDecoderManifestInput, optFns ...func(*Options)) (*UpdateDecoderManifestOutput, error) {
 	if params == nil {
 		params = &UpdateDecoderManifestInput{}
@@ -60,8 +61,9 @@ type UpdateDecoderManifestInput struct {
 	// manifest.
 	SignalDecodersToUpdate []types.SignalDecoder
 
-	// The state of the decoder manifest. If the status is ACTIVE, the decoder manifest
-	// can't be edited. If the status is DRAFT, you can edit the decoder manifest.
+	// The state of the decoder manifest. If the status is ACTIVE, the decoder
+	// manifest can't be edited. If the status is DRAFT, you can edit the decoder
+	// manifest.
 	Status types.ManifestStatus
 
 	noSmithyDocumentSerde

@@ -34,14 +34,14 @@ type ListMembersInput struct {
 	// The maximum number of results to return in the response.
 	MaxResults *int32
 
-	// A token to use for paginating results that are returned in the response. Set the
-	// value of this parameter to null for the first request to a list action. For
-	// subsequent calls, use the NextToken value returned from the previous request to
-	// continue listing results after the first page.
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request to a list action. For
+	// subsequent calls, use the NextToken value returned from the previous request
+	// to continue listing results after the first page.
 	NextToken *string
 
 	// Specifies whether to list only currently associated members if True or to list
-	// all members within the organization if False.
+	// all members within the organization if False .
 	OnlyAssociated *bool
 
 	noSmithyDocumentSerde
@@ -52,8 +52,8 @@ type ListMembersOutput struct {
 	// An object that contains details for each member account.
 	Members []types.Member
 
-	// The pagination parameter to be used on the next list operation to retrieve more
-	// items.
+	// The pagination parameter to be used on the next list operation to retrieve
+	// more items.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -134,8 +134,8 @@ type ListMembersPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -14,8 +14,7 @@ import (
 )
 
 // Gets historical metric data from the specified Amazon Connect instance. For a
-// description of each historical metric, see Historical Metrics Definitions
-// (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
+// description of each historical metric, see Historical Metrics Definitions (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) GetMetricData(ctx context.Context, params *GetMetricDataInput, optFns ...func(*Options)) (*GetMetricDataOutput, error) {
 	if params == nil {
@@ -34,11 +33,11 @@ func (c *Client) GetMetricData(ctx context.Context, params *GetMetricDataInput, 
 
 type GetMetricDataInput struct {
 
-	// The timestamp, in UNIX Epoch time format, at which to end the reporting interval
-	// for the retrieval of historical metrics data. The time must be specified using
-	// an interval of 5 minutes, such as 11:00, 11:05, 11:10, and must be later than
-	// the start time timestamp. The time range between the start and end time must be
-	// less than 24 hours.
+	// The timestamp, in UNIX Epoch time format, at which to end the reporting
+	// interval for the retrieval of historical metrics data. The time must be
+	// specified using an interval of 5 minutes, such as 11:00, 11:05, 11:10, and must
+	// be later than the start time timestamp. The time range between the start and end
+	// time must be less than 24 hours.
 	//
 	// This member is required.
 	EndTime *time.Time
@@ -47,15 +46,14 @@ type GetMetricDataInput struct {
 	// Metric data is retrieved only for the resources associated with the queues or
 	// channels included in the filter. You can include both queue IDs and queue ARNs
 	// in the same request. VOICE, CHAT, and TASK channels are supported. To filter by
-	// Queues, enter the queue ID/ARN, not the name of the queue.
+	// Queues , enter the queue ID/ARN, not the name of the queue.
 	//
 	// This member is required.
 	Filters *types.Filters
 
-	// The metrics to retrieve. Specify the name, unit, and statistic for each metric.
-	// The following historical metrics are available. For a description of each
-	// metric, see Historical Metrics Definitions
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
+	// The metrics to retrieve. Specify the name, unit, and statistic for each
+	// metric. The following historical metrics are available. For a description of
+	// each metric, see Historical Metrics Definitions (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
 	// in the Amazon Connect Administrator Guide. This API does not support a contacts
 	// incoming metric (there's no CONTACTS_INCOMING metric missing from the documented
 	// list). ABANDON_TIME Unit: SECONDS Statistic: AVG AFTER_CONTACT_WORK_TIME Unit:
@@ -76,14 +74,13 @@ type GetMetricDataInput struct {
 	// Unit: SECONDS Statistic: AVG QUEUED_TIME Unit: SECONDS Statistic: MAX
 	// SERVICE_LEVEL You can include up to 20 SERVICE_LEVEL metrics in a request. Unit:
 	// PERCENT Statistic: AVG Threshold: For ThresholdValue, enter any whole number
-	// from 1 to 604800 (inclusive), in seconds. For Comparison, you must enter LT (for
-	// "Less than").
+	// from 1 to 604800 (inclusive), in seconds. For Comparison , you must enter LT
+	// (for "Less than").
 	//
 	// This member is required.
 	HistoricalMetrics []types.HistoricalMetric
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -116,14 +113,14 @@ type GetMetricDataInput struct {
 
 type GetMetricDataOutput struct {
 
-	// Information about the historical metrics. If no grouping is specified, a summary
-	// of metric data is returned.
+	// Information about the historical metrics. If no grouping is specified, a
+	// summary of metric data is returned.
 	MetricResults []types.HistoricalMetricResult
 
-	// If there are additional results, this is the token for the next set of results.
-	// The token expires after 5 minutes from the time it is created. Subsequent
-	// requests that use the token must use the same request parameters as the request
-	// that generated the token.
+	// If there are additional results, this is the token for the next set of
+	// results. The token expires after 5 minutes from the time it is created.
+	// Subsequent requests that use the token must use the same request parameters as
+	// the request that generated the token.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -207,8 +204,8 @@ type GetMetricDataPaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

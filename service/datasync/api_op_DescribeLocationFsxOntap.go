@@ -14,7 +14,7 @@ import (
 
 // Provides details about how an DataSync location for an Amazon FSx for NetApp
 // ONTAP file system is configured. If your location uses SMB, the
-// DescribeLocationFsxOntap operation doesn't actually return a Password.
+// DescribeLocationFsxOntap operation doesn't actually return a Password .
 func (c *Client) DescribeLocationFsxOntap(ctx context.Context, params *DescribeLocationFsxOntapInput, optFns ...func(*Options)) (*DescribeLocationFsxOntapOutput, error) {
 	if params == nil {
 		params = &DescribeLocationFsxOntapInput{}
@@ -52,14 +52,16 @@ type DescribeLocationFsxOntapOutput struct {
 	// The ARN of the FSx for ONTAP file system location.
 	LocationArn *string
 
-	// The uniform resource identifier (URI) of the FSx for ONTAP file system location.
+	// The uniform resource identifier (URI) of the FSx for ONTAP file system
+	// location.
 	LocationUri *string
 
 	// Specifies the data transfer protocol that DataSync uses to access your Amazon
 	// FSx file system.
 	Protocol *types.FsxProtocol
 
-	// The security groups that DataSync uses to access your FSx for ONTAP file system.
+	// The security groups that DataSync uses to access your FSx for ONTAP file
+	// system.
 	SecurityGroupArns []string
 
 	// The ARN of the storage virtual machine (SVM) on your FSx for ONTAP file system

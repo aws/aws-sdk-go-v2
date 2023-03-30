@@ -40,8 +40,8 @@ type DeleteEventStreamInput struct {
 
 type DeleteEventStreamOutput struct {
 
-	// Specifies settings for publishing event data to an Amazon Kinesis data stream or
-	// an Amazon Kinesis Data Firehose delivery stream.
+	// Specifies settings for publishing event data to an Amazon Kinesis data stream
+	// or an Amazon Kinesis Data Firehose delivery stream.
 	//
 	// This member is required.
 	EventStream *types.EventStream

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about one or more merge conflicts in the attempted merge of
-// two commit specifiers using the squash or three-way merge strategy.
+// Returns information about one or more merge conflicts in the attempted merge
+// of two commit specifiers using the squash or three-way merge strategy.
 func (c *Client) BatchDescribeMergeConflicts(ctx context.Context, params *BatchDescribeMergeConflictsInput, optFns ...func(*Options)) (*BatchDescribeMergeConflictsOutput, error) {
 	if params == nil {
 		params = &BatchDescribeMergeConflictsInput{}
@@ -41,7 +41,8 @@ type BatchDescribeMergeConflictsInput struct {
 	// This member is required.
 	MergeOption types.MergeOptionTypeEnum
 
-	// The name of the repository that contains the merge conflicts you want to review.
+	// The name of the repository that contains the merge conflicts you want to
+	// review.
 	//
 	// This member is required.
 	RepositoryName *string
@@ -74,8 +75,8 @@ type BatchDescribeMergeConflictsInput struct {
 	// The maximum number of merge hunks to include in the output.
 	MaxMergeHunks *int32
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
+	// An enumeration token that, when provided in a request, returns the next batch
+	// of the results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -83,8 +84,8 @@ type BatchDescribeMergeConflictsInput struct {
 
 type BatchDescribeMergeConflictsOutput struct {
 
-	// A list of conflicts for each file, including the conflict metadata and the hunks
-	// of the differences between the files.
+	// A list of conflicts for each file, including the conflict metadata and the
+	// hunks of the differences between the files.
 	//
 	// This member is required.
 	Conflicts []types.Conflict

@@ -12,9 +12,9 @@ import (
 
 // Deletes a VPC peering connection. Either the owner of the requester VPC or the
 // owner of the accepter VPC can delete the VPC peering connection if it's in the
-// active state. The owner of the requester VPC can delete a VPC peering connection
-// in the pending-acceptance state. You cannot delete a VPC peering connection
-// that's in the failed state.
+// activestate. The owner of the requester VPC can delete a VPC peering
+// connection in the pending-acceptance state. You cannot delete a VPC peering
+// connection that's in the failed  state.
 func (c *Client) DeleteVpcPeeringConnection(ctx context.Context, params *DeleteVpcPeeringConnectionInput, optFns ...func(*Options)) (*DeleteVpcPeeringConnectionOutput, error) {
 	if params == nil {
 		params = &DeleteVpcPeeringConnectionInput{}
@@ -39,8 +39,8 @@ type DeleteVpcPeeringConnectionInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde
@@ -48,7 +48,7 @@ type DeleteVpcPeeringConnectionInput struct {
 
 type DeleteVpcPeeringConnectionOutput struct {
 
-	// Returns true if the request succeeds; otherwise, it returns an error.
+	// Returns true  if the request succeeds; otherwise, it returns an error.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

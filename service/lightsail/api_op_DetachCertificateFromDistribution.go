@@ -33,7 +33,7 @@ func (c *Client) DetachCertificateFromDistribution(ctx context.Context, params *
 type DetachCertificateFromDistributionInput struct {
 
 	// The name of the distribution from which to detach the certificate. Use the
-	// GetDistributions action to get a list of distribution names that you can
+	// GetDistributionsaction to get a list of distribution names that you can
 	// specify.
 	//
 	// This member is required.

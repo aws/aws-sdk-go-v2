@@ -24,8 +24,8 @@ type AccountHealth struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the number of open reactive and proactive insights that can be
-// used to gauge the health of your system.
+// Information about the number of open reactive and proactive insights that can
+// be used to gauge the health of your system.
 type AccountInsightHealth struct {
 
 	// An integer that specifies the number of open proactive insights in your Amazon
@@ -39,9 +39,9 @@ type AccountInsightHealth struct {
 	noSmithyDocumentSerde
 }
 
-// Information about your account's integration with Amazon CodeGuru Profiler. This
-// returns whether DevOps Guru is configured to consume recommendations generated
-// from Amazon CodeGuru Profiler.
+// Information about your account's integration with Amazon CodeGuru Profiler.
+// This returns whether DevOps Guru is configured to consume recommendations
+// generated from Amazon CodeGuru Profiler.
 type AmazonCodeGuruProfilerIntegration struct {
 
 	// The status of the CodeGuru Profiler integration. Specifies if DevOps Guru is
@@ -92,10 +92,10 @@ type AnomalyReportedTimeRange struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon Web Services resources in which DevOps Guru detected unusual behavior
-// that resulted in the generation of an anomaly. When DevOps Guru detects multiple
-// related anomalies, it creates and insight with details about the anomalous
-// behavior and suggestions about how to correct the problem.
+// The Amazon Web Services resources in which DevOps Guru detected unusual
+// behavior that resulted in the generation of an anomaly. When DevOps Guru detects
+// multiple related anomalies, it creates and insight with details about the
+// anomalous behavior and suggestions about how to correct the problem.
 type AnomalyResource struct {
 
 	// The name of the Amazon Web Services resource.
@@ -156,9 +156,8 @@ type AnomalyTimeRange struct {
 
 // Information about Amazon Web Services CloudFormation stacks. You can use up to
 // 500 stacks to specify which Amazon Web Services resources in your account to
-// analyze. For more information, see Stacks
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in
-// the Amazon Web Services CloudFormation User Guide.
+// analyze. For more information, see Stacks (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html)
+// in the Amazon Web Services CloudFormation User Guide.
 type CloudFormationCollection struct {
 
 	// An array of CloudFormation stack names.
@@ -169,9 +168,8 @@ type CloudFormationCollection struct {
 
 // Information about Amazon Web Services CloudFormation stacks. You can use up to
 // 500 stacks to specify which Amazon Web Services resources in your account to
-// analyze. For more information, see Stacks
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in
-// the Amazon Web Services CloudFormation User Guide.
+// analyze. For more information, see Stacks (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html)
+// in the Amazon Web Services CloudFormation User Guide.
 type CloudFormationCollectionFilter struct {
 
 	// An array of CloudFormation stack names.
@@ -184,9 +182,8 @@ type CloudFormationCollectionFilter struct {
 // monthly cost estimate for DevOps Guru to analyze Amazon Web Services resources.
 // The maximum number of stacks you can specify for a cost estimate is one. The
 // estimate created is for the cost to analyze the Amazon Web Services resources
-// defined by the stack. For more information, see Stacks
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in
-// the Amazon Web Services CloudFormation User Guide.
+// defined by the stack. For more information, see Stacks (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html)
+// in the Amazon Web Services CloudFormation User Guide.
 type CloudFormationCostEstimationResourceCollectionFilter struct {
 
 	// An array of CloudFormation stack names. Its size is fixed at 1 item.
@@ -249,13 +246,12 @@ type CloudWatchMetricsDetail struct {
 	Period int32
 
 	// The type of statistic associated with the CloudWatch metric. For more
-	// information, see Statistics
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic)
+	// information, see Statistics (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic)
 	// in the Amazon CloudWatch User Guide.
 	Stat CloudWatchMetricsStat
 
-	// The unit of measure used for the CloudWatch metric. For example, Bytes, Seconds,
-	// Count, and Percent.
+	// The unit of measure used for the CloudWatch metric. For example, Bytes ,
+	// Seconds , Count , and Percent .
 	Unit *string
 
 	noSmithyDocumentSerde
@@ -265,8 +261,7 @@ type CloudWatchMetricsDetail struct {
 // analyzes the resources in your account for operational problems and anomalous
 // behavior. A dimension is a name/value pair that is part of the identity of a
 // metric. A metric can have up to 10 dimensions. For more information, see
-// Dimensions
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension)
+// Dimensions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension)
 // in the Amazon CloudWatch User Guide.
 type CloudWatchMetricsDimension struct {
 
@@ -281,42 +276,35 @@ type CloudWatchMetricsDimension struct {
 
 // Information about a filter used to specify which Amazon Web Services resources
 // are analyzed to create a monthly DevOps Guru cost estimate. For more
-// information, see Estimate your Amazon DevOps Guru costs
-// (https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html)
-// and Amazon DevOps Guru pricing (http://aws.amazon.com/devops-guru/pricing/).
+// information, see Estimate your Amazon DevOps Guru costs (https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html)
+// and Amazon DevOps Guru pricing (http://aws.amazon.com/devops-guru/pricing/) .
 type CostEstimationResourceCollectionFilter struct {
 
 	// An object that specifies the CloudFormation stack that defines the Amazon Web
 	// Services resources used to create a monthly estimate for DevOps Guru.
 	CloudFormation *CloudFormationCostEstimationResourceCollectionFilter
 
-	// The Amazon Web Services tags used to filter the resource collection that is used
-	// for a cost estimate. Tags help you identify and organize your Amazon Web
+	// The Amazon Web Services tags used to filter the resource collection that is
+	// used for a cost estimate. Tags help you identify and organize your Amazon Web
 	// Services resources. Many Amazon Web Services services support tagging, so you
 	// can assign the same tag to resources from different services to indicate that
 	// the resources are related. For example, you can assign the same tag to an Amazon
 	// DynamoDB table resource that you assign to an Lambda function. For more
-	// information about using tags, see the Tagging best practices
-	// (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html)
+	// information about using tags, see the Tagging best practices (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html)
 	// whitepaper. Each Amazon Web Services tag has two parts.
-	// - A tag key (for
-	// example, CostCenter, Environment, Project, or Secret). Tag keys are
-	// case-sensitive.
-	// - An optional field known as a tag value (for example,
-	// 111122223333, Production, or a team name). Omitting the tag value is the same as
-	// using an empty string. Like tag keys, tag values are case-sensitive.
+	//     - A tag key (for example, CostCenter , Environment , Project , or Secret ). Tag keys are case-sensitive.
+	//     - An optional field known as a tag value (for example, 111122223333 , Production , or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case-sensitive.
 	//
-	// Together
-	// these are known as key-value pairs. The string used for a key in a tag that you
-	// use to define your resource coverage must begin with the prefix Devops-guru-.
-	// The tag key might be DevOps-Guru-deployment-application or
+	// Together these are known as key-value pairs. The string used for a key in a tag
+	// that you use to define your resource coverage must begin with the prefix
+	// Devops-guru- . The tag key might be DevOps-Guru-deployment-application  or
 	// devops-guru-rds-application. When you create a key, the case of characters in
 	// the key can be whatever you choose. After you create a key, it is
 	// case-sensitive. For example, DevOps Guru works with a key named devops-guru-rds
 	// and a key named DevOps-Guru-RDS, and these act as two different keys. Possible
 	// key/value pairs in your application might be
 	// Devops-Guru-production-application/RDS or
-	// Devops-Guru-production-application/containers.
+	// Devops-Guru-production-application/containers .
 	Tags []TagCostEstimationResourceCollectionFilter
 
 	noSmithyDocumentSerde
@@ -334,8 +322,8 @@ type CostEstimationTimeRange struct {
 	noSmithyDocumentSerde
 }
 
-// A range of time that specifies when anomalous behavior in an anomaly or insight
-// ended.
+// A range of time that specifies when anomalous behavior in an anomaly or
+// insight ended.
 type EndTimeRange struct {
 
 	// The earliest end time in the time range.
@@ -352,8 +340,8 @@ type EndTimeRange struct {
 // recommendations to improve your operational solutions.
 type Event struct {
 
-	// The source, AWS_CLOUD_TRAIL or AWS_CODE_DEPLOY, where DevOps Guru analysis found
-	// the event.
+	// The source, AWS_CLOUD_TRAIL  or AWS_CODE_DEPLOY, where DevOps Guru analysis
+	// found the event.
 	DataSource EventDataSource
 
 	// The class of the event. The class specifies what the event is related to, such
@@ -369,8 +357,8 @@ type Event struct {
 	// The name of the event.
 	Name *string
 
-	// A collection of Amazon Web Services resources supported by DevOps Guru. The two
-	// types of Amazon Web Services resource collections supported are Amazon Web
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The
+	// two types of Amazon Web Services resource collections supported are Amazon Web
 	// Services CloudFormation stacks and Amazon Web Services resources that contain
 	// the same Amazon Web Services tag. DevOps Guru can be configured to analyze the
 	// Amazon Web Services resources that are defined in the stacks or that are tagged
@@ -382,7 +370,7 @@ type Event struct {
 	// emitted the event.
 	Resources []EventResource
 
-	// A Timestamp that specifies the time the event occurred.
+	// A Timestamp  that specifies the time the event occurred.
 	Time *time.Time
 
 	noSmithyDocumentSerde
@@ -447,8 +435,8 @@ type InsightFeedback struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the number of open reactive and proactive insights that can be
-// used to gauge the health of your system.
+// Information about the number of open reactive and proactive insights that can
+// be used to gauge the health of your system.
 type InsightHealth struct {
 
 	// The Meant Time to Recover (MTTR) for the insight.
@@ -491,7 +479,8 @@ type ListAnomaliesForInsightFilters struct {
 // called.
 type ListEventsFilters struct {
 
-	// The source, AWS_CLOUD_TRAIL or AWS_CODE_DEPLOY, of the events you want returned.
+	// The source, AWS_CLOUD_TRAIL  or AWS_CODE_DEPLOY, of the events you want
+	// returned.
 	DataSource EventDataSource
 
 	// The class of the events you want to filter for, such as an infrastructure
@@ -507,8 +496,8 @@ type ListEventsFilters struct {
 	// An ID of an insight that is related to the events you want to filter for.
 	InsightId *string
 
-	// A collection of Amazon Web Services resources supported by DevOps Guru. The two
-	// types of Amazon Web Services resource collections supported are Amazon Web
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The
+	// two types of Amazon Web Services resource collections supported are Amazon Web
 	// Services CloudFormation stacks and Amazon Web Services resources that contain
 	// the same Amazon Web Services tag. DevOps Guru can be configured to analyze the
 	// Amazon Web Services resources that are defined in the stacks or that are tagged
@@ -522,12 +511,13 @@ type ListEventsFilters struct {
 // Used to filter for insights that have any status.
 type ListInsightsAnyStatusFilter struct {
 
-	// A time range used to specify when the behavior of the filtered insights started.
+	// A time range used to specify when the behavior of the filtered insights
+	// started.
 	//
 	// This member is required.
 	StartTimeRange *StartTimeRange
 
-	// Use to filter for either REACTIVE or PROACTIVE insights.
+	// Use to filter for either REACTIVE  or PROACTIVE  insights.
 	//
 	// This member is required.
 	Type InsightType
@@ -535,7 +525,7 @@ type ListInsightsAnyStatusFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Used to filter for insights that have the status CLOSED.
+// Used to filter for insights that have the status CLOSED .
 type ListInsightsClosedStatusFilter struct {
 
 	// A time range used to specify when the behavior of the filtered insights ended.
@@ -543,7 +533,7 @@ type ListInsightsClosedStatusFilter struct {
 	// This member is required.
 	EndTimeRange *EndTimeRange
 
-	// Use to filter for either REACTIVE or PROACTIVE insights.
+	// Use to filter for either REACTIVE  or PROACTIVE  insights.
 	//
 	// This member is required.
 	Type InsightType
@@ -551,10 +541,10 @@ type ListInsightsClosedStatusFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Used to filter for insights that have the status ONGOING.
+// Used to filter for insights that have the status ONGOING .
 type ListInsightsOngoingStatusFilter struct {
 
-	// Use to filter for either REACTIVE or PROACTIVE insights.
+	// Use to filter for either REACTIVE  or PROACTIVE  insights.
 	//
 	// This member is required.
 	Type InsightType
@@ -562,19 +552,19 @@ type ListInsightsOngoingStatusFilter struct {
 	noSmithyDocumentSerde
 }
 
-// A filter used by ListInsights to specify which insights to return.
+// A filter used by ListInsights  to specify which insights to return.
 type ListInsightsStatusFilter struct {
 
 	// A ListInsightsAnyStatusFilter that specifies insights of any status that are
-	// either REACTIVE or PROACTIVE.
+	// either REACTIVE  or PROACTIVE .
 	Any *ListInsightsAnyStatusFilter
 
-	// A ListInsightsClosedStatusFilter that specifies closed insights that are either
-	// REACTIVE or PROACTIVE.
+	// A ListInsightsClosedStatusFilter that specifies closed insights that are
+	// either REACTIVE  or PROACTIVE .
 	Closed *ListInsightsClosedStatusFilter
 
-	// A ListInsightsAnyStatusFilter that specifies ongoing insights that are either
-	// REACTIVE or PROACTIVE.
+	// A ListInsightsAnyStatusFilter  that specifies ongoing insights that are either
+	// REACTIVE or PROACTIVE .
 	Ongoing *ListInsightsOngoingStatusFilter
 
 	noSmithyDocumentSerde
@@ -635,8 +625,8 @@ type LogAnomalyShowcase struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the integration of DevOps Guru with CloudWatch log groups for
-// log anomaly detection.
+// Information about the integration of DevOps Guru with CloudWatch log groups
+// for log anomaly detection.
 type LogsAnomalyDetectionIntegration struct {
 
 	// Specifies if DevOps Guru is configured to perform log anomaly detection on
@@ -646,8 +636,8 @@ type LogsAnomalyDetectionIntegration struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the integration of DevOps Guru with CloudWatch log groups for
-// log anomaly detection. You can use this to update the configuration.
+// Information about the integration of DevOps Guru with CloudWatch log groups
+// for log anomaly detection. You can use this to update the configuration.
 type LogsAnomalyDetectionIntegrationConfig struct {
 
 	// Specifies if DevOps Guru is configured to perform log anomaly detection on
@@ -668,8 +658,8 @@ type MonitoredResourceIdentifier struct {
 	// The name of the resource being monitored.
 	MonitoredResourceName *string
 
-	// A collection of Amazon Web Services resources supported by DevOps Guru. The two
-	// types of Amazon Web Services resource collections supported are Amazon Web
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The
+	// two types of Amazon Web Services resource collections supported are Amazon Web
 	// Services CloudFormation stacks and Amazon Web Services resources that contain
 	// the same Amazon Web Services tag. DevOps Guru can be configured to analyze the
 	// Amazon Web Services resources that are defined in the stacks or that are tagged
@@ -693,17 +683,16 @@ type MonitoredResourceIdentifier struct {
 // Guru permission to it notifications. DevOps Guru adds the required policy on
 // your behalf to send notifications using Amazon SNS in your account. DevOps Guru
 // only supports standard SNS topics. For more information, see Permissions for
-// cross account Amazon SNS topics
-// (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html).
-// If you use an Amazon SNS topic in another account, you must attach a policy to
+// cross account Amazon SNS topics (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html)
+// . If you use an Amazon SNS topic in another account, you must attach a policy to
 // it that grants DevOps Guru permission to it notifications. DevOps Guru adds the
 // required policy on your behalf to send notifications using Amazon SNS in your
 // account. For more information, see Permissions for cross account Amazon SNS
 // topics. If you use an Amazon SNS topic that is encrypted by an Amazon Web
 // Services Key Management Service customer-managed key (CMK), then you must add
 // permissions to the CMK. For more information, see Permissions for Amazon Web
-// Services KMS–encrypted Amazon SNS topics
-// (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html).
+// Services KMS–encrypted Amazon SNS topics (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html)
+// .
 type NotificationChannel struct {
 
 	// A NotificationChannelConfig object that contains information about configured
@@ -727,24 +716,23 @@ type NotificationChannelConfig struct {
 	// permission to it notifications. DevOps Guru adds the required policy on your
 	// behalf to send notifications using Amazon SNS in your account. DevOps Guru only
 	// supports standard SNS topics. For more information, see Permissions for cross
-	// account Amazon SNS topics
-	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html).
-	// If you use an Amazon SNS topic in another account, you must attach a policy to
+	// account Amazon SNS topics (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html)
+	// . If you use an Amazon SNS topic in another account, you must attach a policy to
 	// it that grants DevOps Guru permission to it notifications. DevOps Guru adds the
 	// required policy on your behalf to send notifications using Amazon SNS in your
 	// account. For more information, see Permissions for cross account Amazon SNS
 	// topics. If you use an Amazon SNS topic that is encrypted by an Amazon Web
 	// Services Key Management Service customer-managed key (CMK), then you must add
 	// permissions to the CMK. For more information, see Permissions for Amazon Web
-	// Services KMS–encrypted Amazon SNS topics
-	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html).
+	// Services KMS–encrypted Amazon SNS topics (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html)
+	// .
 	//
 	// This member is required.
 	Sns *SnsChannelConfig
 
 	// The filter configurations for the Amazon SNS notification topic you use with
 	// DevOps Guru. If you do not provide filter configurations, the default
-	// configurations are to receive notifications for all message types of High or
+	// configurations are to receive notifications for all message types of High  or
 	// Medium severity.
 	Filters *NotificationFilterConfig
 
@@ -762,10 +750,10 @@ type NotificationFilterConfig struct {
 	// new insight is created.
 	MessageTypes []NotificationMessageType
 
-	// The severity levels that you want to receive notifications for. For example, you
-	// can choose to receive notifications only for insights with HIGH and MEDIUM
-	// severity levels. For more information, see Understanding insight severities
-	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities).
+	// The severity levels that you want to receive notifications for. For example,
+	// you can choose to receive notifications only for insights with HIGH  and MEDIUM
+	// severity levels. For more information, see Understanding insight severities (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
+	// .
 	Severities []InsightSeverity
 
 	noSmithyDocumentSerde
@@ -795,8 +783,8 @@ type OpsCenterIntegrationConfig struct {
 }
 
 // A logical grouping of Performance Insights metrics for a related subject area.
-// For example, the db.sql dimension group consists of the following dimensions:
-// db.sql.id, db.sql.db_id, db.sql.statement, and db.sql.tokenized_id. Each
+// For example, the db.sql  dimension group consists of the following dimensions:
+// db.sql.id , db.sql.db_id , db.sql.statement , and db.sql.tokenized_id. Each
 // response element returns a maximum of 500 bytes. For larger elements, such as
 // SQL statements, only the first 500 bytes are returned. Amazon RDS Performance
 // Insights enables you to monitor and explore different dimensions of database
@@ -806,77 +794,43 @@ type OpsCenterIntegrationConfig struct {
 // data for each time point in the queried time range. Each time point decomposes
 // overall load in relation to the requested dimensions, measured at that time
 // point. Examples include SQL, Wait event, User, and Host.
-// - To learn more about
-// Performance Insights and Amazon Aurora DB instances, go to the  Amazon Aurora
-// User Guide
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html).
-// -
-// To learn more about Performance Insights and Amazon RDS DB instances, go to the
-// Amazon RDS User Guide
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html).
+//   - To learn more about Performance Insights and Amazon Aurora DB instances, go to the Amazon Aurora User Guide (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html) .
+//   - To learn more about Performance Insights and Amazon RDS DB instances, go to the Amazon RDS User Guide (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html) .
 type PerformanceInsightsMetricDimensionGroup struct {
 
 	// A list of specific dimensions from a dimension group. If this parameter is not
 	// present, then it signifies that all of the dimensions in the group were
 	// requested or are present in the response. Valid values for elements in the
 	// Dimensions array are:
-	// - db.application.name - The name of the application that
-	// is connected to the database (only Aurora PostgreSQL and RDS PostgreSQL)
-	// -
-	// db.host.id - The host ID of the connected client (all engines)
-	// - db.host.name -
-	// The host name of the connected client (all engines)
-	// - db.name - The name of the
-	// database to which the client is connected (only Aurora PostgreSQL, Amazon RDS
-	// PostgreSQL, Aurora MySQL, Amazon RDS MySQL, and MariaDB)
-	// - db.session_type.name
-	// - The type of the current session (only Aurora PostgreSQL and RDS PostgreSQL)
-	// -
-	// db.sql.id - The SQL ID generated by Performance Insights (all engines)
-	// -
-	// db.sql.db_id - The SQL ID generated by the database (all engines)
-	// -
-	// db.sql.statement - The SQL text that is being executed (all engines)
-	// -
-	// db.sql.tokenized_id
-	// - db.sql_tokenized.id - The SQL digest ID generated by
-	// Performance Insights (all engines)
-	// - db.sql_tokenized.db_id - SQL digest ID
-	// generated by the database (all engines)
-	// - db.sql_tokenized.statement - The SQL
-	// digest text (all engines)
-	// - db.user.id - The ID of the user logged in to the
-	// database (all engines)
-	// - db.user.name - The name of the user logged in to the
-	// database (all engines)
-	// - db.wait_event.name - The event for which the backend is
-	// waiting (all engines)
-	// - db.wait_event.type - The type of event for which the
-	// backend is waiting (all engines)
-	// - db.wait_event_type.name - The name of the
-	// event type for which the backend is waiting (all engines)
+	//     - db.application.name - The name of the application that is connected to the database (only Aurora PostgreSQL and RDS PostgreSQL)
+	//     - db.host.id - The host ID of the connected client (all engines)
+	//     - db.host.name - The host name of the connected client (all engines)
+	//     - db.name - The name of the database to which the client is connected (only Aurora PostgreSQL, Amazon RDS PostgreSQL, Aurora MySQL, Amazon RDS MySQL, and MariaDB)
+	//     - db.session_type.name - The type of the current session (only Aurora PostgreSQL and RDS PostgreSQL)
+	//     - db.sql.id - The SQL ID generated by Performance Insights (all engines)
+	//     - db.sql.db_id - The SQL ID generated by the database (all engines)
+	//     - db.sql.statement - The SQL text that is being executed (all engines)
+	//     - db.sql.tokenized_id
+	//     - db.sql_tokenized.id - The SQL digest ID generated by Performance Insights (all engines)
+	//     - db.sql_tokenized.db_id - SQL digest ID generated by the database (all engines)
+	//     - db.sql_tokenized.statement - The SQL digest text (all engines)
+	//     - db.user.id - The ID of the user logged in to the database (all engines)
+	//     - db.user.name - The name of the user logged in to the database (all engines)
+	//     - db.wait_event.name - The event for which the backend is waiting (all engines)
+	//     - db.wait_event.type - The type of event for which the backend is waiting (all engines)
+	//     - db.wait_event_type.name - The name of the event type for which the backend is waiting (all engines)
 	Dimensions []string
 
 	// The name of the dimension group. Its valid values are:
-	// - db - The name of the
-	// database to which the client is connected (only Aurora PostgreSQL, Amazon RDS
-	// PostgreSQL, Aurora MySQL, Amazon RDS MySQL, and MariaDB)
-	// - db.application - The
-	// name of the application that is connected to the database (only Aurora
-	// PostgreSQL and RDS PostgreSQL)
-	// - db.host - The host name of the connected client
-	// (all engines)
-	// - db.session_type - The type of the current session (only Aurora
-	// PostgreSQL and RDS PostgreSQL)
-	// - db.sql - The SQL that is currently executing
-	// (all engines)
-	// - db.sql_tokenized - The SQL digest (all engines)
-	// - db.wait_event
-	// - The event for which the database backend is waiting (all engines)
-	// -
-	// db.wait_event_type - The type of event for which the database backend is waiting
-	// (all engines)
-	// - db.user - The user logged in to the database (all engines)
+	//     - db - The name of the database to which the client is connected (only Aurora PostgreSQL, Amazon RDS PostgreSQL, Aurora MySQL, Amazon RDS MySQL, and MariaDB)
+	//     - db.application - The name of the application that is connected to the database (only Aurora PostgreSQL and RDS PostgreSQL)
+	//     - db.host - The host name of the connected client (all engines)
+	//     - db.session_type - The type of the current session (only Aurora PostgreSQL and RDS PostgreSQL)
+	//     - db.sql - The SQL that is currently executing (all engines)
+	//     - db.sql_tokenized - The SQL digest (all engines)
+	//     - db.wait_event - The event for which the database backend is waiting (all engines)
+	//     - db.wait_event_type - The type of event for which the database backend is waiting (all engines)
+	//     - db.user - The user logged in to the database (all engines)
 	Group *string
 
 	// The maximum number of items to fetch for this dimension group.
@@ -886,9 +840,8 @@ type PerformanceInsightsMetricDimensionGroup struct {
 }
 
 // A single query to be processed. Use these parameters to query the Performance
-// Insights GetResourceMetrics API to retrieve the metrics for an anomaly. For more
-// information, see GetResourceMetrics
-// (https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetResourceMetrics.html)
+// Insights GetResourceMetrics API to retrieve the metrics for an anomaly. For
+// more information, see GetResourceMetrics (https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetResourceMetrics.html)
 // in the Amazon RDS Performance Insights API Reference. Amazon RDS Performance
 // Insights enables you to monitor and explore different dimensions of database
 // load based on data captured from a running DB instance. DB load is measured as
@@ -897,22 +850,14 @@ type PerformanceInsightsMetricDimensionGroup struct {
 // data for each time point in the queried time range. Each time point decomposes
 // overall load in relation to the requested dimensions, measured at that time
 // point. Examples include SQL, Wait event, User, and Host.
-// - To learn more about
-// Performance Insights and Amazon Aurora DB instances, go to the  Amazon Aurora
-// User Guide
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html).
-// -
-// To learn more about Performance Insights and Amazon RDS DB instances, go to the
-// Amazon RDS User Guide
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html).
+//   - To learn more about Performance Insights and Amazon Aurora DB instances, go to the Amazon Aurora User Guide (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html) .
+//   - To learn more about Performance Insights and Amazon RDS DB instances, go to the Amazon RDS User Guide (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html) .
 type PerformanceInsightsMetricQuery struct {
 
 	// One or more filters to apply to a Performance Insights GetResourceMetrics API
 	// query. Restrictions:
-	// - Any number of filters by the same dimension, as specified
-	// in the GroupBy parameter.
-	// - A single filter for any other dimension in this
-	// dimension group.
+	//     - Any number of filters by the same dimension, as specified in the GroupBy parameter.
+	//     - A single filter for any other dimension in this dimension group.
 	Filter map[string]string
 
 	// The specification for how to aggregate the data points from a Performance
@@ -923,19 +868,16 @@ type PerformanceInsightsMetricQuery struct {
 	GroupBy *PerformanceInsightsMetricDimensionGroup
 
 	// The name of the meteric used used when querying an Performance Insights
-	// GetResourceMetrics API for anomaly metrics. Valid values for Metric are:
-	// -
-	// db.load.avg - a scaled representation of the number of active sessions for the
-	// database engine.
-	// - db.sampledload.avg - the raw number of active sessions for
-	// the database engine.
+	// GetResourceMetrics API for anomaly metrics. Valid values for Metric  are:
+	//     - db.load.avg - a scaled representation of the number of active sessions for the database engine.
+	//     - db.sampledload.avg - the raw number of active sessions for the database engine.
 	//
-	// If the number of active sessions is less than an internal
-	// Performance Insights threshold, db.load.avg and db.sampledload.avg are the same
-	// value. If the number of active sessions is greater than the internal threshold,
-	// Performance Insights samples the active sessions, with db.load.avg showing the
-	// scaled values, db.sampledload.avg showing the raw values, and db.sampledload.avg
-	// less than db.load.avg. For most use cases, you can query db.load.avg only.
+	// If the number of active sessions is less than an internal Performance Insights
+	// threshold, db.load.avg  and db.sampledload.avg are the same value. If the
+	// number of active sessions is greater than the internal threshold, Performance
+	// Insights samples the active sessions, with db.load.avg showing the scaled
+	// values, db.sampledload.avg  showing the raw values, and db.sampledload.avg
+	// less than db.load.avg . For most use cases, you can query db.load.avg  only.
 	Metric *string
 
 	noSmithyDocumentSerde
@@ -949,34 +891,28 @@ type PerformanceInsightsMetricQuery struct {
 // for each time point in the queried time range. Each time point decomposes
 // overall load in relation to the requested dimensions, measured at that time
 // point. Examples include SQL, Wait event, User, and Host.
-// - To learn more about
-// Performance Insights and Amazon Aurora DB instances, go to the  Amazon Aurora
-// User Guide
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html).
-// -
-// To learn more about Performance Insights and Amazon RDS DB instances, go to the
-// Amazon RDS User Guide
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html).
+//   - To learn more about Performance Insights and Amazon Aurora DB instances, go to the Amazon Aurora User Guide (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html) .
+//   - To learn more about Performance Insights and Amazon RDS DB instances, go to the Amazon RDS User Guide (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html) .
 type PerformanceInsightsMetricsDetail struct {
 
 	// The name used for a specific Performance Insights metric.
 	MetricDisplayName *string
 
 	// A single query to be processed for the metric. For more information, see
-	// PerformanceInsightsMetricQuery
-	// (https://docs.aws.amazon.com/devops-guru/latest/APIReference/API_PerformanceInsightsMetricQuery.html).
+	// PerformanceInsightsMetricQuery (https://docs.aws.amazon.com/devops-guru/latest/APIReference/API_PerformanceInsightsMetricQuery.html)
+	// .
 	MetricQuery *PerformanceInsightsMetricQuery
 
-	// For more information, see PerformanceInsightsReferenceData
-	// (https://docs.aws.amazon.com/devops-guru/latest/APIReference/API_PerformanceInsightsReferenceData.html).
+	// For more information, see PerformanceInsightsReferenceData (https://docs.aws.amazon.com/devops-guru/latest/APIReference/API_PerformanceInsightsReferenceData.html)
+	// .
 	ReferenceData []PerformanceInsightsReferenceData
 
 	// The metric statistics during the anomalous period detected by DevOps Guru;
 	StatsAtAnomaly []PerformanceInsightsStat
 
 	// Typical metric statistics that are not considered anomalous. When DevOps Guru
-	// analyzes metrics, it compares them to StatsAtBaseline to help determine if they
-	// are anomalous.
+	// analyzes metrics, it compares them to StatsAtBaseline to help determine if
+	// they are anomalous.
 	StatsAtBaseline []PerformanceInsightsStat
 
 	// The unit of measure for a metric. For example, a session or a process.
@@ -1008,8 +944,8 @@ type PerformanceInsightsReferenceComparisonValues struct {
 type PerformanceInsightsReferenceData struct {
 
 	// The specific reference values used to evaluate the Performance Insights. For
-	// more information, see PerformanceInsightsReferenceComparisonValues
-	// (https://docs.aws.amazon.com/devops-guru/latest/APIReference/API_PerformanceInsightsReferenceComparisonValues.html).
+	// more information, see PerformanceInsightsReferenceComparisonValues (https://docs.aws.amazon.com/devops-guru/latest/APIReference/API_PerformanceInsightsReferenceComparisonValues.html)
+	// .
 	ComparisonValues *PerformanceInsightsReferenceComparisonValues
 
 	// The name of the reference data.
@@ -1065,7 +1001,7 @@ type PredictionTimeRange struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an anomaly. This object is returned by ListAnomalies.
+// Information about an anomaly. This object is returned by ListAnomalies .
 type ProactiveAnomaly struct {
 
 	// An AnomalyReportedTimeRange object that specifies the time range between when
@@ -1090,16 +1026,16 @@ type ProactiveAnomaly struct {
 	// The ID of a proactive anomaly.
 	Id *string
 
-	// A threshold that was exceeded by behavior in analyzed resources. Exceeding this
-	// threshold is related to the anomalous behavior that generated this anomaly.
+	// A threshold that was exceeded by behavior in analyzed resources. Exceeding
+	// this threshold is related to the anomalous behavior that generated this anomaly.
 	Limit *float64
 
 	// The time range during which anomalous behavior in a proactive anomaly or an
 	// insight is expected to occur.
 	PredictionTimeRange *PredictionTimeRange
 
-	// A collection of Amazon Web Services resources supported by DevOps Guru. The two
-	// types of Amazon Web Services resource collections supported are Amazon Web
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The
+	// two types of Amazon Web Services resource collections supported are Amazon Web
 	// Services CloudFormation stacks and Amazon Web Services resources that contain
 	// the same Amazon Web Services tag. DevOps Guru can be configured to analyze the
 	// Amazon Web Services resources that are defined in the stacks or that are tagged
@@ -1107,10 +1043,9 @@ type ProactiveAnomaly struct {
 	// CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
-	// The severity of the anomaly. The severity of anomalies that generate an insight
-	// determine that insight's severity. For more information, see Understanding
-	// insight severities
-	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
+	// The severity of the anomaly. The severity of anomalies that generate an
+	// insight determine that insight's severity. For more information, see
+	// Understanding insight severities (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
 	// in the Amazon DevOps Guru User Guide.
 	Severity AnomalySeverity
 
@@ -1155,16 +1090,16 @@ type ProactiveAnomalySummary struct {
 	// The ID of the anomaly.
 	Id *string
 
-	// A threshold that was exceeded by behavior in analyzed resources. Exceeding this
-	// threshold is related to the anomalous behavior that generated this anomaly.
+	// A threshold that was exceeded by behavior in analyzed resources. Exceeding
+	// this threshold is related to the anomalous behavior that generated this anomaly.
 	Limit *float64
 
 	// The time range during which anomalous behavior in a proactive anomaly or an
 	// insight is expected to occur.
 	PredictionTimeRange *PredictionTimeRange
 
-	// A collection of Amazon Web Services resources supported by DevOps Guru. The two
-	// types of Amazon Web Services resource collections supported are Amazon Web
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The
+	// two types of Amazon Web Services resource collections supported are Amazon Web
 	// Services CloudFormation stacks and Amazon Web Services resources that contain
 	// the same Amazon Web Services tag. DevOps Guru can be configured to analyze the
 	// Amazon Web Services resources that are defined in the stacks or that are tagged
@@ -1172,10 +1107,9 @@ type ProactiveAnomalySummary struct {
 	// CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
-	// The severity of the anomaly. The severity of anomalies that generate an insight
-	// determine that insight's severity. For more information, see Understanding
-	// insight severities
-	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
+	// The severity of the anomaly. The severity of anomalies that generate an
+	// insight determine that insight's severity. For more information, see
+	// Understanding insight severities (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
 	// in the Amazon DevOps Guru User Guide.
 	Severity AnomalySeverity
 
@@ -1195,7 +1129,7 @@ type ProactiveAnomalySummary struct {
 	noSmithyDocumentSerde
 }
 
-// Details about a proactive insight. This object is returned by ListInsights.
+// Details about a proactive insight. This object is returned by ListInsights .
 type ProactiveInsight struct {
 
 	// Describes the proactive insight.
@@ -1215,8 +1149,8 @@ type ProactiveInsight struct {
 	// insight is expected to occur.
 	PredictionTimeRange *PredictionTimeRange
 
-	// A collection of Amazon Web Services resources supported by DevOps Guru. The two
-	// types of Amazon Web Services resource collections supported are Amazon Web
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The
+	// two types of Amazon Web Services resource collections supported are Amazon Web
 	// Services CloudFormation stacks and Amazon Web Services resources that contain
 	// the same Amazon Web Services tag. DevOps Guru can be configured to analyze the
 	// Amazon Web Services resources that are defined in the stacks or that are tagged
@@ -1225,8 +1159,7 @@ type ProactiveInsight struct {
 	ResourceCollection *ResourceCollection
 
 	// The severity of the insight. For more information, see Understanding insight
-	// severities
-	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
+	// severities (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
 	// in the Amazon DevOps Guru User Guide.
 	Severity InsightSeverity
 
@@ -1262,8 +1195,8 @@ type ProactiveInsightSummary struct {
 	// insight is expected to occur.
 	PredictionTimeRange *PredictionTimeRange
 
-	// A collection of Amazon Web Services resources supported by DevOps Guru. The two
-	// types of Amazon Web Services resource collections supported are Amazon Web
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The
+	// two types of Amazon Web Services resource collections supported are Amazon Web
 	// Services CloudFormation stacks and Amazon Web Services resources that contain
 	// the same Amazon Web Services tag. DevOps Guru can be configured to analyze the
 	// Amazon Web Services resources that are defined in the stacks or that are tagged
@@ -1275,8 +1208,7 @@ type ProactiveInsightSummary struct {
 	ServiceCollection *ServiceCollection
 
 	// The severity of the insight. For more information, see Understanding insight
-	// severities
-	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
+	// severities (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
 	// in the Amazon DevOps Guru User Guide.
 	Severity InsightSeverity
 
@@ -1286,7 +1218,7 @@ type ProactiveInsightSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Details about a proactive insight. This object is returned by DescribeInsight.
+// Details about a proactive insight. This object is returned by DescribeInsight .
 type ProactiveOrganizationInsightSummary struct {
 
 	// The ID of the Amazon Web Services account.
@@ -1309,8 +1241,8 @@ type ProactiveOrganizationInsightSummary struct {
 	// insight is expected to occur.
 	PredictionTimeRange *PredictionTimeRange
 
-	// A collection of Amazon Web Services resources supported by DevOps Guru. The two
-	// types of Amazon Web Services resource collections supported are Amazon Web
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The
+	// two types of Amazon Web Services resource collections supported are Amazon Web
 	// Services CloudFormation stacks and Amazon Web Services resources that contain
 	// the same Amazon Web Services tag. DevOps Guru can be configured to analyze the
 	// Amazon Web Services resources that are defined in the stacks or that are tagged
@@ -1322,8 +1254,7 @@ type ProactiveOrganizationInsightSummary struct {
 	ServiceCollection *ServiceCollection
 
 	// An array of severity values used to search for insights. For more information,
-	// see Understanding insight severities
-	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
+	// see Understanding insight severities (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
 	// in the Amazon DevOps Guru User Guide.
 	Severity InsightSeverity
 
@@ -1333,7 +1264,7 @@ type ProactiveOrganizationInsightSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Details about a reactive anomaly. This object is returned by ListAnomalies.
+// Details about a reactive anomaly. This object is returned by ListAnomalies .
 type ReactiveAnomaly struct {
 
 	// An AnomalyReportedTimeRange object that specifies the time range between when
@@ -1353,8 +1284,8 @@ type ReactiveAnomaly struct {
 	// related anomalies.
 	AssociatedInsightId *string
 
-	// The ID of the causal anomaly that is associated with this reactive anomaly. The
-	// ID of a `CAUSAL` anomaly is always `NULL`.
+	// The ID of the causal anomaly that is associated with this reactive anomaly.
+	// The ID of a `CAUSAL` anomaly is always `NULL`.
 	CausalAnomalyId *string
 
 	// A description of the reactive anomaly.
@@ -1366,8 +1297,8 @@ type ReactiveAnomaly struct {
 	// The name of the reactive anomaly.
 	Name *string
 
-	// A collection of Amazon Web Services resources supported by DevOps Guru. The two
-	// types of Amazon Web Services resource collections supported are Amazon Web
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The
+	// two types of Amazon Web Services resource collections supported are Amazon Web
 	// Services CloudFormation stacks and Amazon Web Services resources that contain
 	// the same Amazon Web Services tag. DevOps Guru can be configured to analyze the
 	// Amazon Web Services resources that are defined in the stacks or that are tagged
@@ -1375,10 +1306,9 @@ type ReactiveAnomaly struct {
 	// CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
-	// The severity of the anomaly. The severity of anomalies that generate an insight
-	// determine that insight's severity. For more information, see Understanding
-	// insight severities
-	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
+	// The severity of the anomaly. The severity of anomalies that generate an
+	// insight determine that insight's severity. For more information, see
+	// Understanding insight severities (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
 	// in the Amazon DevOps Guru User Guide.
 	Severity AnomalySeverity
 
@@ -1390,10 +1320,8 @@ type ReactiveAnomaly struct {
 	Status AnomalyStatus
 
 	// The type of the reactive anomaly. It can be one of the following types.
-	// - CAUSAL
-	// - the anomaly can cause a new insight.
-	// - CONTEXTUAL - the anomaly contains
-	// additional information about an insight or its causal anomaly.
+	//     - CAUSAL - the anomaly can cause a new insight.
+	//     - CONTEXTUAL - the anomaly contains additional information about an insight or its causal anomaly.
 	Type AnomalyType
 
 	noSmithyDocumentSerde
@@ -1419,8 +1347,8 @@ type ReactiveAnomalySummary struct {
 	// related anomalies.
 	AssociatedInsightId *string
 
-	// The ID of the causal anomaly that is associated with this reactive anomaly. The
-	// ID of a `CAUSAL` anomaly is always `NULL`.
+	// The ID of the causal anomaly that is associated with this reactive anomaly.
+	// The ID of a `CAUSAL` anomaly is always `NULL`.
 	CausalAnomalyId *string
 
 	// A description of the reactive anomaly.
@@ -1432,8 +1360,8 @@ type ReactiveAnomalySummary struct {
 	// The name of the reactive anomaly.
 	Name *string
 
-	// A collection of Amazon Web Services resources supported by DevOps Guru. The two
-	// types of Amazon Web Services resource collections supported are Amazon Web
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The
+	// two types of Amazon Web Services resource collections supported are Amazon Web
 	// Services CloudFormation stacks and Amazon Web Services resources that contain
 	// the same Amazon Web Services tag. DevOps Guru can be configured to analyze the
 	// Amazon Web Services resources that are defined in the stacks or that are tagged
@@ -1441,10 +1369,9 @@ type ReactiveAnomalySummary struct {
 	// CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
-	// The severity of the anomaly. The severity of anomalies that generate an insight
-	// determine that insight's severity. For more information, see Understanding
-	// insight severities
-	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
+	// The severity of the anomaly. The severity of anomalies that generate an
+	// insight determine that insight's severity. For more information, see
+	// Understanding insight severities (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
 	// in the Amazon DevOps Guru User Guide.
 	Severity AnomalySeverity
 
@@ -1456,16 +1383,14 @@ type ReactiveAnomalySummary struct {
 	Status AnomalyStatus
 
 	// The type of the reactive anomaly. It can be one of the following types.
-	// - CAUSAL
-	// - the anomaly can cause a new insight.
-	// - CONTEXTUAL - the anomaly contains
-	// additional information about an insight or its causal anomaly.
+	//     - CAUSAL - the anomaly can cause a new insight.
+	//     - CONTEXTUAL - the anomaly contains additional information about an insight or its causal anomaly.
 	Type AnomalyType
 
 	noSmithyDocumentSerde
 }
 
-// Information about a reactive insight. This object is returned by ListInsights.
+// Information about a reactive insight. This object is returned by ListInsights .
 type ReactiveInsight struct {
 
 	// Describes the reactive insight.
@@ -1481,8 +1406,8 @@ type ReactiveInsight struct {
 	// The name of a reactive insight.
 	Name *string
 
-	// A collection of Amazon Web Services resources supported by DevOps Guru. The two
-	// types of Amazon Web Services resource collections supported are Amazon Web
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The
+	// two types of Amazon Web Services resource collections supported are Amazon Web
 	// Services CloudFormation stacks and Amazon Web Services resources that contain
 	// the same Amazon Web Services tag. DevOps Guru can be configured to analyze the
 	// Amazon Web Services resources that are defined in the stacks or that are tagged
@@ -1491,8 +1416,7 @@ type ReactiveInsight struct {
 	ResourceCollection *ResourceCollection
 
 	// The severity of the insight. For more information, see Understanding insight
-	// severities
-	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
+	// severities (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
 	// in the Amazon DevOps Guru User Guide.
 	Severity InsightSeverity
 
@@ -1525,8 +1449,8 @@ type ReactiveInsightSummary struct {
 	// The name of a reactive insight.
 	Name *string
 
-	// A collection of Amazon Web Services resources supported by DevOps Guru. The two
-	// types of Amazon Web Services resource collections supported are Amazon Web
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The
+	// two types of Amazon Web Services resource collections supported are Amazon Web
 	// Services CloudFormation stacks and Amazon Web Services resources that contain
 	// the same Amazon Web Services tag. DevOps Guru can be configured to analyze the
 	// Amazon Web Services resources that are defined in the stacks or that are tagged
@@ -1538,8 +1462,7 @@ type ReactiveInsightSummary struct {
 	ServiceCollection *ServiceCollection
 
 	// The severity of the insight. For more information, see Understanding insight
-	// severities
-	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
+	// severities (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
 	// in the Amazon DevOps Guru User Guide.
 	Severity InsightSeverity
 
@@ -1550,7 +1473,7 @@ type ReactiveInsightSummary struct {
 }
 
 // Information about a reactive insight. This object is returned by
-// DescribeInsight.
+// DescribeInsight .
 type ReactiveOrganizationInsightSummary struct {
 
 	// The ID of the Amazon Web Services account.
@@ -1569,8 +1492,8 @@ type ReactiveOrganizationInsightSummary struct {
 	// The ID of the organizational unit.
 	OrganizationalUnitId *string
 
-	// A collection of Amazon Web Services resources supported by DevOps Guru. The two
-	// types of Amazon Web Services resource collections supported are Amazon Web
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The
+	// two types of Amazon Web Services resource collections supported are Amazon Web
 	// Services CloudFormation stacks and Amazon Web Services resources that contain
 	// the same Amazon Web Services tag. DevOps Guru can be configured to analyze the
 	// Amazon Web Services resources that are defined in the stacks or that are tagged
@@ -1582,8 +1505,7 @@ type ReactiveOrganizationInsightSummary struct {
 	ServiceCollection *ServiceCollection
 
 	// An array of severity values used to search for insights. For more information,
-	// see Understanding insight severities
-	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
+	// see Understanding insight severities (https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities)
 	// in the Amazon DevOps Guru User Guide.
 	Severity InsightSeverity
 
@@ -1648,22 +1570,21 @@ type RecommendationRelatedAnomalyResource struct {
 
 	// The type of the resource. Resource types take the same form that is used by
 	// Amazon Web Services CloudFormation resource type identifiers,
-	// service-provider::service-name::data-type-name. For example,
-	// AWS::RDS::DBCluster. For more information, see Amazon Web Services resource and
-	// property types reference
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+	// service-provider::service-name::data-type-name . For example,
+	// AWS::RDS::DBCluster . For more information, see Amazon Web Services resource
+	// and property types reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the Amazon Web Services CloudFormation User Guide.
 	Type *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains an array of RecommendationRelatedCloudWatchMetricsSourceDetail objects
-// that contain the name and namespace of an Amazon CloudWatch metric.
+// Contains an array of RecommendationRelatedCloudWatchMetricsSourceDetail
+// objects that contain the name and namespace of an Amazon CloudWatch metric.
 type RecommendationRelatedAnomalySourceDetail struct {
 
-	// An array of CloudWatchMetricsDetail objects that contains information about the
-	// analyzed metrics that displayed anomalous behavior.
+	// An array of CloudWatchMetricsDetail objects that contains information about
+	// the analyzed metrics that displayed anomalous behavior.
 	CloudWatchMetrics []RecommendationRelatedCloudWatchMetricsSourceDetail
 
 	noSmithyDocumentSerde
@@ -1686,7 +1607,7 @@ type RecommendationRelatedCloudWatchMetricsSourceDetail struct {
 // Information about an event that is related to a recommendation.
 type RecommendationRelatedEvent struct {
 
-	// The name of the event. This corresponds to the Name field in an Event object.
+	// The name of the event. This corresponds to the Name  field in an Event  object.
 	Name *string
 
 	// A ResourceCollection object that contains arrays of the names of Amazon Web
@@ -1697,23 +1618,23 @@ type RecommendationRelatedEvent struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an Amazon Web Services resource that emitted and event that is
-// related to a recommendation in an insight.
+// Information about an Amazon Web Services resource that emitted and event that
+// is related to a recommendation in an insight.
 type RecommendationRelatedEventResource struct {
 
 	// The name of the resource that emitted the event. This corresponds to the Name
-	// field in an EventResource object.
+	// field in an EventResource  object.
 	Name *string
 
 	// The type of the resource that emitted the event. This corresponds to the Type
-	// field in an EventResource object.
+	// field in an EventResource  object.
 	Type *string
 
 	noSmithyDocumentSerde
 }
 
-// A collection of Amazon Web Services resources supported by DevOps Guru. The two
-// types of Amazon Web Services resource collections supported are Amazon Web
+// A collection of Amazon Web Services resources supported by DevOps Guru. The
+// two types of Amazon Web Services resource collections supported are Amazon Web
 // Services CloudFormation stacks and Amazon Web Services resources that contain
 // the same Amazon Web Services tag. DevOps Guru can be configured to analyze the
 // Amazon Web Services resources that are defined in the stacks or that are tagged
@@ -1732,27 +1653,21 @@ type ResourceCollection struct {
 	// the same tag to resources from different services to indicate that the resources
 	// are related. For example, you can assign the same tag to an Amazon DynamoDB
 	// table resource that you assign to an Lambda function. For more information about
-	// using tags, see the Tagging best practices
-	// (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html)
+	// using tags, see the Tagging best practices (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html)
 	// whitepaper. Each Amazon Web Services tag has two parts.
-	// - A tag key (for
-	// example, CostCenter, Environment, Project, or Secret). Tag keys are
-	// case-sensitive.
-	// - An optional field known as a tag value (for example,
-	// 111122223333, Production, or a team name). Omitting the tag value is the same as
-	// using an empty string. Like tag keys, tag values are case-sensitive.
+	//     - A tag key (for example, CostCenter , Environment , Project , or Secret ). Tag keys are case-sensitive.
+	//     - An optional field known as a tag value (for example, 111122223333 , Production , or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case-sensitive.
 	//
-	// Together
-	// these are known as key-value pairs. The string used for a key in a tag that you
-	// use to define your resource coverage must begin with the prefix Devops-guru-.
-	// The tag key might be DevOps-Guru-deployment-application or
+	// Together these are known as key-value pairs. The string used for a key in a tag
+	// that you use to define your resource coverage must begin with the prefix
+	// Devops-guru- . The tag key might be DevOps-Guru-deployment-application  or
 	// devops-guru-rds-application. When you create a key, the case of characters in
 	// the key can be whatever you choose. After you create a key, it is
 	// case-sensitive. For example, DevOps Guru works with a key named devops-guru-rds
 	// and a key named DevOps-Guru-RDS, and these act as two different keys. Possible
 	// key/value pairs in your application might be
 	// Devops-Guru-production-application/RDS or
-	// Devops-Guru-production-application/containers.
+	// Devops-Guru-production-application/containers .
 	Tags []TagCollection
 
 	noSmithyDocumentSerde
@@ -1764,9 +1679,8 @@ type ResourceCollectionFilter struct {
 
 	// Information about Amazon Web Services CloudFormation stacks. You can use up to
 	// 500 stacks to specify which Amazon Web Services resources in your account to
-	// analyze. For more information, see Stacks
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in
-	// the Amazon Web Services CloudFormation User Guide.
+	// analyze. For more information, see Stacks (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html)
+	// in the Amazon Web Services CloudFormation User Guide.
 	CloudFormation *CloudFormationCollectionFilter
 
 	// The Amazon Web Services tags used to filter the resources in the resource
@@ -1775,41 +1689,36 @@ type ResourceCollectionFilter struct {
 	// the same tag to resources from different services to indicate that the resources
 	// are related. For example, you can assign the same tag to an Amazon DynamoDB
 	// table resource that you assign to an Lambda function. For more information about
-	// using tags, see the Tagging best practices
-	// (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html)
+	// using tags, see the Tagging best practices (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html)
 	// whitepaper. Each Amazon Web Services tag has two parts.
-	// - A tag key (for
-	// example, CostCenter, Environment, Project, or Secret). Tag keys are
-	// case-sensitive.
-	// - An optional field known as a tag value (for example,
-	// 111122223333, Production, or a team name). Omitting the tag value is the same as
-	// using an empty string. Like tag keys, tag values are case-sensitive.
+	//     - A tag key (for example, CostCenter , Environment , Project , or Secret ). Tag keys are case-sensitive.
+	//     - An optional field known as a tag value (for example, 111122223333 , Production , or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case-sensitive.
 	//
-	// Together
-	// these are known as key-value pairs. The string used for a key in a tag that you
-	// use to define your resource coverage must begin with the prefix Devops-guru-.
-	// The tag key might be DevOps-Guru-deployment-application or
+	// Together these are known as key-value pairs. The string used for a key in a tag
+	// that you use to define your resource coverage must begin with the prefix
+	// Devops-guru- . The tag key might be DevOps-Guru-deployment-application  or
 	// devops-guru-rds-application. When you create a key, the case of characters in
 	// the key can be whatever you choose. After you create a key, it is
 	// case-sensitive. For example, DevOps Guru works with a key named devops-guru-rds
 	// and a key named DevOps-Guru-RDS, and these act as two different keys. Possible
 	// key/value pairs in your application might be
 	// Devops-Guru-production-application/RDS or
-	// Devops-Guru-production-application/containers.
+	// Devops-Guru-production-application/containers .
 	Tags []TagCollectionFilter
 
 	noSmithyDocumentSerde
 }
 
 // Specifies values used to filter responses when searching for insights. You can
-// use a ResourceCollection, ServiceCollection, array of severities, and an array
-// of status values. Each filter type contains one or more values to search for. If
-// you specify multiple filter types, the filter types are joined with an AND, and
-// the request returns only results that match all of the specified filters.
+// use a ResourceCollection , ServiceCollection, array of severities, and an
+// array of status values. Each filter type contains one or more values to search
+// for. If you specify multiple filter types, the filter types are joined with an
+// AND, and the request returns only results that match all of the specified
+// filters.
 type SearchInsightsFilters struct {
 
-	// A collection of Amazon Web Services resources supported by DevOps Guru. The two
-	// types of Amazon Web Services resource collections supported are Amazon Web
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The
+	// two types of Amazon Web Services resource collections supported are Amazon Web
 	// Services CloudFormation stacks and Amazon Web Services resources that contain
 	// the same Amazon Web Services tag. DevOps Guru can be configured to analyze the
 	// Amazon Web Services resources that are defined in the stacks or that are tagged
@@ -1833,8 +1742,8 @@ type SearchInsightsFilters struct {
 // called.
 type SearchOrganizationInsightsFilters struct {
 
-	// A collection of Amazon Web Services resources supported by DevOps Guru. The two
-	// types of Amazon Web Services resource collections supported are Amazon Web
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The
+	// two types of Amazon Web Services resource collections supported are Amazon Web
 	// Services CloudFormation stacks and Amazon Web Services resources that contain
 	// the same Amazon Web Services tag. DevOps Guru can be configured to analyze the
 	// Amazon Web Services resources that are defined in the stacks or that are tagged
@@ -1872,7 +1781,7 @@ type ServiceHealth struct {
 	AnalyzedResourceCount *int64
 
 	// Represents the health of an Amazon Web Services service. This is a
-	// ServiceInsightHealth that contains the number of open proactive and reactive
+	// ServiceInsightHealththat contains the number of open proactive and reactive
 	// insights for this service.
 	Insight *ServiceInsightHealth
 
@@ -1910,11 +1819,10 @@ type ServiceIntegrationConfig struct {
 	noSmithyDocumentSerde
 }
 
-// An object that contains information about the estimated monthly cost to analyze
-// an Amazon Web Services resource. For more information, see Estimate your Amazon
-// DevOps Guru costs
-// (https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html)
-// and Amazon DevOps Guru pricing (http://aws.amazon.com/devops-guru/pricing/).
+// An object that contains information about the estimated monthly cost to
+// analyze an Amazon Web Services resource. For more information, see Estimate
+// your Amazon DevOps Guru costs (https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html)
+// and Amazon DevOps Guru pricing (http://aws.amazon.com/devops-guru/pricing/) .
 type ServiceResourceCost struct {
 
 	// The total estimated monthly cost to analyze the active resources for this
@@ -1926,8 +1834,8 @@ type ServiceResourceCost struct {
 	Count int32
 
 	// The state of the resource. The resource is ACTIVE if it produces metrics,
-	// events, or logs within an hour, otherwise it is INACTIVE. You pay for the number
-	// of active Amazon Web Services resource hours analyzed for each resource.
+	// events, or logs within an hour, otherwise it is INACTIVE. You pay for the
+	// number of active Amazon Web Services resource hours analyzed for each resource.
 	// Inactive resources are not charged.
 	State CostEstimationServiceResourceState
 
@@ -1935,30 +1843,28 @@ type ServiceResourceCost struct {
 	Type *string
 
 	// The price per hour to analyze the resources in the service. For more
-	// information, see Estimate your Amazon DevOps Guru costs
-	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html)
-	// and Amazon DevOps Guru pricing (http://aws.amazon.com/devops-guru/pricing/).
+	// information, see Estimate your Amazon DevOps Guru costs (https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html)
+	// and Amazon DevOps Guru pricing (http://aws.amazon.com/devops-guru/pricing/) .
 	UnitCost float64
 
 	noSmithyDocumentSerde
 }
 
-// Contains the Amazon Resource Name (ARN) of an Amazon Simple Notification Service
-// topic. If you use an Amazon SNS topic in another account, you must attach a
-// policy to it that grants DevOps Guru permission to it notifications. DevOps Guru
-// adds the required policy on your behalf to send notifications using Amazon SNS
-// in your account. DevOps Guru only supports standard SNS topics. For more
-// information, see Permissions for cross account Amazon SNS topics
-// (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html).
-// If you use an Amazon SNS topic in another account, you must attach a policy to
+// Contains the Amazon Resource Name (ARN) of an Amazon Simple Notification
+// Service topic. If you use an Amazon SNS topic in another account, you must
+// attach a policy to it that grants DevOps Guru permission to it notifications.
+// DevOps Guru adds the required policy on your behalf to send notifications using
+// Amazon SNS in your account. DevOps Guru only supports standard SNS topics. For
+// more information, see Permissions for cross account Amazon SNS topics (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html)
+// . If you use an Amazon SNS topic in another account, you must attach a policy to
 // it that grants DevOps Guru permission to it notifications. DevOps Guru adds the
 // required policy on your behalf to send notifications using Amazon SNS in your
 // account. For more information, see Permissions for cross account Amazon SNS
 // topics. If you use an Amazon SNS topic that is encrypted by an Amazon Web
 // Services Key Management Service customer-managed key (CMK), then you must add
 // permissions to the CMK. For more information, see Permissions for Amazon Web
-// Services KMS–encrypted Amazon SNS topics
-// (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html).
+// Services KMS–encrypted Amazon SNS topics (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html)
+// .
 type SnsChannelConfig struct {
 
 	// The Amazon Resource Name (ARN) of an Amazon Simple Notification Service topic.
@@ -1967,7 +1873,8 @@ type SnsChannelConfig struct {
 	noSmithyDocumentSerde
 }
 
-// A time range used to specify when the behavior of an insight or anomaly started.
+// A time range used to specify when the behavior of an insight or anomaly
+// started.
 type StartTimeRange struct {
 
 	// The start time of the time range.
@@ -1984,49 +1891,44 @@ type StartTimeRange struct {
 // tagging, so you can assign the same tag to resources from different services to
 // indicate that the resources are related. For example, you can assign the same
 // tag to an Amazon DynamoDB table resource that you assign to an Lambda function.
-// For more information about using tags, see the Tagging best practices
-// (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html)
+// For more information about using tags, see the Tagging best practices (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html)
 // whitepaper. Each Amazon Web Services tag has two parts.
-// - A tag key (for
-// example, CostCenter, Environment, Project, or Secret). Tag keys are
-// case-sensitive.
-// - An optional field known as a tag value (for example,
-// 111122223333, Production, or a team name). Omitting the tag value is the same as
-// using an empty string. Like tag keys, tag values are case-sensitive.
+//   - A tag key (for example, CostCenter , Environment , Project , or Secret ). Tag keys are case-sensitive.
+//   - An optional field known as a tag value (for example, 111122223333 , Production , or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case-sensitive.
 //
-// Together
-// these are known as key-value pairs. The string used for a key in a tag that you
-// use to define your resource coverage must begin with the prefix Devops-guru-.
-// The tag key might be DevOps-Guru-deployment-application or
+// Together these are known as key-value pairs. The string used for a key in a tag
+// that you use to define your resource coverage must begin with the prefix
+// Devops-guru- . The tag key might be DevOps-Guru-deployment-application  or
 // devops-guru-rds-application. When you create a key, the case of characters in
 // the key can be whatever you choose. After you create a key, it is
 // case-sensitive. For example, DevOps Guru works with a key named devops-guru-rds
 // and a key named DevOps-Guru-RDS, and these act as two different keys. Possible
 // key/value pairs in your application might be
 // Devops-Guru-production-application/RDS or
-// Devops-Guru-production-application/containers.
+// Devops-Guru-production-application/containers .
 type TagCollection struct {
 
-	// An Amazon Web Services tag key that is used to identify the Amazon Web Services
-	// resources that DevOps Guru analyzes. All Amazon Web Services resources in your
-	// account and Region tagged with this key make up your DevOps Guru application and
-	// analysis boundary. The string used for a key in a tag that you use to define
-	// your resource coverage must begin with the prefix Devops-guru-. The tag key
-	// might be DevOps-Guru-deployment-application or devops-guru-rds-application. When
-	// you create a key, the case of characters in the key can be whatever you choose.
-	// After you create a key, it is case-sensitive. For example, DevOps Guru works
-	// with a key named devops-guru-rds and a key named DevOps-Guru-RDS, and these act
-	// as two different keys. Possible key/value pairs in your application might be
+	// An Amazon Web Services tag key that is used to identify the Amazon Web
+	// Services resources that DevOps Guru analyzes. All Amazon Web Services resources
+	// in your account and Region tagged with this key make up your DevOps Guru
+	// application and analysis boundary. The string used for a key in a tag that you
+	// use to define your resource coverage must begin with the prefix Devops-guru-.
+	// The tag key might be DevOps-Guru-deployment-application  or
+	// devops-guru-rds-application. When you create a key, the case of characters in
+	// the key can be whatever you choose. After you create a key, it is
+	// case-sensitive. For example, DevOps Guru works with a key named devops-guru-rds
+	// and a key named DevOps-Guru-RDS, and these act as two different keys. Possible
+	// key/value pairs in your application might be
 	// Devops-Guru-production-application/RDS or
-	// Devops-Guru-production-application/containers.
+	// Devops-Guru-production-application/containers .
 	//
 	// This member is required.
 	AppBoundaryKey *string
 
 	// The values in an Amazon Web Services tag collection. The tag's value is an
 	// optional field used to associate a string with the tag key (for example,
-	// 111122223333, Production, or a team name). The key and value are the tag's key
-	// pair. Omitting the tag value is the same as using an empty string. Like tag
+	// 111122223333 , Production, or a team name). The key and value are the tag's
+	// key pair. Omitting the tag value is the same as using an empty string. Like tag
 	// keys, tag values are case-sensitive. You can specify a maximum of 256 characters
 	// for a tag value.
 	//
@@ -2041,26 +1943,27 @@ type TagCollection struct {
 // tag collection.
 type TagCollectionFilter struct {
 
-	// An Amazon Web Services tag key that is used to identify the Amazon Web Services
-	// resources that DevOps Guru analyzes. All Amazon Web Services resources in your
-	// account and Region tagged with this key make up your DevOps Guru application and
-	// analysis boundary. The string used for a key in a tag that you use to define
-	// your resource coverage must begin with the prefix Devops-guru-. The tag key
-	// might be DevOps-Guru-deployment-application or devops-guru-rds-application. When
-	// you create a key, the case of characters in the key can be whatever you choose.
-	// After you create a key, it is case-sensitive. For example, DevOps Guru works
-	// with a key named devops-guru-rds and a key named DevOps-Guru-RDS, and these act
-	// as two different keys. Possible key/value pairs in your application might be
+	// An Amazon Web Services tag key that is used to identify the Amazon Web
+	// Services resources that DevOps Guru analyzes. All Amazon Web Services resources
+	// in your account and Region tagged with this key make up your DevOps Guru
+	// application and analysis boundary. The string used for a key in a tag that you
+	// use to define your resource coverage must begin with the prefix Devops-guru-.
+	// The tag key might be DevOps-Guru-deployment-application  or
+	// devops-guru-rds-application. When you create a key, the case of characters in
+	// the key can be whatever you choose. After you create a key, it is
+	// case-sensitive. For example, DevOps Guru works with a key named devops-guru-rds
+	// and a key named DevOps-Guru-RDS, and these act as two different keys. Possible
+	// key/value pairs in your application might be
 	// Devops-Guru-production-application/RDS or
-	// Devops-Guru-production-application/containers.
+	// Devops-Guru-production-application/containers .
 	//
 	// This member is required.
 	AppBoundaryKey *string
 
 	// The values in an Amazon Web Services tag collection. The tag's value is an
 	// optional field used to associate a string with the tag key (for example,
-	// 111122223333, Production, or a team name). The key and value are the tag's key
-	// pair. Omitting the tag value is the same as using an empty string. Like tag
+	// 111122223333 , Production, or a team name). The key and value are the tag's
+	// key pair. Omitting the tag value is the same as using an empty string. Like tag
 	// keys, tag values are case-sensitive. You can specify a maximum of 256 characters
 	// for a tag value.
 	//
@@ -2075,31 +1978,31 @@ type TagCollectionFilter struct {
 // to create a monthly cost estimate for DevOps Guru to analyze Amazon Web Services
 // resources. The maximum number of tags you can specify for a cost estimate is
 // one. The estimate created is for the cost to analyze the Amazon Web Services
-// resources defined by the tag. For more information, see Stacks
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in
-// the Amazon Web Services CloudFormation User Guide.
+// resources defined by the tag. For more information, see Stacks (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html)
+// in the Amazon Web Services CloudFormation User Guide.
 type TagCostEstimationResourceCollectionFilter struct {
 
-	// An Amazon Web Services tag key that is used to identify the Amazon Web Services
-	// resources that DevOps Guru analyzes. All Amazon Web Services resources in your
-	// account and Region tagged with this key make up your DevOps Guru application and
-	// analysis boundary. The string used for a key in a tag that you use to define
-	// your resource coverage must begin with the prefix Devops-guru-. The tag key
-	// might be DevOps-Guru-deployment-application or devops-guru-rds-application. When
-	// you create a key, the case of characters in the key can be whatever you choose.
-	// After you create a key, it is case-sensitive. For example, DevOps Guru works
-	// with a key named devops-guru-rds and a key named DevOps-Guru-RDS, and these act
-	// as two different keys. Possible key/value pairs in your application might be
+	// An Amazon Web Services tag key that is used to identify the Amazon Web
+	// Services resources that DevOps Guru analyzes. All Amazon Web Services resources
+	// in your account and Region tagged with this key make up your DevOps Guru
+	// application and analysis boundary. The string used for a key in a tag that you
+	// use to define your resource coverage must begin with the prefix Devops-guru-.
+	// The tag key might be DevOps-Guru-deployment-application  or
+	// devops-guru-rds-application. When you create a key, the case of characters in
+	// the key can be whatever you choose. After you create a key, it is
+	// case-sensitive. For example, DevOps Guru works with a key named devops-guru-rds
+	// and a key named DevOps-Guru-RDS, and these act as two different keys. Possible
+	// key/value pairs in your application might be
 	// Devops-Guru-production-application/RDS or
-	// Devops-Guru-production-application/containers.
+	// Devops-Guru-production-application/containers .
 	//
 	// This member is required.
 	AppBoundaryKey *string
 
 	// The values in an Amazon Web Services tag collection. The tag's value is an
 	// optional field used to associate a string with the tag key (for example,
-	// 111122223333, Production, or a team name). The key and value are the tag's key
-	// pair. Omitting the tag value is the same as using an empty string. Like tag
+	// 111122223333 , Production, or a team name). The key and value are the tag's
+	// key pair. Omitting the tag value is the same as using an empty string. Like tag
 	// keys, tag values are case-sensitive. You can specify a maximum of 256 characters
 	// for a tag value.
 	//
@@ -2117,18 +2020,19 @@ type TagHealth struct {
 	// specified by an Amazon Web Services tag.
 	AnalyzedResourceCount *int64
 
-	// An Amazon Web Services tag key that is used to identify the Amazon Web Services
-	// resources that DevOps Guru analyzes. All Amazon Web Services resources in your
-	// account and Region tagged with this key make up your DevOps Guru application and
-	// analysis boundary. The string used for a key in a tag that you use to define
-	// your resource coverage must begin with the prefix Devops-guru-. The tag key
-	// might be DevOps-Guru-deployment-application or devops-guru-rds-application. When
-	// you create a key, the case of characters in the key can be whatever you choose.
-	// After you create a key, it is case-sensitive. For example, DevOps Guru works
-	// with a key named devops-guru-rds and a key named DevOps-Guru-RDS, and these act
-	// as two different keys. Possible key/value pairs in your application might be
+	// An Amazon Web Services tag key that is used to identify the Amazon Web
+	// Services resources that DevOps Guru analyzes. All Amazon Web Services resources
+	// in your account and Region tagged with this key make up your DevOps Guru
+	// application and analysis boundary. The string used for a key in a tag that you
+	// use to define your resource coverage must begin with the prefix Devops-guru-.
+	// The tag key might be DevOps-Guru-deployment-application  or
+	// devops-guru-rds-application. When you create a key, the case of characters in
+	// the key can be whatever you choose. After you create a key, it is
+	// case-sensitive. For example, DevOps Guru works with a key named devops-guru-rds
+	// and a key named DevOps-Guru-RDS, and these act as two different keys. Possible
+	// key/value pairs in your application might be
 	// Devops-Guru-production-application/RDS or
-	// Devops-Guru-production-application/containers.
+	// Devops-Guru-production-application/containers .
 	AppBoundaryKey *string
 
 	// Information about the health of the Amazon Web Services resources in your
@@ -2138,10 +2042,11 @@ type TagHealth struct {
 	Insight *InsightHealth
 
 	// The value in an Amazon Web Services tag. The tag's value is an optional field
-	// used to associate a string with the tag key (for example, 111122223333,
-	// Production, or a team name). The key and value are the tag's key pair. Omitting
-	// the tag value is the same as using an empty string. Like tag keys, tag values
-	// are case-sensitive. You can specify a maximum of 256 characters for a tag value.
+	// used to associate a string with the tag key (for example, 111122223333 ,
+	// Production, or a team name). The key and value are the tag's key pair.
+	// Omitting the tag value is the same as using an empty string. Like tag keys, tag
+	// values are case-sensitive. You can specify a maximum of 256 characters for a tag
+	// value.
 	TagValue *string
 
 	noSmithyDocumentSerde
@@ -2153,14 +2058,14 @@ type TimestampMetricValuePair struct {
 	// Value of the anomalous metric data point at respective Timestamp.
 	MetricValue *float64
 
-	// A Timestamp that specifies the time the event occurred.
+	// A Timestamp  that specifies the time the event occurred.
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Contains the names of Amazon Web Services CloudFormation stacks used to update a
-// collection of stacks. You can specify up to 500 Amazon Web Services
+// Contains the names of Amazon Web Services CloudFormation stacks used to update
+// a collection of stacks. You can specify up to 500 Amazon Web Services
 // CloudFormation stacks.
 type UpdateCloudFormationCollectionFilter struct {
 
@@ -2175,8 +2080,8 @@ type UpdateCloudFormationCollectionFilter struct {
 // resources.
 type UpdateResourceCollectionFilter struct {
 
-	// A collection of Amazon Web Services CloudFormation stacks. You can specify up to
-	// 500 Amazon Web Services CloudFormation stacks.
+	// A collection of Amazon Web Services CloudFormation stacks. You can specify up
+	// to 500 Amazon Web Services CloudFormation stacks.
 	CloudFormation *UpdateCloudFormationCollectionFilter
 
 	// The updated Amazon Web Services tags used to filter the resources in the
@@ -2185,27 +2090,21 @@ type UpdateResourceCollectionFilter struct {
 	// can assign the same tag to resources from different services to indicate that
 	// the resources are related. For example, you can assign the same tag to an Amazon
 	// DynamoDB table resource that you assign to an Lambda function. For more
-	// information about using tags, see the Tagging best practices
-	// (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html)
+	// information about using tags, see the Tagging best practices (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html)
 	// whitepaper. Each Amazon Web Services tag has two parts.
-	// - A tag key (for
-	// example, CostCenter, Environment, Project, or Secret). Tag keys are
-	// case-sensitive.
-	// - An optional field known as a tag value (for example,
-	// 111122223333, Production, or a team name). Omitting the tag value is the same as
-	// using an empty string. Like tag keys, tag values are case-sensitive.
+	//     - A tag key (for example, CostCenter , Environment , Project , or Secret ). Tag keys are case-sensitive.
+	//     - An optional field known as a tag value (for example, 111122223333 , Production , or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case-sensitive.
 	//
-	// Together
-	// these are known as key-value pairs. The string used for a key in a tag that you
-	// use to define your resource coverage must begin with the prefix Devops-guru-.
-	// The tag key might be DevOps-Guru-deployment-application or
+	// Together these are known as key-value pairs. The string used for a key in a tag
+	// that you use to define your resource coverage must begin with the prefix
+	// Devops-guru- . The tag key might be DevOps-Guru-deployment-application  or
 	// devops-guru-rds-application. When you create a key, the case of characters in
 	// the key can be whatever you choose. After you create a key, it is
 	// case-sensitive. For example, DevOps Guru works with a key named devops-guru-rds
 	// and a key named DevOps-Guru-RDS, and these act as two different keys. Possible
 	// key/value pairs in your application might be
 	// Devops-Guru-production-application/RDS or
-	// Devops-Guru-production-application/containers.
+	// Devops-Guru-production-application/containers .
 	Tags []UpdateTagCollectionFilter
 
 	noSmithyDocumentSerde
@@ -2227,30 +2126,31 @@ type UpdateServiceIntegrationConfig struct {
 	noSmithyDocumentSerde
 }
 
-// A new collection of Amazon Web Services resources that are defined by an Amazon
-// Web Services tag or tag key/value pair.
+// A new collection of Amazon Web Services resources that are defined by an
+// Amazon Web Services tag or tag key/value pair.
 type UpdateTagCollectionFilter struct {
 
-	// An Amazon Web Services tag key that is used to identify the Amazon Web Services
-	// resources that DevOps Guru analyzes. All Amazon Web Services resources in your
-	// account and Region tagged with this key make up your DevOps Guru application and
-	// analysis boundary. The string used for a key in a tag that you use to define
-	// your resource coverage must begin with the prefix Devops-guru-. The tag key
-	// might be DevOps-Guru-deployment-application or devops-guru-rds-application. When
-	// you create a key, the case of characters in the key can be whatever you choose.
-	// After you create a key, it is case-sensitive. For example, DevOps Guru works
-	// with a key named devops-guru-rds and a key named DevOps-Guru-RDS, and these act
-	// as two different keys. Possible key/value pairs in your application might be
+	// An Amazon Web Services tag key that is used to identify the Amazon Web
+	// Services resources that DevOps Guru analyzes. All Amazon Web Services resources
+	// in your account and Region tagged with this key make up your DevOps Guru
+	// application and analysis boundary. The string used for a key in a tag that you
+	// use to define your resource coverage must begin with the prefix Devops-guru-.
+	// The tag key might be DevOps-Guru-deployment-application  or
+	// devops-guru-rds-application. When you create a key, the case of characters in
+	// the key can be whatever you choose. After you create a key, it is
+	// case-sensitive. For example, DevOps Guru works with a key named devops-guru-rds
+	// and a key named DevOps-Guru-RDS, and these act as two different keys. Possible
+	// key/value pairs in your application might be
 	// Devops-Guru-production-application/RDS or
-	// Devops-Guru-production-application/containers.
+	// Devops-Guru-production-application/containers .
 	//
 	// This member is required.
 	AppBoundaryKey *string
 
 	// The values in an Amazon Web Services tag collection. The tag's value is an
 	// optional field used to associate a string with the tag key (for example,
-	// 111122223333, Production, or a team name). The key and value are the tag's key
-	// pair. Omitting the tag value is the same as using an empty string. Like tag
+	// 111122223333 , Production, or a team name). The key and value are the tag's
+	// key pair. Omitting the tag value is the same as using an empty string. Like tag
 	// keys, tag values are case-sensitive. You can specify a maximum of 256 characters
 	// for a tag value.
 	//

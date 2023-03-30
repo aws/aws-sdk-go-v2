@@ -12,8 +12,7 @@ import (
 )
 
 // Validates a Device Defender security profile behaviors specification. Requires
-// permission to access the ValidateSecurityProfileBehaviors
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// permission to access the ValidateSecurityProfileBehaviors (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ValidateSecurityProfileBehaviors(ctx context.Context, params *ValidateSecurityProfileBehaviorsInput, optFns ...func(*Options)) (*ValidateSecurityProfileBehaviorsOutput, error) {
 	if params == nil {
@@ -32,7 +31,8 @@ func (c *Client) ValidateSecurityProfileBehaviors(ctx context.Context, params *V
 
 type ValidateSecurityProfileBehaviorsInput struct {
 
-	// Specifies the behaviors that, when violated by a device (thing), cause an alert.
+	// Specifies the behaviors that, when violated by a device (thing), cause an
+	// alert.
 	//
 	// This member is required.
 	Behaviors []types.Behavior

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Activates an DataSync agent that you have deployed in your storage environment.
-// The activation process associates your agent with your account. In the
-// activation process, you specify information such as the Amazon Web Services
+// Activates an DataSync agent that you have deployed in your storage
+// environment. The activation process associates your agent with your account. In
+// the activation process, you specify information such as the Amazon Web Services
 // Region that you want to activate the agent in. You activate the agent in the
 // Amazon Web Services Region where your target locations (in Amazon S3 or Amazon
 // EFS) reside. Your tasks are created in this Amazon Web Services Region. You can
@@ -59,9 +59,9 @@ type CreateAgentInput struct {
 	// used to identify the agent in the console.
 	AgentName *string
 
-	// The ARNs of the security groups used to protect your data transfer task subnets.
-	// See SecurityGroupArns
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_Ec2Config.html#DataSync-Type-Ec2Config-SecurityGroupArns).
+	// The ARNs of the security groups used to protect your data transfer task
+	// subnets. See SecurityGroupArns (https://docs.aws.amazon.com/datasync/latest/userguide/API_Ec2Config.html#DataSync-Type-Ec2Config-SecurityGroupArns)
+	// .
 	SecurityGroupArns []string
 
 	// The Amazon Resource Names (ARNs) of the subnets in which DataSync will create
@@ -80,13 +80,12 @@ type CreateAgentInput struct {
 	// characters: + - = . _ : / @.
 	Tags []types.TagListEntry
 
-	// The ID of the VPC (virtual private cloud) endpoint that the agent has access to.
-	// This is the client-side VPC endpoint, also called a PrivateLink. If you don't
-	// have a PrivateLink VPC endpoint, see Creating a VPC Endpoint Service
-	// Configuration
-	// (https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html#create-endpoint-service)
+	// The ID of the VPC (virtual private cloud) endpoint that the agent has access
+	// to. This is the client-side VPC endpoint, also called a PrivateLink. If you
+	// don't have a PrivateLink VPC endpoint, see Creating a VPC Endpoint Service
+	// Configuration (https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html#create-endpoint-service)
 	// in the Amazon VPC User Guide. VPC endpoint ID looks like this:
-	// vpce-01234d5aff67890e1.
+	// vpce-01234d5aff67890e1 .
 	VpcEndpointId *string
 
 	noSmithyDocumentSerde

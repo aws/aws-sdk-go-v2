@@ -32,8 +32,8 @@ func (c *Client) SearchAnalyses(ctx context.Context, params *SearchAnalysesInput
 
 type SearchAnalysesInput struct {
 
-	// The ID of the Amazon Web Services account that contains the analyses that you're
-	// searching for.
+	// The ID of the Amazon Web Services account that contains the analyses that
+	// you're searching for.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -148,8 +148,8 @@ type SearchAnalysesPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

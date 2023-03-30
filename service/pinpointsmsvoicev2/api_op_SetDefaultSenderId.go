@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets default sender ID on a configuration set. When sending a text message to a
-// destination country that supports sender IDs, the default sender ID on the
+// Sets default sender ID on a configuration set. When sending a text message to
+// a destination country that supports sender IDs, the default sender ID on the
 // configuration set specified will be used if no dedicated origination phone
 // numbers or registered sender IDs are available in your account.
 func (c *Client) SetDefaultSenderId(ctx context.Context, params *SetDefaultSenderIdInput, optFns ...func(*Options)) (*SetDefaultSenderIdOutput, error) {
@@ -31,14 +31,14 @@ func (c *Client) SetDefaultSenderId(ctx context.Context, params *SetDefaultSende
 
 type SetDefaultSenderIdInput struct {
 
-	// The configuration set to updated with a new default SenderId. This field can be
-	// the ConsigurationSetName or ConfigurationSetArn.
+	// The configuration set to updated with a new default SenderId. This field can
+	// be the ConsigurationSetName or ConfigurationSetArn.
 	//
 	// This member is required.
 	ConfigurationSetName *string
 
-	// The current sender ID for the configuration set. When sending a text message to
-	// a destination country which supports SenderIds, the default sender ID on the
+	// The current sender ID for the configuration set. When sending a text message
+	// to a destination country which supports SenderIds, the default sender ID on the
 	// configuration set specified on SendTextMessage will be used if no dedicated
 	// origination phone numbers or registered SenderIds are available in your account,
 	// instead of a generic sender ID, such as 'NOTICE'.

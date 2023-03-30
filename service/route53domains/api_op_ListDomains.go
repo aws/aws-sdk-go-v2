@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation returns all the domain names registered with Amazon Route 53 for
-// the current Amazon Web Services account if no filtering conditions are used.
+// This operation returns all the domain names registered with Amazon Route 53
+// for the current Amazon Web Services account if no filtering conditions are used.
 func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optFns ...func(*Options)) (*ListDomainsOutput, error) {
 	if params == nil {
 		params = &ListDomainsInput{}
@@ -33,24 +33,24 @@ func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optF
 type ListDomainsInput struct {
 
 	// A complex type that contains information about the filters applied during the
-	// ListDomains request. The filter conditions can include domain name and domain
+	// ListDomainsrequest. The filter conditions can include domain name and domain
 	// expiration.
 	FilterConditions []types.FilterCondition
 
 	// For an initial request for a list of domains, omit this element. If the number
 	// of domains that are associated with the current Amazon Web Services account is
-	// greater than the value that you specified for MaxItems, you can use Marker to
+	// greater than the value that you specified for MaxItems , you can use Marker to
 	// return additional domains. Get the value of NextPageMarker from the previous
 	// response, and submit another request that includes the value of NextPageMarker
-	// in the Marker element. Constraints: The marker must match the value specified in
-	// the previous request.
+	// in the Marker element. Constraints: The marker must match the value specified
+	// in the previous request.
 	Marker *string
 
 	// Number of domains to be returned. Default: 20
 	MaxItems *int32
 
-	// A complex type that contains information about the requested ordering of domains
-	// in the returned list.
+	// A complex type that contains information about the requested ordering of
+	// domains in the returned list.
 	SortCondition *types.SortCondition
 
 	noSmithyDocumentSerde
@@ -62,8 +62,9 @@ type ListDomainsOutput struct {
 	// A list of domains.
 	Domains []types.DomainSummary
 
-	// If there are more domains than you specified for MaxItems in the request, submit
-	// another request and include the value of NextPageMarker in the value of Marker.
+	// If there are more domains than you specified for MaxItems in the request,
+	// submit another request and include the value of NextPageMarker  in the value of
+	// Marker .
 	NextPageMarker *string
 
 	// Metadata pertaining to the operation's result.
@@ -147,8 +148,8 @@ type ListDomainsPaginatorOptions struct {
 	// Number of domains to be returned. Default: 20
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

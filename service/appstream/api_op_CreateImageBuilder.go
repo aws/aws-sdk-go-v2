@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an image builder. An image builder is a virtual machine that is used to
-// create an image. The initial state of the builder is PENDING. When it is ready,
-// the state is RUNNING.
+// Creates an image builder. An image builder is a virtual machine that is used
+// to create an image. The initial state of the builder is PENDING. When it is
+// ready, the state is RUNNING .
 func (c *Client) CreateImageBuilder(ctx context.Context, params *CreateImageBuilderInput, optFns ...func(*Options)) (*CreateImageBuilderOutput, error) {
 	if params == nil {
 		params = &CreateImageBuilderInput{}
@@ -33,53 +33,39 @@ type CreateImageBuilderInput struct {
 
 	// The instance type to use when launching the image builder. The following
 	// instance types are available:
-	// - stream.standard.small
-	// - stream.standard.medium
-	// -
-	// stream.standard.large
-	// - stream.compute.large
-	// - stream.compute.xlarge
-	// -
-	// stream.compute.2xlarge
-	// - stream.compute.4xlarge
-	// - stream.compute.8xlarge
-	// -
-	// stream.memory.large
-	// - stream.memory.xlarge
-	// - stream.memory.2xlarge
-	// -
-	// stream.memory.4xlarge
-	// - stream.memory.8xlarge
-	// - stream.memory.z1d.large
-	// -
-	// stream.memory.z1d.xlarge
-	// - stream.memory.z1d.2xlarge
-	// -
-	// stream.memory.z1d.3xlarge
-	// - stream.memory.z1d.6xlarge
-	// -
-	// stream.memory.z1d.12xlarge
-	// - stream.graphics-design.large
-	// -
-	// stream.graphics-design.xlarge
-	// - stream.graphics-design.2xlarge
-	// -
-	// stream.graphics-design.4xlarge
-	// - stream.graphics-desktop.2xlarge
-	// -
-	// stream.graphics.g4dn.xlarge
-	// - stream.graphics.g4dn.2xlarge
-	// -
-	// stream.graphics.g4dn.4xlarge
-	// - stream.graphics.g4dn.8xlarge
-	// -
-	// stream.graphics.g4dn.12xlarge
-	// - stream.graphics.g4dn.16xlarge
-	// -
-	// stream.graphics-pro.4xlarge
-	// - stream.graphics-pro.8xlarge
-	// -
-	// stream.graphics-pro.16xlarge
+	//     - stream.standard.small
+	//     - stream.standard.medium
+	//     - stream.standard.large
+	//     - stream.compute.large
+	//     - stream.compute.xlarge
+	//     - stream.compute.2xlarge
+	//     - stream.compute.4xlarge
+	//     - stream.compute.8xlarge
+	//     - stream.memory.large
+	//     - stream.memory.xlarge
+	//     - stream.memory.2xlarge
+	//     - stream.memory.4xlarge
+	//     - stream.memory.8xlarge
+	//     - stream.memory.z1d.large
+	//     - stream.memory.z1d.xlarge
+	//     - stream.memory.z1d.2xlarge
+	//     - stream.memory.z1d.3xlarge
+	//     - stream.memory.z1d.6xlarge
+	//     - stream.memory.z1d.12xlarge
+	//     - stream.graphics-design.large
+	//     - stream.graphics-design.xlarge
+	//     - stream.graphics-design.2xlarge
+	//     - stream.graphics-design.4xlarge
+	//     - stream.graphics-desktop.2xlarge
+	//     - stream.graphics.g4dn.xlarge
+	//     - stream.graphics.g4dn.2xlarge
+	//     - stream.graphics.g4dn.4xlarge
+	//     - stream.graphics.g4dn.8xlarge
+	//     - stream.graphics.g4dn.12xlarge
+	//     - stream.graphics.g4dn.16xlarge
+	//     - stream.graphics-pro.4xlarge
+	//     - stream.graphics-pro.8xlarge
+	//     - stream.graphics-pro.16xlarge
 	//
 	// This member is required.
 	InstanceType *string
@@ -89,12 +75,13 @@ type CreateImageBuilderInput struct {
 	// This member is required.
 	Name *string
 
-	// The list of interface VPC endpoint (interface endpoint) objects. Administrators
-	// can connect to the image builder only through the specified endpoints.
+	// The list of interface VPC endpoint (interface endpoint) objects.
+	// Administrators can connect to the image builder only through the specified
+	// endpoints.
 	AccessEndpoints []types.AccessEndpoint
 
-	// The version of the AppStream 2.0 agent to use for this image builder. To use the
-	// latest version of the AppStream 2.0 agent, specify [LATEST].
+	// The version of the AppStream 2.0 agent to use for this image builder. To use
+	// the latest version of the AppStream 2.0 agent, specify [LATEST].
 	AppstreamAgentVersion *string
 
 	// The description to display.
@@ -103,22 +90,21 @@ type CreateImageBuilderInput struct {
 	// The image builder name to display.
 	DisplayName *string
 
-	// The name of the directory and organizational unit (OU) to use to join the image
-	// builder to a Microsoft Active Directory domain.
+	// The name of the directory and organizational unit (OU) to use to join the
+	// image builder to a Microsoft Active Directory domain.
 	DomainJoinInfo *types.DomainJoinInfo
 
 	// Enables or disables default internet access for the image builder.
 	EnableDefaultInternetAccess *bool
 
-	// The Amazon Resource Name (ARN) of the IAM role to apply to the image builder. To
-	// assume a role, the image builder calls the AWS Security Token Service (STS)
-	// AssumeRole API operation and passes the ARN of the role to use. The operation
+	// The Amazon Resource Name (ARN) of the IAM role to apply to the image builder.
+	// To assume a role, the image builder calls the AWS Security Token Service (STS)
+	// AssumeRoleAPI operation and passes the ARN of the role to use. The operation
 	// creates a new session with temporary credentials. AppStream 2.0 retrieves the
 	// temporary credentials and creates the appstream_machine_role credential profile
 	// on the instance. For more information, see Using an IAM Role to Grant
 	// Permissions to Applications and Scripts Running on AppStream 2.0 Streaming
-	// Instances
-	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html)
+	// Instances (https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html)
 	// in the Amazon AppStream 2.0 Administration Guide.
 	IamRoleArn *string
 
@@ -128,13 +114,12 @@ type CreateImageBuilderInput struct {
 	// The name of the image used to create the image builder.
 	ImageName *string
 
-	// The tags to associate with the image builder. A tag is a key-value pair, and the
-	// value is optional. For example, Environment=Test. If you do not specify a value,
-	// Environment=. Generally allowed characters are: letters, numbers, and spaces
-	// representable in UTF-8, and the following special characters: _ . : / = + \ - @
-	// If you do not specify a value, the value is set to an empty string. For more
-	// information about tags, see Tagging Your Resources
-	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
+	// The tags to associate with the image builder. A tag is a key-value pair, and
+	// the value is optional. For example, Environment=Test. If you do not specify a
+	// value, Environment=. Generally allowed characters are: letters, numbers, and
+	// spaces representable in UTF-8, and the following special characters: _ . : / = +
+	// \ - @ If you do not specify a value, the value is set to an empty string. For
+	// more information about tags, see Tagging Your Resources (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
 	// in the Amazon AppStream 2.0 Administration Guide.
 	Tags map[string]string
 

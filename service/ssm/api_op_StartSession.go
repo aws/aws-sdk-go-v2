@@ -13,10 +13,10 @@ import (
 // Initiates a connection to a target (for example, a managed node) for a Session
 // Manager session. Returns a URL and token that can be used to open a WebSocket
 // connection for sending input and receiving outputs. Amazon Web Services CLI
-// usage: start-session is an interactive command that requires the Session Manager
-// plugin to be installed on the client machine making the call. For information,
-// see Install the Session Manager plugin for the Amazon Web Services CLI
-// (https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)
+// usage: start-session is an interactive command that requires the Session
+// Manager plugin to be installed on the client machine making the call. For
+// information, see Install the Session Manager plugin for the Amazon Web
+// Services CLI (https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)
 // in the Amazon Web Services Systems Manager User Guide. Amazon Web Services Tools
 // for PowerShell usage: Start-SSMSession isn't currently supported by Amazon Web
 // Services Tools for PowerShell on Windows local machines.
@@ -44,11 +44,10 @@ type StartSessionInput struct {
 
 	// The name of the SSM document you want to use to define the type of session,
 	// input parameters, or preferences for the session. For example,
-	// SSM-SessionManagerRunShell. You can call the GetDocument API to verify the
+	// SSM-SessionManagerRunShell . You can call the GetDocument API to verify the
 	// document exists before attempting to start a session. If no document name is
 	// provided, a shell to the managed node is launched by default. For more
-	// information, see Start a session
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html)
+	// information, see Start a session (https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	DocumentName *string
 
@@ -56,8 +55,9 @@ type StartSessionInput struct {
 	// document.
 	Parameters map[string][]string
 
-	// The reason for connecting to the instance. This value is included in the details
-	// for the Amazon CloudWatch Events event created when you start the session.
+	// The reason for connecting to the instance. This value is included in the
+	// details for the Amazon CloudWatch Events event created when you start the
+	// session.
 	Reason *string
 
 	noSmithyDocumentSerde
@@ -68,16 +68,15 @@ type StartSessionOutput struct {
 	// The ID of the session.
 	SessionId *string
 
-	// A URL back to SSM Agent on the managed node that the Session Manager client uses
-	// to send commands and receive output from the node. Format:
+	// A URL back to SSM Agent on the managed node that the Session Manager client
+	// uses to send commands and receive output from the node. Format:
 	// wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)
 	// region represents the Region identifier for an Amazon Web Services Region
 	// supported by Amazon Web Services Systems Manager, such as us-east-2 for the US
 	// East (Ohio) Region. For a list of supported region values, see the Region column
-	// in Systems Manager service endpoints
-	// (https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region) in the
-	// Amazon Web Services General Reference. session-id represents the ID of a Session
-	// Manager session, such as 1a2b3c4dEXAMPLE.
+	// in Systems Manager service endpoints (https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region)
+	// in the Amazon Web Services General Reference. session-id represents the ID of a
+	// Session Manager session, such as 1a2b3c4dEXAMPLE .
 	StreamUrl *string
 
 	// An encrypted token value containing session and caller information. This token

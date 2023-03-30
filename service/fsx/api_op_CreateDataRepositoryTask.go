@@ -19,11 +19,10 @@ import (
 // symbolic links (symlinks) from your FSx file system to a linked data repository.
 // A CreateDataRepositoryTask operation will fail if a data repository is not
 // linked to the FSx file system. To learn more about data repository tasks, see
-// Data Repository Tasks
-// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html).
-// To learn more about linking a data repository to your file system, see Linking
-// your file system to an S3 bucket
-// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/create-dra-linked-data-repo.html).
+// Data Repository Tasks (https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html)
+// . To learn more about linking a data repository to your file system, see
+// Linking your file system to an S3 bucket (https://docs.aws.amazon.com/fsx/latest/LustreGuide/create-dra-linked-data-repo.html)
+// .
 func (c *Client) CreateDataRepositoryTask(ctx context.Context, params *CreateDataRepositoryTaskInput, optFns ...func(*Options)) (*CreateDataRepositoryTaskOutput, error) {
 	if params == nil {
 		params = &CreateDataRepositoryTaskInput{}
@@ -46,11 +45,11 @@ type CreateDataRepositoryTaskInput struct {
 	// This member is required.
 	FileSystemId *string
 
-	// Defines whether or not Amazon FSx provides a CompletionReport once the task has
-	// completed. A CompletionReport provides a detailed report on the files that
+	// Defines whether or not Amazon FSx provides a CompletionReport once the task
+	// has completed. A CompletionReport provides a detailed report on the files that
 	// Amazon FSx processed that meet the criteria specified by the Scope parameter.
-	// For more information, see Working with Task Completion Reports
-	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/task-completion-report.html).
+	// For more information, see Working with Task Completion Reports (https://docs.aws.amazon.com/fsx/latest/LustreGuide/task-completion-report.html)
+	// .
 	//
 	// This member is required.
 	Report *types.CompletionReport
@@ -69,22 +68,13 @@ type CreateDataRepositoryTaskInput struct {
 	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
-	// A list of paths for the data repository task to use when the task is processed.
-	// If a path that you provide isn't valid, the task fails.
-	// - For export tasks, the
-	// list contains paths on the Amazon FSx file system from which the files are
-	// exported to the Amazon S3 bucket. The default path is the file system root
-	// directory. The paths you provide need to be relative to the mount point of the
-	// file system. If the mount point is /mnt/fsx and /mnt/fsx/path1 is a directory or
-	// file on the file system you want to export, then the path to provide is path1.
-	// -
-	// For import tasks, the list contains paths in the Amazon S3 bucket from which
-	// POSIX metadata changes are imported to the Amazon FSx file system. The path can
-	// be an S3 bucket or prefix in the format s3://myBucket/myPrefix (where myPrefix
-	// is optional).
+	// A list of paths for the data repository task to use when the task is
+	// processed. If a path that you provide isn't valid, the task fails.
+	//     - For export tasks, the list contains paths on the Amazon FSx file system from which the files are exported to the Amazon S3 bucket. The default path is the file system root directory. The paths you provide need to be relative to the mount point of the file system. If the mount point is /mnt/fsx and /mnt/fsx/path1 is a directory or file on the file system you want to export, then the path to provide is path1 .
+	//     - For import tasks, the list contains paths in the Amazon S3 bucket from which POSIX metadata changes are imported to the Amazon FSx file system. The path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix (where myPrefix is optional).
 	Paths []string
 
-	// A list of Tag values, with a maximum of 50 elements.
+	// A list of Tag  values, with a maximum of 50 elements.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

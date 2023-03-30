@@ -13,9 +13,8 @@ import (
 )
 
 // Information about the history of a flywheel iteration. For more information
-// about flywheels, see  Flywheel overview
-// (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html) in the
-// Amazon Comprehend Developer Guide.
+// about flywheels, see Flywheel overview (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html)
+// in the Amazon Comprehend Developer Guide.
 func (c *Client) ListFlywheelIterationHistory(ctx context.Context, params *ListFlywheelIterationHistoryInput, optFns ...func(*Options)) (*ListFlywheelIterationHistoryOutput, error) {
 	if params == nil {
 		params = &ListFlywheelIterationHistoryInput{}
@@ -141,8 +140,8 @@ type ListFlywheelIterationHistoryPaginatorOptions struct {
 	// Maximum number of iteration history results to return
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

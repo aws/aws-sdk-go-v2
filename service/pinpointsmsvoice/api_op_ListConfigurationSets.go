@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all of the configuration sets associated with your Amazon Pinpoint account
-// in the current region.
+// List all of the configuration sets associated with your Amazon Pinpoint
+// account in the current region.
 func (c *Client) ListConfigurationSets(ctx context.Context, params *ListConfigurationSetsInput, optFns ...func(*Options)) (*ListConfigurationSetsOutput, error) {
 	if params == nil {
 		params = &ListConfigurationSetsInput{}
@@ -29,8 +29,8 @@ func (c *Client) ListConfigurationSets(ctx context.Context, params *ListConfigur
 
 type ListConfigurationSetsInput struct {
 
-	// A token returned from a previous call to the API that indicates the position in
-	// the list of results.
+	// A token returned from a previous call to the API that indicates the position
+	// in the list of results.
 	NextToken *string
 
 	// Used to specify the number of items that should be returned in the response.

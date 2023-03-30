@@ -15,7 +15,7 @@ import (
 // change. Do not use this API for production workloads. This API is also subject
 // to change. Attaches one or more traffic sources to the specified Auto Scaling
 // group. To describe the traffic sources for an Auto Scaling group, call the
-// DescribeTrafficSources API. To detach a traffic source from the Auto Scaling
+// DescribeTrafficSourcesAPI. To detach a traffic source from the Auto Scaling
 // group, call the DetachTrafficSources API. This operation is additive and does
 // not detach existing traffic sources from the Auto Scaling group.
 func (c *Client) AttachTrafficSources(ctx context.Context, params *AttachTrafficSourcesInput, optFns ...func(*Options)) (*AttachTrafficSourcesOutput, error) {
@@ -40,9 +40,9 @@ type AttachTrafficSourcesInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// The unique identifiers of one or more traffic sources. You can specify up to 10
-	// traffic sources. Currently, you must specify an Amazon Resource Name (ARN) for
-	// an existing VPC Lattice target group. Amazon EC2 Auto Scaling registers the
+	// The unique identifiers of one or more traffic sources. You can specify up to
+	// 10 traffic sources. Currently, you must specify an Amazon Resource Name (ARN)
+	// for an existing VPC Lattice target group. Amazon EC2 Auto Scaling registers the
 	// running instances with the attached target groups. The target groups receive
 	// incoming traffic and route requests to one or more registered targets.
 	//

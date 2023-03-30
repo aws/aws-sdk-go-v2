@@ -122,22 +122,22 @@ func (c *Client) addOperationDescribeEnvironmentManagedActionHistoryMiddlewares(
 	return nil
 }
 
-// DescribeEnvironmentManagedActionHistoryAPIClient is a client that implements the
-// DescribeEnvironmentManagedActionHistory operation.
+// DescribeEnvironmentManagedActionHistoryAPIClient is a client that implements
+// the DescribeEnvironmentManagedActionHistory operation.
 type DescribeEnvironmentManagedActionHistoryAPIClient interface {
 	DescribeEnvironmentManagedActionHistory(context.Context, *DescribeEnvironmentManagedActionHistoryInput, ...func(*Options)) (*DescribeEnvironmentManagedActionHistoryOutput, error)
 }
 
 var _ DescribeEnvironmentManagedActionHistoryAPIClient = (*Client)(nil)
 
-// DescribeEnvironmentManagedActionHistoryPaginatorOptions is the paginator options
-// for DescribeEnvironmentManagedActionHistory
+// DescribeEnvironmentManagedActionHistoryPaginatorOptions is the paginator
+// options for DescribeEnvironmentManagedActionHistory
 type DescribeEnvironmentManagedActionHistoryPaginatorOptions struct {
 	// The maximum number of items to return for a single request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

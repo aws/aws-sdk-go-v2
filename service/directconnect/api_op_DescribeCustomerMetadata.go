@@ -37,14 +37,11 @@ type DescribeCustomerMetadataOutput struct {
 	// The list of customer agreements.
 	Agreements []types.CustomerAgreement
 
-	// The type of network-to-network interface (NNI) partner. The partner type will be
-	// one of the following:
-	// - V1: This partner can only allocate 50Mbps, 100Mbps,
-	// 200Mbps, 300Mbps, 400Mbps, or 500Mbps subgigabit connections.
-	// - V2: This partner
-	// can only allocate 1GB, 2GB, 5GB, or 10GB hosted connections.
-	// - nonPartner: The
-	// customer is not a partner.
+	// The type of network-to-network interface (NNI) partner. The partner type will
+	// be one of the following:
+	//     - V1: This partner can only allocate 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, or 500Mbps subgigabit connections.
+	//     - V2: This partner can only allocate 1GB, 2GB, 5GB, or 10GB hosted connections.
+	//     - nonPartner: The customer is not a partner.
 	NniPartnerType types.NniPartnerType
 
 	// Metadata pertaining to the operation's result.

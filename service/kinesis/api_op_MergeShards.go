@@ -19,28 +19,28 @@ import (
 // range of 382...454, then you could merge these two shards into a single shard
 // that would have a hash key range of 276...454. After the merge, the single child
 // shard receives data for all hash key values covered by the two parent shards.
-// When invoking this API, it is recommended you use the StreamARN input parameter
-// rather than the StreamName input parameter. MergeShards is called when there is
-// a need to reduce the overall capacity of a stream because of excess capacity
-// that is not being used. You must specify the shard to be merged and the adjacent
-// shard for a stream. For more information about merging shards, see Merge Two
-// Shards
-// (https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-merge.html)
+// When invoking this API, it is recommended you use the StreamARN input
+// parameter rather than the StreamName  input parameter. MergeShards is called
+// when there is a need to reduce the overall capacity of a stream because of
+// excess capacity that is not being used. You must specify the shard to be merged
+// and the adjacent shard for a stream. For more information about merging shards,
+// see Merge Two Shards (https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-merge.html)
 // in the Amazon Kinesis Data Streams Developer Guide. If the stream is in the
-// ACTIVE state, you can call MergeShards. If a stream is in the CREATING,
-// UPDATING, or DELETING state, MergeShards returns a ResourceInUseException. If
-// the specified stream does not exist, MergeShards returns a
-// ResourceNotFoundException. You can use DescribeStreamSummary to check the state
-// of the stream, which is returned in StreamStatus. MergeShards is an asynchronous
-// operation. Upon receiving a MergeShards request, Amazon Kinesis Data Streams
-// immediately returns a response and sets the StreamStatus to UPDATING. After the
-// operation is completed, Kinesis Data Streams sets the StreamStatus to ACTIVE.
-// Read and write operations continue to work while the stream is in the UPDATING
-// state. You use DescribeStreamSummary and the ListShards APIs to determine the
-// shard IDs that are specified in the MergeShards request. If you try to operate
-// on too many streams in parallel using CreateStream, DeleteStream, MergeShards,
-// or SplitShard, you receive a LimitExceededException. MergeShards has a limit of
-// five transactions per second per account.
+// ACTIVE state, you can call MergeShards . If a stream is in the CREATING ,
+// UPDATING , or DELETING  state, MergeShards  returns a ResourceInUseException.
+// If the specified stream does not exist, MergeShards  returns a
+// ResourceNotFoundException . You can use DescribeStreamSummary to check the
+// state of the stream, which is returned in StreamStatus . MergeShards is an
+// asynchronous operation. Upon receiving a MergeShards request, Amazon Kinesis
+// Data Streams immediately returns a response and sets the StreamStatus  to
+// UPDATING . After the operation is completed, Kinesis Data Streams sets the
+// StreamStatus to ACTIVE. Read and write operations continue to work while the
+// stream is in the UPDATING  state. You use DescribeStreamSummary  and the
+// ListShards APIs to determine the shard IDs that are specified in the
+// MergeShardsrequest. If you try to operate on too many streams in parallel
+// using CreateStream , DeleteStream , MergeShards , or SplitShard , you receive a
+// LimitExceededException . MergeShards has a limit of five transactions per
+// second per account.
 func (c *Client) MergeShards(ctx context.Context, params *MergeShardsInput, optFns ...func(*Options)) (*MergeShardsOutput, error) {
 	if params == nil {
 		params = &MergeShardsInput{}
@@ -56,7 +56,7 @@ func (c *Client) MergeShards(ctx context.Context, params *MergeShardsInput, optF
 	return out, nil
 }
 
-// Represents the input for MergeShards.
+// Represents the input for MergeShards .
 type MergeShardsInput struct {
 
 	// The shard ID of the adjacent shard for the merge.

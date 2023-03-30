@@ -39,16 +39,16 @@ type ListIdentityProviderConfigsInput struct {
 	// ListIdentityProviderConfigs in paginated output. When you use this parameter,
 	// ListIdentityProviderConfigs returns only maxResults results in a single page
 	// along with a nextToken response element. You can see the remaining results of
-	// the initial request by sending another ListIdentityProviderConfigs request with
-	// the returned nextToken value. This value can be between 1 and 100. If you don't
-	// use this parameter, ListIdentityProviderConfigs returns up to 100 results and a
-	// nextToken value, if applicable.
+	// the initial request by sending another ListIdentityProviderConfigs request
+	// with the returned nextToken value. This value can be between 1 and 100. If you
+	// don't use this parameter, ListIdentityProviderConfigs returns up to 100
+	// results and a nextToken  value, if applicable.
 	MaxResults *int32
 
-	// The nextToken value returned from a previous paginated
+	// The nextToken  value returned from a previous paginated
 	// IdentityProviderConfigsRequest where maxResults was used and the results
 	// exceeded the value of that parameter. Pagination continues from the end of the
-	// previous results that returned the nextToken value.
+	// previous results that returned the nextToken  value.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -59,10 +59,10 @@ type ListIdentityProviderConfigsOutput struct {
 	// The identity provider configurations for the cluster.
 	IdentityProviderConfigs []types.IdentityProviderConfig
 
-	// The nextToken value returned from a previous paginated
+	// The nextToken  value returned from a previous paginated
 	// ListIdentityProviderConfigsResponse where maxResults was used and the results
 	// exceeded the value of that parameter. Pagination continues from the end of the
-	// previous results that returned the nextToken value.
+	// previous results that returned the nextToken  value.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -149,14 +149,14 @@ type ListIdentityProviderConfigsPaginatorOptions struct {
 	// ListIdentityProviderConfigs in paginated output. When you use this parameter,
 	// ListIdentityProviderConfigs returns only maxResults results in a single page
 	// along with a nextToken response element. You can see the remaining results of
-	// the initial request by sending another ListIdentityProviderConfigs request with
-	// the returned nextToken value. This value can be between 1 and 100. If you don't
-	// use this parameter, ListIdentityProviderConfigs returns up to 100 results and a
-	// nextToken value, if applicable.
+	// the initial request by sending another ListIdentityProviderConfigs request
+	// with the returned nextToken value. This value can be between 1 and 100. If you
+	// don't use this parameter, ListIdentityProviderConfigs returns up to 100
+	// results and a nextToken  value, if applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the status of a service-specific credential to Active or Inactive.
+// Sets the status of a service-specific credential to Active  or Inactive.
 // Service-specific credentials that are inactive cannot be used for authentication
 // to the service. This operation can be used to disable a user's service-specific
 // credential as part of a credential rotation work flow.
@@ -32,9 +32,9 @@ func (c *Client) UpdateServiceSpecificCredential(ctx context.Context, params *Up
 
 type UpdateServiceSpecificCredentialInput struct {
 
-	// The unique identifier of the service-specific credential. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters that can consist of any upper or lowercased letter or digit.
+	// The unique identifier of the service-specific credential. This parameter
+	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string
+	// of characters that can consist of any upper or lowercased letter or digit.
 	//
 	// This member is required.
 	ServiceSpecificCredentialId *string
@@ -44,12 +44,12 @@ type UpdateServiceSpecificCredentialInput struct {
 	// This member is required.
 	Status types.StatusType
 
-	// The name of the IAM user associated with the service-specific credential. If you
-	// do not specify this value, then the operation assumes the user whose credentials
-	// are used to call the operation. This parameter allows (through its regex pattern
-	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
-	// and lowercase alphanumeric characters with no spaces. You can also include any
-	// of the following characters: _+=,.@-
+	// The name of the IAM user associated with the service-specific credential. If
+	// you do not specify this value, then the operation assumes the user whose
+	// credentials are used to call the operation. This parameter allows (through its
+	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
+	// consisting of upper and lowercase alphanumeric characters with no spaces. You
+	// can also include any of the following characters: _+=,.@-
 	UserName *string
 
 	noSmithyDocumentSerde

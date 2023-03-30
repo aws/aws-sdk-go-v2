@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified rules or the rules for the specified listener. You must
-// specify either a listener or one or more rules.
+// Describes the specified rules or the rules for the specified listener. You
+// must specify either a listener or one or more rules.
 func (c *Client) DescribeRules(ctx context.Context, params *DescribeRulesInput, optFns ...func(*Options)) (*DescribeRulesOutput, error) {
 	if params == nil {
 		params = &DescribeRulesInput{}
@@ -48,8 +48,8 @@ type DescribeRulesInput struct {
 
 type DescribeRulesOutput struct {
 
-	// If there are additional results, this is the marker for the next set of results.
-	// Otherwise, this is null.
+	// If there are additional results, this is the marker for the next set of
+	// results. Otherwise, this is null.
 	NextMarker *string
 
 	// Information about the rules.

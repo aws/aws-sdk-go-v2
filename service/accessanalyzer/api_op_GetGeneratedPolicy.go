@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the policy that was generated using StartPolicyGeneration.
+// Retrieves the policy that was generated using StartPolicyGeneration .
 func (c *Client) GetGeneratedPolicy(ctx context.Context, params *GetGeneratedPolicyInput, optFns ...func(*Options)) (*GetGeneratedPolicyOutput, error) {
 	if params == nil {
 		params = &GetGeneratedPolicyInput{}
@@ -29,9 +29,9 @@ func (c *Client) GetGeneratedPolicy(ctx context.Context, params *GetGeneratedPol
 
 type GetGeneratedPolicyInput struct {
 
-	// The JobId that is returned by the StartPolicyGeneration operation. The JobId can
-	// be used with GetGeneratedPolicy to retrieve the generated policies or used with
-	// CancelPolicyGeneration to cancel the policy generation request.
+	// The JobId  that is returned by the StartPolicyGeneration  operation. The JobId
+	// can be used with GetGeneratedPolicy to retrieve the generated policies or used
+	// with CancelPolicyGeneration  to cancel the policy generation request.
 	//
 	// This member is required.
 	JobId *string
@@ -40,12 +40,12 @@ type GetGeneratedPolicyInput struct {
 	// generate policies with placeholders for resource ARNs for actions that support
 	// resource level granularity in policies. For example, in the resource section of
 	// a policy, you can receive a placeholder such as
-	// "Resource":"arn:aws:s3:::${BucketName}" instead of "*".
+	// "Resource":"arn:aws:s3:::${BucketName}" instead of "*" .
 	IncludeResourcePlaceholders *bool
 
 	// The level of detail that you want to generate. You can specify whether to
 	// generate service-level policies. IAM Access Analyzer uses
-	// iam:servicelastaccessed to identify services that have been used recently to
+	// iam:servicelastaccessedto identify services that have been used recently to
 	// create this service-level template.
 	IncludeServiceLevelTemplate *bool
 

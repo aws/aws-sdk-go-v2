@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a user. The user will be removed from all ACLs and in turn removed from
-// all clusters.
+// Deletes a user. The user will be removed from all ACLs and in turn removed
+// from all clusters.
 func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns ...func(*Options)) (*DeleteUserOutput, error) {
 	if params == nil {
 		params = &DeleteUserInput{}

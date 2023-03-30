@@ -31,14 +31,14 @@ func (c *Client) CreateReturnShippingLabel(ctx context.Context, params *CreateRe
 type CreateReturnShippingLabelInput struct {
 
 	// The ID for a job that you want to create the return shipping label for; for
-	// example, JID123e4567-e89b-12d3-a456-426655440000.
+	// example, JID123e4567-e89b-12d3-a456-426655440000 .
 	//
 	// This member is required.
 	JobId *string
 
-	// The shipping speed for a particular job. This speed doesn't dictate how soon the
-	// device is returned to Amazon Web Services. This speed represents how quickly it
-	// moves to its destination while in transit. Regional shipping speeds are as
+	// The shipping speed for a particular job. This speed doesn't dictate how soon
+	// the device is returned to Amazon Web Services. This speed represents how quickly
+	// it moves to its destination while in transit. Regional shipping speeds are as
 	// follows:
 	ShippingOption types.ShippingOption
 

@@ -94,10 +94,9 @@ type DescribeModelPackageOutput struct {
 	// learning domains include computer vision and natural language processing.
 	Domain *string
 
-	// Represents the drift check baselines that can be used when the model monitor is
-	// set using the model package. For more information, see the topic on Drift
-	// Detection against Previous Baselines in SageMaker Pipelines
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection)
+	// Represents the drift check baselines that can be used when the model monitor
+	// is set using the model package. For more information, see the topic on Drift
+	// Detection against Previous Baselines in SageMaker Pipelines (https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection)
 	// in the Amazon SageMaker Developer Guide.
 	DriftCheckBaselines *types.DriftCheckBaselines
 
@@ -131,8 +130,8 @@ type DescribeModelPackageOutput struct {
 	// The version of the model package.
 	ModelPackageVersion *int32
 
-	// The Amazon Simple Storage Service (Amazon S3) path where the sample payload are
-	// stored. This path points to a single gzip compressed tar archive (.tar.gz
+	// The Amazon Simple Storage Service (Amazon S3) path where the sample payload
+	// are stored. This path points to a single gzip compressed tar archive (.tar.gz
 	// suffix).
 	SamplePayloadUrl *string
 

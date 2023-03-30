@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the status, configuration, and other settings for a
-// specific version of a campaign.
+// Retrieves information about the status, configuration, and other settings for
+// a specific version of a campaign.
 func (c *Client) GetCampaignVersion(ctx context.Context, params *GetCampaignVersionInput, optFns ...func(*Options)) (*GetCampaignVersionOutput, error) {
 	if params == nil {
 		params = &GetCampaignVersionInput{}

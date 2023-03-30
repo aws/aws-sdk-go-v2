@@ -28,12 +28,12 @@ func (c *Client) DescribeDBEngineVersions(ctx context.Context, params *DescribeD
 	return out, nil
 }
 
-// Represents the input to DescribeDBEngineVersions.
+// Represents the input to DescribeDBEngineVersions .
 type DescribeDBEngineVersionsInput struct {
 
 	// The name of a specific parameter group family to return details for.
 	// Constraints:
-	// - If provided, must match an existing DBParameterGroupFamily.
+	//     - If provided, must match an existing DBParameterGroupFamily .
 	DBParameterGroupFamily *string
 
 	// Indicates that only the default version of the specified engine or engine and
@@ -50,8 +50,8 @@ type DescribeDBEngineVersionsInput struct {
 	Filters []types.Filter
 
 	// If this parameter is specified and the requested engine supports the
-	// CharacterSetName parameter for CreateDBInstance, the response includes a list of
-	// supported character sets for each engine version.
+	// CharacterSetName parameter for CreateDBInstance, the response includes a list
+	// of supported character sets for each engine version.
 	ListSupportedCharacterSets *bool
 
 	// If this parameter is specified and the requested engine supports the TimeZone
@@ -61,19 +61,19 @@ type DescribeDBEngineVersionsInput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
-	// Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of DescribeDBEngineVersions.
+// Represents the output of DescribeDBEngineVersions .
 type DescribeDBEngineVersionsOutput struct {
 
 	// Detailed information about one or more engine versions.
@@ -81,7 +81,7 @@ type DescribeDBEngineVersionsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -164,14 +164,14 @@ var _ DescribeDBEngineVersionsAPIClient = (*Client)(nil)
 // DescribeDBEngineVersionsPaginatorOptions is the paginator options for
 // DescribeDBEngineVersions
 type DescribeDBEngineVersionsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
-	// Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	// Default: 100 Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

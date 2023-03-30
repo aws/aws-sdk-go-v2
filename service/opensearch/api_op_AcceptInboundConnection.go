@@ -13,8 +13,8 @@ import (
 
 // Allows the destination Amazon OpenSearch Service domain owner to accept an
 // inbound cross-cluster search connection request. For more information, see
-// Cross-cluster search for Amazon OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html).
+// Cross-cluster search for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html)
+// .
 func (c *Client) AcceptInboundConnection(ctx context.Context, params *AcceptInboundConnectionInput, optFns ...func(*Options)) (*AcceptInboundConnectionOutput, error) {
 	if params == nil {
 		params = &AcceptInboundConnectionInput{}
@@ -30,7 +30,7 @@ func (c *Client) AcceptInboundConnection(ctx context.Context, params *AcceptInbo
 	return out, nil
 }
 
-// Container for the parameters to the AcceptInboundConnection operation.
+// Container for the parameters to the AcceptInboundConnection  operation.
 type AcceptInboundConnectionInput struct {
 
 	// The ID of the inbound connection to accept.

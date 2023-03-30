@@ -39,19 +39,20 @@ type StartNotebookExecutionInput struct {
 	// This member is required.
 	ExecutionEngine *types.ExecutionEngineConfig
 
-	// The path and file name of the notebook file for this execution, relative to the
-	// path specified for the EMR Notebook. For example, if you specify a path of
-	// s3://MyBucket/MyNotebooks when you create an EMR Notebook for a notebook with an
-	// ID of e-ABCDEFGHIJK1234567890ABCD (the EditorID of this request), and you
-	// specify a RelativePath of my_notebook_executions/notebook_execution.ipynb, the
-	// location of the file for the notebook execution is
-	// s3://MyBucket/MyNotebooks/e-ABCDEFGHIJK1234567890ABCD/my_notebook_executions/notebook_execution.ipynb.
+	// The path and file name of the notebook file for this execution, relative to
+	// the path specified for the EMR Notebook. For example, if you specify a path of
+	// s3://MyBucket/MyNotebookswhen you create an EMR Notebook for a notebook with
+	// an ID of e-ABCDEFGHIJK1234567890ABCD  (the EditorID of this request), and you
+	// specify a RelativePath  of my_notebook_executions/notebook_execution.ipynb,
+	// the location of the file for the notebook execution is
+	// s3://MyBucket/MyNotebooks/e-ABCDEFGHIJK1234567890ABCD/my_notebook_executions/notebook_execution.ipynb
+	// .
 	//
 	// This member is required.
 	RelativePath *string
 
-	// The name or ARN of the IAM role that is used as the service role for Amazon EMR
-	// (the EMR role) for the notebook execution.
+	// The name or ARN of the IAM role that is used as the service role for Amazon
+	// EMR (the EMR role) for the notebook execution.
 	//
 	// This member is required.
 	ServiceRole *string
@@ -59,8 +60,8 @@ type StartNotebookExecutionInput struct {
 	// An optional name for the notebook execution.
 	NotebookExecutionName *string
 
-	// The unique identifier of the Amazon EC2 security group to associate with the EMR
-	// Notebook for this notebook execution.
+	// The unique identifier of the Amazon EC2 security group to associate with the
+	// EMR Notebook for this notebook execution.
 	NotebookInstanceSecurityGroupId *string
 
 	// Input parameters in JSON format passed to the EMR Notebook at runtime for

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the device event history, including device connection status, for up to 30
-// days.
+// Lists the device event history, including device connection status, for up to
+// 30 days.
 func (c *Client) ListDeviceEvents(ctx context.Context, params *ListDeviceEventsInput, optFns ...func(*Options)) (*ListDeviceEventsOutput, error) {
 	if params == nil {
 		params = &ListDeviceEventsInput{}
@@ -148,8 +148,8 @@ type ListDeviceEventsPaginatorOptions struct {
 	// included in the response so that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

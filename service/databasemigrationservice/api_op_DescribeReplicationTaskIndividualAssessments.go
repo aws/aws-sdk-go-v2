@@ -32,19 +32,19 @@ func (c *Client) DescribeReplicationTaskIndividualAssessments(ctx context.Contex
 
 type DescribeReplicationTaskIndividualAssessmentsInput struct {
 
-	// Filters applied to the individual assessments described in the form of key-value
-	// pairs. Valid filter names: replication-task-assessment-run-arn,
-	// replication-task-arn, status
+	// Filters applied to the individual assessments described in the form of
+	// key-value pairs. Valid filter names: replication-task-assessment-run-arn ,
+	// replication-task-arn , status
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -52,13 +52,13 @@ type DescribeReplicationTaskIndividualAssessmentsInput struct {
 
 type DescribeReplicationTaskIndividualAssessmentsOutput struct {
 
-	// A pagination token returned for you to pass to a subsequent request. If you pass
-	// this token as the Marker value in a subsequent request, the response includes
-	// only records beyond the marker, up to the value specified in the request by
-	// MaxRecords.
+	// A pagination token returned for you to pass to a subsequent request. If you
+	// pass this token as the Marker value in a subsequent request, the response
+	// includes only records beyond the marker, up to the value specified in the
+	// request by MaxRecords .
 	Marker *string
 
-	// One or more individual assessments as specified by Filters.
+	// One or more individual assessments as specified by Filters .
 	ReplicationTaskIndividualAssessments []types.ReplicationTaskIndividualAssessment
 
 	// Metadata pertaining to the operation's result.
@@ -141,13 +141,13 @@ var _ DescribeReplicationTaskIndividualAssessmentsAPIClient = (*Client)(nil)
 // DescribeReplicationTaskIndividualAssessmentsPaginatorOptions is the paginator
 // options for DescribeReplicationTaskIndividualAssessments
 type DescribeReplicationTaskIndividualAssessmentsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

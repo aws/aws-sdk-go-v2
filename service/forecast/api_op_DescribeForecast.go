@@ -12,16 +12,14 @@ import (
 	"time"
 )
 
-// Describes a forecast created using the CreateForecast operation. In addition to
-// listing the properties provided in the CreateForecast request, this operation
-// lists the following properties:
-// - DatasetGroupArn - The dataset group that
-// provided the training data.
-// - CreationTime
-// - LastModificationTime
-// - Status
-// -
-// Message - If an error occurred, information about the error.
+// Describes a forecast created using the CreateForecast operation. In addition
+// to listing the properties provided in the CreateForecast request, this
+// operation lists the following properties:
+//   - DatasetGroupArn - The dataset group that provided the training data.
+//   - CreationTime
+//   - LastModificationTime
+//   - Status
+//   - Message - If an error occurred, information about the error.
 func (c *Client) DescribeForecast(ctx context.Context, params *DescribeForecastInput, optFns ...func(*Options)) (*DescribeForecastOutput, error) {
 	if params == nil {
 		params = &DescribeForecastInput{}
@@ -52,7 +50,8 @@ type DescribeForecastOutput struct {
 	// When the forecast creation task was created.
 	CreationTime *time.Time
 
-	// The ARN of the dataset group that provided the data used to train the predictor.
+	// The ARN of the dataset group that provided the data used to train the
+	// predictor.
 	DatasetGroupArn *string
 
 	// The estimated time remaining in minutes for the forecast job to complete.
@@ -67,15 +66,13 @@ type DescribeForecastOutput struct {
 	// The quantiles at which probabilistic forecasts were generated.
 	ForecastTypes []string
 
-	// The last time the resource was modified. The timestamp depends on the status of
-	// the job:
-	// - CREATE_PENDING - The CreationTime.
-	// - CREATE_IN_PROGRESS - The current
-	// timestamp.
-	// - CREATE_STOPPING - The current timestamp.
-	// - CREATE_STOPPED - When
-	// the job stopped.
-	// - ACTIVE or CREATE_FAILED - When the job finished or failed.
+	// The last time the resource was modified. The timestamp depends on the status
+	// of the job:
+	//     - CREATE_PENDING - The CreationTime .
+	//     - CREATE_IN_PROGRESS - The current timestamp.
+	//     - CREATE_STOPPING - The current timestamp.
+	//     - CREATE_STOPPED - When the job stopped.
+	//     - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
@@ -85,15 +82,12 @@ type DescribeForecastOutput struct {
 	PredictorArn *string
 
 	// The status of the forecast. States include:
-	// - ACTIVE
-	// - CREATE_PENDING,
-	// CREATE_IN_PROGRESS, CREATE_FAILED
-	// - CREATE_STOPPING, CREATE_STOPPED
-	// -
-	// DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
-	//
-	// The Status of the forecast
-	// must be ACTIVE before you can query or export the forecast.
+	//     - ACTIVE
+	//     - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//     - CREATE_STOPPING , CREATE_STOPPED
+	//     - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//  The Status  of the forecast must be ACTIVE before you can query or export the
+	// forecast.
 	Status *string
 
 	// The time series to include in the forecast.

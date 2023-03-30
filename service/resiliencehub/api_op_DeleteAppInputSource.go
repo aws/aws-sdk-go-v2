@@ -31,29 +31,27 @@ func (c *Client) DeleteAppInputSource(ctx context.Context, params *DeleteAppInpu
 
 type DeleteAppInputSourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The
+	// format for this ARN is: arn: partition :resiliencehub: region : account :app/
+	// app-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
 
-	// Used for an idempotency token. A client token is a unique, case-sensitive string
-	// of up to 64 ASCII characters. You should not reuse the same client token for
-	// other API requests.
+	// Used for an idempotency token. A client token is a unique, case-sensitive
+	// string of up to 64 ASCII characters. You should not reuse the same client token
+	// for other API requests.
 	ClientToken *string
 
-	// The namespace on your Amazon Elastic Kubernetes Service cluster that you want to
-	// delete from the Resilience Hub application.
+	// The namespace on your Amazon Elastic Kubernetes Service cluster that you want
+	// to delete from the Resilience Hub application.
 	EksSourceClusterNamespace *types.EksSourceClusterNamespace
 
-	// The Amazon Resource Name (ARN) of the imported resource you want to remove from
-	// the Resilience Hub application. For more information about ARNs, see  Amazon
-	// Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the imported resource you want to remove
+	// from the Resilience Hub application. For more information about ARNs, see
+	// Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	SourceArn *string
 
 	// The imported Terraform s3 state ﬁle you want to remove from the Resilience Hub
@@ -65,11 +63,10 @@ type DeleteAppInputSourceInput struct {
 
 type DeleteAppInputSourceOutput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The
+	// format for this ARN is: arn: partition :resiliencehub: region : account :app/
+	// app-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	AppArn *string
 
 	// The name of the input source from where the application resource is imported

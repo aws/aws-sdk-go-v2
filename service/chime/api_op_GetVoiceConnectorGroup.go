@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves details for the specified Amazon Chime Voice Connector group, such as
-// timestamps,name, and associated VoiceConnectorItems.
+// Retrieves details for the specified Amazon Chime Voice Connector group, such
+// as timestamps,name, and associated VoiceConnectorItems .
 func (c *Client) GetVoiceConnectorGroup(ctx context.Context, params *GetVoiceConnectorGroupInput, optFns ...func(*Options)) (*GetVoiceConnectorGroupOutput, error) {
 	if params == nil {
 		params = &GetVoiceConnectorGroupInput{}

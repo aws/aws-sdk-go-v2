@@ -13,7 +13,7 @@ import (
 
 // Creates a pipeline. In the pipeline structure, you must include either
 // artifactStore or artifactStores in your pipeline, but you cannot use both. If
-// you create a cross-region action in your pipeline, you must use artifactStores.
+// you create a cross-region action in your pipeline, you must use artifactStores .
 func (c *Client) CreatePipeline(ctx context.Context, params *CreatePipelineInput, optFns ...func(*Options)) (*CreatePipelineOutput, error) {
 	if params == nil {
 		params = &CreatePipelineInput{}
@@ -29,7 +29,7 @@ func (c *Client) CreatePipeline(ctx context.Context, params *CreatePipelineInput
 	return out, nil
 }
 
-// Represents the input of a CreatePipeline action.
+// Represents the input of a CreatePipeline  action.
 type CreatePipelineInput struct {
 
 	// Represents the structure of actions and stages to be performed in the pipeline.
@@ -43,7 +43,7 @@ type CreatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a CreatePipeline action.
+// Represents the output of a CreatePipeline  action.
 type CreatePipelineOutput struct {
 
 	// Represents the structure of actions and stages to be performed in the pipeline.

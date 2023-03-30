@@ -11,8 +11,7 @@ import (
 )
 
 // Starts an on-demand Device Defender audit. Requires permission to access the
-// StartOnDemandAuditTask
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// StartOnDemandAuditTask (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) StartOnDemandAuditTask(ctx context.Context, params *StartOnDemandAuditTaskInput, optFns ...func(*Options)) (*StartOnDemandAuditTaskOutput, error) {
 	if params == nil {
@@ -33,9 +32,9 @@ type StartOnDemandAuditTaskInput struct {
 
 	// Which checks are performed during the audit. The checks you specify must be
 	// enabled for your account or an exception occurs. Use
-	// DescribeAccountAuditConfiguration to see the list of all checks, including those
-	// that are enabled or UpdateAccountAuditConfiguration to select which checks are
-	// enabled.
+	// DescribeAccountAuditConfigurationto see the list of all checks, including
+	// those that are enabled or UpdateAccountAuditConfiguration to select which
+	// checks are enabled.
 	//
 	// This member is required.
 	TargetCheckNames []string

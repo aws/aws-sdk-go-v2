@@ -16,12 +16,11 @@ import (
 // applications. For more information about version 2, see Amazon Kinesis Data
 // Analytics API V2 Documentation. Returns information about a specific Amazon
 // Kinesis Analytics application. If you want to retrieve a list of all
-// applications in your account, use the ListApplications
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_ListApplications.html)
+// applications in your account, use the ListApplications (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_ListApplications.html)
 // operation. This operation requires permissions to perform the
-// kinesisanalytics:DescribeApplication action. You can use DescribeApplication to
-// get the current application versionId, which you need to call other operations
-// such as Update.
+// kinesisanalytics:DescribeApplication action. You can use DescribeApplication
+// to get the current application versionId, which you need to call other
+// operations such as Update .
 func (c *Client) DescribeApplication(ctx context.Context, params *DescribeApplicationInput, optFns ...func(*Options)) (*DescribeApplicationOutput, error) {
 	if params == nil {
 		params = &DescribeApplicationInput{}

@@ -13,9 +13,8 @@ import (
 )
 
 // Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to
-// describe images. For more information, see Labeling images
-// (https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-labeling-images.html).
-// Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to
+// describe images. For more information, see Labeling images (https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-labeling-images.html)
+// . Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to
 // describe images. For more information, see Labeling images in the Amazon
 // Rekognition Custom Labels Developer Guide.
 func (c *Client) ListDatasetLabels(ctx context.Context, params *ListDatasetLabelsInput, optFns ...func(*Options)) (*ListDatasetLabelsOutput, error) {
@@ -140,15 +139,16 @@ type ListDatasetLabelsAPIClient interface {
 
 var _ ListDatasetLabelsAPIClient = (*Client)(nil)
 
-// ListDatasetLabelsPaginatorOptions is the paginator options for ListDatasetLabels
+// ListDatasetLabelsPaginatorOptions is the paginator options for
+// ListDatasetLabels
 type ListDatasetLabelsPaginatorOptions struct {
 	// The maximum number of results to return per paginated call. The largest value
 	// you can specify is 100. If you specify a value greater than 100, a
 	// ValidationException error occurs. The default value is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

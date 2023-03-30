@@ -113,8 +113,8 @@ func (e *ConcurrentOperationException) ErrorCode() string {
 }
 func (e *ConcurrentOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource handler has returned that the downstream service generated an error
-// that doesn't map to any other handler error code.
+// The resource handler has returned that the downstream service generated an
+// error that doesn't map to any other handler error code.
 type GeneralServiceException struct {
 	Message *string
 
@@ -140,8 +140,8 @@ func (e *GeneralServiceException) ErrorCode() string {
 }
 func (e *GeneralServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource handler has failed without a returning a more specific error code.
-// This can include timeouts.
+// The resource handler has failed without a returning a more specific error
+// code. This can include timeouts.
 type HandlerFailureException struct {
 	Message *string
 
@@ -194,8 +194,8 @@ func (e *HandlerInternalFailureException) ErrorCode() string {
 }
 func (e *HandlerInternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The resource handler has returned that the credentials provided by the user are
-// invalid.
+// The resource handler has returned that the credentials provided by the user
+// are invalid.
 type InvalidCredentialsException struct {
 	Message *string
 
@@ -221,8 +221,8 @@ func (e *InvalidCredentialsException) ErrorCode() string {
 }
 func (e *InvalidCredentialsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource handler has returned that invalid input from the user has generated
-// a generic exception.
+// The resource handler has returned that invalid input from the user has
+// generated a generic exception.
 type InvalidRequestException struct {
 	Message *string
 
@@ -248,8 +248,8 @@ func (e *InvalidRequestException) ErrorCode() string {
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource handler has returned that the request couldn't be completed due to
-// networking issues, such as a failure to receive a response from the server.
+// The resource handler has returned that the request couldn't be completed due
+// to networking issues, such as a failure to receive a response from the server.
 type NetworkFailureException struct {
 	Message *string
 
@@ -438,7 +438,7 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource handler has returned that the downstream service returned an
-// internal error, typically with a 5XX HTTP status code.
+// internal error, typically with a 5XX HTTP  status code.
 type ServiceInternalErrorException struct {
 	Message *string
 

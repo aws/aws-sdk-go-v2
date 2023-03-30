@@ -15,8 +15,7 @@ import (
 // Lists the CA certificates registered for your Amazon Web Services account. The
 // results are paginated with a default page size of 25. You can use the returned
 // marker to retrieve additional results. Requires permission to access the
-// ListCACertificates
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// ListCACertificates (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListCACertificates(ctx context.Context, params *ListCACertificatesInput, optFns ...func(*Options)) (*ListCACertificatesOutput, error) {
 	if params == nil {
@@ -140,8 +139,8 @@ type ListCACertificatesPaginatorOptions struct {
 	// The result page size.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

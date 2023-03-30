@@ -12,12 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a service mesh. A service mesh is a logical boundary for network traffic
-// between services that are represented by resources within the mesh. After you
-// create your service mesh, you can create virtual services, virtual nodes,
-// virtual routers, and routes to distribute traffic between the applications in
-// your mesh. For more information about service meshes, see Service meshes
-// (https://docs.aws.amazon.com/app-mesh/latest/userguide/meshes.html).
+// Creates a service mesh. A service mesh is a logical boundary for network
+// traffic between services that are represented by resources within the mesh.
+// After you create your service mesh, you can create virtual services, virtual
+// nodes, virtual routers, and routes to distribute traffic between the
+// applications in your mesh. For more information about service meshes, see
+// Service meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/meshes.html)
+// .
 func (c *Client) CreateMesh(ctx context.Context, params *CreateMeshInput, optFns ...func(*Options)) (*CreateMeshOutput, error) {
 	if params == nil {
 		params = &CreateMeshInput{}
@@ -40,8 +41,8 @@ type CreateMeshInput struct {
 	// This member is required.
 	MeshName *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string
 
 	// The service mesh specification to apply.

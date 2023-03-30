@@ -17,11 +17,11 @@ import (
 // all cluster subnet groups that are defined in your Amazon Web Services account.
 // If you specify both tag keys and tag values in the same request, Amazon Redshift
 // returns all subnet groups that match any combination of the specified keys and
-// values. For example, if you have owner and environment for tag keys, and admin
-// and test for tag values, all subnet groups that have any combination of those
-// values are returned. If both tag keys and values are omitted from the request,
-// subnet groups are returned regardless of whether they have tag keys or values
-// associated with them.
+// values. For example, if you have owner  and environment  for tag keys, and
+// admin and test for tag values, all subnet groups that have any combination of
+// those values are returned. If both tag keys and values are omitted from the
+// request, subnet groups are returned regardless of whether they have tag keys or
+// values associated with them.
 func (c *Client) DescribeClusterSubnetGroups(ctx context.Context, params *DescribeClusterSubnetGroupsInput, optFns ...func(*Options)) (*DescribeClusterSubnetGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeClusterSubnetGroupsInput{}
@@ -44,22 +44,22 @@ type DescribeClusterSubnetGroupsInput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeClusterSubnetGroups request
-	// exceed the value specified in MaxRecords, Amazon Web Services returns a value in
-	// the Marker field of the response. You can retrieve the next set of response
+	// exceed the value specified in MaxRecords, Amazon Web Services returns a value
+	// in the Marker field of the response. You can retrieve the next set of response
 	// records by providing the returned marker value in the Marker parameter and
 	// retrying the request.
 	Marker *string
 
-	// The maximum number of response records to return in each call. If the number of
-	// remaining response records exceeds the specified MaxRecords value, a value is
-	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// The maximum number of response records to return in each call. If the number
+	// of remaining response records exceeds the specified MaxRecords value, a value
+	// is returned in a marker field of the response. You can retrieve the next set
+	// of records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// A tag key or keys for which you want to return all matching cluster subnet
 	// groups that are associated with the specified key or keys. For example, suppose
-	// that you have subnet groups that are tagged with keys called owner and
+	// that you have subnet groups that are tagged with keys called owner  and
 	// environment. If you specify both of these tag keys in the request, Amazon
 	// Redshift returns a response with the subnet groups that have either or both of
 	// these tag keys associated with them.
@@ -67,19 +67,19 @@ type DescribeClusterSubnetGroupsInput struct {
 
 	// A tag value or values for which you want to return all matching cluster subnet
 	// groups that are associated with the specified tag value or values. For example,
-	// suppose that you have subnet groups that are tagged with values called admin and
-	// test. If you specify both of these tag values in the request, Amazon Redshift
-	// returns a response with the subnet groups that have either or both of these tag
-	// values associated with them.
+	// suppose that you have subnet groups that are tagged with values called admin
+	// and test. If you specify both of these tag values in the request, Amazon
+	// Redshift returns a response with the subnet groups that have either or both of
+	// these tag values associated with them.
 	TagValues []string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the output from the DescribeClusterSubnetGroups action.
+// Contains the output from the DescribeClusterSubnetGroups  action.
 type DescribeClusterSubnetGroupsOutput struct {
 
-	// A list of ClusterSubnetGroup instances.
+	// A list of ClusterSubnetGroup  instances.
 	ClusterSubnetGroups []types.ClusterSubnetGroup
 
 	// A value that indicates the starting point for the next set of response records
@@ -166,15 +166,15 @@ var _ DescribeClusterSubnetGroupsAPIClient = (*Client)(nil)
 // DescribeClusterSubnetGroupsPaginatorOptions is the paginator options for
 // DescribeClusterSubnetGroups
 type DescribeClusterSubnetGroupsPaginatorOptions struct {
-	// The maximum number of response records to return in each call. If the number of
-	// remaining response records exceeds the specified MaxRecords value, a value is
-	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// The maximum number of response records to return in each call. If the number
+	// of remaining response records exceeds the specified MaxRecords value, a value
+	// is returned in a marker field of the response. You can retrieve the next set
+	// of records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

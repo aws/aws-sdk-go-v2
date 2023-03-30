@@ -14,12 +14,12 @@ import (
 
 // Retrieves details about a replay. Use DescribeReplay to determine the progress
 // of a running replay. A replay processes events to replay based on the time in
-// the event, and replays them using 1 minute intervals. If you use StartReplay and
-// specify an EventStartTime and an EventEndTime that covers a 20 minute time
-// range, the events are replayed from the first minute of that 20 minute range
-// first. Then the events from the second minute are replayed. You can use
+// the event, and replays them using 1 minute intervals. If you use StartReplay
+// and specify an EventStartTime  and an EventEndTime that covers a 20 minute
+// time range, the events are replayed from the first minute of that 20 minute
+// range first. Then the events from the second minute are replayed. You can use
 // DescribeReplay to determine the progress of a replay. The value returned for
-// EventLastReplayedTime indicates the time within the specified time range
+// EventLastReplayedTimeindicates the time within the specified time range
 // associated with the last event replayed.
 func (c *Client) DescribeReplay(ctx context.Context, params *DescribeReplayInput, optFns ...func(*Options)) (*DescribeReplayOutput, error) {
 	if params == nil {
@@ -51,7 +51,7 @@ type DescribeReplayOutput struct {
 	// The description of the replay.
 	Description *string
 
-	// A ReplayDestination object that contains details about the replay.
+	// A ReplayDestination  object that contains details about the replay.
 	Destination *types.ReplayDestination
 
 	// The time stamp for the last event that was replayed from the archive.

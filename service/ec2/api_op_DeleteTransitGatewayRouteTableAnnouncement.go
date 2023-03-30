@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Advertises to the transit gateway that a transit gateway route table is deleted.
+// Advertises to the transit gateway that a transit gateway route table is
+// deleted.
 func (c *Client) DeleteTransitGatewayRouteTableAnnouncement(ctx context.Context, params *DeleteTransitGatewayRouteTableAnnouncementInput, optFns ...func(*Options)) (*DeleteTransitGatewayRouteTableAnnouncementOutput, error) {
 	if params == nil {
 		params = &DeleteTransitGatewayRouteTableAnnouncementInput{}
@@ -36,8 +37,8 @@ type DeleteTransitGatewayRouteTableAnnouncementInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

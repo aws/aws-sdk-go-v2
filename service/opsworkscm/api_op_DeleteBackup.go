@@ -12,9 +12,9 @@ import (
 
 // Deletes a backup. You can delete both manual and automated backups. This
 // operation is asynchronous. An InvalidStateException is thrown when a backup
-// deletion is already in progress. A ResourceNotFoundException is thrown when the
-// backup does not exist. A ValidationException is thrown when parameters of the
-// request are not valid.
+// deletion is already in progress. A ResourceNotFoundException is thrown when
+// the backup does not exist. A ValidationException is thrown when parameters of
+// the request are not valid.
 func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, optFns ...func(*Options)) (*DeleteBackupOutput, error) {
 	if params == nil {
 		params = &DeleteBackupInput{}
@@ -32,8 +32,8 @@ func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, op
 
 type DeleteBackupInput struct {
 
-	// The ID of the backup to delete. Run the DescribeBackups command to get a list of
-	// backup IDs. Backup IDs are in the format ServerName-yyyyMMddHHmmssSSS.
+	// The ID of the backup to delete. Run the DescribeBackups command to get a list
+	// of backup IDs. Backup IDs are in the format ServerName-yyyyMMddHHmmssSSS .
 	//
 	// This member is required.
 	BackupId *string

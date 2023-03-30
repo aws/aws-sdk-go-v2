@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Remove tags from a MediaConvert queue, preset, or job template. For information
-// about tagging, see the User Guide at
+// Remove tags from a MediaConvert queue, preset, or job template. For
+// information about tagging, see the User Guide at
 // https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {

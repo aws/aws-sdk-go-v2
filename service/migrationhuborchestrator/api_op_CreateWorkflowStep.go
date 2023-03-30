@@ -34,8 +34,8 @@ type CreateWorkflowStepInput struct {
 	// This member is required.
 	Name *string
 
-	// The action type of the step. You must run and update the status of a manual step
-	// for the workflow to continue after the completion of the step.
+	// The action type of the step. You must run and update the status of a manual
+	// step for the workflow to continue after the completion of the step.
 	//
 	// This member is required.
 	StepActionType types.StepActionType

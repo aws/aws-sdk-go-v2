@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a FirewallRuleGroup with a VPC, to provide DNS filtering for the VPC.
+// Associates a FirewallRuleGroup with a VPC, to provide DNS filtering for the
+// VPC.
 func (c *Client) AssociateFirewallRuleGroup(ctx context.Context, params *AssociateFirewallRuleGroupInput, optFns ...func(*Options)) (*AssociateFirewallRuleGroupOutput, error) {
 	if params == nil {
 		params = &AssociateFirewallRuleGroupInput{}
@@ -31,8 +32,8 @@ func (c *Client) AssociateFirewallRuleGroup(ctx context.Context, params *Associa
 type AssociateFirewallRuleGroupInput struct {
 
 	// A unique string that identifies the request and that allows failed requests to
-	// be retried without the risk of running the operation twice. CreatorRequestId can
-	// be any unique string, for example, a date/time stamp.
+	// be retried without the risk of running the operation twice. CreatorRequestId
+	// can be any unique string, for example, a date/time stamp.
 	//
 	// This member is required.
 	CreatorRequestId *string
@@ -54,23 +55,25 @@ type AssociateFirewallRuleGroupInput struct {
 	// single VPC. To make it easier to insert rule groups later, leave space between
 	// the numbers, for example, use 101, 200, and so on. You can change the priority
 	// setting for a rule group association after you create it. The allowed values for
+	//
 	// Priority are between 100 and 9900.
 	//
 	// This member is required.
 	Priority *int32
 
-	// The unique identifier of the VPC that you want to associate with the rule group.
+	// The unique identifier of the VPC that you want to associate with the rule
+	// group.
 	//
 	// This member is required.
 	VpcId *string
 
 	// If enabled, this setting disallows modification or removal of the association,
 	// to help prevent against accidentally altering DNS firewall protections. When you
-	// create the association, the default setting is DISABLED.
+	// create the association, the default setting is DISABLED .
 	MutationProtection types.MutationProtectionStatus
 
-	// A list of the tag keys and values that you want to associate with the rule group
-	// association.
+	// A list of the tag keys and values that you want to associate with the rule
+	// group association.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

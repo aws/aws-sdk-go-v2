@@ -11,29 +11,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a collection of fleet resources in an Amazon Web Services Region. You
-// can call this operation to get fleets in a previously selected default Region
-// (see
-// https://docs.aws.amazon.com/credref/latest/refdocs/setting-global-region.html
-// (https://docs.aws.amazon.com/credref/latest/refdocs/setting-global-region.html)or
-// specify a Region in your request. You can filter the result set to find only
+// Retrieves a collection of fleet resources in an Amazon Web Services Region.
+// You can call this operation to get fleets in a previously selected default
+// Region (see
+// https://docs.aws.amazon.com/credref/latest/refdocs/setting-global-region.html (https://docs.aws.amazon.com/credref/latest/refdocs/setting-global-region.html)
+// or specify a Region in your request. You can filter the result set to find only
 // those fleets that are deployed with a specific build or script. For fleets that
 // have multiple locations, this operation retrieves fleets based on their home
 // Region only. This operation can be used in the following ways:
-// - To get a list
-// of all fleets in a Region, don't provide a build or script identifier.
-// - To get
-// a list of all fleets where a specific custom game build is deployed, provide the
-// build ID.
-// - To get a list of all Realtime Servers fleets with a specific
-// configuration script, provide the script ID.
+//   - To get a list of all fleets in a Region, don't provide a build or script identifier.
+//   - To get a list of all fleets where a specific custom game build is deployed, provide the build ID.
+//   - To get a list of all Realtime Servers fleets with a specific configuration script, provide the script ID.
 //
-// Use the pagination parameters to
-// retrieve results as a set of sequential pages. If successful, a list of fleet
-// IDs that match the request parameters is returned. A NextToken value is also
-// returned if there are more result pages to retrieve. Fleet resources are not
-// listed in a particular order. Learn more Setting up GameLift fleets
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// Use the pagination parameters to retrieve results as a set of sequential pages.
+// If successful, a list of fleet IDs that match the request parameters is
+// returned. A NextToken value is also returned if there are more result pages to
+// retrieve. Fleet resources are not listed in a particular order. Learn more
+// Setting up GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns ...func(*Options)) (*ListFleetsOutput, error) {
 	if params == nil {
 		params = &ListFleetsInput{}
@@ -60,9 +54,9 @@ type ListFleetsInput struct {
 	// get results as a set of sequential pages.
 	Limit *int32
 
-	// A token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this operation. To start at the
-	// beginning of the result set, do not specify a value.
+	// A token that indicates the start of the next sequential page of results. Use
+	// the token that is returned with a previous call to this operation. To start at
+	// the beginning of the result set, do not specify a value.
 	NextToken *string
 
 	// A unique identifier for the Realtime script to request fleets for. Use this
@@ -162,8 +156,8 @@ type ListFleetsPaginatorOptions struct {
 	// get results as a set of sequential pages.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

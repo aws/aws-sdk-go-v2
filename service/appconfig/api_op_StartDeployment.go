@@ -79,7 +79,7 @@ type StartDeploymentOutput struct {
 
 	// A list of extensions that were processed as part of the deployment. The
 	// extensions that were previously associated to the configuration profile,
-	// environment, or the application when StartDeployment was called.
+	// environment, or the application when StartDeployment  was called.
 	AppliedExtensions []types.AppliedExtension
 
 	// The time the deployment completed.
@@ -112,8 +112,8 @@ type StartDeploymentOutput struct {
 	// The ID of the environment that was deployed.
 	EnvironmentId *string
 
-	// A list containing all events related to a deployment. The most recent events are
-	// displayed first.
+	// A list containing all events related to a deployment. The most recent events
+	// are displayed first.
 	EventLog []types.DeploymentEvent
 
 	// The amount of time that AppConfig monitored for alarms before considering the

@@ -32,8 +32,8 @@ const (
 	MeetingFeatureStatusUnavailable MeetingFeatureStatus = "UNAVAILABLE"
 )
 
-// Values returns all known values for MeetingFeatureStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for MeetingFeatureStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (MeetingFeatureStatus) Values() []MeetingFeatureStatus {
 	return []MeetingFeatureStatus{
@@ -121,10 +121,10 @@ const (
 	TranscribeMedicalContentIdentificationTypePhi TranscribeMedicalContentIdentificationType = "PHI"
 )
 
-// Values returns all known values for TranscribeMedicalContentIdentificationType.
-// Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for
+// TranscribeMedicalContentIdentificationType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (TranscribeMedicalContentIdentificationType) Values() []TranscribeMedicalContentIdentificationType {
 	return []TranscribeMedicalContentIdentificationType{
 		"PHI",
@@ -161,9 +161,9 @@ const (
 	TranscribeMedicalRegionAuto         TranscribeMedicalRegion = "auto"
 )
 
-// Values returns all known values for TranscribeMedicalRegion. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TranscribeMedicalRegion. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TranscribeMedicalRegion) Values() []TranscribeMedicalRegion {
 	return []TranscribeMedicalRegion{
 		"us-east-1",
@@ -210,8 +210,8 @@ const (
 	TranscribeMedicalTypeDictation    TranscribeMedicalType = "DICTATION"
 )
 
-// Values returns all known values for TranscribeMedicalType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TranscribeMedicalType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TranscribeMedicalType) Values() []TranscribeMedicalType {
 	return []TranscribeMedicalType{
@@ -229,8 +229,8 @@ const (
 	TranscribePartialResultsStabilityHigh   TranscribePartialResultsStability = "high"
 )
 
-// Values returns all known values for TranscribePartialResultsStability. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for TranscribePartialResultsStability. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (TranscribePartialResultsStability) Values() []TranscribePartialResultsStability {
@@ -290,8 +290,8 @@ const (
 	TranscribeVocabularyFilterMethodTag    TranscribeVocabularyFilterMethod = "tag"
 )
 
-// Values returns all known values for TranscribeVocabularyFilterMethod. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for TranscribeVocabularyFilterMethod. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (TranscribeVocabularyFilterMethod) Values() []TranscribeVocabularyFilterMethod {

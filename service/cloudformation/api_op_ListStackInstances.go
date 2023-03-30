@@ -41,16 +41,10 @@ type ListStackInstancesInput struct {
 
 	// [Service-managed permissions] Specifies whether you are acting as an account
 	// administrator in the organization's management account or as a delegated
-	// administrator in a member account. By default, SELF is specified. Use SELF for
-	// stack sets with self-managed permissions.
-	// - If you are signed in to the
-	// management account, specify SELF.
-	// - If you are signed in to a delegated
-	// administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account
-	// must be registered as a delegated administrator in the management account. For
-	// more information, see Register a delegated administrator
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
-	// in the CloudFormation User Guide.
+	// administrator in a member account. By default, SELF  is specified. Use SELF
+	// for stack sets with self-managed permissions.
+	//     - If you are signed in to the management account, specify SELF .
+	//     - If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN . Your Amazon Web Services account must be registered as a delegated administrator in the management account. For more information, see Register a delegated administrator (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html) in the CloudFormation User Guide.
 	CallAs types.CallAs
 
 	// The filter to apply to stack instances
@@ -58,15 +52,15 @@ type ListStackInstancesInput struct {
 
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken
-	// value that you can assign to the NextToken request parameter to get the next set
-	// of results.
+	// value that you can assign to the NextToken request parameter to get the next
+	// set of results.
 	MaxResults *int32
 
-	// If the previous request didn't return all the remaining results, the response's
-	// NextToken parameter value is set to a token. To retrieve the next set of
-	// results, call ListStackInstances again and assign that token to the request
-	// object's NextToken parameter. If there are no remaining results, the previous
-	// response object's NextToken parameter is set to null.
+	// If the previous request didn't return all the remaining results, the
+	// response's NextToken parameter value is set to a token. To retrieve the next
+	// set of results, call ListStackInstances again and assign that token to the
+	// request object's NextToken parameter. If there are no remaining results, the
+	// previous response object's NextToken  parameter is set to null .
 	NextToken *string
 
 	// The name of the Amazon Web Services account that you want to list stack
@@ -84,7 +78,7 @@ type ListStackInstancesOutput struct {
 	// If the request doesn't return all the remaining results, NextToken is set to a
 	// token. To retrieve the next set of results, call ListStackInstances again and
 	// assign that token to the request object's NextToken parameter. If the request
-	// returns all results, NextToken is set to null.
+	// returns all results, NextToken  is set to null .
 	NextToken *string
 
 	// A list of StackInstanceSummary structures that contain information about the
@@ -173,12 +167,12 @@ var _ ListStackInstancesAPIClient = (*Client)(nil)
 type ListStackInstancesPaginatorOptions struct {
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken
-	// value that you can assign to the NextToken request parameter to get the next set
-	// of results.
+	// value that you can assign to the NextToken request parameter to get the next
+	// set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The following example serializes a payload that uses an XML name on the member,
-// changing the wrapper name.
+// The following example serializes a payload that uses an XML name on the
+// member, changing the wrapper name.
 func (c *Client) HttpPayloadWithMemberXmlName(ctx context.Context, params *HttpPayloadWithMemberXmlNameInput, optFns ...func(*Options)) (*HttpPayloadWithMemberXmlNameOutput, error) {
 	if params == nil {
 		params = &HttpPayloadWithMemberXmlNameInput{}

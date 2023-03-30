@@ -52,11 +52,11 @@ type UpdateDocumentInput struct {
 	// supports JSON and YAML documents. JSON is the default format.
 	DocumentFormat types.DocumentFormat
 
-	// The version of the document that you want to update. Currently, Systems Manager
-	// supports updating only the latest version of the document. You can specify the
-	// version number of the latest version or use the $LATEST variable. If you change
-	// a document version for a State Manager association, Systems Manager immediately
-	// runs the association unless you previously specifed the
+	// The version of the document that you want to update. Currently, Systems
+	// Manager supports updating only the latest version of the document. You can
+	// specify the version number of the latest version or use the $LATEST variable.
+	// If you change a document version for a State Manager association, Systems
+	// Manager immediately runs the association unless you previously specifed the
 	// apply-only-at-cron-interval parameter.
 	DocumentVersion *string
 

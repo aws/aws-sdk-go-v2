@@ -45,10 +45,10 @@ type ListCandidatesForAutoMLJobInput struct {
 	// next request to receive the next set of results.
 	NextToken *string
 
-	// The parameter by which to sort the results. The default is Descending.
+	// The parameter by which to sort the results. The default is Descending .
 	SortBy types.CandidateSortBy
 
-	// The sort order for the results. The default is Ascending.
+	// The sort order for the results. The default is Ascending .
 	SortOrder types.AutoMLSortOrder
 
 	// List the candidates for the job and filter by status.
@@ -59,7 +59,7 @@ type ListCandidatesForAutoMLJobInput struct {
 
 type ListCandidatesForAutoMLJobOutput struct {
 
-	// Summaries about the AutoMLCandidates.
+	// Summaries about the AutoMLCandidates .
 	//
 	// This member is required.
 	Candidates []types.AutoMLCandidate
@@ -151,8 +151,8 @@ type ListCandidatesForAutoMLJobPaginatorOptions struct {
 	// List the job's candidates up to a specified limit.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

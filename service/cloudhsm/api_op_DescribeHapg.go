@@ -12,16 +12,13 @@ import (
 )
 
 // This is documentation for AWS CloudHSM Classic. For more information, see AWS
-// CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/), the AWS
-// CloudHSM Classic User Guide
-// (https://docs.aws.amazon.com/cloudhsm/classic/userguide/), and the AWS CloudHSM
-// Classic API Reference
-// (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/). For information
-// about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide
-// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/), and the AWS CloudHSM
-// API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
-// Retrieves information about a high-availability partition group.
+// CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/) , the AWS
+// CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/)
+// , and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/)
+// . For information about the current version of AWS CloudHSM, see AWS CloudHSM (http://aws.amazon.com/cloudhsm/)
+// , the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/)
+// , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
+// . Retrieves information about a high-availability partition group.
 func (c *Client) DescribeHapg(ctx context.Context, params *DescribeHapgInput, optFns ...func(*Options)) (*DescribeHapgOutput, error) {
 	if params == nil {
 		params = &DescribeHapgInput{}
@@ -37,7 +34,7 @@ func (c *Client) DescribeHapg(ctx context.Context, params *DescribeHapgInput, op
 	return out, nil
 }
 
-// Contains the inputs for the DescribeHapg action.
+// Contains the inputs for the DescribeHapg  action.
 type DescribeHapgInput struct {
 
 	// The ARN of the high-availability partition group to describe.
@@ -48,7 +45,7 @@ type DescribeHapgInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the output of the DescribeHapg action.
+// Contains the output of the DescribeHapg  action.
 type DescribeHapgOutput struct {
 
 	// The ARN of the high-availability partition group.

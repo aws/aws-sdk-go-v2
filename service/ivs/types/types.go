@@ -8,8 +8,8 @@ import (
 )
 
 // Object specifying a stream’s audio configuration, as set up by the broadcaster
-// (usually in an encoder). This is part of the IngestConfiguration object and used
-// for monitoring stream health.
+// (usually in an encoder). This is part of the IngestConfiguration object and
+// used for monitoring stream health.
 type AudioConfiguration struct {
 
 	// Number of audio channels.
@@ -50,17 +50,17 @@ type Channel struct {
 	Arn *string
 
 	// Whether the channel is private (enabled for playback authorization). Default:
-	// false.
+	// false .
 	Authorized bool
 
 	// Channel ingest endpoint, part of the definition of an ingest server, used when
 	// you set up streaming software.
 	IngestEndpoint *string
 
-	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full
-	// HD. Use LOW for near-real-time interaction with viewers. Default: LOW. (Note: In
-	// the Amazon IVS console, LOW and NORMAL correspond to Ultra-low and Standard,
-	// respectively.)
+	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to
+	// Full HD. Use LOW  for near-real-time interaction with viewers. Default: LOW.
+	// (Note: In the Amazon IVS console, LOW  and NORMAL correspond to Ultra-low and
+	// Standard, respectively.)
 	LatencyMode ChannelLatencyMode
 
 	// Channel name.
@@ -74,27 +74,17 @@ type Channel struct {
 	RecordingConfigurationArn *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value). See Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
-	// information, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
-	// documented there.
+	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for more information, including restrictions that apply to tags and "Tag naming
+	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
+	// what is documented there.
 	Tags map[string]string
 
 	// Channel type, which determines the allowable resolution and bitrate. If you
 	// exceed the allowable resolution or bitrate, the stream probably will disconnect
-	// immediately. Default: STANDARD. Valid values:
-	// - STANDARD: Video is transcoded:
-	// multiple qualities are generated from the original input, to automatically give
-	// viewers the best experience for their devices and network conditions.
-	// Transcoding allows higher playback quality across a range of download speeds.
-	// Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps. Audio is
-	// transcoded only for renditions 360p and below; above that, audio is passed
-	// through. This is the default.
-	// - BASIC: Video is transmuxed: Amazon IVS delivers
-	// the original input to viewers. The viewer’s video-quality choice is limited to
-	// the original input. Resolution can be up to 1080p and bitrate can be up to 1.5
-	// Mbps for 480p and up to 3.5 Mbps for resolutions between 480p and 1080p.
+	// immediately. Default: STANDARD . Valid values:
+	//     - STANDARD : Video is transcoded: multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Transcoding allows higher playback quality across a range of download speeds. Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps. Audio is transcoded only for renditions 360p and below; above that, audio is passed through. This is the default.
+	//     - BASIC : Video is transmuxed: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Resolution can be up to 1080p and bitrate can be up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions between 480p and 1080p.
 	Type ChannelType
 
 	noSmithyDocumentSerde
@@ -107,13 +97,13 @@ type ChannelSummary struct {
 	Arn *string
 
 	// Whether the channel is private (enabled for playback authorization). Default:
-	// false.
+	// false .
 	Authorized bool
 
-	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full
-	// HD. Use LOW for near-real-time interaction with viewers. Default: LOW. (Note: In
-	// the Amazon IVS console, LOW and NORMAL correspond to Ultra-low and Standard,
-	// respectively.)
+	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to
+	// Full HD. Use LOW  for near-real-time interaction with viewers. Default: LOW.
+	// (Note: In the Amazon IVS console, LOW  and NORMAL correspond to Ultra-low and
+	// Standard, respectively.)
 	LatencyMode ChannelLatencyMode
 
 	// Channel name.
@@ -124,11 +114,10 @@ type ChannelSummary struct {
 	RecordingConfigurationArn *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value). See Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
-	// information, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
-	// documented there.
+	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for more information, including restrictions that apply to tags and "Tag naming
+	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
+	// what is documented there.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -145,8 +134,8 @@ type DestinationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Object specifying the ingest configuration set up by the broadcaster, usually in
-// an encoder.
+// Object specifying the ingest configuration set up by the broadcaster, usually
+// in an encoder.
 type IngestConfiguration struct {
 
 	// Encoder settings for audio.
@@ -171,11 +160,10 @@ type PlaybackKeyPair struct {
 	Name *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value). See Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
-	// information, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
-	// documented there.
+	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for more information, including restrictions that apply to tags and "Tag naming
+	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
+	// what is documented there.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -191,11 +179,10 @@ type PlaybackKeyPairSummary struct {
 	Name *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value). See Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
-	// information, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
-	// documented there.
+	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for more information, including restrictions that apply to tags and "Tag naming
+	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
+	// what is documented there.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -216,7 +203,7 @@ type RecordingConfiguration struct {
 	DestinationConfiguration *DestinationConfiguration
 
 	// Indicates the current state of the recording configuration. When the state is
-	// ACTIVE, the configuration is ready for recording a channel stream.
+	// ACTIVE , the configuration is ready for recording a channel stream.
 	//
 	// This member is required.
 	State RecordingConfigurationState
@@ -230,16 +217,15 @@ type RecordingConfiguration struct {
 	RecordingReconnectWindowSeconds int32
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value). See Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
-	// information, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
-	// documented there.
+	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for more information, including restrictions that apply to tags and "Tag naming
+	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
+	// what is documented there.
 	Tags map[string]string
 
-	// A complex type that allows you to enable/disable the recording of thumbnails for
-	// a live session and modify the interval at which thumbnails are generated for the
-	// live session.
+	// A complex type that allows you to enable/disable the recording of thumbnails
+	// for a live session and modify the interval at which thumbnails are generated for
+	// the live session.
 	ThumbnailConfiguration *ThumbnailConfiguration
 
 	noSmithyDocumentSerde
@@ -260,7 +246,7 @@ type RecordingConfigurationSummary struct {
 	DestinationConfiguration *DestinationConfiguration
 
 	// Indicates the current state of the recording configuration. When the state is
-	// ACTIVE, the configuration is ready for recording a channel stream.
+	// ACTIVE , the configuration is ready for recording a channel stream.
 	//
 	// This member is required.
 	State RecordingConfigurationState
@@ -269,11 +255,10 @@ type RecordingConfigurationSummary struct {
 	Name *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value). See Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
-	// information, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
-	// documented there.
+	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for more information, including restrictions that apply to tags and "Tag naming
+	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
+	// what is documented there.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -300,40 +285,42 @@ type Stream struct {
 	// The stream’s health.
 	Health StreamHealth
 
-	// URL of the master playlist, required by the video player to play the HLS stream.
+	// URL of the master playlist, required by the video player to play the HLS
+	// stream.
 	PlaybackUrl *string
 
 	// Time of the stream’s start. This is an ISO 8601 timestamp; note that this is
 	// returned as a string.
 	StartTime *time.Time
 
-	// The stream’s state. Do not rely on the OFFLINE state, as the API may not return
-	// it; instead, a "NotBroadcasting" error will indicate that the stream is not
-	// live.
+	// The stream’s state. Do not rely on the OFFLINE state, as the API may not
+	// return it; instead, a "NotBroadcasting" error will indicate that the stream is
+	// not live.
 	State StreamState
 
-	// Unique identifier for a live or previously live stream in the specified channel.
+	// Unique identifier for a live or previously live stream in the specified
+	// channel.
 	StreamId *string
 
 	// A count of concurrent views of the stream. Typically, a new view appears in
-	// viewerCount within 15 seconds of when video playback starts and a view is
-	// removed from viewerCount within 1 minute of when video playback ends. A value of
-	// -1 indicates that the request timed out; in this case, retry.
+	// viewerCountwithin 15 seconds of when video playback starts and a view is
+	// removed from viewerCount within 1 minute of when video playback ends. A value
+	// of -1 indicates that the request timed out; in this case, retry.
 	ViewerCount int64
 
 	noSmithyDocumentSerde
 }
 
 // Object specifying a stream’s events. For a list of events, see Using Amazon
-// EventBridge with Amazon IVS
-// (https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html).
+// EventBridge with Amazon IVS (https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html)
+// .
 type StreamEvent struct {
 
 	// Time when the event occurred. This is an ISO 8601 timestamp; note that this is
 	// returned as a string.
 	EventTime *time.Time
 
-	// Name that identifies the stream event within a type.
+	// Name that identifies the stream event within a type .
 	Name *string
 
 	// Logical group for certain events.
@@ -361,11 +348,10 @@ type StreamKey struct {
 	ChannelArn *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value). See Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
-	// information, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
-	// documented there.
+	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for more information, including restrictions that apply to tags and "Tag naming
+	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
+	// what is documented there.
 	Tags map[string]string
 
 	// Stream-key value.
@@ -384,26 +370,25 @@ type StreamKeySummary struct {
 	ChannelArn *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value). See Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
-	// information, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
-	// documented there.
+	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for more information, including restrictions that apply to tags and "Tag naming
+	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
+	// what is documented there.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Object that captures the Amazon IVS configuration that the customer provisioned,
-// the ingest configurations that the broadcaster used, and the most recent Amazon
-// IVS stream events it encountered.
+// Object that captures the Amazon IVS configuration that the customer
+// provisioned, the ingest configurations that the broadcaster used, and the most
+// recent Amazon IVS stream events it encountered.
 type StreamSession struct {
 
 	// The properties of the channel at the time of going live.
 	Channel *Channel
 
 	// Time when the channel went offline. This is an ISO 8601 timestamp; note that
-	// this is returned as a string. For live streams, this is NULL.
+	// this is returned as a string. For live streams, this is NULL .
 	EndTime *time.Time
 
 	// The properties of the incoming RTMP stream for the stream.
@@ -416,13 +401,14 @@ type StreamSession struct {
 	// is returned as a string.
 	StartTime *time.Time
 
-	// Unique identifier for a live or previously live stream in the specified channel.
+	// Unique identifier for a live or previously live stream in the specified
+	// channel.
 	StreamId *string
 
 	// List of Amazon IVS events that the stream encountered. The list is sorted by
 	// most recent events and contains up to 500 events. For Amazon IVS events, see
-	// Using Amazon EventBridge with Amazon IVS
-	// (https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html).
+	// Using Amazon EventBridge with Amazon IVS (https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html)
+	// .
 	TruncatedEvents []StreamEvent
 
 	noSmithyDocumentSerde
@@ -432,17 +418,18 @@ type StreamSession struct {
 type StreamSessionSummary struct {
 
 	// Time when the channel went offline. This is an ISO 8601 timestamp; note that
-	// this is returned as a string. For live streams, this is NULL.
+	// this is returned as a string. For live streams, this is NULL .
 	EndTime *time.Time
 
-	// If true, this stream encountered a quota breach or failure.
+	// If true , this stream encountered a quota breach or failure.
 	HasErrorEvent bool
 
 	// Time when the channel went live. This is an ISO 8601 timestamp; note that this
 	// is returned as a string.
 	StartTime *time.Time
 
-	// Unique identifier for a live or previously live stream in the specified channel.
+	// Unique identifier for a live or previously live stream in the specified
+	// channel.
 	StreamId *string
 
 	noSmithyDocumentSerde
@@ -461,18 +448,19 @@ type StreamSummary struct {
 	// returned as a string.
 	StartTime *time.Time
 
-	// The stream’s state. Do not rely on the OFFLINE state, as the API may not return
-	// it; instead, a "NotBroadcasting" error will indicate that the stream is not
-	// live.
+	// The stream’s state. Do not rely on the OFFLINE state, as the API may not
+	// return it; instead, a "NotBroadcasting" error will indicate that the stream is
+	// not live.
 	State StreamState
 
-	// Unique identifier for a live or previously live stream in the specified channel.
+	// Unique identifier for a live or previously live stream in the specified
+	// channel.
 	StreamId *string
 
 	// A count of concurrent views of the stream. Typically, a new view appears in
-	// viewerCount within 15 seconds of when video playback starts and a view is
-	// removed from viewerCount within 1 minute of when video playback ends. A value of
-	// -1 indicates that the request timed out; in this case, retry.
+	// viewerCountwithin 15 seconds of when video playback starts and a view is
+	// removed from viewerCount within 1 minute of when video playback ends. A value
+	// of -1 indicates that the request timed out; in this case, retry.
 	ViewerCount int64
 
 	noSmithyDocumentSerde
@@ -481,27 +469,26 @@ type StreamSummary struct {
 // An object representing a configuration of thumbnails for recorded video.
 type ThumbnailConfiguration struct {
 
-	// Thumbnail recording mode. Default: INTERVAL.
+	// Thumbnail recording mode. Default: INTERVAL .
 	RecordingMode RecordingMode
 
-	// The targeted thumbnail-generation interval in seconds. This is configurable (and
-	// required) only if recordingMode is INTERVAL. Default: 60. Important: Setting a
-	// value for targetIntervalSeconds does not guarantee that thumbnails are generated
-	// at the specified interval. For thumbnails to be generated at the
-	// targetIntervalSeconds interval, the IDR/Keyframe value for the input video must
-	// be less than the targetIntervalSeconds value. See  Amazon IVS Streaming
-	// Configuration
-	// (https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html) for
-	// information on setting IDR/Keyframe to the recommended value in video-encoder
-	// settings.
+	// The targeted thumbnail-generation interval in seconds. This is configurable
+	// (and required) only if recordingMode  is INTERVAL. Default: 60. Important:
+	// Setting a value for targetIntervalSeconds does not guarantee that thumbnails
+	// are generated at the specified interval. For thumbnails to be generated at the
+	// targetIntervalSeconds interval, the IDR/Keyframe value for the input video
+	// must be less than the targetIntervalSeconds  value. See  Amazon IVS Streaming
+	// Configuration (https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html)
+	// for information on setting IDR/Keyframe to the recommended value in
+	// video-encoder settings.
 	TargetIntervalSeconds int64
 
 	noSmithyDocumentSerde
 }
 
 // Object specifying a stream’s video configuration, as set up by the broadcaster
-// (usually in an encoder). This is part of the IngestConfiguration object and used
-// for monitoring stream health.
+// (usually in an encoder). This is part of the IngestConfiguration object and
+// used for monitoring stream health.
 type VideoConfiguration struct {
 
 	// Indicates the degree of required decoder performance for a profile. Normally

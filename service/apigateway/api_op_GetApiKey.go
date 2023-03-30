@@ -35,8 +35,8 @@ type GetApiKeyInput struct {
 	// This member is required.
 	ApiKey *string
 
-	// A boolean flag to specify whether (true) or not (false) the result contains the
-	// key value.
+	// A boolean flag to specify whether ( true ) or not ( false) the result contains
+	// the key value.
 	IncludeValue *bool
 
 	noSmithyDocumentSerde

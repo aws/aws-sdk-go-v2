@@ -61,11 +61,11 @@ func (e *InvalidInputException) ErrorCode() string {
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation failed because there was nothing to do or the operation wasn't
-// possible. For example, you might have submitted an AssociateAdminAccount request
-// for an account ID that was already set as the Firewall Manager administrator. Or
-// you might have tried to access a Region that's disabled by default, and that you
-// need to enable for the Firewall Manager administrator account and for
-// Organizations before you can access it.
+// possible. For example, you might have submitted an AssociateAdminAccount
+// request for an account ID that was already set as the Firewall Manager
+// administrator. Or you might have tried to access a Region that's disabled by
+// default, and that you need to enable for the Firewall Manager administrator
+// account and for Organizations before you can access it.
 type InvalidOperationException struct {
 	Message *string
 
@@ -91,7 +91,7 @@ func (e *InvalidOperationException) ErrorCode() string {
 }
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The value of the Type parameter is invalid.
+// The value of the Type  parameter is invalid.
 type InvalidTypeException struct {
 	Message *string
 
@@ -118,10 +118,9 @@ func (e *InvalidTypeException) ErrorCode() string {
 func (e *InvalidTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation exceeds a resource limit, for example, the maximum number of
-// policy objects that you can create for an Amazon Web Services account. For more
-// information, see Firewall Manager Limits
-// (https://docs.aws.amazon.com/waf/latest/developerguide/fms-limits.html) in the
-// WAF Developer Guide.
+// policyobjects that you can create for an Amazon Web Services account. For more
+// information, see Firewall Manager Limits (https://docs.aws.amazon.com/waf/latest/developerguide/fms-limits.html)
+// in the WAF Developer Guide.
 type LimitExceededException struct {
 	Message *string
 

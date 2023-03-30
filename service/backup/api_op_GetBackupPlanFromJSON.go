@@ -40,7 +40,7 @@ type GetBackupPlanFromJSONInput struct {
 type GetBackupPlanFromJSONOutput struct {
 
 	// Specifies the body of a backup plan. Includes a BackupPlanName and one or more
-	// sets of Rules.
+	// sets of Rules .
 	BackupPlan *types.BackupPlan
 
 	// Metadata pertaining to the operation's result.

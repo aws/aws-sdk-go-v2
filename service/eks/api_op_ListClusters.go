@@ -30,26 +30,26 @@ func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, op
 
 type ListClustersInput struct {
 
-	// Indicates whether external clusters are included in the returned list. Use 'all'
-	// to return connected clusters, or blank to return only Amazon EKS clusters. 'all'
-	// must be in lowercase otherwise an error occurs.
+	// Indicates whether external clusters are included in the returned list. Use ' all
+	// ' to return connected clusters, or blank to return only Amazon EKS clusters. '
+	// all ' must be in lowercase otherwise an error occurs.
 	Include []string
 
 	// The maximum number of cluster results returned by ListClusters in paginated
-	// output. When you use this parameter, ListClusters returns only maxResults
+	// output. When you use this parameter, ListClusters  returns only maxResults
 	// results in a single page along with a nextToken response element. You can see
 	// the remaining results of the initial request by sending another ListClusters
-	// request with the returned nextToken value. This value can be between 1 and 100.
-	// If you don't use this parameter, ListClusters returns up to 100 results and a
-	// nextToken value if applicable.
+	// request with the returned nextToken value. This value can be between 1 and
+	// 100. If you don't use this parameter, ListClusters returns up to 100 results
+	// and a nextToken  value if applicable.
 	MaxResults *int32
 
-	// The nextToken value returned from a previous paginated ListClusters request
-	// where maxResults was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// nextToken value. This token should be treated as an opaque identifier that is
-	// used only to retrieve the next items in a list and not for other programmatic
-	// purposes.
+	// The nextToken  value returned from a previous paginated ListClusters request
+	// where maxResults was used and the results exceeded the value of that
+	// parameter. Pagination continues from the end of the previous results that
+	// returned the nextToken value. This token should be treated as an opaque
+	// identifier that is used only to retrieve the next items in a list and not for
+	// other programmatic purposes.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -60,10 +60,10 @@ type ListClustersOutput struct {
 	// A list of all of the clusters for your account in the specified Region.
 	Clusters []string
 
-	// The nextToken value to include in a future ListClusters request. When the
-	// results of a ListClusters request exceed maxResults, you can use this value to
-	// retrieve the next page of results. This value is null when there are no more
-	// results to return.
+	// The nextToken  value to include in a future ListClusters request. When the
+	// results of a ListClusters  request exceed maxResults, you can use this value
+	// to retrieve the next page of results. This value is null when there are no
+	// more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -142,16 +142,16 @@ var _ ListClustersAPIClient = (*Client)(nil)
 // ListClustersPaginatorOptions is the paginator options for ListClusters
 type ListClustersPaginatorOptions struct {
 	// The maximum number of cluster results returned by ListClusters in paginated
-	// output. When you use this parameter, ListClusters returns only maxResults
+	// output. When you use this parameter, ListClusters  returns only maxResults
 	// results in a single page along with a nextToken response element. You can see
 	// the remaining results of the initial request by sending another ListClusters
-	// request with the returned nextToken value. This value can be between 1 and 100.
-	// If you don't use this parameter, ListClusters returns up to 100 results and a
-	// nextToken value if applicable.
+	// request with the returned nextToken value. This value can be between 1 and
+	// 100. If you don't use this parameter, ListClusters returns up to 100 results
+	// and a nextToken  value if applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

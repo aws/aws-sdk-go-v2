@@ -37,7 +37,7 @@ type ListChannelMembershipsInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The AppInstanceUserArn of the user that makes the API call.
+	// The AppInstanceUserArn  of the user that makes the API call.
 	ChimeBearer *string
 
 	// The maximum number of channel memberships that you want returned.
@@ -47,9 +47,9 @@ type ListChannelMembershipsInput struct {
 	// are returned.
 	NextToken *string
 
-	// The membership type of a user, DEFAULT or HIDDEN. Default members are always
-	// returned as part of ListChannelMemberships. Hidden members are only returned if
-	// the type filter in ListChannelMemberships equals HIDDEN. Otherwise hidden
+	// The membership type of a user, DEFAULT  or HIDDEN. Default members are always
+	// returned as part of ListChannelMemberships. Hidden members are only returned
+	// if the type filter in ListChannelMemberships  equals HIDDEN. Otherwise hidden
 	// members are not returned.
 	Type types.ChannelMembershipType
 
@@ -181,8 +181,8 @@ type ListChannelMembershipsPaginatorOptions struct {
 	// The maximum number of channel memberships that you want returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -195,7 +195,8 @@ type ListChannelMembershipsPaginator struct {
 	firstPage bool
 }
 
-// NewListChannelMembershipsPaginator returns a new ListChannelMembershipsPaginator
+// NewListChannelMembershipsPaginator returns a new
+// ListChannelMembershipsPaginator
 func NewListChannelMembershipsPaginator(client ListChannelMembershipsAPIClient, params *ListChannelMembershipsInput, optFns ...func(*ListChannelMembershipsPaginatorOptions)) *ListChannelMembershipsPaginator {
 	if params == nil {
 		params = &ListChannelMembershipsInput{}

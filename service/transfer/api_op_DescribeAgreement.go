@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the agreement that's identified by the AgreementId.
+// Describes the agreement that's identified by the AgreementId .
 func (c *Client) DescribeAgreement(ctx context.Context, params *DescribeAgreementInput, optFns ...func(*Options)) (*DescribeAgreementOutput, error) {
 	if params == nil {
 		params = &DescribeAgreementInput{}

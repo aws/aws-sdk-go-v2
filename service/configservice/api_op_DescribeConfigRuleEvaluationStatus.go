@@ -38,10 +38,10 @@ type DescribeConfigRuleEvaluationStatusInput struct {
 	// managed rules that you use.
 	ConfigRuleNames []string
 
-	// The number of rule evaluation results that you want returned. This parameter is
-	// required if the rule limit for your account is more than the default of 150
-	// rules. For information about requesting a rule limit increase, see Config Limits
-	// (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config)
+	// The number of rule evaluation results that you want returned. This parameter
+	// is required if the rule limit for your account is more than the default of 150
+	// rules. For information about requesting a rule limit increase, see Config
+	// Limits (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config)
 	// in the Amazon Web Services General Reference Guide.
 	Limit int32
 
@@ -57,8 +57,8 @@ type DescribeConfigRuleEvaluationStatusOutput struct {
 	// Status information about your Config managed rules.
 	ConfigRulesEvaluationStatus []types.ConfigRuleEvaluationStatus
 
-	// The string that you use in a subsequent request to get the next page of results
-	// in a paginated response.
+	// The string that you use in a subsequent request to get the next page of
+	// results in a paginated response.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -135,18 +135,18 @@ type DescribeConfigRuleEvaluationStatusAPIClient interface {
 
 var _ DescribeConfigRuleEvaluationStatusAPIClient = (*Client)(nil)
 
-// DescribeConfigRuleEvaluationStatusPaginatorOptions is the paginator options for
-// DescribeConfigRuleEvaluationStatus
+// DescribeConfigRuleEvaluationStatusPaginatorOptions is the paginator options
+// for DescribeConfigRuleEvaluationStatus
 type DescribeConfigRuleEvaluationStatusPaginatorOptions struct {
-	// The number of rule evaluation results that you want returned. This parameter is
-	// required if the rule limit for your account is more than the default of 150
-	// rules. For information about requesting a rule limit increase, see Config Limits
-	// (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config)
+	// The number of rule evaluation results that you want returned. This parameter
+	// is required if the rule limit for your account is more than the default of 150
+	// rules. For information about requesting a rule limit increase, see Config
+	// Limits (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config)
 	// in the Amazon Web Services General Reference Guide.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

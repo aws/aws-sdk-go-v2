@@ -26,7 +26,7 @@ func (c *Client) SetStackPolicy(ctx context.Context, params *SetStackPolicyInput
 	return out, nil
 }
 
-// The input for the SetStackPolicy action.
+// The input for the SetStackPolicy  action.
 type SetStackPolicyInput struct {
 
 	// The name or unique stack ID that you want to associate a policy with.
@@ -34,17 +34,16 @@ type SetStackPolicyInput struct {
 	// This member is required.
 	StackName *string
 
-	// Structure containing the stack policy body. For more information, go to  Prevent
-	// updates to stack resources
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html)
-	// in the CloudFormation User Guide. You can specify either the StackPolicyBody or
-	// the StackPolicyURL parameter, but not both.
+	// Structure containing the stack policy body. For more information, go to
+	// Prevent updates to stack resources (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html)
+	// in the CloudFormation User Guide. You can specify either the StackPolicyBody
+	// or the StackPolicyURL  parameter, but not both.
 	StackPolicyBody *string
 
 	// Location of a file containing the stack policy. The URL must point to a policy
 	// (maximum size: 16 KB) located in an Amazon S3 bucket in the same Amazon Web
-	// Services Region as the stack. You can specify either the StackPolicyBody or the
-	// StackPolicyURL parameter, but not both.
+	// Services Region as the stack. You can specify either the StackPolicyBody or
+	// the StackPolicyURL  parameter, but not both.
 	StackPolicyURL *string
 
 	noSmithyDocumentSerde

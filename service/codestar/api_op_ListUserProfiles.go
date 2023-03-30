@@ -46,8 +46,8 @@ type ListUserProfilesOutput struct {
 	// This member is required.
 	UserProfiles []types.UserProfileSummary
 
-	// The continuation token to use when requesting the next set of results, if there
-	// are more results to be returned.
+	// The continuation token to use when requesting the next set of results, if
+	// there are more results to be returned.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

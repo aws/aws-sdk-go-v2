@@ -13,8 +13,8 @@ import (
 )
 
 // Retrieves existing playback configurations. For information about MediaTailor
-// configurations, see Working with Configurations in AWS Elemental MediaTailor
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html).
+// configurations, see Working with Configurations in AWS Elemental MediaTailor (https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html)
+// .
 func (c *Client) ListPlaybackConfigurations(ctx context.Context, params *ListPlaybackConfigurationsInput, optFns ...func(*Options)) (*ListPlaybackConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListPlaybackConfigurationsInput{}
@@ -47,9 +47,9 @@ type ListPlaybackConfigurationsInput struct {
 
 type ListPlaybackConfigurationsOutput struct {
 
-	// Array of playback configurations. This might be all the available configurations
-	// or a subset, depending on the settings that you provide and the total number of
-	// configurations stored.
+	// Array of playback configurations. This might be all the available
+	// configurations or a subset, depending on the settings that you provide and the
+	// total number of configurations stored.
 	Items []types.PlaybackConfiguration
 
 	// Pagination token returned by the GET list request when results exceed the
@@ -139,8 +139,8 @@ type ListPlaybackConfigurationsPaginatorOptions struct {
 	// next page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

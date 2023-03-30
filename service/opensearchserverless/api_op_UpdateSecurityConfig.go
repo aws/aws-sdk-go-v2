@@ -13,8 +13,8 @@ import (
 )
 
 // Updates a security configuration for OpenSearch Serverless. For more
-// information, see SAML authentication for Amazon OpenSearch Serverless
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html).
+// information, see SAML authentication for Amazon OpenSearch Serverless (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html)
+// .
 func (c *Client) UpdateSecurityConfig(ctx context.Context, params *UpdateSecurityConfigInput, optFns ...func(*Options)) (*UpdateSecurityConfigOutput, error) {
 	if params == nil {
 		params = &UpdateSecurityConfigInput{}
@@ -33,13 +33,13 @@ func (c *Client) UpdateSecurityConfig(ctx context.Context, params *UpdateSecurit
 type UpdateSecurityConfigInput struct {
 
 	// The version of the security configuration to be updated. You can find the most
-	// recent version of a security configuration using the GetSecurityPolicy command.
+	// recent version of a security configuration using the GetSecurityPolicy  command.
 	//
 	// This member is required.
 	ConfigVersion *string
 
 	// The security configuration identifier. For SAML the ID will be
-	// saml/<accountId>/<idpProviderName>. For example, saml/123456789123/OKTADev.
+	// saml/<accountId>/<idpProviderName> . For example, saml/123456789123/OKTADev .
 	//
 	// This member is required.
 	Id *string

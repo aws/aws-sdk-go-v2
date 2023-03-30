@@ -15,8 +15,8 @@ import (
 // can use the SignalResource operation in conjunction with a creation policy or
 // update policy. CloudFormation doesn't proceed with a stack creation or update
 // until resources receive the required number of signals or the timeout period is
-// exceeded. The SignalResource operation is useful in cases where you want to send
-// signals from anywhere other than an Amazon EC2 instance.
+// exceeded. The SignalResource operation is useful in cases where you want to
+// send signals from anywhere other than an Amazon EC2 instance.
 func (c *Client) SignalResource(ctx context.Context, params *SignalResourceInput, optFns ...func(*Options)) (*SignalResourceOutput, error) {
 	if params == nil {
 		params = &SignalResourceInput{}
@@ -32,7 +32,7 @@ func (c *Client) SignalResource(ctx context.Context, params *SignalResourceInput
 	return out, nil
 }
 
-// The input for the SignalResource action.
+// The input for the SignalResource  action.
 type SignalResourceInput struct {
 
 	// The logical ID of the resource that you want to signal. The logical ID is the
@@ -53,10 +53,10 @@ type SignalResourceInput struct {
 	// This member is required.
 	Status types.ResourceSignalStatus
 
-	// A unique ID of the signal. When you signal Amazon EC2 instances or Auto Scaling
-	// groups, specify the instance ID that you are signaling as the unique ID. If you
-	// send multiple signals to a single resource (such as signaling a wait condition),
-	// each signal requires a different unique ID.
+	// A unique ID of the signal. When you signal Amazon EC2 instances or Auto
+	// Scaling groups, specify the instance ID that you are signaling as the unique ID.
+	// If you send multiple signals to a single resource (such as signaling a wait
+	// condition), each signal requires a different unique ID.
 	//
 	// This member is required.
 	UniqueId *string

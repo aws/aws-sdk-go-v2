@@ -11,9 +11,9 @@ import (
 	"time"
 )
 
-// Incident Manager uses engagements to engage contacts and escalation plans during
-// an incident. Use this command to describe the engagement that occurred during an
-// incident.
+// Incident Manager uses engagements to engage contacts and escalation plans
+// during an incident. Use this command to describe the engagement that occurred
+// during an incident.
 func (c *Client) DescribeEngagement(ctx context.Context, params *DescribeEngagementInput, optFns ...func(*Options)) (*DescribeEngagementOutput, error) {
 	if params == nil {
 		params = &DescribeEngagementInput{}
@@ -47,7 +47,7 @@ type DescribeEngagementOutput struct {
 	ContactArn *string
 
 	// The secure content of the message that was sent to the contact. Use this field
-	// for engagements to VOICE and EMAIL.
+	// for engagements to VOICE  and EMAIL .
 	//
 	// This member is required.
 	Content *string
@@ -63,7 +63,7 @@ type DescribeEngagementOutput struct {
 	Sender *string
 
 	// The secure subject of the message that was sent to the contact. Use this field
-	// for engagements to VOICE and EMAIL.
+	// for engagements to VOICE  and EMAIL .
 	//
 	// This member is required.
 	Subject *string
@@ -71,12 +71,12 @@ type DescribeEngagementOutput struct {
 	// The ARN of the incident in which the engagement occurred.
 	IncidentId *string
 
-	// The insecure content of the message that was sent to the contact. Use this field
-	// for engagements to SMS.
+	// The insecure content of the message that was sent to the contact. Use this
+	// field for engagements to SMS .
 	PublicContent *string
 
-	// The insecure subject of the message that was sent to the contact. Use this field
-	// for engagements to SMS.
+	// The insecure subject of the message that was sent to the contact. Use this
+	// field for engagements to SMS .
 	PublicSubject *string
 
 	// The time that the engagement started.

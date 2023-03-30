@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a policy version from a core network. You can't delete the current LIVE
-// policy.
+// Deletes a policy version from a core network. You can't delete the current
+// LIVE policy.
 func (c *Client) DeleteCoreNetworkPolicyVersion(ctx context.Context, params *DeleteCoreNetworkPolicyVersionInput, optFns ...func(*Options)) (*DeleteCoreNetworkPolicyVersionOutput, error) {
 	if params == nil {
 		params = &DeleteCoreNetworkPolicyVersionInput{}

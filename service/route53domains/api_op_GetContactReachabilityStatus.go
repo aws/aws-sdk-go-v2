@@ -14,7 +14,7 @@ import (
 // For operations that require confirmation that the email address for the
 // registrant contact is valid, such as registering a new domain, this operation
 // returns information about whether the registrant contact has responded. If you
-// want us to resend the email, use the ResendContactReachabilityEmail operation.
+// want us to resend the email, use the ResendContactReachabilityEmail  operation.
 func (c *Client) GetContactReachabilityStatus(ctx context.Context, params *GetContactReachabilityStatusInput, optFns ...func(*Options)) (*GetContactReachabilityStatusOutput, error) {
 	if params == nil {
 		params = &GetContactReachabilityStatusInput{}
@@ -32,8 +32,8 @@ func (c *Client) GetContactReachabilityStatus(ctx context.Context, params *GetCo
 
 type GetContactReachabilityStatusInput struct {
 
-	// The name of the domain for which you want to know whether the registrant contact
-	// has confirmed that the email address is valid.
+	// The name of the domain for which you want to know whether the registrant
+	// contact has confirmed that the email address is valid.
 	DomainName *string
 
 	noSmithyDocumentSerde

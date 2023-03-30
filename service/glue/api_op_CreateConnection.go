@@ -29,7 +29,7 @@ func (c *Client) CreateConnection(ctx context.Context, params *CreateConnectionI
 
 type CreateConnectionInput struct {
 
-	// A ConnectionInput object defining the connection to create.
+	// A ConnectionInput  object defining the connection to create.
 	//
 	// This member is required.
 	ConnectionInput *types.ConnectionInput

@@ -49,8 +49,8 @@ type SendAnnouncementInput struct {
 	// This member is required.
 	RoomFilters []types.Filter
 
-	// The time to live for an announcement. Default is 300. If delivery doesn't occur
-	// within this time, the announcement is not delivered.
+	// The time to live for an announcement. Default is 300. If delivery doesn't
+	// occur within this time, the announcement is not delivered.
 	TimeToLiveInSeconds *int32
 
 	noSmithyDocumentSerde

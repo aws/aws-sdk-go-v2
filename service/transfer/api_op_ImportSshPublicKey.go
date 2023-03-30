@@ -12,8 +12,8 @@ import (
 
 // Adds a Secure Shell (SSH) public key to a user account identified by a UserName
 // value assigned to the specific file transfer protocol-enabled server, identified
-// by ServerId. The response returns the UserName value, the ServerId value, and
-// the name of the SshPublicKeyId.
+// by ServerId . The response returns the UserName  value, the ServerId value,
+// and the name of the SshPublicKeyId .
 func (c *Client) ImportSshPublicKey(ctx context.Context, params *ImportSshPublicKeyInput, optFns ...func(*Options)) (*ImportSshPublicKeyOutput, error) {
 	if params == nil {
 		params = &ImportSshPublicKeyInput{}
@@ -65,7 +65,7 @@ type ImportSshPublicKeyOutput struct {
 	// This member is required.
 	SshPublicKeyId *string
 
-	// A user name assigned to the ServerID value that you specified.
+	// A user name assigned to the ServerID  value that you specified.
 	//
 	// This member is required.
 	UserName *string

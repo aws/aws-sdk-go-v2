@@ -14,8 +14,8 @@ import (
 
 // Returns a list of all the Contributor Insights rules in your account. For more
 // information about Contributor Insights, see Using Contributor Insights to
-// Analyze High-Cardinality Data
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html).
+// Analyze High-Cardinality Data (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html)
+// .
 func (c *Client) DescribeInsightRules(ctx context.Context, params *DescribeInsightRulesInput, optFns ...func(*Options)) (*DescribeInsightRulesOutput, error) {
 	if params == nil {
 		params = &DescribeInsightRulesInput{}
@@ -134,8 +134,8 @@ type DescribeInsightRulesPaginatorOptions struct {
 	// parameter, the default of 500 is used.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

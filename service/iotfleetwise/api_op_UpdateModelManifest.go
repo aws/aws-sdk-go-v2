@@ -46,8 +46,8 @@ type UpdateModelManifestInput struct {
 	// signals, to remove from the vehicle model.
 	NodesToRemove []string
 
-	// The state of the vehicle model. If the status is ACTIVE, the vehicle model can't
-	// be edited. If the status is DRAFT, you can edit the vehicle model.
+	// The state of the vehicle model. If the status is ACTIVE, the vehicle model
+	// can't be edited. If the status is DRAFT , you can edit the vehicle model.
 	Status types.ManifestStatus
 
 	noSmithyDocumentSerde

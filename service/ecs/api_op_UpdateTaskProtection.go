@@ -11,30 +11,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the protection status of a task. You can set protectionEnabled to true
+// Updates the protection status of a task. You can set protectionEnabled  to true
 // to protect your task from termination during scale-in events from Service
-// Autoscaling
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html)
-// or deployments
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html).
-// Task-protection, by default, expires after 2 hours at which point Amazon ECS
+// Autoscaling (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html)
+// or deployments (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
+// . Task-protection, by default, expires after 2 hours at which point Amazon ECS
 // unsets the protectionEnabled property making the task eligible for termination
 // by a subsequent scale-in event. You can specify a custom expiration period for
 // task protection from 1 minute to up to 2,880 minutes (48 hours). To specify the
-// custom expiration period, set the expiresInMinutes property. The
-// expiresInMinutes property is always reset when you invoke this operation for a
-// task that already has protectionEnabled set to true. You can keep extending the
-// protection expiration period of a task by invoking this operation repeatedly. To
-// learn more about Amazon ECS task protection, see Task scale-in protection
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection.html)
+// custom expiration period, set the expiresInMinutes  property. The
+// expiresInMinutesproperty is always reset when you invoke this operation for a
+// task that already has protectionEnabled  set to true. You can keep extending
+// the protection expiration period of a task by invoking this operation
+// repeatedly. To learn more about Amazon ECS task protection, see Task scale-in
+// protection (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection.html)
 // in the Amazon Elastic Container Service Developer Guide . This operation is only
 // supported for tasks belonging to an Amazon ECS service. Invoking this operation
 // for a standalone task will result in an TASK_NOT_VALID failure. For more
-// information, see API failure reasons
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html).
-// If you prefer to set task protection from within the container, we recommend
-// using the Task scale-in protection endpoint
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection-endpoint.html).
+// information, see API failure reasons (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html)
+// . If you prefer to set task protection from within the container, we recommend
+// using the Task scale-in protection endpoint (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection-endpoint.html)
+// .
 func (c *Client) UpdateTaskProtection(ctx context.Context, params *UpdateTaskProtectionInput, optFns ...func(*Options)) (*UpdateTaskProtectionOutput, error) {
 	if params == nil {
 		params = &UpdateTaskProtectionInput{}
@@ -52,14 +49,14 @@ func (c *Client) UpdateTaskProtection(ctx context.Context, params *UpdateTaskPro
 
 type UpdateTaskProtectionInput struct {
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
-	// service that the task sets exist in.
+	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
+	// the service that the task sets exist in.
 	//
 	// This member is required.
 	Cluster *string
 
-	// Specify true to mark a task for protection and false to unset protection, making
-	// it eligible for termination.
+	// Specify true  to mark a task for protection and false to unset protection,
+	// making it eligible for termination.
 	//
 	// This member is required.
 	ProtectionEnabled bool
@@ -69,12 +66,12 @@ type UpdateTaskProtectionInput struct {
 	// This member is required.
 	Tasks []string
 
-	// If you set protectionEnabled to true, you can specify the duration for task
+	// If you set protectionEnabled  to true, you can specify the duration for task
 	// protection in minutes. You can specify a value from 1 minute to up to 2,880
 	// minutes (48 hours). During this time, your task will not be terminated by
 	// scale-in events from Service Auto Scaling or deployments. After this time period
-	// lapses, protectionEnabled will be reset to false. If you don’t specify the time,
-	// then the task is automatically protected for 120 minutes (2 hours).
+	// lapses, protectionEnabled  will be reset to false. If you don’t specify the
+	// time, then the task is automatically protected for 120 minutes (2 hours).
 	ExpiresInMinutes *int32
 
 	noSmithyDocumentSerde
@@ -86,12 +83,9 @@ type UpdateTaskProtectionOutput struct {
 	Failures []types.Failure
 
 	// A list of tasks with the following information.
-	// - taskArn: The task ARN.
-	// -
-	// protectionEnabled: The protection status of the task. If scale-in protection is
-	// enabled for a task, the value is true. Otherwise, it is false.
-	// - expirationDate:
-	// The epoch time when protection for the task will expire.
+	//     - taskArn : The task ARN.
+	//     - protectionEnabled : The protection status of the task. If scale-in protection is enabled for a task, the value is true . Otherwise, it is false .
+	//     - expirationDate : The epoch time when protection for the task will expire.
 	ProtectedTasks []types.ProtectedTask
 
 	// Metadata pertaining to the operation's result.

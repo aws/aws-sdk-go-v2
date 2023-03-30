@@ -24,9 +24,8 @@ import (
 // to the Availability Zone. The zonal shift is created immediately in Route 53
 // ARC. However, it can take a short time, typically up to a few minutes, for
 // existing, in-progress connections in the Availability Zone to complete. For more
-// information, see Zonal shift
-// (https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.html) in the
-// Amazon Route 53 Application Recovery Controller Developer Guide.
+// information, see Zonal shift (https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.html)
+// in the Amazon Route 53 Application Recovery Controller Developer Guide.
 func (c *Client) StartZonalShift(ctx context.Context, params *StartZonalShiftInput, optFns ...func(*Options)) (*StartZonalShiftOutput, error) {
 	if params == nil {
 		params = &StartZonalShiftInput{}
@@ -58,22 +57,19 @@ type StartZonalShiftInput struct {
 	// This member is required.
 	Comment *string
 
-	// The length of time that you want a zonal shift to be active, which Route 53 ARC
-	// converts to an expiry time (expiration time). Zonal shifts are temporary. You
-	// can set a zonal shift to be active initially for up to three days (72 hours). If
-	// you want to still keep traffic away from an Availability Zone, you can update
-	// the zonal shift and set a new expiration. You can also cancel a zonal shift,
-	// before it expires, for example, if you're ready to restore traffic to the
+	// The length of time that you want a zonal shift to be active, which Route 53
+	// ARC converts to an expiry time (expiration time). Zonal shifts are temporary.
+	// You can set a zonal shift to be active initially for up to three days (72
+	// hours). If you want to still keep traffic away from an Availability Zone, you
+	// can update the zonal shift and set a new expiration. You can also cancel a zonal
+	// shift, before it expires, for example, if you're ready to restore traffic to the
 	// Availability Zone. To set a length of time for a zonal shift to be active,
 	// specify a whole number, and then one of the following, with no space:
-	// - A
-	// lowercase letter m: To specify that the value is in minutes.
-	// - A lowercase
-	// letter h: To specify that the value is in hours.
-	//
-	// For example: 20h means the
-	// zonal shift expires in 20 hours. 120m means the zonal shift expires in 120
-	// minutes (2 hours).
+	//     - A lowercase letter m: To specify that the value is in minutes.
+	//     - A lowercase letter h: To specify that the value is in hours.
+	// For
+	// example: 20h  means the zonal shift expires in 20 hours. 120m means the zonal
+	// shift expires in 120 minutes (2 hours).
 	//
 	// This member is required.
 	ExpiresIn *string
@@ -133,11 +129,9 @@ type StartZonalShiftOutput struct {
 
 	// A status for a zonal shift. The Status for a zonal shift can have one of the
 	// following values:
-	// - ACTIVE: The zonal shift is started and active.
-	// - EXPIRED:
-	// The zonal shift has expired (the expiry time was exceeded).
-	// - CANCELED: The
-	// zonal shift was canceled.
+	//     - ACTIVE: The zonal shift is started and active.
+	//     - EXPIRED: The zonal shift has expired (the expiry time was exceeded).
+	//     - CANCELED: The zonal shift was canceled.
 	//
 	// This member is required.
 	Status types.ZonalShiftStatus

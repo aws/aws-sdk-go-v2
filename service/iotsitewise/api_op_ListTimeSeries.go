@@ -44,9 +44,8 @@ type ListTimeSeriesInput struct {
 
 	// The type of the time series. The time series type can be one of the following
 	// values:
-	// - ASSOCIATED – The time series is associated with an asset property.
-	// -
-	// DISASSOCIATED – The time series isn't associated with any asset property.
+	//     - ASSOCIATED – The time series is associated with an asset property.
+	//     - DISASSOCIATED – The time series isn't associated with any asset property.
 	TimeSeriesType types.ListTimeSeriesType
 
 	noSmithyDocumentSerde
@@ -172,8 +171,8 @@ type ListTimeSeriesPaginatorOptions struct {
 	// The maximum number of results to return for each paginated request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

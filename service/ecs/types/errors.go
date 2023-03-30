@@ -34,8 +34,8 @@ func (e *AccessDeniedException) ErrorCode() string {
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can apply up to 10 custom attributes for each resource. You can view the
-// attributes of a resource with ListAttributes. You can remove existing attributes
-// on a resource with DeleteAttributes.
+// attributes of a resource with ListAttributes. You can remove existing
+// attributes on a resource with DeleteAttributes .
 type AttributeLimitExceededException struct {
 	Message *string
 
@@ -62,7 +62,7 @@ func (e *AttributeLimitExceededException) ErrorCode() string {
 func (e *AttributeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Your Amazon Web Services account was blocked. For more information, contact
-// Amazon Web Services Support (http://aws.amazon.com/contact-us/).
+// Amazon Web Services Support (http://aws.amazon.com/contact-us/) .
 type BlockedException struct {
 	Message *string
 
@@ -88,10 +88,10 @@ func (e *BlockedException) ErrorCode() string {
 }
 func (e *BlockedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// These errors are usually caused by a client action. This client action might be
-// using an action or resource on behalf of a user that doesn't have permissions to
-// use the action or resource,. Or, it might be specifying an identifier that isn't
-// valid.
+// These errors are usually caused by a client action. This client action might
+// be using an action or resource on behalf of a user that doesn't have permissions
+// to use the action or resource,. Or, it might be specifying an identifier that
+// isn't valid.
 type ClientException struct {
 	Message *string
 
@@ -119,7 +119,7 @@ func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 
 // You can't delete a cluster that has registered container instances. First,
 // deregister the container instances before you can delete the cluster. For more
-// information, see DeregisterContainerInstance.
+// information, see DeregisterContainerInstance .
 type ClusterContainsContainerInstancesException struct {
 	Message *string
 
@@ -147,9 +147,9 @@ func (e *ClusterContainsContainerInstancesException) ErrorFault() smithy.ErrorFa
 	return smithy.FaultClient
 }
 
-// You can't delete a cluster that contains services. First, update the service to
-// reduce its desired task count to 0, and then delete the service. For more
-// information, see UpdateService and DeleteService.
+// You can't delete a cluster that contains services. First, update the service
+// to reduce its desired task count to 0, and then delete the service. For more
+// information, see UpdateService  and DeleteService .
 type ClusterContainsServicesException struct {
 	Message *string
 
@@ -202,7 +202,7 @@ func (e *ClusterContainsTasksException) ErrorCode() string {
 func (e *ClusterContainsTasksException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified cluster wasn't found. You can view your available clusters with
-// ListClusters. Amazon ECS clusters are Region specific.
+// ListClusters . Amazon ECS clusters are Region specific.
 type ClusterNotFoundException struct {
 	Message *string
 
@@ -228,8 +228,8 @@ func (e *ClusterNotFoundException) ErrorCode() string {
 }
 func (e *ClusterNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified parameter isn't valid. Review the available parameters for the API
-// request.
+// The specified parameter isn't valid. Review the available parameters for the
+// API request.
 type InvalidParameterException struct {
 	Message *string
 
@@ -281,10 +281,11 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Amazon ECS can't determine the current version of the Amazon ECS container agent
-// on the container instance and doesn't have enough information to proceed with an
-// update. This could be because the agent running on the container instance is a
-// previous or custom version that doesn't use our version information.
+// Amazon ECS can't determine the current version of the Amazon ECS container
+// agent on the container instance and doesn't have enough information to proceed
+// with an update. This could be because the agent running on the container
+// instance is a previous or custom version that doesn't use our version
+// information.
 type MissingVersionException struct {
 	Message *string
 
@@ -364,8 +365,8 @@ func (e *NoUpdateAvailableException) ErrorCode() string {
 }
 func (e *NoUpdateAvailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified platform version doesn't satisfy the required capabilities of the
-// task definition.
+// The specified platform version doesn't satisfy the required capabilities of
+// the task definition.
 type PlatformTaskDefinitionIncompatibilityException struct {
 	Message *string
 
@@ -497,9 +498,9 @@ func (e *ServerException) ErrorCode() string {
 }
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The specified service isn't active. You can't update a service that's inactive.
-// If you have previously deleted a service, you can re-create it with
-// CreateService.
+// The specified service isn't active. You can't update a service that's
+// inactive. If you have previously deleted a service, you can re-create it with
+// CreateService .
 type ServiceNotActiveException struct {
 	Message *string
 
@@ -526,7 +527,7 @@ func (e *ServiceNotActiveException) ErrorCode() string {
 func (e *ServiceNotActiveException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified service wasn't found. You can view your available services with
-// ListServices. Amazon ECS services are cluster specific and Region specific.
+// ListServices . Amazon ECS services are cluster specific and Region specific.
 type ServiceNotFoundException struct {
 	Message *string
 
@@ -552,19 +553,15 @@ func (e *ServiceNotFoundException) ErrorCode() string {
 }
 func (e *ServiceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The execute command cannot run. This error can be caused by any of the following
-// configuration issues:
-// - Incorrect IAM permissions
-// - The SSM agent is not
-// installed or is not running
-// - There is an interface Amazon VPC endpoint for
-// Amazon ECS, but there is not one for for Systems Manager Session Manager
+// The execute command cannot run. This error can be caused by any of the
+// following configuration issues:
+//   - Incorrect IAM permissions
+//   - The SSM agent is not installed or is not running
+//   - There is an interface Amazon VPC endpoint for Amazon ECS, but there is not one for for Systems Manager Session Manager
 //
-// For
-// information about how to troubleshoot the issues, see Troubleshooting issues
-// with ECS Exec
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html) in
-// the Amazon Elastic Container Service Developer Guide.
+// For information about how to troubleshoot the issues, see Troubleshooting
+// issues with ECS Exec (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html)
+// in the Amazon Elastic Container Service Developer Guide.
 type TargetNotConnectedException struct {
 	Message *string
 
@@ -618,8 +615,9 @@ func (e *TargetNotFoundException) ErrorCode() string {
 }
 func (e *TargetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified task set wasn't found. You can view your available task sets with
-// DescribeTaskSets. Task sets are specific to each cluster, service and Region.
+// The specified task set wasn't found. You can view your available task sets
+// with DescribeTaskSets. Task sets are specific to each cluster, service and
+// Region.
 type TaskSetNotFoundException struct {
 	Message *string
 
@@ -673,7 +671,7 @@ func (e *UnsupportedFeatureException) ErrorFault() smithy.ErrorFault { return sm
 
 // There's already a current Amazon ECS container agent update in progress on the
 // container instance that's specified. If the container agent becomes disconnected
-// while it's in a transitional stage, such as PENDING or STAGING, the update
+// while it's in a transitional stage, such as PENDING  or STAGING, the update
 // process can get stuck in that state. However, when the agent reconnects, it
 // resumes where it stopped previously.
 type UpdateInProgressException struct {

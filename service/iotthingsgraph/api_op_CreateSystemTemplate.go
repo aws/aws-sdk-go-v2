@@ -33,7 +33,7 @@ func (c *Client) CreateSystemTemplate(ctx context.Context, params *CreateSystemT
 
 type CreateSystemTemplateInput struct {
 
-	// The DefinitionDocument used to create the system.
+	// The DefinitionDocument  used to create the system.
 	//
 	// This member is required.
 	Definition *types.DefinitionDocument

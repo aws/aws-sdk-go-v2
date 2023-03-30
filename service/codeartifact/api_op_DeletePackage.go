@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a package and all associated package versions. A deleted package cannot
-// be restored. To delete one or more package versions, use the
-// DeletePackageVersions
-// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DeletePackageVersions.html)
+// Deletes a package and all associated package versions. A deleted package
+// cannot be restored. To delete one or more package versions, use the
+// DeletePackageVersions (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DeletePackageVersions.html)
 // API.
 func (c *Client) DeletePackage(ctx context.Context, params *DeletePackageInput, optFns ...func(*Options)) (*DeletePackageOutput, error) {
 	if params == nil {
@@ -57,17 +56,12 @@ type DeletePackageInput struct {
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The namespace of the package to delete. The package component that specifies its
-	// namespace depends on its type. For example:
-	// - The namespace of a Maven package
-	// is its groupId. The namespace is required when deleting Maven package
-	// versions.
-	// - The namespace of an npm package is its scope.
-	// - Python and NuGet
-	// packages do not contain corresponding components, packages of those formats do
-	// not have a namespace.
-	//
-	// * The namespace of a generic package is its namespace.
+	// The namespace of the package to delete. The package component that specifies
+	// its namespace depends on its type. For example:
+	//     - The namespace of a Maven package is its groupId . The namespace is required when deleting Maven package versions.
+	//     - The namespace of an npm package is its scope .
+	//     - Python and NuGet packages do not contain corresponding components, packages of those formats do not have a namespace.
+	//     - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	noSmithyDocumentSerde

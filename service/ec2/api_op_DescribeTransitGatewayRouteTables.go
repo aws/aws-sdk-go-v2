@@ -33,26 +33,20 @@ type DescribeTransitGatewayRouteTablesInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// One or more filters. The possible values are:
-	// - default-association-route-table
-	// - Indicates whether this is the default association route table for the transit
-	// gateway (true | false).
-	// - default-propagation-route-table - Indicates whether
-	// this is the default propagation route table for the transit gateway (true |
-	// false).
-	// - state - The state of the route table (available | deleting | deleted |
-	// pending).
-	// - transit-gateway-id - The ID of the transit gateway.
-	// -
-	// transit-gateway-route-table-id - The ID of the transit gateway route table.
+	//     - default-association-route-table - Indicates whether this is the default association route table for the transit gateway ( true | false ).
+	//     - default-propagation-route-table - Indicates whether this is the default propagation route table for the transit gateway ( true | false ).
+	//     - state - The state of the route table ( available | deleting | deleted | pending ).
+	//     - transit-gateway-id - The ID of the transit gateway.
+	//     - transit-gateway-route-table-id - The ID of the transit gateway route table.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -151,11 +145,11 @@ var _ DescribeTransitGatewayRouteTablesAPIClient = (*Client)(nil)
 // DescribeTransitGatewayRouteTables
 type DescribeTransitGatewayRouteTablesPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

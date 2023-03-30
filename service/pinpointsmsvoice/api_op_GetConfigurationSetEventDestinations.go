@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Obtain information about an event destination, including the types of events it
-// reports, the Amazon Resource Name (ARN) of the destination, and the name of the
-// event destination.
+// Obtain information about an event destination, including the types of events
+// it reports, the Amazon Resource Name (ARN) of the destination, and the name of
+// the event destination.
 func (c *Client) GetConfigurationSetEventDestinations(ctx context.Context, params *GetConfigurationSetEventDestinationsInput, optFns ...func(*Options)) (*GetConfigurationSetEventDestinationsOutput, error) {
 	if params == nil {
 		params = &GetConfigurationSetEventDestinationsInput{}
@@ -42,8 +42,8 @@ type GetConfigurationSetEventDestinationsInput struct {
 // An object that contains information about an event destination.
 type GetConfigurationSetEventDestinationsOutput struct {
 
-	// An array of EventDestination objects. Each EventDestination object includes ARNs
-	// and other information that define an event destination.
+	// An array of EventDestination objects. Each EventDestination object includes
+	// ARNs and other information that define an event destination.
 	EventDestinations []types.EventDestination
 
 	// Metadata pertaining to the operation's result.

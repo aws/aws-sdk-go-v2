@@ -15,14 +15,12 @@ import (
 // you can grant permissions to all accounts in an organization or to individual
 // accounts. You can also use a sink policy to limit the types of data that is
 // shared. The three types that you can allow or deny are:
-// - Metrics - Specify with
-// AWS::CloudWatch::Metric
-// - Log groups - Specify with AWS::Logs::LogGroup
-// - Traces
-// - Specify with AWS::XRay::Trace
+//   - Metrics - Specify with AWS::CloudWatch::Metric
+//   - Log groups - Specify with AWS::Logs::LogGroup
+//   - Traces - Specify with AWS::XRay::Trace
 //
-// See the examples in this section to see how to
-// specify permitted source accounts and data types.
+// See the examples in this section
+// to see how to specify permitted source accounts and data types.
 func (c *Client) PutSinkPolicy(ctx context.Context, params *PutSinkPolicyInput, optFns ...func(*Options)) (*PutSinkPolicyOutput, error) {
 	if params == nil {
 		params = &PutSinkPolicyInput{}
@@ -64,7 +62,8 @@ type PutSinkPolicyOutput struct {
 	// The ARN of the sink.
 	SinkArn *string
 
-	// The random ID string that Amazon Web Services generated as part of the sink ARN.
+	// The random ID string that Amazon Web Services generated as part of the sink
+	// ARN.
 	SinkId *string
 
 	// Metadata pertaining to the operation's result.

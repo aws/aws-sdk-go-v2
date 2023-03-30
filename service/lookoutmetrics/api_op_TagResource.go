@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds tags
-// (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html) to a
-// detector, dataset, or alert.
+// Adds tags (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html)
+// to a detector, dataset, or alert.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -35,8 +34,8 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// Tags to apply to the resource. Tag keys and values can contain letters, numbers,
-	// spaces, and the following symbols: _.:/=+@-
+	// Tags to apply to the resource. Tag keys and values can contain letters,
+	// numbers, spaces, and the following symbols: _.:/=+@-
 	//
 	// This member is required.
 	Tags map[string]string

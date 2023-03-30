@@ -45,17 +45,16 @@ type UpdateWorkteamInput struct {
 	// provide input for both of these parameters in a single request. For workforces
 	// created using Amazon Cognito, private work teams correspond to Amazon Cognito
 	// user groups within the user pool used to create a workforce. All of the
-	// CognitoMemberDefinition objects that make up the member definition must have the
-	// same ClientId and UserPool values. To add a Amazon Cognito user group to an
-	// existing worker pool, see Adding groups to a User Pool. For more information
-	// about user pools, see Amazon Cognito User Pools
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html).
-	// For workforces created using your own OIDC IdP, specify the user groups that you
-	// want to include in your private work team in OidcMemberDefinition by listing
-	// those groups in Groups. Be aware that user groups that are already in the work
-	// team must also be listed in Groups when you make this request to remain on the
-	// work team. If you do not include these user groups, they will no longer be
-	// associated with the work team you update.
+	// CognitoMemberDefinitionobjects that make up the member definition must have
+	// the same ClientId  and UserPool values. To add a Amazon Cognito user group to
+	// an existing worker pool, see Adding groups to a User Pool. For more
+	// information about user pools, see Amazon Cognito User Pools (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html)
+	// . For workforces created using your own OIDC IdP, specify the user groups that
+	// you want to include in your private work team in OidcMemberDefinition by
+	// listing those groups in Groups. Be aware that user groups that are already in
+	// the work team must also be listed in Groups when you make this request to
+	// remain on the work team. If you do not include these user groups, they will no
+	// longer be associated with the work team you update.
 	MemberDefinitions []types.MemberDefinition
 
 	// Configures SNS topic notifications for available or expiring work items
@@ -66,7 +65,7 @@ type UpdateWorkteamInput struct {
 
 type UpdateWorkteamOutput struct {
 
-	// A Workteam object that describes the updated work team.
+	// A Workteam  object that describes the updated work team.
 	//
 	// This member is required.
 	Workteam *types.Workteam

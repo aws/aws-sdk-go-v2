@@ -60,9 +60,9 @@ type ListEmailIdentitiesOutput struct {
 	// Web Services account.
 	EmailIdentities []types.IdentityInfo
 
-	// A token that indicates that there are additional configuration sets to list. To
-	// view additional configuration sets, issue another request to
-	// ListEmailIdentities, and pass this token in the NextToken parameter.
+	// A token that indicates that there are additional configuration sets to list.
+	// To view additional configuration sets, issue another request to
+	// ListEmailIdentities , and pass this token in the NextToken  parameter.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -131,8 +131,8 @@ func (c *Client) addOperationListEmailIdentitiesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListEmailIdentitiesAPIClient is a client that implements the ListEmailIdentities
-// operation.
+// ListEmailIdentitiesAPIClient is a client that implements the
+// ListEmailIdentities operation.
 type ListEmailIdentitiesAPIClient interface {
 	ListEmailIdentities(context.Context, *ListEmailIdentitiesInput, ...func(*Options)) (*ListEmailIdentitiesOutput, error)
 }
@@ -149,8 +149,8 @@ type ListEmailIdentitiesPaginatorOptions struct {
 	// more than 1000.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

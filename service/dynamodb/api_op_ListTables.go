@@ -30,7 +30,7 @@ func (c *Client) ListTables(ctx context.Context, params *ListTablesInput, optFns
 	return out, nil
 }
 
-// Represents the input of a ListTables operation.
+// Represents the input of a ListTables  operation.
 type ListTablesInput struct {
 
 	// The first table name that this operation will evaluate. Use the value that was
@@ -45,21 +45,21 @@ type ListTablesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a ListTables operation.
+// Represents the output of a ListTables  operation.
 type ListTablesOutput struct {
 
-	// The name of the last table in the current page of results. Use this value as the
-	// ExclusiveStartTableName in a new request to obtain the next page of results,
-	// until all the table names are returned. If you do not receive a
-	// LastEvaluatedTableName value in the response, this means that there are no more
+	// The name of the last table in the current page of results. Use this value as
+	// the ExclusiveStartTableName in a new request to obtain the next page of
+	// results, until all the table names are returned. If you do not receive a
+	// LastEvaluatedTableNamevalue in the response, this means that there are no more
 	// table names to be retrieved.
 	LastEvaluatedTableName *string
 
 	// The names of the tables associated with the current account at the current
-	// endpoint. The maximum size of this array is 100. If LastEvaluatedTableName also
-	// appears in the output, you can use this value as the ExclusiveStartTableName
-	// parameter in a subsequent ListTables request and obtain the next page of
-	// results.
+	// endpoint. The maximum size of this array is 100. If LastEvaluatedTableName
+	// also appears in the output, you can use this value as the
+	// ExclusiveStartTableName parameter in a subsequent ListTables request and
+	// obtain the next page of results.
 	TableNames []string
 
 	// Metadata pertaining to the operation's result.
@@ -190,8 +190,8 @@ type ListTablesPaginatorOptions struct {
 	// the limit is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the parameters of a parameter group. You can modify up to 20 parameters
-// in a single request by submitting a list parameter name and value pairs.
+// Updates the parameters of a parameter group. You can modify up to 20
+// parameters in a single request by submitting a list parameter name and value
+// pairs.
 func (c *Client) UpdateParameterGroup(ctx context.Context, params *UpdateParameterGroupInput, optFns ...func(*Options)) (*UpdateParameterGroupOutput, error) {
 	if params == nil {
 		params = &UpdateParameterGroupInput{}
@@ -35,9 +36,9 @@ type UpdateParameterGroupInput struct {
 	// This member is required.
 	ParameterGroupName *string
 
-	// An array of parameter names and values for the parameter update. You must supply
-	// at least one parameter name and value; subsequent arguments are optional. A
-	// maximum of 20 parameters may be updated per request.
+	// An array of parameter names and values for the parameter update. You must
+	// supply at least one parameter name and value; subsequent arguments are optional.
+	// A maximum of 20 parameters may be updated per request.
 	//
 	// This member is required.
 	ParameterNameValues []types.ParameterNameValue

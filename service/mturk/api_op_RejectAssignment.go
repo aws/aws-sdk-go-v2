@@ -34,14 +34,14 @@ func (c *Client) RejectAssignment(ctx context.Context, params *RejectAssignmentI
 
 type RejectAssignmentInput struct {
 
-	// The ID of the assignment. The assignment must correspond to a HIT created by the
-	// Requester.
+	// The ID of the assignment. The assignment must correspond to a HIT created by
+	// the Requester.
 	//
 	// This member is required.
 	AssignmentId *string
 
-	// A message for the Worker, which the Worker can see in the Status section of the
-	// web site.
+	// A message for the Worker, which the Worker can see in the Status section of
+	// the web site.
 	//
 	// This member is required.
 	RequesterFeedback *string

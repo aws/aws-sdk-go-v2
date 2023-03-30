@@ -32,8 +32,8 @@ func (c *Client) ListRegistries(ctx context.Context, params *ListRegistriesInput
 
 type ListRegistriesInput struct {
 
-	// Maximum number of results required per page. If the value is not supplied, this
-	// will be defaulted to 25 per page.
+	// Maximum number of results required per page. If the value is not supplied,
+	// this will be defaulted to 25 per page.
 	MaxResults *int32
 
 	// A continuation token, if this is a continuation call.
@@ -44,12 +44,12 @@ type ListRegistriesInput struct {
 
 type ListRegistriesOutput struct {
 
-	// A continuation token for paginating the returned list of tokens, returned if the
-	// current segment of the list is not the last.
+	// A continuation token for paginating the returned list of tokens, returned if
+	// the current segment of the list is not the last.
 	NextToken *string
 
-	// An array of RegistryDetailedListItem objects containing minimal details of each
-	// registry.
+	// An array of RegistryDetailedListItem objects containing minimal details of
+	// each registry.
 	Registries []types.RegistryListItem
 
 	// Metadata pertaining to the operation's result.
@@ -128,12 +128,12 @@ var _ ListRegistriesAPIClient = (*Client)(nil)
 
 // ListRegistriesPaginatorOptions is the paginator options for ListRegistries
 type ListRegistriesPaginatorOptions struct {
-	// Maximum number of results required per page. If the value is not supplied, this
-	// will be defaulted to 25 per page.
+	// Maximum number of results required per page. If the value is not supplied,
+	// this will be defaulted to 25 per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

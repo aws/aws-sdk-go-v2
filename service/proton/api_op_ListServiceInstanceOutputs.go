@@ -35,13 +35,13 @@ type ListServiceInstanceOutputsInput struct {
 	// This member is required.
 	ServiceInstanceName *string
 
-	// The name of the service that serviceInstanceName is associated to.
+	// The name of the service that serviceInstanceName  is associated to.
 	//
 	// This member is required.
 	ServiceName *string
 
-	// A token that indicates the location of the next output in the array of outputs,
-	// after the list of outputs that was previously requested.
+	// A token that indicates the location of the next output in the array of
+	// outputs, after the list of outputs that was previously requested.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -54,8 +54,8 @@ type ListServiceInstanceOutputsOutput struct {
 	// This member is required.
 	Outputs []types.Output
 
-	// A token that indicates the location of the next output in the array of outputs,
-	// after the current requested list of outputs.
+	// A token that indicates the location of the next output in the array of
+	// outputs, after the current requested list of outputs.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -138,8 +138,8 @@ var _ ListServiceInstanceOutputsAPIClient = (*Client)(nil)
 // ListServiceInstanceOutputsPaginatorOptions is the paginator options for
 // ListServiceInstanceOutputs
 type ListServiceInstanceOutputsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

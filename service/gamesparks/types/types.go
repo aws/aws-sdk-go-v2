@@ -159,9 +159,9 @@ type Generator struct {
 	// The target version of the GameSparks Game SDK.
 	GameSdkVersion *string
 
-	// The programming language for the generated code. Not all languages are supported
-	// for each platform. For cases where multiple languages are supported, this
-	// parameter specifies the language to be used. If this value is omitted, the
+	// The programming language for the generated code. Not all languages are
+	// supported for each platform. For cases where multiple languages are supported,
+	// this parameter specifies the language to be used. If this value is omitted, the
 	// default language for the target platform will be used.
 	Language *string
 
@@ -200,8 +200,8 @@ type Section struct {
 // A single modification to the configuration section.
 type SectionModification struct {
 
-	// The operation to be performed on a configuration section. Content can be added,
-	// deleted, or replaced within a section.
+	// The operation to be performed on a configuration section. Content can be
+	// added, deleted, or replaced within a section.
 	//
 	// This member is required.
 	Operation Operation
@@ -216,8 +216,8 @@ type SectionModification struct {
 	// This member is required.
 	Section *string
 
-	// For add and replace operations, this is the value that will be used. This field
-	// should be omitted for delete operations.
+	// For add and replace operations, this is the value that will be used. This
+	// field should be omitted for delete operations.
 	Value document.Interface
 
 	noSmithyDocumentSerde
@@ -325,8 +325,8 @@ type StageDetails struct {
 	// The description of the stage.
 	Description *string
 
-	// The game key associated with the stage. The game key is a unique identifier that
-	// the game client uses to connect to the GameSparks backend.
+	// The game key associated with the stage. The game key is a unique identifier
+	// that the game client uses to connect to the GameSparks backend.
 	GameKey *string
 
 	// The timestamp of when the stage was last updated.
@@ -357,8 +357,8 @@ type StageSummary struct {
 	// The description of the stage.
 	Description *string
 
-	// The game key associated with the stage. The game key is a unique identifier that
-	// the game client uses to connect to the GameSparks backend.
+	// The game key associated with the stage. The game key is a unique identifier
+	// that the game client uses to connect to the GameSparks backend.
 	GameKey *string
 
 	// The name of the stage.

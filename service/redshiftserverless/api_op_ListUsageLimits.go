@@ -31,12 +31,12 @@ func (c *Client) ListUsageLimits(ctx context.Context, params *ListUsageLimitsInp
 type ListUsageLimitsInput struct {
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results. The default is 100.
+	// You can use nextToken  to get the next page of results. The default is 100.
 	MaxResults *int32
 
-	// If your initial ListUsageLimits operation returns a nextToken, you can include
-	// the returned nextToken in following ListUsageLimits operations, which returns
-	// results in the next page.
+	// If your initial ListUsageLimits  operation returns a nextToken, you can
+	// include the returned nextToken  in following ListUsageLimits operations, which
+	// returns results in the next page.
 	NextToken *string
 
 	// The Amazon Resource Name (ARN) associated with the resource whose usage limits
@@ -51,8 +51,8 @@ type ListUsageLimitsInput struct {
 
 type ListUsageLimitsOutput struct {
 
-	// When nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// When nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page.
 	NextToken *string
 
@@ -136,11 +136,11 @@ var _ ListUsageLimitsAPIClient = (*Client)(nil)
 // ListUsageLimitsPaginatorOptions is the paginator options for ListUsageLimits
 type ListUsageLimitsPaginatorOptions struct {
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results. The default is 100.
+	// You can use nextToken  to get the next page of results. The default is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

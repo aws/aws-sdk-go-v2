@@ -54,7 +54,7 @@ type CreateAssessmentFrameworkInput struct {
 
 type CreateAssessmentFrameworkOutput struct {
 
-	// The name of the new framework that the CreateAssessmentFramework API returned.
+	// The name of the new framework that the CreateAssessmentFramework  API returned.
 	Framework *types.Framework
 
 	// Metadata pertaining to the operation's result.

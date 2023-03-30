@@ -65,8 +65,8 @@ type ListDataSourceSyncJobsOutput struct {
 	// A history of synchronization jobs for the data source connector.
 	History []types.DataSourceSyncJob
 
-	// If the response is truncated, Amazon Kendra returns this token that you can use
-	// in the subsequent request to retrieve the next set of jobs.
+	// If the response is truncated, Amazon Kendra returns this token that you can
+	// use in the subsequent request to retrieve the next set of jobs.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -153,8 +153,8 @@ type ListDataSourceSyncJobsPaginatorOptions struct {
 	// are fewer results in the list, this response contains only the actual results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -167,7 +167,8 @@ type ListDataSourceSyncJobsPaginator struct {
 	firstPage bool
 }
 
-// NewListDataSourceSyncJobsPaginator returns a new ListDataSourceSyncJobsPaginator
+// NewListDataSourceSyncJobsPaginator returns a new
+// ListDataSourceSyncJobsPaginator
 func NewListDataSourceSyncJobsPaginator(client ListDataSourceSyncJobsAPIClient, params *ListDataSourceSyncJobsInput, optFns ...func(*ListDataSourceSyncJobsPaginatorOptions)) *ListDataSourceSyncJobsPaginator {
 	if params == nil {
 		params = &ListDataSourceSyncJobsInput{}

@@ -46,9 +46,9 @@ type DetectPiiEntitiesInput struct {
 
 type DetectPiiEntitiesOutput struct {
 
-	// A collection of PII entities identified in the input text. For each entity, the
-	// response provides the entity type, where the entity text begins and ends, and
-	// the level of confidence that Amazon Comprehend has in the detection.
+	// A collection of PII entities identified in the input text. For each entity,
+	// the response provides the entity type, where the entity text begins and ends,
+	// and the level of confidence that Amazon Comprehend has in the detection.
 	Entities []types.PiiEntity
 
 	// Metadata pertaining to the operation's result.

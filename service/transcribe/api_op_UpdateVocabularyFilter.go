@@ -38,14 +38,14 @@ type UpdateVocabularyFilterInput struct {
 	// This member is required.
 	VocabularyFilterName *string
 
-	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access the
-	// Amazon S3 bucket that contains your input files (in this case, your custom
+	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access
+	// the Amazon S3 bucket that contains your input files (in this case, your custom
 	// vocabulary filter). If the role that you specify doesn’t have the appropriate
 	// permissions to access the specified Amazon S3 location, your request fails. IAM
 	// role ARNs have the format arn:partition:iam::account:role/role-name-with-path.
-	// For example: arn:aws:iam::111122223333:role/Admin. For more information, see IAM
-	// ARNs
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
+	// For example: arn:aws:iam::111122223333:role/Admin . For more information, see
+	// IAM ARNs (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns)
+	// .
 	DataAccessRoleArn *string
 
 	// The Amazon S3 location of the text file that contains your custom vocabulary
@@ -60,13 +60,13 @@ type UpdateVocabularyFilterInput struct {
 	// including all desired terms, as comma-separated values, within your request. The
 	// other option for updating your vocabulary filter is to save your entries in a
 	// text file and upload them to an Amazon S3 bucket, then specify the location of
-	// your file using the VocabularyFilterFileUri parameter. Note that if you include
-	// Words in your request, you cannot use VocabularyFilterFileUri; you must choose
-	// one or the other. Each language has a character set that contains all allowed
-	// characters for that specific language. If you use unsupported characters, your
-	// custom vocabulary filter request fails. Refer to Character Sets for Custom
-	// Vocabularies (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html) to
-	// get the character set for your language.
+	// your file using the VocabularyFilterFileUri parameter. Note that if you
+	// include Words  in your request, you cannot use VocabularyFilterFileUri; you
+	// must choose one or the other. Each language has a character set that contains
+	// all allowed characters for that specific language. If you use unsupported
+	// characters, your custom vocabulary filter request fails. Refer to Character
+	// Sets for Custom Vocabularies (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html)
+	// to get the character set for your language.
 	Words []string
 
 	noSmithyDocumentSerde
@@ -78,7 +78,7 @@ type UpdateVocabularyFilterOutput struct {
 	LanguageCode types.LanguageCode
 
 	// The date and time the specified custom vocabulary filter was last updated.
-	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC . For example,
 	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
 

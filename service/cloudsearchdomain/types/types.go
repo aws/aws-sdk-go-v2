@@ -45,25 +45,25 @@ type FieldStats struct {
 	Count int64
 
 	// The maximum value found in the specified field in the result set. If the field
-	// is numeric (int, int-array, double, or double-array), max is the string
+	// is numeric ( int , int-array , double , or double-array ), max is the string
 	// representation of a double-precision 64-bit floating point value. If the field
-	// is date or date-array, max is the string representation of a date with the
+	// is date  or date-array , max is the string representation of a date with the
 	// format specified in IETF RFC3339 (http://tools.ietf.org/html/rfc3339):
 	// yyyy-mm-ddTHH:mm:ss.SSSZ.
 	Max *string
 
-	// The average of the values found in the specified field in the result set. If the
-	// field is numeric (int, int-array, double, or double-array), mean is the string
-	// representation of a double-precision 64-bit floating point value. If the field
-	// is date or date-array, mean is the string representation of a date with the
-	// format specified in IETF RFC3339 (http://tools.ietf.org/html/rfc3339):
-	// yyyy-mm-ddTHH:mm:ss.SSSZ.
+	// The average of the values found in the specified field in the result set. If
+	// the field is numeric ( int , int-array , double , or double-array ), mean is
+	// the string representation of a double-precision 64-bit floating point value. If
+	// the field is date  or date-array , mean is the string representation of a date
+	// with the format specified in IETF RFC3339 (http://tools.ietf.org/html/rfc3339)
+	// : yyyy-mm-ddTHH:mm:ss.SSSZ.
 	Mean *string
 
 	// The minimum value found in the specified field in the result set. If the field
-	// is numeric (int, int-array, double, or double-array), min is the string
+	// is numeric ( int , int-array , double , or double-array ), min is the string
 	// representation of a double-precision 64-bit floating point value. If the field
-	// is date or date-array, min is the string representation of a date with the
+	// is date  or date-array , min is the string representation of a date with the
 	// format specified in IETF RFC3339 (http://tools.ietf.org/html/rfc3339):
 	// yyyy-mm-ddTHH:mm:ss.SSSZ.
 	Min *string
@@ -122,8 +122,8 @@ type Hits struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the resource id (rid) and the time it took to process the request
-// (timems).
+// Contains the resource id ( rid ) and the time it took to process the request (
+// timems ).
 type SearchStatus struct {
 
 	// The encrypted resource ID for the request.
@@ -136,7 +136,7 @@ type SearchStatus struct {
 }
 
 // An autocomplete suggestion that matches the query string specified in a
-// SuggestRequest.
+// SuggestRequest .
 type SuggestionMatch struct {
 
 	// The document ID of the suggested document.
@@ -145,13 +145,13 @@ type SuggestionMatch struct {
 	// The relevance score of a suggested match.
 	Score int64
 
-	// The string that matches the query string specified in the SuggestRequest.
+	// The string that matches the query string specified in the SuggestRequest .
 	Suggestion *string
 
 	noSmithyDocumentSerde
 }
 
-// Container for the suggestion information returned in a SuggestResponse.
+// Container for the suggestion information returned in a SuggestResponse .
 type SuggestModel struct {
 
 	// The number of documents that were found to match the query string.
@@ -166,8 +166,8 @@ type SuggestModel struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the resource id (rid) and the time it took to process the request
-// (timems).
+// Contains the resource id ( rid ) and the time it took to process the request (
+// timems ).
 type SuggestStatus struct {
 
 	// The encrypted resource ID for the request.

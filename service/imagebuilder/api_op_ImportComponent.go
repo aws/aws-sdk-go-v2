@@ -50,12 +50,12 @@ type ImportComponentInput struct {
 	// This member is required.
 	Platform types.Platform
 
-	// The semantic version of the component. This version follows the semantic version
-	// syntax. The semantic version has four nodes: ../. You can assign values for the
-	// first three, and can filter on all of them. Filtering: With semantic versioning,
-	// you have the flexibility to use wildcards (x) to specify the most recent
-	// versions or nodes when selecting the base image or components for your recipe.
-	// When you use a wildcard in any node, all nodes to the right of the first
+	// The semantic version of the component. This version follows the semantic
+	// version syntax. The semantic version has four nodes: ../. You can assign values
+	// for the first three, and can filter on all of them. Filtering: With semantic
+	// versioning, you have the flexibility to use wildcards (x) to specify the most
+	// recent versions or nodes when selecting the base image or components for your
+	// recipe. When you use a wildcard in any node, all nodes to the right of the first
 	// wildcard must also be wildcards.
 	//
 	// This member is required.
@@ -67,12 +67,12 @@ type ImportComponentInput struct {
 	// This member is required.
 	Type types.ComponentType
 
-	// The change description of the component. Describes what change has been made in
-	// this version, or what makes this version different from other versions of this
-	// component.
+	// The change description of the component. Describes what change has been made
+	// in this version, or what makes this version different from other versions of
+	// this component.
 	ChangeDescription *string
 
-	// The data of the component. Used to specify the data inline. Either data or uri
+	// The data of the component. Used to specify the data inline. Either data  or uri
 	// can be used to specify the data within the component.
 	Data *string
 
@@ -87,7 +87,7 @@ type ImportComponentInput struct {
 
 	// The uri of the component. Must be an Amazon S3 URL and the requester must have
 	// permission to access the Amazon S3 bucket. If you use Amazon S3, you can specify
-	// component content up to your service quota. Either data or uri can be used to
+	// component content up to your service quota. Either data  or uri can be used to
 	// specify the data within the component.
 	Uri *string
 

@@ -44,8 +44,8 @@ type InviteMembersInput struct {
 	// This member is required.
 	DetectorId *string
 
-	// A Boolean value that specifies whether you want to disable email notification to
-	// the accounts that you are inviting to GuardDuty as members.
+	// A Boolean value that specifies whether you want to disable email notification
+	// to the accounts that you are inviting to GuardDuty as members.
 	DisableEmailNotification bool
 
 	// The invitation message that you want to send to the accounts that you're
@@ -57,8 +57,8 @@ type InviteMembersInput struct {
 
 type InviteMembersOutput struct {
 
-	// A list of objects that contain the unprocessed account and a result string that
-	// explains why it was unprocessed.
+	// A list of objects that contain the unprocessed account and a result string
+	// that explains why it was unprocessed.
 	//
 	// This member is required.
 	UnprocessedAccounts []types.UnprocessedAccount

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use the SearchDataSources operation to search for data sources that belong to an
-// account.
+// Use the SearchDataSources operation to search for data sources that belong to
+// an account.
 func (c *Client) SearchDataSources(ctx context.Context, params *SearchDataSourcesInput, optFns ...func(*Options)) (*SearchDataSourcesOutput, error) {
 	if params == nil {
 		params = &SearchDataSourcesInput{}
@@ -52,7 +52,7 @@ type SearchDataSourcesInput struct {
 
 type SearchDataSourcesOutput struct {
 
-	// A DataSourceSummaries object that returns a summary of a data source.
+	// A DataSourceSummaries  object that returns a summary of a data source.
 	DataSourceSummaries []types.DataSourceSummary
 
 	// A pagination token that can be used in a subsequent request.
@@ -141,13 +141,14 @@ type SearchDataSourcesAPIClient interface {
 
 var _ SearchDataSourcesAPIClient = (*Client)(nil)
 
-// SearchDataSourcesPaginatorOptions is the paginator options for SearchDataSources
+// SearchDataSourcesPaginatorOptions is the paginator options for
+// SearchDataSources
 type SearchDataSourcesPaginatorOptions struct {
 	// The maximum number of results to be returned per request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

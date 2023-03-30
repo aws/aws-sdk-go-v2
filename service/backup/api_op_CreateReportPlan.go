@@ -48,26 +48,26 @@ type CreateReportPlanInput struct {
 	// This member is required.
 	ReportPlanName *string
 
-	// Identifies the report template for the report. Reports are built using a report
-	// template. The report templates are: RESOURCE_COMPLIANCE_REPORT |
+	// Identifies the report template for the report. Reports are built using a
+	// report template. The report templates are: RESOURCE_COMPLIANCE_REPORT |
 	// CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT |
-	// RESTORE_JOB_REPORT If the report template is RESOURCE_COMPLIANCE_REPORT or
-	// CONTROL_COMPLIANCE_REPORT, this API resource also describes the report coverage
-	// by Amazon Web Services Regions and frameworks.
+	// RESTORE_JOB_REPORT If the report template is RESOURCE_COMPLIANCE_REPORT  or
+	// CONTROL_COMPLIANCE_REPORT, this API resource also describes the report
+	// coverage by Amazon Web Services Regions and frameworks.
 	//
 	// This member is required.
 	ReportSetting *types.ReportSetting
 
 	// A customer-chosen string that you can use to distinguish between otherwise
-	// identical calls to CreateReportPlanInput. Retrying a successful request with the
-	// same idempotency token results in a success message with no action taken.
+	// identical calls to CreateReportPlanInput. Retrying a successful request with
+	// the same idempotency token results in a success message with no action taken.
 	IdempotencyToken *string
 
 	// An optional description of the report plan with a maximum of 1,024 characters.
 	ReportPlanDescription *string
 
-	// Metadata that you can assign to help organize the report plans that you create.
-	// Each tag is a key-value pair.
+	// Metadata that you can assign to help organize the report plans that you
+	// create. Each tag is a key-value pair.
 	ReportPlanTags map[string]string
 
 	noSmithyDocumentSerde
@@ -76,13 +76,13 @@ type CreateReportPlanInput struct {
 type CreateReportPlanOutput struct {
 
 	// The date and time a backup vault is created, in Unix format and Coordinated
-	// Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For
-	// example, the value 1516925490.087 represents Friday, January 26, 2018
+	// Universal Time (UTC). The value of CreationTime is accurate to milliseconds.
+	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
 	CreationTime *time.Time
 
-	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of
-	// the ARN depends on the resource type.
+	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format
+	// of the ARN depends on the resource type.
 	ReportPlanArn *string
 
 	// The unique name of the report plan.

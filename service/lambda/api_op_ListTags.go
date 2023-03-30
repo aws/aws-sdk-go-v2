@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a function's tags
-// (https://docs.aws.amazon.com/lambda/latest/dg/tagging.html). You can also view
-// tags with GetFunction.
+// Returns a function's tags (https://docs.aws.amazon.com/lambda/latest/dg/tagging.html)
+// . You can also view tags with GetFunction .
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
 		params = &ListTagsInput{}
@@ -30,8 +29,8 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 
 type ListTagsInput struct {
 
-	// The function's Amazon Resource Name (ARN). Note: Lambda does not support adding
-	// tags to aliases or versions.
+	// The function's Amazon Resource Name (ARN). Note: Lambda does not support
+	// adding tags to aliases or versions.
 	//
 	// This member is required.
 	Resource *string

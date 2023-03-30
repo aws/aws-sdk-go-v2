@@ -35,14 +35,13 @@ type ResumeContactRecordingInput struct {
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the contact. This is the identifier of the contact associated
-	// with the first interaction with the contact center.
+	// The identifier of the contact. This is the identifier of the contact
+	// associated with the first interaction with the contact center.
 	//
 	// This member is required.
 	InitialContactId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.

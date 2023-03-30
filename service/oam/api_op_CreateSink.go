@@ -15,9 +15,8 @@ import (
 // resource that represents an attachment point in a monitoring account. Source
 // accounts can link to the sink to send observability data. After you create a
 // sink, you must create a sink policy that allows source accounts to attach to it.
-// For more information, see PutSinkPolicy
-// (https://docs.aws.amazon.com/OAM/latest/APIReference/API_PutSinkPolicy.html).
-// Each account can contain one sink. If you delete a sink, you can then create a
+// For more information, see PutSinkPolicy (https://docs.aws.amazon.com/OAM/latest/APIReference/API_PutSinkPolicy.html)
+// . Each account can contain one sink. If you delete a sink, you can then create a
 // new one in that account.
 func (c *Client) CreateSink(ctx context.Context, params *CreateSinkInput, optFns ...func(*Options)) (*CreateSinkOutput, error) {
 	if params == nil {
@@ -45,8 +44,8 @@ type CreateSinkInput struct {
 	// organize and categorize your resources. You can also use them to scope user
 	// permissions by granting a user permission to access or change only resources
 	// with certain tag values. For more information about using tags to control
-	// access, see Controlling access to Amazon Web Services resources using tags
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html).
+	// access, see Controlling access to Amazon Web Services resources using tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html)
+	// .
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -57,7 +56,8 @@ type CreateSinkOutput struct {
 	// The ARN of the sink that is newly created.
 	Arn *string
 
-	// The random ID string that Amazon Web Services generated as part of the sink ARN.
+	// The random ID string that Amazon Web Services generated as part of the sink
+	// ARN.
 	Id *string
 
 	// The name of the sink.

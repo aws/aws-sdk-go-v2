@@ -172,9 +172,9 @@ func (w *audioStreamWriter) writeStream() {
 }
 
 func (w *audioStreamWriter) writeEvent(event types.AudioStream) error {
-	// serializedEvent returned bytes refers to an underlying byte buffer and must not
-	// escape this writeEvent scope without first copying. Any previous bytes stored in
-	// the buffer are cleared by this call.
+	// serializedEvent returned bytes refers to an underlying byte buffer and must
+	// not escape this writeEvent scope without first copying. Any previous bytes
+	// stored in the buffer are cleared by this call.
 	serializedEvent, err := w.serializeEvent(event)
 	if err != nil {
 		return err

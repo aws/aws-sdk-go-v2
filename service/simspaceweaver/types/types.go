@@ -8,43 +8,35 @@ import (
 )
 
 // The Amazon CloudWatch Logs log group for the simulation. For more information
-// about log groups, see Working with log groups and log streams
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html)
+// about log groups, see Working with log groups and log streams (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html)
 // in the Amazon CloudWatch Logs User Guide.
 type CloudWatchLogsLogGroup struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon CloudWatch Logs log group for the
-	// simulation. For more information about ARNs, see Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the Amazon Web Services General Reference. For more information about log
-	// groups, see Working with log groups and log streams
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html)
+	// simulation. For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the Amazon Web Services General Reference. For more information about log
+	// groups, see Working with log groups and log streams (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html)
 	// in the Amazon CloudWatch Logs User Guide.
 	LogGroupArn *string
 
 	noSmithyDocumentSerde
 }
 
-// A collection of app instances that run the same executable app code and have the
-// same launch options and commands. For more information about domains, see Key
-// concepts
-// (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html)
+// A collection of app instances that run the same executable app code and have
+// the same launch options and commands. For more information about domains, see
+// Key concepts (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html)
 // in the Amazon Web Services SimSpace Weaver User Guide.
 type Domain struct {
 
 	// The type of lifecycle management for apps in the domain. This value indicates
 	// whether apps in this domain are managed (SimSpace Weaver starts and stops the
 	// apps) or unmanaged (you must start and stop the apps). Lifecycle types
-	// -
-	// PerWorker – Managed: SimSpace Weaver starts 1 app on each worker
-	// -
-	// BySpatialSubdivision – Managed: SimSpace Weaver starts 1 app for each spatial
-	// partition
-	// - ByRequest – Unmanaged: You use the StartApp API to start the apps
-	// and use the StopApp API to stop the apps.
+	//     - PerWorker – Managed: SimSpace Weaver starts 1 app on each worker
+	//     - BySpatialSubdivision – Managed: SimSpace Weaver starts 1 app for each spatial partition
+	//     - ByRequest – Unmanaged: You use the StartApp API to start the apps and use the StopApp API to stop the apps.
 	//
-	// The lifecycle types will change when
-	// the service is released for general availability (GA).
+	// The lifecycle types will change when the service is released for general
+	// availability (GA).
 	Lifecycle LifecycleManagementStrategy
 
 	// The name of the domain.
@@ -57,8 +49,8 @@ type Domain struct {
 // behavior.
 type LaunchOverrides struct {
 
-	// App launch commands and command line parameters that override the launch command
-	// configured in the simulation schema.
+	// App launch commands and command line parameters that override the launch
+	// command configured in the simulation schema.
 	LaunchCommands []string
 
 	noSmithyDocumentSerde
@@ -72,8 +64,7 @@ type LiveSimulationState struct {
 	Clocks []SimulationClock
 
 	// A list of domains for the simulation. For more information about domains, see
-	// Key concepts
-	// (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html)
+	// Key concepts (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html)
 	// in the Amazon Web Services SimSpace Weaver User Guide.
 	Domains []Domain
 
@@ -84,8 +75,7 @@ type LiveSimulationState struct {
 type LogDestination struct {
 
 	// An Amazon CloudWatch Logs log group that stores simulation log data. For more
-	// information about log groups, see Working with log groups and log streams
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html)
+	// information about log groups, see Working with log groups and log streams (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html)
 	// in the Amazon CloudWatch Logs User Guide.
 	CloudWatchLogsLogGroup *CloudWatchLogsLogGroup
 
@@ -103,20 +93,18 @@ type LoggingConfiguration struct {
 
 // A location in Amazon Simple Storage Service (Amazon S3) where SimSpace Weaver
 // stores simulation data, such as your app zip files and schema file. For more
-// information about Amazon S3, see the  Amazon Simple Storage Service User Guide
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html).
+// information about Amazon S3, see the Amazon Simple Storage Service User Guide  (https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
+// .
 type S3Location struct {
 
 	// The name of an Amazon S3 bucket. For more information about buckets, see
-	// Creating, configuring, and working with Amazon S3 buckets
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html)
+	// Creating, configuring, and working with Amazon S3 buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html)
 	// in the Amazon Simple Storage Service User Guide.
 	BucketName *string
 
 	// The key name of an object in Amazon S3. For more information about Amazon S3
-	// objects and object keys, see Uploading, downloading, and working with objects in
-	// Amazon S3
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/uploading-downloading-objects.html)
+	// objects and object keys, see Uploading, downloading, and working with objects
+	// in Amazon S3 (https://docs.aws.amazon.com/AmazonS3/latest/userguide/uploading-downloading-objects.html)
 	// in the Amazon Simple Storage Service User Guide.
 	ObjectKey *string
 
@@ -141,8 +129,7 @@ type SimulationAppEndpointInfo struct {
 // A collection of metadata about an app.
 type SimulationAppMetadata struct {
 
-	// The domain of the app. For more information about domains, see Key concepts
-	// (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html)
+	// The domain of the app. For more information about domains, see Key concepts (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html)
 	// in the Amazon Web Services SimSpace Weaver User Guide.
 	Domain *string
 
@@ -164,15 +151,15 @@ type SimulationAppMetadata struct {
 // A collection of TCP/UDP ports for a custom or service app.
 type SimulationAppPortMapping struct {
 
-	// The TCP/UDP port number of the running app. SimSpace Weaver dynamically assigns
-	// this port number when the app starts. SimSpace Weaver maps the Declared port to
-	// the Actual port. Clients connect to the app using the app's IP address and the
-	// Actual port number.
+	// The TCP/UDP port number of the running app. SimSpace Weaver dynamically
+	// assigns this port number when the app starts. SimSpace Weaver maps the Declared
+	// port to the Actual port. Clients connect to the app using the app's IP address
+	// and the Actual  port number.
 	Actual *int32
 
-	// The TCP/UDP port number of the app, declared in the simulation schema. SimSpace
-	// Weaver maps the Declared port to the Actual port. The source code for the app
-	// should bind to the Declared port.
+	// The TCP/UDP port number of the app, declared in the simulation schema.
+	// SimSpace Weaver maps the Declared  port to the Actual port. The source code
+	// for the app should bind to the Declared  port.
 	Declared *int32
 
 	noSmithyDocumentSerde
@@ -194,13 +181,12 @@ type SimulationClock struct {
 type SimulationMetadata struct {
 
 	// The Amazon Resource Name (ARN) of the simulation. For more information about
-	// ARNs, see Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the Amazon Web Services General Reference.
+	// ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the Amazon Web Services General Reference.
 	Arn *string
 
-	// The time when the simulation was created, expressed as the number of seconds and
-	// milliseconds in UTC since the Unix epoch (0:0:0.000, January 1, 1970).
+	// The time when the simulation was created, expressed as the number of seconds
+	// and milliseconds in UTC since the Unix epoch (0:0:0.000, January 1, 1970).
 	CreationTime *time.Time
 
 	// The name of the simulation.

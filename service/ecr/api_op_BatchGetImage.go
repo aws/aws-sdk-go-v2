@@ -31,8 +31,8 @@ func (c *Client) BatchGetImage(ctx context.Context, params *BatchGetImageInput, 
 
 type BatchGetImageInput struct {
 
-	// A list of image ID references that correspond to images to describe. The format
-	// of the imageIds reference is imageTag=tag or imageDigest=digest.
+	// A list of image ID references that correspond to images to describe. The
+	// format of the imageIds  reference is imageTag=tag  or imageDigest=digest .
 	//
 	// This member is required.
 	ImageIds []types.ImageIdentifier

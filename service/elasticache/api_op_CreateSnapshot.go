@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a copy of an entire cluster or replication group at a specific moment in
-// time. This operation is valid for Redis only.
+// Creates a copy of an entire cluster or replication group at a specific moment
+// in time. This operation is valid for Redis only.
 func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput, optFns ...func(*Options)) (*CreateSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateSnapshotInput{}
@@ -28,7 +28,7 @@ func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput
 	return out, nil
 }
 
-// Represents the input of a CreateSnapshot operation.
+// Represents the input of a CreateSnapshot  operation.
 type CreateSnapshotInput struct {
 
 	// A name for the snapshot being created.

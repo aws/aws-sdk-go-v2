@@ -18,11 +18,8 @@ import (
 
 // Returns the current status of a change batch request. The status is one of the
 // following values:
-// - PENDING indicates that the changes in this request have not
-// propagated to all Amazon Route 53 DNS servers. This is the initial status of all
-// change batch requests.
-// - INSYNC indicates that the changes have propagated to
-// all Route 53 DNS servers.
+//   - PENDING indicates that the changes in this request have not propagated to all Amazon Route 53 DNS servers. This is the initial status of all change batch requests.
+//   - INSYNC indicates that the changes have propagated to all Route 53 DNS servers.
 func (c *Client) GetChange(ctx context.Context, params *GetChangeInput, optFns ...func(*Options)) (*GetChangeOutput, error) {
 	if params == nil {
 		params = &GetChangeInput{}
@@ -41,9 +38,9 @@ func (c *Client) GetChange(ctx context.Context, params *GetChangeInput, optFns .
 // The input for a GetChange request.
 type GetChangeInput struct {
 
-	// The ID of the change batch request. The value that you specify here is the value
-	// that ChangeResourceRecordSets returned in the Id element when you submitted the
-	// request.
+	// The ID of the change batch request. The value that you specify here is the
+	// value that ChangeResourceRecordSets  returned in the Id element when you
+	// submitted the request.
 	//
 	// This member is required.
 	Id *string
@@ -51,7 +48,7 @@ type GetChangeInput struct {
 	noSmithyDocumentSerde
 }
 
-// A complex type that contains the ChangeInfo element.
+// A complex type that contains the ChangeInfo  element.
 type GetChangeOutput struct {
 
 	// A complex type that contains information about the specified change batch.
@@ -152,8 +149,8 @@ type ResourceRecordSetsChangedWaiterOptions struct {
 	// Note that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ResourceRecordSetsChangedWaiter will use default max delay of 120
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ResourceRecordSetsChangedWaiter will use default max delay of 120
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration
@@ -180,7 +177,8 @@ type ResourceRecordSetsChangedWaiter struct {
 	options ResourceRecordSetsChangedWaiterOptions
 }
 
-// NewResourceRecordSetsChangedWaiter constructs a ResourceRecordSetsChangedWaiter.
+// NewResourceRecordSetsChangedWaiter constructs a
+// ResourceRecordSetsChangedWaiter.
 func NewResourceRecordSetsChangedWaiter(client GetChangeAPIClient, optFns ...func(*ResourceRecordSetsChangedWaiterOptions)) *ResourceRecordSetsChangedWaiter {
 	options := ResourceRecordSetsChangedWaiterOptions{}
 	options.MinDelay = 30 * time.Second
@@ -204,10 +202,10 @@ func (w *ResourceRecordSetsChangedWaiter) Wait(ctx context.Context, params *GetC
 	return err
 }
 
-// WaitForOutput calls the waiter function for ResourceRecordSetsChanged waiter and
-// returns the output of the successful operation. The maxWaitDur is the maximum
-// wait duration the waiter will wait. The maxWaitDur is required and must be
-// greater than zero.
+// WaitForOutput calls the waiter function for ResourceRecordSetsChanged waiter
+// and returns the output of the successful operation. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
 func (w *ResourceRecordSetsChangedWaiter) WaitForOutput(ctx context.Context, params *GetChangeInput, maxWaitDur time.Duration, optFns ...func(*ResourceRecordSetsChangedWaiterOptions)) (*GetChangeOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

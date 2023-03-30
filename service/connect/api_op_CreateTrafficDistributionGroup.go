@@ -13,8 +13,7 @@ import (
 
 // Creates a traffic distribution group given an Amazon Connect instance that has
 // been replicated. For more information about creating traffic distribution
-// groups, see Set up traffic distribution groups
-// (https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html)
+// groups, see Set up traffic distribution groups (https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) CreateTrafficDistributionGroup(ctx context.Context, params *CreateTrafficDistributionGroupInput, optFns ...func(*Options)) (*CreateTrafficDistributionGroupOutput, error) {
 	if params == nil {
@@ -33,8 +32,8 @@ func (c *Client) CreateTrafficDistributionGroup(ctx context.Context, params *Cre
 
 type CreateTrafficDistributionGroupInput struct {
 
-	// The identifier of the Amazon Connect instance that has been replicated. You can
-	// find the instanceId in the ARN of the instance.
+	// The identifier of the Amazon Connect instance that has been replicated. You
+	// can find the instanceId  in the ARN of the instance.
 	//
 	// This member is required.
 	InstanceId *string
@@ -47,8 +46,8 @@ type CreateTrafficDistributionGroupInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// .
 	ClientToken *string
 
 	// A description for the traffic distribution group.
@@ -66,9 +65,10 @@ type CreateTrafficDistributionGroupOutput struct {
 	// The Amazon Resource Name (ARN) of the traffic distribution group.
 	Arn *string
 
-	// The identifier of the traffic distribution group. This can be the ID or the ARN
-	// if the API is being called in the Region where the traffic distribution group
-	// was created. The ARN must be provided if the call is from the replicated Region.
+	// The identifier of the traffic distribution group. This can be the ID or the
+	// ARN if the API is being called in the Region where the traffic distribution
+	// group was created. The ARN must be provided if the call is from the replicated
+	// Region.
 	Id *string
 
 	// Metadata pertaining to the operation's result.

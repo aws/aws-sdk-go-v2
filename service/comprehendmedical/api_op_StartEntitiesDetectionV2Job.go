@@ -13,8 +13,8 @@ import (
 )
 
 // Starts an asynchronous medical entity detection job for a collection of
-// documents. Use the DescribeEntitiesDetectionV2Job operation to track the status
-// of a job.
+// documents. Use the DescribeEntitiesDetectionV2Job operation to track the
+// status of a job.
 func (c *Client) StartEntitiesDetectionV2Job(ctx context.Context, params *StartEntitiesDetectionV2JobInput, optFns ...func(*Options)) (*StartEntitiesDetectionV2JobOutput, error) {
 	if params == nil {
 		params = &StartEntitiesDetectionV2JobInput{}
@@ -34,20 +34,20 @@ type StartEntitiesDetectionV2JobInput struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
 	// role that grants Comprehend Medical; read access to your input data. For more
-	// information, see  Role-Based Permissions Required for Asynchronous Operations
-	// (https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med).
+	// information, see Role-Based Permissions Required for Asynchronous Operations (https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med)
+	// .
 	//
 	// This member is required.
 	DataAccessRoleArn *string
 
-	// The input configuration that specifies the format and location of the input data
-	// for the job.
+	// The input configuration that specifies the format and location of the input
+	// data for the job.
 	//
 	// This member is required.
 	InputDataConfig *types.InputDataConfig
 
-	// The language of the input documents. All documents must be in the same language.
-	// Comprehend Medical; processes files in US English (en).
+	// The language of the input documents. All documents must be in the same
+	// language. Comprehend Medical; processes files in US English (en).
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
@@ -57,8 +57,8 @@ type StartEntitiesDetectionV2JobInput struct {
 	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
 
-	// A unique identifier for the request. If you don't set the client request token,
-	// Comprehend Medical; generates one for you.
+	// A unique identifier for the request. If you don't set the client request
+	// token, Comprehend Medical; generates one for you.
 	ClientRequestToken *string
 
 	// The identifier of the job.
@@ -74,7 +74,7 @@ type StartEntitiesDetectionV2JobInput struct {
 type StartEntitiesDetectionV2JobOutput struct {
 
 	// The identifier generated for the job. To get the status of a job, use this
-	// identifier with the DescribeEntitiesDetectionV2Job operation.
+	// identifier with the DescribeEntitiesDetectionV2Job  operation.
 	JobId *string
 
 	// Metadata pertaining to the operation's result.

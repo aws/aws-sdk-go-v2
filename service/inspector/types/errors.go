@@ -36,8 +36,8 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You started an assessment run, but one of the instances is already participating
-// in another assessment run.
+// You started an assessment run, but one of the instances is already
+// participating in another assessment run.
 type AgentsAlreadyRunningAssessmentException struct {
 	Message *string
 
@@ -128,8 +128,8 @@ func (e *InternalException) ErrorCode() string {
 }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Amazon Inspector cannot assume the cross-account role that it needs to list your
-// EC2 instances during the assessment run.
+// Amazon Inspector cannot assume the cross-account role that it needs to list
+// your EC2 instances during the assessment run.
 type InvalidCrossAccountRoleException struct {
 	Message *string
 
@@ -307,11 +307,11 @@ func (e *ServiceTemporarilyUnavailableException) ErrorFault() smithy.ErrorFault 
 	return smithy.FaultServer
 }
 
-// Used by the GetAssessmentReport API. The request was rejected because you tried
-// to generate a report for an assessment run that existed before reporting was
-// supported in Amazon Inspector. You can only generate reports for assessment runs
-// that took place or will take place after generating reports in Amazon Inspector
-// became available.
+// Used by the GetAssessmentReport API. The request was rejected because you
+// tried to generate a report for an assessment run that existed before reporting
+// was supported in Amazon Inspector. You can only generate reports for assessment
+// runs that took place or will take place after generating reports in Amazon
+// Inspector became available.
 type UnsupportedFeatureException struct {
 	Message *string
 

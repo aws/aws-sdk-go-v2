@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Gets a deployment. Deployments define the components that run on Greengrass core
-// devices.
+// Gets a deployment. Deployments define the components that run on Greengrass
+// core devices.
 func (c *Client) GetDeployment(ctx context.Context, params *GetDeploymentInput, optFns ...func(*Options)) (*GetDeploymentOutput, error) {
 	if params == nil {
 		params = &GetDeploymentInput{}
@@ -41,8 +41,8 @@ type GetDeploymentInput struct {
 
 type GetDeploymentOutput struct {
 
-	// The components to deploy. This is a dictionary, where each key is the name of a
-	// component, and each key's value is the version and configuration to deploy for
+	// The components to deploy. This is a dictionary, where each key is the name of
+	// a component, and each key's value is the version and configuration to deploy for
 	// that component.
 	Components map[string]types.ComponentDeploymentSpecification
 
@@ -62,9 +62,8 @@ type GetDeploymentOutput struct {
 	// The status of the deployment.
 	DeploymentStatus types.DeploymentStatus
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the IoT job that applies the deployment to target devices.
+	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the IoT job that applies the deployment to target devices.
 	IotJobArn *string
 
 	// The job configuration for the deployment configuration. The job configuration
@@ -78,8 +77,7 @@ type GetDeploymentOutput struct {
 	// Whether or not the deployment is the latest revision for its target.
 	IsLatestForTarget bool
 
-	// The parent deployment's target ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// The parent deployment's target ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// within a subdeployment.
 	ParentTargetArn *string
 
@@ -87,14 +85,12 @@ type GetDeploymentOutput struct {
 	RevisionId *string
 
 	// A list of key-value pairs that contain metadata for the resource. For more
-	// information, see Tag your resources
-	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html) in
-	// the IoT Greengrass V2 Developer Guide.
+	// information, see Tag your resources (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html)
+	// in the IoT Greengrass V2 Developer Guide.
 	Tags map[string]string
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the target IoT thing or thing group.
+	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the target IoT thing or thing group.
 	TargetArn *string
 
 	// Metadata pertaining to the operation's result.

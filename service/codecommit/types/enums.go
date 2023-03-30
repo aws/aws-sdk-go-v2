@@ -48,9 +48,10 @@ const (
 	ConflictDetailLevelTypeEnumLineLevel ConflictDetailLevelTypeEnum = "LINE_LEVEL"
 )
 
-// Values returns all known values for ConflictDetailLevelTypeEnum. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ConflictDetailLevelTypeEnum. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ConflictDetailLevelTypeEnum) Values() []ConflictDetailLevelTypeEnum {
 	return []ConflictDetailLevelTypeEnum{
 		"FILE_LEVEL",
@@ -151,9 +152,9 @@ const (
 	OrderEnumDescending OrderEnum = "descending"
 )
 
-// Values returns all known values for OrderEnum. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for OrderEnum. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (OrderEnum) Values() []OrderEnum {
 	return []OrderEnum{
 		"ascending",
@@ -194,8 +195,8 @@ const (
 	PullRequestEventTypePullRequestApprovalStateChanged   PullRequestEventType = "PULL_REQUEST_APPROVAL_STATE_CHANGED"
 )
 
-// Values returns all known values for PullRequestEventType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PullRequestEventType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PullRequestEventType) Values() []PullRequestEventType {
 	return []PullRequestEventType{
@@ -219,8 +220,8 @@ const (
 	PullRequestStatusEnumClosed PullRequestStatusEnum = "CLOSED"
 )
 
-// Values returns all known values for PullRequestStatusEnum. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PullRequestStatusEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PullRequestStatusEnum) Values() []PullRequestStatusEnum {
 	return []PullRequestStatusEnum{
@@ -237,9 +238,9 @@ const (
 	RelativeFileVersionEnumAfter  RelativeFileVersionEnum = "AFTER"
 )
 
-// Values returns all known values for RelativeFileVersionEnum. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RelativeFileVersionEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RelativeFileVersionEnum) Values() []RelativeFileVersionEnum {
 	return []RelativeFileVersionEnum{
 		"BEFORE",

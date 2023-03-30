@@ -29,7 +29,8 @@ func (c *Client) UpdateLaunchConfiguration(ctx context.Context, params *UpdateLa
 
 type UpdateLaunchConfigurationInput struct {
 
-	// The ID of the Source Server that we want to retrieve a Launch Configuration for.
+	// The ID of the Source Server that we want to retrieve a Launch Configuration
+	// for.
 	//
 	// This member is required.
 	SourceServerID *string
@@ -38,8 +39,8 @@ type UpdateLaunchConfigurationInput struct {
 	// Instance.
 	CopyPrivateIp *bool
 
-	// Whether we want to copy the tags of the Source Server to the EC2 machine of the
-	// Recovery Instance.
+	// Whether we want to copy the tags of the Source Server to the EC2 machine of
+	// the Recovery Instance.
 	CopyTags *bool
 
 	// The state of the Recovery Instance in EC2 after the recovery operation.
@@ -64,8 +65,8 @@ type UpdateLaunchConfigurationOutput struct {
 	// Instance.
 	CopyPrivateIp *bool
 
-	// Whether we want to copy the tags of the Source Server to the EC2 machine of the
-	// Recovery Instance.
+	// Whether we want to copy the tags of the Source Server to the EC2 machine of
+	// the Recovery Instance.
 	CopyTags *bool
 
 	// The EC2 launch template ID of this launch configuration.

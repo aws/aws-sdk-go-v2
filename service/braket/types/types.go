@@ -46,8 +46,8 @@ type DataSource struct {
 // run an Amazon Braket job.
 type DeviceConfig struct {
 
-	// The primary quantum processing unit (QPU) or simulator used to create and run an
-	// Amazon Braket job.
+	// The primary quantum processing unit (QPU) or simulator used to create and run
+	// an Amazon Braket job.
 	//
 	// This member is required.
 	Device *string
@@ -106,8 +106,8 @@ type InputFileConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Configures the resource instances to use while running the Amazon Braket hybrid
-// job on Amazon Braket.
+// Configures the resource instances to use while running the Amazon Braket
+// hybrid job on Amazon Braket.
 type InstanceConfig struct {
 
 	// Configures the type resource instances to use while running an Amazon Braket
@@ -132,13 +132,13 @@ type InstanceConfig struct {
 type JobCheckpointConfig struct {
 
 	// Identifies the S3 path where you want Amazon Braket to store checkpoints. For
-	// example, s3://bucket-name/key-name-prefix.
+	// example, s3://bucket-name/key-name-prefix .
 	//
 	// This member is required.
 	S3Uri *string
 
 	// (Optional) The local directory where checkpoints are written. The default
-	// directory is /opt/braket/checkpoints/.
+	// directory is /opt/braket/checkpoints/ .
 	LocalPath *string
 
 	noSmithyDocumentSerde
@@ -160,18 +160,19 @@ type JobEventDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the path to the S3 location where you want to store job artifacts and
-// the encryption key used to store them.
+// Specifies the path to the S3 location where you want to store job artifacts
+// and the encryption key used to store them.
 type JobOutputDataConfig struct {
 
 	// Identifies the S3 path where you want Amazon Braket to store the job training
-	// artifacts. For example, s3://bucket-name/key-name-prefix.
+	// artifacts. For example, s3://bucket-name/key-name-prefix .
 	//
 	// This member is required.
 	S3Path *string
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon Braket uses to encrypt
-	// the job training artifacts at rest using Amazon S3 server-side encryption.
+	// The AWS Key Management Service (AWS KMS) key that Amazon Braket uses to
+	// encrypt the job training artifacts at rest using Amazon S3 server-side
+	// encryption.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -297,8 +298,8 @@ type ScriptModeConfig struct {
 	// This member is required.
 	EntryPoint *string
 
-	// The URI that specifies the S3 path to the Python script module that contains the
-	// training script used by an Amazon Braket job.
+	// The URI that specifies the S3 path to the Python script module that contains
+	// the training script used by an Amazon Braket job.
 	//
 	// This member is required.
 	S3Uri *string

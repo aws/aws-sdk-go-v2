@@ -141,8 +141,8 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource specified in the request was not found. Check the resource and try
-// again.
+// The resource specified in the request was not found. Check the resource and
+// try again.
 type NotFoundException struct {
 	Message *string
 
@@ -200,7 +200,7 @@ func (e *PreconditionFailedException) ErrorFault() smithy.ErrorFault { return sm
 // trying to delete. The body of the exception contains a JSON object that
 // describes the resource. { "resourceType": BOT | BOTALIAS | BOTCHANNEL | INTENT,
 //
-// "resourceReference": {
+//	"resourceReference": {
 //
 //	"name": string, "version": string } }
 type ResourceInUseException struct {

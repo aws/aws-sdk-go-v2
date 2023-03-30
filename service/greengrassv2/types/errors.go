@@ -91,9 +91,9 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The request is already in progress. This exception occurs when you use a client
-// token for multiple requests while IoT Greengrass is still processing an earlier
-// request that uses the same client token.
+// The request is already in progress. This exception occurs when you use a
+// client token for multiple requests while IoT Greengrass is still processing an
+// earlier request that uses the same client token.
 type RequestAlreadyInProgressException struct {
 	Message *string
 
@@ -180,9 +180,9 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Your request exceeded a request rate quota. For example, you might have exceeded
-// the amount of times that you can retrieve device or deployment status per
-// second.
+// Your request exceeded a request rate quota. For example, you might have
+// exceeded the amount of times that you can retrieve device or deployment status
+// per second.
 type ThrottlingException struct {
 	Message *string
 
@@ -212,8 +212,8 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request isn't valid. This can occur if your request contains malformed JSON
-// or unsupported characters.
+// The request isn't valid. This can occur if your request contains malformed
+// JSON or unsupported characters.
 type ValidationException struct {
 	Message *string
 

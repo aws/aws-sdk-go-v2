@@ -54,8 +54,8 @@ const (
 	DependentServiceNameAWSVirtualPrivateCloud DependentServiceName = "AWSVPC"
 )
 
-// Values returns all known values for DependentServiceName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DependentServiceName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DependentServiceName) Values() []DependentServiceName {
 	return []DependentServiceName{
@@ -120,9 +120,9 @@ const (
 	FirewallDeploymentModelDistributed FirewallDeploymentModel = "DISTRIBUTED"
 )
 
-// Values returns all known values for FirewallDeploymentModel. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FirewallDeploymentModel. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FirewallDeploymentModel) Values() []FirewallDeploymentModel {
 	return []FirewallDeploymentModel{
 		"CENTRALIZED",
@@ -194,8 +194,8 @@ const (
 	RemediationActionTypeModify RemediationActionType = "MODIFY"
 )
 
-// Values returns all known values for RemediationActionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RemediationActionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RemediationActionType) Values() []RemediationActionType {
 	return []RemediationActionType{
@@ -212,9 +212,9 @@ const (
 	RuleOrderDefaultActionOrder RuleOrder = "DEFAULT_ACTION_ORDER"
 )
 
-// Values returns all known values for RuleOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for RuleOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (RuleOrder) Values() []RuleOrder {
 	return []RuleOrder{
 		"STRICT_ORDER",

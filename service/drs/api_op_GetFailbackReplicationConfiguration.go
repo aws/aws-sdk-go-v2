@@ -28,8 +28,8 @@ func (c *Client) GetFailbackReplicationConfiguration(ctx context.Context, params
 
 type GetFailbackReplicationConfigurationInput struct {
 
-	// The ID of the Recovery Instance whose failback replication configuration should
-	// be returned.
+	// The ID of the Recovery Instance whose failback replication configuration
+	// should be returned.
 	//
 	// This member is required.
 	RecoveryInstanceID *string
@@ -51,7 +51,8 @@ type GetFailbackReplicationConfigurationOutput struct {
 	// The name of the Failback Replication Configuration.
 	Name *string
 
-	// Whether to use Private IP for the failback replication of the Recovery Instance.
+	// Whether to use Private IP for the failback replication of the Recovery
+	// Instance.
 	UsePrivateIP *bool
 
 	// Metadata pertaining to the operation's result.

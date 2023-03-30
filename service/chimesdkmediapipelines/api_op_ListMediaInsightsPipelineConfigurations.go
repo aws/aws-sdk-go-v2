@@ -113,22 +113,22 @@ func (c *Client) addOperationListMediaInsightsPipelineConfigurationsMiddlewares(
 	return nil
 }
 
-// ListMediaInsightsPipelineConfigurationsAPIClient is a client that implements the
-// ListMediaInsightsPipelineConfigurations operation.
+// ListMediaInsightsPipelineConfigurationsAPIClient is a client that implements
+// the ListMediaInsightsPipelineConfigurations operation.
 type ListMediaInsightsPipelineConfigurationsAPIClient interface {
 	ListMediaInsightsPipelineConfigurations(context.Context, *ListMediaInsightsPipelineConfigurationsInput, ...func(*Options)) (*ListMediaInsightsPipelineConfigurationsOutput, error)
 }
 
 var _ ListMediaInsightsPipelineConfigurationsAPIClient = (*Client)(nil)
 
-// ListMediaInsightsPipelineConfigurationsPaginatorOptions is the paginator options
-// for ListMediaInsightsPipelineConfigurations
+// ListMediaInsightsPipelineConfigurationsPaginatorOptions is the paginator
+// options for ListMediaInsightsPipelineConfigurations
 type ListMediaInsightsPipelineConfigurationsPaginatorOptions struct {
 	// The maximum number of results to return in a single call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

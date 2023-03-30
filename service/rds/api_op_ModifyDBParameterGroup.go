@@ -12,7 +12,7 @@ import (
 )
 
 // Modifies the parameters of a DB parameter group. To modify more than one
-// parameter, submit a list of the following: ParameterName, ParameterValue, and
+// parameter, submit a list of the following: ParameterName , ParameterValue , and
 // ApplyMethod. A maximum of 20 parameters can be modified in a single request.
 // After you modify a DB parameter group, you should wait at least 5 minutes before
 // creating your first DB instance that uses that DB parameter group as the default
@@ -21,9 +21,9 @@ import (
 // especially important for parameters that are critical when creating the default
 // database for a DB instance, such as the character set for the default database
 // defined by the character_set_database parameter. You can use the Parameter
-// Groups option of the Amazon RDS console (https://console.aws.amazon.com/rds/) or
-// the DescribeDBParameters command to verify that your DB parameter group has been
-// created or modified.
+// Groups option of the Amazon RDS console (https://console.aws.amazon.com/rds/)
+// or the DescribeDBParameters command to verify that your DB parameter group has
+// been created or modified.
 func (c *Client) ModifyDBParameterGroup(ctx context.Context, params *ModifyDBParameterGroupInput, optFns ...func(*Options)) (*ModifyDBParameterGroupOutput, error) {
 	if params == nil {
 		params = &ModifyDBParameterGroupInput{}
@@ -42,8 +42,7 @@ func (c *Client) ModifyDBParameterGroup(ctx context.Context, params *ModifyDBPar
 type ModifyDBParameterGroupInput struct {
 
 	// The name of the DB parameter group. Constraints:
-	// - If supplied, must match the
-	// name of an existing DBParameterGroup.
+	//     - If supplied, must match the name of an existing DBParameterGroup .
 	//
 	// This member is required.
 	DBParameterGroupName *string
@@ -54,15 +53,14 @@ type ModifyDBParameterGroupInput struct {
 	// be modified in a single request. Valid Values (for the application method):
 	// immediate | pending-reboot You can use the immediate value with dynamic
 	// parameters only. You can use the pending-reboot value for both dynamic and
-	// static parameters. When the application method is immediate, changes to dynamic
-	// parameters are applied immediately to the DB instances associated with the
-	// parameter group. When the application method is pending-reboot, changes to
+	// static parameters. When the application method is immediate, changes to
+	// dynamic parameters are applied immediately to the DB instances associated with
+	// the parameter group. When the application method is pending-reboot, changes to
 	// dynamic and static parameters are applied after a reboot without failover to the
 	// DB instances associated with the parameter group. You can't use pending-reboot
 	// with dynamic parameters on RDS for SQL Server DB instances. Use immediate. For
 	// more information on modifying DB parameters, see Working with DB parameter
-	// groups
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html)
+	// groups (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html)
 	// in the Amazon RDS User Guide.
 	//
 	// This member is required.
@@ -71,8 +69,8 @@ type ModifyDBParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the result of a successful invocation of the ModifyDBParameterGroup or
-// ResetDBParameterGroup action.
+// Contains the result of a successful invocation of the ModifyDBParameterGroup
+// or ResetDBParameterGroup  action.
 type ModifyDBParameterGroupOutput struct {
 
 	// The name of the DB parameter group.

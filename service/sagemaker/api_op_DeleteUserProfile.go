@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a user profile. When a user profile is deleted, the user loses access to
-// their EFS volume, including data, notebooks, and other artifacts.
+// Deletes a user profile. When a user profile is deleted, the user loses access
+// to their EFS volume, including data, notebooks, and other artifacts.
 func (c *Client) DeleteUserProfile(ctx context.Context, params *DeleteUserProfileInput, optFns ...func(*Options)) (*DeleteUserProfileOutput, error) {
 	if params == nil {
 		params = &DeleteUserProfileInput{}

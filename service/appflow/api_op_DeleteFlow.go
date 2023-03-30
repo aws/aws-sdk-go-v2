@@ -36,8 +36,8 @@ type DeleteFlowInput struct {
 	// This member is required.
 	FlowName *string
 
-	// Indicates whether Amazon AppFlow should delete the flow, even if it is currently
-	// in use.
+	// Indicates whether Amazon AppFlow should delete the flow, even if it is
+	// currently in use.
 	ForceDelete bool
 
 	noSmithyDocumentSerde

@@ -10,15 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers a specified Amazon ECS cluster with a stack. You can register only one
-// cluster with a stack. A cluster can be registered with only one stack. For more
-// information, see  Resource Management
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html).
-// Required Permissions: To use this action, an IAM user must have a Manage
+// Registers a specified Amazon ECS cluster with a stack. You can register only
+// one cluster with a stack. A cluster can be registered with only one stack. For
+// more information, see Resource Management (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html)
+// . Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see  Managing User
-// Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// permissions. For more information on user permissions, see Managing User
+// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) RegisterEcsCluster(ctx context.Context, params *RegisterEcsClusterInput, optFns ...func(*Options)) (*RegisterEcsClusterOutput, error) {
 	if params == nil {
 		params = &RegisterEcsClusterInput{}
@@ -49,7 +48,7 @@ type RegisterEcsClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a RegisterEcsCluster request.
+// Contains the response to a RegisterEcsCluster  request.
 type RegisterEcsClusterOutput struct {
 
 	// The cluster's ARN.

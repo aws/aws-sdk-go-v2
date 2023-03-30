@@ -13,7 +13,7 @@ import (
 )
 
 // Returns a list of your report plans. For detailed information about a single
-// report plan, use DescribeReportPlan.
+// report plan, use DescribeReportPlan .
 func (c *Client) ListReportPlans(ctx context.Context, params *ListReportPlansInput, optFns ...func(*Options)) (*ListReportPlansOutput, error) {
 	if params == nil {
 		params = &ListReportPlansInput{}
@@ -35,8 +35,8 @@ type ListReportPlansInput struct {
 	// query will return 1 MB of data.
 	MaxResults *int32
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation,
+	// which can be used to return the next set of items in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -44,8 +44,8 @@ type ListReportPlansInput struct {
 
 type ListReportPlansOutput struct {
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation,
+	// which can be used to return the next set of items in the list.
 	NextToken *string
 
 	// A list of your report plans with detailed information for each plan. This
@@ -134,8 +134,8 @@ type ListReportPlansPaginatorOptions struct {
 	// query will return 1 MB of data.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

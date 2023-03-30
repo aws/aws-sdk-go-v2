@@ -31,8 +31,8 @@ func (c *Client) CreateWirelessGatewayTaskDefinition(ctx context.Context, params
 type CreateWirelessGatewayTaskDefinitionInput struct {
 
 	// Whether to automatically create tasks using this task definition for all
-	// gateways with the specified current version. If false, the task must me created
-	// by calling CreateWirelessGatewayTask.
+	// gateways with the specified current version. If false, the task must me
+	// created by calling CreateWirelessGatewayTask .
 	//
 	// This member is required.
 	AutoCreateTasks bool
@@ -46,8 +46,8 @@ type CreateWirelessGatewayTaskDefinitionInput struct {
 	// The name of the new resource.
 	Name *string
 
-	// The tags to attach to the specified resource. Tags are metadata that you can use
-	// to manage a resource.
+	// The tags to attach to the specified resource. Tags are metadata that you can
+	// use to manage a resource.
 	Tags []types.Tag
 
 	// Information about the gateways to update.

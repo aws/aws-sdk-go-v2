@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a placement queue that processes requests for new game sessions. A queue
-// uses FleetIQ algorithms to determine the best placement locations and find an
-// available game server there, then prompts the game server process to start a new
-// game session. A game session queue is configured with a set of destinations
+// Creates a placement queue that processes requests for new game sessions. A
+// queue uses FleetIQ algorithms to determine the best placement locations and find
+// an available game server there, then prompts the game server process to start a
+// new game session. A game session queue is configured with a set of destinations
 // (GameLift fleets or aliases), which determine the locations where the queue can
 // place new game sessions. These destinations can span multiple fleet types (Spot
 // and On-Demand), instance types, and Amazon Web Services Regions. If the queue
@@ -30,26 +30,17 @@ import (
 // latency cap policies. You can also include the ARN for an Amazon Simple
 // Notification Service (SNS) topic to receive notifications of game session
 // placement activity. Notifications using SNS or CloudWatch events is the
-// preferred way to track placement activity. If successful, a new GameSessionQueue
-// object is returned with an assigned queue ARN. New game session requests, which
-// are submitted to queue with StartGameSessionPlacement
-// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html)
-// or StartMatchmaking
-// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartMatchmaking.html),
-// reference a queue's name or ARN. Learn more  Design a game session queue
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-design.html)
-// Create a game session queue
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-creating.html)
-// Related actions CreateGameSessionQueue
-// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateGameSessionQueue.html)
-// | DescribeGameSessionQueues
-// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessionQueues.html)
-// | UpdateGameSessionQueue
-// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSessionQueue.html)
-// | DeleteGameSessionQueue
-// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteGameSessionQueue.html)
-// | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// preferred way to track placement activity. If successful, a new
+// GameSessionQueueobject is returned with an assigned queue ARN. New game
+// session requests, which are submitted to queue with StartGameSessionPlacement (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html)
+// or StartMatchmaking (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartMatchmaking.html)
+// , reference a queue's name or ARN. Learn more Design a game session queue (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-design.html)
+// Create a game session queue (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-creating.html)
+// Related actions CreateGameSessionQueue (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateGameSessionQueue.html)
+// | DescribeGameSessionQueues (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessionQueues.html)
+// | UpdateGameSessionQueue (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSessionQueue.html)
+// | DeleteGameSessionQueue (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteGameSessionQueue.html)
+// | All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateGameSessionQueue(ctx context.Context, params *CreateGameSessionQueueInput, optFns ...func(*Options)) (*CreateGameSessionQueueOutput, error) {
 	if params == nil {
 		params = &CreateGameSessionQueueInput{}
@@ -67,8 +58,8 @@ func (c *Client) CreateGameSessionQueue(ctx context.Context, params *CreateGameS
 
 type CreateGameSessionQueueInput struct {
 
-	// A descriptive label that is associated with game session queue. Queue names must
-	// be unique within each Region.
+	// A descriptive label that is associated with game session queue. Queue names
+	// must be unique within each Region.
 	//
 	// This member is required.
 	Name *string
@@ -84,17 +75,18 @@ type CreateGameSessionQueueInput struct {
 
 	// A list of locations where a queue is allowed to place new game sessions.
 	// Locations are specified in the form of Amazon Web Services Region codes, such as
+	//
 	// us-west-2. If this parameter is not set, game sessions can be placed in any
 	// queue location.
 	FilterConfiguration *types.FilterConfiguration
 
-	// An SNS topic ARN that is set up to receive game session placement notifications.
-	// See  Setting up notifications for game session placement
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html).
+	// An SNS topic ARN that is set up to receive game session placement
+	// notifications. See Setting up notifications for game session placement (https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html)
+	// .
 	NotificationTarget *string
 
-	// A set of policies that act as a sliding cap on player latency. FleetIQ works to
-	// deliver low latency for most players in a game session. These policies ensure
+	// A set of policies that act as a sliding cap on player latency. FleetIQ works
+	// to deliver low latency for most players in a game session. These policies ensure
 	// that no individual player can be placed into a game with unreasonably high
 	// latency. Use multiple policies to gradually relax latency requirements a step at
 	// a time. Multiple policies are applied based on their maximum allowed latency,
@@ -110,14 +102,13 @@ type CreateGameSessionQueueInput struct {
 	// A list of labels to assign to the new game session queue resource. Tags are
 	// developer-defined key-value pairs. Tagging Amazon Web Services resources are
 	// useful for resource management, access management and cost allocation. For more
-	// information, see  Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-	// Web Services General Reference.
+	// information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the Amazon Web Services General Reference.
 	Tags []types.Tag
 
-	// The maximum time, in seconds, that a new game session placement request remains
-	// in the queue. When a request exceeds this time, the game session placement
-	// changes to a TIMED_OUT status.
+	// The maximum time, in seconds, that a new game session placement request
+	// remains in the queue. When a request exceeds this time, the game session
+	// placement changes to a TIMED_OUT  status.
 	TimeoutInSeconds *int32
 
 	noSmithyDocumentSerde

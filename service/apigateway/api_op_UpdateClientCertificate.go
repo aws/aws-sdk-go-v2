@@ -36,15 +36,15 @@ type UpdateClientCertificateInput struct {
 	// This member is required.
 	ClientCertificateId *string
 
-	// For more information about supported patch operations, see Patch Operations
-	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
+	// For more information about supported patch operations, see Patch Operations (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html)
+	// .
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
 }
 
-// Represents a client certificate used to configure client-side SSL authentication
-// while sending requests to the integration endpoint.
+// Represents a client certificate used to configure client-side SSL
+// authentication while sending requests to the integration endpoint.
 type UpdateClientCertificateOutput struct {
 
 	// The identifier of the client certificate.

@@ -11,8 +11,8 @@ import (
 )
 
 // Use this operation to test a rules pattern that you plan to use to create an
-// audience segment. For more information about segments, see CreateSegment
-// (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html).
+// audience segment. For more information about segments, see CreateSegment (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html)
+// .
 func (c *Client) TestSegmentPattern(ctx context.Context, params *TestSegmentPatternInput, optFns ...func(*Options)) (*TestSegmentPatternOutput, error) {
 	if params == nil {
 		params = &TestSegmentPatternInput{}
@@ -37,7 +37,7 @@ type TestSegmentPatternInput struct {
 	// This member is required.
 	Pattern *string
 
-	// A sample evaluationContext JSON block to test against the specified pattern.
+	// A sample evaluationContext  JSON block to test against the specified pattern.
 	//
 	// This value conforms to the media type: application/json
 	//
@@ -49,7 +49,7 @@ type TestSegmentPatternInput struct {
 
 type TestSegmentPatternOutput struct {
 
-	// Returns true if the pattern matches the payload.
+	// Returns true  if the pattern matches the payload.
 	//
 	// This member is required.
 	Match *bool

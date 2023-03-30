@@ -31,9 +31,9 @@ func (c *Client) DescribeAccountOverview(ctx context.Context, params *DescribeAc
 
 type DescribeAccountOverviewInput struct {
 
-	// The start of the time range passed in. The start time granularity is at the day
-	// level. The floor of the start time is used. Returned information occurred after
-	// this day.
+	// The start of the time range passed in. The start time granularity is at the
+	// day level. The floor of the start time is used. Returned information occurred
+	// after this day.
 	//
 	// This member is required.
 	FromTime *time.Time
@@ -48,8 +48,8 @@ type DescribeAccountOverviewInput struct {
 
 type DescribeAccountOverviewOutput struct {
 
-	// The Mean Time to Recover (MTTR) for all closed insights that were created during
-	// the time range passed in.
+	// The Mean Time to Recover (MTTR) for all closed insights that were created
+	// during the time range passed in.
 	//
 	// This member is required.
 	MeanTimeToRecoverInMilliseconds *int64

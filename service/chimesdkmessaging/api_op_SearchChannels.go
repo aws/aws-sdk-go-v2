@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows the ChimeBearer to search channels by channel members. Users or bots can
-// search across the channels that they belong to. Users in the AppInstanceAdmin
-// role can search across all channels. The x-amz-chime-bearer request header is
-// mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the
-// API call as the value in the header.
+// Allows the ChimeBearer to search channels by channel members. Users or bots
+// can search across the channels that they belong to. Users in the
+// AppInstanceAdmin role can search across all channels. The x-amz-chime-bearer
+// request header is mandatory. Use the ARN of the AppInstanceUser  or
+// AppInstanceBot that makes the API call as the value in the header.
 func (c *Client) SearchChannels(ctx context.Context, params *SearchChannelsInput, optFns ...func(*Options)) (*SearchChannelsOutput, error) {
 	if params == nil {
 		params = &SearchChannelsInput{}
@@ -34,12 +34,12 @@ func (c *Client) SearchChannels(ctx context.Context, params *SearchChannelsInput
 
 type SearchChannelsInput struct {
 
-	// A list of the Field objects in the channel being searched.
+	// A list of the Field  objects in the channel being searched.
 	//
 	// This member is required.
 	Fields []types.SearchField
 
-	// The AppInstanceUserArn of the user making the API call.
+	// The AppInstanceUserArn  of the user making the API call.
 	ChimeBearer *string
 
 	// The maximum number of channels that you want returned.
@@ -143,8 +143,8 @@ type SearchChannelsPaginatorOptions struct {
 	// The maximum number of channels that you want returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

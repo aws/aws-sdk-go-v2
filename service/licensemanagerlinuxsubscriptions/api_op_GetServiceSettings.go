@@ -48,7 +48,8 @@ type GetServiceSettingsOutput struct {
 	// Indicates the status of Linux subscriptions settings being applied.
 	Status types.Status
 
-	// A message which details the Linux subscriptions service settings current status.
+	// A message which details the Linux subscriptions service settings current
+	// status.
 	StatusMessage map[string]string
 
 	// Metadata pertaining to the operation's result.

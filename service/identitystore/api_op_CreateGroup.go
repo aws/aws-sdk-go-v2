@@ -36,8 +36,8 @@ type CreateGroupInput struct {
 	// A string containing the description of the group.
 	Description *string
 
-	// A string containing the name of the group. This value is commonly displayed when
-	// the group is referenced.
+	// A string containing the name of the group. This value is commonly displayed
+	// when the group is referenced.
 	DisplayName *string
 
 	noSmithyDocumentSerde

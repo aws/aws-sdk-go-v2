@@ -30,12 +30,13 @@ func (c *Client) ListMaps(ctx context.Context, params *ListMapsInput, optFns ...
 
 type ListMapsInput struct {
 
-	// An optional limit for the number of resources returned in a single call. Default
-	// value: 100
+	// An optional limit for the number of resources returned in a single call.
+	// Default value: 100
 	MaxResults *int32
 
-	// The pagination token specifying which page of results to return in the response.
-	// If no token is provided, the default page is the first page. Default value: null
+	// The pagination token specifying which page of results to return in the
+	// response. If no token is provided, the default page is the first page. Default
+	// value: null
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -48,8 +49,8 @@ type ListMapsOutput struct {
 	// This member is required.
 	Entries []types.ListMapsResponseEntry
 
-	// A pagination token indicating there are additional pages available. You can use
-	// the token in a following request to fetch the next set of results.
+	// A pagination token indicating there are additional pages available. You can
+	// use the token in a following request to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -157,12 +158,12 @@ var _ ListMapsAPIClient = (*Client)(nil)
 
 // ListMapsPaginatorOptions is the paginator options for ListMaps
 type ListMapsPaginatorOptions struct {
-	// An optional limit for the number of resources returned in a single call. Default
-	// value: 100
+	// An optional limit for the number of resources returned in a single call.
+	// Default value: 100
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

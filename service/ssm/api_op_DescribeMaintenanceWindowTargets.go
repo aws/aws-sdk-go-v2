@@ -36,8 +36,8 @@ type DescribeMaintenanceWindowTargetsInput struct {
 	WindowId *string
 
 	// Optional filters that can be used to narrow down the scope of the returned
-	// window targets. The supported filter keys are Type, WindowTargetId, and
-	// OwnerInformation.
+	// window targets. The supported filter keys are Type , WindowTargetId , and
+	// OwnerInformation .
 	Filters []types.MaintenanceWindowFilter
 
 	// The maximum number of items to return for this call. The call also returns a
@@ -144,8 +144,8 @@ type DescribeMaintenanceWindowTargetsPaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

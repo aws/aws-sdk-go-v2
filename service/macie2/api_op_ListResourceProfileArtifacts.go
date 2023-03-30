@@ -45,13 +45,13 @@ type ListResourceProfileArtifactsInput struct {
 
 type ListResourceProfileArtifactsOutput struct {
 
-	// An array of objects, one for each of 1-100 S3 objects that Amazon Macie selected
-	// for analysis. If Macie has analyzed more than 100 objects in the bucket, Macie
-	// populates the array based on the value for the ResourceProfileArtifact.sensitive
-	// field for an object: true (sensitive), followed by false (not sensitive). Macie
-	// then populates any remaining items in the array with information about objects
-	// where the value for the ResourceProfileArtifact.classificationResultStatus field
-	// is SKIPPED.
+	// An array of objects, one for each of 1-100 S3 objects that Amazon Macie
+	// selected for analysis. If Macie has analyzed more than 100 objects in the
+	// bucket, Macie populates the array based on the value for the
+	// ResourceProfileArtifact.sensitive field for an object: true (sensitive),
+	// followed by false (not sensitive). Macie then populates any remaining items in
+	// the array with information about objects where the value for the
+	// ResourceProfileArtifact.classificationResultStatus field is SKIPPED.
 	Artifacts []types.ResourceProfileArtifact
 
 	// The string to use in a subsequent request to get the next page of results in a
@@ -138,8 +138,8 @@ var _ ListResourceProfileArtifactsAPIClient = (*Client)(nil)
 // ListResourceProfileArtifactsPaginatorOptions is the paginator options for
 // ListResourceProfileArtifacts
 type ListResourceProfileArtifactsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

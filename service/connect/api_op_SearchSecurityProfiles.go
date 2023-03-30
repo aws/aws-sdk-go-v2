@@ -32,8 +32,7 @@ func (c *Client) SearchSecurityProfiles(ctx context.Context, params *SearchSecur
 
 type SearchSecurityProfilesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -49,7 +48,7 @@ type SearchSecurityProfilesInput struct {
 	// The search criteria to be used to return security profiles. The name field
 	// support "contains" queries with a minimum of 2 characters and maximum of 25
 	// characters. Any queries with character lengths outside of this range will throw
-	// invalid results. The currently supported value for FieldName: name
+	// invalid results. The currently supported value for FieldName : name
 	SearchCriteria *types.SecurityProfileSearchCriteria
 
 	// Filters to be applied to search results.
@@ -152,8 +151,8 @@ type SearchSecurityProfilesPaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -166,7 +165,8 @@ type SearchSecurityProfilesPaginator struct {
 	firstPage bool
 }
 
-// NewSearchSecurityProfilesPaginator returns a new SearchSecurityProfilesPaginator
+// NewSearchSecurityProfilesPaginator returns a new
+// SearchSecurityProfilesPaginator
 func NewSearchSecurityProfilesPaginator(client SearchSecurityProfilesAPIClient, params *SearchSecurityProfilesInput, optFns ...func(*SearchSecurityProfilesPaginatorOptions)) *SearchSecurityProfilesPaginator {
 	if params == nil {
 		params = &SearchSecurityProfilesInput{}

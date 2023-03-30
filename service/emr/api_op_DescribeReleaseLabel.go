@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides EMR release label details, such as releases available the region where
-// the API request is run, and the available applications for a specific EMR
+// Provides EMR release label details, such as releases available the region
+// where the API request is run, and the available applications for a specific EMR
 // release label. Can also list EMR release versions that support a specified
 // version of Spark.
 func (c *Client) DescribeReleaseLabel(ctx context.Context, params *DescribeReleaseLabelInput, optFns ...func(*Options)) (*DescribeReleaseLabelOutput, error) {
@@ -47,14 +47,14 @@ type DescribeReleaseLabelInput struct {
 type DescribeReleaseLabelOutput struct {
 
 	// The list of applications available for the target release label. Name is the
-	// name of the application. Version is the concise version of the application.
+	// name of the application. Version  is the concise version of the application.
 	Applications []types.SimplifiedApplication
 
 	// The list of available Amazon Linux release versions for an Amazon EMR release.
-	// Contains a Label field that is formatted as shown in  Amazon Linux 2 Release
-	// Notes  (https://docs.aws.amazon.com/AL2/latest/relnotes/relnotes-al2.html). For
-	// example, 2.0.20220218.1
-	// (https://docs.aws.amazon.com/AL2/latest/relnotes/relnotes-20220218.html).
+	// Contains a Label field that is formatted as shown in Amazon Linux 2 Release
+	// Notes  (https://docs.aws.amazon.com/AL2/latest/relnotes/relnotes-al2.html).
+	// For example, 2.0.20220218.1 (https://docs.aws.amazon.com/AL2/latest/relnotes/relnotes-20220218.html)
+	// .
 	AvailableOSReleases []types.OSRelease
 
 	// The pagination token. Reserved for future use. Currently set to null.

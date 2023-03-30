@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the SAP HANA database of an application registered with AWS Systems Manager
-// for SAP.
+// Gets the SAP HANA database of an application registered with AWS Systems
+// Manager for SAP.
 func (c *Client) GetDatabase(ctx context.Context, params *GetDatabaseInput, optFns ...func(*Options)) (*GetDatabaseOutput, error) {
 	if params == nil {
 		params = &GetDatabaseInput{}
@@ -47,8 +47,8 @@ type GetDatabaseInput struct {
 
 type GetDatabaseOutput struct {
 
-	// The SAP HANA database of an application registered with AWS Systems Manager for
-	// SAP.
+	// The SAP HANA database of an application registered with AWS Systems Manager
+	// for SAP.
 	Database *types.Database
 
 	// The tags of a database.

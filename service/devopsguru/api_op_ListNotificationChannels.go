@@ -127,8 +127,8 @@ var _ ListNotificationChannelsAPIClient = (*Client)(nil)
 // ListNotificationChannelsPaginatorOptions is the paginator options for
 // ListNotificationChannels
 type ListNotificationChannelsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

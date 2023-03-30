@@ -41,7 +41,7 @@ type UpdatePublicDnsNamespaceInput struct {
 	Namespace *types.PublicDnsNamespaceChange
 
 	// A unique string that identifies the request and that allows failed
-	// UpdatePublicDnsNamespace requests to be retried without the risk of running the
+	// UpdatePublicDnsNamespacerequests to be retried without the risk of running the
 	// operation twice. UpdaterRequestId can be any unique string (for example, a
 	// date/timestamp).
 	UpdaterRequestId *string
@@ -52,8 +52,8 @@ type UpdatePublicDnsNamespaceInput struct {
 type UpdatePublicDnsNamespaceOutput struct {
 
 	// A value that you can use to determine whether the request completed
-	// successfully. To get the status of the operation, see GetOperation
-	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
+	// successfully. To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html)
+	// .
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

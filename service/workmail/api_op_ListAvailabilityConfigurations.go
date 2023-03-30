@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all the AvailabilityConfiguration's for the given WorkMail organization.
+// List all the AvailabilityConfiguration 's for the given WorkMail organization.
 func (c *Client) ListAvailabilityConfigurations(ctx context.Context, params *ListAvailabilityConfigurationsInput, optFns ...func(*Options)) (*ListAvailabilityConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListAvailabilityConfigurationsInput{}
@@ -139,8 +139,8 @@ type ListAvailabilityConfigurationsPaginatorOptions struct {
 	// The maximum number of results to return in a single call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

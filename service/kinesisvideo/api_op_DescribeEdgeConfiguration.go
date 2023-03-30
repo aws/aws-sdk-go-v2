@@ -13,7 +13,7 @@ import (
 )
 
 // Describes a stream’s edge configuration that was set using the
-// StartEdgeConfigurationUpdate API. Use this API to get the status of the
+// StartEdgeConfigurationUpdateAPI. Use this API to get the status of the
 // configuration if the configuration is in sync with the Edge Agent.
 func (c *Client) DescribeEdgeConfiguration(ctx context.Context, params *DescribeEdgeConfigurationInput, optFns ...func(*Options)) (*DescribeEdgeConfigurationOutput, error) {
 	if params == nil {
@@ -33,11 +33,11 @@ func (c *Client) DescribeEdgeConfiguration(ctx context.Context, params *Describe
 type DescribeEdgeConfigurationInput struct {
 
 	// The Amazon Resource Name (ARN) of the stream. Specify either the StreamNameor
-	// the StreamARN.
+	// the StreamARN .
 	StreamARN *string
 
 	// The name of the stream whose edge configuration you want to update. Specify
-	// either the StreamName or the StreamARN.
+	// either the StreamName  or the StreamARN .
 	StreamName *string
 
 	noSmithyDocumentSerde
@@ -48,9 +48,9 @@ type DescribeEdgeConfigurationOutput struct {
 	// The timestamp at which a stream’s edge configuration was first created.
 	CreationTime *time.Time
 
-	// A description of the stream's edge configuration that will be used to sync with
-	// the Edge Agent IoT Greengrass component. The Edge Agent component will run on an
-	// IoT Hub Device setup at your premise.
+	// A description of the stream's edge configuration that will be used to sync
+	// with the Edge Agent IoT Greengrass component. The Edge Agent component will run
+	// on an IoT Hub Device setup at your premise.
 	EdgeConfig *types.EdgeConfig
 
 	// A description of the generated failure status.

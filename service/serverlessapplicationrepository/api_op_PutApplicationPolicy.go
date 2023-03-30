@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the permission policy for an application. For the list of actions supported
-// for this operation, see Application Permissions
-// (https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions)
+// Sets the permission policy for an application. For the list of actions
+// supported for this operation, see Application Permissions (https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions)
 // .
 func (c *Client) PutApplicationPolicy(ctx context.Context, params *PutApplicationPolicyInput, optFns ...func(*Options)) (*PutApplicationPolicyOutput, error) {
 	if params == nil {

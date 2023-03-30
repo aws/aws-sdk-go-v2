@@ -13,8 +13,7 @@ import (
 )
 
 // Creates an asset from an existing asset model. For more information, see
-// Creating assets
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-assets.html)
+// Creating assets (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-assets.html)
 // in the IoT SiteWise User Guide.
 func (c *Client) CreateAsset(ctx context.Context, params *CreateAssetInput, optFns ...func(*Options)) (*CreateAssetOutput, error) {
 	if params == nil {
@@ -52,8 +51,7 @@ type CreateAssetInput struct {
 	ClientToken *string
 
 	// A list of key-value pairs that contain metadata for the asset. For more
-	// information, see Tagging your IoT SiteWise resources
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
+	// information, see Tagging your IoT SiteWise resources (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
 	// in the IoT SiteWise User Guide.
 	Tags map[string]string
 
@@ -62,9 +60,8 @@ type CreateAssetInput struct {
 
 type CreateAssetOutput struct {
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the asset, which has the following format.
+	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the asset, which has the following format.
 	// arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}
 	//
 	// This member is required.
@@ -76,7 +73,7 @@ type CreateAssetOutput struct {
 	// This member is required.
 	AssetId *string
 
-	// The status of the asset, which contains a state (CREATING after successfully
+	// The status of the asset, which contains a state ( CREATING after successfully
 	// calling this operation) and any error message.
 	//
 	// This member is required.

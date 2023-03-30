@@ -7,14 +7,15 @@ import (
 	"time"
 )
 
-// Represents a Amazon Web Services Service Catalog AppRegistry application that is
-// the top-level node in a hierarchy of related cloud resource abstractions.
+// Represents a Amazon Web Services Service Catalog AppRegistry application that
+// is the top-level node in a hierarchy of related cloud resource abstractions.
 type Application struct {
 
 	// The Amazon resource name (ARN) that specifies the application across services.
 	Arn *string
 
-	// The ISO-8601 formatted timestamp of the moment when the application was created.
+	// The ISO-8601 formatted timestamp of the moment when the application was
+	// created.
 	CreationTime *time.Time
 
 	// The description of the application.
@@ -27,8 +28,8 @@ type Application struct {
 	// updated.
 	LastUpdateTime *time.Time
 
-	// The name of the application. The name must be unique in the region in which you
-	// are creating the application.
+	// The name of the application. The name must be unique in the region in which
+	// you are creating the application.
 	Name *string
 
 	// Key-value pairs you can use to associate with the application.
@@ -43,7 +44,8 @@ type ApplicationSummary struct {
 	// The Amazon resource name (ARN) that specifies the application across services.
 	Arn *string
 
-	// The ISO-8601 formatted timestamp of the moment when the application was created.
+	// The ISO-8601 formatted timestamp of the moment when the application was
+	// created.
 	CreationTime *time.Time
 
 	// The description of the application.
@@ -56,8 +58,8 @@ type ApplicationSummary struct {
 	// updated.
 	LastUpdateTime *time.Time
 
-	// The name of the application. The name must be unique in the region in which you
-	// are creating the application.
+	// The name of the application. The name must be unique in the region in which
+	// you are creating the application.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -66,7 +68,7 @@ type ApplicationSummary struct {
 // Includes all of the AppRegistry settings.
 type AppRegistryConfiguration struct {
 
-	// Includes the definition of a tagQuery.
+	// Includes the definition of a tagQuery .
 	TagQueryConfiguration *TagQueryConfiguration
 
 	noSmithyDocumentSerde
@@ -116,7 +118,7 @@ type AttributeGroupDetails struct {
 	Id *string
 
 	// This field is no longer supported. We recommend you don't use the field when
-	// using ListAttributeGroupsForApplication. The name of the attribute group.
+	// using ListAttributeGroupsForApplication . The name of the attribute group.
 	//
 	// Deprecated: This field is deprecated. We recommend not using the field when
 	// using ListAttributeGroupsForApplication.
@@ -203,10 +205,11 @@ type ResourceGroup struct {
 
 	// The state of the propagation process for the resource group. The states
 	// includes: CREATING if the resource group is in the process of being created.
-	// CREATE_COMPLETE if the resource group was created successfully. CREATE_FAILED if
-	// the resource group failed to be created. UPDATING if the resource group is in
-	// the process of being updated. UPDATE_COMPLETE if the resource group updated
-	// successfully. UPDATE_FAILED if the resource group could not update successfully.
+	// CREATE_COMPLETE if the resource group was created successfully. CREATE_FAILED
+	// if the resource group failed to be created. UPDATING if the resource group is
+	// in the process of being updated. UPDATE_COMPLETE if the resource group updated
+	// successfully. UPDATE_FAILED if the resource group could not update
+	// successfully.
 	State ResourceGroupState
 
 	noSmithyDocumentSerde

@@ -26,8 +26,8 @@ import (
 const ServiceID = "Route53 Recovery Control Config"
 const ServiceAPIVersion = "2020-11-02"
 
-// Client provides the API client to make operations call for AWS Route53 Recovery
-// Control Config.
+// Client provides the API client to make operations call for AWS Route53
+// Recovery Control Config.
 type Client struct {
 	options Options
 }
@@ -122,8 +122,8 @@ type Options struct {
 	// option.
 	Retryer aws.Retryer
 
-	// The RuntimeEnvironment configuration, only populated if the DefaultsMode is set
-	// to DefaultsModeAuto and is initialized using config.LoadDefaultConfig. You
+	// The RuntimeEnvironment configuration, only populated if the DefaultsMode is
+	// set to DefaultsModeAuto and is initialized using config.LoadDefaultConfig. You
 	// should not populate this structure programmatically, or rely on the values here
 	// within your applications.
 	RuntimeEnvironment aws.RuntimeEnvironment

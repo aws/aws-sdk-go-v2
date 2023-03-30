@@ -15,12 +15,11 @@ import (
 // Associate an identity provider configuration to a cluster. If you want to
 // authenticate identities using an identity provider, you can create an identity
 // provider configuration and associate it to your cluster. After configuring
-// authentication to your cluster you can create Kubernetes roles and clusterroles
-// to assign permissions to the roles, and then bind the roles to the identities
-// using Kubernetes rolebindings and clusterrolebindings. For more information see
-// Using RBAC Authorization
-// (https://kubernetes.io/docs/reference/access-authn-authz/rbac/) in the
-// Kubernetes documentation.
+// authentication to your cluster you can create Kubernetes roles  and
+// clusterrolesto assign permissions to the roles, and then bind the roles to the
+// identities using Kubernetes rolebindings  and clusterrolebindings. For more
+// information see Using RBAC Authorization (https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+// in the Kubernetes documentation.
 func (c *Client) AssociateIdentityProviderConfig(ctx context.Context, params *AssociateIdentityProviderConfigInput, optFns ...func(*Options)) (*AssociateIdentityProviderConfigOutput, error) {
 	if params == nil {
 		params = &AssociateIdentityProviderConfigInput{}
@@ -43,13 +42,14 @@ type AssociateIdentityProviderConfigInput struct {
 	// This member is required.
 	ClusterName *string
 
-	// An object representing an OpenID Connect (OIDC) identity provider configuration.
+	// An object representing an OpenID Connect (OIDC) identity provider
+	// configuration.
 	//
 	// This member is required.
 	Oidc *types.OidcIdentityProviderConfigRequest
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
 	// The metadata to apply to the configuration to assist with categorization and

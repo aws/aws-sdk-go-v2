@@ -10,18 +10,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Establishes a VPC peering connection between a virtual private cloud (VPC) in an
-// Amazon Web Services account with the VPC for your Amazon GameLift fleet. VPC
+// Establishes a VPC peering connection between a virtual private cloud (VPC) in
+// an Amazon Web Services account with the VPC for your Amazon GameLift fleet. VPC
 // peering enables the game servers on your fleet to communicate directly with
 // other Amazon Web Services resources. You can peer with VPCs in any Amazon Web
 // Services account that you have access to, including the account that you use to
 // manage your Amazon GameLift fleets. You cannot peer with VPCs that are in
 // different Regions. For more information, see VPC Peering with Amazon GameLift
-// Fleets
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
-// Before calling this operation to establish the peering connection, you first
-// need to use CreateVpcPeeringAuthorization
-// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringAuthorization.html)
+// Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html)
+// . Before calling this operation to establish the peering connection, you first
+// need to use CreateVpcPeeringAuthorization (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringAuthorization.html)
 // and identify the VPC you want to peer with. Once the authorization for the
 // specified VPC is issued, you have 24 hours to establish the connection. These
 // two operations handle all tasks necessary to peer the two VPCs, including
@@ -32,12 +30,10 @@ import (
 // with the VPC that you want to peer with; and (3) The ID of the VPC you want to
 // peer with. This operation is asynchronous. If successful, a connection request
 // is created. You can use continuous polling to track the request's status using
-// DescribeVpcPeeringConnections
-// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeVpcPeeringConnections.html)
-// , or by monitoring fleet events for success or failure using DescribeFleetEvents
-// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetEvents.html)
-// . Related actions All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// DescribeVpcPeeringConnections (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeVpcPeeringConnections.html)
+// , or by monitoring fleet events for success or failure using
+// DescribeFleetEvents (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetEvents.html)
+// . Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateVpcPeeringConnection(ctx context.Context, params *CreateVpcPeeringConnectionInput, optFns ...func(*Options)) (*CreateVpcPeeringConnectionOutput, error) {
 	if params == nil {
 		params = &CreateVpcPeeringConnectionInput{}
@@ -55,8 +51,8 @@ func (c *Client) CreateVpcPeeringConnection(ctx context.Context, params *CreateV
 
 type CreateVpcPeeringConnectionInput struct {
 
-	// A unique identifier for the fleet. You can use either the fleet ID or ARN value.
-	// This tells Amazon GameLift which GameLift VPC to peer with.
+	// A unique identifier for the fleet. You can use either the fleet ID or ARN
+	// value. This tells Amazon GameLift which GameLift VPC to peer with.
 	//
 	// This member is required.
 	FleetId *string
@@ -72,8 +68,8 @@ type CreateVpcPeeringConnectionInput struct {
 	// fleet. The VPC must be in the same Region as your fleet. To look up a VPC ID,
 	// use the VPC Dashboard (https://console.aws.amazon.com/vpc/) in the Amazon Web
 	// Services Management Console. Learn more about VPC peering in VPC Peering with
-	// GameLift Fleets
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
+	// GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html)
+	// .
 	//
 	// This member is required.
 	PeerVpcId *string

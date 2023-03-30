@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a streaming session in a studio. After invoking this operation, you must
-// poll GetStreamingSession until the streaming session is in the READY state.
+// Creates a streaming session in a studio. After invoking this operation, you
+// must poll GetStreamingSession until the streaming session is in the READY
+// state.
 func (c *Client) CreateStreamingSession(ctx context.Context, params *CreateStreamingSessionInput, optFns ...func(*Options)) (*CreateStreamingSessionOutput, error) {
 	if params == nil {
 		params = &CreateStreamingSessionInput{}
@@ -41,8 +42,8 @@ type CreateStreamingSessionInput struct {
 	// This member is required.
 	StudioId *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. If you don’t specify a client token, the Amazon Web Services SDK
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
 	ClientToken *string
@@ -50,8 +51,8 @@ type CreateStreamingSessionInput struct {
 	// The EC2 Instance type used for the streaming session.
 	Ec2InstanceType types.StreamingInstanceType
 
-	// The user ID of the user that owns the streaming session. The user that owns the
-	// session will be logging into the session and interacting with the virtual
+	// The user ID of the user that owns the streaming session. The user that owns
+	// the session will be logging into the session and interacting with the virtual
 	// workstation.
 	OwnedBy *string
 

@@ -14,11 +14,9 @@ import (
 
 // Lists the set of CA certificates provided by Amazon RDS for this Amazon Web
 // Services account. For more information, see Using SSL/TLS to encrypt a
-// connection to a DB instance
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
-// in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB
-// cluster
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+// connection to a DB instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+// in the Amazon RDS User Guide and Using SSL/TLS to encrypt a connection to a DB
+// cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
 // in the Amazon Aurora User Guide.
 func (c *Client) DescribeCertificates(ctx context.Context, params *DescribeCertificatesInput, optFns ...func(*Options)) (*DescribeCertificatesOutput, error) {
 	if params == nil {
@@ -40,8 +38,7 @@ type DescribeCertificatesInput struct {
 	// The user-supplied certificate identifier. If this parameter is specified,
 	// information for only the identified certificate is returned. This parameter
 	// isn't case-sensitive. Constraints:
-	// - Must match an existing
-	// CertificateIdentifier.
+	//     - Must match an existing CertificateIdentifier.
 	CertificateIdentifier *string
 
 	// This parameter isn't currently supported.
@@ -49,13 +46,13 @@ type DescribeCertificatesInput struct {
 
 	// An optional pagination token provided by a previous DescribeCertificates
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
-	// Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so you can retrieve the remaining results. Default:
+	// 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -64,12 +61,12 @@ type DescribeCertificatesInput struct {
 // Data returned by the DescribeCertificates action.
 type DescribeCertificatesOutput struct {
 
-	// The list of Certificate objects for the Amazon Web Services account.
+	// The list of Certificate  objects for the Amazon Web Services account.
 	Certificates []types.Certificate
 
 	// An optional pagination token provided by a previous DescribeCertificates
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords .
+	// beyond the marker, up to the value specified by MaxRecords  .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -152,14 +149,14 @@ var _ DescribeCertificatesAPIClient = (*Client)(nil)
 // DescribeCertificatesPaginatorOptions is the paginator options for
 // DescribeCertificates
 type DescribeCertificatesPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
-	// Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so you can retrieve the remaining results. Default:
+	// 100 Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

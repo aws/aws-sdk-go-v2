@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a safety rule (an assertion rule or gating rule). You can only update the
-// name and the waiting period for a safety rule. To make other updates, delete the
-// safety rule and create a new one.
+// Update a safety rule (an assertion rule or gating rule). You can only update
+// the name and the waiting period for a safety rule. To make other updates, delete
+// the safety rule and create a new one.
 func (c *Client) UpdateSafetyRule(ctx context.Context, params *UpdateSafetyRuleInput, optFns ...func(*Options)) (*UpdateSafetyRuleOutput, error) {
 	if params == nil {
 		params = &UpdateSafetyRuleInput{}

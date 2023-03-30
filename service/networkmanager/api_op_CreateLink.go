@@ -47,8 +47,8 @@ type CreateLinkInput struct {
 	// A description of the link. Constraints: Maximum length of 256 characters.
 	Description *string
 
-	// The provider of the link. Constraints: Maximum length of 128 characters. Cannot
-	// include the following characters: | \ ^
+	// The provider of the link. Constraints: Maximum length of 128 characters.
+	// Cannot include the following characters: | \ ^
 	Provider *string
 
 	// The tags to apply to the resource during creation.

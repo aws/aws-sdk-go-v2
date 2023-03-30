@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a Type object.
+// Retrieves a Type  object.
 func (c *Client) GetType(ctx context.Context, params *GetTypeInput, optFns ...func(*Options)) (*GetTypeOutput, error) {
 	if params == nil {
 		params = &GetTypeInput{}
@@ -49,7 +49,7 @@ type GetTypeInput struct {
 
 type GetTypeOutput struct {
 
-	// The Type object.
+	// The Type  object.
 	Type *types.Type
 
 	// Metadata pertaining to the operation's result.

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the StudioComponents in a studio.
+// Lists the StudioComponents  in a studio.
 func (c *Client) ListStudioComponents(ctx context.Context, params *ListStudioComponentsInput, optFns ...func(*Options)) (*ListStudioComponentsOutput, error) {
 	if params == nil {
 		params = &ListStudioComponentsInput{}
@@ -141,8 +141,8 @@ type ListStudioComponentsPaginatorOptions struct {
 	// The max number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

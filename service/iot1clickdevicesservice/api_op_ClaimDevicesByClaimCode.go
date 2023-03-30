@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds device(s) to your account (i.e., claim one or more devices) if and only if
-// you received a claim code with the device(s).
+// Adds device(s) to your account (i.e., claim one or more devices) if and only
+// if you received a claim code with the device(s).
 func (c *Client) ClaimDevicesByClaimCode(ctx context.Context, params *ClaimDevicesByClaimCodeInput, optFns ...func(*Options)) (*ClaimDevicesByClaimCodeOutput, error) {
 	if params == nil {
 		params = &ClaimDevicesByClaimCodeInput{}

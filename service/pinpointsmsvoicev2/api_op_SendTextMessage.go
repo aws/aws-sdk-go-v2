@@ -15,8 +15,7 @@ import (
 // throughput limits are measured in Message Parts per Second (MPS). Your MPS limit
 // depends on the destination country of your messages, as well as the type of
 // phone number (origination number) that you use to send the message. For more
-// information, see Message Parts per Second (MPS) limits
-// (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-limitations-mps.html)
+// information, see Message Parts per Second (MPS) limits (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-limitations-mps.html)
 // in the Amazon Pinpoint User Guide.
 func (c *Client) SendTextMessage(ctx context.Context, params *SendTextMessageInput, optFns ...func(*Options)) (*SendTextMessageOutput, error) {
 	if params == nil {
@@ -44,15 +43,15 @@ type SendTextMessageInput struct {
 	// ConfigurationSetName or ConfigurationSetArn.
 	ConfigurationSetName *string
 
-	// You can specify custom data in this field. If you do, that data is logged to the
-	// event destination.
+	// You can specify custom data in this field. If you do, that data is logged to
+	// the event destination.
 	Context map[string]string
 
 	// This field is used for any country-specific registration requirements.
 	// Currently, this setting is only used when you send messages to recipients in
 	// India using a sender ID. For more information see Special requirements for
-	// sending SMS messages to recipients in India
-	// (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-senderid-india.html).
+	// sending SMS messages to recipients in India (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-senderid-india.html)
+	// .
 	DestinationCountryParameters map[string]string
 
 	// When set to true, the message is checked and validated, but isn't sent to the
@@ -63,8 +62,8 @@ type SendTextMessageInput struct {
 	// you don’t have a US short code, omit this attribute.
 	Keyword *string
 
-	// The maximum amount that you want to spend, in US dollars, per each text message
-	// part. A text message can contain multiple parts.
+	// The maximum amount that you want to spend, in US dollars, per each text
+	// message part. A text message can contain multiple parts.
 	MaxPrice *string
 
 	// The body of the text message.

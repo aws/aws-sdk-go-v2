@@ -12,7 +12,7 @@ import (
 )
 
 // Retrieves partition statistics of columns. The Identity and Access Management
-// (IAM) permission required for this operation is GetPartition.
+// (IAM) permission required for this operation is GetPartition .
 func (c *Client) GetColumnStatisticsForPartition(ctx context.Context, params *GetColumnStatisticsForPartitionInput, optFns ...func(*Options)) (*GetColumnStatisticsForPartitionOutput, error) {
 	if params == nil {
 		params = &GetColumnStatisticsForPartitionInput{}

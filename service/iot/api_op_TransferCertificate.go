@@ -11,8 +11,7 @@ import (
 )
 
 // Transfers the specified certificate to the specified Amazon Web Services
-// account. Requires permission to access the TransferCertificate
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// account. Requires permission to access the TransferCertificate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action. You can cancel the transfer until it is acknowledged by the recipient.
 // No notification is sent to the transfer destination's account. It is up to the
 // caller to notify the transfer target. The certificate being transferred must not

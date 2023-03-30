@@ -31,8 +31,8 @@ func (c *Client) ListDataQualityJobDefinitions(ctx context.Context, params *List
 
 type ListDataQualityJobDefinitionsInput struct {
 
-	// A filter that returns only data quality monitoring job definitions created after
-	// the specified time.
+	// A filter that returns only data quality monitoring job definitions created
+	// after the specified time.
 	CreationTimeAfter *time.Time
 
 	// A filter that returns only data quality monitoring job definitions created
@@ -47,9 +47,9 @@ type ListDataQualityJobDefinitionsInput struct {
 	// response.
 	MaxResults *int32
 
-	// A string in the data quality monitoring job definition name. This filter returns
-	// only data quality monitoring job definitions whose name contains the specified
-	// string.
+	// A string in the data quality monitoring job definition name. This filter
+	// returns only data quality monitoring job definitions whose name contains the
+	// specified string.
 	NameContains *string
 
 	// If the result of the previous ListDataQualityJobDefinitions request was
@@ -57,10 +57,10 @@ type ListDataQualityJobDefinitionsInput struct {
 	// transform jobs, use the token in the next request.>
 	NextToken *string
 
-	// The field to sort results by. The default is CreationTime.
+	// The field to sort results by. The default is CreationTime .
 	SortBy types.MonitoringJobDefinitionSortKey
 
-	// The sort order for results. The default is Descending.
+	// The sort order for results. The default is Descending .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -159,8 +159,8 @@ type ListDataQualityJobDefinitionsPaginatorOptions struct {
 	// response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -14,18 +14,8 @@ import (
 // Sends a command to an Amazon QLDB ledger. Instead of interacting directly with
 // this API, we recommend using the QLDB driver or the QLDB shell to execute data
 // transactions on a ledger.
-// - If you are working with an AWS SDK, use the QLDB
-// driver. The driver provides a high-level abstraction layer above this QLDB
-// Session data plane and manages SendCommand API calls for you. For information
-// and a list of supported programming languages, see Getting started with the
-// driver
-// (https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-driver.html)
-// in the Amazon QLDB Developer Guide.
-// - If you are working with the AWS Command
-// Line Interface (AWS CLI), use the QLDB shell. The shell is a command line
-// interface that uses the QLDB driver to interact with a ledger. For information,
-// see Accessing Amazon QLDB using the QLDB shell
-// (https://docs.aws.amazon.com/qldb/latest/developerguide/data-shell.html).
+//   - If you are working with an AWS SDK, use the QLDB driver. The driver provides a high-level abstraction layer above this QLDB Session data plane and manages SendCommand API calls for you. For information and a list of supported programming languages, see Getting started with the driver (https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-driver.html) in the Amazon QLDB Developer Guide.
+//   - If you are working with the AWS Command Line Interface (AWS CLI), use the QLDB shell. The shell is a command line interface that uses the QLDB driver to interact with a ledger. For information, see Accessing Amazon QLDB using the QLDB shell (https://docs.aws.amazon.com/qldb/latest/developerguide/data-shell.html) .
 func (c *Client) SendCommand(ctx context.Context, params *SendCommandInput, optFns ...func(*Options)) (*SendCommandOutput, error) {
 	if params == nil {
 		params = &SendCommandInput{}
@@ -58,10 +48,10 @@ type SendCommandInput struct {
 	// Command to fetch a page.
 	FetchPage *types.FetchPageRequest
 
-	// Specifies the session token for the current command. A session token is constant
-	// throughout the life of the session. To obtain a session token, run the
-	// StartSession command. This SessionToken is required for every subsequent command
-	// that is issued during the current session.
+	// Specifies the session token for the current command. A session token is
+	// constant throughout the life of the session. To obtain a session token, run the
+	// StartSession command. This SessionToken is required for every subsequent
+	// command that is issued during the current session.
 	SessionToken *string
 
 	// Command to start a new session. A session token is obtained as part of the
@@ -91,9 +81,9 @@ type SendCommandOutput struct {
 	// Contains the details of the fetched page.
 	FetchPage *types.FetchPageResult
 
-	// Contains the details of the started session that includes a session token. This
-	// SessionToken is required for every subsequent command that is issued during the
-	// current session.
+	// Contains the details of the started session that includes a session token.
+	// This SessionToken is required for every subsequent command that is issued
+	// during the current session.
 	StartSession *types.StartSessionResult
 
 	// Contains the details of the started transaction.

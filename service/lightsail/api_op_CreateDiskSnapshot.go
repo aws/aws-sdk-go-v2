@@ -30,9 +30,10 @@ import (
 // command, and a snapshot of the defined instance's system volume will be created.
 // After the snapshot is available, you can create a block storage disk from the
 // snapshot and attach it to a running instance to access the data on the disk. The
-// create disk snapshot operation supports tag-based access control via request
-// tags. For more information, see the Amazon Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+//
+// create disk snapshotoperation supports tag-based access control via request
+// tags. For more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) CreateDiskSnapshot(ctx context.Context, params *CreateDiskSnapshotInput, optFns ...func(*Options)) (*CreateDiskSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateDiskSnapshotInput{}
@@ -50,21 +51,21 @@ func (c *Client) CreateDiskSnapshot(ctx context.Context, params *CreateDiskSnaps
 
 type CreateDiskSnapshotInput struct {
 
-	// The name of the destination disk snapshot (e.g., my-disk-snapshot) based on the
-	// source disk.
+	// The name of the destination disk snapshot (e.g., my-disk-snapshot) based on
+	// the source disk.
 	//
 	// This member is required.
 	DiskSnapshotName *string
 
 	// The unique name of the source disk (e.g., Disk-Virginia-1). This parameter
-	// cannot be defined together with the instance name parameter. The disk name and
-	// instance name parameters are mutually exclusive.
+	// cannot be defined together with the instance name  parameter. The disk name
+	// and instance name  parameters are mutually exclusive.
 	DiskName *string
 
 	// The unique name of the source instance (e.g., Amazon_Linux-512MB-Virginia-1).
 	// When this is defined, a snapshot of the instance's system volume is created.
-	// This parameter cannot be defined together with the disk name parameter. The
-	// instance name and disk name parameters are mutually exclusive.
+	// This parameter cannot be defined together with the disk name  parameter. The
+	// instance name and disk name  parameters are mutually exclusive.
 	InstanceName *string
 
 	// The tag keys and optional values to add to the resource during create. Use the

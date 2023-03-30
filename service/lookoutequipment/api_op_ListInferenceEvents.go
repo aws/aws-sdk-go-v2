@@ -37,8 +37,8 @@ type ListInferenceEventsInput struct {
 	// This member is required.
 	InferenceSchedulerName *string
 
-	// Returns all the inference events with an end start time equal to or greater than
-	// less than the end time given
+	// Returns all the inference events with an end start time equal to or greater
+	// than less than the end time given
 	//
 	// This member is required.
 	IntervalEndTime *time.Time
@@ -52,8 +52,8 @@ type ListInferenceEventsInput struct {
 	// Specifies the maximum number of inference events to list.
 	MaxResults *int32
 
-	// An opaque pagination token indicating where to continue the listing of inference
-	// events.
+	// An opaque pagination token indicating where to continue the listing of
+	// inference events.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -61,13 +61,13 @@ type ListInferenceEventsInput struct {
 
 type ListInferenceEventsOutput struct {
 
-	// Provides an array of information about the individual inference events returned
-	// from the ListInferenceEvents operation, including scheduler used, event start
-	// time, event end time, diagnostics, and so on.
+	// Provides an array of information about the individual inference events
+	// returned from the ListInferenceEvents operation, including scheduler used,
+	// event start time, event end time, diagnostics, and so on.
 	InferenceEventSummaries []types.InferenceEventSummary
 
-	// An opaque pagination token indicating where to continue the listing of inference
-	// executions.
+	// An opaque pagination token indicating where to continue the listing of
+	// inference executions.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -139,8 +139,8 @@ func (c *Client) addOperationListInferenceEventsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListInferenceEventsAPIClient is a client that implements the ListInferenceEvents
-// operation.
+// ListInferenceEventsAPIClient is a client that implements the
+// ListInferenceEvents operation.
 type ListInferenceEventsAPIClient interface {
 	ListInferenceEvents(context.Context, *ListInferenceEventsInput, ...func(*Options)) (*ListInferenceEventsOutput, error)
 }
@@ -153,8 +153,8 @@ type ListInferenceEventsPaginatorOptions struct {
 	// Specifies the maximum number of inference events to list.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

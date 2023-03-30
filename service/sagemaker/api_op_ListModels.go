@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Lists models created with the CreateModel API.
+// Lists models created with the CreateModel  API.
 func (c *Client) ListModels(ctx context.Context, params *ListModelsInput, optFns ...func(*Options)) (*ListModelsOutput, error) {
 	if params == nil {
 		params = &ListModelsInput{}
@@ -31,18 +31,19 @@ func (c *Client) ListModels(ctx context.Context, params *ListModelsInput, optFns
 
 type ListModelsInput struct {
 
-	// A filter that returns only models with a creation time greater than or equal to
-	// the specified time (timestamp).
+	// A filter that returns only models with a creation time greater than or equal
+	// to the specified time (timestamp).
 	CreationTimeAfter *time.Time
 
-	// A filter that returns only models created before the specified time (timestamp).
+	// A filter that returns only models created before the specified time
+	// (timestamp).
 	CreationTimeBefore *time.Time
 
 	// The maximum number of models to return in the response.
 	MaxResults *int32
 
-	// A string in the model name. This filter returns only models whose name contains
-	// the specified string.
+	// A string in the model name. This filter returns only models whose name
+	// contains the specified string.
 	NameContains *string
 
 	// If the response to a previous ListModels request was truncated, the response
@@ -50,10 +51,10 @@ type ListModelsInput struct {
 	// next request.
 	NextToken *string
 
-	// Sorts the list of results. The default is CreationTime.
+	// Sorts the list of results. The default is CreationTime .
 	SortBy types.ModelSortKey
 
-	// The sort order for results. The default is Descending.
+	// The sort order for results. The default is Descending .
 	SortOrder types.OrderKey
 
 	noSmithyDocumentSerde
@@ -61,13 +62,13 @@ type ListModelsInput struct {
 
 type ListModelsOutput struct {
 
-	// An array of ModelSummary objects, each of which lists a model.
+	// An array of ModelSummary  objects, each of which lists a model.
 	//
 	// This member is required.
 	Models []types.ModelSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of models, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of models, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -148,8 +149,8 @@ type ListModelsPaginatorOptions struct {
 	// The maximum number of models to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

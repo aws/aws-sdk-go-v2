@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gathers a complete list of on-premises servers. Connectors must be installed and
-// monitoring all servers to import. This call returns immediately, but might take
-// additional time to retrieve all the servers.
+// Gathers a complete list of on-premises servers. Connectors must be installed
+// and monitoring all servers to import. This call returns immediately, but might
+// take additional time to retrieve all the servers.
 func (c *Client) ImportServerCatalog(ctx context.Context, params *ImportServerCatalogInput, optFns ...func(*Options)) (*ImportServerCatalogOutput, error) {
 	if params == nil {
 		params = &ImportServerCatalogInput{}

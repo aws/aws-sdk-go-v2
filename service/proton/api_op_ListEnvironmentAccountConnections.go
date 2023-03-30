@@ -13,8 +13,7 @@ import (
 )
 
 // View a list of environment account connections. For more information, see
-// Environment account connections
-// (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html)
+// Environment account connections (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html)
 // in the Proton User guide.
 func (c *Client) ListEnvironmentAccountConnections(ctx context.Context, params *ListEnvironmentAccountConnectionsInput, optFns ...func(*Options)) (*ListEnvironmentAccountConnectionsOutput, error) {
 	if params == nil {
@@ -33,7 +32,7 @@ func (c *Client) ListEnvironmentAccountConnections(ctx context.Context, params *
 
 type ListEnvironmentAccountConnectionsInput struct {
 
-	// The type of account making the ListEnvironmentAccountConnections request.
+	// The type of account making the ListEnvironmentAccountConnections  request.
 	//
 	// This member is required.
 	RequestedBy types.EnvironmentAccountConnectionRequesterAccountType
@@ -152,8 +151,8 @@ type ListEnvironmentAccountConnectionsPaginatorOptions struct {
 	// The maximum number of environment account connections to list.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

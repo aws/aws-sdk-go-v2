@@ -13,25 +13,20 @@ import (
 
 // This operation retrieves the following attributes from the lock-policy
 // subresource set on the specified vault:
-// - The vault lock policy set on the
-// vault.
-// - The state of the vault lock, which is either InProgess or Locked.
-// -
-// When the lock ID expires. The lock ID is used to complete the vault locking
-// process.
-// - When the vault lock was initiated and put into the InProgress
-// state.
+//   - The vault lock policy set on the vault.
+//   - The state of the vault lock, which is either InProgess or Locked .
+//   - When the lock ID expires. The lock ID is used to complete the vault locking process.
+//   - When the vault lock was initiated and put into the InProgress state.
 //
-// A vault lock is put into the InProgress state by calling
-// InitiateVaultLock. A vault lock is put into the Locked state by calling
-// CompleteVaultLock. You can abort the vault locking process by calling
-// AbortVaultLock. For more information about the vault locking process, Amazon
-// Glacier Vault Lock
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html). If there
-// is no vault lock policy set on the vault, the operation returns a 404 Not found
-// error. For more information about vault lock policies, Amazon Glacier Access
-// Control with Vault Lock Policies
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html).
+// A
+// vault lock is put into the InProgress  state by calling InitiateVaultLock. A
+// vault lock is put into the Locked  state by calling CompleteVaultLock. You can
+// abort the vault locking process by calling AbortVaultLock. For more
+// information about the vault locking process, Amazon Glacier Vault Lock (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html)
+// . If there is no vault lock policy set on the vault, the operation returns a
+// 404 Not found error. For more information about vault lock policies, Amazon
+// Glacier Access Control with Vault Lock Policies (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html)
+// .
 func (c *Client) GetVaultLock(ctx context.Context, params *GetVaultLockInput, optFns ...func(*Options)) (*GetVaultLockOutput, error) {
 	if params == nil {
 		params = &GetVaultLockInput{}
@@ -47,12 +42,12 @@ func (c *Client) GetVaultLock(ctx context.Context, params *GetVaultLockInput, op
 	return out, nil
 }
 
-// The input values for GetVaultLock.
+// The input values for GetVaultLock .
 type GetVaultLockInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
-	// which case Amazon S3 Glacier uses the AWS account ID associated with the
+	// You can either specify an AWS account ID or optionally a single ' -' (hyphen),
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -70,17 +65,18 @@ type GetVaultLockInput struct {
 // Contains the Amazon S3 Glacier response to your request.
 type GetVaultLockOutput struct {
 
-	// The UTC date and time at which the vault lock was put into the InProgress state.
+	// The UTC date and time at which the vault lock was put into the InProgress
+	// state.
 	CreationDate *string
 
 	// The UTC date and time at which the lock ID expires. This value can be null if
-	// the vault lock is in a Locked state.
+	// the vault lock is in a Locked  state.
 	ExpirationDate *string
 
 	// The vault lock policy as a JSON string, which uses "\" as an escape character.
 	Policy *string
 
-	// The state of the vault lock. InProgress or Locked.
+	// The state of the vault lock. InProgress  or Locked .
 	State *string
 
 	// Metadata pertaining to the operation's result.

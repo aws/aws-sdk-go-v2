@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets permissions for a user, group, or resource. This replaces any pre-existing
-// permissions.
+// Sets permissions for a user, group, or resource. This replaces any
+// pre-existing permissions.
 func (c *Client) PutMailboxPermissions(ctx context.Context, params *PutMailboxPermissionsInput, optFns ...func(*Options)) (*PutMailboxPermissionsOutput, error) {
 	if params == nil {
 		params = &PutMailboxPermissionsInput{}
@@ -48,12 +48,12 @@ type PutMailboxPermissionsInput struct {
 	// This member is required.
 	OrganizationId *string
 
-	// The permissions granted to the grantee. SEND_AS allows the grantee to send email
-	// as the owner of the mailbox (the grantee is not mentioned on these emails).
-	// SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the
-	// mailbox (the grantee is not mentioned as the physical sender of these emails).
-	// FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other
-	// folder-level permissions set on the mailbox.
+	// The permissions granted to the grantee. SEND_AS allows the grantee to send
+	// email as the owner of the mailbox (the grantee is not mentioned on these
+	// emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner
+	// of the mailbox (the grantee is not mentioned as the physical sender of these
+	// emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective
+	// of other folder-level permissions set on the mailbox.
 	//
 	// This member is required.
 	PermissionValues []types.PermissionType

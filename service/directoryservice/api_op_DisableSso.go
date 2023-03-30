@@ -26,7 +26,7 @@ func (c *Client) DisableSso(ctx context.Context, params *DisableSsoInput, optFns
 	return out, nil
 }
 
-// Contains the inputs for the DisableSso operation.
+// Contains the inputs for the DisableSso  operation.
 type DisableSsoInput struct {
 
 	// The identifier of the directory for which to disable single-sign on.
@@ -51,7 +51,7 @@ type DisableSsoInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the results of the DisableSso operation.
+// Contains the results of the DisableSso  operation.
 type DisableSsoOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

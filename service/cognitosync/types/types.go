@@ -10,18 +10,18 @@ import (
 // Configuration options for configure Cognito streams.
 type CognitoStreams struct {
 
-	// The ARN of the role Amazon Cognito can assume in order to publish to the stream.
-	// This role must grant access to Amazon Cognito (cognito-sync) to invoke PutRecord
-	// on your Cognito stream.
+	// The ARN of the role Amazon Cognito can assume in order to publish to the
+	// stream. This role must grant access to Amazon Cognito (cognito-sync) to invoke
+	// PutRecord on your Cognito stream.
 	RoleArn *string
 
 	// The name of the Cognito stream to receive updates. This stream must be in the
 	// developers account and in the same region as the identity pool.
 	StreamName *string
 
-	// Status of the Cognito streams. Valid values are: ENABLED - Streaming of updates
-	// to identity pool is enabled. DISABLED - Streaming of updates to identity pool is
-	// disabled. Bulk publish will also fail if StreamingStatus is DISABLED.
+	// Status of the Cognito streams. Valid values are: ENABLED - Streaming of
+	// updates to identity pool is enabled. DISABLED - Streaming of updates to identity
+	// pool is disabled. Bulk publish will also fail if StreamingStatus is DISABLED.
 	StreamingStatus StreamingStatus
 
 	noSmithyDocumentSerde
@@ -44,8 +44,9 @@ type Dataset struct {
 	// (underscore), '-' (dash), and '.' (dot).
 	DatasetName *string
 
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. GUID generation is unique within a region.
+	// A name-spaced GUID (for example,
+	// us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID
+	// generation is unique within a region.
 	IdentityId *string
 
 	// The device that made the last change to this dataset.
@@ -66,8 +67,9 @@ type IdentityPoolUsage struct {
 	// Data storage information for the identity pool.
 	DataStorage *int64
 
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. GUID generation is unique within a region.
+	// A name-spaced GUID (for example,
+	// us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID
+	// generation is unique within a region.
 	IdentityPoolId *string
 
 	// Date on which the identity pool was last modified.
@@ -88,12 +90,14 @@ type IdentityUsage struct {
 	// Number of datasets for the identity.
 	DatasetCount int32
 
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. GUID generation is unique within a region.
+	// A name-spaced GUID (for example,
+	// us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID
+	// generation is unique within a region.
 	IdentityId *string
 
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. GUID generation is unique within a region.
+	// A name-spaced GUID (for example,
+	// us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID
+	// generation is unique within a region.
 	IdentityPoolId *string
 
 	// Date on which the identity was last modified.

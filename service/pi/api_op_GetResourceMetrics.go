@@ -37,8 +37,8 @@ type GetResourceMetricsInput struct {
 
 	// The date and time specifying the end of the requested time series query range.
 	// The value specified is exclusive. Thus, the command returns data points less
-	// than (but not equal to) EndTime. The value for EndTime must be later than the
-	// value for StartTime.
+	// than (but not equal to) EndTime . The value for EndTime must be later than the
+	// value for StartTime .
 	//
 	// This member is required.
 	EndTime *time.Time
@@ -46,9 +46,9 @@ type GetResourceMetricsInput struct {
 	// An immutable identifier for a data source that is unique for an Amazon Web
 	// Services Region. Performance Insights gathers metrics from this data source. In
 	// the console, the identifier is shown as ResourceID. When you call
-	// DescribeDBInstances, the identifier is returned as DbiResourceId. To use a DB
-	// instance as a data source, specify its DbiResourceId value. For example, specify
-	// db-ABCDEFGHIJKLMNOPQRSTU1VW2X.
+	// DescribeDBInstances , the identifier is returned as DbiResourceId. To use a DB
+	// instance as a data source, specify its DbiResourceId value. For example,
+	// specify db-ABCDEFGHIJKLMNOPQRSTU1VW2X .
 	//
 	// This member is required.
 	Identifier *string
@@ -60,10 +60,10 @@ type GetResourceMetricsInput struct {
 	// This member is required.
 	MetricQueries []types.MetricQuery
 
-	// The Amazon Web Services service for which Performance Insights returns metrics.
-	// Valid values are as follows:
-	// - RDS
-	// - DOCDB
+	// The Amazon Web Services service for which Performance Insights returns
+	// metrics. Valid values are as follows:
+	//     - RDS
+	//     - DOCDB
 	//
 	// This member is required.
 	ServiceType types.ServiceType
@@ -72,39 +72,37 @@ type GetResourceMetricsInput struct {
 	// range. You can't specify a StartTime that is earlier than 7 days ago. By
 	// default, Performance Insights has 7 days of retention, but you can extend this
 	// range up to 2 years. The value specified is inclusive. Thus, the command returns
-	// data points equal to or greater than StartTime. The value for StartTime must be
-	// earlier than the value for EndTime.
+	// data points equal to or greater than StartTime . The value for StartTime must
+	// be earlier than the value for EndTime .
 	//
 	// This member is required.
 	StartTime *time.Time
 
-	// The maximum number of items to return in the response. If more items exist than
-	// the specified MaxRecords value, a pagination token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of items to return in the response. If more items exist
+	// than the specified MaxRecords value, a pagination token is included in the
+	// response so that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the token, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	NextToken *string
 
 	// The returned timestamp which is the start or end time of the time periods. The
-	// default value is END_TIME.
+	// default value is END_TIME .
 	PeriodAlignment types.PeriodAlignment
 
 	// The granularity, in seconds, of the data points returned from Performance
 	// Insights. A period can be as short as one second, or as long as one day (86400
 	// seconds). Valid values are:
-	// - 1 (one second)
-	// - 60 (one minute)
-	// - 300 (five
-	// minutes)
-	// - 3600 (one hour)
-	// - 86400 (twenty-four hours)
-	//
-	// If you don't specify
-	// PeriodInSeconds, then Performance Insights will choose a value for you, with a
-	// goal of returning roughly 100-200 data points in the response.
+	//     - 1 (one second)
+	//     - 60 (one minute)
+	//     - 300 (five minutes)
+	//     - 3600 (one hour)
+	//     - 86400 (twenty-four hours)
+	// If you don't specify PeriodInSeconds, then Performance Insights will choose a
+	// value for you, with a goal of returning roughly 100-200 data points in the
+	// response.
 	PeriodInSeconds *int32
 
 	noSmithyDocumentSerde
@@ -113,19 +111,19 @@ type GetResourceMetricsInput struct {
 type GetResourceMetricsOutput struct {
 
 	// The end time for the returned metrics, after alignment to a granular boundary
-	// (as specified by PeriodInSeconds). AlignedEndTime will be greater than or equal
-	// to the value of the user-specified Endtime.
+	// (as specified by PeriodInSeconds ). AlignedEndTime will be greater than or
+	// equal to the value of the user-specified Endtime .
 	AlignedEndTime *time.Time
 
-	// The start time for the returned metrics, after alignment to a granular boundary
-	// (as specified by PeriodInSeconds). AlignedStartTime will be less than or equal
-	// to the value of the user-specified StartTime.
+	// The start time for the returned metrics, after alignment to a granular
+	// boundary (as specified by PeriodInSeconds ). AlignedStartTime will be less
+	// than or equal to the value of the user-specified StartTime .
 	AlignedStartTime *time.Time
 
 	// An immutable identifier for a data source that is unique for an Amazon Web
 	// Services Region. Performance Insights gathers metrics from this data source. In
 	// the console, the identifier is shown as ResourceID. When you call
-	// DescribeDBInstances, the identifier is returned as DbiResourceId.
+	// DescribeDBInstances , the identifier is returned as DbiResourceId .
 	Identifier *string
 
 	// An array of metric results, where each array element contains all of the data
@@ -134,7 +132,7 @@ type GetResourceMetricsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the token, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -217,13 +215,13 @@ var _ GetResourceMetricsAPIClient = (*Client)(nil)
 // GetResourceMetricsPaginatorOptions is the paginator options for
 // GetResourceMetrics
 type GetResourceMetricsPaginatorOptions struct {
-	// The maximum number of items to return in the response. If more items exist than
-	// the specified MaxRecords value, a pagination token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of items to return in the response. If more items exist
+	// than the specified MaxRecords value, a pagination token is included in the
+	// response so that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

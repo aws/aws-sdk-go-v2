@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get a list of cost allocation tags. All inputs in the API are optional and serve
-// as filters. By default, all cost allocation tags are returned.
+// Get a list of cost allocation tags. All inputs in the API are optional and
+// serve as filters. By default, all cost allocation tags are returned.
 func (c *Client) ListCostAllocationTags(ctx context.Context, params *ListCostAllocationTagsInput, optFns ...func(*Options)) (*ListCostAllocationTagsOutput, error) {
 	if params == nil {
 		params = &ListCostAllocationTagsInput{}
@@ -35,9 +35,9 @@ type ListCostAllocationTagsInput struct {
 	// the request returns 100 results.
 	MaxResults *int32
 
-	// The token to retrieve the next set of results. Amazon Web Services provides the
-	// token when the response from a previous call has more results than the maximum
-	// page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides
+	// the token when the response from a previous call has more results than the
+	// maximum page size.
 	NextToken *string
 
 	// The status of cost allocation tag keys that are returned for this request.
@@ -46,8 +46,8 @@ type ListCostAllocationTagsInput struct {
 	// The list of cost allocation tag keys that are returned for this request.
 	TagKeys []string
 
-	// The type of CostAllocationTag object that are returned for this request. The
-	// AWSGenerated type tags are tags that Amazon Web Services defines and applies to
+	// The type of CostAllocationTag  object that are returned for this request. The
+	// AWSGeneratedtype tags are tags that Amazon Web Services defines and applies to
 	// support Amazon Web Services resources for cost allocation purposes. The
 	// UserDefined type tags are tags that you define, create, and apply to resources.
 	Type types.CostAllocationTagType
@@ -57,12 +57,13 @@ type ListCostAllocationTagsInput struct {
 
 type ListCostAllocationTagsOutput struct {
 
-	// A list of cost allocation tags that includes the detailed metadata for each one.
+	// A list of cost allocation tags that includes the detailed metadata for each
+	// one.
 	CostAllocationTags []types.CostAllocationTag
 
-	// The token to retrieve the next set of results. Amazon Web Services provides the
-	// token when the response from a previous call has more results than the maximum
-	// page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides
+	// the token when the response from a previous call has more results than the
+	// maximum page size.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -146,8 +147,8 @@ type ListCostAllocationTagsPaginatorOptions struct {
 	// the request returns 100 results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -160,7 +161,8 @@ type ListCostAllocationTagsPaginator struct {
 	firstPage bool
 }
 
-// NewListCostAllocationTagsPaginator returns a new ListCostAllocationTagsPaginator
+// NewListCostAllocationTagsPaginator returns a new
+// ListCostAllocationTagsPaginator
 func NewListCostAllocationTagsPaginator(client ListCostAllocationTagsAPIClient, params *ListCostAllocationTagsInput, optFns ...func(*ListCostAllocationTagsPaginatorOptions)) *ListCostAllocationTagsPaginator {
 	if params == nil {
 		params = &ListCostAllocationTagsInput{}

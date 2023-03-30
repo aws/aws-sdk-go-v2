@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the tags for the specified Kinesis data stream. This operation has a limit
-// of five transactions per second per account. When invoking this API, it is
-// recommended you use the StreamARN input parameter rather than the StreamName
+// Lists the tags for the specified Kinesis data stream. This operation has a
+// limit of five transactions per second per account. When invoking this API, it is
+// recommended you use the StreamARN  input parameter rather than the StreamName
 // input parameter.
 func (c *Client) ListTagsForStream(ctx context.Context, params *ListTagsForStreamInput, optFns ...func(*Options)) (*ListTagsForStreamOutput, error) {
 	if params == nil {
@@ -30,16 +30,16 @@ func (c *Client) ListTagsForStream(ctx context.Context, params *ListTagsForStrea
 	return out, nil
 }
 
-// Represents the input for ListTagsForStream.
+// Represents the input for ListTagsForStream .
 type ListTagsForStreamInput struct {
 
-	// The key to use as the starting point for the list of tags. If this parameter is
-	// set, ListTagsForStream gets all tags that occur after ExclusiveStartTagKey.
+	// The key to use as the starting point for the list of tags. If this parameter
+	// is set, ListTagsForStream  gets all tags that occur after ExclusiveStartTagKey .
 	ExclusiveStartTagKey *string
 
 	// The number of tags to return. If this number is less than the total number of
-	// tags associated with the stream, HasMoreTags is set to true. To list additional
-	// tags, set ExclusiveStartTagKey to the last key in the response.
+	// tags associated with the stream, HasMoreTags  is set to true. To list
+	// additional tags, set ExclusiveStartTagKey  to the last key in the response.
 	Limit *int32
 
 	// The ARN of the stream.
@@ -51,17 +51,17 @@ type ListTagsForStreamInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output for ListTagsForStream.
+// Represents the output for ListTagsForStream .
 type ListTagsForStreamOutput struct {
 
-	// If set to true, more tags are available. To request additional tags, set
+	// If set to true , more tags are available. To request additional tags, set
 	// ExclusiveStartTagKey to the key of the last tag returned.
 	//
 	// This member is required.
 	HasMoreTags *bool
 
-	// A list of tags associated with StreamName, starting with the first tag after
-	// ExclusiveStartTagKey and up to the specified Limit.
+	// A list of tags associated with StreamName , starting with the first tag after
+	// ExclusiveStartTagKey and up to the specified Limit .
 	//
 	// This member is required.
 	Tags []types.Tag

@@ -51,13 +51,13 @@ type DescribeCollectionOutput struct {
 	// Thursday, 1 January 1970.
 	CreationTimestamp *time.Time
 
-	// The number of faces that are indexed into the collection. To index faces into a
-	// collection, use IndexFaces.
+	// The number of faces that are indexed into the collection. To index faces into
+	// a collection, use IndexFaces .
 	FaceCount *int64
 
-	// The version of the face model that's used by the collection for face detection.
-	// For more information, see Model versioning in the Amazon Rekognition Developer
-	// Guide.
+	// The version of the face model that's used by the collection for face
+	// detection. For more information, see Model versioning in the Amazon Rekognition
+	// Developer Guide.
 	FaceModelVersion *string
 
 	// Metadata pertaining to the operation's result.

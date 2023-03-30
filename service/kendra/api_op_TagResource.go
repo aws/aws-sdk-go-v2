@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds the specified tag to the specified index, FAQ, or data source resource. If
-// the tag already exists, the existing value is replaced with the new value.
+// Adds the specified tag to the specified index, FAQ, or data source resource.
+// If the tag already exists, the existing value is replaced with the new value.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

@@ -37,7 +37,7 @@ type RedactChannelMessageInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
+	// The ARN of the AppInstanceUser  or AppInstanceBot  that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string
@@ -61,8 +61,8 @@ type RedactChannelMessageOutput struct {
 	// The ID of the message being redacted.
 	MessageId *string
 
-	// The ID of the SubChannel in the response. Only required when redacting messages
-	// in a SubChannel that the user belongs to.
+	// The ID of the SubChannel in the response. Only required when redacting
+	// messages in a SubChannel that the user belongs to.
 	SubChannelId *string
 
 	// Metadata pertaining to the operation's result.

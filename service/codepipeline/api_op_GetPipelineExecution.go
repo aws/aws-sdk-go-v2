@@ -29,7 +29,7 @@ func (c *Client) GetPipelineExecution(ctx context.Context, params *GetPipelineEx
 	return out, nil
 }
 
-// Represents the input of a GetPipelineExecution action.
+// Represents the input of a GetPipelineExecution  action.
 type GetPipelineExecutionInput struct {
 
 	// The ID of the pipeline execution about which you want to get execution details.
@@ -45,7 +45,7 @@ type GetPipelineExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a GetPipelineExecution action.
+// Represents the output of a GetPipelineExecution  action.
 type GetPipelineExecutionOutput struct {
 
 	// Represents information about the execution of a pipeline.

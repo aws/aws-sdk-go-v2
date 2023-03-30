@@ -231,8 +231,8 @@ func (e *EventBridgeException) ErrorCode() string {
 }
 func (e *EventBridgeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Internal service exceptions are sometimes caused by transient issues. Before you
-// start troubleshooting, perform the operation again.
+// Internal service exceptions are sometimes caused by transient issues. Before
+// you start troubleshooting, perform the operation again.
 type InternalServerException struct {
 	Message *string
 
@@ -260,8 +260,8 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The request was rejected because a value that's not valid or is out of range was
-// supplied for an input parameter.
+// The request was rejected because a value that's not valid or is out of range
+// was supplied for an input parameter.
 type InvalidInputException struct {
 	Message *string
 

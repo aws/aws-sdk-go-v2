@@ -12,10 +12,10 @@ import (
 )
 
 // Detects unsafe content in a specified JPEG or PNG format image. Use
-// DetectModerationLabels to moderate images depending on your requirements. For
+// DetectModerationLabelsto moderate images depending on your requirements. For
 // example, you might want to filter images that contain nudity, but not images
 // containing suggestive content. To filter images, use the labels returned by
-// DetectModerationLabels to determine which types of content are appropriate. For
+// DetectModerationLabelsto determine which types of content are appropriate. For
 // information about moderation labels, see Detecting Unsafe Content in the Amazon
 // Rekognition Developer Guide. You pass the input image either as base64-encoded
 // image bytes or as a reference to an image in an Amazon S3 bucket. If you use the
@@ -38,17 +38,17 @@ func (c *Client) DetectModerationLabels(ctx context.Context, params *DetectModer
 
 type DetectModerationLabelsInput struct {
 
-	// The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI
-	// to call Amazon Rekognition operations, passing base64-encoded image bytes is not
-	// supported. If you are using an AWS SDK to call Amazon Rekognition, you might not
-	// need to base64-encode image bytes passed using the Bytes field. For more
+	// The input image as base64-encoded bytes or an S3 object. If you use the AWS
+	// CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is
+	// not supported. If you are using an AWS SDK to call Amazon Rekognition, you might
+	// not need to base64-encode image bytes passed using the Bytes field. For more
 	// information, see Images in the Amazon Rekognition developer guide.
 	//
 	// This member is required.
 	Image *types.Image
 
-	// Sets up the configuration for human evaluation, including the FlowDefinition the
-	// image will be sent to.
+	// Sets up the configuration for human evaluation, including the FlowDefinition
+	// the image will be sent to.
 	HumanLoopConfig *types.HumanLoopConfig
 
 	// Specifies the minimum confidence level for the labels to return. Amazon
@@ -65,12 +65,12 @@ type DetectModerationLabelsOutput struct {
 	// Shows the results of the human in the loop evaluation.
 	HumanLoopActivationOutput *types.HumanLoopActivationOutput
 
-	// Array of detected Moderation labels and the time, in milliseconds from the start
-	// of the video, they were detected.
+	// Array of detected Moderation labels and the time, in milliseconds from the
+	// start of the video, they were detected.
 	ModerationLabels []types.ModerationLabel
 
-	// Version number of the moderation detection model that was used to detect unsafe
-	// content.
+	// Version number of the moderation detection model that was used to detect
+	// unsafe content.
 	ModerationModelVersion *string
 
 	// Metadata pertaining to the operation's result.

@@ -13,9 +13,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A synchronous operation that allows you to submit a query with parameters to be
-// stored by Timestream for later running. Timestream only supports using this
-// operation with the PrepareQueryRequest$ValidateOnly set to true.
+// A synchronous operation that allows you to submit a query with parameters to
+// be stored by Timestream for later running. Timestream only supports using this
+// operation with the PrepareQueryRequest$ValidateOnly  set to true .
 func (c *Client) PrepareQuery(ctx context.Context, params *PrepareQueryInput, optFns ...func(*Options)) (*PrepareQueryOutput, error) {
 	if params == nil {
 		params = &PrepareQueryInput{}
@@ -34,8 +34,8 @@ func (c *Client) PrepareQuery(ctx context.Context, params *PrepareQueryInput, op
 type PrepareQueryInput struct {
 
 	// The Timestream query string that you want to use as a prepared statement.
-	// Parameter names can be specified in the query string @ character followed by an
-	// identifier.
+	// Parameter names can be specified in the query string @ character followed by
+	// an identifier.
 	//
 	// This member is required.
 	QueryString *string

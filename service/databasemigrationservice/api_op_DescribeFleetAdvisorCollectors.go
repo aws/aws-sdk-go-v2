@@ -30,14 +30,10 @@ func (c *Client) DescribeFleetAdvisorCollectors(ctx context.Context, params *Des
 
 type DescribeFleetAdvisorCollectorsInput struct {
 
-	// If you specify any of the following filters, the output includes information for
-	// only those collectors that meet the filter criteria:
-	// - collector-referenced-id –
-	// The ID of the collector agent, for example
-	// d4610ac5-e323-4ad9-bc50-eaf7249dfe9d.
-	// - collector-name – The name of the
-	// collector agent.
-	//
+	// If you specify any of the following filters, the output includes information
+	// for only those collectors that meet the filter criteria:
+	//     - collector-referenced-id – The ID of the collector agent, for example d4610ac5-e323-4ad9-bc50-eaf7249dfe9d .
+	//     - collector-name – The name of the collector agent.
 	// An example is: describe-fleet-advisor-collectors --filter
 	// Name="collector-referenced-id",Values="d4610ac5-e323-4ad9-bc50-eaf7249dfe9d"
 	Filters []types.Filter
@@ -56,12 +52,12 @@ type DescribeFleetAdvisorCollectorsInput struct {
 
 type DescribeFleetAdvisorCollectorsOutput struct {
 
-	// Provides descriptions of the Fleet Advisor collectors, including the collectors'
-	// name and ID, and the latest inventory data.
+	// Provides descriptions of the Fleet Advisor collectors, including the
+	// collectors' name and ID, and the latest inventory data.
 	Collectors []types.CollectorResponse
 
-	// If NextToken is returned, there are more results available. The value of
-	// NextToken is a unique pagination token for each page. Make the call again using
+	// If NextToken  is returned, there are more results available. The value of
+	// NextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged.
 	NextToken *string
@@ -149,8 +145,8 @@ type DescribeFleetAdvisorCollectorsPaginatorOptions struct {
 	// Sets the maximum number of records returned in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

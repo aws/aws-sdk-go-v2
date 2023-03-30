@@ -44,8 +44,8 @@ func TestClient_GreetingWithErrors_awsRestjson1Deserialize(t *testing.T) {
 				Greeting: ptr.String("Hello"),
 			},
 		},
-		// This test is similar to RestJsonGreetingWithErrors, but it ensures that clients
-		// can gracefully deal with a server omitting a response payload.
+		// This test is similar to RestJsonGreetingWithErrors, but it ensures that
+		// clients can gracefully deal with a server omitting a response payload.
 		"RestJsonGreetingWithErrorsNoPayload": {
 			StatusCode: 200,
 			Header: http.Header{
@@ -143,8 +143,8 @@ func TestClient_GreetingWithErrors_FooError_awsRestjson1Deserialize(t *testing.T
 			},
 			ExpectError: &types.FooError{},
 		},
-		// Some X-Amzn-Errortype headers contain URLs. Clients need to split the URL on ':'
-		// and take only the first half of the string. For example,
+		// Some X-Amzn-Errortype headers contain URLs. Clients need to split the URL on
+		// ':' and take only the first half of the string. For example,
 		// 'ValidationException:http://internal.amazon.com/coral/com.amazon.coral.validate/'
 		// is to be interpreted as 'ValidationException'. For an example service see Amazon
 		// Polly.
@@ -155,9 +155,9 @@ func TestClient_GreetingWithErrors_FooError_awsRestjson1Deserialize(t *testing.T
 			},
 			ExpectError: &types.FooError{},
 		},
-		// X-Amzn-Errortype might contain a URL and a namespace. Client should extract only
-		// the shape name. This is a pathalogical case that might not actually happen in
-		// any deployed AWS service.
+		// X-Amzn-Errortype might contain a URL and a namespace. Client should extract
+		// only the shape name. This is a pathalogical case that might not actually happen
+		// in any deployed AWS service.
 		"RestJsonFooErrorUsingXAmznErrorTypeWithUriAndNamespace": {
 			StatusCode: 500,
 			Header: http.Header{
@@ -194,10 +194,10 @@ func TestClient_GreetingWithErrors_FooError_awsRestjson1Deserialize(t *testing.T
 			}`),
 			ExpectError: &types.FooError{},
 		},
-		// Some services serialize errors using code, and it might contain a namespace. It
-		// also might contain a URI. Clients should just take the last part of the string
-		// after '#' and before ":". This is a pathalogical case that might not occur in
-		// any deployed AWS service.
+		// Some services serialize errors using code, and it might contain a namespace.
+		// It also might contain a URI. Clients should just take the last part of the
+		// string after '#' and before ":". This is a pathalogical case that might not
+		// occur in any deployed AWS service.
 		"RestJsonFooErrorUsingCodeUriAndNamespace": {
 			StatusCode: 500,
 			Header: http.Header{

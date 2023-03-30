@@ -48,8 +48,8 @@ type RestoreFromSnapshotInput struct {
 	// arn:aws:redshift:<region>:<account_id>:snapshot:<cluster_identifier>/<snapshot_identifier>.
 	SnapshotArn *string
 
-	// The name of the snapshot to restore from. Must not be specified at the same time
-	// as snapshotArn.
+	// The name of the snapshot to restore from. Must not be specified at the same
+	// time as snapshotArn .
 	SnapshotName *string
 
 	noSmithyDocumentSerde

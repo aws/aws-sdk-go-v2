@@ -33,8 +33,8 @@ func (c *Client) DiscoverInstances(ctx context.Context, params *DiscoverInstance
 
 type DiscoverInstancesInput struct {
 
-	// The HttpName name of the namespace. It's found in the HttpProperties member of
-	// the Properties member of the namespace.
+	// The HttpName  name of the namespace. It's found in the HttpProperties member
+	// of the Properties  member of the namespace.
 	//
 	// This member is required.
 	NamespaceName *string
@@ -44,8 +44,8 @@ type DiscoverInstancesInput struct {
 	// This member is required.
 	ServiceName *string
 
-	// The health status of the instances that you want to discover. This parameter is
-	// ignored for services that don't have a health check configured, and all
+	// The health status of the instances that you want to discover. This parameter
+	// is ignored for services that don't have a health check configured, and all
 	// instances are returned. HEALTHY Returns healthy instances. UNHEALTHY Returns
 	// unhealthy instances. ALL Returns all instances. HEALTHY_OR_ELSE_ALL Returns
 	// healthy instances, unless none are reporting a healthy state. In that case,
@@ -53,15 +53,15 @@ type DiscoverInstancesInput struct {
 	HealthStatus types.HealthStatusFilter
 
 	// The maximum number of instances that you want Cloud Map to return in the
-	// response to a DiscoverInstances request. If you don't specify a value for
-	// MaxResults, Cloud Map returns up to 100 instances.
+	// response to a DiscoverInstances  request. If you don't specify a value for
+	// MaxResults , Cloud Map returns up to 100 instances.
 	MaxResults *int32
 
-	// Opportunistic filters to scope the results based on custom attributes. If there
-	// are instances that match both the filters specified in both the QueryParameters
-	// parameter and this parameter, all of these instances are returned. Otherwise,
-	// the filters are ignored, and only instances that match the filters that are
-	// specified in the QueryParameters parameter are returned.
+	// Opportunistic filters to scope the results based on custom attributes. If
+	// there are instances that match both the filters specified in both the
+	// QueryParametersparameter and this parameter, all of these instances are
+	// returned. Otherwise, the filters are ignored, and only instances that match the
+	// filters that are specified in the QueryParameters  parameter are returned.
 	OptionalParameters map[string]string
 
 	// Filters to scope the results based on custom attributes for the instance (for

@@ -12,8 +12,7 @@ import (
 )
 
 // Deletes a recommendation preference, such as enhanced infrastructure metrics.
-// For more information, see Activating enhanced infrastructure metrics
-// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
+// For more information, see Activating enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
 // in the Compute Optimizer User Guide.
 func (c *Client) DeleteRecommendationPreferences(ctx context.Context, params *DeleteRecommendationPreferencesInput, optFns ...func(*Options)) (*DeleteRecommendationPreferencesOutput, error) {
 	if params == nil {
@@ -38,10 +37,10 @@ type DeleteRecommendationPreferencesInput struct {
 	RecommendationPreferenceNames []types.RecommendationPreferenceName
 
 	// The target resource type of the recommendation preference to delete. The
-	// Ec2Instance option encompasses standalone instances and instances that are part
+	// Ec2Instanceoption encompasses standalone instances and instances that are part
 	// of Auto Scaling groups. The AutoScalingGroup option encompasses only instances
 	// that are part of an Auto Scaling group. The valid values for this parameter are
-	// Ec2Instance and AutoScalingGroup.
+	// Ec2Instance and AutoScalingGroup .
 	//
 	// This member is required.
 	ResourceType types.ResourceType
@@ -50,8 +49,7 @@ type DeleteRecommendationPreferencesInput struct {
 	// You can delete recommendation preferences that are created at the organization
 	// level (for management accounts of an organization only), account level, and
 	// resource level. For more information, see Activating enhanced infrastructure
-	// metrics
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
+	// metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
 	// in the Compute Optimizer User Guide.
 	Scope *types.Scope
 

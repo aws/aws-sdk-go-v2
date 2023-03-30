@@ -16,8 +16,7 @@ import (
 // Analytics API V2 Documentation. Deletes a reference data source configuration
 // from the specified application configuration. If the application is running,
 // Amazon Kinesis Analytics immediately removes the in-application table that you
-// created using the AddApplicationReferenceDataSource
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html)
+// created using the AddApplicationReferenceDataSource (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html)
 // operation. This operation requires permissions to perform the
 // kinesisanalytics.DeleteApplicationReferenceDataSource action.
 func (c *Client) DeleteApplicationReferenceDataSource(ctx context.Context, params *DeleteApplicationReferenceDataSourceInput, optFns ...func(*Options)) (*DeleteApplicationReferenceDataSourceOutput, error) {
@@ -42,19 +41,16 @@ type DeleteApplicationReferenceDataSourceInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// Version of the application. You can use the DescribeApplication
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// Version of the application. You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation to get the current application version. If the version specified is
-	// not the current version, the ConcurrentModificationException is returned.
+	// not the current version, the ConcurrentModificationException  is returned.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
 
 	// ID of the reference data source. When you add a reference data source to your
-	// application using the AddApplicationReferenceDataSource
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html),
-	// Amazon Kinesis Analytics assigns an ID. You can use the DescribeApplication
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// application using the AddApplicationReferenceDataSource (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html)
+	// , Amazon Kinesis Analytics assigns an ID. You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation to get the reference ID.
 	//
 	// This member is required.

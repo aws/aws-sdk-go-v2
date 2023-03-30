@@ -38,7 +38,7 @@ type ListDevicesForWirelessDeviceImportTaskInput struct {
 	MaxResults int32
 
 	// To retrieve the next set of results, the nextToken value from a previous
-	// response; otherwise null to receive the first set of results.
+	// response; otherwise null  to receive the first set of results.
 	NextToken *string
 
 	// The status of the devices in the import task.

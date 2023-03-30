@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of RepositorySummary
-// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html)
+// Returns a list of RepositorySummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html)
 // objects. Each RepositorySummary contains information about a repository in the
 // specified domain and that matches the input parameters.
 func (c *Client) ListRepositoriesInDomain(ctx context.Context, params *ListRepositoriesInDomainInput, optFns ...func(*Options)) (*ListRepositoriesInDomainOutput, error) {
@@ -53,8 +52,8 @@ type ListRepositoriesInDomainInput struct {
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// A prefix used to filter returned repositories. Only repositories with names that
-	// start with repositoryPrefix are returned.
+	// A prefix used to filter returned repositories. Only repositories with names
+	// that start with repositoryPrefix  are returned.
 	RepositoryPrefix *string
 
 	noSmithyDocumentSerde
@@ -151,8 +150,8 @@ type ListRepositoriesInDomainPaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

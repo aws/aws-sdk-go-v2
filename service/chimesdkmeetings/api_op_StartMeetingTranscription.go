@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts transcription for the specified meetingId. For more information, refer to
-// Using Amazon Chime SDK live transcription
-// (https://docs.aws.amazon.com/chime-sdk/latest/dg/meeting-transcription.html) in
-// the Amazon Chime SDK Developer Guide. Amazon Chime SDK live transcription is
+// Starts transcription for the specified meetingId. For more information, refer
+// to Using Amazon Chime SDK live transcription  (https://docs.aws.amazon.com/chime-sdk/latest/dg/meeting-transcription.html)
+// in the Amazon Chime SDK Developer Guide. Amazon Chime SDK live transcription is
 // powered by Amazon Transcribe. Use of Amazon Transcribe is subject to the AWS
 // Service Terms (https://aws.amazon.com/service-terms/), including the terms
 // specific to the AWS Machine Learning and Artificial Intelligence Services.
@@ -41,7 +40,7 @@ type StartMeetingTranscriptionInput struct {
 	MeetingId *string
 
 	// The configuration for the current transcription operation. Must contain
-	// EngineTranscribeSettings or EngineTranscribeMedicalSettings.
+	// EngineTranscribeSettings or EngineTranscribeMedicalSettings .
 	//
 	// This member is required.
 	TranscriptionConfiguration *types.TranscriptionConfiguration

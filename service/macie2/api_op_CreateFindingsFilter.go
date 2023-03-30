@@ -51,8 +51,8 @@ type CreateFindingsFilterInput struct {
 	// This member is required.
 	Name *string
 
-	// A unique, case-sensitive token that you provide to ensure the idempotency of the
-	// request.
+	// A unique, case-sensitive token that you provide to ensure the idempotency of
+	// the request.
 	ClientToken *string
 
 	// A custom description of the filter. The description can contain as many as 512
@@ -67,8 +67,8 @@ type CreateFindingsFilterInput struct {
 	// findings, relative to other filters that are also applied to the findings.
 	Position int32
 
-	// A map of key-value pairs that specifies the tags to associate with the filter. A
-	// findings filter can have a maximum of 50 tags. Each tag consists of a tag key
+	// A map of key-value pairs that specifies the tags to associate with the filter.
+	// A findings filter can have a maximum of 50 tags. Each tag consists of a tag key
 	// and an associated tag value. The maximum length of a tag key is 128 characters.
 	// The maximum length of a tag value is 256 characters.
 	Tags map[string]string

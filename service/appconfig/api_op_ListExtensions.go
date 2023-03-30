@@ -14,8 +14,7 @@ import (
 
 // Lists all custom and Amazon Web Services authored AppConfig extensions in the
 // account. For more information about extensions, see Working with AppConfig
-// extensions
-// (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
+// extensions (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
 // in the AppConfig User Guide.
 func (c *Client) ListExtensions(ctx context.Context, params *ListExtensionsInput, optFns ...func(*Options)) (*ListExtensionsOutput, error) {
 	if params == nil {
@@ -49,8 +48,8 @@ type ListExtensionsInput struct {
 
 type ListExtensionsOutput struct {
 
-	// The list of available extensions. The list includes Amazon Web Services authored
-	// and user-created extensions.
+	// The list of available extensions. The list includes Amazon Web Services
+	// authored and user-created extensions.
 	Items []types.ExtensionSummary
 
 	// The token for the next set of items to return. Use this token to get the next
@@ -137,8 +136,8 @@ type ListExtensionsPaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

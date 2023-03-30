@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a DomainDescription
-// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainDescription.html)
+// Returns a DomainDescription (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainDescription.html)
 // object that contains information about the requested domain.
 func (c *Client) DescribeDomain(ctx context.Context, params *DescribeDomainInput, optFns ...func(*Options)) (*DescribeDomainOutput, error) {
 	if params == nil {

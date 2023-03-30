@@ -29,14 +29,14 @@ func (c *Client) UpdateDatabase(ctx context.Context, params *UpdateDatabaseInput
 
 type UpdateDatabaseInput struct {
 
-	// A DatabaseInput object specifying the new definition of the metadata database in
-	// the catalog.
+	// A DatabaseInput object specifying the new definition of the metadata database
+	// in the catalog.
 	//
 	// This member is required.
 	DatabaseInput *types.DatabaseInput
 
-	// The name of the database to update in the catalog. For Hive compatibility, this
-	// is folded to lowercase.
+	// The name of the database to update in the catalog. For Hive compatibility,
+	// this is folded to lowercase.
 	//
 	// This member is required.
 	Name *string

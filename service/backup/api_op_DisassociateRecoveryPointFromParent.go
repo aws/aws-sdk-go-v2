@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This action to a specific child (nested) recovery point removes the relationship
-// between the specified recovery point and its parent (composite) recovery point.
+// This action to a specific child (nested) recovery point removes the
+// relationship between the specified recovery point and its parent (composite)
+// recovery point.
 func (c *Client) DisassociateRecoveryPointFromParent(ctx context.Context, params *DisassociateRecoveryPointFromParentInput, optFns ...func(*Options)) (*DisassociateRecoveryPointFromParentOutput, error) {
 	if params == nil {
 		params = &DisassociateRecoveryPointFromParentInput{}
@@ -29,10 +30,10 @@ func (c *Client) DisassociateRecoveryPointFromParent(ctx context.Context, params
 
 type DisassociateRecoveryPointFromParentInput struct {
 
-	// This is the name of a logical container where the child (nested) recovery point
-	// is stored. Backup vaults are identified by names that are unique to the account
-	// used to create them and the Amazon Web Services Region where they are created.
-	// They consist of lowercase letters, numbers, and hyphens.
+	// This is the name of a logical container where the child (nested) recovery
+	// point is stored. Backup vaults are identified by names that are unique to the
+	// account used to create them and the Amazon Web Services Region where they are
+	// created. They consist of lowercase letters, numbers, and hyphens.
 	//
 	// This member is required.
 	BackupVaultName *string

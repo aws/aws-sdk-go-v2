@@ -47,8 +47,8 @@ type DescribeImportOutput struct {
 	// The date and time that the import was created.
 	CreationDateTime *time.Time
 
-	// If the importStatus field is Failed, this provides one or more reasons for the
-	// failure.
+	// If the importStatus  field is Failed, this provides one or more reasons for
+	// the failure.
 	FailureReasons []string
 
 	// The unique identifier of the described import.
@@ -166,8 +166,8 @@ type BotImportCompletedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, BotImportCompletedWaiter will use default max delay of 120 seconds.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, BotImportCompletedWaiter will use default max delay of 120 seconds.
 	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
@@ -208,9 +208,9 @@ func NewBotImportCompletedWaiter(client DescribeImportAPIClient, optFns ...func(
 	}
 }
 
-// Wait calls the waiter function for BotImportCompleted waiter. The maxWaitDur is
-// the maximum wait duration the waiter will wait. The maxWaitDur is required and
-// must be greater than zero.
+// Wait calls the waiter function for BotImportCompleted waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
 func (w *BotImportCompletedWaiter) Wait(ctx context.Context, params *DescribeImportInput, maxWaitDur time.Duration, optFns ...func(*BotImportCompletedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

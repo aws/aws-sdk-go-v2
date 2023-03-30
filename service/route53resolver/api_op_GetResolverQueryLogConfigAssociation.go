@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a specified association between a Resolver query logging
-// configuration and an Amazon VPC. When you associate a VPC with a query logging
-// configuration, Resolver logs DNS queries that originate in that VPC.
+// Gets information about a specified association between a Resolver query
+// logging configuration and an Amazon VPC. When you associate a VPC with a query
+// logging configuration, Resolver logs DNS queries that originate in that VPC.
 func (c *Client) GetResolverQueryLogConfigAssociation(ctx context.Context, params *GetResolverQueryLogConfigAssociationInput, optFns ...func(*Options)) (*GetResolverQueryLogConfigAssociationOutput, error) {
 	if params == nil {
 		params = &GetResolverQueryLogConfigAssociationInput{}
@@ -31,8 +31,8 @@ func (c *Client) GetResolverQueryLogConfigAssociation(ctx context.Context, param
 
 type GetResolverQueryLogConfigAssociationInput struct {
 
-	// The ID of the Resolver query logging configuration association that you want to
-	// get information about.
+	// The ID of the Resolver query logging configuration association that you want
+	// to get information about.
 	//
 	// This member is required.
 	ResolverQueryLogConfigAssociationId *string
@@ -42,8 +42,8 @@ type GetResolverQueryLogConfigAssociationInput struct {
 
 type GetResolverQueryLogConfigAssociationOutput struct {
 
-	// Information about the Resolver query logging configuration association that you
-	// specified in a GetQueryLogConfigAssociation request.
+	// Information about the Resolver query logging configuration association that
+	// you specified in a GetQueryLogConfigAssociation  request.
 	ResolverQueryLogConfigAssociation *types.ResolverQueryLogConfigAssociation
 
 	// Metadata pertaining to the operation's result.

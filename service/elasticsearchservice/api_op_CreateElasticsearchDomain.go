@@ -12,8 +12,7 @@ import (
 )
 
 // Creates a new Elasticsearch domain. For more information, see Creating
-// Elasticsearch Domains
-// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains)
+// Elasticsearch Domains (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains)
 // in the Amazon Elasticsearch Service Developer Guide.
 func (c *Client) CreateElasticsearchDomain(ctx context.Context, params *CreateElasticsearchDomainInput, optFns ...func(*Options)) (*CreateElasticsearchDomainOutput, error) {
 	if params == nil {
@@ -45,8 +44,7 @@ type CreateElasticsearchDomainInput struct {
 
 	// Option to allow references to indices in an HTTP request body. Must be false
 	// when configuring access to individual sub-resources. By default, the value is
-	// true. See Configuration Advanced Options
-	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options)
+	// true . See Configuration Advanced Options (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options)
 	// for more information.
 	AdvancedOptions map[string]string
 
@@ -58,14 +56,15 @@ type CreateElasticsearchDomainInput struct {
 
 	// Options to specify the Cognito user and identity pools for Kibana
 	// authentication. For more information, see Amazon Cognito Authentication for
-	// Kibana
-	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
+	// Kibana (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html)
+	// .
 	CognitoOptions *types.CognitoOptions
 
 	// Options to specify configuration that will be applied to the domain endpoint.
 	DomainEndpointOptions *types.DomainEndpointOptions
 
-	// Options to enable, disable and specify the type and size of EBS storage volumes.
+	// Options to enable, disable and specify the type and size of EBS storage
+	// volumes.
 	EBSOptions *types.EBSOptions
 
 	// Configuration options for an Elasticsearch domain. Specifies the instance type
@@ -73,15 +72,14 @@ type CreateElasticsearchDomainInput struct {
 	ElasticsearchClusterConfig *types.ElasticsearchClusterConfig
 
 	// String of format X.Y to specify version for the Elasticsearch domain eg. "1.5"
-	// or "2.3". For more information, see Creating Elasticsearch Domains
-	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains)
+	// or "2.3". For more information, see Creating Elasticsearch Domains (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains)
 	// in the Amazon Elasticsearch Service Developer Guide.
 	ElasticsearchVersion *string
 
 	// Specifies the Encryption At Rest Options.
 	EncryptionAtRestOptions *types.EncryptionAtRestOptions
 
-	// Map of LogType and LogPublishingOption, each containing options to publish a
+	// Map of LogType  and LogPublishingOption, each containing options to publish a
 	// given type of Elasticsearch log.
 	LogPublishingOptions map[string]types.LogPublishingOption
 
@@ -92,20 +90,19 @@ type CreateElasticsearchDomainInput struct {
 	// value is 0 hours.
 	SnapshotOptions *types.SnapshotOptions
 
-	// A list of Tag added during domain creation.
+	// A list of Tag  added during domain creation.
 	TagList []types.Tag
 
 	// Options to specify the subnets and security groups for VPC endpoint. For more
-	// information, see Creating a VPC
-	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc)
+	// information, see Creating a VPC (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc)
 	// in VPC Endpoints for Amazon Elasticsearch Service Domains
 	VPCOptions *types.VPCOptions
 
 	noSmithyDocumentSerde
 }
 
-// The result of a CreateElasticsearchDomain operation. Contains the status of the
-// newly created Elasticsearch domain.
+// The result of a CreateElasticsearchDomain operation. Contains the status of
+// the newly created Elasticsearch domain.
 type CreateElasticsearchDomainOutput struct {
 
 	// The status of the newly created Elasticsearch domain.

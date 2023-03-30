@@ -14,12 +14,9 @@ import (
 
 // Lists all, or filtered by resource name, migration tasks associated with the
 // user account making this call. This API has the following traits:
-// - Can show a
-// summary list of the most recent migration tasks.
-// - Can show a summary list of
-// migration tasks associated with a given discovered resource.
-// - Lists migration
-// tasks in a paginated interface.
+//   - Can show a summary list of the most recent migration tasks.
+//   - Can show a summary list of migration tasks associated with a given discovered resource.
+//   - Lists migration tasks in a paginated interface.
 func (c *Client) ListMigrationTasks(ctx context.Context, params *ListMigrationTasksInput, optFns ...func(*Options)) (*ListMigrationTasksOutput, error) {
 	if params == nil {
 		params = &ListMigrationTasksInput{}
@@ -42,7 +39,7 @@ type ListMigrationTasksInput struct {
 
 	// If a NextToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the
-	// returned token in NextToken.
+	// returned token in NextToken .
 	NextToken *string
 
 	// Filter migration tasks by discovered resource name.
@@ -53,13 +50,13 @@ type ListMigrationTasksInput struct {
 
 type ListMigrationTasksOutput struct {
 
-	// Lists the migration task's summary which includes: MigrationTaskName,
-	// ProgressPercent, ProgressUpdateStream, Status, and the UpdateDateTime for each
-	// task.
+	// Lists the migration task's summary which includes: MigrationTaskName ,
+	// ProgressPercent , ProgressUpdateStream , Status , and the UpdateDateTime for
+	// each task.
 	MigrationTaskSummaryList []types.MigrationTaskSummary
 
-	// If there are more migration tasks than the max result, return the next token to
-	// be passed to the next call as a bookmark of where to start from.
+	// If there are more migration tasks than the max result, return the next token
+	// to be passed to the next call as a bookmark of where to start from.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -142,8 +139,8 @@ type ListMigrationTasksPaginatorOptions struct {
 	// Value to specify how many results are returned per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

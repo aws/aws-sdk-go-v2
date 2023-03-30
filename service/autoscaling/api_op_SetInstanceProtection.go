@@ -13,8 +13,7 @@ import (
 // Updates the instance protection settings of the specified instances. This
 // operation cannot be called on instances in a warm pool. For more information
 // about preventing instances that are part of an Auto Scaling group from
-// terminating on scale in, see Using instance scale-in protection
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html)
+// terminating on scale in, see Using instance scale-in protection (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html)
 // in the Amazon EC2 Auto Scaling User Guide. If you exceed your maximum limit of
 // instance IDs, which is 50 per Auto Scaling group, the call fails.
 func (c *Client) SetInstanceProtection(ctx context.Context, params *SetInstanceProtectionInput, optFns ...func(*Options)) (*SetInstanceProtectionOutput, error) {
@@ -44,8 +43,8 @@ type SetInstanceProtectionInput struct {
 	// This member is required.
 	InstanceIds []string
 
-	// Indicates whether the instance is protected from termination by Amazon EC2 Auto
-	// Scaling when scaling in.
+	// Indicates whether the instance is protected from termination by Amazon EC2
+	// Auto Scaling when scaling in.
 	//
 	// This member is required.
 	ProtectedFromScaleIn *bool

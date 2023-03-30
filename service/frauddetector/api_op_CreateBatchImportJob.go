@@ -34,11 +34,10 @@ type CreateBatchImportJobInput struct {
 	// This member is required.
 	EventTypeName *string
 
-	// The ARN of the IAM role created for Amazon S3 bucket that holds your data file.
-	// The IAM role must have read permissions to your input S3 bucket and write
+	// The ARN of the IAM role created for Amazon S3 bucket that holds your data
+	// file. The IAM role must have read permissions to your input S3 bucket and write
 	// permissions to your output S3 bucket. For more information about bucket
-	// permissions, see User policy examples
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-policies-s3.html)
+	// permissions, see User policy examples (https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-policies-s3.html)
 	// in the Amazon S3 User Guide.
 	//
 	// This member is required.
@@ -50,7 +49,7 @@ type CreateBatchImportJobInput struct {
 	InputPath *string
 
 	// The ID of the batch import job. The ID cannot be of a past job, unless the job
-	// exists in CREATE_FAILED state.
+	// exists in CREATE_FAILED  state.
 	//
 	// This member is required.
 	JobId *string

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or updates an inline policy document that is stored in the specified Amazon
-// SNS topic.
+// Adds or updates an inline policy document that is stored in the specified
+// Amazon SNS topic.
 func (c *Client) PutDataProtectionPolicy(ctx context.Context, params *PutDataProtectionPolicyInput, optFns ...func(*Options)) (*PutDataProtectionPolicyOutput, error) {
 	if params == nil {
 		params = &PutDataProtectionPolicyInput{}
@@ -29,17 +29,16 @@ func (c *Client) PutDataProtectionPolicy(ctx context.Context, params *PutDataPro
 
 type PutDataProtectionPolicyInput struct {
 
-	// The JSON serialization of the topic's DataProtectionPolicy. The
-	// DataProtectionPolicy must be in JSON string format. Length Constraints: Maximum
+	// The JSON serialization of the topic's DataProtectionPolicy . The
+	// DataProtectionPolicymust be in JSON string format. Length Constraints: Maximum
 	// length of 30,720.
 	//
 	// This member is required.
 	DataProtectionPolicy *string
 
 	// The ARN of the topic whose DataProtectionPolicy you want to add or update. For
-	// more information about ARNs, see Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the Amazon Web Services General Reference.
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	ResourceArn *string

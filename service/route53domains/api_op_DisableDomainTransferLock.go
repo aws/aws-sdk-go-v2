@@ -11,7 +11,7 @@ import (
 )
 
 // This operation removes the transfer lock on the domain (specifically the
-// clientTransferProhibited status) to allow domain transfers. We recommend you
+// clientTransferProhibitedstatus) to allow domain transfers. We recommend you
 // refrain from performing this action unless you intend to transfer the domain to
 // a different registrar. Successful submission returns an operation ID that you
 // can use to track the progress and completion of the action. If the request is
@@ -46,8 +46,8 @@ type DisableDomainTransferLockInput struct {
 type DisableDomainTransferLockOutput struct {
 
 	// Identifier for tracking the progress of the request. To query the operation
-	// status, use GetOperationDetail
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+	// .
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

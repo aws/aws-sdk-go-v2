@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists device identifiers. Add filters to your request to return a more specific
-// list of results. Use filters to match the Amazon Resource Name (ARN) of an
-// order, the status of device identifiers, or the ARN of the traffic group. If you
-// specify multiple filters, filters are joined with an OR, and the request returns
-// results that match all of the specified filters.
+// Lists device identifiers. Add filters to your request to return a more
+// specific list of results. Use filters to match the Amazon Resource Name (ARN) of
+// an order, the status of device identifiers, or the ARN of the traffic group. If
+// you specify multiple filters, filters are joined with an OR, and the request
+// returns results that match all of the specified filters.
 func (c *Client) ListDeviceIdentifiers(ctx context.Context, params *ListDeviceIdentifiersInput, optFns ...func(*Options)) (*ListDeviceIdentifiersOutput, error) {
 	if params == nil {
 		params = &ListDeviceIdentifiersInput{}
@@ -40,15 +40,13 @@ type ListDeviceIdentifiersInput struct {
 	NetworkArn *string
 
 	// The filters.
-	// - ORDER - The Amazon Resource Name (ARN) of the order.
-	// - STATUS -
-	// The status (ACTIVE | INACTIVE).
-	// - TRAFFIC_GROUP - The Amazon Resource Name (ARN)
-	// of the traffic group.
+	//     - ORDER - The Amazon Resource Name (ARN) of the order.
+	//     - STATUS - The status ( ACTIVE | INACTIVE ).
+	//     - TRAFFIC_GROUP - The Amazon Resource Name (ARN) of the traffic group.
 	//
-	// Filter values are case sensitive. If you specify multiple
-	// values for a filter, the values are joined with an OR, and the request returns
-	// all results that match any of the specified values.
+	// Filter values are case sensitive. If you specify multiple values for a filter,
+	// the values are joined with an OR, and the request returns all results that
+	// match any of the specified values.
 	Filters map[string][]string
 
 	// The maximum number of results to return.
@@ -151,8 +149,8 @@ type ListDeviceIdentifiersPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

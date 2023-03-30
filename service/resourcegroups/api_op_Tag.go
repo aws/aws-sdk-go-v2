@@ -17,7 +17,7 @@ import (
 // billing and administration services. Tags are not intended to be used for
 // private or sensitive data. Minimum permissions To run this command, you must
 // have the following permissions:
-// - resource-groups:Tag
+//   - resource-groups:Tag
 func (c *Client) Tag(ctx context.Context, params *TagInput, optFns ...func(*Options)) (*TagOutput, error) {
 	if params == nil {
 		params = &TagInput{}
@@ -40,8 +40,8 @@ type TagInput struct {
 	// This member is required.
 	Arn *string
 
-	// The tags to add to the specified resource group. A tag is a string-to-string map
-	// of key-value pairs.
+	// The tags to add to the specified resource group. A tag is a string-to-string
+	// map of key-value pairs.
 	//
 	// This member is required.
 	Tags map[string]string

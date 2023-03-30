@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists jobs. Requires permission to access the ListJobs
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Lists jobs. Requires permission to access the ListJobs (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...func(*Options)) (*ListJobsOutput, error) {
 	if params == nil {
@@ -45,17 +44,19 @@ type ListJobsInput struct {
 	// The token to retrieve the next set of results.
 	NextToken *string
 
-	// An optional filter that lets you search for jobs that have the specified status.
+	// An optional filter that lets you search for jobs that have the specified
+	// status.
 	Status types.JobStatus
 
-	// Specifies whether the job will continue to run (CONTINUOUS), or will be complete
-	// after all those things specified as targets have completed the job (SNAPSHOT).
-	// If continuous, the job may also be run on a thing when a change is detected in a
-	// target. For example, a job will run on a thing when the thing is added to a
-	// target group, even after the job was completed by all things originally in the
-	// group. We recommend that you use continuous jobs instead of snapshot jobs for
-	// dynamic thing group targets. By using continuous jobs, devices that join the
-	// group receive the job execution even after the job has been created.
+	// Specifies whether the job will continue to run (CONTINUOUS), or will be
+	// complete after all those things specified as targets have completed the job
+	// (SNAPSHOT). If continuous, the job may also be run on a thing when a change is
+	// detected in a target. For example, a job will run on a thing when the thing is
+	// added to a target group, even after the job was completed by all things
+	// originally in the group. We recommend that you use continuous jobs instead of
+	// snapshot jobs for dynamic thing group targets. By using continuous jobs, devices
+	// that join the group receive the job execution even after the job has been
+	// created.
 	TargetSelection types.TargetSelection
 
 	// A filter that limits the returned jobs to those for the specified group.
@@ -154,8 +155,8 @@ type ListJobsPaginatorOptions struct {
 	// The maximum number of results to return per request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

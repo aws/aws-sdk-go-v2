@@ -11,11 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an email template. Email templates enable you to send personalized email
-// to one or more destinations in a single API operation. For more information, see
-// the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
-// You can execute this operation no more than once per second.
+// Updates an email template. Email templates enable you to send personalized
+// email to one or more destinations in a single API operation. For more
+// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
+// . You can execute this operation no more than once per second.
 func (c *Client) UpdateEmailTemplate(ctx context.Context, params *UpdateEmailTemplateInput, optFns ...func(*Options)) (*UpdateEmailTemplateOutput, error) {
 	if params == nil {
 		params = &UpdateEmailTemplateInput{}
@@ -31,13 +30,13 @@ func (c *Client) UpdateEmailTemplate(ctx context.Context, params *UpdateEmailTem
 	return out, nil
 }
 
-// Represents a request to update an email template. For more information, see the
-// Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
+// Represents a request to update an email template. For more information, see
+// the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
+// .
 type UpdateEmailTemplateInput struct {
 
-	// The content of the email template, composed of a subject line, an HTML part, and
-	// a text-only part.
+	// The content of the email template, composed of a subject line, an HTML part,
+	// and a text-only part.
 	//
 	// This member is required.
 	TemplateContent *types.EmailTemplateContent
@@ -50,8 +49,8 @@ type UpdateEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
-// If the action is successful, the service sends back an HTTP 200 response with an
-// empty HTTP body.
+// If the action is successful, the service sends back an HTTP 200 response with
+// an empty HTTP body.
 type UpdateEmailTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

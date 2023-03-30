@@ -30,8 +30,8 @@ func (c *Client) ListOriginEndpoints(ctx context.Context, params *ListOriginEndp
 
 type ListOriginEndpointsInput struct {
 
-	// When specified, the request will return only OriginEndpoints associated with the
-	// given Channel ID.
+	// When specified, the request will return only OriginEndpoints associated with
+	// the given Channel ID.
 	ChannelId *string
 
 	// The upper bound on the number of records to return.
@@ -117,8 +117,8 @@ func (c *Client) addOperationListOriginEndpointsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListOriginEndpointsAPIClient is a client that implements the ListOriginEndpoints
-// operation.
+// ListOriginEndpointsAPIClient is a client that implements the
+// ListOriginEndpoints operation.
 type ListOriginEndpointsAPIClient interface {
 	ListOriginEndpoints(context.Context, *ListOriginEndpointsInput, ...func(*Options)) (*ListOriginEndpointsOutput, error)
 }
@@ -131,8 +131,8 @@ type ListOriginEndpointsPaginatorOptions struct {
 	// The upper bound on the number of records to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

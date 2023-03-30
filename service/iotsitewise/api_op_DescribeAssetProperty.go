@@ -12,13 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about an asset property. When you call this operation for
-// an attribute property, this response includes the default attribute value that
-// you define in the asset model. If you update the default value in the model,
-// this operation's response includes the new default value. This operation doesn't
-// return the value of the asset property. To get the value of an asset property,
-// use GetAssetPropertyValue
-// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_GetAssetPropertyValue.html).
+// Retrieves information about an asset property. When you call this operation
+// for an attribute property, this response includes the default attribute value
+// that you define in the asset model. If you update the default value in the
+// model, this operation's response includes the new default value. This operation
+// doesn't return the value of the asset property. To get the value of an asset
+// property, use GetAssetPropertyValue (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_GetAssetPropertyValue.html)
+// .
 func (c *Client) DescribeAssetProperty(ctx context.Context, params *DescribeAssetPropertyInput, optFns ...func(*Options)) (*DescribeAssetPropertyOutput, error) {
 	if params == nil {
 		params = &DescribeAssetPropertyInput{}
@@ -69,7 +69,7 @@ type DescribeAssetPropertyOutput struct {
 	// The asset property's definition, alias, and notification state. This response
 	// includes this object for normal asset properties. If you describe an asset
 	// property in a composite model, this response includes the asset property
-	// information in compositeModel.
+	// information in compositeModel .
 	AssetProperty *types.Property
 
 	// The composite asset model that declares this asset property, if this asset

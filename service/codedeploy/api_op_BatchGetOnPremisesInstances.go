@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about one or more on-premises instances. The maximum number of
-// on-premises instances that can be returned is 25.
+// Gets information about one or more on-premises instances. The maximum number
+// of on-premises instances that can be returned is 25.
 func (c *Client) BatchGetOnPremisesInstances(ctx context.Context, params *BatchGetOnPremisesInstancesInput, optFns ...func(*Options)) (*BatchGetOnPremisesInstancesOutput, error) {
 	if params == nil {
 		params = &BatchGetOnPremisesInstancesInput{}
@@ -28,7 +28,7 @@ func (c *Client) BatchGetOnPremisesInstances(ctx context.Context, params *BatchG
 	return out, nil
 }
 
-// Represents the input of a BatchGetOnPremisesInstances operation.
+// Represents the input of a BatchGetOnPremisesInstances  operation.
 type BatchGetOnPremisesInstancesInput struct {
 
 	// The names of the on-premises instances about which to get information. The
@@ -40,7 +40,7 @@ type BatchGetOnPremisesInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a BatchGetOnPremisesInstances operation.
+// Represents the output of a BatchGetOnPremisesInstances  operation.
 type BatchGetOnPremisesInstancesOutput struct {
 
 	// Information about the on-premises instances.

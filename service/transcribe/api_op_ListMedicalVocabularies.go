@@ -39,20 +39,20 @@ type ListMedicalVocabulariesInput struct {
 	// used.
 	MaxResults *int32
 
-	// Returns only the custom medical vocabularies that contain the specified string.
-	// The search is not case sensitive.
+	// Returns only the custom medical vocabularies that contain the specified
+	// string. The search is not case sensitive.
 	NameContains *string
 
 	// If your ListMedicalVocabularies request returns more results than can be
-	// displayed, NextToken is displayed in the response with an associated string. To
-	// get the next page of results, copy this string and repeat your request,
+	// displayed, NextToken is displayed in the response with an associated string.
+	// To get the next page of results, copy this string and repeat your request,
 	// including NextToken with the value of the copied string. Repeat as needed to
 	// view all your results.
 	NextToken *string
 
 	// Returns only custom medical vocabularies with the specified state. Custom
 	// vocabularies are ordered by creation date, with the newest vocabulary first. If
-	// you don't include StateEquals, all custom medical vocabularies are returned.
+	// you don't include StateEquals , all custom medical vocabularies are returned.
 	StateEquals types.VocabularyState
 
 	noSmithyDocumentSerde
@@ -60,9 +60,9 @@ type ListMedicalVocabulariesInput struct {
 
 type ListMedicalVocabulariesOutput struct {
 
-	// If NextToken is present in your response, it indicates that not all results are
-	// displayed. To view the next set of results, copy the string associated with the
-	// NextToken parameter in your results output, then run your request again
+	// If NextToken is present in your response, it indicates that not all results
+	// are displayed. To view the next set of results, copy the string associated with
+	// the NextToken parameter in your results output, then run your request again
 	// including NextToken with the value of the copied string. Repeat as needed to
 	// view all your results.
 	NextToken *string
@@ -159,8 +159,8 @@ type ListMedicalVocabulariesPaginatorOptions struct {
 	// used.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

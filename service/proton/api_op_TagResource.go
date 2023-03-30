@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Tag a resource. A tag is a key-value pair of metadata that you associate with an
-// Proton resource. For more information, see Proton resources and tagging
-// (https://docs.aws.amazon.com/proton/latest/userguide/resources.html) in the
-// Proton User Guide.
+// Tag a resource. A tag is a key-value pair of metadata that you associate with
+// an Proton resource. For more information, see Proton resources and tagging (https://docs.aws.amazon.com/proton/latest/userguide/resources.html)
+// in the Proton User Guide.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -32,7 +31,8 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the Proton resource to apply customer tags to.
+	// The Amazon Resource Name (ARN) of the Proton resource to apply customer tags
+	// to.
 	//
 	// This member is required.
 	ResourceArn *string

@@ -36,8 +36,8 @@ type CreateImagePipelineInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the infrastructure configuration that will be
-	// used to build images created by this image pipeline.
+	// The Amazon Resource Name (ARN) of the infrastructure configuration that will
+	// be used to build images created by this image pipeline.
 	//
 	// This member is required.
 	InfrastructureConfigurationArn *string
@@ -47,8 +47,8 @@ type CreateImagePipelineInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the container recipe that is used to configure
-	// images created by this container pipeline.
+	// The Amazon Resource Name (ARN) of the container recipe that is used to
+	// configure images created by this container pipeline.
 	ContainerRecipeArn *string
 
 	// The description of the image pipeline.

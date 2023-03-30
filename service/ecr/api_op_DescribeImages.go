@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns metadata about the images in a repository. Beginning with Docker version
-// 1.9, the Docker client compresses image layers before pushing them to a V2
-// Docker registry. The output of the docker images command shows the uncompressed
-// image size, so it may return a larger image size than the image sizes returned
-// by DescribeImages.
+// Returns metadata about the images in a repository. Beginning with Docker
+// version 1.9, the Docker client compresses image layers before pushing them to a
+// V2 Docker registry. The output of the docker images command shows the
+// uncompressed image size, so it may return a larger image size than the image
+// sizes returned by DescribeImages .
 func (c *Client) DescribeImages(ctx context.Context, params *DescribeImagesInput, optFns ...func(*Options)) (*DescribeImagesOutput, error) {
 	if params == nil {
 		params = &DescribeImagesInput{}
@@ -39,27 +39,28 @@ type DescribeImagesInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The filter key and value with which to filter your DescribeImages results.
+	// The filter key and value with which to filter your DescribeImages  results.
 	Filter *types.DescribeImagesFilter
 
 	// The list of image IDs for the requested repository.
 	ImageIds []types.ImageIdentifier
 
-	// The maximum number of repository results returned by DescribeImages in paginated
-	// output. When this parameter is used, DescribeImages only returns maxResults
-	// results in a single page along with a nextToken response element. The remaining
-	// results of the initial request can be seen by sending another DescribeImages
-	// request with the returned nextToken value. This value can be between 1 and 1000.
-	// If this parameter is not used, then DescribeImages returns up to 100 results and
-	// a nextToken value, if applicable. This option cannot be used when you specify
-	// images with imageIds.
+	// The maximum number of repository results returned by DescribeImages in
+	// paginated output. When this parameter is used, DescribeImages  only returns
+	// maxResults results in a single page along with a nextToken response element.
+	// The remaining results of the initial request can be seen by sending another
+	// DescribeImages request with the returned nextToken value. This value can be
+	// between 1 and 1000. If this parameter is not used, then DescribeImages returns
+	// up to 100 results and a nextToken value, if applicable. This option cannot be
+	// used when you specify images with imageIds .
 	MaxResults *int32
 
-	// The nextToken value returned from a previous paginated DescribeImages request
-	// where maxResults was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// nextToken value. This value is null when there are no more results to return.
-	// This option cannot be used when you specify images with imageIds.
+	// The nextToken  value returned from a previous paginated DescribeImages request
+	// where maxResults was used and the results exceeded the value of that
+	// parameter. Pagination continues from the end of the previous results that
+	// returned the nextToken  value. This value is null when there are no more
+	// results to return. This option cannot be used when you specify images with
+	// imageIds .
 	NextToken *string
 
 	// The Amazon Web Services account ID associated with the registry that contains
@@ -72,13 +73,13 @@ type DescribeImagesInput struct {
 
 type DescribeImagesOutput struct {
 
-	// A list of ImageDetail objects that contain data about the image.
+	// A list of ImageDetail  objects that contain data about the image.
 	ImageDetails []types.ImageDetail
 
-	// The nextToken value to include in a future DescribeImages request. When the
-	// results of a DescribeImages request exceed maxResults, this value can be used to
-	// retrieve the next page of results. This value is null when there are no more
-	// results to return.
+	// The nextToken  value to include in a future DescribeImages request. When the
+	// results of a DescribeImages  request exceed maxResults, this value can be used
+	// to retrieve the next page of results. This value is null when there are no
+	// more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -160,18 +161,18 @@ var _ DescribeImagesAPIClient = (*Client)(nil)
 
 // DescribeImagesPaginatorOptions is the paginator options for DescribeImages
 type DescribeImagesPaginatorOptions struct {
-	// The maximum number of repository results returned by DescribeImages in paginated
-	// output. When this parameter is used, DescribeImages only returns maxResults
-	// results in a single page along with a nextToken response element. The remaining
-	// results of the initial request can be seen by sending another DescribeImages
-	// request with the returned nextToken value. This value can be between 1 and 1000.
-	// If this parameter is not used, then DescribeImages returns up to 100 results and
-	// a nextToken value, if applicable. This option cannot be used when you specify
-	// images with imageIds.
+	// The maximum number of repository results returned by DescribeImages in
+	// paginated output. When this parameter is used, DescribeImages  only returns
+	// maxResults results in a single page along with a nextToken response element.
+	// The remaining results of the initial request can be seen by sending another
+	// DescribeImages request with the returned nextToken value. This value can be
+	// between 1 and 1000. If this parameter is not used, then DescribeImages returns
+	// up to 100 results and a nextToken value, if applicable. This option cannot be
+	// used when you specify images with imageIds .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

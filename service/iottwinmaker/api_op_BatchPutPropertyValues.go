@@ -30,8 +30,8 @@ func (c *Client) BatchPutPropertyValues(ctx context.Context, params *BatchPutPro
 
 type BatchPutPropertyValuesInput struct {
 
-	// An object that maps strings to the property value entries to set. Each string in
-	// the mapping must be unique to this object.
+	// An object that maps strings to the property value entries to set. Each string
+	// in the mapping must be unique to this object.
 	//
 	// This member is required.
 	Entries []types.PropertyValueEntry

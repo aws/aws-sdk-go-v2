@@ -47,15 +47,15 @@ type DescribeLocationFsxWindowsOutput struct {
 	// The name of the Windows domain that the FSx for Windows File Server belongs to.
 	Domain *string
 
-	// The Amazon Resource Name (ARN) of the FSx for Windows File Server location that
-	// was described.
+	// The Amazon Resource Name (ARN) of the FSx for Windows File Server location
+	// that was described.
 	LocationArn *string
 
 	// The URL of the FSx for Windows File Server location that was described.
 	LocationUri *string
 
-	// The Amazon Resource Names (ARNs) of the security groups that are configured for
-	// the FSx for Windows File Server file system.
+	// The Amazon Resource Names (ARNs) of the security groups that are configured
+	// for the FSx for Windows File Server file system.
 	SecurityGroupArns []string
 
 	// The user who has the permissions to access files and folders in the FSx for

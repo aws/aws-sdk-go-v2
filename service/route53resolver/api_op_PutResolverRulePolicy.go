@@ -36,22 +36,18 @@ type PutResolverRulePolicyInput struct {
 	// This member is required.
 	Arn *string
 
-	// An Identity and Access Management policy statement that lists the rules that you
-	// want to share with another Amazon Web Services account and the operations that
-	// you want the account to be able to perform. You can specify the following
-	// operations in the Action section of the statement:
-	// -
-	// route53resolver:GetResolverRule
-	// - route53resolver:AssociateResolverRule
-	// -
-	// route53resolver:DisassociateResolverRule
-	// - route53resolver:ListResolverRules
-	// -
-	// route53resolver:ListResolverRuleAssociations
-	//
-	// In the Resource section of the
-	// statement, specify the ARN for the rule that you want to share with another
-	// account. Specify the same ARN that you specified in Arn.
+	// An Identity and Access Management policy statement that lists the rules that
+	// you want to share with another Amazon Web Services account and the operations
+	// that you want the account to be able to perform. You can specify the following
+	// operations in the Action  section of the statement:
+	//     - route53resolver:GetResolverRule
+	//     - route53resolver:AssociateResolverRule
+	//     - route53resolver:DisassociateResolverRule
+	//     - route53resolver:ListResolverRules
+	//     - route53resolver:ListResolverRuleAssociations
+	//  In the Resource section of the statement, specify the ARN for the rule that
+	// you want to share with another account. Specify the same ARN that you specified
+	// in Arn .
 	//
 	// This member is required.
 	ResolverRulePolicy *string
@@ -59,10 +55,10 @@ type PutResolverRulePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-// The response to a PutResolverRulePolicy request.
+// The response to a PutResolverRulePolicy  request.
 type PutResolverRulePolicyOutput struct {
 
-	// Whether the PutResolverRulePolicy request was successful.
+	// Whether the PutResolverRulePolicy  request was successful.
 	ReturnValue bool
 
 	// Metadata pertaining to the operation's result.

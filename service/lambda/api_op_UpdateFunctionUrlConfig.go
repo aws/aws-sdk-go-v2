@@ -30,29 +30,25 @@ func (c *Client) UpdateFunctionUrlConfig(ctx context.Context, params *UpdateFunc
 type UpdateFunctionUrlConfigInput struct {
 
 	// The name of the Lambda function. Name formats
-	// - Function name – my-function.
-	// -
-	// Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function.
-	// -
-	// Partial ARN – 123456789012:function:my-function.
-	//
-	// The length constraint applies
-	// only to the full ARN. If you specify only the function name, it is limited to 64
-	// characters in length.
+	//     - Function name – my-function .
+	//     - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//     - Partial ARN – 123456789012:function:my-function .
+	// The length constraint
+	// applies only to the full ARN. If you specify only the function name, it is
+	// limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
 
 	// The type of authentication that your function URL uses. Set to AWS_IAM if you
-	// want to restrict access to authenticated users only. Set to NONE if you want to
-	// bypass IAM authentication to create a public endpoint. For more information, see
-	// Security and auth model for Lambda function URLs
-	// (https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html).
+	// want to restrict access to authenticated users only. Set to NONE if you want
+	// to bypass IAM authentication to create a public endpoint. For more information,
+	// see Security and auth model for Lambda function URLs (https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html)
+	// .
 	AuthType types.FunctionUrlAuthType
 
-	// The cross-origin resource sharing (CORS)
-	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) settings for your
-	// function URL.
+	// The cross-origin resource sharing (CORS) (https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+	// settings for your function URL.
 	Cors *types.Cors
 
 	// The alias name.
@@ -64,16 +60,16 @@ type UpdateFunctionUrlConfigInput struct {
 type UpdateFunctionUrlConfigOutput struct {
 
 	// The type of authentication that your function URL uses. Set to AWS_IAM if you
-	// want to restrict access to authenticated users only. Set to NONE if you want to
-	// bypass IAM authentication to create a public endpoint. For more information, see
-	// Security and auth model for Lambda function URLs
-	// (https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html).
+	// want to restrict access to authenticated users only. Set to NONE if you want
+	// to bypass IAM authentication to create a public endpoint. For more information,
+	// see Security and auth model for Lambda function URLs (https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html)
+	// .
 	//
 	// This member is required.
 	AuthType types.FunctionUrlAuthType
 
-	// When the function URL was created, in ISO-8601 format
-	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
+	// When the function URL was created, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
+	// (YYYY-MM-DDThh:mm:ss.sTZD).
 	//
 	// This member is required.
 	CreationTime *string
@@ -88,15 +84,14 @@ type UpdateFunctionUrlConfigOutput struct {
 	// This member is required.
 	FunctionUrl *string
 
-	// When the function URL configuration was last updated, in ISO-8601 format
-	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
+	// When the function URL configuration was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
+	// (YYYY-MM-DDThh:mm:ss.sTZD).
 	//
 	// This member is required.
 	LastModifiedTime *string
 
-	// The cross-origin resource sharing (CORS)
-	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) settings for your
-	// function URL.
+	// The cross-origin resource sharing (CORS) (https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+	// settings for your function URL.
 	Cors *types.Cors
 
 	// Metadata pertaining to the operation's result.

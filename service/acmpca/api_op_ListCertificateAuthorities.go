@@ -13,8 +13,7 @@ import (
 )
 
 // Lists the private certificate authorities that you created by using the
-// CreateCertificateAuthority
-// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
+// CreateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
 // action.
 func (c *Client) ListCertificateAuthorities(ctx context.Context, params *ListCertificateAuthoritiesInput, optFns ...func(*Options)) (*ListCertificateAuthoritiesOutput, error) {
 	if params == nil {
@@ -35,8 +34,8 @@ type ListCertificateAuthoritiesInput struct {
 
 	// Use this parameter when paginating results to specify the maximum number of
 	// items to return in the response on each page. If additional items exist beyond
-	// the number you specify, the NextToken element is sent in the response. Use this
-	// NextToken value in a subsequent request to retrieve additional items.
+	// the number you specify, the NextToken element is sent in the response. Use
+	// this NextToken  value in a subsequent request to retrieve additional items.
 	MaxResults *int32
 
 	// Use this parameter when paginating results in a subsequent request after you
@@ -139,12 +138,12 @@ var _ ListCertificateAuthoritiesAPIClient = (*Client)(nil)
 type ListCertificateAuthoritiesPaginatorOptions struct {
 	// Use this parameter when paginating results to specify the maximum number of
 	// items to return in the response on each page. If additional items exist beyond
-	// the number you specify, the NextToken element is sent in the response. Use this
-	// NextToken value in a subsequent request to retrieve additional items.
+	// the number you specify, the NextToken element is sent in the response. Use
+	// this NextToken  value in a subsequent request to retrieve additional items.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

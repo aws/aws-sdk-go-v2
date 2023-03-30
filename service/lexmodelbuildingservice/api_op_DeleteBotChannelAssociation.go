@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the association between an Amazon Lex bot and a messaging platform. This
-// operation requires permission for the lex:DeleteBotChannelAssociation action.
+// Deletes the association between an Amazon Lex bot and a messaging platform.
+// This operation requires permission for the lex:DeleteBotChannelAssociation
+// action.
 func (c *Client) DeleteBotChannelAssociation(ctx context.Context, params *DeleteBotChannelAssociationInput, optFns ...func(*Options)) (*DeleteBotChannelAssociationOutput, error) {
 	if params == nil {
 		params = &DeleteBotChannelAssociationInput{}
@@ -29,8 +30,8 @@ func (c *Client) DeleteBotChannelAssociation(ctx context.Context, params *Delete
 
 type DeleteBotChannelAssociationInput struct {
 
-	// An alias that points to the specific version of the Amazon Lex bot to which this
-	// association is being made.
+	// An alias that points to the specific version of the Amazon Lex bot to which
+	// this association is being made.
 	//
 	// This member is required.
 	BotAlias *string

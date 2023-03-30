@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the details of a maintenance window task. For maintenance window tasks
-// without a specified target, you can't supply values for --max-errors and
-// --max-concurrency. Instead, the system inserts a placeholder value of 1, which
-// may be reported in the response to this command. These values don't affect the
-// running of your task and can be ignored. To retrieve a list of tasks in a
-// maintenance window, instead use the DescribeMaintenanceWindowTasks command.
+// Retrieves the details of a maintenance window task. For maintenance window
+// tasks without a specified target, you can't supply values for --max-errors  and
+// --max-concurrency . Instead, the system inserts a placeholder value of 1,
+// which may be reported in the response to this command. These values don't affect
+// the running of your task and can be ignored. To retrieve a list of tasks in a
+// maintenance window, instead use the DescribeMaintenanceWindowTasks  command.
 func (c *Client) GetMaintenanceWindowTask(ctx context.Context, params *GetMaintenanceWindowTaskInput, optFns ...func(*Options)) (*GetMaintenanceWindowTaskOutput, error) {
 	if params == nil {
 		params = &GetMaintenanceWindowTaskInput{}
@@ -53,38 +53,38 @@ type GetMaintenanceWindowTaskOutput struct {
 	// task.
 	AlarmConfiguration *types.AlarmConfiguration
 
-	// The action to take on tasks when the maintenance window cutoff time is reached.
-	// CONTINUE_TASK means that tasks continue to run. For Automation, Lambda, Step
-	// Functions tasks, CANCEL_TASK means that currently running task invocations
-	// continue, but no new task invocations are started. For Run Command tasks,
-	// CANCEL_TASK means the system attempts to stop the task by sending a
+	// The action to take on tasks when the maintenance window cutoff time is
+	// reached. CONTINUE_TASK means that tasks continue to run. For Automation,
+	// Lambda, Step Functions tasks, CANCEL_TASK means that currently running task
+	// invocations continue, but no new task invocations are started. For Run Command
+	// tasks, CANCEL_TASK  means the system attempts to stop the task by sending a
 	// CancelCommand operation.
 	CutoffBehavior types.MaintenanceWindowTaskCutoffBehavior
 
 	// The retrieved task description.
 	Description *string
 
-	// The location in Amazon Simple Storage Service (Amazon S3) where the task results
-	// are logged. LoggingInfo has been deprecated. To specify an Amazon Simple Storage
-	// Service (Amazon S3) bucket to contain logs, instead use the OutputS3BucketName
-	// and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For
-	// information about how Amazon Web Services Systems Manager handles these options
-	// for the supported maintenance window task types, see
-	// MaintenanceWindowTaskInvocationParameters.
+	// The location in Amazon Simple Storage Service (Amazon S3) where the task
+	// results are logged. LoggingInfo has been deprecated. To specify an Amazon
+	// Simple Storage Service (Amazon S3) bucket to contain logs, instead use the
+	// OutputS3BucketName and OutputS3KeyPrefix  options in the
+	// TaskInvocationParametersstructure. For information about how Amazon Web
+	// Services Systems Manager handles these options for the supported maintenance
+	// window task types, see MaintenanceWindowTaskInvocationParameters .
 	LoggingInfo *types.LoggingInfo
 
 	// The maximum number of targets allowed to run this task in parallel. For
 	// maintenance window tasks without a target specified, you can't supply a value
-	// for this option. Instead, the system inserts a placeholder value of 1, which may
-	// be reported in the response to this command. This value doesn't affect the
+	// for this option. Instead, the system inserts a placeholder value of 1, which
+	// may be reported in the response to this command. This value doesn't affect the
 	// running of your task and can be ignored.
 	MaxConcurrency *string
 
-	// The maximum number of errors allowed before the task stops being scheduled. For
-	// maintenance window tasks without a target specified, you can't supply a value
-	// for this option. Instead, the system inserts a placeholder value of 1, which may
-	// be reported in the response to this command. This value doesn't affect the
-	// running of your task and can be ignored.
+	// The maximum number of errors allowed before the task stops being scheduled.
+	// For maintenance window tasks without a target specified, you can't supply a
+	// value for this option. Instead, the system inserts a placeholder value of 1,
+	// which may be reported in the response to this command. This value doesn't affect
+	// the running of your task and can be ignored.
 	MaxErrors *string
 
 	// The retrieved task name.
@@ -102,10 +102,10 @@ type GetMaintenanceWindowTaskOutput struct {
 	// The targets where the task should run.
 	Targets []types.Target
 
-	// The resource that the task used during execution. For RUN_COMMAND and AUTOMATION
-	// task types, the value of TaskArn is the SSM document name/ARN. For LAMBDA tasks,
-	// the value is the function name/ARN. For STEP_FUNCTIONS tasks, the value is the
-	// state machine ARN.
+	// The resource that the task used during execution. For RUN_COMMAND  and
+	// AUTOMATION task types, the value of TaskArn  is the SSM document name/ARN. For
+	// LAMBDA tasks, the value is the function name/ARN. For STEP_FUNCTIONS tasks,
+	// the value is the state machine ARN.
 	TaskArn *string
 
 	// The parameters to pass to the task when it runs.
@@ -113,9 +113,9 @@ type GetMaintenanceWindowTaskOutput struct {
 
 	// The parameters to pass to the task when it runs. TaskParameters has been
 	// deprecated. To specify parameters to pass to a task when it runs, instead use
-	// the Parameters option in the TaskInvocationParameters structure. For information
-	// about how Systems Manager handles these options for the supported maintenance
-	// window task types, see MaintenanceWindowTaskInvocationParameters.
+	// the Parameters  option in the TaskInvocationParameters structure. For
+	// information about how Systems Manager handles these options for the supported
+	// maintenance window task types, see MaintenanceWindowTaskInvocationParameters .
 	TaskParameters map[string]types.MaintenanceWindowTaskParameterValueExpression
 
 	// The type of task to run.

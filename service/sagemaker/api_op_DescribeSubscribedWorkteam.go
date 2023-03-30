@@ -40,7 +40,7 @@ type DescribeSubscribedWorkteamInput struct {
 
 type DescribeSubscribedWorkteamOutput struct {
 
-	// A Workteam instance that contains information about the work team.
+	// A Workteam  instance that contains information about the work team.
 	//
 	// This member is required.
 	SubscribedWorkteam *types.SubscribedWorkteam

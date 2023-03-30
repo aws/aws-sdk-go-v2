@@ -60,8 +60,8 @@ type ListMonitoringExecutionsInput struct {
 	// type.
 	MonitoringTypeEquals types.MonitoringType
 
-	// The token returned if the response is truncated. To retrieve the next set of job
-	// executions, use it in the next request.
+	// The token returned if the response is truncated. To retrieve the next set of
+	// job executions, use it in the next request.
 	NextToken *string
 
 	// Filter for jobs scheduled after a specified time.
@@ -70,12 +70,12 @@ type ListMonitoringExecutionsInput struct {
 	// Filter for jobs scheduled before a specified time.
 	ScheduledTimeBefore *time.Time
 
-	// Whether to sort results by Status, CreationTime, ScheduledTime field. The
-	// default is CreationTime.
+	// Whether to sort results by Status , CreationTime , ScheduledTime field. The
+	// default is CreationTime .
 	SortBy types.MonitoringExecutionSortKey
 
-	// Whether to sort the results in Ascending or Descending order. The default is
-	// Descending.
+	// Whether to sort the results in Ascending  or Descending  order. The default is
+	// Descending .
 	SortOrder types.SortOrder
 
 	// A filter that retrieves only jobs with a specific status.
@@ -175,8 +175,8 @@ type ListMonitoringExecutionsPaginatorOptions struct {
 	// The maximum number of jobs to return in the response. The default value is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

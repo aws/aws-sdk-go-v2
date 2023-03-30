@@ -15,7 +15,7 @@ import (
 // Retrieves the firewall configurations that you have defined. DNS Firewall uses
 // the configurations to manage firewall behavior for your VPCs. A single call
 // might return only a partial list of the configurations. For information, see
-// MaxResults.
+// MaxResults .
 func (c *Client) ListFirewallConfigs(ctx context.Context, params *ListFirewallConfigsInput, optFns ...func(*Options)) (*ListFirewallConfigsOutput, error) {
 	if params == nil {
 		params = &ListFirewallConfigsInput{}
@@ -33,16 +33,17 @@ func (c *Client) ListFirewallConfigs(ctx context.Context, params *ListFirewallCo
 
 type ListFirewallConfigsInput struct {
 
-	// The maximum number of objects that you want Resolver to return for this request.
-	// If more objects are available, in the response, Resolver provides a NextToken
-	// value that you can use in a subsequent call to get the next batch of objects. If
-	// you don't specify a value for MaxResults, Resolver returns up to 100 objects.
+	// The maximum number of objects that you want Resolver to return for this
+	// request. If more objects are available, in the response, Resolver provides a
+	// NextTokenvalue that you can use in a subsequent call to get the next batch of
+	// objects. If you don't specify a value for MaxResults, Resolver returns up to
+	// 100 objects.
 	MaxResults *int32
 
 	// For the first call to this list request, omit this value. When you request a
 	// list of objects, Resolver returns at most the number of objects specified in
-	// MaxResults. If more objects are available for retrieval, Resolver returns a
-	// NextToken value in the response. To retrieve the next batch of objects, use the
+	// MaxResults . If more objects are available for retrieval, Resolver returns a
+	// NextTokenvalue in the response. To retrieve the next batch of objects, use the
 	// token that was returned for the prior request in your next request.
 	NextToken *string
 
@@ -55,9 +56,9 @@ type ListFirewallConfigsOutput struct {
 	// from Amazon Virtual Private Cloud (Amazon VPC).
 	FirewallConfigs []types.FirewallConfig
 
-	// If objects are still available for retrieval, Resolver returns this token in the
-	// response. To retrieve the next batch of objects, provide this token in your next
-	// request.
+	// If objects are still available for retrieval, Resolver returns this token in
+	// the response. To retrieve the next batch of objects, provide this token in your
+	// next request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -126,8 +127,8 @@ func (c *Client) addOperationListFirewallConfigsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListFirewallConfigsAPIClient is a client that implements the ListFirewallConfigs
-// operation.
+// ListFirewallConfigsAPIClient is a client that implements the
+// ListFirewallConfigs operation.
 type ListFirewallConfigsAPIClient interface {
 	ListFirewallConfigs(context.Context, *ListFirewallConfigsInput, ...func(*Options)) (*ListFirewallConfigsOutput, error)
 }
@@ -137,14 +138,15 @@ var _ ListFirewallConfigsAPIClient = (*Client)(nil)
 // ListFirewallConfigsPaginatorOptions is the paginator options for
 // ListFirewallConfigs
 type ListFirewallConfigsPaginatorOptions struct {
-	// The maximum number of objects that you want Resolver to return for this request.
-	// If more objects are available, in the response, Resolver provides a NextToken
-	// value that you can use in a subsequent call to get the next batch of objects. If
-	// you don't specify a value for MaxResults, Resolver returns up to 100 objects.
+	// The maximum number of objects that you want Resolver to return for this
+	// request. If more objects are available, in the response, Resolver provides a
+	// NextTokenvalue that you can use in a subsequent call to get the next batch of
+	// objects. If you don't specify a value for MaxResults, Resolver returns up to
+	// 100 objects.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

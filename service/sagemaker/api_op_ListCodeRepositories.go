@@ -55,14 +55,14 @@ type ListCodeRepositoriesInput struct {
 	NameContains *string
 
 	// If the result of a ListCodeRepositoriesOutput request was truncated, the
-	// response includes a NextToken. To get the next set of Git repositories, use the
-	// token in the next request.
+	// response includes a NextToken. To get the next set of Git repositories, use
+	// the token in the next request.
 	NextToken *string
 
-	// The field to sort results by. The default is Name.
+	// The field to sort results by. The default is Name .
 	SortBy types.CodeRepositorySortBy
 
-	// The sort order for results. The default is Ascending.
+	// The sort order for results. The default is Ascending .
 	SortOrder types.CodeRepositorySortOrder
 
 	noSmithyDocumentSerde
@@ -72,21 +72,18 @@ type ListCodeRepositoriesOutput struct {
 
 	// Gets a list of summaries of the Git repositories. Each summary specifies the
 	// following values for the repository:
-	// - Name
-	// - Amazon Resource Name (ARN)
-	// -
-	// Creation time
-	// - Last modified time
-	// - Configuration information, including the
-	// URL location of the repository and the ARN of the Amazon Web Services Secrets
-	// Manager secret that contains the credentials used to access the repository.
+	//     - Name
+	//     - Amazon Resource Name (ARN)
+	//     - Creation time
+	//     - Last modified time
+	//     - Configuration information, including the URL location of the repository and the ARN of the Amazon Web Services Secrets Manager secret that contains the credentials used to access the repository.
 	//
 	// This member is required.
 	CodeRepositorySummaryList []types.CodeRepositorySummary
 
 	// If the result of a ListCodeRepositoriesOutput request was truncated, the
-	// response includes a NextToken. To get the next set of Git repositories, use the
-	// token in the next request.
+	// response includes a NextToken. To get the next set of Git repositories, use
+	// the token in the next request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -169,8 +166,8 @@ type ListCodeRepositoriesPaginatorOptions struct {
 	// The maximum number of Git repositories to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -17,14 +17,12 @@ import (
 // group. Buyers can subscribe to model packages listed on Amazon Web Services
 // Marketplace to create models in SageMaker. To create a model package by
 // specifying a Docker container that contains your inference code and the Amazon
-// S3 location of your model artifacts, provide values for InferenceSpecification.
-// To create a model from an algorithm resource that you created or subscribed to
+// S3 location of your model artifacts, provide values for InferenceSpecification
+// . To create a model from an algorithm resource that you created or subscribed to
 // in Amazon Web Services Marketplace, provide a value for
-// SourceAlgorithmSpecification. There are two types of model packages:
-// - Versioned
-// - a model that is part of a model group in the model registry.
-// - Unversioned - a
-// model package that is not part of a model group.
+// SourceAlgorithmSpecification . There are two types of model packages:
+//   - Versioned - a model that is part of a model group in the model registry.
+//   - Unversioned - a model package that is not part of a model group.
 func (c *Client) CreateModelPackage(ctx context.Context, params *CreateModelPackageInput, optFns ...func(*Options)) (*CreateModelPackageOutput, error) {
 	if params == nil {
 		params = &CreateModelPackageInput{}
@@ -64,22 +62,17 @@ type CreateModelPackageInput struct {
 	// processing.
 	Domain *string
 
-	// Represents the drift check baselines that can be used when the model monitor is
-	// set using the model package. For more information, see the topic on Drift
-	// Detection against Previous Baselines in SageMaker Pipelines
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection)
+	// Represents the drift check baselines that can be used when the model monitor
+	// is set using the model package. For more information, see the topic on Drift
+	// Detection against Previous Baselines in SageMaker Pipelines (https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection)
 	// in the Amazon SageMaker Developer Guide.
 	DriftCheckBaselines *types.DriftCheckBaselines
 
-	// Specifies details about inference jobs that can be run with models based on this
-	// model package, including the following:
-	// - The Amazon ECR paths of containers
-	// that contain the inference code and model artifacts.
-	// - The instance types that
-	// the model package supports for transform jobs and real-time endpoints used for
-	// inference.
-	// - The input and output content formats that the model package
-	// supports for inference.
+	// Specifies details about inference jobs that can be run with models based on
+	// this model package, including the following:
+	//     - The Amazon ECR paths of containers that contain the inference code and model artifacts.
+	//     - The instance types that the model package supports for transform jobs and real-time endpoints used for inference.
+	//     - The input and output content formats that the model package supports for inference.
 	InferenceSpecification *types.InferenceSpecification
 
 	// Metadata properties of the tracking entity, trial, or trial component.
@@ -87,7 +80,8 @@ type CreateModelPackageInput struct {
 
 	// Whether the model is approved for deployment. This parameter is optional for
 	// versioned models, and does not apply to unversioned models. For versioned
-	// models, the value of this parameter must be set to Approved to deploy the model.
+	// models, the value of this parameter must be set to Approved to deploy the
+	// model.
 	ModelApprovalStatus types.ModelApprovalStatus
 
 	// A structure that contains model metrics reports.
@@ -110,8 +104,7 @@ type CreateModelPackageInput struct {
 	// stored. This path must point to a single gzip compressed tar archive (.tar.gz
 	// suffix). This archive can hold multiple files that are all equally used in the
 	// load test. Each file in the archive must satisfy the size constraints of the
-	// InvokeEndpoint
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html#API_runtime_InvokeEndpoint_RequestSyntax)
+	// InvokeEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html#API_runtime_InvokeEndpoint_RequestSyntax)
 	// call.
 	SamplePayloadUrl *string
 
@@ -119,17 +112,16 @@ type CreateModelPackageInput struct {
 	SourceAlgorithmSpecification *types.SourceAlgorithmSpecification
 
 	// A list of key value pairs associated with the model. For more information, see
-	// Tagging Amazon Web Services resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-	// Web Services General Reference Guide.
+	// Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the Amazon Web Services General Reference Guide.
 	Tags []types.Tag
 
 	// The machine learning task your model package accomplishes. Common machine
 	// learning tasks include object detection and image classification. The following
-	// tasks are supported by Inference Recommender: "IMAGE_CLASSIFICATION" |
-	// "OBJECT_DETECTION" | "TEXT_GENERATION" |"IMAGE_SEGMENTATION" | "FILL_MASK" |
-	// "CLASSIFICATION" | "REGRESSION" | "OTHER". Specify "OTHER" if none of the tasks
-	// listed fit your use case.
+	// tasks are supported by Inference Recommender: "IMAGE_CLASSIFICATION"  |
+	// "OBJECT_DETECTION" | "TEXT_GENERATION"  | "IMAGE_SEGMENTATION"  | "FILL_MASK"
+	// | "CLASSIFICATION"  | "REGRESSION"  | "OTHER". Specify "OTHER" if none of the
+	// tasks listed fit your use case.
 	Task *string
 
 	// Specifies configurations for one or more transform jobs that SageMaker runs to

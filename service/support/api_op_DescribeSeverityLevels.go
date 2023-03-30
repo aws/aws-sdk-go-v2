@@ -12,16 +12,10 @@ import (
 )
 
 // Returns the list of severity levels that you can assign to a support case. The
-// severity level for a case is also a field in the CaseDetails data type that you
-// include for a CreateCase request.
-// - You must have a Business, Enterprise
-// On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
-// API.
-// - If you call the Amazon Web Services Support API from an account that
-// doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
-// SubscriptionRequiredException error message appears. For information about
-// changing your support plan, see Amazon Web Services Support
-// (http://aws.amazon.com/premiumsupport/).
+// severity level for a case is also a field in the CaseDetails data type that
+// you include for a CreateCase  request.
+//   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support API.
+//   - If you call the Amazon Web Services Support API from an account that doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the SubscriptionRequiredException error message appears. For information about changing your support plan, see Amazon Web Services Support (http://aws.amazon.com/premiumsupport/) .
 func (c *Client) DescribeSeverityLevels(ctx context.Context, params *DescribeSeverityLevelsInput, optFns ...func(*Options)) (*DescribeSeverityLevelsOutput, error) {
 	if params == nil {
 		params = &DescribeSeverityLevelsInput{}
@@ -48,7 +42,7 @@ type DescribeSeverityLevelsInput struct {
 	noSmithyDocumentSerde
 }
 
-// The list of severity levels returned by the DescribeSeverityLevels operation.
+// The list of severity levels returned by the DescribeSeverityLevels  operation.
 type DescribeSeverityLevelsOutput struct {
 
 	// The available severity levels for the support case. Available severity levels

@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the list of votes for a specified proposal, including the value of each
-// vote and the unique identifier of the member that cast the vote. Applies only to
-// Hyperledger Fabric.
+// Returns the list of votes for a specified proposal, including the value of
+// each vote and the unique identifier of the member that cast the vote. Applies
+// only to Hyperledger Fabric.
 func (c *Client) ListProposalVotes(ctx context.Context, params *ListProposalVotesInput, optFns ...func(*Options)) (*ListProposalVotesOutput, error) {
 	if params == nil {
 		params = &ListProposalVotesInput{}
@@ -136,13 +136,14 @@ type ListProposalVotesAPIClient interface {
 
 var _ ListProposalVotesAPIClient = (*Client)(nil)
 
-// ListProposalVotesPaginatorOptions is the paginator options for ListProposalVotes
+// ListProposalVotesPaginatorOptions is the paginator options for
+// ListProposalVotes
 type ListProposalVotesPaginatorOptions struct {
 	// The maximum number of votes to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -14,14 +14,13 @@ import (
 // Creates an inference experiment using the configurations specified in the
 // request. Use this API to setup and schedule an experiment to compare model
 // variants on a Amazon SageMaker inference endpoint. For more information about
-// inference experiments, see Shadow tests
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html). Amazon
-// SageMaker begins your experiment at the scheduled time and routes traffic to
-// your endpoint's model variants based on your specified configuration. While the
-// experiment is in progress or after it has concluded, you can view metrics that
-// compare your model variants. For more information, see View, monitor, and edit
-// shadow tests
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests-view-monitor-edit.html).
+// inference experiments, see Shadow tests (https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html)
+// . Amazon SageMaker begins your experiment at the scheduled time and routes
+// traffic to your endpoint's model variants based on your specified configuration.
+// While the experiment is in progress or after it has concluded, you can view
+// metrics that compare your model variants. For more information, see View,
+// monitor, and edit shadow tests (https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests-view-monitor-edit.html)
+// .
 func (c *Client) CreateInferenceExperiment(ctx context.Context, params *CreateInferenceExperimentInput, optFns ...func(*Options)) (*CreateInferenceExperimentOutput, error) {
 	if params == nil {
 		params = &CreateInferenceExperimentInput{}
@@ -39,15 +38,15 @@ func (c *Client) CreateInferenceExperiment(ctx context.Context, params *CreateIn
 
 type CreateInferenceExperimentInput struct {
 
-	// The name of the Amazon SageMaker endpoint on which you want to run the inference
-	// experiment.
+	// The name of the Amazon SageMaker endpoint on which you want to run the
+	// inference experiment.
 	//
 	// This member is required.
 	EndpointName *string
 
 	// An array of ModelVariantConfig objects. There is one for each variant in the
-	// inference experiment. Each ModelVariantConfig object in the array describes the
-	// infrastructure configuration for the corresponding variant.
+	// inference experiment. Each ModelVariantConfig object in the array describes
+	// the infrastructure configuration for the corresponding variant.
 	//
 	// This member is required.
 	ModelVariants []types.ModelVariantConfig
@@ -75,17 +74,15 @@ type CreateInferenceExperimentInput struct {
 
 	// The type of the inference experiment that you want to run. The following types
 	// of experiments are possible:
-	// - ShadowMode: You can use this type to validate a
-	// shadow variant. For more information, see Shadow tests
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html).
+	//     - ShadowMode : You can use this type to validate a shadow variant. For more information, see Shadow tests (https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html) .
 	//
 	// This member is required.
 	Type types.InferenceExperimentType
 
 	// The Amazon S3 location and configuration for storing inference request and
 	// response data. This is an optional parameter that you can use for data capture.
-	// For more information, see Capture data
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html).
+	// For more information, see Capture data (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html)
+	// .
 	DataStorageConfig *types.InferenceExperimentDataStorageConfig
 
 	// A description for the inference experiment.
@@ -95,31 +92,24 @@ type CreateInferenceExperimentInput struct {
 	// that Amazon SageMaker uses to encrypt data on the storage volume attached to the
 	// ML compute instance that hosts the endpoint. The KmsKey can be any of the
 	// following formats:
-	// - KMS key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
-	// - Amazon
-	// Resource Name (ARN) of a KMS key
-	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
-	// -
-	// KMS key Alias "alias/ExampleAlias"
-	// - Amazon Resource Name (ARN) of a KMS key
-	// Alias "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
+	//     - KMS key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//     - Amazon Resource Name (ARN) of a KMS key "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	//     - KMS key Alias "alias/ExampleAlias"
+	//     - Amazon Resource Name (ARN) of a KMS key Alias "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
 	//
-	// If you use a KMS
-	// key ID or an alias of your KMS key, the Amazon SageMaker execution role must
-	// include permissions to call kms:Encrypt. If you don't provide a KMS key ID,
-	// Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account.
-	// Amazon SageMaker uses server-side encryption with KMS managed keys for
-	// OutputDataConfig. If you use a bucket policy with an s3:PutObject permission
-	// that only allows objects with server-side encryption, set the condition key of
-	// s3:x-amz-server-side-encryption to "aws:kms". For more information, see KMS
-	// managed Encryption Keys
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) in the
-	// Amazon Simple Storage Service Developer Guide. The KMS key policy must grant
-	// permission to the IAM role that you specify in your CreateEndpoint and
-	// UpdateEndpoint requests. For more information, see Using Key Policies in Amazon
-	// Web Services KMS
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
-	// Amazon Web Services Key Management Service Developer Guide.
+	// If you use a KMS key ID or an alias of your KMS key, the Amazon SageMaker
+	// execution role must include permissions to call kms:Encrypt. If you don't
+	// provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3
+	// for your role's account. Amazon SageMaker uses server-side encryption with KMS
+	// managed keys for OutputDataConfig . If you use a bucket policy with an
+	// s3:PutObjectpermission that only allows objects with server-side encryption,
+	// set the condition key of s3:x-amz-server-side-encryption  to "aws:kms". For
+	// more information, see KMS managed Encryption Keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
+	// in the Amazon Simple Storage Service Developer Guide. The KMS key policy must
+	// grant permission to the IAM role that you specify in your CreateEndpoint  and
+	// UpdateEndpoint requests. For more information, see Using Key Policies in
+	// Amazon Web Services KMS (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
+	// in the Amazon Web Services Key Management Service Developer Guide.
 	KmsKey *string
 
 	// The duration for which you want the inference experiment to run. If you don't
@@ -130,7 +120,7 @@ type CreateInferenceExperimentInput struct {
 	// Array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or
 	// environment. For more information, see Tagging your Amazon Web Services
-	// Resources (https://docs.aws.amazon.com/ARG/latest/userguide/tagging.html).
+	// Resources (https://docs.aws.amazon.com/ARG/latest/userguide/tagging.html) .
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

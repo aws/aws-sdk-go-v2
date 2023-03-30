@@ -55,8 +55,8 @@ type DescribeUserProfileOutput struct {
 	// This member is required.
 	UserArn *string
 
-	// The display name shown for the user in AWS CodeStar projects. For example, this
-	// could be set to both first and last name ("Mary Major") or a single name
+	// The display name shown for the user in AWS CodeStar projects. For example,
+	// this could be set to both first and last name ("Mary Major") or a single name
 	// ("Mary"). The display name is also used to generate the initial icon associated
 	// with the user in AWS CodeStar projects. If spaces are included in the display
 	// name, the first character that appears after the space will be used as the

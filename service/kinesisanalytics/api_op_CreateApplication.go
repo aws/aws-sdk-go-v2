@@ -14,13 +14,12 @@ import (
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
 // applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation. Creates an Amazon Kinesis Analytics application.
-// You can configure each application with one streaming source as input,
-// application code to process the input, and up to three destinations where you
-// want Amazon Kinesis Analytics to write the output data from your application.
-// For an overview, see How it Works
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works.html). In
-// the input configuration, you map the streaming source to an in-application
+// Analytics API V2 Documentation. Creates an Amazon Kinesis Analytics
+// application. You can configure each application with one streaming source as
+// input, application code to process the input, and up to three destinations where
+// you want Amazon Kinesis Analytics to write the output data from your
+// application. For an overview, see How it Works (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works.html)
+// . In the input configuration, you map the streaming source to an in-application
 // stream, which you can think of as a constantly updating table. In the mapping,
 // you must provide a schema for the in-application stream and map each data column
 // in the in-application stream to a data element in the streaming source. Your
@@ -33,8 +32,8 @@ import (
 // permissions. You grant these permissions by creating IAM roles. This operation
 // requires permissions to perform the kinesisanalytics:CreateApplication action.
 // For introductory exercises to create an Amazon Kinesis Analytics application,
-// see Getting Started
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/getting-started.html).
+// see Getting Started (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/getting-started.html)
+// .
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}
@@ -53,7 +52,7 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 // TBD
 type CreateApplicationInput struct {
 
-	// Name of your Amazon Kinesis Analytics application (for example, sample-app).
+	// Name of your Amazon Kinesis Analytics application (for example, sample-app ).
 	//
 	// This member is required.
 	ApplicationName *string
@@ -63,14 +62,13 @@ type CreateApplicationInput struct {
 	// in-application stream, generates a running average of the number of
 	// advertisement clicks by vendor, and insert resulting rows in another
 	// in-application stream using pumps. For more information about the typical
-	// pattern, see Application Code
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-app-code.html).
-	// You can provide such series of SQL statements, where output of one statement can
-	// be used as the input for the next statement. You store intermediate results by
-	// creating in-application streams and pumps. Note that the application code must
-	// create the streams with names specified in the Outputs. For example, if your
-	// Outputs defines output streams named ExampleOutputStream1 and
-	// ExampleOutputStream2, then your application code must create these streams.
+	// pattern, see Application Code (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-app-code.html)
+	// . You can provide such series of SQL statements, where output of one statement
+	// can be used as the input for the next statement. You store intermediate results
+	// by creating in-application streams and pumps. Note that the application code
+	// must create the streams with names specified in the Outputs. For example, if
+	// your Outputs  defines output streams named ExampleOutputStream1  and
+	// ExampleOutputStream2 , then your application code must create these streams.
 	ApplicationCode *string
 
 	// Summary description of the application.
@@ -78,8 +76,8 @@ type CreateApplicationInput struct {
 
 	// Use this parameter to configure a CloudWatch log stream to monitor application
 	// configuration errors. For more information, see Working with Amazon CloudWatch
-	// Logs
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
+	// Logs (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html)
+	// .
 	CloudWatchLoggingOptions []types.CloudWatchLoggingOption
 
 	// Use this parameter to configure the application input. You can configure your
@@ -113,8 +111,8 @@ type CreateApplicationInput struct {
 	// A list of one or more tags to assign to the application. A tag is a key-value
 	// pair that identifies an application. Note that the maximum number of application
 	// tags includes system tags. The maximum number of user-defined application tags
-	// is 50. For more information, see Using Tagging
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html).
+	// is 50. For more information, see Using Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html)
+	// .
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -123,8 +121,8 @@ type CreateApplicationInput struct {
 // TBD
 type CreateApplicationOutput struct {
 
-	// In response to your CreateApplication request, Amazon Kinesis Analytics returns
-	// a response with a summary of the application it created, including the
+	// In response to your CreateApplication request, Amazon Kinesis Analytics
+	// returns a response with a summary of the application it created, including the
 	// application Amazon Resource Name (ARN), name, and status.
 	//
 	// This member is required.

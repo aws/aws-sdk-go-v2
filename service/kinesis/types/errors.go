@@ -86,8 +86,8 @@ func (e *ExpiredNextTokenException) ErrorCode() string {
 }
 func (e *ExpiredNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The processing of the request failed because of an unknown error, exception, or
-// failure.
+// The processing of the request failed because of an unknown error, exception,
+// or failure.
 type InternalFailureException struct {
 	Message *string
 
@@ -140,8 +140,8 @@ func (e *InvalidArgumentException) ErrorCode() string {
 }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The ciphertext references a key that doesn't exist or that you don't have access
-// to.
+// The ciphertext references a key that doesn't exist or that you don't have
+// access to.
 type KMSAccessDeniedException struct {
 	Message *string
 
@@ -194,11 +194,10 @@ func (e *KMSDisabledException) ErrorCode() string {
 }
 func (e *KMSDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because the state of the specified resource isn't valid
-// for this request. For more information, see How Key State Affects Use of a
-// Customer Master Key
-// (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// Amazon Web Services Key Management Service Developer Guide.
+// The request was rejected because the state of the specified resource isn't
+// valid for this request. For more information, see How Key State Affects Use of
+// a Customer Master Key (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the Amazon Web Services Key Management Service Developer Guide.
 type KMSInvalidStateException struct {
 	Message *string
 
@@ -278,8 +277,7 @@ func (e *KMSOptInRequired) ErrorCode() string {
 func (e *KMSOptInRequired) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was denied due to request throttling. For more information about
-// throttling, see Limits
-// (https://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second)
+// throttling, see Limits (https://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second)
 // in the Amazon Web Services Key Management Service Developer Guide.
 type KMSThrottlingException struct {
 	Message *string
@@ -333,14 +331,12 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request rate for the stream is too high, or the requested data is too large
-// for the available throughput. Reduce the frequency or size of your requests. For
-// more information, see Streams Limits
-// (https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
+// The request rate for the stream is too high, or the requested data is too
+// large for the available throughput. Reduce the frequency or size of your
+// requests. For more information, see Streams Limits (https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
 // in the Amazon Kinesis Data Streams Developer Guide, and Error Retries and
-// Exponential Backoff in Amazon Web Services
-// (https://docs.aws.amazon.com/general/latest/gr/api-retries.html) in the Amazon
-// Web Services General Reference.
+// Exponential Backoff in Amazon Web Services (https://docs.aws.amazon.com/general/latest/gr/api-retries.html)
+// in the Amazon Web Services General Reference.
 type ProvisionedThroughputExceededException struct {
 	Message *string
 
@@ -368,8 +364,8 @@ func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault 
 	return smithy.FaultClient
 }
 
-// The resource is not available for this operation. For successful operation, the
-// resource must be in the ACTIVE state.
+// The resource is not available for this operation. For successful operation,
+// the resource must be in the ACTIVE  state.
 type ResourceInUseException struct {
 	Message *string
 
@@ -422,9 +418,9 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Specifies that you tried to invoke this API for a data stream with the on-demand
-// capacity mode. This API is only supported for data streams with the provisioned
-// capacity mode.
+// Specifies that you tried to invoke this API for a data stream with the
+// on-demand capacity mode. This API is only supported for data streams with the
+// provisioned capacity mode.
 type ValidationException struct {
 	Message *string
 

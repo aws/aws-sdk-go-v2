@@ -13,8 +13,7 @@ import (
 )
 
 // Starts a Device Advisor test suite run. Requires permission to access the
-// StartSuiteRun
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// StartSuiteRun (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) StartSuiteRun(ctx context.Context, params *StartSuiteRunInput, optFns ...func(*Options)) (*StartSuiteRunOutput, error) {
 	if params == nil {

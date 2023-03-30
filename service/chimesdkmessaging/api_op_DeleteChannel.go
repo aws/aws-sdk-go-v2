@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Immediately makes a channel and its memberships inaccessible and marks them for
-// deletion. This is an irreversible process. The x-amz-chime-bearer request header
-// is mandatory. Use the ARN of the AppInstanceUserArn or AppInstanceBot that makes
-// the API call as the value in the header.
+// Immediately makes a channel and its memberships inaccessible and marks them
+// for deletion. This is an irreversible process. The x-amz-chime-bearer request
+// header is mandatory. Use the ARN of the AppInstanceUserArn  or AppInstanceBot
+// that makes the API call as the value in the header.
 func (c *Client) DeleteChannel(ctx context.Context, params *DeleteChannelInput, optFns ...func(*Options)) (*DeleteChannelOutput, error) {
 	if params == nil {
 		params = &DeleteChannelInput{}
@@ -36,7 +36,7 @@ type DeleteChannelInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
+	// The ARN of the AppInstanceUser  or AppInstanceBot  that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string

@@ -12,8 +12,8 @@ import (
 )
 
 // Enables you to provide feedback to Amazon Kendra to improve the performance of
-// your index. SubmitFeedback is currently not supported in the Amazon Web Services
-// GovCloud (US-West) region.
+// your index. SubmitFeedback is currently not supported in the Amazon Web
+// Services GovCloud (US-West) region.
 func (c *Client) SubmitFeedback(ctx context.Context, params *SubmitFeedbackInput, optFns ...func(*Options)) (*SubmitFeedbackOutput, error) {
 	if params == nil {
 		params = &SubmitFeedbackInput{}
@@ -36,13 +36,14 @@ type SubmitFeedbackInput struct {
 	// This member is required.
 	IndexId *string
 
-	// The identifier of the specific query for which you are submitting feedback. The
-	// query ID is returned in the response to the Query API.
+	// The identifier of the specific query for which you are submitting feedback.
+	// The query ID is returned in the response to the Query  API.
 	//
 	// This member is required.
 	QueryId *string
 
-	// Tells Amazon Kendra that a particular search result link was chosen by the user.
+	// Tells Amazon Kendra that a particular search result link was chosen by the
+	// user.
 	ClickFeedbackItems []types.ClickFeedback
 
 	// Provides Amazon Kendra with relevant or not relevant feedback for whether a

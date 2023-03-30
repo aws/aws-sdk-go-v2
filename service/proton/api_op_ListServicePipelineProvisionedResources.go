@@ -124,19 +124,19 @@ func (c *Client) addOperationListServicePipelineProvisionedResourcesMiddlewares(
 	return nil
 }
 
-// ListServicePipelineProvisionedResourcesAPIClient is a client that implements the
-// ListServicePipelineProvisionedResources operation.
+// ListServicePipelineProvisionedResourcesAPIClient is a client that implements
+// the ListServicePipelineProvisionedResources operation.
 type ListServicePipelineProvisionedResourcesAPIClient interface {
 	ListServicePipelineProvisionedResources(context.Context, *ListServicePipelineProvisionedResourcesInput, ...func(*Options)) (*ListServicePipelineProvisionedResourcesOutput, error)
 }
 
 var _ ListServicePipelineProvisionedResourcesAPIClient = (*Client)(nil)
 
-// ListServicePipelineProvisionedResourcesPaginatorOptions is the paginator options
-// for ListServicePipelineProvisionedResources
+// ListServicePipelineProvisionedResourcesPaginatorOptions is the paginator
+// options for ListServicePipelineProvisionedResources
 type ListServicePipelineProvisionedResourcesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

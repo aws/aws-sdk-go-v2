@@ -11,8 +11,8 @@ import (
 )
 
 // Removes a specific tag associated with an Amazon Translate resource. For more
-// information, see  Tagging your resources
-// (https://docs.aws.amazon.com/translate/latest/dg/tagging.html).
+// information, see Tagging your resources (https://docs.aws.amazon.com/translate/latest/dg/tagging.html)
+// .
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -30,14 +30,14 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the given Amazon Translate resource from which
-	// you want to remove the tags.
+	// The Amazon Resource Name (ARN) of the given Amazon Translate resource from
+	// which you want to remove the tags.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// The initial part of a key-value pair that forms a tag being removed from a given
-	// resource. Keys must be unique and cannot be duplicated for a particular
+	// The initial part of a key-value pair that forms a tag being removed from a
+	// given resource. Keys must be unique and cannot be duplicated for a particular
 	// resource.
 	//
 	// This member is required.

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Amazon Security Lake exceptions that you can use to find the source of
-// problems and fix them.
+// Lists the Amazon Security Lake exceptions that you can use to find the source
+// of problems and fix them.
 func (c *Client) ListDatalakeExceptions(ctx context.Context, params *ListDatalakeExceptionsInput, optFns ...func(*Options)) (*ListDatalakeExceptionsOutput, error) {
 	if params == nil {
 		params = &ListDatalakeExceptionsInput{}
@@ -141,8 +141,8 @@ type ListDatalakeExceptionsPaginatorOptions struct {
 	// List the maximum number of failures in Security Lake.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -155,7 +155,8 @@ type ListDatalakeExceptionsPaginator struct {
 	firstPage bool
 }
 
-// NewListDatalakeExceptionsPaginator returns a new ListDatalakeExceptionsPaginator
+// NewListDatalakeExceptionsPaginator returns a new
+// ListDatalakeExceptionsPaginator
 func NewListDatalakeExceptionsPaginator(client ListDatalakeExceptionsAPIClient, params *ListDatalakeExceptionsInput, optFns ...func(*ListDatalakeExceptionsPaginatorOptions)) *ListDatalakeExceptionsPaginator {
 	if params == nil {
 		params = &ListDatalakeExceptionsInput{}

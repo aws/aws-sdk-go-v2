@@ -37,8 +37,8 @@ type DescribeOrganizationConfigurationOutput struct {
 	// added to the organization.
 	AutoEnable bool
 
-	// Specifies whether the maximum number of Amazon Macie member accounts are part of
-	// the organization.
+	// Specifies whether the maximum number of Amazon Macie member accounts are part
+	// of the organization.
 	MaxAccountLimitReached bool
 
 	// Metadata pertaining to the operation's result.

@@ -31,21 +31,21 @@ func (c *Client) CreateCustomDBEngineVersion(ctx context.Context, params *Create
 type CreateCustomDBEngineVersionInput struct {
 
 	// The database engine to use for your custom engine version (CEV). The only
-	// supported value is custom-oracle-ee.
+	// supported value is custom-oracle-ee .
 	//
 	// This member is required.
 	Engine *string
 
 	// The name of your CEV. The name format is 19.customized_string. For example, a
 	// valid CEV name is 19.my_cev1. This setting is required for RDS Custom for
-	// Oracle, but optional for Amazon RDS. The combination of Engine and EngineVersion
-	// is unique per customer per Region.
+	// Oracle, but optional for Amazon RDS. The combination of Engine  and
+	// EngineVersion is unique per customer per Region.
 	//
 	// This member is required.
 	EngineVersion *string
 
 	// The name of an Amazon S3 bucket that contains database installation files for
-	// your CEV. For example, a valid bucket name is my-custom-installation-files.
+	// your CEV. For example, a valid bucket name is my-custom-installation-files .
 	DatabaseInstallationFilesS3BucketName *string
 
 	// The Amazon S3 directory that contains the database installation files for your
@@ -56,8 +56,8 @@ type CreateCustomDBEngineVersionInput struct {
 	// An optional description of your CEV.
 	Description *string
 
-	// The ID of the AMI. An AMI ID is required to create a CEV for RDS Custom for SQL
-	// Server.
+	// The ID of the AMI. An AMI ID is required to create a CEV for RDS Custom for
+	// SQL Server.
 	ImageId *string
 
 	// The Amazon Web Services KMS key identifier for an encrypted CEV. A symmetric
@@ -65,38 +65,35 @@ type CreateCustomDBEngineVersionInput struct {
 	// you have an existing symmetric encryption KMS key in your account, you can use
 	// it with RDS Custom. No further action is necessary. If you don't already have a
 	// symmetric encryption KMS key in your account, follow the instructions in
-	// Creating a symmetric encryption KMS key
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk)
+	// Creating a symmetric encryption KMS key (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk)
 	// in the Amazon Web Services Key Management Service Developer Guide. You can
 	// choose the same symmetric encryption key when you create a CEV and a DB
 	// instance, or choose different keys.
 	KMSKeyId *string
 
-	// The CEV manifest, which is a JSON document that describes the installation .zip
-	// files stored in Amazon S3. Specify the name/value pairs in a file or a quoted
-	// string. RDS Custom applies the patches in the order in which they are listed.
-	// The following JSON fields are valid: MediaImportTemplateVersion Version of the
-	// CEV manifest. The date is in the format YYYY-MM-DD.
+	// The CEV manifest, which is a JSON document that describes the installation
+	// .zip files stored in Amazon S3. Specify the name/value pairs in a file or a
+	// quoted string. RDS Custom applies the patches in the order in which they are
+	// listed. The following JSON fields are valid: MediaImportTemplateVersion Version
+	// of the CEV manifest. The date is in the format YYYY-MM-DD.
 	// databaseInstallationFileNames Ordered list of installation files for the CEV.
 	// opatchFileNames Ordered list of OPatch installers used for the Oracle DB engine.
 	// psuRuPatchFileNames The PSU and RU patches for this CEV. OtherPatchFileNames The
 	// patches that are not in the list of PSU and RU patches. Amazon RDS applies these
 	// patches after applying the PSU and RU patches. For more information, see
-	// Creating the CEV manifest
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.preparing.manifest)
+	// Creating the CEV manifest (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.preparing.manifest)
 	// in the Amazon RDS User Guide.
 	Manifest *string
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
-	// the Amazon RDS User Guide.
+	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
+	// in the Amazon RDS User Guide.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element in the action
-// DescribeDBEngineVersions.
+// DescribeDBEngineVersions .
 type CreateCustomDBEngineVersionOutput struct {
 
 	// The creation time of the DB engine version.
@@ -106,8 +103,7 @@ type CreateCustomDBEngineVersionOutput struct {
 	// uses to create a custom engine version (CEV). RDS Custom applies the patches in
 	// the order in which they're listed in the manifest. You can set the Oracle home,
 	// Oracle base, and UNIX/Linux user and group using the installation parameters.
-	// For more information, see JSON fields in the CEV manifest
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html#custom-cev.preparing.manifest.fields)
+	// For more information, see JSON fields in the CEV manifest (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html#custom-cev.preparing.manifest.fields)
 	// in the Amazon RDS User Guide.
 	CustomDBEngineVersionManifest *string
 
@@ -127,7 +123,8 @@ type CreateCustomDBEngineVersionOutput struct {
 	// The name of the DB parameter group family for the database engine.
 	DBParameterGroupFamily *string
 
-	// The name of the Amazon S3 bucket that contains your database installation files.
+	// The name of the Amazon S3 bucket that contains your database installation
+	// files.
 	DatabaseInstallationFilesS3BucketName *string
 
 	// The Amazon S3 directory that contains the database installation files. If not
@@ -151,52 +148,50 @@ type CreateCustomDBEngineVersionOutput struct {
 	// The EC2 image
 	Image *types.CustomDBEngineVersionAMI
 
-	// The Amazon Web Services KMS key identifier for an encrypted CEV. This parameter
-	// is required for RDS Custom, but optional for Amazon RDS.
+	// The Amazon Web Services KMS key identifier for an encrypted CEV. This
+	// parameter is required for RDS Custom, but optional for Amazon RDS.
 	KMSKeyId *string
 
 	// The major engine version of the CEV.
 	MajorEngineVersion *string
 
-	// The status of the DB engine version, either available or deprecated.
+	// The status of the DB engine version, either available  or deprecated .
 	Status *string
 
 	// A list of the supported CA certificate identifiers. For more information, see
-	// Using SSL/TLS to encrypt a connection to a DB instance
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
-	// in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB
-	// cluster
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+	// Using SSL/TLS to encrypt a connection to a DB instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon RDS User Guide and Using SSL/TLS to encrypt a connection to a DB
+	// cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
 	// in the Amazon Aurora User Guide.
 	SupportedCACertificateIdentifiers []string
 
 	// A list of the character sets supported by this engine for the CharacterSetName
-	// parameter of the CreateDBInstance operation.
+	// parameter of the CreateDBInstance  operation.
 	SupportedCharacterSets []types.CharacterSet
 
 	// A list of the supported DB engine modes.
 	SupportedEngineModes []string
 
-	// A list of features supported by the DB engine. The supported features vary by DB
-	// engine and DB engine version. To determine the supported features for a specific
-	// DB engine and DB engine version using the CLI, use the following command: aws
-	// rds describe-db-engine-versions --engine --engine-version  For example, to
-	// determine the supported features for RDS for PostgreSQL version 13.3 using the
-	// CLI, use the following command: aws rds describe-db-engine-versions --engine
-	// postgres --engine-version 13.3 The supported features are listed under
+	// A list of features supported by the DB engine. The supported features vary by
+	// DB engine and DB engine version. To determine the supported features for a
+	// specific DB engine and DB engine version using the CLI, use the following
+	// command: aws rds describe-db-engine-versions --engine --engine-version  For
+	// example, to determine the supported features for RDS for PostgreSQL version 13.3
+	// using the CLI, use the following command: aws rds describe-db-engine-versions
+	// --engine postgres --engine-version 13.3 The supported features are listed under
 	// SupportedFeatureNames in the output.
 	SupportedFeatureNames []string
 
 	// A list of the character sets supported by the Oracle DB engine for the
-	// NcharCharacterSetName parameter of the CreateDBInstance operation.
+	// NcharCharacterSetName parameter of the CreateDBInstance  operation.
 	SupportedNcharCharacterSets []types.CharacterSet
 
-	// A list of the time zones supported by this engine for the Timezone parameter of
-	// the CreateDBInstance action.
+	// A list of the time zones supported by this engine for the Timezone parameter
+	// of the CreateDBInstance  action.
 	SupportedTimezones []types.Timezone
 
-	// A value that indicates whether the engine version supports Babelfish for Aurora
-	// PostgreSQL.
+	// A value that indicates whether the engine version supports Babelfish for
+	// Aurora PostgreSQL.
 	SupportsBabelfish bool
 
 	// A value that indicates whether the engine version supports rotating the server
@@ -211,16 +206,15 @@ type CreateCustomDBEngineVersionOutput struct {
 	// types specified by ExportableLogTypes to CloudWatch Logs.
 	SupportsLogExportsToCloudwatchLogs bool
 
-	// A value that indicates whether you can use Aurora parallel query with a specific
-	// DB engine version.
+	// A value that indicates whether you can use Aurora parallel query with a
+	// specific DB engine version.
 	SupportsParallelQuery bool
 
 	// Indicates whether the database engine version supports read replicas.
 	SupportsReadReplica bool
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
-	// the Amazon RDS User Guide.
+	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
+	// in the Amazon RDS User Guide.
 	TagList []types.Tag
 
 	// A list of engine versions that this database engine version can be upgraded to.

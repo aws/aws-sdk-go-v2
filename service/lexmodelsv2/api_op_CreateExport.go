@@ -17,8 +17,7 @@ import (
 // bot. You can create an archive that contains the complete definition of a bot,
 // or you can specify that the archive contain only the definition of a single bot
 // locale. For more information about exporting bots, and about the structure of
-// the export archive, see  Importing and exporting bots
-// (https://docs.aws.amazon.com/lexv2/latest/dg/importing-exporting.html)
+// the export archive, see Importing and exporting bots  (https://docs.aws.amazon.com/lexv2/latest/dg/importing-exporting.html)
 func (c *Client) CreateExport(ctx context.Context, params *CreateExportInput, optFns ...func(*Options)) (*CreateExportOutput, error) {
 	if params == nil {
 		params = &CreateExportInput{}
@@ -41,8 +40,8 @@ type CreateExportInput struct {
 	// This member is required.
 	FileFormat types.ImportExportFileFormat
 
-	// Specifies the type of resource to export, either a bot or a bot locale. You can
-	// only specify one type of resource to export.
+	// Specifies the type of resource to export, either a bot or a bot locale. You
+	// can only specify one type of resource to export.
 	//
 	// This member is required.
 	ResourceSpecification *types.ExportResourceSpecification
@@ -63,9 +62,8 @@ type CreateExportOutput struct {
 	// An identifier for a specific request to create an export.
 	ExportId *string
 
-	// The status of the export. When the status is Completed, you can use the
-	// DescribeExport
-	// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeExport.html)
+	// The status of the export. When the status is Completed , you can use the
+	// DescribeExport (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeExport.html)
 	// operation to get the pre-signed S3 URL link to your exported bot or bot locale.
 	ExportStatus types.ExportStatus
 

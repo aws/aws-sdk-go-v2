@@ -113,8 +113,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An exception indicating that the attached customer-owned (external) model threw
-// an exception when Amazon Fraud Detector invoked the model.
+// An exception indicating that the attached customer-owned (external) model
+// threw an exception when Amazon Fraud Detector invoked the model.
 type ResourceUnavailableException struct {
 	Message *string
 

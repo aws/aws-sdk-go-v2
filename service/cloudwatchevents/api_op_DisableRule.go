@@ -36,8 +36,8 @@ type DisableRuleInput struct {
 	// This member is required.
 	Name *string
 
-	// The name or ARN of the event bus associated with the rule. If you omit this, the
-	// default event bus is used.
+	// The name or ARN of the event bus associated with the rule. If you omit this,
+	// the default event bus is used.
 	EventBusName *string
 
 	noSmithyDocumentSerde

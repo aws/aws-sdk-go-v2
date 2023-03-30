@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes customized client branding. Client branding allows you to customize your
-// WorkSpace's client login portal. You can tailor your login portal company logo,
-// the support email address, support link, link to reset password, and a custom
-// message for users trying to sign in. After you delete your customized client
-// branding, your login portal reverts to the default client branding.
+// Deletes customized client branding. Client branding allows you to customize
+// your WorkSpace's client login portal. You can tailor your login portal company
+// logo, the support email address, support link, link to reset password, and a
+// custom message for users trying to sign in. After you delete your customized
+// client branding, your login portal reverts to the default client branding.
 func (c *Client) DeleteClientBranding(ctx context.Context, params *DeleteClientBrandingInput, optFns ...func(*Options)) (*DeleteClientBrandingOutput, error) {
 	if params == nil {
 		params = &DeleteClientBrandingInput{}

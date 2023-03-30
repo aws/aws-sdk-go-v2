@@ -200,10 +200,10 @@ type ReadSetActivationJobCompletedWaiterOptions struct {
 	// MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ReadSetActivationJobCompletedWaiter will use default max delay of 600
-	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
-	// MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ReadSetActivationJobCompletedWaiter will use default max delay of
+	// 600 seconds. Note that MaxDelay must resolve to value greater than or equal to
+	// the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -253,8 +253,8 @@ func (w *ReadSetActivationJobCompletedWaiter) Wait(ctx context.Context, params *
 	return err
 }
 
-// WaitForOutput calls the waiter function for ReadSetActivationJobCompleted waiter
-// and returns the output of the successful operation. The maxWaitDur is the
+// WaitForOutput calls the waiter function for ReadSetActivationJobCompleted
+// waiter and returns the output of the successful operation. The maxWaitDur is the
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *ReadSetActivationJobCompletedWaiter) WaitForOutput(ctx context.Context, params *GetReadSetActivationJobInput, maxWaitDur time.Duration, optFns ...func(*ReadSetActivationJobCompletedWaiterOptions)) (*GetReadSetActivationJobOutput, error) {

@@ -12,8 +12,7 @@ import (
 )
 
 // Updates a dynamic thing group. Requires permission to access the
-// UpdateDynamicThingGroup
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// UpdateDynamicThingGroup (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) UpdateDynamicThingGroup(ctx context.Context, params *UpdateDynamicThingGroupInput, optFns ...func(*Options)) (*UpdateDynamicThingGroupOutput, error) {
 	if params == nil {
@@ -46,14 +45,14 @@ type UpdateDynamicThingGroupInput struct {
 	ExpectedVersion *int64
 
 	// The dynamic thing group index to update. Currently one index is supported:
-	// AWS_Things.
+	// AWS_Things .
 	IndexName *string
 
 	// The dynamic thing group search query string to update.
 	QueryString *string
 
-	// The dynamic thing group query version to update. Currently one query version is
-	// supported: "2017-09-30". If not specified, the query version defaults to this
+	// The dynamic thing group query version to update. Currently one query version
+	// is supported: "2017-09-30". If not specified, the query version defaults to this
 	// value.
 	QueryVersion *string
 

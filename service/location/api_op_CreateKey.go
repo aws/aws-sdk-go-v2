@@ -13,12 +13,12 @@ import (
 	"time"
 )
 
-// Creates an API key resource in your Amazon Web Services account, which lets you
-// grant geo:GetMap* actions for Amazon Location Map resources to the API key
+// Creates an API key resource in your Amazon Web Services account, which lets
+// you grant geo:GetMap* actions for Amazon Location Map resources to the API key
 // bearer. The API keys feature is in preview. We may add, change, or remove
-// features before announcing general availability. For more information, see Using
-// API keys
-// (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html).
+// features before announcing general availability. For more information, see
+// Using API keys (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
+// .
 func (c *Client) CreateKey(ctx context.Context, params *CreateKeyInput, optFns ...func(*Options)) (*CreateKeyOutput, error) {
 	if params == nil {
 		params = &CreateKeyInput{}
@@ -37,12 +37,9 @@ func (c *Client) CreateKey(ctx context.Context, params *CreateKeyInput, optFns .
 type CreateKeyInput struct {
 
 	// A custom name for the API key resource. Requirements:
-	// - Contain only
-	// alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), periods (.), and
-	// underscores (_).
-	// - Must be a unique API key name.
-	// - No spaces allowed. For
-	// example, ExampleAPIKey.
+	//     - Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), periods (.), and underscores (_).
+	//     - Must be a unique API key name.
+	//     - No spaces allowed. For example, ExampleAPIKey .
 	//
 	// This member is required.
 	KeyName *string
@@ -55,28 +52,23 @@ type CreateKeyInput struct {
 	// An optional description for the API key resource.
 	Description *string
 
-	// The optional timestamp for when the API key resource will expire in  ISO 8601
-	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ. One of NoExpiry or ExpireTime must be set.
+	// The optional timestamp for when the API key resource will expire in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format: YYYY-MM-DDThh:mm:ss.sssZ . One of NoExpiry  or ExpireTime  must be set.
 	ExpireTime *time.Time
 
-	// Optionally set to true to set no expiration time for the API key. One of
-	// NoExpiry or ExpireTime must be set.
+	// Optionally set to true  to set no expiration time for the API key. One of
+	// NoExpiry or ExpireTime  must be set.
 	NoExpiry *bool
 
 	// Applies one or more tags to the map resource. A tag is a key-value pair that
 	// helps manage, identify, search, and filter your resources by labelling them.
-	// Format: "key" : "value" Restrictions:
-	// - Maximum 50 tags per resource
-	// - Each
-	// resource tag must be unique with a maximum of one value.
-	// - Maximum key length:
-	// 128 Unicode characters in UTF-8
-	// - Maximum value length: 256 Unicode characters
-	// in UTF-8
-	// - Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-	// characters: + - = . _ : / @.
-	// - Cannot use "aws:" as a prefix for a key.
+	// Format: "key" : "value"  Restrictions:
+	//     - Maximum 50 tags per resource
+	//     - Each resource tag must be unique with a maximum of one value.
+	//     - Maximum key length: 128 Unicode characters in UTF-8
+	//     - Maximum value length: 256 Unicode characters in UTF-8
+	//     - Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.
+	//     - Cannot use "aws:" as a prefix for a key.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -84,24 +76,22 @@ type CreateKeyInput struct {
 
 type CreateKeyOutput struct {
 
-	// The timestamp for when the API key resource was created in  ISO 8601
-	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ.
+	// The timestamp for when the API key resource was created in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format: YYYY-MM-DDThh:mm:ss.sssZ .
 	//
 	// This member is required.
 	CreateTime *time.Time
 
-	// The key value/string of an API key. This value is used when making API calls to
-	// authorize the call. For example, see GetMapGlyphs
-	// (https://docs.aws.amazon.com/location/latest/APIReference/API_GetMapGlyphs.html).
+	// The key value/string of an API key. This value is used when making API calls
+	// to authorize the call. For example, see GetMapGlyphs (https://docs.aws.amazon.com/location/latest/APIReference/API_GetMapGlyphs.html)
+	// .
 	//
 	// This member is required.
 	Key *string
 
 	// The Amazon Resource Name (ARN) for the API key resource. Used when you need to
 	// specify a resource across all Amazon Web Services.
-	// - Format example:
-	// arn:aws:geo:region:account-id:key/ExampleKey
+	//     - Format example: arn:aws:geo:region:account-id:key/ExampleKey
 	//
 	// This member is required.
 	KeyArn *string

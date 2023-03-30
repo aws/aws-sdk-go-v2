@@ -73,7 +73,7 @@ type DescribeTransformJobOutput struct {
 	TransformJobName *string
 
 	// The status of the transform job. If the transform job failed, the reason is
-	// returned in the FailureReason field.
+	// returned in the FailureReason  field.
 	//
 	// This member is required.
 	TransformJobStatus types.TransformJobStatus
@@ -87,23 +87,23 @@ type DescribeTransformJobOutput struct {
 	// The Amazon Resource Name (ARN) of the AutoML transform job.
 	AutoMLJobArn *string
 
-	// Specifies the number of records to include in a mini-batch for an HTTP inference
-	// request. A record is a single unit of input data that inference can be made on.
-	// For example, a single line in a CSV file is a record. To enable the batch
-	// strategy, you must set SplitType to Line, RecordIO, or TFRecord.
+	// Specifies the number of records to include in a mini-batch for an HTTP
+	// inference request. A record is a single unit of input data that inference can be
+	// made on. For example, a single line in a CSV file is a record. To enable the
+	// batch strategy, you must set SplitType  to Line , RecordIO , or TFRecord .
 	BatchStrategy types.BatchStrategy
 
 	// Configuration to control how SageMaker captures inference data.
 	DataCaptureConfig *types.BatchDataCaptureConfig
 
-	// The data structure used to specify the data to be used for inference in a batch
-	// transform job and to associate the data that is relevant to the prediction
+	// The data structure used to specify the data to be used for inference in a
+	// batch transform job and to associate the data that is relevant to the prediction
 	// results in the output. The input filter provided allows you to exclude input
 	// data that is not needed for inference in a batch transform job. The output
 	// filter provided allows you to include input data relevant to interpreting the
 	// predictions in the output from the job. For more information, see Associate
-	// Prediction Results with their Corresponding Input Records
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html).
+	// Prediction Results with their Corresponding Input Records (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html)
+	// .
 	DataProcessing *types.DataProcessing
 
 	// The environment variables to set in the Docker container. We support up to 16
@@ -112,21 +112,20 @@ type DescribeTransformJobOutput struct {
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
-	// - CreateProcessingJob
-	// -
-	// CreateTrainingJob
-	// - CreateTransformJob
+	//     - CreateProcessingJob
+	//     - CreateTrainingJob
+	//     - CreateTransformJob
 	ExperimentConfig *types.ExperimentConfig
 
-	// If the transform job failed, FailureReason describes why it failed. A transform
-	// job creates a log file, which includes error messages, and stores it as an
-	// Amazon S3 object. For more information, see Log Amazon SageMaker Events with
-	// Amazon CloudWatch
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/logging-cloudwatch.html).
+	// If the transform job failed, FailureReason describes why it failed. A
+	// transform job creates a log file, which includes error messages, and stores it
+	// as an Amazon S3 object. For more information, see Log Amazon SageMaker Events
+	// with Amazon CloudWatch (https://docs.aws.amazon.com/sagemaker/latest/dg/logging-cloudwatch.html)
+	// .
 	FailureReason *string
 
-	// The Amazon Resource Name (ARN) of the Amazon SageMaker Ground Truth labeling job
-	// that created the transform or training job.
+	// The Amazon Resource Name (ARN) of the Amazon SageMaker Ground Truth labeling
+	// job that created the transform or training job.
 	LabelingJobArn *string
 
 	// The maximum number of parallel requests on each instance node that can be
@@ -142,15 +141,15 @@ type DescribeTransformJobOutput struct {
 
 	// Indicates when the transform job has been completed, or has stopped or failed.
 	// You are billed for the time interval between this time and the value of
-	// TransformStartTime.
+	// TransformStartTime .
 	TransformEndTime *time.Time
 
 	// Identifies the Amazon S3 location where you want Amazon SageMaker to save the
 	// results from the transform job.
 	TransformOutput *types.TransformOutput
 
-	// Indicates when the transform job starts on ML instances. You are billed for the
-	// time interval between this time and the value of TransformEndTime.
+	// Indicates when the transform job starts on ML instances. You are billed for
+	// the time interval between this time and the value of TransformEndTime .
 	TransformStartTime *time.Time
 
 	// Metadata pertaining to the operation's result.
@@ -245,10 +244,10 @@ type TransformJobCompletedOrStoppedWaiterOptions struct {
 	// MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, TransformJobCompletedOrStoppedWaiter will use default max delay of 120
-	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
-	// MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, TransformJobCompletedOrStoppedWaiter will use default max delay of
+	// 120 seconds. Note that MaxDelay must resolve to value greater than or equal to
+	// the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

@@ -14,8 +14,8 @@ import (
 
 // Returns a list of destinations that you have created to receive RUM extended
 // metrics, for the specified app monitor. For more information about extended
-// metrics, see AddRumMetrics
-// (https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_AddRumMetrcs.html).
+// metrics, see AddRumMetrics (https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_AddRumMetrcs.html)
+// .
 func (c *Client) ListRumMetricsDestinations(ctx context.Context, params *ListRumMetricsDestinationsInput, optFns ...func(*Options)) (*ListRumMetricsDestinationsOutput, error) {
 	if params == nil {
 		params = &ListRumMetricsDestinationsInput{}
@@ -39,9 +39,9 @@ type ListRumMetricsDestinationsInput struct {
 	// This member is required.
 	AppMonitorName *string
 
-	// The maximum number of results to return in one operation. The default is 50. The
-	// maximum that you can specify is 100. To retrieve the remaining results, make
-	// another call with the returned NextToken value.
+	// The maximum number of results to return in one operation. The default is 50.
+	// The maximum that you can specify is 100. To retrieve the remaining results, make
+	// another call with the returned NextToken  value.
 	MaxResults *int32
 
 	// Use the token returned by the previous operation to request the next page of
@@ -53,8 +53,8 @@ type ListRumMetricsDestinationsInput struct {
 
 type ListRumMetricsDestinationsOutput struct {
 
-	// The list of CloudWatch RUM extended metrics destinations associated with the app
-	// monitor that you specified.
+	// The list of CloudWatch RUM extended metrics destinations associated with the
+	// app monitor that you specified.
 	Destinations []types.MetricDestinationSummary
 
 	// A token that you can use in a subsequent operation to retrieve the next set of
@@ -141,13 +141,13 @@ var _ ListRumMetricsDestinationsAPIClient = (*Client)(nil)
 // ListRumMetricsDestinationsPaginatorOptions is the paginator options for
 // ListRumMetricsDestinations
 type ListRumMetricsDestinationsPaginatorOptions struct {
-	// The maximum number of results to return in one operation. The default is 50. The
-	// maximum that you can specify is 100. To retrieve the remaining results, make
-	// another call with the returned NextToken value.
+	// The maximum number of results to return in one operation. The default is 50.
+	// The maximum that you can specify is 100. To retrieve the remaining results, make
+	// another call with the returned NextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides the details for the Security Hub administrator account for the current
-// member account. Can be used by both member accounts that are managed using
-// Organizations and accounts that were invited manually.
+// Provides the details for the Security Hub administrator account for the
+// current member account. Can be used by both member accounts that are managed
+// using Organizations and accounts that were invited manually.
 func (c *Client) GetAdministratorAccount(ctx context.Context, params *GetAdministratorAccountInput, optFns ...func(*Options)) (*GetAdministratorAccountOutput, error) {
 	if params == nil {
 		params = &GetAdministratorAccountInput{}

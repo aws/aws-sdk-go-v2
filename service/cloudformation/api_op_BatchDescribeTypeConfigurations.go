@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns configuration data for the specified CloudFormation extensions, from the
-// CloudFormation registry for the account and region. For more information, see
-// Configuring extensions at the account level
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
+// Returns configuration data for the specified CloudFormation extensions, from
+// the CloudFormation registry for the account and region. For more information,
+// see Configuring extensions at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
 // in the CloudFormation User Guide.
 func (c *Client) BatchDescribeTypeConfigurations(ctx context.Context, params *BatchDescribeTypeConfigurationsInput, optFns ...func(*Options)) (*BatchDescribeTypeConfigurationsOutput, error) {
 	if params == nil {
@@ -43,12 +42,12 @@ type BatchDescribeTypeConfigurationsInput struct {
 
 type BatchDescribeTypeConfigurationsOutput struct {
 
-	// A list of information concerning any errors generated during the setting of the
-	// specified configurations.
+	// A list of information concerning any errors generated during the setting of
+	// the specified configurations.
 	Errors []types.BatchDescribeTypeConfigurationsError
 
-	// A list of any of the specified extension configurations from the CloudFormation
-	// registry.
+	// A list of any of the specified extension configurations from the
+	// CloudFormation registry.
 	TypeConfigurations []types.TypeConfigurationDetails
 
 	// A list of any of the specified extension configurations that CloudFormation

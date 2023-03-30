@@ -48,13 +48,13 @@ type ListServicesInput struct {
 type ListServicesOutput struct {
 
 	// A list of service summary information records. In a paginated request, the
-	// request returns up to MaxResults records for each call.
+	// request returns up to MaxResults  records for each call.
 	//
 	// This member is required.
 	ServiceSummaryList []types.ServiceSummary
 
-	// The token that you can pass in a subsequent request to get the next result page.
-	// It's returned in a paginated request.
+	// The token that you can pass in a subsequent request to get the next result
+	// page. It's returned in a paginated request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -137,8 +137,8 @@ type ListServicesPaginatorOptions struct {
 	// retrieves all available results in a single response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

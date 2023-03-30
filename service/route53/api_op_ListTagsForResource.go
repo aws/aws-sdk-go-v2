@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists tags for one health check or hosted zone. For information about using tags
-// for cost allocation, see Using Cost Allocation Tags
-// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+// Lists tags for one health check or hosted zone. For information about using
+// tags for cost allocation, see Using Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
 // in the Billing and Cost Management User Guide.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
@@ -40,9 +39,8 @@ type ListTagsForResourceInput struct {
 	ResourceId *string
 
 	// The type of the resource.
-	// - The resource type for health checks is
-	// healthcheck.
-	// - The resource type for hosted zones is hostedzone.
+	//     - The resource type for health checks is healthcheck .
+	//     - The resource type for hosted zones is hostedzone .
 	//
 	// This member is required.
 	ResourceType types.TagResourceType
@@ -50,11 +48,11 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-// A complex type that contains information about the health checks or hosted zones
-// for which you want to list tags.
+// A complex type that contains information about the health checks or hosted
+// zones for which you want to list tags.
 type ListTagsForResourceOutput struct {
 
-	// A ResourceTagSet containing tags associated with the specified resource.
+	// A ResourceTagSet  containing tags associated with the specified resource.
 	//
 	// This member is required.
 	ResourceTagSet *types.ResourceTagSet

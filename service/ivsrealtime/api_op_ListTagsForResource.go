@@ -39,7 +39,7 @@ type ListTagsForResourceInput struct {
 type ListTagsForResourceOutput struct {
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value).
+	// (key:value) .
 	//
 	// This member is required.
 	Tags map[string]string

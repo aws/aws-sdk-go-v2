@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an application that is specified either by its application ID, name, or
-// ARN. All associated attribute groups and resources must be disassociated from it
-// before deleting an application.
+// Deletes an application that is specified either by its application ID, name,
+// or ARN. All associated attribute groups and resources must be disassociated from
+// it before deleting an application.
 func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicationInput, optFns ...func(*Options)) (*DeleteApplicationOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationInput{}

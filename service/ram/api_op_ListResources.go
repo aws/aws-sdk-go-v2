@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the resources that you added to a resource share or the resources that are
-// shared with you.
+// Lists the resources that you added to a resource share or the resources that
+// are shared with you.
 func (c *Client) ListResources(ctx context.Context, params *ListResourcesInput, optFns ...func(*Options)) (*ListResourcesOutput, error) {
 	if params == nil {
 		params = &ListResourcesInput{}
@@ -33,59 +33,56 @@ type ListResourcesInput struct {
 
 	// Specifies that you want to list only the resource shares that match the
 	// following:
-	// - SELF – resources that your account shares with other accounts
-	// -
-	// OTHER-ACCOUNTS – resources that other accounts share with your account
+	//     - SELF – resources that your account shares with other accounts
+	//     - OTHER-ACCOUNTS – resources that other accounts share with your account
 	//
 	// This member is required.
 	ResourceOwner types.ResourceOwner
 
-	// Specifies the total number of results that you want included on each page of the
-	// response. If you do not include this parameter, it defaults to a value that is
-	// specific to the operation. If additional items exist beyond the number you
+	// Specifies the total number of results that you want included on each page of
+	// the response. If you do not include this parameter, it defaults to a value that
+	// is specific to the operation. If additional items exist beyond the number you
 	// specify, the NextToken response element is returned with a value (not null).
-	// Include the specified value as the NextToken request parameter in the next call
-	// to the operation to get the next part of the results. Note that the service
+	// Include the specified value as the NextToken request parameter in the next
+	// call to the operation to get the next part of the results. Note that the service
 	// might return fewer results than the maximum even when there are more results
 	// available. You should check NextToken after every operation to ensure that you
 	// receive all of the results.
 	MaxResults *int32
 
 	// Specifies that you want to receive the next page of results. Valid only if you
-	// received a NextToken response in the previous request. If you did, it indicates
-	// that more output is available. Set this parameter to the value provided by the
-	// previous call's NextToken response to request the next page of results.
+	// received a NextToken response in the previous request. If you did, it
+	// indicates that more output is available. Set this parameter to the value
+	// provided by the previous call's NextToken response to request the next page of
+	// results.
 	NextToken *string
 
 	// Specifies that you want to list only the resource shares that are associated
 	// with the specified principal.
 	Principal *string
 
-	// Specifies that you want to list only the resource shares that include resources
-	// with the specified Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// Specifies that you want to list only the resource shares that include
+	// resources with the specified Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// .
 	ResourceArns []string
 
 	// Specifies that you want the results to include only resources that have the
 	// specified scope.
-	// - ALL – the results include both global and regional resources
-	// or resource types.
-	// - GLOBAL – the results include only global resources or
-	// resource types.
-	// - REGIONAL – the results include only regional resources or
-	// resource types.
+	//     - ALL – the results include both global and regional resources or resource types.
+	//     - GLOBAL – the results include only global resources or resource types.
+	//     - REGIONAL – the results include only regional resources or resource types.
 	//
-	// The default value is ALL.
+	// The default value is ALL .
 	ResourceRegionScope types.ResourceRegionScopeFilter
 
-	// Specifies that you want to list only resources in the resource shares identified
-	// by the specified Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// Specifies that you want to list only resources in the resource shares
+	// identified by the specified Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// .
 	ResourceShareArns []string
 
-	// Specifies that you want to list only the resource shares that include resources
-	// of the specified resource type. For valid values, query the ListResourceTypes
-	// operation.
+	// Specifies that you want to list only the resource shares that include
+	// resources of the specified resource type. For valid values, query the
+	// ListResourceTypes operation.
 	ResourceType *string
 
 	noSmithyDocumentSerde
@@ -93,11 +90,11 @@ type ListResourcesInput struct {
 
 type ListResourcesOutput struct {
 
-	// If present, this value indicates that more output is available than is included
-	// in the current response. Use this value in the NextToken request parameter in a
-	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken response element comes back as null. This
-	// indicates that this is the last page of results.
+	// If present, this value indicates that more output is available than is
+	// included in the current response. Use this value in the NextToken request
+	// parameter in a subsequent call to the operation to get the next part of the
+	// output. You should repeat this until the NextToken response element comes back
+	// as null . This indicates that this is the last page of results.
 	NextToken *string
 
 	// An array of objects that contain information about the resources.
@@ -181,19 +178,19 @@ var _ ListResourcesAPIClient = (*Client)(nil)
 
 // ListResourcesPaginatorOptions is the paginator options for ListResources
 type ListResourcesPaginatorOptions struct {
-	// Specifies the total number of results that you want included on each page of the
-	// response. If you do not include this parameter, it defaults to a value that is
-	// specific to the operation. If additional items exist beyond the number you
+	// Specifies the total number of results that you want included on each page of
+	// the response. If you do not include this parameter, it defaults to a value that
+	// is specific to the operation. If additional items exist beyond the number you
 	// specify, the NextToken response element is returned with a value (not null).
-	// Include the specified value as the NextToken request parameter in the next call
-	// to the operation to get the next part of the results. Note that the service
+	// Include the specified value as the NextToken request parameter in the next
+	// call to the operation to get the next part of the results. Note that the service
 	// might return fewer results than the maximum even when there are more results
 	// available. You should check NextToken after every operation to ensure that you
 	// receive all of the results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

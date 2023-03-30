@@ -14,8 +14,8 @@ import (
 // disconnects the ML storage volume from it. SageMaker preserves the ML storage
 // volume. SageMaker stops charging you for the ML compute instance when you call
 // StopNotebookInstance. To access data on the ML storage volume for a notebook
-// instance that has been terminated, call the StartNotebookInstance API.
-// StartNotebookInstance launches another ML compute instance, configures it, and
+// instance that has been terminated, call the StartNotebookInstance  API.
+// StartNotebookInstancelaunches another ML compute instance, configures it, and
 // attaches the preserved ML storage volume so you can continue your work.
 func (c *Client) StopNotebookInstance(ctx context.Context, params *StopNotebookInstanceInput, optFns ...func(*Options)) (*StopNotebookInstanceOutput, error) {
 	if params == nil {

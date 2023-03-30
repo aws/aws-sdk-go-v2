@@ -31,8 +31,8 @@ func (c *Client) GetTableVersions(ctx context.Context, params *GetTableVersionsI
 
 type GetTableVersionsInput struct {
 
-	// The database in the catalog in which the table resides. For Hive compatibility,
-	// this name is entirely lowercase.
+	// The database in the catalog in which the table resides. For Hive
+	// compatibility, this name is entirely lowercase.
 	//
 	// This member is required.
 	DatabaseName *string
@@ -146,8 +146,8 @@ type GetTableVersionsPaginatorOptions struct {
 	// The maximum number of table versions to return in one response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

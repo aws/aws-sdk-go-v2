@@ -41,23 +41,22 @@ type CreateApiInput struct {
 	// This member is required.
 	ProtocolType types.ProtocolType
 
-	// An API key selection expression. Supported only for WebSocket APIs. See API Key
-	// Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions).
+	// An API key selection expression. Supported only for WebSocket APIs. See API
+	// Key Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
+	// .
 	ApiKeySelectionExpression *string
 
-	// A CORS configuration. Supported only for HTTP APIs. See Configuring CORS
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html)
+	// A CORS configuration. Supported only for HTTP APIs. See Configuring CORS (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html)
 	// for more information.
 	CorsConfiguration *types.Cors
 
-	// This property is part of quick create. It specifies the credentials required for
-	// the integration, if any. For a Lambda integration, three options are available.
-	// To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource
-	// Name (ARN). To require that the caller's identity be passed through from the
-	// request, specify arn:aws:iam::*:user/*. To use resource-based permissions on
-	// supported AWS services, specify null. Currently, this property is not used for
-	// HTTP integrations. Supported only for HTTP APIs.
+	// This property is part of quick create. It specifies the credentials required
+	// for the integration, if any. For a Lambda integration, three options are
+	// available. To specify an IAM Role for API Gateway to assume, use the role's
+	// Amazon Resource Name (ARN). To require that the caller's identity be passed
+	// through from the request, specify arn:aws:iam::*:user/*. To use resource-based
+	// permissions on supported AWS services, specify null. Currently, this property is
+	// not used for HTTP integrations. Supported only for HTTP APIs.
 	CredentialsArn *string
 
 	// The description of the API.
@@ -70,15 +69,15 @@ type CreateApiInput struct {
 	// endpoint.
 	DisableExecuteApiEndpoint bool
 
-	// Avoid validating models when creating a deployment. Supported only for WebSocket
-	// APIs.
+	// Avoid validating models when creating a deployment. Supported only for
+	// WebSocket APIs.
 	DisableSchemaValidation bool
 
 	// This property is part of quick create. If you don't specify a routeKey, a
-	// default route of $default is created. The $default route acts as a catch-all for
-	// any request made to your API, for a particular stage. The $default route key
-	// can't be modified. You can add routes after creating the API, and you can update
-	// the route keys of additional routes. Supported only for HTTP APIs.
+	// default route of $default is created. The $default route acts as a catch-all
+	// for any request made to your API, for a particular stage. The $default route
+	// key can't be modified. You can add routes after creating the API, and you can
+	// update the route keys of additional routes. Supported only for HTTP APIs.
 	RouteKey *string
 
 	// The route selection expression for the API. For HTTP APIs, the
@@ -106,22 +105,22 @@ type CreateApiInput struct {
 
 type CreateApiOutput struct {
 
-	// The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The
-	// stage name is typically appended to this URI to form a complete path to a
+	// The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com.
+	// The stage name is typically appended to this URI to form a complete path to a
 	// deployed API stage.
 	ApiEndpoint *string
 
-	// Specifies whether an API is managed by API Gateway. You can't update or delete a
-	// managed API by using API Gateway. A managed API can be deleted only through the
-	// tooling or service that created it.
+	// Specifies whether an API is managed by API Gateway. You can't update or delete
+	// a managed API by using API Gateway. A managed API can be deleted only through
+	// the tooling or service that created it.
 	ApiGatewayManaged bool
 
 	// The API ID.
 	ApiId *string
 
-	// An API key selection expression. Supported only for WebSocket APIs. See API Key
-	// Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions).
+	// An API key selection expression. Supported only for WebSocket APIs. See API
+	// Key Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
+	// .
 	ApiKeySelectionExpression *string
 
 	// A CORS configuration. Supported only for HTTP APIs.
@@ -140,8 +139,8 @@ type CreateApiOutput struct {
 	// endpoint.
 	DisableExecuteApiEndpoint bool
 
-	// Avoid validating models when creating a deployment. Supported only for WebSocket
-	// APIs.
+	// Avoid validating models when creating a deployment. Supported only for
+	// WebSocket APIs.
 	DisableSchemaValidation bool
 
 	// The validation information during API import. This may include particular

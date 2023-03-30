@@ -35,14 +35,14 @@ type CreateHarvestJobInput struct {
 	// This member is required.
 	EndTime *string
 
-	// The ID of the HarvestJob. The ID must be unique within the region and it cannot
-	// be changed after the HarvestJob is submitted
+	// The ID of the HarvestJob. The ID must be unique within the region and it
+	// cannot be changed after the HarvestJob is submitted
 	//
 	// This member is required.
 	Id *string
 
-	// The ID of the OriginEndpoint that the HarvestJob will harvest from. This cannot
-	// be changed after the HarvestJob is submitted.
+	// The ID of the OriginEndpoint that the HarvestJob will harvest from. This
+	// cannot be changed after the HarvestJob is submitted.
 	//
 	// This member is required.
 	OriginEndpointId *string
@@ -75,12 +75,12 @@ type CreateHarvestJobOutput struct {
 	// The end of the time-window which will be harvested.
 	EndTime *string
 
-	// The ID of the HarvestJob. The ID must be unique within the region and it cannot
-	// be changed after the HarvestJob is submitted.
+	// The ID of the HarvestJob. The ID must be unique within the region and it
+	// cannot be changed after the HarvestJob is submitted.
 	Id *string
 
-	// The ID of the OriginEndpoint that the HarvestJob will harvest from. This cannot
-	// be changed after the HarvestJob is submitted.
+	// The ID of the OriginEndpoint that the HarvestJob will harvest from. This
+	// cannot be changed after the HarvestJob is submitted.
 	OriginEndpointId *string
 
 	// Configuration parameters for where in an S3 bucket to place the harvested
@@ -90,8 +90,8 @@ type CreateHarvestJobOutput struct {
 	// The start of the time-window which will be harvested.
 	StartTime *string
 
-	// The current status of the HarvestJob. Consider setting up a CloudWatch Event to
-	// listen for HarvestJobs as they succeed or fail. In the event of failure, the
+	// The current status of the HarvestJob. Consider setting up a CloudWatch Event
+	// to listen for HarvestJobs as they succeed or fail. In the event of failure, the
 	// CloudWatch Event will include an explanation of why the HarvestJob failed.
 	Status types.Status
 

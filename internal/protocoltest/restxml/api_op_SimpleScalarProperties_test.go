@@ -322,11 +322,11 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 				DoubleValue:       ptr.Float64(6.5),
 			},
 		},
-		// Serializes string with escaping. This validates the three escape types: literal,
-		// decimal and hexadecimal. It also validates that unescaping properly handles the
-		// case where unescaping an & produces a newly formed escape sequence (this should
-		// not be re-unescaped). Servers may produce different output, this test is
-		// designed different unescapes clients must handle
+		// Serializes string with escaping. This validates the three escape types:
+		// literal, decimal and hexadecimal. It also validates that unescaping properly
+		// handles the case where unescaping an & produces a newly formed escape sequence
+		// (this should not be re-unescaped). Servers may produce different output, this
+		// test is designed different unescapes clients must handle
 		"SimpleScalarPropertiesComplexEscapes": {
 			StatusCode: 200,
 			Header: http.Header{

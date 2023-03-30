@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of import tasks for your account, including status information,
-// times, IDs, the Amazon S3 Object URL for the import file, and more.
+// Returns an array of import tasks for your account, including status
+// information, times, IDs, the Amazon S3 Object URL for the import file, and more.
 func (c *Client) DescribeImportTasks(ctx context.Context, params *DescribeImportTasksInput, optFns ...func(*Options)) (*DescribeImportTasksOutput, error) {
 	if params == nil {
 		params = &DescribeImportTasksInput{}
@@ -32,7 +32,7 @@ func (c *Client) DescribeImportTasks(ctx context.Context, params *DescribeImport
 type DescribeImportTasksInput struct {
 
 	// An array of name-value pairs that you provide to filter the results for the
-	// DescribeImportTask request to a specific subset of results. Currently, wildcard
+	// DescribeImportTaskrequest to a specific subset of results. Currently, wildcard
 	// values aren't supported for filters.
 	Filters []types.ImportTaskFilter
 
@@ -120,8 +120,8 @@ func (c *Client) addOperationDescribeImportTasksMiddlewares(stack *middleware.St
 	return nil
 }
 
-// DescribeImportTasksAPIClient is a client that implements the DescribeImportTasks
-// operation.
+// DescribeImportTasksAPIClient is a client that implements the
+// DescribeImportTasks operation.
 type DescribeImportTasksAPIClient interface {
 	DescribeImportTasks(context.Context, *DescribeImportTasksInput, ...func(*Options)) (*DescribeImportTasksOutput, error)
 }
@@ -134,8 +134,8 @@ type DescribeImportTasksPaginatorOptions struct {
 	// The maximum number of results that you want this request to return, up to 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -32,8 +32,8 @@ func (c *Client) CreateResolverRule(ctx context.Context, params *CreateResolverR
 type CreateResolverRuleInput struct {
 
 	// A unique string that identifies the request and that allows failed requests to
-	// be retried without the risk of running the operation twice. CreatorRequestId can
-	// be any unique string, for example, a date/time stamp.
+	// be retried without the risk of running the operation twice. CreatorRequestId
+	// can be any unique string, for example, a date/time stamp.
 	//
 	// This member is required.
 	CreatorRequestId *string
@@ -51,9 +51,10 @@ type CreateResolverRuleInput struct {
 	// queries for a domain to your network and you want Resolver to process queries
 	// for a subdomain of that domain, specify SYSTEM. For example, to forward DNS
 	// queries for example.com to resolvers on your network, you create a rule and
-	// specify FORWARD for RuleType. To then have Resolver process queries for
-	// apex.example.com, you create a rule and specify SYSTEM for RuleType. Currently,
-	// only Resolver can create rules that have a value of RECURSIVE for RuleType.
+	// specify FORWARD  for RuleType. To then have Resolver process queries for
+	// apex.example.com, you create a rule and specify SYSTEM  for RuleType.
+	// Currently, only Resolver can create rules that have a value of RECURSIVE  for
+	// RuleType .
 	//
 	// This member is required.
 	RuleType types.RuleTypeOption
@@ -63,15 +64,15 @@ type CreateResolverRuleInput struct {
 	Name *string
 
 	// The ID of the outbound Resolver endpoint that you want to use to route DNS
-	// queries to the IP addresses that you specify in TargetIps.
+	// queries to the IP addresses that you specify in TargetIps .
 	ResolverEndpointId *string
 
 	// A list of the tag keys and values that you want to associate with the endpoint.
 	Tags []types.Tag
 
 	// The IPs that you want Resolver to forward DNS queries to. You can specify only
-	// IPv4 addresses. Separate IP addresses with a space. TargetIps is available only
-	// when the value of Rule type is FORWARD.
+	// IPv4 addresses. Separate IP addresses with a space. TargetIps is available
+	// only when the value of Rule type  is FORWARD .
 	TargetIps []types.TargetAddress
 
 	noSmithyDocumentSerde

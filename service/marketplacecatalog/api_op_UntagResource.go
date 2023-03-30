@@ -10,10 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a tag or list of tags from a resource (either an entity
-// (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities)
-// or change set
-// (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets)).
+// Removes a tag or list of tags from a resource (either an entity (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities)
+// or change set (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets)
+// ).
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -37,8 +36,8 @@ type UntagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// Required. A list of key names of tags to be removed. Number of strings allowed:
-	// 0-256.
+	// Required. A list of key names of tags to be removed. Number of strings
+	// allowed: 0-256.
 	//
 	// This member is required.
 	TagKeys []string

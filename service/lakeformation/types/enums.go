@@ -52,8 +52,8 @@ const (
 	DataLakeResourceTypeLfTagPolicyTable    DataLakeResourceType = "LF_TAG_POLICY_TABLE"
 )
 
-// Values returns all known values for DataLakeResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DataLakeResourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DataLakeResourceType) Values() []DataLakeResourceType {
 	return []DataLakeResourceType{
@@ -214,9 +214,9 @@ const (
 	ResourceTypeTable    ResourceType = "TABLE"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"DATABASE",
@@ -257,9 +257,9 @@ const (
 	TransactionStatusFilterAborted   TransactionStatusFilter = "ABORTED"
 )
 
-// Values returns all known values for TransactionStatusFilter. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TransactionStatusFilter. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransactionStatusFilter) Values() []TransactionStatusFilter {
 	return []TransactionStatusFilter{
 		"ALL",

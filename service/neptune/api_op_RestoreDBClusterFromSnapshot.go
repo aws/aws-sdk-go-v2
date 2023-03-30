@@ -37,12 +37,9 @@ type RestoreDBClusterFromSnapshotInput struct {
 
 	// The name of the DB cluster to create from the DB snapshot or DB cluster
 	// snapshot. This parameter isn't case-sensitive. Constraints:
-	// - Must contain from
-	// 1 to 63 letters, numbers, or hyphens
-	// - First character must be a letter
-	// - Cannot
-	// end with a hyphen or contain two consecutive hyphens
-	//
+	//     - Must contain from 1 to 63 letters, numbers, or hyphens
+	//     - First character must be a letter
+	//     - Cannot end with a hyphen or contain two consecutive hyphens
 	// Example: my-snapshot-id
 	//
 	// This member is required.
@@ -58,7 +55,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// can use either the name or the Amazon Resource Name (ARN) to specify a DB
 	// cluster snapshot. However, you can use only the ARN to specify a DB snapshot.
 	// Constraints:
-	// - Must match the identifier of an existing Snapshot.
+	//     - Must match the identifier of an existing Snapshot.
 	//
 	// This member is required.
 	SnapshotIdentifier *string
@@ -67,14 +64,13 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// cluster can be created in.
 	AvailabilityZones []string
 
-	// If set to true, tags are copied to any snapshot of the restored DB cluster that
-	// is created.
+	// If set to true, tags are copied to any snapshot of the restored DB cluster
+	// that is created.
 	CopyTagsToSnapshot *bool
 
-	// The name of the DB cluster parameter group to associate with the new DB cluster.
-	// Constraints:
-	// - If supplied, must match the name of an existing
-	// DBClusterParameterGroup.
+	// The name of the DB cluster parameter group to associate with the new DB
+	// cluster. Constraints:
+	//     - If supplied, must match the name of an existing DBClusterParameterGroup.
 	DBClusterParameterGroupName *string
 
 	// The name of the DB subnet group to use for the new DB cluster. Constraints: If
@@ -90,8 +86,8 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// deletion protection is disabled.
 	DeletionProtection *bool
 
-	// The list of logs that the restored DB cluster is to export to Amazon CloudWatch
-	// Logs.
+	// The list of logs that the restored DB cluster is to export to Amazon
+	// CloudWatch Logs.
 	EnableCloudwatchLogsExports []string
 
 	// True to enable mapping of Amazon Identity and Access Management (IAM) accounts
@@ -101,32 +97,26 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// The version of the database engine to use for the new DB cluster.
 	EngineVersion *string
 
-	// The Amazon KMS key identifier to use when restoring an encrypted DB cluster from
-	// a DB snapshot or DB cluster snapshot. The KMS key identifier is the Amazon
+	// The Amazon KMS key identifier to use when restoring an encrypted DB cluster
+	// from a DB snapshot or DB cluster snapshot. The KMS key identifier is the Amazon
 	// Resource Name (ARN) for the KMS encryption key. If you are restoring a DB
 	// cluster with the same Amazon account that owns the KMS encryption key used to
 	// encrypt the new DB cluster, then you can use the KMS key alias instead of the
 	// ARN for the KMS encryption key. If you do not specify a value for the KmsKeyId
 	// parameter, then the following will occur:
-	// - If the DB snapshot or DB cluster
-	// snapshot in SnapshotIdentifier is encrypted, then the restored DB cluster is
-	// encrypted using the KMS key that was used to encrypt the DB snapshot or DB
-	// cluster snapshot.
-	// - If the DB snapshot or DB cluster snapshot in
-	// SnapshotIdentifier is not encrypted, then the restored DB cluster is not
-	// encrypted.
+	//     - If the DB snapshot or DB cluster snapshot in SnapshotIdentifier is encrypted, then the restored DB cluster is encrypted using the KMS key that was used to encrypt the DB snapshot or DB cluster snapshot.
+	//     - If the DB snapshot or DB cluster snapshot in SnapshotIdentifier is not encrypted, then the restored DB cluster is not encrypted.
 	KmsKeyId *string
 
 	// (Not supported by Neptune)
 	OptionGroupName *string
 
 	// The port number on which the new DB cluster accepts connections. Constraints:
-	// Value must be 1150-65535 Default: The same port as the original DB cluster.
+	// Value must be 1150-65535  Default: The same port as the original DB cluster.
 	Port *int32
 
-	// Contains the scaling configuration of a Neptune Serverless DB cluster. For more
-	// information, see Using Amazon Neptune Serverless
-	// (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html)
+	// Contains the scaling configuration of a Neptune Serverless DB cluster. For
+	// more information, see Using Amazon Neptune Serverless (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html)
 	// in the Amazon Neptune User Guide.
 	ServerlessV2ScalingConfiguration *types.ServerlessV2ScalingConfiguration
 
@@ -141,8 +131,8 @@ type RestoreDBClusterFromSnapshotInput struct {
 
 type RestoreDBClusterFromSnapshotOutput struct {
 
-	// Contains the details of an Amazon Neptune DB cluster. This data type is used as
-	// a response element in the DescribeDBClusters action.
+	// Contains the details of an Amazon Neptune DB cluster. This data type is used
+	// as a response element in the DescribeDBClusters  action.
 	DBCluster *types.DBCluster
 
 	// Metadata pertaining to the operation's result.

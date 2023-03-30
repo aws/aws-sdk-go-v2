@@ -65,9 +65,9 @@ const (
 	ChangeActionRemove ChangeAction = "REMOVE"
 )
 
-// Values returns all known values for ChangeAction. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChangeAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeAction) Values() []ChangeAction {
 	return []ChangeAction{
 		"ADD",
@@ -112,9 +112,9 @@ const (
 	ChangeStatusFailed     ChangeStatus = "FAILED"
 )
 
-// Values returns all known values for ChangeStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChangeStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeStatus) Values() []ChangeStatus {
 	return []ChangeStatus{
 		"NOT_STARTED",
@@ -224,9 +224,10 @@ const (
 	ConnectPeerAssociationStateDeleted   ConnectPeerAssociationState = "DELETED"
 )
 
-// Values returns all known values for ConnectPeerAssociationState. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ConnectPeerAssociationState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ConnectPeerAssociationState) Values() []ConnectPeerAssociationState {
 	return []ConnectPeerAssociationState{
 		"PENDING",
@@ -331,9 +332,9 @@ const (
 	DeviceStateUpdating  DeviceState = "UPDATING"
 )
 
-// Values returns all known values for DeviceState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DeviceState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DeviceState) Values() []DeviceState {
 	return []DeviceState{
 		"PENDING",
@@ -375,8 +376,8 @@ const (
 	LinkAssociationStateDeleted   LinkAssociationState = "DELETED"
 )
 
-// Values returns all known values for LinkAssociationState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for LinkAssociationState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (LinkAssociationState) Values() []LinkAssociationState {
 	return []LinkAssociationState{
@@ -397,9 +398,9 @@ const (
 	LinkStateUpdating  LinkState = "UPDATING"
 )
 
-// Values returns all known values for LinkState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for LinkState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (LinkState) Values() []LinkState {
 	return []LinkState{
 		"PENDING",
@@ -419,9 +420,9 @@ const (
 	PeeringStateDeleting  PeeringState = "DELETING"
 )
 
-// Values returns all known values for PeeringState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PeeringState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PeeringState) Values() []PeeringState {
 	return []PeeringState{
 		"CREATING",
@@ -438,9 +439,9 @@ const (
 	PeeringTypeTransitGateway PeeringType = "TRANSIT_GATEWAY"
 )
 
-// Values returns all known values for PeeringType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PeeringType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PeeringType) Values() []PeeringType {
 	return []PeeringType{
 		"TRANSIT_GATEWAY",
@@ -464,8 +465,8 @@ const (
 	RouteAnalysisCompletionReasonCodeNoDestinationArnProvided                         RouteAnalysisCompletionReasonCode = "NO_DESTINATION_ARN_PROVIDED"
 )
 
-// Values returns all known values for RouteAnalysisCompletionReasonCode. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for RouteAnalysisCompletionReasonCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (RouteAnalysisCompletionReasonCode) Values() []RouteAnalysisCompletionReasonCode {
@@ -492,8 +493,8 @@ const (
 	RouteAnalysisCompletionResultCodeNotConnected RouteAnalysisCompletionResultCode = "NOT_CONNECTED"
 )
 
-// Values returns all known values for RouteAnalysisCompletionResultCode. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for RouteAnalysisCompletionResultCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (RouteAnalysisCompletionResultCode) Values() []RouteAnalysisCompletionResultCode {
@@ -567,9 +568,9 @@ const (
 	RouteTypeStatic     RouteType = "STATIC"
 )
 
-// Values returns all known values for RouteType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for RouteType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (RouteType) Values() []RouteType {
 	return []RouteType{
 		"PROPAGATED",
@@ -587,9 +588,9 @@ const (
 	SiteStateUpdating  SiteState = "UPDATING"
 )
 
-// Values returns all known values for SiteState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SiteState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SiteState) Values() []SiteState {
 	return []SiteState{
 		"PENDING",

@@ -11,12 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Resolver endpoint. There are two types of Resolver endpoints, inbound
-// and outbound:
-// - An inbound Resolver endpoint forwards DNS queries to the DNS
-// service for a VPC from your network.
-// - An outbound Resolver endpoint forwards
-// DNS queries from the DNS service for a VPC to your network.
+// Creates a Resolver endpoint. There are two types of Resolver endpoints,
+// inbound and outbound:
+//   - An inbound Resolver endpoint forwards DNS queries to the DNS service for a VPC from your network.
+//   - An outbound Resolver endpoint forwards DNS queries from the DNS service for a VPC to your network.
 func (c *Client) CreateResolverEndpoint(ctx context.Context, params *CreateResolverEndpointInput, optFns ...func(*Options)) (*CreateResolverEndpointOutput, error) {
 	if params == nil {
 		params = &CreateResolverEndpointInput{}
@@ -35,17 +33,15 @@ func (c *Client) CreateResolverEndpoint(ctx context.Context, params *CreateResol
 type CreateResolverEndpointInput struct {
 
 	// A unique string that identifies the request and that allows failed requests to
-	// be retried without the risk of running the operation twice. CreatorRequestId can
-	// be any unique string, for example, a date/time stamp.
+	// be retried without the risk of running the operation twice. CreatorRequestId
+	// can be any unique string, for example, a date/time stamp.
 	//
 	// This member is required.
 	CreatorRequestId *string
 
 	// Specify the applicable value:
-	// - INBOUND: Resolver forwards DNS queries to the
-	// DNS service for a VPC from your network
-	// - OUTBOUND: Resolver forwards DNS
-	// queries from the DNS service for a VPC to your network
+	//     - INBOUND : Resolver forwards DNS queries to the DNS service for a VPC from your network
+	//     - OUTBOUND : Resolver forwards DNS queries from the DNS service for a VPC to your network
 	//
 	// This member is required.
 	Direction types.ResolverEndpointDirection
@@ -57,11 +53,11 @@ type CreateResolverEndpointInput struct {
 	// This member is required.
 	IpAddresses []types.IpAddressRequest
 
-	// The ID of one or more security groups that you want to use to control access to
-	// this VPC. The security group that you specify must include one or more inbound
-	// rules (for inbound Resolver endpoints) or outbound rules (for outbound Resolver
-	// endpoints). Inbound and outbound rules must allow TCP and UDP access. For
-	// inbound access, open port 53. For outbound access, open the port that you're
+	// The ID of one or more security groups that you want to use to control access
+	// to this VPC. The security group that you specify must include one or more
+	// inbound rules (for inbound Resolver endpoints) or outbound rules (for outbound
+	// Resolver endpoints). Inbound and outbound rules must allow TCP and UDP access.
+	// For inbound access, open port 53. For outbound access, open the port that you're
 	// using for DNS queries on your network.
 	//
 	// This member is required.

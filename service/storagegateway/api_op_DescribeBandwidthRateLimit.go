@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the bandwidth rate limits of a gateway. By default, these limits are not
-// set, which means no bandwidth rate limiting is in effect. This operation is
+// Returns the bandwidth rate limits of a gateway. By default, these limits are
+// not set, which means no bandwidth rate limiting is in effect. This operation is
 // supported only for the stored volume, cached volume, and tape gateway types. To
 // describe bandwidth rate limits for S3 file gateways, use
 // DescribeBandwidthRateLimitSchedule. This operation returns a value for a
@@ -37,8 +37,8 @@ func (c *Client) DescribeBandwidthRateLimit(ctx context.Context, params *Describ
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway.
 type DescribeBandwidthRateLimitInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -53,12 +53,12 @@ type DescribeBandwidthRateLimitOutput struct {
 	// not appear in the response if the download rate limit is not set.
 	AverageDownloadRateLimitInBitsPerSec *int64
 
-	// The average upload bandwidth rate limit in bits per second. This field does not
-	// appear in the response if the upload rate limit is not set.
+	// The average upload bandwidth rate limit in bits per second. This field does
+	// not appear in the response if the upload rate limit is not set.
 	AverageUploadRateLimitInBitsPerSec *int64
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

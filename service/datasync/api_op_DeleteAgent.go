@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an agent. To specify which agent to delete, use the Amazon Resource Name
-// (ARN) of the agent in your request. The operation disassociates the agent from
-// your Amazon Web Services account. However, it doesn't delete the agent virtual
-// machine (VM) from your on-premises environment.
+// Deletes an agent. To specify which agent to delete, use the Amazon Resource
+// Name (ARN) of the agent in your request. The operation disassociates the agent
+// from your Amazon Web Services account. However, it doesn't delete the agent
+// virtual machine (VM) from your on-premises environment.
 func (c *Client) DeleteAgent(ctx context.Context, params *DeleteAgentInput, optFns ...func(*Options)) (*DeleteAgentOutput, error) {
 	if params == nil {
 		params = &DeleteAgentInput{}

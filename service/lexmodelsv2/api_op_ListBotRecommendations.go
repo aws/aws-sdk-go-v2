@@ -45,8 +45,8 @@ type ListBotRecommendationsInput struct {
 	// This member is required.
 	LocaleId *string
 
-	// The maximum number of bot recommendations to return in each page of results. If
-	// there are fewer results than the max page size, only the actual number of
+	// The maximum number of bot recommendations to return in each page of results.
+	// If there are fewer results than the max page size, only the actual number of
 	// results are returned.
 	MaxResults *int32
 
@@ -75,8 +75,8 @@ type ListBotRecommendationsOutput struct {
 	// The identifier of the language and locale of the bot recommendation list.
 	LocaleId *string
 
-	// A token that indicates whether there are more results to return in a response to
-	// the ListBotRecommendations operation. If the nextToken field is present, you
+	// A token that indicates whether there are more results to return in a response
+	// to the ListBotRecommendations operation. If the nextToken field is present, you
 	// send the contents as the nextToken parameter of a ListBotRecommendations
 	// operation request to get the next page of results.
 	NextToken *string
@@ -161,13 +161,13 @@ var _ ListBotRecommendationsAPIClient = (*Client)(nil)
 // ListBotRecommendationsPaginatorOptions is the paginator options for
 // ListBotRecommendations
 type ListBotRecommendationsPaginatorOptions struct {
-	// The maximum number of bot recommendations to return in each page of results. If
-	// there are fewer results than the max page size, only the actual number of
+	// The maximum number of bot recommendations to return in each page of results.
+	// If there are fewer results than the max page size, only the actual number of
 	// results are returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -180,7 +180,8 @@ type ListBotRecommendationsPaginator struct {
 	firstPage bool
 }
 
-// NewListBotRecommendationsPaginator returns a new ListBotRecommendationsPaginator
+// NewListBotRecommendationsPaginator returns a new
+// ListBotRecommendationsPaginator
 func NewListBotRecommendationsPaginator(client ListBotRecommendationsAPIClient, params *ListBotRecommendationsInput, optFns ...func(*ListBotRecommendationsPaginatorOptions)) *ListBotRecommendationsPaginator {
 	if params == nil {
 		params = &ListBotRecommendationsInput{}

@@ -11,7 +11,7 @@ import (
 )
 
 // Updates the name and description of a routing profile. The request accepts the
-// following data in JSON format. At least Name or Description must be provided.
+// following data in JSON format. At least Name  or Description  must be provided.
 func (c *Client) UpdateRoutingProfileName(ctx context.Context, params *UpdateRoutingProfileNameInput, optFns ...func(*Options)) (*UpdateRoutingProfileNameOutput, error) {
 	if params == nil {
 		params = &UpdateRoutingProfileNameInput{}
@@ -29,8 +29,7 @@ func (c *Client) UpdateRoutingProfileName(ctx context.Context, params *UpdateRou
 
 type UpdateRoutingProfileNameInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.

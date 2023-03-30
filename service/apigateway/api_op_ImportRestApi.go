@@ -40,20 +40,21 @@ type ImportRestApiInput struct {
 	// This member is required.
 	Body []byte
 
-	// A query parameter to indicate whether to rollback the API creation (true) or not
-	// (false) when a warning is encountered. The default value is false.
+	// A query parameter to indicate whether to rollback the API creation ( true) or
+	// not ( false ) when a warning is encountered. The default value is false .
 	FailOnWarnings bool
 
 	// A key-value map of context-specific query string parameters specifying the
 	// behavior of different API importing operations. The following shows
 	// operation-specific parameters and their supported values. To exclude
-	// DocumentationParts from the import, set parameters as ignore=documentation. To
-	// configure the endpoint type, set parameters as endpointConfigurationTypes=EDGE,
-	// endpointConfigurationTypes=REGIONAL, or endpointConfigurationTypes=PRIVATE. The
-	// default endpoint type is EDGE. To handle imported basepath, set parameters as
-	// basepath=ignore, basepath=prepend or basepath=split. For example, the AWS CLI
-	// command to exclude documentation from the imported API is: The AWS CLI command
-	// to set the regional endpoint on the imported API is:
+	// DocumentationParts from the import, set parameters  as ignore=documentation.
+	// To configure the endpoint type, set parameters  as
+	// endpointConfigurationTypes=EDGE , endpointConfigurationTypes=REGIONAL , or
+	// endpointConfigurationTypes=PRIVATE . The default endpoint type is EDGE. To
+	// handle imported basepath , set parameters  as basepath=ignore ,
+	// basepath=prepend or basepath=split. For example, the AWS CLI command to
+	// exclude documentation from the imported API is: The AWS CLI command to set the
+	// regional endpoint on the imported API is:
 	Parameters map[string]string
 
 	noSmithyDocumentSerde
@@ -62,14 +63,14 @@ type ImportRestApiInput struct {
 // Represents a REST API.
 type ImportRestApiOutput struct {
 
-	// The source of the API key for metering requests according to a usage plan. Valid
-	// values are: >HEADER to read the API key from the X-API-Key header of a request.
-	// AUTHORIZER to read the API key from the UsageIdentifierKey from a custom
-	// authorizer.
+	// The source of the API key for metering requests according to a usage plan.
+	// Valid values are: > HEADER  to read the API key from the X-API-Key header of a
+	// request. AUTHORIZER  to read the API key from the UsageIdentifierKey from a
+	// custom authorizer.
 	ApiKeySource types.ApiKeySourceType
 
-	// The list of binary media types supported by the RestApi. By default, the RestApi
-	// supports only UTF-8-encoded text payloads.
+	// The list of binary media types supported by the RestApi. By default, the
+	// RestApi supports only UTF-8-encoded text payloads.
 	BinaryMediaTypes []string
 
 	// The timestamp when the API was created.
@@ -80,7 +81,7 @@ type ImportRestApiOutput struct {
 
 	// Specifies whether clients can invoke your API by using the default execute-api
 	// endpoint. By default, clients can invoke your API with the default
-	// https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that
+	// https://{api_id}.execute-api.{region}.amazonaws.comendpoint. To require that
 	// clients use a custom domain name to invoke your API, disable the default
 	// endpoint.
 	DisableExecuteApiEndpoint bool
@@ -93,10 +94,10 @@ type ImportRestApiOutput struct {
 	// Gateway.
 	Id *string
 
-	// A nullable integer that is used to enable compression (with non-negative between
-	// 0 and 10485760 (10M) bytes, inclusive) or disable compression (with a null
-	// value) on an API. When compression is enabled, compression or decompression is
-	// not applied on the payload if the payload size is smaller than this value.
+	// A nullable integer that is used to enable compression (with non-negative
+	// between 0 and 10485760 (10M) bytes, inclusive) or disable compression (with a
+	// null value) on an API. When compression is enabled, compression or decompression
+	// is not applied on the payload if the payload size is smaller than this value.
 	// Setting it to zero allows compression for any payload size.
 	MinimumCompressionSize *int32
 

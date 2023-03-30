@@ -51,8 +51,8 @@ type CreateVpcLinkInput struct {
 	Description *string
 
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
-	// tag key can be up to 128 characters and must not start with aws:. The tag value
-	// can be up to 256 characters.
+	// tag key can be up to 128 characters and must not start with aws:. The tag
+	// value can be up to 256 characters.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -72,9 +72,9 @@ type CreateVpcLinkOutput struct {
 	// The name used to label and identify the VPC link.
 	Name *string
 
-	// The status of the VPC link. The valid values are AVAILABLE, PENDING, DELETING,
-	// or FAILED. Deploying an API will wait if the status is PENDING and will fail if
-	// the status is DELETING.
+	// The status of the VPC link. The valid values are AVAILABLE , PENDING , DELETING
+	// , or FAILED . Deploying an API will wait if the status is PENDING and will
+	// fail if the status is DELETING .
 	Status types.VpcLinkStatus
 
 	// A description about the VPC link status.

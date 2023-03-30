@@ -42,21 +42,21 @@ type PurchaseHostReservationInput struct {
 	// This member is required.
 	OfferingId *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see Ensuring Idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. For more information, see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// .
 	ClientToken *string
 
-	// The currency in which the totalUpfrontPrice, LimitPrice, and totalHourlyPrice
-	// amounts are specified. At this time, the only supported currency is USD.
+	// The currency in which the totalUpfrontPrice , LimitPrice , and totalHourlyPrice
+	// amounts are specified. At this time, the only supported currency is USD .
 	CurrencyCode types.CurrencyCodeValues
 
-	// The specified limit is checked against the total upfront cost of the reservation
-	// (calculated as the offering's upfront cost multiplied by the host count). If the
-	// total upfront cost is greater than the specified price limit, the request fails.
-	// This is used to ensure that the purchase does not exceed the expected upfront
-	// cost of the purchase. At this time, the only supported currency is USD. For
-	// example, to indicate a limit price of USD 100, specify 100.00.
+	// The specified limit is checked against the total upfront cost of the
+	// reservation (calculated as the offering's upfront cost multiplied by the host
+	// count). If the total upfront cost is greater than the specified price limit, the
+	// request fails. This is used to ensure that the purchase does not exceed the
+	// expected upfront cost of the purchase. At this time, the only supported currency
+	// is USD . For example, to indicate a limit price of USD 100, specify 100.00.
 	LimitPrice *string
 
 	// The tags to apply to the Dedicated Host Reservation during purchase.
@@ -67,13 +67,13 @@ type PurchaseHostReservationInput struct {
 
 type PurchaseHostReservationOutput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see Ensuring Idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. For more information, see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// .
 	ClientToken *string
 
-	// The currency in which the totalUpfrontPrice and totalHourlyPrice amounts are
-	// specified. At this time, the only supported currency is USD.
+	// The currency in which the totalUpfrontPrice  and totalHourlyPrice amounts are
+	// specified. At this time, the only supported currency is USD .
 	CurrencyCode types.CurrencyCodeValues
 
 	// Describes the details of the purchase.

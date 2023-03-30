@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Returns the framework details for the specified FrameworkName.
+// Returns the framework details for the specified FrameworkName .
 func (c *Client) DescribeFramework(ctx context.Context, params *DescribeFrameworkInput, optFns ...func(*Options)) (*DescribeFrameworkOutput, error) {
 	if params == nil {
 		params = &DescribeFrameworkInput{}
@@ -50,12 +50,12 @@ type DescribeFrameworkOutput struct {
 	// UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED
 	DeploymentStatus *string
 
-	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of
-	// the ARN depends on the resource type.
+	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format
+	// of the ARN depends on the resource type.
 	FrameworkArn *string
 
-	// A list of the controls that make up the framework. Each control in the list has
-	// a name, input parameters, and scope.
+	// A list of the controls that make up the framework. Each control in the list
+	// has a name, input parameters, and scope.
 	FrameworkControls []types.FrameworkControl
 
 	// An optional description of the framework.
@@ -67,15 +67,10 @@ type DescribeFrameworkOutput struct {
 	// A framework consists of one or more controls. Each control governs a resource,
 	// such as backup plans, backup selections, backup vaults, or recovery points. You
 	// can also turn Config recording on or off for each resource. The statuses are:
-	// -
-	// ACTIVE when recording is turned on for all resources governed by the
-	// framework.
-	// - PARTIALLY_ACTIVE when recording is turned off for at least one
-	// resource governed by the framework.
-	// - INACTIVE when recording is turned off for
-	// all resources governed by the framework.
-	// - UNAVAILABLE when Backup is unable to
-	// validate recording status at this time.
+	//     - ACTIVE when recording is turned on for all resources governed by the framework.
+	//     - PARTIALLY_ACTIVE when recording is turned off for at least one resource governed by the framework.
+	//     - INACTIVE when recording is turned off for all resources governed by the framework.
+	//     - UNAVAILABLE when Backup is unable to validate recording status at this time.
 	FrameworkStatus *string
 
 	// A customer-chosen string that you can use to distinguish between otherwise

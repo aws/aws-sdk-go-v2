@@ -54,21 +54,18 @@ type DescribeStateMachineOutput struct {
 	CreationDate *time.Time
 
 	// The Amazon States Language definition of the state machine. See Amazon States
-	// Language
-	// (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
+	// Language (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html)
+	// .
 	//
 	// This member is required.
 	Definition *string
 
 	// The name of the state machine. A name must not contain:
-	// - white space
-	// - brackets
-	// < > { } [ ]
-	// - wildcard characters ? *
-	// - special characters " # % \ ^ | ~ ` $ & ,
-	// ; : /
-	// - control characters (U+0000-001F, U+007F-009F)
-	//
+	//     - white space
+	//     - brackets < > { } [ ]
+	//     - wildcard characters ? *
+	//     - special characters " # % \ ^ | ~ ` $ & , ; : /
+	//     - control characters ( U+0000-001F , U+007F-009F )
 	// To enable logging with
 	// CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
 	//
@@ -87,7 +84,7 @@ type DescribeStateMachineOutput struct {
 	// This member is required.
 	StateMachineArn *string
 
-	// The type of the state machine (STANDARD or EXPRESS).
+	// The type  of the state machine ( STANDARD  or EXPRESS ).
 	//
 	// This member is required.
 	Type types.StateMachineType
@@ -97,7 +94,7 @@ type DescribeStateMachineOutput struct {
 	// qualified state machine ARN.
 	Label *string
 
-	// The LoggingConfiguration data type is used to set CloudWatch Logs options.
+	// The LoggingConfiguration  data type is used to set CloudWatch Logs options.
 	LoggingConfiguration *types.LoggingConfiguration
 
 	// The current status of the state machine.

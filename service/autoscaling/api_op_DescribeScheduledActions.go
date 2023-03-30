@@ -15,7 +15,7 @@ import (
 
 // Gets information about the scheduled actions that haven't run or that have not
 // reached their end time. To describe the scaling activities for scheduled actions
-// that have already run, call the DescribeScalingActivities API.
+// that have already run, call the DescribeScalingActivities  API.
 func (c *Client) DescribeScheduledActions(ctx context.Context, params *DescribeScheduledActionsInput, optFns ...func(*Options)) (*DescribeScheduledActionsOutput, error) {
 	if params == nil {
 		params = &DescribeScheduledActionsInput{}
@@ -41,7 +41,7 @@ type DescribeScheduledActionsInput struct {
 	EndTime *time.Time
 
 	// The maximum number of items to return with this call. The default value is 50
-	// and the maximum value is 100.
+	// and the maximum value is 100 .
 	MaxRecords *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -149,11 +149,11 @@ var _ DescribeScheduledActionsAPIClient = (*Client)(nil)
 // DescribeScheduledActions
 type DescribeScheduledActionsPaginatorOptions struct {
 	// The maximum number of items to return with this call. The default value is 50
-	// and the maximum value is 100.
+	// and the maximum value is 100 .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

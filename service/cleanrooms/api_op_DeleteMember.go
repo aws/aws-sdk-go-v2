@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified member from a collaboration. The removed member is placed
-// in the Removed status and can't interact with the collaboration. The removed
-// member's data is inaccessible to active members of the collaboration.
+// Removes the specified member from a collaboration. The removed member is
+// placed in the Removed status and can't interact with the collaboration. The
+// removed member's data is inaccessible to active members of the collaboration.
 func (c *Client) DeleteMember(ctx context.Context, params *DeleteMemberInput, optFns ...func(*Options)) (*DeleteMemberOutput, error) {
 	if params == nil {
 		params = &DeleteMemberInput{}

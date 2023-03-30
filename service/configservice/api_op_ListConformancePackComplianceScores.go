@@ -12,14 +12,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of conformance pack compliance scores. A compliance score is the
-// percentage of the number of compliant rule-resource combinations in a
+// Returns a list of conformance pack compliance scores. A compliance score is
+// the percentage of the number of compliant rule-resource combinations in a
 // conformance pack compared to the number of total possible rule-resource
 // combinations in the conformance pack. This metric provides you with a high-level
 // view of the compliance state of your conformance packs. You can use it to
 // identify, investigate, and understand the level of compliance in your
 // conformance packs. Conformance packs with no evaluation results will have a
-// compliance score of INSUFFICIENT_DATA.
+// compliance score of INSUFFICIENT_DATA .
 func (c *Client) ListConformancePackComplianceScores(ctx context.Context, params *ListConformancePackComplianceScoresInput, optFns ...func(*Options)) (*ListConformancePackComplianceScoresOutput, error) {
 	if params == nil {
 		params = &ListConformancePackComplianceScoresInput{}
@@ -37,7 +37,7 @@ func (c *Client) ListConformancePackComplianceScores(ctx context.Context, params
 
 type ListConformancePackComplianceScoresInput struct {
 
-	// Filters the results based on the ConformancePackComplianceScoresFilters.
+	// Filters the results based on the ConformancePackComplianceScoresFilters .
 	Filters *types.ConformancePackComplianceScoresFilters
 
 	// The maximum number of conformance pack compliance scores returned on each page.
@@ -47,11 +47,11 @@ type ListConformancePackComplianceScoresInput struct {
 	// response for the next set of conformance pack compliance scores.
 	NextToken *string
 
-	// Sorts your conformance pack compliance scores in either ascending or descending
-	// order, depending on SortOrder. By default, conformance pack compliance scores
-	// are sorted in alphabetical order by name of the conformance pack. Enter SCORE,
-	// to sort conformance pack compliance scores by the numerical value of the
-	// compliance score.
+	// Sorts your conformance pack compliance scores in either ascending or
+	// descending order, depending on SortOrder. By default, conformance pack
+	// compliance scores are sorted in alphabetical order by name of the conformance
+	// pack. Enter SCORE, to sort conformance pack compliance scores by the numerical
+	// value of the compliance score.
 	SortBy types.SortBy
 
 	// Determines the order in which conformance pack compliance scores are sorted.
@@ -59,10 +59,10 @@ type ListConformancePackComplianceScoresInput struct {
 	// scores are sorted in alphabetical order by name of the conformance pack.
 	// Conformance pack compliance scores are sorted in reverse alphabetical order if
 	// you enter DESCENDING. You can sort conformance pack compliance scores by the
-	// numerical value of the compliance score by entering SCORE in the SortBy action.
-	// When compliance scores are sorted by SCORE, conformance packs with a compliance
-	// score of INSUFFICIENT_DATA will be last when sorting by ascending order and
-	// first when sorting by descending order.
+	// numerical value of the compliance score by entering SCORE  in the SortBy
+	// action. When compliance scores are sorted by SCORE, conformance packs with a
+	// compliance score of INSUFFICIENT_DATA will be last when sorting by ascending
+	// order and first when sorting by descending order.
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -70,7 +70,7 @@ type ListConformancePackComplianceScoresInput struct {
 
 type ListConformancePackComplianceScoresOutput struct {
 
-	// A list of ConformancePackComplianceScore objects.
+	// A list of ConformancePackComplianceScore  objects.
 	//
 	// This member is required.
 	ConformancePackComplianceScores []types.ConformancePackComplianceScore
@@ -156,14 +156,14 @@ type ListConformancePackComplianceScoresAPIClient interface {
 
 var _ ListConformancePackComplianceScoresAPIClient = (*Client)(nil)
 
-// ListConformancePackComplianceScoresPaginatorOptions is the paginator options for
-// ListConformancePackComplianceScores
+// ListConformancePackComplianceScoresPaginatorOptions is the paginator options
+// for ListConformancePackComplianceScores
 type ListConformancePackComplianceScoresPaginatorOptions struct {
 	// The maximum number of conformance pack compliance scores returned on each page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

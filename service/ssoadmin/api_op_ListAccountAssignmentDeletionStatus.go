@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the status of the AWS account assignment deletion requests for a specified
-// IAM Identity Center instance.
+// Lists the status of the AWS account assignment deletion requests for a
+// specified IAM Identity Center instance.
 func (c *Client) ListAccountAssignmentDeletionStatus(ctx context.Context, params *ListAccountAssignmentDeletionStatusInput, optFns ...func(*Options)) (*ListAccountAssignmentDeletionStatusOutput, error) {
 	if params == nil {
 		params = &ListAccountAssignmentDeletionStatusInput{}
@@ -32,8 +32,8 @@ func (c *Client) ListAccountAssignmentDeletionStatus(ctx context.Context, params
 type ListAccountAssignmentDeletionStatusInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// AWS Service Namespaces in the AWS General Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs)
+	// and AWS Service Namespaces in the AWS General Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -137,14 +137,14 @@ type ListAccountAssignmentDeletionStatusAPIClient interface {
 
 var _ ListAccountAssignmentDeletionStatusAPIClient = (*Client)(nil)
 
-// ListAccountAssignmentDeletionStatusPaginatorOptions is the paginator options for
-// ListAccountAssignmentDeletionStatus
+// ListAccountAssignmentDeletionStatusPaginatorOptions is the paginator options
+// for ListAccountAssignmentDeletionStatus
 type ListAccountAssignmentDeletionStatusPaginatorOptions struct {
 	// The maximum number of results to display for the assignment.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

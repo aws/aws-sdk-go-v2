@@ -28,8 +28,8 @@ func (c *Client) CreateAuthenticationProfile(ctx context.Context, params *Create
 
 type CreateAuthenticationProfileInput struct {
 
-	// The content of the authentication profile in JSON format. The maximum length of
-	// the JSON string is determined by a quota for your account.
+	// The content of the authentication profile in JSON format. The maximum length
+	// of the JSON string is determined by a quota for your account.
 	//
 	// This member is required.
 	AuthenticationProfileContent *string

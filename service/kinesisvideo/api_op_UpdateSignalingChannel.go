@@ -15,6 +15,7 @@ import (
 // takes time to complete. If the MessageTtlSeconds value is updated (either
 // increased or reduced), it only applies to new messages sent via this channel
 // after it's been updated. Existing messages are still expired as per the previous
+//
 // MessageTtlSeconds value.
 func (c *Client) UpdateSignalingChannel(ctx context.Context, params *UpdateSignalingChannelInput, optFns ...func(*Options)) (*UpdateSignalingChannelOutput, error) {
 	if params == nil {
@@ -33,7 +34,8 @@ func (c *Client) UpdateSignalingChannel(ctx context.Context, params *UpdateSigna
 
 type UpdateSignalingChannelInput struct {
 
-	// The Amazon Resource Name (ARN) of the signaling channel that you want to update.
+	// The Amazon Resource Name (ARN) of the signaling channel that you want to
+	// update.
 	//
 	// This member is required.
 	ChannelARN *string

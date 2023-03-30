@@ -56,8 +56,8 @@ type ListEdgeDeploymentPlansInput struct {
 	// tokening.
 	NextToken *string
 
-	// The column by which to sort the edge deployment plans. Can be one of NAME,
-	// DEVICEFLEETNAME, CREATIONTIME, LASTMODIFIEDTIME.
+	// The column by which to sort the edge deployment plans. Can be one of NAME ,
+	// DEVICEFLEETNAME , CREATIONTIME , LASTMODIFIEDTIME .
 	SortBy types.ListEdgeDeploymentPlansSortBy
 
 	// The direction of the sorting (ascending or descending).
@@ -156,8 +156,8 @@ type ListEdgeDeploymentPlansPaginatorOptions struct {
 	// The maximum number of results to select (50 by default).
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -50,7 +50,8 @@ type StartFHIRImportJobInput struct {
 	// This member is required.
 	InputDataConfig types.InputDataConfig
 
-	// The output data configuration that was supplied when the export job was created.
+	// The output data configuration that was supplied when the export job was
+	// created.
 	//
 	// This member is required.
 	JobOutputDataConfig types.OutputDataConfig

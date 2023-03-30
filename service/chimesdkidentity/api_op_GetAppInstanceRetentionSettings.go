@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets the retention settings for an AppInstance.
+// Gets the retention settings for an AppInstance .
 func (c *Client) GetAppInstanceRetentionSettings(ctx context.Context, params *GetAppInstanceRetentionSettingsInput, optFns ...func(*Options)) (*GetAppInstanceRetentionSettingsOutput, error) {
 	if params == nil {
 		params = &GetAppInstanceRetentionSettingsInput{}
@@ -30,7 +30,7 @@ func (c *Client) GetAppInstanceRetentionSettings(ctx context.Context, params *Ge
 
 type GetAppInstanceRetentionSettingsInput struct {
 
-	// The ARN of the AppInstance.
+	// The ARN of the AppInstance .
 	//
 	// This member is required.
 	AppInstanceArn *string
@@ -40,7 +40,7 @@ type GetAppInstanceRetentionSettingsInput struct {
 
 type GetAppInstanceRetentionSettingsOutput struct {
 
-	// The retention settings for the AppInstance.
+	// The retention settings for the AppInstance .
 	AppInstanceRetentionSettings *types.AppInstanceRetentionSettings
 
 	// The timestamp representing the time at which the specified items are retained,

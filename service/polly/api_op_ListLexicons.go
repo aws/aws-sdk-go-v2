@@ -12,8 +12,8 @@ import (
 )
 
 // Returns a list of pronunciation lexicons stored in an Amazon Web Services
-// Region. For more information, see Managing Lexicons
-// (https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
+// Region. For more information, see Managing Lexicons (https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html)
+// .
 func (c *Client) ListLexicons(ctx context.Context, params *ListLexiconsInput, optFns ...func(*Options)) (*ListLexiconsOutput, error) {
 	if params == nil {
 		params = &ListLexiconsInput{}
@@ -44,7 +44,7 @@ type ListLexiconsOutput struct {
 	Lexicons []types.LexiconDescription
 
 	// The pagination token to use in the next request to continue the listing of
-	// lexicons. NextToken is returned only if the response is truncated.
+	// lexicons. NextToken  is returned only if the response is truncated.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

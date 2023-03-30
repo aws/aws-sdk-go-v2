@@ -59,8 +59,8 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request failed because this device is no longer registered and therefore no
-// longer managed by this account.
+// The request failed because this device is no longer registered and therefore
+// no longer managed by this account.
 type DeviceNotRegisteredException struct {
 	Message *string
 

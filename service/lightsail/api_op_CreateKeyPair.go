@@ -12,13 +12,12 @@ import (
 )
 
 // Creates a custom SSH key pair that you can use with an Amazon Lightsail
-// instance. Use the DownloadDefaultKeyPair
-// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_DownloadDefaultKeyPair.html)
+// instance. Use the DownloadDefaultKeyPair (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_DownloadDefaultKeyPair.html)
 // action to create a Lightsail default key pair in an Amazon Web Services Region
-// where a default key pair does not currently exist. The create key pair operation
-// supports tag-based access control via request tags. For more information, see
-// the Amazon Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// where a default key pair does not currently exist. The create key pair
+// operation supports tag-based access control via request tags. For more
+// information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) CreateKeyPair(ctx context.Context, params *CreateKeyPairInput, optFns ...func(*Options)) (*CreateKeyPairOutput, error) {
 	if params == nil {
 		params = &CreateKeyPairInput{}
@@ -62,7 +61,7 @@ type CreateKeyPairOutput struct {
 	// A base64-encoded RSA private key.
 	PrivateKeyBase64 *string
 
-	// A base64-encoded public key of the ssh-rsa type.
+	// A base64-encoded public key of the ssh-rsa  type.
 	PublicKeyBase64 *string
 
 	// Metadata pertaining to the operation's result.

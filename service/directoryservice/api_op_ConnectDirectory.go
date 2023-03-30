@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an AD Connector to connect to a self-managed directory. Before you call
-// ConnectDirectory, ensure that all of the required permissions have been
+// Creates an AD Connector to connect to a self-managed directory. Before you
+// call ConnectDirectory, ensure that all of the required permissions have been
 // explicitly granted through a policy. For details about what permissions are
-// required to run the ConnectDirectory operation, see Directory Service API
-// Permissions: Actions, Resources, and Conditions Reference
-// (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html).
+// required to run the ConnectDirectory  operation, see Directory Service API
+// Permissions: Actions, Resources, and Conditions Reference (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html)
+// .
 func (c *Client) ConnectDirectory(ctx context.Context, params *ConnectDirectoryInput, optFns ...func(*Options)) (*ConnectDirectoryOutput, error) {
 	if params == nil {
 		params = &ConnectDirectoryInput{}
@@ -32,7 +32,7 @@ func (c *Client) ConnectDirectory(ctx context.Context, params *ConnectDirectoryI
 	return out, nil
 }
 
-// Contains the inputs for the ConnectDirectory operation.
+// Contains the inputs for the ConnectDirectory  operation.
 type ConnectDirectoryInput struct {
 
 	// A DirectoryConnectSettings object that contains additional information for the
@@ -42,7 +42,7 @@ type ConnectDirectoryInput struct {
 	ConnectSettings *types.DirectoryConnectSettings
 
 	// The fully qualified name of your self-managed directory, such as
-	// corp.example.com.
+	// corp.example.com .
 	//
 	// This member is required.
 	Name *string
@@ -60,7 +60,7 @@ type ConnectDirectoryInput struct {
 	// A description for the directory.
 	Description *string
 
-	// The NetBIOS name of your self-managed directory, such as CORP.
+	// The NetBIOS name of your self-managed directory, such as CORP .
 	ShortName *string
 
 	// The tags to be assigned to AD Connector.
@@ -69,7 +69,7 @@ type ConnectDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the results of the ConnectDirectory operation.
+// Contains the results of the ConnectDirectory  operation.
 type ConnectDirectoryOutput struct {
 
 	// The identifier of the new directory.

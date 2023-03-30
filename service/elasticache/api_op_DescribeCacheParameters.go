@@ -28,7 +28,7 @@ func (c *Client) DescribeCacheParameters(ctx context.Context, params *DescribeCa
 	return out, nil
 }
 
-// Represents the input of a DescribeCacheParameters operation.
+// Represents the input of a DescribeCacheParameters  operation.
 type DescribeCacheParametersInput struct {
 
 	// The name of a specific cache parameter group to return details for.
@@ -36,25 +36,25 @@ type DescribeCacheParametersInput struct {
 	// This member is required.
 	CacheParameterGroupName *string
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a marker is included in the
+	// response so that the remaining results can be retrieved. Default: 100
+	// Constraints: minimum 20; maximum 100.
 	MaxRecords *int32
 
-	// The parameter types to return. Valid values: user | system | engine-default
+	// The parameter types to return. Valid values: user  | system  | engine-default
 	Source *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a DescribeCacheParameters operation.
+// Represents the output of a DescribeCacheParameters  operation.
 type DescribeCacheParametersOutput struct {
 
 	// A list of parameters specific to a particular cache node type. Each element in
@@ -64,7 +64,7 @@ type DescribeCacheParametersOutput struct {
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string
 
-	// A list of Parameter instances.
+	// A list of Parameter  instances.
 	Parameters []types.Parameter
 
 	// Metadata pertaining to the operation's result.
@@ -147,14 +147,14 @@ var _ DescribeCacheParametersAPIClient = (*Client)(nil)
 // DescribeCacheParametersPaginatorOptions is the paginator options for
 // DescribeCacheParameters
 type DescribeCacheParametersPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a marker is included in the
+	// response so that the remaining results can be retrieved. Default: 100
+	// Constraints: minimum 20; maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

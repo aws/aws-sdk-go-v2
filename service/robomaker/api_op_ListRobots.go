@@ -36,19 +36,19 @@ func (c *Client) ListRobots(ctx context.Context, params *ListRobotsInput, optFns
 
 type ListRobotsInput struct {
 
-	// Optional filters to limit results. The filter names status and fleetName are
+	// Optional filters to limit results. The filter names status  and fleetName are
 	// supported. When filtering, you must use the complete value of the filtered item.
 	// You can use up to three filters, but they must be for the same named item. For
-	// example, if you are looking for items with the status Registered or the status
-	// Available.
+	// example, if you are looking for items with the status Registered  or the status
+	// Available .
 	Filters []types.Filter
 
-	// When this parameter is used, ListRobots only returns maxResults results in a
+	// When this parameter is used, ListRobots  only returns maxResults results in a
 	// single page along with a nextToken response element. The remaining results of
 	// the initial request can be seen by sending another ListRobots request with the
-	// returned nextToken value. This value can be between 1 and 200. If this parameter
-	// is not used, then ListRobots returns up to 200 results and a nextToken value if
-	// applicable.
+	// returned nextToken value. This value can be between 1 and 200. If this
+	// parameter is not used, then ListRobots  returns up to 200 results and a
+	// nextToken value if applicable.
 	MaxResults *int32
 
 	// If the previous paginated request did not return all of the remaining results,
@@ -148,16 +148,16 @@ var _ ListRobotsAPIClient = (*Client)(nil)
 
 // ListRobotsPaginatorOptions is the paginator options for ListRobots
 type ListRobotsPaginatorOptions struct {
-	// When this parameter is used, ListRobots only returns maxResults results in a
+	// When this parameter is used, ListRobots  only returns maxResults results in a
 	// single page along with a nextToken response element. The remaining results of
 	// the initial request can be seen by sending another ListRobots request with the
-	// returned nextToken value. This value can be between 1 and 200. If this parameter
-	// is not used, then ListRobots returns up to 200 results and a nextToken value if
-	// applicable.
+	// returned nextToken value. This value can be between 1 and 200. If this
+	// parameter is not used, then ListRobots  returns up to 200 results and a
+	// nextToken value if applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

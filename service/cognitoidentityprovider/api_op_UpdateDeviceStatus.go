@@ -30,8 +30,8 @@ func (c *Client) UpdateDeviceStatus(ctx context.Context, params *UpdateDeviceSta
 // Represents the request to update the device status.
 type UpdateDeviceStatusInput struct {
 
-	// A valid access token that Amazon Cognito issued to the user whose device status
-	// you want to update.
+	// A valid access token that Amazon Cognito issued to the user whose device
+	// status you want to update.
 	//
 	// This member is required.
 	AccessToken *string

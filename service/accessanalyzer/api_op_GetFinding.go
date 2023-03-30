@@ -30,8 +30,7 @@ func (c *Client) GetFinding(ctx context.Context, params *GetFindingInput, optFns
 // Retrieves a finding.
 type GetFindingInput struct {
 
-	// The ARN of the analyzer
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
+	// The ARN of the analyzer (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
 	// that generated the finding.
 	//
 	// This member is required.
@@ -48,7 +47,7 @@ type GetFindingInput struct {
 // The response to the request.
 type GetFindingOutput struct {
 
-	// A finding object that contains finding details.
+	// A finding  object that contains finding details.
 	Finding *types.Finding
 
 	// Metadata pertaining to the operation's result.

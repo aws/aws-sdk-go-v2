@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The AssociateQualificationWithWorker operation gives a Worker a Qualification.
-// AssociateQualificationWithWorker does not require that the Worker submit a
+// The AssociateQualificationWithWorker  operation gives a Worker a Qualification.
+// AssociateQualificationWithWorkerdoes not require that the Worker submit a
 // Qualification request. It gives the Qualification directly to the Worker. You
 // can only assign a Qualification of a Qualification type that you created (using
-// the CreateQualificationType operation). Note: AssociateQualificationWithWorker
+// the CreateQualificationType  operation). Note: AssociateQualificationWithWorker
 // does not affect any pending Qualification requests for the Qualification by the
 // Worker. If you assign a Qualification to a Worker, then later grant a
 // Qualification request made by the Worker, the granting of the request may modify
@@ -43,8 +43,8 @@ type AssociateQualificationWithWorkerInput struct {
 	// This member is required.
 	QualificationTypeId *string
 
-	// The ID of the Worker to whom the Qualification is being assigned. Worker IDs are
-	// included with submitted HIT assignments and Qualification requests.
+	// The ID of the Worker to whom the Qualification is being assigned. Worker IDs
+	// are included with submitted HIT assignments and Qualification requests.
 	//
 	// This member is required.
 	WorkerId *string
@@ -52,8 +52,9 @@ type AssociateQualificationWithWorkerInput struct {
 	// The value of the Qualification to assign.
 	IntegerValue *int32
 
-	// Specifies whether to send a notification email message to the Worker saying that
-	// the qualification was assigned to the Worker. Note: this is true by default.
+	// Specifies whether to send a notification email message to the Worker saying
+	// that the qualification was assigned to the Worker. Note: this is true by
+	// default.
 	SendNotification *bool
 
 	noSmithyDocumentSerde

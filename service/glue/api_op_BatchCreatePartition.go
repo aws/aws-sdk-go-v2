@@ -34,7 +34,7 @@ type BatchCreatePartitionInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// A list of PartitionInput structures that define the partitions to be created.
+	// A list of PartitionInput  structures that define the partitions to be created.
 	//
 	// This member is required.
 	PartitionInputList []types.PartitionInput

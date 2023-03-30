@@ -41,10 +41,10 @@ type GetQueryStatisticsInput struct {
 
 type GetQueryStatisticsOutput struct {
 
-	// An ExecutionStatistics structure containing execution statistics.
+	// An ExecutionStatistics  structure containing execution statistics.
 	ExecutionStatistics *types.ExecutionStatistics
 
-	// A PlanningStatistics structure containing query planning statistics.
+	// A PlanningStatistics  structure containing query planning statistics.
 	PlanningStatistics *types.PlanningStatistics
 
 	// The time that the query was submitted.

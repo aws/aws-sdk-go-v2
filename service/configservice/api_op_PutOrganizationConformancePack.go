@@ -13,27 +13,26 @@ import (
 
 // Deploys conformance packs across member accounts in an Amazon Web Services
 // Organization. For information on how many organization conformance packs and how
-// many Config rules you can have per account, see  Service Limits
-// (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html) in
-// the Config Developer Guide. Only a management account and a delegated
+// many Config rules you can have per account, see Service Limits  (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html)
+// in the Config Developer Guide. Only a management account and a delegated
 // administrator can call this API. When calling this API with a delegated
 // administrator, you must ensure Organizations ListDelegatedAdministrator
 // permissions are added. An organization can have up to 3 delegated
 // administrators. This API enables organization service access for
-// config-multiaccountsetup.amazonaws.com through the EnableAWSServiceAccess action
-// and creates a service-linked role AWSServiceRoleForConfigMultiAccountSetup in
-// the management or delegated administrator account of your organization. The
-// service-linked role is created only when the role does not exist in the caller
-// account. To use this API with delegated administrator, register a delegated
-// administrator by calling Amazon Web Services Organization
-// register-delegate-admin for config-multiaccountsetup.amazonaws.com.
-// Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an
-// organization. You must specify either the TemplateS3Uri or the TemplateBody
-// parameter, but not both. If you provide both Config uses the TemplateS3Uri
-// parameter and ignores the TemplateBody parameter. Config sets the state of a
-// conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the
-// conformance pack is created or updated. You cannot update a conformance pack
-// while it is in this state.
+// config-multiaccountsetup.amazonaws.com through the EnableAWSServiceAccess
+// action and creates a service-linked role
+// AWSServiceRoleForConfigMultiAccountSetupin the management or delegated
+// administrator account of your organization. The service-linked role is created
+// only when the role does not exist in the caller account. To use this API with
+// delegated administrator, register a delegated administrator by calling Amazon
+// Web Services Organization register-delegate-admin  for
+// config-multiaccountsetup.amazonaws.com . Prerequisite: Ensure you call
+// EnableAllFeaturesAPI to enable all features in an organization. You must
+// specify either the TemplateS3Uri  or the TemplateBody parameter, but not both.
+// If you provide both Config uses the TemplateS3Uri  parameter and ignores the
+// TemplateBodyparameter. Config sets the state of a conformance pack to
+// CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created
+// or updated. You cannot update a conformance pack while it is in this state.
 func (c *Client) PutOrganizationConformancePack(ctx context.Context, params *PutOrganizationConformancePackInput, optFns ...func(*Options)) (*PutOrganizationConformancePackOutput, error) {
 	if params == nil {
 		params = &PutOrganizationConformancePackInput{}
@@ -56,11 +55,12 @@ type PutOrganizationConformancePackInput struct {
 	// This member is required.
 	OrganizationConformancePackName *string
 
-	// A list of ConformancePackInputParameter objects.
+	// A list of ConformancePackInputParameter  objects.
 	ConformancePackInputParameters []types.ConformancePackInputParameter
 
-	// The name of the Amazon S3 bucket where Config stores conformance pack templates.
-	// This field is optional. If used, it must be prefixed with awsconfigconforms.
+	// The name of the Amazon S3 bucket where Config stores conformance pack
+	// templates. This field is optional. If used, it must be prefixed with
+	// awsconfigconforms .
 	DeliveryS3Bucket *string
 
 	// The prefix for the Amazon S3 bucket. This field is optional.

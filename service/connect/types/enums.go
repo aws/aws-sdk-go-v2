@@ -124,9 +124,9 @@ const (
 	ContactFlowModuleStatusSaved     ContactFlowModuleStatus = "SAVED"
 )
 
-// Values returns all known values for ContactFlowModuleStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ContactFlowModuleStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContactFlowModuleStatus) Values() []ContactFlowModuleStatus {
 	return []ContactFlowModuleStatus{
 		"PUBLISHED",
@@ -198,9 +198,9 @@ const (
 	ContactInitiationMethodMonitor       ContactInitiationMethod = "MONITOR"
 )
 
-// Values returns all known values for ContactInitiationMethod. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ContactInitiationMethod. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContactInitiationMethod) Values() []ContactInitiationMethod {
 	return []ContactInitiationMethod{
 		"INBOUND",
@@ -229,9 +229,9 @@ const (
 	ContactStateRejected        ContactState = "REJECTED"
 )
 
-// Values returns all known values for ContactState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ContactState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ContactState) Values() []ContactState {
 	return []ContactState{
 		"INCOMING",
@@ -357,9 +357,9 @@ const (
 	GroupingRoutingProfile Grouping = "ROUTING_PROFILE"
 )
 
-// Values returns all known values for Grouping. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Grouping. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Grouping) Values() []Grouping {
 	return []Grouping{
 		"QUEUE",
@@ -376,9 +376,9 @@ const (
 	HierarchyGroupMatchTypeWithChildGroups HierarchyGroupMatchType = "WITH_CHILD_GROUPS"
 )
 
-// Values returns all known values for HierarchyGroupMatchType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for HierarchyGroupMatchType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HierarchyGroupMatchType) Values() []HierarchyGroupMatchType {
 	return []HierarchyGroupMatchType{
 		"EXACT",
@@ -417,8 +417,8 @@ const (
 	HistoricalMetricNameServiceLevel                    HistoricalMetricName = "SERVICE_LEVEL"
 )
 
-// Values returns all known values for HistoricalMetricName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for HistoricalMetricName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (HistoricalMetricName) Values() []HistoricalMetricName {
 	return []HistoricalMetricName{
@@ -463,8 +463,8 @@ const (
 	HoursOfOperationDaysSaturday  HoursOfOperationDays = "SATURDAY"
 )
 
-// Values returns all known values for HoursOfOperationDays. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for HoursOfOperationDays. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (HoursOfOperationDays) Values() []HoursOfOperationDays {
 	return []HoursOfOperationDays{
@@ -494,8 +494,8 @@ const (
 	InstanceAttributeTypeEnhancedContactMonitoring InstanceAttributeType = "ENHANCED_CONTACT_MONITORING"
 )
 
-// Values returns all known values for InstanceAttributeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for InstanceAttributeType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceAttributeType) Values() []InstanceAttributeType {
 	return []InstanceAttributeType{
@@ -547,9 +547,10 @@ const (
 	InstanceStorageResourceTypeContactEvaluations              InstanceStorageResourceType = "CONTACT_EVALUATIONS"
 )
 
-// Values returns all known values for InstanceStorageResourceType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InstanceStorageResourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (InstanceStorageResourceType) Values() []InstanceStorageResourceType {
 	return []InstanceStorageResourceType{
 		"CHAT_TRANSCRIPTS",
@@ -633,9 +634,9 @@ const (
 	NotificationContentTypePlainText NotificationContentType = "PLAIN_TEXT"
 )
 
-// Values returns all known values for NotificationContentType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NotificationContentType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationContentType) Values() []NotificationContentType {
 	return []NotificationContentType{
 		"PLAIN_TEXT",
@@ -649,9 +650,9 @@ const (
 	NotificationDeliveryTypeEmail NotificationDeliveryType = "EMAIL"
 )
 
-// Values returns all known values for NotificationDeliveryType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NotificationDeliveryType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationDeliveryType) Values() []NotificationDeliveryType {
 	return []NotificationDeliveryType{
 		"EMAIL",
@@ -682,8 +683,8 @@ const (
 	ParticipantTimerTypeDisconnectNoncustomer ParticipantTimerType = "DISCONNECT_NONCUSTOMER"
 )
 
-// Values returns all known values for ParticipantTimerType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ParticipantTimerType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ParticipantTimerType) Values() []ParticipantTimerType {
 	return []ParticipantTimerType{
@@ -1226,9 +1227,9 @@ const (
 	PhoneTypeDeskPhone PhoneType = "DESK_PHONE"
 )
 
-// Values returns all known values for PhoneType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for PhoneType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (PhoneType) Values() []PhoneType {
 	return []PhoneType{
 		"SOFT_PHONE",
@@ -1248,8 +1249,8 @@ const (
 	PropertyValidationExceptionReasonNotSupported               PropertyValidationExceptionReason = "NOT_SUPPORTED"
 )
 
-// Values returns all known values for PropertyValidationExceptionReason. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for PropertyValidationExceptionReason. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (PropertyValidationExceptionReason) Values() []PropertyValidationExceptionReason {
@@ -1271,9 +1272,9 @@ const (
 	QueueStatusDisabled QueueStatus = "DISABLED"
 )
 
-// Values returns all known values for QueueStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for QueueStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (QueueStatus) Values() []QueueStatus {
 	return []QueueStatus{
 		"ENABLED",
@@ -1289,9 +1290,9 @@ const (
 	QueueTypeAgent    QueueType = "AGENT"
 )
 
-// Values returns all known values for QueueType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for QueueType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (QueueType) Values() []QueueType {
 	return []QueueType{
 		"STANDARD",
@@ -1394,9 +1395,9 @@ const (
 	ResourceTypeUser           ResourceType = "USER"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"CONTACT",
@@ -1451,9 +1452,9 @@ const (
 	SortOrderDescending SortOrder = "DESCENDING"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
@@ -1488,9 +1489,9 @@ const (
 	StatisticAvg Statistic = "AVG"
 )
 
-// Values returns all known values for Statistic. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Statistic. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Statistic) Values() []Statistic {
 	return []Statistic{
 		"SUM",
@@ -1509,9 +1510,9 @@ const (
 	StorageTypeKinesisFirehose    StorageType = "KINESIS_FIREHOSE"
 )
 
-// Values returns all known values for StorageType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StorageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (StorageType) Values() []StorageType {
 	return []StorageType{
 		"S3",
@@ -1530,8 +1531,8 @@ const (
 	StringComparisonTypeExact      StringComparisonType = "EXACT"
 )
 
-// Values returns all known values for StringComparisonType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for StringComparisonType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (StringComparisonType) Values() []StringComparisonType {
 	return []StringComparisonType{
@@ -1559,8 +1560,8 @@ const (
 	TaskTemplateFieldTypeEmail         TaskTemplateFieldType = "EMAIL"
 )
 
-// Values returns all known values for TaskTemplateFieldType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for TaskTemplateFieldType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (TaskTemplateFieldType) Values() []TaskTemplateFieldType {
 	return []TaskTemplateFieldType{
@@ -1651,9 +1652,9 @@ const (
 	TrafficTypeCampaign TrafficType = "CAMPAIGN"
 )
 
-// Values returns all known values for TrafficType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TrafficType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TrafficType) Values() []TrafficType {
 	return []TrafficType{
 		"GENERAL",
@@ -1670,8 +1671,8 @@ const (
 	UnitPercent Unit = "PERCENT"
 )
 
-// Values returns all known values for Unit. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Unit. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Unit) Values() []Unit {
 	return []Unit{
@@ -1689,9 +1690,9 @@ const (
 	UseCaseTypeConnectCampaigns UseCaseType = "CONNECT_CAMPAIGNS"
 )
 
-// Values returns all known values for UseCaseType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UseCaseType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (UseCaseType) Values() []UseCaseType {
 	return []UseCaseType{
 		"RULES_EVALUATION",

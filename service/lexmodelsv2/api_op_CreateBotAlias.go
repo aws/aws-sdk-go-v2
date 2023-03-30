@@ -12,10 +12,10 @@ import (
 	"time"
 )
 
-// Creates an alias for the specified version of a bot. Use an alias to enable you
-// to change the version of a bot without updating applications that use the bot.
-// For example, you can create an alias called "PROD" that your applications use to
-// call the Amazon Lex bot.
+// Creates an alias for the specified version of a bot. Use an alias to enable
+// you to change the version of a bot without updating applications that use the
+// bot. For example, you can create an alias called "PROD" that your applications
+// use to call the Amazon Lex bot.
 func (c *Client) CreateBotAlias(ctx context.Context, params *CreateBotAliasInput, optFns ...func(*Options)) (*CreateBotAliasOutput, error) {
 	if params == nil {
 		params = &CreateBotAliasInput{}
@@ -43,13 +43,13 @@ type CreateBotAliasInput struct {
 	// This member is required.
 	BotId *string
 
-	// Maps configuration information to a specific locale. You can use this parameter
-	// to specify a specific Lambda function to run different functions in different
-	// locales.
+	// Maps configuration information to a specific locale. You can use this
+	// parameter to specify a specific Lambda function to run different functions in
+	// different locales.
 	BotAliasLocaleSettings map[string]types.BotAliasLocaleSettings
 
-	// The version of the bot that this alias points to. You can use the UpdateBotAlias
-	// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_UpdateBotAlias.html)
+	// The version of the bot that this alias points to. You can use the
+	// UpdateBotAlias (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_UpdateBotAlias.html)
 	// operation to change the bot version associated with the alias.
 	BotVersion *string
 
@@ -62,13 +62,13 @@ type CreateBotAliasInput struct {
 	// A description of the alias. Use this description to help identify the alias.
 	Description *string
 
-	// Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment
-	// of user utterances.
+	// Determines whether Amazon Lex will use Amazon Comprehend to detect the
+	// sentiment of user utterances.
 	SentimentAnalysisSettings *types.SentimentAnalysisSettings
 
-	// A list of tags to add to the bot alias. You can only add tags when you create an
-	// alias, you can't use the UpdateBotAlias operation to update the tags on a bot
-	// alias. To update tags, use the TagResource operation.
+	// A list of tags to add to the bot alias. You can only add tags when you create
+	// an alias, you can't use the UpdateBotAlias operation to update the tags on a
+	// bot alias. To update tags, use the TagResource  operation.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -85,9 +85,10 @@ type CreateBotAliasOutput struct {
 	// The name specified for the bot alias.
 	BotAliasName *string
 
-	// The current status of the alias. The alias is first put into the Creating state.
-	// When the alias is ready to be used, it is put into the Available state. You can
-	// use the DescribeBotAlias operation to get the current state of an alias.
+	// The current status of the alias. The alias is first put into the Creating
+	// state. When the alias is ready to be used, it is put into the Available state.
+	// You can use the DescribeBotAlias operation to get the current state of an
+	// alias.
 	BotAliasStatus types.BotAliasStatus
 
 	// The unique identifier of the bot that this alias applies to.
@@ -105,8 +106,8 @@ type CreateBotAliasOutput struct {
 	// The description specified for the bot alias.
 	Description *string
 
-	// Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment
-	// of user utterances.
+	// Determines whether Amazon Lex will use Amazon Comprehend to detect the
+	// sentiment of user utterances.
 	SentimentAnalysisSettings *types.SentimentAnalysisSettings
 
 	// A list of tags associated with the bot alias.

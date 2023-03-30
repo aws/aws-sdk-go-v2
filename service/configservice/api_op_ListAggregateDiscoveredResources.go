@@ -48,7 +48,7 @@ type ListAggregateDiscoveredResourcesInput struct {
 	// This member is required.
 	ResourceType types.ResourceType
 
-	// Filters the results based on the ResourceFilters object.
+	// Filters the results based on the ResourceFilters  object.
 	Filters *types.ResourceFilters
 
 	// The maximum number of resource identifiers returned on each page. You cannot
@@ -68,7 +68,7 @@ type ListAggregateDiscoveredResourcesOutput struct {
 	// page of results in a paginated response.
 	NextToken *string
 
-	// Returns a list of ResourceIdentifiers objects.
+	// Returns a list of ResourceIdentifiers  objects.
 	ResourceIdentifiers []types.AggregateResourceIdentifier
 
 	// Metadata pertaining to the operation's result.
@@ -155,8 +155,8 @@ type ListAggregateDiscoveredResourcesPaginatorOptions struct {
 	// specify a number greater than 100. If you specify 0, Config uses the default.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

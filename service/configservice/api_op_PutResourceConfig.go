@@ -37,9 +37,9 @@ func (c *Client) PutResourceConfig(ctx context.Context, params *PutResourceConfi
 
 type PutResourceConfigInput struct {
 
-	// The configuration object of the resource in valid JSON format. It must match the
-	// schema registered with CloudFormation. The configuration JSON must not exceed 64
-	// KB.
+	// The configuration object of the resource in valid JSON format. It must match
+	// the schema registered with CloudFormation. The configuration JSON must not
+	// exceed 64 KB.
 	//
 	// This member is required.
 	Configuration *string
@@ -67,7 +67,8 @@ type PutResourceConfigInput struct {
 
 	// Tags associated with the resource. This field is not to be confused with the
 	// Amazon Web Services-wide tag feature for Amazon Web Services resources. Tags for
-	// PutResourceConfig are tags that you supply for the configuration items of your
+	//
+	// PutResourceConfigare tags that you supply for the configuration items of your
 	// custom resources.
 	Tags map[string]string
 

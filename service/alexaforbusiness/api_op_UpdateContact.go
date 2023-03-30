@@ -43,9 +43,10 @@ type UpdateContactInput struct {
 	// The updated last name of the contact.
 	LastName *string
 
-	// The updated phone number of the contact. The phone number type defaults to WORK.
-	// You can either specify PhoneNumber or PhoneNumbers. We recommend that you use
-	// PhoneNumbers, which lets you specify the phone number type and multiple numbers.
+	// The updated phone number of the contact. The phone number type defaults to
+	// WORK. You can either specify PhoneNumber or PhoneNumbers. We recommend that you
+	// use PhoneNumbers, which lets you specify the phone number type and multiple
+	// numbers.
 	PhoneNumber *string
 
 	// The list of phone numbers for the contact.

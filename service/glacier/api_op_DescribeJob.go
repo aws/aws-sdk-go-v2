@@ -23,12 +23,10 @@ import (
 // Glacier completes the job. An AWS account has full permission to perform all
 // operations (actions). However, AWS Identity and Access Management (IAM) users
 // don't have any permissions by default. You must grant them explicit permission
-// to perform specific actions. For more information, see Access Control Using AWS
-// Identity and Access Management (IAM)
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
-// For more information about using this operation, see the documentation for the
-// underlying REST API Describe Job
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-describe-job-get.html)
+// to perform specific actions. For more information, see Access Control Using
+// AWS Identity and Access Management (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html)
+// . For more information about using this operation, see the documentation for the
+// underlying REST API Describe Job (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-describe-job-get.html)
 // in the Amazon Glacier Developer Guide.
 func (c *Client) DescribeJob(ctx context.Context, params *DescribeJobInput, optFns ...func(*Options)) (*DescribeJobOutput, error) {
 	if params == nil {
@@ -49,8 +47,8 @@ func (c *Client) DescribeJob(ctx context.Context, params *DescribeJobInput, optF
 type DescribeJobInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
-	// which case Amazon S3 Glacier uses the AWS account ID associated with the
+	// You can either specify an AWS account ID or optionally a single ' -' (hyphen),
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -73,12 +71,12 @@ type DescribeJobInput struct {
 // Contains the description of an Amazon S3 Glacier job.
 type DescribeJobOutput struct {
 
-	// The job type. This value is either ArchiveRetrieval, InventoryRetrieval, or
-	// Select.
+	// The job type. This value is either ArchiveRetrieval , InventoryRetrieval , or
+	// Select .
 	Action types.ActionCode
 
-	// The archive ID requested for a select job or archive retrieval. Otherwise, this
-	// field is null.
+	// The archive ID requested for a select job or archive retrieval. Otherwise,
+	// this field is null.
 	ArchiveId *string
 
 	// The SHA256 tree hash of the entire archive for an archive retrieval. For
@@ -90,24 +88,24 @@ type DescribeJobOutput struct {
 	// value is null.
 	ArchiveSizeInBytes *int64
 
-	// The job status. When a job is completed, you get the job's output using Get Job
-	// Output (GET output).
+	// The job status. When a job is completed, you get the job's output using Get
+	// Job Output (GET output).
 	Completed bool
 
 	// The UTC time that the job request completed. While the job is in progress, the
 	// value is null.
 	CompletionDate *string
 
-	// The UTC date when the job was created. This value is a string representation of
-	// ISO 8601 date format, for example "2012-03-20T17:03:43.221Z".
+	// The UTC date when the job was created. This value is a string representation
+	// of ISO 8601 date format, for example "2012-03-20T17:03:43.221Z" .
 	CreationDate *string
 
 	// Parameters used for range inventory retrieval.
 	InventoryRetrievalParameters *types.InventoryRetrievalJobDescription
 
-	// For an inventory retrieval job, this value is the size in bytes of the inventory
-	// requested for download. For an archive retrieval or select job, this value is
-	// null.
+	// For an inventory retrieval job, this value is the size in bytes of the
+	// inventory requested for download. For an archive retrieval or select job, this
+	// value is null.
 	InventorySizeInBytes *int64
 
 	// The job description provided when initiating the job.
@@ -135,15 +133,12 @@ type DescribeJobOutput struct {
 	// tree-hash aligned range, then this field returns a value. If the whole archive
 	// is retrieved, this value is the same as the ArchiveSHA256TreeHash value. This
 	// field is null for the following:
-	// - Archive retrieval jobs that specify a range
-	// that is not tree-hash aligned
+	//     - Archive retrieval jobs that specify a range that is not tree-hash aligned
 	//
-	// - Archival jobs that specify a range that is
-	// equal to the whole archive, when the job status is InProgress
+	//     - Archival jobs that specify a range that is equal to the whole archive, when the job status is InProgress
 	//
-	// - Inventory
-	// jobs
-	// - Select jobs
+	//     - Inventory jobs
+	//     - Select jobs
 	SHA256TreeHash *string
 
 	// An Amazon SNS topic that receives notification.
@@ -152,7 +147,7 @@ type DescribeJobOutput struct {
 	// Contains the parameters used for a select.
 	SelectParameters *types.SelectParameters
 
-	// The status code can be InProgress, Succeeded, or Failed, and indicates the
+	// The status code can be InProgress , Succeeded , or Failed, and indicates the
 	// status of the job.
 	StatusCode types.StatusCode
 
@@ -160,11 +155,11 @@ type DescribeJobOutput struct {
 	StatusMessage *string
 
 	// The tier to use for a select or an archive retrieval. Valid values are
-	// Expedited, Standard, or Bulk. Standard is the default.
+	// Expedited , Standard , or Bulk . Standard  is the default.
 	Tier *string
 
-	// The Amazon Resource Name (ARN) of the vault from which an archive retrieval was
-	// requested.
+	// The Amazon Resource Name (ARN) of the vault from which an archive retrieval
+	// was requested.
 	VaultARN *string
 
 	// Metadata pertaining to the operation's result.

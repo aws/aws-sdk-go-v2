@@ -30,10 +30,10 @@ func (c *Client) DescribeServiceUpdates(ctx context.Context, params *DescribeSer
 
 type DescribeServiceUpdatesInput struct {
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// MaxRecords .
 	Marker *string
 
 	// The maximum number of records to include in the response
@@ -50,10 +50,10 @@ type DescribeServiceUpdatesInput struct {
 
 type DescribeServiceUpdatesOutput struct {
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// MaxRecords .
 	Marker *string
 
 	// A list of service updates
@@ -139,8 +139,8 @@ type DescribeServiceUpdatesPaginatorOptions struct {
 	// The maximum number of records to include in the response
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -153,7 +153,8 @@ type DescribeServiceUpdatesPaginator struct {
 	firstPage bool
 }
 
-// NewDescribeServiceUpdatesPaginator returns a new DescribeServiceUpdatesPaginator
+// NewDescribeServiceUpdatesPaginator returns a new
+// DescribeServiceUpdatesPaginator
 func NewDescribeServiceUpdatesPaginator(client DescribeServiceUpdatesAPIClient, params *DescribeServiceUpdatesInput, optFns ...func(*DescribeServiceUpdatesPaginatorOptions)) *DescribeServiceUpdatesPaginator {
 	if params == nil {
 		params = &DescribeServiceUpdatesInput{}

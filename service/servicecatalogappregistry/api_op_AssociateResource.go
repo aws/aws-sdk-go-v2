@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a resource with an application. The resource can be specified by its
-// ARN or name. The application can be specified by ARN, ID, or name.
+// Associates a resource with an application. The resource can be specified by
+// its ARN or name. The application can be specified by ARN, ID, or name.
 func (c *Client) AssociateResource(ctx context.Context, params *AssociateResourceInput, optFns ...func(*Options)) (*AssociateResourceOutput, error) {
 	if params == nil {
 		params = &AssociateResourceInput{}

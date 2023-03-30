@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a detector model. Detectors (instances) spawned by the previous version
-// are deleted and then re-created as new inputs arrive.
+// Updates a detector model. Detectors (instances) spawned by the previous
+// version are deleted and then re-created as new inputs arrive.
 func (c *Client) UpdateDetectorModel(ctx context.Context, params *UpdateDetectorModelInput, optFns ...func(*Options)) (*UpdateDetectorModelOutput, error) {
 	if params == nil {
 		params = &UpdateDetectorModelInput{}

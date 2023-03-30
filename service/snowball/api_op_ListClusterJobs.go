@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of JobListEntry objects of the specified length. Each
-// JobListEntry object is for a job in the specified cluster and contains a job's
+// Returns an array of JobListEntry  objects of the specified length. Each
+// JobListEntryobject is for a job in the specified cluster and contains a job's
 // state, a job's ID, and other information.
 func (c *Client) ListClusterJobs(ctx context.Context, params *ListClusterJobsInput, optFns ...func(*Options)) (*ListClusterJobsOutput, error) {
 	if params == nil {
@@ -33,16 +33,16 @@ func (c *Client) ListClusterJobs(ctx context.Context, params *ListClusterJobsInp
 type ListClusterJobsInput struct {
 
 	// The 39-character ID for the cluster that you want to list, for example
-	// CID123e4567-e89b-12d3-a456-426655440000.
+	// CID123e4567-e89b-12d3-a456-426655440000 .
 	//
 	// This member is required.
 	ClusterId *string
 
-	// The number of JobListEntry objects to return.
+	// The number of JobListEntry  objects to return.
 	MaxResults *int32
 
-	// HTTP requests are stateless. To identify what object comes "next" in the list of
-	// JobListEntry objects, you have the option of specifying NextToken as the
+	// HTTP requests are stateless. To identify what object comes "next" in the list
+	// of JobListEntry  objects, you have the option of specifying NextToken as the
 	// starting point for your returned list.
 	NextToken *string
 
@@ -139,11 +139,11 @@ var _ ListClusterJobsAPIClient = (*Client)(nil)
 
 // ListClusterJobsPaginatorOptions is the paginator options for ListClusterJobs
 type ListClusterJobsPaginatorOptions struct {
-	// The number of JobListEntry objects to return.
+	// The number of JobListEntry  objects to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

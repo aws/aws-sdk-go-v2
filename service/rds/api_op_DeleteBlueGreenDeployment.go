@@ -12,11 +12,9 @@ import (
 )
 
 // Deletes a blue/green deployment. For more information, see Using Amazon RDS
-// Blue/Green Deployments for database updates
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
-// in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for
-// database updates
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
+// Blue/Green Deployments for database updates (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
+// in the Amazon RDS User Guide and Using Amazon RDS Blue/Green Deployments for
+// database updates (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
 // in the Amazon Aurora User Guide.
 func (c *Client) DeleteBlueGreenDeployment(ctx context.Context, params *DeleteBlueGreenDeploymentInput, optFns ...func(*Options)) (*DeleteBlueGreenDeploymentOutput, error) {
 	if params == nil {
@@ -37,16 +35,14 @@ type DeleteBlueGreenDeploymentInput struct {
 
 	// The blue/green deployment identifier of the deployment to be deleted. This
 	// parameter isn't case-sensitive. Constraints:
-	// - Must match an existing blue/green
-	// deployment identifier.
+	//     - Must match an existing blue/green deployment identifier.
 	//
 	// This member is required.
 	BlueGreenDeploymentIdentifier *string
 
-	// A value that indicates whether to delete the resources in the green environment.
-	// You can't specify this option if the blue/green deployment status
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_BlueGreenDeployment.html)
-	// is SWITCHOVER_COMPLETED.
+	// A value that indicates whether to delete the resources in the green
+	// environment. You can't specify this option if the blue/green deployment status (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_BlueGreenDeployment.html)
+	// is SWITCHOVER_COMPLETED .
 	DeleteTarget *bool
 
 	noSmithyDocumentSerde
@@ -55,11 +51,9 @@ type DeleteBlueGreenDeploymentInput struct {
 type DeleteBlueGreenDeploymentOutput struct {
 
 	// Contains the details about a blue/green deployment. For more information, see
-	// Using Amazon RDS Blue/Green Deployments for database updates
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
-	// in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for
-	// database updates
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
+	// Using Amazon RDS Blue/Green Deployments for database updates (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
+	// in the Amazon RDS User Guide and Using Amazon RDS Blue/Green Deployments for
+	// database updates (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
 	// in the Amazon Aurora User Guide.
 	BlueGreenDeployment *types.BlueGreenDeployment
 

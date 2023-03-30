@@ -14,8 +14,7 @@ import (
 // Configures the specified network resource. Use this action to specify the
 // geographic position of the hardware. You must provide Certified Professional
 // Installer (CPI) credentials in the request so that we can obtain spectrum
-// grants. For more information, see Radio units
-// (https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html)
+// grants. For more information, see Radio units (https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html)
 // in the Amazon Web Services Private 5G User Guide.
 func (c *Client) ConfigureAccessPoint(ctx context.Context, params *ConfigureAccessPointInput, optFns ...func(*Options)) (*ConfigureAccessPointOutput, error) {
 	if params == nil {
@@ -39,19 +38,19 @@ type ConfigureAccessPointInput struct {
 	// This member is required.
 	AccessPointArn *string
 
-	// A Base64 encoded string of the CPI certificate associated with the CPI user who
-	// is certifying the coordinates of the network resource.
+	// A Base64 encoded string of the CPI certificate associated with the CPI user
+	// who is certifying the coordinates of the network resource.
 	CpiSecretKey *string
 
-	// The CPI user ID of the CPI user who is certifying the coordinates of the network
-	// resource.
+	// The CPI user ID of the CPI user who is certifying the coordinates of the
+	// network resource.
 	CpiUserId *string
 
-	// The CPI password associated with the CPI certificate in cpiSecretKey.
+	// The CPI password associated with the CPI certificate in cpiSecretKey .
 	CpiUserPassword *string
 
-	// The CPI user name of the CPI user who is certifying the coordinates of the radio
-	// unit.
+	// The CPI user name of the CPI user who is certifying the coordinates of the
+	// radio unit.
 	CpiUsername *string
 
 	// The position of the network resource.

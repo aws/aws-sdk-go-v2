@@ -48,7 +48,7 @@ type DescribeAppInput struct {
 	// The name of the space.
 	SpaceName *string
 
-	// The user profile name. If this value is not set, then SpaceName must be set.
+	// The user profile name. If this value is not set, then SpaceName  must be set.
 	UserProfileName *string
 
 	noSmithyDocumentSerde
@@ -79,7 +79,7 @@ type DescribeAppOutput struct {
 
 	// The timestamp of the last user's activity. LastUserActivityTimestamp is also
 	// updated when SageMaker performs health checks without user activity. As a
-	// result, this value is set to the same value as LastHealthCheckTimestamp.
+	// result, this value is set to the same value as LastHealthCheckTimestamp .
 	LastUserActivityTimestamp *time.Time
 
 	// The instance type and the Amazon Resource Name (ARN) of the SageMaker image

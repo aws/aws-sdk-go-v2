@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the status of a DeleteEventsByEventType action.
+// Retrieves the status of a DeleteEventsByEventType  action.
 func (c *Client) GetDeleteEventsByEventTypeStatus(ctx context.Context, params *GetDeleteEventsByEventTypeStatusInput, optFns ...func(*Options)) (*GetDeleteEventsByEventTypeStatusOutput, error) {
 	if params == nil {
 		params = &GetDeleteEventsByEventTypeStatusInput{}

@@ -15,8 +15,7 @@ import (
 // generated. This is not a valid action for SigV4 (administrative API) clients.
 // This action requires an authentication token. To get an authentication token,
 // register an application with Amazon WorkDocs. For more information, see
-// Authentication and Access Control for User Applications
-// (https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html)
+// Authentication and Access Control for User Applications (https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html)
 // in the Amazon WorkDocs Developer Guide.
 func (c *Client) GetCurrentUser(ctx context.Context, params *GetCurrentUserInput, optFns ...func(*Options)) (*GetCurrentUserOutput, error) {
 	if params == nil {

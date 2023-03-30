@@ -34,10 +34,10 @@ type DescribeAssociationInput struct {
 	// The association ID for which you want information.
 	AssociationId *string
 
-	// Specify the association version to retrieve. To view the latest version, either
-	// specify $LATEST for this parameter, or omit this parameter. To view a list of
-	// all associations for a managed node, use ListAssociations. To get a list of
-	// versions for a specific association, use ListAssociationVersions.
+	// Specify the association version to retrieve. To view the latest version,
+	// either specify $LATEST for this parameter, or omit this parameter. To view a
+	// list of all associations for a managed node, use ListAssociations. To get a
+	// list of versions for a specific association, use ListAssociationVersions .
 	AssociationVersion *string
 
 	// The managed node ID.

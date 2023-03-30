@@ -13,8 +13,7 @@ import (
 )
 
 // List bulk thing provisioning tasks. Requires permission to access the
-// ListThingRegistrationTasks
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// ListThingRegistrationTasks (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListThingRegistrationTasks(ctx context.Context, params *ListThingRegistrationTasksInput, optFns ...func(*Options)) (*ListThingRegistrationTasksOutput, error) {
 	if params == nil {
@@ -135,8 +134,8 @@ type ListThingRegistrationTasksPaginatorOptions struct {
 	// The maximum number of results to return at one time.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

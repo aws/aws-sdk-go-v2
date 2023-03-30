@@ -46,9 +46,9 @@ const (
 	AddonStatusUpdateFailed AddonStatus = "UPDATE_FAILED"
 )
 
-// Values returns all known values for AddonStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AddonStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AddonStatus) Values() []AddonStatus {
 	return []AddonStatus{
 		"CREATING",
@@ -80,9 +80,9 @@ const (
 	AMITypesWindowsFull2022X8664    AMITypes = "WINDOWS_FULL_2022_x86_64"
 )
 
-// Values returns all known values for AMITypes. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for AMITypes. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AMITypes) Values() []AMITypes {
 	return []AMITypes{
 		"AL2_x86_64",
@@ -179,9 +179,9 @@ const (
 	ConfigStatusActive   ConfigStatus = "ACTIVE"
 )
 
-// Values returns all known values for ConfigStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ConfigStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigStatus) Values() []ConfigStatus {
 	return []ConfigStatus{
 		"CREATING",
@@ -205,9 +205,9 @@ const (
 	ConnectorConfigProviderOther       ConnectorConfigProvider = "OTHER"
 )
 
-// Values returns all known values for ConnectorConfigProvider. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ConnectorConfigProvider. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectorConfigProvider) Values() []ConnectorConfigProvider {
 	return []ConnectorConfigProvider{
 		"EKS_ANYWHERE",
@@ -245,9 +245,9 @@ const (
 	ErrorCodeK8sResourceNotFound          ErrorCode = "K8sResourceNotFound"
 )
 
-// Values returns all known values for ErrorCode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"SubnetNotFound",
@@ -281,8 +281,8 @@ const (
 	FargateProfileStatusDeleteFailed FargateProfileStatus = "DELETE_FAILED"
 )
 
-// Values returns all known values for FargateProfileStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for FargateProfileStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (FargateProfileStatus) Values() []FargateProfileStatus {
 	return []FargateProfileStatus{
@@ -302,9 +302,9 @@ const (
 	IpFamilyIpv6 IpFamily = "ipv6"
 )
 
-// Values returns all known values for IpFamily. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for IpFamily. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (IpFamily) Values() []IpFamily {
 	return []IpFamily{
 		"ipv4",
@@ -445,9 +445,9 @@ const (
 	TaintEffectPreferNoSchedule TaintEffect = "PREFER_NO_SCHEDULE"
 )
 
-// Values returns all known values for TaintEffect. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TaintEffect. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TaintEffect) Values() []TaintEffect {
 	return []TaintEffect{
 		"NO_SCHEDULE",
@@ -526,9 +526,9 @@ const (
 	UpdateStatusSuccessful UpdateStatus = "Successful"
 )
 
-// Values returns all known values for UpdateStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UpdateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateStatus) Values() []UpdateStatus {
 	return []UpdateStatus{
 		"InProgress",

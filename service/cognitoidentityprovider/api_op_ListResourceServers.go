@@ -123,8 +123,8 @@ func (c *Client) addOperationListResourceServersMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListResourceServersAPIClient is a client that implements the ListResourceServers
-// operation.
+// ListResourceServersAPIClient is a client that implements the
+// ListResourceServers operation.
 type ListResourceServersAPIClient interface {
 	ListResourceServers(context.Context, *ListResourceServersInput, ...func(*Options)) (*ListResourceServersOutput, error)
 }
@@ -137,8 +137,8 @@ type ListResourceServersPaginatorOptions struct {
 	// The maximum number of resource servers to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

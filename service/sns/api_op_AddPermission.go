@@ -13,7 +13,7 @@ import (
 // Adds a statement to a topic's access control policy, granting access for the
 // specified Amazon Web Services accounts to the specified actions. To remove the
 // ability to change topic permissions, you must deny permissions to the
-// AddPermission, RemovePermission, and SetTopicAttributes actions in your IAM
+// AddPermission , RemovePermission , and SetTopicAttributes actions in your IAM
 // policy.
 func (c *Client) AddPermission(ctx context.Context, params *AddPermissionInput, optFns ...func(*Options)) (*AddPermissionOutput, error) {
 	if params == nil {
@@ -32,15 +32,15 @@ func (c *Client) AddPermission(ctx context.Context, params *AddPermissionInput, 
 
 type AddPermissionInput struct {
 
-	// The Amazon Web Services account IDs of the users (principals) who will be given
-	// access to the specified actions. The users must have Amazon Web Services
+	// The Amazon Web Services account IDs of the users (principals) who will be
+	// given access to the specified actions. The users must have Amazon Web Services
 	// account, but do not need to be signed up for this service.
 	//
 	// This member is required.
 	AWSAccountId []string
 
 	// The action you want to allow for the specified principal(s). Valid values: Any
-	// Amazon SNS action name, for example Publish.
+	// Amazon SNS action name, for example Publish .
 	//
 	// This member is required.
 	ActionName []string

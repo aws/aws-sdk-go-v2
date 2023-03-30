@@ -38,10 +38,8 @@ type ModifySamlPropertiesInput struct {
 
 	// The SAML properties to delete as part of your request. Specify one of the
 	// following options:
-	// - SAML_PROPERTIES_USER_ACCESS_URL to delete the user access
-	// URL.
-	// - SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME to delete the relay state
-	// parameter name.
+	//     - SAML_PROPERTIES_USER_ACCESS_URL to delete the user access URL.
+	//     - SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME to delete the relay state parameter name.
 	PropertiesToDelete []types.DeletableSamlProperty
 
 	// The properties for configuring SAML 2.0 authentication.

@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a policy with the specified attributes for the specified load balancer.
-// Policies are settings that are saved for your load balancer and that can be
-// applied to the listener or the application server, depending on the policy type.
+// Creates a policy with the specified attributes for the specified load
+// balancer. Policies are settings that are saved for your load balancer and that
+// can be applied to the listener or the application server, depending on the
+// policy type.
 func (c *Client) CreateLoadBalancerPolicy(ctx context.Context, params *CreateLoadBalancerPolicyInput, optFns ...func(*Options)) (*CreateLoadBalancerPolicyOutput, error) {
 	if params == nil {
 		params = &CreateLoadBalancerPolicyInput{}
@@ -44,7 +45,7 @@ type CreateLoadBalancerPolicyInput struct {
 	PolicyName *string
 
 	// The name of the base policy type. To get the list of policy types, use
-	// DescribeLoadBalancerPolicyTypes.
+	// DescribeLoadBalancerPolicyTypes .
 	//
 	// This member is required.
 	PolicyTypeName *string

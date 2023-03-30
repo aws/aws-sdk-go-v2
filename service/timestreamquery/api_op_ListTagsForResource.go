@@ -31,8 +31,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Timestream resource with tags to be listed. This value is an Amazon Resource
-	// Name (ARN).
+	// The Timestream resource with tags to be listed. This value is an Amazon
+	// Resource Name (ARN).
 	//
 	// This member is required.
 	ResourceARN *string
@@ -54,7 +54,7 @@ type ListTagsForResourceOutput struct {
 	Tags []types.Tag
 
 	// A pagination token to resume pagination with a subsequent call to
-	// ListTagsForResourceResponse.
+	// ListTagsForResourceResponse .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -178,8 +178,8 @@ func (c *Client) fetchOpListTagsForResourceDiscoverEndpoint(ctx context.Context,
 	return weighted, nil
 }
 
-// ListTagsForResourceAPIClient is a client that implements the ListTagsForResource
-// operation.
+// ListTagsForResourceAPIClient is a client that implements the
+// ListTagsForResource operation.
 type ListTagsForResourceAPIClient interface {
 	ListTagsForResource(context.Context, *ListTagsForResourceInput, ...func(*Options)) (*ListTagsForResourceOutput, error)
 }
@@ -192,8 +192,8 @@ type ListTagsForResourcePaginatorOptions struct {
 	// The maximum number of tags to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes the resource selection associated with a backup plan that is specified
-// by the SelectionId.
+// by the SelectionId .
 func (c *Client) DeleteBackupSelection(ctx context.Context, params *DeleteBackupSelectionInput, optFns ...func(*Options)) (*DeleteBackupSelectionOutput, error) {
 	if params == nil {
 		params = &DeleteBackupSelectionInput{}

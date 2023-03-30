@@ -64,8 +64,8 @@ type DescribeDatasetOutput struct {
 	// The name of the dataset being described.
 	DatasetName *string
 
-	// IngestedFilesSummary associated with the given dataset for the latest successful
-	// associated ingestion job id.
+	// IngestedFilesSummary associated with the given dataset for the latest
+	// successful associated ingestion job id.
 	IngestedFilesSummary *types.IngestedFilesSummary
 
 	// Specifies the S3 location configuration for the data input for the data

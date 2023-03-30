@@ -27,9 +27,9 @@ type Action struct {
 // retention period.
 type ArchiveRetainRule struct {
 
-	// Information about retention period in the Amazon EBS Snapshots Archive. For more
-	// information, see Archive Amazon EBS snapshots
-	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/snapshot-archive.html).
+	// Information about retention period in the Amazon EBS Snapshots Archive. For
+	// more information, see Archive Amazon EBS snapshots (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/snapshot-archive.html)
+	// .
 	//
 	// This member is required.
 	RetentionArchiveTier *RetentionArchiveTier
@@ -50,15 +50,12 @@ type ArchiveRule struct {
 
 // [Snapshot and AMI policies only] Specifies when the policy should create
 // snapshots or AMIs.
-// - You must specify either CronExpression, or Interval,
-// IntervalUnit, and Times.
-// - If you need to specify an ArchiveRule for the
-// schedule, then you must specify a creation frequency of at least 28 days.
+//   - You must specify either CronExpression, or Interval, IntervalUnit, and Times.
+//   - If you need to specify an ArchiveRule for the schedule, then you must specify a creation frequency of at least 28 days.
 type CreateRule struct {
 
-	// The schedule, as a Cron expression. The schedule interval must be between 1 hour
-	// and 1 year. For more information, see Cron expressions
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
+	// The schedule, as a Cron expression. The schedule interval must be between 1
+	// hour and 1 year. For more information, see Cron expressions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
 	// in the Amazon CloudWatch User Guide.
 	CronExpression *string
 
@@ -69,14 +66,14 @@ type CreateRule struct {
 	// The interval unit.
 	IntervalUnit IntervalUnitValues
 
-	// [Snapshot policies only] Specifies the destination for snapshots created by the
-	// policy. To create snapshots in the same Region as the source resource, specify
-	// CLOUD. To create snapshots on the same Outpost as the source resource, specify
-	// OUTPOST_LOCAL. If you omit this parameter, CLOUD is used by default. If the
-	// policy targets resources in an Amazon Web Services Region, then you must create
-	// snapshots in the same Region as the source resource. If the policy targets
-	// resources on an Outpost, then you can create snapshots on the same Outpost as
-	// the source resource, or in the Region of that Outpost.
+	// [Snapshot policies only] Specifies the destination for snapshots created by
+	// the policy. To create snapshots in the same Region as the source resource,
+	// specify CLOUD. To create snapshots on the same Outpost as the source resource,
+	// specify OUTPOST_LOCAL . If you omit this parameter, CLOUD is used by default.
+	// If the policy targets resources in an Amazon Web Services Region, then you must
+	// create snapshots in the same Region as the source resource. If the policy
+	// targets resources on an Outpost, then you can create snapshots on the same
+	// Outpost as the source resource, or in the Region of that Outpost.
 	Location LocationValues
 
 	// The time, in UTC, to start the operation. The supported format is hh:mm. The
@@ -88,9 +85,9 @@ type CreateRule struct {
 	noSmithyDocumentSerde
 }
 
-// [Event-based policies only] Specifies a cross-Region copy action for event-based
-// policies. To specify a cross-Region copy rule for snapshot and AMI policies, use
-// CrossRegionCopyRule.
+// [Event-based policies only] Specifies a cross-Region copy action for
+// event-based policies. To specify a cross-Region copy rule for snapshot and AMI
+// policies, use CrossRegionCopyRule .
 type CrossRegionCopyAction struct {
 
 	// The encryption settings for the copied snapshot.
@@ -103,9 +100,9 @@ type CrossRegionCopyAction struct {
 	// This member is required.
 	Target *string
 
-	// Specifies a retention rule for cross-Region snapshot copies created by snapshot
-	// or event-based policies, or cross-Region AMI copies created by AMI policies.
-	// After the retention period expires, the cross-Region copy is deleted.
+	// Specifies a retention rule for cross-Region snapshot copies created by
+	// snapshot or event-based policies, or cross-Region AMI copies created by AMI
+	// policies. After the retention period expires, the cross-Region copy is deleted.
 	RetainRule *CrossRegionCopyRetainRule
 
 	noSmithyDocumentSerde
@@ -115,39 +112,39 @@ type CrossRegionCopyAction struct {
 // copies created by an AMI policy.
 type CrossRegionCopyDeprecateRule struct {
 
-	// The period after which to deprecate the cross-Region AMI copies. The period must
-	// be less than or equal to the cross-Region AMI copy retention period, and it
+	// The period after which to deprecate the cross-Region AMI copies. The period
+	// must be less than or equal to the cross-Region AMI copy retention period, and it
 	// can't be greater than 10 years. This is equivalent to 120 months, 520 weeks, or
 	// 3650 days.
 	Interval int32
 
 	// The unit of time in which to measure the Interval. For example, to deprecate a
-	// cross-Region AMI copy after 3 months, specify Interval=3 and
-	// IntervalUnit=MONTHS.
+	// cross-Region AMI copy after 3 months, specify Interval=3  and
+	// IntervalUnit=MONTHS .
 	IntervalUnit RetentionIntervalUnitValues
 
 	noSmithyDocumentSerde
 }
 
-// Specifies a retention rule for cross-Region snapshot copies created by snapshot
-// or event-based policies, or cross-Region AMI copies created by AMI policies.
-// After the retention period expires, the cross-Region copy is deleted.
+// Specifies a retention rule for cross-Region snapshot copies created by
+// snapshot or event-based policies, or cross-Region AMI copies created by AMI
+// policies. After the retention period expires, the cross-Region copy is deleted.
 type CrossRegionCopyRetainRule struct {
 
-	// The amount of time to retain a cross-Region snapshot or AMI copy. The maximum is
-	// 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.
+	// The amount of time to retain a cross-Region snapshot or AMI copy. The maximum
+	// is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.
 	Interval int32
 
-	// The unit of time for time-based retention. For example, to retain a cross-Region
-	// copy for 3 months, specify Interval=3 and IntervalUnit=MONTHS.
+	// The unit of time for time-based retention. For example, to retain a
+	// cross-Region copy for 3 months, specify Interval=3  and IntervalUnit=MONTHS .
 	IntervalUnit RetentionIntervalUnitValues
 
 	noSmithyDocumentSerde
 }
 
-// [Snapshot and AMI policies only] Specifies a cross-Region copy rule for snapshot
-// and AMI policies. To specify a cross-Region copy action for event-based polices,
-// use CrossRegionCopyAction.
+// [Snapshot and AMI policies only] Specifies a cross-Region copy rule for
+// snapshot and AMI policies. To specify a cross-Region copy action for event-based
+// polices, use CrossRegionCopyAction .
 type CrossRegionCopyRule struct {
 
 	// To encrypt a copy of an unencrypted snapshot if encryption by default is not
@@ -158,16 +155,16 @@ type CrossRegionCopyRule struct {
 	// This member is required.
 	Encrypted *bool
 
-	// The Amazon Resource Name (ARN) of the KMS key to use for EBS encryption. If this
-	// parameter is not specified, the default KMS key for the account is used.
+	// The Amazon Resource Name (ARN) of the KMS key to use for EBS encryption. If
+	// this parameter is not specified, the default KMS key for the account is used.
 	CmkArn *string
 
-	// Indicates whether to copy all user-defined tags from the source snapshot or AMI
-	// to the cross-Region copy.
+	// Indicates whether to copy all user-defined tags from the source snapshot or
+	// AMI to the cross-Region copy.
 	CopyTags *bool
 
-	// [AMI policies only] The AMI deprecation rule for cross-Region AMI copies created
-	// by the rule.
+	// [AMI policies only] The AMI deprecation rule for cross-Region AMI copies
+	// created by the rule.
 	DeprecateRule *CrossRegionCopyDeprecateRule
 
 	// The retention rule that indicates how long the cross-Region snapshot or AMI
@@ -188,8 +185,8 @@ type CrossRegionCopyRule struct {
 	noSmithyDocumentSerde
 }
 
-// [AMI policies only] Specifies an AMI deprecation rule for AMIs created by an AMI
-// lifecycle policy. For age-based schedules, you must specify Interval and
+// [AMI policies only] Specifies an AMI deprecation rule for AMIs created by an
+// AMI lifecycle policy. For age-based schedules, you must specify Interval and
 // IntervalUnit. For count-based schedules, you must specify Count.
 type DeprecateRule struct {
 
@@ -222,8 +219,8 @@ type EncryptionConfiguration struct {
 	// This member is required.
 	Encrypted *bool
 
-	// The Amazon Resource Name (ARN) of the KMS key to use for EBS encryption. If this
-	// parameter is not specified, the default KMS key for the account is used.
+	// The Amazon Resource Name (ARN) of the KMS key to use for EBS encryption. If
+	// this parameter is not specified, the default KMS key for the account is used.
 	CmkArn *string
 
 	noSmithyDocumentSerde
@@ -233,10 +230,10 @@ type EncryptionConfiguration struct {
 // policy.
 type EventParameters struct {
 
-	// The snapshot description that can trigger the policy. The description pattern is
-	// specified using a regular expression. The policy runs only if a snapshot with a
-	// description that matches the specified pattern is shared with your account. For
-	// example, specifying ^.*Created for policy: policy-1234567890abcdef0.*$
+	// The snapshot description that can trigger the policy. The description pattern
+	// is specified using a regular expression. The policy runs only if a snapshot with
+	// a description that matches the specified pattern is shared with your account.
+	// For example, specifying ^.*Created for policy: policy-1234567890abcdef0.*$
 	// configures the policy to run only if snapshots created by policy
 	// policy-1234567890abcdef0 are shared with your account.
 	//
@@ -274,8 +271,8 @@ type EventSource struct {
 	noSmithyDocumentSerde
 }
 
-// [Snapshot policies only] Specifies a rule for enabling fast snapshot restore for
-// snapshots created by snapshot policies. You can enable fast snapshot restore
+// [Snapshot policies only] Specifies a rule for enabling fast snapshot restore
+// for snapshots created by snapshot policies. You can enable fast snapshot restore
 // based on either a count or a time interval.
 type FastRestoreRule struct {
 
@@ -360,19 +357,19 @@ type LifecyclePolicySummary struct {
 	noSmithyDocumentSerde
 }
 
-// [Snapshot and AMI policies only] Specifies optional parameters for snapshot and
-// AMI policies. The set of valid parameters depends on the combination of policy
-// type and target resource type. If you choose to exclude boot volumes and you
-// specify tags that consequently exclude all of the additional data volumes
+// [Snapshot and AMI policies only] Specifies optional parameters for snapshot
+// and AMI policies. The set of valid parameters depends on the combination of
+// policy type and target resource type. If you choose to exclude boot volumes and
+// you specify tags that consequently exclude all of the additional data volumes
 // attached to an instance, then Amazon Data Lifecycle Manager will not create any
 // snapshots for the affected instance, and it will emit a SnapshotsCreateFailed
-// Amazon CloudWatch metric. For more information, see Monitor your policies using
-// Amazon CloudWatch
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitor-dlm-cw-metrics.html).
+// Amazon CloudWatch metric. For more information, see Monitor your policies
+// using Amazon CloudWatch (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitor-dlm-cw-metrics.html)
+// .
 type Parameters struct {
 
-	// [Snapshot policies that target instances only] Indicates whether to exclude the
-	// root volume from multi-volume snapshot sets. The default is false. If you
+	// [Snapshot policies that target instances only] Indicates whether to exclude
+	// the root volume from multi-volume snapshot sets. The default is false. If you
 	// specify true, then the root volumes attached to targeted instances will be
 	// excluded from the multi-volume snapshot sets created by the policy.
 	ExcludeBootVolume *bool
@@ -388,7 +385,7 @@ type Parameters struct {
 	// [AMI policies only] Indicates whether targeted instances are rebooted when the
 	// lifecycle policy runs. true indicates that targeted instances are not rebooted
 	// when the policy runs. false indicates that target instances are rebooted when
-	// the policy runs. The default is true (instances are not rebooted).
+	// the policy runs. The default is true  (instances are not rebooted).
 	NoReboot *bool
 
 	noSmithyDocumentSerde
@@ -416,22 +413,23 @@ type PolicyDetails struct {
 	// manage. Specify EBS_SNAPSHOT_MANAGEMENT to create a lifecycle policy that
 	// manages the lifecycle of Amazon EBS snapshots. Specify IMAGE_MANAGEMENT to
 	// create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify
-	// EVENT_BASED_POLICY  to create an event-based policy that performs specific
+	//
+	// EVENT_BASED_POLICY to create an event-based policy that performs specific
 	// actions when a defined event occurs in your Amazon Web Services account. The
-	// default is EBS_SNAPSHOT_MANAGEMENT.
+	// default is EBS_SNAPSHOT_MANAGEMENT .
 	PolicyType PolicyTypeValues
 
-	// [Snapshot and AMI policies only] The location of the resources to backup. If the
-	// source resources are located in an Amazon Web Services Region, specify CLOUD. If
-	// the source resources are located on an Outpost in your account, specify OUTPOST.
-	// If you specify OUTPOST, Amazon Data Lifecycle Manager backs up all resources of
-	// the specified type with matching target tags across all of the Outposts in your
-	// account.
+	// [Snapshot and AMI policies only] The location of the resources to backup. If
+	// the source resources are located in an Amazon Web Services Region, specify
+	// CLOUD. If the source resources are located on an Outpost in your account,
+	// specify OUTPOST . If you specify OUTPOST, Amazon Data Lifecycle Manager backs
+	// up all resources of the specified type with matching target tags across all of
+	// the Outposts in your account.
 	ResourceLocations []ResourceLocationValues
 
-	// [Snapshot policies only] The target resource type for snapshot and AMI lifecycle
-	// policies. Use VOLUME to create snapshots of individual volumes or use INSTANCE
-	// to create multi-volume snapshots from the volumes for an instance.
+	// [Snapshot policies only] The target resource type for snapshot and AMI
+	// lifecycle policies. Use VOLUME to create snapshots of individual volumes or
+	// use INSTANCE  to create multi-volume snapshots from the volumes for an instance.
 	ResourceTypes []ResourceTypeValues
 
 	// [Snapshot and AMI policies only] The schedules of policy-defined actions for
@@ -448,38 +446,29 @@ type PolicyDetails struct {
 
 // [Snapshot and AMI policies only] Specifies a retention rule for snapshots
 // created by snapshot policies, or for AMIs created by AMI policies. For snapshot
-// policies that have an ArchiveRule, this retention rule applies to standard tier
-// retention. When the retention threshold is met, snapshots are moved from the
-// standard to the archive tier. For snapshot policies that do not have an
+// policies that have an ArchiveRule, this retention rule applies to standard
+// tier retention. When the retention threshold is met, snapshots are moved from
+// the standard to the archive tier. For snapshot policies that do not have an
 // ArchiveRule, snapshots are permanently deleted when this retention threshold is
 // met. You can retain snapshots based on either a count or a time interval.
-// -
-// Count-based retention You must specify Count. If you specify an ArchiveRule for
-// the schedule, then you can specify a retention count of 0 to archive snapshots
-// immediately after creation. If you specify a FastRestoreRule, ShareRule, or a
-// CrossRegionCopyRule, then you must specify a retention count of 1 or more.
-// -
-// Age-based retention You must specify Interval and IntervalUnit. If you specify
-// an ArchiveRule for the schedule, then you can specify a retention interval of 0
-// days to archive snapshots immediately after creation. If you specify a
-// FastRestoreRule, ShareRule, or a CrossRegionCopyRule, then you must specify a
-// retention interval of 1 day or more.
+//   - Count-based retention You must specify Count. If you specify an ArchiveRule for the schedule, then you can specify a retention count of 0 to archive snapshots immediately after creation. If you specify a FastRestoreRule , ShareRule , or a CrossRegionCopyRule , then you must specify a retention count of 1 or more.
+//   - Age-based retention You must specify Interval and IntervalUnit. If you specify an ArchiveRule for the schedule, then you can specify a retention interval of 0 days to archive snapshots immediately after creation. If you specify a FastRestoreRule , ShareRule , or a CrossRegionCopyRule , then you must specify a retention interval of 1 day or more.
 type RetainRule struct {
 
-	// The number of snapshots to retain for each volume, up to a maximum of 1000. For
-	// example if you want to retain a maximum of three snapshots, specify 3. When the
-	// fourth snapshot is created, the oldest retained snapshot is deleted, or it is
-	// moved to the archive tier if you have specified an ArchiveRule.
+	// The number of snapshots to retain for each volume, up to a maximum of 1000.
+	// For example if you want to retain a maximum of three snapshots, specify 3.
+	// When the fourth snapshot is created, the oldest retained snapshot is deleted, or
+	// it is moved to the archive tier if you have specified an ArchiveRule .
 	Count int32
 
 	// The amount of time to retain each snapshot. The maximum is 100 years. This is
 	// equivalent to 1200 months, 5200 weeks, or 36500 days.
 	Interval int32
 
-	// The unit of time for time-based retention. For example, to retain snapshots for
-	// 3 months, specify Interval=3 and IntervalUnit=MONTHS. Once the snapshot has been
-	// retained for 3 months, it is deleted, or it is moved to the archive tier if you
-	// have specified an ArchiveRule.
+	// The unit of time for time-based retention. For example, to retain snapshots
+	// for 3 months, specify Interval=3  and IntervalUnit=MONTHS. Once the snapshot
+	// has been retained for 3 months, it is deleted, or it is moved to the archive
+	// tier if you have specified an ArchiveRule .
 	IntervalUnit RetentionIntervalUnitValues
 
 	noSmithyDocumentSerde
@@ -491,8 +480,8 @@ type RetainRule struct {
 // in the archive tier for a minimum of 90 days. For count-based schedules, you
 // must specify Count. For age-based schedules, you must specify Interval and
 // IntervalUnit. For more information about using snapshot archiving, see
-// Considerations for snapshot lifecycle policies
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-ami-policy.html#dlm-archive).
+// Considerations for snapshot lifecycle policies (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-ami-policy.html#dlm-archive)
+// .
 type RetentionArchiveTier struct {
 
 	// The maximum number of snapshots to retain in the archive storage tier for each
@@ -502,13 +491,13 @@ type RetentionArchiveTier struct {
 	// for at least 90 days.
 	Count int32
 
-	// Specifies the period of time to retain snapshots in the archive tier. After this
-	// period expires, the snapshot is permanently deleted.
+	// Specifies the period of time to retain snapshots in the archive tier. After
+	// this period expires, the snapshot is permanently deleted.
 	Interval int32
 
 	// The unit of time in which to measure the Interval. For example, to retain a
-	// snapshots in the archive tier for 6 months, specify Interval=6 and
-	// IntervalUnit=MONTHS.
+	// snapshots in the archive tier for 6 months, specify Interval=6  and
+	// IntervalUnit=MONTHS .
 	IntervalUnit RetentionIntervalUnitValues
 
 	noSmithyDocumentSerde
@@ -518,26 +507,26 @@ type RetentionArchiveTier struct {
 // lifecycle policy.
 type Schedule struct {
 
-	// [Snapshot policies that target volumes only] The snapshot archiving rule for the
-	// schedule. When you specify an archiving rule, snapshots are automatically moved
-	// from the standard tier to the archive tier once the schedule's retention
+	// [Snapshot policies that target volumes only] The snapshot archiving rule for
+	// the schedule. When you specify an archiving rule, snapshots are automatically
+	// moved from the standard tier to the archive tier once the schedule's retention
 	// threshold is met. Snapshots are then retained in the archive tier for the
 	// archive retention period that you specify. For more information about using
-	// snapshot archiving, see Considerations for snapshot lifecycle policies
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-ami-policy.html#dlm-archive).
+	// snapshot archiving, see Considerations for snapshot lifecycle policies (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-ami-policy.html#dlm-archive)
+	// .
 	ArchiveRule *ArchiveRule
 
-	// Copy all user-defined tags on a source volume to snapshots of the volume created
-	// by this policy.
+	// Copy all user-defined tags on a source volume to snapshots of the volume
+	// created by this policy.
 	CopyTags bool
 
 	// The creation rule.
 	CreateRule *CreateRule
 
-	// Specifies a rule for copying snapshots or AMIs across regions. You can't specify
-	// cross-Region copy rules for policies that create snapshots on an Outpost. If the
-	// policy creates snapshots in a Region, then snapshots can be copied to up to
-	// three Regions or Outposts.
+	// Specifies a rule for copying snapshots or AMIs across regions. You can't
+	// specify cross-Region copy rules for policies that create snapshots on an
+	// Outpost. If the policy creates snapshots in a Region, then snapshots can be
+	// copied to up to three Regions or Outposts.
 	CrossRegionCopyRules []CrossRegionCopyRule
 
 	// [AMI policies only] The AMI deprecation rule for the schedule.
@@ -560,11 +549,11 @@ type Schedule struct {
 	// addition to the Amazon Web Services-added lifecycle tags.
 	TagsToAdd []Tag
 
-	// [AMI policies and snapshot policies that target instances only] A collection of
-	// key/value pairs with values determined dynamically when the policy is executed.
-	// Keys may be any valid Amazon EC2 tag key. Values must be in one of the two
-	// following formats: $(instance-id) or $(timestamp). Variable tags are only valid
-	// for EBS Snapshot Management – Instance policies.
+	// [AMI policies and snapshot policies that target instances only] A collection
+	// of key/value pairs with values determined dynamically when the policy is
+	// executed. Keys may be any valid Amazon EC2 tag key. Values must be in one of the
+	// two following formats: $(instance-id)  or $(timestamp). Variable tags are only
+	// valid for EBS Snapshot Management – Instance policies.
 	VariableTags []Tag
 
 	noSmithyDocumentSerde
@@ -579,8 +568,8 @@ type ShareRule struct {
 	// This member is required.
 	TargetAccounts []string
 
-	// The period after which snapshots that are shared with other Amazon Web Services
-	// accounts are automatically unshared.
+	// The period after which snapshots that are shared with other Amazon Web
+	// Services accounts are automatically unshared.
 	UnshareInterval int32
 
 	// The unit of time for the automatic unsharing interval.

@@ -29,7 +29,7 @@ func (c *Client) DeleteAvailabilityConfiguration(ctx context.Context, params *De
 
 type DeleteAvailabilityConfigurationInput struct {
 
-	// The domain for which the AvailabilityConfiguration will be deleted.
+	// The domain for which the AvailabilityConfiguration  will be deleted.
 	//
 	// This member is required.
 	DomainName *string

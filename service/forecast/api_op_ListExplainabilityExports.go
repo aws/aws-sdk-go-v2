@@ -13,10 +13,10 @@ import (
 )
 
 // Returns a list of Explainability exports created using the
-// CreateExplainabilityExport operation. This operation returns a summary for each
-// Explainability export. You can filter the list using an array of Filter objects.
-// To retrieve the complete set of properties for a particular Explainability
-// export, use the ARN with the DescribeExplainability operation.
+// CreateExplainabilityExportoperation. This operation returns a summary for each
+// Explainability export. You can filter the list using an array of Filter
+// objects. To retrieve the complete set of properties for a particular
+// Explainability export, use the ARN with the DescribeExplainability  operation.
 func (c *Client) ListExplainabilityExports(ctx context.Context, params *ListExplainabilityExportsInput, optFns ...func(*Options)) (*ListExplainabilityExportsOutput, error) {
 	if params == nil {
 		params = &ListExplainabilityExportsInput{}
@@ -34,16 +34,13 @@ func (c *Client) ListExplainabilityExports(ctx context.Context, params *ListExpl
 
 type ListExplainabilityExportsInput struct {
 
-	// An array of filters. For each filter, provide a condition and a match statement.
-	// The condition is either IS or IS_NOT, which specifies whether to include or
-	// exclude resources that match the statement from the list. The match statement
-	// consists of a key and a value. Filter properties
-	// - Condition - The condition to
-	// apply. Valid values are IS and IS_NOT.
-	// - Key - The name of the parameter to
-	// filter on. Valid values are ResourceArn and Status.
-	// - Value - The value to
-	// match.
+	// An array of filters. For each filter, provide a condition and a match
+	// statement. The condition is either IS  or IS_NOT, which specifies whether to
+	// include or exclude resources that match the statement from the list. The match
+	// statement consists of a key and a value. Filter properties
+	//     - Condition - The condition to apply. Valid values are IS and IS_NOT .
+	//     - Key - The name of the parameter to filter on. Valid values are ResourceArn and Status .
+	//     - Value - The value to match.
 	Filters []types.Filter
 
 	// The number of items to return in the response.
@@ -59,7 +56,8 @@ type ListExplainabilityExportsInput struct {
 
 type ListExplainabilityExportsOutput struct {
 
-	// An array of objects that summarize the properties of each Explainability export.
+	// An array of objects that summarize the properties of each Explainability
+	// export.
 	ExplainabilityExports []types.ExplainabilityExportSummary
 
 	// Returns this token if the response is truncated. To retrieve the next set of
@@ -149,8 +147,8 @@ type ListExplainabilityExportsPaginatorOptions struct {
 	// The number of items to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

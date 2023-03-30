@@ -30,11 +30,10 @@ func (c *Client) ListAppVersionAppComponents(ctx context.Context, params *ListAp
 
 type ListAppVersionAppComponentsInput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The
+	// format for this ARN is: arn: partition :resiliencehub: region : account :app/
+	// app-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
@@ -44,8 +43,8 @@ type ListAppVersionAppComponentsInput struct {
 	// This member is required.
 	AppVersion *string
 
-	// Maximum number of Application Components to be displayed per AWS Resilience Hub
-	// application version.
+	// Maximum number of Application Components to be displayed per AWS Resilience
+	// Hub application version.
 	MaxResults *int32
 
 	// Null, or the token from a previous call to get the next set of results.
@@ -56,11 +55,10 @@ type ListAppVersionAppComponentsInput struct {
 
 type ListAppVersionAppComponentsOutput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference guide.
+	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The
+	// format for this ARN is: arn: partition :resiliencehub: region : account :app/
+	// app-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
@@ -156,12 +154,12 @@ var _ ListAppVersionAppComponentsAPIClient = (*Client)(nil)
 // ListAppVersionAppComponentsPaginatorOptions is the paginator options for
 // ListAppVersionAppComponents
 type ListAppVersionAppComponentsPaginatorOptions struct {
-	// Maximum number of Application Components to be displayed per AWS Resilience Hub
-	// application version.
+	// Maximum number of Application Components to be displayed per AWS Resilience
+	// Hub application version.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

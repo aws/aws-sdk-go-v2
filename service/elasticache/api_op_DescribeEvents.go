@@ -33,26 +33,26 @@ func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput
 	return out, nil
 }
 
-// Represents the input of a DescribeEvents operation.
+// Represents the input of a DescribeEvents  operation.
 type DescribeEventsInput struct {
 
 	// The number of minutes worth of events to retrieve.
 	Duration *int32
 
-	// The end of the time interval for which to retrieve events, specified in ISO 8601
-	// format. Example: 2017-03-30T07:03:49.555Z
+	// The end of the time interval for which to retrieve events, specified in ISO
+	// 8601 format. Example: 2017-03-30T07:03:49.555Z
 	EndTime *time.Time
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a marker is included in the
+	// response so that the remaining results can be retrieved. Default: 100
+	// Constraints: minimum 20; maximum 100.
 	MaxRecords *int32
 
 	// The identifier of the event source for which events are returned. If not
@@ -63,14 +63,14 @@ type DescribeEventsInput struct {
 	// are returned.
 	SourceType types.SourceType
 
-	// The beginning of the time interval to retrieve events for, specified in ISO 8601
-	// format. Example: 2017-03-30T07:03:49.555Z
+	// The beginning of the time interval to retrieve events for, specified in ISO
+	// 8601 format. Example: 2017-03-30T07:03:49.555Z
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a DescribeEvents operation.
+// Represents the output of a DescribeEvents  operation.
 type DescribeEventsOutput struct {
 
 	// A list of events. Each element in the list contains detailed information about
@@ -156,14 +156,14 @@ var _ DescribeEventsAPIClient = (*Client)(nil)
 
 // DescribeEventsPaginatorOptions is the paginator options for DescribeEvents
 type DescribeEventsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a marker is included in the
+	// response so that the remaining results can be retrieved. Default: 100
+	// Constraints: minimum 20; maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches network profiles and lists the ones that meet a set of filter and sort
-// criteria.
+// Searches network profiles and lists the ones that meet a set of filter and
+// sort criteria.
 func (c *Client) SearchNetworkProfiles(ctx context.Context, params *SearchNetworkProfilesInput, optFns ...func(*Options)) (*SearchNetworkProfilesOutput, error) {
 	if params == nil {
 		params = &SearchNetworkProfilesInput{}
@@ -35,9 +35,9 @@ type SearchNetworkProfilesInput struct {
 	// are NetworkProfileName, Ssid, and SecurityType.
 	Filters []types.Filter
 
-	// The maximum number of results to include in the response. If more results exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved.
+	// The maximum number of results to include in the response. If more results
+	// exist than the specified MaxResults value, a token is included in the response
+	// so that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// An optional token returned from a prior request. Use this token for pagination
@@ -45,8 +45,8 @@ type SearchNetworkProfilesInput struct {
 	// includes only results beyond the token, up to the value specified by MaxResults.
 	NextToken *string
 
-	// The sort order to use to list the specified set of network profiles. Valid sort
-	// criteria includes NetworkProfileName, Ssid, and SecurityType.
+	// The sort order to use to list the specified set of network profiles. Valid
+	// sort criteria includes NetworkProfileName, Ssid, and SecurityType.
 	SortCriteria []types.Sort
 
 	noSmithyDocumentSerde
@@ -146,13 +146,13 @@ var _ SearchNetworkProfilesAPIClient = (*Client)(nil)
 // SearchNetworkProfilesPaginatorOptions is the paginator options for
 // SearchNetworkProfiles
 type SearchNetworkProfilesPaginatorOptions struct {
-	// The maximum number of results to include in the response. If more results exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved.
+	// The maximum number of results to include in the response. If more results
+	// exist than the specified MaxResults value, a token is included in the response
+	// so that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

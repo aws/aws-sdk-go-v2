@@ -28,9 +28,9 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource to return tags for. The Firewall
-	// Manager resources that support tagging are policies, applications lists, and
-	// protocols lists.
+	// The Amazon Resource Name (ARN) of the resource to return tags for. The
+	// Firewall Manager resources that support tagging are policies, applications
+	// lists, and protocols lists.
 	//
 	// This member is required.
 	ResourceArn *string

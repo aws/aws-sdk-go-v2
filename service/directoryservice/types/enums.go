@@ -72,9 +72,9 @@ const (
 	ClientAuthenticationTypeSmartCardOrPassword ClientAuthenticationType = "SmartCardOrPassword"
 )
 
-// Values returns all known values for ClientAuthenticationType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ClientAuthenticationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClientAuthenticationType) Values() []ClientAuthenticationType {
 	return []ClientAuthenticationType{
 		"SmartCard",
@@ -93,9 +93,10 @@ const (
 	DirectoryConfigurationStatusDefault   DirectoryConfigurationStatus = "Default"
 )
 
-// Values returns all known values for DirectoryConfigurationStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DirectoryConfigurationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (DirectoryConfigurationStatus) Values() []DirectoryConfigurationStatus {
 	return []DirectoryConfigurationStatus{
 		"Requested",
@@ -264,9 +265,9 @@ const (
 	LDAPSStatusDisabled     LDAPSStatus = "Disabled"
 )
 
-// Values returns all known values for LDAPSStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LDAPSStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LDAPSStatus) Values() []LDAPSStatus {
 	return []LDAPSStatus{
 		"Enabling",
@@ -283,9 +284,9 @@ const (
 	LDAPSTypeClient LDAPSType = "Client"
 )
 
-// Values returns all known values for LDAPSType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for LDAPSType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (LDAPSType) Values() []LDAPSType {
 	return []LDAPSType{
 		"Client",
@@ -300,9 +301,9 @@ const (
 	OSVersionVersion2019 OSVersion = "SERVER_2019"
 )
 
-// Values returns all known values for OSVersion. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for OSVersion. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (OSVersion) Values() []OSVersion {
 	return []OSVersion{
 		"SERVER_2012",
@@ -320,9 +321,10 @@ const (
 	RadiusAuthenticationProtocolMschapv2 RadiusAuthenticationProtocol = "MS-CHAPv2"
 )
 
-// Values returns all known values for RadiusAuthenticationProtocol. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RadiusAuthenticationProtocol. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (RadiusAuthenticationProtocol) Values() []RadiusAuthenticationProtocol {
 	return []RadiusAuthenticationProtocol{
 		"PAP",
@@ -341,9 +343,9 @@ const (
 	RadiusStatusFailed    RadiusStatus = "Failed"
 )
 
-// Values returns all known values for RadiusStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RadiusStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (RadiusStatus) Values() []RadiusStatus {
 	return []RadiusStatus{
 		"Creating",
@@ -401,8 +403,8 @@ const (
 	SchemaExtensionStatusCompleted          SchemaExtensionStatus = "Completed"
 )
 
-// Values returns all known values for SchemaExtensionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SchemaExtensionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SchemaExtensionStatus) Values() []SchemaExtensionStatus {
 	return []SchemaExtensionStatus{
@@ -444,9 +446,9 @@ const (
 	ShareMethodHandshake     ShareMethod = "HANDSHAKE"
 )
 
-// Values returns all known values for ShareMethod. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ShareMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ShareMethod) Values() []ShareMethod {
 	return []ShareMethod{
 		"ORGANIZATIONS",
@@ -469,9 +471,9 @@ const (
 	ShareStatusDeleting          ShareStatus = "Deleting"
 )
 
-// Values returns all known values for ShareStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ShareStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ShareStatus) Values() []ShareStatus {
 	return []ShareStatus{
 		"Shared",
@@ -514,9 +516,9 @@ const (
 	SnapshotTypeManual SnapshotType = "Manual"
 )
 
-// Values returns all known values for SnapshotType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SnapshotType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (SnapshotType) Values() []SnapshotType {
 	return []SnapshotType{
 		"Auto",
@@ -550,9 +552,9 @@ const (
 	TopicStatusDeleted       TopicStatus = "Deleted"
 )
 
-// Values returns all known values for TopicStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TopicStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TopicStatus) Values() []TopicStatus {
 	return []TopicStatus{
 		"Registered",
@@ -626,9 +628,9 @@ const (
 	TrustTypeExternal TrustType = "External"
 )
 
-// Values returns all known values for TrustType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for TrustType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TrustType) Values() []TrustType {
 	return []TrustType{
 		"Forest",
@@ -645,9 +647,9 @@ const (
 	UpdateStatusUpdateFailed UpdateStatus = "UpdateFailed"
 )
 
-// Values returns all known values for UpdateStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UpdateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateStatus) Values() []UpdateStatus {
 	return []UpdateStatus{
 		"Updated",

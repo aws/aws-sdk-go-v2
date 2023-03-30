@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about all provisioned DAX clusters if no cluster identifier
-// is specified, or about a specific DAX cluster if a cluster identifier is
-// supplied. If the cluster is in the CREATING state, only cluster level
+// Returns information about all provisioned DAX clusters if no cluster
+// identifier is specified, or about a specific DAX cluster if a cluster identifier
+// is supplied. If the cluster is in the CREATING state, only cluster level
 // information will be displayed until all of the nodes are successfully
 // provisioned. If the cluster is in the DELETING state, only cluster level
 // information will be displayed. If nodes are currently being added to the DAX
@@ -42,15 +42,16 @@ type DescribeClustersInput struct {
 	// The names of the DAX clusters being described.
 	ClusterNames []string
 
-	// The maximum number of results to include in the response. If more results exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved. The value for MaxResults must be between
-	// 20 and 100.
+	// The maximum number of results to include in the response. If more results
+	// exist than the specified MaxResults value, a token is included in the response
+	// so that the remaining results can be retrieved. The value for MaxResults must
+	// be between 20 and 100.
 	MaxResults *int32
 
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
-	// includes only results beyond the token, up to the value specified by MaxResults.
+	// includes only results beyond the token, up to the value specified by MaxResults
+	// .
 	NextToken *string
 
 	noSmithyDocumentSerde

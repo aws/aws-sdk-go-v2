@@ -40,8 +40,8 @@ type UpdateTableObjectsInput struct {
 	// This member is required.
 	TableName *string
 
-	// A list of WriteOperation objects that define an object to add to or delete from
-	// the manifest for a governed table.
+	// A list of WriteOperation objects that define an object to add to or delete
+	// from the manifest for a governed table.
 	//
 	// This member is required.
 	WriteOperations []types.WriteOperation

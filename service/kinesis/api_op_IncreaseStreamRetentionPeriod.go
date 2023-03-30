@@ -14,13 +14,13 @@ import (
 // time data records are accessible after they are added to the stream. The maximum
 // value of a stream's retention period is 8760 hours (365 days). When invoking
 // this API, it is recommended you use the StreamARN input parameter rather than
-// the StreamName input parameter. If you choose a longer stream retention period,
-// this operation increases the time period during which records that have not yet
-// expired are accessible. However, it does not make previous, expired data (older
-// than the stream's previous retention period) accessible after the operation has
-// been called. For example, if a stream's retention period is set to 24 hours and
-// is increased to 168 hours, any data that is older than 24 hours remains
-// inaccessible to consumer applications.
+// the StreamName input parameter. If you choose a longer stream retention
+// period, this operation increases the time period during which records that have
+// not yet expired are accessible. However, it does not make previous, expired data
+// (older than the stream's previous retention period) accessible after the
+// operation has been called. For example, if a stream's retention period is set to
+// 24 hours and is increased to 168 hours, any data that is older than 24 hours
+// remains inaccessible to consumer applications.
 func (c *Client) IncreaseStreamRetentionPeriod(ctx context.Context, params *IncreaseStreamRetentionPeriodInput, optFns ...func(*Options)) (*IncreaseStreamRetentionPeriodOutput, error) {
 	if params == nil {
 		params = &IncreaseStreamRetentionPeriodInput{}
@@ -36,11 +36,11 @@ func (c *Client) IncreaseStreamRetentionPeriod(ctx context.Context, params *Incr
 	return out, nil
 }
 
-// Represents the input for IncreaseStreamRetentionPeriod.
+// Represents the input for IncreaseStreamRetentionPeriod .
 type IncreaseStreamRetentionPeriodInput struct {
 
-	// The new retention period of the stream, in hours. Must be more than the current
-	// retention period.
+	// The new retention period of the stream, in hours. Must be more than the
+	// current retention period.
 	//
 	// This member is required.
 	RetentionPeriodHours *int32

@@ -38,23 +38,23 @@ type ListHumanLoopsInput struct {
 	FlowDefinitionArn *string
 
 	// (Optional) The timestamp of the date when you want the human loops to begin in
-	// ISO 8601 format. For example, 2020-02-24.
+	// ISO 8601 format. For example, 2020-02-24 .
 	CreationTimeAfter *time.Time
 
 	// (Optional) The timestamp of the date before which you want the human loops to
-	// begin in ISO 8601 format. For example, 2020-02-24.
+	// begin in ISO 8601 format. For example, 2020-02-24 .
 	CreationTimeBefore *time.Time
 
 	// The total number of items to return. If the total number of available items is
-	// more than the value specified in MaxResults, then a NextToken is returned in the
-	// output. You can use this token to display the next page of results.
+	// more than the value specified in MaxResults , then a NextToken is returned in
+	// the output. You can use this token to display the next page of results.
 	MaxResults *int32
 
 	// A token to display the next page of results.
 	NextToken *string
 
-	// Optional. The order for displaying results. Valid values: Ascending and
-	// Descending.
+	// Optional. The order for displaying results. Valid values: Ascending  and
+	// Descending .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -150,12 +150,12 @@ var _ ListHumanLoopsAPIClient = (*Client)(nil)
 // ListHumanLoopsPaginatorOptions is the paginator options for ListHumanLoops
 type ListHumanLoopsPaginatorOptions struct {
 	// The total number of items to return. If the total number of available items is
-	// more than the value specified in MaxResults, then a NextToken is returned in the
-	// output. You can use this token to display the next page of results.
+	// more than the value specified in MaxResults , then a NextToken is returned in
+	// the output. You can use this token to display the next page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

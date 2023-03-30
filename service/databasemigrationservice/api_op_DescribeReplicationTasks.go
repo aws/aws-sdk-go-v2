@@ -36,24 +36,24 @@ func (c *Client) DescribeReplicationTasks(ctx context.Context, params *DescribeR
 
 type DescribeReplicationTasksInput struct {
 
-	// Filters applied to replication tasks. Valid filter names: replication-task-arn |
-	// replication-task-id | migration-type | endpoint-arn | replication-instance-arn
+	// Filters applied to replication tasks. Valid filter names: replication-task-arn
+	// | replication-task-id | migration-type | endpoint-arn | replication-instance-arn
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// An option to set to avoid returning information about settings. Use this to
 	// reduce overhead when setting information is too large. To use this option,
-	// choose true; otherwise, choose false (the default).
+	// choose true ; otherwise, choose false  (the default).
 	WithoutSettings *bool
 
 	noSmithyDocumentSerde
@@ -63,7 +63,7 @@ type DescribeReplicationTasksOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// A description of the replication tasks.
@@ -149,14 +149,14 @@ var _ DescribeReplicationTasksAPIClient = (*Client)(nil)
 // DescribeReplicationTasksPaginatorOptions is the paginator options for
 // DescribeReplicationTasks
 type DescribeReplicationTasksPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -247,9 +247,10 @@ type ReplicationTaskDeletedWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ReplicationTaskDeletedWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ReplicationTaskDeletedWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -289,9 +290,9 @@ func NewReplicationTaskDeletedWaiter(client DescribeReplicationTasksAPIClient, o
 	}
 }
 
-// Wait calls the waiter function for ReplicationTaskDeleted waiter. The maxWaitDur
-// is the maximum wait duration the waiter will wait. The maxWaitDur is required
-// and must be greater than zero.
+// Wait calls the waiter function for ReplicationTaskDeleted waiter. The
+// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
+// required and must be greater than zero.
 func (w *ReplicationTaskDeletedWaiter) Wait(ctx context.Context, params *DescribeReplicationTasksInput, maxWaitDur time.Duration, optFns ...func(*ReplicationTaskDeletedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -518,9 +519,10 @@ type ReplicationTaskReadyWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ReplicationTaskReadyWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ReplicationTaskReadyWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -886,9 +888,10 @@ type ReplicationTaskRunningWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ReplicationTaskRunningWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ReplicationTaskRunningWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -928,9 +931,9 @@ func NewReplicationTaskRunningWaiter(client DescribeReplicationTasksAPIClient, o
 	}
 }
 
-// Wait calls the waiter function for ReplicationTaskRunning waiter. The maxWaitDur
-// is the maximum wait duration the waiter will wait. The maxWaitDur is required
-// and must be greater than zero.
+// Wait calls the waiter function for ReplicationTaskRunning waiter. The
+// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
+// required and must be greater than zero.
 func (w *ReplicationTaskRunningWaiter) Wait(ctx context.Context, params *DescribeReplicationTasksInput, maxWaitDur time.Duration, optFns ...func(*ReplicationTaskRunningWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -1254,9 +1257,10 @@ type ReplicationTaskStoppedWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ReplicationTaskStoppedWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ReplicationTaskStoppedWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -1296,9 +1300,9 @@ func NewReplicationTaskStoppedWaiter(client DescribeReplicationTasksAPIClient, o
 	}
 }
 
-// Wait calls the waiter function for ReplicationTaskStopped waiter. The maxWaitDur
-// is the maximum wait duration the waiter will wait. The maxWaitDur is required
-// and must be greater than zero.
+// Wait calls the waiter function for ReplicationTaskStopped waiter. The
+// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
+// required and must be greater than zero.
 func (w *ReplicationTaskStoppedWaiter) Wait(ctx context.Context, params *DescribeReplicationTasksInput, maxWaitDur time.Duration, optFns ...func(*ReplicationTaskStoppedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

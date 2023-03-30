@@ -46,8 +46,8 @@ type MergeBranchesByThreeWayInput struct {
 	// This member is required.
 	SourceCommitSpecifier *string
 
-	// The name of the author who created the commit. This information is used as both
-	// the author and committer for the commit.
+	// The name of the author who created the commit. This information is used as
+	// both the author and committer for the commit.
 	AuthorName *string
 
 	// The commit message to include in the commit information for the merge.

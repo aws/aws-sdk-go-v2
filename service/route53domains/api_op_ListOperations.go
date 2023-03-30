@@ -13,8 +13,8 @@ import (
 	"time"
 )
 
-// Returns information about all of the operations that return an operation ID and
-// that have ever been performed on domains that were registered by the current
+// Returns information about all of the operations that return an operation ID
+// and that have ever been performed on domains that were registered by the current
 // account. This command runs only in the us-east-1 Region.
 func (c *Client) ListOperations(ctx context.Context, params *ListOperationsInput, optFns ...func(*Options)) (*ListOperationsOutput, error) {
 	if params == nil {
@@ -36,9 +36,10 @@ type ListOperationsInput struct {
 
 	// For an initial request for a list of operations, omit this element. If the
 	// number of operations that are not yet complete is greater than the value that
-	// you specified for MaxItems, you can use Marker to return additional operations.
-	// Get the value of NextPageMarker from the previous response, and submit another
-	// request that includes the value of NextPageMarker in the Marker element.
+	// you specified for MaxItems , you can use Marker to return additional
+	// operations. Get the value of NextPageMarker from the previous response, and
+	// submit another request that includes the value of NextPageMarker  in the Marker
+	// element.
 	Marker *string
 
 	// Number of domains to be returned. Default: 20
@@ -68,8 +69,8 @@ type ListOperationsInput struct {
 type ListOperationsOutput struct {
 
 	// If there are more operations than you specified for MaxItems in the request,
-	// submit another request and include the value of NextPageMarker in the value of
-	// Marker.
+	// submit another request and include the value of NextPageMarker  in the value of
+	// Marker .
 	NextPageMarker *string
 
 	// Lists summaries of the operations.
@@ -154,8 +155,8 @@ type ListOperationsPaginatorOptions struct {
 	// Number of domains to be returned. Default: 20
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

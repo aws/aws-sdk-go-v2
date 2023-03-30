@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a storage container to hold objects. A container is similar to a bucket
-// in the Amazon S3 service.
+// Creates a storage container to hold objects. A container is similar to a
+// bucket in the Amazon S3 service.
 func (c *Client) CreateContainer(ctx context.Context, params *CreateContainerInput, optFns ...func(*Options)) (*CreateContainerOutput, error) {
 	if params == nil {
 		params = &CreateContainerInput{}
@@ -30,10 +30,10 @@ func (c *Client) CreateContainer(ctx context.Context, params *CreateContainerInp
 
 type CreateContainerInput struct {
 
-	// The name for the container. The name must be from 1 to 255 characters. Container
-	// names must be unique to your AWS account within a specific region. As an
-	// example, you could create a container named movies in every region, as long as
-	// you don’t have an existing container with that name.
+	// The name for the container. The name must be from 1 to 255 characters.
+	// Container names must be unique to your AWS account within a specific region. As
+	// an example, you could create a container named movies in every region, as long
+	// as you don’t have an existing container with that name.
 	//
 	// This member is required.
 	ContainerName *string
@@ -43,8 +43,8 @@ type CreateContainerInput struct {
 	// and the tag value represents a specific value within that category (such as
 	// "test," "development," or "production"). You can add up to 50 tags to each
 	// container. For more information about tagging, including naming and usage
-	// conventions, see Tagging Resources in MediaStore
-	// (https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html).
+	// conventions, see Tagging Resources in MediaStore (https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html)
+	// .
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -52,16 +52,16 @@ type CreateContainerInput struct {
 
 type CreateContainerOutput struct {
 
-	// ContainerARN: The Amazon Resource Name (ARN) of the newly created container. The
-	// ARN has the following format: arn:aws:::container/. For example:
+	// ContainerARN: The Amazon Resource Name (ARN) of the newly created container.
+	// The ARN has the following format: arn:aws:::container/. For example:
 	// arn:aws:mediastore:us-west-2:111122223333:container/movies ContainerName: The
 	// container name as specified in the request. CreationTime: Unix time stamp.
 	// Status: The status of container creation or deletion. The status is one of the
-	// following: CREATING, ACTIVE, or DELETING. While the service is creating the
+	// following: CREATING , ACTIVE , or DELETING. While the service is creating the
 	// container, the status is CREATING. When an endpoint is available, the status
 	// changes to ACTIVE. The return value does not include the container's endpoint.
 	// To make downstream requests, you must obtain this value by using
-	// DescribeContainer or ListContainers.
+	// DescribeContainer or ListContainers .
 	//
 	// This member is required.
 	Container *types.Container

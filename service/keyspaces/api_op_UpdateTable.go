@@ -42,78 +42,56 @@ type UpdateTableInput struct {
 	TableName *string
 
 	// For each column to be added to the specified table:
-	// - name - The name of the
-	// column.
-	// - type - An Amazon Keyspaces data type. For more information, see Data
-	// types
-	// (https://docs.aws.amazon.com/keyspaces/latest/devguide/cql.elements.html#cql.data-types)
-	// in the Amazon Keyspaces Developer Guide.
+	//     - name - The name of the column.
+	//     - type - An Amazon Keyspaces data type. For more information, see Data types (https://docs.aws.amazon.com/keyspaces/latest/devguide/cql.elements.html#cql.data-types) in the Amazon Keyspaces Developer Guide.
 	AddColumns []types.ColumnDefinition
 
 	// Modifies the read/write throughput capacity mode for the table. The options
 	// are:
-	// - throughputMode:PAY_PER_REQUEST and
-	// - throughputMode:PROVISIONED -
-	// Provisioned capacity mode requires readCapacityUnits and writeCapacityUnits as
-	// input.
+	//     - throughputMode:PAY_PER_REQUEST and
+	//     - throughputMode:PROVISIONED - Provisioned capacity mode requires readCapacityUnits and writeCapacityUnits as input.
 	//
-	// The default is throughput_mode:PAY_PER_REQUEST. For more information,
-	// see Read/write capacity modes
-	// (https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html)
+	// The default is throughput_mode:PAY_PER_REQUEST . For more information, see
+	// Read/write capacity modes (https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html)
 	// in the Amazon Keyspaces Developer Guide.
 	CapacitySpecification *types.CapacitySpecification
 
 	// Enables client-side timestamps for the table. By default, the setting is
 	// disabled. You can enable client-side timestamps with the following option:
-	// -
-	// status: "enabled"
-	//
-	// Once client-side timestamps are enabled for a table, this
-	// setting cannot be disabled.
+	//     - status: "enabled"
+	// Once client-side timestamps are enabled for a table,
+	// this setting cannot be disabled.
 	ClientSideTimestamps *types.ClientSideTimestamps
 
-	// The default Time to Live setting in seconds for the table. For more information,
-	// see Setting the default TTL value for a table
-	// (https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL-how-it-works.html#ttl-howitworks_default_ttl)
+	// The default Time to Live setting in seconds for the table. For more
+	// information, see Setting the default TTL value for a table (https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL-how-it-works.html#ttl-howitworks_default_ttl)
 	// in the Amazon Keyspaces Developer Guide.
 	DefaultTimeToLive *int32
 
 	// Modifies the encryption settings of the table. You can choose one of the
 	// following KMS key (KMS key):
-	// - type:AWS_OWNED_KMS_KEY - This key is owned by
-	// Amazon Keyspaces.
-	// - type:CUSTOMER_MANAGED_KMS_KEY - This key is stored in your
-	// account and is created, owned, and managed by you. This option requires the
-	// kms_key_identifier of the KMS key in Amazon Resource Name (ARN) format as
-	// input.
+	//     - type:AWS_OWNED_KMS_KEY - This key is owned by Amazon Keyspaces.
+	//     - type:CUSTOMER_MANAGED_KMS_KEY - This key is stored in your account and is created, owned, and managed by you. This option requires the kms_key_identifier of the KMS key in Amazon Resource Name (ARN) format as input.
 	//
-	// The default is AWS_OWNED_KMS_KEY. For more information, see Encryption
-	// at rest
-	// (https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html) in
-	// the Amazon Keyspaces Developer Guide.
+	// The default is AWS_OWNED_KMS_KEY . For more information, see Encryption at rest (https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html)
+	// in the Amazon Keyspaces Developer Guide.
 	EncryptionSpecification *types.EncryptionSpecification
 
-	// Modifies the pointInTimeRecovery settings of the table. The options are:
-	// -
-	// status=ENABLED
-	// - status=DISABLED
-	//
-	// If it's not specified, the default is
-	// status=DISABLED. For more information, see Point-in-time recovery
-	// (https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html)
+	// Modifies the pointInTimeRecovery  settings of the table. The options are:
+	//     - status=ENABLED
+	//     - status=DISABLED
+	//  If it's not specified, the default is status=DISABLED. For more information,
+	// see Point-in-time recovery (https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html)
 	// in the Amazon Keyspaces Developer Guide.
 	PointInTimeRecovery *types.PointInTimeRecovery
 
 	// Modifies Time to Live custom settings for the table. The options are:
-	// -
-	// status:enabled
-	// - status:disabled
-	//
-	// The default is status:disabled. After ttl is
-	// enabled, you can't disable it for the table. For more information, see Expiring
-	// data by using Amazon Keyspaces Time to Live (TTL)
-	// (https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL.html) in the Amazon
-	// Keyspaces Developer Guide.
+	//     - status:enabled
+	//     - status:disabled
+	//  The default is status:disabled . After ttl is enabled, you can't disable it
+	// for the table. For more information, see Expiring data by using Amazon
+	// Keyspaces Time to Live (TTL) (https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL.html)
+	// in the Amazon Keyspaces Developer Guide.
 	Ttl *types.TimeToLive
 
 	noSmithyDocumentSerde

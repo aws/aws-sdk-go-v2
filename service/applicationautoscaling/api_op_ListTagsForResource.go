@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns all the tags on the specified Application Auto Scaling scalable target.
-// For general information about tags, including the format and syntax, see Tagging
-// Amazon Web Services resources
-// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-// Web Services General Reference.
+// Returns all the tags on the specified Application Auto Scaling scalable
+// target. For general information about tags, including the format and syntax, see
+//
+// Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+// in the Amazon Web Services General Reference.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -34,7 +34,7 @@ type ListTagsForResourceInput struct {
 
 	// Specify the ARN of the scalable target. For example:
 	// arn:aws:application-autoscaling:us-east-1:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123
-	// To get the ARN for a scalable target, use DescribeScalableTargets.
+	// To get the ARN for a scalable target, use DescribeScalableTargets .
 	//
 	// This member is required.
 	ResourceARN *string

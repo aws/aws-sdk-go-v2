@@ -15,11 +15,10 @@ import (
 // prints, and encrypted enrollment audio. Before creating any voice profiles, you
 // must provide all notices and obtain all consents from the speaker as required
 // under applicable privacy and biometrics laws, and as required under the AWS
-// service terms (https://aws.amazon.com/service-terms/) for the Amazon Chime SDK.
+// service terms (https://aws.amazon.com/service-terms/)for the Amazon Chime SDK.
 // For more information about voice profile domains, see Using Amazon Chime SDK
-// Voice Analytics
-// (https://docs.aws.amazon.com/chime-sdk/latest/dg/pstn-voice-analytics.html) in
-// the Amazon Chime SDK Developer Guide.
+// Voice Analytics (https://docs.aws.amazon.com/chime-sdk/latest/dg/pstn-voice-analytics.html)
+// in the Amazon Chime SDK Developer Guide.
 func (c *Client) CreateVoiceProfileDomain(ctx context.Context, params *CreateVoiceProfileDomainInput, optFns ...func(*Options)) (*CreateVoiceProfileDomainOutput, error) {
 	if params == nil {
 		params = &CreateVoiceProfileDomainInput{}

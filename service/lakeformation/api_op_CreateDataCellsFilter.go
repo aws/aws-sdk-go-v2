@@ -30,7 +30,7 @@ func (c *Client) CreateDataCellsFilter(ctx context.Context, params *CreateDataCe
 
 type CreateDataCellsFilterInput struct {
 
-	// A DataCellsFilter structure containing information about the data cells filter.
+	// A DataCellsFilter  structure containing information about the data cells filter.
 	//
 	// This member is required.
 	TableData *types.DataCellsFilter

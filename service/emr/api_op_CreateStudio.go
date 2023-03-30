@@ -41,9 +41,9 @@ type CreateStudioInput struct {
 	// This member is required.
 	DefaultS3Location *string
 
-	// The ID of the Amazon EMR Studio Engine security group. The Engine security group
-	// allows inbound network traffic from the Workspace security group, and it must be
-	// in the same VPC specified by VpcId.
+	// The ID of the Amazon EMR Studio Engine security group. The Engine security
+	// group allows inbound network traffic from the Workspace security group, and it
+	// must be in the same VPC specified by VpcId .
 	//
 	// This member is required.
 	EngineSecurityGroupId *string
@@ -53,15 +53,16 @@ type CreateStudioInput struct {
 	// This member is required.
 	Name *string
 
-	// The IAM role that the Amazon EMR Studio assumes. The service role provides a way
-	// for Amazon EMR Studio to interoperate with other Amazon Web Services services.
+	// The IAM role that the Amazon EMR Studio assumes. The service role provides a
+	// way for Amazon EMR Studio to interoperate with other Amazon Web Services
+	// services.
 	//
 	// This member is required.
 	ServiceRole *string
 
-	// A list of subnet IDs to associate with the Amazon EMR Studio. A Studio can have
-	// a maximum of 5 subnets. The subnets must belong to the VPC specified by VpcId.
-	// Studio users can create a Workspace in any of the specified subnets.
+	// A list of subnet IDs to associate with the Amazon EMR Studio. A Studio can
+	// have a maximum of 5 subnets. The subnets must belong to the VPC specified by
+	// VpcId . Studio users can create a Workspace in any of the specified subnets.
 	//
 	// This member is required.
 	SubnetIds []string
@@ -72,9 +73,9 @@ type CreateStudioInput struct {
 	// This member is required.
 	VpcId *string
 
-	// The ID of the Amazon EMR Studio Workspace security group. The Workspace security
-	// group allows outbound network traffic to resources in the Engine security group,
-	// and it must be in the same VPC specified by VpcId.
+	// The ID of the Amazon EMR Studio Workspace security group. The Workspace
+	// security group allows outbound network traffic to resources in the Engine
+	// security group, and it must be in the same VPC specified by VpcId .
 	//
 	// This member is required.
 	WorkspaceSecurityGroupId *string
@@ -82,16 +83,16 @@ type CreateStudioInput struct {
 	// A detailed description of the Amazon EMR Studio.
 	Description *string
 
-	// The authentication endpoint of your identity provider (IdP). Specify this value
-	// when you use IAM authentication and want to let federated users log in to a
-	// Studio with the Studio URL and credentials from your IdP. Amazon EMR Studio
+	// The authentication endpoint of your identity provider (IdP). Specify this
+	// value when you use IAM authentication and want to let federated users log in to
+	// a Studio with the Studio URL and credentials from your IdP. Amazon EMR Studio
 	// redirects users to this endpoint to enter credentials.
 	IdpAuthUrl *string
 
 	// The name that your identity provider (IdP) uses for its RelayState parameter.
-	// For example, RelayState or TargetSource. Specify this value when you use IAM
+	// For example, RelayState  or TargetSource. Specify this value when you use IAM
 	// authentication and want to let federated users log in to a Studio using the
-	// Studio URL. The RelayState parameter differs by IdP.
+	// Studio URL. The RelayState  parameter differs by IdP.
 	IdpRelayStateParameterName *string
 
 	// A list of tags to associate with the Amazon EMR Studio. Tags are user-defined
@@ -100,9 +101,9 @@ type CreateStudioInput struct {
 	Tags []types.Tag
 
 	// The IAM user role that users and groups assume when logged in to an Amazon EMR
-	// Studio. Only specify a UserRole when you use IAM Identity Center authentication.
-	// The permissions attached to the UserRole can be scoped down for each user or
-	// group using session policies.
+	// Studio. Only specify a UserRole when you use IAM Identity Center
+	// authentication. The permissions attached to the UserRole can be scoped down
+	// for each user or group using session policies.
 	UserRole *string
 
 	noSmithyDocumentSerde

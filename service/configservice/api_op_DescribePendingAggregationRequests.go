@@ -124,15 +124,15 @@ type DescribePendingAggregationRequestsAPIClient interface {
 
 var _ DescribePendingAggregationRequestsAPIClient = (*Client)(nil)
 
-// DescribePendingAggregationRequestsPaginatorOptions is the paginator options for
-// DescribePendingAggregationRequests
+// DescribePendingAggregationRequestsPaginatorOptions is the paginator options
+// for DescribePendingAggregationRequests
 type DescribePendingAggregationRequestsPaginatorOptions struct {
 	// The maximum number of evaluation results returned on each page. The default is
 	// maximum. If you specify 0, Config uses the default.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

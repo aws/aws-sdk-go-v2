@@ -30,7 +30,7 @@ func (c *Client) CreateDBInstance(ctx context.Context, params *CreateDBInstanceI
 type CreateDBInstanceInput struct {
 
 	// The identifier of the DB cluster that the instance will belong to. For
-	// information on creating a DB cluster, see CreateDBCluster. Type: String
+	// information on creating a DB cluster, see CreateDBCluster . Type: String
 	//
 	// This member is required.
 	DBClusterIdentifier *string
@@ -43,12 +43,9 @@ type CreateDBInstanceInput struct {
 
 	// The DB instance identifier. This parameter is stored as a lowercase string.
 	// Constraints:
-	// - Must contain from 1 to 63 letters, numbers, or hyphens.
-	// - First
-	// character must be a letter.
-	// - Cannot end with a hyphen or contain two
-	// consecutive hyphens.
-	//
+	//     - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//     - First character must be a letter.
+	//     - Cannot end with a hyphen or contain two consecutive hyphens.
 	// Example: mydbinstance
 	//
 	// This member is required.
@@ -67,26 +64,25 @@ type CreateDBInstanceInput struct {
 	// instance during the maintenance window. Default: true
 	AutoMinorVersionUpgrade *bool
 
-	// The EC2 Availability Zone that the DB instance is created in Default: A random,
-	// system-chosen Availability Zone in the endpoint's Amazon Region. Example:
-	// us-east-1d Constraint: The AvailabilityZone parameter can't be specified if the
-	// MultiAZ parameter is set to true. The specified Availability Zone must be in the
-	// same Amazon Region as the current endpoint.
+	// The EC2 Availability Zone that the DB instance is created in Default: A
+	// random, system-chosen Availability Zone in the endpoint's Amazon Region.
+	// Example: us-east-1d Constraint: The AvailabilityZone parameter can't be
+	// specified if the MultiAZ parameter is set to true. The specified Availability
+	// Zone must be in the same Amazon Region as the current endpoint.
 	AvailabilityZone *string
 
-	// The number of days for which automated backups are retained. Not applicable. The
-	// retention period for automated backups is managed by the DB cluster. For more
-	// information, see CreateDBCluster. Default: 1 Constraints:
-	// - Must be a value from
-	// 0 to 35
-	// - Cannot be set to 0 if the DB instance is a source to Read Replicas
+	// The number of days for which automated backups are retained. Not applicable.
+	// The retention period for automated backups is managed by the DB cluster. For
+	// more information, see CreateDBCluster . Default: 1 Constraints:
+	//     - Must be a value from 0 to 35
+	//     - Cannot be set to 0 if the DB instance is a source to Read Replicas
 	BackupRetentionPeriod *int32
 
 	// (Not supported by Neptune)
 	CharacterSetName *string
 
-	// True to copy all tags from the DB instance to snapshots of the DB instance, and
-	// otherwise false. The default is false.
+	// True to copy all tags from the DB instance to snapshots of the DB instance,
+	// and otherwise false. The default is false.
 	CopyTagsToSnapshot *bool
 
 	// Not supported.
@@ -95,11 +91,9 @@ type CreateDBInstanceInput struct {
 	// The name of the DB parameter group to associate with this DB instance. If this
 	// argument is omitted, the default DBParameterGroup for the specified engine is
 	// used. Constraints:
-	// - Must be 1 to 255 letters, numbers, or hyphens.
-	// - First
-	// character must be a letter
-	// - Cannot end with a hyphen or contain two consecutive
-	// hyphens
+	//     - Must be 1 to 255 letters, numbers, or hyphens.
+	//     - First character must be a letter
+	//     - Cannot end with a hyphen or contain two consecutive hyphens
 	DBParameterGroupName *string
 
 	// A list of DB security groups to associate with this DB instance. Default: The
@@ -110,11 +104,10 @@ type CreateDBInstanceInput struct {
 	// group, then it is a non-VPC DB instance.
 	DBSubnetGroupName *string
 
-	// A value that indicates whether the DB instance has deletion protection enabled.
-	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled. See Deleting a DB Instance
-	// (https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html).
-	// DB instances in a DB cluster can be deleted even when deletion protection is
+	// A value that indicates whether the DB instance has deletion protection
+	// enabled. The database can't be deleted when deletion protection is enabled. By
+	// default, deletion protection is disabled. See Deleting a DB Instance (https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html)
+	// . DB instances in a DB cluster can be deleted even when deletion protection is
 	// enabled in their parent DB cluster.
 	DeletionProtection *bool
 
@@ -148,15 +141,15 @@ type CreateDBInstanceInput struct {
 	// encryption key used to encrypt the new DB instance, then you can use the KMS key
 	// alias instead of the ARN for the KM encryption key. Not applicable. The KMS key
 	// identifier is managed by the DB cluster. For more information, see
-	// CreateDBCluster. If the StorageEncrypted parameter is true, and you do not
+	// CreateDBCluster . If the StorageEncrypted parameter is true, and you do not
 	// specify a value for the KmsKeyId parameter, then Amazon Neptune will use your
 	// default encryption key. Amazon KMS creates the default encryption key for your
 	// Amazon account. Your Amazon account has a different default encryption key for
 	// each Amazon Region.
 	KmsKeyId *string
 
-	// License model information for this DB instance. Valid values: license-included |
-	// bring-your-own-license | general-public-license
+	// License model information for this DB instance. Valid values: license-included
+	// | bring-your-own-license  | general-public-license
 	LicenseModel *string
 
 	// Not supported by Neptune.
@@ -168,14 +161,14 @@ type CreateDBInstanceInput struct {
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
 	// collected for the DB instance. To disable collecting Enhanced Monitoring
 	// metrics, specify 0. The default is 0. If MonitoringRoleArn is specified, then
-	// you must also set MonitoringInterval to a value other than 0. Valid Values: 0,
-	// 1, 5, 10, 15, 30, 60
+	// you must also set MonitoringInterval  to a value other than 0. Valid Values:
+	// 0, 1, 5, 10, 15, 30, 60
 	MonitoringInterval *int32
 
 	// The ARN for the IAM role that permits Neptune to send enhanced monitoring
 	// metrics to Amazon CloudWatch Logs. For example,
-	// arn:aws:iam:123456789012:role/emaccess. If MonitoringInterval is set to a value
-	// other than 0, then you must supply a MonitoringRoleArn value.
+	// arn:aws:iam:123456789012:role/emaccess . If MonitoringInterval is set to a
+	// value other than 0, then you must supply a MonitoringRoleArn  value.
 	MonitoringRoleArn *string
 
 	// Specifies if the DB instance is a Multi-AZ deployment. You can't set the
@@ -190,19 +183,19 @@ type CreateDBInstanceInput struct {
 
 	// The port number on which the database accepts connections. Not applicable. The
 	// port is managed by the DB cluster. For more information, see CreateDBCluster.
-	// Default: 8182 Type: Integer
+	// Default: 8182  Type: Integer
 	Port *int32
 
-	// The daily time range during which automated backups are created. Not applicable.
-	// The daily time range for creating automated backups is managed by the DB
-	// cluster. For more information, see CreateDBCluster.
+	// The daily time range during which automated backups are created. Not
+	// applicable. The daily time range for creating automated backups is managed by
+	// the DB cluster. For more information, see CreateDBCluster .
 	PreferredBackupWindow *string
 
-	// The time range each week during which system maintenance can occur, in Universal
-	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each Amazon
-	// Region, occurring on a random day of the week. Valid Days: Mon, Tue, Wed, Thu,
-	// Fri, Sat, Sun. Constraints: Minimum 30-minute window.
+	// The time range each week during which system maintenance can occur, in
+	// Universal Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default
+	// is a 30-minute window selected at random from an 8-hour block of time for each
+	// Amazon Region, occurring on a random day of the week. Valid Days: Mon, Tue, Wed,
+	// Thu, Fri, Sat, Sun. Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
 
 	// A value that specifies the order in which an Read Replica is promoted to the
@@ -217,7 +210,7 @@ type CreateDBInstanceInput struct {
 
 	// Specifies whether the DB instance is encrypted. Not applicable. The encryption
 	// for DB instances is managed by the DB cluster. For more information, see
-	// CreateDBCluster. Default: false
+	// CreateDBCluster . Default: false
 	StorageEncrypted *bool
 
 	// Specifies the storage type to be associated with the DB instance. Not
@@ -231,7 +224,8 @@ type CreateDBInstanceInput struct {
 	// encryption.
 	TdeCredentialArn *string
 
-	// The password for the given ARN from the key store in order to access the device.
+	// The password for the given ARN from the key store in order to access the
+	// device.
 	TdeCredentialPassword *string
 
 	// The time zone of the DB instance.
@@ -239,8 +233,8 @@ type CreateDBInstanceInput struct {
 
 	// A list of EC2 VPC security groups to associate with this DB instance. Not
 	// applicable. The associated list of EC2 VPC security groups is managed by the DB
-	// cluster. For more information, see CreateDBCluster. Default: The default EC2 VPC
-	// security group for the DB subnet group's VPC.
+	// cluster. For more information, see CreateDBCluster. Default: The default EC2
+	// VPC security group for the DB subnet group's VPC.
 	VpcSecurityGroupIds []string
 
 	noSmithyDocumentSerde
@@ -248,8 +242,8 @@ type CreateDBInstanceInput struct {
 
 type CreateDBInstanceOutput struct {
 
-	// Contains the details of an Amazon Neptune DB instance. This data type is used as
-	// a response element in the DescribeDBInstances action.
+	// Contains the details of an Amazon Neptune DB instance. This data type is used
+	// as a response element in the DescribeDBInstances  action.
 	DBInstance *types.DBInstance
 
 	// Metadata pertaining to the operation's result.

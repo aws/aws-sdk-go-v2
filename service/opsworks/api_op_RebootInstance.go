@@ -10,14 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Reboots a specified instance. For more information, see Starting, Stopping, and
-// Rebooting Instances
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html).
-// Required Permissions: To use this action, an IAM user must have a Manage
+// Reboots a specified instance. For more information, see Starting, Stopping,
+// and Rebooting Instances (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html)
+// . Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see Managing User
-// Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// .
 func (c *Client) RebootInstance(ctx context.Context, params *RebootInstanceInput, optFns ...func(*Options)) (*RebootInstanceOutput, error) {
 	if params == nil {
 		params = &RebootInstanceInput{}

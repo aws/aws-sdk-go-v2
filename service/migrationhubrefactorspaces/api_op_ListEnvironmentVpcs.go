@@ -37,7 +37,7 @@ type ListEnvironmentVpcsInput struct {
 	EnvironmentIdentifier *string
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -48,7 +48,7 @@ type ListEnvironmentVpcsInput struct {
 
 type ListEnvironmentVpcsOutput struct {
 
-	// The list of EnvironmentVpc objects.
+	// The list of EnvironmentVpc  objects.
 	EnvironmentVpcList []types.EnvironmentVpc
 
 	// The token for the next page of results.
@@ -123,8 +123,8 @@ func (c *Client) addOperationListEnvironmentVpcsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListEnvironmentVpcsAPIClient is a client that implements the ListEnvironmentVpcs
-// operation.
+// ListEnvironmentVpcsAPIClient is a client that implements the
+// ListEnvironmentVpcs operation.
 type ListEnvironmentVpcsAPIClient interface {
 	ListEnvironmentVpcs(context.Context, *ListEnvironmentVpcsInput, ...func(*Options)) (*ListEnvironmentVpcsOutput, error)
 }
@@ -135,11 +135,11 @@ var _ ListEnvironmentVpcsAPIClient = (*Client)(nil)
 // ListEnvironmentVpcs
 type ListEnvironmentVpcsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

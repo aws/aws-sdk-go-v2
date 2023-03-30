@@ -13,14 +13,11 @@ import (
 
 // Removes OwnershipControls for an Amazon S3 bucket. To use this operation, you
 // must have the s3:PutBucketOwnershipControls permission. For more information
-// about Amazon S3 permissions, see Specifying Permissions in a Policy
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html).
-// For information about Amazon S3 Object Ownership, see Using Object Ownership
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/about-object-ownership.html).
-// The following operations are related to DeleteBucketOwnershipControls:
-// -
-// GetBucketOwnershipControls
-// - PutBucketOwnershipControls
+// about Amazon S3 permissions, see Specifying Permissions in a Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)
+// . For information about Amazon S3 Object Ownership, see Using Object Ownership (https://docs.aws.amazon.com/AmazonS3/latest/dev/about-object-ownership.html)
+// . The following operations are related to DeleteBucketOwnershipControls :
+//   - GetBucketOwnershipControls
+//   - PutBucketOwnershipControls
 func (c *Client) DeleteBucketOwnershipControls(ctx context.Context, params *DeleteBucketOwnershipControlsInput, optFns ...func(*Options)) (*DeleteBucketOwnershipControlsOutput, error) {
 	if params == nil {
 		params = &DeleteBucketOwnershipControlsInput{}
@@ -38,7 +35,7 @@ func (c *Client) DeleteBucketOwnershipControls(ctx context.Context, params *Dele
 
 type DeleteBucketOwnershipControlsInput struct {
 
-	// The Amazon S3 bucket whose OwnershipControls you want to delete.
+	// The Amazon S3 bucket whose OwnershipControls  you want to delete.
 	//
 	// This member is required.
 	Bucket *string

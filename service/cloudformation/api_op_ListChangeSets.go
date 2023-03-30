@@ -13,7 +13,7 @@ import (
 )
 
 // Returns the ID and status of each active change set for a stack. For example,
-// CloudFormation lists change sets that are in the CREATE_IN_PROGRESS or
+// CloudFormation lists change sets that are in the CREATE_IN_PROGRESS  or
 // CREATE_PENDING state.
 func (c *Client) ListChangeSets(ctx context.Context, params *ListChangeSetsInput, optFns ...func(*Options)) (*ListChangeSetsOutput, error) {
 	if params == nil {
@@ -30,7 +30,7 @@ func (c *Client) ListChangeSets(ctx context.Context, params *ListChangeSetsInput
 	return out, nil
 }
 
-// The input for the ListChangeSets action.
+// The input for the ListChangeSets  action.
 type ListChangeSetsInput struct {
 
 	// The name or the Amazon Resource Name (ARN) of the stack for which you want to
@@ -46,11 +46,11 @@ type ListChangeSetsInput struct {
 	noSmithyDocumentSerde
 }
 
-// The output for the ListChangeSets action.
+// The output for the ListChangeSets  action.
 type ListChangeSetsOutput struct {
 
 	// If the output exceeds 1 MB, a string that identifies the next page of change
-	// sets. If there is no additional page, this value is null.
+	// sets. If there is no additional page, this value is null .
 	NextToken *string
 
 	// A list of ChangeSetSummary structures that provides the ID and status of each
@@ -136,8 +136,8 @@ var _ ListChangeSetsAPIClient = (*Client)(nil)
 
 // ListChangeSetsPaginatorOptions is the paginator options for ListChangeSets
 type ListChangeSetsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -16,24 +16,20 @@ import (
 // durable off-site recovery, and also import the data to an Amazon Elastic Block
 // Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots
 // of your gateway volume on a scheduled or ad hoc basis. This API enables you to
-// take an ad hoc snapshot. For more information, see Editing a snapshot schedule
-// (https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot).
-// In the CreateSnapshot request, you identify the volume by providing its Amazon
-// Resource Name (ARN). You must also provide description for the snapshot. When
-// Storage Gateway takes the snapshot of specified volume, the snapshot and
+// take an ad hoc snapshot. For more information, see Editing a snapshot schedule (https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot)
+// . In the CreateSnapshot request, you identify the volume by providing its
+// Amazon Resource Name (ARN). You must also provide description for the snapshot.
+// When Storage Gateway takes the snapshot of specified volume, the snapshot and
 // description appears in the Storage Gateway console. In response, Storage Gateway
 // returns you a snapshot ID. You can use this snapshot ID to check the snapshot
 // progress or later use it when you want to create a volume from a snapshot. This
 // operation is only supported in stored and cached volume gateway type. To list or
 // delete a snapshot, you must use the Amazon EC2 API. For more information, see
-// DescribeSnapshots
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html)
-// or DeleteSnapshot
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html)
+// DescribeSnapshots (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html)
+// or DeleteSnapshot (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html)
 // in the Amazon Elastic Compute Cloud API Reference. Volume and snapshot IDs are
 // changing to a longer length ID format. For more information, see the important
-// note on the Welcome
-// (https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html)
+// note on the Welcome (https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html)
 // page.
 func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput, optFns ...func(*Options)) (*CreateSnapshotOutput, error) {
 	if params == nil {
@@ -51,9 +47,8 @@ func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput
 }
 
 // A JSON object containing one or more of the following fields:
-// -
-// CreateSnapshotInput$SnapshotDescription
-// - CreateSnapshotInput$VolumeARN
+//   - CreateSnapshotInput$SnapshotDescription
+//   - CreateSnapshotInput$VolumeARN
 type CreateSnapshotInput struct {
 
 	// Textual description of the snapshot that appears in the Amazon EC2 console,
@@ -82,9 +77,10 @@ type CreateSnapshotInput struct {
 // A JSON object containing the following fields:
 type CreateSnapshotOutput struct {
 
-	// The snapshot ID that is used to refer to the snapshot in future operations such
-	// as describing snapshots (Amazon Elastic Compute Cloud API DescribeSnapshots) or
-	// creating a volume from a snapshot (CreateStorediSCSIVolume).
+	// The snapshot ID that is used to refer to the snapshot in future operations
+	// such as describing snapshots (Amazon Elastic Compute Cloud API
+	// DescribeSnapshots ) or creating a volume from a snapshot (
+	// CreateStorediSCSIVolume ).
 	SnapshotId *string
 
 	// The Amazon Resource Name (ARN) of the volume of which the snapshot was taken.

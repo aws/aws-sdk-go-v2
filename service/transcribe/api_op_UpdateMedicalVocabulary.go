@@ -33,8 +33,8 @@ func (c *Client) UpdateMedicalVocabulary(ctx context.Context, params *UpdateMedi
 type UpdateMedicalVocabularyInput struct {
 
 	// The language code that represents the language of the entries in the custom
-	// vocabulary you want to update. US English (en-US) is the only language supported
-	// with Amazon Transcribe Medical.
+	// vocabulary you want to update. US English ( en-US) is the only language
+	// supported with Amazon Transcribe Medical.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
@@ -58,12 +58,12 @@ type UpdateMedicalVocabularyInput struct {
 
 type UpdateMedicalVocabularyOutput struct {
 
-	// The language code you selected for your custom medical vocabulary. US English
-	// (en-US) is the only language supported with Amazon Transcribe Medical.
+	// The language code you selected for your custom medical vocabulary. US English (
+	// en-US ) is the only language supported with Amazon Transcribe Medical.
 	LanguageCode types.LanguageCode
 
 	// The date and time the specified custom medical vocabulary was last updated.
-	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC . For example,
 	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
 
@@ -71,7 +71,7 @@ type UpdateMedicalVocabularyOutput struct {
 	VocabularyName *string
 
 	// The processing state of your custom medical vocabulary. If the state is READY,
-	// you can use the custom vocabulary in a StartMedicalTranscriptionJob request.
+	// you can use the custom vocabulary in a StartMedicalTranscriptionJob  request.
 	VocabularyState types.VocabularyState
 
 	// Metadata pertaining to the operation's result.

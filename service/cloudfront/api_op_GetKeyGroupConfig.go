@@ -15,7 +15,7 @@ import (
 // provide the key group's identifier. If the key group is referenced in a
 // distribution's cache behavior, you can get the key group's identifier using
 // ListDistributions or GetDistribution. If the key group is not referenced in a
-// cache behavior, you can get the identifier using ListKeyGroups.
+// cache behavior, you can get the identifier using ListKeyGroups .
 func (c *Client) GetKeyGroupConfig(ctx context.Context, params *GetKeyGroupConfigInput, optFns ...func(*Options)) (*GetKeyGroupConfigOutput, error) {
 	if params == nil {
 		params = &GetKeyGroupConfigInput{}
@@ -33,8 +33,8 @@ func (c *Client) GetKeyGroupConfig(ctx context.Context, params *GetKeyGroupConfi
 
 type GetKeyGroupConfigInput struct {
 
-	// The identifier of the key group whose configuration you are getting. To get the
-	// identifier, use ListKeyGroups.
+	// The identifier of the key group whose configuration you are getting. To get
+	// the identifier, use ListKeyGroups .
 	//
 	// This member is required.
 	Id *string

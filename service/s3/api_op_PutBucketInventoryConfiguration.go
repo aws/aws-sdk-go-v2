@@ -24,49 +24,31 @@ import (
 // to be stored, and whether to generate the inventory daily or weekly. You can
 // also configure what object metadata to include and whether to inventory all
 // object versions or only current versions. For more information, see Amazon S3
-// Inventory
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html) in the
-// Amazon S3 User Guide. You must create a bucket policy on the destination bucket
-// to grant permissions to Amazon S3 to write objects to the bucket in the defined
-// location. For an example policy, see  Granting Permissions for Amazon S3
-// Inventory and Storage Class Analysis
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html#example-bucket-policies-use-case-9).
-// To use this operation, you must have permissions to perform the
-// s3:PutInventoryConfiguration action. The bucket owner has this permission by
+// Inventory (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html)
+// in the Amazon S3 User Guide. You must create a bucket policy on the destination
+// bucket to grant permissions to Amazon S3 to write objects to the bucket in the
+// defined location. For an example policy, see Granting Permissions for Amazon
+// S3 Inventory and Storage Class Analysis (https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html#example-bucket-policies-use-case-9)
+// . To use this operation, you must have permissions to perform the
+// s3:PutInventoryConfigurationaction. The bucket owner has this permission by
 // default and can grant this permission to others. For more information about
-// permissions, see Permissions Related to Bucket Subresource Operations
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
-// and Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
+// permissions, see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
 // in the Amazon S3 User Guide. Special Errors
-// - HTTP 400 Bad Request Error
-// - Code:
-// InvalidArgument
-// - Cause: Invalid Argument
-//
-// - HTTP 400 Bad Request Error
-// - Code:
-// TooManyConfigurations
-// - Cause: You are attempting to create a new configuration
-// but have already reached the 1,000-configuration limit.
-//
-// - HTTP 403 Forbidden
-// Error
-// - Code: AccessDenied
-// - Cause: You are not the owner of the specified
-// bucket, or you do not have the s3:PutInventoryConfiguration bucket permission to
-// set the configuration on the bucket.
+//   - HTTP 400 Bad Request Error
+//   - Code: InvalidArgument
+//   - Cause: Invalid Argument
+//   - HTTP 400 Bad Request Error
+//   - Code: TooManyConfigurations
+//   - Cause: You are attempting to create a new configuration but have already reached the 1,000-configuration limit.
+//   - HTTP 403 Forbidden Error
+//   - Code: AccessDenied
+//   - Cause: You are not the owner of the specified bucket, or you do not have the s3:PutInventoryConfiguration bucket permission to set the configuration on the bucket.
 //
 // Related Resources
-// -
-// GetBucketInventoryConfiguration
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketInventoryConfiguration.html)
-// -
-// DeleteBucketInventoryConfiguration
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketInventoryConfiguration.html)
-// -
-// ListBucketInventoryConfigurations
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketInventoryConfigurations.html)
+//   - GetBucketInventoryConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketInventoryConfiguration.html)
+//   - DeleteBucketInventoryConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketInventoryConfiguration.html)
+//   - ListBucketInventoryConfigurations (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketInventoryConfigurations.html)
 func (c *Client) PutBucketInventoryConfiguration(ctx context.Context, params *PutBucketInventoryConfigurationInput, optFns ...func(*Options)) (*PutBucketInventoryConfigurationOutput, error) {
 	if params == nil {
 		params = &PutBucketInventoryConfigurationInput{}

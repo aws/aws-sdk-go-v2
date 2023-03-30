@@ -53,9 +53,9 @@ const (
 	ErrorCodeSyncProcessingError   ErrorCode = "SYNC_PROCESSING_ERROR"
 )
 
-// Values returns all known values for ErrorCode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"VALIDATION_ERROR",
@@ -73,9 +73,9 @@ const (
 	GroupTypeTabular GroupType = "TABULAR"
 )
 
-// Values returns all known values for GroupType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for GroupType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (GroupType) Values() []GroupType {
 	return []GroupType{
 		"TABULAR",
@@ -106,8 +106,8 @@ const (
 	OrderDescending Order = "DESCENDING"
 )
 
-// Values returns all known values for Order. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Order. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Order) Values() []Order {
 	return []Order{
@@ -124,9 +124,9 @@ const (
 	OrderByTimeDescending OrderByTime = "DESCENDING"
 )
 
-// Values returns all known values for OrderByTime. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OrderByTime. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (OrderByTime) Values() []OrderByTime {
 	return []OrderByTime{
 		"ASCENDING",
@@ -161,9 +161,9 @@ const (
 	PricingModeTieredBundle PricingMode = "TIERED_BUNDLE"
 )
 
-// Values returns all known values for PricingMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PricingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PricingMode) Values() []PricingMode {
 	return []PricingMode{
 		"BASIC",
@@ -182,9 +182,9 @@ const (
 	PricingTierTier4 PricingTier = "TIER_4"
 )
 
-// Values returns all known values for PricingTier. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PricingTier. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PricingTier) Values() []PricingTier {
 	return []PricingTier{
 		"TIER_1",
@@ -203,9 +203,9 @@ const (
 	PropertyGroupUpdateTypeCreate PropertyGroupUpdateType = "CREATE"
 )
 
-// Values returns all known values for PropertyGroupUpdateType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PropertyGroupUpdateType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PropertyGroupUpdateType) Values() []PropertyGroupUpdateType {
 	return []PropertyGroupUpdateType{
 		"UPDATE",
@@ -242,8 +242,8 @@ const (
 	ScopeWorkspace Scope = "WORKSPACE"
 )
 
-// Values returns all known values for Scope. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Scope. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Scope) Values() []Scope {
 	return []Scope{
@@ -263,8 +263,8 @@ const (
 	StateError    State = "ERROR"
 )
 
-// Values returns all known values for State. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for State. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (State) Values() []State {
 	return []State{
@@ -287,9 +287,9 @@ const (
 	SyncJobStateError        SyncJobState = "ERROR"
 )
 
-// Values returns all known values for SyncJobState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SyncJobState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (SyncJobState) Values() []SyncJobState {
 	return []SyncJobState{
 		"CREATING",
@@ -356,8 +356,8 @@ const (
 	TypeMap          Type = "MAP"
 )
 
-// Values returns all known values for Type. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Type. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{
@@ -383,9 +383,9 @@ const (
 	UpdateReasonOverwritten       UpdateReason = "OVERWRITTEN"
 )
 
-// Values returns all known values for UpdateReason. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UpdateReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateReason) Values() []UpdateReason {
 	return []UpdateReason{
 		"DEFAULT",

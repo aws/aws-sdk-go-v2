@@ -12,9 +12,9 @@ const (
 	AlarmModelVersionStatusFailed     AlarmModelVersionStatus = "FAILED"
 )
 
-// Values returns all known values for AlarmModelVersionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AlarmModelVersionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AlarmModelVersionStatus) Values() []AlarmModelVersionStatus {
 	return []AlarmModelVersionStatus{
 		"ACTIVE",
@@ -146,9 +146,9 @@ const (
 	InputStatusDeleting InputStatus = "DELETING"
 )
 
-// Values returns all known values for InputStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InputStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (InputStatus) Values() []InputStatus {
 	return []InputStatus{
 		"CREATING",
@@ -167,9 +167,9 @@ const (
 	LoggingLevelDebug LoggingLevel = "DEBUG"
 )
 
-// Values returns all known values for LoggingLevel. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LoggingLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LoggingLevel) Values() []LoggingLevel {
 	return []LoggingLevel{
 		"ERROR",
@@ -186,9 +186,9 @@ const (
 	PayloadTypeJson   PayloadType = "JSON"
 )
 
-// Values returns all known values for PayloadType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PayloadType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PayloadType) Values() []PayloadType {
 	return []PayloadType{
 		"STRING",

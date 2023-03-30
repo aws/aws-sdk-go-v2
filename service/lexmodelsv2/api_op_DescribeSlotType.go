@@ -42,8 +42,8 @@ type DescribeSlotTypeInput struct {
 
 	// The identifier of the language and locale of the slot type to describe. The
 	// string must match one of the supported locales. For more information, see
-	// Supported languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	//
 	// This member is required.
 	LocaleId *string
@@ -91,8 +91,8 @@ type DescribeSlotTypeOutput struct {
 	// The name specified for the slot type.
 	SlotTypeName *string
 
-	// The values that the slot type can take. Includes any synonyms for the slot type
-	// values.
+	// The values that the slot type can take. Includes any synonyms for the slot
+	// type values.
 	SlotTypeValues []types.SlotTypeValue
 
 	// The strategy that Amazon Lex uses to choose a value from a list of possible

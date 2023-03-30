@@ -13,11 +13,10 @@ import (
 
 // Reboots a cluster. This action is taken as soon as possible. It results in a
 // momentary outage to the cluster, during which the cluster status is set to
-// rebooting. A cluster event is created when the reboot is completed. Any pending
-// cluster modifications (see ModifyCluster) are applied at this reboot. For more
-// information about managing clusters, go to Amazon Redshift Clusters
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html) in
-// the Amazon Redshift Cluster Management Guide.
+// rebooting. A cluster event is created when the reboot is completed. Any
+// pending cluster modifications (see ModifyCluster) are applied at this reboot.
+// For more information about managing clusters, go to Amazon Redshift Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
+// in the Amazon Redshift Cluster Management Guide.
 func (c *Client) RebootCluster(ctx context.Context, params *RebootClusterInput, optFns ...func(*Options)) (*RebootClusterOutput, error) {
 	if params == nil {
 		params = &RebootClusterInput{}

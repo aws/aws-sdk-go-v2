@@ -15,12 +15,9 @@ import (
 
 // Lists the INFO, WARN, and ERROR events for periodic configuration updates
 // performed by Application Insights. Examples of events represented are:
-// - INFO:
-// creating a new alarm or updating an alarm threshold.
-// - WARN: alarm not created
-// due to insufficient data points used to predict thresholds.
-// - ERROR: alarm not
-// created due to permission errors or exceeding quotas.
+//   - INFO: creating a new alarm or updating an alarm threshold.
+//   - WARN: alarm not created due to insufficient data points used to predict thresholds.
+//   - ERROR: alarm not created due to permission errors or exceeding quotas.
 func (c *Client) ListConfigurationHistory(ctx context.Context, params *ListConfigurationHistoryInput, optFns ...func(*Options)) (*ListConfigurationHistoryOutput, error) {
 	if params == nil {
 		params = &ListConfigurationHistoryInput{}
@@ -45,19 +42,20 @@ type ListConfigurationHistoryInput struct {
 	// WARN, and ERROR.
 	EventStatus types.ConfigurationEventStatus
 
-	// The maximum number of results returned by ListConfigurationHistory in paginated
-	// output. When this parameter is used, ListConfigurationHistory returns only
-	// MaxResults in a single page along with a NextToken response element. The
-	// remaining results of the initial request can be seen by sending another
-	// ListConfigurationHistory request with the returned NextToken value. If this
-	// parameter is not used, then ListConfigurationHistory returns all results.
+	// The maximum number of results returned by ListConfigurationHistory in
+	// paginated output. When this parameter is used, ListConfigurationHistory
+	// returns only MaxResults  in a single page along with a NextToken response
+	// element. The remaining results of the initial request can be seen by sending
+	// another ListConfigurationHistory  request with the returned NextToken value.
+	// If this parameter is not used, then ListConfigurationHistory returns all
+	// results.
 	MaxResults *int32
 
-	// The NextToken value returned from a previous paginated ListConfigurationHistory
-	// request where MaxResults was used and the results exceeded the value of that
-	// parameter. Pagination continues from the end of the previous results that
-	// returned the NextToken value. This value is null when there are no more results
-	// to return.
+	// The NextToken  value returned from a previous paginated
+	// ListConfigurationHistory request where MaxResults was used and the results
+	// exceeded the value of that parameter. Pagination continues from the end of the
+	// previous results that returned the NextToken  value. This value is null when
+	// there are no more results to return.
 	NextToken *string
 
 	// Resource group to which the application belongs.
@@ -74,10 +72,10 @@ type ListConfigurationHistoryOutput struct {
 	// The list of configuration events and their corresponding details.
 	EventList []types.ConfigurationEvent
 
-	// The NextToken value to include in a future ListConfigurationHistory request.
-	// When the results of a ListConfigurationHistory request exceed MaxResults, this
-	// value can be used to retrieve the next page of results. This value is null when
-	// there are no more results to return.
+	// The NextToken  value to include in a future ListConfigurationHistory request.
+	// When the results of a ListConfigurationHistory  request exceed MaxResults,
+	// this value can be used to retrieve the next page of results. This value is null
+	// when there are no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -157,16 +155,17 @@ var _ ListConfigurationHistoryAPIClient = (*Client)(nil)
 // ListConfigurationHistoryPaginatorOptions is the paginator options for
 // ListConfigurationHistory
 type ListConfigurationHistoryPaginatorOptions struct {
-	// The maximum number of results returned by ListConfigurationHistory in paginated
-	// output. When this parameter is used, ListConfigurationHistory returns only
-	// MaxResults in a single page along with a NextToken response element. The
-	// remaining results of the initial request can be seen by sending another
-	// ListConfigurationHistory request with the returned NextToken value. If this
-	// parameter is not used, then ListConfigurationHistory returns all results.
+	// The maximum number of results returned by ListConfigurationHistory in
+	// paginated output. When this parameter is used, ListConfigurationHistory
+	// returns only MaxResults  in a single page along with a NextToken response
+	// element. The remaining results of the initial request can be seen by sending
+	// another ListConfigurationHistory  request with the returned NextToken value.
+	// If this parameter is not used, then ListConfigurationHistory returns all
+	// results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

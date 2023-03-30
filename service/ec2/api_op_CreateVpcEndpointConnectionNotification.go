@@ -14,7 +14,7 @@ import (
 // Creates a connection notification for a specified VPC endpoint or VPC endpoint
 // service. A connection notification notifies you of specific endpoint events. You
 // must create an SNS topic to receive notifications. For more information, see
-// Create a Topic (https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) in
+// Create a Topic (https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html)in
 // the Amazon Simple Notification Service Developer Guide. You can create a
 // connection notification for interface endpoints only.
 func (c *Client) CreateVpcEndpointConnectionNotification(ctx context.Context, params *CreateVpcEndpointConnectionNotificationInput, optFns ...func(*Options)) (*CreateVpcEndpointConnectionNotificationOutput, error) {
@@ -34,8 +34,8 @@ func (c *Client) CreateVpcEndpointConnectionNotification(ctx context.Context, pa
 
 type CreateVpcEndpointConnectionNotificationInput struct {
 
-	// The endpoint events for which to receive notifications. Valid values are Accept,
-	// Connect, Delete, and Reject.
+	// The endpoint events for which to receive notifications. Valid values are Accept
+	// , Connect , Delete , and Reject .
 	//
 	// This member is required.
 	ConnectionEvents []string
@@ -45,15 +45,15 @@ type CreateVpcEndpointConnectionNotificationInput struct {
 	// This member is required.
 	ConnectionNotificationArn *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to ensure idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// .
 	ClientToken *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The ID of the endpoint service.
@@ -67,8 +67,8 @@ type CreateVpcEndpointConnectionNotificationInput struct {
 
 type CreateVpcEndpointConnectionNotificationOutput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientToken *string
 
 	// Information about the notification.

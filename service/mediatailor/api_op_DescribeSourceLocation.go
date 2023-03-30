@@ -13,8 +13,7 @@ import (
 )
 
 // Describes a source location. A source location is a container for sources. For
-// more information about source locations, see Working with source locations
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-source-locations.html)
+// more information about source locations, see Working with source locations (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-source-locations.html)
 // in the MediaTailor User Guide.
 func (c *Client) DescribeSourceLocation(ctx context.Context, params *DescribeSourceLocationInput, optFns ...func(*Options)) (*DescribeSourceLocationOutput, error) {
 	if params == nil {
@@ -67,10 +66,10 @@ type DescribeSourceLocationOutput struct {
 	// The name of the source location.
 	SourceLocationName *string
 
-	// The tags assigned to the source location. Tags are key-value pairs that you can
-	// associate with Amazon resources to help with organization, access control, and
-	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
-	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+	// The tags assigned to the source location. Tags are key-value pairs that you
+	// can associate with Amazon resources to help with organization, access control,
+	// and cost tracking. For more information, see Tagging AWS Elemental MediaTailor
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html) .
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

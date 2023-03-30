@@ -14,8 +14,8 @@ import (
 // Adds metadata tags to an Amazon RDS resource. These tags can also be used with
 // cost allocation reporting to track cost associated with Amazon RDS resources, or
 // used in a Condition statement in an IAM policy for Amazon RDS. For an overview
-// on tagging Amazon RDS resources, see Tagging Amazon RDS Resources
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html).
+// on tagging Amazon RDS resources, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html)
+// .
 func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {
 	if params == nil {
 		params = &AddTagsToResourceInput{}
@@ -34,9 +34,9 @@ func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourc
 type AddTagsToResourceInput struct {
 
 	// The Amazon RDS resource that the tags are added to. This value is an Amazon
-	// Resource Name (ARN). For information about creating an ARN, see  Constructing an
-	// RDS Amazon Resource Name (ARN)
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing).
+	// Resource Name (ARN). For information about creating an ARN, see Constructing
+	// an RDS Amazon Resource Name (ARN) (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
+	// .
 	//
 	// This member is required.
 	ResourceName *string

@@ -27,8 +27,8 @@ type DatastoreFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Displays the properties of the Data Store, including the ID, Arn, name, and the
-// status of the Data Store.
+// Displays the properties of the Data Store, including the ID, Arn, name, and
+// the status of the Data Store.
 type DatastoreProperties struct {
 
 	// The Amazon Resource Name used in the creation of the Data Store.
@@ -36,8 +36,8 @@ type DatastoreProperties struct {
 	// This member is required.
 	DatastoreArn *string
 
-	// The AWS endpoint for the Data Store. Each Data Store will have it's own endpoint
-	// with Data Store ID in the endpoint URL.
+	// The AWS endpoint for the Data Store. Each Data Store will have it's own
+	// endpoint with Data Store ID in the endpoint URL.
 	//
 	// This member is required.
 	DatastoreEndpoint *string
@@ -68,19 +68,19 @@ type DatastoreProperties struct {
 	// Synthea is supported.
 	PreloadDataConfig *PreloadDataConfig
 
-	// The server-side encryption key configuration for a customer provided encryption
-	// key (CMK).
+	// The server-side encryption key configuration for a customer provided
+	// encryption key (CMK).
 	SseConfiguration *SseConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// The properties of a FHIR export job, including the ID, ARN, name, and the status
-// of the job.
+// The properties of a FHIR export job, including the ID, ARN, name, and the
+// status of the job.
 type ExportJobProperties struct {
 
-	// The AWS generated ID for the Data Store from which files are being exported for
-	// an export job.
+	// The AWS generated ID for the Data Store from which files are being exported
+	// for an export job.
 	//
 	// This member is required.
 	DatastoreId *string
@@ -96,7 +96,8 @@ type ExportJobProperties struct {
 	// This member is required.
 	JobStatus JobStatus
 
-	// The output data configuration that was supplied when the export job was created.
+	// The output data configuration that was supplied when the export job was
+	// created.
 	//
 	// This member is required.
 	OutputDataConfig OutputDataConfig
@@ -121,8 +122,8 @@ type ExportJobProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Displays the properties of the import job, including the ID, Arn, Name, and the
-// status of the Data Store.
+// Displays the properties of the import job, including the ID, Arn, Name, and
+// the status of the Data Store.
 type ImportJobProperties struct {
 
 	// The datastore id used when the Import job was created.
@@ -140,8 +141,8 @@ type ImportJobProperties struct {
 	// This member is required.
 	JobId *string
 
-	// The job status for an Import job. Possible statuses are SUBMITTED, IN_PROGRESS,
-	// COMPLETED, FAILED.
+	// The job status for an Import job. Possible statuses are SUBMITTED,
+	// IN_PROGRESS, COMPLETED, FAILED.
 	//
 	// This member is required.
 	JobStatus JobStatus
@@ -151,8 +152,8 @@ type ImportJobProperties struct {
 	// This member is required.
 	SubmitTime *time.Time
 
-	// The Amazon Resource Name (ARN) that gives Amazon HealthLake access to your input
-	// data.
+	// The Amazon Resource Name (ARN) that gives Amazon HealthLake access to your
+	// input data.
 	DataAccessRoleArn *string
 
 	// The time that the Import job was completed.
@@ -161,7 +162,8 @@ type ImportJobProperties struct {
 	// The user-generated name for an Import job.
 	JobName *string
 
-	// The output data configuration that was supplied when the export job was created.
+	// The output data configuration that was supplied when the export job was
+	// created.
 	JobOutputDataConfig OutputDataConfig
 
 	// An explanation of any errors that may have occurred during the FHIR import job.
@@ -179,8 +181,8 @@ type InputDataConfig interface {
 	isInputDataConfig()
 }
 
-// The S3Uri is the user specified S3 location of the FHIR data to be imported into
-// Amazon HealthLake.
+// The S3Uri is the user specified S3 location of the FHIR data to be imported
+// into Amazon HealthLake.
 type InputDataConfigMemberS3Uri struct {
 	Value string
 
@@ -199,13 +201,15 @@ type KmsEncryptionConfig struct {
 	// This member is required.
 	CmkType CmkType
 
-	// The KMS encryption key id/alias used to encrypt the Data Store contents at rest.
+	// The KMS encryption key id/alias used to encrypt the Data Store contents at
+	// rest.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
 }
 
-// The output data configuration that was supplied when the export job was created.
+// The output data configuration that was supplied when the export job was
+// created.
 //
 // The following types satisfy this interface:
 //
@@ -214,7 +218,8 @@ type OutputDataConfig interface {
 	isOutputDataConfig()
 }
 
-// The output data configuration that was supplied when the export job was created.
+// The output data configuration that was supplied when the export job was
+// created.
 type OutputDataConfigMemberS3Configuration struct {
 	Value S3Configuration
 
@@ -244,8 +249,8 @@ type S3Configuration struct {
 	// This member is required.
 	KmsKeyId *string
 
-	// The S3Uri is the user specified S3 location of the FHIR data to be imported into
-	// Amazon HealthLake.
+	// The S3Uri is the user specified S3 location of the FHIR data to be imported
+	// into Amazon HealthLake.
 	//
 	// This member is required.
 	S3Uri *string
@@ -253,8 +258,8 @@ type S3Configuration struct {
 	noSmithyDocumentSerde
 }
 
-// The server-side encryption key configuration for a customer provided encryption
-// key.
+// The server-side encryption key configuration for a customer provided
+// encryption key.
 type SseConfiguration struct {
 
 	// The KMS encryption configuration used to provide details for data encryption.

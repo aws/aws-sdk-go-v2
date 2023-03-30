@@ -53,20 +53,10 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 
 	// Indicates whether tasks should continue to run after the cutoff time specified
 	// in the maintenance windows is reached.
-	// - CONTINUE_TASK: When the cutoff time is
-	// reached, any tasks that are running continue. The default value.
-	// -
-	// CANCEL_TASK:
-	// - For Automation, Lambda, Step Functions tasks: When the cutoff
-	// time is reached, any task invocations that are already running continue, but no
-	// new task invocations are started.
-	// - For Run Command tasks: When the cutoff time
-	// is reached, the system sends a CancelCommand operation that attempts to cancel
-	// the command associated with the task. However, there is no guarantee that the
-	// command will be terminated and the underlying process stopped.
-	//
-	// The status for
-	// tasks that are not completed is TIMED_OUT.
+	//     - CONTINUE_TASK : When the cutoff time is reached, any tasks that are running continue. The default value.
+	//     - CANCEL_TASK :
+	//         - For Automation, Lambda, Step Functions tasks: When the cutoff time is reached, any task invocations that are already running continue, but no new task invocations are started.
+	//         - For Run Command tasks: When the cutoff time is reached, the system sends a CancelCommand operation that attempts to cancel the command associated with the task. However, there is no guarantee that the command will be terminated and the underlying process stopped. The status for tasks that are not completed is TIMED_OUT .
 	CutoffBehavior types.MaintenanceWindowTaskCutoffBehavior
 
 	// An optional description for the task.
@@ -75,16 +65,15 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// A structure containing information about an Amazon Simple Storage Service
 	// (Amazon S3) bucket to write managed node-level logs to. LoggingInfo has been
 	// deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to
-	// contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options
-	// in the TaskInvocationParameters structure. For information about how Amazon Web
-	// Services Systems Manager handles these options for the supported maintenance
-	// window task types, see MaintenanceWindowTaskInvocationParameters.
+	// contain logs, instead use the OutputS3BucketName  and OutputS3KeyPrefix
+	// options in the TaskInvocationParameters structure. For information about how
+	// Amazon Web Services Systems Manager handles these options for the supported
+	// maintenance window task types, see MaintenanceWindowTaskInvocationParameters .
 	LoggingInfo *types.LoggingInfo
 
 	// The maximum number of targets this task can be run for, in parallel. Although
 	// this element is listed as "Required: No", a value can be omitted only when you
-	// are registering or updating a targetless task
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html)
+	// are registering or updating a targetless task (https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html)
 	// You must provide a value in all other cases. For maintenance window tasks
 	// without a target specified, you can't supply a value for this option. Instead,
 	// the system inserts a placeholder value of 1. This value doesn't affect the
@@ -93,8 +82,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 
 	// The maximum number of errors allowed before this task stops being scheduled.
 	// Although this element is listed as "Required: No", a value can be omitted only
-	// when you are registering or updating a targetless task
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html)
+	// when you are registering or updating a targetless task (https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html)
 	// You must provide a value in all other cases. For maintenance window tasks
 	// without a target specified, you can't supply a value for this option. Instead,
 	// the system inserts a placeholder value of 1. This value doesn't affect the
@@ -113,15 +101,11 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// Systems Manager to assume when running a maintenance window task. If you do not
 	// specify a service role ARN, Systems Manager uses your account's service-linked
 	// role. If no service-linked role for Systems Manager exists in your account, it
-	// is created when you run RegisterTaskWithMaintenanceWindow. For more information,
-	// see the following topics in the in the Amazon Web Services Systems Manager User
-	// Guide:
-	// - Using service-linked roles for Systems Manager
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions)
-	// -
-	// Should I use a service-linked role or a custom service role to run maintenance
-	// window tasks?
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)
+	// is created when you run RegisterTaskWithMaintenanceWindow. For more
+	// information, see the following topics in the in the Amazon Web Services Systems
+	// Manager User Guide:
+	//     - Using service-linked roles for Systems Manager (https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions)
+	//     - Should I use a service-linked role or a custom service role to run maintenance window tasks?  (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)
 	ServiceRoleArn *string
 
 	// The targets (either managed nodes or maintenance window targets). One or more
@@ -129,11 +113,10 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// Depending on the task, targets are optional for other maintenance window task
 	// types (Automation, Lambda, and Step Functions). For more information about
 	// running tasks that don't specify targets, see Registering maintenance window
-	// tasks without targets
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html)
+	// tasks without targets (https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html)
 	// in the Amazon Web Services Systems Manager User Guide. Specify managed nodes
-	// using the following format: Key=InstanceIds,Values=, Specify maintenance window
-	// targets using the following format: Key=WindowTargetIds,Values=,
+	// using the following format: Key=InstanceIds,Values=, Specify maintenance
+	// window targets using the following format: Key=WindowTargetIds,Values=,
 	Targets []types.Target
 
 	// The parameters that the task should use during execution. Populate only the
@@ -142,9 +125,10 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 
 	// The parameters that should be passed to the task when it is run. TaskParameters
 	// has been deprecated. To specify parameters to pass to a task when it runs,
-	// instead use the Parameters option in the TaskInvocationParameters structure. For
-	// information about how Systems Manager handles these options for the supported
-	// maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
+	// instead use the Parameters  option in the TaskInvocationParameters structure.
+	// For information about how Systems Manager handles these options for the
+	// supported maintenance window task types, see
+	// MaintenanceWindowTaskInvocationParameters .
 	TaskParameters map[string]types.MaintenanceWindowTaskParameterValueExpression
 
 	noSmithyDocumentSerde

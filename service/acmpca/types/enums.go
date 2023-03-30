@@ -116,9 +116,9 @@ const (
 	CertificateAuthorityTypeSubordinate CertificateAuthorityType = "SUBORDINATE"
 )
 
-// Values returns all known values for CertificateAuthorityType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CertificateAuthorityType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CertificateAuthorityType) Values() []CertificateAuthorityType {
 	return []CertificateAuthorityType{
 		"ROOT",
@@ -160,8 +160,8 @@ const (
 	ExtendedKeyUsageTypeCertificateTransparency ExtendedKeyUsageType = "CERTIFICATE_TRANSPARENCY"
 )
 
-// Values returns all known values for ExtendedKeyUsageType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ExtendedKeyUsageType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ExtendedKeyUsageType) Values() []ExtendedKeyUsageType {
 	return []ExtendedKeyUsageType{
@@ -207,9 +207,9 @@ const (
 	KeyAlgorithmEcSecp384r1  KeyAlgorithm = "EC_secp384r1"
 )
 
-// Values returns all known values for KeyAlgorithm. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for KeyAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (KeyAlgorithm) Values() []KeyAlgorithm {
 	return []KeyAlgorithm{
 		"RSA_2048",
@@ -309,9 +309,9 @@ const (
 	S3ObjectAclBucketOwnerFullControl S3ObjectAcl = "BUCKET_OWNER_FULL_CONTROL"
 )
 
-// Values returns all known values for S3ObjectAcl. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for S3ObjectAcl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (S3ObjectAcl) Values() []S3ObjectAcl {
 	return []S3ObjectAcl{
 		"PUBLIC_READ",

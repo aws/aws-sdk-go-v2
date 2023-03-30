@@ -14,10 +14,11 @@ import (
 // This method works, but is deprecated. Use BatchGetDeploymentTargets instead.
 // Returns an array of one or more instances associated with a deployment. This
 // method works with EC2/On-premises and Lambda compute platforms. The newer
-// BatchGetDeploymentTargets works with all compute platforms. The maximum number
+// BatchGetDeploymentTargetsworks with all compute platforms. The maximum number
 // of instances that can be returned is 25.
 //
-// Deprecated: This operation is deprecated, use BatchGetDeploymentTargets instead.
+// Deprecated: This operation is deprecated, use BatchGetDeploymentTargets
+// instead.
 func (c *Client) BatchGetDeploymentInstances(ctx context.Context, params *BatchGetDeploymentInstancesInput, optFns ...func(*Options)) (*BatchGetDeploymentInstancesOutput, error) {
 	if params == nil {
 		params = &BatchGetDeploymentInstancesInput{}
@@ -33,7 +34,7 @@ func (c *Client) BatchGetDeploymentInstances(ctx context.Context, params *BatchG
 	return out, nil
 }
 
-// Represents the input of a BatchGetDeploymentInstances operation.
+// Represents the input of a BatchGetDeploymentInstances  operation.
 type BatchGetDeploymentInstancesInput struct {
 
 	// The unique ID of a deployment.
@@ -50,7 +51,7 @@ type BatchGetDeploymentInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a BatchGetDeploymentInstances operation.
+// Represents the output of a BatchGetDeploymentInstances  operation.
 type BatchGetDeploymentInstancesOutput struct {
 
 	// Information about errors that might have occurred during the API call.

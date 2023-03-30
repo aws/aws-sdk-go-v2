@@ -13,8 +13,8 @@ import (
 
 // Modifies attributes of a specified VPC endpoint. The attributes that you can
 // modify depend on the type of VPC endpoint (interface, gateway, or Gateway Load
-// Balancer). For more information, see the Amazon Web Services PrivateLink Guide
-// (https://docs.aws.amazon.com/vpc/latest/privatelink/).
+// Balancer). For more information, see the Amazon Web Services PrivateLink Guide (https://docs.aws.amazon.com/vpc/latest/privatelink/)
+// .
 func (c *Client) ModifyVpcEndpoint(ctx context.Context, params *ModifyVpcEndpointInput, optFns ...func(*Options)) (*ModifyVpcEndpointOutput, error) {
 	if params == nil {
 		params = &ModifyVpcEndpointInput{}
@@ -44,9 +44,9 @@ type ModifyVpcEndpointInput struct {
 	// network interface.
 	AddSecurityGroupIds []string
 
-	// (Interface and Gateway Load Balancer endpoints) The IDs of the subnets in which
-	// to serve the endpoint. For a Gateway Load Balancer endpoint, you can specify
-	// only one subnet.
+	// (Interface and Gateway Load Balancer endpoints) The IDs of the subnets in
+	// which to serve the endpoint. For a Gateway Load Balancer endpoint, you can
+	// specify only one subnet.
 	AddSubnetIds []string
 
 	// The DNS options for the endpoint.
@@ -54,8 +54,8 @@ type ModifyVpcEndpointInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The IP address type for the endpoint.
@@ -65,8 +65,8 @@ type ModifyVpcEndpointInput struct {
 	// controls access to the service. The policy must be in valid JSON format.
 	PolicyDocument *string
 
-	// (Interface endpoint) Indicates whether a private hosted zone is associated with
-	// the VPC.
+	// (Interface endpoint) Indicates whether a private hosted zone is associated
+	// with the VPC.
 	PrivateDnsEnabled *bool
 
 	// (Gateway endpoint) The IDs of the route tables to disassociate from the
@@ -89,7 +89,7 @@ type ModifyVpcEndpointInput struct {
 
 type ModifyVpcEndpointOutput struct {
 
-	// Returns true if the request succeeds; otherwise, it returns an error.
+	// Returns true  if the request succeeds; otherwise, it returns an error.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

@@ -13,11 +13,10 @@ import (
 )
 
 // Lists all channel memberships in a channel. The x-amz-chime-bearer request
-// header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that
-// makes the API call as the value in the header. If you want to list the channels
-// to which a specific app instance user belongs, see the
-// ListChannelMembershipsForAppInstanceUser
-// (https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html)
+// header is mandatory. Use the ARN of the AppInstanceUser  or AppInstanceBot
+// that makes the API call as the value in the header. If you want to list the
+// channels to which a specific app instance user belongs, see the
+// ListChannelMembershipsForAppInstanceUser (https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html)
 // API.
 func (c *Client) ListChannelMemberships(ctx context.Context, params *ListChannelMembershipsInput, optFns ...func(*Options)) (*ListChannelMembershipsOutput, error) {
 	if params == nil {
@@ -41,7 +40,7 @@ type ListChannelMembershipsInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
+	// The ARN of the AppInstanceUser  or AppInstanceBot  that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string
@@ -57,9 +56,10 @@ type ListChannelMembershipsInput struct {
 	// memberships in a particular sub-channel of an elastic channel.
 	SubChannelId *string
 
-	// The membership type of a user, DEFAULT or HIDDEN. Default members are returned
-	// as part of ListChannelMemberships if no type is specified. Hidden members are
-	// only returned if the type filter in ListChannelMemberships equals HIDDEN.
+	// The membership type of a user, DEFAULT  or HIDDEN. Default members are
+	// returned as part of ListChannelMemberships if no type is specified. Hidden
+	// members are only returned if the type filter in ListChannelMemberships  equals
+	// HIDDEN .
 	Type types.ChannelMembershipType
 
 	noSmithyDocumentSerde
@@ -160,8 +160,8 @@ type ListChannelMembershipsPaginatorOptions struct {
 	// The maximum number of channel memberships that you want returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -174,7 +174,8 @@ type ListChannelMembershipsPaginator struct {
 	firstPage bool
 }
 
-// NewListChannelMembershipsPaginator returns a new ListChannelMembershipsPaginator
+// NewListChannelMembershipsPaginator returns a new
+// ListChannelMembershipsPaginator
 func NewListChannelMembershipsPaginator(client ListChannelMembershipsAPIClient, params *ListChannelMembershipsInput, optFns ...func(*ListChannelMembershipsPaginatorOptions)) *ListChannelMembershipsPaginator {
 	if params == nil {
 		params = &ListChannelMembershipsInput{}

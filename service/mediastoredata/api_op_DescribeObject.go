@@ -29,8 +29,8 @@ func (c *Client) DescribeObject(ctx context.Context, params *DescribeObjectInput
 
 type DescribeObjectInput struct {
 
-	// The path (including the file name) where the object is stored in the container.
-	// Format: //
+	// The path (including the file name) where the object is stored in the
+	// container. Format: //
 	//
 	// This member is required.
 	Path *string
@@ -42,9 +42,8 @@ type DescribeObjectOutput struct {
 
 	// An optional CacheControl header that allows the caller to control the object's
 	// cache behavior. Headers can be passed in as specified in the HTTP at
-	// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
-	// (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9). Headers with
-	// a custom user-defined value are also accepted.
+	// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9 (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)
+	// . Headers with a custom user-defined value are also accepted.
 	CacheControl *string
 
 	// The length of the object in bytes.

@@ -44,8 +44,8 @@ type ListShareInvitationsInput struct {
 	// The type of share invitations to be returned.
 	ShareResourceType types.ShareResourceType
 
-	// An optional string added to the beginning of each workload name returned in the
-	// results.
+	// An optional string added to the beginning of each workload name returned in
+	// the results.
 	WorkloadNamePrefix *string
 
 	noSmithyDocumentSerde
@@ -140,8 +140,8 @@ type ListShareInvitationsPaginatorOptions struct {
 	// The maximum number of results to return for this request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -31,7 +31,7 @@ func (c *Client) DescribeDBProxyTargetGroups(ctx context.Context, params *Descri
 
 type DescribeDBProxyTargetGroupsInput struct {
 
-	// The identifier of the DBProxy associated with the target group.
+	// The identifier of the DBProxy  associated with the target group.
 	//
 	// This member is required.
 	DBProxyName *string
@@ -41,16 +41,16 @@ type DescribeDBProxyTargetGroupsInput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
-	// The identifier of the DBProxyTargetGroup to describe.
+	// The identifier of the DBProxyTargetGroup  to describe.
 	TargetGroupName *string
 
 	noSmithyDocumentSerde
@@ -60,7 +60,7 @@ type DescribeDBProxyTargetGroupsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// An arbitrary number of DBProxyTargetGroup objects, containing details of the
@@ -147,14 +147,14 @@ var _ DescribeDBProxyTargetGroupsAPIClient = (*Client)(nil)
 // DescribeDBProxyTargetGroupsPaginatorOptions is the paginator options for
 // DescribeDBProxyTargetGroups
 type DescribeDBProxyTargetGroupsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

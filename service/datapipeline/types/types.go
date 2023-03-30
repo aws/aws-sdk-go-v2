@@ -7,8 +7,8 @@ import (
 )
 
 // A key-value pair that describes a property of a pipeline object. The value is
-// specified as either a string value (StringValue) or a reference to another
-// object (RefValue) but not as both.
+// specified as either a string value ( StringValue) or a reference to another
+// object ( RefValue ) but not as both.
 type Field struct {
 
 	// The field identifier.
@@ -27,16 +27,15 @@ type Field struct {
 
 // Identity information for the EC2 instance that is hosting the task runner. You
 // can get this value by calling a metadata URI from the EC2 instance. For more
-// information, see Instance Metadata
-// (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html)
+// information, see Instance Metadata (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html)
 // in the Amazon Elastic Compute Cloud User Guide. Passing in this value proves
 // that your task runner is running on an EC2 instance, and ensures the proper AWS
 // Data Pipeline service charges are applied to your pipeline.
 type InstanceIdentity struct {
 
-	// A description of an EC2 instance that is generated when the instance is launched
-	// and exposed to the instance via the instance metadata service in the form of a
-	// JSON representation of an object.
+	// A description of an EC2 instance that is generated when the instance is
+	// launched and exposed to the instance via the instance metadata service in the
+	// form of a JSON representation of an object.
 	Document *string
 
 	// A signature which can be used to verify the accuracy and authenticity of the
@@ -46,42 +45,36 @@ type InstanceIdentity struct {
 	noSmithyDocumentSerde
 }
 
-// Contains a logical operation for comparing the value of a field with a specified
-// value.
+// Contains a logical operation for comparing the value of a field with a
+// specified value.
 type Operator struct {
 
-	// The logical operation to be performed: equal (EQ), equal reference (REF_EQ),
-	// less than or equal (LE), greater than or equal (GE), or between (BETWEEN). Equal
-	// reference (REF_EQ) can be used only with reference fields. The other comparison
-	// types can be used only with String fields. The comparison types you can use
-	// apply only to certain object fields, as detailed below. The comparison operators
-	// EQ and REF_EQ act on the following fields:
-	// - name
-	// - @sphere
-	// - parent
-	// -
-	// @componentParent
-	// - @instanceParent
-	// - @status
-	// - @scheduledStartTime
-	// -
-	// @scheduledEndTime
-	// - @actualStartTime
-	// - @actualEndTime
-	//
-	// The comparison operators
-	// GE, LE, and BETWEEN act on the following fields:
-	// - @scheduledStartTime
-	// -
-	// @scheduledEndTime
-	// - @actualStartTime
-	// - @actualEndTime
-	//
-	// Note that fields
-	// beginning with the at sign (@) are read-only and set by the web service. When
-	// you name fields, you should choose names containing only alpha-numeric values,
-	// as symbols may be reserved by AWS Data Pipeline. User-defined fields that you
-	// add to a pipeline should prefix their name with the string "my".
+	// The logical operation to be performed: equal ( EQ ), equal reference ( REF_EQ
+	// ), less than or equal ( LE ), greater than or equal ( GE ), or between ( BETWEEN
+	// ). Equal reference ( REF_EQ) can be used only with reference fields. The other
+	// comparison types can be used only with String fields. The comparison types you
+	// can use apply only to certain object fields, as detailed below. The comparison
+	// operators EQ and REF_EQ act on the following fields:
+	//     - name
+	//     - @sphere
+	//     - parent
+	//     - @componentParent
+	//     - @instanceParent
+	//     - @status
+	//     - @scheduledStartTime
+	//     - @scheduledEndTime
+	//     - @actualStartTime
+	//     - @actualEndTime
+	//  The comparison operators GE , LE , and BETWEEN  act on the following fields:
+	//     - @scheduledStartTime
+	//     - @scheduledEndTime
+	//     - @actualStartTime
+	//     - @actualEndTime
+	// Note that fields beginning with the at sign (@) are
+	// read-only and set by the web service. When you name fields, you should choose
+	// names containing only alpha-numeric values, as symbols may be reserved by AWS
+	// Data Pipeline. User-defined fields that you add to a pipeline should prefix
+	// their name with the string "my".
 	Type OperatorType
 
 	// The value that the actual field value will be compared with.
@@ -152,8 +145,8 @@ type PipelineDescription struct {
 	// This member is required.
 	Name *string
 
-	// The pipeline identifier that was assigned by AWS Data Pipeline. This is a string
-	// of the form df-297EG78HU43EEXAMPLE.
+	// The pipeline identifier that was assigned by AWS Data Pipeline. This is a
+	// string of the form df-297EG78HU43EEXAMPLE .
 	//
 	// This member is required.
 	PipelineId *string
@@ -162,8 +155,7 @@ type PipelineDescription struct {
 	Description *string
 
 	// A list of tags to associated with a pipeline. Tags let you control access to
-	// pipelines. For more information, see Controlling User Access to Pipelines
-	// (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
+	// pipelines. For more information, see Controlling User Access to Pipelines (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
 	// in the AWS Data Pipeline Developer Guide.
 	Tags []Tag
 
@@ -173,8 +165,8 @@ type PipelineDescription struct {
 // Contains the name and identifier of a pipeline.
 type PipelineIdName struct {
 
-	// The ID of the pipeline that was assigned by AWS Data Pipeline. This is a string
-	// of the form df-297EG78HU43EEXAMPLE.
+	// The ID of the pipeline that was assigned by AWS Data Pipeline. This is a
+	// string of the form df-297EG78HU43EEXAMPLE .
 	Id *string
 
 	// The name of the pipeline.
@@ -226,8 +218,8 @@ type Selector struct {
 	// condition fails.
 	FieldName *string
 
-	// Contains a logical operation for comparing the value of a field with a specified
-	// value.
+	// Contains a logical operation for comparing the value of a field with a
+	// specified value.
 	Operator *Operator
 
 	noSmithyDocumentSerde
@@ -235,22 +227,19 @@ type Selector struct {
 
 // Tags are key/value pairs defined by a user and associated with a pipeline to
 // control access. AWS Data Pipeline allows you to associate ten tags per pipeline.
-// For more information, see Controlling User Access to Pipelines
-// (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
+// For more information, see Controlling User Access to Pipelines (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
 // in the AWS Data Pipeline Developer Guide.
 type Tag struct {
 
 	// The key name of a tag defined by a user. For more information, see Controlling
-	// User Access to Pipelines
-	// (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
+	// User Access to Pipelines (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
 	// in the AWS Data Pipeline Developer Guide.
 	//
 	// This member is required.
 	Key *string
 
-	// The optional value portion of a tag defined by a user. For more information, see
-	// Controlling User Access to Pipelines
-	// (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
+	// The optional value portion of a tag defined by a user. For more information,
+	// see Controlling User Access to Pipelines (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
 	// in the AWS Data Pipeline Developer Guide.
 	//
 	// This member is required.
@@ -262,8 +251,8 @@ type Tag struct {
 // Contains information about a pipeline task that is assigned to a task runner.
 type TaskObject struct {
 
-	// The ID of the pipeline task attempt object. AWS Data Pipeline uses this value to
-	// track how many times a task is attempted.
+	// The ID of the pipeline task attempt object. AWS Data Pipeline uses this value
+	// to track how many times a task is attempted.
 	AttemptId *string
 
 	// Connection information for the location where the task runner will publish the
@@ -273,8 +262,8 @@ type TaskObject struct {
 	// The ID of the pipeline that provided the task.
 	PipelineId *string
 
-	// An internal identifier for the task. This ID is passed to the SetTaskStatus and
-	// ReportTaskProgress actions.
+	// An internal identifier for the task. This ID is passed to the SetTaskStatus
+	// and ReportTaskProgress  actions.
 	TaskId *string
 
 	noSmithyDocumentSerde

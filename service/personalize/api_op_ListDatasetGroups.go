@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of dataset groups. The response provides the properties for each
-// dataset group, including the Amazon Resource Name (ARN). For more information on
-// dataset groups, see CreateDatasetGroup
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html).
+// Returns a list of dataset groups. The response provides the properties for
+// each dataset group, including the Amazon Resource Name (ARN). For more
+// information on dataset groups, see CreateDatasetGroup (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html)
+// .
 func (c *Client) ListDatasetGroups(ctx context.Context, params *ListDatasetGroupsInput, optFns ...func(*Options)) (*ListDatasetGroupsOutput, error) {
 	if params == nil {
 		params = &ListDatasetGroupsInput{}
@@ -125,13 +125,14 @@ type ListDatasetGroupsAPIClient interface {
 
 var _ ListDatasetGroupsAPIClient = (*Client)(nil)
 
-// ListDatasetGroupsPaginatorOptions is the paginator options for ListDatasetGroups
+// ListDatasetGroupsPaginatorOptions is the paginator options for
+// ListDatasetGroups
 type ListDatasetGroupsPaginatorOptions struct {
 	// The maximum number of dataset groups to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

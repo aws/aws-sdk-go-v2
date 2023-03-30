@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows the destination domain owner to delete an existing inbound cross-cluster
-// search connection.
+// Allows the destination domain owner to delete an existing inbound
+// cross-cluster search connection.
 func (c *Client) DeleteInboundCrossClusterSearchConnection(ctx context.Context, params *DeleteInboundCrossClusterSearchConnectionInput, optFns ...func(*Options)) (*DeleteInboundCrossClusterSearchConnectionOutput, error) {
 	if params == nil {
 		params = &DeleteInboundCrossClusterSearchConnectionInput{}
@@ -44,7 +44,8 @@ type DeleteInboundCrossClusterSearchConnectionInput struct {
 // details of deleted inbound connection.
 type DeleteInboundCrossClusterSearchConnectionOutput struct {
 
-	// Specifies the InboundCrossClusterSearchConnection of deleted inbound connection.
+	// Specifies the InboundCrossClusterSearchConnection of deleted inbound
+	// connection.
 	CrossClusterSearchConnection *types.InboundCrossClusterSearchConnection
 
 	// Metadata pertaining to the operation's result.

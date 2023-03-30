@@ -13,14 +13,14 @@ import (
 
 // Starts asynchronous recognition of celebrities in a stored video. Amazon
 // Rekognition Video can detect celebrities in a video must be stored in an Amazon
-// S3 bucket. Use Video to specify the bucket name and the filename of the video.
-// StartCelebrityRecognition returns a job identifier (JobId) which you use to get
-// the results of the analysis. When celebrity recognition analysis is finished,
-// Amazon Rekognition Video publishes a completion status to the Amazon Simple
-// Notification Service topic that you specify in NotificationChannel. To get the
-// results of the celebrity recognition analysis, first check that the status value
-// published to the Amazon SNS topic is SUCCEEDED. If so, call
-// GetCelebrityRecognition and pass the job identifier (JobId) from the initial
+// S3 bucket. Use Video  to specify the bucket name and the filename of the video.
+// StartCelebrityRecognition returns a job identifier ( JobId) which you use to
+// get the results of the analysis. When celebrity recognition analysis is
+// finished, Amazon Rekognition Video publishes a completion status to the Amazon
+// Simple Notification Service topic that you specify in NotificationChannel. To
+// get the results of the celebrity recognition analysis, first check that the
+// status value published to the Amazon SNS topic is SUCCEEDED . If so, call
+// GetCelebrityRecognition and pass the job identifier ( JobId) from the initial
 // call to StartCelebrityRecognition. For more information, see Recognizing
 // celebrities in the Amazon Rekognition Developer Guide.
 func (c *Client) StartCelebrityRecognition(ctx context.Context, params *StartCelebrityRecognitionInput, optFns ...func(*Options)) (*StartCelebrityRecognitionOutput, error) {
@@ -47,14 +47,14 @@ type StartCelebrityRecognitionInput struct {
 	Video *types.Video
 
 	// Idempotent token used to identify the start request. If you use the same token
-	// with multiple StartCelebrityRecognition requests, the same JobId is returned.
+	// with multiple StartCelebrityRecognition  requests, the same JobId is returned.
 	// Use ClientRequestToken to prevent the same job from being accidently started
 	// more than once.
 	ClientRequestToken *string
 
-	// An identifier you specify that's returned in the completion notification that's
-	// published to your Amazon Simple Notification Service topic. For example, you can
-	// use JobTag to group related jobs and identify them in the completion
+	// An identifier you specify that's returned in the completion notification
+	// that's published to your Amazon Simple Notification Service topic. For example,
+	// you can use JobTag to group related jobs and identify them in the completion
 	// notification.
 	JobTag *string
 
@@ -69,8 +69,8 @@ type StartCelebrityRecognitionInput struct {
 
 type StartCelebrityRecognitionOutput struct {
 
-	// The identifier for the celebrity recognition analysis job. Use JobId to identify
-	// the job in a subsequent call to GetCelebrityRecognition.
+	// The identifier for the celebrity recognition analysis job. Use JobId to
+	// identify the job in a subsequent call to GetCelebrityRecognition .
 	JobId *string
 
 	// Metadata pertaining to the operation's result.

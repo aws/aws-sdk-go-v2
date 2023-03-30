@@ -18,7 +18,7 @@ import (
 // either all metric alarms or all composite alarms are returned. CloudWatch
 // retains the history of an alarm even if you delete the alarm. To use this
 // operation and return information about a composite alarm, you must be signed on
-// with the cloudwatch:DescribeAlarmHistory permission that is scoped to *. You
+// with the cloudwatch:DescribeAlarmHistory  permission that is scoped to *. You
 // can't return information about composite alarms if your
 // cloudwatch:DescribeAlarmHistory permission has a narrower scope.
 func (c *Client) DescribeAlarmHistory(ctx context.Context, params *DescribeAlarmHistoryInput, optFns ...func(*Options)) (*DescribeAlarmHistoryOutput, error) {
@@ -60,8 +60,8 @@ type DescribeAlarmHistoryInput struct {
 	NextToken *string
 
 	// Specified whether to return the newest or oldest alarm history first. Specify
-	// TimestampDescending to have the newest event history returned first, and specify
-	// TimestampAscending to have the oldest history returned first.
+	// TimestampDescendingto have the newest event history returned first, and
+	// specify TimestampAscending  to have the oldest history returned first.
 	ScanBy types.ScanBy
 
 	// The starting date to retrieve alarm history.
@@ -158,8 +158,8 @@ type DescribeAlarmHistoryPaginatorOptions struct {
 	// The maximum number of alarm history records to retrieve.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -32,13 +32,13 @@ type DescribeIpamPoolsInput struct {
 
 	// A check for whether you have the required permissions for the action without
 	// actually making the request and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// One or more filters for the request. For more information about filtering, see
-	// Filtering CLI output
-	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html).
+	// Filtering CLI output (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html)
+	// .
 	Filters []types.Filter
 
 	// The IDs of the IPAM pools you would like information on.
@@ -136,13 +136,14 @@ type DescribeIpamPoolsAPIClient interface {
 
 var _ DescribeIpamPoolsAPIClient = (*Client)(nil)
 
-// DescribeIpamPoolsPaginatorOptions is the paginator options for DescribeIpamPools
+// DescribeIpamPoolsPaginatorOptions is the paginator options for
+// DescribeIpamPools
 type DescribeIpamPoolsPaginatorOptions struct {
 	// The maximum number of results to return in the request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

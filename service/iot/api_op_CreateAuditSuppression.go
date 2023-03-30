@@ -14,8 +14,7 @@ import (
 )
 
 // Creates a Device Defender audit suppression. Requires permission to access the
-// CreateAuditSuppression
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// CreateAuditSuppression (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateAuditSuppression(ctx context.Context, params *CreateAuditSuppressionInput, optFns ...func(*Options)) (*CreateAuditSuppressionOutput, error) {
 	if params == nil {
@@ -35,9 +34,9 @@ func (c *Client) CreateAuditSuppression(ctx context.Context, params *CreateAudit
 type CreateAuditSuppressionInput struct {
 
 	// An audit check name. Checks must be enabled for your account. (Use
-	// DescribeAccountAuditConfiguration to see the list of all checks, including those
-	// that are enabled or use UpdateAccountAuditConfiguration to select which checks
-	// are enabled.)
+	// DescribeAccountAuditConfigurationto see the list of all checks, including
+	// those that are enabled or use UpdateAccountAuditConfiguration to select which
+	// checks are enabled.)
 	//
 	// This member is required.
 	CheckName *string

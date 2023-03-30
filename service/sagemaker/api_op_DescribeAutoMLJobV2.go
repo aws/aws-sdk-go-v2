@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Returns information about an Amazon SageMaker AutoML V2 job. This API action is
-// callable through SageMaker Canvas only. Calling it directly from the CLI or an
-// SDK results in an error.
+// Returns information about an Amazon SageMaker AutoML V2 job. This API action
+// is callable through SageMaker Canvas only. Calling it directly from the CLI or
+// an SDK results in an error.
 func (c *Client) DescribeAutoMLJobV2(ctx context.Context, params *DescribeAutoMLJobV2Input, optFns ...func(*Options)) (*DescribeAutoMLJobV2Output, error) {
 	if params == nil {
 		params = &DescribeAutoMLJobV2Input{}
@@ -97,8 +97,8 @@ type DescribeAutoMLJobV2Output struct {
 	// job.
 	AutoMLProblemTypeConfig types.AutoMLProblemTypeConfig
 
-	// Information about the candidate produced by an AutoML training job V2, including
-	// its status, steps, and other properties.
+	// Information about the candidate produced by an AutoML training job V2,
+	// including its status, steps, and other properties.
 	BestCandidate *types.AutoMLCandidate
 
 	// Returns the configuration settings of how the data are split into train and

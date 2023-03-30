@@ -20,8 +20,8 @@ import (
 // transactions per second, after which transactions are throttled. If you are
 // using CloudWatch cross-account observability, you can use this operation in a
 // monitoring account and view data from the linked source accounts. For more
-// information, see CloudWatch cross-account observability
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html).
+// information, see CloudWatch cross-account observability (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html)
+// .
 func (c *Client) DescribeLogStreams(ctx context.Context, params *DescribeLogStreamsInput, optFns ...func(*Options)) (*DescribeLogStreamsOutput, error) {
 	if params == nil {
 		params = &DescribeLogStreamsInput{}
@@ -39,25 +39,26 @@ func (c *Client) DescribeLogStreams(ctx context.Context, params *DescribeLogStre
 
 type DescribeLogStreamsInput struct {
 
-	// If the value is true, results are returned in descending order. If the value is
-	// to false, results are returned in ascending order. The default value is false.
+	// If the value is true, results are returned in descending order. If the value
+	// is to false, results are returned in ascending order. The default value is
+	// false.
 	Descending *bool
 
-	// The maximum number of items returned. If you don't specify a value, the default
-	// is up to 50 items.
+	// The maximum number of items returned. If you don't specify a value, the
+	// default is up to 50 items.
 	Limit *int32
 
-	// Specify either the name or ARN of the log group to view. If the log group is in
-	// a source account and you are using a monitoring account, you must use the log
-	// group ARN. You must include either logGroupIdentifier or logGroupName, but not
-	// both.
+	// Specify either the name or ARN of the log group to view. If the log group is
+	// in a source account and you are using a monitoring account, you must use the log
+	// group ARN. You must include either logGroupIdentifier  or logGroupName, but
+	// not both.
 	LogGroupIdentifier *string
 
-	// The name of the log group. You must include either logGroupIdentifier or
-	// logGroupName, but not both.
+	// The name of the log group. You must include either logGroupIdentifier  or
+	// logGroupName , but not both.
 	LogGroupName *string
 
-	// The prefix to match. If orderBy is LastEventTime, you cannot specify this
+	// The prefix to match. If orderBy  is LastEventTime, you cannot specify this
 	// parameter.
 	LogStreamNamePrefix *string
 
@@ -68,12 +69,12 @@ type DescribeLogStreamsInput struct {
 	// If the value is LogStreamName, the results are ordered by log stream name. If
 	// the value is LastEventTime, the results are ordered by the event time. The
 	// default value is LogStreamName. If you order the results by event time, you
-	// cannot specify the logStreamNamePrefix parameter. lastEventTimestamp represents
-	// the time of the most recent log event in the log stream in CloudWatch Logs. This
-	// number is expressed as the number of milliseconds after Jan 1, 1970 00:00:00
-	// UTC. lastEventTimestamp updates on an eventual consistency basis. It typically
-	// updates in less than an hour from ingestion, but in rare situations might take
-	// longer.
+	// cannot specify the logStreamNamePrefix  parameter. lastEventTimestamp
+	// represents the time of the most recent log event in the log stream in CloudWatch
+	// Logs. This number is expressed as the number of milliseconds after Jan 1, 1970
+	// 00:00:00 UTC . lastEventTimestamp updates on an eventual consistency basis. It
+	// typically updates in less than an hour from ingestion, but in rare situations
+	// might take longer.
 	OrderBy types.OrderBy
 
 	noSmithyDocumentSerde
@@ -84,7 +85,8 @@ type DescribeLogStreamsOutput struct {
 	// The log streams.
 	LogStreams []types.LogStream
 
-	// The token for the next set of items to return. The token expires after 24 hours.
+	// The token for the next set of items to return. The token expires after 24
+	// hours.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -164,12 +166,12 @@ var _ DescribeLogStreamsAPIClient = (*Client)(nil)
 // DescribeLogStreamsPaginatorOptions is the paginator options for
 // DescribeLogStreams
 type DescribeLogStreamsPaginatorOptions struct {
-	// The maximum number of items returned. If you don't specify a value, the default
-	// is up to 50 items.
+	// The maximum number of items returned. If you don't specify a value, the
+	// default is up to 50 items.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

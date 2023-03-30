@@ -33,8 +33,8 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The provided developer user identifier is already registered with Cognito under
-// a different identity ID.
+// The provided developer user identifier is already registered with Cognito
+// under a different identity ID.
 type DeveloperUserAlreadyRegisteredException struct {
 	Message *string
 
@@ -62,8 +62,8 @@ func (e *DeveloperUserAlreadyRegisteredException) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
-// An exception thrown when a dependent service such as Facebook or Twitter is not
-// responding
+// An exception thrown when a dependent service such as Facebook or Twitter is
+// not responding
 type ExternalServiceException struct {
 	Message *string
 

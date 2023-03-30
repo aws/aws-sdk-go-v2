@@ -13,8 +13,7 @@ import (
 
 // Get the position information for a given resource. This action is no longer
 // supported. Calls to retrieve the position information should use the
-// GetResourcePosition
-// (https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetResourcePosition.html)
+// GetResourcePosition (https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetResourcePosition.html)
 // API operation instead.
 //
 // Deprecated: This operation is no longer supported.
@@ -50,10 +49,10 @@ type GetPositionInput struct {
 
 type GetPositionOutput struct {
 
-	// The accuracy of the estimated position in meters. An empty value indicates that
-	// no position data is available. A value of ‘0.0’ value indicates that position
-	// data is available. This data corresponds to the position information that you
-	// specified instead of the position computed by solver.
+	// The accuracy of the estimated position in meters. An empty value indicates
+	// that no position data is available. A value of ‘0.0’ value indicates that
+	// position data is available. This data corresponds to the position information
+	// that you specified instead of the position computed by solver.
 	Accuracy *types.Accuracy
 
 	// The position information of the resource.

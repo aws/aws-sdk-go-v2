@@ -53,9 +53,9 @@ const (
 	HsmStatusDegraded    HsmStatus = "DEGRADED"
 )
 
-// Values returns all known values for HsmStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for HsmStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (HsmStatus) Values() []HsmStatus {
 	return []HsmStatus{
 		"PENDING",

@@ -46,12 +46,12 @@ type ListAppsInput struct {
 	// The sort order for the results. The default is Ascending.
 	SortOrder types.SortOrder
 
-	// A parameter to search by space name. If UserProfileNameEquals is set, then this
-	// value cannot be set.
+	// A parameter to search by space name. If UserProfileNameEquals is set, then
+	// this value cannot be set.
 	SpaceNameEquals *string
 
-	// A parameter to search by user profile name. If SpaceNameEquals is set, then this
-	// value cannot be set.
+	// A parameter to search by user profile name. If SpaceNameEquals is set, then
+	// this value cannot be set.
 	UserProfileNameEquals *string
 
 	noSmithyDocumentSerde
@@ -144,8 +144,8 @@ type ListAppsPaginatorOptions struct {
 	// Returns a list up to a specified limit.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

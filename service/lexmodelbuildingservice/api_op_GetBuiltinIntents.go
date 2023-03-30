@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of built-in intents that meet the specified criteria. This operation
-// requires permission for the lex:GetBuiltinIntents action.
+// Gets a list of built-in intents that meet the specified criteria. This
+// operation requires permission for the lex:GetBuiltinIntents  action.
 func (c *Client) GetBuiltinIntents(ctx context.Context, params *GetBuiltinIntentsInput, optFns ...func(*Options)) (*GetBuiltinIntentsOutput, error) {
 	if params == nil {
 		params = &GetBuiltinIntentsInput{}
@@ -42,11 +42,10 @@ type GetBuiltinIntentsInput struct {
 	// next page of intents, use the pagination token in the next request.
 	NextToken *string
 
-	// Substring to match in built-in intent signatures. An intent will be returned if
-	// any part of its signature matches the substring. For example, "xyz" matches both
-	// "xyzabc" and "abcxyz." To find the signature for an intent, see Standard
-	// Built-in Intents
-	// (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
+	// Substring to match in built-in intent signatures. An intent will be returned
+	// if any part of its signature matches the substring. For example, "xyz" matches
+	// both "xyzabc" and "abcxyz." To find the signature for an intent, see Standard
+	// Built-in Intents (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
 	// in the Alexa Skills Kit.
 	SignatureContains *string
 
@@ -55,7 +54,7 @@ type GetBuiltinIntentsInput struct {
 
 type GetBuiltinIntentsOutput struct {
 
-	// An array of builtinIntentMetadata objects, one for each intent in the response.
+	// An array of builtinIntentMetadata  objects, one for each intent in the response.
 	Intents []types.BuiltinIntentMetadata
 
 	// A pagination token that fetches the next page of intents. If the response to
@@ -138,13 +137,14 @@ type GetBuiltinIntentsAPIClient interface {
 
 var _ GetBuiltinIntentsAPIClient = (*Client)(nil)
 
-// GetBuiltinIntentsPaginatorOptions is the paginator options for GetBuiltinIntents
+// GetBuiltinIntentsPaginatorOptions is the paginator options for
+// GetBuiltinIntents
 type GetBuiltinIntentsPaginatorOptions struct {
 	// The maximum number of intents to return in the response. The default is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

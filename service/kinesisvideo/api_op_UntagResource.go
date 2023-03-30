@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes one or more tags from a signaling channel. In the request, specify only
-// a tag key or keys; don't specify the value. If you specify a tag key that does
-// not exist, it's ignored.
+// Removes one or more tags from a signaling channel. In the request, specify
+// only a tag key or keys; don't specify the value. If you specify a tag key that
+// does not exist, it's ignored.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

@@ -17,7 +17,7 @@ import (
 // attaches a DeletionTime stamp to the response that specifies the end of the
 // recovery window. At the end of the recovery window, Amazon QuickSight deletes
 // the analysis permanently. At any time before recovery window ends, you can use
-// the RestoreAnalysis API operation to remove the DeletionTime stamp and cancel
+// the RestoreAnalysis  API operation to remove the DeletionTime stamp and cancel
 // the deletion of the analysis. The analysis remains visible in the API until it's
 // deleted, so you can describe it but you can't make a template from it. An
 // analysis that's scheduled for deletion isn't accessible in the Amazon QuickSight
@@ -55,8 +55,8 @@ type DeleteAnalysisInput struct {
 	// restore an analysis after it's deleted.
 	ForceDeleteWithoutRecovery bool
 
-	// A value that specifies the number of days that Amazon QuickSight waits before it
-	// deletes the analysis. You can't use this parameter with the
+	// A value that specifies the number of days that Amazon QuickSight waits before
+	// it deletes the analysis. You can't use this parameter with the
 	// ForceDeleteWithoutRecovery option in the same API call. The default value is 30.
 	RecoveryWindowInDays *int64
 

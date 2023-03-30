@@ -12,8 +12,7 @@ import (
 )
 
 // Creates a provisioning template. Requires permission to access the
-// CreateProvisioningTemplate
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// CreateProvisioningTemplate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateProvisioningTemplate(ctx context.Context, params *CreateProvisioningTemplateInput, optFns ...func(*Options)) (*CreateProvisioningTemplateOutput, error) {
 	if params == nil {
@@ -55,22 +54,22 @@ type CreateProvisioningTemplateInput struct {
 	Enabled bool
 
 	// Creates a pre-provisioning hook template. Only supports template of type
-	// FLEET_PROVISIONING. For more information about provisioning template types, see
-	// type
-	// (https://docs.aws.amazon.com/iot/latest/apireference/API_CreateProvisioningTemplate.html#iot-CreateProvisioningTemplate-request-type).
+	// FLEET_PROVISIONING. For more information about provisioning template types,
+	// see type (https://docs.aws.amazon.com/iot/latest/apireference/API_CreateProvisioningTemplate.html#iot-CreateProvisioningTemplate-request-type)
+	// .
 	PreProvisioningHook *types.ProvisioningHook
 
-	// Metadata which can be used to manage the provisioning template. For URI Request
-	// parameters use format: ...key1=value1&key2=value2... For the CLI command-line
-	// parameter use format: &&tags "key1=value1&key2=value2..." For the cli-input-json
-	// file use format: "tags": "key1=value1&key2=value2..."
+	// Metadata which can be used to manage the provisioning template. For URI
+	// Request parameters use format: ...key1=value1&key2=value2... For the CLI
+	// command-line parameter use format: &&tags "key1=value1&key2=value2..." For the
+	// cli-input-json file use format: "tags": "key1=value1&key2=value2..."
 	Tags []types.Tag
 
 	// The type you define in a provisioning template. You can create a template with
 	// only one type. You can't change the template type after its creation. The
 	// default value is FLEET_PROVISIONING. For more information about provisioning
-	// template, see: Provisioning template
-	// (https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html).
+	// template, see: Provisioning template (https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html)
+	// .
 	Type types.TemplateType
 
 	noSmithyDocumentSerde

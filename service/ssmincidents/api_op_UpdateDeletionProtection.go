@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update deletion protection to either allow or deny deletion of the final Region
-// in a replication set.
+// Update deletion protection to either allow or deny deletion of the final
+// Region in a replication set.
 func (c *Client) UpdateDeletionProtection(ctx context.Context, params *UpdateDeletionProtectionInput, optFns ...func(*Options)) (*UpdateDeletionProtectionOutput, error) {
 	if params == nil {
 		params = &UpdateDeletionProtectionInput{}

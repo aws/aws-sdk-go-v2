@@ -11,6 +11,6 @@
 // more. You can also fully customize build environments in CodeBuild to use your
 // own build tools. CodeBuild scales automatically to meet peak build requests. You
 // pay only for the build time you consume. For more information about CodeBuild,
-// see the CodeBuild User Guide
-// (https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html).
+// see the CodeBuild User Guide (https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html)
+// .
 package codebuild

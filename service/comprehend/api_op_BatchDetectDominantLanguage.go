@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Determines the dominant language of the input text for a batch of documents. For
-// a list of languages that Amazon Comprehend can detect, see Amazon Comprehend
-// Supported Languages
-// (https://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html).
+// Determines the dominant language of the input text for a batch of documents.
+// For a list of languages that Amazon Comprehend can detect, see Amazon
+// Comprehend Supported Languages (https://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html)
+// .
 func (c *Client) BatchDetectDominantLanguage(ctx context.Context, params *BatchDetectDominantLanguageInput, optFns ...func(*Options)) (*BatchDetectDominantLanguageOutput, error) {
 	if params == nil {
 		params = &BatchDetectDominantLanguageInput{}
@@ -45,8 +45,8 @@ type BatchDetectDominantLanguageInput struct {
 type BatchDetectDominantLanguageOutput struct {
 
 	// A list containing one object for each document that contained an error. The
-	// results are sorted in ascending order by the Index field and match the order of
-	// the documents in the input list. If there are no errors in the batch, the
+	// results are sorted in ascending order by the Index field and match the order
+	// of the documents in the input list. If there are no errors in the batch, the
 	// ErrorList is empty.
 	//
 	// This member is required.

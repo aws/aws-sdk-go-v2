@@ -12,10 +12,9 @@ import (
 )
 
 // Gets the availability options configured for a domain. By default, shows the
-// configuration with any pending changes. Set the Deployed option to true to show
-// the active configuration and exclude pending changes. For more information, see
-// Configuring Availability Options
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html)
+// configuration with any pending changes. Set the Deployed  option to true to
+// show the active configuration and exclude pending changes. For more information,
+// see Configuring Availability Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DescribeAvailabilityOptions(ctx context.Context, params *DescribeAvailabilityOptionsInput, optFns ...func(*Options)) (*DescribeAvailabilityOptionsOutput, error) {
 	if params == nil {
@@ -34,7 +33,7 @@ func (c *Client) DescribeAvailabilityOptions(ctx context.Context, params *Descri
 
 // Container for the parameters to the DescribeAvailabilityOptions operation.
 // Specifies the name of the domain you want to describe. To show the active
-// configuration and exclude any pending changes, set the Deployed option to true.
+// configuration and exclude any pending changes, set the Deployed option to true .
 type DescribeAvailabilityOptionsInput struct {
 
 	// The name of the domain you want to describe.
@@ -42,8 +41,8 @@ type DescribeAvailabilityOptionsInput struct {
 	// This member is required.
 	DomainName *string
 
-	// Whether to display the deployed configuration (true) or include any pending
-	// changes (false). Defaults to false.
+	// Whether to display the deployed configuration ( true) or include any pending
+	// changes ( false ). Defaults to false .
 	Deployed *bool
 
 	noSmithyDocumentSerde

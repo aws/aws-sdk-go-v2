@@ -10,13 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the FileSystemPolicy for the specified file system. The default
-// FileSystemPolicy goes into effect once the existing policy is deleted. For more
+// Deletes the FileSystemPolicy  for the specified file system. The default
+// FileSystemPolicygoes into effect once the existing policy is deleted. For more
 // information about the default file system policy, see Using Resource-based
-// Policies with EFS
-// (https://docs.aws.amazon.com/efs/latest/ug/res-based-policies-efs.html). This
-// operation requires permissions for the elasticfilesystem:DeleteFileSystemPolicy
-// action.
+// Policies with EFS (https://docs.aws.amazon.com/efs/latest/ug/res-based-policies-efs.html)
+// . This operation requires permissions for the
+// elasticfilesystem:DeleteFileSystemPolicy action.
 func (c *Client) DeleteFileSystemPolicy(ctx context.Context, params *DeleteFileSystemPolicyInput, optFns ...func(*Options)) (*DeleteFileSystemPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteFileSystemPolicyInput{}
@@ -34,7 +33,7 @@ func (c *Client) DeleteFileSystemPolicy(ctx context.Context, params *DeleteFileS
 
 type DeleteFileSystemPolicyInput struct {
 
-	// Specifies the EFS file system for which to delete the FileSystemPolicy.
+	// Specifies the EFS file system for which to delete the FileSystemPolicy .
 	//
 	// This member is required.
 	FileSystemId *string

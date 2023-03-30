@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Information about approval reviews for a version of a change template in Change
-// Manager.
+// Information about approval reviews for a version of a change template in
+// Change Manager.
 func (c *Client) ListDocumentMetadataHistory(ctx context.Context, params *ListDocumentMetadataHistoryInput, optFns ...func(*Options)) (*ListDocumentMetadataHistoryOutput, error) {
 	if params == nil {
 		params = &ListDocumentMetadataHistoryInput{}
@@ -31,7 +31,7 @@ func (c *Client) ListDocumentMetadataHistory(ctx context.Context, params *ListDo
 type ListDocumentMetadataHistoryInput struct {
 
 	// The type of data for which details are being requested. Currently, the only
-	// supported value is DocumentReviews.
+	// supported value is DocumentReviews .
 	//
 	// This member is required.
 	Metadata types.DocumentMetadataEnum

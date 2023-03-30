@@ -15,32 +15,21 @@ import (
 // Creates a broker. Note: This API is asynchronous. To create a broker, you must
 // either use the AmazonMQFullAccess IAM policy or include the following EC2
 // permissions in your IAM policy.
-// - ec2:CreateNetworkInterface This permission is
-// required to allow Amazon MQ to create an elastic network interface (ENI) on
-// behalf of your account.
-// - ec2:CreateNetworkInterfacePermission This permission
-// is required to attach the ENI to the broker instance.
-// -
-// ec2:DeleteNetworkInterface
-// - ec2:DeleteNetworkInterfacePermission
-// -
-// ec2:DetachNetworkInterface
-// - ec2:DescribeInternetGateways
-// -
-// ec2:DescribeNetworkInterfaces
-// - ec2:DescribeNetworkInterfacePermissions
-// -
-// ec2:DescribeRouteTables
-// - ec2:DescribeSecurityGroups
-// - ec2:DescribeSubnets
-// -
-// ec2:DescribeVpcs
+//   - ec2:CreateNetworkInterface This permission is required to allow Amazon MQ to create an elastic network interface (ENI) on behalf of your account.
+//   - ec2:CreateNetworkInterfacePermission This permission is required to attach the ENI to the broker instance.
+//   - ec2:DeleteNetworkInterface
+//   - ec2:DeleteNetworkInterfacePermission
+//   - ec2:DetachNetworkInterface
+//   - ec2:DescribeInternetGateways
+//   - ec2:DescribeNetworkInterfaces
+//   - ec2:DescribeNetworkInterfacePermissions
+//   - ec2:DescribeRouteTables
+//   - ec2:DescribeSecurityGroups
+//   - ec2:DescribeSubnets
+//   - ec2:DescribeVpcs
+//     For more information, see Create an IAM User and Get Your AWS Credentials (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/amazon-mq-setting-up.html#create-iam-user)
 //
-// For more information, see Create an IAM User and Get Your AWS
-// Credentials
-// (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/amazon-mq-setting-up.html#create-iam-user)
-// and Never Modify or Delete the Amazon MQ Elastic Network Interface
-// (https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/connecting-to-amazon-mq.html#never-modify-delete-elastic-network-interface)
+// and Never Modify or Delete the Amazon MQ Elastic Network Interface (https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/connecting-to-amazon-mq.html#never-modify-delete-elastic-network-interface)
 // in the Amazon MQ Developer Guide.
 func (c *Client) CreateBroker(ctx context.Context, params *CreateBrokerInput, optFns ...func(*Options)) (*CreateBrokerOutput, error) {
 	if params == nil {
@@ -68,10 +57,10 @@ type CreateBrokerInput struct {
 	// This member is required.
 	AutoMinorVersionUpgrade bool
 
-	// Required. The broker's name. This value must be unique in your AWS account, 1-50
-	// characters long, must contain only letters, numbers, dashes, and underscores,
-	// and must not contain white spaces, brackets, wildcard characters, or special
-	// characters.
+	// Required. The broker's name. This value must be unique in your AWS account,
+	// 1-50 characters long, must contain only letters, numbers, dashes, and
+	// underscores, and must not contain white spaces, brackets, wildcard characters,
+	// or special characters.
 	//
 	// This member is required.
 	BrokerName *string
@@ -81,15 +70,15 @@ type CreateBrokerInput struct {
 	// This member is required.
 	DeploymentMode types.DeploymentMode
 
-	// Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and
-	// RABBITMQ.
+	// Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ
+	// and RABBITMQ.
 	//
 	// This member is required.
 	EngineType types.EngineType
 
-	// Required. The broker engine's version. For a list of supported engine versions,
-	// see Supported engines
-	// (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html).
+	// Required. The broker engine's version. For a list of supported engine
+	// versions, see Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
+	// .
 	//
 	// This member is required.
 	EngineVersion *string
@@ -99,8 +88,8 @@ type CreateBrokerInput struct {
 	// This member is required.
 	HostInstanceType *string
 
-	// Enables connections from applications outside of the VPC that hosts the broker's
-	// subnets. Set to false by default, if no value is provided.
+	// Enables connections from applications outside of the VPC that hosts the
+	// broker's subnets. Set to false by default, if no value is provided.
 	//
 	// This member is required.
 	PubliclyAccessible bool
@@ -116,8 +105,8 @@ type CreateBrokerInput struct {
 	// This member is required.
 	Users []types.User
 
-	// Optional. The authentication strategy used to secure the broker. The default is
-	// SIMPLE.
+	// Optional. The authentication strategy used to secure the broker. The default
+	// is SIMPLE.
 	AuthenticationStrategy types.AuthenticationStrategy
 
 	// A list of information about the configuration.
@@ -158,11 +147,10 @@ type CreateBrokerInput struct {
 	// deployment requires two subnets. A CLUSTER_MULTI_AZ Amazon MQ for RabbitMQ
 	// deployment has no subnet requirements when deployed with public accessibility.
 	// Deployment without public accessibility requires at least one subnet. If you
-	// specify subnets in a shared VPC
-	// (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html) for a
-	// RabbitMQ broker, the associated VPC to which the specified subnets belong must
-	// be owned by your AWS account. Amazon MQ will not be able to create VPC endpoints
-	// in VPCs that are not owned by your AWS account.
+	// specify subnets in a shared VPC (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html)
+	// for a RabbitMQ broker, the associated VPC to which the specified subnets belong
+	// must be owned by your AWS account. Amazon MQ will not be able to create VPC
+	// endpoints in VPCs that are not owned by your AWS account.
 	SubnetIds []string
 
 	// Create tags when creating the broker.

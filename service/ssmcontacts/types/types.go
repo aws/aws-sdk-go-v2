@@ -38,7 +38,7 @@ type Contact struct {
 	ContactArn *string
 
 	// Refers to the type of contact. A single contact is type PERSONAL and an
-	// escalation plan is type ESCALATION.
+	// escalation plan is type ESCALATION .
 	//
 	// This member is required.
 	Type ContactType
@@ -52,9 +52,9 @@ type Contact struct {
 // The method that Incident Manager uses to engage a contact.
 type ContactChannel struct {
 
-	// A Boolean value describing if the contact channel has been activated or not. If
-	// the contact channel isn't activated, Incident Manager can't engage the contact
-	// through it.
+	// A Boolean value describing if the contact channel has been activated or not.
+	// If the contact channel isn't activated, Incident Manager can't engage the
+	// contact through it.
 	//
 	// This member is required.
 	ActivationStatus ActivationStatus
@@ -82,9 +82,9 @@ type ContactChannel struct {
 
 	// The type of the contact channel. Incident Manager supports three contact
 	// methods:
-	// - SMS
-	// - VOICE
-	// - EMAIL
+	//     - SMS
+	//     - VOICE
+	//     - EMAIL
 	Type ChannelType
 
 	noSmithyDocumentSerde
@@ -96,11 +96,9 @@ type ContactChannelAddress struct {
 
 	// The format is dependent on the type of the contact channel. The following are
 	// the expected formats:
-	// - SMS - '+' followed by the country code and phone
-	// number
-	// - VOICE - '+' followed by the country code and phone number
-	// - EMAIL - any
-	// standard email format
+	//     - SMS - '+' followed by the country code and phone number
+	//     - VOICE - '+' followed by the country code and phone number
+	//     - EMAIL - any standard email format
 	SimpleAddress *string
 
 	noSmithyDocumentSerde
@@ -109,8 +107,8 @@ type ContactChannelAddress struct {
 // The contact that Incident Manager is engaging during an incident.
 type ContactTargetInfo struct {
 
-	// A Boolean value determining if the contact's acknowledgement stops the progress
-	// of stages in the plan.
+	// A Boolean value determining if the contact's acknowledgement stops the
+	// progress of stages in the plan.
 	//
 	// This member is required.
 	IsEssential *bool
@@ -133,9 +131,9 @@ type CoverageTime struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a resource that another resource is related to or depends on.
-// For example, if a contact is a member of a rotation, the rotation is a dependent
-// entity of the contact.
+// Information about a resource that another resource is related to or depends
+// on. For example, if a contact is a member of a rotation, the rotation is a
+// dependent entity of the contact.
 type DependentEntity struct {
 
 	// The Amazon Resource Names (ARNs) of the dependent resources.
@@ -143,8 +141,8 @@ type DependentEntity struct {
 	// This member is required.
 	DependentResourceIds []string
 
-	// The type of relationship between one resource and the other resource that it is
-	// related to or depends on.
+	// The type of relationship between one resource and the other resource that it
+	// is related to or depends on.
 	//
 	// This member is required.
 	RelationType *string
@@ -152,8 +150,8 @@ type DependentEntity struct {
 	noSmithyDocumentSerde
 }
 
-// Incident Manager reaching out to a contact or escalation plan to engage contact
-// during an incident.
+// Incident Manager reaching out to a contact or escalation plan to engage
+// contact during an incident.
 type Engagement struct {
 
 	// The ARN of the escalation plan or contact that Incident Manager is engaging.
@@ -286,12 +284,12 @@ type PreviewOverride struct {
 // Records events during an engagement.
 type Receipt struct {
 
-	// The time receipt was SENT, DELIVERED, or READ.
+	// The time receipt was SENT , DELIVERED , or READ .
 	//
 	// This member is required.
 	ReceiptTime *time.Time
 
-	// The type follows the engagement cycle, SENT, DELIVERED, and READ.
+	// The type follows the engagement cycle, SENT , DELIVERED , and READ .
 	//
 	// This member is required.
 	ReceiptType ReceiptType
@@ -385,8 +383,8 @@ type Rotation struct {
 	// The date and time the rotation becomes active.
 	StartTime *time.Time
 
-	// The time zone the rotation’s activity is based on, in Internet Assigned Numbers
-	// Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or
+	// The time zone the rotation’s activity is based on, in Internet Assigned
+	// Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or
 	// "Asia/Seoul".
 	TimeZoneId *string
 
@@ -406,8 +404,8 @@ type RotationOverride struct {
 	// This member is required.
 	EndTime *time.Time
 
-	// The Amazon Resource Names (ARNs) of the contacts assigned to the override of the
-	// on-call rotation.
+	// The Amazon Resource Names (ARNs) of the contacts assigned to the override of
+	// the on-call rotation.
 	//
 	// This member is required.
 	NewContactIds []string
@@ -468,8 +466,8 @@ type ShiftDetails struct {
 // specified contacts or contact methods.
 type Stage struct {
 
-	// The time to wait until beginning the next stage. The duration can only be set to
-	// 0 if a target is specified.
+	// The time to wait until beginning the next stage. The duration can only be set
+	// to 0 if a target is specified.
 	//
 	// This member is required.
 	DurationInMinutes *int32

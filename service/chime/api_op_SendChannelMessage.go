@@ -39,7 +39,7 @@ type SendChannelMessageInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The Idempotency token for each client request.
+	// The Idempotency  token for each client request.
 	//
 	// This member is required.
 	ClientRequestToken *string
@@ -55,12 +55,12 @@ type SendChannelMessageInput struct {
 	// This member is required.
 	Persistence types.ChannelMessagePersistenceType
 
-	// The type of message, STANDARD or CONTROL.
+	// The type of message, STANDARD  or CONTROL .
 	//
 	// This member is required.
 	Type types.ChannelMessageType
 
-	// The AppInstanceUserArn of the user that makes the API call.
+	// The AppInstanceUserArn  of the user that makes the API call.
 	ChimeBearer *string
 
 	// The optional metadata for each message.

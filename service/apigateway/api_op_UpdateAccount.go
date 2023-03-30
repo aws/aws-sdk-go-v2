@@ -30,8 +30,8 @@ func (c *Client) UpdateAccount(ctx context.Context, params *UpdateAccountInput, 
 // Requests API Gateway to change information about the current Account resource.
 type UpdateAccountInput struct {
 
-	// For more information about supported patch operations, see Patch Operations
-	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
+	// For more information about supported patch operations, see Patch Operations (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html)
+	// .
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
@@ -46,8 +46,8 @@ type UpdateAccountOutput struct {
 	// The ARN of an Amazon CloudWatch role for the current Account.
 	CloudwatchRoleArn *string
 
-	// A list of features supported for the account. When usage plans are enabled, the
-	// features list will include an entry of "UsagePlans".
+	// A list of features supported for the account. When usage plans are enabled,
+	// the features list will include an entry of "UsagePlans" .
 	Features []string
 
 	// Specifies the API request limits configured for the current Account.

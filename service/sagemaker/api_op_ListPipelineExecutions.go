@@ -47,12 +47,12 @@ type ListPipelineExecutionsInput struct {
 	// The maximum number of pipeline executions to return in the response.
 	MaxResults *int32
 
-	// If the result of the previous ListPipelineExecutions request was truncated, the
-	// response includes a NextToken. To retrieve the next set of pipeline executions,
-	// use the token in the next request.
+	// If the result of the previous ListPipelineExecutions request was truncated,
+	// the response includes a NextToken. To retrieve the next set of pipeline
+	// executions, use the token in the next request.
 	NextToken *string
 
-	// The field by which to sort results. The default is CreatedTime.
+	// The field by which to sort results. The default is CreatedTime .
 	SortBy types.SortPipelineExecutionsBy
 
 	// The sort order for results.
@@ -63,9 +63,9 @@ type ListPipelineExecutionsInput struct {
 
 type ListPipelineExecutionsOutput struct {
 
-	// If the result of the previous ListPipelineExecutions request was truncated, the
-	// response includes a NextToken. To retrieve the next set of pipeline executions,
-	// use the token in the next request.
+	// If the result of the previous ListPipelineExecutions request was truncated,
+	// the response includes a NextToken. To retrieve the next set of pipeline
+	// executions, use the token in the next request.
 	NextToken *string
 
 	// Contains a sorted list of pipeline execution summary objects matching the
@@ -156,8 +156,8 @@ type ListPipelineExecutionsPaginatorOptions struct {
 	// The maximum number of pipeline executions to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -170,7 +170,8 @@ type ListPipelineExecutionsPaginator struct {
 	firstPage bool
 }
 
-// NewListPipelineExecutionsPaginator returns a new ListPipelineExecutionsPaginator
+// NewListPipelineExecutionsPaginator returns a new
+// ListPipelineExecutionsPaginator
 func NewListPipelineExecutionsPaginator(client ListPipelineExecutionsAPIClient, params *ListPipelineExecutionsInput, optFns ...func(*ListPipelineExecutionsPaginatorOptions)) *ListPipelineExecutionsPaginator {
 	if params == nil {
 		params = &ListPipelineExecutionsInput{}

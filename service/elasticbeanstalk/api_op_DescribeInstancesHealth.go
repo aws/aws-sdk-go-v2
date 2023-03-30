@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Retrieves detailed information about the health of instances in your AWS Elastic
-// Beanstalk. This operation requires enhanced health reporting
-// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html).
+// Retrieves detailed information about the health of instances in your AWS
+// Elastic Beanstalk. This operation requires enhanced health reporting (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html)
+// .
 func (c *Client) DescribeInstancesHealth(ctx context.Context, params *DescribeInstancesHealthInput, optFns ...func(*Options)) (*DescribeInstancesHealthOutput, error) {
 	if params == nil {
 		params = &DescribeInstancesHealthInput{}
@@ -30,11 +30,12 @@ func (c *Client) DescribeInstancesHealth(ctx context.Context, params *DescribeIn
 	return out, nil
 }
 
-// Parameters for a call to DescribeInstancesHealth.
+// Parameters for a call to DescribeInstancesHealth .
 type DescribeInstancesHealthInput struct {
 
-	// Specifies the response elements you wish to receive. To retrieve all attributes,
-	// set to All. If no attribute names are specified, returns a list of instances.
+	// Specifies the response elements you wish to receive. To retrieve all
+	// attributes, set to All. If no attribute names are specified, returns a list of
+	// instances.
 	AttributeNames []types.InstancesHealthAttribute
 
 	// Specify the AWS Elastic Beanstalk environment by ID.
@@ -55,7 +56,7 @@ type DescribeInstancesHealthOutput struct {
 
 	// Detailed health information about each instance. The output differs slightly
 	// between Linux and Windows environments. There is a difference in the members
-	// that are supported under the  type.
+	// that are supported under the type.
 	InstanceHealthList []types.SingleInstanceHealth
 
 	// Pagination token for the next page of results, if available.

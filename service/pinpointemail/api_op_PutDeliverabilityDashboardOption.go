@@ -11,15 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enable or disable the Deliverability dashboard for your Amazon Pinpoint account.
-// When you enable the Deliverability dashboard, you gain access to reputation,
-// deliverability, and other metrics for the domains that you use to send email
-// using Amazon Pinpoint. You also gain the ability to perform predictive inbox
-// placement tests. When you use the Deliverability dashboard, you pay a monthly
-// subscription charge, in addition to any other fees that you accrue by using
-// Amazon Pinpoint. For more information about the features and cost of a
-// Deliverability dashboard subscription, see Amazon Pinpoint Pricing
-// (http://aws.amazon.com/pinpoint/pricing/).
+// Enable or disable the Deliverability dashboard for your Amazon Pinpoint
+// account. When you enable the Deliverability dashboard, you gain access to
+// reputation, deliverability, and other metrics for the domains that you use to
+// send email using Amazon Pinpoint. You also gain the ability to perform
+// predictive inbox placement tests. When you use the Deliverability dashboard, you
+// pay a monthly subscription charge, in addition to any other fees that you accrue
+// by using Amazon Pinpoint. For more information about the features and cost of a
+// Deliverability dashboard subscription, see Amazon Pinpoint Pricing (http://aws.amazon.com/pinpoint/pricing/)
+// .
 func (c *Client) PutDeliverabilityDashboardOption(ctx context.Context, params *PutDeliverabilityDashboardOptionInput, optFns ...func(*Options)) (*PutDeliverabilityDashboardOptionOutput, error) {
 	if params == nil {
 		params = &PutDeliverabilityDashboardOptionInput{}
@@ -35,25 +35,25 @@ func (c *Client) PutDeliverabilityDashboardOption(ctx context.Context, params *P
 	return out, nil
 }
 
-// Enable or disable the Deliverability dashboard for your Amazon Pinpoint account.
-// When you enable the Deliverability dashboard, you gain access to reputation,
-// deliverability, and other metrics for the domains that you use to send email
-// using Amazon Pinpoint. You also gain the ability to perform predictive inbox
-// placement tests. When you use the Deliverability dashboard, you pay a monthly
-// subscription charge, in addition to any other fees that you accrue by using
-// Amazon Pinpoint. For more information about the features and cost of a
-// Deliverability dashboard subscription, see Amazon Pinpoint Pricing
-// (http://aws.amazon.com/pinpoint/pricing/).
+// Enable or disable the Deliverability dashboard for your Amazon Pinpoint
+// account. When you enable the Deliverability dashboard, you gain access to
+// reputation, deliverability, and other metrics for the domains that you use to
+// send email using Amazon Pinpoint. You also gain the ability to perform
+// predictive inbox placement tests. When you use the Deliverability dashboard, you
+// pay a monthly subscription charge, in addition to any other fees that you accrue
+// by using Amazon Pinpoint. For more information about the features and cost of a
+// Deliverability dashboard subscription, see Amazon Pinpoint Pricing (http://aws.amazon.com/pinpoint/pricing/)
+// .
 type PutDeliverabilityDashboardOptionInput struct {
 
 	// Specifies whether to enable the Deliverability dashboard for your Amazon
-	// Pinpoint account. To enable the dashboard, set this value to true.
+	// Pinpoint account. To enable the dashboard, set this value to true .
 	//
 	// This member is required.
 	DashboardEnabled bool
 
-	// An array of objects, one for each verified domain that you use to send email and
-	// enabled the Deliverability dashboard for.
+	// An array of objects, one for each verified domain that you use to send email
+	// and enabled the Deliverability dashboard for.
 	SubscribedDomains []types.DomainDeliverabilityTrackingOption
 
 	noSmithyDocumentSerde

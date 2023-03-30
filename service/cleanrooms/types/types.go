@@ -33,15 +33,15 @@ type AggregationConstraint struct {
 	// This member is required.
 	ColumnName *string
 
-	// The minimum number of distinct values that an output row must be an aggregation
-	// of. Minimum threshold of distinct values for a specified column that must exist
-	// in an output row for it to be in the query output.
+	// The minimum number of distinct values that an output row must be an
+	// aggregation of. Minimum threshold of distinct values for a specified column that
+	// must exist in an output row for it to be in the query output.
 	//
 	// This member is required.
 	Minimum *int32
 
-	// The type of aggregation the constraint allows. The only valid value is currently
-	// `COUNT_DISTINCT`.
+	// The type of aggregation the constraint allows. The only valid value is
+	// currently `COUNT_DISTINCT`.
 	//
 	// This member is required.
 	Type AggregationType
@@ -49,7 +49,8 @@ type AggregationConstraint struct {
 	noSmithyDocumentSerde
 }
 
-// A specification about how data from the configured table can be used in a query.
+// A specification about how data from the configured table can be used in a
+// query.
 type AnalysisRule struct {
 
 	// The unique ID for the associated collaboration.
@@ -85,7 +86,8 @@ type AnalysisRule struct {
 	noSmithyDocumentSerde
 }
 
-// Enables query structure and specified queries that product aggregate statistics.
+// Enables query structure and specified queries that product aggregate
+// statistics.
 type AnalysisRuleAggregation struct {
 
 	// The columns that query runners are allowed to use in aggregation queries.
@@ -104,14 +106,14 @@ type AnalysisRuleAggregation struct {
 	// This member is required.
 	JoinColumns []string
 
-	// Columns that must meet a specific threshold value (after an aggregation function
-	// is applied to it) for each output row to be returned.
+	// Columns that must meet a specific threshold value (after an aggregation
+	// function is applied to it) for each output row to be returned.
 	//
 	// This member is required.
 	OutputConstraints []AggregationConstraint
 
-	// Set of scalar functions that are allowed to be used on dimension columns and the
-	// output of aggregation of metrics.
+	// Set of scalar functions that are allowed to be used on dimension columns and
+	// the output of aggregation of metrics.
 	//
 	// This member is required.
 	ScalarFunctions []ScalarFunctions
@@ -126,8 +128,8 @@ type AnalysisRuleAggregation struct {
 // A type of analysis rule that enables row-level analysis.
 type AnalysisRuleList struct {
 
-	// Columns that can be used to join a configured table with the table of the member
-	// who can query and another members' configured tables.
+	// Columns that can be used to join a configured table with the table of the
+	// member who can query and another members' configured tables.
 	//
 	// This member is required.
 	JoinColumns []string
@@ -353,14 +355,14 @@ type ConfiguredTable struct {
 	// This member is required.
 	AllowedColumns []string
 
-	// The analysis method for the configured table. The only valid value is currently
-	// `DIRECT_QUERY`.
+	// The analysis method for the configured table. The only valid value is
+	// currently `DIRECT_QUERY`.
 	//
 	// This member is required.
 	AnalysisMethod AnalysisMethod
 
-	// The types of analysis rules associated with this configured table. Valid values
-	// are `AGGREGATION` and `LIST`. Currently, only one analysis rule may be
+	// The types of analysis rules associated with this configured table. Valid
+	// values are `AGGREGATION` and `LIST`. Currently, only one analysis rule may be
 	// associated with a configured table.
 	//
 	// This member is required.
@@ -557,7 +559,8 @@ type ConfiguredTableAssociationSummary struct {
 	// This member is required.
 	Arn *string
 
-	// The unique configured table ID that this configured table association refers to.
+	// The unique configured table ID that this configured table association refers
+	// to.
 	//
 	// This member is required.
 	ConfiguredTableId *string
@@ -572,8 +575,8 @@ type ConfiguredTableAssociationSummary struct {
 	// This member is required.
 	Id *string
 
-	// The unique ARN for the membership that the configured table association belongs
-	// to.
+	// The unique ARN for the membership that the configured table association
+	// belongs to.
 	//
 	// This member is required.
 	MembershipArn *string
@@ -601,8 +604,8 @@ type ConfiguredTableAssociationSummary struct {
 // The configured table summary for the objects listed by the request.
 type ConfiguredTableSummary struct {
 
-	// The analysis method for the configured tables. The only valid value is currently
-	// `DIRECT_QUERY`.
+	// The analysis method for the configured tables. The only valid value is
+	// currently `DIRECT_QUERY`.
 	//
 	// This member is required.
 	AnalysisMethod AnalysisMethod
@@ -1201,15 +1204,15 @@ type SchemaSummary struct {
 	// This member is required.
 	UpdateTime *time.Time
 
-	// The analysis method for the associated schema. The only valid value is currently
-	// `DIRECT_QUERY`.
+	// The analysis method for the associated schema. The only valid value is
+	// currently `DIRECT_QUERY`.
 	AnalysisMethod AnalysisMethod
 
 	noSmithyDocumentSerde
 }
 
-// A pointer to the dataset that underlies this table. Currently, this can only be
-// an AWS Glue table.
+// A pointer to the dataset that underlies this table. Currently, this can only
+// be an AWS Glue table.
 //
 // The following types satisfy this interface:
 //

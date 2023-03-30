@@ -30,8 +30,8 @@ func (c *Client) CreateWorkerBlock(ctx context.Context, params *CreateWorkerBloc
 
 type CreateWorkerBlockInput struct {
 
-	// A message explaining the reason for blocking the Worker. This parameter enables
-	// you to keep track of your Workers. The Worker does not see this message.
+	// A message explaining the reason for blocking the Worker. This parameter
+	// enables you to keep track of your Workers. The Worker does not see this message.
 	//
 	// This member is required.
 	Reason *string

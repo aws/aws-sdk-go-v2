@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the bandwidth rate limit schedule for a specified gateway. By default,
-// gateways do not have bandwidth rate limit schedules, which means no bandwidth
-// rate limiting is in effect. Use this to get a gateway's bandwidth rate limit
-// schedule.
+// Retrieves the bandwidth rate limit schedule for a specified gateway. By
+// default, gateways do not have bandwidth rate limit schedules, which means no
+// bandwidth rate limiting is in effect. Use this to get a gateway's bandwidth rate
+// limit schedule.
 func (c *Client) GetBandwidthRateLimitSchedule(ctx context.Context, params *GetBandwidthRateLimitScheduleInput, optFns ...func(*Options)) (*GetBandwidthRateLimitScheduleOutput, error) {
 	if params == nil {
 		params = &GetBandwidthRateLimitScheduleInput{}
@@ -32,8 +32,7 @@ func (c *Client) GetBandwidthRateLimitSchedule(ctx context.Context, params *GetB
 
 type GetBandwidthRateLimitScheduleInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html)
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html)
 	// operation to return a list of gateways for your account and Amazon Web Services
 	// Region.
 	//
@@ -45,12 +44,11 @@ type GetBandwidthRateLimitScheduleInput struct {
 
 type GetBandwidthRateLimitScheduleOutput struct {
 
-	// An array containing bandwidth rate limit schedule intervals for a gateway. When
-	// no bandwidth rate limit intervals have been scheduled, the array is empty.
+	// An array containing bandwidth rate limit schedule intervals for a gateway.
+	// When no bandwidth rate limit intervals have been scheduled, the array is empty.
 	BandwidthRateLimitIntervals []types.BandwidthRateLimitInterval
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html)
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html)
 	// operation to return a list of gateways for your account and Amazon Web Services
 	// Region.
 	GatewayArn *string

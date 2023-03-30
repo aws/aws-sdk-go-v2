@@ -32,15 +32,15 @@ func (c *Client) ListResolverConfigs(ctx context.Context, params *ListResolverCo
 type ListResolverConfigsInput struct {
 
 	// The maximum number of Resolver configurations that you want to return in the
-	// response to a ListResolverConfigs request. If you don't specify a value for
-	// MaxResults, up to 100 Resolver configurations are returned.
+	// response to a ListResolverConfigs  request. If you don't specify a value for
+	// MaxResults , up to 100 Resolver configurations are returned.
 	MaxResults *int32
 
 	// (Optional) If the current Amazon Web Services account has more than MaxResults
-	// Resolver configurations, use NextToken to get the second and subsequent pages of
-	// results. For the first ListResolverConfigs request, omit this value. For the
-	// second and subsequent requests, get the value of NextToken from the previous
-	// response and specify that value for NextToken in the request.
+	// Resolver configurations, use NextToken to get the second and subsequent pages
+	// of results. For the first ListResolverConfigs request, omit this value. For
+	// the second and subsequent requests, get the value of NextToken from the
+	// previous response and specify that value for NextToken  in the request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -127,8 +127,8 @@ func (c *Client) addOperationListResolverConfigsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListResolverConfigsAPIClient is a client that implements the ListResolverConfigs
-// operation.
+// ListResolverConfigsAPIClient is a client that implements the
+// ListResolverConfigs operation.
 type ListResolverConfigsAPIClient interface {
 	ListResolverConfigs(context.Context, *ListResolverConfigsInput, ...func(*Options)) (*ListResolverConfigsOutput, error)
 }
@@ -139,12 +139,12 @@ var _ ListResolverConfigsAPIClient = (*Client)(nil)
 // ListResolverConfigs
 type ListResolverConfigsPaginatorOptions struct {
 	// The maximum number of Resolver configurations that you want to return in the
-	// response to a ListResolverConfigs request. If you don't specify a value for
-	// MaxResults, up to 100 Resolver configurations are returned.
+	// response to a ListResolverConfigs  request. If you don't specify a value for
+	// MaxResults , up to 100 Resolver configurations are returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

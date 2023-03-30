@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the DataSourceName of a DataSource. You can use the GetDataSource
+// Updates the DataSourceName  of a DataSource . You can use the GetDataSource
 // operation to view the contents of the updated data element.
 func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceInput, optFns ...func(*Options)) (*UpdateDataSourceOutput, error) {
 	if params == nil {
@@ -29,13 +29,13 @@ func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceI
 
 type UpdateDataSourceInput struct {
 
-	// The ID assigned to the DataSource during creation.
+	// The ID assigned to the DataSource  during creation.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// A new user-supplied name or description of the DataSource that will replace the
-	// current description.
+	// A new user-supplied name or description of the DataSource that will replace
+	// the current description.
 	//
 	// This member is required.
 	DataSourceName *string
@@ -43,12 +43,12 @@ type UpdateDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of an UpdateDataSource operation. You can see the updated
-// content by using the GetBatchPrediction operation.
+// Represents the output of an UpdateDataSource operation. You can see the
+// updated content by using the GetBatchPrediction  operation.
 type UpdateDataSourceOutput struct {
 
 	// The ID assigned to the DataSource during creation. This value should be
-	// identical to the value of the DataSourceID in the request.
+	// identical to the value of the DataSourceID  in the request.
 	DataSourceId *string
 
 	// Metadata pertaining to the operation's result.

@@ -46,8 +46,8 @@ type CreateConnectionInput struct {
 	// This member is required.
 	ProviderType types.ProviderType
 
-	// A list of metadata items that you can associate with your connection resource. A
-	// tag is a key-value pair.
+	// A list of metadata items that you can associate with your connection resource.
+	// A tag is a key-value pair.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

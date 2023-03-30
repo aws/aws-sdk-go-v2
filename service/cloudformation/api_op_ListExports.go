@@ -14,10 +14,9 @@ import (
 
 // Lists all exported output values in the account and Region in which you call
 // this action. Use this action to see the exported output values that you can
-// import into other stacks. To import values, use the Fn::ImportValue
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html)
-// function. For more information, see  CloudFormation export stack output values
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html).
+// import into other stacks. To import values, use the Fn::ImportValue (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html)
+// function. For more information, see CloudFormation export stack output values (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html)
+// .
 func (c *Client) ListExports(ctx context.Context, params *ListExportsInput, optFns ...func(*Options)) (*ListExportsOutput, error) {
 	if params == nil {
 		params = &ListExportsInput{}
@@ -35,8 +34,8 @@ func (c *Client) ListExports(ctx context.Context, params *ListExportsInput, optF
 
 type ListExportsInput struct {
 
-	// A string (provided by the ListExports response output) that identifies the next
-	// page of exported output values that you asked to retrieve.
+	// A string (provided by the ListExports response output) that identifies the
+	// next page of exported output values that you asked to retrieve.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -44,7 +43,7 @@ type ListExportsInput struct {
 
 type ListExportsOutput struct {
 
-	// The output for the ListExports action.
+	// The output for the ListExports  action.
 	Exports []types.Export
 
 	// If the output exceeds 100 exported output values, a string that identifies the
@@ -126,8 +125,8 @@ var _ ListExportsAPIClient = (*Client)(nil)
 
 // ListExportsPaginatorOptions is the paginator options for ListExports
 type ListExportsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

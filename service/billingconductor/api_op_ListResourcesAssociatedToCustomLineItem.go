@@ -39,8 +39,8 @@ type ListResourcesAssociatedToCustomLineItemInput struct {
 	// The billing period for which the resource associations will be listed.
 	BillingPeriod *string
 
-	// (Optional) A ListResourcesAssociatedToCustomLineItemFilter that can specify the
-	// types of resources that should be retrieved.
+	// (Optional) A ListResourcesAssociatedToCustomLineItemFilter that can specify
+	// the types of resources that should be retrieved.
 	Filters *types.ListResourcesAssociatedToCustomLineItemFilter
 
 	// (Optional) The maximum number of resource associations to be retrieved.
@@ -134,22 +134,22 @@ func (c *Client) addOperationListResourcesAssociatedToCustomLineItemMiddlewares(
 	return nil
 }
 
-// ListResourcesAssociatedToCustomLineItemAPIClient is a client that implements the
-// ListResourcesAssociatedToCustomLineItem operation.
+// ListResourcesAssociatedToCustomLineItemAPIClient is a client that implements
+// the ListResourcesAssociatedToCustomLineItem operation.
 type ListResourcesAssociatedToCustomLineItemAPIClient interface {
 	ListResourcesAssociatedToCustomLineItem(context.Context, *ListResourcesAssociatedToCustomLineItemInput, ...func(*Options)) (*ListResourcesAssociatedToCustomLineItemOutput, error)
 }
 
 var _ ListResourcesAssociatedToCustomLineItemAPIClient = (*Client)(nil)
 
-// ListResourcesAssociatedToCustomLineItemPaginatorOptions is the paginator options
-// for ListResourcesAssociatedToCustomLineItem
+// ListResourcesAssociatedToCustomLineItemPaginatorOptions is the paginator
+// options for ListResourcesAssociatedToCustomLineItem
 type ListResourcesAssociatedToCustomLineItemPaginatorOptions struct {
 	// (Optional) The maximum number of resource associations to be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

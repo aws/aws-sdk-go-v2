@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API permits filtering on the ControlId and HomeRegion fields.
+// This API permits filtering on the ControlId  and HomeRegion  fields.
 func (c *Client) DescribeHomeRegionControls(ctx context.Context, params *DescribeHomeRegionControlsInput, optFns ...func(*Options)) (*DescribeHomeRegionControlsOutput, error) {
 	if params == nil {
 		params = &DescribeHomeRegionControlsInput{}
@@ -30,7 +30,7 @@ func (c *Client) DescribeHomeRegionControls(ctx context.Context, params *Describ
 
 type DescribeHomeRegionControlsInput struct {
 
-	// The ControlID is a unique identifier string of your HomeRegionControl object.
+	// The ControlID  is a unique identifier string of your HomeRegionControl  object.
 	ControlId *string
 
 	// The name of the home region you'd like to view.
@@ -41,12 +41,12 @@ type DescribeHomeRegionControlsInput struct {
 
 	// If a NextToken was returned by a previous call, more results are available. To
 	// retrieve the next page of results, make the call again using the returned token
-	// in NextToken.
+	// in NextToken .
 	NextToken *string
 
 	// The target parameter specifies the identifier to which the home region is
 	// applied, which is always of type ACCOUNT. It applies the home region to the
-	// current ACCOUNT.
+	// current ACCOUNT .
 	Target *types.Target
 
 	noSmithyDocumentSerde
@@ -54,12 +54,12 @@ type DescribeHomeRegionControlsInput struct {
 
 type DescribeHomeRegionControlsOutput struct {
 
-	// An array that contains your HomeRegionControl objects.
+	// An array that contains your HomeRegionControl  objects.
 	HomeRegionControls []types.HomeRegionControl
 
 	// If a NextToken was returned by a previous call, more results are available. To
 	// retrieve the next page of results, make the call again using the returned token
-	// in NextToken.
+	// in NextToken .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -145,8 +145,8 @@ type DescribeHomeRegionControlsPaginatorOptions struct {
 	// The maximum number of filtering results to display per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified the load balancers. If no load balancers are specified,
-// the call describes all of your load balancers.
+// Describes the specified the load balancers. If no load balancers are
+// specified, the call describes all of your load balancers.
 func (c *Client) DescribeLoadBalancers(ctx context.Context, params *DescribeLoadBalancersInput, optFns ...func(*Options)) (*DescribeLoadBalancersOutput, error) {
 	if params == nil {
 		params = &DescribeLoadBalancersInput{}
@@ -39,8 +39,8 @@ type DescribeLoadBalancersInput struct {
 	// previous call.)
 	Marker *string
 
-	// The maximum number of results to return with this call (a number from 1 to 400).
-	// The default is 400.
+	// The maximum number of results to return with this call (a number from 1 to
+	// 400). The default is 400.
 	PageSize *int32
 
 	noSmithyDocumentSerde
@@ -133,8 +133,8 @@ var _ DescribeLoadBalancersAPIClient = (*Client)(nil)
 // DescribeLoadBalancersPaginatorOptions is the paginator options for
 // DescribeLoadBalancers
 type DescribeLoadBalancersPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

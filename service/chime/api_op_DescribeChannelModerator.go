@@ -42,7 +42,7 @@ type DescribeChannelModeratorInput struct {
 	// This member is required.
 	ChannelModeratorArn *string
 
-	// The AppInstanceUserArn of the user that makes the API call.
+	// The AppInstanceUserArn  of the user that makes the API call.
 	ChimeBearer *string
 
 	noSmithyDocumentSerde

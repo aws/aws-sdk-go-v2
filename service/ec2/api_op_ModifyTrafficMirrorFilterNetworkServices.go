@@ -16,7 +16,7 @@ import (
 // network services to a Traffic Mirror filter. When a network service is added to
 // the Traffic Mirror filter, all traffic related to that network service will be
 // mirrored. When you no longer want to mirror network services, use
-// RemoveNetworkServices to remove the network services from the Traffic Mirror
+// RemoveNetworkServicesto remove the network services from the Traffic Mirror
 // filter.
 func (c *Client) ModifyTrafficMirrorFilterNetworkServices(ctx context.Context, params *ModifyTrafficMirrorFilterNetworkServicesInput, optFns ...func(*Options)) (*ModifyTrafficMirrorFilterNetworkServicesOutput, error) {
 	if params == nil {
@@ -45,8 +45,8 @@ type ModifyTrafficMirrorFilterNetworkServicesInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The network service, for example Amazon DNS, that you no longer want to mirror.

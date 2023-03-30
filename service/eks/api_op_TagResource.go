@@ -34,8 +34,9 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource to which to add tags. Currently,
-	// the supported resources are Amazon EKS clusters and managed node groups.
+	// The Amazon Resource Name (ARN) of the resource to which to add tags.
+	// Currently, the supported resources are Amazon EKS clusters and managed node
+	// groups.
 	//
 	// This member is required.
 	ResourceArn *string

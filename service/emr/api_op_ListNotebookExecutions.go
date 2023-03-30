@@ -13,10 +13,10 @@ import (
 	"time"
 )
 
-// Provides summaries of all notebook executions. You can filter the list based on
-// multiple criteria such as status, time range, and editor id. Returns a maximum
-// of 50 notebook executions and a marker to track the paging of a longer notebook
-// execution list across multiple ListNotebookExecution calls.
+// Provides summaries of all notebook executions. You can filter the list based
+// on multiple criteria such as status, time range, and editor id. Returns a
+// maximum of 50 notebook executions and a marker to track the paging of a longer
+// notebook execution list across multiple ListNotebookExecution  calls.
 func (c *Client) ListNotebookExecutions(ctx context.Context, params *ListNotebookExecutionsInput, optFns ...func(*Options)) (*ListNotebookExecutionsOutput, error) {
 	if params == nil {
 		params = &ListNotebookExecutionsInput{}
@@ -37,40 +37,29 @@ type ListNotebookExecutionsInput struct {
 	// The unique ID of the editor associated with the notebook execution.
 	EditorId *string
 
-	// The beginning of time range filter for listing notebook executions. The default
-	// is the timestamp of 30 days ago.
+	// The beginning of time range filter for listing notebook executions. The
+	// default is the timestamp of 30 days ago.
 	From *time.Time
 
 	// The pagination token, returned by a previous ListNotebookExecutions call, that
-	// indicates the start of the list for this ListNotebookExecutions call.
+	// indicates the start of the list for this ListNotebookExecutions  call.
 	Marker *string
 
 	// The status filter for listing notebook executions.
-	// - START_PENDING indicates
-	// that the cluster has received the execution request but execution has not
-	// begun.
-	// - STARTING indicates that the execution is starting on the cluster.
-	// -
-	// RUNNING indicates that the execution is being processed by the cluster.
-	// -
-	// FINISHING indicates that execution processing is in the final stages.
-	// - FINISHED
-	// indicates that the execution has completed without error.
-	// - FAILING indicates
-	// that the execution is failing and will not finish successfully.
-	// - FAILED
-	// indicates that the execution failed.
-	// - STOP_PENDING indicates that the cluster
-	// has received a StopNotebookExecution request and the stop is pending.
-	// - STOPPING
-	// indicates that the cluster is in the process of stopping the execution as a
-	// result of a StopNotebookExecution request.
-	// - STOPPED indicates that the
-	// execution stopped because of a StopNotebookExecution request.
+	//     - START_PENDING indicates that the cluster has received the execution request but execution has not begun.
+	//     - STARTING indicates that the execution is starting on the cluster.
+	//     - RUNNING indicates that the execution is being processed by the cluster.
+	//     - FINISHING indicates that execution processing is in the final stages.
+	//     - FINISHED indicates that the execution has completed without error.
+	//     - FAILING indicates that the execution is failing and will not finish successfully.
+	//     - FAILED indicates that the execution failed.
+	//     - STOP_PENDING indicates that the cluster has received a StopNotebookExecution request and the stop is pending.
+	//     - STOPPING indicates that the cluster is in the process of stopping the execution as a result of a StopNotebookExecution request.
+	//     - STOPPED indicates that the execution stopped because of a StopNotebookExecution request.
 	Status types.NotebookExecutionStatus
 
-	// The end of time range filter for listing notebook executions. The default is the
-	// current timestamp.
+	// The end of time range filter for listing notebook executions. The default is
+	// the current timestamp.
 	To *time.Time
 
 	noSmithyDocumentSerde
@@ -78,8 +67,8 @@ type ListNotebookExecutionsInput struct {
 
 type ListNotebookExecutionsOutput struct {
 
-	// A pagination token that a subsequent ListNotebookExecutions can use to determine
-	// the next set of results to retrieve.
+	// A pagination token that a subsequent ListNotebookExecutions can use to
+	// determine the next set of results to retrieve.
 	Marker *string
 
 	// A list of notebook executions.
@@ -162,8 +151,8 @@ var _ ListNotebookExecutionsAPIClient = (*Client)(nil)
 // ListNotebookExecutionsPaginatorOptions is the paginator options for
 // ListNotebookExecutions
 type ListNotebookExecutionsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -176,7 +165,8 @@ type ListNotebookExecutionsPaginator struct {
 	firstPage bool
 }
 
-// NewListNotebookExecutionsPaginator returns a new ListNotebookExecutionsPaginator
+// NewListNotebookExecutionsPaginator returns a new
+// ListNotebookExecutionsPaginator
 func NewListNotebookExecutionsPaginator(client ListNotebookExecutionsAPIClient, params *ListNotebookExecutionsInput, optFns ...func(*ListNotebookExecutionsPaginatorOptions)) *ListNotebookExecutionsPaginator {
 	if params == nil {
 		params = &ListNotebookExecutionsInput{}

@@ -14,8 +14,7 @@ import (
 // Tests if a specified principal is authorized to perform an IoT action on a
 // specified resource. Use this to test and debug the authorization behavior of
 // devices that connect to the IoT device gateway. Requires permission to access
-// the TestAuthorization
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// the TestAuthorization (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) TestAuthorization(ctx context.Context, params *TestAuthorizationInput, optFns ...func(*Options)) (*TestAuthorizationOutput, error) {
 	if params == nil {
@@ -35,7 +34,7 @@ func (c *Client) TestAuthorization(ctx context.Context, params *TestAuthorizatio
 type TestAuthorizationInput struct {
 
 	// A list of authorization info objects. Simulating authorization will create a
-	// response for each authInfo object in the list.
+	// response for each authInfo  object in the list.
 	//
 	// This member is required.
 	AuthInfos []types.AuthInfo
@@ -46,12 +45,12 @@ type TestAuthorizationInput struct {
 	// The Cognito identity pool ID.
 	CognitoIdentityPoolId *string
 
-	// When testing custom authorization, the policies specified here are treated as if
-	// they are attached to the principal being authorized.
+	// When testing custom authorization, the policies specified here are treated as
+	// if they are attached to the principal being authorized.
 	PolicyNamesToAdd []string
 
-	// When testing custom authorization, the policies specified here are treated as if
-	// they are not attached to the principal being authorized.
+	// When testing custom authorization, the policies specified here are treated as
+	// if they are not attached to the principal being authorized.
 	PolicyNamesToSkip []string
 
 	// The principal. Valid principals are CertificateArn

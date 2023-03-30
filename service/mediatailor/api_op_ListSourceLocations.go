@@ -119,8 +119,8 @@ func (c *Client) addOperationListSourceLocationsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListSourceLocationsAPIClient is a client that implements the ListSourceLocations
-// operation.
+// ListSourceLocationsAPIClient is a client that implements the
+// ListSourceLocations operation.
 type ListSourceLocationsAPIClient interface {
 	ListSourceLocations(context.Context, *ListSourceLocationsInput, ...func(*Options)) (*ListSourceLocationsOutput, error)
 }
@@ -136,8 +136,8 @@ type ListSourceLocationsPaginatorOptions struct {
 	// results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -19,12 +19,11 @@ import (
 // hyperparameter tuning job automatically creates Amazon SageMaker experiments,
 // trials, and trial components for each training job that it runs. You can view
 // these entities in Amazon SageMaker Studio. For more information, see View
-// Experiments, Trials, and Trial Components
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/experiments-view-compare.html#experiments-view).
-// Do not include any security-sensitive information including account access IDs,
-// secrets or tokens in any hyperparameter field. If the use of security-sensitive
-// credentials are detected, SageMaker will reject your training job request and
-// return an exception error.
+// Experiments, Trials, and Trial Components (https://docs.aws.amazon.com/sagemaker/latest/dg/experiments-view-compare.html#experiments-view)
+// . Do not include any security-sensitive information including account access
+// IDs, secrets or tokens in any hyperparameter field. If the use of
+// security-sensitive credentials are detected, SageMaker will reject your training
+// job request and return an exception error.
 func (c *Client) CreateHyperParameterTuningJob(ctx context.Context, params *CreateHyperParameterTuningJobInput, optFns ...func(*Options)) (*CreateHyperParameterTuningJobOutput, error) {
 	if params == nil {
 		params = &CreateHyperParameterTuningJobInput{}
@@ -45,8 +44,8 @@ type CreateHyperParameterTuningJobInput struct {
 	// The HyperParameterTuningJobConfig object that describes the tuning job,
 	// including the search strategy, the objective metric used to evaluate training
 	// jobs, ranges of parameters to search, and resource limits for the tuning job.
-	// For more information, see How Hyperparameter Tuning Works
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html).
+	// For more information, see How Hyperparameter Tuning Works (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html)
+	// .
 	//
 	// This member is required.
 	HyperParameterTuningJobConfig *types.HyperParameterTuningJobConfig
@@ -62,14 +61,13 @@ type CreateHyperParameterTuningJobInput struct {
 
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or
-	// environment. For more information, see Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html). Tags that you
-	// specify for the tuning job are also added to all training jobs that the tuning
-	// job launches.
+	// environment. For more information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// . Tags that you specify for the tuning job are also added to all training jobs
+	// that the tuning job launches.
 	Tags []types.Tag
 
-	// The HyperParameterTrainingJobDefinition object that describes the training jobs
-	// that this tuning job launches, including static hyperparameters, input data
+	// The HyperParameterTrainingJobDefinition object that describes the training
+	// jobs that this tuning job launches, including static hyperparameters, input data
 	// configuration, output data configuration, resource configuration, and stopping
 	// condition.
 	TrainingJobDefinition *types.HyperParameterTrainingJobDefinition
@@ -78,11 +76,11 @@ type CreateHyperParameterTuningJobInput struct {
 	// tuning job.
 	TrainingJobDefinitions []types.HyperParameterTrainingJobDefinition
 
-	// Specifies the configuration for starting the hyperparameter tuning job using one
-	// or more previous tuning jobs as a starting point. The results of previous tuning
-	// jobs are used to inform which combinations of hyperparameters to search over in
-	// the new tuning job. All training jobs launched by the new hyperparameter tuning
-	// job are evaluated by using the objective metric. If you specify
+	// Specifies the configuration for starting the hyperparameter tuning job using
+	// one or more previous tuning jobs as a starting point. The results of previous
+	// tuning jobs are used to inform which combinations of hyperparameters to search
+	// over in the new tuning job. All training jobs launched by the new hyperparameter
+	// tuning job are evaluated by using the objective metric. If you specify
 	// IDENTICAL_DATA_AND_ALGORITHM as the WarmStartType value for the warm start
 	// configuration, the training job that performs the best in the new tuning job is
 	// compared to the best training jobs from the parent tuning jobs. From these, the
@@ -97,8 +95,8 @@ type CreateHyperParameterTuningJobInput struct {
 
 type CreateHyperParameterTuningJobOutput struct {
 
-	// The Amazon Resource Name (ARN) of the tuning job. SageMaker assigns an ARN to a
-	// hyperparameter tuning job when you create it.
+	// The Amazon Resource Name (ARN) of the tuning job. SageMaker assigns an ARN to
+	// a hyperparameter tuning job when you create it.
 	//
 	// This member is required.
 	HyperParameterTuningJobArn *string

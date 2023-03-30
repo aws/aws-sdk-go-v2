@@ -17,10 +17,10 @@ import (
 // data accessible to subscribers. Security Lake also deletes all the existing
 // settings and resources that it stores or maintains for your Amazon Web Services
 // account in the current Region, including security log and event data. The
-// DeleteDatalake operation does not delete the Amazon S3 bucket, which is owned by
-// your Amazon Web Services account. For more information, see the Amazon Security
-// Lake User Guide
-// (https://docs.aws.amazon.com/security-lake/latest/userguide/disable-security-lake.html).
+// DeleteDatalakeoperation does not delete the Amazon S3 bucket, which is owned
+// by your Amazon Web Services account. For more information, see the Amazon
+// Security Lake User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/disable-security-lake.html)
+// .
 func (c *Client) DeleteDatalake(ctx context.Context, params *DeleteDatalakeInput, optFns ...func(*Options)) (*DeleteDatalakeOutput, error) {
 	if params == nil {
 		params = &DeleteDatalakeInput{}

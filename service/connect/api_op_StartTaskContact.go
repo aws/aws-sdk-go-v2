@@ -31,14 +31,14 @@ func (c *Client) StartTaskContact(ctx context.Context, params *StartTaskContactI
 
 type StartTaskContactInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The name of a task that is shown to an agent in the Contact Control Panel (CCP).
+	// The name of a task that is shown to an agent in the Contact Control Panel
+	// (CCP).
 	//
 	// This member is required.
 	Name *string
@@ -53,20 +53,20 @@ type StartTaskContactInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// .
 	ClientToken *string
 
-	// The identifier of the flow for initiating the tasks. To see the ContactFlowId in
-	// the Amazon Connect console user interface, on the navigation menu go to Routing,
-	// Contact Flows. Choose the flow. On the flow page, under the name of the flow,
-	// choose Show additional flow information. The ContactFlowId is the last part of
-	// the ARN, shown here in bold:
+	// The identifier of the flow for initiating the tasks. To see the ContactFlowId
+	// in the Amazon Connect console user interface, on the navigation menu go to
+	// Routing, Contact Flows. Choose the flow. On the flow page, under the name of the
+	// flow, choose Show additional flow information. The ContactFlowId is the last
+	// part of the ARN, shown here in bold:
 	// arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx
 	ContactFlowId *string
 
-	// A description of the task that is shown to an agent in the Contact Control Panel
-	// (CCP).
+	// A description of the task that is shown to an agent in the Contact Control
+	// Panel (CCP).
 	Description *string
 
 	// The identifier of the previous chat, voice, or task contact.
@@ -78,8 +78,7 @@ type StartTaskContactInput struct {
 	// A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
 	References map[string]types.Reference
 
-	// The contactId that is related
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html#linked-tasks)
+	// The contactId that is related (https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html#linked-tasks)
 	// to this contact.
 	RelatedContactId *string
 

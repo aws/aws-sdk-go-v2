@@ -31,8 +31,8 @@ func (c *Client) DescribeMaintenanceWindows(ctx context.Context, params *Describ
 type DescribeMaintenanceWindowsInput struct {
 
 	// Optional filters used to narrow down the scope of the returned maintenance
-	// windows. Supported filter keys are Name and Enabled. For example,
-	// Name=MyMaintenanceWindow and Enabled=True.
+	// windows. Supported filter keys are Name  and Enabled . For example,
+	// Name=MyMaintenanceWindow and Enabled=True .
 	Filters []types.MaintenanceWindowFilter
 
 	// The maximum number of items to return for this call. The call also returns a
@@ -136,8 +136,8 @@ type DescribeMaintenanceWindowsPaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

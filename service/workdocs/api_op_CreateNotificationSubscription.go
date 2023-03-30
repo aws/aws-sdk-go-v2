@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives
-// a confirmation message, and must confirm the subscription. For more information,
-// see Setting up notifications for an IAM user or role
-// (https://docs.aws.amazon.com/workdocs/latest/developerguide/manage-notifications.html)
+// Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint
+// receives a confirmation message, and must confirm the subscription. For more
+// information, see Setting up notifications for an IAM user or role (https://docs.aws.amazon.com/workdocs/latest/developerguide/manage-notifications.html)
 // in the Amazon WorkDocs Developer Guide.
 func (c *Client) CreateNotificationSubscription(ctx context.Context, params *CreateNotificationSubscriptionInput, optFns ...func(*Options)) (*CreateNotificationSubscriptionOutput, error) {
 	if params == nil {
@@ -34,7 +33,7 @@ func (c *Client) CreateNotificationSubscription(ctx context.Context, params *Cre
 type CreateNotificationSubscriptionInput struct {
 
 	// The endpoint to receive the notifications. If the protocol is HTTPS, the
-	// endpoint is a URL that begins with https.
+	// endpoint is a URL that begins with https .
 	//
 	// This member is required.
 	Endpoint *string

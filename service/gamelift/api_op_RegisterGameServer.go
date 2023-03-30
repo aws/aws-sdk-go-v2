@@ -20,11 +20,10 @@ import (
 // game session. To register a game server, identify the game server group and
 // instance where the game server is running, and provide a unique identifier for
 // the game server. You can also include connection and game server data. Once a
-// game server is successfully registered, it is put in status AVAILABLE. A request
-// to register a game server may fail if the instance it is running on is in the
-// process of shutting down as part of instance balancing or scale-down activity.
-// Learn more GameLift FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+// game server is successfully registered, it is put in status AVAILABLE. A
+// request to register a game server may fail if the instance it is running on is
+// in the process of shutting down as part of instance balancing or scale-down
+// activity. Learn more GameLift FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 func (c *Client) RegisterGameServer(ctx context.Context, params *RegisterGameServerInput, optFns ...func(*Options)) (*RegisterGameServerOutput, error) {
 	if params == nil {
 		params = &RegisterGameServerInput{}
@@ -54,9 +53,9 @@ type RegisterGameServerInput struct {
 	// This member is required.
 	GameServerId *string
 
-	// The unique identifier for the instance where the game server is running. This ID
-	// is available in the instance metadata. EC2 instance IDs use a 17-character
-	// format, for example: i-1234567890abcdef0.
+	// The unique identifier for the instance where the game server is running. This
+	// ID is available in the instance metadata. EC2 instance IDs use a 17-character
+	// format, for example: i-1234567890abcdef0 .
 	//
 	// This member is required.
 	InstanceId *string
@@ -66,9 +65,9 @@ type RegisterGameServerInput struct {
 	// information.
 	ConnectionInfo *string
 
-	// A set of custom game server properties, formatted as a single string value. This
-	// data is passed to a game client or service when it requests information on game
-	// servers.
+	// A set of custom game server properties, formatted as a single string value.
+	// This data is passed to a game client or service when it requests information on
+	// game servers.
 	GameServerData *string
 
 	noSmithyDocumentSerde

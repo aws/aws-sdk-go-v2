@@ -32,7 +32,8 @@ func (c *Client) DescribeConditionalForwarders(ctx context.Context, params *Desc
 // Describes a conditional forwarder.
 type DescribeConditionalForwardersInput struct {
 
-	// The directory ID for which to get the list of associated conditional forwarders.
+	// The directory ID for which to get the list of associated conditional
+	// forwarders.
 	//
 	// This member is required.
 	DirectoryId *string

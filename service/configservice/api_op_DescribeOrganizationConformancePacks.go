@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of organization conformance packs. When you specify the limit and
-// the next token, you receive a paginated response. Limit and next token are not
-// applicable if you specify organization conformance packs names. They are only
-// applicable, when you request all the organization conformance packs. For
+// Returns a list of organization conformance packs. When you specify the limit
+// and the next token, you receive a paginated response. Limit and next token are
+// not applicable if you specify organization conformance packs names. They are
+// only applicable, when you request all the organization conformance packs. For
 // accounts within an organzation If you deploy an organizational rule or
 // conformance pack in an organization administrator account, and then establish a
 // delegated administrator and deploy an organizational rule or conformance pack in
@@ -23,8 +23,8 @@ import (
 // rule or conformance pack in the organization administrator account from the
 // delegated administrator account or see the organizational rule or conformance
 // pack in the delegated administrator account from organization administrator
-// account. The DescribeOrganizationConfigRules and
-// DescribeOrganizationConformancePacks APIs can only see and interact with the
+// account. The DescribeOrganizationConfigRules  and
+// DescribeOrganizationConformancePacksAPIs can only see and interact with the
 // organization-related resource that were deployed from within the account calling
 // those APIs.
 func (c *Client) DescribeOrganizationConformancePacks(ctx context.Context, params *DescribeOrganizationConformancePacksInput, optFns ...func(*Options)) (*DescribeOrganizationConformancePacksOutput, error) {
@@ -44,8 +44,8 @@ func (c *Client) DescribeOrganizationConformancePacks(ctx context.Context, param
 
 type DescribeOrganizationConformancePacksInput struct {
 
-	// The maximum number of organization config packs returned on each page. If you do
-	// no specify a number, Config uses the default. The default is 100.
+	// The maximum number of organization config packs returned on each page. If you
+	// do no specify a number, Config uses the default. The default is 100.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -144,12 +144,12 @@ var _ DescribeOrganizationConformancePacksAPIClient = (*Client)(nil)
 // DescribeOrganizationConformancePacksPaginatorOptions is the paginator options
 // for DescribeOrganizationConformancePacks
 type DescribeOrganizationConformancePacksPaginatorOptions struct {
-	// The maximum number of organization config packs returned on each page. If you do
-	// no specify a number, Config uses the default. The default is 100.
+	// The maximum number of organization config packs returned on each page. If you
+	// do no specify a number, Config uses the default. The default is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

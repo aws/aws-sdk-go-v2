@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified mount target. This operation forcibly breaks any mounts of
-// the file system by using the mount target that is being deleted, which might
+// Deletes the specified mount target. This operation forcibly breaks any mounts
+// of the file system by using the mount target that is being deleted, which might
 // disrupt instances or applications using those mounts. To avoid applications
 // getting cut off abruptly, you might consider unmounting any mounts of the mount
 // target, if feasible. The operation also deletes the associated network
@@ -20,15 +20,14 @@ import (
 // created remains. You can mount an EC2 instance in your VPC by using another
 // mount target. This operation requires permissions for the following action on
 // the file system:
-// - elasticfilesystem:DeleteMountTarget
+//   - elasticfilesystem:DeleteMountTarget
+//     The DeleteMountTarget  call returns while the mount target state is still
 //
-// The DeleteMountTarget
-// call returns while the mount target state is still deleting. You can check the
-// mount target deletion by calling the DescribeMountTargets operation, which
-// returns a list of mount target descriptions for the given file system. The
-// operation also requires permissions for the following Amazon EC2 action on the
-// mount target's network interface:
-// - ec2:DeleteNetworkInterface
+// deleting . You can check the mount target deletion by calling the
+// DescribeMountTargetsoperation, which returns a list of mount target
+// descriptions for the given file system. The operation also requires permissions
+// for the following Amazon EC2 action on the mount target's network interface:
+//   - ec2:DeleteNetworkInterface
 func (c *Client) DeleteMountTarget(ctx context.Context, params *DeleteMountTargetInput, optFns ...func(*Options)) (*DeleteMountTargetOutput, error) {
 	if params == nil {
 		params = &DeleteMountTargetInput{}

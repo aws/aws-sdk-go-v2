@@ -12,8 +12,8 @@ import (
 )
 
 // Creates a package for use with Amazon OpenSearch Service domains. For more
-// information, see Custom packages for Amazon OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
+// information, see Custom packages for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html)
+// .
 func (c *Client) CreatePackage(ctx context.Context, params *CreatePackageInput, optFns ...func(*Options)) (*CreatePackageOutput, error) {
 	if params == nil {
 		params = &CreatePackageInput{}
@@ -29,7 +29,7 @@ func (c *Client) CreatePackage(ctx context.Context, params *CreatePackageInput, 
 	return out, nil
 }
 
-// Container for request parameters to the CreatePackage operation.
+// Container for request parameters to the CreatePackage  operation.
 type CreatePackageInput struct {
 
 	// Unique name for the package.
@@ -53,7 +53,7 @@ type CreatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for the response returned by the CreatePackage operation.
+// Container for the response returned by the CreatePackage  operation.
 type CreatePackageOutput struct {
 
 	// Basic information about an OpenSearch Service package.

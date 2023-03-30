@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets tags (key and value pairs) to the assessment template that is specified by
-// the ARN of the assessment template.
+// Sets tags (key and value pairs) to the assessment template that is specified
+// by the ARN of the assessment template.
 func (c *Client) SetTagsForResource(ctx context.Context, params *SetTagsForResourceInput, optFns ...func(*Options)) (*SetTagsForResourceOutput, error) {
 	if params == nil {
 		params = &SetTagsForResourceInput{}

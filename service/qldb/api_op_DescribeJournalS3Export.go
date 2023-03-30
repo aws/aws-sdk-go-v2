@@ -14,11 +14,10 @@ import (
 // Returns information about a journal export job, including the ledger name,
 // export ID, creation time, current status, and the parameters of the original
 // export creation request. This action does not return any expired export jobs.
-// For more information, see Export job expiration
-// (https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration)
+// For more information, see Export job expiration (https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration)
 // in the Amazon QLDB Developer Guide. If the export job with the given ExportId
 // doesn't exist, then throws ResourceNotFoundException. If the ledger with the
-// given Name doesn't exist, then throws ResourceNotFoundException.
+// given Name  doesn't exist, then throws ResourceNotFoundException .
 func (c *Client) DescribeJournalS3Export(ctx context.Context, params *DescribeJournalS3ExportInput, optFns ...func(*Options)) (*DescribeJournalS3ExportOutput, error) {
 	if params == nil {
 		params = &DescribeJournalS3ExportInput{}

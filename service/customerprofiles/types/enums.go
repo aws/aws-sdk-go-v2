@@ -28,9 +28,9 @@ const (
 	DataPullModeComplete    DataPullMode = "Complete"
 )
 
-// Values returns all known values for DataPullMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DataPullMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DataPullMode) Values() []DataPullMode {
 	return []DataPullMode{
 		"Incremental",
@@ -95,9 +95,10 @@ const (
 	IdentityResolutionJobStatusFailed         IdentityResolutionJobStatus = "FAILED"
 )
 
-// Values returns all known values for IdentityResolutionJobStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IdentityResolutionJobStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (IdentityResolutionJobStatus) Values() []IdentityResolutionJobStatus {
 	return []IdentityResolutionJobStatus{
 		"PENDING",
@@ -123,9 +124,9 @@ const (
 	JobScheduleDayOfTheWeekSaturday  JobScheduleDayOfTheWeek = "SATURDAY"
 )
 
-// Values returns all known values for JobScheduleDayOfTheWeek. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobScheduleDayOfTheWeek. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobScheduleDayOfTheWeek) Values() []JobScheduleDayOfTheWeek {
 	return []JobScheduleDayOfTheWeek{
 		"SUNDAY",
@@ -178,9 +179,9 @@ const (
 	MarketoConnectorOperatorNoOp                MarketoConnectorOperator = "NO_OP"
 )
 
-// Values returns all known values for MarketoConnectorOperator. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MarketoConnectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MarketoConnectorOperator) Values() []MarketoConnectorOperator {
 	return []MarketoConnectorOperator{
 		"PROJECTION",
@@ -253,9 +254,9 @@ const (
 	PartyTypeOther      PartyType = "OTHER"
 )
 
-// Values returns all known values for PartyType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for PartyType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (PartyType) Values() []PartyType {
 	return []PartyType{
 		"INDIVIDUAL",
@@ -345,9 +346,10 @@ const (
 	SalesforceConnectorOperatorNoOp                 SalesforceConnectorOperator = "NO_OP"
 )
 
-// Values returns all known values for SalesforceConnectorOperator. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SalesforceConnectorOperator. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (SalesforceConnectorOperator) Values() []SalesforceConnectorOperator {
 	return []SalesforceConnectorOperator{
 		"PROJECTION",
@@ -401,9 +403,10 @@ const (
 	ServiceNowConnectorOperatorNoOp                 ServiceNowConnectorOperator = "NO_OP"
 )
 
-// Values returns all known values for ServiceNowConnectorOperator. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ServiceNowConnectorOperator. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ServiceNowConnectorOperator) Values() []ServiceNowConnectorOperator {
 	return []ServiceNowConnectorOperator{
 		"PROJECTION",
@@ -525,9 +528,9 @@ const (
 	TaskTypeValidate   TaskType = "Validate"
 )
 
-// Values returns all known values for TaskType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for TaskType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TaskType) Values() []TaskType {
 	return []TaskType{
 		"Arithmetic",
@@ -549,9 +552,9 @@ const (
 	TriggerTypeOndemand  TriggerType = "OnDemand"
 )
 
-// Values returns all known values for TriggerType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TriggerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TriggerType) Values() []TriggerType {
 	return []TriggerType{
 		"Scheduled",
@@ -567,9 +570,9 @@ const (
 	WorkflowTypeAppflowIntegration WorkflowType = "APPFLOW_INTEGRATION"
 )
 
-// Values returns all known values for WorkflowType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for WorkflowType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (WorkflowType) Values() []WorkflowType {
 	return []WorkflowType{
 		"APPFLOW_INTEGRATION",
@@ -596,9 +599,9 @@ const (
 	ZendeskConnectorOperatorNoOp                ZendeskConnectorOperator = "NO_OP"
 )
 
-// Values returns all known values for ZendeskConnectorOperator. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ZendeskConnectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ZendeskConnectorOperator) Values() []ZendeskConnectorOperator {
 	return []ZendeskConnectorOperator{
 		"PROJECTION",

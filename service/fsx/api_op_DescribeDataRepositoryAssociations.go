@@ -13,15 +13,15 @@ import (
 )
 
 // Returns the description of specific Amazon FSx for Lustre or Amazon File Cache
-// data repository associations, if one or more AssociationIds values are provided
-// in the request, or if filters are used in the request. Data repository
+// data repository associations, if one or more AssociationIds values are
+// provided in the request, or if filters are used in the request. Data repository
 // associations are supported only for Amazon FSx for Lustre file systems with the
-// Persistent_2 deployment type and for Amazon File Cache resources. You can use
+// Persistent_2deployment type and for Amazon File Cache resources. You can use
 // filters to narrow the response to include just data repository associations for
 // specific file systems (use the file-system-id filter with the ID of the file
 // system) or caches (use the file-cache-id filter with the ID of the cache), or
 // data repository associations for a specific repository type (use the
-// data-repository-type filter with a value of S3 or NFS). If you don't use
+// data-repository-type filter with a value of S3  or NFS). If you don't use
 // filters, the response returns all data repository associations owned by your
 // Amazon Web Services account in the Amazon Web Services Region of the endpoint
 // that you're calling. When retrieving all data repository associations, you can
@@ -29,7 +29,7 @@ import (
 // number of data repository associations returned in a response. If more data
 // repository associations remain, a NextToken value is returned in the response.
 // In this case, send a later request with the NextToken request parameter set to
-// the value of NextToken from the last response.
+// the value of NextToken  from the last response.
 func (c *Client) DescribeDataRepositoryAssociations(ctx context.Context, params *DescribeDataRepositoryAssociationsInput, optFns ...func(*Options)) (*DescribeDataRepositoryAssociationsOutput, error) {
 	if params == nil {
 		params = &DescribeDataRepositoryAssociationsInput{}
@@ -47,20 +47,20 @@ func (c *Client) DescribeDataRepositoryAssociations(ctx context.Context, params 
 
 type DescribeDataRepositoryAssociationsInput struct {
 
-	// IDs of the data repository associations whose descriptions you want to retrieve
-	// (String).
+	// IDs of the data repository associations whose descriptions you want to
+	// retrieve (String).
 	AssociationIds []string
 
-	// A list of Filter elements.
+	// A list of Filter  elements.
 	Filters []types.Filter
 
-	// The maximum number of resources to return in the response. This value must be an
-	// integer greater than zero.
+	// The maximum number of resources to return in the response. This value must be
+	// an integer greater than zero.
 	MaxResults *int32
 
-	// (Optional) Opaque pagination token returned from a previous operation (String).
-	// If present, this token indicates from what point you can continue processing the
-	// request, where the previous NextToken value left off.
+	// (Optional) Opaque pagination token returned from a previous operation
+	// (String). If present, this token indicates from what point you can continue
+	// processing the request, where the previous NextToken  value left off.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -71,9 +71,9 @@ type DescribeDataRepositoryAssociationsOutput struct {
 	// An array of one or more data repository association descriptions.
 	Associations []types.DataRepositoryAssociation
 
-	// (Optional) Opaque pagination token returned from a previous operation (String).
-	// If present, this token indicates from what point you can continue processing the
-	// request, where the previous NextToken value left off.
+	// (Optional) Opaque pagination token returned from a previous operation
+	// (String). If present, this token indicates from what point you can continue
+	// processing the request, where the previous NextToken  value left off.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -150,15 +150,15 @@ type DescribeDataRepositoryAssociationsAPIClient interface {
 
 var _ DescribeDataRepositoryAssociationsAPIClient = (*Client)(nil)
 
-// DescribeDataRepositoryAssociationsPaginatorOptions is the paginator options for
-// DescribeDataRepositoryAssociations
+// DescribeDataRepositoryAssociationsPaginatorOptions is the paginator options
+// for DescribeDataRepositoryAssociations
 type DescribeDataRepositoryAssociationsPaginatorOptions struct {
-	// The maximum number of resources to return in the response. This value must be an
-	// integer greater than zero.
+	// The maximum number of resources to return in the response. This value must be
+	// an integer greater than zero.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

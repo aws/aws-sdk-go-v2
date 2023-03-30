@@ -30,8 +30,8 @@ func (c *Client) CreateMissionProfile(ctx context.Context, params *CreateMission
 
 type CreateMissionProfileInput struct {
 
-	// A list of lists of ARNs. Each list of ARNs is an edge, with a from Config and a
-	// to Config.
+	// A list of lists of ARNs. Each list of ARNs is an edge, with a from Config and
+	// a to Config .
 	//
 	// This member is required.
 	DataflowEdges [][]string
@@ -48,7 +48,7 @@ type CreateMissionProfileInput struct {
 	// This member is required.
 	Name *string
 
-	// ARN of a tracking Config.
+	// ARN of a tracking Config .
 	//
 	// This member is required.
 	TrackingConfigArn *string

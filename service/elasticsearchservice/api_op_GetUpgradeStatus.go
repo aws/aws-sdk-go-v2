@@ -28,13 +28,13 @@ func (c *Client) GetUpgradeStatus(ctx context.Context, params *GetUpgradeStatusI
 	return out, nil
 }
 
-// Container for request parameters to GetUpgradeStatus operation.
+// Container for request parameters to GetUpgradeStatus  operation.
 type GetUpgradeStatusInput struct {
 
-	// The name of an Elasticsearch domain. Domain names are unique across the domains
-	// owned by an account within an AWS region. Domain names start with a letter or
-	// number and can contain the following characters: a-z (lowercase), 0-9, and -
-	// (hyphen).
+	// The name of an Elasticsearch domain. Domain names are unique across the
+	// domains owned by an account within an AWS region. Domain names start with a
+	// letter or number and can contain the following characters: a-z (lowercase), 0-9,
+	// and - (hyphen).
 	//
 	// This member is required.
 	DomainName *string
@@ -42,16 +42,16 @@ type GetUpgradeStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response returned by GetUpgradeStatus operation.
+// Container for response returned by GetUpgradeStatus  operation.
 type GetUpgradeStatusOutput struct {
 
 	// One of 4 statuses that a step can go through returned as part of the
-	// GetUpgradeStatusResponse object. The status can take one of the following
+	// GetUpgradeStatusResponseobject. The status can take one of the following
 	// values:
-	// - In Progress
-	// - Succeeded
-	// - Succeeded with Issues
-	// - Failed
+	//     - In Progress
+	//     - Succeeded
+	//     - Succeeded with Issues
+	//     - Failed
 	StepStatus types.UpgradeStatus
 
 	// A string that describes the update briefly
@@ -59,9 +59,9 @@ type GetUpgradeStatusOutput struct {
 
 	// Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does
 	// through:
-	// - PreUpgradeCheck
-	// - Snapshot
-	// - Upgrade
+	//     - PreUpgradeCheck
+	//     - Snapshot
+	//     - Upgrade
 	UpgradeStep types.UpgradeStep
 
 	// Metadata pertaining to the operation's result.

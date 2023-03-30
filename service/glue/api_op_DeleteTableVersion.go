@@ -28,8 +28,8 @@ func (c *Client) DeleteTableVersion(ctx context.Context, params *DeleteTableVers
 
 type DeleteTableVersionInput struct {
 
-	// The database in the catalog in which the table resides. For Hive compatibility,
-	// this name is entirely lowercase.
+	// The database in the catalog in which the table resides. For Hive
+	// compatibility, this name is entirely lowercase.
 	//
 	// This member is required.
 	DatabaseName *string

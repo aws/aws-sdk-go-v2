@@ -53,8 +53,8 @@ type DescribeBotOutput struct {
 	// The name of the bot.
 	BotName *string
 
-	// The current status of the bot. When the status is Available the bot is ready to
-	// be used in conversations with users.
+	// The current status of the bot. When the status is Available the bot is ready
+	// to be used in conversations with users.
 	BotStatus types.BotStatus
 
 	// The type of the bot that was described.
@@ -69,7 +69,7 @@ type DescribeBotOutput struct {
 	// The description of the bot.
 	Description *string
 
-	// If the botStatus is Failed, this contains a list of reasons that the bot
+	// If the botStatus  is Failed, this contains a list of reasons that the bot
 	// couldn't be built.
 	FailureReasons []string
 
@@ -80,8 +80,8 @@ type DescribeBotOutput struct {
 	// A timestamp of the date and time that the bot was last updated.
 	LastUpdatedDateTime *time.Time
 
-	// The Amazon Resource Name (ARN) of an IAM role that has permission to access the
-	// bot.
+	// The Amazon Resource Name (ARN) of an IAM role that has permission to access
+	// the bot.
 	RoleArn *string
 
 	// Metadata pertaining to the operation's result.
@@ -173,9 +173,9 @@ type BotAvailableWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, BotAvailableWaiter will use default max delay of 120 seconds. Note that
-	// MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, BotAvailableWaiter will use default max delay of 120 seconds. Note
+	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -223,9 +223,10 @@ func (w *BotAvailableWaiter) Wait(ctx context.Context, params *DescribeBotInput,
 	return err
 }
 
-// WaitForOutput calls the waiter function for BotAvailable waiter and returns the
-// output of the successful operation. The maxWaitDur is the maximum wait duration
-// the waiter will wait. The maxWaitDur is required and must be greater than zero.
+// WaitForOutput calls the waiter function for BotAvailable waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
 func (w *BotAvailableWaiter) WaitForOutput(ctx context.Context, params *DescribeBotInput, maxWaitDur time.Duration, optFns ...func(*BotAvailableWaiterOptions)) (*DescribeBotOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

@@ -37,9 +37,9 @@ type ListRotationsInput struct {
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
 
-	// A filter to include rotations in list results based on their common prefix. For
-	// example, entering prod returns a list of all rotation names that begin with
-	// prod, such as production and prod-1.
+	// A filter to include rotations in list results based on their common prefix.
+	// For example, entering prod returns a list of all rotation names that begin with
+	// prod , such as production  and prod-1 .
 	RotationNamePrefix *string
 
 	noSmithyDocumentSerde
@@ -135,8 +135,8 @@ type ListRotationsPaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// List FeatureGroups based on given filter and order.
+// List FeatureGroup s based on given filter and order.
 func (c *Client) ListFeatureGroups(ctx context.Context, params *ListFeatureGroupsInput, optFns ...func(*Options)) (*ListFeatureGroupsOutput, error) {
 	if params == nil {
 		params = &ListFeatureGroupsInput{}
@@ -38,20 +38,20 @@ type ListFeatureGroupsInput struct {
 	// and time.
 	CreationTimeBefore *time.Time
 
-	// A FeatureGroup status. Filters by FeatureGroup status.
+	// A FeatureGroup  status. Filters by FeatureGroup  status.
 	FeatureGroupStatusEquals types.FeatureGroupStatus
 
-	// The maximum number of results returned by ListFeatureGroups.
+	// The maximum number of results returned by ListFeatureGroups .
 	MaxResults *int32
 
-	// A string that partially matches one or more FeatureGroups names. Filters
-	// FeatureGroups by name.
+	// A string that partially matches one or more FeatureGroup s names. Filters
+	// FeatureGroup s by name.
 	NameContains *string
 
-	// A token to resume pagination of ListFeatureGroups results.
+	// A token to resume pagination of ListFeatureGroups  results.
 	NextToken *string
 
-	// An OfflineStore status. Filters by OfflineStore status.
+	// An OfflineStore  status. Filters by OfflineStore  status.
 	OfflineStoreStatusEquals types.OfflineStoreStatusValue
 
 	// The value on which the feature group list is sorted.
@@ -70,7 +70,7 @@ type ListFeatureGroupsOutput struct {
 	// This member is required.
 	FeatureGroupSummaries []types.FeatureGroupSummary
 
-	// A token to resume pagination of ListFeatureGroups results.
+	// A token to resume pagination of ListFeatureGroups  results.
 	//
 	// This member is required.
 	NextToken *string

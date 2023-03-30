@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates which users in a workspace have the Grafana Admin or Editor roles.
+// Updates which users in a workspace have the Grafana Admin  or Editor  roles.
 func (c *Client) UpdatePermissions(ctx context.Context, params *UpdatePermissionsInput, optFns ...func(*Options)) (*UpdatePermissionsOutput, error) {
 	if params == nil {
 		params = &UpdatePermissionsInput{}

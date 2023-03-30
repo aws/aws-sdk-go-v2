@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the profiles for your system. If you want to limit the results
-// to a certain number, supply a value for the MaxResults parameter. If you ran the
-// command previously and received a value for NextToken, you can supply that value
-// to continue listing profiles from where you left off.
+// Returns a list of the profiles for your system. If you want to limit the
+// results to a certain number, supply a value for the MaxResults parameter. If
+// you ran the command previously and received a value for NextToken, you can
+// supply that value to continue listing profiles from where you left off.
 func (c *Client) ListProfiles(ctx context.Context, params *ListProfilesInput, optFns ...func(*Options)) (*ListProfilesOutput, error) {
 	if params == nil {
 		params = &ListProfilesInput{}
@@ -36,12 +36,12 @@ type ListProfilesInput struct {
 	// The maximum number of profiles to return.
 	MaxResults *int32
 
-	// When there are additional results that were not returned, a NextToken parameter
-	// is returned. You can use that value for a subsequent call to ListProfiles to
-	// continue listing results.
+	// When there are additional results that were not returned, a NextToken
+	// parameter is returned. You can use that value for a subsequent call to
+	// ListProfiles to continue listing results.
 	NextToken *string
 
-	// Indicates whether to list only LOCAL type profiles or only PARTNER type
+	// Indicates whether to list only LOCAL  type profiles or only PARTNER type
 	// profiles. If not supplied in the request, the command lists all types of
 	// profiles.
 	ProfileType types.ProfileType
@@ -138,8 +138,8 @@ type ListProfilesPaginatorOptions struct {
 	// The maximum number of profiles to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

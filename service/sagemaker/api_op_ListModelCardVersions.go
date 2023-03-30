@@ -49,8 +49,8 @@ type ListModelCardVersionsInput struct {
 	ModelCardStatus types.ModelCardStatus
 
 	// If the response to a previous ListModelCardVersions request was truncated, the
-	// response includes a NextToken. To retrieve the next set of model card versions,
-	// use the token in the next request.
+	// response includes a NextToken. To retrieve the next set of model card
+	// versions, use the token in the next request.
 	NextToken *string
 
 	// Sort listed model card versions by version. Sorts by version by default.
@@ -69,8 +69,8 @@ type ListModelCardVersionsOutput struct {
 	// This member is required.
 	ModelCardVersionSummaryList []types.ModelCardVersionSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of model card versions, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of model card versions, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -156,8 +156,8 @@ type ListModelCardVersionsPaginatorOptions struct {
 	// The maximum number of model card versions to list.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -33,7 +33,7 @@ func (c *Client) SetIpAddressType(ctx context.Context, params *SetIpAddressTypeI
 type SetIpAddressTypeInput struct {
 
 	// The IP address type to set for the specified resource. The possible values are
-	// ipv4 for IPv4 only, and dualstack for IPv4 and IPv6.
+	// ipv4 for IPv4 only, and dualstack  for IPv4 and IPv6.
 	//
 	// This member is required.
 	IpAddressType types.IpAddressType
@@ -43,10 +43,10 @@ type SetIpAddressTypeInput struct {
 	// This member is required.
 	ResourceName *string
 
-	// The resource type. The possible values are Distribution, Instance, and
-	// LoadBalancer. Distribution-related APIs are available only in the N. Virginia
-	// (us-east-1) Amazon Web Services Region. Set your Amazon Web Services Region
-	// configuration to us-east-1 to create, view, or edit distributions.
+	// The resource type. The possible values are Distribution , Instance , and
+	// LoadBalancer . Distribution-related APIs are available only in the N. Virginia (
+	// us-east-1) Amazon Web Services Region. Set your Amazon Web Services Region
+	// configuration to us-east-1  to create, view, or edit distributions.
 	//
 	// This member is required.
 	ResourceType types.ResourceType

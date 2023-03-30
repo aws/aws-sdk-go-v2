@@ -12,7 +12,7 @@ import (
 )
 
 // Deactivates the existing flow. For on-demand flows, this operation returns an
-// unsupportedOperationException error message. For schedule and event-triggered
+// unsupportedOperationExceptionerror message. For schedule and event-triggered
 // flows, this operation deactivates the flow.
 func (c *Client) StopFlow(ctx context.Context, params *StopFlowInput, optFns ...func(*Options)) (*StopFlowOutput, error) {
 	if params == nil {

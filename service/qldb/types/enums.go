@@ -49,9 +49,9 @@ const (
 	ExportStatusCancelled  ExportStatus = "CANCELLED"
 )
 
-// Values returns all known values for ExportStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ExportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ExportStatus) Values() []ExportStatus {
 	return []ExportStatus{
 		"IN_PROGRESS",
@@ -70,9 +70,9 @@ const (
 	LedgerStateDeleted  LedgerState = "DELETED"
 )
 
-// Values returns all known values for LedgerState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LedgerState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LedgerState) Values() []LedgerState {
 	return []LedgerState{
 		"CREATING",
@@ -91,9 +91,9 @@ const (
 	OutputFormatJson      OutputFormat = "JSON"
 )
 
-// Values returns all known values for OutputFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OutputFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (OutputFormat) Values() []OutputFormat {
 	return []OutputFormat{
 		"ION_BINARY",
@@ -151,9 +151,9 @@ const (
 	StreamStatusImpaired  StreamStatus = "IMPAIRED"
 )
 
-// Values returns all known values for StreamStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StreamStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (StreamStatus) Values() []StreamStatus {
 	return []StreamStatus{
 		"ACTIVE",

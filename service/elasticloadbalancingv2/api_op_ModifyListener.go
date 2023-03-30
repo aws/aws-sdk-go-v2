@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Replaces the specified properties of the specified listener. Any properties that
-// you do not specify remain unchanged. Changing the protocol from HTTPS to HTTP,
-// or from TLS to TCP, removes the security policy and default certificate
+// Replaces the specified properties of the specified listener. Any properties
+// that you do not specify remain unchanged. Changing the protocol from HTTPS to
+// HTTP, or from TLS to TCP, removes the security policy and default certificate
 // properties. If you change the protocol from HTTP to HTTPS, or from TCP to TLS,
 // you must add the security policy and default certificate properties. To add an
 // item to a list, remove an item from a list, or update an item in a list, you
@@ -42,44 +42,38 @@ type ModifyListenerInput struct {
 	ListenerArn *string
 
 	// [TLS listeners] The name of the Application-Layer Protocol Negotiation (ALPN)
-	// policy. You can specify one policy name. The following are the possible
-	// values:
-	// - HTTP1Only
-	// - HTTP2Only
-	// - HTTP2Optional
-	// - HTTP2Preferred
-	// - None
-	//
-	// For
-	// more information, see ALPN policies
-	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies)
+	// policy. You can specify one policy name. The following are the possible values:
+	//     - HTTP1Only
+	//     - HTTP2Only
+	//     - HTTP2Optional
+	//     - HTTP2Preferred
+	//     - None
+	//  For more information, see ALPN policies (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies)
 	// in the Network Load Balancers Guide.
 	AlpnPolicy []string
 
 	// [HTTPS and TLS listeners] The default certificate for the listener. You must
 	// provide exactly one certificate. Set CertificateArn to the certificate ARN but
-	// do not set IsDefault.
+	// do not set IsDefault .
 	Certificates []types.Certificate
 
 	// The actions for the default rule.
 	DefaultActions []types.Action
 
-	// The port for connections from clients to the load balancer. You cannot specify a
-	// port for a Gateway Load Balancer.
+	// The port for connections from clients to the load balancer. You cannot specify
+	// a port for a Gateway Load Balancer.
 	Port *int32
 
-	// The protocol for connections from clients to the load balancer. Application Load
-	// Balancers support the HTTP and HTTPS protocols. Network Load Balancers support
-	// the TCP, TLS, UDP, and TCP_UDP protocols. You can’t change the protocol to UDP
-	// or TCP_UDP if dual-stack mode is enabled. You cannot specify a protocol for a
-	// Gateway Load Balancer.
+	// The protocol for connections from clients to the load balancer. Application
+	// Load Balancers support the HTTP and HTTPS protocols. Network Load Balancers
+	// support the TCP, TLS, UDP, and TCP_UDP protocols. You can’t change the protocol
+	// to UDP or TCP_UDP if dual-stack mode is enabled. You cannot specify a protocol
+	// for a Gateway Load Balancer.
 	Protocol types.ProtocolEnum
 
 	// [HTTPS and TLS listeners] The security policy that defines which protocols and
-	// ciphers are supported. For more information, see Security policies
-	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies)
-	// in the Application Load Balancers Guide or Security policies
-	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies)
+	// ciphers are supported. For more information, see Security policies (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies)
+	// in the Application Load Balancers Guide or Security policies (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies)
 	// in the Network Load Balancers Guide.
 	SslPolicy *string
 

@@ -13,8 +13,8 @@ import (
 	"time"
 )
 
-// Creates a job template. Job template stores values of StartJobRun API request in
-// a template and can be used to start a job run. Job template allows two use
+// Creates a job template. Job template stores values of StartJobRun API request
+// in a template and can be used to start a job run. Job template allows two use
 // cases: avoid repeating recurring StartJobRun API request values, enforcing
 // certain values in StartJobRun API request.
 func (c *Client) CreateJobTemplate(ctx context.Context, params *CreateJobTemplateInput, optFns ...func(*Options)) (*CreateJobTemplateOutput, error) {

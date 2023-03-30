@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the list of all log groups that are being monitored and tagged by DevOps
-// Guru.
+// Returns the list of all log groups that are being monitored and tagged by
+// DevOps Guru.
 func (c *Client) ListMonitoredResources(ctx context.Context, params *ListMonitoredResourcesInput, optFns ...func(*Options)) (*ListMonitoredResourcesOutput, error) {
 	if params == nil {
 		params = &ListMonitoredResourcesInput{}
@@ -36,7 +36,7 @@ type ListMonitoredResourcesInput struct {
 	Filters *types.ListMonitoredResourcesFilters
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	MaxResults *int32
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -140,11 +140,11 @@ var _ ListMonitoredResourcesAPIClient = (*Client)(nil)
 // ListMonitoredResources
 type ListMonitoredResourcesPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -157,7 +157,8 @@ type ListMonitoredResourcesPaginator struct {
 	firstPage bool
 }
 
-// NewListMonitoredResourcesPaginator returns a new ListMonitoredResourcesPaginator
+// NewListMonitoredResourcesPaginator returns a new
+// ListMonitoredResourcesPaginator
 func NewListMonitoredResourcesPaginator(client ListMonitoredResourcesAPIClient, params *ListMonitoredResourcesInput, optFns ...func(*ListMonitoredResourcesPaginatorOptions)) *ListMonitoredResourcesPaginator {
 	if params == nil {
 		params = &ListMonitoredResourcesInput{}

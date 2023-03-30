@@ -15,14 +15,8 @@ import (
 // temporary container for attachments that you add to a case or case
 // communication. The set is available for 1 hour after it's created. The
 // expiryTime returned in the response is when the set expires.
-// - You must have a
-// Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web
-// Services Support API.
-// - If you call the Amazon Web Services Support API from an
-// account that doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
-// plan, the SubscriptionRequiredException error message appears. For information
-// about changing your support plan, see Amazon Web Services Support
-// (http://aws.amazon.com/premiumsupport/).
+//   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support API.
+//   - If you call the Amazon Web Services Support API from an account that doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the SubscriptionRequiredException error message appears. For information about changing your support plan, see Amazon Web Services Support (http://aws.amazon.com/premiumsupport/) .
 func (c *Client) AddAttachmentsToSet(ctx context.Context, params *AddAttachmentsToSetInput, optFns ...func(*Options)) (*AddAttachmentsToSetOutput, error) {
 	if params == nil {
 		params = &AddAttachmentsToSetInput{}
@@ -43,24 +37,24 @@ type AddAttachmentsToSetInput struct {
 	// One or more attachments to add to the set. You can add up to three attachments
 	// per set. The size limit is 5 MB per attachment. In the Attachment object, use
 	// the data parameter to specify the contents of the attachment file. In the
-	// previous request syntax, the value for data appear as blob, which is represented
-	// as a base64-encoded string. The value for fileName is the name of the
-	// attachment, such as troubleshoot-screenshot.png.
+	// previous request syntax, the value for data  appear as blob, which is
+	// represented as a base64-encoded string. The value for fileName is the name of
+	// the attachment, such as troubleshoot-screenshot.png .
 	//
 	// This member is required.
 	Attachments []types.Attachment
 
 	// The ID of the attachment set. If an attachmentSetId is not specified, a new
 	// attachment set is created, and the ID of the set is returned in the response. If
-	// an attachmentSetId is specified, the attachments are added to the specified set,
-	// if it exists.
+	// an attachmentSetId is specified, the attachments are added to the specified
+	// set, if it exists.
 	AttachmentSetId *string
 
 	noSmithyDocumentSerde
 }
 
-// The ID and expiry time of the attachment set returned by the AddAttachmentsToSet
-// operation.
+// The ID and expiry time of the attachment set returned by the
+// AddAttachmentsToSet operation.
 type AddAttachmentsToSetOutput struct {
 
 	// The ID of the attachment set. If an attachmentSetId was not specified, a new

@@ -13,17 +13,14 @@ import (
 
 // Returns detailed information about one or more specified events. Information
 // includes standard event data (Amazon Web Services Region, service, and so on, as
-// returned by DescribeEvents
-// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEvents.html)),
-// a detailed event description, and possible additional metadata that depends upon
-// the nature of the event. Affected entities are not included. To retrieve the
-// entities, use the DescribeAffectedEntities
-// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html)
+// returned by DescribeEvents (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEvents.html)
+// ), a detailed event description, and possible additional metadata that depends
+// upon the nature of the event. Affected entities are not included. To retrieve
+// the entities, use the DescribeAffectedEntities (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html)
 // operation. If a specified event can't be retrieved, an error message is returned
 // for that event. This operation supports resource-level permissions. You can use
 // this operation to allow or deny access to specific Health events. For more
-// information, see Resource- and action-based conditions
-// (https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions)
+// information, see Resource- and action-based conditions (https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions)
 // in the Health User Guide.
 func (c *Client) DescribeEventDetails(ctx context.Context, params *DescribeEventDetailsInput, optFns ...func(*Options)) (*DescribeEventDetailsOutput, error) {
 	if params == nil {
@@ -49,8 +46,8 @@ type DescribeEventDetailsInput struct {
 	// This member is required.
 	EventArns []string
 
-	// The locale (language) to return information in. English (en) is the default and
-	// the only supported value at this time.
+	// The locale (language) to return information in. English (en) is the default
+	// and the only supported value at this time.
 	Locale *string
 
 	noSmithyDocumentSerde

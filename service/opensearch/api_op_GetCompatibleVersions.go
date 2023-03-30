@@ -28,17 +28,17 @@ func (c *Client) GetCompatibleVersions(ctx context.Context, params *GetCompatibl
 	return out, nil
 }
 
-// Container for the request parameters to GetCompatibleVersions operation.
+// Container for the request parameters to GetCompatibleVersions  operation.
 type GetCompatibleVersionsInput struct {
 
-	// The name of an existing domain. Provide this parameter to limit the results to a
-	// single domain.
+	// The name of an existing domain. Provide this parameter to limit the results to
+	// a single domain.
 	DomainName *string
 
 	noSmithyDocumentSerde
 }
 
-// Container for the response returned by the GetCompatibleVersions operation.
+// Container for the response returned by the GetCompatibleVersions  operation.
 type GetCompatibleVersionsOutput struct {
 
 	// A map of OpenSearch or Elasticsearch versions and the versions you can upgrade

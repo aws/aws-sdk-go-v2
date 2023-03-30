@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of all Amazon Route 53 health checks associated with a specific
-// routing control.
+// Returns an array of all Amazon Route 53 health checks associated with a
+// specific routing control.
 func (c *Client) ListAssociatedRoute53HealthChecks(ctx context.Context, params *ListAssociatedRoute53HealthChecksInput, optFns ...func(*Options)) (*ListAssociatedRoute53HealthChecksOutput, error) {
 	if params == nil {
 		params = &ListAssociatedRoute53HealthChecksInput{}
@@ -135,8 +135,8 @@ type ListAssociatedRoute53HealthChecksPaginatorOptions struct {
 	// The number of objects that you want to return with this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -28,7 +28,7 @@ func (c *Client) StartPipelineExecution(ctx context.Context, params *StartPipeli
 	return out, nil
 }
 
-// Represents the input of a StartPipelineExecution action.
+// Represents the input of a StartPipelineExecution  action.
 type StartPipelineExecutionInput struct {
 
 	// The name of the pipeline to start.
@@ -42,7 +42,7 @@ type StartPipelineExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a StartPipelineExecution action.
+// Represents the output of a StartPipelineExecution  action.
 type StartPipelineExecutionOutput struct {
 
 	// The unique system-generated ID of the pipeline execution that was started.

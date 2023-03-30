@@ -29,8 +29,7 @@ func (c *Client) StartResourceScan(ctx context.Context, params *StartResourceSca
 // Starts a scan of the policies applied to the specified resource.
 type StartResourceScanInput struct {
 
-	// The ARN of the analyzer
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
+	// The ARN of the analyzer (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
 	// to use to scan the policies applied to the specified resource.
 	//
 	// This member is required.

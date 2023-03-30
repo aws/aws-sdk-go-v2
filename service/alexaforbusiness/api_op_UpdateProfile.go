@@ -42,8 +42,8 @@ type UpdateProfileInput struct {
 	// to the default status.
 	IsDefault *bool
 
-	// The updated locale for the room profile. (This is currently only available to a
-	// limited preview audience.)
+	// The updated locale for the room profile. (This is currently only available to
+	// a limited preview audience.)
 	Locale *string
 
 	// The updated maximum volume limit for the room profile.

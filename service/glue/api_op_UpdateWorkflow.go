@@ -33,7 +33,8 @@ type UpdateWorkflowInput struct {
 	// This member is required.
 	Name *string
 
-	// A collection of properties to be used as part of each execution of the workflow.
+	// A collection of properties to be used as part of each execution of the
+	// workflow.
 	DefaultRunProperties map[string]string
 
 	// The description of the workflow.

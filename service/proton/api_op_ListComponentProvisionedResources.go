@@ -13,9 +13,8 @@ import (
 )
 
 // List provisioned resources for a component with details. For more information
-// about components, see Proton components
-// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
-// Proton User Guide.
+// about components, see Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
+// in the Proton User Guide.
 func (c *Client) ListComponentProvisionedResources(ctx context.Context, params *ListComponentProvisionedResourcesInput, optFns ...func(*Options)) (*ListComponentProvisionedResourcesOutput, error) {
 	if params == nil {
 		params = &ListComponentProvisionedResourcesInput{}
@@ -138,8 +137,8 @@ var _ ListComponentProvisionedResourcesAPIClient = (*Client)(nil)
 // ListComponentProvisionedResourcesPaginatorOptions is the paginator options for
 // ListComponentProvisionedResources
 type ListComponentProvisionedResourcesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

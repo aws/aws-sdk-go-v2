@@ -74,9 +74,9 @@ const (
 	EventTypePing                EventType = "Ping"
 )
 
-// Values returns all known values for EventType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for EventType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"AssignmentAccepted",
@@ -147,9 +147,9 @@ const (
 	HITStatusDisposed     HITStatus = "Disposed"
 )
 
-// Values returns all known values for HITStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for HITStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (HITStatus) Values() []HITStatus {
 	return []HITStatus{
 		"Assignable",
@@ -169,8 +169,8 @@ const (
 	NotificationTransportSns   NotificationTransport = "SNS"
 )
 
-// Values returns all known values for NotificationTransport. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for NotificationTransport. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationTransport) Values() []NotificationTransport {
 	return []NotificationTransport{
@@ -188,9 +188,9 @@ const (
 	NotifyWorkersFailureCodeHardFailure NotifyWorkersFailureCode = "HardFailure"
 )
 
-// Values returns all known values for NotifyWorkersFailureCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NotifyWorkersFailureCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotifyWorkersFailureCode) Values() []NotifyWorkersFailureCode {
 	return []NotifyWorkersFailureCode{
 		"SoftFailure",
@@ -224,9 +224,9 @@ const (
 	QualificationTypeStatusInactive QualificationTypeStatus = "Inactive"
 )
 
-// Values returns all known values for QualificationTypeStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for QualificationTypeStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QualificationTypeStatus) Values() []QualificationTypeStatus {
 	return []QualificationTypeStatus{
 		"Active",

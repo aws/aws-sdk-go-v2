@@ -16,11 +16,9 @@ import (
 // monitoring account and create a sink policy in that account. The sink policy
 // must permit the source account to link to it. You can grant permission to source
 // accounts by granting permission to an entire organization or to individual
-// accounts. For more information, see CreateSink
-// (https://docs.aws.amazon.com/OAM/latest/APIReference/API_CreateSink.html) and
-// PutSinkPolicy
-// (https://docs.aws.amazon.com/OAM/latest/APIReference/API_PutSinkPolicy.html).
-// Each monitoring account can be linked to as many as 100,000 source accounts.
+// accounts. For more information, see CreateSink (https://docs.aws.amazon.com/OAM/latest/APIReference/API_CreateSink.html)
+// and PutSinkPolicy (https://docs.aws.amazon.com/OAM/latest/APIReference/API_PutSinkPolicy.html)
+// . Each monitoring account can be linked to as many as 100,000 source accounts.
 // Each source account can be linked to as many as five monitoring accounts.
 func (c *Client) CreateLink(ctx context.Context, params *CreateLinkInput, optFns ...func(*Options)) (*CreateLinkOutput, error) {
 	if params == nil {
@@ -42,12 +40,9 @@ type CreateLinkInput struct {
 	// Specify a friendly human-readable name to use to identify this source account
 	// when you are viewing data from it in the monitoring account. You can use a
 	// custom label or use the following variables:
-	// - $AccountName is the name of the
-	// account
-	// - $AccountEmail is the globally unique email address of the account
-	// -
-	// $AccountEmailNoDomain is the email address of the account without the domain
-	// name
+	//     - $AccountName is the name of the account
+	//     - $AccountEmail is the globally unique email address of the account
+	//     - $AccountEmailNoDomain is the email address of the account without the domain name
 	//
 	// This member is required.
 	LabelTemplate *string
@@ -58,10 +53,9 @@ type CreateLinkInput struct {
 	// This member is required.
 	ResourceTypes []types.ResourceType
 
-	// The ARN of the sink to use to create this link. You can use ListSinks
-	// (https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListSinks.html) to find
-	// the ARNs of sinks. For more information about sinks, see CreateSink
-	// (https://docs.aws.amazon.com/OAM/latest/APIReference/API_CreateSink.html).
+	// The ARN of the sink to use to create this link. You can use ListSinks (https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListSinks.html)
+	// to find the ARNs of sinks. For more information about sinks, see CreateSink (https://docs.aws.amazon.com/OAM/latest/APIReference/API_CreateSink.html)
+	// .
 	//
 	// This member is required.
 	SinkIdentifier *string
@@ -70,8 +64,8 @@ type CreateLinkInput struct {
 	// organize and categorize your resources. You can also use them to scope user
 	// permissions by granting a user permission to access or change only resources
 	// with certain tag values. For more information about using tags to control
-	// access, see Controlling access to Amazon Web Services resources using tags
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html).
+	// access, see Controlling access to Amazon Web Services resources using tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html)
+	// .
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -82,7 +76,8 @@ type CreateLinkOutput struct {
 	// The ARN of the link that is newly created.
 	Arn *string
 
-	// The random ID string that Amazon Web Services generated as part of the link ARN.
+	// The random ID string that Amazon Web Services generated as part of the link
+	// ARN.
 	Id *string
 
 	// The label that you assigned to this link. If the labelTemplate includes

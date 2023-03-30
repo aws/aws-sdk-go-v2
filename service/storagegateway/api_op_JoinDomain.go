@@ -36,8 +36,8 @@ type JoinDomainInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -58,16 +58,16 @@ type JoinDomainInput struct {
 
 	// List of IPv4 addresses, NetBIOS names, or host names of your domain server. If
 	// you need to specify the port number include it after the colon (“:”). For
-	// example, mydc.mydomain.com:389.
+	// example, mydc.mydomain.com:389 .
 	DomainControllers []string
 
-	// The organizational unit (OU) is a container in an Active Directory that can hold
-	// users, groups, computers, and other OUs and this parameter specifies the OU that
-	// the gateway will join within the AD domain.
+	// The organizational unit (OU) is a container in an Active Directory that can
+	// hold users, groups, computers, and other OUs and this parameter specifies the OU
+	// that the gateway will join within the AD domain.
 	OrganizationalUnit *string
 
-	// Specifies the time in seconds, in which the JoinDomain operation must complete.
-	// The default is 20 seconds.
+	// Specifies the time in seconds, in which the JoinDomain operation must
+	// complete. The default is 20 seconds.
 	TimeoutInSeconds *int32
 
 	noSmithyDocumentSerde
@@ -78,20 +78,13 @@ type JoinDomainOutput struct {
 
 	// Indicates the status of the gateway as a member of the Active Directory
 	// domain.
-	// - ACCESS_DENIED: Indicates that the JoinDomain operation failed due to
-	// an authentication error.
-	// - DETACHED: Indicates that gateway is not joined to a
-	// domain.
-	// - JOINED: Indicates that the gateway has successfully joined a domain.
-	// -
-	// JOINING: Indicates that a JoinDomain operation is in progress.
-	// - NETWORK_ERROR:
-	// Indicates that JoinDomain operation failed due to a network or connectivity
-	// error.
-	// - TIMEOUT: Indicates that the JoinDomain operation failed because the
-	// operation didn't complete within the allotted time.
-	// - UNKNOWN_ERROR: Indicates
-	// that the JoinDomain operation failed due to another type of error.
+	//     - ACCESS_DENIED : Indicates that the JoinDomain operation failed due to an authentication error.
+	//     - DETACHED : Indicates that gateway is not joined to a domain.
+	//     - JOINED : Indicates that the gateway has successfully joined a domain.
+	//     - JOINING : Indicates that a JoinDomain operation is in progress.
+	//     - NETWORK_ERROR : Indicates that JoinDomain operation failed due to a network or connectivity error.
+	//     - TIMEOUT : Indicates that the JoinDomain operation failed because the operation didn't complete within the allotted time.
+	//     - UNKNOWN_ERROR : Indicates that the JoinDomain operation failed due to another type of error.
 	ActiveDirectoryStatus types.ActiveDirectoryStatus
 
 	// The unique Amazon Resource Name (ARN) of the gateway that joined the domain.

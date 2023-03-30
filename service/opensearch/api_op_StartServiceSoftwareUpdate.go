@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Schedules a service software update for an Amazon OpenSearch Service domain. For
-// more information, see Service software updates in Amazon OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html).
+// Schedules a service software update for an Amazon OpenSearch Service domain.
+// For more information, see Service software updates in Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html)
+// .
 func (c *Client) StartServiceSoftwareUpdate(ctx context.Context, params *StartServiceSoftwareUpdateInput, optFns ...func(*Options)) (*StartServiceSoftwareUpdateOutput, error) {
 	if params == nil {
 		params = &StartServiceSoftwareUpdateInput{}
@@ -38,24 +38,17 @@ type StartServiceSoftwareUpdateInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The Epoch timestamp when you want the service software update to start. You only
-	// need to specify this parameter if you set ScheduleAt to TIMESTAMP.
+	// The Epoch timestamp when you want the service software update to start. You
+	// only need to specify this parameter if you set ScheduleAt  to TIMESTAMP .
 	DesiredStartTime *int64
 
 	// When to start the service software update.
-	// - NOW - Immediately schedules the
-	// update to happen in the current hour if there's capacity available.
-	// - TIMESTAMP
-	// - Lets you specify a custom date and time to apply the update. If you specify
-	// this value, you must also provide a value for DesiredStartTime.
-	// -
-	// OFF_PEAK_WINDOW - Marks the update to be picked up during an upcoming off-peak
-	// window. There's no guarantee that the update will happen during the next
-	// immediate window. Depending on capacity, it might happen in subsequent
-	// days.
+	//     - NOW - Immediately schedules the update to happen in the current hour if there's capacity available.
+	//     - TIMESTAMP - Lets you specify a custom date and time to apply the update. If you specify this value, you must also provide a value for DesiredStartTime .
+	//     - OFF_PEAK_WINDOW - Marks the update to be picked up during an upcoming off-peak window. There's no guarantee that the update will happen during the next immediate window. Depending on capacity, it might happen in subsequent days.
 	//
-	// Default: NOW if you don't specify a value for DesiredStartTime, and
-	// TIMESTAMP if you do.
+	// Default: NOW  if you don't specify a value for DesiredStartTime , and TIMESTAMP
+	// if you do.
 	ScheduleAt types.ScheduleAt
 
 	noSmithyDocumentSerde

@@ -49,8 +49,8 @@ type CreateProjectInput struct {
 	// The description of the project, if any.
 	Description *string
 
-	// A list of the Code objects submitted with the project request. If this parameter
-	// is specified, the request must also include the toolchain parameter.
+	// A list of the Code objects submitted with the project request. If this
+	// parameter is specified, the request must also include the toolchain parameter.
 	SourceCode []types.Code
 
 	// The tags created for the project.

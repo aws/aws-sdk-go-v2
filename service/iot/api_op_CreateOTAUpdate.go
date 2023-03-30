@@ -12,8 +12,7 @@ import (
 )
 
 // Creates an IoT OTA update on a target group of things or groups. Requires
-// permission to access the CreateOTAUpdate
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// permission to access the CreateOTAUpdate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateOTAUpdate(ctx context.Context, params *CreateOTAUpdateInput, optFns ...func(*Options)) (*CreateOTAUpdateOutput, error) {
 	if params == nil {
@@ -66,10 +65,10 @@ type CreateOTAUpdateInput struct {
 	// Configuration information for pre-signed URLs.
 	AwsJobPresignedUrlConfig *types.AwsJobPresignedUrlConfig
 
-	// Specifies the amount of time each device has to finish its execution of the job.
-	// A timer is started when the job execution status is set to IN_PROGRESS. If the
-	// job execution status is not set to another terminal state before the timer
-	// expires, it will be automatically set to TIMED_OUT.
+	// Specifies the amount of time each device has to finish its execution of the
+	// job. A timer is started when the job execution status is set to IN_PROGRESS.
+	// If the job execution status is not set to another terminal state before the
+	// timer expires, it will be automatically set to TIMED_OUT .
 	AwsJobTimeoutConfig *types.AwsJobTimeoutConfig
 
 	// The description of the OTA update.

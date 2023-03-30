@@ -16,7 +16,7 @@ import (
 // information such as the bounding box coordinates, the confidence (that the
 // bounding box contains a face), and face ID. For an example, see Listing Faces in
 // a Collection in the Amazon Rekognition Developer Guide. This operation requires
-// permissions to perform the rekognition:ListFaces action.
+// permissions to perform the rekognition:ListFaces  action.
 func (c *Client) ListFaces(ctx context.Context, params *ListFacesInput, optFns ...func(*Options)) (*ListFacesOutput, error) {
 	if params == nil {
 		params = &ListFacesInput{}
@@ -52,15 +52,15 @@ type ListFacesInput struct {
 
 type ListFacesOutput struct {
 
-	// Version number of the face detection model associated with the input collection
-	// (CollectionId).
+	// Version number of the face detection model associated with the input
+	// collection ( CollectionId ).
 	FaceModelVersion *string
 
-	// An array of Face objects.
+	// An array of Face  objects.
 	Faces []types.Face
 
-	// If the response is truncated, Amazon Rekognition returns this token that you can
-	// use in the subsequent request to retrieve the next set of faces.
+	// If the response is truncated, Amazon Rekognition returns this token that you
+	// can use in the subsequent request to retrieve the next set of faces.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -144,8 +144,8 @@ type ListFacesPaginatorOptions struct {
 	// Maximum number of faces to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

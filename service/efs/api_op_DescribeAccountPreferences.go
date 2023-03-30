@@ -13,7 +13,7 @@ import (
 
 // Returns the account preferences settings for the Amazon Web Services account
 // associated with the user making the request, in the current Amazon Web Services
-// Region. For more information, see Managing Amazon EFS resource IDs.
+// Region. For more information, see Managing Amazon EFS resource IDs .
 func (c *Client) DescribeAccountPreferences(ctx context.Context, params *DescribeAccountPreferencesInput, optFns ...func(*Options)) (*DescribeAccountPreferencesOutput, error) {
 	if params == nil {
 		params = &DescribeAccountPreferencesInput{}
@@ -32,12 +32,12 @@ func (c *Client) DescribeAccountPreferences(ctx context.Context, params *Describ
 type DescribeAccountPreferencesInput struct {
 
 	// (Optional) When retrieving account preferences, you can optionally specify the
-	// MaxItems parameter to limit the number of objects returned in a response. The
+	// MaxItemsparameter to limit the number of objects returned in a response. The
 	// default value is 100.
 	MaxResults *int32
 
-	// (Optional) You can use NextToken in a subsequent request to fetch the next page
-	// of Amazon Web Services account preferences if the response payload was
+	// (Optional) You can use NextToken in a subsequent request to fetch the next
+	// page of Amazon Web Services account preferences if the response payload was
 	// paginated.
 	NextToken *string
 
@@ -46,13 +46,13 @@ type DescribeAccountPreferencesInput struct {
 
 type DescribeAccountPreferencesOutput struct {
 
-	// Present if there are more records than returned in the response. You can use the
-	// NextToken in the subsequent request to fetch the additional descriptions.
+	// Present if there are more records than returned in the response. You can use
+	// the NextToken  in the subsequent request to fetch the additional descriptions.
 	NextToken *string
 
-	// Describes the resource ID preference setting for the Amazon Web Services account
-	// associated with the user making the request, in the current Amazon Web Services
-	// Region.
+	// Describes the resource ID preference setting for the Amazon Web Services
+	// account associated with the user making the request, in the current Amazon Web
+	// Services Region.
 	ResourceIdPreference *types.ResourceIdPreference
 
 	// Metadata pertaining to the operation's result.

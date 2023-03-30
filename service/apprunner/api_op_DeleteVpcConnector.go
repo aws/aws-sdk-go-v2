@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete an App Runner VPC connector resource. You can't delete a connector that's
-// used by one or more App Runner services.
+// Delete an App Runner VPC connector resource. You can't delete a connector
+// that's used by one or more App Runner services.
 func (c *Client) DeleteVpcConnector(ctx context.Context, params *DeleteVpcConnectorInput, optFns ...func(*Options)) (*DeleteVpcConnectorOutput, error) {
 	if params == nil {
 		params = &DeleteVpcConnectorInput{}
@@ -30,8 +30,8 @@ func (c *Client) DeleteVpcConnector(ctx context.Context, params *DeleteVpcConnec
 
 type DeleteVpcConnectorInput struct {
 
-	// The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to
-	// delete. The ARN must be a full VPC connector ARN.
+	// The Amazon Resource Name (ARN) of the App Runner VPC connector that you want
+	// to delete. The ARN must be a full VPC connector ARN.
 	//
 	// This member is required.
 	VpcConnectorArn *string

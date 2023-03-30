@@ -40,19 +40,15 @@ type CreateIAMPolicyAssignmentInput struct {
 	AssignmentName *string
 
 	// The status of the assignment. Possible values are as follows:
-	// - ENABLED -
-	// Anything specified in this assignment is used when creating the data source.
-	// -
-	// DISABLED - This assignment isn't used when creating the data source.
-	// - DRAFT -
-	// This assignment is an unfinished draft and isn't used when creating the data
-	// source.
+	//     - ENABLED - Anything specified in this assignment is used when creating the data source.
+	//     - DISABLED - This assignment isn't used when creating the data source.
+	//     - DRAFT - This assignment is an unfinished draft and isn't used when creating the data source.
 	//
 	// This member is required.
 	AssignmentStatus types.AssignmentStatus
 
-	// The ID of the Amazon Web Services account where you want to assign an IAM policy
-	// to Amazon QuickSight users or groups.
+	// The ID of the Amazon Web Services account where you want to assign an IAM
+	// policy to Amazon QuickSight users or groups.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -62,8 +58,8 @@ type CreateIAMPolicyAssignmentInput struct {
 	// This member is required.
 	Namespace *string
 
-	// The Amazon QuickSight users, groups, or both that you want to assign the policy
-	// to.
+	// The Amazon QuickSight users, groups, or both that you want to assign the
+	// policy to.
 	Identities map[string][]string
 
 	// The ARN for the IAM policy to apply to the Amazon QuickSight users and groups
@@ -83,16 +79,13 @@ type CreateIAMPolicyAssignmentOutput struct {
 	AssignmentName *string
 
 	// The status of the assignment. Possible values are as follows:
-	// - ENABLED -
-	// Anything specified in this assignment is used when creating the data source.
-	// -
-	// DISABLED - This assignment isn't used when creating the data source.
-	// - DRAFT -
-	// This assignment is an unfinished draft and isn't used when creating the data
-	// source.
+	//     - ENABLED - Anything specified in this assignment is used when creating the data source.
+	//     - DISABLED - This assignment isn't used when creating the data source.
+	//     - DRAFT - This assignment is an unfinished draft and isn't used when creating the data source.
 	AssignmentStatus types.AssignmentStatus
 
-	// The Amazon QuickSight users, groups, or both that the IAM policy is assigned to.
+	// The Amazon QuickSight users, groups, or both that the IAM policy is assigned
+	// to.
 	Identities map[string][]string
 
 	// The ARN for the IAM policy that is applied to the Amazon QuickSight users and

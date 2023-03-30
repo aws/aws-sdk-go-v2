@@ -13,8 +13,7 @@ import (
 // Detaches a policy from the specified target. Because of the distributed nature
 // of Amazon Web Services, it can take up to five minutes after a policy is
 // detached before it's ready to be deleted. Requires permission to access the
-// DetachPolicy
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// DetachPolicy (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DetachPolicy(ctx context.Context, params *DetachPolicyInput, optFns ...func(*Options)) (*DetachPolicyOutput, error) {
 	if params == nil {

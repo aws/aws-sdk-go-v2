@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of phone numbers that are opted out, meaning you cannot send SMS
-// messages to them. The results for ListPhoneNumbersOptedOut are paginated, and
-// each page returns up to 100 phone numbers. If additional phone numbers are
+// Returns a list of phone numbers that are opted out, meaning you cannot send
+// SMS messages to them. The results for ListPhoneNumbersOptedOut are paginated,
+// and each page returns up to 100 phone numbers. If additional phone numbers are
 // available after the first page of results, then a NextToken string will be
 // returned. To receive the next page, you call ListPhoneNumbersOptedOut again
 // using the NextToken string received from the previous call. When there are no
-// more records to return, NextToken will be null.
+// more records to return, NextToken  will be null.
 func (c *Client) ListPhoneNumbersOptedOut(ctx context.Context, params *ListPhoneNumbersOptedOutInput, optFns ...func(*Options)) (*ListPhoneNumbersOptedOutOutput, error) {
 	if params == nil {
 		params = &ListPhoneNumbersOptedOutInput{}
@@ -33,21 +33,22 @@ func (c *Client) ListPhoneNumbersOptedOut(ctx context.Context, params *ListPhone
 	return out, nil
 }
 
-// The input for the ListPhoneNumbersOptedOut action.
+// The input for the ListPhoneNumbersOptedOut  action.
 type ListPhoneNumbersOptedOutInput struct {
 
-	// A NextToken string is used when you call the ListPhoneNumbersOptedOut action to
-	// retrieve additional records that are available after the first page of results.
+	// A NextToken  string is used when you call the ListPhoneNumbersOptedOut action
+	// to retrieve additional records that are available after the first page of
+	// results.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// The response from the ListPhoneNumbersOptedOut action.
+// The response from the ListPhoneNumbersOptedOut  action.
 type ListPhoneNumbersOptedOutOutput struct {
 
-	// A NextToken string is returned when you call the ListPhoneNumbersOptedOut action
-	// if additional records are available after the first page of results.
+	// A NextToken  string is returned when you call the ListPhoneNumbersOptedOut
+	// action if additional records are available after the first page of results.
 	NextToken *string
 
 	// A list of phone numbers that are opted out of receiving SMS messages. The list
@@ -131,8 +132,8 @@ var _ ListPhoneNumbersOptedOutAPIClient = (*Client)(nil)
 // ListPhoneNumbersOptedOutPaginatorOptions is the paginator options for
 // ListPhoneNumbersOptedOut
 type ListPhoneNumbersOptedOutPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -12,60 +12,27 @@ import (
 	"time"
 )
 
-// Creates a replication configuration that replicates an existing EFS file system
-// to a new, read-only file system. For more information, see Amazon EFS
-// replication (https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html) in
+// Creates a replication configuration that replicates an existing EFS file
+// system to a new, read-only file system. For more information, see Amazon EFS
+// replication (https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html)in
 // the Amazon EFS User Guide. The replication configuration specifies the
 // following:
-// - Source file system - An existing EFS file system that you want
-// replicated. The source file system cannot be a destination file system in an
-// existing replication configuration.
-// - Destination file system configuration -
-// The configuration of the destination file system to which the source file system
-// will be replicated. There can only be one destination file system in a
-// replication configuration. The destination file system configuration consists of
-// the following properties:
-// - Amazon Web Services Region - The Amazon Web Services
-// Region in which the destination file system is created. Amazon EFS replication
-// is available in all Amazon Web Services Regions that Amazon EFS is available in,
-// except Africa (Cape Town), Asia Pacific (Hong Kong), Asia Pacific (Jakarta),
-// Europe (Milan), and Middle East (Bahrain).
-// - Availability Zone - If you want the
-// destination file system to use EFS One Zone availability and durability, you
-// must specify the Availability Zone to create the file system in. For more
-// information about EFS storage classes, see  Amazon EFS storage classes
-// (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html) in the Amazon
-// EFS User Guide.
-// - Encryption - All destination file systems are created with
-// encryption at rest enabled. You can specify the Key Management Service (KMS) key
-// that is used to encrypt the destination file system. If you don't specify a KMS
-// key, your service-managed KMS key for Amazon EFS is used. After the file system
-// is created, you cannot change the KMS key.
+//   - Source file system - An existing EFS file system that you want replicated. The source file system cannot be a destination file system in an existing replication configuration.
+//   - Destination file system configuration - The configuration of the destination file system to which the source file system will be replicated. There can only be one destination file system in a replication configuration. The destination file system configuration consists of the following properties:
+//   - Amazon Web Services Region - The Amazon Web Services Region in which the destination file system is created. Amazon EFS replication is available in all Amazon Web Services Regions that Amazon EFS is available in, except Africa (Cape Town), Asia Pacific (Hong Kong), Asia Pacific (Jakarta), Europe (Milan), and Middle East (Bahrain).
+//   - Availability Zone - If you want the destination file system to use EFS One Zone availability and durability, you must specify the Availability Zone to create the file system in. For more information about EFS storage classes, see Amazon EFS storage classes (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html) in the Amazon EFS User Guide.
+//   - Encryption - All destination file systems are created with encryption at rest enabled. You can specify the Key Management Service (KMS) key that is used to encrypt the destination file system. If you don't specify a KMS key, your service-managed KMS key for Amazon EFS is used. After the file system is created, you cannot change the KMS key.
 //
-// The following properties are set by
-// default:
-// - Performance mode - The destination file system's performance mode
-// matches that of the source file system, unless the destination file system uses
-// EFS One Zone storage. In that case, the General Purpose performance mode is
-// used. The performance mode cannot be changed.
-// - Throughput mode - The
-// destination file system's throughput mode matches that of the source file
-// system. After the file system is created, you can modify the throughput
-// mode.
+// The following properties are set by default:
+//   - Performance mode - The destination file system's performance mode matches that of the source file system, unless the destination file system uses EFS One Zone storage. In that case, the General Purpose performance mode is used. The performance mode cannot be changed.
+//   - Throughput mode - The destination file system's throughput mode matches that of the source file system. After the file system is created, you can modify the throughput mode.
 //
 // The following properties are turned off by default:
-// - Lifecycle
-// management - EFS lifecycle management and EFS Intelligent-Tiering are not
-// enabled on the destination file system. After the destination file system is
-// created, you can enable EFS lifecycle management and EFS Intelligent-Tiering.
-// -
-// Automatic backups - Automatic daily backups not enabled on the destination file
-// system. After the file system is created, you can change this setting.
+//   - Lifecycle management - EFS lifecycle management and EFS Intelligent-Tiering are not enabled on the destination file system. After the destination file system is created, you can enable EFS lifecycle management and EFS Intelligent-Tiering.
+//   - Automatic backups - Automatic daily backups not enabled on the destination file system. After the file system is created, you can change this setting.
 //
-// For more
-// information, see Amazon EFS replication
-// (https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html) in the Amazon
-// EFS User Guide.
+// For more information, see Amazon EFS replication (https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html)
+// in the Amazon EFS User Guide.
 func (c *Client) CreateReplicationConfiguration(ctx context.Context, params *CreateReplicationConfigurationInput, optFns ...func(*Options)) (*CreateReplicationConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateReplicationConfigurationInput{}
@@ -111,8 +78,8 @@ type CreateReplicationConfigurationOutput struct {
 	// This member is required.
 	Destinations []types.Destination
 
-	// The Amazon Resource Name (ARN) of the original source Amazon EFS file system in
-	// the replication configuration.
+	// The Amazon Resource Name (ARN) of the original source Amazon EFS file system
+	// in the replication configuration.
 	//
 	// This member is required.
 	OriginalSourceFileSystemArn *string

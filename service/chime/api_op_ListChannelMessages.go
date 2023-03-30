@@ -13,13 +13,13 @@ import (
 	"time"
 )
 
-// List all the messages in a channel. Returns a paginated list of ChannelMessages.
-// By default, sorted by creation timestamp in descending order. Redacted messages
-// appear in the results as empty, since they are only redacted, not deleted.
-// Deleted messages do not appear in the results. This action always returns the
-// latest version of an edited message. Also, the x-amz-chime-bearer request header
-// is mandatory. Use the AppInstanceUserArn of the user that makes the API call as
-// the value in the header.
+// List all the messages in a channel. Returns a paginated list of ChannelMessages
+// . By default, sorted by creation timestamp in descending order. Redacted
+// messages appear in the results as empty, since they are only redacted, not
+// deleted. Deleted messages do not appear in the results. This action always
+// returns the latest version of an edited message. Also, the x-amz-chime-bearer
+// request header is mandatory. Use the AppInstanceUserArn of the user that makes
+// the API call as the value in the header.
 func (c *Client) ListChannelMessages(ctx context.Context, params *ListChannelMessagesInput, optFns ...func(*Options)) (*ListChannelMessagesOutput, error) {
 	if params == nil {
 		params = &ListChannelMessagesInput{}
@@ -42,7 +42,7 @@ type ListChannelMessagesInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The AppInstanceUserArn of the user that makes the API call.
+	// The AppInstanceUserArn  of the user that makes the API call.
 	ChimeBearer *string
 
 	// The maximum number of messages that you want returned.
@@ -176,8 +176,8 @@ func addEndpointPrefix_opListChannelMessagesMiddleware(stack *middleware.Stack) 
 	return stack.Serialize.Insert(&endpointPrefix_opListChannelMessagesMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
-// ListChannelMessagesAPIClient is a client that implements the ListChannelMessages
-// operation.
+// ListChannelMessagesAPIClient is a client that implements the
+// ListChannelMessages operation.
 type ListChannelMessagesAPIClient interface {
 	ListChannelMessages(context.Context, *ListChannelMessagesInput, ...func(*Options)) (*ListChannelMessagesOutput, error)
 }
@@ -190,8 +190,8 @@ type ListChannelMessagesPaginatorOptions struct {
 	// The maximum number of messages that you want returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

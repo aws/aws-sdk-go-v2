@@ -46,10 +46,10 @@ type BatchGetBlueprintsInput struct {
 
 type BatchGetBlueprintsOutput struct {
 
-	// Returns a list of blueprint as a Blueprints object.
+	// Returns a list of blueprint as a Blueprints  object.
 	Blueprints []types.Blueprint
 
-	// Returns a list of BlueprintNames that were not found.
+	// Returns a list of BlueprintNames  that were not found.
 	MissingBlueprints []string
 
 	// Metadata pertaining to the operation's result.

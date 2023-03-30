@@ -89,7 +89,7 @@ func (e *InstanceRefreshInProgressFault) ErrorCode() string {
 }
 func (e *InstanceRefreshInProgressFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The NextToken value is not valid.
+// The NextToken  value is not valid.
 type InvalidNextToken struct {
 	Message *string
 
@@ -117,7 +117,7 @@ func (e *InvalidNextToken) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 
 // The request failed because a desired configuration was not found or an
 // incompatible launch template (uses a Systems Manager parameter instead of an AMI
-// ID) or launch template version ($Latest or $Default) is present on the Auto
+// ID) or launch template version ( $Latest  or $Default) is present on the Auto
 // Scaling group.
 type IrreversibleInstanceRefreshFault struct {
 	Message *string
@@ -144,10 +144,9 @@ func (e *IrreversibleInstanceRefreshFault) ErrorCode() string {
 }
 func (e *IrreversibleInstanceRefreshFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have already reached a limit for your Amazon EC2 Auto Scaling resources (for
-// example, Auto Scaling groups, launch configurations, or lifecycle hooks). For
-// more information, see DescribeAccountLimits
-// (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAccountLimits.html)
+// You have already reached a limit for your Amazon EC2 Auto Scaling resources
+// (for example, Auto Scaling groups, launch configurations, or lifecycle hooks).
+// For more information, see DescribeAccountLimits (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAccountLimits.html)
 // in the Amazon EC2 Auto Scaling API Reference.
 type LimitExceededFault struct {
 	Message *string

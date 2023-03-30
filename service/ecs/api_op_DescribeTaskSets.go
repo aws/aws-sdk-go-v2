@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the task sets in the specified cluster and service. This is used when
-// a service uses the EXTERNAL deployment controller type. For more information,
-// see Amazon ECS Deployment Types
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
+// Describes the task sets in the specified cluster and service. This is used
+// when a service uses the EXTERNAL deployment controller type. For more
+// information, see Amazon ECS Deployment Types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) DescribeTaskSets(ctx context.Context, params *DescribeTaskSetsInput, optFns ...func(*Options)) (*DescribeTaskSetsOutput, error) {
 	if params == nil {
@@ -33,8 +32,8 @@ func (c *Client) DescribeTaskSets(ctx context.Context, params *DescribeTaskSetsI
 
 type DescribeTaskSetsInput struct {
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
-	// service that the task sets exist in.
+	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
+	// the service that the task sets exist in.
 	//
 	// This member is required.
 	Cluster *string

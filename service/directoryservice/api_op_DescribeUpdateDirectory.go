@@ -40,8 +40,8 @@ type DescribeUpdateDirectoryInput struct {
 	// This member is required.
 	UpdateType types.UpdateType
 
-	// The DescribeUpdateDirectoryResult. NextToken value from a previous call to
-	// DescribeUpdateDirectory. Pass null if this is the first call.
+	// The DescribeUpdateDirectoryResult . NextToken value from a previous call to
+	// DescribeUpdateDirectory . Pass null if this is the first call.
 	NextToken *string
 
 	// The name of the Region.
@@ -139,8 +139,8 @@ var _ DescribeUpdateDirectoryAPIClient = (*Client)(nil)
 // DescribeUpdateDirectoryPaginatorOptions is the paginator options for
 // DescribeUpdateDirectory
 type DescribeUpdateDirectoryPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

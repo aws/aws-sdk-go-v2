@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of TrainingJobSummary objects that describe the training jobs that a
-// hyperparameter tuning job launched.
+// Gets a list of TrainingJobSummary objects that describe the training jobs that
+// a hyperparameter tuning job launched.
 func (c *Client) ListTrainingJobsForHyperParameterTuningJob(ctx context.Context, params *ListTrainingJobsForHyperParameterTuningJobInput, optFns ...func(*Options)) (*ListTrainingJobsForHyperParameterTuningJobOutput, error) {
 	if params == nil {
 		params = &ListTrainingJobsForHyperParameterTuningJobInput{}
@@ -39,17 +39,17 @@ type ListTrainingJobsForHyperParameterTuningJobInput struct {
 	// The maximum number of training jobs to return. The default value is 10.
 	MaxResults *int32
 
-	// If the result of the previous ListTrainingJobsForHyperParameterTuningJob request
-	// was truncated, the response includes a NextToken. To retrieve the next set of
-	// training jobs, use the token in the next request.
+	// If the result of the previous ListTrainingJobsForHyperParameterTuningJob
+	// request was truncated, the response includes a NextToken. To retrieve the next
+	// set of training jobs, use the token in the next request.
 	NextToken *string
 
-	// The field to sort results by. The default is Name. If the value of this field is
-	// FinalObjectiveMetricValue, any training jobs that did not return an objective
-	// metric are not listed.
+	// The field to sort results by. The default is Name. If the value of this field
+	// is FinalObjectiveMetricValue, any training jobs that did not return an
+	// objective metric are not listed.
 	SortBy types.TrainingJobSortByOptions
 
-	// The sort order for results. The default is Ascending.
+	// The sort order for results. The default is Ascending .
 	SortOrder types.SortOrder
 
 	// A filter that returns only training jobs with the specified status.
@@ -60,7 +60,7 @@ type ListTrainingJobsForHyperParameterTuningJobInput struct {
 
 type ListTrainingJobsForHyperParameterTuningJobOutput struct {
 
-	// A list of TrainingJobSummary objects that describe the training jobs that the
+	// A list of TrainingJobSummary  objects that describe the training jobs that the
 	// ListTrainingJobsForHyperParameterTuningJob request returned.
 	//
 	// This member is required.
@@ -140,8 +140,8 @@ func (c *Client) addOperationListTrainingJobsForHyperParameterTuningJobMiddlewar
 	return nil
 }
 
-// ListTrainingJobsForHyperParameterTuningJobAPIClient is a client that implements
-// the ListTrainingJobsForHyperParameterTuningJob operation.
+// ListTrainingJobsForHyperParameterTuningJobAPIClient is a client that
+// implements the ListTrainingJobsForHyperParameterTuningJob operation.
 type ListTrainingJobsForHyperParameterTuningJobAPIClient interface {
 	ListTrainingJobsForHyperParameterTuningJob(context.Context, *ListTrainingJobsForHyperParameterTuningJobInput, ...func(*Options)) (*ListTrainingJobsForHyperParameterTuningJobOutput, error)
 }
@@ -154,8 +154,8 @@ type ListTrainingJobsForHyperParameterTuningJobPaginatorOptions struct {
 	// The maximum number of training jobs to return. The default value is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

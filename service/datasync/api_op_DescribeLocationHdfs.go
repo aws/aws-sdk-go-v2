@@ -53,8 +53,9 @@ type DescribeLocationHdfsOutput struct {
 	// The time that the HDFS location was created.
 	CreationTime *time.Time
 
-	// The Kerberos principal with access to the files and folders on the HDFS cluster.
-	// This parameter is used if the AuthenticationType is defined as KERBEROS.
+	// The Kerberos principal with access to the files and folders on the HDFS
+	// cluster. This parameter is used if the AuthenticationType  is defined as
+	// KERBEROS .
 	KerberosPrincipal *string
 
 	// The URI of the HDFS cluster's Key Management Server (KMS).
@@ -79,7 +80,7 @@ type DescribeLocationHdfsOutput struct {
 	ReplicationFactor *int32
 
 	// The user name used to identify the client on the host operating system. This
-	// parameter is used if the AuthenticationType is defined as SIMPLE.
+	// parameter is used if the AuthenticationType  is defined as SIMPLE .
 	SimpleUser *string
 
 	// Metadata pertaining to the operation's result.

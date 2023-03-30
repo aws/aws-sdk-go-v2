@@ -45,9 +45,8 @@ type CreateAnomalyDetectorInput struct {
 	// The ARN of the KMS key to use to encrypt your data.
 	KmsKeyArn *string
 
-	// A list of tags
-	// (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html) to
-	// apply to the anomaly detector.
+	// A list of tags (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html)
+	// to apply to the anomaly detector.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

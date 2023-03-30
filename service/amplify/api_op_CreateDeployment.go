@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a deployment for a manually deployed Amplify app. Manually deployed apps
-// are not connected to a repository.
+// Creates a deployment for a manually deployed Amplify app. Manually deployed
+// apps are not connected to a repository.
 func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentInput, optFns ...func(*Options)) (*CreateDeploymentOutput, error) {
 	if params == nil {
 		params = &CreateDeploymentInput{}
@@ -40,10 +40,10 @@ type CreateDeploymentInput struct {
 	// This member is required.
 	BranchName *string
 
-	// An optional file map that contains the file name as the key and the file content
-	// md5 hash as the value. If this argument is provided, the service will generate a
-	// unique upload URL per file. Otherwise, the service will only generate a single
-	// upload URL for the zipped files.
+	// An optional file map that contains the file name as the key and the file
+	// content md5 hash as the value. If this argument is provided, the service will
+	// generate a unique upload URL per file. Otherwise, the service will only generate
+	// a single upload URL for the zipped files.
 	FileMap map[string]string
 
 	noSmithyDocumentSerde
@@ -52,14 +52,14 @@ type CreateDeploymentInput struct {
 // The result structure for the create a new deployment request.
 type CreateDeploymentOutput struct {
 
-	// When the fileMap argument is provided in the request, fileUploadUrls will
+	// When the fileMap  argument is provided in the request, fileUploadUrls will
 	// contain a map of file names to upload URLs.
 	//
 	// This member is required.
 	FileUploadUrls map[string]string
 
-	// When the fileMap argument is not provided in the request, this zipUploadUrl is
-	// returned.
+	// When the fileMap  argument is not provided in the request, this zipUploadUrl
+	// is returned.
 	//
 	// This member is required.
 	ZipUploadUrl *string

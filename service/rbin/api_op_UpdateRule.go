@@ -15,8 +15,7 @@ import (
 // Updates an existing Recycle Bin retention rule. You can update a retention
 // rule's description, resource tags, and retention period at any time after
 // creation. You can't update a retention rule's resource type after creation. For
-// more information, see  Update Recycle Bin retention rules
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-update-rule)
+// more information, see Update Recycle Bin retention rules (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-update-rule)
 // in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) UpdateRule(ctx context.Context, params *UpdateRuleInput, optFns ...func(*Options)) (*UpdateRuleOutput, error) {
 	if params == nil {
@@ -43,9 +42,9 @@ type UpdateRuleInput struct {
 	// The retention rule description.
 	Description *string
 
-	// Specifies the resource tags to use to identify resources that are to be retained
-	// by a tag-level retention rule. For tag-level retention rules, only deleted
-	// resources, of the specified resource type, that have one or more of the
+	// Specifies the resource tags to use to identify resources that are to be
+	// retained by a tag-level retention rule. For tag-level retention rules, only
+	// deleted resources, of the specified resource type, that have one or more of the
 	// specified tag key and value pairs are retained. If a resource is deleted, but it
 	// does not have any of the specified tag key and value pairs, it is immediately
 	// deleted without being retained by the retention rule. You can add the same tag
@@ -60,8 +59,8 @@ type UpdateRuleInput struct {
 	// resource type after creation.
 	ResourceType types.ResourceType
 
-	// Information about the retention period for which the retention rule is to retain
-	// resources.
+	// Information about the retention period for which the retention rule is to
+	// retain resources.
 	RetentionPeriod *types.RetentionPeriod
 
 	noSmithyDocumentSerde
@@ -75,34 +74,27 @@ type UpdateRuleOutput struct {
 	// The unique ID of the retention rule.
 	Identifier *string
 
-	// The date and time at which the unlock delay is set to expire. Only returned for
-	// retention rules that have been unlocked and that are still within the unlock
+	// The date and time at which the unlock delay is set to expire. Only returned
+	// for retention rules that have been unlocked and that are still within the unlock
 	// delay period.
 	LockEndTime *time.Time
 
 	// The lock state for the retention rule.
-	// - locked - The retention rule is locked
-	// and can't be modified or deleted.
-	// - pending_unlock - The retention rule has been
-	// unlocked but it is still within the unlock delay period. The retention rule can
-	// be modified or deleted only after the unlock delay period has expired.
-	// -
-	// unlocked - The retention rule is unlocked and it can be modified or deleted by
-	// any user with the required permissions.
-	// - null - The retention rule has never
-	// been locked. Once a retention rule has been locked, it can transition between
-	// the locked and unlocked states only; it can never transition back to null.
+	//     - locked - The retention rule is locked and can't be modified or deleted.
+	//     - pending_unlock - The retention rule has been unlocked but it is still within the unlock delay period. The retention rule can be modified or deleted only after the unlock delay period has expired.
+	//     - unlocked - The retention rule is unlocked and it can be modified or deleted by any user with the required permissions.
+	//     - null - The retention rule has never been locked. Once a retention rule has been locked, it can transition between the locked and unlocked states only; it can never transition back to null .
 	LockState types.LockState
 
-	// Information about the resource tags used to identify resources that are retained
-	// by the retention rule.
+	// Information about the resource tags used to identify resources that are
+	// retained by the retention rule.
 	ResourceTags []types.ResourceTag
 
 	// The resource type retained by the retention rule.
 	ResourceType types.ResourceType
 
-	// Information about the retention period for which the retention rule is to retain
-	// resources.
+	// Information about the retention period for which the retention rule is to
+	// retain resources.
 	RetentionPeriod *types.RetentionPeriod
 
 	// The state of the retention rule. Only retention rules that are in the available

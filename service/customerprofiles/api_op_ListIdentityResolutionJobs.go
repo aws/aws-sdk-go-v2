@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all of the Identity Resolution Jobs in your domain. The response sorts the
-// list by JobStartTime.
+// Lists all of the Identity Resolution Jobs in your domain. The response sorts
+// the list by JobStartTime .
 func (c *Client) ListIdentityResolutionJobs(ctx context.Context, params *ListIdentityResolutionJobsInput, optFns ...func(*Options)) (*ListIdentityResolutionJobsOutput, error) {
 	if params == nil {
 		params = &ListIdentityResolutionJobsInput{}

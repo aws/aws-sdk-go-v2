@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// List the contents of a hub. Hub APIs are only callable through SageMaker Studio.
+// List the contents of a hub. Hub APIs are only callable through SageMaker
+// Studio.
 func (c *Client) ListHubContents(ctx context.Context, params *ListHubContentsInput, optFns ...func(*Options)) (*ListHubContentsOutput, error) {
 	if params == nil {
 		params = &ListHubContentsInput{}
@@ -56,8 +57,8 @@ type ListHubContentsInput struct {
 	NameContains *string
 
 	// If the response to a previous ListHubContents request was truncated, the
-	// response includes a NextToken. To retrieve the next set of hub content, use the
-	// token in the next request.
+	// response includes a NextToken. To retrieve the next set of hub content, use
+	// the token in the next request.
 	NextToken *string
 
 	// Sort hub content versions by either name or creation time.
@@ -76,8 +77,8 @@ type ListHubContentsOutput struct {
 	// This member is required.
 	HubContentSummaries []types.HubContentInfo
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of hub content, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of hub content, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

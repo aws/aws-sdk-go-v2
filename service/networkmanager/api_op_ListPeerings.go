@@ -56,7 +56,7 @@ type ListPeeringsOutput struct {
 	// The token for the next page of results.
 	NextToken *string
 
-	// Lists the transit gateway peerings for the ListPeerings request.
+	// Lists the transit gateway peerings for the ListPeerings  request.
 	Peerings []types.Peering
 
 	// Metadata pertaining to the operation's result.
@@ -137,8 +137,8 @@ type ListPeeringsPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

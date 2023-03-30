@@ -48,8 +48,9 @@ type ListDataSourcesInput struct {
 
 type ListDataSourcesOutput struct {
 
-	// If the response is truncated, Amazon Kendra returns this token that you can use
-	// in the subsequent request to retrieve the next set of data source connectors.
+	// If the response is truncated, Amazon Kendra returns this token that you can
+	// use in the subsequent request to retrieve the next set of data source
+	// connectors.
 	NextToken *string
 
 	// An array of summary information for one or more data source connector.
@@ -137,8 +138,8 @@ type ListDataSourcesPaginatorOptions struct {
 	// The maximum number of data source connectors to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

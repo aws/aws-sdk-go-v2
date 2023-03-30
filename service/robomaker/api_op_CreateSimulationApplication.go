@@ -55,8 +55,8 @@ type CreateSimulationApplicationInput struct {
 	// The sources of the simulation application.
 	Sources []types.SourceConfig
 
-	// A map that contains tag keys and tag values that are attached to the simulation
-	// application.
+	// A map that contains tag keys and tag values that are attached to the
+	// simulation application.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

@@ -10,9 +10,9 @@ const (
 	AnalysisTypeCodeQuality AnalysisType = "CodeQuality"
 )
 
-// Values returns all known values for AnalysisType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AnalysisType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AnalysisType) Values() []AnalysisType {
 	return []AnalysisType{
 		"Security",
@@ -68,9 +68,9 @@ const (
 	JobStateDeleting  JobState = "Deleting"
 )
 
-// Values returns all known values for JobState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobState) Values() []JobState {
 	return []JobState{
 		"Completed",
@@ -91,9 +91,9 @@ const (
 	ProviderTypeS3Bucket               ProviderType = "S3Bucket"
 )
 
-// Values returns all known values for ProviderType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ProviderType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ProviderType) Values() []ProviderType {
 	return []ProviderType{
 		"CodeCommit",
@@ -112,9 +112,9 @@ const (
 	ReactionThumbsDown Reaction = "ThumbsDown"
 )
 
-// Values returns all known values for Reaction. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Reaction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Reaction) Values() []Reaction {
 	return []Reaction{
 		"ThumbsUp",
@@ -193,9 +193,9 @@ const (
 	SeverityCritical Severity = "Critical"
 )
 
-// Values returns all known values for Severity. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Severity. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Severity) Values() []Severity {
 	return []Severity{
 		"Info",
@@ -214,8 +214,8 @@ const (
 	TypeRepositoryAnalysis Type = "RepositoryAnalysis"
 )
 
-// Values returns all known values for Type. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Type. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{

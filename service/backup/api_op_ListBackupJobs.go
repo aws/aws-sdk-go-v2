@@ -13,9 +13,9 @@ import (
 	"time"
 )
 
-// Returns a list of existing backup jobs for an authenticated account for the last
-// 30 days. For a longer period of time, consider using these monitoring tools
-// (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html).
+// Returns a list of existing backup jobs for an authenticated account for the
+// last 30 days. For a longer period of time, consider using these monitoring
+// tools (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html) .
 func (c *Client) ListBackupJobs(ctx context.Context, params *ListBackupJobsInput, optFns ...func(*Options)) (*ListBackupJobsOutput, error) {
 	if params == nil {
 		params = &ListBackupJobsInput{}
@@ -35,7 +35,7 @@ type ListBackupJobsInput struct {
 
 	// The account ID to list the jobs from. Returns only backup jobs associated with
 	// the specified account ID. If used from an Organizations management account,
-	// passing * returns all jobs across the organization.
+	// passing *  returns all jobs across the organization.
 	ByAccountId *string
 
 	// Returns only backup jobs that will be stored in the specified backup vault.
@@ -61,29 +61,23 @@ type ListBackupJobsInput struct {
 	// This is a filter to list child (nested) jobs based on parent job ID.
 	ByParentJobId *string
 
-	// Returns only backup jobs that match the specified resource Amazon Resource Name
-	// (ARN).
+	// Returns only backup jobs that match the specified resource Amazon Resource
+	// Name (ARN).
 	ByResourceArn *string
 
 	// Returns only backup jobs for the specified resources:
-	// - Aurora for Amazon
-	// Aurora
-	// - DocumentDB for Amazon DocumentDB (with MongoDB compatibility)
-	// -
-	// DynamoDB for Amazon DynamoDB
-	// - EBS for Amazon Elastic Block Store
-	// - EC2 for
-	// Amazon Elastic Compute Cloud
-	// - EFS for Amazon Elastic File System
-	// - FSx for
-	// Amazon FSx
-	// - Neptune for Amazon Neptune
-	// - RDS for Amazon Relational Database
-	// Service
-	// - Storage Gateway for Storage Gateway
-	// - S3 for Amazon S3
-	// -
-	// VirtualMachine for virtual machines
+	//     - Aurora for Amazon Aurora
+	//     - DocumentDB for Amazon DocumentDB (with MongoDB compatibility)
+	//     - DynamoDB for Amazon DynamoDB
+	//     - EBS for Amazon Elastic Block Store
+	//     - EC2 for Amazon Elastic Compute Cloud
+	//     - EFS for Amazon Elastic File System
+	//     - FSx for Amazon FSx
+	//     - Neptune for Amazon Neptune
+	//     - RDS for Amazon Relational Database Service
+	//     - Storage Gateway for Storage Gateway
+	//     - S3 for Amazon S3
+	//     - VirtualMachine for virtual machines
 	ByResourceType *string
 
 	// Returns only backup jobs that are in the specified state.
@@ -93,7 +87,7 @@ type ListBackupJobsInput struct {
 	MaxResults *int32
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return maxResults  number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -108,7 +102,7 @@ type ListBackupJobsOutput struct {
 	BackupJobs []types.BackupJob
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return maxResults  number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -192,8 +186,8 @@ type ListBackupJobsPaginatorOptions struct {
 	// The maximum number of items to be returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

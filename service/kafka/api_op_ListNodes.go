@@ -39,8 +39,8 @@ type ListNodesInput struct {
 	// results, the response includes a NextToken parameter.
 	MaxResults int32
 
-	// The paginated results marker. When the result of the operation is truncated, the
-	// call returns NextToken in the response. To get the next batch, provide this
+	// The paginated results marker. When the result of the operation is truncated,
+	// the call returns NextToken in the response. To get the next batch, provide this
 	// token in your next request.
 	NextToken *string
 
@@ -139,8 +139,8 @@ type ListNodesPaginatorOptions struct {
 	// results, the response includes a NextToken parameter.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

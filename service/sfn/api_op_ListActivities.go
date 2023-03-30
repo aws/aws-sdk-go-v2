@@ -12,13 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the existing activities. If nextToken is returned, there are more results
-// available. The value of nextToken is a unique pagination token for each page.
-// Make the call again using the returned token to retrieve the next page. Keep all
-// other arguments unchanged. Each pagination token expires after 24 hours. Using
-// an expired pagination token will return an HTTP 400 InvalidToken error. This
-// operation is eventually consistent. The results are best effort and may not
-// reflect very recent updates and changes.
+// Lists the existing activities. If nextToken is returned, there are more
+// results available. The value of nextToken is a unique pagination token for
+// each page. Make the call again using the returned token to retrieve the next
+// page. Keep all other arguments unchanged. Each pagination token expires after 24
+// hours. Using an expired pagination token will return an HTTP 400 InvalidToken
+// error. This operation is eventually consistent. The results are best effort and
+// may not reflect very recent updates and changes.
 func (c *Client) ListActivities(ctx context.Context, params *ListActivitiesInput, optFns ...func(*Options)) (*ListActivitiesOutput, error) {
 	if params == nil {
 		params = &ListActivitiesInput{}
@@ -43,8 +43,8 @@ type ListActivitiesInput struct {
 	// maximum.
 	MaxResults int32
 
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// If nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 24 hours. Using an expired
 	// pagination token will return an HTTP 400 InvalidToken error.
@@ -60,8 +60,8 @@ type ListActivitiesOutput struct {
 	// This member is required.
 	Activities []types.ActivityListItem
 
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// If nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 24 hours. Using an expired
 	// pagination token will return an HTTP 400 InvalidToken error.
@@ -150,8 +150,8 @@ type ListActivitiesPaginatorOptions struct {
 	// maximum.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

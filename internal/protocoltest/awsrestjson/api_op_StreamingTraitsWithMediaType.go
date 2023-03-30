@@ -10,8 +10,8 @@ import (
 	"io"
 )
 
-// This examples serializes a streaming media-typed blob shape in the request body.
-// This examples uses a @mediaType trait on the payload to force a custom
+// This examples serializes a streaming media-typed blob shape in the request
+// body. This examples uses a @mediaType trait on the payload to force a custom
 // content-type to be serialized.
 func (c *Client) StreamingTraitsWithMediaType(ctx context.Context, params *StreamingTraitsWithMediaTypeInput, optFns ...func(*Options)) (*StreamingTraitsWithMediaTypeOutput, error) {
 	if params == nil {

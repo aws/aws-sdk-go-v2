@@ -14,11 +14,8 @@ import (
 // Deletes the S3 bucket. All objects (including all object versions and delete
 // markers) in the bucket must be deleted before the bucket itself can be deleted.
 // Related Resources
-// - CreateBucket
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
-// -
-// DeleteObject
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
+//   - CreateBucket (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
+//   - DeleteObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
 func (c *Client) DeleteBucket(ctx context.Context, params *DeleteBucketInput, optFns ...func(*Options)) (*DeleteBucketOutput, error) {
 	if params == nil {
 		params = &DeleteBucketInput{}
@@ -166,8 +163,8 @@ func addDeleteBucketUpdateEndpoint(stack *middleware.Stack, options Options) err
 	})
 }
 
-// PresignDeleteBucket is used to generate a presigned HTTP Request which contains
-// presigned URL, signed headers and HTTP method used.
+// PresignDeleteBucket is used to generate a presigned HTTP Request which
+// contains presigned URL, signed headers and HTTP method used.
 func (c *PresignClient) PresignDeleteBucket(ctx context.Context, params *DeleteBucketInput, optFns ...func(*PresignOptions)) (*v4.PresignedHTTPRequest, error) {
 	if params == nil {
 		params = &DeleteBucketInput{}

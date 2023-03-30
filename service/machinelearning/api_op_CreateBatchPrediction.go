@@ -12,15 +12,15 @@ import (
 
 // Generates predictions for a group of observations. The observations to process
 // exist in one or more data files referenced by a DataSource. This operation
-// creates a new BatchPrediction, and uses an MLModel and the data files referenced
-// by the DataSource as information sources. CreateBatchPrediction is an
-// asynchronous operation. In response to CreateBatchPrediction, Amazon Machine
-// Learning (Amazon ML) immediately returns and sets the BatchPrediction status to
-// PENDING. After the BatchPrediction completes, Amazon ML sets the status to
-// COMPLETED. You can poll for status updates by using the GetBatchPrediction
-// operation and checking the Status parameter of the result. After the COMPLETED
-// status appears, the results are available in the location specified by the
-// OutputUri parameter.
+// creates a new BatchPrediction , and uses an MLModel and the data files
+// referenced by the DataSource  as information sources. CreateBatchPrediction is
+// an asynchronous operation. In response to CreateBatchPrediction, Amazon
+// Machine Learning (Amazon ML) immediately returns and sets the BatchPrediction
+// status to PENDING . After the BatchPrediction completes, Amazon ML sets the
+// status to COMPLETED . You can poll for status updates by using the
+// GetBatchPrediction operation and checking the Status parameter of the result.
+// After the COMPLETED status appears, the results are available in the location
+// specified by the OutputUri  parameter.
 func (c *Client) CreateBatchPrediction(ctx context.Context, params *CreateBatchPredictionInput, optFns ...func(*Options)) (*CreateBatchPredictionOutput, error) {
 	if params == nil {
 		params = &CreateBatchPredictionInput{}
@@ -38,12 +38,12 @@ func (c *Client) CreateBatchPrediction(ctx context.Context, params *CreateBatchP
 
 type CreateBatchPredictionInput struct {
 
-	// The ID of the DataSource that points to the group of observations to predict.
+	// The ID of the DataSource  that points to the group of observations to predict.
 	//
 	// This member is required.
 	BatchPredictionDataSourceId *string
 
-	// A user-supplied ID that uniquely identifies the BatchPrediction.
+	// A user-supplied ID that uniquely identifies the BatchPrediction .
 	//
 	// This member is required.
 	BatchPredictionId *string
@@ -54,18 +54,19 @@ type CreateBatchPredictionInput struct {
 	// This member is required.
 	MLModelId *string
 
-	// The location of an Amazon Simple Storage Service (Amazon S3) bucket or directory
-	// to store the batch prediction results. The following substrings are not allowed
-	// in the s3 key portion of the outputURI field: ':', '//', '/./', '/../'. Amazon
-	// ML needs permissions to store and retrieve the logs on your behalf. For
-	// information about how to set permissions, see the Amazon Machine Learning
-	// Developer Guide (https://docs.aws.amazon.com/machine-learning/latest/dg).
+	// The location of an Amazon Simple Storage Service (Amazon S3) bucket or
+	// directory to store the batch prediction results. The following substrings are
+	// not allowed in the s3 key  portion of the outputURI field: ':', '//', '/./',
+	// '/../'. Amazon ML needs permissions to store and retrieve the logs on your
+	// behalf. For information about how to set permissions, see the Amazon Machine
+	// Learning Developer Guide (https://docs.aws.amazon.com/machine-learning/latest/dg)
+	// .
 	//
 	// This member is required.
 	OutputUri *string
 
-	// A user-supplied name or description of the BatchPrediction. BatchPredictionName
-	// can only use the UTF-8 character set.
+	// A user-supplied name or description of the BatchPrediction .
+	// BatchPredictionName can only use the UTF-8 character set.
 	BatchPredictionName *string
 
 	noSmithyDocumentSerde
@@ -74,11 +75,11 @@ type CreateBatchPredictionInput struct {
 // Represents the output of a CreateBatchPrediction operation, and is an
 // acknowledgement that Amazon ML received the request. The CreateBatchPrediction
 // operation is asynchronous. You can poll for status updates by using the
-// >GetBatchPrediction operation and checking the Status parameter of the result.
+// >GetBatchPrediction operation and checking the Status  parameter of the result.
 type CreateBatchPredictionOutput struct {
 
 	// A user-supplied ID that uniquely identifies the BatchPrediction. This value is
-	// identical to the value of the BatchPredictionId in the request.
+	// identical to the value of the BatchPredictionId  in the request.
 	BatchPredictionId *string
 
 	// Metadata pertaining to the operation's result.

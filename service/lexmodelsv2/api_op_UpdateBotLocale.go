@@ -36,14 +36,14 @@ type UpdateBotLocaleInput struct {
 	BotId *string
 
 	// The version of the bot that contains the locale to be updated. The version can
-	// only be the DRAFT version.
+	// only be the DRAFT  version.
 	//
 	// This member is required.
 	BotVersion *string
 
 	// The identifier of the language and locale to update. The string must match one
-	// of the supported locales. For more information, see Supported languages
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// of the supported locales. For more information, see Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// .
 	//
 	// This member is required.
 	LocaleId *string
@@ -58,8 +58,8 @@ type UpdateBotLocaleInput struct {
 	// The new description of the locale.
 	Description *string
 
-	// The new Amazon Polly voice Amazon Lex should use for voice interaction with the
-	// user.
+	// The new Amazon Polly voice Amazon Lex should use for voice interaction with
+	// the user.
 	VoiceSettings *types.VoiceSettings
 
 	noSmithyDocumentSerde
@@ -83,8 +83,8 @@ type UpdateBotLocaleOutput struct {
 	// The updated description of the locale.
 	Description *string
 
-	// If the botLocaleStatus is Failed, the failureReasons field lists the errors that
-	// occurred while building the bot.
+	// If the botLocaleStatus  is Failed , the failureReasons field lists the errors
+	// that occurred while building the bot.
 	FailureReasons []string
 
 	// A timestamp of the date and time that the locale was last updated.
@@ -96,12 +96,12 @@ type UpdateBotLocaleOutput struct {
 	// The updated locale name for the locale.
 	LocaleName *string
 
-	// The updated confidence threshold for inserting the AMAZON.FallbackIntent and
-	// AMAZON.KendraSearchIntent intents in the list of possible intents for an
+	// The updated confidence threshold for inserting the AMAZON.FallbackIntent  and
+	// AMAZON.KendraSearchIntentintents in the list of possible intents for an
 	// utterance.
 	NluIntentConfidenceThreshold *float64
 
-	// Recommended actions to take to resolve an error in the failureReasons field.
+	// Recommended actions to take to resolve an error in the failureReasons  field.
 	RecommendedActions []string
 
 	// The updated Amazon Polly voice to use for voice interaction with the user.

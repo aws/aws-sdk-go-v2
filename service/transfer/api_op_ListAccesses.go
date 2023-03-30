@@ -38,9 +38,9 @@ type ListAccessesInput struct {
 	// Specifies the maximum number of access SIDs to return.
 	MaxResults *int32
 
-	// When you can get additional results from the ListAccesses call, a NextToken
+	// When you can get additional results from the ListAccesses  call, a NextToken
 	// parameter is returned in the output. You can then pass in a subsequent command
-	// to the NextToken parameter to continue listing additional accesses.
+	// to the NextToken  parameter to continue listing additional accesses.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -59,9 +59,9 @@ type ListAccessesOutput struct {
 	// This member is required.
 	ServerId *string
 
-	// When you can get additional results from the ListAccesses call, a NextToken
+	// When you can get additional results from the ListAccesses  call, a NextToken
 	// parameter is returned in the output. You can then pass in a subsequent command
-	// to the NextToken parameter to continue listing additional accesses.
+	// to the NextToken  parameter to continue listing additional accesses.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -145,8 +145,8 @@ type ListAccessesPaginatorOptions struct {
 	// Specifies the maximum number of access SIDs to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

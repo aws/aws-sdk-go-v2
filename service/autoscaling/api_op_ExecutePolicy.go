@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Executes the specified policy. This can be useful for testing the design of your
-// scaling policy.
+// Executes the specified policy. This can be useful for testing the design of
+// your scaling policy.
 func (c *Client) ExecutePolicy(ctx context.Context, params *ExecutePolicyInput, optFns ...func(*Options)) (*ExecutePolicyOutput, error) {
 	if params == nil {
 		params = &ExecutePolicyInput{}
@@ -43,9 +43,9 @@ type ExecutePolicyInput struct {
 
 	// Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to
 	// complete before executing the policy. Valid only if the policy type is
-	// SimpleScaling. For more information, see Scaling cooldowns for Amazon EC2 Auto
-	// Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html) in
-	// the Amazon EC2 Auto Scaling User Guide.
+	// SimpleScaling . For more information, see Scaling cooldowns for Amazon EC2
+	// Auto Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	HonorCooldown *bool
 
 	// The metric value to compare to BreachThreshold. This enables you to execute a
@@ -54,7 +54,7 @@ type ExecutePolicyInput struct {
 	// with a lower bound of 0 and an upper bound of 10, you can set the metric value
 	// to 59. If you specify a metric value that doesn't correspond to a step
 	// adjustment for the policy, the call returns an error. Required if the policy
-	// type is StepScaling and not supported otherwise.
+	// type is StepScaling  and not supported otherwise.
 	MetricValue *float64
 
 	noSmithyDocumentSerde

@@ -11,29 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates an embed URL that you can use to embed an Amazon QuickSight dashboard
-// or visual in your website, without having to register any reader users. Before
-// you use this action, make sure that you have configured the dashboards and
-// permissions. The following rules apply to the generated URL:
-// - It contains a
-// temporary bearer token. It is valid for 5 minutes after it is generated. Once
-// redeemed within this period, it cannot be re-used again.
-// - The URL validity
-// period should not be confused with the actual session lifetime that can be
-// customized using the SessionLifetimeInMinutes
-// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForAnonymousUser.html#QS-GenerateEmbedUrlForAnonymousUser-request-SessionLifetimeInMinutes)
-// parameter. The resulting user session is valid for 15 minutes (minimum) to 10
-// hours (maximum). The default session duration is 10 hours.
-// - You are charged
-// only when the URL is used or there is interaction with Amazon QuickSight.
+// Generates an embed URL that you can use to embed an Amazon QuickSight
+// dashboard or visual in your website, without having to register any reader
+// users. Before you use this action, make sure that you have configured the
+// dashboards and permissions. The following rules apply to the generated URL:
+//   - It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.
+//   - The URL validity period should not be confused with the actual session lifetime that can be customized using the SessionLifetimeInMinutes (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForAnonymousUser.html#QS-GenerateEmbedUrlForAnonymousUser-request-SessionLifetimeInMinutes) parameter. The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours.
+//   - You are charged only when the URL is used or there is interaction with Amazon QuickSight.
 //
-// For
-// more information, see Embedded Analytics
-// (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html) in
-// the Amazon QuickSight User Guide. For more information about the high-level
+// For more information, see Embedded Analytics (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html)
+// in the Amazon QuickSight User Guide. For more information about the high-level
 // steps for embedding and for an interactive demo of the ways you can customize
-// embedding, visit the Amazon QuickSight Developer Portal
-// (https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html).
+// embedding, visit the Amazon QuickSight Developer Portal (https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html)
+// .
 func (c *Client) GenerateEmbedUrlForAnonymousUser(ctx context.Context, params *GenerateEmbedUrlForAnonymousUserInput, optFns ...func(*Options)) (*GenerateEmbedUrlForAnonymousUserOutput, error) {
 	if params == nil {
 		params = &GenerateEmbedUrlForAnonymousUserInput{}
@@ -53,7 +43,7 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 
 	// The Amazon Resource Names (ARNs) for the Amazon QuickSight resources that the
 	// user is authorized to access during the lifetime of the session. If you choose
-	// Dashboard embedding experience, pass the list of dashboard ARNs in the account
+	// Dashboardembedding experience, pass the list of dashboard ARNs in the account
 	// that you want the user to be able to view. Currently, you can pass up to 25
 	// dashboard ARNs in each API call.
 	//
@@ -71,8 +61,9 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 	// This member is required.
 	ExperienceConfiguration *types.AnonymousUserEmbeddingExperienceConfiguration
 
-	// The Amazon QuickSight namespace that the anonymous user virtually belongs to. If
-	// you are not using an Amazon QuickSight custom namespace, set this to default.
+	// The Amazon QuickSight namespace that the anonymous user virtually belongs to.
+	// If you are not using an Amazon QuickSight custom namespace, set this to default
+	// .
 	//
 	// This member is required.
 	Namespace *string
@@ -82,22 +73,22 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 	// that are configured in the Manage QuickSight menu in the Amazon QuickSight
 	// console. Instead, it allows only the domains that you include in this parameter.
 	// You can list up to three domains or subdomains in each API call. To include all
-	// subdomains under a specific domain to the allow list, use *. For example,
-	// https://*.sapp.amazon.com includes all subdomains under https://sapp.amazon.com.
+	// subdomains under a specific domain to the allow list, use * . For example,
+	// https://*.sapp.amazon.com includes all subdomains under https://sapp.amazon.com
+	// .
 	AllowedDomains []string
 
-	// How many minutes the session is valid. The session lifetime must be in [15-600]
-	// minutes range.
+	// How many minutes the session is valid. The session lifetime must be in
+	// [15-600] minutes range.
 	SessionLifetimeInMinutes *int64
 
 	// The session tags used for row-level security. Before you use this parameter,
 	// make sure that you have configured the relevant datasets using the
-	// DataSet$RowLevelPermissionTagConfiguration parameter so that session tags can be
-	// used to provide row-level security. These are not the tags used for the Amazon
-	// Web Services resource tagging feature. For more information, see Using Row-Level
-	// Security (RLS) with Tags
-	// (https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html)in
-	// the Amazon QuickSight User Guide.
+	// DataSet$RowLevelPermissionTagConfigurationparameter so that session tags can
+	// be used to provide row-level security. These are not the tags used for the
+	// Amazon Web Services resource tagging feature. For more information, see Using
+	// Row-Level Security (RLS) with Tags (https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html)
+	// in the Amazon QuickSight User Guide.
 	SessionTags []types.SessionTag
 
 	noSmithyDocumentSerde

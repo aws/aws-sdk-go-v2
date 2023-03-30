@@ -35,8 +35,8 @@ type DescribeReservedElasticsearchInstancesInput struct {
 	// defaults to 100.
 	MaxResults int32
 
-	// NextToken should be sent in case if earlier API call produced result containing
-	// NextToken. It is used for pagination.
+	// NextToken should be sent in case if earlier API call produced result
+	// containing NextToken. It is used for pagination.
 	NextToken *string
 
 	// The reserved instance identifier filter value. Use this parameter to show only
@@ -121,23 +121,23 @@ func (c *Client) addOperationDescribeReservedElasticsearchInstancesMiddlewares(s
 	return nil
 }
 
-// DescribeReservedElasticsearchInstancesAPIClient is a client that implements the
-// DescribeReservedElasticsearchInstances operation.
+// DescribeReservedElasticsearchInstancesAPIClient is a client that implements
+// the DescribeReservedElasticsearchInstances operation.
 type DescribeReservedElasticsearchInstancesAPIClient interface {
 	DescribeReservedElasticsearchInstances(context.Context, *DescribeReservedElasticsearchInstancesInput, ...func(*Options)) (*DescribeReservedElasticsearchInstancesOutput, error)
 }
 
 var _ DescribeReservedElasticsearchInstancesAPIClient = (*Client)(nil)
 
-// DescribeReservedElasticsearchInstancesPaginatorOptions is the paginator options
-// for DescribeReservedElasticsearchInstances
+// DescribeReservedElasticsearchInstancesPaginatorOptions is the paginator
+// options for DescribeReservedElasticsearchInstances
 type DescribeReservedElasticsearchInstancesPaginatorOptions struct {
 	// Set this value to limit the number of results returned. If not specified,
 	// defaults to 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -35,7 +35,8 @@ type PutDedicatedIpWarmupAttributesInput struct {
 	// This member is required.
 	Ip *string
 
-	// The warm-up percentage that you want to associate with the dedicated IP address.
+	// The warm-up percentage that you want to associate with the dedicated IP
+	// address.
 	//
 	// This member is required.
 	WarmupPercentage *int32
@@ -43,8 +44,8 @@ type PutDedicatedIpWarmupAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type PutDedicatedIpWarmupAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -31,8 +31,8 @@ func (c *Client) UpdateDistribution(ctx context.Context, params *UpdateDistribut
 
 type UpdateDistributionInput struct {
 
-	// The name of the distribution to update. Use the GetDistributions action to get a
-	// list of distribution names that you can specify.
+	// The name of the distribution to update. Use the GetDistributions action to get
+	// a list of distribution names that you can specify.
 	//
 	// This member is required.
 	DistributionName *string

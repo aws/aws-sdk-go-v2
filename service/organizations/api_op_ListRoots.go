@@ -13,17 +13,17 @@ import (
 )
 
 // Lists the roots that are defined in the current organization. Always check the
-// NextToken response parameter for a null value when calling a List* operation.
+// NextToken response parameter for a null  value when calling a List* operation.
 // These operations can occasionally return an empty set of results even when there
-// are more results available. The NextToken response parameter value is null only
-// when there are no more results to display. This operation can be called only
-// from the organization's management account or by a member account that is a
+// are more results available. The NextToken  response parameter value is null
+// only when there are no more results to display. This operation can be called
+// only from the organization's management account or by a member account that is a
 // delegated administrator for an Amazon Web Services service. Policy types can be
 // enabled and disabled in roots. This is distinct from whether they're available
 // in the organization. When you enable all features, you make policy types
 // available for use in that organization. Individual policy types can then be
 // enabled and disabled in a root. To see the availability of a policy type in an
-// organization, use DescribeOrganization.
+// organization, use DescribeOrganization .
 func (c *Client) ListRoots(ctx context.Context, params *ListRootsInput, optFns ...func(*Options)) (*ListRootsOutput, error) {
 	if params == nil {
 		params = &ListRootsInput{}
@@ -41,21 +41,21 @@ func (c *Client) ListRoots(ctx context.Context, params *ListRootsInput, optFns .
 
 type ListRootsInput struct {
 
-	// The total number of results that you want included on each page of the response.
-	// If you do not include this parameter, it defaults to a value that is specific to
-	// the operation. If additional items exist beyond the maximum you specify, the
-	// NextToken response element is present and has a value (is not null). Include
-	// that value as the NextToken request parameter in the next call to the operation
-	// to get the next part of the results. Note that Organizations might return fewer
-	// results than the maximum even when there are more results available. You should
-	// check NextToken after every operation to ensure that you receive all of the
-	// results.
+	// The total number of results that you want included on each page of the
+	// response. If you do not include this parameter, it defaults to a value that is
+	// specific to the operation. If additional items exist beyond the maximum you
+	// specify, the NextToken response element is present and has a value (is not
+	// null). Include that value as the NextToken request parameter in the next call
+	// to the operation to get the next part of the results. Note that Organizations
+	// might return fewer results than the maximum even when there are more results
+	// available. You should check NextToken after every operation to ensure that you
+	// receive all of the results.
 	MaxResults *int32
 
 	// The parameter for receiving additional results if you receive a NextToken
-	// response in a previous request. A NextToken response indicates that more output
-	// is available. Set this parameter to the value of the previous call's NextToken
-	// response to indicate where the output should continue from.
+	// response in a previous request. A NextToken response indicates that more
+	// output is available. Set this parameter to the value of the previous call's
+	// NextToken response to indicate where the output should continue from.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -66,7 +66,7 @@ type ListRootsOutput struct {
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken response element comes back as null.
+	// repeat this until the NextToken  response element comes back as null .
 	NextToken *string
 
 	// A list of roots that are defined in an organization.
@@ -147,19 +147,19 @@ var _ ListRootsAPIClient = (*Client)(nil)
 
 // ListRootsPaginatorOptions is the paginator options for ListRoots
 type ListRootsPaginatorOptions struct {
-	// The total number of results that you want included on each page of the response.
-	// If you do not include this parameter, it defaults to a value that is specific to
-	// the operation. If additional items exist beyond the maximum you specify, the
-	// NextToken response element is present and has a value (is not null). Include
-	// that value as the NextToken request parameter in the next call to the operation
-	// to get the next part of the results. Note that Organizations might return fewer
-	// results than the maximum even when there are more results available. You should
-	// check NextToken after every operation to ensure that you receive all of the
-	// results.
+	// The total number of results that you want included on each page of the
+	// response. If you do not include this parameter, it defaults to a value that is
+	// specific to the operation. If additional items exist beyond the maximum you
+	// specify, the NextToken response element is present and has a value (is not
+	// null). Include that value as the NextToken request parameter in the next call
+	// to the operation to get the next part of the results. Note that Organizations
+	// might return fewer results than the maximum even when there are more results
+	// available. You should check NextToken after every operation to ensure that you
+	// receive all of the results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

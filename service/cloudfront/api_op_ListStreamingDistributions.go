@@ -31,10 +31,10 @@ func (c *Client) ListStreamingDistributions(ctx context.Context, params *ListStr
 // The request to list your streaming distributions.
 type ListStreamingDistributionsInput struct {
 
-	// The value that you provided for the Marker request parameter.
+	// The value that you provided for the Marker  request parameter.
 	Marker *string
 
-	// The value that you provided for the MaxItems request parameter.
+	// The value that you provided for the MaxItems  request parameter.
 	MaxItems *int32
 
 	noSmithyDocumentSerde
@@ -43,7 +43,7 @@ type ListStreamingDistributionsInput struct {
 // The returned result of the corresponding request.
 type ListStreamingDistributionsOutput struct {
 
-	// The StreamingDistributionList type.
+	// The StreamingDistributionList  type.
 	StreamingDistributionList *types.StreamingDistributionList
 
 	// Metadata pertaining to the operation's result.
@@ -123,11 +123,11 @@ var _ ListStreamingDistributionsAPIClient = (*Client)(nil)
 // ListStreamingDistributionsPaginatorOptions is the paginator options for
 // ListStreamingDistributions
 type ListStreamingDistributionsPaginatorOptions struct {
-	// The value that you provided for the MaxItems request parameter.
+	// The value that you provided for the MaxItems  request parameter.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

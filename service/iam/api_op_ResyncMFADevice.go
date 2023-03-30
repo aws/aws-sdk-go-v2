@@ -10,11 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Synchronizes the specified MFA device with its IAM resource object on the Amazon
-// Web Services servers. For more information about creating and working with
-// virtual MFA devices, see Using a virtual MFA device
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html) in the
-// IAM User Guide.
+// Synchronizes the specified MFA device with its IAM resource object on the
+// Amazon Web Services servers. For more information about creating and working
+// with virtual MFA devices, see Using a virtual MFA device (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html)
+// in the IAM User Guide.
 func (c *Client) ResyncMFADevice(ctx context.Context, params *ResyncMFADeviceInput, optFns ...func(*Options)) (*ResyncMFADeviceOutput, error) {
 	if params == nil {
 		params = &ResyncMFADeviceInput{}
@@ -32,8 +31,8 @@ func (c *Client) ResyncMFADevice(ctx context.Context, params *ResyncMFADeviceInp
 
 type ResyncMFADeviceInput struct {
 
-	// An authentication code emitted by the device. The format for this parameter is a
-	// sequence of six digits.
+	// An authentication code emitted by the device. The format for this parameter is
+	// a sequence of six digits.
 	//
 	// This member is required.
 	AuthenticationCode1 *string
@@ -52,10 +51,10 @@ type ResyncMFADeviceInput struct {
 	// This member is required.
 	SerialNumber *string
 
-	// The name of the user whose MFA device you want to resynchronize. This parameter
-	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters consisting of upper and lowercase alphanumeric characters with no
-	// spaces. You can also include any of the following characters: _+=,.@-
+	// The name of the user whose MFA device you want to resynchronize. This
+	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
+	// a string of characters consisting of upper and lowercase alphanumeric characters
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.
 	UserName *string

@@ -31,14 +31,14 @@ func (c *Client) DescribePullRequestEvents(ctx context.Context, params *Describe
 type DescribePullRequestEventsInput struct {
 
 	// The system-generated ID of the pull request. To get this ID, use
-	// ListPullRequests.
+	// ListPullRequests .
 	//
 	// This member is required.
 	PullRequestId *string
 
-	// The Amazon Resource Name (ARN) of the user whose actions resulted in the event.
-	// Examples include updating the pull request with more commits or changing the
-	// status of a pull request.
+	// The Amazon Resource Name (ARN) of the user whose actions resulted in the
+	// event. Examples include updating the pull request with more commits or changing
+	// the status of a pull request.
 	ActorArn *string
 
 	// A non-zero, non-negative integer used to limit the number of returned results.
@@ -46,8 +46,8 @@ type DescribePullRequestEventsInput struct {
 	// be returned in a result.
 	MaxResults *int32
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
+	// An enumeration token that, when provided in a request, returns the next batch
+	// of the results.
 	NextToken *string
 
 	// Optional. The pull request event type about which you want to return
@@ -153,8 +153,8 @@ type DescribePullRequestEventsPaginatorOptions struct {
 	// be returned in a result.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

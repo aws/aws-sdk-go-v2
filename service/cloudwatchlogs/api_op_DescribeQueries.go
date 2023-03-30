@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of CloudWatch Logs Insights queries that are scheduled, running,
-// or have been run recently in this account. You can request all queries or limit
-// it to queries of a specific log group or queries with a certain status.
+// Returns a list of CloudWatch Logs Insights queries that are scheduled,
+// running, or have been run recently in this account. You can request all queries
+// or limit it to queries of a specific log group or queries with a certain status.
 func (c *Client) DescribeQueries(ctx context.Context, params *DescribeQueriesInput, optFns ...func(*Options)) (*DescribeQueriesOutput, error) {
 	if params == nil {
 		params = &DescribeQueriesInput{}
@@ -37,11 +37,12 @@ type DescribeQueriesInput struct {
 	// Limits the number of returned queries to the specified number.
 	MaxResults *int32
 
-	// The token for the next set of items to return. The token expires after 24 hours.
+	// The token for the next set of items to return. The token expires after 24
+	// hours.
 	NextToken *string
 
-	// Limits the returned queries to only those that have the specified status. Valid
-	// values are Cancelled, Complete, Failed, Running, and Scheduled.
+	// Limits the returned queries to only those that have the specified status.
+	// Valid values are Cancelled , Complete , Failed , Running , and Scheduled .
 	Status types.QueryStatus
 
 	noSmithyDocumentSerde
@@ -49,7 +50,8 @@ type DescribeQueriesInput struct {
 
 type DescribeQueriesOutput struct {
 
-	// The token for the next set of items to return. The token expires after 24 hours.
+	// The token for the next set of items to return. The token expires after 24
+	// hours.
 	NextToken *string
 
 	// The list of queries that match the request.

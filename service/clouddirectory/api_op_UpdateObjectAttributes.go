@@ -35,7 +35,7 @@ type UpdateObjectAttributesInput struct {
 	AttributeUpdates []types.ObjectAttributeUpdate
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where the
-	// object resides. For more information, see arns.
+	// object resides. For more information, see arns .
 	//
 	// This member is required.
 	DirectoryArn *string
@@ -50,7 +50,7 @@ type UpdateObjectAttributesInput struct {
 
 type UpdateObjectAttributesOutput struct {
 
-	// The ObjectIdentifier of the updated object.
+	// The ObjectIdentifier  of the updated object.
 	ObjectIdentifier *string
 
 	// Metadata pertaining to the operation's result.

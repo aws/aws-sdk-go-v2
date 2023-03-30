@@ -49,7 +49,7 @@ type ListComplianceItemsInput struct {
 	ResourceIds []string
 
 	// The type of resource from which to get compliance information. Currently, the
-	// only supported resource type is ManagedInstance.
+	// only supported resource type is ManagedInstance .
 	ResourceTypes []string
 
 	noSmithyDocumentSerde
@@ -130,8 +130,8 @@ func (c *Client) addOperationListComplianceItemsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListComplianceItemsAPIClient is a client that implements the ListComplianceItems
-// operation.
+// ListComplianceItemsAPIClient is a client that implements the
+// ListComplianceItems operation.
 type ListComplianceItemsAPIClient interface {
 	ListComplianceItems(context.Context, *ListComplianceItemsInput, ...func(*Options)) (*ListComplianceItemsOutput, error)
 }
@@ -145,8 +145,8 @@ type ListComplianceItemsPaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

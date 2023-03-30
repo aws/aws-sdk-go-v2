@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates one or more virtual tapes. You write data to the virtual tapes and then
-// archive the tapes. This operation is only supported in the tape gateway type.
-// Cache storage must be allocated to the gateway before you can create virtual
-// tapes. Use the AddCache operation to add cache storage to a gateway.
+// Creates one or more virtual tapes. You write data to the virtual tapes and
+// then archive the tapes. This operation is only supported in the tape gateway
+// type. Cache storage must be allocated to the gateway before you can create
+// virtual tapes. Use the AddCache  operation to add cache storage to a gateway.
 func (c *Client) CreateTapes(ctx context.Context, params *CreateTapesInput, optFns ...func(*Options)) (*CreateTapesOutput, error) {
 	if params == nil {
 		params = &CreateTapesInput{}
@@ -33,8 +33,8 @@ func (c *Client) CreateTapes(ctx context.Context, params *CreateTapesInput, optF
 // CreateTapesInput
 type CreateTapesInput struct {
 
-	// A unique identifier that you use to retry a request. If you retry a request, use
-	// the same ClientToken you specified in the initial request. Using the same
+	// A unique identifier that you use to retry a request. If you retry a request,
+	// use the same ClientToken  you specified in the initial request. Using the same
 	// ClientToken prevents creating the tape multiple times.
 	//
 	// This member is required.
@@ -59,26 +59,27 @@ type CreateTapesInput struct {
 	// This member is required.
 	TapeBarcodePrefix *string
 
-	// The size, in bytes, of the virtual tapes that you want to create. The size must
-	// be aligned by gigabyte (102410241024 bytes).
+	// The size, in bytes, of the virtual tapes that you want to create. The size
+	// must be aligned by gigabyte (102410241024 bytes).
 	//
 	// This member is required.
 	TapeSizeInBytes *int64
 
-	// Set to true to use Amazon S3 server-side encryption with your own KMS key, or
-	// false to use a key managed by Amazon S3. Optional. Valid Values: true | false
+	// Set to true  to use Amazon S3 server-side encryption with your own KMS key, or
+	// false to use a key managed by Amazon S3. Optional. Valid Values: true  | false
 	KMSEncrypted *bool
 
-	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
-	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
-	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
+	// for Amazon S3 server-side encryption. Storage Gateway does not support
+	// asymmetric CMKs. This value can only be set when KMSEncrypted  is true.
+	// Optional.
 	KMSKey *string
 
-	// The ID of the pool that you want to add your tape to for archiving. The tape in
-	// this pool is archived in the S3 storage class that is associated with the pool.
-	// When you use your backup application to eject the tape, the tape is archived
-	// directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that
-	// corresponds to the pool.
+	// The ID of the pool that you want to add your tape to for archiving. The tape
+	// in this pool is archived in the S3 storage class that is associated with the
+	// pool. When you use your backup application to eject the tape, the tape is
+	// archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive)
+	// that corresponds to the pool.
 	PoolId *string
 
 	// A list of up to 50 tags that can be assigned to a virtual tape. Each tag is a
@@ -98,8 +99,8 @@ type CreateTapesInput struct {
 // CreateTapeOutput
 type CreateTapesOutput struct {
 
-	// A list of unique Amazon Resource Names (ARNs) that represents the virtual tapes
-	// that were created.
+	// A list of unique Amazon Resource Names (ARNs) that represents the virtual
+	// tapes that were created.
 	TapeARNs []string
 
 	// Metadata pertaining to the operation's result.

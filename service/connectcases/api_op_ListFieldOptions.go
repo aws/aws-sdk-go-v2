@@ -47,7 +47,7 @@ type ListFieldOptionsInput struct {
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// A list of FieldOption values to filter on for ListFieldOptions.
+	// A list of FieldOption  values to filter on for ListFieldOptions .
 	Values []string
 
 	noSmithyDocumentSerde
@@ -55,13 +55,13 @@ type ListFieldOptionsInput struct {
 
 type ListFieldOptionsOutput struct {
 
-	// A list of FieldOption objects.
+	// A list of FieldOption  objects.
 	//
 	// This member is required.
 	Options []types.FieldOption
 
-	// The token for the next set of results. This is null if there are no more results
-	// to return.
+	// The token for the next set of results. This is null if there are no more
+	// results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -146,8 +146,8 @@ type ListFieldOptionsPaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

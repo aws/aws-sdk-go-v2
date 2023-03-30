@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a given schema. Schemas in a development and published state can only be
-// deleted.
+// Deletes a given schema. Schemas in a development and published state can only
+// be deleted.
 func (c *Client) DeleteSchema(ctx context.Context, params *DeleteSchemaInput, optFns ...func(*Options)) (*DeleteSchemaOutput, error) {
 	if params == nil {
 		params = &DeleteSchemaInput{}
@@ -29,8 +29,8 @@ func (c *Client) DeleteSchema(ctx context.Context, params *DeleteSchemaInput, op
 
 type DeleteSchemaInput struct {
 
-	// The Amazon Resource Name (ARN) of the development schema. For more information,
-	// see arns.
+	// The Amazon Resource Name (ARN) of the development schema. For more
+	// information, see arns .
 	//
 	// This member is required.
 	SchemaArn *string
@@ -41,7 +41,7 @@ type DeleteSchemaInput struct {
 type DeleteSchemaOutput struct {
 
 	// The input ARN that is returned as part of the response. For more information,
-	// see arns.
+	// see arns .
 	SchemaArn *string
 
 	// Metadata pertaining to the operation's result.

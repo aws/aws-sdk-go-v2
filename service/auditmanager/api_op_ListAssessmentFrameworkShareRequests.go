@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of sent or received share requests for custom frameworks in Audit
-// Manager.
+// Returns a list of sent or received share requests for custom frameworks in
+// Audit Manager.
 func (c *Client) ListAssessmentFrameworkShareRequests(ctx context.Context, params *ListAssessmentFrameworkShareRequestsInput, optFns ...func(*Options)) (*ListAssessmentFrameworkShareRequestsOutput, error) {
 	if params == nil {
 		params = &ListAssessmentFrameworkShareRequestsInput{}
@@ -137,8 +137,8 @@ type ListAssessmentFrameworkShareRequestsPaginatorOptions struct {
 	// Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

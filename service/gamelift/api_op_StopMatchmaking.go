@@ -19,8 +19,7 @@ import (
 // included in the MatchmakerData of an updated game session object, which is
 // provided to the game server. If the operation is successful, the service sends
 // back an empty JSON struct with the HTTP 200 response (not an empty HTTP body).
-// Learn more  Add FlexMatch to a game client
-// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html)
+// Learn more Add FlexMatch to a game client (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html)
 func (c *Client) StopMatchmaking(ctx context.Context, params *StopMatchmakingInput, optFns ...func(*Options)) (*StopMatchmakingOutput, error) {
 	if params == nil {
 		params = &StopMatchmakingInput{}

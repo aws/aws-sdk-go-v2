@@ -13,8 +13,7 @@ import (
 )
 
 // List the device certificates signed by the specified CA certificate. Requires
-// permission to access the ListCertificatesByCA
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// permission to access the ListCertificatesByCA (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListCertificatesByCA(ctx context.Context, params *ListCertificatesByCAInput, optFns ...func(*Options)) (*ListCertificatesByCAOutput, error) {
 	if params == nil {
@@ -40,8 +39,8 @@ type ListCertificatesByCAInput struct {
 	// This member is required.
 	CaCertificateId *string
 
-	// Specifies the order for results. If True, the results are returned in ascending
-	// order, based on the creation date.
+	// Specifies the order for results. If True, the results are returned in
+	// ascending order, based on the creation date.
 	AscendingOrder bool
 
 	// The marker for the next set of results.
@@ -146,8 +145,8 @@ type ListCertificatesByCAPaginatorOptions struct {
 	// The result page size.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

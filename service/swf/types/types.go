@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-// Provides the details of the ActivityTaskCanceled event.
+// Provides the details of the ActivityTaskCanceled  event.
 type ActivityTaskCanceledEventAttributes struct {
 
 	// The ID of the ActivityTaskScheduled event that was recorded when this activity
@@ -35,7 +35,7 @@ type ActivityTaskCanceledEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the ActivityTaskCancelRequested event.
+// Provides the details of the ActivityTaskCancelRequested  event.
 type ActivityTaskCancelRequestedEventAttributes struct {
 
 	// The unique ID of the task.
@@ -54,7 +54,7 @@ type ActivityTaskCancelRequestedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the ActivityTaskCompleted event.
+// Provides the details of the ActivityTaskCompleted  event.
 type ActivityTaskCompletedEventAttributes struct {
 
 	// The ID of the ActivityTaskScheduled event that was recorded when this activity
@@ -77,7 +77,7 @@ type ActivityTaskCompletedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the ActivityTaskFailed event.
+// Provides the details of the ActivityTaskFailed  event.
 type ActivityTaskFailedEventAttributes struct {
 
 	// The ID of the ActivityTaskScheduled event that was recorded when this activity
@@ -103,7 +103,7 @@ type ActivityTaskFailedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the ActivityTaskScheduled event.
+// Provides the details of the ActivityTaskScheduled  event.
 type ActivityTaskScheduledEventAttributes struct {
 
 	// The unique ID of the activity task.
@@ -134,9 +134,9 @@ type ActivityTaskScheduledEventAttributes struct {
 	Control *string
 
 	// The maximum time before which the worker processing this task must report
-	// progress by calling RecordActivityTaskHeartbeat. If the timeout is exceeded, the
-	// activity task is automatically timed out. If the worker subsequently attempts to
-	// record a heartbeat or return a result, it is ignored.
+	// progress by calling RecordActivityTaskHeartbeat. If the timeout is exceeded,
+	// the activity task is automatically timed out. If the worker subsequently
+	// attempts to record a heartbeat or return a result, it is ignored.
 	HeartbeatTimeout *string
 
 	// The input provided to the activity task.
@@ -155,17 +155,16 @@ type ActivityTaskScheduledEventAttributes struct {
 	// The priority to assign to the scheduled activity task. If set, this overrides
 	// any default priority value that was assigned when the activity type was
 	// registered. Valid values are integers that range from Java's Integer.MIN_VALUE
-	// (-2147483648) to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher
-	// priority. For more information about setting task priority, see Setting Task
-	// Priority
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (-2147483648) to Integer.MAX_VALUE (2147483647). Higher numbers indicate
+	// higher priority. For more information about setting task priority, see Setting
+	// Task Priority (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the ActivityTaskStarted event.
+// Provides the details of the ActivityTaskStarted  event.
 type ActivityTaskStartedEventAttributes struct {
 
 	// The ID of the ActivityTaskScheduled event that was recorded when this activity
@@ -182,7 +181,7 @@ type ActivityTaskStartedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the ActivityTaskTimedOut event.
+// Provides the details of the ActivityTaskTimedOut  event.
 type ActivityTaskTimedOutEventAttributes struct {
 
 	// The ID of the ActivityTaskScheduled event that was recorded when this activity
@@ -205,7 +204,7 @@ type ActivityTaskTimedOutEventAttributes struct {
 	TimeoutType ActivityTaskTimeoutType
 
 	// Contains the content of the details parameter for the last call made by the
-	// activity to RecordActivityTaskHeartbeat.
+	// activity to RecordActivityTaskHeartbeat .
 	Details *string
 
 	noSmithyDocumentSerde
@@ -220,8 +219,8 @@ type ActivityType struct {
 	// This member is required.
 	Name *string
 
-	// The version of this activity. The combination of activity type name and version
-	// must be unique with in a domain.
+	// The version of this activity. The combination of activity type name and
+	// version must be unique with in a domain.
 	//
 	// This member is required.
 	Version *string
@@ -235,49 +234,49 @@ type ActivityTypeConfiguration struct {
 	// The default maximum time, in seconds, before which a worker processing a task
 	// must report progress by calling RecordActivityTaskHeartbeat. You can specify
 	// this value only when registering an activity type. The registered default value
-	// can be overridden when you schedule a task through the
-	// ScheduleActivityTaskDecision. If the activity worker subsequently attempts to
-	// record a heartbeat or returns a result, the activity worker receives an
-	// UnknownResource fault. In this case, Amazon SWF no longer considers the activity
-	// task to be valid; the activity worker should clean up the activity task. The
-	// duration is specified in seconds, an integer greater than or equal to 0. You can
-	// use NONE to specify unlimited duration.
+	// can be overridden when you schedule a task through the ScheduleActivityTask
+	// Decision. If the activity worker subsequently attempts to record a heartbeat
+	// or returns a result, the activity worker receives an UnknownResource fault. In
+	// this case, Amazon SWF no longer considers the activity task to be valid; the
+	// activity worker should clean up the activity task. The duration is specified in
+	// seconds, an integer greater than or equal to 0 . You can use NONE to specify
+	// unlimited duration.
 	DefaultTaskHeartbeatTimeout *string
 
 	// The default task list specified for this activity type at registration. This
 	// default is used if a task list isn't provided when a task is scheduled through
-	// the ScheduleActivityTaskDecision. You can override the default registered task
-	// list when scheduling a task through the ScheduleActivityTaskDecision.
+	// the ScheduleActivityTask Decision. You can override the default registered
+	// task list when scheduling a task through the ScheduleActivityTask Decision .
 	DefaultTaskList *TaskList
 
 	// The default task priority for tasks of this activity type, specified at
 	// registration. If not set, then 0 is used as the default priority. This default
 	// can be overridden when scheduling an activity task. Valid values are integers
-	// that range from Java's Integer.MIN_VALUE (-2147483648) to Integer.MAX_VALUE
+	// that range from Java's Integer.MIN_VALUE  (-2147483648) to Integer.MAX_VALUE
 	// (2147483647). Higher numbers indicate higher priority. For more information
-	// about setting task priority, see Setting Task Priority
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// about setting task priority, see Setting Task Priority (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	DefaultTaskPriority *string
 
-	// The default maximum duration, specified when registering the activity type, for
-	// tasks of this activity type. You can override this default when scheduling a
-	// task through the ScheduleActivityTaskDecision. The duration is specified in
-	// seconds, an integer greater than or equal to 0. You can use NONE to specify
+	// The default maximum duration, specified when registering the activity type,
+	// for tasks of this activity type. You can override this default when scheduling a
+	// task through the ScheduleActivityTask Decision. The duration is specified in
+	// seconds, an integer greater than or equal to 0 . You can use NONE to specify
 	// unlimited duration.
 	DefaultTaskScheduleToCloseTimeout *string
 
-	// The default maximum duration, specified when registering the activity type, that
-	// a task of an activity type can wait before being assigned to a worker. You can
-	// override this default when scheduling a task through the
-	// ScheduleActivityTaskDecision. The duration is specified in seconds, an integer
-	// greater than or equal to 0. You can use NONE to specify unlimited duration.
+	// The default maximum duration, specified when registering the activity type,
+	// that a task of an activity type can wait before being assigned to a worker. You
+	// can override this default when scheduling a task through the
+	// ScheduleActivityTask Decision. The duration is specified in seconds, an
+	// integer greater than or equal to 0 . You can use NONE to specify unlimited
+	// duration.
 	DefaultTaskScheduleToStartTimeout *string
 
 	// The default maximum duration for tasks of an activity type specified when
 	// registering the activity type. You can override this default when scheduling a
-	// task through the ScheduleActivityTaskDecision. The duration is specified in
-	// seconds, an integer greater than or equal to 0. You can use NONE to specify
+	// task through the ScheduleActivityTask Decision. The duration is specified in
+	// seconds, an integer greater than or equal to 0 . You can use NONE to specify
 	// unlimited duration.
 	DefaultTaskStartToCloseTimeout *string
 
@@ -287,12 +286,12 @@ type ActivityTypeConfiguration struct {
 // Detailed information about an activity type.
 type ActivityTypeInfo struct {
 
-	// The ActivityType type structure representing the activity type.
+	// The ActivityType  type structure representing the activity type.
 	//
 	// This member is required.
 	ActivityType *ActivityType
 
-	// The date and time this activity type was created through RegisterActivityType.
+	// The date and time this activity type was created through RegisterActivityType .
 	//
 	// This member is required.
 	CreationDate *time.Time
@@ -302,31 +301,28 @@ type ActivityTypeInfo struct {
 	// This member is required.
 	Status RegistrationStatus
 
-	// If DEPRECATED, the date and time DeprecateActivityType was called.
+	// If DEPRECATED, the date and time DeprecateActivityType  was called.
 	DeprecationDate *time.Time
 
-	// The description of the activity type provided in RegisterActivityType.
+	// The description of the activity type provided in RegisterActivityType .
 	Description *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the CancelTimer decision. Access Control You can use IAM
-// policies to control this decision's access to Amazon SWF resources as follows:
-// -
-// Use a Resource element with the domain name to limit the action to only
-// specified domains.
-// - Use an Action element to allow or deny permission to call
-// this action.
-// - You cannot use an IAM policy to constrain this action's
-// parameters.
+// Provides the details of the CancelTimer decision. Access Control You can use
+// IAM policies to control this decision's access to Amazon SWF resources as
+// follows:
+//   - Use a Resource element with the domain name to limit the action to only specified domains.
+//   - Use an Action element to allow or deny permission to call this action.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
-// If the caller doesn't have sufficient permissions to invoke the
-// action, or the parameter values fall outside the specified constraints, the
-// action fails. The associated event attribute's cause parameter is set to
-// OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to
-// Manage Access to Amazon SWF Workflows
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// If
+// the caller doesn't have sufficient permissions to invoke the action, or the
+// parameter values fall outside the specified constraints, the action fails. The
+// associated event attribute's cause  parameter is set to OPERATION_NOT_PERMITTED
+// . For details and example IAM policies, see Using IAM to Manage Access to
+// Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type CancelTimerDecisionAttributes struct {
 
@@ -338,28 +334,27 @@ type CancelTimerDecisionAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the CancelTimerFailed event.
+// Provides the details of the CancelTimerFailed  event.
 type CancelTimerFailedEventAttributes struct {
 
-	// The cause of the failure. This information is generated by the system and can be
-	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
-	// decision failed because it lacked sufficient permissions. For details and
-	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// The cause of the failure. This information is generated by the system and can
+	// be useful for diagnostic purposes. If cause  is set to OPERATION_NOT_PERMITTED
+	// , the decision failed because it lacked sufficient permissions. For details and
+	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// This member is required.
 	Cause CancelTimerFailedCause
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
-	// that resulted in the CancelTimer decision to cancel this timer. This information
-	// can be useful for diagnosing problems by tracing back the chain of events
-	// leading up to this event.
+	// that resulted in the CancelTimer decision to cancel this timer. This
+	// information can be useful for diagnosing problems by tracing back the chain of
+	// events leading up to this event.
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId int64
 
-	// The timerId provided in the CancelTimer decision that failed.
+	// The timerId provided in the CancelTimer  decision that failed.
 	//
 	// This member is required.
 	TimerId *string
@@ -367,22 +362,19 @@ type CancelTimerFailedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the CancelWorkflowExecution decision. Access Control You
-// can use IAM policies to control this decision's access to Amazon SWF resources
-// as follows:
-// - Use a Resource element with the domain name to limit the action to
-// only specified domains.
-// - Use an Action element to allow or deny permission to
-// call this action.
-// - You cannot use an IAM policy to constrain this action's
-// parameters.
+// Provides the details of the CancelWorkflowExecution decision. Access Control
+// You can use IAM policies to control this decision's access to Amazon SWF
+// resources as follows:
+//   - Use a Resource element with the domain name to limit the action to only specified domains.
+//   - Use an Action element to allow or deny permission to call this action.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
-// If the caller doesn't have sufficient permissions to invoke the
-// action, or the parameter values fall outside the specified constraints, the
-// action fails. The associated event attribute's cause parameter is set to
-// OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to
-// Manage Access to Amazon SWF Workflows
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// If
+// the caller doesn't have sufficient permissions to invoke the action, or the
+// parameter values fall outside the specified constraints, the action fails. The
+// associated event attribute's cause  parameter is set to OPERATION_NOT_PERMITTED
+// . For details and example IAM policies, see Using IAM to Manage Access to
+// Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type CancelWorkflowExecutionDecisionAttributes struct {
 
@@ -392,14 +384,13 @@ type CancelWorkflowExecutionDecisionAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the CancelWorkflowExecutionFailed event.
+// Provides the details of the CancelWorkflowExecutionFailed  event.
 type CancelWorkflowExecutionFailedEventAttributes struct {
 
-	// The cause of the failure. This information is generated by the system and can be
-	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
-	// decision failed because it lacked sufficient permissions. For details and
-	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// The cause of the failure. This information is generated by the system and can
+	// be useful for diagnostic purposes. If cause  is set to OPERATION_NOT_PERMITTED
+	// , the decision failed because it lacked sufficient permissions. For details and
+	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// This member is required.
@@ -416,13 +407,13 @@ type CancelWorkflowExecutionFailedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provide details of the ChildWorkflowExecutionCanceled event.
+// Provide details of the ChildWorkflowExecutionCanceled  event.
 type ChildWorkflowExecutionCanceledEventAttributes struct {
 
-	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to the
-	// StartChildWorkflowExecutionDecision to start this child workflow execution. This
-	// information can be useful for diagnosing problems by tracing back the chain of
-	// events leading up to this event.
+	// The ID of the StartChildWorkflowExecutionInitiated  event corresponding to the
+	// StartChildWorkflowExecution Decision to start this child workflow execution.
+	// This information can be useful for diagnosing problems by tracing back the chain
+	// of events leading up to this event.
 	//
 	// This member is required.
 	InitiatedEventId int64
@@ -450,13 +441,13 @@ type ChildWorkflowExecutionCanceledEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the ChildWorkflowExecutionCompleted event.
+// Provides the details of the ChildWorkflowExecutionCompleted  event.
 type ChildWorkflowExecutionCompletedEventAttributes struct {
 
-	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to the
-	// StartChildWorkflowExecutionDecision to start this child workflow execution. This
-	// information can be useful for diagnosing problems by tracing back the chain of
-	// events leading up to this event.
+	// The ID of the StartChildWorkflowExecutionInitiated  event corresponding to the
+	// StartChildWorkflowExecution Decision to start this child workflow execution.
+	// This information can be useful for diagnosing problems by tracing back the chain
+	// of events leading up to this event.
 	//
 	// This member is required.
 	InitiatedEventId int64
@@ -484,13 +475,13 @@ type ChildWorkflowExecutionCompletedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the ChildWorkflowExecutionFailed event.
+// Provides the details of the ChildWorkflowExecutionFailed  event.
 type ChildWorkflowExecutionFailedEventAttributes struct {
 
-	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to the
-	// StartChildWorkflowExecutionDecision to start this child workflow execution. This
-	// information can be useful for diagnosing problems by tracing back the chain of
-	// events leading up to this event.
+	// The ID of the StartChildWorkflowExecutionInitiated  event corresponding to the
+	// StartChildWorkflowExecution Decision to start this child workflow execution.
+	// This information can be useful for diagnosing problems by tracing back the chain
+	// of events leading up to this event.
 	//
 	// This member is required.
 	InitiatedEventId int64
@@ -521,13 +512,13 @@ type ChildWorkflowExecutionFailedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the ChildWorkflowExecutionStarted event.
+// Provides the details of the ChildWorkflowExecutionStarted  event.
 type ChildWorkflowExecutionStartedEventAttributes struct {
 
-	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to the
-	// StartChildWorkflowExecutionDecision to start this child workflow execution. This
-	// information can be useful for diagnosing problems by tracing back the chain of
-	// events leading up to this event.
+	// The ID of the StartChildWorkflowExecutionInitiated  event corresponding to the
+	// StartChildWorkflowExecution Decision to start this child workflow execution.
+	// This information can be useful for diagnosing problems by tracing back the chain
+	// of events leading up to this event.
 	//
 	// This member is required.
 	InitiatedEventId int64
@@ -545,13 +536,13 @@ type ChildWorkflowExecutionStartedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the ChildWorkflowExecutionTerminated event.
+// Provides the details of the ChildWorkflowExecutionTerminated  event.
 type ChildWorkflowExecutionTerminatedEventAttributes struct {
 
-	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to the
-	// StartChildWorkflowExecutionDecision to start this child workflow execution. This
-	// information can be useful for diagnosing problems by tracing back the chain of
-	// events leading up to this event.
+	// The ID of the StartChildWorkflowExecutionInitiated  event corresponding to the
+	// StartChildWorkflowExecution Decision to start this child workflow execution.
+	// This information can be useful for diagnosing problems by tracing back the chain
+	// of events leading up to this event.
 	//
 	// This member is required.
 	InitiatedEventId int64
@@ -576,13 +567,13 @@ type ChildWorkflowExecutionTerminatedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the ChildWorkflowExecutionTimedOut event.
+// Provides the details of the ChildWorkflowExecutionTimedOut  event.
 type ChildWorkflowExecutionTimedOutEventAttributes struct {
 
-	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to the
-	// StartChildWorkflowExecutionDecision to start this child workflow execution. This
-	// information can be useful for diagnosing problems by tracing back the chain of
-	// events leading up to this event.
+	// The ID of the StartChildWorkflowExecutionInitiated  event corresponding to the
+	// StartChildWorkflowExecution Decision to start this child workflow execution.
+	// This information can be useful for diagnosing problems by tracing back the chain
+	// of events leading up to this event.
 	//
 	// This member is required.
 	InitiatedEventId int64
@@ -612,12 +603,12 @@ type ChildWorkflowExecutionTimedOutEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Used to filter the closed workflow executions in visibility APIs by their close
-// status.
+// Used to filter the closed workflow executions in visibility APIs by their
+// close status.
 type CloseStatusFilter struct {
 
-	// The close status that must match the close status of an execution for it to meet
-	// the criteria of this filter.
+	// The close status that must match the close status of an execution for it to
+	// meet the criteria of this filter.
 	//
 	// This member is required.
 	Status CloseStatus
@@ -628,19 +619,16 @@ type CloseStatusFilter struct {
 // Provides the details of the CompleteWorkflowExecution decision. Access Control
 // You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
-// - Use a Resource element with the domain name to limit the
-// action to only specified domains.
-// - Use an Action element to allow or deny
-// permission to call this action.
-// - You cannot use an IAM policy to constrain this
-// action's parameters.
+//   - Use a Resource element with the domain name to limit the action to only specified domains.
+//   - Use an Action element to allow or deny permission to call this action.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
-// If the caller doesn't have sufficient permissions to
-// invoke the action, or the parameter values fall outside the specified
-// constraints, the action fails. The associated event attribute's cause parameter
-// is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see
-// Using IAM to Manage Access to Amazon SWF Workflows
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// If
+// the caller doesn't have sufficient permissions to invoke the action, or the
+// parameter values fall outside the specified constraints, the action fails. The
+// associated event attribute's cause  parameter is set to OPERATION_NOT_PERMITTED
+// . For details and example IAM policies, see Using IAM to Manage Access to
+// Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type CompleteWorkflowExecutionDecisionAttributes struct {
 
@@ -651,14 +639,13 @@ type CompleteWorkflowExecutionDecisionAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the CompleteWorkflowExecutionFailed event.
+// Provides the details of the CompleteWorkflowExecutionFailed  event.
 type CompleteWorkflowExecutionFailedEventAttributes struct {
 
-	// The cause of the failure. This information is generated by the system and can be
-	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
-	// decision failed because it lacked sufficient permissions. For details and
-	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// The cause of the failure. This information is generated by the system and can
+	// be useful for diagnostic purposes. If cause  is set to OPERATION_NOT_PERMITTED
+	// , the decision failed because it lacked sufficient permissions. For details and
+	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// This member is required.
@@ -678,56 +665,44 @@ type CompleteWorkflowExecutionFailedEventAttributes struct {
 // Provides the details of the ContinueAsNewWorkflowExecution decision. Access
 // Control You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
-// - Use a Resource element with the domain name to limit the
-// action to only specified domains.
-// - Use an Action element to allow or deny
-// permission to call this action.
-// - Constrain the following parameters by using a
-// Condition element with the appropriate keys.
-// - tag – A tag used to identify the
-// workflow execution
-// - taskList – String constraint. The key is
-// swf:taskList.name.
-// - workflowType.version – String constraint. The key is
-// swf:workflowType.version.
+//   - Use a Resource element with the domain name to limit the action to only specified domains.
+//   - Use an Action element to allow or deny permission to call this action.
+//   - Constrain the following parameters by using a Condition element with the appropriate keys.
+//   - tag – A tag used to identify the workflow execution
+//   - taskList – String constraint. The key is swf:taskList.name .
+//   - workflowType.version – String constraint. The key is swf:workflowType.version .
 //
-// If the caller doesn't have sufficient permissions to
-// invoke the action, or the parameter values fall outside the specified
-// constraints, the action fails. The associated event attribute's cause parameter
-// is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see
-// Using IAM to Manage Access to Amazon SWF Workflows
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// If the caller doesn't have sufficient permissions to invoke the action, or the
+// parameter values fall outside the specified constraints, the action fails. The
+// associated event attribute's cause  parameter is set to OPERATION_NOT_PERMITTED
+// . For details and example IAM policies, see Using IAM to Manage Access to
+// Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
 
-	// If set, specifies the policy to use for the child workflow executions of the new
-	// execution if it is terminated by calling the TerminateWorkflowExecution action
-	// explicitly or due to an expired timeout. This policy overrides the default child
-	// policy specified when registering the workflow type using RegisterWorkflowType.
-	// The supported child policies are:
-	// - TERMINATE – The child executions are
-	// terminated.
-	// - REQUEST_CANCEL – A request to cancel is attempted for each child
-	// execution by recording a WorkflowExecutionCancelRequested event in its history.
-	// It is up to the decider to take appropriate actions when it receives an
-	// execution history with this event.
-	// - ABANDON – No action is taken. The child
-	// executions continue to run.
-	//
-	// A child policy for this workflow execution must be
-	// specified either as a default for the workflow type or through this parameter.
-	// If neither this parameter is set nor a default child policy was specified at
-	// registration time then a fault is returned.
+	// If set, specifies the policy to use for the child workflow executions of the
+	// new execution if it is terminated by calling the TerminateWorkflowExecution
+	// action explicitly or due to an expired timeout. This policy overrides the
+	// default child policy specified when registering the workflow type using
+	// RegisterWorkflowType . The supported child policies are:
+	//     - TERMINATE – The child executions are terminated.
+	//     - REQUEST_CANCEL – A request to cancel is attempted for each child execution by recording a WorkflowExecutionCancelRequested event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+	//     - ABANDON – No action is taken. The child executions continue to run.
+	// A
+	// child policy for this workflow execution must be specified either as a default
+	// for the workflow type or through this parameter. If neither this parameter is
+	// set nor a default child policy was specified at registration time then a fault
+	// is returned.
 	ChildPolicy ChildPolicy
 
-	// If set, specifies the total duration for this workflow execution. This overrides
-	// the defaultExecutionStartToCloseTimeout specified when registering the workflow
-	// type. The duration is specified in seconds, an integer greater than or equal to
-	// 0. You can use NONE to specify unlimited duration. An execution start-to-close
-	// timeout for this workflow execution must be specified either as a default for
-	// the workflow type or through this field. If neither this field is set nor a
-	// default execution start-to-close timeout was specified at registration time then
-	// a fault is returned.
+	// If set, specifies the total duration for this workflow execution. This
+	// overrides the defaultExecutionStartToCloseTimeout specified when registering
+	// the workflow type. The duration is specified in seconds, an integer greater than
+	// or equal to 0 . You can use NONE to specify unlimited duration. An execution
+	// start-to-close timeout for this workflow execution must be specified either as a
+	// default for the workflow type or through this field. If neither this field is
+	// set nor a default execution start-to-close timeout was specified at registration
+	// time then a fault is returned.
 	ExecutionStartToCloseTimeout *string
 
 	// The input provided to the new workflow execution.
@@ -738,8 +713,8 @@ type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
 
 	// The list of tags to associate with the new workflow execution. A maximum of 5
 	// tags can be specified. You can list workflow executions with a specific tag by
-	// calling ListOpenWorkflowExecutions or ListClosedWorkflowExecutions and
-	// specifying a TagFilter.
+	// calling ListOpenWorkflowExecutions  or ListClosedWorkflowExecutions and
+	// specifying a TagFilter .
 	TagList []string
 
 	// The task list to use for the decisions of the new (continued) workflow
@@ -749,22 +724,21 @@ type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
 	// The task priority that, if set, specifies the priority for the decision tasks
 	// for this workflow execution. This overrides the defaultTaskPriority specified
 	// when registering the workflow type. Valid values are integers that range from
-	// Java's Integer.MIN_VALUE (-2147483648) to Integer.MAX_VALUE (2147483647). Higher
-	// numbers indicate higher priority. For more information about setting task
-	// priority, see Setting Task Priority
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// Java's Integer.MIN_VALUE  (-2147483648) to Integer.MAX_VALUE (2147483647).
+	// Higher numbers indicate higher priority. For more information about setting task
+	// priority, see Setting Task Priority (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string
 
-	// Specifies the maximum duration of decision tasks for the new workflow execution.
-	// This parameter overrides the defaultTaskStartToCloseTimout specified when
-	// registering the workflow type using RegisterWorkflowType. The duration is
-	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
-	// specify unlimited duration. A task start-to-close timeout for the new workflow
-	// execution must be specified either as a default for the workflow type or through
-	// this parameter. If neither this parameter is set nor a default task
-	// start-to-close timeout was specified at registration time then a fault is
-	// returned.
+	// Specifies the maximum duration of decision tasks for the new workflow
+	// execution. This parameter overrides the defaultTaskStartToCloseTimout
+	// specified when registering the workflow type using RegisterWorkflowType. The
+	// duration is specified in seconds, an integer greater than or equal to 0. You
+	// can use NONE to specify unlimited duration. A task start-to-close timeout for
+	// the new workflow execution must be specified either as a default for the
+	// workflow type or through this parameter. If neither this parameter is set nor a
+	// default task start-to-close timeout was specified at registration time then a
+	// fault is returned.
 	TaskStartToCloseTimeout *string
 
 	// The version of the workflow to start.
@@ -773,14 +747,13 @@ type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the ContinueAsNewWorkflowExecutionFailed event.
+// Provides the details of the ContinueAsNewWorkflowExecutionFailed  event.
 type ContinueAsNewWorkflowExecutionFailedEventAttributes struct {
 
-	// The cause of the failure. This information is generated by the system and can be
-	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
-	// decision failed because it lacked sufficient permissions. For details and
-	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// The cause of the failure. This information is generated by the system and can
+	// be useful for diagnostic purposes. If cause  is set to OPERATION_NOT_PERMITTED
+	// , the decision failed because it lacked sufficient permissions. For details and
+	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// This member is required.
@@ -799,117 +772,56 @@ type ContinueAsNewWorkflowExecutionFailedEventAttributes struct {
 
 // Specifies a decision made by the decider. A decision can be one of these
 // types:
-// - CancelTimer – Cancels a previously started timer and records a
-// TimerCanceled event in the history.
-// - CancelWorkflowExecution – Closes the
-// workflow execution and records a WorkflowExecutionCanceled event in the
-// history.
-// - CompleteWorkflowExecution – Closes the workflow execution and records
-// a WorkflowExecutionCompleted event in the history .
-// -
-// ContinueAsNewWorkflowExecution – Closes the workflow execution and starts a new
-// workflow execution of the same type using the same workflow ID and a unique run
-// Id. A WorkflowExecutionContinuedAsNew event is recorded in the history.
-// -
-// FailWorkflowExecution – Closes the workflow execution and records a
-// WorkflowExecutionFailed event in the history.
-// - RecordMarker – Records a
-// MarkerRecorded event in the history. Markers can be used for adding custom
-// information in the history for instance to let deciders know that they don't
-// need to look at the history beyond the marker event.
-// - RequestCancelActivityTask
-// – Attempts to cancel a previously scheduled activity task. If the activity task
-// was scheduled but has not been assigned to a worker, then it is canceled. If the
-// activity task was already assigned to a worker, then the worker is informed that
-// cancellation has been requested in the response to
-// RecordActivityTaskHeartbeat.
-// - RequestCancelExternalWorkflowExecution – Requests
-// that a request be made to cancel the specified external workflow execution and
-// records a RequestCancelExternalWorkflowExecutionInitiated event in the
-// history.
-// - ScheduleActivityTask – Schedules an activity task.
-// -
-// SignalExternalWorkflowExecution – Requests a signal to be delivered to the
-// specified external workflow execution and records a
-// SignalExternalWorkflowExecutionInitiated event in the history.
-// -
-// StartChildWorkflowExecution – Requests that a child workflow execution be
-// started and records a StartChildWorkflowExecutionInitiated event in the history.
-// The child workflow execution is a separate workflow execution with its own
-// history.
-// - StartTimer – Starts a timer for this workflow execution and records a
-// TimerStarted event in the history. This timer fires after the specified delay
-// and record a TimerFired event.
+//   - CancelTimer – Cancels a previously started timer and records a TimerCanceled event in the history.
+//   - CancelWorkflowExecution – Closes the workflow execution and records a WorkflowExecutionCanceled event in the history.
+//   - CompleteWorkflowExecution – Closes the workflow execution and records a WorkflowExecutionCompleted event in the history .
+//   - ContinueAsNewWorkflowExecution – Closes the workflow execution and starts a new workflow execution of the same type using the same workflow ID and a unique run Id. A WorkflowExecutionContinuedAsNew event is recorded in the history.
+//   - FailWorkflowExecution – Closes the workflow execution and records a WorkflowExecutionFailed event in the history.
+//   - RecordMarker – Records a MarkerRecorded event in the history. Markers can be used for adding custom information in the history for instance to let deciders know that they don't need to look at the history beyond the marker event.
+//   - RequestCancelActivityTask – Attempts to cancel a previously scheduled activity task. If the activity task was scheduled but has not been assigned to a worker, then it is canceled. If the activity task was already assigned to a worker, then the worker is informed that cancellation has been requested in the response to RecordActivityTaskHeartbeat .
+//   - RequestCancelExternalWorkflowExecution – Requests that a request be made to cancel the specified external workflow execution and records a RequestCancelExternalWorkflowExecutionInitiated event in the history.
+//   - ScheduleActivityTask – Schedules an activity task.
+//   - SignalExternalWorkflowExecution – Requests a signal to be delivered to the specified external workflow execution and records a SignalExternalWorkflowExecutionInitiated event in the history.
+//   - StartChildWorkflowExecution – Requests that a child workflow execution be started and records a StartChildWorkflowExecutionInitiated event in the history. The child workflow execution is a separate workflow execution with its own history.
+//   - StartTimer – Starts a timer for this workflow execution and records a TimerStarted event in the history. This timer fires after the specified delay and record a TimerFired event.
 //
-// Access Control If you grant permission to use
-// RespondDecisionTaskCompleted, you can use IAM policies to express permissions
-// for the list of decisions returned by this action as if they were members of the
-// API. Treating decisions as a pseudo API maintains a uniform conceptual model and
-// helps keep policies readable. For details and example IAM policies, see Using
-// IAM to Manage Access to Amazon SWF Workflows
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// Access Control If you grant permission to use RespondDecisionTaskCompleted,
+// you can use IAM policies to express permissions for the list of decisions
+// returned by this action as if they were members of the API. Treating decisions
+// as a pseudo API maintains a uniform conceptual model and helps keep policies
+// readable. For details and example IAM policies, see Using IAM to Manage Access
+// to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide. Decision Failure Decisions can fail for
 // several reasons
-// - The ordering of decisions should follow a logical flow. Some
-// decisions might not make sense in the current context of the workflow execution
-// and therefore fails.
-// - A limit on your account was reached.
-// - The decision lacks
-// sufficient permissions.
+//   - The ordering of decisions should follow a logical flow. Some decisions might not make sense in the current context of the workflow execution and therefore fails.
+//   - A limit on your account was reached.
+//   - The decision lacks sufficient permissions.
 //
-// One of the following events might be added to the
-// history to indicate an error. The event attribute's cause parameter indicates
-// the cause. If cause is set to OPERATION_NOT_PERMITTED, the decision failed
-// because it lacked sufficient permissions. For details and example IAM policies,
-// see Using IAM to Manage Access to Amazon SWF Workflows
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// One of the following events
+// might be added to the history to indicate an error. The event attribute's cause
+// parameter indicates the cause. If cause  is set to OPERATION_NOT_PERMITTED,
+// the decision failed because it lacked sufficient permissions. For details and
+// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
-// - ScheduleActivityTaskFailed – A
-// ScheduleActivityTask decision failed. This could happen if the activity type
-// specified in the decision isn't registered, is in a deprecated state, or the
-// decision isn't properly configured.
-// - RequestCancelActivityTaskFailed – A
-// RequestCancelActivityTask decision failed. This could happen if there is no open
-// activity task with the specified activityId.
-// - StartTimerFailed – A StartTimer
-// decision failed. This could happen if there is another open timer with the same
-// timerId.
-// - CancelTimerFailed – A CancelTimer decision failed. This could happen
-// if there is no open timer with the specified timerId.
-// -
-// StartChildWorkflowExecutionFailed – A StartChildWorkflowExecution decision
-// failed. This could happen if the workflow type specified isn't registered, is
-// deprecated, or the decision isn't properly configured.
-// -
-// SignalExternalWorkflowExecutionFailed – A SignalExternalWorkflowExecution
-// decision failed. This could happen if the workflowID specified in the decision
-// was incorrect.
-// - RequestCancelExternalWorkflowExecutionFailed – A
-// RequestCancelExternalWorkflowExecution decision failed. This could happen if the
-// workflowID specified in the decision was incorrect.
-// -
-// CancelWorkflowExecutionFailed – A CancelWorkflowExecution decision failed. This
-// could happen if there is an unhandled decision task pending in the workflow
-// execution.
-// - CompleteWorkflowExecutionFailed – A CompleteWorkflowExecution
-// decision failed. This could happen if there is an unhandled decision task
-// pending in the workflow execution.
-// - ContinueAsNewWorkflowExecutionFailed – A
-// ContinueAsNewWorkflowExecution decision failed. This could happen if there is an
-// unhandled decision task pending in the workflow execution or the
-// ContinueAsNewWorkflowExecution decision was not configured correctly.
-// -
-// FailWorkflowExecutionFailed – A FailWorkflowExecution decision failed. This
-// could happen if there is an unhandled decision task pending in the workflow
-// execution.
+//   - ScheduleActivityTaskFailed – A ScheduleActivityTask decision failed. This could happen if the activity type specified in the decision isn't registered, is in a deprecated state, or the decision isn't properly configured.
+//   - RequestCancelActivityTaskFailed – A RequestCancelActivityTask decision failed. This could happen if there is no open activity task with the specified activityId.
+//   - StartTimerFailed – A StartTimer decision failed. This could happen if there is another open timer with the same timerId.
+//   - CancelTimerFailed – A CancelTimer decision failed. This could happen if there is no open timer with the specified timerId.
+//   - StartChildWorkflowExecutionFailed – A StartChildWorkflowExecution decision failed. This could happen if the workflow type specified isn't registered, is deprecated, or the decision isn't properly configured.
+//   - SignalExternalWorkflowExecutionFailed – A SignalExternalWorkflowExecution decision failed. This could happen if the workflowID specified in the decision was incorrect.
+//   - RequestCancelExternalWorkflowExecutionFailed – A RequestCancelExternalWorkflowExecution decision failed. This could happen if the workflowID specified in the decision was incorrect.
+//   - CancelWorkflowExecutionFailed – A CancelWorkflowExecution decision failed. This could happen if there is an unhandled decision task pending in the workflow execution.
+//   - CompleteWorkflowExecutionFailed – A CompleteWorkflowExecution decision failed. This could happen if there is an unhandled decision task pending in the workflow execution.
+//   - ContinueAsNewWorkflowExecutionFailed – A ContinueAsNewWorkflowExecution decision failed. This could happen if there is an unhandled decision task pending in the workflow execution or the ContinueAsNewWorkflowExecution decision was not configured correctly.
+//   - FailWorkflowExecutionFailed – A FailWorkflowExecution decision failed. This could happen if there is an unhandled decision task pending in the workflow execution.
 //
-// The preceding error events might occur due to an error in the
-// decider logic, which might put the workflow execution in an unstable state The
-// cause field in the event structure for the error event indicates the cause of
-// the error. A workflow execution may be closed by the decider by returning one of
-// the following decisions when completing a decision task:
-// CompleteWorkflowExecution, FailWorkflowExecution, CancelWorkflowExecution and
-// ContinueAsNewWorkflowExecution. An UnhandledDecision fault is returned if a
+// The preceding error events might occur due to an error in the decider logic,
+// which might put the workflow execution in an unstable state The cause field in
+// the event structure for the error event indicates the cause of the error. A
+// workflow execution may be closed by the decider by returning one of the
+// following decisions when completing a decision task: CompleteWorkflowExecution
+// , FailWorkflowExecution , CancelWorkflowExecution  and
+// ContinueAsNewWorkflowExecution . An UnhandledDecision fault is returned if a
 // workflow closing decision is specified and a signal or activity event had been
 // added to the history while the decision task was being performed by the decider.
 // Unlike the above situations which are logic issues, this fault is always
@@ -920,29 +832,18 @@ type ContinueAsNewWorkflowExecutionFailedEventAttributes struct {
 // execution. How to Code a Decision You code a decision by first setting the
 // decision type field to one of the above decision values, and then set the
 // corresponding attributes field shown below:
-// -
-// ScheduleActivityTaskDecisionAttributes
-// -
-// RequestCancelActivityTaskDecisionAttributes
-// -
-// CompleteWorkflowExecutionDecisionAttributes
-// -
-// FailWorkflowExecutionDecisionAttributes
-// -
-// CancelWorkflowExecutionDecisionAttributes
-// -
-// ContinueAsNewWorkflowExecutionDecisionAttributes
-// -
-// RecordMarkerDecisionAttributes
-// - StartTimerDecisionAttributes
-// -
-// CancelTimerDecisionAttributes
-// -
-// SignalExternalWorkflowExecutionDecisionAttributes
-// -
-// RequestCancelExternalWorkflowExecutionDecisionAttributes
-// -
-// StartChildWorkflowExecutionDecisionAttributes
+//   - ScheduleActivityTaskDecisionAttributes
+//   - RequestCancelActivityTaskDecisionAttributes
+//   - CompleteWorkflowExecutionDecisionAttributes
+//   - FailWorkflowExecutionDecisionAttributes
+//   - CancelWorkflowExecutionDecisionAttributes
+//   - ContinueAsNewWorkflowExecutionDecisionAttributes
+//   - RecordMarkerDecisionAttributes
+//   - StartTimerDecisionAttributes
+//   - CancelTimerDecisionAttributes
+//   - SignalExternalWorkflowExecutionDecisionAttributes
+//   - RequestCancelExternalWorkflowExecutionDecisionAttributes
+//   - StartChildWorkflowExecutionDecisionAttributes
 type Decision struct {
 
 	// Specifies the type of the decision.
@@ -958,8 +859,8 @@ type Decision struct {
 	// other decision types.
 	CancelWorkflowExecutionDecisionAttributes *CancelWorkflowExecutionDecisionAttributes
 
-	// Provides the details of the CompleteWorkflowExecution decision. It isn't set for
-	// other decision types.
+	// Provides the details of the CompleteWorkflowExecution decision. It isn't set
+	// for other decision types.
 	CompleteWorkflowExecutionDecisionAttributes *CompleteWorkflowExecutionDecisionAttributes
 
 	// Provides the details of the ContinueAsNewWorkflowExecution decision. It isn't
@@ -974,12 +875,12 @@ type Decision struct {
 	// decision types.
 	RecordMarkerDecisionAttributes *RecordMarkerDecisionAttributes
 
-	// Provides the details of the RequestCancelActivityTask decision. It isn't set for
-	// other decision types.
+	// Provides the details of the RequestCancelActivityTask decision. It isn't set
+	// for other decision types.
 	RequestCancelActivityTaskDecisionAttributes *RequestCancelActivityTaskDecisionAttributes
 
-	// Provides the details of the RequestCancelExternalWorkflowExecution decision. It
-	// isn't set for other decision types.
+	// Provides the details of the RequestCancelExternalWorkflowExecution decision.
+	// It isn't set for other decision types.
 	RequestCancelExternalWorkflowExecutionDecisionAttributes *RequestCancelExternalWorkflowExecutionDecisionAttributes
 
 	// Provides the details of the ScheduleActivityTask decision. It isn't set for
@@ -998,14 +899,14 @@ type Decision struct {
 	// for other decision types.
 	StartChildWorkflowExecutionDecisionAttributes *StartChildWorkflowExecutionDecisionAttributes
 
-	// Provides the details of the StartTimer decision. It isn't set for other decision
-	// types.
+	// Provides the details of the StartTimer decision. It isn't set for other
+	// decision types.
 	StartTimerDecisionAttributes *StartTimerDecisionAttributes
 
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the DecisionTaskCompleted event.
+// Provides the details of the DecisionTaskCompleted  event.
 type DecisionTaskCompletedEventAttributes struct {
 
 	// The ID of the DecisionTaskScheduled event that was recorded when this decision
@@ -1028,7 +929,7 @@ type DecisionTaskCompletedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides details about the DecisionTaskScheduled event.
+// Provides details about the DecisionTaskScheduled  event.
 type DecisionTaskScheduledEventAttributes struct {
 
 	// The name of the task list in which the decision task was scheduled.
@@ -1036,24 +937,24 @@ type DecisionTaskScheduledEventAttributes struct {
 	// This member is required.
 	TaskList *TaskList
 
-	// The maximum duration for this decision task. The task is considered timed out if
-	// it doesn't completed within this duration. The duration is specified in seconds,
-	// an integer greater than or equal to 0. You can use NONE to specify unlimited
-	// duration.
+	// The maximum duration for this decision task. The task is considered timed out
+	// if it doesn't completed within this duration. The duration is specified in
+	// seconds, an integer greater than or equal to 0 . You can use NONE to specify
+	// unlimited duration.
 	StartToCloseTimeout *string
 
 	// A task priority that, if set, specifies the priority for this decision task.
-	// Valid values are integers that range from Java's Integer.MIN_VALUE (-2147483648)
-	// to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority. For
-	// more information about setting task priority, see Setting Task Priority
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// Valid values are integers that range from Java's Integer.MIN_VALUE
+	// (-2147483648) to Integer.MAX_VALUE (2147483647). Higher numbers indicate
+	// higher priority. For more information about setting task priority, see Setting
+	// Task Priority (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the DecisionTaskStarted event.
+// Provides the details of the DecisionTaskStarted  event.
 type DecisionTaskStartedEventAttributes struct {
 
 	// The ID of the DecisionTaskScheduled event that was recorded when this decision
@@ -1063,14 +964,14 @@ type DecisionTaskStartedEventAttributes struct {
 	// This member is required.
 	ScheduledEventId int64
 
-	// Identity of the decider making the request. This enables diagnostic tracing when
-	// problems arise. The form of this identity is user defined.
+	// Identity of the decider making the request. This enables diagnostic tracing
+	// when problems arise. The form of this identity is user defined.
 	Identity *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the DecisionTaskTimedOut event.
+// Provides the details of the DecisionTaskTimedOut  event.
 type DecisionTaskTimedOutEventAttributes struct {
 
 	// The ID of the DecisionTaskScheduled event that was recorded when this decision
@@ -1115,12 +1016,8 @@ type DomainInfo struct {
 	Name *string
 
 	// The status of the domain:
-	// - REGISTERED – The domain is properly registered and
-	// available. You can use this domain for registering types and creating new
-	// workflow executions.
-	// - DEPRECATED – The domain was deprecated using
-	// DeprecateDomain, but is still in use. You should not create new workflow
-	// executions in this domain.
+	//     - REGISTERED – The domain is properly registered and available. You can use this domain for registering types and creating new workflow executions.
+	//     - DEPRECATED – The domain was deprecated using DeprecateDomain , but is still in use. You should not create new workflow executions in this domain.
 	//
 	// This member is required.
 	Status RegistrationStatus
@@ -1128,17 +1025,17 @@ type DomainInfo struct {
 	// The ARN of the domain.
 	Arn *string
 
-	// The description of the domain provided through RegisterDomain.
+	// The description of the domain provided through RegisterDomain .
 	Description *string
 
 	noSmithyDocumentSerde
 }
 
-// Used to filter the workflow executions in visibility APIs by various time-based
-// rules. Each parameter, if specified, defines a rule that must be satisfied by
-// each returned query result. The parameter values are in the Unix Time format
-// (https://en.wikipedia.org/wiki/Unix_time). For example: "oldestDate":
-// 1325376070.
+// Used to filter the workflow executions in visibility APIs by various
+// time-based rules. Each parameter, if specified, defines a rule that must be
+// satisfied by each returned query result. The parameter values are in the Unix
+// Time format (https://en.wikipedia.org/wiki/Unix_time) . For example:
+// "oldestDate": 1325376070.
 type ExecutionTimeFilter struct {
 
 	// Specifies the oldest start or close date and time to return.
@@ -1152,7 +1049,7 @@ type ExecutionTimeFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the ExternalWorkflowExecutionCancelRequested event.
+// Provides the details of the ExternalWorkflowExecutionCancelRequested  event.
 type ExternalWorkflowExecutionCancelRequestedEventAttributes struct {
 
 	// The ID of the RequestCancelExternalWorkflowExecutionInitiated event
@@ -1163,7 +1060,8 @@ type ExternalWorkflowExecutionCancelRequestedEventAttributes struct {
 	// This member is required.
 	InitiatedEventId int64
 
-	// The external workflow execution to which the cancellation request was delivered.
+	// The external workflow execution to which the cancellation request was
+	// delivered.
 	//
 	// This member is required.
 	WorkflowExecution *WorkflowExecution
@@ -1171,7 +1069,7 @@ type ExternalWorkflowExecutionCancelRequestedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the ExternalWorkflowExecutionSignaled event.
+// Provides the details of the ExternalWorkflowExecutionSignaled  event.
 type ExternalWorkflowExecutionSignaledEventAttributes struct {
 
 	// The ID of the SignalExternalWorkflowExecutionInitiated event corresponding to
@@ -1193,19 +1091,16 @@ type ExternalWorkflowExecutionSignaledEventAttributes struct {
 // Provides the details of the FailWorkflowExecution decision. Access Control You
 // can use IAM policies to control this decision's access to Amazon SWF resources
 // as follows:
-// - Use a Resource element with the domain name to limit the action to
-// only specified domains.
-// - Use an Action element to allow or deny permission to
-// call this action.
-// - You cannot use an IAM policy to constrain this action's
-// parameters.
+//   - Use a Resource element with the domain name to limit the action to only specified domains.
+//   - Use an Action element to allow or deny permission to call this action.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
-// If the caller doesn't have sufficient permissions to invoke the
-// action, or the parameter values fall outside the specified constraints, the
-// action fails. The associated event attribute's cause parameter is set to
-// OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to
-// Manage Access to Amazon SWF Workflows
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// If
+// the caller doesn't have sufficient permissions to invoke the action, or the
+// parameter values fall outside the specified constraints, the action fails. The
+// associated event attribute's cause  parameter is set to OPERATION_NOT_PERMITTED
+// . For details and example IAM policies, see Using IAM to Manage Access to
+// Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type FailWorkflowExecutionDecisionAttributes struct {
 
@@ -1218,23 +1113,22 @@ type FailWorkflowExecutionDecisionAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the FailWorkflowExecutionFailed event.
+// Provides the details of the FailWorkflowExecutionFailed  event.
 type FailWorkflowExecutionFailedEventAttributes struct {
 
-	// The cause of the failure. This information is generated by the system and can be
-	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
-	// decision failed because it lacked sufficient permissions. For details and
-	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// The cause of the failure. This information is generated by the system and can
+	// be useful for diagnostic purposes. If cause  is set to OPERATION_NOT_PERMITTED
+	// , the decision failed because it lacked sufficient permissions. For details and
+	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// This member is required.
 	Cause FailWorkflowExecutionFailedCause
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
-	// that resulted in the FailWorkflowExecution decision to fail this execution. This
-	// information can be useful for diagnosing problems by tracing back the chain of
-	// events leading up to this event.
+	// that resulted in the FailWorkflowExecution decision to fail this execution.
+	// This information can be useful for diagnosing problems by tracing back the chain
+	// of events leading up to this event.
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId int64
@@ -1243,128 +1137,58 @@ type FailWorkflowExecutionFailedEventAttributes struct {
 }
 
 // Event within a workflow execution. A history event can be one of these types:
-// -
-// ActivityTaskCancelRequested – A RequestCancelActivityTask decision was received
-// by the system.
-// - ActivityTaskCanceled – The activity task was successfully
-// canceled.
-// - ActivityTaskCompleted – An activity worker successfully completed an
-// activity task by calling RespondActivityTaskCompleted.
-// - ActivityTaskFailed – An
-// activity worker failed an activity task by calling RespondActivityTaskFailed.
-// -
-// ActivityTaskScheduled – An activity task was scheduled for execution.
-// -
-// ActivityTaskStarted – The scheduled activity task was dispatched to a worker.
-// -
-// ActivityTaskTimedOut – The activity task timed out.
-// - CancelTimerFailed – Failed
-// to process CancelTimer decision. This happens when the decision isn't configured
-// properly, for example no timer exists with the specified timer Id.
-// -
-// CancelWorkflowExecutionFailed – A request to cancel a workflow execution
-// failed.
-// - ChildWorkflowExecutionCanceled – A child workflow execution, started
-// by this workflow execution, was canceled and closed.
-// -
-// ChildWorkflowExecutionCompleted – A child workflow execution, started by this
-// workflow execution, completed successfully and was closed.
-// -
-// ChildWorkflowExecutionFailed – A child workflow execution, started by this
-// workflow execution, failed to complete successfully and was closed.
-// -
-// ChildWorkflowExecutionStarted – A child workflow execution was successfully
-// started.
-// - ChildWorkflowExecutionTerminated – A child workflow execution,
-// started by this workflow execution, was terminated.
-// -
-// ChildWorkflowExecutionTimedOut – A child workflow execution, started by this
-// workflow execution, timed out and was closed.
-// - CompleteWorkflowExecutionFailed
-// – The workflow execution failed to complete.
-// -
-// ContinueAsNewWorkflowExecutionFailed – The workflow execution failed to complete
-// after being continued as a new workflow execution.
-// - DecisionTaskCompleted – The
-// decider successfully completed a decision task by calling
-// RespondDecisionTaskCompleted.
-// - DecisionTaskScheduled – A decision task was
-// scheduled for the workflow execution.
-// - DecisionTaskStarted – The decision task
-// was dispatched to a decider.
-// - DecisionTaskTimedOut – The decision task timed
-// out.
-// - ExternalWorkflowExecutionCancelRequested – Request to cancel an external
-// workflow execution was successfully delivered to the target execution.
-// -
-// ExternalWorkflowExecutionSignaled – A signal, requested by this workflow
-// execution, was successfully delivered to the target external workflow
-// execution.
-// - FailWorkflowExecutionFailed – A request to mark a workflow
-// execution as failed, itself failed.
-// - MarkerRecorded – A marker was recorded in
-// the workflow history as the result of a RecordMarker decision.
-// -
-// RecordMarkerFailed – A RecordMarker decision was returned as failed.
-// -
-// RequestCancelActivityTaskFailed – Failed to process RequestCancelActivityTask
-// decision. This happens when the decision isn't configured properly.
-// -
-// RequestCancelExternalWorkflowExecutionFailed – Request to cancel an external
-// workflow execution failed.
-// - RequestCancelExternalWorkflowExecutionInitiated – A
-// request was made to request the cancellation of an external workflow
-// execution.
-// - ScheduleActivityTaskFailed – Failed to process ScheduleActivityTask
-// decision. This happens when the decision isn't configured properly, for example
-// the activity type specified isn't registered.
-// -
-// SignalExternalWorkflowExecutionFailed – The request to signal an external
-// workflow execution failed.
-// - SignalExternalWorkflowExecutionInitiated – A
-// request to signal an external workflow was made.
-// - StartActivityTaskFailed – A
-// scheduled activity task failed to start.
-// - StartChildWorkflowExecutionFailed –
-// Failed to process StartChildWorkflowExecution decision. This happens when the
-// decision isn't configured properly, for example the workflow type specified
-// isn't registered.
-// - StartChildWorkflowExecutionInitiated – A request was made to
-// start a child workflow execution.
-// - StartTimerFailed – Failed to process
-// StartTimer decision. This happens when the decision isn't configured properly,
-// for example a timer already exists with the specified timer Id.
-// - TimerCanceled
-// – A timer, previously started for this workflow execution, was successfully
-// canceled.
-// - TimerFired – A timer, previously started for this workflow
-// execution, fired.
-// - TimerStarted – A timer was started for the workflow
-// execution due to a StartTimer decision.
-// - WorkflowExecutionCancelRequested – A
-// request to cancel this workflow execution was made.
-// - WorkflowExecutionCanceled
-// – The workflow execution was successfully canceled and closed.
-// -
-// WorkflowExecutionCompleted – The workflow execution was closed due to successful
-// completion.
-// - WorkflowExecutionContinuedAsNew – The workflow execution was
-// closed and a new execution of the same type was created with the same
-// workflowId.
-// - WorkflowExecutionFailed – The workflow execution closed due to a
-// failure.
-// - WorkflowExecutionSignaled – An external signal was received for the
-// workflow execution.
-// - WorkflowExecutionStarted – The workflow execution was
-// started.
-// - WorkflowExecutionTerminated – The workflow execution was
-// terminated.
-// - WorkflowExecutionTimedOut – The workflow execution was closed
-// because a time out was exceeded.
+//   - ActivityTaskCancelRequested – A RequestCancelActivityTask decision was received by the system.
+//   - ActivityTaskCanceled – The activity task was successfully canceled.
+//   - ActivityTaskCompleted – An activity worker successfully completed an activity task by calling RespondActivityTaskCompleted .
+//   - ActivityTaskFailed – An activity worker failed an activity task by calling RespondActivityTaskFailed .
+//   - ActivityTaskScheduled – An activity task was scheduled for execution.
+//   - ActivityTaskStarted – The scheduled activity task was dispatched to a worker.
+//   - ActivityTaskTimedOut – The activity task timed out.
+//   - CancelTimerFailed – Failed to process CancelTimer decision. This happens when the decision isn't configured properly, for example no timer exists with the specified timer Id.
+//   - CancelWorkflowExecutionFailed – A request to cancel a workflow execution failed.
+//   - ChildWorkflowExecutionCanceled – A child workflow execution, started by this workflow execution, was canceled and closed.
+//   - ChildWorkflowExecutionCompleted – A child workflow execution, started by this workflow execution, completed successfully and was closed.
+//   - ChildWorkflowExecutionFailed – A child workflow execution, started by this workflow execution, failed to complete successfully and was closed.
+//   - ChildWorkflowExecutionStarted – A child workflow execution was successfully started.
+//   - ChildWorkflowExecutionTerminated – A child workflow execution, started by this workflow execution, was terminated.
+//   - ChildWorkflowExecutionTimedOut – A child workflow execution, started by this workflow execution, timed out and was closed.
+//   - CompleteWorkflowExecutionFailed – The workflow execution failed to complete.
+//   - ContinueAsNewWorkflowExecutionFailed – The workflow execution failed to complete after being continued as a new workflow execution.
+//   - DecisionTaskCompleted – The decider successfully completed a decision task by calling RespondDecisionTaskCompleted .
+//   - DecisionTaskScheduled – A decision task was scheduled for the workflow execution.
+//   - DecisionTaskStarted – The decision task was dispatched to a decider.
+//   - DecisionTaskTimedOut – The decision task timed out.
+//   - ExternalWorkflowExecutionCancelRequested – Request to cancel an external workflow execution was successfully delivered to the target execution.
+//   - ExternalWorkflowExecutionSignaled – A signal, requested by this workflow execution, was successfully delivered to the target external workflow execution.
+//   - FailWorkflowExecutionFailed – A request to mark a workflow execution as failed, itself failed.
+//   - MarkerRecorded – A marker was recorded in the workflow history as the result of a RecordMarker decision.
+//   - RecordMarkerFailed – A RecordMarker decision was returned as failed.
+//   - RequestCancelActivityTaskFailed – Failed to process RequestCancelActivityTask decision. This happens when the decision isn't configured properly.
+//   - RequestCancelExternalWorkflowExecutionFailed – Request to cancel an external workflow execution failed.
+//   - RequestCancelExternalWorkflowExecutionInitiated – A request was made to request the cancellation of an external workflow execution.
+//   - ScheduleActivityTaskFailed – Failed to process ScheduleActivityTask decision. This happens when the decision isn't configured properly, for example the activity type specified isn't registered.
+//   - SignalExternalWorkflowExecutionFailed – The request to signal an external workflow execution failed.
+//   - SignalExternalWorkflowExecutionInitiated – A request to signal an external workflow was made.
+//   - StartActivityTaskFailed – A scheduled activity task failed to start.
+//   - StartChildWorkflowExecutionFailed – Failed to process StartChildWorkflowExecution decision. This happens when the decision isn't configured properly, for example the workflow type specified isn't registered.
+//   - StartChildWorkflowExecutionInitiated – A request was made to start a child workflow execution.
+//   - StartTimerFailed – Failed to process StartTimer decision. This happens when the decision isn't configured properly, for example a timer already exists with the specified timer Id.
+//   - TimerCanceled – A timer, previously started for this workflow execution, was successfully canceled.
+//   - TimerFired – A timer, previously started for this workflow execution, fired.
+//   - TimerStarted – A timer was started for the workflow execution due to a StartTimer decision.
+//   - WorkflowExecutionCancelRequested – A request to cancel this workflow execution was made.
+//   - WorkflowExecutionCanceled – The workflow execution was successfully canceled and closed.
+//   - WorkflowExecutionCompleted – The workflow execution was closed due to successful completion.
+//   - WorkflowExecutionContinuedAsNew – The workflow execution was closed and a new execution of the same type was created with the same workflowId.
+//   - WorkflowExecutionFailed – The workflow execution closed due to a failure.
+//   - WorkflowExecutionSignaled – An external signal was received for the workflow execution.
+//   - WorkflowExecutionStarted – The workflow execution was started.
+//   - WorkflowExecutionTerminated – The workflow execution was terminated.
+//   - WorkflowExecutionTimedOut – The workflow execution was closed because a time out was exceeded.
 type HistoryEvent struct {
 
-	// The system generated ID of the event. This ID uniquely identifies the event with
-	// in the workflow execution history.
+	// The system generated ID of the event. This ID uniquely identifies the event
+	// with in the workflow execution history.
 	//
 	// This member is required.
 	EventId int64
@@ -1379,8 +1203,8 @@ type HistoryEvent struct {
 	// This member is required.
 	EventType EventType
 
-	// If the event is of type ActivityTaskcancelRequested then this member is set and
-	// provides detailed information about the event. It isn't set for other event
+	// If the event is of type ActivityTaskcancelRequested then this member is set
+	// and provides detailed information about the event. It isn't set for other event
 	// types.
 	ActivityTaskCancelRequestedEventAttributes *ActivityTaskCancelRequestedEventAttributes
 
@@ -1394,8 +1218,9 @@ type HistoryEvent struct {
 	// types.
 	ActivityTaskCompletedEventAttributes *ActivityTaskCompletedEventAttributes
 
-	// If the event is of type ActivityTaskFailed then this member is set and provides
-	// detailed information about the event. It isn't set for other event types.
+	// If the event is of type ActivityTaskFailed then this member is set and
+	// provides detailed information about the event. It isn't set for other event
+	// types.
 	ActivityTaskFailedEventAttributes *ActivityTaskFailedEventAttributes
 
 	// If the event is of type ActivityTaskScheduled then this member is set and
@@ -1403,8 +1228,9 @@ type HistoryEvent struct {
 	// types.
 	ActivityTaskScheduledEventAttributes *ActivityTaskScheduledEventAttributes
 
-	// If the event is of type ActivityTaskStarted then this member is set and provides
-	// detailed information about the event. It isn't set for other event types.
+	// If the event is of type ActivityTaskStarted then this member is set and
+	// provides detailed information about the event. It isn't set for other event
+	// types.
 	ActivityTaskStartedEventAttributes *ActivityTaskStartedEventAttributes
 
 	// If the event is of type ActivityTaskTimedOut then this member is set and
@@ -1426,13 +1252,13 @@ type HistoryEvent struct {
 	// types.
 	ChildWorkflowExecutionCanceledEventAttributes *ChildWorkflowExecutionCanceledEventAttributes
 
-	// If the event is of type ChildWorkflowExecutionCompleted then this member is set
-	// and provides detailed information about the event. It isn't set for other event
-	// types.
+	// If the event is of type ChildWorkflowExecutionCompleted then this member is
+	// set and provides detailed information about the event. It isn't set for other
+	// event types.
 	ChildWorkflowExecutionCompletedEventAttributes *ChildWorkflowExecutionCompletedEventAttributes
 
-	// If the event is of type ChildWorkflowExecutionFailed then this member is set and
-	// provides detailed information about the event. It isn't set for other event
+	// If the event is of type ChildWorkflowExecutionFailed then this member is set
+	// and provides detailed information about the event. It isn't set for other event
 	// types.
 	ChildWorkflowExecutionFailedEventAttributes *ChildWorkflowExecutionFailedEventAttributes
 
@@ -1441,9 +1267,9 @@ type HistoryEvent struct {
 	// types.
 	ChildWorkflowExecutionStartedEventAttributes *ChildWorkflowExecutionStartedEventAttributes
 
-	// If the event is of type ChildWorkflowExecutionTerminated then this member is set
-	// and provides detailed information about the event. It isn't set for other event
-	// types.
+	// If the event is of type ChildWorkflowExecutionTerminated then this member is
+	// set and provides detailed information about the event. It isn't set for other
+	// event types.
 	ChildWorkflowExecutionTerminatedEventAttributes *ChildWorkflowExecutionTerminatedEventAttributes
 
 	// If the event is of type ChildWorkflowExecutionTimedOut then this member is set
@@ -1451,13 +1277,13 @@ type HistoryEvent struct {
 	// types.
 	ChildWorkflowExecutionTimedOutEventAttributes *ChildWorkflowExecutionTimedOutEventAttributes
 
-	// If the event is of type CompleteWorkflowExecutionFailed then this member is set
-	// and provides detailed information about the event. It isn't set for other event
-	// types.
+	// If the event is of type CompleteWorkflowExecutionFailed then this member is
+	// set and provides detailed information about the event. It isn't set for other
+	// event types.
 	CompleteWorkflowExecutionFailedEventAttributes *CompleteWorkflowExecutionFailedEventAttributes
 
-	// If the event is of type ContinueAsNewWorkflowExecutionFailed then this member is
-	// set and provides detailed information about the event. It isn't set for other
+	// If the event is of type ContinueAsNewWorkflowExecutionFailed then this member
+	// is set and provides detailed information about the event. It isn't set for other
 	// event types.
 	ContinueAsNewWorkflowExecutionFailedEventAttributes *ContinueAsNewWorkflowExecutionFailedEventAttributes
 
@@ -1471,8 +1297,9 @@ type HistoryEvent struct {
 	// types.
 	DecisionTaskScheduledEventAttributes *DecisionTaskScheduledEventAttributes
 
-	// If the event is of type DecisionTaskStarted then this member is set and provides
-	// detailed information about the event. It isn't set for other event types.
+	// If the event is of type DecisionTaskStarted then this member is set and
+	// provides detailed information about the event. It isn't set for other event
+	// types.
 	DecisionTaskStartedEventAttributes *DecisionTaskStartedEventAttributes
 
 	// If the event is of type DecisionTaskTimedOut then this member is set and
@@ -1490,8 +1317,8 @@ type HistoryEvent struct {
 	// event types.
 	ExternalWorkflowExecutionSignaledEventAttributes *ExternalWorkflowExecutionSignaledEventAttributes
 
-	// If the event is of type FailWorkflowExecutionFailed then this member is set and
-	// provides detailed information about the event. It isn't set for other event
+	// If the event is of type FailWorkflowExecutionFailed then this member is set
+	// and provides detailed information about the event. It isn't set for other event
 	// types.
 	FailWorkflowExecutionFailedEventAttributes *FailWorkflowExecutionFailedEventAttributes
 
@@ -1507,25 +1334,26 @@ type HistoryEvent struct {
 	// other event types.
 	LambdaFunctionScheduledEventAttributes *LambdaFunctionScheduledEventAttributes
 
-	// Provides the details of the LambdaFunctionStarted event. It isn't set for other
-	// event types.
+	// Provides the details of the LambdaFunctionStarted event. It isn't set for
+	// other event types.
 	LambdaFunctionStartedEventAttributes *LambdaFunctionStartedEventAttributes
 
-	// Provides the details of the LambdaFunctionTimedOut event. It isn't set for other
-	// event types.
+	// Provides the details of the LambdaFunctionTimedOut event. It isn't set for
+	// other event types.
 	LambdaFunctionTimedOutEventAttributes *LambdaFunctionTimedOutEventAttributes
 
 	// If the event is of type MarkerRecorded then this member is set and provides
 	// detailed information about the event. It isn't set for other event types.
 	MarkerRecordedEventAttributes *MarkerRecordedEventAttributes
 
-	// If the event is of type DecisionTaskFailed then this member is set and provides
-	// detailed information about the event. It isn't set for other event types.
+	// If the event is of type DecisionTaskFailed then this member is set and
+	// provides detailed information about the event. It isn't set for other event
+	// types.
 	RecordMarkerFailedEventAttributes *RecordMarkerFailedEventAttributes
 
-	// If the event is of type RequestCancelActivityTaskFailed then this member is set
-	// and provides detailed information about the event. It isn't set for other event
-	// types.
+	// If the event is of type RequestCancelActivityTaskFailed then this member is
+	// set and provides detailed information about the event. It isn't set for other
+	// event types.
 	RequestCancelActivityTaskFailedEventAttributes *RequestCancelActivityTaskFailedEventAttributes
 
 	// If the event is of type RequestCancelExternalWorkflowExecutionFailed then this
@@ -1543,8 +1371,8 @@ type HistoryEvent struct {
 	// types.
 	ScheduleActivityTaskFailedEventAttributes *ScheduleActivityTaskFailedEventAttributes
 
-	// Provides the details of the ScheduleLambdaFunctionFailed event. It isn't set for
-	// other event types.
+	// Provides the details of the ScheduleLambdaFunctionFailed event. It isn't set
+	// for other event types.
 	ScheduleLambdaFunctionFailedEventAttributes *ScheduleLambdaFunctionFailedEventAttributes
 
 	// If the event is of type SignalExternalWorkflowExecutionFailed then this member
@@ -1562,8 +1390,8 @@ type HistoryEvent struct {
 	// event types.
 	StartChildWorkflowExecutionFailedEventAttributes *StartChildWorkflowExecutionFailedEventAttributes
 
-	// If the event is of type StartChildWorkflowExecutionInitiated then this member is
-	// set and provides detailed information about the event. It isn't set for other
+	// If the event is of type StartChildWorkflowExecutionInitiated then this member
+	// is set and provides detailed information about the event. It isn't set for other
 	// event types.
 	StartChildWorkflowExecutionInitiatedEventAttributes *StartChildWorkflowExecutionInitiatedEventAttributes
 
@@ -1579,17 +1407,17 @@ type HistoryEvent struct {
 	// detailed information about the event. It isn't set for other event types.
 	TimerCanceledEventAttributes *TimerCanceledEventAttributes
 
-	// If the event is of type TimerFired then this member is set and provides detailed
-	// information about the event. It isn't set for other event types.
+	// If the event is of type TimerFired then this member is set and provides
+	// detailed information about the event. It isn't set for other event types.
 	TimerFiredEventAttributes *TimerFiredEventAttributes
 
 	// If the event is of type TimerStarted then this member is set and provides
 	// detailed information about the event. It isn't set for other event types.
 	TimerStartedEventAttributes *TimerStartedEventAttributes
 
-	// If the event is of type WorkflowExecutionCancelRequested then this member is set
-	// and provides detailed information about the event. It isn't set for other event
-	// types.
+	// If the event is of type WorkflowExecutionCancelRequested then this member is
+	// set and provides detailed information about the event. It isn't set for other
+	// event types.
 	WorkflowExecutionCancelRequestedEventAttributes *WorkflowExecutionCancelRequestedEventAttributes
 
 	// If the event is of type WorkflowExecutionCanceled then this member is set and
@@ -1602,9 +1430,9 @@ type HistoryEvent struct {
 	// types.
 	WorkflowExecutionCompletedEventAttributes *WorkflowExecutionCompletedEventAttributes
 
-	// If the event is of type WorkflowExecutionContinuedAsNew then this member is set
-	// and provides detailed information about the event. It isn't set for other event
-	// types.
+	// If the event is of type WorkflowExecutionContinuedAsNew then this member is
+	// set and provides detailed information about the event. It isn't set for other
+	// event types.
 	WorkflowExecutionContinuedAsNewEventAttributes *WorkflowExecutionContinuedAsNewEventAttributes
 
 	// If the event is of type WorkflowExecutionFailed then this member is set and
@@ -1622,8 +1450,8 @@ type HistoryEvent struct {
 	// types.
 	WorkflowExecutionStartedEventAttributes *WorkflowExecutionStartedEventAttributes
 
-	// If the event is of type WorkflowExecutionTerminated then this member is set and
-	// provides detailed information about the event. It isn't set for other event
+	// If the event is of type WorkflowExecutionTerminated then this member is set
+	// and provides detailed information about the event. It isn't set for other event
 	// types.
 	WorkflowExecutionTerminatedEventAttributes *WorkflowExecutionTerminatedEventAttributes
 
@@ -1663,9 +1491,9 @@ type LambdaFunctionCompletedEventAttributes struct {
 // event types.
 type LambdaFunctionFailedEventAttributes struct {
 
-	// The ID of the LambdaFunctionScheduled event that was recorded when this activity
-	// task was scheduled. To help diagnose issues, use this information to trace back
-	// the chain of events leading up to this event.
+	// The ID of the LambdaFunctionScheduled event that was recorded when this
+	// activity task was scheduled. To help diagnose issues, use this information to
+	// trace back the chain of events leading up to this event.
 	//
 	// This member is required.
 	ScheduledEventId int64
@@ -1720,13 +1548,13 @@ type LambdaFunctionScheduledEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the LambdaFunctionStarted event. It isn't set for other
-// event types.
+// Provides the details of the LambdaFunctionStarted event. It isn't set for
+// other event types.
 type LambdaFunctionStartedEventAttributes struct {
 
-	// The ID of the LambdaFunctionScheduled event that was recorded when this activity
-	// task was scheduled. To help diagnose issues, use this information to trace back
-	// the chain of events leading up to this event.
+	// The ID of the LambdaFunctionScheduled event that was recorded when this
+	// activity task was scheduled. To help diagnose issues, use this information to
+	// trace back the chain of events leading up to this event.
 	//
 	// This member is required.
 	ScheduledEventId int64
@@ -1734,12 +1562,12 @@ type LambdaFunctionStartedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides details of the LambdaFunctionTimedOut event.
+// Provides details of the LambdaFunctionTimedOut  event.
 type LambdaFunctionTimedOutEventAttributes struct {
 
-	// The ID of the LambdaFunctionScheduled event that was recorded when this activity
-	// task was scheduled. To help diagnose issues, use this information to trace back
-	// the chain of events leading up to this event.
+	// The ID of the LambdaFunctionScheduled event that was recorded when this
+	// activity task was scheduled. To help diagnose issues, use this information to
+	// trace back the chain of events leading up to this event.
 	//
 	// This member is required.
 	ScheduledEventId int64
@@ -1757,7 +1585,7 @@ type LambdaFunctionTimedOutEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the MarkerRecorded event.
+// Provides the details of the MarkerRecorded  event.
 type MarkerRecordedEventAttributes struct {
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
@@ -1782,19 +1610,16 @@ type MarkerRecordedEventAttributes struct {
 // Provides the details of the RecordMarker decision. Access Control You can use
 // IAM policies to control this decision's access to Amazon SWF resources as
 // follows:
-// - Use a Resource element with the domain name to limit the action to
-// only specified domains.
-// - Use an Action element to allow or deny permission to
-// call this action.
-// - You cannot use an IAM policy to constrain this action's
-// parameters.
+//   - Use a Resource element with the domain name to limit the action to only specified domains.
+//   - Use an Action element to allow or deny permission to call this action.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
-// If the caller doesn't have sufficient permissions to invoke the
-// action, or the parameter values fall outside the specified constraints, the
-// action fails. The associated event attribute's cause parameter is set to
-// OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to
-// Manage Access to Amazon SWF Workflows
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// If
+// the caller doesn't have sufficient permissions to invoke the action, or the
+// parameter values fall outside the specified constraints, the action fails. The
+// associated event attribute's cause  parameter is set to OPERATION_NOT_PERMITTED
+// . For details and example IAM policies, see Using IAM to Manage Access to
+// Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type RecordMarkerDecisionAttributes struct {
 
@@ -1809,23 +1634,22 @@ type RecordMarkerDecisionAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the RecordMarkerFailed event.
+// Provides the details of the RecordMarkerFailed  event.
 type RecordMarkerFailedEventAttributes struct {
 
-	// The cause of the failure. This information is generated by the system and can be
-	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
-	// decision failed because it lacked sufficient permissions. For details and
-	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// The cause of the failure. This information is generated by the system and can
+	// be useful for diagnostic purposes. If cause  is set to OPERATION_NOT_PERMITTED
+	// , the decision failed because it lacked sufficient permissions. For details and
+	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// This member is required.
 	Cause RecordMarkerFailedCause
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
-	// that resulted in the RecordMarkerFailed decision for this cancellation request.
-	// This information can be useful for diagnosing problems by tracing back the chain
-	// of events leading up to this event.
+	// that resulted in the RecordMarkerFailed decision for this cancellation
+	// request. This information can be useful for diagnosing problems by tracing back
+	// the chain of events leading up to this event.
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId int64
@@ -1841,23 +1665,20 @@ type RecordMarkerFailedEventAttributes struct {
 // Provides the details of the RequestCancelActivityTask decision. Access Control
 // You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
-// - Use a Resource element with the domain name to limit the
-// action to only specified domains.
-// - Use an Action element to allow or deny
-// permission to call this action.
-// - You cannot use an IAM policy to constrain this
-// action's parameters.
+//   - Use a Resource element with the domain name to limit the action to only specified domains.
+//   - Use an Action element to allow or deny permission to call this action.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
-// If the caller doesn't have sufficient permissions to
-// invoke the action, or the parameter values fall outside the specified
-// constraints, the action fails. The associated event attribute's cause parameter
-// is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see
-// Using IAM to Manage Access to Amazon SWF Workflows
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// If
+// the caller doesn't have sufficient permissions to invoke the action, or the
+// parameter values fall outside the specified constraints, the action fails. The
+// associated event attribute's cause  parameter is set to OPERATION_NOT_PERMITTED
+// . For details and example IAM policies, see Using IAM to Manage Access to
+// Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type RequestCancelActivityTaskDecisionAttributes struct {
 
-	// The activityId of the activity task to be canceled.
+	// The activityId  of the activity task to be canceled.
 	//
 	// This member is required.
 	ActivityId *string
@@ -1865,19 +1686,18 @@ type RequestCancelActivityTaskDecisionAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the RequestCancelActivityTaskFailed event.
+// Provides the details of the RequestCancelActivityTaskFailed  event.
 type RequestCancelActivityTaskFailedEventAttributes struct {
 
-	// The activityId provided in the RequestCancelActivityTask decision that failed.
+	// The activityId provided in the RequestCancelActivityTask  decision that failed.
 	//
 	// This member is required.
 	ActivityId *string
 
-	// The cause of the failure. This information is generated by the system and can be
-	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
-	// decision failed because it lacked sufficient permissions. For details and
-	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// The cause of the failure. This information is generated by the system and can
+	// be useful for diagnostic purposes. If cause  is set to OPERATION_NOT_PERMITTED
+	// , the decision failed because it lacked sufficient permissions. For details and
+	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// This member is required.
@@ -1897,23 +1717,20 @@ type RequestCancelActivityTaskFailedEventAttributes struct {
 // Provides the details of the RequestCancelExternalWorkflowExecution decision.
 // Access Control You can use IAM policies to control this decision's access to
 // Amazon SWF resources as follows:
-// - Use a Resource element with the domain name
-// to limit the action to only specified domains.
-// - Use an Action element to allow
-// or deny permission to call this action.
-// - You cannot use an IAM policy to
-// constrain this action's parameters.
+//   - Use a Resource element with the domain name to limit the action to only specified domains.
+//   - Use an Action element to allow or deny permission to call this action.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
-// If the caller doesn't have sufficient
-// permissions to invoke the action, or the parameter values fall outside the
-// specified constraints, the action fails. The associated event attribute's cause
-// parameter is set to OPERATION_NOT_PERMITTED. For details and example IAM
-// policies, see Using IAM to Manage Access to Amazon SWF Workflows
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// If
+// the caller doesn't have sufficient permissions to invoke the action, or the
+// parameter values fall outside the specified constraints, the action fails. The
+// associated event attribute's cause  parameter is set to OPERATION_NOT_PERMITTED
+// . For details and example IAM policies, see Using IAM to Manage Access to
+// Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type RequestCancelExternalWorkflowExecutionDecisionAttributes struct {
 
-	// The workflowId of the external workflow execution to cancel.
+	// The workflowId  of the external workflow execution to cancel.
 	//
 	// This member is required.
 	WorkflowId *string
@@ -1922,20 +1739,19 @@ type RequestCancelExternalWorkflowExecutionDecisionAttributes struct {
 	// workflow tasks.
 	Control *string
 
-	// The runId of the external workflow execution to cancel.
+	// The runId  of the external workflow execution to cancel.
 	RunId *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the RequestCancelExternalWorkflowExecutionFailed event.
+// Provides the details of the RequestCancelExternalWorkflowExecutionFailed  event.
 type RequestCancelExternalWorkflowExecutionFailedEventAttributes struct {
 
-	// The cause of the failure. This information is generated by the system and can be
-	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
-	// decision failed because it lacked sufficient permissions. For details and
-	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// The cause of the failure. This information is generated by the system and can
+	// be useful for diagnostic purposes. If cause  is set to OPERATION_NOT_PERMITTED
+	// , the decision failed because it lacked sufficient permissions. For details and
+	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// This member is required.
@@ -1967,7 +1783,7 @@ type RequestCancelExternalWorkflowExecutionFailedEventAttributes struct {
 	// tasks. This data isn't sent to the workflow execution.
 	Control *string
 
-	// The runId of the external workflow execution.
+	// The runId  of the external workflow execution.
 	RunId *string
 
 	noSmithyDocumentSerde
@@ -1985,7 +1801,7 @@ type RequestCancelExternalWorkflowExecutionInitiatedEventAttributes struct {
 	// This member is required.
 	DecisionTaskCompletedEventId int64
 
-	// The workflowId of the external workflow execution to be canceled.
+	// The workflowId  of the external workflow execution to be canceled.
 	//
 	// This member is required.
 	WorkflowId *string
@@ -1994,7 +1810,7 @@ type RequestCancelExternalWorkflowExecutionInitiatedEventAttributes struct {
 	// workflow tasks.
 	Control *string
 
-	// The runId of the external workflow execution to be canceled.
+	// The runId  of the external workflow execution to be canceled.
 	RunId *string
 
 	noSmithyDocumentSerde
@@ -2002,7 +1818,7 @@ type RequestCancelExternalWorkflowExecutionInitiatedEventAttributes struct {
 
 // Tags are key-value pairs that can be associated with Amazon SWF state machines
 // and activities. Tags may only contain unicode letters, digits, whitespace, or
-// these symbols: _ . : / = + - @.
+// these symbols: _ . : / = + - @ .
 type ResourceTag struct {
 
 	// The key of a tag.
@@ -2019,32 +1835,26 @@ type ResourceTag struct {
 // Provides the details of the ScheduleActivityTask decision. Access Control You
 // can use IAM policies to control this decision's access to Amazon SWF resources
 // as follows:
-// - Use a Resource element with the domain name to limit the action to
-// only specified domains.
-// - Use an Action element to allow or deny permission to
-// call this action.
-// - Constrain the following parameters by using a Condition
-// element with the appropriate keys.
-// - activityType.name – String constraint. The
-// key is swf:activityType.name.
-// - activityType.version – String constraint. The
-// key is swf:activityType.version.
-// - taskList – String constraint. The key is
-// swf:taskList.name.
+//   - Use a Resource element with the domain name to limit the action to only specified domains.
+//   - Use an Action element to allow or deny permission to call this action.
+//   - Constrain the following parameters by using a Condition element with the appropriate keys.
+//   - activityType.name – String constraint. The key is swf:activityType.name .
+//   - activityType.version – String constraint. The key is swf:activityType.version .
+//   - taskList – String constraint. The key is swf:taskList.name .
 //
-// If the caller doesn't have sufficient permissions to invoke
-// the action, or the parameter values fall outside the specified constraints, the
-// action fails. The associated event attribute's cause parameter is set to
-// OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to
-// Manage Access to Amazon SWF Workflows
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// If the
+// caller doesn't have sufficient permissions to invoke the action, or the
+// parameter values fall outside the specified constraints, the action fails. The
+// associated event attribute's cause  parameter is set to OPERATION_NOT_PERMITTED
+// . For details and example IAM policies, see Using IAM to Manage Access to
+// Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type ScheduleActivityTaskDecisionAttributes struct {
 
-	// The activityId of the activity task. The specified string must not start or end
-	// with whitespace. It must not contain a : (colon), / (slash), | (vertical bar),
-	// or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not
-	// contain the literal string arn.
+	// The activityId of the activity task. The specified string must not start or
+	// end with whitespace. It must not contain a :  (colon), /  (slash), | (vertical
+	// bar), or any control characters ( \u0000-\u001f  | \u007f-\u009f). Also, it
+	// must not contain the literal string arn .
 	//
 	// This member is required.
 	ActivityId *string
@@ -2063,84 +1873,83 @@ type ScheduleActivityTaskDecisionAttributes struct {
 	// timeout is exceeded, the activity task is automatically timed out. If the worker
 	// subsequently attempts to record a heartbeat or returns a result, it is ignored.
 	// This overrides the default heartbeat timeout specified when registering the
-	// activity type using RegisterActivityType. The duration is specified in seconds,
-	// an integer greater than or equal to 0. You can use NONE to specify unlimited
-	// duration.
+	// activity type using RegisterActivityType. The duration is specified in
+	// seconds, an integer greater than or equal to 0 . You can use NONE to specify
+	// unlimited duration.
 	HeartbeatTimeout *string
 
 	// The input provided to the activity task.
 	Input *string
 
 	// The maximum duration for this activity task. The duration is specified in
-	// seconds, an integer greater than or equal to 0. You can use NONE to specify
+	// seconds, an integer greater than or equal to 0 . You can use NONE to specify
 	// unlimited duration. A schedule-to-close timeout for this activity task must be
 	// specified either as a default for the activity type or through this field. If
 	// neither this field is set nor a default schedule-to-close timeout was specified
 	// at registration time then a fault is returned.
 	ScheduleToCloseTimeout *string
 
-	// If set, specifies the maximum duration the activity task can wait to be assigned
-	// to a worker. This overrides the default schedule-to-start timeout specified when
-	// registering the activity type using RegisterActivityType. The duration is
-	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
-	// specify unlimited duration. A schedule-to-start timeout for this activity task
-	// must be specified either as a default for the activity type or through this
-	// field. If neither this field is set nor a default schedule-to-start timeout was
-	// specified at registration time then a fault is returned.
+	// If set, specifies the maximum duration the activity task can wait to be
+	// assigned to a worker. This overrides the default schedule-to-start timeout
+	// specified when registering the activity type using RegisterActivityType. The
+	// duration is specified in seconds, an integer greater than or equal to 0. You
+	// can use NONE to specify unlimited duration. A schedule-to-start timeout for
+	// this activity task must be specified either as a default for the activity type
+	// or through this field. If neither this field is set nor a default
+	// schedule-to-start timeout was specified at registration time then a fault is
+	// returned.
 	ScheduleToStartTimeout *string
 
 	// If set, specifies the maximum duration a worker may take to process this
 	// activity task. This overrides the default start-to-close timeout specified when
 	// registering the activity type using RegisterActivityType. The duration is
-	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
-	// specify unlimited duration. A start-to-close timeout for this activity task must
-	// be specified either as a default for the activity type or through this field. If
-	// neither this field is set nor a default start-to-close timeout was specified at
-	// registration time then a fault is returned.
+	// specified in seconds, an integer greater than or equal to 0 . You can use NONE
+	// to specify unlimited duration. A start-to-close timeout for this activity task
+	// must be specified either as a default for the activity type or through this
+	// field. If neither this field is set nor a default start-to-close timeout was
+	// specified at registration time then a fault is returned.
 	StartToCloseTimeout *string
 
 	// If set, specifies the name of the task list in which to schedule the activity
-	// task. If not specified, the defaultTaskList registered with the activity type is
-	// used. A task list for this activity task must be specified either as a default
-	// for the activity type or through this field. If neither this field is set nor a
-	// default task list was specified at registration time then a fault is returned.
-	// The specified string must not start or end with whitespace. It must not contain
-	// a : (colon), / (slash), | (vertical bar), or any control characters
-	// (\u0000-\u001f | \u007f-\u009f). Also, it must not contain the literal string
-	// arn.
+	// task. If not specified, the defaultTaskList registered with the activity type
+	// is used. A task list for this activity task must be specified either as a
+	// default for the activity type or through this field. If neither this field is
+	// set nor a default task list was specified at registration time then a fault is
+	// returned. The specified string must not start or end with whitespace. It must
+	// not contain a :  (colon), /  (slash), | (vertical bar), or any control
+	// characters ( \u0000-\u001f  | \u007f-\u009f). Also, it must not contain the
+	// literal string arn .
 	TaskList *TaskList
 
-	// If set, specifies the priority with which the activity task is to be assigned to
-	// a worker. This overrides the defaultTaskPriority specified when registering the
-	// activity type using RegisterActivityType. Valid values are integers that range
-	// from Java's Integer.MIN_VALUE (-2147483648) to Integer.MAX_VALUE (2147483647).
-	// Higher numbers indicate higher priority. For more information about setting task
-	// priority, see Setting Task Priority
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// If set, specifies the priority with which the activity task is to be assigned
+	// to a worker. This overrides the defaultTaskPriority specified when registering
+	// the activity type using RegisterActivityType. Valid values are integers that
+	// range from Java's Integer.MIN_VALUE  (-2147483648) to Integer.MAX_VALUE
+	// (2147483647). Higher numbers indicate higher priority. For more information
+	// about setting task priority, see Setting Task Priority (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the ScheduleActivityTaskFailed event.
+// Provides the details of the ScheduleActivityTaskFailed  event.
 type ScheduleActivityTaskFailedEventAttributes struct {
 
-	// The activityId provided in the ScheduleActivityTask decision that failed.
+	// The activityId provided in the ScheduleActivityTask  decision that failed.
 	//
 	// This member is required.
 	ActivityId *string
 
-	// The activity type provided in the ScheduleActivityTask decision that failed.
+	// The activity type provided in the ScheduleActivityTask  decision that failed.
 	//
 	// This member is required.
 	ActivityType *ActivityType
 
-	// The cause of the failure. This information is generated by the system and can be
-	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
-	// decision failed because it lacked sufficient permissions. For details and
-	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// The cause of the failure. This information is generated by the system and can
+	// be useful for diagnostic purposes. If cause  is set to OPERATION_NOT_PERMITTED
+	// , the decision failed because it lacked sufficient permissions. For details and
+	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// This member is required.
@@ -2157,8 +1966,8 @@ type ScheduleActivityTaskFailedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Decision attributes specified in scheduleLambdaFunctionDecisionAttributes within
-// the list of decisions decisions passed to RespondDecisionTaskCompleted.
+// Decision attributes specified in scheduleLambdaFunctionDecisionAttributes
+// within the list of decisions decisions  passed to RespondDecisionTaskCompleted .
 type ScheduleLambdaFunctionDecisionAttributes struct {
 
 	// A string that identifies the Lambda function execution in the event history.
@@ -2178,24 +1987,23 @@ type ScheduleLambdaFunctionDecisionAttributes struct {
 	// The optional input data to be supplied to the Lambda function.
 	Input *string
 
-	// The timeout value, in seconds, after which the Lambda function is considered to
-	// be failed once it has started. This can be any integer from 1-300 (1s-5m). If no
-	// value is supplied, than a default value of 300s is assumed.
+	// The timeout value, in seconds, after which the Lambda function is considered
+	// to be failed once it has started. This can be any integer from 1-300 (1s-5m). If
+	// no value is supplied, than a default value of 300s is assumed.
 	StartToCloseTimeout *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the ScheduleLambdaFunctionFailed event. It isn't set for
-// other event types.
+// Provides the details of the ScheduleLambdaFunctionFailed event. It isn't set
+// for other event types.
 type ScheduleLambdaFunctionFailedEventAttributes struct {
 
-	// The cause of the failure. To help diagnose issues, use this information to trace
-	// back the chain of events leading up to this event. If cause is set to
+	// The cause of the failure. To help diagnose issues, use this information to
+	// trace back the chain of events leading up to this event. If cause  is set to
 	// OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient
 	// permissions. For details and example IAM policies, see Using IAM to Manage
-	// Access to Amazon SWF Workflows
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// This member is required.
@@ -2208,7 +2016,7 @@ type ScheduleLambdaFunctionFailedEventAttributes struct {
 	// This member is required.
 	DecisionTaskCompletedEventId int64
 
-	// The ID provided in the ScheduleLambdaFunction decision that failed.
+	// The ID provided in the ScheduleLambdaFunction  decision that failed.
 	//
 	// This member is required.
 	Id *string
@@ -2224,19 +2032,16 @@ type ScheduleLambdaFunctionFailedEventAttributes struct {
 // Provides the details of the SignalExternalWorkflowExecution decision. Access
 // Control You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
-// - Use a Resource element with the domain name to limit the
-// action to only specified domains.
-// - Use an Action element to allow or deny
-// permission to call this action.
-// - You cannot use an IAM policy to constrain this
-// action's parameters.
+//   - Use a Resource element with the domain name to limit the action to only specified domains.
+//   - Use an Action element to allow or deny permission to call this action.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
-// If the caller doesn't have sufficient permissions to
-// invoke the action, or the parameter values fall outside the specified
-// constraints, the action fails. The associated event attribute's cause parameter
-// is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see
-// Using IAM to Manage Access to Amazon SWF Workflows
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// If
+// the caller doesn't have sufficient permissions to invoke the action, or the
+// parameter values fall outside the specified constraints, the action fails. The
+// associated event attribute's cause  parameter is set to OPERATION_NOT_PERMITTED
+// . For details and example IAM policies, see Using IAM to Manage Access to
+// Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type SignalExternalWorkflowExecutionDecisionAttributes struct {
 
@@ -2246,7 +2051,7 @@ type SignalExternalWorkflowExecutionDecisionAttributes struct {
 	// This member is required.
 	SignalName *string
 
-	// The workflowId of the workflow execution to be signaled.
+	// The workflowId  of the workflow execution to be signaled.
 	//
 	// This member is required.
 	WorkflowId *string
@@ -2259,20 +2064,19 @@ type SignalExternalWorkflowExecutionDecisionAttributes struct {
 	// uses the signal name and input data to process the signal.
 	Input *string
 
-	// The runId of the workflow execution to be signaled.
+	// The runId  of the workflow execution to be signaled.
 	RunId *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the SignalExternalWorkflowExecutionFailed event.
+// Provides the details of the SignalExternalWorkflowExecutionFailed  event.
 type SignalExternalWorkflowExecutionFailedEventAttributes struct {
 
-	// The cause of the failure. This information is generated by the system and can be
-	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
-	// decision failed because it lacked sufficient permissions. For details and
-	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// The cause of the failure. This information is generated by the system and can
+	// be useful for diagnostic purposes. If cause  is set to OPERATION_NOT_PERMITTED
+	// , the decision failed because it lacked sufficient permissions. For details and
+	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// This member is required.
@@ -2304,14 +2108,14 @@ type SignalExternalWorkflowExecutionFailedEventAttributes struct {
 	// tasks. This data isn't sent to the workflow execution.
 	Control *string
 
-	// The runId of the external workflow execution that the signal was being delivered
-	// to.
+	// The runId of the external workflow execution that the signal was being
+	// delivered to.
 	RunId *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the SignalExternalWorkflowExecutionInitiated event.
+// Provides the details of the SignalExternalWorkflowExecutionInitiated  event.
 type SignalExternalWorkflowExecutionInitiatedEventAttributes struct {
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
@@ -2327,7 +2131,7 @@ type SignalExternalWorkflowExecutionInitiatedEventAttributes struct {
 	// This member is required.
 	SignalName *string
 
-	// The workflowId of the external workflow execution.
+	// The workflowId  of the external workflow execution.
 	//
 	// This member is required.
 	WorkflowId *string
@@ -2339,43 +2143,35 @@ type SignalExternalWorkflowExecutionInitiatedEventAttributes struct {
 	// The input provided to the signal.
 	Input *string
 
-	// The runId of the external workflow execution to send the signal to.
+	// The runId  of the external workflow execution to send the signal to.
 	RunId *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the StartChildWorkflowExecution decision. Access Control
-// You can use IAM policies to control this decision's access to Amazon SWF
+// Provides the details of the StartChildWorkflowExecution decision. Access
+// Control You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
-// - Use a Resource element with the domain name to limit the
-// action to only specified domains.
-// - Use an Action element to allow or deny
-// permission to call this action.
-// - Constrain the following parameters by using a
-// Condition element with the appropriate keys.
-// - tagList.member.N – The key is
-// "swf:tagList.N" where N is the tag number from 0 to 4, inclusive.
-// - taskList –
-// String constraint. The key is swf:taskList.name.
-// - workflowType.name – String
-// constraint. The key is swf:workflowType.name.
-// - workflowType.version – String
-// constraint. The key is swf:workflowType.version.
+//   - Use a Resource element with the domain name to limit the action to only specified domains.
+//   - Use an Action element to allow or deny permission to call this action.
+//   - Constrain the following parameters by using a Condition element with the appropriate keys.
+//   - tagList.member.N – The key is "swf:tagList.N" where N is the tag number from 0 to 4, inclusive.
+//   - taskList – String constraint. The key is swf:taskList.name .
+//   - workflowType.name – String constraint. The key is swf:workflowType.name .
+//   - workflowType.version – String constraint. The key is swf:workflowType.version .
 //
-// If the caller doesn't have
-// sufficient permissions to invoke the action, or the parameter values fall
-// outside the specified constraints, the action fails. The associated event
-// attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and
-// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// If the caller doesn't have sufficient permissions to invoke the action, or the
+// parameter values fall outside the specified constraints, the action fails. The
+// associated event attribute's cause  parameter is set to OPERATION_NOT_PERMITTED
+// . For details and example IAM policies, see Using IAM to Manage Access to
+// Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type StartChildWorkflowExecutionDecisionAttributes struct {
 
-	// The workflowId of the workflow execution. The specified string must not start or
-	// end with whitespace. It must not contain a : (colon), / (slash), | (vertical
-	// bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must
-	// not contain the literal string arn.
+	// The workflowId of the workflow execution. The specified string must not start
+	// or end with whitespace. It must not contain a :  (colon), /  (slash), |
+	// (vertical bar), or any control characters ( \u0000-\u001f  | \u007f-\u009f).
+	// Also, it must not contain the literal string arn .
 	//
 	// This member is required.
 	WorkflowId *string
@@ -2387,18 +2183,12 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 
 	// If set, specifies the policy to use for the child workflow executions if the
 	// workflow execution being started is terminated by calling the
-	// TerminateWorkflowExecution action explicitly or due to an expired timeout. This
+	// TerminateWorkflowExecutionaction explicitly or due to an expired timeout. This
 	// policy overrides the default child policy specified when registering the
-	// workflow type using RegisterWorkflowType. The supported child policies are:
-	// -
-	// TERMINATE – The child executions are terminated.
-	// - REQUEST_CANCEL – A request to
-	// cancel is attempted for each child execution by recording a
-	// WorkflowExecutionCancelRequested event in its history. It is up to the decider
-	// to take appropriate actions when it receives an execution history with this
-	// event.
-	// - ABANDON – No action is taken. The child executions continue to run.
-	//
+	// workflow type using RegisterWorkflowType . The supported child policies are:
+	//     - TERMINATE – The child executions are terminated.
+	//     - REQUEST_CANCEL – A request to cancel is attempted for each child execution by recording a WorkflowExecutionCancelRequested event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+	//     - ABANDON – No action is taken. The child executions continue to run.
 	// A
 	// child policy for this workflow execution must be specified either as a default
 	// for the workflow type or through this parameter. If neither this parameter is
@@ -2413,11 +2203,11 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 	// The total duration for this workflow execution. This overrides the
 	// defaultExecutionStartToCloseTimeout specified when registering the workflow
 	// type. The duration is specified in seconds, an integer greater than or equal to
-	// 0. You can use NONE to specify unlimited duration. An execution start-to-close
-	// timeout for this workflow execution must be specified either as a default for
-	// the workflow type or through this parameter. If neither this parameter is set
-	// nor a default execution start-to-close timeout was specified at registration
-	// time then a fault is returned.
+	// 0 . You can use NONE to specify unlimited duration. An execution
+	// start-to-close timeout for this workflow execution must be specified either as a
+	// default for the workflow type or through this parameter. If neither this
+	// parameter is set nor a default execution start-to-close timeout was specified at
+	// registration time then a fault is returned.
 	ExecutionStartToCloseTimeout *string
 
 	// The input to be provided to the workflow execution.
@@ -2426,10 +2216,10 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 	// The IAM role attached to the child workflow execution.
 	LambdaRole *string
 
-	// The list of tags to associate with the child workflow execution. A maximum of 5
-	// tags can be specified. You can list workflow executions with a specific tag by
-	// calling ListOpenWorkflowExecutions or ListClosedWorkflowExecutions and
-	// specifying a TagFilter.
+	// The list of tags to associate with the child workflow execution. A maximum of
+	// 5 tags can be specified. You can list workflow executions with a specific tag by
+	// calling ListOpenWorkflowExecutions  or ListClosedWorkflowExecutions and
+	// specifying a TagFilter .
 	TagList []string
 
 	// The name of the task list to be used for decision tasks of the child workflow
@@ -2437,26 +2227,25 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 	// default for the workflow type or through this parameter. If neither this
 	// parameter is set nor a default task list was specified at registration time then
 	// a fault is returned. The specified string must not start or end with whitespace.
-	// It must not contain a : (colon), / (slash), | (vertical bar), or any control
-	// characters (\u0000-\u001f | \u007f-\u009f). Also, it must not contain the
-	// literal string arn.
+	// It must not contain a :  (colon), /  (slash), | (vertical bar), or any control
+	// characters ( \u0000-\u001f  | \u007f-\u009f). Also, it must not contain the
+	// literal string arn .
 	TaskList *TaskList
 
-	// A task priority that, if set, specifies the priority for a decision task of this
-	// workflow execution. This overrides the defaultTaskPriority specified when
+	// A task priority that, if set, specifies the priority for a decision task of
+	// this workflow execution. This overrides the defaultTaskPriority specified when
 	// registering the workflow type. Valid values are integers that range from Java's
 	// Integer.MIN_VALUE (-2147483648) to Integer.MAX_VALUE (2147483647). Higher
 	// numbers indicate higher priority. For more information about setting task
-	// priority, see Setting Task Priority
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// priority, see Setting Task Priority (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string
 
 	// Specifies the maximum duration of decision tasks for this workflow execution.
 	// This parameter overrides the defaultTaskStartToCloseTimout specified when
 	// registering the workflow type using RegisterWorkflowType. The duration is
-	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
-	// specify unlimited duration. A task start-to-close timeout for this workflow
+	// specified in seconds, an integer greater than or equal to 0 . You can use NONE
+	// to specify unlimited duration. A task start-to-close timeout for this workflow
 	// execution must be specified either as a default for the workflow type or through
 	// this parameter. If neither this parameter is set nor a default task
 	// start-to-close timeout was specified at registration time then a fault is
@@ -2466,44 +2255,44 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the StartChildWorkflowExecutionFailed event.
+// Provides the details of the StartChildWorkflowExecutionFailed  event.
 type StartChildWorkflowExecutionFailedEventAttributes struct {
 
-	// The cause of the failure. This information is generated by the system and can be
-	// useful for diagnostic purposes. When cause is set to OPERATION_NOT_PERMITTED,
-	// the decision fails because it lacks sufficient permissions. For details and
-	// example IAM policies, see  Using IAM to Manage Access to Amazon SWF Workflows
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// The cause of the failure. This information is generated by the system and can
+	// be useful for diagnostic purposes. When cause  is set to
+	// OPERATION_NOT_PERMITTED, the decision fails because it lacks sufficient
+	// permissions. For details and example IAM policies, see Using IAM to Manage
+	// Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// This member is required.
 	Cause StartChildWorkflowExecutionFailedCause
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
-	// that resulted in the StartChildWorkflowExecutionDecision to request this child
-	// workflow execution. This information can be useful for diagnosing problems by
-	// tracing back the chain of events.
+	// that resulted in the StartChildWorkflowExecution Decision to request this
+	// child workflow execution. This information can be useful for diagnosing problems
+	// by tracing back the chain of events.
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId int64
 
-	// When the cause is WORKFLOW_ALREADY_RUNNING, initiatedEventId is the ID of the
-	// StartChildWorkflowExecutionInitiated event that corresponds to the
-	// StartChildWorkflowExecutionDecision to start the workflow execution. You can use
-	// this information to diagnose problems by tracing back the chain of events
-	// leading up to this event. When the cause isn't WORKFLOW_ALREADY_RUNNING,
-	// initiatedEventId is set to 0 because the StartChildWorkflowExecutionInitiated
+	// When the cause  is WORKFLOW_ALREADY_RUNNING , initiatedEventId is the ID of
+	// the StartChildWorkflowExecutionInitiated  event that corresponds to the
+	// StartChildWorkflowExecution Decision to start the workflow execution. You can
+	// use this information to diagnose problems by tracing back the chain of events
+	// leading up to this event. When the cause  isn't WORKFLOW_ALREADY_RUNNING ,
+	// initiatedEventId is set to 0  because the StartChildWorkflowExecutionInitiated
 	// event doesn't exist.
 	//
 	// This member is required.
 	InitiatedEventId int64
 
-	// The workflowId of the child workflow execution.
+	// The workflowId  of the child workflow execution.
 	//
 	// This member is required.
 	WorkflowId *string
 
-	// The workflow type provided in the StartChildWorkflowExecutionDecision that
+	// The workflow type provided in the StartChildWorkflowExecution Decision that
 	// failed.
 	//
 	// This member is required.
@@ -2516,28 +2305,23 @@ type StartChildWorkflowExecutionFailedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the StartChildWorkflowExecutionInitiated event.
+// Provides the details of the StartChildWorkflowExecutionInitiated  event.
 type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 
 	// The policy to use for the child workflow executions if this execution gets
-	// terminated by explicitly calling the TerminateWorkflowExecution action or due to
-	// an expired timeout. The supported child policies are:
-	// - TERMINATE – The child
-	// executions are terminated.
-	// - REQUEST_CANCEL – A request to cancel is attempted
-	// for each child execution by recording a WorkflowExecutionCancelRequested event
-	// in its history. It is up to the decider to take appropriate actions when it
-	// receives an execution history with this event.
-	// - ABANDON – No action is taken.
-	// The child executions continue to run.
+	// terminated by explicitly calling the TerminateWorkflowExecution action or due
+	// to an expired timeout. The supported child policies are:
+	//     - TERMINATE – The child executions are terminated.
+	//     - REQUEST_CANCEL – A request to cancel is attempted for each child execution by recording a WorkflowExecutionCancelRequested event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+	//     - ABANDON – No action is taken. The child executions continue to run.
 	//
 	// This member is required.
 	ChildPolicy ChildPolicy
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
-	// that resulted in the StartChildWorkflowExecutionDecision to request this child
-	// workflow execution. This information can be useful for diagnosing problems by
-	// tracing back the cause of events.
+	// that resulted in the StartChildWorkflowExecution Decision to request this
+	// child workflow execution. This information can be useful for diagnosing problems
+	// by tracing back the cause of events.
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId int64
@@ -2548,7 +2332,7 @@ type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 	// This member is required.
 	TaskList *TaskList
 
-	// The workflowId of the child workflow execution.
+	// The workflowId  of the child workflow execution.
 	//
 	// This member is required.
 	WorkflowId *string
@@ -2562,10 +2346,10 @@ type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 	// decision tasks. This data isn't sent to the activity.
 	Control *string
 
-	// The maximum duration for the child workflow execution. If the workflow execution
-	// isn't closed within this duration, it is timed out and force-terminated. The
-	// duration is specified in seconds, an integer greater than or equal to 0. You can
-	// use NONE to specify unlimited duration.
+	// The maximum duration for the child workflow execution. If the workflow
+	// execution isn't closed within this duration, it is timed out and
+	// force-terminated. The duration is specified in seconds, an integer greater than
+	// or equal to 0 . You can use NONE  to specify unlimited duration.
 	ExecutionStartToCloseTimeout *string
 
 	// The inputs provided to the child workflow execution.
@@ -2577,17 +2361,17 @@ type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 	// The list of tags to associated with the child workflow execution.
 	TagList []string
 
-	// The priority assigned for the decision tasks for this workflow execution. Valid
-	// values are integers that range from Java's Integer.MIN_VALUE (-2147483648) to
-	// Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority. For
-	// more information about setting task priority, see Setting Task Priority
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// The priority assigned for the decision tasks for this workflow execution.
+	// Valid values are integers that range from Java's Integer.MIN_VALUE
+	// (-2147483648) to Integer.MAX_VALUE (2147483647). Higher numbers indicate
+	// higher priority. For more information about setting task priority, see Setting
+	// Task Priority (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string
 
-	// The maximum duration allowed for the decision tasks for this workflow execution.
-	// The duration is specified in seconds, an integer greater than or equal to 0. You
-	// can use NONE to specify unlimited duration.
+	// The maximum duration allowed for the decision tasks for this workflow
+	// execution. The duration is specified in seconds, an integer greater than or
+	// equal to 0 . You can use NONE  to specify unlimited duration.
 	TaskStartToCloseTimeout *string
 
 	noSmithyDocumentSerde
@@ -2597,12 +2381,11 @@ type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 // other event types.
 type StartLambdaFunctionFailedEventAttributes struct {
 
-	// The cause of the failure. To help diagnose issues, use this information to trace
-	// back the chain of events leading up to this event. If cause is set to
+	// The cause of the failure. To help diagnose issues, use this information to
+	// trace back the chain of events leading up to this event. If cause  is set to
 	// OPERATION_NOT_PERMITTED, the decision failed because the IAM role attached to
 	// the execution lacked sufficient permissions. For details and example IAM
-	// policies, see Lambda Tasks
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
+	// policies, see Lambda Tasks (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
 	// in the Amazon SWF Developer Guide.
 	Cause StartLambdaFunctionFailedCause
 
@@ -2617,35 +2400,32 @@ type StartLambdaFunctionFailedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the StartTimer decision. Access Control You can use IAM
-// policies to control this decision's access to Amazon SWF resources as follows:
-// -
-// Use a Resource element with the domain name to limit the action to only
-// specified domains.
-// - Use an Action element to allow or deny permission to call
-// this action.
-// - You cannot use an IAM policy to constrain this action's
-// parameters.
+// Provides the details of the StartTimer decision. Access Control You can use
+// IAM policies to control this decision's access to Amazon SWF resources as
+// follows:
+//   - Use a Resource element with the domain name to limit the action to only specified domains.
+//   - Use an Action element to allow or deny permission to call this action.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
-// If the caller doesn't have sufficient permissions to invoke the
-// action, or the parameter values fall outside the specified constraints, the
-// action fails. The associated event attribute's cause parameter is set to
-// OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to
-// Manage Access to Amazon SWF Workflows
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// If
+// the caller doesn't have sufficient permissions to invoke the action, or the
+// parameter values fall outside the specified constraints, the action fails. The
+// associated event attribute's cause  parameter is set to OPERATION_NOT_PERMITTED
+// . For details and example IAM policies, see Using IAM to Manage Access to
+// Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type StartTimerDecisionAttributes struct {
 
 	// The duration to wait before firing the timer. The duration is specified in
-	// seconds, an integer greater than or equal to 0.
+	// seconds, an integer greater than or equal to 0 .
 	//
 	// This member is required.
 	StartToFireTimeout *string
 
 	// The unique ID of the timer. The specified string must not start or end with
-	// whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any
-	// control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not contain
-	// the literal string arn.
+	// whitespace. It must not contain a :  (colon), /  (slash), | (vertical bar), or
+	// any control characters ( \u0000-\u001f  | \u007f-\u009f). Also, it must not
+	// contain the literal string arn .
 	//
 	// This member is required.
 	TimerId *string
@@ -2657,14 +2437,13 @@ type StartTimerDecisionAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the StartTimerFailed event.
+// Provides the details of the StartTimerFailed  event.
 type StartTimerFailedEventAttributes struct {
 
-	// The cause of the failure. This information is generated by the system and can be
-	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
-	// decision failed because it lacked sufficient permissions. For details and
-	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// The cause of the failure. This information is generated by the system and can
+	// be useful for diagnostic purposes. If cause  is set to OPERATION_NOT_PERMITTED
+	// , the decision failed because it lacked sufficient permissions. For details and
+	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// This member is required.
@@ -2678,7 +2457,7 @@ type StartTimerFailedEventAttributes struct {
 	// This member is required.
 	DecisionTaskCompletedEventId int64
 
-	// The timerId provided in the StartTimer decision that failed.
+	// The timerId provided in the StartTimer  decision that failed.
 	//
 	// This member is required.
 	TimerId *string
@@ -2689,9 +2468,9 @@ type StartTimerFailedEventAttributes struct {
 // Used to filter the workflow executions in visibility APIs based on a tag.
 type TagFilter struct {
 
-	// Specifies the tag that must be associated with the execution for it to meet the
-	// filter criteria. Tags may only contain unicode letters, digits, whitespace, or
-	// these symbols: _ . : / = + - @.
+	// Specifies the tag that must be associated with the execution for it to meet
+	// the filter criteria. Tags may only contain unicode letters, digits, whitespace,
+	// or these symbols: _ . : / = + - @ .
 	//
 	// This member is required.
 	Tag *string
@@ -2710,20 +2489,20 @@ type TaskList struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the TimerCanceled event.
+// Provides the details of the TimerCanceled  event.
 type TimerCanceledEventAttributes struct {
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
-	// that resulted in the CancelTimer decision to cancel this timer. This information
-	// can be useful for diagnosing problems by tracing back the chain of events
-	// leading up to this event.
+	// that resulted in the CancelTimer decision to cancel this timer. This
+	// information can be useful for diagnosing problems by tracing back the chain of
+	// events leading up to this event.
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId int64
 
-	// The ID of the TimerStarted event that was recorded when this timer was started.
-	// This information can be useful for diagnosing problems by tracing back the chain
-	// of events leading up to this event.
+	// The ID of the TimerStarted event that was recorded when this timer was
+	// started. This information can be useful for diagnosing problems by tracing back
+	// the chain of events leading up to this event.
 	//
 	// This member is required.
 	StartedEventId int64
@@ -2736,12 +2515,12 @@ type TimerCanceledEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the TimerFired event.
+// Provides the details of the TimerFired  event.
 type TimerFiredEventAttributes struct {
 
-	// The ID of the TimerStarted event that was recorded when this timer was started.
-	// This information can be useful for diagnosing problems by tracing back the chain
-	// of events leading up to this event.
+	// The ID of the TimerStarted event that was recorded when this timer was
+	// started. This information can be useful for diagnosing problems by tracing back
+	// the chain of events leading up to this event.
 	//
 	// This member is required.
 	StartedEventId int64
@@ -2754,7 +2533,7 @@ type TimerFiredEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the TimerStarted event.
+// Provides the details of the TimerStarted  event.
 type TimerStartedEventAttributes struct {
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
@@ -2766,7 +2545,7 @@ type TimerStartedEventAttributes struct {
 	DecisionTaskCompletedEventId int64
 
 	// The duration of time after which the timer fires. The duration is specified in
-	// seconds, an integer greater than or equal to 0.
+	// seconds, an integer greater than or equal to 0 .
 	//
 	// This member is required.
 	StartToFireTimeout *string
@@ -2799,7 +2578,7 @@ type WorkflowExecution struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the WorkflowExecutionCanceled event.
+// Provides the details of the WorkflowExecutionCanceled  event.
 type WorkflowExecutionCanceledEventAttributes struct {
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
@@ -2816,7 +2595,7 @@ type WorkflowExecutionCanceledEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the WorkflowExecutionCancelRequested event.
+// Provides the details of the WorkflowExecutionCancelRequested  event.
 type WorkflowExecutionCancelRequestedEventAttributes struct {
 
 	// If set, indicates that the request to cancel the workflow execution was
@@ -2839,7 +2618,7 @@ type WorkflowExecutionCancelRequestedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the WorkflowExecutionCompleted event.
+// Provides the details of the WorkflowExecutionCompleted  event.
 type WorkflowExecutionCompletedEventAttributes struct {
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
@@ -2865,33 +2644,29 @@ type WorkflowExecutionConfiguration struct {
 	// The policy to use for the child workflow executions if this workflow execution
 	// is terminated, by calling the TerminateWorkflowExecution action explicitly or
 	// due to an expired timeout. The supported child policies are:
-	// - TERMINATE – The
-	// child executions are terminated.
-	// - REQUEST_CANCEL – A request to cancel is
-	// attempted for each child execution by recording a
-	// WorkflowExecutionCancelRequested event in its history. It is up to the decider
-	// to take appropriate actions when it receives an execution history with this
-	// event.
-	// - ABANDON – No action is taken. The child executions continue to run.
+	//     - TERMINATE – The child executions are terminated.
+	//     - REQUEST_CANCEL – A request to cancel is attempted for each child execution by recording a WorkflowExecutionCancelRequested event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+	//     - ABANDON – No action is taken. The child executions continue to run.
 	//
 	// This member is required.
 	ChildPolicy ChildPolicy
 
 	// The total duration for this workflow execution. The duration is specified in
-	// seconds, an integer greater than or equal to 0. You can use NONE to specify
+	// seconds, an integer greater than or equal to 0 . You can use NONE to specify
 	// unlimited duration.
 	//
 	// This member is required.
 	ExecutionStartToCloseTimeout *string
 
-	// The task list used for the decision tasks generated for this workflow execution.
+	// The task list used for the decision tasks generated for this workflow
+	// execution.
 	//
 	// This member is required.
 	TaskList *TaskList
 
-	// The maximum duration allowed for decision tasks for this workflow execution. The
-	// duration is specified in seconds, an integer greater than or equal to 0. You can
-	// use NONE to specify unlimited duration.
+	// The maximum duration allowed for decision tasks for this workflow execution.
+	// The duration is specified in seconds, an integer greater than or equal to 0.
+	// You can use NONE  to specify unlimited duration.
 	//
 	// This member is required.
 	TaskStartToCloseTimeout *string
@@ -2900,30 +2675,24 @@ type WorkflowExecutionConfiguration struct {
 	LambdaRole *string
 
 	// The priority assigned to decision tasks for this workflow execution. Valid
-	// values are integers that range from Java's Integer.MIN_VALUE (-2147483648) to
-	// Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority. For
-	// more information about setting task priority, see Setting Task Priority
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// values are integers that range from Java's Integer.MIN_VALUE  (-2147483648) to
+	// Integer.MAX_VALUE(2147483647). Higher numbers indicate higher priority. For
+	// more information about setting task priority, see Setting Task Priority (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the WorkflowExecutionContinuedAsNew event.
+// Provides the details of the WorkflowExecutionContinuedAsNew  event.
 type WorkflowExecutionContinuedAsNewEventAttributes struct {
 
 	// The policy to use for the child workflow executions of the new execution if it
-	// is terminated by calling the TerminateWorkflowExecution action explicitly or due
-	// to an expired timeout. The supported child policies are:
-	// - TERMINATE – The child
-	// executions are terminated.
-	// - REQUEST_CANCEL – A request to cancel is attempted
-	// for each child execution by recording a WorkflowExecutionCancelRequested event
-	// in its history. It is up to the decider to take appropriate actions when it
-	// receives an execution history with this event.
-	// - ABANDON – No action is taken.
-	// The child executions continue to run.
+	// is terminated by calling the TerminateWorkflowExecution action explicitly or
+	// due to an expired timeout. The supported child policies are:
+	//     - TERMINATE – The child executions are terminated.
+	//     - REQUEST_CANCEL – A request to cancel is attempted for each child execution by recording a WorkflowExecutionCancelRequested event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+	//     - ABANDON – No action is taken. The child executions continue to run.
 	//
 	// This member is required.
 	ChildPolicy ChildPolicy
@@ -2936,7 +2705,7 @@ type WorkflowExecutionContinuedAsNewEventAttributes struct {
 	// This member is required.
 	DecisionTaskCompletedEventId int64
 
-	// The runId of the new workflow execution.
+	// The runId  of the new workflow execution.
 	//
 	// This member is required.
 	NewExecutionRunId *string
@@ -2953,8 +2722,8 @@ type WorkflowExecutionContinuedAsNewEventAttributes struct {
 	WorkflowType *WorkflowType
 
 	// The total duration allowed for the new workflow execution. The duration is
-	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
-	// specify unlimited duration.
+	// specified in seconds, an integer greater than or equal to 0 . You can use NONE
+	// to specify unlimited duration.
 	ExecutionStartToCloseTimeout *string
 
 	// The input provided to the new workflow execution.
@@ -2971,20 +2740,20 @@ type WorkflowExecutionContinuedAsNewEventAttributes struct {
 	TaskPriority *string
 
 	// The maximum duration of decision tasks for the new workflow execution. The
-	// duration is specified in seconds, an integer greater than or equal to 0. You can
-	// use NONE to specify unlimited duration.
+	// duration is specified in seconds, an integer greater than or equal to 0. You
+	// can use NONE  to specify unlimited duration.
 	TaskStartToCloseTimeout *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the WorkflowExecutionFailed event.
+// Provides the details of the WorkflowExecutionFailed  event.
 type WorkflowExecutionFailedEventAttributes struct {
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
-	// that resulted in the FailWorkflowExecution decision to fail this execution. This
-	// information can be useful for diagnosing problems by tracing back the chain of
-	// events leading up to this event.
+	// that resulted in the FailWorkflowExecution decision to fail this execution.
+	// This information can be useful for diagnosing problems by tracing back the chain
+	// of events leading up to this event.
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId int64
@@ -2998,7 +2767,7 @@ type WorkflowExecutionFailedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Used to filter the workflow executions in visibility APIs by their workflowId.
+// Used to filter the workflow executions in visibility APIs by their workflowId .
 type WorkflowExecutionFilter struct {
 
 	// The workflowId to pass of match the criteria of this filter.
@@ -3037,19 +2806,12 @@ type WorkflowExecutionInfo struct {
 
 	// If the execution status is closed then this specifies how the execution was
 	// closed:
-	// - COMPLETED – the execution was successfully completed.
-	// - CANCELED – the
-	// execution was canceled.Cancellation allows the implementation to gracefully
-	// clean up before the execution is closed.
-	// - TERMINATED – the execution was force
-	// terminated.
-	// - FAILED – the execution failed to complete.
-	// - TIMED_OUT – the
-	// execution did not complete in the alloted time and was automatically timed
-	// out.
-	// - CONTINUED_AS_NEW – the execution is logically continued. This means the
-	// current execution was completed and a new execution was started to carry on the
-	// workflow.
+	//     - COMPLETED – the execution was successfully completed.
+	//     - CANCELED – the execution was canceled.Cancellation allows the implementation to gracefully clean up before the execution is closed.
+	//     - TERMINATED – the execution was force terminated.
+	//     - FAILED – the execution failed to complete.
+	//     - TIMED_OUT – the execution did not complete in the alloted time and was automatically timed out.
+	//     - CONTINUED_AS_NEW – the execution is logically continued. This means the current execution was completed and a new execution was started to carry on the workflow.
 	CloseStatus CloseStatus
 
 	// The time when the workflow execution was closed. Set only if the execution
@@ -3072,18 +2834,18 @@ type WorkflowExecutionInfo struct {
 // workflow execution.
 type WorkflowExecutionOpenCounts struct {
 
-	// The count of activity tasks whose status is OPEN.
+	// The count of activity tasks whose status is OPEN .
 	//
 	// This member is required.
 	OpenActivityTasks int32
 
-	// The count of child workflow executions whose status is OPEN.
+	// The count of child workflow executions whose status is OPEN .
 	//
 	// This member is required.
 	OpenChildWorkflowExecutions int32
 
-	// The count of decision tasks whose status is OPEN. A workflow execution can have
-	// at most one open decision task.
+	// The count of decision tasks whose status is OPEN. A workflow execution can
+	// have at most one open decision task.
 	//
 	// This member is required.
 	OpenDecisionTasks int32
@@ -3093,31 +2855,31 @@ type WorkflowExecutionOpenCounts struct {
 	// This member is required.
 	OpenTimers int32
 
-	// The count of Lambda tasks whose status is OPEN.
+	// The count of Lambda tasks whose status is OPEN .
 	OpenLambdaFunctions int32
 
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the WorkflowExecutionSignaled event.
+// Provides the details of the WorkflowExecutionSignaled  event.
 type WorkflowExecutionSignaledEventAttributes struct {
 
-	// The name of the signal received. The decider can use the signal name and inputs
-	// to determine how to the process the signal.
+	// The name of the signal received. The decider can use the signal name and
+	// inputs to determine how to the process the signal.
 	//
 	// This member is required.
 	SignalName *string
 
 	// The ID of the SignalExternalWorkflowExecutionInitiated event corresponding to
-	// the SignalExternalWorkflow decision to signal this workflow execution.The source
-	// event with this ID can be found in the history of the source workflow execution.
-	// This information can be useful for diagnosing problems by tracing back the chain
-	// of events leading up to this event. This field is set only if the signal was
-	// initiated by another workflow execution.
+	// the SignalExternalWorkflow decision to signal this workflow execution.The
+	// source event with this ID can be found in the history of the source workflow
+	// execution. This information can be useful for diagnosing problems by tracing
+	// back the chain of events leading up to this event. This field is set only if the
+	// signal was initiated by another workflow execution.
 	ExternalInitiatedEventId int64
 
-	// The workflow execution that sent the signal. This is set only of the signal was
-	// sent by another workflow execution.
+	// The workflow execution that sent the signal. This is set only of the signal
+	// was sent by another workflow execution.
 	ExternalWorkflowExecution *WorkflowExecution
 
 	// The inputs provided with the signal. The decider can use the signal name and
@@ -3127,20 +2889,15 @@ type WorkflowExecutionSignaledEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides details of WorkflowExecutionStarted event.
+// Provides details of WorkflowExecutionStarted  event.
 type WorkflowExecutionStartedEventAttributes struct {
 
 	// The policy to use for the child workflow executions if this workflow execution
 	// is terminated, by calling the TerminateWorkflowExecution action explicitly or
 	// due to an expired timeout. The supported child policies are:
-	// - TERMINATE – The
-	// child executions are terminated.
-	// - REQUEST_CANCEL – A request to cancel is
-	// attempted for each child execution by recording a
-	// WorkflowExecutionCancelRequested event in its history. It is up to the decider
-	// to take appropriate actions when it receives an execution history with this
-	// event.
-	// - ABANDON – No action is taken. The child executions continue to run.
+	//     - TERMINATE – The child executions are terminated.
+	//     - REQUEST_CANCEL – A request to cancel is attempted for each child execution by recording a WorkflowExecutionCancelRequested event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+	//     - ABANDON – No action is taken. The child executions continue to run.
 	//
 	// This member is required.
 	ChildPolicy ChildPolicy
@@ -3157,12 +2914,12 @@ type WorkflowExecutionStartedEventAttributes struct {
 	WorkflowType *WorkflowType
 
 	// If this workflow execution was started due to a ContinueAsNewWorkflowExecution
-	// decision, then it contains the runId of the previous workflow execution that was
-	// closed and continued as this execution.
+	// decision, then it contains the runId of the previous workflow execution that
+	// was closed and continued as this execution.
 	ContinuedExecutionRunId *string
 
 	// The maximum duration for this workflow execution. The duration is specified in
-	// seconds, an integer greater than or equal to 0. You can use NONE to specify
+	// seconds, an integer greater than or equal to 0 . You can use NONE to specify
 	// unlimited duration.
 	ExecutionStartToCloseTimeout *string
 
@@ -3172,52 +2929,47 @@ type WorkflowExecutionStartedEventAttributes struct {
 	// The IAM role attached to the workflow execution.
 	LambdaRole *string
 
-	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to the
-	// StartChildWorkflowExecutionDecision to start this workflow execution. The source
-	// event with this ID can be found in the history of the source workflow execution.
-	// This information can be useful for diagnosing problems by tracing back the chain
-	// of events leading up to this event.
+	// The ID of the StartChildWorkflowExecutionInitiated  event corresponding to the
+	// StartChildWorkflowExecution Decision to start this workflow execution. The
+	// source event with this ID can be found in the history of the source workflow
+	// execution. This information can be useful for diagnosing problems by tracing
+	// back the chain of events leading up to this event.
 	ParentInitiatedEventId int64
 
 	// The source workflow execution that started this workflow execution. The member
 	// isn't set if the workflow execution was not started by a workflow.
 	ParentWorkflowExecution *WorkflowExecution
 
-	// The list of tags associated with this workflow execution. An execution can have
-	// up to 5 tags.
+	// The list of tags associated with this workflow execution. An execution can
+	// have up to 5 tags.
 	TagList []string
 
 	// The priority of the decision tasks in the workflow execution.
 	TaskPriority *string
 
 	// The maximum duration of decision tasks for this workflow type. The duration is
-	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
-	// specify unlimited duration.
+	// specified in seconds, an integer greater than or equal to 0 . You can use NONE
+	// to specify unlimited duration.
 	TaskStartToCloseTimeout *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the WorkflowExecutionTerminated event.
+// Provides the details of the WorkflowExecutionTerminated  event.
 type WorkflowExecutionTerminatedEventAttributes struct {
 
 	// The policy used for the child workflow executions of this workflow execution.
 	// The supported child policies are:
-	// - TERMINATE – The child executions are
-	// terminated.
-	// - REQUEST_CANCEL – A request to cancel is attempted for each child
-	// execution by recording a WorkflowExecutionCancelRequested event in its history.
-	// It is up to the decider to take appropriate actions when it receives an
-	// execution history with this event.
-	// - ABANDON – No action is taken. The child
-	// executions continue to run.
+	//     - TERMINATE – The child executions are terminated.
+	//     - REQUEST_CANCEL – A request to cancel is attempted for each child execution by recording a WorkflowExecutionCancelRequested event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+	//     - ABANDON – No action is taken. The child executions continue to run.
 	//
 	// This member is required.
 	ChildPolicy ChildPolicy
 
-	// If set, indicates that the workflow execution was automatically terminated, and
-	// specifies the cause. This happens if the parent workflow execution times out or
-	// is terminated and the child policy is set to terminate child executions.
+	// If set, indicates that the workflow execution was automatically terminated,
+	// and specifies the cause. This happens if the parent workflow execution times out
+	// or is terminated and the child policy is set to terminate child executions.
 	Cause WorkflowExecutionTerminatedCause
 
 	// The details provided for the termination.
@@ -3229,19 +2981,14 @@ type WorkflowExecutionTerminatedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the details of the WorkflowExecutionTimedOut event.
+// Provides the details of the WorkflowExecutionTimedOut  event.
 type WorkflowExecutionTimedOutEventAttributes struct {
 
 	// The policy used for the child workflow executions of this workflow execution.
 	// The supported child policies are:
-	// - TERMINATE – The child executions are
-	// terminated.
-	// - REQUEST_CANCEL – A request to cancel is attempted for each child
-	// execution by recording a WorkflowExecutionCancelRequested event in its history.
-	// It is up to the decider to take appropriate actions when it receives an
-	// execution history with this event.
-	// - ABANDON – No action is taken. The child
-	// executions continue to run.
+	//     - TERMINATE – The child executions are terminated.
+	//     - REQUEST_CANCEL – A request to cancel is attempted for each child execution by recording a WorkflowExecutionCancelRequested event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+	//     - ABANDON – No action is taken. The child executions continue to run.
 	//
 	// This member is required.
 	ChildPolicy ChildPolicy
@@ -3257,8 +3004,8 @@ type WorkflowExecutionTimedOutEventAttributes struct {
 // Represents a workflow type.
 type WorkflowType struct {
 
-	// The name of the workflow type. The combination of workflow type name and version
-	// must be unique with in a domain.
+	// The name of the workflow type. The combination of workflow type name and
+	// version must be unique with in a domain.
 	//
 	// This member is required.
 	Name *string
@@ -3279,60 +3026,53 @@ type WorkflowTypeConfiguration struct {
 	// execution of this type is terminated, by calling the TerminateWorkflowExecution
 	// action explicitly or due to an expired timeout. This default can be overridden
 	// when starting a workflow execution using the StartWorkflowExecution action or
-	// the StartChildWorkflowExecutionDecision. The supported child policies are:
-	// -
-	// TERMINATE – The child executions are terminated.
-	// - REQUEST_CANCEL – A request to
-	// cancel is attempted for each child execution by recording a
-	// WorkflowExecutionCancelRequested event in its history. It is up to the decider
-	// to take appropriate actions when it receives an execution history with this
-	// event.
-	// - ABANDON – No action is taken. The child executions continue to run.
+	// the StartChildWorkflowExecution Decision . The supported child policies are:
+	//     - TERMINATE – The child executions are terminated.
+	//     - REQUEST_CANCEL – A request to cancel is attempted for each child execution by recording a WorkflowExecutionCancelRequested event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+	//     - ABANDON – No action is taken. The child executions continue to run.
 	DefaultChildPolicy ChildPolicy
 
-	// The default maximum duration, specified when registering the workflow type, for
-	// executions of this workflow type. This default can be overridden when starting a
-	// workflow execution using the StartWorkflowExecution action or the
-	// StartChildWorkflowExecutionDecision. The duration is specified in seconds, an
-	// integer greater than or equal to 0. You can use NONE to specify unlimited
+	// The default maximum duration, specified when registering the workflow type,
+	// for executions of this workflow type. This default can be overridden when
+	// starting a workflow execution using the StartWorkflowExecution  action or the
+	// StartChildWorkflowExecution Decision. The duration is specified in seconds, an
+	// integer greater than or equal to 0 . You can use NONE to specify unlimited
 	// duration.
 	DefaultExecutionStartToCloseTimeout *string
 
-	// The default IAM role attached to this workflow type. Executions of this workflow
-	// type need IAM roles to invoke Lambda functions. If you don't specify an IAM role
-	// when starting this workflow type, the default Lambda role is attached to the
-	// execution. For more information, see
-	// https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
+	// The default IAM role attached to this workflow type. Executions of this
+	// workflow type need IAM roles to invoke Lambda functions. If you don't specify an
+	// IAM role when starting this workflow type, the default Lambda role is attached
+	// to the execution. For more information, see
+	// https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
 	// in the Amazon SWF Developer Guide.
 	DefaultLambdaRole *string
 
 	// The default task list, specified when registering the workflow type, for
 	// decisions tasks scheduled for workflow executions of this type. This default can
 	// be overridden when starting a workflow execution using the
-	// StartWorkflowExecution action or the StartChildWorkflowExecutionDecision.
+	// StartWorkflowExecution action or the StartChildWorkflowExecution Decision .
 	DefaultTaskList *TaskList
 
-	// The default task priority, specified when registering the workflow type, for all
-	// decision tasks of this workflow type. This default can be overridden when
-	// starting a workflow execution using the StartWorkflowExecution action or the
-	// StartChildWorkflowExecution decision. Valid values are integers that range from
-	// Java's Integer.MIN_VALUE (-2147483648) to Integer.MAX_VALUE (2147483647). Higher
-	// numbers indicate higher priority. For more information about setting task
-	// priority, see Setting Task Priority
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// The default task priority, specified when registering the workflow type, for
+	// all decision tasks of this workflow type. This default can be overridden when
+	// starting a workflow execution using the StartWorkflowExecution  action or the
+	// StartChildWorkflowExecutiondecision. Valid values are integers that range from
+	// Java's Integer.MIN_VALUE  (-2147483648) to Integer.MAX_VALUE (2147483647).
+	// Higher numbers indicate higher priority. For more information about setting task
+	// priority, see Setting Task Priority (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	DefaultTaskPriority *string
 
-	// The default maximum duration, specified when registering the workflow type, that
-	// a decision task for executions of this workflow type might take before returning
-	// completion or failure. If the task doesn'tdo close in the specified time then
-	// the task is automatically timed out and rescheduled. If the decider eventually
-	// reports a completion or failure, it is ignored. This default can be overridden
-	// when starting a workflow execution using the StartWorkflowExecution action or
-	// the StartChildWorkflowExecutionDecision. The duration is specified in seconds,
-	// an integer greater than or equal to 0. You can use NONE to specify unlimited
-	// duration.
+	// The default maximum duration, specified when registering the workflow type,
+	// that a decision task for executions of this workflow type might take before
+	// returning completion or failure. If the task doesn'tdo close in the specified
+	// time then the task is automatically timed out and rescheduled. If the decider
+	// eventually reports a completion or failure, it is ignored. This default can be
+	// overridden when starting a workflow execution using the StartWorkflowExecution
+	// action or the StartChildWorkflowExecution Decision. The duration is specified
+	// in seconds, an integer greater than or equal to 0 . You can use NONE to
+	// specify unlimited duration.
 	DefaultTaskStartToCloseTimeout *string
 
 	noSmithyDocumentSerde
@@ -3371,11 +3111,11 @@ type WorkflowTypeInfo struct {
 	// This member is required.
 	WorkflowType *WorkflowType
 
-	// If the type is in deprecated state, then it is set to the date when the type was
-	// deprecated.
+	// If the type is in deprecated state, then it is set to the date when the type
+	// was deprecated.
 	DeprecationDate *time.Time
 
-	// The description of the type registered through RegisterWorkflowType.
+	// The description of the type registered through RegisterWorkflowType .
 	Description *string
 
 	noSmithyDocumentSerde

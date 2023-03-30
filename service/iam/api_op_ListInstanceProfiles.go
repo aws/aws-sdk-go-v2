@@ -14,13 +14,12 @@ import (
 
 // Lists the instance profiles that have the specified path prefix. If there are
 // none, the operation returns an empty list. For more information about instance
-// profiles, see About instance profiles
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html).
-// IAM resource-listing operations return a subset of the available attributes for
-// the resource. For example, this operation does not return tags, even though they
-// are an attribute of the returned object. To view all of the information for an
-// instance profile, see GetInstanceProfile. You can paginate the results using the
-// MaxItems and Marker parameters.
+// profiles, see About instance profiles (https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html)
+// . IAM resource-listing operations return a subset of the available attributes
+// for the resource. For example, this operation does not return tags, even though
+// they are an attribute of the returned object. To view all of the information for
+// an instance profile, see GetInstanceProfile. You can paginate the results
+// using the MaxItems  and Marker  parameters.
 func (c *Client) ListInstanceProfiles(ctx context.Context, params *ListInstanceProfilesInput, optFns ...func(*Options)) (*ListInstanceProfilesOutput, error) {
 	if params == nil {
 		params = &ListInstanceProfilesInput{}
@@ -40,34 +39,34 @@ type ListInstanceProfilesInput struct {
 
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
-	// Marker element in the response that you received to indicate where the next call
-	// should start.
+	// Markerelement in the response that you received to indicate where the next
+	// call should start.
 	Marker *string
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true. If you do not include this
+	// specify, the IsTruncated  response element is true. If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true, and Marker contains a value to
+	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
 
 	// The path prefix for filtering the results. For example, the prefix
-	// /application_abc/component_xyz/ gets all instance profiles whose path starts
+	// /application_abc/component_xyz/gets all instance profiles whose path starts
 	// with /application_abc/component_xyz/. This parameter is optional. If it is not
 	// included, it defaults to a slash (/), listing all instance profiles. This
-	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a
-	// string of characters consisting of either a forward slash (/) by itself or a
+	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
+	// a string of characters consisting of either a forward slash (/) by itself or a
 	// string that must begin and end with forward slashes. In addition, it can contain
-	// any ASCII character from the ! (\u0021) through the DEL character (\u007F),
+	// any ASCII character from the ! ( \u0021 ) through the DEL character ( \u007F),
 	// including most punctuation characters, digits, and upper and lowercased letters.
 	PathPrefix *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful ListInstanceProfiles request.
+// Contains the response to a successful ListInstanceProfiles  request.
 type ListInstanceProfilesOutput struct {
 
 	// A list of instance profiles.
@@ -79,12 +78,12 @@ type ListInstanceProfilesOutput struct {
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than
 	// the MaxItems number of results even when there are more results available. We
-	// recommend that you check IsTruncated after every call to ensure that you receive
-	// all your results.
+	// recommend that you check IsTruncated after every call to ensure that you
+	// receive all your results.
 	IsTruncated bool
 
-	// When IsTruncated is true, this element is present and contains the value to use
-	// for the Marker parameter in a subsequent pagination request.
+	// When IsTruncated  is true, this element is present and contains the value to
+	// use for the Marker  parameter in a subsequent pagination request.
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -166,15 +165,15 @@ var _ ListInstanceProfilesAPIClient = (*Client)(nil)
 type ListInstanceProfilesPaginatorOptions struct {
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true. If you do not include this
+	// specify, the IsTruncated  response element is true. If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true, and Marker contains a value to
+	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

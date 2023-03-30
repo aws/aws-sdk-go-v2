@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a logging level. Requires permission to access the DeleteV2LoggingLevel
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Deletes a logging level. Requires permission to access the DeleteV2LoggingLevel (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DeleteV2LoggingLevel(ctx context.Context, params *DeleteV2LoggingLevelInput, optFns ...func(*Options)) (*DeleteV2LoggingLevelOutput, error) {
 	if params == nil {
@@ -36,7 +35,8 @@ type DeleteV2LoggingLevelInput struct {
 	// This member is required.
 	TargetName *string
 
-	// The type of resource for which you are configuring logging. Must be THING_Group.
+	// The type of resource for which you are configuring logging. Must be THING_Group
+	// .
 	//
 	// This member is required.
 	TargetType types.LogTargetType

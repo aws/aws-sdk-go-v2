@@ -52,23 +52,23 @@ type DescribeRestoreJobOutput struct {
 	// Friday, January 26, 2018 12:11:30.087 AM.
 	CompletionDate *time.Time
 
-	// An Amazon Resource Name (ARN) that uniquely identifies a resource whose recovery
-	// point is being restored. The format of the ARN depends on the resource type of
-	// the backed-up resource.
+	// An Amazon Resource Name (ARN) that uniquely identifies a resource whose
+	// recovery point is being restored. The format of the ARN depends on the resource
+	// type of the backed-up resource.
 	CreatedResourceArn *string
 
-	// The date and time that a restore job is created, in Unix format and Coordinated
-	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For
-	// example, the value 1516925490.087 represents Friday, January 26, 2018
-	// 12:11:30.087 AM.
+	// The date and time that a restore job is created, in Unix format and
+	// Coordinated Universal Time (UTC). The value of CreationDate is accurate to
+	// milliseconds. For example, the value 1516925490.087 represents Friday, January
+	// 26, 2018 12:11:30.087 AM.
 	CreationDate *time.Time
 
-	// The amount of time in minutes that a job restoring a recovery point is expected
-	// to take.
+	// The amount of time in minutes that a job restoring a recovery point is
+	// expected to take.
 	ExpectedCompletionTimeMinutes *int64
 
 	// Specifies the IAM role ARN used to create the target recovery point; for
-	// example, arn:aws:iam::123456789012:role/S3Access.
+	// example, arn:aws:iam::123456789012:role/S3Access .
 	IamRoleArn *string
 
 	// Contains an estimated percentage that is complete of a job at the time the job
@@ -76,7 +76,8 @@ type DescribeRestoreJobOutput struct {
 	PercentDone *string
 
 	// An ARN that uniquely identifies a recovery point; for example,
-	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45
+	// .
 	RecoveryPointArn *string
 
 	// Returns metadata associated with a restore job listed by resource type.

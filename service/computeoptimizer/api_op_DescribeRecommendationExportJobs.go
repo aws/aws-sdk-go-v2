@@ -45,7 +45,7 @@ type DescribeRecommendationExportJobsInput struct {
 	JobIds []string
 
 	// The maximum number of export jobs to return with a single request. To retrieve
-	// the remaining results, make another request with the returned nextToken value.
+	// the remaining results, make another request with the returned nextToken  value.
 	MaxResults *int32
 
 	// The token to advance to the next page of export jobs.
@@ -56,8 +56,8 @@ type DescribeRecommendationExportJobsInput struct {
 
 type DescribeRecommendationExportJobsOutput struct {
 
-	// The token to use to advance to the next page of export jobs. This value is null
-	// when there are no more pages of export jobs to return.
+	// The token to use to advance to the next page of export jobs. This value is
+	// null when there are no more pages of export jobs to return.
 	NextToken *string
 
 	// An array of objects that describe recommendation export jobs.
@@ -141,11 +141,11 @@ var _ DescribeRecommendationExportJobsAPIClient = (*Client)(nil)
 // DescribeRecommendationExportJobs
 type DescribeRecommendationExportJobsPaginatorOptions struct {
 	// The maximum number of export jobs to return with a single request. To retrieve
-	// the remaining results, make another request with the returned nextToken value.
+	// the remaining results, make another request with the returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -39,35 +39,33 @@ type UpdateNotebookInstanceInput struct {
 	// A list of the Elastic Inference (EI) instance types to associate with this
 	// notebook instance. Currently only one EI instance type can be associated with a
 	// notebook instance. For more information, see Using Elastic Inference in Amazon
-	// SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html).
+	// SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html) .
 	AcceleratorTypes []types.NotebookInstanceAcceleratorType
 
 	// An array of up to three Git repositories to associate with the notebook
 	// instance. These can be either the names of Git repositories stored as resources
 	// in your account, or the URL of Git repositories in Amazon Web Services
-	// CodeCommit
-	// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
-	// other Git repository. These repositories are cloned at the same level as the
-	// default repository of your notebook instance. For more information, see
-	// Associating Git Repositories with SageMaker Notebook Instances
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	// CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// or in any other Git repository. These repositories are cloned at the same level
+	// as the default repository of your notebook instance. For more information, see
+	// Associating Git Repositories with SageMaker Notebook Instances (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html)
+	// .
 	AdditionalCodeRepositories []string
 
 	// The Git repository to associate with the notebook instance as its default code
 	// repository. This can be either the name of a Git repository stored as a resource
 	// in your account, or the URL of a Git repository in Amazon Web Services
-	// CodeCommit
-	// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
-	// other Git repository. When you open a notebook instance, it opens in the
-	// directory that contains this repository. For more information, see Associating
-	// Git Repositories with SageMaker Notebook Instances
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	// CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// or in any other Git repository. When you open a notebook instance, it opens in
+	// the directory that contains this repository. For more information, see
+	// Associating Git Repositories with SageMaker Notebook Instances (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html)
+	// .
 	DefaultCodeRepository *string
 
-	// A list of the Elastic Inference (EI) instance types to remove from this notebook
-	// instance. This operation is idempotent. If you specify an accelerator type that
-	// is not associated with the notebook instance when you call this method, it does
-	// not throw an error.
+	// A list of the Elastic Inference (EI) instance types to remove from this
+	// notebook instance. This operation is idempotent. If you specify an accelerator
+	// type that is not associated with the notebook instance when you call this
+	// method, it does not throw an error.
 	DisassociateAcceleratorTypes bool
 
 	// A list of names or URLs of the default Git repositories to remove from this
@@ -96,21 +94,20 @@ type UpdateNotebookInstanceInput struct {
 
 	// The name of a lifecycle configuration to associate with the notebook instance.
 	// For information about lifestyle configurations, see Step 2.1: (Optional)
-	// Customize a Notebook Instance
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html).
+	// Customize a Notebook Instance (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html)
+	// .
 	LifecycleConfigName *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that SageMaker can assume to
-	// access the notebook instance. For more information, see SageMaker Roles
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html). To be
-	// able to pass this role to SageMaker, the caller of this API must have the
-	// iam:PassRole permission.
+	// access the notebook instance. For more information, see SageMaker Roles (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html)
+	// . To be able to pass this role to SageMaker, the caller of this API must have
+	// the iam:PassRole  permission.
 	RoleArn *string
 
 	// Whether root access is enabled or disabled for users of the notebook instance.
-	// The default value is Enabled. If you set this to Disabled, users don't have root
-	// access on the notebook instance, but lifecycle configuration scripts still run
-	// with root permissions.
+	// The default value is Enabled . If you set this to Disabled, users don't have
+	// root access on the notebook instance, but lifecycle configuration scripts still
+	// run with root permissions.
 	RootAccess types.RootAccess
 
 	// The size, in GB, of the ML storage volume to attach to the notebook instance.

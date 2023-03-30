@@ -30,8 +30,8 @@ const (
 	ChannelMembershipTypeHidden  ChannelMembershipType = "HIDDEN"
 )
 
-// Values returns all known values for ChannelMembershipType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ChannelMembershipType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ChannelMembershipType) Values() []ChannelMembershipType {
 	return []ChannelMembershipType{
@@ -69,8 +69,8 @@ const (
 	ChannelMessageStatusDenied  ChannelMessageStatus = "DENIED"
 )
 
-// Values returns all known values for ChannelMessageStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ChannelMessageStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ChannelMessageStatus) Values() []ChannelMessageStatus {
 	return []ChannelMessageStatus{
@@ -107,9 +107,9 @@ const (
 	ChannelModeRestricted   ChannelMode = "RESTRICTED"
 )
 
-// Values returns all known values for ChannelMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChannelMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ChannelMode) Values() []ChannelMode {
 	return []ChannelMode{
 		"UNRESTRICTED",
@@ -156,9 +156,9 @@ const (
 	ErrorCodePhoneNumberAssociationsExist         ErrorCode = "PhoneNumberAssociationsExist"
 )
 
-// Values returns all known values for ErrorCode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"BadRequest",
@@ -257,8 +257,8 @@ const (
 	PushNotificationTypeVoip    PushNotificationType = "VOIP"
 )
 
-// Values returns all known values for PushNotificationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PushNotificationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PushNotificationType) Values() []PushNotificationType {
 	return []PushNotificationType{
@@ -309,9 +309,9 @@ const (
 	SortOrderDescending SortOrder = "DESCENDING"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",

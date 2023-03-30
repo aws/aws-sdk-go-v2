@@ -107,8 +107,8 @@ const (
 	PhysicalConnectorTypeWifi    PhysicalConnectorType = "WIFI"
 )
 
-// Values returns all known values for PhysicalConnectorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PhysicalConnectorType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PhysicalConnectorType) Values() []PhysicalConnectorType {
 	return []PhysicalConnectorType{
@@ -129,9 +129,9 @@ const (
 	TaskStateCompleted  TaskState = "COMPLETED"
 )
 
-// Values returns all known values for TaskState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for TaskState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TaskState) Values() []TaskState {
 	return []TaskState{
 		"IN_PROGRESS",
@@ -149,9 +149,9 @@ const (
 	UnlockStateUnlocking UnlockState = "UNLOCKING"
 )
 
-// Values returns all known values for UnlockState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UnlockState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (UnlockState) Values() []UnlockState {
 	return []UnlockState{
 		"UNLOCKED",

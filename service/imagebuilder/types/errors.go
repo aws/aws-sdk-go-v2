@@ -171,8 +171,8 @@ func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The specified parameter is invalid. Review the available parameters for the API
-// request.
+// The specified parameter is invalid. Review the available parameters for the
+// API request.
 type InvalidParameterException struct {
 	Message *string
 
@@ -382,7 +382,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the service encounters an unrecoverable exception.
+// This exception is thrown when the service encounters an unrecoverable
+// exception.
 type ServiceException struct {
 	Message *string
 
@@ -409,8 +410,8 @@ func (e *ServiceException) ErrorCode() string {
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // You have exceeded the number of permitted resources or operations for this
-// service. For service quotas, see EC2 Image Builder endpoints and quotas
-// (https://docs.aws.amazon.com/general/latest/gr/imagebuilder.html#limits_imagebuilder).
+// service. For service quotas, see EC2 Image Builder endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/imagebuilder.html#limits_imagebuilder)
+// .
 type ServiceQuotaExceededException struct {
 	Message *string
 

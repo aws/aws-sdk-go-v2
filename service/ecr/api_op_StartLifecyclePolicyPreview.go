@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a preview of a lifecycle policy for the specified repository. This allows
-// you to see the results before associating the lifecycle policy with the
+// Starts a preview of a lifecycle policy for the specified repository. This
+// allows you to see the results before associating the lifecycle policy with the
 // repository.
 func (c *Client) StartLifecyclePolicyPreview(ctx context.Context, params *StartLifecyclePolicyPreviewInput, optFns ...func(*Options)) (*StartLifecyclePolicyPreviewOutput, error) {
 	if params == nil {
@@ -36,8 +36,8 @@ type StartLifecyclePolicyPreviewInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The policy to be evaluated against. If you do not specify a policy, the current
-	// policy for the repository is used.
+	// The policy to be evaluated against. If you do not specify a policy, the
+	// current policy for the repository is used.
 	LifecyclePolicyText *string
 
 	// The Amazon Web Services account ID associated with the registry that contains

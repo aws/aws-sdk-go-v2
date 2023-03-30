@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deprecated. Use the VerifyEmailIdentity operation to verify a new email address.
+// Deprecated. Use the VerifyEmailIdentity operation to verify a new email
+// address.
 func (c *Client) VerifyEmailAddress(ctx context.Context, params *VerifyEmailAddressInput, optFns ...func(*Options)) (*VerifyEmailAddressOutput, error) {
 	if params == nil {
 		params = &VerifyEmailAddressInput{}
@@ -27,8 +28,9 @@ func (c *Client) VerifyEmailAddress(ctx context.Context, params *VerifyEmailAddr
 }
 
 // Represents a request to begin email address verification with Amazon SES. For
-// information about email address verification, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html).
+// information about email address verification, see the Amazon SES Developer
+// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html)
+// .
 type VerifyEmailAddressInput struct {
 
 	// The email address to be verified.

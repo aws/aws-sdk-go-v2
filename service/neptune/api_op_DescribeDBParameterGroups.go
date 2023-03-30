@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of DBParameterGroup descriptions. If a DBParameterGroupName is
+// Returns a list of DBParameterGroup  descriptions. If a DBParameterGroupName is
 // specified, the list will contain only the description of the specified DB
 // parameter group.
 func (c *Client) DescribeDBParameterGroups(ctx context.Context, params *DescribeDBParameterGroupsInput, optFns ...func(*Options)) (*DescribeDBParameterGroupsOutput, error) {
@@ -33,8 +33,7 @@ func (c *Client) DescribeDBParameterGroups(ctx context.Context, params *Describe
 type DescribeDBParameterGroupsInput struct {
 
 	// The name of a specific DB parameter group to return details for. Constraints:
-	// -
-	// If supplied, must match the name of an existing DBClusterParameterGroup.
+	//     - If supplied, must match the name of an existing DBClusterParameterGroup.
 	DBParameterGroupName *string
 
 	// This parameter is not currently supported.
@@ -42,12 +41,12 @@ type DescribeDBParameterGroupsInput struct {
 
 	// An optional pagination token provided by a previous DescribeDBParameterGroups
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -56,12 +55,12 @@ type DescribeDBParameterGroupsInput struct {
 
 type DescribeDBParameterGroupsOutput struct {
 
-	// A list of DBParameterGroup instances.
+	// A list of DBParameterGroup  instances.
 	DBParameterGroups []types.DBParameterGroup
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -144,14 +143,14 @@ var _ DescribeDBParameterGroupsAPIClient = (*Client)(nil)
 // DescribeDBParameterGroupsPaginatorOptions is the paginator options for
 // DescribeDBParameterGroups
 type DescribeDBParameterGroupsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

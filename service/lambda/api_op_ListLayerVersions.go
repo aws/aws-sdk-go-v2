@@ -12,13 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the versions of an Lambda layer
-// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
-// Versions that have been deleted aren't listed. Specify a runtime identifier
-// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) to list only
-// versions that indicate that they're compatible with that runtime. Specify a
-// compatible architecture to include only layer versions that are compatible with
-// that architecture.
+// Lists the versions of an Lambda layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
+// . Versions that have been deleted aren't listed. Specify a runtime identifier (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
+// to list only versions that indicate that they're compatible with that runtime.
+// Specify a compatible architecture to include only layer versions that are
+// compatible with that architecture.
 func (c *Client) ListLayerVersions(ctx context.Context, params *ListLayerVersionsInput, optFns ...func(*Options)) (*ListLayerVersionsOutput, error) {
 	if params == nil {
 		params = &ListLayerVersionsInput{}
@@ -41,11 +39,11 @@ type ListLayerVersionsInput struct {
 	// This member is required.
 	LayerName *string
 
-	// The compatible instruction set architecture
-	// (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
+	// The compatible instruction set architecture (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)
+	// .
 	CompatibleArchitecture types.Architecture
 
-	// A runtime identifier. For example, go1.x.
+	// A runtime identifier. For example, go1.x .
 	CompatibleRuntime types.Runtime
 
 	// A pagination token returned by a previous call.
@@ -142,13 +140,14 @@ type ListLayerVersionsAPIClient interface {
 
 var _ ListLayerVersionsAPIClient = (*Client)(nil)
 
-// ListLayerVersionsPaginatorOptions is the paginator options for ListLayerVersions
+// ListLayerVersionsPaginatorOptions is the paginator options for
+// ListLayerVersions
 type ListLayerVersionsPaginatorOptions struct {
 	// The maximum number of versions to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

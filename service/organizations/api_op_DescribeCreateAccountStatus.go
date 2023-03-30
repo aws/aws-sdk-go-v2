@@ -32,11 +32,11 @@ func (c *Client) DescribeCreateAccountStatus(ctx context.Context, params *Descri
 
 type DescribeCreateAccountStatusInput struct {
 
-	// Specifies the Id value that uniquely identifies the CreateAccount request. You
-	// can get the value from the CreateAccountStatus.Id response in an earlier
-	// CreateAccount request, or from the ListCreateAccountStatus operation. The regex
-	// pattern (http://wikipedia.org/wiki/regex) for a create account request ID string
-	// requires "car-" followed by from 8 to 32 lowercase letters or digits.
+	// Specifies the Id  value that uniquely identifies the CreateAccount request.
+	// You can get the value from the CreateAccountStatus.Id  response in an earlier
+	// CreateAccount request, or from the ListCreateAccountStatus  operation. The
+	// regex pattern (http://wikipedia.org/wiki/regex)for a create account request ID
+	// string requires "car-" followed by from 8 to 32 lowercase letters or digits.
 	//
 	// This member is required.
 	CreateAccountRequestId *string

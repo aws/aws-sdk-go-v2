@@ -42,7 +42,7 @@ type BatchCreateVariableInput struct {
 
 type BatchCreateVariableOutput struct {
 
-	// Provides the errors for the BatchCreateVariable request.
+	// Provides the errors for the BatchCreateVariable  request.
 	Errors []types.BatchCreateVariableError
 
 	// Metadata pertaining to the operation's result.

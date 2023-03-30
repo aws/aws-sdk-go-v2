@@ -29,8 +29,8 @@ func (c *Client) CreateRecipe(ctx context.Context, params *CreateRecipeInput, op
 
 type CreateRecipeInput struct {
 
-	// A unique name for the recipe. Valid characters are alphanumeric (A-Z, a-z, 0-9),
-	// hyphen (-), period (.), and space.
+	// A unique name for the recipe. Valid characters are alphanumeric (A-Z, a-z,
+	// 0-9), hyphen (-), period (.), and space.
 	//
 	// This member is required.
 	Name *string

@@ -12,12 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of Jobs. Use the JobsID and fromDate and toDate filters to limit
-// which jobs are returned. The response is sorted by creationDataTime - latest
-// date first. Jobs are created by the StartRecovery, TerminateRecoveryInstances
-// and StartFailbackLaunch APIs. Jobs are also created by DiagnosticLaunch and
-// TerminateDiagnosticInstances, which are APIs available only to *Support* and
-// only used in response to relevant support tickets.
+// Returns a list of Jobs. Use the JobsID and fromDate and toDate filters to
+// limit which jobs are returned. The response is sorted by creationDataTime -
+// latest date first. Jobs are created by the StartRecovery,
+// TerminateRecoveryInstances and StartFailbackLaunch APIs. Jobs are also created
+// by DiagnosticLaunch and TerminateDiagnosticInstances, which are APIs available
+// only to *Support* and only used in response to relevant support tickets.
 func (c *Client) DescribeJobs(ctx context.Context, params *DescribeJobsInput, optFns ...func(*Options)) (*DescribeJobsOutput, error) {
 	if params == nil {
 		params = &DescribeJobsInput{}
@@ -133,8 +133,8 @@ type DescribeJobsPaginatorOptions struct {
 	// Maximum number of Jobs to retrieve.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -30,8 +30,8 @@ func (c *Client) DescribeConfiguration(ctx context.Context, params *DescribeConf
 
 type DescribeConfigurationInput struct {
 
-	// The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and
-	// all of its revisions.
+	// The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration
+	// and all of its revisions.
 	//
 	// This member is required.
 	Arn *string

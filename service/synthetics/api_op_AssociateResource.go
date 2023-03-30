@@ -31,8 +31,8 @@ func (c *Client) AssociateResource(ctx context.Context, params *AssociateResourc
 
 type AssociateResourceInput struct {
 
-	// Specifies the group. You can specify the group name, the ARN, or the group ID as
-	// the GroupIdentifier.
+	// Specifies the group. You can specify the group name, the ARN, or the group ID
+	// as the GroupIdentifier .
 	//
 	// This member is required.
 	GroupIdentifier *string

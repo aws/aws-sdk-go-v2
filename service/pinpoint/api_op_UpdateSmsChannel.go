@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the SMS channel for an application or updates the status and settings of
-// the SMS channel for an application.
+// Enables the SMS channel for an application or updates the status and settings
+// of the SMS channel for an application.
 func (c *Client) UpdateSmsChannel(ctx context.Context, params *UpdateSmsChannelInput, optFns ...func(*Options)) (*UpdateSmsChannelOutput, error) {
 	if params == nil {
 		params = &UpdateSmsChannelInput{}

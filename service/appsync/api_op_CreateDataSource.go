@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a DataSource object.
+// Creates a DataSource  object.
 func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceInput, optFns ...func(*Options)) (*CreateDataSourceOutput, error) {
 	if params == nil {
 		params = &CreateDataSourceInput{}
@@ -29,22 +29,22 @@ func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceI
 
 type CreateDataSourceInput struct {
 
-	// The API ID for the GraphQL API for the DataSource.
+	// The API ID for the GraphQL API for the DataSource .
 	//
 	// This member is required.
 	ApiId *string
 
-	// A user-supplied name for the DataSource.
+	// A user-supplied name for the DataSource .
 	//
 	// This member is required.
 	Name *string
 
-	// The type of the DataSource.
+	// The type of the DataSource .
 	//
 	// This member is required.
 	Type types.DataSourceType
 
-	// A description of the DataSource.
+	// A description of the DataSource .
 	Description *string
 
 	// Amazon DynamoDB settings.
@@ -71,8 +71,8 @@ type CreateDataSourceInput struct {
 	// Relational database settings.
 	RelationalDatabaseConfig *types.RelationalDatabaseDataSourceConfig
 
-	// The Identity and Access Management (IAM) service role Amazon Resource Name (ARN)
-	// for the data source. The system assumes this role when accessing the data
+	// The Identity and Access Management (IAM) service role Amazon Resource Name
+	// (ARN) for the data source. The system assumes this role when accessing the data
 	// source.
 	ServiceRoleArn *string
 
@@ -81,7 +81,7 @@ type CreateDataSourceInput struct {
 
 type CreateDataSourceOutput struct {
 
-	// The DataSource object.
+	// The DataSource  object.
 	DataSource *types.DataSource
 
 	// Metadata pertaining to the operation's result.

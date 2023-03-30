@@ -14,8 +14,7 @@ import (
 
 // Use this operation in a source account to return a list of links to monitoring
 // account sinks that this source account has. To find a list of links for one
-// monitoring account sink, use ListAttachedLinks
-// (https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListAttachedLinks.html)
+// monitoring account sink, use ListAttachedLinks (https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListAttachedLinks.html)
 // from within the monitoring account.
 func (c *Client) ListLinks(ctx context.Context, params *ListLinksInput, optFns ...func(*Options)) (*ListLinksOutput, error) {
 	if params == nil {
@@ -132,8 +131,8 @@ type ListLinksPaginatorOptions struct {
 	// Limits the number of returned links to the specified number.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

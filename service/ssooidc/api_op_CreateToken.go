@@ -9,9 +9,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates and returns an access token for the authorized client. The access token
-// issued will be used to fetch short-term credentials for the assigned roles in
-// the AWS account.
+// Creates and returns an access token for the authorized client. The access
+// token issued will be used to fetch short-term credentials for the assigned roles
+// in the AWS account.
 func (c *Client) CreateToken(ctx context.Context, params *CreateTokenInput, optFns ...func(*Options)) (*CreateTokenOutput, error) {
 	if params == nil {
 		params = &CreateTokenInput{}
@@ -30,21 +30,21 @@ func (c *Client) CreateToken(ctx context.Context, params *CreateTokenInput, optF
 type CreateTokenInput struct {
 
 	// The unique identifier string for each client. This value should come from the
-	// persisted result of the RegisterClient API.
+	// persisted result of the RegisterClient  API.
 	//
 	// This member is required.
 	ClientId *string
 
 	// A secret string generated for the client. This value should come from the
-	// persisted result of the RegisterClient API.
+	// persisted result of the RegisterClient  API.
 	//
 	// This member is required.
 	ClientSecret *string
 
-	// Supports grant types for the authorization code, refresh token, and device code
-	// request. For device code requests, specify the following value:
-	// urn:ietf:params:oauth:grant-type:device_code  For information about how to
-	// obtain the device code, see the StartDeviceAuthorization topic.
+	// Supports grant types for the authorization code, refresh token, and device
+	// code request. For device code requests, specify the following value:
+	// urn:ietf:params:oauth:grant-type:device_code For information about how to
+	// obtain the device code, see the StartDeviceAuthorization  topic.
 	//
 	// This member is required.
 	GrantType *string
@@ -53,26 +53,26 @@ type CreateTokenInput struct {
 	// is required to perform an authorization grant request to get access to a token.
 	Code *string
 
-	// Used only when calling this API for the device code grant type. This short-term
-	// code is used to identify this authentication attempt. This should come from an
-	// in-memory reference to the result of the StartDeviceAuthorization API.
+	// Used only when calling this API for the device code grant type. This
+	// short-term code is used to identify this authentication attempt. This should
+	// come from an in-memory reference to the result of the StartDeviceAuthorization
+	// API.
 	DeviceCode *string
 
-	// The location of the application that will receive the authorization code. Users
-	// authorize the service to send the request to this location.
+	// The location of the application that will receive the authorization code.
+	// Users authorize the service to send the request to this location.
 	RedirectUri *string
 
 	// Currently, refreshToken is not yet implemented and is not supported. For more
 	// information about the features and limitations of the current IAM Identity
 	// Center OIDC implementation, see Considerations for Using this Guide in the IAM
-	// Identity Center OIDC API Reference
-	// (https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html).
-	// The token used to obtain an access token in the event that the access token is
+	// Identity Center OIDC API Reference (https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html)
+	// . The token used to obtain an access token in the event that the access token is
 	// invalid or expired.
 	RefreshToken *string
 
-	// The list of scopes that is defined by the client. Upon authorization, this list
-	// is used to restrict permissions when granting an access token.
+	// The list of scopes that is defined by the client. Upon authorization, this
+	// list is used to restrict permissions when granting an access token.
 	Scope []string
 
 	noSmithyDocumentSerde
@@ -89,22 +89,20 @@ type CreateTokenOutput struct {
 	// Currently, idToken is not yet implemented and is not supported. For more
 	// information about the features and limitations of the current IAM Identity
 	// Center OIDC implementation, see Considerations for Using this Guide in the IAM
-	// Identity Center OIDC API Reference
-	// (https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html).
-	// The identifier of the user that associated with the access token, if present.
+	// Identity Center OIDC API Reference (https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html)
+	// . The identifier of the user that associated with the access token, if present.
 	IdToken *string
 
 	// Currently, refreshToken is not yet implemented and is not supported. For more
 	// information about the features and limitations of the current IAM Identity
 	// Center OIDC implementation, see Considerations for Using this Guide in the IAM
-	// Identity Center OIDC API Reference
-	// (https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html).
-	// A token that, if present, can be used to refresh a previously issued access
+	// Identity Center OIDC API Reference (https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html)
+	// . A token that, if present, can be used to refresh a previously issued access
 	// token that might have expired.
 	RefreshToken *string
 
 	// Used to notify the client that the returned token is an access token. The
-	// supported type is BearerToken.
+	// supported type is BearerToken .
 	TokenType *string
 
 	// Metadata pertaining to the operation's result.

@@ -15,8 +15,8 @@ import (
 // Creates a gateway route. A gateway route is attached to a virtual gateway and
 // routes traffic to an existing virtual service. If a route matches a request, it
 // can distribute traffic to a target virtual service. For more information about
-// gateway routes, see Gateway routes
-// (https://docs.aws.amazon.com/app-mesh/latest/userguide/gateway-routes.html).
+// gateway routes, see Gateway routes (https://docs.aws.amazon.com/app-mesh/latest/userguide/gateway-routes.html)
+// .
 func (c *Client) CreateGatewayRoute(ctx context.Context, params *CreateGatewayRouteInput, optFns ...func(*Options)) (*CreateGatewayRouteOutput, error) {
 	if params == nil {
 		params = &CreateGatewayRouteInput{}
@@ -56,15 +56,15 @@ type CreateGatewayRouteInput struct {
 	// This member is required.
 	VirtualGatewayName *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string
 
-	// The Amazon Web Services IAM account ID of the service mesh owner. If the account
-	// ID is not your own, then the account that you specify must share the mesh with
-	// your account before you can create the resource in the service mesh. For more
-	// information about mesh sharing, see Working with shared meshes
-	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
+	// The Amazon Web Services IAM account ID of the service mesh owner. If the
+	// account ID is not your own, then the account that you specify must share the
+	// mesh with your account before you can create the resource in the service mesh.
+	// For more information about mesh sharing, see Working with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
+	// .
 	MeshOwner *string
 
 	// Optional metadata that you can apply to the gateway route to assist with

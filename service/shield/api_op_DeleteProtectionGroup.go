@@ -28,9 +28,9 @@ func (c *Client) DeleteProtectionGroup(ctx context.Context, params *DeleteProtec
 
 type DeleteProtectionGroupInput struct {
 
-	// The name of the protection group. You use this to identify the protection group
-	// in lists and to manage the protection group, for example to update, delete, or
-	// describe it.
+	// The name of the protection group. You use this to identify the protection
+	// group in lists and to manage the protection group, for example to update,
+	// delete, or describe it.
 	//
 	// This member is required.
 	ProtectionGroupId *string

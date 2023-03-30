@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows you to purchase a reserved node offering. Reserved nodes are not eligible
-// for cancellation and are non-refundable.
+// Allows you to purchase a reserved node offering. Reserved nodes are not
+// eligible for cancellation and are non-refundable.
 func (c *Client) PurchaseReservedNodesOffering(ctx context.Context, params *PurchaseReservedNodesOfferingInput, optFns ...func(*Options)) (*PurchaseReservedNodesOfferingOutput, error) {
 	if params == nil {
 		params = &PurchaseReservedNodesOfferingInput{}
@@ -50,7 +50,7 @@ type PurchaseReservedNodesOfferingInput struct {
 
 type PurchaseReservedNodesOfferingOutput struct {
 
-	// Represents the output of a PurchaseReservedNodesOffering operation.
+	// Represents the output of a PurchaseReservedNodesOffering  operation.
 	ReservedNode *types.ReservedNode
 
 	// Metadata pertaining to the operation's result.

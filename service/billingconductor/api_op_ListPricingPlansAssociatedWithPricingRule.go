@@ -55,8 +55,8 @@ type ListPricingPlansAssociatedWithPricingRuleOutput struct {
 	// The pagination token to be used on subsequent calls.
 	NextToken *string
 
-	// The list containing pricing plans that are associated with the requested pricing
-	// rule.
+	// The list containing pricing plans that are associated with the requested
+	// pricing rule.
 	PricingPlanArns []string
 
 	// The pricing rule Amazon Resource Name (ARN) for which associations will be
@@ -146,8 +146,8 @@ type ListPricingPlansAssociatedWithPricingRulePaginatorOptions struct {
 	// The optional maximum number of pricing rule associations to retrieve.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

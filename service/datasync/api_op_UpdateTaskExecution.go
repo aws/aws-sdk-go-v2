@@ -13,10 +13,10 @@ import (
 
 // Updates execution of a task. You can modify bandwidth throttling for a task
 // execution that is running or queued. For more information, see Adjusting
-// Bandwidth Throttling for a Task Execution
-// (https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#adjust-bandwidth-throttling).
-// The only Option that can be modified by UpdateTaskExecution is BytesPerSecond
-// (https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond).
+// Bandwidth Throttling for a Task Execution (https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#adjust-bandwidth-throttling)
+// . The only Option  that can be modified by UpdateTaskExecution  is
+// BytesPerSecond (https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond)
+// .
 func (c *Client) UpdateTaskExecution(ctx context.Context, params *UpdateTaskExecutionInput, optFns ...func(*Options)) (*UpdateTaskExecutionOutput, error) {
 	if params == nil {
 		params = &UpdateTaskExecutionInput{}
@@ -38,7 +38,7 @@ type UpdateTaskExecutionInput struct {
 	// handles files, objects, and their associated metadata. You also can specify how
 	// DataSync verifies data integrity, set bandwidth limits for your task, among
 	// other options. Each task setting has a default value. Unless you need to, you
-	// don't have to configure any of these Options before starting your task.
+	// don't have to configure any of these Options  before starting your task.
 	//
 	// This member is required.
 	Options *types.Options

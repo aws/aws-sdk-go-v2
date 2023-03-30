@@ -15,8 +15,8 @@ import (
 // the instances are attached to the load balancer and the health check status is
 // available. The attach instances to load balancer operation supports tag-based
 // access control via resource tags applied to the resource identified by load
-// balancer name. For more information, see the Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// balancer name . For more information, see the Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) AttachInstancesToLoadBalancer(ctx context.Context, params *AttachInstancesToLoadBalancerInput, optFns ...func(*Options)) (*AttachInstancesToLoadBalancerOutput, error) {
 	if params == nil {
 		params = &AttachInstancesToLoadBalancerInput{}
@@ -34,11 +34,11 @@ func (c *Client) AttachInstancesToLoadBalancer(ctx context.Context, params *Atta
 
 type AttachInstancesToLoadBalancerInput struct {
 
-	// An array of strings representing the instance name(s) you want to attach to your
-	// load balancer. An instance must be running before you can attach it to your load
-	// balancer. There are no additional limits on the number of instances you can
-	// attach to your load balancer, aside from the limit of Lightsail instances you
-	// can create in your account (20).
+	// An array of strings representing the instance name(s) you want to attach to
+	// your load balancer. An instance must be running before you can attach it to
+	// your load balancer. There are no additional limits on the number of instances
+	// you can attach to your load balancer, aside from the limit of Lightsail
+	// instances you can create in your account (20).
 	//
 	// This member is required.
 	InstanceNames []string

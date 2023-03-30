@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Requests the details of a job for a third party action. Used for partner actions
-// only. When this API is called, AWS CodePipeline returns temporary credentials
-// for the S3 bucket used to store artifacts for the pipeline, if the action
-// requires access to that S3 bucket for input or output artifacts. This API also
-// returns any secret values defined for the action.
+// Requests the details of a job for a third party action. Used for partner
+// actions only. When this API is called, AWS CodePipeline returns temporary
+// credentials for the S3 bucket used to store artifacts for the pipeline, if the
+// action requires access to that S3 bucket for input or output artifacts. This API
+// also returns any secret values defined for the action.
 func (c *Client) GetThirdPartyJobDetails(ctx context.Context, params *GetThirdPartyJobDetailsInput, optFns ...func(*Options)) (*GetThirdPartyJobDetailsOutput, error) {
 	if params == nil {
 		params = &GetThirdPartyJobDetailsInput{}
@@ -31,11 +31,11 @@ func (c *Client) GetThirdPartyJobDetails(ctx context.Context, params *GetThirdPa
 	return out, nil
 }
 
-// Represents the input of a GetThirdPartyJobDetails action.
+// Represents the input of a GetThirdPartyJobDetails  action.
 type GetThirdPartyJobDetailsInput struct {
 
-	// The clientToken portion of the clientId and clientToken pair used to verify that
-	// the calling entity is allowed access to the job and its details.
+	// The clientToken portion of the clientId and clientToken pair used to verify
+	// that the calling entity is allowed access to the job and its details.
 	//
 	// This member is required.
 	ClientToken *string
@@ -48,7 +48,7 @@ type GetThirdPartyJobDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a GetThirdPartyJobDetails action.
+// Represents the output of a GetThirdPartyJobDetails  action.
 type GetThirdPartyJobDetailsOutput struct {
 
 	// The details of the job, including any protected values defined for the job.

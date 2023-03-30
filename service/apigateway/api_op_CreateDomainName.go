@@ -36,9 +36,9 @@ type CreateDomainNameInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The reference to an AWS-managed certificate that will be used by edge-optimized
-	// endpoint for this domain name. AWS Certificate Manager is the only supported
-	// source.
+	// The reference to an AWS-managed certificate that will be used by
+	// edge-optimized endpoint for this domain name. AWS Certificate Manager is the
+	// only supported source.
 	CertificateArn *string
 
 	// [Deprecated] The body of the server certificate that will be used by
@@ -46,13 +46,13 @@ type CreateDomainNameInput struct {
 	// authority.
 	CertificateBody *string
 
-	// [Deprecated] The intermediate certificates and optionally the root certificate,
-	// one after the other without any blank lines, used by an edge-optimized endpoint
-	// for this domain name. If you include the root certificate, your certificate
-	// chain must start with intermediate certificates and end with the root
-	// certificate. Use the intermediate certificates that were provided by your
-	// certificate authority. Do not include any intermediaries that are not in the
-	// chain of trust path.
+	// [Deprecated] The intermediate certificates and optionally the root
+	// certificate, one after the other without any blank lines, used by an
+	// edge-optimized endpoint for this domain name. If you include the root
+	// certificate, your certificate chain must start with intermediate certificates
+	// and end with the root certificate. Use the intermediate certificates that were
+	// provided by your certificate authority. Do not include any intermediaries that
+	// are not in the chain of trust path.
 	CertificateChain *string
 
 	// The user-friendly name of the certificate that will be used by edge-optimized
@@ -63,8 +63,8 @@ type CreateDomainNameInput struct {
 	// key.
 	CertificatePrivateKey *string
 
-	// The endpoint configuration of this DomainName showing the endpoint types of the
-	// domain name.
+	// The endpoint configuration of this DomainName showing the endpoint types of
+	// the domain name.
 	EndpointConfiguration *types.EndpointConfiguration
 
 	// The mutual TLS authentication configuration for a custom domain name. If
@@ -82,17 +82,17 @@ type CreateDomainNameInput struct {
 	// source.
 	RegionalCertificateArn *string
 
-	// The user-friendly name of the certificate that will be used by regional endpoint
-	// for this domain name.
+	// The user-friendly name of the certificate that will be used by regional
+	// endpoint for this domain name.
 	RegionalCertificateName *string
 
 	// The Transport Layer Security (TLS) version + cipher suite for this DomainName.
-	// The valid values are TLS_1_0 and TLS_1_2.
+	// The valid values are TLS_1_0  and TLS_1_2 .
 	SecurityPolicy types.SecurityPolicy
 
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
-	// tag key can be up to 128 characters and must not start with aws:. The tag value
-	// can be up to 256 characters.
+	// tag key can be up to 128 characters and must not start with aws:. The tag
+	// value can be up to 256 characters.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -102,17 +102,17 @@ type CreateDomainNameInput struct {
 // (RestApi).
 type CreateDomainNameOutput struct {
 
-	// The reference to an AWS-managed certificate that will be used by edge-optimized
-	// endpoint for this domain name. AWS Certificate Manager is the only supported
-	// source.
+	// The reference to an AWS-managed certificate that will be used by
+	// edge-optimized endpoint for this domain name. AWS Certificate Manager is the
+	// only supported source.
 	CertificateArn *string
 
 	// The name of the certificate that will be used by edge-optimized endpoint for
 	// this domain name.
 	CertificateName *string
 
-	// The timestamp when the certificate that was used by edge-optimized endpoint for
-	// this domain name was uploaded.
+	// The timestamp when the certificate that was used by edge-optimized endpoint
+	// for this domain name was uploaded.
 	CertificateUploadDate *time.Time
 
 	// The domain name of the Amazon CloudFront distribution associated with this
@@ -128,21 +128,21 @@ type CreateDomainNameOutput struct {
 	// Endpoints for API Gateway.
 	DistributionHostedZoneId *string
 
-	// The custom domain name as an API host name, for example, my-api.example.com.
+	// The custom domain name as an API host name, for example, my-api.example.com .
 	DomainName *string
 
-	// The status of the DomainName migration. The valid values are AVAILABLE and
-	// UPDATING. If the status is UPDATING, the domain cannot be modified further until
-	// the existing operation is complete. If it is AVAILABLE, the domain can be
-	// updated.
+	// The status of the DomainName migration. The valid values are AVAILABLE  and
+	// UPDATING . If the status is UPDATING, the domain cannot be modified further
+	// until the existing operation is complete. If it is AVAILABLE, the domain can
+	// be updated.
 	DomainNameStatus types.DomainNameStatus
 
 	// An optional text message containing detailed information about status of the
 	// DomainName migration.
 	DomainNameStatusMessage *string
 
-	// The endpoint configuration of this DomainName showing the endpoint types of the
-	// domain name.
+	// The endpoint configuration of this DomainName showing the endpoint types of
+	// the domain name.
 	EndpointConfiguration *types.EndpointConfiguration
 
 	// The mutual TLS authentication configuration for a custom domain name. If
@@ -155,12 +155,12 @@ type CreateDomainNameOutput struct {
 	// imported or private CA certificate ARN as the regionalCertificateArn.
 	OwnershipVerificationCertificateArn *string
 
-	// The reference to an AWS-managed certificate that will be used for validating the
-	// regional domain name. AWS Certificate Manager is the only supported source.
+	// The reference to an AWS-managed certificate that will be used for validating
+	// the regional domain name. AWS Certificate Manager is the only supported source.
 	RegionalCertificateArn *string
 
-	// The name of the certificate that will be used for validating the regional domain
-	// name.
+	// The name of the certificate that will be used for validating the regional
+	// domain name.
 	RegionalCertificateName *string
 
 	// The domain name associated with the regional endpoint for this custom domain
@@ -169,13 +169,13 @@ type CreateDomainNameOutput struct {
 	// by API Gateway when you create a regional endpoint.
 	RegionalDomainName *string
 
-	// The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For
-	// more information, see Set up a Regional Custom Domain Name and AWS Regions and
-	// Endpoints for API Gateway.
+	// The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint.
+	// For more information, see Set up a Regional Custom Domain Name and AWS Regions
+	// and Endpoints for API Gateway.
 	RegionalHostedZoneId *string
 
 	// The Transport Layer Security (TLS) version + cipher suite for this DomainName.
-	// The valid values are TLS_1_0 and TLS_1_2.
+	// The valid values are TLS_1_0  and TLS_1_2 .
 	SecurityPolicy types.SecurityPolicy
 
 	// The collection of tags. Each tag element is associated with a given resource.

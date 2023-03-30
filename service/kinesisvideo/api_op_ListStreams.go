@@ -14,7 +14,7 @@ import (
 
 // Returns an array of StreamInfo objects. Each object describes a stream. To
 // retrieve only streams that satisfy a specific condition, you can specify a
-// StreamNameCondition.
+// StreamNameCondition .
 func (c *Client) ListStreams(ctx context.Context, params *ListStreamsInput, optFns ...func(*Options)) (*ListStreamsOutput, error) {
 	if params == nil {
 		params = &ListStreamsInput{}
@@ -36,12 +36,12 @@ type ListStreamsInput struct {
 	MaxResults *int32
 
 	// If you specify this parameter, when the result of a ListStreams operation is
-	// truncated, the call returns the NextToken in the response. To get another batch
-	// of streams, provide this token in your next request.
+	// truncated, the call returns the NextToken in the response. To get another
+	// batch of streams, provide this token in your next request.
 	NextToken *string
 
-	// Optional: Returns only streams that satisfy a specific condition. Currently, you
-	// can specify only the prefix of a stream name as a condition.
+	// Optional: Returns only streams that satisfy a specific condition. Currently,
+	// you can specify only the prefix of a stream name as a condition.
 	StreamNameCondition *types.StreamNameCondition
 
 	noSmithyDocumentSerde
@@ -49,11 +49,11 @@ type ListStreamsInput struct {
 
 type ListStreamsOutput struct {
 
-	// If the response is truncated, the call returns this element with a token. To get
-	// the next batch of streams, use this token in your next request.
+	// If the response is truncated, the call returns this element with a token. To
+	// get the next batch of streams, use this token in your next request.
 	NextToken *string
 
-	// An array of StreamInfo objects.
+	// An array of StreamInfo  objects.
 	StreamInfoList []types.StreamInfo
 
 	// Metadata pertaining to the operation's result.
@@ -134,8 +134,8 @@ type ListStreamsPaginatorOptions struct {
 	// The maximum number of streams to return in the response. The default is 10,000.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

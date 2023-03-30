@@ -49,10 +49,10 @@ type DescribeModelOutput struct {
 	// data after post processing by Amazon Lookout for Equipment. For example, if you
 	// provide data that has been collected at a 1 second level and you want the system
 	// to resample the data at a 1 minute rate before training, the TargetSamplingRate
-	// is 1 minute. When providing a value for the TargetSamplingRate, you must attach
-	// the prefix "PT" to the rate you want. The value for a 1 second rate is therefore
-	// PT1S, the value for a 15 minute rate is PT15M, and the value for a 1 hour rate
-	// is PT1H
+	// is 1 minute. When providing a value for the TargetSamplingRate, you must
+	// attach the prefix "PT" to the rate you want. The value for a 1 second rate is
+	// therefore PT1S, the value for a 15 minute rate is PT15M, and the value for a 1
+	// hour rate is PT1H
 	DataPreProcessingConfiguration *types.DataPreProcessingConfiguration
 
 	// The Amazon Resouce Name (ARN) of the dataset used to create the ML model being
@@ -66,8 +66,8 @@ type DescribeModelOutput struct {
 	// evaluation data for the ML model.
 	EvaluationDataEndTime *time.Time
 
-	// Indicates the time reference in the dataset that was used to begin the subset of
-	// evaluation data for the ML model.
+	// Indicates the time reference in the dataset that was used to begin the subset
+	// of evaluation data for the ML model.
 	EvaluationDataStartTime *time.Time
 
 	// If the training of the ML model failed, this indicates the reason for that
@@ -95,8 +95,8 @@ type DescribeModelOutput struct {
 	// The name of the ML model being described.
 	ModelName *string
 
-	// Indicates that the asset associated with this sensor has been shut off. As long
-	// as this condition is met, Lookout for Equipment will not use data from this
+	// Indicates that the asset associated with this sensor has been shut off. As
+	// long as this condition is met, Lookout for Equipment will not use data from this
 	// asset for training, evaluation, or inference.
 	OffCondition *string
 
@@ -114,16 +114,16 @@ type DescribeModelOutput struct {
 	// Lookout for Equipment.
 	ServerSideKmsKeyId *string
 
-	// Specifies the current status of the model being described. Status describes the
-	// status of the most recent action of the model.
+	// Specifies the current status of the model being described. Status describes
+	// the status of the most recent action of the model.
 	Status types.ModelStatus
 
 	// Indicates the time reference in the dataset that was used to end the subset of
 	// training data for the ML model.
 	TrainingDataEndTime *time.Time
 
-	// Indicates the time reference in the dataset that was used to begin the subset of
-	// training data for the ML model.
+	// Indicates the time reference in the dataset that was used to begin the subset
+	// of training data for the ML model.
 	TrainingDataStartTime *time.Time
 
 	// Indicates the time at which the training of the ML model was completed.

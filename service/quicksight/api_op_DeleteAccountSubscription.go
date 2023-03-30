@@ -12,10 +12,10 @@ import (
 
 // Use the DeleteAccountSubscription operation to delete an Amazon QuickSight
 // account. This operation will result in an error message if you have configured
-// your account termination protection settings to True. To change this setting and
-// delete your account, call the UpdateAccountSettings API and set the value of the
-// TerminationProtectionEnabled parameter to False, then make another call to the
-// DeleteAccountSubscription API.
+// your account termination protection settings to True. To change this setting
+// and delete your account, call the UpdateAccountSettings API and set the value
+// of the TerminationProtectionEnabled  parameter to False, then make another
+// call to the DeleteAccountSubscription  API.
 func (c *Client) DeleteAccountSubscription(ctx context.Context, params *DeleteAccountSubscriptionInput, optFns ...func(*Options)) (*DeleteAccountSubscriptionOutput, error) {
 	if params == nil {
 		params = &DeleteAccountSubscriptionInput{}

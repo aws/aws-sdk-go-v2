@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Used to enable or disable the custom Mail-From domain configuration for an email
-// identity.
+// Used to enable or disable the custom Mail-From domain configuration for an
+// email identity.
 func (c *Client) PutEmailIdentityMailFromAttributes(ctx context.Context, params *PutEmailIdentityMailFromAttributesInput, optFns ...func(*Options)) (*PutEmailIdentityMailFromAttributesOutput, error) {
 	if params == nil {
 		params = &PutEmailIdentityMailFromAttributesInput{}
@@ -36,29 +36,27 @@ type PutEmailIdentityMailFromAttributesInput struct {
 	// This member is required.
 	EmailIdentity *string
 
-	// The action to take if the required MX record isn't found when you send an email.
-	// When you set this value to UseDefaultValue, the mail is sent using amazonses.com
-	// as the MAIL FROM domain. When you set this value to RejectMessage, the Amazon
-	// SES API v2 returns a MailFromDomainNotVerified error, and doesn't attempt to
-	// deliver the email. These behaviors are taken when the custom MAIL FROM domain
-	// configuration is in the Pending, Failed, and TemporaryFailure states.
+	// The action to take if the required MX record isn't found when you send an
+	// email. When you set this value to UseDefaultValue, the mail is sent using
+	// amazonses.com as the MAIL FROM domain. When you set this value to RejectMessage
+	// , the Amazon SES API v2 returns a MailFromDomainNotVerified error, and doesn't
+	// attempt to deliver the email. These behaviors are taken when the custom MAIL
+	// FROM domain configuration is in the Pending , Failed , and TemporaryFailure
+	// states.
 	BehaviorOnMxFailure types.BehaviorOnMxFailure
 
-	// The custom MAIL FROM domain that you want the verified identity to use. The MAIL
-	// FROM domain must meet the following criteria:
-	// - It has to be a subdomain of the
-	// verified identity.
-	// - It can't be used to receive email.
-	// - It can't be used in a
-	// "From" address if the MAIL FROM domain is a destination for feedback forwarding
-	// emails.
+	// The custom MAIL FROM domain that you want the verified identity to use. The
+	// MAIL FROM domain must meet the following criteria:
+	//     - It has to be a subdomain of the verified identity.
+	//     - It can't be used to receive email.
+	//     - It can't be used in a "From" address if the MAIL FROM domain is a destination for feedback forwarding emails.
 	MailFromDomain *string
 
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type PutEmailIdentityMailFromAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

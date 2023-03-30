@@ -15,24 +15,15 @@ import (
 // Initiates a signing job to be performed on the code provided. Signing jobs are
 // viewable by the ListSigningJobs operation for two years after they are
 // performed. Note the following requirements:
-// - You must create an Amazon S3
-// source bucket. For more information, see Create a Bucket
-// (http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the
-// Amazon S3 Getting Started Guide.
-// - Your S3 source bucket must be version
-// enabled.
-// - You must create an S3 destination bucket. Code signing uses your S3
-// destination bucket to write your signed code.
-// - You specify the name of the
-// source and destination buckets when calling the StartSigningJob operation.
-// - You
-// must also specify a request token that identifies your request to code
-// signing.
+//   - You must create an Amazon S3 source bucket. For more information, see Create a Bucket (http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the Amazon S3 Getting Started Guide.
+//   - Your S3 source bucket must be version enabled.
+//   - You must create an S3 destination bucket. Code signing uses your S3 destination bucket to write your signed code.
+//   - You specify the name of the source and destination buckets when calling the StartSigningJob operation.
+//   - You must also specify a request token that identifies your request to code signing.
 //
-// You can call the DescribeSigningJob and the ListSigningJobs actions
-// after you call StartSigningJob. For a Java example that shows how to use this
-// action, see http://docs.aws.amazon.com/acm/latest/userguide/
-// (http://docs.aws.amazon.com/acm/latest/userguide/)
+// You can call the DescribeSigningJob  and the ListSigningJobs actions after you
+// call StartSigningJob. For a Java example that shows how to use this action,
+// see http://docs.aws.amazon.com/acm/latest/userguide/ (http://docs.aws.amazon.com/acm/latest/userguide/)
 func (c *Client) StartSigningJob(ctx context.Context, params *StartSigningJobInput, optFns ...func(*Options)) (*StartSigningJobOutput, error) {
 	if params == nil {
 		params = &StartSigningJobInput{}
@@ -56,8 +47,8 @@ type StartSigningJobInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// The S3 bucket in which to save your signed object. The destination contains the
-	// name of your bucket and an optional prefix.
+	// The S3 bucket in which to save your signed object. The destination contains
+	// the name of your bucket and an optional prefix.
 	//
 	// This member is required.
 	Destination *types.Destination
@@ -67,8 +58,8 @@ type StartSigningJobInput struct {
 	// This member is required.
 	ProfileName *string
 
-	// The S3 bucket that contains the object to sign or a BLOB that contains your raw
-	// code.
+	// The S3 bucket that contains the object to sign or a BLOB that contains your
+	// raw code.
 	//
 	// This member is required.
 	Source *types.Source

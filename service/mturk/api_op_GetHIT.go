@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The GetHIT operation retrieves the details of the specified HIT.
+// The GetHIT  operation retrieves the details of the specified HIT.
 func (c *Client) GetHIT(ctx context.Context, params *GetHITInput, optFns ...func(*Options)) (*GetHITOutput, error) {
 	if params == nil {
 		params = &GetHITInput{}

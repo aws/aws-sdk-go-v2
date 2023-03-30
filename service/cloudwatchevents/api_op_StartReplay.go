@@ -15,11 +15,11 @@ import (
 // Starts the specified replay. Events are not necessarily replayed in the exact
 // same order that they were added to the archive. A replay processes events to
 // replay based on the time in the event, and replays them using 1 minute
-// intervals. If you specify an EventStartTime and an EventEndTime that covers a 20
-// minute time range, the events are replayed from the first minute of that 20
+// intervals. If you specify an EventStartTime  and an EventEndTime that covers a
+// 20 minute time range, the events are replayed from the first minute of that 20
 // minute range first. Then the events from the second minute are replayed. You can
-// use DescribeReplay to determine the progress of a replay. The value returned for
-// EventLastReplayedTime indicates the time within the specified time range
+// use DescribeReplay to determine the progress of a replay. The value returned
+// for EventLastReplayedTime indicates the time within the specified time range
 // associated with the last event replayed.
 func (c *Client) StartReplay(ctx context.Context, params *StartReplayInput, optFns ...func(*Options)) (*StartReplayOutput, error) {
 	if params == nil {
@@ -45,7 +45,7 @@ type StartReplayInput struct {
 	Destination *types.ReplayDestination
 
 	// A time stamp for the time to stop replaying events. Only events that occurred
-	// between the EventStartTime and EventEndTime are replayed.
+	// between the EventStartTime  and EventEndTime  are replayed.
 	//
 	// This member is required.
 	EventEndTime *time.Time
@@ -56,7 +56,7 @@ type StartReplayInput struct {
 	EventSourceArn *string
 
 	// A time stamp for the time to start replaying events. Only events that occurred
-	// between the EventStartTime and EventEndTime are replayed.
+	// between the EventStartTime  and EventEndTime  are replayed.
 	//
 	// This member is required.
 	EventStartTime *time.Time

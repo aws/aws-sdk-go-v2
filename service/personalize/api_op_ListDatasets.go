@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the list of datasets contained in the given dataset group. The response
-// provides the properties for each dataset, including the Amazon Resource Name
-// (ARN). For more information on datasets, see CreateDataset
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html).
+// Returns the list of datasets contained in the given dataset group. The
+// response provides the properties for each dataset, including the Amazon Resource
+// Name (ARN). For more information on datasets, see CreateDataset (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html)
+// .
 func (c *Client) ListDatasets(ctx context.Context, params *ListDatasetsInput, optFns ...func(*Options)) (*ListDatasetsOutput, error) {
 	if params == nil {
 		params = &ListDatasetsInput{}
@@ -40,8 +40,8 @@ type ListDatasetsInput struct {
 	// The maximum number of datasets to return.
 	MaxResults *int32
 
-	// A token returned from the previous call to ListDatasetImportJobs for getting the
-	// next set of dataset import jobs (if they exist).
+	// A token returned from the previous call to ListDatasetImportJobs for getting
+	// the next set of dataset import jobs (if they exist).
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,7 +49,7 @@ type ListDatasetsInput struct {
 
 type ListDatasetsOutput struct {
 
-	// An array of Dataset objects. Each object provides metadata information.
+	// An array of Dataset  objects. Each object provides metadata information.
 	Datasets []types.DatasetSummary
 
 	// A token for getting the next set of datasets (if they exist).
@@ -133,8 +133,8 @@ type ListDatasetsPaginatorOptions struct {
 	// The maximum number of datasets to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

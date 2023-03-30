@@ -14,7 +14,7 @@ import (
 
 // Returns information about a specific version of a slot type. In addition to
 // specifying the slot type name, you must specify the slot type version. This
-// operation requires permissions for the lex:GetSlotType action.
+// operation requires permissions for the lex:GetSlotType  action.
 func (c *Client) GetSlotType(ctx context.Context, params *GetSlotTypeInput, optFns ...func(*Options)) (*GetSlotTypeOutput, error) {
 	if params == nil {
 		params = &GetSlotTypeInput{}
@@ -47,7 +47,7 @@ type GetSlotTypeInput struct {
 
 type GetSlotTypeOutput struct {
 
-	// Checksum of the $LATEST version of the slot type.
+	// Checksum of the $LATEST  version of the slot type.
 	Checksum *string
 
 	// The date that the slot type was created.
@@ -74,7 +74,7 @@ type GetSlotTypeOutput struct {
 	SlotTypeConfigurations []types.SlotTypeConfiguration
 
 	// The strategy that Amazon Lex uses to determine the value of the slot. For more
-	// information, see PutSlotType.
+	// information, see PutSlotType .
 	ValueSelectionStrategy types.SlotValueSelectionStrategy
 
 	// The version of the slot type.

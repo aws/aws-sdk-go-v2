@@ -8,9 +8,9 @@ import (
 )
 
 // Contains information about a backup of an AWS CloudHSM cluster. All backup
-// objects contain the BackupId, BackupState, ClusterId, and CreateTimestamp
+// objects contain the BackupId , BackupState , ClusterId , and CreateTimestamp
 // parameters. Backups that were copied into a destination region additionally
-// contain the CopyTimestamp, SourceBackup, SourceCluster, and SourceRegion
+// contain the CopyTimestamp , SourceBackup , SourceCluster , and SourceRegion
 // parameters. A backup that is pending deletion will include the DeleteTimestamp
 // parameter.
 type Backup struct {
@@ -36,7 +36,7 @@ type Backup struct {
 	DeleteTimestamp *time.Time
 
 	// Specifies whether the service should exempt a backup from the retention policy
-	// for the cluster. True exempts a backup from the retention policy. False means
+	// for the cluster. True  exempts a backup from the retention policy. False means
 	// the service applies the backup retention policy defined at the cluster.
 	NeverExpires *bool
 
@@ -60,8 +60,8 @@ type Backup struct {
 // A policy that defines the number of days to retain backups.
 type BackupRetentionPolicy struct {
 
-	// The type of backup retention policy. For the DAYS type, the value is the number
-	// of days to retain backups.
+	// The type of backup retention policy. For the DAYS type, the value is the
+	// number of days to retain backups.
 	Type BackupRetentionType
 
 	// Use a value between 7 - 379.
@@ -81,7 +81,7 @@ type Certificates struct {
 	ClusterCertificate *string
 
 	// The cluster's certificate signing request (CSR). The CSR exists only when the
-	// cluster's state is UNINITIALIZED.
+	// cluster's state is UNINITIALIZED .
 	ClusterCsr *string
 
 	// The HSM certificate issued (signed) by the HSM hardware.
@@ -123,8 +123,8 @@ type Cluster struct {
 	// The identifier (ID) of the cluster's security group.
 	SecurityGroup *string
 
-	// The identifier (ID) of the backup used to create the cluster. This value exists
-	// only when the cluster was created from a backup.
+	// The identifier (ID) of the backup used to create the cluster. This value
+	// exists only when the cluster was created from a backup.
 	SourceBackupId *string
 
 	// The cluster's state.

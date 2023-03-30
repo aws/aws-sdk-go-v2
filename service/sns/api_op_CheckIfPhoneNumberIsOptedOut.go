@@ -13,7 +13,7 @@ import (
 // Accepts a phone number and indicates whether the phone holder has opted out of
 // receiving SMS messages from your Amazon Web Services account. You cannot send
 // SMS messages to a number that is opted out. To resume sending messages, you can
-// opt in the number by using the OptInPhoneNumber action.
+// opt in the number by using the OptInPhoneNumber  action.
 func (c *Client) CheckIfPhoneNumberIsOptedOut(ctx context.Context, params *CheckIfPhoneNumberIsOptedOutInput, optFns ...func(*Options)) (*CheckIfPhoneNumberIsOptedOutOutput, error) {
 	if params == nil {
 		params = &CheckIfPhoneNumberIsOptedOutInput{}
@@ -29,7 +29,7 @@ func (c *Client) CheckIfPhoneNumberIsOptedOut(ctx context.Context, params *Check
 	return out, nil
 }
 
-// The input for the CheckIfPhoneNumberIsOptedOut action.
+// The input for the CheckIfPhoneNumberIsOptedOut  action.
 type CheckIfPhoneNumberIsOptedOutInput struct {
 
 	// The phone number for which you want to check the opt out status.
@@ -40,14 +40,12 @@ type CheckIfPhoneNumberIsOptedOutInput struct {
 	noSmithyDocumentSerde
 }
 
-// The response from the CheckIfPhoneNumberIsOptedOut action.
+// The response from the CheckIfPhoneNumberIsOptedOut  action.
 type CheckIfPhoneNumberIsOptedOutOutput struct {
 
 	// Indicates whether the phone number is opted out:
-	// - true – The phone number is
-	// opted out, meaning you cannot publish SMS messages to it.
-	// - false – The phone
-	// number is opted in, meaning you can publish SMS messages to it.
+	//     - true – The phone number is opted out, meaning you cannot publish SMS messages to it.
+	//     - false – The phone number is opted in, meaning you can publish SMS messages to it.
 	IsOptedOut bool
 
 	// Metadata pertaining to the operation's result.

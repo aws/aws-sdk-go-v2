@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides the details for the GuardDuty administrator account associated with the
-// current GuardDuty member account.
+// Provides the details for the GuardDuty administrator account associated with
+// the current GuardDuty member account.
 func (c *Client) GetAdministratorAccount(ctx context.Context, params *GetAdministratorAccountInput, optFns ...func(*Options)) (*GetAdministratorAccountOutput, error) {
 	if params == nil {
 		params = &GetAdministratorAccountInput{}

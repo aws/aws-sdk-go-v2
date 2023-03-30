@@ -31,8 +31,7 @@ func (c *Client) ListQueueQuickConnects(ctx context.Context, params *ListQueueQu
 
 type ListQueueQuickConnectsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -43,8 +42,8 @@ type ListQueueQuickConnectsInput struct {
 	// This member is required.
 	QueueId *string
 
-	// The maximum number of results to return per page. The default MaxResult size is
-	// 100.
+	// The maximum number of results to return per page. The default MaxResult size
+	// is 100.
 	MaxResults *int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -142,12 +141,12 @@ var _ ListQueueQuickConnectsAPIClient = (*Client)(nil)
 // ListQueueQuickConnectsPaginatorOptions is the paginator options for
 // ListQueueQuickConnects
 type ListQueueQuickConnectsPaginatorOptions struct {
-	// The maximum number of results to return per page. The default MaxResult size is
-	// 100.
+	// The maximum number of results to return per page. The default MaxResult size
+	// is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -160,7 +159,8 @@ type ListQueueQuickConnectsPaginator struct {
 	firstPage bool
 }
 
-// NewListQueueQuickConnectsPaginator returns a new ListQueueQuickConnectsPaginator
+// NewListQueueQuickConnectsPaginator returns a new
+// ListQueueQuickConnectsPaginator
 func NewListQueueQuickConnectsPaginator(client ListQueueQuickConnectsAPIClient, params *ListQueueQuickConnectsInput, optFns ...func(*ListQueueQuickConnectsPaginatorOptions)) *ListQueueQuickConnectsPaginator {
 	if params == nil {
 		params = &ListQueueQuickConnectsInput{}

@@ -16,19 +16,16 @@ import (
 // may be split into multiple pages that can be retrieved by making the call
 // repeatedly. Access Control You can use IAM policies to control this action's
 // access to Amazon SWF resources as follows:
-// - Use a Resource element with the
-// domain name to limit the action to only specified domains.
-// - Use an Action
-// element to allow or deny permission to call this action.
-// - You cannot use an IAM
-// policy to constrain this action's parameters.
+//   - Use a Resource element with the domain name to limit the action to only specified domains.
+//   - Use an Action element to allow or deny permission to call this action.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
-// If the caller doesn't have
-// sufficient permissions to invoke the action, or the parameter values fall
-// outside the specified constraints, the action fails. The associated event
-// attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and
-// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
-// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// If
+// the caller doesn't have sufficient permissions to invoke the action, or the
+// parameter values fall outside the specified constraints, the action fails. The
+// associated event attribute's cause  parameter is set to OPERATION_NOT_PERMITTED
+// . For details and example IAM policies, see Using IAM to Manage Access to
+// Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 func (c *Client) ListWorkflowTypes(ctx context.Context, params *ListWorkflowTypesInput, optFns ...func(*Options)) (*ListWorkflowTypesOutput, error) {
 	if params == nil {
@@ -64,17 +61,17 @@ type ListWorkflowTypesInput struct {
 	// If specified, lists the workflow type with this name.
 	Name *string
 
-	// If NextPageToken is returned there are more results available. The value of
-	// NextPageToken is a unique pagination token for each page. Make the call again
+	// If NextPageToken  is returned there are more results available. The value of
+	// NextPageTokenis a unique pagination token for each page. Make the call again
 	// using the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 60 seconds. Using an expired
-	// pagination token will return a 400 error: "Specified token has exceeded its
-	// maximum lifetime". The configured maximumPageSize determines how many results
+	// pagination token will return a 400  error: "Specified token has exceeded its
+	// maximum lifetime ". The configured maximumPageSize determines how many results
 	// can be returned in a single call.
 	NextPageToken *string
 
 	// When set to true, returns the results in reverse order. By default the results
-	// are returned in ascending alphabetical order of the name of the workflow types.
+	// are returned in ascending alphabetical order of the name  of the workflow types.
 	ReverseOrder bool
 
 	noSmithyDocumentSerde
@@ -172,14 +169,15 @@ type ListWorkflowTypesAPIClient interface {
 
 var _ ListWorkflowTypesAPIClient = (*Client)(nil)
 
-// ListWorkflowTypesPaginatorOptions is the paginator options for ListWorkflowTypes
+// ListWorkflowTypesPaginatorOptions is the paginator options for
+// ListWorkflowTypes
 type ListWorkflowTypesPaginatorOptions struct {
 	// The maximum number of results that are returned per call. Use nextPageToken to
 	// obtain further pages of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -46,7 +46,7 @@ type GetImportOutput struct {
 	// The ARN of the destination event data store.
 	Destinations []string
 
-	// Used with StartEventTime to bound a StartImport request, and limit imported
+	// Used with StartEventTime  to bound a StartImport request, and limit imported
 	// trail events to only those events logged within a specified time period.
 	EndEventTime *time.Time
 
@@ -56,17 +56,17 @@ type GetImportOutput struct {
 	// The source S3 bucket.
 	ImportSource *types.ImportSource
 
-	// Provides statistics for the import. CloudTrail does not update import statistics
-	// in real-time. Returned values for parameters such as EventsCompleted may be
-	// lower than the actual value, because CloudTrail updates statistics incrementally
-	// over the course of the import.
+	// Provides statistics for the import. CloudTrail does not update import
+	// statistics in real-time. Returned values for parameters such as EventsCompleted
+	// may be lower than the actual value, because CloudTrail updates statistics
+	// incrementally over the course of the import.
 	ImportStatistics *types.ImportStatistics
 
 	// The status of the import.
 	ImportStatus types.ImportStatus
 
-	// Used with EndEventTime to bound a StartImport request, and limit imported trail
-	// events to only those events logged within a specified time period.
+	// Used with EndEventTime  to bound a StartImport request, and limit imported
+	// trail events to only those events logged within a specified time period.
 	StartEventTime *time.Time
 
 	// The timestamp of when the import was updated.

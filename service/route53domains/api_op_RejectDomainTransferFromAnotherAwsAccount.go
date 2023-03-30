@@ -10,18 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Rejects the transfer of a domain from another Amazon Web Services account to the
-// current Amazon Web Services account. You initiate a transfer betweenAmazon Web
-// Services accounts using TransferDomainToAnotherAwsAccount
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html).
-// Use either ListOperations
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html)
-// or GetOperationDetail
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
-// to determine whether the operation succeeded. GetOperationDetail
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+// Rejects the transfer of a domain from another Amazon Web Services account to
+// the current Amazon Web Services account. You initiate a transfer betweenAmazon
+// Web Services accounts using TransferDomainToAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
+// . Use either ListOperations (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html)
+// or GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+// to determine whether the operation succeeded. GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
 // provides additional information, for example, Domain Transfer from Aws Account
-// 111122223333 has been cancelled.
+// 111122223333 has been cancelled .
 func (c *Client) RejectDomainTransferFromAnotherAwsAccount(ctx context.Context, params *RejectDomainTransferFromAnotherAwsAccountInput, optFns ...func(*Options)) (*RejectDomainTransferFromAnotherAwsAccountOutput, error) {
 	if params == nil {
 		params = &RejectDomainTransferFromAnotherAwsAccountInput{}
@@ -42,8 +38,7 @@ func (c *Client) RejectDomainTransferFromAnotherAwsAccount(ctx context.Context, 
 type RejectDomainTransferFromAnotherAwsAccountInput struct {
 
 	// The name of the domain that was specified when another Amazon Web Services
-	// account submitted a TransferDomainToAnotherAwsAccount
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
+	// account submitted a TransferDomainToAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
 	// request.
 	//
 	// This member is required.

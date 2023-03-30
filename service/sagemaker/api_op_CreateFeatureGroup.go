@@ -11,16 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new FeatureGroup. A FeatureGroup is a group of Features defined in the
-// FeatureStore to describe a Record. The FeatureGroup defines the schema and
-// features contained in the FeatureGroup. A FeatureGroup definition is composed of
-// a list of Features, a RecordIdentifierFeatureName, an EventTimeFeatureName and
-// configurations for its OnlineStore and OfflineStore. Check Amazon Web Services
-// service quotas
-// (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) to see
-// the FeatureGroups quota for your Amazon Web Services account. You must include
-// at least one of OnlineStoreConfig and OfflineStoreConfig to create a
-// FeatureGroup.
+// Create a new FeatureGroup . A FeatureGroup  is a group of Features defined in
+// the FeatureStore  to describe a Record . The FeatureGroup defines the schema
+// and features contained in the FeatureGroup. A FeatureGroup definition is
+// composed of a list of Features , a RecordIdentifierFeatureName , an
+// EventTimeFeatureName and configurations for its OnlineStore  and OfflineStore.
+// Check Amazon Web Services service quotas (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
+// to see the FeatureGroups quota for your Amazon Web Services account. You must
+// include at least one of OnlineStoreConfig  and OfflineStoreConfig  to create a
+// FeatureGroup .
 func (c *Client) CreateFeatureGroup(ctx context.Context, params *CreateFeatureGroupInput, optFns ...func(*Options)) (*CreateFeatureGroupOutput, error) {
 	if params == nil {
 		params = &CreateFeatureGroupInput{}
@@ -38,86 +37,68 @@ func (c *Client) CreateFeatureGroup(ctx context.Context, params *CreateFeatureGr
 
 type CreateFeatureGroupInput struct {
 
-	// The name of the feature that stores the EventTime of a Record in a FeatureGroup.
-	// An EventTime is a point in time when a new event occurs that corresponds to the
-	// creation or update of a Record in a FeatureGroup. All Records in the
-	// FeatureGroup must have a corresponding EventTime. An EventTime can be a String
-	// or Fractional.
-	// - Fractional: EventTime feature values must be a Unix timestamp
-	// in seconds.
-	// - String: EventTime feature values must be an ISO-8601 string in the
-	// format. The following formats are supported yyyy-MM-dd'T'HH:mm:ssZ and
-	// yyyy-MM-dd'T'HH:mm:ss.SSSZ where yyyy, MM, and dd represent the year, month, and
-	// day respectively and HH, mm, ss, and if applicable, SSS represent the hour,
-	// month, second and milliseconds respsectively. 'T' and Z are constants.
+	// The name of the feature that stores the EventTime  of a Record  in a
+	// FeatureGroup . An EventTime is a point in time when a new event occurs that
+	// corresponds to the creation or update of a Record  in a FeatureGroup . All
+	// Records in the FeatureGroup  must have a corresponding EventTime . An EventTime
+	// can be a String  or Fractional .
+	//     - Fractional : EventTime feature values must be a Unix timestamp in seconds.
+	//     - String : EventTime feature values must be an ISO-8601 string in the format. The following formats are supported yyyy-MM-dd'T'HH:mm:ssZ and yyyy-MM-dd'T'HH:mm:ss.SSSZ where yyyy , MM , and dd represent the year, month, and day respectively and HH , mm , ss , and if applicable, SSS represent the hour, month, second and milliseconds respsectively. 'T' and Z are constants.
 	//
 	// This member is required.
 	EventTimeFeatureName *string
 
-	// A list of Feature names and types. Name and Type is compulsory per Feature.
-	// Valid feature FeatureTypes are Integral, Fractional and String. FeatureNames
-	// cannot be any of the following: is_deleted, write_time, api_invocation_time You
-	// can create up to 2,500 FeatureDefinitions per FeatureGroup.
+	// A list of Feature  names and types. Name  and Type  is compulsory per Feature.
+	// Valid feature FeatureType s are Integral , Fractional  and String . FeatureName
+	// s cannot be any of the following: is_deleted , write_time , api_invocation_time
+	// You can create up to 2,500 FeatureDefinition s per FeatureGroup .
 	//
 	// This member is required.
 	FeatureDefinitions []types.FeatureDefinition
 
 	// The name of the FeatureGroup. The name must be unique within an Amazon Web
 	// Services Region in an Amazon Web Services account. The name:
-	// - Must start and
-	// end with an alphanumeric character.
-	// - Can only contain alphanumeric character
-	// and hyphens. Spaces are not allowed.
+	//     - Must start and end with an alphanumeric character.
+	//     - Can only contain alphanumeric character and hyphens. Spaces are not allowed.
 	//
 	// This member is required.
 	FeatureGroupName *string
 
-	// The name of the Feature whose value uniquely identifies a Record defined in the
-	// FeatureStore. Only the latest record per identifier value will be stored in the
-	// OnlineStore. RecordIdentifierFeatureName must be one of feature definitions'
-	// names. You use the RecordIdentifierFeatureName to access data in a FeatureStore.
-	// This name:
-	// - Must start and end with an alphanumeric character.
-	// - Can only
-	// contains alphanumeric characters, hyphens, underscores. Spaces are not allowed.
+	// The name of the Feature  whose value uniquely identifies a Record defined in
+	// the FeatureStore. Only the latest record per identifier value will be stored
+	// in the OnlineStore . RecordIdentifierFeatureName must be one of feature
+	// definitions' names. You use the RecordIdentifierFeatureName to access data in
+	// a FeatureStore . This name:
+	//     - Must start and end with an alphanumeric character.
+	//     - Can only contains alphanumeric characters, hyphens, underscores. Spaces are not allowed.
 	//
 	// This member is required.
 	RecordIdentifierFeatureName *string
 
-	// A free-form description of a FeatureGroup.
+	// A free-form description of a FeatureGroup .
 	Description *string
 
 	// Use this to configure an OfflineFeatureStore. This parameter allows you to
 	// specify:
-	// - The Amazon Simple Storage Service (Amazon S3) location of an
-	// OfflineStore.
-	// - A configuration for an Amazon Web Services Glue or Amazon Web
-	// Services Hive data catalog.
-	// - An KMS encryption key to encrypt the Amazon S3
-	// location used for OfflineStore. If KMS encryption key is not specified, by
-	// default we encrypt all data at rest using Amazon Web Services KMS key. By
-	// defining your bucket-level key
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html) for SSE,
-	// you can reduce Amazon Web Services KMS requests costs by up to 99 percent.
-	// -
-	// Format for the offline store table. Supported formats are Glue (Default) and
-	// Apache Iceberg (https://iceberg.apache.org/).
+	//     - The Amazon Simple Storage Service (Amazon S3) location of an OfflineStore .
+	//     - A configuration for an Amazon Web Services Glue or Amazon Web Services Hive data catalog.
+	//     - An KMS encryption key to encrypt the Amazon S3 location used for OfflineStore . If KMS encryption key is not specified, by default we encrypt all data at rest using Amazon Web Services KMS key. By defining your bucket-level key (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html) for SSE, you can reduce Amazon Web Services KMS requests costs by up to 99 percent.
+	//     - Format for the offline store table. Supported formats are Glue (Default) and Apache Iceberg (https://iceberg.apache.org/) .
 	//
-	// To learn more about this
-	// parameter, see OfflineStoreConfig.
+	// To learn more about this parameter, see OfflineStoreConfig .
 	OfflineStoreConfig *types.OfflineStoreConfig
 
-	// You can turn the OnlineStore on or off by specifying True for the
-	// EnableOnlineStore flag in OnlineStoreConfig; the default value is False. You can
-	// also include an Amazon Web Services KMS key ID (KMSKeyId) for at-rest encryption
-	// of the OnlineStore.
+	// You can turn the OnlineStore  on or off by specifying True  for the
+	// EnableOnlineStore flag in OnlineStoreConfig ; the default value is False. You
+	// can also include an Amazon Web Services KMS key ID ( KMSKeyId) for at-rest
+	// encryption of the OnlineStore .
 	OnlineStoreConfig *types.OnlineStoreConfig
 
 	// The Amazon Resource Name (ARN) of the IAM execution role used to persist data
-	// into the OfflineStore if an OfflineStoreConfig is provided.
+	// into the OfflineStore  if an OfflineStoreConfig  is provided.
 	RoleArn *string
 
-	// Tags used to identify Features in each FeatureGroup.
+	// Tags used to identify Features  in each FeatureGroup .
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -125,8 +106,8 @@ type CreateFeatureGroupInput struct {
 
 type CreateFeatureGroupOutput struct {
 
-	// The Amazon Resource Name (ARN) of the FeatureGroup. This is a unique identifier
-	// for the feature group.
+	// The Amazon Resource Name (ARN) of the FeatureGroup. This is a unique
+	// identifier for the feature group.
 	//
 	// This member is required.
 	FeatureGroupArn *string

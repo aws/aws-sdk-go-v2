@@ -44,7 +44,7 @@ type CreateTimelineEventInput struct {
 	// This member is required.
 	EventTime *time.Time
 
-	// The type of event. You can create timeline events of type Custom Event.
+	// The type of event. You can create timeline events of type Custom Event .
 	//
 	// This member is required.
 	EventType *string
@@ -55,8 +55,8 @@ type CreateTimelineEventInput struct {
 	// This member is required.
 	IncidentRecordArn *string
 
-	// A token that ensures that a client calls the action only once with the specified
-	// details.
+	// A token that ensures that a client calls the action only once with the
+	// specified details.
 	ClientToken *string
 
 	// Adds one or more references to the TimelineEvent. A reference is an Amazon Web

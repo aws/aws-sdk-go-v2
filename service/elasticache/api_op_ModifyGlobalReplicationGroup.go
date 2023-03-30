@@ -49,12 +49,12 @@ type ModifyGlobalReplicationGroupInput struct {
 	// A valid cache node type that you want to scale this Global datastore to.
 	CacheNodeType *string
 
-	// The name of the cache parameter group to use with the Global datastore. It must
-	// be compatible with the major engine version used by the Global datastore.
+	// The name of the cache parameter group to use with the Global datastore. It
+	// must be compatible with the major engine version used by the Global datastore.
 	CacheParameterGroupName *string
 
-	// The upgraded version of the cache engine to be run on the clusters in the Global
-	// datastore.
+	// The upgraded version of the cache engine to be run on the clusters in the
+	// Global datastore.
 	EngineVersion *string
 
 	// A description of the Global datastore
@@ -69,8 +69,7 @@ type ModifyGlobalReplicationGroupOutput struct {
 	// cluster that resides in a different Amazon region. The secondary cluster accepts
 	// only reads. The primary cluster automatically replicates updates to the
 	// secondary cluster.
-	// - The GlobalReplicationGroupIdSuffix represents the name of
-	// the Global datastore, which is what you use to associate a secondary cluster.
+	//     - The GlobalReplicationGroupIdSuffix represents the name of the Global datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *types.GlobalReplicationGroup
 
 	// Metadata pertaining to the operation's result.

@@ -36,9 +36,9 @@ type ListVpcEndpointAccessInput struct {
 	// This member is required.
 	DomainName *string
 
-	// If your initial ListVpcEndpointAccess operation returns a nextToken, you can
-	// include the returned nextToken in subsequent ListVpcEndpointAccess operations,
-	// which returns results in the next page.
+	// If your initial ListVpcEndpointAccess  operation returns a nextToken, you can
+	// include the returned nextToken  in subsequent ListVpcEndpointAccess
+	// operations, which returns results in the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,15 +46,14 @@ type ListVpcEndpointAccessInput struct {
 
 type ListVpcEndpointAccessOutput struct {
 
-	// A list of IAM principals
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html)
+	// A list of IAM principals (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html)
 	// that can currently access the domain.
 	//
 	// This member is required.
 	AuthorizedPrincipalList []types.AuthorizedPrincipal
 
-	// When nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// When nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page.
 	//
 	// This member is required.

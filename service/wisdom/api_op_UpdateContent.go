@@ -48,25 +48,25 @@ type UpdateContentInput struct {
 
 	// The URI for the article. If the knowledge base has a templateUri, setting this
 	// argument overrides it for this piece of content. To remove an existing
-	// overrideLinkOurUri, exclude this argument and set removeOverrideLinkOutUri to
+	// overrideLinkOurUri , exclude this argument and set removeOverrideLinkOutUri to
 	// true.
 	OverrideLinkOutUri *string
 
-	// Unset the existing overrideLinkOutUri if it exists.
+	// Unset the existing overrideLinkOutUri  if it exists.
 	RemoveOverrideLinkOutUri *bool
 
-	// The revisionId of the content resource to update, taken from an earlier call to
-	// GetContent, GetContentSummary, SearchContent, or ListContents. If included, this
-	// argument acts as an optimistic lock to ensure content was not modified since it
-	// was last read. If it has been modified, this API throws a
-	// PreconditionFailedException.
+	// The revisionId of the content resource to update, taken from an earlier call
+	// to GetContent , GetContentSummary , SearchContent , or ListContents. If
+	// included, this argument acts as an optimistic lock to ensure content was not
+	// modified since it was last read. If it has been modified, this API throws a
+	// PreconditionFailedException .
 	RevisionId *string
 
 	// The title of the content.
 	Title *string
 
-	// A pointer to the uploaded asset. This value is returned by StartContentUpload
-	// (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html).
+	// A pointer to the uploaded asset. This value is returned by StartContentUpload (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html)
+	// .
 	UploadId *string
 
 	noSmithyDocumentSerde

@@ -30,15 +30,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource that you want to update tags for.
-	// It must be the ARN of an App Runner resource.
+	// The Amazon Resource Name (ARN) of the resource that you want to update tags
+	// for. It must be the ARN of an App Runner resource.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// A list of tag key-value pairs to add or update. If a key is new to the resource,
-	// the tag is added with the provided value. If a key is already associated with
-	// the resource, the value of the tag is updated.
+	// A list of tag key-value pairs to add or update. If a key is new to the
+	// resource, the tag is added with the provided value. If a key is already
+	// associated with the resource, the value of the tag is updated.
 	//
 	// This member is required.
 	Tags []types.Tag

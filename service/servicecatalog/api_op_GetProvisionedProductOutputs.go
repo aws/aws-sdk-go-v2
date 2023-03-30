@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API takes either a ProvisonedProductId or a ProvisionedProductName, along
-// with a list of one or more output keys, and responds with the key/value pairs of
-// those outputs.
+// This API takes either a ProvisonedProductId  or a ProvisionedProductName,
+// along with a list of one or more output keys, and responds with the key/value
+// pairs of those outputs.
 func (c *Client) GetProvisionedProductOutputs(ctx context.Context, params *GetProvisionedProductOutputsInput, optFns ...func(*Options)) (*GetProvisionedProductOutputsOutput, error) {
 	if params == nil {
 		params = &GetProvisionedProductOutputsInput{}
@@ -33,9 +33,9 @@ func (c *Client) GetProvisionedProductOutputs(ctx context.Context, params *GetPr
 type GetProvisionedProductOutputsInput struct {
 
 	// The language code.
-	// - en - English (default)
-	// - jp - Japanese
-	// - zh - Chinese
+	//     - en - English (default)
+	//     - jp - Japanese
+	//     - zh - Chinese
 	AcceptLanguage *string
 
 	// The list of keys that the API should return with their values. If none are
@@ -149,8 +149,8 @@ type GetProvisionedProductOutputsPaginatorOptions struct {
 	// The maximum number of items to return with this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -31,13 +31,13 @@ func (c *Client) ListFlows(ctx context.Context, params *ListFlowsInput, optFns .
 
 type ListFlowsInput struct {
 
-	// The maximum number of results to return per API request. For example, you submit
-	// a ListFlows request with MaxResults set at 5. Although 20 items match your
-	// request, the service returns no more than the first 5 items. (The service also
-	// returns a NextToken value that you can use to fetch the next batch of results.)
-	// The service might return fewer results than the MaxResults value. If MaxResults
-	// is not included in the request, the service defaults to pagination with a
-	// maximum of 10 results per page.
+	// The maximum number of results to return per API request. For example, you
+	// submit a ListFlows request with MaxResults set at 5. Although 20 items match
+	// your request, the service returns no more than the first 5 items. (The service
+	// also returns a NextToken value that you can use to fetch the next batch of
+	// results.) The service might return fewer results than the MaxResults value. If
+	// MaxResults is not included in the request, the service defaults to pagination
+	// with a maximum of 10 results per page.
 	MaxResults int32
 
 	// The token that identifies which batch of results that you want to see. For
@@ -137,17 +137,17 @@ var _ ListFlowsAPIClient = (*Client)(nil)
 
 // ListFlowsPaginatorOptions is the paginator options for ListFlows
 type ListFlowsPaginatorOptions struct {
-	// The maximum number of results to return per API request. For example, you submit
-	// a ListFlows request with MaxResults set at 5. Although 20 items match your
-	// request, the service returns no more than the first 5 items. (The service also
-	// returns a NextToken value that you can use to fetch the next batch of results.)
-	// The service might return fewer results than the MaxResults value. If MaxResults
-	// is not included in the request, the service defaults to pagination with a
-	// maximum of 10 results per page.
+	// The maximum number of results to return per API request. For example, you
+	// submit a ListFlows request with MaxResults set at 5. Although 20 items match
+	// your request, the service returns no more than the first 5 items. (The service
+	// also returns a NextToken value that you can use to fetch the next batch of
+	// results.) The service might return fewer results than the MaxResults value. If
+	// MaxResults is not included in the request, the service defaults to pagination
+	// with a maximum of 10 results per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

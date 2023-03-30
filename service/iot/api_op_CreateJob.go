@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a job. Requires permission to access the CreateJob
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Creates a job. Requires permission to access the CreateJob (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	if params == nil {
@@ -49,21 +48,21 @@ type CreateJobInput struct {
 	// A short text description of the job.
 	Description *string
 
-	// The job document. Required if you don't specify a value for documentSource.
+	// The job document. Required if you don't specify a value for documentSource .
 	Document *string
 
 	// Parameters of an Amazon Web Services managed template that you can specify to
-	// create the job document. documentParameters can only be used when creating jobs
-	// from Amazon Web Services managed templates. This parameter can't be used with
-	// custom job templates or to create jobs from them.
+	// create the job document. documentParameters can only be used when creating
+	// jobs from Amazon Web Services managed templates. This parameter can't be used
+	// with custom job templates or to create jobs from them.
 	DocumentParameters map[string]string
 
 	// An S3 link to the job document. Required if you don't specify a value for
 	// document. If the job document resides in an S3 bucket, you must use a
 	// placeholder link when specifying the document. The placeholder link is of the
-	// following form: ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key}
-	// where bucket is your bucket name and key is the object in the bucket to which
-	// you are linking.
+	// following form:
+	// ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key}where bucket is
+	// your bucket name and key is the object in the bucket to which you are linking.
 	DocumentSource *string
 
 	// Allows you to create the criteria to retry a job.
@@ -92,20 +91,21 @@ type CreateJobInput struct {
 	// Metadata which can be used to manage the job.
 	Tags []types.Tag
 
-	// Specifies whether the job will continue to run (CONTINUOUS), or will be complete
-	// after all those things specified as targets have completed the job (SNAPSHOT).
-	// If continuous, the job may also be run on a thing when a change is detected in a
-	// target. For example, a job will run on a thing when the thing is added to a
-	// target group, even after the job was completed by all things originally in the
-	// group. We recommend that you use continuous jobs instead of snapshot jobs for
-	// dynamic thing group targets. By using continuous jobs, devices that join the
-	// group receive the job execution even after the job has been created.
+	// Specifies whether the job will continue to run (CONTINUOUS), or will be
+	// complete after all those things specified as targets have completed the job
+	// (SNAPSHOT). If continuous, the job may also be run on a thing when a change is
+	// detected in a target. For example, a job will run on a thing when the thing is
+	// added to a target group, even after the job was completed by all things
+	// originally in the group. We recommend that you use continuous jobs instead of
+	// snapshot jobs for dynamic thing group targets. By using continuous jobs, devices
+	// that join the group receive the job execution even after the job has been
+	// created.
 	TargetSelection types.TargetSelection
 
-	// Specifies the amount of time each device has to finish its execution of the job.
-	// The timer is started when the job execution status is set to IN_PROGRESS. If the
-	// job execution status is not set to another terminal state before the time
-	// expires, it will be automatically set to TIMED_OUT.
+	// Specifies the amount of time each device has to finish its execution of the
+	// job. The timer is started when the job execution status is set to IN_PROGRESS.
+	// If the job execution status is not set to another terminal state before the time
+	// expires, it will be automatically set to TIMED_OUT .
 	TimeoutConfig *types.TimeoutConfig
 
 	noSmithyDocumentSerde

@@ -33,7 +33,8 @@ type DeregisterPatchBaselineForPatchGroupInput struct {
 	// This member is required.
 	BaselineId *string
 
-	// The name of the patch group that should be deregistered from the patch baseline.
+	// The name of the patch group that should be deregistered from the patch
+	// baseline.
 	//
 	// This member is required.
 	PatchGroup *string

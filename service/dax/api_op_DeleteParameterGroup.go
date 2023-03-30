@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified parameter group. You cannot delete a parameter group if it
-// is associated with any DAX clusters.
+// Deletes the specified parameter group. You cannot delete a parameter group if
+// it is associated with any DAX clusters.
 func (c *Client) DeleteParameterGroup(ctx context.Context, params *DeleteParameterGroupInput, optFns ...func(*Options)) (*DeleteParameterGroupOutput, error) {
 	if params == nil {
 		params = &DeleteParameterGroupInput{}

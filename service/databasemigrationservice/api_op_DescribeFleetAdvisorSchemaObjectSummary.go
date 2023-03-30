@@ -31,13 +31,11 @@ func (c *Client) DescribeFleetAdvisorSchemaObjectSummary(ctx context.Context, pa
 
 type DescribeFleetAdvisorSchemaObjectSummaryInput struct {
 
-	// If you specify any of the following filters, the output includes information for
-	// only those schema objects that meet the filter criteria:
-	// - schema-id – The ID of
-	// the schema, for example d4610ac5-e323-4ad9-bc50-eaf7249dfe9d.
+	// If you specify any of the following filters, the output includes information
+	// for only those schema objects that meet the filter criteria:
+	//     - schema-id – The ID of the schema, for example d4610ac5-e323-4ad9-bc50-eaf7249dfe9d .
 	//
-	// Example:
-	// describe-fleet-advisor-schema-object-summary --filter
+	// Example: describe-fleet-advisor-schema-object-summary --filter
 	// Name="schema-id",Values="50"
 	Filters []types.Filter
 
@@ -55,11 +53,11 @@ type DescribeFleetAdvisorSchemaObjectSummaryInput struct {
 
 type DescribeFleetAdvisorSchemaObjectSummaryOutput struct {
 
-	// A collection of FleetAdvisorSchemaObjectResponse objects.
+	// A collection of FleetAdvisorSchemaObjectResponse  objects.
 	FleetAdvisorSchemaObjects []types.FleetAdvisorSchemaObjectResponse
 
-	// If NextToken is returned, there are more results available. The value of
-	// NextToken is a unique pagination token for each page. Make the call again using
+	// If NextToken  is returned, there are more results available. The value of
+	// NextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged.
 	NextToken *string
@@ -133,22 +131,22 @@ func (c *Client) addOperationDescribeFleetAdvisorSchemaObjectSummaryMiddlewares(
 	return nil
 }
 
-// DescribeFleetAdvisorSchemaObjectSummaryAPIClient is a client that implements the
-// DescribeFleetAdvisorSchemaObjectSummary operation.
+// DescribeFleetAdvisorSchemaObjectSummaryAPIClient is a client that implements
+// the DescribeFleetAdvisorSchemaObjectSummary operation.
 type DescribeFleetAdvisorSchemaObjectSummaryAPIClient interface {
 	DescribeFleetAdvisorSchemaObjectSummary(context.Context, *DescribeFleetAdvisorSchemaObjectSummaryInput, ...func(*Options)) (*DescribeFleetAdvisorSchemaObjectSummaryOutput, error)
 }
 
 var _ DescribeFleetAdvisorSchemaObjectSummaryAPIClient = (*Client)(nil)
 
-// DescribeFleetAdvisorSchemaObjectSummaryPaginatorOptions is the paginator options
-// for DescribeFleetAdvisorSchemaObjectSummary
+// DescribeFleetAdvisorSchemaObjectSummaryPaginatorOptions is the paginator
+// options for DescribeFleetAdvisorSchemaObjectSummary
 type DescribeFleetAdvisorSchemaObjectSummaryPaginatorOptions struct {
 	// Sets the maximum number of records returned in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

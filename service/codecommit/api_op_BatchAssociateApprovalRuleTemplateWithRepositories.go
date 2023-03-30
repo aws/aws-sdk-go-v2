@@ -47,7 +47,8 @@ type BatchAssociateApprovalRuleTemplateWithRepositoriesInput struct {
 
 type BatchAssociateApprovalRuleTemplateWithRepositoriesOutput struct {
 
-	// A list of names of the repositories that have been associated with the template.
+	// A list of names of the repositories that have been associated with the
+	// template.
 	//
 	// This member is required.
 	AssociatedRepositoryNames []string

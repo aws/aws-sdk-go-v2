@@ -12,8 +12,8 @@ import (
 )
 
 // Associates a specific tag with a resource. A tag is a key-value pair that adds
-// as a metadata to a resource. For more information, see  Tagging your resources
-// (https://docs.aws.amazon.com/translate/latest/dg/tagging.html).
+// as a metadata to a resource. For more information, see Tagging your resources (https://docs.aws.amazon.com/translate/latest/dg/tagging.html)
+// .
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -37,8 +37,8 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// Tags being associated with a specific Amazon Translate resource. There can be a
-	// maximum of 50 tags (both existing and pending) associated with a specific
+	// Tags being associated with a specific Amazon Translate resource. There can be
+	// a maximum of 50 tags (both existing and pending) associated with a specific
 	// resource.
 	//
 	// This member is required.

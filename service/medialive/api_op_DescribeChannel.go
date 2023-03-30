@@ -57,9 +57,9 @@ type DescribeChannelOutput struct {
 	// SINGLE_PIPELINE for a channel with one pipeline.
 	ChannelClass types.ChannelClass
 
-	// A list of destinations of the channel. For UDP outputs, there is one destination
-	// per output. For other types (HLS, for example), there is one destination per
-	// packager.
+	// A list of destinations of the channel. For UDP outputs, there is one
+	// destination per output. For other types (HLS, for example), there is one
+	// destination per packager.
 	Destinations []types.OutputDestination
 
 	// The endpoints where outgoing connections initiate from
@@ -194,9 +194,9 @@ type ChannelCreatedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ChannelCreatedWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ChannelCreatedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -236,9 +236,9 @@ func NewChannelCreatedWaiter(client DescribeChannelAPIClient, optFns ...func(*Ch
 	}
 }
 
-// Wait calls the waiter function for ChannelCreated waiter. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// Wait calls the waiter function for ChannelCreated waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *ChannelCreatedWaiter) Wait(ctx context.Context, params *DescribeChannelInput, maxWaitDur time.Duration, optFns ...func(*ChannelCreatedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -395,9 +395,9 @@ type ChannelDeletedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ChannelDeletedWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ChannelDeletedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -437,9 +437,9 @@ func NewChannelDeletedWaiter(client DescribeChannelAPIClient, optFns ...func(*Ch
 	}
 }
 
-// Wait calls the waiter function for ChannelDeleted waiter. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// Wait calls the waiter function for ChannelDeleted waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *ChannelDeletedWaiter) Wait(ctx context.Context, params *DescribeChannelInput, maxWaitDur time.Duration, optFns ...func(*ChannelDeletedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -579,9 +579,9 @@ type ChannelRunningWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ChannelRunningWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ChannelRunningWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -621,9 +621,9 @@ func NewChannelRunningWaiter(client DescribeChannelAPIClient, optFns ...func(*Ch
 	}
 }
 
-// Wait calls the waiter function for ChannelRunning waiter. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// Wait calls the waiter function for ChannelRunning waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *ChannelRunningWaiter) Wait(ctx context.Context, params *DescribeChannelInput, maxWaitDur time.Duration, optFns ...func(*ChannelRunningWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -763,9 +763,9 @@ type ChannelStoppedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ChannelStoppedWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ChannelStoppedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -805,9 +805,9 @@ func NewChannelStoppedWaiter(client DescribeChannelAPIClient, optFns ...func(*Ch
 	}
 }
 
-// Wait calls the waiter function for ChannelStopped waiter. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// Wait calls the waiter function for ChannelStopped waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *ChannelStoppedWaiter) Wait(ctx context.Context, params *DescribeChannelInput, maxWaitDur time.Duration, optFns ...func(*ChannelStoppedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

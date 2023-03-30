@@ -12,11 +12,11 @@ import (
 )
 
 // Authorizes the aggregator account and region to collect data from the source
-// account and region. PutAggregationAuthorization is an idempotent API. Subsequent
-// requests won’t create a duplicate resource if one was already created. If a
-// following request has different tags values, Config will ignore these
-// differences and treat it as an idempotent request of the previous. In this case,
-// tags will not be updated, even if they are different.
+// account and region. PutAggregationAuthorization is an idempotent API.
+// Subsequent requests won’t create a duplicate resource if one was already
+// created. If a following request has different tags values, Config will ignore
+// these differences and treat it as an idempotent request of the previous. In this
+// case, tags  will not be updated, even if they are different.
 func (c *Client) PutAggregationAuthorization(ctx context.Context, params *PutAggregationAuthorizationInput, optFns ...func(*Options)) (*PutAggregationAuthorizationOutput, error) {
 	if params == nil {
 		params = &PutAggregationAuthorizationInput{}

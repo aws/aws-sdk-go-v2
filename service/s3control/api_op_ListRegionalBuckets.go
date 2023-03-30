@@ -17,12 +17,10 @@ import (
 
 // Returns a list of all Outposts buckets in an Outpost that are owned by the
 // authenticated sender of the request. For more information, see Using Amazon S3
-// on Outposts
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
-// Amazon S3 User Guide. For an example of the request syntax for Amazon S3 on
-// Outposts that uses the S3 on Outposts endpoint hostname prefix and
-// x-amz-outpost-id in your request, see the Examples
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListRegionalBuckets.html#API_control_ListRegionalBuckets_Examples)
+// on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
+// in the Amazon S3 User Guide. For an example of the request syntax for Amazon S3
+// on Outposts that uses the S3 on Outposts endpoint hostname prefix and
+// x-amz-outpost-id in your request, see the Examples (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListRegionalBuckets.html#API_control_ListRegionalBuckets_Examples)
 // section.
 func (c *Client) ListRegionalBuckets(ctx context.Context, params *ListRegionalBucketsInput, optFns ...func(*Options)) (*ListRegionalBucketsOutput, error) {
 	if params == nil {
@@ -61,9 +59,9 @@ type ListRegionalBucketsInput struct {
 
 type ListRegionalBucketsOutput struct {
 
-	// NextToken is sent when isTruncated is true, which means there are more buckets
-	// that can be listed. The next list requests to Amazon S3 can be continued with
-	// this NextToken. NextToken is obfuscated and is not a real key.
+	// NextToken  is sent when isTruncated is true, which means there are more
+	// buckets that can be listed. The next list requests to Amazon S3 can be continued
+	// with this NextToken . NextToken  is obfuscated and is not a real key.
 	NextToken *string
 
 	//
@@ -188,8 +186,8 @@ func addEndpointPrefix_opListRegionalBucketsMiddleware(stack *middleware.Stack) 
 	return stack.Serialize.Insert(&endpointPrefix_opListRegionalBucketsMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
-// ListRegionalBucketsAPIClient is a client that implements the ListRegionalBuckets
-// operation.
+// ListRegionalBucketsAPIClient is a client that implements the
+// ListRegionalBuckets operation.
 type ListRegionalBucketsAPIClient interface {
 	ListRegionalBuckets(context.Context, *ListRegionalBucketsInput, ...func(*Options)) (*ListRegionalBucketsOutput, error)
 }
@@ -202,8 +200,8 @@ type ListRegionalBucketsPaginatorOptions struct {
 	//
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

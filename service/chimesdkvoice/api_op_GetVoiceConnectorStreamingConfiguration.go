@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the streaming configuration details for the specified Amazon Chime SDK
-// Voice Connector. Shows whether media streaming is enabled for sending to Amazon
-// Kinesis. It also shows the retention period, in hours, for the Amazon Kinesis
-// data.
+// Retrieves the streaming configuration details for the specified Amazon Chime
+// SDK Voice Connector. Shows whether media streaming is enabled for sending to
+// Amazon Kinesis. It also shows the retention period, in hours, for the Amazon
+// Kinesis data.
 func (c *Client) GetVoiceConnectorStreamingConfiguration(ctx context.Context, params *GetVoiceConnectorStreamingConfigurationInput, optFns ...func(*Options)) (*GetVoiceConnectorStreamingConfigurationOutput, error) {
 	if params == nil {
 		params = &GetVoiceConnectorStreamingConfigurationInput{}

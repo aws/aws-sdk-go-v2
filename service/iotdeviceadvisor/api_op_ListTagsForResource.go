@@ -11,8 +11,7 @@ import (
 )
 
 // Lists the tags attached to an IoT Device Advisor resource. Requires permission
-// to access the ListTagsForResource
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// to access the ListTagsForResource (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
@@ -31,8 +30,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The resource ARN of the IoT Device Advisor resource. This can be SuiteDefinition
-	// ARN or SuiteRun ARN.
+	// The resource ARN of the IoT Device Advisor resource. This can be
+	// SuiteDefinition ARN or SuiteRun ARN.
 	//
 	// This member is required.
 	ResourceArn *string

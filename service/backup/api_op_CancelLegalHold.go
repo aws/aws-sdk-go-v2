@@ -39,8 +39,8 @@ type CancelLegalHoldInput struct {
 	// This member is required.
 	LegalHoldId *string
 
-	// The integer amount in days specifying amount of days after this API operation to
-	// remove legal hold.
+	// The integer amount in days specifying amount of days after this API operation
+	// to remove legal hold.
 	RetainRecordInDays *int64
 
 	noSmithyDocumentSerde

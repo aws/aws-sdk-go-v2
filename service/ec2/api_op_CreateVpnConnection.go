@@ -11,19 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a VPN connection between an existing virtual private gateway or transit
-// gateway and a customer gateway. The supported connection type is ipsec.1. The
-// response includes information that you need to give to your network
-// administrator to configure your customer gateway. We strongly recommend that you
-// use HTTPS when calling this operation because the response contains sensitive
-// cryptographic information for configuring your customer gateway device. If you
-// decide to shut down your VPN connection for any reason and later create a new
-// VPN connection, you must reconfigure your customer gateway with the new
-// information returned from this call. This is an idempotent operation. If you
+// Creates a VPN connection between an existing virtual private gateway or
+// transit gateway and a customer gateway. The supported connection type is
+// ipsec.1. The response includes information that you need to give to your
+// network administrator to configure your customer gateway. We strongly recommend
+// that you use HTTPS when calling this operation because the response contains
+// sensitive cryptographic information for configuring your customer gateway
+// device. If you decide to shut down your VPN connection for any reason and later
+// create a new VPN connection, you must reconfigure your customer gateway with the
+// new information returned from this call. This is an idempotent operation. If you
 // perform the operation more than once, Amazon EC2 doesn't return an error. For
-// more information, see Amazon Web Services Site-to-Site VPN
-// (https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) in the Amazon Web
-// Services Site-to-Site VPN User Guide.
+// more information, see Amazon Web Services Site-to-Site VPN (https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html)
+// in the Amazon Web Services Site-to-Site VPN User Guide.
 func (c *Client) CreateVpnConnection(ctx context.Context, params *CreateVpnConnectionInput, optFns ...func(*Options)) (*CreateVpnConnectionOutput, error) {
 	if params == nil {
 		params = &CreateVpnConnectionInput{}
@@ -47,15 +46,15 @@ type CreateVpnConnectionInput struct {
 	// This member is required.
 	CustomerGatewayId *string
 
-	// The type of VPN connection (ipsec.1).
+	// The type of VPN connection ( ipsec.1 ).
 	//
 	// This member is required.
 	Type *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The options for the VPN connection.
@@ -68,8 +67,8 @@ type CreateVpnConnectionInput struct {
 	// specify a virtual private gateway.
 	TransitGatewayId *string
 
-	// The ID of the virtual private gateway. If you specify a virtual private gateway,
-	// you cannot specify a transit gateway.
+	// The ID of the virtual private gateway. If you specify a virtual private
+	// gateway, you cannot specify a transit gateway.
 	VpnGatewayId *string
 
 	noSmithyDocumentSerde

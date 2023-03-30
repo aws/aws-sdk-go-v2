@@ -16,8 +16,7 @@ import (
 // It doesn't work with any resource groups that are automatically populated by
 // tag-based or CloudFormation stack-based queries. Minimum permissions To run this
 // command, you must have the following permissions:
-// -
-// resource-groups:UngroupResources
+//   - resource-groups:UngroupResources
 func (c *Client) UngroupResources(ctx context.Context, params *UngroupResourcesInput, optFns ...func(*Options)) (*UngroupResourcesOutput, error) {
 	if params == nil {
 		params = &UngroupResourcesInput{}
@@ -54,11 +53,11 @@ type UngroupResourcesOutput struct {
 	// operation.
 	Failed []types.FailedResource
 
-	// A list of any resources that are still in the process of being removed from the
-	// group by this operation. These pending removals continue asynchronously. You can
-	// check the status of pending removals by using the ListGroupResources operation.
-	// After the resource is successfully removed, it no longer appears in the
-	// response.
+	// A list of any resources that are still in the process of being removed from
+	// the group by this operation. These pending removals continue asynchronously. You
+	// can check the status of pending removals by using the ListGroupResources
+	// operation. After the resource is successfully removed, it no longer appears in
+	// the response.
 	Pending []types.PendingResource
 
 	// A list of resources that were successfully removed from the group by this

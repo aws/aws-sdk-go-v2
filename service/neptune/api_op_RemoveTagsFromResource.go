@@ -30,8 +30,8 @@ type RemoveTagsFromResourceInput struct {
 
 	// The Amazon Neptune resource that the tags are removed from. This value is an
 	// Amazon Resource Name (ARN). For information about creating an ARN, see
-	// Constructing an Amazon Resource Name (ARN)
-	// (https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing).
+	// Constructing an Amazon Resource Name (ARN) (https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing)
+	// .
 	//
 	// This member is required.
 	ResourceName *string

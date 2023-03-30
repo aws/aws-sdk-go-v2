@@ -38,8 +38,8 @@ type GetAccountInput struct {
 // account in the current Amazon Web Services Region.
 type GetAccountOutput struct {
 
-	// Indicates whether or not the automatic warm-up feature is enabled for dedicated
-	// IP addresses that are associated with your account.
+	// Indicates whether or not the automatic warm-up feature is enabled for
+	// dedicated IP addresses that are associated with your account.
 	DedicatedIpAutoWarmupEnabled bool
 
 	// An object that defines your account details.
@@ -47,15 +47,9 @@ type GetAccountOutput struct {
 
 	// The reputation status of your Amazon SES account. The status can be one of the
 	// following:
-	// - HEALTHY – There are no reputation-related issues that currently
-	// impact your account.
-	// - PROBATION – We've identified potential issues with your
-	// Amazon SES account. We're placing your account under review while you work on
-	// correcting these issues.
-	// - SHUTDOWN – Your account's ability to send email is
-	// currently paused because of an issue with the email sent from your account. When
-	// you correct the issue, you can contact us and request that your account's
-	// ability to send email is resumed.
+	//     - HEALTHY – There are no reputation-related issues that currently impact your account.
+	//     - PROBATION – We've identified potential issues with your Amazon SES account. We're placing your account under review while you work on correcting these issues.
+	//     - SHUTDOWN – Your account's ability to send email is currently paused because of an issue with the email sent from your account. When you correct the issue, you can contact us and request that your account's ability to send email is resumed.
 	EnforcementStatus *string
 
 	// Indicates whether or not your account has production access in the current
@@ -63,8 +57,8 @@ type GetAccountOutput struct {
 	// sandbox. When your account is in the sandbox, you can only send email to
 	// verified identities. Additionally, the maximum number of emails you can send in
 	// a 24-hour period (your sending quota) is 200, and the maximum number of emails
-	// you can send per second (your maximum sending rate) is 1. If the value is true,
-	// then your account has production access. When your account has production
+	// you can send per second (your maximum sending rate) is 1. If the value is true
+	// , then your account has production access. When your account has production
 	// access, you can send email to any address. The sending quota and maximum sending
 	// rate for your account vary based on your specific use case.
 	ProductionAccessEnabled bool
@@ -73,8 +67,8 @@ type GetAccountOutput struct {
 	// limits for your Amazon SES account in the current Amazon Web Services Region.
 	SendQuota *types.SendQuota
 
-	// Indicates whether or not email sending is enabled for your Amazon SES account in
-	// the current Amazon Web Services Region.
+	// Indicates whether or not email sending is enabled for your Amazon SES account
+	// in the current Amazon Web Services Region.
 	SendingEnabled bool
 
 	// An object that contains information about the email address suppression

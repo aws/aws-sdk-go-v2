@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified Traffic Mirror target. You cannot delete a Traffic Mirror
-// target that is in use by a Traffic Mirror session.
+// Deletes the specified Traffic Mirror target. You cannot delete a Traffic
+// Mirror target that is in use by a Traffic Mirror session.
 func (c *Client) DeleteTrafficMirrorTarget(ctx context.Context, params *DeleteTrafficMirrorTargetInput, optFns ...func(*Options)) (*DeleteTrafficMirrorTargetOutput, error) {
 	if params == nil {
 		params = &DeleteTrafficMirrorTargetInput{}
@@ -36,8 +36,8 @@ type DeleteTrafficMirrorTargetInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

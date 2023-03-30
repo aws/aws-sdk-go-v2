@@ -12,13 +12,11 @@ import (
 )
 
 // Add a tag to a Step Functions resource. An array of key-value pairs. For more
-// information, see Using Cost Allocation Tags
-// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+// information, see Using Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
 // in the Amazon Web Services Billing and Cost Management User Guide, and
-// Controlling Access Using IAM Tags
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html). Tags
-// may only contain Unicode letters, digits, white space, or these symbols: _ . : /
-// = + - @.
+// Controlling Access Using IAM Tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html)
+// . Tags may only contain Unicode letters, digits, white space, or these symbols:
+// _ . : / = + - @ .
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -36,13 +34,14 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
+	// The Amazon Resource Name (ARN) for the Step Functions state machine or
+	// activity.
 	//
 	// This member is required.
 	ResourceArn *string
 
 	// The list of tags to add to a resource. Tags may only contain Unicode letters,
-	// digits, white space, or these symbols: _ . : / = + - @.
+	// digits, white space, or these symbols: _ . : / = + - @ .
 	//
 	// This member is required.
 	Tags []types.Tag

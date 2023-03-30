@@ -32,24 +32,23 @@ func (c *Client) PutAccountSettingDefault(ctx context.Context, params *PutAccoun
 type PutAccountSettingDefaultInput struct {
 
 	// The resource name for which to modify the account setting. If
-	// serviceLongArnFormat is specified, the ARN for your Amazon ECS services is
+	// serviceLongArnFormatis specified, the ARN for your Amazon ECS services is
 	// affected. If taskLongArnFormat is specified, the ARN and resource ID for your
 	// Amazon ECS tasks is affected. If containerInstanceLongArnFormat is specified,
 	// the ARN and resource ID for your Amazon ECS container instances is affected. If
-	// awsvpcTrunking is specified, the ENI limit for your Amazon ECS container
+	// awsvpcTrunkingis specified, the ENI limit for your Amazon ECS container
 	// instances is affected. If containerInsights is specified, the default setting
 	// for CloudWatch Container Insights for your clusters is affected. Fargate is
 	// transitioning from task count-based quotas to vCPU-based quotas. You can set the
 	// name to fargateVCPULimit to opt in or opt out of the vCPU-based quotas. For
-	// information about the opt in timeline, see Fargate vCPU-based quotas timeline
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#fargate-quota-timeline)
+	// information about the opt in timeline, see Fargate vCPU-based quotas timeline (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#fargate-quota-timeline)
 	// in the Amazon ECS Developer Guide.
 	//
 	// This member is required.
 	Name types.SettingName
 
 	// The account setting value for the specified principal ARN. Accepted values are
-	// enabled and disabled.
+	// enabled and disabled .
 	//
 	// This member is required.
 	Value *string

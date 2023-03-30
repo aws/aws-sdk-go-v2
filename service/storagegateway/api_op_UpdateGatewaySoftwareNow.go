@@ -17,12 +17,10 @@ import (
 // the STATE_RUNNING state. A software update forces a system restart of your
 // gateway. You can minimize the chance of any disruption to your applications by
 // increasing your iSCSI Initiators' timeouts. For more information about
-// increasing iSCSI Initiator timeouts for Windows and Linux, see Customizing your
-// Windows iSCSI settings
-// (https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorWindowsClient.html#CustomizeWindowsiSCSISettings)
-// and Customizing your Linux iSCSI settings
-// (https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorRedHatClient.html#CustomizeLinuxiSCSISettings),
-// respectively.
+// increasing iSCSI Initiator timeouts for Windows and Linux, see Customizing
+// your Windows iSCSI settings (https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorWindowsClient.html#CustomizeWindowsiSCSISettings)
+// and Customizing your Linux iSCSI settings (https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorRedHatClient.html#CustomizeLinuxiSCSISettings)
+// , respectively.
 func (c *Client) UpdateGatewaySoftwareNow(ctx context.Context, params *UpdateGatewaySoftwareNowInput, optFns ...func(*Options)) (*UpdateGatewaySoftwareNowOutput, error) {
 	if params == nil {
 		params = &UpdateGatewaySoftwareNowInput{}
@@ -42,8 +40,8 @@ func (c *Client) UpdateGatewaySoftwareNow(ctx context.Context, params *UpdateGat
 // update.
 type UpdateGatewaySoftwareNowInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -51,12 +49,12 @@ type UpdateGatewaySoftwareNowInput struct {
 	noSmithyDocumentSerde
 }
 
-// A JSON object containing the Amazon Resource Name (ARN) of the gateway that was
-// updated.
+// A JSON object containing the Amazon Resource Name (ARN) of the gateway that
+// was updated.
 type UpdateGatewaySoftwareNowOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

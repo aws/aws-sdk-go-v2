@@ -11,20 +11,17 @@ import (
 )
 
 // This is documentation for AWS CloudHSM Classic. For more information, see AWS
-// CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/), the AWS
-// CloudHSM Classic User Guide
-// (https://docs.aws.amazon.com/cloudhsm/classic/userguide/), and the AWS CloudHSM
-// Classic API Reference
-// (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/). For information
-// about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide
-// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/), and the AWS CloudHSM
-// API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
-// Retrieves the identifiers of all of the HSMs provisioned for the current
+// CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/) , the AWS
+// CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/)
+// , and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/)
+// . For information about the current version of AWS CloudHSM, see AWS CloudHSM (http://aws.amazon.com/cloudhsm/)
+// , the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/)
+// , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
+// . Retrieves the identifiers of all of the HSMs provisioned for the current
 // customer. This operation supports pagination with the use of the NextToken
 // member. If more results are available, the NextToken member of the response
-// contains a token that you pass in the next call to ListHsms to retrieve the next
-// set of items.
+// contains a token that you pass in the next call to ListHsms to retrieve the
+// next set of items.
 func (c *Client) ListHsms(ctx context.Context, params *ListHsmsInput, optFns ...func(*Options)) (*ListHsmsOutput, error) {
 	if params == nil {
 		params = &ListHsmsInput{}
@@ -42,21 +39,21 @@ func (c *Client) ListHsms(ctx context.Context, params *ListHsmsInput, optFns ...
 
 type ListHsmsInput struct {
 
-	// The NextToken value from a previous call to ListHsms. Pass null if this is the
-	// first call.
+	// The NextToken  value from a previous call to ListHsms. Pass null if this is
+	// the first call.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the output of the ListHsms operation.
+// Contains the output of the ListHsms  operation.
 type ListHsmsOutput struct {
 
 	// The list of ARNs that identify the HSMs.
 	HsmList []string
 
-	// If not null, more results are available. Pass this value to ListHsms to retrieve
-	// the next set of items.
+	// If not null, more results are available. Pass this value to ListHsms to
+	// retrieve the next set of items.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

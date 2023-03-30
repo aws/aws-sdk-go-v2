@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Retrieves the Table definition in a Data Catalog for a specified table.
+// Retrieves the Table  definition in a Data Catalog for a specified table.
 func (c *Client) GetTable(ctx context.Context, params *GetTableInput, optFns ...func(*Options)) (*GetTableOutput, error) {
 	if params == nil {
 		params = &GetTableInput{}
@@ -48,7 +48,7 @@ type GetTableInput struct {
 
 	// The time as of when to read the table contents. If not set, the most recent
 	// transaction commit time will be used. Cannot be specified along with
-	// TransactionId.
+	// TransactionId .
 	QueryAsOfTime *time.Time
 
 	// The transaction ID at which to read the table contents.
@@ -59,7 +59,7 @@ type GetTableInput struct {
 
 type GetTableOutput struct {
 
-	// The Table object that defines the specified table.
+	// The Table  object that defines the specified table.
 	Table *types.Table
 
 	// Metadata pertaining to the operation's result.

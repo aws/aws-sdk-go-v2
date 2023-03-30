@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends an activation code to a contact channel. The contact can use this code to
-// activate the contact channel in the console or with the ActivateChannel
+// Sends an activation code to a contact channel. The contact can use this code
+// to activate the contact channel in the console or with the ActivateChannel
 // operation. Incident Manager can't engage a contact channel until it has been
 // activated.
 func (c *Client) SendActivationCode(ctx context.Context, params *SendActivationCodeInput, optFns ...func(*Options)) (*SendActivationCodeOutput, error) {

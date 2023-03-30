@@ -12,15 +12,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Queries the specified pipeline for the names of objects that match the specified
-// set of conditions. POST / HTTP/1.1 Content-Type: application/x-amz-json-1.1
-// X-Amz-Target: DataPipeline.QueryObjects Content-Length: 123 Host:
-// datapipeline.us-east-1.amazonaws.com X-Amz-Date: Mon, 12 Nov 2012 17:49:52 GMT
-// Authorization: AuthParams {"pipelineId": "df-06372391ZG65EXAMPLE", "query":
-// {"selectors": [ ] }, "sphere": "INSTANCE", "marker": "", "limit": 10}
-// x-amzn-RequestId: 14d704c1-0775-11e2-af6f-6bc7a6be60d9 Content-Type:
-// application/x-amz-json-1.1 Content-Length: 72 Date: Mon, 12 Nov 2012 17:50:53
-// GMT {"hasMoreResults": false, "ids": ["@SayHello_1_2012-09-25T17:00:00"] }
+// Queries the specified pipeline for the names of objects that match the
+// specified set of conditions. POST / HTTP/1.1 Content-Type:
+// application/x-amz-json-1.1 X-Amz-Target: DataPipeline.QueryObjects
+// Content-Length: 123 Host: datapipeline.us-east-1.amazonaws.com X-Amz-Date: Mon,
+// 12 Nov 2012 17:49:52 GMT Authorization: AuthParams {"pipelineId":
+// "df-06372391ZG65EXAMPLE", "query": {"selectors": [ ] }, "sphere": "INSTANCE",
+// "marker": "", "limit": 10} x-amzn-RequestId:
+// 14d704c1-0775-11e2-af6f-6bc7a6be60d9 Content-Type: application/x-amz-json-1.1
+// Content-Length: 72 Date: Mon, 12 Nov 2012 17:50:53 GMT {"hasMoreResults": false,
+// "ids": ["@SayHello_1_2012-09-25T17:00:00"] }
 func (c *Client) QueryObjects(ctx context.Context, params *QueryObjectsInput, optFns ...func(*Options)) (*QueryObjectsOutput, error) {
 	if params == nil {
 		params = &QueryObjectsInput{}
@@ -45,7 +46,7 @@ type QueryObjectsInput struct {
 	PipelineId *string
 
 	// Indicates whether the query applies to components or instances. The possible
-	// values are: COMPONENT, INSTANCE, and ATTEMPT.
+	// values are: COMPONENT , INSTANCE , and ATTEMPT .
 	//
 	// This member is required.
 	Sphere *string
@@ -56,14 +57,14 @@ type QueryObjectsInput struct {
 
 	// The starting point for the results to be returned. For the first call, this
 	// value should be empty. As long as there are more results, continue to call
-	// QueryObjects with the marker value from the previous call to retrieve the next
+	// QueryObjectswith the marker value from the previous call to retrieve the next
 	// set of results.
 	Marker *string
 
-	// The query that defines the objects to be returned. The Query object can contain
-	// a maximum of ten selectors. The conditions in the query are limited to top-level
-	// String fields in the object. These filters can be applied to components,
-	// instances, and attempts.
+	// The query that defines the objects to be returned. The Query object can
+	// contain a maximum of ten selectors. The conditions in the query are limited to
+	// top-level String fields in the object. These filters can be applied to
+	// components, instances, and attempts.
 	Query *types.Query
 
 	noSmithyDocumentSerde
@@ -166,8 +167,8 @@ type QueryObjectsPaginatorOptions struct {
 	// call. The default value is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

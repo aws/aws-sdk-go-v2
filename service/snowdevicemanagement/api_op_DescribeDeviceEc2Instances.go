@@ -12,8 +12,8 @@ import (
 )
 
 // Checks the current state of the Amazon EC2 instances. The output is similar to
-// describeDevice, but the results are sourced from the device cache in the Amazon
-// Web Services Cloud and include a subset of the available fields.
+// describeDevice, but the results are sourced from the device cache in the
+// Amazon Web Services Cloud and include a subset of the available fields.
 func (c *Client) DescribeDeviceEc2Instances(ctx context.Context, params *DescribeDeviceEc2InstancesInput, optFns ...func(*Options)) (*DescribeDeviceEc2InstancesOutput, error) {
 	if params == nil {
 		params = &DescribeDeviceEc2InstancesInput{}

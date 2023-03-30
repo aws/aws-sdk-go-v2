@@ -16,12 +16,10 @@ import (
 // specified query. The query uses the same format as a resource query in a
 // CreateGroup or UpdateGroupQuery operation. Minimum permissions To run this
 // command, you must have the following permissions:
-// -
-// resource-groups:SearchResources
-// - cloudformation:DescribeStacks
-// -
-// cloudformation:ListStackResources
-// - tag:GetResources
+//   - resource-groups:SearchResources
+//   - cloudformation:DescribeStacks
+//   - cloudformation:ListStackResources
+//   - tag:GetResources
 func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInput, optFns ...func(*Options)) (*SearchResourcesOutput, error) {
 	if params == nil {
 		params = &SearchResourcesInput{}
@@ -40,26 +38,26 @@ func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInp
 type SearchResourcesInput struct {
 
 	// The search query, using the same formats that are supported for resource group
-	// definition. For more information, see CreateGroup.
+	// definition. For more information, see CreateGroup .
 	//
 	// This member is required.
 	ResourceQuery *types.ResourceQuery
 
-	// The total number of results that you want included on each page of the response.
-	// If you do not include this parameter, it defaults to a value that is specific to
-	// the operation. If additional items exist beyond the maximum you specify, the
-	// NextToken response element is present and has a value (is not null). Include
-	// that value as the NextToken request parameter in the next call to the operation
-	// to get the next part of the results. Note that the service might return fewer
-	// results than the maximum even when there are more results available. You should
-	// check NextToken after every operation to ensure that you receive all of the
-	// results.
+	// The total number of results that you want included on each page of the
+	// response. If you do not include this parameter, it defaults to a value that is
+	// specific to the operation. If additional items exist beyond the maximum you
+	// specify, the NextToken response element is present and has a value (is not
+	// null). Include that value as the NextToken request parameter in the next call
+	// to the operation to get the next part of the results. Note that the service
+	// might return fewer results than the maximum even when there are more results
+	// available. You should check NextToken after every operation to ensure that you
+	// receive all of the results.
 	MaxResults *int32
 
 	// The parameter for receiving additional results if you receive a NextToken
-	// response in a previous request. A NextToken response indicates that more output
-	// is available. Set this parameter to the value provided by a previous call's
-	// NextToken response to indicate where the output should continue from.
+	// response in a previous request. A NextToken response indicates that more
+	// output is available. Set this parameter to the value provided by a previous
+	// call's NextToken  response to indicate where the output should continue from.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -70,18 +68,17 @@ type SearchResourcesOutput struct {
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken response element comes back as null.
+	// repeat this until the NextToken  response element comes back as null .
 	NextToken *string
 
-	// A list of QueryError objects. Each error is an object that contains ErrorCode
-	// and Message structures. Possible values for ErrorCode:
-	// -
-	// CLOUDFORMATION_STACK_INACTIVE
-	// - CLOUDFORMATION_STACK_NOT_EXISTING
+	// A list of QueryError  objects. Each error is an object that contains ErrorCode
+	// and Message  structures. Possible values for ErrorCode :
+	//     - CLOUDFORMATION_STACK_INACTIVE
+	//     - CLOUDFORMATION_STACK_NOT_EXISTING
 	QueryErrors []types.QueryError
 
-	// The ARNs and resource types of resources that are members of the group that you
-	// specified.
+	// The ARNs and resource types of resources that are members of the group that
+	// you specified.
 	ResourceIdentifiers []types.ResourceIdentifier
 
 	// Metadata pertaining to the operation's result.
@@ -163,19 +160,19 @@ var _ SearchResourcesAPIClient = (*Client)(nil)
 
 // SearchResourcesPaginatorOptions is the paginator options for SearchResources
 type SearchResourcesPaginatorOptions struct {
-	// The total number of results that you want included on each page of the response.
-	// If you do not include this parameter, it defaults to a value that is specific to
-	// the operation. If additional items exist beyond the maximum you specify, the
-	// NextToken response element is present and has a value (is not null). Include
-	// that value as the NextToken request parameter in the next call to the operation
-	// to get the next part of the results. Note that the service might return fewer
-	// results than the maximum even when there are more results available. You should
-	// check NextToken after every operation to ensure that you receive all of the
-	// results.
+	// The total number of results that you want included on each page of the
+	// response. If you do not include this parameter, it defaults to a value that is
+	// specific to the operation. If additional items exist beyond the maximum you
+	// specify, the NextToken response element is present and has a value (is not
+	// null). Include that value as the NextToken request parameter in the next call
+	// to the operation to get the next part of the results. Note that the service
+	// might return fewer results than the maximum even when there are more results
+	// available. You should check NextToken after every operation to ensure that you
+	// receive all of the results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

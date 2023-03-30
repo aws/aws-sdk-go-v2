@@ -18,14 +18,12 @@ import (
 // password as strings for use with a Windows Remote Desktop client. For a Linux
 // instance, GameLift returns a user name and RSA private key, also as strings, for
 // use with an SSH client. The private key must be saved in the proper format to a
-// .pem file before using. If you're making this request using the CLI, saving the
-// secret can be handled as part of the GetInstanceAccess request, as shown in one
-// of the examples for this operation. To request access to a specific instance,
-// specify the IDs of both the instance and the fleet it belongs to. Learn more
-// Remotely Access Fleet Instances
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html)Debug
-// Fleet Issues
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html)
+// .pemfile before using. If you're making this request using the CLI, saving the
+// secret can be handled as part of the GetInstanceAccess request, as shown in
+// one of the examples for this operation. To request access to a specific
+// instance, specify the IDs of both the instance and the fleet it belongs to.
+// Learn more Remotely Access Fleet Instances (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html)
+// Debug Fleet Issues (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html)
 func (c *Client) GetComputeAccess(ctx context.Context, params *GetComputeAccessInput, optFns ...func(*Options)) (*GetComputeAccessOutput, error) {
 	if params == nil {
 		params = &GetComputeAccessInput{}
@@ -58,11 +56,10 @@ type GetComputeAccessInput struct {
 
 type GetComputeAccessOutput struct {
 
-	// The Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is
-	// assigned to a GameLift compute resource and uniquely identifies it. ARNs are
-	// unique across all Regions. Format is
-	// arn:aws:gamelift:::compute/compute-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912.
+	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
+	// ) that is assigned to a GameLift compute resource and uniquely identifies it.
+	// ARNs are unique across all Regions. Format is
+	// arn:aws:gamelift:::compute/compute-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
 	ComputeArn *string
 
 	// The name of the compute resource you requested credentials for.
@@ -71,11 +68,10 @@ type GetComputeAccessOutput struct {
 	// The access credentials for the compute resource.
 	Credentials *types.AwsCredentials
 
-	// The Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is
-	// assigned to a GameLift fleet resource and uniquely identifies it. ARNs are
-	// unique across all Regions. Format is
-	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912.
+	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
+	// ) that is assigned to a GameLift fleet resource and uniquely identifies it. ARNs
+	// are unique across all Regions. Format is
+	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
 	FleetArn *string
 
 	// The fleet ID of compute resource.

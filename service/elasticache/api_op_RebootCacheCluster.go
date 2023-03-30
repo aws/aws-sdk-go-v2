@@ -20,8 +20,7 @@ import (
 // cluster is currently supported on Memcached and Redis (cluster mode disabled)
 // clusters. Rebooting is not supported on Redis (cluster mode enabled) clusters.
 // If you make changes to parameters that require a Redis (cluster mode enabled)
-// cluster reboot for the changes to be applied, see Rebooting a Cluster
-// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/nodes.rebooting.html)
+// cluster reboot for the changes to be applied, see Rebooting a Cluster (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/nodes.rebooting.html)
 // for an alternate process.
 func (c *Client) RebootCacheCluster(ctx context.Context, params *RebootCacheClusterInput, optFns ...func(*Options)) (*RebootCacheClusterOutput, error) {
 	if params == nil {
@@ -38,7 +37,7 @@ func (c *Client) RebootCacheCluster(ctx context.Context, params *RebootCacheClus
 	return out, nil
 }
 
-// Represents the input of a RebootCacheCluster operation.
+// Represents the input of a RebootCacheCluster  operation.
 type RebootCacheClusterInput struct {
 
 	// The cluster identifier. This parameter is stored as a lowercase string.

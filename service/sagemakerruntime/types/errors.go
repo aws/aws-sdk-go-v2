@@ -90,8 +90,8 @@ func (e *ModelError) ErrorCode() string {
 }
 func (e *ModelError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Either a serverless endpoint variant's resources are still being provisioned, or
-// a multi-model endpoint is still downloading or loading the target model. Wait
+// Either a serverless endpoint variant's resources are still being provisioned,
+// or a multi-model endpoint is still downloading or loading the target model. Wait
 // and try your request again.
 type ModelNotReadyException struct {
 	Message *string

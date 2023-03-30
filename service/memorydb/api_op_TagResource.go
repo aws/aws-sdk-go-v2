@@ -14,15 +14,14 @@ import (
 // A tag is a key-value pair where the key and value are case-sensitive. You can
 // use tags to categorize and track all your MemoryDB resources. When you add or
 // remove tags on clusters, those actions will be replicated to all nodes in the
-// cluster. For more information, see Resource-level permissions
-// (https://docs.aws.amazon.com/MemoryDB/latest/devguide/iam.resourcelevelpermissions.html).
-// For example, you can use cost-allocation tags to your MemoryDB resources, Amazon
-// generates a cost allocation report as a comma-separated value (CSV) file with
-// your usage and costs aggregated by your tags. You can apply tags that represent
-// business categories (such as cost centers, application names, or owners) to
-// organize your costs across multiple services. For more information, see Using
-// Cost Allocation Tags
-// (https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging.html).
+// cluster. For more information, see Resource-level permissions (https://docs.aws.amazon.com/MemoryDB/latest/devguide/iam.resourcelevelpermissions.html)
+// . For example, you can use cost-allocation tags to your MemoryDB resources,
+// Amazon generates a cost allocation report as a comma-separated value (CSV) file
+// with your usage and costs aggregated by your tags. You can apply tags that
+// represent business categories (such as cost centers, application names, or
+// owners) to organize your costs across multiple services. For more information,
+// see Using Cost Allocation Tags (https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging.html)
+// .
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -40,7 +39,8 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource to which the tags are to be added
+	// The Amazon Resource Name (ARN) of the resource to which the tags are to be
+	// added
 	//
 	// This member is required.
 	ResourceArn *string

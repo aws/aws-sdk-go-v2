@@ -38,8 +38,8 @@ type UpdateProjectInput struct {
 	// project.
 	Artifacts *types.ProjectArtifacts
 
-	// Set this to true to generate a publicly accessible URL for your project's build
-	// badge.
+	// Set this to true to generate a publicly accessible URL for your project's
+	// build badge.
 	BadgeEnabled *bool
 
 	// Contains configuration information about a batch build project.
@@ -62,16 +62,16 @@ type UpdateProjectInput struct {
 	// the build output artifacts. You can use a cross-account KMS key to encrypt the
 	// build output artifacts if your service role has permission to that key. You can
 	// specify either the Amazon Resource Name (ARN) of the CMK or, if available, the
-	// CMK's alias (using the format alias/).
+	// CMK's alias (using the format alias/ ).
 	EncryptionKey *string
 
 	// Information to be changed about the build environment for the build project.
 	Environment *types.ProjectEnvironment
 
-	// An array of ProjectFileSystemLocation objects for a CodeBuild build project. A
-	// ProjectFileSystemLocation object specifies the identifier, location,
-	// mountOptions, mountPoint, and type of a file system created using Amazon Elastic
-	// File System.
+	// An array of ProjectFileSystemLocation  objects for a CodeBuild build project. A
+	// ProjectFileSystemLocation object specifies the identifier , location ,
+	// mountOptions , mountPoint , and type of a file system created using Amazon
+	// Elastic File System.
 	FileSystemLocations []types.ProjectFileSystemLocation
 
 	// Information about logs for the build project. A project can create logs in
@@ -81,15 +81,15 @@ type UpdateProjectInput struct {
 	// The number of minutes a build is allowed to be queued before it times out.
 	QueuedTimeoutInMinutes *int32
 
-	// An array of ProjectArtifact objects.
+	// An array of ProjectArtifact  objects.
 	SecondaryArtifacts []types.ProjectArtifacts
 
-	// An array of ProjectSourceVersion objects. If secondarySourceVersions is
+	// An array of ProjectSourceVersion  objects. If secondarySourceVersions is
 	// specified at the build level, then they take over these secondarySourceVersions
 	// (at the project level).
 	SecondarySourceVersions []types.ProjectSourceVersion
 
-	// An array of ProjectSource objects.
+	// An array of ProjectSource  objects.
 	SecondarySources []types.ProjectSource
 
 	// The replacement ARN of the IAM role that enables CodeBuild to interact with
@@ -101,28 +101,16 @@ type UpdateProjectInput struct {
 	// project.
 	Source *types.ProjectSource
 
-	// A version of the build input to be built for this project. If not specified, the
-	// latest version is used. If specified, it must be one of:
-	// - For CodeCommit: the
-	// commit ID, branch, or Git tag to use.
-	// - For GitHub: the commit ID, pull request
-	// ID, branch name, or tag name that corresponds to the version of the source code
-	// you want to build. If a pull request ID is specified, it must use the format
-	// pr/pull-request-ID (for example pr/25). If a branch name is specified, the
-	// branch's HEAD commit ID is used. If not specified, the default branch's HEAD
-	// commit ID is used.
-	// - For Bitbucket: the commit ID, branch name, or tag name that
-	// corresponds to the version of the source code you want to build. If a branch
-	// name is specified, the branch's HEAD commit ID is used. If not specified, the
-	// default branch's HEAD commit ID is used.
-	// - For Amazon S3: the version ID of the
-	// object that represents the build input ZIP file to use.
+	// A version of the build input to be built for this project. If not specified,
+	// the latest version is used. If specified, it must be one of:
+	//     - For CodeCommit: the commit ID, branch, or Git tag to use.
+	//     - For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25 ). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.
+	//     - For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.
+	//     - For Amazon S3: the version ID of the object that represents the build input ZIP file to use.
 	//
-	// If sourceVersion is
-	// specified at the build level, then that version takes precedence over this
-	// sourceVersion (at the project level). For more information, see Source Version
-	// Sample with CodeBuild
-	// (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
+	// If sourceVersion is specified at the build level, then that version takes
+	// precedence over this sourceVersion (at the project level). For more
+	// information, see Source Version Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
 	// in the CodeBuild User Guide.
 	SourceVersion *string
 
@@ -131,8 +119,8 @@ type UpdateProjectInput struct {
 	// CodeBuild build project tags.
 	Tags []types.Tag
 
-	// The replacement value in minutes, from 5 to 480 (8 hours), for CodeBuild to wait
-	// before timing out any related build that did not get marked as completed.
+	// The replacement value in minutes, from 5 to 480 (8 hours), for CodeBuild to
+	// wait before timing out any related build that did not get marked as completed.
 	TimeoutInMinutes *int32
 
 	// VpcConfig enables CodeBuild to access resources in an Amazon VPC.

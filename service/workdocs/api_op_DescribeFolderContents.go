@@ -43,14 +43,15 @@ type DescribeFolderContentsInput struct {
 	// Services administrator credentials to access the API.
 	AuthenticationToken *string
 
-	// The contents to include. Specify "INITIALIZED" to include initialized documents.
+	// The contents to include. Specify "INITIALIZED" to include initialized
+	// documents.
 	Include *string
 
 	// The maximum number of items to return with this call.
 	Limit *int32
 
-	// The marker for the next set of results. This marker was received from a previous
-	// call.
+	// The marker for the next set of results. This marker was received from a
+	// previous call.
 	Marker *string
 
 	// The order for the contents of the folder.
@@ -160,8 +161,8 @@ type DescribeFolderContentsPaginatorOptions struct {
 	// The maximum number of items to return with this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -174,7 +175,8 @@ type DescribeFolderContentsPaginator struct {
 	firstPage bool
 }
 
-// NewDescribeFolderContentsPaginator returns a new DescribeFolderContentsPaginator
+// NewDescribeFolderContentsPaginator returns a new
+// DescribeFolderContentsPaginator
 func NewDescribeFolderContentsPaginator(client DescribeFolderContentsAPIClient, params *DescribeFolderContentsInput, optFns ...func(*DescribeFolderContentsPaginatorOptions)) *DescribeFolderContentsPaginator {
 	if params == nil {
 		params = &DescribeFolderContentsInput{}

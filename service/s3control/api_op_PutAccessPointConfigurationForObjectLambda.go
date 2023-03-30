@@ -15,11 +15,9 @@ import (
 	"strings"
 )
 
-// Replaces configuration for an Object Lambda Access Point. The following actions
-// are related to PutAccessPointConfigurationForObjectLambda:
-// -
-// GetAccessPointConfigurationForObjectLambda
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointConfigurationForObjectLambda.html)
+// Replaces configuration for an Object Lambda Access Point. The following
+// actions are related to PutAccessPointConfigurationForObjectLambda :
+//   - GetAccessPointConfigurationForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointConfigurationForObjectLambda.html)
 func (c *Client) PutAccessPointConfigurationForObjectLambda(ctx context.Context, params *PutAccessPointConfigurationForObjectLambdaInput, optFns ...func(*Options)) (*PutAccessPointConfigurationForObjectLambdaOutput, error) {
 	if params == nil {
 		params = &PutAccessPointConfigurationForObjectLambdaInput{}

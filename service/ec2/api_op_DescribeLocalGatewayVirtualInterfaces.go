@@ -32,32 +32,26 @@ type DescribeLocalGatewayVirtualInterfacesInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// One or more filters.
-	// - local-address - The local address.
-	// - local-bgp-asn - The
-	// Border Gateway Protocol (BGP) Autonomous System Number (ASN) of the local
-	// gateway.
-	// - local-gateway-id - The ID of the local gateway.
-	// -
-	// local-gateway-virtual-interface-id - The ID of the virtual interface.
-	// - owner-id
-	// - The ID of the Amazon Web Services account that owns the local gateway virtual
-	// interface.
-	// - peer-address - The peer address.
-	// - peer-bgp-asn - The peer BGP
-	// ASN.
-	// - vlan - The ID of the VLAN.
+	//     - local-address - The local address.
+	//     - local-bgp-asn - The Border Gateway Protocol (BGP) Autonomous System Number (ASN) of the local gateway.
+	//     - local-gateway-id - The ID of the local gateway.
+	//     - local-gateway-virtual-interface-id - The ID of the virtual interface.
+	//     - owner-id - The ID of the Amazon Web Services account that owns the local gateway virtual interface.
+	//     - peer-address - The peer address.
+	//     - peer-bgp-asn - The peer BGP ASN.
+	//     - vlan - The ID of the VLAN.
 	Filters []types.Filter
 
 	// The IDs of the virtual interfaces.
 	LocalGatewayVirtualInterfaceIds []string
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -153,11 +147,11 @@ var _ DescribeLocalGatewayVirtualInterfacesAPIClient = (*Client)(nil)
 // for DescribeLocalGatewayVirtualInterfaces
 type DescribeLocalGatewayVirtualInterfacesPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

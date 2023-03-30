@@ -28,22 +28,21 @@ func (c *Client) StartDeviceAuthorization(ctx context.Context, params *StartDevi
 
 type StartDeviceAuthorizationInput struct {
 
-	// The unique identifier string for the client that is registered with IAM Identity
-	// Center. This value should come from the persisted result of the RegisterClient
-	// API operation.
+	// The unique identifier string for the client that is registered with IAM
+	// Identity Center. This value should come from the persisted result of the
+	// RegisterClient API operation.
 	//
 	// This member is required.
 	ClientId *string
 
 	// A secret string that is generated for the client. This value should come from
-	// the persisted result of the RegisterClient API operation.
+	// the persisted result of the RegisterClient  API operation.
 	//
 	// This member is required.
 	ClientSecret *string
 
 	// The URL for the AWS access portal. For more information, see Using the AWS
-	// access portal
-	// (https://docs.aws.amazon.com/singlesignon/latest/userguide/using-the-portal.html)
+	// access portal (https://docs.aws.amazon.com/singlesignon/latest/userguide/using-the-portal.html)
 	// in the IAM Identity Center User Guide.
 	//
 	// This member is required.
@@ -66,16 +65,17 @@ type StartDeviceAuthorizationOutput struct {
 	// polling for a session.
 	Interval int32
 
-	// A one-time user verification code. This is needed to authorize an in-use device.
+	// A one-time user verification code. This is needed to authorize an in-use
+	// device.
 	UserCode *string
 
 	// The URI of the verification page that takes the userCode to authorize the
 	// device.
 	VerificationUri *string
 
-	// An alternate URL that the client can use to automatically launch a browser. This
-	// process skips the manual step in which the user visits the verification page and
-	// enters their code.
+	// An alternate URL that the client can use to automatically launch a browser.
+	// This process skips the manual step in which the user visits the verification
+	// page and enters their code.
 	VerificationUriComplete *string
 
 	// Metadata pertaining to the operation's result.

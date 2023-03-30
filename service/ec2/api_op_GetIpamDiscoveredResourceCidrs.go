@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the resource CIDRs that are monitored as part of a resource discovery. A
-// discovered resource is a resource CIDR monitored under a resource discovery. The
-// following resources can be discovered: VPCs, Public IPv4 pools, VPC subnets, and
-// Elastic IP addresses.
+// Returns the resource CIDRs that are monitored as part of a resource discovery.
+// A discovered resource is a resource CIDR monitored under a resource discovery.
+// The following resources can be discovered: VPCs, Public IPv4 pools, VPC subnets,
+// and Elastic IP addresses.
 func (c *Client) GetIpamDiscoveredResourceCidrs(ctx context.Context, params *GetIpamDiscoveredResourceCidrsInput, optFns ...func(*Options)) (*GetIpamDiscoveredResourceCidrsOutput, error) {
 	if params == nil {
 		params = &GetIpamDiscoveredResourceCidrsInput{}
@@ -45,8 +45,8 @@ type GetIpamDiscoveredResourceCidrsInput struct {
 
 	// A check for whether you have the required permissions for the action without
 	// actually making the request and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// Filters.
@@ -156,8 +156,8 @@ type GetIpamDiscoveredResourceCidrsPaginatorOptions struct {
 	// results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

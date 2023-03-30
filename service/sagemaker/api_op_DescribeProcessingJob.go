@@ -73,8 +73,8 @@ type DescribeProcessingJobOutput struct {
 	// This member is required.
 	ProcessingJobStatus types.ProcessingJobStatus
 
-	// Identifies the resources, ML compute instances, and ML storage volumes to deploy
-	// for a processing job. In distributed training, you specify more than one
+	// Identifies the resources, ML compute instances, and ML storage volumes to
+	// deploy for a processing job. In distributed training, you specify more than one
 	// instance.
 	//
 	// This member is required.
@@ -100,8 +100,8 @@ type DescribeProcessingJobOutput struct {
 	// The time at which the processing job was last modified.
 	LastModifiedTime *time.Time
 
-	// The ARN of a monitoring schedule for an endpoint associated with this processing
-	// job.
+	// The ARN of a monitoring schedule for an endpoint associated with this
+	// processing job.
 	MonitoringScheduleArn *string
 
 	// Networking options for a processing job.
@@ -221,10 +221,10 @@ type ProcessingJobCompletedOrStoppedWaiterOptions struct {
 	// MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ProcessingJobCompletedOrStoppedWaiter will use default max delay of 120
-	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
-	// MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ProcessingJobCompletedOrStoppedWaiter will use default max delay of
+	// 120 seconds. Note that MaxDelay must resolve to value greater than or equal to
+	// the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

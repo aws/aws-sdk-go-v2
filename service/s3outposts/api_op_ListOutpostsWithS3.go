@@ -35,9 +35,10 @@ type ListOutpostsWithS3Input struct {
 	// The maximum number of Outposts to return. The limit is 100.
 	MaxResults int32
 
-	// When you can get additional results from the ListOutpostsWithS3 call, a
-	// NextToken parameter is returned in the output. You can then pass in a subsequent
-	// command to the NextToken parameter to continue listing additional Outposts.
+	// When you can get additional results from the ListOutpostsWithS3  call, a
+	// NextTokenparameter is returned in the output. You can then pass in a
+	// subsequent command to the NextToken parameter to continue listing additional
+	// Outposts.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -50,12 +51,9 @@ type ListOutpostsWithS3Output struct {
 	NextToken *string
 
 	// Returns the list of Outposts that have the following characteristics:
-	// - outposts
-	// that have S3 provisioned
-	// - outposts that are Active (not pending any
-	// provisioning nor decommissioned)
-	// - outposts to which the the calling Amazon Web
-	// Services account has access
+	//     - outposts that have S3 provisioned
+	//     - outposts that are Active (not pending any provisioning nor decommissioned)
+	//     - outposts to which the the calling Amazon Web Services account has access
 	Outposts []types.Outpost
 
 	// Metadata pertaining to the operation's result.
@@ -138,8 +136,8 @@ type ListOutpostsWithS3PaginatorOptions struct {
 	// The maximum number of Outposts to return. The limit is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

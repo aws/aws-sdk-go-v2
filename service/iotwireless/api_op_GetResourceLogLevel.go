@@ -30,13 +30,13 @@ func (c *Client) GetResourceLogLevel(ctx context.Context, params *GetResourceLog
 
 type GetResourceLogLevelInput struct {
 
-	// The identifier of the resource. For a Wireless Device, it is the wireless device
-	// ID. For a wireless gateway, it is the wireless gateway ID.
+	// The identifier of the resource. For a Wireless Device, it is the wireless
+	// device ID. For a wireless gateway, it is the wireless gateway ID.
 	//
 	// This member is required.
 	ResourceIdentifier *string
 
-	// The type of the resource, which can be WirelessDevice or WirelessGateway.
+	// The type of the resource, which can be WirelessDevice  or WirelessGateway .
 	//
 	// This member is required.
 	ResourceType *string
@@ -46,9 +46,9 @@ type GetResourceLogLevelInput struct {
 
 type GetResourceLogLevelOutput struct {
 
-	// The log level for a log message. The log levels can be disabled, or set to ERROR
-	// to display less verbose logs containing only error information, or to INFO for
-	// more detailed logs.
+	// The log level for a log message. The log levels can be disabled, or set to
+	// ERROR to display less verbose logs containing only error information, or to
+	// INFO for more detailed logs.
 	LogLevel types.LogLevel
 
 	// Metadata pertaining to the operation's result.

@@ -38,14 +38,15 @@ type ListCodeReviewsInput struct {
 	// The maximum number of results that are returned per call. The default is 100.
 	MaxResults *int32
 
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// If nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged.
 	NextToken *string
 
-	// List of provider types for filtering that needs to be applied before displaying
-	// the result. For example, providerTypes=[GitHub] lists code reviews from GitHub.
+	// List of provider types for filtering that needs to be applied before
+	// displaying the result. For example, providerTypes=[GitHub] lists code reviews
+	// from GitHub.
 	ProviderTypes []types.ProviderType
 
 	// List of repository names for filtering that needs to be applied before
@@ -55,12 +56,10 @@ type ListCodeReviewsInput struct {
 	// List of states for filtering that needs to be applied before displaying the
 	// result. For example, states=[Pending] lists code reviews in the Pending state.
 	// The valid code review states are:
-	// - Completed: The code review is complete.
-	// -
-	// Pending: The code review started and has not completed or failed.
-	// - Failed: The
-	// code review failed.
-	// - Deleting: The code review is being deleted.
+	//     - Completed : The code review is complete.
+	//     - Pending : The code review started and has not completed or failed.
+	//     - Failed : The code review failed.
+	//     - Deleting : The code review is being deleted.
 	States []types.JobState
 
 	noSmithyDocumentSerde
@@ -156,8 +155,8 @@ type ListCodeReviewsPaginatorOptions struct {
 	// The maximum number of results that are returned per call. The default is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

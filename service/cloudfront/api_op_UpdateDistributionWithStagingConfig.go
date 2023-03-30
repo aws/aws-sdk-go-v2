@@ -45,7 +45,7 @@ type UpdateDistributionWithStagingConfigInput struct {
 	// This member is required.
 	Id *string
 
-	// The current versions (ETag values) of both primary and staging distributions.
+	// The current versions ( ETag values) of both primary and staging distributions.
 	// Provide these in the following format: ,
 	IfMatch *string
 
@@ -58,8 +58,8 @@ type UpdateDistributionWithStagingConfigInput struct {
 
 type UpdateDistributionWithStagingConfigOutput struct {
 
-	// A distribution tells CloudFront where you want content to be delivered from, and
-	// the details about how to track and manage content delivery.
+	// A distribution tells CloudFront where you want content to be delivered from,
+	// and the details about how to track and manage content delivery.
 	Distribution *types.Distribution
 
 	// The current version of the primary distribution (after it's updated).

@@ -59,8 +59,8 @@ func (e *GoneException) ErrorCode() string {
 }
 func (e *GoneException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The client is sending more than the allowed number of requests per unit of time
-// or the WebSocket client side buffer is full.
+// The client is sending more than the allowed number of requests per unit of
+// time or the WebSocket client side buffer is full.
 type LimitExceededException struct {
 	Message *string
 

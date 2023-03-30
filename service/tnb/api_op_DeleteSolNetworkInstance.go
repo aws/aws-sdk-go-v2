@@ -14,8 +14,8 @@ import (
 // Amazon Web Services TNB that can be deployed and on which life-cycle operations
 // (like terminate, update, and delete) can be performed. To delete a network
 // instance, the instance must be in a stopped or terminated state. To terminate a
-// network instance, see TerminateSolNetworkInstance
-// (https://docs.aws.amazon.com/tnb/latest/APIReference/API_TerminateSolNetworkInstance.html).
+// network instance, see TerminateSolNetworkInstance (https://docs.aws.amazon.com/tnb/latest/APIReference/API_TerminateSolNetworkInstance.html)
+// .
 func (c *Client) DeleteSolNetworkInstance(ctx context.Context, params *DeleteSolNetworkInstanceInput, optFns ...func(*Options)) (*DeleteSolNetworkInstanceOutput, error) {
 	if params == nil {
 		params = &DeleteSolNetworkInstanceInput{}

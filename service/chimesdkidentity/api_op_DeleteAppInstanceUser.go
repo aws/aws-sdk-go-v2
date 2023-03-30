@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an AppInstanceUser.
+// Deletes an AppInstanceUser .
 func (c *Client) DeleteAppInstanceUser(ctx context.Context, params *DeleteAppInstanceUserInput, optFns ...func(*Options)) (*DeleteAppInstanceUserOutput, error) {
 	if params == nil {
 		params = &DeleteAppInstanceUserInput{}

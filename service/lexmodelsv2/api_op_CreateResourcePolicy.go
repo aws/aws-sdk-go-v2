@@ -31,15 +31,14 @@ type CreateResourcePolicyInput struct {
 	// A resource policy to add to the resource. The policy is a JSON structure that
 	// contains one or more statements that define the policy. The policy must follow
 	// the IAM syntax. For more information about the contents of a JSON policy
-	// document, see  IAM JSON policy reference
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html). If
-	// the policy isn't valid, Amazon Lex returns a validation exception.
+	// document, see IAM JSON policy reference  (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html)
+	// . If the policy isn't valid, Amazon Lex returns a validation exception.
 	//
 	// This member is required.
 	Policy *string
 
-	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
-	// is attached to.
+	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource
+	// policy is attached to.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -49,8 +48,8 @@ type CreateResourcePolicyInput struct {
 
 type CreateResourcePolicyOutput struct {
 
-	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
-	// was attached to.
+	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource
+	// policy was attached to.
 	ResourceArn *string
 
 	// The current revision of the resource policy. Use the revision ID to make sure

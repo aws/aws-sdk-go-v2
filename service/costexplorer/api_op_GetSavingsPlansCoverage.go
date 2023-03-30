@@ -17,14 +17,13 @@ import (
 // account can see the coverage of the associated member accounts. This supports
 // dimensions, Cost Categories, and nested expressions. For any time period, you
 // can filter data for Savings Plans usage with the following dimensions:
-// -
-// LINKED_ACCOUNT
-// - REGION
-// - SERVICE
-// - INSTANCE_FAMILY
+//   - LINKED_ACCOUNT
+//   - REGION
+//   - SERVICE
+//   - INSTANCE_FAMILY
+//     To determine valid values for a dimension, use the GetDimensionValues
 //
-// To determine valid values
-// for a dimension, use the GetDimensionValues operation.
+// operation.
 func (c *Client) GetSavingsPlansCoverage(ctx context.Context, params *GetSavingsPlansCoverageInput, optFns ...func(*Options)) (*GetSavingsPlansCoverageOutput, error) {
 	if params == nil {
 		params = &GetSavingsPlansCoverageInput{}
@@ -43,61 +42,56 @@ func (c *Client) GetSavingsPlansCoverage(ctx context.Context, params *GetSavings
 type GetSavingsPlansCoverageInput struct {
 
 	// The time period that you want the usage and costs for. The Start date must be
-	// within 13 months. The End date must be after the Start date, and before the
-	// current date. Future dates can't be used as an End date.
+	// within 13 months. The End  date must be after the Start date, and before the
+	// current date. Future dates can't be used as an End  date.
 	//
 	// This member is required.
 	TimePeriod *types.DateInterval
 
 	// Filters Savings Plans coverage data by dimensions. You can filter data for
 	// Savings Plans usage with the following dimensions:
-	// - LINKED_ACCOUNT
-	// - REGION
-	// -
-	// SERVICE
-	// - INSTANCE_FAMILY
-	//
-	// GetSavingsPlansCoverage uses the same Expression
-	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
-	// object as the other operations, but only AND is supported among each dimension.
-	// If there are multiple values for a dimension, they are OR'd together. Cost
-	// category is also supported.
+	//     - LINKED_ACCOUNT
+	//     - REGION
+	//     - SERVICE
+	//     - INSTANCE_FAMILY
+	//  GetSavingsPlansCoverage  uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	// object as the other operations, but only AND is supported among each
+	// dimension. If there are multiple values for a dimension, they are OR'd together.
+	// Cost category is also supported.
 	Filter *types.Expression
 
 	// The granularity of the Amazon Web Services cost data for your Savings Plans.
-	// Granularity can't be set if GroupBy is set. The GetSavingsPlansCoverage
-	// operation supports only DAILY and MONTHLY granularities.
+	// Granularity can't be set if GroupBy  is set. The GetSavingsPlansCoverage
+	// operation supports only DAILY  and MONTHLY  granularities.
 	Granularity types.Granularity
 
-	// You can group the data using the attributes INSTANCE_FAMILY, REGION, or SERVICE.
+	// You can group the data using the attributes INSTANCE_FAMILY , REGION , or
+	// SERVICE .
 	GroupBy []types.GroupDefinition
 
 	// The number of items to be returned in a response. The default is 20, with a
-	// minimum value of 1.
+	// minimum value of 1 .
 	MaxResults *int32
 
-	// The measurement that you want your Savings Plans coverage reported in. The only
-	// valid value is SpendCoveredBySavingsPlans.
+	// The measurement that you want your Savings Plans coverage reported in. The
+	// only valid value is SpendCoveredBySavingsPlans .
 	Metrics []string
 
-	// The token to retrieve the next set of results. Amazon Web Services provides the
-	// token when the response from a previous call has more results than the maximum
-	// page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides
+	// the token when the response from a previous call has more results than the
+	// maximum page size.
 	NextToken *string
 
-	// The value that you want to sort the data by. The following values are supported
-	// for Key:
-	// - SpendCoveredBySavingsPlan
-	// - OnDemandCost
-	// - CoveragePercentage
-	// -
-	// TotalCost
-	// - InstanceFamily
-	// - Region
-	// - Service
-	//
-	// The supported values for
-	// SortOrder are ASCENDING and DESCENDING.
+	// The value that you want to sort the data by. The following values are
+	// supported for Key :
+	//     - SpendCoveredBySavingsPlan
+	//     - OnDemandCost
+	//     - CoveragePercentage
+	//     - TotalCost
+	//     - InstanceFamily
+	//     - Region
+	//     - Service
+	//  The supported values for SortOrder  are ASCENDING  and DESCENDING .
 	SortBy *types.SortDefinition
 
 	noSmithyDocumentSerde
@@ -110,9 +104,9 @@ type GetSavingsPlansCoverageOutput struct {
 	// This member is required.
 	SavingsPlansCoverages []types.SavingsPlansCoverage
 
-	// The token to retrieve the next set of results. Amazon Web Services provides the
-	// token when the response from a previous call has more results than the maximum
-	// page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides
+	// the token when the response from a previous call has more results than the
+	// maximum page size.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -196,11 +190,11 @@ var _ GetSavingsPlansCoverageAPIClient = (*Client)(nil)
 // GetSavingsPlansCoverage
 type GetSavingsPlansCoveragePaginatorOptions struct {
 	// The number of items to be returned in a response. The default is 20, with a
-	// minimum value of 1.
+	// minimum value of 1 .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

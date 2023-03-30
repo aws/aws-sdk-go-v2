@@ -12,8 +12,7 @@ import (
 )
 
 // Creates a scheduled audit that is run at a specified time interval. Requires
-// permission to access the CreateScheduledAudit
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// permission to access the CreateScheduledAudit (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateScheduledAudit(ctx context.Context, params *CreateScheduledAuditInput, optFns ...func(*Options)) (*CreateScheduledAuditOutput, error) {
 	if params == nil {
@@ -32,8 +31,8 @@ func (c *Client) CreateScheduledAudit(ctx context.Context, params *CreateSchedul
 
 type CreateScheduledAuditInput struct {
 
-	// How often the scheduled audit takes place, either DAILY, WEEKLY, BIWEEKLY or
-	// MONTHLY. The start time of each audit is determined by the system.
+	// How often the scheduled audit takes place, either DAILY , WEEKLY , BIWEEKLY  or
+	// MONTHLY . The start time of each audit is determined by the system.
 	//
 	// This member is required.
 	Frequency types.AuditFrequency
@@ -44,22 +43,22 @@ type CreateScheduledAuditInput struct {
 	ScheduledAuditName *string
 
 	// Which checks are performed during the scheduled audit. Checks must be enabled
-	// for your account. (Use DescribeAccountAuditConfiguration to see the list of all
-	// checks, including those that are enabled or use UpdateAccountAuditConfiguration
-	// to select which checks are enabled.)
+	// for your account. (Use DescribeAccountAuditConfiguration to see the list of
+	// all checks, including those that are enabled or use
+	// UpdateAccountAuditConfiguration to select which checks are enabled.)
 	//
 	// This member is required.
 	TargetCheckNames []string
 
 	// The day of the month on which the scheduled audit takes place. This can be "1"
 	// through "31" or "LAST". This field is required if the "frequency" parameter is
-	// set to MONTHLY. If days 29 to 31 are specified, and the month doesn't have that
-	// many days, the audit takes place on the LAST day of the month.
+	// set to MONTHLY. If days 29 to 31 are specified, and the month doesn't have
+	// that many days, the audit takes place on the LAST  day of the month.
 	DayOfMonth *string
 
-	// The day of the week on which the scheduled audit takes place, either SUN, MON,
-	// TUE, WED, THU, FRI, or SAT. This field is required if the frequency parameter is
-	// set to WEEKLY or BIWEEKLY.
+	// The day of the week on which the scheduled audit takes place, either SUN , MON
+	// , TUE , WED , THU , FRI , or SAT . This field is required if the frequency
+	// parameter is set to WEEKLY  or BIWEEKLY .
 	DayOfWeek types.DayOfWeek
 
 	// Metadata that can be used to manage the scheduled audit.

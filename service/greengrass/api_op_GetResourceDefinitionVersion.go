@@ -53,8 +53,8 @@ type GetResourceDefinitionVersionOutput struct {
 	// Arn of the resource definition version.
 	Arn *string
 
-	// The time, in milliseconds since the epoch, when the resource definition version
-	// was created.
+	// The time, in milliseconds since the epoch, when the resource definition
+	// version was created.
 	CreationTimestamp *string
 
 	// Information about the definition.

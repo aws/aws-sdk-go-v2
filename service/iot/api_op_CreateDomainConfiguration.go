@@ -12,8 +12,7 @@ import (
 )
 
 // Creates a domain configuration. Requires permission to access the
-// CreateDomainConfiguration
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// CreateDomainConfiguration (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateDomainConfiguration(ctx context.Context, params *CreateDomainConfigurationInput, optFns ...func(*Options)) (*CreateDomainConfigurationOutput, error) {
 	if params == nil {
@@ -49,7 +48,7 @@ type CreateDomainConfigurationInput struct {
 	ServerCertificateArns []string
 
 	// The type of service delivered by the endpoint. Amazon Web Services IoT Core
-	// currently supports only the DATA service type.
+	// currently supports only the DATA  service type.
 	ServiceType types.ServiceType
 
 	// Metadata which can be used to manage the domain configuration. For URI Request

@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about the products for the specified portfolio or all products.
+// Gets information about the products for the specified portfolio or all
+// products.
 func (c *Client) SearchProductsAsAdmin(ctx context.Context, params *SearchProductsAsAdminInput, optFns ...func(*Options)) (*SearchProductsAsAdminOutput, error) {
 	if params == nil {
 		params = &SearchProductsAsAdminInput{}
@@ -31,13 +32,13 @@ func (c *Client) SearchProductsAsAdmin(ctx context.Context, params *SearchProduc
 type SearchProductsAsAdminInput struct {
 
 	// The language code.
-	// - en - English (default)
-	// - jp - Japanese
-	// - zh - Chinese
+	//     - en - English (default)
+	//     - jp - Japanese
+	//     - zh - Chinese
 	AcceptLanguage *string
 
-	// The search filters. If no search filters are specified, the output includes all
-	// products to which the administrator has access.
+	// The search filters. If no search filters are specified, the output includes
+	// all products to which the administrator has access.
 	Filters map[string][]string
 
 	// The maximum number of items to return with this call.
@@ -151,8 +152,8 @@ type SearchProductsAsAdminPaginatorOptions struct {
 	// The maximum number of items to return with this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

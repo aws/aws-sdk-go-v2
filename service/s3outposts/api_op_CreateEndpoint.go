@@ -11,14 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint and associates it with the specified Outpost. It can take up
-// to 5 minutes for this action to finish. Related actions include:
-// -
-// DeleteEndpoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html)
-// -
-// ListEndpoints
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html)
+// Creates an endpoint and associates it with the specified Outpost. It can take
+// up to 5 minutes for this action to finish. Related actions include:
+//   - DeleteEndpoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html)
+//   - ListEndpoints (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html)
 func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput, optFns ...func(*Options)) (*CreateEndpointOutput, error) {
 	if params == nil {
 		params = &CreateEndpointInput{}
@@ -46,21 +42,21 @@ type CreateEndpointInput struct {
 	// This member is required.
 	SecurityGroupId *string
 
-	// The ID of the subnet in the selected VPC. The endpoint subnet must belong to the
-	// Outpost that has Amazon S3 on Outposts provisioned.
+	// The ID of the subnet in the selected VPC. The endpoint subnet must belong to
+	// the Outpost that has Amazon S3 on Outposts provisioned.
 	//
 	// This member is required.
 	SubnetId *string
 
 	// The type of access for the network connectivity for the Amazon S3 on Outposts
 	// endpoint. To use the Amazon Web Services VPC, choose Private. To use the
-	// endpoint with an on-premises network, choose CustomerOwnedIp. If you choose
-	// CustomerOwnedIp, you must also provide the customer-owned IP address pool (CoIP
-	// pool). Private is the default access type value.
+	// endpoint with an on-premises network, choose CustomerOwnedIp . If you choose
+	// CustomerOwnedIp, you must also provide the customer-owned IP address pool
+	// (CoIP pool). Private  is the default access type value.
 	AccessType types.EndpointAccessType
 
-	// The ID of the customer-owned IPv4 address pool (CoIP pool) for the endpoint. IP
-	// addresses are allocated from this pool for the endpoint.
+	// The ID of the customer-owned IPv4 address pool (CoIP pool) for the endpoint.
+	// IP addresses are allocated from this pool for the endpoint.
 	CustomerOwnedIpv4Pool *string
 
 	noSmithyDocumentSerde

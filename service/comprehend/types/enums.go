@@ -29,9 +29,9 @@ const (
 	BlockTypeWord BlockType = "WORD"
 )
 
-// Values returns all known values for BlockType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for BlockType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (BlockType) Values() []BlockType {
 	return []BlockType{
 		"LINE",
@@ -85,9 +85,9 @@ const (
 	DatasetTypeTest  DatasetType = "TEST"
 )
 
-// Values returns all known values for DatasetType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DatasetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DatasetType) Values() []DatasetType {
 	return []DatasetType{
 		"TRAIN",
@@ -103,9 +103,10 @@ const (
 	DocumentClassifierDataFormatAugmentedManifest DocumentClassifierDataFormat = "AUGMENTED_MANIFEST"
 )
 
-// Values returns all known values for DocumentClassifierDataFormat. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DocumentClassifierDataFormat. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (DocumentClassifierDataFormat) Values() []DocumentClassifierDataFormat {
 	return []DocumentClassifierDataFormat{
 		"COMPREHEND_CSV",
@@ -157,9 +158,9 @@ const (
 	DocumentReadFeatureTypesForms  DocumentReadFeatureTypes = "FORMS"
 )
 
-// Values returns all known values for DocumentReadFeatureTypes. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DocumentReadFeatureTypes. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DocumentReadFeatureTypes) Values() []DocumentReadFeatureTypes {
 	return []DocumentReadFeatureTypes{
 		"TABLES",
@@ -198,9 +199,9 @@ const (
 	DocumentTypeTextractAnalyzeDocumentJson    DocumentType = "TEXTRACT_ANALYZE_DOCUMENT_JSON"
 )
 
-// Values returns all known values for DocumentType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DocumentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DocumentType) Values() []DocumentType {
 	return []DocumentType{
 		"NATIVE_PDF",
@@ -299,9 +300,9 @@ const (
 	FlywheelIterationStatusStopped       FlywheelIterationStatus = "STOPPED"
 )
 
-// Values returns all known values for FlywheelIterationStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FlywheelIterationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FlywheelIterationStatus) Values() []FlywheelIterationStatus {
 	return []FlywheelIterationStatus{
 		"TRAINING",
@@ -345,9 +346,9 @@ const (
 	InputFormatOneDocPerLine InputFormat = "ONE_DOC_PER_LINE"
 )
 
-// Values returns all known values for InputFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InputFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (InputFormat) Values() []InputFormat {
 	return []InputFormat{
 		"ONE_DOC_PER_FILE",
@@ -384,8 +385,8 @@ const (
 	InvalidRequestReasonInvalidDocument InvalidRequestReason = "INVALID_DOCUMENT"
 )
 
-// Values returns all known values for InvalidRequestReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for InvalidRequestReason. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (InvalidRequestReason) Values() []InvalidRequestReason {
 	return []InvalidRequestReason{
@@ -405,9 +406,9 @@ const (
 	JobStatusStopped       JobStatus = "STOPPED"
 )
 
-// Values returns all known values for JobStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"SUBMITTED",
@@ -437,9 +438,9 @@ const (
 	LanguageCodeZhTw LanguageCode = "zh-TW"
 )
 
-// Values returns all known values for LanguageCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LanguageCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LanguageCode) Values() []LanguageCode {
 	return []LanguageCode{
 		"en",
@@ -471,9 +472,9 @@ const (
 	ModelStatusTrainedWithWarning ModelStatus = "TRAINED_WITH_WARNING"
 )
 
-// Values returns all known values for ModelStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ModelStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ModelStatus) Values() []ModelStatus {
 	return []ModelStatus{
 		"SUBMITTED",
@@ -495,9 +496,9 @@ const (
 	ModelTypeEntityRecognizer   ModelType = "ENTITY_RECOGNIZER"
 )
 
-// Values returns all known values for ModelType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ModelType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ModelType) Values() []ModelType {
 	return []ModelType{
 		"DOCUMENT_CLASSIFIER",
@@ -587,9 +588,10 @@ const (
 	PiiEntitiesDetectionMaskModeReplaceWithPiiEntityType PiiEntitiesDetectionMaskMode = "REPLACE_WITH_PII_ENTITY_TYPE"
 )
 
-// Values returns all known values for PiiEntitiesDetectionMaskMode. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PiiEntitiesDetectionMaskMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (PiiEntitiesDetectionMaskMode) Values() []PiiEntitiesDetectionMaskMode {
 	return []PiiEntitiesDetectionMaskMode{
 		"MASK",
@@ -605,9 +607,9 @@ const (
 	PiiEntitiesDetectionModeOnlyOffsets   PiiEntitiesDetectionMode = "ONLY_OFFSETS"
 )
 
-// Values returns all known values for PiiEntitiesDetectionMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PiiEntitiesDetectionMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PiiEntitiesDetectionMode) Values() []PiiEntitiesDetectionMode {
 	return []PiiEntitiesDetectionMode{
 		"ONLY_REDACTION",
@@ -749,8 +751,8 @@ const (
 	SplitTest  Split = "TEST"
 )
 
-// Values returns all known values for Split. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Split. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Split) Values() []Split {
 	return []Split{
@@ -808,9 +810,10 @@ const (
 	TargetedSentimentEntityTypeOther          TargetedSentimentEntityType = "OTHER"
 )
 
-// Values returns all known values for TargetedSentimentEntityType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TargetedSentimentEntityType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (TargetedSentimentEntityType) Values() []TargetedSentimentEntityType {
 	return []TargetedSentimentEntityType{
 		"PERSON",

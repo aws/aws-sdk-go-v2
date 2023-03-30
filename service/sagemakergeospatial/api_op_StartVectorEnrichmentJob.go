@@ -13,8 +13,8 @@ import (
 	"time"
 )
 
-// Creates a Vector Enrichment job for the supplied job type. Currently, there are
-// two supported job types: reverse geocoding and map matching.
+// Creates a Vector Enrichment job for the supplied job type. Currently, there
+// are two supported job types: reverse geocoding and map matching.
 func (c *Client) StartVectorEnrichmentJob(ctx context.Context, params *StartVectorEnrichmentJobInput, optFns ...func(*Options)) (*StartVectorEnrichmentJobOutput, error) {
 	if params == nil {
 		params = &StartVectorEnrichmentJobInput{}

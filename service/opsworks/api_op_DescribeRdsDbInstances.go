@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes Amazon RDS instances. Required Permissions: To use this action, an IAM
-// user must have a Show, Deploy, or Manage permissions level for the stack, or an
-// attached policy that explicitly grants permissions. For more information about
-// user permissions, see Managing User Permissions
-// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-// This call accepts only one resource-identifying parameter.
+// Describes Amazon RDS instances. Required Permissions: To use this action, an
+// IAM user must have a Show, Deploy, or Manage permissions level for the stack, or
+// an attached policy that explicitly grants permissions. For more information
+// about user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+// . This call accepts only one resource-identifying parameter.
 func (c *Client) DescribeRdsDbInstances(ctx context.Context, params *DescribeRdsDbInstancesInput, optFns ...func(*Options)) (*DescribeRdsDbInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeRdsDbInstancesInput{}
@@ -46,10 +45,10 @@ type DescribeRdsDbInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a DescribeRdsDbInstances request.
+// Contains the response to a DescribeRdsDbInstances  request.
 type DescribeRdsDbInstancesOutput struct {
 
-	// An a array of RdsDbInstance objects that describe the instances.
+	// An a array of RdsDbInstance  objects that describe the instances.
 	RdsDbInstances []types.RdsDbInstance
 
 	// Metadata pertaining to the operation's result.

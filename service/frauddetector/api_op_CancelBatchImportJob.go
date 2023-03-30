@@ -28,9 +28,9 @@ func (c *Client) CancelBatchImportJob(ctx context.Context, params *CancelBatchIm
 
 type CancelBatchImportJobInput struct {
 
-	// The ID of an in-progress batch import job to cancel. Amazon Fraud Detector will
-	// throw an error if the batch import job is in FAILED, CANCELED, or COMPLETED
-	// state.
+	// The ID of an in-progress batch import job to cancel. Amazon Fraud Detector
+	// will throw an error if the batch import job is in FAILED , CANCELED , or
+	// COMPLETED state.
 	//
 	// This member is required.
 	JobId *string

@@ -12,7 +12,7 @@ import (
 )
 
 // Inspects a batch of documents and returns an inference of the prevailing
-// sentiment, POSITIVE, NEUTRAL, MIXED, or NEGATIVE, in each one.
+// sentiment, POSITIVE , NEUTRAL , MIXED , or NEGATIVE , in each one.
 func (c *Client) BatchDetectSentiment(ctx context.Context, params *BatchDetectSentimentInput, optFns ...func(*Options)) (*BatchDetectSentimentOutput, error) {
 	if params == nil {
 		params = &BatchDetectSentimentInput{}
@@ -49,8 +49,8 @@ type BatchDetectSentimentInput struct {
 type BatchDetectSentimentOutput struct {
 
 	// A list containing one object for each document that contained an error. The
-	// results are sorted in ascending order by the Index field and match the order of
-	// the documents in the input list. If there are no errors in the batch, the
+	// results are sorted in ascending order by the Index field and match the order
+	// of the documents in the input list. If there are no errors in the batch, the
 	// ErrorList is empty.
 	//
 	// This member is required.

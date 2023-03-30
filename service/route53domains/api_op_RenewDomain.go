@@ -15,9 +15,8 @@ import (
 // that you renew your domain several weeks before the expiration date. Some TLD
 // registries delete domains before the expiration date if you haven't renewed far
 // enough in advance. For more information about renewing domain registration, see
-// Renewing Registration for a Domain
-// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-renew.html) in
-// the Amazon Route 53 Developer Guide.
+// Renewing Registration for a Domain (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-renew.html)
+// in the Amazon Route 53 Developer Guide.
 func (c *Client) RenewDomain(ctx context.Context, params *RenewDomainInput, optFns ...func(*Options)) (*RenewDomainOutput, error) {
 	if params == nil {
 		params = &RenewDomainInput{}
@@ -37,8 +36,8 @@ func (c *Client) RenewDomain(ctx context.Context, params *RenewDomainInput, optF
 // and the current expiration year.
 type RenewDomainInput struct {
 
-	// The year when the registration for the domain is set to expire. This value must
-	// match the current expiration date for the domain.
+	// The year when the registration for the domain is set to expire. This value
+	// must match the current expiration date for the domain.
 	//
 	// This member is required.
 	CurrentExpiryYear int32
@@ -48,10 +47,9 @@ type RenewDomainInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The number of years that you want to renew the domain for. The maximum number of
-	// years depends on the top-level domain. For the range of valid values for your
-	// domain, see Domains that You Can Register with Amazon Route 53
-	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+	// The number of years that you want to renew the domain for. The maximum number
+	// of years depends on the top-level domain. For the range of valid values for your
+	// domain, see Domains that You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
 	// in the Amazon Route 53 Developer Guide. Default: 1
 	DurationInYears *int32
 
@@ -61,8 +59,8 @@ type RenewDomainInput struct {
 type RenewDomainOutput struct {
 
 	// Identifier for tracking the progress of the request. To query the operation
-	// status, use GetOperationDetail
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+	// .
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

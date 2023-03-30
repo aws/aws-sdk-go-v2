@@ -30,7 +30,7 @@ func (c *Client) UpdateComment(ctx context.Context, params *UpdateCommentInput, 
 type UpdateCommentInput struct {
 
 	// The system-generated ID of the comment you want to update. To get this ID, use
-	// GetCommentsForComparedCommit or GetCommentsForPullRequest.
+	// GetCommentsForComparedCommit or GetCommentsForPullRequest .
 	//
 	// This member is required.
 	CommentId *string

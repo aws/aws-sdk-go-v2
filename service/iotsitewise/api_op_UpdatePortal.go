@@ -45,12 +45,10 @@ type UpdatePortalInput struct {
 	// This member is required.
 	PortalName *string
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// a service role that allows the portal's users to access your IoT SiteWise
-	// resources on your behalf. For more information, see Using service roles for IoT
-	// SiteWise Monitor
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
+	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of a service role that allows the portal's users to access your IoT SiteWise
+	// resources on your behalf. For more information, see Using service roles for
+	// IoT SiteWise Monitor (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
 	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
@@ -59,8 +57,7 @@ type UpdatePortalInput struct {
 	// Contains the configuration information of an alarm created in an IoT SiteWise
 	// Monitor portal. You can use the alarm to monitor an asset property and get
 	// notified when the asset property value is outside a specified range. For more
-	// information, see Monitoring with alarms
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html)
+	// information, see Monitoring with alarms (https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html)
 	// in the IoT SiteWise Application Guide.
 	Alarms *types.Alarms
 
@@ -76,10 +73,8 @@ type UpdatePortalInput struct {
 	PortalDescription *string
 
 	// Contains an image that is one of the following:
-	// - An image file. Choose this
-	// option to upload a new image.
-	// - The ID of an existing image. Choose this option
-	// to keep an existing image.
+	//     - An image file. Choose this option to upload a new image.
+	//     - The ID of an existing image. Choose this option to keep an existing image.
 	PortalLogoImage *types.Image
 
 	noSmithyDocumentSerde
@@ -87,7 +82,7 @@ type UpdatePortalInput struct {
 
 type UpdatePortalOutput struct {
 
-	// The status of the portal, which contains a state (UPDATING after successfully
+	// The status of the portal, which contains a state ( UPDATING after successfully
 	// calling this operation) and any error message.
 	//
 	// This member is required.

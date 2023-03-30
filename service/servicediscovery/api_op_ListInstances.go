@@ -37,11 +37,11 @@ type ListInstancesInput struct {
 	ServiceId *string
 
 	// The maximum number of instances that you want Cloud Map to return in the
-	// response to a ListInstances request. If you don't specify a value for
-	// MaxResults, Cloud Map returns up to 100 instances.
+	// response to a ListInstances  request. If you don't specify a value for
+	// MaxResults , Cloud Map returns up to 100 instances.
 	MaxResults *int32
 
-	// For the first ListInstances request, omit this value. If more than MaxResults
+	// For the first ListInstances  request, omit this value. If more than MaxResults
 	// instances match the specified criteria, you can submit another ListInstances
 	// request to get the next group of results. Specify the value of NextToken from
 	// the previous response in the next request.
@@ -58,7 +58,7 @@ type ListInstancesOutput struct {
 
 	// If more than MaxResults instances match the specified criteria, you can submit
 	// another ListInstances request to get the next group of results. Specify the
-	// value of NextToken from the previous response in the next request.
+	// value of NextToken  from the previous response in the next request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -140,12 +140,12 @@ var _ ListInstancesAPIClient = (*Client)(nil)
 // ListInstancesPaginatorOptions is the paginator options for ListInstances
 type ListInstancesPaginatorOptions struct {
 	// The maximum number of instances that you want Cloud Map to return in the
-	// response to a ListInstances request. If you don't specify a value for
-	// MaxResults, Cloud Map returns up to 100 instances.
+	// response to a ListInstances  request. If you don't specify a value for
+	// MaxResults , Cloud Map returns up to 100 instances.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

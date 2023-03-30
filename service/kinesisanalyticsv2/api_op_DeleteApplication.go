@@ -35,7 +35,7 @@ type DeleteApplicationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// Use the DescribeApplication operation to get this value.
+	// Use the DescribeApplication  operation to get this value.
 	//
 	// This member is required.
 	CreateTimestamp *time.Time

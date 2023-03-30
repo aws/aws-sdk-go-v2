@@ -29,7 +29,7 @@ func (c *Client) UpdateConnection(ctx context.Context, params *UpdateConnectionI
 
 type UpdateConnectionInput struct {
 
-	// A ConnectionInput object that redefines the connection in question.
+	// A ConnectionInput  object that redefines the connection in question.
 	//
 	// This member is required.
 	ConnectionInput *types.ConnectionInput
@@ -39,8 +39,8 @@ type UpdateConnectionInput struct {
 	// This member is required.
 	Name *string
 
-	// The ID of the Data Catalog in which the connection resides. If none is provided,
-	// the Amazon Web Services account ID is used by default.
+	// The ID of the Data Catalog in which the connection resides. If none is
+	// provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
 
 	noSmithyDocumentSerde

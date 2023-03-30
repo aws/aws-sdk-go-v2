@@ -37,12 +37,12 @@ type ListTargetsInput struct {
 	// with different names should be applied with AND statements.
 	Filters []types.ListTargetsFilter
 
-	// A non-negative integer used to limit the number of returned results. The maximum
-	// number of results that can be returned is 100.
+	// A non-negative integer used to limit the number of returned results. The
+	// maximum number of results that can be returned is 100.
 	MaxResults *int32
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
+	// An enumeration token that, when provided in a request, returns the next batch
+	// of the results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -135,12 +135,12 @@ var _ ListTargetsAPIClient = (*Client)(nil)
 
 // ListTargetsPaginatorOptions is the paginator options for ListTargets
 type ListTargetsPaginatorOptions struct {
-	// A non-negative integer used to limit the number of returned results. The maximum
-	// number of results that can be returned is 100.
+	// A non-negative integer used to limit the number of returned results. The
+	// maximum number of results that can be returned is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

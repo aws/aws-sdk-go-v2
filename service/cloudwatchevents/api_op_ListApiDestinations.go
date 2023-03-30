@@ -35,8 +35,8 @@ type ListApiDestinationsInput struct {
 	// The maximum number of API destinations to include in the response.
 	Limit *int32
 
-	// A name prefix to filter results returned. Only API destinations with a name that
-	// starts with the prefix are returned.
+	// A name prefix to filter results returned. Only API destinations with a name
+	// that starts with the prefix are returned.
 	NamePrefix *string
 
 	// The token returned by a previous call to retrieve the next set of results.
@@ -51,7 +51,8 @@ type ListApiDestinationsOutput struct {
 	// destination.
 	ApiDestinations []types.ApiDestination
 
-	// A token you can use in a subsequent request to retrieve the next set of results.
+	// A token you can use in a subsequent request to retrieve the next set of
+	// results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

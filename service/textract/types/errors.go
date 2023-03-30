@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You aren't authorized to perform the action. Use the Amazon Resource Name (ARN)
-// of an authorized user or IAM role to perform the operation.
+// You aren't authorized to perform the action. Use the Amazon Resource Name
+// (ARN) of an authorized user or IAM role to perform the operation.
 type AccessDeniedException struct {
 	Message *string
 
@@ -37,7 +37,7 @@ func (e *AccessDeniedException) ErrorCode() string {
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Amazon Textract isn't able to read the document. For more information on the
-// document limits in Amazon Textract, see limits.
+// document limits in Amazon Textract, see limits .
 type BadDocumentException struct {
 	Message *string
 
@@ -127,9 +127,9 @@ func (e *HumanLoopQuotaExceededException) ErrorCode() string {
 }
 func (e *HumanLoopQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A ClientRequestToken input parameter was reused with an operation, but at least
-// one of the other input parameters is different from the previous call to the
-// operation.
+// A ClientRequestToken input parameter was reused with an operation, but at
+// least one of the other input parameters is different from the previous call to
+// the operation.
 type IdempotentParameterMismatchException struct {
 	Message *string
 
@@ -245,8 +245,8 @@ func (e *InvalidKMSKeyException) ErrorCode() string {
 func (e *InvalidKMSKeyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An input parameter violated a constraint. For example, in synchronous
-// operations, an InvalidParameterException exception occurs when neither of the
-// S3Object or Bytes values are supplied in the Document request parameter.
+// operations, an InvalidParameterException  exception occurs when neither of the
+// S3Object or Bytes  values are supplied in the Document request parameter.
 // Validate your parameter before calling the API operation again.
 type InvalidParameterException struct {
 	Message *string
@@ -276,10 +276,8 @@ func (e *InvalidParameterException) ErrorCode() string {
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Amazon Textract is unable to access the S3 object that's specified in the
-// request. for more information, Configure Access to Amazon S3
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html) For
-// troubleshooting information, see Troubleshooting Amazon S3
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html)
+// request. for more information, Configure Access to Amazon S3 (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)
+// For troubleshooting information, see Troubleshooting Amazon S3 (https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html)
 type InvalidS3ObjectException struct {
 	Message *string
 
@@ -308,8 +306,8 @@ func (e *InvalidS3ObjectException) ErrorCode() string {
 func (e *InvalidS3ObjectException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An Amazon Textract service limit was exceeded. For example, if you start too
-// many asynchronous jobs concurrently, calls to start operations
-// (StartDocumentTextDetection, for example) raise a LimitExceededException
+// many asynchronous jobs concurrently, calls to start operations (
+// StartDocumentTextDetection, for example) raise a LimitExceededException
 // exception (HTTP status code: 400) until the number of concurrently running jobs
 // is below the Amazon Textract service limit.
 type LimitExceededException struct {

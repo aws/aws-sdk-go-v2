@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint for an object storage system that DataSync can access for a
-// transfer. For more information, see Creating a location for object storage
-// (https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html).
+// Creates an endpoint for an object storage system that DataSync can access for
+// a transfer. For more information, see Creating a location for object storage (https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html)
+// .
 func (c *Client) CreateLocationObjectStorage(ctx context.Context, params *CreateLocationObjectStorageInput, optFns ...func(*Options)) (*CreateLocationObjectStorageOutput, error) {
 	if params == nil {
 		params = &CreateLocationObjectStorageInput{}
@@ -43,26 +43,27 @@ type CreateLocationObjectStorageInput struct {
 	// This member is required.
 	BucketName *string
 
-	// Specifies the domain name or IP address of the object storage server. A DataSync
-	// agent uses this hostname to mount the object storage server in a network.
+	// Specifies the domain name or IP address of the object storage server. A
+	// DataSync agent uses this hostname to mount the object storage server in a
+	// network.
 	//
 	// This member is required.
 	ServerHostname *string
 
-	// Specifies the access key (for example, a user name) if credentials are required
-	// to authenticate with the object storage server.
+	// Specifies the access key (for example, a user name) if credentials are
+	// required to authenticate with the object storage server.
 	AccessKey *string
 
 	// Specifies the secret key (for example, a password) if credentials are required
 	// to authenticate with the object storage server.
 	SecretKey *string
 
-	// Specifies a certificate to authenticate with an object storage system that uses
-	// a private or self-signed certificate authority (CA). You must specify a
-	// Base64-encoded .pem file (for example,
+	// Specifies a certificate to authenticate with an object storage system that
+	// uses a private or self-signed certificate authority (CA). You must specify a
+	// Base64-encoded .pem  file (for example,
 	// file:///home/user/.ssh/storage_sys_certificate.pem). The certificate can be up
 	// to 32768 bytes (before Base64 encoding). To use this parameter, configure
-	// ServerProtocol to HTTPS.
+	// ServerProtocol to HTTPS .
 	ServerCertificate []byte
 
 	// Specifies the port that your object storage server accepts inbound network
@@ -72,8 +73,8 @@ type CreateLocationObjectStorageInput struct {
 	// Specifies the protocol that your object storage server uses to communicate.
 	ServerProtocol types.ObjectStorageServerProtocol
 
-	// Specifies the object prefix for your object storage server. If this is a source
-	// location, DataSync only copies objects with this prefix. If this is a
+	// Specifies the object prefix for your object storage server. If this is a
+	// source location, DataSync only copies objects with this prefix. If this is a
 	// destination location, DataSync writes all objects with this prefix.
 	Subdirectory *string
 

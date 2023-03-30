@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a Resolver object.
+// Retrieves a Resolver  object.
 func (c *Client) GetResolver(ctx context.Context, params *GetResolverInput, optFns ...func(*Options)) (*GetResolverOutput, error) {
 	if params == nil {
 		params = &GetResolverInput{}
@@ -49,7 +49,7 @@ type GetResolverInput struct {
 
 type GetResolverOutput struct {
 
-	// The Resolver object.
+	// The Resolver  object.
 	Resolver *types.Resolver
 
 	// Metadata pertaining to the operation's result.

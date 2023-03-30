@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays the tags associated with an Amazon Connect Customer Profiles resource.
-// In Connect Customer Profiles, domains, profile object types, and integrations
-// can be tagged.
+// Displays the tags associated with an Amazon Connect Customer Profiles
+// resource. In Connect Customer Profiles, domains, profile object types, and
+// integrations can be tagged.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

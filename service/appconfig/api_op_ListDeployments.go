@@ -42,12 +42,12 @@ type ListDeploymentsInput struct {
 
 	// The maximum number of items that may be returned for this call. If there are
 	// items that have not yet been returned, the response will include a non-null
-	// NextToken that you can provide in a subsequent call to get the next set of
+	// NextTokenthat you can provide in a subsequent call to get the next set of
 	// results.
 	MaxResults *int32
 
-	// The token returned by a prior call to this operation indicating the next set of
-	// results to be returned. If not specified, the operation will return the first
+	// The token returned by a prior call to this operation indicating the next set
+	// of results to be returned. If not specified, the operation will return the first
 	// set of results.
 	NextToken *string
 
@@ -144,12 +144,12 @@ var _ ListDeploymentsAPIClient = (*Client)(nil)
 type ListDeploymentsPaginatorOptions struct {
 	// The maximum number of items that may be returned for this call. If there are
 	// items that have not yet been returned, the response will include a non-null
-	// NextToken that you can provide in a subsequent call to get the next set of
+	// NextTokenthat you can provide in a subsequent call to get the next set of
 	// results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -30,8 +30,8 @@ func (c *Client) PutReportDefinition(ctx context.Context, params *PutReportDefin
 // Creates a Cost and Usage Report.
 type PutReportDefinitionInput struct {
 
-	// Represents the output of the PutReportDefinition operation. The content consists
-	// of the detailed metadata and data file information.
+	// Represents the output of the PutReportDefinition operation. The content
+	// consists of the detailed metadata and data file information.
 	//
 	// This member is required.
 	ReportDefinition *types.ReportDefinition
@@ -39,8 +39,8 @@ type PutReportDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
-// If the action is successful, the service sends back an HTTP 200 response with an
-// empty HTTP body.
+// If the action is successful, the service sends back an HTTP 200 response with
+// an empty HTTP body.
 type PutReportDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

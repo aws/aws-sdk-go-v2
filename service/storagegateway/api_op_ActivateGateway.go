@@ -34,17 +34,13 @@ func (c *Client) ActivateGateway(ctx context.Context, params *ActivateGatewayInp
 }
 
 // A JSON object containing one or more of the following fields:
-// -
-// ActivateGatewayInput$ActivationKey
-// - ActivateGatewayInput$GatewayName
-// -
-// ActivateGatewayInput$GatewayRegion
-// - ActivateGatewayInput$GatewayTimezone
-// -
-// ActivateGatewayInput$GatewayType
-// - ActivateGatewayInput$MediumChangerType
-// -
-// ActivateGatewayInput$TapeDriveType
+//   - ActivateGatewayInput$ActivationKey
+//   - ActivateGatewayInput$GatewayName
+//   - ActivateGatewayInput$GatewayRegion
+//   - ActivateGatewayInput$GatewayTimezone
+//   - ActivateGatewayInput$GatewayType
+//   - ActivateGatewayInput$MediumChangerType
+//   - ActivateGatewayInput$TapeDriveType
 type ActivateGatewayInput struct {
 
 	// Your gateway activation key. You can obtain the activation key by sending an
@@ -53,8 +49,7 @@ type ActivateGatewayInput struct {
 	// gateway in the query string parameter activationKey. It may also include other
 	// activation-related parameters, however, these are merely defaults -- the
 	// arguments you pass to the ActivateGateway API call determine the actual
-	// configuration of your gateway. For more information, see Getting activation key
-	// (https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html)
+	// configuration of your gateway. For more information, see Getting activation key (https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html)
 	// in the Storage Gateway User Guide.
 	//
 	// This member is required.
@@ -67,13 +62,13 @@ type ActivateGatewayInput struct {
 
 	// A value that indicates the Amazon Web Services Region where you want to store
 	// your data. The gateway Amazon Web Services Region specified must be the same
-	// Amazon Web Services Region as the Amazon Web Services Region in your Host header
-	// in the request. For more information about available Amazon Web Services Regions
-	// and endpoints for Storage Gateway, see  Storage Gateway endpoints and quotas
-	// (https://docs.aws.amazon.com/general/latest/gr/sg.html) in the Amazon Web
-	// Services General Reference. Valid Values: See  Storage Gateway endpoints and
-	// quotas (https://docs.aws.amazon.com/general/latest/gr/sg.html) in the Amazon Web
-	// Services General Reference.
+	// Amazon Web Services Region as the Amazon Web Services Region in your Host
+	// header in the request. For more information about available Amazon Web Services
+	// Regions and endpoints for Storage Gateway, see Storage Gateway endpoints and
+	// quotas (https://docs.aws.amazon.com/general/latest/gr/sg.html)in the Amazon
+	// Web Services General Reference. Valid Values: See Storage Gateway endpoints
+	// and quotas (https://docs.aws.amazon.com/general/latest/gr/sg.html)in the
+	// Amazon Web Services General Reference.
 	//
 	// This member is required.
 	GatewayRegion *string
@@ -89,12 +84,12 @@ type ActivateGatewayInput struct {
 
 	// A value that defines the type of gateway to activate. The type specified is
 	// critical to all later functions of the gateway and cannot be changed after
-	// activation. The default value is CACHED. Valid Values: STORED | CACHED | VTL |
-	// VTL_SNOW | FILE_S3 | FILE_FSX_SMB
+	// activation. The default value is CACHED . Valid Values: STORED  | CACHED  | VTL
+	// | VTL_SNOW  | FILE_S3  | FILE_FSX_SMB
 	GatewayType *string
 
 	// The value that indicates the type of medium changer to use for tape gateway.
-	// This field is optional. Valid Values: STK-L700 | AWS-Gateway-VTL |
+	// This field is optional. Valid Values: STK-L700  | AWS-Gateway-VTL  |
 	// IBM-03584L32-0402
 	MediumChangerType *string
 
@@ -112,17 +107,17 @@ type ActivateGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
-// Storage Gateway returns the Amazon Resource Name (ARN) of the activated gateway.
-// It is a string made of information such as your account, gateway name, and
-// Amazon Web Services Region. This ARN is used to reference the gateway in other
-// API operations as well as resource-based authorization. For gateways activated
-// prior to September 02, 2015, the gateway ARN contains the gateway name rather
-// than the gateway ID. Changing the name of the gateway has no effect on the
-// gateway ARN.
+// Storage Gateway returns the Amazon Resource Name (ARN) of the activated
+// gateway. It is a string made of information such as your account, gateway name,
+// and Amazon Web Services Region. This ARN is used to reference the gateway in
+// other API operations as well as resource-based authorization. For gateways
+// activated prior to September 02, 2015, the gateway ARN contains the gateway name
+// rather than the gateway ID. Changing the name of the gateway has no effect on
+// the gateway ARN.
 type ActivateGatewayOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

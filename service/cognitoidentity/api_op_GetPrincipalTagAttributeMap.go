@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use GetPrincipalTagAttributeMap to list all mappings between PrincipalTags and
-// user attributes.
+// Use GetPrincipalTagAttributeMap  to list all mappings between PrincipalTags
+// and user attributes.
 func (c *Client) GetPrincipalTagAttributeMap(ctx context.Context, params *GetPrincipalTagAttributeMapInput, optFns ...func(*Options)) (*GetPrincipalTagAttributeMapOutput, error) {
 	if params == nil {
 		params = &GetPrincipalTagAttributeMapInput{}

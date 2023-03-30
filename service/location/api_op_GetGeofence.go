@@ -46,9 +46,8 @@ type GetGeofenceInput struct {
 
 type GetGeofenceOutput struct {
 
-	// The timestamp for when the geofence collection was created in ISO 8601
-	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp for when the geofence collection was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format: YYYY-MM-DDThh:mm:ss.sssZ
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -63,23 +62,19 @@ type GetGeofenceOutput struct {
 	// This member is required.
 	Geometry *types.GeofenceGeometry
 
-	// Identifies the state of the geofence. A geofence will hold one of the following
-	// states:
-	// - ACTIVE — The geofence has been indexed by the system.
-	// - PENDING — The
-	// geofence is being processed by the system.
-	// - FAILED — The geofence failed to be
-	// indexed by the system.
-	// - DELETED — The geofence has been deleted from the system
-	// index.
-	// - DELETING — The geofence is being deleted from the system index.
+	// Identifies the state of the geofence. A geofence will hold one of the
+	// following states:
+	//     - ACTIVE — The geofence has been indexed by the system.
+	//     - PENDING — The geofence is being processed by the system.
+	//     - FAILED — The geofence failed to be indexed by the system.
+	//     - DELETED — The geofence has been deleted from the system index.
+	//     - DELETING — The geofence is being deleted from the system index.
 	//
 	// This member is required.
 	Status *string
 
-	// The timestamp for when the geofence collection was last updated in ISO 8601
-	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp for when the geofence collection was last updated in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format: YYYY-MM-DDThh:mm:ss.sssZ
 	//
 	// This member is required.
 	UpdateTime *time.Time

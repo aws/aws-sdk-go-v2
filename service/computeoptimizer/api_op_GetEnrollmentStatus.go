@@ -39,8 +39,8 @@ type GetEnrollmentStatusInput struct {
 
 type GetEnrollmentStatusOutput struct {
 
-	// The Unix epoch timestamp, in seconds, of when the account enrollment status was
-	// last updated.
+	// The Unix epoch timestamp, in seconds, of when the account enrollment status
+	// was last updated.
 	LastUpdatedTimestamp *time.Time
 
 	// Confirms the enrollment status of member accounts of the organization, if the

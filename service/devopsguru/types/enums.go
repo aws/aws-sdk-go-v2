@@ -48,9 +48,9 @@ const (
 	AnomalyTypeContextual AnomalyType = "CONTEXTUAL"
 )
 
-// Values returns all known values for AnomalyType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AnomalyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AnomalyType) Values() []AnomalyType {
 	return []AnomalyType{
 		"CAUSAL",
@@ -93,8 +93,8 @@ const (
 	CloudWatchMetricsStatP50         CloudWatchMetricsStat = "p50"
 )
 
-// Values returns all known values for CloudWatchMetricsStat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for CloudWatchMetricsStat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (CloudWatchMetricsStat) Values() []CloudWatchMetricsStat {
 	return []CloudWatchMetricsStat{
@@ -136,8 +136,8 @@ const (
 	CostEstimationStatusCompleted CostEstimationStatus = "COMPLETED"
 )
 
-// Values returns all known values for CostEstimationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for CostEstimationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (CostEstimationStatus) Values() []CostEstimationStatus {
 	return []CostEstimationStatus{
@@ -217,8 +217,8 @@ const (
 	InsightFeedbackOptionDataIncorrect        InsightFeedbackOption = "DATA_INCORRECT"
 )
 
-// Values returns all known values for InsightFeedbackOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for InsightFeedbackOption. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (InsightFeedbackOption) Values() []InsightFeedbackOption {
 	return []InsightFeedbackOption{
@@ -276,9 +276,9 @@ const (
 	InsightTypeProactive InsightType = "PROACTIVE"
 )
 
-// Values returns all known values for InsightType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InsightType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (InsightType) Values() []InsightType {
 	return []InsightType{
 		"REACTIVE",
@@ -363,9 +363,9 @@ const (
 	NotificationMessageTypeNewRecommendation NotificationMessageType = "NEW_RECOMMENDATION"
 )
 
-// Values returns all known values for NotificationMessageType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for NotificationMessageType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationMessageType) Values() []NotificationMessageType {
 	return []NotificationMessageType{
 		"NEW_INSIGHT",
@@ -384,9 +384,9 @@ const (
 	OptInStatusDisabled OptInStatus = "DISABLED"
 )
 
-// Values returns all known values for OptInStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OptInStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (OptInStatus) Values() []OptInStatus {
 	return []OptInStatus{
 		"ENABLED",
@@ -554,9 +554,9 @@ const (
 	ServiceNameSwf              ServiceName = "SWF"
 )
 
-// Values returns all known values for ServiceName. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ServiceName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceName) Values() []ServiceName {
 	return []ServiceName{
 		"API_GATEWAY",

@@ -13,17 +13,11 @@ import (
 )
 
 // Returns the optimization findings for an account. It returns the number of:
-// -
-// Amazon EC2 instances in an account that are Underprovisioned, Overprovisioned,
-// or Optimized.
-// - Auto Scaling groups in an account that are NotOptimized, or
-// Optimized.
-// - Amazon EBS volumes in an account that are NotOptimized, or
-// Optimized.
-// - Lambda functions in an account that are NotOptimized, or
-// Optimized.
-// - Amazon ECS services in an account that are Underprovisioned,
-// Overprovisioned, or Optimized.
+//   - Amazon EC2 instances in an account that are Underprovisioned , Overprovisioned , or Optimized .
+//   - Auto Scaling groups in an account that are NotOptimized , or Optimized .
+//   - Amazon EBS volumes in an account that are NotOptimized , or Optimized .
+//   - Lambda functions in an account that are NotOptimized , or Optimized .
+//   - Amazon ECS services in an account that are Underprovisioned , Overprovisioned , or Optimized .
 func (c *Client) GetRecommendationSummaries(ctx context.Context, params *GetRecommendationSummariesInput, optFns ...func(*Options)) (*GetRecommendationSummariesOutput, error) {
 	if params == nil {
 		params = &GetRecommendationSummariesInput{}
@@ -47,9 +41,9 @@ type GetRecommendationSummariesInput struct {
 	// recommendation summaries. Only one account ID can be specified per request.
 	AccountIds []string
 
-	// The maximum number of recommendation summaries to return with a single request.
-	// To retrieve the remaining results, make another request with the returned
-	// nextToken value.
+	// The maximum number of recommendation summaries to return with a single
+	// request. To retrieve the remaining results, make another request with the
+	// returned nextToken  value.
 	MaxResults *int32
 
 	// The token to advance to the next page of recommendation summaries.
@@ -145,13 +139,13 @@ var _ GetRecommendationSummariesAPIClient = (*Client)(nil)
 // GetRecommendationSummariesPaginatorOptions is the paginator options for
 // GetRecommendationSummaries
 type GetRecommendationSummariesPaginatorOptions struct {
-	// The maximum number of recommendation summaries to return with a single request.
-	// To retrieve the remaining results, make another request with the returned
-	// nextToken value.
+	// The maximum number of recommendation summaries to return with a single
+	// request. To retrieve the remaining results, make another request with the
+	// returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

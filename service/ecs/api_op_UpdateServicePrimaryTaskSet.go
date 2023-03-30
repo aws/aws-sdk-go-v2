@@ -14,8 +14,7 @@ import (
 // Modifies which task set in a service is the primary task set. Any parameters
 // that are updated on the primary task set in a service will transition to the
 // service. This is used when a service uses the EXTERNAL deployment controller
-// type. For more information, see Amazon ECS Deployment Types
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
+// type. For more information, see Amazon ECS Deployment Types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) UpdateServicePrimaryTaskSet(ctx context.Context, params *UpdateServicePrimaryTaskSetInput, optFns ...func(*Options)) (*UpdateServicePrimaryTaskSetOutput, error) {
 	if params == nil {
@@ -34,14 +33,14 @@ func (c *Client) UpdateServicePrimaryTaskSet(ctx context.Context, params *Update
 
 type UpdateServicePrimaryTaskSetInput struct {
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
-	// service that the task set exists in.
+	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
+	// the service that the task set exists in.
 	//
 	// This member is required.
 	Cluster *string
 
-	// The short name or full Amazon Resource Name (ARN) of the task set to set as the
-	// primary task set in the deployment.
+	// The short name or full Amazon Resource Name (ARN) of the task set to set as
+	// the primary task set in the deployment.
 	//
 	// This member is required.
 	PrimaryTaskSet *string

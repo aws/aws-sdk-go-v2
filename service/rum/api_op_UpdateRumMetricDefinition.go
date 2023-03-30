@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies one existing metric definition for CloudWatch RUM extended metrics. For
-// more information about extended metrics, see BatchCreateRumMetricsDefinitions
-// (https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricsDefinitions.html).
+// Modifies one existing metric definition for CloudWatch RUM extended metrics.
+// For more information about extended metrics, see
+// BatchCreateRumMetricsDefinitions (https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricsDefinitions.html)
+// .
 func (c *Client) UpdateRumMetricDefinition(ctx context.Context, params *UpdateRumMetricDefinitionInput, optFns ...func(*Options)) (*UpdateRumMetricDefinitionOutput, error) {
 	if params == nil {
 		params = &UpdateRumMetricDefinitionInput{}
@@ -36,8 +37,8 @@ type UpdateRumMetricDefinitionInput struct {
 	// This member is required.
 	AppMonitorName *string
 
-	// The destination to send the metrics to. Valid values are CloudWatch and
-	// Evidently. If you specify Evidently, you must also specify the ARN of the
+	// The destination to send the metrics to. Valid values are CloudWatch  and
+	// Evidently . If you specify Evidently, you must also specify the ARN of the
 	// CloudWatchEvidently experiment that will receive the metrics and an IAM role
 	// that has permission to write to the experiment.
 	//
@@ -55,12 +56,12 @@ type UpdateRumMetricDefinitionInput struct {
 	// This member is required.
 	MetricDefinitionId *string
 
-	// This parameter is required if Destination is Evidently. If Destination is
+	// This parameter is required if Destination  is Evidently . If Destination  is
 	// CloudWatch, do not use this parameter. This parameter specifies the ARN of the
 	// Evidently experiment that is to receive the metrics. You must have already
 	// defined this experiment as a valid destination. For more information, see
-	// PutRumMetricsDestination
-	// (https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html).
+	// PutRumMetricsDestination (https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html)
+	// .
 	DestinationArn *string
 
 	noSmithyDocumentSerde

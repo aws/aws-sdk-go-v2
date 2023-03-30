@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The InvokeScreenAutomation API allows invoking an action defined in a screen in
-// a Honeycode app. The API allows setting local variables, which can then be used
-// in the automation being invoked. This allows automating the Honeycode app
+// The InvokeScreenAutomation API allows invoking an action defined in a screen
+// in a Honeycode app. The API allows setting local variables, which can then be
+// used in the automation being invoked. This allows automating the Honeycode app
 // interactions to write, update or delete data in the workbook.
 func (c *Client) InvokeScreenAutomation(ctx context.Context, params *InvokeScreenAutomationInput, optFns ...func(*Options)) (*InvokeScreenAutomationOutput, error) {
 	if params == nil {

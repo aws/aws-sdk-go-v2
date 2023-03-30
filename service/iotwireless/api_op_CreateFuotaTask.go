@@ -57,8 +57,8 @@ type CreateFuotaTaskInput struct {
 	// delay with the cloud.
 	FragmentIntervalMS *int32
 
-	// The size of each fragment in bytes. Currently only supported in fuota tasks with
-	// multicast groups.
+	// The size of each fragment in bytes. Currently only supported in fuota tasks
+	// with multicast groups.
 	FragmentSizeBytes *int32
 
 	// The LoRaWAN information used with a FUOTA task.
@@ -72,8 +72,8 @@ type CreateFuotaTaskInput struct {
 	// the final number of encoded fragments is (100 / 10) + (100 / 10 * 50%) = 15.
 	RedundancyPercent *int32
 
-	// The tag to attach to the specified resource. Tags are metadata that you can use
-	// to manage a resource.
+	// The tag to attach to the specified resource. Tags are metadata that you can
+	// use to manage a resource.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

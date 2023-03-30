@@ -28,7 +28,7 @@ func (c *Client) UpdateDomainConfig(ctx context.Context, params *UpdateDomainCon
 	return out, nil
 }
 
-// Container for the request parameters to the UpdateDomain operation.
+// Container for the request parameters to the UpdateDomain  operation.
 type UpdateDomainConfigInput struct {
 
 	// The name of the domain that you're updating.
@@ -41,28 +41,13 @@ type UpdateDomainConfigInput struct {
 
 	// Key-value pairs to specify advanced configuration options. The following
 	// key-value pairs are supported:
-	// - "rest.action.multi.allow_explicit_index":
-	// "true" | "false" - Note the use of a string rather than a boolean. Specifies
-	// whether explicit references to indexes are allowed inside the body of HTTP
-	// requests. If you want to configure access policies for domain sub-resources,
-	// such as specific indexes and domain APIs, you must disable this property.
-	// Default is true.
-	// - "indices.fielddata.cache.size": "80"  - Note the use of a
-	// string rather than a boolean. Specifies the percentage of heap space allocated
-	// to field data. Default is unbounded.
-	// - "indices.query.bool.max_clause_count":
-	// "1024" - Note the use of a string rather than a boolean. Specifies the maximum
-	// number of clauses allowed in a Lucene boolean query. Default is 1,024. Queries
-	// with more than the permitted number of clauses result in a TooManyClauses
-	// error.
-	// - "override_main_response_version": "true" | "false" - Note the use of a
-	// string rather than a boolean. Specifies whether the domain reports its version
-	// as 7.10 to allow Elasticsearch OSS clients and plugins to continue working with
-	// it. Default is false when creating a domain and true when upgrading a
-	// domain.
+	//     - "rest.action.multi.allow_explicit_index": "true" | "false" - Note the use of a string rather than a boolean. Specifies whether explicit references to indexes are allowed inside the body of HTTP requests. If you want to configure access policies for domain sub-resources, such as specific indexes and domain APIs, you must disable this property. Default is true.
+	//     - "indices.fielddata.cache.size": "80" - Note the use of a string rather than a boolean. Specifies the percentage of heap space allocated to field data. Default is unbounded.
+	//     - "indices.query.bool.max_clause_count": "1024" - Note the use of a string rather than a boolean. Specifies the maximum number of clauses allowed in a Lucene boolean query. Default is 1,024. Queries with more than the permitted number of clauses result in a TooManyClauses error.
+	//     - "override_main_response_version": "true" | "false" - Note the use of a string rather than a boolean. Specifies whether the domain reports its version as 7.10 to allow Elasticsearch OSS clients and plugins to continue working with it. Default is false when creating a domain and true when upgrading a domain.
 	//
-	// For more information, see Advanced cluster parameters
-	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options).
+	// For more information, see Advanced cluster parameters (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options)
+	// .
 	AdvancedOptions map[string]string
 
 	// Options for fine-grained access control.
@@ -71,16 +56,16 @@ type UpdateDomainConfigInput struct {
 	// Options for Auto-Tune.
 	AutoTuneOptions *types.AutoTuneOptions
 
-	// Changes that you want to make to the cluster configuration, such as the instance
-	// type and number of EC2 instances.
+	// Changes that you want to make to the cluster configuration, such as the
+	// instance type and number of EC2 instances.
 	ClusterConfig *types.ClusterConfig
 
 	// Key-value pairs to configure Amazon Cognito authentication for OpenSearch
 	// Dashboards.
 	CognitoOptions *types.CognitoOptions
 
-	// Additional options for the domain endpoint, such as whether to require HTTPS for
-	// all traffic.
+	// Additional options for the domain endpoint, such as whether to require HTTPS
+	// for all traffic.
 	DomainEndpointOptions *types.DomainEndpointOptions
 
 	// This flag, when set to True, specifies whether the UpdateDomain request should
@@ -89,12 +74,8 @@ type UpdateDomainConfigInput struct {
 	DryRun *bool
 
 	// The type of dry run to perform.
-	// - Basic only returns the type of deployment
-	// (blue/green or dynamic) that the update will cause.
-	// - Verbose runs an additional
-	// check to validate the changes you're making. For more information, see
-	// Validating a domain update
-	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check).
+	//     - Basic only returns the type of deployment (blue/green or dynamic) that the update will cause.
+	//     - Verbose runs an additional check to validate the changes you're making. For more information, see Validating a domain update (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check) .
 	DryRunMode types.DryRunMode
 
 	// The type and size of the EBS volume to attach to instances in the domain.
@@ -112,23 +93,24 @@ type UpdateDomainConfigInput struct {
 	// Off-peak window options for the domain.
 	OffPeakWindowOptions *types.OffPeakWindowOptions
 
-	// Option to set the time, in UTC format, for the daily automated snapshot. Default
-	// value is 0 hours.
+	// Option to set the time, in UTC format, for the daily automated snapshot.
+	// Default value is 0  hours.
 	SnapshotOptions *types.SnapshotOptions
 
 	// Service software update options for the domain.
 	SoftwareUpdateOptions *types.SoftwareUpdateOptions
 
-	// Options to specify the subnets and security groups for a VPC endpoint. For more
-	// information, see Launching your Amazon OpenSearch Service domains using a VPC
-	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html).
+	// Options to specify the subnets and security groups for a VPC endpoint. For
+	// more information, see Launching your Amazon OpenSearch Service domains using a
+	// VPC (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html)
+	// .
 	VPCOptions *types.VPCOptions
 
 	noSmithyDocumentSerde
 }
 
-// The results of an UpdateDomain request. Contains the status of the domain being
-// updated.
+// The results of an UpdateDomain request. Contains the status of the domain
+// being updated.
 type UpdateDomainConfigOutput struct {
 
 	// The status of the updated domain.

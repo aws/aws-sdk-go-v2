@@ -12,9 +12,8 @@ import (
 
 // Pushes an SSH public key to the specified EC2 instance. The key remains for 60
 // seconds, which gives you 60 seconds to establish a serial console connection to
-// the instance using SSH. For more information, see EC2 Serial Console
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-serial-console.html) in
-// the Amazon EC2 User Guide.
+// the instance using SSH. For more information, see EC2 Serial Console (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-serial-console.html)
+// in the Amazon EC2 User Guide.
 func (c *Client) SendSerialConsoleSSHPublicKey(ctx context.Context, params *SendSerialConsoleSSHPublicKeyInput, optFns ...func(*Options)) (*SendSerialConsoleSSHPublicKeyOutput, error) {
 	if params == nil {
 		params = &SendSerialConsoleSSHPublicKeyInput{}
@@ -39,8 +38,7 @@ type SendSerialConsoleSSHPublicKeyInput struct {
 
 	// The public key material. To use the public key, you must have the matching
 	// private key. For information about the supported key formats and lengths, see
-	// Requirements for key pairs
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws)
+	// Requirements for key pairs (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws)
 	// in the Amazon EC2 User Guide.
 	//
 	// This member is required.

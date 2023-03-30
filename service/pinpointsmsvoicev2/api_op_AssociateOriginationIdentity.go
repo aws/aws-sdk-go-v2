@@ -41,21 +41,21 @@ type AssociateOriginationIdentityInput struct {
 
 	// The origination identity to use, such as PhoneNumberId, PhoneNumberArn,
 	// SenderId, or SenderIdArn. You can use DescribePhoneNumbers to find the values
-	// for PhoneNumberId and PhoneNumberArn, while DescribeSenderIds can be used to get
-	// the values for SenderId and SenderIdArn.
+	// for PhoneNumberId and PhoneNumberArn, while DescribeSenderIds can be used to
+	// get the values for SenderId and SenderIdArn.
 	//
 	// This member is required.
 	OriginationIdentity *string
 
-	// The pool to update with the new Identity. This value can be either the PoolId or
-	// PoolArn, and you can find these values using DescribePools.
+	// The pool to update with the new Identity. This value can be either the PoolId
+	// or PoolArn, and you can find these values using DescribePools .
 	//
 	// This member is required.
 	PoolId *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. If you don't specify a client token, a randomly generated token is
-	// used for the request to ensure idempotency.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If you don't specify a client token, a randomly generated token
+	// is used for the request to ensure idempotency.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -63,7 +63,8 @@ type AssociateOriginationIdentityInput struct {
 
 type AssociateOriginationIdentityOutput struct {
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region.
 	IsoCountryCode *string
 
 	// The PhoneNumberId or SenderId of the origination identity.

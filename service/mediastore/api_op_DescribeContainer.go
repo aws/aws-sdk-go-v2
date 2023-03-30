@@ -15,8 +15,8 @@ import (
 // used to retrieve the endpoint of a container. An endpoint is a value assigned by
 // the service when a new container is created. A container's endpoint does not
 // change after it has been assigned. The DescribeContainer request returns a
-// single Container object based on ContainerName. To return all Container objects
-// that are associated with a specified AWS account, use ListContainers.
+// single Container  object based on ContainerName . To return all Container
+// objects that are associated with a specified AWS account, use ListContainers .
 func (c *Client) DescribeContainer(ctx context.Context, params *DescribeContainerInput, optFns ...func(*Options)) (*DescribeContainerOutput, error) {
 	if params == nil {
 		params = &DescribeContainerInput{}

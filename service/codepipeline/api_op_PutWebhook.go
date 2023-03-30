@@ -36,10 +36,10 @@ func (c *Client) PutWebhook(ctx context.Context, params *PutWebhookInput, optFns
 
 type PutWebhookInput struct {
 
-	// The detail provided in an input file to create the webhook, such as the webhook
-	// name, the pipeline name, and the action name. Give the webhook a unique name
-	// that helps you identify it. You might name the webhook after the pipeline and
-	// action it targets so that you can easily recognize what it's used for later.
+	// The detail provided in an input file to create the webhook, such as the
+	// webhook name, the pipeline name, and the action name. Give the webhook a unique
+	// name that helps you identify it. You might name the webhook after the pipeline
+	// and action it targets so that you can easily recognize what it's used for later.
 	//
 	// This member is required.
 	Webhook *types.WebhookDefinition
@@ -52,8 +52,8 @@ type PutWebhookInput struct {
 
 type PutWebhookOutput struct {
 
-	// The detail returned from creating the webhook, such as the webhook name, webhook
-	// URL, and webhook ARN.
+	// The detail returned from creating the webhook, such as the webhook name,
+	// webhook URL, and webhook ARN.
 	Webhook *types.ListWebhookItem
 
 	// Metadata pertaining to the operation's result.

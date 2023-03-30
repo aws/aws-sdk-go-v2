@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the Identity and Access Management (Amazon Web Services IAM) policy for
-// sharing the specified rule group. You can use the policy to share the rule group
-// using Resource Access Manager (RAM).
+// Returns the Identity and Access Management (Amazon Web Services IAM) policy
+// for sharing the specified rule group. You can use the policy to share the rule
+// group using Resource Access Manager (RAM).
 func (c *Client) GetFirewallRuleGroupPolicy(ctx context.Context, params *GetFirewallRuleGroupPolicyInput, optFns ...func(*Options)) (*GetFirewallRuleGroupPolicyOutput, error) {
 	if params == nil {
 		params = &GetFirewallRuleGroupPolicyInput{}
@@ -40,9 +40,9 @@ type GetFirewallRuleGroupPolicyInput struct {
 
 type GetFirewallRuleGroupPolicyOutput struct {
 
-	// The Identity and Access Management (Amazon Web Services IAM) policy for sharing
-	// the specified rule group. You can use the policy to share the rule group using
-	// Resource Access Manager (RAM).
+	// The Identity and Access Management (Amazon Web Services IAM) policy for
+	// sharing the specified rule group. You can use the policy to share the rule group
+	// using Resource Access Manager (RAM).
 	FirewallRuleGroupPolicy *string
 
 	// Metadata pertaining to the operation's result.

@@ -20,9 +20,8 @@ import (
 // account is in the SMS sandbox, you can use all of the features of Amazon SNS.
 // However, you can send SMS messages only to verified destination phone numbers.
 // For more information, including how to move out of the sandbox to send messages
-// without restrictions, see SMS sandbox
-// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) in the Amazon
-// SNS Developer Guide.
+// without restrictions, see SMS sandbox (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html)
+// in the Amazon SNS Developer Guide.
 func (c *Client) ListSMSSandboxPhoneNumbers(ctx context.Context, params *ListSMSSandboxPhoneNumbersInput, optFns ...func(*Options)) (*ListSMSSandboxPhoneNumbersOutput, error) {
 	if params == nil {
 		params = &ListSMSSandboxPhoneNumbersInput{}
@@ -43,7 +42,7 @@ type ListSMSSandboxPhoneNumbersInput struct {
 	// The maximum number of phone numbers to return.
 	MaxResults *int32
 
-	// Token that the previous ListSMSSandboxPhoneNumbersInput request returns.
+	// Token that the previous ListSMSSandboxPhoneNumbersInput  request returns.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -56,8 +55,9 @@ type ListSMSSandboxPhoneNumbersOutput struct {
 	// This member is required.
 	PhoneNumbers []types.SMSSandboxPhoneNumber
 
-	// A NextToken string is returned when you call the ListSMSSandboxPhoneNumbersInput
-	// operation if additional pages of records are available.
+	// A NextToken  string is returned when you call the
+	// ListSMSSandboxPhoneNumbersInputoperation if additional pages of records are
+	// available.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -140,8 +140,8 @@ type ListSMSSandboxPhoneNumbersPaginatorOptions struct {
 	// The maximum number of phone numbers to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

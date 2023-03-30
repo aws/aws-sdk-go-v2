@@ -11,34 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a configuration profile, which is information that enables AppConfig to
-// access the configuration source. Valid configuration sources include the
+// Creates a configuration profile, which is information that enables AppConfig
+// to access the configuration source. Valid configuration sources include the
 // following:
-// - Configuration data in YAML, JSON, and other formats stored in the
-// AppConfig hosted configuration store
-// - Configuration data stored as objects in
-// an Amazon Simple Storage Service (Amazon S3) bucket
-// - Pipelines stored in
-// CodePipeline
-// - Secrets stored in Secrets Manager
-// - Standard and secure string
-// parameters stored in Amazon Web Services Systems Manager Parameter Store
-// -
-// Configuration data in SSM documents stored in the Systems Manager document
-// store
+//   - Configuration data in YAML, JSON, and other formats stored in the AppConfig hosted configuration store
+//   - Configuration data stored as objects in an Amazon Simple Storage Service (Amazon S3) bucket
+//   - Pipelines stored in CodePipeline
+//   - Secrets stored in Secrets Manager
+//   - Standard and secure string parameters stored in Amazon Web Services Systems Manager Parameter Store
+//   - Configuration data in SSM documents stored in the Systems Manager document store
 //
 // A configuration profile includes the following information:
-// - The URI
-// location of the configuration data.
-// - The Identity and Access Management (IAM)
-// role that provides access to the configuration data.
-// - A validator for the
-// configuration data. Available validators include either a JSON Schema or an
-// Amazon Web Services Lambda function.
+//   - The URI location of the configuration data.
+//   - The Identity and Access Management (IAM) role that provides access to the configuration data.
+//   - A validator for the configuration data. Available validators include either a JSON Schema or an Amazon Web Services Lambda function.
 //
-// For more information, see Create a
-// Configuration and a Configuration Profile
-// (http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile.html)
+// For more information, see Create a Configuration and a Configuration Profile (http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile.html)
 // in the AppConfig User Guide.
 func (c *Client) CreateConfigurationProfile(ctx context.Context, params *CreateConfigurationProfileInput, optFns ...func(*Options)) (*CreateConfigurationProfileOutput, error) {
 	if params == nil {
@@ -63,20 +51,11 @@ type CreateConfigurationProfileInput struct {
 	ApplicationId *string
 
 	// A URI to locate the configuration. You can specify the following:
-	// - For the
-	// AppConfig hosted configuration store and for feature flags, specify hosted.
-	// -
-	// For an Amazon Web Services Systems Manager Parameter Store parameter, specify
-	// either the parameter name in the format ssm-parameter:// or the ARN.
-	// - For an
-	// Secrets Manager secret, specify the URI in the following format:
-	// secrets-manager://.
-	// - For an Amazon S3 object, specify the URI in the following
-	// format: s3:/// . Here is an example:
-	// s3://my-bucket/my-app/us-east-1/my-config.json
-	// - For an SSM document, specify
-	// either the document name in the format ssm-document:// or the Amazon Resource
-	// Name (ARN).
+	//     - For the AppConfig hosted configuration store and for feature flags, specify hosted .
+	//     - For an Amazon Web Services Systems Manager Parameter Store parameter, specify either the parameter name in the format ssm-parameter:// or the ARN.
+	//     - For an Secrets Manager secret, specify the URI in the following format: secrets-manager ://.
+	//     - For an Amazon S3 object, specify the URI in the following format: s3:/// . Here is an example: s3://my-bucket/my-app/us-east-1/my-config.json
+	//     - For an SSM document, specify either the document name in the format ssm-document:// or the Amazon Resource Name (ARN).
 	//
 	// This member is required.
 	LocationUri *string
@@ -100,11 +79,12 @@ type CreateConfigurationProfileInput struct {
 	// value, both of which you define.
 	Tags map[string]string
 
-	// The type of configurations contained in the profile. AppConfig supports feature
-	// flags and freeform configurations. We recommend you create feature flag
-	// configurations to enable or disable new features and freeform configurations to
-	// distribute configurations to an application. When calling this API, enter one of
-	// the following values for Type: AWS.AppConfig.FeatureFlags
+	// The type of configurations contained in the profile. AppConfig supports
+	// feature flags and freeform configurations. We recommend you create feature
+	// flag configurations to enable or disable new features and freeform
+	// configurations to distribute configurations to an application. When calling this
+	// API, enter one of the following values for Type : AWS.AppConfig.FeatureFlags
+	//
 	//     AWS.Freeform
 	Type *string
 
@@ -132,14 +112,15 @@ type CreateConfigurationProfileOutput struct {
 	Name *string
 
 	// The ARN of an IAM role with permission to access the configuration at the
-	// specified LocationUri.
+	// specified LocationUri .
 	RetrievalRoleArn *string
 
-	// The type of configurations contained in the profile. AppConfig supports feature
-	// flags and freeform configurations. We recommend you create feature flag
-	// configurations to enable or disable new features and freeform configurations to
-	// distribute configurations to an application. When calling this API, enter one of
-	// the following values for Type: AWS.AppConfig.FeatureFlags
+	// The type of configurations contained in the profile. AppConfig supports
+	// feature flags and freeform configurations. We recommend you create feature
+	// flag configurations to enable or disable new features and freeform
+	// configurations to distribute configurations to an application. When calling this
+	// API, enter one of the following values for Type : AWS.AppConfig.FeatureFlags
+	//
 	//     AWS.Freeform
 	Type *string
 

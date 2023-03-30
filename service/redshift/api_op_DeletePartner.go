@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a partner integration from a cluster. Data can still flow to the cluster
-// until the integration is deleted at the partner's website.
+// Deletes a partner integration from a cluster. Data can still flow to the
+// cluster until the integration is deleted at the partner's website.
 func (c *Client) DeletePartner(ctx context.Context, params *DeletePartnerInput, optFns ...func(*Options)) (*DeletePartnerOutput, error) {
 	if params == nil {
 		params = &DeletePartnerInput{}

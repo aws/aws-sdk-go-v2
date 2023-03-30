@@ -13,14 +13,13 @@ import (
 
 // Provides a list of the configuration sets associated with your Amazon SES
 // account in the current AWS Region. For information about using configuration
-// sets, see Monitoring Your Amazon SES Sending Activity
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
+// sets, see Monitoring Your Amazon SES Sending Activity (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
 // in the Amazon SES Developer Guide. You can execute this operation no more than
 // once per second. This operation will return up to 1,000 configuration sets each
 // time it is run. If your Amazon SES account has more than 1,000 configuration
 // sets, this operation will also return a NextToken element. You can then execute
-// the ListConfigurationSets operation again, passing the NextToken parameter and
-// the value of the NextToken element to retrieve additional results.
+// the ListConfigurationSets  operation again, passing the NextToken parameter
+// and the value of the NextToken element to retrieve additional results.
 func (c *Client) ListConfigurationSets(ctx context.Context, params *ListConfigurationSetsInput, optFns ...func(*Options)) (*ListConfigurationSetsOutput, error) {
 	if params == nil {
 		params = &ListConfigurationSetsInput{}
@@ -38,8 +37,8 @@ func (c *Client) ListConfigurationSets(ctx context.Context, params *ListConfigur
 
 // Represents a request to list the configuration sets associated with your AWS
 // account. Configuration sets enable you to publish email sending events. For
-// information about using configuration sets, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
+// information about using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
+// .
 type ListConfigurationSetsInput struct {
 
 	// The number of configuration sets to return.
@@ -54,15 +53,15 @@ type ListConfigurationSetsInput struct {
 
 // A list of configuration sets associated with your AWS account. Configuration
 // sets enable you to publish email sending events. For information about using
-// configuration sets, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
+// configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
+// .
 type ListConfigurationSetsOutput struct {
 
 	// A list of configuration sets.
 	ConfigurationSets []types.ConfigurationSet
 
-	// A token indicating that there are additional configuration sets available to be
-	// listed. Pass this token to successive calls of ListConfigurationSets.
+	// A token indicating that there are additional configuration sets available to
+	// be listed. Pass this token to successive calls of ListConfigurationSets .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Represents the failure of a third party job as returned to the pipeline by a job
-// worker. Used for partner actions only.
+// Represents the failure of a third party job as returned to the pipeline by a
+// job worker. Used for partner actions only.
 func (c *Client) PutThirdPartyJobFailureResult(ctx context.Context, params *PutThirdPartyJobFailureResultInput, optFns ...func(*Options)) (*PutThirdPartyJobFailureResultOutput, error) {
 	if params == nil {
 		params = &PutThirdPartyJobFailureResultInput{}
@@ -28,11 +28,11 @@ func (c *Client) PutThirdPartyJobFailureResult(ctx context.Context, params *PutT
 	return out, nil
 }
 
-// Represents the input of a PutThirdPartyJobFailureResult action.
+// Represents the input of a PutThirdPartyJobFailureResult  action.
 type PutThirdPartyJobFailureResultInput struct {
 
-	// The clientToken portion of the clientId and clientToken pair used to verify that
-	// the calling entity is allowed access to the job and its details.
+	// The clientToken portion of the clientId and clientToken pair used to verify
+	// that the calling entity is allowed access to the job and its details.
 	//
 	// This member is required.
 	ClientToken *string
@@ -43,7 +43,7 @@ type PutThirdPartyJobFailureResultInput struct {
 	FailureDetails *types.FailureDetails
 
 	// The ID of the job that failed. This is the same ID returned from
-	// PollForThirdPartyJobs.
+	// PollForThirdPartyJobs .
 	//
 	// This member is required.
 	JobId *string

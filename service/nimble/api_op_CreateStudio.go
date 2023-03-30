@@ -12,15 +12,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new studio. When creating a studio, two IAM roles must be provided: the
-// admin role and the user role. These roles are assumed by your users when they
-// log in to the Nimble Studio portal. The user role must have the
-// AmazonNimbleStudio-StudioUser managed policy attached for the portal to function
-// properly. The admin role must have the AmazonNimbleStudio-StudioAdmin managed
-// policy attached for the portal to function properly. You may optionally specify
-// a KMS key in the StudioEncryptionConfiguration. In Nimble Studio, resource
-// names, descriptions, initialization scripts, and other data you provide are
-// always encrypted at rest using an KMS key. By default, this key is owned by
+// Create a new studio. When creating a studio, two IAM roles must be provided:
+// the admin role and the user role. These roles are assumed by your users when
+// they log in to the Nimble Studio portal. The user role must have the
+// AmazonNimbleStudio-StudioUsermanaged policy attached for the portal to
+// function properly. The admin role must have the AmazonNimbleStudio-StudioAdmin
+// managed policy attached for the portal to function properly. You may optionally
+// specify a KMS key in the StudioEncryptionConfiguration. In Nimble Studio,
+// resource names, descriptions, initialization scripts, and other data you provide
+// are always encrypted at rest using an KMS key. By default, this key is owned by
 // Amazon Web Services and managed on your behalf. You may provide your own KMS key
 // when calling CreateStudio to encrypt this data using a key you own and manage.
 // When providing an KMS key during studio creation, Nimble Studio creates KMS
@@ -45,8 +45,8 @@ func (c *Client) CreateStudio(ctx context.Context, params *CreateStudioInput, op
 
 type CreateStudioInput struct {
 
-	// The IAM role that studio admins will assume when logging in to the Nimble Studio
-	// portal.
+	// The IAM role that studio admins will assume when logging in to the Nimble
+	// Studio portal.
 	//
 	// This member is required.
 	AdminRoleArn *string
@@ -62,14 +62,14 @@ type CreateStudioInput struct {
 	// This member is required.
 	StudioName *string
 
-	// The IAM role that studio users will assume when logging in to the Nimble Studio
-	// portal.
+	// The IAM role that studio users will assume when logging in to the Nimble
+	// Studio portal.
 	//
 	// This member is required.
 	UserRoleArn *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. If you don’t specify a client token, the Amazon Web Services SDK
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
 	ClientToken *string

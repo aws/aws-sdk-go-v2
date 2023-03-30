@@ -13,16 +13,15 @@ import (
 
 // This operation is used with the GameLift FleetIQ solution and game server
 // groups. Reinstates activity on a game server group after it has been suspended.
-// A game server group might be suspended by the SuspendGameServerGroup operation,
-// or it might be suspended involuntarily due to a configuration problem. In the
-// second case, you can manually resume activity on the group once the
-// configuration problem has been resolved. Refer to the game server group status
-// and status reason for more information on why group activity is suspended. To
-// resume activity, specify a game server group ARN and the type of activity to be
-// resumed. If successful, a GameServerGroup object is returned showing that the
-// resumed activity is no longer listed in SuspendedActions. Learn more GameLift
-// FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+// A game server group might be suspended by the SuspendGameServerGroup
+// operation, or it might be suspended involuntarily due to a configuration
+// problem. In the second case, you can manually resume activity on the group once
+// the configuration problem has been resolved. Refer to the game server group
+// status and status reason for more information on why group activity is
+// suspended. To resume activity, specify a game server group ARN and the type of
+// activity to be resumed. If successful, a GameServerGroup object is returned
+// showing that the resumed activity is no longer listed in SuspendedActions.
+// Learn more GameLift FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 func (c *Client) ResumeGameServerGroup(ctx context.Context, params *ResumeGameServerGroupInput, optFns ...func(*Options)) (*ResumeGameServerGroupOutput, error) {
 	if params == nil {
 		params = &ResumeGameServerGroupInput{}
@@ -40,7 +39,8 @@ func (c *Client) ResumeGameServerGroup(ctx context.Context, params *ResumeGameSe
 
 type ResumeGameServerGroupInput struct {
 
-	// A unique identifier for the game server group. Use either the name or ARN value.
+	// A unique identifier for the game server group. Use either the name or ARN
+	// value.
 	//
 	// This member is required.
 	GameServerGroupName *string

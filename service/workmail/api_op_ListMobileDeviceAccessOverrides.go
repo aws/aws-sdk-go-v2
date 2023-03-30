@@ -48,12 +48,9 @@ type ListMobileDeviceAccessOverridesInput struct {
 
 	// The WorkMail user under which you list the mobile device access overrides.
 	// Accepts the following types of user identities:
-	// - User ID:
-	// 12345678-1234-1234-1234-123456789012 or
-	// S-1-1-12-1234567890-123456789-123456789-1234
-	// - Email address: user@domain.tld
-	// -
-	// User name: user
+	//     - User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234
+	//     - Email address: user@domain.tld
+	//     - User name: user
 	UserId *string
 
 	noSmithyDocumentSerde
@@ -61,12 +58,12 @@ type ListMobileDeviceAccessOverridesInput struct {
 
 type ListMobileDeviceAccessOverridesOutput struct {
 
-	// The token to use to retrieve the next page of results. The value is “null” when
-	// there are no more results to return.
+	// The token to use to retrieve the next page of results. The value is “null”
+	// when there are no more results to return.
 	NextToken *string
 
-	// The list of mobile device access overrides that exist for the specified WorkMail
-	// organization and user.
+	// The list of mobile device access overrides that exist for the specified
+	// WorkMail organization and user.
 	Overrides []types.MobileDeviceAccessOverride
 
 	// Metadata pertaining to the operation's result.
@@ -152,8 +149,8 @@ type ListMobileDeviceAccessOverridesPaginatorOptions struct {
 	// The maximum number of results to return in a single call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

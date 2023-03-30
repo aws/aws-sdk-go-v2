@@ -31,9 +31,9 @@ func (c *Client) CreateVpcIngressConnection(ctx context.Context, params *CreateV
 
 type CreateVpcIngressConnectionInput struct {
 
-	// Specifications for the customer’s Amazon VPC and the related Amazon Web Services
-	// PrivateLink VPC endpoint that are used to create the VPC Ingress Connection
-	// resource.
+	// Specifications for the customer’s Amazon VPC and the related Amazon Web
+	// Services PrivateLink VPC endpoint that are used to create the VPC Ingress
+	// Connection resource.
 	//
 	// This member is required.
 	IngressVpcConfiguration *types.IngressVpcConfiguration
@@ -44,9 +44,9 @@ type CreateVpcIngressConnectionInput struct {
 	// This member is required.
 	ServiceArn *string
 
-	// A name for the VPC Ingress Connection resource. It must be unique across all the
-	// active VPC Ingress Connections in your Amazon Web Services account in the Amazon
-	// Web Services Region.
+	// A name for the VPC Ingress Connection resource. It must be unique across all
+	// the active VPC Ingress Connections in your Amazon Web Services account in the
+	// Amazon Web Services Region.
 	//
 	// This member is required.
 	VpcIngressConnectionName *string

@@ -12,12 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the details of one or more remediation exceptions. A detailed view of a
-// remediation exception for a set of resources that includes an explanation of an
-// exception and the time when the exception will be deleted. When you specify the
-// limit and the next token, you receive a paginated response. Config generates a
-// remediation exception when a problem occurs executing a remediation action to a
-// specific resource. Remediation exceptions blocks auto-remediation until the
+// Returns the details of one or more remediation exceptions. A detailed view of
+// a remediation exception for a set of resources that includes an explanation of
+// an exception and the time when the exception will be deleted. When you specify
+// the limit and the next token, you receive a paginated response. Config generates
+// a remediation exception when a problem occurs executing a remediation action to
+// a specific resource. Remediation exceptions blocks auto-remediation until the
 // exception is cleared. When you specify the limit and the next token, you receive
 // a paginated response. Limit and next token are not applicable if you request
 // resources in batch. It is only applicable, when you request all resources.
@@ -43,12 +43,12 @@ type DescribeRemediationExceptionsInput struct {
 	// This member is required.
 	ConfigRuleName *string
 
-	// The maximum number of RemediationExceptionResourceKey returned on each page. The
-	// default is 25. If you specify 0, Config uses the default.
+	// The maximum number of RemediationExceptionResourceKey returned on each page.
+	// The default is 25. If you specify 0, Config uses the default.
 	Limit int32
 
-	// The nextToken string returned in a previous request that you use to request the
-	// next page of results in a paginated response.
+	// The nextToken string returned in a previous request that you use to request
+	// the next page of results in a paginated response.
 	NextToken *string
 
 	// An exception list of resource exception keys to be processed with the current
@@ -61,8 +61,8 @@ type DescribeRemediationExceptionsInput struct {
 
 type DescribeRemediationExceptionsOutput struct {
 
-	// The nextToken string returned in a previous request that you use to request the
-	// next page of results in a paginated response.
+	// The nextToken string returned in a previous request that you use to request
+	// the next page of results in a paginated response.
 	NextToken *string
 
 	// Returns a list of remediation exception objects.
@@ -148,12 +148,12 @@ var _ DescribeRemediationExceptionsAPIClient = (*Client)(nil)
 // DescribeRemediationExceptionsPaginatorOptions is the paginator options for
 // DescribeRemediationExceptions
 type DescribeRemediationExceptionsPaginatorOptions struct {
-	// The maximum number of RemediationExceptionResourceKey returned on each page. The
-	// default is 25. If you specify 0, Config uses the default.
+	// The maximum number of RemediationExceptionResourceKey returned on each page.
+	// The default is 25. If you specify 0, Config uses the default.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

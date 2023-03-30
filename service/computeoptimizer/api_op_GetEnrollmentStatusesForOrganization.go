@@ -12,9 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the Compute Optimizer enrollment (opt-in) status of organization member
-// accounts, if your account is an organization management account. To get the
-// enrollment status of standalone accounts, use the GetEnrollmentStatus action.
+// Returns the Compute Optimizer enrollment (opt-in) status of organization
+// member accounts, if your account is an organization management account. To get
+// the enrollment status of standalone accounts, use the GetEnrollmentStatus
+// action.
 func (c *Client) GetEnrollmentStatusesForOrganization(ctx context.Context, params *GetEnrollmentStatusesForOrganizationInput, optFns ...func(*Options)) (*GetEnrollmentStatusesForOrganizationOutput, error) {
 	if params == nil {
 		params = &GetEnrollmentStatusesForOrganizationInput{}
@@ -38,8 +39,8 @@ type GetEnrollmentStatusesForOrganizationInput struct {
 
 	// The maximum number of account enrollment statuses to return with a single
 	// request. You can specify up to 100 statuses to return with each request. To
-	// retrieve the remaining results, make another request with the returned nextToken
-	// value.
+	// retrieve the remaining results, make another request with the returned
+	// nextToken value.
 	MaxResults *int32
 
 	// The token to advance to the next page of account enrollment statuses.
@@ -50,8 +51,8 @@ type GetEnrollmentStatusesForOrganizationInput struct {
 
 type GetEnrollmentStatusesForOrganizationOutput struct {
 
-	// An array of objects that describe the enrollment statuses of organization member
-	// accounts.
+	// An array of objects that describe the enrollment statuses of organization
+	// member accounts.
 	AccountEnrollmentStatuses []types.AccountEnrollmentStatus
 
 	// The token to use to advance to the next page of account enrollment statuses.
@@ -138,12 +139,12 @@ var _ GetEnrollmentStatusesForOrganizationAPIClient = (*Client)(nil)
 type GetEnrollmentStatusesForOrganizationPaginatorOptions struct {
 	// The maximum number of account enrollment statuses to return with a single
 	// request. You can specify up to 100 statuses to return with each request. To
-	// retrieve the remaining results, make another request with the returned nextToken
-	// value.
+	// retrieve the remaining results, make another request with the returned
+	// nextToken value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

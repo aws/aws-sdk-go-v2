@@ -22,8 +22,7 @@ import (
 // practice, ensure that you have permissions in place to avoid inadvertently
 // deleting accelerators. You can use IAM policies with Global Accelerator to limit
 // the users who have permissions to delete an accelerator. For more information,
-// see Identity and access management
-// (https://docs.aws.amazon.com/global-accelerator/latest/dg/auth-and-access-control.html)
+// see Identity and access management (https://docs.aws.amazon.com/global-accelerator/latest/dg/auth-and-access-control.html)
 // in the Global Accelerator Developer Guide.
 func (c *Client) DeleteCustomRoutingAccelerator(ctx context.Context, params *DeleteCustomRoutingAcceleratorInput, optFns ...func(*Options)) (*DeleteCustomRoutingAcceleratorOutput, error) {
 	if params == nil {

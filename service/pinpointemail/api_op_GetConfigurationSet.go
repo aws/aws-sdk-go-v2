@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get information about an existing configuration set, including the dedicated IP
-// pool that it's associated with, whether or not it's enabled for sending email,
-// and more. In Amazon Pinpoint, configuration sets are groups of rules that you
-// can apply to the emails you send. You apply a configuration set to an email by
-// including a reference to the configuration set in the headers of the email. When
-// you apply a configuration set to an email, all of the rules in that
+// Get information about an existing configuration set, including the dedicated
+// IP pool that it's associated with, whether or not it's enabled for sending
+// email, and more. In Amazon Pinpoint, configuration sets are groups of rules that
+// you can apply to the emails you send. You apply a configuration set to an email
+// by including a reference to the configuration set in the headers of the email.
+// When you apply a configuration set to an email, all of the rules in that
 // configuration set are applied to the email.
 func (c *Client) GetConfigurationSet(ctx context.Context, params *GetConfigurationSetInput, optFns ...func(*Options)) (*GetConfigurationSetOutput, error) {
 	if params == nil {

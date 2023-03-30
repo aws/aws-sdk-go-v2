@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or overwrites one or more tags for the specified directory. Each directory
-// can have a maximum of 50 tags. Each tag consists of a key and optional value.
-// Tag keys must be unique to each resource.
+// Adds or overwrites one or more tags for the specified directory. Each
+// directory can have a maximum of 50 tags. Each tag consists of a key and optional
+// value. Tag keys must be unique to each resource.
 func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {
 	if params == nil {
 		params = &AddTagsToResourceInput{}

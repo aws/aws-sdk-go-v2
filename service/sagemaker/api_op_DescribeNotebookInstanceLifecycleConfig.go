@@ -14,8 +14,8 @@ import (
 
 // Returns a description of a notebook instance lifecycle configuration. For
 // information about notebook instance lifestyle configurations, see Step 2.1:
-// (Optional) Customize a Notebook Instance
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html).
+// (Optional) Customize a Notebook Instance (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html)
+// .
 func (c *Client) DescribeNotebookInstanceLifecycleConfig(ctx context.Context, params *DescribeNotebookInstanceLifecycleConfigInput, optFns ...func(*Options)) (*DescribeNotebookInstanceLifecycleConfigOutput, error) {
 	if params == nil {
 		params = &DescribeNotebookInstanceLifecycleConfigInput{}

@@ -11,11 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the list of Identity and Access Management (IAM) roles that can be used
-// by the cluster to access other Amazon Web Services services. The maximum number
-// of IAM roles that you can associate is subject to a quota. For more information,
-// go to Quotas and limits
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
+// Modifies the list of Identity and Access Management (IAM) roles that can be
+// used by the cluster to access other Amazon Web Services services. The maximum
+// number of IAM roles that you can associate is subject to a quota. For more
+// information, go to Quotas and limits (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) ModifyClusterIamRoles(ctx context.Context, params *ModifyClusterIamRolesInput, optFns ...func(*Options)) (*ModifyClusterIamRolesOutput, error) {
 	if params == nil {
@@ -40,12 +39,12 @@ type ModifyClusterIamRolesInput struct {
 	// This member is required.
 	ClusterIdentifier *string
 
-	// Zero or more IAM roles to associate with the cluster. The roles must be in their
-	// Amazon Resource Name (ARN) format.
+	// Zero or more IAM roles to associate with the cluster. The roles must be in
+	// their Amazon Resource Name (ARN) format.
 	AddIamRoles []string
 
-	// The Amazon Resource Name (ARN) for the IAM role that was set as default for the
-	// cluster when the cluster was last modified.
+	// The Amazon Resource Name (ARN) for the IAM role that was set as default for
+	// the cluster when the cluster was last modified.
 	DefaultIamRoleArn *string
 
 	// Zero or more IAM roles in ARN format to disassociate from the cluster.

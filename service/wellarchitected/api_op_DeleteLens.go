@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete an existing lens. Only the owner of a lens can delete it. After the lens
-// is deleted, Amazon Web Services accounts and IAM users that you shared the lens
-// with can continue to use it, but they will no longer be able to apply it to new
-// workloads. Disclaimer By sharing your custom lenses with other Amazon Web
+// Delete an existing lens. Only the owner of a lens can delete it. After the
+// lens is deleted, Amazon Web Services accounts and IAM users that you shared the
+// lens with can continue to use it, but they will no longer be able to apply it to
+// new workloads. Disclaimer By sharing your custom lenses with other Amazon Web
 // Services accounts, you acknowledge that Amazon Web Services will make your
 // custom lenses available to those other accounts. Those other accounts may
 // continue to access and use your shared custom lenses even if you delete the
@@ -51,11 +51,11 @@ type DeleteLensInput struct {
 	ClientRequestToken *string
 
 	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless, or the lens ARN, such as
+	// the lens alias, such as serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
 	// the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
-	// identified by its LensSummary$LensAlias.
+	// identified by its LensSummary$LensAlias .
 	//
 	// This member is required.
 	LensAlias *string

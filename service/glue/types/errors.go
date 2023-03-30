@@ -137,7 +137,7 @@ func (e *ConditionCheckFailureException) ErrorCode() string {
 }
 func (e *ConditionCheckFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The CreatePartitions API was called on a table that has indexes enabled.
+// The CreatePartitions  API was called on a table that has indexes enabled.
 type ConflictException struct {
 	Message *string
 

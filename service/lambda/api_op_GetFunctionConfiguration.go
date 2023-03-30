@@ -19,7 +19,7 @@ import (
 // Returns the version-specific settings of a Lambda function or version. The
 // output includes only options that can vary between versions of a function. To
 // modify these settings, use UpdateFunctionConfiguration. To get all of a
-// function's details, including function-level settings, use GetFunction.
+// function's details, including function-level settings, use GetFunction .
 func (c *Client) GetFunctionConfiguration(ctx context.Context, params *GetFunctionConfigurationInput, optFns ...func(*Options)) (*GetFunctionConfigurationOutput, error) {
 	if params == nil {
 		params = &GetFunctionConfigurationInput{}
@@ -38,16 +38,13 @@ func (c *Client) GetFunctionConfiguration(ctx context.Context, params *GetFuncti
 type GetFunctionConfigurationInput struct {
 
 	// The name of the Lambda function, version, or alias. Name formats
-	// - Function name
-	// – my-function (name-only), my-function:v1 (with alias).
-	// - Function ARN –
-	// arn:aws:lambda:us-west-2:123456789012:function:my-function.
-	// - Partial ARN –
-	// 123456789012:function:my-function.
-	//
-	// You can append a version number or alias to
-	// any of the formats. The length constraint applies only to the full ARN. If you
-	// specify only the function name, it is limited to 64 characters in length.
+	//     - Function name – my-function (name-only), my-function:v1 (with alias).
+	//     - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//     - Partial ARN – 123456789012:function:my-function .
+	// You can append a
+	// version number or alias to any of the formats. The length constraint applies
+	// only to the full ARN. If you specify only the function name, it is limited to 64
+	// characters in length.
 	//
 	// This member is required.
 	FunctionName *string
@@ -64,7 +61,7 @@ type GetFunctionConfigurationOutput struct {
 
 	// The instruction set architecture that the function supports. Architecture is a
 	// string array with one of the valid values. The default architecture value is
-	// x86_64.
+	// x86_64 .
 	Architectures []types.Architecture
 
 	// The SHA256 hash of the function's deployment package.
@@ -79,17 +76,16 @@ type GetFunctionConfigurationOutput struct {
 	// The function's description.
 	Description *string
 
-	// The function's environment variables
-	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).
-	// Omitted from CloudTrail logs.
+	// The function's environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)
+	// . Omitted from CloudTrail logs.
 	Environment *types.EnvironmentResponse
 
 	// The size of the function’s /tmp directory in MB. The default value is 512, but
 	// it can be any whole number between 512 and 10,240 MB.
 	EphemeralStorage *types.EphemeralStorage
 
-	// Connection settings for an Amazon EFS file system
-	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).
+	// Connection settings for an Amazon EFS file system (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)
+	// .
 	FileSystemConfigs []types.FileSystemConfig
 
 	// The function's Amazon Resource Name (ARN).
@@ -104,20 +100,18 @@ type GetFunctionConfigurationOutput struct {
 	// The function's image configuration values.
 	ImageConfigResponse *types.ImageConfigResponse
 
-	// The KMS key that's used to encrypt the function's environment variables
-	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption).
-	// When Lambda SnapStart
-	// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html) is
-	// activated, this key is also used to encrypt the function's snapshot. This key is
-	// returned only if you've configured a customer managed key.
+	// The KMS key that's used to encrypt the function's environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption)
+	// . When Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html)
+	// is activated, this key is also used to encrypt the function's snapshot. This key
+	// is returned only if you've configured a customer managed key.
 	KMSKeyArn *string
 
-	// The date and time that the function was last updated, in ISO-8601 format
-	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
+	// The date and time that the function was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
+	// (YYYY-MM-DDThh:mm:ss.sTZD).
 	LastModified *string
 
-	// The status of the last update that was performed on the function. This is first
-	// set to Successful after function creation completes.
+	// The status of the last update that was performed on the function. This is
+	// first set to Successful  after function creation completes.
 	LastUpdateStatus types.LastUpdateStatus
 
 	// The reason for the last update that was performed on the function.
@@ -126,8 +120,8 @@ type GetFunctionConfigurationOutput struct {
 	// The reason code for the last update that was performed on the function.
 	LastUpdateStatusReasonCode types.LastUpdateStatusReasonCode
 
-	// The function's layers
-	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
+	// The function's layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
+	// .
 	Layers []types.Layer
 
 	// For Lambda@Edge functions, the ARN of the main function.
@@ -136,8 +130,8 @@ type GetFunctionConfigurationOutput struct {
 	// The amount of memory available to the function at runtime.
 	MemorySize *int32
 
-	// The type of deployment package. Set to Image for container image and set Zip for
-	// .zip file archive.
+	// The type of deployment package. Set to Image  for container image and set Zip
+	// for .zip file archive.
 	PackageType types.PackageType
 
 	// The latest updated revision of the function or alias.
@@ -158,10 +152,10 @@ type GetFunctionConfigurationOutput struct {
 	// The ARN of the signing profile version.
 	SigningProfileVersionArn *string
 
-	// Set ApplyOn to PublishedVersions to create a snapshot of the initialized
+	// Set ApplyOn  to PublishedVersions to create a snapshot of the initialized
 	// execution environment when you publish a function version. For more information,
-	// see Improving startup performance with Lambda SnapStart
-	// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html).
+	// see Improving startup performance with Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html)
+	// .
 	SnapStart *types.SnapStartResponse
 
 	// The current state of the function. When the state is Inactive, you can
@@ -171,8 +165,8 @@ type GetFunctionConfigurationOutput struct {
 	// The reason for the function's current state.
 	StateReason *string
 
-	// The reason code for the function's current state. When the code is Creating, you
-	// can't invoke or modify the function.
+	// The reason code for the function's current state. When the code is Creating,
+	// you can't invoke or modify the function.
 	StateReasonCode types.StateReasonCode
 
 	// The amount of time in seconds that Lambda allows a function to run before
@@ -278,9 +272,9 @@ type FunctionActiveWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, FunctionActiveWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, FunctionActiveWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -320,9 +314,9 @@ func NewFunctionActiveWaiter(client GetFunctionConfigurationAPIClient, optFns ..
 	}
 }
 
-// Wait calls the waiter function for FunctionActive waiter. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// Wait calls the waiter function for FunctionActive waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *FunctionActiveWaiter) Wait(ctx context.Context, params *GetFunctionConfigurationInput, maxWaitDur time.Duration, optFns ...func(*FunctionActiveWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -472,9 +466,9 @@ type FunctionUpdatedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, FunctionUpdatedWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, FunctionUpdatedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -514,9 +508,9 @@ func NewFunctionUpdatedWaiter(client GetFunctionConfigurationAPIClient, optFns .
 	}
 }
 
-// Wait calls the waiter function for FunctionUpdated waiter. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// Wait calls the waiter function for FunctionUpdated waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *FunctionUpdatedWaiter) Wait(ctx context.Context, params *GetFunctionConfigurationInput, maxWaitDur time.Duration, optFns ...func(*FunctionUpdatedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -667,9 +661,10 @@ type PublishedVersionActiveWaiterOptions struct {
 	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, PublishedVersionActiveWaiter will use default max delay of 120 seconds.
-	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, PublishedVersionActiveWaiter will use default max delay of 120
+	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
+	// MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -709,9 +704,9 @@ func NewPublishedVersionActiveWaiter(client GetFunctionConfigurationAPIClient, o
 	}
 }
 
-// Wait calls the waiter function for PublishedVersionActive waiter. The maxWaitDur
-// is the maximum wait duration the waiter will wait. The maxWaitDur is required
-// and must be greater than zero.
+// Wait calls the waiter function for PublishedVersionActive waiter. The
+// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
+// required and must be greater than zero.
 func (w *PublishedVersionActiveWaiter) Wait(ctx context.Context, params *GetFunctionConfigurationInput, maxWaitDur time.Duration, optFns ...func(*PublishedVersionActiveWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

@@ -12,18 +12,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or updates one or more JSON Line entries in a dataset. A JSON Line includes
-// information about an image used for training or testing an Amazon Lookout for
-// Vision model. To update an existing JSON Line, use the source-ref field to
-// identify the JSON Line. The JSON line that you supply replaces the existing JSON
-// line. Any existing annotations that are not in the new JSON line are removed
-// from the dataset. For more information, see Defining JSON lines for anomaly
-// classification in the Amazon Lookout for Vision Developer Guide. The images you
-// reference in the source-ref field of a JSON line, must be in the same S3 bucket
-// as the existing images in the dataset. Updating a dataset might take a while to
-// complete. To check the current status, call DescribeDataset and check the Status
-// field in the response. This operation requires permissions to perform the
-// lookoutvision:UpdateDatasetEntries operation.
+// Adds or updates one or more JSON Line entries in a dataset. A JSON Line
+// includes information about an image used for training or testing an Amazon
+// Lookout for Vision model. To update an existing JSON Line, use the source-ref
+// field to identify the JSON Line. The JSON line that you supply replaces the
+// existing JSON line. Any existing annotations that are not in the new JSON line
+// are removed from the dataset. For more information, see Defining JSON lines for
+// anomaly classification in the Amazon Lookout for Vision Developer Guide. The
+// images you reference in the source-ref field of a JSON line, must be in the
+// same S3 bucket as the existing images in the dataset. Updating a dataset might
+// take a while to complete. To check the current status, call DescribeDataset
+// and check the Status field in the response. This operation requires
+// permissions to perform the lookoutvision:UpdateDatasetEntries  operation.
 func (c *Client) UpdateDatasetEntries(ctx context.Context, params *UpdateDatasetEntriesInput, optFns ...func(*Options)) (*UpdateDatasetEntriesOutput, error) {
 	if params == nil {
 		params = &UpdateDatasetEntriesInput{}
@@ -47,8 +47,8 @@ type UpdateDatasetEntriesInput struct {
 	Changes []byte
 
 	// The type of the dataset that you want to update. Specify train to update the
-	// training dataset. Specify test to update the test dataset. If you have a single
-	// dataset project, specify train.
+	// training dataset. Specify test to update the test dataset. If you have a
+	// single dataset project, specify train .
 	//
 	// This member is required.
 	DatasetType *string
@@ -61,12 +61,13 @@ type UpdateDatasetEntriesInput struct {
 	// ClientToken is an idempotency token that ensures a call to UpdateDatasetEntries
 	// completes only once. You choose the value to pass. For example, An issue might
 	// prevent you from getting a response from UpdateDatasetEntries. In this case,
-	// safely retry your call to UpdateDatasetEntries by using the same ClientToken
+	// safely retry your call to UpdateDatasetEntries  by using the same ClientToken
 	// parameter value. If you don't supply a value for ClientToken, the AWS SDK you
 	// are using inserts a value for you. This prevents retries after a network error
 	// from making multiple updates with the same dataset entries. You'll need to
 	// provide your own value for other use cases. An error occurs if the other input
 	// parameters are not the same as in the first request. Using a different value for
+	//
 	// ClientToken is considered a new call to UpdateDatasetEntries. An idempotency
 	// token is active for 8 hours.
 	ClientToken *string

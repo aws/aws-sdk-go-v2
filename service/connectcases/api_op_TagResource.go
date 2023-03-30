@@ -33,8 +33,8 @@ type TagResourceInput struct {
 	// This member is required.
 	Arn *string
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
-	// organize, track, or control access for this resource.
+	// A map of of key-value pairs that represent tags on a resource. Tags are used
+	// to organize, track, or control access for this resource.
 	//
 	// This member is required.
 	Tags map[string]*string

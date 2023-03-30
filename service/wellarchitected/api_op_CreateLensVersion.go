@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new lens version. A lens can have up to 100 versions. After a lens has
-// been imported, create a new lens version to publish it. The owner of a lens can
-// share the lens with other Amazon Web Services accounts and IAM users in the same
-// Amazon Web Services Region. Only the owner of a lens can delete it.
+// Create a new lens version. A lens can have up to 100 versions. After a lens
+// has been imported, create a new lens version to publish it. The owner of a lens
+// can share the lens with other Amazon Web Services accounts and IAM users in the
+// same Amazon Web Services Region. Only the owner of a lens can delete it.
 func (c *Client) CreateLensVersion(ctx context.Context, params *CreateLensVersionInput, optFns ...func(*Options)) (*CreateLensVersionOutput, error) {
 	if params == nil {
 		params = &CreateLensVersionInput{}
@@ -45,11 +45,11 @@ type CreateLensVersionInput struct {
 	ClientRequestToken *string
 
 	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless, or the lens ARN, such as
+	// the lens alias, such as serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
 	// the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
-	// identified by its LensSummary$LensAlias.
+	// identified by its LensSummary$LensAlias .
 	//
 	// This member is required.
 	LensAlias *string

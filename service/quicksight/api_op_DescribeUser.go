@@ -36,7 +36,7 @@ type DescribeUserInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The namespace. Currently, you should set this to default.
+	// The namespace. Currently, you should set this to default .
 	//
 	// This member is required.
 	Namespace *string

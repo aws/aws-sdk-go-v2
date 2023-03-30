@@ -12,20 +12,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the versions of a secret. Secrets Manager uses staging labels to indicate
-// the different versions of a secret. For more information, see  Secrets Manager
-// concepts: Versions
-// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/getting-started.html#term_version).
-// To list the secrets in the account, use ListSecrets. Secrets Manager generates a
-// CloudTrail log entry when you call this action. Do not include sensitive
-// information in request parameters because it might be logged. For more
-// information, see Logging Secrets Manager events with CloudTrail
-// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html).
-// Required permissions: secretsmanager:ListSecretVersionIds. For more information,
-// see  IAM policy actions for Secrets Manager
-// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
-// and Authentication and access control in Secrets Manager
-// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
+// Lists the versions of a secret. Secrets Manager uses staging labels to
+// indicate the different versions of a secret. For more information, see Secrets
+// Manager concepts: Versions (https://docs.aws.amazon.com/secretsmanager/latest/userguide/getting-started.html#term_version)
+// . To list the secrets in the account, use ListSecrets. Secrets Manager
+// generates a CloudTrail log entry when you call this action. Do not include
+// sensitive information in request parameters because it might be logged. For more
+// information, see Logging Secrets Manager events with CloudTrail (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html)
+// . Required permissions: secretsmanager:ListSecretVersionIds. For more
+// information, see IAM policy actions for Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
+// and Authentication and access control in Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html)
+// .
 func (c *Client) ListSecretVersionIds(ctx context.Context, params *ListSecretVersionIdsInput, optFns ...func(*Options)) (*ListSecretVersionIdsOutput, error) {
 	if params == nil {
 		params = &ListSecretVersionIdsInput{}
@@ -44,9 +41,9 @@ func (c *Client) ListSecretVersionIds(ctx context.Context, params *ListSecretVer
 type ListSecretVersionIdsInput struct {
 
 	// The ARN or name of the secret whose versions you want to list. For an ARN, we
-	// recommend that you specify a complete ARN rather than a partial ARN. See Finding
-	// a secret from a partial ARN
-	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen).
+	// recommend that you specify a complete ARN rather than a partial ARN. See
+	// Finding a secret from a partial ARN (https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen)
+	// .
 	//
 	// This member is required.
 	SecretId *string
@@ -57,13 +54,13 @@ type ListSecretVersionIdsInput struct {
 	IncludeDeprecated *bool
 
 	// The number of results to include in the response. If there are more results
-	// available, in the response, Secrets Manager includes NextToken. To get the next
-	// results, call ListSecretVersionIds again with the value from NextToken.
+	// available, in the response, Secrets Manager includes NextToken. To get the
+	// next results, call ListSecretVersionIds  again with the value from NextToken .
 	MaxResults *int32
 
-	// A token that indicates where the output should continue from, if a previous call
-	// did not show all results. To get the next results, call ListSecretVersionIds
-	// again with this value.
+	// A token that indicates where the output should continue from, if a previous
+	// call did not show all results. To get the next results, call
+	// ListSecretVersionIds again with this value.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -80,7 +77,7 @@ type ListSecretVersionIdsOutput struct {
 	// Secrets Manager includes this value if there's more output available than what
 	// is included in the current response. This can occur even when the response
 	// includes no values at all, such as when you ask for a filtered view of a long
-	// list. To get the next results, call ListSecretVersionIds again with this value.
+	// list. To get the next results, call ListSecretVersionIds  again with this value.
 	NextToken *string
 
 	// A list of the versions of the secret.
@@ -167,12 +164,12 @@ var _ ListSecretVersionIdsAPIClient = (*Client)(nil)
 // ListSecretVersionIds
 type ListSecretVersionIdsPaginatorOptions struct {
 	// The number of results to include in the response. If there are more results
-	// available, in the response, Secrets Manager includes NextToken. To get the next
-	// results, call ListSecretVersionIds again with the value from NextToken.
+	// available, in the response, Secrets Manager includes NextToken. To get the
+	// next results, call ListSecretVersionIds  again with the value from NextToken .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

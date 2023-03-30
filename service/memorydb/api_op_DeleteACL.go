@@ -12,9 +12,9 @@ import (
 )
 
 // Deletes an Access Control List. The ACL must first be disassociated from the
-// cluster before it can be deleted. For more information, see Authenticating users
-// with Access Contol Lists (ACLs)
-// (https://docs.aws.amazon.com/MemoryDB/latest/devguide/clusters.acls.html).
+// cluster before it can be deleted. For more information, see Authenticating
+// users with Access Contol Lists (ACLs) (https://docs.aws.amazon.com/MemoryDB/latest/devguide/clusters.acls.html)
+// .
 func (c *Client) DeleteACL(ctx context.Context, params *DeleteACLInput, optFns ...func(*Options)) (*DeleteACLOutput, error) {
 	if params == nil {
 		params = &DeleteACLInput{}

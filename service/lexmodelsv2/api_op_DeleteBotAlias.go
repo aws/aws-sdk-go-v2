@@ -42,8 +42,8 @@ type DeleteBotAliasInput struct {
 	// By default, Amazon Lex checks if any other resource, such as a bot network, is
 	// using the bot alias before it is deleted and throws a ResourceInUseException
 	// exception if the alias is being used by another resource. Set this parameter to
-	// true to skip this check and remove the alias even if it is being used by another
-	// resource.
+	// trueto skip this check and remove the alias even if it is being used by
+	// another resource.
 	SkipResourceInUseCheck bool
 
 	noSmithyDocumentSerde
@@ -56,7 +56,7 @@ type DeleteBotAliasOutput struct {
 
 	// The current status of the alias. The status is Deleting while the alias is in
 	// the process of being deleted. Once the alias is deleted, it will no longer
-	// appear in the list of aliases returned by the ListBotAliases operation.
+	// appear in the list of aliases returned by the ListBotAliases  operation.
 	BotAliasStatus types.BotAliasStatus
 
 	// The unique identifier of the bot that contains the alias to delete.

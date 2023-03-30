@@ -47,8 +47,8 @@ type DisassociateResolverRuleInput struct {
 
 type DisassociateResolverRuleOutput struct {
 
-	// Information about the DisassociateResolverRule request, including the status of
-	// the request.
+	// Information about the DisassociateResolverRule request, including the status
+	// of the request.
 	ResolverRuleAssociation *types.ResolverRuleAssociation
 
 	// Metadata pertaining to the operation's result.

@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-// Describes a quota for an Amazon Web Services account, for example the number of
-// replication instances allowed.
+// Describes a quota for an Amazon Web Services account, for example the number
+// of replication instances allowed.
 type AccountQuota struct {
 
 	// The name of the DMS quota for this Amazon Web Services account.
@@ -24,8 +24,7 @@ type AccountQuota struct {
 }
 
 // The name of an Availability Zone for use during database migration.
-// AvailabilityZone is an optional parameter to the CreateReplicationInstance
-// (https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationInstance.html)
+// AvailabilityZone is an optional parameter to the CreateReplicationInstance (https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationInstance.html)
 // operation, and it’s value relates to the Amazon Web Services Region of an
 // endpoint. For example, the availability zone of an endpoint in the us-east-1
 // region might be us-east-1a, us-east-1b, us-east-1c, or us-east-1d.
@@ -71,11 +70,11 @@ type Certificate struct {
 	// The owner of the certificate.
 	CertificateOwner *string
 
-	// The contents of a .pem file, which contains an X.509 certificate.
+	// The contents of a .pem  file, which contains an X.509 certificate.
 	CertificatePem *string
 
-	// The location of an imported Oracle Wallet certificate for use with SSL. Example:
-	// filebase64("${path.root}/rds-ca-2019-root.sso")
+	// The location of an imported Oracle Wallet certificate for use with SSL.
+	// Example: filebase64("${path.root}/rds-ca-2019-root.sso")
 	CertificateWallet []byte
 
 	// The key length of the cryptographic algorithm being used.
@@ -102,8 +101,8 @@ type CollectorHealthCheck struct {
 	// Whether the local collector can access its Amazon S3 bucket.
 	LocalCollectorS3Access *bool
 
-	// Whether the role that you provided when creating the Fleet Advisor collector has
-	// sufficient permissions to access the Fleet Advisor web collector.
+	// Whether the role that you provided when creating the Fleet Advisor collector
+	// has sufficient permissions to access the Fleet Advisor web collector.
 	WebCollectorGrantedRoleBasedAccess *bool
 
 	// Whether the web collector can access its Amazon S3 bucket.
@@ -124,8 +123,8 @@ type CollectorResponse struct {
 	// The reference ID of the Fleet Advisor collector.
 	CollectorReferencedId *string
 
-	// The version of your Fleet Advisor collector, in semantic versioning format, for
-	// example 1.0.2
+	// The version of your Fleet Advisor collector, in semantic versioning format,
+	// for example 1.0.2
 	CollectorVersion *string
 
 	// The timestamp when you created the collector, in the following format:
@@ -198,11 +197,10 @@ type Connection struct {
 	ReplicationInstanceIdentifier *string
 
 	// The connection status. This parameter can return one of the following values:
-	// -
-	// "successful"
-	// - "testing"
-	// - "failed"
-	// - "deleting"
+	//     - "successful"
+	//     - "testing"
+	//     - "failed"
+	//     - "deleting"
 	Status *string
 
 	noSmithyDocumentSerde
@@ -212,15 +210,15 @@ type Connection struct {
 type DatabaseInstanceSoftwareDetailsResponse struct {
 
 	// The database engine of a database in a Fleet Advisor collector inventory, for
-	// example Microsoft SQL Server.
+	// example Microsoft SQL Server .
 	Engine *string
 
 	// The database engine edition of a database in a Fleet Advisor collector
-	// inventory, for example Express.
+	// inventory, for example Express .
 	EngineEdition *string
 
 	// The database engine version of a database in a Fleet Advisor collector
-	// inventory, for example 2019.
+	// inventory, for example 2019 .
 	EngineVersion *string
 
 	// The operating system architecture of the database.
@@ -229,11 +227,11 @@ type DatabaseInstanceSoftwareDetailsResponse struct {
 	// The service pack level of the database.
 	ServicePack *string
 
-	// The support level of the database, for example Mainstream support.
+	// The support level of the database, for example Mainstream support .
 	SupportLevel *string
 
 	// Information about the database engine software, for example Mainstream support
-	// ends on November 14th, 2024.
+	// ends on November 14th, 2024 .
 	Tooltip *string
 
 	noSmithyDocumentSerde
@@ -260,8 +258,8 @@ type DatabaseResponse struct {
 	// The server name of a database in a Fleet Advisor collector inventory.
 	Server *ServerShortInfoResponse
 
-	// The software details of a database in a Fleet Advisor collector inventory, such
-	// as database engine and version.
+	// The software details of a database in a Fleet Advisor collector inventory,
+	// such as database engine and version.
 	SoftwareDetails *DatabaseInstanceSoftwareDetailsResponse
 
 	noSmithyDocumentSerde
@@ -271,7 +269,7 @@ type DatabaseResponse struct {
 type DatabaseShortInfoResponse struct {
 
 	// The database engine of a database in a Fleet Advisor collector inventory, for
-	// example PostgreSQL.
+	// example PostgreSQL .
 	DatabaseEngine *string
 
 	// The ID of a database in a Fleet Advisor collector inventory.
@@ -293,7 +291,7 @@ type DmsTransferSettings struct {
 	BucketName *string
 
 	// The Amazon Resource Name (ARN) used by the service access IAM role. The role
-	// must allow the iam:PassRole action.
+	// must allow the iam:PassRole  action.
 	ServiceAccessRoleArn *string
 
 	noSmithyDocumentSerde
@@ -306,23 +304,23 @@ type DocDbSettings struct {
 	DatabaseName *string
 
 	// Indicates the number of documents to preview to determine the document
-	// organization. Use this setting when NestingLevel is set to "one". Must be a
-	// positive value greater than 0. Default value is 1000.
+	// organization. Use this setting when NestingLevel  is set to "one". Must be a
+	// positive value greater than 0 . Default value is 1000 .
 	DocsToInvestigate *int32
 
-	// Specifies the document ID. Use this setting when NestingLevel is set to "none".
-	// Default value is "false".
+	// Specifies the document ID. Use this setting when NestingLevel  is set to "none"
+	// . Default value is "false" .
 	ExtractDocId *bool
 
 	// The KMS key identifier that is used to encrypt the content on the replication
-	// instance. If you don't specify a value for the KmsKeyId parameter, then DMS uses
-	// your default encryption key. KMS creates the default encryption key for your
-	// Amazon Web Services account. Your Amazon Web Services account has a different
-	// default encryption key for each Amazon Web Services Region.
+	// instance. If you don't specify a value for the KmsKeyId parameter, then DMS
+	// uses your default encryption key. KMS creates the default encryption key for
+	// your Amazon Web Services account. Your Amazon Web Services account has a
+	// different default encryption key for each Amazon Web Services Region.
 	KmsKeyId *string
 
-	// Specifies either document or table mode. Default value is "none". Specify "none"
-	// to use document mode. Specify "one" to use table mode.
+	// Specifies either document or table mode. Default value is "none" . Specify
+	// "none" to use document mode. Specify "one"  to use table mode.
 	NestingLevel NestingLevelValue
 
 	// The password for the user account you use to access the DocumentDB source
@@ -334,16 +332,15 @@ type DocDbSettings struct {
 
 	// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
 	// trusted entity and grants the required permissions to access the value in
-	// SecretsManagerSecret. The role must allow the iam:PassRole action.
-	// SecretsManagerSecret has the value of the Amazon Web Services Secrets Manager
+	// SecretsManagerSecret . The role must allow the iam:PassRole  action.
+	// SecretsManagerSecrethas the value of the Amazon Web Services Secrets Manager
 	// secret that allows access to the DocumentDB endpoint. You can specify one of two
 	// sets of values for these permissions. You can specify the values for this
-	// setting and SecretsManagerSecretId. Or you can specify clear-text values for
-	// UserName, Password, ServerName, and Port. You can't specify both. For more
-	// information on creating this SecretsManagerSecret and the
+	// setting and SecretsManagerSecretId . Or you can specify clear-text values for
+	// UserName , Password , ServerName , and Port. You can't specify both. For more
+	// information on creating this SecretsManagerSecret  and the
 	// SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it,
-	// see Using secrets to access Database Migration Service resources
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// see Using secrets to access Database Migration Service resources (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
 	// in the Database Migration Service User Guide.
 	SecretsManagerAccessRoleArn *string
 
@@ -365,7 +362,7 @@ type DocDbSettings struct {
 type DynamoDbSettings struct {
 
 	// The Amazon Resource Name (ARN) used by the service to access the IAM role. The
-	// role must allow the iam:PassRole action.
+	// role must allow the iam:PassRole  action.
 	//
 	// This member is required.
 	ServiceAccessRoleArn *string
@@ -376,14 +373,14 @@ type DynamoDbSettings struct {
 // Provides information that defines an OpenSearch endpoint.
 type ElasticsearchSettings struct {
 
-	// The endpoint for the OpenSearch cluster. DMS uses HTTPS if a transport protocol
-	// (http/https) is not specified.
+	// The endpoint for the OpenSearch cluster. DMS uses HTTPS if a transport
+	// protocol (http/https) is not specified.
 	//
 	// This member is required.
 	EndpointUri *string
 
 	// The Amazon Resource Name (ARN) used by the service to access the IAM role. The
-	// role must allow the iam:PassRole action.
+	// role must allow the iam:PassRole  action.
 	//
 	// This member is required.
 	ServiceAccessRoleArn *string
@@ -392,16 +389,17 @@ type ElasticsearchSettings struct {
 	// OpenSearch cluster.
 	ErrorRetryDuration *int32
 
-	// The maximum percentage of records that can fail to be written before a full load
-	// operation stops. To avoid early failure, this counter is only effective after
-	// 1000 records are transferred. OpenSearch also has the concept of error
+	// The maximum percentage of records that can fail to be written before a full
+	// load operation stops. To avoid early failure, this counter is only effective
+	// after 1000 records are transferred. OpenSearch also has the concept of error
 	// monitoring during the last 10 minutes of an Observation Window. If transfer of
 	// all records fail in the last 10 minutes, the full load operation stops.
 	FullLoadErrorPercentage *int32
 
-	// Set this option to true for DMS to migrate documentation using the documentation
-	// type _doc. OpenSearch and an Elasticsearch cluster only support the _doc
-	// documentation type in versions 7. x and later. The default value is false.
+	// Set this option to true for DMS to migrate documentation using the
+	// documentation type _doc. OpenSearch and an Elasticsearch cluster only support
+	// the _doc documentation type in versions 7. x and later. The default value is
+	// false .
 	UseNewMappingType *bool
 
 	noSmithyDocumentSerde
@@ -409,9 +407,9 @@ type ElasticsearchSettings struct {
 
 // Describes an endpoint of a database instance in response to operations such as
 // the following:
-// - CreateEndpoint
-// - DescribeEndpoint
-// - ModifyEndpoint
+//   - CreateEndpoint
+//   - DescribeEndpoint
+//   - ModifyEndpoint
 type Endpoint struct {
 
 	// The Amazon Resource Name (ARN) used for SSL connection to the endpoint.
@@ -438,23 +436,23 @@ type Endpoint struct {
 	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
 	EndpointArn *string
 
-	// The database endpoint identifier. Identifiers must begin with a letter and must
-	// contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or
-	// contain two consecutive hyphens.
+	// The database endpoint identifier. Identifiers must begin with a letter and
+	// must contain only ASCII letters, digits, and hyphens. They can't end with a
+	// hyphen or contain two consecutive hyphens.
 	EndpointIdentifier *string
 
-	// The type of endpoint. Valid values are source and target.
+	// The type of endpoint. Valid values are source  and target .
 	EndpointType ReplicationEndpointTypeValue
 
-	// The expanded name for the engine name. For example, if the EngineName parameter
-	// is "aurora", this value would be "Amazon Aurora MySQL".
+	// The expanded name for the engine name. For example, if the EngineName
+	// parameter is "aurora", this value would be "Amazon Aurora MySQL".
 	EngineDisplayName *string
 
 	// The database engine name. Valid values, depending on the EndpointType, include
-	// "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql",
-	// "redshift", "s3", "db2", "db2-zos", "azuredb", "sybase", "dynamodb", "mongodb",
-	// "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", "neptune", and
-	// "babelfish".
+	// "mysql" , "oracle" , "postgres" , "mariadb" , "aurora" , "aurora-postgresql" ,
+	// "redshift" , "s3" , "db2" , "db2-zos" , "azuredb" , "sybase" , "dynamodb" ,
+	// "mongodb" , "kinesis" , "kafka" , "elasticsearch" , "documentdb" , "sqlserver"
+	// , "neptune" , and "babelfish" .
 	EngineName *string
 
 	// Value returned by a call to CreateEndpoint that can be used for cross-account
@@ -471,50 +469,50 @@ type Endpoint struct {
 	// Settings in JSON format for the source GCP MySQL endpoint.
 	GcpMySQLSettings *GcpMySQLSettings
 
-	// The settings for the IBM Db2 LUW source endpoint. For more information, see the
-	// IBMDb2Settings structure.
+	// The settings for the IBM Db2 LUW source endpoint. For more information, see
+	// the IBMDb2Settings  structure.
 	IBMDb2Settings *IBMDb2Settings
 
-	// The settings for the Apache Kafka target endpoint. For more information, see the
-	// KafkaSettings structure.
+	// The settings for the Apache Kafka target endpoint. For more information, see
+	// the KafkaSettings  structure.
 	KafkaSettings *KafkaSettings
 
 	// The settings for the Amazon Kinesis target endpoint. For more information, see
-	// the KinesisSettings structure.
+	// the KinesisSettings  structure.
 	KinesisSettings *KinesisSettings
 
-	// An KMS key identifier that is used to encrypt the connection parameters for the
-	// endpoint. If you don't specify a value for the KmsKeyId parameter, then DMS uses
-	// your default encryption key. KMS creates the default encryption key for your
-	// Amazon Web Services account. Your Amazon Web Services account has a different
-	// default encryption key for each Amazon Web Services Region.
+	// An KMS key identifier that is used to encrypt the connection parameters for
+	// the endpoint. If you don't specify a value for the KmsKeyId parameter, then
+	// DMS uses your default encryption key. KMS creates the default encryption key for
+	// your Amazon Web Services account. Your Amazon Web Services account has a
+	// different default encryption key for each Amazon Web Services Region.
 	KmsKeyId *string
 
 	// The settings for the Microsoft SQL Server source and target endpoint. For more
-	// information, see the MicrosoftSQLServerSettings structure.
+	// information, see the MicrosoftSQLServerSettings  structure.
 	MicrosoftSQLServerSettings *MicrosoftSQLServerSettings
 
 	// The settings for the MongoDB source endpoint. For more information, see the
 	// MongoDbSettings structure.
 	MongoDbSettings *MongoDbSettings
 
-	// The settings for the MySQL source and target endpoint. For more information, see
-	// the MySQLSettings structure.
+	// The settings for the MySQL source and target endpoint. For more information,
+	// see the MySQLSettings  structure.
 	MySQLSettings *MySQLSettings
 
 	// The settings for the Amazon Neptune target endpoint. For more information, see
-	// the NeptuneSettings structure.
+	// the NeptuneSettings  structure.
 	NeptuneSettings *NeptuneSettings
 
 	// The settings for the Oracle source and target endpoint. For more information,
-	// see the OracleSettings structure.
+	// see the OracleSettings  structure.
 	OracleSettings *OracleSettings
 
 	// The port value used to access the endpoint.
 	Port *int32
 
 	// The settings for the PostgreSQL source and target endpoint. For more
-	// information, see the PostgreSQLSettings structure.
+	// information, see the PostgreSQLSettings  structure.
 	PostgreSQLSettings *PostgreSQLSettings
 
 	// The settings for the Redis target endpoint. For more information, see the
@@ -532,17 +530,17 @@ type Endpoint struct {
 	ServerName *string
 
 	// The Amazon Resource Name (ARN) used by the service to access the IAM role. The
-	// role must allow the iam:PassRole action.
+	// role must allow the iam:PassRole  action.
 	ServiceAccessRoleArn *string
 
-	// The SSL mode used to connect to the endpoint. The default value is none.
+	// The SSL mode used to connect to the endpoint. The default value is none .
 	SslMode DmsSslModeValue
 
 	// The status of the endpoint.
 	Status *string
 
 	// The settings for the SAP ASE source and target endpoint. For more information,
-	// see the SybaseSettings structure.
+	// see the SybaseSettings  structure.
 	SybaseSettings *SybaseSettings
 
 	// The user name used to connect to the endpoint.
@@ -559,16 +557,16 @@ type EndpointSetting struct {
 	Applicability *string
 
 	// The default value of the endpoint setting if no value is specified using
-	// CreateEndpoint or ModifyEndpoint.
+	// CreateEndpoint or ModifyEndpoint .
 	DefaultValue *string
 
 	// Enumerated values to use for this endpoint.
 	EnumValues []string
 
-	// The maximum value of an endpoint setting that is of type int.
+	// The maximum value of an endpoint setting that is of type int .
 	IntValueMax *int32
 
-	// The minimum value of an endpoint setting that is of type int.
+	// The minimum value of an endpoint setting that is of type int .
 	IntValueMin *int32
 
 	// The name that you want to give the endpoint settings.
@@ -577,7 +575,7 @@ type EndpointSetting struct {
 	// A value that marks this endpoint setting as sensitive.
 	Sensitive *bool
 
-	// The type of endpoint. Valid values are source and target.
+	// The type of endpoint. Valid values are source  and target .
 	Type EndpointSettingTypeValue
 
 	// The unit of measure for this endpoint setting.
@@ -611,8 +609,8 @@ type Event struct {
 }
 
 // Lists categories of events subscribed to, and generated by, the applicable DMS
-// resource type. This data type appears in response to the DescribeEventCategories
-// (https://docs.aws.amazon.com/dms/latest/APIReference/API_EventCategoryGroup.html)
+// resource type. This data type appears in response to the
+// DescribeEventCategories (https://docs.aws.amazon.com/dms/latest/APIReference/API_EventCategoryGroup.html)
 // action.
 type EventCategoryGroup struct {
 
@@ -672,7 +670,7 @@ type EventSubscription struct {
 // API operations.
 type Filter struct {
 
-	// The name of the filter as specified for a Describe* or similar operation.
+	// The name of the filter as specified for a Describe*  or similar operation.
 	//
 	// This member is required.
 	Name *string
@@ -710,15 +708,16 @@ type FleetAdvisorSchemaObjectResponse struct {
 	// inventory.
 	CodeSize *int64
 
-	// The number of objects in a schema object in a Fleet Advisor collector inventory.
+	// The number of objects in a schema object in a Fleet Advisor collector
+	// inventory.
 	NumberOfObjects *int64
 
 	// The type of the schema object, as reported by the database engine. Examples
 	// include the following:
-	// - function
-	// - trigger
-	// - SYSTEM_TABLE
-	// - QUEUE
+	//     - function
+	//     - trigger
+	//     - SYSTEM_TABLE
+	//     - QUEUE
 	ObjectType *string
 
 	// The ID of a schema object in a Fleet Advisor collector inventory.
@@ -736,23 +735,23 @@ type GcpMySQLSettings struct {
 	// of a file containing the script.
 	AfterConnectScript *string
 
-	// Cleans and recreates table metadata information on the replication instance when
-	// a mismatch occurs. For example, in a situation where running an alter DDL on the
-	// table could result in different information about the table cached in the
+	// Cleans and recreates table metadata information on the replication instance
+	// when a mismatch occurs. For example, in a situation where running an alter DDL
+	// on the table could result in different information about the table cached in the
 	// replication instance.
 	CleanSourceMetadataOnMismatch *bool
 
 	// Database name for the endpoint. For a MySQL source or target endpoint, don't
 	// explicitly specify the database using the DatabaseName request parameter on
-	// either the CreateEndpoint or ModifyEndpoint API call. Specifying DatabaseName
+	// either the CreateEndpoint  or ModifyEndpoint  API call. Specifying DatabaseName
 	// when you create or modify a MySQL endpoint replicates all the task tables to
 	// this single database. For MySQL endpoints, you specify the database only when
 	// you specify the schema in the table-mapping rules of the DMS task.
 	DatabaseName *string
 
 	// Specifies how often to check the binary log for new changes/events when the
-	// database is idle. The default is five seconds. Example: eventsPollInterval=5; In
-	// the example, DMS checks for changes in the binary logs every five seconds.
+	// database is idle. The default is five seconds. Example: eventsPollInterval=5;
+	// In the example, DMS checks for changes in the binary logs every five seconds.
 	EventsPollInterval *int32
 
 	// Specifies the maximum size (in KB) of any .csv file used to transfer data to a
@@ -774,16 +773,16 @@ type GcpMySQLSettings struct {
 
 	// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
 	// trusted entity and grants the required permissions to access the value in
-	// SecretsManagerSecret. The role must allow the iam:PassRole action.
-	// SecretsManagerSecret has the value of the Amazon Web Services Secrets Manager
+	// SecretsManagerSecret. The role must allow the iam:PassRole  action.
+	// SecretsManagerSecrethas the value of the Amazon Web Services Secrets Manager
 	// secret that allows access to the MySQL endpoint. You can specify one of two sets
 	// of values for these permissions. You can specify the values for this setting and
-	// SecretsManagerSecretId. Or you can specify clear-text values for UserName,
-	// Password, ServerName, and Port. You can't specify both. For more information on
-	// creating this SecretsManagerSecret and the SecretsManagerAccessRoleArn and
+	//
+	// SecretsManagerSecretId . Or you can specify clear-text values for UserName ,
+	// Password , ServerName , and Port. You can't specify both. For more information
+	// on creating this SecretsManagerSecret  and the SecretsManagerAccessRoleArn  and
 	// SecretsManagerSecretId required to access it, see Using secrets to access
-	// Database Migration Service resources
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// Database Migration Service resources (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
 	// in the Database Migration Service User Guide.
 	SecretsManagerAccessRoleArn *string
 
@@ -829,16 +828,15 @@ type IBMDb2Settings struct {
 
 	// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
 	// trusted entity and grants the required permissions to access the value in
-	// SecretsManagerSecret. The role must allow the iam:PassRole action.
-	// SecretsManagerSecret has the value of the Amazon Web Services Secrets Manager
+	// SecretsManagerSecret . The role must allow the iam:PassRole  action.
+	// SecretsManagerSecrethas the value of the Amazon Web Services Secrets Manager
 	// secret that allows access to the Db2 LUW endpoint. You can specify one of two
 	// sets of values for these permissions. You can specify the values for this
-	// setting and SecretsManagerSecretId. Or you can specify clear-text values for
-	// UserName, Password, ServerName, and Port. You can't specify both. For more
-	// information on creating this SecretsManagerSecret and the
+	// setting and SecretsManagerSecretId . Or you can specify clear-text values for
+	// UserName , Password , ServerName , and Port. You can't specify both. For more
+	// information on creating this SecretsManagerSecret  and the
 	// SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it,
-	// see Using secrets to access Database Migration Service resources
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// see Using secrets to access Database Migration Service resources (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
 	// in the Database Migration Service User Guide.
 	SecretsManagerAccessRoleArn *string
 
@@ -880,60 +878,59 @@ type KafkaSettings struct {
 	// broker-hostname-or-ip:port . For example,
 	// "ec2-12-345-678-901.compute-1.amazonaws.com:2345". For more information and
 	// examples of specifying a list of broker locations, see Using Apache Kafka as a
-	// target for Database Migration Service
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html) in the
-	// Database Migration Service User Guide.
+	// target for Database Migration Service (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html)
+	// in the Database Migration Service User Guide.
 	Broker *string
 
-	// Shows detailed control information for table definition, column definition, and
-	// table and column changes in the Kafka message output. The default is false.
+	// Shows detailed control information for table definition, column definition,
+	// and table and column changes in the Kafka message output. The default is false .
 	IncludeControlDetails *bool
 
-	// Include NULL and empty columns for records migrated to the endpoint. The default
-	// is false.
+	// Include NULL and empty columns for records migrated to the endpoint. The
+	// default is false .
 	IncludeNullAndEmpty *bool
 
 	// Shows the partition value within the Kafka message output unless the partition
-	// type is schema-table-type. The default is false.
+	// type is schema-table-type . The default is false .
 	IncludePartitionValue *bool
 
-	// Includes any data definition language (DDL) operations that change the table in
-	// the control data, such as rename-table, drop-table, add-column, drop-column, and
-	// rename-column. The default is false.
+	// Includes any data definition language (DDL) operations that change the table
+	// in the control data, such as rename-table , drop-table , add-column ,
+	// drop-column , and rename-column . The default is false .
 	IncludeTableAlterOperations *bool
 
 	// Provides detailed transaction information from the source database. This
 	// information includes a commit timestamp, a log position, and values for
-	// transaction_id, previous transaction_id, and transaction_record_id (the record
-	// offset within a transaction). The default is false.
+	// transaction_id , previous transaction_id , and transaction_record_id (the
+	// record offset within a transaction). The default is false .
 	IncludeTransactionDetails *bool
 
-	// The output format for the records created on the endpoint. The message format is
-	// JSON (default) or JSON_UNFORMATTED (a single line with no tab).
+	// The output format for the records created on the endpoint. The message format
+	// is JSON  (default) or JSON_UNFORMATTED  (a single line with no tab).
 	MessageFormat MessageFormatValue
 
 	// The maximum size in bytes for records created on the endpoint The default is
 	// 1,000,000.
 	MessageMaxBytes *int32
 
-	// Set this optional parameter to true to avoid adding a '0x' prefix to raw data in
-	// hexadecimal format. For example, by default, DMS adds a '0x' prefix to the LOB
-	// column type in hexadecimal format moving from an Oracle source to a Kafka
+	// Set this optional parameter to true to avoid adding a '0x' prefix to raw data
+	// in hexadecimal format. For example, by default, DMS adds a '0x' prefix to the
+	// LOB column type in hexadecimal format moving from an Oracle source to a Kafka
 	// target. Use the NoHexPrefix endpoint setting to enable migration of RAW data
 	// type columns without adding the '0x' prefix.
 	NoHexPrefix *bool
 
-	// Prefixes schema and table names to partition values, when the partition type is
-	// primary-key-type. Doing this increases data distribution among Kafka partitions.
-	// For example, suppose that a SysBench schema has thousands of tables and each
-	// table has only limited range for a primary key. In this case, the same primary
-	// key is sent from thousands of tables to the same partition, which causes
-	// throttling. The default is false.
+	// Prefixes schema and table names to partition values, when the partition type
+	// is primary-key-type. Doing this increases data distribution among Kafka
+	// partitions. For example, suppose that a SysBench schema has thousands of tables
+	// and each table has only limited range for a primary key. In this case, the same
+	// primary key is sent from thousands of tables to the same partition, which causes
+	// throttling. The default is false .
 	PartitionIncludeSchemaTable *bool
 
 	// For SASL/SSL authentication, DMS supports the SCRAM-SHA-512 mechanism by
 	// default. DMS versions 3.5.0 and later also support the PLAIN mechanism. To use
-	// the PLAIN mechanism, set this parameter to PLAIN.
+	// the PLAIN  mechanism, set this parameter to PLAIN.
 	SaslMechanism KafkaSaslMechanism
 
 	// The secure password you created when you first set up your MSK cluster to
@@ -946,9 +943,9 @@ type KafkaSettings struct {
 	// client using SASL-SSL authentication.
 	SaslUsername *string
 
-	// Set secure connection to a Kafka target endpoint using Transport Layer Security
-	// (TLS). Options include ssl-encryption, ssl-authentication, and sasl-ssl.
-	// sasl-ssl requires SaslUsername and SaslPassword.
+	// Set secure connection to a Kafka target endpoint using Transport Layer
+	// Security (TLS). Options include ssl-encryption , ssl-authentication , and
+	// sasl-ssl . sasl-ssl  requires SaslUsername  and SaslPassword .
 	SecurityProtocol KafkaSecurityProtocol
 
 	// The Amazon Resource Name (ARN) for the private certificate authority (CA) cert
@@ -968,61 +965,62 @@ type KafkaSettings struct {
 	SslClientKeyPassword *string
 
 	// The topic to which you migrate the data. If you don't specify a topic, DMS
-	// specifies "kafka-default-topic" as the migration topic.
+	// specifies "kafka-default-topic"  as the migration topic.
 	Topic *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides information that describes an Amazon Kinesis Data Stream endpoint. This
-// information includes the output format of records applied to the endpoint and
-// details of transaction and control table data information.
+// Provides information that describes an Amazon Kinesis Data Stream endpoint.
+// This information includes the output format of records applied to the endpoint
+// and details of transaction and control table data information.
 type KinesisSettings struct {
 
-	// Shows detailed control information for table definition, column definition, and
-	// table and column changes in the Kinesis message output. The default is false.
+	// Shows detailed control information for table definition, column definition,
+	// and table and column changes in the Kinesis message output. The default is
+	// false .
 	IncludeControlDetails *bool
 
-	// Include NULL and empty columns for records migrated to the endpoint. The default
-	// is false.
+	// Include NULL and empty columns for records migrated to the endpoint. The
+	// default is false .
 	IncludeNullAndEmpty *bool
 
 	// Shows the partition value within the Kinesis message output, unless the
-	// partition type is schema-table-type. The default is false.
+	// partition type is schema-table-type . The default is false .
 	IncludePartitionValue *bool
 
-	// Includes any data definition language (DDL) operations that change the table in
-	// the control data, such as rename-table, drop-table, add-column, drop-column, and
-	// rename-column. The default is false.
+	// Includes any data definition language (DDL) operations that change the table
+	// in the control data, such as rename-table , drop-table , add-column ,
+	// drop-column , and rename-column . The default is false .
 	IncludeTableAlterOperations *bool
 
 	// Provides detailed transaction information from the source database. This
 	// information includes a commit timestamp, a log position, and values for
-	// transaction_id, previous transaction_id, and transaction_record_id (the record
-	// offset within a transaction). The default is false.
+	// transaction_id , previous transaction_id , and transaction_record_id (the
+	// record offset within a transaction). The default is false .
 	IncludeTransactionDetails *bool
 
-	// The output format for the records created on the endpoint. The message format is
-	// JSON (default) or JSON_UNFORMATTED (a single line with no tab).
+	// The output format for the records created on the endpoint. The message format
+	// is JSON  (default) or JSON_UNFORMATTED  (a single line with no tab).
 	MessageFormat MessageFormatValue
 
-	// Set this optional parameter to true to avoid adding a '0x' prefix to raw data in
-	// hexadecimal format. For example, by default, DMS adds a '0x' prefix to the LOB
-	// column type in hexadecimal format moving from an Oracle source to an Amazon
-	// Kinesis target. Use the NoHexPrefix endpoint setting to enable migration of RAW
-	// data type columns without adding the '0x' prefix.
+	// Set this optional parameter to true to avoid adding a '0x' prefix to raw data
+	// in hexadecimal format. For example, by default, DMS adds a '0x' prefix to the
+	// LOB column type in hexadecimal format moving from an Oracle source to an Amazon
+	// Kinesis target. Use the NoHexPrefix endpoint setting to enable migration of
+	// RAW data type columns without adding the '0x' prefix.
 	NoHexPrefix *bool
 
-	// Prefixes schema and table names to partition values, when the partition type is
-	// primary-key-type. Doing this increases data distribution among Kinesis shards.
-	// For example, suppose that a SysBench schema has thousands of tables and each
-	// table has only limited range for a primary key. In this case, the same primary
-	// key is sent from thousands of tables to the same shard, which causes throttling.
-	// The default is false.
+	// Prefixes schema and table names to partition values, when the partition type
+	// is primary-key-type. Doing this increases data distribution among Kinesis
+	// shards. For example, suppose that a SysBench schema has thousands of tables and
+	// each table has only limited range for a primary key. In this case, the same
+	// primary key is sent from thousands of tables to the same shard, which causes
+	// throttling. The default is false .
 	PartitionIncludeSchemaTable *bool
 
 	// The Amazon Resource Name (ARN) for the IAM role that DMS uses to write to the
-	// Kinesis data stream. The role must allow the iam:PassRole action.
+	// Kinesis data stream. The role must allow the iam:PassRole  action.
 	ServiceAccessRoleArn *string
 
 	// The Amazon Resource Name (ARN) for the Amazon Kinesis Data Streams endpoint.
@@ -1047,15 +1045,15 @@ type Limitation struct {
 	// avoid this limitation.
 	Description *string
 
-	// The name of the target engine that Fleet Advisor should use in the target engine
-	// recommendation. Valid values include "rds-aurora-mysql",
-	// "rds-aurora-postgresql", "rds-mysql", "rds-oracle", "rds-sql-server", and
-	// "rds-postgresql".
+	// The name of the target engine that Fleet Advisor should use in the target
+	// engine recommendation. Valid values include "rds-aurora-mysql" ,
+	// "rds-aurora-postgresql" , "rds-mysql" , "rds-oracle" , "rds-sql-server" , and
+	// "rds-postgresql" .
 	EngineName *string
 
 	// The impact of the limitation. You can use this parameter to prioritize
-	// limitations that you want to address. Valid values include "Blocker", "High",
-	// "Medium", and "Low".
+	// limitations that you want to address. Valid values include "Blocker" , "High" ,
+	// "Medium" , and "Low" .
 	Impact *string
 
 	// The name of the limitation. Describes unsupported database features, migration
@@ -1092,8 +1090,8 @@ type MicrosoftSQLServerSettings struct {
 	// Endpoint TCP port.
 	Port *int32
 
-	// Cleans and recreates table metadata information on the replication instance when
-	// a mismatch occurs. An example is a situation where running an alter DDL
+	// Cleans and recreates table metadata information on the replication instance
+	// when a mismatch occurs. An example is a situation where running an alter DDL
 	// statement on a table might result in different information about the table
 	// cached in the replication instance.
 	QuerySingleAlwaysOnNode *bool
@@ -1105,33 +1103,32 @@ type MicrosoftSQLServerSettings struct {
 	// However, it can add some source latency to ongoing replication.
 	ReadBackupOnly *bool
 
-	// Use this attribute to minimize the need to access the backup log and enable DMS
-	// to prevent truncation using one of the following two methods. Start transactions
-	// in the database: This is the default method. When this method is used, DMS
-	// prevents TLOG truncation by mimicking a transaction in the database. As long as
-	// such a transaction is open, changes that appear after the transaction started
-	// aren't truncated. If you need Microsoft Replication to be enabled in your
-	// database, then you must choose this method. Exclusively use sp_repldone within a
-	// single task: When this method is used, DMS reads the changes and then uses
-	// sp_repldone to mark the TLOG transactions as ready for truncation. Although this
-	// method doesn't involve any transactional activities, it can only be used when
-	// Microsoft Replication isn't running. Also, when using this method, only one DMS
-	// task can access the database at any given time. Therefore, if you need to run
-	// parallel DMS tasks against the same database, use the default method.
+	// Use this attribute to minimize the need to access the backup log and enable
+	// DMS to prevent truncation using one of the following two methods. Start
+	// transactions in the database: This is the default method. When this method is
+	// used, DMS prevents TLOG truncation by mimicking a transaction in the database.
+	// As long as such a transaction is open, changes that appear after the transaction
+	// started aren't truncated. If you need Microsoft Replication to be enabled in
+	// your database, then you must choose this method. Exclusively use sp_repldone
+	// within a single task: When this method is used, DMS reads the changes and then
+	// uses sp_repldone to mark the TLOG transactions as ready for truncation. Although
+	// this method doesn't involve any transactional activities, it can only be used
+	// when Microsoft Replication isn't running. Also, when using this method, only one
+	// DMS task can access the database at any given time. Therefore, if you need to
+	// run parallel DMS tasks against the same database, use the default method.
 	SafeguardPolicy SafeguardPolicy
 
 	// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
 	// trusted entity and grants the required permissions to access the value in
-	// SecretsManagerSecret. The role must allow the iam:PassRole action.
-	// SecretsManagerSecret has the value of the Amazon Web Services Secrets Manager
+	// SecretsManagerSecret . The role must allow the iam:PassRole  action.
+	// SecretsManagerSecrethas the value of the Amazon Web Services Secrets Manager
 	// secret that allows access to the SQL Server endpoint. You can specify one of two
 	// sets of values for these permissions. You can specify the values for this
-	// setting and SecretsManagerSecretId. Or you can specify clear-text values for
-	// UserName, Password, ServerName, and Port. You can't specify both. For more
-	// information on creating this SecretsManagerSecret and the
+	// setting and SecretsManagerSecretId . Or you can specify clear-text values for
+	// UserName , Password , ServerName , and Port. You can't specify both. For more
+	// information on creating this SecretsManagerSecret  and the
 	// SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it,
-	// see Using secrets to access Database Migration Service resources
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// see Using secrets to access Database Migration Service resources (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
 	// in the Database Migration Service User Guide.
 	SecretsManagerAccessRoleArn *string
 
@@ -1140,23 +1137,21 @@ type MicrosoftSQLServerSettings struct {
 	SecretsManagerSecretId *string
 
 	// Fully qualified domain name of the endpoint. For an Amazon RDS SQL Server
-	// instance, this is the output of DescribeDBInstances
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html),
-	// in the Endpoint
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Endpoint.html).Address
-	// field.
+	// instance, this is the output of DescribeDBInstances (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)
+	// , in the Endpoint (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Endpoint.html)
+	// .Address field.
 	ServerName *string
 
 	// Indicates the mode used to fetch CDC data.
 	TlogAccessMode TlogAccessMode
 
 	// Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR
-	// data types during migration. The default value is true.
+	// data types during migration. The default value is true .
 	TrimSpaceInChar *bool
 
-	// Use this to attribute to transfer data for full-load operations using BCP. When
-	// the target table contains an identity column that does not exist in the source
-	// table, you must disable the use BCP for loading table option.
+	// Use this to attribute to transfer data for full-load operations using BCP.
+	// When the target table contains an identity column that does not exist in the
+	// source table, you must disable the use BCP for loading table option.
 	UseBcpFullLoad *bool
 
 	// When this attribute is set to Y, DMS processes third-party transaction log
@@ -1172,44 +1167,46 @@ type MicrosoftSQLServerSettings struct {
 // Provides information that defines a MongoDB endpoint.
 type MongoDbSettings struct {
 
-	// The authentication mechanism you use to access the MongoDB source endpoint. For
-	// the default value, in MongoDB version 2.x, "default" is "mongodb_cr". For
-	// MongoDB version 3.x or later, "default" is "scram_sha_1". This setting isn't
-	// used when AuthType is set to "no".
+	// The authentication mechanism you use to access the MongoDB source endpoint.
+	// For the default value, in MongoDB version 2.x, "default"  is "mongodb_cr". For
+	// MongoDB version 3.x or later, "default"  is "scram_sha_1". This setting isn't
+	// used when AuthType  is set to "no" .
 	AuthMechanism AuthMechanismValue
 
-	// The MongoDB database name. This setting isn't used when AuthType is set to "no".
-	// The default is "admin".
+	// The MongoDB database name. This setting isn't used when AuthType  is set to
+	// "no" . The default is "admin" .
 	AuthSource *string
 
-	// The authentication type you use to access the MongoDB source endpoint. When when
-	// set to "no", user name and password parameters are not used and can be empty.
+	// The authentication type you use to access the MongoDB source endpoint. When
+	// when set to "no", user name and password parameters are not used and can be
+	// empty.
 	AuthType AuthTypeValue
 
 	// The database name on the MongoDB source endpoint.
 	DatabaseName *string
 
 	// Indicates the number of documents to preview to determine the document
-	// organization. Use this setting when NestingLevel is set to "one". Must be a
-	// positive value greater than 0. Default value is 1000.
+	// organization. Use this setting when NestingLevel  is set to "one". Must be a
+	// positive value greater than 0 . Default value is 1000 .
 	DocsToInvestigate *string
 
-	// Specifies the document ID. Use this setting when NestingLevel is set to "none".
-	// Default value is "false".
+	// Specifies the document ID. Use this setting when NestingLevel  is set to "none"
+	// . Default value is "false" .
 	ExtractDocId *string
 
 	// The KMS key identifier that is used to encrypt the content on the replication
-	// instance. If you don't specify a value for the KmsKeyId parameter, then DMS uses
-	// your default encryption key. KMS creates the default encryption key for your
-	// Amazon Web Services account. Your Amazon Web Services account has a different
-	// default encryption key for each Amazon Web Services Region.
+	// instance. If you don't specify a value for the KmsKeyId parameter, then DMS
+	// uses your default encryption key. KMS creates the default encryption key for
+	// your Amazon Web Services account. Your Amazon Web Services account has a
+	// different default encryption key for each Amazon Web Services Region.
 	KmsKeyId *string
 
-	// Specifies either document or table mode. Default value is "none". Specify "none"
-	// to use document mode. Specify "one" to use table mode.
+	// Specifies either document or table mode. Default value is "none" . Specify
+	// "none" to use document mode. Specify "one"  to use table mode.
 	NestingLevel NestingLevelValue
 
-	// The password for the user account you use to access the MongoDB source endpoint.
+	// The password for the user account you use to access the MongoDB source
+	// endpoint.
 	Password *string
 
 	// The port value for the MongoDB source endpoint.
@@ -1217,16 +1214,15 @@ type MongoDbSettings struct {
 
 	// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
 	// trusted entity and grants the required permissions to access the value in
-	// SecretsManagerSecret. The role must allow the iam:PassRole action.
-	// SecretsManagerSecret has the value of the Amazon Web Services Secrets Manager
+	// SecretsManagerSecret . The role must allow the iam:PassRole  action.
+	// SecretsManagerSecrethas the value of the Amazon Web Services Secrets Manager
 	// secret that allows access to the MongoDB endpoint. You can specify one of two
 	// sets of values for these permissions. You can specify the values for this
-	// setting and SecretsManagerSecretId. Or you can specify clear-text values for
-	// UserName, Password, ServerName, and Port. You can't specify both. For more
-	// information on creating this SecretsManagerSecret and the
+	// setting and SecretsManagerSecretId . Or you can specify clear-text values for
+	// UserName , Password , ServerName , and Port. You can't specify both. For more
+	// information on creating this SecretsManagerSecret  and the
 	// SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it,
-	// see Using secrets to access Database Migration Service resources
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// see Using secrets to access Database Migration Service resources (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
 	// in the Database Migration Service User Guide.
 	SecretsManagerAccessRoleArn *string
 
@@ -1252,23 +1248,23 @@ type MySQLSettings struct {
 	// of a file containing the script.
 	AfterConnectScript *string
 
-	// Cleans and recreates table metadata information on the replication instance when
-	// a mismatch occurs. For example, in a situation where running an alter DDL on the
-	// table could result in different information about the table cached in the
+	// Cleans and recreates table metadata information on the replication instance
+	// when a mismatch occurs. For example, in a situation where running an alter DDL
+	// on the table could result in different information about the table cached in the
 	// replication instance.
 	CleanSourceMetadataOnMismatch *bool
 
 	// Database name for the endpoint. For a MySQL source or target endpoint, don't
 	// explicitly specify the database using the DatabaseName request parameter on
-	// either the CreateEndpoint or ModifyEndpoint API call. Specifying DatabaseName
+	// either the CreateEndpoint  or ModifyEndpoint  API call. Specifying DatabaseName
 	// when you create or modify a MySQL endpoint replicates all the task tables to
 	// this single database. For MySQL endpoints, you specify the database only when
 	// you specify the schema in the table-mapping rules of the DMS task.
 	DatabaseName *string
 
 	// Specifies how often to check the binary log for new changes/events when the
-	// database is idle. The default is five seconds. Example: eventsPollInterval=5; In
-	// the example, DMS checks for changes in the binary logs every five seconds.
+	// database is idle. The default is five seconds. Example: eventsPollInterval=5;
+	// In the example, DMS checks for changes in the binary logs every five seconds.
 	EventsPollInterval *int32
 
 	// Specifies the maximum size (in KB) of any .csv file used to transfer data to a
@@ -1290,16 +1286,16 @@ type MySQLSettings struct {
 
 	// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
 	// trusted entity and grants the required permissions to access the value in
-	// SecretsManagerSecret. The role must allow the iam:PassRole action.
-	// SecretsManagerSecret has the value of the Amazon Web Services Secrets Manager
+	// SecretsManagerSecret . The role must allow the iam:PassRole  action.
+	// SecretsManagerSecrethas the value of the Amazon Web Services Secrets Manager
 	// secret that allows access to the MySQL endpoint. You can specify one of two sets
 	// of values for these permissions. You can specify the values for this setting and
-	// SecretsManagerSecretId. Or you can specify clear-text values for UserName,
-	// Password, ServerName, and Port. You can't specify both. For more information on
-	// creating this SecretsManagerSecret and the SecretsManagerAccessRoleArn and
+	//
+	// SecretsManagerSecretId . Or you can specify clear-text values for UserName ,
+	// Password , ServerName , and Port. You can't specify both. For more information
+	// on creating this SecretsManagerSecret  and the SecretsManagerAccessRoleArn  and
 	// SecretsManagerSecretId required to access it, see Using secrets to access
-	// Database Migration Service resources
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// Database Migration Service resources (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
 	// in the Database Migration Service User Guide.
 	SecretsManagerAccessRoleArn *string
 
@@ -1308,13 +1304,11 @@ type MySQLSettings struct {
 	SecretsManagerSecretId *string
 
 	// The host name of the endpoint database. For an Amazon RDS MySQL instance, this
-	// is the output of DescribeDBInstances
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html),
-	// in the Endpoint
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Endpoint.html).Address
-	// field. For an Aurora MySQL instance, this is the output of DescribeDBClusters
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html),
-	// in the Endpoint field.
+	// is the output of DescribeDBInstances (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)
+	// , in the Endpoint (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Endpoint.html)
+	// .Address field. For an Aurora MySQL instance, this is the output of
+	// DescribeDBClusters (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html)
+	// , in the Endpoint  field.
 	ServerName *string
 
 	// Specifies the time zone for the source MySQL database. Example:
@@ -1323,8 +1317,8 @@ type MySQLSettings struct {
 
 	// Specifies where to migrate source tables on the target, either to a single
 	// database or multiple databases. If you specify SPECIFIC_DATABASE, specify the
-	// database name using the DatabaseName parameter of the Endpoint object. Example:
-	// targetDbType=MULTIPLE_DATABASES
+	// database name using the DatabaseName  parameter of the Endpoint object.
+	// Example: targetDbType=MULTIPLE_DATABASES
 	TargetDbType TargetDbType
 
 	// Endpoint connection user name.
@@ -1342,9 +1336,10 @@ type NeptuneSettings struct {
 	// This member is required.
 	S3BucketFolder *string
 
-	// The name of the Amazon S3 bucket where DMS can temporarily store migrated graph
-	// data in .csv files before bulk-loading it to the Neptune target database. DMS
-	// maps the SQL source data to graph data before storing it in these .csv files.
+	// The name of the Amazon S3 bucket where DMS can temporarily store migrated
+	// graph data in .csv files before bulk-loading it to the Neptune target database.
+	// DMS maps the SQL source data to graph data before storing it in these .csv
+	// files.
 	//
 	// This member is required.
 	S3BucketName *string
@@ -1354,10 +1349,10 @@ type NeptuneSettings struct {
 	// is 250.
 	ErrorRetryDuration *int32
 
-	// If you want Identity and Access Management (IAM) authorization enabled for this
-	// endpoint, set this parameter to true. Then attach the appropriate IAM policy
-	// document to your service role specified by ServiceAccessRoleArn. The default is
-	// false.
+	// If you want Identity and Access Management (IAM) authorization enabled for
+	// this endpoint, set this parameter to true. Then attach the appropriate IAM
+	// policy document to your service role specified by ServiceAccessRoleArn. The
+	// default is false .
 	IamAuthEnabled *bool
 
 	// The maximum size in kilobytes of migrated graph data stored in a .csv file
@@ -1372,9 +1367,8 @@ type NeptuneSettings struct {
 
 	// The Amazon Resource Name (ARN) of the service role that you created for the
 	// Neptune target endpoint. The role must allow the iam:PassRole action. For more
-	// information, see Creating an IAM Service Role for Accessing Amazon Neptune as a
-	// Target
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.ServiceRole)
+	// information, see Creating an IAM Service Role for Accessing Amazon Neptune as
+	// a Target (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.ServiceRole)
 	// in the Database Migration Service User Guide.
 	ServiceAccessRoleArn *string
 
@@ -1384,10 +1378,10 @@ type NeptuneSettings struct {
 // Provides information that defines an Oracle endpoint.
 type OracleSettings struct {
 
-	// Set this attribute to false in order to use the Binary Reader to capture change
-	// data for an Amazon RDS for Oracle as the source. This tells the DMS instance to
-	// not access redo logs through any specified path prefix replacement using direct
-	// file access.
+	// Set this attribute to false in order to use the Binary Reader to capture
+	// change data for an Amazon RDS for Oracle as the source. This tells the DMS
+	// instance to not access redo logs through any specified path prefix replacement
+	// using direct file access.
 	AccessAlternateDirectly *bool
 
 	// Set this attribute to set up table-level supplemental logging for the Oracle
@@ -1400,10 +1394,9 @@ type OracleSettings struct {
 	// attribute is useful in the case of a switchover. In this case, DMS needs to know
 	// which destination to get archive redo logs from to read changes. This need
 	// arises because the previous primary instance is now a standby instance after
-	// switchover. Although DMS supports the use of the Oracle RESETLOGS option to open
-	// the database, never use RESETLOGS unless necessary. For additional information
-	// about RESETLOGS, see RMAN Data Repair Concepts
-	// (https://docs.oracle.com/en/database/oracle/oracle-database/19/bradv/rman-data-repair-concepts.html#GUID-1805CCF7-4AF2-482D-B65A-998192F89C2B)
+	// switchover. Although DMS supports the use of the Oracle RESETLOGS option to
+	// open the database, never use RESETLOGS unless necessary. For additional
+	// information about RESETLOGS , see RMAN Data Repair Concepts (https://docs.oracle.com/en/database/oracle/oracle-database/19/bradv/rman-data-repair-concepts.html#GUID-1805CCF7-4AF2-482D-B65A-998192F89C2B)
 	// in the Oracle Database Backup and Recovery User's Guide.
 	AdditionalArchivedLogDestId *int32
 
@@ -1412,9 +1405,9 @@ type OracleSettings struct {
 	AllowSelectNestedTables *bool
 
 	// Specifies the ID of the destination for the archived redo logs. This value
-	// should be the same as a number in the dest_id column of the v$archived_log view.
-	// If you work with an additional redo log destination, use the
-	// AdditionalArchivedLogDestId option to specify the additional destination ID.
+	// should be the same as a number in the dest_id column of the v$archived_log
+	// view. If you work with an additional redo log destination, use the
+	// AdditionalArchivedLogDestIdoption to specify the additional destination ID.
 	// Doing this improves performance by ensuring that the correct logs are accessed
 	// from the outset.
 	ArchivedLogDestId *int32
@@ -1425,50 +1418,50 @@ type OracleSettings struct {
 	ArchivedLogsOnly *bool
 
 	// For an Oracle source endpoint, your Oracle Automatic Storage Management (ASM)
-	// password. You can set this value from the  asm_user_password  value. You set
+	// password. You can set this value from the asm_user_password  value. You set
 	// this value as part of the comma-separated value that you set to the Password
 	// request parameter when you create the endpoint to access transaction logs using
 	// Binary Reader. For more information, see Configuration for change data capture
-	// (CDC) on an Oracle source database
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration).
+	// (CDC) on an Oracle source database (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration)
+	// .
 	AsmPassword *string
 
 	// For an Oracle source endpoint, your ASM server address. You can set this value
-	// from the asm_server value. You set asm_server as part of the extra connection
+	// from the asm_server  value. You set asm_server as part of the extra connection
 	// attribute string to access an Oracle server with Binary Reader that uses ASM.
 	// For more information, see Configuration for change data capture (CDC) on an
-	// Oracle source database
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration).
+	// Oracle source database (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration)
+	// .
 	AsmServer *string
 
 	// For an Oracle source endpoint, your ASM user name. You can set this value from
-	// the asm_user value. You set asm_user as part of the extra connection attribute
-	// string to access an Oracle server with Binary Reader that uses ASM. For more
-	// information, see Configuration for change data capture (CDC) on an Oracle source
-	// database
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration).
+	// the asm_user  value. You set asm_user as part of the extra connection
+	// attribute string to access an Oracle server with Binary Reader that uses ASM.
+	// For more information, see Configuration for change data capture (CDC) on an
+	// Oracle source database (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration)
+	// .
 	AsmUser *string
 
-	// Specifies whether the length of a character column is in bytes or in characters.
-	// To indicate that the character column length is in characters, set this
-	// attribute to CHAR. Otherwise, the character column length is in bytes. Example:
-	// charLengthSemantics=CHAR;
+	// Specifies whether the length of a character column is in bytes or in
+	// characters. To indicate that the character column length is in characters, set
+	// this attribute to CHAR. Otherwise, the character column length is in bytes.
+	// Example: charLengthSemantics=CHAR;
 	CharLengthSemantics CharLengthSemantics
 
-	// When true, converts timestamps with the timezone datatype to their UTC value.
+	// When true, converts timestamps with the timezone  datatype to their UTC value.
 	ConvertTimestampWithZoneToUTC *bool
 
 	// Database name for the endpoint.
 	DatabaseName *string
 
-	// When set to true, this attribute helps to increase the commit rate on the Oracle
-	// target database by writing directly to tables and not writing a trail to
+	// When set to true, this attribute helps to increase the commit rate on the
+	// Oracle target database by writing directly to tables and not writing a trail to
 	// database logs.
 	DirectPathNoLog *bool
 
-	// When set to true, this attribute specifies a parallel load when
-	// useDirectPathFullLoad is set to Y. This attribute also only applies when you use
-	// the DMS parallel load feature. Note that the target table cannot have any
+	// When set to true , this attribute specifies a parallel load when
+	// useDirectPathFullLoad is set to Y. This attribute also only applies when you
+	// use the DMS parallel load feature. Note that the target table cannot have any
 	// constraints or indexes.
 	DirectPathParallelLoad *bool
 
@@ -1477,27 +1470,27 @@ type OracleSettings struct {
 	EnableHomogenousTablespace *bool
 
 	// Specifies the IDs of one more destinations for one or more archived redo logs.
-	// These IDs are the values of the dest_id column in the v$archived_log view. Use
-	// this setting with the archivedLogDestId extra connection attribute in a
+	// These IDs are the values of the dest_id  column in the v$archived_log view.
+	// Use this setting with the archivedLogDestId extra connection attribute in a
 	// primary-to-single setup or a primary-to-multiple-standby setup. This setting is
 	// useful in a switchover when you use an Oracle Data Guard database as a source.
 	// In this case, DMS needs information about what destination to get archive redo
 	// logs from to read changes. DMS needs this because after the switchover the
 	// previous primary is a standby instance. For example, in a primary-to-single
 	// standby setup you might apply the following settings. archivedLogDestId=1;
-	// ExtraArchivedLogDestIds=[2] In a primary-to-multiple-standby setup, you might
+	// ExtraArchivedLogDestIds=[2]In a primary-to-multiple-standby setup, you might
 	// apply the following settings. archivedLogDestId=1;
 	// ExtraArchivedLogDestIds=[2,3,4] Although DMS supports the use of the Oracle
 	// RESETLOGS option to open the database, never use RESETLOGS unless it's
-	// necessary. For more information about RESETLOGS, see  RMAN Data Repair Concepts
-	// (https://docs.oracle.com/en/database/oracle/oracle-database/19/bradv/rman-data-repair-concepts.html#GUID-1805CCF7-4AF2-482D-B65A-998192F89C2B)
+	// necessary. For more information about RESETLOGS , see  RMAN Data Repair
+	// Concepts (https://docs.oracle.com/en/database/oracle/oracle-database/19/bradv/rman-data-repair-concepts.html#GUID-1805CCF7-4AF2-482D-B65A-998192F89C2B)
 	// in the Oracle Database Backup and Recovery User's Guide.
 	ExtraArchivedLogDestIds []int32
 
-	// When set to true, this attribute causes a task to fail if the actual size of an
-	// LOB column is greater than the specified LobMaxSize. If a task is set to limited
-	// LOB mode and this option is set to true, the task fails instead of truncating
-	// the LOB data.
+	// When set to true, this attribute causes a task to fail if the actual size of
+	// an LOB column is greater than the specified LobMaxSize. If a task is set to
+	// limited LOB mode and this option is set to true, the task fails instead of
+	// truncating the LOB data.
 	FailTasksOnLobTruncation *bool
 
 	// Specifies the number scale. You can select a scale up to 38, or you can select
@@ -1513,7 +1506,7 @@ type OracleSettings struct {
 	// Set this attribute to change the number of threads that DMS configures to
 	// perform a change data capture (CDC) load using Oracle Automatic Storage
 	// Management (ASM). You can specify an integer value between 2 (the default) and 8
-	// (the maximum). Use this attribute together with the readAheadBlocks attribute.
+	// (the maximum). Use this attribute together with the readAheadBlocks  attribute.
 	ParallelAsmReadThreads *int32
 
 	// Endpoint connection password.
@@ -1522,13 +1515,13 @@ type OracleSettings struct {
 	// Endpoint TCP port.
 	Port *int32
 
-	// Set this attribute to change the number of read-ahead blocks that DMS configures
-	// to perform a change data capture (CDC) load using Oracle Automatic Storage
-	// Management (ASM). You can specify an integer value between 1000 (the default)
-	// and 200,000 (the maximum).
+	// Set this attribute to change the number of read-ahead blocks that DMS
+	// configures to perform a change data capture (CDC) load using Oracle Automatic
+	// Storage Management (ASM). You can specify an integer value between 1000 (the
+	// default) and 200,000 (the maximum).
 	ReadAheadBlocks *int32
 
-	// When set to true, this attribute supports tablespace replication.
+	// When set to true , this attribute supports tablespace replication.
 	ReadTableSpaceName *bool
 
 	// Set this attribute to true in order to use the Binary Reader to capture change
@@ -1537,44 +1530,43 @@ type OracleSettings struct {
 	// access the redo logs.
 	ReplacePathPrefix *bool
 
-	// Specifies the number of seconds that the system waits before resending a query.
-	// Example: retryInterval=6;
+	// Specifies the number of seconds that the system waits before resending a
+	// query. Example: retryInterval=6;
 	RetryInterval *int32
 
 	// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
 	// trusted entity and grants the required permissions to access the value in
-	// SecretsManagerSecret. The role must allow the iam:PassRole action.
-	// SecretsManagerSecret has the value of the Amazon Web Services Secrets Manager
+	// SecretsManagerSecret . The role must allow the iam:PassRole  action.
+	// SecretsManagerSecrethas the value of the Amazon Web Services Secrets Manager
 	// secret that allows access to the Oracle endpoint. You can specify one of two
 	// sets of values for these permissions. You can specify the values for this
-	// setting and SecretsManagerSecretId. Or you can specify clear-text values for
-	// UserName, Password, ServerName, and Port. You can't specify both. For more
-	// information on creating this SecretsManagerSecret and the
+	// setting and SecretsManagerSecretId . Or you can specify clear-text values for
+	// UserName , Password , ServerName , and Port. You can't specify both. For more
+	// information on creating this SecretsManagerSecret  and the
 	// SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it,
-	// see Using secrets to access Database Migration Service resources
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// see Using secrets to access Database Migration Service resources (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
 	// in the Database Migration Service User Guide.
 	SecretsManagerAccessRoleArn *string
 
 	// Required only if your Oracle endpoint uses Automatic Storage Management (ASM).
 	// The full ARN of the IAM role that specifies DMS as the trusted entity and grants
-	// the required permissions to access the SecretsManagerOracleAsmSecret. This
-	// SecretsManagerOracleAsmSecret has the secret value that allows access to the
+	// the required permissions to access the SecretsManagerOracleAsmSecret . This
+	// SecretsManagerOracleAsmSecrethas the secret value that allows access to the
 	// Oracle ASM of the endpoint. You can specify one of two sets of values for these
 	// permissions. You can specify the values for this setting and
-	// SecretsManagerOracleAsmSecretId. Or you can specify clear-text values for
-	// AsmUserName, AsmPassword, and AsmServerName. You can't specify both. For more
-	// information on creating this SecretsManagerOracleAsmSecret and the
+	// SecretsManagerOracleAsmSecretId . Or you can specify clear-text values for
+	// AsmUserName , AsmPassword , and AsmServerName. You can't specify both. For
+	// more information on creating this SecretsManagerOracleAsmSecret  and the
 	// SecretsManagerOracleAsmAccessRoleArn and SecretsManagerOracleAsmSecretId
 	// required to access it, see Using secrets to access Database Migration Service
-	// resources
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// resources (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
 	// in the Database Migration Service User Guide.
 	SecretsManagerOracleAsmAccessRoleArn *string
 
 	// Required only if your Oracle endpoint uses Automatic Storage Management (ASM).
-	// The full ARN, partial ARN, or friendly name of the SecretsManagerOracleAsmSecret
-	// that contains the Oracle ASM connection details for the Oracle endpoint.
+	// The full ARN, partial ARN, or friendly name of the
+	// SecretsManagerOracleAsmSecretthat contains the Oracle ASM connection details
+	// for the Oracle endpoint.
 	SecretsManagerOracleAsmSecretId *string
 
 	// The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that
@@ -1583,38 +1575,34 @@ type OracleSettings struct {
 
 	// For an Oracle source endpoint, the transparent data encryption (TDE) password
 	// required by AWM DMS to access Oracle redo logs encrypted by TDE using Binary
-	// Reader. It is also the  TDE_Password  part of the comma-separated value you set
-	// to the Password request parameter when you create the endpoint. The
+	// Reader. It is also the TDE_Password  part of the comma-separated value you set
+	// to the Password  request parameter when you create the endpoint. The
 	// SecurityDbEncryptian setting is related to this SecurityDbEncryptionName
-	// setting. For more information, see  Supported encryption methods for using
-	// Oracle as a source for DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.Encryption)
+	// setting. For more information, see Supported encryption methods for using
+	// Oracle as a source for DMS  (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.Encryption)
 	// in the Database Migration Service User Guide.
 	SecurityDbEncryption *string
 
 	// For an Oracle source endpoint, the name of a key used for the transparent data
 	// encryption (TDE) of the columns and tablespaces in an Oracle source database
 	// that is encrypted using TDE. The key value is the value of the
-	// SecurityDbEncryption setting. For more information on setting the key name value
-	// of SecurityDbEncryptionName, see the information and example for setting the
-	// securityDbEncryptionName extra connection attribute in  Supported encryption
-	// methods for using Oracle as a source for DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.Encryption)
+	// SecurityDbEncryptionsetting. For more information on setting the key name
+	// value of SecurityDbEncryptionName, see the information and example for setting
+	// the securityDbEncryptionName  extra connection attribute in  Supported
+	// encryption methods for using Oracle as a source for DMS  (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.Encryption)
 	// in the Database Migration Service User Guide.
 	SecurityDbEncryptionName *string
 
-	// Fully qualified domain name of the endpoint. For an Amazon RDS Oracle instance,
-	// this is the output of DescribeDBInstances
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html),
-	// in the Endpoint
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Endpoint.html).Address
-	// field.
+	// Fully qualified domain name of the endpoint. For an Amazon RDS Oracle
+	// instance, this is the output of DescribeDBInstances (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)
+	// , in the Endpoint (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Endpoint.html)
+	// .Address field.
 	ServerName *string
 
-	// Use this attribute to convert SDO_GEOMETRY to GEOJSON format. By default, DMS
+	// Use this attribute to convert SDO_GEOMETRY  to GEOJSON format. By default, DMS
 	// calls the SDO2GEOJSON custom function if present and accessible. Or you can
-	// create your own custom function that mimics the operation of SDOGEOJSON and set
-	// SpatialDataOptionToGeoJsonFunctionName to call it instead.
+	// create your own custom function that mimics the operation of SDOGEOJSON and
+	// set SpatialDataOptionToGeoJsonFunctionName  to call it instead.
 	SpatialDataOptionToGeoJsonFunctionName *string
 
 	// Use this attribute to specify a time in minutes for the delay in standby sync.
@@ -1626,7 +1614,7 @@ type OracleSettings struct {
 	StandbyDelayTime *int32
 
 	// Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR
-	// data types during migration. The default value is true.
+	// data types during migration. The default value is true .
 	TrimSpaceInChar *bool
 
 	// Set this attribute to true in order to use the Binary Reader to capture change
@@ -1634,12 +1622,12 @@ type OracleSettings struct {
 	// use any specified prefix replacement to access all online redo logs.
 	UseAlternateFolderForOnline *bool
 
-	// Set this attribute to Y to capture change data using the Binary Reader utility.
-	// Set UseLogminerReader to N to set this attribute to Y. To use Binary Reader with
-	// Amazon RDS for Oracle as the source, you set additional attributes. For more
-	// information about using this setting with Oracle Automatic Storage Management
-	// (ASM), see  Using Oracle LogMiner or DMS Binary Reader for CDC
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC).
+	// Set this attribute to Y to capture change data using the Binary Reader
+	// utility. Set UseLogminerReader to N to set this attribute to Y. To use Binary
+	// Reader with Amazon RDS for Oracle as the source, you set additional attributes.
+	// For more information about using this setting with Oracle Automatic Storage
+	// Management (ASM), see Using Oracle LogMiner or DMS Binary Reader for CDC (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC)
+	// .
 	UseBFile *bool
 
 	// Set this attribute to Y to have DMS use a direct path full load. Specify this
@@ -1648,12 +1636,11 @@ type OracleSettings struct {
 	// load.
 	UseDirectPathFullLoad *bool
 
-	// Set this attribute to Y to capture change data using the Oracle LogMiner utility
-	// (the default). Set this attribute to N if you want to access the redo logs as a
-	// binary file. When you set UseLogminerReader to N, also set UseBfile to Y. For
-	// more information on this setting and using Oracle ASM, see  Using Oracle
-	// LogMiner or DMS Binary Reader for CDC
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC)
+	// Set this attribute to Y to capture change data using the Oracle LogMiner
+	// utility (the default). Set this attribute to N if you want to access the redo
+	// logs as a binary file. When you set UseLogminerReader  to N, also set UseBfile
+	// to Y. For more information on this setting and using Oracle ASM, see Using
+	// Oracle LogMiner or DMS Binary Reader for CDC (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC)
 	// in the DMS User Guide.
 	UseLogminerReader *bool
 
@@ -1669,9 +1656,9 @@ type OracleSettings struct {
 	noSmithyDocumentSerde
 }
 
-// In response to the DescribeOrderableReplicationInstances operation, this object
-// describes an available replication instance. This description includes the
-// replication instance's type, engine version, and allocated storage.
+// In response to the DescribeOrderableReplicationInstances operation, this
+// object describes an available replication instance. This description includes
+// the replication instance's type, engine version, and allocated storage.
 type OrderableReplicationInstance struct {
 
 	// List of Availability Zones for this replication instance.
@@ -1696,17 +1683,17 @@ type OrderableReplicationInstance struct {
 	// replication instance.
 	MinAllocatedStorage int32
 
-	// The value returned when the specified EngineVersion of the replication instance
-	// is in Beta or test mode. This indicates some features might not work as
-	// expected. DMS supports the ReleaseStatus parameter in versions 3.1.4 and later.
+	// The value returned when the specified EngineVersion of the replication
+	// instance is in Beta or test mode. This indicates some features might not work as
+	// expected. DMS supports the ReleaseStatus  parameter in versions 3.1.4 and later.
 	ReleaseStatus ReleaseStatusValues
 
 	// The compute and memory capacity of the replication instance as defined for the
 	// specified replication instance class. For example to specify the instance class
-	// dms.c4.large, set this parameter to "dms.c4.large". For more information on the
-	// settings and capacities for the available replication instance classes, see
-	// Selecting the right DMS replication instance for your migration
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth).
+	// dms.c4.large, set this parameter to "dms.c4.large". For more information on
+	// the settings and capacities for the available replication instance classes, see
+	// Selecting the right DMS replication instance for your migration (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth)
+	// .
 	ReplicationInstanceClass *string
 
 	// The type of storage used by the replication instance.
@@ -1733,8 +1720,8 @@ type PendingMaintenanceAction struct {
 	// resource. This date takes into account opt-in requests received from the
 	// ApplyPendingMaintenanceAction API operation, and also the AutoAppliedAfterDate
 	// and ForcedApplyDate parameter values. This value is blank if an opt-in request
-	// has not been received and nothing has been specified for AutoAppliedAfterDate or
-	// ForcedApplyDate.
+	// has not been received and nothing has been specified for AutoAppliedAfterDate
+	// or ForcedApplyDate .
 	CurrentApplyDate *time.Time
 
 	// A description providing more detail about the maintenance action.
@@ -1760,16 +1747,17 @@ type PostgreSQLSettings struct {
 	// Example: afterConnectScript=SET session_replication_role='replica'
 	AfterConnectScript *string
 
-	// To capture DDL events, DMS creates various artifacts in the PostgreSQL database
-	// when the task starts. You can later remove these artifacts. If this value is set
-	// to N, you don't have to create tables or triggers on the source database.
+	// To capture DDL events, DMS creates various artifacts in the PostgreSQL
+	// database when the task starts. You can later remove these artifacts. If this
+	// value is set to N, you don't have to create tables or triggers on the source
+	// database.
 	CaptureDdls *bool
 
 	// Database name for the endpoint.
 	DatabaseName *string
 
-	// The schema in which the operational DDL database artifacts are created. Example:
-	// ddlArtifactsSchema=xyzddlschema;
+	// The schema in which the operational DDL database artifacts are created.
+	// Example: ddlArtifactsSchema=xyzddlschema;
 	DdlArtifactsSchema *string
 
 	// Sets the client statement timeout for the PostgreSQL instance, in seconds. The
@@ -1782,10 +1770,10 @@ type PostgreSQLSettings struct {
 	// LOB data.
 	FailTasksOnLobTruncation *bool
 
-	// The write-ahead log (WAL) heartbeat feature mimics a dummy transaction. By doing
-	// this, it prevents idle logical replication slots from holding onto old WAL logs,
-	// which can result in storage full situations on the source. This heartbeat keeps
-	// restart_lsn moving and prevents storage full scenarios.
+	// The write-ahead log (WAL) heartbeat feature mimics a dummy transaction. By
+	// doing this, it prevents idle logical replication slots from holding onto old WAL
+	// logs, which can result in storage full situations on the source. This heartbeat
+	// keeps restart_lsn  moving and prevents storage full scenarios.
 	HeartbeatEnable *bool
 
 	// Sets the WAL heartbeat frequency (in minutes).
@@ -1795,7 +1783,7 @@ type PostgreSQLSettings struct {
 	HeartbeatSchema *string
 
 	// When true, lets PostgreSQL migrate the boolean type as boolean. By default,
-	// PostgreSQL migrates booleans as varchar(5).
+	// PostgreSQL migrates booleans as varchar(5) .
 	MapBooleanAsBoolean *bool
 
 	// Specifies the maximum size (in KB) of any .csv file used to transfer data to
@@ -1813,16 +1801,15 @@ type PostgreSQLSettings struct {
 
 	// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
 	// trusted entity and grants the required permissions to access the value in
-	// SecretsManagerSecret. The role must allow the iam:PassRole action.
-	// SecretsManagerSecret has the value of the Amazon Web Services Secrets Manager
+	// SecretsManagerSecret . The role must allow the iam:PassRole  action.
+	// SecretsManagerSecrethas the value of the Amazon Web Services Secrets Manager
 	// secret that allows access to the PostgreSQL endpoint. You can specify one of two
 	// sets of values for these permissions. You can specify the values for this
-	// setting and SecretsManagerSecretId. Or you can specify clear-text values for
-	// UserName, Password, ServerName, and Port. You can't specify both. For more
-	// information on creating this SecretsManagerSecret and the
+	// setting and SecretsManagerSecretId . Or you can specify clear-text values for
+	// UserName , Password , ServerName , and Port. You can't specify both. For more
+	// information on creating this SecretsManagerSecret  and the
 	// SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it,
-	// see Using secrets to access Database Migration Service resources
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// see Using secrets to access Database Migration Service resources (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
 	// in the Database Migration Service User Guide.
 	SecretsManagerAccessRoleArn *string
 
@@ -1831,36 +1818,31 @@ type PostgreSQLSettings struct {
 	SecretsManagerSecretId *string
 
 	// The host name of the endpoint database. For an Amazon RDS PostgreSQL instance,
-	// this is the output of DescribeDBInstances
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html),
-	// in the Endpoint
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Endpoint.html).Address
-	// field. For an Aurora PostgreSQL instance, this is the output of
-	// DescribeDBClusters
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html),
-	// in the Endpoint field.
+	// this is the output of DescribeDBInstances (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)
+	// , in the Endpoint (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Endpoint.html)
+	// .Address field. For an Aurora PostgreSQL instance, this is the output of
+	// DescribeDBClusters (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html)
+	// , in the Endpoint  field.
 	ServerName *string
 
-	// Sets the name of a previously created logical replication slot for a change data
-	// capture (CDC) load of the PostgreSQL source instance. When used with the
-	// CdcStartPosition request parameter for the DMS API , this attribute also makes
+	// Sets the name of a previously created logical replication slot for a change
+	// data capture (CDC) load of the PostgreSQL source instance. When used with the
+	// CdcStartPositionrequest parameter for the DMS API , this attribute also makes
 	// it possible to use native CDC start points. DMS verifies that the specified
 	// logical replication slot exists before starting the CDC load task. It also
-	// verifies that the task was created with a valid setting of CdcStartPosition. If
-	// the specified slot doesn't exist or the task doesn't have a valid
-	// CdcStartPosition setting, DMS raises an error. For more information about
-	// setting the CdcStartPosition request parameter, see Determining a CDC native
-	// start point in the Database Migration Service User Guide. For more information
-	// about using CdcStartPosition, see CreateReplicationTask
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html),
-	// StartReplicationTask
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html),
-	// and ModifyReplicationTask
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html).
+	// verifies that the task was created with a valid setting of CdcStartPosition.
+	// If the specified slot doesn't exist or the task doesn't have a valid
+	// CdcStartPositionsetting, DMS raises an error. For more information about
+	// setting the CdcStartPosition  request parameter, see Determining a CDC native
+	// start pointin the Database Migration Service User Guide. For more information
+	// about using CdcStartPosition , see CreateReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html)
+	// , StartReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html)
+	// , and ModifyReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html)
+	// .
 	SlotName *string
 
 	// Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR
-	// data types during migration. The default value is true.
+	// data types during migration. The default value is true .
 	TrimSpaceInChar *bool
 
 	// Endpoint connection user name.
@@ -1869,13 +1851,13 @@ type PostgreSQLSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information that describes the configuration of the recommended target
-// engine on Amazon RDS.
+// Provides information that describes the configuration of the recommended
+// target engine on Amazon RDS.
 type RdsConfiguration struct {
 
-	// Describes the deployment option for the recommended Amazon RDS DB instance. The
-	// deployment options include Multi-AZ and Single-AZ deployments. Valid values
-	// include "MULTI_AZ" and "SINGLE_AZ".
+	// Describes the deployment option for the recommended Amazon RDS DB instance.
+	// The deployment options include Multi-AZ and Single-AZ deployments. Valid values
+	// include "MULTI_AZ"  and "SINGLE_AZ" .
 	DeploymentOption *string
 
 	// Describes the recommended target Amazon RDS engine edition.
@@ -1896,14 +1878,14 @@ type RdsConfiguration struct {
 	// recommended Amazon RDS DB instance that meets your requirements.
 	StorageIops *int32
 
-	// Describes the storage size of the recommended Amazon RDS DB instance that meets
-	// your requirements.
+	// Describes the storage size of the recommended Amazon RDS DB instance that
+	// meets your requirements.
 	StorageSize *int32
 
-	// Describes the storage type of the recommended Amazon RDS DB instance that meets
-	// your requirements. Amazon RDS provides three storage types: General Purpose SSD
-	// (also known as gp2 and gp3), Provisioned IOPS SSD (also known as io1), and
-	// magnetic (also known as standard).
+	// Describes the storage type of the recommended Amazon RDS DB instance that
+	// meets your requirements. Amazon RDS provides three storage types: General
+	// Purpose SSD (also known as gp2 and gp3), Provisioned IOPS SSD (also known as
+	// io1), and magnetic (also known as standard).
 	StorageType *string
 
 	noSmithyDocumentSerde
@@ -1929,7 +1911,7 @@ type RdsRecommendation struct {
 type RdsRequirements struct {
 
 	// The required deployment option for the Amazon RDS DB instance. Valid values
-	// include "MULTI_AZ" for Multi-AZ deployments and "SINGLE_AZ" for Single-AZ
+	// include "MULTI_AZ"  for Multi-AZ deployments and "SINGLE_AZ" for Single-AZ
 	// deployments.
 	DeploymentOption *string
 
@@ -1974,9 +1956,9 @@ type Recommendation struct {
 	// recommendation.
 	DatabaseId *string
 
-	// The name of the target engine. Valid values include "rds-aurora-mysql",
-	// "rds-aurora-postgresql", "rds-mysql", "rds-oracle", "rds-sql-server", and
-	// "rds-postgresql".
+	// The name of the target engine. Valid values include "rds-aurora-mysql" ,
+	// "rds-aurora-postgresql" , "rds-mysql" , "rds-oracle" , "rds-sql-server" , and
+	// "rds-postgresql" .
 	EngineName *string
 
 	// Indicates that this target is the rightsized migration destination.
@@ -1988,7 +1970,7 @@ type Recommendation struct {
 	Settings *RecommendationSettings
 
 	// The status of the target engine recommendation. Valid values include
-	// "alternate", "in-progress", "not-viable", and "recommended".
+	// "alternate" , "in-progress" , "not-viable" , and "recommended" .
 	Status *string
 
 	noSmithyDocumentSerde
@@ -2008,15 +1990,15 @@ type RecommendationSettings struct {
 
 	// The size of your target instance. Fleet Advisor calculates this value based on
 	// your data collection type, such as total capacity and resource utilization.
-	// Valid values include "total-capacity" and "utilization".
+	// Valid values include "total-capacity"  and "utilization" .
 	//
 	// This member is required.
 	InstanceSizingType *string
 
 	// The deployment option for your target engine. For production databases, Fleet
 	// Advisor chooses Multi-AZ deployment. For development or test databases, Fleet
-	// Advisor chooses Single-AZ deployment. Valid values include "development" and
-	// "production".
+	// Advisor chooses Single-AZ deployment. Valid values include "development"  and
+	// "production" .
 	//
 	// This member is required.
 	WorkloadType *string
@@ -2037,32 +2019,32 @@ type RedisSettings struct {
 	// This member is required.
 	ServerName *string
 
-	// The password provided with the auth-role and auth-token options of the AuthType
-	// setting for a Redis target endpoint.
+	// The password provided with the auth-role  and auth-token  options of the
+	// AuthType setting for a Redis target endpoint.
 	AuthPassword *string
 
-	// The type of authentication to perform when connecting to a Redis target. Options
-	// include none, auth-token, and auth-role. The auth-token option requires an
-	// AuthPassword value to be provided. The auth-role option requires AuthUserName
-	// and AuthPassword values to be provided.
+	// The type of authentication to perform when connecting to a Redis target.
+	// Options include none , auth-token , and auth-role . The auth-token option
+	// requires an AuthPassword  value to be provided. The auth-role  option requires
+	// AuthUserName and AuthPassword  values to be provided.
 	AuthType RedisAuthTypeValue
 
-	// The user name provided with the auth-role option of the AuthType setting for a
-	// Redis target endpoint.
+	// The user name provided with the auth-role  option of the AuthType setting for
+	// a Redis target endpoint.
 	AuthUserName *string
 
-	// The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses
-	// to connect to your Redis target endpoint.
+	// The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS
+	// uses to connect to your Redis target endpoint.
 	SslCaCertificateArn *string
 
-	// The connection to a Redis target endpoint using Transport Layer Security (TLS).
-	// Valid values include plaintext and ssl-encryption. The default is
-	// ssl-encryption. The ssl-encryption option makes an encrypted connection.
+	// The connection to a Redis target endpoint using Transport Layer Security
+	// (TLS). Valid values include plaintext  and ssl-encryption . The default is
+	// ssl-encryption . The ssl-encryption option makes an encrypted connection.
 	// Optionally, you can identify an Amazon Resource Name (ARN) for an SSL
 	// certificate authority (CA) using the SslCaCertificateArn setting. If an ARN
-	// isn't given for a CA, DMS uses the Amazon root CA. The plaintext option doesn't
-	// provide Transport Layer Security (TLS) encryption for traffic between endpoint
-	// and database.
+	// isn't given for a CA, DMS uses the Amazon root CA. The plaintext option
+	// doesn't provide Transport Layer Security (TLS) encryption for traffic between
+	// endpoint and database.
 	SslSecurityProtocol SslSecurityProtocolValue
 
 	noSmithyDocumentSerde
@@ -2071,42 +2053,42 @@ type RedisSettings struct {
 // Provides information that defines an Amazon Redshift endpoint.
 type RedshiftSettings struct {
 
-	// A value that indicates to allow any date format, including invalid formats such
-	// as 00/00/00 00:00:00, to be loaded without generating an error. You can choose
-	// true or false (the default). This parameter applies only to TIMESTAMP and DATE
-	// columns. Always use ACCEPTANYDATE with the DATEFORMAT parameter. If the date
-	// format for the data doesn't match the DATEFORMAT specification, Amazon Redshift
-	// inserts a NULL value into that field.
+	// A value that indicates to allow any date format, including invalid formats
+	// such as 00/00/00 00:00:00, to be loaded without generating an error. You can
+	// choose true  or false (the default). This parameter applies only to TIMESTAMP
+	// and DATE columns. Always use ACCEPTANYDATE with the DATEFORMAT parameter. If the
+	// date format for the data doesn't match the DATEFORMAT specification, Amazon
+	// Redshift inserts a NULL value into that field.
 	AcceptAnyDate *bool
 
-	// Code to run after connecting. This parameter should contain the code itself, not
-	// the name of a file containing the code.
+	// Code to run after connecting. This parameter should contain the code itself,
+	// not the name of a file containing the code.
 	AfterConnectScript *string
 
 	// An S3 folder where the comma-separated-value (.csv) files are stored before
 	// being uploaded to the target Redshift cluster. For full load mode, DMS converts
 	// source records into .csv files and loads them to the BucketFolder/TableID path.
-	// DMS uses the Redshift COPY command to upload the .csv files to the target table.
-	// The files are deleted once the COPY operation has finished. For more
-	// information, see COPY
-	// (https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html) in the Amazon
-	// Redshift Database Developer Guide. For change-data-capture (CDC) mode, DMS
-	// creates a NetChanges table, and loads the .csv files to this
+	// DMS uses the Redshift COPY command to upload the .csv files to the target
+	// table. The files are deleted once the COPY operation has finished. For more
+	// information, see COPY (https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html)
+	// in the Amazon Redshift Database Developer Guide. For change-data-capture (CDC)
+	// mode, DMS creates a NetChanges table, and loads the .csv files to this
 	// BucketFolder/NetChangesTableID path.
 	BucketFolder *string
 
-	// The name of the intermediate S3 bucket used to store .csv files before uploading
-	// data to Redshift.
+	// The name of the intermediate S3 bucket used to store .csv files before
+	// uploading data to Redshift.
 	BucketName *string
 
 	// If Amazon Redshift is configured to support case sensitive schema names, set
-	// CaseSensitiveNames to true. The default is false.
+	// CaseSensitiveNames to true . The default is false .
 	CaseSensitiveNames *bool
 
-	// If you set CompUpdate to true Amazon Redshift applies automatic compression if
-	// the table is empty. This applies even if the table columns already have
-	// encodings other than RAW. If you set CompUpdate to false, automatic compression
-	// is disabled and existing column encodings aren't changed. The default is true.
+	// If you set CompUpdate  to true Amazon Redshift applies automatic compression
+	// if the table is empty. This applies even if the table columns already have
+	// encodings other than RAW . If you set CompUpdate  to false, automatic
+	// compression is disabled and existing column encodings aren't changed. The
+	// default is true .
 	CompUpdate *bool
 
 	// A value that sets the amount of time to wait (in milliseconds) before timing
@@ -2117,41 +2099,41 @@ type RedshiftSettings struct {
 	// with.
 	DatabaseName *string
 
-	// The date format that you are using. Valid values are auto (case-sensitive), your
-	// date format string enclosed in quotes, or NULL. If this parameter is left unset
-	// (NULL), it defaults to a format of 'YYYY-MM-DD'. Using auto recognizes most
-	// strings, even some that aren't supported when you use a date format string. If
-	// your date and time values use formats different from each other, set this to
-	// auto.
+	// The date format that you are using. Valid values are auto (case-sensitive),
+	// your date format string enclosed in quotes, or NULL. If this parameter is left
+	// unset (NULL), it defaults to a format of 'YYYY-MM-DD'. Using auto recognizes
+	// most strings, even some that aren't supported when you use a date format string.
+	// If your date and time values use formats different from each other, set this to
+	// auto .
 	DateFormat *string
 
-	// A value that specifies whether DMS should migrate empty CHAR and VARCHAR fields
-	// as NULL. A value of true sets empty CHAR and VARCHAR fields to null. The default
-	// is false.
+	// A value that specifies whether DMS should migrate empty CHAR and VARCHAR
+	// fields as NULL. A value of true sets empty CHAR and VARCHAR fields to null.
+	// The default is false .
 	EmptyAsNull *bool
 
 	// The type of server-side encryption that you want to use for your data. This
 	// encryption type is part of the endpoint settings or the extra connections
-	// attributes for Amazon S3. You can choose either SSE_S3 (the default) or SSE_KMS.
-	// For the ModifyEndpoint operation, you can change the existing value of the
-	// EncryptionMode parameter from SSE_KMS to SSE_S3. But you can’t change the
-	// existing value from SSE_S3 to SSE_KMS. To use SSE_S3, create an Identity and
-	// Access Management (IAM) role with a policy that allows "arn:aws:s3:::*" to use
-	// the following actions: "s3:PutObject", "s3:ListBucket"
+	// attributes for Amazon S3. You can choose either SSE_S3  (the default) or
+	// SSE_KMS . For the ModifyEndpoint operation, you can change the existing value
+	// of the EncryptionMode  parameter from SSE_KMS  to SSE_S3. But you can’t change
+	// the existing value from SSE_S3  to SSE_KMS . To use SSE_S3, create an Identity
+	// and Access Management (IAM) role with a policy that allows "arn:aws:s3:::*" to
+	// use the following actions: "s3:PutObject", "s3:ListBucket"
 	EncryptionMode EncryptionModeValue
 
-	// This setting is only valid for a full-load migration task. Set ExplicitIds to
+	// This setting is only valid for a full-load migration task. Set ExplicitIds  to
 	// true to have tables with IDENTITY columns override their auto-generated values
 	// with explicit values loaded from the source data files used to populate the
-	// tables. The default is false.
+	// tables. The default is false .
 	ExplicitIds *bool
 
 	// The number of threads used to upload a single file. This parameter accepts a
 	// value from 1 through 64. It defaults to 10. The number of parallel streams used
 	// to upload a single .csv file to an S3 bucket using S3 Multipart Upload. For more
-	// information, see Multipart upload overview
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html).
-	// FileTransferUploadStreams accepts a value from 1 through 64. It defaults to 10.
+	// information, see Multipart upload overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html)
+	// . FileTransferUploadStreams accepts a value from 1 through 64. It defaults to
+	// 10.
 	FileTransferUploadStreams *int32
 
 	// The amount of time to wait (in milliseconds) before timing out of operations
@@ -2160,44 +2142,44 @@ type RedshiftSettings struct {
 	LoadTimeout *int32
 
 	// When true, lets Redshift migrate the boolean type as boolean. By default,
-	// Redshift migrates booleans as varchar(1).
+	// Redshift migrates booleans as varchar(1) .
 	MapBooleanAsBoolean *bool
 
-	// The maximum size (in KB) of any .csv file used to load data on an S3 bucket and
-	// transfer data to Amazon Redshift. It defaults to 1048576KB (1 GB).
+	// The maximum size (in KB) of any .csv file used to load data on an S3 bucket
+	// and transfer data to Amazon Redshift. It defaults to 1048576KB (1 GB).
 	MaxFileSize *int32
 
-	// The password for the user named in the username property.
+	// The password for the user named in the username  property.
 	Password *string
 
 	// The port number for Amazon Redshift. The default value is 5439.
 	Port *int32
 
-	// A value that specifies to remove surrounding quotation marks from strings in the
-	// incoming data. All characters within the quotation marks, including delimiters,
-	// are retained. Choose true to remove quotation marks. The default is false.
+	// A value that specifies to remove surrounding quotation marks from strings in
+	// the incoming data. All characters within the quotation marks, including
+	// delimiters, are retained. Choose true to remove quotation marks. The default
+	// is false .
 	RemoveQuotes *bool
 
 	// A value that specifies to replaces the invalid characters specified in
-	// ReplaceInvalidChars, substituting the specified characters instead. The default
-	// is "?".
+	// ReplaceInvalidChars, substituting the specified characters instead. The
+	// default is "?" .
 	ReplaceChars *string
 
-	// A list of characters that you want to replace. Use with ReplaceChars.
+	// A list of characters that you want to replace. Use with ReplaceChars .
 	ReplaceInvalidChars *string
 
 	// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
 	// trusted entity and grants the required permissions to access the value in
-	// SecretsManagerSecret. The role must allow the iam:PassRole action.
-	// SecretsManagerSecret has the value of the Amazon Web Services Secrets Manager
+	// SecretsManagerSecret . The role must allow the iam:PassRole  action.
+	// SecretsManagerSecrethas the value of the Amazon Web Services Secrets Manager
 	// secret that allows access to the Amazon Redshift endpoint. You can specify one
 	// of two sets of values for these permissions. You can specify the values for this
-	// setting and SecretsManagerSecretId. Or you can specify clear-text values for
-	// UserName, Password, ServerName, and Port. You can't specify both. For more
-	// information on creating this SecretsManagerSecret and the
+	// setting and SecretsManagerSecretId . Or you can specify clear-text values for
+	// UserName , Password , ServerName , and Port. You can't specify both. For more
+	// information on creating this SecretsManagerSecret  and the
 	// SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it,
-	// see Using secrets to access Database Migration Service resources
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// see Using secrets to access Database Migration Service resources (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
 	// in the Database Migration Service User Guide.
 	SecretsManagerAccessRoleArn *string
 
@@ -2208,31 +2190,31 @@ type RedshiftSettings struct {
 	// The name of the Amazon Redshift cluster you are using.
 	ServerName *string
 
-	// The KMS key ID. If you are using SSE_KMS for the EncryptionMode, provide this
+	// The KMS key ID. If you are using SSE_KMS  for the EncryptionMode, provide this
 	// key ID. The key that you use needs an attached policy that enables IAM user
 	// permissions and allows use of the key.
 	ServerSideEncryptionKmsKeyId *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that has access to the Amazon
-	// Redshift service. The role must allow the iam:PassRole action.
+	// Redshift service. The role must allow the iam:PassRole  action.
 	ServiceAccessRoleArn *string
 
-	// The time format that you want to use. Valid values are auto (case-sensitive),
-	// 'timeformat_string', 'epochsecs', or 'epochmillisecs'. It defaults to 10. Using
-	// auto recognizes most strings, even some that aren't supported when you use a
-	// time format string. If your date and time values use formats different from each
-	// other, set this parameter to auto.
+	// The time format that you want to use. Valid values are auto  (case-sensitive),
+	// 'timeformat_string' , 'epochsecs' , or 'epochmillisecs'. It defaults to 10.
+	// Using auto recognizes most strings, even some that aren't supported when you
+	// use a time format string. If your date and time values use formats different
+	// from each other, set this parameter to auto .
 	TimeFormat *string
 
 	// A value that specifies to remove the trailing white space characters from a
 	// VARCHAR string. This parameter applies only to columns with a VARCHAR data type.
-	// Choose true to remove unneeded white space. The default is false.
+	// Choose true  to remove unneeded white space. The default is false .
 	TrimBlanks *bool
 
-	// A value that specifies to truncate data in columns to the appropriate number of
-	// characters, so that the data fits in the column. This parameter applies only to
-	// columns with a VARCHAR or CHAR data type, and rows with a size of 4 MB or less.
-	// Choose true to truncate data. The default is false.
+	// A value that specifies to truncate data in columns to the appropriate number
+	// of characters, so that the data fits in the column. This parameter applies only
+	// to columns with a VARCHAR or CHAR data type, and rows with a size of 4 MB or
+	// less. Choose true  to truncate data. The default is false .
 	TruncateColumns *bool
 
 	// An Amazon Redshift user name for a registered user.
@@ -2246,8 +2228,8 @@ type RedshiftSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information that describes status of a schema at an endpoint specified
-// by the DescribeRefreshSchemaStatus operation.
+// Provides information that describes status of a schema at an endpoint
+// specified by the DescribeRefreshSchemaStatus  operation.
 type RefreshSchemasStatus struct {
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
@@ -2275,8 +2257,8 @@ type ReplicationInstance struct {
 	// instance.
 	AllocatedStorage int32
 
-	// Boolean value indicating if minor version upgrades will be automatically applied
-	// to the instance.
+	// Boolean value indicating if minor version upgrades will be automatically
+	// applied to the instance.
 	AutoMinorVersionUpgrade bool
 
 	// The Availability Zone for the instance.
@@ -2289,7 +2271,7 @@ type ReplicationInstance struct {
 	// The engine version number of the replication instance. If an engine version
 	// number is not specified when a replication instance is created, the default is
 	// the latest engine version available. When modifying a major engine version of an
-	// instance, also set AllowMajorVersionUpgrade to true.
+	// instance, also set AllowMajorVersionUpgrade  to true .
 	EngineVersion *string
 
 	// The expiration date of the free replication instance that is part of the Free
@@ -2300,14 +2282,14 @@ type ReplicationInstance struct {
 	InstanceCreateTime *time.Time
 
 	// An KMS key identifier that is used to encrypt the data on the replication
-	// instance. If you don't specify a value for the KmsKeyId parameter, then DMS uses
-	// your default encryption key. KMS creates the default encryption key for your
-	// Amazon Web Services account. Your Amazon Web Services account has a different
-	// default encryption key for each Amazon Web Services Region.
+	// instance. If you don't specify a value for the KmsKeyId parameter, then DMS
+	// uses your default encryption key. KMS creates the default encryption key for
+	// your Amazon Web Services account. Your Amazon Web Services account has a
+	// different default encryption key for each Amazon Web Services Region.
 	KmsKeyId *string
 
 	// Specifies whether the replication instance is a Multi-AZ deployment. You can't
-	// set the AvailabilityZone parameter if the Multi-AZ parameter is set to true.
+	// set the AvailabilityZone  parameter if the Multi-AZ parameter is set to true .
 	MultiAZ bool
 
 	// The type of IP address protocol used by a replication instance, such as IPv4
@@ -2318,13 +2300,13 @@ type ReplicationInstance struct {
 	// The pending modification values.
 	PendingModifiedValues *ReplicationPendingModifiedValues
 
-	// The maintenance window times for the replication instance. Any pending upgrades
-	// to the replication instance are performed during this time.
+	// The maintenance window times for the replication instance. Any pending
+	// upgrades to the replication instance are performed during this time.
 	PreferredMaintenanceWindow *string
 
 	// Specifies the accessibility options for the replication instance. A value of
 	// true represents an instance with a public IP address. A value of false
-	// represents an instance with a private IP address. The default value is true.
+	// represents an instance with a private IP address. The default value is true .
 	PubliclyAccessible bool
 
 	// The Amazon Resource Name (ARN) of the replication instance.
@@ -2334,18 +2316,15 @@ type ReplicationInstance struct {
 	// specified replication instance class. It is a required parameter, although a
 	// default value is pre-selected in the DMS console. For more information on the
 	// settings and capacities for the available replication instance classes, see
-	// Selecting the right DMS replication instance for your migration
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth).
+	// Selecting the right DMS replication instance for your migration (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth)
+	// .
 	ReplicationInstanceClass *string
 
 	// The replication instance identifier is a required parameter. This parameter is
 	// stored as a lowercase string. Constraints:
-	// - Must contain 1-63 alphanumeric
-	// characters or hyphens.
-	// - First character must be a letter.
-	// - Cannot end with a
-	// hyphen or contain two consecutive hyphens.
-	//
+	//     - Must contain 1-63 alphanumeric characters or hyphens.
+	//     - First character must be a letter.
+	//     - Cannot end with a hyphen or contain two consecutive hyphens.
 	// Example: myrepinstance
 	ReplicationInstanceIdentifier *string
 
@@ -2369,22 +2348,19 @@ type ReplicationInstance struct {
 	ReplicationInstancePublicIpAddresses []string
 
 	// The status of the replication instance. The possible return values include:
-	// -
-	// "available"
-	// - "creating"
-	// - "deleted"
-	// - "deleting"
-	// - "failed"
-	// - "modifying"
-	// -
-	// "upgrading"
-	// - "rebooting"
-	// - "resetting-master-credentials"
-	// - "storage-full"
-	// -
-	// "incompatible-credentials"
-	// - "incompatible-network"
-	// - "maintenance"
+	//     - "available"
+	//     - "creating"
+	//     - "deleted"
+	//     - "deleting"
+	//     - "failed"
+	//     - "modifying"
+	//     - "upgrading"
+	//     - "rebooting"
+	//     - "resetting-master-credentials"
+	//     - "storage-full"
+	//     - "incompatible-credentials"
+	//     - "incompatible-network"
+	//     - "maintenance"
 	ReplicationInstanceStatus *string
 
 	// The subnet group for the replication instance.
@@ -2415,9 +2391,8 @@ type ReplicationInstanceTaskLog struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about the values of pending modifications to a replication
-// instance. This data type is an object of the ReplicationInstance
-// (https://docs.aws.amazon.com/dms/latest/APIReference/API_ReplicationInstance.html)
+// Provides information about the values of pending modifications to a
+// replication instance. This data type is an object of the ReplicationInstance (https://docs.aws.amazon.com/dms/latest/APIReference/API_ReplicationInstance.html)
 // user-defined data type.
 type ReplicationPendingModifiedValues struct {
 
@@ -2429,7 +2404,7 @@ type ReplicationPendingModifiedValues struct {
 	EngineVersion *string
 
 	// Specifies whether the replication instance is a Multi-AZ deployment. You can't
-	// set the AvailabilityZone parameter if the Multi-AZ parameter is set to true.
+	// set the AvailabilityZone  parameter if the Multi-AZ parameter is set to true .
 	MultiAZ *bool
 
 	// The type of IP address protocol used by a replication instance, such as IPv4
@@ -2439,9 +2414,9 @@ type ReplicationPendingModifiedValues struct {
 
 	// The compute and memory capacity of the replication instance as defined for the
 	// specified replication instance class. For more information on the settings and
-	// capacities for the available replication instance classes, see  Selecting the
-	// right DMS replication instance for your migration
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth).
+	// capacities for the available replication instance classes, see Selecting the
+	// right DMS replication instance for your migration (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth)
+	// .
 	ReplicationInstanceClass *string
 
 	noSmithyDocumentSerde
@@ -2479,7 +2454,7 @@ type ReplicationSubnetGroup struct {
 type ReplicationTask struct {
 
 	// Indicates when you want a change data capture (CDC) operation to start. Use
-	// either CdcStartPosition or CdcStartTime to specify when you want the CDC
+	// either CdcStartPosition  or CdcStartTime to specify when you want the CDC
 	// operation to start. Specifying both values results in an error. The value can be
 	// in date, checkpoint, or LSN/SCN format. Date Example: --cdc-start-position
 	// “2018-03-08T12:12:12” Checkpoint Example: --cdc-start-position
@@ -2487,8 +2462,8 @@ type ReplicationTask struct {
 	// LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
 	CdcStartPosition *string
 
-	// Indicates when you want a change data capture (CDC) operation to stop. The value
-	// can be either server time or commit time. Server time example:
+	// Indicates when you want a change data capture (CDC) operation to stop. The
+	// value can be either server time or commit time. Server time example:
 	// --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example:
 	// --cdc-stop-position “commit_time: 2018-02-09T12:12:12“
 	CdcStopPosition *string
@@ -2500,8 +2475,8 @@ type ReplicationTask struct {
 	MigrationType MigrationTypeValue
 
 	// Indicates the last checkpoint that occurred during a change data capture (CDC)
-	// operation. You can provide this value to the CdcStartPosition parameter to start
-	// a CDC operation that begins at that checkpoint.
+	// operation. You can provide this value to the CdcStartPosition parameter to
+	// start a CDC operation that begins at that checkpoint.
 	RecoveryCheckpoint *string
 
 	// The ARN of the replication instance.
@@ -2514,11 +2489,9 @@ type ReplicationTask struct {
 	ReplicationTaskCreationDate *time.Time
 
 	// The user-assigned replication task identifier or name. Constraints:
-	// - Must
-	// contain 1-255 alphanumeric characters or hyphens.
-	// - First character must be a
-	// letter.
-	// - Cannot end with a hyphen or contain two consecutive hyphens.
+	//     - Must contain 1-255 alphanumeric characters or hyphens.
+	//     - First character must be a letter.
+	//     - Cannot end with a hyphen or contain two consecutive hyphens.
 	ReplicationTaskIdentifier *string
 
 	// The settings for the replication task.
@@ -2536,99 +2509,36 @@ type ReplicationTask struct {
 
 	// The status of the replication task. This response parameter can return one of
 	// the following values:
-	// - "moving" – The task is being moved in response to
-	// running the MoveReplicationTask
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html)
-	// operation.
-	// - "creating" – The task is being created in response to running the
-	// CreateReplicationTask
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html)
-	// operation.
-	// - "deleting" – The task is being deleted in response to running the
-	// DeleteReplicationTask
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationTask.html)
-	// operation.
-	// - "failed" – The task failed to successfully complete the database
-	// migration in response to running the StartReplicationTask
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html)
-	// operation.
-	// - "failed-move" – The task failed to move in response to running the
-	// MoveReplicationTask
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html)
-	// operation.
-	// - "modifying" – The task definition is being modified in response to
-	// running the ModifyReplicationTask
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html)
-	// operation.
-	// - "ready" – The task is in a ready state where it can respond to
-	// other task operations, such as StartReplicationTask
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html)
-	// or DeleteReplicationTask
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationTask.html).
-	// -
-	// "running" – The task is performing a database migration in response to running
-	// the StartReplicationTask
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html)
-	// operation.
-	// - "starting" – The task is preparing to perform a database migration
-	// in response to running the StartReplicationTask
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html)
-	// operation.
-	// - "stopped" – The task has stopped in response to running the
-	// StopReplicationTask
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StopReplicationTask.html)
-	// operation.
-	// - "stopping" – The task is preparing to stop in response to running
-	// the StopReplicationTask
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StopReplicationTask.html)
-	// operation.
-	// - "testing" – The database migration specified for this task is being
-	// tested in response to running either the StartReplicationTaskAssessmentRun
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html)
-	// or the StartReplicationTaskAssessment
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessment.html)
-	// operation. StartReplicationTaskAssessmentRun
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html)
-	// is an improved premigration task assessment operation. The
-	// StartReplicationTaskAssessment
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessment.html)
-	// operation assesses data type compatibility only between the source and target
-	// database of a given migration task. In contrast,
-	// StartReplicationTaskAssessmentRun
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html)
-	// enables you to specify a variety of premigration task assessments in addition to
-	// data type compatibility. These assessments include ones for the validity of
-	// primary key definitions and likely issues with database migration performance,
-	// among others.
+	//     - "moving" – The task is being moved in response to running the MoveReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html) operation.
+	//     - "creating" – The task is being created in response to running the CreateReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html) operation.
+	//     - "deleting" – The task is being deleted in response to running the DeleteReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationTask.html) operation.
+	//     - "failed" – The task failed to successfully complete the database migration in response to running the StartReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html) operation.
+	//     - "failed-move" – The task failed to move in response to running the MoveReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html) operation.
+	//     - "modifying" – The task definition is being modified in response to running the ModifyReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html) operation.
+	//     - "ready" – The task is in a ready state where it can respond to other task operations, such as StartReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html) or DeleteReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationTask.html) .
+	//     - "running" – The task is performing a database migration in response to running the StartReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html) operation.
+	//     - "starting" – The task is preparing to perform a database migration in response to running the StartReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html) operation.
+	//     - "stopped" – The task has stopped in response to running the StopReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_StopReplicationTask.html) operation.
+	//     - "stopping" – The task is preparing to stop in response to running the StopReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_StopReplicationTask.html) operation.
+	//     - "testing" – The database migration specified for this task is being tested in response to running either the StartReplicationTaskAssessmentRun (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html) or the StartReplicationTaskAssessment (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessment.html) operation. StartReplicationTaskAssessmentRun (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html) is an improved premigration task assessment operation. The StartReplicationTaskAssessment (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessment.html) operation assesses data type compatibility only between the source and target database of a given migration task. In contrast, StartReplicationTaskAssessmentRun (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html) enables you to specify a variety of premigration task assessments in addition to data type compatibility. These assessments include ones for the validity of primary key definitions and likely issues with database migration performance, among others.
 	Status *string
 
-	// The reason the replication task was stopped. This response parameter can return
-	// one of the following values:
-	// - "Stop Reason NORMAL"
-	// - "Stop Reason
-	// RECOVERABLE_ERROR"
-	// - "Stop Reason FATAL_ERROR"
-	// - "Stop Reason
-	// FULL_LOAD_ONLY_FINISHED"
-	// - "Stop Reason STOPPED_AFTER_FULL_LOAD" – Full load
-	// completed, with cached changes not applied
-	// - "Stop Reason
-	// STOPPED_AFTER_CACHED_EVENTS" – Full load completed, with cached changes
-	// applied
-	// - "Stop Reason EXPRESS_LICENSE_LIMITS_REACHED"
-	// - "Stop Reason
-	// STOPPED_AFTER_DDL_APPLY" – User-defined stop task after DDL applied
-	// - "Stop
-	// Reason STOPPED_DUE_TO_LOW_MEMORY"
-	// - "Stop Reason STOPPED_DUE_TO_LOW_DISK"
-	// -
-	// "Stop Reason STOPPED_AT_SERVER_TIME" – User-defined server time for stopping
-	// task
-	// - "Stop Reason STOPPED_AT_COMMIT_TIME" – User-defined commit time for
-	// stopping task
-	// - "Stop Reason RECONFIGURATION_RESTART"
-	// - "Stop Reason
-	// RECYCLE_TASK"
+	// The reason the replication task was stopped. This response parameter can
+	// return one of the following values:
+	//     - "Stop Reason NORMAL"
+	//     - "Stop Reason RECOVERABLE_ERROR"
+	//     - "Stop Reason FATAL_ERROR"
+	//     - "Stop Reason FULL_LOAD_ONLY_FINISHED"
+	//     - "Stop Reason STOPPED_AFTER_FULL_LOAD" – Full load completed, with cached changes not applied
+	//     - "Stop Reason STOPPED_AFTER_CACHED_EVENTS" – Full load completed, with cached changes applied
+	//     - "Stop Reason EXPRESS_LICENSE_LIMITS_REACHED"
+	//     - "Stop Reason STOPPED_AFTER_DDL_APPLY" – User-defined stop task after DDL applied
+	//     - "Stop Reason STOPPED_DUE_TO_LOW_MEMORY"
+	//     - "Stop Reason STOPPED_DUE_TO_LOW_DISK"
+	//     - "Stop Reason STOPPED_AT_SERVER_TIME" – User-defined server time for stopping task
+	//     - "Stop Reason STOPPED_AT_COMMIT_TIME" – User-defined commit time for stopping task
+	//     - "Stop Reason RECONFIGURATION_RESTART"
+	//     - "Stop Reason RECYCLE_TASK"
 	StopReason *string
 
 	// Table mappings specified in the task.
@@ -2638,17 +2548,15 @@ type ReplicationTask struct {
 	TargetEndpointArn *string
 
 	// The ARN of the replication instance to which this task is moved in response to
-	// running the MoveReplicationTask
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html)
+	// running the MoveReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html)
 	// operation. Otherwise, this response parameter isn't a member of the
 	// ReplicationTask object.
 	TargetReplicationInstanceArn *string
 
-	// Supplemental information that the task requires to migrate the data for certain
-	// source and target endpoints. For more information, see Specifying Supplemental
-	// Data for Task Settings
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html) in
-	// the Database Migration Service User Guide.
+	// Supplemental information that the task requires to migrate the data for
+	// certain source and target endpoints. For more information, see Specifying
+	// Supplemental Data for Task Settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html)
+	// in the Database Migration Service User Guide.
 	TaskData *string
 
 	noSmithyDocumentSerde
@@ -2659,7 +2567,7 @@ type ReplicationTaskAssessmentResult struct {
 
 	// The task assessment results in JSON format. The response object only contains
 	// this field if you provide
-	// DescribeReplicationTaskAssessmentResultsMessage$ReplicationTaskArn in the
+	// DescribeReplicationTaskAssessmentResultsMessage$ReplicationTaskArnin the
 	// request.
 	AssessmentResults *string
 
@@ -2681,16 +2589,16 @@ type ReplicationTaskAssessmentResult struct {
 
 	// The URL of the S3 object containing the task assessment results. The response
 	// object only contains this field if you provide
-	// DescribeReplicationTaskAssessmentResultsMessage$ReplicationTaskArn in the
+	// DescribeReplicationTaskAssessmentResultsMessage$ReplicationTaskArnin the
 	// request.
 	S3ObjectUrl *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides information that describes a premigration assessment run that you have
-// started using the StartReplicationTaskAssessmentRun operation. Some of the
-// information appears based on other operations that can return the
+// Provides information that describes a premigration assessment run that you
+// have started using the StartReplicationTaskAssessmentRun operation. Some of
+// the information appears based on other operations that can return the
 // ReplicationTaskAssessmentRun object.
 type ReplicationTaskAssessmentRun struct {
 
@@ -2733,35 +2641,22 @@ type ReplicationTaskAssessmentRun struct {
 	ServiceAccessRoleArn *string
 
 	// Assessment run status. This status can have one of the following values:
-	// -
-	// "cancelling" – The assessment run was canceled by the
-	// CancelReplicationTaskAssessmentRun operation.
-	// - "deleting" – The assessment run
-	// was deleted by the DeleteReplicationTaskAssessmentRun operation.
-	// - "failed" – At
-	// least one individual assessment completed with a failed status.
-	// -
-	// "error-provisioning" – An internal error occurred while resources were
-	// provisioned (during provisioning status).
-	// - "error-executing" – An internal
-	// error occurred while individual assessments ran (during running status).
-	// -
-	// "invalid state" – The assessment run is in an unknown state.
-	// - "passed" – All
-	// individual assessments have completed, and none has a failed status.
-	// -
-	// "provisioning" – Resources required to run individual assessments are being
-	// provisioned.
-	// - "running" – Individual assessments are being run.
-	// - "starting" –
-	// The assessment run is starting, but resources are not yet being provisioned for
-	// individual assessments.
+	//     - "cancelling" – The assessment run was canceled by the CancelReplicationTaskAssessmentRun operation.
+	//     - "deleting" – The assessment run was deleted by the DeleteReplicationTaskAssessmentRun operation.
+	//     - "failed" – At least one individual assessment completed with a failed status.
+	//     - "error-provisioning" – An internal error occurred while resources were provisioned (during provisioning status).
+	//     - "error-executing" – An internal error occurred while individual assessments ran (during running status).
+	//     - "invalid state" – The assessment run is in an unknown state.
+	//     - "passed" – All individual assessments have completed, and none has a failed status.
+	//     - "provisioning" – Resources required to run individual assessments are being provisioned.
+	//     - "running" – Individual assessments are being run.
+	//     - "starting" – The assessment run is starting, but resources are not yet being provisioned for individual assessments.
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
-// The progress values reported by the AssessmentProgress response element.
+// The progress values reported by the AssessmentProgress  response element.
 type ReplicationTaskAssessmentRunProgress struct {
 
 	// The number of individual assessments that have completed, successfully or not.
@@ -2773,8 +2668,8 @@ type ReplicationTaskAssessmentRunProgress struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information that describes an individual assessment from a premigration
-// assessment run.
+// Provides information that describes an individual assessment from a
+// premigration assessment run.
 type ReplicationTaskIndividualAssessment struct {
 
 	// Name of this individual assessment.
@@ -2793,26 +2688,26 @@ type ReplicationTaskIndividualAssessment struct {
 
 	// Individual assessment status. This status can have one of the following
 	// values:
-	// - "cancelled"
-	// - "error"
-	// - "failed"
-	// - "passed"
-	// - "pending"
-	// - "running"
+	//     - "cancelled"
+	//     - "error"
+	//     - "failed"
+	//     - "passed"
+	//     - "pending"
+	//     - "running"
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
-// In response to a request by the DescribeReplicationTasks operation, this object
-// provides a collection of statistics about a replication task.
+// In response to a request by the DescribeReplicationTasks operation, this
+// object provides a collection of statistics about a replication task.
 type ReplicationTaskStats struct {
 
 	// The elapsed time of the task, in milliseconds.
 	ElapsedTimeMillis int64
 
-	// The date the replication task was started either with a fresh start or a target
-	// reload.
+	// The date the replication task was started either with a fresh start or a
+	// target reload.
 	FreshStartDate *time.Time
 
 	// The date the replication task full load was completed.
@@ -2824,9 +2719,9 @@ type ReplicationTaskStats struct {
 	// The date the replication task full load was started.
 	FullLoadStartDate *time.Time
 
-	// The date the replication task was started either with a fresh start or a resume.
-	// For more information, see StartReplicationTaskType
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html#DMS-StartReplicationTask-request-StartReplicationTaskType).
+	// The date the replication task was started either with a fresh start or a
+	// resume. For more information, see StartReplicationTaskType (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html#DMS-StartReplicationTask-request-StartReplicationTaskType)
+	// .
 	StartDate *time.Time
 
 	// The date the replication task was stopped.
@@ -2853,10 +2748,9 @@ type ResourcePendingMaintenanceActions struct {
 	// Detailed information about the pending maintenance action.
 	PendingMaintenanceActionDetails []PendingMaintenanceAction
 
-	// The Amazon Resource Name (ARN) of the DMS resource that the pending maintenance
-	// action applies to. For information about creating an ARN, see  Constructing an
-	// Amazon Resource Name (ARN) for DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.AWS.ARN.html)
+	// The Amazon Resource Name (ARN) of the DMS resource that the pending
+	// maintenance action applies to. For information about creating an ARN, see
+	// Constructing an Amazon Resource Name (ARN) for DMS (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.AWS.ARN.html)
 	// in the DMS documentation.
 	ResourceIdentifier *string
 
@@ -2866,18 +2760,18 @@ type ResourcePendingMaintenanceActions struct {
 // Settings for exporting data to Amazon S3.
 type S3Settings struct {
 
-	// An optional parameter that, when set to true or y, you can use to add column
+	// An optional parameter that, when set to true  or y, you can use to add column
 	// name information to the .csv output file. The default value is false. Valid
-	// values are true, false, y, and n.
+	// values are true , false , y , and n .
 	AddColumnName *bool
 
-	// Use the S3 target endpoint setting AddTrailingPaddingCharacter to add padding on
-	// string data. The default value is false.
+	// Use the S3 target endpoint setting AddTrailingPaddingCharacter to add padding
+	// on string data. The default value is false .
 	AddTrailingPaddingCharacter *bool
 
-	// An optional parameter to set a folder name in the S3 bucket. If provided, tables
-	// are created in the path  bucketFolder/schema_name/table_name/. If this parameter
-	// isn't specified, then the path used is  schema_name/table_name/.
+	// An optional parameter to set a folder name in the S3 bucket. If provided,
+	// tables are created in the path bucketFolder/schema_name/table_name/. If this
+	// parameter isn't specified, then the path used is schema_name/table_name/ .
 	BucketFolder *string
 
 	// The name of the S3 bucket.
@@ -2885,88 +2779,83 @@ type S3Settings struct {
 
 	// A value that enables DMS to specify a predefined (canned) access control list
 	// for objects created in an Amazon S3 bucket as .csv or .parquet files. For more
-	// information about Amazon S3 canned ACLs, see Canned ACL
-	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl) in
-	// the Amazon S3 Developer Guide. The default value is NONE. Valid values include
-	// NONE, PRIVATE, PUBLIC_READ, PUBLIC_READ_WRITE, AUTHENTICATED_READ,
+	// information about Amazon S3 canned ACLs, see Canned ACL (http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl)
+	// in the Amazon S3 Developer Guide. The default value is NONE. Valid values
+	// include NONE, PRIVATE, PUBLIC_READ, PUBLIC_READ_WRITE, AUTHENTICATED_READ,
 	// AWS_EXEC_READ, BUCKET_OWNER_READ, and BUCKET_OWNER_FULL_CONTROL.
 	CannedAclForObjects CannedAclForObjectsValue
 
-	// A value that enables a change data capture (CDC) load to write INSERT and UPDATE
-	// operations to .csv or .parquet (columnar storage) output files. The default
-	// setting is false, but when CdcInsertsAndUpdates is set to true or y, only
-	// INSERTs and UPDATEs from the source database are migrated to the .csv or
+	// A value that enables a change data capture (CDC) load to write INSERT and
+	// UPDATE operations to .csv or .parquet (columnar storage) output files. The
+	// default setting is false , but when CdcInsertsAndUpdates  is set to true  or y
+	// , only INSERTs and UPDATEs from the source database are migrated to the .csv or
 	// .parquet file. For .csv file format only, how these INSERTs and UPDATEs are
-	// recorded depends on the value of the IncludeOpForFullLoad parameter. If
-	// IncludeOpForFullLoad is set to true, the first field of every CDC record is set
-	// to either I or U to indicate INSERT and UPDATE operations at the source. But if
-	// IncludeOpForFullLoad is set to false, CDC records are written without an
-	// indication of INSERT or UPDATE operations at the source. For more information
+	// recorded depends on the value of the IncludeOpForFullLoad  parameter. If
+	// IncludeOpForFullLoad is set to true, the first field of every CDC record is
+	// set to either I  or U to indicate INSERT and UPDATE operations at the source.
+	// But if IncludeOpForFullLoad  is set to false, CDC records are written without
+	// an indication of INSERT or UPDATE operations at the source. For more information
 	// about how these settings work together, see Indicating Source DB Operations in
-	// Migrated S3 Data
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps)
+	// Migrated S3 Data (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps)
 	// in the Database Migration Service User Guide.. DMS supports the use of the
-	// CdcInsertsAndUpdates parameter in versions 3.3.1 and later. CdcInsertsOnly and
-	// CdcInsertsAndUpdates can't both be set to true for the same endpoint. Set either
-	// CdcInsertsOnly or CdcInsertsAndUpdates to true for the same endpoint, but not
-	// both.
+	// CdcInsertsAndUpdates parameter in versions 3.3.1 and later. CdcInsertsOnly  and
+	// CdcInsertsAndUpdates can't both be set to true for the same endpoint. Set
+	// either CdcInsertsOnly  or CdcInsertsAndUpdates  to true for the same endpoint,
+	// but not both.
 	CdcInsertsAndUpdates *bool
 
 	// A value that enables a change data capture (CDC) load to write only INSERT
 	// operations to .csv or columnar storage (.parquet) output files. By default (the
-	// false setting), the first field in a .csv or .parquet record contains the letter
-	// I (INSERT), U (UPDATE), or D (DELETE). These values indicate whether the row was
-	// inserted, updated, or deleted at the source database for a CDC load to the
-	// target. If CdcInsertsOnly is set to true or y, only INSERTs from the source
-	// database are migrated to the .csv or .parquet file. For .csv format only, how
-	// these INSERTs are recorded depends on the value of IncludeOpForFullLoad. If
-	// IncludeOpForFullLoad is set to true, the first field of every CDC record is set
-	// to I to indicate the INSERT operation at the source. If IncludeOpForFullLoad is
-	// set to false, every CDC record is written without a first field to indicate the
-	// INSERT operation at the source. For more information about how these settings
-	// work together, see Indicating Source DB Operations in Migrated S3 Data
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps)
+	// falsesetting), the first field in a .csv or .parquet record contains the
+	// letter I (INSERT), U (UPDATE), or D (DELETE). These values indicate whether the
+	// row was inserted, updated, or deleted at the source database for a CDC load to
+	// the target. If CdcInsertsOnly  is set to true  or y, only INSERTs from the
+	// source database are migrated to the .csv or .parquet file. For .csv format only,
+	// how these INSERTs are recorded depends on the value of IncludeOpForFullLoad.
+	// If IncludeOpForFullLoad  is set to true, the first field of every CDC record
+	// is set to I to indicate the INSERT operation at the source. If
+	// IncludeOpForFullLoad is set to false, every CDC record is written without a
+	// first field to indicate the INSERT operation at the source. For more information
+	// about how these settings work together, see Indicating Source DB Operations in
+	// Migrated S3 Data (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps)
 	// in the Database Migration Service User Guide.. DMS supports the interaction
-	// described preceding between the CdcInsertsOnly and IncludeOpForFullLoad
-	// parameters in versions 3.1.4 and later. CdcInsertsOnly and CdcInsertsAndUpdates
-	// can't both be set to true for the same endpoint. Set either CdcInsertsOnly or
-	// CdcInsertsAndUpdates to true for the same endpoint, but not both.
+	// described preceding between the CdcInsertsOnly  and IncludeOpForFullLoad
+	// parameters in versions 3.1.4 and later. CdcInsertsOnly  and
+	// CdcInsertsAndUpdates can't both be set to true for the same endpoint. Set
+	// either CdcInsertsOnly  or CdcInsertsAndUpdates  to true for the same endpoint,
+	// but not both.
 	CdcInsertsOnly *bool
 
-	// Maximum length of the interval, defined in seconds, after which to output a file
-	// to Amazon S3. When CdcMaxBatchInterval and CdcMinFileSize are both specified,
-	// the file write is triggered by whichever parameter condition is met first within
-	// an DMS CloudFormation template. The default value is 60 seconds.
+	// Maximum length of the interval, defined in seconds, after which to output a
+	// file to Amazon S3. When CdcMaxBatchInterval  and CdcMinFileSize are both
+	// specified, the file write is triggered by whichever parameter condition is met
+	// first within an DMS CloudFormation template. The default value is 60 seconds.
 	CdcMaxBatchInterval *int32
 
 	// Minimum file size, defined in kilobytes, to reach for a file output to Amazon
-	// S3. When CdcMinFileSize and CdcMaxBatchInterval are both specified, the file
+	// S3. When CdcMinFileSize  and CdcMaxBatchInterval are both specified, the file
 	// write is triggered by whichever parameter condition is met first within an DMS
 	// CloudFormation template. The default value is 32 MB.
 	CdcMinFileSize *int32
 
 	// Specifies the folder path of CDC files. For an S3 source, this setting is
-	// required if a task captures change data; otherwise, it's optional. If CdcPath is
-	// set, DMS reads CDC files from this path and replicates the data changes to the
-	// target endpoint. For an S3 target if you set PreserveTransactions
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-PreserveTransactions)
-	// to true, DMS verifies that you have set this parameter to a folder path on your
-	// S3 target where DMS can save the transaction order for the CDC load. DMS creates
-	// this CDC folder path in either your S3 target working directory or the S3 target
-	// location specified by BucketFolder
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketFolder)
-	// and BucketName
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketName).
-	// For example, if you specify CdcPath as MyChangedData, and you specify BucketName
-	// as MyTargetBucket but do not specify BucketFolder, DMS creates the CDC folder
-	// path following: MyTargetBucket/MyChangedData. If you specify the same CdcPath,
-	// and you specify BucketName as MyTargetBucket and BucketFolder as MyTargetData,
-	// DMS creates the CDC folder path following:
-	// MyTargetBucket/MyTargetData/MyChangedData. For more information on CDC including
-	// transaction order on an S3 target, see Capturing data changes (CDC) including
-	// transaction order on the S3 target
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath).
-	// This setting is supported in DMS versions 3.4.2 and later.
+	// required if a task captures change data; otherwise, it's optional. If CdcPath
+	// is set, DMS reads CDC files from this path and replicates the data changes to
+	// the target endpoint. For an S3 target if you set PreserveTransactions (https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-PreserveTransactions)
+	// to true, DMS verifies that you have set this parameter to a folder path on
+	// your S3 target where DMS can save the transaction order for the CDC load. DMS
+	// creates this CDC folder path in either your S3 target working directory or the
+	// S3 target location specified by BucketFolder (https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketFolder)
+	// and BucketName (https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketName)
+	// . For example, if you specify CdcPath  as MyChangedData , and you specify
+	// BucketName as MyTargetBucket  but do not specify BucketFolder, DMS creates the
+	// CDC folder path following: MyTargetBucket/MyChangedData. If you specify the
+	// same CdcPath , and you specify BucketName  as MyTargetBucket  and BucketFolder
+	// as MyTargetData , DMS creates the CDC folder path following:
+	// MyTargetBucket/MyTargetData/MyChangedData. For more information on CDC
+	// including transaction order on an S3 target, see Capturing data changes (CDC)
+	// including transaction order on the S3 target (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath)
+	// . This setting is supported in DMS versions 3.4.2 and later.
 	CdcPath *string
 
 	// An optional parameter to use GZIP to compress the target files. Set to GZIP to
@@ -2980,60 +2869,57 @@ type S3Settings struct {
 	CsvDelimiter *string
 
 	// This setting only applies if your Amazon S3 output files during a change data
-	// capture (CDC) load are written in .csv format. If UseCsvNoSupValue
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-UseCsvNoSupValue)
+	// capture (CDC) load are written in .csv format. If UseCsvNoSupValue (https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-UseCsvNoSupValue)
 	// is set to true, specify a string value that you want DMS to use for all columns
 	// not included in the supplemental log. If you do not specify a string value, DMS
 	// uses the null value for these columns regardless of the UseCsvNoSupValue
 	// setting. This setting is supported in DMS versions 3.4.1 and later.
 	CsvNoSupValue *string
 
-	// An optional parameter that specifies how DMS treats null values. While handling
-	// the null value, you can use this parameter to pass a user-defined string as null
-	// when writing to the target. For example, when target columns are not nullable,
-	// you can use this option to differentiate between the empty string value and the
-	// null value. So, if you set this parameter value to the empty string ("" or ''),
-	// DMS treats the empty string as the null value instead of NULL. The default value
-	// is NULL. Valid values include any valid string.
+	// An optional parameter that specifies how DMS treats null values. While
+	// handling the null value, you can use this parameter to pass a user-defined
+	// string as null when writing to the target. For example, when target columns are
+	// not nullable, you can use this option to differentiate between the empty string
+	// value and the null value. So, if you set this parameter value to the empty
+	// string ("" or ''), DMS treats the empty string as the null value instead of
+	// NULL . The default value is NULL . Valid values include any valid string.
 	CsvNullValue *string
 
-	// The delimiter used to separate rows in the .csv file for both source and target.
-	// The default is a carriage return (\n).
+	// The delimiter used to separate rows in the .csv file for both source and
+	// target. The default is a carriage return ( \n ).
 	CsvRowDelimiter *string
 
 	// The format of the data that you want to use for output. You can choose one of
 	// the following:
-	// - csv : This is a row-based file format with comma-separated
-	// values (.csv).
-	// - parquet : Apache Parquet (.parquet) is a columnar storage file
-	// format that features efficient compression and provides faster query response.
+	//     - csv : This is a row-based file format with comma-separated values (.csv).
+	//     - parquet : Apache Parquet (.parquet) is a columnar storage file format that features efficient compression and provides faster query response.
 	DataFormat DataFormatValue
 
-	// The size of one data page in bytes. This parameter defaults to 1024 * 1024 bytes
-	// (1 MiB). This number is used for .parquet file format only.
+	// The size of one data page in bytes. This parameter defaults to 1024 * 1024
+	// bytes (1 MiB). This number is used for .parquet file format only.
 	DataPageSize *int32
 
 	// Specifies a date separating delimiter to use during folder partitioning. The
-	// default value is SLASH. Use this parameter when DatePartitionedEnabled is set to
-	// true.
+	// default value is SLASH . Use this parameter when DatePartitionedEnabled is set
+	// to true .
 	DatePartitionDelimiter DatePartitionDelimiterValue
 
 	// When set to true, this parameter partitions S3 bucket folders based on
-	// transaction commit dates. The default value is false. For more information about
-	// date-based folder partitioning, see Using date-based folder partitioning
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.DatePartitioning).
+	// transaction commit dates. The default value is false. For more information
+	// about date-based folder partitioning, see Using date-based folder partitioning (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.DatePartitioning)
+	// .
 	DatePartitionEnabled *bool
 
 	// Identifies the sequence of the date format to use during folder partitioning.
-	// The default value is YYYYMMDD. Use this parameter when DatePartitionedEnabled is
-	// set to true.
+	// The default value is YYYYMMDD . Use this parameter when DatePartitionedEnabled
+	// is set to true .
 	DatePartitionSequence DatePartitionSequenceValue
 
 	// When creating an S3 target endpoint, set DatePartitionTimezone to convert the
 	// current UTC time into a specified time zone. The conversion occurs when a date
 	// partition folder is created and a CDC filename is generated. The time zone
 	// format is Area/Location. Use this parameter when DatePartitionedEnabled is set
-	// to true, as shown in the following example.
+	// to true , as shown in the following example.
 	// s3-settings='{"DatePartitionEnabled": true, "DatePartitionSequence":
 	// "YYYYMMDDHH", "DatePartitionDelimiter": "SLASH",
 	// "DatePartitionTimezone":"Asia/Seoul", "BucketName": "dms-nattarat-test"}'
@@ -3046,50 +2932,42 @@ type S3Settings struct {
 	// .parquet file format only.
 	DictPageSizeLimit *int32
 
-	// A value that enables statistics for Parquet pages and row groups. Choose true to
-	// enable statistics, false to disable. Statistics include NULL, DISTINCT, MAX, and
-	// MIN values. This parameter defaults to true. This value is used for .parquet
-	// file format only.
+	// A value that enables statistics for Parquet pages and row groups. Choose true
+	// to enable statistics, false  to disable. Statistics include NULL , DISTINCT ,
+	// MAX , and MIN  values. This parameter defaults to true. This value is used for
+	// .parquet file format only.
 	EnableStatistics *bool
 
 	// The type of encoding you are using:
-	// - RLE_DICTIONARY uses a combination of
-	// bit-packing and run-length encoding to store repeated values more efficiently.
-	// This is the default.
-	// - PLAIN doesn't use encoding at all. Values are stored as
-	// they are.
-	// - PLAIN_DICTIONARY builds a dictionary of the values encountered in a
-	// given column. The dictionary is stored in a dictionary page for each column
-	// chunk.
+	//     - RLE_DICTIONARY uses a combination of bit-packing and run-length encoding to store repeated values more efficiently. This is the default.
+	//     - PLAIN doesn't use encoding at all. Values are stored as they are.
+	//     - PLAIN_DICTIONARY builds a dictionary of the values encountered in a given column. The dictionary is stored in a dictionary page for each column chunk.
 	EncodingType EncodingTypeValue
 
 	// The type of server-side encryption that you want to use for your data. This
 	// encryption type is part of the endpoint settings or the extra connections
-	// attributes for Amazon S3. You can choose either SSE_S3 (the default) or SSE_KMS.
-	// For the ModifyEndpoint operation, you can change the existing value of the
-	// EncryptionMode parameter from SSE_KMS to SSE_S3. But you can’t change the
-	// existing value from SSE_S3 to SSE_KMS. To use SSE_S3, you need an Identity and
-	// Access Management (IAM) role with permission to allow "arn:aws:s3:::dms-*" to
-	// use the following actions:
-	// - s3:CreateBucket
-	// - s3:ListBucket
-	// - s3:DeleteBucket
-	// -
-	// s3:GetBucketLocation
-	// - s3:GetObject
-	// - s3:PutObject
-	// - s3:DeleteObject
-	// -
-	// s3:GetObjectVersion
-	// - s3:GetBucketPolicy
-	// - s3:PutBucketPolicy
-	// -
-	// s3:DeleteBucketPolicy
+	// attributes for Amazon S3. You can choose either SSE_S3  (the default) or
+	// SSE_KMS . For the ModifyEndpoint operation, you can change the existing value
+	// of the EncryptionMode  parameter from SSE_KMS  to SSE_S3. But you can’t change
+	// the existing value from SSE_S3  to SSE_KMS . To use SSE_S3, you need an
+	// Identity and Access Management (IAM) role with permission to allow
+	// "arn:aws:s3:::dms-*" to use the following actions:
+	//     - s3:CreateBucket
+	//     - s3:ListBucket
+	//     - s3:DeleteBucket
+	//     - s3:GetBucketLocation
+	//     - s3:GetObject
+	//     - s3:PutObject
+	//     - s3:DeleteObject
+	//     - s3:GetObjectVersion
+	//     - s3:GetBucketPolicy
+	//     - s3:PutBucketPolicy
+	//     - s3:DeleteBucketPolicy
 	EncryptionMode EncryptionModeValue
 
 	// To specify a bucket owner and prevent sniping, you can use the
 	// ExpectedBucketOwner endpoint setting. Example:
-	// --s3-settings='{"ExpectedBucketOwner": "AWS_Account_ID"}' When you make a
+	// --s3-settings='{"ExpectedBucketOwner": "AWS_Account_ID"}'When you make a
 	// request to test a connection or perform a migration, S3 checks the account ID of
 	// the bucket owner against the specified parameter.
 	ExpectedBucketOwner *string
@@ -3097,29 +2975,28 @@ type S3Settings struct {
 	// Specifies how tables are defined in the S3 source files only.
 	ExternalTableDefinition *string
 
-	// When true, allows Glue to catalog your S3 bucket. Creating an Glue catalog lets
-	// you use Athena to query your data.
+	// When true, allows Glue to catalog your S3 bucket. Creating an Glue catalog
+	// lets you use Athena to query your data.
 	GlueCatalogGeneration *bool
 
-	// When this value is set to 1, DMS ignores the first row header in a .csv file. A
-	// value of 1 turns on the feature; a value of 0 turns off the feature. The default
-	// is 0.
+	// When this value is set to 1, DMS ignores the first row header in a .csv file.
+	// A value of 1 turns on the feature; a value of 0 turns off the feature. The
+	// default is 0.
 	IgnoreHeaderRows *int32
 
 	// A value that enables a full load to write INSERT operations to the
 	// comma-separated value (.csv) output files only to indicate how the rows were
-	// added to the source database. DMS supports the IncludeOpForFullLoad parameter in
-	// versions 3.1.4 and later. For full load, records can only be inserted. By
+	// added to the source database. DMS supports the IncludeOpForFullLoad parameter
+	// in versions 3.1.4 and later. For full load, records can only be inserted. By
 	// default (the false setting), no information is recorded in these output files
 	// for a full load to indicate that the rows were inserted at the source database.
-	// If IncludeOpForFullLoad is set to true or y, the INSERT is recorded as an I
+	// If IncludeOpForFullLoad  is set to true  or y, the INSERT is recorded as an I
 	// annotation in the first field of the .csv file. This allows the format of your
 	// target records from a full load to be consistent with the target records from a
-	// CDC load. This setting works together with the CdcInsertsOnly and the
-	// CdcInsertsAndUpdates parameters for output to .csv files only. For more
+	// CDC load. This setting works together with the CdcInsertsOnly  and the
+	// CdcInsertsAndUpdatesparameters for output to .csv files only. For more
 	// information about how these settings work together, see Indicating Source DB
-	// Operations in Migrated S3 Data
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps)
+	// Operations in Migrated S3 Data (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps)
 	// in the Database Migration Service User Guide..
 	IncludeOpForFullLoad *bool
 
@@ -3131,43 +3008,42 @@ type S3Settings struct {
 	// A value that specifies the precision of any TIMESTAMP column values that are
 	// written to an Amazon S3 object file in .parquet format. DMS supports the
 	// ParquetTimestampInMillisecond parameter in versions 3.1.4 and later. When
-	// ParquetTimestampInMillisecond is set to true or y, DMS writes all TIMESTAMP
+	// ParquetTimestampInMillisecond is set to true  or y , DMS writes all TIMESTAMP
 	// columns in a .parquet formatted file with millisecond precision. Otherwise, DMS
 	// writes them with microsecond precision. Currently, Amazon Athena and Glue can
-	// handle only millisecond precision for TIMESTAMP values. Set this parameter to
-	// true for S3 endpoint object files that are .parquet formatted only if you plan
+	// handle only millisecond precision for TIMESTAMP  values. Set this parameter to
+	// truefor S3 endpoint object files that are .parquet formatted only if you plan
 	// to query or process the data with Athena or Glue. DMS writes any TIMESTAMP
 	// column values written to an S3 file in .csv format with microsecond precision.
-	// Setting ParquetTimestampInMillisecond has no effect on the string format of the
-	// timestamp column value that is inserted by setting the TimestampColumnName
+	// Setting ParquetTimestampInMillisecond has no effect on the string format of
+	// the timestamp column value that is inserted by setting the TimestampColumnName
 	// parameter.
 	ParquetTimestampInMillisecond *bool
 
-	// The version of the Apache Parquet format that you want to use: parquet_1_0 (the
-	// default) or parquet_2_0.
+	// The version of the Apache Parquet format that you want to use: parquet_1_0
+	// (the default) or parquet_2_0 .
 	ParquetVersion ParquetVersionValue
 
-	// If set to true, DMS saves the transaction order for a change data capture (CDC)
-	// load on the Amazon S3 target specified by CdcPath
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CdcPath).
-	// For more information, see Capturing data changes (CDC) including transaction
-	// order on the S3 target
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath).
-	// This setting is supported in DMS versions 3.4.2 and later.
+	// If set to true, DMS saves the transaction order for a change data capture
+	// (CDC) load on the Amazon S3 target specified by CdcPath (https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CdcPath)
+	// . For more information, see Capturing data changes (CDC) including transaction
+	// order on the S3 target (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath)
+	// . This setting is supported in DMS versions 3.4.2 and later.
 	PreserveTransactions *bool
 
-	// For an S3 source, when this value is set to true or y, each leading double
+	// For an S3 source, when this value is set to true  or y, each leading double
 	// quotation mark has to be followed by an ending double quotation mark. This
-	// formatting complies with RFC 4180. When this value is set to false or n, string
-	// literals are copied to the target as is. In this case, a delimiter (row or
-	// column) signals the end of the field. Thus, you can't use a delimiter as part of
-	// the string, because it signals the end of the value. For an S3 target, an
+	// formatting complies with RFC 4180. When this value is set to false  or n,
+	// string literals are copied to the target as is. In this case, a delimiter (row
+	// or column) signals the end of the field. Thus, you can't use a delimiter as part
+	// of the string, because it signals the end of the value. For an S3 target, an
 	// optional parameter used to set behavior to comply with RFC 4180 for data
 	// migrated to Amazon S3 using .csv file format only. When this value is set to
 	// true or y using Amazon S3 as a target, if the data has quotation marks or
 	// newline characters in it, DMS encloses the entire column with an additional pair
 	// of double quotation marks ("). Every quotation mark within the data is repeated
-	// twice. The default value is true. Valid values include true, false, y, and n.
+	// twice. The default value is true . Valid values include true , false , y , and
+	// n .
 	Rfc4180 *bool
 
 	// The number of rows in a row group. A smaller row group size provides faster
@@ -3177,8 +3053,8 @@ type S3Settings struct {
 	// the max row group length in bytes (64 * 1024 * 1024).
 	RowGroupLength *int32
 
-	// If you are using SSE_KMS for the EncryptionMode, provide the KMS key ID. The key
-	// that you use needs an attached policy that enables Identity and Access
+	// If you are using SSE_KMS  for the EncryptionMode, provide the KMS key ID. The
+	// key that you use needs an attached policy that enables Identity and Access
 	// Management (IAM) user permissions and allows use of the key. Here is a CLI
 	// example: aws dms create-endpoint --endpoint-identifier value --endpoint-type
 	// target --engine-name s3 --s3-settings
@@ -3186,16 +3062,16 @@ type S3Settings struct {
 	ServerSideEncryptionKmsKeyId *string
 
 	// The Amazon Resource Name (ARN) used by the service to access the IAM role. The
-	// role must allow the iam:PassRole action. It is a required parameter that enables
-	// DMS to write and read objects from an S3 bucket.
+	// role must allow the iam:PassRole action. It is a required parameter that
+	// enables DMS to write and read objects from an S3 bucket.
 	ServiceAccessRoleArn *string
 
-	// A value that when nonblank causes DMS to add a column with timestamp information
-	// to the endpoint data for an Amazon S3 target. DMS supports the
-	// TimestampColumnName parameter in versions 3.1.4 and later. DMS includes an
+	// A value that when nonblank causes DMS to add a column with timestamp
+	// information to the endpoint data for an Amazon S3 target. DMS supports the
+	// TimestampColumnNameparameter in versions 3.1.4 and later. DMS includes an
 	// additional STRING column in the .csv or .parquet object files of your migrated
-	// data when you set TimestampColumnName to a nonblank value. For a full load, each
-	// row of this timestamp column contains a timestamp for when the data was
+	// data when you set TimestampColumnName to a nonblank value. For a full load,
+	// each row of this timestamp column contains a timestamp for when the data was
 	// transferred from the source to the target by DMS. For a change data capture
 	// (CDC) load, each row of the timestamp column contains the timestamp for the
 	// commit of that row in the source database. The string format for this timestamp
@@ -3203,14 +3079,13 @@ type S3Settings struct {
 	// value is in microseconds. For a CDC load, the rounding of the precision depends
 	// on the commit timestamp supported by DMS for the source database. When the
 	// AddColumnName parameter is set to true, DMS also includes a name for the
-	// timestamp column that you set with TimestampColumnName.
+	// timestamp column that you set with TimestampColumnName .
 	TimestampColumnName *string
 
 	// This setting applies if the S3 output files during a change data capture (CDC)
-	// load are written in .csv format. If set to true for columns not included in the
-	// supplemental log, DMS uses the value specified by CsvNoSupValue
-	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CsvNoSupValue).
-	// If not set or set to false, DMS uses the null value for these columns. This
+	// load are written in .csv format. If set to true for columns not included in
+	// the supplemental log, DMS uses the value specified by CsvNoSupValue (https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CsvNoSupValue)
+	// . If not set or set to false, DMS uses the null value for these columns. This
 	// setting is supported in DMS versions 3.4.1 and later.
 	UseCsvNoSupValue *bool
 
@@ -3219,8 +3094,8 @@ type S3Settings struct {
 	// useTaskStartTimeForFullLoadTimestamp is set to true, each row of the timestamp
 	// column contains the task start time. For CDC loads, each row of the timestamp
 	// column contains the transaction commit time. When
-	// useTaskStartTimeForFullLoadTimestamp is set to false, the full load timestamp in
-	// the timestamp column increments with the time data arrives at the target.
+	// useTaskStartTimeForFullLoadTimestamp is set to false, the full load timestamp
+	// in the timestamp column increments with the time data arrives at the target.
 	UseTaskStartTimeForFullLoadTimestamp *bool
 
 	noSmithyDocumentSerde
@@ -3314,9 +3189,9 @@ type StartRecommendationsRequestEntry struct {
 	noSmithyDocumentSerde
 }
 
-// In response to a request by the DescribeReplicationSubnetGroups operation, this
-// object identifies a subnet by its given Availability Zone, subnet identifier,
-// and status.
+// In response to a request by the DescribeReplicationSubnetGroups operation,
+// this object identifies a subnet by its given Availability Zone, subnet
+// identifier, and status.
 type Subnet struct {
 
 	// The Availability Zone of the subnet.
@@ -3331,24 +3206,24 @@ type Subnet struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about types of supported endpoints in response to a request
-// by the DescribeEndpointTypes operation. This information includes the type of
-// endpoint, the database engine name, and whether change data capture (CDC) is
-// supported.
+// Provides information about types of supported endpoints in response to a
+// request by the DescribeEndpointTypes operation. This information includes the
+// type of endpoint, the database engine name, and whether change data capture
+// (CDC) is supported.
 type SupportedEndpointType struct {
 
-	// The type of endpoint. Valid values are source and target.
+	// The type of endpoint. Valid values are source  and target .
 	EndpointType ReplicationEndpointTypeValue
 
-	// The expanded name for the engine name. For example, if the EngineName parameter
-	// is "aurora", this value would be "Amazon Aurora MySQL".
+	// The expanded name for the engine name. For example, if the EngineName
+	// parameter is "aurora", this value would be "Amazon Aurora MySQL".
 	EngineDisplayName *string
 
 	// The database engine name. Valid values, depending on the EndpointType, include
-	// "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql",
-	// "redshift", "s3", "db2", "db2-zos", "azuredb", "sybase", "dynamodb", "mongodb",
-	// "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", "neptune", and
-	// "babelfish".
+	// "mysql" , "oracle" , "postgres" , "mariadb" , "aurora" , "aurora-postgresql" ,
+	// "redshift" , "s3" , "db2" , "db2-zos" , "azuredb" , "sybase" , "dynamodb" ,
+	// "mongodb" , "kinesis" , "kafka" , "elasticsearch" , "documentdb" , "sqlserver"
+	// , "neptune" , and "babelfish" .
 	EngineName *string
 
 	// The earliest DMS engine version that supports this endpoint engine. Note that
@@ -3376,16 +3251,15 @@ type SybaseSettings struct {
 
 	// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
 	// trusted entity and grants the required permissions to access the value in
-	// SecretsManagerSecret. The role must allow the iam:PassRole action.
-	// SecretsManagerSecret has the value of the Amazon Web Services Secrets Manager
+	// SecretsManagerSecret . The role must allow the iam:PassRole  action.
+	// SecretsManagerSecrethas the value of the Amazon Web Services Secrets Manager
 	// secret that allows access to the SAP ASE endpoint. You can specify one of two
 	// sets of values for these permissions. You can specify the values for this
-	// setting and SecretsManagerSecretId. Or you can specify clear-text values for
-	// UserName, Password, ServerName, and Port. You can't specify both. For more
-	// information on creating this SecretsManagerSecret and the
+	// setting and SecretsManagerSecretId . Or you can specify clear-text values for
+	// UserName , Password , ServerName , and Port. You can't specify both. For more
+	// information on creating this SecretsManagerSecret  and the
 	// SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it,
-	// see Using secrets to access Database Migration Service resources
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// see Using secrets to access Database Migration Service resources (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
 	// in the Database Migration Service User Guide.
 	SecretsManagerAccessRoleArn *string
 
@@ -3406,8 +3280,8 @@ type SybaseSettings struct {
 // DescribeTableStatistics operation.
 type TableStatistics struct {
 
-	// The number of data definition language (DDL) statements used to build and modify
-	// the structure of your tables applied on the target.
+	// The number of data definition language (DDL) statements used to build and
+	// modify the structure of your tables applied on the target.
 	AppliedDdls *int64
 
 	// The number of delete actions applied on a target table.
@@ -3426,8 +3300,8 @@ type TableStatistics struct {
 	// The number of delete actions performed on a table.
 	Deletes int64
 
-	// The number of rows that failed conditional checks during the full load operation
-	// (valid only for migrations where DynamoDB is the target).
+	// The number of rows that failed conditional checks during the full load
+	// operation (valid only for migrations where DynamoDB is the target).
 	FullLoadCondtnlChkFailedRows int64
 
 	// The time when the full load operation completed.
@@ -3437,8 +3311,8 @@ type TableStatistics struct {
 	// only for migrations where DynamoDB is the target).
 	FullLoadErrorRows int64
 
-	// A value that indicates if the table was reloaded (true) or loaded as part of a
-	// new full load operation (false).
+	// A value that indicates if the table was reloaded ( true) or loaded as part of
+	// a new full load operation ( false ).
 	FullLoadReloaded *bool
 
 	// The number of rows added during the full load operation.
@@ -3475,29 +3349,17 @@ type TableStatistics struct {
 
 	// The validation state of the table. This parameter can have the following
 	// values:
-	// - Not enabled – Validation isn't enabled for the table in the migration
-	// task.
-	// - Pending records – Some records in the table are waiting for
-	// validation.
-	// - Mismatched records – Some records in the table don't match between
-	// the source and target.
-	// - Suspended records – Some records in the table couldn't
-	// be validated.
-	// - No primary key –The table couldn't be validated because it has
-	// no primary key.
-	// - Table error – The table wasn't validated because it's in an
-	// error state and some data wasn't migrated.
-	// - Validated – All rows in the table
-	// are validated. If the table is updated, the status can change from Validated.
-	// -
-	// Error – The table couldn't be validated because of an unexpected error.
-	// -
-	// Pending validation – The table is waiting validation.
-	// - Preparing table –
-	// Preparing the table enabled in the migration task for validation.
-	// - Pending
-	// revalidation – All rows in the table are pending validation after the table was
-	// updated.
+	//     - Not enabled – Validation isn't enabled for the table in the migration task.
+	//     - Pending records – Some records in the table are waiting for validation.
+	//     - Mismatched records – Some records in the table don't match between the source and target.
+	//     - Suspended records – Some records in the table couldn't be validated.
+	//     - No primary key –The table couldn't be validated because it has no primary key.
+	//     - Table error – The table wasn't validated because it's in an error state and some data wasn't migrated.
+	//     - Validated – All rows in the table are validated. If the table is updated, the status can change from Validated.
+	//     - Error – The table couldn't be validated because of an unexpected error.
+	//     - Pending validation – The table is waiting validation.
+	//     - Preparing table – Preparing the table enabled in the migration task for validation.
+	//     - Pending revalidation – All rows in the table are pending validation after the table was updated.
 	ValidationState *string
 
 	// Additional details about the state of validation.
@@ -3527,10 +3389,9 @@ type TableToReload struct {
 
 // A user-defined key-value pair that describes metadata added to an DMS resource
 // and that is used by operations such as the following:
-// - AddTagsToResource
-// -
-// ListTagsForResource
-// - RemoveTagsFromResource
+//   - AddTagsToResource
+//   - ListTagsForResource
+//   - RemoveTagsFromResource
 type Tag struct {
 
 	// A key is the required name of the tag. The string value can be 1-128 Unicode
@@ -3540,14 +3401,14 @@ type Tag struct {
 	// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
 	Key *string
 
-	// The Amazon Resource Name (ARN) string that uniquely identifies the resource for
-	// which the tag is created.
+	// The Amazon Resource Name (ARN) string that uniquely identifies the resource
+	// for which the tag is created.
 	ResourceArn *string
 
-	// A value is the optional value of the tag. The string value can be 1-256 Unicode
-	// characters in length and can't be prefixed with "aws:" or "dms:". The string can
-	// only contain only the set of Unicode letters, digits, white-space, '_', '.',
-	// '/', '=', '+', '-' (Java regular expressions:
+	// A value is the optional value of the tag. The string value can be 1-256
+	// Unicode characters in length and can't be prefixed with "aws:" or "dms:". The
+	// string can only contain only the set of Unicode letters, digits, white-space,
+	// '_', '.', '/', '=', '+', '-' (Java regular expressions:
 	// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
 	Value *string
 

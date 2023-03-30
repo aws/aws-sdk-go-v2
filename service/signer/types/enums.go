@@ -9,9 +9,9 @@ const (
 	CategoryAWSIoT Category = "AWSIoT"
 )
 
-// Values returns all known values for Category. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Category. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Category) Values() []Category {
 	return []Category{
 		"AWSIoT",
@@ -63,9 +63,9 @@ const (
 	ImageFormatJSONDetached ImageFormat = "JSONDetached"
 )
 
-// Values returns all known values for ImageFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ImageFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ImageFormat) Values() []ImageFormat {
 	return []ImageFormat{
 		"JSON",
@@ -83,8 +83,8 @@ const (
 	SigningProfileStatusRevoked  SigningProfileStatus = "Revoked"
 )
 
-// Values returns all known values for SigningProfileStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SigningProfileStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SigningProfileStatus) Values() []SigningProfileStatus {
 	return []SigningProfileStatus{
@@ -123,9 +123,9 @@ const (
 	ValidityTypeYears  ValidityType = "YEARS"
 )
 
-// Values returns all known values for ValidityType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ValidityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ValidityType) Values() []ValidityType {
 	return []ValidityType{
 		"DAYS",

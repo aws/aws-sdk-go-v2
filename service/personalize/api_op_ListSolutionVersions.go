@@ -36,8 +36,8 @@ type ListSolutionVersionsInput struct {
 	// The maximum number of solution versions to return.
 	MaxResults *int32
 
-	// A token returned from the previous call to ListSolutionVersions for getting the
-	// next set of solution versions (if they exist).
+	// A token returned from the previous call to ListSolutionVersions for getting
+	// the next set of solution versions (if they exist).
 	NextToken *string
 
 	// The Amazon Resource Name (ARN) of the solution.
@@ -134,8 +134,8 @@ type ListSolutionVersionsPaginatorOptions struct {
 	// The maximum number of solution versions to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

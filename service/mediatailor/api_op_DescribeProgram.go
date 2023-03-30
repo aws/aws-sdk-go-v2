@@ -13,8 +13,7 @@ import (
 )
 
 // Describes a program within a channel. For information about programs, see
-// Working with programs
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-programs.html)
+// Working with programs (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-programs.html)
 // in the MediaTailor User Guide.
 func (c *Client) DescribeProgram(ctx context.Context, params *DescribeProgramInput, optFns ...func(*Options)) (*DescribeProgramOutput, error) {
 	if params == nil {
@@ -72,8 +71,8 @@ type DescribeProgramOutput struct {
 	// The name of the program.
 	ProgramName *string
 
-	// The date and time that the program is scheduled to start in ISO 8601 format and
-	// Coordinated Universal Time (UTC). For example, the value
+	// The date and time that the program is scheduled to start in ISO 8601 format
+	// and Coordinated Universal Time (UTC). For example, the value
 	// 2021-03-27T17:48:16.751Z represents March 27, 2021 at 17:48:16.751 UTC.
 	ScheduledStartTime *time.Time
 

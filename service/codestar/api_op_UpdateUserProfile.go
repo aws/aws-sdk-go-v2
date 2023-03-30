@@ -44,9 +44,9 @@ type UpdateUserProfileInput struct {
 	// CodeStar.
 	EmailAddress *string
 
-	// The SSH public key associated with the user in AWS CodeStar. If a project owner
-	// allows the user remote access to project resources, this public key will be used
-	// along with the user's private key for SSH access.
+	// The SSH public key associated with the user in AWS CodeStar. If a project
+	// owner allows the user remote access to project resources, this public key will
+	// be used along with the user's private key for SSH access.
 	SshPublicKey *string
 
 	noSmithyDocumentSerde
@@ -72,8 +72,8 @@ type UpdateUserProfileOutput struct {
 	// The date the user profile was last modified, in timestamp format.
 	LastModifiedTimestamp *time.Time
 
-	// The SSH public key associated with the user in AWS CodeStar. This is the public
-	// portion of the public/private keypair the user can use to access project
+	// The SSH public key associated with the user in AWS CodeStar. This is the
+	// public portion of the public/private keypair the user can use to access project
 	// resources if a project owner allows the user remote access to those resources.
 	SshPublicKey *string
 

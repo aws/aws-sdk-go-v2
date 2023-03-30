@@ -11,8 +11,7 @@ import (
 )
 
 // Deletes a Device Defender security profile. Requires permission to access the
-// DeleteSecurityProfile
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// DeleteSecurityProfile (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DeleteSecurityProfile(ctx context.Context, params *DeleteSecurityProfileInput, optFns ...func(*Options)) (*DeleteSecurityProfileOutput, error) {
 	if params == nil {
@@ -38,7 +37,7 @@ type DeleteSecurityProfileInput struct {
 
 	// The expected version of the security profile. A new version is generated
 	// whenever the security profile is updated. If you specify a value that is
-	// different from the actual version, a VersionConflictException is thrown.
+	// different from the actual version, a VersionConflictException  is thrown.
 	ExpectedVersion *int64
 
 	noSmithyDocumentSerde

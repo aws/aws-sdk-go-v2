@@ -13,8 +13,8 @@ import (
 )
 
 // Returns the full details of a channel moderated by the specified
-// AppInstanceUser. The x-amz-chime-bearer request header is mandatory. Use the
-// AppInstanceUserArn of the user that makes the API call as the value in the
+// AppInstanceUser . The x-amz-chime-bearer  request header is mandatory. Use the
+// AppInstanceUserArnof the user that makes the API call as the value in the
 // header.
 func (c *Client) DescribeChannelModeratedByAppInstanceUser(ctx context.Context, params *DescribeChannelModeratedByAppInstanceUserInput, optFns ...func(*Options)) (*DescribeChannelModeratedByAppInstanceUserOutput, error) {
 	if params == nil {
@@ -33,7 +33,7 @@ func (c *Client) DescribeChannelModeratedByAppInstanceUser(ctx context.Context, 
 
 type DescribeChannelModeratedByAppInstanceUserInput struct {
 
-	// The ARN of the AppInstanceUser in the moderated channel.
+	// The ARN of the AppInstanceUser  in the moderated channel.
 	//
 	// This member is required.
 	AppInstanceUserArn *string
@@ -43,7 +43,7 @@ type DescribeChannelModeratedByAppInstanceUserInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The AppInstanceUserArn of the user that makes the API call.
+	// The AppInstanceUserArn  of the user that makes the API call.
 	ChimeBearer *string
 
 	noSmithyDocumentSerde

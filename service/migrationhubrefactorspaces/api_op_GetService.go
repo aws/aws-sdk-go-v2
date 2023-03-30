@@ -93,8 +93,8 @@ type GetServiceOutput struct {
 	// The current state of the service.
 	State types.ServiceState
 
-	// The tags assigned to the service. A tag is a label that you assign to an Amazon
-	// Web Services resource. Each tag consists of a key-value pair.
+	// The tags assigned to the service. A tag is a label that you assign to an
+	// Amazon Web Services resource. Each tag consists of a key-value pair.
 	Tags map[string]string
 
 	// The configuration for the URL endpoint type. The Url isthe URL of the endpoint

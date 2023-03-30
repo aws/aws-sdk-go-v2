@@ -11,8 +11,8 @@ const (
 	AcknowledgmentStatusUnacknowledged AcknowledgmentStatus = "UNACKNOWLEDGED"
 )
 
-// Values returns all known values for AcknowledgmentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AcknowledgmentStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AcknowledgmentStatus) Values() []AcknowledgmentStatus {
 	return []AcknowledgmentStatus{
@@ -104,9 +104,9 @@ const (
 	HealthStatusUnhealthy HealthStatus = "UNHEALTHY"
 )
 
-// Values returns all known values for HealthStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for HealthStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (HealthStatus) Values() []HealthStatus {
 	return []HealthStatus{
 		"INITIAL",
@@ -183,8 +183,8 @@ const (
 	NetworkResourceStatusCreatingShippingLabel NetworkResourceStatus = "CREATING_SHIPPING_LABEL"
 )
 
-// Values returns all known values for NetworkResourceStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for NetworkResourceStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkResourceStatus) Values() []NetworkResourceStatus {
 	return []NetworkResourceStatus{
@@ -223,8 +223,8 @@ const (
 	NetworkSiteFilterKeysStatus NetworkSiteFilterKeys = "STATUS"
 )
 
-// Values returns all known values for NetworkSiteFilterKeys. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for NetworkSiteFilterKeys. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkSiteFilterKeys) Values() []NetworkSiteFilterKeys {
 	return []NetworkSiteFilterKeys{

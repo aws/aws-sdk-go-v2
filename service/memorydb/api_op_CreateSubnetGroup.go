@@ -16,8 +16,8 @@ import (
 // Private Cloud (VPC) environment. When you create a cluster in an Amazon VPC, you
 // must specify a subnet group. MemoryDB uses that subnet group to choose a subnet
 // and IP addresses within that subnet to associate with your nodes. For more
-// information, see Subnets and subnet groups
-// (https://docs.aws.amazon.com/MemoryDB/latest/devguide/subnetgroups.html).
+// information, see Subnets and subnet groups (https://docs.aws.amazon.com/MemoryDB/latest/devguide/subnetgroups.html)
+// .
 func (c *Client) CreateSubnetGroup(ctx context.Context, params *CreateSubnetGroupInput, optFns ...func(*Options)) (*CreateSubnetGroupOutput, error) {
 	if params == nil {
 		params = &CreateSubnetGroupInput{}

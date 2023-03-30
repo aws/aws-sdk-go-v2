@@ -44,7 +44,7 @@ type ListModelQualityJobDefinitionsInput struct {
 	EndpointName *string
 
 	// The maximum number of results to return in a call to
-	// ListModelQualityJobDefinitions.
+	// ListModelQualityJobDefinitions .
 	MaxResults *int32
 
 	// A string in the transform job name. This filter returns only model quality
@@ -52,14 +52,14 @@ type ListModelQualityJobDefinitionsInput struct {
 	NameContains *string
 
 	// If the result of the previous ListModelQualityJobDefinitions request was
-	// truncated, the response includes a NextToken. To retrieve the next set of model
-	// quality monitoring job definitions, use the token in the next request.
+	// truncated, the response includes a NextToken. To retrieve the next set of
+	// model quality monitoring job definitions, use the token in the next request.
 	NextToken *string
 
-	// The field to sort results by. The default is CreationTime.
+	// The field to sort results by. The default is CreationTime .
 	SortBy types.MonitoringJobDefinitionSortKey
 
-	// The sort order for results. The default is Descending.
+	// The sort order for results. The default is Descending .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -155,11 +155,11 @@ var _ ListModelQualityJobDefinitionsAPIClient = (*Client)(nil)
 // ListModelQualityJobDefinitions
 type ListModelQualityJobDefinitionsPaginatorOptions struct {
 	// The maximum number of results to return in a call to
-	// ListModelQualityJobDefinitions.
+	// ListModelQualityJobDefinitions .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

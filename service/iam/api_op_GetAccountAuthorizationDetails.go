@@ -16,13 +16,13 @@ import (
 // Amazon Web Services account, including their relationships to one another. Use
 // this operation to obtain a snapshot of the configuration of IAM permissions
 // (users, groups, roles, and policies) in your account. Policies returned by this
-// operation are URL-encoded compliant with RFC 3986
-// (https://tools.ietf.org/html/rfc3986). You can use a URL decoding method to
-// convert the policy back to plain JSON text. For example, if you use Java, you
-// can use the decode method of the java.net.URLDecoder utility class in the Java
-// SDK. Other languages and SDKs provide similar functionality. You can optionally
-// filter the results using the Filter parameter. You can paginate the results
-// using the MaxItems and Marker parameters.
+// operation are URL-encoded compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986)
+// . You can use a URL decoding method to convert the policy back to plain JSON
+// text. For example, if you use Java, you can use the decode  method of the
+// java.net.URLDecoderutility class in the Java SDK. Other languages and SDKs
+// provide similar functionality. You can optionally filter the results using the
+// Filter parameter. You can paginate the results using the MaxItems  and Marker
+// parameters.
 func (c *Client) GetAccountAuthorizationDetails(ctx context.Context, params *GetAccountAuthorizationDetailsInput, optFns ...func(*Options)) (*GetAccountAuthorizationDetailsOutput, error) {
 	if params == nil {
 		params = &GetAccountAuthorizationDetailsInput{}
@@ -40,32 +40,32 @@ func (c *Client) GetAccountAuthorizationDetails(ctx context.Context, params *Get
 
 type GetAccountAuthorizationDetailsInput struct {
 
-	// A list of entity types used to filter the results. Only the entities that match
-	// the types you specify are included in the output. Use the value
-	// LocalManagedPolicy to include customer managed policies. The format for this
+	// A list of entity types used to filter the results. Only the entities that
+	// match the types you specify are included in the output. Use the value
+	// LocalManagedPolicyto include customer managed policies. The format for this
 	// parameter is a comma-separated (if more than one) list of strings. Each string
 	// value in the list must be one of the valid values listed below.
 	Filter []types.EntityType
 
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
-	// Marker element in the response that you received to indicate where the next call
-	// should start.
+	// Markerelement in the response that you received to indicate where the next
+	// call should start.
 	Marker *string
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true. If you do not include this
+	// specify, the IsTruncated  response element is true. If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true, and Marker contains a value to
+	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
 
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetAccountAuthorizationDetails request.
+// Contains the response to a successful GetAccountAuthorizationDetails  request.
 type GetAccountAuthorizationDetailsOutput struct {
 
 	// A list containing information about IAM groups.
@@ -75,12 +75,12 @@ type GetAccountAuthorizationDetailsOutput struct {
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than
 	// the MaxItems number of results even when there are more results available. We
-	// recommend that you check IsTruncated after every call to ensure that you receive
-	// all your results.
+	// recommend that you check IsTruncated after every call to ensure that you
+	// receive all your results.
 	IsTruncated bool
 
-	// When IsTruncated is true, this element is present and contains the value to use
-	// for the Marker parameter in a subsequent pagination request.
+	// When IsTruncated  is true, this element is present and contains the value to
+	// use for the Marker  parameter in a subsequent pagination request.
 	Marker *string
 
 	// A list containing information about managed policies.
@@ -171,15 +171,15 @@ var _ GetAccountAuthorizationDetailsAPIClient = (*Client)(nil)
 type GetAccountAuthorizationDetailsPaginatorOptions struct {
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true. If you do not include this
+	// specify, the IsTruncated  response element is true. If you do not include this
 	// parameter, the number of items defaults to 100. Note that IAM might return fewer
 	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true, and Marker contains a value to
+	// IsTruncated response element returns true , and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

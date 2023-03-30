@@ -77,8 +77,8 @@ const (
 	EventDataStoreStatusPendingDeletion EventDataStoreStatus = "PENDING_DELETION"
 )
 
-// Values returns all known values for EventDataStoreStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for EventDataStoreStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (EventDataStoreStatus) Values() []EventDataStoreStatus {
 	return []EventDataStoreStatus{
@@ -119,9 +119,9 @@ const (
 	ImportStatusCompleted    ImportStatus = "COMPLETED"
 )
 
-// Values returns all known values for ImportStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ImportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ImportStatus) Values() []ImportStatus {
 	return []ImportStatus{
 		"INITIALIZING",
@@ -140,9 +140,9 @@ const (
 	InsightTypeApiErrorRateInsight InsightType = "ApiErrorRateInsight"
 )
 
-// Values returns all known values for InsightType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InsightType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (InsightType) Values() []InsightType {
 	return []InsightType{
 		"ApiCallRateInsight",
@@ -192,9 +192,9 @@ const (
 	QueryStatusTimedOut  QueryStatus = "TIMED_OUT"
 )
 
-// Values returns all known values for QueryStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for QueryStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (QueryStatus) Values() []QueryStatus {
 	return []QueryStatus{
 		"QUEUED",

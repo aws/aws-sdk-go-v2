@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Two or more batch entries in the request have the same Id.
+// Two or more batch entries in the request have the same Id .
 type BatchEntryIdsNotDistinct struct {
 	Message *string
 
@@ -111,7 +111,7 @@ func (e *InvalidAttributeName) ErrorCode() string {
 }
 func (e *InvalidAttributeName) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Id of a batch entry in a batch request doesn't abide by the specification.
+// The Id  of a batch entry in a batch request doesn't abide by the specification.
 type InvalidBatchEntryId struct {
 	Message *string
 
@@ -215,10 +215,10 @@ func (e *MessageNotInflight) ErrorCode() string {
 }
 func (e *MessageNotInflight) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified action violates a limit. For example, ReceiveMessage returns this
-// error if the maximum number of inflight messages is reached and AddPermission
-// returns this error if the maximum number of permissions for the queue is
-// reached.
+// The specified action violates a limit. For example, ReceiveMessage returns
+// this error if the maximum number of inflight messages is reached and
+// AddPermissionreturns this error if the maximum number of permissions for the
+// queue is reached.
 type OverLimit struct {
 	Message *string
 
@@ -325,8 +325,8 @@ func (e *QueueDoesNotExist) ErrorCode() string {
 }
 func (e *QueueDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A queue with this name already exists. Amazon SQS returns this error only if the
-// request includes attributes whose values differ from those of the existing
+// A queue with this name already exists. Amazon SQS returns this error only if
+// the request includes attributes whose values differ from those of the existing
 // queue.
 type QueueNameExists struct {
 	Message *string

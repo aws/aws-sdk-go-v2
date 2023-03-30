@@ -34,9 +34,8 @@ func (c *Client) PromoteResourceShareCreatedFromPolicy(ctx context.Context, para
 
 type PromoteResourceShareCreatedFromPolicyInput struct {
 
-	// Specifies the Amazon Resoure Name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the resource share to promote.
+	// Specifies the Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the resource share to promote.
 	//
 	// This member is required.
 	ResourceShareArn *string
@@ -46,7 +45,7 @@ type PromoteResourceShareCreatedFromPolicyInput struct {
 
 type PromoteResourceShareCreatedFromPolicyOutput struct {
 
-	// A return value of true indicates that the request succeeded. A value of false
+	// A return value of true  indicates that the request succeeded. A value of false
 	// indicates that the request failed.
 	ReturnValue *bool
 

@@ -17,8 +17,7 @@ import (
 // Amazon Web Services authored extensions provided by AppConfig. For most use
 // cases, to create your own extension, you must create an Lambda function to
 // perform any computation and processing defined in the extension. For more
-// information about extensions, see Working with AppConfig extensions
-// (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
+// information about extensions, see Working with AppConfig extensions (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
 // in the AppConfig User Guide.
 func (c *Client) CreateExtension(ctx context.Context, params *CreateExtensionInput, optFns ...func(*Options)) (*CreateExtensionOutput, error) {
 	if params == nil {
@@ -56,9 +55,9 @@ type CreateExtensionInput struct {
 	// version 3, enter 2 for this field.
 	LatestVersionNumber *int32
 
-	// The parameters accepted by the extension. You specify parameter values when you
-	// associate the extension to an AppConfig resource by using the
-	// CreateExtensionAssociation API action. For Lambda extension actions, these
+	// The parameters accepted by the extension. You specify parameter values when
+	// you associate the extension to an AppConfig resource by using the
+	// CreateExtensionAssociationAPI action. For Lambda extension actions, these
 	// parameters are included in the Lambda request object.
 	Parameters map[string]types.Parameter
 
@@ -88,9 +87,9 @@ type CreateExtensionOutput struct {
 	// The extension name.
 	Name *string
 
-	// The parameters accepted by the extension. You specify parameter values when you
-	// associate the extension to an AppConfig resource by using the
-	// CreateExtensionAssociation API action. For Lambda extension actions, these
+	// The parameters accepted by the extension. You specify parameter values when
+	// you associate the extension to an AppConfig resource by using the
+	// CreateExtensionAssociationAPI action. For Lambda extension actions, these
 	// parameters are included in the Lambda request object.
 	Parameters map[string]types.Parameter
 

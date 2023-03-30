@@ -15,9 +15,8 @@ import (
 // Lists phone numbers claimed to your Amazon Connect instance or traffic
 // distribution group. If the provided TargetArn is a traffic distribution group,
 // you can call this API in both Amazon Web Services Regions associated with
-// traffic distribution group. For more information about phone numbers, see Set Up
-// Phone Numbers for Your Contact Center
-// (https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html)
+// traffic distribution group. For more information about phone numbers, see Set
+// Up Phone Numbers for Your Contact Center (https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) ListPhoneNumbersV2(ctx context.Context, params *ListPhoneNumbersV2Input, optFns ...func(*Options)) (*ListPhoneNumbersV2Output, error) {
 	if params == nil {
@@ -54,8 +53,8 @@ type ListPhoneNumbersV2Input struct {
 	PhoneNumberTypes []types.PhoneNumberType
 
 	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
-	// distribution groups that phone numbers are claimed to. If TargetArn input is not
-	// provided, this API lists numbers claimed to all the Amazon Connect instances
+	// distribution groups that phone numbers are claimed to. If TargetArn input is
+	// not provided, this API lists numbers claimed to all the Amazon Connect instances
 	// belonging to your account in the same Amazon Web Services Region as the request.
 	TargetArn *string
 
@@ -151,8 +150,8 @@ type ListPhoneNumbersV2PaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

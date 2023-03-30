@@ -13,11 +13,9 @@ import (
 )
 
 // Returns information about blue/green deployments. For more information, see
-// Using Amazon RDS Blue/Green Deployments for database updates
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
-// in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for
-// database updates
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
+// Using Amazon RDS Blue/Green Deployments for database updates (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
+// in the Amazon RDS User Guide and Using Amazon RDS Blue/Green Deployments for
+// database updates (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
 // in the Amazon Aurora User Guide.
 func (c *Client) DescribeBlueGreenDeployments(ctx context.Context, params *DescribeBlueGreenDeploymentsInput, optFns ...func(*Options)) (*DescribeBlueGreenDeploymentsOutput, error) {
 	if params == nil {
@@ -39,37 +37,27 @@ type DescribeBlueGreenDeploymentsInput struct {
 	// The blue/green deployment identifier. If this parameter is specified,
 	// information from only the specific blue/green deployment is returned. This
 	// parameter isn't case-sensitive. Constraints:
-	// - If supplied, must match an
-	// existing blue/green deployment identifier.
+	//     - If supplied, must match an existing blue/green deployment identifier.
 	BlueGreenDeploymentIdentifier *string
 
 	// A filter that specifies one or more blue/green deployments to describe.
 	// Supported filters:
-	// - blue-green-deployment-identifier - Accepts system-generated
-	// identifiers for blue/green deployments. The results list only includes
-	// information about the blue/green deployments with the specified identifiers.
-	// -
-	// blue-green-deployment-name - Accepts user-supplied names for blue/green
-	// deployments. The results list only includes information about the blue/green
-	// deployments with the specified names.
-	// - source - Accepts source databases for a
-	// blue/green deployment. The results list only includes information about the
-	// blue/green deployments with the specified source databases.
-	// - target - Accepts
-	// target databases for a blue/green deployment. The results list only includes
-	// information about the blue/green deployments with the specified target
-	// databases.
+	//     - blue-green-deployment-identifier - Accepts system-generated identifiers for blue/green deployments. The results list only includes information about the blue/green deployments with the specified identifiers.
+	//     - blue-green-deployment-name - Accepts user-supplied names for blue/green deployments. The results list only includes information about the blue/green deployments with the specified names.
+	//     - source - Accepts source databases for a blue/green deployment. The results list only includes information about the blue/green deployments with the specified source databases.
+	//     - target - Accepts target databases for a blue/green deployment. The results list only includes information about the blue/green deployments with the specified target databases.
 	Filters []types.Filter
 
-	// An optional pagination token provided by a previous DescribeBlueGreenDeployments
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// An optional pagination token provided by a previous
+	// DescribeBlueGreenDeploymentsrequest. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
-	// Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so you can retrieve the remaining results. Default:
+	// 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -164,14 +152,14 @@ var _ DescribeBlueGreenDeploymentsAPIClient = (*Client)(nil)
 // DescribeBlueGreenDeploymentsPaginatorOptions is the paginator options for
 // DescribeBlueGreenDeployments
 type DescribeBlueGreenDeploymentsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
-	// Constraints: Minimum 20, maximum 100.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so you can retrieve the remaining results. Default:
+	// 100 Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

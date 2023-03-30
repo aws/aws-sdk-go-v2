@@ -31,68 +31,58 @@ func (c *Client) ListPrincipals(ctx context.Context, params *ListPrincipalsInput
 
 type ListPrincipalsInput struct {
 
-	// Specifies that you want to list information for only resource shares that match
-	// the following:
-	// - SELF – principals that your account is sharing resources with
-	// -
-	// OTHER-ACCOUNTS – principals that are sharing resources with your account
+	// Specifies that you want to list information for only resource shares that
+	// match the following:
+	//     - SELF – principals that your account is sharing resources with
+	//     - OTHER-ACCOUNTS – principals that are sharing resources with your account
 	//
 	// This member is required.
 	ResourceOwner types.ResourceOwner
 
-	// Specifies the total number of results that you want included on each page of the
-	// response. If you do not include this parameter, it defaults to a value that is
-	// specific to the operation. If additional items exist beyond the number you
+	// Specifies the total number of results that you want included on each page of
+	// the response. If you do not include this parameter, it defaults to a value that
+	// is specific to the operation. If additional items exist beyond the number you
 	// specify, the NextToken response element is returned with a value (not null).
-	// Include the specified value as the NextToken request parameter in the next call
-	// to the operation to get the next part of the results. Note that the service
+	// Include the specified value as the NextToken request parameter in the next
+	// call to the operation to get the next part of the results. Note that the service
 	// might return fewer results than the maximum even when there are more results
 	// available. You should check NextToken after every operation to ensure that you
 	// receive all of the results.
 	MaxResults *int32
 
 	// Specifies that you want to receive the next page of results. Valid only if you
-	// received a NextToken response in the previous request. If you did, it indicates
-	// that more output is available. Set this parameter to the value provided by the
-	// previous call's NextToken response to request the next page of results.
+	// received a NextToken response in the previous request. If you did, it
+	// indicates that more output is available. Set this parameter to the value
+	// provided by the previous call's NextToken response to request the next page of
+	// results.
 	NextToken *string
 
-	// Specifies that you want to list information for only the listed principals. You
-	// can include the following values:
-	// - An Amazon Web Services account ID, for
-	// example: 123456789012
-	// - An Amazon Resoure Name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// an organization in Organizations, for example:
-	// organizations::123456789012:organization/o-exampleorgid
-	// - An ARN of an
-	// organizational unit (OU) in Organizations, for example:
-	// organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123
-	// -
-	// An ARN of an IAM role, for example: iam::123456789012:role/rolename
-	// - An ARN of
-	// an IAM user, for example: iam::123456789012user/username
-	//
-	// Not all resource types
-	// can be shared with IAM roles and users. For more information, see Sharing with
-	// IAM roles and users
-	// (https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types)
+	// Specifies that you want to list information for only the listed principals.
+	// You can include the following values:
+	//     - An Amazon Web Services account ID, for example: 123456789012
+	//     - An Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of an organization in Organizations, for example: organizations::123456789012:organization/o-exampleorgid
+	//     - An ARN of an organizational unit (OU) in Organizations, for example: organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123
+	//     - An ARN of an IAM role, for example: iam::123456789012:role/rolename
+	//     - An ARN of an IAM user, for example: iam::123456789012user/username
+	// Not
+	// all resource types can be shared with IAM roles and users. For more information,
+	// see Sharing with IAM roles and users (https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types)
 	// in the Resource Access Manager User Guide.
 	Principals []string
 
 	// Specifies that you want to list principal information for the resource share
-	// with the specified Amazon Resoure Name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// with the specified Amazon Resoure Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// .
 	ResourceArn *string
 
-	// Specifies that you want to list information for only principals associated with
-	// the resource shares specified by a list the Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// Specifies that you want to list information for only principals associated
+	// with the resource shares specified by a list the Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// .
 	ResourceShareArns []string
 
-	// Specifies that you want to list information for only principals associated with
-	// resource shares that include the specified resource type. For a list of valid
-	// values, query the ListResourceTypes operation.
+	// Specifies that you want to list information for only principals associated
+	// with resource shares that include the specified resource type. For a list of
+	// valid values, query the ListResourceTypes  operation.
 	ResourceType *string
 
 	noSmithyDocumentSerde
@@ -100,11 +90,11 @@ type ListPrincipalsInput struct {
 
 type ListPrincipalsOutput struct {
 
-	// If present, this value indicates that more output is available than is included
-	// in the current response. Use this value in the NextToken request parameter in a
-	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken response element comes back as null. This
-	// indicates that this is the last page of results.
+	// If present, this value indicates that more output is available than is
+	// included in the current response. Use this value in the NextToken request
+	// parameter in a subsequent call to the operation to get the next part of the
+	// output. You should repeat this until the NextToken response element comes back
+	// as null . This indicates that this is the last page of results.
 	NextToken *string
 
 	// An array of objects that contain the details about the principals.
@@ -189,19 +179,19 @@ var _ ListPrincipalsAPIClient = (*Client)(nil)
 
 // ListPrincipalsPaginatorOptions is the paginator options for ListPrincipals
 type ListPrincipalsPaginatorOptions struct {
-	// Specifies the total number of results that you want included on each page of the
-	// response. If you do not include this parameter, it defaults to a value that is
-	// specific to the operation. If additional items exist beyond the number you
+	// Specifies the total number of results that you want included on each page of
+	// the response. If you do not include this parameter, it defaults to a value that
+	// is specific to the operation. If additional items exist beyond the number you
 	// specify, the NextToken response element is returned with a value (not null).
-	// Include the specified value as the NextToken request parameter in the next call
-	// to the operation to get the next part of the results. Note that the service
+	// Include the specified value as the NextToken request parameter in the next
+	// call to the operation to get the next part of the results. Note that the service
 	// might return fewer results than the maximum even when there are more results
 	// available. You should check NextToken after every operation to ensure that you
 	// receive all of the results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -42,8 +42,7 @@ type UpdateElasticsearchDomainConfigInput struct {
 
 	// Modifies the advanced option to allow references to indices in an HTTP request
 	// body. Must be false when configuring access to individual sub-resources. By
-	// default, the value is true. See Configuration Advanced Options
-	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options)
+	// default, the value is true . See Configuration Advanced Options (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options)
 	// for more information.
 	AdvancedOptions map[string]string
 
@@ -55,8 +54,8 @@ type UpdateElasticsearchDomainConfigInput struct {
 
 	// Options to specify the Cognito user and identity pools for Kibana
 	// authentication. For more information, see Amazon Cognito Authentication for
-	// Kibana
-	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
+	// Kibana (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html)
+	// .
 	CognitoOptions *types.CognitoOptions
 
 	// Options to specify configuration that will be applied to the domain endpoint.
@@ -78,20 +77,19 @@ type UpdateElasticsearchDomainConfigInput struct {
 	// Specifies the Encryption At Rest Options.
 	EncryptionAtRestOptions *types.EncryptionAtRestOptions
 
-	// Map of LogType and LogPublishingOption, each containing options to publish a
+	// Map of LogType  and LogPublishingOption, each containing options to publish a
 	// given type of Elasticsearch log.
 	LogPublishingOptions map[string]types.LogPublishingOption
 
 	// Specifies the NodeToNodeEncryptionOptions.
 	NodeToNodeEncryptionOptions *types.NodeToNodeEncryptionOptions
 
-	// Option to set the time, in UTC format, for the daily automated snapshot. Default
-	// value is 0 hours.
+	// Option to set the time, in UTC format, for the daily automated snapshot.
+	// Default value is 0  hours.
 	SnapshotOptions *types.SnapshotOptions
 
 	// Options to specify the subnets and security groups for VPC endpoint. For more
-	// information, see Creating a VPC
-	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc)
+	// information, see Creating a VPC (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc)
 	// in VPC Endpoints for Amazon Elasticsearch Service Domains
 	VPCOptions *types.VPCOptions
 

@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all buckets owned by the authenticated sender of the request.
-// To use this operation, you must have the s3:ListAllMyBuckets permission.
+// Returns a list of all buckets owned by the authenticated sender of the
+// request. To use this operation, you must have the s3:ListAllMyBuckets
+// permission.
 func (c *Client) ListBuckets(ctx context.Context, params *ListBucketsInput, optFns ...func(*Options)) (*ListBucketsOutput, error) {
 	if params == nil {
 		params = &ListBucketsInput{}

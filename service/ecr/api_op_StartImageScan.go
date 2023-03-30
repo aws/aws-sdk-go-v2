@@ -13,9 +13,8 @@ import (
 
 // Starts an image vulnerability scan. An image scan can only be started once per
 // 24 hours on an individual image. This limit includes if an image was scanned on
-// initial push. For more information, see Image scanning
-// (https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html) in
-// the Amazon Elastic Container Registry User Guide.
+// initial push. For more information, see Image scanning (https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html)
+// in the Amazon Elastic Container Registry User Guide.
 func (c *Client) StartImageScan(ctx context.Context, params *StartImageScanInput, optFns ...func(*Options)) (*StartImageScanOutput, error) {
 	if params == nil {
 		params = &StartImageScanInput{}
@@ -33,7 +32,8 @@ func (c *Client) StartImageScan(ctx context.Context, params *StartImageScanInput
 
 type StartImageScanInput struct {
 
-	// An object with identifying information for an image in an Amazon ECR repository.
+	// An object with identifying information for an image in an Amazon ECR
+	// repository.
 	//
 	// This member is required.
 	ImageId *types.ImageIdentifier
@@ -53,7 +53,8 @@ type StartImageScanInput struct {
 
 type StartImageScanOutput struct {
 
-	// An object with identifying information for an image in an Amazon ECR repository.
+	// An object with identifying information for an image in an Amazon ECR
+	// repository.
 	ImageId *types.ImageIdentifier
 
 	// The current state of the scan.

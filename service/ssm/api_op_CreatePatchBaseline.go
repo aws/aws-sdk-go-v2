@@ -13,7 +13,7 @@ import (
 )
 
 // Creates a patch baseline. For information about valid key-value pairs in
-// PatchFilters for each supported operating system type, see PatchFilter.
+// PatchFilters for each supported operating system type, see PatchFilter .
 func (c *Client) CreatePatchBaseline(ctx context.Context, params *CreatePatchBaselineInput, optFns ...func(*Options)) (*CreatePatchBaselineOutput, error) {
 	if params == nil {
 		params = &CreatePatchBaselineInput{}
@@ -41,19 +41,18 @@ type CreatePatchBaselineInput struct {
 
 	// A list of explicitly approved patches for the baseline. For information about
 	// accepted formats for lists of approved patches and rejected patches, see About
-	// package name formats for approved and rejected patch lists
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
+	// package name formats for approved and rejected patch lists (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	ApprovedPatches []string
 
 	// Defines the compliance level for approved patches. When an approved patch is
 	// reported as missing, this value describes the severity of the compliance
-	// violation. The default value is UNSPECIFIED.
+	// violation. The default value is UNSPECIFIED .
 	ApprovedPatchesComplianceLevel types.PatchComplianceLevel
 
 	// Indicates whether the list of approved patches includes non-security updates
-	// that should be applied to the managed nodes. The default value is false. Applies
-	// to Linux managed nodes only.
+	// that should be applied to the managed nodes. The default value is false.
+	// Applies to Linux managed nodes only.
 	ApprovedPatchesEnableNonSecurity *bool
 
 	// User-provided idempotency token.
@@ -65,28 +64,20 @@ type CreatePatchBaselineInput struct {
 	// A set of global filters used to include patches in the baseline.
 	GlobalFilters *types.PatchFilterGroup
 
-	// Defines the operating system the patch baseline applies to. The default value is
-	// WINDOWS.
+	// Defines the operating system the patch baseline applies to. The default value
+	// is WINDOWS .
 	OperatingSystem types.OperatingSystem
 
 	// A list of explicitly rejected patches for the baseline. For information about
 	// accepted formats for lists of approved patches and rejected patches, see About
-	// package name formats for approved and rejected patch lists
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
+	// package name formats for approved and rejected patch lists (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	RejectedPatches []string
 
-	// The action for Patch Manager to take on patches included in the RejectedPackages
-	// list.
-	// - ALLOW_AS_DEPENDENCY : A package in the Rejected patches list is
-	// installed only if it is a dependency of another package. It is considered
-	// compliant with the patch baseline, and its status is reported as InstalledOther.
-	// This is the default action if no option is specified.
-	// - BLOCK : Packages in the
-	// RejectedPatches list, and packages that include them as dependencies, aren't
-	// installed under any circumstances. If a package was installed before it was
-	// added to the Rejected patches list, it is considered non-compliant with the
-	// patch baseline, and its status is reported as InstalledRejected.
+	// The action for Patch Manager to take on patches included in the
+	// RejectedPackages list.
+	//     - ALLOW_AS_DEPENDENCY : A package in the Rejected patches list is installed only if it is a dependency of another package. It is considered compliant with the patch baseline, and its status is reported as InstalledOther . This is the default action if no option is specified.
+	//     - BLOCK : Packages in the RejectedPatches list, and packages that include them as dependencies, aren't installed under any circumstances. If a package was installed before it was added to the Rejected patches list, it is considered non-compliant with the patch baseline, and its status is reported as InstalledRejected .
 	RejectedPatchesAction types.PatchAction
 
 	// Information about the patches to use to update the managed nodes, including
@@ -94,17 +85,15 @@ type CreatePatchBaselineInput struct {
 	// only.
 	Sources []types.PatchSource
 
-	// Optional metadata that you assign to a resource. Tags enable you to categorize a
-	// resource in different ways, such as by purpose, owner, or environment. For
+	// Optional metadata that you assign to a resource. Tags enable you to categorize
+	// a resource in different ways, such as by purpose, owner, or environment. For
 	// example, you might want to tag a patch baseline to identify the severity level
 	// of patches it specifies and the operating system family it applies to. In this
 	// case, you could specify the following key-value pairs:
-	// -
-	// Key=PatchSeverity,Value=Critical
-	// - Key=OS,Value=Windows
-	//
-	// To add tags to an
-	// existing patch baseline, use the AddTagsToResource operation.
+	//     - Key=PatchSeverity,Value=Critical
+	//     - Key=OS,Value=Windows
+	//  To add tags to an existing patch baseline, use the AddTagsToResource
+	// operation.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

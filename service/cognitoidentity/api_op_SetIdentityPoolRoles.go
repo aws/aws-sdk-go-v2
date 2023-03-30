@@ -12,8 +12,8 @@ import (
 )
 
 // Sets the roles for an identity pool. These roles are used when making calls to
-// GetCredentialsForIdentity action. You must use AWS Developer credentials to call
-// this API.
+// GetCredentialsForIdentityaction. You must use AWS Developer credentials to
+// call this API.
 func (c *Client) SetIdentityPoolRoles(ctx context.Context, params *SetIdentityPoolRolesInput, optFns ...func(*Options)) (*SetIdentityPoolRolesOutput, error) {
 	if params == nil {
 		params = &SetIdentityPoolRolesInput{}
@@ -29,7 +29,7 @@ func (c *Client) SetIdentityPoolRoles(ctx context.Context, params *SetIdentityPo
 	return out, nil
 }
 
-// Input to the SetIdentityPoolRoles action.
+// Input to the SetIdentityPoolRoles  action.
 type SetIdentityPoolRolesInput struct {
 
 	// An identity pool ID in the format REGION:GUID.

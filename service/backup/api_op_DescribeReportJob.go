@@ -12,7 +12,7 @@ import (
 )
 
 // Returns the details associated with creating a report as specified by its
-// ReportJobId.
+// ReportJobId .
 func (c *Client) DescribeReportJob(ctx context.Context, params *DescribeReportJobInput, optFns ...func(*Options)) (*DescribeReportJobOutput, error) {
 	if params == nil {
 		params = &DescribeReportJobInput{}
@@ -42,9 +42,9 @@ type DescribeReportJobInput struct {
 
 type DescribeReportJobOutput struct {
 
-	// A list of information about a report job, including its completion and creation
-	// times, report destination, unique report job ID, Amazon Resource Name (ARN),
-	// report template, status, and status message.
+	// A list of information about a report job, including its completion and
+	// creation times, report destination, unique report job ID, Amazon Resource Name
+	// (ARN), report template, status, and status message.
 	ReportJob *types.ReportJob
 
 	// Metadata pertaining to the operation's result.

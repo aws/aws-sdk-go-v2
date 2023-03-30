@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows you run image query on a specific raster data collection to get a list of
-// the satellite imagery matching the selected filters.
+// Allows you run image query on a specific raster data collection to get a list
+// of the satellite imagery matching the selected filters.
 func (c *Client) SearchRasterDataCollection(ctx context.Context, params *SearchRasterDataCollectionInput, optFns ...func(*Options)) (*SearchRasterDataCollectionOutput, error) {
 	if params == nil {
 		params = &SearchRasterDataCollectionInput{}
@@ -142,8 +142,8 @@ var _ SearchRasterDataCollectionAPIClient = (*Client)(nil)
 // SearchRasterDataCollectionPaginatorOptions is the paginator options for
 // SearchRasterDataCollection
 type SearchRasterDataCollectionPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

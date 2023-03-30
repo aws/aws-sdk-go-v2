@@ -30,11 +30,11 @@ func (c *Client) CreateRepository(ctx context.Context, params *CreateRepositoryI
 // Represents the input of a create repository operation.
 type CreateRepositoryInput struct {
 
-	// The name of the new repository to be created. The repository name must be unique
-	// across the calling AWS account. Repository names are limited to 100
+	// The name of the new repository to be created. The repository name must be
+	// unique across the calling AWS account. Repository names are limited to 100
 	// alphanumeric, dash, and underscore characters, and cannot include certain
 	// characters. For more information about the limits on repository names, see
-	// Limits (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html) in
+	// Limits (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)in
 	// the AWS CodeCommit User Guide. The suffix .git is prohibited.
 	//
 	// This member is required.

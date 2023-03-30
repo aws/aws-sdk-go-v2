@@ -12,8 +12,8 @@ import (
 )
 
 // Reloads the target database table with the source data. You can only use this
-// operation with a task in the RUNNING state, otherwise the service will throw an
-// InvalidResourceStateFault exception.
+// operation with a task in the RUNNING state, otherwise the service will throw
+// an InvalidResourceStateFault  exception.
 func (c *Client) ReloadTables(ctx context.Context, params *ReloadTablesInput, optFns ...func(*Options)) (*ReloadTablesOutput, error) {
 	if params == nil {
 		params = &ReloadTablesInput{}
@@ -41,8 +41,8 @@ type ReloadTablesInput struct {
 	// This member is required.
 	TablesToReload []types.TableToReload
 
-	// Options for reload. Specify data-reload to reload the data and re-validate it if
-	// validation is enabled. Specify validate-only to re-validate the table. This
+	// Options for reload. Specify data-reload to reload the data and re-validate it
+	// if validation is enabled. Specify validate-only to re-validate the table. This
 	// option applies only when validation is enabled for the task. Valid values:
 	// data-reload, validate-only Default value is data-reload.
 	ReloadOption types.ReloadOptionValue

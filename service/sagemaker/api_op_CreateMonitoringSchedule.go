@@ -30,8 +30,8 @@ func (c *Client) CreateMonitoringSchedule(ctx context.Context, params *CreateMon
 
 type CreateMonitoringScheduleInput struct {
 
-	// The configuration object that specifies the monitoring schedule and defines the
-	// monitoring job.
+	// The configuration object that specifies the monitoring schedule and defines
+	// the monitoring job.
 	//
 	// This member is required.
 	MonitoringScheduleConfig *types.MonitoringScheduleConfig
@@ -43,8 +43,7 @@ type CreateMonitoringScheduleInput struct {
 	MonitoringScheduleName *string
 
 	// (Optional) An array of key-value pairs. For more information, see Using Cost
-	// Allocation Tags
-	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
+	// Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
 	// in the Amazon Web Services Billing and Cost Management User Guide.
 	Tags []types.Tag
 

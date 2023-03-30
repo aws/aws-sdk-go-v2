@@ -14,8 +14,7 @@ import (
 // X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or
 // federated identities. This call is asynchronous. It might take several seconds
 // for the detachment to propagate. Requires permission to access the
-// DetachThingPrincipal
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// DetachThingPrincipal (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DetachThingPrincipal(ctx context.Context, params *DetachThingPrincipalInput, optFns ...func(*Options)) (*DetachThingPrincipalOutput, error) {
 	if params == nil {
@@ -35,8 +34,8 @@ func (c *Client) DetachThingPrincipal(ctx context.Context, params *DetachThingPr
 // The input for the DetachThingPrincipal operation.
 type DetachThingPrincipalInput struct {
 
-	// If the principal is a certificate, this value must be ARN of the certificate. If
-	// the principal is an Amazon Cognito identity, this value must be the ID of the
+	// If the principal is a certificate, this value must be ARN of the certificate.
+	// If the principal is an Amazon Cognito identity, this value must be the ID of the
 	// Amazon Cognito identity.
 	//
 	// This member is required.

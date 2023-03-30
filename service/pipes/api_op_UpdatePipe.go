@@ -15,12 +15,12 @@ import (
 // Update an existing pipe. When you call UpdatePipe, only the fields that are
 // included in the request are changed, the rest are unchanged. The exception to
 // this is if you modify any Amazon Web Services-service specific fields in the
-// SourceParameters, EnrichmentParameters, or TargetParameters objects. The fields
-// in these objects are updated atomically as one and override existing values.
-// This is by design and means that if you don't specify an optional field in one
-// of these Parameters objects, that field will be set to its system-default value
-// after the update. For more information about pipes, see  Amazon EventBridge
-// Pipes (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html)
+// SourceParameters , EnrichmentParameters , or TargetParameters objects. The
+// fields in these objects are updated atomically as one and override existing
+// values. This is by design and means that if you don't specify an optional field
+// in one of these Parameters objects, that field will be set to its system-default
+// value after the update. For more information about pipes, see Amazon
+// EventBridge Pipes (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html)
 // in the Amazon EventBridge User Guide.
 func (c *Client) UpdatePipe(ctx context.Context, params *UpdatePipeInput, optFns ...func(*Options)) (*UpdatePipeOutput, error) {
 	if params == nil {
@@ -87,8 +87,8 @@ type UpdatePipeOutput struct {
 	// The state the pipe should be in.
 	DesiredState types.RequestedPipeState
 
-	// When the pipe was last updated, in ISO-8601 format
-	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
+	// When the pipe was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
+	// (YYYY-MM-DDThh:mm:ss.sTZD).
 	LastModifiedTime *time.Time
 
 	// The name of the pipe.

@@ -31,8 +31,8 @@ func (c *Client) GlobalSignOut(ctx context.Context, params *GlobalSignOutInput, 
 // Represents the request to sign out all devices.
 type GlobalSignOutInput struct {
 
-	// A valid access token that Amazon Cognito issued to the user who you want to sign
-	// out.
+	// A valid access token that Amazon Cognito issued to the user who you want to
+	// sign out.
 	//
 	// This member is required.
 	AccessToken *string

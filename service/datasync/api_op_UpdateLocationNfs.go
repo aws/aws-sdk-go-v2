@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates some of the parameters of a previously created location for Network File
-// System (NFS) access. For information about creating an NFS location, see
-// Creating a location for NFS
-// (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html).
+// Updates some of the parameters of a previously created location for Network
+// File System (NFS) access. For information about creating an NFS location, see
+// Creating a location for NFS (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html)
+// .
 func (c *Client) UpdateLocationNfs(ctx context.Context, params *UpdateLocationNfsInput, optFns ...func(*Options)) (*UpdateLocationNfsOutput, error) {
 	if params == nil {
 		params = &UpdateLocationNfsInput{}
@@ -54,12 +54,11 @@ type UpdateLocationNfsInput struct {
 	// directory. Ensure that the NFS export is accessible without Kerberos
 	// authentication. To transfer all the data in the folder that you specified,
 	// DataSync must have permissions to read all the data. To ensure this, either
-	// configure the NFS export with no_root_squash, or ensure that the files you want
-	// DataSync to access have permissions that allow read access for all users. Doing
-	// either option enables the agent to read the files. For the agent to access
+	// configure the NFS export with no_root_squash, or ensure that the files you
+	// want DataSync to access have permissions that allow read access for all users.
+	// Doing either option enables the agent to read the files. For the agent to access
 	// directories, you must additionally enable all execute access. If you are copying
-	// data to or from your Snowcone device, see NFS Server on Snowcone
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
+	// data to or from your Snowcone device, see NFS Server on Snowcone (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
 	// for more information. For information about NFS export configuration, see 18.7.
 	// The /etc/exports Configuration File in the Red Hat Enterprise Linux
 	// documentation.

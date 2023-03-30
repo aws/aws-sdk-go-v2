@@ -13,8 +13,8 @@ import (
 
 // Retrieves complete information about one canary. You must specify the name of
 // the canary that you want. To get a list of canaries and their names, use
-// DescribeCanaries
-// (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html).
+// DescribeCanaries (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html)
+// .
 func (c *Client) GetCanary(ctx context.Context, params *GetCanaryInput, optFns ...func(*Options)) (*GetCanaryOutput, error) {
 	if params == nil {
 		params = &GetCanaryInput{}

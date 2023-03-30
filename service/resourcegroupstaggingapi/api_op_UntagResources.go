@@ -11,26 +11,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified tags from the specified resources. When you specify a tag
-// key, the action removes both that key and its associated value. The operation
-// succeeds even if you attempt to remove tags from a resource that were already
-// removed. Note the following:
-// - To remove tags from a resource, you need the
-// necessary permissions for the service that the resource belongs to as well as
-// permissions for removing tags. For more information, see the documentation for
-// the service whose resource you want to untag.
-// - You can only tag resources that
-// are located in the specified Amazon Web Services Region for the calling Amazon
-// Web Services account.
+// Removes the specified tags from the specified resources. When you specify a
+// tag key, the action removes both that key and its associated value. The
+// operation succeeds even if you attempt to remove tags from a resource that were
+// already removed. Note the following:
+//   - To remove tags from a resource, you need the necessary permissions for the service that the resource belongs to as well as permissions for removing tags. For more information, see the documentation for the service whose resource you want to untag.
+//   - You can only tag resources that are located in the specified Amazon Web Services Region for the calling Amazon Web Services account.
 //
-// Minimum permissions In addition to the tag:UntagResources
-// permission required by this operation, you must also have the remove tags
-// permission defined by the service that created the resource. For example, to
-// remove the tags from an Amazon EC2 instance using the UntagResources operation,
-// you must have both of the following permissions:
-// - tag:UntagResource
-// -
-// ec2:DeleteTags
+// Minimum permissions In addition to the tag:UntagResources permission required
+// by this operation, you must also have the remove tags permission defined by the
+// service that created the resource. For example, to remove the tags from an
+// Amazon EC2 instance using the UntagResources operation, you must have both of
+// the following permissions:
+//   - tag:UntagResource
+//   - ec2:DeleteTags
 func (c *Client) UntagResources(ctx context.Context, params *UntagResourcesInput, optFns ...func(*Options)) (*UntagResourcesOutput, error) {
 	if params == nil {
 		params = &UntagResourcesInput{}
@@ -48,11 +42,11 @@ func (c *Client) UntagResources(ctx context.Context, params *UntagResourcesInput
 
 type UntagResourcesInput struct {
 
-	// Specifies a list of ARNs of the resources that you want to remove tags from. An
-	// ARN (Amazon Resource Name) uniquely identifies a resource. For more information,
-	// see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the Amazon Web Services General Reference.
+	// Specifies a list of ARNs of the resources that you want to remove tags from.
+	// An ARN (Amazon Resource Name) uniquely identifies a resource. For more
+	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
+	// Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	ResourceARNList []string
@@ -71,7 +65,7 @@ type UntagResourcesOutput struct {
 	// A map containing a key-value pair for each failed item that couldn't be
 	// untagged. The key is the ARN of the failed resource. The value is a FailureInfo
 	// object that contains an error code, a status code, and an error message. If
-	// there are no errors, the FailedResourcesMap is empty.
+	// there are no errors, the FailedResourcesMap  is empty.
 	FailedResourcesMap map[string]types.FailureInfo
 
 	// Metadata pertaining to the operation's result.

@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all active backup plans for an authenticated account. The list
-// contains information such as Amazon Resource Names (ARNs), plan IDs, creation
-// and deletion dates, version IDs, plan names, and creator request IDs.
+// Returns a list of all active backup plans for an authenticated account. The
+// list contains information such as Amazon Resource Names (ARNs), plan IDs,
+// creation and deletion dates, version IDs, plan names, and creator request IDs.
 func (c *Client) ListBackupPlans(ctx context.Context, params *ListBackupPlansInput, optFns ...func(*Options)) (*ListBackupPlansOutput, error) {
 	if params == nil {
 		params = &ListBackupPlansInput{}
@@ -32,15 +32,15 @@ func (c *Client) ListBackupPlans(ctx context.Context, params *ListBackupPlansInp
 
 type ListBackupPlansInput struct {
 
-	// A Boolean value with a default value of FALSE that returns deleted backup plans
-	// when set to TRUE.
+	// A Boolean value with a default value of FALSE that returns deleted backup
+	// plans when set to TRUE .
 	IncludeDeleted *bool
 
 	// The maximum number of items to be returned.
 	MaxResults *int32
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return maxResults  number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -55,7 +55,7 @@ type ListBackupPlansOutput struct {
 	BackupPlansList []types.BackupPlansListMember
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return maxResults  number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -139,8 +139,8 @@ type ListBackupPlansPaginatorOptions struct {
 	// The maximum number of items to be returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

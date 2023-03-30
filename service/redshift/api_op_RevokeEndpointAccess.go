@@ -36,8 +36,8 @@ type RevokeEndpointAccessInput struct {
 	// The cluster to revoke access from.
 	ClusterIdentifier *string
 
-	// Indicates whether to force the revoke action. If true, the Redshift-managed VPC
-	// endpoints associated with the endpoint authorization are also deleted.
+	// Indicates whether to force the revoke action. If true, the Redshift-managed
+	// VPC endpoints associated with the endpoint authorization are also deleted.
 	Force bool
 
 	// The virtual private cloud (VPC) identifiers for which access is to be revoked.

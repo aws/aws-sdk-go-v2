@@ -11,16 +11,15 @@ import (
 	"time"
 )
 
-// Returns a database user name and temporary password with temporary authorization
-// to log in to an Amazon Redshift database. The database user is mapped 1:1 to the
-// source Identity and Access Management (IAM) identity. For more information about
-// IAM identities, see IAM Identities (users, user groups, and roles)
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) in the Amazon Web
-// Services Identity and Access Management User Guide. The Identity and Access
+// Returns a database user name and temporary password with temporary
+// authorization to log in to an Amazon Redshift database. The database user is
+// mapped 1:1 to the source Identity and Access Management (IAM) identity. For more
+// information about IAM identities, see IAM Identities (users, user groups, and
+// roles) (https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html)in the Amazon
+// Web Services Identity and Access Management User Guide. The Identity and Access
 // Management (IAM) identity that runs this operation must have an IAM policy
 // attached that allows access to all necessary actions and resources. For more
-// information about permissions, see Using identity-based policies (IAM policies)
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html)
+// information about permissions, see Using identity-based policies (IAM policies) (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) GetClusterCredentialsWithIAM(ctx context.Context, params *GetClusterCredentialsWithIAMInput, optFns ...func(*Options)) (*GetClusterCredentialsWithIAMOutput, error) {
 	if params == nil {
@@ -47,7 +46,7 @@ type GetClusterCredentialsWithIAMInput struct {
 
 	// The name of the database for which you are requesting credentials. If the
 	// database name is specified, the IAM policy must allow access to the resource
-	// dbname for the specified database name. If the database name is not specified,
+	// dbnamefor the specified database name. If the database name is not specified,
 	// access to all databases is allowed.
 	DbName *string
 
@@ -67,8 +66,8 @@ type GetClusterCredentialsWithIAMOutput struct {
 	// database user is mapped 1:1 to the source IAM identity.
 	DbUser *string
 
-	// The time (UTC) when the temporary password expires. After this timestamp, a log
-	// in with the temporary password fails.
+	// The time (UTC) when the temporary password expires. After this timestamp, a
+	// log in with the temporary password fails.
 	Expiration *time.Time
 
 	// Reserved for future use.

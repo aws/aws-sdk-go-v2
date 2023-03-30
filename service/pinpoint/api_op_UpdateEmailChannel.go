@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the email channel for an application or updates the status and settings
-// of the email channel for an application.
+// Enables the email channel for an application or updates the status and
+// settings of the email channel for an application.
 func (c *Client) UpdateEmailChannel(ctx context.Context, params *UpdateEmailChannelInput, optFns ...func(*Options)) (*UpdateEmailChannelOutput, error) {
 	if params == nil {
 		params = &UpdateEmailChannelInput{}

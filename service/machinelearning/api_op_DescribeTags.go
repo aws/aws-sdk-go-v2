@@ -29,7 +29,7 @@ func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, op
 
 type DescribeTagsInput struct {
 
-	// The ID of the ML object. For example, exampleModelId.
+	// The ID of the ML object. For example, exampleModelId .
 	//
 	// This member is required.
 	ResourceId *string

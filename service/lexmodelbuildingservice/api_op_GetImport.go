@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets information about an import job started with the StartImport operation.
+// Gets information about an import job started with the StartImport  operation.
 func (c *Client) GetImport(ctx context.Context, params *GetImportInput, optFns ...func(*Options)) (*GetImportOutput, error) {
 	if params == nil {
 		params = &GetImportInput{}
@@ -50,7 +50,7 @@ type GetImportOutput struct {
 	ImportId *string
 
 	// The status of the import job. If the status is FAILED, you can get the reason
-	// for the failure from the failureReason field.
+	// for the failure from the failureReason  field.
 	ImportStatus types.ImportStatus
 
 	// The action taken when there was a conflict between an existing resource and a

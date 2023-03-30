@@ -142,13 +142,14 @@ type ListTableMetadataAPIClient interface {
 
 var _ ListTableMetadataAPIClient = (*Client)(nil)
 
-// ListTableMetadataPaginatorOptions is the paginator options for ListTableMetadata
+// ListTableMetadataPaginatorOptions is the paginator options for
+// ListTableMetadata
 type ListTableMetadataPaginatorOptions struct {
 	// Specifies the maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

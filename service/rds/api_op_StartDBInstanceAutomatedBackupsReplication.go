@@ -13,8 +13,7 @@ import (
 
 // Enables replication of automated backups to a different Amazon Web Services
 // Region. This command doesn't apply to RDS Custom. For more information, see
-// Replicating Automated Backups to Another Amazon Web Services Region
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html)
+// Replicating Automated Backups to Another Amazon Web Services Region (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html)
 // in the Amazon RDS User Guide.
 func (c *Client) StartDBInstanceAutomatedBackupsReplication(ctx context.Context, params *StartDBInstanceAutomatedBackupsReplicationInput, optFns ...func(*Options)) (*StartDBInstanceAutomatedBackupsReplicationOutput, error) {
 	if params == nil {
@@ -35,7 +34,7 @@ type StartDBInstanceAutomatedBackupsReplicationInput struct {
 
 	// The Amazon Resource Name (ARN) of the source DB instance for the replicated
 	// automated backups, for example,
-	// arn:aws:rds:us-west-2:123456789012:db:mydatabase.
+	// arn:aws:rds:us-west-2:123456789012:db:mydatabase .
 	//
 	// This member is required.
 	SourceDBInstanceArn *string
@@ -46,26 +45,25 @@ type StartDBInstanceAutomatedBackupsReplicationInput struct {
 	// The Amazon Web Services KMS key identifier for encryption of the replicated
 	// automated backups. The KMS key ID is the Amazon Resource Name (ARN) for the KMS
 	// encryption key in the destination Amazon Web Services Region, for example,
-	// arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE.
+	// arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE .
 	KmsKeyId *string
 
-	// In an Amazon Web Services GovCloud (US) Region, an URL that contains a Signature
-	// Version 4 signed request for the StartDBInstanceAutomatedBackupsReplication
-	// operation to call in the Amazon Web Services Region of the source DB instance.
-	// The presigned URL must be a valid request for the
-	// StartDBInstanceAutomatedBackupsReplication API operation that can run in the
-	// Amazon Web Services Region that contains the source DB instance. This setting
-	// applies only to Amazon Web Services GovCloud (US) Regions. It's ignored in other
-	// Amazon Web Services Regions. To learn how to generate a Signature Version 4
-	// signed request, see  Authenticating Requests: Using Query Parameters (Amazon Web
-	// Services Signature Version 4)
-	// (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
-	// and  Signature Version 4 Signing Process
-	// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html). If you
-	// are using an Amazon Web Services SDK tool or the CLI, you can specify
-	// SourceRegion (or --source-region for the CLI) instead of specifying PreSignedUrl
-	// manually. Specifying SourceRegion autogenerates a presigned URL that is a valid
-	// request for the operation that can run in the source Amazon Web Services Region.
+	// In an Amazon Web Services GovCloud (US) Region, an URL that contains a
+	// Signature Version 4 signed request for the
+	// StartDBInstanceAutomatedBackupsReplicationoperation to call in the Amazon Web
+	// Services Region of the source DB instance. The presigned URL must be a valid
+	// request for the StartDBInstanceAutomatedBackupsReplication API operation that
+	// can run in the Amazon Web Services Region that contains the source DB instance.
+	// This setting applies only to Amazon Web Services GovCloud (US) Regions. It's
+	// ignored in other Amazon Web Services Regions. To learn how to generate a
+	// Signature Version 4 signed request, see Authenticating Requests: Using Query
+	// Parameters (Amazon Web Services Signature Version 4) (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
+	// and Signature Version 4 Signing Process (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
+	// . If you are using an Amazon Web Services SDK tool or the CLI, you can specify
+	// SourceRegion (or --source-region  for the CLI) instead of specifying
+	// PreSignedUrl manually. Specifying SourceRegion autogenerates a presigned URL
+	// that is a valid request for the operation that can run in the source Amazon Web
+	// Services Region.
 	PreSignedUrl *string
 
 	noSmithyDocumentSerde
@@ -73,9 +71,9 @@ type StartDBInstanceAutomatedBackupsReplicationInput struct {
 
 type StartDBInstanceAutomatedBackupsReplicationOutput struct {
 
-	// An automated backup of a DB instance. It consists of system backups, transaction
-	// logs, and the database instance properties that existed at the time you deleted
-	// the source instance.
+	// An automated backup of a DB instance. It consists of system backups,
+	// transaction logs, and the database instance properties that existed at the time
+	// you deleted the source instance.
 	DBInstanceAutomatedBackup *types.DBInstanceAutomatedBackup
 
 	// Metadata pertaining to the operation's result.

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the description for the specified firewall. Use the description to help
-// you identify the firewall when you're working with it.
+// Modifies the description for the specified firewall. Use the description to
+// help you identify the firewall when you're working with it.
 func (c *Client) UpdateFirewallDescription(ctx context.Context, params *UpdateFirewallDescriptionInput, optFns ...func(*Options)) (*UpdateFirewallDescriptionOutput, error) {
 	if params == nil {
 		params = &UpdateFirewallDescriptionInput{}
@@ -29,12 +29,12 @@ func (c *Client) UpdateFirewallDescription(ctx context.Context, params *UpdateFi
 
 type UpdateFirewallDescriptionInput struct {
 
-	// The new description for the firewall. If you omit this setting, Network Firewall
-	// removes the description for the firewall.
+	// The new description for the firewall. If you omit this setting, Network
+	// Firewall removes the description for the firewall.
 	Description *string
 
-	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or the
-	// name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or
+	// the name, and you can specify both.
 	FirewallArn *string
 
 	// The descriptive name of the firewall. You can't change the name of a firewall

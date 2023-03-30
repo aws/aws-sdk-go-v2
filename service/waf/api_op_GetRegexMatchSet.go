@@ -11,13 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
-// (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
-// the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns the RegexMatchSet specified by RegexMatchSetId.
+// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+// . With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use. Returns the RegexMatchSet  specified by RegexMatchSetId .
 func (c *Client) GetRegexMatchSet(ctx context.Context, params *GetRegexMatchSetInput, optFns ...func(*Options)) (*GetRegexMatchSetOutput, error) {
 	if params == nil {
 		params = &GetRegexMatchSetInput{}
@@ -35,8 +34,8 @@ func (c *Client) GetRegexMatchSet(ctx context.Context, params *GetRegexMatchSetI
 
 type GetRegexMatchSetInput struct {
 
-	// The RegexMatchSetId of the RegexMatchSet that you want to get. RegexMatchSetId
-	// is returned by CreateRegexMatchSet and by ListRegexMatchSets.
+	// The RegexMatchSetId  of the RegexMatchSet  that you want to get.
+	// RegexMatchSetId is returned by CreateRegexMatchSet  and by ListRegexMatchSets .
 	//
 	// This member is required.
 	RegexMatchSetId *string
@@ -46,8 +45,8 @@ type GetRegexMatchSetInput struct {
 
 type GetRegexMatchSetOutput struct {
 
-	// Information about the RegexMatchSet that you specified in the GetRegexMatchSet
-	// request. For more information, see RegexMatchTuple.
+	// Information about the RegexMatchSet  that you specified in the GetRegexMatchSet
+	// request. For more information, see RegexMatchTuple .
 	RegexMatchSet *types.RegexMatchSet
 
 	// Metadata pertaining to the operation's result.

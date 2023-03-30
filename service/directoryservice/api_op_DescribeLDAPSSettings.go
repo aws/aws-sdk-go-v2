@@ -50,8 +50,8 @@ type DescribeLDAPSSettingsInput struct {
 
 type DescribeLDAPSSettingsOutput struct {
 
-	// Information about LDAP security for the specified directory, including status of
-	// enablement, state last updated date time, and the reason for the state.
+	// Information about LDAP security for the specified directory, including status
+	// of enablement, state last updated date time, and the reason for the state.
 	LDAPSSettingsInfo []types.LDAPSSettingInfo
 
 	// The next token used to retrieve the LDAPS settings if the number of setting
@@ -141,8 +141,8 @@ type DescribeLDAPSSettingsPaginatorOptions struct {
 	// Specifies the number of items that should be displayed on one page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

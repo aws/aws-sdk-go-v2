@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the definition of the LATEST_WORKING version of a DataBrew recipe.
+// Modifies the definition of the LATEST_WORKING  version of a DataBrew recipe.
 func (c *Client) UpdateRecipe(ctx context.Context, params *UpdateRecipeInput, optFns ...func(*Options)) (*UpdateRecipeOutput, error) {
 	if params == nil {
 		params = &UpdateRecipeInput{}

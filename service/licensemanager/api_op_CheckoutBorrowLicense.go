@@ -29,15 +29,15 @@ func (c *Client) CheckoutBorrowLicense(ctx context.Context, params *CheckoutBorr
 
 type CheckoutBorrowLicenseInput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	//
 	// This member is required.
 	ClientToken *string
 
 	// Digital signature method. The possible value is JSON Web Signature (JWS)
 	// algorithm PS384. For more information, see RFC 7518 Digital Signature with
-	// RSASSA-PSS (https://tools.ietf.org/html/rfc7518#section-3.5).
+	// RSASSA-PSS (https://tools.ietf.org/html/rfc7518#section-3.5) .
 	//
 	// This member is required.
 	DigitalSignatureMethod types.DigitalSignatureMethod

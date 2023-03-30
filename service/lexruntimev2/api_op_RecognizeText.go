@@ -17,22 +17,14 @@ import (
 // Amazon Lex V2 returns the next message to convey to the user and an optional
 // response card to display. If the optional post-fulfillment response is
 // specified, the messages are returned as follows. For more information, see
-// PostFulfillmentStatusSpecification
-// (https://docs.aws.amazon.com/lexv2/latest/dg/API_PostFulfillmentStatusSpecification.html).
-// -
-// Success message - Returned if the Lambda function completes successfully and the
-// intent state is fulfilled or ready fulfillment if the message is present.
-// -
-// Failed message - The failed message is returned if the Lambda function throws an
-// exception or if the Lambda function returns a failed intent state without a
-// message.
-// - Timeout message - If you don't configure a timeout message and a
-// timeout, and the Lambda function doesn't return within 30 seconds, the timeout
-// message is returned. If you configure a timeout, the timeout message is returned
-// when the period times out.
+// PostFulfillmentStatusSpecification (https://docs.aws.amazon.com/lexv2/latest/dg/API_PostFulfillmentStatusSpecification.html)
+// .
+//   - Success message - Returned if the Lambda function completes successfully and the intent state is fulfilled or ready fulfillment if the message is present.
+//   - Failed message - The failed message is returned if the Lambda function throws an exception or if the Lambda function returns a failed intent state without a message.
+//   - Timeout message - If you don't configure a timeout message and a timeout, and the Lambda function doesn't return within 30 seconds, the timeout message is returned. If you configure a timeout, the timeout message is returned when the period times out.
 //
-// For more information, see Completion message
-// (https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete.html).
+// For more information, see Completion message (https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete.html)
+// .
 func (c *Client) RecognizeText(ctx context.Context, params *RecognizeTextInput, optFns ...func(*Options)) (*RecognizeTextOutput, error) {
 	if params == nil {
 		params = &RecognizeTextInput{}
@@ -76,8 +68,8 @@ type RecognizeTextInput struct {
 	Text *string
 
 	// Request-specific information passed between the client application and Amazon
-	// Lex V2 The namespace x-amz-lex: is reserved for special attributes. Don't create
-	// any request attributes with the prefix x-amz-lex:.
+	// Lex V2 The namespace x-amz-lex: is reserved for special attributes. Don't
+	// create any request attributes with the prefix x-amz-lex: .
 	RequestAttributes map[string]string
 
 	// The current state of the dialog between the user and the bot.
@@ -95,9 +87,9 @@ type RecognizeTextOutput struct {
 	// utterance.
 	Interpretations []types.Interpretation
 
-	// A list of messages last sent to the user. The messages are ordered based on the
-	// order that you returned the messages from your Lambda function or the order that
-	// the messages are defined in the bot.
+	// A list of messages last sent to the user. The messages are ordered based on
+	// the order that you returned the messages from your Lambda function or the order
+	// that the messages are defined in the bot.
 	Messages []types.Message
 
 	// The bot member that recognized the text.

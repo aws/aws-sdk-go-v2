@@ -29,8 +29,8 @@ func (c *Client) DeletePullThroughCacheRule(ctx context.Context, params *DeleteP
 
 type DeletePullThroughCacheRuleInput struct {
 
-	// The Amazon ECR repository prefix associated with the pull through cache rule to
-	// delete.
+	// The Amazon ECR repository prefix associated with the pull through cache rule
+	// to delete.
 	//
 	// This member is required.
 	EcrRepositoryPrefix *string

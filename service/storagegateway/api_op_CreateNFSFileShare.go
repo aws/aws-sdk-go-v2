@@ -21,8 +21,7 @@ import (
 // Web Services STS is not activated in the Amazon Web Services Region, activate
 // it. For information about how to activate Amazon Web Services STS, see
 // Activating and deactivating Amazon Web Services STS in an Amazon Web Services
-// Region
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
+// Region (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
 // in the Identity and Access Management User Guide. S3 File Gateways do not
 // support creating hard or symbolic links on a file share.
 func (c *Client) CreateNFSFileShare(ctx context.Context, params *CreateNFSFileShareInput, optFns ...func(*Options)) (*CreateNFSFileShareOutput, error) {
@@ -43,8 +42,8 @@ func (c *Client) CreateNFSFileShare(ctx context.Context, params *CreateNFSFileSh
 // CreateNFSFileShareInput
 type CreateNFSFileShareInput struct {
 
-	// A unique string value that you supply that is used by S3 File Gateway to ensure
-	// idempotent file share creation.
+	// A unique string value that you supply that is used by S3 File Gateway to
+	// ensure idempotent file share creation.
 	//
 	// This member is required.
 	ClientToken *string
@@ -59,20 +58,19 @@ type CreateNFSFileShareInput struct {
 	// includes a resource ARN with an optional prefix concatenation. The prefix must
 	// end with a forward slash (/). You can specify LocationARN as a bucket ARN,
 	// access point ARN or access point alias, as shown in the following examples.
-	// Bucket ARN: arn:aws:s3:::my-bucket/prefix/ Access point ARN:
-	// arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/ If you
+	// Bucket ARN: arn:aws:s3:::my-bucket/prefix/  Access point ARN:
+	// arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/If you
 	// specify an access point, the bucket policy must be configured to delegate access
 	// control to the access point. For information, see Delegating access control to
-	// access points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control)
+	// access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control)
 	// in the Amazon S3 User Guide. Access point alias:
 	// test-ap-ab123cdef4gehijklmn5opqrstuvuse1a-s3alias
 	//
 	// This member is required.
 	LocationARN *string
 
-	// The ARN of the Identity and Access Management (IAM) role that an S3 File Gateway
-	// assumes when it accesses the underlying storage.
+	// The ARN of the Identity and Access Management (IAM) role that an S3 File
+	// Gateway assumes when it accesses the underlying storage.
 	//
 	// This member is required.
 	Role *string
@@ -94,26 +92,29 @@ type CreateNFSFileShareInput struct {
 	ClientList []string
 
 	// The default storage class for objects put into an Amazon S3 bucket by the S3
-	// File Gateway. The default value is S3_STANDARD. Optional. Valid Values:
-	// S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
+	// File Gateway. The default value is S3_STANDARD . Optional. Valid Values:
+	// S3_STANDARD | S3_INTELLIGENT_TIERING  | S3_STANDARD_IA  | S3_ONEZONE_IA
 	DefaultStorageClass *string
 
-	// The name of the file share. Optional. FileShareName must be set if an S3 prefix
-	// name is set in LocationARN, or if an access point or access point alias is used.
+	// The name of the file share. Optional. FileShareName must be set if an S3
+	// prefix name is set in LocationARN, or if an access point or access point alias
+	// is used.
 	FileShareName *string
 
 	// A value that enables guessing of the MIME type for uploaded objects based on
-	// file extensions. Set this value to true to enable MIME type guessing, otherwise
-	// set to false. The default value is true. Valid Values: true | false
+	// file extensions. Set this value to true to enable MIME type guessing,
+	// otherwise set to false . The default value is true . Valid Values: true  |
+	// false
 	GuessMIMETypeEnabled *bool
 
-	// Set to true to use Amazon S3 server-side encryption with your own KMS key, or
-	// false to use a key managed by Amazon S3. Optional. Valid Values: true | false
+	// Set to true  to use Amazon S3 server-side encryption with your own KMS key, or
+	// false to use a key managed by Amazon S3. Optional. Valid Values: true  | false
 	KMSEncrypted *bool
 
-	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
-	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
-	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
+	// for Amazon S3 server-side encryption. Storage Gateway does not support
+	// asymmetric CMKs. This value can only be set when KMSEncrypted  is true.
+	// Optional.
 	KMSKey *string
 
 	// File share default values. Optional.
@@ -121,44 +122,43 @@ type CreateNFSFileShareInput struct {
 
 	// The notification policy of the file share. SettlingTimeInSeconds controls the
 	// number of seconds to wait after the last point in time a client wrote to a file
-	// before generating an ObjectUploaded notification. Because clients can make many
-	// small writes to files, it's best to set this parameter for as long as possible
-	// to avoid generating multiple notifications for the same file in a small time
-	// period. SettlingTimeInSeconds has no effect on the timing of the object
+	// before generating an ObjectUploaded notification. Because clients can make
+	// many small writes to files, it's best to set this parameter for as long as
+	// possible to avoid generating multiple notifications for the same file in a small
+	// time period. SettlingTimeInSeconds has no effect on the timing of the object
 	// uploading to Amazon S3, only the timing of the notification. The following
-	// example sets NotificationPolicy on with SettlingTimeInSeconds set to 60.
+	// example sets NotificationPolicy  on with SettlingTimeInSeconds  set to 60.
 	// {"Upload": {"SettlingTimeInSeconds": 60}} The following example sets
 	// NotificationPolicy off. {}
 	NotificationPolicy *string
 
-	// A value that sets the access control list (ACL) permission for objects in the S3
-	// bucket that a S3 File Gateway puts objects into. The default value is private.
+	// A value that sets the access control list (ACL) permission for objects in the
+	// S3 bucket that a S3 File Gateway puts objects into. The default value is
+	// private .
 	ObjectACL types.ObjectACL
 
 	// A value that sets the write status of a file share. Set this value to true to
-	// set the write status to read-only, otherwise set to false. Valid Values: true |
-	// false
+	// set the write status to read-only, otherwise set to false . Valid Values: true
+	// | false
 	ReadOnly *bool
 
-	// A value that sets who pays the cost of the request and the cost associated with
-	// data download from the S3 bucket. If this value is set to true, the requester
-	// pays the costs; otherwise, the S3 bucket owner pays. However, the S3 bucket
-	// owner always pays the cost of storing data. RequesterPays is a configuration for
-	// the S3 bucket that backs the file share, so make sure that the configuration on
-	// the file share is the same as the S3 bucket configuration. Valid Values: true |
-	// false
+	// A value that sets who pays the cost of the request and the cost associated
+	// with data download from the S3 bucket. If this value is set to true, the
+	// requester pays the costs; otherwise, the S3 bucket owner pays. However, the S3
+	// bucket owner always pays the cost of storing data. RequesterPays is a
+	// configuration for the S3 bucket that backs the file share, so make sure that the
+	// configuration on the file share is the same as the S3 bucket configuration.
+	// Valid Values: true  | false
 	RequesterPays *bool
 
 	// A value that maps a user to anonymous user. Valid values are the following:
-	// -
-	// RootSquash: Only root is mapped to anonymous user.
-	// - NoSquash: No one is mapped
-	// to anonymous user.
-	// - AllSquash: Everyone is mapped to anonymous user.
+	//     - RootSquash : Only root is mapped to anonymous user.
+	//     - NoSquash : No one is mapped to anonymous user.
+	//     - AllSquash : Everyone is mapped to anonymous user.
 	Squash *string
 
-	// A list of up to 50 tags that can be assigned to the NFS file share. Each tag is
-	// a key-value pair. Valid characters for key and value are letters, spaces, and
+	// A list of up to 50 tags that can be assigned to the NFS file share. Each tag
+	// is a key-value pair. Valid characters for key and value are letters, spaces, and
 	// numbers representable in UTF-8 format, and the following special characters: + -
 	// = . _ : / @. The maximum length of a tag's key is 128 characters, and the
 	// maximum length for a tag's value is 256.

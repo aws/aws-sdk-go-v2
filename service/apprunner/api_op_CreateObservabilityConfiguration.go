@@ -16,8 +16,8 @@ import (
 // enable non-default observability features. You can share an observability
 // configuration across multiple services. Create multiple revisions of a
 // configuration by calling this action multiple times using the same
-// ObservabilityConfigurationName. The call returns incremental
-// ObservabilityConfigurationRevision values. When you create a service and
+// ObservabilityConfigurationName . The call returns incremental
+// ObservabilityConfigurationRevisionvalues. When you create a service and
 // configure an observability configuration resource, the service uses the latest
 // active revision of the observability configuration by default. You can
 // optionally configure the service to use a specific revision. The observability

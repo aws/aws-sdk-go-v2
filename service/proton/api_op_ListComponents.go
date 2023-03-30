@@ -14,9 +14,8 @@ import (
 
 // List components with summary data. You can filter the result list by
 // environment, service, or a single service instance. For more information about
-// components, see Proton components
-// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
-// Proton User Guide.
+// components, see Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
+// in the Proton User Guide.
 func (c *Client) ListComponents(ctx context.Context, params *ListComponentsInput, optFns ...func(*Options)) (*ListComponentsOutput, error) {
 	if params == nil {
 		params = &ListComponentsInput{}
@@ -34,8 +33,9 @@ func (c *Client) ListComponents(ctx context.Context, params *ListComponentsInput
 
 type ListComponentsInput struct {
 
-	// The name of an environment for result list filtering. Proton returns components
-	// associated with the environment or attached to service instances running in it.
+	// The name of an environment for result list filtering. Proton returns
+	// components associated with the environment or attached to service instances
+	// running in it.
 	EnvironmentName *string
 
 	// The maximum number of components to list.
@@ -146,8 +146,8 @@ type ListComponentsPaginatorOptions struct {
 	// The maximum number of components to list.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

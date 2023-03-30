@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts the recording of Amazon Web Services API calls and log file delivery for
-// a trail. For a trail that is enabled in all regions, this operation must be
+// Starts the recording of Amazon Web Services API calls and log file delivery
+// for a trail. For a trail that is enabled in all regions, this operation must be
 // called from the region in which the trail was created. This operation cannot be
 // called on the shadow trails (replicated trails in other regions) of a trail that
 // is enabled in all regions.
@@ -30,12 +30,12 @@ func (c *Client) StartLogging(ctx context.Context, params *StartLoggingInput, op
 	return out, nil
 }
 
-// The request to CloudTrail to start logging Amazon Web Services API calls for an
-// account.
+// The request to CloudTrail to start logging Amazon Web Services API calls for
+// an account.
 type StartLoggingInput struct {
 
-	// Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs
-	// Amazon Web Services API calls. The following is the format of a trail ARN.
+	// Specifies the name or the CloudTrail ARN of the trail for which CloudTrail
+	// logs Amazon Web Services API calls. The following is the format of a trail ARN.
 	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 	//
 	// This member is required.

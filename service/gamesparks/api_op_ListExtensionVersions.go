@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a paginated list of available versions for the extension. Each time an API
-// change is made to an extension, the version is incremented. The list retrieved
-// by this operation shows the versions that are currently available.
+// Gets a paginated list of available versions for the extension. Each time an
+// API change is made to an extension, the version is incremented. The list
+// retrieved by this operation shows the versions that are currently available.
 func (c *Client) ListExtensionVersions(ctx context.Context, params *ListExtensionVersionsInput, optFns ...func(*Options)) (*ListExtensionVersionsOutput, error) {
 	if params == nil {
 		params = &ListExtensionVersionsInput{}
@@ -148,8 +148,8 @@ type ListExtensionVersionsPaginatorOptions struct {
 	// get results as a set of sequential pages.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -28,7 +28,7 @@ func (c *Client) DescribeDomain(ctx context.Context, params *DescribeDomainInput
 	return out, nil
 }
 
-// Container for the parameters to the DescribeDomain operation.
+// Container for the parameters to the DescribeDomain  operation.
 type DescribeDomainInput struct {
 
 	// The name of the domain that you want information about.

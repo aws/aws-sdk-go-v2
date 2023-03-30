@@ -31,8 +31,8 @@ func (c *Client) DescribeProtectedResource(ctx context.Context, params *Describe
 
 type DescribeProtectedResourceInput struct {
 
-	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of
-	// the ARN depends on the resource type.
+	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format
+	// of the ARN depends on the resource type.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -48,16 +48,16 @@ type DescribeProtectedResourceOutput struct {
 	// 26, 2018 12:11:30.087 AM.
 	LastBackupTime *time.Time
 
-	// An ARN that uniquely identifies a resource. The format of the ARN depends on the
-	// resource type.
+	// An ARN that uniquely identifies a resource. The format of the ARN depends on
+	// the resource type.
 	ResourceArn *string
 
 	// This is the non-unique name of the resource that belongs to the specified
 	// backup.
 	ResourceName *string
 
-	// The type of Amazon Web Services resource saved as a recovery point; for example,
-	// an Amazon EBS volume or an Amazon RDS database.
+	// The type of Amazon Web Services resource saved as a recovery point; for
+	// example, an Amazon EBS volume or an Amazon RDS database.
 	ResourceType *string
 
 	// Metadata pertaining to the operation's result.

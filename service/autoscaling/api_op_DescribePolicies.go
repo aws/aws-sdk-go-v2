@@ -33,8 +33,8 @@ type DescribePoliciesInput struct {
 	// The name of the Auto Scaling group.
 	AutoScalingGroupName *string
 
-	// The maximum number of items to be returned with each call. The default value is
-	// 50 and the maximum value is 100.
+	// The maximum number of items to be returned with each call. The default value
+	// is 50  and the maximum value is 100 .
 	MaxRecords *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -47,8 +47,8 @@ type DescribePoliciesInput struct {
 	// Members: Maximum number of 50 items.
 	PolicyNames []string
 
-	// One or more policy types. The valid values are SimpleScaling, StepScaling,
-	// TargetTrackingScaling, and PredictiveScaling.
+	// One or more policy types. The valid values are SimpleScaling , StepScaling ,
+	// TargetTrackingScaling , and PredictiveScaling .
 	PolicyTypes []string
 
 	noSmithyDocumentSerde
@@ -141,12 +141,12 @@ var _ DescribePoliciesAPIClient = (*Client)(nil)
 
 // DescribePoliciesPaginatorOptions is the paginator options for DescribePolicies
 type DescribePoliciesPaginatorOptions struct {
-	// The maximum number of items to be returned with each call. The default value is
-	// 50 and the maximum value is 100.
+	// The maximum number of items to be returned with each call. The default value
+	// is 50  and the maximum value is 100 .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

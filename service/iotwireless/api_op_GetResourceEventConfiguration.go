@@ -39,7 +39,7 @@ type GetResourceEventConfigurationInput struct {
 	// This member is required.
 	IdentifierType types.IdentifierType
 
-	// Partner type of the resource if the identifier type is PartnerAccountId.
+	// Partner type of the resource if the identifier type is PartnerAccountId .
 	PartnerType types.EventNotificationPartnerType
 
 	noSmithyDocumentSerde

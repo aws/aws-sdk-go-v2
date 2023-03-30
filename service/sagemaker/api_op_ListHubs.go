@@ -69,8 +69,8 @@ type ListHubsOutput struct {
 	// This member is required.
 	HubSummaries []types.HubInfo
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of hubs, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of hubs, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified VPC. You must detach or delete all gateways and resources
-// that are associated with the VPC before you can delete it. For example, you must
-// terminate all instances running in the VPC, delete all security groups
-// associated with the VPC (except the default one), delete all route tables
-// associated with the VPC (except the default one), and so on.
+// Deletes the specified VPC. You must detach or delete all gateways and
+// resources that are associated with the VPC before you can delete it. For
+// example, you must terminate all instances running in the VPC, delete all
+// security groups associated with the VPC (except the default one), delete all
+// route tables associated with the VPC (except the default one), and so on.
 func (c *Client) DeleteVpc(ctx context.Context, params *DeleteVpcInput, optFns ...func(*Options)) (*DeleteVpcOutput, error) {
 	if params == nil {
 		params = &DeleteVpcInput{}
@@ -39,8 +39,8 @@ type DeleteVpcInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

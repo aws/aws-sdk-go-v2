@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the group metadata and attributes from GroupId in an identity store.
+// Retrieves the group metadata and attributes from GroupId  in an identity store.
 func (c *Client) DescribeGroup(ctx context.Context, params *DescribeGroupInput, optFns ...func(*Options)) (*DescribeGroupOutput, error) {
 	if params == nil {
 		params = &DescribeGroupInput{}
@@ -34,8 +34,8 @@ type DescribeGroupInput struct {
 	// This member is required.
 	GroupId *string
 
-	// The globally unique identifier for the identity store, such as d-1234567890. In
-	// this example, d- is a fixed prefix, and 1234567890 is a randomly generated
+	// The globally unique identifier for the identity store, such as d-1234567890.
+	// In this example, d-  is a fixed prefix, and 1234567890 is a randomly generated
 	// string that contains numbers and lower case letters. This value is generated at
 	// the time that a new identity store is created.
 	//
@@ -60,11 +60,11 @@ type DescribeGroupOutput struct {
 	// A string containing a description of the group.
 	Description *string
 
-	// The group’s display name value. The length limit is 1,024 characters. This value
-	// can consist of letters, accented characters, symbols, numbers, punctuation, tab,
-	// new line, carriage return, space, and nonbreaking space in this attribute. This
-	// value is specified at the time that the group is created and stored as an
-	// attribute of the group object in the identity store.
+	// The group’s display name value. The length limit is 1,024 characters. This
+	// value can consist of letters, accented characters, symbols, numbers,
+	// punctuation, tab, new line, carriage return, space, and nonbreaking space in
+	// this attribute. This value is specified at the time that the group is created
+	// and stored as an attribute of the group object in the identity store.
 	DisplayName *string
 
 	// A list of ExternalId objects that contains the identifiers issued to this

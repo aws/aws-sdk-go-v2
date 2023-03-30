@@ -18,18 +18,14 @@ import (
 // password as strings for use with a Windows Remote Desktop client. For a Linux
 // instance, GameLift returns a user name and RSA private key, also as strings, for
 // use with an SSH client. The private key must be saved in the proper format to a
-// .pem file before using. If you're making this request using the CLI, saving the
-// secret can be handled as part of the GetInstanceAccess request, as shown in one
-// of the examples for this operation. To request access to a specific instance,
-// specify the IDs of both the instance and the fleet it belongs to. You can
-// retrieve a fleet's instance IDs by calling DescribeInstances
-// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeInstances.html).
-// Learn more Remotely Access Fleet Instances
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html)Debug
-// Fleet Issues
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html)
-// Related actions All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// .pemfile before using. If you're making this request using the CLI, saving the
+// secret can be handled as part of the GetInstanceAccess request, as shown in
+// one of the examples for this operation. To request access to a specific
+// instance, specify the IDs of both the instance and the fleet it belongs to. You
+// can retrieve a fleet's instance IDs by calling DescribeInstances (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeInstances.html)
+// . Learn more Remotely Access Fleet Instances (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html)
+// Debug Fleet Issues (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html)
+// Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) GetInstanceAccess(ctx context.Context, params *GetInstanceAccessInput, optFns ...func(*Options)) (*GetInstanceAccessOutput, error) {
 	if params == nil {
 		params = &GetInstanceAccessInput{}
@@ -47,10 +43,10 @@ func (c *Client) GetInstanceAccess(ctx context.Context, params *GetInstanceAcces
 
 type GetInstanceAccessInput struct {
 
-	// A unique identifier for the fleet that contains the instance you want access to.
-	// You can use either the fleet ID or ARN value. The fleet can be in any of the
-	// following statuses: ACTIVATING, ACTIVE, or ERROR. Fleets with an ERROR status
-	// may be accessible for a short time before they are deleted.
+	// A unique identifier for the fleet that contains the instance you want access
+	// to. You can use either the fleet ID or ARN value. The fleet can be in any of the
+	// following statuses: ACTIVATING , ACTIVE , or ERROR . Fleets with an ERROR
+	// status may be accessible for a short time before they are deleted.
 	//
 	// This member is required.
 	FleetId *string
@@ -66,8 +62,8 @@ type GetInstanceAccessInput struct {
 
 type GetInstanceAccessOutput struct {
 
-	// The connection information for a fleet instance, including IP address and access
-	// credentials.
+	// The connection information for a fleet instance, including IP address and
+	// access credentials.
 	InstanceAccess *types.InstanceAccess
 
 	// Metadata pertaining to the operation's result.

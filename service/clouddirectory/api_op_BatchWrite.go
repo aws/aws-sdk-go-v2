@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Performs all the write operations in a batch. Either all the operations succeed
-// or none.
+// Performs all the write operations in a batch. Either all the operations
+// succeed or none.
 func (c *Client) BatchWrite(ctx context.Context, params *BatchWriteInput, optFns ...func(*Options)) (*BatchWriteOutput, error) {
 	if params == nil {
 		params = &BatchWriteInput{}
@@ -31,7 +31,7 @@ func (c *Client) BatchWrite(ctx context.Context, params *BatchWriteInput, optFns
 type BatchWriteInput struct {
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory. For more
-	// information, see arns.
+	// information, see arns .
 	//
 	// This member is required.
 	DirectoryArn *string

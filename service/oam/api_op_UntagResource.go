@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes one or more tags from the specified resource. Unlike tagging permissions
-// in other Amazon Web Services services, to tag or untag links and sinks you must
-// have the oam:ResourceTag permission. The iam:TagResource permission does not
-// allow you to tag and untag links and sinks.
+// Removes one or more tags from the specified resource. Unlike tagging
+// permissions in other Amazon Web Services services, to tag or untag links and
+// sinks you must have the oam:ResourceTag  permission. The iam:TagResource
+// permission does not allow you to tag and untag links and sinks.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -31,11 +31,11 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The ARN of the resource that you're removing tags from. The ARN format of a sink
-	// is arn:aws:oam:Region:account-id:sink/sink-id  The ARN format of a link is
-	// arn:aws:oam:Region:account-id:link/link-id  For more information about ARN
-	// format, see CloudWatch Logs resources and operations
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html).
+	// The ARN of the resource that you're removing tags from. The ARN format of a
+	// sink is arn:aws:oam:Region:account-id:sink/sink-id  The ARN format of a link
+	// is arn:aws:oam:Region:account-id:link/link-id  For more information about ARN
+	// format, see CloudWatch Logs resources and operations (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html)
+	// .
 	//
 	// This member is required.
 	ResourceArn *string

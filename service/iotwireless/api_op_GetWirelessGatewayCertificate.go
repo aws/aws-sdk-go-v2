@@ -42,8 +42,8 @@ type GetWirelessGatewayCertificateOutput struct {
 	// The ID of the certificate associated with the wireless gateway.
 	IotCertificateId *string
 
-	// The ID of the certificate that is associated with the wireless gateway and used
-	// for the LoRaWANNetworkServer endpoint.
+	// The ID of the certificate that is associated with the wireless gateway and
+	// used for the LoRaWANNetworkServer endpoint.
 	LoRaWANNetworkServerCertificateId *string
 
 	// Metadata pertaining to the operation's result.

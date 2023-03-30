@@ -11,9 +11,9 @@ const (
 	BuildTypeImport        BuildType = "IMPORT"
 )
 
-// Values returns all known values for BuildType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for BuildType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (BuildType) Values() []BuildType {
 	return []BuildType{
 		"USER_INITIATED",
@@ -162,9 +162,9 @@ const (
 	ImageSourceCustom         ImageSource = "CUSTOM"
 )
 
-// Values returns all known values for ImageSource. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ImageSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ImageSource) Values() []ImageSource {
 	return []ImageSource{
 		"AMAZON_MANAGED",
@@ -191,9 +191,9 @@ const (
 	ImageStatusDeleted      ImageStatus = "DELETED"
 )
 
-// Values returns all known values for ImageStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ImageStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ImageStatus) Values() []ImageStatus {
 	return []ImageStatus{
 		"PENDING",
@@ -218,9 +218,9 @@ const (
 	ImageTypeDocker ImageType = "DOCKER"
 )
 
-// Values returns all known values for ImageType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ImageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ImageType) Values() []ImageType {
 	return []ImageType{
 		"AMI",
@@ -238,9 +238,9 @@ const (
 	OwnershipThirdparty Ownership = "ThirdParty"
 )
 
-// Values returns all known values for Ownership. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Ownership. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Ownership) Values() []Ownership {
 	return []Ownership{
 		"Self",
@@ -295,9 +295,9 @@ const (
 	PlatformLinux   Platform = "Linux"
 )
 
-// Values returns all known values for Platform. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Platform. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Platform) Values() []Platform {
 	return []Platform{
 		"Windows",

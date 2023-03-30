@@ -49,8 +49,8 @@ type DescribeBotAliasInput struct {
 
 type DescribeBotAliasOutput struct {
 
-	// A list of events that affect a bot alias. For example, an event is recorded when
-	// the version that the alias points to changes.
+	// A list of events that affect a bot alias. For example, an event is recorded
+	// when the version that the alias points to changes.
 	BotAliasHistoryEvents []types.BotAliasHistoryEvent
 
 	// The identifier of the bot alias.
@@ -62,8 +62,8 @@ type DescribeBotAliasOutput struct {
 	// The name of the bot alias.
 	BotAliasName *string
 
-	// The current status of the alias. When the alias is Available, the alias is ready
-	// for use with your bot.
+	// The current status of the alias. When the alias is Available, the alias is
+	// ready for use with your bot.
 	BotAliasStatus types.BotAliasStatus
 
 	// The identifier of the bot associated with the bot alias.
@@ -88,8 +88,8 @@ type DescribeBotAliasOutput struct {
 	// A list of the networks to which the bot alias you described belongs.
 	ParentBotNetworks []types.ParentBotNetwork
 
-	// Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment
-	// of user utterances.
+	// Determines whether Amazon Lex will use Amazon Comprehend to detect the
+	// sentiment of user utterances.
 	SentimentAnalysisSettings *types.SentimentAnalysisSettings
 
 	// Metadata pertaining to the operation's result.
@@ -182,9 +182,9 @@ type BotAliasAvailableWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, BotAliasAvailableWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, BotAliasAvailableWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -232,10 +232,10 @@ func (w *BotAliasAvailableWaiter) Wait(ctx context.Context, params *DescribeBotA
 	return err
 }
 
-// WaitForOutput calls the waiter function for BotAliasAvailable waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for BotAliasAvailable waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
 func (w *BotAliasAvailableWaiter) WaitForOutput(ctx context.Context, params *DescribeBotAliasInput, maxWaitDur time.Duration, optFns ...func(*BotAliasAvailableWaiterOptions)) (*DescribeBotAliasOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

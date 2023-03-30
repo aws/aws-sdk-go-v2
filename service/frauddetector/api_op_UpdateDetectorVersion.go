@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a detector version. The detector version attributes that you can update
-// include models, external model endpoints, rules, rule execution mode, and
-// description. You can only update a DRAFT detector version.
+// Updates a detector version. The detector version attributes that you can
+// update include models, external model endpoints, rules, rule execution mode, and
+// description. You can only update a DRAFT  detector version.
 func (c *Client) UpdateDetectorVersion(ctx context.Context, params *UpdateDetectorVersionInput, optFns ...func(*Options)) (*UpdateDetectorVersionOutput, error) {
 	if params == nil {
 		params = &UpdateDetectorVersionInput{}
@@ -63,7 +63,7 @@ type UpdateDetectorVersionInput struct {
 	// that single rule. If you specifiy ALL_MATCHED, Amazon Fraud Detector evaluates
 	// all rules and returns the outcomes for all matched rules. You can define and
 	// edit the rule mode at the detector version level, when it is in draft status.
-	// The default behavior is FIRST_MATCHED.
+	// The default behavior is FIRST_MATCHED .
 	RuleExecutionMode types.RuleExecutionMode
 
 	noSmithyDocumentSerde

@@ -13,9 +13,8 @@ import (
 
 // Inspects the text of a batch of documents for the syntax and part of speech of
 // the words in the document and returns information about them. For more
-// information, see Syntax
-// (https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html) in the
-// Comprehend Developer Guide.
+// information, see Syntax (https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html)
+// in the Comprehend Developer Guide.
 func (c *Client) BatchDetectSyntax(ctx context.Context, params *BatchDetectSyntaxInput, optFns ...func(*Options)) (*BatchDetectSyntaxOutput, error) {
 	if params == nil {
 		params = &BatchDetectSyntaxInput{}
@@ -53,8 +52,8 @@ type BatchDetectSyntaxInput struct {
 type BatchDetectSyntaxOutput struct {
 
 	// A list containing one object for each document that contained an error. The
-	// results are sorted in ascending order by the Index field and match the order of
-	// the documents in the input list. If there are no errors in the batch, the
+	// results are sorted in ascending order by the Index field and match the order
+	// of the documents in the input list. If there are no errors in the batch, the
 	// ErrorList is empty.
 	//
 	// This member is required.

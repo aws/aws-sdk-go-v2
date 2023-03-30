@@ -31,25 +31,22 @@ func (c *Client) ApplyPendingMaintenanceAction(ctx context.Context, params *Appl
 type ApplyPendingMaintenanceActionInput struct {
 
 	// The pending maintenance action to apply to this resource. Valid values:
-	// os-upgrade, system-update, db-upgrade
+	// os-upgrade , system-update , db-upgrade
 	//
 	// This member is required.
 	ApplyAction *string
 
-	// A value that specifies the type of opt-in request, or undoes an opt-in request.
-	// You can't undo an opt-in request of type immediate. Valid values:
-	// - immediate -
-	// Apply the maintenance action immediately.
-	// - next-maintenance - Apply the
-	// maintenance action during the next maintenance window for the resource.
-	// -
-	// undo-opt-in - Cancel any existing next-maintenance opt-in requests.
+	// A value that specifies the type of opt-in request, or undoes an opt-in
+	// request. You can't undo an opt-in request of type immediate . Valid values:
+	//     - immediate - Apply the maintenance action immediately.
+	//     - next-maintenance - Apply the maintenance action during the next maintenance window for the resource.
+	//     - undo-opt-in - Cancel any existing next-maintenance opt-in requests.
 	//
 	// This member is required.
 	OptInType *string
 
-	// The Amazon Resource Name (ARN) of the DMS resource that the pending maintenance
-	// action applies to.
+	// The Amazon Resource Name (ARN) of the DMS resource that the pending
+	// maintenance action applies to.
 	//
 	// This member is required.
 	ReplicationInstanceArn *string

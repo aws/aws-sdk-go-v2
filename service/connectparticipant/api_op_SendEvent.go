@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends an event. ConnectionToken is used for invoking this API instead of
-// ParticipantToken. The Amazon Connect Participant Service APIs do not use
-// Signature Version 4 authentication
-// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+// Sends an event. ConnectionToken  is used for invoking this API instead of
+// ParticipantToken . The Amazon Connect Participant Service APIs do not use
+// Signature Version 4 authentication (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
+// .
 func (c *Client) SendEvent(ctx context.Context, params *SendEventInput, optFns ...func(*Options)) (*SendEventOutput, error) {
 	if params == nil {
 		params = &SendEventInput{}
@@ -38,14 +38,10 @@ type SendEventInput struct {
 	ConnectionToken *string
 
 	// The content type of the request. Supported types are:
-	// -
-	// application/vnd.amazonaws.connect.event.typing
-	// -
-	// application/vnd.amazonaws.connect.event.connection.acknowledged
-	// -
-	// application/vnd.amazonaws.connect.event.message.delivered
-	// -
-	// application/vnd.amazonaws.connect.event.message.read
+	//     - application/vnd.amazonaws.connect.event.typing
+	//     - application/vnd.amazonaws.connect.event.connection.acknowledged
+	//     - application/vnd.amazonaws.connect.event.message.delivered
+	//     - application/vnd.amazonaws.connect.event.message.read
 	//
 	// This member is required.
 	ContentType *string
@@ -53,8 +49,8 @@ type SendEventInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// .
 	ClientToken *string
 
 	// The content of the event to be sent (for example, message text). For content

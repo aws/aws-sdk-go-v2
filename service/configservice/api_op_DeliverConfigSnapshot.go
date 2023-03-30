@@ -13,12 +13,9 @@ import (
 // Schedules delivery of a configuration snapshot to the Amazon S3 bucket in the
 // specified delivery channel. After the delivery has started, Config sends the
 // following notifications using an Amazon SNS topic that you have specified.
-// -
-// Notification of the start of the delivery.
-// - Notification of the completion of
-// the delivery, if the delivery was successfully completed.
-// - Notification of
-// delivery failure, if the delivery failed.
+//   - Notification of the start of the delivery.
+//   - Notification of the completion of the delivery, if the delivery was successfully completed.
+//   - Notification of delivery failure, if the delivery failed.
 func (c *Client) DeliverConfigSnapshot(ctx context.Context, params *DeliverConfigSnapshotInput, optFns ...func(*Options)) (*DeliverConfigSnapshotOutput, error) {
 	if params == nil {
 		params = &DeliverConfigSnapshotInput{}
@@ -34,7 +31,7 @@ func (c *Client) DeliverConfigSnapshot(ctx context.Context, params *DeliverConfi
 	return out, nil
 }
 
-// The input for the DeliverConfigSnapshot action.
+// The input for the DeliverConfigSnapshot  action.
 type DeliverConfigSnapshotInput struct {
 
 	// The name of the delivery channel through which the snapshot is delivered.
@@ -45,7 +42,7 @@ type DeliverConfigSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
-// The output for the DeliverConfigSnapshot action, in JSON format.
+// The output for the DeliverConfigSnapshot  action, in JSON format.
 type DeliverConfigSnapshotOutput struct {
 
 	// The ID of the snapshot that is being created.

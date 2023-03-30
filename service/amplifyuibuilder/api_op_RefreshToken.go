@@ -29,7 +29,7 @@ func (c *Client) RefreshToken(ctx context.Context, params *RefreshTokenInput, op
 
 type RefreshTokenInput struct {
 
-	// The third-party provider for the token. The only valid value is figma.
+	// The third-party provider for the token. The only valid value is figma .
 	//
 	// This member is required.
 	Provider types.TokenProviders

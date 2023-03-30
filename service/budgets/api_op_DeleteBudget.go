@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a budget. You can delete your budget at any time. Deleting a budget also
-// deletes the notifications and subscribers that are associated with that budget.
+// Deletes a budget. You can delete your budget at any time. Deleting a budget
+// also deletes the notifications and subscribers that are associated with that
+// budget.
 func (c *Client) DeleteBudget(ctx context.Context, params *DeleteBudgetInput, optFns ...func(*Options)) (*DeleteBudgetOutput, error) {
 	if params == nil {
 		params = &DeleteBudgetInput{}
@@ -30,7 +31,7 @@ func (c *Client) DeleteBudget(ctx context.Context, params *DeleteBudgetInput, op
 // Request of DeleteBudget
 type DeleteBudgetInput struct {
 
-	// The accountId that is associated with the budget that you want to delete.
+	// The accountId  that is associated with the budget that you want to delete.
 	//
 	// This member is required.
 	AccountId *string

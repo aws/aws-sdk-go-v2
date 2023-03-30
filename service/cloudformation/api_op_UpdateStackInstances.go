@@ -16,20 +16,18 @@ import (
 // within the specified Amazon Web Services Regions. A stack instance refers to a
 // stack in a specific account and Region. You can only update stack instances in
 // Amazon Web Services Regions and accounts where they already exist; to create
-// additional stack instances, use CreateStackInstances
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStackInstances.html).
-// During stack set updates, any parameters overridden for a stack instance aren't
-// updated, but retain their overridden value. You can only update the parameter
-// values that are specified in the stack set; to add or delete a parameter itself,
-// use UpdateStackSet
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html)
+// additional stack instances, use CreateStackInstances (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStackInstances.html)
+// . During stack set updates, any parameters overridden for a stack instance
+// aren't updated, but retain their overridden value. You can only update the
+// parameter values that are specified in the stack set; to add or delete a
+// parameter itself, use UpdateStackSet (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html)
 // to update the stack set template. If you add a parameter to a template, before
 // you can override the parameter value specified in the stack set you must first
-// use UpdateStackSet
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html)
+// use UpdateStackSet (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html)
 // to update all stack instances with the updated template and parameter value
 // specified in the stack set. Once a stack instance has been updated with the new
-// parameter, you can then override the parameter value using UpdateStackInstances.
+// parameter, you can then override the parameter value using UpdateStackInstances
+// .
 func (c *Client) UpdateStackInstances(ctx context.Context, params *UpdateStackInstancesInput, optFns ...func(*Options)) (*UpdateStackInstancesOutput, error) {
 	if params == nil {
 		params = &UpdateStackInstancesInput{}
@@ -47,10 +45,10 @@ func (c *Client) UpdateStackInstances(ctx context.Context, params *UpdateStackIn
 
 type UpdateStackInstancesInput struct {
 
-	// The names of one or more Amazon Web Services Regions in which you want to update
-	// parameter values for stack instances. The overridden parameter values will be
-	// applied to all stack instances in the specified accounts and Amazon Web Services
-	// Regions.
+	// The names of one or more Amazon Web Services Regions in which you want to
+	// update parameter values for stack instances. The overridden parameter values
+	// will be applied to all stack instances in the specified accounts and Amazon Web
+	// Services Regions.
 	//
 	// This member is required.
 	Regions []string
@@ -60,33 +58,27 @@ type UpdateStackInstancesInput struct {
 	// This member is required.
 	StackSetName *string
 
-	// [Self-managed permissions] The names of one or more Amazon Web Services accounts
-	// for which you want to update parameter values for stack instances. The
+	// [Self-managed permissions] The names of one or more Amazon Web Services
+	// accounts for which you want to update parameter values for stack instances. The
 	// overridden parameter values will be applied to all stack instances in the
-	// specified accounts and Amazon Web Services Regions. You can specify Accounts or
-	// DeploymentTargets, but not both.
+	// specified accounts and Amazon Web Services Regions. You can specify Accounts
+	// or DeploymentTargets , but not both.
 	Accounts []string
 
 	// [Service-managed permissions] Specifies whether you are acting as an account
 	// administrator in the organization's management account or as a delegated
-	// administrator in a member account. By default, SELF is specified. Use SELF for
-	// stack sets with self-managed permissions.
-	// - If you are signed in to the
-	// management account, specify SELF.
-	// - If you are signed in to a delegated
-	// administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account
-	// must be registered as a delegated administrator in the management account. For
-	// more information, see Register a delegated administrator
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
-	// in the CloudFormation User Guide.
+	// administrator in a member account. By default, SELF  is specified. Use SELF
+	// for stack sets with self-managed permissions.
+	//     - If you are signed in to the management account, specify SELF .
+	//     - If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN . Your Amazon Web Services account must be registered as a delegated administrator in the management account. For more information, see Register a delegated administrator (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html) in the CloudFormation User Guide.
 	CallAs types.CallAs
 
 	// [Service-managed permissions] The Organizations accounts for which you want to
 	// update parameter values for stack instances. If your update targets OUs, the
 	// overridden parameter values only apply to the accounts that are currently in the
 	// target OUs and their child OUs. Accounts added to the target OUs and their child
-	// OUs in the future won't use the overridden values. You can specify Accounts or
-	// DeploymentTargets, but not both.
+	// OUs in the future won't use the overridden values. You can specify Accounts  or
+	// DeploymentTargets , but not both.
 	DeploymentTargets *types.DeploymentTargets
 
 	// The unique identifier for this stack set operation. The operation ID also
@@ -105,29 +97,21 @@ type UpdateStackInstancesInput struct {
 	// instances in the specified accounts and Amazon Web Services Regions. When
 	// specifying parameters and their values, be aware of how CloudFormation sets
 	// parameter values during stack instance update operations:
-	// - To override the
-	// current value for a parameter, include the parameter and specify its value.
-	// - To
-	// leave an overridden parameter set to its present value, include the parameter
-	// and specify UsePreviousValue as true. (You can't specify both a value and set
-	// UsePreviousValue to true.)
-	// - To set an overridden parameter back to the value
-	// specified in the stack set, specify a parameter list but don't include the
-	// parameter in the list.
-	// - To leave all parameters set to their present values,
-	// don't specify this property at all.
+	//     - To override the current value for a parameter, include the parameter and specify its value.
+	//     - To leave an overridden parameter set to its present value, include the parameter and specify UsePreviousValue as true . (You can't specify both a value and set UsePreviousValue to true .)
+	//     - To set an overridden parameter back to the value specified in the stack set, specify a parameter list but don't include the parameter in the list.
+	//     - To leave all parameters set to their present values, don't specify this property at all.
 	//
-	// During stack set updates, any parameter
-	// values overridden for a stack instance aren't updated, but retain their
-	// overridden value. You can only override the parameter values that are specified
-	// in the stack set; to add or delete a parameter itself, use UpdateStackSet to
-	// update the stack set template. If you add a parameter to a template, before you
-	// can override the parameter value specified in the stack set you must first use
-	// UpdateStackSet
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html)
+	// During stack set updates, any parameter values overridden for a stack instance
+	// aren't updated, but retain their overridden value. You can only override the
+	// parameter values that are specified in the stack set; to add or delete a
+	// parameter itself, use UpdateStackSet to update the stack set template. If you
+	// add a parameter to a template, before you can override the parameter value
+	// specified in the stack set you must first use UpdateStackSet (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html)
 	// to update all stack instances with the updated template and parameter value
 	// specified in the stack set. Once a stack instance has been updated with the new
-	// parameter, you can then override the parameter value using UpdateStackInstances.
+	// parameter, you can then override the parameter value using UpdateStackInstances
+	// .
 	ParameterOverrides []types.Parameter
 
 	noSmithyDocumentSerde

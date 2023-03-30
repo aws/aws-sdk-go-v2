@@ -33,18 +33,16 @@ type CreateLocationNfsInput struct {
 
 	// Contains a list of Amazon Resource Names (ARNs) of agents that are used to
 	// connect to an NFS server. If you are copying data to or from your Snowcone
-	// device, see NFS Server on Snowcone
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
+	// device, see NFS Server on Snowcone (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
 	// for more information.
 	//
 	// This member is required.
 	OnPremConfig *types.OnPremConfig
 
-	// The name of the NFS server. This value is the IP address or Domain Name Service
-	// (DNS) name of the NFS server. An agent that is installed on-premises uses this
-	// hostname to mount the NFS server in a network. If you are copying data to or
-	// from your Snowcone device, see NFS Server on Snowcone
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
+	// The name of the NFS server. This value is the IP address or Domain Name
+	// Service (DNS) name of the NFS server. An agent that is installed on-premises
+	// uses this hostname to mount the NFS server in a network. If you are copying data
+	// to or from your Snowcone device, see NFS Server on Snowcone (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
 	// for more information. This name must either be DNS-compliant or must be an IP
 	// version 4 (IPv4) address.
 	//
@@ -65,8 +63,7 @@ type CreateLocationNfsInput struct {
 	// the files that you want DataSync allow read access for all users. Doing either
 	// enables the agent to read the files. For the agent to access directories, you
 	// must additionally enable all execute access. If you are copying data to or from
-	// your Snowcone device, see NFS Server on Snowcone
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
+	// your Snowcone device, see NFS Server on Snowcone (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
 	// for more information. For information about NFS export configuration, see 18.7.
 	// The /etc/exports Configuration File in the Red Hat Enterprise Linux
 	// documentation.
@@ -77,8 +74,8 @@ type CreateLocationNfsInput struct {
 	// The NFS mount options that DataSync can use to mount your NFS share.
 	MountOptions *types.NfsMountOptions
 
-	// The key-value pair that represents the tag that you want to add to the location.
-	// The value can be an empty string. We recommend using tags to name your
+	// The key-value pair that represents the tag that you want to add to the
+	// location. The value can be an empty string. We recommend using tags to name your
 	// resources.
 	Tags []types.TagListEntry
 

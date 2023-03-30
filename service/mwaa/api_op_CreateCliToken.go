@@ -12,8 +12,8 @@ import (
 )
 
 // Creates a CLI token for the Airflow CLI. To learn more, see Creating an Apache
-// Airflow CLI token
-// (https://docs.aws.amazon.com/mwaa/latest/userguide/call-mwaa-apis-cli.html).
+// Airflow CLI token (https://docs.aws.amazon.com/mwaa/latest/userguide/call-mwaa-apis-cli.html)
+// .
 func (c *Client) CreateCliToken(ctx context.Context, params *CreateCliTokenInput, optFns ...func(*Options)) (*CreateCliTokenOutput, error) {
 	if params == nil {
 		params = &CreateCliTokenInput{}
@@ -31,7 +31,7 @@ func (c *Client) CreateCliToken(ctx context.Context, params *CreateCliTokenInput
 
 type CreateCliTokenInput struct {
 
-	// The name of the Amazon MWAA environment. For example, MyMWAAEnvironment.
+	// The name of the Amazon MWAA environment. For example, MyMWAAEnvironment .
 	//
 	// This member is required.
 	Name *string

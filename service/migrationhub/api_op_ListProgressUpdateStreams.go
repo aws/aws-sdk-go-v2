@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists progress update streams associated with the user account making this call.
+// Lists progress update streams associated with the user account making this
+// call.
 func (c *Client) ListProgressUpdateStreams(ctx context.Context, params *ListProgressUpdateStreamsInput, optFns ...func(*Options)) (*ListProgressUpdateStreamsOutput, error) {
 	if params == nil {
 		params = &ListProgressUpdateStreamsInput{}
@@ -35,7 +36,7 @@ type ListProgressUpdateStreamsInput struct {
 
 	// If a NextToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the
-	// returned token in NextToken.
+	// returned token in NextToken .
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -43,8 +44,8 @@ type ListProgressUpdateStreamsInput struct {
 
 type ListProgressUpdateStreamsOutput struct {
 
-	// If there are more streams created than the max result, return the next token to
-	// be passed to the next call as a bookmark of where to start from.
+	// If there are more streams created than the max result, return the next token
+	// to be passed to the next call as a bookmark of where to start from.
 	NextToken *string
 
 	// List of progress update streams up to the max number of results passed in the
@@ -131,8 +132,8 @@ type ListProgressUpdateStreamsPaginatorOptions struct {
 	// Filter to limit the maximum number of results to list per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

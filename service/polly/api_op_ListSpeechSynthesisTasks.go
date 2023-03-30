@@ -51,9 +51,9 @@ type ListSpeechSynthesisTasksOutput struct {
 	// request. If present, this indicates where to continue the listing.
 	NextToken *string
 
-	// List of SynthesisTask objects that provides information from the specified task
-	// in the list request, including output format, creation time, task status, and so
-	// on.
+	// List of SynthesisTask objects that provides information from the specified
+	// task in the list request, including output format, creation time, task status,
+	// and so on.
 	SynthesisTasks []types.SynthesisTask
 
 	// Metadata pertaining to the operation's result.
@@ -136,8 +136,8 @@ type ListSpeechSynthesisTasksPaginatorOptions struct {
 	// Maximum number of speech synthesis tasks returned in a List operation.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

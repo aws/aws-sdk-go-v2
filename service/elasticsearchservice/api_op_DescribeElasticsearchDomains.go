@@ -40,11 +40,12 @@ type DescribeElasticsearchDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a DescribeElasticsearchDomains request. Contains the status of the
-// specified domains or all domains owned by the account.
+// The result of a DescribeElasticsearchDomains request. Contains the status of
+// the specified domains or all domains owned by the account.
 type DescribeElasticsearchDomainsOutput struct {
 
-	// The status of the domains requested in the DescribeElasticsearchDomains request.
+	// The status of the domains requested in the DescribeElasticsearchDomains
+	// request.
 	//
 	// This member is required.
 	DomainStatusList []types.ElasticsearchDomainStatus

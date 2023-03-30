@@ -9,9 +9,10 @@ const (
 	AnalyticsS3ExportFileFormatCsv AnalyticsS3ExportFileFormat = "CSV"
 )
 
-// Values returns all known values for AnalyticsS3ExportFileFormat. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AnalyticsS3ExportFileFormat. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (AnalyticsS3ExportFileFormat) Values() []AnalyticsS3ExportFileFormat {
 	return []AnalyticsS3ExportFileFormat{
 		"CSV",
@@ -108,9 +109,9 @@ const (
 	BucketLocationConstraintUsWest2      BucketLocationConstraint = "us-west-2"
 )
 
-// Values returns all known values for BucketLocationConstraint. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BucketLocationConstraint. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BucketLocationConstraint) Values() []BucketLocationConstraint {
 	return []BucketLocationConstraint{
 		"af-south-1",
@@ -151,8 +152,8 @@ const (
 	BucketLogsPermissionWrite       BucketLogsPermission = "WRITE"
 )
 
-// Values returns all known values for BucketLogsPermission. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for BucketLogsPermission. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (BucketLogsPermission) Values() []BucketLogsPermission {
 	return []BucketLogsPermission{
@@ -209,9 +210,9 @@ const (
 	ChecksumModeEnabled ChecksumMode = "ENABLED"
 )
 
-// Values returns all known values for ChecksumMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChecksumMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ChecksumMode) Values() []ChecksumMode {
 	return []ChecksumMode{
 		"ENABLED",
@@ -264,9 +265,9 @@ const (
 	EncodingTypeUrl EncodingType = "url"
 )
 
-// Values returns all known values for EncodingType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EncodingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (EncodingType) Values() []EncodingType {
 	return []EncodingType{
 		"url",
@@ -275,8 +276,8 @@ func (EncodingType) Values() []EncodingType {
 
 type Event string
 
-// Values returns all known values for Event. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Event. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Event) Values() []Event {
 	return []Event{
@@ -409,9 +410,10 @@ const (
 	IntelligentTieringAccessTierDeepArchiveAccess IntelligentTieringAccessTier = "DEEP_ARCHIVE_ACCESS"
 )
 
-// Values returns all known values for IntelligentTieringAccessTier. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IntelligentTieringAccessTier. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (IntelligentTieringAccessTier) Values() []IntelligentTieringAccessTier {
 	return []IntelligentTieringAccessTier{
 		"ARCHIVE_ACCESS",
@@ -427,9 +429,9 @@ const (
 	IntelligentTieringStatusDisabled IntelligentTieringStatus = "Disabled"
 )
 
-// Values returns all known values for IntelligentTieringStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IntelligentTieringStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IntelligentTieringStatus) Values() []IntelligentTieringStatus {
 	return []IntelligentTieringStatus{
 		"Enabled",
@@ -542,9 +544,9 @@ const (
 	JSONTypeLines    JSONType = "LINES"
 )
 
-// Values returns all known values for JSONType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JSONType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JSONType) Values() []JSONType {
 	return []JSONType{
 		"DOCUMENT",
@@ -596,9 +598,9 @@ const (
 	MFADeleteDisabled MFADelete = "Disabled"
 )
 
-// Values returns all known values for MFADelete. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for MFADelete. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (MFADelete) Values() []MFADelete {
 	return []MFADelete{
 		"Enabled",
@@ -736,9 +738,9 @@ const (
 	ObjectLockRetentionModeCompliance ObjectLockRetentionMode = "COMPLIANCE"
 )
 
-// Values returns all known values for ObjectLockRetentionMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ObjectLockRetentionMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ObjectLockRetentionMode) Values() []ObjectLockRetentionMode {
 	return []ObjectLockRetentionMode{
 		"GOVERNANCE",
@@ -838,8 +840,8 @@ const (
 	PayerBucketOwner Payer = "BucketOwner"
 )
 
-// Values returns all known values for Payer. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Payer. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Payer) Values() []Payer {
 	return []Payer{
@@ -880,9 +882,9 @@ const (
 	ProtocolHttps Protocol = "https"
 )
 
-// Values returns all known values for Protocol. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Protocol. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Protocol) Values() []Protocol {
 	return []Protocol{
 		"http",
@@ -898,9 +900,9 @@ const (
 	QuoteFieldsAsneeded QuoteFields = "ASNEEDED"
 )
 
-// Values returns all known values for QuoteFields. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for QuoteFields. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (QuoteFields) Values() []QuoteFields {
 	return []QuoteFields{
 		"ALWAYS",
@@ -934,8 +936,8 @@ const (
 	ReplicationRuleStatusDisabled ReplicationRuleStatus = "Disabled"
 )
 
-// Values returns all known values for ReplicationRuleStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ReplicationRuleStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationRuleStatus) Values() []ReplicationRuleStatus {
 	return []ReplicationRuleStatus{
@@ -974,8 +976,8 @@ const (
 	ReplicationTimeStatusDisabled ReplicationTimeStatus = "Disabled"
 )
 
-// Values returns all known values for ReplicationTimeStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ReplicationTimeStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationTimeStatus) Values() []ReplicationTimeStatus {
 	return []ReplicationTimeStatus{
@@ -1007,9 +1009,9 @@ const (
 	RequestPayerRequester RequestPayer = "requester"
 )
 
-// Values returns all known values for RequestPayer. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RequestPayer. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (RequestPayer) Values() []RequestPayer {
 	return []RequestPayer{
 		"requester",
@@ -1040,8 +1042,8 @@ const (
 	ServerSideEncryptionAwsKms ServerSideEncryption = "aws:kms"
 )
 
-// Values returns all known values for ServerSideEncryption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ServerSideEncryption. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ServerSideEncryption) Values() []ServerSideEncryption {
 	return []ServerSideEncryption{
@@ -1058,9 +1060,10 @@ const (
 	SseKmsEncryptedObjectsStatusDisabled SseKmsEncryptedObjectsStatus = "Disabled"
 )
 
-// Values returns all known values for SseKmsEncryptedObjectsStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SseKmsEncryptedObjectsStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (SseKmsEncryptedObjectsStatus) Values() []SseKmsEncryptedObjectsStatus {
 	return []SseKmsEncryptedObjectsStatus{
 		"Enabled",
@@ -1083,9 +1086,9 @@ const (
 	StorageClassGlacierIr          StorageClass = "GLACIER_IR"
 )
 
-// Values returns all known values for StorageClass. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StorageClass. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (StorageClass) Values() []StorageClass {
 	return []StorageClass{
 		"STANDARD",
@@ -1107,8 +1110,8 @@ const (
 	StorageClassAnalysisSchemaVersionV1 StorageClassAnalysisSchemaVersion = "V_1"
 )
 
-// Values returns all known values for StorageClassAnalysisSchemaVersion. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for StorageClassAnalysisSchemaVersion. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (StorageClassAnalysisSchemaVersion) Values() []StorageClassAnalysisSchemaVersion {
@@ -1144,8 +1147,8 @@ const (
 	TierExpedited Tier = "Expedited"
 )
 
-// Values returns all known values for Tier. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Tier. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Tier) Values() []Tier {
 	return []Tier{
@@ -1190,8 +1193,8 @@ const (
 	TypeGroup                 Type = "Group"
 )
 
-// Values returns all known values for Type. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Type. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{

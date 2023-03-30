@@ -30,8 +30,8 @@ func (c *Client) CreateAllowList(ctx context.Context, params *CreateAllowListInp
 
 type CreateAllowListInput struct {
 
-	// A unique, case-sensitive token that you provide to ensure the idempotency of the
-	// request.
+	// A unique, case-sensitive token that you provide to ensure the idempotency of
+	// the request.
 	//
 	// This member is required.
 	ClientToken *string

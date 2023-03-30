@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You don't have sufficient access to perform this action. Please ensure you have
-// the required permission policies and user accounts and try again.
+// You don't have sufficient access to perform this action. Please ensure you
+// have the required permission policies and user accounts and try again.
 type AccessDeniedException struct {
 	Message *string
 
@@ -61,9 +61,9 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An issue occurred with the internal server used for your Amazon Kendra service.
-// Please wait a few minutes and try again, or contact  Support
-// (http://aws.amazon.com/aws.amazon.com/contact-us) for help.
+// An issue occurred with the internal server used for your Amazon Kendra
+// service. Please wait a few minutes and try again, or contact Support (http://aws.amazon.com/aws.amazon.com/contact-us)
+// for help.
 type InternalServerException struct {
 	Message *string
 
@@ -89,8 +89,8 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The input to the request is not valid. Please provide the correct input and try
-// again.
+// The input to the request is not valid. Please provide the correct input and
+// try again.
 type InvalidRequestException struct {
 	Message *string
 
@@ -116,8 +116,8 @@ func (e *InvalidRequestException) ErrorCode() string {
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource you want to use already exists. Please check you have provided the
-// correct resource and try again.
+// The resource you want to use already exists. Please check you have provided
+// the correct resource and try again.
 type ResourceAlreadyExistException struct {
 	Message *string
 
@@ -143,8 +143,8 @@ func (e *ResourceAlreadyExistException) ErrorCode() string {
 }
 func (e *ResourceAlreadyExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource you want to use is currently in use. Please check you have provided
-// the correct resource and try again.
+// The resource you want to use is currently in use. Please check you have
+// provided the correct resource and try again.
 type ResourceInUseException struct {
 	Message *string
 
@@ -197,8 +197,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource you want to use isn't available. Please check you have provided the
-// correct resource and try again.
+// The resource you want to use isn't available. Please check you have provided
+// the correct resource and try again.
 type ResourceUnavailableException struct {
 	Message *string
 
@@ -225,9 +225,8 @@ func (e *ResourceUnavailableException) ErrorCode() string {
 func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have exceeded the set limits for your Amazon Kendra service. Please see
-// Quotas[hyperlink Kendra Quotas pg] for more information, or contact  Support
-// (http://aws.amazon.com/aws.amazon.com/contact-us) to inquire about an increase
-// of limits.
+// Quotas[hyperlink Kendra Quotas pg] for more information, or contact Support (http://aws.amazon.com/aws.amazon.com/contact-us)
+// to inquire about an increase of limits.
 type ServiceQuotaExceededException struct {
 	Message *string
 

@@ -10,9 +10,9 @@ const (
 	AgentStatusOffline AgentStatus = "OFFLINE"
 )
 
-// Values returns all known values for AgentStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AgentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AgentStatus) Values() []AgentStatus {
 	return []AgentStatus{
 		"ONLINE",
@@ -28,8 +28,8 @@ const (
 	AtimeBestEffort Atime = "BEST_EFFORT"
 )
 
-// Values returns all known values for Atime. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Atime. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Atime) Values() []Atime {
 	return []Atime{
@@ -65,9 +65,9 @@ const (
 	EndpointTypeFips        EndpointType = "FIPS"
 )
 
-// Values returns all known values for EndpointType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EndpointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointType) Values() []EndpointType {
 	return []EndpointType{
 		"PUBLIC",
@@ -205,9 +205,9 @@ const (
 	LogLevelTransfer LogLevel = "TRANSFER"
 )
 
-// Values returns all known values for LogLevel. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for LogLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (LogLevel) Values() []LogLevel {
 	return []LogLevel{
 		"OFF",
@@ -224,8 +224,8 @@ const (
 	MtimePreserve Mtime = "PRESERVE"
 )
 
-// Values returns all known values for Mtime. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Mtime. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Mtime) Values() []Mtime {
 	return []Mtime{
@@ -264,9 +264,10 @@ const (
 	ObjectStorageServerProtocolHttp  ObjectStorageServerProtocol = "HTTP"
 )
 
-// Values returns all known values for ObjectStorageServerProtocol. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ObjectStorageServerProtocol. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ObjectStorageServerProtocol) Values() []ObjectStorageServerProtocol {
 	return []ObjectStorageServerProtocol{
 		"HTTPS",
@@ -308,9 +309,9 @@ const (
 	OperatorBeginsWith  Operator = "BeginsWith"
 )
 
-// Values returns all known values for Operator. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Operator. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Operator) Values() []Operator {
 	return []Operator{
 		"Equals",
@@ -353,9 +354,9 @@ const (
 	PhaseStatusError   PhaseStatus = "ERROR"
 )
 
-// Values returns all known values for PhaseStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PhaseStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PhaseStatus) Values() []PhaseStatus {
 	return []PhaseStatus{
 		"PENDING",
@@ -390,8 +391,8 @@ const (
 	PreserveDeletedFilesRemove   PreserveDeletedFiles = "REMOVE"
 )
 
-// Values returns all known values for PreserveDeletedFiles. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PreserveDeletedFiles. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PreserveDeletedFiles) Values() []PreserveDeletedFiles {
 	return []PreserveDeletedFiles{
@@ -547,9 +548,9 @@ const (
 	TaskQueueingDisabled TaskQueueing = "DISABLED"
 )
 
-// Values returns all known values for TaskQueueing. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TaskQueueing. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TaskQueueing) Values() []TaskQueueing {
 	return []TaskQueueing{
 		"ENABLED",
@@ -589,9 +590,9 @@ const (
 	TransferModeAll     TransferMode = "ALL"
 )
 
-// Values returns all known values for TransferMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TransferMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TransferMode) Values() []TransferMode {
 	return []TransferMode{
 		"CHANGED",

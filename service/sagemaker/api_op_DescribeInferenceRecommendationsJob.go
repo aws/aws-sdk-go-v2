@@ -89,8 +89,8 @@ type DescribeInferenceRecommendationsJobOutput struct {
 	// A timestamp that shows when the job completed.
 	CompletionTime *time.Time
 
-	// The performance results from running an Inference Recommender job on an existing
-	// endpoint.
+	// The performance results from running an Inference Recommender job on an
+	// existing endpoint.
 	EndpointPerformances []types.EndpointPerformance
 
 	// If the job fails, provides information why the job failed.

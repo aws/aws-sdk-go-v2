@@ -57,7 +57,8 @@ type CreateWorkerConfigurationOutput struct {
 	// The name of the worker configuration.
 	Name *string
 
-	// The Amazon Resource Name (ARN) that Amazon assigned to the worker configuration.
+	// The Amazon Resource Name (ARN) that Amazon assigned to the worker
+	// configuration.
 	WorkerConfigurationArn *string
 
 	// Metadata pertaining to the operation's result.

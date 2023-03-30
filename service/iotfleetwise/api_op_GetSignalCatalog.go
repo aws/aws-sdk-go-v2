@@ -45,8 +45,8 @@ type GetSignalCatalogOutput struct {
 	// This member is required.
 	Arn *string
 
-	// The time the signal catalog was created in seconds since epoch (January 1, 1970
-	// at midnight UTC time).
+	// The time the signal catalog was created in seconds since epoch (January 1,
+	// 1970 at midnight UTC time).
 	//
 	// This member is required.
 	CreationTime *time.Time

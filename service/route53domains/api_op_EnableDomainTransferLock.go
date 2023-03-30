@@ -11,7 +11,7 @@ import (
 )
 
 // This operation sets the transfer lock on the domain (specifically the
-// clientTransferProhibited status) to prevent domain transfers. Successful
+// clientTransferProhibitedstatus) to prevent domain transfers. Successful
 // submission returns an operation ID that you can use to track the progress and
 // completion of the action. If the request is not completed successfully, the
 // domain registrant will be notified by email.
@@ -44,8 +44,8 @@ type EnableDomainTransferLockInput struct {
 // The EnableDomainTransferLock response includes the following elements.
 type EnableDomainTransferLockOutput struct {
 
-	// Identifier for tracking the progress of the request. To use this ID to query the
-	// operation status, use GetOperationDetail.
+	// Identifier for tracking the progress of the request. To use this ID to query
+	// the operation status, use GetOperationDetail.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

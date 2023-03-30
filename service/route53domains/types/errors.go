@@ -87,10 +87,10 @@ func (e *DuplicateRequest) ErrorCode() string {
 }
 func (e *DuplicateRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested item is not acceptable. For example, for APIs that accept a domain
-// name, the request might specify a domain name that doesn't belong to the account
-// that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount, the
-// password might be invalid.
+// The requested item is not acceptable. For example, for APIs that accept a
+// domain name, the request might specify a domain name that doesn't belong to the
+// account that submitted the request. For
+// AcceptDomainTransferFromAnotherAwsAccount , the password might be invalid.
 type InvalidInput struct {
 	Message *string
 
@@ -116,8 +116,8 @@ func (e *InvalidInput) ErrorCode() string {
 }
 func (e *InvalidInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The number of operations or jobs running exceeded the allowed threshold for the
-// account.
+// The number of operations or jobs running exceeded the allowed threshold for
+// the account.
 type OperationLimitExceeded struct {
 	Message *string
 

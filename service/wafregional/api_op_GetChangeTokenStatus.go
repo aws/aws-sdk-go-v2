@@ -11,21 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
-// (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// This is AWS WAF Classic documentation. For more information, see AWS WAF
+// Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
-// the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns the status of a ChangeToken that you got by calling
-// GetChangeToken. ChangeTokenStatus is one of the following values:
-// - PROVISIONED:
-// You requested the change token by calling GetChangeToken, but you haven't used
-// it yet in a call to create, update, or delete an AWS WAF object.
-// - PENDING: AWS
-// WAF is propagating the create, update, or delete request to all AWS WAF
-// servers.
-// - INSYNC: Propagation is complete.
+// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+// . With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use. Returns the status of a ChangeToken  that you got by calling
+// GetChangeToken . ChangeTokenStatus  is one of the following values:
+//   - PROVISIONED : You requested the change token by calling GetChangeToken , but you haven't used it yet in a call to create, update, or delete an AWS WAF object.
+//   - PENDING : AWS WAF is propagating the create, update, or delete request to all AWS WAF servers.
+//   - INSYNC : Propagation is complete.
 func (c *Client) GetChangeTokenStatus(ctx context.Context, params *GetChangeTokenStatusInput, optFns ...func(*Options)) (*GetChangeTokenStatusOutput, error) {
 	if params == nil {
 		params = &GetChangeTokenStatusInput{}
@@ -44,7 +39,7 @@ func (c *Client) GetChangeTokenStatus(ctx context.Context, params *GetChangeToke
 type GetChangeTokenStatusInput struct {
 
 	// The change token for which you want to get the status. This change token was
-	// previously returned in the GetChangeToken response.
+	// previously returned in the GetChangeToken  response.
 	//
 	// This member is required.
 	ChangeToken *string

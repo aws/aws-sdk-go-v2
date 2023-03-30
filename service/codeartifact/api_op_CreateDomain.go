@@ -47,16 +47,13 @@ type CreateDomainInput struct {
 	// The encryption key for the domain. This is used to encrypt content stored in a
 	// domain. An encryption key can be a key ID, a key Amazon Resource Name (ARN), a
 	// key alias, or a key alias ARN. To specify an encryptionKey, your IAM role must
-	// have kms:DescribeKey and kms:CreateGrant permissions on the encryption key that
-	// is used. For more information, see DescribeKey
-	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestSyntax)
+	// have kms:DescribeKey  and kms:CreateGrant permissions on the encryption key
+	// that is used. For more information, see DescribeKey (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestSyntax)
 	// in the Key Management Service API Reference and Key Management Service API
-	// Permissions Reference
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+	// Permissions Reference (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 	// in the Key Management Service Developer Guide. CodeArtifact supports only
 	// symmetric CMKs. Do not associate an asymmetric CMK with your domain. For more
-	// information, see Using symmetric and asymmetric keys
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
+	// information, see Using symmetric and asymmetric keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// in the Key Management Service Developer Guide.
 	EncryptionKey *string
 

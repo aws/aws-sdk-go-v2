@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists logging levels. Requires permission to access the ListV2LoggingLevels
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Lists logging levels. Requires permission to access the ListV2LoggingLevels (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListV2LoggingLevels(ctx context.Context, params *ListV2LoggingLevelsInput, optFns ...func(*Options)) (*ListV2LoggingLevelsOutput, error) {
 	if params == nil {
@@ -39,7 +38,8 @@ type ListV2LoggingLevelsInput struct {
 	// response; otherwise null to receive the first set of results.
 	NextToken *string
 
-	// The type of resource for which you are configuring logging. Must be THING_Group.
+	// The type of resource for which you are configuring logging. Must be THING_Group
+	// .
 	TargetType types.LogTargetType
 
 	noSmithyDocumentSerde
@@ -120,8 +120,8 @@ func (c *Client) addOperationListV2LoggingLevelsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListV2LoggingLevelsAPIClient is a client that implements the ListV2LoggingLevels
-// operation.
+// ListV2LoggingLevelsAPIClient is a client that implements the
+// ListV2LoggingLevels operation.
 type ListV2LoggingLevelsAPIClient interface {
 	ListV2LoggingLevels(context.Context, *ListV2LoggingLevelsInput, ...func(*Options)) (*ListV2LoggingLevelsOutput, error)
 }
@@ -134,8 +134,8 @@ type ListV2LoggingLevelsPaginatorOptions struct {
 	// The maximum number of results to return at one time.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

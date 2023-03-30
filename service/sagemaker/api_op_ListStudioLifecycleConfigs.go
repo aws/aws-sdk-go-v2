@@ -43,25 +43,25 @@ type ListStudioLifecycleConfigsInput struct {
 	// specified time.
 	CreationTimeBefore *time.Time
 
-	// The maximum number of Studio Lifecycle Configurations to return in the response.
-	// The default value is 10.
+	// The maximum number of Studio Lifecycle Configurations to return in the
+	// response. The default value is 10.
 	MaxResults *int32
 
-	// A filter that returns only Lifecycle Configurations modified after the specified
-	// time.
+	// A filter that returns only Lifecycle Configurations modified after the
+	// specified time.
 	ModifiedTimeAfter *time.Time
 
 	// A filter that returns only Lifecycle Configurations modified before the
 	// specified time.
 	ModifiedTimeBefore *time.Time
 
-	// A string in the Lifecycle Configuration name. This filter returns only Lifecycle
-	// Configurations whose name contains the specified string.
+	// A string in the Lifecycle Configuration name. This filter returns only
+	// Lifecycle Configurations whose name contains the specified string.
 	NameContains *string
 
-	// If the previous call to ListStudioLifecycleConfigs didn't return the full set of
-	// Lifecycle Configurations, the call returns a token for getting the next set of
-	// Lifecycle Configurations.
+	// If the previous call to ListStudioLifecycleConfigs didn't return the full set
+	// of Lifecycle Configurations, the call returns a token for getting the next set
+	// of Lifecycle Configurations.
 	NextToken *string
 
 	// The property used to sort results. The default value is CreationTime.
@@ -158,12 +158,12 @@ var _ ListStudioLifecycleConfigsAPIClient = (*Client)(nil)
 // ListStudioLifecycleConfigsPaginatorOptions is the paginator options for
 // ListStudioLifecycleConfigs
 type ListStudioLifecycleConfigsPaginatorOptions struct {
-	// The maximum number of Studio Lifecycle Configurations to return in the response.
-	// The default value is 10.
+	// The maximum number of Studio Lifecycle Configurations to return in the
+	// response. The default value is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

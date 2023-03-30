@@ -14,7 +14,7 @@ import (
 // Update an accelerator. Global Accelerator is a global service that supports
 // endpoints in multiple Amazon Web Services Regions but you must specify the US
 // West (Oregon) Region to create, update, or otherwise work with accelerators.
-// That is, for example, specify --region us-west-2 on AWS CLI commands.
+// That is, for example, specify --region us-west-2  on AWS CLI commands.
 func (c *Client) UpdateAccelerator(ctx context.Context, params *UpdateAcceleratorInput, optFns ...func(*Options)) (*UpdateAcceleratorOutput, error) {
 	if params == nil {
 		params = &UpdateAcceleratorInput{}
@@ -46,9 +46,9 @@ type UpdateAcceleratorInput struct {
 	// the value can be IPV4 or DUAL_STACK.
 	IpAddressType types.IpAddressType
 
-	// The name of the accelerator. The name can have a maximum of 64 characters, must
-	// contain only alphanumeric characters, periods (.), or hyphens (-), and must not
-	// begin or end with a hyphen or period.
+	// The name of the accelerator. The name can have a maximum of 64 characters,
+	// must contain only alphanumeric characters, periods (.), or hyphens (-), and must
+	// not begin or end with a hyphen or period.
 	Name *string
 
 	noSmithyDocumentSerde

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes one or more tags from a resource. Specify only tag keys in your request.
-// Don't specify the value.
+// Removes one or more tags from a resource. Specify only tag keys in your
+// request. Don't specify the value.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -30,8 +30,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 type UntagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource. For a list of supported
-	// resources, see ResourceTag
-	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html).
+	// resources, see ResourceTag (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html)
+	// .
 	//
 	// This member is required.
 	ResourceArn *string

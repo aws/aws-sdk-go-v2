@@ -34,8 +34,8 @@ type ListStoredQueriesInput struct {
 	// The maximum number of results to be returned with a single call.
 	MaxResults *int32
 
-	// The nextToken string returned in a previous request that you use to request the
-	// next page of results in a paginated response.
+	// The nextToken string returned in a previous request that you use to request
+	// the next page of results in a paginated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,10 +47,10 @@ type ListStoredQueriesOutput struct {
 	// the response object's NextToken parameter value is set to a token. To retrieve
 	// the next set of results, call this action again and assign that token to the
 	// request object's NextToken parameter. If there are no remaining results, the
-	// previous response object's NextToken parameter is set to null.
+	// previous response object's NextToken  parameter is set to null .
 	NextToken *string
 
-	// A list of StoredQueryMetadata objects.
+	// A list of StoredQueryMetadata  objects.
 	StoredQueryMetadata []types.StoredQueryMetadata
 
 	// Metadata pertaining to the operation's result.
@@ -127,13 +127,14 @@ type ListStoredQueriesAPIClient interface {
 
 var _ ListStoredQueriesAPIClient = (*Client)(nil)
 
-// ListStoredQueriesPaginatorOptions is the paginator options for ListStoredQueries
+// ListStoredQueriesPaginatorOptions is the paginator options for
+// ListStoredQueries
 type ListStoredQueriesPaginatorOptions struct {
 	// The maximum number of results to be returned with a single call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

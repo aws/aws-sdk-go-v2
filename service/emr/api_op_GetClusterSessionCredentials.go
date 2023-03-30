@@ -41,7 +41,7 @@ type GetClusterSessionCredentialsInput struct {
 	// The Amazon Resource Name (ARN) of the runtime role for interactive workload
 	// submission on the cluster. The runtime role can be a cross-account IAM role. The
 	// runtime role ARN is a combination of account ID, role name, and role type using
-	// the following format: arn:partition:service:region:account:resource.
+	// the following format: arn:partition:service:region:account:resource .
 	//
 	// This member is required.
 	ExecutionRoleArn *string

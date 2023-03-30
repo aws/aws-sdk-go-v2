@@ -12,13 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a case in the specified Cases domain. Case system and custom fields are
-// taken as an array id/value pairs with a declared data types. The following
+// Creates a case in the specified Cases domain. Case system and custom fields
+// are taken as an array id/value pairs with a declared data types. The following
 // fields are required when creating a case:
-// - customer_id - You must provide the
-// full customer profile ARN in this format: arn:aws:profile:your AWS Region:your
-// AWS account ID:domains/profiles domain name/profiles/profile ID
-// - title
+//   - customer_id - You must provide the full customer profile ARN in this format: arn:aws:profile:your AWS Region:your AWS account ID:domains/profiles domain name/profiles/profile ID
+//   - title
 func (c *Client) CreateCase(ctx context.Context, params *CreateCaseInput, optFns ...func(*Options)) (*CreateCaseOutput, error) {
 	if params == nil {
 		params = &CreateCaseInput{}
@@ -41,8 +39,8 @@ type CreateCaseInput struct {
 	// This member is required.
 	DomainId *string
 
-	// An array of objects with field ID (matching ListFields/DescribeField) and value
-	// union data.
+	// An array of objects with field ID (matching ListFields/DescribeField) and
+	// value union data.
 	//
 	// This member is required.
 	Fields []types.FieldValue
@@ -55,8 +53,8 @@ type CreateCaseInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// .
 	ClientToken *string
 
 	noSmithyDocumentSerde

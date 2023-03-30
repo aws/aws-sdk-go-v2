@@ -124,8 +124,8 @@ func (c *Client) addOperationListRoutingControlsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListRoutingControlsAPIClient is a client that implements the ListRoutingControls
-// operation.
+// ListRoutingControlsAPIClient is a client that implements the
+// ListRoutingControls operation.
 type ListRoutingControlsAPIClient interface {
 	ListRoutingControls(context.Context, *ListRoutingControlsInput, ...func(*Options)) (*ListRoutingControlsOutput, error)
 }
@@ -138,8 +138,8 @@ type ListRoutingControlsPaginatorOptions struct {
 	// The number of objects that you want to return with this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

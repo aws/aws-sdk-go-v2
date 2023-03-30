@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Permanently deletes the specified Elasticsearch domain and all of its data. Once
-// a domain is deleted, it cannot be recovered.
+// Permanently deletes the specified Elasticsearch domain and all of its data.
+// Once a domain is deleted, it cannot be recovered.
 func (c *Client) DeleteElasticsearchDomain(ctx context.Context, params *DeleteElasticsearchDomainInput, optFns ...func(*Options)) (*DeleteElasticsearchDomainOutput, error) {
 	if params == nil {
 		params = &DeleteElasticsearchDomainInput{}

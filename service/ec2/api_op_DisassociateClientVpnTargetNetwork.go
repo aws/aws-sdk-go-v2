@@ -11,15 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a target network from the specified Client VPN endpoint. When you
-// disassociate the last target network from a Client VPN, the following happens:
-// -
-// The route that was automatically added for the VPC is deleted
-// - All active
-// client connections are terminated
-// - New client connections are disallowed
-// - The
-// Client VPN endpoint's status changes to pending-associate
+// Disassociates a target network from the specified Client VPN endpoint. When
+// you disassociate the last target network from a Client VPN, the following
+// happens:
+//   - The route that was automatically added for the VPC is deleted
+//   - All active client connections are terminated
+//   - New client connections are disallowed
+//   - The Client VPN endpoint's status changes to pending-associate
 func (c *Client) DisassociateClientVpnTargetNetwork(ctx context.Context, params *DisassociateClientVpnTargetNetworkInput, optFns ...func(*Options)) (*DisassociateClientVpnTargetNetworkOutput, error) {
 	if params == nil {
 		params = &DisassociateClientVpnTargetNetworkInput{}
@@ -42,15 +40,16 @@ type DisassociateClientVpnTargetNetworkInput struct {
 	// This member is required.
 	AssociationId *string
 
-	// The ID of the Client VPN endpoint from which to disassociate the target network.
+	// The ID of the Client VPN endpoint from which to disassociate the target
+	// network.
 	//
 	// This member is required.
 	ClientVpnEndpointId *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde

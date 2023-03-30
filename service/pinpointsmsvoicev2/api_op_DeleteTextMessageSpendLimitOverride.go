@@ -13,9 +13,8 @@ import (
 // Deletes an account-level monthly spending limit override for sending text
 // messages. Deleting a spend limit override will set the EnforcedLimit to equal
 // the MaxLimit, which is controlled by Amazon Web Services. For more information
-// on spend limits (quotas) see Amazon Pinpoint quotas
-// (https://docs.aws.amazon.com/pinpoint/latest/developerguide/quotas.html) in the
-// Amazon Pinpoint Developer Guide.
+// on spend limits (quotas) see Amazon Pinpoint quotas  (https://docs.aws.amazon.com/pinpoint/latest/developerguide/quotas.html)
+// in the Amazon Pinpoint Developer Guide.
 func (c *Client) DeleteTextMessageSpendLimitOverride(ctx context.Context, params *DeleteTextMessageSpendLimitOverrideInput, optFns ...func(*Options)) (*DeleteTextMessageSpendLimitOverrideOutput, error) {
 	if params == nil {
 		params = &DeleteTextMessageSpendLimitOverrideInput{}

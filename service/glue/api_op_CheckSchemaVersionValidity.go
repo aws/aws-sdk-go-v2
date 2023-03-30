@@ -31,8 +31,8 @@ func (c *Client) CheckSchemaVersionValidity(ctx context.Context, params *CheckSc
 
 type CheckSchemaVersionValidityInput struct {
 
-	// The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are
-	// supported.
+	// The data format of the schema definition. Currently AVRO , JSON  and PROTOBUF
+	// are supported.
 	//
 	// This member is required.
 	DataFormat types.DataFormat

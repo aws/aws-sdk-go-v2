@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of tags in an Amazon Rekognition collection, stream processor, or
-// Custom Labels model. This operation requires permissions to perform the
+// Returns a list of tags in an Amazon Rekognition collection, stream processor,
+// or Custom Labels model. This operation requires permissions to perform the
 // rekognition:ListTagsForResource action.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {

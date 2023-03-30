@@ -50,16 +50,16 @@ type ListUsersOutput struct {
 	// Required. The unique ID that Amazon MQ generates for the broker.
 	BrokerId *string
 
-	// Required. The maximum number of ActiveMQ users that can be returned per page (20
-	// by default). This value must be an integer from 5 to 100.
+	// Required. The maximum number of ActiveMQ users that can be returned per page
+	// (20 by default). This value must be an integer from 5 to 100.
 	MaxResults int32
 
 	// The token that specifies the next page of results Amazon MQ should return. To
 	// request the first page, leave nextToken empty.
 	NextToken *string
 
-	// Required. The list of all ActiveMQ usernames for the specified broker. Does not
-	// apply to RabbitMQ brokers.
+	// Required. The list of all ActiveMQ usernames for the specified broker. Does
+	// not apply to RabbitMQ brokers.
 	Users []types.UserSummary
 
 	// Metadata pertaining to the operation's result.

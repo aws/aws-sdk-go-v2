@@ -22,9 +22,9 @@ const (
 	ErrorCodeSystemLimitError          ErrorCode = "SYSTEM_LIMIT_ERROR"
 )
 
-// Values returns all known values for ErrorCode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"ACCESS_DENIED",
@@ -94,9 +94,10 @@ const (
 	ImportDataCharacterEncodingUtf16    ImportDataCharacterEncoding = "UTF-16"
 )
 
-// Values returns all known values for ImportDataCharacterEncoding. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ImportDataCharacterEncoding. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ImportDataCharacterEncoding) Values() []ImportDataCharacterEncoding {
 	return []ImportDataCharacterEncoding{
 		"UTF-8",
@@ -134,9 +135,9 @@ const (
 	TableDataImportJobStatusFailed     TableDataImportJobStatus = "FAILED"
 )
 
-// Values returns all known values for TableDataImportJobStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TableDataImportJobStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TableDataImportJobStatus) Values() []TableDataImportJobStatus {
 	return []TableDataImportJobStatus{
 		"SUBMITTED",
@@ -154,9 +155,9 @@ const (
 	UpsertActionAppended UpsertAction = "APPENDED"
 )
 
-// Values returns all known values for UpsertAction. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UpsertAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (UpsertAction) Values() []UpsertAction {
 	return []UpsertAction{
 		"UPDATED",

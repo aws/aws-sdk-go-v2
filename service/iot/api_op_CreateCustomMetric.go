@@ -13,8 +13,7 @@ import (
 )
 
 // Use this API to define a Custom Metric published by your devices to Device
-// Defender. Requires permission to access the CreateCustomMetric
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Defender. Requires permission to access the CreateCustomMetric (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateCustomMetric(ctx context.Context, params *CreateCustomMetricInput, optFns ...func(*Options)) (*CreateCustomMetricOutput, error) {
 	if params == nil {
@@ -33,24 +32,24 @@ func (c *Client) CreateCustomMetric(ctx context.Context, params *CreateCustomMet
 
 type CreateCustomMetricInput struct {
 
-	// Each custom metric must have a unique client request token. If you try to create
-	// a new custom metric that already exists with a different token, an exception
-	// occurs. If you omit this value, Amazon Web Services SDKs will automatically
-	// generate a unique client request.
+	// Each custom metric must have a unique client request token. If you try to
+	// create a new custom metric that already exists with a different token, an
+	// exception occurs. If you omit this value, Amazon Web Services SDKs will
+	// automatically generate a unique client request.
 	//
 	// This member is required.
 	ClientRequestToken *string
 
-	// The name of the custom metric. This will be used in the metric report submitted
-	// from the device/thing. The name can't begin with aws:. You can't change the name
-	// after you define it.
+	// The name of the custom metric. This will be used in the metric report
+	// submitted from the device/thing. The name can't begin with aws:. You can't
+	// change the name after you define it.
 	//
 	// This member is required.
 	MetricName *string
 
-	// The type of the custom metric. The type number only takes a single metric value
-	// as an input, but when you submit the metrics value in the DeviceMetrics report,
-	// you must pass it as an array with a single value.
+	// The type of the custom metric. The type number only takes a single metric
+	// value as an input, but when you submit the metrics value in the DeviceMetrics
+	// report, you must pass it as an array with a single value.
 	//
 	// This member is required.
 	MetricType types.CustomMetricType

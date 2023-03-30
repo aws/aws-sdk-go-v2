@@ -7,16 +7,16 @@ import (
 	"time"
 )
 
-// Describes a bandwidth rate limit interval for a gateway. A bandwidth rate limit
-// schedule consists of one or more bandwidth rate limit intervals. A bandwidth
-// rate limit interval defines a period of time on one or more days of the week,
-// during which bandwidth rate limits are specified for uploading, downloading, or
-// both.
+// Describes a bandwidth rate limit interval for a gateway. A bandwidth rate
+// limit schedule consists of one or more bandwidth rate limit intervals. A
+// bandwidth rate limit interval defines a period of time on one or more days of
+// the week, during which bandwidth rate limits are specified for uploading,
+// downloading, or both.
 type BandwidthRateLimitInterval struct {
 
-	// The days of the week component of the bandwidth rate limit interval, represented
-	// as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 represents
-	// Saturday.
+	// The days of the week component of the bandwidth rate limit interval,
+	// represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6
+	// represents Saturday.
 	//
 	// This member is required.
 	DaysOfWeek []int32
@@ -28,7 +28,7 @@ type BandwidthRateLimitInterval struct {
 
 	// The minute of the hour to end the bandwidth rate limit interval. The bandwidth
 	// rate limit interval ends at the end of the minute. To end an interval at the end
-	// of an hour, use the value 59.
+	// of an hour, use the value 59 .
 	//
 	// This member is required.
 	EndMinuteOfHour *int32
@@ -38,28 +38,28 @@ type BandwidthRateLimitInterval struct {
 	// This member is required.
 	StartHourOfDay *int32
 
-	// The minute of the hour to start the bandwidth rate limit interval. The interval
-	// begins at the start of that minute. To begin an interval exactly at the start of
-	// the hour, use the value 0.
+	// The minute of the hour to start the bandwidth rate limit interval. The
+	// interval begins at the start of that minute. To begin an interval exactly at the
+	// start of the hour, use the value 0 .
 	//
 	// This member is required.
 	StartMinuteOfHour *int32
 
-	// The average upload rate limit component of the bandwidth rate limit interval, in
-	// bits per second. This field does not appear in the response if the upload rate
-	// limit is not set. For Backup Gateway, the minimum value is (Value).
+	// The average upload rate limit component of the bandwidth rate limit interval,
+	// in bits per second. This field does not appear in the response if the upload
+	// rate limit is not set. For Backup Gateway, the minimum value is (Value) .
 	AverageUploadRateLimitInBitsPerSec *int64
 
 	noSmithyDocumentSerde
 }
 
-// A gateway is an Backup Gateway appliance that runs on the customer's network to
-// provide seamless connectivity to backup storage in the Amazon Web Services
+// A gateway is an Backup Gateway appliance that runs on the customer's network
+// to provide seamless connectivity to backup storage in the Amazon Web Services
 // Cloud.
 type Gateway struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayArn *string
 
 	// The display name of the gateway.
@@ -81,8 +81,8 @@ type Gateway struct {
 // The details of gateway.
 type GatewayDetails struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	GatewayArn *string
 
 	// The display name of the gateway.
@@ -98,9 +98,9 @@ type GatewayDetails struct {
 	// Unix format and UTC time.
 	LastSeenTime *time.Time
 
-	// Returns your gateway's weekly maintenance start time including the day and time
-	// of the week. Note that values are in terms of the gateway's time zone. Can be
-	// weekly or monthly.
+	// Returns your gateway's weekly maintenance start time including the day and
+	// time of the week. Note that values are in terms of the gateway's time zone. Can
+	// be weekly or monthly.
 	MaintenanceStartTime *MaintenanceStartTime
 
 	// Details showing the next update availability time of the gateway.
@@ -125,8 +125,8 @@ type Hypervisor struct {
 	// The Amazon Resource Name (ARN) of the hypervisor.
 	HypervisorArn *string
 
-	// The Amazon Resource Name (ARN) of the Key Management Service used to encrypt the
-	// hypervisor.
+	// The Amazon Resource Name (ARN) of the Key Management Service used to encrypt
+	// the hypervisor.
 	KmsKeyArn *string
 
 	// The name of the hypervisor.
@@ -170,19 +170,19 @@ type HypervisorDetails struct {
 	Name *string
 
 	// This is the current state of the specified hypervisor. The possible states are
-	// PENDING, ONLINE, OFFLINE, or ERROR.
+	// PENDING , ONLINE , OFFLINE , or ERROR .
 	State HypervisorState
 
 	noSmithyDocumentSerde
 }
 
-// This is your gateway's weekly maintenance start time including the day and time
-// of the week. Note that values are in terms of the gateway's time zone. Can be
-// weekly or monthly.
+// This is your gateway's weekly maintenance start time including the day and
+// time of the week. Note that values are in terms of the gateway's time zone. Can
+// be weekly or monthly.
 type MaintenanceStartTime struct {
 
-	// The hour component of the maintenance start time represented as hh, where hh is
-	// the hour (0 to 23). The hour of the day is in the time zone of the gateway.
+	// The hour component of the maintenance start time represented as hh, where hh
+	// is the hour (0 to 23). The hour of the day is in the time zone of the gateway.
 	//
 	// This member is required.
 	HourOfDay *int32
@@ -212,7 +212,7 @@ type MaintenanceStartTime struct {
 // characters: + - = . _ : /.
 type Tag struct {
 
-	// The key part of a tag's key-value pair. The key can't start with aws:.
+	// The key part of a tag's key-value pair. The key can't start with aws: .
 	//
 	// This member is required.
 	Key *string
@@ -245,13 +245,13 @@ type VirtualMachine struct {
 	Path *string
 
 	// The Amazon Resource Name (ARN) of the virtual machine. For example,
-	// arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL.
+	// arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL .
 	ResourceArn *string
 
 	noSmithyDocumentSerde
 }
 
-// Your VirtualMachine objects, ordered by their Amazon Resource Names (ARNs).
+// Your VirtualMachine  objects, ordered by their Amazon Resource Names (ARNs).
 type VirtualMachineDetails struct {
 
 	// The host name of the virtual machine.
@@ -271,7 +271,7 @@ type VirtualMachineDetails struct {
 	Path *string
 
 	// The Amazon Resource Name (ARN) of the virtual machine. For example,
-	// arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL.
+	// arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL .
 	ResourceArn *string
 
 	// These are the details of the VMware tags associated with the specified virtual
@@ -281,10 +281,10 @@ type VirtualMachineDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A VMware tag is a tag attached to a specific virtual machine. A tag
-// (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_Tag.html) is a
-// key-value pair you can use to manage, filter, and search for your resources. The
-// content of VMware tags can be matched to Amazon Web Services tags.
+// A VMware tag is a tag attached to a specific virtual machine. A tag (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_Tag.html)
+// is a key-value pair you can use to manage, filter, and search for your
+// resources. The content of VMware tags can be matched to Amazon Web Services
+// tags.
 type VmwareTag struct {
 
 	// The is the category of VMware.
@@ -299,8 +299,8 @@ type VmwareTag struct {
 	noSmithyDocumentSerde
 }
 
-// This displays the mapping of on-premises VMware tags to the corresponding Amazon
-// Web Services tags.
+// This displays the mapping of on-premises VMware tags to the corresponding
+// Amazon Web Services tags.
 type VmwareToAwsTagMapping struct {
 
 	// The key part of the Amazon Web Services tag's key-value pair.

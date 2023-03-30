@@ -34,13 +34,13 @@ type DescribeStorageVirtualMachinesInput struct {
 	// Enter a filter name:value pair to view a select set of SVMs.
 	Filters []types.StorageVirtualMachineFilter
 
-	// The maximum number of resources to return in the response. This value must be an
-	// integer greater than zero.
+	// The maximum number of resources to return in the response. This value must be
+	// an integer greater than zero.
 	MaxResults *int32
 
-	// (Optional) Opaque pagination token returned from a previous operation (String).
-	// If present, this token indicates from what point you can continue processing the
-	// request, where the previous NextToken value left off.
+	// (Optional) Opaque pagination token returned from a previous operation
+	// (String). If present, this token indicates from what point you can continue
+	// processing the request, where the previous NextToken  value left off.
 	NextToken *string
 
 	// Enter the ID of one or more SVMs that you want to view.
@@ -51,13 +51,13 @@ type DescribeStorageVirtualMachinesInput struct {
 
 type DescribeStorageVirtualMachinesOutput struct {
 
-	// (Optional) Opaque pagination token returned from a previous operation (String).
-	// If present, this token indicates from what point you can continue processing the
-	// request, where the previous NextToken value left off.
+	// (Optional) Opaque pagination token returned from a previous operation
+	// (String). If present, this token indicates from what point you can continue
+	// processing the request, where the previous NextToken  value left off.
 	NextToken *string
 
-	// Returned after a successful DescribeStorageVirtualMachines operation, describing
-	// each SVM.
+	// Returned after a successful DescribeStorageVirtualMachines operation,
+	// describing each SVM.
 	StorageVirtualMachines []types.StorageVirtualMachine
 
 	// Metadata pertaining to the operation's result.
@@ -137,12 +137,12 @@ var _ DescribeStorageVirtualMachinesAPIClient = (*Client)(nil)
 // DescribeStorageVirtualMachinesPaginatorOptions is the paginator options for
 // DescribeStorageVirtualMachines
 type DescribeStorageVirtualMachinesPaginatorOptions struct {
-	// The maximum number of resources to return in the response. This value must be an
-	// integer greater than zero.
+	// The maximum number of resources to return in the response. This value must be
+	// an integer greater than zero.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

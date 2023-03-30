@@ -14,8 +14,7 @@ import (
 
 // Gets a list of domain configurations for the user. This list is sorted
 // alphabetically by domain configuration name. Requires permission to access the
-// ListDomainConfigurations
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// ListDomainConfigurations (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListDomainConfigurations(ctx context.Context, params *ListDomainConfigurationsInput, optFns ...func(*Options)) (*ListDomainConfigurationsOutput, error) {
 	if params == nil {
@@ -135,8 +134,8 @@ type ListDomainConfigurationsPaginatorOptions struct {
 	// The result page size.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

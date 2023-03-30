@@ -67,8 +67,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The server encountered an unexpected condition that prevented it from fulfilling
-// the request.
+// The server encountered an unexpected condition that prevented it from
+// fulfilling the request.
 type InternalServerException struct {
 	Message *string
 

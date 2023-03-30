@@ -27,7 +27,7 @@ func (c *Client) BatchGetDeploymentGroups(ctx context.Context, params *BatchGetD
 	return out, nil
 }
 
-// Represents the input of a BatchGetDeploymentGroups operation.
+// Represents the input of a BatchGetDeploymentGroups  operation.
 type BatchGetDeploymentGroupsInput struct {
 
 	// The name of an CodeDeploy application associated with the applicable IAM or
@@ -44,7 +44,7 @@ type BatchGetDeploymentGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a BatchGetDeploymentGroups operation.
+// Represents the output of a BatchGetDeploymentGroups  operation.
 type BatchGetDeploymentGroupsOutput struct {
 
 	// Information about the deployment groups.

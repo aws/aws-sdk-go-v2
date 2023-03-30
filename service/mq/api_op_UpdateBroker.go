@@ -35,8 +35,8 @@ type UpdateBrokerInput struct {
 	// This member is required.
 	BrokerId *string
 
-	// Optional. The authentication strategy used to secure the broker. The default is
-	// SIMPLE.
+	// Optional. The authentication strategy used to secure the broker. The default
+	// is SIMPLE.
 	AuthenticationStrategy types.AuthenticationStrategy
 
 	// Enables automatic upgrades to new minor versions for brokers, as new versions
@@ -48,13 +48,13 @@ type UpdateBrokerInput struct {
 	Configuration *types.ConfigurationId
 
 	// The broker engine version. For a list of supported engine versions, see
-	// Supported engines
-	// (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html).
+	// Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
+	// .
 	EngineVersion *string
 
-	// The broker's host instance type to upgrade to. For a list of supported instance
-	// types, see Broker instance types
-	// (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types).
+	// The broker's host instance type to upgrade to. For a list of supported
+	// instance types, see Broker instance types (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types)
+	// .
 	HostInstanceType *string
 
 	// Optional. The metadata of the LDAP server used to authenticate and authorize
@@ -76,8 +76,8 @@ type UpdateBrokerInput struct {
 
 type UpdateBrokerOutput struct {
 
-	// Optional. The authentication strategy used to secure the broker. The default is
-	// SIMPLE.
+	// Optional. The authentication strategy used to secure the broker. The default
+	// is SIMPLE.
 	AuthenticationStrategy types.AuthenticationStrategy
 
 	// The new boolean value that specifies whether broker engines automatically
@@ -92,13 +92,13 @@ type UpdateBrokerOutput struct {
 	Configuration *types.ConfigurationId
 
 	// The broker engine version to upgrade to. For a list of supported engine
-	// versions, see Supported engines
-	// (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html).
+	// versions, see Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
+	// .
 	EngineVersion *string
 
-	// The broker's host instance type to upgrade to. For a list of supported instance
-	// types, see Broker instance types
-	// (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types).
+	// The broker's host instance type to upgrade to. For a list of supported
+	// instance types, see Broker instance types (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types)
+	// .
 	HostInstanceType *string
 
 	// Optional. The metadata of the LDAP server used to authenticate and authorize

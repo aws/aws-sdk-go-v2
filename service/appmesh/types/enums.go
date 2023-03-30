@@ -46,9 +46,9 @@ const (
 	DurationUnitMs DurationUnit = "ms"
 )
 
-// Values returns all known values for DurationUnit. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DurationUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DurationUnit) Values() []DurationUnit {
 	return []DurationUnit{
 		"s",
@@ -105,8 +105,8 @@ const (
 	GrpcRetryPolicyEventUnavailable       GrpcRetryPolicyEvent = "unavailable"
 )
 
-// Values returns all known values for GrpcRetryPolicyEvent. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for GrpcRetryPolicyEvent. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (GrpcRetryPolicyEvent) Values() []GrpcRetryPolicyEvent {
 	return []GrpcRetryPolicyEvent{
@@ -178,9 +178,9 @@ const (
 	IpPreferenceIPv6Only      IpPreference = "IPv6_ONLY"
 )
 
-// Values returns all known values for IpPreference. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IpPreference. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (IpPreference) Values() []IpPreference {
 	return []IpPreference{
 		"IPv6_PREFERRED",
@@ -240,9 +240,9 @@ const (
 	PortProtocolGrpc  PortProtocol = "grpc"
 )
 
-// Values returns all known values for PortProtocol. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PortProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PortProtocol) Values() []PortProtocol {
 	return []PortProtocol{
 		"http",
@@ -338,9 +338,9 @@ const (
 	VirtualGatewayStatusCodeDeleted  VirtualGatewayStatusCode = "DELETED"
 )
 
-// Values returns all known values for VirtualGatewayStatusCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for VirtualGatewayStatusCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VirtualGatewayStatusCode) Values() []VirtualGatewayStatusCode {
 	return []VirtualGatewayStatusCode{
 		"ACTIVE",
@@ -358,8 +358,8 @@ const (
 	VirtualNodeStatusCodeDeleted  VirtualNodeStatusCode = "DELETED"
 )
 
-// Values returns all known values for VirtualNodeStatusCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for VirtualNodeStatusCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (VirtualNodeStatusCode) Values() []VirtualNodeStatusCode {
 	return []VirtualNodeStatusCode{
@@ -378,9 +378,9 @@ const (
 	VirtualRouterStatusCodeDeleted  VirtualRouterStatusCode = "DELETED"
 )
 
-// Values returns all known values for VirtualRouterStatusCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for VirtualRouterStatusCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VirtualRouterStatusCode) Values() []VirtualRouterStatusCode {
 	return []VirtualRouterStatusCode{
 		"ACTIVE",
@@ -398,9 +398,9 @@ const (
 	VirtualServiceStatusCodeDeleted  VirtualServiceStatusCode = "DELETED"
 )
 
-// Values returns all known values for VirtualServiceStatusCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for VirtualServiceStatusCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VirtualServiceStatusCode) Values() []VirtualServiceStatusCode {
 	return []VirtualServiceStatusCode{
 		"ACTIVE",

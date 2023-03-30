@@ -40,12 +40,9 @@ type GetUserPoolMfaConfigInput struct {
 type GetUserPoolMfaConfigOutput struct {
 
 	// The multi-factor authentication (MFA) configuration. Valid values include:
-	// - OFF
-	// MFA won't be used for any users.
-	// - ON MFA is required for all users to sign
-	// in.
-	// - OPTIONAL MFA will be required only for individual users who have an MFA
-	// factor activated.
+	//     - OFF MFA won't be used for any users.
+	//     - ON MFA is required for all users to sign in.
+	//     - OPTIONAL MFA will be required only for individual users who have an MFA factor activated.
 	MfaConfiguration types.UserPoolMfaType
 
 	// The SMS text message multi-factor authentication (MFA) configuration.

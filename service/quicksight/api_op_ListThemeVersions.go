@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the versions of the themes in the current Amazon Web Services account.
+// Lists all the versions of the themes in the current Amazon Web Services
+// account.
 func (c *Client) ListThemeVersions(ctx context.Context, params *ListThemeVersionsInput, optFns ...func(*Options)) (*ListThemeVersionsOutput, error) {
 	if params == nil {
 		params = &ListThemeVersionsInput{}
@@ -141,13 +142,14 @@ type ListThemeVersionsAPIClient interface {
 
 var _ ListThemeVersionsAPIClient = (*Client)(nil)
 
-// ListThemeVersionsPaginatorOptions is the paginator options for ListThemeVersions
+// ListThemeVersionsPaginatorOptions is the paginator options for
+// ListThemeVersions
 type ListThemeVersionsPaginatorOptions struct {
 	// The maximum number of results to be returned per request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

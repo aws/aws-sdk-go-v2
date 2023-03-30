@@ -14,8 +14,8 @@ import (
 
 // Returns the list of optimizations that Auto-Tune has made to an Amazon
 // OpenSearch Service domain. For more information, see Auto-Tune for Amazon
-// OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html).
+// OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
+// .
 func (c *Client) DescribeDomainAutoTunes(ctx context.Context, params *DescribeDomainAutoTunesInput, optFns ...func(*Options)) (*DescribeDomainAutoTunesOutput, error) {
 	if params == nil {
 		params = &DescribeDomainAutoTunesInput{}
@@ -31,7 +31,7 @@ func (c *Client) DescribeDomainAutoTunes(ctx context.Context, params *DescribeDo
 	return out, nil
 }
 
-// Container for the parameters to the DescribeDomainAutoTunes operation.
+// Container for the parameters to the DescribeDomainAutoTunes  operation.
 type DescribeDomainAutoTunesInput struct {
 
 	// Name of the domain that you want Auto-Tune details about.
@@ -40,25 +40,25 @@ type DescribeDomainAutoTunesInput struct {
 	DomainName *string
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken  to get the next page of results.
 	MaxResults int32
 
-	// If your initial DescribeDomainAutoTunes operation returns a nextToken, you can
-	// include the returned nextToken in subsequent DescribeDomainAutoTunes operations,
-	// which returns results in the next page.
+	// If your initial DescribeDomainAutoTunes  operation returns a nextToken, you
+	// can include the returned nextToken  in subsequent DescribeDomainAutoTunes
+	// operations, which returns results in the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// The result of a DescribeDomainAutoTunes request.
+// The result of a DescribeDomainAutoTunes  request.
 type DescribeDomainAutoTunesOutput struct {
 
 	// The list of setting adjustments that Auto-Tune has made to the domain.
 	AutoTunes []types.AutoTune
 
-	// When nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// When nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page.
 	NextToken *string
 
@@ -143,11 +143,11 @@ var _ DescribeDomainAutoTunesAPIClient = (*Client)(nil)
 // DescribeDomainAutoTunes
 type DescribeDomainAutoTunesPaginatorOptions struct {
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken  to get the next page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

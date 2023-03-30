@@ -27,12 +27,12 @@ func (c *Client) ModifyCacheSubnetGroup(ctx context.Context, params *ModifyCache
 	return out, nil
 }
 
-// Represents the input of a ModifyCacheSubnetGroup operation.
+// Represents the input of a ModifyCacheSubnetGroup  operation.
 type ModifyCacheSubnetGroupInput struct {
 
-	// The name for the cache subnet group. This value is stored as a lowercase string.
-	// Constraints: Must contain no more than 255 alphanumeric characters or hyphens.
-	// Example: mysubnetgroup
+	// The name for the cache subnet group. This value is stored as a lowercase
+	// string. Constraints: Must contain no more than 255 alphanumeric characters or
+	// hyphens. Example: mysubnetgroup
 	//
 	// This member is required.
 	CacheSubnetGroupName *string
@@ -49,9 +49,8 @@ type ModifyCacheSubnetGroupInput struct {
 type ModifyCacheSubnetGroupOutput struct {
 
 	// Represents the output of one of the following operations:
-	// -
-	// CreateCacheSubnetGroup
-	// - ModifyCacheSubnetGroup
+	//     - CreateCacheSubnetGroup
+	//     - ModifyCacheSubnetGroup
 	CacheSubnetGroup *types.CacheSubnetGroup
 
 	// Metadata pertaining to the operation's result.

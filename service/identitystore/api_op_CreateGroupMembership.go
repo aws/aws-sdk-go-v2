@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a relationship between a member and a group. The following identifiers
-// must be specified: GroupId, IdentityStoreId, and MemberId.
+// must be specified: GroupId , IdentityStoreId , and MemberId .
 func (c *Client) CreateGroupMembership(ctx context.Context, params *CreateGroupMembershipInput, optFns ...func(*Options)) (*CreateGroupMembershipOutput, error) {
 	if params == nil {
 		params = &CreateGroupMembershipInput{}
@@ -57,7 +57,7 @@ type CreateGroupMembershipOutput struct {
 	// This member is required.
 	IdentityStoreId *string
 
-	// The identifier for a newly created GroupMembership in an identity store.
+	// The identifier for a newly created GroupMembership  in an identity store.
 	//
 	// This member is required.
 	MembershipId *string

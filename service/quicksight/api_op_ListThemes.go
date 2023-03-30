@@ -43,12 +43,9 @@ type ListThemesInput struct {
 	NextToken *string
 
 	// The type of themes that you want to list. Valid options include the following:
-	// -
-	// ALL (default)- Display all existing themes.
-	// - CUSTOM - Display only the themes
-	// created by people using Amazon QuickSight.
-	// - QUICKSIGHT - Display only the
-	// starting themes defined by Amazon QuickSight.
+	//     - ALL (default) - Display all existing themes.
+	//     - CUSTOM - Display only the themes created by people using Amazon QuickSight.
+	//     - QUICKSIGHT - Display only the starting themes defined by Amazon QuickSight.
 	Type types.ThemeType
 
 	noSmithyDocumentSerde
@@ -149,8 +146,8 @@ type ListThemesPaginatorOptions struct {
 	// The maximum number of results to be returned per request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

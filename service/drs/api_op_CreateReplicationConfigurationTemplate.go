@@ -35,8 +35,8 @@ type CreateReplicationConfigurationTemplateInput struct {
 	// This member is required.
 	AssociateDefaultSecurityGroup *bool
 
-	// Configure bandwidth throttling for the outbound data transfer rate of the Source
-	// Server in Mbps.
+	// Configure bandwidth throttling for the outbound data transfer rate of the
+	// Source Server in Mbps.
 	//
 	// This member is required.
 	BandwidthThrottling int64
@@ -116,8 +116,8 @@ type CreateReplicationConfigurationTemplateOutput struct {
 	// the Replication Configuration Template.
 	AssociateDefaultSecurityGroup *bool
 
-	// Configure bandwidth throttling for the outbound data transfer rate of the Source
-	// Server in Mbps.
+	// Configure bandwidth throttling for the outbound data transfer rate of the
+	// Source Server in Mbps.
 	BandwidthThrottling int64
 
 	// Whether to create a Public IP for the Recovery Instance by default.

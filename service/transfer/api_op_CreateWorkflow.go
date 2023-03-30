@@ -14,7 +14,7 @@ import (
 // Allows you to create a workflow with specified steps and step details the
 // workflow invokes after file transfer completes. After creating a workflow, you
 // can associate the workflow created with any transfer servers by specifying the
-// workflow-details field in CreateServer and UpdateServer operations.
+// workflow-details field in CreateServer  and UpdateServer  operations.
 func (c *Client) CreateWorkflow(ctx context.Context, params *CreateWorkflowInput, optFns ...func(*Options)) (*CreateWorkflowOutput, error) {
 	if params == nil {
 		params = &CreateWorkflowInput{}
@@ -32,21 +32,16 @@ func (c *Client) CreateWorkflow(ctx context.Context, params *CreateWorkflowInput
 
 type CreateWorkflowInput struct {
 
-	// Specifies the details for the steps that are in the specified workflow. The TYPE
-	// specifies which of the following actions is being taken for this step.
-	// - COPY -
-	// Copy the file to another location.
-	// - CUSTOM - Perform a custom step with an
-	// Lambda function target.
-	// - DECRYPT - Decrypt a file that was encrypted before it
-	// was uploaded.
-	// - DELETE - Delete the file.
-	// - TAG - Add a tag to the
-	// file.
-	//
-	// Currently, copying and tagging are supported only on S3. For file
-	// location, you specify either the Amazon S3 bucket and key, or the Amazon EFS
-	// file system ID and path.
+	// Specifies the details for the steps that are in the specified workflow. The
+	// TYPE specifies which of the following actions is being taken for this step.
+	//     - COPY - Copy the file to another location.
+	//     - CUSTOM - Perform a custom step with an Lambda function target.
+	//     - DECRYPT - Decrypt a file that was encrypted before it was uploaded.
+	//     - DELETE - Delete the file.
+	//     - TAG - Add a tag to the file.
+	// Currently, copying and tagging are
+	// supported only on S3. For file location, you specify either the Amazon S3 bucket
+	// and key, or the Amazon EFS file system ID and path.
 	//
 	// This member is required.
 	Steps []types.WorkflowStep
@@ -54,10 +49,11 @@ type CreateWorkflowInput struct {
 	// A textual description for the workflow.
 	Description *string
 
-	// Specifies the steps (actions) to take if errors are encountered during execution
-	// of the workflow. For custom steps, the lambda function needs to send FAILURE to
-	// the call back API to kick off the exception steps. Additionally, if the lambda
-	// does not send SUCCESS before it times out, the exception steps are executed.
+	// Specifies the steps (actions) to take if errors are encountered during
+	// execution of the workflow. For custom steps, the lambda function needs to send
+	// FAILUREto the call back API to kick off the exception steps. Additionally, if
+	// the lambda does not send SUCCESS before it times out, the exception steps are
+	// executed.
 	OnExceptionSteps []types.WorkflowStep
 
 	// Key-value pairs that can be used to group and search for workflows. Tags are

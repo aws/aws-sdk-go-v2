@@ -34,7 +34,7 @@ func (c *Client) DeleteReplicationGroup(ctx context.Context, params *DeleteRepli
 	return out, nil
 }
 
-// Represents the input of a DeleteReplicationGroup operation.
+// Represents the input of a DeleteReplicationGroup  operation.
 type DeleteReplicationGroupInput struct {
 
 	// The identifier for the cluster to be deleted. This parameter is not case

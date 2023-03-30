@@ -11,12 +11,12 @@ import (
 // Serverless.
 type ConfigParameter struct {
 
-	// The key of the parameter. The options are auto_mv, datestyle,
-	// enable_case_sensitivity_identifier, enable_user_activity_logging, query_group,
-	// search_path, and query monitoring metrics that let you define performance
+	// The key of the parameter. The options are auto_mv , datestyle ,
+	// enable_case_sensitivity_identifier , enable_user_activity_logging , query_group
+	// , search_path, and query monitoring metrics that let you define performance
 	// boundaries. For more information about query monitoring rules and available
-	// metrics, see Query monitoring metrics for Amazon Redshift Serverless
-	// (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless).
+	// metrics, see Query monitoring metrics for Amazon Redshift Serverless (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless)
+	// .
 	ParameterKey *string
 
 	// The value of the parameter to set.
@@ -34,7 +34,7 @@ type Endpoint struct {
 	// The port that Amazon Redshift Serverless listens on.
 	Port *int32
 
-	// An array of VpcEndpoint objects.
+	// An array of VpcEndpoint  objects.
 	VpcEndpoints []VpcEndpoint
 
 	noSmithyDocumentSerde
@@ -102,8 +102,8 @@ type Namespace struct {
 	// your data.
 	KmsKeyId *string
 
-	// The types of logs the namespace can export. Available export types are User log,
-	// Connection log, and User activity log.
+	// The types of logs the namespace can export. Available export types are User
+	// log, Connection log, and User activity log.
 	LogExports []LogExport
 
 	// The Amazon Resource Name (ARN) associated with a namespace.
@@ -114,9 +114,8 @@ type Namespace struct {
 
 	// The name of the namespace. Must be between 3-64 alphanumeric characters in
 	// lowercase, and it cannot be a reserved word. A list of reserved words can be
-	// found in Reserved Words
-	// (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the
-	// Amazon Redshift Database Developer Guide.
+	// found in Reserved Words (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
+	// in the Amazon Redshift Database Developer Guide.
 	NamespaceName *string
 
 	// The status of the namespace.
@@ -125,8 +124,8 @@ type Namespace struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a network interface in an Amazon Redshift Serverless
-// managed VPC endpoint.
+// Contains information about a network interface in an Amazon Redshift
+// Serverless managed VPC endpoint.
 type NetworkInterface struct {
 
 	// The availability Zone.
@@ -148,8 +147,8 @@ type NetworkInterface struct {
 // created every 30 minutes and kept for 24 hours.
 type RecoveryPoint struct {
 
-	// The Amazon Resource Name (ARN) of the namespace the recovery point is associated
-	// with.
+	// The Amazon Resource Name (ARN) of the namespace the recovery point is
+	// associated with.
 	NamespaceArn *string
 
 	// The name of the namespace the recovery point is associated with.
@@ -254,8 +253,8 @@ type Snapshot struct {
 // Contains information about a table restore request.
 type TableRestoreStatus struct {
 
-	// A description of the status of the table restore request. Status values include
-	// SUCCEEDED, FAILED, CANCELED, PENDING, IN_PROGRESS.
+	// A description of the status of the table restore request. Status values
+	// include SUCCEEDED , FAILED , CANCELED , PENDING , IN_PROGRESS .
 	Message *string
 
 	// The namespace of the table being restored from.
@@ -267,8 +266,8 @@ type TableRestoreStatus struct {
 	// The amount of data restored to the new table so far, in megabytes (MB).
 	ProgressInMegaBytes *int64
 
-	// The time that the table restore request was made, in Universal Coordinated Time
-	// (UTC).
+	// The time that the table restore request was made, in Universal Coordinated
+	// Time (UTC).
 	RequestTime *time.Time
 
 	// The name of the snapshot being restored from.
@@ -283,8 +282,8 @@ type TableRestoreStatus struct {
 	// The name of the source table being restored from.
 	SourceTableName *string
 
-	// A value that describes the current state of the table restore request. Possible
-	// values include SUCCEEDED, FAILED, CANCELED, PENDING, IN_PROGRESS.
+	// A value that describes the current state of the table restore request.
+	// Possible values include SUCCEEDED , FAILED , CANCELED , PENDING , IN_PROGRESS .
 	Status *string
 
 	// The ID of the RestoreTableFromSnapshot request.
@@ -352,8 +351,8 @@ type UsageLimit struct {
 	noSmithyDocumentSerde
 }
 
-// The connection endpoint for connecting to Amazon Redshift Serverless through the
-// proxy.
+// The connection endpoint for connecting to Amazon Redshift Serverless through
+// the proxy.
 type VpcEndpoint struct {
 
 	// One or more network interfaces of the endpoint. Also known as an interface
@@ -388,13 +387,13 @@ type Workgroup struct {
 	// (RPUs).
 	BaseCapacity *int32
 
-	// An array of parameters to set for advanced control over a database. The options
-	// are auto_mv, datestyle, enable_case_sensitivity_identifier,
-	// enable_user_activity_logging, query_group, , search_path, and query monitoring
-	// metrics that let you define performance boundaries. For more information about
-	// query monitoring rules and available metrics, see  Query monitoring metrics for
-	// Amazon Redshift Serverless
-	// (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless).
+	// An array of parameters to set for advanced control over a database. The
+	// options are auto_mv , datestyle , enable_case_sensitivity_identifier ,
+	// enable_user_activity_logging , query_group , , search_path, and query
+	// monitoring metrics that let you define performance boundaries. For more
+	// information about query monitoring rules and available metrics, see Query
+	// monitoring metrics for Amazon Redshift Serverless (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless)
+	// .
 	ConfigParameters []ConfigParameter
 
 	// The creation date of the workgroup.
@@ -403,9 +402,9 @@ type Workgroup struct {
 	// The endpoint that is created from the workgroup.
 	Endpoint *Endpoint
 
-	// The value that specifies whether to enable enhanced virtual private cloud (VPC)
-	// routing, which forces Amazon Redshift Serverless to route traffic through your
-	// VPC.
+	// The value that specifies whether to enable enhanced virtual private cloud
+	// (VPC) routing, which forces Amazon Redshift Serverless to route traffic through
+	// your VPC.
 	EnhancedVpcRouting *bool
 
 	// The namespace the workgroup is associated with.

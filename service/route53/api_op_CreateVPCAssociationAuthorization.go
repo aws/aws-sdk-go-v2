@@ -14,12 +14,12 @@ import (
 // Authorizes the Amazon Web Services account that created a specified VPC to
 // submit an AssociateVPCWithHostedZone request to associate the VPC with a
 // specified hosted zone that was created by a different account. To submit a
-// CreateVPCAssociationAuthorization request, you must use the account that created
-// the hosted zone. After you authorize the association, use the account that
-// created the VPC to submit an AssociateVPCWithHostedZone request. If you want to
-// associate multiple VPCs that you created by using one account with a hosted zone
-// that you created by using a different account, you must submit one authorization
-// request for each VPC.
+// CreateVPCAssociationAuthorizationrequest, you must use the account that
+// created the hosted zone. After you authorize the association, use the account
+// that created the VPC to submit an AssociateVPCWithHostedZone request. If you
+// want to associate multiple VPCs that you created by using one account with a
+// hosted zone that you created by using a different account, you must submit one
+// authorization request for each VPC.
 func (c *Client) CreateVPCAssociationAuthorization(ctx context.Context, params *CreateVPCAssociationAuthorizationInput, optFns ...func(*Options)) (*CreateVPCAssociationAuthorizationOutput, error) {
 	if params == nil {
 		params = &CreateVPCAssociationAuthorizationInput{}
@@ -46,8 +46,8 @@ type CreateVPCAssociationAuthorizationInput struct {
 	// This member is required.
 	HostedZoneId *string
 
-	// A complex type that contains the VPC ID and region for the VPC that you want to
-	// authorize associating with your hosted zone.
+	// A complex type that contains the VPC ID and region for the VPC that you want
+	// to authorize associating with your hosted zone.
 	//
 	// This member is required.
 	VPC *types.VPC

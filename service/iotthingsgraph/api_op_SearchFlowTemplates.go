@@ -33,7 +33,7 @@ func (c *Client) SearchFlowTemplates(ctx context.Context, params *SearchFlowTemp
 type SearchFlowTemplatesInput struct {
 
 	// An array of objects that limit the result set. The only valid filter is
-	// DEVICE_MODEL_ID.
+	// DEVICE_MODEL_ID .
 	Filters []types.FlowTemplateFilter
 
 	// The maximum number of results to return in the response.
@@ -48,11 +48,11 @@ type SearchFlowTemplatesInput struct {
 
 type SearchFlowTemplatesOutput struct {
 
-	// The string to specify as nextToken when you request the next page of results.
+	// The string to specify as nextToken  when you request the next page of results.
 	NextToken *string
 
-	// An array of objects that contain summary information about each workflow in the
-	// result set.
+	// An array of objects that contain summary information about each workflow in
+	// the result set.
 	Summaries []types.FlowTemplateSummary
 
 	// Metadata pertaining to the operation's result.
@@ -124,8 +124,8 @@ func (c *Client) addOperationSearchFlowTemplatesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// SearchFlowTemplatesAPIClient is a client that implements the SearchFlowTemplates
-// operation.
+// SearchFlowTemplatesAPIClient is a client that implements the
+// SearchFlowTemplates operation.
 type SearchFlowTemplatesAPIClient interface {
 	SearchFlowTemplates(context.Context, *SearchFlowTemplatesInput, ...func(*Options)) (*SearchFlowTemplatesOutput, error)
 }
@@ -138,8 +138,8 @@ type SearchFlowTemplatesPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

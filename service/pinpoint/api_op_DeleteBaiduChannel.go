@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables the Baidu channel for an application and deletes any existing settings
-// for the channel.
+// Disables the Baidu channel for an application and deletes any existing
+// settings for the channel.
 func (c *Client) DeleteBaiduChannel(ctx context.Context, params *DeleteBaiduChannelInput, optFns ...func(*Options)) (*DeleteBaiduChannelOutput, error) {
 	if params == nil {
 		params = &DeleteBaiduChannelInput{}

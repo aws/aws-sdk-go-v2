@@ -48,8 +48,8 @@ type ListPresetsInput struct {
 	// the next batch of presets.
 	NextToken *string
 
-	// Optional. When you request lists of resources, you can specify whether they are
-	// sorted in ASCENDING or DESCENDING order. Default varies by resource.
+	// Optional. When you request lists of resources, you can specify whether they
+	// are sorted in ASCENDING or DESCENDING order. Default varies by resource.
 	Order types.Order
 
 	noSmithyDocumentSerde
@@ -141,8 +141,8 @@ type ListPresetsPaginatorOptions struct {
 	// Optional. Number of presets, up to twenty, that will be returned at one time
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -50,8 +50,8 @@ type CreateArchiveInput struct {
 	// An event pattern to use to filter events sent to the archive.
 	EventPattern *string
 
-	// The number of days to retain events for. Default value is 0. If set to 0, events
-	// are retained indefinitely
+	// The number of days to retain events for. Default value is 0. If set to 0,
+	// events are retained indefinitely
 	RetentionDays *int32
 
 	noSmithyDocumentSerde

@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables server-side encryption for a specified stream. When invoking this API,
-// it is recommended you use the StreamARN input parameter rather than the
-// StreamName input parameter. Stopping encryption is an asynchronous operation.
+// Disables server-side encryption for a specified stream. When invoking this
+// API, it is recommended you use the StreamARN  input parameter rather than the
+// StreamNameinput parameter. Stopping encryption is an asynchronous operation.
 // Upon receiving the request, Kinesis Data Streams returns immediately and sets
-// the status of the stream to UPDATING. After the update is complete, Kinesis Data
-// Streams sets the status of the stream back to ACTIVE. Stopping encryption
+// the status of the stream to UPDATING. After the update is complete, Kinesis
+// Data Streams sets the status of the stream back to ACTIVE. Stopping encryption
 // normally takes a few seconds to complete, but it can take minutes. You can
 // continue to read and write data to your stream while its status is UPDATING.
 // Once the status of the stream is ACTIVE, records written to the stream are no
@@ -25,7 +25,7 @@ import (
 // can take up to 5 seconds after the stream is in an ACTIVE status before all
 // records written to the stream are no longer subject to encryption. After you
 // disabled encryption, you can verify that encryption is not applied by inspecting
-// the API response from PutRecord or PutRecords.
+// the API response from PutRecord  or PutRecords .
 func (c *Client) StopStreamEncryption(ctx context.Context, params *StopStreamEncryptionInput, optFns ...func(*Options)) (*StopStreamEncryptionOutput, error) {
 	if params == nil {
 		params = &StopStreamEncryptionInput{}
@@ -43,7 +43,7 @@ func (c *Client) StopStreamEncryption(ctx context.Context, params *StopStreamEnc
 
 type StopStreamEncryptionInput struct {
 
-	// The encryption type. The only valid value is KMS.
+	// The encryption type. The only valid value is KMS .
 	//
 	// This member is required.
 	EncryptionType types.EncryptionType
@@ -52,17 +52,12 @@ type StopStreamEncryptionInput struct {
 	// encryption. This value can be a globally unique identifier, a fully specified
 	// Amazon Resource Name (ARN) to either an alias or a key, or an alias name
 	// prefixed by "alias/".You can also use a master key owned by Kinesis Data Streams
-	// by specifying the alias aws/kinesis.
-	// - Key ARN example:
-	// arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-	// -
-	// Alias ARN example: arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
-	// -
-	// Globally unique key ID example: 12345678-1234-1234-1234-123456789012
-	// - Alias
-	// name example: alias/MyAliasName
-	// - Master key owned by Kinesis Data Streams:
-	// alias/aws/kinesis
+	// by specifying the alias aws/kinesis .
+	//     - Key ARN example: arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	//     - Alias ARN example: arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+	//     - Globally unique key ID example: 12345678-1234-1234-1234-123456789012
+	//     - Alias name example: alias/MyAliasName
+	//     - Master key owned by Kinesis Data Streams: alias/aws/kinesis
 	//
 	// This member is required.
 	KeyId *string

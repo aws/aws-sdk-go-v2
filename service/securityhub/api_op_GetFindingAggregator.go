@@ -28,8 +28,8 @@ func (c *Client) GetFindingAggregator(ctx context.Context, params *GetFindingAgg
 
 type GetFindingAggregatorInput struct {
 
-	// The ARN of the finding aggregator to return details for. To obtain the ARN, use
-	// ListFindingAggregators.
+	// The ARN of the finding aggregator to return details for. To obtain the ARN,
+	// use ListFindingAggregators .
 	//
 	// This member is required.
 	FindingAggregatorArn *string
@@ -45,8 +45,8 @@ type GetFindingAggregatorOutput struct {
 	// The ARN of the finding aggregator.
 	FindingAggregatorArn *string
 
-	// Indicates whether to link all Regions, all Regions except for a list of excluded
-	// Regions, or a list of included Regions.
+	// Indicates whether to link all Regions, all Regions except for a list of
+	// excluded Regions, or a list of included Regions.
 	RegionLinkingMode *string
 
 	// The list of excluded Regions or included Regions.

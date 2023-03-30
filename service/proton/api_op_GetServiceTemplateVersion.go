@@ -34,12 +34,12 @@ func (c *Client) GetServiceTemplateVersion(ctx context.Context, params *GetServi
 
 type GetServiceTemplateVersionInput struct {
 
-	// To get service template major version detail data, include major Version.
+	// To get service template major version detail data, include major Version .
 	//
 	// This member is required.
 	MajorVersion *string
 
-	// To get service template minor version detail data, include minorVersion.
+	// To get service template minor version detail data, include minorVersion .
 	//
 	// This member is required.
 	MinorVersion *string
@@ -152,10 +152,10 @@ type ServiceTemplateVersionRegisteredWaiterOptions struct {
 	// MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ServiceTemplateVersionRegisteredWaiter will use default max delay of
-	// 300 seconds. Note that MaxDelay must resolve to value greater than or equal to
-	// the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ServiceTemplateVersionRegisteredWaiter will use default max delay
+	// of 300 seconds. Note that MaxDelay must resolve to value greater than or equal
+	// to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -197,9 +197,9 @@ func NewServiceTemplateVersionRegisteredWaiter(client GetServiceTemplateVersionA
 	}
 }
 
-// Wait calls the waiter function for ServiceTemplateVersionRegistered waiter. The
-// maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
-// required and must be greater than zero.
+// Wait calls the waiter function for ServiceTemplateVersionRegistered waiter.
+// The maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur
+// is required and must be greater than zero.
 func (w *ServiceTemplateVersionRegisteredWaiter) Wait(ctx context.Context, params *GetServiceTemplateVersionInput, maxWaitDur time.Duration, optFns ...func(*ServiceTemplateVersionRegisteredWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

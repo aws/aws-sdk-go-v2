@@ -29,9 +29,9 @@ func (c *Client) CreateTemplateAlias(ctx context.Context, params *CreateTemplate
 
 type CreateTemplateAliasInput struct {
 
-	// The name that you want to give to the template alias that you're creating. Don't
-	// start the alias name with the $ character. Alias names that start with $ are
-	// reserved by Amazon QuickSight.
+	// The name that you want to give to the template alias that you're creating.
+	// Don't start the alias name with the $  character. Alias names that start with
+	// $ are reserved by Amazon QuickSight.
 	//
 	// This member is required.
 	AliasName *string

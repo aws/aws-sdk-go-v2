@@ -34,7 +34,7 @@ type BatchUpdatePartitionInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// A list of up to 100 BatchUpdatePartitionRequestEntry objects to update.
+	// A list of up to 100 BatchUpdatePartitionRequestEntry  objects to update.
 	//
 	// This member is required.
 	Entries []types.BatchUpdatePartitionRequestEntry
@@ -53,8 +53,8 @@ type BatchUpdatePartitionInput struct {
 
 type BatchUpdatePartitionOutput struct {
 
-	// The errors encountered when trying to update the requested partitions. A list of
-	// BatchUpdatePartitionFailureEntry objects.
+	// The errors encountered when trying to update the requested partitions. A list
+	// of BatchUpdatePartitionFailureEntry  objects.
 	Errors []types.BatchUpdatePartitionFailureEntry
 
 	// Metadata pertaining to the operation's result.

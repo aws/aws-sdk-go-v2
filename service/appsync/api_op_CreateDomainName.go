@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a custom DomainName object.
+// Creates a custom DomainName  object.
 func (c *Client) CreateDomainName(ctx context.Context, params *CreateDomainNameInput, optFns ...func(*Options)) (*CreateDomainNameOutput, error) {
 	if params == nil {
 		params = &CreateDomainNameInput{}
@@ -41,7 +41,7 @@ type CreateDomainNameInput struct {
 	// This member is required.
 	DomainName *string
 
-	// A description of the DomainName.
+	// A description of the DomainName .
 	Description *string
 
 	noSmithyDocumentSerde
@@ -49,7 +49,7 @@ type CreateDomainNameInput struct {
 
 type CreateDomainNameOutput struct {
 
-	// The configuration for the DomainName.
+	// The configuration for the DomainName .
 	DomainNameConfig *types.DomainNameConfig
 
 	// Metadata pertaining to the operation's result.

@@ -13,9 +13,9 @@ import (
 // Reorders the receipt rules within a receipt rule set. All of the rules in the
 // rule set must be represented in this request. That is, this API will return an
 // error if the reorder request doesn't explicitly position all of the rules. For
-// information about managing receipt rule sets, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html).
-// You can execute this operation no more than once per second.
+// information about managing receipt rule sets, see the Amazon SES Developer
+// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html)
+// . You can execute this operation no more than once per second.
 func (c *Client) ReorderReceiptRuleSet(ctx context.Context, params *ReorderReceiptRuleSetInput, optFns ...func(*Options)) (*ReorderReceiptRuleSetOutput, error) {
 	if params == nil {
 		params = &ReorderReceiptRuleSetInput{}
@@ -31,10 +31,10 @@ func (c *Client) ReorderReceiptRuleSet(ctx context.Context, params *ReorderRecei
 	return out, nil
 }
 
-// Represents a request to reorder the receipt rules within a receipt rule set. You
-// use receipt rule sets to receive email with Amazon SES. For more information,
-// see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
+// Represents a request to reorder the receipt rules within a receipt rule set.
+// You use receipt rule sets to receive email with Amazon SES. For more
+// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
+// .
 type ReorderReceiptRuleSetInput struct {
 
 	// A list of the specified receipt rule set's receipt rules in the order that you

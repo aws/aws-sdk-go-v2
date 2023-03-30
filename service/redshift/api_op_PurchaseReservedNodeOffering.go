@@ -13,11 +13,10 @@ import (
 
 // Allows you to purchase reserved nodes. Amazon Redshift offers a predefined set
 // of reserved node offerings. You can purchase one or more of the offerings. You
-// can call the DescribeReservedNodeOfferings API to obtain the available reserved
-// node offerings. You can call this API by providing a specific reserved node
-// offering and the number of nodes you want to reserve. For more information about
-// reserved node offerings, go to Purchasing Reserved Nodes
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html)
+// can call the DescribeReservedNodeOfferings API to obtain the available
+// reserved node offerings. You can call this API by providing a specific reserved
+// node offering and the number of nodes you want to reserve. For more information
+// about reserved node offerings, go to Purchasing Reserved Nodes (https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) PurchaseReservedNodeOffering(ctx context.Context, params *PurchaseReservedNodeOfferingInput, optFns ...func(*Options)) (*PurchaseReservedNodeOfferingOutput, error) {
 	if params == nil {
@@ -49,8 +48,8 @@ type PurchaseReservedNodeOfferingInput struct {
 
 type PurchaseReservedNodeOfferingOutput struct {
 
-	// Describes a reserved node. You can call the DescribeReservedNodeOfferings API to
-	// obtain the available reserved node offerings.
+	// Describes a reserved node. You can call the DescribeReservedNodeOfferings API
+	// to obtain the available reserved node offerings.
 	ReservedNode *types.ReservedNode
 
 	// Metadata pertaining to the operation's result.

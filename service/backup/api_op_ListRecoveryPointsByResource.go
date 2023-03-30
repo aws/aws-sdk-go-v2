@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns detailed information about all the recovery points of the type specified
-// by a resource Amazon Resource Name (ARN). For Amazon EFS and Amazon EC2, this
-// action only lists recovery points created by Backup.
+// Returns detailed information about all the recovery points of the type
+// specified by a resource Amazon Resource Name (ARN). For Amazon EFS and Amazon
+// EC2, this action only lists recovery points created by Backup.
 func (c *Client) ListRecoveryPointsByResource(ctx context.Context, params *ListRecoveryPointsByResourceInput, optFns ...func(*Options)) (*ListRecoveryPointsByResourceOutput, error) {
 	if params == nil {
 		params = &ListRecoveryPointsByResourceInput{}
@@ -32,8 +32,8 @@ func (c *Client) ListRecoveryPointsByResource(ctx context.Context, params *ListR
 
 type ListRecoveryPointsByResourceInput struct {
 
-	// An ARN that uniquely identifies a resource. The format of the ARN depends on the
-	// resource type.
+	// An ARN that uniquely identifies a resource. The format of the ARN depends on
+	// the resource type.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -43,7 +43,7 @@ type ListRecoveryPointsByResourceInput struct {
 	MaxResults *int32
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return maxResults  number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -54,7 +54,7 @@ type ListRecoveryPointsByResourceInput struct {
 type ListRecoveryPointsByResourceOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return maxResults  number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -148,8 +148,8 @@ type ListRecoveryPointsByResourcePaginatorOptions struct {
 	// least 20.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

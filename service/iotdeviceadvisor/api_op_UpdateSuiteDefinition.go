@@ -13,8 +13,7 @@ import (
 )
 
 // Updates a Device Advisor test suite. Requires permission to access the
-// UpdateSuiteDefinition
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// UpdateSuiteDefinition (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) UpdateSuiteDefinition(ctx context.Context, params *UpdateSuiteDefinitionInput, optFns ...func(*Options)) (*UpdateSuiteDefinitionOutput, error) {
 	if params == nil {

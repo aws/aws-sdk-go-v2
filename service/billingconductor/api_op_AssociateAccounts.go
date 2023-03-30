@@ -37,8 +37,8 @@ type AssociateAccountsInput struct {
 	// This member is required.
 	AccountIds []string
 
-	// The Amazon Resource Name (ARN) of the billing group that associates the array of
-	// account IDs.
+	// The Amazon Resource Name (ARN) of the billing group that associates the array
+	// of account IDs.
 	//
 	// This member is required.
 	Arn *string
@@ -48,8 +48,8 @@ type AssociateAccountsInput struct {
 
 type AssociateAccountsOutput struct {
 
-	// The Amazon Resource Name (ARN) of the billing group that associates the array of
-	// account IDs.
+	// The Amazon Resource Name (ARN) of the billing group that associates the array
+	// of account IDs.
 	Arn *string
 
 	// Metadata pertaining to the operation's result.

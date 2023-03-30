@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a batch inference job. The operation can handle up to 50 million records
-// and the input file must be in JSON format. For more information, see Creating a
-// batch inference job
-// (https://docs.aws.amazon.com/personalize/latest/dg/creating-batch-inference-job.html).
+// Creates a batch inference job. The operation can handle up to 50 million
+// records and the input file must be in JSON format. For more information, see
+// Creating a batch inference job (https://docs.aws.amazon.com/personalize/latest/dg/creating-batch-inference-job.html)
+// .
 func (c *Client) CreateBatchInferenceJob(ctx context.Context, params *CreateBatchInferenceJobInput, optFns ...func(*Options)) (*CreateBatchInferenceJobOutput, error) {
 	if params == nil {
 		params = &CreateBatchInferenceJobInput{}
@@ -32,8 +32,8 @@ func (c *Client) CreateBatchInferenceJob(ctx context.Context, params *CreateBatc
 
 type CreateBatchInferenceJobInput struct {
 
-	// The Amazon S3 path that leads to the input file to base your recommendations on.
-	// The input material must be in JSON format.
+	// The Amazon S3 path that leads to the input file to base your recommendations
+	// on. The input material must be in JSON format.
 	//
 	// This member is required.
 	JobInput *types.BatchInferenceJobInput
@@ -63,17 +63,16 @@ type CreateBatchInferenceJobInput struct {
 	// The configuration details of a batch inference job.
 	BatchInferenceJobConfig *types.BatchInferenceJobConfig
 
-	// The ARN of the filter to apply to the batch inference job. For more information
-	// on using filters, see Filtering batch recommendations
-	// (https://docs.aws.amazon.com/personalize/latest/dg/filter-batch.html).
+	// The ARN of the filter to apply to the batch inference job. For more
+	// information on using filters, see Filtering batch recommendations (https://docs.aws.amazon.com/personalize/latest/dg/filter-batch.html)
+	// .
 	FilterArn *string
 
 	// The number of recommendations to retrieve.
 	NumResults *int32
 
-	// A list of tags
-	// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html) to
-	// apply to the batch inference job.
+	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html)
+	// to apply to the batch inference job.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

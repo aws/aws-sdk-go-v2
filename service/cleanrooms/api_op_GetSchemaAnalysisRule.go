@@ -29,8 +29,8 @@ func (c *Client) GetSchemaAnalysisRule(ctx context.Context, params *GetSchemaAna
 
 type GetSchemaAnalysisRuleInput struct {
 
-	// A unique identifier for the collaboration that the schema belongs to. Currently
-	// accepts a collaboration ID.
+	// A unique identifier for the collaboration that the schema belongs to.
+	// Currently accepts a collaboration ID.
 	//
 	// This member is required.
 	CollaborationIdentifier *string

@@ -16,12 +16,11 @@ import (
 // 3.4.6 or higher. If any replication instances are from versions earlier than
 // 3.4.6, the operation raises an error and tells you to upgrade these instances to
 // version 3.4.6 or higher. To enable migration regardless of version, set the
-// Force option to true. However, if you don't upgrade instances earlier than
+// Forceoption to true. However, if you don't upgrade instances earlier than
 // version 3.4.6, some types of events might not be available when you use Amazon
 // EventBridge. To call this operation, make sure that you have certain permissions
 // added to your user account. For more information, see Migrating event
-// subscriptions to Amazon EventBridge
-// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html#CHAP_Events-migrate-to-eventbridge)
+// subscriptions to Amazon EventBridge (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html#CHAP_Events-migrate-to-eventbridge)
 // in the Amazon Web Services Database Migration Service User Guide.
 func (c *Client) UpdateSubscriptionsToEventBridge(ctx context.Context, params *UpdateSubscriptionsToEventBridgeInput, optFns ...func(*Options)) (*UpdateSubscriptionsToEventBridgeOutput, error) {
 	if params == nil {
@@ -51,8 +50,8 @@ type UpdateSubscriptionsToEventBridgeInput struct {
 
 type UpdateSubscriptionsToEventBridgeOutput struct {
 
-	// A string that indicates how many event subscriptions were migrated and how many
-	// remain to be migrated.
+	// A string that indicates how many event subscriptions were migrated and how
+	// many remain to be migrated.
 	Result *string
 
 	// Metadata pertaining to the operation's result.

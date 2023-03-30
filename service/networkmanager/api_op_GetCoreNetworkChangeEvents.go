@@ -51,7 +51,7 @@ type GetCoreNetworkChangeEventsInput struct {
 
 type GetCoreNetworkChangeEventsOutput struct {
 
-	// The response to GetCoreNetworkChangeEventsRequest.
+	// The response to GetCoreNetworkChangeEventsRequest .
 	CoreNetworkChangeEvents []types.CoreNetworkChangeEvent
 
 	// The token for the next page of results.
@@ -140,8 +140,8 @@ type GetCoreNetworkChangeEventsPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

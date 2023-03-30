@@ -29,8 +29,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the notification rule from which to remove the
-	// tags.
+	// The Amazon Resource Name (ARN) of the notification rule from which to remove
+	// the tags.
 	//
 	// This member is required.
 	Arn *string

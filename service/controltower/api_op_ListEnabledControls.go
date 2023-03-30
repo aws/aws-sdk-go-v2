@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the controls enabled by AWS Control Tower on the specified organizational
-// unit and the accounts it contains.
+// Lists the controls enabled by AWS Control Tower on the specified
+// organizational unit and the accounts it contains.
 func (c *Client) ListEnabledControls(ctx context.Context, params *ListEnabledControlsInput, optFns ...func(*Options)) (*ListEnabledControlsOutput, error) {
 	if params == nil {
 		params = &ListEnabledControlsInput{}
@@ -48,14 +48,14 @@ type ListEnabledControlsInput struct {
 
 type ListEnabledControlsOutput struct {
 
-	// Lists the controls enabled by AWS Control Tower on the specified organizational
-	// unit and the accounts it contains.
+	// Lists the controls enabled by AWS Control Tower on the specified
+	// organizational unit and the accounts it contains.
 	//
 	// This member is required.
 	EnabledControls []types.EnabledControlSummary
 
-	// Retrieves the next page of results. If the string is empty, the current response
-	// is the end of the results.
+	// Retrieves the next page of results. If the string is empty, the current
+	// response is the end of the results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -127,8 +127,8 @@ func (c *Client) addOperationListEnabledControlsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListEnabledControlsAPIClient is a client that implements the ListEnabledControls
-// operation.
+// ListEnabledControlsAPIClient is a client that implements the
+// ListEnabledControls operation.
 type ListEnabledControlsAPIClient interface {
 	ListEnabledControls(context.Context, *ListEnabledControlsInput, ...func(*Options)) (*ListEnabledControlsOutput, error)
 }
@@ -141,8 +141,8 @@ type ListEnabledControlsPaginatorOptions struct {
 	// How many results to return per API call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -128,8 +128,8 @@ func (c *Client) addOperationGetPartitionIndexesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// GetPartitionIndexesAPIClient is a client that implements the GetPartitionIndexes
-// operation.
+// GetPartitionIndexesAPIClient is a client that implements the
+// GetPartitionIndexes operation.
 type GetPartitionIndexesAPIClient interface {
 	GetPartitionIndexes(context.Context, *GetPartitionIndexesInput, ...func(*Options)) (*GetPartitionIndexesOutput, error)
 }
@@ -139,8 +139,8 @@ var _ GetPartitionIndexesAPIClient = (*Client)(nil)
 // GetPartitionIndexesPaginatorOptions is the paginator options for
 // GetPartitionIndexes
 type GetPartitionIndexesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -11,9 +11,9 @@ import (
 	"time"
 )
 
-// Returns metadata related to the given identity, including when the identity was
-// created and any associated linked logins. You must use AWS Developer credentials
-// to call this API.
+// Returns metadata related to the given identity, including when the identity
+// was created and any associated linked logins. You must use AWS Developer
+// credentials to call this API.
 func (c *Client) DescribeIdentity(ctx context.Context, params *DescribeIdentityInput, optFns ...func(*Options)) (*DescribeIdentityOutput, error) {
 	if params == nil {
 		params = &DescribeIdentityInput{}
@@ -29,7 +29,7 @@ func (c *Client) DescribeIdentity(ctx context.Context, params *DescribeIdentityI
 	return out, nil
 }
 
-// Input to the DescribeIdentity action.
+// Input to the DescribeIdentity  action.
 type DescribeIdentityInput struct {
 
 	// A unique identifier in the format REGION:GUID.

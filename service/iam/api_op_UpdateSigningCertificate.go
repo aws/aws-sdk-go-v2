@@ -13,12 +13,13 @@ import (
 
 // Changes the status of the specified user signing certificate from active to
 // disabled, or vice versa. This operation can be used to disable an IAM user's
-// signing certificate as part of a certificate rotation work flow. If the UserName
-// field is not specified, the user name is determined implicitly based on the
-// Amazon Web Services access key ID used to sign the request. This operation works
-// for access keys under the Amazon Web Services account. Consequently, you can use
-// this operation to manage Amazon Web Services account root user credentials even
-// if the Amazon Web Services account has no associated users.
+// signing certificate as part of a certificate rotation work flow. If the
+// UserNamefield is not specified, the user name is determined implicitly based
+// on the Amazon Web Services access key ID used to sign the request. This
+// operation works for access keys under the Amazon Web Services account.
+// Consequently, you can use this operation to manage Amazon Web Services account
+// root user credentials even if the Amazon Web Services account has no associated
+// users.
 func (c *Client) UpdateSigningCertificate(ctx context.Context, params *UpdateSigningCertificateInput, optFns ...func(*Options)) (*UpdateSigningCertificateOutput, error) {
 	if params == nil {
 		params = &UpdateSigningCertificateInput{}
@@ -51,8 +52,8 @@ type UpdateSigningCertificateInput struct {
 	Status types.StatusType
 
 	// The name of the IAM user the signing certificate belongs to. This parameter
-	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters consisting of upper and lowercase alphanumeric characters with no
+	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string
+	// of characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string
 

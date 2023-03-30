@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of IDs for all fleets that the vehicle is associated with. This
-// API operation uses pagination. Specify the nextToken parameter in the request to
-// return more results.
+// Retrieves a list of IDs for all fleets that the vehicle is associated with.
+// This API operation uses pagination. Specify the nextToken parameter in the
+// request to return more results.
 func (c *Client) ListFleetsForVehicle(ctx context.Context, params *ListFleetsForVehicleInput, optFns ...func(*Options)) (*ListFleetsForVehicleOutput, error) {
 	if params == nil {
 		params = &ListFleetsForVehicleInput{}
@@ -141,8 +141,8 @@ type ListFleetsForVehiclePaginatorOptions struct {
 	// The maximum number of items to return, between 1 and 100, inclusive.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -30,7 +30,7 @@ func (c *Client) ListTestGridSessionArtifacts(ctx context.Context, params *ListT
 
 type ListTestGridSessionArtifactsInput struct {
 
-	// The ARN of a TestGridSession.
+	// The ARN of a TestGridSession .
 	//
 	// This member is required.
 	SessionArn *string
@@ -49,7 +49,7 @@ type ListTestGridSessionArtifactsInput struct {
 
 type ListTestGridSessionArtifactsOutput struct {
 
-	// A list of test grid session artifacts for a TestGridSession.
+	// A list of test grid session artifacts for a TestGridSession .
 	Artifacts []types.TestGridSessionArtifact
 
 	// Pagination token.
@@ -138,8 +138,8 @@ type ListTestGridSessionArtifactsPaginatorOptions struct {
 	// The maximum number of results to be returned by a request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

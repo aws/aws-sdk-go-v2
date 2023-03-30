@@ -50,14 +50,14 @@ type DetectPHIOutput struct {
 	// This member is required.
 	Entities []types.Entity
 
-	// The version of the model used to analyze the documents. The version number looks
-	// like X.X.X. You can use this information to track the model used for a
+	// The version of the model used to analyze the documents. The version number
+	// looks like X.X.X. You can use this information to track the model used for a
 	// particular batch of documents.
 	//
 	// This member is required.
 	ModelVersion *string
 
-	// If the result of the previous request to DetectPHI was truncated, include the
+	// If the result of the previous request to DetectPHI  was truncated, include the
 	// PaginationToken to fetch the next page of PHI entities.
 	PaginationToken *string
 

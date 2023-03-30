@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the default values for the quotas for the specified AWS service. A default
-// value does not reflect any quota increases.
+// Lists the default values for the quotas for the specified AWS service. A
+// default value does not reflect any quota increases.
 func (c *Client) ListAWSDefaultServiceQuotas(ctx context.Context, params *ListAWSDefaultServiceQuotasInput, optFns ...func(*Options)) (*ListAWSDefaultServiceQuotasOutput, error) {
 	if params == nil {
 		params = &ListAWSDefaultServiceQuotasInput{}
@@ -141,8 +141,8 @@ type ListAWSDefaultServiceQuotasPaginatorOptions struct {
 	// call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -15,8 +15,8 @@ import (
 // distribution is a globally distributed network of caching servers that improve
 // the performance of your website or web application hosted on a Lightsail
 // instance. For more information, see Content delivery networks in Amazon
-// Lightsail
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-content-delivery-network-distributions).
+// Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-content-delivery-network-distributions)
+// .
 func (c *Client) CreateDistribution(ctx context.Context, params *CreateDistributionInput, optFns ...func(*Options)) (*CreateDistributionOutput, error) {
 	if params == nil {
 		params = &CreateDistributionInput{}
@@ -66,12 +66,12 @@ type CreateDistributionInput struct {
 	// distribution.
 	CacheBehaviors []types.CacheBehaviorPerPath
 
-	// The IP address type for the distribution. The possible values are ipv4 for IPv4
-	// only, and dualstack for IPv4 and IPv6. The default value is dualstack.
+	// The IP address type for the distribution. The possible values are ipv4 for
+	// IPv4 only, and dualstack  for IPv4 and IPv6. The default value is dualstack .
 	IpAddressType types.IpAddressType
 
 	// The tag keys and optional values to add to the distribution during create. Use
-	// the TagResource action to tag a resource after it's created.
+	// the TagResource  action to tag a resource after it's created.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

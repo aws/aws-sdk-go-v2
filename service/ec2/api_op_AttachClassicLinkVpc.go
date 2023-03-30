@@ -10,11 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a
-// VPC. For more information, see Migrate from EC2-Classic to a VPC
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
-// Amazon Elastic Compute Cloud User Guide. Links an EC2-Classic instance to a
-// ClassicLink-enabled VPC through one or more of the VPC's security groups. You
+// We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to
+// a VPC. For more information, see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
+// in the Amazon Elastic Compute Cloud User Guide. Links an EC2-Classic instance to
+// a ClassicLink-enabled VPC through one or more of the VPC's security groups. You
 // cannot link an EC2-Classic instance to more than one VPC at a time. You can only
 // link an instance that's in the running state. An instance is automatically
 // unlinked from a VPC when it's stopped - you can link it to the VPC again when
@@ -39,8 +38,8 @@ func (c *Client) AttachClassicLinkVpc(ctx context.Context, params *AttachClassic
 
 type AttachClassicLinkVpcInput struct {
 
-	// The ID of one or more of the VPC's security groups. You cannot specify security
-	// groups from a different VPC.
+	// The ID of one or more of the VPC's security groups. You cannot specify
+	// security groups from a different VPC.
 	//
 	// This member is required.
 	Groups []string
@@ -57,8 +56,8 @@ type AttachClassicLinkVpcInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	noSmithyDocumentSerde
@@ -66,7 +65,7 @@ type AttachClassicLinkVpcInput struct {
 
 type AttachClassicLinkVpcOutput struct {
 
-	// Returns true if the request succeeds; otherwise, it returns an error.
+	// Returns true  if the request succeeds; otherwise, it returns an error.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

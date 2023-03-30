@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a NamedQuery object. The database or workgroup cannot be updated.
+// Updates a NamedQuery  object. The database or workgroup cannot be updated.
 func (c *Client) UpdateNamedQuery(ctx context.Context, params *UpdateNamedQueryInput, optFns ...func(*Options)) (*UpdateNamedQueryOutput, error) {
 	if params == nil {
 		params = &UpdateNamedQueryInput{}

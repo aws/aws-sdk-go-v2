@@ -37,21 +37,21 @@ type DescribeDataSharesForConsumerInput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeDataSharesForConsumer request
-	// exceed the value specified in MaxRecords, Amazon Web Services returns a value in
-	// the Marker field of the response. You can retrieve the next set of response
+	// exceed the value specified in MaxRecords, Amazon Web Services returns a value
+	// in the Marker field of the response. You can retrieve the next set of response
 	// records by providing the returned marker value in the Marker parameter and
 	// retrying the request.
 	Marker *string
 
-	// The maximum number of response records to return in each call. If the number of
-	// remaining response records exceeds the specified MaxRecords value, a value is
-	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value.
+	// The maximum number of response records to return in each call. If the number
+	// of remaining response records exceeds the specified MaxRecords value, a value
+	// is returned in a marker field of the response. You can retrieve the next set
+	// of records by retrying the command with the returned marker value.
 	MaxRecords *int32
 
-	// An identifier giving the status of a datashare in the consumer cluster. If this
-	// field is specified, Amazon Redshift returns the list of datashares that have the
-	// specified status.
+	// An identifier giving the status of a datashare in the consumer cluster. If
+	// this field is specified, Amazon Redshift returns the list of datashares that
+	// have the specified status.
 	Status types.DataShareStatusForConsumer
 
 	noSmithyDocumentSerde
@@ -64,8 +64,8 @@ type DescribeDataSharesForConsumerOutput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeDataSharesForConsumer request
-	// exceed the value specified in MaxRecords, Amazon Web Services returns a value in
-	// the Marker field of the response. You can retrieve the next set of response
+	// exceed the value specified in MaxRecords, Amazon Web Services returns a value
+	// in the Marker field of the response. You can retrieve the next set of response
 	// records by providing the returned marker value in the Marker parameter and
 	// retrying the request.
 	Marker *string
@@ -147,14 +147,14 @@ var _ DescribeDataSharesForConsumerAPIClient = (*Client)(nil)
 // DescribeDataSharesForConsumerPaginatorOptions is the paginator options for
 // DescribeDataSharesForConsumer
 type DescribeDataSharesForConsumerPaginatorOptions struct {
-	// The maximum number of response records to return in each call. If the number of
-	// remaining response records exceeds the specified MaxRecords value, a value is
-	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value.
+	// The maximum number of response records to return in each call. If the number
+	// of remaining response records exceeds the specified MaxRecords value, a value
+	// is returned in a marker field of the response. You can retrieve the next set
+	// of records by retrying the command with the returned marker value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -34,9 +34,9 @@ const (
 	ActionStatusEligible      ActionStatus = "ELIGIBLE"
 )
 
-// Values returns all known values for ActionStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ActionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ActionStatus) Values() []ActionStatus {
 	return []ActionStatus{
 		"PENDING_UPDATE",
@@ -76,8 +76,8 @@ const (
 	AutoTuneDesiredStateDisabled AutoTuneDesiredState = "DISABLED"
 )
 
-// Values returns all known values for AutoTuneDesiredState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AutoTuneDesiredState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AutoTuneDesiredState) Values() []AutoTuneDesiredState {
 	return []AutoTuneDesiredState{
@@ -125,9 +125,9 @@ const (
 	AutoTuneTypeScheduledAction AutoTuneType = "SCHEDULED_ACTION"
 )
 
-// Values returns all known values for AutoTuneType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AutoTuneType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AutoTuneType) Values() []AutoTuneType {
 	return []AutoTuneType{
 		"SCHEDULED_ACTION",
@@ -270,9 +270,10 @@ const (
 	InboundConnectionStatusCodeDeleted           InboundConnectionStatusCode = "DELETED"
 )
 
-// Values returns all known values for InboundConnectionStatusCode. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InboundConnectionStatusCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (InboundConnectionStatusCode) Values() []InboundConnectionStatusCode {
 	return []InboundConnectionStatusCode{
 		"PENDING_ACCEPTANCE",
@@ -543,9 +544,9 @@ const (
 	OptionStateActive                 OptionState = "Active"
 )
 
-// Values returns all known values for OptionState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OptionState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (OptionState) Values() []OptionState {
 	return []OptionState{
 		"RequiresIndexDocuments",
@@ -570,9 +571,10 @@ const (
 	OutboundConnectionStatusCodeDeleted           OutboundConnectionStatusCode = "DELETED"
 )
 
-// Values returns all known values for OutboundConnectionStatusCode. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for OutboundConnectionStatusCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (OutboundConnectionStatusCode) Values() []OutboundConnectionStatusCode {
 	return []OutboundConnectionStatusCode{
 		"VALIDATING",
@@ -647,9 +649,9 @@ const (
 	PackageTypeTxtDictionary PackageType = "TXT-DICTIONARY"
 )
 
-// Values returns all known values for PackageType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PackageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PackageType) Values() []PackageType {
 	return []PackageType{
 		"TXT-DICTIONARY",
@@ -741,9 +743,10 @@ const (
 	ScheduledAutoTuneActionTypeJvmYoungGenTuning ScheduledAutoTuneActionType = "JVM_YOUNG_GEN_TUNING"
 )
 
-// Values returns all known values for ScheduledAutoTuneActionType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ScheduledAutoTuneActionType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ScheduledAutoTuneActionType) Values() []ScheduledAutoTuneActionType {
 	return []ScheduledAutoTuneActionType{
 		"JVM_HEAP_SIZE_TUNING",
@@ -780,9 +783,9 @@ const (
 	ScheduledBySystem   ScheduledBy = "SYSTEM"
 )
 
-// Values returns all known values for ScheduledBy. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ScheduledBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ScheduledBy) Values() []ScheduledBy {
 	return []ScheduledBy{
 		"CUSTOMER",
@@ -797,9 +800,9 @@ const (
 	TimeUnitHours TimeUnit = "HOURS"
 )
 
-// Values returns all known values for TimeUnit. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for TimeUnit. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TimeUnit) Values() []TimeUnit {
 	return []TimeUnit{
 		"HOURS",
@@ -855,9 +858,9 @@ const (
 	UpgradeStepUpgrade         UpgradeStep = "UPGRADE"
 )
 
-// Values returns all known values for UpgradeStep. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UpgradeStep. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (UpgradeStep) Values() []UpgradeStep {
 	return []UpgradeStep{
 		"PRE_UPGRADE_CHECK",
@@ -896,8 +899,8 @@ const (
 	VpcEndpointErrorCodeServerError      VpcEndpointErrorCode = "SERVER_ERROR"
 )
 
-// Values returns all known values for VpcEndpointErrorCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for VpcEndpointErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (VpcEndpointErrorCode) Values() []VpcEndpointErrorCode {
 	return []VpcEndpointErrorCode{

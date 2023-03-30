@@ -44,7 +44,8 @@ type StartSNOMEDCTInferenceJobInput struct {
 	// This member is required.
 	InputDataConfig *types.InputDataConfig
 
-	// The language of the input documents. All documents must be in the same language.
+	// The language of the input documents. All documents must be in the same
+	// language.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
@@ -54,8 +55,8 @@ type StartSNOMEDCTInferenceJobInput struct {
 	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
 
-	// A unique identifier for the request. If you don't set the client request token,
-	// Amazon Comprehend Medical generates one.
+	// A unique identifier for the request. If you don't set the client request
+	// token, Amazon Comprehend Medical generates one.
 	ClientRequestToken *string
 
 	// The user generated name the asynchronous InferSNOMEDCT job.

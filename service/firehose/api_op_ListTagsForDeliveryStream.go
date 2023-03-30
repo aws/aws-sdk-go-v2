@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the tags for the specified delivery stream. This operation has a limit of
-// five transactions per second per account.
+// Lists the tags for the specified delivery stream. This operation has a limit
+// of five transactions per second per account.
 func (c *Client) ListTagsForDeliveryStream(ctx context.Context, params *ListTagsForDeliveryStreamInput, optFns ...func(*Options)) (*ListTagsForDeliveryStreamOutput, error) {
 	if params == nil {
 		params = &ListTagsForDeliveryStreamInput{}
@@ -36,12 +36,12 @@ type ListTagsForDeliveryStreamInput struct {
 	DeliveryStreamName *string
 
 	// The key to use as the starting point for the list of tags. If you set this
-	// parameter, ListTagsForDeliveryStream gets all tags that occur after
-	// ExclusiveStartTagKey.
+	// parameter, ListTagsForDeliveryStream  gets all tags that occur after
+	// ExclusiveStartTagKey .
 	ExclusiveStartTagKey *string
 
 	// The number of tags to return. If this number is less than the total number of
-	// tags associated with the delivery stream, HasMoreTags is set to true in the
+	// tags associated with the delivery stream, HasMoreTags  is set to true in the
 	// response. To list additional tags, set ExclusiveStartTagKey to the last key in
 	// the response.
 	Limit *int32
@@ -51,15 +51,15 @@ type ListTagsForDeliveryStreamInput struct {
 
 type ListTagsForDeliveryStreamOutput struct {
 
-	// If this is true in the response, more tags are available. To list the remaining
-	// tags, set ExclusiveStartTagKey to the key of the last tag returned and call
-	// ListTagsForDeliveryStream again.
+	// If this is true in the response, more tags are available. To list the
+	// remaining tags, set ExclusiveStartTagKey to the key of the last tag returned
+	// and call ListTagsForDeliveryStream  again.
 	//
 	// This member is required.
 	HasMoreTags *bool
 
 	// A list of tags associated with DeliveryStreamName, starting with the first tag
-	// after ExclusiveStartTagKey and up to the specified Limit.
+	// after ExclusiveStartTagKey  and up to the specified Limit .
 	//
 	// This member is required.
 	Tags []types.Tag

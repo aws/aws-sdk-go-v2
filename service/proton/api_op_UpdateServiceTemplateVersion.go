@@ -29,12 +29,12 @@ func (c *Client) UpdateServiceTemplateVersion(ctx context.Context, params *Updat
 
 type UpdateServiceTemplateVersionInput struct {
 
-	// To update a major version of a service template, include major Version.
+	// To update a major version of a service template, include major Version .
 	//
 	// This member is required.
 	MajorVersion *string
 
-	// To update a minor version of a service template, include minorVersion.
+	// To update a minor version of a service template, include minorVersion .
 	//
 	// This member is required.
 	MinorVersion *string
@@ -59,9 +59,9 @@ type UpdateServiceTemplateVersionInput struct {
 	// be attached to service instances based on this service template version. A
 	// change to supportedComponentSources doesn't impact existing component
 	// attachments to instances based on this template version. A change only affects
-	// later associations. For more information about components, see Proton components
-	// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
-	// Proton User Guide.
+	// later associations. For more information about components, see Proton
+	// components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
+	// in the Proton User Guide.
 	SupportedComponentSources []types.ServiceTemplateSupportedComponentSourceType
 
 	noSmithyDocumentSerde

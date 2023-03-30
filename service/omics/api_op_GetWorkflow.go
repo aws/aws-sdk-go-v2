@@ -214,8 +214,8 @@ type WorkflowActiveWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, WorkflowActiveWaiter will use default max delay of 30 seconds. Note
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, WorkflowActiveWaiter will use default max delay of 30 seconds. Note
 	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
@@ -256,9 +256,9 @@ func NewWorkflowActiveWaiter(client GetWorkflowAPIClient, optFns ...func(*Workfl
 	}
 }
 
-// Wait calls the waiter function for WorkflowActive waiter. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// Wait calls the waiter function for WorkflowActive waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *WorkflowActiveWaiter) Wait(ctx context.Context, params *GetWorkflowInput, maxWaitDur time.Duration, optFns ...func(*WorkflowActiveWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err

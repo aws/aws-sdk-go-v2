@@ -31,7 +31,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 	return out, nil
 }
 
-// Contains the parameters for TagResource.
+// Contains the parameters for TagResource .
 type TagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource that tags are added to. Batch
@@ -42,11 +42,10 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The tags that you apply to the resource to help you categorize and organize your
-	// resources. Each tag consists of a key and an optional value. For more
-	// information, see Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in Amazon Web
-	// Services General Reference.
+	// The tags that you apply to the resource to help you categorize and organize
+	// your resources. Each tag consists of a key and an optional value. For more
+	// information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in Amazon Web Services General Reference.
 	//
 	// This member is required.
 	Tags map[string]string

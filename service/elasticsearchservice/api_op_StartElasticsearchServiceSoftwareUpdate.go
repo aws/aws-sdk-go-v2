@@ -40,8 +40,8 @@ type StartElasticsearchServiceSoftwareUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a StartElasticsearchServiceSoftwareUpdate operation. Contains the
-// status of the update.
+// The result of a StartElasticsearchServiceSoftwareUpdate operation. Contains
+// the status of the update.
 type StartElasticsearchServiceSoftwareUpdateOutput struct {
 
 	// The current status of the Elasticsearch service software update.

@@ -33,7 +33,7 @@ import (
 // conflicting merges. This is a required field, and the service updates the
 // configuration only if the existing configuration has a version ID that matches.
 // After the update is applied successfully, the version ID is updated, and can be
-// retrieved using DescribeDeliveryStream. Use the new version ID to set
+// retrieved using DescribeDeliveryStream . Use the new version ID to set
 // CurrentDeliveryStreamVersionId in the next call.
 func (c *Client) UpdateDestination(ctx context.Context, params *UpdateDestinationInput, optFns ...func(*Options)) (*UpdateDestinationOutput, error) {
 	if params == nil {
@@ -52,12 +52,12 @@ func (c *Client) UpdateDestination(ctx context.Context, params *UpdateDestinatio
 
 type UpdateDestinationInput struct {
 
-	// Obtain this value from the VersionId result of DeliveryStreamDescription. This
-	// value is required, and helps the service perform conditional operations. For
-	// example, if there is an interleaving update and this value is null, then the
-	// update destination fails. After the update is successful, the VersionId value is
-	// updated. The service then performs a merge of the old configuration with the new
-	// configuration.
+	// Obtain this value from the VersionId  result of DeliveryStreamDescription.
+	// This value is required, and helps the service perform conditional operations.
+	// For example, if there is an interleaving update and this value is null, then the
+	// update destination fails. After the update is successful, the VersionId value
+	// is updated. The service then performs a merge of the old configuration with the
+	// new configuration.
 	//
 	// This member is required.
 	CurrentDeliveryStreamVersionId *string

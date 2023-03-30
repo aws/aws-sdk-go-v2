@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of Synthetics canary runtime versions. For more information, see
-// Canary Runtime Versions
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html).
+// Returns a list of Synthetics canary runtime versions. For more information,
+// see Canary Runtime Versions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html)
+// .
 func (c *Client) DescribeRuntimeVersions(ctx context.Context, params *DescribeRuntimeVersionsInput, optFns ...func(*Options)) (*DescribeRuntimeVersionsOutput, error) {
 	if params == nil {
 		params = &DescribeRuntimeVersionsInput{}
@@ -32,14 +32,14 @@ func (c *Client) DescribeRuntimeVersions(ctx context.Context, params *DescribeRu
 
 type DescribeRuntimeVersionsInput struct {
 
-	// Specify this parameter to limit how many runs are returned each time you use the
-	// DescribeRuntimeVersions operation. If you omit this parameter, the default of
-	// 100 is used.
+	// Specify this parameter to limit how many runs are returned each time you use
+	// the DescribeRuntimeVersions operation. If you omit this parameter, the default
+	// of 100 is used.
 	MaxResults *int32
 
-	// A token that indicates that there is more data available. You can use this token
-	// in a subsequent DescribeRuntimeVersions operation to retrieve the next set of
-	// results.
+	// A token that indicates that there is more data available. You can use this
+	// token in a subsequent DescribeRuntimeVersions operation to retrieve the next
+	// set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,9 +47,9 @@ type DescribeRuntimeVersionsInput struct {
 
 type DescribeRuntimeVersionsOutput struct {
 
-	// A token that indicates that there is more data available. You can use this token
-	// in a subsequent DescribeRuntimeVersions operation to retrieve the next set of
-	// results.
+	// A token that indicates that there is more data available. You can use this
+	// token in a subsequent DescribeRuntimeVersions operation to retrieve the next
+	// set of results.
 	NextToken *string
 
 	// An array of objects that display the details about each Synthetics canary
@@ -133,13 +133,13 @@ var _ DescribeRuntimeVersionsAPIClient = (*Client)(nil)
 // DescribeRuntimeVersionsPaginatorOptions is the paginator options for
 // DescribeRuntimeVersions
 type DescribeRuntimeVersionsPaginatorOptions struct {
-	// Specify this parameter to limit how many runs are returned each time you use the
-	// DescribeRuntimeVersions operation. If you omit this parameter, the default of
-	// 100 is used.
+	// Specify this parameter to limit how many runs are returned each time you use
+	// the DescribeRuntimeVersions operation. If you omit this parameter, the default
+	// of 100 is used.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

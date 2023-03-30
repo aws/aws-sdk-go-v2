@@ -39,7 +39,8 @@ type ListIdentitiesInput struct {
 	// "Domain". If this parameter is omitted, then all identities will be listed.
 	IdentityType types.IdentityType
 
-	// The maximum number of identities per page. Possible values are 1-1000 inclusive.
+	// The maximum number of identities per page. Possible values are 1-1000
+	// inclusive.
 	MaxItems *int32
 
 	// The token to use for pagination.
@@ -136,11 +137,12 @@ var _ ListIdentitiesAPIClient = (*Client)(nil)
 
 // ListIdentitiesPaginatorOptions is the paginator options for ListIdentities
 type ListIdentitiesPaginatorOptions struct {
-	// The maximum number of identities per page. Possible values are 1-1000 inclusive.
+	// The maximum number of identities per page. Possible values are 1-1000
+	// inclusive.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

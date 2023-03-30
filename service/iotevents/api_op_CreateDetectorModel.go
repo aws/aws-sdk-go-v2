@@ -52,11 +52,11 @@ type CreateDetectorModelInput struct {
 	// executed.
 	EvaluationMethod types.EvaluationMethod
 
-	// The input attribute key used to identify a device or system to create a detector
-	// (an instance of the detector model) and then to route each input received to the
-	// appropriate detector (instance). This parameter uses a JSON-path expression in
-	// the message payload of each input to specify the attribute-value pair that is
-	// used to identify the device associated with the input.
+	// The input attribute key used to identify a device or system to create a
+	// detector (an instance of the detector model) and then to route each input
+	// received to the appropriate detector (instance). This parameter uses a JSON-path
+	// expression in the message payload of each input to specify the attribute-value
+	// pair that is used to identify the device associated with the input.
 	Key *string
 
 	// Metadata that can be used to manage the detector model.

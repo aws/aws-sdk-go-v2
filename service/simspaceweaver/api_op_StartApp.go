@@ -46,8 +46,8 @@ type StartAppInput struct {
 	Simulation *string
 
 	// A value that you provide to ensure that repeated calls to this API operation
-	// using the same parameters complete only once. A ClientToken is also known as an
-	// idempotency token. A ClientToken expires after 24 hours.
+	// using the same parameters complete only once. A ClientToken is also known as
+	// an idempotency token. A ClientToken  expires after 24 hours.
 	ClientToken *string
 
 	// The description of the app.

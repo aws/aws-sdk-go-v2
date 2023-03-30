@@ -29,13 +29,13 @@ func (c *Client) ResetResourceLogLevel(ctx context.Context, params *ResetResourc
 
 type ResetResourceLogLevelInput struct {
 
-	// The identifier of the resource. For a Wireless Device, it is the wireless device
-	// ID. For a wireless gateway, it is the wireless gateway ID.
+	// The identifier of the resource. For a Wireless Device, it is the wireless
+	// device ID. For a wireless gateway, it is the wireless gateway ID.
 	//
 	// This member is required.
 	ResourceIdentifier *string
 
-	// The type of the resource, which can be WirelessDevice or WirelessGateway.
+	// The type of the resource, which can be WirelessDevice  or WirelessGateway .
 	//
 	// This member is required.
 	ResourceType *string

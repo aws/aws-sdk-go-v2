@@ -31,9 +31,9 @@ const (
 	AnswerReasonNone                    AnswerReason = "NONE"
 )
 
-// Values returns all known values for AnswerReason. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AnswerReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AnswerReason) Values() []AnswerReason {
 	return []AnswerReason{
 		"OUT_OF_SCOPE",
@@ -93,9 +93,9 @@ const (
 	CheckStatusFetchFailed  CheckStatus = "FETCH_FAILED"
 )
 
-// Values returns all known values for CheckStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CheckStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (CheckStatus) Values() []CheckStatus {
 	return []CheckStatus{
 		"OKAY",
@@ -117,9 +117,9 @@ const (
 	ChoiceReasonNone                    ChoiceReason = "NONE"
 )
 
-// Values returns all known values for ChoiceReason. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChoiceReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ChoiceReason) Values() []ChoiceReason {
 	return []ChoiceReason{
 		"OUT_OF_SCOPE",
@@ -139,9 +139,9 @@ const (
 	ChoiceStatusUnselected    ChoiceStatus = "UNSELECTED"
 )
 
-// Values returns all known values for ChoiceStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChoiceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ChoiceStatus) Values() []ChoiceStatus {
 	return []ChoiceStatus{
 		"SELECTED",
@@ -243,9 +243,9 @@ const (
 	LensTypeCustomSelf   LensType = "CUSTOM_SELF"
 )
 
-// Values returns all known values for LensType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for LensType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (LensType) Values() []LensType {
 	return []LensType{
 		"AWS_OFFICIAL",
@@ -319,8 +319,8 @@ const (
 	RiskNotApplicable Risk = "NOT_APPLICABLE"
 )
 
-// Values returns all known values for Risk. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
+// Values returns all known values for Risk. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
 func (Risk) Values() []Risk {
 	return []Risk{
@@ -340,8 +340,8 @@ const (
 	ShareInvitationActionReject ShareInvitationAction = "REJECT"
 )
 
-// Values returns all known values for ShareInvitationAction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ShareInvitationAction. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ShareInvitationAction) Values() []ShareInvitationAction {
 	return []ShareInvitationAction{
@@ -382,9 +382,9 @@ const (
 	ShareStatusFailed      ShareStatus = "FAILED"
 )
 
-// Values returns all known values for ShareStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ShareStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ShareStatus) Values() []ShareStatus {
 	return []ShareStatus{
 		"ACCEPTED",

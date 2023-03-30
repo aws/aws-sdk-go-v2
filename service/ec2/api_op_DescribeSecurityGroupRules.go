@@ -32,30 +32,25 @@ type DescribeSecurityGroupRulesInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// One or more filters.
-	// - group-id - The ID of the security group.
-	// -
-	// security-group-rule-id - The ID of the security group rule.
-	// - tag: - The
-	// key/value combination of a tag assigned to the resource. Use the tag key in the
-	// filter name and the tag value as the filter value. For example, to find all
-	// resources that have a tag with the key Owner and the value TeamA, specify
-	// tag:Owner for the filter name and TeamA for the filter value.
+	//     - group-id - The ID of the security group.
+	//     - security-group-rule-id - The ID of the security group rule.
+	//     - tag : - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA , specify tag:Owner for the filter name and TeamA for the filter value.
 	Filters []types.Filter
 
-	// The maximum number of items to return for this request. To get the next page of
-	// items, make another request with the token returned in the output. This value
+	// The maximum number of items to return for this request. To get the next page
+	// of items, make another request with the token returned in the output. This value
 	// can be between 5 and 1000. If this parameter is not specified, then all items
-	// are returned. For more information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// are returned. For more information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	MaxResults *int32
 
-	// The token returned from a previous paginated request. Pagination continues from
-	// the end of the items returned by the previous request.
+	// The token returned from a previous paginated request. Pagination continues
+	// from the end of the items returned by the previous request.
 	NextToken *string
 
 	// The IDs of the security group rules.
@@ -67,7 +62,7 @@ type DescribeSecurityGroupRulesInput struct {
 type DescribeSecurityGroupRulesOutput struct {
 
 	// The token to include in another request to get the next page of items. This
-	// value is null when there are no more items to return.
+	// value is null  when there are no more items to return.
 	NextToken *string
 
 	// Information about security group rules.
@@ -150,15 +145,15 @@ var _ DescribeSecurityGroupRulesAPIClient = (*Client)(nil)
 // DescribeSecurityGroupRulesPaginatorOptions is the paginator options for
 // DescribeSecurityGroupRules
 type DescribeSecurityGroupRulesPaginatorOptions struct {
-	// The maximum number of items to return for this request. To get the next page of
-	// items, make another request with the token returned in the output. This value
+	// The maximum number of items to return for this request. To get the next page
+	// of items, make another request with the token returned in the output. This value
 	// can be between 5 and 1000. If this parameter is not specified, then all items
-	// are returned. For more information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// are returned. For more information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

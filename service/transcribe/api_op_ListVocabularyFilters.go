@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides a list of custom vocabulary filters that match the specified criteria.
-// If no criteria are specified, all custom vocabularies are returned. To get
-// detailed information about a specific custom vocabulary filter, use the
+// Provides a list of custom vocabulary filters that match the specified
+// criteria. If no criteria are specified, all custom vocabularies are returned. To
+// get detailed information about a specific custom vocabulary filter, use the
 // operation.
 func (c *Client) ListVocabularyFilters(ctx context.Context, params *ListVocabularyFiltersInput, optFns ...func(*Options)) (*ListVocabularyFiltersOutput, error) {
 	if params == nil {
@@ -44,8 +44,8 @@ type ListVocabularyFiltersInput struct {
 	NameContains *string
 
 	// If your ListVocabularyFilters request returns more results than can be
-	// displayed, NextToken is displayed in the response with an associated string. To
-	// get the next page of results, copy this string and repeat your request,
+	// displayed, NextToken is displayed in the response with an associated string.
+	// To get the next page of results, copy this string and repeat your request,
 	// including NextToken with the value of the copied string. Repeat as needed to
 	// view all your results.
 	NextToken *string
@@ -55,15 +55,15 @@ type ListVocabularyFiltersInput struct {
 
 type ListVocabularyFiltersOutput struct {
 
-	// If NextToken is present in your response, it indicates that not all results are
-	// displayed. To view the next set of results, copy the string associated with the
-	// NextToken parameter in your results output, then run your request again
+	// If NextToken is present in your response, it indicates that not all results
+	// are displayed. To view the next set of results, copy the string associated with
+	// the NextToken parameter in your results output, then run your request again
 	// including NextToken with the value of the copied string. Repeat as needed to
 	// view all your results.
 	NextToken *string
 
-	// Provides information about the custom vocabulary filters that match the criteria
-	// specified in your request.
+	// Provides information about the custom vocabulary filters that match the
+	// criteria specified in your request.
 	VocabularyFilters []types.VocabularyFilterInfo
 
 	// Metadata pertaining to the operation's result.
@@ -149,8 +149,8 @@ type ListVocabularyFiltersPaginatorOptions struct {
 	// used.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

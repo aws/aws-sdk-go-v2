@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the emergency calling configuration details for the specified Amazon Chime
-// Voice Connector.
+// Gets the emergency calling configuration details for the specified Amazon
+// Chime Voice Connector.
 func (c *Client) GetVoiceConnectorEmergencyCallingConfiguration(ctx context.Context, params *GetVoiceConnectorEmergencyCallingConfigurationInput, optFns ...func(*Options)) (*GetVoiceConnectorEmergencyCallingConfigurationOutput, error) {
 	if params == nil {
 		params = &GetVoiceConnectorEmergencyCallingConfigurationInput{}

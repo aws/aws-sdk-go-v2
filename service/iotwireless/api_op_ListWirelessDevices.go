@@ -133,8 +133,8 @@ func (c *Client) addOperationListWirelessDevicesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListWirelessDevicesAPIClient is a client that implements the ListWirelessDevices
-// operation.
+// ListWirelessDevicesAPIClient is a client that implements the
+// ListWirelessDevices operation.
 type ListWirelessDevicesAPIClient interface {
 	ListWirelessDevices(context.Context, *ListWirelessDevicesInput, ...func(*Options)) (*ListWirelessDevicesOutput, error)
 }
@@ -147,8 +147,8 @@ type ListWirelessDevicesPaginatorOptions struct {
 	// The maximum number of results to return in this operation.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

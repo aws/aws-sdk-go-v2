@@ -88,9 +88,9 @@ const (
 	ContactListImportActionPut    ContactListImportAction = "PUT"
 )
 
-// Values returns all known values for ContactListImportAction. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ContactListImportAction. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContactListImportAction) Values() []ContactListImportAction {
 	return []ContactListImportAction{
 		"DELETE",
@@ -145,9 +145,9 @@ const (
 	DeliverabilityTestStatusCompleted  DeliverabilityTestStatus = "COMPLETED"
 )
 
-// Values returns all known values for DeliverabilityTestStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DeliverabilityTestStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeliverabilityTestStatus) Values() []DeliverabilityTestStatus {
 	return []DeliverabilityTestStatus{
 		"IN_PROGRESS",
@@ -164,8 +164,8 @@ const (
 	DimensionValueSourceLinkTag     DimensionValueSource = "LINK_TAG"
 )
 
-// Values returns all known values for DimensionValueSource. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DimensionValueSource. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DimensionValueSource) Values() []DimensionValueSource {
 	return []DimensionValueSource{
@@ -183,9 +183,10 @@ const (
 	DkimSigningAttributesOriginExternal DkimSigningAttributesOrigin = "EXTERNAL"
 )
 
-// Values returns all known values for DkimSigningAttributesOrigin. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DkimSigningAttributesOrigin. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (DkimSigningAttributesOrigin) Values() []DkimSigningAttributesOrigin {
 	return []DkimSigningAttributesOrigin{
 		"AWS_SES",
@@ -201,8 +202,8 @@ const (
 	DkimSigningKeyLengthRsa2048Bit DkimSigningKeyLength = "RSA_2048_BIT"
 )
 
-// Values returns all known values for DkimSigningKeyLength. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DkimSigningKeyLength. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DkimSigningKeyLength) Values() []DkimSigningKeyLength {
 	return []DkimSigningKeyLength{
@@ -251,9 +252,9 @@ const (
 	EventTypeSubscription     EventType = "SUBSCRIPTION"
 )
 
-// Values returns all known values for EventType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for EventType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"SEND",
@@ -296,9 +297,9 @@ const (
 	IdentityTypeManagedDomain IdentityType = "MANAGED_DOMAIN"
 )
 
-// Values returns all known values for IdentityType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IdentityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (IdentityType) Values() []IdentityType {
 	return []IdentityType{
 		"EMAIL_ADDRESS",
@@ -315,8 +316,8 @@ const (
 	ImportDestinationTypeContactList     ImportDestinationType = "CONTACT_LIST"
 )
 
-// Values returns all known values for ImportDestinationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ImportDestinationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ImportDestinationType) Values() []ImportDestinationType {
 	return []ImportDestinationType{
@@ -335,9 +336,9 @@ const (
 	JobStatusFailed     JobStatus = "FAILED"
 )
 
-// Values returns all known values for JobStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"CREATED",
@@ -357,9 +358,10 @@ const (
 	ListRecommendationsFilterKeyResourceArn ListRecommendationsFilterKey = "RESOURCE_ARN"
 )
 
-// Values returns all known values for ListRecommendationsFilterKey. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ListRecommendationsFilterKey. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ListRecommendationsFilterKey) Values() []ListRecommendationsFilterKey {
 	return []ListRecommendationsFilterKey{
 		"TYPE",
@@ -379,8 +381,8 @@ const (
 	MailFromDomainStatusTemporaryFailure MailFromDomainStatus = "TEMPORARY_FAILURE"
 )
 
-// Values returns all known values for MailFromDomainStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for MailFromDomainStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (MailFromDomainStatus) Values() []MailFromDomainStatus {
 	return []MailFromDomainStatus{
@@ -399,9 +401,9 @@ const (
 	MailTypeTransactional MailType = "TRANSACTIONAL"
 )
 
-// Values returns all known values for MailType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for MailType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (MailType) Values() []MailType {
 	return []MailType{
 		"MARKETING",
@@ -505,8 +507,8 @@ const (
 	RecommendationImpactHigh RecommendationImpact = "HIGH"
 )
 
-// Values returns all known values for RecommendationImpact. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RecommendationImpact. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationImpact) Values() []RecommendationImpact {
 	return []RecommendationImpact{
@@ -523,8 +525,8 @@ const (
 	RecommendationStatusFixed RecommendationStatus = "FIXED"
 )
 
-// Values returns all known values for RecommendationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RecommendationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationStatus) Values() []RecommendationStatus {
 	return []RecommendationStatus{
@@ -565,9 +567,9 @@ const (
 	ReviewStatusDenied  ReviewStatus = "DENIED"
 )
 
-// Values returns all known values for ReviewStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReviewStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ReviewStatus) Values() []ReviewStatus {
 	return []ReviewStatus{
 		"PENDING",
@@ -585,9 +587,9 @@ const (
 	ScalingModeManaged  ScalingMode = "MANAGED"
 )
 
-// Values returns all known values for ScalingMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ScalingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ScalingMode) Values() []ScalingMode {
 	return []ScalingMode{
 		"STANDARD",
@@ -621,9 +623,10 @@ const (
 	SuppressionListImportActionPut    SuppressionListImportAction = "PUT"
 )
 
-// Values returns all known values for SuppressionListImportAction. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SuppressionListImportAction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (SuppressionListImportAction) Values() []SuppressionListImportAction {
 	return []SuppressionListImportAction{
 		"DELETE",
@@ -639,8 +642,8 @@ const (
 	SuppressionListReasonComplaint SuppressionListReason = "COMPLAINT"
 )
 
-// Values returns all known values for SuppressionListReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SuppressionListReason. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SuppressionListReason) Values() []SuppressionListReason {
 	return []SuppressionListReason{
@@ -657,9 +660,9 @@ const (
 	TlsPolicyOptional TlsPolicy = "OPTIONAL"
 )
 
-// Values returns all known values for TlsPolicy. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for TlsPolicy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TlsPolicy) Values() []TlsPolicy {
 	return []TlsPolicy{
 		"REQUIRE",
@@ -699,9 +702,9 @@ const (
 	WarmupStatusDone       WarmupStatus = "DONE"
 )
 
-// Values returns all known values for WarmupStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for WarmupStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (WarmupStatus) Values() []WarmupStatus {
 	return []WarmupStatus{
 		"IN_PROGRESS",

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Type object.
+// Creates a Type  object.
 func (c *Client) CreateType(ctx context.Context, params *CreateTypeInput, optFns ...func(*Options)) (*CreateTypeOutput, error) {
 	if params == nil {
 		params = &CreateTypeInput{}
@@ -35,8 +35,8 @@ type CreateTypeInput struct {
 	ApiId *string
 
 	// The type definition, in GraphQL Schema Definition Language (SDL) format. For
-	// more information, see the GraphQL SDL documentation
-	// (http://graphql.org/learn/schema/).
+	// more information, see the GraphQL SDL documentation (http://graphql.org/learn/schema/)
+	// .
 	//
 	// This member is required.
 	Definition *string
@@ -51,7 +51,7 @@ type CreateTypeInput struct {
 
 type CreateTypeOutput struct {
 
-	// The Type object.
+	// The Type  object.
 	Type *types.Type
 
 	// Metadata pertaining to the operation's result.

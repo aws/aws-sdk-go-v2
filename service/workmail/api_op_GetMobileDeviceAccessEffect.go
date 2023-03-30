@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Simulates the effect of the mobile device access rules for the given attributes
-// of a sample access event. Use this method to test the effects of the current set
-// of mobile device access rules for the WorkMail organization for a particular
-// user's attributes.
+// Simulates the effect of the mobile device access rules for the given
+// attributes of a sample access event. Use this method to test the effects of the
+// current set of mobile device access rules for the WorkMail organization for a
+// particular user's attributes.
 func (c *Client) GetMobileDeviceAccessEffect(ctx context.Context, params *GetMobileDeviceAccessEffectInput, optFns ...func(*Options)) (*GetMobileDeviceAccessEffectOutput, error) {
 	if params == nil {
 		params = &GetMobileDeviceAccessEffectInput{}
@@ -54,7 +54,7 @@ type GetMobileDeviceAccessEffectInput struct {
 
 type GetMobileDeviceAccessEffectOutput struct {
 
-	// The effect of the simulated access, ALLOW or DENY, after evaluating mobile
+	// The effect of the simulated access, ALLOW  or DENY, after evaluating mobile
 	// device access rules in the WorkMail organization for the simulated user
 	// parameters.
 	Effect types.MobileDeviceAccessRuleEffect

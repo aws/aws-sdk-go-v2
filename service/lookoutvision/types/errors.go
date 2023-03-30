@@ -119,8 +119,9 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A service quota was exceeded the allowed limit. For more information, see Limits
-// in Amazon Lookout for Vision in the Amazon Lookout for Vision Developer Guide.
+// A service quota was exceeded the allowed limit. For more information, see
+// Limits in Amazon Lookout for Vision in the Amazon Lookout for Vision Developer
+// Guide.
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -151,8 +152,8 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Amazon Lookout for Vision is temporarily unable to process the request. Try your
-// call again.
+// Amazon Lookout for Vision is temporarily unable to process the request. Try
+// your call again.
 type ThrottlingException struct {
 	Message *string
 
@@ -182,8 +183,8 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An input validation error occured. For example, invalid characters in a project
-// name, or if a pagination token is invalid.
+// An input validation error occured. For example, invalid characters in a
+// project name, or if a pagination token is invalid.
 type ValidationException struct {
 	Message *string
 

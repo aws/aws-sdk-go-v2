@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the default value for the specified quota. The default value does not
-// reflect any quota increases.
+// Retrieves the default value for the specified quota. The default value does
+// not reflect any quota increases.
 func (c *Client) GetAWSDefaultServiceQuota(ctx context.Context, params *GetAWSDefaultServiceQuotaInput, optFns ...func(*Options)) (*GetAWSDefaultServiceQuotaOutput, error) {
 	if params == nil {
 		params = &GetAWSDefaultServiceQuotaInput{}

@@ -28,16 +28,16 @@ func (c *Client) ListVersions(ctx context.Context, params *ListVersionsInput, op
 	return out, nil
 }
 
-// Container for the request parameters to the ListVersions operation.
+// Container for the request parameters to the ListVersions  operation.
 type ListVersionsInput struct {
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken  to get the next page of results.
 	MaxResults int32
 
-	// If your initial ListVersions operation returns a nextToken, you can include the
-	// returned nextToken in subsequent ListVersions operations, which returns results
-	// in the next page.
+	// If your initial ListVersions  operation returns a nextToken, you can include
+	// the returned nextToken  in subsequent ListVersions operations, which returns
+	// results in the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,8 +47,8 @@ type ListVersionsInput struct {
 // operation.
 type ListVersionsOutput struct {
 
-	// When nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// When nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page.
 	NextToken *string
 
@@ -132,11 +132,11 @@ var _ ListVersionsAPIClient = (*Client)(nil)
 // ListVersionsPaginatorOptions is the paginator options for ListVersions
 type ListVersionsPaginatorOptions struct {
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken  to get the next page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -28,7 +28,7 @@ func (c *Client) DeleteChannel(ctx context.Context, params *DeleteChannelInput, 
 
 type DeleteChannelInput struct {
 
-	// The ARN or the UUID value of the channel that you want to delete.
+	// The ARN or the UUID  value of the channel that you want to delete.
 	//
 	// This member is required.
 	Channel *string

@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Using a device ID, returns a DeviceEventsResponse object containing an array of
-// events for the device.
+// Using a device ID, returns a DeviceEventsResponse object containing an array
+// of events for the device.
 func (c *Client) ListDeviceEvents(ctx context.Context, params *ListDeviceEventsInput, optFns ...func(*Options)) (*ListDeviceEventsOutput, error) {
 	if params == nil {
 		params = &ListDeviceEventsInput{}
@@ -48,8 +48,8 @@ type ListDeviceEventsInput struct {
 	// This member is required.
 	ToTimeStamp *time.Time
 
-	// The maximum number of results to return per request. If not set, a default value
-	// of 100 is used.
+	// The maximum number of results to return per request. If not set, a default
+	// value of 100 is used.
 	MaxResults int32
 
 	// The token to retrieve the next set of results.

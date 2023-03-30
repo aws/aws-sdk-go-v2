@@ -32,13 +32,13 @@ func (c *Client) ListGroupsOlderThanOrderingId(ctx context.Context, params *List
 
 type ListGroupsOlderThanOrderingIdInput struct {
 
-	// The identifier of the index for getting a list of groups mapped to users before
-	// a given ordering or timestamp identifier.
+	// The identifier of the index for getting a list of groups mapped to users
+	// before a given ordering or timestamp identifier.
 	//
 	// This member is required.
 	IndexId *string
 
-	// The timestamp identifier used for the latest PUT or DELETE action for mapping
+	// The timestamp identifier used for the latest PUT  or DELETE action for mapping
 	// users to their groups.
 	//
 	// This member is required.
@@ -67,9 +67,9 @@ type ListGroupsOlderThanOrderingIdOutput struct {
 	// ordering or timestamp identifier.
 	GroupsSummaries []types.GroupSummary
 
-	// If the response is truncated, Amazon Kendra returns this token that you can use
-	// in the subsequent request to retrieve the next set of groups that are mapped to
-	// users before a given ordering or timestamp identifier.
+	// If the response is truncated, Amazon Kendra returns this token that you can
+	// use in the subsequent request to retrieve the next set of groups that are mapped
+	// to users before a given ordering or timestamp identifier.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -156,8 +156,8 @@ type ListGroupsOlderThanOrderingIdPaginatorOptions struct {
 	// ordering or timestamp identifier.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

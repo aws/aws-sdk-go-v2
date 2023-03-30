@@ -30,17 +30,15 @@ func (c *Client) ListStackResources(ctx context.Context, params *ListStackResour
 	return out, nil
 }
 
-// The input for the ListStackResource action.
+// The input for the ListStackResource  action.
 type ListStackResourcesInput struct {
 
-	// The name or the unique stack ID that is associated with the stack, which aren't
-	// always interchangeable:
-	// - Running stacks: You can specify either the stack's
-	// name or its unique stack ID.
-	// - Deleted stacks: You must specify the unique stack
-	// ID.
-	//
-	// Default: There is no default value.
+	// The name or the unique stack ID that is associated with the stack, which
+	// aren't always interchangeable:
+	//     - Running stacks: You can specify either the stack's name or its unique stack ID.
+	//     - Deleted stacks: You must specify the unique stack ID.
+	// Default: There is
+	// no default value.
 	//
 	// This member is required.
 	StackName *string
@@ -52,14 +50,14 @@ type ListStackResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
-// The output for a ListStackResources action.
+// The output for a ListStackResources  action.
 type ListStackResourcesOutput struct {
 
 	// If the output exceeds 1 MB, a string that identifies the next page of stack
 	// resources. If no additional page exists, this value is null.
 	NextToken *string
 
-	// A list of StackResourceSummary structures.
+	// A list of StackResourceSummary  structures.
 	StackResourceSummaries []types.StackResourceSummary
 
 	// Metadata pertaining to the operation's result.
@@ -142,8 +140,8 @@ var _ ListStackResourcesAPIClient = (*Client)(nil)
 // ListStackResourcesPaginatorOptions is the paginator options for
 // ListStackResources
 type ListStackResourcesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

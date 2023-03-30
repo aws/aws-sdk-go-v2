@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a virtual private gateway. A virtual private gateway is the endpoint on
-// the VPC side of your VPN connection. You can create a virtual private gateway
+// Creates a virtual private gateway. A virtual private gateway is the endpoint
+// on the VPC side of your VPN connection. You can create a virtual private gateway
 // before creating the VPC itself. For more information, see Amazon Web Services
-// Site-to-Site VPN (https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) in
-// the Amazon Web Services Site-to-Site VPN User Guide.
+// Site-to-Site VPN (https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html)
+// in the Amazon Web Services Site-to-Site VPN User Guide.
 func (c *Client) CreateVpnGateway(ctx context.Context, params *CreateVpnGatewayInput, optFns ...func(*Options)) (*CreateVpnGatewayOutput, error) {
 	if params == nil {
 		params = &CreateVpnGatewayInput{}
@@ -50,8 +50,8 @@ type CreateVpnGatewayInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The tags to apply to the virtual private gateway.

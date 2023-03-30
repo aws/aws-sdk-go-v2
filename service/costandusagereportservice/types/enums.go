@@ -54,9 +54,9 @@ const (
 	AWSRegionNingxia            AWSRegion = "cn-northwest-1"
 )
 
-// Values returns all known values for AWSRegion. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for AWSRegion. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (AWSRegion) Values() []AWSRegion {
 	return []AWSRegion{
 		"af-south-1",
@@ -116,9 +116,9 @@ const (
 	ReportFormatParquet ReportFormat = "Parquet"
 )
 
-// Values returns all known values for ReportFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ReportFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ReportFormat) Values() []ReportFormat {
 	return []ReportFormat{
 		"textORcsv",
@@ -169,9 +169,9 @@ const (
 	TimeUnitMonthly TimeUnit = "MONTHLY"
 )
 
-// Values returns all known values for TimeUnit. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for TimeUnit. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TimeUnit) Values() []TimeUnit {
 	return []TimeUnit{
 		"HOURLY",

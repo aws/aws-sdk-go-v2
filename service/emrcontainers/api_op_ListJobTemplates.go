@@ -13,8 +13,8 @@ import (
 	"time"
 )
 
-// Lists job templates based on a set of parameters. Job template stores values of
-// StartJobRun API request in a template and can be used to start a job run. Job
+// Lists job templates based on a set of parameters. Job template stores values
+// of StartJobRun API request in a template and can be used to start a job run. Job
 // template allows two use cases: avoid repeating recurring StartJobRun API request
 // values, enforcing certain values in StartJobRun API request.
 func (c *Client) ListJobTemplates(ctx context.Context, params *ListJobTemplatesInput, optFns ...func(*Options)) (*ListJobTemplatesOutput, error) {
@@ -136,8 +136,8 @@ type ListJobTemplatesPaginatorOptions struct {
 	// The maximum number of job templates that can be listed.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -34,8 +34,8 @@ type DescribeExclusionsInput struct {
 	// This member is required.
 	ExclusionArns []string
 
-	// The locale into which you want to translate the exclusion's title, description,
-	// and recommendation.
+	// The locale into which you want to translate the exclusion's title,
+	// description, and recommendation.
 	Locale types.Locale
 
 	noSmithyDocumentSerde

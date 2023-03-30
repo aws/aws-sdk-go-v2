@@ -32,14 +32,14 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the given Amazon Comprehend resource to which
-	// you want to associate the tags.
+	// The Amazon Resource Name (ARN) of the given Amazon Comprehend resource to
+	// which you want to associate the tags.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// Tags being associated with a specific Amazon Comprehend resource. There can be a
-	// maximum of 50 tags (both existing and pending) associated with a specific
+	// Tags being associated with a specific Amazon Comprehend resource. There can be
+	// a maximum of 50 tags (both existing and pending) associated with a specific
 	// resource.
 	//
 	// This member is required.

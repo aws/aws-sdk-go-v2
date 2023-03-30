@@ -55,8 +55,8 @@ type GetFleetOutput struct {
 	// This member is required.
 	Id *string
 
-	// The time the fleet was last updated, in seconds since epoch (January 1, 1970 at
-	// midnight UTC time).
+	// The time the fleet was last updated, in seconds since epoch (January 1, 1970
+	// at midnight UTC time).
 	//
 	// This member is required.
 	LastModificationTime *time.Time

@@ -37,8 +37,8 @@ type DeleteAppInput struct {
 	// the application while deleting the application.
 	ForceStopAppReplication *bool
 
-	// Indicates whether to terminate the stack corresponding to the application while
-	// deleting the application.
+	// Indicates whether to terminate the stack corresponding to the application
+	// while deleting the application.
 	ForceTerminateApp *bool
 
 	noSmithyDocumentSerde

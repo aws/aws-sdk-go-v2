@@ -13,8 +13,8 @@ type ConnectionState struct {
 	// The last time the connection status was updated.
 	LastUpdatedAt *time.Time
 
-	// The connection status of the tunnel. Valid values are CONNECTED and
-	// DISCONNECTED.
+	// The connection status of the tunnel. Valid values are CONNECTED  and
+	// DISCONNECTED .
 	Status ConnectionStatus
 
 	noSmithyDocumentSerde

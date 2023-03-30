@@ -14,15 +14,14 @@ import (
 
 // Lists tags that are attached to the specified resource. You can attach tags to
 // the following resources in Organizations.
-// - Amazon Web Services account
-// -
-// Organization root
-// - Organizational unit (OU)
-// - Policy (any type)
+//   - Amazon Web Services account
+//   - Organization root
+//   - Organizational unit (OU)
+//   - Policy (any type)
 //
-// This operation
-// can be called only from the organization's management account or by a member
-// account that is a delegated administrator for an Amazon Web Services service.
+// This operation can be called only from the
+// organization's management account or by a member account that is a delegated
+// administrator for an Amazon Web Services service.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -42,22 +41,18 @@ type ListTagsForResourceInput struct {
 
 	// The ID of the resource with the tags to list. You can specify any of the
 	// following taggable resources.
-	// - Amazon Web Services account – specify the
-	// account ID number.
-	// - Organizational unit – specify the OU ID that begins with
-	// ou- and looks similar to: ou-1a2b-34uvwxyz
-	// - Root – specify the root ID that
-	// begins with r- and looks similar to: r-1a2b
-	// - Policy – specify the policy ID
-	// that begins with p- andlooks similar to: p-12abcdefg3
+	//     - Amazon Web Services account – specify the account ID number.
+	//     - Organizational unit – specify the OU ID that begins with ou- and looks similar to: ou-1a2b-34uvwxyz
+	//     - Root – specify the root ID that begins with r- and looks similar to: r-1a2b
+	//     - Policy – specify the policy ID that begins with p- andlooks similar to: p-12abcdefg3
 	//
 	// This member is required.
 	ResourceId *string
 
 	// The parameter for receiving additional results if you receive a NextToken
-	// response in a previous request. A NextToken response indicates that more output
-	// is available. Set this parameter to the value of the previous call's NextToken
-	// response to indicate where the output should continue from.
+	// response in a previous request. A NextToken response indicates that more
+	// output is available. Set this parameter to the value of the previous call's
+	// NextToken response to indicate where the output should continue from.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -68,7 +63,7 @@ type ListTagsForResourceOutput struct {
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken response element comes back as null.
+	// repeat this until the NextToken  response element comes back as null .
 	NextToken *string
 
 	// The tags that are assigned to the resource.
@@ -143,8 +138,8 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListTagsForResourceAPIClient is a client that implements the ListTagsForResource
-// operation.
+// ListTagsForResourceAPIClient is a client that implements the
+// ListTagsForResource operation.
 type ListTagsForResourceAPIClient interface {
 	ListTagsForResource(context.Context, *ListTagsForResourceInput, ...func(*Options)) (*ListTagsForResourceOutput, error)
 }
@@ -154,8 +149,8 @@ var _ ListTagsForResourceAPIClient = (*Client)(nil)
 // ListTagsForResourcePaginatorOptions is the paginator options for
 // ListTagsForResource
 type ListTagsForResourcePaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

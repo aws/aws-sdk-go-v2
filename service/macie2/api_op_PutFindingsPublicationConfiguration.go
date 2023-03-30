@@ -30,12 +30,12 @@ func (c *Client) PutFindingsPublicationConfiguration(ctx context.Context, params
 
 type PutFindingsPublicationConfigurationInput struct {
 
-	// A unique, case-sensitive token that you provide to ensure the idempotency of the
-	// request.
+	// A unique, case-sensitive token that you provide to ensure the idempotency of
+	// the request.
 	ClientToken *string
 
-	// The configuration settings that determine which findings to publish to Security
-	// Hub.
+	// The configuration settings that determine which findings to publish to
+	// Security Hub.
 	SecurityHubConfiguration *types.SecurityHubConfiguration
 
 	noSmithyDocumentSerde

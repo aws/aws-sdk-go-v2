@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// This engine is not compatible with the voice that you have designated. Choose a
-// new voice that is compatible with the engine or change the engine and restart
+// This engine is not compatible with the voice that you have designated. Choose
+// a new voice that is compatible with the engine or change the engine and restart
 // the operation.
 type EngineNotSupportedException struct {
 	Message *string
@@ -35,8 +35,8 @@ func (e *EngineNotSupportedException) ErrorCode() string {
 }
 func (e *EngineNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Amazon Polly can't find the specified lexicon. Verify that the lexicon's name is
-// spelled correctly, and then try again.
+// Amazon Polly can't find the specified lexicon. Verify that the lexicon's name
+// is spelled correctly, and then try again.
 type InvalidLexiconException struct {
 	Message *string
 
@@ -169,8 +169,8 @@ func (e *InvalidSampleRateException) ErrorCode() string {
 }
 func (e *InvalidSampleRateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The provided SNS topic ARN is invalid. Please provide a valid SNS topic ARN and
-// try again.
+// The provided SNS topic ARN is invalid. Please provide a valid SNS topic ARN
+// and try again.
 type InvalidSnsTopicArnException struct {
 	Message *string
 
@@ -223,7 +223,8 @@ func (e *InvalidSsmlException) ErrorCode() string {
 }
 func (e *InvalidSsmlException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The provided Task ID is not valid. Please provide a valid Task ID and try again.
+// The provided Task ID is not valid. Please provide a valid Task ID and try
+// again.
 type InvalidTaskIdException struct {
 	Message *string
 
@@ -276,9 +277,9 @@ func (e *LanguageNotSupportedException) ErrorCode() string {
 }
 func (e *LanguageNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Amazon Polly can't find the specified lexicon. This could be caused by a lexicon
-// that is missing, its name is misspelled or specifying a lexicon that is in a
-// different region. Verify that the lexicon exists, is in the region (see
+// Amazon Polly can't find the specified lexicon. This could be caused by a
+// lexicon that is missing, its name is misspelled or specifying a lexicon that is
+// in a different region. Verify that the lexicon exists, is in the region (see
 // ListLexicons) and that you spelled its name is spelled correctly. Then try
 // again.
 type LexiconNotFoundException struct {
@@ -333,7 +334,7 @@ func (e *LexiconSizeExceededException) ErrorCode() string {
 func (e *LexiconSizeExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Speech marks are not supported for the OutputFormat selected. Speech marks are
-// only available for content in json format.
+// only available for content in json  format.
 type MarksNotSupportedForFormatException struct {
 	Message *string
 
@@ -496,9 +497,9 @@ func (e *SynthesisTaskNotFoundException) ErrorCode() string {
 func (e *SynthesisTaskNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The value of the "Text" parameter is longer than the accepted limits. For the
-// SynthesizeSpeech API, the limit for input text is a maximum of 6000 characters
+// SynthesizeSpeechAPI, the limit for input text is a maximum of 6000 characters
 // total, of which no more than 3000 can be billed characters. For the
-// StartSpeechSynthesisTask API, the maximum is 200,000 characters, of which no
+// StartSpeechSynthesisTaskAPI, the maximum is 200,000 characters, of which no
 // more than 100,000 can be billed characters. SSML tags are not counted as billed
 // characters.
 type TextLengthExceededException struct {
@@ -526,8 +527,8 @@ func (e *TextLengthExceededException) ErrorCode() string {
 }
 func (e *TextLengthExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The alphabet specified by the lexicon is not a supported alphabet. Valid values
-// are x-sampa and ipa.
+// The alphabet specified by the lexicon is not a supported alphabet. Valid
+// values are x-sampa  and ipa .
 type UnsupportedPlsAlphabetException struct {
 	Message *string
 
@@ -554,8 +555,8 @@ func (e *UnsupportedPlsAlphabetException) ErrorCode() string {
 func (e *UnsupportedPlsAlphabetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The language specified in the lexicon is unsupported. For a list of supported
-// languages, see Lexicon Attributes
-// (https://docs.aws.amazon.com/polly/latest/dg/API_LexiconAttributes.html).
+// languages, see Lexicon Attributes (https://docs.aws.amazon.com/polly/latest/dg/API_LexiconAttributes.html)
+// .
 type UnsupportedPlsLanguageException struct {
 	Message *string
 

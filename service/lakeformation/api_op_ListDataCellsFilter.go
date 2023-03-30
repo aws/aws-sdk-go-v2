@@ -44,10 +44,11 @@ type ListDataCellsFilterInput struct {
 
 type ListDataCellsFilterOutput struct {
 
-	// A list of DataCellFilter structures.
+	// A list of DataCellFilter  structures.
 	DataCellsFilters []types.DataCellsFilter
 
-	// A continuation token, if not all requested data cell filters have been returned.
+	// A continuation token, if not all requested data cell filters have been
+	// returned.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -119,8 +120,8 @@ func (c *Client) addOperationListDataCellsFilterMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListDataCellsFilterAPIClient is a client that implements the ListDataCellsFilter
-// operation.
+// ListDataCellsFilterAPIClient is a client that implements the
+// ListDataCellsFilter operation.
 type ListDataCellsFilterAPIClient interface {
 	ListDataCellsFilter(context.Context, *ListDataCellsFilterInput, ...func(*Options)) (*ListDataCellsFilterOutput, error)
 }
@@ -133,8 +134,8 @@ type ListDataCellsFilterPaginatorOptions struct {
 	// The maximum size of the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

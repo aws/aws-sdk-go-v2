@@ -37,8 +37,8 @@ type ModifyEventSubscriptionInput struct {
 	// A Boolean value; set to true to activate the subscription.
 	Enabled *bool
 
-	// A list of event categories for a source type that you want to subscribe to. Use
-	// the DescribeEventCategories action to see a list of event categories.
+	// A list of event categories for a source type that you want to subscribe to.
+	// Use the DescribeEventCategories  action to see a list of event categories.
 	EventCategories []string
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic created for event

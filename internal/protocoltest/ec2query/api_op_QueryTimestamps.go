@@ -11,12 +11,9 @@ import (
 )
 
 // This test serializes timestamps.
-// - Timestamps are serialized as RFC 3339
-// date-time values by default.
-// - A timestampFormat trait on a member changes the
-// format.
-// - A timestampFormat trait on the shape targeted by the member changes
-// the format.
+//   - Timestamps are serialized as RFC 3339 date-time values by default.
+//   - A timestampFormat trait on a member changes the format.
+//   - A timestampFormat trait on the shape targeted by the member changes the format.
 func (c *Client) QueryTimestamps(ctx context.Context, params *QueryTimestampsInput, optFns ...func(*Options)) (*QueryTimestampsOutput, error) {
 	if params == nil {
 		params = &QueryTimestampsInput{}

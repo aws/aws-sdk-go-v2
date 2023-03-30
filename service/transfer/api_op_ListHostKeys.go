@@ -38,9 +38,9 @@ type ListHostKeysInput struct {
 	// The maximum number of host keys to return.
 	MaxResults *int32
 
-	// When there are additional results that were not returned, a NextToken parameter
-	// is returned. You can use that value for a subsequent call to ListHostKeys to
-	// continue listing results.
+	// When there are additional results that were not returned, a NextToken
+	// parameter is returned. You can use that value for a subsequent call to
+	// ListHostKeys to continue listing results.
 	NextToken *string
 
 	noSmithyDocumentSerde

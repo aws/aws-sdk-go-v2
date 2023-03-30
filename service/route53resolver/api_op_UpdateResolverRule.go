@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates settings for a specified Resolver rule. ResolverRuleId is required, and
-// all other parameters are optional. If you don't specify a parameter, it retains
-// its current value.
+// Updates settings for a specified Resolver rule. ResolverRuleId is required,
+// and all other parameters are optional. If you don't specify a parameter, it
+// retains its current value.
 func (c *Client) UpdateResolverRule(ctx context.Context, params *UpdateResolverRuleInput, optFns ...func(*Options)) (*UpdateResolverRuleOutput, error) {
 	if params == nil {
 		params = &UpdateResolverRuleInput{}
@@ -46,7 +46,7 @@ type UpdateResolverRuleInput struct {
 
 type UpdateResolverRuleOutput struct {
 
-	// The response to an UpdateResolverRule request.
+	// The response to an UpdateResolverRule  request.
 	ResolverRule *types.ResolverRule
 
 	// Metadata pertaining to the operation's result.

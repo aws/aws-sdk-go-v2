@@ -28,7 +28,8 @@ func (c *Client) DisassociateMember(ctx context.Context, params *DisassociateMem
 
 type DisassociateMemberInput struct {
 
-	// The unique identifier for the Amazon Macie resource that the request applies to.
+	// The unique identifier for the Amazon Macie resource that the request applies
+	// to.
 	//
 	// This member is required.
 	Id *string

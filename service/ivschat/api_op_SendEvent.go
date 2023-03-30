@@ -41,8 +41,8 @@ type SendEventInput struct {
 	// This member is required.
 	RoomIdentifier *string
 
-	// Application-defined metadata to attach to the event sent to clients. The maximum
-	// length of the metadata is 1 KB total.
+	// Application-defined metadata to attach to the event sent to clients. The
+	// maximum length of the metadata is 1 KB total.
 	Attributes map[string]string
 
 	noSmithyDocumentSerde

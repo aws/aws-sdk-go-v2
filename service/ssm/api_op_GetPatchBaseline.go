@@ -33,9 +33,9 @@ type GetPatchBaselineInput struct {
 	// The ID of the patch baseline to retrieve. To retrieve information about an
 	// Amazon Web Services managed patch baseline, specify the full Amazon Resource
 	// Name (ARN) of the baseline. For example, for the baseline
-	// AWS-AmazonLinuxDefaultPatchBaseline, specify
-	// arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0e392de35e7c563b7 instead of
-	// pb-0e392de35e7c563b7.
+	// AWS-AmazonLinuxDefaultPatchBaseline , specify
+	// arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0e392de35e7c563b7instead
+	// of pb-0e392de35e7c563b7 .
 	//
 	// This member is required.
 	BaselineId *string
@@ -56,8 +56,8 @@ type GetPatchBaselineOutput struct {
 	ApprovedPatchesComplianceLevel types.PatchComplianceLevel
 
 	// Indicates whether the list of approved patches includes non-security updates
-	// that should be applied to the managed nodes. The default value is false. Applies
-	// to Linux managed nodes only.
+	// that should be applied to the managed nodes. The default value is false.
+	// Applies to Linux managed nodes only.
 	ApprovedPatchesEnableNonSecurity *bool
 
 	// The ID of the retrieved patch baseline.
@@ -87,8 +87,8 @@ type GetPatchBaselineOutput struct {
 	// A list of explicitly rejected patches for the baseline.
 	RejectedPatches []string
 
-	// The action specified to take on patches included in the RejectedPatches list. A
-	// patch can be allowed only if it is a dependency of another package, or blocked
+	// The action specified to take on patches included in the RejectedPatches list.
+	// A patch can be allowed only if it is a dependency of another package, or blocked
 	// entirely along with packages that include it as a dependency.
 	RejectedPatchesAction types.PatchAction
 

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of the batch segment jobs that have been performed off of a solution
-// version that you specify.
+// Gets a list of the batch segment jobs that have been performed off of a
+// solution version that you specify.
 func (c *Client) ListBatchSegmentJobs(ctx context.Context, params *ListBatchSegmentJobsInput, optFns ...func(*Options)) (*ListBatchSegmentJobsOutput, error) {
 	if params == nil {
 		params = &ListBatchSegmentJobsInput{}
@@ -135,8 +135,8 @@ type ListBatchSegmentJobsPaginatorOptions struct {
 	// default value is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

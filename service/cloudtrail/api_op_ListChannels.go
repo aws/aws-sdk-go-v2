@@ -33,8 +33,8 @@ type ListChannelsInput struct {
 	// The maximum number of CloudTrail channels to display on a single page.
 	MaxResults *int32
 
-	// The token to use to get the next page of results after a previous API call. This
-	// token must be passed in with the same parameters that were specified in the
+	// The token to use to get the next page of results after a previous API call.
+	// This token must be passed in with the same parameters that were specified in the
 	// original call. For example, if the original call specified an AttributeKey of
 	// 'Username' with a value of 'root', the call with NextToken should include those
 	// same parameters.
@@ -129,8 +129,8 @@ type ListChannelsPaginatorOptions struct {
 	// The maximum number of CloudTrail channels to display on a single page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

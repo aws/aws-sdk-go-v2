@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns detailed information about a member. Applies only to Hyperledger Fabric.
+// Returns detailed information about a member. Applies only to Hyperledger
+// Fabric.
 func (c *Client) GetMember(ctx context.Context, params *GetMemberInput, optFns ...func(*Options)) (*GetMemberOutput, error) {
 	if params == nil {
 		params = &GetMemberInput{}

@@ -15,9 +15,8 @@ import (
 // through Amazon SES. You can only use this API on an email up to 24 hours after
 // you receive it. You cannot use this API to send generic bounces for mail that
 // was not received by Amazon SES. For information about receiving email through
-// Amazon SES, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html).
-// You can execute this operation no more than once per second.
+// Amazon SES, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html)
+// . You can execute this operation no more than once per second.
 func (c *Client) SendBounce(ctx context.Context, params *SendBounceInput, optFns ...func(*Options)) (*SendBounceOutput, error) {
 	if params == nil {
 		params = &SendBounceInput{}
@@ -43,9 +42,9 @@ type SendBounceInput struct {
 	// This member is required.
 	BounceSender *string
 
-	// A list of recipients of the bounced message, including the information required
-	// to create the Delivery Status Notifications (DSNs) for the recipients. You must
-	// specify at least one BouncedRecipientInfo in the list.
+	// A list of recipients of the bounced message, including the information
+	// required to create the Delivery Status Notifications (DSNs) for the recipients.
+	// You must specify at least one BouncedRecipientInfo  in the list.
 	//
 	// This member is required.
 	BouncedRecipientInfoList []types.BouncedRecipientInfo
@@ -58,8 +57,8 @@ type SendBounceInput struct {
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
 	// you to use the address in the "From" header of the bounce. For more information
-	// about sending authorization, see the Amazon SES Developer Guide
-	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+	// about sending authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
+	// .
 	BounceSenderArn *string
 
 	// Human-readable text for the bounce message to explain the failure. If not
@@ -67,7 +66,8 @@ type SendBounceInput struct {
 	// information.
 	Explanation *string
 
-	// Message-related DSN fields. If not specified, Amazon SES will choose the values.
+	// Message-related DSN fields. If not specified, Amazon SES will choose the
+	// values.
 	MessageDsn *types.MessageDsn
 
 	noSmithyDocumentSerde

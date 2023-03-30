@@ -11,14 +11,12 @@ import (
 type AccessLevelFilter struct {
 
 	// The access level.
-	// - Account - Filter results based on the account.
-	// - Role -
-	// Filter results based on the federated role of the specified user.
-	// - User -
-	// Filter results based on the specified user.
+	//     - Account - Filter results based on the account.
+	//     - Role - Filter results based on the federated role of the specified user.
+	//     - User - Filter results based on the specified user.
 	Key AccessLevelFilterKey
 
-	// The user to which the access level applies. The only supported value is Self.
+	// The user to which the access level applies. The only supported value is Self .
 	Value *string
 
 	noSmithyDocumentSerde
@@ -42,7 +40,7 @@ type CloudWatchDashboard struct {
 	noSmithyDocumentSerde
 }
 
-// The subtype containing details about the Codestar connection Type.
+// The subtype containing details about the Codestar connection Type .
 type CodeStarParameters struct {
 
 	// The absolute path wehre the artifact resides within the repo and branch,
@@ -87,15 +85,16 @@ type ConstraintDetail struct {
 	// only to the instance of the product that lives within this portfolio.
 	PortfolioId *string
 
-	// The identifier of the product the constraint applies to. Note that a constraint
-	// applies to a specific instance of a product within a certain portfolio.
+	// The identifier of the product the constraint applies to. Note that a
+	// constraint applies to a specific instance of a product within a certain
+	// portfolio.
 	ProductId *string
 
 	// The type of constraint.
-	// - LAUNCH
-	// - NOTIFICATION
-	// - STACKSET
-	// - TEMPLATE
+	//     - LAUNCH
+	//     - NOTIFICATION
+	//     - STACKSET
+	//     - TEMPLATE
 	Type *string
 
 	noSmithyDocumentSerde
@@ -108,17 +107,17 @@ type ConstraintSummary struct {
 	Description *string
 
 	// The type of constraint.
-	// - LAUNCH
-	// - NOTIFICATION
-	// - STACKSET
-	// - TEMPLATE
+	//     - LAUNCH
+	//     - NOTIFICATION
+	//     - STACKSET
+	//     - TEMPLATE
 	Type *string
 
 	noSmithyDocumentSerde
 }
 
-// Details of an execution parameter value that is passed to a self-service action
-// when executed on a provisioned product.
+// Details of an execution parameter value that is passed to a self-service
+// action when executed on a provisioned product.
 type ExecutionParameter struct {
 
 	// The default values for the execution parameter.
@@ -143,26 +142,25 @@ type FailedServiceActionAssociation struct {
 	// A text description of the error.
 	ErrorMessage *string
 
-	// The product identifier. For example, prod-abcdzk7xy33qa.
+	// The product identifier. For example, prod-abcdzk7xy33qa .
 	ProductId *string
 
-	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne .
 	ProvisioningArtifactId *string
 
-	// The self-service action identifier. For example, act-fs7abcd89wxyz.
+	// The self-service action identifier. For example, act-fs7abcd89wxyz .
 	ServiceActionId *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about the product's connection sync and contains the following
-// sub-fields.
-// - LastSyncTime
-// - LastSyncStatus
-// - LastSyncStatusMessage
-// -
-// LastSuccessfulSyncTime
-// - LastSuccessfulSyncProvisioningArtifactID
+// Provides details about the product's connection sync and contains the
+// following sub-fields.
+//   - LastSyncTime
+//   - LastSyncStatus
+//   - LastSyncStatusMessage
+//   - LastSuccessfulSyncTime
+//   - LastSuccessfulSyncProvisioningArtifactID
 type LastSync struct {
 
 	// The ProvisioningArtifactID of the ProvisioningArtifact created from the latest
@@ -173,7 +171,7 @@ type LastSync struct {
 	// Service Catalog product.
 	LastSuccessfulSyncTime *time.Time
 
-	// The current status of the sync. Responses include SUCCEEDED or FAILED.
+	// The current status of the sync. Responses include SUCCEEDED  or FAILED .
 	LastSyncStatus LastSyncStatus
 
 	// The sync's status message.
@@ -220,10 +218,8 @@ type LaunchPathSummary struct {
 type ListRecordHistorySearchFilter struct {
 
 	// The filter key.
-	// - product - Filter results based on the specified product
-	// identifier.
-	// - provisionedproduct - Filter results based on the provisioned
-	// product identifier.
+	//     - product - Filter results based on the specified product identifier.
+	//     - provisionedproduct - Filter results based on the provisioned product identifier.
 	Key *string
 
 	// The filter value.
@@ -273,26 +269,26 @@ type ParameterConstraints struct {
 	// example, without a constraint description, a parameter that has an allowed
 	// pattern of [A-Za-z0-9]+ displays the following error message when the user
 	// specifies an invalid value: Malformed input-Parameter MyParameter must match
-	// pattern [A-Za-z0-9]+ By adding a constraint description, such as must only
+	// pattern [A-Za-z0-9]+By adding a constraint description, such as must only
 	// contain letters (uppercase and lowercase) and numbers, you can display the
 	// following customized error message: Malformed input-Parameter MyParameter must
 	// only contain uppercase and lowercase letters and numbers.
 	ConstraintDescription *string
 
 	// An integer value that determines the largest number of characters you want to
-	// allow for String types.
+	// allow for String  types.
 	MaxLength *string
 
-	// A numeric value that determines the largest numeric value you want to allow for
-	// Number types.
+	// A numeric value that determines the largest numeric value you want to allow
+	// for Number  types.
 	MaxValue *string
 
 	// An integer value that determines the smallest number of characters you want to
-	// allow for String types.
+	// allow for String  types.
 	MinLength *string
 
-	// A numeric value that determines the smallest numeric value you want to allow for
-	// Number types.
+	// A numeric value that determines the smallest numeric value you want to allow
+	// for Number  types.
 	MinValue *string
 
 	noSmithyDocumentSerde
@@ -325,9 +321,9 @@ type PortfolioDetail struct {
 // Information about the portfolio share.
 type PortfolioShareDetail struct {
 
-	// Indicates whether the shared portfolio is imported by the recipient account. If
-	// the recipient is in an organization node, the share is automatically imported,
-	// and the field is always set to true.
+	// Indicates whether the shared portfolio is imported by the recipient account.
+	// If the recipient is in an organization node, the share is automatically
+	// imported, and the field is always set to true.
 	Accepted bool
 
 	// The identifier of the recipient entity that received the portfolio share. The
@@ -336,7 +332,7 @@ type PortfolioShareDetail struct {
 	// itself. (This shares with every account in the organization).
 	PrincipalId *string
 
-	// Indicates if Principal sharing is enabled or disabled for the portfolio share.
+	// Indicates if Principal  sharing is enabled or disabled for the portfolio share.
 	SharePrincipals bool
 
 	// Indicates whether TagOptions sharing is enabled or disabled for the portfolio
@@ -353,11 +349,11 @@ type PortfolioShareDetail struct {
 type Principal struct {
 
 	// The ARN of the principal (IAM user, role, or group). This field allows for an
-	// ARN with no accountID if the PrincipalType is an IAM_PATTERN.
+	// ARN with no accountID  if the PrincipalType  is an IAM_PATTERN .
 	PrincipalARN *string
 
 	// The principal type. The supported value is IAM if you use a fully defined ARN,
-	// or IAM_PATTERN if you use an ARN with no accountID.
+	// or IAM_PATTERN  if you use an ARN with no accountID .
 	PrincipalType PrincipalType
 
 	noSmithyDocumentSerde
@@ -389,18 +385,16 @@ type ProductViewDetail struct {
 	ProductViewSummary *ProductViewSummary
 
 	// A top level ProductViewDetail response containing details about the product’s
-	// connection. Service Catalog returns this field for the CreateProduct,
-	// UpdateProduct, DescribeProductAsAdmin, and SearchProductAsAdmin APIs. This
-	// response contains the same fields as the ConnectionParameters request, with the
-	// addition of the LastSync response.
+	// connection. Service Catalog returns this field for the CreateProduct ,
+	// UpdateProduct , DescribeProductAsAdmin , and SearchProductAsAdmin APIs. This
+	// response contains the same fields as the ConnectionParameters request, with
+	// the addition of the LastSync  response.
 	SourceConnection *SourceConnectionDetail
 
 	// The status of the product.
-	// - AVAILABLE - The product is ready for use.
-	// -
-	// CREATING - Product creation has started; the product is not ready for use.
-	// -
-	// FAILED - An action failed.
+	//     - AVAILABLE - The product is ready for use.
+	//     - CREATING - Product creation has started; the product is not ready for use.
+	//     - FAILED - An action failed.
 	Status Status
 
 	noSmithyDocumentSerde
@@ -413,10 +407,10 @@ type ProductViewSummary struct {
 	// significance of this value.
 	Distributor *string
 
-	// Indicates whether the product has a default path. If the product does not have a
-	// default path, call ListLaunchPaths to disambiguate between paths. Otherwise,
+	// Indicates whether the product has a default path. If the product does not have
+	// a default path, call ListLaunchPaths  to disambiguate between paths. Otherwise,
 	// ListLaunchPaths is not required, and the output of ProductViewSummary can be
-	// used directly with DescribeProvisioningParameters.
+	// used directly with DescribeProvisioningParameters .
 	HasDefaultPath bool
 
 	// The product view identifier.
@@ -425,8 +419,8 @@ type ProductViewSummary struct {
 	// The name of the product.
 	Name *string
 
-	// The owner of the product. Contact the product administrator for the significance
-	// of this value.
+	// The owner of the product. Contact the product administrator for the
+	// significance of this value.
 	Owner *string
 
 	// The product identifier.
@@ -444,9 +438,9 @@ type ProductViewSummary struct {
 	// The URL information to obtain support for this Product.
 	SupportUrl *string
 
-	// The product type. Contact the product administrator for the significance of this
-	// value. If this value is MARKETPLACE, the product was created by Amazon Web
-	// Services Marketplace.
+	// The product type. Contact the product administrator for the significance of
+	// this value. If this value is MARKETPLACE, the product was created by Amazon
+	// Web Services Marketplace.
 	Type ProductType
 
 	noSmithyDocumentSerde
@@ -464,31 +458,29 @@ type ProvisionedProductAttribute struct {
 	// The identifier of the provisioned product.
 	Id *string
 
-	// A unique identifier that you provide to ensure idempotency. If multiple requests
-	// differ only by the idempotency token, the same response is returned for each
-	// repeated request.
+	// A unique identifier that you provide to ensure idempotency. If multiple
+	// requests differ only by the idempotency token, the same response is returned for
+	// each repeated request.
 	IdempotencyToken *string
 
-	// The record identifier of the last request performed on this provisioned product
-	// of the following types:
-	// - ProvisionedProduct
-	// - UpdateProvisionedProduct
-	// -
-	// ExecuteProvisionedProductPlan
-	// - TerminateProvisionedProduct
+	// The record identifier of the last request performed on this provisioned
+	// product of the following types:
+	//     - ProvisionedProduct
+	//     - UpdateProvisionedProduct
+	//     - ExecuteProvisionedProductPlan
+	//     - TerminateProvisionedProduct
 	LastProvisioningRecordId *string
 
-	// The record identifier of the last request performed on this provisioned product.
+	// The record identifier of the last request performed on this provisioned
+	// product.
 	LastRecordId *string
 
 	// The record identifier of the last successful request performed on this
 	// provisioned product of the following types:
-	// - ProvisionedProduct
-	// -
-	// UpdateProvisionedProduct
-	// - ExecuteProvisionedProductPlan
-	// -
-	// TerminateProvisionedProduct
+	//     - ProvisionedProduct
+	//     - UpdateProvisionedProduct
+	//     - ExecuteProvisionedProductPlan
+	//     - TerminateProvisionedProduct
 	LastSuccessfulProvisioningRecordId *string
 
 	// The user-friendly name of the provisioned product.
@@ -511,24 +503,11 @@ type ProvisionedProductAttribute struct {
 	ProvisioningArtifactName *string
 
 	// The current status of the provisioned product.
-	// - AVAILABLE - Stable state, ready
-	// to perform any operation. The most recent operation succeeded and completed.
-	// -
-	// UNDER_CHANGE - Transitive state. Operations performed might not have valid
-	// results. Wait for an AVAILABLE status before performing operations.
-	// - TAINTED -
-	// Stable state, ready to perform any operation. The stack has completed the
-	// requested operation but is not exactly what was requested. For example, a
-	// request to update to a new version failed and the stack rolled back to the
-	// current version.
-	// - ERROR - An unexpected error occurred. The provisioned product
-	// exists but the stack is not running. For example, CloudFormation received a
-	// parameter value that was not valid and could not launch the stack.
-	// -
-	// PLAN_IN_PROGRESS - Transitive state. The plan operations were performed to
-	// provision a new product, but resources have not yet been created. After
-	// reviewing the list of resources to be created, execute the plan. Wait for an
-	// AVAILABLE status before performing operations.
+	//     - AVAILABLE - Stable state, ready to perform any operation. The most recent operation succeeded and completed.
+	//     - UNDER_CHANGE - Transitive state. Operations performed might not have valid results. Wait for an AVAILABLE status before performing operations.
+	//     - TAINTED - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version.
+	//     - ERROR - An unexpected error occurred. The provisioned product exists but the stack is not running. For example, CloudFormation received a parameter value that was not valid and could not launch the stack.
+	//     - PLAN_IN_PROGRESS - Transitive state. The plan operations were performed to provision a new product, but resources have not yet been created. After reviewing the list of resources to be created, execute the plan. Wait for an AVAILABLE status before performing operations.
 	Status ProvisionedProductStatus
 
 	// The current status message of the provisioned product.
@@ -537,8 +516,8 @@ type ProvisionedProductAttribute struct {
 	// One or more tags.
 	Tags []Tag
 
-	// The type of provisioned product. The supported values are CFN_STACK and
-	// CFN_STACKSET.
+	// The type of provisioned product. The supported values are CFN_STACK  and
+	// CFN_STACKSET .
 	Type *string
 
 	// The Amazon Resource Name (ARN) of the IAM user.
@@ -562,31 +541,29 @@ type ProvisionedProductDetail struct {
 	// The identifier of the provisioned product.
 	Id *string
 
-	// A unique identifier that you provide to ensure idempotency. If multiple requests
-	// differ only by the idempotency token, the same response is returned for each
-	// repeated request.
+	// A unique identifier that you provide to ensure idempotency. If multiple
+	// requests differ only by the idempotency token, the same response is returned for
+	// each repeated request.
 	IdempotencyToken *string
 
-	// The record identifier of the last request performed on this provisioned product
-	// of the following types:
-	// - ProvisionedProduct
-	// - UpdateProvisionedProduct
-	// -
-	// ExecuteProvisionedProductPlan
-	// - TerminateProvisionedProduct
+	// The record identifier of the last request performed on this provisioned
+	// product of the following types:
+	//     - ProvisionedProduct
+	//     - UpdateProvisionedProduct
+	//     - ExecuteProvisionedProductPlan
+	//     - TerminateProvisionedProduct
 	LastProvisioningRecordId *string
 
-	// The record identifier of the last request performed on this provisioned product.
+	// The record identifier of the last request performed on this provisioned
+	// product.
 	LastRecordId *string
 
 	// The record identifier of the last successful request performed on this
 	// provisioned product of the following types:
-	// - ProvisionedProduct
-	// -
-	// UpdateProvisionedProduct
-	// - ExecuteProvisionedProductPlan
-	// -
-	// TerminateProvisionedProduct
+	//     - ProvisionedProduct
+	//     - UpdateProvisionedProduct
+	//     - ExecuteProvisionedProductPlan
+	//     - TerminateProvisionedProduct
 	LastSuccessfulProvisioningRecordId *string
 
 	// The ARN of the launch role associated with the provisioned product.
@@ -595,38 +572,25 @@ type ProvisionedProductDetail struct {
 	// The user-friendly name of the provisioned product.
 	Name *string
 
-	// The product identifier. For example, prod-abcdzk7xy33qa.
+	// The product identifier. For example, prod-abcdzk7xy33qa .
 	ProductId *string
 
-	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne .
 	ProvisioningArtifactId *string
 
 	// The current status of the provisioned product.
-	// - AVAILABLE - Stable state, ready
-	// to perform any operation. The most recent operation succeeded and completed.
-	// -
-	// UNDER_CHANGE - Transitive state. Operations performed might not have valid
-	// results. Wait for an AVAILABLE status before performing operations.
-	// - TAINTED -
-	// Stable state, ready to perform any operation. The stack has completed the
-	// requested operation but is not exactly what was requested. For example, a
-	// request to update to a new version failed and the stack rolled back to the
-	// current version.
-	// - ERROR - An unexpected error occurred. The provisioned product
-	// exists but the stack is not running. For example, CloudFormation received a
-	// parameter value that was not valid and could not launch the stack.
-	// -
-	// PLAN_IN_PROGRESS - Transitive state. The plan operations were performed to
-	// provision a new product, but resources have not yet been created. After
-	// reviewing the list of resources to be created, execute the plan. Wait for an
-	// AVAILABLE status before performing operations.
+	//     - AVAILABLE - Stable state, ready to perform any operation. The most recent operation succeeded and completed.
+	//     - UNDER_CHANGE - Transitive state. Operations performed might not have valid results. Wait for an AVAILABLE status before performing operations.
+	//     - TAINTED - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version.
+	//     - ERROR - An unexpected error occurred. The provisioned product exists but the stack is not running. For example, CloudFormation received a parameter value that was not valid and could not launch the stack.
+	//     - PLAN_IN_PROGRESS - Transitive state. The plan operations were performed to provision a new product, but resources have not yet been created. After reviewing the list of resources to be created, execute the plan. Wait for an AVAILABLE status before performing operations.
 	Status ProvisionedProductStatus
 
 	// The current status message of the provisioned product.
 	StatusMessage *string
 
-	// The type of provisioned product. The supported values are CFN_STACK and
-	// CFN_STACKSET.
+	// The type of provisioned product. The supported values are CFN_STACK  and
+	// CFN_STACKSET .
 	Type *string
 
 	noSmithyDocumentSerde
@@ -642,9 +606,9 @@ type ProvisionedProductPlanDetails struct {
 	// events.
 	NotificationArns []string
 
-	// The path identifier of the product. This value is optional if the product has a
-	// default path, and required if the product has more than one path. To list the
-	// paths for a product, use ListLaunchPaths.
+	// The path identifier of the product. This value is optional if the product has
+	// a default path, and required if the product has more than one path. To list the
+	// paths for a product, use ListLaunchPaths .
 	PathId *string
 
 	// The plan identifier.
@@ -668,8 +632,8 @@ type ProvisionedProductPlanDetails struct {
 	// The identifier of the provisioning artifact.
 	ProvisioningArtifactId *string
 
-	// Parameters specified by the administrator that are required for provisioning the
-	// product.
+	// Parameters specified by the administrator that are required for provisioning
+	// the product.
 	ProvisioningParameters []UpdateProvisioningParameter
 
 	// The status.
@@ -711,8 +675,8 @@ type ProvisionedProductPlanSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a provisioning artifact. A provisioning artifact is also known
-// as a product version.
+// Information about a provisioning artifact. A provisioning artifact is also
+// known as a product version.
 type ProvisioningArtifact struct {
 
 	// The UTC time stamp of the creation time.
@@ -761,18 +725,15 @@ type ProvisioningArtifactDetail struct {
 	// sync the Service Catalog product and create the provisioning artifact. Service
 	// Catalog includes this response parameter as a high level field to the existing
 	// ProvisioningArtifactDetail type, which is returned as part of the response for
-	// CreateProduct, UpdateProduct, DescribeProductAsAdmin,
-	// DescribeProvisioningArtifact, ListProvisioningArtifact, and
+	// CreateProduct , UpdateProduct , DescribeProductAsAdmin ,
+	// DescribeProvisioningArtifact , ListProvisioningArtifact , and
 	// UpdateProvisioningArticat APIs. This field only exists for Repo-Synced products.
 	SourceRevision *string
 
 	// The type of provisioning artifact.
-	// - CLOUD_FORMATION_TEMPLATE - CloudFormation
-	// template
-	// - MARKETPLACE_AMI - Amazon Web Services Marketplace AMI
-	// -
-	// MARKETPLACE_CAR - Amazon Web Services Marketplace Clusters and Amazon Web
-	// Services Resources
+	//     - CLOUD_FORMATION_TEMPLATE - CloudFormation template
+	//     - MARKETPLACE_AMI - Amazon Web Services Marketplace AMI
+	//     - MARKETPLACE_CAR - Amazon Web Services Marketplace Clusters and Amazon Web Services Resources
 	Type ProvisioningArtifactType
 
 	noSmithyDocumentSerde
@@ -799,8 +760,8 @@ type ProvisioningArtifactParameter struct {
 	// The description of the parameter.
 	Description *string
 
-	// If this value is true, the value for this parameter is obfuscated from view when
-	// the parameter is retrieved. This parameter is used to hide sensitive
+	// If this value is true, the value for this parameter is obfuscated from view
+	// when the parameter is retrieved. This parameter is used to hide sensitive
 	// information.
 	IsNoEcho bool
 
@@ -817,25 +778,25 @@ type ProvisioningArtifactParameter struct {
 }
 
 // The user-defined preferences that will be applied during product provisioning,
-// unless overridden by ProvisioningPreferences or UpdateProvisioningPreferences.
-// For more information on maximum concurrent accounts and failure tolerance, see
-// Stack set operation options
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options)
+// unless overridden by ProvisioningPreferences  or UpdateProvisioningPreferences
+// . For more information on maximum concurrent accounts and failure tolerance, see
+//
+// Stack set operation options (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options)
 // in the CloudFormation User Guide.
 type ProvisioningArtifactPreferences struct {
 
-	// One or more Amazon Web Services accounts where stack instances are deployed from
-	// the stack set. These accounts can be scoped in
+	// One or more Amazon Web Services accounts where stack instances are deployed
+	// from the stack set. These accounts can be scoped in
 	// ProvisioningPreferences$StackSetAccounts and
-	// UpdateProvisioningPreferences$StackSetAccounts. Applicable only to a
+	// UpdateProvisioningPreferences$StackSetAccounts . Applicable only to a
 	// CFN_STACKSET provisioned product type.
 	StackSetAccounts []string
 
-	// One or more Amazon Web Services Regions where stack instances are deployed from
-	// the stack set. These Regions can be scoped in
+	// One or more Amazon Web Services Regions where stack instances are deployed
+	// from the stack set. These Regions can be scoped in
 	// ProvisioningPreferences$StackSetRegions and
-	// UpdateProvisioningPreferences$StackSetRegions. Applicable only to a CFN_STACKSET
-	// provisioned product type.
+	// UpdateProvisioningPreferences$StackSetRegions . Applicable only to a
+	// CFN_STACKSET provisioned product type.
 	StackSetRegions []string
 
 	noSmithyDocumentSerde
@@ -845,8 +806,8 @@ type ProvisioningArtifactPreferences struct {
 // product.
 type ProvisioningArtifactProperties struct {
 
-	// The description of the provisioning artifact, including how it differs from the
-	// previous provisioning artifact.
+	// The description of the provisioning artifact, including how it differs from
+	// the previous provisioning artifact.
 	Description *string
 
 	// If set to true, Service Catalog stops validating the specified provisioning
@@ -854,13 +815,13 @@ type ProvisioningArtifactProperties struct {
 	DisableTemplateValidation bool
 
 	// Specify the template source with one of the following options, but not both.
-	// Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ] The URL of the
+	// Keys accepted: [ LoadTemplateFromURL , ImportFromPhysicalId ] The URL of the
 	// CloudFormation template in Amazon S3 or GitHub in JSON format. Specify the URL
 	// in JSON format as follows: "LoadTemplateFromURL":
-	// "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."ImportFromPhysicalId:
-	// The physical id of the resource that contains the template. Currently only
-	// supports CloudFormation stack arn. Specify the physical id in JSON format as
-	// follows: ImportFromPhysicalId:
+	// "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."
+	// ImportFromPhysicalId: The physical id of the resource that contains the
+	// template. Currently only supports CloudFormation stack arn. Specify the physical
+	// id in JSON format as follows: ImportFromPhysicalId:
 	// “arn:aws:cloudformation:[us-east-1]:[accountId]:stack/[StackName]/[resourceId]
 	Info map[string]string
 
@@ -869,19 +830,16 @@ type ProvisioningArtifactProperties struct {
 	Name *string
 
 	// The type of provisioning artifact.
-	// - CLOUD_FORMATION_TEMPLATE - CloudFormation
-	// template
-	// - MARKETPLACE_AMI - Amazon Web Services Marketplace AMI
-	// -
-	// MARKETPLACE_CAR - Amazon Web Services Marketplace Clusters and Amazon Web
-	// Services Resources
+	//     - CLOUD_FORMATION_TEMPLATE - CloudFormation template
+	//     - MARKETPLACE_AMI - Amazon Web Services Marketplace AMI
+	//     - MARKETPLACE_CAR - Amazon Web Services Marketplace Clusters and Amazon Web Services Resources
 	Type ProvisioningArtifactType
 
 	noSmithyDocumentSerde
 }
 
-// Summary information about a provisioning artifact (also known as a version) for
-// a product.
+// Summary information about a provisioning artifact (also known as a version)
+// for a product.
 type ProvisioningArtifactSummary struct {
 
 	// The UTC time stamp of the creation time.
@@ -910,8 +868,8 @@ type ProvisioningArtifactView struct {
 	// Summary information about a product view.
 	ProductViewSummary *ProductViewSummary
 
-	// Information about a provisioning artifact. A provisioning artifact is also known
-	// as a product version.
+	// Information about a provisioning artifact. A provisioning artifact is also
+	// known as a product version.
 	ProvisioningArtifact *ProvisioningArtifact
 
 	noSmithyDocumentSerde
@@ -932,49 +890,49 @@ type ProvisioningParameter struct {
 // The user-defined preferences that will be applied when updating a provisioned
 // product. Not all preferences are applicable to all provisioned product type One
 // or more Amazon Web Services accounts that will have access to the provisioned
-// product. Applicable only to a CFN_STACKSET provisioned product type. The Amazon
-// Web Services accounts specified should be within the list of accounts in the
-// STACKSET constraint. To get the list of accounts in the STACKSET constraint, use
-// the DescribeProvisioningParameters operation. If no values are specified, the
-// default value is all accounts from the STACKSET constraint.
+// product. Applicable only to a CFN_STACKSET provisioned product type. The
+// Amazon Web Services accounts specified should be within the list of accounts in
+// the STACKSET  constraint. To get the list of accounts in the STACKSET
+// constraint, use the DescribeProvisioningParameters operation. If no values are
+// specified, the default value is all accounts from the STACKSET  constraint.
 type ProvisioningPreferences struct {
 
 	// One or more Amazon Web Services accounts where the provisioned product will be
 	// available. Applicable only to a CFN_STACKSET provisioned product type. The
 	// specified accounts should be within the list of accounts from the STACKSET
-	// constraint. To get the list of accounts in the STACKSET constraint, use the
-	// DescribeProvisioningParameters operation. If no values are specified, the
-	// default value is all acounts from the STACKSET constraint.
+	// constraint. To get the list of accounts in the STACKSET  constraint, use the
+	// DescribeProvisioningParametersoperation. If no values are specified, the
+	// default value is all acounts from the STACKSET  constraint.
 	StackSetAccounts []string
 
 	// The number of accounts, per Region, for which this operation can fail before
 	// Service Catalog stops the operation in that Region. If the operation is stopped
 	// in a Region, Service Catalog doesn't attempt the operation in any subsequent
 	// Regions. Applicable only to a CFN_STACKSET provisioned product type.
-	// Conditional: You must specify either StackSetFailureToleranceCount or
-	// StackSetFailureTolerancePercentage, but not both. The default value is 0 if no
-	// value is specified.
+	// Conditional: You must specify either StackSetFailureToleranceCount  or
+	// StackSetFailureTolerancePercentage , but not both. The default value is 0 if
+	// no value is specified.
 	StackSetFailureToleranceCount *int32
 
-	// The percentage of accounts, per Region, for which this stack operation can fail
-	// before Service Catalog stops the operation in that Region. If the operation is
-	// stopped in a Region, Service Catalog doesn't attempt the operation in any
+	// The percentage of accounts, per Region, for which this stack operation can
+	// fail before Service Catalog stops the operation in that Region. If the operation
+	// is stopped in a Region, Service Catalog doesn't attempt the operation in any
 	// subsequent Regions. When calculating the number of accounts based on the
 	// specified percentage, Service Catalog rounds down to the next whole number.
 	// Applicable only to a CFN_STACKSET provisioned product type. Conditional: You
-	// must specify either StackSetFailureToleranceCount or
-	// StackSetFailureTolerancePercentage, but not both.
+	// must specify either StackSetFailureToleranceCount  or
+	// StackSetFailureTolerancePercentage , but not both.
 	StackSetFailureTolerancePercentage *int32
 
 	// The maximum number of accounts in which to perform this operation at one time.
-	// This is dependent on the value of StackSetFailureToleranceCount.
+	// This is dependent on the value of StackSetFailureToleranceCount .
 	// StackSetMaxConcurrentCount is at most one more than the
 	// StackSetFailureToleranceCount. Note that this setting lets you specify the
 	// maximum for operations. For large deployments, under certain circumstances the
 	// actual number of accounts acted upon concurrently may be lower due to service
 	// throttling. Applicable only to a CFN_STACKSET provisioned product type.
-	// Conditional: You must specify either StackSetMaxConcurrentCount or
-	// StackSetMaxConcurrentPercentage, but not both.
+	// Conditional: You must specify either StackSetMaxConcurrentCount  or
+	// StackSetMaxConcurrentPercentage , but not both.
 	StackSetMaxConcurrencyCount *int32
 
 	// The maximum percentage of accounts in which to perform this operation at one
@@ -985,16 +943,16 @@ type ProvisioningPreferences struct {
 	// maximum for operations. For large deployments, under certain circumstances the
 	// actual number of accounts acted upon concurrently may be lower due to service
 	// throttling. Applicable only to a CFN_STACKSET provisioned product type.
-	// Conditional: You must specify either StackSetMaxConcurrentCount or
-	// StackSetMaxConcurrentPercentage, but not both.
+	// Conditional: You must specify either StackSetMaxConcurrentCount  or
+	// StackSetMaxConcurrentPercentage , but not both.
 	StackSetMaxConcurrencyPercentage *int32
 
 	// One or more Amazon Web Services Regions where the provisioned product will be
 	// available. Applicable only to a CFN_STACKSET provisioned product type. The
 	// specified Regions should be within the list of Regions from the STACKSET
-	// constraint. To get the list of Regions in the STACKSET constraint, use the
-	// DescribeProvisioningParameters operation. If no values are specified, the
-	// default value is all Regions from the STACKSET constraint.
+	// constraint. To get the list of Regions in the STACKSET  constraint, use the
+	// DescribeProvisioningParametersoperation. If no values are specified, the
+	// default value is all Regions from the STACKSET  constraint.
 	StackSetRegions []string
 
 	noSmithyDocumentSerde
@@ -1021,8 +979,8 @@ type RecordDetail struct {
 	// The user-friendly name of the provisioned product.
 	ProvisionedProductName *string
 
-	// The type of provisioned product. The supported values are CFN_STACK and
-	// CFN_STACKSET.
+	// The type of provisioned product. The supported values are CFN_STACK  and
+	// CFN_STACKSET .
 	ProvisionedProductType *string
 
 	// The identifier of the provisioning artifact.
@@ -1038,24 +996,17 @@ type RecordDetail struct {
 	RecordTags []RecordTag
 
 	// The record type.
-	// - PROVISION_PRODUCT
-	// - UPDATE_PROVISIONED_PRODUCT
-	// -
-	// TERMINATE_PROVISIONED_PRODUCT
+	//     - PROVISION_PRODUCT
+	//     - UPDATE_PROVISIONED_PRODUCT
+	//     - TERMINATE_PROVISIONED_PRODUCT
 	RecordType *string
 
 	// The status of the provisioned product.
-	// - CREATED - The request was created but
-	// the operation has not started.
-	// - IN_PROGRESS - The requested operation is in
-	// progress.
-	// - IN_PROGRESS_IN_ERROR - The provisioned product is under change but
-	// the requested operation failed and some remediation is occurring. For example, a
-	// rollback.
-	// - SUCCEEDED - The requested operation has successfully completed.
-	// -
-	// FAILED - The requested operation has unsuccessfully completed. Investigate using
-	// the error messages returned.
+	//     - CREATED - The request was created but the operation has not started.
+	//     - IN_PROGRESS - The requested operation is in progress.
+	//     - IN_PROGRESS_IN_ERROR - The provisioned product is under change but the requested operation failed and some remediation is occurring. For example, a rollback.
+	//     - SUCCEEDED - The requested operation has successfully completed.
+	//     - FAILED - The requested operation has unsuccessfully completed. Investigate using the error messages returned.
 	Status RecordStatus
 
 	// The time when the record was last updated.
@@ -1076,8 +1027,8 @@ type RecordError struct {
 	noSmithyDocumentSerde
 }
 
-// The output for the product created as the result of a request. For example, the
-// output for a CloudFormation-backed product that creates an S3 bucket would
+// The output for the product created as the result of a request. For example,
+// the output for a CloudFormation-backed product that creates an S3 bucket would
 // include the S3 bucket URL.
 type RecordOutput struct {
 
@@ -1120,8 +1071,8 @@ type ResourceChange struct {
 	// The ID of the resource, if it was already created.
 	PhysicalResourceId *string
 
-	// If the change type is Modify, indicates whether the existing resource is deleted
-	// and replaced with a new one.
+	// If the change type is Modify, indicates whether the existing resource is
+	// deleted and replaced with a new one.
 	Replacement Replacement
 
 	// The type of resource.
@@ -1139,9 +1090,9 @@ type ResourceChangeDetail struct {
 	// The ID of the entity that caused the change.
 	CausingEntity *string
 
-	// For static evaluations, the value of the resource attribute will change and the
-	// new value is known. For dynamic evaluations, the value might change, and any new
-	// value will be determined when the plan is updated.
+	// For static evaluations, the value of the resource attribute will change and
+	// the new value is known. For dynamic evaluations, the value might change, and any
+	// new value will be determined when the plan is updated.
 	Evaluation EvaluationType
 
 	// Information about the resource attribute to be modified.
@@ -1192,17 +1143,17 @@ type ResourceTargetDefinition struct {
 // and the Provisioning Artifact ID.
 type ServiceActionAssociation struct {
 
-	// The product identifier. For example, prod-abcdzk7xy33qa.
+	// The product identifier. For example, prod-abcdzk7xy33qa .
 	//
 	// This member is required.
 	ProductId *string
 
-	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne .
 	//
 	// This member is required.
 	ProvisioningArtifactId *string
 
-	// The self-service action identifier. For example, act-fs7abcd89wxyz.
+	// The self-service action identifier. For example, act-fs7abcd89wxyz .
 	//
 	// This member is required.
 	ServiceActionId *string
@@ -1225,7 +1176,7 @@ type ServiceActionDetail struct {
 // Detailed information about the self-service action.
 type ServiceActionSummary struct {
 
-	// The self-service action definition type. For example, SSM_AUTOMATION.
+	// The self-service action definition type. For example, SSM_AUTOMATION .
 	DefinitionType ServiceActionDefinitionType
 
 	// The self-service action description.
@@ -1268,40 +1219,39 @@ type ShareError struct {
 }
 
 // A top level ProductViewDetail response containing details about the product’s
-// connection. Service Catalog returns this field for the CreateProduct,
-// UpdateProduct, DescribeProductAsAdmin, and SearchProductAsAdmin APIs. This
-// response contains the same fields as the ConnectionParameters request, with the
-// addition of the LastSync response.
+// connection. Service Catalog returns this field for the CreateProduct ,
+// UpdateProduct , DescribeProductAsAdmin , and SearchProductAsAdmin APIs. This
+// response contains the same fields as the ConnectionParameters request, with
+// the addition of the LastSync  response.
 type SourceConnection struct {
 
-	// The connection details based on the connection Type.
+	// The connection details based on the connection Type .
 	//
 	// This member is required.
 	ConnectionParameters *SourceConnectionParameters
 
-	// The only supported SourceConnection type is Codestar.
+	// The only supported SourceConnection  type is Codestar.
 	Type SourceType
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about the configured SourceConnection.
+// Provides details about the configured SourceConnection .
 type SourceConnectionDetail struct {
 
-	// The connection details based on the connection Type.
+	// The connection details based on the connection Type .
 	ConnectionParameters *SourceConnectionParameters
 
-	// Provides details about the product's connection sync and contains the following
-	// sub-fields.
-	// - LastSyncTime
-	// - LastSyncStatus
-	// - LastSyncStatusMessage
-	// -
-	// LastSuccessfulSyncTime
-	// - LastSuccessfulSyncProvisioningArtifactID
+	// Provides details about the product's connection sync and contains the
+	// following sub-fields.
+	//     - LastSyncTime
+	//     - LastSyncStatus
+	//     - LastSyncStatusMessage
+	//     - LastSuccessfulSyncTime
+	//     - LastSuccessfulSyncProvisioningArtifactID
 	LastSync *LastSync
 
-	// The only supported SourceConnection type is Codestar.
+	// The only supported SourceConnection  type is Codestar.
 	Type SourceType
 
 	noSmithyDocumentSerde
@@ -1310,7 +1260,7 @@ type SourceConnectionDetail struct {
 // Provides connection details.
 type SourceConnectionParameters struct {
 
-	// Provides ConnectionType details.
+	// Provides ConnectionType  details.
 	CodeStar *CodeStarParameters
 
 	noSmithyDocumentSerde
@@ -1329,24 +1279,15 @@ type StackInstance struct {
 	// associated with.
 	Account *string
 
-	// The name of the Amazon Web Services Region that the stack instance is associated
-	// with.
+	// The name of the Amazon Web Services Region that the stack instance is
+	// associated with.
 	Region *string
 
 	// The status of the stack instance, in terms of its synchronization with its
 	// associated stack set.
-	// - INOPERABLE: A DeleteStackInstances operation has failed
-	// and left the stack in an unstable state. Stacks in this state are excluded from
-	// further UpdateStackSet operations. You might need to perform a
-	// DeleteStackInstances operation, with RetainStacks set to true, to delete the
-	// stack instance, and then delete the stack manually.
-	// - OUTDATED: The stack isn't
-	// currently up to date with the stack set because either the associated stack
-	// failed during a CreateStackSet or UpdateStackSet operation, or the stack was
-	// part of a CreateStackSet or UpdateStackSet operation that failed or was stopped
-	// before the stack was created or updated.
-	// - CURRENT: The stack is currently up to
-	// date with the stack set.
+	//     - INOPERABLE : A DeleteStackInstances operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further UpdateStackSet operations. You might need to perform a DeleteStackInstances operation, with RetainStacks set to true, to delete the stack instance, and then delete the stack manually.
+	//     - OUTDATED : The stack isn't currently up to date with the stack set because either the associated stack failed during a CreateStackSet or UpdateStackSet operation, or the stack was part of a CreateStackSet or UpdateStackSet operation that failed or was stopped before the stack was created or updated.
+	//     - CURRENT : The stack is currently up to date with the stack set.
 	StackInstanceStatus StackInstanceStatus
 
 	noSmithyDocumentSerde
@@ -1409,7 +1350,7 @@ type UpdateProvisioningParameter struct {
 	// The parameter key.
 	Key *string
 
-	// If set to true, Value is ignored and the previous parameter value is kept.
+	// If set to true, Value  is ignored and the previous parameter value is kept.
 	UsePreviousValue bool
 
 	// The parameter value.
@@ -1423,41 +1364,42 @@ type UpdateProvisioningParameter struct {
 type UpdateProvisioningPreferences struct {
 
 	// One or more Amazon Web Services accounts that will have access to the
-	// provisioned product. Applicable only to a CFN_STACKSET provisioned product type.
-	// The Amazon Web Services accounts specified should be within the list of accounts
-	// in the STACKSET constraint. To get the list of accounts in the STACKSET
-	// constraint, use the DescribeProvisioningParameters operation. If no values are
-	// specified, the default value is all accounts from the STACKSET constraint.
+	// provisioned product. Applicable only to a CFN_STACKSET provisioned product
+	// type. The Amazon Web Services accounts specified should be within the list of
+	// accounts in the STACKSET  constraint. To get the list of accounts in the
+	// STACKSET constraint, use the DescribeProvisioningParameters operation. If no
+	// values are specified, the default value is all accounts from the STACKSET
+	// constraint.
 	StackSetAccounts []string
 
 	// The number of accounts, per Region, for which this operation can fail before
 	// Service Catalog stops the operation in that Region. If the operation is stopped
 	// in a Region, Service Catalog doesn't attempt the operation in any subsequent
 	// Regions. Applicable only to a CFN_STACKSET provisioned product type.
-	// Conditional: You must specify either StackSetFailureToleranceCount or
-	// StackSetFailureTolerancePercentage, but not both. The default value is 0 if no
-	// value is specified.
+	// Conditional: You must specify either StackSetFailureToleranceCount  or
+	// StackSetFailureTolerancePercentage , but not both. The default value is 0 if
+	// no value is specified.
 	StackSetFailureToleranceCount *int32
 
-	// The percentage of accounts, per Region, for which this stack operation can fail
-	// before Service Catalog stops the operation in that Region. If the operation is
-	// stopped in a Region, Service Catalog doesn't attempt the operation in any
+	// The percentage of accounts, per Region, for which this stack operation can
+	// fail before Service Catalog stops the operation in that Region. If the operation
+	// is stopped in a Region, Service Catalog doesn't attempt the operation in any
 	// subsequent Regions. When calculating the number of accounts based on the
 	// specified percentage, Service Catalog rounds down to the next whole number.
 	// Applicable only to a CFN_STACKSET provisioned product type. Conditional: You
-	// must specify either StackSetFailureToleranceCount or
-	// StackSetFailureTolerancePercentage, but not both.
+	// must specify either StackSetFailureToleranceCount  or
+	// StackSetFailureTolerancePercentage , but not both.
 	StackSetFailureTolerancePercentage *int32
 
 	// The maximum number of accounts in which to perform this operation at one time.
-	// This is dependent on the value of StackSetFailureToleranceCount.
+	// This is dependent on the value of StackSetFailureToleranceCount .
 	// StackSetMaxConcurrentCount is at most one more than the
 	// StackSetFailureToleranceCount. Note that this setting lets you specify the
 	// maximum for operations. For large deployments, under certain circumstances the
 	// actual number of accounts acted upon concurrently may be lower due to service
 	// throttling. Applicable only to a CFN_STACKSET provisioned product type.
-	// Conditional: You must specify either StackSetMaxConcurrentCount or
-	// StackSetMaxConcurrentPercentage, but not both.
+	// Conditional: You must specify either StackSetMaxConcurrentCount  or
+	// StackSetMaxConcurrentPercentage , but not both.
 	StackSetMaxConcurrencyCount *int32
 
 	// The maximum percentage of accounts in which to perform this operation at one
@@ -1468,13 +1410,13 @@ type UpdateProvisioningPreferences struct {
 	// maximum for operations. For large deployments, under certain circumstances the
 	// actual number of accounts acted upon concurrently may be lower due to service
 	// throttling. Applicable only to a CFN_STACKSET provisioned product type.
-	// Conditional: You must specify either StackSetMaxConcurrentCount or
-	// StackSetMaxConcurrentPercentage, but not both.
+	// Conditional: You must specify either StackSetMaxConcurrentCount  or
+	// StackSetMaxConcurrentPercentage , but not both.
 	StackSetMaxConcurrencyPercentage *int32
 
 	// Determines what action Service Catalog performs to a stack set or a stack
-	// instance represented by the provisioned product. The default value is UPDATE if
-	// nothing is specified. Applicable only to a CFN_STACKSET provisioned product
+	// instance represented by the provisioned product. The default value is UPDATE
+	// if nothing is specified. Applicable only to a CFN_STACKSET provisioned product
 	// type. CREATE Creates a new stack instance in the stack set represented by the
 	// provisioned product. In this case, only new stack instances are created based on
 	// accounts and Regions; if new ProductId or ProvisioningArtifactID are passed,
@@ -1486,9 +1428,9 @@ type UpdateProvisioningPreferences struct {
 	// One or more Amazon Web Services Regions where the provisioned product will be
 	// available. Applicable only to a CFN_STACKSET provisioned product type. The
 	// specified Regions should be within the list of Regions from the STACKSET
-	// constraint. To get the list of Regions in the STACKSET constraint, use the
-	// DescribeProvisioningParameters operation. If no values are specified, the
-	// default value is all Regions from the STACKSET constraint.
+	// constraint. To get the list of Regions in the STACKSET  constraint, use the
+	// DescribeProvisioningParametersoperation. If no values are specified, the
+	// default value is all Regions from the STACKSET  constraint.
 	StackSetRegions []string
 
 	noSmithyDocumentSerde

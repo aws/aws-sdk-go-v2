@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get all rules for a detector (paginated) if ruleId and ruleVersion are not
+// Get all rules for a detector (paginated) if ruleId  and ruleVersion are not
 // specified. Gets all rules for the detector and the ruleId if present
-// (paginated). Gets a specific rule if both the ruleId and the ruleVersion are
+// (paginated). Gets a specific rule if both the ruleId  and the ruleVersion are
 // specified. This is a paginated API. Providing null maxResults results in
 // retrieving maximum of 100 records per page. If you provide maxResults the value
 // must be between 50 and 100. To get the next page result, a provide a pagination
@@ -146,8 +146,8 @@ type GetRulesPaginatorOptions struct {
 	// The maximum number of rules to return for the request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

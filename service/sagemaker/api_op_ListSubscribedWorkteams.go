@@ -14,7 +14,7 @@ import (
 
 // Gets a list of the work teams that you are subscribed to in the Amazon Web
 // Services Marketplace. The list may be empty if no work team satisfies the filter
-// specified in the NameContains parameter.
+// specified in the NameContains  parameter.
 func (c *Client) ListSubscribedWorkteams(ctx context.Context, params *ListSubscribedWorkteamsInput, optFns ...func(*Options)) (*ListSubscribedWorkteamsOutput, error) {
 	if params == nil {
 		params = &ListSubscribedWorkteamsInput{}
@@ -39,9 +39,9 @@ type ListSubscribedWorkteamsInput struct {
 	// contains the specified string.
 	NameContains *string
 
-	// If the result of the previous ListSubscribedWorkteams request was truncated, the
-	// response includes a NextToken. To retrieve the next set of labeling jobs, use
-	// the token in the next request.
+	// If the result of the previous ListSubscribedWorkteams request was truncated,
+	// the response includes a NextToken. To retrieve the next set of labeling jobs,
+	// use the token in the next request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,7 +49,7 @@ type ListSubscribedWorkteamsInput struct {
 
 type ListSubscribedWorkteamsOutput struct {
 
-	// An array of Workteam objects, each describing a work team.
+	// An array of Workteam  objects, each describing a work team.
 	//
 	// This member is required.
 	SubscribedWorkteams []types.SubscribedWorkteam
@@ -138,8 +138,8 @@ type ListSubscribedWorkteamsPaginatorOptions struct {
 	// The maximum number of work teams to return in each page of the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

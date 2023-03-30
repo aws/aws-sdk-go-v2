@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Defines the settings you will use for the human review workflow user interface.
-// Reviewers will see a three-panel interface with an instruction area, the item to
-// review, and an input area.
+// Defines the settings you will use for the human review workflow user
+// interface. Reviewers will see a three-panel interface with an instruction area,
+// the item to review, and an input area.
 func (c *Client) CreateHumanTaskUi(ctx context.Context, params *CreateHumanTaskUiInput, optFns ...func(*Options)) (*CreateHumanTaskUiOutput, error) {
 	if params == nil {
 		params = &CreateHumanTaskUiInput{}

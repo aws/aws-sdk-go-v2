@@ -51,12 +51,12 @@ type GetNetworkAnalyzerConfigurationOutput struct {
 	// Trace content for your wireless gateway and wireless device resources.
 	TraceContent *types.TraceContent
 
-	// List of wireless gateway resources that have been added to the network analyzer
-	// configuration.
+	// List of wireless gateway resources that have been added to the network
+	// analyzer configuration.
 	WirelessDevices []string
 
-	// List of wireless gateway resources that have been added to the network analyzer
-	// configuration.
+	// List of wireless gateway resources that have been added to the network
+	// analyzer configuration.
 	WirelessGateways []string
 
 	// Metadata pertaining to the operation's result.

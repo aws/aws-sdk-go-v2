@@ -18,10 +18,8 @@ import (
 // the evaluation mode that was run, and whether the resource details comply with
 // the configuration of the proactive rules. To see additional information about
 // the evaluation result, such as which rule flagged a resource as NON_COMPLIANT,
-// use the GetComplianceDetailsByResource
-// (https://docs.aws.amazon.com/config/latest/APIReference/API_GetComplianceDetailsByResource.html)
-// API. For more information, see the Examples
-// (https://docs.aws.amazon.com/config/latest/APIReference/API_GetResourceEvaluationSummary.html#API_GetResourceEvaluationSummary_Examples)
+// use the GetComplianceDetailsByResource (https://docs.aws.amazon.com/config/latest/APIReference/API_GetComplianceDetailsByResource.html)
+// API. For more information, see the Examples (https://docs.aws.amazon.com/config/latest/APIReference/API_GetResourceEvaluationSummary.html#API_GetResourceEvaluationSummary_Examples)
 // section.
 func (c *Client) GetResourceEvaluationSummary(ctx context.Context, params *GetResourceEvaluationSummaryInput, optFns ...func(*Options)) (*GetResourceEvaluationSummaryOutput, error) {
 	if params == nil {
@@ -54,21 +52,21 @@ type GetResourceEvaluationSummaryOutput struct {
 	// The compliance status of the resource evaluation summary.
 	Compliance types.ComplianceType
 
-	// Returns an EvaluationContext object.
+	// Returns an EvaluationContext  object.
 	EvaluationContext *types.EvaluationContext
 
-	// Lists results of the mode that you requested to retrieve the resource evaluation
-	// summary. The valid values are Detective or Proactive.
+	// Lists results of the mode that you requested to retrieve the resource
+	// evaluation summary. The valid values are Detective or Proactive.
 	EvaluationMode types.EvaluationMode
 
 	// The start timestamp when Config rule starts evaluating compliance for the
 	// provided resource details.
 	EvaluationStartTimestamp *time.Time
 
-	// Returns an EvaluationStatus object.
+	// Returns an EvaluationStatus  object.
 	EvaluationStatus *types.EvaluationStatus
 
-	// Returns a ResourceDetails object.
+	// Returns a ResourceDetails  object.
 	ResourceDetails *types.ResourceDetails
 
 	// The unique ResourceEvaluationId of Amazon Web Services resource execution for

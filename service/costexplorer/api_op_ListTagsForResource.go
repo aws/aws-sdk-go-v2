@@ -31,8 +31,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 type ListTagsForResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource. For a list of supported
-	// resources, see ResourceTag
-	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html).
+	// resources, see ResourceTag (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html)
+	// .
 	//
 	// This member is required.
 	ResourceArn *string

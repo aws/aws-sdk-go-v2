@@ -11,11 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Lambda layer
-// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) from a
-// ZIP archive. Each time you call PublishLayerVersion with the same layer name, a
-// new version is created. Add layers to your function with CreateFunction or
-// UpdateFunctionConfiguration.
+// Creates an Lambda layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
+// from a ZIP archive. Each time you call PublishLayerVersion with the same layer
+// name, a new version is created. Add layers to your function with CreateFunction
+// or UpdateFunctionConfiguration .
 func (c *Client) PublishLayerVersion(ctx context.Context, params *PublishLayerVersionInput, optFns ...func(*Options)) (*PublishLayerVersionOutput, error) {
 	if params == nil {
 		params = &PublishLayerVersionInput{}
@@ -43,25 +42,21 @@ type PublishLayerVersionInput struct {
 	// This member is required.
 	LayerName *string
 
-	// A list of compatible instruction set architectures
-	// (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
+	// A list of compatible instruction set architectures (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)
+	// .
 	CompatibleArchitectures []types.Architecture
 
-	// A list of compatible function runtimes
-	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html). Used for
-	// filtering with ListLayers and ListLayerVersions.
+	// A list of compatible function runtimes (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
+	// . Used for filtering with ListLayers  and ListLayerVersions .
 	CompatibleRuntimes []types.Runtime
 
 	// The description of the version.
 	Description *string
 
 	// The layer's software license. It can be any of the following:
-	// - An SPDX license
-	// identifier (https://spdx.org/licenses/). For example, MIT.
-	// - The URL of a
-	// license hosted on the internet. For example,
-	// https://opensource.org/licenses/MIT.
-	// - The full text of the license.
+	//     - An SPDX license identifier (https://spdx.org/licenses/) . For example, MIT .
+	//     - The URL of a license hosted on the internet. For example, https://opensource.org/licenses/MIT .
+	//     - The full text of the license.
 	LicenseInfo *string
 
 	noSmithyDocumentSerde
@@ -69,8 +64,8 @@ type PublishLayerVersionInput struct {
 
 type PublishLayerVersionOutput struct {
 
-	// A list of compatible instruction set architectures
-	// (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
+	// A list of compatible instruction set architectures (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)
+	// .
 	CompatibleArchitectures []types.Architecture
 
 	// The layer's compatible runtimes.
@@ -79,8 +74,8 @@ type PublishLayerVersionOutput struct {
 	// Details about the layer version.
 	Content *types.LayerVersionContentOutput
 
-	// The date that the layer version was created, in ISO-8601 format
-	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
+	// The date that the layer version was created, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
+	// (YYYY-MM-DDThh:mm:ss.sTZD).
 	CreatedDate *string
 
 	// The description of the version.

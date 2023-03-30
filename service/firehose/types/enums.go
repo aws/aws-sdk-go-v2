@@ -10,9 +10,9 @@ const (
 	AmazonOpenSearchServerlessS3BackupModeAllDocuments        AmazonOpenSearchServerlessS3BackupMode = "AllDocuments"
 )
 
-// Values returns all known values for AmazonOpenSearchServerlessS3BackupMode. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for AmazonOpenSearchServerlessS3BackupMode.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (AmazonOpenSearchServerlessS3BackupMode) Values() []AmazonOpenSearchServerlessS3BackupMode {
 	return []AmazonOpenSearchServerlessS3BackupMode{
@@ -32,10 +32,10 @@ const (
 	AmazonopensearchserviceIndexRotationPeriodOneMonth   AmazonopensearchserviceIndexRotationPeriod = "OneMonth"
 )
 
-// Values returns all known values for AmazonopensearchserviceIndexRotationPeriod.
-// Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for
+// AmazonopensearchserviceIndexRotationPeriod. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (AmazonopensearchserviceIndexRotationPeriod) Values() []AmazonopensearchserviceIndexRotationPeriod {
 	return []AmazonopensearchserviceIndexRotationPeriod{
 		"NoRotation",
@@ -189,8 +189,8 @@ const (
 	DeliveryStreamStatusActive         DeliveryStreamStatus = "ACTIVE"
 )
 
-// Values returns all known values for DeliveryStreamStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DeliveryStreamStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DeliveryStreamStatus) Values() []DeliveryStreamStatus {
 	return []DeliveryStreamStatus{
@@ -231,8 +231,8 @@ const (
 	ElasticsearchIndexRotationPeriodOneMonth   ElasticsearchIndexRotationPeriod = "OneMonth"
 )
 
-// Values returns all known values for ElasticsearchIndexRotationPeriod. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for ElasticsearchIndexRotationPeriod. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (ElasticsearchIndexRotationPeriod) Values() []ElasticsearchIndexRotationPeriod {
@@ -289,9 +289,9 @@ const (
 	HttpEndpointS3BackupModeAllData        HttpEndpointS3BackupMode = "AllData"
 )
 
-// Values returns all known values for HttpEndpointS3BackupMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for HttpEndpointS3BackupMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HttpEndpointS3BackupMode) Values() []HttpEndpointS3BackupMode {
 	return []HttpEndpointS3BackupMode{
 		"FailedDataOnly",
@@ -399,8 +399,8 @@ const (
 	ParquetWriterVersionV2 ParquetWriterVersion = "V2"
 )
 
-// Values returns all known values for ParquetWriterVersion. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ParquetWriterVersion. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ParquetWriterVersion) Values() []ParquetWriterVersion {
 	return []ParquetWriterVersion{
@@ -471,8 +471,8 @@ const (
 	RedshiftS3BackupModeEnabled  RedshiftS3BackupMode = "Enabled"
 )
 
-// Values returns all known values for RedshiftS3BackupMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RedshiftS3BackupMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RedshiftS3BackupMode) Values() []RedshiftS3BackupMode {
 	return []RedshiftS3BackupMode{
@@ -489,9 +489,9 @@ const (
 	S3BackupModeEnabled  S3BackupMode = "Enabled"
 )
 
-// Values returns all known values for S3BackupMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for S3BackupMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (S3BackupMode) Values() []S3BackupMode {
 	return []S3BackupMode{
 		"Disabled",

@@ -33,8 +33,8 @@ type TagResourceInput struct {
 	// This member is required.
 	Arn *string
 
-	// The list of tags to associate with the resource. Tag key names cannot start with
-	// "aws".
+	// The list of tags to associate with the resource. Tag key names cannot start
+	// with " aws ".
 	//
 	// This member is required.
 	Tags map[string]string

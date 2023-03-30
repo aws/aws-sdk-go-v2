@@ -47,8 +47,7 @@ type UpdateApplicationInput struct {
 	// This member is required.
 	ApplicationUpdate *types.ApplicationUpdate
 
-	// The current application version ID. You can use the DescribeApplication
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// The current application version ID. You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation to get this value.
 	//
 	// This member is required.

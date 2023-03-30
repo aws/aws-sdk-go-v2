@@ -18,16 +18,11 @@ import (
 // other Regions as needed. In the China (Ningxia) Region, you can copy images only
 // within the same Region. In Amazon Web Services GovCloud (US), to copy images to
 // and from other Regions, contact Amazon Web Services Support. For more
-// information about sharing images, see  Share or Unshare a Custom WorkSpaces
-// Image
-// (https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html).
-// -
-// To delete an image that has been shared, you must unshare the image before you
-// delete it.
-// - Sharing Bring Your Own License (BYOL) images across Amazon Web
-// Services accounts isn't supported at this time in Amazon Web Services GovCloud
-// (US). To share BYOL images across accounts in Amazon Web Services GovCloud (US),
-// contact Amazon Web Services Support.
+// information about sharing images, see Share or Unshare a Custom WorkSpaces
+// Image (https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html)
+// .
+//   - To delete an image that has been shared, you must unshare the image before you delete it.
+//   - Sharing Bring Your Own License (BYOL) images across Amazon Web Services accounts isn't supported at this time in Amazon Web Services GovCloud (US). To share BYOL images across accounts in Amazon Web Services GovCloud (US), contact Amazon Web Services Support.
 func (c *Client) UpdateWorkspaceImagePermission(ctx context.Context, params *UpdateWorkspaceImagePermissionInput, optFns ...func(*Options)) (*UpdateWorkspaceImagePermissionOutput, error) {
 	if params == nil {
 		params = &UpdateWorkspaceImagePermissionInput{}
@@ -56,9 +51,9 @@ type UpdateWorkspaceImagePermissionInput struct {
 	// This member is required.
 	ImageId *string
 
-	// The identifier of the Amazon Web Services account to share or unshare the image
-	// with. Before sharing the image, confirm that you are sharing to the correct
-	// Amazon Web Services account ID.
+	// The identifier of the Amazon Web Services account to share or unshare the
+	// image with. Before sharing the image, confirm that you are sharing to the
+	// correct Amazon Web Services account ID.
 	//
 	// This member is required.
 	SharedAccountId *string

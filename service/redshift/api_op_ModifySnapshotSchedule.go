@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Modifies a snapshot schedule. Any schedule associated with a cluster is modified
-// asynchronously.
+// Modifies a snapshot schedule. Any schedule associated with a cluster is
+// modified asynchronously.
 func (c *Client) ModifySnapshotSchedule(ctx context.Context, params *ModifySnapshotScheduleInput, optFns ...func(*Options)) (*ModifySnapshotScheduleOutput, error) {
 	if params == nil {
 		params = &ModifySnapshotScheduleInput{}

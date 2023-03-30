@@ -18,15 +18,15 @@ import (
 // Streams sets the status of the stream back to ACTIVE. Updating or applying
 // encryption normally takes a few seconds to complete, but it can take minutes.
 // You can continue to read and write data to your stream while its status is
-// UPDATING. Once the status of the stream is ACTIVE, encryption begins for records
-// written to the stream. API Limits: You can successfully apply a new Amazon Web
-// Services KMS key for server-side encryption 25 times in a rolling 24-hour
-// period. Note: It can take up to 5 seconds after the stream is in an ACTIVE
-// status before all records written to the stream are encrypted. After you enable
-// encryption, you can verify that encryption is applied by inspecting the API
-// response from PutRecord or PutRecords. When invoking this API, it is recommended
-// you use the StreamARN input parameter rather than the StreamName input
-// parameter.
+// UPDATING . Once the status of the stream is ACTIVE, encryption begins for
+// records written to the stream. API Limits: You can successfully apply a new
+// Amazon Web Services KMS key for server-side encryption 25 times in a rolling
+// 24-hour period. Note: It can take up to 5 seconds after the stream is in an
+// ACTIVEstatus before all records written to the stream are encrypted. After you
+// enable encryption, you can verify that encryption is applied by inspecting the
+// API response from PutRecord  or PutRecords. When invoking this API, it is
+// recommended you use the StreamARN  input parameter rather than the StreamName
+// input parameter.
 func (c *Client) StartStreamEncryption(ctx context.Context, params *StartStreamEncryptionInput, optFns ...func(*Options)) (*StartStreamEncryptionOutput, error) {
 	if params == nil {
 		params = &StartStreamEncryptionInput{}
@@ -44,7 +44,7 @@ func (c *Client) StartStreamEncryption(ctx context.Context, params *StartStreamE
 
 type StartStreamEncryptionInput struct {
 
-	// The encryption type to use. The only valid value is KMS.
+	// The encryption type to use. The only valid value is KMS .
 	//
 	// This member is required.
 	EncryptionType types.EncryptionType
@@ -53,17 +53,12 @@ type StartStreamEncryptionInput struct {
 	// encryption. This value can be a globally unique identifier, a fully specified
 	// Amazon Resource Name (ARN) to either an alias or a key, or an alias name
 	// prefixed by "alias/".You can also use a master key owned by Kinesis Data Streams
-	// by specifying the alias aws/kinesis.
-	// - Key ARN example:
-	// arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-	// -
-	// Alias ARN example: arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
-	// -
-	// Globally unique key ID example: 12345678-1234-1234-1234-123456789012
-	// - Alias
-	// name example: alias/MyAliasName
-	// - Master key owned by Kinesis Data Streams:
-	// alias/aws/kinesis
+	// by specifying the alias aws/kinesis .
+	//     - Key ARN example: arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	//     - Alias ARN example: arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+	//     - Globally unique key ID example: 12345678-1234-1234-1234-123456789012
+	//     - Alias name example: alias/MyAliasName
+	//     - Master key owned by Kinesis Data Streams: alias/aws/kinesis
 	//
 	// This member is required.
 	KeyId *string

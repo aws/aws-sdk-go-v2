@@ -14,8 +14,7 @@ import (
 // Creates a real-time log configuration. After you create a real-time log
 // configuration, you can attach it to one or more cache behaviors to send
 // real-time log data to the specified Amazon Kinesis data stream. For more
-// information about real-time log configurations, see Real-time logs
-// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html)
+// information about real-time log configurations, see Real-time logs (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html)
 // in the Amazon CloudFront Developer Guide.
 func (c *Client) CreateRealtimeLogConfig(ctx context.Context, params *CreateRealtimeLogConfigInput, optFns ...func(*Options)) (*CreateRealtimeLogConfigOutput, error) {
 	if params == nil {
@@ -34,15 +33,14 @@ func (c *Client) CreateRealtimeLogConfig(ctx context.Context, params *CreateReal
 
 type CreateRealtimeLogConfigInput struct {
 
-	// Contains information about the Amazon Kinesis data stream where you are sending
-	// real-time log data.
+	// Contains information about the Amazon Kinesis data stream where you are
+	// sending real-time log data.
 	//
 	// This member is required.
 	EndPoints []types.EndPoint
 
 	// A list of fields to include in each real-time log record. For more information
-	// about fields, see Real-time log configuration fields
-	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields)
+	// about fields, see Real-time log configuration fields (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// This member is required.

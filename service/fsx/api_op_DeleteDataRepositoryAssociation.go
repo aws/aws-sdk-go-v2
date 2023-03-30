@@ -17,7 +17,7 @@ import (
 // S3 bucket. When deleting a data repository association, you have the option of
 // deleting the data in the file system that corresponds to the data repository
 // association. Data repository associations are supported only for file systems
-// with the Persistent_2 deployment type.
+// with the Persistent_2  deployment type.
 func (c *Client) DeleteDataRepositoryAssociation(ctx context.Context, params *DeleteDataRepositoryAssociationInput, optFns ...func(*Options)) (*DeleteDataRepositoryAssociationOutput, error) {
 	if params == nil {
 		params = &DeleteDataRepositoryAssociationInput{}
@@ -58,7 +58,7 @@ type DeleteDataRepositoryAssociationOutput struct {
 	AssociationId *string
 
 	// Indicates whether data in the file system that corresponds to the data
-	// repository association is being deleted. Default is false.
+	// repository association is being deleted. Default is false .
 	DeleteDataInFileSystem *bool
 
 	// Describes the lifecycle state of the data repository association being deleted.

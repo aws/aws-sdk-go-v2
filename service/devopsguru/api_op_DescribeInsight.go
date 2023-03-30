@@ -42,10 +42,10 @@ type DescribeInsightInput struct {
 
 type DescribeInsightOutput struct {
 
-	// A ProactiveInsight object that represents the requested insight.
+	// A ProactiveInsight  object that represents the requested insight.
 	ProactiveInsight *types.ProactiveInsight
 
-	// A ReactiveInsight object that represents the requested insight.
+	// A ReactiveInsight  object that represents the requested insight.
 	ReactiveInsight *types.ReactiveInsight
 
 	// Metadata pertaining to the operation's result.

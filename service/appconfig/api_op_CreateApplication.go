@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an application. In AppConfig, an application is simply an organizational
-// construct like a folder. This organizational construct has a relationship with
-// some unit of executable code. For example, you could create an application
-// called MyMobileApp to organize and manage configuration data for a mobile
-// application installed by your users.
+// Creates an application. In AppConfig, an application is simply an
+// organizational construct like a folder. This organizational construct has a
+// relationship with some unit of executable code. For example, you could create an
+// application called MyMobileApp to organize and manage configuration data for a
+// mobile application installed by your users.
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}

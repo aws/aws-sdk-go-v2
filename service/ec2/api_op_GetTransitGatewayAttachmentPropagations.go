@@ -38,17 +38,16 @@ type GetTransitGatewayAttachmentPropagationsInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// One or more filters. The possible values are:
-	// - transit-gateway-route-table-id -
-	// The ID of the transit gateway route table.
+	//     - transit-gateway-route-table-id - The ID of the transit gateway route table.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -135,23 +134,23 @@ func (c *Client) addOperationGetTransitGatewayAttachmentPropagationsMiddlewares(
 	return nil
 }
 
-// GetTransitGatewayAttachmentPropagationsAPIClient is a client that implements the
-// GetTransitGatewayAttachmentPropagations operation.
+// GetTransitGatewayAttachmentPropagationsAPIClient is a client that implements
+// the GetTransitGatewayAttachmentPropagations operation.
 type GetTransitGatewayAttachmentPropagationsAPIClient interface {
 	GetTransitGatewayAttachmentPropagations(context.Context, *GetTransitGatewayAttachmentPropagationsInput, ...func(*Options)) (*GetTransitGatewayAttachmentPropagationsOutput, error)
 }
 
 var _ GetTransitGatewayAttachmentPropagationsAPIClient = (*Client)(nil)
 
-// GetTransitGatewayAttachmentPropagationsPaginatorOptions is the paginator options
-// for GetTransitGatewayAttachmentPropagations
+// GetTransitGatewayAttachmentPropagationsPaginatorOptions is the paginator
+// options for GetTransitGatewayAttachmentPropagations
 type GetTransitGatewayAttachmentPropagationsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

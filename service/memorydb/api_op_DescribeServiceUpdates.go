@@ -33,9 +33,9 @@ type DescribeServiceUpdatesInput struct {
 	// The list of cluster names to identify service updates to apply
 	ClusterNames []string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxResults value, a token is included in the response
+	// so that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// An optional argument to pass in case the total number of records exceeds the
@@ -143,13 +143,13 @@ var _ DescribeServiceUpdatesAPIClient = (*Client)(nil)
 // DescribeServiceUpdatesPaginatorOptions is the paginator options for
 // DescribeServiceUpdates
 type DescribeServiceUpdatesPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxResults value, a token is included in the response
+	// so that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -162,7 +162,8 @@ type DescribeServiceUpdatesPaginator struct {
 	firstPage bool
 }
 
-// NewDescribeServiceUpdatesPaginator returns a new DescribeServiceUpdatesPaginator
+// NewDescribeServiceUpdatesPaginator returns a new
+// DescribeServiceUpdatesPaginator
 func NewDescribeServiceUpdatesPaginator(client DescribeServiceUpdatesAPIClient, params *DescribeServiceUpdatesInput, optFns ...func(*DescribeServiceUpdatesPaginatorOptions)) *DescribeServiceUpdatesPaginator {
 	if params == nil {
 		params = &DescribeServiceUpdatesInput{}

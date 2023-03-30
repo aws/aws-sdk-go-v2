@@ -45,7 +45,7 @@ type GetCloudFrontOriginAccessIdentityOutput struct {
 	CloudFrontOriginAccessIdentity *types.CloudFrontOriginAccessIdentity
 
 	// The current version of the origin access identity's information. For example:
-	// E2QWRUHAPOMQZL.
+	// E2QWRUHAPOMQZL .
 	ETag *string
 
 	// Metadata pertaining to the operation's result.

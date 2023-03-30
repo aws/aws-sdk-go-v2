@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a channel to which you can add users and send messages. Restriction: You
-// can't change a channel's privacy. The x-amz-chime-bearer request header is
-// mandatory. Use the AppInstanceUserArn of the user that makes the API call as the
-// value in the header.
+// Creates a channel to which you can add users and send messages. Restriction:
+// You can't change a channel's privacy. The x-amz-chime-bearer request header is
+// mandatory. Use the AppInstanceUserArn of the user that makes the API call as
+// the value in the header.
 func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, optFns ...func(*Options)) (*CreateChannelOutput, error) {
 	if params == nil {
 		params = &CreateChannelInput{}
@@ -38,7 +38,7 @@ type CreateChannelInput struct {
 	// This member is required.
 	AppInstanceArn *string
 
-	// The client token for the request. An Idempotency token.
+	// The client token for the request. An Idempotency  token.
 	//
 	// This member is required.
 	ClientRequestToken *string
@@ -48,20 +48,20 @@ type CreateChannelInput struct {
 	// This member is required.
 	Name *string
 
-	// The AppInstanceUserArn of the user that makes the API call.
+	// The AppInstanceUserArn  of the user that makes the API call.
 	ChimeBearer *string
 
 	// The metadata of the creation request. Limited to 1KB and UTF-8.
 	Metadata *string
 
-	// The channel mode: UNRESTRICTED or RESTRICTED. Administrators, moderators, and
+	// The channel mode: UNRESTRICTED  or RESTRICTED. Administrators, moderators, and
 	// channel members can add themselves and other members to unrestricted channels.
 	// Only administrators and moderators can add members to restricted channels.
 	Mode types.ChannelMode
 
-	// The channel's privacy level: PUBLIC or PRIVATE. Private channels aren't
+	// The channel's privacy level: PUBLIC  or PRIVATE. Private channels aren't
 	// discoverable by users outside the channel. Public channels are discoverable by
-	// anyone in the AppInstance.
+	// anyone in the AppInstance .
 	Privacy types.ChannelPrivacy
 
 	// The tags for the creation request.

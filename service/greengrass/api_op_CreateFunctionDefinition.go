@@ -58,7 +58,8 @@ type CreateFunctionDefinitionOutput struct {
 	// The ID of the definition.
 	Id *string
 
-	// The time, in milliseconds since the epoch, when the definition was last updated.
+	// The time, in milliseconds since the epoch, when the definition was last
+	// updated.
 	LastUpdatedTimestamp *string
 
 	// The ID of the latest version associated with the definition.

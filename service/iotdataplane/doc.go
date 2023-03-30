@@ -11,7 +11,6 @@
 // things and their state in the Amazon Web Services cloud. Find the endpoint
 // address for actions in IoT data by running this CLI command: aws iot
 // describe-endpoint --endpoint-type iot:Data-ATS The service name used by Amazon
-// Web ServicesSignature Version 4
-// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) to sign
-// requests is: iotdevicegateway.
+// Web ServicesSignature Version 4 (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
+// to sign requests is: iotdevicegateway.
 package iotdataplane

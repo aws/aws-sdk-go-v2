@@ -12,8 +12,8 @@ import (
 )
 
 // Returns a MemberAccounts object that lists the member accounts in the
-// administrator's Amazon Web Services organization. The ListMemberAccounts must be
-// submitted by the account that is set as the Firewall Manager administrator.
+// administrator's Amazon Web Services organization. The ListMemberAccounts must
+// be submitted by the account that is set as the Firewall Manager administrator.
 func (c *Client) ListMemberAccounts(ctx context.Context, params *ListMemberAccountsInput, optFns ...func(*Options)) (*ListMemberAccountsOutput, error) {
 	if params == nil {
 		params = &ListMemberAccountsInput{}
@@ -33,15 +33,15 @@ type ListMemberAccountsInput struct {
 
 	// Specifies the number of member account IDs that you want Firewall Manager to
 	// return for this request. If you have more IDs than the number that you specify
-	// for MaxResults, the response includes a NextToken value that you can use to get
-	// another batch of member account IDs.
+	// for MaxResults , the response includes a NextToken value that you can use to
+	// get another batch of member account IDs.
 	MaxResults *int32
 
 	// If you specify a value for MaxResults and you have more account IDs than the
-	// number that you specify for MaxResults, Firewall Manager returns a NextToken
+	// number that you specify for MaxResults , Firewall Manager returns a NextToken
 	// value in the response that allows you to list another group of IDs. For the
-	// second and subsequent ListMemberAccountsRequest requests, specify the value of
-	// NextToken from the previous response to get information about another batch of
+	// second and subsequent ListMemberAccountsRequest  requests, specify the value of
+	// NextTokenfrom the previous response to get information about another batch of
 	// member account IDs.
 	NextToken *string
 
@@ -54,9 +54,9 @@ type ListMemberAccountsOutput struct {
 	MemberAccounts []string
 
 	// If you have more member account IDs than the number that you specified for
-	// MaxResults in the request, the response includes a NextToken value. To list more
-	// IDs, submit another ListMemberAccounts request, and specify the NextToken value
-	// from the response in the NextToken value in the next request.
+	// MaxResults in the request, the response includes a NextToken value. To list
+	// more IDs, submit another ListMemberAccounts  request, and specify the NextToken
+	// value from the response in the NextToken  value in the next request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -138,12 +138,12 @@ var _ ListMemberAccountsAPIClient = (*Client)(nil)
 type ListMemberAccountsPaginatorOptions struct {
 	// Specifies the number of member account IDs that you want Firewall Manager to
 	// return for this request. If you have more IDs than the number that you specify
-	// for MaxResults, the response includes a NextToken value that you can use to get
-	// another batch of member account IDs.
+	// for MaxResults , the response includes a NextToken value that you can use to
+	// get another batch of member account IDs.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

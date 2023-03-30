@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels the specified export task. The task must be in the PENDING or RUNNING
+// Cancels the specified export task. The task must be in the PENDING  or RUNNING
 // state.
 func (c *Client) CancelExportTask(ctx context.Context, params *CancelExportTaskInput, optFns ...func(*Options)) (*CancelExportTaskOutput, error) {
 	if params == nil {

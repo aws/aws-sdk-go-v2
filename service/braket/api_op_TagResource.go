@@ -28,7 +28,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// Specify the resourceArn of the resource to which a tag will be added.
+	// Specify the resourceArn  of the resource to which a tag will be added.
 	//
 	// This member is required.
 	ResourceArn *string

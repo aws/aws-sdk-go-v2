@@ -50,13 +50,14 @@ type UpdateLocationHdfsInput struct {
 	// for you. Otherwise, provide the base64-encoded text.
 	KerberosKeytab []byte
 
-	// The krb5.conf file that contains the Kerberos configuration information. You can
-	// load the krb5.conf file by providing the file's address. If you're using the
-	// CLI, it performs the base64 encoding for you. Otherwise, provide the
+	// The krb5.conf file that contains the Kerberos configuration information. You
+	// can load the krb5.conf file by providing the file's address. If you're using
+	// the CLI, it performs the base64 encoding for you. Otherwise, provide the
 	// base64-encoded text.
 	KerberosKrb5Conf []byte
 
-	// The Kerberos principal with access to the files and folders on the HDFS cluster.
+	// The Kerberos principal with access to the files and folders on the HDFS
+	// cluster.
 	KerberosPrincipal *string
 
 	// The URI of the HDFS cluster's Key Management Server (KMS).
@@ -80,8 +81,8 @@ type UpdateLocationHdfsInput struct {
 	// The user name used to identify the client on the host operating system.
 	SimpleUser *string
 
-	// A subdirectory in the HDFS cluster. This subdirectory is used to read data from
-	// or write data to the HDFS cluster.
+	// A subdirectory in the HDFS cluster. This subdirectory is used to read data
+	// from or write data to the HDFS cluster.
 	Subdirectory *string
 
 	noSmithyDocumentSerde

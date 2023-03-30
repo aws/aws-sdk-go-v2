@@ -35,8 +35,9 @@ type ListManagedJobTemplatesInput struct {
 	// The token to retrieve the next set of results.
 	NextToken *string
 
-	// An optional parameter for template name. If specified, only the versions of the
-	// managed job templates that have the specified template name will be returned.
+	// An optional parameter for template name. If specified, only the versions of
+	// the managed job templates that have the specified template name will be
+	// returned.
 	TemplateName *string
 
 	noSmithyDocumentSerde

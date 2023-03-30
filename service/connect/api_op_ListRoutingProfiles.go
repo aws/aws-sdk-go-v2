@@ -12,13 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides summary information about the routing profiles for the specified Amazon
-// Connect instance. For more information about routing profiles, see Routing
-// Profiles
-// (https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing.html)
-// and Create a Routing Profile
-// (https://docs.aws.amazon.com/connect/latest/adminguide/routing-profiles.html) in
-// the Amazon Connect Administrator Guide.
+// Provides summary information about the routing profiles for the specified
+// Amazon Connect instance. For more information about routing profiles, see
+// Routing Profiles (https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing.html)
+// and Create a Routing Profile (https://docs.aws.amazon.com/connect/latest/adminguide/routing-profiles.html)
+// in the Amazon Connect Administrator Guide.
 func (c *Client) ListRoutingProfiles(ctx context.Context, params *ListRoutingProfilesInput, optFns ...func(*Options)) (*ListRoutingProfilesOutput, error) {
 	if params == nil {
 		params = &ListRoutingProfilesInput{}
@@ -36,15 +34,14 @@ func (c *Client) ListRoutingProfiles(ctx context.Context, params *ListRoutingPro
 
 type ListRoutingProfilesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The maximum number of results to return per page. The default MaxResult size is
-	// 100.
+	// The maximum number of results to return per page. The default MaxResult size
+	// is 100.
 	MaxResults *int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -131,8 +128,8 @@ func (c *Client) addOperationListRoutingProfilesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListRoutingProfilesAPIClient is a client that implements the ListRoutingProfiles
-// operation.
+// ListRoutingProfilesAPIClient is a client that implements the
+// ListRoutingProfiles operation.
 type ListRoutingProfilesAPIClient interface {
 	ListRoutingProfiles(context.Context, *ListRoutingProfilesInput, ...func(*Options)) (*ListRoutingProfilesOutput, error)
 }
@@ -142,12 +139,12 @@ var _ ListRoutingProfilesAPIClient = (*Client)(nil)
 // ListRoutingProfilesPaginatorOptions is the paginator options for
 // ListRoutingProfiles
 type ListRoutingProfilesPaginatorOptions struct {
-	// The maximum number of results to return per page. The default MaxResult size is
-	// 100.
+	// The maximum number of results to return per page. The default MaxResult size
+	// is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

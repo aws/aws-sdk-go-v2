@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Resolver object.
+// Deletes a Resolver  object.
 func (c *Client) DeleteResolver(ctx context.Context, params *DeleteResolverInput, optFns ...func(*Options)) (*DeleteResolverOutput, error) {
 	if params == nil {
 		params = &DeleteResolverInput{}

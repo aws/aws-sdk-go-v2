@@ -60,8 +60,8 @@ func (e *BadRequestException) ErrorCode() string {
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The service has encountered an unexpected error condition which prevents it from
-// servicing the request.
+// The service has encountered an unexpected error condition which prevents it
+// from servicing the request.
 type InternalFailureException struct {
 	Message *string
 
@@ -144,8 +144,8 @@ func (e *NotFoundException) ErrorCode() string {
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The service is temporarily unavailable. The request should be retried after some
-// time delay.
+// The service is temporarily unavailable. The request should be retried after
+// some time delay.
 type ServiceUnavailableException struct {
 	Message *string
 

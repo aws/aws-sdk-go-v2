@@ -7,11 +7,11 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You don't have permissions to perform the requested operation. The user or role
-// that is making the request must have at least one IAM permissions policy
-// attached that grants the required permissions. For more information, see Access
-// Management (https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the
-// IAM User Guide.
+// You don't have permissions to perform the requested operation. The user or
+// role that is making the request must have at least one IAM permissions policy
+// attached that grants the required permissions. For more information, see
+// Access Management (https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html)
+// in the IAM User Guide.
 type AccessDeniedException struct {
 	Message *string
 

@@ -38,10 +38,10 @@ type DescribeRuleGroupInput struct {
 	// specify both.
 	RuleGroupName *string
 
-	// Indicates whether the rule group is stateless or stateful. If the rule group is
-	// stateless, it contains stateless rules. If it is stateful, it contains stateful
-	// rules. This setting is required for requests that do not include the
-	// RuleGroupARN.
+	// Indicates whether the rule group is stateless or stateful. If the rule group
+	// is stateless, it contains stateless rules. If it is stateful, it contains
+	// stateful rules. This setting is required for requests that do not include the
+	// RuleGroupARN .
 	Type types.RuleGroupType
 
 	noSmithyDocumentSerde
@@ -51,7 +51,7 @@ type DescribeRuleGroupOutput struct {
 
 	// The high-level properties of a rule group. This, along with the RuleGroup,
 	// define the rule group. You can retrieve all objects for a rule group by calling
-	// DescribeRuleGroup.
+	// DescribeRuleGroup .
 	//
 	// This member is required.
 	RuleGroupResponse *types.RuleGroupResponse

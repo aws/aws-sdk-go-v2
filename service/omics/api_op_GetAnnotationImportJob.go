@@ -220,8 +220,8 @@ type AnnotationImportJobCreatedWaiterOptions struct {
 	// Note that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, AnnotationImportJobCreatedWaiter will use default max delay of 600
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, AnnotationImportJobCreatedWaiter will use default max delay of 600
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration

@@ -33,9 +33,9 @@ func (e *ConcurrentDeploymentException) ErrorCode() string {
 }
 func (e *ConcurrentDeploymentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request uses the same client token as a previous, but non-identical request.
-// Do not reuse a client token with different requests, unless the requests are
-// identical.
+// The request uses the same client token as a previous, but non-identical
+// request. Do not reuse a client token with different requests, unless the
+// requests are identical.
 type IdempotentParameterMismatchException struct {
 	Message *string
 
@@ -221,7 +221,8 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// AWS RoboMaker is temporarily unable to process the request. Try your call again.
+// AWS RoboMaker is temporarily unable to process the request. Try your call
+// again.
 type ThrottlingException struct {
 	Message *string
 

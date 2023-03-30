@@ -12,7 +12,7 @@ import (
 
 // Disassociates the account that has been set as the Firewall Manager
 // administrator account. To set a different account as the administrator account,
-// you must submit an AssociateAdminAccount request.
+// you must submit an AssociateAdminAccount  request.
 func (c *Client) DisassociateAdminAccount(ctx context.Context, params *DisassociateAdminAccountInput, optFns ...func(*Options)) (*DisassociateAdminAccountOutput, error) {
 	if params == nil {
 		params = &DisassociateAdminAccountInput{}

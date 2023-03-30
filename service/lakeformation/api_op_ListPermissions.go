@@ -17,8 +17,8 @@ import (
 // you are able to see only the principal permissions for ALTER. This operation
 // returns only those permissions that have been explicitly granted. For
 // information about permissions, see Security and Access Control to Metadata and
-// Data
-// (https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html).
+// Data (https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html)
+// .
 func (c *Client) ListPermissions(ctx context.Context, params *ListPermissionsInput, optFns ...func(*Options)) (*ListPermissionsOutput, error) {
 	if params == nil {
 		params = &ListPermissionsInput{}
@@ -157,8 +157,8 @@ type ListPermissionsPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

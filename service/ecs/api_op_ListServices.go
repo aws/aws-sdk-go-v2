@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of services. You can filter the results by cluster, launch type,
-// and scheduling strategy.
+// Returns a list of services. You can filter the results by cluster, launch
+// type, and scheduling strategy.
 func (c *Client) ListServices(ctx context.Context, params *ListServicesInput, optFns ...func(*Options)) (*ListServicesOutput, error) {
 	if params == nil {
 		params = &ListServicesInput{}
@@ -32,23 +32,23 @@ func (c *Client) ListServices(ctx context.Context, params *ListServicesInput, op
 type ListServicesInput struct {
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster to use when
-	// filtering the ListServices results. If you do not specify a cluster, the default
-	// cluster is assumed.
+	// filtering the ListServices results. If you do not specify a cluster, the
+	// default cluster is assumed.
 	Cluster *string
 
-	// The launch type to use when filtering the ListServices results.
+	// The launch type to use when filtering the ListServices  results.
 	LaunchType types.LaunchType
 
 	// The maximum number of service results that ListServices returned in paginated
-	// output. When this parameter is used, ListServices only returns maxResults
-	// results in a single page along with a nextToken response element. The remaining
-	// results of the initial request can be seen by sending another ListServices
-	// request with the returned nextToken value. This value can be between 1 and 100.
-	// If this parameter isn't used, then ListServices returns up to 10 results and a
-	// nextToken value if applicable.
+	// output. When this parameter is used, ListServices  only returns maxResults
+	// results in a single page along with a nextToken response element. The
+	// remaining results of the initial request can be seen by sending another
+	// ListServices request with the returned nextToken value. This value can be
+	// between 1 and 100. If this parameter isn't used, then ListServices returns up
+	// to 10 results and a nextToken  value if applicable.
 	MaxResults *int32
 
-	// The nextToken value returned from a ListServices request indicating that more
+	// The nextToken  value returned from a ListServices request indicating that more
 	// results are available to fulfill the request and further calls will be needed.
 	// If maxResults was provided, it is possible the number of results to be fewer
 	// than maxResults. This token should be treated as an opaque identifier that is
@@ -56,7 +56,7 @@ type ListServicesInput struct {
 	// purposes.
 	NextToken *string
 
-	// The scheduling strategy to use when filtering the ListServices results.
+	// The scheduling strategy to use when filtering the ListServices  results.
 	SchedulingStrategy types.SchedulingStrategy
 
 	noSmithyDocumentSerde
@@ -64,10 +64,10 @@ type ListServicesInput struct {
 
 type ListServicesOutput struct {
 
-	// The nextToken value to include in a future ListServices request. When the
-	// results of a ListServices request exceed maxResults, this value can be used to
-	// retrieve the next page of results. This value is null when there are no more
-	// results to return.
+	// The nextToken  value to include in a future ListServices request. When the
+	// results of a ListServices  request exceed maxResults, this value can be used
+	// to retrieve the next page of results. This value is null when there are no
+	// more results to return.
 	NextToken *string
 
 	// The list of full ARN entries for each service that's associated with the
@@ -150,16 +150,16 @@ var _ ListServicesAPIClient = (*Client)(nil)
 // ListServicesPaginatorOptions is the paginator options for ListServices
 type ListServicesPaginatorOptions struct {
 	// The maximum number of service results that ListServices returned in paginated
-	// output. When this parameter is used, ListServices only returns maxResults
-	// results in a single page along with a nextToken response element. The remaining
-	// results of the initial request can be seen by sending another ListServices
-	// request with the returned nextToken value. This value can be between 1 and 100.
-	// If this parameter isn't used, then ListServices returns up to 10 results and a
-	// nextToken value if applicable.
+	// output. When this parameter is used, ListServices  only returns maxResults
+	// results in a single page along with a nextToken response element. The
+	// remaining results of the initial request can be seen by sending another
+	// ListServices request with the returned nextToken value. This value can be
+	// between 1 and 100. If this parameter isn't used, then ListServices returns up
+	// to 10 results and a nextToken  value if applicable.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

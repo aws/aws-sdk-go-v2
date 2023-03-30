@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes a specific version of a slot type. To delete all versions of a slot
-// type, use the DeleteSlotType operation. This operation requires permissions for
-// the lex:DeleteSlotTypeVersion action.
+// type, use the DeleteSlotType operation. This operation requires permissions
+// for the lex:DeleteSlotTypeVersion  action.
 func (c *Client) DeleteSlotTypeVersion(ctx context.Context, params *DeleteSlotTypeVersionInput, optFns ...func(*Options)) (*DeleteSlotTypeVersionOutput, error) {
 	if params == nil {
 		params = &DeleteSlotTypeVersionInput{}
@@ -35,8 +35,9 @@ type DeleteSlotTypeVersionInput struct {
 	// This member is required.
 	Name *string
 
-	// The version of the slot type to delete. You cannot delete the $LATEST version of
-	// the slot type. To delete the $LATEST version, use the DeleteSlotType operation.
+	// The version of the slot type to delete. You cannot delete the $LATEST version
+	// of the slot type. To delete the $LATEST  version, use the DeleteSlotType
+	// operation.
 	//
 	// This member is required.
 	Version *string

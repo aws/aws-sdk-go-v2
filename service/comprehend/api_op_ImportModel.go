@@ -44,23 +44,18 @@ type ImportModelInput struct {
 	// custom model.
 	DataAccessRoleArn *string
 
-	// ID for the KMS key that Amazon Comprehend uses to encrypt trained custom models.
-	// The ModelKmsKeyId can be either of the following formats:
-	//
-	// * KMS Key ID:
-	// "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * Amazon Resource Name (ARN) of a KMS
-	// Key:
-	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	// ID for the KMS key that Amazon Comprehend uses to encrypt trained custom
+	// models. The ModelKmsKeyId can be either of the following formats:
+	//     - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//     - Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	ModelKmsKeyId *string
 
 	// The name to assign to the custom model that is created in Amazon Comprehend by
 	// this import.
 	ModelName *string
 
-	// Tags to associate with the custom model that is created by this import. A tag is
-	// a key-value pair that adds as a metadata to a resource used by Amazon
+	// Tags to associate with the custom model that is created by this import. A tag
+	// is a key-value pair that adds as a metadata to a resource used by Amazon
 	// Comprehend. For example, a tag with "Sales" as the key might be added to a
 	// resource to indicate its use by the sales department.
 	Tags []types.Tag

@@ -17,12 +17,11 @@ import (
 // results for ListEndpointsByPlatformApplication are paginated and return a
 // limited list of endpoints, up to 100. If additional records are available after
 // the first page results, then a NextToken string will be returned. To receive the
-// next page, you call ListEndpointsByPlatformApplication again using the NextToken
-// string received from the previous call. When there are no more records to
-// return, NextToken will be null. For more information, see Using Amazon SNS
-// Mobile Push Notifications
-// (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html). This action is
-// throttled at 30 transactions per second (TPS).
+// next page, you call ListEndpointsByPlatformApplication again using the
+// NextToken string received from the previous call. When there are no more records
+// to return, NextToken will be null. For more information, see Using Amazon SNS
+// Mobile Push Notifications (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html)
+// . This action is throttled at 30 transactions per second (TPS).
 func (c *Client) ListEndpointsByPlatformApplication(ctx context.Context, params *ListEndpointsByPlatformApplicationInput, optFns ...func(*Options)) (*ListEndpointsByPlatformApplicationOutput, error) {
 	if params == nil {
 		params = &ListEndpointsByPlatformApplicationInput{}
@@ -46,8 +45,9 @@ type ListEndpointsByPlatformApplicationInput struct {
 	// This member is required.
 	PlatformApplicationArn *string
 
-	// NextToken string is used when calling ListEndpointsByPlatformApplication action
-	// to retrieve additional records that are available after the first page results.
+	// NextToken string is used when calling ListEndpointsByPlatformApplication
+	// action to retrieve additional records that are available after the first page
+	// results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -140,11 +140,11 @@ type ListEndpointsByPlatformApplicationAPIClient interface {
 
 var _ ListEndpointsByPlatformApplicationAPIClient = (*Client)(nil)
 
-// ListEndpointsByPlatformApplicationPaginatorOptions is the paginator options for
-// ListEndpointsByPlatformApplication
+// ListEndpointsByPlatformApplicationPaginatorOptions is the paginator options
+// for ListEndpointsByPlatformApplication
 type ListEndpointsByPlatformApplicationPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

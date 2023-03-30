@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds two domain controllers in the specified Region for the specified directory.
+// Adds two domain controllers in the specified Region for the specified
+// directory.
 func (c *Client) AddRegion(ctx context.Context, params *AddRegionInput, optFns ...func(*Options)) (*AddRegionOutput, error) {
 	if params == nil {
 		params = &AddRegionInput{}
@@ -34,13 +35,14 @@ type AddRegionInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// The name of the Region where you want to add domain controllers for replication.
-	// For example, us-east-1.
+	// The name of the Region where you want to add domain controllers for
+	// replication. For example, us-east-1 .
 	//
 	// This member is required.
 	RegionName *string
 
-	// Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
+	// Contains VPC information for the CreateDirectory  or CreateMicrosoftAD
+	// operation.
 	//
 	// This member is required.
 	VPCSettings *types.DirectoryVpcSettings

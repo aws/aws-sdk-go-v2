@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a game session queue. Once a queue is successfully deleted, unfulfilled
-// StartGameSessionPlacement
-// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html)
+// Deletes a game session queue. Once a queue is successfully deleted,
+// unfulfilled StartGameSessionPlacement (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html)
 // requests that reference the queue will fail. To delete a queue, specify the
 // queue name.
 func (c *Client) DeleteGameSessionQueue(ctx context.Context, params *DeleteGameSessionQueueInput, optFns ...func(*Options)) (*DeleteGameSessionQueueOutput, error) {
@@ -32,8 +31,8 @@ func (c *Client) DeleteGameSessionQueue(ctx context.Context, params *DeleteGameS
 
 type DeleteGameSessionQueueInput struct {
 
-	// A descriptive label that is associated with game session queue. Queue names must
-	// be unique within each Region. You can use either the queue ID or ARN value.
+	// A descriptive label that is associated with game session queue. Queue names
+	// must be unique within each Region. You can use either the queue ID or ARN value.
 	//
 	// This member is required.
 	Name *string

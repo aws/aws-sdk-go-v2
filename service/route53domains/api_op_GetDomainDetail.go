@@ -65,8 +65,9 @@ type GetDomainDetailOutput struct {
 	// Specifies whether the domain registration is set to renew automatically.
 	AutoRenew *bool
 
-	// The date when the domain was created as found in the response to a WHOIS query.
-	// The date and time is in Unix time format and Coordinated Universal time (UTC).
+	// The date when the domain was created as found in the response to a WHOIS
+	// query. The date and time is in Unix time format and Coordinated Universal time
+	// (UTC).
 	CreationDate *time.Time
 
 	// Deprecated.
@@ -96,10 +97,10 @@ type GetDomainDetailOutput struct {
 	// owner).
 	RegistrantPrivacy *bool
 
-	// Name of the registrar of the domain as identified in the registry. Domains with
-	// a .com, .net, or .org TLD are registered by Amazon Registrar. All other domains
-	// are registered by our registrar associate, Gandi. The value for domains that are
-	// registered by Gandi is "GANDI SAS".
+	// Name of the registrar of the domain as identified in the registry. Domains
+	// with a .com, .net, or .org TLD are registered by Amazon Registrar. All other
+	// domains are registered by our registrar associate, Gandi. The value for domains
+	// that are registered by Gandi is "GANDI SAS" .
 	RegistrarName *string
 
 	// Web address of the registrar.
@@ -108,8 +109,8 @@ type GetDomainDetailOutput struct {
 	// Reserved for future use.
 	RegistryDomainId *string
 
-	// Reseller of the domain. Domains registered or transferred using Route 53 domains
-	// will have "Amazon" as the reseller.
+	// Reseller of the domain. Domains registered or transferred using Route 53
+	// domains will have "Amazon"  as the reseller.
 	Reseller *string
 
 	// An array of domain name status codes, also known as Extensible Provisioning
@@ -119,9 +120,9 @@ type GetDomainDetailOutput struct {
 	// registering a domain name, transferring a domain name to another registrar,
 	// renewing the registration for a domain name, and so on. All registrars use this
 	// same set of status codes. For a current list of domain name status codes and an
-	// explanation of what each code means, go to the ICANN website
-	// (https://www.icann.org/) and search for epp status codes. (Search on the ICANN
-	// website; web searches sometimes return an old version of the document.)
+	// explanation of what each code means, go to the ICANN website (https://www.icann.org/)
+	// and search for epp status codes. (Search on the ICANN website; web searches
+	// sometimes return an old version of the document.)
 	StatusList []string
 
 	// Provides details about the domain technical contact.
@@ -138,8 +139,8 @@ type GetDomainDetailOutput struct {
 	// The date and time is in Unix time format and Coordinated Universal time (UTC).
 	UpdatedDate *time.Time
 
-	// The fully qualified name of the WHOIS server that can answer the WHOIS query for
-	// the domain.
+	// The fully qualified name of the WHOIS server that can answer the WHOIS query
+	// for the domain.
 	WhoIsServer *string
 
 	// Metadata pertaining to the operation's result.

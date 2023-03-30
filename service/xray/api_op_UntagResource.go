@@ -11,7 +11,7 @@ import (
 )
 
 // Removes tags from an Amazon Web Services X-Ray group or sampling rule. You
-// cannot edit or delete system tags (those with an aws: prefix).
+// cannot edit or delete system tags (those with an aws:  prefix).
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

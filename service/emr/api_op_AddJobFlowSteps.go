@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// AddJobFlowSteps adds new steps to a running cluster. A maximum of 256 steps are
-// allowed in each job flow. If your cluster is long-running (such as a Hive data
-// warehouse) or complex, you may require more than 256 steps to process your data.
-// You can bypass the 256-step limitation in various ways, including using SSH to
-// connect to the master node and submitting queries directly to the software
-// running on the master node, such as Hive and Hadoop. A step specifies the
-// location of a JAR file stored either on the master node of the cluster or in
+// AddJobFlowSteps adds new steps to a running cluster. A maximum of 256 steps
+// are allowed in each job flow. If your cluster is long-running (such as a Hive
+// data warehouse) or complex, you may require more than 256 steps to process your
+// data. You can bypass the 256-step limitation in various ways, including using
+// SSH to connect to the master node and submitting queries directly to the
+// software running on the master node, such as Hive and Hadoop. A step specifies
+// the location of a JAR file stored either on the master node of the cluster or in
 // Amazon S3. Each step is performed by the main function of the main class of the
 // JAR file. The main class can be specified either in the manifest of the JAR or
 // by using the MainFunction parameter of the step. Amazon EMR executes each step
@@ -42,16 +42,16 @@ func (c *Client) AddJobFlowSteps(ctx context.Context, params *AddJobFlowStepsInp
 	return out, nil
 }
 
-// The input argument to the AddJobFlowSteps operation.
+// The input argument to the AddJobFlowSteps  operation.
 type AddJobFlowStepsInput struct {
 
 	// A string that uniquely identifies the job flow. This identifier is returned by
-	// RunJobFlow and can also be obtained from ListClusters.
+	// RunJobFlow and can also be obtained from ListClusters .
 	//
 	// This member is required.
 	JobFlowId *string
 
-	// A list of StepConfig to be executed by the job flow.
+	// A list of StepConfig  to be executed by the job flow.
 	//
 	// This member is required.
 	Steps []types.StepConfig
@@ -59,14 +59,14 @@ type AddJobFlowStepsInput struct {
 	// The Amazon Resource Name (ARN) of the runtime role for a step on the cluster.
 	// The runtime role can be a cross-account IAM role. The runtime role ARN is a
 	// combination of account ID, role name, and role type using the following format:
-	// arn:partition:service:region:account:resource. For example,
+	// arn:partition:service:region:account:resource . For example,
 	// arn:aws:iam::1234567890:role/ReadOnly is a correctly formatted runtime role ARN.
 	ExecutionRoleArn *string
 
 	noSmithyDocumentSerde
 }
 
-// The output for the AddJobFlowSteps operation.
+// The output for the AddJobFlowSteps  operation.
 type AddJobFlowStepsOutput struct {
 
 	// The identifiers of the list of steps added to the job flow.

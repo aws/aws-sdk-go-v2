@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all AppConfig extension associations in the account. For more information
-// about extensions and associations, see Working with AppConfig extensions
-// (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
+// Lists all AppConfig extension associations in the account. For more
+// information about extensions and associations, see Working with AppConfig
+// extensions (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
 // in the AppConfig User Guide.
 func (c *Client) ListExtensionAssociations(ctx context.Context, params *ListExtensionAssociationsInput, optFns ...func(*Options)) (*ListExtensionAssociationsOutput, error) {
 	if params == nil {
@@ -43,8 +43,8 @@ type ListExtensionAssociationsInput struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
 
-	// A token to start the list. Use this token to get the next set of results or pass
-	// null to get the first set of results.
+	// A token to start the list. Use this token to get the next set of results or
+	// pass null to get the first set of results.
 	NextToken *string
 
 	// The ARN of an application, configuration profile, or environment.
@@ -144,8 +144,8 @@ type ListExtensionAssociationsPaginatorOptions struct {
 	// token that you can specify in a subsequent call to get the next set of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

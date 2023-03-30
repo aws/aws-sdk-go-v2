@@ -35,15 +35,16 @@ func (c *Client) ListLocations(ctx context.Context, params *ListLocationsInput, 
 type ListLocationsInput struct {
 
 	// You can use API filters to narrow down the list of resources returned by
-	// ListLocations. For example, to retrieve all tasks on a specific source location,
-	// you can use ListLocations with filter name LocationType S3 and Operator Equals.
+	// ListLocations. For example, to retrieve all tasks on a specific source
+	// location, you can use ListLocations  with filter name LocationType S3  and
+	// Operator Equals .
 	Filters []types.LocationFilter
 
 	// The maximum number of locations to return.
 	MaxResults *int32
 
-	// An opaque string that indicates the position at which to begin the next list of
-	// locations.
+	// An opaque string that indicates the position at which to begin the next list
+	// of locations.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -140,8 +141,8 @@ type ListLocationsPaginatorOptions struct {
 	// The maximum number of locations to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

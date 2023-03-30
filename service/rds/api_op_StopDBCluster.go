@@ -14,8 +14,7 @@ import (
 // Stops an Amazon Aurora DB cluster. When you stop a DB cluster, Aurora retains
 // the DB cluster's metadata, including its endpoints and DB parameter groups.
 // Aurora also retains the transaction logs so you can do a point-in-time restore
-// if necessary. For more information, see  Stopping and Starting an Aurora Cluster
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html)
+// if necessary. For more information, see Stopping and Starting an Aurora Cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html)
 // in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
 func (c *Client) StopDBCluster(ctx context.Context, params *StopDBClusterInput, optFns ...func(*Options)) (*StopDBClusterOutput, error) {
 	if params == nil {
@@ -45,21 +44,19 @@ type StopDBClusterInput struct {
 
 type StopDBClusterOutput struct {
 
-	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For
-	// an Amazon Aurora DB cluster, this data type is used as a response element in the
-	// operations CreateDBCluster, DeleteDBCluster, DescribeDBClusters,
-	// FailoverDBCluster, ModifyDBCluster, PromoteReadReplicaDBCluster,
-	// RestoreDBClusterFromS3, RestoreDBClusterFromSnapshot,
-	// RestoreDBClusterToPointInTime, StartDBCluster, and StopDBCluster. For a Multi-AZ
-	// DB cluster, this data type is used as a response element in the operations
-	// CreateDBCluster, DeleteDBCluster, DescribeDBClusters, FailoverDBCluster,
-	// ModifyDBCluster, RebootDBCluster, RestoreDBClusterFromSnapshot, and
-	// RestoreDBClusterToPointInTime. For more information on Amazon Aurora DB
-	// clusters, see  What is Amazon Aurora?
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster.
+	// For an Amazon Aurora DB cluster, this data type is used as a response element in
+	// the operations CreateDBCluster , DeleteDBCluster , DescribeDBClusters ,
+	// FailoverDBCluster , ModifyDBCluster , PromoteReadReplicaDBCluster ,
+	// RestoreDBClusterFromS3 , RestoreDBClusterFromSnapshot ,
+	// RestoreDBClusterToPointInTime , StartDBCluster , and StopDBCluster. For a
+	// Multi-AZ DB cluster, this data type is used as a response element in the
+	// operations CreateDBCluster , DeleteDBCluster , DescribeDBClusters ,
+	// FailoverDBCluster , ModifyDBCluster , RebootDBCluster ,
+	// RestoreDBClusterFromSnapshot , and RestoreDBClusterToPointInTime. For more
+	// information on Amazon Aurora DB clusters, see What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 	// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-	// see  Multi-AZ deployments with two readable standby DB instances
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+	// see Multi-AZ deployments with two readable standby DB instances (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 	// in the Amazon RDS User Guide.
 	DBCluster *types.DBCluster
 

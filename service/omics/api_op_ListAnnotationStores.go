@@ -164,8 +164,8 @@ type ListAnnotationStoresPaginatorOptions struct {
 	// The maximum number of stores to return in one page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

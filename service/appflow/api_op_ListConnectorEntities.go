@@ -42,12 +42,12 @@ type ListConnectorEntitiesInput struct {
 	// The type of connector, such as Salesforce, Amplitude, and so on.
 	ConnectorType types.ConnectorType
 
-	// This optional parameter is specific to connector implementation. Some connectors
-	// support multiple levels or categories of entities. You can find out the list of
-	// roots for such providers by sending a request without the entitiesPath
-	// parameter. If the connector supports entities at different roots, this initial
-	// request returns the list of roots. Otherwise, this request returns all entities
-	// supported by the provider.
+	// This optional parameter is specific to connector implementation. Some
+	// connectors support multiple levels or categories of entities. You can find out
+	// the list of roots for such providers by sending a request without the
+	// entitiesPathparameter. If the connector supports entities at different roots,
+	// this initial request returns the list of roots. Otherwise, this request returns
+	// all entities supported by the provider.
 	EntitiesPath *string
 
 	// The maximum number of items that the operation returns in the response.
@@ -70,9 +70,9 @@ type ListConnectorEntitiesOutput struct {
 	// This member is required.
 	ConnectorEntityMap map[string][]types.ConnectorEntity
 
-	// A token that you specify in your next ListConnectorEntities operation to get the
-	// next page of results in paginated response. The ListConnectorEntities operation
-	// provides this token if the response is too big for the page size.
+	// A token that you specify in your next ListConnectorEntities operation to get
+	// the next page of results in paginated response. The ListConnectorEntities
+	// operation provides this token if the response is too big for the page size.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

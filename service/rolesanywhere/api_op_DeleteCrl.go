@@ -12,7 +12,7 @@ import (
 )
 
 // Deletes a certificate revocation list (CRL). Required permissions:
-// rolesanywhere:DeleteCrl.
+// rolesanywhere:DeleteCrl .
 func (c *Client) DeleteCrl(ctx context.Context, params *DeleteCrlInput, optFns ...func(*Options)) (*DeleteCrlOutput, error) {
 	if params == nil {
 		params = &DeleteCrlInput{}

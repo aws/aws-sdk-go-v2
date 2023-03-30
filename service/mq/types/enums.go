@@ -32,9 +32,9 @@ const (
 	BrokerStateCriticalActionRequired BrokerState = "CRITICAL_ACTION_REQUIRED"
 )
 
-// Values returns all known values for BrokerState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for BrokerState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (BrokerState) Values() []BrokerState {
 	return []BrokerState{
 		"CREATION_IN_PROGRESS",
@@ -97,9 +97,9 @@ const (
 	DayOfWeekSunday    DayOfWeek = "SUNDAY"
 )
 
-// Values returns all known values for DayOfWeek. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for DayOfWeek. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (DayOfWeek) Values() []DayOfWeek {
 	return []DayOfWeek{
 		"MONDAY",

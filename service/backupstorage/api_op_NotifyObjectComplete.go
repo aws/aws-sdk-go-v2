@@ -62,7 +62,8 @@ type NotifyObjectCompleteInput struct {
 	// The size of MetadataBlob.
 	MetadataBlobLength int64
 
-	// Optional metadata associated with an Object. Maximum string length is 256 bytes.
+	// Optional metadata associated with an Object. Maximum string length is 256
+	// bytes.
 	MetadataString *string
 
 	noSmithyDocumentSerde

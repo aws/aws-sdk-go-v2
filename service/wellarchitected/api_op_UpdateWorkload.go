@@ -30,8 +30,8 @@ func (c *Client) UpdateWorkload(ctx context.Context, params *UpdateWorkloadInput
 // Input to update a workload.
 type UpdateWorkloadInput struct {
 
-	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
-	// Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web
+	// Services Region.
 	//
 	// This member is required.
 	WorkloadId *string
@@ -46,7 +46,7 @@ type UpdateWorkloadInput struct {
 	ArchitecturalDesign *string
 
 	// The list of Amazon Web Services Regions associated with the workload, for
-	// example, us-east-2, or ca-central-1.
+	// example, us-east-2 , or ca-central-1 .
 	AwsRegions []string
 
 	// The description for the workload.
@@ -66,39 +66,33 @@ type UpdateWorkloadInput struct {
 
 	// The industry type for the workload. If specified, must be one of the
 	// following:
-	// - Agriculture
-	// - Automobile
-	// - Defense
-	// - Design and Engineering
-	// -
-	// Digital Advertising
-	// - Education
-	// - Environmental Protection
-	// - Financial
-	// Services
-	// - Gaming
-	// - General Public Services
-	// - Healthcare
-	// - Hospitality
-	// -
-	// InfoTech
-	// - Justice and Public Safety
-	// - Life Sciences
-	// - Manufacturing
-	// - Media &
-	// Entertainment
-	// - Mining & Resources
-	// - Oil & Gas
-	// - Power & Utilities
-	// -
-	// Professional Services
-	// - Real Estate & Construction
-	// - Retail & Wholesale
-	// - Social
-	// Protection
-	// - Telecommunications
-	// - Travel, Transportation & Logistics
-	// - Other
+	//     - Agriculture
+	//     - Automobile
+	//     - Defense
+	//     - Design and Engineering
+	//     - Digital Advertising
+	//     - Education
+	//     - Environmental Protection
+	//     - Financial Services
+	//     - Gaming
+	//     - General Public Services
+	//     - Healthcare
+	//     - Hospitality
+	//     - InfoTech
+	//     - Justice and Public Safety
+	//     - Life Sciences
+	//     - Manufacturing
+	//     - Media & Entertainment
+	//     - Mining & Resources
+	//     - Oil & Gas
+	//     - Power & Utilities
+	//     - Professional Services
+	//     - Real Estate & Construction
+	//     - Retail & Wholesale
+	//     - Social Protection
+	//     - Telecommunications
+	//     - Travel, Transportation & Logistics
+	//     - Other
 	IndustryType *string
 
 	// Flag indicating whether the workload owner has acknowledged that the Review
@@ -113,12 +107,13 @@ type UpdateWorkloadInput struct {
 	// The notes associated with the workload.
 	Notes *string
 
-	// The priorities of the pillars, which are used to order items in the improvement
-	// plan. Each pillar is represented by its PillarReviewSummary$PillarId.
+	// The priorities of the pillars, which are used to order items in the
+	// improvement plan. Each pillar is represented by its
+	// PillarReviewSummary$PillarId .
 	PillarPriorities []string
 
-	// The review owner of the workload. The name, email address, or identifier for the
-	// primary group or individual that owns the workload review process.
+	// The review owner of the workload. The name, email address, or identifier for
+	// the primary group or individual that owns the workload review process.
 	ReviewOwner *string
 
 	// The name of the workload. The name must be unique within an account within an

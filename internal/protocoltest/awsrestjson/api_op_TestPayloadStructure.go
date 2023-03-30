@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This example operation serializes a payload targeting a structure. This enforces
-// the same requirements as TestBodyStructure but with the body specified by the
-// @httpPayload trait.
+// This example operation serializes a payload targeting a structure. This
+// enforces the same requirements as TestBodyStructure but with the body specified
+// by the @httpPayload trait.
 func (c *Client) TestPayloadStructure(ctx context.Context, params *TestPayloadStructureInput, optFns ...func(*Options)) (*TestPayloadStructureOutput, error) {
 	if params == nil {
 		params = &TestPayloadStructureInput{}

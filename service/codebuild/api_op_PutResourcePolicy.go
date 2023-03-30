@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stores a resource policy for the ARN of a Project or ReportGroup object.
+// Stores a resource policy for the ARN of a Project  or ReportGroup  object.
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
 		params = &PutResourcePolicyInput{}
@@ -28,16 +28,14 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 
 type PutResourcePolicyInput struct {
 
-	// A JSON-formatted resource policy. For more information, see Sharing a Project
-	// (https://docs.aws.amazon.com/codebuild/latest/userguide/project-sharing.html#project-sharing-share)
-	// and Sharing a Report Group
-	// (https://docs.aws.amazon.com/codebuild/latest/userguide/report-groups-sharing.html#report-groups-sharing-share)
+	// A JSON-formatted resource policy. For more information, see Sharing a Project (https://docs.aws.amazon.com/codebuild/latest/userguide/project-sharing.html#project-sharing-share)
+	// and Sharing a Report Group (https://docs.aws.amazon.com/codebuild/latest/userguide/report-groups-sharing.html#report-groups-sharing-share)
 	// in the CodeBuild User Guide.
 	//
 	// This member is required.
 	Policy *string
 
-	// The ARN of the Project or ReportGroup resource you want to associate with a
+	// The ARN of the Project  or ReportGroup resource you want to associate with a
 	// resource policy.
 	//
 	// This member is required.
@@ -48,7 +46,7 @@ type PutResourcePolicyInput struct {
 
 type PutResourcePolicyOutput struct {
 
-	// The ARN of the Project or ReportGroup resource that is associated with a
+	// The ARN of the Project  or ReportGroup resource that is associated with a
 	// resource policy.
 	ResourceArn *string
 

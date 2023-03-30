@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the IAM policy assignments, including the Amazon Resource Names (ARNs)
-// for the IAM policies assigned to the specified user and group or groups that the
-// user belongs to.
+// Lists all the IAM policy assignments, including the Amazon Resource Names
+// (ARNs) for the IAM policies assigned to the specified user and group or groups
+// that the user belongs to.
 func (c *Client) ListIAMPolicyAssignmentsForUser(ctx context.Context, params *ListIAMPolicyAssignmentsForUserInput, optFns ...func(*Options)) (*ListIAMPolicyAssignmentsForUserOutput, error) {
 	if params == nil {
 		params = &ListIAMPolicyAssignmentsForUserInput{}

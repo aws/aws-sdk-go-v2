@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes an authorizer. Requires permission to access the DescribeAuthorizer
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Describes an authorizer. Requires permission to access the DescribeAuthorizer (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DescribeAuthorizer(ctx context.Context, params *DescribeAuthorizerInput, optFns ...func(*Options)) (*DescribeAuthorizerOutput, error) {
 	if params == nil {

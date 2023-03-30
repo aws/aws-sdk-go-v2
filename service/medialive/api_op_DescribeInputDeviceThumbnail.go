@@ -48,8 +48,8 @@ type DescribeInputDeviceThumbnailInput struct {
 // Placeholder documentation for DescribeInputDeviceThumbnailResponse
 type DescribeInputDeviceThumbnailOutput struct {
 
-	// The binary data for the thumbnail that the Link device has most recently sent to
-	// MediaLive.
+	// The binary data for the thumbnail that the Link device has most recently sent
+	// to MediaLive.
 	Body io.ReadCloser
 
 	// The length of the content.

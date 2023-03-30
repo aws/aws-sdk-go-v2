@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified parameter group. You cannot delete a parameter group if it
-// is associated with any clusters. You cannot delete the default parameter groups
-// in your account.
+// Deletes the specified parameter group. You cannot delete a parameter group if
+// it is associated with any clusters. You cannot delete the default parameter
+// groups in your account.
 func (c *Client) DeleteParameterGroup(ctx context.Context, params *DeleteParameterGroupInput, optFns ...func(*Options)) (*DeleteParameterGroupOutput, error) {
 	if params == nil {
 		params = &DeleteParameterGroupInput{}

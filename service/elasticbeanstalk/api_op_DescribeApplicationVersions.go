@@ -54,7 +54,7 @@ type DescribeApplicationVersionsInput struct {
 // Result message wrapping a list of application version descriptions.
 type DescribeApplicationVersionsOutput struct {
 
-	// List of ApplicationVersionDescription objects sorted in order of creation.
+	// List of ApplicationVersionDescription  objects sorted in order of creation.
 	ApplicationVersions []types.ApplicationVersionDescription
 
 	// In a paginated request, the token that you can pass in a subsequent request to

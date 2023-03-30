@@ -21,8 +21,8 @@ type AccessTokenSummary struct {
 	Name *string
 
 	// The date and time when the personal access token will expire, in coordinated
-	// universal time (UTC) timestamp format as specified in RFC 3339
-	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
+	// universal time (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// .
 	ExpiresTime *time.Time
 
 	noSmithyDocumentSerde
@@ -67,8 +67,8 @@ type DevEnvironmentSessionConfiguration struct {
 	// This member is required.
 	SessionType DevEnvironmentSessionType
 
-	// Information about optional commands that will be run on the Dev Environment when
-	// the SSH session begins.
+	// Information about optional commands that will be run on the Dev Environment
+	// when the SSH session begins.
 	ExecuteCommandSessionConfiguration *ExecuteCommandSessionConfiguration
 
 	noSmithyDocumentSerde
@@ -100,8 +100,8 @@ type DevEnvironmentSummary struct {
 	InstanceType InstanceType
 
 	// The time when the Dev Environment was last updated, in coordinated universal
-	// time (UTC) timestamp format as specified in RFC 3339
-	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
+	// time (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// .
 	//
 	// This member is required.
 	LastUpdatedTime *time.Time
@@ -112,8 +112,8 @@ type DevEnvironmentSummary struct {
 	// This member is required.
 	PersistentStorage *PersistentStorage
 
-	// Information about the repositories that will be cloned into the Dev Environment.
-	// If no rvalue is specified, no repository is cloned.
+	// Information about the repositories that will be cloned into the Dev
+	// Environment. If no rvalue is specified, no repository is cloned.
 	//
 	// This member is required.
 	Repositories []DevEnvironmentRepositorySummary
@@ -126,8 +126,8 @@ type DevEnvironmentSummary struct {
 	// The user-specified alias for the Dev Environment.
 	Alias *string
 
-	// Information about the integrated development environment (IDE) configured for a
-	// Dev Environment.
+	// Information about the integrated development environment (IDE) configured for
+	// a Dev Environment.
 	Ides []Ide
 
 	// The name of the project in the space.
@@ -173,8 +173,8 @@ type EventLogEntry struct {
 	EventSource *string
 
 	// The time the event took place, in coordinated universal time (UTC) timestamp
-	// format as specified in RFC 3339
-	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
+	// format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// .
 	//
 	// This member is required.
 	EventTime *time.Time
@@ -237,8 +237,8 @@ type EventPayload struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the commands that will be run on a Dev Environment when an SSH
-// session begins.
+// Information about the commands that will be run on a Dev Environment when an
+// SSH session begins.
 type ExecuteCommandSessionConfiguration struct {
 
 	// The command used at the beginning of the SSH session to a Dev Environment.
@@ -287,22 +287,23 @@ type Ide struct {
 // (IDE) for a Dev Environment.
 type IdeConfiguration struct {
 
-	// The name of the IDE. Valid values include Cloud9, IntelliJ, PyCharm, GoLand, and
-	// VSCode.
+	// The name of the IDE. Valid values include Cloud9 , IntelliJ , PyCharm , GoLand
+	// , and VSCode .
 	Name *string
 
-	// A link to the IDE runtime image. This parameter is not required for VSCode.
+	// A link to the IDE runtime image. This parameter is not required for VSCode .
 	Runtime *string
 
 	noSmithyDocumentSerde
 }
 
-// Information about a source repository returned in a list of source repositories.
+// Information about a source repository returned in a list of source
+// repositories.
 type ListSourceRepositoriesItem struct {
 
-	// The time the source repository was created, in coordinated universal time (UTC)
-	// timestamp format as specified in RFC 3339
-	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
+	// The time the source repository was created, in coordinated universal time
+	// (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// .
 	//
 	// This member is required.
 	CreatedTime *time.Time
@@ -313,8 +314,8 @@ type ListSourceRepositoriesItem struct {
 	Id *string
 
 	// The time the source repository was last updated, in coordinated universal time
-	// (UTC) timestamp format as specified in RFC 3339
-	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
+	// (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// .
 	//
 	// This member is required.
 	LastUpdatedTime *time.Time
@@ -334,13 +335,13 @@ type ListSourceRepositoriesItem struct {
 // branches.
 type ListSourceRepositoryBranchesItem struct {
 
-	// The commit ID of the tip of the branch at the time of the request, also known as
-	// the head commit.
+	// The commit ID of the tip of the branch at the time of the request, also known
+	// as the head commit.
 	HeadCommitId *string
 
 	// The time the branch was last updated, in coordinated universal time (UTC)
-	// timestamp format as specified in RFC 3339
-	// (https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
+	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// .
 	LastUpdatedTime *time.Time
 
 	// The name of the branch.
@@ -355,9 +356,9 @@ type ListSourceRepositoryBranchesItem struct {
 // Information about the persistent storage for a Dev Environment.
 type PersistentStorage struct {
 
-	// The size of the persistent storage in gigabytes (specifically GiB). Valid values
-	// for storage are based on memory sizes in 16GB increments. Valid values are 16,
-	// 32, and 64.
+	// The size of the persistent storage in gigabytes (specifically GiB). Valid
+	// values for storage are based on memory sizes in 16GB increments. Valid values
+	// are 16, 32, and 64.
 	//
 	// This member is required.
 	SizeInGiB *int32
@@ -365,12 +366,13 @@ type PersistentStorage struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the configuration of persistent storage for a Dev Environment.
+// Information about the configuration of persistent storage for a Dev
+// Environment.
 type PersistentStorageConfiguration struct {
 
-	// The size of the persistent storage in gigabytes (specifically GiB). Valid values
-	// for storage are based on memory sizes in 16GB increments. Valid values are 16,
-	// 32, and 64.
+	// The size of the persistent storage in gigabytes (specifically GiB). Valid
+	// values for storage are based on memory sizes in 16GB increments. Valid values
+	// are 16, 32, and 64.
 	//
 	// This member is required.
 	SizeInGiB *int32
@@ -471,8 +473,8 @@ type UserIdentity struct {
 	// This member is required.
 	PrincipalId *string
 
-	// The role assigned to the user in a Amazon CodeCatalyst space or project when the
-	// event occurred.
+	// The role assigned to the user in a Amazon CodeCatalyst space or project when
+	// the event occurred.
 	//
 	// This member is required.
 	UserType UserType

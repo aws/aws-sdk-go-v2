@@ -12,11 +12,10 @@ import (
 )
 
 // Updates the resource query of a group. For more information about resource
-// queries, see Create a tag-based group in Resource Groups
-// (https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag).
-// Minimum permissions To run this command, you must have the following
+// queries, see Create a tag-based group in Resource Groups (https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag)
+// . Minimum permissions To run this command, you must have the following
 // permissions:
-// - resource-groups:UpdateGroupQuery
+//   - resource-groups:UpdateGroupQuery
 func (c *Client) UpdateGroupQuery(ctx context.Context, params *UpdateGroupQueryInput, optFns ...func(*Options)) (*UpdateGroupQueryOutput, error) {
 	if params == nil {
 		params = &UpdateGroupQueryInput{}
@@ -34,9 +33,9 @@ func (c *Client) UpdateGroupQuery(ctx context.Context, params *UpdateGroupQueryI
 
 type UpdateGroupQueryInput struct {
 
-	// The resource query to determine which Amazon Web Services resources are members
-	// of this resource group. A resource group can contain either a Configuration or a
-	// ResourceQuery, but not both.
+	// The resource query to determine which Amazon Web Services resources are
+	// members of this resource group. A resource group can contain either a
+	// Configuration or a ResourceQuery , but not both.
 	//
 	// This member is required.
 	ResourceQuery *types.ResourceQuery
@@ -44,7 +43,7 @@ type UpdateGroupQueryInput struct {
 	// The name or the ARN of the resource group to query.
 	Group *string
 
-	// Don't use this parameter. Use Group instead.
+	// Don't use this parameter. Use Group  instead.
 	//
 	// Deprecated: This field is deprecated, use Group instead.
 	GroupName *string

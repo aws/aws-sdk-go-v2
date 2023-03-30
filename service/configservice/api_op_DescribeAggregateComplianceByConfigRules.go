@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of compliant and noncompliant rules with the number of resources
-// for compliant and noncompliant rules. Does not display rules that do not have
-// compliance results. The results can return an empty result page, but if you have
-// a nextToken, the results are displayed on the next page.
+// Returns a list of compliant and noncompliant rules with the number of
+// resources for compliant and noncompliant rules. Does not display rules that do
+// not have compliance results. The results can return an empty result page, but if
+// you have a nextToken , the results are displayed on the next page.
 func (c *Client) DescribeAggregateComplianceByConfigRules(ctx context.Context, params *DescribeAggregateComplianceByConfigRulesInput, optFns ...func(*Options)) (*DescribeAggregateComplianceByConfigRulesOutput, error) {
 	if params == nil {
 		params = &DescribeAggregateComplianceByConfigRulesInput{}
@@ -145,8 +145,8 @@ type DescribeAggregateComplianceByConfigRulesPaginatorOptions struct {
 	// maximum. If you specify 0, Config uses the default.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

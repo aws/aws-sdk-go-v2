@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the status and settings of the voice channel for an
-// application.
+// Retrieves information about the status and settings of the voice channel for
+// an application.
 func (c *Client) GetVoiceChannel(ctx context.Context, params *GetVoiceChannelInput, optFns ...func(*Options)) (*GetVoiceChannelOutput, error) {
 	if params == nil {
 		params = &GetVoiceChannelInput{}

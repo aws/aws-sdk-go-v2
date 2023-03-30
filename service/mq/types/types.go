@@ -14,9 +14,8 @@ type ActionRequired struct {
 	// The code you can use to resolve your broker issue when the broker is in a
 	// CRITICAL_ACTION_REQUIRED state. You can find instructions by choosing the link
 	// for your code from the list of action required codes in Amazon MQ action
-	// required codes
-	// (https://docs.aws.amazon.com//latest/developer-guide/troubleshooting-action-required-codes.html).
-	// Each code references a topic with detailed information, instructions, and
+	// required codes (https://docs.aws.amazon.com//latest/developer-guide/troubleshooting-action-required-codes.html)
+	// . Each code references a topic with detailed information, instructions, and
 	// recommendations for how to resolve the issue and prevent future occurrences.
 	ActionRequiredCode *string
 
@@ -148,15 +147,15 @@ type Configuration struct {
 	// This member is required.
 	Description *string
 
-	// Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and
-	// RABBITMQ.
+	// Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ
+	// and RABBITMQ.
 	//
 	// This member is required.
 	EngineType EngineType
 
-	// Required. The broker engine's version. For a list of supported engine versions,
-	// see, Supported engines
-	// (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html).
+	// Required. The broker engine's version. For a list of supported engine
+	// versions, see, Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
+	// .
 	//
 	// This member is required.
 	EngineVersion *string
@@ -236,8 +235,9 @@ type Configurations struct {
 // Does not apply to RabbitMQ brokers. Encryption options for the broker.
 type EncryptionOptions struct {
 
-	// Enables the use of an AWS owned CMK using AWS Key Management Service (KMS). Set
-	// to true by default, if no value is provided, for example, for RabbitMQ brokers.
+	// Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
+	// Set to true by default, if no value is provided, for example, for RabbitMQ
+	// brokers.
 	//
 	// This member is required.
 	UseAwsOwnedKey bool
@@ -276,13 +276,14 @@ type LdapServerMetadataInput struct {
 	// This member is required.
 	RoleBase *string
 
-	// The LDAP search filter used to find roles within the roleBase. The distinguished
-	// name of the user matched by userSearchMatching is substituted into the {0}
-	// placeholder in the search filter. The client's username is substituted into the
-	// {1} placeholder. For example, if you set this option to (member=uid={1})for the
-	// user janedoe, the search filter becomes (member=uid=janedoe) after string
-	// substitution. It matches all role entries that have a member attribute equal to
-	// uid=janedoe under the subtree selected by the roleBase.
+	// The LDAP search filter used to find roles within the roleBase. The
+	// distinguished name of the user matched by userSearchMatching is substituted into
+	// the {0} placeholder in the search filter. The client's username is substituted
+	// into the {1} placeholder. For example, if you set this option to
+	// (member=uid={1})for the user janedoe, the search filter becomes
+	// (member=uid=janedoe) after string substitution. It matches all role entries that
+	// have a member attribute equal to uid=janedoe under the subtree selected by the
+	// roleBase.
 	//
 	// This member is required.
 	RoleSearchMatching *string
@@ -324,15 +325,15 @@ type LdapServerMetadataInput struct {
 	// object returned from the group membership query.
 	RoleName *string
 
-	// The directory search scope for the role. If set to true, scope is to search the
-	// entire subtree.
+	// The directory search scope for the role. If set to true, scope is to search
+	// the entire subtree.
 	RoleSearchSubtree bool
 
 	// Specifies the name of the LDAP attribute for the user group membership.
 	UserRoleName *string
 
-	// The directory search scope for the user. If set to true, scope is to search the
-	// entire subtree.
+	// The directory search scope for the user. If set to true, scope is to search
+	// the entire subtree.
 	UserSearchSubtree bool
 
 	noSmithyDocumentSerde
@@ -355,13 +356,14 @@ type LdapServerMetadataOutput struct {
 	// This member is required.
 	RoleBase *string
 
-	// The LDAP search filter used to find roles within the roleBase. The distinguished
-	// name of the user matched by userSearchMatching is substituted into the {0}
-	// placeholder in the search filter. The client's username is substituted into the
-	// {1} placeholder. For example, if you set this option to (member=uid={1})for the
-	// user janedoe, the search filter becomes (member=uid=janedoe) after string
-	// substitution. It matches all role entries that have a member attribute equal to
-	// uid=janedoe under the subtree selected by the roleBase.
+	// The LDAP search filter used to find roles within the roleBase. The
+	// distinguished name of the user matched by userSearchMatching is substituted into
+	// the {0} placeholder in the search filter. The client's username is substituted
+	// into the {1} placeholder. For example, if you set this option to
+	// (member=uid={1})for the user janedoe, the search filter becomes
+	// (member=uid=janedoe) after string substitution. It matches all role entries that
+	// have a member attribute equal to uid=janedoe under the subtree selected by the
+	// roleBase.
 	//
 	// This member is required.
 	RoleSearchMatching *string
@@ -396,15 +398,15 @@ type LdapServerMetadataOutput struct {
 	// object returned from the group membership query.
 	RoleName *string
 
-	// The directory search scope for the role. If set to true, scope is to search the
-	// entire subtree.
+	// The directory search scope for the role. If set to true, scope is to search
+	// the entire subtree.
 	RoleSearchSubtree bool
 
 	// Specifies the name of the LDAP attribute for the user group membership.
 	UserRoleName *string
 
-	// The directory search scope for the user. If set to true, scope is to search the
-	// entire subtree.
+	// The directory search scope for the user. If set to true, scope is to search
+	// the entire subtree.
 	UserSearchSubtree bool
 
 	noSmithyDocumentSerde
@@ -423,8 +425,8 @@ type Logs struct {
 	noSmithyDocumentSerde
 }
 
-// The list of information about logs currently enabled and pending to be deployed
-// for the specified broker.
+// The list of information about logs currently enabled and pending to be
+// deployed for the specified broker.
 type LogsSummary struct {
 
 	// Enables general logging.
@@ -464,8 +466,8 @@ type PendingLogs struct {
 	noSmithyDocumentSerde
 }
 
-// Returns information about the XML element or attribute that was sanitized in the
-// configuration.
+// Returns information about the XML element or attribute that was sanitized in
+// the configuration.
 type SanitizationWarning struct {
 
 	// Required. The reason for which the XML elements or attributes were sanitized.
@@ -506,8 +508,8 @@ type User struct {
 	// This member is required.
 	Username *string
 
-	// Enables access to the ActiveMQ Web Console for the ActiveMQ user. Does not apply
-	// to RabbitMQ brokers.
+	// Enables access to the ActiveMQ Web Console for the ActiveMQ user. Does not
+	// apply to RabbitMQ brokers.
 	ConsoleAccess bool
 
 	// The list of groups (20 maximum) to which the ActiveMQ user belongs. This value
@@ -555,8 +557,8 @@ type UserSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The scheduled time period relative to UTC during which Amazon MQ begins to apply
-// pending updates or patches to the broker.
+// The scheduled time period relative to UTC during which Amazon MQ begins to
+// apply pending updates or patches to the broker.
 type WeeklyStartTime struct {
 
 	// Required. The day of the week.

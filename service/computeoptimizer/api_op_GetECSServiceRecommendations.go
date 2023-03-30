@@ -13,9 +13,9 @@ import (
 
 // Returns Amazon ECS service recommendations. Compute Optimizer generates
 // recommendations for Amazon ECS services on Fargate that meet a specific set of
-// requirements. For more information, see the Supported resources and requirements
-// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html) in
-// the Compute Optimizer User Guide.
+// requirements. For more information, see the Supported resources and
+// requirements (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html)
+// in the Compute Optimizer User Guide.
 func (c *Client) GetECSServiceRecommendations(ctx context.Context, params *GetECSServiceRecommendationsInput, optFns ...func(*Options)) (*GetECSServiceRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetECSServiceRecommendationsInput{}
@@ -44,9 +44,9 @@ type GetECSServiceRecommendationsInput struct {
 	// Amazon ECS service recommendations.
 	Filters []types.ECSServiceRecommendationFilter
 
-	// The maximum number of Amazon ECS service recommendations to return with a single
-	// request. To retrieve the remaining results, make another request with the
-	// returned nextToken value.
+	// The maximum number of Amazon ECS service recommendations to return with a
+	// single request. To retrieve the remaining results, make another request with the
+	// returned nextToken  value.
 	MaxResults *int32
 
 	// The token to advance to the next page of Amazon ECS service recommendations.

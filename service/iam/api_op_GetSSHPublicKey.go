@@ -15,8 +15,7 @@ import (
 // SSH public key retrieved by this operation is used only for authenticating the
 // associated IAM user to an CodeCommit repository. For more information about
 // using SSH keys to authenticate to an CodeCommit repository, see Set up
-// CodeCommit for SSH connections
-// (https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
+// CodeCommit for SSH connections (https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
 // in the CodeCommit User Guide.
 func (c *Client) GetSSHPublicKey(ctx context.Context, params *GetSSHPublicKeyInput, optFns ...func(*Options)) (*GetSSHPublicKeyOutput, error) {
 	if params == nil {
@@ -35,23 +34,23 @@ func (c *Client) GetSSHPublicKey(ctx context.Context, params *GetSSHPublicKeyInp
 
 type GetSSHPublicKeyInput struct {
 
-	// Specifies the public key encoding format to use in the response. To retrieve the
-	// public key in ssh-rsa format, use SSH. To retrieve the public key in PEM format,
-	// use PEM.
+	// Specifies the public key encoding format to use in the response. To retrieve
+	// the public key in ssh-rsa format, use SSH. To retrieve the public key in PEM
+	// format, use PEM .
 	//
 	// This member is required.
 	Encoding types.EncodingType
 
-	// The unique identifier for the SSH public key. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters that can
-	// consist of any upper or lowercased letter or digit.
+	// The unique identifier for the SSH public key. This parameter allows (through
+	// its regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
+	// that can consist of any upper or lowercased letter or digit.
 	//
 	// This member is required.
 	SSHPublicKeyId *string
 
 	// The name of the IAM user associated with the SSH public key. This parameter
-	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters consisting of upper and lowercase alphanumeric characters with no
+	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string
+	// of characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.
@@ -60,7 +59,7 @@ type GetSSHPublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetSSHPublicKey request.
+// Contains the response to a successful GetSSHPublicKey  request.
 type GetSSHPublicKeyOutput struct {
 
 	// A structure containing details about the SSH public key.

@@ -15,7 +15,7 @@ import (
 // endpoint, or capacity of one variant associated with an existing endpoint. When
 // it receives the request, SageMaker sets the endpoint status to Updating. After
 // updating the endpoint, it sets the status to InService. To check the status of
-// an endpoint, use the DescribeEndpoint API.
+// an endpoint, use the DescribeEndpoint  API.
 func (c *Client) UpdateEndpointWeightsAndCapacities(ctx context.Context, params *UpdateEndpointWeightsAndCapacitiesInput, optFns ...func(*Options)) (*UpdateEndpointWeightsAndCapacitiesOutput, error) {
 	if params == nil {
 		params = &UpdateEndpointWeightsAndCapacitiesInput{}

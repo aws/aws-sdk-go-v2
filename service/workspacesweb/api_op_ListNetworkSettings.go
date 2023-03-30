@@ -115,8 +115,8 @@ func (c *Client) addOperationListNetworkSettingsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListNetworkSettingsAPIClient is a client that implements the ListNetworkSettings
-// operation.
+// ListNetworkSettingsAPIClient is a client that implements the
+// ListNetworkSettings operation.
 type ListNetworkSettingsAPIClient interface {
 	ListNetworkSettings(context.Context, *ListNetworkSettingsInput, ...func(*Options)) (*ListNetworkSettingsOutput, error)
 }
@@ -129,8 +129,8 @@ type ListNetworkSettingsPaginatorOptions struct {
 	// The maximum number of results to be included in the next page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

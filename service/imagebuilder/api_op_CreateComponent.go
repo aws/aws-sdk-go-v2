@@ -15,10 +15,8 @@ import (
 // Creates a new component that can be used to build, validate, test, and assess
 // your image. The component is based on a YAML document that you specify using
 // exactly one of the following methods:
-// - Inline, using the data property in the
-// request body.
-// - A URL that points to a YAML document file stored in Amazon S3,
-// using the uri property in the request body.
+//   - Inline, using the data property in the request body.
+//   - A URL that points to a YAML document file stored in Amazon S3, using the uri property in the request body.
 func (c *Client) CreateComponent(ctx context.Context, params *CreateComponentInput, optFns ...func(*Options)) (*CreateComponentOutput, error) {
 	if params == nil {
 		params = &CreateComponentInput{}
@@ -51,11 +49,11 @@ type CreateComponentInput struct {
 	// This member is required.
 	Platform types.Platform
 
-	// The semantic version of the component. This version follows the semantic version
-	// syntax. The semantic version has four nodes: ../. You can assign values for the
-	// first three, and can filter on all of them. Assignment: For the first three
-	// nodes you can assign any positive integer value, including zero, with an upper
-	// limit of 2^30-1, or 1073741823 for each node. Image Builder automatically
+	// The semantic version of the component. This version follows the semantic
+	// version syntax. The semantic version has four nodes: ../. You can assign values
+	// for the first three, and can filter on all of them. Assignment: For the first
+	// three nodes you can assign any positive integer value, including zero, with an
+	// upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically
 	// assigns the build number to the fourth node. Patterns: You can use any numeric
 	// pattern that adheres to the assignment requirements for the nodes that you can
 	// assign. For example, you might choose a software version pattern, such as 1.0.0,
@@ -64,14 +62,14 @@ type CreateComponentInput struct {
 	// This member is required.
 	SemanticVersion *string
 
-	// The change description of the component. Describes what change has been made in
-	// this version, or what makes this version different from other versions of this
-	// component.
+	// The change description of the component. Describes what change has been made
+	// in this version, or what makes this version different from other versions of
+	// this component.
 	ChangeDescription *string
 
 	// Component data contains inline YAML document content for the component.
-	// Alternatively, you can specify the uri of a YAML document file stored in Amazon
-	// S3. However, you cannot specify both properties.
+	// Alternatively, you can specify the uri of a YAML document file stored in
+	// Amazon S3. However, you cannot specify both properties.
 	Data *string
 
 	// Describes the contents of the component.
@@ -88,11 +86,11 @@ type CreateComponentInput struct {
 	// The tags that apply to the component.
 	Tags map[string]string
 
-	// The uri of a YAML component document file. This must be an S3 URL
-	// (s3://bucket/key), and the requester must have permission to access the S3
+	// The uri  of a YAML component document file. This must be an S3 URL (
+	// s3://bucket/key), and the requester must have permission to access the S3
 	// bucket it points to. If you use Amazon S3, you can specify component content up
 	// to your service quota. Alternatively, you can specify the YAML document inline,
-	// using the component data property. You cannot specify both properties.
+	// using the component data  property. You cannot specify both properties.
 	Uri *string
 
 	noSmithyDocumentSerde

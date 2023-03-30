@@ -12,14 +12,15 @@ import (
 )
 
 // Retrieves the current snapshot for the patch baseline the managed node uses.
-// This API is primarily used by the AWS-RunPatchBaseline Systems Manager document
-// (SSM document). If you run the command locally, such as with the Command Line
-// Interface (CLI), the system attempts to use your local Amazon Web Services
-// credentials and the operation fails. To avoid this, you can run the command in
-// the Amazon Web Services Systems Manager console. Use Run Command, a capability
-// of Amazon Web Services Systems Manager, with an SSM document that enables you to
-// target a managed node with a script or command. For example, run the command
-// using the AWS-RunShellScript document or the AWS-RunPowerShellScript document.
+// This API is primarily used by the AWS-RunPatchBaseline Systems Manager
+// document (SSM document). If you run the command locally, such as with the
+// Command Line Interface (CLI), the system attempts to use your local Amazon Web
+// Services credentials and the operation fails. To avoid this, you can run the
+// command in the Amazon Web Services Systems Manager console. Use Run Command, a
+// capability of Amazon Web Services Systems Manager, with an SSM document that
+// enables you to target a managed node with a script or command. For example, run
+// the command using the AWS-RunShellScript  document or the
+// AWS-RunPowerShellScript document.
 func (c *Client) GetDeployablePatchSnapshotForInstance(ctx context.Context, params *GetDeployablePatchSnapshotForInstanceInput, optFns ...func(*Options)) (*GetDeployablePatchSnapshotForInstanceOutput, error) {
 	if params == nil {
 		params = &GetDeployablePatchSnapshotForInstanceInput{}
@@ -43,7 +44,7 @@ type GetDeployablePatchSnapshotForInstanceInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The snapshot ID provided by the user when running AWS-RunPatchBaseline.
+	// The snapshot ID provided by the user when running AWS-RunPatchBaseline .
 	//
 	// This member is required.
 	SnapshotId *string
@@ -59,8 +60,8 @@ type GetDeployablePatchSnapshotForInstanceOutput struct {
 	// The managed node ID.
 	InstanceId *string
 
-	// Returns the specific operating system (for example Windows Server 2012 or Amazon
-	// Linux 2015.09) on the managed node for the specified patch snapshot.
+	// Returns the specific operating system (for example Windows Server 2012 or
+	// Amazon Linux 2015.09) on the managed node for the specified patch snapshot.
 	Product *string
 
 	// A pre-signed Amazon Simple Storage Service (Amazon S3) URL that can be used to

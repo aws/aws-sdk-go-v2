@@ -14,11 +14,12 @@ import (
 // determines what happens when an identity is used to send an email that results
 // in a bounce or complaint event. If the value is true, you receive email
 // notifications when bounce or complaint events occur. These notifications are
-// sent to the address that you specified in the Return-Path header of the original
-// email. You're required to have a method of tracking bounces and complaints. If
-// you haven't set up another mechanism for receiving bounce or complaint
-// notifications (for example, by setting up an event destination), you receive an
-// email notification when these events occur (even if this setting is disabled).
+// sent to the address that you specified in the Return-Path header of the
+// original email. You're required to have a method of tracking bounces and
+// complaints. If you haven't set up another mechanism for receiving bounce or
+// complaint notifications (for example, by setting up an event destination), you
+// receive an email notification when these events occur (even if this setting is
+// disabled).
 func (c *Client) PutEmailIdentityFeedbackAttributes(ctx context.Context, params *PutEmailIdentityFeedbackAttributesInput, optFns ...func(*Options)) (*PutEmailIdentityFeedbackAttributesOutput, error) {
 	if params == nil {
 		params = &PutEmailIdentityFeedbackAttributesInput{}
@@ -34,8 +35,8 @@ func (c *Client) PutEmailIdentityFeedbackAttributes(ctx context.Context, params 
 	return out, nil
 }
 
-// A request to set the attributes that control how bounce and complaint events are
-// processed.
+// A request to set the attributes that control how bounce and complaint events
+// are processed.
 type PutEmailIdentityFeedbackAttributesInput struct {
 
 	// The email identity.
@@ -46,7 +47,7 @@ type PutEmailIdentityFeedbackAttributesInput struct {
 	// Sets the feedback forwarding configuration for the identity. If the value is
 	// true, you receive email notifications when bounce or complaint events occur.
 	// These notifications are sent to the address that you specified in the
-	// Return-Path header of the original email. You're required to have a method of
+	// Return-Pathheader of the original email. You're required to have a method of
 	// tracking bounces and complaints. If you haven't set up another mechanism for
 	// receiving bounce or complaint notifications (for example, by setting up an event
 	// destination), you receive an email notification when these events occur (even if
@@ -56,8 +57,8 @@ type PutEmailIdentityFeedbackAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-// An HTTP 200 response if the request succeeds, or an error message if the request
-// fails.
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 type PutEmailIdentityFeedbackAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

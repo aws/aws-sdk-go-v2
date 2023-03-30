@@ -30,9 +30,9 @@ func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, 
 // Request structure used to request a project be created.
 type CreateProjectInput struct {
 
-	// ZIP or YAML file which contains configuration settings to be used when creating
-	// the project. This may be the contents of the file downloaded from the URL
-	// provided in an export project operation.
+	// ZIP or YAML file which contains configuration settings to be used when
+	// creating the project. This may be the contents of the file downloaded from the
+	// URL provided in an export project operation.
 	Contents []byte
 
 	// Name of the project.

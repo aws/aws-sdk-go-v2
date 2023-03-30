@@ -12,9 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the IP address ranges that were specified in calls to ProvisionByoipCidr
-// (https://docs.aws.amazon.com/global-accelerator/latest/api/ProvisionByoipCidr.html),
-// including the current state and a history of state changes.
+// Lists the IP address ranges that were specified in calls to ProvisionByoipCidr (https://docs.aws.amazon.com/global-accelerator/latest/api/ProvisionByoipCidr.html)
+// , including the current state and a history of state changes.
 func (c *Client) ListByoipCidrs(ctx context.Context, params *ListByoipCidrsInput, optFns ...func(*Options)) (*ListByoipCidrsOutput, error) {
 	if params == nil {
 		params = &ListByoipCidrsInput{}
@@ -33,7 +32,7 @@ func (c *Client) ListByoipCidrs(ctx context.Context, params *ListByoipCidrsInput
 type ListByoipCidrsInput struct {
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -127,11 +126,11 @@ var _ ListByoipCidrsAPIClient = (*Client)(nil)
 // ListByoipCidrsPaginatorOptions is the paginator options for ListByoipCidrs
 type ListByoipCidrsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

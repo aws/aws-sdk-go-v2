@@ -67,30 +67,14 @@ type DescribeEndpointOutput struct {
 	EndpointName *string
 
 	// The status of the endpoint.
-	// - OutOfService: Endpoint is not available to take
-	// incoming requests.
-	// - Creating: CreateEndpoint is executing.
-	// - Updating:
-	// UpdateEndpoint or UpdateEndpointWeightsAndCapacities is executing.
-	// -
-	// SystemUpdating: Endpoint is undergoing maintenance and cannot be updated or
-	// deleted or re-scaled until it has completed. This maintenance operation does not
-	// change any customer-specified values such as VPC config, KMS encryption, model,
-	// instance type, or instance count.
-	// - RollingBack: Endpoint fails to scale up or
-	// down or change its variant weight and is in the process of rolling back to its
-	// previous configuration. Once the rollback completes, endpoint returns to an
-	// InService status. This transitional status only applies to an endpoint that has
-	// autoscaling enabled and is undergoing variant weight or capacity changes as part
-	// of an UpdateEndpointWeightsAndCapacities call or when the
-	// UpdateEndpointWeightsAndCapacities operation is called explicitly.
-	// - InService:
-	// Endpoint is available to process incoming requests.
-	// - Deleting: DeleteEndpoint
-	// is executing.
-	// - Failed: Endpoint could not be created, updated, or re-scaled.
-	// Use DescribeEndpointOutput$FailureReason for information about the failure.
-	// DeleteEndpoint is the only operation that can be performed on a failed endpoint.
+	//     - OutOfService : Endpoint is not available to take incoming requests.
+	//     - Creating : CreateEndpoint is executing.
+	//     - Updating : UpdateEndpoint or UpdateEndpointWeightsAndCapacities is executing.
+	//     - SystemUpdating : Endpoint is undergoing maintenance and cannot be updated or deleted or re-scaled until it has completed. This maintenance operation does not change any customer-specified values such as VPC config, KMS encryption, model, instance type, or instance count.
+	//     - RollingBack : Endpoint fails to scale up or down or change its variant weight and is in the process of rolling back to its previous configuration. Once the rollback completes, endpoint returns to an InService status. This transitional status only applies to an endpoint that has autoscaling enabled and is undergoing variant weight or capacity changes as part of an UpdateEndpointWeightsAndCapacities call or when the UpdateEndpointWeightsAndCapacities operation is called explicitly.
+	//     - InService : Endpoint is available to process incoming requests.
+	//     - Deleting : DeleteEndpoint is executing.
+	//     - Failed : Endpoint could not be created, updated, or re-scaled. Use DescribeEndpointOutput$FailureReason for information about the failure. DeleteEndpoint is the only operation that can be performed on a failed endpoint.
 	//
 	// This member is required.
 	EndpointStatus types.EndpointStatus
@@ -101,8 +85,7 @@ type DescribeEndpointOutput struct {
 	LastModifiedTime *time.Time
 
 	// Returns the description of an endpoint configuration created using the
-	// CreateEndpointConfig
-	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html)
+	// CreateEndpointConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html)
 	// API.
 	AsyncInferenceConfig *types.AsyncInferenceConfig
 
@@ -112,7 +95,7 @@ type DescribeEndpointOutput struct {
 	// The configuration parameters for an explainer.
 	ExplainerConfig *types.ExplainerConfig
 
-	// If the status of the endpoint is Failed, the reason why it failed.
+	// If the status of the endpoint is Failed , the reason why it failed.
 	FailureReason *string
 
 	// The most recent deployment configuration for the endpoint.
@@ -128,7 +111,7 @@ type DescribeEndpointOutput struct {
 
 	// An array of ProductionVariantSummary objects, one for each model that you want
 	// to host at this endpoint in shadow mode with production traffic replicated from
-	// the model specified on ProductionVariants.
+	// the model specified on ProductionVariants .
 	ShadowProductionVariants []types.ProductionVariantSummary
 
 	// Metadata pertaining to the operation's result.
@@ -221,9 +204,9 @@ type EndpointDeletedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, EndpointDeletedWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, EndpointDeletedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -263,9 +246,9 @@ func NewEndpointDeletedWaiter(client DescribeEndpointAPIClient, optFns ...func(*
 	}
 }
 
-// Wait calls the waiter function for EndpointDeleted waiter. The maxWaitDur is the
-// maximum wait duration the waiter will wait. The maxWaitDur is required and must
-// be greater than zero.
+// Wait calls the waiter function for EndpointDeleted waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
 func (w *EndpointDeletedWaiter) Wait(ctx context.Context, params *DescribeEndpointInput, maxWaitDur time.Duration, optFns ...func(*EndpointDeletedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
@@ -393,9 +376,9 @@ type EndpointInServiceWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, EndpointInServiceWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, EndpointInServiceWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -443,10 +426,10 @@ func (w *EndpointInServiceWaiter) Wait(ctx context.Context, params *DescribeEndp
 	return err
 }
 
-// WaitForOutput calls the waiter function for EndpointInService waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for EndpointInService waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
 func (w *EndpointInServiceWaiter) WaitForOutput(ctx context.Context, params *DescribeEndpointInput, maxWaitDur time.Duration, optFns ...func(*EndpointInServiceWaiterOptions)) (*DescribeEndpointOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

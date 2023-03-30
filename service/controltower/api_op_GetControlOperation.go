@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the status of a particular EnableControl or DisableControl operation.
+// Returns the status of a particular EnableControl  or DisableControl operation.
 // Displays a message in case of error. Details for an operation are available for
 // 90 days.
 func (c *Client) GetControlOperation(ctx context.Context, params *GetControlOperationInput, optFns ...func(*Options)) (*GetControlOperationOutput, error) {

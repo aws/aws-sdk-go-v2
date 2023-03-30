@@ -59,11 +59,11 @@ type GetDataQualityRuleRecommendationRunOutput struct {
 	// run was modified.
 	LastModifiedOn *time.Time
 
-	// The number of G.1X workers to be used in the run. The default is 5.
+	// The number of G.1X  workers to be used in the run. The default is 5.
 	NumberOfWorkers *int32
 
-	// When a start rule recommendation run completes, it creates a recommended ruleset
-	// (a set of rules). This member has those rules in Data Quality Definition
+	// When a start rule recommendation run completes, it creates a recommended
+	// ruleset (a set of rules). This member has those rules in Data Quality Definition
 	// Language (DQDL) format.
 	RecommendedRuleset *string
 
@@ -80,8 +80,8 @@ type GetDataQualityRuleRecommendationRunOutput struct {
 	Status types.TaskStatusType
 
 	// The timeout for a run in minutes. This is the maximum time that a run can
-	// consume resources before it is terminated and enters TIMEOUT status. The default
-	// is 2,880 minutes (48 hours).
+	// consume resources before it is terminated and enters TIMEOUT status. The
+	// default is 2,880 minutes (48 hours).
 	Timeout *int32
 
 	// Metadata pertaining to the operation's result.

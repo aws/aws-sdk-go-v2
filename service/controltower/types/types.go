@@ -13,17 +13,17 @@ type ControlOperation struct {
 	// The time that the operation finished.
 	EndTime *time.Time
 
-	// One of ENABLE_CONTROL or DISABLE_CONTROL.
+	// One of ENABLE_CONTROL  or DISABLE_CONTROL .
 	OperationType ControlOperationType
 
 	// The time that the operation began.
 	StartTime *time.Time
 
-	// One of IN_PROGRESS, SUCEEDED, or FAILED.
+	// One of IN_PROGRESS , SUCEEDED , or FAILED .
 	Status ControlOperationStatus
 
-	// If the operation result is FAILED, this string contains a message explaining why
-	// the operation failed.
+	// If the operation result is FAILED, this string contains a message explaining
+	// why the operation failed.
 	StatusMessage *string
 
 	noSmithyDocumentSerde

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a version of a core definition that has already been defined. Greengrass
-// groups must each contain exactly one Greengrass core.
+// Creates a version of a core definition that has already been defined.
+// Greengrass groups must each contain exactly one Greengrass core.
 func (c *Client) CreateCoreDefinitionVersion(ctx context.Context, params *CreateCoreDefinitionVersionInput, optFns ...func(*Options)) (*CreateCoreDefinitionVersionOutput, error) {
 	if params == nil {
 		params = &CreateCoreDefinitionVersionInput{}

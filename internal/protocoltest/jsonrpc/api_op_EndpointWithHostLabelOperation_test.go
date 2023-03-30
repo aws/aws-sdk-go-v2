@@ -34,8 +34,8 @@ func TestClient_EndpointWithHostLabelOperation_awsAwsjson11Serialize(t *testing.
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// Operations can prepend to the given host if they define the endpoint trait, and
-		// can use the host label trait to define further customization based on user
+		// Operations can prepend to the given host if they define the endpoint trait,
+		// and can use the host label trait to define further customization based on user
 		// input.
 		"AwsJson11EndpointTraitWithHostLabel": {
 			Params: &EndpointWithHostLabelOperationInput{

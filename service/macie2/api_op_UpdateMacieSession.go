@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Suspends or re-enables Amazon Macie, or updates the configuration settings for a
-// Macie account.
+// Suspends or re-enables Amazon Macie, or updates the configuration settings for
+// a Macie account.
 func (c *Client) UpdateMacieSession(ctx context.Context, params *UpdateMacieSessionInput, optFns ...func(*Options)) (*UpdateMacieSessionOutput, error) {
 	if params == nil {
 		params = &UpdateMacieSessionInput{}
@@ -30,9 +30,9 @@ func (c *Client) UpdateMacieSession(ctx context.Context, params *UpdateMacieSess
 
 type UpdateMacieSessionInput struct {
 
-	// Specifies how often to publish updates to policy findings for the account. This
-	// includes publishing updates to Security Hub and Amazon EventBridge (formerly
-	// Amazon CloudWatch Events).
+	// Specifies how often to publish updates to policy findings for the account.
+	// This includes publishing updates to Security Hub and Amazon EventBridge
+	// (formerly Amazon CloudWatch Events).
 	FindingPublishingFrequency types.FindingPublishingFrequency
 
 	// Specifies a new status for the account. Valid values are: ENABLED, resume all

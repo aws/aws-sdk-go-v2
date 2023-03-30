@@ -133,8 +133,8 @@ func (c *Client) addOperationListTemplateAliasesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListTemplateAliasesAPIClient is a client that implements the ListTemplateAliases
-// operation.
+// ListTemplateAliasesAPIClient is a client that implements the
+// ListTemplateAliases operation.
 type ListTemplateAliasesAPIClient interface {
 	ListTemplateAliases(context.Context, *ListTemplateAliasesInput, ...func(*Options)) (*ListTemplateAliasesOutput, error)
 }
@@ -147,8 +147,8 @@ type ListTemplateAliasesPaginatorOptions struct {
 	// The maximum number of results to be returned per request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

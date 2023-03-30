@@ -122,13 +122,14 @@ type ListGatewayGroupsAPIClient interface {
 
 var _ ListGatewayGroupsAPIClient = (*Client)(nil)
 
-// ListGatewayGroupsPaginatorOptions is the paginator options for ListGatewayGroups
+// ListGatewayGroupsPaginatorOptions is the paginator options for
+// ListGatewayGroups
 type ListGatewayGroupsPaginatorOptions struct {
 	// The maximum number of gateway group summaries to return. The default is 50.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

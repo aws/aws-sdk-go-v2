@@ -14,8 +14,7 @@ import (
 // information that is already available to the public. GetCheckerIpRanges still
 // works, but we recommend that you download ip-ranges.json, which includes IP
 // address ranges for all Amazon Web Services services. For more information, see
-// IP Address Ranges of Amazon Route 53 Servers
-// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/route-53-ip-addresses.html)
+// IP Address Ranges of Amazon Route 53 Servers (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/route-53-ip-addresses.html)
 // in the Amazon Route 53 Developer Guide.
 func (c *Client) GetCheckerIpRanges(ctx context.Context, params *GetCheckerIpRangesInput, optFns ...func(*Options)) (*GetCheckerIpRangesOutput, error) {
 	if params == nil {
@@ -37,11 +36,11 @@ type GetCheckerIpRangesInput struct {
 	noSmithyDocumentSerde
 }
 
-// A complex type that contains the CheckerIpRanges element.
+// A complex type that contains the CheckerIpRanges  element.
 type GetCheckerIpRangesOutput struct {
 
-	// A complex type that contains sorted list of IP ranges in CIDR format for Amazon
-	// Route 53 health checkers.
+	// A complex type that contains sorted list of IP ranges in CIDR format for
+	// Amazon Route 53 health checkers.
 	//
 	// This member is required.
 	CheckerIpRanges []string

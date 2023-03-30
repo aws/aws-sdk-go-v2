@@ -33,8 +33,8 @@ type DeleteRecipeVersionInput struct {
 	// This member is required.
 	Name *string
 
-	// The version of the recipe to be deleted. You can specify a numeric versions
-	// (X.Y) or LATEST_WORKING. LATEST_PUBLISHED is not supported.
+	// The version of the recipe to be deleted. You can specify a numeric versions (
+	// X.Y ) or LATEST_WORKING . LATEST_PUBLISHED  is not supported.
 	//
 	// This member is required.
 	RecipeVersion *string

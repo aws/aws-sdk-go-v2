@@ -26,7 +26,7 @@ func (c *Client) DeletePipeline(ctx context.Context, params *DeletePipelineInput
 	return out, nil
 }
 
-// Represents the input of a DeletePipeline action.
+// Represents the input of a DeletePipeline  action.
 type DeletePipelineInput struct {
 
 	// The name of the pipeline to be deleted.

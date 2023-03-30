@@ -30,7 +30,8 @@ func (c *Client) UpdateFindingsFilter(ctx context.Context, params *UpdateFinding
 
 type UpdateFindingsFilterInput struct {
 
-	// The unique identifier for the Amazon Macie resource that the request applies to.
+	// The unique identifier for the Amazon Macie resource that the request applies
+	// to.
 	//
 	// This member is required.
 	Id *string
@@ -40,8 +41,8 @@ type UpdateFindingsFilterInput struct {
 	// the findings; and, NOOP, don't perform any action on the findings.
 	Action types.FindingsFilterAction
 
-	// A unique, case-sensitive token that you provide to ensure the idempotency of the
-	// request.
+	// A unique, case-sensitive token that you provide to ensure the idempotency of
+	// the request.
 	ClientToken *string
 
 	// A custom description of the filter. The description can contain as many as 512

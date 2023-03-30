@@ -39,8 +39,8 @@ type ListApplicationSnapshotsInput struct {
 
 	// Use this parameter if you receive a NextToken response in a previous request
 	// that indicates that there is more output available. Set it to the value of the
-	// previous call's NextToken response to indicate where the output should continue
-	// from.
+	// previous call's NextToken response to indicate where the output should
+	// continue from.
 	NextToken *string
 
 	noSmithyDocumentSerde

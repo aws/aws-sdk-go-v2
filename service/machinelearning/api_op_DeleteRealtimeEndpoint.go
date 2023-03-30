@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a real time endpoint of an MLModel.
+// Deletes a real time endpoint of an MLModel .
 func (c *Client) DeleteRealtimeEndpoint(ctx context.Context, params *DeleteRealtimeEndpointInput, optFns ...func(*Options)) (*DeleteRealtimeEndpointOutput, error) {
 	if params == nil {
 		params = &DeleteRealtimeEndpointInput{}
@@ -29,7 +29,7 @@ func (c *Client) DeleteRealtimeEndpoint(ctx context.Context, params *DeleteRealt
 
 type DeleteRealtimeEndpointInput struct {
 
-	// The ID assigned to the MLModel during creation.
+	// The ID assigned to the MLModel  during creation.
 	//
 	// This member is required.
 	MLModelId *string
@@ -38,11 +38,11 @@ type DeleteRealtimeEndpointInput struct {
 }
 
 // Represents the output of an DeleteRealtimeEndpoint operation. The result
-// contains the MLModelId and the endpoint information for the MLModel.
+// contains the MLModelId  and the endpoint information for the MLModel .
 type DeleteRealtimeEndpointOutput struct {
 
 	// A user-supplied ID that uniquely identifies the MLModel. This value should be
-	// identical to the value of the MLModelId in the request.
+	// identical to the value of the MLModelId  in the request.
 	MLModelId *string
 
 	// The endpoint information of the MLModel

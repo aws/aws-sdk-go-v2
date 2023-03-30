@@ -13,9 +13,8 @@ import (
 
 // Create an App Runner service. After the service is created, the action also
 // automatically starts a deployment. This is an asynchronous operation. On a
-// successful call, you can use the returned OperationId and the ListOperations
-// (https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html) call
-// to track the operation's progress.
+// successful call, you can use the returned OperationId  and the ListOperations (https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html)
+// call to track the operation's progress.
 func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, optFns ...func(*Options)) (*CreateServiceOutput, error) {
 	if params == nil {
 		params = &CreateServiceInput{}
@@ -33,9 +32,9 @@ func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, 
 
 type CreateServiceInput struct {
 
-	// A name for the App Runner service. It must be unique across all the running App
-	// Runner services in your Amazon Web Services account in the Amazon Web Services
-	// Region.
+	// A name for the App Runner service. It must be unique across all the running
+	// App Runner services in your Amazon Web Services account in the Amazon Web
+	// Services Region.
 	//
 	// This member is required.
 	ServiceName *string
@@ -46,11 +45,11 @@ type CreateServiceInput struct {
 	// This member is required.
 	SourceConfiguration *types.SourceConfiguration
 
-	// The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration
-	// resource that you want to associate with your service. If not provided, App
-	// Runner associates the latest revision of a default auto scaling configuration.
-	// Specify an ARN with a name and a revision number to associate that revision. For
-	// example:
+	// The Amazon Resource Name (ARN) of an App Runner automatic scaling
+	// configuration resource that you want to associate with your service. If not
+	// provided, App Runner associates the latest revision of a default auto scaling
+	// configuration. Specify an ARN with a name and a revision number to associate
+	// that revision. For example:
 	// arn:aws:apprunner:us-east-1:123456789012:autoscalingconfiguration/high-availability/3
 	// Specify just the name to associate the latest revision. For example:
 	// arn:aws:apprunner:us-east-1:123456789012:autoscalingconfiguration/high-availability
@@ -61,8 +60,8 @@ type CreateServiceInput struct {
 	// Runner uses an Amazon Web Services managed key.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
-	// The settings for the health check that App Runner performs to monitor the health
-	// of the App Runner service.
+	// The settings for the health check that App Runner performs to monitor the
+	// health of the App Runner service.
 	HealthCheckConfiguration *types.HealthCheckConfiguration
 
 	// The runtime configuration of instances (scaling units) of your service.
@@ -85,9 +84,8 @@ type CreateServiceInput struct {
 type CreateServiceOutput struct {
 
 	// The unique ID of the asynchronous operation that this request started. You can
-	// use it combined with the ListOperations
-	// (https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html) call
-	// to track the operation's progress.
+	// use it combined with the ListOperations (https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html)
+	// call to track the operation's progress.
 	//
 	// This member is required.
 	OperationId *string

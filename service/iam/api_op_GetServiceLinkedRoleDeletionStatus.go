@@ -12,10 +12,10 @@ import (
 )
 
 // Retrieves the status of your service-linked role deletion. After you use
-// DeleteServiceLinkedRole to submit a service-linked role for deletion, you can
-// use the DeletionTaskId parameter in GetServiceLinkedRoleDeletionStatus to check
-// the status of the deletion. If the deletion fails, this operation returns the
-// reason that it failed, if that information is returned by the service.
+// DeleteServiceLinkedRoleto submit a service-linked role for deletion, you can
+// use the DeletionTaskId  parameter in GetServiceLinkedRoleDeletionStatus to
+// check the status of the deletion. If the deletion fails, this operation returns
+// the reason that it failed, if that information is returned by the service.
 func (c *Client) GetServiceLinkedRoleDeletionStatus(ctx context.Context, params *GetServiceLinkedRoleDeletionStatusInput, optFns ...func(*Options)) (*GetServiceLinkedRoleDeletionStatusOutput, error) {
 	if params == nil {
 		params = &GetServiceLinkedRoleDeletionStatusInput{}
@@ -34,7 +34,7 @@ func (c *Client) GetServiceLinkedRoleDeletionStatus(ctx context.Context, params 
 type GetServiceLinkedRoleDeletionStatusInput struct {
 
 	// The deletion task identifier. This identifier is returned by the
-	// DeleteServiceLinkedRole operation in the format task/aws-service-role///.
+	// DeleteServiceLinkedRole operation in the format task/aws-service-role/// .
 	//
 	// This member is required.
 	DeletionTaskId *string

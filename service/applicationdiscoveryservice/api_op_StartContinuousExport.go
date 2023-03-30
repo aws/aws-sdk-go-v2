@@ -34,8 +34,8 @@ type StartContinuousExportInput struct {
 
 type StartContinuousExportOutput struct {
 
-	// The type of data collector used to gather this data (currently only offered for
-	// AGENT).
+	// The type of data collector used to gather this data (currently only offered
+	// for AGENT).
 	DataSource types.DataSource
 
 	// The unique ID assigned to this export.
@@ -45,8 +45,7 @@ type StartContinuousExportOutput struct {
 	S3Bucket *string
 
 	// A dictionary which describes how the data is stored.
-	// - databaseName - the name
-	// of the Glue database used to store the schema.
+	//     - databaseName - the name of the Glue database used to store the schema.
 	SchemaStorageConfig map[string]string
 
 	// The timestamp representing when the continuous export was started.

@@ -16,8 +16,7 @@ import (
 // CloudSearch will still automatically scale your domain based on the volume of
 // data and traffic, but not below the desired instance type and replication count.
 // If the Multi-AZ option is enabled, these values control the resources used per
-// Availability Zone. For more information, see Configuring Scaling Options
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html)
+// Availability Zone. For more information, see Configuring Scaling Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) UpdateScalingParameters(ctx context.Context, params *UpdateScalingParametersInput, optFns ...func(*Options)) (*UpdateScalingParametersOutput, error) {
 	if params == nil {
@@ -34,9 +33,9 @@ func (c *Client) UpdateScalingParameters(ctx context.Context, params *UpdateScal
 	return out, nil
 }
 
-// Container for the parameters to the UpdateScalingParameters operation. Specifies
-// the name of the domain you want to update and the scaling parameters you want to
-// configure.
+// Container for the parameters to the UpdateScalingParameters operation.
+// Specifies the name of the domain you want to update and the scaling parameters
+// you want to configure.
 type UpdateScalingParametersInput struct {
 
 	// A string that represents the name of a domain. Domain names are unique across

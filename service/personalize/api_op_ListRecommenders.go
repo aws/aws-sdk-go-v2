@@ -16,8 +16,8 @@ import (
 // dataset group is not specified, all the recommenders associated with the account
 // are listed. The response provides the properties for each recommender, including
 // the Amazon Resource Name (ARN). For more information on recommenders, see
-// CreateRecommender
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateRecommender.html).
+// CreateRecommender (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateRecommender.html)
+// .
 func (c *Client) ListRecommenders(ctx context.Context, params *ListRecommendersInput, optFns ...func(*Options)) (*ListRecommendersOutput, error) {
 	if params == nil {
 		params = &ListRecommendersInput{}
@@ -43,8 +43,8 @@ type ListRecommendersInput struct {
 	// The maximum number of recommenders to return.
 	MaxResults *int32
 
-	// A token returned from the previous call to ListRecommenders for getting the next
-	// set of recommenders (if they exist).
+	// A token returned from the previous call to ListRecommenders for getting the
+	// next set of recommenders (if they exist).
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -137,8 +137,8 @@ type ListRecommendersPaginatorOptions struct {
 	// The maximum number of recommenders to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

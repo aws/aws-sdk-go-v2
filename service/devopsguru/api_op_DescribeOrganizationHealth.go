@@ -40,8 +40,8 @@ type DescribeOrganizationHealthInput struct {
 
 type DescribeOrganizationHealthOutput struct {
 
-	// An integer that specifies the number of metrics that have been analyzed in your
-	// organization.
+	// An integer that specifies the number of metrics that have been analyzed in
+	// your organization.
 	//
 	// This member is required.
 	MetricsAnalyzed int32

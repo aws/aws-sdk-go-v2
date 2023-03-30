@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified version from the specified application. You cannot delete
-// an application version that is associated with a running environment.
+// Deletes the specified version from the specified application. You cannot
+// delete an application version that is associated with a running environment.
 func (c *Client) DeleteApplicationVersion(ctx context.Context, params *DeleteApplicationVersionInput, optFns ...func(*Options)) (*DeleteApplicationVersionOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationVersionInput{}
@@ -40,9 +40,9 @@ type DeleteApplicationVersionInput struct {
 	// This member is required.
 	VersionLabel *string
 
-	// Set to true to delete the source bundle from your storage bucket. Otherwise, the
-	// application version is deleted only from Elastic Beanstalk and the source bundle
-	// remains in Amazon S3.
+	// Set to true to delete the source bundle from your storage bucket. Otherwise,
+	// the application version is deleted only from Elastic Beanstalk and the source
+	// bundle remains in Amazon S3.
 	DeleteSourceBundle *bool
 
 	noSmithyDocumentSerde

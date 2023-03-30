@@ -11,11 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a thing group. This is a control plane operation. See Authorization
-// (https://docs.aws.amazon.com/iot/latest/developerguide/iot-authorization.html)
+// Create a thing group. This is a control plane operation. See Authorization (https://docs.aws.amazon.com/iot/latest/developerguide/iot-authorization.html)
 // for information about authorizing control plane actions. Requires permission to
-// access the CreateThingGroup
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// access the CreateThingGroup (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateThingGroup(ctx context.Context, params *CreateThingGroupInput, optFns ...func(*Options)) (*CreateThingGroupOutput, error) {
 	if params == nil {

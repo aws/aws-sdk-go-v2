@@ -14,8 +14,8 @@ import (
 
 // Returns the OpenSearch Serverless-managed interface VPC endpoints associated
 // with the current account. For more information, see Access Amazon OpenSearch
-// Serverless using an interface endpoint
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html).
+// Serverless using an interface endpoint (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html)
+// .
 func (c *Client) ListVpcEndpoints(ctx context.Context, params *ListVpcEndpointsInput, optFns ...func(*Options)) (*ListVpcEndpointsOutput, error) {
 	if params == nil {
 		params = &ListVpcEndpointsInput{}
@@ -34,16 +34,16 @@ func (c *Client) ListVpcEndpoints(ctx context.Context, params *ListVpcEndpointsI
 type ListVpcEndpointsInput struct {
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results. The default is 20.
+	// You can use nextToken  to get the next page of results. The default is 20.
 	MaxResults *int32
 
-	// If your initial ListVpcEndpoints operation returns a nextToken, you can include
-	// the returned nextToken in subsequent ListVpcEndpoints operations, which returns
-	// results in the next page.
+	// If your initial ListVpcEndpoints  operation returns a nextToken, you can
+	// include the returned nextToken  in subsequent ListVpcEndpoints operations,
+	// which returns results in the next page.
 	NextToken *string
 
-	// Filter the results according to the current status of the VPC endpoint. Possible
-	// statuses are CREATING, DELETING, UPDATING, ACTIVE, and FAILED.
+	// Filter the results according to the current status of the VPC endpoint.
+	// Possible statuses are CREATING , DELETING , UPDATING , ACTIVE , and FAILED .
 	VpcEndpointFilters *types.VpcEndpointFilters
 
 	noSmithyDocumentSerde
@@ -51,8 +51,8 @@ type ListVpcEndpointsInput struct {
 
 type ListVpcEndpointsOutput struct {
 
-	// When nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// When nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page.
 	NextToken *string
 
@@ -135,8 +135,8 @@ var _ ListVpcEndpointsAPIClient = (*Client)(nil)
 
 // ListVpcEndpointsPaginatorOptions is the paginator options for ListVpcEndpoints
 type ListVpcEndpointsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

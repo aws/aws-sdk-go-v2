@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the contents of a network package. A network package is a .zip file in CSAR
-// (Cloud Service Archive) format defines the function packages you want to deploy
-// and the Amazon Web Services infrastructure you want to deploy them on.
+// Gets the contents of a network package. A network package is a .zip file in
+// CSAR (Cloud Service Archive) format defines the function packages you want to
+// deploy and the Amazon Web Services infrastructure you want to deploy them on.
 func (c *Client) GetSolNetworkPackageContent(ctx context.Context, params *GetSolNetworkPackageContentInput, optFns ...func(*Options)) (*GetSolNetworkPackageContentOutput, error) {
 	if params == nil {
 		params = &GetSolNetworkPackageContentInput{}

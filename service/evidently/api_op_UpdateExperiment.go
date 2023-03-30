@@ -12,8 +12,8 @@ import (
 )
 
 // Updates an Evidently experiment. Don't use this operation to update an
-// experiment's tag. Instead, use TagResource
-// (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html).
+// experiment's tag. Instead, use TagResource (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html)
+// .
 func (c *Client) UpdateExperiment(ctx context.Context, params *UpdateExperimentInput, optFns ...func(*Options)) (*UpdateExperimentOutput, error) {
 	if params == nil {
 		params = &UpdateExperimentInput{}
@@ -55,15 +55,15 @@ type UpdateExperimentInput struct {
 	// allocated to each variation.
 	OnlineAbConfig *types.OnlineAbConfig
 
-	// When Evidently assigns a particular user session to an experiment, it must use a
-	// randomization ID to determine which variation the user session is served. This
-	// randomization ID is a combination of the entity ID and randomizationSalt. If you
-	// omit randomizationSalt, Evidently uses the experiment name as the
-	// randomizationSalt.
+	// When Evidently assigns a particular user session to an experiment, it must use
+	// a randomization ID to determine which variation the user session is served. This
+	// randomization ID is a combination of the entity ID and randomizationSalt. If
+	// you omit randomizationSalt , Evidently uses the experiment name as the
+	// randomizationSalt .
 	RandomizationSalt *string
 
-	// Removes a segment from being used in an experiment. You can't use this parameter
-	// if the experiment is currently running.
+	// Removes a segment from being used in an experiment. You can't use this
+	// parameter if the experiment is currently running.
 	RemoveSegment bool
 
 	// The portion of the available audience that you want to allocate to this

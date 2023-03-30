@@ -51,10 +51,9 @@ type GetEventPredictionMetadataInput struct {
 	// This member is required.
 	EventTypeName *string
 
-	// The timestamp that defines when the prediction was generated. The timestamp must
-	// be specified using ISO 8601 standard in UTC. We recommend calling
-	// ListEventPredictions
-	// (https://docs.aws.amazon.com/frauddetector/latest/api/API_ListEventPredictions.html)
+	// The timestamp that defines when the prediction was generated. The timestamp
+	// must be specified using ISO 8601 standard in UTC. We recommend calling
+	// ListEventPredictions (https://docs.aws.amazon.com/frauddetector/latest/api/API_ListEventPredictions.html)
 	// first, and using the predictionTimestamp value in the response to provide an
 	// accurate prediction timestamp value.
 	//
@@ -91,7 +90,8 @@ type GetEventPredictionMetadataOutput struct {
 	// The event ID.
 	EventId *string
 
-	// The timestamp for when the prediction was generated for the associated event ID.
+	// The timestamp for when the prediction was generated for the associated event
+	// ID.
 	EventTimestamp *string
 
 	// The event type associated with the detector specified for this prediction.
@@ -109,8 +109,8 @@ type GetEventPredictionMetadataOutput struct {
 	// The execution mode of the rule used for evaluating variable values.
 	RuleExecutionMode types.RuleExecutionMode
 
-	// List of rules associated with the detector version that were used for evaluating
-	// variable values.
+	// List of rules associated with the detector version that were used for
+	// evaluating variable values.
 	Rules []types.EvaluatedRule
 
 	// Metadata pertaining to the operation's result.

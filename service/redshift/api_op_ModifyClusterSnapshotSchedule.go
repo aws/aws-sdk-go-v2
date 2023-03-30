@@ -33,8 +33,8 @@ type ModifyClusterSnapshotScheduleInput struct {
 	// This member is required.
 	ClusterIdentifier *string
 
-	// A boolean to indicate whether to remove the assoiciation between the cluster and
-	// the schedule.
+	// A boolean to indicate whether to remove the assoiciation between the cluster
+	// and the schedule.
 	DisassociateSchedule *bool
 
 	// A unique alphanumeric identifier for the schedule that you want to associate

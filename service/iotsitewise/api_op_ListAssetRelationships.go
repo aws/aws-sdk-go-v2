@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a paginated list of asset relationships for an asset. You can use this
-// operation to identify an asset's root asset and all associated assets between
-// that asset and its root.
+// Retrieves a paginated list of asset relationships for an asset. You can use
+// this operation to identify an asset's root asset and all associated assets
+// between that asset and its root.
 func (c *Client) ListAssetRelationships(ctx context.Context, params *ListAssetRelationshipsInput, optFns ...func(*Options)) (*ListAssetRelationshipsOutput, error) {
 	if params == nil {
 		params = &ListAssetRelationshipsInput{}
@@ -39,9 +39,7 @@ type ListAssetRelationshipsInput struct {
 
 	// The type of traversal to use to identify asset relationships. Choose the
 	// following option:
-	// - PATH_TO_ROOT – Identify the asset's parent assets up to the
-	// root asset. The asset that you specify in assetId is the first result in the
-	// list of assetRelationshipSummaries, and the root asset is the last result.
+	//     - PATH_TO_ROOT – Identify the asset's parent assets up to the root asset. The asset that you specify in assetId is the first result in the list of assetRelationshipSummaries , and the root asset is the last result.
 	//
 	// This member is required.
 	TraversalType types.TraversalType
@@ -179,8 +177,8 @@ type ListAssetRelationshipsPaginatorOptions struct {
 	// The maximum number of results to return for each paginated request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -193,7 +191,8 @@ type ListAssetRelationshipsPaginator struct {
 	firstPage bool
 }
 
-// NewListAssetRelationshipsPaginator returns a new ListAssetRelationshipsPaginator
+// NewListAssetRelationshipsPaginator returns a new
+// ListAssetRelationshipsPaginator
 func NewListAssetRelationshipsPaginator(client ListAssetRelationshipsAPIClient, params *ListAssetRelationshipsInput, optFns ...func(*ListAssetRelationshipsPaginatorOptions)) *ListAssetRelationshipsPaginator {
 	if params == nil {
 		params = &ListAssetRelationshipsInput{}

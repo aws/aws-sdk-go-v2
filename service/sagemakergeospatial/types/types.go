@@ -260,7 +260,8 @@ type InputConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
-// Structure representing the items in the response for SearchRasterDataCollection.
+// Structure representing the items in the response for
+// SearchRasterDataCollection.
 type ItemSource struct {
 
 	//

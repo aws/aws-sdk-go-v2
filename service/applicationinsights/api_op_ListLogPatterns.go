@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the log patterns in the specific log LogPatternSet.
+// Lists the log patterns in the specific log LogPatternSet .
 func (c *Client) ListLogPatterns(ctx context.Context, params *ListLogPatternsInput, optFns ...func(*Options)) (*ListLogPatternsOutput, error) {
 	if params == nil {
 		params = &ListLogPatternsInput{}
@@ -36,7 +36,7 @@ type ListLogPatternsInput struct {
 	ResourceGroupName *string
 
 	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value.
+	// remaining results, make another call with the returned NextToken  value.
 	MaxResults *int32
 
 	// The token to request the next page of results.
@@ -140,11 +140,11 @@ var _ ListLogPatternsAPIClient = (*Client)(nil)
 // ListLogPatternsPaginatorOptions is the paginator options for ListLogPatterns
 type ListLogPatternsPaginatorOptions struct {
 	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value.
+	// remaining results, make another call with the returned NextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

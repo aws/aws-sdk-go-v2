@@ -15,7 +15,7 @@ import (
 // Deletes streaming session resource. After invoking this operation, use
 // GetStreamingSession to poll the resource until it transitions to a DELETED
 // state. A streaming session will count against your streaming session quota until
-// it is marked DELETED.
+// it is marked DELETED .
 func (c *Client) DeleteStreamingSession(ctx context.Context, params *DeleteStreamingSessionInput, optFns ...func(*Options)) (*DeleteStreamingSessionOutput, error) {
 	if params == nil {
 		params = &DeleteStreamingSessionInput{}
@@ -43,8 +43,8 @@ type DeleteStreamingSessionInput struct {
 	// This member is required.
 	StudioId *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. If you don’t specify a client token, the Amazon Web Services SDK
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
 	ClientToken *string

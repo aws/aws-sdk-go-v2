@@ -34,15 +34,15 @@ type RemoveRoleFromDBClusterInput struct {
 	DBClusterIdentifier *string
 
 	// The Amazon Resource Name (ARN) of the IAM role to disassociate from the DB
-	// cluster, for example arn:aws:iam::123456789012:role/NeptuneAccessRole.
+	// cluster, for example arn:aws:iam::123456789012:role/NeptuneAccessRole .
 	//
 	// This member is required.
 	RoleArn *string
 
 	// The name of the feature for the DB cluster that the IAM role is to be
 	// disassociated from. For the list of supported feature names, see
-	// DescribeDBEngineVersions
-	// (https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions).
+	// DescribeDBEngineVersions (https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions)
+	// .
 	FeatureName *string
 
 	noSmithyDocumentSerde

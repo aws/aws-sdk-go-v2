@@ -39,7 +39,8 @@ type GetProductsInput struct {
 	// all filters are returned.
 	Filters []types.Filter
 
-	// The format version that you want the response to be in. Valid values are: aws_v1
+	// The format version that you want the response to be in. Valid values are:
+	// aws_v1
 	FormatVersion *string
 
 	// The maximum number of results to return in the response.
@@ -60,8 +61,8 @@ type GetProductsOutput struct {
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 
-	// The list of products that match your filters. The list contains both the product
-	// metadata and the price information.
+	// The list of products that match your filters. The list contains both the
+	// product metadata and the price information.
 	PriceList []string
 
 	// Metadata pertaining to the operation's result.
@@ -145,8 +146,8 @@ type GetProductsPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

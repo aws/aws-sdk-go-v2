@@ -28,7 +28,8 @@ func (c *Client) GetSolutionMetrics(ctx context.Context, params *GetSolutionMetr
 
 type GetSolutionMetricsInput struct {
 
-	// The Amazon Resource Name (ARN) of the solution version for which to get metrics.
+	// The Amazon Resource Name (ARN) of the solution version for which to get
+	// metrics.
 	//
 	// This member is required.
 	SolutionVersionArn *string
@@ -39,8 +40,8 @@ type GetSolutionMetricsInput struct {
 type GetSolutionMetricsOutput struct {
 
 	// The metrics for the solution version. For more information, see  Evaluating a
-	// solution version with metrics
-	// (https://docs.aws.amazon.com/personalize/latest/dg/working-with-training-metrics.html).
+	// solution version with metrics  (https://docs.aws.amazon.com/personalize/latest/dg/working-with-training-metrics.html)
+	// .
 	Metrics map[string]float64
 
 	// The same solution version ARN as specified in the request.

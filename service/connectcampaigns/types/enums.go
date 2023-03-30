@@ -59,9 +59,9 @@ const (
 	FailureCodeUnknownError FailureCode = "UnknownError"
 )
 
-// Values returns all known values for FailureCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FailureCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (FailureCode) Values() []FailureCode {
 	return []FailureCode{
 		"InvalidInput",
@@ -80,8 +80,8 @@ const (
 	GetCampaignStateBatchFailureCodeUnknownError GetCampaignStateBatchFailureCode = "UnknownError"
 )
 
-// Values returns all known values for GetCampaignStateBatchFailureCode. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for GetCampaignStateBatchFailureCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (GetCampaignStateBatchFailureCode) Values() []GetCampaignStateBatchFailureCode {
@@ -99,9 +99,9 @@ const (
 	InstanceIdFilterOperatorEq InstanceIdFilterOperator = "Eq"
 )
 
-// Values returns all known values for InstanceIdFilterOperator. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InstanceIdFilterOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceIdFilterOperator) Values() []InstanceIdFilterOperator {
 	return []InstanceIdFilterOperator{
 		"Eq",
@@ -120,8 +120,8 @@ const (
 	InstanceOnboardingJobFailureCodeInternalFailure                     InstanceOnboardingJobFailureCode = "INTERNAL_FAILURE"
 )
 
-// Values returns all known values for InstanceOnboardingJobFailureCode. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for InstanceOnboardingJobFailureCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (InstanceOnboardingJobFailureCode) Values() []InstanceOnboardingJobFailureCode {

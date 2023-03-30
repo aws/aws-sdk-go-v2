@@ -30,8 +30,8 @@ func (c *Client) UpdateApnsChannel(ctx context.Context, params *UpdateApnsChanne
 
 type UpdateApnsChannelInput struct {
 
-	// Specifies the status and settings of the APNs (Apple Push Notification service)
-	// channel for an application.
+	// Specifies the status and settings of the APNs (Apple Push Notification
+	// service) channel for an application.
 	//
 	// This member is required.
 	APNSChannelRequest *types.APNSChannelRequest

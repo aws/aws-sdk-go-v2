@@ -178,9 +178,9 @@ type ContactScheduledWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, ContactScheduledWaiter will use default max delay of 900 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, ContactScheduledWaiter will use default max delay of 900 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -228,10 +228,10 @@ func (w *ContactScheduledWaiter) Wait(ctx context.Context, params *DescribeConta
 	return err
 }
 
-// WaitForOutput calls the waiter function for ContactScheduled waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for ContactScheduled waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
 func (w *ContactScheduledWaiter) WaitForOutput(ctx context.Context, params *DescribeContactInput, maxWaitDur time.Duration, optFns ...func(*ContactScheduledWaiterOptions)) (*DescribeContactOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

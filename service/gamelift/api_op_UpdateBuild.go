@@ -14,10 +14,8 @@ import (
 // Updates metadata in a build resource, including the build name and version. To
 // update the metadata, specify the build ID to update and provide the new values.
 // If successful, a build object containing the updated metadata is returned. Learn
-// more  Upload a Custom Server Build
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)All
-// APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// more Upload a Custom Server Build (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
+// All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateBuild(ctx context.Context, params *UpdateBuildInput, optFns ...func(*Options)) (*UpdateBuildOutput, error) {
 	if params == nil {
 		params = &UpdateBuildInput{}
@@ -35,8 +33,8 @@ func (c *Client) UpdateBuild(ctx context.Context, params *UpdateBuildInput, optF
 
 type UpdateBuildInput struct {
 
-	// A unique identifier for the build to update. You can use either the build ID or
-	// ARN value.
+	// A unique identifier for the build to update. You can use either the build ID
+	// or ARN value.
 	//
 	// This member is required.
 	BuildId *string

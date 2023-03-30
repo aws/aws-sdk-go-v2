@@ -11,13 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a resource data sync. After you create a resource data sync for a Region,
-// you can't change the account options for that sync. For example, if you create a
-// sync in the us-east-2 (Ohio) Region and you choose the Include only the current
-// account option, you can't edit that sync later and choose the Include all
-// accounts from my Organizations configuration option. Instead, you must delete
-// the first resource data sync, and create a new one. This API operation only
-// supports a resource data sync that was created with a SyncFromSource SyncType.
+// Update a resource data sync. After you create a resource data sync for a
+// Region, you can't change the account options for that sync. For example, if you
+// create a sync in the us-east-2 (Ohio) Region and you choose the Include only
+// the current account option, you can't edit that sync later and choose the
+// Include all accounts from my Organizations configurationoption. Instead, you
+// must delete the first resource data sync, and create a new one. This API
+// operation only supports a resource data sync that was created with a
+// SyncFromSource SyncType .
 func (c *Client) UpdateResourceDataSync(ctx context.Context, params *UpdateResourceDataSyncInput, optFns ...func(*Options)) (*UpdateResourceDataSyncOutput, error) {
 	if params == nil {
 		params = &UpdateResourceDataSyncInput{}
@@ -45,7 +46,7 @@ type UpdateResourceDataSyncInput struct {
 	// This member is required.
 	SyncSource *types.ResourceDataSyncSource
 
-	// The type of resource data sync. The supported SyncType is SyncFromSource.
+	// The type of resource data sync. The supported SyncType  is SyncFromSource.
 	//
 	// This member is required.
 	SyncType *string

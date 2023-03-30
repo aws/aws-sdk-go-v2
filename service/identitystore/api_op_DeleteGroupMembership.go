@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a membership within a group given MembershipId.
+// Delete a membership within a group given MembershipId .
 func (c *Client) DeleteGroupMembership(ctx context.Context, params *DeleteGroupMembershipInput, optFns ...func(*Options)) (*DeleteGroupMembershipOutput, error) {
 	if params == nil {
 		params = &DeleteGroupMembershipInput{}
@@ -33,7 +33,7 @@ type DeleteGroupMembershipInput struct {
 	// This member is required.
 	IdentityStoreId *string
 
-	// The identifier for a GroupMembership in an identity store.
+	// The identifier for a GroupMembership  in an identity store.
 	//
 	// This member is required.
 	MembershipId *string

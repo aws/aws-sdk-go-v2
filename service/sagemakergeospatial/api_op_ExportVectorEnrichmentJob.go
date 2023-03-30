@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Use this operation to copy results of a Vector Enrichment job to an S3 location.
+// Use this operation to copy results of a Vector Enrichment job to an S3
+// location.
 func (c *Client) ExportVectorEnrichmentJob(ctx context.Context, params *ExportVectorEnrichmentJobInput, optFns ...func(*Options)) (*ExportVectorEnrichmentJobOutput, error) {
 	if params == nil {
 		params = &ExportVectorEnrichmentJobInput{}
@@ -61,8 +62,8 @@ type ExportVectorEnrichmentJobOutput struct {
 	// This member is required.
 	CreationTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the IAM role with permission to upload to the
-	// location in OutputConfig.
+	// The Amazon Resource Name (ARN) of the IAM role with permission to upload to
+	// the location in OutputConfig.
 	//
 	// This member is required.
 	ExecutionRoleArn *string

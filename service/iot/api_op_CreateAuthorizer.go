@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an authorizer. Requires permission to access the CreateAuthorizer
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// Creates an authorizer. Requires permission to access the CreateAuthorizer (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateAuthorizer(ctx context.Context, params *CreateAuthorizerInput, optFns ...func(*Options)) (*CreateAuthorizerOutput, error) {
 	if params == nil {
@@ -43,12 +42,13 @@ type CreateAuthorizerInput struct {
 
 	// When true, the result from the authorizer’s Lambda function is cached for
 	// clients that use persistent HTTP connections. The results are cached for the
-	// time specified by the Lambda function in refreshAfterInSeconds. This value does
-	// not affect authorization of clients that use MQTT connections. The default value
-	// is false.
+	// time specified by the Lambda function in refreshAfterInSeconds. This value
+	// does not affect authorization of clients that use MQTT connections. The default
+	// value is false .
 	EnableCachingForHttp *bool
 
-	// Specifies whether IoT validates the token signature in an authorization request.
+	// Specifies whether IoT validates the token signature in an authorization
+	// request.
 	SigningDisabled *bool
 
 	// The status of the create authorizer request.

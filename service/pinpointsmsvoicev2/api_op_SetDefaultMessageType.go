@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the default message type on a configuration set. Choose the category of SMS
-// messages that you plan to send from this account. If you send account-related
-// messages or time-sensitive messages such as one-time passcodes, choose
-// Transactional. If you plan to send messages that contain marketing material or
-// other promotional content, choose Promotional. This setting applies to your
-// entire Amazon Web Services account.
+// Sets the default message type on a configuration set. Choose the category of
+// SMS messages that you plan to send from this account. If you send
+// account-related messages or time-sensitive messages such as one-time passcodes,
+// choose Transactional. If you plan to send messages that contain marketing
+// material or other promotional content, choose Promotional. This setting applies
+// to your entire Amazon Web Services account.
 func (c *Client) SetDefaultMessageType(ctx context.Context, params *SetDefaultMessageTypeInput, optFns ...func(*Options)) (*SetDefaultMessageTypeOutput, error) {
 	if params == nil {
 		params = &SetDefaultMessageTypeInput{}
@@ -34,8 +34,8 @@ func (c *Client) SetDefaultMessageType(ctx context.Context, params *SetDefaultMe
 
 type SetDefaultMessageTypeInput struct {
 
-	// The configuration set to update with a new default message type. This field can
-	// be the ConsigurationSetName or ConfigurationSetArn.
+	// The configuration set to update with a new default message type. This field
+	// can be the ConsigurationSetName or ConfigurationSetArn.
 	//
 	// This member is required.
 	ConfigurationSetName *string

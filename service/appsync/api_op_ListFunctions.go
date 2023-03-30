@@ -37,8 +37,8 @@ type ListFunctionsInput struct {
 	// The maximum number of results that you want the request to return.
 	MaxResults int32
 
-	// An identifier that was returned from the previous call to this operation, which
-	// you can use to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation,
+	// which you can use to return the next set of items in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,11 +46,11 @@ type ListFunctionsInput struct {
 
 type ListFunctionsOutput struct {
 
-	// A list of Function objects.
+	// A list of Function  objects.
 	Functions []types.FunctionConfiguration
 
-	// An identifier that was returned from the previous call to this operation, which
-	// you can use to return the next set of items in the list.
+	// An identifier that was returned from the previous call to this operation,
+	// which you can use to return the next set of items in the list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

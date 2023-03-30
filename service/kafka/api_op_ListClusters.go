@@ -30,16 +30,16 @@ func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, op
 
 type ListClustersInput struct {
 
-	// Specify a prefix of the name of the clusters that you want to list. The service
-	// lists all the clusters whose names start with this prefix.
+	// Specify a prefix of the name of the clusters that you want to list. The
+	// service lists all the clusters whose names start with this prefix.
 	ClusterNameFilter *string
 
 	// The maximum number of results to return in the response. If there are more
 	// results, the response includes a NextToken parameter.
 	MaxResults int32
 
-	// The paginated results marker. When the result of the operation is truncated, the
-	// call returns NextToken in the response. To get the next batch, provide this
+	// The paginated results marker. When the result of the operation is truncated,
+	// the call returns NextToken in the response. To get the next batch, provide this
 	// token in your next request.
 	NextToken *string
 
@@ -135,8 +135,8 @@ type ListClustersPaginatorOptions struct {
 	// results, the response includes a NextToken parameter.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

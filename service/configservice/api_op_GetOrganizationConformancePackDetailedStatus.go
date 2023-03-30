@@ -31,13 +31,13 @@ func (c *Client) GetOrganizationConformancePackDetailedStatus(ctx context.Contex
 
 type GetOrganizationConformancePackDetailedStatusInput struct {
 
-	// The name of organization conformance pack for which you want status details for
-	// member accounts.
+	// The name of organization conformance pack for which you want status details
+	// for member accounts.
 	//
 	// This member is required.
 	OrganizationConformancePackName *string
 
-	// An OrganizationResourceDetailedStatusFilters object.
+	// An OrganizationResourceDetailedStatusFilters  object.
 	Filters *types.OrganizationResourceDetailedStatusFilters
 
 	// The maximum number of OrganizationConformancePackDetailedStatuses returned on
@@ -58,7 +58,7 @@ type GetOrganizationConformancePackDetailedStatusOutput struct {
 	// page of results in a paginated response.
 	NextToken *string
 
-	// A list of OrganizationConformancePackDetailedStatus objects.
+	// A list of OrganizationConformancePackDetailedStatus  objects.
 	OrganizationConformancePackDetailedStatuses []types.OrganizationConformancePackDetailedStatus
 
 	// Metadata pertaining to the operation's result.
@@ -146,8 +146,8 @@ type GetOrganizationConformancePackDetailedStatusPaginatorOptions struct {
 	// is 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

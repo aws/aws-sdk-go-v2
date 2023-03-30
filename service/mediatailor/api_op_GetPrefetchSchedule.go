@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a prefetch schedule for a playback configuration. A prefetch schedule
-// allows you to tell MediaTailor to fetch and prepare certain ads before an ad
-// break happens. For more information about ad prefetching, see Using ad
-// prefetching
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/prefetching-ads.html) in the
-// MediaTailor User Guide.
+// Retrieves a prefetch schedule for a playback configuration. A prefetch
+// schedule allows you to tell MediaTailor to fetch and prepare certain ads before
+// an ad break happens. For more information about ad prefetching, see Using ad
+// prefetching (https://docs.aws.amazon.com/mediatailor/latest/ug/prefetching-ads.html)
+// in the MediaTailor User Guide.
 func (c *Client) GetPrefetchSchedule(ctx context.Context, params *GetPrefetchScheduleInput, optFns ...func(*Options)) (*GetPrefetchScheduleOutput, error) {
 	if params == nil {
 		params = &GetPrefetchScheduleInput{}
@@ -41,8 +40,8 @@ type GetPrefetchScheduleInput struct {
 	Name *string
 
 	// Returns information about the prefetch schedule for a specific playback
-	// configuration. If you call GetPrefetchSchedule on an expired prefetch schedule,
-	// MediaTailor returns an HTTP 404 status code.
+	// configuration. If you call GetPrefetchSchedule on an expired prefetch
+	// schedule, MediaTailor returns an HTTP 404 status code.
 	//
 	// This member is required.
 	PlaybackConfigurationName *string
@@ -55,10 +54,10 @@ type GetPrefetchScheduleOutput struct {
 	// The Amazon Resource Name (ARN) of the prefetch schedule.
 	Arn *string
 
-	// Consumption settings determine how, and when, MediaTailor places the prefetched
-	// ads into ad breaks. Ad consumption occurs within a span of time that you define,
-	// called a consumption window. You can designate which ad breaks that MediaTailor
-	// fills with prefetch ads by setting avail matching criteria.
+	// Consumption settings determine how, and when, MediaTailor places the
+	// prefetched ads into ad breaks. Ad consumption occurs within a span of time that
+	// you define, called a consumption window. You can designate which ad breaks that
+	// MediaTailor fills with prefetch ads by setting avail matching criteria.
 	Consumption *types.PrefetchConsumption
 
 	// The name of the prefetch schedule. The name must be unique among all prefetch

@@ -38,9 +38,9 @@ type ListCompatibleImagesInput struct {
 	// Snowball Edge device can store 10 AMIs.
 	MaxResults *int32
 
-	// HTTP requests are stateless. To identify what object comes "next" in the list of
-	// compatible images, you can specify a value for NextToken as the starting point
-	// for your list of returned images.
+	// HTTP requests are stateless. To identify what object comes "next" in the list
+	// of compatible images, you can specify a value for NextToken as the starting
+	// point for your list of returned images.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -137,8 +137,8 @@ type ListCompatibleImagesPaginatorOptions struct {
 	// Snowball Edge device can store 10 AMIs.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

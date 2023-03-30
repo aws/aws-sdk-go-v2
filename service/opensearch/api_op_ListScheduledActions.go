@@ -12,11 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of configuration changes that are scheduled for a domain. These
-// changes can be service software updates
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html)
-// or blue/green Auto-Tune enhancements
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types).
+// Retrieves a list of configuration changes that are scheduled for a domain.
+// These changes can be service software updates (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html)
+// or blue/green Auto-Tune enhancements (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types)
+// .
 func (c *Client) ListScheduledActions(ctx context.Context, params *ListScheduledActionsInput, optFns ...func(*Options)) (*ListScheduledActionsOutput, error) {
 	if params == nil {
 		params = &ListScheduledActionsInput{}
@@ -40,11 +39,11 @@ type ListScheduledActionsInput struct {
 	DomainName *string
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken  to get the next page of results.
 	MaxResults int32
 
-	// If your initial ListScheduledActions operation returns a nextToken, you can
-	// include the returned nextToken in subsequent ListScheduledActions operations,
+	// If your initial ListScheduledActions  operation returns a nextToken, you can
+	// include the returned nextToken  in subsequent ListScheduledActions operations,
 	// which returns results in the next page.
 	NextToken *string
 
@@ -53,8 +52,8 @@ type ListScheduledActionsInput struct {
 
 type ListScheduledActionsOutput struct {
 
-	// When nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// When nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page.
 	NextToken *string
 
@@ -142,11 +141,11 @@ var _ ListScheduledActionsAPIClient = (*Client)(nil)
 // ListScheduledActions
 type ListScheduledActionsPaginatorOptions struct {
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken  to get the next page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

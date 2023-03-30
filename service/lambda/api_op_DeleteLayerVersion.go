@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a version of an Lambda layer
-// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
-// Deleted versions can no longer be viewed or added to functions. To avoid
+// Deletes a version of an Lambda layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
+// . Deleted versions can no longer be viewed or added to functions. To avoid
 // breaking functions, a copy of the version remains in Lambda until no functions
 // refer to it.
 func (c *Client) DeleteLayerVersion(ctx context.Context, params *DeleteLayerVersionInput, optFns ...func(*Options)) (*DeleteLayerVersionOutput, error) {

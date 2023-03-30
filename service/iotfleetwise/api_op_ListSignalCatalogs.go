@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the created signal catalogs in an Amazon Web Services account. You can
-// use to list information about each signal (node) specified in a signal catalog.
-// This API operation uses pagination. Specify the nextToken parameter in the
-// request to return more results.
+// Lists all the created signal catalogs in an Amazon Web Services account. You
+// can use to list information about each signal (node) specified in a signal
+// catalog. This API operation uses pagination. Specify the nextToken parameter
+// in the request to return more results.
 func (c *Client) ListSignalCatalogs(ctx context.Context, params *ListSignalCatalogsInput, optFns ...func(*Options)) (*ListSignalCatalogsOutput, error) {
 	if params == nil {
 		params = &ListSignalCatalogsInput{}
@@ -135,8 +135,8 @@ type ListSignalCatalogsPaginatorOptions struct {
 	// The maximum number of items to return, between 1 and 100, inclusive.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -11,14 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts the running of the version of a model. Starting a model takes a while to
-// complete. To check the current state of the model, use DescribeProjectVersions.
-// Once the model is running, you can detect custom labels in new images by calling
-// DetectCustomLabels. You are charged for the amount of time that the model is
-// running. To stop a running model, call StopProjectVersion. For more information,
-// see Running a trained Amazon Rekognition Custom Labels model in the Amazon
-// Rekognition Custom Labels Guide. This operation requires permissions to perform
-// the rekognition:StartProjectVersion action.
+// Starts the running of the version of a model. Starting a model takes a while
+// to complete. To check the current state of the model, use
+// DescribeProjectVersions. Once the model is running, you can detect custom
+// labels in new images by calling DetectCustomLabels. You are charged for the
+// amount of time that the model is running. To stop a running model, call
+// StopProjectVersion. For more information, see Running a trained Amazon
+// Rekognition Custom Labels model in the Amazon Rekognition Custom Labels Guide.
+// This operation requires permissions to perform the
+// rekognition:StartProjectVersion action.
 func (c *Client) StartProjectVersion(ctx context.Context, params *StartProjectVersionInput, optFns ...func(*Options)) (*StartProjectVersionOutput, error) {
 	if params == nil {
 		params = &StartProjectVersionInput{}
@@ -36,12 +37,12 @@ func (c *Client) StartProjectVersion(ctx context.Context, params *StartProjectVe
 
 type StartProjectVersionInput struct {
 
-	// The minimum number of inference units to use. A single inference unit represents
-	// 1 hour of processing. For information about the number of transactions per
-	// second (TPS) that an inference unit can support, see Running a trained Amazon
-	// Rekognition Custom Labels model in the Amazon Rekognition Custom Labels Guide.
-	// Use a higher number to increase the TPS throughput of your model. You are
-	// charged for the number of inference units that you use.
+	// The minimum number of inference units to use. A single inference unit
+	// represents 1 hour of processing. For information about the number of
+	// transactions per second (TPS) that an inference unit can support, see Running a
+	// trained Amazon Rekognition Custom Labels model in the Amazon Rekognition Custom
+	// Labels Guide. Use a higher number to increase the TPS throughput of your model.
+	// You are charged for the number of inference units that you use.
 	//
 	// This member is required.
 	MinInferenceUnits *int32
@@ -51,9 +52,9 @@ type StartProjectVersionInput struct {
 	// This member is required.
 	ProjectVersionArn *string
 
-	// The maximum number of inference units to use for auto-scaling the model. If you
-	// don't specify a value, Amazon Rekognition Custom Labels doesn't auto-scale the
-	// model.
+	// The maximum number of inference units to use for auto-scaling the model. If
+	// you don't specify a value, Amazon Rekognition Custom Labels doesn't auto-scale
+	// the model.
 	MaxInferenceUnits *int32
 
 	noSmithyDocumentSerde

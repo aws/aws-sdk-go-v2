@@ -10,8 +10,8 @@ import (
 	"time"
 )
 
-// The example tests how requests serialize different timestamp formats in the URI
-// path.
+// The example tests how requests serialize different timestamp formats in the
+// URI path.
 func (c *Client) HttpRequestWithLabelsAndTimestampFormat(ctx context.Context, params *HttpRequestWithLabelsAndTimestampFormatInput, optFns ...func(*Options)) (*HttpRequestWithLabelsAndTimestampFormatOutput, error) {
 	if params == nil {
 		params = &HttpRequestWithLabelsAndTimestampFormatInput{}

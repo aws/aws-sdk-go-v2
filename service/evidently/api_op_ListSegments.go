@@ -31,12 +31,12 @@ func (c *Client) ListSegments(ctx context.Context, params *ListSegmentsInput, op
 
 type ListSegmentsInput struct {
 
-	// The maximum number of results to include in the response. If you omit this, the
-	// default of 50 is used.
+	// The maximum number of results to include in the response. If you omit this,
+	// the default of 50 is used.
 	MaxResults *int32
 
 	// The token to use when requesting the next set of results. You received this
-	// token from a previous ListSegments operation.
+	// token from a previous ListSegments  operation.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -127,12 +127,12 @@ var _ ListSegmentsAPIClient = (*Client)(nil)
 
 // ListSegmentsPaginatorOptions is the paginator options for ListSegments
 type ListSegmentsPaginatorOptions struct {
-	// The maximum number of results to include in the response. If you omit this, the
-	// default of 50 is used.
+	// The maximum number of results to include in the response. If you omit this,
+	// the default of 50 is used.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

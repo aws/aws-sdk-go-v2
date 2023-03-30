@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Retrieves (queries) pre-aggregated data for a standard metric that applies to a
-// campaign.
+// Retrieves (queries) pre-aggregated data for a standard metric that applies to
+// a campaign.
 func (c *Client) GetCampaignDateRangeKpi(ctx context.Context, params *GetCampaignDateRangeKpiInput, optFns ...func(*Options)) (*GetCampaignDateRangeKpiOutput, error) {
 	if params == nil {
 		params = &GetCampaignDateRangeKpiInput{}
@@ -47,16 +47,16 @@ type GetCampaignDateRangeKpiInput struct {
 	// two or more terms, which are comprised of lowercase alphanumeric characters,
 	// separated by a hyphen. Examples are email-open-rate and
 	// successful-delivery-rate. For a list of valid values, see the Amazon Pinpoint
-	// Developer Guide
-	// (https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html).
+	// Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html)
+	// .
 	//
 	// This member is required.
 	KpiName *string
 
-	// The last date and time to retrieve data for, as part of an inclusive date range
-	// that filters the query results. This value should be in extended ISO 8601 format
-	// and use Coordinated Universal Time (UTC), for example: 2019-07-26T20:00:00Z for
-	// 8:00 PM UTC July 26, 2019.
+	// The last date and time to retrieve data for, as part of an inclusive date
+	// range that filters the query results. This value should be in extended ISO 8601
+	// format and use Coordinated Universal Time (UTC), for example:
+	// 2019-07-26T20:00:00Z for 8:00 PM UTC July 26, 2019.
 	EndTime *time.Time
 
 	// The string that specifies which page of results to return in a paginated
@@ -68,11 +68,11 @@ type GetCampaignDateRangeKpiInput struct {
 	// This parameter is not supported for application, campaign, and journey metrics.
 	PageSize *string
 
-	// The first date and time to retrieve data for, as part of an inclusive date range
-	// that filters the query results. This value should be in extended ISO 8601 format
-	// and use Coordinated Universal Time (UTC), for example: 2019-07-19T20:00:00Z for
-	// 8:00 PM UTC July 19, 2019. This value should also be fewer than 90 days from the
-	// current day.
+	// The first date and time to retrieve data for, as part of an inclusive date
+	// range that filters the query results. This value should be in extended ISO 8601
+	// format and use Coordinated Universal Time (UTC), for example:
+	// 2019-07-19T20:00:00Z for 8:00 PM UTC July 19, 2019. This value should also be
+	// fewer than 90 days from the current day.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde

@@ -35,8 +35,8 @@ func (e *APICallRateForCustomerExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The specified Amazon EC2 security group is already authorized for the specified
-// cache security group.
+// The specified Amazon EC2 security group is already authorized for the
+// specified cache security group.
 type AuthorizationAlreadyExistsFault struct {
 	Message *string
 
@@ -364,8 +364,8 @@ func (e *CacheSubnetGroupInUse) ErrorCode() string {
 }
 func (e *CacheSubnetGroupInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested cache subnet group name does not refer to an existing cache subnet
-// group.
+// The requested cache subnet group name does not refer to an existing cache
+// subnet group.
 type CacheSubnetGroupNotFoundFault struct {
 	Message *string
 
@@ -613,8 +613,7 @@ func (e *GlobalReplicationGroupNotFoundFault) ErrorFault() smithy.ErrorFault {
 }
 
 // The requested cache node type is not available in the specified Availability
-// Zone. For more information, see InsufficientCacheClusterCapacity
-// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ErrorMessages.html#ErrorMessages.INSUFFICIENT_CACHE_CLUSTER_CAPACITY)
+// Zone. For more information, see InsufficientCacheClusterCapacity (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ErrorMessages.html#ErrorMessages.INSUFFICIENT_CACHE_CLUSTER_CAPACITY)
 // in the ElastiCache User Guide.
 type InsufficientCacheClusterCapacityFault struct {
 	Message *string
@@ -643,7 +642,8 @@ func (e *InsufficientCacheClusterCapacityFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The requested Amazon Resource Name (ARN) does not refer to an existing resource.
+// The requested Amazon Resource Name (ARN) does not refer to an existing
+// resource.
 type InvalidARNFault struct {
 	Message *string
 
@@ -669,7 +669,7 @@ func (e *InvalidARNFault) ErrorCode() string {
 }
 func (e *InvalidARNFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested cluster is not in the available state.
+// The requested cluster is not in the available  state.
 type InvalidCacheClusterStateFault struct {
 	Message *string
 
@@ -860,7 +860,7 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested replication group is not in the available state.
+// The requested replication group is not in the available  state.
 type InvalidReplicationGroupStateFault struct {
 	Message *string
 
@@ -1017,9 +1017,9 @@ func (e *InvalidVPCNetworkStateFault) ErrorCode() string {
 }
 func (e *InvalidVPCNetworkStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The node group specified by the NodeGroupId parameter could not be found. Please
-// verify that the node group exists and that you spelled the NodeGroupId value
-// correctly.
+// The node group specified by the NodeGroupId parameter could not be found.
+// Please verify that the node group exists and that you spelled the NodeGroupId
+// value correctly.
 type NodeGroupNotFoundFault struct {
 	Message *string
 
@@ -1455,13 +1455,10 @@ func (e *SnapshotAlreadyExistsFault) ErrorCode() string {
 func (e *SnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You attempted one of the following operations:
-// - Creating a snapshot of a Redis
-// cluster running on a cache.t1.micro cache node.
-// - Creating a snapshot of a
-// cluster that is running Memcached rather than Redis.
+//   - Creating a snapshot of a Redis cluster running on a cache.t1.micro cache node.
+//   - Creating a snapshot of a cluster that is running Memcached rather than Redis.
 //
-// Neither of these are
-// supported by ElastiCache.
+// Neither of these are supported by ElastiCache.
 type SnapshotFeatureNotSupportedFault struct {
 	Message *string
 
@@ -1621,8 +1618,8 @@ func (e *TagNotFoundFault) ErrorCode() string {
 }
 func (e *TagNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request cannot be processed because it would cause the resource to have more
-// than the allowed number of tags. The maximum number of tags permitted on a
+// The request cannot be processed because it would cause the resource to have
+// more than the allowed number of tags. The maximum number of tags permitted on a
 // resource is 50.
 type TagQuotaPerResourceExceeded struct {
 	Message *string
@@ -1649,7 +1646,7 @@ func (e *TagQuotaPerResourceExceeded) ErrorCode() string {
 }
 func (e *TagQuotaPerResourceExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The TestFailover action is not available.
+// The TestFailover  action is not available.
 type TestFailoverNotAvailableFault struct {
 	Message *string
 

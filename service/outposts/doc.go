@@ -3,8 +3,8 @@
 // Package outposts provides the API client, operations, and parameter types for
 // AWS Outposts.
 //
-// Amazon Web Services Outposts is a fully managed service that extends Amazon Web
-// Services infrastructure, APIs, and tools to customer premises. By providing
+// Amazon Web Services Outposts is a fully managed service that extends Amazon
+// Web Services infrastructure, APIs, and tools to customer premises. By providing
 // local access to Amazon Web Services managed infrastructure, Amazon Web Services
 // Outposts enables customers to build and run applications on premises using the
 // same programming interfaces as in Amazon Web Services Regions, while using local

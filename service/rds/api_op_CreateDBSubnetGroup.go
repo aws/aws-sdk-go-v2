@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new DB subnet group. DB subnet groups must contain at least one subnet
-// in at least two AZs in the Amazon Web Services Region.
+// Creates a new DB subnet group. DB subnet groups must contain at least one
+// subnet in at least two AZs in the Amazon Web Services Region.
 func (c *Client) CreateDBSubnetGroup(ctx context.Context, params *CreateDBSubnetGroupInput, optFns ...func(*Options)) (*CreateDBSubnetGroupOutput, error) {
 	if params == nil {
 		params = &CreateDBSubnetGroupInput{}
@@ -37,12 +37,9 @@ type CreateDBSubnetGroupInput struct {
 
 	// The name for the DB subnet group. This value is stored as a lowercase string.
 	// Constraints:
-	// - Must contain no more than 255 letters, numbers, periods,
-	// underscores, spaces, or hyphens.
-	// - Must not be default.
-	// - First character must
-	// be a letter.
-	//
+	//     - Must contain no more than 255 letters, numbers, periods, underscores, spaces, or hyphens.
+	//     - Must not be default.
+	//     - First character must be a letter.
 	// Example: mydbsubnetgroup
 	//
 	// This member is required.
@@ -61,8 +58,8 @@ type CreateDBSubnetGroupInput struct {
 
 type CreateDBSubnetGroupOutput struct {
 
-	// Contains the details of an Amazon RDS DB subnet group. This data type is used as
-	// a response element in the DescribeDBSubnetGroups action.
+	// Contains the details of an Amazon RDS DB subnet group. This data type is used
+	// as a response element in the DescribeDBSubnetGroups  action.
 	DBSubnetGroup *types.DBSubnetGroup
 
 	// Metadata pertaining to the operation's result.

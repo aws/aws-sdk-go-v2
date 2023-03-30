@@ -12,8 +12,8 @@ import (
 )
 
 // Lists all tags associated with a given Amazon Translate resource. For more
-// information, see  Tagging your resources
-// (https://docs.aws.amazon.com/translate/latest/dg/tagging.html).
+// information, see Tagging your resources (https://docs.aws.amazon.com/translate/latest/dg/tagging.html)
+// .
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

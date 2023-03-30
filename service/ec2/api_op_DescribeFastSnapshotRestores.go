@@ -32,29 +32,25 @@ type DescribeFastSnapshotRestoresInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The filters. The possible values are:
-	// - availability-zone: The Availability Zone
-	// of the snapshot.
-	// - owner-id: The ID of the Amazon Web Services account that
-	// enabled fast snapshot restore on the snapshot.
-	// - snapshot-id: The ID of the
-	// snapshot.
-	// - state: The state of fast snapshot restores for the snapshot
-	// (enabling | optimizing | enabled | disabling | disabled).
+	//     - availability-zone : The Availability Zone of the snapshot.
+	//     - owner-id : The ID of the Amazon Web Services account that enabled fast snapshot restore on the snapshot.
+	//     - snapshot-id : The ID of the snapshot.
+	//     - state : The state of fast snapshot restores for the snapshot ( enabling | optimizing | enabled | disabling | disabled ).
 	Filters []types.Filter
 
-	// The maximum number of items to return for this request. To get the next page of
-	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// The maximum number of items to return for this request. To get the next page
+	// of items, make another request with the token returned in the output. For more
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	MaxResults *int32
 
-	// The token returned from a previous paginated request. Pagination continues from
-	// the end of the items returned by the previous request.
+	// The token returned from a previous paginated request. Pagination continues
+	// from the end of the items returned by the previous request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -66,7 +62,7 @@ type DescribeFastSnapshotRestoresOutput struct {
 	FastSnapshotRestores []types.DescribeFastSnapshotRestoreSuccessItem
 
 	// The token to include in another request to get the next page of items. This
-	// value is null when there are no more items to return.
+	// value is null  when there are no more items to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -146,14 +142,14 @@ var _ DescribeFastSnapshotRestoresAPIClient = (*Client)(nil)
 // DescribeFastSnapshotRestoresPaginatorOptions is the paginator options for
 // DescribeFastSnapshotRestores
 type DescribeFastSnapshotRestoresPaginatorOptions struct {
-	// The maximum number of items to return for this request. To get the next page of
-	// items, make another request with the token returned in the output. For more
-	// information, see Pagination
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+	// The maximum number of items to return for this request. To get the next page
+	// of items, make another request with the token returned in the output. For more
+	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
+	// .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

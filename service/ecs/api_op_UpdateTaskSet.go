@@ -12,8 +12,7 @@ import (
 )
 
 // Modifies a task set. This is used when a service uses the EXTERNAL deployment
-// controller type. For more information, see Amazon ECS Deployment Types
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
+// controller type. For more information, see Amazon ECS Deployment Types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) UpdateTaskSet(ctx context.Context, params *UpdateTaskSetInput, optFns ...func(*Options)) (*UpdateTaskSetOutput, error) {
 	if params == nil {
@@ -32,8 +31,8 @@ func (c *Client) UpdateTaskSet(ctx context.Context, params *UpdateTaskSetInput, 
 
 type UpdateTaskSetInput struct {
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
-	// service that the task set is found in.
+	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
+	// the service that the task set is found in.
 	//
 	// This member is required.
 	Cluster *string

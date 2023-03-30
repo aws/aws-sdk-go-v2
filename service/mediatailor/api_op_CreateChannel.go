@@ -12,9 +12,8 @@ import (
 	"time"
 )
 
-// Creates a channel. For information about MediaTailor channels, see Working with
-// channels
-// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
+// Creates a channel. For information about MediaTailor channels, see Working
+// with channels (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
 // in the MediaTailor User Guide.
 func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, optFns ...func(*Options)) (*CreateChannelOutput, error) {
 	if params == nil {
@@ -43,24 +42,25 @@ type CreateChannelInput struct {
 	// This member is required.
 	Outputs []types.RequestOutputItem
 
-	// The type of playback mode to use for this channel. LINEAR - The programs in the
-	// schedule play once back-to-back in the schedule. LOOP - The programs in the
-	// schedule play back-to-back in an endless loop. When the last program in the
+	// The type of playback mode to use for this channel. LINEAR - The programs in
+	// the schedule play once back-to-back in the schedule. LOOP - The programs in
+	// the schedule play back-to-back in an endless loop. When the last program in the
 	// schedule stops playing, playback loops back to the first program in the
 	// schedule.
 	//
 	// This member is required.
 	PlaybackMode types.PlaybackMode
 
-	// The slate used to fill gaps between programs in the schedule. You must configure
-	// filler slate if your channel uses the LINEARPlaybackMode. MediaTailor doesn't
-	// support filler slate for channels using the LOOPPlaybackMode.
+	// The slate used to fill gaps between programs in the schedule. You must
+	// configure filler slate if your channel uses the LINEAR PlaybackMode.
+	// MediaTailor doesn't support filler slate for channels using the LOOP
+	// PlaybackMode .
 	FillerSlate *types.SlateSource
 
 	// The tags to assign to the channel. Tags are key-value pairs that you can
 	// associate with Amazon resources to help with organization, access control, and
 	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
-	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html) .
 	Tags map[string]string
 
 	// The tier of the channel.
@@ -99,7 +99,7 @@ type CreateChannelOutput struct {
 	// The tags to assign to the channel. Tags are key-value pairs that you can
 	// associate with Amazon resources to help with organization, access control, and
 	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
-	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html) .
 	Tags map[string]string
 
 	// The tier of the channel.

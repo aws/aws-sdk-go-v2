@@ -84,9 +84,9 @@ const (
 	ErrorCodeNotAuthorized                     ErrorCode = "NOT_AUTHORIZED"
 )
 
-// Values returns all known values for ErrorCode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"INVALID_RESOURCE_STATE",
@@ -209,9 +209,9 @@ const (
 	ProxyTypeApiGateway ProxyType = "API_GATEWAY"
 )
 
-// Values returns all known values for ProxyType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ProxyType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ProxyType) Values() []ProxyType {
 	return []ProxyType{
 		"API_GATEWAY",
@@ -226,8 +226,8 @@ const (
 	RouteActivationStateInactive RouteActivationState = "INACTIVE"
 )
 
-// Values returns all known values for RouteActivationState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RouteActivationState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RouteActivationState) Values() []RouteActivationState {
 	return []RouteActivationState{
@@ -270,9 +270,9 @@ const (
 	RouteTypeUriPath RouteType = "URI_PATH"
 )
 
-// Values returns all known values for RouteType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for RouteType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (RouteType) Values() []RouteType {
 	return []RouteType{
 		"DEFAULT",
@@ -308,9 +308,9 @@ const (
 	ServiceStateFailed   ServiceState = "FAILED"
 )
 
-// Values returns all known values for ServiceState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ServiceState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceState) Values() []ServiceState {
 	return []ServiceState{
 		"CREATING",

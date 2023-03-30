@@ -45,8 +45,8 @@ type GetObjectAttributesInput struct {
 	// This member is required.
 	ObjectReference *types.ObjectReference
 
-	// Identifier for the facet whose attributes will be retrieved. See SchemaFacet for
-	// details.
+	// Identifier for the facet whose attributes will be retrieved. See SchemaFacet
+	// for details.
 	//
 	// This member is required.
 	SchemaFacet *types.SchemaFacet

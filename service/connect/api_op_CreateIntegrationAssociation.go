@@ -30,16 +30,15 @@ func (c *Client) CreateIntegrationAssociation(ctx context.Context, params *Creat
 
 type CreateIntegrationAssociationInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The Amazon Resource Name (ARN) of the integration. When integrating with Amazon
-	// Pinpoint, the Amazon Connect and Amazon Pinpoint instances must be in the same
-	// account.
+	// The Amazon Resource Name (ARN) of the integration. When integrating with
+	// Amazon Pinpoint, the Amazon Connect and Amazon Pinpoint instances must be in the
+	// same account.
 	//
 	// This member is required.
 	IntegrationArn *string
@@ -49,12 +48,12 @@ type CreateIntegrationAssociationInput struct {
 	// This member is required.
 	IntegrationType types.IntegrationType
 
-	// The name of the external application. This field is only required for the EVENT
-	// integration type.
+	// The name of the external application. This field is only required for the
+	// EVENT integration type.
 	SourceApplicationName *string
 
-	// The URL for the external application. This field is only required for the EVENT
-	// integration type.
+	// The URL for the external application. This field is only required for the
+	// EVENT integration type.
 	SourceApplicationUrl *string
 
 	// The type of the data source. This field is only required for the EVENT

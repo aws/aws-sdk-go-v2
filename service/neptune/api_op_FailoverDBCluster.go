@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Forces a failover for a DB cluster. A failover for a DB cluster promotes one of
-// the Read Replicas (read-only instances) in the DB cluster to be the primary
+// Forces a failover for a DB cluster. A failover for a DB cluster promotes one
+// of the Read Replicas (read-only instances) in the DB cluster to be the primary
 // instance (the cluster writer). Amazon Neptune will automatically fail over to a
 // Read Replica, if one exists, when the primary instance fails. You can force a
 // failover when you want to simulate a failure of a primary instance for testing.
@@ -38,13 +38,12 @@ type FailoverDBClusterInput struct {
 
 	// A DB cluster identifier to force a failover for. This parameter is not
 	// case-sensitive. Constraints:
-	// - Must match the identifier of an existing
-	// DBCluster.
+	//     - Must match the identifier of an existing DBCluster.
 	DBClusterIdentifier *string
 
 	// The name of the instance to promote to the primary instance. You must specify
 	// the instance identifier for an Read Replica in the DB cluster. For example,
-	// mydbcluster-replica1.
+	// mydbcluster-replica1 .
 	TargetDBInstanceIdentifier *string
 
 	noSmithyDocumentSerde
@@ -52,8 +51,8 @@ type FailoverDBClusterInput struct {
 
 type FailoverDBClusterOutput struct {
 
-	// Contains the details of an Amazon Neptune DB cluster. This data type is used as
-	// a response element in the DescribeDBClusters action.
+	// Contains the details of an Amazon Neptune DB cluster. This data type is used
+	// as a response element in the DescribeDBClusters  action.
 	DBCluster *types.DBCluster
 
 	// Metadata pertaining to the operation's result.

@@ -17,8 +17,8 @@ import (
 // specify the maximum number of items to receive in the response. If the total
 // number of items in the list exceeds the maximum that you specify, or the default
 // maximum, the response is paginated. To get the next page of items, send a
-// subsequent request that specifies the NextMarker value from the current response
-// as the Marker value in the subsequent request.
+// subsequent request that specifies the NextMarker value from the current
+// response as the Marker  value in the subsequent request.
 func (c *Client) ListOriginRequestPolicies(ctx context.Context, params *ListOriginRequestPoliciesInput, optFns ...func(*Options)) (*ListOriginRequestPoliciesOutput, error) {
 	if params == nil {
 		params = &ListOriginRequestPoliciesInput{}
@@ -39,7 +39,7 @@ type ListOriginRequestPoliciesInput struct {
 	// Use this field when paginating results to indicate where to begin in your list
 	// of origin request policies. The response includes origin request policies in the
 	// list that occur after the marker. To get the next page of the list, set this
-	// field's value to the value of NextMarker from the current page's response.
+	// field's value to the value of NextMarker  from the current page's response.
 	Marker *string
 
 	// The maximum number of origin request policies that you want in the response.
@@ -47,10 +47,8 @@ type ListOriginRequestPoliciesInput struct {
 
 	// A filter to return only the specified kinds of origin request policies. Valid
 	// values are:
-	// - managed – Returns only the managed policies created by Amazon Web
-	// Services.
-	// - custom – Returns only the custom policies created in your Amazon Web
-	// Services account.
+	//     - managed – Returns only the managed policies created by Amazon Web Services.
+	//     - custom – Returns only the custom policies created in your Amazon Web Services account.
 	Type types.OriginRequestPolicyType
 
 	noSmithyDocumentSerde

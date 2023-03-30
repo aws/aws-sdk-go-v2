@@ -42,7 +42,7 @@ type DeleteReplicationTaskAssessmentRunInput struct {
 
 type DeleteReplicationTaskAssessmentRunOutput struct {
 
-	// The ReplicationTaskAssessmentRun object for the deleted assessment run.
+	// The ReplicationTaskAssessmentRun  object for the deleted assessment run.
 	ReplicationTaskAssessmentRun *types.ReplicationTaskAssessmentRun
 
 	// Metadata pertaining to the operation's result.

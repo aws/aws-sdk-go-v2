@@ -33,21 +33,18 @@ type ListAvailableResourceMetricsInput struct {
 
 	// An immutable identifier for a data source that is unique within an Amazon Web
 	// Services Region. Performance Insights gathers metrics from this data source. To
-	// use an Amazon RDS DB instance as a data source, specify its DbiResourceId value.
-	// For example, specify db-ABCDEFGHIJKLMNOPQRSTU1VWZ.
+	// use an Amazon RDS DB instance as a data source, specify its DbiResourceId
+	// value. For example, specify db-ABCDEFGHIJKLMNOPQRSTU1VWZ .
 	//
 	// This member is required.
 	Identifier *string
 
 	// The types of metrics to return in the response. Valid values in the array
 	// include the following:
-	// - os (OS counter metrics) - All engines
-	// - db (DB load
-	// metrics) - All engines except for Amazon DocumentDB
-	// - db.sql.stats (per-SQL
-	// metrics) - All engines except for Amazon DocumentDB
-	// - db.sql_tokenized.stats
-	// (per-SQL digest metrics) - All engines except for Amazon DocumentDB
+	//     - os (OS counter metrics) - All engines
+	//     - db (DB load metrics) - All engines except for Amazon DocumentDB
+	//     - db.sql.stats (per-SQL metrics) - All engines except for Amazon DocumentDB
+	//     - db.sql_tokenized.stats (per-SQL digest metrics) - All engines except for Amazon DocumentDB
 	//
 	// This member is required.
 	MetricTypes []string
@@ -57,13 +54,13 @@ type ListAvailableResourceMetricsInput struct {
 	// This member is required.
 	ServiceType types.ServiceType
 
-	// The maximum number of items to return. If the MaxRecords value is less than the
-	// number of existing items, the response includes a pagination token.
+	// The maximum number of items to return. If the MaxRecords value is less than
+	// the number of existing items, the response includes a pagination token.
 	MaxResults *int32
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the token, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -77,7 +74,7 @@ type ListAvailableResourceMetricsOutput struct {
 
 	// A pagination token that indicates the response didn’t return all available
 	// records because MaxRecords was specified in the previous request. To get the
-	// remaining records, specify NextToken in a separate request with this value.
+	// remaining records, specify NextToken  in a separate request with this value.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -160,12 +157,12 @@ var _ ListAvailableResourceMetricsAPIClient = (*Client)(nil)
 // ListAvailableResourceMetricsPaginatorOptions is the paginator options for
 // ListAvailableResourceMetrics
 type ListAvailableResourceMetricsPaginatorOptions struct {
-	// The maximum number of items to return. If the MaxRecords value is less than the
-	// number of existing items, the response includes a pagination token.
+	// The maximum number of items to return. If the MaxRecords value is less than
+	// the number of existing items, the response includes a pagination token.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

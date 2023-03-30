@@ -32,9 +32,9 @@ func (DimensionUnit) Values() []DimensionUnit {
 
 type DistanceUnit string
 
-// Values returns all known values for DistanceUnit. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DistanceUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DistanceUnit) Values() []DistanceUnit {
 	return []DistanceUnit{
 		"Kilometers",
@@ -44,9 +44,9 @@ func (DistanceUnit) Values() []DistanceUnit {
 
 type IntendedUse string
 
-// Values returns all known values for IntendedUse. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for IntendedUse. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (IntendedUse) Values() []IntendedUse {
 	return []IntendedUse{
 		"SingleUse",
@@ -69,9 +69,9 @@ func (PositionFiltering) Values() []PositionFiltering {
 
 type PricingPlan string
 
-// Values returns all known values for PricingPlan. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PricingPlan. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PricingPlan) Values() []PricingPlan {
 	return []PricingPlan{
 		"RequestBasedUsage",
@@ -82,8 +82,8 @@ func (PricingPlan) Values() []PricingPlan {
 
 type RouteMatrixErrorCode string
 
-// Values returns all known values for RouteMatrixErrorCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RouteMatrixErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RouteMatrixErrorCode) Values() []RouteMatrixErrorCode {
 	return []RouteMatrixErrorCode{

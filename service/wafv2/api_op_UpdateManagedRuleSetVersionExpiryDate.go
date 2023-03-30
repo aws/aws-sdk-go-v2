@@ -15,13 +15,13 @@ import (
 // Updates the expiration information for your managed rule set. Use this to
 // initiate the expiration of a managed rule group version. After you initiate
 // expiration for a version, WAF excludes it from the response to
-// ListAvailableManagedRuleGroupVersions for the managed rule group. This is
+// ListAvailableManagedRuleGroupVersionsfor the managed rule group. This is
 // intended for use only by vendors of managed rule sets. Vendors are Amazon Web
 // Services and Amazon Web Services Marketplace sellers. Vendors, you can use the
 // managed rule set APIs to provide controlled rollout of your versioned managed
-// rule group offerings for your customers. The APIs are ListManagedRuleSets,
-// GetManagedRuleSet, PutManagedRuleSetVersions, and
-// UpdateManagedRuleSetVersionExpiryDate.
+// rule group offerings for your customers. The APIs are ListManagedRuleSets ,
+// GetManagedRuleSet , PutManagedRuleSetVersions , and
+// UpdateManagedRuleSetVersionExpiryDate .
 func (c *Client) UpdateManagedRuleSetVersionExpiryDate(ctx context.Context, params *UpdateManagedRuleSetVersionExpiryDateInput, optFns ...func(*Options)) (*UpdateManagedRuleSetVersionExpiryDateOutput, error) {
 	if params == nil {
 		params = &UpdateManagedRuleSetVersionExpiryDateInput{}
@@ -39,27 +39,27 @@ func (c *Client) UpdateManagedRuleSetVersionExpiryDate(ctx context.Context, para
 
 type UpdateManagedRuleSetVersionExpiryDateInput struct {
 
-	// The time that you want the version to expire. Times are in Coordinated Universal
-	// Time (UTC) format. UTC format includes the special designator, Z. For example,
-	// "2016-09-27T14:50Z".
+	// The time that you want the version to expire. Times are in Coordinated
+	// Universal Time (UTC) format. UTC format includes the special designator, Z. For
+	// example, "2016-09-27T14:50Z".
 	//
 	// This member is required.
 	ExpiryTimestamp *time.Time
 
 	// A unique identifier for the managed rule set. The ID is returned in the
-	// responses to commands like list. You provide it to operations like get and
-	// update.
+	// responses to commands like list . You provide it to operations like get  and
+	// update .
 	//
 	// This member is required.
 	Id *string
 
-	// A token used for optimistic locking. WAF returns a token to your get and list
+	// A token used for optimistic locking. WAF returns a token to your get  and list
 	// requests, to mark the state of the entity at the time of the request. To make
 	// changes to the entity associated with the token, you provide the token to
-	// operations like update and delete. WAF uses the token to ensure that no changes
-	// have been made to the entity since you last retrieved it. If a change has been
-	// made, the update fails with a WAFOptimisticLockException. If this happens,
-	// perform another get, and use the new token returned by that operation.
+	// operations like update  and delete. WAF uses the token to ensure that no
+	// changes have been made to the entity since you last retrieved it. If a change
+	// has been made, the update fails with a WAFOptimisticLockException. If this
+	// happens, perform another get , and use the new token returned by that operation.
 	//
 	// This member is required.
 	LockToken *string
@@ -76,10 +76,8 @@ type UpdateManagedRuleSetVersionExpiryDateInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	// - CLI - Specify the Region
-	// when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.
-	// - API
-	// and SDKs - For all calls, use the Region endpoint us-east-1.
+	//     - CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1 .
+	//     - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
@@ -103,13 +101,13 @@ type UpdateManagedRuleSetVersionExpiryDateOutput struct {
 	// "2016-09-27T14:50Z".
 	ExpiryTimestamp *time.Time
 
-	// A token used for optimistic locking. WAF returns a token to your get and list
+	// A token used for optimistic locking. WAF returns a token to your get  and list
 	// requests, to mark the state of the entity at the time of the request. To make
 	// changes to the entity associated with the token, you provide the token to
-	// operations like update and delete. WAF uses the token to ensure that no changes
-	// have been made to the entity since you last retrieved it. If a change has been
-	// made, the update fails with a WAFOptimisticLockException. If this happens,
-	// perform another get, and use the new token returned by that operation.
+	// operations like update  and delete. WAF uses the token to ensure that no
+	// changes have been made to the entity since you last retrieved it. If a change
+	// has been made, the update fails with a WAFOptimisticLockException. If this
+	// happens, perform another get , and use the new token returned by that operation.
 	NextLockToken *string
 
 	// Metadata pertaining to the operation's result.

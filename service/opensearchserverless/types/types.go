@@ -61,7 +61,7 @@ type AccessPolicySummary struct {
 	// The version of the policy.
 	PolicyVersion *string
 
-	// The type of access policy. Currently the only available type is data.
+	// The type of access policy. Currently the only available type is data .
 	Type AccessPolicyType
 
 	noSmithyDocumentSerde
@@ -73,8 +73,8 @@ type AccountSettingsDetail struct {
 	// The maximum capacity limits for all OpenSearch Serverless collections, in
 	// OpenSearch Compute Units (OCUs). These limits are used to scale your collections
 	// based on the current workload. For more information, see Managing capacity
-	// limits for Amazon OpenSearch Serverless
-	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html).
+	// limits for Amazon OpenSearch Serverless (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html)
+	// .
 	CapacityLimits *CapacityLimits
 
 	noSmithyDocumentSerde
@@ -83,8 +83,8 @@ type AccountSettingsDetail struct {
 // The maximum capacity limits for all OpenSearch Serverless collections, in
 // OpenSearch Compute Units (OCUs). These limits are used to scale your collections
 // based on the current workload. For more information, see Managing capacity
-// limits for Amazon OpenSearch Serverless
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html).
+// limits for Amazon OpenSearch Serverless (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html)
+// .
 type CapacityLimits struct {
 
 	// The maximum indexing capacity for collections.
@@ -140,7 +140,7 @@ type CollectionDetail struct {
 // Error information for an OpenSearch Serverless request.
 type CollectionErrorDetail struct {
 
-	// The error code for the request. For example, NOT_FOUND.
+	// The error code for the request. For example, NOT_FOUND .
 	ErrorCode *string
 
 	// A description of the error. For example, The specified Collection is not found.
@@ -224,8 +224,8 @@ type CreateCollectionDetail struct {
 
 // Creation details for an OpenSearch Serverless-managed interface endpoint. For
 // more information, see Access Amazon OpenSearch Serverless using an interface
-// endpoint
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html).
+// endpoint (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html)
+// .
 type CreateVpcEndpointDetail struct {
 
 	// The unique identifier of the endpoint.
@@ -472,8 +472,9 @@ type UpdateVpcEndpointDetail struct {
 	// The name of the endpoint.
 	Name *string
 
-	// The unique identifiers of the security groups that define the ports, protocols,
-	// and sources for inbound traffic that you are authorizing into your endpoint.
+	// The unique identifiers of the security groups that define the ports,
+	// protocols, and sources for inbound traffic that you are authorizing into your
+	// endpoint.
 	SecurityGroupIds []string
 
 	// The current status of the endpoint update process.
@@ -497,8 +498,9 @@ type VpcEndpointDetail struct {
 	// The name of the endpoint.
 	Name *string
 
-	// The unique identifiers of the security groups that define the ports, protocols,
-	// and sources for inbound traffic that you are authorizing into your endpoint.
+	// The unique identifiers of the security groups that define the ports,
+	// protocols, and sources for inbound traffic that you are authorizing into your
+	// endpoint.
 	SecurityGroupIds []string
 
 	// The current status of the endpoint.
@@ -513,7 +515,7 @@ type VpcEndpointDetail struct {
 	noSmithyDocumentSerde
 }
 
-// Error information for a failed BatchGetVpcEndpoint request.
+// Error information for a failed BatchGetVpcEndpoint  request.
 type VpcEndpointErrorDetail struct {
 
 	// The error code for the failed request.
@@ -528,7 +530,7 @@ type VpcEndpointErrorDetail struct {
 	noSmithyDocumentSerde
 }
 
-// Filter the results of a ListVpcEndpoints request.
+// Filter the results of a ListVpcEndpoints  request.
 type VpcEndpointFilters struct {
 
 	// The current status of the endpoint.

@@ -13,8 +13,8 @@ import (
 )
 
 // Submits a request to process a query statement. This operation generates work
-// units that can be retrieved with the GetWorkUnits operation as soon as the query
-// state is WORKUNITS_AVAILABLE or FINISHED.
+// units that can be retrieved with the GetWorkUnits operation as soon as the
+// query state is WORKUNITS_AVAILABLE or FINISHED.
 func (c *Client) StartQueryPlanning(ctx context.Context, params *StartQueryPlanningInput, optFns ...func(*Options)) (*StartQueryPlanningOutput, error) {
 	if params == nil {
 		params = &StartQueryPlanningInput{}
@@ -50,7 +50,7 @@ type StartQueryPlanningOutput struct {
 
 	// The ID of the plan query operation can be used to fetch the actual work unit
 	// descriptors that are produced as the result of the operation. The ID is also
-	// used to get the query state and as an input to the Execute operation.
+	// used to get the query state and as an input to the Execute  operation.
 	//
 	// This member is required.
 	QueryId *string

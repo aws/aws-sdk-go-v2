@@ -12,7 +12,7 @@ import (
 )
 
 // Describe an Amazon Lookout for Vision dataset. This operation requires
-// permissions to perform the lookoutvision:DescribeDataset operation.
+// permissions to perform the lookoutvision:DescribeDataset  operation.
 func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInput, optFns ...func(*Options)) (*DescribeDatasetOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetInput{}
@@ -31,8 +31,8 @@ func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInp
 type DescribeDatasetInput struct {
 
 	// The type of the dataset to describe. Specify train to describe the training
-	// dataset. Specify test to describe the test dataset. If you have a single dataset
-	// project, specify train
+	// dataset. Specify test to describe the test dataset. If you have a single
+	// dataset project, specify train
 	//
 	// This member is required.
 	DatasetType *string

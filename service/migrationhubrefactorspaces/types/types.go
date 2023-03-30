@@ -27,10 +27,10 @@ type ApiGatewayProxyConfig struct {
 	// The endpoint URL of the API Gateway proxy.
 	ProxyUrl *string
 
-	// The name of the API Gateway stage. The name defaults to prod.
+	// The name of the API Gateway stage. The name defaults to prod .
 	StageName *string
 
-	// The VpcLink ID of the API Gateway proxy.
+	// The VpcLink  ID of the API Gateway proxy.
 	VpcLinkId *string
 
 	noSmithyDocumentSerde
@@ -39,15 +39,15 @@ type ApiGatewayProxyConfig struct {
 // A wrapper object holding the Amazon API Gateway endpoint input.
 type ApiGatewayProxyInput struct {
 
-	// The type of endpoint to use for the API Gateway proxy. If no value is specified
-	// in the request, the value is set to REGIONAL by default. If the value is set to
-	// PRIVATE in the request, this creates a private API endpoint that is isolated
-	// from the public internet. The private endpoint can only be accessed by using
-	// Amazon Virtual Private Cloud (Amazon VPC) endpoints for Amazon API Gateway that
-	// have been granted access.
+	// The type of endpoint to use for the API Gateway proxy. If no value is
+	// specified in the request, the value is set to REGIONAL by default. If the
+	// value is set to PRIVATE in the request, this creates a private API endpoint
+	// that is isolated from the public internet. The private endpoint can only be
+	// accessed by using Amazon Virtual Private Cloud (Amazon VPC) endpoints for Amazon
+	// API Gateway that have been granted access.
 	EndpointType ApiGatewayEndpointType
 
-	// The name of the API Gateway stage. The name defaults to prod.
+	// The name of the API Gateway stage. The name defaults to prod .
 	StageName *string
 
 	noSmithyDocumentSerde
@@ -73,16 +73,16 @@ type ApiGatewayProxySummary struct {
 	// The endpoint URL of the API Gateway proxy.
 	ProxyUrl *string
 
-	// The name of the API Gateway stage. The name defaults to prod.
+	// The name of the API Gateway stage. The name defaults to prod .
 	StageName *string
 
-	// The VpcLink ID of the API Gateway proxy.
+	// The VpcLink  ID of the API Gateway proxy.
 	VpcLinkId *string
 
 	noSmithyDocumentSerde
 }
 
-// The list of ApplicationSummary objects.
+// The list of ApplicationSummary  objects.
 type ApplicationSummary struct {
 
 	// The endpoint URL of the Amazon API Gateway proxy.
@@ -112,8 +112,8 @@ type ApplicationSummary struct {
 	// The name of the application.
 	Name *string
 
-	// The Amazon Web Services account ID of the application owner (which is always the
-	// same as the environment owner account ID).
+	// The Amazon Web Services account ID of the application owner (which is always
+	// the same as the environment owner account ID).
 	OwnerAccountId *string
 
 	// The proxy type of the proxy created within the application.
@@ -141,7 +141,7 @@ type DefaultRouteInput struct {
 	noSmithyDocumentSerde
 }
 
-// The summary information for environments as a response to ListEnvironments.
+// The summary information for environments as a response to ListEnvironments .
 type EnvironmentSummary struct {
 
 	// The Amazon Resource Name (ARN) of the environment.
@@ -183,8 +183,8 @@ type EnvironmentSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Provides summary information for the EnvironmentVpc resource as a response to
-// ListEnvironmentVpc.
+// Provides summary information for the EnvironmentVpc  resource as a response to
+// ListEnvironmentVpc .
 type EnvironmentVpc struct {
 
 	// The Amazon Web Services account ID of the virtual private cloud (VPC) owner.
@@ -264,7 +264,7 @@ type LambdaEndpointSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The summary information for the routes as a response to ListRoutes.
+// The summary information for the routes as a response to ListRoutes .
 type RouteSummary struct {
 
 	// The unique identifier of the application.
@@ -285,9 +285,9 @@ type RouteSummary struct {
 	// Any error associated with the route resource.
 	Error *ErrorResponse
 
-	// Indicates whether to match all subpaths of the given source path. If this value
-	// is false, requests must match the source path exactly before they are forwarded
-	// to this route's service.
+	// Indicates whether to match all subpaths of the given source path. If this
+	// value is false, requests must match the source path exactly before they are
+	// forwarded to this route's service.
 	IncludeChildPaths *bool
 
 	// A timestamp that indicates when the route was last updated.
@@ -326,7 +326,7 @@ type RouteSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A summary for the service as a response to ListServices.
+// A summary for the service as a response to ListServices .
 type ServiceSummary struct {
 
 	// The unique identifier of the application.
@@ -398,9 +398,9 @@ type UriPathRouteInput struct {
 	// This member is required.
 	SourcePath *string
 
-	// Indicates whether to match all subpaths of the given source path. If this value
-	// is false, requests must match the source path exactly before they are forwarded
-	// to this route's service.
+	// Indicates whether to match all subpaths of the given source path. If this
+	// value is false, requests must match the source path exactly before they are
+	// forwarded to this route's service.
 	IncludeChildPaths *bool
 
 	// A list of HTTP methods to match. An empty list matches all values. If a method
@@ -426,19 +426,18 @@ type UrlEndpointConfig struct {
 // The configuration for the URL endpoint type.
 type UrlEndpointInput struct {
 
-	// The URL to route traffic to. The URL must be an rfc3986-formatted URL
-	// (https://datatracker.ietf.org/doc/html/rfc3986). If the host is a domain name,
-	// the name must be resolvable over the public internet. If the scheme is https,
-	// the top level domain of the host must be listed in the IANA root zone database
-	// (https://www.iana.org/domains/root/db).
+	// The URL to route traffic to. The URL must be an rfc3986-formatted URL (https://datatracker.ietf.org/doc/html/rfc3986)
+	// . If the host is a domain name, the name must be resolvable over the public
+	// internet. If the scheme is https, the top level domain of the host must be
+	// listed in the IANA root zone database (https://www.iana.org/domains/root/db) .
 	//
 	// This member is required.
 	Url *string
 
-	// The health check URL of the URL endpoint type. If the URL is a public endpoint,
-	// the HealthUrl must also be a public endpoint. If the URL is a private endpoint
-	// inside a virtual private cloud (VPC), the health URL must also be a private
-	// endpoint, and the host must be the same as the URL.
+	// The health check URL of the URL endpoint type. If the URL is a public
+	// endpoint, the HealthUrl must also be a public endpoint. If the URL is a
+	// private endpoint inside a virtual private cloud (VPC), the health URL must also
+	// be a private endpoint, and the host must be the same as the URL.
 	HealthUrl *string
 
 	noSmithyDocumentSerde
@@ -447,17 +446,16 @@ type UrlEndpointInput struct {
 // The summary of the configuration for the URL endpoint type.
 type UrlEndpointSummary struct {
 
-	// The health check URL of the URL endpoint type. If the URL is a public endpoint,
-	// the HealthUrl must also be a public endpoint. If the URL is a private endpoint
-	// inside a virtual private cloud (VPC), the health URL must also be a private
-	// endpoint, and the host must be the same as the URL.
+	// The health check URL of the URL endpoint type. If the URL is a public
+	// endpoint, the HealthUrl must also be a public endpoint. If the URL is a
+	// private endpoint inside a virtual private cloud (VPC), the health URL must also
+	// be a private endpoint, and the host must be the same as the URL.
 	HealthUrl *string
 
-	// The URL to route traffic to. The URL must be an rfc3986-formatted URL
-	// (https://datatracker.ietf.org/doc/html/rfc3986). If the host is a domain name,
-	// the name must be resolvable over the public internet. If the scheme is https,
-	// the top level domain of the host must be listed in the IANA root zone database
-	// (https://www.iana.org/domains/root/db).
+	// The URL to route traffic to. The URL must be an rfc3986-formatted URL (https://datatracker.ietf.org/doc/html/rfc3986)
+	// . If the host is a domain name, the name must be resolvable over the public
+	// internet. If the scheme is https, the top level domain of the host must be
+	// listed in the IANA root zone database (https://www.iana.org/domains/root/db) .
 	Url *string
 
 	noSmithyDocumentSerde

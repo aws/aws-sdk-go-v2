@@ -26,7 +26,7 @@ func (c *Client) ListGitHubAccountTokenNames(ctx context.Context, params *ListGi
 	return out, nil
 }
 
-// Represents the input of a ListGitHubAccountTokenNames operation.
+// Represents the input of a ListGitHubAccountTokenNames  operation.
 type ListGitHubAccountTokenNamesInput struct {
 
 	// An identifier returned from the previous ListGitHubAccountTokenNames call. It
@@ -36,12 +36,12 @@ type ListGitHubAccountTokenNamesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a ListGitHubAccountTokenNames operation.
+// Represents the output of a ListGitHubAccountTokenNames  operation.
 type ListGitHubAccountTokenNamesOutput struct {
 
-	// If a large amount of information is returned, an identifier is also returned. It
-	// can be used in a subsequent ListGitHubAccountTokenNames call to return the next
-	// set of names in the list.
+	// If a large amount of information is returned, an identifier is also returned.
+	// It can be used in a subsequent ListGitHubAccountTokenNames call to return the
+	// next set of names in the list.
 	NextToken *string
 
 	// A list of names of connections to GitHub accounts.

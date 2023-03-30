@@ -194,8 +194,8 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// API calls have exceeded the maximum allowed API request rate per account and per
-// Region.
+// API calls have exceeded the maximum allowed API request rate per account and
+// per Region.
 type ThrottlingException struct {
 	Message *string
 

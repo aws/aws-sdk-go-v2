@@ -13,7 +13,7 @@ import (
 )
 
 // Gets summary information about all your rooms in the AWS region where the API
-// request is processed. Results are sorted in descending order of updateTime.
+// request is processed. Results are sorted in descending order of updateTime .
 func (c *Client) ListRooms(ctx context.Context, params *ListRoomsInput, optFns ...func(*Options)) (*ListRoomsOutput, error) {
 	if params == nil {
 		params = &ListRoomsInput{}
@@ -57,8 +57,8 @@ type ListRoomsOutput struct {
 	// This member is required.
 	Rooms []types.RoomSummary
 
-	// If there are more rooms than maxResults, use nextToken in the request to get the
-	// next set.
+	// If there are more rooms than maxResults , use nextToken in the request to get
+	// the next set.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -139,8 +139,8 @@ type ListRoomsPaginatorOptions struct {
 	// Maximum number of rooms to return. Default: 50.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

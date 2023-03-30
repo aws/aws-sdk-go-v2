@@ -17,7 +17,7 @@ import (
 // change only resources with certain tag values. In EventBridge, rules and event
 // buses can be tagged. Tags don't have any semantic meaning to Amazon Web Services
 // and are interpreted strictly as strings of characters. You can use the
-// TagResource action with a resource that already has tags. If you specify a new
+// TagResourceaction with a resource that already has tags. If you specify a new
 // tag key, this tag is appended to the list of tags associated with the resource.
 // If you specify a tag key that is already associated with the resource, the new
 // tag value that you specify replaces the previous value for that tag. You can

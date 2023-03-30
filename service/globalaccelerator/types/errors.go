@@ -299,8 +299,8 @@ func (e *EndpointNotFoundException) ErrorCode() string {
 }
 func (e *EndpointNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The CIDR that you specified is not valid for this action. For example, the state
-// of the CIDR might be incorrect for this action.
+// The CIDR that you specified is not valid for this action. For example, the
+// state of the CIDR might be incorrect for this action.
 type IncorrectCidrStateException struct {
 	Message *string
 
@@ -404,8 +404,8 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The port numbers that you specified are not valid numbers or are not unique for
-// this accelerator.
+// The port numbers that you specified are not valid numbers or are not unique
+// for this accelerator.
 type InvalidPortRangeException struct {
 	Message *string
 

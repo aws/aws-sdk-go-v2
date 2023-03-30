@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This action can be used only with Windows stacks. Grants RDP access to a Windows
-// instance for a specified time period.
+// This action can be used only with Windows stacks. Grants RDP access to a
+// Windows instance for a specified time period.
 func (c *Client) GrantAccess(ctx context.Context, params *GrantAccessInput, optFns ...func(*Options)) (*GrantAccessOutput, error) {
 	if params == nil {
 		params = &GrantAccessInput{}
@@ -35,8 +35,8 @@ type GrantAccessInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The length of time (in minutes) that the grant is valid. When the grant expires
-	// at the end of this period, the user will no longer be able to use the
+	// The length of time (in minutes) that the grant is valid. When the grant
+	// expires at the end of this period, the user will no longer be able to use the
 	// credentials to log in. If the user is logged in at the time, he or she
 	// automatically will be logged out.
 	ValidForInMinutes *int32
@@ -44,7 +44,7 @@ type GrantAccessInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a GrantAccess request.
+// Contains the response to a GrantAccess  request.
 type GrantAccessOutput struct {
 
 	// A TemporaryCredential object that contains the data needed to log in to the

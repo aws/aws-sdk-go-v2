@@ -37,7 +37,8 @@ type ListResourcesInput struct {
 	// The maximum number of resource results.
 	MaxResults *int32
 
-	// A continuation token, if this is not the first call to retrieve these resources.
+	// A continuation token, if this is not the first call to retrieve these
+	// resources.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,7 +46,8 @@ type ListResourcesInput struct {
 
 type ListResourcesOutput struct {
 
-	// A continuation token, if this is not the first call to retrieve these resources.
+	// A continuation token, if this is not the first call to retrieve these
+	// resources.
 	NextToken *string
 
 	// A summary of the data lake resources.
@@ -129,8 +131,8 @@ type ListResourcesPaginatorOptions struct {
 	// The maximum number of resource results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

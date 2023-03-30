@@ -46,9 +46,9 @@ const (
 	ConnectionErrorCodeTypeXksProxyInvalidTlsConfiguration           ConnectionErrorCodeType = "XKS_PROXY_INVALID_TLS_CONFIGURATION"
 )
 
-// Values returns all known values for ConnectionErrorCodeType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ConnectionErrorCodeType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectionErrorCodeType) Values() []ConnectionErrorCodeType {
 	return []ConnectionErrorCodeType{
 		"INVALID_CREDENTIALS",
@@ -115,8 +115,8 @@ const (
 	CustomerMasterKeySpecSm2              CustomerMasterKeySpec = "SM2"
 )
 
-// Values returns all known values for CustomerMasterKeySpec. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for CustomerMasterKeySpec. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (CustomerMasterKeySpec) Values() []CustomerMasterKeySpec {
 	return []CustomerMasterKeySpec{
@@ -192,9 +192,9 @@ const (
 	DataKeySpecAes128 DataKeySpec = "AES_128"
 )
 
-// Values returns all known values for DataKeySpec. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DataKeySpec. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DataKeySpec) Values() []DataKeySpec {
 	return []DataKeySpec{
 		"AES_256",
@@ -212,9 +212,9 @@ const (
 	EncryptionAlgorithmSpecSm2pke           EncryptionAlgorithmSpec = "SM2PKE"
 )
 
-// Values returns all known values for EncryptionAlgorithmSpec. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EncryptionAlgorithmSpec. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncryptionAlgorithmSpec) Values() []EncryptionAlgorithmSpec {
 	return []EncryptionAlgorithmSpec{
 		"SYMMETRIC_DEFAULT",
@@ -360,9 +360,9 @@ const (
 	KeyStateUpdating               KeyState = "Updating"
 )
 
-// Values returns all known values for KeyState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for KeyState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (KeyState) Values() []KeyState {
 	return []KeyState{
 		"Creating",
@@ -385,9 +385,9 @@ const (
 	KeyUsageTypeGenerateVerifyMac KeyUsageType = "GENERATE_VERIFY_MAC"
 )
 
-// Values returns all known values for KeyUsageType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for KeyUsageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (KeyUsageType) Values() []KeyUsageType {
 	return []KeyUsageType{
 		"SIGN_VERIFY",
@@ -426,9 +426,9 @@ const (
 	MessageTypeDigest MessageType = "DIGEST"
 )
 
-// Values returns all known values for MessageType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MessageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (MessageType) Values() []MessageType {
 	return []MessageType{
 		"RAW",
@@ -492,8 +492,8 @@ const (
 	SigningAlgorithmSpecSm2dsa               SigningAlgorithmSpec = "SM2DSA"
 )
 
-// Values returns all known values for SigningAlgorithmSpec. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SigningAlgorithmSpec. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SigningAlgorithmSpec) Values() []SigningAlgorithmSpec {
 	return []SigningAlgorithmSpec{
@@ -534,9 +534,9 @@ const (
 	XksProxyConnectivityTypeVpcEndpointService XksProxyConnectivityType = "VPC_ENDPOINT_SERVICE"
 )
 
-// Values returns all known values for XksProxyConnectivityType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for XksProxyConnectivityType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (XksProxyConnectivityType) Values() []XksProxyConnectivityType {
 	return []XksProxyConnectivityType{
 		"PUBLIC_ENDPOINT",

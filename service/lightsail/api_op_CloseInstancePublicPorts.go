@@ -12,10 +12,10 @@ import (
 )
 
 // Closes ports for a specific Amazon Lightsail instance. The
-// CloseInstancePublicPorts action supports tag-based access control via resource
+// CloseInstancePublicPortsaction supports tag-based access control via resource
 // tags applied to the resource identified by instanceName. For more information,
-// see the Amazon Lightsail Developer Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
+// see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
+// .
 func (c *Client) CloseInstancePublicPorts(ctx context.Context, params *CloseInstancePublicPortsInput, optFns ...func(*Options)) (*CloseInstancePublicPortsOutput, error) {
 	if params == nil {
 		params = &CloseInstancePublicPortsInput{}

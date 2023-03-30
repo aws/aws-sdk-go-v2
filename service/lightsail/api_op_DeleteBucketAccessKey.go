@@ -14,8 +14,7 @@ import (
 // Deletes an access key for the specified Amazon Lightsail bucket. We recommend
 // that you delete an access key if the secret access key is compromised. For more
 // information about access keys, see Creating access keys for a bucket in Amazon
-// Lightsail
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys)
+// Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys)
 // in the Amazon Lightsail Developer Guide.
 func (c *Client) DeleteBucketAccessKey(ctx context.Context, params *DeleteBucketAccessKeyInput, optFns ...func(*Options)) (*DeleteBucketAccessKeyOutput, error) {
 	if params == nil {
@@ -34,8 +33,7 @@ func (c *Client) DeleteBucketAccessKey(ctx context.Context, params *DeleteBucket
 
 type DeleteBucketAccessKeyInput struct {
 
-	// The ID of the access key to delete. Use the GetBucketAccessKeys
-	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketAccessKeys.html)
+	// The ID of the access key to delete. Use the GetBucketAccessKeys (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketAccessKeys.html)
 	// action to get a list of access key IDs that you can specify.
 	//
 	// This member is required.

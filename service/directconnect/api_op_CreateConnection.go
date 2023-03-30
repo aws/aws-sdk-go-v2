@@ -16,11 +16,11 @@ import (
 // location. A connection links your internal network to an Direct Connect location
 // over a standard Ethernet fiber-optic cable. One end of the cable is connected to
 // your router, the other to an Direct Connect router. To find the locations for
-// your Region, use DescribeLocations. You can automatically add the new connection
-// to a link aggregation group (LAG) by specifying a LAG ID in the request. This
-// ensures that the new connection is allocated on the same Direct Connect endpoint
-// that hosts the specified LAG. If there are no available ports on the endpoint,
-// the request fails and no connection is created.
+// your Region, use DescribeLocations. You can automatically add the new
+// connection to a link aggregation group (LAG) by specifying a LAG ID in the
+// request. This ensures that the new connection is allocated on the same Direct
+// Connect endpoint that hosts the specified LAG. If there are no available ports
+// on the endpoint, the request fails and no connection is created.
 func (c *Client) CreateConnection(ctx context.Context, params *CreateConnectionInput, optFns ...func(*Options)) (*CreateConnectionOutput, error) {
 	if params == nil {
 		params = &CreateConnectionInput{}
@@ -59,10 +59,9 @@ type CreateConnectionInput struct {
 	// The name of the service provider associated with the requested connection.
 	ProviderName *string
 
-	// Indicates whether you want the connection to support MAC Security (MACsec). MAC
-	// Security (MACsec) is only available on dedicated connections. For information
-	// about MAC Security (MACsec) prerequisties, see MACsec prerequisties
-	// (https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites)
+	// Indicates whether you want the connection to support MAC Security (MACsec).
+	// MAC Security (MACsec) is only available on dedicated connections. For
+	// information about MAC Security (MACsec) prerequisties, see MACsec prerequisties (https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites)
 	// in the Direct Connect User Guide.
 	RequestMACSec *bool
 
@@ -83,8 +82,9 @@ type CreateConnectionOutput struct {
 	// The Direct Connect endpoint that terminates the physical connection.
 	AwsDeviceV2 *string
 
-	// The Direct Connect endpoint that terminates the logical connection. This device
-	// might be different than the device that terminates the physical connection.
+	// The Direct Connect endpoint that terminates the logical connection. This
+	// device might be different than the device that terminates the physical
+	// connection.
 	AwsLogicalDeviceId *string
 
 	// The bandwidth of the connection.
@@ -97,30 +97,19 @@ type CreateConnectionOutput struct {
 	ConnectionName *string
 
 	// The state of the connection. The following are the possible values:
-	// - ordering:
-	// The initial state of a hosted connection provisioned on an interconnect. The
-	// connection stays in the ordering state until the owner of the hosted connection
-	// confirms or declines the connection order.
-	// - requested: The initial state of a
-	// standard connection. The connection stays in the requested state until the
-	// Letter of Authorization (LOA) is sent to the customer.
-	// - pending: The connection
-	// has been approved and is being initialized.
-	// - available: The network link is up
-	// and the connection is ready for use.
-	// - down: The network link is down.
-	// -
-	// deleting: The connection is being deleted.
-	// - deleted: The connection has been
-	// deleted.
-	// - rejected: A hosted connection in the ordering state enters the
-	// rejected state if it is deleted by the customer.
-	// - unknown: The state of the
-	// connection is not available.
+	//     - ordering : The initial state of a hosted connection provisioned on an interconnect. The connection stays in the ordering state until the owner of the hosted connection confirms or declines the connection order.
+	//     - requested : The initial state of a standard connection. The connection stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.
+	//     - pending : The connection has been approved and is being initialized.
+	//     - available : The network link is up and the connection is ready for use.
+	//     - down : The network link is down.
+	//     - deleting : The connection is being deleted.
+	//     - deleted : The connection has been deleted.
+	//     - rejected : A hosted connection in the ordering state enters the rejected state if it is deleted by the customer.
+	//     - unknown : The state of the connection is not available.
 	ConnectionState types.ConnectionState
 
 	// The MAC Security (MACsec) connection encryption mode. The valid values are
-	// no_encrypt, should_encrypt, and must_encrypt.
+	// no_encrypt , should_encrypt , and must_encrypt .
 	EncryptionMode *string
 
 	// Indicates whether the connection supports a secondary BGP peer in the same
@@ -133,7 +122,7 @@ type CreateConnectionOutput struct {
 	// The ID of the LAG.
 	LagId *string
 
-	// The time of the most recent call to DescribeLoa for this connection.
+	// The time of the most recent call to DescribeLoa  for this connection.
 	LoaIssueTime *time.Time
 
 	// The location of the connection.
@@ -152,8 +141,8 @@ type CreateConnectionOutput struct {
 	PartnerName *string
 
 	// The MAC Security (MACsec) port link status of the connection. The valid values
-	// are Encryption Up, which means that there is an active Connection Key Name, or
-	// Encryption Down.
+	// are Encryption Up , which means that there is an active Connection Key Name, or
+	// Encryption Down .
 	PortEncryptionStatus *string
 
 	// The name of the service provider associated with the connection.

@@ -15,8 +15,7 @@ import (
 // Returns the task assessment results from the Amazon S3 bucket that DMS creates
 // in your Amazon Web Services account. This action always returns the latest
 // results. For more information about DMS task assessments, see Creating a task
-// assessment report
-// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html)
+// assessment report (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html)
 // in the Database Migration Service User Guide.
 func (c *Client) DescribeReplicationTaskAssessmentResults(ctx context.Context, params *DescribeReplicationTaskAssessmentResultsInput, optFns ...func(*Options)) (*DescribeReplicationTaskAssessmentResultsOutput, error) {
 	if params == nil {
@@ -37,18 +36,18 @@ type DescribeReplicationTaskAssessmentResultsInput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the task. When
 	// this input parameter is specified, the API returns only one result and ignore
-	// the values of the MaxRecords and Marker parameters.
+	// the values of the MaxRecords  and Marker  parameters.
 	ReplicationTaskArn *string
 
 	noSmithyDocumentSerde
@@ -61,7 +60,7 @@ type DescribeReplicationTaskAssessmentResultsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
+	// value specified by MaxRecords .
 	Marker *string
 
 	// The task assessment report.
@@ -144,14 +143,14 @@ var _ DescribeReplicationTaskAssessmentResultsAPIClient = (*Client)(nil)
 // DescribeReplicationTaskAssessmentResultsPaginatorOptions is the paginator
 // options for DescribeReplicationTaskAssessmentResults
 type DescribeReplicationTaskAssessmentResultsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

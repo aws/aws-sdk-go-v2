@@ -13,8 +13,8 @@ import (
 
 // Creates a pipeline. A pipeline consumes messages from a channel and allows you
 // to process the messages before storing them in a data store. You must specify
-// both a channel and a datastore activity and, optionally, as many as 23
-// additional activities in the pipelineActivities array.
+// both a channel  and a datastore activity and, optionally, as many as 23
+// additional activities in the pipelineActivities  array.
 func (c *Client) CreatePipeline(ctx context.Context, params *CreatePipelineInput, optFns ...func(*Options)) (*CreatePipelineOutput, error) {
 	if params == nil {
 		params = &CreatePipelineInput{}
@@ -36,10 +36,10 @@ type CreatePipelineInput struct {
 	// messages, such as removing, renaming or adding message attributes; filtering
 	// messages based on attribute values; invoking your Lambda unctions on messages
 	// for advanced processing; or performing mathematical transformations to normalize
-	// device data. The list can be 2-25 PipelineActivity objects and must contain both
-	// a channel and a datastore activity. Each entry in the list must contain only one
-	// activity. For example: pipelineActivities = [ { "channel": { ... } }, {
-	// "lambda": { ... } }, ... ]
+	// device data. The list can be 2-25 PipelineActivity objects and must contain
+	// both a channel  and a datastore activity. Each entry in the list must contain
+	// only one activity. For example: pipelineActivities = [ { "channel": { ... } },
+	// { "lambda": { ... } }, ... ]
 	//
 	// This member is required.
 	PipelineActivities []types.PipelineActivity

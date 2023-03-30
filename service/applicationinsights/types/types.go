@@ -27,8 +27,8 @@ type ApplicationComponent struct {
 	// The operating system of the component.
 	OsType OsType
 
-	// The resource type. Supported resource types include EC2 instances, Auto Scaling
-	// group, Classic ELB, Application ELB, and SQS Queue.
+	// The resource type. Supported resource types include EC2 instances, Auto
+	// Scaling group, Classic ELB, Application ELB, and SQS Queue.
 	ResourceType *string
 
 	// The stack tier of the application component.
@@ -44,7 +44,7 @@ type ApplicationInfo struct {
 	AutoConfigEnabled *bool
 
 	// Indicates whether Application Insights can listen to CloudWatch events for the
-	// application resources, such as instance terminated, failed deployment, and
+	// application resources, such as instance terminated , failed deployment, and
 	// others.
 	CWEMonitorEnabled *bool
 
@@ -58,16 +58,14 @@ type ApplicationInfo struct {
 	// detected by Application Insights for an application.
 	OpsCenterEnabled *bool
 
-	// The SNS topic provided to Application Insights that is associated to the created
-	// opsItems to receive SNS notifications for opsItem updates.
+	// The SNS topic provided to Application Insights that is associated to the
+	// created opsItems to receive SNS notifications for opsItem updates.
 	OpsItemSNSTopicArn *string
 
 	// The issues on the user side that block Application Insights from successfully
 	// monitoring an application. Example remarks include:
-	// - “Configuring application,
-	// detected 1 Errors, 3 Warnings”
-	// - “Configuring application, detected 1
-	// Unconfigured Components”
+	//     - “Configuring application, detected 1 Errors, 3 Warnings”
+	//     - “Configuring application, detected 1 Unconfigured Components”
 	Remarks *string
 
 	// The name of the resource group used for the application.
@@ -85,8 +83,8 @@ type ConfigurationEvent struct {
 	// The name of the resource Application Insights attempted to configure.
 	EventResourceName *string
 
-	// The resource type that Application Insights attempted to configure, for example,
-	// CLOUDWATCH_ALARM.
+	// The resource type that Application Insights attempted to configure, for
+	// example, CLOUDWATCH_ALARM.
 	EventResourceType ConfigurationEventResourceType
 
 	// The status of the configuration update event. Possible values include INFO,
@@ -102,11 +100,11 @@ type ConfigurationEvent struct {
 	noSmithyDocumentSerde
 }
 
-// An object that defines the log patterns that belongs to a LogPatternSet.
+// An object that defines the log patterns that belongs to a LogPatternSet .
 type LogPattern struct {
 
-	// A regular expression that defines the log pattern. A log pattern can contain as
-	// many as 50 characters, and it cannot be empty. The pattern must be DFA
+	// A regular expression that defines the log pattern. A log pattern can contain
+	// as many as 50 characters, and it cannot be empty. The pattern must be DFA
 	// compatible. Patterns that utilize forward lookahead or backreference
 	// constructions are not supported.
 	Pattern *string
@@ -121,14 +119,15 @@ type LogPattern struct {
 	// digits, or one of the following symbols: period, dash, underscore.
 	PatternSetName *string
 
-	// Rank of the log pattern. Must be a value between 1 and 1,000,000. The patterns
-	// are sorted by rank, so we recommend that you set your highest priority patterns
-	// with the lowest rank. A pattern of rank 1 will be the first to get matched to a
-	// log line. A pattern of rank 1,000,000 will be last to get matched. When you
-	// configure custom log patterns from the console, a Low severity pattern
-	// translates to a 750,000 rank. A Medium severity pattern translates to a 500,000
-	// rank. And a High severity pattern translates to a 250,000 rank. Rank values less
-	// than 1 or greater than 1,000,000 are reserved for AWS-provided patterns.
+	// Rank of the log pattern. Must be a value between 1  and 1,000,000. The
+	// patterns are sorted by rank, so we recommend that you set your highest priority
+	// patterns with the lowest rank. A pattern of rank 1 will be the first to get
+	// matched to a log line. A pattern of rank 1,000,000 will be last to get
+	// matched. When you configure custom log patterns from the console, a Low
+	// severity pattern translates to a 750,000  rank. A Medium severity pattern
+	// translates to a 500,000  rank. And a High  severity pattern translates to a
+	// 250,000 rank. Rank values less than 1  or greater than 1,000,000 are reserved
+	// for AWS-provided patterns.
 	Rank int32
 
 	noSmithyDocumentSerde
@@ -138,7 +137,7 @@ type LogPattern struct {
 type Observation struct {
 
 	// The detail type of the CloudWatch Event-based observation, for example, EC2
-	// Instance State-change Notification.
+	// Instance State-change Notification .
 	CloudWatchEventDetailType *string
 
 	// The ID of the CloudWatch Event-based observation related to the detected
@@ -161,23 +160,23 @@ type Observation struct {
 	// The instance group to which the CodeDeploy instance belongs.
 	CodeDeployInstanceGroupId *string
 
-	// The status of the CodeDeploy deployment, for example SUCCESS or  FAILURE.
+	// The status of the CodeDeploy deployment, for example SUCCESS  or  FAILURE .
 	CodeDeployState *string
 
 	// The cause of an EBS CloudWatch event.
 	EbsCause *string
 
-	// The type of EBS CloudWatch event, such as createVolume, deleteVolume or
-	// attachVolume.
+	// The type of EBS CloudWatch event, such as createVolume , deleteVolume  or
+	// attachVolume .
 	EbsEvent *string
 
 	// The request ID of an EBS CloudWatch event.
 	EbsRequestId *string
 
-	// The result of an EBS CloudWatch event, such as failed or succeeded.
+	// The result of an EBS CloudWatch event, such as failed  or succeeded .
 	EbsResult *string
 
-	// The state of the instance, such as STOPPING or TERMINATING.
+	// The state of the instance, such as STOPPING  or TERMINATING .
 	Ec2State *string
 
 	// The time when the observation ended, in epoch seconds.
@@ -186,14 +185,15 @@ type Observation struct {
 	// The Amazon Resource Name (ARN) of the AWS Health Event-based observation.
 	HealthEventArn *string
 
-	// The description of the AWS Health event provided by the service, such as Amazon
-	// EC2.
+	// The description of the AWS Health event provided by the service, such as
+	// Amazon EC2.
 	HealthEventDescription *string
 
-	// The category of the AWS Health event, such as issue.
+	// The category of the AWS Health event, such as issue .
 	HealthEventTypeCategory *string
 
-	// The type of the AWS Health event, for example, AWS_EC2_POWER_CONNECTIVITY_ISSUE.
+	// The type of the AWS Health event, for example, AWS_EC2_POWER_CONNECTIVITY_ISSUE
+	// .
 	HealthEventTypeCode *string
 
 	// The service to which the AWS Health Event belongs, such as EC2.
@@ -242,7 +242,8 @@ type Observation struct {
 	// The Amazon Resource Name (ARN) of the step function-based observation.
 	StatesArn *string
 
-	// The Amazon Resource Name (ARN) of the step function execution-based observation.
+	// The Amazon Resource Name (ARN) of the step function execution-based
+	// observation.
 	StatesExecutionArn *string
 
 	// The input to the step function-based observation.
@@ -302,8 +303,8 @@ type Problem struct {
 	// The last time that the problem reoccurred after its last resolution.
 	LastRecurrenceTime *time.Time
 
-	// The number of times that the same problem reoccurred after the first time it was
-	// resolved.
+	// The number of times that the same problem reoccurred after the first time it
+	// was resolved.
 	RecurringCount *int64
 
 	// The name of the resource group affected by the problem.
@@ -333,35 +334,31 @@ type RelatedObservations struct {
 	noSmithyDocumentSerde
 }
 
-// An object that defines the tags associated with an application. A tag is a label
-// that you optionally define and associate with an application. Tags can help you
-// categorize and manage resources in different ways, such as by purpose, owner,
-// environment, or other criteria. Each tag consists of a required tag key and an
-// associated tag value, both of which you define. A tag key is a general label
-// that acts as a category for a more specific tag value. A tag value acts as a
-// descriptor within a tag key. A tag key can contain as many as 128 characters. A
-// tag value can contain as many as 256 characters. The characters can be Unicode
+// An object that defines the tags associated with an application. A tag is a
+// label that you optionally define and associate with an application. Tags can
+// help you categorize and manage resources in different ways, such as by purpose,
+// owner, environment, or other criteria. Each tag consists of a required tag key
+// and an associated tag value, both of which you define. A tag key is a general
+// label that acts as a category for a more specific tag value. A tag value acts as
+// a descriptor within a tag key. A tag key can contain as many as 128 characters.
+// A tag value can contain as many as 256 characters. The characters can be Unicode
 // letters, digits, white space, or one of the following symbols: _ . : / = + -.
 // The following additional restrictions apply to tags:
-// - Tag keys and values are
-// case sensitive.
-// - For each associated resource, each tag key must be unique and
-// it can have only one value.
-// - The aws: prefix is reserved for use by AWS; you
-// can’t use it in any tag keys or values that you define. In addition, you can't
-// edit or remove tag keys or values that use this prefix.
+//   - Tag keys and values are case sensitive.
+//   - For each associated resource, each tag key must be unique and it can have only one value.
+//   - The aws: prefix is reserved for use by AWS; you can’t use it in any tag keys or values that you define. In addition, you can't edit or remove tag keys or values that use this prefix.
 type Tag struct {
 
-	// One part of a key-value pair that defines a tag. The maximum length of a tag key
-	// is 128 characters. The minimum length is 1 character.
+	// One part of a key-value pair that defines a tag. The maximum length of a tag
+	// key is 128 characters. The minimum length is 1 character.
 	//
 	// This member is required.
 	Key *string
 
-	// The optional part of a key-value pair that defines a tag. The maximum length of
-	// a tag value is 256 characters. The minimum length is 0 characters. If you don't
-	// want an application to have a specific tag value, don't specify a value for this
-	// parameter.
+	// The optional part of a key-value pair that defines a tag. The maximum length
+	// of a tag value is 256 characters. The minimum length is 0 characters. If you
+	// don't want an application to have a specific tag value, don't specify a value
+	// for this parameter.
 	//
 	// This member is required.
 	Value *string

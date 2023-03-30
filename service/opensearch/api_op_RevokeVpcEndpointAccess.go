@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Revokes access to an Amazon OpenSearch Service domain that was provided through
-// an interface VPC endpoint.
+// Revokes access to an Amazon OpenSearch Service domain that was provided
+// through an interface VPC endpoint.
 func (c *Client) RevokeVpcEndpointAccess(ctx context.Context, params *RevokeVpcEndpointAccessInput, optFns ...func(*Options)) (*RevokeVpcEndpointAccessOutput, error) {
 	if params == nil {
 		params = &RevokeVpcEndpointAccessInput{}

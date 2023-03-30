@@ -13,8 +13,7 @@ import (
 )
 
 // Gets information about a Device Defender detect custom metric. Requires
-// permission to access the DescribeCustomMetric
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// permission to access the DescribeCustomMetric (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DescribeCustomMetric(ctx context.Context, params *DescribeCustomMetricInput, optFns ...func(*Options)) (*DescribeCustomMetricOutput, error) {
 	if params == nil {
@@ -60,9 +59,9 @@ type DescribeCustomMetricOutput struct {
 	// The name of the custom metric.
 	MetricName *string
 
-	// The type of the custom metric. The type number only takes a single metric value
-	// as an input, but while submitting the metrics value in the DeviceMetrics report,
-	// it must be passed as an array with a single value.
+	// The type of the custom metric. The type number only takes a single metric
+	// value as an input, but while submitting the metrics value in the DeviceMetrics
+	// report, it must be passed as an array with a single value.
 	MetricType types.CustomMetricType
 
 	// Metadata pertaining to the operation's result.

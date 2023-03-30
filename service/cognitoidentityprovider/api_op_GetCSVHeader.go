@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the header information for the comma-separated value (CSV) file to be used
-// as input for the user import job.
+// Gets the header information for the comma-separated value (CSV) file to be
+// used as input for the user import job.
 func (c *Client) GetCSVHeader(ctx context.Context, params *GetCSVHeaderInput, optFns ...func(*Options)) (*GetCSVHeaderOutput, error) {
 	if params == nil {
 		params = &GetCSVHeaderInput{}

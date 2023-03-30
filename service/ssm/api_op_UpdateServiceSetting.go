@@ -17,12 +17,13 @@ import (
 // team might create a default setting of "false". This means the user can't use
 // this feature unless they change the setting to "true" and intentionally opt in
 // for a paid feature. Services map a SettingId object to a setting value. Amazon
-// Web Services services teams define the default value for a SettingId. You can't
-// create a new SettingId, but you can overwrite the default value if you have the
-// ssm:UpdateServiceSetting permission for the setting. Use the GetServiceSetting
-// API operation to view the current value. Or, use the ResetServiceSetting to
-// change the value back to the original value defined by the Amazon Web Services
-// service team. Update the service setting for the account.
+// Web Services services teams define the default value for a SettingId. You
+// can't create a new SettingId, but you can overwrite the default value if you
+// have the ssm:UpdateServiceSetting  permission for the setting. Use the
+// GetServiceSetting API operation to view the current value. Or, use the
+// ResetServiceSettingto change the value back to the original value defined by
+// the Amazon Web Services service team. Update the service setting for the
+// account.
 func (c *Client) UpdateServiceSetting(ctx context.Context, params *UpdateServiceSettingInput, optFns ...func(*Options)) (*UpdateServiceSettingOutput, error) {
 	if params == nil {
 		params = &UpdateServiceSettingInput{}
@@ -42,34 +43,18 @@ func (c *Client) UpdateServiceSetting(ctx context.Context, params *UpdateService
 type UpdateServiceSettingInput struct {
 
 	// The Amazon Resource Name (ARN) of the service setting to update. For example,
-	// arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled.
-	// The setting ID can be one of the following.
-	//
-	// *
-	// /ssm/managed-instance/default-ec2-instance-management-role
-	//
-	// *
-	// /ssm/automation/customer-script-log-destination
-	//
-	// *
-	// /ssm/automation/customer-script-log-group-name
-	//
-	// *
-	// /ssm/documents/console/public-sharing-permission
-	//
-	// *
-	// /ssm/managed-instance/activation-tier
-	//
-	// * /ssm/opsinsights/opscenter
-	//
-	// *
-	// /ssm/parameter-store/default-parameter-tier
-	//
-	// *
-	// /ssm/parameter-store/high-throughput-enabled
-	//
-	// Permissions to update the
-	// /ssm/managed-instance/default-ec2-instance-management-role setting should only
+	// arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled
+	// . The setting ID can be one of the following.
+	//     - /ssm/managed-instance/default-ec2-instance-management-role
+	//     - /ssm/automation/customer-script-log-destination
+	//     - /ssm/automation/customer-script-log-group-name
+	//     - /ssm/documents/console/public-sharing-permission
+	//     - /ssm/managed-instance/activation-tier
+	//     - /ssm/opsinsights/opscenter
+	//     - /ssm/parameter-store/default-parameter-tier
+	//     - /ssm/parameter-store/high-throughput-enabled
+	//  Permissions to update the
+	// /ssm/managed-instance/default-ec2-instance-management-rolesetting should only
 	// be provided to administrators. Implement least privilege access when allowing
 	// individuals to configure or modify the Default Host Management Configuration.
 	//
@@ -78,31 +63,14 @@ type UpdateServiceSettingInput struct {
 
 	// The new value to specify for the service setting. The following list specifies
 	// the available values for each setting.
-	//
-	// *
-	// /ssm/managed-instance/default-ec2-instance-management-role: The name of an IAM
-	// role
-	//
-	// * /ssm/automation/customer-script-log-destination: CloudWatch
-	//
-	// *
-	// /ssm/automation/customer-script-log-group-name: The name of an Amazon CloudWatch
-	// Logs log group
-	//
-	// * /ssm/documents/console/public-sharing-permission: Enable or
-	// Disable
-	//
-	// * /ssm/managed-instance/activation-tier: standard or advanced
-	//
-	// *
-	// /ssm/opsinsights/opscenter: Enabled or Disabled
-	//
-	// *
-	// /ssm/parameter-store/default-parameter-tier: Standard, Advanced,
-	// Intelligent-Tiering
-	//
-	// * /ssm/parameter-store/high-throughput-enabled: true or
-	// false
+	//     - /ssm/managed-instance/default-ec2-instance-management-role: The name of an IAM role
+	//     - /ssm/automation/customer-script-log-destination : CloudWatch
+	//     - /ssm/automation/customer-script-log-group-name : The name of an Amazon CloudWatch Logs log group
+	//     - /ssm/documents/console/public-sharing-permission : Enable or Disable
+	//     - /ssm/managed-instance/activation-tier : standard or advanced
+	//     - /ssm/opsinsights/opscenter : Enabled or Disabled
+	//     - /ssm/parameter-store/default-parameter-tier : Standard , Advanced , Intelligent-Tiering
+	//     - /ssm/parameter-store/high-throughput-enabled : true or false
 	//
 	// This member is required.
 	SettingValue *string

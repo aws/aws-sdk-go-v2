@@ -138,8 +138,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request couldn't be processed because an error occurred with the Amazon SES
-// API v2.
+// The request couldn't be processed because an error occurred with the Amazon
+// SES API v2.
 type InternalServiceErrorException struct {
 	Message *string
 

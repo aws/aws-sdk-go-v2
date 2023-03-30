@@ -11,11 +11,10 @@ import (
 )
 
 // Deletes an account level monthly spend limit override for sending voice
-// messages. Deleting a spend limit override sets the EnforcedLimit equal to the
+// messages. Deleting a spend limit override sets the EnforcedLimit  equal to the
 // MaxLimit, which is controlled by Amazon Web Services. For more information on
-// spending limits (quotas) see Amazon Pinpoint quotas
-// (https://docs.aws.amazon.com/pinpoint/latest/developerguide/quotas.html) in the
-// Amazon Pinpoint Developer Guide.
+// spending limits (quotas) see Amazon Pinpoint quotas (https://docs.aws.amazon.com/pinpoint/latest/developerguide/quotas.html)
+// in the Amazon Pinpoint Developer Guide.
 func (c *Client) DeleteVoiceMessageSpendLimitOverride(ctx context.Context, params *DeleteVoiceMessageSpendLimitOverrideInput, optFns ...func(*Options)) (*DeleteVoiceMessageSpendLimitOverrideOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceMessageSpendLimitOverrideInput{}

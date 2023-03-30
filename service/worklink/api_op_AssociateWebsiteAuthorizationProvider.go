@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a website authorization provider with a specified fleet. This is used
-// to authorize users against associated websites in the company network.
+// Associates a website authorization provider with a specified fleet. This is
+// used to authorize users against associated websites in the company network.
 //
 // Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
 // future version of the SDK.

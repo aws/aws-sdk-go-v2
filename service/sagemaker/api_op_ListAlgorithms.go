@@ -46,15 +46,15 @@ type ListAlgorithmsInput struct {
 	// contains the specified string.
 	NameContains *string
 
-	// If the response to a previous ListAlgorithms request was truncated, the response
-	// includes a NextToken. To retrieve the next set of algorithms, use the token in
-	// the next request.
+	// If the response to a previous ListAlgorithms request was truncated, the
+	// response includes a NextToken. To retrieve the next set of algorithms, use the
+	// token in the next request.
 	NextToken *string
 
-	// The parameter by which to sort the results. The default is CreationTime.
+	// The parameter by which to sort the results. The default is CreationTime .
 	SortBy types.AlgorithmSortBy
 
-	// The sort order for the results. The default is Ascending.
+	// The sort order for the results. The default is Ascending .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -62,13 +62,13 @@ type ListAlgorithmsInput struct {
 
 type ListAlgorithmsOutput struct {
 
-	// >An array of AlgorithmSummary objects, each of which lists an algorithm.
+	// >An array of AlgorithmSummary  objects, each of which lists an algorithm.
 	//
 	// This member is required.
 	AlgorithmSummaryList []types.AlgorithmSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of algorithms, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of algorithms, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -150,8 +150,8 @@ type ListAlgorithmsPaginatorOptions struct {
 	// The maximum number of algorithms to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

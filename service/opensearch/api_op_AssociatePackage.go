@@ -12,8 +12,8 @@ import (
 )
 
 // Associates a package with an Amazon OpenSearch Service domain. For more
-// information, see Custom packages for Amazon OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
+// information, see Custom packages for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html)
+// .
 func (c *Client) AssociatePackage(ctx context.Context, params *AssociatePackageInput, optFns ...func(*Options)) (*AssociatePackageOutput, error) {
 	if params == nil {
 		params = &AssociatePackageInput{}
@@ -29,7 +29,7 @@ func (c *Client) AssociatePackage(ctx context.Context, params *AssociatePackageI
 	return out, nil
 }
 
-// Container for the request parameters to the AssociatePackage operation.
+// Container for the request parameters to the AssociatePackage  operation.
 type AssociatePackageInput struct {
 
 	// Name of the domain to associate the package with.
@@ -46,7 +46,7 @@ type AssociatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for the response returned by the AssociatePackage operation.
+// Container for the response returned by the AssociatePackage  operation.
 type AssociatePackageOutput struct {
 
 	// Information about a package that is associated with a domain.

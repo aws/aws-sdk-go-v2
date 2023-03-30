@@ -14,7 +14,7 @@ import (
 // Updates the description, compatibility setting, or version checkpoint for a
 // schema set. For updating the compatibility setting, the call will not validate
 // compatibility for the entire set of schema versions with the new compatibility
-// setting. If the value for Compatibility is provided, the VersionNumber (a
+// setting. If the value for Compatibility  is provided, the VersionNumber (a
 // checkpoint) is also required. The API will validate the checkpoint version
 // number for consistency. If the value for the VersionNumber (checkpoint) is
 // provided, Compatibility is optional and this can be used to set/reset a
@@ -39,10 +39,8 @@ type UpdateSchemaInput struct {
 
 	// This is a wrapper structure to contain schema identity fields. The structure
 	// contains:
-	// - SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
-	// One of SchemaArn or SchemaName has to be provided.
-	// - SchemaId$SchemaName: The
-	// name of the schema. One of SchemaArn or SchemaName has to be provided.
+	//     - SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. One of SchemaArn or SchemaName has to be provided.
+	//     - SchemaId$SchemaName: The name of the schema. One of SchemaArn or SchemaName has to be provided.
 	//
 	// This member is required.
 	SchemaId *types.SchemaId
@@ -53,7 +51,7 @@ type UpdateSchemaInput struct {
 	// The new description for the schema.
 	Description *string
 
-	// Version number required for check pointing. One of VersionNumber or
+	// Version number required for check pointing. One of VersionNumber  or
 	// Compatibility has to be provided.
 	SchemaVersionNumber *types.SchemaVersionNumber
 

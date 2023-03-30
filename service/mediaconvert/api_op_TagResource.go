@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Add tags to a MediaConvert queue, preset, or job template. For information about
-// tagging, see the User Guide at
+// Add tags to a MediaConvert queue, preset, or job template. For information
+// about tagging, see the User Guide at
 // https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
@@ -30,8 +30,8 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource that you want to tag. To get the
-	// ARN, send a GET request with the resource name.
+	// The Amazon Resource Name (ARN) of the resource that you want to tag. To get
+	// the ARN, send a GET request with the resource name.
 	//
 	// This member is required.
 	Arn *string

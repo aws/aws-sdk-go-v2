@@ -36,7 +36,7 @@ type UpdateHostedZoneCommentInput struct {
 	Id *string
 
 	// The new comment for the hosted zone. If you don't specify a value for Comment,
-	// Amazon Route 53 deletes the existing value of the Comment element, if any.
+	// Amazon Route 53 deletes the existing value of the Comment  element, if any.
 	Comment *string
 
 	noSmithyDocumentSerde

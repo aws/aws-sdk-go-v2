@@ -33,8 +33,7 @@ type DescribeDBLogFilesInput struct {
 
 	// The customer-assigned name of the DB instance that contains the log files you
 	// want to list. Constraints:
-	// - Must match the identifier of an existing
-	// DBInstance.
+	//     - Must match the identifier of an existing DBInstance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
@@ -58,21 +57,21 @@ type DescribeDBLogFilesInput struct {
 	// MaxRecords.
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so you can retrieve the remaining results.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
 }
 
-// The response from a call to DescribeDBLogFiles.
+// The response from a call to DescribeDBLogFiles .
 type DescribeDBLogFilesOutput struct {
 
 	// The DB log files returned.
 	DescribeDBLogFiles []types.DescribeDBLogFilesDetails
 
-	// A pagination token that can be used in a later DescribeDBLogFiles request.
+	// A pagination token that can be used in a later DescribeDBLogFiles  request.
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -155,13 +154,13 @@ var _ DescribeDBLogFilesAPIClient = (*Client)(nil)
 // DescribeDBLogFilesPaginatorOptions is the paginator options for
 // DescribeDBLogFiles
 type DescribeDBLogFilesPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so you can retrieve the remaining results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

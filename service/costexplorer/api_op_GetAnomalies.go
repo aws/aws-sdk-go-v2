@@ -12,8 +12,8 @@ import (
 )
 
 // Retrieves all of the cost anomalies detected on your account during the time
-// period that's specified by the DateInterval object. Anomalies are available for
-// up to 90 days.
+// period that's specified by the DateInterval object. Anomalies are available
+// for up to 90 days.
 func (c *Client) GetAnomalies(ctx context.Context, params *GetAnomaliesInput, optFns ...func(*Options)) (*GetAnomaliesOutput, error) {
 	if params == nil {
 		params = &GetAnomaliesInput{}
@@ -32,7 +32,7 @@ func (c *Client) GetAnomalies(ctx context.Context, params *GetAnomaliesInput, op
 type GetAnomaliesInput struct {
 
 	// Assigns the start and end dates for retrieving cost anomalies. The returned
-	// anomaly object will have an AnomalyEndDate in the specified time range.
+	// anomaly object will have an AnomalyEndDate  in the specified time range.
 	//
 	// This member is required.
 	DateInterval *types.AnomalyDateInterval
@@ -43,13 +43,13 @@ type GetAnomaliesInput struct {
 	// The number of entries a paginated response contains.
 	MaxResults *int32
 
-	// Retrieves all of the cost anomalies detected for a specific cost anomaly monitor
-	// Amazon Resource Name (ARN).
+	// Retrieves all of the cost anomalies detected for a specific cost anomaly
+	// monitor Amazon Resource Name (ARN).
 	MonitorArn *string
 
-	// The token to retrieve the next set of results. Amazon Web Services provides the
-	// token when the response from a previous call has more results than the maximum
-	// page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides
+	// the token when the response from a previous call has more results than the
+	// maximum page size.
 	NextPageToken *string
 
 	// Filters anomaly results by the total impact field on the anomaly object. For
@@ -67,9 +67,9 @@ type GetAnomaliesOutput struct {
 	// This member is required.
 	Anomalies []types.Anomaly
 
-	// The token to retrieve the next set of results. Amazon Web Services provides the
-	// token when the response from a previous call has more results than the maximum
-	// page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides
+	// the token when the response from a previous call has more results than the
+	// maximum page size.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

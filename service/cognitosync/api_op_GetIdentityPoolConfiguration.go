@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the configuration settings of an identity pool.This API can only be called
-// with developer credentials. You cannot call this API with the temporary user
-// credentials provided by Cognito Identity. GetIdentityPoolConfiguration The
+// Gets the configuration settings of an identity pool.This API can only be
+// called with developer credentials. You cannot call this API with the temporary
+// user credentials provided by Cognito Identity. GetIdentityPoolConfiguration The
 // following examples have been edited for readability. POST / HTTP/1.1
 // CONTENT-TYPE: application/json X-AMZN-REQUESTID:
 // b1cfdd4b-f620-4fe4-be0f-02024a1d33da X-AMZ-TARGET:
@@ -48,9 +48,9 @@ func (c *Client) GetIdentityPoolConfiguration(ctx context.Context, params *GetId
 // The input for the GetIdentityPoolConfiguration operation.
 type GetIdentityPoolConfigurationInput struct {
 
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. This is the ID of the pool for which to return a
-	// configuration.
+	// A name-spaced GUID (for example,
+	// us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. This
+	// is the ID of the pool for which to return a configuration.
 	//
 	// This member is required.
 	IdentityPoolId *string
@@ -64,8 +64,8 @@ type GetIdentityPoolConfigurationOutput struct {
 	// Options to apply to this identity pool for Amazon Cognito streams.
 	CognitoStreams *types.CognitoStreams
 
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito.
+	// A name-spaced GUID (for example,
+	// us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
 	IdentityPoolId *string
 
 	// Options to apply to this identity pool for push synchronization.

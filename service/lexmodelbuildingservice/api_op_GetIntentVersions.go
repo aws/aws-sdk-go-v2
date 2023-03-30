@@ -16,9 +16,9 @@ import (
 // operation returns an IntentMetadata object for each version of an intent. For
 // example, if an intent has three numbered versions, the GetIntentVersions
 // operation returns four IntentMetadata objects in the response, one for each
-// numbered version and one for the $LATEST version. The GetIntentVersions
+// numbered version and one for the $LATEST  version. The GetIntentVersions
 // operation always returns at least one version, the $LATEST version. This
-// operation requires permissions for the lex:GetIntentVersions action.
+// operation requires permissions for the lex:GetIntentVersions  action.
 func (c *Client) GetIntentVersions(ctx context.Context, params *GetIntentVersionsInput, optFns ...func(*Options)) (*GetIntentVersionsOutput, error) {
 	if params == nil {
 		params = &GetIntentVersionsInput{}
@@ -41,8 +41,8 @@ type GetIntentVersionsInput struct {
 	// This member is required.
 	Name *string
 
-	// The maximum number of intent versions to return in the response. The default is
-	// 10.
+	// The maximum number of intent versions to return in the response. The default
+	// is 10.
 	MaxResults *int32
 
 	// A pagination token for fetching the next page of intent versions. If the
@@ -56,8 +56,8 @@ type GetIntentVersionsInput struct {
 
 type GetIntentVersionsOutput struct {
 
-	// An array of IntentMetadata objects, one for each numbered version of the intent
-	// plus one for the $LATEST version.
+	// An array of IntentMetadata objects, one for each numbered version of the
+	// intent plus one for the $LATEST  version.
 	Intents []types.IntentMetadata
 
 	// A pagination token for fetching the next page of intent versions. If the
@@ -143,14 +143,15 @@ type GetIntentVersionsAPIClient interface {
 
 var _ GetIntentVersionsAPIClient = (*Client)(nil)
 
-// GetIntentVersionsPaginatorOptions is the paginator options for GetIntentVersions
+// GetIntentVersionsPaginatorOptions is the paginator options for
+// GetIntentVersions
 type GetIntentVersionsPaginatorOptions struct {
-	// The maximum number of intent versions to return in the response. The default is
-	// 10.
+	// The maximum number of intent versions to return in the response. The default
+	// is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

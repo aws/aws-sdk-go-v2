@@ -34,9 +34,9 @@ type ListProjectsInput struct {
 	// Maximum number of records to list in a single response.
 	MaxResults int32
 
-	// Pagination token. Set to null to start listing projects from start. If non-null
-	// pagination token is returned in a result, then pass its value in here in another
-	// request to list more projects.
+	// Pagination token. Set to null to start listing projects from start. If
+	// non-null pagination token is returned in a result, then pass its value in here
+	// in another request to list more projects.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -131,8 +131,8 @@ type ListProjectsPaginatorOptions struct {
 	// Maximum number of records to list in a single response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

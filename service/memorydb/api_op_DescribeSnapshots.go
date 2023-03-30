@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about cluster snapshots. By default, DescribeSnapshots lists
-// all of your snapshots; it can optionally describe a single snapshot, or just the
-// snapshots associated with a particular cluster.
+// Returns information about cluster snapshots. By default, DescribeSnapshots
+// lists all of your snapshots; it can optionally describe a single snapshot, or
+// just the snapshots associated with a particular cluster.
 func (c *Client) DescribeSnapshots(ctx context.Context, params *DescribeSnapshotsInput, optFns ...func(*Options)) (*DescribeSnapshotsOutput, error) {
 	if params == nil {
 		params = &DescribeSnapshotsInput{}
@@ -36,9 +36,9 @@ type DescribeSnapshotsInput struct {
 	// snapshots associated with that specific cluster are described.
 	ClusterName *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxResults value, a token is included in the response
+	// so that the remaining results can be retrieved.
 	MaxResults *int32
 
 	// An optional argument to pass in case the total number of records exceeds the
@@ -52,13 +52,14 @@ type DescribeSnapshotsInput struct {
 	// snapshot description.
 	ShowDetail *bool
 
-	// A user-supplied name of the snapshot. If this parameter is specified, only this
-	// named snapshot is described.
+	// A user-supplied name of the snapshot. If this parameter is specified, only
+	// this named snapshot is described.
 	SnapshotName *string
 
-	// If set to system, the output shows snapshots that were automatically created by
-	// MemoryDB. If set to user the output shows snapshots that were manually created.
-	// If omitted, the output shows both automatically and manually created snapshots.
+	// If set to system, the output shows snapshots that were automatically created
+	// by MemoryDB. If set to user the output shows snapshots that were manually
+	// created. If omitted, the output shows both automatically and manually created
+	// snapshots.
 	Source *string
 
 	noSmithyDocumentSerde
@@ -151,15 +152,16 @@ type DescribeSnapshotsAPIClient interface {
 
 var _ DescribeSnapshotsAPIClient = (*Client)(nil)
 
-// DescribeSnapshotsPaginatorOptions is the paginator options for DescribeSnapshots
+// DescribeSnapshotsPaginatorOptions is the paginator options for
+// DescribeSnapshots
 type DescribeSnapshotsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxResults value, a token is included in the response
+	// so that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -154,9 +154,10 @@ const (
 	LifecyclePolicyPreviewStatusFailed     LifecyclePolicyPreviewStatus = "FAILED"
 )
 
-// Values returns all known values for LifecyclePolicyPreviewStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LifecyclePolicyPreviewStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (LifecyclePolicyPreviewStatus) Values() []LifecyclePolicyPreviewStatus {
 	return []LifecyclePolicyPreviewStatus{
 		"IN_PROGRESS",
@@ -193,8 +194,8 @@ const (
 	RepositoryFilterTypePrefixMatch RepositoryFilterType = "PREFIX_MATCH"
 )
 
-// Values returns all known values for RepositoryFilterType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for RepositoryFilterType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (RepositoryFilterType) Values() []RepositoryFilterType {
 	return []RepositoryFilterType{
@@ -229,8 +230,8 @@ const (
 	ScanningConfigurationFailureCodeRepositoryNotFound ScanningConfigurationFailureCode = "REPOSITORY_NOT_FOUND"
 )
 
-// Values returns all known values for ScanningConfigurationFailureCode. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for ScanningConfigurationFailureCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (ScanningConfigurationFailureCode) Values() []ScanningConfigurationFailureCode {
@@ -246,9 +247,10 @@ const (
 	ScanningRepositoryFilterTypeWildcard ScanningRepositoryFilterType = "WILDCARD"
 )
 
-// Values returns all known values for ScanningRepositoryFilterType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ScanningRepositoryFilterType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ScanningRepositoryFilterType) Values() []ScanningRepositoryFilterType {
 	return []ScanningRepositoryFilterType{
 		"WILDCARD",
@@ -293,9 +295,9 @@ const (
 	ScanTypeEnhanced ScanType = "ENHANCED"
 )
 
-// Values returns all known values for ScanType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ScanType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ScanType) Values() []ScanType {
 	return []ScanType{
 		"BASIC",
@@ -312,9 +314,9 @@ const (
 	TagStatusAny      TagStatus = "ANY"
 )
 
-// Values returns all known values for TagStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for TagStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (TagStatus) Values() []TagStatus {
 	return []TagStatus{
 		"TAGGED",

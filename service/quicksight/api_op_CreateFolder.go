@@ -39,18 +39,18 @@ type CreateFolderInput struct {
 	// This member is required.
 	FolderId *string
 
-	// The type of folder. By default, folderType is SHARED.
+	// The type of folder. By default, folderType  is SHARED .
 	FolderType types.FolderType
 
 	// The name of the folder.
 	Name *string
 
 	// The Amazon Resource Name (ARN) for the parent folder. ParentFolderArn can be
-	// null. An empty parentFolderArn creates a root-level folder.
+	// null. An empty parentFolderArn  creates a root-level folder.
 	ParentFolderArn *string
 
-	// A structure that describes the principals and the resource-level permissions of
-	// a folder. To specify no permissions, omit Permissions.
+	// A structure that describes the principals and the resource-level permissions
+	// of a folder. To specify no permissions, omit Permissions .
 	Permissions []types.ResourcePermission
 
 	// Tags for the folder.

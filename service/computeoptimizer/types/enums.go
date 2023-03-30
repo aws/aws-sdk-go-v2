@@ -10,9 +10,9 @@ const (
 	AutoScalingConfigurationTargetTrackingScalingMemory AutoScalingConfiguration = "TargetTrackingScalingMemory"
 )
 
-// Values returns all known values for AutoScalingConfiguration. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AutoScalingConfiguration. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AutoScalingConfiguration) Values() []AutoScalingConfiguration {
 	return []AutoScalingConfiguration{
 		"TargetTrackingScalingCpu",
@@ -28,8 +28,8 @@ const (
 	CpuVendorArchitectureCurrent  CpuVendorArchitecture = "CURRENT"
 )
 
-// Values returns all known values for CpuVendorArchitecture. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for CpuVendorArchitecture. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (CpuVendorArchitecture) Values() []CpuVendorArchitecture {
 	return []CpuVendorArchitecture{
@@ -46,9 +46,9 @@ const (
 	CurrencyCny Currency = "CNY"
 )
 
-// Values returns all known values for Currency. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Currency. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Currency) Values() []Currency {
 	return []Currency{
 		"USD",
@@ -142,8 +142,8 @@ const (
 	ECSServiceLaunchTypeFargate ECSServiceLaunchType = "Fargate"
 )
 
-// Values returns all known values for ECSServiceLaunchType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ECSServiceLaunchType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ECSServiceLaunchType) Values() []ECSServiceLaunchType {
 	return []ECSServiceLaunchType{
@@ -160,8 +160,8 @@ const (
 	ECSServiceMetricNameMemory ECSServiceMetricName = "Memory"
 )
 
-// Values returns all known values for ECSServiceMetricName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ECSServiceMetricName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ECSServiceMetricName) Values() []ECSServiceMetricName {
 	return []ECSServiceMetricName{
@@ -277,8 +277,8 @@ const (
 	EnrollmentFilterNameStatus EnrollmentFilterName = "Status"
 )
 
-// Values returns all known values for EnrollmentFilterName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for EnrollmentFilterName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (EnrollmentFilterName) Values() []EnrollmentFilterName {
 	return []EnrollmentFilterName{
@@ -528,9 +528,9 @@ const (
 	ExportableInstanceFieldEffectiveRecommendationPreferencesExternalMetricsSource         ExportableInstanceField = "EffectiveRecommendationPreferencesExternalMetricsSource"
 )
 
-// Values returns all known values for ExportableInstanceField. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ExportableInstanceField. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExportableInstanceField) Values() []ExportableInstanceField {
 	return []ExportableInstanceField{
 		"AccountId",
@@ -690,8 +690,8 @@ const (
 	ExportableVolumeFieldRecommendationOptionsEstimatedMonthlySavingsValue          ExportableVolumeField = "RecommendationOptionsEstimatedMonthlySavingsValue"
 )
 
-// Values returns all known values for ExportableVolumeField. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ExportableVolumeField. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ExportableVolumeField) Values() []ExportableVolumeField {
 	return []ExportableVolumeField{
@@ -736,8 +736,8 @@ const (
 	ExternalMetricsSourceInstana   ExternalMetricsSource = "Instana"
 )
 
-// Values returns all known values for ExternalMetricsSource. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ExternalMetricsSource. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ExternalMetricsSource) Values() []ExternalMetricsSource {
 	return []ExternalMetricsSource{
@@ -838,8 +838,8 @@ const (
 	InferredWorkloadTypeKafka           InferredWorkloadType = "Kafka"
 )
 
-// Values returns all known values for InferredWorkloadType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for InferredWorkloadType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (InferredWorkloadType) Values() []InferredWorkloadType {
 	return []InferredWorkloadType{
@@ -948,9 +948,9 @@ const (
 	JobStatusFailed     JobStatus = "Failed"
 )
 
-// Values returns all known values for JobStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"Queued",
@@ -1006,9 +1006,9 @@ const (
 	LambdaFunctionMetricNameMemory   LambdaFunctionMetricName = "Memory"
 )
 
-// Values returns all known values for LambdaFunctionMetricName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LambdaFunctionMetricName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LambdaFunctionMetricName) Values() []LambdaFunctionMetricName {
 	return []LambdaFunctionMetricName{
 		"Duration",
@@ -1043,9 +1043,9 @@ const (
 	LambdaFunctionRecommendationFilterNameFindingReasonCode LambdaFunctionRecommendationFilterName = "FindingReasonCode"
 )
 
-// Values returns all known values for LambdaFunctionRecommendationFilterName. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for LambdaFunctionRecommendationFilterName.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (LambdaFunctionRecommendationFilterName) Values() []LambdaFunctionRecommendationFilterName {
 	return []LambdaFunctionRecommendationFilterName{
@@ -1215,9 +1215,10 @@ const (
 	RecommendationPreferenceNameExternalMetricsPreference     RecommendationPreferenceName = "ExternalMetricsPreference"
 )
 
-// Values returns all known values for RecommendationPreferenceName. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RecommendationPreferenceName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (RecommendationPreferenceName) Values() []RecommendationPreferenceName {
 	return []RecommendationPreferenceName{
 		"EnhancedInfrastructureMetrics",
@@ -1237,9 +1238,9 @@ const (
 	RecommendationSourceTypeEcsService       RecommendationSourceType = "EcsService"
 )
 
-// Values returns all known values for RecommendationSourceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RecommendationSourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationSourceType) Values() []RecommendationSourceType {
 	return []RecommendationSourceType{
 		"Ec2Instance",
@@ -1262,9 +1263,9 @@ const (
 	ResourceTypeEcsService       ResourceType = "EcsService"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"Ec2Instance",
@@ -1285,9 +1286,9 @@ const (
 	ScopeNameResourceArn  ScopeName = "ResourceArn"
 )
 
-// Values returns all known values for ScopeName. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for ScopeName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (ScopeName) Values() []ScopeName {
 	return []ScopeName{
 		"Organization",

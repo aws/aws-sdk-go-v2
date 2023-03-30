@@ -12,8 +12,8 @@ import (
 
 // Creates or modifies tags for a resource. Tags are key/value pairs (metadata)
 // that can be used to manage a resource. For more information, see AWS Tagging
-// Strategies
-// (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/).
+// Strategies (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
+// .
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -36,8 +36,8 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The new or modifying tag(s) for the resource. See AWS IoT 1-Click Service Limits
-	// (https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits)
+	// The new or modifying tag(s) for the resource. See AWS IoT 1-Click Service
+	// Limits (https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits)
 	// for the maximum number of tags allowed per resource.
 	//
 	// This member is required.

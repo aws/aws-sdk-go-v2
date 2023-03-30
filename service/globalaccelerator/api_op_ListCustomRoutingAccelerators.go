@@ -30,8 +30,8 @@ func (c *Client) ListCustomRoutingAccelerators(ctx context.Context, params *List
 
 type ListCustomRoutingAcceleratorsInput struct {
 
-	// The number of custom routing Global Accelerator objects that you want to return
-	// with this call. The default value is 10.
+	// The number of custom routing Global Accelerator objects that you want to
+	// return with this call. The default value is 10.
 	MaxResults *int32
 
 	// The token for the next set of results. You receive this token from a previous
@@ -127,12 +127,12 @@ var _ ListCustomRoutingAcceleratorsAPIClient = (*Client)(nil)
 // ListCustomRoutingAcceleratorsPaginatorOptions is the paginator options for
 // ListCustomRoutingAccelerators
 type ListCustomRoutingAcceleratorsPaginatorOptions struct {
-	// The number of custom routing Global Accelerator objects that you want to return
-	// with this call. The default value is 10.
+	// The number of custom routing Global Accelerator objects that you want to
+	// return with this call. The default value is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

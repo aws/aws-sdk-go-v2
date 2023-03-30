@@ -18,8 +18,7 @@ import (
 // documents whose values in the suggester field start with the specified query
 // string. The beginning of the field must match the query string to be considered
 // a match. For more information about configuring suggesters and retrieving
-// suggestions, see Getting Suggestions
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
+// suggestions, see Getting Suggestions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
 // in the Amazon CloudSearch Developer Guide. The endpoint for submitting Suggest
 // requests is domain-specific. You submit suggest requests to a domain's search
 // endpoint. To get the search endpoint for your domain, use the Amazon CloudSearch
@@ -40,7 +39,7 @@ func (c *Client) Suggest(ctx context.Context, params *SuggestInput, optFns ...fu
 	return out, nil
 }
 
-// Container for the parameters to the Suggest request.
+// Container for the parameters to the Suggest  request.
 type SuggestInput struct {
 
 	// Specifies the string for which you want to get suggestions.
@@ -59,11 +58,11 @@ type SuggestInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a Suggest request.
+// Contains the response to a Suggest  request.
 type SuggestOutput struct {
 
-	// The status of a SuggestRequest. Contains the resource ID (rid) and how long it
-	// took to process the request (timems).
+	// The status of a SuggestRequest . Contains the resource ID ( rid) and how long
+	// it took to process the request ( timems ).
 	Status *types.SuggestStatus
 
 	// Container for the matching search suggestion information.

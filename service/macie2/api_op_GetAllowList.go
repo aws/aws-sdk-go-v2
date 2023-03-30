@@ -30,7 +30,8 @@ func (c *Client) GetAllowList(ctx context.Context, params *GetAllowListInput, op
 
 type GetAllowListInput struct {
 
-	// The unique identifier for the Amazon Macie resource that the request applies to.
+	// The unique identifier for the Amazon Macie resource that the request applies
+	// to.
 	//
 	// This member is required.
 	Id *string
@@ -43,8 +44,8 @@ type GetAllowListOutput struct {
 	// The Amazon Resource Name (ARN) of the allow list.
 	Arn *string
 
-	// The date and time, in UTC and extended ISO 8601 format, when the allow list was
-	// created in Amazon Macie.
+	// The date and time, in UTC and extended ISO 8601 format, when the allow list
+	// was created in Amazon Macie.
 	CreatedAt *time.Time
 
 	// The criteria that specify the text or text pattern to ignore. The criteria can

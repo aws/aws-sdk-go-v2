@@ -32,8 +32,8 @@ func (c *Client) ListRestoreJobs(ctx context.Context, params *ListRestoreJobsInp
 
 type ListRestoreJobsInput struct {
 
-	// The account ID to list the jobs from. Returns only restore jobs associated with
-	// the specified account ID.
+	// The account ID to list the jobs from. Returns only restore jobs associated
+	// with the specified account ID.
 	ByAccountId *string
 
 	// Returns only copy jobs completed after a date expressed in Unix format and
@@ -57,7 +57,7 @@ type ListRestoreJobsInput struct {
 	MaxResults *int32
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return maxResults  number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -68,7 +68,7 @@ type ListRestoreJobsInput struct {
 type ListRestoreJobsOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return maxResults  number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -156,8 +156,8 @@ type ListRestoreJobsPaginatorOptions struct {
 	// The maximum number of items to be returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

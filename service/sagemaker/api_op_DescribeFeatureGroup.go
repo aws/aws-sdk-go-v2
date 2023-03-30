@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Use this operation to describe a FeatureGroup. The response includes information
-// on the creation time, FeatureGroup name, the unique identifier for each
-// FeatureGroup, and more.
+// Use this operation to describe a FeatureGroup. The response includes
+// information on the creation time, FeatureGroup name, the unique identifier for
+// each FeatureGroup , and more.
 func (c *Client) DescribeFeatureGroup(ctx context.Context, params *DescribeFeatureGroupInput, optFns ...func(*Options)) (*DescribeFeatureGroupOutput, error) {
 	if params == nil {
 		params = &DescribeFeatureGroupInput{}
@@ -32,13 +32,13 @@ func (c *Client) DescribeFeatureGroup(ctx context.Context, params *DescribeFeatu
 
 type DescribeFeatureGroupInput struct {
 
-	// The name of the FeatureGroup you want described.
+	// The name of the FeatureGroup  you want described.
 	//
 	// This member is required.
 	FeatureGroupName *string
 
-	// A token to resume pagination of the list of Features (FeatureDefinitions). 2,500
-	// Features are returned by default.
+	// A token to resume pagination of the list of Features  ( FeatureDefinitions).
+	// 2,500 Features  are returned by default.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,41 +46,41 @@ type DescribeFeatureGroupInput struct {
 
 type DescribeFeatureGroupOutput struct {
 
-	// A timestamp indicating when SageMaker created the FeatureGroup.
+	// A timestamp indicating when SageMaker created the FeatureGroup .
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// The name of the feature that stores the EventTime of a Record in a FeatureGroup.
-	// An EventTime is a point in time when a new event occurs that corresponds to the
-	// creation or update of a Record in a FeatureGroup. All Records in the
-	// FeatureGroup have a corresponding EventTime.
+	// The name of the feature that stores the EventTime  of a Record in a
+	// FeatureGroup . An EventTime is a point in time when a new event occurs that
+	// corresponds to the creation or update of a Record  in a FeatureGroup . All
+	// Records in the FeatureGroup  have a corresponding EventTime .
 	//
 	// This member is required.
 	EventTimeFeatureName *string
 
-	// A list of the Features in the FeatureGroup. Each feature is defined by a
-	// FeatureName and FeatureType.
+	// A list of the Features  in the FeatureGroup . Each feature is defined by a
+	// FeatureName and FeatureType .
 	//
 	// This member is required.
 	FeatureDefinitions []types.FeatureDefinition
 
-	// The Amazon Resource Name (ARN) of the FeatureGroup.
+	// The Amazon Resource Name (ARN) of the FeatureGroup .
 	//
 	// This member is required.
 	FeatureGroupArn *string
 
-	// he name of the FeatureGroup.
+	// he name of the FeatureGroup .
 	//
 	// This member is required.
 	FeatureGroupName *string
 
-	// A token to resume pagination of the list of Features (FeatureDefinitions).
+	// A token to resume pagination of the list of Features  ( FeatureDefinitions ).
 	//
 	// This member is required.
 	NextToken *string
 
-	// The name of the Feature used for RecordIdentifier, whose value uniquely
+	// The name of the Feature  used for RecordIdentifier, whose value uniquely
 	// identifies a record stored in the feature store.
 	//
 	// This member is required.
@@ -89,11 +89,10 @@ type DescribeFeatureGroupOutput struct {
 	// A free form description of the feature group.
 	Description *string
 
-	// The reason that the FeatureGroup failed to be replicated in the OfflineStore.
+	// The reason that the FeatureGroup  failed to be replicated in the OfflineStore.
 	// This is failure can occur because:
-	// - The FeatureGroup could not be created in
-	// the OfflineStore.
-	// - The FeatureGroup could not be deleted from the OfflineStore.
+	//     - The FeatureGroup could not be created in the OfflineStore .
+	//     - The FeatureGroup could not be deleted from the OfflineStore .
 	FailureReason *string
 
 	// The status of the feature group.
@@ -107,24 +106,21 @@ type DescribeFeatureGroupOutput struct {
 
 	// The configuration of the offline store. It includes the following
 	// configurations:
-	// - Amazon S3 location of the offline store.
-	// - Configuration of
-	// the Glue data catalog.
-	// - Table format of the offline store.
-	// - Option to disable
-	// the automatic creation of a Glue table for the offline store.
-	// - Encryption
-	// configuration.
+	//     - Amazon S3 location of the offline store.
+	//     - Configuration of the Glue data catalog.
+	//     - Table format of the offline store.
+	//     - Option to disable the automatic creation of a Glue table for the offline store.
+	//     - Encryption configuration.
 	OfflineStoreConfig *types.OfflineStoreConfig
 
-	// The status of the OfflineStore. Notifies you if replicating data into the
-	// OfflineStore has failed. Returns either: Active or Blocked
+	// The status of the OfflineStore . Notifies you if replicating data into the
+	// OfflineStore has failed. Returns either: Active  or Blocked
 	OfflineStoreStatus *types.OfflineStoreStatus
 
-	// The configuration for the OnlineStore.
+	// The configuration for the OnlineStore .
 	OnlineStoreConfig *types.OnlineStoreConfig
 
-	// The size of the OnlineStore in bytes.
+	// The size of the OnlineStore  in bytes.
 	OnlineStoreTotalSizeBytes *int64
 
 	// The Amazon Resource Name (ARN) of the IAM execution role used to persist data

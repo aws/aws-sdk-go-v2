@@ -32,8 +32,8 @@ func (c *Client) GetAccessControlEffect(ctx context.Context, params *GetAccessCo
 
 type GetAccessControlEffectInput struct {
 
-	// The access protocol action. Valid values include ActiveSync, AutoDiscover, EWS,
-	// IMAP, SMTP, WindowsOutlook, and WebMail.
+	// The access protocol action. Valid values include ActiveSync , AutoDiscover ,
+	// EWS , IMAP , SMTP , WindowsOutlook , and WebMail .
 	//
 	// This member is required.
 	Action *string

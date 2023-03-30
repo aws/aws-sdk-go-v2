@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new cache security group. Use a cache security group to control access
-// to one or more clusters. Cache security groups are only used when you are
+// Creates a new cache security group. Use a cache security group to control
+// access to one or more clusters. Cache security groups are only used when you are
 // creating a cluster outside of an Amazon Virtual Private Cloud (Amazon VPC). If
 // you are creating a cluster inside of a VPC, use a cache subnet group instead.
-// For more information, see CreateCacheSubnetGroup
-// (https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html).
+// For more information, see CreateCacheSubnetGroup (https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html)
+// .
 func (c *Client) CreateCacheSecurityGroup(ctx context.Context, params *CreateCacheSecurityGroupInput, optFns ...func(*Options)) (*CreateCacheSecurityGroupOutput, error) {
 	if params == nil {
 		params = &CreateCacheSecurityGroupInput{}
@@ -32,12 +32,12 @@ func (c *Client) CreateCacheSecurityGroup(ctx context.Context, params *CreateCac
 	return out, nil
 }
 
-// Represents the input of a CreateCacheSecurityGroup operation.
+// Represents the input of a CreateCacheSecurityGroup  operation.
 type CreateCacheSecurityGroupInput struct {
 
-	// A name for the cache security group. This value is stored as a lowercase string.
-	// Constraints: Must contain no more than 255 alphanumeric characters. Cannot be
-	// the word "Default". Example: mysecuritygroup
+	// A name for the cache security group. This value is stored as a lowercase
+	// string. Constraints: Must contain no more than 255 alphanumeric characters.
+	// Cannot be the word "Default". Example: mysecuritygroup
 	//
 	// This member is required.
 	CacheSecurityGroupName *string
@@ -57,11 +57,9 @@ type CreateCacheSecurityGroupInput struct {
 type CreateCacheSecurityGroupOutput struct {
 
 	// Represents the output of one of the following operations:
-	// -
-	// AuthorizeCacheSecurityGroupIngress
-	// - CreateCacheSecurityGroup
-	// -
-	// RevokeCacheSecurityGroupIngress
+	//     - AuthorizeCacheSecurityGroupIngress
+	//     - CreateCacheSecurityGroup
+	//     - RevokeCacheSecurityGroupIngress
 	CacheSecurityGroup *types.CacheSecurityGroup
 
 	// Metadata pertaining to the operation's result.

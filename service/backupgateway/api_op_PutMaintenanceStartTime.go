@@ -28,8 +28,8 @@ func (c *Client) PutMaintenanceStartTime(ctx context.Context, params *PutMainten
 
 type PutMaintenanceStartTimeInput struct {
 
-	// The Amazon Resource Name (ARN) for the gateway, used to specify its maintenance
-	// start time.
+	// The Amazon Resource Name (ARN) for the gateway, used to specify its
+	// maintenance start time.
 	//
 	// This member is required.
 	GatewayArn *string
@@ -45,7 +45,7 @@ type PutMaintenanceStartTimeInput struct {
 	MinuteOfHour *int32
 
 	// The day of the month start maintenance on a gateway. Valid values range from
-	// Sunday to Saturday.
+	// Sunday to Saturday .
 	DayOfMonth *int32
 
 	// The day of the week to start maintenance on a gateway.

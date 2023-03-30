@@ -16,36 +16,21 @@ import (
 // resource. This call overwrites existing compliance information on the resource,
 // so you must provide a full list of compliance items each time that you send the
 // request. ComplianceType can be one of the following:
-// - ExecutionId: The
-// execution ID when the patch, association, or custom compliance item was
-// applied.
-// - ExecutionType: Specify patch, association, or Custom:string.
-// -
-// ExecutionTime. The time the patch, association, or custom compliance item was
-// applied to the managed node.
-// - Id: The patch, association, or custom compliance
-// ID.
-// - Title: A title.
-// - Status: The status of the compliance item. For example,
-// approved for patches, or Failed for associations.
-// - Severity: A patch severity.
-// For example, Critical.
-// - DocumentName: An SSM document name. For example,
-// AWS-RunPatchBaseline.
-// - DocumentVersion: An SSM document version number. For
-// example, 4.
-// - Classification: A patch classification. For example, security
-// updates.
-// - PatchBaselineId: A patch baseline ID.
-// - PatchSeverity: A patch
-// severity. For example, Critical.
-// - PatchState: A patch state. For example,
-// InstancesWithFailedPatches.
-// - PatchGroup: The name of a patch group.
-// -
-// InstalledTime: The time the association, patch, or custom compliance item was
-// applied to the resource. Specify the time by using the following format:
-// yyyy-MM-dd'T'HH:mm:ss'Z'
+//   - ExecutionId: The execution ID when the patch, association, or custom compliance item was applied.
+//   - ExecutionType: Specify patch, association, or Custom: string .
+//   - ExecutionTime. The time the patch, association, or custom compliance item was applied to the managed node.
+//   - Id: The patch, association, or custom compliance ID.
+//   - Title: A title.
+//   - Status: The status of the compliance item. For example, approved for patches, or Failed for associations.
+//   - Severity: A patch severity. For example, Critical .
+//   - DocumentName: An SSM document name. For example, AWS-RunPatchBaseline .
+//   - DocumentVersion: An SSM document version number. For example, 4.
+//   - Classification: A patch classification. For example, security updates .
+//   - PatchBaselineId: A patch baseline ID.
+//   - PatchSeverity: A patch severity. For example, Critical .
+//   - PatchState: A patch state. For example, InstancesWithFailedPatches .
+//   - PatchGroup: The name of a patch group.
+//   - InstalledTime: The time the association, patch, or custom compliance item was applied to the resource. Specify the time by using the following format: yyyy-MM-dd'T'HH:mm:ss'Z'
 func (c *Client) PutComplianceItems(ctx context.Context, params *PutComplianceItemsInput, optFns ...func(*Options)) (*PutComplianceItemsOutput, error) {
 	if params == nil {
 		params = &PutComplianceItemsInput{}
@@ -64,7 +49,7 @@ func (c *Client) PutComplianceItems(ctx context.Context, params *PutComplianceIt
 type PutComplianceItemsInput struct {
 
 	// Specify the compliance type. For example, specify Association (for a State
-	// Manager association), Patch, or Custom:string.
+	// Manager association), Patch, or Custom: string .
 	//
 	// This member is required.
 	ComplianceType *string
@@ -77,8 +62,8 @@ type PutComplianceItemsInput struct {
 	ExecutionSummary *types.ComplianceExecutionSummary
 
 	// Information about the compliance as defined by the resource type. For example,
-	// for a patch compliance type, Items includes information about the PatchSeverity,
-	// Classification, and so on.
+	// for a patch compliance type, Items includes information about the
+	// PatchSeverity, Classification, and so on.
 	//
 	// This member is required.
 	Items []types.ComplianceItemEntry
@@ -99,13 +84,13 @@ type PutComplianceItemsInput struct {
 	// request to put compliance information is ignored.
 	ItemContentHash *string
 
-	// The mode for uploading compliance items. You can specify COMPLETE or PARTIAL. In
-	// COMPLETE mode, the system overwrites all existing compliance information for the
-	// resource. You must provide a full list of compliance items each time you send
-	// the request. In PARTIAL mode, the system overwrites compliance information for a
-	// specific association. The association must be configured with SyncCompliance set
-	// to MANUAL. By default, all requests use COMPLETE mode. This attribute is only
-	// valid for association compliance.
+	// The mode for uploading compliance items. You can specify COMPLETE  or PARTIAL.
+	// In COMPLETE mode, the system overwrites all existing compliance information
+	// for the resource. You must provide a full list of compliance items each time you
+	// send the request. In PARTIAL mode, the system overwrites compliance
+	// information for a specific association. The association must be configured with
+	// SyncCompliance set to MANUAL . By default, all requests use COMPLETE mode.
+	// This attribute is only valid for association compliance.
 	UploadType types.ComplianceUploadType
 
 	noSmithyDocumentSerde

@@ -37,7 +37,7 @@ type UpdateInsightInput struct {
 	// The updated filters that define this insight.
 	Filters *types.AwsSecurityFindingFilters
 
-	// The updated GroupBy attribute that defines this insight.
+	// The updated GroupBy  attribute that defines this insight.
 	GroupByAttribute *string
 
 	// The updated name for the insight.

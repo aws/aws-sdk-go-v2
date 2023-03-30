@@ -15,8 +15,7 @@ import (
 // expands an Amazon CloudSearch domain to an additional Availability Zone in the
 // same Region to increase fault tolerance in the event of a service disruption.
 // Changes to the Multi-AZ option can take about half an hour to become active. For
-// more information, see Configuring Availability Options
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html)
+// more information, see Configuring Availability Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) UpdateAvailabilityOptions(ctx context.Context, params *UpdateAvailabilityOptionsInput, optFns ...func(*Options)) (*UpdateAvailabilityOptionsOutput, error) {
 	if params == nil {
@@ -49,7 +48,7 @@ type UpdateAvailabilityOptionsInput struct {
 	// You expand an existing search domain to a second Availability Zone by setting
 	// the Multi-AZ option to true. Similarly, you can turn off the Multi-AZ option to
 	// downgrade the domain to a single Availability Zone by setting the Multi-AZ
-	// option to false.
+	// option to false .
 	//
 	// This member is required.
 	MultiAZ *bool
@@ -61,8 +60,8 @@ type UpdateAvailabilityOptionsInput struct {
 // domain's availability options.
 type UpdateAvailabilityOptionsOutput struct {
 
-	// The newly-configured availability options. Indicates whether Multi-AZ is enabled
-	// for the domain.
+	// The newly-configured availability options. Indicates whether Multi-AZ is
+	// enabled for the domain.
 	AvailabilityOptions *types.AvailabilityOptionsStatus
 
 	// Metadata pertaining to the operation's result.

@@ -35,7 +35,7 @@ type DeregisterWirelessDeviceInput struct {
 	Identifier *string
 
 	// The type of wireless device to deregister from AWS IoT Wireless, which can be
-	// LoRaWAN or Sidewalk.
+	// LoRaWAN or Sidewalk .
 	WirelessDeviceType types.WirelessDeviceType
 
 	noSmithyDocumentSerde

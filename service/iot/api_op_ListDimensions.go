@@ -12,8 +12,7 @@ import (
 )
 
 // List the set of dimensions that are defined for your Amazon Web Services
-// accounts. Requires permission to access the ListDimensions
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// accounts. Requires permission to access the ListDimensions (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListDimensions(ctx context.Context, params *ListDimensionsInput, optFns ...func(*Options)) (*ListDimensionsOutput, error) {
 	if params == nil {
@@ -130,8 +129,8 @@ type ListDimensionsPaginatorOptions struct {
 	// The maximum number of results to retrieve at one time.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

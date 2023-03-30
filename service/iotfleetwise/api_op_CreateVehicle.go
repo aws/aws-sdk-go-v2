@@ -16,8 +16,7 @@ import (
 // inherited from the vehicle model. If you have an existing Amazon Web Services
 // IoT Thing, you can use Amazon Web Services IoT FleetWise to create a vehicle and
 // collect data from your thing. For more information, see Create a vehicle (AWS
-// CLI)
-// (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/create-vehicle-cli.html)
+// CLI) (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/create-vehicle-cli.html)
 // in the Amazon Web Services IoT FleetWise Developer Guide.
 func (c *Client) CreateVehicle(ctx context.Context, params *CreateVehicleInput, optFns ...func(*Options)) (*CreateVehicleOutput, error) {
 	if params == nil {
@@ -51,8 +50,9 @@ type CreateVehicleInput struct {
 	// This member is required.
 	VehicleName *string
 
-	// An option to create a new Amazon Web Services IoT thing when creating a vehicle,
-	// or to validate an existing Amazon Web Services IoT thing as a vehicle. Default:
+	// An option to create a new Amazon Web Services IoT thing when creating a
+	// vehicle, or to validate an existing Amazon Web Services IoT thing as a vehicle.
+	// Default:
 	AssociationBehavior types.VehicleAssociationBehavior
 
 	// Static information about a vehicle in a key-value pair. For example:

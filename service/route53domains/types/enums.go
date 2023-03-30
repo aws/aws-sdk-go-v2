@@ -13,9 +13,9 @@ const (
 	ContactTypeReseller    ContactType = "RESELLER"
 )
 
-// Values returns all known values for ContactType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ContactType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ContactType) Values() []ContactType {
 	return []ContactType{
 		"PERSON",
@@ -283,9 +283,9 @@ const (
 	CountryCodeZw CountryCode = "ZW"
 )
 
-// Values returns all known values for CountryCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for CountryCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (CountryCode) Values() []CountryCode {
 	return []CountryCode{
 		"AC",
@@ -656,9 +656,9 @@ const (
 	ListDomainsAttributeNameExpiry     ListDomainsAttributeName = "Expiry"
 )
 
-// Values returns all known values for ListDomainsAttributeName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ListDomainsAttributeName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ListDomainsAttributeName) Values() []ListDomainsAttributeName {
 	return []ListDomainsAttributeName{
 		"DomainName",
@@ -766,9 +766,9 @@ const (
 	OperatorBeginsWith Operator = "BEGINS_WITH"
 )
 
-// Values returns all known values for Operator. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for Operator. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (Operator) Values() []Operator {
 	return []Operator{
 		"LE",
@@ -805,9 +805,9 @@ const (
 	SortOrderDesc SortOrder = "DESC"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASC",
@@ -851,9 +851,9 @@ const (
 	TransferablePremiumDomain          Transferable = "PREMIUM_DOMAIN"
 )
 
-// Values returns all known values for Transferable. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Transferable. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (Transferable) Values() []Transferable {
 	return []Transferable{
 		"TRANSFERABLE",

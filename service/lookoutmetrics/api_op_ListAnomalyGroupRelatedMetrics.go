@@ -48,8 +48,8 @@ type ListAnomalyGroupRelatedMetricsInput struct {
 	// the next page of results.
 	NextToken *string
 
-	// Filter for potential causes (CAUSE_OF_INPUT_ANOMALY_GROUP) or downstream effects
-	// (EFFECT_OF_INPUT_ANOMALY_GROUP) of the anomaly group.
+	// Filter for potential causes ( CAUSE_OF_INPUT_ANOMALY_GROUP) or downstream
+	// effects ( EFFECT_OF_INPUT_ANOMALY_GROUP ) of the anomaly group.
 	RelationshipTypeFilter types.RelationshipType
 
 	noSmithyDocumentSerde
@@ -57,8 +57,8 @@ type ListAnomalyGroupRelatedMetricsInput struct {
 
 type ListAnomalyGroupRelatedMetricsOutput struct {
 
-	// Aggregated details about the measures contributing to the anomaly group, and the
-	// measures potentially impacted by the anomaly group.
+	// Aggregated details about the measures contributing to the anomaly group, and
+	// the measures potentially impacted by the anomaly group.
 	InterMetricImpactList []types.InterMetricImpactDetails
 
 	// The pagination token that's included if more results are available.
@@ -147,8 +147,8 @@ type ListAnomalyGroupRelatedMetricsPaginatorOptions struct {
 	// The maximum number of results to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -31,8 +31,8 @@ func (c *Client) StartDataIngestionJob(ctx context.Context, params *StartDataIng
 
 type StartDataIngestionJobInput struct {
 
-	// A unique identifier for the request. If you do not set the client request token,
-	// Amazon Lookout for Equipment generates one.
+	// A unique identifier for the request. If you do not set the client request
+	// token, Amazon Lookout for Equipment generates one.
 	//
 	// This member is required.
 	ClientToken *string
@@ -62,7 +62,7 @@ type StartDataIngestionJobOutput struct {
 	// Indicates the job ID of the data ingestion job.
 	JobId *string
 
-	// Indicates the status of the StartDataIngestionJob operation.
+	// Indicates the status of the StartDataIngestionJob  operation.
 	Status types.IngestionJobStatus
 
 	// Metadata pertaining to the operation's result.

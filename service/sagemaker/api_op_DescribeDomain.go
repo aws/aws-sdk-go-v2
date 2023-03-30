@@ -41,17 +41,15 @@ type DescribeDomainInput struct {
 type DescribeDomainOutput struct {
 
 	// Specifies the VPC used for non-EFS traffic. The default value is
-	// PublicInternetOnly.
-	// - PublicInternetOnly - Non-EFS traffic is through a VPC
-	// managed by Amazon SageMaker, which allows direct internet access
-	// - VpcOnly - All
-	// Studio traffic is through the specified VPC and subnets
+	// PublicInternetOnly .
+	//     - PublicInternetOnly - Non-EFS traffic is through a VPC managed by Amazon SageMaker, which allows direct internet access
+	//     - VpcOnly - All Studio traffic is through the specified VPC and subnets
 	AppNetworkAccessType types.AppNetworkAccessType
 
 	// The entity that creates and manages the required security groups for inter-app
-	// communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType
-	// is VPCOnly and
-	// DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is
+	// communication in VPCOnly  mode. Required when CreateDomain.AppNetworkAccessType
+	// is VPCOnly  and
+	// DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArnis
 	// provided.
 	AppSecurityGroupManagement types.AppSecurityGroupManagement
 
@@ -77,7 +75,7 @@ type DescribeDomainOutput struct {
 	// The domain name.
 	DomainName *string
 
-	// A collection of Domain settings.
+	// A collection of Domain  settings.
 	DomainSettings *types.DomainSettings
 
 	// The failure reason.
@@ -86,20 +84,20 @@ type DescribeDomainOutput struct {
 	// The ID of the Amazon Elastic File System (EFS) managed by this Domain.
 	HomeEfsFileSystemId *string
 
-	// Use KmsKeyId.
+	// Use KmsKeyId .
 	//
 	// Deprecated: This property is deprecated, use KmsKeyId instead.
 	HomeEfsFileSystemKmsKeyId *string
 
-	// The Amazon Web Services KMS customer managed key used to encrypt the EFS volume
-	// attached to the domain.
+	// The Amazon Web Services KMS customer managed key used to encrypt the EFS
+	// volume attached to the domain.
 	KmsKeyId *string
 
 	// The last modified time.
 	LastModifiedTime *time.Time
 
-	// The ID of the security group that authorizes traffic between the RSessionGateway
-	// apps and the RStudioServerPro app.
+	// The ID of the security group that authorizes traffic between the
+	// RSessionGateway apps and the RStudioServerPro  app.
 	SecurityGroupIdForDomainBoundary *string
 
 	// The IAM Identity Center managed application instance ID.

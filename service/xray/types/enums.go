@@ -62,9 +62,9 @@ const (
 	InsightStateClosed InsightState = "CLOSED"
 )
 
-// Values returns all known values for InsightState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InsightState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (InsightState) Values() []InsightState {
 	return []InsightState{
 		"ACTIVE",
@@ -80,8 +80,8 @@ const (
 	SamplingStrategyNameFixedRate   SamplingStrategyName = "FixedRate"
 )
 
-// Values returns all known values for SamplingStrategyName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SamplingStrategyName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SamplingStrategyName) Values() []SamplingStrategyName {
 	return []SamplingStrategyName{

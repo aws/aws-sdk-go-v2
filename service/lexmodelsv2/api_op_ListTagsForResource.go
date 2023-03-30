@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of tags associated with a resource. Only bots, bot aliases, and bot
-// channels can have tags associated with them.
+// Gets a list of tags associated with a resource. Only bots, bot aliases, and
+// bot channels can have tags associated with them.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

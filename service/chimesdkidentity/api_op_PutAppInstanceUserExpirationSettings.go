@@ -33,7 +33,7 @@ func (c *Client) PutAppInstanceUserExpirationSettings(ctx context.Context, param
 
 type PutAppInstanceUserExpirationSettingsInput struct {
 
-	// The ARN of the AppInstanceUser.
+	// The ARN of the AppInstanceUser .
 	//
 	// This member is required.
 	AppInstanceUserArn *string
@@ -47,7 +47,7 @@ type PutAppInstanceUserExpirationSettingsInput struct {
 
 type PutAppInstanceUserExpirationSettingsOutput struct {
 
-	// The ARN of the AppInstanceUser.
+	// The ARN of the AppInstanceUser .
 	AppInstanceUserArn *string
 
 	// Settings that control the interval after which an AppInstanceUser is

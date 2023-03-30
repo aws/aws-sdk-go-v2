@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates or updates a custom terminology, depending on whether one already exists
-// for the given terminology name. Importing a terminology with the same name as an
-// existing one will merge the terminologies based on the chosen merge strategy.
-// The only supported merge strategy is OVERWRITE, where the imported terminology
-// overwrites the existing terminology of the same name. If you import a
-// terminology that overwrites an existing one, the new terminology takes up to 10
-// minutes to fully propagate. After that, translations have access to the new
+// Creates or updates a custom terminology, depending on whether one already
+// exists for the given terminology name. Importing a terminology with the same
+// name as an existing one will merge the terminologies based on the chosen merge
+// strategy. The only supported merge strategy is OVERWRITE, where the imported
+// terminology overwrites the existing terminology of the same name. If you import
+// a terminology that overwrites an existing one, the new terminology takes up to
+// 10 minutes to fully propagate. After that, translations have access to the new
 // terminology.
 func (c *Client) ImportTerminology(ctx context.Context, params *ImportTerminologyInput, optFns ...func(*Options)) (*ImportTerminologyOutput, error) {
 	if params == nil {
@@ -36,9 +36,9 @@ func (c *Client) ImportTerminology(ctx context.Context, params *ImportTerminolog
 
 type ImportTerminologyInput struct {
 
-	// The merge strategy of the custom terminology being imported. Currently, only the
-	// OVERWRITE merge strategy is supported. In this case, the imported terminology
-	// will overwrite an existing terminology of the same name.
+	// The merge strategy of the custom terminology being imported. Currently, only
+	// the OVERWRITE merge strategy is supported. In this case, the imported
+	// terminology will overwrite an existing terminology of the same name.
 	//
 	// This member is required.
 	MergeStrategy types.MergeStrategy
@@ -61,8 +61,8 @@ type ImportTerminologyInput struct {
 
 	// Tags to be associated with this resource. A tag is a key-value pair that adds
 	// metadata to a resource. Each tag key for the resource must be unique. For more
-	// information, see  Tagging your resources
-	// (https://docs.aws.amazon.com/translate/latest/dg/tagging.html).
+	// information, see Tagging your resources (https://docs.aws.amazon.com/translate/latest/dg/tagging.html)
+	// .
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -70,8 +70,8 @@ type ImportTerminologyInput struct {
 
 type ImportTerminologyOutput struct {
 
-	// The Amazon S3 location of a file that provides any errors or warnings that were
-	// produced by your input file. This file was created when Amazon Translate
+	// The Amazon S3 location of a file that provides any errors or warnings that
+	// were produced by your input file. This file was created when Amazon Translate
 	// attempted to create a terminology resource. The location is returned as a
 	// presigned URL to that has a 30 minute expiration.
 	AuxiliaryDataLocation *types.TerminologyDataLocation

@@ -37,7 +37,8 @@ type ListAssociationsInput struct {
 	// A filter that returns only associations created on or after the specified time.
 	CreatedAfter *time.Time
 
-	// A filter that returns only associations created on or before the specified time.
+	// A filter that returns only associations created on or before the specified
+	// time.
 	CreatedBefore *time.Time
 
 	// A filter that returns only associations with the specified destination Amazon
@@ -47,18 +48,18 @@ type ListAssociationsInput struct {
 	// A filter that returns only associations with the specified destination type.
 	DestinationType *string
 
-	// The maximum number of associations to return in the response. The default value
-	// is 10.
+	// The maximum number of associations to return in the response. The default
+	// value is 10.
 	MaxResults *int32
 
 	// If the previous call to ListAssociations didn't return the full set of
 	// associations, the call returns a token for getting the next set of associations.
 	NextToken *string
 
-	// The property used to sort results. The default value is CreationTime.
+	// The property used to sort results. The default value is CreationTime .
 	SortBy types.SortAssociationsBy
 
-	// The sort order. The default value is Descending.
+	// The sort order. The default value is Descending .
 	SortOrder types.SortOrder
 
 	// A filter that returns only associations with the specified source ARN.
@@ -154,12 +155,12 @@ var _ ListAssociationsAPIClient = (*Client)(nil)
 
 // ListAssociationsPaginatorOptions is the paginator options for ListAssociations
 type ListAssociationsPaginatorOptions struct {
-	// The maximum number of associations to return in the response. The default value
-	// is 10.
+	// The maximum number of associations to return in the response. The default
+	// value is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

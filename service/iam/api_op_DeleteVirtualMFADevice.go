@@ -12,7 +12,7 @@ import (
 
 // Deletes a virtual MFA device. You must deactivate a user's virtual MFA device
 // before you can delete it. For information about deactivating MFA devices, see
-// DeactivateMFADevice.
+// DeactivateMFADevice .
 func (c *Client) DeleteVirtualMFADevice(ctx context.Context, params *DeleteVirtualMFADeviceInput, optFns ...func(*Options)) (*DeleteVirtualMFADeviceOutput, error) {
 	if params == nil {
 		params = &DeleteVirtualMFADeviceInput{}

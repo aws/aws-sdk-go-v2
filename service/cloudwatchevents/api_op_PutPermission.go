@@ -19,14 +19,13 @@ import (
 // with your account's event bus as a target. To enable multiple Amazon Web
 // Services accounts to put events to your event bus, run PutPermission once for
 // each of these accounts. Or, if all the accounts are members of the same Amazon
-// Web Services organization, you can run PutPermission once specifying Principal
+// Web Services organization, you can run PutPermission  once specifying Principal
 // as "*" and specifying the Amazon Web Services organization ID in Condition, to
 // grant permissions to all accounts in that organization. If you grant permissions
-// using an organization, then accounts in that organization must specify a RoleArn
-// with proper permissions when they use PutTarget to add your account's event bus
-// as a target. For more information, see Sending and Receiving Events Between
-// Amazon Web Services Accounts
-// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html)
+// using an organization, then accounts in that organization must specify a
+// RoleArn with proper permissions when they use PutTarget to add your account's
+// event bus as a target. For more information, see Sending and Receiving Events
+// Between Amazon Web Services Accounts (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html)
 // in the Amazon EventBridge User Guide. The permission policy on the event bus
 // cannot exceed 10 KB in size.
 func (c *Client) PutPermission(ctx context.Context, params *PutPermissionInput, optFns ...func(*Options)) (*PutPermissionOutput, error) {
@@ -52,21 +51,21 @@ type PutPermissionInput struct {
 	// This parameter enables you to limit the permission to accounts that fulfill a
 	// certain condition, such as being a member of a certain Amazon Web Services
 	// organization. For more information about Amazon Web Services Organizations, see
-	// What Is Amazon Web Services Organizations
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html)
+	// What Is Amazon Web Services Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html)
 	// in the Amazon Web Services Organizations User Guide. If you specify Condition
 	// with an Amazon Web Services organization ID, and specify "*" as the value for
 	// Principal, you grant permission to all the accounts in the named organization.
-	// The Condition is a JSON string which must contain Type, Key, and Value fields.
+	// The Condition  is a JSON string which must contain Type , Key , and Value
+	// fields.
 	Condition *types.Condition
 
 	// The name of the event bus associated with the rule. If you omit this, the
 	// default event bus is used.
 	EventBusName *string
 
-	// A JSON string that describes the permission policy statement. You can include a
-	// Policy parameter in the request instead of using the StatementId, Action,
-	// Principal, or Condition parameters.
+	// A JSON string that describes the permission policy statement. You can include
+	// a Policy  parameter in the request instead of using the StatementId , Action ,
+	// Principal , or Condition  parameters.
 	Policy *string
 
 	// The 12-digit Amazon Web Services account ID that you are permitting to put
@@ -74,14 +73,14 @@ type PutPermissionInput struct {
 	// events to your default event bus. If you specify "*" without specifying
 	// Condition, avoid creating rules that may match undesirable events. To create
 	// more secure rules, make sure that the event pattern for each rule contains an
-	// account field with a specific account ID from which to receive events. Rules
+	// accountfield with a specific account ID from which to receive events. Rules
 	// with an account field do not match any events sent from other accounts.
 	Principal *string
 
-	// An identifier string for the external account that you are granting permissions
-	// to. If you later want to revoke the permission for this external account,
-	// specify this StatementId when you run RemovePermission
-	// (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_RemovePermission.html).
+	// An identifier string for the external account that you are granting
+	// permissions to. If you later want to revoke the permission for this external
+	// account, specify this StatementId  when you run RemovePermission (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_RemovePermission.html)
+	// .
 	StatementId *string
 
 	noSmithyDocumentSerde

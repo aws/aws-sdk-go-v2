@@ -16,15 +16,15 @@ import (
 // require non-default auto scaling settings. You can share an auto scaling
 // configuration across multiple services. Create multiple revisions of a
 // configuration by calling this action multiple times using the same
-// AutoScalingConfigurationName. The call returns incremental
-// AutoScalingConfigurationRevision values. When you create a service and configure
-// an auto scaling configuration resource, the service uses the latest active
-// revision of the auto scaling configuration by default. You can optionally
-// configure the service to use a specific revision. Configure a higher MinSize to
-// increase the spread of your App Runner service over more Availability Zones in
-// the Amazon Web Services Region. The tradeoff is a higher minimal cost. Configure
-// a lower MaxSize to control your cost. The tradeoff is lower responsiveness
-// during peak demand.
+// AutoScalingConfigurationName . The call returns incremental
+// AutoScalingConfigurationRevisionvalues. When you create a service and
+// configure an auto scaling configuration resource, the service uses the latest
+// active revision of the auto scaling configuration by default. You can optionally
+// configure the service to use a specific revision. Configure a higher MinSize
+// to increase the spread of your App Runner service over more Availability Zones
+// in the Amazon Web Services Region. The tradeoff is a higher minimal cost.
+// Configure a lower MaxSize to control your cost. The tradeoff is lower
+// responsiveness during peak demand.
 func (c *Client) CreateAutoScalingConfiguration(ctx context.Context, params *CreateAutoScalingConfigurationInput, optFns ...func(*Options)) (*CreateAutoScalingConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateAutoScalingConfigurationInput{}
@@ -42,8 +42,8 @@ func (c *Client) CreateAutoScalingConfiguration(ctx context.Context, params *Cre
 
 type CreateAutoScalingConfigurationInput struct {
 
-	// A name for the auto scaling configuration. When you use it for the first time in
-	// an Amazon Web Services Region, App Runner creates revision number 1 of this
+	// A name for the auto scaling configuration. When you use it for the first time
+	// in an Amazon Web Services Region, App Runner creates revision number 1 of this
 	// name. When you use the same name in subsequent calls, App Runner creates
 	// incremental revisions of the configuration. The name DefaultConfiguration is
 	// reserved (it's the configuration that App Runner uses if you don't provide a
@@ -55,23 +55,23 @@ type CreateAutoScalingConfigurationInput struct {
 	// This member is required.
 	AutoScalingConfigurationName *string
 
-	// The maximum number of concurrent requests that you want an instance to process.
-	// If the number of concurrent requests exceeds this limit, App Runner scales up
-	// your service. Default: 100
+	// The maximum number of concurrent requests that you want an instance to
+	// process. If the number of concurrent requests exceeds this limit, App Runner
+	// scales up your service. Default: 100
 	MaxConcurrency *int32
 
 	// The maximum number of instances that your service scales up to. At most MaxSize
 	// instances actively serve traffic for your service. Default: 25
 	MaxSize *int32
 
-	// The minimum number of instances that App Runner provisions for your service. The
-	// service always has at least MinSize provisioned instances. Some of them actively
-	// serve traffic. The rest of them (provisioned and inactive instances) are a
-	// cost-effective compute capacity reserve and are ready to be quickly activated.
-	// You pay for memory usage of all the provisioned instances. You pay for CPU usage
-	// of only the active subset. App Runner temporarily doubles the number of
-	// provisioned instances during deployments, to maintain the same capacity for both
-	// old and new code. Default: 1
+	// The minimum number of instances that App Runner provisions for your service.
+	// The service always has at least MinSize provisioned instances. Some of them
+	// actively serve traffic. The rest of them (provisioned and inactive instances)
+	// are a cost-effective compute capacity reserve and are ready to be quickly
+	// activated. You pay for memory usage of all the provisioned instances. You pay
+	// for CPU usage of only the active subset. App Runner temporarily doubles the
+	// number of provisioned instances during deployments, to maintain the same
+	// capacity for both old and new code. Default: 1
 	MinSize *int32
 
 	// A list of metadata items that you can associate with your auto scaling

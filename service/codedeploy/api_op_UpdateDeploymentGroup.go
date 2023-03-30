@@ -27,7 +27,7 @@ func (c *Client) UpdateDeploymentGroup(ctx context.Context, params *UpdateDeploy
 	return out, nil
 }
 
-// Represents the input of an UpdateDeploymentGroup operation.
+// Represents the input of an UpdateDeploymentGroup  operation.
 type UpdateDeploymentGroupInput struct {
 
 	// The application name that corresponds to the deployment group to update.
@@ -40,8 +40,8 @@ type UpdateDeploymentGroupInput struct {
 	// This member is required.
 	CurrentDeploymentGroupName *string
 
-	// Information to add or change about Amazon CloudWatch alarms when the deployment
-	// group is updated.
+	// Information to add or change about Amazon CloudWatch alarms when the
+	// deployment group is updated.
 	AlarmConfiguration *types.AlarmConfiguration
 
 	// Information for an automatic rollback configuration that is added or changed
@@ -50,15 +50,8 @@ type UpdateDeploymentGroupInput struct {
 
 	// The replacement list of Auto Scaling groups to be included in the deployment
 	// group, if you want to change them.
-	// - To keep the Auto Scaling groups, enter
-	// their names or do not specify this parameter.
-	// - To remove Auto Scaling groups,
-	// specify a non-null empty list of Auto Scaling group names to detach all
-	// CodeDeploy-managed Auto Scaling lifecycle hooks. For examples, see Amazon EC2
-	// instances in an Amazon EC2 Auto Scaling group fail to launch and receive the
-	// error "Heartbeat Timeout"
-	// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-auto-scaling.html#troubleshooting-auto-scaling-heartbeat)
-	// in the CodeDeploy User Guide.
+	//     - To keep the Auto Scaling groups, enter their names or do not specify this parameter.
+	//     - To remove Auto Scaling groups, specify a non-null empty list of Auto Scaling group names to detach all CodeDeploy-managed Auto Scaling lifecycle hooks. For examples, see Amazon EC2 instances in an Amazon EC2 Auto Scaling group fail to launch and receive the error "Heartbeat Timeout" (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-auto-scaling.html#troubleshooting-auto-scaling-heartbeat) in the CodeDeploy User Guide.
 	AutoScalingGroups []string
 
 	// Information about blue/green deployment options for a deployment group.
@@ -71,9 +64,9 @@ type UpdateDeploymentGroupInput struct {
 	// want to run and whether to route deployment traffic behind a load balancer.
 	DeploymentStyle *types.DeploymentStyle
 
-	// The replacement set of Amazon EC2 tags on which to filter, if you want to change
-	// them. To keep the existing tags, enter their names. To remove tags, do not enter
-	// any tag names.
+	// The replacement set of Amazon EC2 tags on which to filter, if you want to
+	// change them. To keep the existing tags, enter their names. To remove tags, do
+	// not enter any tag names.
 	Ec2TagFilters []types.EC2TagFilter
 
 	// Information about groups of tags applied to on-premises instances. The
@@ -84,7 +77,7 @@ type UpdateDeploymentGroupInput struct {
 	// The target Amazon ECS services in the deployment group. This applies only to
 	// deployment groups that use the Amazon ECS compute platform. A target Amazon ECS
 	// service is specified as an Amazon ECS cluster and service name pair using the
-	// format :.
+	// format : .
 	EcsServices []types.ECSService
 
 	// Information about the load balancer used in a deployment.
@@ -93,41 +86,40 @@ type UpdateDeploymentGroupInput struct {
 	// The new name of the deployment group, if you want to change it.
 	NewDeploymentGroupName *string
 
-	// The replacement set of on-premises instance tags on which to filter, if you want
-	// to change them. To keep the existing tags, enter their names. To remove tags, do
-	// not enter any tag names.
+	// The replacement set of on-premises instance tags on which to filter, if you
+	// want to change them. To keep the existing tags, enter their names. To remove
+	// tags, do not enter any tag names.
 	OnPremisesInstanceTagFilters []types.TagFilter
 
-	// Information about an on-premises instance tag set. The deployment group includes
-	// only on-premises instances identified by all the tag groups.
+	// Information about an on-premises instance tag set. The deployment group
+	// includes only on-premises instances identified by all the tag groups.
 	OnPremisesTagSet *types.OnPremisesTagSet
 
-	// Indicates what happens when new Amazon EC2 instances are launched mid-deployment
-	// and do not receive the deployed application revision. If this option is set to
-	// UPDATE or is unspecified, CodeDeploy initiates one or more 'auto-update outdated
-	// instances' deployments to apply the deployed application revision to the new
-	// Amazon EC2 instances. If this option is set to IGNORE, CodeDeploy does not
-	// initiate a deployment to update the new Amazon EC2 instances. This may result in
-	// instances having different revisions.
+	// Indicates what happens when new Amazon EC2 instances are launched
+	// mid-deployment and do not receive the deployed application revision. If this
+	// option is set to UPDATE or is unspecified, CodeDeploy initiates one or more
+	// 'auto-update outdated instances' deployments to apply the deployed application
+	// revision to the new Amazon EC2 instances. If this option is set to IGNORE,
+	// CodeDeploy does not initiate a deployment to update the new Amazon EC2
+	// instances. This may result in instances having different revisions.
 	OutdatedInstancesStrategy types.OutdatedInstancesStrategy
 
 	// A replacement ARN for the service role, if you want to change it.
 	ServiceRoleArn *string
 
 	// Information about triggers to change when the deployment group is updated. For
-	// examples, see Edit a Trigger in a CodeDeploy Deployment Group
-	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html)
+	// examples, see Edit a Trigger in a CodeDeploy Deployment Group (https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html)
 	// in the CodeDeploy User Guide.
 	TriggerConfigurations []types.TriggerConfig
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of an UpdateDeploymentGroup operation.
+// Represents the output of an UpdateDeploymentGroup  operation.
 type UpdateDeploymentGroupOutput struct {
 
-	// If the output contains no data, and the corresponding deployment group contained
-	// at least one Auto Scaling group, CodeDeploy successfully removed all
+	// If the output contains no data, and the corresponding deployment group
+	// contained at least one Auto Scaling group, CodeDeploy successfully removed all
 	// corresponding Auto Scaling lifecycle event hooks from the Amazon Web Services
 	// account. If the output contains data, CodeDeploy could not remove some Auto
 	// Scaling lifecycle event hooks from the Amazon Web Services account.

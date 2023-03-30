@@ -33,7 +33,7 @@ func (c *Client) DescribeEventAggregates(ctx context.Context, params *DescribeEv
 
 type DescribeEventAggregatesInput struct {
 
-	// The only currently supported value is eventTypeCategory.
+	// The only currently supported value is eventTypeCategory .
 	//
 	// This member is required.
 	AggregateField types.EventAggregateField
@@ -151,8 +151,8 @@ type DescribeEventAggregatesPaginatorOptions struct {
 	// inclusive.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

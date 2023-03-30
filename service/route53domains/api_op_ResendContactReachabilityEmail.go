@@ -47,9 +47,9 @@ type ResendContactReachabilityEmailOutput struct {
 	// verification email.
 	EmailAddress *string
 
-	// True if the email address for the registrant contact has already been verified,
-	// and false otherwise. If the email address has already been verified, we don't
-	// send another confirmation email.
+	// True if the email address for the registrant contact has already been
+	// verified, and false otherwise. If the email address has already been verified,
+	// we don't send another confirmation email.
 	IsAlreadyVerified *bool
 
 	// Metadata pertaining to the operation's result.

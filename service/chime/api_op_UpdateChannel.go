@@ -13,8 +13,8 @@ import (
 )
 
 // Update a channel's attributes. Restriction: You can't change a channel's
-// privacy. The x-amz-chime-bearer request header is mandatory. Use the
-// AppInstanceUserArn of the user that makes the API call as the value in the
+// privacy. The x-amz-chime-bearer  request header is mandatory. Use the
+// AppInstanceUserArnof the user that makes the API call as the value in the
 // header.
 func (c *Client) UpdateChannel(ctx context.Context, params *UpdateChannelInput, optFns ...func(*Options)) (*UpdateChannelOutput, error) {
 	if params == nil {
@@ -48,7 +48,7 @@ type UpdateChannelInput struct {
 	// This member is required.
 	Name *string
 
-	// The AppInstanceUserArn of the user that makes the API call.
+	// The AppInstanceUserArn  of the user that makes the API call.
 	ChimeBearer *string
 
 	// The metadata for the update request.

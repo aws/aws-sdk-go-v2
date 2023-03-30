@@ -19,8 +19,7 @@ import (
 // are deleting. You should also make sure there is no snapshot in progress. You
 // can use the Amazon Elastic Compute Cloud (Amazon EC2) API to query snapshots on
 // the volume you are deleting and check the snapshot status. For more information,
-// go to DescribeSnapshots
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html)
+// go to DescribeSnapshots (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html)
 // in the Amazon Elastic Compute Cloud API Reference. In the request, you must
 // provide the Amazon Resource Name (ARN) of the storage volume you want to delete.
 func (c *Client) DeleteVolume(ctx context.Context, params *DeleteVolumeInput, optFns ...func(*Options)) (*DeleteVolumeOutput, error) {
@@ -38,7 +37,7 @@ func (c *Client) DeleteVolume(ctx context.Context, params *DeleteVolumeInput, op
 	return out, nil
 }
 
-// A JSON object containing the DeleteVolumeInput$VolumeARN to delete.
+// A JSON object containing the DeleteVolumeInput$VolumeARN  to delete.
 type DeleteVolumeInput struct {
 
 	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to
@@ -54,8 +53,8 @@ type DeleteVolumeInput struct {
 // that was deleted.
 type DeleteVolumeOutput struct {
 
-	// The Amazon Resource Name (ARN) of the storage volume that was deleted. It is the
-	// same ARN you provided in the request.
+	// The Amazon Resource Name (ARN) of the storage volume that was deleted. It is
+	// the same ARN you provided in the request.
 	VolumeARN *string
 
 	// Metadata pertaining to the operation's result.

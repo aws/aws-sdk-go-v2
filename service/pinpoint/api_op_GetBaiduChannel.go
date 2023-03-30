@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the status and settings of the Baidu channel for an
-// application.
+// Retrieves information about the status and settings of the Baidu channel for
+// an application.
 func (c *Client) GetBaiduChannel(ctx context.Context, params *GetBaiduChannelInput, optFns ...func(*Options)) (*GetBaiduChannelOutput, error) {
 	if params == nil {
 		params = &GetBaiduChannelInput{}

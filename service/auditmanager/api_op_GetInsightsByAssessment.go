@@ -39,7 +39,7 @@ type GetInsightsByAssessmentInput struct {
 
 type GetInsightsByAssessmentOutput struct {
 
-	// The assessment analytics data that the GetInsightsByAssessment API returned.
+	// The assessment analytics data that the GetInsightsByAssessment  API returned.
 	Insights *types.InsightsByAssessment
 
 	// Metadata pertaining to the operation's result.

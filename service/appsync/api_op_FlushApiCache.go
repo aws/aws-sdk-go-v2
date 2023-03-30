@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Flushes an ApiCache object.
+// Flushes an ApiCache  object.
 func (c *Client) FlushApiCache(ctx context.Context, params *FlushApiCacheInput, optFns ...func(*Options)) (*FlushApiCacheOutput, error) {
 	if params == nil {
 		params = &FlushApiCacheInput{}
@@ -26,7 +26,7 @@ func (c *Client) FlushApiCache(ctx context.Context, params *FlushApiCacheInput, 
 	return out, nil
 }
 
-// Represents the input of a FlushApiCache operation.
+// Represents the input of a FlushApiCache  operation.
 type FlushApiCacheInput struct {
 
 	// The API ID.
@@ -37,7 +37,7 @@ type FlushApiCacheInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a FlushApiCache operation.
+// Represents the output of a FlushApiCache  operation.
 type FlushApiCacheOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

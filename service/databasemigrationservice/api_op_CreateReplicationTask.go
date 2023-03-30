@@ -30,7 +30,7 @@ func (c *Client) CreateReplicationTask(ctx context.Context, params *CreateReplic
 
 type CreateReplicationTaskInput struct {
 
-	// The migration type. Valid values: full-load | cdc | full-load-and-cdc
+	// The migration type. Valid values: full-load  | cdc  | full-load-and-cdc
 	//
 	// This member is required.
 	MigrationType types.MigrationTypeValue
@@ -41,11 +41,9 @@ type CreateReplicationTaskInput struct {
 	ReplicationInstanceArn *string
 
 	// An identifier for the replication task. Constraints:
-	// - Must contain 1-255
-	// alphanumeric characters or hyphens.
-	// - First character must be a letter.
-	// - Cannot
-	// end with a hyphen or contain two consecutive hyphens.
+	//     - Must contain 1-255 alphanumeric characters or hyphens.
+	//     - First character must be a letter.
+	//     - Cannot end with a hyphen or contain two consecutive hyphens.
 	//
 	// This member is required.
 	ReplicationTaskIdentifier *string
@@ -55,9 +53,8 @@ type CreateReplicationTaskInput struct {
 	// This member is required.
 	SourceEndpointArn *string
 
-	// The table mappings for the task, in JSON format. For more information, see Using
-	// Table Mapping to Specify Task Settings
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html)
+	// The table mappings for the task, in JSON format. For more information, see
+	// Using Table Mapping to Specify Task Settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html)
 	// in the Database Migration Service User Guide.
 	//
 	// This member is required.
@@ -79,8 +76,8 @@ type CreateReplicationTaskInput struct {
 	// should already be created and associated with the source endpoint. You can
 	// verify this by setting the slotName extra connection attribute to the name of
 	// this logical replication slot. For more information, see Extra Connection
-	// Attributes When Using PostgreSQL as a Source for DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib).
+	// Attributes When Using PostgreSQL as a Source for DMS (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib)
+	// .
 	CdcStartPosition *string
 
 	// Indicates the start time for a change data capture (CDC) operation. Use either
@@ -89,15 +86,14 @@ type CreateReplicationTaskInput struct {
 	// --cdc-start-time “2018-03-08T12:12:12”
 	CdcStartTime *time.Time
 
-	// Indicates when you want a change data capture (CDC) operation to stop. The value
-	// can be either server time or commit time. Server time example:
+	// Indicates when you want a change data capture (CDC) operation to stop. The
+	// value can be either server time or commit time. Server time example:
 	// --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example:
 	// --cdc-stop-position “commit_time: 2018-02-09T12:12:12“
 	CdcStopPosition *string
 
 	// Overall settings for the task, in JSON format. For more information, see
-	// Specifying Task Settings for Database Migration Service Tasks
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html)
+	// Specifying Task Settings for Database Migration Service Tasks (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html)
 	// in the Database Migration Service User Guide.
 	ReplicationTaskSettings *string
 
@@ -106,20 +102,19 @@ type CreateReplicationTaskInput struct {
 	// for this parameter can have up to 31 characters. It can contain only ASCII
 	// letters, digits, and hyphen ('-'). Also, it can't end with a hyphen or contain
 	// two consecutive hyphens, and can only begin with a letter, such as
-	// Example-App-ARN1. For example, this value might result in the EndpointArn value
-	// arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1. If you don't specify a
-	// ResourceIdentifier value, DMS generates a default identifier value for the end
-	// of EndpointArn.
+	// Example-App-ARN1 . For example, this value might result in the EndpointArn
+	// value arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1. If you don't
+	// specify a ResourceIdentifier value, DMS generates a default identifier value
+	// for the end of EndpointArn .
 	ResourceIdentifier *string
 
 	// One or more tags to be assigned to the replication task.
 	Tags []types.Tag
 
-	// Supplemental information that the task requires to migrate the data for certain
-	// source and target endpoints. For more information, see Specifying Supplemental
-	// Data for Task Settings
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html) in
-	// the Database Migration Service User Guide.
+	// Supplemental information that the task requires to migrate the data for
+	// certain source and target endpoints. For more information, see Specifying
+	// Supplemental Data for Task Settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html)
+	// in the Database Migration Service User Guide.
 	TaskData *string
 
 	noSmithyDocumentSerde

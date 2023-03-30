@@ -78,9 +78,9 @@ const (
 	DomainStatusFailed            DomainStatus = "FAILED"
 )
 
-// Values returns all known values for DomainStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for DomainStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (DomainStatus) Values() []DomainStatus {
 	return []DomainStatus{
 		"PENDING_VALIDATION",
@@ -107,8 +107,8 @@ const (
 	ExtendedKeyUsageNameCustom                     ExtendedKeyUsageName = "CUSTOM"
 )
 
-// Values returns all known values for ExtendedKeyUsageName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ExtendedKeyUsageName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ExtendedKeyUsageName) Values() []ExtendedKeyUsageName {
 	return []ExtendedKeyUsageName{
@@ -188,9 +188,9 @@ const (
 	KeyAlgorithmEcSecp521r1  KeyAlgorithm = "EC_secp521r1"
 )
 
-// Values returns all known values for KeyAlgorithm. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for KeyAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (KeyAlgorithm) Values() []KeyAlgorithm {
 	return []KeyAlgorithm{
 		"RSA_1024",
@@ -220,9 +220,9 @@ const (
 	KeyUsageNameCustom             KeyUsageName = "CUSTOM"
 )
 
-// Values returns all known values for KeyUsageName. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for KeyUsageName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (KeyUsageName) Values() []KeyUsageName {
 	return []KeyUsageName{
 		"DIGITAL_SIGNATURE",
@@ -353,9 +353,9 @@ const (
 	SortOrderDescending SortOrder = "DESCENDING"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",

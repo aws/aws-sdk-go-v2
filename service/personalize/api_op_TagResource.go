@@ -35,8 +35,8 @@ type TagResourceInput struct {
 	ResourceArn *string
 
 	// Tags to apply to the resource. For more information see Tagging Personalize
-	// resources
-	// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html).
+	// resources (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html)
+	// .
 	//
 	// This member is required.
 	Tags []types.Tag

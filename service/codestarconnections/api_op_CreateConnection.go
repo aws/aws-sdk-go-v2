@@ -32,14 +32,14 @@ func (c *Client) CreateConnection(ctx context.Context, params *CreateConnectionI
 
 type CreateConnectionInput struct {
 
-	// The name of the connection to be created. The name must be unique in the calling
-	// AWS account.
+	// The name of the connection to be created. The name must be unique in the
+	// calling AWS account.
 	//
 	// This member is required.
 	ConnectionName *string
 
-	// The Amazon Resource Name (ARN) of the host associated with the connection to be
-	// created.
+	// The Amazon Resource Name (ARN) of the host associated with the connection to
+	// be created.
 	HostArn *string
 
 	// The name of the external provider where your third-party code repository is
@@ -54,9 +54,9 @@ type CreateConnectionInput struct {
 
 type CreateConnectionOutput struct {
 
-	// The Amazon Resource Name (ARN) of the connection to be created. The ARN is used
-	// as the connection reference when the connection is shared between AWS services.
-	// The ARN is never reused if the connection is deleted.
+	// The Amazon Resource Name (ARN) of the connection to be created. The ARN is
+	// used as the connection reference when the connection is shared between AWS
+	// services. The ARN is never reused if the connection is deleted.
 	//
 	// This member is required.
 	ConnectionArn *string

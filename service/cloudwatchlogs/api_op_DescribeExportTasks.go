@@ -30,16 +30,16 @@ func (c *Client) DescribeExportTasks(ctx context.Context, params *DescribeExport
 
 type DescribeExportTasksInput struct {
 
-	// The maximum number of items returned. If you don't specify a value, the default
-	// is up to 50 items.
+	// The maximum number of items returned. If you don't specify a value, the
+	// default is up to 50 items.
 	Limit *int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
 
-	// The status code of the export task. Specifying a status code filters the results
-	// to zero or more export tasks.
+	// The status code of the export task. Specifying a status code filters the
+	// results to zero or more export tasks.
 	StatusCode types.ExportTaskStatusCode
 
 	// The ID of the export task. Specifying a task ID filters the results to one or
@@ -54,7 +54,8 @@ type DescribeExportTasksOutput struct {
 	// The export tasks.
 	ExportTasks []types.ExportTask
 
-	// The token for the next set of items to return. The token expires after 24 hours.
+	// The token for the next set of items to return. The token expires after 24
+	// hours.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

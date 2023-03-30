@@ -11,14 +11,12 @@
 // Runner connects directly to your container registry or source code repository.
 // It provides an automatic delivery pipeline with fully managed operations, high
 // performance, scalability, and security. For more information about App Runner,
-// see the App Runner Developer Guide
-// (https://docs.aws.amazon.com/apprunner/latest/dg/). For release information, see
-// the App Runner Release Notes
-// (https://docs.aws.amazon.com/apprunner/latest/relnotes/). To install the
-// Software Development Kits (SDKs), Integrated Development Environment (IDE)
-// Toolkits, and command line tools that you can use to access the API, see Tools
-// for Amazon Web Services (http://aws.amazon.com/tools/). Endpoints For a list of
-// Region-specific endpoints that App Runner supports, see App Runner endpoints and
-// quotas (https://docs.aws.amazon.com/general/latest/gr/apprunner.html) in the
-// Amazon Web Services General Reference.
+// see the App Runner Developer Guide (https://docs.aws.amazon.com/apprunner/latest/dg/)
+// . For release information, see the App Runner Release Notes (https://docs.aws.amazon.com/apprunner/latest/relnotes/)
+// . To install the Software Development Kits (SDKs), Integrated Development
+// Environment (IDE) Toolkits, and command line tools that you can use to access
+// the API, see Tools for Amazon Web Services (http://aws.amazon.com/tools/).
+// Endpoints For a list of Region-specific endpoints that App Runner supports, see
+// App Runner endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/apprunner.html)
+// in the Amazon Web Services General Reference.
 package apprunner

@@ -17,13 +17,11 @@ import (
 )
 
 // Retrieves a certificate from your private CA or one that has been shared with
-// you. The ARN of the certificate is returned when you call the IssueCertificate
-// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html)
+// you. The ARN of the certificate is returned when you call the IssueCertificate (https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html)
 // action. You must specify both the ARN of your private CA and the ARN of the
 // issued certificate when calling the GetCertificate action. You can retrieve the
 // certificate if it is in the ISSUED state. You can call the
-// CreateCertificateAuthorityAuditReport
-// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html)
+// CreateCertificateAuthorityAuditReport (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html)
 // action to create a report that contains information about all of the
 // certificates issued and revoked by your private CA.
 func (c *Client) GetCertificate(ctx context.Context, params *GetCertificateInput, optFns ...func(*Options)) (*GetCertificateOutput, error) {
@@ -51,10 +49,10 @@ type GetCertificateInput struct {
 	CertificateArn *string
 
 	// The Amazon Resource Name (ARN) that was returned when you called
-	// CreateCertificateAuthority
-	// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html).
-	// This must be of the form:
+	// CreateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
+	// . This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	//
 	// .
 	//
 	// This member is required.
@@ -65,7 +63,7 @@ type GetCertificateInput struct {
 
 type GetCertificateOutput struct {
 
-	// The base64 PEM-encoded certificate specified by the CertificateArn parameter.
+	// The base64 PEM-encoded certificate specified by the CertificateArn  parameter.
 	Certificate *string
 
 	// The base64 PEM-encoded certificate chain that chains up to the root CA
@@ -162,9 +160,9 @@ type CertificateIssuedWaiterOptions struct {
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, CertificateIssuedWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, CertificateIssuedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -212,10 +210,10 @@ func (w *CertificateIssuedWaiter) Wait(ctx context.Context, params *GetCertifica
 	return err
 }
 
-// WaitForOutput calls the waiter function for CertificateIssued waiter and returns
-// the output of the successful operation. The maxWaitDur is the maximum wait
-// duration the waiter will wait. The maxWaitDur is required and must be greater
-// than zero.
+// WaitForOutput calls the waiter function for CertificateIssued waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
 func (w *CertificateIssuedWaiter) WaitForOutput(ctx context.Context, params *GetCertificateInput, maxWaitDur time.Duration, optFns ...func(*CertificateIssuedWaiterOptions)) (*GetCertificateOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")

@@ -14,9 +14,8 @@ import (
 
 // Returns an estimate of the monthly cost for DevOps Guru to analyze your Amazon
 // Web Services resources. For more information, see Estimate your Amazon DevOps
-// Guru costs
-// (https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html)
-// and Amazon DevOps Guru pricing (http://aws.amazon.com/devops-guru/pricing/).
+// Guru costs (https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html)
+// and Amazon DevOps Guru pricing (http://aws.amazon.com/devops-guru/pricing/) .
 func (c *Client) GetCostEstimation(ctx context.Context, params *GetCostEstimationInput, optFns ...func(*Options)) (*GetCostEstimationOutput, error) {
 	if params == nil {
 		params = &GetCostEstimationInput{}
@@ -51,12 +50,13 @@ type GetCostEstimationOutput struct {
 	// operation. If there are no more pages, this value is null.
 	NextToken *string
 
-	// The collection of the Amazon Web Services resources used to create your monthly
-	// DevOps Guru cost estimate.
+	// The collection of the Amazon Web Services resources used to create your
+	// monthly DevOps Guru cost estimate.
 	ResourceCollection *types.CostEstimationResourceCollectionFilter
 
-	// The status of creating this cost estimate. If it's still in progress, the status
-	// ONGOING is returned. If it is finished, the status COMPLETED is returned.
+	// The status of creating this cost estimate. If it's still in progress, the
+	// status ONGOING  is returned. If it is finished, the status COMPLETED is
+	// returned.
 	Status types.CostEstimationStatus
 
 	// The start and end time of the cost estimation.
@@ -141,10 +141,11 @@ type GetCostEstimationAPIClient interface {
 
 var _ GetCostEstimationAPIClient = (*Client)(nil)
 
-// GetCostEstimationPaginatorOptions is the paginator options for GetCostEstimation
+// GetCostEstimationPaginatorOptions is the paginator options for
+// GetCostEstimation
 type GetCostEstimationPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

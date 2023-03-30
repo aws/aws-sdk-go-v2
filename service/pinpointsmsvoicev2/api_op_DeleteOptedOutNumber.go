@@ -47,7 +47,8 @@ type DeleteOptedOutNumberInput struct {
 
 type DeleteOptedOutNumberOutput struct {
 
-	// This is true if it was the end user who requested their phone number be removed.
+	// This is true if it was the end user who requested their phone number be
+	// removed.
 	EndUserOptedOut bool
 
 	// The OptOutListArn that the phone number was removed from.
@@ -59,8 +60,8 @@ type DeleteOptedOutNumberOutput struct {
 	// The phone number that was removed from the OptOutList.
 	OptedOutNumber *string
 
-	// The time that the number was removed at, in UNIX epoch time
-	// (https://www.epochconverter.com/) format.
+	// The time that the number was removed at, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
 	OptedOutTimestamp *time.Time
 
 	// Metadata pertaining to the operation's result.

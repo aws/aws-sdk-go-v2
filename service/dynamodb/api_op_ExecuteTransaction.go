@@ -16,9 +16,8 @@ import (
 // stored in DynamoDB, using PartiQL. The entire transaction must consist of either
 // read statements or write statements, you cannot mix both in one transaction. The
 // EXISTS function is an exception and can be used to check the condition of
-// specific attributes of the item in a similar manner to ConditionCheck in the
-// TransactWriteItems
-// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis.html#transaction-apis-txwriteitems)
+// specific attributes of the item in a similar manner to ConditionCheck  in the
+// TransactWriteItems (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis.html#transaction-apis-txwriteitems)
 // API.
 func (c *Client) ExecuteTransaction(ctx context.Context, params *ExecuteTransactionInput, optFns ...func(*Options)) (*ExecuteTransactionOutput, error) {
 	if params == nil {
@@ -46,12 +45,11 @@ type ExecuteTransactionInput struct {
 	// statement response.
 	ClientRequestToken *string
 
-	// Determines the level of detail about either provisioned or on-demand throughput
-	// consumption that is returned in the response. For more information, see
-	// TransactGetItems
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TransactGetItems.html)
-	// and TransactWriteItems
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TransactWriteItems.html).
+	// Determines the level of detail about either provisioned or on-demand
+	// throughput consumption that is returned in the response. For more information,
+	// see TransactGetItems (https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TransactGetItems.html)
+	// and TransactWriteItems (https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TransactWriteItems.html)
+	// .
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
 
 	noSmithyDocumentSerde
@@ -59,8 +57,8 @@ type ExecuteTransactionInput struct {
 
 type ExecuteTransactionOutput struct {
 
-	// The capacity units consumed by the entire operation. The values of the list are
-	// ordered according to the ordering of the statements.
+	// The capacity units consumed by the entire operation. The values of the list
+	// are ordered according to the ordering of the statements.
 	ConsumedCapacity []types.ConsumedCapacity
 
 	// The response to a PartiQL transaction.

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets details of the Facet, such as facet name, attributes, Rules, or ObjectType.
-// You can call this on all kinds of schema facets -- published, development, or
-// applied.
+// Gets details of the Facet , such as facet name, attributes, Rule s, or
+// ObjectType. You can call this on all kinds of schema facets -- published,
+// development, or applied.
 func (c *Client) GetFacet(ctx context.Context, params *GetFacetInput, optFns ...func(*Options)) (*GetFacetOutput, error) {
 	if params == nil {
 		params = &GetFacetInput{}
@@ -37,7 +37,7 @@ type GetFacetInput struct {
 	Name *string
 
 	// The Amazon Resource Name (ARN) that is associated with the Facet. For more
-	// information, see arns.
+	// information, see arns .
 	//
 	// This member is required.
 	SchemaArn *string
@@ -47,7 +47,7 @@ type GetFacetInput struct {
 
 type GetFacetOutput struct {
 
-	// The Facet structure that is associated with the facet.
+	// The Facet  structure that is associated with the facet.
 	Facet *types.Facet
 
 	// Metadata pertaining to the operation's result.

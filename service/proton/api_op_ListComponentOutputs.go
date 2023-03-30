@@ -13,9 +13,8 @@ import (
 )
 
 // Get a list of component Infrastructure as Code (IaC) outputs. For more
-// information about components, see Proton components
-// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
-// Proton User Guide.
+// information about components, see Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
+// in the Proton User Guide.
 func (c *Client) ListComponentOutputs(ctx context.Context, params *ListComponentOutputsInput, optFns ...func(*Options)) (*ListComponentOutputsOutput, error) {
 	if params == nil {
 		params = &ListComponentOutputsInput{}
@@ -38,8 +37,8 @@ type ListComponentOutputsInput struct {
 	// This member is required.
 	ComponentName *string
 
-	// A token that indicates the location of the next output in the array of outputs,
-	// after the list of outputs that was previously requested.
+	// A token that indicates the location of the next output in the array of
+	// outputs, after the list of outputs that was previously requested.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,8 +51,8 @@ type ListComponentOutputsOutput struct {
 	// This member is required.
 	Outputs []types.Output
 
-	// A token that indicates the location of the next output in the array of outputs,
-	// after the list of outputs that was previously requested.
+	// A token that indicates the location of the next output in the array of
+	// outputs, after the list of outputs that was previously requested.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -136,8 +135,8 @@ var _ ListComponentOutputsAPIClient = (*Client)(nil)
 // ListComponentOutputsPaginatorOptions is the paginator options for
 // ListComponentOutputs
 type ListComponentOutputsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

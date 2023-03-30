@@ -11,8 +11,8 @@ import (
 )
 
 // Cancels a cluster job. You can only cancel a cluster job while it's in the
-// AwaitingQuorum status. You'll have at least an hour after creating a cluster job
-// to cancel it.
+// AwaitingQuorumstatus. You'll have at least an hour after creating a cluster
+// job to cancel it.
 func (c *Client) CancelCluster(ctx context.Context, params *CancelClusterInput, optFns ...func(*Options)) (*CancelClusterOutput, error) {
 	if params == nil {
 		params = &CancelClusterInput{}
@@ -31,7 +31,7 @@ func (c *Client) CancelCluster(ctx context.Context, params *CancelClusterInput, 
 type CancelClusterInput struct {
 
 	// The 39-character ID for the cluster that you want to cancel, for example
-	// CID123e4567-e89b-12d3-a456-426655440000.
+	// CID123e4567-e89b-12d3-a456-426655440000 .
 	//
 	// This member is required.
 	ClusterId *string

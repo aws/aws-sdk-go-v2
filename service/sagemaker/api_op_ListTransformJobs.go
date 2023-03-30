@@ -44,7 +44,7 @@ type ListTransformJobsInput struct {
 	LastModifiedTimeBefore *time.Time
 
 	// The maximum number of transform jobs to return in the response. The default
-	// value is 10.
+	// value is 10 .
 	MaxResults *int32
 
 	// A string in the transform job name. This filter returns only transform jobs
@@ -56,10 +56,10 @@ type ListTransformJobsInput struct {
 	// the token in the next request.
 	NextToken *string
 
-	// The field to sort results by. The default is CreationTime.
+	// The field to sort results by. The default is CreationTime .
 	SortBy types.SortBy
 
-	// The sort order for results. The default is Descending.
+	// The sort order for results. The default is Descending .
 	SortOrder types.SortOrder
 
 	// A filter that retrieves only transform jobs with a specific status.
@@ -70,7 +70,7 @@ type ListTransformJobsInput struct {
 
 type ListTransformJobsOutput struct {
 
-	// An array of TransformJobSummary objects.
+	// An array of TransformJobSummary  objects.
 	//
 	// This member is required.
 	TransformJobSummaries []types.TransformJobSummary
@@ -153,14 +153,15 @@ type ListTransformJobsAPIClient interface {
 
 var _ ListTransformJobsAPIClient = (*Client)(nil)
 
-// ListTransformJobsPaginatorOptions is the paginator options for ListTransformJobs
+// ListTransformJobsPaginatorOptions is the paginator options for
+// ListTransformJobs
 type ListTransformJobsPaginatorOptions struct {
 	// The maximum number of transform jobs to return in the response. The default
-	// value is 10.
+	// value is 10 .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

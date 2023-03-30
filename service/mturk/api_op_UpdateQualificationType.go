@@ -86,7 +86,7 @@ type UpdateQualificationTypeInput struct {
 
 	// The questions for the Qualification test a Worker must answer correctly to
 	// obtain a Qualification of this type. If this parameter is specified,
-	// TestDurationInSeconds must also be specified. Constraints: Must not be longer
+	// TestDurationInSecondsmust also be specified. Constraints: Must not be longer
 	// than 65535 bytes. Must be a QuestionForm data structure. This parameter cannot
 	// be specified if AutoGranted is true. Constraints: None. If not specified, the
 	// Worker may request the Qualification without answering any questions.

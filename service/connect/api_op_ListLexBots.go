@@ -14,8 +14,8 @@ import (
 
 // This API is in preview release for Amazon Connect and is subject to change.
 // Returns a paginated list of all the Amazon Lex V1 bots currently associated with
-// the instance. To return both Amazon Lex V1 and V2 bots, use the ListBots
-// (https://docs.aws.amazon.com/connect/latest/APIReference/API_ListBots.html) API.
+// the instance. To return both Amazon Lex V1 and V2 bots, use the ListBots (https://docs.aws.amazon.com/connect/latest/APIReference/API_ListBots.html)
+// API.
 func (c *Client) ListLexBots(ctx context.Context, params *ListLexBotsInput, optFns ...func(*Options)) (*ListLexBotsOutput, error) {
 	if params == nil {
 		params = &ListLexBotsInput{}
@@ -33,15 +33,14 @@ func (c *Client) ListLexBots(ctx context.Context, params *ListLexBotsInput, optF
 
 type ListLexBotsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The maximum number of results to return per page. If no value is specified, the
-	// default is 10.
+	// The maximum number of results to return per page. If no value is specified,
+	// the default is 10.
 	MaxResults *int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -53,8 +52,8 @@ type ListLexBotsInput struct {
 
 type ListLexBotsOutput struct {
 
-	// The names and Amazon Web Services Regions of the Amazon Lex bots associated with
-	// the specified instance.
+	// The names and Amazon Web Services Regions of the Amazon Lex bots associated
+	// with the specified instance.
 	LexBots []types.LexBot
 
 	// If there are additional results, this is the token for the next set of results.
@@ -138,12 +137,12 @@ var _ ListLexBotsAPIClient = (*Client)(nil)
 
 // ListLexBotsPaginatorOptions is the paginator options for ListLexBots
 type ListLexBotsPaginatorOptions struct {
-	// The maximum number of results to return per page. If no value is specified, the
-	// default is 10.
+	// The maximum number of results to return per page. If no value is specified,
+	// the default is 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

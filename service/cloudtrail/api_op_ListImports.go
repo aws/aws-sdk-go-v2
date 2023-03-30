@@ -13,7 +13,7 @@ import (
 )
 
 // Returns information on all imports, or a select set of imports by ImportStatus
-// or Destination.
+// or Destination .
 func (c *Client) ListImports(ctx context.Context, params *ListImportsInput, optFns ...func(*Options)) (*ListImportsOutput, error) {
 	if params == nil {
 		params = &ListImportsInput{}
@@ -132,8 +132,8 @@ type ListImportsPaginatorOptions struct {
 	// The maximum number of imports to display on a single page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

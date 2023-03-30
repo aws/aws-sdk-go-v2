@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns complete information about one link. To use this operation, provide the
-// link ARN. To retrieve a list of link ARNs, use ListLinks
-// (https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListLinks.html).
+// Returns complete information about one link. To use this operation, provide
+// the link ARN. To retrieve a list of link ARNs, use ListLinks (https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListLinks.html)
+// .
 func (c *Client) GetLink(ctx context.Context, params *GetLinkInput, optFns ...func(*Options)) (*GetLinkOutput, error) {
 	if params == nil {
 		params = &GetLinkInput{}
@@ -43,15 +43,16 @@ type GetLinkOutput struct {
 	// The ARN of the link.
 	Arn *string
 
-	// The random ID string that Amazon Web Services generated as part of the link ARN.
+	// The random ID string that Amazon Web Services generated as part of the link
+	// ARN.
 	Id *string
 
 	// The label that you assigned to this link, with the variables resolved to their
 	// actual values.
 	Label *string
 
-	// The exact label template that was specified when the link was created, with the
-	// template variables not resolved.
+	// The exact label template that was specified when the link was created, with
+	// the template variables not resolved.
 	LabelTemplate *string
 
 	// The resource types supported by this link.

@@ -13,10 +13,9 @@ import (
 )
 
 // Updates an OpenSearch Serverless security policy. For more information, see
-// Network access for Amazon OpenSearch Serverless
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html)
-// and Encryption at rest for Amazon OpenSearch Serverless
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html).
+// Network access for Amazon OpenSearch Serverless (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html)
+// and Encryption at rest for Amazon OpenSearch Serverless (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html)
+// .
 func (c *Client) UpdateSecurityPolicy(ctx context.Context, params *UpdateSecurityPolicyInput, optFns ...func(*Options)) (*UpdateSecurityPolicyOutput, error) {
 	if params == nil {
 		params = &UpdateSecurityPolicyInput{}

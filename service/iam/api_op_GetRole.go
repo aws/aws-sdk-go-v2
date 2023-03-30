@@ -17,15 +17,14 @@ import (
 	"time"
 )
 
-// Retrieves information about the specified role, including the role's path, GUID,
-// ARN, and the role's trust policy that grants permission to assume the role. For
-// more information about roles, see Working with roles
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html).
-// Policies returned by this operation are URL-encoded compliant with RFC 3986
-// (https://tools.ietf.org/html/rfc3986). You can use a URL decoding method to
-// convert the policy back to plain JSON text. For example, if you use Java, you
-// can use the decode method of the java.net.URLDecoder utility class in the Java
-// SDK. Other languages and SDKs provide similar functionality.
+// Retrieves information about the specified role, including the role's path,
+// GUID, ARN, and the role's trust policy that grants permission to assume the
+// role. For more information about roles, see Working with roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html)
+// . Policies returned by this operation are URL-encoded compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986)
+// . You can use a URL decoding method to convert the policy back to plain JSON
+// text. For example, if you use Java, you can use the decode  method of the
+// java.net.URLDecoderutility class in the Java SDK. Other languages and SDKs
+// provide similar functionality.
 func (c *Client) GetRole(ctx context.Context, params *GetRoleInput, optFns ...func(*Options)) (*GetRoleOutput, error) {
 	if params == nil {
 		params = &GetRoleInput{}
@@ -54,7 +53,7 @@ type GetRoleInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetRole request.
+// Contains the response to a successful GetRole  request.
 type GetRoleOutput struct {
 
 	// A structure containing details about the IAM role.
@@ -151,9 +150,9 @@ type RoleExistsWaiterOptions struct {
 	// must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, RoleExistsWaiter will use default max delay of 120 seconds. Note that
-	// MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, RoleExistsWaiter will use default max delay of 120 seconds. Note
+	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

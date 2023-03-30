@@ -11,16 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Task runners call ReportTaskProgress when assigned a task to acknowledge that it
-// has the task. If the web service does not receive this acknowledgement within 2
-// minutes, it assigns the task in a subsequent PollForTask call. After this
+// Task runners call ReportTaskProgress when assigned a task to acknowledge that
+// it has the task. If the web service does not receive this acknowledgement within
+// 2 minutes, it assigns the task in a subsequent PollForTask call. After this
 // initial acknowledgement, the task runner only needs to report progress every 15
 // minutes to maintain its ownership of the task. You can change this reporting
 // time from 15 minutes by specifying a reportProgressTimeout field in your
 // pipeline. If a task runner does not report its status after 5 minutes, AWS Data
 // Pipeline assumes that the task runner is unable to process the task and
-// reassigns the task in a subsequent response to PollForTask. Task runners should
-// call ReportTaskProgress every 60 seconds. POST / HTTP/1.1 Content-Type:
+// reassigns the task in a subsequent response to PollForTask. Task runners
+// should call ReportTaskProgress every 60 seconds. POST / HTTP/1.1 Content-Type:
 // application/x-amz-json-1.1 X-Amz-Target: DataPipeline.ReportTaskProgress
 // Content-Length: 832 Host: datapipeline.us-east-1.amazonaws.com X-Amz-Date: Mon,
 // 12 Nov 2012 17:49:52 GMT Authorization: AuthParams {"taskId":
@@ -48,7 +48,7 @@ func (c *Client) ReportTaskProgress(ctx context.Context, params *ReportTaskProgr
 type ReportTaskProgressInput struct {
 
 	// The ID of the task assigned to the task runner. This value is provided in the
-	// response for PollForTask.
+	// response for PollForTask .
 	//
 	// This member is required.
 	TaskId *string
@@ -63,8 +63,8 @@ type ReportTaskProgressInput struct {
 // Contains the output of ReportTaskProgress.
 type ReportTaskProgressOutput struct {
 
-	// If true, the calling task runner should cancel processing of the task. The task
-	// runner does not need to call SetTaskStatus for canceled tasks.
+	// If true, the calling task runner should cancel processing of the task. The
+	// task runner does not need to call SetTaskStatus  for canceled tasks.
 	//
 	// This member is required.
 	Canceled bool

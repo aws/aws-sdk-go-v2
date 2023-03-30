@@ -185,9 +185,9 @@ type AutoExportRevisionDestinationEntry struct {
 	Bucket *string
 
 	// A string representing the pattern for generated names of the individual assets
-	// in the revision. For more information about key patterns, see Key patterns when
-	// exporting revisions
-	// (https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns).
+	// in the revision. For more information about key patterns, see Key patterns
+	// when exporting revisions (https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns)
+	// .
 	KeyPattern *string
 
 	noSmithyDocumentSerde
@@ -230,8 +230,8 @@ type CreateS3DataAccessFromS3BucketRequestDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Details about the response of the operation to create an S3 data access from an
-// S3 bucket.
+// Details about the response of the operation to create an S3 data access from
+// an S3 bucket.
 type CreateS3DataAccessFromS3BucketResponseDetails struct {
 
 	// Details about the asset source from an Amazon S3 bucket.
@@ -312,8 +312,8 @@ type DataSetEntry struct {
 	// This member is required.
 	Name *string
 
-	// A property that defines the data set as OWNED by the account (for providers) or
-	// ENTITLED to the account (for subscribers).
+	// A property that defines the data set as OWNED by the account (for providers)
+	// or ENTITLED to the account (for subscribers).
 	//
 	// This member is required.
 	Origin Origin
@@ -323,8 +323,8 @@ type DataSetEntry struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// If the origin of this data set is ENTITLED, includes the details for the product
-	// on AWS Marketplace.
+	// If the origin of this data set is ENTITLED, includes the details for the
+	// product on AWS Marketplace.
 	OriginDetails *OriginDetails
 
 	// The data set ID of the owned data set corresponding to the entitled data set
@@ -535,13 +535,14 @@ type ExportRevisionsToS3ResponseDetails struct {
 // encryption type.
 type ExportServerSideEncryption struct {
 
-	// The type of server side encryption used for encrypting the objects in Amazon S3.
+	// The type of server side encryption used for encrypting the objects in Amazon
+	// S3.
 	//
 	// This member is required.
 	Type ServerSideEncryptionTypes
 
-	// The Amazon Resource Name (ARN) of the AWS KMS key you want to use to encrypt the
-	// Amazon S3 objects. This parameter is required if you choose aws:kms as an
+	// The Amazon Resource Name (ARN) of the AWS KMS key you want to use to encrypt
+	// the Amazon S3 objects. This parameter is required if you choose aws:kms as an
 	// encryption type.
 	KmsKeyArn *string
 
@@ -693,8 +694,8 @@ type ImportAssetFromSignedUrlRequestDetails struct {
 	noSmithyDocumentSerde
 }
 
-// The details in the response for an import request, including the signed URL and
-// other information.
+// The details in the response for an import request, including the signed URL
+// and other information.
 type ImportAssetFromSignedUrlResponseDetails struct {
 
 	// The name for the asset associated with this import job.
@@ -725,7 +726,8 @@ type ImportAssetFromSignedUrlResponseDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Details about the assets imported from an AWS Lake Formation tag policy request.
+// Details about the assets imported from an AWS Lake Formation tag policy
+// request.
 type ImportAssetsFromLakeFormationTagPolicyRequestDetails struct {
 
 	// The identifier for the AWS Glue Data Catalog.
@@ -891,8 +893,8 @@ type JobEntry struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Details of the operation to be performed by the job, such as export destination
-	// details or import source details.
+	// Details of the operation to be performed by the job, such as export
+	// destination details or import source details.
 	//
 	// This member is required.
 	Details *ResponseDetails
@@ -954,14 +956,14 @@ type JobError struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon Resource Name (ARN) of the AWS KMS key used to encrypt the shared S3
-// objects.
+// The Amazon Resource Name (ARN) of the AWS KMS key used to encrypt the shared
+// S3 objects.
 type KmsKeyToGrant struct {
 
-	// The AWS KMS CMK (Key Management System Customer Managed Key) used to encrypt S3
-	// objects in the shared S3 Bucket. AWS Data exchange will create a KMS grant for
-	// each subscriber to allow them to access and decrypt their entitled data that is
-	// encrypted using this KMS key specified.
+	// The AWS KMS CMK (Key Management System Customer Managed Key) used to encrypt
+	// S3 objects in the shared S3 Bucket. AWS Data exchange will create a KMS grant
+	// for each subscriber to allow them to access and decrypt their entitled data that
+	// is encrypted using this KMS key specified.
 	//
 	// This member is required.
 	KmsKeyArn *string
@@ -1168,9 +1170,9 @@ type RevisionDestinationEntry struct {
 	RevisionId *string
 
 	// A string representing the pattern for generated names of the individual assets
-	// in the revision. For more information about key patterns, see Key patterns when
-	// exporting revisions
-	// (https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns).
+	// in the revision. For more information about key patterns, see Key patterns
+	// when exporting revisions (https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns)
+	// .
 	KeyPattern *string
 
 	noSmithyDocumentSerde
@@ -1259,13 +1261,13 @@ type S3DataAccessAsset struct {
 	// S3 keys made available using this asset.
 	Keys []string
 
-	// List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs used
-	// to encrypt S3 objects being shared in this S3 Data Access asset. Providers must
-	// include all AWS KMS keys used to encrypt these shared S3 objects.
+	// List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs
+	// used to encrypt S3 objects being shared in this S3 Data Access asset. Providers
+	// must include all AWS KMS keys used to encrypt these shared S3 objects.
 	KmsKeysToGrant []KmsKeyToGrant
 
-	// The automatically-generated bucket-style alias for your Amazon S3 Access Point.
-	// Customers can access their entitled data using the S3 Access Point alias.
+	// The automatically-generated bucket-style alias for your Amazon S3 Access
+	// Point. Customers can access their entitled data using the S3 Access Point alias.
 	S3AccessPointAlias *string
 
 	// The ARN for your Amazon S3 Access Point. Customers can also access their
@@ -1289,8 +1291,8 @@ type S3DataAccessAssetSourceEntry struct {
 	// The keys used to create the Amazon S3 data access.
 	Keys []string
 
-	// List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs used
-	// to encrypt S3 objects being shared in this S3 Data Access asset.
+	// List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs
+	// used to encrypt S3 objects being shared in this S3 Data Access asset.
 	KmsKeysToGrant []KmsKeyToGrant
 
 	noSmithyDocumentSerde

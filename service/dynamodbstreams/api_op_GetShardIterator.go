@@ -13,8 +13,8 @@ import (
 
 // Returns a shard iterator. A shard iterator provides information about how to
 // retrieve the stream records from within a shard. Use the shard iterator in a
-// subsequent GetRecords request to read the stream records from the shard. A shard
-// iterator expires 15 minutes after it is returned to the requester.
+// subsequent GetRecords request to read the stream records from the shard. A
+// shard iterator expires 15 minutes after it is returned to the requester.
 func (c *Client) GetShardIterator(ctx context.Context, params *GetShardIteratorInput, optFns ...func(*Options)) (*GetShardIteratorOutput, error) {
 	if params == nil {
 		params = &GetShardIteratorInput{}
@@ -30,7 +30,7 @@ func (c *Client) GetShardIterator(ctx context.Context, params *GetShardIteratorI
 	return out, nil
 }
 
-// Represents the input of a GetShardIterator operation.
+// Represents the input of a GetShardIterator  operation.
 type GetShardIteratorInput struct {
 
 	// The identifier of the shard. The iterator will be returned for this shard ID.
@@ -40,17 +40,10 @@ type GetShardIteratorInput struct {
 
 	// Determines how the shard iterator is used to start reading stream records from
 	// the shard:
-	// - AT_SEQUENCE_NUMBER - Start reading exactly from the position
-	// denoted by a specific sequence number.
-	// - AFTER_SEQUENCE_NUMBER - Start reading
-	// right after the position denoted by a specific sequence number.
-	// - TRIM_HORIZON -
-	// Start reading at the last (untrimmed) stream record, which is the oldest record
-	// in the shard. In DynamoDB Streams, there is a 24 hour limit on data retention.
-	// Stream records whose age exceeds this limit are subject to removal (trimming)
-	// from the stream.
-	// - LATEST - Start reading just after the most recent stream
-	// record in the shard, so that you always read the most recent data in the shard.
+	//     - AT_SEQUENCE_NUMBER - Start reading exactly from the position denoted by a specific sequence number.
+	//     - AFTER_SEQUENCE_NUMBER - Start reading right after the position denoted by a specific sequence number.
+	//     - TRIM_HORIZON - Start reading at the last (untrimmed) stream record, which is the oldest record in the shard. In DynamoDB Streams, there is a 24 hour limit on data retention. Stream records whose age exceeds this limit are subject to removal (trimming) from the stream.
+	//     - LATEST - Start reading just after the most recent stream record in the shard, so that you always read the most recent data in the shard.
 	//
 	// This member is required.
 	ShardIteratorType types.ShardIteratorType
@@ -60,13 +53,14 @@ type GetShardIteratorInput struct {
 	// This member is required.
 	StreamArn *string
 
-	// The sequence number of a stream record in the shard from which to start reading.
+	// The sequence number of a stream record in the shard from which to start
+	// reading.
 	SequenceNumber *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a GetShardIterator operation.
+// Represents the output of a GetShardIterator  operation.
 type GetShardIteratorOutput struct {
 
 	// The position in the shard from which to start reading stream records

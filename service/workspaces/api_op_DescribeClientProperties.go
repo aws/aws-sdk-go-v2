@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
+// Retrieves a list that describes one or more specified Amazon WorkSpaces
+// clients.
 func (c *Client) DescribeClientProperties(ctx context.Context, params *DescribeClientPropertiesInput, optFns ...func(*Options)) (*DescribeClientPropertiesOutput, error) {
 	if params == nil {
 		params = &DescribeClientPropertiesInput{}

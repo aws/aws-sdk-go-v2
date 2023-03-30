@@ -14,9 +14,9 @@ import (
 // Gets a key group, including the date and time when the key group was last
 // modified. To get a key group, you must provide the key group's identifier. If
 // the key group is referenced in a distribution's cache behavior, you can get the
-// key group's identifier using ListDistributions or GetDistribution. If the key
+// key group's identifier using ListDistributions  or GetDistribution. If the key
 // group is not referenced in a cache behavior, you can get the identifier using
-// ListKeyGroups.
+// ListKeyGroups .
 func (c *Client) GetKeyGroup(ctx context.Context, params *GetKeyGroupInput, optFns ...func(*Options)) (*GetKeyGroupOutput, error) {
 	if params == nil {
 		params = &GetKeyGroupInput{}
@@ -34,8 +34,8 @@ func (c *Client) GetKeyGroup(ctx context.Context, params *GetKeyGroupInput, optF
 
 type GetKeyGroupInput struct {
 
-	// The identifier of the key group that you are getting. To get the identifier, use
-	// ListKeyGroups.
+	// The identifier of the key group that you are getting. To get the identifier,
+	// use ListKeyGroups .
 	//
 	// This member is required.
 	Id *string

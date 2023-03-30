@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the configuration options that are used in a particular configuration
-// template or environment, or that a specified solution stack defines. The
-// description includes the values the options, their default values, and an
-// indication of the required action on a running environment if an option value is
-// changed.
+// Describes the configuration options that are used in a particular
+// configuration template or environment, or that a specified solution stack
+// defines. The description includes the values the options, their default values,
+// and an indication of the required action on a running environment if an option
+// value is changed.
 func (c *Client) DescribeConfigurationOptions(ctx context.Context, params *DescribeConfigurationOptionsInput, optFns ...func(*Options)) (*DescribeConfigurationOptionsOutput, error) {
 	if params == nil {
 		params = &DescribeConfigurationOptionsInput{}
@@ -48,7 +48,8 @@ type DescribeConfigurationOptionsInput struct {
 	// The ARN of the custom platform.
 	PlatformArn *string
 
-	// The name of the solution stack whose configuration options you want to describe.
+	// The name of the solution stack whose configuration options you want to
+	// describe.
 	SolutionStackName *string
 
 	// The name of the configuration template whose configuration options you want to
@@ -61,7 +62,7 @@ type DescribeConfigurationOptionsInput struct {
 // Describes the settings for a specified configuration set.
 type DescribeConfigurationOptionsOutput struct {
 
-	// A list of ConfigurationOptionDescription.
+	// A list of ConfigurationOptionDescription .
 	Options []types.ConfigurationOptionDescription
 
 	// The ARN of the platform version.

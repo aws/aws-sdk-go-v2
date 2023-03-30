@@ -14,9 +14,9 @@ import (
 
 // Gets one or more outcomes. This is a paginated API. If you provide a null
 // maxResults, this actions retrieves a maximum of 100 records per page. If you
-// provide a maxResults, the value must be between 50 and 100. To get the next page
-// results, provide the pagination token from the GetOutcomesResult as part of your
-// request. A null pagination token fetches the records from the beginning.
+// provide a maxResults, the value must be between 50 and 100. To get the next
+// page results, provide the pagination token from the GetOutcomesResult as part
+// of your request. A null pagination token fetches the records from the beginning.
 func (c *Client) GetOutcomes(ctx context.Context, params *GetOutcomesInput, optFns ...func(*Options)) (*GetOutcomesOutput, error) {
 	if params == nil {
 		params = &GetOutcomesInput{}
@@ -132,8 +132,8 @@ type GetOutcomesPaginatorOptions struct {
 	// The maximum number of objects to return for the request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

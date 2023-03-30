@@ -12,13 +12,12 @@ import (
 )
 
 // This is AWS WAF Classic Regional documentation. For more information, see AWS
-// WAF Classic
-// (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
+// WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
 // in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
-// the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns an array of resources associated with the specified web ACL.
+// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+// . With the latest version, AWS WAF has a single set of endpoints for regional
+// and global use. Returns an array of resources associated with the specified web
+// ACL.
 func (c *Client) ListResourcesForWebACL(ctx context.Context, params *ListResourcesForWebACLInput, optFns ...func(*Options)) (*ListResourcesForWebACLOutput, error) {
 	if params == nil {
 		params = &ListResourcesForWebACLInput{}
@@ -42,8 +41,8 @@ type ListResourcesForWebACLInput struct {
 	// This member is required.
 	WebACLId *string
 
-	// The type of resource to list, either an application load balancer or Amazon API
-	// Gateway.
+	// The type of resource to list, either an application load balancer or Amazon
+	// API Gateway.
 	ResourceType types.ResourceType
 
 	noSmithyDocumentSerde

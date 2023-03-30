@@ -32,9 +32,9 @@ const (
 	ActionStatusUnknown   ActionStatus = "Unknown"
 )
 
-// Values returns all known values for ActionStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ActionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ActionStatus) Values() []ActionStatus {
 	return []ActionStatus{
 		"Scheduled",
@@ -75,9 +75,9 @@ const (
 	ApplicationVersionStatusBuilding    ApplicationVersionStatus = "Building"
 )
 
-// Values returns all known values for ApplicationVersionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ApplicationVersionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationVersionStatus) Values() []ApplicationVersionStatus {
 	return []ApplicationVersionStatus{
 		"Processed",
@@ -97,9 +97,9 @@ const (
 	ComputeTypeBuildGeneral1Large  ComputeType = "BUILD_GENERAL1_LARGE"
 )
 
-// Values returns all known values for ComputeType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ComputeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ComputeType) Values() []ComputeType {
 	return []ComputeType{
 		"BUILD_GENERAL1_SMALL",
@@ -137,9 +137,10 @@ const (
 	ConfigurationOptionValueTypeList   ConfigurationOptionValueType = "List"
 )
 
-// Values returns all known values for ConfigurationOptionValueType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ConfigurationOptionValueType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ConfigurationOptionValueType) Values() []ConfigurationOptionValueType {
 	return []ConfigurationOptionValueType{
 		"Scalar",
@@ -214,9 +215,9 @@ const (
 	EnvironmentHealthStatusSuspended EnvironmentHealthStatus = "Suspended"
 )
 
-// Values returns all known values for EnvironmentHealthStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for EnvironmentHealthStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnvironmentHealthStatus) Values() []EnvironmentHealthStatus {
 	return []EnvironmentHealthStatus{
 		"NoData",
@@ -318,9 +319,9 @@ const (
 	FailureTypePermissionsError        FailureType = "PermissionsError"
 )
 
-// Values returns all known values for FailureType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FailureType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (FailureType) Values() []FailureType {
 	return []FailureType{
 		"UpdateCancelled",
@@ -350,9 +351,9 @@ const (
 	InstancesHealthAttributeAll                InstancesHealthAttribute = "All"
 )
 
-// Values returns all known values for InstancesHealthAttribute. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InstancesHealthAttribute. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstancesHealthAttribute) Values() []InstancesHealthAttribute {
 	return []InstancesHealthAttribute{
 		"HealthStatus",

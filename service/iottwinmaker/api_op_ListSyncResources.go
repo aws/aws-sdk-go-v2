@@ -40,15 +40,11 @@ type ListSyncResourcesInput struct {
 	// This member is required.
 	WorkspaceId *string
 
-	// A list of objects that filter the request. The following filter combinations are
-	// supported:
-	//
-	// * Filter with state
-	//
-	// * Filter with ResourceType and ResourceId
-	//
-	// *
-	// Filter with ResourceType and ExternalId
+	// A list of objects that filter the request. The following filter combinations
+	// are supported:
+	//     - Filter with state
+	//     - Filter with ResourceType and ResourceId
+	//     - Filter with ResourceType and ExternalId
 	Filters []types.SyncResourceFilter
 
 	// The maximum number of results to return at one time. The default is 50. Valid
@@ -176,14 +172,15 @@ type ListSyncResourcesAPIClient interface {
 
 var _ ListSyncResourcesAPIClient = (*Client)(nil)
 
-// ListSyncResourcesPaginatorOptions is the paginator options for ListSyncResources
+// ListSyncResourcesPaginatorOptions is the paginator options for
+// ListSyncResources
 type ListSyncResourcesPaginatorOptions struct {
 	// The maximum number of results to return at one time. The default is 50. Valid
 	// Range: Minimum value of 0. Maximum value of 200.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

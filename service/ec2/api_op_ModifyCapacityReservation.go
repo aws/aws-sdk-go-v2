@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Modifies a Capacity Reservation's capacity and the conditions under which it is
-// to be released. You cannot change a Capacity Reservation's instance type, EBS
+// Modifies a Capacity Reservation's capacity and the conditions under which it
+// is to be released. You cannot change a Capacity Reservation's instance type, EBS
 // optimization, instance store settings, platform, Availability Zone, or instance
 // eligibility. If you need to modify any of these attributes, we recommend that
 // you cancel the Capacity Reservation, and then create a new one with the required
@@ -48,8 +48,8 @@ type ModifyCapacityReservationInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The date and time at which the Capacity Reservation expires. When a Capacity
@@ -58,22 +58,18 @@ type ModifyCapacityReservationInput struct {
 	// when it reaches its end date and time. The Capacity Reservation is cancelled
 	// within an hour from the specified time. For example, if you specify 5/31/2019,
 	// 13:30:55, the Capacity Reservation is guaranteed to end between 13:30:55 and
-	// 14:30:55 on 5/31/2019. You must provide an EndDate value if EndDateType is
-	// limited. Omit EndDate if EndDateType is unlimited.
+	// 14:30:55 on 5/31/2019. You must provide an EndDate  value if EndDateType  is
+	// limited . Omit EndDate  if EndDateType  is unlimited .
 	EndDate *time.Time
 
-	// Indicates the way in which the Capacity Reservation ends. A Capacity Reservation
-	// can have one of the following end types:
-	// - unlimited - The Capacity Reservation
-	// remains active until you explicitly cancel it. Do not provide an EndDate value
-	// if EndDateType is unlimited.
-	// - limited - The Capacity Reservation expires
-	// automatically at a specified date and time. You must provide an EndDate value if
-	// EndDateType is limited.
+	// Indicates the way in which the Capacity Reservation ends. A Capacity
+	// Reservation can have one of the following end types:
+	//     - unlimited - The Capacity Reservation remains active until you explicitly cancel it. Do not provide an EndDate value if EndDateType is unlimited .
+	//     - limited - The Capacity Reservation expires automatically at a specified date and time. You must provide an EndDate value if EndDateType is limited .
 	EndDateType types.EndDateType
 
 	// The number of instances for which to reserve capacity. The number of instances
-	// can't be increased or decreased by more than 1000 in a single request.
+	// can't be increased or decreased by more than 1000  in a single request.
 	InstanceCount *int32
 
 	noSmithyDocumentSerde
@@ -81,7 +77,7 @@ type ModifyCapacityReservationInput struct {
 
 type ModifyCapacityReservationOutput struct {
 
-	// Returns true if the request succeeds; otherwise, it returns an error.
+	// Returns true  if the request succeeds; otherwise, it returns an error.
 	Return *bool
 
 	// Metadata pertaining to the operation's result.

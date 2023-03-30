@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of configuration items as specified by the value passed to the
-// required parameter configurationType. Optional filtering may be applied to
+// Retrieves a list of configuration items as specified by the value passed to
+// the required parameter configurationType. Optional filtering may be applied to
 // refine search results.
 func (c *Client) ListConfigurations(ctx context.Context, params *ListConfigurationsInput, optFns ...func(*Options)) (*ListConfigurationsOutput, error) {
 	if params == nil {
@@ -37,10 +37,9 @@ type ListConfigurationsInput struct {
 	ConfigurationType types.ConfigurationItemType
 
 	// You can filter the request using various logical operators and a key-value
-	// format. For example: {"key": "serverType", "value": "webServer"} For a complete
-	// list of filter options and guidance about using them with this action, see Using
-	// the ListConfigurations Action
-	// (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
+	// format. For example: {"key": "serverType", "value": "webServer"} For a
+	// complete list of filter options and guidance about using them with this action,
+	// see Using the ListConfigurations Action (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
 	// in the Amazon Web Services Application Discovery Service User Guide.
 	Filters []types.Filter
 
@@ -49,14 +48,13 @@ type ListConfigurationsInput struct {
 
 	// Token to retrieve the next set of results. For example, if a previous call to
 	// ListConfigurations returned 100 items, but you set
-	// ListConfigurationsRequest$maxResults to 10, you received a set of 10 results
+	// ListConfigurationsRequest$maxResultsto 10, you received a set of 10 results
 	// along with a token. Use that token in this query to get the next set of 10.
 	NextToken *string
 
 	// Certain filter criteria return output that can be sorted in ascending or
 	// descending order. For a list of output characteristics for each filter, see
-	// Using the ListConfigurations Action
-	// (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
+	// Using the ListConfigurations Action (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
 	// in the Amazon Web Services Application Discovery Service User Guide.
 	OrderBy []types.OrderByElement
 
@@ -65,13 +63,13 @@ type ListConfigurationsInput struct {
 
 type ListConfigurationsOutput struct {
 
-	// Returns configuration details, including the configuration ID, attribute names,
-	// and attribute values.
+	// Returns configuration details, including the configuration ID, attribute
+	// names, and attribute values.
 	Configurations []map[string]string
 
 	// Token to retrieve the next set of results. For example, if your call to
 	// ListConfigurations returned 100 items, but you set
-	// ListConfigurationsRequest$maxResults to 10, you received a set of 10 results
+	// ListConfigurationsRequest$maxResultsto 10, you received a set of 10 results
 	// along with this token. Use this token in the next query to retrieve the next set
 	// of 10.
 	NextToken *string

@@ -54,28 +54,21 @@ type LockRuleOutput struct {
 	LockConfiguration *types.LockConfiguration
 
 	// The lock state for the retention rule.
-	// - locked - The retention rule is locked
-	// and can't be modified or deleted.
-	// - pending_unlock - The retention rule has been
-	// unlocked but it is still within the unlock delay period. The retention rule can
-	// be modified or deleted only after the unlock delay period has expired.
-	// -
-	// unlocked - The retention rule is unlocked and it can be modified or deleted by
-	// any user with the required permissions.
-	// - null - The retention rule has never
-	// been locked. Once a retention rule has been locked, it can transition between
-	// the locked and unlocked states only; it can never transition back to null.
+	//     - locked - The retention rule is locked and can't be modified or deleted.
+	//     - pending_unlock - The retention rule has been unlocked but it is still within the unlock delay period. The retention rule can be modified or deleted only after the unlock delay period has expired.
+	//     - unlocked - The retention rule is unlocked and it can be modified or deleted by any user with the required permissions.
+	//     - null - The retention rule has never been locked. Once a retention rule has been locked, it can transition between the locked and unlocked states only; it can never transition back to null .
 	LockState types.LockState
 
-	// Information about the resource tags used to identify resources that are retained
-	// by the retention rule.
+	// Information about the resource tags used to identify resources that are
+	// retained by the retention rule.
 	ResourceTags []types.ResourceTag
 
 	// The resource type retained by the retention rule.
 	ResourceType types.ResourceType
 
-	// Information about the retention period for which the retention rule is to retain
-	// resources.
+	// Information about the retention period for which the retention rule is to
+	// retain resources.
 	RetentionPeriod *types.RetentionPeriod
 
 	// The state of the retention rule. Only retention rules that are in the available

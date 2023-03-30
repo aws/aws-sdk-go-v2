@@ -10,8 +10,8 @@ import (
 // A new object to add to the governed table.
 type AddObjectInput struct {
 
-	// The Amazon S3 ETag of the object. Returned by GetTableObjects for validation and
-	// used to identify changes to the underlying data.
+	// The Amazon S3 ETag of the object. Returned by GetTableObjects for validation
+	// and used to identify changes to the underlying data.
 	//
 	// This member is required.
 	ETag *string
@@ -43,9 +43,9 @@ type AllRowsWildcard struct {
 // A structure used to include auditing information on the privileged API.
 type AuditContext struct {
 
-	// The filter engine can populate the 'AdditionalAuditContext' information with the
-	// request ID for you to track. This information will be displayed in CloudTrail
-	// log in your account.
+	// The filter engine can populate the 'AdditionalAuditContext' information with
+	// the request ID for you to track. This information will be displayed in
+	// CloudTrail log in your account.
 	AdditionalAuditContext *string
 
 	noSmithyDocumentSerde
@@ -91,8 +91,8 @@ type CatalogResource struct {
 	noSmithyDocumentSerde
 }
 
-// A structure containing the name of a column resource and the LF-tags attached to
-// it.
+// A structure containing the name of a column resource and the LF-tags attached
+// to it.
 type ColumnLFTag struct {
 
 	// The LF-tags attached to a column resource.
@@ -155,8 +155,8 @@ type DataCellsFilter struct {
 	// A list of column names.
 	ColumnNames []string
 
-	// A wildcard with exclusions. You must specify either a ColumnNames list or the
-	// ColumnWildCard.
+	// A wildcard with exclusions. You must specify either a ColumnNames  list or the
+	// ColumnWildCard .
 	ColumnWildcard *ColumnWildcard
 
 	// A PartiQL predicate.
@@ -195,9 +195,9 @@ type DataLakePrincipal struct {
 	noSmithyDocumentSerde
 }
 
-// A structure representing a list of Lake Formation principals designated as data
-// lake administrators and lists of principal permission entries for default create
-// database and default create table permissions.
+// A structure representing a list of Lake Formation principals designated as
+// data lake administrators and lists of principal permission entries for default
+// create database and default create table permissions.
 type DataLakeSettings struct {
 
 	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
@@ -205,13 +205,13 @@ type DataLakeSettings struct {
 	// that are registered with Lake Formation. If false or null, no Amazon EMR
 	// clusters will be able to access data in Amazon S3 locations that are registered
 	// with Lake Formation. For more information, see (Optional) Allow Data Filtering
-	// on Amazon EMR
-	// (https://docs-aws.amazon.com/lake-formation/latest/dg/getting-started-setup.html#emr-switch).
+	// on Amazon EMR (https://docs-aws.amazon.com/lake-formation/latest/dg/getting-started-setup.html#emr-switch)
+	// .
 	AllowExternalDataFiltering *bool
 
-	// Lake Formation relies on a privileged process secured by Amazon EMR or the third
-	// party integrator to tag the user's role while assuming it. Lake Formation will
-	// publish the acceptable key-value pair, for example key =
+	// Lake Formation relies on a privileged process secured by Amazon EMR or the
+	// third party integrator to tag the user's role while assuming it. Lake Formation
+	// will publish the acceptable key-value pair, for example key =
 	// "LakeFormationTrustedCaller" and value = "TRUE" and the third party integrator
 	// must properly tag the temporary security credentials that will be used to call
 	// Lake Formation's administrative APIs.
@@ -225,8 +225,8 @@ type DataLakeSettings struct {
 	// compatibility with the Glue permission model implemented by IAM permissions. The
 	// only permitted values are an empty array or an array that contains a single JSON
 	// object that grants ALL to IAM_ALLOWED_PRINCIPALS. For more information, see
-	// Changing the Default Security Settings for Your Data Lake
-	// (https://docs.aws.amazon.com/lake-formation/latest/dg/change-settings.html).
+	// Changing the Default Security Settings for Your Data Lake (https://docs.aws.amazon.com/lake-formation/latest/dg/change-settings.html)
+	// .
 	CreateDatabaseDefaultPermissions []PrincipalPermissions
 
 	// Specifies whether access control on newly created table is managed by Lake
@@ -237,8 +237,8 @@ type DataLakeSettings struct {
 	// compatibility with the Glue permission model implemented by IAM permissions. The
 	// only permitted values are an empty array or an array that contains a single JSON
 	// object that grants ALL to IAM_ALLOWED_PRINCIPALS. For more information, see
-	// Changing the Default Security Settings for Your Data Lake
-	// (https://docs.aws.amazon.com/lake-formation/latest/dg/change-settings.html).
+	// Changing the Default Security Settings for Your Data Lake (https://docs.aws.amazon.com/lake-formation/latest/dg/change-settings.html)
+	// .
 	CreateTableDefaultPermissions []PrincipalPermissions
 
 	// A list of Lake Formation principals. Supported principals are IAM users or IAM
@@ -263,7 +263,8 @@ type DataLakeSettings struct {
 	noSmithyDocumentSerde
 }
 
-// A structure for a data location object where permissions are granted or revoked.
+// A structure for a data location object where permissions are granted or
+// revoked.
 type DataLocationResource struct {
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the data location
@@ -287,8 +288,8 @@ type DeleteObjectInput struct {
 	// This member is required.
 	Uri *string
 
-	// The Amazon S3 ETag of the object. Returned by GetTableObjects for validation and
-	// used to identify changes to the underlying data.
+	// The Amazon S3 ETag of the object. Returned by GetTableObjects for validation
+	// and used to identify changes to the underlying data.
 	ETag *string
 
 	// A list of partition values for the object. A value must be specified for each
@@ -371,7 +372,7 @@ type LFTag struct {
 	noSmithyDocumentSerde
 }
 
-// A structure containing an error related to a TagResource or UnTagResource
+// A structure containing an error related to a TagResource  or UnTagResource
 // operation.
 type LFTagError struct {
 
@@ -542,7 +543,7 @@ type QueryPlanningContext struct {
 
 	// The time as of when to read the table contents. If not set, the most recent
 	// transaction commit time will be used. Cannot be specified along with
-	// TransactionId.
+	// TransactionId .
 	QueryAsOfTime *time.Time
 
 	// A map consisting of key-value pairs.
@@ -552,7 +553,7 @@ type QueryPlanningContext struct {
 	// not committed, the read will be treated as part of that transaction and will see
 	// its writes. If this transaction has aborted, an error will be returned. If not
 	// set, defaults to the most recent committed transaction. Cannot be specified
-	// along with QueryAsOfTime.
+	// along with QueryAsOfTime .
 	TransactionId *string
 
 	noSmithyDocumentSerde
@@ -627,7 +628,7 @@ type RowFilter struct {
 type StorageOptimizer struct {
 
 	// A map of the storage optimizer configuration. Currently contains only one
-	// key-value pair: is_enabled indicates true or false for acceleration.
+	// key-value pair: is_enabled  indicates true or false for acceleration.
 	Config map[string]string
 
 	// A message that contains information about any error (if present). When an
@@ -640,7 +641,7 @@ type StorageOptimizer struct {
 	// last job run.
 	LastRunDetails *string
 
-	// The specific type of storage optimizer. The supported value is compaction.
+	// The specific type of storage optimizer. The supported value is compaction .
 	StorageOptimizerType OptimizerType
 
 	// A message that contains information about any warnings (if present).
@@ -652,8 +653,8 @@ type StorageOptimizer struct {
 // Specifies the details of a governed table.
 type TableObject struct {
 
-	// The Amazon S3 ETag of the object. Returned by GetTableObjects for validation and
-	// used to identify changes to the underlying data.
+	// The Amazon S3 ETag of the object. Returned by GetTableObjects for validation
+	// and used to identify changes to the underlying data.
 	ETag *string
 
 	// The size of the Amazon S3 object in bytes.
@@ -669,8 +670,8 @@ type TableObject struct {
 // represents your data. You can Grant and Revoke table privileges to a principal.
 type TableResource struct {
 
-	// The name of the database for the table. Unique to a Data Catalog. A database is
-	// a set of associated table definitions organized into a logical group. You can
+	// The name of the database for the table. Unique to a Data Catalog. A database
+	// is a set of associated table definitions organized into a logical group. You can
 	// Grant and Revoke database privileges to a principal.
 	//
 	// This member is required.
@@ -684,7 +685,7 @@ type TableResource struct {
 	Name *string
 
 	// A wildcard object representing every table under a database. At least one of
-	// TableResource$Name or TableResource$TableWildcard is required.
+	// TableResource$Name or TableResource$TableWildcard  is required.
 	TableWildcard *TableWildcard
 
 	noSmithyDocumentSerde
@@ -697,18 +698,18 @@ type TableWildcard struct {
 
 // A structure for a table with columns object. This object is only used when
 // granting a SELECT permission. This object must take a value for at least one of
-// ColumnsNames, ColumnsIndexes, or ColumnsWildcard.
+// ColumnsNames , ColumnsIndexes , or ColumnsWildcard .
 type TableWithColumnsResource struct {
 
-	// The name of the database for the table with columns resource. Unique to the Data
-	// Catalog. A database is a set of associated table definitions organized into a
-	// logical group. You can Grant and Revoke database privileges to a principal.
+	// The name of the database for the table with columns resource. Unique to the
+	// Data Catalog. A database is a set of associated table definitions organized into
+	// a logical group. You can Grant and Revoke database privileges to a principal.
 	//
 	// This member is required.
 	DatabaseName *string
 
-	// The name of the table resource. A table is a metadata definition that represents
-	// your data. You can Grant and Revoke table privileges to a principal.
+	// The name of the table resource. A table is a metadata definition that
+	// represents your data. You can Grant and Revoke table privileges to a principal.
 	//
 	// This member is required.
 	Name *string
@@ -717,12 +718,12 @@ type TableWithColumnsResource struct {
 	// caller.
 	CatalogId *string
 
-	// The list of column names for the table. At least one of ColumnNames or
+	// The list of column names for the table. At least one of ColumnNames  or
 	// ColumnWildcard is required.
 	ColumnNames []string
 
-	// A wildcard specified by a ColumnWildcard object. At least one of ColumnNames or
-	// ColumnWildcard is required.
+	// A wildcard specified by a ColumnWildcard  object. At least one of ColumnNames
+	// or ColumnWildcard  is required.
 	ColumnWildcard *ColumnWildcard
 
 	noSmithyDocumentSerde
@@ -778,7 +779,7 @@ type TransactionDescription struct {
 }
 
 // An object that defines an Amazon S3 object to be deleted if a transaction
-// cancels, provided that VirtualPut was called before writing the object.
+// cancels, provided that VirtualPut  was called before writing the object.
 type VirtualObject struct {
 
 	// The path to the Amazon S3 object. Must start with s3://

@@ -14,11 +14,8 @@ import (
 // operation requires that the network interface of the mount target has been
 // created and the lifecycle state of the mount target is not deleted. This
 // operation requires permissions for the following actions:
-// -
-// elasticfilesystem:DescribeMountTargetSecurityGroups action on the mount target's
-// file system.
-// - ec2:DescribeNetworkInterfaceAttribute action on the mount
-// target's network interface.
+//   - elasticfilesystem:DescribeMountTargetSecurityGroups action on the mount target's file system.
+//   - ec2:DescribeNetworkInterfaceAttribute action on the mount target's network interface.
 func (c *Client) DescribeMountTargetSecurityGroups(ctx context.Context, params *DescribeMountTargetSecurityGroupsInput, optFns ...func(*Options)) (*DescribeMountTargetSecurityGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeMountTargetSecurityGroupsInput{}

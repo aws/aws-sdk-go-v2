@@ -84,15 +84,16 @@ type CreateInterconnectOutput struct {
 	// The Direct Connect endpoint that terminates the physical connection.
 	AwsDeviceV2 *string
 
-	// The Direct Connect endpoint that terminates the logical connection. This device
-	// might be different than the device that terminates the physical connection.
+	// The Direct Connect endpoint that terminates the logical connection. This
+	// device might be different than the device that terminates the physical
+	// connection.
 	AwsLogicalDeviceId *string
 
 	// The bandwidth of the connection.
 	Bandwidth *string
 
-	// Indicates whether the interconnect supports a secondary BGP in the same address
-	// family (IPv4/IPv6).
+	// Indicates whether the interconnect supports a secondary BGP in the same
+	// address family (IPv4/IPv6).
 	HasLogicalRedundancy types.HasLogicalRedundancy
 
 	// The ID of the interconnect.
@@ -102,20 +103,13 @@ type CreateInterconnectOutput struct {
 	InterconnectName *string
 
 	// The state of the interconnect. The following are the possible values:
-	// -
-	// requested: The initial state of an interconnect. The interconnect stays in the
-	// requested state until the Letter of Authorization (LOA) is sent to the
-	// customer.
-	// - pending: The interconnect is approved, and is being initialized.
-	// -
-	// available: The network link is up, and the interconnect is ready for use.
-	// -
-	// down: The network link is down.
-	// - deleting: The interconnect is being deleted.
-	// -
-	// deleted: The interconnect is deleted.
-	// - unknown: The state of the interconnect
-	// is not available.
+	//     - requested : The initial state of an interconnect. The interconnect stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.
+	//     - pending : The interconnect is approved, and is being initialized.
+	//     - available : The network link is up, and the interconnect is ready for use.
+	//     - down : The network link is down.
+	//     - deleting : The interconnect is being deleted.
+	//     - deleted : The interconnect is deleted.
+	//     - unknown : The state of the interconnect is not available.
 	InterconnectState types.InterconnectState
 
 	// Indicates whether jumbo frames (9001 MTU) are supported.
@@ -124,7 +118,7 @@ type CreateInterconnectOutput struct {
 	// The ID of the LAG.
 	LagId *string
 
-	// The time of the most recent call to DescribeLoa for this connection.
+	// The time of the most recent call to DescribeLoa  for this connection.
 	LoaIssueTime *time.Time
 
 	// The location of the connection.

@@ -168,9 +168,9 @@ const (
 	LogLevelOff   LogLevel = "OFF"
 )
 
-// Values returns all known values for LogLevel. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for LogLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (LogLevel) Values() []LogLevel {
 	return []LogLevel{
 		"ALL",
@@ -190,9 +190,9 @@ const (
 	MapRunStatusAborted   MapRunStatus = "ABORTED"
 )
 
-// Values returns all known values for MapRunStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for MapRunStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (MapRunStatus) Values() []MapRunStatus {
 	return []MapRunStatus{
 		"RUNNING",

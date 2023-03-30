@@ -34,13 +34,13 @@ type CreateUserDefinedFunctionInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// A FunctionInput object that defines the function to create in the Data Catalog.
+	// A FunctionInput  object that defines the function to create in the Data Catalog.
 	//
 	// This member is required.
 	FunctionInput *types.UserDefinedFunctionInput
 
-	// The ID of the Data Catalog in which to create the function. If none is provided,
-	// the Amazon Web Services account ID is used by default.
+	// The ID of the Data Catalog in which to create the function. If none is
+	// provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
 
 	noSmithyDocumentSerde

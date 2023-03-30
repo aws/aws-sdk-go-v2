@@ -28,8 +28,8 @@ func (c *Client) VerifyTrust(ctx context.Context, params *VerifyTrustInput, optF
 	return out, nil
 }
 
-// Initiates the verification of an existing trust relationship between an Managed
-// Microsoft AD directory and an external domain.
+// Initiates the verification of an existing trust relationship between an
+// Managed Microsoft AD directory and an external domain.
 type VerifyTrustInput struct {
 
 	// The unique Trust ID of the trust relationship to verify.

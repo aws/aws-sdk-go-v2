@@ -31,12 +31,12 @@ func (c *Client) ListEndpoints(ctx context.Context, params *ListEndpointsInput, 
 
 type ListEndpointsInput struct {
 
-	// A filter that returns only endpoints with a creation time greater than or equal
-	// to the specified time (timestamp).
+	// A filter that returns only endpoints with a creation time greater than or
+	// equal to the specified time (timestamp).
 	CreationTimeAfter *time.Time
 
-	// A filter that returns only endpoints that were created before the specified time
-	// (timestamp).
+	// A filter that returns only endpoints that were created before the specified
+	// time (timestamp).
 	CreationTimeBefore *time.Time
 
 	// A filter that returns only endpoints that were modified after the specified
@@ -55,15 +55,15 @@ type ListEndpointsInput struct {
 	// contains the specified string.
 	NameContains *string
 
-	// If the result of a ListEndpoints request was truncated, the response includes a
-	// NextToken. To retrieve the next set of endpoints, use the token in the next
+	// If the result of a ListEndpoints request was truncated, the response includes
+	// a NextToken. To retrieve the next set of endpoints, use the token in the next
 	// request.
 	NextToken *string
 
-	// Sorts the list of results. The default is CreationTime.
+	// Sorts the list of results. The default is CreationTime .
 	SortBy types.EndpointSortKey
 
-	// The sort order for results. The default is Descending.
+	// The sort order for results. The default is Descending .
 	SortOrder types.OrderKey
 
 	// A filter that returns only endpoints with the specified status.
@@ -79,8 +79,8 @@ type ListEndpointsOutput struct {
 	// This member is required.
 	Endpoints []types.EndpointSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the next
-	// set of training jobs, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the
+	// next set of training jobs, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -162,8 +162,8 @@ type ListEndpointsPaginatorOptions struct {
 	// to 10.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

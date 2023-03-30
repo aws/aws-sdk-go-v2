@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Resets the password for a specified user ID and generates a temporary one. Only
-// a superuser can reset password for other users. Resetting the password
+// Resets the password for a specified user ID and generates a temporary one.
+// Only a superuser can reset password for other users. Resetting the password
 // immediately invalidates the previous password associated with the user.
 func (c *Client) ResetUserPassword(ctx context.Context, params *ResetUserPasswordInput, optFns ...func(*Options)) (*ResetUserPasswordOutput, error) {
 	if params == nil {

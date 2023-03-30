@@ -35,7 +35,7 @@ type ListAvailableSolutionStacksInput struct {
 // A list of available AWS Elastic Beanstalk solution stacks.
 type ListAvailableSolutionStacksOutput struct {
 
-	// A list of available solution stacks and their SolutionStackDescription.
+	// A list of available solution stacks and their SolutionStackDescription .
 	SolutionStackDetails []types.SolutionStackDescription
 
 	// A list of available solution stacks.

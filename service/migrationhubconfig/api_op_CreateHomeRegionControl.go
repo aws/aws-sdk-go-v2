@@ -34,14 +34,14 @@ type CreateHomeRegionControlInput struct {
 	// This member is required.
 	HomeRegion *string
 
-	// The account for which this command sets up a home region control. The Target is
-	// always of type ACCOUNT.
+	// The account for which this command sets up a home region control. The Target
+	// is always of type ACCOUNT .
 	//
 	// This member is required.
 	Target *types.Target
 
-	// Optional Boolean flag to indicate whether any effect should take place. It tests
-	// whether the caller has permission to make the call.
+	// Optional Boolean flag to indicate whether any effect should take place. It
+	// tests whether the caller has permission to make the call.
 	DryRun bool
 
 	noSmithyDocumentSerde
@@ -49,8 +49,8 @@ type CreateHomeRegionControlInput struct {
 
 type CreateHomeRegionControlOutput struct {
 
-	// This object is the HomeRegionControl object that's returned by a successful call
-	// to CreateHomeRegionControl.
+	// This object is the HomeRegionControl object that's returned by a successful
+	// call to CreateHomeRegionControl .
 	HomeRegionControl *types.HomeRegionControl
 
 	// Metadata pertaining to the operation's result.

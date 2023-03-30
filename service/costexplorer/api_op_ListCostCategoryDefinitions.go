@@ -12,13 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the name, Amazon Resource Name (ARN), NumberOfRules and effective dates
-// of all Cost Categories defined in the account. You have the option to use
-// EffectiveOn to return a list of Cost Categories that were active on a specific
-// date. If there is no EffectiveOn specified, you’ll see Cost Categories that are
-// effective on the current date. If Cost Category is still effective, EffectiveEnd
-// is omitted in the response. ListCostCategoryDefinitions supports pagination. The
-// request can have a MaxResults range up to 100.
+// Returns the name, Amazon Resource Name (ARN), NumberOfRules and effective
+// dates of all Cost Categories defined in the account. You have the option to use
+// EffectiveOnto return a list of Cost Categories that were active on a specific
+// date. If there is no EffectiveOn specified, you’ll see Cost Categories that
+// are effective on the current date. If Cost Category is still effective,
+// EffectiveEnd is omitted in the response. ListCostCategoryDefinitions supports
+// pagination. The request can have a MaxResults  range up to 100.
 func (c *Client) ListCostCategoryDefinitions(ctx context.Context, params *ListCostCategoryDefinitionsInput, optFns ...func(*Options)) (*ListCostCategoryDefinitionsOutput, error) {
 	if params == nil {
 		params = &ListCostCategoryDefinitionsInput{}
@@ -42,9 +42,9 @@ type ListCostCategoryDefinitionsInput struct {
 	// The number of entries a paginated response contains.
 	MaxResults *int32
 
-	// The token to retrieve the next set of results. Amazon Web Services provides the
-	// token when the response from a previous call has more results than the maximum
-	// page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides
+	// the token when the response from a previous call has more results than the
+	// maximum page size.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,13 +52,13 @@ type ListCostCategoryDefinitionsInput struct {
 
 type ListCostCategoryDefinitionsOutput struct {
 
-	// A reference to a Cost Category that contains enough information to identify the
-	// Cost Category.
+	// A reference to a Cost Category that contains enough information to identify
+	// the Cost Category.
 	CostCategoryReferences []types.CostCategoryReference
 
-	// The token to retrieve the next set of results. Amazon Web Services provides the
-	// token when the response from a previous call has more results than the maximum
-	// page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides
+	// the token when the response from a previous call has more results than the
+	// maximum page size.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -141,8 +141,8 @@ type ListCostCategoryDefinitionsPaginatorOptions struct {
 	// The number of entries a paginated response contains.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

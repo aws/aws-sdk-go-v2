@@ -35,19 +35,18 @@ type DescribeMovingAddressesInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// One or more filters.
-	// - moving-status - The status of the Elastic IP address
-	// (MovingToVpc | RestoringToClassic).
+	//     - moving-status - The status of the Elastic IP address ( MovingToVpc | RestoringToClassic ).
 	Filters []types.Filter
 
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
-	// with the returned NextToken value. This value can be between 5 and 1000; if
-	// MaxResults is given a value outside of this range, an error is returned.
+	// with the returned NextToken  value. This value can be between 5 and 1000; if
+	// MaxResultsis given a value outside of this range, an error is returned.
 	// Default: If no value is provided, the default is 1000.
 	MaxResults *int32
 
@@ -148,13 +147,13 @@ var _ DescribeMovingAddressesAPIClient = (*Client)(nil)
 type DescribeMovingAddressesPaginatorOptions struct {
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
-	// with the returned NextToken value. This value can be between 5 and 1000; if
-	// MaxResults is given a value outside of this range, an error is returned.
+	// with the returned NextToken  value. This value can be between 5 and 1000; if
+	// MaxResultsis given a value outside of this range, an error is returned.
 	// Default: If no value is provided, the default is 1000.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

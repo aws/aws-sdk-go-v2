@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Infers a schema for a SQL-based Kinesis Data Analytics application by evaluating
-// sample records on the specified streaming source (Kinesis data stream or Kinesis
-// Data Firehose delivery stream) or Amazon S3 object. In the response, the
-// operation returns the inferred schema and also the sample records that the
+// Infers a schema for a SQL-based Kinesis Data Analytics application by
+// evaluating sample records on the specified streaming source (Kinesis data stream
+// or Kinesis Data Firehose delivery stream) or Amazon S3 object. In the response,
+// the operation returns the inferred schema and also the sample records that the
 // operation used to infer the schema. You can use the inferred schema when
 // configuring a streaming source for your application. When you create an
 // application using the Kinesis Data Analytics console, the console uses this
@@ -45,8 +45,8 @@ type DiscoverInputSchemaInput struct {
 	// discovering the schema of the records.
 	InputProcessingConfiguration *types.InputProcessingConfiguration
 
-	// The point at which you want Kinesis Data Analytics to start reading records from
-	// the specified streaming source discovery purposes.
+	// The point at which you want Kinesis Data Analytics to start reading records
+	// from the specified streaming source discovery purposes.
 	InputStartingPositionConfiguration *types.InputStartingPositionConfiguration
 
 	// The Amazon Resource Name (ARN) of the streaming source.
@@ -65,8 +65,8 @@ type DiscoverInputSchemaOutput struct {
 	// columns in the in-application stream that you can create.
 	InputSchema *types.SourceSchema
 
-	// An array of elements, where each element corresponds to a row in a stream record
-	// (a stream record can have more than one row).
+	// An array of elements, where each element corresponds to a row in a stream
+	// record (a stream record can have more than one row).
 	ParsedInputRecords [][]string
 
 	// The stream data that was modified by the processor specified in the

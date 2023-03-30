@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Stops a launch that is currently running. After you stop a launch, you will not
-// be able to resume it or restart it. Also, it will not be evaluated as a rule for
-// traffic allocation, and the traffic that was allocated to the launch will
+// Stops a launch that is currently running. After you stop a launch, you will
+// not be able to resume it or restart it. Also, it will not be evaluated as a rule
+// for traffic allocation, and the traffic that was allocated to the launch will
 // instead be available to the feature's experiment, if there is one. Otherwise,
 // all traffic will be served the default variation after the launch is stopped.
 func (c *Client) StopLaunch(ctx context.Context, params *StopLaunchInput, optFns ...func(*Options)) (*StopLaunchOutput, error) {
@@ -44,7 +44,8 @@ type StopLaunchInput struct {
 	// This member is required.
 	Project *string
 
-	// Specify whether to consider the launch as COMPLETED or CANCELLED after it stops.
+	// Specify whether to consider the launch as COMPLETED  or CANCELLED after it
+	// stops.
 	DesiredState types.LaunchStopDesiredState
 
 	// A string that describes why you are stopping the launch.

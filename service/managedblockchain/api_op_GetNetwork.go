@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns detailed information about a network. Applies to Hyperledger Fabric and
-// Ethereum.
+// Returns detailed information about a network. Applies to Hyperledger Fabric
+// and Ethereum.
 func (c *Client) GetNetwork(ctx context.Context, params *GetNetworkInput, optFns ...func(*Options)) (*GetNetworkOutput, error) {
 	if params == nil {
 		params = &GetNetworkInput{}

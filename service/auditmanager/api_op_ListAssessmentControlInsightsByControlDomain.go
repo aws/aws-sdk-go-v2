@@ -15,9 +15,9 @@ import (
 // Lists the latest analytics data for controls within a specific control domain
 // and a specific active assessment. Control insights are listed only if the
 // control belongs to the control domain and assessment that was specified.
-// Moreover, the control must have collected evidence on the lastUpdated date of
-// controlInsightsByAssessment. If neither of these conditions are met, no data is
-// listed for that control.
+// Moreover, the control must have collected evidence on the lastUpdated  date of
+// controlInsightsByAssessment. If neither of these conditions are met, no data
+// is listed for that control.
 func (c *Client) ListAssessmentControlInsightsByControlDomain(ctx context.Context, params *ListAssessmentControlInsightsByControlDomainInput, optFns ...func(*Options)) (*ListAssessmentControlInsightsByControlDomainOutput, error) {
 	if params == nil {
 		params = &ListAssessmentControlInsightsByControlDomainInput{}
@@ -146,8 +146,8 @@ type ListAssessmentControlInsightsByControlDomainPaginatorOptions struct {
 	// Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

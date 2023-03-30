@@ -14,8 +14,8 @@ import (
 // Lists your Amazon EventBridge rules. You can either list all the rules or you
 // can provide a prefix to match to the rule names. ListRules does not list the
 // targets of a rule. To see the targets associated with a rule, use
-// ListTargetsByRule
-// (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ListTargetsByRule.html).
+// ListTargetsByRule (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ListTargetsByRule.html)
+// .
 func (c *Client) ListRules(ctx context.Context, params *ListRulesInput, optFns ...func(*Options)) (*ListRulesOutput, error) {
 	if params == nil {
 		params = &ListRulesInput{}
@@ -51,8 +51,8 @@ type ListRulesInput struct {
 
 type ListRulesOutput struct {
 
-	// Indicates whether there are additional results to retrieve. If there are no more
-	// results, the value is null.
+	// Indicates whether there are additional results to retrieve. If there are no
+	// more results, the value is null.
 	NextToken *string
 
 	// The rules that match the specified criteria.

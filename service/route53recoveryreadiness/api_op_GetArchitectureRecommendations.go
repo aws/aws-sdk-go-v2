@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Gets recommendations about architecture designs for improving resiliency for an
-// application, based on a recovery group.
+// Gets recommendations about architecture designs for improving resiliency for
+// an application, based on a recovery group.
 func (c *Client) GetArchitectureRecommendations(ctx context.Context, params *GetArchitectureRecommendationsInput, optFns ...func(*Options)) (*GetArchitectureRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetArchitectureRecommendationsInput{}

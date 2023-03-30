@@ -50,17 +50,17 @@ type CreateLensShareInput struct {
 	ClientRequestToken *string
 
 	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless, or the lens ARN, such as
+	// the lens alias, such as serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
 	// the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
-	// identified by its LensSummary$LensAlias.
+	// identified by its LensSummary$LensAlias .
 	//
 	// This member is required.
 	LensAlias *string
 
-	// The Amazon Web Services account ID, IAM role, organization ID, or organizational
-	// unit (OU) ID with which the workload is shared.
+	// The Amazon Web Services account ID, IAM role, organization ID, or
+	// organizational unit (OU) ID with which the workload is shared.
 	//
 	// This member is required.
 	SharedWith *string

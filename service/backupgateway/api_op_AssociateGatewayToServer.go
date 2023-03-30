@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a backup gateway with your server. After you complete the association
-// process, you can back up and restore your VMs through the gateway.
+// Associates a backup gateway with your server. After you complete the
+// association process, you can back up and restore your VMs through the gateway.
 func (c *Client) AssociateGatewayToServer(ctx context.Context, params *AssociateGatewayToServerInput, optFns ...func(*Options)) (*AssociateGatewayToServerOutput, error) {
 	if params == nil {
 		params = &AssociateGatewayToServerInput{}
@@ -29,8 +29,8 @@ func (c *Client) AssociateGatewayToServer(ctx context.Context, params *Associate
 
 type AssociateGatewayToServerInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayArn *string

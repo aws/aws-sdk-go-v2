@@ -41,9 +41,9 @@ const (
 	ActivityTypeFolderMoved                            ActivityType = "FOLDER_MOVED"
 )
 
-// Values returns all known values for ActivityType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ActivityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ActivityType) Values() []ActivityType {
 	return []ActivityType{
 		"DOCUMENT_CHECKED_IN",
@@ -89,9 +89,10 @@ const (
 	AdditionalResponseFieldTypeWeburl AdditionalResponseFieldType = "WEBURL"
 )
 
-// Values returns all known values for AdditionalResponseFieldType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AdditionalResponseFieldType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (AdditionalResponseFieldType) Values() []AdditionalResponseFieldType {
 	return []AdditionalResponseFieldType{
 		"WEBURL",
@@ -144,8 +145,8 @@ const (
 	CommentVisibilityTypePrivate CommentVisibilityType = "PRIVATE"
 )
 
-// Values returns all known values for CommentVisibilityType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for CommentVisibilityType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (CommentVisibilityType) Values() []CommentVisibilityType {
 	return []CommentVisibilityType{
@@ -231,8 +232,8 @@ const (
 	DocumentThumbnailTypeLarge   DocumentThumbnailType = "LARGE"
 )
 
-// Values returns all known values for DocumentThumbnailType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DocumentThumbnailType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DocumentThumbnailType) Values() []DocumentThumbnailType {
 	return []DocumentThumbnailType{
@@ -249,8 +250,8 @@ const (
 	DocumentVersionStatusActive DocumentVersionStatus = "ACTIVE"
 )
 
-// Values returns all known values for DocumentVersionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DocumentVersionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DocumentVersionStatus) Values() []DocumentVersionStatus {
 	return []DocumentVersionStatus{
@@ -422,9 +423,9 @@ const (
 	OrderTypeDescending OrderType = "DESCENDING"
 )
 
-// Values returns all known values for OrderType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for OrderType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (OrderType) Values() []OrderType {
 	return []OrderType{
 		"ASCENDING",
@@ -542,9 +543,9 @@ const (
 	ResourceTypeDocument ResourceType = "DOCUMENT"
 )
 
-// Values returns all known values for ResourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"FOLDER",
@@ -602,9 +603,9 @@ const (
 	RoleTypeCoowner     RoleType = "COOWNER"
 )
 
-// Values returns all known values for RoleType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for RoleType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (RoleType) Values() []RoleType {
 	return []RoleType{
 		"VIEWER",
@@ -622,8 +623,8 @@ const (
 	SearchCollectionTypeSharedWithMe SearchCollectionType = "SHARED_WITH_ME"
 )
 
-// Values returns all known values for SearchCollectionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SearchCollectionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SearchCollectionType) Values() []SearchCollectionType {
 	return []SearchCollectionType{
@@ -640,8 +641,8 @@ const (
 	SearchQueryScopeTypeContent SearchQueryScopeType = "CONTENT"
 )
 
-// Values returns all known values for SearchQueryScopeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SearchQueryScopeType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SearchQueryScopeType) Values() []SearchQueryScopeType {
 	return []SearchQueryScopeType{
@@ -698,9 +699,9 @@ const (
 	SortOrderDesc SortOrder = "DESC"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASC",
@@ -716,9 +717,9 @@ const (
 	StorageTypeQuota     StorageType = "QUOTA"
 )
 
-// Values returns all known values for StorageType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StorageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (StorageType) Values() []StorageType {
 	return []StorageType{
 		"UNLIMITED",
@@ -734,9 +735,9 @@ const (
 	SubscriptionProtocolTypeSqs   SubscriptionProtocolType = "SQS"
 )
 
-// Values returns all known values for SubscriptionProtocolType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SubscriptionProtocolType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SubscriptionProtocolType) Values() []SubscriptionProtocolType {
 	return []SubscriptionProtocolType{
 		"HTTPS",
@@ -789,9 +790,9 @@ const (
 	UserSortTypeStorageUsed  UserSortType = "STORAGE_USED"
 )
 
-// Values returns all known values for UserSortType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for UserSortType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (UserSortType) Values() []UserSortType {
 	return []UserSortType{
 		"USER_NAME",
@@ -833,9 +834,9 @@ const (
 	UserTypeWorkspacesuser UserType = "WORKSPACESUSER"
 )
 
-// Values returns all known values for UserType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for UserType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (UserType) Values() []UserType {
 	return []UserType{
 		"USER",

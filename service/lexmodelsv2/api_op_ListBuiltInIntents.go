@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of built-in intents provided by Amazon Lex that you can use in your
-// bot. To use a built-in intent as a the base for your own intent, include the
-// built-in intent signature in the parentIntentSignature parameter when you call
-// the CreateIntent operation. For more information, see CreateIntent
-// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateIntent.html).
+// Gets a list of built-in intents provided by Amazon Lex that you can use in
+// your bot. To use a built-in intent as a the base for your own intent, include
+// the built-in intent signature in the parentIntentSignature parameter when you
+// call the CreateIntent  operation. For more information, see CreateIntent (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateIntent.html)
+// .
 func (c *Client) ListBuiltInIntents(ctx context.Context, params *ListBuiltInIntentsInput, optFns ...func(*Options)) (*ListBuiltInIntentsOutput, error) {
 	if params == nil {
 		params = &ListBuiltInIntentsInput{}
@@ -36,7 +36,7 @@ type ListBuiltInIntentsInput struct {
 
 	// The identifier of the language and locale of the intents to list. The string
 	// must match one of the supported locales. For more information, see Supported
-	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html) .
 	//
 	// This member is required.
 	LocaleId *string
@@ -46,9 +46,10 @@ type ListBuiltInIntentsInput struct {
 	// results are returned.
 	MaxResults *int32
 
-	// If the response from the ListBuiltInIntents operation contains more results than
-	// specified in the maxResults parameter, a token is returned in the response. Use
-	// that token in the nextToken parameter to return the next page of results.
+	// If the response from the ListBuiltInIntents operation contains more results
+	// than specified in the maxResults parameter, a token is returned in the
+	// response. Use that token in the nextToken parameter to return the next page of
+	// results.
 	NextToken *string
 
 	// Specifies sorting parameters for the list of built-in intents. You can specify
@@ -70,10 +71,10 @@ type ListBuiltInIntentsOutput struct {
 	// The language and locale of the intents in the list.
 	LocaleId *string
 
-	// A token that indicates whether there are more results to return in a response to
-	// the ListBuiltInIntents operation. If the nextToken field is present, you send
-	// the contents as the nextToken parameter of a ListBotAliases operation request to
-	// get the next page of results.
+	// A token that indicates whether there are more results to return in a response
+	// to the ListBuiltInIntents  operation. If the nextToken field is present, you
+	// send the contents as the nextToken  parameter of a ListBotAliases operation
+	// request to get the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -161,8 +162,8 @@ type ListBuiltInIntentsPaginatorOptions struct {
 	// results are returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

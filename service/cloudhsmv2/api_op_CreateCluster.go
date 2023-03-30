@@ -30,7 +30,7 @@ func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, 
 type CreateClusterInput struct {
 
 	// The type of HSM to use in the cluster. Currently the only allowed value is
-	// hsm1.medium.
+	// hsm1.medium .
 	//
 	// This member is required.
 	HsmType *string
@@ -38,9 +38,8 @@ type CreateClusterInput struct {
 	// The identifiers (IDs) of the subnets where you are creating the cluster. You
 	// must specify at least one subnet. If you specify multiple subnets, they must
 	// meet the following criteria:
-	// - All subnets must be in the same virtual private
-	// cloud (VPC).
-	// - You can specify only one subnet per Availability Zone.
+	//     - All subnets must be in the same virtual private cloud (VPC).
+	//     - You can specify only one subnet per Availability Zone.
 	//
 	// This member is required.
 	SubnetIds []string
@@ -48,9 +47,9 @@ type CreateClusterInput struct {
 	// A policy that defines how the service retains backups.
 	BackupRetentionPolicy *types.BackupRetentionPolicy
 
-	// The identifier (ID) of the cluster backup to restore. Use this value to restore
-	// the cluster from a backup instead of creating a new cluster. To find the backup
-	// ID, use DescribeBackups.
+	// The identifier (ID) of the cluster backup to restore. Use this value to
+	// restore the cluster from a backup instead of creating a new cluster. To find the
+	// backup ID, use DescribeBackups .
 	SourceBackupId *string
 
 	// Tags to apply to the CloudHSM cluster during creation.

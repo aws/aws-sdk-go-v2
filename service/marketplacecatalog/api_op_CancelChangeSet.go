@@ -11,9 +11,9 @@ import (
 )
 
 // Used to cancel an open change request. Must be sent before the status of the
-// request changes to APPLYING, the final stage of completing your change request.
-// You can describe a change during the 60-day request history retention period for
-// API calls.
+// request changes to APPLYING, the final stage of completing your change
+// request. You can describe a change during the 60-day request history retention
+// period for API calls.
 func (c *Client) CancelChangeSet(ctx context.Context, params *CancelChangeSetInput, optFns ...func(*Options)) (*CancelChangeSetOutput, error) {
 	if params == nil {
 		params = &CancelChangeSetInput{}
@@ -31,7 +31,7 @@ func (c *Client) CancelChangeSet(ctx context.Context, params *CancelChangeSetInp
 
 type CancelChangeSetInput struct {
 
-	// Required. The catalog related to the request. Fixed value: AWSMarketplace.
+	// Required. The catalog related to the request. Fixed value: AWSMarketplace .
 	//
 	// This member is required.
 	Catalog *string

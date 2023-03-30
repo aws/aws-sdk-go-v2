@@ -44,8 +44,8 @@ type UpdateAccountSettingsInput struct {
 	// environments configured for self-managed provisioning with services that include
 	// pipelines. A linked repository is a repository that has been registered with
 	// Proton. For more information, see CreateRepository. To remove a previously
-	// configured repository, set deletePipelineProvisioningRepository to true, and
-	// don't set pipelineProvisioningRepository.
+	// configured repository, set deletePipelineProvisioningRepository  to true, and
+	// don't set pipelineProvisioningRepository .
 	PipelineProvisioningRepository *types.RepositoryBranchInput
 
 	// The Amazon Resource Name (ARN) of the service role you want to use for

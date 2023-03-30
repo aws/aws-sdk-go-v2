@@ -16,12 +16,10 @@ import (
 // an existing Amazon FSx for Windows File Server file system. A file system can
 // have a maximum of 50 DNS aliases associated with it at any one time. If you try
 // to associate a DNS alias that is already associated with the file system, FSx
-// takes no action on that alias in the request. For more information, see Working
-// with DNS Aliases
-// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html)
-// and Walkthrough 5: Using DNS aliases to access your file system
-// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html),
-// including additional steps you must take to be able to access your file system
+// takes no action on that alias in the request. For more information, see
+// Working with DNS Aliases (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html)
+// and Walkthrough 5: Using DNS aliases to access your file system (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html)
+// , including additional steps you must take to be able to access your file system
 // using a DNS alias. The system response shows the DNS aliases that Amazon FSx is
 // attempting to associate with the file system. Use the API operation to monitor
 // the status of the aliases Amazon FSx is associating with the file system.
@@ -46,18 +44,14 @@ type AssociateFileSystemAliasesInput struct {
 
 	// An array of one or more DNS alias names to associate with the file system. The
 	// alias name has to comply with the following formatting requirements:
-	// - Formatted
-	// as a fully-qualified domain name (FQDN), hostname.domain , for example,
-	// accounting.corp.example.com.
-	// - Can contain alphanumeric characters and the
-	// hyphen (-).
-	// - Cannot start or end with a hyphen.
-	// - Can start with a
-	// numeric.
-	//
-	// For DNS alias names, Amazon FSx stores alphabetic characters as
-	// lowercase letters (a-z), regardless of how you specify them: as uppercase
-	// letters, lowercase letters, or the corresponding letters in escape codes.
+	//     - Formatted as a fully-qualified domain name (FQDN), hostname.domain , for example, accounting.corp.example.com .
+	//     - Can contain alphanumeric characters and the hyphen (-).
+	//     - Cannot start or end with a hyphen.
+	//     - Can start with a numeric.
+	// For DNS alias names, Amazon FSx stores
+	// alphabetic characters as lowercase letters (a-z), regardless of how you specify
+	// them: as uppercase letters, lowercase letters, or the corresponding letters in
+	// escape codes.
 	//
 	// This member is required.
 	Aliases []string
@@ -79,11 +73,12 @@ type AssociateFileSystemAliasesInput struct {
 // The system generated response showing the DNS aliases that Amazon FSx is
 // attempting to associate with the file system. Use the API operation to monitor
 // the status of the aliases Amazon FSx is associating with the file system. It can
-// take up to 2.5 minutes for the alias status to change from CREATING to
-// AVAILABLE.
+// take up to 2.5 minutes for the alias status to change from CREATING  to
+// AVAILABLE .
 type AssociateFileSystemAliasesOutput struct {
 
-	// An array of the DNS aliases that Amazon FSx is associating with the file system.
+	// An array of the DNS aliases that Amazon FSx is associating with the file
+	// system.
 	Aliases []types.Alias
 
 	// Metadata pertaining to the operation's result.

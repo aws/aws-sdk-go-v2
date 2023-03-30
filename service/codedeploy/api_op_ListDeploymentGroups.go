@@ -28,23 +28,23 @@ func (c *Client) ListDeploymentGroups(ctx context.Context, params *ListDeploymen
 	return out, nil
 }
 
-// Represents the input of a ListDeploymentGroups operation.
+// Represents the input of a ListDeploymentGroups  operation.
 type ListDeploymentGroupsInput struct {
 
-	// The name of an CodeDeploy application associated with the IAM user or Amazon Web
-	// Services account.
+	// The name of an CodeDeploy application associated with the IAM user or Amazon
+	// Web Services account.
 	//
 	// This member is required.
 	ApplicationName *string
 
-	// An identifier returned from the previous list deployment groups call. It can be
-	// used to return the next set of deployment groups in the list.
+	// An identifier returned from the previous list deployment groups call. It can
+	// be used to return the next set of deployment groups in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a ListDeploymentGroups operation.
+// Represents the output of a ListDeploymentGroups  operation.
 type ListDeploymentGroupsOutput struct {
 
 	// The application name.
@@ -53,9 +53,9 @@ type ListDeploymentGroupsOutput struct {
 	// A list of deployment group names.
 	DeploymentGroups []string
 
-	// If a large amount of information is returned, an identifier is also returned. It
-	// can be used in a subsequent list deployment groups call to return the next set
-	// of deployment groups in the list.
+	// If a large amount of information is returned, an identifier is also returned.
+	// It can be used in a subsequent list deployment groups call to return the next
+	// set of deployment groups in the list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -138,8 +138,8 @@ var _ ListDeploymentGroupsAPIClient = (*Client)(nil)
 // ListDeploymentGroupsPaginatorOptions is the paginator options for
 // ListDeploymentGroups
 type ListDeploymentGroupsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specifies an Amazon Web Services account that you want to share a query logging
-// configuration with, the query logging configuration that you want to share, and
-// the operations that you want the account to be able to perform on the
+// Specifies an Amazon Web Services account that you want to share a query
+// logging configuration with, the query logging configuration that you want to
+// share, and the operations that you want the account to be able to perform on the
 // configuration.
 func (c *Client) PutResolverQueryLogConfigPolicy(ctx context.Context, params *PutResolverQueryLogConfigPolicyInput, optFns ...func(*Options)) (*PutResolverQueryLogConfigPolicyOutput, error) {
 	if params == nil {
@@ -31,27 +31,23 @@ func (c *Client) PutResolverQueryLogConfigPolicy(ctx context.Context, params *Pu
 
 type PutResolverQueryLogConfigPolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the account that you want to share rules with.
+	// The Amazon Resource Name (ARN) of the account that you want to share rules
+	// with.
 	//
 	// This member is required.
 	Arn *string
 
-	// An Identity and Access Management policy statement that lists the query logging
-	// configurations that you want to share with another Amazon Web Services account
-	// and the operations that you want the account to be able to perform. You can
-	// specify the following operations in the Actions section of the statement:
-	// -
-	// route53resolver:AssociateResolverQueryLogConfig
-	// -
-	// route53resolver:DisassociateResolverQueryLogConfig
-	// -
-	// route53resolver:ListResolverQueryLogConfigAssociations
-	// -
-	// route53resolver:ListResolverQueryLogConfigs
-	//
-	// In the Resource section of the
-	// statement, you specify the ARNs for the query logging configurations that you
-	// want to share with the account that you specified in Arn.
+	// An Identity and Access Management policy statement that lists the query
+	// logging configurations that you want to share with another Amazon Web Services
+	// account and the operations that you want the account to be able to perform. You
+	// can specify the following operations in the Actions  section of the statement:
+	//     - route53resolver:AssociateResolverQueryLogConfig
+	//     - route53resolver:DisassociateResolverQueryLogConfig
+	//     - route53resolver:ListResolverQueryLogConfigAssociations
+	//     - route53resolver:ListResolverQueryLogConfigs
+	//  In the Resource section of the statement, you specify the ARNs for the query
+	// logging configurations that you want to share with the account that you
+	// specified in Arn .
 	//
 	// This member is required.
 	ResolverQueryLogConfigPolicy *string
@@ -59,10 +55,10 @@ type PutResolverQueryLogConfigPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-// The response to a PutResolverQueryLogConfigPolicy request.
+// The response to a PutResolverQueryLogConfigPolicy  request.
 type PutResolverQueryLogConfigPolicyOutput struct {
 
-	// Whether the PutResolverQueryLogConfigPolicy request was successful.
+	// Whether the PutResolverQueryLogConfigPolicy  request was successful.
 	ReturnValue bool
 
 	// Metadata pertaining to the operation's result.

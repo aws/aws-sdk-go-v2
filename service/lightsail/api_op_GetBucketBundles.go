@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the bundles that you can apply to a Amazon Lightsail bucket. The bucket
-// bundle specifies the monthly cost, storage quota, and data transfer quota for a
-// bucket. Use the UpdateBucketBundle
-// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html)
+// Returns the bundles that you can apply to a Amazon Lightsail bucket. The
+// bucket bundle specifies the monthly cost, storage quota, and data transfer quota
+// for a bucket. Use the UpdateBucketBundle (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html)
 // action to update the bundle for a bucket.
 func (c *Client) GetBucketBundles(ctx context.Context, params *GetBucketBundlesInput, optFns ...func(*Options)) (*GetBucketBundlesOutput, error) {
 	if params == nil {
@@ -33,8 +32,8 @@ func (c *Client) GetBucketBundles(ctx context.Context, params *GetBucketBundlesI
 
 type GetBucketBundlesInput struct {
 
-	// A Boolean value that indicates whether to include inactive (unavailable) bundles
-	// in the response of your request.
+	// A Boolean value that indicates whether to include inactive (unavailable)
+	// bundles in the response of your request.
 	IncludeInactive *bool
 
 	noSmithyDocumentSerde

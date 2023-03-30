@@ -14,8 +14,8 @@ import (
 )
 
 // Lists model compilation jobs that satisfy various filters. To create a model
-// compilation job, use CreateCompilationJob. To get information about a particular
-// model compilation job you have created, use DescribeCompilationJob.
+// compilation job, use CreateCompilationJob. To get information about a
+// particular model compilation job you have created, use DescribeCompilationJob .
 func (c *Client) ListCompilationJobs(ctx context.Context, params *ListCompilationJobsInput, optFns ...func(*Options)) (*ListCompilationJobsOutput, error) {
 	if params == nil {
 		params = &ListCompilationJobsInput{}
@@ -52,8 +52,8 @@ type ListCompilationJobsInput struct {
 	// The maximum number of model compilation jobs to return in the response.
 	MaxResults *int32
 
-	// A filter that returns the model compilation jobs whose name contains a specified
-	// string.
+	// A filter that returns the model compilation jobs whose name contains a
+	// specified string.
 	NameContains *string
 
 	// If the result of the previous ListCompilationJobs request was truncated, the
@@ -61,10 +61,10 @@ type ListCompilationJobsInput struct {
 	// jobs, use the token in the next request.
 	NextToken *string
 
-	// The field by which to sort results. The default is CreationTime.
+	// The field by which to sort results. The default is CreationTime .
 	SortBy types.ListCompilationJobsSortBy
 
-	// The sort order for results. The default is Ascending.
+	// The sort order for results. The default is Ascending .
 	SortOrder types.SortOrder
 
 	// A filter that retrieves model compilation jobs with a specific
@@ -153,8 +153,8 @@ func (c *Client) addOperationListCompilationJobsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListCompilationJobsAPIClient is a client that implements the ListCompilationJobs
-// operation.
+// ListCompilationJobsAPIClient is a client that implements the
+// ListCompilationJobs operation.
 type ListCompilationJobsAPIClient interface {
 	ListCompilationJobs(context.Context, *ListCompilationJobsInput, ...func(*Options)) (*ListCompilationJobsOutput, error)
 }
@@ -167,8 +167,8 @@ type ListCompilationJobsPaginatorOptions struct {
 	// The maximum number of model compilation jobs to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

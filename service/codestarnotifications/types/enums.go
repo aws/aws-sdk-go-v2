@@ -28,9 +28,9 @@ const (
 	ListEventTypesFilterNameServiceName  ListEventTypesFilterName = "SERVICE_NAME"
 )
 
-// Values returns all known values for ListEventTypesFilterName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ListEventTypesFilterName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ListEventTypesFilterName) Values() []ListEventTypesFilterName {
 	return []ListEventTypesFilterName{
 		"RESOURCE_TYPE",
@@ -70,8 +70,8 @@ const (
 	ListTargetsFilterNameTargetStatus  ListTargetsFilterName = "TARGET_STATUS"
 )
 
-// Values returns all known values for ListTargetsFilterName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ListTargetsFilterName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ListTargetsFilterName) Values() []ListTargetsFilterName {
 	return []ListTargetsFilterName{
@@ -110,9 +110,9 @@ const (
 	TargetStatusDeactivated TargetStatus = "DEACTIVATED"
 )
 
-// Values returns all known values for TargetStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for TargetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (TargetStatus) Values() []TargetStatus {
 	return []TargetStatus{
 		"PENDING",

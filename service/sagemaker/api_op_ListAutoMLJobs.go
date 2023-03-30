@@ -53,10 +53,10 @@ type ListAutoMLJobsInput struct {
 	// next request to receive the next set of results.
 	NextToken *string
 
-	// The parameter by which to sort the results. The default is Name.
+	// The parameter by which to sort the results. The default is Name .
 	SortBy types.AutoMLSortBy
 
-	// The sort order for the results. The default is Descending.
+	// The sort order for the results. The default is Descending .
 	SortOrder types.AutoMLSortOrder
 
 	// Request a list of jobs, using a filter for status.
@@ -155,8 +155,8 @@ type ListAutoMLJobsPaginatorOptions struct {
 	// Request a list of jobs up to a specified limit.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

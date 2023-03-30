@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Obtains information about the trust relationships for this account. If no input
-// parameters are provided, such as DirectoryId or TrustIds, this request describes
-// all the trust relationships belonging to the account.
+// Obtains information about the trust relationships for this account. If no
+// input parameters are provided, such as DirectoryId or TrustIds, this request
+// describes all the trust relationships belonging to the account.
 func (c *Client) DescribeTrusts(ctx context.Context, params *DescribeTrustsInput, optFns ...func(*Options)) (*DescribeTrustsOutput, error) {
 	if params == nil {
 		params = &DescribeTrustsInput{}
@@ -42,8 +42,8 @@ type DescribeTrustsInput struct {
 	// The maximum number of objects to return.
 	Limit *int32
 
-	// The DescribeTrustsResult.NextToken value from a previous call to DescribeTrusts.
-	// Pass null if this is the first call.
+	// The DescribeTrustsResult.NextToken value from a previous call to DescribeTrusts
+	// . Pass null if this is the first call.
 	NextToken *string
 
 	// A list of identifiers of the trust relationships for which to obtain the
@@ -148,8 +148,8 @@ type DescribeTrustsPaginatorOptions struct {
 	// The maximum number of objects to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -69,8 +69,8 @@ type DeploymentModel struct {
 // registered with SageMaker Edge Manager.
 type DeploymentResult struct {
 
-	// The timestamp of when the deployment was ended, and the agent got the deployment
-	// results.
+	// The timestamp of when the deployment was ended, and the agent got the
+	// deployment results.
 	DeploymentEndTime *time.Time
 
 	// Returns a list of models deployed on the agent.

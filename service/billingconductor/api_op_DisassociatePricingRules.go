@@ -33,8 +33,8 @@ type DisassociatePricingRulesInput struct {
 	// This member is required.
 	Arn *string
 
-	// A list containing the Amazon Resource Name (ARN) of the pricing rules that will
-	// be disassociated.
+	// A list containing the Amazon Resource Name (ARN) of the pricing rules that
+	// will be disassociated.
 	//
 	// This member is required.
 	PricingRuleArns []string

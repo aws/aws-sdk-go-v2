@@ -41,8 +41,8 @@ type GetDataLakeSettingsInput struct {
 
 type GetDataLakeSettingsOutput struct {
 
-	// A structure representing a list of Lake Formation principals designated as data
-	// lake administrators.
+	// A structure representing a list of Lake Formation principals designated as
+	// data lake administrators.
 	DataLakeSettings *types.DataLakeSettings
 
 	// Metadata pertaining to the operation's result.

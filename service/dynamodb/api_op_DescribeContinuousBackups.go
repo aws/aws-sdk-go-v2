@@ -14,14 +14,14 @@ import (
 )
 
 // Checks the status of continuous backups and point in time recovery on the
-// specified table. Continuous backups are ENABLED on all tables at table creation.
-// If point in time recovery is enabled, PointInTimeRecoveryStatus will be set to
-// ENABLED. After continuous backups and point in time recovery are enabled, you
-// can restore to any point in time within EarliestRestorableDateTime and
-// LatestRestorableDateTime. LatestRestorableDateTime is typically 5 minutes before
-// the current time. You can restore your table to any point in time during the
-// last 35 days. You can call DescribeContinuousBackups at a maximum rate of 10
-// times per second.
+// specified table. Continuous backups are ENABLED on all tables at table
+// creation. If point in time recovery is enabled, PointInTimeRecoveryStatus will
+// be set to ENABLED. After continuous backups and point in time recovery are
+// enabled, you can restore to any point in time within EarliestRestorableDateTime
+// and LatestRestorableDateTime . LatestRestorableDateTime is typically 5 minutes
+// before the current time. You can restore your table to any point in time during
+// the last 35 days. You can call DescribeContinuousBackups at a maximum rate of
+// 10 times per second.
 func (c *Client) DescribeContinuousBackups(ctx context.Context, params *DescribeContinuousBackupsInput, optFns ...func(*Options)) (*DescribeContinuousBackupsOutput, error) {
 	if params == nil {
 		params = &DescribeContinuousBackupsInput{}

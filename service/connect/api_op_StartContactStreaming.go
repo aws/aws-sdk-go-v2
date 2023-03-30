@@ -13,8 +13,8 @@ import (
 )
 
 // Initiates real-time message streaming for a new chat contact. For more
-// information about message streaming, see Enable real-time chat message streaming
-// (https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html)
+// information about message streaming, see Enable real-time chat message
+// streaming (https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) StartContactStreaming(ctx context.Context, params *StartContactStreamingInput, optFns ...func(*Options)) (*StartContactStreamingOutput, error) {
 	if params == nil {
@@ -41,20 +41,19 @@ type StartContactStreamingInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs
-	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+	// .
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The identifier of the contact. This is the identifier of the contact associated
-	// with the first interaction with the contact center.
+	// The identifier of the contact. This is the identifier of the contact
+	// associated with the first interaction with the contact center.
 	//
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.

@@ -13,7 +13,7 @@ import (
 )
 
 // Creates a bot under an Amazon Chime AppInstance. The request consists of a
-// unique Configuration and Name for that bot.
+// unique Configuration  and Name  for that bot.
 func (c *Client) CreateAppInstanceBot(ctx context.Context, params *CreateAppInstanceBotInput, optFns ...func(*Options)) (*CreateAppInstanceBotOutput, error) {
 	if params == nil {
 		params = &CreateAppInstanceBotInput{}
@@ -31,13 +31,13 @@ func (c *Client) CreateAppInstanceBot(ctx context.Context, params *CreateAppInst
 
 type CreateAppInstanceBotInput struct {
 
-	// The ARN of the AppInstance request.
+	// The ARN of the AppInstance  request.
 	//
 	// This member is required.
 	AppInstanceArn *string
 
 	// The unique ID for the client making the request. Use different tokens for
-	// different AppInstanceBots.
+	// different AppInstanceBots .
 	//
 	// This member is required.
 	ClientRequestToken *string
@@ -53,7 +53,7 @@ type CreateAppInstanceBotInput struct {
 	// The user's name.
 	Name *string
 
-	// The tags assigned to the AppInstanceBot.
+	// The tags assigned to the AppInstanceBot .
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -61,7 +61,7 @@ type CreateAppInstanceBotInput struct {
 
 type CreateAppInstanceBotOutput struct {
 
-	// The ARN of the AppinstanceBot.
+	// The ARN of the AppinstanceBot .
 	AppInstanceBotArn *string
 
 	// Metadata pertaining to the operation's result.

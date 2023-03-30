@@ -33,7 +33,7 @@ func (c *Client) DescribeSnapshots(ctx context.Context, params *DescribeSnapshot
 	return out, nil
 }
 
-// Contains the inputs for the DescribeSnapshots operation.
+// Contains the inputs for the DescribeSnapshots  operation.
 type DescribeSnapshotsInput struct {
 
 	// The identifier of the directory for which to retrieve snapshot information.
@@ -43,7 +43,7 @@ type DescribeSnapshotsInput struct {
 	Limit *int32
 
 	// The DescribeSnapshotsResult.NextToken value from a previous call to
-	// DescribeSnapshots. Pass null if this is the first call.
+	// DescribeSnapshots . Pass null if this is the first call.
 	NextToken *string
 
 	// A list of identifiers of the snapshots to obtain the information for. If this
@@ -54,15 +54,15 @@ type DescribeSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the results of the DescribeSnapshots operation.
+// Contains the results of the DescribeSnapshots  operation.
 type DescribeSnapshotsOutput struct {
 
-	// If not null, more results are available. Pass this value in the NextToken member
-	// of a subsequent call to DescribeSnapshots.
+	// If not null, more results are available. Pass this value in the NextToken
+	// member of a subsequent call to DescribeSnapshots .
 	NextToken *string
 
-	// The list of Snapshot objects that were retrieved. It is possible that this list
-	// contains less than the number of items specified in the Limit member of the
+	// The list of Snapshot objects that were retrieved. It is possible that this
+	// list contains less than the number of items specified in the Limit member of the
 	// request. This occurs if there are less than the requested number of items left
 	// to retrieve, or if the limitations of the operation have been exceeded.
 	Snapshots []types.Snapshot
@@ -141,13 +141,14 @@ type DescribeSnapshotsAPIClient interface {
 
 var _ DescribeSnapshotsAPIClient = (*Client)(nil)
 
-// DescribeSnapshotsPaginatorOptions is the paginator options for DescribeSnapshots
+// DescribeSnapshotsPaginatorOptions is the paginator options for
+// DescribeSnapshots
 type DescribeSnapshotsPaginatorOptions struct {
 	// The maximum number of objects to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

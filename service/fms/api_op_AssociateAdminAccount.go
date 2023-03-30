@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the Firewall Manager administrator account. The account must be a member of
-// the organization in Organizations whose resources you want to protect. Firewall
-// Manager sets the permissions that allow the account to administer your Firewall
-// Manager policies. The account that you associate with Firewall Manager is called
-// the Firewall Manager administrator account.
+// Sets the Firewall Manager administrator account. The account must be a member
+// of the organization in Organizations whose resources you want to protect.
+// Firewall Manager sets the permissions that allow the account to administer your
+// Firewall Manager policies. The account that you associate with Firewall Manager
+// is called the Firewall Manager administrator account.
 func (c *Client) AssociateAdminAccount(ctx context.Context, params *AssociateAdminAccountInput, optFns ...func(*Options)) (*AssociateAdminAccountOutput, error) {
 	if params == nil {
 		params = &AssociateAdminAccountInput{}
@@ -35,8 +35,8 @@ type AssociateAdminAccountInput struct {
 	// The Amazon Web Services account ID to associate with Firewall Manager as the
 	// Firewall Manager administrator account. This must be an Organizations member
 	// account. For more information about Organizations, see Managing the Amazon Web
-	// Services Accounts in Your Organization
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html).
+	// Services Accounts in Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html)
+	// .
 	//
 	// This member is required.
 	AdminAccount *string

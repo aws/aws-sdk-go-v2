@@ -5,6 +5,6 @@
 //
 // Amazon Inspector Amazon Inspector enables you to analyze the behavior of your
 // AWS resources and to identify potential security issues. For more information,
-// see  Amazon Inspector User Guide
-// (https://docs.aws.amazon.com/inspector/latest/userguide/inspector_introduction.html).
+// see Amazon Inspector User Guide (https://docs.aws.amazon.com/inspector/latest/userguide/inspector_introduction.html)
+// .
 package inspector

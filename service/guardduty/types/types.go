@@ -55,7 +55,8 @@ type AccountDetail struct {
 	noSmithyDocumentSerde
 }
 
-// Provides details of the GuardDuty member account that uses a free trial service.
+// Provides details of the GuardDuty member account that uses a free trial
+// service.
 type AccountFreeTrialInfo struct {
 
 	// The account identifier of the GuardDuty member account.
@@ -102,7 +103,7 @@ type Action struct {
 	// Information about the PORT_PROBE action described in this finding.
 	PortProbeAction *PortProbeAction
 
-	// Information about RDS_LOGIN_ATTEMPT action described in this finding.
+	// Information about RDS_LOGIN_ATTEMPT  action described in this finding.
 	RdsLoginAttemptAction *RdsLoginAttemptAction
 
 	noSmithyDocumentSerde
@@ -177,21 +178,20 @@ type AwsApiCallAction struct {
 }
 
 // Contains information on how the bucker owner's S3 Block Public Access settings
-// are being applied to the S3 bucket. See S3 Block Public Access
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
+// are being applied to the S3 bucket. See S3 Block Public Access (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
 // for more information.
 type BlockPublicAccess struct {
 
-	// Indicates if S3 Block Public Access is set to BlockPublicAcls.
+	// Indicates if S3 Block Public Access is set to BlockPublicAcls .
 	BlockPublicAcls bool
 
-	// Indicates if S3 Block Public Access is set to BlockPublicPolicy.
+	// Indicates if S3 Block Public Access is set to BlockPublicPolicy .
 	BlockPublicPolicy bool
 
-	// Indicates if S3 Block Public Access is set to IgnorePublicAcls.
+	// Indicates if S3 Block Public Access is set to IgnorePublicAcls .
 	IgnorePublicAcls bool
 
-	// Indicates if S3 Block Public Access is set to RestrictPublicBuckets.
+	// Indicates if S3 Block Public Access is set to RestrictPublicBuckets .
 	RestrictPublicBuckets bool
 
 	noSmithyDocumentSerde
@@ -203,8 +203,8 @@ type BucketLevelPermissions struct {
 	// Contains information on how Access Control Policies are applied to the bucket.
 	AccessControlList *AccessControlList
 
-	// Contains information on which account level S3 Block Public Access settings are
-	// applied to the S3 bucket.
+	// Contains information on which account level S3 Block Public Access settings
+	// are applied to the S3 bucket.
 	BlockPublicAccess *BlockPublicAccess
 
 	// Contains information on the bucket policies for the S3 bucket.
@@ -251,14 +251,14 @@ type CloudTrailConfigurationResult struct {
 // Contains information about the condition.
 type Condition struct {
 
-	// Represents the equal condition to be applied to a single field when querying for
-	// findings.
+	// Represents the equal condition to be applied to a single field when querying
+	// for findings.
 	//
 	// Deprecated: This member has been deprecated.
 	Eq []string
 
-	// Represents an equal condition to be applied to a single field when querying for
-	// findings.
+	// Represents an equal condition to be applied to a single field when querying
+	// for findings.
 	Equals []string
 
 	// Represents a greater than condition to be applied to a single field when
@@ -301,8 +301,8 @@ type Condition struct {
 	// Deprecated: This member has been deprecated.
 	Lte int32
 
-	// Represents the not equal condition to be applied to a single field when querying
-	// for findings.
+	// Represents the not equal condition to be applied to a single field when
+	// querying for findings.
 	//
 	// Deprecated: This member has been deprecated.
 	Neq []string
@@ -317,7 +317,8 @@ type Condition struct {
 // Details of a container.
 type Container struct {
 
-	// The container runtime (such as, Docker or containerd) used to run the container.
+	// The container runtime (such as, Docker or containerd) used to run the
+	// container.
 	ContainerRuntime *string
 
 	// Container ID.
@@ -443,17 +444,16 @@ type DataSourcesFreeTrial struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information on the server side encryption method used in the S3 bucket.
-// See S3 Server-Side Encryption
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) for
-// more information.
+// Contains information on the server side encryption method used in the S3
+// bucket. See S3 Server-Side Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html)
+// for more information.
 type DefaultServerSideEncryption struct {
 
 	// The type of encryption used for objects within the S3 bucket.
 	EncryptionType *string
 
-	// The Amazon Resource Name (ARN) of the KMS encryption key. Only available if the
-	// bucket EncryptionType is aws:kms.
+	// The Amazon Resource Name (ARN) of the KMS encryption key. Only available if
+	// the bucket EncryptionType  is aws:kms .
 	KmsMasterKeyArn *string
 
 	noSmithyDocumentSerde
@@ -468,8 +468,8 @@ type Destination struct {
 	// This member is required.
 	DestinationId *string
 
-	// The type of resource used for the publishing destination. Currently, only Amazon
-	// S3 buckets are supported.
+	// The type of resource used for the publishing destination. Currently, only
+	// Amazon S3 buckets are supported.
 	//
 	// This member is required.
 	DestinationType DestinationType
@@ -543,8 +543,8 @@ type DnsRequestAction struct {
 	// The domain information for the API request.
 	Domain *string
 
-	// The network connection protocol observed in the activity that prompted GuardDuty
-	// to generate the finding.
+	// The network connection protocol observed in the activity that prompted
+	// GuardDuty to generate the finding.
 	Protocol *string
 
 	noSmithyDocumentSerde
@@ -710,8 +710,8 @@ type Evidence struct {
 // Contains information about the condition.
 type FilterCondition struct {
 
-	// Represents an equal condition to be applied to a single field when querying for
-	// scan entries.
+	// Represents an equal condition to be applied to a single field when querying
+	// for scan entries.
 	EqualsValue *string
 
 	// Represents a greater than condition to be applied to a single field when
@@ -780,8 +780,8 @@ type Finding struct {
 	// This member is required.
 	Region *string
 
-	// Contains information about the Amazon Web Services resource associated with the
-	// activity that prompted GuardDuty to generate a finding.
+	// Contains information about the Amazon Web Services resource associated with
+	// the activity that prompted GuardDuty to generate a finding.
 	//
 	// This member is required.
 	Resource *Resource
@@ -878,8 +878,8 @@ type GeoLocation struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details of the highest severity threat detected during scan and number
-// of infected files.
+// Contains details of the highest severity threat detected during scan and
+// number of infected files.
 type HighestSeverityThreatDetails struct {
 
 	// Total number of infected files with the highest severity threat detected.
@@ -888,14 +888,15 @@ type HighestSeverityThreatDetails struct {
 	// Severity level of the highest severity threat detected.
 	Severity *string
 
-	// Threat name of the highest severity threat detected as part of the malware scan.
+	// Threat name of the highest severity threat detected as part of the malware
+	// scan.
 	ThreatName *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents a pre-existing file or directory on the host machine that the volume
-// maps to.
+// Represents a pre-existing file or directory on the host machine that the
+// volume maps to.
 type HostPath struct {
 
 	// Path of the file or directory on the host that the volume maps to.
@@ -968,8 +969,8 @@ type Invitation struct {
 	// The ID of the account that the invitation was sent from.
 	AccountId *string
 
-	// The ID of the invitation. This value is used to validate the inviter account to
-	// the member account.
+	// The ID of the invitation. This value is used to validate the inviter account
+	// to the member account.
 	InvitationId *string
 
 	// The timestamp when the invitation was sent.
@@ -993,8 +994,8 @@ type KubernetesApiCallAction struct {
 	// The Kubernetes API request URI.
 	RequestUri *string
 
-	// The IP of the Kubernetes API caller and the IPs of any proxies or load balancers
-	// between the caller and the API endpoint.
+	// The IP of the Kubernetes API caller and the IPs of any proxies or load
+	// balancers between the caller and the API endpoint.
 	SourceIps []string
 
 	// The resulting HTTP response code of the Kubernetes API call action.
@@ -1170,8 +1171,8 @@ type MalwareProtectionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// An object that contains information on the status of all Malware Protection data
-// sources.
+// An object that contains information on the status of all Malware Protection
+// data sources.
 type MalwareProtectionConfigurationResult struct {
 
 	// Describes the configuration of Malware Protection for EC2 instances with
@@ -1187,8 +1188,8 @@ type MalwareProtectionConfigurationResult struct {
 // Provides details about Malware Protection when it is enabled as a data source.
 type MalwareProtectionDataSourceFreeTrial struct {
 
-	// Describes whether Malware Protection for EC2 instances with findings is enabled
-	// as a data source.
+	// Describes whether Malware Protection for EC2 instances with findings is
+	// enabled as a data source.
 	ScanEc2InstanceWithFindings *DataSourceFreeTrial
 
 	noSmithyDocumentSerde
@@ -1381,8 +1382,8 @@ type Organization struct {
 	noSmithyDocumentSerde
 }
 
-// An object that contains information on which data sources will be configured to
-// be automatically enabled for new members within the organization.
+// An object that contains information on which data sources will be configured
+// to be automatically enabled for new members within the organization.
 type OrganizationDataSourceConfigurations struct {
 
 	// Describes the configuration of Kubernetes data sources for new members of the
@@ -1422,8 +1423,8 @@ type OrganizationDataSourceConfigurationsResult struct {
 // Organization-wide EBS volumes scan configuration.
 type OrganizationEbsVolumes struct {
 
-	// Whether scanning EBS volumes should be auto-enabled for new members joining the
-	// organization.
+	// Whether scanning EBS volumes should be auto-enabled for new members joining
+	// the organization.
 	AutoEnable bool
 
 	noSmithyDocumentSerde
@@ -1456,10 +1457,10 @@ type OrganizationFeatureConfiguration struct {
 type OrganizationFeatureConfigurationResult struct {
 
 	// Describes how The status of the feature that are configured for the member
-	// accounts within the organization. If you set AutoEnable to NEW, a feature will
-	// be configured for only the new accounts when they join the organization. If you
-	// set AutoEnable to NONE, no feature will be configured for the accounts when they
-	// join the organization.
+	// accounts within the organization. If you set AutoEnable  to NEW, a feature
+	// will be configured for only the new accounts when they join the organization. If
+	// you set AutoEnable  to NONE, no feature will be configured for the accounts
+	// when they join the organization.
 	AutoEnable OrgFeatureStatus
 
 	// The name of the feature that is configured for the member accounts within the
@@ -1485,8 +1486,8 @@ type OrganizationKubernetesAuditLogsConfiguration struct {
 // organization.
 type OrganizationKubernetesAuditLogsConfigurationResult struct {
 
-	// Whether Kubernetes audit logs data source should be auto-enabled for new members
-	// joining the organization.
+	// Whether Kubernetes audit logs data source should be auto-enabled for new
+	// members joining the organization.
 	//
 	// This member is required.
 	AutoEnable bool
@@ -1497,8 +1498,8 @@ type OrganizationKubernetesAuditLogsConfigurationResult struct {
 // Organization-wide Kubernetes data sources configurations.
 type OrganizationKubernetesConfiguration struct {
 
-	// Whether Kubernetes audit logs data source should be auto-enabled for new members
-	// joining the organization.
+	// Whether Kubernetes audit logs data source should be auto-enabled for new
+	// members joining the organization.
 	//
 	// This member is required.
 	AuditLogs *OrganizationKubernetesAuditLogsConfiguration
@@ -1528,8 +1529,8 @@ type OrganizationMalwareProtectionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// An object that contains information on the status of all Malware Protection data
-// source for an organization.
+// An object that contains information on the status of all Malware Protection
+// data source for an organization.
 type OrganizationMalwareProtectionConfigurationResult struct {
 
 	// Describes the configuration for scanning EC2 instances with findings for an
@@ -1543,8 +1544,8 @@ type OrganizationMalwareProtectionConfigurationResult struct {
 // members of the organization.
 type OrganizationS3LogsConfiguration struct {
 
-	// A value that contains information on whether S3 data event logs will be enabled
-	// automatically as a data source for the organization.
+	// A value that contains information on whether S3 data event logs will be
+	// enabled automatically as a data source for the organization.
 	//
 	// This member is required.
 	AutoEnable bool
@@ -1556,8 +1557,8 @@ type OrganizationS3LogsConfiguration struct {
 // organization.
 type OrganizationS3LogsConfigurationResult struct {
 
-	// A value that describes whether S3 data event logs are automatically enabled for
-	// new members of the organization.
+	// A value that describes whether S3 data event logs are automatically enabled
+	// for new members of the organization.
 	//
 	// This member is required.
 	AutoEnable bool
@@ -1568,15 +1569,15 @@ type OrganizationS3LogsConfigurationResult struct {
 // Organization-wide EC2 instances with findings scan configuration.
 type OrganizationScanEc2InstanceWithFindings struct {
 
-	// Whether scanning EBS volumes should be auto-enabled for new members joining the
-	// organization.
+	// Whether scanning EBS volumes should be auto-enabled for new members joining
+	// the organization.
 	EbsVolumes *OrganizationEbsVolumes
 
 	noSmithyDocumentSerde
 }
 
-// An object that contains information on the status of scanning EC2 instances with
-// findings for an organization.
+// An object that contains information on the status of scanning EC2 instances
+// with findings for an organization.
 type OrganizationScanEc2InstanceWithFindingsResult struct {
 
 	// Describes the configuration for scanning EBS volumes for an organization.
@@ -1589,8 +1590,7 @@ type OrganizationScanEc2InstanceWithFindingsResult struct {
 type Owner struct {
 
 	// The canonical user ID of the bucket owner. For information about locating your
-	// canonical user ID see Finding Your Account Canonical User ID.
-	// (https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)
+	// canonical user ID see Finding Your Account Canonical User ID. (https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)
 	Id *string
 
 	noSmithyDocumentSerde
@@ -1681,8 +1681,8 @@ type RdsDbInstanceDetails struct {
 	// involved in the finding.
 	DbClusterIdentifier *string
 
-	// The Amazon Resource Name (ARN) that identifies the database instance involved in
-	// the finding.
+	// The Amazon Resource Name (ARN) that identifies the database instance involved
+	// in the finding.
 	DbInstanceArn *string
 
 	// The identifier associated to the database instance that was involved in the
@@ -1723,8 +1723,8 @@ type RdsDbUserDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Indicates that a login attempt was made to the potentially compromised database
-// from a remote IP address.
+// Indicates that a login attempt was made to the potentially compromised
+// database from a remote IP address.
 type RdsLoginAttemptAction struct {
 
 	// Indicates the login attributes used in the login attempt.
@@ -1736,8 +1736,8 @@ type RdsLoginAttemptAction struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about the remote Amazon Web Services account that made the API
-// call.
+// Contains details about the remote Amazon Web Services account that made the
+// API call.
 type RemoteAccountDetails struct {
 
 	// The Amazon Web Services account ID of the remote API caller.
@@ -1785,8 +1785,8 @@ type RemotePortDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the Amazon Web Services resource associated with the
-// activity that prompted GuardDuty to generate a finding.
+// Contains information about the Amazon Web Services resource associated with
+// the activity that prompted GuardDuty to generate a finding.
 type Resource struct {
 
 	// The IAM access key details (user information) of a user that engaged in the
@@ -1809,7 +1809,8 @@ type Resource struct {
 	// prompted GuardDuty to generate a finding.
 	InstanceDetails *InstanceDetails
 
-	// Details about the Kubernetes user and workload involved in a Kubernetes finding.
+	// Details about the Kubernetes user and workload involved in a Kubernetes
+	// finding.
 	KubernetesDetails *KubernetesDetails
 
 	// Contains information about the database instance to which an anomalous login
@@ -1882,8 +1883,8 @@ type S3LogsConfiguration struct {
 // Describes whether S3 data event logs will be enabled as a data source.
 type S3LogsConfigurationResult struct {
 
-	// A value that describes whether S3 data event logs are automatically enabled for
-	// new members of the organization.
+	// A value that describes whether S3 data event logs are automatically enabled
+	// for new members of the organization.
 	//
 	// This member is required.
 	Status DataSourceStatus
@@ -1944,8 +1945,8 @@ type Scan struct {
 // Contains information about the condition.
 type ScanCondition struct {
 
-	// Represents an mapEqual condition to be applied to a single field when triggering
-	// for malware scan.
+	// Represents an mapEqual condition to be applied to a single field when
+	// triggering for malware scan.
 	//
 	// This member is required.
 	MapEquals []ScanConditionPair
@@ -1961,8 +1962,8 @@ type ScanConditionPair struct {
 	// This member is required.
 	Key *string
 
-	// Represents optional value in the map condition. If not specified, only key will
-	// be matched.
+	// Represents optional value in the map condition. If not specified, only key
+	// will be matched.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -1997,8 +1998,8 @@ type ScanEc2InstanceWithFindings struct {
 	noSmithyDocumentSerde
 }
 
-// An object that contains information on the status of whether Malware Protection
-// for EC2 instances with findings will be enabled as a data source.
+// An object that contains information on the status of whether Malware
+// Protection for EC2 instances with findings will be enabled as a data source.
 type ScanEc2InstanceWithFindingsResult struct {
 
 	// Describes the configuration of scanning EBS volumes as a data source.
@@ -2044,8 +2045,8 @@ type ScannedItemCount struct {
 // malware scan.
 type ScanResourceCriteria struct {
 
-	// Represents condition that when matched will prevent a malware scan for a certain
-	// resource.
+	// Represents condition that when matched will prevent a malware scan for a
+	// certain resource.
 	Exclude map[string]ScanCondition
 
 	// Represents condition that when matched will allow a malware scan for a certain
@@ -2064,8 +2065,8 @@ type ScanResultDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Contains files infected with the given threat providing details of malware name
-// and severity.
+// Contains files infected with the given threat providing details of malware
+// name and severity.
 type ScanThreatName struct {
 
 	// List of infected files in EBS volume with details.
@@ -2092,7 +2093,8 @@ type SecurityContext struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the security groups associated with the EC2 instance.
+// Contains information about the security groups associated with the EC2
+// instance.
 type SecurityGroup struct {
 
 	// The security group ID of the EC2 instance.
@@ -2129,8 +2131,8 @@ type Service struct {
 	// this finding.
 	EventFirstSeen *string
 
-	// The last-seen timestamp of the activity that prompted GuardDuty to generate this
-	// finding.
+	// The last-seen timestamp of the activity that prompted GuardDuty to generate
+	// this finding.
 	EventLastSeen *string
 
 	// An evidence object associated with the service.
@@ -2167,7 +2169,7 @@ type ServiceAdditionalInfo struct {
 // Contains information about the criteria used for sorting findings.
 type SortCriteria struct {
 
-	// Represents the finding attribute, such as accountId, that sorts the findings.
+	// Represents the finding attribute, such as accountId , that sorts the findings.
 	AttributeName *string
 
 	// The order by which the sorted findings are to be displayed.
@@ -2194,8 +2196,8 @@ type ThreatDetectedByName struct {
 	// Total number of infected files identified.
 	ItemCount int32
 
-	// Flag to determine if the finding contains every single infected file-path and/or
-	// every threat.
+	// Flag to determine if the finding contains every single infected file-path
+	// and/or every threat.
 	Shortened bool
 
 	// List of identified threats with details, organized by threat name.
@@ -2273,8 +2275,8 @@ type UnprocessedAccount struct {
 // Specifies the names of the data sources that couldn't be enabled.
 type UnprocessedDataSourcesResult struct {
 
-	// An object that contains information on the status of all Malware Protection data
-	// sources.
+	// An object that contains information on the status of all Malware Protection
+	// data sources.
 	MalwareProtection *MalwareProtectionConfigurationResult
 
 	noSmithyDocumentSerde
@@ -2350,8 +2352,8 @@ type UsageResourceResult struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the result of GuardDuty usage. If a UsageStatisticType is provided the
-// result for other types will be null.
+// Contains the result of GuardDuty usage. If a UsageStatisticType is provided
+// the result for other types will be null.
 type UsageStatistics struct {
 
 	// The usage statistic sum organized by account ID.
@@ -2376,8 +2378,8 @@ type UsageStatistics struct {
 // Volume used by the Kubernetes workload.
 type Volume struct {
 
-	// Represents a pre-existing file or directory on the host machine that the volume
-	// maps to.
+	// Represents a pre-existing file or directory on the host machine that the
+	// volume maps to.
 	HostPath *HostPath
 
 	// Volume name.

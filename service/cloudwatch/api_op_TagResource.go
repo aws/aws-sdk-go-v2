@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Assigns one or more tags (key-value pairs) to the specified CloudWatch resource.
-// Currently, the only CloudWatch resources that can be tagged are alarms and
-// Contributor Insights rules. Tags can help you organize and categorize your
+// Assigns one or more tags (key-value pairs) to the specified CloudWatch
+// resource. Currently, the only CloudWatch resources that can be tagged are alarms
+// and Contributor Insights rules. Tags can help you organize and categorize your
 // resources. You can also use them to scope user permissions by granting a user
 // permission to access or change only resources with certain tag values. Tags
 // don't have any semantic meaning to Amazon Web Services and are interpreted
@@ -40,12 +40,11 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The ARN of the CloudWatch resource that you're adding tags to. The ARN format of
-	// an alarm is arn:aws:cloudwatch:Region:account-id:alarm:alarm-name  The ARN
+	// The ARN of the CloudWatch resource that you're adding tags to. The ARN format
+	// of an alarm is arn:aws:cloudwatch:Region:account-id:alarm:alarm-name  The ARN
 	// format of a Contributor Insights rule is
-	// arn:aws:cloudwatch:Region:account-id:insight-rule:insight-rule-name  For more
-	// information about ARN format, see  Resource Types Defined by Amazon CloudWatch
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies)
+	// arn:aws:cloudwatch:Region:account-id:insight-rule:insight-rule-name For more
+	// information about ARN format, see Resource Types Defined by Amazon CloudWatch (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies)
 	// in the Amazon Web Services General Reference.
 	//
 	// This member is required.

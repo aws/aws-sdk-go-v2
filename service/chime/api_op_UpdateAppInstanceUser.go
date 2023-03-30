@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the details of an AppInstanceUser. You can update names and metadata.
+// Updates the details of an AppInstanceUser . You can update names and metadata.
 func (c *Client) UpdateAppInstanceUser(ctx context.Context, params *UpdateAppInstanceUserInput, optFns ...func(*Options)) (*UpdateAppInstanceUserOutput, error) {
 	if params == nil {
 		params = &UpdateAppInstanceUserInput{}
@@ -29,17 +29,17 @@ func (c *Client) UpdateAppInstanceUser(ctx context.Context, params *UpdateAppIns
 
 type UpdateAppInstanceUserInput struct {
 
-	// The ARN of the AppInstanceUser.
+	// The ARN of the AppInstanceUser .
 	//
 	// This member is required.
 	AppInstanceUserArn *string
 
-	// The name of the AppInstanceUser.
+	// The name of the AppInstanceUser .
 	//
 	// This member is required.
 	Name *string
 
-	// The metadata of the AppInstanceUser.
+	// The metadata of the AppInstanceUser .
 	Metadata *string
 
 	noSmithyDocumentSerde
@@ -47,7 +47,7 @@ type UpdateAppInstanceUserInput struct {
 
 type UpdateAppInstanceUserOutput struct {
 
-	// The ARN of the AppInstanceUser.
+	// The ARN of the AppInstanceUser .
 	AppInstanceUserArn *string
 
 	// Metadata pertaining to the operation's result.

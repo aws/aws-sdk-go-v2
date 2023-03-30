@@ -33,8 +33,8 @@ type CreateCellInput struct {
 	// This member is required.
 	CellName *string
 
-	// A list of cell Amazon Resource Names (ARNs) contained within this cell, for use
-	// in nested cells. For example, Availability Zones within specific Amazon Web
+	// A list of cell Amazon Resource Names (ARNs) contained within this cell, for
+	// use in nested cells. For example, Availability Zones within specific Amazon Web
 	// Services Regions.
 	Cells []string
 
@@ -55,8 +55,9 @@ type CreateCellOutput struct {
 	// A list of cell ARNs.
 	Cells []string
 
-	// The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN)
-	// or a recovery group ARN. This is a list but currently can have only one element.
+	// The readiness scope for the cell, which can be a cell Amazon Resource Name
+	// (ARN) or a recovery group ARN. This is a list but currently can have only one
+	// element.
 	ParentReadinessScopes []string
 
 	// Tags on the resources.

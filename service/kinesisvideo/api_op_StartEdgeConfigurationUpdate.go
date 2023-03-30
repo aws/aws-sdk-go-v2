@@ -19,12 +19,12 @@ import (
 // Device. The SyncStatus will be updated as the edge configuration is
 // acknowledged, and synced with the Edge Agent. If this API is invoked for the
 // first time, a new edge configuration will be created for the stream, and the
-// sync status will be set to SYNCING. You will have to wait for the sync status to
-// reach a terminal state such as: IN_SYNC, or SYNC_FAILED, before using this API
-// again. If you invoke this API during the syncing process, a
-// ResourceInUseException will be thrown. The connectivity of the stream’s edge
+// sync status will be set to SYNCING. You will have to wait for the sync status
+// to reach a terminal state such as: IN_SYNC , or SYNC_FAILED, before using this
+// API again. If you invoke this API during the syncing process, a
+// ResourceInUseExceptionwill be thrown. The connectivity of the stream’s edge
 // configuration and the Edge Agent will be retried for 15 minutes. After 15
-// minutes, the status will transition into the SYNC_FAILED state.
+// minutes, the status will transition into the SYNC_FAILED  state.
 func (c *Client) StartEdgeConfigurationUpdate(ctx context.Context, params *StartEdgeConfigurationUpdateInput, optFns ...func(*Options)) (*StartEdgeConfigurationUpdateOutput, error) {
 	if params == nil {
 		params = &StartEdgeConfigurationUpdateInput{}
@@ -48,11 +48,11 @@ type StartEdgeConfigurationUpdateInput struct {
 	EdgeConfig *types.EdgeConfig
 
 	// The Amazon Resource Name (ARN) of the stream. Specify either the StreamName or
-	// the StreamARN.
+	// the StreamARN .
 	StreamARN *string
 
 	// The name of the stream whose edge configuration you want to update. Specify
-	// either the StreamName or the StreamARN.
+	// either the StreamName  or the StreamARN .
 	StreamName *string
 
 	noSmithyDocumentSerde
@@ -63,9 +63,9 @@ type StartEdgeConfigurationUpdateOutput struct {
 	// The timestamp at which a stream’s edge configuration was first created.
 	CreationTime *time.Time
 
-	// A description of the stream's edge configuration that will be used to sync with
-	// the Edge Agent IoT Greengrass component. The Edge Agent component will run on an
-	// IoT Hub Device setup at your premise.
+	// A description of the stream's edge configuration that will be used to sync
+	// with the Edge Agent IoT Greengrass component. The Edge Agent component will run
+	// on an IoT Hub Device setup at your premise.
 	EdgeConfig *types.EdgeConfig
 
 	// A description of the generated failure status.
@@ -80,9 +80,9 @@ type StartEdgeConfigurationUpdateOutput struct {
 	// The name of the stream from which the edge configuration was updated.
 	StreamName *string
 
-	// The current sync status of the stream's edge configuration. When you invoke this
-	// API, the sync status will be set to the SYNCING state. Use the
-	// DescribeEdgeConfiguration API to get the latest status of the edge
+	// The current sync status of the stream's edge configuration. When you invoke
+	// this API, the sync status will be set to the SYNCING  state. Use the
+	// DescribeEdgeConfigurationAPI to get the latest status of the edge
 	// configuration.
 	SyncStatus types.SyncStatus
 

@@ -13,10 +13,9 @@ import (
 
 // The CreateKeyspace operation adds a new keyspace to your account. In an Amazon
 // Web Services account, keyspace names must be unique within each Region.
-// CreateKeyspace is an asynchronous operation. You can monitor the creation status
-// of the new keyspace by using the GetKeyspace operation. For more information,
-// see Creating keyspaces
-// (https://docs.aws.amazon.com/keyspaces/latest/devguide/working-with-keyspaces.html#keyspaces-create)
+// CreateKeyspaceis an asynchronous operation. You can monitor the creation
+// status of the new keyspace by using the GetKeyspace operation. For more
+// information, see Creating keyspaces (https://docs.aws.amazon.com/keyspaces/latest/devguide/working-with-keyspaces.html#keyspaces-create)
 // in the Amazon Keyspaces Developer Guide.
 func (c *Client) CreateKeyspace(ctx context.Context, params *CreateKeyspaceInput, optFns ...func(*Options)) (*CreateKeyspaceOutput, error) {
 	if params == nil {
@@ -41,8 +40,7 @@ type CreateKeyspaceInput struct {
 	KeyspaceName *string
 
 	// A list of key-value pair tags to be attached to the keyspace. For more
-	// information, see Adding tags and labels to Amazon Keyspaces resources
-	// (https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html)
+	// information, see Adding tags and labels to Amazon Keyspaces resources (https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html)
 	// in the Amazon Keyspaces Developer Guide.
 	Tags []types.Tag
 

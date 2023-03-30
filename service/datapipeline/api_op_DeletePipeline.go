@@ -14,7 +14,7 @@ import (
 // Pipeline attempts to cancel instances associated with the pipeline that are
 // currently being processed by task runners. Deleting a pipeline cannot be undone.
 // You cannot query or restore a deleted pipeline. To temporarily pause a pipeline
-// instead of deleting it, call SetStatus with the status set to PAUSE on
+// instead of deleting it, call SetStatus  with the status set to PAUSE on
 // individual components. Components that are paused by SetStatus can be resumed.
 // POST / HTTP/1.1 Content-Type: application/x-amz-json-1.1 X-Amz-Target:
 // DataPipeline.DeletePipeline Content-Length: 50 Host:

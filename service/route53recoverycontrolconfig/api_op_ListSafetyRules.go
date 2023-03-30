@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the safety rules (the assertion rules and gating rules) that you've defined
-// for the routing controls in a control panel.
+// List the safety rules (the assertion rules and gating rules) that you've
+// defined for the routing controls in a control panel.
 func (c *Client) ListSafetyRules(ctx context.Context, params *ListSafetyRulesInput, optFns ...func(*Options)) (*ListSafetyRulesOutput, error) {
 	if params == nil {
 		params = &ListSafetyRulesInput{}
@@ -135,8 +135,8 @@ type ListSafetyRulesPaginatorOptions struct {
 	// The number of objects that you want to return with this call.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

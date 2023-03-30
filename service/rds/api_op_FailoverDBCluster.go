@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Forces a failover for a DB cluster. For an Aurora DB cluster, failover for a DB
-// cluster promotes one of the Aurora Replicas (read-only instances) in the DB
+// Forces a failover for a DB cluster. For an Aurora DB cluster, failover for a
+// DB cluster promotes one of the Aurora Replicas (read-only instances) in the DB
 // cluster to be the primary DB instance (the cluster writer). For a Multi-AZ DB
 // cluster, failover for a DB cluster promotes one of the readable standby DB
 // instances (read-only instances) in the DB cluster to be the primary DB instance
@@ -23,11 +23,9 @@ import (
 // testing, you can force a failover. Because each instance in a DB cluster has its
 // own endpoint address, make sure to clean up and re-establish any existing
 // connections that use those endpoint addresses when the failover is complete. For
-// more information on Amazon Aurora DB clusters, see  What is Amazon Aurora?
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// more information on Amazon Aurora DB clusters, see What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-// see  Multi-AZ DB cluster deployments
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+// see Multi-AZ DB cluster deployments (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 // in the Amazon RDS User Guide.
 func (c *Client) FailoverDBCluster(ctx context.Context, params *FailoverDBClusterInput, optFns ...func(*Options)) (*FailoverDBClusterOutput, error) {
 	if params == nil {
@@ -48,8 +46,7 @@ type FailoverDBClusterInput struct {
 
 	// A DB cluster identifier to force a failover for. This parameter isn't
 	// case-sensitive. Constraints:
-	// - Must match the identifier of an existing
-	// DBCluster.
+	//     - Must match the identifier of an existing DBCluster.
 	//
 	// This member is required.
 	DBClusterIdentifier *string
@@ -65,21 +62,19 @@ type FailoverDBClusterInput struct {
 
 type FailoverDBClusterOutput struct {
 
-	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For
-	// an Amazon Aurora DB cluster, this data type is used as a response element in the
-	// operations CreateDBCluster, DeleteDBCluster, DescribeDBClusters,
-	// FailoverDBCluster, ModifyDBCluster, PromoteReadReplicaDBCluster,
-	// RestoreDBClusterFromS3, RestoreDBClusterFromSnapshot,
-	// RestoreDBClusterToPointInTime, StartDBCluster, and StopDBCluster. For a Multi-AZ
-	// DB cluster, this data type is used as a response element in the operations
-	// CreateDBCluster, DeleteDBCluster, DescribeDBClusters, FailoverDBCluster,
-	// ModifyDBCluster, RebootDBCluster, RestoreDBClusterFromSnapshot, and
-	// RestoreDBClusterToPointInTime. For more information on Amazon Aurora DB
-	// clusters, see  What is Amazon Aurora?
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster.
+	// For an Amazon Aurora DB cluster, this data type is used as a response element in
+	// the operations CreateDBCluster , DeleteDBCluster , DescribeDBClusters ,
+	// FailoverDBCluster , ModifyDBCluster , PromoteReadReplicaDBCluster ,
+	// RestoreDBClusterFromS3 , RestoreDBClusterFromSnapshot ,
+	// RestoreDBClusterToPointInTime , StartDBCluster , and StopDBCluster. For a
+	// Multi-AZ DB cluster, this data type is used as a response element in the
+	// operations CreateDBCluster , DeleteDBCluster , DescribeDBClusters ,
+	// FailoverDBCluster , ModifyDBCluster , RebootDBCluster ,
+	// RestoreDBClusterFromSnapshot , and RestoreDBClusterToPointInTime. For more
+	// information on Amazon Aurora DB clusters, see What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 	// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-	// see  Multi-AZ deployments with two readable standby DB instances
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+	// see Multi-AZ deployments with two readable standby DB instances (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 	// in the Amazon RDS User Guide.
 	DBCluster *types.DBCluster
 

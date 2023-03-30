@@ -11,8 +11,8 @@ const (
 	AccessLevelFilterKeyUser    AccessLevelFilterKey = "User"
 )
 
-// Values returns all known values for AccessLevelFilterKey. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for AccessLevelFilterKey. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AccessLevelFilterKey) Values() []AccessLevelFilterKey {
 	return []AccessLevelFilterKey{
@@ -31,9 +31,9 @@ const (
 	AccessStatusDisabled    AccessStatus = "DISABLED"
 )
 
-// Values returns all known values for AccessStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AccessStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (AccessStatus) Values() []AccessStatus {
 	return []AccessStatus{
 		"ENABLED",
@@ -51,9 +51,9 @@ const (
 	ChangeActionRemove ChangeAction = "REMOVE"
 )
 
-// Values returns all known values for ChangeAction. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ChangeAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeAction) Values() []ChangeAction {
 	return []ChangeAction{
 		"ADD",
@@ -165,8 +165,8 @@ const (
 	OrganizationNodeTypeAccount            OrganizationNodeType = "ACCOUNT"
 )
 
-// Values returns all known values for OrganizationNodeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for OrganizationNodeType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (OrganizationNodeType) Values() []OrganizationNodeType {
 	return []OrganizationNodeType{
@@ -238,9 +238,9 @@ const (
 	ProductTypeMarketplace            ProductType = "MARKETPLACE"
 )
 
-// Values returns all known values for ProductType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ProductType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ProductType) Values() []ProductType {
 	return []ProductType{
 		"CLOUD_FORMATION_TEMPLATE",
@@ -298,9 +298,9 @@ const (
 	PropertyKeyLaunchRole PropertyKey = "LAUNCH_ROLE"
 )
 
-// Values returns all known values for PropertyKey. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PropertyKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (PropertyKey) Values() []PropertyKey {
 	return []PropertyKey{
 		"OWNER",
@@ -320,9 +320,10 @@ const (
 	ProvisionedProductPlanStatusExecuteFailed     ProvisionedProductPlanStatus = "EXECUTE_FAILED"
 )
 
-// Values returns all known values for ProvisionedProductPlanStatus. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ProvisionedProductPlanStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ProvisionedProductPlanStatus) Values() []ProvisionedProductPlanStatus {
 	return []ProvisionedProductPlanStatus{
 		"CREATE_IN_PROGRESS",
@@ -361,9 +362,9 @@ const (
 	ProvisionedProductStatusPlanInProgress ProvisionedProductStatus = "PLAN_IN_PROGRESS"
 )
 
-// Values returns all known values for ProvisionedProductStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ProvisionedProductStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProvisionedProductStatus) Values() []ProvisionedProductStatus {
 	return []ProvisionedProductStatus{
 		"AVAILABLE",
@@ -399,9 +400,10 @@ const (
 	ProvisioningArtifactGuidanceDeprecated ProvisioningArtifactGuidance = "DEPRECATED"
 )
 
-// Values returns all known values for ProvisioningArtifactGuidance. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ProvisioningArtifactGuidance. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ProvisioningArtifactGuidance) Values() []ProvisioningArtifactGuidance {
 	return []ProvisioningArtifactGuidance{
 		"DEFAULT",
@@ -416,8 +418,8 @@ const (
 	ProvisioningArtifactPropertyNameId ProvisioningArtifactPropertyName = "Id"
 )
 
-// Values returns all known values for ProvisioningArtifactPropertyName. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for ProvisioningArtifactPropertyName. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (ProvisioningArtifactPropertyName) Values() []ProvisioningArtifactPropertyName {
@@ -435,9 +437,9 @@ const (
 	ProvisioningArtifactTypeMarketplaceCar         ProvisioningArtifactType = "MARKETPLACE_CAR"
 )
 
-// Values returns all known values for ProvisioningArtifactType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ProvisioningArtifactType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProvisioningArtifactType) Values() []ProvisioningArtifactType {
 	return []ProvisioningArtifactType{
 		"CLOUD_FORMATION_TEMPLATE",
@@ -457,9 +459,9 @@ const (
 	RecordStatusFailed            RecordStatus = "FAILED"
 )
 
-// Values returns all known values for RecordStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for RecordStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (RecordStatus) Values() []RecordStatus {
 	return []RecordStatus{
 		"CREATED",
@@ -479,9 +481,9 @@ const (
 	ReplacementConditional Replacement = "CONDITIONAL"
 )
 
-// Values returns all known values for Replacement. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for Replacement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (Replacement) Values() []Replacement {
 	return []Replacement{
 		"TRUE",
@@ -547,8 +549,8 @@ const (
 	ServiceActionAssociationErrorCodeThrottlingException        ServiceActionAssociationErrorCode = "THROTTLING"
 )
 
-// Values returns all known values for ServiceActionAssociationErrorCode. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for ServiceActionAssociationErrorCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (ServiceActionAssociationErrorCode) Values() []ServiceActionAssociationErrorCode {
@@ -590,9 +592,10 @@ const (
 	ServiceActionDefinitionTypeSsmAutomation ServiceActionDefinitionType = "SSM_AUTOMATION"
 )
 
-// Values returns all known values for ServiceActionDefinitionType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ServiceActionDefinitionType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (ServiceActionDefinitionType) Values() []ServiceActionDefinitionType {
 	return []ServiceActionDefinitionType{
 		"SSM_AUTOMATION",
@@ -610,9 +613,9 @@ const (
 	ShareStatusError               ShareStatus = "ERROR"
 )
 
-// Values returns all known values for ShareStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ShareStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ShareStatus) Values() []ShareStatus {
 	return []ShareStatus{
 		"NOT_STARTED",
@@ -631,9 +634,9 @@ const (
 	SortOrderDescending SortOrder = "DESCENDING"
 )
 
-// Values returns all known values for SortOrder. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
@@ -686,8 +689,8 @@ const (
 	StackSetOperationTypeDelete StackSetOperationType = "DELETE"
 )
 
-// Values returns all known values for StackSetOperationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for StackSetOperationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (StackSetOperationType) Values() []StackSetOperationType {
 	return []StackSetOperationType{

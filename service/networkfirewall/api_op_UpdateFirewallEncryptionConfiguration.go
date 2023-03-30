@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A complex type that contains settings for encryption of your firewall resources.
+// A complex type that contains settings for encryption of your firewall
+// resources.
 func (c *Client) UpdateFirewallEncryptionConfiguration(ctx context.Context, params *UpdateFirewallEncryptionConfigurationInput, optFns ...func(*Options)) (*UpdateFirewallEncryptionConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateFirewallEncryptionConfigurationInput{}
@@ -29,14 +30,13 @@ func (c *Client) UpdateFirewallEncryptionConfiguration(ctx context.Context, para
 
 type UpdateFirewallEncryptionConfigurationInput struct {
 
-	// A complex type that contains optional Amazon Web Services Key Management Service
-	// (KMS) encryption settings for your Network Firewall resources. Your data is
-	// encrypted by default with an Amazon Web Services owned key that Amazon Web
+	// A complex type that contains optional Amazon Web Services Key Management
+	// Service (KMS) encryption settings for your Network Firewall resources. Your data
+	// is encrypted by default with an Amazon Web Services owned key that Amazon Web
 	// Services owns and manages for you. You can use either the Amazon Web Services
 	// owned key, or provide your own customer managed key. To learn more about KMS
 	// encryption of your Network Firewall resources, see Encryption at rest with
-	// Amazon Web Services Key Managment Service
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html)
+	// Amazon Web Services Key Managment Service (https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html)
 	// in the Network Firewall Developer Guide.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
@@ -66,14 +66,13 @@ type UpdateFirewallEncryptionConfigurationInput struct {
 
 type UpdateFirewallEncryptionConfigurationOutput struct {
 
-	// A complex type that contains optional Amazon Web Services Key Management Service
-	// (KMS) encryption settings for your Network Firewall resources. Your data is
-	// encrypted by default with an Amazon Web Services owned key that Amazon Web
+	// A complex type that contains optional Amazon Web Services Key Management
+	// Service (KMS) encryption settings for your Network Firewall resources. Your data
+	// is encrypted by default with an Amazon Web Services owned key that Amazon Web
 	// Services owns and manages for you. You can use either the Amazon Web Services
 	// owned key, or provide your own customer managed key. To learn more about KMS
 	// encryption of your Network Firewall resources, see Encryption at rest with
-	// Amazon Web Services Key Managment Service
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html)
+	// Amazon Web Services Key Managment Service (https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html)
 	// in the Network Firewall Developer Guide.
 	EncryptionConfiguration *types.EncryptionConfiguration
 

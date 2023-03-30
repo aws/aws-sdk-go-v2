@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the network interfaces specified in a decoder manifest. This API operation
-// uses pagination. Specify the nextToken parameter in the request to return more
-// results.
+// Lists the network interfaces specified in a decoder manifest. This API
+// operation uses pagination. Specify the nextToken parameter in the request to
+// return more results.
 func (c *Client) ListDecoderManifestNetworkInterfaces(ctx context.Context, params *ListDecoderManifestNetworkInterfacesInput, optFns ...func(*Options)) (*ListDecoderManifestNetworkInterfacesOutput, error) {
 	if params == nil {
 		params = &ListDecoderManifestNetworkInterfacesInput{}
@@ -142,8 +142,8 @@ type ListDecoderManifestNetworkInterfacesPaginatorOptions struct {
 	// The maximum number of items to return, between 1 and 100, inclusive.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -13,8 +13,8 @@ import (
 
 // Deletes a Resolver rule. Before you can delete a Resolver rule, you must
 // disassociate it from all the VPCs that you associated the Resolver rule with.
-// For more information, see DisassociateResolverRule
-// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverRule.html).
+// For more information, see DisassociateResolverRule (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverRule.html)
+// .
 func (c *Client) DeleteResolverRule(ctx context.Context, params *DeleteResolverRuleInput, optFns ...func(*Options)) (*DeleteResolverRuleOutput, error) {
 	if params == nil {
 		params = &DeleteResolverRuleInput{}

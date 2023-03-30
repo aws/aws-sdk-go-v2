@@ -36,10 +36,10 @@ type DescribeReplicationConfigurationsInput struct {
 	FileSystemId *string
 
 	// (Optional) To limit the number of objects returned in a response, you can
-	// specify the MaxItems parameter. The default value is 100.
+	// specify the MaxItems  parameter. The default value is 100.
 	MaxResults *int32
 
-	// NextToken is present if the response is paginated. You can use NextToken in a
+	// NextToken  is present if the response is paginated. You can use NextToken in a
 	// subsequent request to fetch the next page of output.
 	NextToken *string
 
@@ -48,8 +48,8 @@ type DescribeReplicationConfigurationsInput struct {
 
 type DescribeReplicationConfigurationsOutput struct {
 
-	// You can use the NextToken from the previous response in a subsequent request to
-	// fetch the additional descriptions.
+	// You can use the NextToken from the previous response in a subsequent request
+	// to fetch the additional descriptions.
 	NextToken *string
 
 	// The collection of replication configurations that is returned.

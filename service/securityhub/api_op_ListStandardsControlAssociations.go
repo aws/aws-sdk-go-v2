@@ -31,9 +31,9 @@ func (c *Client) ListStandardsControlAssociations(ctx context.Context, params *L
 
 type ListStandardsControlAssociationsInput struct {
 
-	// The identifier of the control (identified with SecurityControlId,
-	// SecurityControlArn, or a mix of both parameters) that you want to determine the
-	// enablement status of in each enabled standard.
+	// The identifier of the control (identified with SecurityControlId ,
+	// SecurityControlArn, or a mix of both parameters) that you want to determine
+	// the enablement status of in each enabled standard.
 	//
 	// This member is required.
 	SecurityControlId *string
@@ -41,10 +41,10 @@ type ListStandardsControlAssociationsInput struct {
 	// An optional parameter that limits the total results of the API response to the
 	// specified number. If this parameter isn't provided in the request, the results
 	// include the first 25 standard and control associations. The results also include
-	// a NextToken parameter that you can use in a subsequent API call to get the next
-	// 25 associations. This repeats until all associations for the specified control
-	// are returned. The number of results is limited by the number of supported
-	// Security Hub standards that you've enabled in the calling account.
+	// a NextToken parameter that you can use in a subsequent API call to get the
+	// next 25 associations. This repeats until all associations for the specified
+	// control are returned. The number of results is limited by the number of
+	// supported Security Hub standards that you've enabled in the calling account.
 	MaxResults int32
 
 	// Optional pagination parameter.
@@ -55,8 +55,8 @@ type ListStandardsControlAssociationsInput struct {
 
 type ListStandardsControlAssociationsOutput struct {
 
-	// An array that provides the enablement status and other details for each security
-	// control that applies to each enabled standard.
+	// An array that provides the enablement status and other details for each
+	// security control that applies to each enabled standard.
 	//
 	// This member is required.
 	StandardsControlAssociationSummaries []types.StandardsControlAssociationSummary
@@ -148,14 +148,14 @@ type ListStandardsControlAssociationsPaginatorOptions struct {
 	// An optional parameter that limits the total results of the API response to the
 	// specified number. If this parameter isn't provided in the request, the results
 	// include the first 25 standard and control associations. The results also include
-	// a NextToken parameter that you can use in a subsequent API call to get the next
-	// 25 associations. This repeats until all associations for the specified control
-	// are returned. The number of results is limited by the number of supported
-	// Security Hub standards that you've enabled in the calling account.
+	// a NextToken parameter that you can use in a subsequent API call to get the
+	// next 25 associations. This repeats until all associations for the specified
+	// control are returned. The number of results is limited by the number of
+	// supported Security Hub standards that you've enabled in the calling account.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -62,8 +62,8 @@ func (e *FleetCapacityExceededException) ErrorCode() string {
 }
 func (e *FleetCapacityExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The game instance is currently full and cannot allow the requested player(s) to
-// join. Clients can retry such requests immediately or after a waiting period.
+// The game instance is currently full and cannot allow the requested player(s)
+// to join. Clients can retry such requests immediately or after a waiting period.
 type GameSessionFullException struct {
 	Message *string
 
@@ -89,8 +89,8 @@ func (e *GameSessionFullException) ErrorCode() string {
 }
 func (e *GameSessionFullException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A game session with this custom ID string already exists in this fleet. Resolve
-// this conflict before retrying this request.
+// A game session with this custom ID string already exists in this fleet.
+// Resolve this conflict before retrying this request.
 type IdempotentParameterMismatchException struct {
 	Message *string
 
@@ -283,7 +283,7 @@ func (e *NotFoundException) ErrorCode() string {
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified game server group has no available game servers to fulfill a
-// ClaimGameServer request. Clients can retry such requests immediately or after a
+// ClaimGameServerrequest. Clients can retry such requests immediately or after a
 // waiting period.
 type OutOfCapacityException struct {
 	Message *string
@@ -310,9 +310,9 @@ func (e *OutOfCapacityException) ErrorCode() string {
 }
 func (e *OutOfCapacityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested tagging operation did not succeed. This may be due to invalid tag
-// format or the maximum tag limit may have been exceeded. Resolve the issue before
-// retrying.
+// The requested tagging operation did not succeed. This may be due to invalid
+// tag format or the maximum tag limit may have been exceeded. Resolve the issue
+// before retrying.
 type TaggingFailedException struct {
 	Message *string
 
@@ -339,10 +339,10 @@ func (e *TaggingFailedException) ErrorCode() string {
 func (e *TaggingFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service is unable to resolve the routing for a particular alias because it
-// has a terminal RoutingStrategy associated with it. The message returned in this
-// exception is the message defined in the routing strategy itself. Such requests
-// should only be retried if the routing strategy for the specified alias is
-// modified.
+// has a terminal RoutingStrategy associated with it. The message returned in
+// this exception is the message defined in the routing strategy itself. Such
+// requests should only be retried if the routing strategy for the specified alias
+// is modified.
 type TerminalRoutingStrategyException struct {
 	Message *string
 

@@ -13,12 +13,11 @@ import (
 
 // Set up a template to create new template versions automatically by tracking a
 // linked repository. A linked repository is a repository that has been registered
-// with Proton. For more information, see CreateRepository. When a commit is pushed
-// to your linked repository, Proton checks for changes to your repository template
-// bundles. If it detects a template bundle change, a new major or minor version of
-// its template is created, if the version doesn’t already exist. For more
-// information, see Template sync configurations
-// (https://docs.aws.amazon.com/proton/latest/userguide/ag-template-sync-configs.html)
+// with Proton. For more information, see CreateRepository. When a commit is
+// pushed to your linked repository, Proton checks for changes to your repository
+// template bundles. If it detects a template bundle change, a new major or minor
+// version of its template is created, if the version doesn’t already exist. For
+// more information, see Template sync configurations (https://docs.aws.amazon.com/proton/latest/userguide/ag-template-sync-configs.html)
 // in the Proton User Guide.
 func (c *Client) CreateTemplateSyncConfig(ctx context.Context, params *CreateTemplateSyncConfigInput, optFns ...func(*Options)) (*CreateTemplateSyncConfigOutput, error) {
 	if params == nil {
@@ -42,7 +41,7 @@ type CreateTemplateSyncConfigInput struct {
 	// This member is required.
 	Branch *string
 
-	// The repository name (for example, myrepos/myrepo).
+	// The repository name (for example, myrepos/myrepo ).
 	//
 	// This member is required.
 	RepositoryName *string
@@ -62,8 +61,8 @@ type CreateTemplateSyncConfigInput struct {
 	// This member is required.
 	TemplateType types.TemplateType
 
-	// A repository subdirectory path to your template bundle directory. When included,
-	// Proton limits the template bundle search to this repository directory.
+	// A repository subdirectory path to your template bundle directory. When
+	// included, Proton limits the template bundle search to this repository directory.
 	Subdirectory *string
 
 	noSmithyDocumentSerde

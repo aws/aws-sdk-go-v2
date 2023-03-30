@@ -45,7 +45,7 @@ type CreateBranchInput struct {
 	BackendEnvironmentArn *string
 
 	// The basic authorization credentials for the branch. You must base64-encode the
-	// authorization credentials and provide them in the format user:password.
+	// authorization credentials and provide them in the format user:password .
 	BasicAuthCredentials *string
 
 	// The build specification (build spec) for the branch.
@@ -99,8 +99,8 @@ type CreateBranchInput struct {
 // The result structure for create branch request.
 type CreateBranchOutput struct {
 
-	// Describes the branch for an Amplify app, which maps to a third-party repository
-	// branch.
+	// Describes the branch for an Amplify app, which maps to a third-party
+	// repository branch.
 	//
 	// This member is required.
 	Branch *types.Branch

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the Amazon Web Services Migration Hub Refactor Spaces routes within an
-// application.
+// Lists all the Amazon Web Services Migration Hub Refactor Spaces routes within
+// an application.
 func (c *Client) ListRoutes(ctx context.Context, params *ListRoutesInput, optFns ...func(*Options)) (*ListRoutesOutput, error) {
 	if params == nil {
 		params = &ListRoutesInput{}
@@ -42,7 +42,7 @@ type ListRoutesInput struct {
 	EnvironmentIdentifier *string
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -56,7 +56,7 @@ type ListRoutesOutput struct {
 	// The token for the next page of results.
 	NextToken *string
 
-	// The list of RouteSummary objects.
+	// The list of RouteSummary  objects.
 	RouteSummaryList []types.RouteSummary
 
 	// Metadata pertaining to the operation's result.
@@ -138,11 +138,11 @@ var _ ListRoutesAPIClient = (*Client)(nil)
 // ListRoutesPaginatorOptions is the paginator options for ListRoutes
 type ListRoutesPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -35,8 +35,9 @@ type UnregisterConnectorInput struct {
 	// This member is required.
 	ConnectorLabel *string
 
-	// Indicates whether Amazon AppFlow should unregister the connector, even if it is
-	// currently in use in one or more connector profiles. The default value is false.
+	// Indicates whether Amazon AppFlow should unregister the connector, even if it
+	// is currently in use in one or more connector profiles. The default value is
+	// false.
 	ForceDelete bool
 
 	noSmithyDocumentSerde

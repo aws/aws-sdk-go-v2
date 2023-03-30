@@ -39,8 +39,8 @@ type DeleteSubnetGroupInput struct {
 
 type DeleteSubnetGroupOutput struct {
 
-	// A user-specified message for this action (i.e., a reason for deleting the subnet
-	// group).
+	// A user-specified message for this action (i.e., a reason for deleting the
+	// subnet group).
 	DeletionMessage *string
 
 	// Metadata pertaining to the operation's result.

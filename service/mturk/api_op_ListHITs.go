@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListHITs operation returns all of a Requester's HITs. The operation returns
-// HITs of any status, except for HITs that have been deleted of with the DeleteHIT
-// operation or that have been auto-deleted.
+// The ListHITs operation returns all of a Requester's HITs. The operation
+// returns HITs of any status, except for HITs that have been deleted of with the
+// DeleteHIT operation or that have been auto-deleted.
 func (c *Client) ListHITs(ctx context.Context, params *ListHITsInput, optFns ...func(*Options)) (*ListHITsOutput, error) {
 	if params == nil {
 		params = &ListHITsInput{}
@@ -49,8 +49,8 @@ type ListHITsOutput struct {
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
 
-	// The number of HITs on this page in the filtered results list, equivalent to the
-	// number of HITs being returned by this call.
+	// The number of HITs on this page in the filtered results list, equivalent to
+	// the number of HITs being returned by this call.
 	NumResults *int32
 
 	// Metadata pertaining to the operation's result.
@@ -130,8 +130,8 @@ var _ ListHITsAPIClient = (*Client)(nil)
 type ListHITsPaginatorOptions struct {
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

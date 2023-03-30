@@ -29,8 +29,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The ARN of the media pipeline associated with any tags. The ARN consists of the
-	// pipeline's region, resource ID, and pipeline ID.
+	// The ARN of the media pipeline associated with any tags. The ARN consists of
+	// the pipeline's region, resource ID, and pipeline ID.
 	//
 	// This member is required.
 	ResourceARN *string

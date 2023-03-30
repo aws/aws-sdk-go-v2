@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the major version families of each managed schema. If a major version ARN
-// is provided as SchemaArn, the minor version revisions in that family are listed
-// instead.
+// Lists the major version families of each managed schema. If a major version
+// ARN is provided as SchemaArn, the minor version revisions in that family are
+// listed instead.
 func (c *Client) ListManagedSchemaArns(ctx context.Context, params *ListManagedSchemaArnsInput, optFns ...func(*Options)) (*ListManagedSchemaArnsOutput, error) {
 	if params == nil {
 		params = &ListManagedSchemaArnsInput{}
@@ -132,8 +132,8 @@ type ListManagedSchemaArnsPaginatorOptions struct {
 	// The maximum number of results to retrieve.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

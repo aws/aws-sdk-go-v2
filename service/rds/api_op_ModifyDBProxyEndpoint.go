@@ -40,9 +40,9 @@ type ModifyDBProxyEndpointInput struct {
 	// with a hyphen or contain two consecutive hyphens.
 	NewDBProxyEndpointName *string
 
-	// The VPC security group IDs for the DB proxy endpoint. When the DB proxy endpoint
-	// uses a different VPC than the original proxy, you also specify a different set
-	// of security group IDs than for the original proxy.
+	// The VPC security group IDs for the DB proxy endpoint. When the DB proxy
+	// endpoint uses a different VPC than the original proxy, you also specify a
+	// different set of security group IDs than for the original proxy.
 	VpcSecurityGroupIds []string
 
 	noSmithyDocumentSerde

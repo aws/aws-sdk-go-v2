@@ -12,13 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the modifications made to your Reserved Instances. If no parameter is
-// specified, information about all your Reserved Instances modification requests
-// is returned. If a modification ID is specified, only information about the
-// specific modification is returned. For more information, see Modifying Reserved
-// Instances
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html) in the
-// Amazon EC2 User Guide.
+// Describes the modifications made to your Reserved Instances. If no parameter
+// is specified, information about all your Reserved Instances modification
+// requests is returned. If a modification ID is specified, only information about
+// the specific modification is returned. For more information, see Modifying
+// Reserved Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html)
+// in the Amazon EC2 User Guide.
 func (c *Client) DescribeReservedInstancesModifications(ctx context.Context, params *DescribeReservedInstancesModificationsInput, optFns ...func(*Options)) (*DescribeReservedInstancesModificationsOutput, error) {
 	if params == nil {
 		params = &DescribeReservedInstancesModificationsInput{}
@@ -38,36 +37,19 @@ func (c *Client) DescribeReservedInstancesModifications(ctx context.Context, par
 type DescribeReservedInstancesModificationsInput struct {
 
 	// One or more filters.
-	// - client-token - The idempotency token for the modification
-	// request.
-	// - create-date - The time when the modification request was created.
-	// -
-	// effective-date - The time when the modification becomes effective.
-	// -
-	// modification-result.reserved-instances-id - The ID for the Reserved Instances
-	// created as part of the modification request. This ID is only available when the
-	// status of the modification is fulfilled.
-	// -
-	// modification-result.target-configuration.availability-zone - The Availability
-	// Zone for the new Reserved Instances.
-	// -
-	// modification-result.target-configuration.instance-count  - The number of new
-	// Reserved Instances.
-	// - modification-result.target-configuration.instance-type -
-	// The instance type of the new Reserved Instances.
-	// -
-	// modification-result.target-configuration.platform - The network platform of the
-	// new Reserved Instances (EC2-Classic | EC2-VPC).
-	// - reserved-instances-id - The ID
-	// of the Reserved Instances modified.
-	// - reserved-instances-modification-id - The
-	// ID of the modification request.
-	// - status - The status of the Reserved Instances
-	// modification request (processing | fulfilled | failed).
-	// - status-message - The
-	// reason for the status.
-	// - update-date - The time when the modification request
-	// was last updated.
+	//     - client-token - The idempotency token for the modification request.
+	//     - create-date - The time when the modification request was created.
+	//     - effective-date - The time when the modification becomes effective.
+	//     - modification-result.reserved-instances-id - The ID for the Reserved Instances created as part of the modification request. This ID is only available when the status of the modification is fulfilled .
+	//     - modification-result.target-configuration.availability-zone - The Availability Zone for the new Reserved Instances.
+	//     - modification-result.target-configuration.instance-count - The number of new Reserved Instances.
+	//     - modification-result.target-configuration.instance-type - The instance type of the new Reserved Instances.
+	//     - modification-result.target-configuration.platform - The network platform of the new Reserved Instances ( EC2-Classic | EC2-VPC ).
+	//     - reserved-instances-id - The ID of the Reserved Instances modified.
+	//     - reserved-instances-modification-id - The ID of the modification request.
+	//     - status - The status of the Reserved Instances modification request ( processing | fulfilled | failed ).
+	//     - status-message - The reason for the status.
+	//     - update-date - The time when the modification request was last updated.
 	Filters []types.Filter
 
 	// The token to retrieve the next page of results.
@@ -155,19 +137,19 @@ func (c *Client) addOperationDescribeReservedInstancesModificationsMiddlewares(s
 	return nil
 }
 
-// DescribeReservedInstancesModificationsAPIClient is a client that implements the
-// DescribeReservedInstancesModifications operation.
+// DescribeReservedInstancesModificationsAPIClient is a client that implements
+// the DescribeReservedInstancesModifications operation.
 type DescribeReservedInstancesModificationsAPIClient interface {
 	DescribeReservedInstancesModifications(context.Context, *DescribeReservedInstancesModificationsInput, ...func(*Options)) (*DescribeReservedInstancesModificationsOutput, error)
 }
 
 var _ DescribeReservedInstancesModificationsAPIClient = (*Client)(nil)
 
-// DescribeReservedInstancesModificationsPaginatorOptions is the paginator options
-// for DescribeReservedInstancesModifications
+// DescribeReservedInstancesModificationsPaginatorOptions is the paginator
+// options for DescribeReservedInstancesModifications
 type DescribeReservedInstancesModificationsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

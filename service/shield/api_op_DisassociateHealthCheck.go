@@ -15,8 +15,7 @@ import (
 // Web Services resource to improve responsiveness and accuracy in attack detection
 // and response. You define the health check in Route 53 and then associate or
 // disassociate it with your Shield Advanced protection. For more information, see
-// Shield Advanced Health-Based Detection
-// (https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option)
+// Shield Advanced Health-Based Detection (https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option)
 // in the WAF Developer Guide.
 func (c *Client) DisassociateHealthCheck(ctx context.Context, params *DisassociateHealthCheckInput, optFns ...func(*Options)) (*DisassociateHealthCheckOutput, error) {
 	if params == nil {
@@ -41,8 +40,8 @@ type DisassociateHealthCheckInput struct {
 	// This member is required.
 	HealthCheckArn *string
 
-	// The unique identifier (ID) for the Protection object to remove the health check
-	// association from.
+	// The unique identifier (ID) for the Protection object to remove the health
+	// check association from.
 	//
 	// This member is required.
 	ProtectionId *string

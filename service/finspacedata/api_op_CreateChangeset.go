@@ -32,13 +32,9 @@ func (c *Client) CreateChangeset(ctx context.Context, params *CreateChangesetInp
 type CreateChangesetInput struct {
 
 	// The option to indicate how a Changeset will be applied to a Dataset.
-	// - REPLACE –
-	// Changeset will be considered as a replacement to all prior loaded Changesets.
-	// -
-	// APPEND – Changeset will be considered as an addition to the end of all prior
-	// loaded Changesets.
-	// - MODIFY – Changeset is considered as a replacement to a
-	// specific prior ingested Changeset.
+	//     - REPLACE – Changeset will be considered as a replacement to all prior loaded Changesets.
+	//     - APPEND – Changeset will be considered as an addition to the end of all prior loaded Changesets.
+	//     - MODIFY – Changeset is considered as a replacement to a specific prior ingested Changeset.
 	//
 	// This member is required.
 	ChangeType types.ChangeType
@@ -50,39 +46,34 @@ type CreateChangesetInput struct {
 	DatasetId *string
 
 	// Options that define the structure of the source file(s) including the format
-	// type (formatType), header row (withHeader), data separation character
-	// (separator) and the type of compression (compression). formatType is a required
-	// attribute and can have the following values:
-	// - PARQUET – Parquet source file
-	// format.
-	// - CSV – CSV source file format.
-	// - JSON – JSON source file format.
-	// - XML
-	// – XML source file format.
-	//
-	// Here is an example of how you could specify the
-	// formatParams:  "formatParams": { "formatType": "CSV", "withHeader": "true",
-	// "separator": ",", "compression":"None" }  Note that if you only provide
-	// formatType as CSV, the rest of the attributes will automatically default to CSV
-	// values as following:  { "withHeader": "true", "separator": "," }  For more
-	// information about supported file formats, see Supported Data Types and File
-	// Formats
-	// (https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html)
+	// type ( formatType ), header row ( withHeader ), data separation character (
+	// separator ) and the type of compression ( compression ). formatType is a
+	// required attribute and can have the following values:
+	//     - PARQUET – Parquet source file format.
+	//     - CSV – CSV source file format.
+	//     - JSON – JSON source file format.
+	//     - XML – XML source file format.
+	// Here is an example of how you could
+	// specify the formatParams :  "formatParams": { "formatType": "CSV",
+	// "withHeader": "true", "separator": ",", "compression":"None" } Note that if
+	// you only provide formatType  as CSV, the rest of the attributes will
+	// automatically default to CSV values as following: { "withHeader": "true",
+	// "separator": "," } For more information about supported file formats, see
+	// Supported Data Types and File Formats (https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html)
 	// in the FinSpace User Guide.
 	//
 	// This member is required.
 	FormatParams map[string]string
 
-	// Options that define the location of the data being ingested (s3SourcePath) and
-	// the source of the changeset (sourceType). Both s3SourcePath and sourceType are
-	// required attributes. Here is an example of how you could specify the
-	// sourceParams:  "sourceParams": { "s3SourcePath":
+	// Options that define the location of the data being ingested ( s3SourcePath)
+	// and the source of the changeset ( sourceType ). Both s3SourcePath  and
+	// sourceTypeare required attributes. Here is an example of how you could specify
+	// the sourceParams :  "sourceParams": { "s3SourcePath":
 	// "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv",
-	// "sourceType": "S3" }  The S3 path that you specify must allow the FinSpace role
+	// "sourceType": "S3" } The S3 path that you specify must allow the FinSpace role
 	// access. To do that, you first need to configure the IAM policy on S3 bucket. For
 	// more information, see Loading data from an Amazon S3 Bucket using the FinSpace
-	// API
-	// (https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#access-s3-buckets)
+	// API (https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#access-s3-buckets)
 	// section.
 	//
 	// This member is required.

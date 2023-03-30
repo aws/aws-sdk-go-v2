@@ -12,11 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of forecast export jobs created using the CreateForecastExportJob
-// operation. For each forecast export job, this operation returns a summary of its
-// properties, including its Amazon Resource Name (ARN). To retrieve the complete
-// set of properties, use the ARN with the DescribeForecastExportJob operation. You
-// can filter the list using an array of Filter objects.
+// Returns a list of forecast export jobs created using the
+// CreateForecastExportJoboperation. For each forecast export job, this operation
+// returns a summary of its properties, including its Amazon Resource Name (ARN).
+// To retrieve the complete set of properties, use the ARN with the
+// DescribeForecastExportJob operation. You can filter the list using an array of
+// Filter objects.
 func (c *Client) ListForecastExportJobs(ctx context.Context, params *ListForecastExportJobsInput, optFns ...func(*Options)) (*ListForecastExportJobsOutput, error) {
 	if params == nil {
 		params = &ListForecastExportJobsInput{}
@@ -35,21 +36,16 @@ func (c *Client) ListForecastExportJobs(ctx context.Context, params *ListForecas
 type ListForecastExportJobsInput struct {
 
 	// An array of filters. For each filter, you provide a condition and a match
-	// statement. The condition is either IS or IS_NOT, which specifies whether to
+	// statement. The condition is either IS  or IS_NOT, which specifies whether to
 	// include or exclude the forecast export jobs that match the statement from the
 	// list, respectively. The match statement consists of a key and a value. Filter
 	// properties
-	// - Condition - The condition to apply. Valid values are IS and IS_NOT.
-	// To include the forecast export jobs that match the statement, specify IS. To
-	// exclude matching forecast export jobs, specify IS_NOT.
-	// - Key - The name of the
-	// parameter to filter on. Valid values are ForecastArn and Status.
-	// - Value - The
-	// value to match.
-	//
-	// For example, to list all jobs that export a forecast named
-	// electricityforecast, specify the following filter: "Filters": [ { "Condition":
-	// "IS", "Key": "ForecastArn", "Value":
+	//     - Condition - The condition to apply. Valid values are IS and IS_NOT . To include the forecast export jobs that match the statement, specify IS . To exclude matching forecast export jobs, specify IS_NOT .
+	//     - Key - The name of the parameter to filter on. Valid values are ForecastArn and Status .
+	//     - Value - The value to match.
+	// For example, to list all jobs that export a
+	// forecast named electricityforecast, specify the following filter: "Filters": [
+	// { "Condition": "IS", "Key": "ForecastArn", "Value":
 	// "arn:aws:forecast:us-west-2::forecast/electricityforecast" } ]
 	Filters []types.Filter
 
@@ -156,8 +152,8 @@ type ListForecastExportJobsPaginatorOptions struct {
 	// The number of items to return in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -170,7 +166,8 @@ type ListForecastExportJobsPaginator struct {
 	firstPage bool
 }
 
-// NewListForecastExportJobsPaginator returns a new ListForecastExportJobsPaginator
+// NewListForecastExportJobsPaginator returns a new
+// ListForecastExportJobsPaginator
 func NewListForecastExportJobsPaginator(client ListForecastExportJobsAPIClient, params *ListForecastExportJobsInput, optFns ...func(*ListForecastExportJobsPaginatorOptions)) *ListForecastExportJobsPaginator {
 	if params == nil {
 		params = &ListForecastExportJobsInput{}

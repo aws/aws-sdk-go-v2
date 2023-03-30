@@ -39,8 +39,8 @@ type GetFieldLevelEncryptionProfileConfigInput struct {
 
 type GetFieldLevelEncryptionProfileConfigOutput struct {
 
-	// The current version of the field-level encryption profile configuration result.
-	// For example: E2QWRUHAPOMQZL.
+	// The current version of the field-level encryption profile configuration
+	// result. For example: E2QWRUHAPOMQZL .
 	ETag *string
 
 	// Return the field-level encryption profile configuration information.

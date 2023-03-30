@@ -42,11 +42,11 @@ type DescribeLocationS3Input struct {
 // DescribeLocationS3Response
 type DescribeLocationS3Output struct {
 
-	// If you are using DataSync on an Amazon Web Services Outpost, the Amazon Resource
-	// Name (ARNs) of the EC2 agents deployed on your Outpost. For more information
-	// about launching a DataSync agent on an Amazon Web Services Outpost, see Deploy
-	// your DataSync agent on Outposts
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent).
+	// If you are using DataSync on an Amazon Web Services Outpost, the Amazon
+	// Resource Name (ARNs) of the EC2 agents deployed on your Outpost. For more
+	// information about launching a DataSync agent on an Amazon Web Services Outpost,
+	// see Deploy your DataSync agent on Outposts (https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent)
+	// .
 	AgentArns []string
 
 	// The time that the Amazon S3 bucket location was created.
@@ -58,18 +58,18 @@ type DescribeLocationS3Output struct {
 	// The URL of the Amazon S3 location that was described.
 	LocationUri *string
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-	// used to access an Amazon S3 bucket. For detailed information about using such a
-	// role, see Creating a Location for Amazon S3 in the DataSync User Guide.
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
+	// role used to access an Amazon S3 bucket. For detailed information about using
+	// such a role, see Creating a Location for Amazon S3 in the DataSync User Guide.
 	S3Config *types.S3Config
 
 	// The Amazon S3 storage class that you chose to store your files in when this
 	// location is used as a task destination. For more information about S3 storage
-	// classes, see Amazon S3 Storage Classes
-	// (http://aws.amazon.com/s3/storage-classes/). Some storage classes have behaviors
-	// that can affect your S3 storage cost. For detailed information, see
-	// Considerations when working with S3 storage classes in DataSync
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes).
+	// classes, see Amazon S3 Storage Classes (http://aws.amazon.com/s3/storage-classes/)
+	// . Some storage classes have behaviors that can affect your S3 storage cost. For
+	// detailed information, see Considerations when working with S3 storage classes
+	// in DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes)
+	// .
 	S3StorageClass types.S3StorageClass
 
 	// Metadata pertaining to the operation's result.

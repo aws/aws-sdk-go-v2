@@ -36,11 +36,11 @@ type ListAccessPoliciesInput struct {
 	Type types.AccessPolicyType
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results. The default is 20.
+	// You can use nextToken  to get the next page of results. The default is 20.
 	MaxResults *int32
 
-	// If your initial ListAccessPolicies operation returns a nextToken, you can
-	// include the returned nextToken in subsequent ListAccessPolicies operations,
+	// If your initial ListAccessPolicies  operation returns a nextToken, you can
+	// include the returned nextToken  in subsequent ListAccessPolicies operations,
 	// which returns results in the next page.
 	NextToken *string
 
@@ -55,8 +55,8 @@ type ListAccessPoliciesOutput struct {
 	// Details about the requested access policies.
 	AccessPolicySummaries []types.AccessPolicySummary
 
-	// When nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// When nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page.
 	NextToken *string
 
@@ -140,8 +140,8 @@ var _ ListAccessPoliciesAPIClient = (*Client)(nil)
 // ListAccessPoliciesPaginatorOptions is the paginator options for
 // ListAccessPolicies
 type ListAccessPoliciesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

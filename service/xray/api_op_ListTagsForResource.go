@@ -36,9 +36,9 @@ type ListTagsForResourceInput struct {
 	// This member is required.
 	ResourceARN *string
 
-	// A pagination token. If multiple pages of results are returned, use the NextToken
-	// value returned with the current page of results as the value of this parameter
-	// to get the next page of results.
+	// A pagination token. If multiple pages of results are returned, use the
+	// NextTokenvalue returned with the current page of results as the value of this
+	// parameter to get the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,8 +46,9 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// A pagination token. If multiple pages of results are returned, use the NextToken
-	// value returned with the current page of results to get the next page of results.
+	// A pagination token. If multiple pages of results are returned, use the
+	// NextTokenvalue returned with the current page of results to get the next page
+	// of results.
 	NextToken *string
 
 	// A list of tags, as key and value pairs, that is associated with the specified
@@ -123,8 +124,8 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListTagsForResourceAPIClient is a client that implements the ListTagsForResource
-// operation.
+// ListTagsForResourceAPIClient is a client that implements the
+// ListTagsForResource operation.
 type ListTagsForResourceAPIClient interface {
 	ListTagsForResource(context.Context, *ListTagsForResourceInput, ...func(*Options)) (*ListTagsForResourceOutput, error)
 }
@@ -134,8 +135,8 @@ var _ ListTagsForResourceAPIClient = (*Client)(nil)
 // ListTagsForResourcePaginatorOptions is the paginator options for
 // ListTagsForResource
 type ListTagsForResourcePaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

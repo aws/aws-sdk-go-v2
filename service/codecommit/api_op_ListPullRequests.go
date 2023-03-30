@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of pull requests for a specified repository. The return list can
-// be refined by pull request status or pull request author ARN.
+// Returns a list of pull requests for a specified repository. The return list
+// can be refined by pull request status or pull request author ARN.
 func (c *Client) ListPullRequests(ctx context.Context, params *ListPullRequestsInput, optFns ...func(*Options)) (*ListPullRequestsOutput, error) {
 	if params == nil {
 		params = &ListPullRequestsInput{}
@@ -44,8 +44,8 @@ type ListPullRequestsInput struct {
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	MaxResults *int32
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
+	// An enumeration token that, when provided in a request, returns the next batch
+	// of the results.
 	NextToken *string
 
 	// Optional. The status of the pull request. If used, this refines the results to
@@ -62,8 +62,8 @@ type ListPullRequestsOutput struct {
 	// This member is required.
 	PullRequestIds []string
 
-	// An enumeration token that allows the operation to batch the next results of the
-	// operation.
+	// An enumeration token that allows the operation to batch the next results of
+	// the operation.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -148,8 +148,8 @@ type ListPullRequestsPaginatorOptions struct {
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Retrieves a list of sessions for a TestGridProject.
+// Retrieves a list of sessions for a TestGridProject .
 func (c *Client) ListTestGridSessions(ctx context.Context, params *ListTestGridSessionsInput, optFns ...func(*Options)) (*ListTestGridSessionsOutput, error) {
 	if params == nil {
 		params = &ListTestGridSessionsInput{}
@@ -31,7 +31,7 @@ func (c *Client) ListTestGridSessions(ctx context.Context, params *ListTestGridS
 
 type ListTestGridSessionsInput struct {
 
-	// ARN of a TestGridProject.
+	// ARN of a TestGridProject .
 	//
 	// This member is required.
 	ProjectArn *string
@@ -65,7 +65,7 @@ type ListTestGridSessionsOutput struct {
 	// Pagination token.
 	NextToken *string
 
-	// The sessions that match the criteria in a ListTestGridSessionsRequest.
+	// The sessions that match the criteria in a ListTestGridSessionsRequest .
 	TestGridSessions []types.TestGridSession
 
 	// Metadata pertaining to the operation's result.
@@ -151,8 +151,8 @@ type ListTestGridSessionsPaginatorOptions struct {
 	// Return only this many results at a time.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

@@ -29,8 +29,8 @@ func (c *Client) StartHumanLoop(ctx context.Context, params *StartHumanLoopInput
 
 type StartHumanLoopInput struct {
 
-	// The Amazon Resource Name (ARN) of the flow definition associated with this human
-	// loop.
+	// The Amazon Resource Name (ARN) of the flow definition associated with this
+	// human loop.
 	//
 	// This member is required.
 	FlowDefinitionArn *string
@@ -45,8 +45,8 @@ type StartHumanLoopInput struct {
 	// This member is required.
 	HumanLoopName *string
 
-	// Attributes of the specified data. Use DataAttributes to specify if your data is
-	// free of personally identifiable information and/or free of adult content.
+	// Attributes of the specified data. Use DataAttributes to specify if your data
+	// is free of personally identifiable information and/or free of adult content.
 	DataAttributes *types.HumanLoopDataAttributes
 
 	noSmithyDocumentSerde

@@ -12,9 +12,9 @@ import (
 )
 
 // Assigns a Grafana Enterprise license to a workspace. Upgrading to Grafana
-// Enterprise incurs additional fees. For more information, see Upgrade a workspace
-// to Grafana Enterprise
-// (https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html).
+// Enterprise incurs additional fees. For more information, see Upgrade a
+// workspace to Grafana Enterprise (https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html)
+// .
 func (c *Client) AssociateLicense(ctx context.Context, params *AssociateLicenseInput, optFns ...func(*Options)) (*AssociateLicenseOutput, error) {
 	if params == nil {
 		params = &AssociateLicenseInput{}

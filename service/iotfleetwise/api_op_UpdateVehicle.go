@@ -35,7 +35,7 @@ type UpdateVehicleInput struct {
 	VehicleName *string
 
 	// The method the specified attributes will update the existing attributes on the
-	// vehicle. UseOverwite to replace the vehicle attributes with the specified
+	// vehicle. Use Overwite to replace the vehicle attributes with the specified
 	// attributes. Or use Merge to combine all attributes. This is required if
 	// attributes are present in the input.
 	AttributeUpdateMode types.UpdateMode

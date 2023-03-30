@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Activates the switch for the specific directory to always use LDAP secure calls.
+// Activates the switch for the specific directory to always use LDAP secure
+// calls.
 func (c *Client) EnableLDAPS(ctx context.Context, params *EnableLDAPSInput, optFns ...func(*Options)) (*EnableLDAPSOutput, error) {
 	if params == nil {
 		params = &EnableLDAPSInput{}

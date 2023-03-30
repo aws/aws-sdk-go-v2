@@ -29,8 +29,8 @@ func (c *Client) DescribeLoggingConfiguration(ctx context.Context, params *Descr
 
 type DescribeLoggingConfigurationInput struct {
 
-	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or the
-	// name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or
+	// the name, and you can specify both.
 	FirewallArn *string
 
 	// The descriptive name of the firewall. You can't change the name of a firewall
@@ -46,7 +46,7 @@ type DescribeLoggingConfigurationOutput struct {
 	// The Amazon Resource Name (ARN) of the firewall.
 	FirewallArn *string
 
-	// Defines how Network Firewall performs logging for a Firewall.
+	// Defines how Network Firewall performs logging for a Firewall .
 	LoggingConfiguration *types.LoggingConfiguration
 
 	// Metadata pertaining to the operation's result.

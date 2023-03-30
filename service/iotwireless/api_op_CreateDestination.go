@@ -35,7 +35,7 @@ type CreateDestinationInput struct {
 	// This member is required.
 	Expression *string
 
-	// The type of value in Expression.
+	// The type of value in Expression .
 	//
 	// This member is required.
 	ExpressionType types.ExpressionType
@@ -59,8 +59,8 @@ type CreateDestinationInput struct {
 	// The description of the new resource.
 	Description *string
 
-	// The tags to attach to the new destination. Tags are metadata that you can use to
-	// manage a resource.
+	// The tags to attach to the new destination. Tags are metadata that you can use
+	// to manage a resource.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

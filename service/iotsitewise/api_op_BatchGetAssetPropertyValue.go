@@ -13,8 +13,7 @@ import (
 )
 
 // Gets the current value for one or more asset properties. For more information,
-// see Querying current values
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#current-values)
+// see Querying current values (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#current-values)
 // in the IoT SiteWise User Guide.
 func (c *Client) BatchGetAssetPropertyValue(ctx context.Context, params *BatchGetAssetPropertyValueInput, optFns ...func(*Options)) (*BatchGetAssetPropertyValueOutput, error) {
 	if params == nil {
@@ -48,14 +47,14 @@ type BatchGetAssetPropertyValueInput struct {
 type BatchGetAssetPropertyValueOutput struct {
 
 	// A list of the errors (if any) associated with the batch request. Each error
-	// entry contains the entryId of the entry that failed.
+	// entry contains the entryId  of the entry that failed.
 	//
 	// This member is required.
 	ErrorEntries []types.BatchGetAssetPropertyValueErrorEntry
 
 	// A list of entries that were not processed by this batch request. because these
 	// entries had been completely processed by previous paginated requests. Each
-	// skipped entry contains the entryId of the entry that skipped.
+	// skipped entry contains the entryId  of the entry that skipped.
 	//
 	// This member is required.
 	SkippedEntries []types.BatchGetAssetPropertyValueSkippedEntry
@@ -181,8 +180,8 @@ var _ BatchGetAssetPropertyValueAPIClient = (*Client)(nil)
 // BatchGetAssetPropertyValuePaginatorOptions is the paginator options for
 // BatchGetAssetPropertyValue
 type BatchGetAssetPropertyValuePaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

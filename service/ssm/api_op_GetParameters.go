@@ -12,8 +12,8 @@ import (
 )
 
 // Get information about one or more parameters by specifying multiple parameter
-// names. To get information about a single parameter, you can use the GetParameter
-// operation instead.
+// names. To get information about a single parameter, you can use the
+// GetParameter operation instead.
 func (c *Client) GetParameters(ctx context.Context, params *GetParametersInput, optFns ...func(*Options)) (*GetParametersOutput, error) {
 	if params == nil {
 		params = &GetParametersInput{}
@@ -32,14 +32,15 @@ func (c *Client) GetParameters(ctx context.Context, params *GetParametersInput, 
 type GetParametersInput struct {
 
 	// Names of the parameters for which you want to query information. To query by
-	// parameter label, use "Name": "name:label". To query by parameter version, use
-	// "Name": "name:version".
+	// parameter label, use "Name": "name:label" . To query by parameter version, use
+	// "Name": "name:version" .
 	//
 	// This member is required.
 	Names []string
 
-	// Return decrypted secure string value. Return decrypted values for secure string
-	// parameters. This flag is ignored for String and StringList parameter types.
+	// Return decrypted secure string value. Return decrypted values for secure
+	// string parameters. This flag is ignored for String  and StringList parameter
+	// types.
 	WithDecryption *bool
 
 	noSmithyDocumentSerde

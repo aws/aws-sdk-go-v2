@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a branch in a repository and points the branch to a commit. Calling the
-// create branch operation does not set a repository's default branch. To do this,
-// call the update default branch operation.
+// Creates a branch in a repository and points the branch to a commit. Calling
+// the create branch operation does not set a repository's default branch. To do
+// this, call the update default branch operation.
 func (c *Client) CreateBranch(ctx context.Context, params *CreateBranchInput, optFns ...func(*Options)) (*CreateBranchOutput, error) {
 	if params == nil {
 		params = &CreateBranchInput{}

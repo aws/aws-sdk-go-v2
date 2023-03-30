@@ -121,8 +121,8 @@ var _ GetSamplingStatisticSummariesAPIClient = (*Client)(nil)
 // GetSamplingStatisticSummariesPaginatorOptions is the paginator options for
 // GetSamplingStatisticSummaries
 type GetSamplingStatisticSummariesPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

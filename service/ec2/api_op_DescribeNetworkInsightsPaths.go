@@ -32,48 +32,26 @@ type DescribeNetworkInsightsPathsInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
 	// The filters. The following are the possible values:
-	//
-	// * destination - The ID of
-	// the resource.
-	//
-	// * filter-at-source.source-address - The source IPv4 address at
-	// the source.
-	//
-	// * filter-at-source.source-port-range - The source port range at the
-	// source.
-	//
-	// * filter-at-source.destination-address - The destination IPv4 address
-	// at the source.
-	//
-	// * filter-at-source.destination-port-range - The destination port
-	// range at the source.
-	//
-	// * filter-at-destination.source-address - The source IPv4
-	// address at the destination.
-	//
-	// * filter-at-destination.source-port-range - The
-	// source port range at the destination.
-	//
-	// *
-	// filter-at-destination.destination-address - The destination IPv4 address at the
-	// destination.
-	//
-	// * filter-at-destination.destination-port-range - The destination
-	// port range at the destination.
-	//
-	// * protocol - The protocol.
-	//
-	// * source - The ID of
-	// the resource.
+	//     - destination - The ID of the resource.
+	//     - filter-at-source.source-address - The source IPv4 address at the source.
+	//     - filter-at-source.source-port-range - The source port range at the source.
+	//     - filter-at-source.destination-address - The destination IPv4 address at the source.
+	//     - filter-at-source.destination-port-range - The destination port range at the source.
+	//     - filter-at-destination.source-address - The source IPv4 address at the destination.
+	//     - filter-at-destination.source-port-range - The source port range at the destination.
+	//     - filter-at-destination.destination-address - The destination IPv4 address at the destination.
+	//     - filter-at-destination.destination-port-range - The destination port range at the destination.
+	//     - protocol - The protocol.
+	//     - source - The ID of the resource.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	MaxResults *int32
 
 	// The IDs of the paths.
@@ -172,11 +150,11 @@ var _ DescribeNetworkInsightsPathsAPIClient = (*Client)(nil)
 // DescribeNetworkInsightsPaths
 type DescribeNetworkInsightsPathsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// remaining results, make another call with the returned nextToken  value.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

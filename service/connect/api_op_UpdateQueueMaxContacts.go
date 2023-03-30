@@ -30,8 +30,7 @@ func (c *Client) UpdateQueueMaxContacts(ctx context.Context, params *UpdateQueue
 
 type UpdateQueueMaxContactsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -42,8 +41,8 @@ type UpdateQueueMaxContactsInput struct {
 	// This member is required.
 	QueueId *string
 
-	// The maximum number of contacts that can be in the queue before it is considered
-	// full.
+	// The maximum number of contacts that can be in the queue before it is
+	// considered full.
 	MaxContacts *int32
 
 	noSmithyDocumentSerde

@@ -13,7 +13,7 @@ import (
 )
 
 // Lists the trust anchors in the authenticated account and Amazon Web Services
-// Region. Required permissions: rolesanywhere:ListTrustAnchors.
+// Region. Required permissions: rolesanywhere:ListTrustAnchors .
 func (c *Client) ListTrustAnchors(ctx context.Context, params *ListTrustAnchorsInput, optFns ...func(*Options)) (*ListTrustAnchorsOutput, error) {
 	if params == nil {
 		params = &ListTrustAnchorsInput{}
@@ -128,8 +128,8 @@ var _ ListTrustAnchorsAPIClient = (*Client)(nil)
 
 // ListTrustAnchorsPaginatorOptions is the paginator options for ListTrustAnchors
 type ListTrustAnchorsPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

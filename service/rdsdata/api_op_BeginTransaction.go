@@ -15,7 +15,7 @@ import (
 // transaction times out if no calls use its transaction ID in three minutes. If a
 // transaction times out before it's committed, it's rolled back automatically. DDL
 // statements inside a transaction cause an implicit commit. We recommend that you
-// run each DDL statement in a separate ExecuteStatement call with
+// run each DDL statement in a separate ExecuteStatement  call with
 // continueAfterTimeout enabled.
 func (c *Client) BeginTransaction(ctx context.Context, params *BeginTransactionInput, optFns ...func(*Options)) (*BeginTransactionOutput, error) {
 	if params == nil {

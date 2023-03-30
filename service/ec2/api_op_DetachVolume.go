@@ -21,8 +21,7 @@ import (
 // instance is running. To detach the root volume, stop the instance first. When a
 // volume with an Amazon Web Services Marketplace product code is detached from an
 // instance, the product code is no longer associated with the instance. For more
-// information, see Detach an Amazon EBS volume
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html)
+// information, see Detach an Amazon EBS volume (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) DetachVolume(ctx context.Context, params *DetachVolumeInput, optFns ...func(*Options)) (*DetachVolumeOutput, error) {
 	if params == nil {
@@ -51,12 +50,12 @@ type DetachVolumeInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
+	// required permissions, the error response is DryRunOperation . Otherwise, it is
+	// UnauthorizedOperation .
 	DryRun *bool
 
-	// Forces detachment if the previous detachment attempt did not occur cleanly (for
-	// example, logging into an instance, unmounting the volume, and detaching
+	// Forces detachment if the previous detachment attempt did not occur cleanly
+	// (for example, logging into an instance, unmounting the volume, and detaching
 	// normally). This option can lead to data loss or a corrupted file system. Use
 	// this option only as a last resort to detach a volume from a failed instance. The
 	// instance won't have an opportunity to flush file system caches or file system
@@ -64,8 +63,8 @@ type DetachVolumeInput struct {
 	// procedures.
 	Force *bool
 
-	// The ID of the instance. If you are detaching a Multi-Attach enabled volume, you
-	// must specify an instance ID.
+	// The ID of the instance. If you are detaching a Multi-Attach enabled volume,
+	// you must specify an instance ID.
 	InstanceId *string
 
 	noSmithyDocumentSerde

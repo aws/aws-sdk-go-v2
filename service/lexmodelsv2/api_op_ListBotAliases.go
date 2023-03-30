@@ -41,8 +41,8 @@ type ListBotAliasesInput struct {
 	MaxResults *int32
 
 	// If the response from the ListBotAliases operation contains more results than
-	// specified in the maxResults parameter, a token is returned in the response. Use
-	// that token in the nextToken parameter to return the next page of results.
+	// specified in the maxResults parameter, a token is returned in the response.
+	// Use that token in the nextToken  parameter to return the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -50,19 +50,19 @@ type ListBotAliasesInput struct {
 
 type ListBotAliasesOutput struct {
 
-	// Summary information for the bot aliases that meet the filter criteria specified
-	// in the request. The length of the list is specified in the maxResults parameter
-	// of the request. If there are more aliases available, the nextToken field
-	// contains a token to get the next page of results.
+	// Summary information for the bot aliases that meet the filter criteria
+	// specified in the request. The length of the list is specified in the maxResults
+	// parameter of the request. If there are more aliases available, the nextToken
+	// field contains a token to get the next page of results.
 	BotAliasSummaries []types.BotAliasSummary
 
 	// The identifier of the bot associated with the aliases.
 	BotId *string
 
-	// A token that indicates whether there are more results to return in a response to
-	// the ListBotAliases operation. If the nextToken field is present, you send the
-	// contents as the nextToken parameter of a ListBotAliases operation request to get
-	// the next page of results.
+	// A token that indicates whether there are more results to return in a response
+	// to the ListBotAliases  operation. If the nextToken field is present, you send
+	// the contents as the nextToken  parameter of a ListBotAliases operation request
+	// to get the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -149,8 +149,8 @@ type ListBotAliasesPaginatorOptions struct {
 	// returned.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

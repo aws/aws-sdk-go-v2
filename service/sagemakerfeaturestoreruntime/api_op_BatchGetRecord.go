@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a batch of Records from a FeatureGroup.
+// Retrieves a batch of Records  from a FeatureGroup .
 func (c *Client) BatchGetRecord(ctx context.Context, params *BatchGetRecordInput, optFns ...func(*Options)) (*BatchGetRecordOutput, error) {
 	if params == nil {
 		params = &BatchGetRecordInput{}
@@ -29,8 +29,8 @@ func (c *Client) BatchGetRecord(ctx context.Context, params *BatchGetRecordInput
 
 type BatchGetRecordInput struct {
 
-	// A list of FeatureGroup names, with their corresponding RecordIdentifier value,
-	// and Feature name that have been requested to be retrieved in batch.
+	// A list of FeatureGroup  names, with their corresponding RecordIdentifier
+	// value, and Feature name that have been requested to be retrieved in batch.
 	//
 	// This member is required.
 	Identifiers []types.BatchGetRecordIdentifier
@@ -50,7 +50,7 @@ type BatchGetRecordOutput struct {
 	// This member is required.
 	Records []types.BatchGetRecordResultDetail
 
-	// A unprocessed list of FeatureGroup names, with their corresponding
+	// A unprocessed list of FeatureGroup  names, with their corresponding
 	// RecordIdentifier value, and Feature name.
 	//
 	// This member is required.

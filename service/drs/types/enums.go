@@ -61,8 +61,8 @@ const (
 	DataReplicationInitiationStepNameStartDataTransfer               DataReplicationInitiationStepName = "START_DATA_TRANSFER"
 )
 
-// Values returns all known values for DataReplicationInitiationStepName. Note that
-// this can be expanded in the future, and so it is only as up to date as the
+// Values returns all known values for DataReplicationInitiationStepName. Note
+// that this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (DataReplicationInitiationStepName) Values() []DataReplicationInitiationStepName {
@@ -122,8 +122,8 @@ const (
 	DataReplicationStateDisconnected     DataReplicationState = "DISCONNECTED"
 )
 
-// Values returns all known values for DataReplicationState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for DataReplicationState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (DataReplicationState) Values() []DataReplicationState {
 	return []DataReplicationState{
@@ -233,9 +233,9 @@ const (
 	FailbackReplicationErrorFailedToStartDataTransfer                             FailbackReplicationError = "FAILED_TO_START_DATA_TRANSFER"
 )
 
-// Values returns all known values for FailbackReplicationError. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for FailbackReplicationError. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FailbackReplicationError) Values() []FailbackReplicationError {
 	return []FailbackReplicationError{
 		"AGENT_NOT_SEEN",
@@ -302,9 +302,9 @@ const (
 	InitiatedByTargetAccount              InitiatedBy = "TARGET_ACCOUNT"
 )
 
-// Values returns all known values for InitiatedBy. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for InitiatedBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (InitiatedBy) Values() []InitiatedBy {
 	return []InitiatedBy{
 		"START_RECOVERY",
@@ -339,9 +339,9 @@ const (
 	JobLogEventJobEnd                      JobLogEvent = "JOB_END"
 )
 
-// Values returns all known values for JobLogEvent. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobLogEvent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (JobLogEvent) Values() []JobLogEvent {
 	return []JobLogEvent{
 		"JOB_START",
@@ -373,9 +373,9 @@ const (
 	JobStatusCompleted JobStatus = "COMPLETED"
 )
 
-// Values returns all known values for JobStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"PENDING",
@@ -473,9 +473,9 @@ const (
 	LaunchStatusTerminated LaunchStatus = "TERMINATED"
 )
 
-// Values returns all known values for LaunchStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LaunchStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchStatus) Values() []LaunchStatus {
 	return []LaunchStatus{
 		"PENDING",
@@ -707,9 +707,9 @@ const (
 	ReplicationConfigurationEbsEncryptionCustom  ReplicationConfigurationEbsEncryption = "CUSTOM"
 )
 
-// Values returns all known values for ReplicationConfigurationEbsEncryption. Note
-// that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
+// Values returns all known values for ReplicationConfigurationEbsEncryption.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
 // updates.
 func (ReplicationConfigurationEbsEncryption) Values() []ReplicationConfigurationEbsEncryption {
 	return []ReplicationConfigurationEbsEncryption{
@@ -755,8 +755,8 @@ const (
 	ReplicationDirectionFailback ReplicationDirection = "FAILBACK"
 )
 
-// Values returns all known values for ReplicationDirection. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for ReplicationDirection. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationDirection) Values() []ReplicationDirection {
 	return []ReplicationDirection{

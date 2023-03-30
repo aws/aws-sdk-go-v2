@@ -13,9 +13,9 @@ import (
 )
 
 // Returns a list of Amazon OpenSearch Service package versions, along with their
-// creation time and commit message. For more information, see Custom packages for
-// Amazon OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
+// creation time and commit message. For more information, see Custom packages
+// for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html)
+// .
 func (c *Client) GetPackageVersionHistory(ctx context.Context, params *GetPackageVersionHistoryInput, optFns ...func(*Options)) (*GetPackageVersionHistoryOutput, error) {
 	if params == nil {
 		params = &GetPackageVersionHistoryInput{}
@@ -31,7 +31,7 @@ func (c *Client) GetPackageVersionHistory(ctx context.Context, params *GetPackag
 	return out, nil
 }
 
-// Container for the request parameters to the GetPackageVersionHistory operation.
+// Container for the request parameters to the GetPackageVersionHistory  operation.
 type GetPackageVersionHistoryInput struct {
 
 	// The unique identifier of the package.
@@ -40,22 +40,22 @@ type GetPackageVersionHistoryInput struct {
 	PackageID *string
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken  to get the next page of results.
 	MaxResults int32
 
-	// If your initial GetPackageVersionHistory operation returns a nextToken, you can
-	// include the returned nextToken in subsequent GetPackageVersionHistory
+	// If your initial GetPackageVersionHistory  operation returns a nextToken, you
+	// can include the returned nextToken  in subsequent GetPackageVersionHistory
 	// operations, which returns results in the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// Container for response returned by GetPackageVersionHistory operation.
+// Container for response returned by GetPackageVersionHistory  operation.
 type GetPackageVersionHistoryOutput struct {
 
-	// When nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
+	// When nextToken  is returned, there are more results available. The value of
+	// nextTokenis a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page.
 	NextToken *string
 
@@ -146,11 +146,11 @@ var _ GetPackageVersionHistoryAPIClient = (*Client)(nil)
 // GetPackageVersionHistory
 type GetPackageVersionHistoryPaginatorOptions struct {
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken  to get the next page of results.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

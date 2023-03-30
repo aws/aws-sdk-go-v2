@@ -48,8 +48,8 @@ type AccountLimit struct {
 // events.
 type CloudWatchLogsDestination struct {
 
-	// The Amazon Resource Name (ARN) of an Amazon Identity and Access Management (IAM)
-	// role that is able to write event data to an Amazon CloudWatch destination.
+	// The Amazon Resource Name (ARN) of an Amazon Identity and Access Management
+	// (IAM) role that is able to write event data to an Amazon CloudWatch destination.
 	//
 	// This member is required.
 	IamRoleArn *string
@@ -92,8 +92,8 @@ type ConfigurationSetInformation struct {
 	// This member is required.
 	ConfigurationSetName *string
 
-	// The time when the ConfigurationSet was created, in UNIX epoch time
-	// (https://www.epochconverter.com/) format.
+	// The time when the ConfigurationSet was created, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
 	//
 	// This member is required.
 	CreatedTimestamp *time.Time
@@ -237,8 +237,8 @@ type OptedOutNumberInformation struct {
 	// This member is required.
 	OptedOutNumber *string
 
-	// The time that the op tout occurred, in UNIX epoch time
-	// (https://www.epochconverter.com/) format.
+	// The time that the op tout occurred, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
 	//
 	// This member is required.
 	OptedOutTimestamp *time.Time
@@ -249,8 +249,8 @@ type OptedOutNumberInformation struct {
 // The information for all OptOutList in an Amazon Web Services account.
 type OptOutListInformation struct {
 
-	// The time when the OutOutList was created, in UNIX epoch time
-	// (https://www.epochconverter.com/) format.
+	// The time when the OutOutList was created, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
 	//
 	// This member is required.
 	CreatedTimestamp *time.Time
@@ -271,13 +271,14 @@ type OptOutListInformation struct {
 // The metadata for an origination identity associated with a pool.
 type OriginationIdentityMetadata struct {
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region.
 	//
 	// This member is required.
 	IsoCountryCode *string
 
-	// Describes if the origination identity can be used for text messages, voice calls
-	// or both.
+	// Describes if the origination identity can be used for text messages, voice
+	// calls or both.
 	//
 	// This member is required.
 	NumberCapabilities []NumberCapability
@@ -314,8 +315,8 @@ type PhoneNumberFilter struct {
 // The information for a phone number in an Amazon Web Services account.
 type PhoneNumberInformation struct {
 
-	// The time when the phone number was created, in UNIX epoch time
-	// (https://www.epochconverter.com/) format.
+	// The time when the phone number was created, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
 	//
 	// This member is required.
 	CreatedTimestamp *time.Time
@@ -325,7 +326,8 @@ type PhoneNumberInformation struct {
 	// This member is required.
 	DeletionProtectionEnabled bool
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region.
 	//
 	// This member is required.
 	IsoCountryCode *string
@@ -342,8 +344,8 @@ type PhoneNumberInformation struct {
 	// This member is required.
 	MonthlyLeasingPrice *string
 
-	// Describes if the origination identity can be used for text messages, voice calls
-	// or both.
+	// Describes if the origination identity can be used for text messages, voice
+	// calls or both.
 	//
 	// This member is required.
 	NumberCapabilities []NumberCapability
@@ -368,13 +370,12 @@ type PhoneNumberInformation struct {
 	// This member is required.
 	PhoneNumberArn *string
 
-	// When set to false an end recipient sends a message that begins with HELP or STOP
-	// to one of your dedicated numbers, Amazon Pinpoint automatically replies with a
-	// customizable message and adds the end recipient to the OptOutList. When set to
-	// true you're responsible for responding to HELP and STOP requests. You're also
-	// responsible for tracking and honoring opt-out request. For more information see
-	// Self-managed opt-outs
-	// (https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-managing.html#settings-account-sms-self-managed-opt-out)
+	// When set to false an end recipient sends a message that begins with HELP or
+	// STOP to one of your dedicated numbers, Amazon Pinpoint automatically replies
+	// with a customizable message and adds the end recipient to the OptOutList. When
+	// set to true you're responsible for responding to HELP and STOP requests. You're
+	// also responsible for tracking and honoring opt-out request. For more information
+	// see Self-managed opt-outs (https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-managing.html#settings-account-sms-self-managed-opt-out)
 	//
 	// This member is required.
 	SelfManagedOptOutsEnabled bool
@@ -384,8 +385,8 @@ type PhoneNumberInformation struct {
 	// This member is required.
 	Status NumberStatus
 
-	// By default this is set to false. When set to true you can receive incoming text
-	// messages from your end recipients using the TwoWayChannelArn.
+	// By default this is set to false. When set to true you can receive incoming
+	// text messages from your end recipients using the TwoWayChannelArn.
 	//
 	// This member is required.
 	TwoWayEnabled bool
@@ -421,8 +422,8 @@ type PoolFilter struct {
 // The information for a pool in an Amazon Web Services account.
 type PoolInformation struct {
 
-	// The time when the pool was created, in UNIX epoch time
-	// (https://www.epochconverter.com/) format.
+	// The time when the pool was created, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
 	//
 	// This member is required.
 	CreatedTimestamp *time.Time
@@ -459,18 +460,17 @@ type PoolInformation struct {
 	// with a customizable message and adds the end recipient to the OptOutList. When
 	// set to true you're responsible for responding to HELP and STOP requests. You're
 	// also responsible for tracking and honoring opt-out requests. For more
-	// information see Self-managed opt-outs
-	// (https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-managing.html#settings-account-sms-self-managed-opt-out)
+	// information see Self-managed opt-outs (https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-managing.html#settings-account-sms-self-managed-opt-out)
 	//
 	// This member is required.
 	SelfManagedOptOutsEnabled bool
 
 	// Allows you to enable shared routes on your pool. By default, this is set to
-	// False. If you set this value to True, your messages are sent using phone numbers
-	// or sender IDs (depending on the country) that are shared with other Amazon
-	// Pinpoint users. In some countries, such as the United States, senders aren't
-	// allowed to use shared routes and must use a dedicated phone number or short
-	// code.
+	// False . If you set this value to True, your messages are sent using phone
+	// numbers or sender IDs (depending on the country) that are shared with other
+	// Amazon Pinpoint users. In some countries, such as the United States, senders
+	// aren't allowed to use shared routes and must use a dedicated phone number or
+	// short code.
 	//
 	// This member is required.
 	SharedRoutesEnabled bool
@@ -480,8 +480,8 @@ type PoolInformation struct {
 	// This member is required.
 	Status PoolStatus
 
-	// When set to true you can receive incoming text messages from your end recipients
-	// using the TwoWayChannelArn.
+	// When set to true you can receive incoming text messages from your end
+	// recipients using the TwoWayChannelArn.
 	//
 	// This member is required.
 	TwoWayEnabled bool
@@ -509,14 +509,14 @@ type PoolOriginationIdentitiesFilter struct {
 	noSmithyDocumentSerde
 }
 
-// The alphanumeric sender ID in a specific country that you want to describe. For
-// more information on sender IDs see Requesting sender IDs for SMS messaging with
-// Amazon Pinpoint
-// (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-sender-id.html)
+// The alphanumeric sender ID in a specific country that you want to describe.
+// For more information on sender IDs see Requesting sender IDs for SMS messaging
+// with Amazon Pinpoint  (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-sender-id.html)
 // in the Amazon Pinpoint User Guide.
 type SenderIdAndCountry struct {
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region.
 	//
 	// This member is required.
 	IsoCountryCode *string
@@ -548,7 +548,8 @@ type SenderIdFilter struct {
 // The information for all SenderIds in an Amazon Web Services account.
 type SenderIdInformation struct {
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region.
 	//
 	// This member is required.
 	IsoCountryCode *string
@@ -578,12 +579,12 @@ type SenderIdInformation struct {
 	noSmithyDocumentSerde
 }
 
-// An object that defines an Amazon SNS destination for events. You can use Amazon
-// SNS to send notification when certain events occur.
+// An object that defines an Amazon SNS destination for events. You can use
+// Amazon SNS to send notification when certain events occur.
 type SnsDestination struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish
-	// events to.
+	// The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to
+	// publish events to.
 	//
 	// This member is required.
 	TopicArn *string
@@ -591,16 +592,16 @@ type SnsDestination struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the current Amazon Pinpoint monthly spend limits for sending voice and
-// text messages. For more information on increasing your monthly spend limit, see
-// Requesting increases to your monthly SMS spending quota for Amazon Pinpoint
-// (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-spend-threshold.html)
+// Describes the current Amazon Pinpoint monthly spend limits for sending voice
+// and text messages. For more information on increasing your monthly spend limit,
+// see Requesting increases to your monthly SMS spending quota for Amazon
+// Pinpoint  (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-spend-threshold.html)
 // in the Amazon Pinpoint User Guide.
 type SpendLimit struct {
 
 	// The maximum amount of money, in US dollars, that you want to be able to spend
 	// sending messages each month. This value has to be less than or equal to the
-	// amount in MaxLimit. To use this custom limit, Overridden must be set to true.
+	// amount in MaxLimit . To use this custom limit, Overridden  must be set to true.
 	//
 	// This member is required.
 	EnforcedLimit int64
@@ -616,9 +617,9 @@ type SpendLimit struct {
 	// This member is required.
 	Name SpendLimitName
 
-	// When set to True, the value that has been specified in the EnforcedLimit is used
-	// to determine the maximum amount in US dollars that can be spent to send messages
-	// each month, in US dollars.
+	// When set to True , the value that has been specified in the EnforcedLimit is
+	// used to determine the maximum amount in US dollars that can be spent to send
+	// messages each month, in US dollars.
 	//
 	// This member is required.
 	Overridden bool

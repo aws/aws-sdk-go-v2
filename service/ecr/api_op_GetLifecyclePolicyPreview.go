@@ -16,8 +16,8 @@ import (
 	"time"
 )
 
-// Retrieves the results of the lifecycle policy preview request for the specified
-// repository.
+// Retrieves the results of the lifecycle policy preview request for the
+// specified repository.
 func (c *Client) GetLifecyclePolicyPreview(ctx context.Context, params *GetLifecyclePolicyPreviewInput, optFns ...func(*Options)) (*GetLifecyclePolicyPreviewOutput, error) {
 	if params == nil {
 		params = &GetLifecyclePolicyPreviewInput{}
@@ -48,23 +48,23 @@ type GetLifecyclePolicyPreviewInput struct {
 	ImageIds []types.ImageIdentifier
 
 	// The maximum number of repository results returned by
-	// GetLifecyclePolicyPreviewRequest in  paginated output. When this parameter is
-	// used, GetLifecyclePolicyPreviewRequest only returns  maxResults results in a
+	// GetLifecyclePolicyPreviewRequestin  paginated output. When this parameter is
+	// used, GetLifecyclePolicyPreviewRequest  only returns  maxResults results in a
 	// single page along with a nextToken  response element. The remaining results of
 	// the initial request can be seen by sending  another
 	// GetLifecyclePolicyPreviewRequest request with the returned nextToken  value.
 	// This value can be between 1 and 1000. If this  parameter is not used, then
 	// GetLifecyclePolicyPreviewRequest returns up to  100 results and a nextToken
 	// value, if  applicable. This option cannot be used when you specify images with
-	// imageIds.
+	// imageIds .
 	MaxResults *int32
 
-	// The nextToken value returned from a previous paginated
+	// The nextToken  value returned from a previous paginated
 	// GetLifecyclePolicyPreviewRequest request where maxResults was used and the
 	// results exceeded the value of that parameter. Pagination continues from the end
-	// of the  previous results that returned the nextToken value. This value is  null
-	// when there are no more results to return. This option cannot be used when you
-	// specify images with imageIds.
+	// of the  previous results that returned the nextToken  value. This value is
+	// nullwhen there are no more results to return. This option cannot be used when
+	// you specify images with imageIds .
 	NextToken *string
 
 	// The Amazon Web Services account ID associated with the registry that contains
@@ -80,10 +80,10 @@ type GetLifecyclePolicyPreviewOutput struct {
 	// The JSON lifecycle policy text.
 	LifecyclePolicyText *string
 
-	// The nextToken value to include in a future GetLifecyclePolicyPreview request.
-	// When the results of a GetLifecyclePolicyPreview request exceed maxResults, this
-	// value can be used to retrieve the next page of results. This value is null when
-	// there are no more results to return.
+	// The nextToken  value to include in a future GetLifecyclePolicyPreview request.
+	// When the results of a GetLifecyclePolicyPreview  request exceed maxResults,
+	// this value can be used to retrieve the next page of results. This value is null
+	// when there are no more results to return.
 	NextToken *string
 
 	// The results of the lifecycle policy preview request.
@@ -182,19 +182,19 @@ var _ GetLifecyclePolicyPreviewAPIClient = (*Client)(nil)
 // GetLifecyclePolicyPreview
 type GetLifecyclePolicyPreviewPaginatorOptions struct {
 	// The maximum number of repository results returned by
-	// GetLifecyclePolicyPreviewRequest in  paginated output. When this parameter is
-	// used, GetLifecyclePolicyPreviewRequest only returns  maxResults results in a
+	// GetLifecyclePolicyPreviewRequestin  paginated output. When this parameter is
+	// used, GetLifecyclePolicyPreviewRequest  only returns  maxResults results in a
 	// single page along with a nextToken  response element. The remaining results of
 	// the initial request can be seen by sending  another
 	// GetLifecyclePolicyPreviewRequest request with the returned nextToken  value.
 	// This value can be between 1 and 1000. If this  parameter is not used, then
 	// GetLifecyclePolicyPreviewRequest returns up to  100 results and a nextToken
 	// value, if  applicable. This option cannot be used when you specify images with
-	// imageIds.
+	// imageIds .
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -286,10 +286,10 @@ type LifecyclePolicyPreviewCompleteWaiterOptions struct {
 	// MaxDelay.
 	MinDelay time.Duration
 
-	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
-	// to zero, LifecyclePolicyPreviewCompleteWaiter will use default max delay of 120
-	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
-	// MinDelay.
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, LifecyclePolicyPreviewCompleteWaiter will use default max delay of
+	// 120 seconds. Note that MaxDelay must resolve to value greater than or equal to
+	// the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts

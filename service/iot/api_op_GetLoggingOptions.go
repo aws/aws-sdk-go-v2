@@ -12,8 +12,8 @@ import (
 )
 
 // Gets the logging options. NOTE: use of this command is not recommended. Use
-// GetV2LoggingOptions instead. Requires permission to access the GetLoggingOptions
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// GetV2LoggingOptions instead. Requires permission to access the
+// GetLoggingOptions (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) GetLoggingOptions(ctx context.Context, params *GetLoggingOptionsInput, optFns ...func(*Options)) (*GetLoggingOptionsOutput, error) {
 	if params == nil {

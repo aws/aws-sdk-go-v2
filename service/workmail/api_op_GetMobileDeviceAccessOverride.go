@@ -31,7 +31,7 @@ func (c *Client) GetMobileDeviceAccessOverride(ctx context.Context, params *GetM
 
 type GetMobileDeviceAccessOverrideInput struct {
 
-	// The mobile device to which the override applies. DeviceId is case insensitive.
+	// The mobile device to which the override applies. DeviceId  is case insensitive.
 	//
 	// This member is required.
 	DeviceId *string
@@ -43,11 +43,9 @@ type GetMobileDeviceAccessOverrideInput struct {
 
 	// Identifies the WorkMail user for the override. Accepts the following types of
 	// user identities:
-	// - User ID: 12345678-1234-1234-1234-123456789012 or
-	// S-1-1-12-1234567890-123456789-123456789-1234
-	// - Email address: user@domain.tld
-	// -
-	// User name: user
+	//     - User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234
+	//     - Email address: user@domain.tld
+	//     - User name: user
 	//
 	// This member is required.
 	UserId *string
@@ -69,7 +67,7 @@ type GetMobileDeviceAccessOverrideOutput struct {
 	// The device to which the access override applies.
 	DeviceId *string
 
-	// The effect of the override, ALLOW or DENY.
+	// The effect of the override, ALLOW  or DENY .
 	Effect types.MobileDeviceAccessRuleEffect
 
 	// The WorkMail user to which the access override applies.

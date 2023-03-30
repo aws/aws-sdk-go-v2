@@ -18,8 +18,7 @@ import (
 // snapshot expires, Amazon Redshift automatically deletes it. If you want to keep
 // an automated snapshot for a longer period, you can make a manual copy of the
 // snapshot. Manual snapshots are retained until you delete them. For more
-// information about working with snapshots, go to Amazon Redshift Snapshots
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
+// information about working with snapshots, go to Amazon Redshift Snapshots (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) CopyClusterSnapshot(ctx context.Context, params *CopyClusterSnapshotInput, optFns ...func(*Options)) (*CopyClusterSnapshotOutput, error) {
 	if params == nil {
@@ -39,22 +38,17 @@ func (c *Client) CopyClusterSnapshot(ctx context.Context, params *CopyClusterSna
 type CopyClusterSnapshotInput struct {
 
 	// The identifier for the source snapshot. Constraints:
-	// - Must be the identifier
-	// for a valid automated snapshot whose state is available.
+	//     - Must be the identifier for a valid automated snapshot whose state is available .
 	//
 	// This member is required.
 	SourceSnapshotIdentifier *string
 
 	// The identifier given to the new manual snapshot. Constraints:
-	// - Cannot be null,
-	// empty, or blank.
-	// - Must contain from 1 to 255 alphanumeric characters or
-	// hyphens.
-	// - First character must be a letter.
-	// - Cannot end with a hyphen or
-	// contain two consecutive hyphens.
-	// - Must be unique for the Amazon Web Services
-	// account that is making the request.
+	//     - Cannot be null, empty, or blank.
+	//     - Must contain from 1 to 255 alphanumeric characters or hyphens.
+	//     - First character must be a letter.
+	//     - Cannot end with a hyphen or contain two consecutive hyphens.
+	//     - Must be unique for the Amazon Web Services account that is making the request.
 	//
 	// This member is required.
 	TargetSnapshotIdentifier *string
@@ -68,7 +62,7 @@ type CopyClusterSnapshotInput struct {
 	// parameter is required if your IAM user or role has a policy containing a
 	// snapshot resource element that specifies anything other than * for the cluster
 	// name. Constraints:
-	// - Must be the identifier for a valid cluster.
+	//     - Must be the identifier for a valid cluster.
 	SourceSnapshotClusterIdentifier *string
 
 	noSmithyDocumentSerde

@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new search domain. For more information, see Creating a Search Domain
-// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/creating-domains.html)
+// Creates a new search domain. For more information, see Creating a Search Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/creating-domains.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, optFns ...func(*Options)) (*CreateDomainOutput, error) {
 	if params == nil {
@@ -29,8 +28,8 @@ func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, op
 	return out, nil
 }
 
-// Container for the parameters to the CreateDomain operation. Specifies a name for
-// the new search domain.
+// Container for the parameters to the CreateDomain operation. Specifies a name
+// for the new search domain.
 type CreateDomainInput struct {
 
 	// A name for the domain you are creating. Allowed characters are a-z (lower-case

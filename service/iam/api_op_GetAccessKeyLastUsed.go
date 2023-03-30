@@ -43,7 +43,7 @@ type GetAccessKeyLastUsedInput struct {
 }
 
 // Contains the response to a successful GetAccessKeyLastUsed request. It is also
-// returned as a member of the AccessKeyMetaData structure returned by the
+// returned as a member of the AccessKeyMetaData  structure returned by the
 // ListAccessKeys action.
 type GetAccessKeyLastUsedOutput struct {
 

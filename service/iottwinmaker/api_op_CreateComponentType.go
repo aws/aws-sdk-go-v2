@@ -50,8 +50,8 @@ type CreateComponentTypeInput struct {
 	// Specifies the parent component type to extend.
 	ExtendsFrom []string
 
-	// An object that maps strings to the functions in the component type. Each string
-	// in the mapping must be unique to this object.
+	// An object that maps strings to the functions in the component type. Each
+	// string in the mapping must be unique to this object.
 	Functions map[string]types.FunctionRequest
 
 	// A Boolean value that specifies whether an entity can have more than one

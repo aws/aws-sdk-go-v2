@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Returns information about the specified OpenID Connect (OIDC) provider resource
-// object in IAM.
+// Returns information about the specified OpenID Connect (OIDC) provider
+// resource object in IAM.
 func (c *Client) GetOpenIDConnectProvider(ctx context.Context, params *GetOpenIDConnectProviderInput, optFns ...func(*Options)) (*GetOpenIDConnectProviderOutput, error) {
 	if params == nil {
 		params = &GetOpenIDConnectProviderInput{}
@@ -33,10 +33,9 @@ type GetOpenIDConnectProviderInput struct {
 
 	// The Amazon Resource Name (ARN) of the OIDC provider resource object in IAM to
 	// get information for. You can get a list of OIDC provider resource ARNs by using
-	// the ListOpenIDConnectProviders operation. For more information about ARNs, see
-	// Amazon Resource Names (ARNs)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the Amazon Web Services General Reference.
+	// the ListOpenIDConnectProviders  operation. For more information about ARNs, see
+	// Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	OpenIDConnectProviderArn *string
@@ -44,32 +43,31 @@ type GetOpenIDConnectProviderInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetOpenIDConnectProvider request.
+// Contains the response to a successful GetOpenIDConnectProvider  request.
 type GetOpenIDConnectProviderOutput struct {
 
 	// A list of client IDs (also known as audiences) that are associated with the
 	// specified IAM OIDC provider resource object. For more information, see
-	// CreateOpenIDConnectProvider.
+	// CreateOpenIDConnectProvider .
 	ClientIDList []string
 
-	// The date and time when the IAM OIDC provider resource object was created in the
-	// Amazon Web Services account.
+	// The date and time when the IAM OIDC provider resource object was created in
+	// the Amazon Web Services account.
 	CreateDate *time.Time
 
 	// A list of tags that are attached to the specified IAM OIDC provider. The
 	// returned list of tags is sorted by tag key. For more information about tagging,
-	// see Tagging IAM resources
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
-	// Guide.
+	// see Tagging IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
+	// in the IAM User Guide.
 	Tags []types.Tag
 
 	// A list of certificate thumbprints that are associated with the specified IAM
 	// OIDC provider resource object. For more information, see
-	// CreateOpenIDConnectProvider.
+	// CreateOpenIDConnectProvider .
 	ThumbprintList []string
 
-	// The URL that the IAM OIDC provider resource object is associated with. For more
-	// information, see CreateOpenIDConnectProvider.
+	// The URL that the IAM OIDC provider resource object is associated with. For
+	// more information, see CreateOpenIDConnectProvider .
 	Url *string
 
 	// Metadata pertaining to the operation's result.

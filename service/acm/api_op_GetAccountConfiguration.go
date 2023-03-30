@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the account configuration options associated with an Amazon Web Services
-// account.
+// Returns the account configuration options associated with an Amazon Web
+// Services account.
 func (c *Client) GetAccountConfiguration(ctx context.Context, params *GetAccountConfigurationInput, optFns ...func(*Options)) (*GetAccountConfigurationOutput, error) {
 	if params == nil {
 		params = &GetAccountConfigurationInput{}
@@ -34,8 +34,8 @@ type GetAccountConfigurationInput struct {
 
 type GetAccountConfigurationOutput struct {
 
-	// Expiration events configuration options associated with the Amazon Web Services
-	// account.
+	// Expiration events configuration options associated with the Amazon Web
+	// Services account.
 	ExpiryEvents *types.ExpiryEventsConfiguration
 
 	// Metadata pertaining to the operation's result.

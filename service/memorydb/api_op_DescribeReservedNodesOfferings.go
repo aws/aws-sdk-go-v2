@@ -30,24 +30,24 @@ func (c *Client) DescribeReservedNodesOfferings(ctx context.Context, params *Des
 
 type DescribeReservedNodesOfferingsInput struct {
 
-	// Duration filter value, specified in years or seconds. Use this parameter to show
-	// only reservations for a given duration.
+	// Duration filter value, specified in years or seconds. Use this parameter to
+	// show only reservations for a given duration.
 	Duration *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a marker is included in the response
+	// so that the remaining results can be retrieved.
 	MaxResults *int32
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
 	// MaxRecords.
 	NextToken *string
 
 	// The node type for the reserved nodes. For more information, see Supported node
-	// types
-	// (https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported).
+	// types (https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported)
+	// .
 	NodeType *string
 
 	// The offering type filter value. Use this parameter to show only the available
@@ -64,9 +64,9 @@ type DescribeReservedNodesOfferingsInput struct {
 
 type DescribeReservedNodesOfferingsOutput struct {
 
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
+	// An optional marker returned from a prior request. Use this marker for
+	// pagination of results from this operation. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
 	// MaxRecords.
 	NextToken *string
 
@@ -150,13 +150,13 @@ var _ DescribeReservedNodesOfferingsAPIClient = (*Client)(nil)
 // DescribeReservedNodesOfferingsPaginatorOptions is the paginator options for
 // DescribeReservedNodesOfferings
 type DescribeReservedNodesOfferingsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a marker is included in the response
+	// so that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

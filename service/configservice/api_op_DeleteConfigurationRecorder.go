@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the configuration recorder. After the configuration recorder is deleted,
-// Config will not record resource configuration changes until you create a new
-// configuration recorder. This action does not delete the configuration
+// Deletes the configuration recorder. After the configuration recorder is
+// deleted, Config will not record resource configuration changes until you create
+// a new configuration recorder. This action does not delete the configuration
 // information that was previously recorded. You will be able to access the
 // previously recorded information by using the GetResourceConfigHistory action,
 // but you will not be able to access this information in the Config console until
@@ -32,11 +32,11 @@ func (c *Client) DeleteConfigurationRecorder(ctx context.Context, params *Delete
 	return out, nil
 }
 
-// The request object for the DeleteConfigurationRecorder action.
+// The request object for the DeleteConfigurationRecorder  action.
 type DeleteConfigurationRecorderInput struct {
 
-	// The name of the configuration recorder to be deleted. You can retrieve the name
-	// of your configuration recorder by using the DescribeConfigurationRecorders
+	// The name of the configuration recorder to be deleted. You can retrieve the
+	// name of your configuration recorder by using the DescribeConfigurationRecorders
 	// action.
 	//
 	// This member is required.

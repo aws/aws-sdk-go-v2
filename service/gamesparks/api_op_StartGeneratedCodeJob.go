@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an asynchronous process that generates client code for system-defined and
-// custom messages. The resulting code is collected as a .zip file and uploaded to
-// a pre-signed Amazon S3 URL.
+// Starts an asynchronous process that generates client code for system-defined
+// and custom messages. The resulting code is collected as a .zip file and uploaded
+// to a pre-signed Amazon S3 URL.
 func (c *Client) StartGeneratedCodeJob(ctx context.Context, params *StartGeneratedCodeJobInput, optFns ...func(*Options)) (*StartGeneratedCodeJobOutput, error) {
 	if params == nil {
 		params = &StartGeneratedCodeJobInput{}

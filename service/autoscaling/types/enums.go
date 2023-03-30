@@ -12,9 +12,9 @@ const (
 	AcceleratorManufacturerXilinx            AcceleratorManufacturer = "xilinx"
 )
 
-// Values returns all known values for AcceleratorManufacturer. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for AcceleratorManufacturer. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AcceleratorManufacturer) Values() []AcceleratorManufacturer {
 	return []AcceleratorManufacturer{
 		"nvidia",
@@ -81,9 +81,9 @@ const (
 	BareMetalRequired BareMetal = "required"
 )
 
-// Values returns all known values for BareMetal. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for BareMetal. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (BareMetal) Values() []BareMetal {
 	return []BareMetal{
 		"included",
@@ -101,8 +101,8 @@ const (
 	BurstablePerformanceRequired BurstablePerformance = "required"
 )
 
-// Values returns all known values for BurstablePerformance. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for BurstablePerformance. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (BurstablePerformance) Values() []BurstablePerformance {
 	return []BurstablePerformance{
@@ -203,8 +203,8 @@ const (
 	InstanceRefreshStatusRollbackSuccessful InstanceRefreshStatus = "RollbackSuccessful"
 )
 
-// Values returns all known values for InstanceRefreshStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for InstanceRefreshStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceRefreshStatus) Values() []InstanceRefreshStatus {
 	return []InstanceRefreshStatus{
@@ -289,9 +289,9 @@ const (
 	LocalStorageRequired LocalStorage = "required"
 )
 
-// Values returns all known values for LocalStorage. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for LocalStorage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (LocalStorage) Values() []LocalStorage {
 	return []LocalStorage{
 		"included",
@@ -374,9 +374,9 @@ const (
 	PredefinedLoadMetricTypeALBTargetGroupRequestCount PredefinedLoadMetricType = "ALBTargetGroupRequestCount"
 )
 
-// Values returns all known values for PredefinedLoadMetricType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PredefinedLoadMetricType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PredefinedLoadMetricType) Values() []PredefinedLoadMetricType {
 	return []PredefinedLoadMetricType{
 		"ASGTotalCPUUtilization",
@@ -396,9 +396,9 @@ const (
 	PredefinedMetricPairTypeALBRequestCount   PredefinedMetricPairType = "ALBRequestCount"
 )
 
-// Values returns all known values for PredefinedMetricPairType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PredefinedMetricPairType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PredefinedMetricPairType) Values() []PredefinedMetricPairType {
 	return []PredefinedMetricPairType{
 		"ASGCPUUtilization",
@@ -418,9 +418,10 @@ const (
 	PredefinedScalingMetricTypeALBRequestCountPerTarget PredefinedScalingMetricType = "ALBRequestCountPerTarget"
 )
 
-// Values returns all known values for PredefinedScalingMetricType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
+// Values returns all known values for PredefinedScalingMetricType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
 func (PredefinedScalingMetricType) Values() []PredefinedScalingMetricType {
 	return []PredefinedScalingMetricType{
 		"ASGAverageCPUUtilization",
@@ -438,10 +439,10 @@ const (
 	PredictiveScalingMaxCapacityBreachBehaviorIncreaseMaxCapacity PredictiveScalingMaxCapacityBreachBehavior = "IncreaseMaxCapacity"
 )
 
-// Values returns all known values for PredictiveScalingMaxCapacityBreachBehavior.
-// Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// Values returns all known values for
+// PredictiveScalingMaxCapacityBreachBehavior. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
 func (PredictiveScalingMaxCapacityBreachBehavior) Values() []PredictiveScalingMaxCapacityBreachBehavior {
 	return []PredictiveScalingMaxCapacityBreachBehavior{
 		"HonorMaxCapacity",
@@ -457,8 +458,8 @@ const (
 	PredictiveScalingModeForecastOnly     PredictiveScalingMode = "ForecastOnly"
 )
 
-// Values returns all known values for PredictiveScalingMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for PredictiveScalingMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PredictiveScalingMode) Values() []PredictiveScalingMode {
 	return []PredictiveScalingMode{

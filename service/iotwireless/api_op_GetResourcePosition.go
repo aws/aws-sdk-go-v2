@@ -12,8 +12,8 @@ import (
 )
 
 // Get the position information for a given wireless device or a wireless gateway
-// resource. The position information uses the  World Geodetic System (WGS84)
-// (https://gisgeography.com/wgs84-world-geodetic-system/).
+// resource. The position information uses the World Geodetic System (WGS84) (https://gisgeography.com/wgs84-world-geodetic-system/)
+// .
 func (c *Client) GetResourcePosition(ctx context.Context, params *GetResourcePositionInput, optFns ...func(*Options)) (*GetResourcePositionOutput, error) {
 	if params == nil {
 		params = &GetResourcePositionInput{}
@@ -38,8 +38,8 @@ type GetResourcePositionInput struct {
 	// This member is required.
 	ResourceIdentifier *string
 
-	// The type of resource for which position information is retrieved, which can be a
-	// wireless device or a wireless gateway.
+	// The type of resource for which position information is retrieved, which can be
+	// a wireless device or a wireless gateway.
 	//
 	// This member is required.
 	ResourceType types.PositionResourceType
@@ -51,7 +51,7 @@ type GetResourcePositionOutput struct {
 
 	// The position information of the resource, displayed as a JSON payload. The
 	// payload uses the GeoJSON format, which a format that's used to encode geographic
-	// data structures. For more information, see GeoJSON (https://geojson.org/).
+	// data structures. For more information, see GeoJSON (https://geojson.org/) .
 	GeoJsonPayload []byte
 
 	// Metadata pertaining to the operation's result.

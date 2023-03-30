@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the CloudFormation stack record created as a result of the create cloud
-// formation stack operation. An AWS CloudFormation stack is used to create a new
-// Amazon EC2 instance from an exported Lightsail snapshot.
+// Returns the CloudFormation stack record created as a result of the create
+// cloud formation stackoperation. An AWS CloudFormation stack is used to create
+// a new Amazon EC2 instance from an exported Lightsail snapshot.
 func (c *Client) GetCloudFormationStackRecords(ctx context.Context, params *GetCloudFormationStackRecordsInput, optFns ...func(*Options)) (*GetCloudFormationStackRecordsOutput, error) {
 	if params == nil {
 		params = &GetCloudFormationStackRecordsInput{}
@@ -45,10 +45,10 @@ type GetCloudFormationStackRecordsOutput struct {
 	// A list of objects describing the CloudFormation stack records.
 	CloudFormationStackRecords []types.CloudFormationStackRecord
 
-	// The token to advance to the next page of results from your request. A next page
-	// token is not returned if there are no more results to display. To get the next
-	// page of results, perform another GetCloudFormationStackRecords request and
-	// specify the next page token using the pageToken parameter.
+	// The token to advance to the next page of results from your request. A next
+	// page token is not returned if there are no more results to display. To get the
+	// next page of results, perform another GetCloudFormationStackRecords request
+	// and specify the next page token using the pageToken  parameter.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

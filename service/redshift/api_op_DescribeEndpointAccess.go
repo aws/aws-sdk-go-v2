@@ -38,12 +38,12 @@ type DescribeEndpointAccessInput struct {
 
 	// An optional pagination token provided by a previous DescribeEndpointAccess
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by the MaxRecords parameter.
+	// beyond the marker, up to the value specified by the MaxRecords  parameter.
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a Marker is
-	// included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords  value, a pagination token called a Marker
+	// is included in the response so that the remaining results can be retrieved.
 	MaxRecords *int32
 
 	// The Amazon Web Services account ID of the owner of the cluster.
@@ -62,7 +62,7 @@ type DescribeEndpointAccessOutput struct {
 
 	// An optional pagination token provided by a previous DescribeEndpointAccess
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by the MaxRecords parameter.
+	// beyond the marker, up to the value specified by the MaxRecords  parameter.
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -142,13 +142,13 @@ var _ DescribeEndpointAccessAPIClient = (*Client)(nil)
 // DescribeEndpointAccessPaginatorOptions is the paginator options for
 // DescribeEndpointAccess
 type DescribeEndpointAccessPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a Marker is
-	// included in the response so that the remaining results can be retrieved.
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords  value, a pagination token called a Marker
+	// is included in the response so that the remaining results can be retrieved.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
@@ -161,7 +161,8 @@ type DescribeEndpointAccessPaginator struct {
 	firstPage bool
 }
 
-// NewDescribeEndpointAccessPaginator returns a new DescribeEndpointAccessPaginator
+// NewDescribeEndpointAccessPaginator returns a new
+// DescribeEndpointAccessPaginator
 func NewDescribeEndpointAccessPaginator(client DescribeEndpointAccessAPIClient, params *DescribeEndpointAccessInput, optFns ...func(*DescribeEndpointAccessPaginatorOptions)) *DescribeEndpointAccessPaginator {
 	if params == nil {
 		params = &DescribeEndpointAccessInput{}

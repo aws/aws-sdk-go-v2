@@ -30,7 +30,7 @@ func (c *Client) PutBackupPolicy(ctx context.Context, params *PutBackupPolicyInp
 
 type PutBackupPolicyInput struct {
 
-	// The backup policy included in the PutBackupPolicy request.
+	// The backup policy included in the PutBackupPolicy  request.
 	//
 	// This member is required.
 	BackupPolicy *types.BackupPolicy
@@ -45,8 +45,8 @@ type PutBackupPolicyInput struct {
 
 type PutBackupPolicyOutput struct {
 
-	// Describes the file system's backup policy, indicating whether automatic backups
-	// are turned on or off.
+	// Describes the file system's backup policy, indicating whether automatic
+	// backups are turned on or off.
 	BackupPolicy *types.BackupPolicy
 
 	// Metadata pertaining to the operation's result.

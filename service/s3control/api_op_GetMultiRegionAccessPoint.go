@@ -15,24 +15,16 @@ import (
 	"strings"
 )
 
-// Returns configuration information about the specified Multi-Region Access Point.
-// This action will always be routed to the US West (Oregon) Region. For more
-// information about the restrictions around managing Multi-Region Access Points,
-// see Managing Multi-Region Access Points
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
+// Returns configuration information about the specified Multi-Region Access
+// Point. This action will always be routed to the US West (Oregon) Region. For
+// more information about the restrictions around managing Multi-Region Access
+// Points, see Managing Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
 // in the Amazon S3 User Guide. The following actions are related to
-// GetMultiRegionAccessPoint:
-// - CreateMultiRegionAccessPoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html)
-// -
-// DeleteMultiRegionAccessPoint
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html)
-// -
-// DescribeMultiRegionAccessPointOperation
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html)
-// -
-// ListMultiRegionAccessPoints
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html)
+// GetMultiRegionAccessPoint :
+//   - CreateMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html)
+//   - DeleteMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html)
+//   - DescribeMultiRegionAccessPointOperation (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html)
+//   - ListMultiRegionAccessPoints (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html)
 func (c *Client) GetMultiRegionAccessPoint(ctx context.Context, params *GetMultiRegionAccessPointInput, optFns ...func(*Options)) (*GetMultiRegionAccessPointOutput, error) {
 	if params == nil {
 		params = &GetMultiRegionAccessPointInput{}
@@ -59,8 +51,7 @@ type GetMultiRegionAccessPointInput struct {
 	// The name of the Multi-Region Access Point whose configuration information you
 	// want to receive. The name of the Multi-Region Access Point is different from the
 	// alias. For more information about the distinction between the name and the alias
-	// of an Multi-Region Access Point, see Managing Multi-Region Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming)
+	// of an Multi-Region Access Point, see Managing Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming)
 	// in the Amazon S3 User Guide.
 	//
 	// This member is required.
@@ -71,8 +62,8 @@ type GetMultiRegionAccessPointInput struct {
 
 type GetMultiRegionAccessPointOutput struct {
 
-	// A container element containing the details of the requested Multi-Region Access
-	// Point.
+	// A container element containing the details of the requested Multi-Region
+	// Access Point.
 	AccessPoint *types.MultiRegionAccessPointReport
 
 	// Metadata pertaining to the operation's result.

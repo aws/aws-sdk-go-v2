@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns tags for a resource. Tagging is currently supported only for directories
-// with a limit of 50 tags per directory. All 50 tags are returned for a given
-// directory with this API call.
+// Returns tags for a resource. Tagging is currently supported only for
+// directories with a limit of 50 tags per directory. All 50 tags are returned for
+// a given directory with this API call.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -38,8 +38,8 @@ type ListTagsForResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The MaxResults parameter sets the maximum number of results returned in a single
-	// page. This is for future use and is not supported currently.
+	// The MaxResults parameter sets the maximum number of results returned in a
+	// single page. This is for future use and is not supported currently.
 	MaxResults *int32
 
 	// The pagination token. This is for future use. Currently pagination is not
@@ -127,8 +127,8 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListTagsForResourceAPIClient is a client that implements the ListTagsForResource
-// operation.
+// ListTagsForResourceAPIClient is a client that implements the
+// ListTagsForResource operation.
 type ListTagsForResourceAPIClient interface {
 	ListTagsForResource(context.Context, *ListTagsForResourceInput, ...func(*Options)) (*ListTagsForResourceOutput, error)
 }
@@ -138,12 +138,12 @@ var _ ListTagsForResourceAPIClient = (*Client)(nil)
 // ListTagsForResourcePaginatorOptions is the paginator options for
 // ListTagsForResource
 type ListTagsForResourcePaginatorOptions struct {
-	// The MaxResults parameter sets the maximum number of results returned in a single
-	// page. This is for future use and is not supported currently.
+	// The MaxResults parameter sets the maximum number of results returned in a
+	// single page. This is for future use and is not supported currently.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

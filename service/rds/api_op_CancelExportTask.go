@@ -41,21 +41,15 @@ type CancelExportTaskInput struct {
 }
 
 // Contains the details of a snapshot or cluster export to Amazon S3. This data
-// type is used as a response element in the DescribeExportTasks action.
+// type is used as a response element in the DescribeExportTasks  action.
 type CancelExportTaskOutput struct {
 
 	// The data exported from the snapshot or cluster. Valid values are the
 	// following:
-	// - database - Export all the data from a specified database.
-	// -
-	// database.table table-name - Export a table of the snapshot or cluster. This
-	// format is valid only for RDS for MySQL, RDS for MariaDB, and Aurora MySQL.
-	// -
-	// database.schema schema-name - Export a database schema of the snapshot or
-	// cluster. This format is valid only for RDS for PostgreSQL and Aurora
-	// PostgreSQL.
-	// - database.schema.table table-name - Export a table of the database
-	// schema. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.
+	//     - database - Export all the data from a specified database.
+	//     - database.table table-name - Export a table of the snapshot or cluster. This format is valid only for RDS for MySQL, RDS for MariaDB, and Aurora MySQL.
+	//     - database.schema schema-name - Export a database schema of the snapshot or cluster. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.
+	//     - database.schema.table table-name - Export a table of the database schema. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.
 	ExportOnly []string
 
 	// A unique identifier for the snapshot or cluster export task. This ID isn't an
@@ -81,13 +75,15 @@ type CancelExportTaskOutput struct {
 	// The Amazon S3 bucket that the snapshot or cluster is exported to.
 	S3Bucket *string
 
-	// The Amazon S3 bucket prefix that is the file name and path of the exported data.
+	// The Amazon S3 bucket prefix that is the file name and path of the exported
+	// data.
 	S3Prefix *string
 
 	// The time that the snapshot was created.
 	SnapshotTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the snapshot or cluster exported to Amazon S3.
+	// The Amazon Resource Name (ARN) of the snapshot or cluster exported to Amazon
+	// S3.
 	SourceArn *string
 
 	// The type of source for the export.
@@ -95,12 +91,12 @@ type CancelExportTaskOutput struct {
 
 	// The progress status of the export task. The status can be one of the
 	// following:
-	// - CANCELED
-	// - CANCELING
-	// - COMPLETE
-	// - FAILED
-	// - IN_PROGRESS
-	// - STARTING
+	//     - CANCELED
+	//     - CANCELING
+	//     - COMPLETE
+	//     - FAILED
+	//     - IN_PROGRESS
+	//     - STARTING
 	Status *string
 
 	// The time that the snapshot or cluster export task ended.

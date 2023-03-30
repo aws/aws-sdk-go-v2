@@ -31,8 +31,7 @@ func (c *Client) ListLambdaFunctions(ctx context.Context, params *ListLambdaFunc
 
 type ListLambdaFunctionsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -125,8 +124,8 @@ func (c *Client) addOperationListLambdaFunctionsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListLambdaFunctionsAPIClient is a client that implements the ListLambdaFunctions
-// operation.
+// ListLambdaFunctionsAPIClient is a client that implements the
+// ListLambdaFunctions operation.
 type ListLambdaFunctionsAPIClient interface {
 	ListLambdaFunctions(context.Context, *ListLambdaFunctionsInput, ...func(*Options)) (*ListLambdaFunctionsOutput, error)
 }
@@ -139,8 +138,8 @@ type ListLambdaFunctionsPaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

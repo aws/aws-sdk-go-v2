@@ -31,8 +31,8 @@ func (c *Client) AssociateDataShareConsumer(ctx context.Context, params *Associa
 
 type AssociateDataShareConsumerInput struct {
 
-	// The Amazon Resource Name (ARN) of the datashare that the consumer is to use with
-	// the account or the namespace.
+	// The Amazon Resource Name (ARN) of the datashare that the consumer is to use
+	// with the account or the namespace.
 	//
 	// This member is required.
 	DataShareArn *string
@@ -45,8 +45,8 @@ type AssociateDataShareConsumerInput struct {
 	// datashare.
 	ConsumerArn *string
 
-	// From a datashare consumer account, associates a datashare with all existing and
-	// future namespaces in the specified Amazon Web Services Region.
+	// From a datashare consumer account, associates a datashare with all existing
+	// and future namespaces in the specified Amazon Web Services Region.
 	ConsumerRegion *string
 
 	noSmithyDocumentSerde

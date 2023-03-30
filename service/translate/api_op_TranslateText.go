@@ -12,8 +12,8 @@ import (
 )
 
 // Translates input text from the source language to the target language. For a
-// list of available languages and language codes, see Supported languages
-// (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html).
+// list of available languages and language codes, see Supported languages (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html)
+// .
 func (c *Client) TranslateText(ctx context.Context, params *TranslateTextInput, optFns ...func(*Options)) (*TranslateTextOutput, error) {
 	if params == nil {
 		params = &TranslateTextInput{}
@@ -33,14 +33,12 @@ type TranslateTextInput struct {
 
 	// The language code for the language of the source text. The language must be a
 	// language supported by Amazon Translate. For a list of language codes, see
-	// Supported languages
-	// (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html). To
-	// have Amazon Translate determine the source language of your text, you can
-	// specify auto in the SourceLanguageCode field. If you specify auto, Amazon
-	// Translate will call Amazon Comprehend
-	// (https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html) to
-	// determine the source language. If you specify auto, you must send the
-	// TranslateText request in a region that supports Amazon Comprehend. Otherwise,
+	// Supported languages (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html)
+	// . To have Amazon Translate determine the source language of your text, you can
+	// specify auto  in the SourceLanguageCode  field. If you specify auto, Amazon
+	// Translate will call Amazon Comprehend (https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html)
+	// to determine the source language. If you specify auto , you must send the
+	// TranslateTextrequest in a region that supports Amazon Comprehend. Otherwise,
 	// the request returns an error indicating that autodetect is not supported.
 	//
 	// This member is required.

@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a version
-// (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html) from the
-// current code and configuration of a function. Use versions to create a snapshot
-// of your function code and configuration that doesn't change. Lambda doesn't
-// publish a version if the function's configuration and code haven't changed since
-// the last version. Use UpdateFunctionCode or UpdateFunctionConfiguration to
-// update the function before publishing a version. Clients can invoke versions
-// directly or with an alias. To create an alias, use CreateAlias.
+// Creates a version (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)
+// from the current code and configuration of a function. Use versions to create a
+// snapshot of your function code and configuration that doesn't change. Lambda
+// doesn't publish a version if the function's configuration and code haven't
+// changed since the last version. Use UpdateFunctionCode  or
+// UpdateFunctionConfigurationto update the function before publishing a version.
+// Clients can invoke versions directly or with an alias. To create an alias, use
+// CreateAlias .
 func (c *Client) PublishVersion(ctx context.Context, params *PublishVersionInput, optFns ...func(*Options)) (*PublishVersionOutput, error) {
 	if params == nil {
 		params = &PublishVersionInput{}
@@ -37,31 +37,28 @@ func (c *Client) PublishVersion(ctx context.Context, params *PublishVersionInput
 type PublishVersionInput struct {
 
 	// The name of the Lambda function. Name formats
-	// - Function name - MyFunction.
-	// -
-	// Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.
-	// -
-	// Partial ARN - 123456789012:function:MyFunction.
-	//
-	// The length constraint applies
-	// only to the full ARN. If you specify only the function name, it is limited to 64
-	// characters in length.
+	//     - Function name - MyFunction .
+	//     - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
+	//     - Partial ARN - 123456789012:function:MyFunction .
+	// The length constraint
+	// applies only to the full ARN. If you specify only the function name, it is
+	// limited to 64 characters in length.
 	//
 	// This member is required.
 	FunctionName *string
 
-	// Only publish a version if the hash value matches the value that's specified. Use
-	// this option to avoid publishing a version if the function code has changed since
-	// you last updated it. You can get the hash for the version that you uploaded from
-	// the output of UpdateFunctionCode.
+	// Only publish a version if the hash value matches the value that's specified.
+	// Use this option to avoid publishing a version if the function code has changed
+	// since you last updated it. You can get the hash for the version that you
+	// uploaded from the output of UpdateFunctionCode .
 	CodeSha256 *string
 
 	// A description for the version to override the description in the function
 	// configuration.
 	Description *string
 
-	// Only update the function if the revision ID matches the ID that's specified. Use
-	// this option to avoid publishing a version if the function configuration has
+	// Only update the function if the revision ID matches the ID that's specified.
+	// Use this option to avoid publishing a version if the function configuration has
 	// changed since you last updated it.
 	RevisionId *string
 
@@ -73,7 +70,7 @@ type PublishVersionOutput struct {
 
 	// The instruction set architecture that the function supports. Architecture is a
 	// string array with one of the valid values. The default architecture value is
-	// x86_64.
+	// x86_64 .
 	Architectures []types.Architecture
 
 	// The SHA256 hash of the function's deployment package.
@@ -88,17 +85,16 @@ type PublishVersionOutput struct {
 	// The function's description.
 	Description *string
 
-	// The function's environment variables
-	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).
-	// Omitted from CloudTrail logs.
+	// The function's environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)
+	// . Omitted from CloudTrail logs.
 	Environment *types.EnvironmentResponse
 
 	// The size of the function’s /tmp directory in MB. The default value is 512, but
 	// it can be any whole number between 512 and 10,240 MB.
 	EphemeralStorage *types.EphemeralStorage
 
-	// Connection settings for an Amazon EFS file system
-	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).
+	// Connection settings for an Amazon EFS file system (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)
+	// .
 	FileSystemConfigs []types.FileSystemConfig
 
 	// The function's Amazon Resource Name (ARN).
@@ -113,20 +109,18 @@ type PublishVersionOutput struct {
 	// The function's image configuration values.
 	ImageConfigResponse *types.ImageConfigResponse
 
-	// The KMS key that's used to encrypt the function's environment variables
-	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption).
-	// When Lambda SnapStart
-	// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html) is
-	// activated, this key is also used to encrypt the function's snapshot. This key is
-	// returned only if you've configured a customer managed key.
+	// The KMS key that's used to encrypt the function's environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption)
+	// . When Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html)
+	// is activated, this key is also used to encrypt the function's snapshot. This key
+	// is returned only if you've configured a customer managed key.
 	KMSKeyArn *string
 
-	// The date and time that the function was last updated, in ISO-8601 format
-	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
+	// The date and time that the function was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
+	// (YYYY-MM-DDThh:mm:ss.sTZD).
 	LastModified *string
 
-	// The status of the last update that was performed on the function. This is first
-	// set to Successful after function creation completes.
+	// The status of the last update that was performed on the function. This is
+	// first set to Successful  after function creation completes.
 	LastUpdateStatus types.LastUpdateStatus
 
 	// The reason for the last update that was performed on the function.
@@ -135,8 +129,8 @@ type PublishVersionOutput struct {
 	// The reason code for the last update that was performed on the function.
 	LastUpdateStatusReasonCode types.LastUpdateStatusReasonCode
 
-	// The function's layers
-	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
+	// The function's layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
+	// .
 	Layers []types.Layer
 
 	// For Lambda@Edge functions, the ARN of the main function.
@@ -145,8 +139,8 @@ type PublishVersionOutput struct {
 	// The amount of memory available to the function at runtime.
 	MemorySize *int32
 
-	// The type of deployment package. Set to Image for container image and set Zip for
-	// .zip file archive.
+	// The type of deployment package. Set to Image  for container image and set Zip
+	// for .zip file archive.
 	PackageType types.PackageType
 
 	// The latest updated revision of the function or alias.
@@ -167,10 +161,10 @@ type PublishVersionOutput struct {
 	// The ARN of the signing profile version.
 	SigningProfileVersionArn *string
 
-	// Set ApplyOn to PublishedVersions to create a snapshot of the initialized
+	// Set ApplyOn  to PublishedVersions to create a snapshot of the initialized
 	// execution environment when you publish a function version. For more information,
-	// see Improving startup performance with Lambda SnapStart
-	// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html).
+	// see Improving startup performance with Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html)
+	// .
 	SnapStart *types.SnapStartResponse
 
 	// The current state of the function. When the state is Inactive, you can
@@ -180,8 +174,8 @@ type PublishVersionOutput struct {
 	// The reason for the function's current state.
 	StateReason *string
 
-	// The reason code for the function's current state. When the code is Creating, you
-	// can't invoke or modify the function.
+	// The reason code for the function's current state. When the code is Creating,
+	// you can't invoke or modify the function.
 	StateReasonCode types.StateReasonCode
 
 	// The amount of time in seconds that Lambda allows a function to run before

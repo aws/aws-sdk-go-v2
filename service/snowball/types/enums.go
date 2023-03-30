@@ -13,9 +13,9 @@ const (
 	ClusterStateCancelled      ClusterState = "Cancelled"
 )
 
-// Values returns all known values for ClusterState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ClusterState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ClusterState) Values() []ClusterState {
 	return []ClusterState{
 		"AwaitingQuorum",
@@ -63,9 +63,9 @@ const (
 	JobStatePending                JobState = "Pending"
 )
 
-// Values returns all known values for JobState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// Values returns all known values for JobState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
 func (JobState) Values() []JobState {
 	return []JobState{
 		"New",
@@ -148,9 +148,9 @@ const (
 	ServiceNameEksAnywhere ServiceName = "EKS_ANYWHERE"
 )
 
-// Values returns all known values for ServiceName. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for ServiceName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceName) Values() []ServiceName {
 	return []ServiceName{
 		"KUBERNETES",
@@ -266,9 +266,9 @@ const (
 	SnowballTypeV35c     SnowballType = "V3_5C"
 )
 
-// Values returns all known values for SnowballType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for SnowballType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (SnowballType) Values() []SnowballType {
 	return []SnowballType{
 		"STANDARD",
@@ -289,9 +289,9 @@ const (
 	StorageUnitTb StorageUnit = "TB"
 )
 
-// Values returns all known values for StorageUnit. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// Values returns all known values for StorageUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
 func (StorageUnit) Values() []StorageUnit {
 	return []StorageUnit{
 		"TB",

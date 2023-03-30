@@ -20,8 +20,8 @@ type BrowserSettings struct {
 	// A list of web portal ARNs that this browser settings is associated with.
 	AssociatedPortalArns []string
 
-	// A JSON string containing Chrome Enterprise policies that will be applied to all
-	// streaming sessions.
+	// A JSON string containing Chrome Enterprise policies that will be applied to
+	// all streaming sessions.
 	BrowserPolicy *string
 
 	noSmithyDocumentSerde
@@ -89,50 +89,36 @@ type IdentityProvider struct {
 	// This member is required.
 	IdentityProviderArn *string
 
-	// The identity provider details. The following list describes the provider detail
-	// keys for each identity provider type.
-	// - For Google and Login with Amazon:
-	// -
-	// client_id
-	// - client_secret
-	// - authorize_scopes
-	//
-	// - For Facebook:
-	// - client_id
-	// -
-	// client_secret
-	// - authorize_scopes
-	// - api_version
-	//
-	// - For Sign in with Apple:
-	// -
-	// client_id
-	// - team_id
-	// - key_id
-	// - private_key
-	// - authorize_scopes
-	//
-	// - For OIDC
-	// providers:
-	// - client_id
-	// - client_secret
-	// - attributes_request_method
-	// -
-	// oidc_issuer
-	// - authorize_scopes
-	// - authorize_url if not available from discovery
-	// URL specified by oidc_issuer key
-	// - token_url if not available from discovery URL
-	// specified by oidc_issuer key
-	// - attributes_url if not available from discovery
-	// URL specified by oidc_issuer key
-	// - jwks_uri if not available from discovery URL
-	// specified by oidc_issuer key
-	//
-	// - For SAML providers:
-	// - MetadataFile OR
-	// MetadataURL
-	// - IDPSignout optional
+	// The identity provider details. The following list describes the provider
+	// detail keys for each identity provider type.
+	//     - For Google and Login with Amazon:
+	//         - client_id
+	//         - client_secret
+	//         - authorize_scopes
+	//     - For Facebook:
+	//         - client_id
+	//         - client_secret
+	//         - authorize_scopes
+	//         - api_version
+	//     - For Sign in with Apple:
+	//         - client_id
+	//         - team_id
+	//         - key_id
+	//         - private_key
+	//         - authorize_scopes
+	//     - For OIDC providers:
+	//         - client_id
+	//         - client_secret
+	//         - attributes_request_method
+	//         - oidc_issuer
+	//         - authorize_scopes
+	//         - authorize_url if not available from discovery URL specified by oidc_issuer key
+	//         - token_url if not available from discovery URL specified by oidc_issuer key
+	//         - attributes_url if not available from discovery URL specified by oidc_issuer key
+	//         - jwks_uri if not available from discovery URL specified by oidc_issuer key
+	//     - For SAML providers:
+	//         - MetadataFile OR MetadataURL
+	//         - IDPSignout optional
 	IdentityProviderDetails map[string]string
 
 	// The identity provider name.
@@ -203,11 +189,11 @@ type NetworkSettingsSummary struct {
 type Portal struct {
 
 	// The type of authentication integration points used when signing into the web
-	// portal. Defaults to Standard. Standard web portals are authenticated directly
+	// portal. Defaults to Standard . Standard web portals are authenticated directly
 	// through your identity provider. You need to call CreateIdentityProvider to
 	// integrate your identity provider with your web portal. User and group access to
 	// your web portal is controlled through your identity provider.
-	// IAM_Identity_Center web portals are authenticated through AWS IAM Identity
+	// IAM_Identity_Centerweb portals are authenticated through AWS IAM Identity
 	// Center (successor to AWS Single Sign-On). They provide additional features, such
 	// as IdP-initiated authentication. Identity sources (including external identity
 	// provider integration), plus user and group access to your web portal, can be
@@ -232,8 +218,8 @@ type Portal struct {
 	// The ARN of the web portal.
 	PortalArn *string
 
-	// The endpoint URL of the web portal that users access in order to start streaming
-	// sessions.
+	// The endpoint URL of the web portal that users access in order to start
+	// streaming sessions.
 	PortalEndpoint *string
 
 	// The status of the web portal.
@@ -262,11 +248,11 @@ type Portal struct {
 type PortalSummary struct {
 
 	// The type of authentication integration points used when signing into the web
-	// portal. Defaults to Standard. Standard web portals are authenticated directly
+	// portal. Defaults to Standard . Standard web portals are authenticated directly
 	// through your identity provider. You need to call CreateIdentityProvider to
 	// integrate your identity provider with your web portal. User and group access to
 	// your web portal is controlled through your identity provider.
-	// IAM_Identity_Center web portals are authenticated through AWS IAM Identity
+	// IAM_Identity_Centerweb portals are authenticated through AWS IAM Identity
 	// Center (successor to AWS Single Sign-On). They provide additional features, such
 	// as IdP-initiated authentication. Identity sources (including external identity
 	// provider integration), plus user and group access to your web portal, can be
@@ -291,8 +277,8 @@ type PortalSummary struct {
 	// The ARN of the web portal.
 	PortalArn *string
 
-	// The endpoint URL of the web portal that users access in order to start streaming
-	// sessions.
+	// The endpoint URL of the web portal that users access in order to start
+	// streaming sessions.
 	PortalEndpoint *string
 
 	// The status of the web portal.
@@ -400,16 +386,16 @@ type UserSettings struct {
 	// A list of web portal ARNs that this user settings is associated with.
 	AssociatedPortalArns []string
 
-	// Specifies whether the user can copy text from the streaming session to the local
-	// device.
+	// Specifies whether the user can copy text from the streaming session to the
+	// local device.
 	CopyAllowed EnabledType
 
 	// The amount of time that a streaming session remains active after users
 	// disconnect.
 	DisconnectTimeoutInMinutes *int32
 
-	// Specifies whether the user can download files from the streaming session to the
-	// local device.
+	// Specifies whether the user can download files from the streaming session to
+	// the local device.
 	DownloadAllowed EnabledType
 
 	// The amount of time that users can be idle (inactive) before they are
@@ -417,8 +403,8 @@ type UserSettings struct {
 	// begins.
 	IdleDisconnectTimeoutInMinutes *int32
 
-	// Specifies whether the user can paste text from the local device to the streaming
-	// session.
+	// Specifies whether the user can paste text from the local device to the
+	// streaming session.
 	PasteAllowed EnabledType
 
 	// Specifies whether the user can print to the local device.
@@ -434,16 +420,16 @@ type UserSettings struct {
 // The summary of user settings.
 type UserSettingsSummary struct {
 
-	// Specifies whether the user can copy text from the streaming session to the local
-	// device.
+	// Specifies whether the user can copy text from the streaming session to the
+	// local device.
 	CopyAllowed EnabledType
 
 	// The amount of time that a streaming session remains active after users
 	// disconnect.
 	DisconnectTimeoutInMinutes *int32
 
-	// Specifies whether the user can download files from the streaming session to the
-	// local device.
+	// Specifies whether the user can download files from the streaming session to
+	// the local device.
 	DownloadAllowed EnabledType
 
 	// The amount of time that users can be idle (inactive) before they are
@@ -451,8 +437,8 @@ type UserSettingsSummary struct {
 	// begins.
 	IdleDisconnectTimeoutInMinutes *int32
 
-	// Specifies whether the user can paste text from the local device to the streaming
-	// session.
+	// Specifies whether the user can paste text from the local device to the
+	// streaming session.
 	PasteAllowed EnabledType
 
 	// Specifies whether the user can print to the local device.
@@ -468,7 +454,8 @@ type UserSettingsSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a field passed inside a request that resulted in an exception.
+// Information about a field passed inside a request that resulted in an
+// exception.
 type ValidationExceptionField struct {
 
 	// The message describing why the field failed validation.

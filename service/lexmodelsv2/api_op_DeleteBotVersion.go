@@ -12,8 +12,7 @@ import (
 )
 
 // Deletes a specific version of a bot. To delete all versions of a bot, use the
-// DeleteBot
-// (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DeleteBot.html)
+// DeleteBot (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DeleteBot.html)
 // operation.
 func (c *Client) DeleteBotVersion(ctx context.Context, params *DeleteBotVersionInput, optFns ...func(*Options)) (*DeleteBotVersionOutput, error) {
 	if params == nil {
@@ -44,7 +43,7 @@ type DeleteBotVersionInput struct {
 
 	// By default, Amazon Lex checks if any other resource, such as an alias or bot
 	// network, is using the bot version before it is deleted and throws a
-	// ResourceInUseException exception if the version is being used by another
+	// ResourceInUseExceptionexception if the version is being used by another
 	// resource. Set this parameter to true to skip this check and remove the version
 	// even if it is being used by another resource.
 	SkipResourceInUseCheck bool

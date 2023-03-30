@@ -30,11 +30,11 @@ func (c *Client) ListLongTermPricing(ctx context.Context, params *ListLongTermPr
 
 type ListLongTermPricingInput struct {
 
-	// The maximum number of ListLongTermPricing objects to return.
+	// The maximum number of ListLongTermPricing  objects to return.
 	MaxResults *int32
 
 	// Because HTTP requests are stateless, this is the starting point for your next
-	// list of ListLongTermPricing to return.
+	// list of ListLongTermPricing  to return.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -43,11 +43,11 @@ type ListLongTermPricingInput struct {
 type ListLongTermPricingOutput struct {
 
 	// Each LongTermPricingEntry object contains a status, ID, and other information
-	// about the LongTermPricing type.
+	// about the LongTermPricing  type.
 	LongTermPricingEntries []types.LongTermPricingListEntry
 
 	// Because HTTP requests are stateless, this is the starting point for your next
-	// list of returned ListLongTermPricing list.
+	// list of returned ListLongTermPricing  list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -116,8 +116,8 @@ func (c *Client) addOperationListLongTermPricingMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListLongTermPricingAPIClient is a client that implements the ListLongTermPricing
-// operation.
+// ListLongTermPricingAPIClient is a client that implements the
+// ListLongTermPricing operation.
 type ListLongTermPricingAPIClient interface {
 	ListLongTermPricing(context.Context, *ListLongTermPricingInput, ...func(*Options)) (*ListLongTermPricingOutput, error)
 }
@@ -127,11 +127,11 @@ var _ ListLongTermPricingAPIClient = (*Client)(nil)
 // ListLongTermPricingPaginatorOptions is the paginator options for
 // ListLongTermPricing
 type ListLongTermPricingPaginatorOptions struct {
-	// The maximum number of ListLongTermPricing objects to return.
+	// The maximum number of ListLongTermPricing  objects to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

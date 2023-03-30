@@ -37,9 +37,9 @@ type CreateProjectInput struct {
 	// This member is required.
 	SpaceName *string
 
-	// The description of the project. This description will be displayed to all users
-	// of the project. We recommend providing a brief description of the project and
-	// its intended purpose.
+	// The description of the project. This description will be displayed to all
+	// users of the project. We recommend providing a brief description of the project
+	// and its intended purpose.
 	Description *string
 
 	noSmithyDocumentSerde

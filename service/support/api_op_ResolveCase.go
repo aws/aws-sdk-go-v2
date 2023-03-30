@@ -12,14 +12,8 @@ import (
 
 // Resolves a support case. This operation takes a caseId and returns the initial
 // and final state of the case.
-// - You must have a Business, Enterprise On-Ramp, or
-// Enterprise Support plan to use the Amazon Web Services Support API.
-// - If you
-// call the Amazon Web Services Support API from an account that doesn't have a
-// Business, Enterprise On-Ramp, or Enterprise Support plan, the
-// SubscriptionRequiredException error message appears. For information about
-// changing your support plan, see Amazon Web Services Support
-// (http://aws.amazon.com/premiumsupport/).
+//   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support API.
+//   - If you call the Amazon Web Services Support API from an account that doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the SubscriptionRequiredException error message appears. For information about changing your support plan, see Amazon Web Services Support (http://aws.amazon.com/premiumsupport/) .
 func (c *Client) ResolveCase(ctx context.Context, params *ResolveCaseInput, optFns ...func(*Options)) (*ResolveCaseOutput, error) {
 	if params == nil {
 		params = &ResolveCaseInput{}
@@ -45,13 +39,13 @@ type ResolveCaseInput struct {
 	noSmithyDocumentSerde
 }
 
-// The status of the case returned by the ResolveCase operation.
+// The status of the case returned by the ResolveCase  operation.
 type ResolveCaseOutput struct {
 
-	// The status of the case after the ResolveCase request was processed.
+	// The status of the case after the ResolveCase  request was processed.
 	FinalCaseStatus *string
 
-	// The status of the case when the ResolveCase request was sent.
+	// The status of the case when the ResolveCase  request was sent.
 	InitialCaseStatus *string
 
 	// Metadata pertaining to the operation's result.

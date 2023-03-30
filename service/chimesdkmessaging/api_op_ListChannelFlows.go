@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a paginated lists of all the channel flows created under a single Chime.
-// This is a developer API.
+// Returns a paginated lists of all the channel flows created under a single
+// Chime. This is a developer API.
 func (c *Client) ListChannelFlows(ctx context.Context, params *ListChannelFlowsInput, optFns ...func(*Options)) (*ListChannelFlowsOutput, error) {
 	if params == nil {
 		params = &ListChannelFlowsInput{}
@@ -137,8 +137,8 @@ type ListChannelFlowsPaginatorOptions struct {
 	// The maximum number of channel flows that you want to return.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination
+	// token that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 
