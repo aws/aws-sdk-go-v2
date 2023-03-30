@@ -354,6 +354,9 @@ type FirewallPolicy struct {
 	// define the matching criteria in stateless rules.
 	StatelessRuleGroupReferences []StatelessRuleGroupReference
 
+	// The Amazon Resource Name (ARN) of the TLS inspection configuration.
+	TLSInspectionConfigurationArn *string
+
 	noSmithyDocumentSerde
 }
 
@@ -585,18 +588,20 @@ type IPSetMetadata struct {
 
 // Configures one or more IP set references for a Suricata-compatible rule group.
 // This is used in CreateRuleGroup or UpdateRuleGroup. An IP set reference is a
-// rule variable that references a resource that you create and manage in another
+// rule variable that references resources that you create and manage in another
 // Amazon Web Services service, such as an Amazon VPC prefix list. Network Firewall
 // IP set references enable you to dynamically update the contents of your rules.
-// When you create, update, or delete the IP set you are referencing in your rule,
-// Network Firewall automatically updates the rule's content with the changes. For
-// more information about IP set references in Network Firewall, see Using IP set
-// references
+// When you create, update, or delete the resource you are referencing in your
+// rule, Network Firewall automatically updates the rule's content with the
+// changes. For more information about IP set references in Network Firewall, see
+// Using IP set references
 // (https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-ip-set-references)
 // in the Network Firewall Developer Guide. Network Firewall currently supports
-// only Amazon VPC prefix lists
-// (https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html) as
-// IP set references.
+// Amazon VPC prefix lists
+// (https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html) and
+// resource groups
+// (https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-ip-set-references.html#rule-groups-referencing-resource-groups)
+// in IP set references.
 type IPSetReference struct {
 
 	// The Amazon Resource Name (ARN) of the resource that you are referencing in your
@@ -1035,6 +1040,80 @@ type RuleVariables struct {
 	noSmithyDocumentSerde
 }
 
+// Any Certificate Manager Secure Sockets Layer/Transport Layer Security (SSL/TLS)
+// server certificate that's associated with a ServerCertificateConfiguration used
+// in a TLSInspectionConfiguration. You must request or import a SSL/TLS
+// certificate into ACM for each domain Network Firewall needs to decrypt and
+// inspect. Network Firewall uses the SSL/TLS certificates to decrypt specified
+// inbound SSL/TLS traffic going to your firewall. For information about working
+// with certificates in Certificate Manager, see Request a public certificate
+// (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html) or
+// Importing certificates
+// (https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html) in
+// the Certificate Manager User Guide.
+type ServerCertificate struct {
+
+	// The Amazon Resource Name (ARN) of the Certificate Manager SSL/TLS server
+	// certificate.
+	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Configures the associated Certificate Manager Secure Sockets Layer/Transport
+// Layer Security (SSL/TLS) server certificates and scope settings Network Firewall
+// uses to decrypt traffic in a TLSInspectionConfiguration. For information about
+// working with SSL/TLS certificates for TLS inspection, see  Requirements for
+// using SSL/TLS server certficiates with TLS inspection configurations
+// (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html)
+// in the Network Firewall Developer Guide. If a server certificate that's
+// associated with your TLSInspectionConfiguration is revoked, deleted, or expired
+// it can result in client-side TLS errors.
+type ServerCertificateConfiguration struct {
+
+	// A list of a server certificate configuration's scopes.
+	Scopes []ServerCertificateScope
+
+	// The list of a server certificate configuration's Certificate Manager SSL/TLS
+	// certificates.
+	ServerCertificates []ServerCertificate
+
+	noSmithyDocumentSerde
+}
+
+// Settings that define the Secure Sockets Layer/Transport Layer Security (SSL/TLS)
+// traffic that Network Firewall should decrypt for inspection by the stateful rule
+// engine.
+type ServerCertificateScope struct {
+
+	// The destination ports to decrypt for inspection, in Transmission Control
+	// Protocol (TCP) format. If not specified, this matches with any destination port.
+	// You can specify individual ports, for example 1994, and you can specify port
+	// ranges, such as 1990:1994.
+	DestinationPorts []PortRange
+
+	// The destination IP addresses and address ranges to decrypt for inspection, in
+	// CIDR notation. If not specified, this matches with any destination address.
+	Destinations []Address
+
+	// The protocols to decrypt for inspection, specified using each protocol's
+	// assigned internet protocol number (IANA). Network Firewall currently supports
+	// only TCP.
+	Protocols []int32
+
+	// The source ports to decrypt for inspection, in Transmission Control Protocol
+	// (TCP) format. If not specified, this matches with any source port. You can
+	// specify individual ports, for example 1994, and you can specify port ranges,
+	// such as 1990:1994.
+	SourcePorts []PortRange
+
+	// The source IP addresses and address ranges to decrypt for inspection, in CIDR
+	// notation. If not specified, this matches with any source address.
+	Sources []Address
+
+	noSmithyDocumentSerde
+}
+
 // High-level information about the managed rule group that your own rule group is
 // copied from. You can use the the metadata to track version updates made to the
 // originating rule group. You can retrieve all objects for a rule group by calling
@@ -1351,6 +1430,115 @@ type TCPFlagField struct {
 	// The set of flags to consider in the inspection. To inspect all flags in the
 	// valid values list, leave this with no setting.
 	Masks []TCPFlag
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata about an Certificate Manager certificate.
+type TlsCertificateData struct {
+
+	// The Amazon Resource Name (ARN) of the certificate.
+	CertificateArn *string
+
+	// The serial number of the certificate.
+	CertificateSerial *string
+
+	// The status of the certificate.
+	Status *string
+
+	// Contains details about the certificate status, including information about
+	// certificate errors.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// The object that defines a TLS inspection configuration. This, along with
+// TLSInspectionConfigurationResponse, define the TLS inspection configuration. You
+// can retrieve all objects for a TLS inspection configuration by calling
+// DescribeTLSInspectionConfiguration. Network Firewall uses a TLS inspection
+// configuration to decrypt traffic. Network Firewall re-encrypts the traffic
+// before sending it to its destination. To use a TLS inspection configuration, you
+// add it to a Network Firewall firewall policy, then you apply the firewall policy
+// to a firewall. Network Firewall acts as a proxy service to decrypt and inspect
+// inbound traffic. You can reference a TLS inspection configuration from more than
+// one firewall policy, and you can use a firewall policy in more than one
+// firewall. For more information about using TLS inspection configurations, see
+// Decrypting SSL/TLS traffic with TLS inspection configurations
+// (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html)
+// in the Network Firewall Developer Guide.
+type TLSInspectionConfiguration struct {
+
+	// Lists the server certificate configurations that are associated with the TLS
+	// configuration.
+	ServerCertificateConfigurations []ServerCertificateConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// High-level information about a TLS inspection configuration, returned by
+// ListTLSInspectionConfigurations. You can use the information provided in the
+// metadata to retrieve and manage a TLS configuration.
+type TLSInspectionConfigurationMetadata struct {
+
+	// The Amazon Resource Name (ARN) of the TLS inspection configuration.
+	Arn *string
+
+	// The descriptive name of the TLS inspection configuration. You can't change the
+	// name of a TLS inspection configuration after you create it.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The high-level properties of a TLS inspection configuration. This, along with
+// the TLSInspectionConfiguration, define the TLS inspection configuration. You can
+// retrieve all objects for a TLS inspection configuration by calling
+// DescribeTLSInspectionConfiguration.
+type TLSInspectionConfigurationResponse struct {
+
+	// The Amazon Resource Name (ARN) of the TLS inspection configuration.
+	//
+	// This member is required.
+	TLSInspectionConfigurationArn *string
+
+	// A unique identifier for the TLS inspection configuration. This ID is returned in
+	// the responses to create and list commands. You provide it to operations such as
+	// update and delete.
+	//
+	// This member is required.
+	TLSInspectionConfigurationId *string
+
+	// The descriptive name of the TLS inspection configuration. You can't change the
+	// name of a TLS inspection configuration after you create it.
+	//
+	// This member is required.
+	TLSInspectionConfigurationName *string
+
+	// A list of the certificates associated with the TLS inspection configuration.
+	Certificates []TlsCertificateData
+
+	// A description of the TLS inspection configuration.
+	Description *string
+
+	// A complex type that contains the Amazon Web Services KMS encryption
+	// configuration settings for your TLS inspection configuration.
+	EncryptionConfiguration *EncryptionConfiguration
+
+	// The last time that the TLS inspection configuration was changed.
+	LastModifiedTime *time.Time
+
+	// The number of firewall policies that use this TLS inspection configuration.
+	NumberOfAssociations *int32
+
+	// Detailed information about the current status of a TLSInspectionConfiguration.
+	// You can retrieve this for a TLS inspection configuration by calling
+	// DescribeTLSInspectionConfiguration and providing the TLS inspection
+	// configuration name and ARN.
+	TLSInspectionConfigurationStatus ResourceStatus
+
+	// The key:value pairs to associate with the resource.
+	Tags []Tag
 
 	noSmithyDocumentSerde
 }

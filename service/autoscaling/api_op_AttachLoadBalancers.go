@@ -10,16 +10,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// To attach an Application Load Balancer, Network Load Balancer, or Gateway Load
-// Balancer, use the AttachLoadBalancerTargetGroups API operation instead. Attaches
-// one or more Classic Load Balancers to the specified Auto Scaling group. Amazon
-// EC2 Auto Scaling registers the running instances with these Classic Load
-// Balancers. To describe the load balancers for an Auto Scaling group, call the
-// DescribeLoadBalancers API. To detach a load balancer from the Auto Scaling
-// group, call the DetachLoadBalancers API. This operation is additive and does not
-// detach existing Classic Load Balancers or target groups from the Auto Scaling
-// group. For more information, see Use Elastic Load Balancing to distribute
-// traffic across the instances in your Auto Scaling group
+// This API call has been replaced with a new "traffic sources" API call
+// (AttachTrafficSources) that can attach multiple traffic sources types. While we
+// continue to support AttachLoadBalancers, and you can use both the original
+// AttachLoadBalancers API call and the new AttachTrafficSources API call on the
+// same Auto Scaling group, we recommend using the new "traffic sources" API call
+// to simplify how you manage traffic sources. Attaches one or more Classic Load
+// Balancers to the specified Auto Scaling group. Amazon EC2 Auto Scaling registers
+// the running instances with these Classic Load Balancers. To describe the load
+// balancers for an Auto Scaling group, call the DescribeLoadBalancers API. To
+// detach a load balancer from the Auto Scaling group, call the DetachLoadBalancers
+// API. This operation is additive and does not detach existing Classic Load
+// Balancers or target groups from the Auto Scaling group. For more information,
+// see Use Elastic Load Balancing to distribute traffic across the instances in
+// your Auto Scaling group
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) AttachLoadBalancers(ctx context.Context, params *AttachLoadBalancersInput, optFns ...func(*Options)) (*AttachLoadBalancersOutput, error) {

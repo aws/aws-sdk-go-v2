@@ -1,0 +1,8 @@
+{
+    "id": "c9eb7243-3190-436c-ad71-3141628e101a",
+    "type": "feature",
+    "description": "AWS Kendra now supports featured results for a query.",
+    "modules": [
+        "service/kendra"
+    ]
+}

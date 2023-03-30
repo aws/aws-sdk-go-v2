@@ -54,7 +54,7 @@ type GetRasterDataCollectionOutput struct {
 	// This member is required.
 	DescriptionPageUrl *string
 
-	//
+	// The list of image source bands in the raster data collection.
 	//
 	// This member is required.
 	ImageSourceBands []string

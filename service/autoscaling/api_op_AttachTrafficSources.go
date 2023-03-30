@@ -11,13 +11,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Reserved for use with Amazon VPC Lattice, which is in preview and subject to
-// change. Do not use this API for production workloads. This API is also subject
-// to change. Attaches one or more traffic sources to the specified Auto Scaling
-// group. To describe the traffic sources for an Auto Scaling group, call the
-// DescribeTrafficSources API. To detach a traffic source from the Auto Scaling
-// group, call the DetachTrafficSources API. This operation is additive and does
-// not detach existing traffic sources from the Auto Scaling group.
+// Attaches one or more traffic sources to the specified Auto Scaling group. You
+// can use any of the following as traffic sources for an Auto Scaling group:
+//
+// *
+// Application Load Balancer
+//
+// * Classic Load Balancer
+//
+// * Network Load Balancer
+//
+// *
+// Gateway Load Balancer
+//
+// * VPC Lattice
+//
+// This operation is additive and does not
+// detach existing traffic sources from the Auto Scaling group. After the operation
+// completes, use the DescribeTrafficSources API to return details about the state
+// of the attachments between traffic sources and your Auto Scaling group. To
+// detach a traffic source from the Auto Scaling group, call the
+// DetachTrafficSources API.
 func (c *Client) AttachTrafficSources(ctx context.Context, params *AttachTrafficSourcesInput, optFns ...func(*Options)) (*AttachTrafficSourcesOutput, error) {
 	if params == nil {
 		params = &AttachTrafficSourcesInput{}
@@ -41,10 +55,7 @@ type AttachTrafficSourcesInput struct {
 	AutoScalingGroupName *string
 
 	// The unique identifiers of one or more traffic sources. You can specify up to 10
-	// traffic sources. Currently, you must specify an Amazon Resource Name (ARN) for
-	// an existing VPC Lattice target group. Amazon EC2 Auto Scaling registers the
-	// running instances with the attached target groups. The target groups receive
-	// incoming traffic and route requests to one or more registered targets.
+	// traffic sources.
 	//
 	// This member is required.
 	TrafficSources []types.TrafficSourceIdentifier

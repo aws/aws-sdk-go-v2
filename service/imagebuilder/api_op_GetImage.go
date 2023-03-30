@@ -29,7 +29,7 @@ func (c *Client) GetImage(ctx context.Context, params *GetImageInput, optFns ...
 
 type GetImageInput struct {
 
-	// The Amazon Resource Name (ARN) of the image that you want to retrieve.
+	// The Amazon Resource Name (ARN) of the image that you want to get.
 	//
 	// This member is required.
 	ImageBuildVersionArn *string

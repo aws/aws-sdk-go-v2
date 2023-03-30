@@ -4550,6 +4550,15 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 				sv.IngestEndpoint = ptr.String(jtv)
 			}
 
+		case "insecureIngest":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected InsecureIngest to be of type *bool, got %T instead", value)
+				}
+				sv.InsecureIngest = jtv
+			}
+
 		case "latencyMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4755,6 +4764,15 @@ func awsRestjson1_deserializeDocumentChannelSummary(v **types.ChannelSummary, va
 					return fmt.Errorf("expected IsAuthorized to be of type *bool, got %T instead", value)
 				}
 				sv.Authorized = jtv
+			}
+
+		case "insecureIngest":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected InsecureIngest to be of type *bool, got %T instead", value)
+				}
+				sv.InsecureIngest = jtv
 			}
 
 		case "latencyMode":

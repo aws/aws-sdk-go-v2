@@ -859,34 +859,34 @@ type InstanceRecommendation struct {
 	//
 	// * EBSThroughputOverprovisioned — The instance’s EBS
 	// throughput configuration can be sized down while still meeting the performance
-	// requirements of your workload. This is identified by analyzing the VolumeReadOps
-	// and VolumeWriteOps metrics of EBS volumes attached to the current instance
-	// during the look-back period.
+	// requirements of your workload. This is identified by analyzing the
+	// VolumeReadBytes and VolumeWriteBytes metrics of EBS volumes attached to the
+	// current instance during the look-back period.
 	//
-	// * EBSThroughputUnderprovisioned — The instance’s
-	// EBS throughput configuration doesn't meet the performance requirements of your
-	// workload and there is an alternative instance type that provides better EBS
-	// throughput performance. This is identified by analyzing the VolumeReadOps and
-	// VolumeWriteOps metrics of EBS volumes attached to the current instance during
-	// the look-back period.
+	// * EBSThroughputUnderprovisioned —
+	// The instance’s EBS throughput configuration doesn't meet the performance
+	// requirements of your workload and there is an alternative instance type that
+	// provides better EBS throughput performance. This is identified by analyzing the
+	// VolumeReadBytes and VolumeWriteBytes> metrics of EBS volumes attached to the
+	// current instance during the look-back period.
 	//
-	// * EBSIOPSOverprovisioned — The instance’s EBS IOPS
-	// configuration can be sized down while still meeting the performance requirements
-	// of your workload. This is identified by analyzing the VolumeReadBytes and
-	// VolumeWriteBytes metric of EBS volumes attached to the current instance during
-	// the look-back period.
+	// * EBSIOPSOverprovisioned — The
+	// instance’s EBS IOPS configuration can be sized down while still meeting the
+	// performance requirements of your workload. This is identified by analyzing the
+	// VolumeReadOps and VolumeWriteOps metric of EBS volumes attached to the current
+	// instance during the look-back period.
 	//
-	// * EBSIOPSUnderprovisioned — The instance’s EBS IOPS
-	// configuration doesn't meet the performance requirements of your workload and
-	// there is an alternative instance type that provides better EBS IOPS performance.
-	// This is identified by analyzing the VolumeReadBytes and VolumeWriteBytes metric
-	// of EBS volumes attached to the current instance during the look-back period.
+	// * EBSIOPSUnderprovisioned — The
+	// instance’s EBS IOPS configuration doesn't meet the performance requirements of
+	// your workload and there is an alternative instance type that provides better EBS
+	// IOPS performance. This is identified by analyzing the VolumeReadOps and
+	// VolumeWriteOps metric of EBS volumes attached to the current instance during the
+	// look-back period.
 	//
-	// *
-	// NetworkBandwidthOverprovisioned — The instance’s network bandwidth configuration
-	// can be sized down while still meeting the performance requirements of your
-	// workload. This is identified by analyzing the NetworkIn and NetworkOut metrics
-	// of the current instance during the look-back period.
+	// * NetworkBandwidthOverprovisioned — The instance’s network
+	// bandwidth configuration can be sized down while still meeting the performance
+	// requirements of your workload. This is identified by analyzing the NetworkIn and
+	// NetworkOut metrics of the current instance during the look-back period.
 	//
 	// *
 	// NetworkBandwidthUnderprovisioned — The instance’s network bandwidth
@@ -976,6 +976,9 @@ type InstanceRecommendation struct {
 
 	// The name of the current instance.
 	InstanceName *string
+
+	// The state of the instance when the recommendation was generated.
+	InstanceState InstanceState
 
 	// The timestamp of when the instance recommendation was last generated.
 	LastRefreshTimestamp *time.Time
@@ -1857,6 +1860,9 @@ type UtilizationMetric struct {
 // Describes the configuration of an Amazon Elastic Block Store (Amazon EBS)
 // volume.
 type VolumeConfiguration struct {
+
+	// Contains the image used to boot the instance during launch.
+	RootVolume *bool
 
 	// The baseline IOPS of the volume.
 	VolumeBaselineIOPS int32

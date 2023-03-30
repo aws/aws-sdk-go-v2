@@ -137,10 +137,7 @@ type AutoScalingGroup struct {
 	// This member is required.
 	DesiredCapacity *int32
 
-	// Determines whether any additional health checks are performed on the instances
-	// in this group. Amazon EC2 health checks are always on. The valid values are EC2
-	// (default), ELB, and VPC_LATTICE. The VPC_LATTICE health check type is reserved
-	// for use with VPC Lattice, which is in preview release and is subject to change.
+	// A comma-separated list of one or more health check types.
 	//
 	// This member is required.
 	HealthCheckType *string
@@ -227,9 +224,7 @@ type AutoScalingGroup struct {
 	// The termination policies for the group.
 	TerminationPolicies []string
 
-	// Reserved for use with Amazon VPC Lattice, which is in preview release and is
-	// subject to change. Do not use this parameter for production workloads. It is
-	// also subject to change. The unique identifiers of the traffic sources.
+	// The traffic sources associated with this Auto Scaling group.
 	TrafficSources []TrafficSourceIdentifier
 
 	// One or more subnet IDs, if applicable, separated by commas.
@@ -257,8 +252,8 @@ type AutoScalingInstanceDetails struct {
 	// This member is required.
 	AvailabilityZone *string
 
-	// The last reported health status of this instance. "Healthy" means that the
-	// instance is healthy and should remain in service. "Unhealthy" means that the
+	// The last reported health status of this instance. Healthy means that the
+	// instance is healthy and should remain in service. Unhealthy means that the
 	// instance is unhealthy and Amazon EC2 Auto Scaling should terminate and replace
 	// it.
 	//
@@ -671,10 +666,9 @@ type Instance struct {
 	// This member is required.
 	AvailabilityZone *string
 
-	// The last reported health status of the instance. "Healthy" means that the
-	// instance is healthy and should remain in service. "Unhealthy" means that the
-	// instance is unhealthy and that Amazon EC2 Auto Scaling should terminate and
-	// replace it.
+	// The last reported health status of the instance. Healthy means that the instance
+	// is healthy and should remain in service. Unhealthy means that the instance is
+	// unhealthy and that Amazon EC2 Auto Scaling should terminate and replace it.
 	//
 	// This member is required.
 	HealthStatus *string
@@ -783,7 +777,7 @@ type InstanceRefresh struct {
 	// during a rollback.
 	PercentageComplete *int32
 
-	// Describes the preferences for an instance refresh.
+	// The preferences for an instance refresh.
 	Preferences *RefreshPreferences
 
 	// Additional progress details for an Auto Scaling group that has a warm pool.
@@ -2789,14 +2783,14 @@ type TargetTrackingMetricDataQuery struct {
 	noSmithyDocumentSerde
 }
 
-// This structure defines the CloudWatch metric to return, along with the
-// statistic, period, and unit. For more information about the CloudWatch
-// terminology below, see Amazon CloudWatch concepts
+// This structure defines the CloudWatch metric to return, along with the statistic
+// and unit. For more information about the CloudWatch terminology below, see
+// Amazon CloudWatch concepts
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html)
 // in the Amazon CloudWatch User Guide.
 type TargetTrackingMetricStat struct {
 
-	// Represents a specific metric.
+	// The metric to use.
 	//
 	// This member is required.
 	Metric *Metric
@@ -2804,8 +2798,8 @@ type TargetTrackingMetricStat struct {
 	// The statistic to return. It can include any CloudWatch statistic or extended
 	// statistic. For a list of valid values, see the table in Statistics
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic)
-	// in the Amazon CloudWatch User Guide. The most commonly used metrics for scaling
-	// is Average
+	// in the Amazon CloudWatch User Guide. The most commonly used metric for scaling
+	// is Average.
 	//
 	// This member is required.
 	Stat *string
@@ -2832,12 +2826,54 @@ type TotalLocalStorageGBRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the identifier of a traffic source. Currently, you must specify an
-// Amazon Resource Name (ARN) for an existing VPC Lattice target group.
+// Identifying information for a traffic source.
 type TrafficSourceIdentifier struct {
 
-	// The unique identifier of the traffic source.
+	// Identifies the traffic source. For Application Load Balancers, Gateway Load
+	// Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon
+	// Resource Name (ARN) for a target group in this account and Region. For Classic
+	// Load Balancers, this will be the name of the Classic Load Balancer in this
+	// account and Region. For example:
+	//
+	// * Application Load Balancer ARN:
+	// arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/1234567890123456
+	//
+	// *
+	// Classic Load Balancer name: my-classic-load-balancer
+	//
+	// * VPC Lattice ARN:
+	// arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-1234567890123456
+	//
+	// To
+	// get the ARN of a target group for a Application Load Balancer, Gateway Load
+	// Balancer, or Network Load Balancer, or the name of a Classic Load Balancer, use
+	// the Elastic Load Balancing DescribeTargetGroups
+	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
+	// and DescribeLoadBalancers
+	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
+	// API operations. To get the ARN of a target group for VPC Lattice, use the VPC
+	// Lattice GetTargetGroup
+	// (https://docs.aws.amazon.com/vpc-lattice/latest/APIReference/API_GetTargetGroup.html)
+	// API operation.
+	//
+	// This member is required.
 	Identifier *string
+
+	// Provides additional context for the value of Identifier. The following lists the
+	// valid values:
+	//
+	// * elb if Identifier is the name of a Classic Load Balancer.
+	//
+	// *
+	// elbv2 if Identifier is the ARN of an Application Load Balancer, Gateway Load
+	// Balancer, or Network Load Balancer target group.
+	//
+	// * vpc-lattice if Identifier is
+	// the ARN of a VPC Lattice target group.
+	//
+	// Required if the identifier is the name
+	// of a Classic Load Balancer.
+	Type *string
 
 	noSmithyDocumentSerde
 }
@@ -2845,29 +2881,53 @@ type TrafficSourceIdentifier struct {
 // Describes the state of a traffic source.
 type TrafficSourceState struct {
 
-	// The following are the possible states for a VPC Lattice target group:
+	// The unique identifier of the traffic source.
+	Identifier *string
+
+	// Describes the current state of a traffic source. The state values are as
+	// follows:
 	//
-	// * Adding
-	// - The Auto Scaling instances are being registered with the target group.
+	// * Adding - The Auto Scaling instances are being registered with the
+	// load balancer or target group.
 	//
-	// *
-	// Added - All Auto Scaling instances are registered with the target group.
+	// * Added - All Auto Scaling instances are
+	// registered with the load balancer or target group.
 	//
-	// *
-	// InService - At least one Auto Scaling instance passed the VPC_LATTICE health
-	// check.
+	// * InService - For an Elastic
+	// Load Balancing load balancer or target group, at least one Auto Scaling instance
+	// passed an ELB health check. For VPC Lattice, at least one Auto Scaling instance
+	// passed an VPC_LATTICE health check.
 	//
-	// * Removing - The Auto Scaling instances are being deregistered from the
-	// target group. If connection draining is enabled, VPC Lattice waits for in-flight
-	// requests to complete before deregistering the instances.
+	// * Removing - The Auto Scaling instances are
+	// being deregistered from the load balancer or target group. If connection
+	// draining (deregistration delay) is enabled, Elastic Load Balancing or VPC
+	// Lattice waits for in-flight requests to complete before deregistering the
+	// instances.
 	//
-	// * Removed - All Auto
-	// Scaling instances are deregistered from the target group.
+	// * Removed - All Auto Scaling instances are deregistered from the
+	// load balancer or target group.
 	State *string
 
-	// The unique identifier of the traffic source. Currently, this is the Amazon
-	// Resource Name (ARN) for a VPC Lattice target group.
+	// This is replaced by Identifier.
+	//
+	// Deprecated: TrafficSource has been replaced by Identifier
 	TrafficSource *string
+
+	// Provides additional context for the value of Identifier. The following lists the
+	// valid values:
+	//
+	// * elb if Identifier is the name of a Classic Load Balancer.
+	//
+	// *
+	// elbv2 if Identifier is the ARN of an Application Load Balancer, Gateway Load
+	// Balancer, or Network Load Balancer target group.
+	//
+	// * vpc-lattice if Identifier is
+	// the ARN of a VPC Lattice target group.
+	//
+	// Required if the identifier is the name
+	// of a Classic Load Balancer.
+	Type *string
 
 	noSmithyDocumentSerde
 }

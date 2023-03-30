@@ -152,6 +152,34 @@ func (EbsVolumeType) Values() []EbsVolumeType {
 	}
 }
 
+type ImageScanStatus string
+
+// Enum values for ImageScanStatus
+const (
+	ImageScanStatusPending    ImageScanStatus = "PENDING"
+	ImageScanStatusScanning   ImageScanStatus = "SCANNING"
+	ImageScanStatusCollecting ImageScanStatus = "COLLECTING"
+	ImageScanStatusCompleted  ImageScanStatus = "COMPLETED"
+	ImageScanStatusAbandoned  ImageScanStatus = "ABANDONED"
+	ImageScanStatusFailed     ImageScanStatus = "FAILED"
+	ImageScanStatusTimedOut   ImageScanStatus = "TIMED_OUT"
+)
+
+// Values returns all known values for ImageScanStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImageScanStatus) Values() []ImageScanStatus {
+	return []ImageScanStatus{
+		"PENDING",
+		"SCANNING",
+		"COLLECTING",
+		"COMPLETED",
+		"ABANDONED",
+		"FAILED",
+		"TIMED_OUT",
+	}
+}
+
 type ImageSource string
 
 // Enum values for ImageSource
@@ -302,5 +330,100 @@ func (Platform) Values() []Platform {
 	return []Platform{
 		"Windows",
 		"Linux",
+	}
+}
+
+type WorkflowExecutionStatus string
+
+// Enum values for WorkflowExecutionStatus
+const (
+	WorkflowExecutionStatusPending            WorkflowExecutionStatus = "PENDING"
+	WorkflowExecutionStatusSkipped            WorkflowExecutionStatus = "SKIPPED"
+	WorkflowExecutionStatusRunning            WorkflowExecutionStatus = "RUNNING"
+	WorkflowExecutionStatusCompleted          WorkflowExecutionStatus = "COMPLETED"
+	WorkflowExecutionStatusFailed             WorkflowExecutionStatus = "FAILED"
+	WorkflowExecutionStatusRollbackInProgress WorkflowExecutionStatus = "ROLLBACK_IN_PROGRESS"
+	WorkflowExecutionStatusRollbackCompleted  WorkflowExecutionStatus = "ROLLBACK_COMPLETED"
+)
+
+// Values returns all known values for WorkflowExecutionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WorkflowExecutionStatus) Values() []WorkflowExecutionStatus {
+	return []WorkflowExecutionStatus{
+		"PENDING",
+		"SKIPPED",
+		"RUNNING",
+		"COMPLETED",
+		"FAILED",
+		"ROLLBACK_IN_PROGRESS",
+		"ROLLBACK_COMPLETED",
+	}
+}
+
+type WorkflowStepExecutionRollbackStatus string
+
+// Enum values for WorkflowStepExecutionRollbackStatus
+const (
+	WorkflowStepExecutionRollbackStatusRunning   WorkflowStepExecutionRollbackStatus = "RUNNING"
+	WorkflowStepExecutionRollbackStatusCompleted WorkflowStepExecutionRollbackStatus = "COMPLETED"
+	WorkflowStepExecutionRollbackStatusSkipped   WorkflowStepExecutionRollbackStatus = "SKIPPED"
+	WorkflowStepExecutionRollbackStatusFailed    WorkflowStepExecutionRollbackStatus = "FAILED"
+)
+
+// Values returns all known values for WorkflowStepExecutionRollbackStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (WorkflowStepExecutionRollbackStatus) Values() []WorkflowStepExecutionRollbackStatus {
+	return []WorkflowStepExecutionRollbackStatus{
+		"RUNNING",
+		"COMPLETED",
+		"SKIPPED",
+		"FAILED",
+	}
+}
+
+type WorkflowStepExecutionStatus string
+
+// Enum values for WorkflowStepExecutionStatus
+const (
+	WorkflowStepExecutionStatusPending   WorkflowStepExecutionStatus = "PENDING"
+	WorkflowStepExecutionStatusSkipped   WorkflowStepExecutionStatus = "SKIPPED"
+	WorkflowStepExecutionStatusRunning   WorkflowStepExecutionStatus = "RUNNING"
+	WorkflowStepExecutionStatusCompleted WorkflowStepExecutionStatus = "COMPLETED"
+	WorkflowStepExecutionStatusFailed    WorkflowStepExecutionStatus = "FAILED"
+)
+
+// Values returns all known values for WorkflowStepExecutionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WorkflowStepExecutionStatus) Values() []WorkflowStepExecutionStatus {
+	return []WorkflowStepExecutionStatus{
+		"PENDING",
+		"SKIPPED",
+		"RUNNING",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
+type WorkflowType string
+
+// Enum values for WorkflowType
+const (
+	WorkflowTypeBuild        WorkflowType = "BUILD"
+	WorkflowTypeTest         WorkflowType = "TEST"
+	WorkflowTypeDistribution WorkflowType = "DISTRIBUTION"
+)
+
+// Values returns all known values for WorkflowType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (WorkflowType) Values() []WorkflowType {
+	return []WorkflowType{
+		"BUILD",
+		"TEST",
+		"DISTRIBUTION",
 	}
 }

@@ -1,0 +1,8 @@
+{
+    "id": "03b221e7-12d3-42fa-be82-a9de64ab12bb",
+    "type": "feature",
+    "description": "This feature allows Batch on EKS to support configuration of Pod Labels through Metadata for Batch on EKS Jobs.",
+    "modules": [
+        "service/batch"
+    ]
+}

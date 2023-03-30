@@ -270,6 +270,26 @@ func (m *validateOpGetAnswer) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetConsolidatedReport struct {
+}
+
+func (*validateOpGetConsolidatedReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConsolidatedReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConsolidatedReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConsolidatedReportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetLens struct {
 }
 
@@ -802,6 +822,10 @@ func addOpGetAnswerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAnswer{}, middleware.After)
 }
 
+func addOpGetConsolidatedReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConsolidatedReport{}, middleware.After)
+}
+
 func addOpGetLensValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLens{}, middleware.After)
 }
@@ -1190,6 +1214,21 @@ func validateOpGetAnswerInput(v *GetAnswerInput) error {
 	}
 	if v.QuestionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QuestionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetConsolidatedReportInput(v *GetConsolidatedReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConsolidatedReportInput"}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

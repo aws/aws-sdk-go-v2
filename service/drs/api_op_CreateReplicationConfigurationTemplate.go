@@ -92,6 +92,10 @@ type CreateReplicationConfigurationTemplateInput struct {
 	// This member is required.
 	UseDedicatedReplicationServer *bool
 
+	// Whether to allow the AWS replication agent to automatically replicate newly
+	// added disks.
+	AutoReplicateNewDisks *bool
+
 	// The ARN of the EBS encryption key to be used during replication.
 	EbsEncryptionKeyArn *string
 
@@ -115,6 +119,10 @@ type CreateReplicationConfigurationTemplateOutput struct {
 	// Whether to associate the default Elastic Disaster Recovery Security group with
 	// the Replication Configuration Template.
 	AssociateDefaultSecurityGroup *bool
+
+	// Whether to allow the AWS replication agent to automatically replicate newly
+	// added disks.
+	AutoReplicateNewDisks *bool
 
 	// Configure bandwidth throttling for the outbound data transfer rate of the Source
 	// Server in Mbps.

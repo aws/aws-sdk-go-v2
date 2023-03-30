@@ -13,9 +13,11 @@ import (
 )
 
 // Create a workload share. The owner of a workload can share it with other Amazon
-// Web Services accounts and IAM users in the same Amazon Web Services Region.
-// Shared access to a workload is not removed until the workload invitation is
-// deleted. For more information, see Sharing a Workload
+// Web Services accounts and users in the same Amazon Web Services Region. Shared
+// access to a workload is not removed until the workload invitation is deleted. If
+// you share a workload with an organization or OU, all accounts in the
+// organization or OU are granted access to the workload. For more information, see
+// Sharing a workload
 // (https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html)
 // in the Well-Architected Tool User Guide.
 func (c *Client) CreateWorkloadShare(ctx context.Context, params *CreateWorkloadShareInput, optFns ...func(*Options)) (*CreateWorkloadShareOutput, error) {
@@ -39,11 +41,11 @@ type CreateWorkloadShareInput struct {
 	// A unique case-sensitive string used to ensure that this request is idempotent
 	// (executes only once). You should not reuse the same token for other requests. If
 	// you retry a request with the same client request token and the same parameters
-	// after it has completed successfully, the result of the original request is
-	// returned. This token is listed as required, however, if you do not specify it,
-	// the Amazon Web Services SDKs automatically generate one for you. If you are not
-	// using the Amazon Web Services SDK or the CLI, you must provide this token or the
-	// request will fail.
+	// after the original request has completed successfully, the result of the
+	// original request is returned. This token is listed as required, however, if you
+	// do not specify it, the Amazon Web Services SDKs automatically generate one for
+	// you. If you are not using the Amazon Web Services SDK or the CLI, you must
+	// provide this token or the request will fail.
 	//
 	// This member is required.
 	ClientRequestToken *string

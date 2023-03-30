@@ -10,6 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API call has been replaced with a new "traffic sources" API call
+// (DetachTrafficSources) that can detach multiple traffic sources types. While we
+// continue to support DetachLoadBalancerTargetGroups, and you can use both the
+// original DetachLoadBalancerTargetGroups API call and the new
+// DetachTrafficSources API call on the same Auto Scaling group, we recommend using
+// the new "traffic sources" API call to simplify how you manage traffic sources.
 // Detaches one or more target groups from the specified Auto Scaling group. When
 // you detach a target group, it enters the Removing state while deregistering the
 // instances in the group. When all instances are deregistered, then you can no

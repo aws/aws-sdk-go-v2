@@ -42,11 +42,11 @@ type ListContainerRecipesInput struct {
 	// * platform
 	Filters []types.Filter
 
-	// The maximum number of results to return in the list.
+	// The maximum items to return in a request.
 	MaxResults *int32
 
-	// Provides a token for pagination, which determines where to begin the next set of
-	// results when the current set reaches the maximum for one request.
+	// A token to specify where to start paginating. This is the NextToken from a
+	// previously truncated response.
 	NextToken *string
 
 	// Returns container recipes belonging to the specified owner, that have been
@@ -62,10 +62,9 @@ type ListContainerRecipesOutput struct {
 	// The list of container recipes returned for the request.
 	ContainerRecipeSummaryList []types.ContainerRecipeSummary
 
-	// The next token field is used for paginated responses. When this is not empty,
-	// there are additional container recipes that the service has not included in this
-	// response. Use this token with the next request to retrieve additional list
-	// items.
+	// The next token used for paginated responses. When this field isn't empty, there
+	// are additional elements that the service has'ot included in this request. Use
+	// this token with the next request to retrieve additional objects.
 	NextToken *string
 
 	// The request ID that uniquely identifies this request.
@@ -148,7 +147,7 @@ var _ ListContainerRecipesAPIClient = (*Client)(nil)
 // ListContainerRecipesPaginatorOptions is the paginator options for
 // ListContainerRecipes
 type ListContainerRecipesPaginatorOptions struct {
-	// The maximum number of results to return in the list.
+	// The maximum items to return in a request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

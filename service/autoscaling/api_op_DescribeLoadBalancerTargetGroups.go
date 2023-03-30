@@ -11,7 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about the Elastic Load Balancing target groups for the
+// This API call has been replaced with a new "traffic sources" API call
+// (DescribeTrafficSources) that can describe multiple traffic sources types. While
+// we continue to support DescribeLoadBalancerTargetGroups, and you can use both
+// the original DescribeLoadBalancerTargetGroups API call and the new
+// DescribeTrafficSources API call on the same Auto Scaling group, we recommend
+// using the new "traffic sources" API call to simplify how you manage traffic
+// sources. Gets information about the Elastic Load Balancing target groups for the
 // specified Auto Scaling group. To determine the attachment status of the target
 // group, use the State element in the response. When you attach a target group to
 // an Auto Scaling group, the initial State value is Adding. The state transitions

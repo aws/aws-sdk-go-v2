@@ -10,6 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API call has been replaced with a new "traffic sources" API call
+// (AttachTrafficSources) that can attach multiple traffic sources types. While we
+// continue to support AttachLoadBalancerTargetGroups, and you can use both the
+// original AttachLoadBalancerTargetGroups API call and the new
+// AttachTrafficSources API call on the same Auto Scaling group, we recommend using
+// the new "traffic sources" API call to simplify how you manage traffic sources.
 // Attaches one or more target groups to the specified Auto Scaling group. This
 // operation is used with the following load balancer types:
 //

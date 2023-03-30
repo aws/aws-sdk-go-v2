@@ -5770,6 +5770,26 @@ func (m *validateOpGetVpnConnectionDeviceSampleConfiguration) HandleInitialize(c
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetVpnTunnelReplacementStatus struct {
+}
+
+func (*validateOpGetVpnTunnelReplacementStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetVpnTunnelReplacementStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetVpnTunnelReplacementStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetVpnTunnelReplacementStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpImportClientVpnClientCertificateRevocationList struct {
 }
 
@@ -7610,6 +7630,26 @@ func (m *validateOpReplaceTransitGatewayRoute) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpReplaceVpnTunnel struct {
+}
+
+func (*validateOpReplaceVpnTunnel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpReplaceVpnTunnel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ReplaceVpnTunnelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpReplaceVpnTunnelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpReportInstanceStatus struct {
 }
 
@@ -9442,6 +9482,10 @@ func addOpGetVpnConnectionDeviceSampleConfigurationValidationMiddleware(stack *m
 	return stack.Initialize.Add(&validateOpGetVpnConnectionDeviceSampleConfiguration{}, middleware.After)
 }
 
+func addOpGetVpnTunnelReplacementStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetVpnTunnelReplacementStatus{}, middleware.After)
+}
+
 func addOpImportClientVpnClientCertificateRevocationListValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportClientVpnClientCertificateRevocationList{}, middleware.After)
 }
@@ -9808,6 +9852,10 @@ func addOpReplaceRouteTableAssociationValidationMiddleware(stack *middleware.Sta
 
 func addOpReplaceTransitGatewayRouteValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpReplaceTransitGatewayRoute{}, middleware.After)
+}
+
+func addOpReplaceVpnTunnelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpReplaceVpnTunnel{}, middleware.After)
 }
 
 func addOpReportInstanceStatusValidationMiddleware(stack *middleware.Stack) error {
@@ -15643,6 +15691,24 @@ func validateOpGetVpnConnectionDeviceSampleConfigurationInput(v *GetVpnConnectio
 	}
 }
 
+func validateOpGetVpnTunnelReplacementStatusInput(v *GetVpnTunnelReplacementStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetVpnTunnelReplacementStatusInput"}
+	if v.VpnConnectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpnConnectionId"))
+	}
+	if v.VpnTunnelOutsideIpAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpnTunnelOutsideIpAddress"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpImportClientVpnClientCertificateRevocationListInput(v *ImportClientVpnClientCertificateRevocationListInput) error {
 	if v == nil {
 		return nil
@@ -17207,6 +17273,24 @@ func validateOpReplaceTransitGatewayRouteInput(v *ReplaceTransitGatewayRouteInpu
 	}
 	if v.TransitGatewayRouteTableId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayRouteTableId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpReplaceVpnTunnelInput(v *ReplaceVpnTunnelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplaceVpnTunnelInput"}
+	if v.VpnConnectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpnConnectionId"))
+	}
+	if v.VpnTunnelOutsideIpAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpnTunnelOutsideIpAddress"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,8 @@
+{
+    "id": "dab601f5-bd67-4b45-ab25-e8f29e5dc207",
+    "type": "feature",
+    "description": "General Availability (GA) release of Amazon VPC Lattice",
+    "modules": [
+        "service/vpclattice"
+    ]
+}

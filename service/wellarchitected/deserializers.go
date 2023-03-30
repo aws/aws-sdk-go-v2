@@ -760,6 +760,9 @@ func awsRestjson1_deserializeOpErrorCreateWorkload(response *smithyhttp.Response
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
 	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
 		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
@@ -1877,6 +1880,183 @@ func awsRestjson1_deserializeOpDocumentGetAnswerOutput(v **GetAnswerOutput, valu
 					return fmt.Errorf("expected WorkloadId to be of type string, got %T instead", value)
 				}
 				sv.WorkloadId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpGetConsolidatedReport struct {
+}
+
+func (*awsRestjson1_deserializeOpGetConsolidatedReport) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpGetConsolidatedReport) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorGetConsolidatedReport(response, &metadata)
+	}
+	output := &GetConsolidatedReportOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentGetConsolidatedReportOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorGetConsolidatedReport(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentGetConsolidatedReportOutput(v **GetConsolidatedReportOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetConsolidatedReportOutput
+	if *v == nil {
+		sv = &GetConsolidatedReportOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Base64String":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Base64String to be of type string, got %T instead", value)
+				}
+				sv.Base64String = ptr.String(jtv)
+			}
+
+		case "Metrics":
+			if err := awsRestjson1_deserializeDocumentConsolidatedReportMetrics(&sv.Metrics, value); err != nil {
+				return err
+			}
+
+		case "NextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -7314,6 +7494,89 @@ func awsRestjson1_deserializeDocumentAnswerSummary(v **types.AnswerSummary, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBestPractice(v **types.BestPractice, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BestPractice
+	if *v == nil {
+		sv = &types.BestPractice{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ChoiceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChoiceId to be of type string, got %T instead", value)
+				}
+				sv.ChoiceId = ptr.String(jtv)
+			}
+
+		case "ChoiceTitle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChoiceTitle to be of type string, got %T instead", value)
+				}
+				sv.ChoiceTitle = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBestPractices(v *[]types.BestPractice, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BestPractice
+	if *v == nil {
+		cv = []types.BestPractice{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BestPractice
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBestPractice(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCheckDetail(v **types.CheckDetail, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8173,6 +8436,146 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentConsolidatedReportMetric(v **types.ConsolidatedReportMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConsolidatedReportMetric
+	if *v == nil {
+		sv = &types.ConsolidatedReportMetric{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Lenses":
+			if err := awsRestjson1_deserializeDocumentLensMetrics(&sv.Lenses, value); err != nil {
+				return err
+			}
+
+		case "LensesAppliedCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LensesAppliedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LensesAppliedCount = int32(i64)
+			}
+
+		case "MetricType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MetricType to be of type string, got %T instead", value)
+				}
+				sv.MetricType = types.MetricType(jtv)
+			}
+
+		case "RiskCounts":
+			if err := awsRestjson1_deserializeDocumentRiskCounts(&sv.RiskCounts, value); err != nil {
+				return err
+			}
+
+		case "UpdatedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UpdatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "WorkloadArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkloadArn to be of type string, got %T instead", value)
+				}
+				sv.WorkloadArn = ptr.String(jtv)
+			}
+
+		case "WorkloadId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkloadId to be of type string, got %T instead", value)
+				}
+				sv.WorkloadId = ptr.String(jtv)
+			}
+
+		case "WorkloadName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkloadName to be of type string, got %T instead", value)
+				}
+				sv.WorkloadName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConsolidatedReportMetrics(v *[]types.ConsolidatedReportMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ConsolidatedReportMetric
+	if *v == nil {
+		cv = []types.ConsolidatedReportMetric{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ConsolidatedReportMetric
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentConsolidatedReportMetric(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentImprovementSummaries(v *[]types.ImprovementSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8415,6 +8818,90 @@ func awsRestjson1_deserializeDocumentLens(v **types.Lens, value interface{}) err
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLensMetric(v **types.LensMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LensMetric
+	if *v == nil {
+		sv = &types.LensMetric{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LensArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LensArn to be of type string, got %T instead", value)
+				}
+				sv.LensArn = ptr.String(jtv)
+			}
+
+		case "Pillars":
+			if err := awsRestjson1_deserializeDocumentPillarMetrics(&sv.Pillars, value); err != nil {
+				return err
+			}
+
+		case "RiskCounts":
+			if err := awsRestjson1_deserializeDocumentRiskCounts(&sv.RiskCounts, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLensMetrics(v *[]types.LensMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LensMetric
+	if *v == nil {
+		cv = []types.LensMetric{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LensMetric
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentLensMetric(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -9440,6 +9927,90 @@ func awsRestjson1_deserializeDocumentPillarDifferences(v *[]types.PillarDifferen
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPillarMetric(v **types.PillarMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PillarMetric
+	if *v == nil {
+		sv = &types.PillarMetric{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PillarId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PillarId to be of type string, got %T instead", value)
+				}
+				sv.PillarId = ptr.String(jtv)
+			}
+
+		case "Questions":
+			if err := awsRestjson1_deserializeDocumentQuestionMetrics(&sv.Questions, value); err != nil {
+				return err
+			}
+
+		case "RiskCounts":
+			if err := awsRestjson1_deserializeDocumentRiskCounts(&sv.RiskCounts, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPillarMetrics(v *[]types.PillarMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PillarMetric
+	if *v == nil {
+		cv = []types.PillarMetric{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PillarMetric
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPillarMetric(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPillarReviewSummaries(v *[]types.PillarReviewSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9619,6 +10190,94 @@ func awsRestjson1_deserializeDocumentQuestionDifferences(v *[]types.QuestionDiff
 		var col types.QuestionDifference
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentQuestionDifference(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQuestionMetric(v **types.QuestionMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QuestionMetric
+	if *v == nil {
+		sv = &types.QuestionMetric{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BestPractices":
+			if err := awsRestjson1_deserializeDocumentBestPractices(&sv.BestPractices, value); err != nil {
+				return err
+			}
+
+		case "QuestionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QuestionId to be of type string, got %T instead", value)
+				}
+				sv.QuestionId = ptr.String(jtv)
+			}
+
+		case "Risk":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Risk to be of type string, got %T instead", value)
+				}
+				sv.Risk = types.Risk(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQuestionMetrics(v *[]types.QuestionMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.QuestionMetric
+	if *v == nil {
+		cv = []types.QuestionMetric{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.QuestionMetric
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentQuestionMetric(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr

@@ -144,13 +144,11 @@ type CreateAutoScalingGroupInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide. Default: 0 seconds
 	HealthCheckGracePeriod *int32
 
-	// Determines whether any additional health checks are performed on the instances
-	// in this group. Amazon EC2 health checks are always on. For more information, see
-	// Health checks for Auto Scaling instances
+	// A comma-separated list of one or more health check types. The valid values are
+	// EC2, ELB, and VPC_LATTICE. EC2 is the default health check and cannot be
+	// disabled. For more information, see Health checks for Auto Scaling instances
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html) in the
-	// Amazon EC2 Auto Scaling User Guide. The valid values are EC2 (default), ELB, and
-	// VPC_LATTICE. The VPC_LATTICE health check type is reserved for use with VPC
-	// Lattice, which is in preview release and is subject to change.
+	// Amazon EC2 Auto Scaling User Guide.
 	HealthCheckType *string
 
 	// The ID of the instance used to base the launch configuration on. If specified,
@@ -185,7 +183,7 @@ type CreateAutoScalingGroupInput struct {
 	LifecycleHookSpecificationList []types.LifecycleHookSpecification
 
 	// A list of Classic Load Balancers associated with this Auto Scaling group. For
-	// Application Load Balancers, Network Load Balancers, and Gateway Load Balancer,
+	// Application Load Balancers, Network Load Balancers, and Gateway Load Balancers,
 	// specify the TargetGroupARNs property instead.
 	LoadBalancerNames []string
 
@@ -257,13 +255,10 @@ type CreateAutoScalingGroupInput struct {
 	// arn:aws:lambda:region:account-id:function:my-function:my-alias
 	TerminationPolicies []string
 
-	// Reserved for use with Amazon VPC Lattice, which is in preview release and is
-	// subject to change. Do not use this parameter for production workloads. It is
-	// also subject to change. The unique identifiers of one or more traffic sources.
-	// Currently, you must specify an Amazon Resource Name (ARN) for an existing VPC
-	// Lattice target group. Amazon EC2 Auto Scaling registers the running instances
-	// with the attached target groups. The target groups receive incoming traffic and
-	// route requests to one or more registered targets.
+	// The list of traffic sources to attach to this Auto Scaling group. You can use
+	// any of the following as traffic sources for an Auto Scaling group: Classic Load
+	// Balancer, Application Load Balancer, Gateway Load Balancer, Network Load
+	// Balancer, and VPC Lattice.
 	TrafficSources []types.TrafficSourceIdentifier
 
 	// A comma-separated list of subnet IDs for a virtual private cloud (VPC) where

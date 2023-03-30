@@ -36,7 +36,7 @@ type ListImagePackagesInput struct {
 	// This member is required.
 	ImageBuildVersionArn *string
 
-	// The maxiumum number of results to return from the ListImagePackages request.
+	// The maximum items to return in a request.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. This is the NextToken from a
@@ -51,8 +51,9 @@ type ListImagePackagesOutput struct {
 	// The list of Image Packages returned in the response.
 	ImagePackageList []types.ImagePackage
 
-	// A token to specify where to start paginating. This is the NextToken from a
-	// previously truncated response.
+	// The next token used for paginated responses. When this field isn't empty, there
+	// are additional elements that the service has'ot included in this request. Use
+	// this token with the next request to retrieve additional objects.
 	NextToken *string
 
 	// The request ID that uniquely identifies this request.
@@ -137,7 +138,7 @@ var _ ListImagePackagesAPIClient = (*Client)(nil)
 
 // ListImagePackagesPaginatorOptions is the paginator options for ListImagePackages
 type ListImagePackagesPaginatorOptions struct {
-	// The maxiumum number of results to return from the ListImagePackages request.
+	// The maximum items to return in a request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

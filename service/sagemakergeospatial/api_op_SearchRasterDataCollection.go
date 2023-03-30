@@ -36,7 +36,14 @@ type SearchRasterDataCollectionInput struct {
 	// This member is required.
 	Arn *string
 
-	//
+	// RasterDataCollectionQuery consisting of AreaOfInterest(AOI)
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_AreaOfInterest.html),
+	// PropertyFilters
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_PropertyFilter.html)
+	// and TimeRangeFilterInput
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_TimeRangeFilterInput.html)
+	// used in SearchRasterDataCollection
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_SearchRasterDataCollection.html).
 	//
 	// This member is required.
 	RasterDataCollectionQuery *types.RasterDataCollectionQueryWithBandFilterInput
@@ -50,12 +57,12 @@ type SearchRasterDataCollectionInput struct {
 
 type SearchRasterDataCollectionOutput struct {
 
-	//
+	// Approximate number of results in the response.
 	//
 	// This member is required.
 	ApproximateResultCount *int32
 
-	//
+	// List of items matching the Raster DataCollectionQuery.
 	Items []types.ItemSource
 
 	// If the previous response was truncated, you receive this token. Use it in your

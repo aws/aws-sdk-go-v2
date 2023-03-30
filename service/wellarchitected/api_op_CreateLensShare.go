@@ -12,10 +12,15 @@ import (
 )
 
 // Create a lens share. The owner of a lens can share it with other Amazon Web
-// Services accounts, IAM users, an organization, and organizational units (OUs) in
-// the same Amazon Web Services Region. Shared access to a lens is not removed
-// until the lens invitation is deleted. Disclaimer By sharing your custom lenses
-// with other Amazon Web Services accounts, you acknowledge that Amazon Web
+// Services accounts, users, an organization, and organizational units (OUs) in the
+// same Amazon Web Services Region. Lenses provided by Amazon Web Services (Amazon
+// Web Services Official Content) cannot be shared. Shared access to a lens is not
+// removed until the lens invitation is deleted. If you share a lens with an
+// organization or OU, all accounts in the organization or OU are granted access to
+// the lens. For more information, see Sharing a custom lens
+// (https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-sharing.html)
+// in the Well-Architected Tool User Guide. Disclaimer By sharing your custom
+// lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web
 // Services will make your custom lenses available to those other accounts. Those
 // other accounts may continue to access and use your shared custom lenses even if
 // you delete the custom lenses from your own Amazon Web Services account or
@@ -40,21 +45,22 @@ type CreateLensShareInput struct {
 	// A unique case-sensitive string used to ensure that this request is idempotent
 	// (executes only once). You should not reuse the same token for other requests. If
 	// you retry a request with the same client request token and the same parameters
-	// after it has completed successfully, the result of the original request is
-	// returned. This token is listed as required, however, if you do not specify it,
-	// the Amazon Web Services SDKs automatically generate one for you. If you are not
-	// using the Amazon Web Services SDK or the CLI, you must provide this token or the
-	// request will fail.
+	// after the original request has completed successfully, the result of the
+	// original request is returned. This token is listed as required, however, if you
+	// do not specify it, the Amazon Web Services SDKs automatically generate one for
+	// you. If you are not using the Amazon Web Services SDK or the CLI, you must
+	// provide this token or the request will fail.
 	//
 	// This member is required.
 	ClientRequestToken *string
 
 	// The alias of the lens. For Amazon Web Services official lenses, this is either
 	// the lens alias, such as serverless, or the lens ARN, such as
-	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
-	// the lens ARN, such as
-	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
-	// identified by its LensSummary$LensAlias.
+	// arn:aws:wellarchitected:us-east-1::lens/serverless. Note that some operations
+	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
+	// Services official lenses. For custom lenses, this is the lens ARN, such as
+	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef.
+	// Each lens is identified by its LensSummary$LensAlias.
 	//
 	// This member is required.
 	LensAlias *string

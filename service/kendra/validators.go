@@ -70,6 +70,26 @@ func (m *validateOpBatchDeleteDocument) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchDeleteFeaturedResultsSet struct {
+}
+
+func (*validateOpBatchDeleteFeaturedResultsSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteFeaturedResultsSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteFeaturedResultsSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteFeaturedResultsSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetDocumentStatus struct {
 }
 
@@ -205,6 +225,26 @@ func (m *validateOpCreateFaq) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateFaqInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateFeaturedResultsSet struct {
+}
+
+func (*validateOpCreateFeaturedResultsSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFeaturedResultsSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFeaturedResultsSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFeaturedResultsSetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -505,6 +545,26 @@ func (m *validateOpDescribeFaq) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeFaqInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeFeaturedResultsSet struct {
+}
+
+func (*validateOpDescribeFeaturedResultsSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFeaturedResultsSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFeaturedResultsSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFeaturedResultsSetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -830,6 +890,26 @@ func (m *validateOpListFaqs) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListFeaturedResultsSets struct {
+}
+
+func (*validateOpListFeaturedResultsSets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFeaturedResultsSets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFeaturedResultsSetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFeaturedResultsSetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListGroupsOlderThanOrderingId struct {
 }
 
@@ -1110,6 +1190,26 @@ func (m *validateOpUpdateExperience) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFeaturedResultsSet struct {
+}
+
+func (*validateOpUpdateFeaturedResultsSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFeaturedResultsSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFeaturedResultsSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFeaturedResultsSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateIndex struct {
 }
 
@@ -1202,6 +1302,10 @@ func addOpBatchDeleteDocumentValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpBatchDeleteDocument{}, middleware.After)
 }
 
+func addOpBatchDeleteFeaturedResultsSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteFeaturedResultsSet{}, middleware.After)
+}
+
 func addOpBatchGetDocumentStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetDocumentStatus{}, middleware.After)
 }
@@ -1228,6 +1332,10 @@ func addOpCreateExperienceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateFaqValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFaq{}, middleware.After)
+}
+
+func addOpCreateFeaturedResultsSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFeaturedResultsSet{}, middleware.After)
 }
 
 func addOpCreateIndexValidationMiddleware(stack *middleware.Stack) error {
@@ -1288,6 +1396,10 @@ func addOpDescribeExperienceValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpDescribeFaqValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeFaq{}, middleware.After)
+}
+
+func addOpDescribeFeaturedResultsSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFeaturedResultsSet{}, middleware.After)
 }
 
 func addOpDescribeIndexValidationMiddleware(stack *middleware.Stack) error {
@@ -1354,6 +1466,10 @@ func addOpListFaqsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFaqs{}, middleware.After)
 }
 
+func addOpListFeaturedResultsSetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFeaturedResultsSets{}, middleware.After)
+}
+
 func addOpListGroupsOlderThanOrderingIdValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListGroupsOlderThanOrderingId{}, middleware.After)
 }
@@ -1408,6 +1524,10 @@ func addOpUpdateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateExperienceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateExperience{}, middleware.After)
+}
+
+func addOpUpdateFeaturedResultsSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFeaturedResultsSet{}, middleware.After)
 }
 
 func addOpUpdateIndexValidationMiddleware(stack *middleware.Stack) error {
@@ -3661,6 +3781,24 @@ func validateOpBatchDeleteDocumentInput(v *BatchDeleteDocumentInput) error {
 	}
 }
 
+func validateOpBatchDeleteFeaturedResultsSetInput(v *BatchDeleteFeaturedResultsSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteFeaturedResultsSetInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.FeaturedResultsSetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeaturedResultsSetIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetDocumentStatusInput(v *BatchGetDocumentStatusInput) error {
 	if v == nil {
 		return nil
@@ -3832,6 +3970,29 @@ func validateOpCreateFaqInput(v *CreateFaqInput) error {
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateFeaturedResultsSetInput(v *CreateFeaturedResultsSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFeaturedResultsSetInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.FeaturedResultsSetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeaturedResultsSetName"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -4157,6 +4318,24 @@ func validateOpDescribeFaqInput(v *DescribeFaqInput) error {
 	}
 }
 
+func validateOpDescribeFeaturedResultsSetInput(v *DescribeFeaturedResultsSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFeaturedResultsSetInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.FeaturedResultsSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeaturedResultsSetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeIndexInput(v *DescribeIndexInput) error {
 	if v == nil {
 		return nil
@@ -4430,6 +4609,21 @@ func validateOpListFaqsInput(v *ListFaqsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListFaqsInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListFeaturedResultsSetsInput(v *ListFeaturedResultsSetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFeaturedResultsSetsInput"}
 	if v.IndexId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
 	}
@@ -4743,6 +4937,24 @@ func validateOpUpdateExperienceInput(v *UpdateExperienceInput) error {
 	}
 	if v.IndexId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFeaturedResultsSetInput(v *UpdateFeaturedResultsSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFeaturedResultsSetInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.FeaturedResultsSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeaturedResultsSetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

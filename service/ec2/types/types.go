@@ -9629,6 +9629,22 @@ type LocalGatewayVirtualInterfaceGroup struct {
 	noSmithyDocumentSerde
 }
 
+// Details for Site-to-Site VPN tunnel endpoint maintenance events.
+type MaintenanceDetails struct {
+
+	// Timestamp of last applied maintenance.
+	LastMaintenanceApplied *time.Time
+
+	// The timestamp after which Amazon Web Services will automatically apply
+	// maintenance.
+	MaintenanceAutoAppliedAfter *time.Time
+
+	// Verify existence of a pending maintenance.
+	PendingMaintenance *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a managed prefix list.
 type ManagedPrefixList struct {
 
@@ -9863,6 +9879,9 @@ type ModifyVpnTunnelOptionsSpecification struct {
 	// The number of seconds after which a DPD timeout occurs. Constraints: A value
 	// greater than or equal to 30. Default: 30
 	DPDTimeoutSeconds *int32
+
+	// Turn on or off tunnel endpoint lifecycle control feature.
+	EnableTunnelLifecycleControl *bool
 
 	// The IKE versions that are permitted for the VPN tunnel. Valid values: ikev1 |
 	// ikev2
@@ -16485,6 +16504,9 @@ type TunnelOption struct {
 	// The number of seconds after which a DPD timeout occurs.
 	DpdTimeoutSeconds *int32
 
+	// Status of tunnel endpoint lifecycle control feature.
+	EnableTunnelLifecycleControl *bool
+
 	// The IKE versions that are permitted for the VPN tunnel.
 	IkeVersions []IKEVersionsListValue
 
@@ -17962,6 +17984,9 @@ type VpnTunnelOptionsSpecification struct {
 	// The number of seconds after which a DPD timeout occurs. Constraints: A value
 	// greater than or equal to 30. Default: 30
 	DPDTimeoutSeconds *int32
+
+	// Turn on or off tunnel endpoint lifecycle control feature.
+	EnableTunnelLifecycleControl *bool
 
 	// The IKE versions that are permitted for the VPN tunnel. Valid values: ikev1 |
 	// ikev2

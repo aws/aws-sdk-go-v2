@@ -290,6 +290,61 @@ func (m *awsAwsjson10_serializeOpCreateRuleGroup) HandleSerialize(ctx context.Co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpCreateTLSInspectionConfiguration struct {
+}
+
+func (*awsAwsjson10_serializeOpCreateTLSInspectionConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpCreateTLSInspectionConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateTLSInspectionConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("NetworkFirewall_20201112.CreateTLSInspectionConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentCreateTLSInspectionConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpDeleteFirewall struct {
 }
 
@@ -495,6 +550,61 @@ func (m *awsAwsjson10_serializeOpDeleteRuleGroup) HandleSerialize(ctx context.Co
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentDeleteRuleGroupInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpDeleteTLSInspectionConfiguration struct {
+}
+
+func (*awsAwsjson10_serializeOpDeleteTLSInspectionConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDeleteTLSInspectionConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteTLSInspectionConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("NetworkFirewall_20201112.DeleteTLSInspectionConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDeleteTLSInspectionConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -840,6 +950,61 @@ func (m *awsAwsjson10_serializeOpDescribeRuleGroupMetadata) HandleSerialize(ctx 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpDescribeTLSInspectionConfiguration struct {
+}
+
+func (*awsAwsjson10_serializeOpDescribeTLSInspectionConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDescribeTLSInspectionConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeTLSInspectionConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("NetworkFirewall_20201112.DescribeTLSInspectionConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDescribeTLSInspectionConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpDisassociateSubnets struct {
 }
 
@@ -1100,6 +1265,61 @@ func (m *awsAwsjson10_serializeOpListTagsForResource) HandleSerialize(ctx contex
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpListTLSInspectionConfigurations struct {
+}
+
+func (*awsAwsjson10_serializeOpListTLSInspectionConfigurations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpListTLSInspectionConfigurations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListTLSInspectionConfigurationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("NetworkFirewall_20201112.ListTLSInspectionConfigurations")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListTLSInspectionConfigurationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1719,6 +1939,61 @@ func (m *awsAwsjson10_serializeOpUpdateSubnetChangeProtection) HandleSerialize(c
 
 	return next.HandleSerialize(ctx, in)
 }
+
+type awsAwsjson10_serializeOpUpdateTLSInspectionConfiguration struct {
+}
+
+func (*awsAwsjson10_serializeOpUpdateTLSInspectionConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpUpdateTLSInspectionConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateTLSInspectionConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("NetworkFirewall_20201112.UpdateTLSInspectionConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdateTLSInspectionConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
 func awsAwsjson10_serializeDocumentActionDefinition(v *types.ActionDefinition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1894,6 +2169,11 @@ func awsAwsjson10_serializeDocumentFirewallPolicy(v *types.FirewallPolicy, value
 		if err := awsAwsjson10_serializeDocumentStatelessRuleGroupReferences(v.StatelessRuleGroupReferences, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.TLSInspectionConfigurationArn != nil {
+		ok := object.Key("TLSInspectionConfigurationArn")
+		ok.String(*v.TLSInspectionConfigurationArn)
 	}
 
 	return nil
@@ -2388,6 +2668,120 @@ func awsAwsjson10_serializeDocumentRuleVariables(v *types.RuleVariables, value s
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentServerCertificate(v *types.ServerCertificate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ResourceArn != nil {
+		ok := object.Key("ResourceArn")
+		ok.String(*v.ResourceArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentServerCertificateConfiguration(v *types.ServerCertificateConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Scopes != nil {
+		ok := object.Key("Scopes")
+		if err := awsAwsjson10_serializeDocumentServerCertificateScopes(v.Scopes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ServerCertificates != nil {
+		ok := object.Key("ServerCertificates")
+		if err := awsAwsjson10_serializeDocumentServerCertificates(v.ServerCertificates, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentServerCertificateConfigurations(v []types.ServerCertificateConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentServerCertificateConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentServerCertificates(v []types.ServerCertificate, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentServerCertificate(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentServerCertificateScope(v *types.ServerCertificateScope, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DestinationPorts != nil {
+		ok := object.Key("DestinationPorts")
+		if err := awsAwsjson10_serializeDocumentPortRanges(v.DestinationPorts, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Destinations != nil {
+		ok := object.Key("Destinations")
+		if err := awsAwsjson10_serializeDocumentAddresses(v.Destinations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Protocols != nil {
+		ok := object.Key("Protocols")
+		if err := awsAwsjson10_serializeDocumentProtocolNumbers(v.Protocols, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourcePorts != nil {
+		ok := object.Key("SourcePorts")
+		if err := awsAwsjson10_serializeDocumentPortRanges(v.SourcePorts, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Sources != nil {
+		ok := object.Key("Sources")
+		if err := awsAwsjson10_serializeDocumentAddresses(v.Sources, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentServerCertificateScopes(v []types.ServerCertificateScope, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentServerCertificateScope(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentSettings(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2754,6 +3148,20 @@ func awsAwsjson10_serializeDocumentTCPFlags(v []types.TCPFlagField, value smithy
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentTLSInspectionConfiguration(v *types.TLSInspectionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ServerCertificateConfigurations != nil {
+		ok := object.Key("ServerCertificateConfigurations")
+		if err := awsAwsjson10_serializeDocumentServerCertificateConfigurations(v.ServerCertificateConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentVariableDefinitionList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3003,6 +3411,44 @@ func awsAwsjson10_serializeOpDocumentCreateRuleGroupInput(v *CreateRuleGroupInpu
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentCreateTLSInspectionConfigurationInput(v *CreateTLSInspectionConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("EncryptionConfiguration")
+		if err := awsAwsjson10_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson10_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TLSInspectionConfiguration != nil {
+		ok := object.Key("TLSInspectionConfiguration")
+		if err := awsAwsjson10_serializeDocumentTLSInspectionConfiguration(v.TLSInspectionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TLSInspectionConfigurationName != nil {
+		ok := object.Key("TLSInspectionConfigurationName")
+		ok.String(*v.TLSInspectionConfigurationName)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentDeleteFirewallInput(v *DeleteFirewallInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3066,6 +3512,23 @@ func awsAwsjson10_serializeOpDocumentDeleteRuleGroupInput(v *DeleteRuleGroupInpu
 	if len(v.Type) > 0 {
 		ok := object.Key("Type")
 		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentDeleteTLSInspectionConfigurationInput(v *DeleteTLSInspectionConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TLSInspectionConfigurationArn != nil {
+		ok := object.Key("TLSInspectionConfigurationArn")
+		ok.String(*v.TLSInspectionConfigurationArn)
+	}
+
+	if v.TLSInspectionConfigurationName != nil {
+		ok := object.Key("TLSInspectionConfigurationName")
+		ok.String(*v.TLSInspectionConfigurationName)
 	}
 
 	return nil
@@ -3173,6 +3636,23 @@ func awsAwsjson10_serializeOpDocumentDescribeRuleGroupMetadataInput(v *DescribeR
 	if len(v.Type) > 0 {
 		ok := object.Key("Type")
 		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentDescribeTLSInspectionConfigurationInput(v *DescribeTLSInspectionConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TLSInspectionConfigurationArn != nil {
+		ok := object.Key("TLSInspectionConfigurationArn")
+		ok.String(*v.TLSInspectionConfigurationArn)
+	}
+
+	if v.TLSInspectionConfigurationName != nil {
+		ok := object.Key("TLSInspectionConfigurationName")
+		ok.String(*v.TLSInspectionConfigurationName)
 	}
 
 	return nil
@@ -3297,6 +3777,23 @@ func awsAwsjson10_serializeOpDocumentListTagsForResourceInput(v *ListTagsForReso
 	if v.ResourceArn != nil {
 		ok := object.Key("ResourceArn")
 		ok.String(*v.ResourceArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentListTLSInspectionConfigurationsInput(v *ListTLSInspectionConfigurationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
 	}
 
 	return nil
@@ -3617,6 +4114,47 @@ func awsAwsjson10_serializeOpDocumentUpdateSubnetChangeProtectionInput(v *Update
 	{
 		ok := object.Key("SubnetChangeProtection")
 		ok.Boolean(v.SubnetChangeProtection)
+	}
+
+	if v.UpdateToken != nil {
+		ok := object.Key("UpdateToken")
+		ok.String(*v.UpdateToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentUpdateTLSInspectionConfigurationInput(v *UpdateTLSInspectionConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("EncryptionConfiguration")
+		if err := awsAwsjson10_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TLSInspectionConfiguration != nil {
+		ok := object.Key("TLSInspectionConfiguration")
+		if err := awsAwsjson10_serializeDocumentTLSInspectionConfiguration(v.TLSInspectionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TLSInspectionConfigurationArn != nil {
+		ok := object.Key("TLSInspectionConfigurationArn")
+		ok.String(*v.TLSInspectionConfigurationArn)
+	}
+
+	if v.TLSInspectionConfigurationName != nil {
+		ok := object.Key("TLSInspectionConfigurationName")
+		ok.String(*v.TLSInspectionConfigurationName)
 	}
 
 	if v.UpdateToken != nil {

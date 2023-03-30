@@ -6964,6 +6964,11 @@ func awsAwsjson11_deserializeDocumentClusterStatus(v **types.ClusterStatus, valu
 
 	for key, value := range shape {
 		switch key {
+		case "ErrorDetails":
+			if err := awsAwsjson11_deserializeDocumentErrorDetailList(&sv.ErrorDetails, value); err != nil {
+				return err
+			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7799,6 +7804,126 @@ func awsAwsjson11_deserializeDocumentEC2InstanceIdsList(v *[]string, value inter
 			}
 			col = jtv
 		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentErrorData(v *[]map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []map[string]string
+	if *v == nil {
+		cv = []map[string]string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col map[string]string
+		if err := awsAwsjson11_deserializeDocumentStringMap(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentErrorDetail(v **types.ErrorDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ErrorDetail
+	if *v == nil {
+		sv = &types.ErrorDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = ptr.String(jtv)
+			}
+
+		case "ErrorData":
+			if err := awsAwsjson11_deserializeDocumentErrorData(&sv.ErrorData, value); err != nil {
+				return err
+			}
+
+		case "ErrorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentErrorDetailList(v *[]types.ErrorDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ErrorDetail
+	if *v == nil {
+		cv = []types.ErrorDetail{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ErrorDetail
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentErrorDetail(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}

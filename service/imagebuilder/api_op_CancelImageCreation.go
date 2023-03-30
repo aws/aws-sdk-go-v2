@@ -38,7 +38,8 @@ type CancelImageCreationInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the image whose creation you want to cancel.
+	// The Amazon Resource Name (ARN) of the image that you want to cancel creation
+	// for.
 	//
 	// This member is required.
 	ImageBuildVersionArn *string
@@ -51,7 +52,7 @@ type CancelImageCreationOutput struct {
 	// The idempotency token that was used for this request.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the image whose creation has been cancelled.
+	// The ARN of the image whose creation this request canceled.
 	ImageBuildVersionArn *string
 
 	// The request ID that uniquely identifies this request.

@@ -1,0 +1,8 @@
+{
+    "id": "a93ea7c5-4549-477b-997e-3892f61c3e08",
+    "type": "feature",
+    "description": "Adds support for new image workflow details and image vulnerability detection.",
+    "modules": [
+        "service/imagebuilder"
+    ]
+}

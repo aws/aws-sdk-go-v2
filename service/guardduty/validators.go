@@ -550,6 +550,26 @@ func (m *validateOpGetAdministratorAccount) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCoverageStatistics struct {
+}
+
+func (*validateOpGetCoverageStatistics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCoverageStatistics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCoverageStatisticsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCoverageStatisticsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDetector struct {
 }
 
@@ -805,6 +825,26 @@ func (m *validateOpInviteMembers) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpInviteMembersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCoverage struct {
+}
+
+func (*validateOpListCoverage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCoverage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCoverageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCoverageInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1338,6 +1378,10 @@ func addOpGetAdministratorAccountValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpGetAdministratorAccount{}, middleware.After)
 }
 
+func addOpGetCoverageStatisticsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCoverageStatistics{}, middleware.After)
+}
+
 func addOpGetDetectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDetector{}, middleware.After)
 }
@@ -1388,6 +1432,10 @@ func addOpGetUsageStatisticsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpInviteMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInviteMembers{}, middleware.After)
+}
+
+func addOpListCoverageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCoverage{}, middleware.After)
 }
 
 func addOpListFiltersValidationMiddleware(stack *middleware.Stack) error {
@@ -2210,6 +2258,24 @@ func validateOpGetAdministratorAccountInput(v *GetAdministratorAccountInput) err
 	}
 }
 
+func validateOpGetCoverageStatisticsInput(v *GetCoverageStatisticsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCoverageStatisticsInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.StatisticsType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatisticsType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDetectorInput(v *GetDetectorInput) error {
 	if v == nil {
 		return nil
@@ -2427,6 +2493,21 @@ func validateOpInviteMembersInput(v *InviteMembersInput) error {
 	}
 	if v.AccountIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCoverageInput(v *ListCoverageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCoverageInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

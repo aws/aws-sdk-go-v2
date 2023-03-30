@@ -45,7 +45,7 @@ type DescribeThesaurusInput struct {
 
 type DescribeThesaurusOutput struct {
 
-	// The Unix datetime that the thesaurus was created.
+	// The Unix timestamp when the thesaurus was created.
 	CreatedAt *time.Time
 
 	// The thesaurus description.
@@ -88,7 +88,7 @@ type DescribeThesaurusOutput struct {
 	// a,b,c and a=>d, the term count would be 4.
 	TermCount *int64
 
-	// The Unix datetime that the thesaurus was last updated.
+	// The Unix timestamp when the thesaurus was last updated.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

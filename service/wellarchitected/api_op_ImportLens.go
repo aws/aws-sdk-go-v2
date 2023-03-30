@@ -12,9 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Import a new lens. The lens cannot be applied to workloads or shared with other
-// Amazon Web Services accounts until it's published with CreateLensVersion Lenses
-// are defined in JSON. For more information, see JSON format specification
+// Import a new custom lens or update an existing custom lens. To update an
+// existing custom lens, specify its ARN as the LensAlias. If no ARN is specified,
+// a new custom lens is created. The new or updated lens will have a status of
+// DRAFT. The lens cannot be applied to workloads or shared with other Amazon Web
+// Services accounts until it's published with CreateLensVersion. Lenses are
+// defined in JSON. For more information, see JSON format specification
 // (https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html)
 // in the Well-Architected Tool User Guide. A custom lens cannot exceed 500 KB in
 // size. Disclaimer Do not include or gather personal identifiable information
@@ -43,11 +46,11 @@ type ImportLensInput struct {
 	// A unique case-sensitive string used to ensure that this request is idempotent
 	// (executes only once). You should not reuse the same token for other requests. If
 	// you retry a request with the same client request token and the same parameters
-	// after it has completed successfully, the result of the original request is
-	// returned. This token is listed as required, however, if you do not specify it,
-	// the Amazon Web Services SDKs automatically generate one for you. If you are not
-	// using the Amazon Web Services SDK or the CLI, you must provide this token or the
-	// request will fail.
+	// after the original request has completed successfully, the result of the
+	// original request is returned. This token is listed as required, however, if you
+	// do not specify it, the Amazon Web Services SDKs automatically generate one for
+	// you. If you are not using the Amazon Web Services SDK or the CLI, you must
+	// provide this token or the request will fail.
 	//
 	// This member is required.
 	ClientRequestToken *string
@@ -59,10 +62,11 @@ type ImportLensInput struct {
 
 	// The alias of the lens. For Amazon Web Services official lenses, this is either
 	// the lens alias, such as serverless, or the lens ARN, such as
-	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
-	// the lens ARN, such as
-	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
-	// identified by its LensSummary$LensAlias.
+	// arn:aws:wellarchitected:us-east-1::lens/serverless. Note that some operations
+	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
+	// Services official lenses. For custom lenses, this is the lens ARN, such as
+	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef.
+	// Each lens is identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// Tags to associate to a lens.
@@ -73,7 +77,7 @@ type ImportLensInput struct {
 
 type ImportLensOutput struct {
 
-	// The ARN for the lens.
+	// The ARN for the lens that was created or updated.
 	LensArn *string
 
 	// The status of the imported lens.

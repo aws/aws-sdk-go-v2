@@ -1,0 +1,8 @@
+{
+    "id": "1cf9ad35-59ee-4c31-bda2-e19def8c1a22",
+    "type": "feature",
+    "description": "AWS Network Firewall added TLS inspection configurations to allow TLS traffic inspection.",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

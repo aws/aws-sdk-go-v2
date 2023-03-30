@@ -67,6 +67,9 @@ type CreateImagePipelineInput struct {
 	// configure images created by this image pipeline.
 	ImageRecipeArn *string
 
+	// Contains settings for vulnerability scans.
+	ImageScanningConfiguration *types.ImageScanningConfiguration
+
 	// The image test configuration of the image pipeline.
 	ImageTestsConfiguration *types.ImageTestsConfiguration
 

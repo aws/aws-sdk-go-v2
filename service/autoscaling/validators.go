@@ -1896,6 +1896,38 @@ func validateTargetTrackingMetricStat(v *types.TargetTrackingMetricStat) error {
 	}
 }
 
+func validateTrafficSourceIdentifier(v *types.TrafficSourceIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrafficSourceIdentifier"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrafficSources(v []types.TrafficSourceIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrafficSources"}
+	for i := range v {
+		if err := validateTrafficSourceIdentifier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVCpuCountRequest(v *types.VCpuCountRequest) error {
 	if v == nil {
 		return nil
@@ -1972,6 +2004,10 @@ func validateOpAttachTrafficSourcesInput(v *AttachTrafficSourcesInput) error {
 	}
 	if v.TrafficSources == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrafficSources"))
+	} else if v.TrafficSources != nil {
+		if err := validateTrafficSources(v.TrafficSources); err != nil {
+			invalidParams.AddNested("TrafficSources", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2083,6 +2119,11 @@ func validateOpCreateAutoScalingGroupInput(v *CreateAutoScalingGroupInput) error
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TrafficSources != nil {
+		if err := validateTrafficSources(v.TrafficSources); err != nil {
+			invalidParams.AddNested("TrafficSources", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2332,9 +2373,6 @@ func validateOpDescribeTrafficSourcesInput(v *DescribeTrafficSourcesInput) error
 	if v.AutoScalingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
 	}
-	if v.TrafficSourceType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TrafficSourceType"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2421,6 +2459,10 @@ func validateOpDetachTrafficSourcesInput(v *DetachTrafficSourcesInput) error {
 	}
 	if v.TrafficSources == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrafficSources"))
+	} else if v.TrafficSources != nil {
+		if err := validateTrafficSources(v.TrafficSources); err != nil {
+			invalidParams.AddNested("TrafficSources", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

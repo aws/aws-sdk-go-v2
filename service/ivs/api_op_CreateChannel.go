@@ -33,6 +33,9 @@ type CreateChannelInput struct {
 	// false.
 	Authorized bool
 
+	// Whether the channel allows insecure RTMP ingest. Default: false.
+	InsecureIngest bool
+
 	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full
 	// HD. Use LOW for near-real-time interaction with viewers. (Note: In the Amazon
 	// IVS console, LOW and NORMAL correspond to Ultra-low and Standard, respectively.)

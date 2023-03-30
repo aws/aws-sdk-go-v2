@@ -238,6 +238,23 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			endpoints.EndpointKey{
+				Region: "ap-south-2",
+			}: endpoints.Endpoint{
+				Hostname: "wafv2.ap-south-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-south-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-south-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "wafv2-fips.ap-south-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-south-2",
+				},
+			},
+			endpoints.EndpointKey{
 				Region: "ap-southeast-1",
 			}: endpoints.Endpoint{
 				Hostname: "wafv2.ap-southeast-1.amazonaws.com",
@@ -289,6 +306,23 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-4",
+			}: endpoints.Endpoint{
+				Hostname: "wafv2.ap-southeast-4.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-4",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-4",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "wafv2-fips.ap-southeast-4.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-4",
+				},
+			},
+			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{
 				Hostname: "wafv2.ca-central-1.amazonaws.com",
@@ -323,6 +357,23 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			endpoints.EndpointKey{
+				Region: "eu-central-2",
+			}: endpoints.Endpoint{
+				Hostname: "wafv2.eu-central-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-central-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "eu-central-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "wafv2-fips.eu-central-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-central-2",
+				},
+			},
+			endpoints.EndpointKey{
 				Region: "eu-north-1",
 			}: endpoints.Endpoint{
 				Hostname: "wafv2.eu-north-1.amazonaws.com",
@@ -354,6 +405,23 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "wafv2-fips.eu-south-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "eu-south-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "eu-south-2",
+			}: endpoints.Endpoint{
+				Hostname: "wafv2.eu-south-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-south-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "eu-south-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "wafv2-fips.eu-south-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-south-2",
 				},
 			},
 			endpoints.EndpointKey{
@@ -462,6 +530,15 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "fips-ap-south-2",
+			}: endpoints.Endpoint{
+				Hostname: "wafv2-fips.ap-south-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-south-2",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "fips-ap-southeast-1",
 			}: endpoints.Endpoint{
 				Hostname: "wafv2-fips.ap-southeast-1.amazonaws.com",
@@ -489,6 +566,15 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "fips-ap-southeast-4",
+			}: endpoints.Endpoint{
+				Hostname: "wafv2-fips.ap-southeast-4.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-4",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "fips-ca-central-1",
 			}: endpoints.Endpoint{
 				Hostname: "wafv2-fips.ca-central-1.amazonaws.com",
@@ -507,6 +593,15 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "fips-eu-central-2",
+			}: endpoints.Endpoint{
+				Hostname: "wafv2-fips.eu-central-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-central-2",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "fips-eu-north-1",
 			}: endpoints.Endpoint{
 				Hostname: "wafv2-fips.eu-north-1.amazonaws.com",
@@ -521,6 +616,15 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "wafv2-fips.eu-south-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "eu-south-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-eu-south-2",
+			}: endpoints.Endpoint{
+				Hostname: "wafv2-fips.eu-south-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-south-2",
 				},
 				Deprecated: aws.TrueTernary,
 			},

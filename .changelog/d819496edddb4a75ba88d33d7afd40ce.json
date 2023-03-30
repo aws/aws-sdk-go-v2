@@ -1,0 +1,8 @@
+{
+    "id": "d819496e-dddb-4a75-ba88-d33d7afd40ce",
+    "type": "feature",
+    "description": "Make DefaultExecutorDpuSize and CoordinatorDpuSize  fields optional  in StartSession",
+    "modules": [
+        "service/athena"
+    ]
+}

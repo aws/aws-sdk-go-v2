@@ -22,8 +22,7 @@ import (
 // documents. For more information, see Filtering on user context
 // (https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html). If more
 // than five PUT actions for a group are currently processing, a validation
-// exception is thrown. PutPrincipalMapping is currently not supported in the
-// Amazon Web Services GovCloud (US-West) region.
+// exception is thrown.
 func (c *Client) PutPrincipalMapping(ctx context.Context, params *PutPrincipalMappingInput, optFns ...func(*Options)) (*PutPrincipalMappingOutput, error) {
 	if params == nil {
 		params = &PutPrincipalMappingInput{}
@@ -75,12 +74,12 @@ type PutPrincipalMappingInput struct {
 	// the latest PUT action with previous actions. The highest number ID, which is the
 	// ordering ID, is the latest action you want to process and apply on top of other
 	// actions with lower number IDs. This prevents previous actions with lower number
-	// IDs from possibly overriding the latest action. The ordering ID can be the UNIX
+	// IDs from possibly overriding the latest action. The ordering ID can be the Unix
 	// time of the last update you made to a group members list. You would then provide
 	// this list when calling PutPrincipalMapping. This ensures your PUT action for
 	// that updated group with the latest members list doesn't get overwritten by
 	// earlier PUT actions for the same group which are yet to be processed. The
-	// default ordering ID is the current UNIX time in milliseconds that the action was
+	// default ordering ID is the current Unix time in milliseconds that the action was
 	// received by Amazon Kendra.
 	OrderingId *int64
 

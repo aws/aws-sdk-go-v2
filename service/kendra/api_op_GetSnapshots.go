@@ -88,7 +88,7 @@ type GetSnapshotsOutput struct {
 	// use in a later request to retrieve the next set of search metrics data.
 	NextToken *string
 
-	// The date-time for the beginning and end of the time window for the search
+	// The Unix timestamp for the beginning and end of the time window for the search
 	// metrics data.
 	SnapShotTimeFilter *types.TimeRange
 

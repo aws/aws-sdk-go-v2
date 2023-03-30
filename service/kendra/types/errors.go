@@ -61,9 +61,40 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An error message with a list of conflicting queries used across different sets
+// of featured results. This occurred with the request for a new featured results
+// set. Check that the queries you specified for featured results are unique per
+// featured results set for each index.
+type FeaturedResultsConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ConflictingItems []ConflictingItem
+
+	noSmithyDocumentSerde
+}
+
+func (e *FeaturedResultsConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *FeaturedResultsConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *FeaturedResultsConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "FeaturedResultsConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *FeaturedResultsConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // An issue occurred with the internal server used for your Amazon Kendra service.
-// Please wait a few minutes and try again, or contact  Support
-// (http://aws.amazon.com/aws.amazon.com/contact-us) for help.
+// Please wait a few minutes and try again, or contact Support
+// (http://aws.amazon.com/contact-us/) for help.
 type InternalServerException struct {
 	Message *string
 
@@ -225,9 +256,9 @@ func (e *ResourceUnavailableException) ErrorCode() string {
 func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have exceeded the set limits for your Amazon Kendra service. Please see
-// Quotas[hyperlink Kendra Quotas pg] for more information, or contact  Support
-// (http://aws.amazon.com/aws.amazon.com/contact-us) to inquire about an increase
-// of limits.
+// Quotas (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html) for more
+// information, or contact Support (http://aws.amazon.com/contact-us/) to inquire
+// about an increase of limits.
 type ServiceQuotaExceededException struct {
 	Message *string
 

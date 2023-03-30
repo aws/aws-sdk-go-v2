@@ -278,6 +278,33 @@ type BatchDeleteDocumentResponseFailedDocument struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about a set of featured results that couldn't be removed
+// from an index by the BatchDeleteFeaturedResultsSet
+// (https://docs.aws.amazon.com/kendra/latest/dg/API_BatchDeleteFeaturedResultsSet.html)
+// API.
+type BatchDeleteFeaturedResultsSetError struct {
+
+	// The error code for why the set of featured results couldn't be removed from the
+	// index.
+	//
+	// This member is required.
+	ErrorCode ErrorCode
+
+	// An explanation for why the set of featured results couldn't be removed from the
+	// index.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	// The identifier of the set of featured results that couldn't be removed from the
+	// index.
+	//
+	// This member is required.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides a response when the status of a document could not be retrieved.
 type BatchGetDocumentStatusResponseError struct {
 
@@ -449,7 +476,7 @@ type CapacityUnitsConfiguration struct {
 // application uses the SubmitFeedback API to provide click information.
 type ClickFeedback struct {
 
-	// The Unix timestamp of the date and time that the result was clicked.
+	// The Unix timestamp when the result was clicked.
 	//
 	// This member is required.
 	ClickTime *time.Time
@@ -488,6 +515,24 @@ type ColumnConfiguration struct {
 	// in an index. You must first create the fields in the index using the UpdateIndex
 	// API.
 	FieldMappings []DataSourceToIndexFieldMapping
+
+	noSmithyDocumentSerde
+}
+
+// Information about a conflicting query used across different sets of featured
+// results. When you create a featured results set, you must check that the queries
+// are unique per featured results set for each index.
+type ConflictingItem struct {
+
+	// The text of the conflicting query.
+	QueryText *string
+
+	// The identifier of the set of featured results that the conflicting query belongs
+	// to.
+	SetId *string
+
+	// The name for the set of featured results that the conflicting query belongs to.
+	SetName *string
 
 	noSmithyDocumentSerde
 }
@@ -994,7 +1039,7 @@ type DataSourceGroup struct {
 // Summary information for a Amazon Kendra data source.
 type DataSourceSummary struct {
 
-	// The UNIX datetime that the data source was created.
+	// The Unix timestamp when the data source connector was created.
 	CreatedAt *time.Time
 
 	// The identifier for the data source.
@@ -1017,7 +1062,7 @@ type DataSourceSummary struct {
 	// The type of the data source.
 	Type DataSourceType
 
-	// The UNIX datetime that the data source was lasted updated.
+	// The Unix timestamp when the data source connector was last updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -1030,7 +1075,7 @@ type DataSourceSyncJob struct {
 	// underlying data source, this field contains a code that identifies the error.
 	DataSourceErrorCode *string
 
-	// The UNIX datetime that the synchronization job completed.
+	// The Unix timestamp when the synchronization job completed.
 	EndTime *time.Time
 
 	// If the Status field is set to FAILED, the ErrorCode field indicates the reason
@@ -1049,7 +1094,7 @@ type DataSourceSyncJob struct {
 	// connector.
 	Metrics *DataSourceSyncJobMetrics
 
-	// The UNIX datetime that the synchronization job started.
+	// The Unix timestamp when the synchronization job started.
 	StartTime *time.Time
 
 	// The execution status of the synchronization job. When the Status field is set to
@@ -1543,7 +1588,7 @@ type ExperienceEntitiesSummary struct {
 // (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
 type ExperiencesSummary struct {
 
-	// The date-time your Amazon Kendra experience was created.
+	// The Unix timestamp when your Amazon Kendra experience was created.
 	CreatedAt *time.Time
 
 	// The endpoint URLs for your Amazon Kendra experiences. The URLs are unique and
@@ -1641,7 +1686,7 @@ type FaqStatistics struct {
 // index.
 type FaqSummary struct {
 
-	// The UNIX datetime that the FAQ was added to the index.
+	// The Unix timestamp when the FAQ was created.
 	CreatedAt *time.Time
 
 	// The file type used to create the FAQ.
@@ -1664,8 +1709,186 @@ type FaqSummary struct {
 	// use.
 	Status FaqStatus
 
-	// The UNIX datetime that the FAQ was last updated.
+	// The Unix timestamp when the FAQ was last updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A featured document. This document is displayed at the top of the search results
+// page, placed above all other results for certain queries. If there's an exact
+// match of a query, then the document is featured in the search results.
+type FeaturedDocument struct {
+
+	// The identifier of the document to feature in the search results. You can use the
+	// Query (https://docs.aws.amazon.com/kendra/latest/dg/API_Query.html) API to
+	// search for specific documents with their document IDs included in the result
+	// items, or you can use the console.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// A document ID doesn't exist but you have specified as a featured document.
+// Amazon Kendra cannot feature the document if it doesn't exist in the index. You
+// can check the status of a document and its ID or check for documents with status
+// errors using the BatchGetDocumentStatus
+// (https://docs.aws.amazon.com/kendra/latest/dg/API_BatchGetDocumentStatus.html)
+// API.
+type FeaturedDocumentMissing struct {
+
+	// The identifier of the document that doesn't exist but you have specified as a
+	// featured document.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// A featured document with its metadata information. This document is displayed at
+// the top of the search results page, placed above all other results for certain
+// queries. If there's an exact match of a query, then the document is featured in
+// the search results.
+type FeaturedDocumentWithMetadata struct {
+
+	// The identifier of the featured document with its metadata. You can use the Query
+	// (https://docs.aws.amazon.com/kendra/latest/dg/API_Query.html) API to search for
+	// specific documents with their document IDs included in the result items, or you
+	// can use the console.
+	Id *string
+
+	// The main title of the featured document.
+	Title *string
+
+	// The source URI location of the featured document.
+	URI *string
+
+	noSmithyDocumentSerde
+}
+
+// A single featured result item. A featured result is displayed at the top of the
+// search results page, placed above all other results for certain queries. If
+// there's an exact match of a query, then certain documents are featured in the
+// search results.
+type FeaturedResultsItem struct {
+
+	// One or more additional attributes associated with the featured result.
+	AdditionalAttributes []AdditionalResultAttribute
+
+	// An array of document attributes assigned to a featured document in the search
+	// results. For example, the document author (_author) or the source URI
+	// (_source_uri) of the document.
+	DocumentAttributes []DocumentAttribute
+
+	// Provides text and information about where to highlight the text.
+	DocumentExcerpt *TextWithHighlights
+
+	// The identifier of the featured document.
+	DocumentId *string
+
+	// Provides text and information about where to highlight the text.
+	DocumentTitle *TextWithHighlights
+
+	// The source URI location of the featured document.
+	DocumentURI *string
+
+	// A token that identifies a particular featured result from a particular query.
+	// Use this token to provide click-through feedback for the result. For more
+	// information, see Submitting feedback
+	// (https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html).
+	FeedbackToken *string
+
+	// The identifier of the featured result.
+	Id *string
+
+	// The type of document within the featured result response. For example, a
+	// response could include a question-answer type that's relevant to the query.
+	Type QueryResultType
+
+	noSmithyDocumentSerde
+}
+
+// A set of featured results that are displayed at the top of your search results.
+// Featured results are placed above all other results for certain queries. If
+// there's an exact match of a query, then one or more specific documents are
+// featured in the search results.
+type FeaturedResultsSet struct {
+
+	// The Unix timestamp when the set of featured results was created.
+	CreationTimestamp *int64
+
+	// The description for the set of featured results.
+	Description *string
+
+	// The list of document IDs for the documents you want to feature at the top of the
+	// search results page. You can use the Query
+	// (https://docs.aws.amazon.com/kendra/latest/dg/API_Query.html) API to search for
+	// specific documents with their document IDs included in the result items, or you
+	// can use the console. You can add up to four featured documents. You can request
+	// to increase this limit by contacting Support
+	// (http://aws.amazon.com/contact-us/). Specific queries are mapped to specific
+	// documents for featuring in the results. If a query contains an exact match, then
+	// one or more specific documents are featured in the results. The exact match
+	// applies to the full query. For example, if you only specify 'Kendra', queries
+	// such as 'How does kendra semantically rank results?' will not render the
+	// featured results. Featured results are designed for specific queries, rather
+	// than queries that are too broad in scope.
+	FeaturedDocuments []FeaturedDocument
+
+	// The identifier of the set of featured results.
+	FeaturedResultsSetId *string
+
+	// The name for the set of featured results.
+	FeaturedResultsSetName *string
+
+	// The Unix timestamp when the set of featured results was last updated.
+	LastUpdatedTimestamp *int64
+
+	// The list of queries for featuring results. Specific queries are mapped to
+	// specific documents for featuring in the results. If a query contains an exact
+	// match, then one or more specific documents are featured in the results. The
+	// exact match applies to the full query. For example, if you only specify
+	// 'Kendra', queries such as 'How does kendra semantically rank results?' will not
+	// render the featured results. Featured results are designed for specific queries,
+	// rather than queries that are too broad in scope.
+	QueryTexts []string
+
+	// The current status of the set of featured results. When the value is ACTIVE,
+	// featured results are ready for use. You can still configure your settings before
+	// setting the status to ACTIVE. You can set the status to ACTIVE or INACTIVE using
+	// the UpdateFeaturedResultsSet
+	// (https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html)
+	// API. The queries you specify for featured results must be unique per featured
+	// results set for each index, whether the status is ACTIVE or INACTIVE.
+	Status FeaturedResultsSetStatus
+
+	noSmithyDocumentSerde
+}
+
+// Summary information for a set of featured results. Featured results are placed
+// above all other results for certain queries. If there's an exact match of a
+// query, then one or more specific documents are featured in the search results.
+type FeaturedResultsSetSummary struct {
+
+	// The Unix timestamp when the set of featured results was created.
+	CreationTimestamp *int64
+
+	// The identifier of the set of featured results.
+	FeaturedResultsSetId *string
+
+	// The name for the set of featured results.
+	FeaturedResultsSetName *string
+
+	// The Unix timestamp when the set of featured results was last updated.
+	LastUpdatedTimestamp *int64
+
+	// The current status of the set of featured results. When the value is ACTIVE,
+	// featured results are ready for use. You can still configure your settings before
+	// setting the status to ACTIVE. You can set the status to ACTIVE or INACTIVE using
+	// the UpdateFeaturedResultsSet
+	// (https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html)
+	// API. The queries you specify for featured results must be unique per featured
+	// results set for each index, whether the status is ACTIVE or INACTIVE.
+	Status FeaturedResultsSetStatus
 
 	noSmithyDocumentSerde
 }
@@ -2005,16 +2228,16 @@ type GroupOrderingIdSummary struct {
 	// action for mapping users to their groups.
 	FailureReason *string
 
-	// The last date-time an action was updated. An action can be a PUT or DELETE
-	// action for mapping users to their groups.
+	// The Unix timestamp when an action was last updated. An action can be a PUT or
+	// DELETE action for mapping users to their groups.
 	LastUpdatedAt *time.Time
 
 	// The order in which actions should complete processing. An action can be a PUT or
 	// DELETE action for mapping users to their groups.
 	OrderingId *int64
 
-	// The date-time an action was received by Amazon Kendra. An action can be a PUT or
-	// DELETE action for mapping users to their groups.
+	// The Unix timestamp when an action was received by Amazon Kendra. An action can
+	// be a PUT or DELETE action for mapping users to their groups.
 	ReceivedAt *time.Time
 
 	// The current processing status of actions for mapping users to their groups. The
@@ -2129,7 +2352,7 @@ type IndexConfigurationSummary struct {
 	// This member is required.
 	Status IndexStatus
 
-	// The Unix timestamp when the index was last updated by the UpdateIndex API.
+	// The Unix timestamp when the index was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
@@ -2470,7 +2693,7 @@ type OnPremiseConfiguration struct {
 // (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
 type PersonasSummary struct {
 
-	// The date-time the summary information was created.
+	// The Unix timestamp when the summary information was created.
 	CreatedAt *time.Time
 
 	// The identifier of a user or group in your IAM Identity Center identity source.
@@ -2484,7 +2707,7 @@ type PersonasSummary struct {
 	// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience).
 	Persona Persona
 
-	// The date-time the summary information was last updated.
+	// The Unix timestamp when the summary information was last updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -2611,8 +2834,7 @@ type QueryResultItem struct {
 // for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
 type QuerySuggestionsBlockListSummary struct {
 
-	// The date-time summary information for a query suggestions block list was last
-	// created.
+	// The Unix timestamp when the block list was created.
 	CreatedAt *time.Time
 
 	// The identifier of a block list.
@@ -2627,7 +2849,7 @@ type QuerySuggestionsBlockListSummary struct {
 	// The status of the block list.
 	Status QuerySuggestionsBlockListStatus
 
-	// The date-time the block list was last updated.
+	// The Unix timestamp when the block list was last updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -2763,7 +2985,7 @@ type Relevance struct {
 // uses the SubmitFeedback API to provide relevance information.
 type RelevanceFeedback struct {
 
-	// Whether to document was relevant or not relevant to the search.
+	// Whether the document was relevant or not relevant to the search.
 	//
 	// This member is required.
 	RelevanceValue RelevanceType
@@ -2917,10 +3139,10 @@ type SalesforceConfiguration struct {
 	// the user logging in to the Salesforce instance.
 	//
 	// * securityToken - The token
-	// associated with the user account logging in to the Salesforce instance.
+	// associated with the user logging in to the Salesforce instance.
 	//
-	// *
-	// username - The user name of the user logging in to the Salesforce instance.
+	// * username -
+	// The user name of the user logging in to the Salesforce instance.
 	//
 	// This member is required.
 	SecretArn *string
@@ -3122,8 +3344,8 @@ type Search struct {
 // Provides the configuration information for the seed or starting point URLs to
 // crawl. When selecting websites to index, you must adhere to the Amazon
 // Acceptable Use Policy (https://aws.amazon.com/aup/) and all other Amazon terms.
-// Remember that you must only use Amazon Kendra Web Crawler to index your own
-// webpages, or webpages that you have authorization to index.
+// Remember that you must only use Amazon Kendra Web Crawler to index your own web
+// pages, or web pages that you have authorization to index.
 type SeedUrlConfiguration struct {
 
 	// The list of seed or starting point URLs of the websites you want to crawl. The
@@ -3143,8 +3365,8 @@ type SeedUrlConfiguration struct {
 	// then "a.abc.example.com" and "b.abc.example.com" are also crawled.
 	//
 	// * EVERYTHING
-	// – crawl the website host names with subdomains and other domains that the
-	// webpages link to.
+	// – crawl the website host names with subdomains and other domains that the web
+	// pages link to.
 	//
 	// The default mode is set to HOST_ONLY.
 	WebCrawlerMode WebCrawlerMode
@@ -3307,13 +3529,8 @@ type ServiceNowServiceCatalogConfiguration struct {
 type SharePointConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
-	// user name and password required to connect to the SharePoint instance. If you
-	// use SharePoint Server, you also need to provide the sever domain name as part of
-	// the credentials. For more information, see Using a Microsoft SharePoint Data
-	// Source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html). You
-	// can also provide OAuth authentication credentials of user name, password, client
-	// ID, and client secret. For more information, see Using a SharePoint data source
+	// user name and password required to connect to the SharePoint instance. For more
+	// information, see Microsoft SharePoint
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html).
 	//
 	// This member is required.
@@ -3329,9 +3546,9 @@ type SharePointConfiguration struct {
 	// This member is required.
 	Urls []string
 
-	// Whether you want to connect to SharePoint using basic authentication of user
-	// name and password, or OAuth authentication of user name, password, client ID,
-	// and client secret. You can use OAuth authentication for SharePoint Online.
+	// Whether you want to connect to SharePoint Online using basic authentication of
+	// user name and password, or OAuth authentication of user name, password, client
+	// ID, and client secret, or AD App-only authentication of client secret.
 	AuthenticationType SharePointOnlineAuthenticationType
 
 	// TRUE to index document attachments.
@@ -3386,9 +3603,9 @@ type SharePointConfiguration struct {
 
 	// The path to the SSL certificate stored in an Amazon S3 bucket. You use this to
 	// connect to SharePoint Server if you require a secure SSL connection. You can
-	// simply generate a self-signed X509 certificate on any computer using OpenSSL.
-	// For an example of using OpenSSL to create an X509 certificate, see Create and
-	// sign an X509 certificate
+	// generate a self-signed X509 certificate on any computer using OpenSSL. For an
+	// example of using OpenSSL to create an X509 certificate, see Create and sign an
+	// X509 certificate
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html).
 	SslCertificateS3Path *S3Path
 
@@ -3409,8 +3626,8 @@ type SharePointConfiguration struct {
 // Provides the configuration information for the sitemap URLs to crawl. When
 // selecting websites to index, you must adhere to the Amazon Acceptable Use Policy
 // (https://aws.amazon.com/aup/) and all other Amazon terms. Remember that you must
-// only use Amazon Kendra Web Crawler to index your own webpages, or webpages that
-// you have authorization to index.
+// only use Amazon Kendra Web Crawler to index your own web pages, or web pages
+// that you have authorization to index.
 type SiteMapsConfiguration struct {
 
 	// The list of sitemap URLs of the websites you want to crawl. The list can include
@@ -3786,7 +4003,7 @@ type TextWithHighlights struct {
 // An array of summary information for a thesaurus or multiple thesauri.
 type ThesaurusSummary struct {
 
-	// The Unix datetime that the thesaurus was created.
+	// The Unix timestamp when the thesaurus was created.
 	CreatedAt *time.Time
 
 	// The identifier of the thesaurus.
@@ -3798,7 +4015,7 @@ type ThesaurusSummary struct {
 	// The status of the thesaurus.
 	Status ThesaurusStatus
 
-	// The Unix datetime that the thesaurus was last updated.
+	// The Unix timestamp when the thesaurus was last updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -3807,10 +4024,10 @@ type ThesaurusSummary struct {
 // Provides a range of time.
 type TimeRange struct {
 
-	// The UNIX datetime of the end of the time range.
+	// The Unix timestamp for the end of the time range.
 	EndTime *time.Time
 
-	// The UNIX datetime of the beginning of the time range.
+	// The Unix timestamp for the beginning of the time range.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -3822,14 +4039,14 @@ type TimeRange struct {
 // that the website is blocked from crawling. When selecting websites to index, you
 // must adhere to the Amazon Acceptable Use Policy (https://aws.amazon.com/aup/)
 // and all other Amazon terms. Remember that you must only use Amazon Kendra Web
-// Crawler to index your own webpages, or webpages that you have authorization to
+// Crawler to index your own web pages, or web pages that you have authorization to
 // index.
 type Urls struct {
 
 	// Configuration of the seed or starting point URLs of the websites you want to
 	// crawl. You can choose to crawl only the website host names, or the website host
 	// names with subdomains, or the website host names with subdomains and other
-	// domains that the webpages link to. You can list up to 100 seed URLs.
+	// domains that the web pages link to. You can list up to 100 seed URLs.
 	SeedUrlConfiguration *SeedUrlConfiguration
 
 	// Configuration of the sitemap URLs of the websites you want to crawl. Only URLs
@@ -3876,11 +4093,10 @@ type UserContext struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information to fetch access levels of groups and
-// users from an IAM Identity Center (successor to Single Sign-On) identity source.
-// This is useful for user context filtering, where search results are filtered
-// based on the user or their group access to documents. You can also use the
-// PutPrincipalMapping
+// Provides the configuration information to get users and groups from an IAM
+// Identity Center (successor to Single Sign-On) identity source. This is useful
+// for user context filtering, where search results are filtered based on the user
+// or their group access to documents. You can also use the PutPrincipalMapping
 // (https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html) API
 // to map users to their groups so that you only need to provide the user ID when
 // you issue the query. To set up an IAM Identity Center identity source in the
@@ -3896,10 +4112,10 @@ type UserContext struct {
 // the organization in order to use UserGroupResolutionConfiguration.
 type UserGroupResolutionConfiguration struct {
 
-	// The identity store provider (mode) you want to use to fetch access levels of
-	// groups and users. IAM Identity Center (successor to Single Sign-On) is currently
-	// the only available mode. Your users and groups must exist in an IAM Identity
-	// Center identity source in order to use this mode.
+	// The identity store provider (mode) you want to use to get users and groups. IAM
+	// Identity Center (successor to Single Sign-On) is currently the only available
+	// mode. Your users and groups must exist in an IAM Identity Center identity source
+	// in order to use this mode.
 	//
 	// This member is required.
 	UserGroupResolutionMode UserGroupResolutionMode
@@ -3958,7 +4174,7 @@ type WebCrawlerConfiguration struct {
 	// website is blocked from crawling. When selecting websites to index, you must
 	// adhere to the Amazon Acceptable Use Policy (https://aws.amazon.com/aup/) and all
 	// other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to
-	// index your own webpages, or webpages that you have authorization to index.
+	// index your own web pages, or web pages that you have authorization to index.
 	//
 	// This member is required.
 	Urls *Urls
@@ -3974,20 +4190,20 @@ type WebCrawlerConfiguration struct {
 
 	// Specifies the number of levels in a website that you want to crawl. The first
 	// level begins from the website seed or starting point URL. For example, if a
-	// website has 3 levels – index level (i.e. seed in this example), sections level,
-	// and subsections level – and you are only interested in crawling information up
-	// to the sections level (i.e. levels 0-1), you can set your depth to 1. The
-	// default crawl depth is set to 2.
+	// website has three levels—index level (the seed in this example), sections level,
+	// and subsections level—and you are only interested in crawling information up to
+	// the sections level (levels 0-1), you can set your depth to 1. The default crawl
+	// depth is set to 2.
 	CrawlDepth *int32
 
-	// The maximum size (in MB) of a webpage or attachment to crawl. Files larger than
-	// this size (in MB) are skipped/not crawled. The default maximum size of a webpage
-	// or attachment is set to 50 MB.
+	// The maximum size (in MB) of a web page or attachment to crawl. Files larger than
+	// this size (in MB) are skipped/not crawled. The default maximum size of a web
+	// page or attachment is set to 50 MB.
 	MaxContentSizePerPageInMegaBytes *float32
 
-	// The maximum number of URLs on a webpage to include when crawling a website. This
-	// number is per webpage. As a website’s webpages are crawled, any URLs the
-	// webpages link to are also crawled. URLs on a webpage are crawled in order of
+	// The maximum number of URLs on a web page to include when crawling a website.
+	// This number is per web page. As a website’s web pages are crawled, any URLs the
+	// web pages link to are also crawled. URLs on a web page are crawled in order of
 	// appearance. The default maximum links per page is 100.
 	MaxLinksPerPage *int32
 

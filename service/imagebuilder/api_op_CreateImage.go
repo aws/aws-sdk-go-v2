@@ -61,6 +61,9 @@ type CreateImageInput struct {
 	// configured, tested, and assessed.
 	ImageRecipeArn *string
 
+	// Contains settings for vulnerability scans.
+	ImageScanningConfiguration *types.ImageScanningConfiguration
+
 	// The image tests configuration of the image.
 	ImageTestsConfiguration *types.ImageTestsConfiguration
 
@@ -75,7 +78,7 @@ type CreateImageOutput struct {
 	// The idempotency token used to make this request idempotent.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the image that was created by this request.
+	// The Amazon Resource Name (ARN) of the image that this request created.
 	ImageBuildVersionArn *string
 
 	// The request ID that uniquely identifies this request.

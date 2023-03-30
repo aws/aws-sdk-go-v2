@@ -13,11 +13,14 @@ import (
 )
 
 // Create a new workload. The owner of a workload can share the workload with other
-// Amazon Web Services accounts, IAM users, an organization, and organizational
-// units (OUs) in the same Amazon Web Services Region. Only the owner of a workload
-// can delete it. For more information, see Defining a Workload
+// Amazon Web Services accounts, users, an organization, and organizational units
+// (OUs) in the same Amazon Web Services Region. Only the owner of a workload can
+// delete it. For more information, see Defining a Workload
 // (https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html)
-// in the Well-Architected Tool User Guide.
+// in the Well-Architected Tool User Guide. Either AwsRegions, NonAwsRegions, or
+// both must be specified when creating a workload. You also must specify
+// ReviewOwner, even though the parameter is listed as not being required in the
+// following section.
 func (c *Client) CreateWorkload(ctx context.Context, params *CreateWorkloadInput, optFns ...func(*Options)) (*CreateWorkloadOutput, error) {
 	if params == nil {
 		params = &CreateWorkloadInput{}
@@ -39,11 +42,11 @@ type CreateWorkloadInput struct {
 	// A unique case-sensitive string used to ensure that this request is idempotent
 	// (executes only once). You should not reuse the same token for other requests. If
 	// you retry a request with the same client request token and the same parameters
-	// after it has completed successfully, the result of the original request is
-	// returned. This token is listed as required, however, if you do not specify it,
-	// the Amazon Web Services SDKs automatically generate one for you. If you are not
-	// using the Amazon Web Services SDK or the CLI, you must provide this token or the
-	// request will fail.
+	// after the original request has completed successfully, the result of the
+	// original request is returned. This token is listed as required, however, if you
+	// do not specify it, the Amazon Web Services SDKs automatically generate one for
+	// you. If you are not using the Amazon Web Services SDK or the CLI, you must
+	// provide this token or the request will fail.
 	//
 	// This member is required.
 	ClientRequestToken *string

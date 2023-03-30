@@ -41,6 +41,10 @@ type UpdateReplicationConfigurationTemplateInput struct {
 	// the Replication Configuration Template.
 	AssociateDefaultSecurityGroup *bool
 
+	// Whether to allow the AWS replication agent to automatically replicate newly
+	// added disks.
+	AutoReplicateNewDisks *bool
+
 	// Configure bandwidth throttling for the outbound data transfer rate of the Source
 	// Server in Mbps.
 	BandwidthThrottling int64
@@ -95,6 +99,10 @@ type UpdateReplicationConfigurationTemplateOutput struct {
 	// Whether to associate the default Elastic Disaster Recovery Security group with
 	// the Replication Configuration Template.
 	AssociateDefaultSecurityGroup *bool
+
+	// Whether to allow the AWS replication agent to automatically replicate newly
+	// added disks.
+	AutoReplicateNewDisks *bool
 
 	// Configure bandwidth throttling for the outbound data transfer rate of the Source
 	// Server in Mbps.

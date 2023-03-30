@@ -62,7 +62,8 @@ type DescribeOrganizationConfigurationOutput struct {
 	MemberAccountLimitReached bool
 
 	// Indicates whether GuardDuty is automatically enabled for accounts added to the
-	// organization.
+	// organization. Even though this is still supported, we recommend using
+	// AutoEnableOrganizationMembers to achieve the similar results.
 	//
 	// Deprecated: This field is deprecated, use AutoEnableOrganizationMembers instead
 	AutoEnable bool
@@ -70,16 +71,18 @@ type DescribeOrganizationConfigurationOutput struct {
 	// Indicates the auto-enablement configuration of GuardDuty for the member accounts
 	// in the organization.
 	//
-	// * NEW: Indicates that new accounts joining the
-	// organization are configured to have GuardDuty enabled automatically.
+	// * NEW: Indicates that when a new account joins the
+	// organization, they will have GuardDuty enabled automatically.
 	//
-	// * ALL:
-	// Indicates that all accounts (new and existing members) in the organization are
-	// configured to have GuardDuty enabled automatically.
+	// * ALL: Indicates
+	// that all accounts in the Amazon Web Services Organization have GuardDuty enabled
+	// automatically. This includes NEW accounts that join the organization and
+	// accounts that may have been suspended or removed from the organization in
+	// GuardDuty.
 	//
-	// * NONE: Indicates that no
-	// account in the organization will be configured to have GuardDuty enabled
-	// automatically.
+	// * NONE: Indicates that GuardDuty will not be automatically enabled
+	// for any accounts in the organization. GuardDuty must be managed for each account
+	// individually by the administrator.
 	AutoEnableOrganizationMembers types.AutoEnableMembers
 
 	// Describes which data sources are enabled automatically for member accounts.

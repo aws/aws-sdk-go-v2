@@ -17152,6 +17152,19 @@ func awsAwsquery_deserializeDocumentTrafficSourceIdentifier(v **types.TrafficSou
 				sv.Identifier = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("Type", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Type = ptr.String(xtv)
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -17256,6 +17269,19 @@ func awsAwsquery_deserializeDocumentTrafficSourceState(v **types.TrafficSourceSt
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("Identifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Identifier = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("State", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -17280,6 +17306,19 @@ func awsAwsquery_deserializeDocumentTrafficSourceState(v **types.TrafficSourceSt
 			{
 				xtv := string(val)
 				sv.TrafficSource = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Type", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Type = ptr.String(xtv)
 			}
 
 		default:

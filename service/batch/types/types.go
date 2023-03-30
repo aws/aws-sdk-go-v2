@@ -714,7 +714,7 @@ type ContainerDetail struct {
 	// Batch sets.
 	Environment []KeyValuePair
 
-	// The amount of ephemeral storage to allocate for the task. This parameter is used
+	// The amount of ephemeral storage allocated for the task. This parameter is used
 	// to expand the total amount of ephemeral storage available, beyond the default
 	// amount, for tasks hosted on Fargate.
 	EphemeralStorage *EphemeralStorage
@@ -1729,7 +1729,17 @@ type EksHostPath struct {
 	noSmithyDocumentSerde
 }
 
+// Describes and uniquely identifies Kubernetes resources. For example, the compute
+// environment that a pod runs in or the jobID for a job running in the pod. For
+// more information, see Understanding Kubernetes Objects
+// (https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/)
+// in the Kubernetes documentation.
 type EksMetadata struct {
+
+	// Key-value pairs used to identify, sort, and organize cube resources. Can contain
+	// up to 63 uppercase letters, lowercase letters, numbers, hyphens (-), and
+	// underscores (_). Labels can be added or modified at any time. Each resource can
+	// have multiple labels, but each key must be unique for a given object.
 	Labels map[string]string
 
 	noSmithyDocumentSerde
@@ -1761,6 +1771,10 @@ type EksPodProperties struct {
 	// Kubernetes documentation.
 	HostNetwork *bool
 
+	// Metadata about the Kubernetes pod. For more information, see Understanding
+	// Kubernetes Objects
+	// (https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/)
+	// in the Kubernetes documentation.
 	Metadata *EksMetadata
 
 	// The name of the service account that's used to run the pod. For more
@@ -1814,6 +1828,13 @@ type EksPodPropertiesDetail struct {
 	// Kubernetes documentation.
 	HostNetwork *bool
 
+	// Describes and uniquely identifies Kubernetes resources. For example, the compute
+	// environment that a pod runs in or the jobID for a job running in the pod. For
+	// more information, see Understanding Kubernetes Objects
+	// (https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/)
+	// in the Kubernetes documentation.
+	Metadata *EksMetadata
+
 	// The name of the node for this job.
 	NodeName *string
 
@@ -1842,6 +1863,8 @@ type EksPodPropertiesOverride struct {
 	// The overrides for the container that's used on the Amazon EKS pod.
 	Containers []EksContainerOverride
 
+	// Metadata about the overrides for the container that's used on the Amazon EKS
+	// pod.
 	Metadata *EksMetadata
 
 	noSmithyDocumentSerde

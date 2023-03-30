@@ -5258,6 +5258,15 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 				sv.InstanceName = ptr.String(jtv)
 			}
 
+		case "instanceState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceState to be of type string, got %T instead", value)
+				}
+				sv.InstanceState = types.InstanceState(jtv)
+			}
+
 		case "lastRefreshTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7884,6 +7893,15 @@ func awsAwsjson10_deserializeDocumentVolumeConfiguration(v **types.VolumeConfigu
 
 	for key, value := range shape {
 		switch key {
+		case "rootVolume":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected RootVolume to be of type *bool, got %T instead", value)
+				}
+				sv.RootVolume = ptr.Bool(jtv)
+			}
+
 		case "volumeBaselineIOPS":
 			if value != nil {
 				jtv, ok := value.(json.Number)

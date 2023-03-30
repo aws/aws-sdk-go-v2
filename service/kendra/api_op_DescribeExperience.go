@@ -54,7 +54,7 @@ type DescribeExperienceOutput struct {
 	// information to grant access to your Amazon Kendra experience.
 	Configuration *types.ExperienceConfiguration
 
-	// Shows the date-time your Amazon Kendra experience was created.
+	// The Unix timestamp when your Amazon Kendra experience was created.
 	CreatedAt *time.Time
 
 	// Shows the description for your Amazon Kendra experience.
@@ -86,7 +86,7 @@ type DescribeExperienceOutput struct {
 	// FAILED, the ErrorMessage field contains the reason that this failed.
 	Status types.ExperienceStatus
 
-	// Shows the date-time your Amazon Kendra experience was last updated.
+	// The Unix timestamp when your Amazon Kendra experience was last updated.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

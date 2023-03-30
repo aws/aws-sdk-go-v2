@@ -4,6 +4,7 @@ package sagemakergeospatial
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/types"
@@ -12,7 +13,8 @@ import (
 	"time"
 )
 
-// Use this operation to copy results of a Vector Enrichment job to an S3 location.
+// Use this operation to copy results of a Vector Enrichment job to an Amazon S3
+// location.
 func (c *Client) ExportVectorEnrichmentJob(ctx context.Context, params *ExportVectorEnrichmentJobInput, optFns ...func(*Options)) (*ExportVectorEnrichmentJobOutput, error) {
 	if params == nil {
 		params = &ExportVectorEnrichmentJobInput{}
@@ -45,6 +47,9 @@ type ExportVectorEnrichmentJobInput struct {
 	//
 	// This member is required.
 	OutputConfig *types.ExportVectorEnrichmentJobOutputConfig
+
+	// A unique token that guarantees that the call to this API is idempotent.
+	ClientToken *string
 
 	noSmithyDocumentSerde
 }
@@ -128,6 +133,9 @@ func (c *Client) addOperationExportVectorEnrichmentJobMiddlewares(stack *middlew
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opExportVectorEnrichmentJobMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpExportVectorEnrichmentJobValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,6 +152,39 @@ func (c *Client) addOperationExportVectorEnrichmentJobMiddlewares(stack *middlew
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpExportVectorEnrichmentJob struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpExportVectorEnrichmentJob) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpExportVectorEnrichmentJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*ExportVectorEnrichmentJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *ExportVectorEnrichmentJobInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opExportVectorEnrichmentJobMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpExportVectorEnrichmentJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opExportVectorEnrichmentJob(region string) *awsmiddleware.RegisterServiceMetadata {

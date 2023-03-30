@@ -8352,7 +8352,7 @@ func awsAwsjson11_deserializeDocumentEngineConfiguration(v **types.EngineConfigu
 				if err != nil {
 					return err
 				}
-				sv.CoordinatorDpuSize = int32(i64)
+				sv.CoordinatorDpuSize = ptr.Int32(int32(i64))
 			}
 
 		case "DefaultExecutorDpuSize":
@@ -8365,7 +8365,7 @@ func awsAwsjson11_deserializeDocumentEngineConfiguration(v **types.EngineConfigu
 				if err != nil {
 					return err
 				}
-				sv.DefaultExecutorDpuSize = int32(i64)
+				sv.DefaultExecutorDpuSize = ptr.Int32(int32(i64))
 			}
 
 		case "MaxConcurrentDpus":

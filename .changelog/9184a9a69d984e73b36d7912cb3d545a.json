@@ -1,0 +1,8 @@
+{
+    "id": "9184a9a6-9d98-4e73-b36d-7912cb3d545a",
+    "type": "feature",
+    "description": "This release adds support for Tunnel Endpoint Lifecycle control, a new feature that provides Site-to-Site VPN customers with better visibility and control of their VPN tunnel maintenance updates.",
+    "modules": [
+        "service/ec2"
+    ]
+}

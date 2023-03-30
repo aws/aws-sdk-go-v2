@@ -224,7 +224,7 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have made a request for an action that is not supported by the service.
+// You have requested an action that that the service doesn't support.
 type InvalidRequestException struct {
 	Message *string
 

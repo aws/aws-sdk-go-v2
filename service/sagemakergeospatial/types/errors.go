@@ -33,6 +33,7 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Updating or deleting a resource can cause an inconsistent state.
 type ConflictException struct {
 	Message *string
 
@@ -89,6 +90,7 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The request references a resource which does not exist.
 type ResourceNotFoundException struct {
 	Message *string
 

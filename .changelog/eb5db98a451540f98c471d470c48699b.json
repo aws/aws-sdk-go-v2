@@ -1,0 +1,8 @@
+{
+    "id": "eb5db98a-4515-40f9-8c47-1d470c48699b",
+    "type": "feature",
+    "description": "AWS Well-Architected SDK now supports getting consolidated report metrics and generating a consolidated report PDF.",
+    "modules": [
+        "service/wellarchitected"
+    ]
+}

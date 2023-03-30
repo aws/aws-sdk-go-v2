@@ -57,10 +57,12 @@ type CreateExperienceInput struct {
 	// A description for your Amazon Kendra experience.
 	Description *string
 
-	// The Amazon Resource Name (ARN) of a role with permission to access Query API,
-	// QuerySuggestions API, SubmitFeedback API, and IAM Identity Center that stores
-	// your user and group information. For more information, see IAM roles for Amazon
-	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
+	// The Amazon Resource Name (ARN) of an IAM role with permission to access Query
+	// API, GetQuerySuggestions API, and other required APIs. The role also must
+	// include permission to access IAM Identity Center (successor to Single Sign-On)
+	// that stores your user and group information. For more information, see IAM
+	// access roles for Amazon Kendra
+	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -68,7 +70,7 @@ type CreateExperienceInput struct {
 
 type CreateExperienceOutput struct {
 
-	// The identifier for your created Amazon Kendra experience.
+	// The identifier of your Amazon Kendra experience.
 	//
 	// This member is required.
 	Id *string

@@ -351,6 +351,15 @@ func awsRestjson1_deserializeOpDocumentCreateReplicationConfigurationTemplateOut
 				sv.AssociateDefaultSecurityGroup = ptr.Bool(jtv)
 			}
 
+		case "autoReplicateNewDisks":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AutoReplicateNewDisks = ptr.Bool(jtv)
+			}
+
 		case "bandwidthThrottling":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2760,6 +2769,15 @@ func awsRestjson1_deserializeOpDocumentGetReplicationConfigurationOutput(v **Get
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.AssociateDefaultSecurityGroup = ptr.Bool(jtv)
+			}
+
+		case "autoReplicateNewDisks":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AutoReplicateNewDisks = ptr.Bool(jtv)
 			}
 
 		case "bandwidthThrottling":
@@ -5472,6 +5490,15 @@ func awsRestjson1_deserializeOpDocumentUpdateReplicationConfigurationOutput(v **
 				sv.AssociateDefaultSecurityGroup = ptr.Bool(jtv)
 			}
 
+		case "autoReplicateNewDisks":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AutoReplicateNewDisks = ptr.Bool(jtv)
+			}
+
 		case "bandwidthThrottling":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5768,6 +5795,15 @@ func awsRestjson1_deserializeOpDocumentUpdateReplicationConfigurationTemplateOut
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.AssociateDefaultSecurityGroup = ptr.Bool(jtv)
+			}
+
+		case "autoReplicateNewDisks":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AutoReplicateNewDisks = ptr.Bool(jtv)
 			}
 
 		case "bandwidthThrottling":
@@ -6432,7 +6468,7 @@ func awsRestjson1_deserializeDocumentConversionMap(v *map[string]string, value i
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected ebsSnapshot to be of type string, got %T instead", value)
+				return fmt.Errorf("expected EbsSnapshot to be of type string, got %T instead", value)
 			}
 			parsedVal = jtv
 		}
@@ -7138,7 +7174,7 @@ func awsRestjson1_deserializeDocumentEbsSnapshotsList(v *[]string, value interfa
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected ebsSnapshot to be of type string, got %T instead", value)
+				return fmt.Errorf("expected EbsSnapshot to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}
@@ -9252,6 +9288,15 @@ func awsRestjson1_deserializeDocumentReplicationConfigurationTemplate(v **types.
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.AssociateDefaultSecurityGroup = ptr.Bool(jtv)
+			}
+
+		case "autoReplicateNewDisks":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AutoReplicateNewDisks = ptr.Bool(jtv)
 			}
 
 		case "bandwidthThrottling":

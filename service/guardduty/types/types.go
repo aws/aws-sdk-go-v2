@@ -108,6 +108,18 @@ type Action struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the installed EKS add-on (GuardDuty security agent).
+type AddonDetails struct {
+
+	// Status of the installed EKS add-on.
+	AddonStatus *string
+
+	// Version of the installed EKS add-on.
+	AddonVersion *string
+
+	noSmithyDocumentSerde
+}
+
 // The account within the organization specified as the GuardDuty delegated
 // administrator.
 type AdminAccount struct {
@@ -356,6 +368,126 @@ type Country struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the EKS cluster that has a coverage status.
+type CoverageEksClusterDetails struct {
+
+	// Information about the installed EKS add-on.
+	AddonDetails *AddonDetails
+
+	// Name of the EKS cluster.
+	ClusterName *string
+
+	// Represents all the nodes within the EKS cluster in your account.
+	CompatibleNodes int64
+
+	// Represents the nodes within the EKS cluster that have a HEALTHY coverage status.
+	CoveredNodes int64
+
+	noSmithyDocumentSerde
+}
+
+// Represents a condition that when matched will be added to the response of the
+// operation.
+type CoverageFilterCondition struct {
+
+	// Represents an equal condition that is applied to a single field while retrieving
+	// the coverage details.
+	Equals []string
+
+	// Represents a not equal condition that is applied to a single field while
+	// retrieving the coverage details.
+	NotEquals []string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the criteria used in the filter.
+type CoverageFilterCriteria struct {
+
+	// Represents a condition that when matched will be added to the response of the
+	// operation.
+	FilterCriterion []CoverageFilterCriterion
+
+	noSmithyDocumentSerde
+}
+
+// Represents a condition that when matched will be added to the response of the
+// operation.
+type CoverageFilterCriterion struct {
+
+	// An enum value representing possible filter fields.
+	CriterionKey CoverageFilterCriterionKey
+
+	// Contains information about the condition.
+	FilterCondition *CoverageFilterCondition
+
+	noSmithyDocumentSerde
+}
+
+// Information about the resource of the GuardDuty account.
+type CoverageResource struct {
+
+	// The unique ID of the Amazon Web Services account.
+	AccountId *string
+
+	// Represents the status of the EKS cluster coverage.
+	CoverageStatus CoverageStatus
+
+	// The unique ID of the GuardDuty detector associated with the resource.
+	DetectorId *string
+
+	// Represents the reason why a coverage status was UNHEALTHY for the EKS cluster.
+	Issue *string
+
+	// Information about the resource for which the coverage statistics are retrieved.
+	ResourceDetails *CoverageResourceDetails
+
+	// The unique ID of the resource.
+	ResourceId *string
+
+	// The timestamp at which the coverage details for the resource were last updated.
+	// This is in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Information about the resource for each individual EKS cluster.
+type CoverageResourceDetails struct {
+
+	// EKS cluster details involved in the coverage statistics.
+	EksClusterDetails *CoverageEksClusterDetails
+
+	// The type of Amazon Web Services resource.
+	ResourceType ResourceType
+
+	noSmithyDocumentSerde
+}
+
+// Information about the sorting criteria used in the coverage statistics.
+type CoverageSortCriteria struct {
+
+	// Represents the field name used to sort the coverage details.
+	AttributeName CoverageSortKey
+
+	// The order in which the sorted findings are to be displayed.
+	OrderBy OrderBy
+
+	noSmithyDocumentSerde
+}
+
+// Information about the coverage statistics for a resource.
+type CoverageStatistics struct {
+
+	// Represents coverage statistics for EKS clusters aggregated by coverage status.
+	CountByCoverageStatus map[string]int64
+
+	// Represents coverage statistics for EKS clusters aggregated by resource type.
+	CountByResourceType map[string]int64
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about which data sources are enabled.
 type DataSourceConfigurations struct {
 
@@ -496,8 +628,40 @@ type DestinationProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the additional configuration for a feature in your GuardDuty
+// account.
+type DetectorAdditionalConfiguration struct {
+
+	// Name of the additional configuration.
+	Name FeatureAdditionalConfiguration
+
+	// Status of the additional configuration.
+	Status FeatureStatus
+
+	noSmithyDocumentSerde
+}
+
+// Information about the additional configuration.
+type DetectorAdditionalConfigurationResult struct {
+
+	// Name of the additional configuration.
+	Name FeatureAdditionalConfiguration
+
+	// Status of the additional configuration.
+	Status FeatureStatus
+
+	// The timestamp at which the additional configuration was last updated. This is in
+	// UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a GuardDuty feature.
 type DetectorFeatureConfiguration struct {
+
+	// Additional configuration for a resource.
+	AdditionalConfiguration []DetectorAdditionalConfiguration
 
 	// The name of the feature.
 	Name DetectorFeature
@@ -510,6 +674,9 @@ type DetectorFeatureConfiguration struct {
 
 // Contains information about a GuardDuty feature.
 type DetectorFeatureConfigurationResult struct {
+
+	// Additional configuration for a resource.
+	AdditionalConfiguration []DetectorAdditionalConfigurationResult
 
 	// Indicates the name of the feature that can be enabled for the detector.
 	Name DetectorFeatureResult
@@ -1119,6 +1286,40 @@ type KubernetesWorkloadDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the runtime process details.
+type LineageObject struct {
+
+	// The effective user ID that was used to execute the process.
+	Euid int32
+
+	// The absolute path of the process executable file.
+	ExecutablePath *string
+
+	// The name of the process.
+	Name *string
+
+	// The process ID of the child process.
+	NamespacePid int32
+
+	// The unique ID of the parent process. This ID is assigned to the parent process
+	// by GuardDuty.
+	ParentUuid *string
+
+	// The ID of the process.
+	Pid int32
+
+	// The time when the process started. This is in UTC format.
+	StartTime *time.Time
+
+	// The user ID of the user that executed the process.
+	UserId int32
+
+	// The unique ID assigned to the process by GuardDuty.
+	Uuid *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the local IP address of the connection.
 type LocalIpDetails struct {
 
@@ -1252,6 +1453,36 @@ type Member struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the additional configuration for the member account.
+type MemberAdditionalConfiguration struct {
+
+	// Name of the additional configuration.
+	Name OrgFeatureAdditionalConfiguration
+
+	// Status of the additional configuration.
+	Status FeatureStatus
+
+	noSmithyDocumentSerde
+}
+
+// Information about the additional configuration for the member account.
+type MemberAdditionalConfigurationResult struct {
+
+	// Indicates the name of the additional configuration that is set for the member
+	// account.
+	Name OrgFeatureAdditionalConfiguration
+
+	// Indicates the status of the additional configuration that is set for the member
+	// account.
+	Status FeatureStatus
+
+	// The timestamp at which the additional configuration was set for the member
+	// account. This is in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains information on which data sources are enabled for a member account.
 type MemberDataSourceConfiguration struct {
 
@@ -1274,6 +1505,9 @@ type MemberDataSourceConfiguration struct {
 // Contains information about the features for the member account.
 type MemberFeaturesConfiguration struct {
 
+	// Additional configuration of the feature for the member account.
+	AdditionalConfiguration []MemberAdditionalConfiguration
+
 	// The name of the feature.
 	Name OrgFeature
 
@@ -1285,6 +1519,10 @@ type MemberFeaturesConfiguration struct {
 
 // Contains information about the features for the member account.
 type MemberFeaturesConfigurationResult struct {
+
+	// Indicates the additional configuration of the feature that is configured for the
+	// member account.
+	AdditionalConfiguration []MemberAdditionalConfigurationResult
 
 	// Indicates the name of the feature that is enabled for the detector.
 	Name OrgFeature
@@ -1381,6 +1619,39 @@ type Organization struct {
 	noSmithyDocumentSerde
 }
 
+// A list of additional configurations which will be configured for the
+// organization.
+type OrganizationAdditionalConfiguration struct {
+
+	// The status of the additional configuration that will be configured for the
+	// organization.
+	AutoEnable OrgFeatureStatus
+
+	// The name of the additional configuration that will be configured for the
+	// organization.
+	Name OrgFeatureAdditionalConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A list of additional configuration which will be configured for the
+// organization.
+type OrganizationAdditionalConfigurationResult struct {
+
+	// Describes how The status of the additional configuration that are configured for
+	// the member accounts within the organization. If you set AutoEnable to NEW, a
+	// feature will be configured for only the new accounts when they join the
+	// organization. If you set AutoEnable to NONE, no feature will be configured for
+	// the accounts when they join the organization.
+	AutoEnable OrgFeatureStatus
+
+	// The name of the additional configuration that is configured for the member
+	// accounts within the organization.
+	Name OrgFeatureAdditionalConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains information on which data sources will be configured to
 // be automatically enabled for new members within the organization.
 type OrganizationDataSourceConfigurations struct {
@@ -1443,6 +1714,9 @@ type OrganizationEbsVolumesResult struct {
 // A list of features which will be configured for the organization.
 type OrganizationFeatureConfiguration struct {
 
+	// The additional information that will be configured for the organization.
+	AdditionalConfiguration []OrganizationAdditionalConfiguration
+
 	// The status of the feature that will be configured for the organization.
 	AutoEnable OrgFeatureStatus
 
@@ -1454,6 +1728,10 @@ type OrganizationFeatureConfiguration struct {
 
 // A list of features which will be configured for the organization.
 type OrganizationFeatureConfigurationResult struct {
+
+	// The additional configuration that is configured for the member accounts within
+	// the organization.
+	AdditionalConfiguration []OrganizationAdditionalConfigurationResult
 
 	// Describes how The status of the feature that are configured for the member
 	// accounts within the organization. If you set AutoEnable to NEW, a feature will
@@ -1648,6 +1926,52 @@ type PrivateIpAddressDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the observed process.
+type ProcessDetails struct {
+
+	// The effective user ID of the user that executed the process.
+	Euid int32
+
+	// The absolute path of the process executable file.
+	ExecutablePath *string
+
+	// The SHA256 hash of the process executable.
+	ExecutableSha256 *string
+
+	// Information about the process's lineage.
+	Lineage []LineageObject
+
+	// The name of the process.
+	Name *string
+
+	// The ID of the child process.
+	NamespacePid int32
+
+	// The unique ID of the parent process. This ID is assigned to the parent process
+	// by GuardDuty.
+	ParentUuid *string
+
+	// The ID of the process.
+	Pid int32
+
+	// The present working directory of the process.
+	Pwd *string
+
+	// The time when the process started. This is in UTC format.
+	StartTime *time.Time
+
+	// The user that executed the process.
+	User *string
+
+	// The unique ID of the user that executed the process.
+	UserId int32
+
+	// The unique ID assigned to the process by GuardDuty.
+	Uuid *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the product code for the EC2 instance.
 type ProductCode struct {
 
@@ -1834,6 +2158,92 @@ type ResourceDetails struct {
 
 	// InstanceArn that was scanned in the scan entry.
 	InstanceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Additional information about the suspicious activity.
+type RuntimeContext struct {
+
+	// Represents the communication protocol associated with the address. For example,
+	// the address family AF_INET is used for IP version of 4 protocol.
+	AddressFamily *string
+
+	// Represents the type of mounted fileSystem.
+	FileSystemType *string
+
+	// Represents options that control the behavior of a runtime operation or action.
+	// For example, a filesystem mount operation may contain a read-only flag.
+	Flags []string
+
+	// Specifies a particular protocol within the address family. Usually there is a
+	// single protocol in address families. For example, the address family AF_INET
+	// only has the IP protocol.
+	IanaProtocolNumber int32
+
+	// The value of the LD_PRELOAD environment variable.
+	LdPreloadValue *string
+
+	// The path to the new library that was loaded.
+	LibraryPath *string
+
+	// Specifies the Region of a process's address space such as stack and heap.
+	MemoryRegions []string
+
+	// The timestamp at which the process modified the current process. The timestamp
+	// is in UTC date string format.
+	ModifiedAt *time.Time
+
+	// Information about the process that modified the current process. This is
+	// available for multiple finding types.
+	ModifyingProcess *ProcessDetails
+
+	// The path to the module loaded into the kernel.
+	ModuleFilePath *string
+
+	// The name of the module loaded into the kernel.
+	ModuleName *string
+
+	// The SHA256 hash of the module.
+	ModuleSha256 *string
+
+	// The path on the host that is mounted by the container.
+	MountSource *string
+
+	// The path in the container that is mapped to the host directory.
+	MountTarget *string
+
+	// The path in the container that modified the release agent file.
+	ReleaseAgentPath *string
+
+	// The path to the leveraged runc implementation.
+	RuncBinaryPath *string
+
+	// The path to the script that was executed.
+	ScriptPath *string
+
+	// The path to the modified shell history file.
+	ShellHistoryFilePath *string
+
+	// The path to the docket socket that was accessed.
+	SocketPath *string
+
+	// Information about the process that had its memory overwritten by the current
+	// process.
+	TargetProcess *ProcessDetails
+
+	noSmithyDocumentSerde
+}
+
+// Information about the process and any required context values for a specific
+// finding.
+type RuntimeDetails struct {
+
+	// Additional information about the suspicious activity.
+	Context *RuntimeContext
+
+	// Information about the observed process.
+	Process *ProcessDetails
 
 	noSmithyDocumentSerde
 }
@@ -2141,6 +2551,10 @@ type Service struct {
 
 	// The resource role information for this finding.
 	ResourceRole *string
+
+	// Information about the process and any required context values for a specific
+	// finding
+	RuntimeDetails *RuntimeDetails
 
 	// The name of the Amazon Web Services service (GuardDuty) that generated a
 	// finding.

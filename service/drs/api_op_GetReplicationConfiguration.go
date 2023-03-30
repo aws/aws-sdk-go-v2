@@ -43,6 +43,10 @@ type GetReplicationConfigurationOutput struct {
 	// the Replication Configuration.
 	AssociateDefaultSecurityGroup *bool
 
+	// Whether to allow the AWS replication agent to automatically replicate newly
+	// added disks.
+	AutoReplicateNewDisks *bool
+
 	// Configure bandwidth throttling for the outbound data transfer rate of the Source
 	// Server in Mbps.
 	BandwidthThrottling int64

@@ -41,15 +41,12 @@ type BatchPutDocumentInput struct {
 	// One or more documents to add to the index. Documents have the following file
 	// size limits.
 	//
-	// * 5 MB total size for inline documents
+	// * 50 MB total size for any file
 	//
-	// * 50 MB total size for
-	// files from an S3 bucket
+	// * 5 MB extracted text for any
+	// file
 	//
-	// * 5 MB extracted text for any file
-	//
-	// For more
-	// information about file size and transaction per second quotas, see Quotas
+	// For more information, see Quotas
 	// (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
 	//
 	// This member is required.
@@ -69,8 +66,8 @@ type BatchPutDocumentInput struct {
 	// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html).
 	CustomDocumentEnrichmentConfiguration *types.CustomDocumentEnrichmentConfiguration
 
-	// The Amazon Resource Name (ARN) of a role that is allowed to run the
-	// BatchPutDocument API. For more information, see IAM Roles for Amazon Kendra
+	// The Amazon Resource Name (ARN) of an IAM role with permission to access your S3
+	// bucket. For more information, see IAM access roles for Amazon Kendra
 	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
 	RoleArn *string
 

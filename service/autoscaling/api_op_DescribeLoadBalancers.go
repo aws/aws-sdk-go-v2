@@ -11,24 +11,30 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about the load balancers for the specified Auto Scaling group.
-// This operation describes only Classic Load Balancers. If you have Application
-// Load Balancers, Network Load Balancers, or Gateway Load Balancer, use the
-// DescribeLoadBalancerTargetGroups API instead. To determine the attachment status
-// of the load balancer, use the State element in the response. When you attach a
-// load balancer to an Auto Scaling group, the initial State value is Adding. The
-// state transitions to Added after all Auto Scaling instances are registered with
-// the load balancer. If Elastic Load Balancing health checks are enabled for the
-// Auto Scaling group, the state transitions to InService after at least one Auto
-// Scaling instance passes the health check. When the load balancer is in the
-// InService state, Amazon EC2 Auto Scaling can terminate and replace any instances
-// that are reported as unhealthy. If no registered instances pass the health
-// checks, the load balancer doesn't enter the InService state. Load balancers also
-// have an InService state if you attach them in the CreateAutoScalingGroup API
-// call. If your load balancer state is InService, but it is not working properly,
-// check the scaling activities by calling DescribeScalingActivities and take any
-// corrective actions necessary. For help with failed health checks, see
-// Troubleshooting Amazon EC2 Auto Scaling: Health checks
+// This API call has been replaced with a new "traffic sources" API call
+// (DescribeTrafficSources) that can describe multiple traffic sources types. While
+// we continue to support DescribeLoadBalancers, and you can use both the original
+// DescribeLoadBalancers API call and the new DescribeTrafficSources API call on
+// the same Auto Scaling group, we recommend using the new "traffic sources" API
+// call to simplify how you manage traffic sources. Gets information about the load
+// balancers for the specified Auto Scaling group. This operation describes only
+// Classic Load Balancers. If you have Application Load Balancers, Network Load
+// Balancers, or Gateway Load Balancers, use the DescribeLoadBalancerTargetGroups
+// API instead. To determine the attachment status of the load balancer, use the
+// State element in the response. When you attach a load balancer to an Auto
+// Scaling group, the initial State value is Adding. The state transitions to Added
+// after all Auto Scaling instances are registered with the load balancer. If
+// Elastic Load Balancing health checks are enabled for the Auto Scaling group, the
+// state transitions to InService after at least one Auto Scaling instance passes
+// the health check. When the load balancer is in the InService state, Amazon EC2
+// Auto Scaling can terminate and replace any instances that are reported as
+// unhealthy. If no registered instances pass the health checks, the load balancer
+// doesn't enter the InService state. Load balancers also have an InService state
+// if you attach them in the CreateAutoScalingGroup API call. If your load balancer
+// state is InService, but it is not working properly, check the scaling activities
+// by calling DescribeScalingActivities and take any corrective actions necessary.
+// For help with failed health checks, see Troubleshooting Amazon EC2 Auto Scaling:
+// Health checks
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html)
 // in the Amazon EC2 Auto Scaling User Guide. For more information, see Use Elastic
 // Load Balancing to distribute traffic across the instances in your Auto Scaling

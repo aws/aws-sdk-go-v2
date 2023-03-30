@@ -1,0 +1,8 @@
+{
+    "id": "e8c53697-b546-4424-b49a-c62f092d7ccc",
+    "type": "feature",
+    "description": "This release adds support for HDD EBS volume types and io2 Block Express. We are also adding support for 61 new instance types and instances that have non consecutive runtime.",
+    "modules": [
+        "service/computeoptimizer"
+    ]
+}

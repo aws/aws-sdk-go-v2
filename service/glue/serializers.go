@@ -23595,11 +23595,6 @@ func awsAwsjson11_serializeOpDocumentUpdateDataQualityRulesetInput(v *UpdateData
 		ok.String(*v.Ruleset)
 	}
 
-	if v.UpdatedName != nil {
-		ok := object.Key("UpdatedName")
-		ok.String(*v.UpdatedName)
-	}
-
 	return nil
 }
 

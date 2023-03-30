@@ -43,8 +43,10 @@ type CreateThesaurusInput struct {
 	// This member is required.
 	Name *string
 
-	// An IAM role that gives Amazon Kendra permissions to access thesaurus file
-	// specified in SourceS3Path.
+	// The Amazon Resource Name (ARN) of an IAM role with permission to access your S3
+	// bucket that contains the thesaurus file. For more information, see IAM access
+	// roles for Amazon Kendra
+	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
 	//
 	// This member is required.
 	RoleArn *string
@@ -62,8 +64,10 @@ type CreateThesaurusInput struct {
 	// A description for the thesaurus.
 	Description *string
 
-	// A list of key-value pairs that identify the thesaurus. You can use the tags to
-	// identify and organize your resources and to control access to resources.
+	// A list of key-value pairs that identify or categorize the thesaurus. You can
+	// also use tags to help control access to the thesaurus. Tag keys and values can
+	// consist of Unicode letters, digits, white space, and any of the following
+	// symbols: _ . : / = + - @.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

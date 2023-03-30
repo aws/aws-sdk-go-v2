@@ -57,6 +57,9 @@ type Channel struct {
 	// you set up streaming software.
 	IngestEndpoint *string
 
+	// Whether the channel allows insecure RTMP ingest. Default: false.
+	InsecureIngest bool
+
 	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full
 	// HD. Use LOW for near-real-time interaction with viewers. Default: LOW. (Note: In
 	// the Amazon IVS console, LOW and NORMAL correspond to Ultra-low and Standard,
@@ -111,6 +114,9 @@ type ChannelSummary struct {
 	// Whether the channel is private (enabled for playback authorization). Default:
 	// false.
 	Authorized bool
+
+	// Whether the channel allows insecure RTMP ingest. Default: false.
+	InsecureIngest bool
 
 	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full
 	// HD. Use LOW for near-real-time interaction with viewers. Default: LOW. (Note: In

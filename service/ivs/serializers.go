@@ -219,6 +219,11 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 		ok.Boolean(v.Authorized)
 	}
 
+	if v.InsecureIngest {
+		ok := object.Key("insecureIngest")
+		ok.Boolean(v.InsecureIngest)
+	}
+
 	if len(v.LatencyMode) > 0 {
 		ok := object.Key("latencyMode")
 		ok.String(string(v.LatencyMode))
@@ -2062,6 +2067,11 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 	if v.Authorized {
 		ok := object.Key("authorized")
 		ok.Boolean(v.Authorized)
+	}
+
+	if v.InsecureIngest {
+		ok := object.Key("insecureIngest")
+		ok.Boolean(v.InsecureIngest)
 	}
 
 	if len(v.LatencyMode) > 0 {

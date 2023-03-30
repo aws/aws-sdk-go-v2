@@ -135,10 +135,11 @@ type UpdateAutoScalingGroupInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	HealthCheckGracePeriod *int32
 
-	// Determines whether any additional health checks are performed on the instances
-	// in this group. Amazon EC2 health checks are always on. The valid values are EC2
-	// (default), ELB, and VPC_LATTICE. The VPC_LATTICE health check type is reserved
-	// for use with VPC Lattice, which is in preview release and is subject to change.
+	// A comma-separated list of one or more health check types. The valid values are
+	// EC2, ELB, and VPC_LATTICE. EC2 is the default health check and cannot be
+	// disabled. For more information, see Health checks for Auto Scaling instances
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html) in the
+	// Amazon EC2 Auto Scaling User Guide.
 	HealthCheckType *string
 
 	// The name of the launch configuration. If you specify LaunchConfigurationName in

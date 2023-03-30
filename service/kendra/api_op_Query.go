@@ -125,6 +125,12 @@ type QueryOutput struct {
 	// key that was specified in the Facets input parameter.
 	FacetResults []types.FacetResult
 
+	// The list of featured result items. Featured results are displayed at the top of
+	// the search results page, placed above all other results for certain queries. If
+	// there's an exact match of a query, then certain documents are featured in the
+	// search results.
+	FeaturedResultsItems []types.FeaturedResultsItem
+
 	// The identifier for the search. You use QueryId to identify the search when using
 	// the feedback API.
 	QueryId *string

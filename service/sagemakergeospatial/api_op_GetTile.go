@@ -61,6 +61,9 @@ type GetTileInput struct {
 	// This member is required.
 	Z *int32
 
+	// The Amazon Resource Name (ARN) of the IAM role that you specify.
+	ExecutionRoleArn *string
+
 	// Determines whether or not to return a valid data mask.
 	ImageMask *bool
 

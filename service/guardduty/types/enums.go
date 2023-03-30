@@ -40,6 +40,92 @@ func (AutoEnableMembers) Values() []AutoEnableMembers {
 	}
 }
 
+type CoverageFilterCriterionKey string
+
+// Enum values for CoverageFilterCriterionKey
+const (
+	CoverageFilterCriterionKeyAccountId      CoverageFilterCriterionKey = "ACCOUNT_ID"
+	CoverageFilterCriterionKeyClusterName    CoverageFilterCriterionKey = "CLUSTER_NAME"
+	CoverageFilterCriterionKeyResourceType   CoverageFilterCriterionKey = "RESOURCE_TYPE"
+	CoverageFilterCriterionKeyCoverageStatus CoverageFilterCriterionKey = "COVERAGE_STATUS"
+	CoverageFilterCriterionKeyAddonVersion   CoverageFilterCriterionKey = "ADDON_VERSION"
+)
+
+// Values returns all known values for CoverageFilterCriterionKey. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CoverageFilterCriterionKey) Values() []CoverageFilterCriterionKey {
+	return []CoverageFilterCriterionKey{
+		"ACCOUNT_ID",
+		"CLUSTER_NAME",
+		"RESOURCE_TYPE",
+		"COVERAGE_STATUS",
+		"ADDON_VERSION",
+	}
+}
+
+type CoverageSortKey string
+
+// Enum values for CoverageSortKey
+const (
+	CoverageSortKeyAccountId      CoverageSortKey = "ACCOUNT_ID"
+	CoverageSortKeyClusterName    CoverageSortKey = "CLUSTER_NAME"
+	CoverageSortKeyCoverageStatus CoverageSortKey = "COVERAGE_STATUS"
+	CoverageSortKeyIssue          CoverageSortKey = "ISSUE"
+	CoverageSortKeyAddonVersion   CoverageSortKey = "ADDON_VERSION"
+	CoverageSortKeyUpdatedAt      CoverageSortKey = "UPDATED_AT"
+)
+
+// Values returns all known values for CoverageSortKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CoverageSortKey) Values() []CoverageSortKey {
+	return []CoverageSortKey{
+		"ACCOUNT_ID",
+		"CLUSTER_NAME",
+		"COVERAGE_STATUS",
+		"ISSUE",
+		"ADDON_VERSION",
+		"UPDATED_AT",
+	}
+}
+
+type CoverageStatisticsType string
+
+// Enum values for CoverageStatisticsType
+const (
+	CoverageStatisticsTypeCountByResourceType   CoverageStatisticsType = "COUNT_BY_RESOURCE_TYPE"
+	CoverageStatisticsTypeCountByCoverageStatus CoverageStatisticsType = "COUNT_BY_COVERAGE_STATUS"
+)
+
+// Values returns all known values for CoverageStatisticsType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CoverageStatisticsType) Values() []CoverageStatisticsType {
+	return []CoverageStatisticsType{
+		"COUNT_BY_RESOURCE_TYPE",
+		"COUNT_BY_COVERAGE_STATUS",
+	}
+}
+
+type CoverageStatus string
+
+// Enum values for CoverageStatus
+const (
+	CoverageStatusHealthy   CoverageStatus = "HEALTHY"
+	CoverageStatusUnhealthy CoverageStatus = "UNHEALTHY"
+)
+
+// Values returns all known values for CoverageStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CoverageStatus) Values() []CoverageStatus {
+	return []CoverageStatus{
+		"HEALTHY",
+		"UNHEALTHY",
+	}
+}
+
 type CriterionKey string
 
 // Enum values for CriterionKey
@@ -134,6 +220,7 @@ const (
 	DetectorFeatureEksAuditLogs         DetectorFeature = "EKS_AUDIT_LOGS"
 	DetectorFeatureEbsMalwareProtection DetectorFeature = "EBS_MALWARE_PROTECTION"
 	DetectorFeatureRdsLoginEvents       DetectorFeature = "RDS_LOGIN_EVENTS"
+	DetectorFeatureEksRuntimeMonitoring DetectorFeature = "EKS_RUNTIME_MONITORING"
 )
 
 // Values returns all known values for DetectorFeature. Note that this can be
@@ -145,6 +232,7 @@ func (DetectorFeature) Values() []DetectorFeature {
 		"EKS_AUDIT_LOGS",
 		"EBS_MALWARE_PROTECTION",
 		"RDS_LOGIN_EVENTS",
+		"EKS_RUNTIME_MONITORING",
 	}
 }
 
@@ -159,6 +247,7 @@ const (
 	DetectorFeatureResultEksAuditLogs         DetectorFeatureResult = "EKS_AUDIT_LOGS"
 	DetectorFeatureResultEbsMalwareProtection DetectorFeatureResult = "EBS_MALWARE_PROTECTION"
 	DetectorFeatureResultRdsLoginEvents       DetectorFeatureResult = "RDS_LOGIN_EVENTS"
+	DetectorFeatureResultEksRuntimeMonitoring DetectorFeatureResult = "EKS_RUNTIME_MONITORING"
 )
 
 // Values returns all known values for DetectorFeatureResult. Note that this can be
@@ -173,6 +262,7 @@ func (DetectorFeatureResult) Values() []DetectorFeatureResult {
 		"EKS_AUDIT_LOGS",
 		"EBS_MALWARE_PROTECTION",
 		"RDS_LOGIN_EVENTS",
+		"EKS_RUNTIME_MONITORING",
 	}
 }
 
@@ -209,6 +299,23 @@ func (EbsSnapshotPreservation) Values() []EbsSnapshotPreservation {
 	return []EbsSnapshotPreservation{
 		"NO_RETENTION",
 		"RETENTION_WITH_FINDING",
+	}
+}
+
+type FeatureAdditionalConfiguration string
+
+// Enum values for FeatureAdditionalConfiguration
+const (
+	FeatureAdditionalConfigurationEksAddonManagement FeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"
+)
+
+// Values returns all known values for FeatureAdditionalConfiguration. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (FeatureAdditionalConfiguration) Values() []FeatureAdditionalConfiguration {
+	return []FeatureAdditionalConfiguration{
+		"EKS_ADDON_MANAGEMENT",
 	}
 }
 
@@ -313,6 +420,7 @@ const (
 	FreeTrialFeatureResultEksAuditLogs         FreeTrialFeatureResult = "EKS_AUDIT_LOGS"
 	FreeTrialFeatureResultEbsMalwareProtection FreeTrialFeatureResult = "EBS_MALWARE_PROTECTION"
 	FreeTrialFeatureResultRdsLoginEvents       FreeTrialFeatureResult = "RDS_LOGIN_EVENTS"
+	FreeTrialFeatureResultEksRuntimeMonitoring FreeTrialFeatureResult = "EKS_RUNTIME_MONITORING"
 )
 
 // Values returns all known values for FreeTrialFeatureResult. Note that this can
@@ -327,6 +435,7 @@ func (FreeTrialFeatureResult) Values() []FreeTrialFeatureResult {
 		"EKS_AUDIT_LOGS",
 		"EBS_MALWARE_PROTECTION",
 		"RDS_LOGIN_EVENTS",
+		"EKS_RUNTIME_MONITORING",
 	}
 }
 
@@ -410,6 +519,7 @@ const (
 	OrgFeatureEksAuditLogs         OrgFeature = "EKS_AUDIT_LOGS"
 	OrgFeatureEbsMalwareProtection OrgFeature = "EBS_MALWARE_PROTECTION"
 	OrgFeatureRdsLoginEvents       OrgFeature = "RDS_LOGIN_EVENTS"
+	OrgFeatureEksRuntimeMonitoring OrgFeature = "EKS_RUNTIME_MONITORING"
 )
 
 // Values returns all known values for OrgFeature. Note that this can be expanded
@@ -421,6 +531,24 @@ func (OrgFeature) Values() []OrgFeature {
 		"EKS_AUDIT_LOGS",
 		"EBS_MALWARE_PROTECTION",
 		"RDS_LOGIN_EVENTS",
+		"EKS_RUNTIME_MONITORING",
+	}
+}
+
+type OrgFeatureAdditionalConfiguration string
+
+// Enum values for OrgFeatureAdditionalConfiguration
+const (
+	OrgFeatureAdditionalConfigurationEksAddonManagement OrgFeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"
+)
+
+// Values returns all known values for OrgFeatureAdditionalConfiguration. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (OrgFeatureAdditionalConfiguration) Values() []OrgFeatureAdditionalConfiguration {
+	return []OrgFeatureAdditionalConfiguration{
+		"EKS_ADDON_MANAGEMENT",
 	}
 }
 
@@ -461,6 +589,22 @@ func (PublishingStatus) Values() []PublishingStatus {
 		"PUBLISHING",
 		"UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY",
 		"STOPPED",
+	}
+}
+
+type ResourceType string
+
+// Enum values for ResourceType
+const (
+	ResourceTypeEks ResourceType = "EKS"
+)
+
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"EKS",
 	}
 }
 
