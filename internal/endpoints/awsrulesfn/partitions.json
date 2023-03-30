@@ -1,0 +1,43 @@
+{
+  "version": "1.0",
+  "partitions": [
+    {
+      "id": "aws",
+      "regionRegex": "^(us|eu|ap|sa|ca|me|af)-\\w+-\\d+$",
+      "regions": {
+        "us-skip-1": {
+          "name": "aws",
+          "dnsSuffix": "other.amazonaws.com",
+          "dualStackDnsSuffix": "other.api.aws",
+          "supportsFIPS": false,
+          "supportsDualStack": false,
+          "extraRegionProperty": "someProperty"
+        },
+        "us-east-1": {},
+        "aws-global": {}
+      },
+      "outputs": {
+        "name": "aws",
+        "dnsSuffix": "amazonaws.com",
+        "dualStackDnsSuffix": "api.aws",
+        "supportsFIPS": true,
+        "supportsDualStack": true
+      }
+    },
+    {
+      "id": "aws-cn",
+      "regionRegex": "^(cn)-\\w+-\\d+$",
+      "regions": {
+        "aws-cn-global": {},
+        "cn-north-5": {}
+      },
+      "outputs": {
+        "name": "aws-cn",
+        "dnsSuffix": "amazonaws.com.cn",
+        "dualStackDnsSuffix": "api.amazonwebservices.com.cn",
+        "supportsFIPS": true,
+        "supportsDualStack": true
+      }
+    }
+  ]
+}

@@ -1,21 +1,21 @@
 package awsrulesfn
 
 import (
-	"testing"
 	"github.com/google/go-cmp/cmp"
+	"testing"
 )
 
 func TestParseARN(t *testing.T) {
 	cases := []struct {
-		input     string
-		expect    *ARN
+		input  string
+		expect *ARN
 	}{
 		{
-			input:     "invalid",
+			input:  "invalid",
 			expect: nil,
 		},
 		{
-			input:     "arn:nope",
+			input:  "arn:nope",
 			expect: nil,
 		},
 		{
