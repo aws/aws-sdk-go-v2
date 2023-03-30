@@ -1,8 +1,0 @@
-{
-    "id": "3168e383-fbfa-485b-ab6a-3dde73f2f8aa",
-    "type": "feature",
-    "description": "Amazon SageMaker geospatial capabilities now supports server-side encryption with customer managed KMS key and SageMaker notebooks with a SageMaker geospatial image in a Amazon SageMaker Domain with VPC only mode.",
-    "modules": [
-        "service/sagemakergeospatial"
-    ]
-}

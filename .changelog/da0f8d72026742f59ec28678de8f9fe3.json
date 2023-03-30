@@ -1,8 +1,0 @@
-{
-    "id": "da0f8d72-0267-42f5-9ec2-8678de8f9fe3",
-    "type": "feature",
-    "description": "This release adds support for AWS Glue Data Quality, which helps you evaluate and monitor the quality of your data and includes the API for creating, deleting, or updating data quality rulesets, runs and evaluations.",
-    "modules": [
-        "service/glue"
-    ]
-}

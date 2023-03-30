@@ -1,3 +1,7 @@
+# v1.12.0 (2023-03-30)
+
+* **Feature**: Adding a field to the replication configuration APIs to support the auto replicate new disks feature. We also deprecated RetryDataReplication.
+
 # v1.11.2 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

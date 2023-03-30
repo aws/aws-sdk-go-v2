@@ -1,3 +1,7 @@
+# v1.2.0 (2023-03-30)
+
+* **Feature**: Amazon SageMaker geospatial capabilities now supports server-side encryption with customer managed KMS key and SageMaker notebooks with a SageMaker geospatial image in a Amazon SageMaker Domain with VPC only mode.
+
 # v1.1.6 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.24.0 (2023-03-30)
+
+* **Feature**: Updated DescribeCluster and ListClusters API responses to include ErrorDetail that specifies error code, programmatically accessible error data,and an error message. ErrorDetail provides the underlying reason for cluster failure and recommends actions to simplify troubleshooting of EMR clusters.
+
 # v1.23.4 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

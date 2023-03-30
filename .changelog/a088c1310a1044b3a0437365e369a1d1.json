@@ -1,8 +1,0 @@
-{
-    "id": "a088c131-0a10-44b3-a043-7365e369a1d1",
-    "type": "feature",
-    "description": "Adding a field to the replication configuration APIs to support the auto replicate new disks feature. We also deprecated RetryDataReplication.",
-    "modules": [
-        "service/drs"
-    ]
-}

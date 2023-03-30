@@ -1,8 +1,0 @@
-{
-    "id": "67a0f517-0414-490c-b37e-af534a144443",
-    "type": "feature",
-    "description": "Added EKS Runtime Monitoring feature support to existing detector, finding APIs and introducing new Coverage APIs",
-    "modules": [
-        "service/guardduty"
-    ]
-}

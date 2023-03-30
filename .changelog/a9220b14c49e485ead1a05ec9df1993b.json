@@ -1,8 +1,0 @@
-{
-    "id": "a9220b14-c49e-485e-ad1a-05ec9df1993b",
-    "type": "feature",
-    "description": "Updated DescribeCluster and ListClusters API responses to include ErrorDetail that specifies error code, programmatically accessible error data,and an error message. ErrorDetail provides the underlying reason for cluster failure and recommends actions to simplify troubleshooting of EMR clusters.",
-    "modules": [
-        "service/emr"
-    ]
-}

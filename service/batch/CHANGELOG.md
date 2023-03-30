@@ -1,3 +1,7 @@
+# v1.23.0 (2023-03-30)
+
+* **Feature**: This feature allows Batch on EKS to support configuration of Pod Labels through Metadata for Batch on EKS Jobs.
+
 # v1.22.0 (2023-03-23)
 
 * **Feature**: This feature allows Batch to support configuration of ephemeral storage size for jobs running on FARGATE

@@ -1,3 +1,7 @@
+# v1.20.0 (2023-03-30)
+
+* **Feature**: Added EKS Runtime Monitoring feature support to existing detector, finding APIs and introducing new Coverage APIs
+
 # v1.19.0 (2023-03-23)
 
 * **Feature**: Adds AutoEnableOrganizationMembers attribute to DescribeOrganizationConfiguration and UpdateOrganizationConfiguration APIs.
