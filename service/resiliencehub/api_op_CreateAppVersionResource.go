@@ -43,8 +43,8 @@ func (c *Client) CreateAppVersionResource(ctx context.Context, params *CreateApp
 
 type CreateAppVersionResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
 	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference guide.
@@ -53,8 +53,8 @@ type CreateAppVersionResourceInput struct {
 	AppArn *string
 
 	// The list of Application Components that this resource belongs to. If an
-	// Application Component is not part of the AWS Resilience Hub application, it will
-	// be added.
+	// Application Component is not part of the Resilience Hub application, it will be
+	// added.
 	//
 	// This member is required.
 	AppComponents []string
@@ -98,8 +98,8 @@ type CreateAppVersionResourceInput struct {
 
 type CreateAppVersionResourceOutput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
 	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference guide.
@@ -107,7 +107,7 @@ type CreateAppVersionResourceOutput struct {
 	// This member is required.
 	AppArn *string
 
-	// The AWS Resilience Hub application version.
+	// The Resilience Hub application version.
 	//
 	// This member is required.
 	AppVersion *string

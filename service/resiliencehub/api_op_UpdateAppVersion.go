@@ -31,8 +31,8 @@ func (c *Client) UpdateAppVersion(ctx context.Context, params *UpdateAppVersionI
 
 type UpdateAppVersionInput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
 	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference guide.
@@ -40,7 +40,10 @@ type UpdateAppVersionInput struct {
 	// This member is required.
 	AppArn *string
 
-	// Additional configuration parameters for an AWS Resilience Hub application.
+	// Additional configuration parameters for an Resilience Hub application. If you
+	// want to implement additionalInfo through the Resilience Hub console rather than
+	// using an API call, see Configure the application configuration parameters
+	// (https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html).
 	// Currently, this parameter accepts a key-value mapping (in a string format) of
 	// only one failover region and one associated account. Key: "failover-regions"
 	// Value: "[{"region":"<REGION>", "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
@@ -51,8 +54,8 @@ type UpdateAppVersionInput struct {
 
 type UpdateAppVersionOutput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
 	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference guide.
@@ -60,12 +63,15 @@ type UpdateAppVersionOutput struct {
 	// This member is required.
 	AppArn *string
 
-	// The AWS Resilience Hub application version.
+	// The Resilience Hub application version.
 	//
 	// This member is required.
 	AppVersion *string
 
-	// Additional configuration parameters for an AWS Resilience Hub application.
+	// Additional configuration parameters for an Resilience Hub application. If you
+	// want to implement additionalInfo through the Resilience Hub console rather than
+	// using an API call, see Configure the application configuration parameters
+	// (https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html).
 	// Currently, this parameter supports only failover region and account.
 	AdditionalInfo map[string][]string
 

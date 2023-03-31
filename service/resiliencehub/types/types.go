@@ -48,8 +48,8 @@ type AlarmRecommendation struct {
 // Defines an Resilience Hub application.
 type App struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
 	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference guide.
@@ -124,8 +124,8 @@ type AppAssessment struct {
 	// This member is required.
 	Invoker AssessmentInvoker
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
 	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference guide.
@@ -189,8 +189,8 @@ type AppAssessmentSummary struct {
 	// This member is required.
 	AssessmentStatus AssessmentStatus
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
 	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference guide.
@@ -239,7 +239,10 @@ type AppComponent struct {
 	// This member is required.
 	Type *string
 
-	// Additional configuration parameters for an AWS Resilience Hub application.
+	// Additional configuration parameters for an Resilience Hub application. If you
+	// want to implement additionalInfo through the Resilience Hub console rather than
+	// using an API call, see Configure the application configuration parameters
+	// (https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html).
 	// Currently, this parameter accepts a key-value mapping (in a string format) of
 	// only one failover region and one associated account. Key: "failover-regions"
 	// Value: "[{"region":"<REGION>", "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
@@ -308,8 +311,8 @@ type AppInputSource struct {
 // Defines an application summary.
 type AppSummary struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
 	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference guide.
@@ -586,7 +589,10 @@ type PhysicalResource struct {
 	// This member is required.
 	ResourceType *string
 
-	// Additional configuration parameters for an AWS Resilience Hub application.
+	// Additional configuration parameters for an Resilience Hub application. If you
+	// want to implement additionalInfo through the Resilience Hub console rather than
+	// using an API call, see Configure the application configuration parameters
+	// (https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html).
 	// Currently, this parameter accepts a key-value mapping (in a string format) of
 	// only one failover region and one associated account. Key: "failover-regions"
 	// Value: "[{"region":"<REGION>", "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
@@ -713,8 +719,8 @@ type RecommendationTemplate struct {
 	// This member is required.
 	Status RecommendationTemplateStatus
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
 	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference guide.
@@ -838,8 +844,8 @@ type ResourceMapping struct {
 	// stack. The name of the CloudFormation stack is contained in the logicalStackName
 	// property. Resource The resource is mapped to another resource. The name of the
 	// resource is contained in the resourceName property. ResourceGroup The resource
-	// is mapped to an Resource Groups. The name of the resource group is contained in
-	// the resourceGroupName property.
+	// is mapped to Resource Groups. The name of the resource group is contained in the
+	// resourceGroupName property.
 	//
 	// This member is required.
 	MappingType ResourceMappingType
@@ -991,7 +997,7 @@ type UnsupportedResource struct {
 	// This member is required.
 	ResourceType *string
 
-	// The status of unsupported resource.
+	// The status of the unsupported resource.
 	UnsupportedResourceStatus *string
 
 	noSmithyDocumentSerde

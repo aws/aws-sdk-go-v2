@@ -48,8 +48,13 @@ type GetMonitorOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The maximum number of city-network combinations (that is, combinations of a city
-	// location and network, such as an ISP) to be monitored for your resources.
+	// The maximum number of city-networks to monitor for your resources. A
+	// city-network is the location (city) where clients access your application
+	// resources from and the network or ASN, such as an internet service provider
+	// (ISP), that clients access the resources through. This limit helps control
+	// billing costs. To learn more, see Choosing a city-network maximum value
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html)
+	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
 	//
 	// This member is required.
 	MaxCityNetworksToMonitor int32
@@ -79,6 +84,11 @@ type GetMonitorOutput struct {
 	//
 	// This member is required.
 	Status types.MonitorConfigState
+
+	// Publish internet measurements for Internet Monitor to another location, such as
+	// an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch
+	// Logs.
+	InternetMeasurementsLogDelivery *types.InternetMeasurementsLogDelivery
 
 	// The health of the data processing for the monitor.
 	ProcessingStatus types.MonitorProcessingStatusCode

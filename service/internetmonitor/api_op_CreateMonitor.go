@@ -13,13 +13,21 @@ import (
 )
 
 // Creates a monitor in Amazon CloudWatch Internet Monitor. A monitor is built
-// based on information from the application resources that you add: Virtual
+// based on information from the application resources that you add: Amazon Virtual
 // Private Clouds (VPCs), Amazon CloudFront distributions, and WorkSpaces
-// directories. After you create a monitor, you can view the internet performance
-// for your application, scoped to a location, as well as any health events that
-// are impairing traffic. Internet Monitor can also diagnose whether the impairment
-// is on the Amazon Web Services network or is an issue with an internet service
-// provider (ISP).
+// directories. Internet Monitor then publishes internet measurements from Amazon
+// Web Services that are specific to the city-networks, that is, the locations and
+// ASNs (typically internet service providers or ISPs), where clients access your
+// application. For more information, see Using Amazon CloudWatch Internet Monitor
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-InternetMonitor.html)
+// in the Amazon CloudWatch User Guide. When you create a monitor, you set a
+// maximum limit for the number of city-networks where client traffic is monitored.
+// The city-network maximum that you choose is the limit, but you only pay for the
+// number of city-networks that are actually monitored. You can change the maximum
+// at any time by updating your monitor. For more information, see Choosing a
+// city-network maximum value
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html)
+// in the Amazon CloudWatch User Guide.
 func (c *Client) CreateMonitor(ctx context.Context, params *CreateMonitorInput, optFns ...func(*Options)) (*CreateMonitorOutput, error) {
 	if params == nil {
 		params = &CreateMonitorInput{}
@@ -37,8 +45,13 @@ func (c *Client) CreateMonitor(ctx context.Context, params *CreateMonitorInput, 
 
 type CreateMonitorInput struct {
 
-	// The maximum number of city-network combinations (that is, combinations of a city
-	// location and network, such as an ISP) to be monitored for your resources.
+	// The maximum number of city-networks to monitor for your resources. A
+	// city-network is the location (city) where clients access your application
+	// resources from and the network or ASN, such as an internet service provider
+	// (ISP), that clients access the resources through. This limit helps control
+	// billing costs. To learn more, see Choosing a city-network maximum value
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html)
+	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
 	//
 	// This member is required.
 	MaxCityNetworksToMonitor int32
@@ -52,6 +65,11 @@ type CreateMonitorInput struct {
 	// make an idempotent API request. Don't reuse the same client token for other API
 	// requests.
 	ClientToken *string
+
+	// Publish internet measurements for Internet Monitor to another location, such as
+	// an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch
+	// Logs.
+	InternetMeasurementsLogDelivery *types.InternetMeasurementsLogDelivery
 
 	// The resources to include in a monitor, which you provide as a set of Amazon
 	// Resource Names (ARNs). You can add a combination of Amazon Virtual Private

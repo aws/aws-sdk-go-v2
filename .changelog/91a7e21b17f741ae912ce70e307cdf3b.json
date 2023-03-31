@@ -1,0 +1,8 @@
+{
+    "id": "91a7e21b-17f7-41ae-912c-e70e307cdf3b",
+    "type": "documentation",
+    "description": "Adding EKS related documentation for appTemplateBody",
+    "modules": [
+        "service/resiliencehub"
+    ]
+}

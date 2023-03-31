@@ -1,0 +1,8 @@
+{
+    "id": "ff32ac08-5f4b-4d98-877a-fdf99570f12e",
+    "type": "feature",
+    "description": "This release adds a new feature for Amazon CloudWatch Internet Monitor that enables customers to deliver internet measurements to Amazon S3 buckets as well as CloudWatch Logs.",
+    "modules": [
+        "service/internetmonitor"
+    ]
+}

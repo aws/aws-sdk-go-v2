@@ -12,8 +12,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a monitor. You can update a monitor to add or remove resources, or to
-// change the status of the monitor. You can't change the name of a monitor.
+// Updates a monitor. You can update a monitor to change the maximum number of
+// city-networks (locations and ASNs or internet service providers), to add or
+// remove resources, or to change the status of the monitor. Note that you can't
+// change the name of a monitor. The city-network maximum that you choose is the
+// limit, but you only pay for the number of city-networks that are actually
+// monitored. For more information, see Choosing a city-network maximum value
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html)
+// in the Amazon CloudWatch User Guide.
 func (c *Client) UpdateMonitor(ctx context.Context, params *UpdateMonitorInput, optFns ...func(*Options)) (*UpdateMonitorOutput, error) {
 	if params == nil {
 		params = &UpdateMonitorInput{}
@@ -41,8 +47,15 @@ type UpdateMonitorInput struct {
 	// other API requests.
 	ClientToken *string
 
-	// The maximum number of city-network combinations (that is, combinations of a city
-	// location and network, such as an ISP) to be monitored for your resources.
+	// Publish internet measurements for Internet Monitor to another location, such as
+	// an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch
+	// Logs.
+	InternetMeasurementsLogDelivery *types.InternetMeasurementsLogDelivery
+
+	// The maximum number of city-networks to monitor for your resources. A
+	// city-network is the location (city) where clients access your application
+	// resources from and the network or ASN, such as an internet service provider,
+	// that clients access the resources through.
 	MaxCityNetworksToMonitor int32
 
 	// The resources to include in a monitor, which you provide as a set of Amazon

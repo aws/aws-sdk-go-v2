@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
@@ -77,6 +78,13 @@ func awsRestjson1_serializeOpDocumentCreateMonitorInput(v *CreateMonitorInput, v
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.InternetMeasurementsLogDelivery != nil {
+		ok := object.Key("InternetMeasurementsLogDelivery")
+		if err := awsRestjson1_serializeDocumentInternetMeasurementsLogDelivery(v.InternetMeasurementsLogDelivery, ok); err != nil {
+			return err
+		}
 	}
 
 	{
@@ -711,6 +719,13 @@ func awsRestjson1_serializeOpDocumentUpdateMonitorInput(v *UpdateMonitorInput, v
 		ok.String(*v.ClientToken)
 	}
 
+	if v.InternetMeasurementsLogDelivery != nil {
+		ok := object.Key("InternetMeasurementsLogDelivery")
+		if err := awsRestjson1_serializeDocumentInternetMeasurementsLogDelivery(v.InternetMeasurementsLogDelivery, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaxCityNetworksToMonitor != 0 {
 		ok := object.Key("MaxCityNetworksToMonitor")
 		ok.Integer(v.MaxCityNetworksToMonitor)
@@ -733,6 +748,42 @@ func awsRestjson1_serializeOpDocumentUpdateMonitorInput(v *UpdateMonitorInput, v
 	if len(v.Status) > 0 {
 		ok := object.Key("Status")
 		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInternetMeasurementsLogDelivery(v *types.InternetMeasurementsLogDelivery, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3Config != nil {
+		ok := object.Key("S3Config")
+		if err := awsRestjson1_serializeDocumentS3Config(v.S3Config, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3Config(v *types.S3Config, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketName != nil {
+		ok := object.Key("BucketName")
+		ok.String(*v.BucketName)
+	}
+
+	if v.BucketPrefix != nil {
+		ok := object.Key("BucketPrefix")
+		ok.String(*v.BucketPrefix)
+	}
+
+	if len(v.LogDeliveryStatus) > 0 {
+		ok := object.Key("LogDeliveryStatus")
+		ok.String(string(v.LogDeliveryStatus))
 	}
 
 	return nil

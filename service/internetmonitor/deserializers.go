@@ -720,6 +720,11 @@ func awsRestjson1_deserializeOpDocumentGetMonitorOutput(v **GetMonitorOutput, va
 				sv.CreatedAt = ptr.Time(t)
 			}
 
+		case "InternetMeasurementsLogDelivery":
+			if err := awsRestjson1_deserializeDocumentInternetMeasurementsLogDelivery(&sv.InternetMeasurementsLogDelivery, value); err != nil {
+				return err
+			}
+
 		case "MaxCityNetworksToMonitor":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2863,6 +2868,42 @@ func awsRestjson1_deserializeDocumentInternetHealth(v **types.InternetHealth, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentInternetMeasurementsLogDelivery(v **types.InternetMeasurementsLogDelivery, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InternetMeasurementsLogDelivery
+	if *v == nil {
+		sv = &types.InternetMeasurementsLogDelivery{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "S3Config":
+			if err := awsRestjson1_deserializeDocumentS3Config(&sv.S3Config, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExceededException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3481,6 +3522,64 @@ func awsRestjson1_deserializeDocumentRoundTripTime(v **types.RoundTripTime, valu
 					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3Config(v **types.S3Config, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3Config
+	if *v == nil {
+		sv = &types.S3Config{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BucketName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.BucketName = ptr.String(jtv)
+			}
+
+		case "BucketPrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.BucketPrefix = ptr.String(jtv)
+			}
+
+		case "LogDeliveryStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogDeliveryStatus to be of type string, got %T instead", value)
+				}
+				sv.LogDeliveryStatus = types.LogDeliveryStatus(jtv)
 			}
 
 		default:

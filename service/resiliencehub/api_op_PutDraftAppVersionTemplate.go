@@ -29,8 +29,8 @@ func (c *Client) PutDraftAppVersionTemplate(ctx context.Context, params *PutDraf
 
 type PutDraftAppVersionTemplateInput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
 	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference guide.
@@ -43,8 +43,8 @@ type PutDraftAppVersionTemplateInput struct {
 	// in the Examples section. The appTemplateBody JSON string has the following
 	// structure:
 	//
-	// * resources The list of logical resources that needs to be included
-	// in the Resilience Hub application. Type: Array Don't add the resources that you
+	// * resources The list of logical resources that must be included in
+	// the Resilience Hub application. Type: Array Don't add the resources that you
 	// want to exclude. Each resources array item includes the following fields:
 	//
 	// *
@@ -64,28 +64,36 @@ type PutDraftAppVersionTemplateInput struct {
 	// terraformSourceName The name of the Terraform S3 state file this resource
 	// belongs to. Type: String
 	//
-	// * type The type of resource. Type: string
+	// * eksSourceName The name of the Amazon Elastic
+	// Kubernetes Service cluster and namespace this resource belongs to. This
+	// parameter accepts values in "eks-cluster/namespace" format. Type: String
 	//
-	// * name The
-	// name of the resource. Type: String
+	// * type
+	// The type of resource. Type: string
 	//
-	// * additionalInfo Additional configuration
-	// parameters for an AWS Resilience Hub application. Currently, this parameter
-	// accepts a key-value mapping (in a string format) of only one failover region and
-	// one associated account. Key: "failover-regions" Value: "[{"region":"<REGION>",
-	// "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
+	// * name The name of the resource. Type:
+	// String
 	//
-	// * appComponents The list of Application
-	// Components that this resource belongs to. If an Application Component is not
-	// part of the AWS Resilience Hub application, it will be added. Type: Array Each
-	// appComponents array item includes the following fields:
+	// * additionalInfo Additional configuration parameters for an Resilience
+	// Hub application. If you want to implement additionalInfo through the Resilience
+	// Hub console rather than using an API call, see Configure the application
+	// configuration parameters
+	// (https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html).
+	// Currently, this parameter accepts a key-value mapping (in a string format) of
+	// only one failover region and one associated account. Key: "failover-regions"
+	// Value: "[{"region":"<REGION>", "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
 	//
-	// * name The name of the
-	// Application Component. Type: String
+	// *
+	// appComponents The list of Application Components that this resource belongs to.
+	// If an Application Component is not part of the Resilience Hub application, it
+	// will be added. Type: Array Each appComponents array item includes the following
+	// fields:
 	//
-	// * type The type of Application Component.
-	// For more information about the types of Application Component, see Grouping
-	// resources in an AppComponent
+	// * name The name of the Application Component. Type: String
+	//
+	// * type The
+	// type of Application Component. For more information about the types of
+	// Application Component, see Grouping resources in an AppComponent
 	// (https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html).
 	// Type: String
 	//
@@ -93,7 +101,10 @@ type PutDraftAppVersionTemplateInput struct {
 	// to the Application Component. Type: Array of strings
 	//
 	// * additionalInfo
-	// Additional configuration parameters for an AWS Resilience Hub application.
+	// Additional configuration parameters for an Resilience Hub application. If you
+	// want to implement additionalInfo through the Resilience Hub console rather than
+	// using an API call, see Configure the application configuration parameters
+	// (https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html).
 	// Currently, this parameter accepts a key-value mapping (in a string format) of
 	// only one failover region and one associated account. Key: "failover-regions"
 	// Value: "[{"region":"<REGION>", "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
@@ -114,29 +125,39 @@ type PutDraftAppVersionTemplateInput struct {
 	//
 	// * terraformSourceName
 	//
-	// Each logicalResourceIds object
-	// includes the following fields:
+	// * eksSourceName
 	//
-	// * identifier The identifier of the resource.
-	// Type: String
+	// Each
+	// logicalResourceIds object includes the following fields:
 	//
-	// * logicalStackName The name of the CloudFormation stack this
-	// resource belongs to. Type: String
+	// * identifier The
+	// identifier of the resource. Type: String
 	//
-	// * resourceGroupName The name of the resource
-	// group this resource belongs to. Type: String
+	// * logicalStackName The name of the
+	// CloudFormation stack this resource belongs to. Type: String
 	//
-	// * terraformSourceName The name of
-	// the Terraform S3 state file this resource belongs to. Type: String
+	// * resourceGroupName
+	// The name of the resource group this resource belongs to. Type: String
 	//
-	// * version
-	// The AWS Resilience Hub application version.
+	// *
+	// terraformSourceName The name of the Terraform S3 state file this resource
+	// belongs to. Type: String
+	//
+	// * eksSourceName The name of the Amazon Elastic
+	// Kubernetes Service cluster and namespace this resource belongs to. This
+	// parameter accepts values in "eks-cluster/namespace" format. Type: String
+	//
+	// *
+	// version The Resilience Hub application version.
 	//
 	// * additionalInfo Additional
-	// configuration parameters for an AWS Resilience Hub application. Currently, this
-	// parameter accepts a key-value mapping (in a string format) of only one failover
-	// region and one associated account. Key: "failover-regions" Value:
-	// "[{"region":"<REGION>", "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
+	// configuration parameters for an Resilience Hub application. If you want to
+	// implement additionalInfo through the Resilience Hub console rather than using an
+	// API call, see Configure the application configuration parameters
+	// (https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html).
+	// Currently, this parameter accepts a key-value mapping (in a string format) of
+	// only one failover region and one associated account. Key: "failover-regions"
+	// Value: "[{"region":"<REGION>", "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
 	//
 	// This member is required.
 	AppTemplateBody *string
@@ -146,8 +167,8 @@ type PutDraftAppVersionTemplateInput struct {
 
 type PutDraftAppVersionTemplateOutput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
-	// for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
+	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more
 	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference guide.

@@ -30,7 +30,9 @@ func (c *Client) GetGroupsForCapacityReservation(ctx context.Context, params *Ge
 
 type GetGroupsForCapacityReservationInput struct {
 
-	// The ID of the Capacity Reservation.
+	// The ID of the Capacity Reservation. If you specify a Capacity Reservation that
+	// is shared with you, the operation returns only Capacity Reservation groups that
+	// you own.
 	//
 	// This member is required.
 	CapacityReservationId *string

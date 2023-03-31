@@ -9,14 +9,14 @@ import (
 // The error that has occurred when attempting to retrieve a batch of Records.
 type BatchGetRecordError struct {
 
-	// The error code of an error that has occured when attempting to retrieve a batch
+	// The error code of an error that has occurred when attempting to retrieve a batch
 	// of Records. For more information on errors, see Errors
 	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_GetRecord.html#API_feature_store_GetRecord_Errors).
 	//
 	// This member is required.
 	ErrorCode *string
 
-	// The error message of an error that has occured when attempting to retrieve a
+	// The error message of an error that has occurred when attempting to retrieve a
 	// record in the batch.
 	//
 	// This member is required.
@@ -70,7 +70,7 @@ type BatchGetRecordResultDetail struct {
 	// This member is required.
 	Record []FeatureValue
 
-	// The value of the record identifer in string format.
+	// The value of the record identifier in string format.
 	//
 	// This member is required.
 	RecordIdentifierValueAsString *string
