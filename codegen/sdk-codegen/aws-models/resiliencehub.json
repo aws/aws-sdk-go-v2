@@ -57,7 +57,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -76,7 +76,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -228,7 +228,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -312,7 +312,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>"
                     }
                 },
                 "appVersion": {
@@ -434,7 +434,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>"
                     }
                 },
                 "appVersion": {
@@ -566,7 +566,7 @@
                 "additionalInfo": {
                     "target": "com.amazonaws.resiliencehub#AdditionalInfoMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n         <note>\n            <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n            <p>Key: <code>\"failover-regions\"</code>\n            </p>\n            <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n            </p>\n         </note>"
+                        "smithy.api#documentation": "<p>Additional configuration parameters for an Resilience Hub application. If you want to implement <code>additionalInfo</code> through the Resilience Hub console rather than using an API call, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html\">Configure the application configuration parameters</a>.</p>\n         <note>\n            <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n            <p>Key: <code>\"failover-regions\"</code>\n            </p>\n            <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n            </p>\n         </note>"
                     }
                 }
             },
@@ -703,7 +703,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1410,9 +1410,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "af-south-1",
                                 "UseDualStack": false,
-                                "Region": "af-south-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1423,9 +1423,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "ap-east-1",
                                 "UseDualStack": false,
-                                "Region": "ap-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1436,9 +1436,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
                                 "UseDualStack": false,
-                                "Region": "ap-northeast-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1449,9 +1449,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
                                 "UseDualStack": false,
-                                "Region": "ap-northeast-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1462,9 +1462,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "ap-south-1",
                                 "UseDualStack": false,
-                                "Region": "ap-south-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1475,9 +1475,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
                                 "UseDualStack": false,
-                                "Region": "ap-southeast-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1488,9 +1488,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
                                 "UseDualStack": false,
-                                "Region": "ap-southeast-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1501,9 +1501,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "ca-central-1",
                                 "UseDualStack": false,
-                                "Region": "ca-central-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1514,9 +1514,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "eu-central-1",
                                 "UseDualStack": false,
-                                "Region": "eu-central-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1527,9 +1527,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "eu-north-1",
                                 "UseDualStack": false,
-                                "Region": "eu-north-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1540,9 +1540,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "eu-south-1",
                                 "UseDualStack": false,
-                                "Region": "eu-south-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1553,9 +1553,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "eu-west-1",
                                 "UseDualStack": false,
-                                "Region": "eu-west-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1566,9 +1566,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "eu-west-2",
                                 "UseDualStack": false,
-                                "Region": "eu-west-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1579,9 +1579,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "eu-west-3",
                                 "UseDualStack": false,
-                                "Region": "eu-west-3"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1592,9 +1592,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "me-south-1",
                                 "UseDualStack": false,
-                                "Region": "me-south-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1605,9 +1605,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "sa-east-1",
                                 "UseDualStack": false,
-                                "Region": "sa-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1618,9 +1618,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1631,9 +1631,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-east-2",
                                 "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1644,9 +1644,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-west-1",
                                 "UseDualStack": false,
-                                "Region": "us-west-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1657,9 +1657,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-west-2",
                                 "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1670,9 +1670,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1683,9 +1683,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1696,9 +1696,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1709,9 +1709,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1722,9 +1722,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "cn-north-1",
                                 "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1735,9 +1735,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1748,9 +1748,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "cn-north-1",
                                 "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1761,9 +1761,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1774,9 +1774,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1787,9 +1787,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1800,9 +1800,20 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1813,9 +1824,20 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1826,9 +1848,20 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1839,9 +1872,20 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1852,9 +1896,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1865,9 +1909,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1879,8 +1923,8 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1890,9 +1934,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1902,10 +1946,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -2200,7 +2250,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Resilience Hub application. An Resilience Hub application is a collection of Amazon Web Services\n      resources structured to prevent and recover Amazon Web Services application disruptions. To describe a\n      Resilience Hub application, you provide an application name, resources from one or more–up to\n      five–CloudFormation stacks, and an appropriate resiliency policy.</p>\n         <p>After you create an Resilience Hub application, you publish it so that you can run a resiliency\n      assessment on it. You can then use recommendations from the assessment to improve resiliency\n      by running another assessment, comparing results, and then iterating the process until you\n      achieve your goals for recovery time objective (RTO) and recovery point objective\n      (RPO).</p>",
+                "smithy.api#documentation": "<p>Creates an Resilience Hub application. An Resilience Hub application is a\n      collection of Amazon Web Services resources structured to prevent and recover Amazon Web Services application disruptions. To describe a Resilience Hub application, you provide an\n      application name, resources from one or more–up to 20–CloudFormation stacks, and an appropriate\n      resiliency policy.</p>\n         <p>After you create an Resilience Hub application, you publish it so that you can run a resiliency\n      assessment on it. You can then use recommendations from the assessment to improve resiliency\n      by running another assessment, comparing results, and then iterating the process until you\n      achieve your goals for recovery time objective (RTO) and recovery point objective\n      (RPO).</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/create-app",
@@ -2309,7 +2359,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2354,14 +2404,14 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "appVersion": {
                     "target": "com.amazonaws.resiliencehub#EntityVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Resilience Hub application version.</p>",
+                        "smithy.api#documentation": "<p>The Resilience Hub application version.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2419,7 +2469,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2466,7 +2516,7 @@
                 "appComponents": {
                     "target": "com.amazonaws.resiliencehub#AppComponentNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of Application Components that this resource belongs to. If an Application Component is not part of the AWS Resilience Hub application, it will be added.</p>",
+                        "smithy.api#documentation": "<p>The list of Application Components that this resource belongs to. If an Application Component is not part of the Resilience Hub application, it will be added.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2491,14 +2541,14 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "appVersion": {
                     "target": "com.amazonaws.resiliencehub#EntityVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Resilience Hub application version.</p>",
+                        "smithy.api#documentation": "<p>The Resilience Hub application version.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2903,7 +2953,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2940,7 +2990,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>"
                     }
                 },
                 "appInputSource": {
@@ -2957,7 +3007,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2982,7 +3032,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3031,7 +3081,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3057,14 +3107,14 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "appVersion": {
                     "target": "com.amazonaws.resiliencehub#EntityVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Resilience Hub application version.</p>",
+                        "smithy.api#documentation": "<p>The Resilience Hub application version.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3119,7 +3169,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3168,14 +3218,14 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "appVersion": {
                     "target": "com.amazonaws.resiliencehub#EntityVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Resilience Hub application version.</p>",
+                        "smithy.api#documentation": "<p>The Resilience Hub application version.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3425,7 +3475,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3520,14 +3570,14 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "appVersion": {
                     "target": "com.amazonaws.resiliencehub#EntityVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Resilience Hub application version.</p>",
+                        "smithy.api#documentation": "<p>The Resilience Hub application version.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3546,14 +3596,14 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "appVersion": {
                     "target": "com.amazonaws.resiliencehub#EntityVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Resilience Hub application version.</p>",
+                        "smithy.api#documentation": "<p>The Resilience Hub application version.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3571,14 +3621,14 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "appVersion": {
                     "target": "com.amazonaws.resiliencehub#EntityVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Resilience Hub application version.</p>",
+                        "smithy.api#documentation": "<p>The Resilience Hub application version.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3627,14 +3677,14 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "appVersion": {
                     "target": "com.amazonaws.resiliencehub#EntityVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Resilience Hub application version.</p>",
+                        "smithy.api#documentation": "<p>The Resilience Hub application version.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3676,14 +3726,14 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "appVersion": {
                     "target": "com.amazonaws.resiliencehub#EntityVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Resilience Hub application version.</p>",
+                        "smithy.api#documentation": "<p>The Resilience Hub application version.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3735,7 +3785,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3760,7 +3810,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3799,21 +3849,21 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "appVersion": {
                     "target": "com.amazonaws.resiliencehub#EntityVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Resilience Hub application version.</p>",
+                        "smithy.api#documentation": "<p>The Resilience Hub application version.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "additionalInfo": {
                     "target": "com.amazonaws.resiliencehub#AdditionalInfoMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n         <note>\n            <p>Currently, this parameter supports only failover region and account.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Additional configuration parameters for an Resilience Hub application. If you want to implement <code>additionalInfo</code> through the Resilience Hub console rather than using an API call, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html\">Configure the application configuration parameters</a>.</p>\n         <note>\n            <p>Currently, this parameter supports only failover region and account.</p>\n         </note>"
                     }
                 }
             }
@@ -3858,7 +3908,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3877,7 +3927,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3891,7 +3941,7 @@
                 "appTemplateBody": {
                     "target": "com.amazonaws.resiliencehub#AppTemplateBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>A JSON string that provides information about your application structure. To learn more\n      about the <code>appTemplateBody</code> template, see the sample template provided in the\n      <i>Examples</i> section.</p>\n         <p>The <code>appTemplateBody</code> JSON string has the following structure:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>resources</code>\n                  </b>\n               </p>\n               <p>The list of logical resources that needs to be included in the Resilience Hub application.</p>\n               <p>Type: Array</p>\n               <note>\n                  <p>Don't add the resources that you want to exclude.</p>\n               </note>\n               <p>Each <code>resources</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>\n                           <code>logicalResourceId</code>\n                        </i>\n                     </p>\n                     <p>The logical identifier of the resource.</p>\n                     <p>Type: Object</p>\n                     <p>Each <code>logicalResourceId</code> object includes the following fields:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>identifier</code>\n                           </p>\n                           <p>The identifier of the resource.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>logicalStackName</code>\n                           </p>\n                           <p>The name of the CloudFormation stack this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>resourceGroupName</code>\n                           </p>\n                           <p>The name of the resource group this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>terraformSourceName</code>\n                           </p>\n                           <p>The name of the Terraform S3 state file this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <i>\n                           <code>type</code>\n                        </i>\n                     </p>\n                     <p>The type of resource.</p>\n                     <p>Type: string</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>\n                           <code>name</code>\n                        </i>\n                     </p>\n                     <p>The name of the resource.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>additionalInfo</code>\n                     </p>\n                     <p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n                     <note>\n                        <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                        <p>Key: <code>\"failover-regions\"</code>\n                        </p>\n                        <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                        </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>appComponents</code>\n                  </b>\n               </p>\n               <p>The list of Application Components that this resource belongs to. If an Application Component is not part of the AWS Resilience Hub application, it will be added.</p>\n               <p>Type: Array</p>\n               <p>Each <code>appComponents</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>name</code>\n                     </p>\n                     <p>The name of the Application Component.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>type</code>\n                     </p>\n                     <p>The type of Application Component. For more information about the types of Application Component, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html\">Grouping resources in an AppComponent</a>.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>resourceNames</code>\n                     </p>\n                     <p>The list of included resources that are assigned to the Application Component.</p>\n                     <p>Type: Array of strings</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>additionalInfo</code>\n                     </p>\n                     <p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n                     <note>\n                        <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                        <p>Key: <code>\"failover-regions\"</code>\n                        </p>\n                        <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                        </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>excludedResources</code>\n                  </b>\n               </p>\n               <p>The list of logical resource identifiers to be excluded from the application.</p>\n               <p>Type: Array</p>\n               <note>\n                  <p>Don't add the resources that you want to include.</p>\n               </note>\n               <p>Each <code>excludedResources</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>\n                           <code>logicalResourceIds</code>\n                        </i>\n                     </p>\n                     <p>The logical identifier of the resource.</p>\n                     <p>Type: Object</p>\n                     <note>\n                        <p>You can configure only one of the following fields:</p>\n                        <ul>\n                           <li>\n                              <p>\n                                 <code>logicalStackName</code>\n                              </p>\n                           </li>\n                           <li>\n                              <p>\n                                 <code>resourceGroupName</code>\n                              </p>\n                           </li>\n                           <li>\n                              <p>\n                                 <code>terraformSourceName</code>\n                              </p>\n                           </li>\n                        </ul>\n                     </note>\n                     <p>Each <code>logicalResourceIds</code> object includes the following fields:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>identifier</code>\n                           </p>\n                           <p>The identifier of the resource.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>logicalStackName</code>\n                           </p>\n                           <p>The name of the CloudFormation stack this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>resourceGroupName</code>\n                           </p>\n                           <p>The name of the resource group this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>terraformSourceName</code>\n                           </p>\n                           <p>The name of the Terraform S3 state file this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>version</code>\n                  </b>\n               </p>\n               <p>The AWS Resilience Hub application version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>additionalInfo</code>\n               </p>\n               <p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n               <note>\n                  <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                  <p>Key: <code>\"failover-regions\"</code>\n                  </p>\n                  <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                  </p>\n               </note>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A JSON string that provides information about your application structure. To learn more\n      about the <code>appTemplateBody</code> template, see the sample template provided in the\n      <i>Examples</i> section.</p>\n         <p>The <code>appTemplateBody</code> JSON string has the following structure:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>resources</code>\n                  </b>\n               </p>\n               <p>The list of logical resources that\n          must\n          be included in the Resilience Hub application.</p>\n               <p>Type: Array</p>\n               <note>\n                  <p>Don't add the resources that you want to exclude.</p>\n               </note>\n               <p>Each <code>resources</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>\n                           <code>logicalResourceId</code>\n                        </i>\n                     </p>\n                     <p>The logical identifier of the resource.</p>\n                     <p>Type: Object</p>\n                     <p>Each <code>logicalResourceId</code> object includes the following fields:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>identifier</code>\n                           </p>\n                           <p>The identifier of the resource.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>logicalStackName</code>\n                           </p>\n                           <p>The name of the CloudFormation stack this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>resourceGroupName</code>\n                           </p>\n                           <p>The name of the resource group this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>terraformSourceName</code>\n                           </p>\n                           <p>The name of the Terraform S3 state file this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>eksSourceName</code>\n                           </p>\n                           <p>The name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.</p>\n                           <note>\n                              <p>This parameter accepts values in \"eks-cluster/namespace\" format.</p>\n                           </note>\n                           <p>Type: String</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <i>\n                           <code>type</code>\n                        </i>\n                     </p>\n                     <p>The type of resource.</p>\n                     <p>Type: string</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>\n                           <code>name</code>\n                        </i>\n                     </p>\n                     <p>The name of the resource.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>additionalInfo</code>\n                     </p>\n                     <p>Additional configuration parameters for an Resilience Hub application. If you want to implement <code>additionalInfo</code> through the Resilience Hub console rather than using an API call, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html\">Configure the application configuration parameters</a>.</p>\n                     <note>\n                        <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                        <p>Key: <code>\"failover-regions\"</code>\n                        </p>\n                        <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                        </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>appComponents</code>\n                  </b>\n               </p>\n               <p>The list of Application Components that this resource belongs to. If an Application Component is not part of the Resilience Hub application, it will be added.</p>\n               <p>Type: Array</p>\n               <p>Each <code>appComponents</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>name</code>\n                     </p>\n                     <p>The name of the Application Component.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>type</code>\n                     </p>\n                     <p>The type of Application Component. For more information about the types of Application Component, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html\">Grouping resources in an AppComponent</a>.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>resourceNames</code>\n                     </p>\n                     <p>The list of included resources that are assigned to the Application Component.</p>\n                     <p>Type: Array of strings</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>additionalInfo</code>\n                     </p>\n                     <p>Additional configuration parameters for an Resilience Hub application. If you want to implement <code>additionalInfo</code> through the Resilience Hub console rather than using an API call, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html\">Configure the application configuration parameters</a>.</p>\n                     <note>\n                        <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                        <p>Key: <code>\"failover-regions\"</code>\n                        </p>\n                        <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                        </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>excludedResources</code>\n                  </b>\n               </p>\n               <p>The list of logical resource identifiers to be excluded from the application.</p>\n               <p>Type: Array</p>\n               <note>\n                  <p>Don't add the resources that you want to include.</p>\n               </note>\n               <p>Each <code>excludedResources</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>\n                           <code>logicalResourceIds</code>\n                        </i>\n                     </p>\n                     <p>The logical identifier of the resource.</p>\n                     <p>Type: Object</p>\n                     <note>\n                        <p>You can configure only one of the following fields:</p>\n                        <ul>\n                           <li>\n                              <p>\n                                 <code>logicalStackName</code>\n                              </p>\n                           </li>\n                           <li>\n                              <p>\n                                 <code>resourceGroupName</code>\n                              </p>\n                           </li>\n                           <li>\n                              <p>\n                                 <code>terraformSourceName</code>\n                              </p>\n                           </li>\n                           <li>\n                              <p>\n                                 <code>eksSourceName</code>\n                              </p>\n                           </li>\n                        </ul>\n                     </note>\n                     <p>Each <code>logicalResourceIds</code> object includes the following fields:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>identifier</code>\n                           </p>\n                           <p>The identifier of the resource.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>logicalStackName</code>\n                           </p>\n                           <p>The name of the CloudFormation stack this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>resourceGroupName</code>\n                           </p>\n                           <p>The name of the resource group this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>terraformSourceName</code>\n                           </p>\n                           <p>The name of the Terraform S3 state file this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>eksSourceName</code>\n                           </p>\n                           <p>The name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.</p>\n                           <note>\n                              <p>This parameter accepts values in \"eks-cluster/namespace\" format.</p>\n                           </note>\n                           <p>Type: String</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>version</code>\n                  </b>\n               </p>\n               <p>The Resilience Hub application version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>additionalInfo</code>\n               </p>\n               <p>Additional configuration parameters for an Resilience Hub application. If you want to implement <code>additionalInfo</code> through the Resilience Hub console rather than using an API call, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html\">Configure the application configuration parameters</a>.</p>\n               <note>\n                  <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                  <p>Key: <code>\"failover-regions\"</code>\n                  </p>\n                  <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                  </p>\n               </note>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3937,7 +3987,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3949,7 +3999,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4394,7 +4444,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4407,7 +4457,7 @@
                 "terraformSources": {
                     "target": "com.amazonaws.resiliencehub#TerraformSourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A list of terraform file s3 URLs you need to import.\n    </p>"
+                        "smithy.api#documentation": "<p> A list of terraform file s3 URLs you need to import. </p>"
                     }
                 },
                 "importStrategy": {
@@ -4430,7 +4480,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4614,7 +4664,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#httpQuery": "appArn"
                     }
                 },
@@ -4894,14 +4944,14 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "appVersion": {
                     "target": "com.amazonaws.resiliencehub#EntityVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Resilience Hub application version.</p>",
+                        "smithy.api#documentation": "<p>The Resilience Hub application version.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4985,7 +5035,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5005,7 +5055,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.resiliencehub#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of Application Components to be displayed per AWS Resilience Hub application version.</p>"
+                        "smithy.api#documentation": "<p>Maximum number of Application Components to be displayed per Resilience Hub application version.</p>"
                     }
                 }
             }
@@ -5016,14 +5066,14 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "appVersion": {
                     "target": "com.amazonaws.resiliencehub#EntityVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Resilience Hub application version.</p>",
+                        "smithy.api#documentation": "<p>The Resilience Hub application version.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5086,7 +5136,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5177,7 +5227,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5275,7 +5325,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5375,7 +5425,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#httpQuery": "appArn"
                     }
                 }
@@ -5944,7 +5994,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6108,7 +6158,7 @@
                 "additionalInfo": {
                     "target": "com.amazonaws.resiliencehub#AdditionalInfoMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n         <note>\n            <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n            <p>Key: <code>\"failover-regions\"</code>\n            </p>\n            <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n            </p>\n         </note>"
+                        "smithy.api#documentation": "<p>Additional configuration parameters for an Resilience Hub application. If you want to implement <code>additionalInfo</code> through the Resilience Hub console rather than using an API call, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html\">Configure the application configuration parameters</a>.</p>\n         <note>\n            <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n            <p>Key: <code>\"failover-regions\"</code>\n            </p>\n            <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n            </p>\n         </note>"
                     }
                 },
                 "excluded": {
@@ -6205,7 +6255,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6217,7 +6267,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6272,14 +6322,14 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "appTemplateBody": {
                     "target": "com.amazonaws.resiliencehub#AppTemplateBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>A JSON string that provides information about your application structure. To learn more\n      about the <code>appTemplateBody</code> template, see the sample template provided in the\n      <i>Examples</i> section.</p>\n         <p>The <code>appTemplateBody</code> JSON string has the following structure:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>resources</code>\n                  </b>\n               </p>\n               <p>The list of logical resources that needs to be included in the Resilience Hub application.</p>\n               <p>Type: Array</p>\n               <note>\n                  <p>Don't add the resources that you want to exclude.</p>\n               </note>\n               <p>Each <code>resources</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>\n                           <code>logicalResourceId</code>\n                        </i>\n                     </p>\n                     <p>The logical identifier of the resource.</p>\n                     <p>Type: Object</p>\n                     <p>Each <code>logicalResourceId</code> object includes the following fields:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>identifier</code>\n                           </p>\n                           <p>The identifier of the resource.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>logicalStackName</code>\n                           </p>\n                           <p>The name of the CloudFormation stack this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>resourceGroupName</code>\n                           </p>\n                           <p>The name of the resource group this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>terraformSourceName</code>\n                           </p>\n                           <p>The name of the Terraform S3 state file this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <i>\n                           <code>type</code>\n                        </i>\n                     </p>\n                     <p>The type of resource.</p>\n                     <p>Type: string</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>\n                           <code>name</code>\n                        </i>\n                     </p>\n                     <p>The name of the resource.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>additionalInfo</code>\n                     </p>\n                     <p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n                     <note>\n                        <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                        <p>Key: <code>\"failover-regions\"</code>\n                        </p>\n                        <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                        </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>appComponents</code>\n                  </b>\n               </p>\n               <p>The list of Application Components that this resource belongs to. If an Application Component is not part of the AWS Resilience Hub application, it will be added.</p>\n               <p>Type: Array</p>\n               <p>Each <code>appComponents</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>name</code>\n                     </p>\n                     <p>The name of the Application Component.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>type</code>\n                     </p>\n                     <p>The type of Application Component. For more information about the types of Application Component, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html\">Grouping resources in an AppComponent</a>.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>resourceNames</code>\n                     </p>\n                     <p>The list of included resources that are assigned to the Application Component.</p>\n                     <p>Type: Array of strings</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>additionalInfo</code>\n                     </p>\n                     <p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n                     <note>\n                        <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                        <p>Key: <code>\"failover-regions\"</code>\n                        </p>\n                        <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                        </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>excludedResources</code>\n                  </b>\n               </p>\n               <p>The list of logical resource identifiers to be excluded from the application.</p>\n               <p>Type: Array</p>\n               <note>\n                  <p>Don't add the resources that you want to include.</p>\n               </note>\n               <p>Each <code>excludedResources</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>\n                           <code>logicalResourceIds</code>\n                        </i>\n                     </p>\n                     <p>The logical identifier of the resource.</p>\n                     <p>Type: Object</p>\n                     <note>\n                        <p>You can configure only one of the following fields:</p>\n                        <ul>\n                           <li>\n                              <p>\n                                 <code>logicalStackName</code>\n                              </p>\n                           </li>\n                           <li>\n                              <p>\n                                 <code>resourceGroupName</code>\n                              </p>\n                           </li>\n                           <li>\n                              <p>\n                                 <code>terraformSourceName</code>\n                              </p>\n                           </li>\n                        </ul>\n                     </note>\n                     <p>Each <code>logicalResourceIds</code> object includes the following fields:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>identifier</code>\n                           </p>\n                           <p>The identifier of the resource.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>logicalStackName</code>\n                           </p>\n                           <p>The name of the CloudFormation stack this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>resourceGroupName</code>\n                           </p>\n                           <p>The name of the resource group this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>terraformSourceName</code>\n                           </p>\n                           <p>The name of the Terraform S3 state file this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>version</code>\n                  </b>\n               </p>\n               <p>The AWS Resilience Hub application version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>additionalInfo</code>\n               </p>\n               <p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n               <note>\n                  <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                  <p>Key: <code>\"failover-regions\"</code>\n                  </p>\n                  <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                  </p>\n               </note>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A JSON string that provides information about your application structure. To learn more\n      about the <code>appTemplateBody</code> template, see the sample template provided in the\n        <i>Examples</i> section.</p>\n         <p>The <code>appTemplateBody</code> JSON string has the following structure:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>resources</code>\n                  </b>\n               </p>\n               <p>The list of logical resources that\n          must\n          be included in the Resilience Hub application.</p>\n               <p>Type: Array</p>\n               <note>\n                  <p>Don't add the resources that you want to exclude.</p>\n               </note>\n               <p>Each <code>resources</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>\n                           <code>logicalResourceId</code>\n                        </i>\n                     </p>\n                     <p>The logical identifier of the resource.</p>\n                     <p>Type: Object</p>\n                     <p>Each <code>logicalResourceId</code> object includes the following fields:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>identifier</code>\n                           </p>\n                           <p>The identifier of the resource.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>logicalStackName</code>\n                           </p>\n                           <p>The name of the CloudFormation stack this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>resourceGroupName</code>\n                           </p>\n                           <p>The name of the resource group this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>terraformSourceName</code>\n                           </p>\n                           <p>The name of the Terraform S3 state file this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>eksSourceName</code>\n                           </p>\n                           <p>The name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.</p>\n                           <note>\n                              <p>This parameter accepts values in \"eks-cluster/namespace\" format.</p>\n                           </note>\n                           <p>Type: String</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <i>\n                           <code>type</code>\n                        </i>\n                     </p>\n                     <p>The type of resource.</p>\n                     <p>Type: string</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>\n                           <code>name</code>\n                        </i>\n                     </p>\n                     <p>The name of the resource.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>additionalInfo</code>\n                     </p>\n                     <p>Additional configuration parameters for an Resilience Hub application. If you want to implement <code>additionalInfo</code> through the Resilience Hub console rather than using an API call, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html\">Configure the application configuration parameters</a>.</p>\n                     <note>\n                        <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                        <p>Key: <code>\"failover-regions\"</code>\n                        </p>\n                        <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                        </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>appComponents</code>\n                  </b>\n               </p>\n               <p>The list of Application Components that this resource belongs to. If an Application Component is not part of the Resilience Hub application, it will be added.</p>\n               <p>Type: Array</p>\n               <p>Each <code>appComponents</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>name</code>\n                     </p>\n                     <p>The name of the Application Component.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>type</code>\n                     </p>\n                     <p>The type of Application Component. For more information about the types of Application Component, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html\">Grouping resources in an AppComponent</a>.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>resourceNames</code>\n                     </p>\n                     <p>The list of included resources that are assigned to the Application Component.</p>\n                     <p>Type: Array of strings</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>additionalInfo</code>\n                     </p>\n                     <p>Additional configuration parameters for an Resilience Hub application. If you want to implement <code>additionalInfo</code> through the Resilience Hub console rather than using an API call, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html\">Configure the application configuration parameters</a>.</p>\n                     <note>\n                        <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                        <p>Key: <code>\"failover-regions\"</code>\n                        </p>\n                        <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                        </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>excludedResources</code>\n                  </b>\n               </p>\n               <p>The list of logical resource identifiers to be excluded from the application.</p>\n               <p>Type: Array</p>\n               <note>\n                  <p>Don't add the resources that you want to include.</p>\n               </note>\n               <p>Each <code>excludedResources</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>\n                           <code>logicalResourceIds</code>\n                        </i>\n                     </p>\n                     <p>The logical identifier of the resource.</p>\n                     <p>Type: Object</p>\n                     <note>\n                        <p>You can configure only one of the following fields:</p>\n                        <ul>\n                           <li>\n                              <p>\n                                 <code>logicalStackName</code>\n                              </p>\n                           </li>\n                           <li>\n                              <p>\n                                 <code>resourceGroupName</code>\n                              </p>\n                           </li>\n                           <li>\n                              <p>\n                                 <code>terraformSourceName</code>\n                              </p>\n                           </li>\n                           <li>\n                              <p>\n                                 <code>eksSourceName</code>\n                              </p>\n                           </li>\n                        </ul>\n                     </note>\n                     <p>Each <code>logicalResourceIds</code> object includes the following fields:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>identifier</code>\n                           </p>\n                           <p>The identifier of the resource.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>logicalStackName</code>\n                           </p>\n                           <p>The name of the CloudFormation stack this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>resourceGroupName</code>\n                           </p>\n                           <p>The name of the resource group this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>terraformSourceName</code>\n                           </p>\n                           <p>The name of the Terraform S3 state file this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>eksSourceName</code>\n                           </p>\n                           <p>The name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.</p>\n                           <note>\n                              <p>This parameter accepts values in \"eks-cluster/namespace\" format.</p>\n                           </note>\n                           <p>Type: String</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>version</code>\n                  </b>\n               </p>\n               <p>The Resilience Hub application version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>additionalInfo</code>\n               </p>\n               <p>Additional configuration parameters for an Resilience Hub application. If you want to implement <code>additionalInfo</code> through the Resilience Hub console rather than using an API call, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html\">Configure the application configuration parameters</a>.</p>\n               <note>\n                  <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                  <p>Key: <code>\"failover-regions\"</code>\n                  </p>\n                  <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                  </p>\n               </note>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6291,7 +6341,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>"
                     }
                 },
                 "appVersion": {
@@ -6440,7 +6490,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>"
                     }
                 },
                 "recommendationIds": {
@@ -6603,7 +6653,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6651,7 +6701,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>"
                     }
                 },
                 "appVersion": {
@@ -6854,7 +6904,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6873,7 +6923,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7026,7 +7076,7 @@
                 "mappingType": {
                     "target": "com.amazonaws.resiliencehub#ResourceMappingType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of resource mapping.</p>\n         <dl>\n            <dt>AppRegistryApp</dt>\n            <dd>\n               <p>The resource is mapped to another application. The name of the application is\n            contained in the <code>appRegistryAppName</code> property.</p>\n            </dd>\n            <dt>CfnStack</dt>\n            <dd>\n               <p>The resource is mapped to a CloudFormation stack. The name of the CloudFormation stack is contained in\n            the <code>logicalStackName</code> property.</p>\n            </dd>\n            <dt>Resource</dt>\n            <dd>\n               <p>The resource is mapped to another resource. The name of the resource is contained in\n            the <code>resourceName</code> property.</p>\n            </dd>\n            <dt>ResourceGroup</dt>\n            <dd>\n               <p>The resource is mapped to an Resource Groups. The name of the resource group is\n            contained in the <code>resourceGroupName</code> property.</p>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>Specifies the type of resource mapping.</p>\n         <dl>\n            <dt>AppRegistryApp</dt>\n            <dd>\n               <p>The resource is mapped to another application. The name of the application is\n            contained in the <code>appRegistryAppName</code> property.</p>\n            </dd>\n            <dt>CfnStack</dt>\n            <dd>\n               <p>The resource is mapped to a CloudFormation stack. The name of the CloudFormation stack is contained in\n            the <code>logicalStackName</code> property.</p>\n            </dd>\n            <dt>Resource</dt>\n            <dd>\n               <p>The resource is mapped to another resource. The name of the resource is contained in\n            the <code>resourceName</code> property.</p>\n            </dd>\n            <dt>ResourceGroup</dt>\n            <dd>\n               <p>The resource is mapped to Resource Groups. The name of the resource group is\n            contained in the <code>resourceGroupName</code> property.</p>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7330,7 +7380,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7744,7 +7794,7 @@
                 "unsupportedResourceStatus": {
                     "target": "com.amazonaws.resiliencehub#String255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of unsupported resource.</p>"
+                        "smithy.api#documentation": "<p>The status of the\n      unsupported resource.</p>"
                     }
                 }
             },
@@ -7860,7 +7910,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7982,7 +8032,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8019,14 +8069,14 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "appVersion": {
                     "target": "com.amazonaws.resiliencehub#EntityVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Resilience Hub application version.</p>",
+                        "smithy.api#documentation": "<p>The Resilience Hub application version.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8044,14 +8094,14 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "additionalInfo": {
                     "target": "com.amazonaws.resiliencehub#AdditionalInfoMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n         <note>\n            <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n            <p>Key: <code>\"failover-regions\"</code>\n            </p>\n            <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n            </p>\n         </note>"
+                        "smithy.api#documentation": "<p>Additional configuration parameters for an Resilience Hub application. If you want to implement <code>additionalInfo</code> through the Resilience Hub console rather than using an API call, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html\">Configure the application configuration parameters</a>.</p>\n         <note>\n            <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n            <p>Key: <code>\"failover-regions\"</code>\n            </p>\n            <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n            </p>\n         </note>"
                     }
                 }
             }
@@ -8102,7 +8152,7 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8145,7 +8195,7 @@
                 "appComponents": {
                     "target": "com.amazonaws.resiliencehub#AppComponentNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of Application Components that this resource belongs to. If an Application Component is not part of the AWS Resilience Hub application, it will be added.</p>"
+                        "smithy.api#documentation": "<p>The list of Application Components that this resource belongs to. If an Application Component is not part of the Resilience Hub application, it will be added.</p>"
                     }
                 },
                 "additionalInfo": {
@@ -8168,14 +8218,14 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "appVersion": {
                     "target": "com.amazonaws.resiliencehub#EntityVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Resilience Hub application version.</p>",
+                        "smithy.api#documentation": "<p>The Resilience Hub application version.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8193,21 +8243,21 @@
                 "appArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: \narn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "appVersion": {
                     "target": "com.amazonaws.resiliencehub#EntityVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Resilience Hub application version.</p>",
+                        "smithy.api#documentation": "<p>The Resilience Hub application version.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "additionalInfo": {
                     "target": "com.amazonaws.resiliencehub#AdditionalInfoMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n         <note>\n            <p>Currently, this parameter supports only failover region and account.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Additional configuration parameters for an Resilience Hub application. If you want to implement <code>additionalInfo</code> through the Resilience Hub console rather than using an API call, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html\">Configure the application configuration parameters</a>.</p>\n         <note>\n            <p>Currently, this parameter supports only failover region and account.</p>\n         </note>"
                     }
                 }
             }
