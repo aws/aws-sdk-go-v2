@@ -21,6 +21,7 @@
         "api_op_DisassociateLenses.go",
         "api_op_ExportLens.go",
         "api_op_GetAnswer.go",
+        "api_op_GetConsolidatedReport.go",
         "api_op_GetLens.go",
         "api_op_GetLensReview.go",
         "api_op_GetLensReviewReport.go",

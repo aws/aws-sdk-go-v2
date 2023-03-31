@@ -95,7 +95,7 @@ type GetVectorEnrichmentJobOutput struct {
 	// The export status of the Vector Enrichment job being initiated.
 	ExportStatus types.VectorEnrichmentJobExportStatus
 
-	// The Amazon Key Management Service (KMS) key ID for server-side encryption.
+	// The Key Management Service key ID for server-side encryption.
 	KmsKeyId *string
 
 	// Each tag consists of a key and a value.

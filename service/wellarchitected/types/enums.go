@@ -254,6 +254,22 @@ func (LensType) Values() []LensType {
 	}
 }
 
+type MetricType string
+
+// Enum values for MetricType
+const (
+	MetricTypeWorkload MetricType = "WORKLOAD"
+)
+
+// Values returns all known values for MetricType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MetricType) Values() []MetricType {
+	return []MetricType{
+		"WORKLOAD",
+	}
+}
+
 type NotificationType string
 
 // Enum values for NotificationType
@@ -305,6 +321,24 @@ func (PermissionType) Values() []PermissionType {
 	return []PermissionType{
 		"READONLY",
 		"CONTRIBUTOR",
+	}
+}
+
+type ReportFormat string
+
+// Enum values for ReportFormat
+const (
+	ReportFormatPdf  ReportFormat = "PDF"
+	ReportFormatJson ReportFormat = "JSON"
+)
+
+// Values returns all known values for ReportFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ReportFormat) Values() []ReportFormat {
+	return []ReportFormat{
+		"PDF",
+		"JSON",
 	}
 }
 

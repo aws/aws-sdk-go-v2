@@ -14,8 +14,8 @@ import (
 
 // Creates a thesaurus for an index. The thesaurus contains a list of synonyms in
 // Solr format. For an example of adding a thesaurus file to an index, see Adding
-// custom synonyms to an index (https://docs.aws.amazon.com/kendra/latest/dg/index-synonyms-adding-thesaurus-file.html)
-// .
+// custom synonyms to an index
+// (https://docs.aws.amazon.com/kendra/latest/dg/index-synonyms-adding-thesaurus-file.html).
 func (c *Client) CreateThesaurus(ctx context.Context, params *CreateThesaurusInput, optFns ...func(*Options)) (*CreateThesaurusOutput, error) {
 	if params == nil {
 		params = &CreateThesaurusInput{}
@@ -43,8 +43,10 @@ type CreateThesaurusInput struct {
 	// This member is required.
 	Name *string
 
-	// An IAM role that gives Amazon Kendra permissions to access thesaurus file
-	// specified in SourceS3Path .
+	// The Amazon Resource Name (ARN) of an IAM role with permission to access your S3
+	// bucket that contains the thesaurus file. For more information, see IAM access
+	// roles for Amazon Kendra
+	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
 	//
 	// This member is required.
 	RoleArn *string
@@ -54,16 +56,18 @@ type CreateThesaurusInput struct {
 	// This member is required.
 	SourceS3Path *types.S3Path
 
-	// A token that you provide to identify the request to create a thesaurus.
-	// Multiple calls to the CreateThesaurus API with the same client token will
-	// create only one thesaurus.
+	// A token that you provide to identify the request to create a thesaurus. Multiple
+	// calls to the CreateThesaurus API with the same client token will create only one
+	// thesaurus.
 	ClientToken *string
 
 	// A description for the thesaurus.
 	Description *string
 
-	// A list of key-value pairs that identify the thesaurus. You can use the tags to
-	// identify and organize your resources and to control access to resources.
+	// A list of key-value pairs that identify or categorize the thesaurus. You can
+	// also use tags to help control access to the thesaurus. Tag keys and values can
+	// consist of Unicode letters, digits, white space, and any of the following
+	// symbols: _ . : / = + - @.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

@@ -48,9 +48,9 @@ type ListInfrastructureConfigurationsOutput struct {
 	// The list of infrastructure configurations.
 	InfrastructureConfigurationSummaryList []types.InfrastructureConfigurationSummary
 
-	// The next token used for paginated responses. When this is not empty, there are
-	// additional elements that the service has not included in this request. Use this
-	// token with the next request to retrieve additional objects.
+	// The next token used for paginated responses. When this field isn't empty, there
+	// are additional elements that the service has'ot included in this request. Use
+	// this token with the next request to retrieve additional objects.
 	NextToken *string
 
 	// The request ID that uniquely identifies this request.

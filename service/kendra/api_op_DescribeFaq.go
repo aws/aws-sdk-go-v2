@@ -45,7 +45,7 @@ type DescribeFaqInput struct {
 
 type DescribeFaqOutput struct {
 
-	// The date and time that the FAQ was created.
+	// The Unix timestamp when the FAQ was created.
 	CreatedAt *time.Time
 
 	// The description of the FAQ that you provided when it was created.
@@ -83,7 +83,7 @@ type DescribeFaqOutput struct {
 	// The status of the FAQ. It is ready to use when the status is ACTIVE .
 	Status types.FaqStatus
 
-	// The date and time that the FAQ was last updated.
+	// The Unix timestamp when the FAQ was last updated.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

@@ -436,6 +436,10 @@ type ClusterStateChangeReason struct {
 // The detailed status of the cluster.
 type ClusterStatus struct {
 
+	// A list of tuples that provide information about the errors that caused a cluster
+	// termination. This structure may have up to 10 different ErrorDetail tuples.
+	ErrorDetails []ErrorDetail
+
 	// The current state of the cluster.
 	State ClusterState
 
@@ -708,6 +712,23 @@ type Ec2InstanceAttributes struct {
 	// The identifier of the Amazon EC2 security group for the Amazon EMR service to
 	// access clusters in VPC private subnets.
 	ServiceAccessSecurityGroup *string
+
+	noSmithyDocumentSerde
+}
+
+// A tuple that provides information about an error that caused a cluster to
+// terminate.
+type ErrorDetail struct {
+
+	// The name or code that's associated with the error.
+	ErrorCode *string
+
+	// A list of key value pairs that provide contextual information to explain why the
+	// error may have occured.
+	ErrorData []map[string]string
+
+	// A message describing the error that occured.
+	ErrorMessage *string
 
 	noSmithyDocumentSerde
 }

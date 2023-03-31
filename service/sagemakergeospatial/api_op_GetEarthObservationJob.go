@@ -87,10 +87,10 @@ type GetEarthObservationJobOutput struct {
 	// The status of the Earth Observation job.
 	ExportStatus types.EarthObservationJobExportStatus
 
-	// The Amazon Key Management Service (KMS) key ID for server-side encryption.
+	// The Key Management Service key ID for server-side encryption.
 	KmsKeyId *string
 
-	//
+	// Bands available in the output of an operation.
 	OutputBands []types.OutputBand
 
 	// Each tag consists of a key and a value.

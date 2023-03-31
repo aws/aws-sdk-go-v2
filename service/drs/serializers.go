@@ -154,6 +154,11 @@ func awsRestjson1_serializeOpDocumentCreateReplicationConfigurationTemplateInput
 		ok.Boolean(*v.AssociateDefaultSecurityGroup)
 	}
 
+	if v.AutoReplicateNewDisks != nil {
+		ok := object.Key("autoReplicateNewDisks")
+		ok.Boolean(*v.AutoReplicateNewDisks)
+	}
+
 	{
 		ok := object.Key("bandwidthThrottling")
 		ok.Long(v.BandwidthThrottling)
@@ -2532,6 +2537,11 @@ func awsRestjson1_serializeOpDocumentUpdateReplicationConfigurationInput(v *Upda
 		ok.Boolean(*v.AssociateDefaultSecurityGroup)
 	}
 
+	if v.AutoReplicateNewDisks != nil {
+		ok := object.Key("autoReplicateNewDisks")
+		ok.Boolean(*v.AutoReplicateNewDisks)
+	}
+
 	if v.BandwidthThrottling != 0 {
 		ok := object.Key("bandwidthThrottling")
 		ok.Long(v.BandwidthThrottling)
@@ -2686,6 +2696,11 @@ func awsRestjson1_serializeOpDocumentUpdateReplicationConfigurationTemplateInput
 	if v.AssociateDefaultSecurityGroup != nil {
 		ok := object.Key("associateDefaultSecurityGroup")
 		ok.Boolean(*v.AssociateDefaultSecurityGroup)
+	}
+
+	if v.AutoReplicateNewDisks != nil {
+		ok := object.Key("autoReplicateNewDisks")
+		ok.Boolean(*v.AutoReplicateNewDisks)
 	}
 
 	if v.BandwidthThrottling != 0 {

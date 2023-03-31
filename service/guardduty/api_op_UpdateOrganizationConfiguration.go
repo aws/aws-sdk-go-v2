@@ -12,11 +12,11 @@ import (
 )
 
 // Configures the delegated administrator account with the provided values. You
-// must provide the value for either autoEnableOrganizationMembers  or autoEnable
-// . There might be regional differences because some data sources might not be
+// must provide the value for either autoEnableOrganizationMembers or autoEnable.
+// There might be regional differences because some data sources might not be
 // available in all the Amazon Web Services Regions where GuardDuty is presently
-// supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html)
-// .
+// supported. For more information, see Regions and endpoints
+// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 func (c *Client) UpdateOrganizationConfiguration(ctx context.Context, params *UpdateOrganizationConfigurationInput, optFns ...func(*Options)) (*UpdateOrganizationConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateOrganizationConfigurationInput{}
@@ -40,15 +40,27 @@ type UpdateOrganizationConfigurationInput struct {
 	DetectorId *string
 
 	// Indicates whether to automatically enable member accounts in the organization.
+	// Even though this is still supported, we recommend using
+	// AutoEnableOrganizationMembers to achieve the similar results.
 	//
 	// Deprecated: This field is deprecated, use AutoEnableOrganizationMembers instead
 	AutoEnable bool
 
-	// Indicates the auto-enablement configuration of GuardDuty for the member
-	// accounts in the organization.
-	//     - NEW : Indicates that new accounts joining the organization are configured to have GuardDuty enabled automatically.
-	//     - ALL : Indicates that all accounts (new and existing members) in the organization are configured to have GuardDuty enabled automatically.
-	//     - NONE : Indicates that no account in the organization will be configured to have GuardDuty enabled automatically.
+	// Indicates the auto-enablement configuration of GuardDuty for the member accounts
+	// in the organization.
+	//
+	// * NEW: Indicates that when a new account joins the
+	// organization, they will have GuardDuty enabled automatically.
+	//
+	// * ALL: Indicates
+	// that all accounts in the Amazon Web Services Organization have GuardDuty enabled
+	// automatically. This includes NEW accounts that join the organization and
+	// accounts that may have been suspended or removed from the organization in
+	// GuardDuty.
+	//
+	// * NONE: Indicates that GuardDuty will not be automatically enabled
+	// for any accounts in the organization. GuardDuty must be managed for each account
+	// individually by the administrator.
 	AutoEnableOrganizationMembers types.AutoEnableMembers
 
 	// Describes which data sources will be updated.

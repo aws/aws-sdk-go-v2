@@ -33,7 +33,7 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource already exists.
+// The resource has already been processed, was deleted, or is too large.
 type ConflictException struct {
 	Message *string
 

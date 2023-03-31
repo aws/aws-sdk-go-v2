@@ -1,3 +1,7 @@
+# v1.23.0 (2023-03-30)
+
+* **Feature**: Adds support for new image workflow details and image vulnerability detection.
+
 # v1.22.6 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

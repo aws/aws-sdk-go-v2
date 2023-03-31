@@ -530,6 +530,46 @@ func (m *validateOpGetInfrastructureConfiguration) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetWorkflowExecution struct {
+}
+
+func (*validateOpGetWorkflowExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetWorkflowExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetWorkflowExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetWorkflowExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetWorkflowStepExecution struct {
+}
+
+func (*validateOpGetWorkflowStepExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetWorkflowStepExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetWorkflowStepExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetWorkflowStepExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpImportComponent struct {
 }
 
@@ -665,6 +705,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListWorkflowExecutions struct {
+}
+
+func (*validateOpListWorkflowExecutions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListWorkflowExecutions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListWorkflowExecutionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListWorkflowExecutionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListWorkflowStepExecutions struct {
+}
+
+func (*validateOpListWorkflowStepExecutions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListWorkflowStepExecutions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListWorkflowStepExecutionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListWorkflowStepExecutionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -974,6 +1054,14 @@ func addOpGetInfrastructureConfigurationValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpGetInfrastructureConfiguration{}, middleware.After)
 }
 
+func addOpGetWorkflowExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetWorkflowExecution{}, middleware.After)
+}
+
+func addOpGetWorkflowStepExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetWorkflowStepExecution{}, middleware.After)
+}
+
 func addOpImportComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportComponent{}, middleware.After)
 }
@@ -1000,6 +1088,14 @@ func addOpListImagePipelineImagesValidationMiddleware(stack *middleware.Stack) e
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListWorkflowExecutionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListWorkflowExecutions{}, middleware.After)
+}
+
+func addOpListWorkflowStepExecutionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListWorkflowStepExecutions{}, middleware.After)
 }
 
 func addOpPutComponentPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -1754,6 +1850,36 @@ func validateOpGetInfrastructureConfigurationInput(v *GetInfrastructureConfigura
 	}
 }
 
+func validateOpGetWorkflowExecutionInput(v *GetWorkflowExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetWorkflowExecutionInput"}
+	if v.WorkflowExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowExecutionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetWorkflowStepExecutionInput(v *GetWorkflowStepExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetWorkflowStepExecutionInput"}
+	if v.StepExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StepExecutionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpImportComponentInput(v *ImportComponentInput) error {
 	if v == nil {
 		return nil
@@ -1878,6 +2004,36 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListWorkflowExecutionsInput(v *ListWorkflowExecutionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListWorkflowExecutionsInput"}
+	if v.ImageBuildVersionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageBuildVersionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListWorkflowStepExecutionsInput(v *ListWorkflowStepExecutionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListWorkflowStepExecutionsInput"}
+	if v.WorkflowExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowExecutionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

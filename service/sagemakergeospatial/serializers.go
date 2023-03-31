@@ -197,6 +197,11 @@ func awsRestjson1_serializeOpDocumentExportEarthObservationJobInput(v *ExportEar
 		ok.String(*v.Arn)
 	}
 
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.ExecutionRoleArn != nil {
 		ok := object.Key("ExecutionRoleArn")
 		ok.String(*v.ExecutionRoleArn)
@@ -280,6 +285,11 @@ func awsRestjson1_serializeOpDocumentExportVectorEnrichmentJobInput(v *ExportVec
 	if v.Arn != nil {
 		ok := object.Key("Arn")
 		ok.String(*v.Arn)
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
 	}
 
 	if v.ExecutionRoleArn != nil {
@@ -461,6 +471,10 @@ func awsRestjson1_serializeOpHttpBindingsGetTileInput(v *GetTileInput, encoder *
 
 	if v.Arn != nil {
 		encoder.SetQuery("Arn").String(*v.Arn)
+	}
+
+	if v.ExecutionRoleArn != nil {
+		encoder.SetQuery("ExecutionRoleArn").String(*v.ExecutionRoleArn)
 	}
 
 	if v.ImageAssets != nil {
@@ -2612,6 +2626,11 @@ func awsRestjson1_serializeDocumentZonalStatisticsConfigInput(v *types.ZonalStat
 	if v.ZoneS3Path != nil {
 		ok := object.Key("ZoneS3Path")
 		ok.String(*v.ZoneS3Path)
+	}
+
+	if v.ZoneS3PathKmsKeyId != nil {
+		ok := object.Key("ZoneS3PathKmsKeyId")
+		ok.String(*v.ZoneS3PathKmsKeyId)
 	}
 
 	return nil

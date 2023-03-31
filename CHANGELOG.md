@@ -1,3 +1,40 @@
+# Release (2023-03-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.25.0](service/athena/CHANGELOG.md#v1250-2023-03-30)
+  * **Feature**: Make DefaultExecutorDpuSize and CoordinatorDpuSize  fields optional  in StartSession
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.28.0](service/autoscaling/CHANGELOG.md#v1280-2023-03-30)
+  * **Feature**: Amazon EC2 Auto Scaling now supports Elastic Load Balancing traffic sources with the AttachTrafficSources, DetachTrafficSources, and DescribeTrafficSources APIs. This release also introduces a new activity status, "WaitingForConnectionDraining", for VPC Lattice to the DescribeScalingActivities API.
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.23.0](service/batch/CHANGELOG.md#v1230-2023-03-30)
+  * **Feature**: This feature allows Batch on EKS to support configuration of Pod Labels through Metadata for Batch on EKS Jobs.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.22.0](service/computeoptimizer/CHANGELOG.md#v1220-2023-03-30)
+  * **Feature**: This release adds support for HDD EBS volume types and io2 Block Express. We are also adding support for 61 new instance types and instances that have non consecutive runtime.
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.12.0](service/drs/CHANGELOG.md#v1120-2023-03-30)
+  * **Feature**: Adding a field to the replication configuration APIs to support the auto replicate new disks feature. We also deprecated RetryDataReplication.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.92.0](service/ec2/CHANGELOG.md#v1920-2023-03-30)
+  * **Feature**: This release adds support for Tunnel Endpoint Lifecycle control, a new feature that provides Site-to-Site VPN customers with better visibility and control of their VPN tunnel maintenance updates.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.24.0](service/emr/CHANGELOG.md#v1240-2023-03-30)
+  * **Feature**: Updated DescribeCluster and ListClusters API responses to include ErrorDetail that specifies error code, programmatically accessible error data,and an error message. ErrorDetail provides the underlying reason for cluster failure and recommends actions to simplify troubleshooting of EMR clusters.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.44.0](service/glue/CHANGELOG.md#v1440-2023-03-30)
+  * **Feature**: This release adds support for AWS Glue Data Quality, which helps you evaluate and monitor the quality of your data and includes the API for creating, deleting, or updating data quality rulesets, runs and evaluations.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.20.0](service/guardduty/CHANGELOG.md#v1200-2023-03-30)
+  * **Feature**: Added EKS Runtime Monitoring feature support to existing detector, finding APIs and introducing new Coverage APIs
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.23.0](service/imagebuilder/CHANGELOG.md#v1230-2023-03-30)
+  * **Feature**: Adds support for new image workflow details and image vulnerability detection.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.21.0](service/ivs/CHANGELOG.md#v1210-2023-03-30)
+  * **Feature**: Amazon Interactive Video Service (IVS) now offers customers the ability to configure IVS channels to allow insecure RTMP ingest.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.39.0](service/kendra/CHANGELOG.md#v1390-2023-03-30)
+  * **Feature**: AWS Kendra now supports featured results for a query.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.25.0](service/networkfirewall/CHANGELOG.md#v1250-2023-03-30)
+  * **Feature**: AWS Network Firewall added TLS inspection configurations to allow TLS traffic inspection.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial`: [v1.2.0](service/sagemakergeospatial/CHANGELOG.md#v120-2023-03-30)
+  * **Feature**: Amazon SageMaker geospatial capabilities now supports server-side encryption with customer managed KMS key and SageMaker notebooks with a SageMaker geospatial image in a Amazon SageMaker Domain with VPC only mode.
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.0.0](service/vpclattice/CHANGELOG.md#v100-2023-03-30)
+  * **Release**: New AWS service client module
+  * **Feature**: General Availability (GA) release of Amazon VPC Lattice
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.19.0](service/wellarchitected/CHANGELOG.md#v1190-2023-03-30)
+  * **Feature**: AWS Well-Architected SDK now supports getting consolidated report metrics and generating a consolidated report PDF.
+
 # Release (2023-03-29)
 
 ## Module Highlights

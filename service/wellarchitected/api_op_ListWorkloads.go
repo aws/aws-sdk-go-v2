@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List workloads. Paginated.
+// Paginated list of workloads.
 func (c *Client) ListWorkloads(ctx context.Context, params *ListWorkloadsInput, optFns ...func(*Options)) (*ListWorkloadsOutput, error) {
 	if params == nil {
 		params = &ListWorkloadsInput{}

@@ -1,3 +1,7 @@
+# v1.72.2 (2023-03-30)
+
+* No change notes available for this release.
+
 # v1.72.1 (2023-03-27)
 
 * **Documentation**: Fixed some improperly rendered links in SDK documentation.

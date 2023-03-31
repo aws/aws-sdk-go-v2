@@ -486,7 +486,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches one or more target groups to the specified Auto Scaling group.</p>\n         <p>This operation is used with the following load balancer types: </p>\n         <ul>\n            <li>\n               <p>Application Load Balancer - Operates at the application layer (layer 7) and supports HTTP and\n                    HTTPS. </p>\n            </li>\n            <li>\n               <p>Network Load Balancer - Operates at the transport layer (layer 4) and supports TCP, TLS, and\n                    UDP. </p>\n            </li>\n            <li>\n               <p>Gateway Load Balancer - Operates at the network layer (layer 3).</p>\n            </li>\n         </ul>\n         <p>To describe the target groups for an Auto Scaling group, call the <a>DescribeLoadBalancerTargetGroups</a> API. To detach the target group from\n            the Auto Scaling group, call the <a>DetachLoadBalancerTargetGroups</a> API.</p>\n         <p>This operation is additive and does not detach existing target groups or Classic Load\n            Balancers from the Auto Scaling group.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html\">Use Elastic Load Balancing to\n                distribute traffic across the instances in your Auto Scaling group</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>. </p>"
+                "smithy.api#documentation": "<note>\n            <p>This API call has been replaced with a new \"traffic sources\" API call\n                    (<code>AttachTrafficSources</code>) that can attach multiple traffic sources\n                types. While we continue to support <code>AttachLoadBalancerTargetGroups</code>, and\n                you can use both the original <code>AttachLoadBalancerTargetGroups</code> API call\n                and the new <code>AttachTrafficSources</code> API call on the same Auto Scaling group, we\n                recommend using the new \"traffic sources\" API call to simplify how you manage\n                traffic sources.</p>\n         </note>\n         <p>Attaches one or more target groups to the specified Auto Scaling group.</p>\n         <p>This operation is used with the following load balancer types: </p>\n         <ul>\n            <li>\n               <p>Application Load Balancer - Operates at the application layer (layer 7) and supports HTTP and\n                    HTTPS. </p>\n            </li>\n            <li>\n               <p>Network Load Balancer - Operates at the transport layer (layer 4) and supports TCP, TLS, and\n                    UDP. </p>\n            </li>\n            <li>\n               <p>Gateway Load Balancer - Operates at the network layer (layer 3).</p>\n            </li>\n         </ul>\n         <p>To describe the target groups for an Auto Scaling group, call the <a>DescribeLoadBalancerTargetGroups</a> API. To detach the target group from\n            the Auto Scaling group, call the <a>DetachLoadBalancerTargetGroups</a> API.</p>\n         <p>This operation is additive and does not detach existing target groups or Classic Load\n            Balancers from the Auto Scaling group.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html\">Use Elastic Load Balancing to\n                distribute traffic across the instances in your Auto Scaling group</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>. </p>"
             }
         },
         "com.amazonaws.autoscaling#AttachLoadBalancerTargetGroupsResultType": {
@@ -529,7 +529,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>To attach an Application Load Balancer, Network Load Balancer, or Gateway Load Balancer, use the <a>AttachLoadBalancerTargetGroups</a> API operation instead.</p>\n         </note>\n         <p>Attaches one or more Classic Load Balancers to the specified Auto Scaling group. Amazon EC2 Auto Scaling registers the\n            running instances with these Classic Load Balancers.</p>\n         <p>To describe the load balancers for an Auto Scaling group, call the <a>DescribeLoadBalancers</a> API. To detach a load balancer from the Auto Scaling\n            group, call the <a>DetachLoadBalancers</a> API.</p>\n         <p>This operation is additive and does not detach existing Classic Load Balancers or\n            target groups from the Auto Scaling group.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html\">Use Elastic Load Balancing to\n                distribute traffic across the instances in your Auto Scaling group</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                "smithy.api#documentation": "<note>\n            <p>This API call has been replaced with a new \"traffic sources\" API call\n                    (<code>AttachTrafficSources</code>) that can attach multiple traffic sources\n                types. While we continue to support <code>AttachLoadBalancers</code>, and you can\n                use both the original <code>AttachLoadBalancers</code> API call and the new\n                    <code>AttachTrafficSources</code> API call on the same Auto Scaling group, we recommend\n                using the new \"traffic sources\" API call to simplify how you manage traffic\n                sources.</p>\n         </note>\n         <p>Attaches one or more Classic Load Balancers to the specified Auto Scaling group. Amazon EC2 Auto Scaling registers the\n            running instances with these Classic Load Balancers.</p>\n         <p>To describe the load balancers for an Auto Scaling group, call the <a>DescribeLoadBalancers</a> API. To detach a load balancer from the Auto Scaling\n            group, call the <a>DetachLoadBalancers</a> API.</p>\n         <p>This operation is additive and does not detach existing Classic Load Balancers or\n            target groups from the Auto Scaling group.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html\">Use Elastic Load Balancing to\n                distribute traffic across the instances in your Auto Scaling group</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
             }
         },
         "com.amazonaws.autoscaling#AttachLoadBalancersResultType": {
@@ -572,7 +572,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>Reserved for use with Amazon VPC Lattice, which is in preview and subject to change. \n            Do not use this API for production workloads. This API is also subject to change.</b>\n         </p>\n         <p>Attaches one or more traffic sources to the specified Auto Scaling group.</p>\n         <p>To describe the traffic sources for an Auto Scaling group, call the <a>DescribeTrafficSources</a> API. To detach a traffic source from the Auto Scaling\n            group, call the <a>DetachTrafficSources</a> API.</p>\n         <p>This operation is additive and does not detach existing traffic sources from the Auto Scaling\n            group.</p>"
+                "smithy.api#documentation": "<p>Attaches one or more traffic sources to the specified Auto Scaling group.</p>\n         <p>You can use any of the following as traffic sources for an Auto Scaling group:</p>\n         <ul>\n            <li>\n               <p>Application Load Balancer</p>\n            </li>\n            <li>\n               <p>Classic Load Balancer</p>\n            </li>\n            <li>\n               <p>Network Load Balancer</p>\n            </li>\n            <li>\n               <p>Gateway Load Balancer</p>\n            </li>\n            <li>\n               <p>VPC Lattice</p>\n            </li>\n         </ul>\n         <p>This operation is additive and does not detach existing traffic sources from the Auto Scaling\n            group. </p>\n         <p>After the operation completes, use the <a>DescribeTrafficSources</a> API to\n            return details about the state of the attachments between traffic sources and your Auto Scaling\n            group. To detach a traffic source from the Auto Scaling group, call the <a>DetachTrafficSources</a> API.</p>"
             }
         },
         "com.amazonaws.autoscaling#AttachTrafficSourcesResultType": {
@@ -592,7 +592,7 @@
                 "TrafficSources": {
                     "target": "com.amazonaws.autoscaling#TrafficSources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifiers of one or more traffic sources. You can specify up to 10\n            traffic sources.</p>\n         <p>Currently, you must specify an Amazon Resource Name (ARN) for an existing VPC Lattice\n            target group. Amazon EC2 Auto Scaling registers the running instances with the attached target groups.\n            The target groups receive incoming traffic and route requests to one or more registered\n            targets.</p>",
+                        "smithy.api#documentation": "<p>The unique identifiers of one or more traffic sources. You can specify up to 10\n            traffic sources.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -691,7 +691,7 @@
                 "HealthCheckType": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen32",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines whether any additional health checks are performed on the instances in this\n            group. Amazon EC2 health checks are always on.</p>\n         <p>The valid values are <code>EC2</code> (default), <code>ELB</code>, and\n                <code>VPC_LATTICE</code>. The <code>VPC_LATTICE</code> health check type is reserved\n            for use with VPC Lattice, which is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>A comma-separated list of one or more health check types.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -813,7 +813,7 @@
                 "TrafficSources": {
                     "target": "com.amazonaws.autoscaling#TrafficSources",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>Reserved for use with Amazon VPC Lattice, which is in preview release and is subject to\n            change. Do not use this parameter for production workloads. It is also subject to change.</b>\n         </p>\n         <p>The unique identifiers of the traffic sources.</p>"
+                        "smithy.api#documentation": "<p>The traffic sources associated with this Auto Scaling group.</p>"
                     }
                 }
             },
@@ -941,7 +941,7 @@
                 "HealthStatus": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last reported health status of this instance. \"Healthy\" means that the instance is\n            healthy and should remain in service. \"Unhealthy\" means that the instance is unhealthy\n            and Amazon EC2 Auto Scaling should terminate and replace it.</p>",
+                        "smithy.api#documentation": "<p>The last reported health status of this instance. <code>Healthy</code> means that the\n            instance is healthy and should remain in service. <code>Unhealthy</code> means that the\n            instance is unhealthy and Amazon EC2 Auto Scaling should terminate and replace it.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1606,9 +1606,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "af-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1619,9 +1619,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -1632,9 +1632,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -1645,9 +1645,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -1658,9 +1658,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-3",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -1671,9 +1671,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -1684,9 +1684,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -1697,9 +1697,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -1710,9 +1710,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-3",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-3"
                             }
                         },
                         {
@@ -1723,9 +1723,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1736,9 +1736,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1749,9 +1749,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -1762,9 +1762,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -1775,9 +1775,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -1788,9 +1788,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1801,9 +1801,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-3",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -1814,9 +1814,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "me-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -1827,9 +1827,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "sa-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -1840,9 +1840,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1853,9 +1853,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -1866,9 +1866,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -1879,9 +1879,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1892,9 +1892,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1905,9 +1905,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1918,9 +1918,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1931,9 +1931,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1944,9 +1944,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-northwest-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -1957,9 +1957,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1970,9 +1970,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1983,9 +1983,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1996,9 +1996,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -2009,9 +2009,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -2022,9 +2022,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -2035,9 +2035,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -2048,9 +2048,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -2061,9 +2061,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -2074,9 +2074,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-iso-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -2087,9 +2098,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -2100,9 +2122,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -2113,9 +2146,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -2126,9 +2170,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2151,9 +2195,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2163,10 +2207,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
                                 "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -2708,7 +2758,7 @@
                 "LoadBalancerNames": {
                     "target": "com.amazonaws.autoscaling#LoadBalancerNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Classic Load Balancers associated with this Auto Scaling group. For Application Load Balancers, Network Load Balancers, and Gateway Load Balancer,\n            specify the <code>TargetGroupARNs</code> property instead.</p>"
+                        "smithy.api#documentation": "<p>A list of Classic Load Balancers associated with this Auto Scaling group. For Application Load Balancers, Network Load Balancers, and Gateway Load Balancers,\n            specify the <code>TargetGroupARNs</code> property instead.</p>"
                     }
                 },
                 "TargetGroupARNs": {
@@ -2720,7 +2770,7 @@
                 "HealthCheckType": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen32",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines whether any additional health checks are performed on the instances in this\n            group. Amazon EC2 health checks are always on. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html\">Health checks\n                for Auto Scaling instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         <p>The valid values are <code>EC2</code> (default), <code>ELB</code>, and\n                <code>VPC_LATTICE</code>. The <code>VPC_LATTICE</code> health check type is reserved\n            for use with VPC Lattice, which is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>A comma-separated list of one or more health check types.</p>\n         <p>The valid values are <code>EC2</code>, <code>ELB</code>, and <code>VPC_LATTICE</code>.\n                <code>EC2</code> is the default health check and cannot be disabled. For more\n            information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html\">Health checks for Auto Scaling\n                instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
                     }
                 },
                 "HealthCheckGracePeriod": {
@@ -2804,7 +2854,7 @@
                 "TrafficSources": {
                     "target": "com.amazonaws.autoscaling#TrafficSources",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>Reserved for use with Amazon VPC Lattice, which is in preview release and is subject to\n            change. Do not use this parameter for production workloads. It is also subject to change.</b>\n         </p>\n         <p>The unique identifiers of one or more traffic sources.</p>\n         <p>Currently, you must specify an Amazon Resource Name (ARN) for an existing VPC Lattice\n            target group. Amazon EC2 Auto Scaling registers the running instances with the attached target groups.\n            The target groups receive incoming traffic and route requests to one or more registered\n            targets.</p>"
+                        "smithy.api#documentation": "<p>The list of traffic sources to attach to this Auto Scaling group. You can use any of the\n            following as traffic sources for an Auto Scaling group: Classic Load Balancer, Application Load Balancer, Gateway Load Balancer, Network Load Balancer, and\n            VPC Lattice.</p>"
                     }
                 }
             }
@@ -3766,7 +3816,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about the Elastic Load Balancing target groups for the specified Auto Scaling group.</p>\n         <p>To determine the attachment status of the target group, use the <code>State</code>\n            element in the response. When you attach a target group to an Auto Scaling group, the initial\n                <code>State</code> value is <code>Adding</code>. The state transitions to\n                <code>Added</code> after all Auto Scaling instances are registered with the target group. If\n            Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to\n                <code>InService</code> after at least one Auto Scaling instance passes the health check.\n            When the target group is in the <code>InService</code> state, Amazon EC2 Auto Scaling can terminate and\n            replace any instances that are reported as unhealthy. If no registered instances pass\n            the health checks, the target group doesn't enter the <code>InService</code> state. </p>\n         <p>Target groups also have an <code>InService</code> state if you attach them in the\n                <a>CreateAutoScalingGroup</a> API call. If your target group state is\n                <code>InService</code>, but it is not working properly, check the scaling activities\n            by calling <a>DescribeScalingActivities</a> and take any corrective actions\n            necessary.</p>\n         <p>For help with failed health checks, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html\">Troubleshooting Amazon EC2 Auto Scaling:\n                Health checks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html\">Use Elastic Load Balancing to\n                distribute traffic across the instances in your Auto Scaling group</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>. </p>\n         <note>\n            <p>You can use this operation to describe target groups that were attached by using\n                    <a>AttachLoadBalancerTargetGroups</a>, but not for target groups that\n                were attached by using <a>AttachTrafficSources</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<note>\n            <p>This API call has been replaced with a new \"traffic sources\" API call\n                    (<code>DescribeTrafficSources</code>) that can describe multiple traffic sources\n                types. While we continue to support <code>DescribeLoadBalancerTargetGroups</code>,\n                and you can use both the original <code>DescribeLoadBalancerTargetGroups</code> API\n                call and the new <code>DescribeTrafficSources</code> API call on the same Auto Scaling\n                group, we recommend using the new \"traffic sources\" API call to simplify how you\n                manage traffic sources.</p>\n         </note>\n         <p>Gets information about the Elastic Load Balancing target groups for the specified Auto Scaling group.</p>\n         <p>To determine the attachment status of the target group, use the <code>State</code>\n            element in the response. When you attach a target group to an Auto Scaling group, the initial\n                <code>State</code> value is <code>Adding</code>. The state transitions to\n                <code>Added</code> after all Auto Scaling instances are registered with the target group. If\n            Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to\n                <code>InService</code> after at least one Auto Scaling instance passes the health check.\n            When the target group is in the <code>InService</code> state, Amazon EC2 Auto Scaling can terminate and\n            replace any instances that are reported as unhealthy. If no registered instances pass\n            the health checks, the target group doesn't enter the <code>InService</code> state. </p>\n         <p>Target groups also have an <code>InService</code> state if you attach them in the\n                <a>CreateAutoScalingGroup</a> API call. If your target group state is\n                <code>InService</code>, but it is not working properly, check the scaling activities\n            by calling <a>DescribeScalingActivities</a> and take any corrective actions\n            necessary.</p>\n         <p>For help with failed health checks, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html\">Troubleshooting Amazon EC2 Auto Scaling:\n                Health checks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html\">Use Elastic Load Balancing to\n                distribute traffic across the instances in your Auto Scaling group</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>. </p>\n         <note>\n            <p>You can use this operation to describe target groups that were attached by using\n                    <a>AttachLoadBalancerTargetGroups</a>, but not for target groups that\n                were attached by using <a>AttachTrafficSources</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.autoscaling#DescribeLoadBalancerTargetGroupsRequest": {
@@ -3833,7 +3883,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about the load balancers for the specified Auto Scaling group.</p>\n         <p>This operation describes only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or Gateway Load Balancer, use the\n                <a>DescribeLoadBalancerTargetGroups</a> API instead.</p>\n         <p>To determine the attachment status of the load balancer, use the <code>State</code>\n            element in the response. When you attach a load balancer to an Auto Scaling group, the initial\n                <code>State</code> value is <code>Adding</code>. The state transitions to\n                <code>Added</code> after all Auto Scaling instances are registered with the load balancer.\n            If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to\n                <code>InService</code> after at least one Auto Scaling instance passes the health check.\n            When the load balancer is in the <code>InService</code> state, Amazon EC2 Auto Scaling can terminate\n            and replace any instances that are reported as unhealthy. If no registered instances\n            pass the health checks, the load balancer doesn't enter the <code>InService</code>\n            state. </p>\n         <p>Load balancers also have an <code>InService</code> state if you attach them in the\n                <a>CreateAutoScalingGroup</a> API call. If your load balancer state is\n                <code>InService</code>, but it is not working properly, check the scaling activities\n            by calling <a>DescribeScalingActivities</a> and take any corrective actions\n            necessary.</p>\n         <p>For help with failed health checks, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html\">Troubleshooting Amazon EC2 Auto Scaling:\n                Health checks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html\">Use Elastic Load Balancing to\n                distribute traffic across the instances in your Auto Scaling group</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>. </p>"
+                "smithy.api#documentation": "<note>\n            <p>This API call has been replaced with a new \"traffic sources\" API call\n                    (<code>DescribeTrafficSources</code>) that can describe multiple traffic sources\n                types. While we continue to support <code>DescribeLoadBalancers</code>, and you can\n                use both the original <code>DescribeLoadBalancers</code> API call and the new\n                    <code>DescribeTrafficSources</code> API call on the same Auto Scaling group, we\n                recommend using the new \"traffic sources\" API call to simplify how you manage\n                traffic sources.</p>\n         </note>\n         <p>Gets information about the load balancers for the specified Auto Scaling group.</p>\n         <p>This operation describes only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or Gateway Load Balancers, use the\n                <a>DescribeLoadBalancerTargetGroups</a> API instead.</p>\n         <p>To determine the attachment status of the load balancer, use the <code>State</code>\n            element in the response. When you attach a load balancer to an Auto Scaling group, the initial\n                <code>State</code> value is <code>Adding</code>. The state transitions to\n                <code>Added</code> after all Auto Scaling instances are registered with the load balancer.\n            If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to\n                <code>InService</code> after at least one Auto Scaling instance passes the health check.\n            When the load balancer is in the <code>InService</code> state, Amazon EC2 Auto Scaling can terminate\n            and replace any instances that are reported as unhealthy. If no registered instances\n            pass the health checks, the load balancer doesn't enter the <code>InService</code>\n            state. </p>\n         <p>Load balancers also have an <code>InService</code> state if you attach them in the\n                <a>CreateAutoScalingGroup</a> API call. If your load balancer state is\n                <code>InService</code>, but it is not working properly, check the scaling activities\n            by calling <a>DescribeScalingActivities</a> and take any corrective actions\n            necessary.</p>\n         <p>For help with failed health checks, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html\">Troubleshooting Amazon EC2 Auto Scaling:\n                Health checks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html\">Use Elastic Load Balancing to\n                distribute traffic across the instances in your Auto Scaling group</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>. </p>"
             }
         },
         "com.amazonaws.autoscaling#DescribeLoadBalancersRequest": {
@@ -4287,7 +4337,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>Reserved for use with Amazon VPC Lattice, which is in preview and subject to change. \n            Do not use this API for production workloads. This API is also subject to change.</b>\n         </p>\n         <p>Gets information about the traffic sources for the specified Auto Scaling group.</p>"
+                "smithy.api#documentation": "<p>Gets information about the traffic sources for the specified Auto Scaling group.</p>\n         <p>You can optionally provide a traffic source type. If you provide a traffic source\n            type, then the results only include that traffic source type.</p>\n         <p>If you do not provide a traffic source type, then the results include all the traffic\n            sources for the specified Auto Scaling group. </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxRecords"
+                }
             }
         },
         "com.amazonaws.autoscaling#DescribeTrafficSourcesRequest": {
@@ -4303,8 +4358,7 @@
                 "TrafficSourceType": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of traffic source you are describing. Currently, the only valid value is\n                <code>vpc-lattice</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The traffic source type that you want to describe.</p>\n         <p>The following lists the valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>elb</code> if the traffic source is a Classic Load Balancer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>elbv2</code> if the traffic source is a Application Load Balancer, Gateway Load Balancer, or Network Load Balancer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-lattice</code> if the traffic source is VPC Lattice.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextToken": {
@@ -4418,10 +4472,16 @@
             "type": "structure",
             "members": {
                 "LaunchTemplate": {
-                    "target": "com.amazonaws.autoscaling#LaunchTemplateSpecification"
+                    "target": "com.amazonaws.autoscaling#LaunchTemplateSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the launch template and the version of the launch template that Amazon EC2 Auto Scaling\n            uses to launch Amazon EC2 instances. For more information about launch templates, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html\">Launch\n                templates</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                    }
                 },
                 "MixedInstancesPolicy": {
-                    "target": "com.amazonaws.autoscaling#MixedInstancesPolicy"
+                    "target": "com.amazonaws.autoscaling#MixedInstancesPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this structure to launch multiple instance types and On-Demand Instances and Spot\n            Instances within a single Auto Scaling group.</p>\n         <p>A mixed instances policy contains information that Amazon EC2 Auto Scaling can use to launch\n            instances and help optimize your costs. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html\">Auto Scaling\n                groups with multiple instance types and purchase options</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4495,7 +4555,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detaches one or more target groups from the specified Auto Scaling group.</p>\n         <p>When you detach a target group, it enters the <code>Removing</code> state while\n            deregistering the instances in the group. When all instances are deregistered, then you\n            can no longer describe the target group using the <a>DescribeLoadBalancerTargetGroups</a> API call. The instances remain\n            running.</p>\n         <note>\n            <p>You can use this operation to detach target groups that were attached by using\n                    <a>AttachLoadBalancerTargetGroups</a>, but not for target groups that\n                were attached by using <a>AttachTrafficSources</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<note>\n            <p>This API call has been replaced with a new \"traffic sources\" API call\n                    (<code>DetachTrafficSources</code>) that can detach multiple traffic sources\n                types. While we continue to support <code>DetachLoadBalancerTargetGroups</code>, and\n                you can use both the original <code>DetachLoadBalancerTargetGroups</code> API call\n                and the new <code>DetachTrafficSources</code> API call on the same Auto Scaling group, we\n                recommend using the new \"traffic sources\" API call to simplify how you manage\n                traffic sources.</p>\n         </note>\n         <p>Detaches one or more target groups from the specified Auto Scaling group.</p>\n         <p>When you detach a target group, it enters the <code>Removing</code> state while\n            deregistering the instances in the group. When all instances are deregistered, then you\n            can no longer describe the target group using the <a>DescribeLoadBalancerTargetGroups</a> API call. The instances remain\n            running.</p>\n         <note>\n            <p>You can use this operation to detach target groups that were attached by using\n                    <a>AttachLoadBalancerTargetGroups</a>, but not for target groups that\n                were attached by using <a>AttachTrafficSources</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.autoscaling#DetachLoadBalancerTargetGroupsResultType": {
@@ -4535,7 +4595,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detaches one or more Classic Load Balancers from the specified Auto Scaling group.</p>\n         <p>This operation detaches only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or\n            Gateway Load Balancer, use the <a>DetachLoadBalancerTargetGroups</a> API instead.</p>\n         <p>When you detach a load balancer, it enters the <code>Removing</code> state while\n            deregistering the instances in the group. When all instances are deregistered, then you\n            can no longer describe the load balancer using the <a>DescribeLoadBalancers</a> API call. The instances remain running.</p>"
+                "smithy.api#documentation": "<note>\n            <p>This API call has been replaced with a new \"traffic sources\" API call\n                (<code>DetachTrafficSources</code>) that can detach multiple traffic sources\n                types. While we continue to support <code>DetachLoadBalancers</code>, and you can\n                use both the original <code>DetachLoadBalancers</code> API call and the new\n                    <code>DetachTrafficSources</code> API call on the same Auto Scaling group, we recommend\n                using the new \"traffic sources\" API call to simplify how you manage traffic\n                sources.</p>\n         </note>\n         <p>Detaches one or more Classic Load Balancers from the specified Auto Scaling group.</p>\n         <p>This operation detaches only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or\n            Gateway Load Balancers, use the <a>DetachLoadBalancerTargetGroups</a> API instead.</p>\n         <p>When you detach a load balancer, it enters the <code>Removing</code> state while\n            deregistering the instances in the group. When all instances are deregistered, then you\n            can no longer describe the load balancer using the <a>DescribeLoadBalancers</a> API call. The instances remain running.</p>"
             }
         },
         "com.amazonaws.autoscaling#DetachLoadBalancersResultType": {
@@ -4575,7 +4635,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>Reserved for use with Amazon VPC Lattice, which is in preview and subject to change. \n            Do not use this API for production workloads. This API is also subject to change.</b>\n         </p>\n         <p>Detaches one or more traffic sources from the specified Auto Scaling group.</p>"
+                "smithy.api#documentation": "<p>Detaches one or more traffic sources from the specified Auto Scaling group.</p>\n         <p>When you detach a taffic, it enters the <code>Removing</code> state while\n            deregistering the instances in the group. When all instances are deregistered, then you\n            can no longer describe the traffic source using the <a>DescribeTrafficSources</a> API call. The instances continue to run.</p>"
             }
         },
         "com.amazonaws.autoscaling#DetachTrafficSourcesResultType": {
@@ -4595,7 +4655,7 @@
                 "TrafficSources": {
                     "target": "com.amazonaws.autoscaling#TrafficSources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifiers of one or more traffic sources you are detaching. You can\n            specify up to 10 traffic sources.</p>\n         <p>Currently, you must specify an Amazon Resource Name (ARN) for an existing VPC Lattice\n            target group. When you detach a target group, it enters the <code>Removing</code> state\n            while deregistering the instances in the group. When all instances are deregistered,\n            then you can no longer describe the target group using the <a>DescribeTrafficSources</a> API call. The instances continue to run.</p>",
+                        "smithy.api#documentation": "<p>The unique identifiers of one or more traffic sources you are detaching. You can\n            specify up to 10 traffic sources.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5126,7 +5186,7 @@
                 "HealthStatus": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last reported health status of the instance. \"Healthy\" means that the instance is\n            healthy and should remain in service. \"Unhealthy\" means that the instance is unhealthy\n            and that Amazon EC2 Auto Scaling should terminate and replace it.</p>",
+                        "smithy.api#documentation": "<p>The last reported health status of the instance. <code>Healthy</code> means that the\n            instance is healthy and should remain in service. <code>Unhealthy</code> means that the\n            instance is unhealthy and that Amazon EC2 Auto Scaling should terminate and replace it.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5333,7 +5393,10 @@
                     }
                 },
                 "Preferences": {
-                    "target": "com.amazonaws.autoscaling#RefreshPreferences"
+                    "target": "com.amazonaws.autoscaling#RefreshPreferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The preferences for an instance refresh.</p>"
+                    }
                 },
                 "DesiredConfiguration": {
                     "target": "com.amazonaws.autoscaling#DesiredConfiguration",
@@ -8096,7 +8159,10 @@
                     }
                 },
                 "ProgressDetailsOnRollback": {
-                    "target": "com.amazonaws.autoscaling#InstanceRefreshProgressDetails"
+                    "target": "com.amazonaws.autoscaling#InstanceRefreshProgressDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reports progress on replacing instances in an Auto Scaling group that has a warm pool. This\n            includes separate details for instances in the warm pool and instances in the Auto Scaling group\n            (the live pool).</p>"
+                    }
                 }
             },
             "traits": {
@@ -8126,7 +8192,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels an instance refresh that is in progress and rolls back any changes that it\n            made. Amazon EC2 Auto Scaling replaces any instances that were replaced during the instance refresh.\n            This restores your Auto Scaling group to the configuration that it was using before the start of\n            the instance refresh. </p>\n         <p>This operation is part of the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">instance refresh\n                feature</a> in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group\n            after you make configuration changes.</p>\n         <p>A rollback is not supported in the following situations: </p>\n         <ul>\n            <li>\n               <p>There is no desired configuration specified for the instance refresh.</p>\n            </li>\n            <li>\n               <p>The Auto Scaling group has a launch template that uses an Amazon Web Services Systems Manager\n                    parameter instead of an AMI ID for the <code>ImageId</code> property.</p>\n            </li>\n            <li>\n               <p>The Auto Scaling group uses the launch template's <code>$Latest</code> or\n                        <code>$Default</code> version.</p>\n            </li>\n         </ul>\n         <p>When you receive a successful response from this operation, Amazon EC2 Auto Scaling immediately\n            begins replacing instances. You can check the status of this operation through the <a>DescribeInstanceRefreshes</a> API operation. </p>"
+                "smithy.api#documentation": "<p>Cancels an instance refresh that is in progress and rolls back any changes that it\n            made. Amazon EC2 Auto Scaling replaces any instances that were replaced during the instance refresh.\n            This restores your Auto Scaling group to the configuration that it was using before the start of\n            the instance refresh. </p>\n         <p>This operation is part of the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">instance refresh\n                feature</a> in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group\n            after you make configuration changes.</p>\n         <p>A rollback is not supported in the following situations: </p>\n         <ul>\n            <li>\n               <p>There is no desired configuration specified for the instance refresh.</p>\n            </li>\n            <li>\n               <p>The Auto Scaling group has a launch template that uses an Amazon Web Services Systems Manager parameter instead\n                    of an AMI ID for the <code>ImageId</code> property.</p>\n            </li>\n            <li>\n               <p>The Auto Scaling group uses the launch template's <code>$Latest</code> or\n                        <code>$Default</code> version.</p>\n            </li>\n         </ul>\n         <p>When you receive a successful response from this operation, Amazon EC2 Auto Scaling immediately\n            begins replacing instances. You can check the status of this operation through the <a>DescribeInstanceRefreshes</a> API operation. </p>"
             }
         },
         "com.amazonaws.autoscaling#RollbackInstanceRefreshAnswer": {
@@ -8267,6 +8333,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Cancelled"
+                    }
+                },
+                "WaitingForConnectionDraining": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WaitingForConnectionDraining"
                     }
                 }
             }
@@ -9131,13 +9203,14 @@
                 "Metric": {
                     "target": "com.amazonaws.autoscaling#Metric",
                     "traits": {
+                        "smithy.api#documentation": "<p>The metric to use.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Stat": {
                     "target": "com.amazonaws.autoscaling#XmlStringMetricStat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The statistic to return. It can include any CloudWatch statistic or extended statistic. For\n            a list of valid values, see the table in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic\">Statistics</a> in the <i>Amazon CloudWatch User Guide</i>.</p>\n         <p>The most commonly used metrics for scaling is <code>Average</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The statistic to return. It can include any CloudWatch statistic or extended statistic. For\n            a list of valid values, see the table in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic\">Statistics</a> in the <i>Amazon CloudWatch User Guide</i>.</p>\n         <p>The most commonly used metric for scaling is <code>Average</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9149,7 +9222,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure defines the CloudWatch metric to return, along with the statistic, period,\n            and unit.</p>\n         <p>For more information about the CloudWatch terminology below, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch\n                concepts</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>This structure defines the CloudWatch metric to return, along with the statistic and\n            unit.</p>\n         <p>For more information about the CloudWatch terminology below, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch\n                concepts</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
             }
         },
         "com.amazonaws.autoscaling#TerminateInstanceInAutoScalingGroup": {
@@ -9226,12 +9299,19 @@
                 "Identifier": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen511",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the traffic source.</p>"
+                        "smithy.api#documentation": "<p>Identifies the traffic source.</p>\n         <p>For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name\n            (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name\n            of the Classic Load Balancer in this account and Region.</p>\n         <p>For example: </p>\n         <ul>\n            <li>\n               <p>Application Load Balancer ARN:\n                        <code>arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/1234567890123456</code>\n               </p>\n            </li>\n            <li>\n               <p>Classic Load Balancer name: <code>my-classic-load-balancer</code>\n               </p>\n            </li>\n            <li>\n               <p>VPC Lattice ARN:\n                        <code>arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-1234567890123456</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the ARN of a target group for a Application Load Balancer, Gateway Load Balancer, or Network Load Balancer, or the name of a\n            Classic Load Balancer, use the Elastic Load Balancing <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html\">DescribeTargetGroups</a> and <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html\">DescribeLoadBalancers</a> API operations.</p>\n         <p>To get the ARN of a target group for VPC Lattice, use the VPC Lattice <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/APIReference/API_GetTargetGroup.html\">GetTargetGroup</a> API operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen511",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides additional context for the value of <code>Identifier</code>.</p>\n         <p>The following lists the valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>elb</code> if <code>Identifier</code> is the name of a Classic Load Balancer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>elbv2</code> if <code>Identifier</code> is the ARN of an Application Load Balancer, Gateway Load Balancer,\n                    or Network Load Balancer target group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-lattice</code> if <code>Identifier</code> is the ARN of a VPC Lattice\n                    target group.</p>\n            </li>\n         </ul>\n         <p>Required if the identifier is the name of a Classic Load Balancer.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the identifier of a traffic source.</p>\n         <p>Currently, you must specify an Amazon Resource Name (ARN) for an existing VPC Lattice\n            target group.</p>"
+                "smithy.api#documentation": "<p>Identifying information for a traffic source.</p>"
             }
         },
         "com.amazonaws.autoscaling#TrafficSourceState": {
@@ -9240,13 +9320,28 @@
                 "TrafficSource": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen511",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the traffic source. Currently, this is the Amazon Resource\n            Name (ARN) for a VPC Lattice target group.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "TrafficSource has been replaced by Identifier"
+                        },
+                        "smithy.api#documentation": "<p>This is replaced by <code>Identifier</code>.</p>"
                     }
                 },
                 "State": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The following are the possible states for a VPC Lattice target group:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Adding</code> - The Auto Scaling instances are being registered with the target\n                    group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Added</code> - All Auto Scaling instances are registered with the target\n                    group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>InService</code> - At least one Auto Scaling instance passed the\n                        <code>VPC_LATTICE</code> health check.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Removing</code> - The Auto Scaling instances are being deregistered from the\n                    target group. If connection draining is enabled, VPC Lattice waits for in-flight\n                    requests to complete before deregistering the instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Removed</code> - All Auto Scaling instances are deregistered from the target\n                    group.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Describes the current state of a traffic source.</p>\n         <p>The state values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Adding</code> - The Auto Scaling instances are being registered with the load\n                    balancer or target group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Added</code> - All Auto Scaling instances are registered with the load balancer or\n                    target group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>InService</code> - For an Elastic Load Balancing load balancer or target group, at least\n                    one Auto Scaling instance passed an <code>ELB</code> health check. For VPC Lattice, at\n                    least one Auto Scaling instance passed an <code>VPC_LATTICE</code> health check.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Removing</code> - The Auto Scaling instances are being deregistered from the\n                    load balancer or target group. If connection draining (deregistration delay) is\n                    enabled, Elastic Load Balancing or VPC Lattice waits for in-flight requests to complete before\n                    deregistering the instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Removed</code> - All Auto Scaling instances are deregistered from the load\n                    balancer or target group.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Identifier": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen511",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the traffic source.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen511",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides additional context for the value of <code>Identifier</code>.</p>\n         <p>The following lists the valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>elb</code> if <code>Identifier</code> is the name of a Classic Load Balancer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>elbv2</code> if <code>Identifier</code> is the ARN of an Application Load Balancer, Gateway Load Balancer,\n                    or Network Load Balancer target group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-lattice</code> if <code>Identifier</code> is the ARN of a VPC Lattice\n                    target group.</p>\n            </li>\n         </ul>\n         <p>Required if the identifier is the name of a Classic Load Balancer.</p>"
                     }
                 }
             },
@@ -9350,7 +9445,7 @@
                 "HealthCheckType": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen32",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines whether any additional health checks are performed on the instances in this\n            group. Amazon EC2 health checks are always on.</p>\n         <p>The valid values are <code>EC2</code> (default), <code>ELB</code>, and\n                <code>VPC_LATTICE</code>. The <code>VPC_LATTICE</code> health check type is reserved\n            for use with VPC Lattice, which is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>A comma-separated list of one or more health check types.</p>\n         <p>The valid values are <code>EC2</code>, <code>ELB</code>, and <code>VPC_LATTICE</code>.\n                <code>EC2</code> is the default health check and cannot be disabled. For more\n            information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html\">Health checks for Auto Scaling\n                instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
                     }
                 },
                 "HealthCheckGracePeriod": {

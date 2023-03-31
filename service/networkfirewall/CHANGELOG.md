@@ -1,3 +1,7 @@
+# v1.25.0 (2023-03-30)
+
+* **Feature**: AWS Network Firewall added TLS inspection configurations to allow TLS traffic inspection.
+
 # v1.24.7 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

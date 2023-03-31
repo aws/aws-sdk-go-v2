@@ -520,6 +520,7 @@ const (
 	ScalingActivityStatusCodeSuccessful                      ScalingActivityStatusCode = "Successful"
 	ScalingActivityStatusCodeFailed                          ScalingActivityStatusCode = "Failed"
 	ScalingActivityStatusCodeCancelled                       ScalingActivityStatusCode = "Cancelled"
+	ScalingActivityStatusCodeWaitingForConnectionDraining    ScalingActivityStatusCode = "WaitingForConnectionDraining"
 )
 
 // Values returns all known values for ScalingActivityStatusCode. Note that this
@@ -539,6 +540,7 @@ func (ScalingActivityStatusCode) Values() []ScalingActivityStatusCode {
 		"Successful",
 		"Failed",
 		"Cancelled",
+		"WaitingForConnectionDraining",
 	}
 }
 

@@ -378,25 +378,22 @@ func awsRestjson1_deserializeOpDocumentExportEarthObservationJobOutput(v **Expor
 
 		case "CreationTime":
 			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.CreationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
-
-				default:
-					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
-
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.CreationTime = ptr.Time(t)
 			}
 
 		case "ExecutionRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ExecutionRoleArn to be of type string, got %T instead", value)
 				}
 				sv.ExecutionRoleArn = ptr.String(jtv)
 			}
@@ -595,25 +592,22 @@ func awsRestjson1_deserializeOpDocumentExportVectorEnrichmentJobOutput(v **Expor
 
 		case "CreationTime":
 			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.CreationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
-
-				default:
-					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
-
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.CreationTime = ptr.Time(t)
 			}
 
 		case "ExecutionRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ExecutionRoleArn to be of type string, got %T instead", value)
 				}
 				sv.ExecutionRoleArn = ptr.String(jtv)
 			}
@@ -797,18 +791,15 @@ func awsRestjson1_deserializeOpDocumentGetEarthObservationJobOutput(v **GetEarth
 
 		case "CreationTime":
 			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.CreationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
-
-				default:
-					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
-
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.CreationTime = ptr.Time(t)
 			}
 
 		case "DurationInSeconds":
@@ -833,7 +824,7 @@ func awsRestjson1_deserializeOpDocumentGetEarthObservationJobOutput(v **GetEarth
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ExecutionRoleArn to be of type string, got %T instead", value)
 				}
 				sv.ExecutionRoleArn = ptr.String(jtv)
 			}
@@ -866,7 +857,7 @@ func awsRestjson1_deserializeOpDocumentGetEarthObservationJobOutput(v **GetEarth
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected KmsKey to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
@@ -1387,18 +1378,15 @@ func awsRestjson1_deserializeOpDocumentGetVectorEnrichmentJobOutput(v **GetVecto
 
 		case "CreationTime":
 			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.CreationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
-
-				default:
-					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
-
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.CreationTime = ptr.Time(t)
 			}
 
 		case "DurationInSeconds":
@@ -1423,7 +1411,7 @@ func awsRestjson1_deserializeOpDocumentGetVectorEnrichmentJobOutput(v **GetVecto
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ExecutionRoleArn to be of type string, got %T instead", value)
 				}
 				sv.ExecutionRoleArn = ptr.String(jtv)
 			}
@@ -1456,7 +1444,7 @@ func awsRestjson1_deserializeOpDocumentGetVectorEnrichmentJobOutput(v **GetVecto
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected KmsKey to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
@@ -2508,18 +2496,15 @@ func awsRestjson1_deserializeOpDocumentStartEarthObservationJobOutput(v **StartE
 
 		case "CreationTime":
 			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.CreationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
-
-				default:
-					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
-
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.CreationTime = ptr.Time(t)
 			}
 
 		case "DurationInSeconds":
@@ -2539,7 +2524,7 @@ func awsRestjson1_deserializeOpDocumentStartEarthObservationJobOutput(v **StartE
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ExecutionRoleArn to be of type string, got %T instead", value)
 				}
 				sv.ExecutionRoleArn = ptr.String(jtv)
 			}
@@ -2558,7 +2543,7 @@ func awsRestjson1_deserializeOpDocumentStartEarthObservationJobOutput(v **StartE
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected KmsKey to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
@@ -2757,18 +2742,15 @@ func awsRestjson1_deserializeOpDocumentStartVectorEnrichmentJobOutput(v **StartV
 
 		case "CreationTime":
 			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.CreationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
-
-				default:
-					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
-
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.CreationTime = ptr.Time(t)
 			}
 
 		case "DurationInSeconds":
@@ -2788,7 +2770,7 @@ func awsRestjson1_deserializeOpDocumentStartVectorEnrichmentJobOutput(v **StartV
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ExecutionRoleArn to be of type string, got %T instead", value)
 				}
 				sv.ExecutionRoleArn = ptr.String(jtv)
 			}
@@ -2807,7 +2789,7 @@ func awsRestjson1_deserializeOpDocumentStartVectorEnrichmentJobOutput(v **StartV
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected KmsKey to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
@@ -4311,7 +4293,7 @@ func awsRestjson1_deserializeDocumentExportS3DataInput(v **types.ExportS3DataInp
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected KmsKey to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
@@ -4320,7 +4302,7 @@ func awsRestjson1_deserializeDocumentExportS3DataInput(v **types.ExportS3DataInp
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
 				}
 				sv.S3Uri = ptr.String(jtv)
 			}
@@ -4678,7 +4660,7 @@ func awsRestjson1_deserializeDocumentInputConfigOutput(v **types.InputConfigOutp
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected EarthObservationJobArn to be of type string, got %T instead", value)
 				}
 				sv.PreviousEarthObservationJobArn = ptr.String(jtv)
 			}
@@ -5230,18 +5212,15 @@ func awsRestjson1_deserializeDocumentListEarthObservationJobOutputConfig(v **typ
 
 		case "CreationTime":
 			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.CreationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
-
-				default:
-					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
-
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.CreationTime = ptr.Time(t)
 			}
 
 		case "DurationInSeconds":
@@ -5331,18 +5310,15 @@ func awsRestjson1_deserializeDocumentListVectorEnrichmentJobOutputConfig(v **typ
 
 		case "CreationTime":
 			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.CreationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
-
-				default:
-					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
-
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.CreationTime = ptr.Time(t)
 			}
 
 		case "DurationInSeconds":
@@ -6443,7 +6419,7 @@ func awsRestjson1_deserializeDocumentRasterDataCollectionQueryOutput(v **types.R
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected DataCollectionArn to be of type string, got %T instead", value)
 				}
 				sv.RasterDataCollectionArn = ptr.String(jtv)
 			}
@@ -6458,7 +6434,7 @@ func awsRestjson1_deserializeDocumentRasterDataCollectionQueryOutput(v **types.R
 			}
 
 		case "TimeRangeFilter":
-			if err := awsRestjson1_deserializeDocumentTimeRangeFilterInput(&sv.TimeRangeFilter, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentTimeRangeFilterOutput(&sv.TimeRangeFilter, value); err != nil {
 				return err
 			}
 
@@ -6645,7 +6621,7 @@ func awsRestjson1_deserializeDocumentS3DataInput(v **types.S3DataInput, value in
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected KmsKey to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
@@ -6663,7 +6639,7 @@ func awsRestjson1_deserializeDocumentS3DataInput(v **types.S3DataInput, value in
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
 				}
 				sv.S3Uri = ptr.String(jtv)
 			}
@@ -6974,7 +6950,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentTimeRangeFilterInput(v **types.TimeRangeFilterInput, value interface{}) error {
+func awsRestjson1_deserializeDocumentTimeRangeFilterOutput(v **types.TimeRangeFilterOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6987,9 +6963,9 @@ func awsRestjson1_deserializeDocumentTimeRangeFilterInput(v **types.TimeRangeFil
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var sv *types.TimeRangeFilterInput
+	var sv *types.TimeRangeFilterOutput
 	if *v == nil {
-		sv = &types.TimeRangeFilterInput{}
+		sv = &types.TimeRangeFilterOutput{}
 	} else {
 		sv = *v
 	}
@@ -6998,34 +6974,28 @@ func awsRestjson1_deserializeDocumentTimeRangeFilterInput(v **types.TimeRangeFil
 		switch key {
 		case "EndTime":
 			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.EndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
-
-				default:
-					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
-
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.EndTime = ptr.Time(t)
 			}
 
 		case "StartTime":
 			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
-
-				default:
-					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
-
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.StartTime = ptr.Time(t)
 			}
 
 		default:
@@ -7453,7 +7423,7 @@ func awsRestjson1_deserializeDocumentVectorEnrichmentJobS3Data(v **types.VectorE
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected KmsKey to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
@@ -7462,7 +7432,7 @@ func awsRestjson1_deserializeDocumentVectorEnrichmentJobS3Data(v **types.VectorE
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
 				}
 				sv.S3Uri = ptr.String(jtv)
 			}
@@ -7809,9 +7779,18 @@ func awsRestjson1_deserializeDocumentZonalStatisticsConfigInput(v **types.ZonalS
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
 				}
 				sv.ZoneS3Path = ptr.String(jtv)
+			}
+
+		case "ZoneS3PathKmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKey to be of type string, got %T instead", value)
+				}
+				sv.ZoneS3PathKmsKeyId = ptr.String(jtv)
 			}
 
 		default:

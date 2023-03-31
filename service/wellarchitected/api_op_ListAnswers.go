@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List of answers.
+// List of answers for a particular workload and lens.
 func (c *Client) ListAnswers(ctx context.Context, params *ListAnswersInput, optFns ...func(*Options)) (*ListAnswersOutput, error) {
 	if params == nil {
 		params = &ListAnswersInput{}
@@ -32,17 +32,18 @@ func (c *Client) ListAnswers(ctx context.Context, params *ListAnswersInput, optF
 type ListAnswersInput struct {
 
 	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless , or the lens ARN, such as
-	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
-	// the lens ARN, such as
-	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
-	// identified by its LensSummary$LensAlias .
+	// the lens alias, such as serverless, or the lens ARN, such as
+	// arn:aws:wellarchitected:us-east-1::lens/serverless. Note that some operations
+	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
+	// Services official lenses. For custom lenses, this is the lens ARN, such as
+	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef.
+	// Each lens is identified by its LensSummary$LensAlias.
 	//
 	// This member is required.
 	LensAlias *string
 
-	// The ID assigned to the workload. This ID is unique within an Amazon Web
-	// Services Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	//
 	// This member is required.
 	WorkloadId *string
@@ -56,8 +57,8 @@ type ListAnswersInput struct {
 	// The token to use to retrieve the next set of results.
 	NextToken *string
 
-	// The ID used to identify a pillar, for example, security. A pillar is
-	// identified by its PillarReviewSummary$PillarId .
+	// The ID used to identify a pillar, for example, security. A pillar is identified
+	// by its PillarReviewSummary$PillarId.
 	PillarId *string
 
 	noSmithyDocumentSerde
@@ -70,11 +71,12 @@ type ListAnswersOutput struct {
 	AnswerSummaries []types.AnswerSummary
 
 	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless , or the lens ARN, such as
-	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
-	// the lens ARN, such as
-	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
-	// identified by its LensSummary$LensAlias .
+	// the lens alias, such as serverless, or the lens ARN, such as
+	// arn:aws:wellarchitected:us-east-1::lens/serverless. Note that some operations
+	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
+	// Services official lenses. For custom lenses, this is the lens ARN, such as
+	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef.
+	// Each lens is identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// The ARN for the lens.
@@ -86,8 +88,8 @@ type ListAnswersOutput struct {
 	// The token to use to retrieve the next set of results.
 	NextToken *string
 
-	// The ID assigned to the workload. This ID is unique within an Amazon Web
-	// Services Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	WorkloadId *string
 
 	// Metadata pertaining to the operation's result.
@@ -171,8 +173,8 @@ type ListAnswersPaginatorOptions struct {
 	// The maximum number of results to return for this request.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

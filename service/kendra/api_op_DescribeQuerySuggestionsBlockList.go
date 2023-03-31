@@ -48,7 +48,7 @@ type DescribeQuerySuggestionsBlockListInput struct {
 
 type DescribeQuerySuggestionsBlockListOutput struct {
 
-	// The date-time a block list for query suggestions was created.
+	// The Unix timestamp when a block list for query suggestions was created.
 	CreatedAt *time.Time
 
 	// The description for the block list.
@@ -90,7 +90,7 @@ type DescribeQuerySuggestionsBlockListOutput struct {
 	// is ready for use.
 	Status types.QuerySuggestionsBlockListStatus
 
-	// The date-time a block list for query suggestions was last updated.
+	// The Unix timestamp when a block list for query suggestions was last updated.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

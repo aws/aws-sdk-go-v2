@@ -101,8 +101,7 @@ type CreateComponentOutput struct {
 	// The idempotency token used to make this request idempotent.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the component that was created by this
-	// request.
+	// The Amazon Resource Name (ARN) of the component that this request created.
 	ComponentBuildVersionArn *string
 
 	// The request ID that uniquely identifies this request.

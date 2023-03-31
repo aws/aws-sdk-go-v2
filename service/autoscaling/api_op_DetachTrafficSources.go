@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Reserved for use with Amazon VPC Lattice, which is in preview and subject to
-// change. Do not use this API for production workloads. This API is also subject
-// to change. Detaches one or more traffic sources from the specified Auto Scaling
-// group.
+// Detaches one or more traffic sources from the specified Auto Scaling group. When
+// you detach a taffic, it enters the Removing state while deregistering the
+// instances in the group. When all instances are deregistered, then you can no
+// longer describe the traffic source using the DescribeTrafficSources API call.
+// The instances continue to run.
 func (c *Client) DetachTrafficSources(ctx context.Context, params *DetachTrafficSourcesInput, optFns ...func(*Options)) (*DetachTrafficSourcesOutput, error) {
 	if params == nil {
 		params = &DetachTrafficSourcesInput{}
@@ -37,13 +38,8 @@ type DetachTrafficSourcesInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// The unique identifiers of one or more traffic sources you are detaching. You
-	// can specify up to 10 traffic sources. Currently, you must specify an Amazon
-	// Resource Name (ARN) for an existing VPC Lattice target group. When you detach a
-	// target group, it enters the Removing state while deregistering the instances
-	// in the group. When all instances are deregistered, then you can no longer
-	// describe the target group using the DescribeTrafficSources API call. The
-	// instances continue to run.
+	// The unique identifiers of one or more traffic sources you are detaching. You can
+	// specify up to 10 traffic sources.
 	//
 	// This member is required.
 	TrafficSources []types.TrafficSourceIdentifier

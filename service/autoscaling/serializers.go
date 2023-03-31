@@ -5889,6 +5889,11 @@ func awsAwsquery_serializeDocumentTrafficSourceIdentifier(v *types.TrafficSource
 		objectKey.String(*v.Identifier)
 	}
 
+	if v.Type != nil {
+		objectKey := object.Key("Type")
+		objectKey.String(*v.Type)
+	}
+
 	return nil
 }
 

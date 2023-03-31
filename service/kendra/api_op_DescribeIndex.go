@@ -48,7 +48,7 @@ type DescribeIndexOutput struct {
 	// .
 	CapacityUnits *types.CapacityUnitsConfiguration
 
-	// The Unix datetime that the index was created.
+	// The Unix timestamp when the index was created.
 	CreatedAt *time.Time
 
 	// The description for the index.
@@ -90,7 +90,7 @@ type DescribeIndexOutput struct {
 	// contains a message that explains why.
 	Status types.IndexStatus
 
-	// The Unix datetime that the index was last updated.
+	// The Unix when the index was last updated.
 	UpdatedAt *time.Time
 
 	// The user context policy for the Amazon Kendra index.

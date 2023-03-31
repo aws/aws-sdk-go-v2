@@ -4,7 +4,24 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
+
+// Contains counts of vulnerability findings from image scans that run when you
+// create new Image Builder images, or build new versions of existing images. The
+// vulnerability counts are grouped by severity level. The counts are aggregated
+// across resources to create the final tally for the account that owns them.
+type AccountAggregation struct {
+
+	// Identifies the account that owns the aggregated resource findings.
+	AccountId *string
+
+	// Counts by severity level for medium severity and higher level findings, plus a
+	// total for all of the findings.
+	SeverityCounts *SeverityCounts
+
+	noSmithyDocumentSerde
+}
 
 // In addition to your infrastructure configuration, these settings provide an
 // extra layer of control over your build instances. You can also specify commands
@@ -53,7 +70,7 @@ type Ami struct {
 	// The Amazon Web Services Region of the Amazon EC2 AMI.
 	Region *string
 
-	// Image state shows the image status and the reason for that status.
+	// Image status and the reason for that status.
 	State *ImageState
 
 	noSmithyDocumentSerde
@@ -467,6 +484,70 @@ type ContainerRecipeSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon Inspector generates a risk score for each finding. This score helps you
+// to prioritize findings, to focus on the most critical findings and the most
+// vulnerable resources. The score uses the Common Vulnerability Scoring System
+// (CVSS) format. This format is a modification of the base CVSS score that the
+// National Vulnerability Database (NVD) provides. For more information about
+// severity levels, see Severity levels for Amazon Inspector findings
+// (https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-severity.html)
+// in the Amazon Inspector User Guide.
+type CvssScore struct {
+
+	// The CVSS base score.
+	BaseScore *float64
+
+	// The vector string of the CVSS score.
+	ScoringVector *string
+
+	// The source of the CVSS score.
+	Source *string
+
+	// The CVSS version that generated the score.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an adjustment that Amazon Inspector made to the CVSS score for a
+// finding.
+type CvssScoreAdjustment struct {
+
+	// The metric that Amazon Inspector used to adjust the CVSS score.
+	Metric *string
+
+	// The reason for the CVSS score adjustment.
+	Reason *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the source of the score, and the factors that determined the
+// adjustments to create the final score.
+type CvssScoreDetails struct {
+
+	// An object that contains details about an adjustment that Amazon Inspector made
+	// to the CVSS score for the finding.
+	Adjustments []CvssScoreAdjustment
+
+	// The source of the finding.
+	CvssSource *string
+
+	// The CVSS score.
+	Score *float64
+
+	// The source for the CVSS score.
+	ScoreSource *string
+
+	// A vector that measures the severity of the vulnerability.
+	ScoringVector *string
+
+	// The CVSS version that generated the score.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines the settings for a specific Region.
 type Distribution struct {
 
@@ -590,6 +671,25 @@ type EbsInstanceBlockDeviceSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// Settings that Image Builder uses to configure the ECR repository and the output
+// container images that Amazon Inspector scans.
+type EcrConfiguration struct {
+
+	// Tags for Image Builder to apply to the output container image that &INS; scans.
+	// Tags can help you identify and manage your scanned images.
+	ContainerTags []string
+
+	// The name of the container repository that Amazon Inspector scans to identify
+	// findings for your container images. The name includes the path for the
+	// repository location. If you don’t provide this information, Image Builder
+	// creates a repository in your account named
+	// image-builder-image-scanning-repository for vulnerability scans of your output
+	// container images.
+	RepositoryName *string
+
+	noSmithyDocumentSerde
+}
+
 // Define and configure faster launching for output Windows AMIs.
 type FastLaunchConfiguration struct {
 
@@ -700,6 +800,9 @@ type Image struct {
 	// used to create the image. For container images, this is empty.
 	ImageRecipe *ImageRecipe
 
+	// Contains settings for vulnerability scans.
+	ImageScanningConfiguration *ImageScanningConfiguration
+
 	// The origin of the base image that Image Builder used to build this image.
 	ImageSource ImageSource
 
@@ -721,6 +824,9 @@ type Image struct {
 
 	// The image operating system platform, such as Linux or Windows.
 	Platform Platform
+
+	// Contains information about the current state of scans for this image.
+	ScanState *ImageScanState
 
 	// The Amazon Resource Name (ARN) of the image pipeline that created this image.
 	SourcePipelineArn *string
@@ -750,6 +856,19 @@ type Image struct {
 	// or components for your recipe. When you use a wildcard in any node, all nodes to
 	// the right of the first wildcard must also be wildcards.
 	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains vulnerability counts for a specific image.
+type ImageAggregation struct {
+
+	// The Amazon Resource Name (ARN) that identifies the image for this aggregation.
+	ImageBuildVersionArn *string
+
+	// Counts by severity level for medium severity and higher level findings, plus a
+	// total for all of the findings for the specified image.
+	SeverityCounts *SeverityCounts
 
 	noSmithyDocumentSerde
 }
@@ -804,6 +923,9 @@ type ImagePipeline struct {
 	// pipeline.
 	ImageRecipeArn *string
 
+	// Contains settings for vulnerability scans.
+	ImageScanningConfiguration *ImageScanningConfiguration
+
 	// The image tests configuration of the image pipeline.
 	ImageTestsConfiguration *ImageTestsConfiguration
 
@@ -825,6 +947,20 @@ type ImagePipeline struct {
 
 	// The tags of this image pipeline.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Contains vulnerability counts for a specific image pipeline.
+type ImagePipelineAggregation struct {
+
+	// The Amazon Resource Name (ARN) that identifies the image pipeline for this
+	// aggregation.
+	ImagePipelineArn *string
+
+	// Counts by severity level for medium severity and higher level findings, plus a
+	// total for all of the findings for the specified image pipeline.
+	SeverityCounts *SeverityCounts
 
 	noSmithyDocumentSerde
 }
@@ -910,10 +1046,122 @@ type ImageRecipeSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Image state shows the image status and the reason for that status.
+// Contains details about a vulnerability scan finding.
+type ImageScanFinding struct {
+
+	// The Amazon Web Services account ID that's associated with the finding.
+	AwsAccountId *string
+
+	// The description of the finding.
+	Description *string
+
+	// The date and time when the finding was first observed.
+	FirstObservedAt *time.Time
+
+	// Details about whether a fix is available for any of the packages that are
+	// identified in the finding through a version update.
+	FixAvailable *string
+
+	// The Amazon Resource Name (ARN) of the image build version that's associated with
+	// the finding.
+	ImageBuildVersionArn *string
+
+	// The Amazon Resource Name (ARN) of the image pipeline that's associated with the
+	// finding.
+	ImagePipelineArn *string
+
+	// The score that Amazon Inspector assigned for the finding.
+	InspectorScore *float64
+
+	// An object that contains details of the Amazon Inspector score.
+	InspectorScoreDetails *InspectorScoreDetails
+
+	// An object that contains the details of a package vulnerability finding.
+	PackageVulnerabilityDetails *PackageVulnerabilityDetails
+
+	// An object that contains the details about how to remediate the finding.
+	Remediation *Remediation
+
+	// The severity of the finding.
+	Severity *string
+
+	// The title of the finding.
+	Title *string
+
+	// The type of the finding. Image Builder looks for findings of the type
+	// PACKAGE_VULNERABILITY that apply to output images, and excludes other types.
+	Type *string
+
+	// The timestamp when the finding was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// This returns exactly one type of aggregation, based on the filter that Image
+// Builder applies in its API action.
+type ImageScanFindingAggregation struct {
+
+	// Returns an object that contains severity counts based on an account ID.
+	AccountAggregation *AccountAggregation
+
+	// Returns an object that contains severity counts based on the Amazon Resource
+	// Name (ARN) for a specific image.
+	ImageAggregation *ImageAggregation
+
+	// Returns an object that contains severity counts based on an image pipeline ARN.
+	ImagePipelineAggregation *ImagePipelineAggregation
+
+	// Returns an object that contains severity counts based on vulnerability ID.
+	VulnerabilityIdAggregation *VulnerabilityIdAggregation
+
+	noSmithyDocumentSerde
+}
+
+// A name value pair that Image Builder applies to streamline results from the
+// vulnerability scan findings list action.
+type ImageScanFindingsFilter struct {
+
+	// The name of the image scan finding filter. Filter names are case-sensitive.
+	Name *string
+
+	// The filter values. Filter values are case-sensitive.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains settings for Image Builder image resource and container image scans.
+type ImageScanningConfiguration struct {
+
+	// Contains Amazon ECR settings for vulnerability scans.
+	EcrConfiguration *EcrConfiguration
+
+	// A setting that indicates whether Image Builder keeps a snapshot of the
+	// vulnerability scans that Amazon Inspector runs against the build instance when
+	// you create a new image.
+	ImageScanningEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Shows the vulnerability scan status for a specific image, and the reason for
+// that status.
+type ImageScanState struct {
+
+	// The reason for the scan status for the image.
+	Reason *string
+
+	// The current state of vulnerability scans for the image.
+	Status ImageScanStatus
+
+	noSmithyDocumentSerde
+}
+
+// Image status and the reason for that status.
 type ImageState struct {
 
-	// The reason for the image's status.
+	// The reason for the status of the image.
 	Reason *string
 
 	// The status of the image.
@@ -1140,6 +1388,17 @@ type InfrastructureConfigurationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the factors that influenced the score that Amazon Inspector
+// assigned for a finding.
+type InspectorScoreDetails struct {
+
+	// An object that contains details about an adjustment that Amazon Inspector made
+	// to the CVSS score for the finding.
+	AdjustedCvss *CvssScoreDetails
+
+	noSmithyDocumentSerde
+}
+
 // Defines block device mappings for the instance used to configure your image.
 type InstanceBlockDeviceMapping struct {
 
@@ -1267,6 +1526,71 @@ type OutputResources struct {
 	noSmithyDocumentSerde
 }
 
+// Information about package vulnerability findings.
+type PackageVulnerabilityDetails struct {
+
+	// A unique identifier for this vulnerability.
+	//
+	// This member is required.
+	VulnerabilityId *string
+
+	// CVSS scores for one or more vulnerabilities that Amazon Inspector identified for
+	// a package.
+	Cvss []CvssScore
+
+	// Links to web pages that contain details about the vulnerabilities that Amazon
+	// Inspector identified for the package.
+	ReferenceUrls []string
+
+	// Vulnerabilities that are often related to the findings for the package.
+	RelatedVulnerabilities []string
+
+	// The source of the vulnerability information.
+	Source *string
+
+	// A link to the source of the vulnerability information.
+	SourceUrl *string
+
+	// The date and time when this vulnerability was first added to the vendor's
+	// database.
+	VendorCreatedAt *time.Time
+
+	// The severity that the vendor assigned to this vulnerability type.
+	VendorSeverity *string
+
+	// The date and time when the vendor last updated this vulnerability in their
+	// database.
+	VendorUpdatedAt *time.Time
+
+	// The packages that this vulnerability impacts.
+	VulnerablePackages []VulnerablePackage
+
+	noSmithyDocumentSerde
+}
+
+// Information about how to remediate a finding.
+type Remediation struct {
+
+	// An object that contains information about the recommended course of action to
+	// remediate the finding.
+	Recommendation *RemediationRecommendation
+
+	noSmithyDocumentSerde
+}
+
+// Details about the recommended course of action to remediate the finding.
+type RemediationRecommendation struct {
+
+	// The recommended course of action to remediate the finding.
+	Text *string
+
+	// A link to more information about the recommended remediation for this
+	// vulnerability.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
 // Properties that configure export from your build instance to a compatible file
 // format for your VM.
 type S3ExportConfiguration struct {
@@ -1339,6 +1663,26 @@ type Schedule struct {
 	noSmithyDocumentSerde
 }
 
+// Includes counts by severity level for medium severity and higher level findings,
+// plus a total for all of the findings for the specified filter.
+type SeverityCounts struct {
+
+	// The total number of findings across all severity levels for the specified
+	// filter.
+	All *int64
+
+	// The number of critical severity findings for the specified filter.
+	Critical *int64
+
+	// The number of high severity findings for the specified filter.
+	High *int64
+
+	// The number of medium severity findings for the specified filter.
+	Medium *int64
+
+	noSmithyDocumentSerde
+}
+
 // Contains settings for the Systems Manager agent on your build instance.
 type SystemsManagerAgent struct {
 
@@ -1364,6 +1708,139 @@ type TargetContainerRepository struct {
 	//
 	// This member is required.
 	Service ContainerRepositoryService
+
+	noSmithyDocumentSerde
+}
+
+// Includes counts of image and pipeline resource findings by vulnerability.
+type VulnerabilityIdAggregation struct {
+
+	// Counts by severity level for medium severity and higher level findings, plus a
+	// total for all of the findings for the specified vulnerability.
+	SeverityCounts *SeverityCounts
+
+	// The vulnerability Id for this set of counts.
+	VulnerabilityId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a vulnerable package that Amazon Inspector identifies in a
+// finding.
+type VulnerablePackage struct {
+
+	// The architecture of the vulnerable package.
+	Arch *string
+
+	// The epoch of the vulnerable package.
+	Epoch *int32
+
+	// The file path of the vulnerable package.
+	FilePath *string
+
+	// The version of the package that contains the vulnerability fix.
+	FixedInVersion *string
+
+	// The name of the vulnerable package.
+	Name *string
+
+	// The package manager of the vulnerable package.
+	PackageManager *string
+
+	// The release of the vulnerable package.
+	Release *string
+
+	// The code to run in your environment to update packages with a fix available.
+	Remediation *string
+
+	// The source layer hash of the vulnerable package.
+	SourceLayerHash *string
+
+	// The version of the vulnerable package.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata that includes details and status from this runtime instance of the
+// workflow.
+type WorkflowExecutionMetadata struct {
+
+	// The timestamp when this runtime instance of the workflow finished.
+	EndTime *string
+
+	// The runtime output message from the workflow, if applicable.
+	Message *string
+
+	// The timestamp when the runtime instance of this workflow started.
+	StartTime *string
+
+	// The current runtime status for this workflow.
+	Status WorkflowExecutionStatus
+
+	// The total number of steps in the workflow. This should equal the sum of the step
+	// counts for steps that succeeded, were skipped, and failed.
+	TotalStepCount int32
+
+	// A runtime count for the number of steps in the workflow that failed.
+	TotalStepsFailed int32
+
+	// A runtime count for the number of steps in the workflow that were skipped.
+	TotalStepsSkipped int32
+
+	// A runtime count for the number of steps in the workflow that ran successfully.
+	TotalStepsSucceeded int32
+
+	// Indicates what type of workflow that Image Builder ran for this runtime instance
+	// of the workflow.
+	Type WorkflowType
+
+	// The Amazon Resource Name (ARN) of the workflow resource build version that ran.
+	WorkflowBuildVersionArn *string
+
+	// Unique identifier that Image Builder assigns to keep track of runtime resources
+	// each time it runs a workflow.
+	WorkflowExecutionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Runtime details and status for the workflow step.
+type WorkflowStepMetadata struct {
+
+	// The step action name.
+	Action *string
+
+	// Description of the workflow step.
+	Description *string
+
+	// The timestamp when the workflow step finished.
+	EndTime *string
+
+	// Input parameters that Image Builder provides for the workflow step.
+	Inputs *string
+
+	// Detailed output message that the workflow step provides at runtime.
+	Message *string
+
+	// The name of the workflow step.
+	Name *string
+
+	// The file names that the workflow step created as output for this runtime
+	// instance of the workflow.
+	Outputs *string
+
+	// Reports on the rollback status of the step, if applicable.
+	RollbackStatus WorkflowStepExecutionRollbackStatus
+
+	// The timestamp when the workflow step started.
+	StartTime *string
+
+	// Runtime status for the workflow step.
+	Status WorkflowStepExecutionStatus
+
+	// A unique identifier for the workflow step, assigned at runtime.
+	StepExecutionId *string
 
 	noSmithyDocumentSerde
 }

@@ -71,9 +71,9 @@ type ListImagesOutput struct {
 	// the right of the first wildcard must also be wildcards.
 	ImageVersionList []types.ImageVersion
 
-	// The next token used for paginated responses. When this is not empty, there are
-	// additional elements that the service has not included in this request. Use this
-	// token with the next request to retrieve additional objects.
+	// The next token used for paginated responses. When this field isn't empty, there
+	// are additional elements that the service has'ot included in this request. Use
+	// this token with the next request to retrieve additional objects.
 	NextToken *string
 
 	// The request ID that uniquely identifies this request.

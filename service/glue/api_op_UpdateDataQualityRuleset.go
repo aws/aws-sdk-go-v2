@@ -40,9 +40,6 @@ type UpdateDataQualityRulesetInput struct {
 	// the Glue developer guide.
 	Ruleset *string
 
-	// The new name of the ruleset, if you are renaming it.
-	UpdatedName *string
-
 	noSmithyDocumentSerde
 }
 

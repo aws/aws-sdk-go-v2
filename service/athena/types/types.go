@@ -333,11 +333,11 @@ type EngineConfiguration struct {
 	// The number of DPUs to use for the coordinator. A coordinator is a special
 	// executor that orchestrates processing work and manages other executors in a
 	// notebook session.
-	CoordinatorDpuSize int32
+	CoordinatorDpuSize *int32
 
 	// The default number of DPUs to use for executors. An executor is the smallest
 	// unit of compute that a notebook session can request from Athena.
-	DefaultExecutorDpuSize int32
+	DefaultExecutorDpuSize *int32
 
 	noSmithyDocumentSerde
 }

@@ -537,6 +537,13 @@ func awsRestjson1_serializeOpDocumentCreateImageInput(v *CreateImageInput, value
 		ok.String(*v.ImageRecipeArn)
 	}
 
+	if v.ImageScanningConfiguration != nil {
+		ok := object.Key("imageScanningConfiguration")
+		if err := awsRestjson1_serializeDocumentImageScanningConfiguration(v.ImageScanningConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ImageTestsConfiguration != nil {
 		ok := object.Key("imageTestsConfiguration")
 		if err := awsRestjson1_serializeDocumentImageTestsConfiguration(v.ImageTestsConfiguration, ok); err != nil {
@@ -647,6 +654,13 @@ func awsRestjson1_serializeOpDocumentCreateImagePipelineInput(v *CreateImagePipe
 	if v.ImageRecipeArn != nil {
 		ok := object.Key("imageRecipeArn")
 		ok.String(*v.ImageRecipeArn)
+	}
+
+	if v.ImageScanningConfiguration != nil {
+		ok := object.Key("imageScanningConfiguration")
+		if err := awsRestjson1_serializeDocumentImageScanningConfiguration(v.ImageScanningConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ImageTestsConfiguration != nil {
@@ -1908,6 +1922,112 @@ func awsRestjson1_serializeOpHttpBindingsGetInfrastructureConfigurationInput(v *
 	return nil
 }
 
+type awsRestjson1_serializeOpGetWorkflowExecution struct {
+}
+
+func (*awsRestjson1_serializeOpGetWorkflowExecution) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetWorkflowExecution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetWorkflowExecutionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/GetWorkflowExecution")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetWorkflowExecutionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetWorkflowExecutionInput(v *GetWorkflowExecutionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.WorkflowExecutionId != nil {
+		encoder.SetQuery("workflowExecutionId").String(*v.WorkflowExecutionId)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetWorkflowStepExecution struct {
+}
+
+func (*awsRestjson1_serializeOpGetWorkflowStepExecution) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetWorkflowStepExecution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetWorkflowStepExecutionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/GetWorkflowStepExecution")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetWorkflowStepExecutionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetWorkflowStepExecutionInput(v *GetWorkflowStepExecutionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.StepExecutionId != nil {
+		encoder.SetQuery("stepExecutionId").String(*v.StepExecutionId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpImportComponent struct {
 }
 
@@ -2979,6 +3099,161 @@ func awsRestjson1_serializeOpDocumentListImagesInput(v *ListImagesInput, value s
 	return nil
 }
 
+type awsRestjson1_serializeOpListImageScanFindingAggregations struct {
+}
+
+func (*awsRestjson1_serializeOpListImageScanFindingAggregations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListImageScanFindingAggregations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListImageScanFindingAggregationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/ListImageScanFindingAggregations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListImageScanFindingAggregationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListImageScanFindingAggregationsInput(v *ListImageScanFindingAggregationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListImageScanFindingAggregationsInput(v *ListImageScanFindingAggregationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filter != nil {
+		ok := object.Key("filter")
+		if err := awsRestjson1_serializeDocumentFilter(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListImageScanFindings struct {
+}
+
+func (*awsRestjson1_serializeOpListImageScanFindings) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListImageScanFindings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListImageScanFindingsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/ListImageScanFindings")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListImageScanFindingsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListImageScanFindingsInput(v *ListImageScanFindingsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListImageScanFindingsInput(v *ListImageScanFindingsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("filters")
+		if err := awsRestjson1_serializeDocumentImageScanFindingsFilterList(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListInfrastructureConfigurations struct {
 }
 
@@ -3112,6 +3387,162 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListWorkflowExecutions struct {
+}
+
+func (*awsRestjson1_serializeOpListWorkflowExecutions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListWorkflowExecutions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListWorkflowExecutionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/ListWorkflowExecutions")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListWorkflowExecutionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListWorkflowExecutionsInput(v *ListWorkflowExecutionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListWorkflowExecutionsInput(v *ListWorkflowExecutionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ImageBuildVersionArn != nil {
+		ok := object.Key("imageBuildVersionArn")
+		ok.String(*v.ImageBuildVersionArn)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListWorkflowStepExecutions struct {
+}
+
+func (*awsRestjson1_serializeOpListWorkflowStepExecutions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListWorkflowStepExecutions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListWorkflowStepExecutionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/ListWorkflowStepExecutions")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListWorkflowStepExecutionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListWorkflowStepExecutionsInput(v *ListWorkflowStepExecutionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListWorkflowStepExecutionsInput(v *ListWorkflowStepExecutionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.WorkflowExecutionId != nil {
+		ok := object.Key("workflowExecutionId")
+		ok.String(*v.WorkflowExecutionId)
 	}
 
 	return nil
@@ -3809,6 +4240,13 @@ func awsRestjson1_serializeOpDocumentUpdateImagePipelineInput(v *UpdateImagePipe
 		ok.String(*v.ImageRecipeArn)
 	}
 
+	if v.ImageScanningConfiguration != nil {
+		ok := object.Key("imageScanningConfiguration")
+		if err := awsRestjson1_serializeDocumentImageScanningConfiguration(v.ImageScanningConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ImageTestsConfiguration != nil {
 		ok := object.Key("imageTestsConfiguration")
 		if err := awsRestjson1_serializeDocumentImageTestsConfiguration(v.ImageTestsConfiguration, ok); err != nil {
@@ -4262,6 +4700,25 @@ func awsRestjson1_serializeDocumentEbsInstanceBlockDeviceSpecification(v *types.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEcrConfiguration(v *types.EcrConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContainerTags != nil {
+		ok := object.Key("containerTags")
+		if err := awsRestjson1_serializeDocumentStringList(v.ContainerTags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RepositoryName != nil {
+		ok := object.Key("repositoryName")
+		ok.String(*v.RepositoryName)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFastLaunchConfiguration(v *types.FastLaunchConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4385,6 +4842,68 @@ func awsRestjson1_serializeDocumentFilterValues(v []string, value smithyjson.Val
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentImageScanFindingsFilter(v *types.ImageScanFindingsFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Values != nil {
+		ok := object.Key("values")
+		if err := awsRestjson1_serializeDocumentImageScanFindingsFilterValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentImageScanFindingsFilterList(v []types.ImageScanFindingsFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentImageScanFindingsFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentImageScanFindingsFilterValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentImageScanningConfiguration(v *types.ImageScanningConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EcrConfiguration != nil {
+		ok := object.Key("ecrConfiguration")
+		if err := awsRestjson1_serializeDocumentEcrConfiguration(v.EcrConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ImageScanningEnabled != nil {
+		ok := object.Key("imageScanningEnabled")
+		ok.Boolean(*v.ImageScanningEnabled)
+	}
+
 	return nil
 }
 

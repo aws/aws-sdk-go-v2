@@ -45,18 +45,17 @@ type CreateQuerySuggestionsBlockListInput struct {
 	// This member is required.
 	IndexId *string
 
-	// A user friendly name for the block list. For example, the block list named
-	// 'offensive-words' includes all offensive words that could appear in user queries
-	// and need to be blocked from suggestions.
+	// A name for the block list. For example, the name 'offensive-words', which
+	// includes all offensive words that could appear in user queries and need to be
+	// blocked from suggestions.
 	//
 	// This member is required.
 	Name *string
 
-	// The IAM (Identity and Access Management) role used by Amazon Kendra to access
-	// the block list text file in your S3 bucket. You need permissions to the role ARN
-	// (Amazon Web Services Resource Name). The role needs S3 read permissions to your
-	// file in S3 and needs to give STS (Security Token Service) assume role
-	// permissions to Amazon Kendra.
+	// The Amazon Resource Name (ARN) of an IAM role with permission to access your S3
+	// bucket that contains the block list text file. For more information, see IAM
+	// access roles for Amazon Kendra
+	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
 	//
 	// This member is required.
 	RoleArn *string
@@ -73,12 +72,14 @@ type CreateQuerySuggestionsBlockListInput struct {
 	// block list.
 	ClientToken *string
 
-	// A user-friendly description for the block list. For example, the description
-	// "List of all offensive words that can appear in user queries and need to be
-	// blocked from suggestions."
+	// A description for the block list. For example, the description "List of all
+	// offensive words that can appear in user queries and need to be blocked from
+	// suggestions."
 	Description *string
 
-	// A tag that you can assign to a block list that categorizes the block list.
+	// A list of key-value pairs that identify or categorize the block list. Tag keys
+	// and values can consist of Unicode letters, digits, white space, and any of the
+	// following symbols: _ . : / = + - @.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -86,7 +87,7 @@ type CreateQuerySuggestionsBlockListInput struct {
 
 type CreateQuerySuggestionsBlockListOutput struct {
 
-	// The identifier of the created block list.
+	// The identifier of the block list.
 	Id *string
 
 	// Metadata pertaining to the operation's result.

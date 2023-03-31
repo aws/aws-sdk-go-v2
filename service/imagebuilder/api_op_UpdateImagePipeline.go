@@ -43,8 +43,8 @@ type UpdateImagePipelineInput struct {
 	// This member is required.
 	ImagePipelineArn *string
 
-	// The Amazon Resource Name (ARN) of the infrastructure configuration that will
-	// be used to build images updated by this image pipeline.
+	// The Amazon Resource Name (ARN) of the infrastructure configuration that Image
+	// Builder uses to build images that this image pipeline has updated.
 	//
 	// This member is required.
 	InfrastructureConfigurationArn *string
@@ -55,8 +55,9 @@ type UpdateImagePipelineInput struct {
 	// The description of the image pipeline.
 	Description *string
 
-	// The Amazon Resource Name (ARN) of the distribution configuration that will be
-	// used to configure and distribute images updated by this image pipeline.
+	// The Amazon Resource Name (ARN) of the distribution configuration that Image
+	// Builder uses to configure and distribute images that this image pipeline has
+	// updated.
 	DistributionConfigurationArn *string
 
 	// Collects additional information about the image being created, including the
@@ -67,6 +68,9 @@ type UpdateImagePipelineInput struct {
 	// The Amazon Resource Name (ARN) of the image recipe that will be used to
 	// configure images updated by this image pipeline.
 	ImageRecipeArn *string
+
+	// Contains settings for vulnerability scans.
+	ImageScanningConfiguration *types.ImageScanningConfiguration
 
 	// The image test configuration of the image pipeline.
 	ImageTestsConfiguration *types.ImageTestsConfiguration

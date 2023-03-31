@@ -4,6 +4,7 @@ package sagemakergeospatial
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/types"
@@ -12,8 +13,8 @@ import (
 	"time"
 )
 
-// Use this operation to export results of an Earth Observation job and
-// optionally source images used as input to the EOJ to an S3 location.
+// Use this operation to export results of an Earth Observation job and optionally
+// source images used as input to the EOJ to an Amazon S3 location.
 func (c *Client) ExportEarthObservationJob(ctx context.Context, params *ExportEarthObservationJobInput, optFns ...func(*Options)) (*ExportEarthObservationJobOutput, error) {
 	if params == nil {
 		params = &ExportEarthObservationJobInput{}
@@ -46,6 +47,9 @@ type ExportEarthObservationJobInput struct {
 	//
 	// This member is required.
 	OutputConfig *types.OutputConfigInput
+
+	// A unique token that guarantees that the call to this API is idempotent.
+	ClientToken *string
 
 	// The source images provided to the Earth Observation job being exported.
 	ExportSourceImages *bool
@@ -135,6 +139,9 @@ func (c *Client) addOperationExportEarthObservationJobMiddlewares(stack *middlew
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opExportEarthObservationJobMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpExportEarthObservationJobValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,6 +158,39 @@ func (c *Client) addOperationExportEarthObservationJobMiddlewares(stack *middlew
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpExportEarthObservationJob struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpExportEarthObservationJob) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpExportEarthObservationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*ExportEarthObservationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *ExportEarthObservationJobInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opExportEarthObservationJobMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpExportEarthObservationJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opExportEarthObservationJob(region string) *awsmiddleware.RegisterServiceMetadata {

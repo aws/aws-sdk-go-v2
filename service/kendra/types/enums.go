@@ -571,6 +571,24 @@ func (FaqStatus) Values() []FaqStatus {
 	}
 }
 
+type FeaturedResultsSetStatus string
+
+// Enum values for FeaturedResultsSetStatus
+const (
+	FeaturedResultsSetStatusActive   FeaturedResultsSetStatus = "ACTIVE"
+	FeaturedResultsSetStatusInactive FeaturedResultsSetStatus = "INACTIVE"
+)
+
+// Values returns all known values for FeaturedResultsSetStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FeaturedResultsSetStatus) Values() []FeaturedResultsSetStatus {
+	return []FeaturedResultsSetStatus{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
 type FsxFileSystemType string
 
 // Enum values for FsxFileSystemType

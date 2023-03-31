@@ -110,6 +110,26 @@ func (m *validateOpCreateRuleGroup) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateTLSInspectionConfiguration struct {
+}
+
+func (*validateOpCreateTLSInspectionConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTLSInspectionConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTLSInspectionConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTLSInspectionConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteResourcePolicy struct {
 }
 
@@ -390,6 +410,26 @@ func (m *validateOpUpdateSubnetChangeProtection) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateTLSInspectionConfiguration struct {
+}
+
+func (*validateOpUpdateTLSInspectionConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateTLSInspectionConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateTLSInspectionConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateTLSInspectionConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociateFirewallPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateFirewallPolicy{}, middleware.After)
 }
@@ -408,6 +448,10 @@ func addOpCreateFirewallPolicyValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpCreateRuleGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRuleGroup{}, middleware.After)
+}
+
+func addOpCreateTLSInspectionConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTLSInspectionConfiguration{}, middleware.After)
 }
 
 func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -464,6 +508,10 @@ func addOpUpdateRuleGroupValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateSubnetChangeProtectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSubnetChangeProtection{}, middleware.After)
+}
+
+func addOpUpdateTLSInspectionConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateTLSInspectionConfiguration{}, middleware.After)
 }
 
 func validateActionDefinition(v *types.ActionDefinition) error {
@@ -982,6 +1030,89 @@ func validateRuleVariables(v *types.RuleVariables) error {
 	}
 }
 
+func validateServerCertificateConfiguration(v *types.ServerCertificateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServerCertificateConfiguration"}
+	if v.Scopes != nil {
+		if err := validateServerCertificateScopes(v.Scopes); err != nil {
+			invalidParams.AddNested("Scopes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServerCertificateConfigurations(v []types.ServerCertificateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServerCertificateConfigurations"}
+	for i := range v {
+		if err := validateServerCertificateConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServerCertificateScope(v *types.ServerCertificateScope) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServerCertificateScope"}
+	if v.Sources != nil {
+		if err := validateAddresses(v.Sources); err != nil {
+			invalidParams.AddNested("Sources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Destinations != nil {
+		if err := validateAddresses(v.Destinations); err != nil {
+			invalidParams.AddNested("Destinations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourcePorts != nil {
+		if err := validatePortRanges(v.SourcePorts); err != nil {
+			invalidParams.AddNested("SourcePorts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DestinationPorts != nil {
+		if err := validatePortRanges(v.DestinationPorts); err != nil {
+			invalidParams.AddNested("DestinationPorts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServerCertificateScopes(v []types.ServerCertificateScope) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServerCertificateScopes"}
+	for i := range v {
+		if err := validateServerCertificateScope(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateStatefulRule(v *types.StatefulRule) error {
 	if v == nil {
 		return nil
@@ -1251,6 +1382,23 @@ func validateTCPFlags(v []types.TCPFlagField) error {
 	}
 }
 
+func validateTLSInspectionConfiguration(v *types.TLSInspectionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TLSInspectionConfiguration"}
+	if v.ServerCertificateConfigurations != nil {
+		if err := validateServerCertificateConfigurations(v.ServerCertificateConfigurations); err != nil {
+			invalidParams.AddNested("ServerCertificateConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateFirewallPolicyInput(v *AssociateFirewallPolicyInput) error {
 	if v == nil {
 		return nil
@@ -1373,6 +1521,38 @@ func validateOpCreateRuleGroupInput(v *CreateRuleGroupInput) error {
 	}
 	if v.Capacity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Capacity"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateTLSInspectionConfigurationInput(v *CreateTLSInspectionConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTLSInspectionConfigurationInput"}
+	if v.TLSInspectionConfigurationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TLSInspectionConfigurationName"))
+	}
+	if v.TLSInspectionConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TLSInspectionConfiguration"))
+	} else if v.TLSInspectionConfiguration != nil {
+		if err := validateTLSInspectionConfiguration(v.TLSInspectionConfiguration); err != nil {
+			invalidParams.AddNested("TLSInspectionConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -1624,6 +1804,33 @@ func validateOpUpdateSubnetChangeProtectionInput(v *UpdateSubnetChangeProtection
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSubnetChangeProtectionInput"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateTLSInspectionConfigurationInput(v *UpdateTLSInspectionConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTLSInspectionConfigurationInput"}
+	if v.TLSInspectionConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TLSInspectionConfiguration"))
+	} else if v.TLSInspectionConfiguration != nil {
+		if err := validateTLSInspectionConfiguration(v.TLSInspectionConfiguration); err != nil {
+			invalidParams.AddNested("TLSInspectionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UpdateToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateToken"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

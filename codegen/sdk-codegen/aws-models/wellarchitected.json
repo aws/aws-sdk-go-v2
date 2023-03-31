@@ -80,18 +80,18 @@
                 "Type": {
                     "target": "com.amazonaws.wellarchitected#AdditionalResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Type of additional resource.</p>"
+                        "smithy.api#documentation": "<p>Type of additional resource for a custom lens.</p>"
                     }
                 },
                 "Content": {
                     "target": "com.amazonaws.wellarchitected#Urls",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URLs for additional resources, either helpful resources or improvement plans. Up to five additional URLs can be specified.</p>"
+                        "smithy.api#documentation": "<p>The URLs for additional resources, either helpful resources or improvement plans, for a custom lens. Up to five additional URLs can be specified.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The choice level additional resources.</p>"
+                "smithy.api#documentation": "<p>The choice level additional resources for a custom lens.</p>\n         <p>This field does not apply to Amazon Web Services official lenses.</p>"
             }
         },
         "com.amazonaws.wellarchitected#AdditionalResourcesList": {
@@ -124,7 +124,7 @@
                 "HelpfulResourceDisplayText": {
                     "target": "com.amazonaws.wellarchitected#DisplayText",
                     "traits": {
-                        "smithy.api#documentation": "<p>The helpful resource text to be displayed.</p>"
+                        "smithy.api#documentation": "<p>The helpful resource text to be displayed for a custom lens.</p>\n         <p>This field does not apply to Amazon Web Services official lenses.</p>"
                     }
                 },
                 "Choices": {
@@ -289,7 +289,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associate a lens to a workload.</p>\n        <p>Up to 10 lenses can be associated with a workload in a single API operation. A \n        maximum of 20 lenses can be associated with a workload.</p>\n        <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>By accessing and/or applying custom lenses created by another Amazon Web Services user or account, \n            you acknowledge that custom lenses created by other users and shared with you are \n            Third Party Content as defined in the Amazon Web Services Customer Agreement.    </p>\n         </note>",
+                "smithy.api#documentation": "<p>Associate a lens to a workload.</p>\n         <p>Up to 10 lenses can be associated with a workload in a single API operation. A \n        maximum of 20 lenses can be associated with a workload.</p>\n         <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>By accessing and/or applying custom lenses created by another Amazon Web Services user or account, \n            you acknowledge that custom lenses created by other users and shared with you are \n            Third Party Content as defined in the Amazon Web Services Customer Agreement.    </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/workloads/{WorkloadId}/associateLenses",
@@ -315,7 +315,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to associate lens reviews.</p>"
+                "smithy.api#documentation": "<p>Input to associate lens reviews.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#AwsAccountId": {
@@ -338,7 +339,27 @@
         "com.amazonaws.wellarchitected#Base64String": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The Base64-encoded string representation of a lens review report.</p>\n        <p>This data can be used to create a PDF file.</p>"
+                "smithy.api#documentation": "<p>The Base64-encoded string representation of a lens review report.</p>\n         <p>This data can be used to create a PDF file.</p>\n         <p>Only returned by <a>GetConsolidatedReport</a> \n         when <code>PDF</code> format is requested.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#BestPractice": {
+            "type": "structure",
+            "members": {
+                "ChoiceId": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceId"
+                },
+                "ChoiceTitle": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceTitle"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A best practice, or question choice, that has been identified as a risk in this question.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#BestPractices": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#BestPractice"
             }
         },
         "com.amazonaws.wellarchitected#CheckDescription": {
@@ -596,19 +617,19 @@
                 "HelpfulResource": {
                     "target": "com.amazonaws.wellarchitected#ChoiceContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The choice level helpful resource.</p>"
+                        "smithy.api#documentation": "<p>The helpful resource (both text and URL) for a particular choice.</p>\n         <p>This field only applies to custom lenses. Each choice can have only one helpful resource.</p>"
                     }
                 },
                 "ImprovementPlan": {
                     "target": "com.amazonaws.wellarchitected#ChoiceContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The choice level improvement plan.</p>"
+                        "smithy.api#documentation": "<p>The improvement plan (both text and URL) for a particular choice.</p>\n         <p>This field only applies to custom lenses. Each choice can have only one improvement plan.</p>"
                     }
                 },
                 "AdditionalResources": {
                     "target": "com.amazonaws.wellarchitected#AdditionalResourcesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The additional resources for a choice. A choice can have up to two additional resources: one of type <code>HELPFUL_RESOURCE</code>, \n            one of type <code>IMPROVEMENT_PLAN</code>, or both.</p>"
+                        "smithy.api#documentation": "<p>The additional resources for a choice in a custom lens.</p>\n         <p>A choice can have up to two additional resources: one of type <code>HELPFUL_RESOURCE</code>, \n            one of type <code>IMPROVEMENT_PLAN</code>, or both.</p>"
                     }
                 }
             },
@@ -889,7 +910,7 @@
         "com.amazonaws.wellarchitected#ClientRequestToken": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>A unique case-sensitive string used to ensure that this request is idempotent\n            (executes only once).</p>\n        <p>You should not reuse the same token for other requests. If you retry a request with\n            the same client request token and the same parameters after it has completed\n            successfully, the result of the original request is returned. </p>\n        <important>\n            <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs\n                automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,\n                you must provide this token or the request will fail.</p>\n        </important>"
+                "smithy.api#documentation": "<p>A unique case-sensitive string used to ensure that this request is idempotent\n            (executes only once).</p>\n         <p>You should not reuse the same token for other requests. If you retry a request with\n            the same client request token and the same parameters after the original request has completed\n            successfully, the result of the original request is returned.</p>\n         <important>\n            <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs\n                automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,\n                you must provide this token or the request will fail.</p>\n         </important>"
             }
         },
         "com.amazonaws.wellarchitected#ConflictException": {
@@ -915,9 +936,57 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The resource already exists.</p>",
+                "smithy.api#documentation": "<p>The resource has already been processed, was deleted, or is too large.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.wellarchitected#ConsolidatedReportMetric": {
+            "type": "structure",
+            "members": {
+                "MetricType": {
+                    "target": "com.amazonaws.wellarchitected#MetricType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric type of a metric in the consolidated report. Currently only WORKLOAD metric types are supported.</p>"
+                    }
+                },
+                "RiskCounts": {
+                    "target": "com.amazonaws.wellarchitected#RiskCounts"
+                },
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "WorkloadName": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadName"
+                },
+                "WorkloadArn": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadArn"
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
+                },
+                "Lenses": {
+                    "target": "com.amazonaws.wellarchitected#LensMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metrics for the lenses in the workload.</p>"
+                    }
+                },
+                "LensesAppliedCount": {
+                    "target": "com.amazonaws.wellarchitected#LensesAppliedCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of lenses applied to the workload.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A metric that contributes to the consolidated report.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ConsolidatedReportMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ConsolidatedReportMetric"
             }
         },
         "com.amazonaws.wellarchitected#Count": {
@@ -962,7 +1031,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a lens share.</p>\n        <p>The owner of a lens can share it with other Amazon Web Services accounts, IAM users, an organization,\n            and organizational units (OUs) in the same Amazon Web Services Region. \n            Shared access to a lens is not removed until the lens invitation is deleted.</p>\n        <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>By sharing your custom lenses with other Amazon Web Services accounts, \n                you acknowledge that Amazon Web Services will make your custom lenses available to those \n                other accounts. Those other accounts may continue to access and use your \n                shared custom lenses even if you delete the custom lenses \n                from your own Amazon Web Services account or terminate \n                your Amazon Web Services account.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Create a lens share.</p>\n         <p>The owner of a lens can share it with other Amazon Web Services accounts, users, an organization,\n            and organizational units (OUs) in the same Amazon Web Services Region.\n            Lenses provided by Amazon Web Services (Amazon Web Services Official Content) cannot be shared.</p>\n         <p>\n            Shared access to a lens is not removed until the lens invitation is deleted.</p>\n         <p>If you share a lens with an organization or OU, all accounts in the organization or OU\n        are granted access to the lens.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-sharing.html\">Sharing a custom lens</a> in the\n            <i>Well-Architected Tool User Guide</i>.</p>\n         <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>By sharing your custom lenses with other Amazon Web Services accounts, \n                you acknowledge that Amazon Web Services will make your custom lenses available to those \n                other accounts. Those other accounts may continue to access and use your \n                shared custom lenses even if you delete the custom lenses \n                from your own Amazon Web Services account or terminate \n                your Amazon Web Services account.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/lenses/{LensAlias}/shares",
@@ -993,6 +1062,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#CreateLensShareOutput": {
@@ -1001,6 +1073,9 @@
                 "ShareId": {
                     "target": "com.amazonaws.wellarchitected#ShareId"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#CreateLensVersion": {
@@ -1035,7 +1110,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a new lens version.</p>\n        <p>A lens can have up to 100 versions.</p>\n        <p>After a lens has been imported, create a new lens version to publish it.  The owner of a lens can share the lens with other \n            Amazon Web Services accounts and IAM users in the same Amazon Web Services Region. Only the owner of a lens can delete it.\n        </p>",
+                "smithy.api#documentation": "<p>Create a new lens version.</p>\n         <p>A lens can have up to 100 versions.</p>\n         <p>Use this operation to publish a new lens version after you have imported a lens. The <code>LensAlias</code> \n            is used to identify the lens to be published. \n            The owner of a lens can share the lens with other \n            Amazon Web Services accounts and users in the same Amazon Web Services Region. Only the owner of a lens can delete it.\n        </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/lenses/{LensAlias}/versions",
@@ -1074,6 +1149,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#CreateLensVersionOutput": {
@@ -1091,6 +1169,9 @@
                         "smithy.api#documentation": "<p>The version of the lens.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#CreateMilestone": {
@@ -1158,7 +1239,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for milestone creation.</p>"
+                "smithy.api#documentation": "<p>Input for milestone creation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#CreateMilestoneOutput": {
@@ -1175,7 +1257,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output of a create milestone call.</p>"
+                "smithy.api#documentation": "<p>Output of a create milestone call.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#CreateWorkload": {
@@ -1197,6 +1280,9 @@
                     "target": "com.amazonaws.wellarchitected#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.wellarchitected#ServiceQuotaExceededException"
                 },
                 {
@@ -1207,7 +1293,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a new workload.</p>\n        <p>The owner of a workload can share the workload with other Amazon Web Services accounts, IAM users,\n            an organization, and organizational units (OUs) \n            in the same Amazon Web Services Region. Only the owner of a workload can delete it.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html\">Defining a Workload</a> in the\n                <i>Well-Architected Tool User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Create a new workload.</p>\n         <p>The owner of a workload can share the workload with other Amazon Web Services accounts, users,\n            an organization, and organizational units (OUs) \n            in the same Amazon Web Services Region. Only the owner of a workload can delete it.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html\">Defining a Workload</a> in the\n                <i>Well-Architected Tool User Guide</i>.</p>\n         <important>\n            <p>Either <code>AwsRegions</code>, <code>NonAwsRegions</code>, or both must be specified when\n                creating a workload.</p>\n            <p>You also must specify <code>ReviewOwner</code>, even though the\n                parameter is listed as not being required in the following section.\n            </p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/workloads",
@@ -1296,7 +1382,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for workload creation.</p>"
+                "smithy.api#documentation": "<p>Input for workload creation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#CreateWorkloadOutput": {
@@ -1310,7 +1397,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output of a create workload call.</p>"
+                "smithy.api#documentation": "<p>Output of a create workload call.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#CreateWorkloadShare": {
@@ -1345,7 +1433,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a workload share.</p>\n        <p>The owner of a workload can share it with other Amazon Web Services accounts and IAM users in the same\n            Amazon Web Services Region. Shared access to a workload is not removed until the workload invitation is\n            deleted.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html\">Sharing a Workload</a> in the\n                <i>Well-Architected Tool User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Create a workload share.</p>\n         <p>The owner of a workload can share it with other Amazon Web Services accounts and users in the same\n            Amazon Web Services Region. Shared access to a workload is not removed until the workload invitation is\n            deleted.</p>\n         <p>If you share a workload with an organization or OU, all accounts in the organization or OU\n            are granted access to the workload.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html\">Sharing a workload</a> in the\n                <i>Well-Architected Tool User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/workloads/{WorkloadId}/shares",
@@ -1384,7 +1472,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for Create Workload Share</p>"
+                "smithy.api#documentation": "<p>Input for Create Workload Share</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#CreateWorkloadShareOutput": {
@@ -1398,7 +1487,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for Create Workload Share</p>"
+                "smithy.api#documentation": "<p>Input for Create Workload Share</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#DeleteLens": {
@@ -1430,7 +1520,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete an existing lens.</p>\n        <p>Only the owner of a lens can delete it.  After the lens is deleted,  Amazon Web Services accounts and IAM users \n              that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.\n        </p>\n        <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>By sharing your custom lenses with other Amazon Web Services accounts, \n                you acknowledge that Amazon Web Services will make your custom lenses available to those \n                other accounts. Those other accounts may continue to access and use your \n                shared custom lenses even if you delete the custom lenses \n                from your own Amazon Web Services account or terminate \n                your Amazon Web Services account.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Delete an existing lens.</p>\n         <p>Only the owner of a lens can delete it.  After the lens is deleted,  Amazon Web Services accounts and users \n              that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.\n        </p>\n         <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>By sharing your custom lenses with other Amazon Web Services accounts, \n                you acknowledge that Amazon Web Services will make your custom lenses available to those \n                other accounts. Those other accounts may continue to access and use your \n                shared custom lenses even if you delete the custom lenses \n                from your own Amazon Web Services account or terminate \n                your Amazon Web Services account.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/lenses/{LensAlias}",
@@ -1464,6 +1554,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#DeleteLensShare": {
@@ -1495,7 +1588,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete a lens share.</p>\n        <p>After the lens share is deleted,  Amazon Web Services accounts, IAM users, organizations,\n            and organizational units (OUs) \n            that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.</p>\n        <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>By sharing your custom lenses with other Amazon Web Services accounts, \n                you acknowledge that Amazon Web Services will make your custom lenses available to those \n                other accounts. Those other accounts may continue to access and use your \n                shared custom lenses even if you delete the custom lenses \n                from your own Amazon Web Services account or terminate \n                your Amazon Web Services account.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Delete a lens share.</p>\n         <p>After the lens share is deleted,  Amazon Web Services accounts, users, organizations,\n            and organizational units (OUs) \n            that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.</p>\n         <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>By sharing your custom lenses with other Amazon Web Services accounts, \n                you acknowledge that Amazon Web Services will make your custom lenses available to those \n                other accounts. Those other accounts may continue to access and use your \n                shared custom lenses even if you delete the custom lenses \n                from your own Amazon Web Services account or terminate \n                your Amazon Web Services account.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/lenses/{LensAlias}/shares/{ShareId}",
@@ -1528,6 +1621,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#DeleteWorkload": {
@@ -1587,7 +1683,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for workload deletion.</p>"
+                "smithy.api#documentation": "<p>Input for workload deletion.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#DeleteWorkloadShare": {
@@ -1654,7 +1751,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for Delete Workload Share</p>"
+                "smithy.api#documentation": "<p>Input for Delete Workload Share</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#DifferenceStatus": {
@@ -1709,7 +1807,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociate a lens from a workload.</p>\n        <p>Up to 10 lenses can be disassociated from a workload in a single API operation.</p>\n        <note>\n            <p>The Amazon Web Services Well-Architected Framework lens (<code>wellarchitected</code>) cannot be\n                removed from a workload.</p>\n        </note>",
+                "smithy.api#documentation": "<p>Disassociate a lens from a workload.</p>\n         <p>Up to 10 lenses can be disassociated from a workload in a single API operation.</p>\n         <note>\n            <p>The Amazon Web Services Well-Architected Framework lens (<code>wellarchitected</code>) cannot be\n                removed from a workload.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/workloads/{WorkloadId}/disassociateLenses",
@@ -1735,7 +1833,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to disassociate lens reviews.</p>"
+                "smithy.api#documentation": "<p>Input to disassociate lens reviews.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#DisplayText": {
@@ -1791,7 +1890,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Export an existing lens.</p>\n        <p>Lenses are defined in JSON. For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html\">JSON format specification</a> \n            in the <i>Well-Architected Tool User Guide</i>. Only the owner of a lens can export it.               \n        </p>\n        <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>Do not include or gather personal identifiable information (PII) of end users or \n                other identifiable individuals in or via your custom lenses. If your custom \n                lens or those shared with you and used in your account do include or collect \n                PII you are responsible for: ensuring that the included PII is processed in accordance \n                with applicable law, providing adequate privacy notices, and obtaining necessary \n                consents for processing such data.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Export an existing lens.</p>\n         <p>Only the owner of a lens can export it. Lenses provided by Amazon Web Services (Amazon Web Services Official Content) \n            cannot be exported.</p>\n         <p>Lenses are defined in JSON. For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html\">JSON format specification</a> \n            in the <i>Well-Architected Tool User Guide</i>.</p>\n         <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>Do not include or gather personal identifiable information (PII) of end users or \n                other identifiable individuals in or via your custom lenses. If your custom \n                lens or those shared with you and used in your account do include or collect \n                PII you are responsible for: ensuring that the included PII is processed in accordance \n                with applicable law, providing adequate privacy notices, and obtaining necessary \n                consents for processing such data.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/lenses/{LensAlias}/export",
@@ -1816,6 +1915,9 @@
                         "smithy.api#httpQuery": "LensVersion"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#ExportLensOutput": {
@@ -1824,9 +1926,12 @@
                 "LensJSON": {
                     "target": "com.amazonaws.wellarchitected#LensJSON",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON for the lens.</p>"
+                        "smithy.api#documentation": "<p>The JSON representation of a lens.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#FlaggedResources": {
@@ -1906,7 +2011,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to get answer.</p>"
+                "smithy.api#documentation": "<p>Input to get answer.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#GetAnswerOutput": {
@@ -1935,7 +2041,115 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output of a get answer call.</p>"
+                "smithy.api#documentation": "<p>Output of a get answer call.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.wellarchitected#GetConsolidatedReport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#GetConsolidatedReportInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#GetConsolidatedReportOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get a consolidated report of your workloads.</p>\n         <p>You can optionally choose to include workloads that have been shared with you.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/consolidatedReport",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#GetConsolidatedReportInput": {
+            "type": "structure",
+            "members": {
+                "Format": {
+                    "target": "com.amazonaws.wellarchitected#ReportFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the consolidated report.</p>\n         <p>For <code>PDF</code>, <code>Base64String</code> is returned. For <code>JSON</code>, \n            <code>Metrics</code> is returned.</p>",
+                        "smithy.api#httpQuery": "Format",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IncludeSharedResources": {
+                    "target": "com.amazonaws.wellarchitected#IncludeSharedResources",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to have shared resources included in the report.</p>",
+                        "smithy.api#httpQuery": "IncludeSharedResources"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.wellarchitected#GetConsolidatedReportMaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wellarchitected#GetConsolidatedReportMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 15
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#GetConsolidatedReportOutput": {
+            "type": "structure",
+            "members": {
+                "Metrics": {
+                    "target": "com.amazonaws.wellarchitected#ConsolidatedReportMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metrics that make up the consolidated report.</p>\n         <p>Only returned when <code>JSON</code> format is requested.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                },
+                "Base64String": {
+                    "target": "com.amazonaws.wellarchitected#Base64String"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#GetLens": {
@@ -1989,6 +2203,9 @@
                         "smithy.api#httpQuery": "LensVersion"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#GetLensOutput": {
@@ -2000,6 +2217,9 @@
                         "smithy.api#documentation": "<p>A lens return object.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#GetLensReview": {
@@ -2062,7 +2282,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to get lens review.</p>"
+                "smithy.api#documentation": "<p>Input to get lens review.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#GetLensReviewOutput": {
@@ -2082,7 +2303,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output of a get lens review call.</p>"
+                "smithy.api#documentation": "<p>Output of a get lens review call.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#GetLensReviewReport": {
@@ -2145,7 +2367,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to get lens review report.</p>"
+                "smithy.api#documentation": "<p>Input to get lens review report.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#GetLensReviewReportOutput": {
@@ -2165,7 +2388,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output of a get lens review report call.</p>"
+                "smithy.api#documentation": "<p>Output of a get lens review report call.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#GetLensVersionDifference": {
@@ -2226,6 +2450,9 @@
                         "smithy.api#httpQuery": "TargetLensVersion"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#GetLensVersionDifferenceOutput": {
@@ -2261,6 +2488,9 @@
                 "VersionDifferences": {
                     "target": "com.amazonaws.wellarchitected#VersionDifferences"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#GetMilestone": {
@@ -2317,7 +2547,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to get a milestone.</p>"
+                "smithy.api#documentation": "<p>Input to get a milestone.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#GetMilestoneOutput": {
@@ -2331,7 +2562,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output of a get milestone call.</p>"
+                "smithy.api#documentation": "<p>Output of a get milestone call.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#GetWorkload": {
@@ -2380,7 +2612,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to get a workload.</p>"
+                "smithy.api#documentation": "<p>Input to get a workload.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#GetWorkloadOutput": {
@@ -2391,13 +2624,14 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output of a get workload call.</p>"
+                "smithy.api#documentation": "<p>Output of a get workload call.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#HelpfulResourceUrl": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The helpful resource URL for a question.</p>",
+                "smithy.api#documentation": "<p>The helpful resource URL.</p>\n         <p>For Amazon Web Services official lenses, this is the helpful resource URL for a question or choice.</p>\n         <p>For custom lenses, this is the helpful resource URL for a question and is only provided\n            if <code>HelpfulResourceDisplayText</code> was specified for the question.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
@@ -2436,7 +2670,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Import a new lens.</p>\n        <p>The lens cannot be applied to workloads or shared with other Amazon Web Services accounts\n            until it's published with <a>CreateLensVersion</a>\n         </p>\n        <p>Lenses are defined in JSON. For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html\">JSON format specification</a> \n            in the <i>Well-Architected Tool User Guide</i>.</p>\n        <p>A custom lens cannot exceed 500 KB in size.</p>\n        \n        <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>Do not include or gather personal identifiable information (PII) of end users or \n                other identifiable individuals in or via your custom lenses. If your custom \n                lens or those shared with you and used in your account do include or collect \n                PII you are responsible for: ensuring that the included PII is processed in accordance \n                with applicable law, providing adequate privacy notices, and obtaining necessary \n                consents for processing such data.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Import a new custom lens or update an existing custom lens.</p>\n         <p>To update an existing custom lens, specify its ARN as the  <code>LensAlias</code>. If\n            no ARN is specified, a new custom lens is created.</p>\n         <p>The new or updated lens will have a status of <code>DRAFT</code>. The lens cannot be\n            applied to workloads or shared with other Amazon Web Services accounts until it's\n            published with <a>CreateLensVersion</a>.</p>\n         <p>Lenses are defined in JSON. For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html\">JSON format specification</a> \n            in the <i>Well-Architected Tool User Guide</i>.</p>\n         <p>A custom lens cannot exceed 500 KB in size.</p>\n         <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>Do not include or gather personal identifiable information (PII) of end users or \n                other identifiable individuals in or via your custom lenses. If your custom \n                lens or those shared with you and used in your account do include or collect \n                PII you are responsible for: ensuring that the included PII is processed in accordance \n                with applicable law, providing adequate privacy notices, and obtaining necessary \n                consents for processing such data.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/importLens",
@@ -2470,6 +2704,9 @@
                         "smithy.api#documentation": "<p>Tags to associate to a lens.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#ImportLensOutput": {
@@ -2478,7 +2715,7 @@
                 "LensArn": {
                     "target": "com.amazonaws.wellarchitected#LensArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for the lens.</p>"
+                        "smithy.api#documentation": "<p>The ARN for the lens that was created or updated.</p>"
                     }
                 },
                 "Status": {
@@ -2487,6 +2724,9 @@
                         "smithy.api#documentation": "<p>The status of the imported lens.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#ImportLensStatus": {
@@ -2515,7 +2755,7 @@
         "com.amazonaws.wellarchitected#ImprovementPlanUrl": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The improvement plan URL for a question.</p>\n        <p>This value is only available if the question has been answered.</p>",
+                "smithy.api#documentation": "<p>The improvement plan URL for a question in an Amazon Web Services official lenses.</p>\n         <p>This value is only available if the question has been answered.</p>\n         <p>This value does not apply to custom lenses.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
@@ -2558,6 +2798,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An improvement summary of a lens review in a workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#IncludeSharedResources": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
             }
         },
         "com.amazonaws.wellarchitected#InternalServerException": {
@@ -2642,7 +2888,7 @@
         "com.amazonaws.wellarchitected#LensAlias": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The alias of the lens.</p>\n        <p>For Amazon Web Services official lenses, this is either the lens alias,\n            such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p>\n        <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p>\n        <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>",
+                "smithy.api#documentation": "<p>The alias of the lens.</p>\n         <p>For Amazon Web Services official lenses, this is either the lens alias, such as\n                <code>serverless</code>, or the lens ARN, such as\n                <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some\n            operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>\n         <p>For custom lenses, this is the lens ARN, such as\n                <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>\n         <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 128
@@ -2655,7 +2901,7 @@
                 "target": "com.amazonaws.wellarchitected#LensAlias"
             },
             "traits": {
-                "smithy.api#documentation": "<p>List of lens aliases to associate or disassociate with a workload. Up to 10 lenses can be specified.</p>\n        <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>",
+                "smithy.api#documentation": "<p>List of lens aliases to associate or disassociate with a workload. Up to 10 lenses can be specified.</p>\n         <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>",
                 "smithy.api#length": {
                     "min": 1
                 }
@@ -2681,6 +2927,35 @@
                     "min": 2,
                     "max": 500000
                 }
+            }
+        },
+        "com.amazonaws.wellarchitected#LensMetric": {
+            "type": "structure",
+            "members": {
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lens ARN.</p>"
+                    }
+                },
+                "Pillars": {
+                    "target": "com.amazonaws.wellarchitected#PillarMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metrics for the pillars in a lens.</p>"
+                    }
+                },
+                "RiskCounts": {
+                    "target": "com.amazonaws.wellarchitected#RiskCounts"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A metric for a particular lens in a workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#LensMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#LensMetric"
             }
         },
         "com.amazonaws.wellarchitected#LensName": {
@@ -3032,6 +3307,15 @@
                 }
             }
         },
+        "com.amazonaws.wellarchitected#LensesAppliedCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.wellarchitected#ListAnswers": {
             "type": "operation",
             "input": {
@@ -3058,7 +3342,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List of answers.</p>",
+                "smithy.api#documentation": "<p>List of answers for a particular workload and lens.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/workloads/{WorkloadId}/lensReviews/{LensAlias}/answers",
@@ -3117,7 +3401,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to list answers.</p>"
+                "smithy.api#documentation": "<p>Input to list answers.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#ListAnswersMaxResults": {
@@ -3159,7 +3444,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output of a list answers call.</p>"
+                "smithy.api#documentation": "<p>Output of a list answers call.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#ListCheckDetails": {
@@ -3245,6 +3531,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#ListCheckDetailsOutput": {
@@ -3259,6 +3548,9 @@
                 "NextToken": {
                     "target": "com.amazonaws.wellarchitected#NextToken"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#ListCheckSummaries": {
@@ -3344,6 +3636,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#ListCheckSummariesOutput": {
@@ -3358,6 +3653,9 @@
                 "NextToken": {
                     "target": "com.amazonaws.wellarchitected#NextToken"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#ListLensReviewImprovements": {
@@ -3445,7 +3743,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to list lens review improvements.</p>"
+                "smithy.api#documentation": "<p>Input to list lens review improvements.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#ListLensReviewImprovementsMaxResults": {
@@ -3487,7 +3786,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output of a list lens review improvements call.</p>"
+                "smithy.api#documentation": "<p>Output of a list lens review improvements call.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#ListLensReviews": {
@@ -3516,7 +3816,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List lens reviews.</p>",
+                "smithy.api#documentation": "<p>List lens reviews for a particular workload.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/workloads/{WorkloadId}/lensReviews",
@@ -3561,7 +3861,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to list lens reviews.</p>"
+                "smithy.api#documentation": "<p>Input to list lens reviews.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#ListLensReviewsOutput": {
@@ -3584,7 +3885,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output of a list lens reviews call.</p>"
+                "smithy.api#documentation": "<p>Output of a list lens reviews call.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#ListLensShares": {
@@ -3663,6 +3965,9 @@
                         "smithy.api#httpQuery": "Status"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#ListLensSharesOutput": {
@@ -3677,6 +3982,9 @@
                 "NextToken": {
                     "target": "com.amazonaws.wellarchitected#NextToken"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#ListLenses": {
@@ -3753,7 +4061,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to list lenses.</p>"
+                "smithy.api#documentation": "<p>Input to list lenses.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#ListLensesOutput": {
@@ -3767,7 +4076,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output of a list lenses call.</p>"
+                "smithy.api#documentation": "<p>Output of a list lenses call.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#ListMilestones": {
@@ -3830,7 +4140,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to list all milestones for a workload.</p>"
+                "smithy.api#documentation": "<p>Input to list all milestones for a workload.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#ListMilestonesOutput": {
@@ -3847,7 +4158,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output of a list milestones call.</p>"
+                "smithy.api#documentation": "<p>Output of a list milestones call.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#ListNotifications": {
@@ -3902,6 +4214,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#ListNotificationsMaxResults": {
@@ -3926,6 +4241,9 @@
                 "NextToken": {
                     "target": "com.amazonaws.wellarchitected#NextToken"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#ListShareInvitations": {
@@ -4003,7 +4321,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for List Share Invitations</p>"
+                "smithy.api#documentation": "<p>Input for List Share Invitations</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#ListShareInvitationsMaxResults": {
@@ -4030,7 +4349,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for List Share Invitations</p>"
+                "smithy.api#documentation": "<p>Input for List Share Invitations</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#ListTagsForResource": {
@@ -4050,7 +4370,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the tags for a resource.</p>\n        <note>\n            <p>The WorkloadArn parameter can be either a workload ARN or a custom lens ARN.</p>\n         </note>",
+                "smithy.api#documentation": "<p>List the tags for a resource.</p>\n         <note>\n            <p>The WorkloadArn parameter can be either a workload ARN or a custom lens ARN.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{WorkloadArn}",
@@ -4068,6 +4388,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#ListTagsForResourceOutput": {
@@ -4079,6 +4402,9 @@
                         "smithy.api#documentation": "<p>The tags for the resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#ListWorkloadShares": {
@@ -4159,7 +4485,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for List Workload Share</p>"
+                "smithy.api#documentation": "<p>Input for List Workload Share</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#ListWorkloadSharesMaxResults": {
@@ -4186,7 +4513,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for List Workload Share</p>"
+                "smithy.api#documentation": "<p>Input for List Workload Share</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#ListWorkloads": {
@@ -4212,7 +4540,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List workloads. Paginated.</p>",
+                "smithy.api#documentation": "<p>Paginated list of workloads.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/workloadsSummaries",
@@ -4243,7 +4571,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to list all workloads.</p>"
+                "smithy.api#documentation": "<p>Input to list all workloads.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#ListWorkloadsMaxResults": {
@@ -4267,7 +4596,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output of a list workloads call.</p>"
+                "smithy.api#documentation": "<p>Output of a list workloads call.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#MaxResults": {
@@ -4278,6 +4608,17 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#MetricType": {
+            "type": "enum",
+            "members": {
+                "WORKLOAD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORKLOAD"
+                    }
                 }
             }
         },
@@ -4307,7 +4648,7 @@
         "com.amazonaws.wellarchitected#MilestoneName": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The name of the milestone in a workload.</p>\n        <p>Milestone names must be unique within a workload.</p>",
+                "smithy.api#documentation": "<p>The name of the milestone in a workload.</p>\n         <p>Milestone names must be unique within a workload.</p>",
                 "smithy.api#length": {
                     "min": 3,
                     "max": 100
@@ -4318,7 +4659,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#default": 0,
-                "smithy.api#documentation": "<p>The milestone number.</p>\n        <p>A workload can have a maximum of 100 milestones.</p>",
+                "smithy.api#documentation": "<p>The milestone number.</p>\n         <p>A workload can have a maximum of 100 milestones.</p>",
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4488,11 +4829,37 @@
         "com.amazonaws.wellarchitected#PillarId": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The ID used to identify a pillar, for example, <code>security</code>.</p>\n        <p>A pillar is identified by its <a>PillarReviewSummary$PillarId</a>.</p>",
+                "smithy.api#documentation": "<p>The ID used to identify a pillar, for example, <code>security</code>.</p>\n         <p>A pillar is identified by its <a>PillarReviewSummary$PillarId</a>.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 64
                 }
+            }
+        },
+        "com.amazonaws.wellarchitected#PillarMetric": {
+            "type": "structure",
+            "members": {
+                "PillarId": {
+                    "target": "com.amazonaws.wellarchitected#PillarId"
+                },
+                "RiskCounts": {
+                    "target": "com.amazonaws.wellarchitected#RiskCounts"
+                },
+                "Questions": {
+                    "target": "com.amazonaws.wellarchitected#QuestionMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The questions that have been identified as risks in the pillar.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A metric for a particular pillar in a lens.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#PillarMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#PillarMetric"
             }
         },
         "com.amazonaws.wellarchitected#PillarName": {
@@ -4592,6 +4959,32 @@
                 }
             }
         },
+        "com.amazonaws.wellarchitected#QuestionMetric": {
+            "type": "structure",
+            "members": {
+                "QuestionId": {
+                    "target": "com.amazonaws.wellarchitected#QuestionId"
+                },
+                "Risk": {
+                    "target": "com.amazonaws.wellarchitected#Risk"
+                },
+                "BestPractices": {
+                    "target": "com.amazonaws.wellarchitected#BestPractices",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The best practices, or choices, that have been identified as contributing to risk in a question.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A metric for a particular question in the pillar. </p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#QuestionMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#QuestionMetric"
+            }
+        },
         "com.amazonaws.wellarchitected#QuestionTitle": {
             "type": "string",
             "traits": {
@@ -4606,6 +4999,23 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>Service Quotas requirement to identify originating quota.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ReportFormat": {
+            "type": "enum",
+            "members": {
+                "PDF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PDF"
+                    }
+                },
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#ResourceNotFoundException": {
@@ -4683,7 +5093,7 @@
                 "target": "com.amazonaws.wellarchitected#Count"
             },
             "traits": {
-                "smithy.api#documentation": "<p>A map from risk names to the count of how questions have that rating.</p>"
+                "smithy.api#documentation": "<p>A map from risk names to the count of how many questions have that rating.</p>"
             }
         },
         "com.amazonaws.wellarchitected#SelectedChoices": {
@@ -4692,7 +5102,7 @@
                 "target": "com.amazonaws.wellarchitected#ChoiceId"
             },
             "traits": {
-                "smithy.api#documentation": "<p>List of selected choice IDs in a question answer.</p>\n        <p>The values entered replace the previously selected choices.</p>"
+                "smithy.api#documentation": "<p>List of selected choice IDs in a question answer.</p>\n         <p>The values entered replace the previously selected choices.</p>"
             }
         },
         "com.amazonaws.wellarchitected#ServiceCode": {
@@ -5004,7 +5414,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more tags to the specified resource.</p>\n        <note>\n            <p>The WorkloadArn parameter can be either a workload ARN or a custom lens ARN.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Adds one or more tags to the specified resource.</p>\n         <note>\n            <p>The WorkloadArn parameter can be either a workload ARN or a custom lens ARN.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{WorkloadArn}",
@@ -5029,11 +5439,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#TagResourceOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.wellarchitected#TagValue": {
             "type": "string",
@@ -5106,7 +5522,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes specified tags from a resource.</p>\n        <note>\n            <p>The WorkloadArn parameter can be either a workload ARN or a custom lens ARN.</p>\n         </note>\n        \n        <p>To specify multiple tags, use separate <b>tagKeys</b> parameters, for example:</p>\n        <p>\n            <code>DELETE /tags/WorkloadArn?tagKeys=key1&tagKeys=key2</code>\n         </p>",
+                "smithy.api#documentation": "<p>Deletes specified tags from a resource.</p>\n         <note>\n            <p>The WorkloadArn parameter can be either a workload ARN or a custom lens ARN.</p>\n         </note>\n         <p>To specify multiple tags, use separate <b>tagKeys</b> parameters, for example:</p>\n         <p>\n            <code>DELETE /tags/WorkloadArn?tagKeys=key1&tagKeys=key2</code>\n         </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{WorkloadArn}",
@@ -5132,11 +5548,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#UntagResourceOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.wellarchitected#UpdateAnswer": {
             "type": "operation",
@@ -5225,7 +5647,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to update answer.</p>"
+                "smithy.api#documentation": "<p>Input to update answer.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#UpdateAnswerOutput": {
@@ -5248,7 +5671,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output of a update answer call.</p>"
+                "smithy.api#documentation": "<p>Output of a update answer call.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#UpdateGlobalSettings": {
@@ -5294,6 +5718,9 @@
                         "smithy.api#documentation": "<p>The status of organization sharing settings.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#UpdateLensReview": {
@@ -5325,7 +5752,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update lens review.</p>",
+                "smithy.api#documentation": "<p>Update lens review for a particular workload.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/workloads/{WorkloadId}/lensReviews/{LensAlias}",
@@ -5358,7 +5785,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for update lens review.</p>"
+                "smithy.api#documentation": "<p>Input for update lens review.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#UpdateLensReviewOutput": {
@@ -5372,7 +5800,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output of a update lens review call.</p>"
+                "smithy.api#documentation": "<p>Output of a update lens review call.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#UpdateShareInvitation": {
@@ -5404,7 +5833,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update a workload or custom lens share invitation.</p>\n        <note>\n            <p>This API operation can be called independently of any resource. Previous documentation implied that a workload ARN must be specified.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Update a workload or custom lens share invitation.</p>\n         <note>\n            <p>This API operation can be called independently of any resource. Previous documentation implied that a workload ARN must be specified.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/shareInvitations/{ShareInvitationId}",
@@ -5431,7 +5860,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for Update Share Invitation</p>"
+                "smithy.api#documentation": "<p>Input for Update Share Invitation</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#UpdateShareInvitationOutput": {
@@ -5443,6 +5873,9 @@
                         "smithy.api#documentation": "<p>The updated workload or custom lens share invitation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#UpdateWorkload": {
@@ -5523,7 +5956,7 @@
                     "target": "com.amazonaws.wellarchitected#IsReviewOwnerUpdateAcknowledged",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Flag indicating whether the workload owner has acknowledged that the <i>Review\n                owner</i> field is required.</p>\n        <p>If a <b>Review owner</b> is not added to the workload within\n            60 days of acknowledgement, access to the workload is restricted until an owner is\n            added.</p>"
+                        "smithy.api#documentation": "<p>Flag indicating whether the workload owner has acknowledged that the <i>Review\n                owner</i> field is required.</p>\n         <p>If a <b>Review owner</b> is not added to the workload within\n            60 days of acknowledgement, access to the workload is restricted until an owner is\n            added.</p>"
                     }
                 },
                 "IndustryType": {
@@ -5552,7 +5985,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to update a workload.</p>"
+                "smithy.api#documentation": "<p>Input to update a workload.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#UpdateWorkloadOutput": {
@@ -5563,7 +5997,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output of an update workload call.</p>"
+                "smithy.api#documentation": "<p>Output of an update workload call.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#UpdateWorkloadShare": {
@@ -5628,7 +6063,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for Update Workload Share</p>"
+                "smithy.api#documentation": "<p>Input for Update Workload Share</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#UpdateWorkloadShareOutput": {
@@ -5642,7 +6078,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for Update Workload Share</p>"
+                "smithy.api#documentation": "<p>Input for Update Workload Share</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wellarchitected#UpgradeLensReview": {
@@ -5674,7 +6111,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Upgrade lens review.</p>",
+                "smithy.api#documentation": "<p>Upgrade lens review for a particular workload.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/workloads/{WorkloadId}/lensReviews/{LensAlias}/upgrade",
@@ -5708,6 +6145,9 @@
                 "ClientRequestToken": {
                     "target": "com.amazonaws.wellarchitected#ClientRequestToken"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.wellarchitected#Urls": {
@@ -5863,6 +6303,9 @@
                     "target": "com.amazonaws.wellarchitected#GetAnswer"
                 },
                 {
+                    "target": "com.amazonaws.wellarchitected#GetConsolidatedReport"
+                },
+                {
                     "target": "com.amazonaws.wellarchitected#GetLens"
                 },
                 {
@@ -5962,7 +6405,7 @@
                     "name": "wellarchitected"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Well-Architected Tool</fullname>\n        \n         <p>This is the <i>Well-Architected Tool API Reference</i>. The WA Tool API provides programmatic access to the \n            <a href=\"http://aws.amazon.com/well-architected-tool\">Well-Architected Tool</a> in the \n           <a href=\"https://console.aws.amazon.com/wellarchitected\">Amazon Web Services Management Console</a>. For information \n            about the Well-Architected Tool, see the \n           <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html\">Well-Architected Tool User Guide</a>.</p>",
+                "smithy.api#documentation": "<fullname>Well-Architected Tool</fullname>\n         <p>This is the <i>Well-Architected Tool API Reference</i>. The WA Tool API provides programmatic access to the \n            <a href=\"http://aws.amazon.com/well-architected-tool\">Well-Architected Tool</a> in the \n           <a href=\"https://console.aws.amazon.com/wellarchitected\">Amazon Web Services Management Console</a>. For information \n            about the Well-Architected Tool, see the \n           <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html\">Well-Architected Tool User Guide</a>.</p>",
                 "smithy.api#title": "AWS Well-Architected Tool",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -6324,9 +6767,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -6337,9 +6780,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -6350,9 +6793,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -6363,9 +6806,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -6376,9 +6819,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -6389,9 +6832,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -6402,9 +6845,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -6415,9 +6858,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -6428,9 +6871,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -6441,9 +6884,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -6454,9 +6897,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -6467,9 +6910,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-3",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -6480,9 +6923,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "me-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -6493,9 +6936,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "sa-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -6506,9 +6949,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -6519,9 +6962,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -6532,9 +6975,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -6545,9 +6988,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -6558,9 +7001,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -6571,9 +7014,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -6584,9 +7027,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -6597,9 +7040,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -6610,9 +7053,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -6623,9 +7066,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -6636,9 +7079,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -6649,9 +7092,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -6662,9 +7105,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -6675,9 +7118,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -6688,9 +7131,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -6701,9 +7155,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -6714,9 +7179,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -6727,9 +7203,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -6740,9 +7227,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -6753,9 +7240,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -6767,8 +7254,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -6778,9 +7265,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -6790,10 +7277,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -6844,7 +7337,7 @@
                     "target": "com.amazonaws.wellarchitected#IsReviewOwnerUpdateAcknowledged",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Flag indicating whether the workload owner has acknowledged that the <i>Review\n                owner</i> field is required.</p>\n        <p>If a <b>Review owner</b> is not added to the workload within\n            60 days of acknowledgement, access to the workload is restricted until an owner is\n            added.</p>"
+                        "smithy.api#documentation": "<p>Flag indicating whether the workload owner has acknowledged that the <i>Review\n                owner</i> field is required.</p>\n         <p>If a <b>Review owner</b> is not added to the workload within\n            60 days of acknowledgement, access to the workload is restricted until an owner is\n            added.</p>"
                     }
                 },
                 "IndustryType": {
@@ -7057,7 +7550,7 @@
         "com.amazonaws.wellarchitected#WorkloadIndustryType": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The industry type for the workload.</p>\n        <p>If specified, must be one of the following:</p>  \n        <ul>\n            <li>\n                <p>\n                  <code>Agriculture</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Automobile</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Defense</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Design and Engineering</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Digital Advertising</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Education</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Environmental Protection</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Financial Services</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Gaming</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>General Public Services</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Healthcare</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Hospitality</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>InfoTech</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Justice and Public Safety</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Life Sciences</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Manufacturing</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Media & Entertainment</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Mining & Resources</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Oil & Gas</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Power & Utilities</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Professional Services</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Real Estate & Construction</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Retail & Wholesale</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Social Protection</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Telecommunications</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Travel, Transportation & Logistics</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Other</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>The industry type for the workload.</p>\n         <p>If specified, must be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Agriculture</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Automobile</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Defense</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Design and Engineering</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Digital Advertising</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Education</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Environmental Protection</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Financial Services</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Gaming</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>General Public Services</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Healthcare</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Hospitality</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>InfoTech</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Justice and Public Safety</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Life Sciences</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Manufacturing</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Media & Entertainment</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Mining & Resources</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Oil & Gas</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Power & Utilities</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Professional Services</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Real Estate & Construction</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Retail & Wholesale</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Social Protection</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Telecommunications</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Travel, Transportation & Logistics</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Other</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 100
@@ -7076,7 +7569,7 @@
         "com.amazonaws.wellarchitected#WorkloadName": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The name of the workload.</p>\n        <p>The name must be unique within an account within an Amazon Web Services Region. Spaces and capitalization\n            are ignored when checking for uniqueness.</p>",
+                "smithy.api#documentation": "<p>The name of the workload.</p>\n         <p>The name must be unique within an account within an Amazon Web Services Region. Spaces and capitalization\n            are ignored when checking for uniqueness.</p>",
                 "smithy.api#length": {
                     "min": 3,
                     "max": 100

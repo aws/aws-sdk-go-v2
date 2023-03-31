@@ -35,8 +35,8 @@ type CreateReplicationConfigurationTemplateInput struct {
 	// This member is required.
 	AssociateDefaultSecurityGroup *bool
 
-	// Configure bandwidth throttling for the outbound data transfer rate of the
-	// Source Server in Mbps.
+	// Configure bandwidth throttling for the outbound data transfer rate of the Source
+	// Server in Mbps.
 	//
 	// This member is required.
 	BandwidthThrottling int64
@@ -92,6 +92,10 @@ type CreateReplicationConfigurationTemplateInput struct {
 	// This member is required.
 	UseDedicatedReplicationServer *bool
 
+	// Whether to allow the AWS replication agent to automatically replicate newly
+	// added disks.
+	AutoReplicateNewDisks *bool
+
 	// The ARN of the EBS encryption key to be used during replication.
 	EbsEncryptionKeyArn *string
 
@@ -116,8 +120,12 @@ type CreateReplicationConfigurationTemplateOutput struct {
 	// the Replication Configuration Template.
 	AssociateDefaultSecurityGroup *bool
 
-	// Configure bandwidth throttling for the outbound data transfer rate of the
-	// Source Server in Mbps.
+	// Whether to allow the AWS replication agent to automatically replicate newly
+	// added disks.
+	AutoReplicateNewDisks *bool
+
+	// Configure bandwidth throttling for the outbound data transfer rate of the Source
+	// Server in Mbps.
 	BandwidthThrottling int64
 
 	// Whether to create a Public IP for the Recovery Instance by default.

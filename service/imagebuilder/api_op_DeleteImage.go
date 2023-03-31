@@ -44,8 +44,7 @@ type DeleteImageInput struct {
 
 type DeleteImageOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Image Builder image resource that was
-	// deleted.
+	// The ARN of the Image Builder image resource that this request deleted.
 	ImageBuildVersionArn *string
 
 	// The request ID that uniquely identifies this request.

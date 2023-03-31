@@ -55,7 +55,7 @@ type StartVectorEnrichmentJobInput struct {
 	// A unique token that guarantees that the call to this API is idempotent.
 	ClientToken *string
 
-	// The Amazon Key Management Service (KMS) key ID for server-side encryption.
+	// The Key Management Service key ID for server-side encryption.
 	KmsKeyId *string
 
 	// Each tag consists of a key and a value.
@@ -111,7 +111,7 @@ type StartVectorEnrichmentJobOutput struct {
 	// This member is required.
 	Type types.VectorEnrichmentJobType
 
-	// The Amazon Key Management Service (KMS) key ID for server-side encryption.
+	// The Key Management Service key ID for server-side encryption.
 	KmsKeyId *string
 
 	// Each tag consists of a key and a value.

@@ -48,13 +48,13 @@ type DescribeQuerySuggestionsConfigOutput struct {
 	// information to generate the query suggestions.
 	IncludeQueriesWithoutUserInformation *bool
 
-	// The date-time query suggestions for an index was last cleared. After you clear
-	// suggestions, Amazon Kendra learns new suggestions based on new queries added to
-	// the query log from the time you cleared suggestions. Amazon Kendra only
+	// The Unix timestamp when query suggestions for an index was last cleared. After
+	// you clear suggestions, Amazon Kendra learns new suggestions based on new queries
+	// added to the query log from the time you cleared suggestions. Amazon Kendra only
 	// considers re-occurences of a query from the time you cleared suggestions.
 	LastClearTime *time.Time
 
-	// The date-time query suggestions for an index was last updated.
+	// The Unix timestamp when query suggestions for an index was last updated.
 	LastSuggestionsBuildTime *time.Time
 
 	// The minimum number of unique users who must search a query in order for the

@@ -55,6 +55,10 @@ type ModifyVpnTunnelOptionsInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
+	// Choose whether or not to trigger immediate tunnel replacement. Valid values:
+	// True | False
+	SkipTunnelReplacement *bool
+
 	noSmithyDocumentSerde
 }
 

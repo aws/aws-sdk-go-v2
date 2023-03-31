@@ -40237,6 +40237,97 @@ func awsEc2query_deserializeOpErrorGetVpnConnectionDeviceTypes(response *smithyh
 	}
 }
 
+type awsEc2query_deserializeOpGetVpnTunnelReplacementStatus struct {
+}
+
+func (*awsEc2query_deserializeOpGetVpnTunnelReplacementStatus) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsEc2query_deserializeOpGetVpnTunnelReplacementStatus) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsEc2query_deserializeOpErrorGetVpnTunnelReplacementStatus(response, &metadata)
+	}
+	output := &GetVpnTunnelReplacementStatusOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeOpDocumentGetVpnTunnelReplacementStatusOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsEc2query_deserializeOpErrorGetVpnTunnelReplacementStatus(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := ec2query.GetErrorResponseComponents(errorBody)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.SetRequestIDMetadata(metadata, errorComponents.RequestID)
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsEc2query_deserializeOpImportClientVpnClientCertificateRevocationList struct {
 }
 
@@ -49006,6 +49097,97 @@ func (m *awsEc2query_deserializeOpReplaceTransitGatewayRoute) HandleDeserialize(
 }
 
 func awsEc2query_deserializeOpErrorReplaceTransitGatewayRoute(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := ec2query.GetErrorResponseComponents(errorBody)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.SetRequestIDMetadata(metadata, errorComponents.RequestID)
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsEc2query_deserializeOpReplaceVpnTunnel struct {
+}
+
+func (*awsEc2query_deserializeOpReplaceVpnTunnel) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsEc2query_deserializeOpReplaceVpnTunnel) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsEc2query_deserializeOpErrorReplaceVpnTunnel(response, &metadata)
+	}
+	output := &ReplaceVpnTunnelOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeOpDocumentReplaceVpnTunnelOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsEc2query_deserializeOpErrorReplaceVpnTunnel(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -93757,6 +93939,89 @@ func awsEc2query_deserializeDocumentLocalStorageTypeSetUnwrapped(v *[]types.Loca
 	*v = sv
 	return nil
 }
+func awsEc2query_deserializeDocumentMaintenanceDetails(v **types.MaintenanceDetails, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.MaintenanceDetails
+	if *v == nil {
+		sv = &types.MaintenanceDetails{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("lastMaintenanceApplied", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.LastMaintenanceApplied = ptr.Time(t)
+			}
+
+		case strings.EqualFold("maintenanceAutoAppliedAfter", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.MaintenanceAutoAppliedAfter = ptr.Time(t)
+			}
+
+		case strings.EqualFold("pendingMaintenance", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.PendingMaintenance = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeDocumentManagedPrefixList(v **types.ManagedPrefixList, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -123836,6 +124101,22 @@ func awsEc2query_deserializeDocumentTunnelOption(v **types.TunnelOption, decoder
 					return err
 				}
 				sv.DpdTimeoutSeconds = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("enableTunnelLifecycleControl", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.EnableTunnelLifecycleControl = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("ikeVersionSet", t.Name.Local):
@@ -154315,6 +154596,113 @@ func awsEc2query_deserializeOpDocumentGetVpnConnectionDeviceTypesOutput(v **GetV
 	return nil
 }
 
+func awsEc2query_deserializeOpDocumentGetVpnTunnelReplacementStatusOutput(v **GetVpnTunnelReplacementStatusOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *GetVpnTunnelReplacementStatusOutput
+	if *v == nil {
+		sv = &GetVpnTunnelReplacementStatusOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("customerGatewayId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.CustomerGatewayId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("maintenanceDetails", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentMaintenanceDetails(&sv.MaintenanceDetails, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("transitGatewayId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TransitGatewayId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("vpnConnectionId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.VpnConnectionId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("vpnGatewayId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.VpnGatewayId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("vpnTunnelOutsideIpAddress", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.VpnTunnelOutsideIpAddress = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeOpDocumentImportClientVpnClientCertificateRevocationListOutput(v **ImportClientVpnClientCertificateRevocationListOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -158690,6 +159078,58 @@ func awsEc2query_deserializeOpDocumentReplaceTransitGatewayRouteOutput(v **Repla
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentTransitGatewayRoute(&sv.Route, nodeDecoder); err != nil {
 				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeOpDocumentReplaceVpnTunnelOutput(v **ReplaceVpnTunnelOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *ReplaceVpnTunnelOutput
+	if *v == nil {
+		sv = &ReplaceVpnTunnelOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("return", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:

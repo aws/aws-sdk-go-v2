@@ -136,7 +136,7 @@
                         "date"
                     ]
                 },
-                "smithy.api#documentation": "<p>\n            <b>Introduction</b>\n         </p>\n         <p>The Amazon Interactive Video Service (IVS) API is REST compatible, using a standard HTTP\n      API and an Amazon Web Services EventBridge event stream for responses. JSON is used for both\n      requests and responses, including errors.</p>\n         <p>The API is an Amazon Web Services regional service. For a list of supported regions and\n      Amazon IVS HTTPS service endpoints, see the <a href=\"https://docs.aws.amazon.com/general/latest/gr/ivs.html\">Amazon IVS page</a> in the\n          <i>Amazon Web Services General Reference</i>.</p>\n         <p>\n            <i>\n               <b>All API request parameters and URLs are case sensitive.\n        </b>\n            </i>\n         </p>\n         <p>For a summary of notable documentation changes in each release, see <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/doc-history.html\"> Document\n      History</a>.</p>\n         <p>\n            <b>Allowed Header Values</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>\n                     <b>Accept:</b>\n                  </code> application/json</p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <b>Accept-Encoding:</b>\n                  </code> gzip, deflate</p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <b>Content-Type:</b>\n                  </code>application/json</p>\n            </li>\n         </ul>\n         <p>\n            <b>Resources</b>\n         </p>\n         <p>The following resources contain information about your IVS live stream (see <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/getting-started.html\"> Getting Started with\n        Amazon IVS</a>):</p>\n         <ul>\n            <li>\n               <p>Channel — Stores configuration data related to your live stream. You first create a\n          channel and then use the channel’s stream key to start your live stream. See the Channel\n          endpoints for more information. </p>\n            </li>\n            <li>\n               <p>Stream key — An identifier assigned by Amazon IVS when you create a channel, which is\n          then used to authorize streaming. See the StreamKey endpoints for more information.\n              <i>\n                     <b>Treat the stream key like a secret, since it allows\n              anyone to stream to the channel.</b>\n                  </i>\n               </p>\n            </li>\n            <li>\n               <p>Playback key pair — Video playback may be restricted using playback-authorization\n          tokens, which use public-key encryption. A playback key pair is the public-private pair of\n          keys used to sign and validate the playback-authorization token. See the PlaybackKeyPair\n          endpoints for more information.</p>\n            </li>\n            <li>\n               <p>Recording configuration — Stores configuration related to recording a live stream and\n          where to store the recorded content. Multiple channels can reference the same recording\n          configuration. See the Recording Configuration endpoints for more information.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Tagging</b>\n         </p>\n         <p>A <i>tag</i> is a metadata label that you assign to an Amazon Web Services\n      resource. A tag comprises a <i>key</i> and a <i>value</i>, both\n      set by you. For example, you might set a tag as <code>topic:nature</code> to label a\n      particular video category. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for\n      more information, including restrictions that apply to tags and \"Tag naming limits and\n      requirements\"; Amazon IVS has no service-specific constraints beyond what is documented\n      there.</p>\n         <p>Tags can help you identify and organize your Amazon Web Services resources. For example,\n      you can use the same tag for different resources to indicate that they are related. You can\n      also use tags to manage access (see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\"> Access Tags</a>). </p>\n         <p>The Amazon IVS API has these tag-related endpoints: <a>TagResource</a>, <a>UntagResource</a>, and <a>ListTagsForResource</a>. The following\n      resources support tagging: Channels, Stream Keys, Playback Key Pairs, and Recording\n      Configurations.</p>\n         <p>At most 50 tags can be applied to a resource. </p>\n         <p>\n            <b>Authentication versus Authorization</b>\n         </p>\n         <p>Note the differences between these concepts:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Authentication</i> is about verifying identity. You need to be\n          authenticated to sign Amazon IVS API requests.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Authorization</i> is about granting permissions. Your IAM roles need\n          to have permissions for Amazon IVS API requests. In addition, authorization is needed to\n          view <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html\">Amazon\n            IVS private channels</a>. (Private channels are channels that are enabled for\n          \"playback authorization.\")</p>\n            </li>\n         </ul>\n         <p>\n            <b>Authentication</b>\n         </p>\n         <p>All Amazon IVS API requests must be authenticated with a signature. The Amazon Web Services\n      Command-Line Interface (CLI) and Amazon IVS Player SDKs take care of signing the underlying\n      API calls for you. However, if your application calls the Amazon IVS API directly, it’s your\n      responsibility to sign the requests.</p>\n         <p>You generate a signature using valid Amazon Web Services credentials that have permission\n      to perform the requested action. For example, you must sign PutMetadata requests with a\n      signature generated from a user account that has the <code>ivs:PutMetadata</code>\n      permission.</p>\n         <p>For more information:</p>\n         <ul>\n            <li>\n               <p>Authentication and generating signatures — See <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html\">Authenticating Requests\n              (Amazon Web Services Signature Version 4)</a> in the <i>Amazon Web Services\n            General Reference</i>.</p>\n            </li>\n            <li>\n               <p>Managing Amazon IVS permissions — See <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/security-iam.html\">Identity and Access Management</a> on\n          the Security page of the <i>Amazon IVS User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Amazon Resource Names (ARNs)</b>\n         </p>\n         <p>ARNs uniquely identify AWS resources. An ARN is required when you need to specify a\n      resource unambiguously across all of AWS, such as in IAM policies and API calls. For more\n      information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names</a> in the <i>AWS General\n      Reference</i>.</p>\n         <p>\n            <b>Channel Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateChannel</a> — Creates a new channel and an associated stream\n          key to start streaming.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetChannel</a> — Gets the channel configuration for the specified\n          channel ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>BatchGetChannel</a> — Performs <a>GetChannel</a> on\n          multiple ARNs simultaneously.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListChannels</a> — Gets summary information about all channels in\n          your account, in the Amazon Web Services region where the API request is processed. This\n          list can be filtered to match a specified name or recording-configuration ARN. Filters are\n          mutually exclusive and cannot be used together. If you try to use both filters, you will\n          get an error (409 Conflict Exception).</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateChannel</a> — Updates a channel's configuration. This does\n          not affect an ongoing stream of this channel. You must stop and restart the stream for the\n          changes to take effect.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteChannel</a> — Deletes the specified channel.</p>\n            </li>\n         </ul>\n         <p>\n            <b>StreamKey Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateStreamKey</a> — Creates a stream key, used to initiate a\n          stream, for the specified channel ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetStreamKey</a> — Gets stream key information for the specified\n          ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>BatchGetStreamKey</a> — Performs <a>GetStreamKey</a> on\n          multiple ARNs simultaneously.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStreamKeys</a> — Gets summary information about stream keys\n          for the specified channel.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteStreamKey</a> — Deletes the stream key for the specified\n          ARN, so it can no longer be used to stream.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Stream Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetStream</a> — Gets information about the active (live) stream on\n          a specified channel.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetStreamSession</a> — Gets metadata on a specified stream.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStreams</a> — Gets summary information about live streams in\n          your account, in the Amazon Web Services region where the API request is processed.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStreamSessions</a> — Gets a summary of current and previous\n          streams for a specified channel in your account, in the AWS region where the API request\n          is processed.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopStream</a> — Disconnects the incoming RTMPS stream for the\n          specified channel. Can be used in conjunction with <a>DeleteStreamKey</a> to\n          prevent further streaming to a channel.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PutMetadata</a> — Inserts metadata into the active stream of the\n          specified channel. At most 5 requests per second per channel are allowed, each with a\n          maximum 1 KB payload. (If 5 TPS is not sufficient for your needs, we recommend batching\n          your data into a single PutMetadata call.) At most 155 requests per second per account are\n          allowed.</p>\n            </li>\n         </ul>\n         <p>\n            <b>PlaybackKeyPair Endpoints</b>\n         </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html\">Setting Up Private Channels</a> in the\n        <i>Amazon IVS User Guide</i>.</p>\n         <ul>\n            <li>\n               <p>\n                  <a>ImportPlaybackKeyPair</a> — Imports the public portion of a new\n          key pair and returns its <code>arn</code> and <code>fingerprint</code>. The\n            <code>privateKey</code> can then be used to generate viewer authorization tokens, to\n          grant viewers access to private channels (channels enabled for playback\n          authorization).</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetPlaybackKeyPair</a> — Gets a specified playback authorization\n          key pair and returns the <code>arn</code> and <code>fingerprint</code>. The\n            <code>privateKey</code> held by the caller can be used to generate viewer authorization\n          tokens, to grant viewers access to private channels.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListPlaybackKeyPairs</a> — Gets summary information about playback\n          key pairs.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeletePlaybackKeyPair</a> — Deletes a specified authorization key\n          pair. This invalidates future viewer tokens generated using the key pair’s\n            <code>privateKey</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>RecordingConfiguration Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateRecordingConfiguration</a> — Creates a new recording\n          configuration, used to enable recording to Amazon S3.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetRecordingConfiguration</a> — Gets the recording-configuration\n          metadata for the specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListRecordingConfigurations</a> — Gets summary information about\n          all recording configurations in your account, in the Amazon Web Services region where the\n          API request is processed.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteRecordingConfiguration</a> — Deletes the recording\n          configuration for the specified ARN.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Amazon Web Services Tags Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>TagResource</a> — Adds or updates tags for the Amazon Web Services\n          resource with the specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UntagResource</a> — Removes tags from the resource with the\n          specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListTagsForResource</a> — Gets information about Amazon Web Services tags for the specified ARN.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>\n            <b>Introduction</b>\n         </p>\n         <p>The Amazon Interactive Video Service (IVS) API is REST compatible, using a standard HTTP\n      API and an Amazon Web Services EventBridge event stream for responses. JSON is used for both\n      requests and responses, including errors.</p>\n         <p>The API is an Amazon Web Services regional service. For a list of supported regions and\n      Amazon IVS HTTPS service endpoints, see the <a href=\"https://docs.aws.amazon.com/general/latest/gr/ivs.html\">Amazon IVS page</a> in the\n          <i>Amazon Web Services General Reference</i>.</p>\n         <p>\n            <i>\n               <b>All API request parameters and URLs are case sensitive.\n        </b>\n            </i>\n         </p>\n         <p>For a summary of notable documentation changes in each release, see <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/doc-history.html\"> Document\n      History</a>.</p>\n         <p>\n            <b>Allowed Header Values</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>\n                     <b>Accept:</b>\n                  </code> application/json</p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <b>Accept-Encoding:</b>\n                  </code> gzip, deflate</p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <b>Content-Type:</b>\n                  </code>application/json</p>\n            </li>\n         </ul>\n         <p>\n            <b>Resources</b>\n         </p>\n         <p>The following resources contain information about your IVS live stream (see <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/getting-started.html\"> Getting Started with\n        Amazon IVS</a>):</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Channel</b> — Stores configuration data related to your live stream. You first create a\n          channel and then use the channel’s stream key to start your live stream. See the Channel\n          endpoints for more information. </p>\n            </li>\n            <li>\n               <p>\n                  <b>Stream key</b> — An identifier assigned by Amazon IVS when you create a channel, which is\n          then used to authorize streaming. See the StreamKey endpoints for more information.\n              <i>\n                     <b>Treat the stream key like a secret, since it allows\n              anyone to stream to the channel.</b>\n                  </i>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Playback key pair</b> — Video playback may be restricted using playback-authorization\n          tokens, which use public-key encryption. A playback key pair is the public-private pair of\n          keys used to sign and validate the playback-authorization token. See the PlaybackKeyPair\n          endpoints for more information.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Recording configuration</b> — Stores configuration related to recording a live stream and\n          where to store the recorded content. Multiple channels can reference the same recording\n          configuration. See the Recording Configuration endpoints for more information.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Tagging</b>\n         </p>\n         <p>A <i>tag</i> is a metadata label that you assign to an Amazon Web Services\n      resource. A tag comprises a <i>key</i> and a <i>value</i>, both\n      set by you. For example, you might set a tag as <code>topic:nature</code> to label a\n      particular video category. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for\n      more information, including restrictions that apply to tags and \"Tag naming limits and\n      requirements\"; Amazon IVS has no service-specific constraints beyond what is documented\n      there.</p>\n         <p>Tags can help you identify and organize your Amazon Web Services resources. For example,\n      you can use the same tag for different resources to indicate that they are related. You can\n      also use tags to manage access (see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\"> Access Tags</a>). </p>\n         <p>The Amazon IVS API has these tag-related endpoints: <a>TagResource</a>, <a>UntagResource</a>, and <a>ListTagsForResource</a>. The following\n      resources support tagging: Channels, Stream Keys, Playback Key Pairs, and Recording\n      Configurations.</p>\n         <p>At most 50 tags can be applied to a resource. </p>\n         <p>\n            <b>Authentication versus Authorization</b>\n         </p>\n         <p>Note the differences between these concepts:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Authentication</i> is about verifying identity. You need to be\n          authenticated to sign Amazon IVS API requests.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Authorization</i> is about granting permissions. Your IAM roles need\n          to have permissions for Amazon IVS API requests. In addition, authorization is needed to\n          view <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html\">Amazon\n            IVS private channels</a>. (Private channels are channels that are enabled for\n          \"playback authorization.\")</p>\n            </li>\n         </ul>\n         <p>\n            <b>Authentication</b>\n         </p>\n         <p>All Amazon IVS API requests must be authenticated with a signature. The Amazon Web Services\n      Command-Line Interface (CLI) and Amazon IVS Player SDKs take care of signing the underlying\n      API calls for you. However, if your application calls the Amazon IVS API directly, it’s your\n      responsibility to sign the requests.</p>\n         <p>You generate a signature using valid Amazon Web Services credentials that have permission\n      to perform the requested action. For example, you must sign PutMetadata requests with a\n      signature generated from a user account that has the <code>ivs:PutMetadata</code>\n      permission.</p>\n         <p>For more information:</p>\n         <ul>\n            <li>\n               <p>Authentication and generating signatures — See <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html\">Authenticating Requests\n              (Amazon Web Services Signature Version 4)</a> in the <i>Amazon Web Services\n            General Reference</i>.</p>\n            </li>\n            <li>\n               <p>Managing Amazon IVS permissions — See <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/security-iam.html\">Identity and Access Management</a> on\n          the Security page of the <i>Amazon IVS User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Amazon Resource Names (ARNs)</b>\n         </p>\n         <p>ARNs uniquely identify AWS resources. An ARN is required when you need to specify a\n      resource unambiguously across all of AWS, such as in IAM policies and API calls. For more\n      information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names</a> in the <i>AWS General\n      Reference</i>.</p>\n         <p>\n            <b>Channel Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateChannel</a> — Creates a new channel and an associated stream\n          key to start streaming.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetChannel</a> — Gets the channel configuration for the specified\n          channel ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>BatchGetChannel</a> — Performs <a>GetChannel</a> on\n          multiple ARNs simultaneously.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListChannels</a> — Gets summary information about all channels in\n          your account, in the Amazon Web Services region where the API request is processed. This\n          list can be filtered to match a specified name or recording-configuration ARN. Filters are\n          mutually exclusive and cannot be used together. If you try to use both filters, you will\n          get an error (409 Conflict Exception).</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateChannel</a> — Updates a channel's configuration. This does\n          not affect an ongoing stream of this channel. You must stop and restart the stream for the\n          changes to take effect.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteChannel</a> — Deletes the specified channel.</p>\n            </li>\n         </ul>\n         <p>\n            <b>StreamKey Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateStreamKey</a> — Creates a stream key, used to initiate a\n          stream, for the specified channel ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetStreamKey</a> — Gets stream key information for the specified\n          ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>BatchGetStreamKey</a> — Performs <a>GetStreamKey</a> on\n          multiple ARNs simultaneously.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStreamKeys</a> — Gets summary information about stream keys\n          for the specified channel.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteStreamKey</a> — Deletes the stream key for the specified\n          ARN, so it can no longer be used to stream.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Stream Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetStream</a> — Gets information about the active (live) stream on\n          a specified channel.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetStreamSession</a> — Gets metadata on a specified stream.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStreams</a> — Gets summary information about live streams in\n          your account, in the Amazon Web Services region where the API request is processed.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStreamSessions</a> — Gets a summary of current and previous\n          streams for a specified channel in your account, in the AWS region where the API request\n          is processed.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopStream</a> — Disconnects the incoming RTMPS stream for the\n          specified channel. Can be used in conjunction with <a>DeleteStreamKey</a> to\n          prevent further streaming to a channel.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PutMetadata</a> — Inserts metadata into the active stream of the\n          specified channel. At most 5 requests per second per channel are allowed, each with a\n          maximum 1 KB payload. (If 5 TPS is not sufficient for your needs, we recommend batching\n          your data into a single PutMetadata call.) At most 155 requests per second per account are\n          allowed.</p>\n            </li>\n         </ul>\n         <p>\n            <b>PlaybackKeyPair Endpoints</b>\n         </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html\">Setting Up Private Channels</a> in the\n        <i>Amazon IVS User Guide</i>.</p>\n         <ul>\n            <li>\n               <p>\n                  <a>ImportPlaybackKeyPair</a> — Imports the public portion of a new\n          key pair and returns its <code>arn</code> and <code>fingerprint</code>. The\n            <code>privateKey</code> can then be used to generate viewer authorization tokens, to\n          grant viewers access to private channels (channels enabled for playback\n          authorization).</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetPlaybackKeyPair</a> — Gets a specified playback authorization\n          key pair and returns the <code>arn</code> and <code>fingerprint</code>. The\n            <code>privateKey</code> held by the caller can be used to generate viewer authorization\n          tokens, to grant viewers access to private channels.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListPlaybackKeyPairs</a> — Gets summary information about playback\n          key pairs.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeletePlaybackKeyPair</a> — Deletes a specified authorization key\n          pair. This invalidates future viewer tokens generated using the key pair’s\n            <code>privateKey</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>RecordingConfiguration Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateRecordingConfiguration</a> — Creates a new recording\n          configuration, used to enable recording to Amazon S3.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetRecordingConfiguration</a> — Gets the recording-configuration\n          metadata for the specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListRecordingConfigurations</a> — Gets summary information about\n          all recording configurations in your account, in the Amazon Web Services region where the\n          API request is processed.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteRecordingConfiguration</a> — Deletes the recording\n          configuration for the specified ARN.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Amazon Web Services Tags Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>TagResource</a> — Adds or updates tags for the Amazon Web Services\n          resource with the specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UntagResource</a> — Removes tags from the resource with the\n          specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListTagsForResource</a> — Gets information about Amazon Web Services tags for the specified ARN.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Interactive Video Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -498,9 +498,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -511,9 +511,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -524,9 +524,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -537,9 +537,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -550,9 +550,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -563,9 +563,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -576,9 +576,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -589,9 +589,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -602,9 +602,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -615,9 +615,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -628,9 +628,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -641,9 +641,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -654,9 +654,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -667,9 +667,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -680,9 +680,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -693,9 +693,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -706,9 +706,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -719,9 +719,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -732,9 +743,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -745,9 +767,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -758,9 +791,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -771,9 +815,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -784,9 +828,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -798,8 +842,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -809,9 +853,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -821,10 +865,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1054,6 +1104,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string\n        (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for more information, including restrictions\n      that apply to tags and \"Tag naming limits and requirements\"; Amazon IVS has no\n      service-specific constraints beyond what is documented there.</p>"
                     }
+                },
+                "insecureIngest": {
+                    "target": "com.amazonaws.ivs#InsecureIngest",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether the channel allows insecure RTMP ingest. Default: <code>false</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1178,6 +1235,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string\n        (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for more information, including restrictions\n      that apply to tags and \"Tag naming limits and requirements\"; Amazon IVS has no\n      service-specific constraints beyond what is documented there.</p>"
                     }
+                },
+                "insecureIngest": {
+                    "target": "com.amazonaws.ivs#InsecureIngest",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether the channel allows insecure RTMP ingest. Default: <code>false</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1294,6 +1358,13 @@
                     "target": "com.amazonaws.ivs#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> for\n      more information, including restrictions that apply to tags and \"Tag naming limits and\n      requirements\"; Amazon IVS has no service-specific constraints beyond what is documented\n      there.</p>"
+                    }
+                },
+                "insecureIngest": {
+                    "target": "com.amazonaws.ivs#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether the channel allows insecure RTMP ingest. Default: <code>false</code>.</p>"
                     }
                 }
             }
@@ -2063,6 +2134,12 @@
         },
         "com.amazonaws.ivs#IngestEndpoint": {
             "type": "string"
+        },
+        "com.amazonaws.ivs#InsecureIngest": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.ivs#Integer": {
             "type": "long",
@@ -3611,7 +3688,7 @@
             "traits": {
                 "smithy.api#default": 0,
                 "smithy.api#range": {
-                    "min": 5,
+                    "min": 1,
                     "max": 60
                 }
             }
@@ -3784,6 +3861,13 @@
                     "target": "com.amazonaws.ivs#ChannelRecordingConfigurationArn",
                     "traits": {
                         "smithy.api#documentation": "<p>Recording-configuration ARN. If this is set to an empty string, recording is disabled. A\n      value other than an empty string indicates that recording is enabled</p>"
+                    }
+                },
+                "insecureIngest": {
+                    "target": "com.amazonaws.ivs#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether the channel allows insecure RTMP ingest. Default: <code>false</code>.</p>"
                     }
                 }
             }

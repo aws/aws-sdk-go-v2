@@ -704,348 +704,6 @@
                                                     "type": "tree",
                                                     "rules": [
                                                         {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "ap-northeast-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.ap-northeast-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "ap-northeast-2"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.ap-northeast-2.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "ap-south-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.ap-south-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "ap-southeast-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.ap-southeast-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "ap-southeast-2"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.ap-southeast-2.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "ca-central-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.ca-central-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "eu-central-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.eu-central-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "eu-north-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.eu-north-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "eu-west-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.eu-west-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "eu-west-2"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.eu-west-2.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "eu-west-3"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.eu-west-3.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "sa-east-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.sa-east-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "us-east-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.us-east-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "us-east-2"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.us-east-2.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "us-west-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.us-west-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "us-west-2"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.us-west-2.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "cn-north-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.cn-north-1.amazonaws.com.cn",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "cn-northwest-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.cn-northwest-1.amazonaws.com.cn",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
                                                             "conditions": [],
                                                             "endpoint": {
                                                                 "url": "https://compute-optimizer.{Region}.{PartitionResult#dnsSuffix}",
@@ -1079,8 +737,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
                                 "UseDualStack": false,
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1092,8 +750,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
                                 "UseDualStack": false,
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": false
                             }
                         },
@@ -1105,8 +763,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-south-1",
                                 "UseDualStack": false,
+                                "Region": "ap-south-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1118,8 +776,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-1",
                                 "UseDualStack": false,
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1131,8 +789,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
                                 "UseDualStack": false,
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": false
                             }
                         },
@@ -1144,8 +802,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
                                 "UseDualStack": false,
+                                "Region": "ca-central-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1157,8 +815,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
                                 "UseDualStack": false,
+                                "Region": "eu-central-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1170,8 +828,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-north-1",
                                 "UseDualStack": false,
+                                "Region": "eu-north-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1183,8 +841,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
                                 "UseDualStack": false,
+                                "Region": "eu-west-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1196,8 +854,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-2",
                                 "UseDualStack": false,
+                                "Region": "eu-west-2",
                                 "UseFIPS": false
                             }
                         },
@@ -1209,8 +867,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-3",
                                 "UseDualStack": false,
+                                "Region": "eu-west-3",
                                 "UseFIPS": false
                             }
                         },
@@ -1222,8 +880,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "sa-east-1",
                                 "UseDualStack": false,
+                                "Region": "sa-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1235,8 +893,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1248,8 +906,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
                                 "UseDualStack": false,
+                                "Region": "us-east-2",
                                 "UseFIPS": false
                             }
                         },
@@ -1261,8 +919,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
                                 "UseDualStack": false,
+                                "Region": "us-west-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1274,8 +932,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
                                 "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": false
                             }
                         },
@@ -1287,8 +945,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1300,8 +958,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1313,8 +971,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1326,8 +984,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1339,8 +997,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-northwest-1",
                                 "UseDualStack": false,
+                                "Region": "cn-northwest-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1352,8 +1010,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1365,8 +1023,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1378,8 +1036,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1391,8 +1049,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1404,8 +1062,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1417,8 +1075,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1430,9 +1088,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1443,9 +1112,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1456,9 +1136,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1469,9 +1160,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1482,8 +1184,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1495,8 +1197,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -1520,8 +1222,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
@@ -1532,10 +1234,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1788,11 +1496,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#DeleteRecommendationPreferencesResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.computeoptimizer#DescribeRecommendationExportJobs": {
             "type": "operation",
@@ -1865,6 +1579,9 @@
                         "smithy.api#documentation": "<p>The maximum number of export jobs to return with a single request.</p>\n         <p>To retrieve the remaining results, make another request with the returned\n                <code>nextToken</code> value.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#DescribeRecommendationExportJobsResponse": {
@@ -1882,6 +1599,9 @@
                         "smithy.api#documentation": "<p>The token to use to advance to the next page of export jobs.</p>\n         <p>This value is null when there are no more pages of export jobs to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#DesiredCapacity": {
@@ -2629,6 +2349,9 @@
                         "smithy.api#documentation": "<p>An object to specify the preferences for the Auto Scaling group recommendations\n            to export.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#ExportAutoScalingGroupRecommendationsResponse": {
@@ -2646,6 +2369,9 @@
                         "smithy.api#documentation": "<p>An object that describes the destination Amazon S3 bucket of a recommendations\n            export file.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#ExportDestination": {
@@ -2740,6 +2466,9 @@
                         "smithy.api#documentation": "<p>Indicates whether to include recommendations for resources in all member accounts of\n            the organization if your account is the management account of an organization.</p>\n         <p>The member accounts must also be opted in to Compute Optimizer, and trusted access for\n                Compute Optimizer must be enabled in the organization account. For more information,\n            see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access\">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the\n                    <i>Compute Optimizer User Guide</i>.</p>\n         <p>Recommendations for member accounts of the organization are not included in the export\n            file if this parameter is omitted.</p>\n         <p>This parameter cannot be specified together with the account IDs parameter. The\n            parameters are mutually exclusive.</p>\n         <p>Recommendations for member accounts are not included in the export if this parameter,\n            or the account IDs parameter, is omitted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#ExportEBSVolumeRecommendationsResponse": {
@@ -2754,6 +2483,9 @@
                 "s3Destination": {
                     "target": "com.amazonaws.computeoptimizer#S3Destination"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#ExportEC2InstanceRecommendations": {
@@ -2841,6 +2573,9 @@
                         "smithy.api#documentation": "<p>An object to specify the preferences for the Amazon EC2 instance\n            recommendations to export.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#ExportEC2InstanceRecommendationsResponse": {
@@ -2858,6 +2593,9 @@
                         "smithy.api#documentation": "<p>An object that describes the destination Amazon S3 bucket of a recommendations\n            export file.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#ExportECSServiceRecommendations": {
@@ -2938,6 +2676,9 @@
                         "smithy.api#documentation": "<p>If your account is the management account or the delegated administrator of an organization,\n            this parameter indicates whether to include recommendations for resources in all member accounts of\n            the organization.</p>\n         <p>The member accounts must also be opted in to Compute Optimizer, and trusted access for\n            Compute Optimizer must be enabled in the organization account. For more information,\n            see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access\">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the\n            <i>Compute Optimizer User Guide</i>.</p>\n         <p>If this parameter is omitted, recommendations for member accounts of the \n            organization aren't included in the export file.</p>\n         <p>If this parameter or the account ID parameter is omitted, recommendations for \n            member accounts aren't included in the export.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#ExportECSServiceRecommendationsResponse": {
@@ -2952,6 +2693,9 @@
                 "s3Destination": {
                     "target": "com.amazonaws.computeoptimizer#S3Destination"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#ExportLambdaFunctionRecommendations": {
@@ -3032,6 +2776,9 @@
                         "smithy.api#documentation": "<p>Indicates whether to include recommendations for resources in all member accounts of\n            the organization if your account is the management account of an organization.</p>\n         <p>The member accounts must also be opted in to Compute Optimizer, and trusted access for\n                Compute Optimizer must be enabled in the organization account. For more information,\n            see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access\">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the\n                    <i>Compute Optimizer User Guide</i>.</p>\n         <p>Recommendations for member accounts of the organization are not included in the export\n            file if this parameter is omitted.</p>\n         <p>This parameter cannot be specified together with the account IDs parameter. The\n            parameters are mutually exclusive.</p>\n         <p>Recommendations for member accounts are not included in the export if this parameter,\n            or the account IDs parameter, is omitted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#ExportLambdaFunctionRecommendationsResponse": {
@@ -3046,6 +2793,9 @@
                 "s3Destination": {
                     "target": "com.amazonaws.computeoptimizer#S3Destination"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#ExportableAutoScalingGroupField": {
@@ -3852,6 +3602,12 @@
                     "traits": {
                         "smithy.api#enumValue": "EffectiveRecommendationPreferencesExternalMetricsSource"
                     }
+                },
+                "INSTANCE_STATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceState"
+                    }
                 }
             }
         },
@@ -4198,6 +3954,12 @@
                     "traits": {
                         "smithy.api#enumValue": "RecommendationOptionsEstimatedMonthlySavingsValue"
                     }
+                },
+                "ROOT_VOLUME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RootVolume"
+                    }
                 }
             }
         },
@@ -4457,6 +4219,9 @@
                         "smithy.api#documentation": "<p>An object to specify the preferences for the Auto Scaling group recommendations\n            to return in the response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetAutoScalingGroupRecommendationsResponse": {
@@ -4480,6 +4245,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe errors of the request.</p>\n         <p>For example, an error is returned if you request recommendations for an unsupported\n                Auto Scaling group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetEBSVolumeRecommendations": {
@@ -4553,6 +4321,9 @@
                         "smithy.api#documentation": "<p>The ID of the Amazon Web Services account for which to return volume\n            recommendations.</p>\n         <p>If your account is the management account of an organization, use this parameter to\n            specify the member account for which you want to return volume recommendations.</p>\n         <p>Only one account ID can be specified per request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetEBSVolumeRecommendationsResponse": {
@@ -4576,6 +4347,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe errors of the request.</p>\n         <p>For example, an error is returned if you request recommendations for an unsupported\n            volume.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetEC2InstanceRecommendations": {
@@ -4655,6 +4429,9 @@
                         "smithy.api#documentation": "<p>An object to specify the preferences for the Amazon EC2 instance\n            recommendations to return in the response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetEC2InstanceRecommendationsResponse": {
@@ -4678,6 +4455,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe errors of the request.</p>\n         <p>For example, an error is returned if you request recommendations for an instance of an\n            unsupported instance family.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetEC2RecommendationProjectedMetrics": {
@@ -4763,6 +4543,9 @@
                         "smithy.api#documentation": "<p>An object to specify the preferences for the Amazon EC2 recommendation\n            projected metrics to return in the response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetEC2RecommendationProjectedMetricsResponse": {
@@ -4774,6 +4557,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describes projected metrics.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetECSServiceRecommendationProjectedMetrics": {
@@ -4853,6 +4639,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetECSServiceRecommendationProjectedMetricsResponse": {
@@ -4864,6 +4653,9 @@
                         "smithy.api#documentation": "<p>\n            An array of objects that describes the projected metrics.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetECSServiceRecommendations": {
@@ -4937,6 +4729,9 @@
                         "smithy.api#documentation": "<p>\n            Return the Amazon ECS service recommendations to the specified Amazon Web Services account IDs.\n        </p>\n         <p>If your account is the management account or the delegated administrator \n            of an organization, use this parameter to return the Amazon ECS service recommendations to specific\n            member accounts.</p>\n         <p>You can only specify one account ID per request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetECSServiceRecommendationsResponse": {
@@ -4960,6 +4755,9 @@
                         "smithy.api#documentation": "<p>\n            An array of objects that describe errors of the request.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetEffectiveRecommendationPreferences": {
@@ -5010,6 +4808,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetEffectiveRecommendationPreferencesResponse": {
@@ -5027,6 +4828,9 @@
                         "smithy.api#documentation": "<p>The provider of the external metrics recommendation preference. Considers all\n            applicable preferences that you might have set at the account and organization\n            level.</p>\n         <p>If the preference is applied in the latest recommendation refresh, an object with a\n            valid <code>source</code> value appears in the response. If the preference isn't applied\n            to the recommendations already, then this object doesn't appear in the response.</p>\n         <p>To validate whether the preference is applied to your last generated set of\n            recommendations, review the <code>effectiveRecommendationPreferences</code> value in the\n            response of the <a>GetEC2InstanceRecommendations</a> actions.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html\">Enhanced\n                infrastructure metrics</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetEnrollmentStatus": {
@@ -5063,7 +4867,10 @@
         },
         "com.amazonaws.computeoptimizer#GetEnrollmentStatusRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.computeoptimizer#GetEnrollmentStatusResponse": {
             "type": "structure",
@@ -5099,6 +4906,9 @@
                         "smithy.api#documentation": "<p>The count of organization member accounts that are opted in to the service, if your\n            account is an organization management account.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetEnrollmentStatusesForOrganization": {
@@ -5160,6 +4970,9 @@
                         "smithy.api#documentation": "<p>The maximum number of account enrollment statuses to return with a single request. You\n            can specify up to 100 statuses to return with each request.</p>\n         <p>To retrieve the remaining results, make another request with the returned\n                <code>nextToken</code> value.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetEnrollmentStatusesForOrganizationResponse": {
@@ -5177,6 +4990,9 @@
                         "smithy.api#documentation": "<p>The token to use to advance to the next page of account enrollment statuses.</p>\n         <p>This value is null when there are no more pages of account enrollment statuses to\n            return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetLambdaFunctionRecommendations": {
@@ -5256,6 +5072,9 @@
                         "smithy.api#documentation": "<p>The maximum number of function recommendations to return with a single request.</p>\n         <p>To retrieve the remaining results, make another request with the returned\n                <code>nextToken</code> value.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetLambdaFunctionRecommendationsResponse": {
@@ -5273,6 +5092,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe function recommendations.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetRecommendationError": {
@@ -5379,6 +5201,9 @@
                         "smithy.api#documentation": "<p>The maximum number of recommendation preferences to return with a single\n            request.</p>\n         <p>To retrieve the remaining results, make another request with the returned\n                <code>nextToken</code> value.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetRecommendationPreferencesResponse": {
@@ -5396,6 +5221,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe recommendation preferences.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetRecommendationSummaries": {
@@ -5460,6 +5288,9 @@
                         "smithy.api#documentation": "<p>The maximum number of recommendation summaries to return with a single request.</p>\n         <p>To retrieve the remaining results, make another request with the returned\n                <code>nextToken</code> value.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#GetRecommendationSummariesResponse": {
@@ -5477,6 +5308,9 @@
                         "smithy.api#documentation": "<p>An array of objects that summarize a recommendation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#High": {
@@ -5618,7 +5452,7 @@
                 "findingReasonCodes": {
                     "target": "com.amazonaws.computeoptimizer#InstanceRecommendationFindingReasonCodes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason for the finding classification of the instance.</p>\n         <p>Finding reason codes for instances include:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>CPUOverprovisioned</code>\n                  </b> — The\n                    instance’s CPU configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                        <code>CPUUtilization</code> metric of the current instance during the\n                    look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>CPUUnderprovisioned</code>\n                  </b> — The\n                    instance’s CPU configuration doesn't meet the performance requirements of your\n                    workload and there is an alternative instance type that provides better CPU\n                    performance. This is identified by analyzing the <code>CPUUtilization</code>\n                    metric of the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>MemoryOverprovisioned</code>\n                  </b> — The\n                    instance’s memory configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                    memory utilization metric of the current instance during the look-back\n                    period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>MemoryUnderprovisioned</code>\n                  </b> — The\n                    instance’s memory configuration doesn't meet the performance requirements of\n                    your workload and there is an alternative instance type that provides better\n                    memory performance. This is identified by analyzing the memory utilization\n                    metric of the current instance during the look-back period.</p>\n               <note>\n                  <p>Memory utilization is analyzed only for resources that have the unified\n                            CloudWatch agent installed on them. For more information, see\n                            <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling memory\n                            utilization with the Amazon CloudWatch Agent</a> in the\n                                <i>Compute Optimizer User Guide</i>. On Linux\n                        instances, Compute Optimizer analyses the <code>mem_used_percent</code>\n                        metric in the <code>CWAgent</code> namespace, or the legacy\n                            <code>MemoryUtilization</code> metric in the <code>System/Linux</code>\n                        namespace. On Windows instances, Compute Optimizer analyses the <code>Memory\n                            % Committed Bytes In Use</code> metric in the <code>CWAgent</code>\n                        namespace.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EBSThroughputOverprovisioned</code>\n                  </b> —\n                    The instance’s EBS throughput configuration can be sized down while still\n                    meeting the performance requirements of your workload. This is identified by\n                    analyzing the <code>VolumeReadOps</code> and <code>VolumeWriteOps</code> metrics\n                    of EBS volumes attached to the current instance during the look-back\n                    period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EBSThroughputUnderprovisioned</code>\n                  </b> —\n                    The instance’s EBS throughput configuration doesn't meet the performance\n                    requirements of your workload and there is an alternative instance type that\n                    provides better EBS throughput performance. This is identified by analyzing the\n                        <code>VolumeReadOps</code> and <code>VolumeWriteOps</code> metrics of EBS\n                    volumes attached to the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EBSIOPSOverprovisioned</code>\n                  </b> — The\n                    instance’s EBS IOPS configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                        <code>VolumeReadBytes</code> and <code>VolumeWriteBytes</code> metric of EBS\n                    volumes attached to the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EBSIOPSUnderprovisioned</code>\n                  </b> — The\n                    instance’s EBS IOPS configuration doesn't meet the performance requirements of\n                    your workload and there is an alternative instance type that provides better EBS\n                    IOPS performance. This is identified by analyzing the\n                        <code>VolumeReadBytes</code> and <code>VolumeWriteBytes</code> metric of EBS\n                    volumes attached to the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkBandwidthOverprovisioned</code>\n                  </b>\n                    — The instance’s network bandwidth configuration can be sized down while still\n                    meeting the performance requirements of your workload. This is identified by\n                    analyzing the <code>NetworkIn</code> and <code>NetworkOut</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkBandwidthUnderprovisioned</code>\n                  </b>\n                    — The instance’s network bandwidth configuration doesn't meet the performance\n                    requirements of your workload and there is an alternative instance type that\n                    provides better network bandwidth performance. This is identified by analyzing\n                    the <code>NetworkIn</code> and <code>NetworkOut</code> metrics of the current\n                    instance during the look-back period. This finding reason happens when the\n                        <code>NetworkIn</code> or <code>NetworkOut</code> performance of an instance\n                    is impacted.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkPPSOverprovisioned</code>\n                  </b> — The\n                    instance’s network PPS (packets per second) configuration can be sized down\n                    while still meeting the performance requirements of your workload. This is\n                    identified by analyzing the <code>NetworkPacketsIn</code> and\n                        <code>NetworkPacketsIn</code> metrics of the current instance during the\n                    look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkPPSUnderprovisioned</code>\n                  </b> — The\n                    instance’s network PPS (packets per second) configuration doesn't meet the\n                    performance requirements of your workload and there is an alternative instance\n                    type that provides better network PPS performance. This is identified by\n                    analyzing the <code>NetworkPacketsIn</code> and <code>NetworkPacketsIn</code>\n                    metrics of the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskIOPSOverprovisioned</code>\n                  </b> — The\n                    instance’s disk IOPS configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                        <code>DiskReadOps</code> and <code>DiskWriteOps</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskIOPSUnderprovisioned</code>\n                  </b> — The\n                    instance’s disk IOPS configuration doesn't meet the performance requirements of\n                    your workload and there is an alternative instance type that provides better\n                    disk IOPS performance. This is identified by analyzing the\n                        <code>DiskReadOps</code> and <code>DiskWriteOps</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskThroughputOverprovisioned</code>\n                  </b> —\n                    The instance’s disk throughput configuration can be sized down while still\n                    meeting the performance requirements of your workload. This is identified by\n                    analyzing the <code>DiskReadBytes</code> and <code>DiskWriteBytes</code> metrics\n                    of the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskThroughputUnderprovisioned</code>\n                  </b> —\n                    The instance’s disk throughput configuration doesn't meet the performance\n                    requirements of your workload and there is an alternative instance type that\n                    provides better disk throughput performance. This is identified by analyzing the\n                        <code>DiskReadBytes</code> and <code>DiskWriteBytes</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n         </ul>\n         <note>\n            <p>For more information about instance metrics, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/viewing_metrics_with_cloudwatch.html\">List the\n                    available CloudWatch metrics for your instances</a> in the\n                        <i>Amazon Elastic Compute Cloud User Guide</i>. For more information\n                about EBS volume metrics, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cloudwatch_ebs.html\">Amazon CloudWatch\n                    metrics for Amazon EBS</a> in the <i>Amazon Elastic Compute Cloud\n                    User Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The reason for the finding classification of the instance.</p>\n         <p>Finding reason codes for instances include:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>CPUOverprovisioned</code>\n                  </b> — The\n                    instance’s CPU configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                        <code>CPUUtilization</code> metric of the current instance during the\n                    look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>CPUUnderprovisioned</code>\n                  </b> — The\n                    instance’s CPU configuration doesn't meet the performance requirements of your\n                    workload and there is an alternative instance type that provides better CPU\n                    performance. This is identified by analyzing the <code>CPUUtilization</code>\n                    metric of the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>MemoryOverprovisioned</code>\n                  </b> — The\n                    instance’s memory configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                    memory utilization metric of the current instance during the look-back\n                    period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>MemoryUnderprovisioned</code>\n                  </b> — The\n                    instance’s memory configuration doesn't meet the performance requirements of\n                    your workload and there is an alternative instance type that provides better\n                    memory performance. This is identified by analyzing the memory utilization\n                    metric of the current instance during the look-back period.</p>\n               <note>\n                  <p>Memory utilization is analyzed only for resources that have the unified\n                            CloudWatch agent installed on them. For more information, see\n                            <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling memory\n                            utilization with the Amazon CloudWatch Agent</a> in the\n                                <i>Compute Optimizer User Guide</i>. On Linux\n                        instances, Compute Optimizer analyses the <code>mem_used_percent</code>\n                        metric in the <code>CWAgent</code> namespace, or the legacy\n                            <code>MemoryUtilization</code> metric in the <code>System/Linux</code>\n                        namespace. On Windows instances, Compute Optimizer analyses the <code>Memory\n                            % Committed Bytes In Use</code> metric in the <code>CWAgent</code>\n                        namespace.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EBSThroughputOverprovisioned</code>\n                  </b> —\n                    The instance’s EBS throughput configuration can be sized down while still\n                    meeting the performance requirements of your workload. This is identified by\n                    analyzing the <code>VolumeReadBytes</code> and <code>VolumeWriteBytes</code> metrics\n                    of EBS volumes attached to the current instance during the look-back\n                    period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EBSThroughputUnderprovisioned</code>\n                  </b> —\n                    The instance’s EBS throughput configuration doesn't meet the performance\n                    requirements of your workload and there is an alternative instance type that\n                    provides better EBS throughput performance. This is identified by analyzing the\n                    <code>VolumeReadBytes</code> and <code>VolumeWriteBytes</code>> metrics of EBS\n                    volumes attached to the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EBSIOPSOverprovisioned</code>\n                  </b> — The\n                    instance’s EBS IOPS configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                    <code>VolumeReadOps</code> and <code>VolumeWriteOps</code> metric of EBS\n                    volumes attached to the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EBSIOPSUnderprovisioned</code>\n                  </b> — The\n                    instance’s EBS IOPS configuration doesn't meet the performance requirements of\n                    your workload and there is an alternative instance type that provides better EBS\n                    IOPS performance. This is identified by analyzing the\n                    <code>VolumeReadOps</code> and <code>VolumeWriteOps</code> metric of EBS\n                    volumes attached to the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkBandwidthOverprovisioned</code>\n                  </b>\n                    — The instance’s network bandwidth configuration can be sized down while still\n                    meeting the performance requirements of your workload. This is identified by\n                    analyzing the <code>NetworkIn</code> and <code>NetworkOut</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkBandwidthUnderprovisioned</code>\n                  </b>\n                    — The instance’s network bandwidth configuration doesn't meet the performance\n                    requirements of your workload and there is an alternative instance type that\n                    provides better network bandwidth performance. This is identified by analyzing\n                    the <code>NetworkIn</code> and <code>NetworkOut</code> metrics of the current\n                    instance during the look-back period. This finding reason happens when the\n                        <code>NetworkIn</code> or <code>NetworkOut</code> performance of an instance\n                    is impacted.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkPPSOverprovisioned</code>\n                  </b> — The\n                    instance’s network PPS (packets per second) configuration can be sized down\n                    while still meeting the performance requirements of your workload. This is\n                    identified by analyzing the <code>NetworkPacketsIn</code> and\n                        <code>NetworkPacketsIn</code> metrics of the current instance during the\n                    look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkPPSUnderprovisioned</code>\n                  </b> — The\n                    instance’s network PPS (packets per second) configuration doesn't meet the\n                    performance requirements of your workload and there is an alternative instance\n                    type that provides better network PPS performance. This is identified by\n                    analyzing the <code>NetworkPacketsIn</code> and <code>NetworkPacketsIn</code>\n                    metrics of the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskIOPSOverprovisioned</code>\n                  </b> — The\n                    instance’s disk IOPS configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                        <code>DiskReadOps</code> and <code>DiskWriteOps</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskIOPSUnderprovisioned</code>\n                  </b> — The\n                    instance’s disk IOPS configuration doesn't meet the performance requirements of\n                    your workload and there is an alternative instance type that provides better\n                    disk IOPS performance. This is identified by analyzing the\n                        <code>DiskReadOps</code> and <code>DiskWriteOps</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskThroughputOverprovisioned</code>\n                  </b> —\n                    The instance’s disk throughput configuration can be sized down while still\n                    meeting the performance requirements of your workload. This is identified by\n                    analyzing the <code>DiskReadBytes</code> and <code>DiskWriteBytes</code> metrics\n                    of the current instance during the look-back period.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskThroughputUnderprovisioned</code>\n                  </b> —\n                    The instance’s disk throughput configuration doesn't meet the performance\n                    requirements of your workload and there is an alternative instance type that\n                    provides better disk throughput performance. This is identified by analyzing the\n                        <code>DiskReadBytes</code> and <code>DiskWriteBytes</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n         </ul>\n         <note>\n            <p>For more information about instance metrics, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/viewing_metrics_with_cloudwatch.html\">List the\n                    available CloudWatch metrics for your instances</a> in the\n                        <i>Amazon Elastic Compute Cloud User Guide</i>. For more information\n                about EBS volume metrics, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cloudwatch_ebs.html\">Amazon CloudWatch\n                    metrics for Amazon EBS</a> in the <i>Amazon Elastic Compute Cloud\n                    User Guide</i>.</p>\n         </note>"
                     }
                 },
                 "utilizationMetrics": {
@@ -5668,6 +5502,12 @@
                     "target": "com.amazonaws.computeoptimizer#InferredWorkloadTypes",
                     "traits": {
                         "smithy.api#documentation": "<p>The applications that might be running on the instance as inferred by Compute Optimizer.</p>\n         <p>Compute Optimizer can infer if one of the following applications might be running on\n            the instance:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AmazonEmr</code> - Infers that Amazon EMR might be running on\n                    the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheCassandra</code> - Infers that Apache Cassandra might be running\n                    on the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheHadoop</code> - Infers that Apache Hadoop might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memcached</code> - Infers that Memcached might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NGINX</code> - Infers that NGINX might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PostgreSql</code> - Infers that PostgreSQL might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Redis</code> - Infers that Redis might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Kafka</code> - Infers that Kafka might be running on the\n                    instance.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "instanceState": {
+                    "target": "com.amazonaws.computeoptimizer#InstanceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The state of the instance when the recommendation was generated.\n        </p>"
                     }
                 }
             },
@@ -5838,6 +5678,47 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.computeoptimizer#InstanceRecommendation"
+            }
+        },
+        "com.amazonaws.computeoptimizer#InstanceState": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "running"
+                    }
+                },
+                "SHUTTING_DOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "shutting-down"
+                    }
+                },
+                "TERMINATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "terminated"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "stopping"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "stopped"
+                    }
+                }
             }
         },
         "com.amazonaws.computeoptimizer#InstanceType": {
@@ -6783,11 +6664,17 @@
                         "smithy.api#documentation": "<p>The provider of the external metrics recommendation preference to create or\n            update.</p>\n         <p>Specify a valid provider in the <code>source</code> field to activate the preference.\n            To delete this preference, see the <a>DeleteRecommendationPreferences</a>\n            action.</p>\n         <p>This preference can only be set for the <code>Ec2Instance</code> resource type.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html\">External metrics\n                ingestion</a> in the <i>Compute Optimizer User\n            Guide</i>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#PutRecommendationPreferencesResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.computeoptimizer#Rank": {
             "type": "integer",
@@ -7172,6 +7059,9 @@
                 }
             }
         },
+        "com.amazonaws.computeoptimizer#RootVolume": {
+            "type": "boolean"
+        },
         "com.amazonaws.computeoptimizer#S3Destination": {
             "type": "structure",
             "members": {
@@ -7499,6 +7389,9 @@
                         "smithy.api#documentation": "<p>Indicates whether to enroll member accounts of the organization if the account is the\n            management account of an organization.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.computeoptimizer#UpdateEnrollmentStatusResponse": {
@@ -7516,6 +7409,9 @@
                         "smithy.api#documentation": "<p>The reason for the enrollment status of the account. For example, an account might\n            show a status of <code>Pending</code> because member accounts of an organization require\n            more time to be enrolled in the service.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.computeoptimizer#UpperBoundValue": {
@@ -7644,6 +7540,12 @@
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The burst throughput of the volume.</p>"
+                    }
+                },
+                "rootVolume": {
+                    "target": "com.amazonaws.computeoptimizer#RootVolume",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Contains the image used to boot the instance during launch.\n        </p>"
                     }
                 }
             },

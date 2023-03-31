@@ -7,23 +7,23 @@ import (
 	"time"
 )
 
-// Describes the enrollment status of an organization's member accounts in
-// Compute Optimizer.
+// Describes the enrollment status of an organization's member accounts in Compute
+// Optimizer.
 type AccountEnrollmentStatus struct {
 
 	// The Amazon Web Services account ID.
 	AccountId *string
 
-	// The Unix epoch timestamp, in seconds, of when the account enrollment status
-	// was last updated.
+	// The Unix epoch timestamp, in seconds, of when the account enrollment status was
+	// last updated.
 	LastUpdatedTimestamp *time.Time
 
 	// The account enrollment status.
 	Status Status
 
-	// The reason for the account enrollment status. For example, an account might
-	// show a status of Pending because member accounts of an organization require
-	// more time to be enrolled in the service.
+	// The reason for the account enrollment status. For example, an account might show
+	// a status of Pending because member accounts of an organization require more time
+	// to be enrolled in the service.
 	StatusReason *string
 
 	noSmithyDocumentSerde
@@ -59,12 +59,12 @@ type AutoScalingGroupRecommendation struct {
 	// The name of the Auto Scaling group.
 	AutoScalingGroupName *string
 
-	// An array of objects that describe the current configuration of the Auto
-	// Scaling group.
+	// An array of objects that describe the current configuration of the Auto Scaling
+	// group.
 	CurrentConfiguration *AutoScalingGroupConfiguration
 
-	// The risk of the current Auto Scaling group not meeting the performance needs
-	// of its workloads. The higher the risk, the more likely the current Auto Scaling
+	// The risk of the current Auto Scaling group not meeting the performance needs of
+	// its workloads. The higher the risk, the more likely the current Auto Scaling
 	// group configuration has insufficient capacity and cannot meet workload
 	// requirements.
 	CurrentPerformanceRisk CurrentPerformanceRisk
@@ -73,22 +73,44 @@ type AutoScalingGroupRecommendation struct {
 	// Scaling group.
 	EffectiveRecommendationPreferences *EffectiveRecommendationPreferences
 
-	// The finding classification of the Auto Scaling group. Findings for Auto
-	// Scaling groups include:
-	//     - NotOptimized —An Auto Scaling group is considered not optimized when Compute Optimizer identifies a recommendation that can provide better performance for your workload.
-	//     - Optimized —An Auto Scaling group is considered optimized when Compute Optimizer determines that the group is correctly provisioned to run your workload based on the chosen instance type. For optimized resources, Compute Optimizer might recommend a new generation instance type.
+	// The finding classification of the Auto Scaling group. Findings for Auto Scaling
+	// groups include:
+	//
+	// * NotOptimized —An Auto Scaling group is considered not
+	// optimized when Compute Optimizer identifies a recommendation that can provide
+	// better performance for your workload.
+	//
+	// * Optimized —An Auto Scaling group is
+	// considered optimized when Compute Optimizer determines that the group is
+	// correctly provisioned to run your workload based on the chosen instance type.
+	// For optimized resources, Compute Optimizer might recommend a new generation
+	// instance type.
 	Finding Finding
 
 	// The applications that might be running on the instances in the Auto Scaling
 	// group as inferred by Compute Optimizer. Compute Optimizer can infer if one of
 	// the following applications might be running on the instances:
-	//     - AmazonEmr - Infers that Amazon EMR might be running on the instances.
-	//     - ApacheCassandra - Infers that Apache Cassandra might be running on the instances.
-	//     - ApacheHadoop - Infers that Apache Hadoop might be running on the instances.
-	//     - Memcached - Infers that Memcached might be running on the instances.
-	//     - NGINX - Infers that NGINX might be running on the instances.
-	//     - PostgreSql - Infers that PostgreSQL might be running on the instances.
-	//     - Redis - Infers that Redis might be running on the instances.
+	//
+	// * AmazonEmr -
+	// Infers that Amazon EMR might be running on the instances.
+	//
+	// * ApacheCassandra -
+	// Infers that Apache Cassandra might be running on the instances.
+	//
+	// * ApacheHadoop
+	// - Infers that Apache Hadoop might be running on the instances.
+	//
+	// * Memcached -
+	// Infers that Memcached might be running on the instances.
+	//
+	// * NGINX - Infers that
+	// NGINX might be running on the instances.
+	//
+	// * PostgreSql - Infers that PostgreSQL
+	// might be running on the instances.
+	//
+	// * Redis - Infers that Redis might be running
+	// on the instances.
 	InferredWorkloadTypes []InferredWorkloadType
 
 	// The timestamp of when the Auto Scaling group recommendation was last generated.
@@ -118,10 +140,10 @@ type AutoScalingGroupRecommendationOption struct {
 	// The level of effort required to migrate from the current instance type to the
 	// recommended instance type. For example, the migration effort is Low if Amazon
 	// EMR is the inferred workload type and an Amazon Web Services Graviton instance
-	// type is recommended. The migration effort is Medium if a workload type
-	// couldn't be inferred but an Amazon Web Services Graviton instance type is
-	// recommended. The migration effort is VeryLow if both the current and
-	// recommended instance types are of the same CPU architecture.
+	// type is recommended. The migration effort is Medium if a workload type couldn't
+	// be inferred but an Amazon Web Services Graviton instance type is recommended.
+	// The migration effort is VeryLow if both the current and recommended instance
+	// types are of the same CPU architecture.
 	MigrationEffort MigrationEffort
 
 	// The performance risk of the Auto Scaling group configuration recommendation.
@@ -131,24 +153,24 @@ type AutoScalingGroupRecommendationOption struct {
 	// instance, including CPU, memory, EBS throughput, EBS IOPS, disk throughput, disk
 	// IOPS, network throughput, and network PPS. The performance risk of the
 	// recommended instance is calculated as the maximum performance risk score across
-	// the analyzed resource specifications. The value ranges from 0  - 4 , with 0
+	// the analyzed resource specifications. The value ranges from 0 - 4, with 0
 	// meaning that the recommended resource is predicted to always provide enough
 	// hardware capability. The higher the performance risk is, the more likely you
 	// should validate whether the recommendation will meet the performance
 	// requirements of your workload before migrating your resource.
 	PerformanceRisk float64
 
-	// An array of objects that describe the projected utilization metrics of the
-	// Auto Scaling group recommendation option. The Cpu  and Memory metrics are the
-	// only projected utilization metrics returned. Additionally, the Memory metric
-	// is returned only for resources that have the unified CloudWatch agent installed
-	// on them. For more information, see Enabling Memory Utilization with the
-	// CloudWatch Agent (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent)
-	// .
+	// An array of objects that describe the projected utilization metrics of the Auto
+	// Scaling group recommendation option. The Cpu and Memory metrics are the only
+	// projected utilization metrics returned. Additionally, the Memory metric is
+	// returned only for resources that have the unified CloudWatch agent installed on
+	// them. For more information, see Enabling Memory Utilization with the CloudWatch
+	// Agent
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
 	ProjectedUtilizationMetrics []UtilizationMetric
 
-	// The rank of the Auto Scaling group recommendation option. The top
-	// recommendation option is ranked as 1 .
+	// The rank of the Auto Scaling group recommendation option. The top recommendation
+	// option is ranked as 1.
 	Rank int32
 
 	// An object that describes the savings opportunity for the Auto Scaling group
@@ -191,10 +213,10 @@ type ContainerRecommendation struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the performance risk ratings for a given resource type. Resources
-// with a high  or medium rating are at risk of not meeting the performance needs
-// of their workloads, while resources with a low rating are performing well in
-// their workloads.
+// Describes the performance risk ratings for a given resource type. Resources with
+// a high or medium rating are at risk of not meeting the performance needs of
+// their workloads, while resources with a low rating are performing well in their
+// workloads.
 type CurrentPerformanceRiskRatings struct {
 
 	// A count of the applicable resource types with a high performance risk rating.
@@ -217,16 +239,16 @@ type CurrentPerformanceRiskRatings struct {
 // Store (Amazon EBS) volume recommendations. Use this filter with the
 // GetEBSVolumeRecommendations action. You can use
 // LambdaFunctionRecommendationFilter with the GetLambdaFunctionRecommendations
-// action, JobFilter  with the DescribeRecommendationExportJobs  action, and
-// Filter with the GetAutoScalingGroupRecommendations  and
-// GetEC2InstanceRecommendations actions.
+// action, JobFilter with the DescribeRecommendationExportJobs action, and Filter
+// with the GetAutoScalingGroupRecommendations and GetEC2InstanceRecommendations
+// actions.
 type EBSFilter struct {
 
 	// The name of the filter. Specify Finding to return recommendations with a
-	// specific finding classification (for example, NotOptimized ).
+	// specific finding classification (for example, NotOptimized).
 	Name EBSFilterName
 
-	// The value of the filter. The valid values are Optimized , or NotOptimized .
+	// The value of the filter. The valid values are Optimized, or NotOptimized.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -240,23 +262,33 @@ type EBSUtilizationMetric struct {
 
 	// The name of the utilization metric. The following utilization metrics are
 	// available:
-	//     - VolumeReadOpsPerSecond - The completed read operations per second from the volume in a specified period of time. Unit: Count
-	//     - VolumeWriteOpsPerSecond - The completed write operations per second to the volume in a specified period of time. Unit: Count
-	//     - VolumeReadBytesPerSecond - The bytes read per second from the volume in a specified period of time. Unit: Bytes
-	//     - VolumeWriteBytesPerSecond - The bytes written to the volume in a specified period of time. Unit: Bytes
+	//
+	// * VolumeReadOpsPerSecond - The completed read operations per second
+	// from the volume in a specified period of time. Unit: Count
+	//
+	// *
+	// VolumeWriteOpsPerSecond - The completed write operations per second to the
+	// volume in a specified period of time. Unit: Count
+	//
+	// * VolumeReadBytesPerSecond -
+	// The bytes read per second from the volume in a specified period of time. Unit:
+	// Bytes
+	//
+	// * VolumeWriteBytesPerSecond - The bytes written to the volume in a
+	// specified period of time. Unit: Bytes
 	Name EBSMetricName
 
-	// The statistic of the utilization metric. The Compute Optimizer API, Command
-	// Line Interface (CLI), and SDKs return utilization metrics using only the
-	// Maximumstatistic, which is the highest value observed during the specified
-	// period. The Compute Optimizer console displays graphs for some utilization
-	// metrics using the Average  statistic, which is the value of Sum  / SampleCount
-	// during the specified period. For more information, see Viewing resource
-	// recommendations (https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html)
+	// The statistic of the utilization metric. The Compute Optimizer API, Command Line
+	// Interface (CLI), and SDKs return utilization metrics using only the Maximum
+	// statistic, which is the highest value observed during the specified period. The
+	// Compute Optimizer console displays graphs for some utilization metrics using the
+	// Average statistic, which is the value of Sum / SampleCount during the specified
+	// period. For more information, see Viewing resource recommendations
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html)
 	// in the Compute Optimizer User Guide. You can also get averaged utilization
 	// metric data for your resources using Amazon CloudWatch. For more information,
-	// see the Amazon CloudWatch User Guide (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html)
-	// .
+	// see the Amazon CloudWatch User Guide
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
 	Statistic MetricStatistic
 
 	// The value of the utilization metric.
@@ -265,18 +297,23 @@ type EBSUtilizationMetric struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the projected metrics of an Amazon ECS service recommendation
-// option. To determine the performance difference between your current Amazon ECS
-// service and the recommended option, compare the metric data of your service
-// against its projected metric data.
+// Describes the projected metrics of an Amazon ECS service recommendation option.
+// To determine the performance difference between your current Amazon ECS service
+// and the recommended option, compare the metric data of your service against its
+// projected metric data.
 type ECSServiceProjectedMetric struct {
 
 	// The lower bound values for the projected metric.
 	LowerBoundValues []float64
 
 	// The name of the projected metric. The following metrics are available:
-	//     - Cpu — The percentage of allocated compute units that are currently in use on the service tasks.
-	//     - Memory — The percentage of memory that's currently in use on the service tasks.
+	//
+	// * Cpu —
+	// The percentage of allocated compute units that are currently in use on the
+	// service tasks.
+	//
+	// * Memory — The percentage of memory that's currently in use on
+	// the service tasks.
 	Name ECSServiceMetricName
 
 	// The timestamps of the projected metric.
@@ -297,24 +334,28 @@ type ECSServiceProjectedUtilizationMetric struct {
 	// The lower bound values for the projected utilization metrics.
 	LowerBoundValue float64
 
-	// The name of the projected utilization metric. The following utilization
-	// metrics are available:
-	//     - Cpu — The percentage of allocated compute units that are currently in use on the service tasks.
-	//     - Memory — The percentage of memory that's currently in use on the service tasks.
+	// The name of the projected utilization metric. The following utilization metrics
+	// are available:
+	//
+	// * Cpu — The percentage of allocated compute units that are
+	// currently in use on the service tasks.
+	//
+	// * Memory — The percentage of memory
+	// that's currently in use on the service tasks.
 	Name ECSServiceMetricName
 
 	// The statistic of the projected utilization metric. The Compute Optimizer API,
 	// Command Line Interface (CLI), and SDKs return utilization metrics using only the
-	//
-	// Maximumstatistic, which is the highest value observed during the specified
+	// Maximum statistic, which is the highest value observed during the specified
 	// period. The Compute Optimizer console displays graphs for some utilization
-	// metrics using the Average  statistic, which is the value of Sum  / SampleCount
+	// metrics using the Average statistic, which is the value of Sum / SampleCount
 	// during the specified period. For more information, see Viewing resource
-	// recommendations (https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html)
+	// recommendations
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html)
 	// in the Compute Optimizer User Guide. You can also get averaged utilization
 	// metric data for your resources using Amazon CloudWatch. For more information,
-	// see the Amazon CloudWatch User Guide (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html)
-	// .
+	// see the Amazon CloudWatch User Guide
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
 	Statistic ECSServiceMetricStatistic
 
 	// The upper bound values for the projected utilization metrics.
@@ -329,8 +370,8 @@ type ECSServiceRecommendation struct {
 	// The Amazon Web Services account ID of the Amazon ECS service.
 	AccountId *string
 
-	// The risk of the current Amazon ECS service not meeting the performance needs
-	// of its workloads. The higher the risk, the more likely the current service can't
+	// The risk of the current Amazon ECS service not meeting the performance needs of
+	// its workloads. The higher the risk, the more likely the current service can't
 	// meet the performance requirements of its workload.
 	CurrentPerformanceRisk CurrentPerformanceRisk
 
@@ -339,36 +380,63 @@ type ECSServiceRecommendation struct {
 
 	// The finding classification of an Amazon ECS service. Findings for Amazon ECS
 	// services include:
-	//     - Underprovisioned — When Compute Optimizer detects that there’s not enough memory or CPU, an Amazon ECS service is considered under-provisioned. An under-provisioned service might result in poor application performance.
-	//     - Overprovisioned — When Compute Optimizer detects that there’s excessive memory or CPU, an Amazon ECS service is considered over-provisioned. An over-provisioned service might result in additional infrastructure costs.
-	//     - Optimized — When both the CPU and memory of your Amazon ECS service meet the performance requirements of your workload, the service is considered optimized.
+	//
+	// * Underprovisioned — When Compute Optimizer detects that
+	// there’s not enough memory or CPU, an Amazon ECS service is considered
+	// under-provisioned. An under-provisioned service might result in poor application
+	// performance.
+	//
+	// * Overprovisioned — When Compute Optimizer detects that there’s
+	// excessive memory or CPU, an Amazon ECS service is considered over-provisioned.
+	// An over-provisioned service might result in additional infrastructure costs.
+	//
+	// *
+	// Optimized — When both the CPU and memory of your Amazon ECS service meet the
+	// performance requirements of your workload, the service is considered optimized.
 	Finding ECSServiceRecommendationFinding
 
 	// The reason for the finding classification of an Amazon ECS service. Finding
 	// reason codes for Amazon ECS services include:
-	//     - CPUUnderprovisioned — The service CPU configuration can be sized up to enhance the performance of your workload. This is identified by analyzing the CPUUtilization metric of the current service during the look-back period.
-	//     - CPUOverprovisioned — The service CPU configuration can be sized down while still meeting the performance requirements of your workload. This is identified by analyzing the CPUUtilization metric of the current service during the look-back period.
-	//     - MemoryUnderprovisioned — The service memory configuration can be sized up to enhance the performance of your workload. This is identified by analyzing the MemoryUtilization metric of the current service during the look-back period.
-	//     - MemoryOverprovisioned — The service memory configuration can be sized down while still meeting the performance requirements of your workload. This is identified by analyzing the MemoryUtilization metric of the current service during the look-back period.
+	//
+	// * CPUUnderprovisioned — The
+	// service CPU configuration can be sized up to enhance the performance of your
+	// workload. This is identified by analyzing the CPUUtilization metric of the
+	// current service during the look-back period.
+	//
+	// * CPUOverprovisioned — The service
+	// CPU configuration can be sized down while still meeting the performance
+	// requirements of your workload. This is identified by analyzing the
+	// CPUUtilization metric of the current service during the look-back period.
+	//
+	// *
+	// MemoryUnderprovisioned — The service memory configuration can be sized up to
+	// enhance the performance of your workload. This is identified by analyzing the
+	// MemoryUtilization metric of the current service during the look-back period.
+	//
+	// *
+	// MemoryOverprovisioned — The service memory configuration can be sized down while
+	// still meeting the performance requirements of your workload. This is identified
+	// by analyzing the MemoryUtilization metric of the current service during the
+	// look-back period.
 	FindingReasonCodes []ECSServiceRecommendationFindingReasonCode
 
 	// The timestamp of when the Amazon ECS service recommendation was last generated.
 	LastRefreshTimestamp *time.Time
 
-	// The launch type the Amazon ECS service is using. Compute Optimizer only
-	// supports the Fargate launch type.
+	// The launch type the Amazon ECS service is using. Compute Optimizer only supports
+	// the Fargate launch type.
 	LaunchType ECSServiceLaunchType
 
 	// The number of days the Amazon ECS service utilization metrics were analyzed.
 	LookbackPeriodInDays float64
 
-	// The Amazon Resource Name (ARN) of the current Amazon ECS service. The
-	// following is the format of the ARN:
+	// The Amazon Resource Name (ARN) of the current Amazon ECS service. The following
+	// is the format of the ARN:
 	// arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name
 	ServiceArn *string
 
-	// An array of objects that describe the recommendation options for the Amazon
-	// ECS service.
+	// An array of objects that describe the recommendation options for the Amazon ECS
+	// service.
 	ServiceRecommendationOptions []ECSServiceRecommendationOption
 
 	// An array of objects that describe the utilization metrics of the Amazon ECS
@@ -379,7 +447,7 @@ type ECSServiceRecommendation struct {
 }
 
 // Describes a filter that returns a more specific list of Amazon ECS service
-// recommendations. Use this filter with the GetECSServiceRecommendations  action.
+// recommendations. Use this filter with the GetECSServiceRecommendations action.
 type ECSServiceRecommendationFilter struct {
 
 	// The name of the filter. Specify Finding to return recommendations with a
@@ -388,8 +456,14 @@ type ECSServiceRecommendationFilter struct {
 	Name ECSServiceRecommendationFilterName
 
 	// The value of the filter. The valid values for this parameter are as follows:
-	//     - If you specify the name parameter as Finding , specify Optimized , NotOptimized , or Unavailable .
-	//     - If you specify the name parameter as FindingReasonCode , specify CPUUnderprovisioned , CPUOverprovisioned , MemoryUnderprovisioned , or MemoryOverprovisioned .
+	//
+	// *
+	// If you specify the name parameter as Finding, specify Optimized, NotOptimized,
+	// or Unavailable.
+	//
+	// * If you specify the name parameter as FindingReasonCode,
+	// specify CPUUnderprovisioned, CPUOverprovisioned, MemoryUnderprovisioned, or
+	// MemoryOverprovisioned.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -422,18 +496,20 @@ type ECSServiceRecommendationOption struct {
 	// generates savings estimates considering the price of existing resources, the
 	// price of recommended resources, and historical usage data. Estimated monthly
 	// savings reflects the projected dollar savings associated with each of the
-	// recommendations generated. For more information, see Enabling Cost Explorer (https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html)
-	// and Optimizing your cost with Rightsizing Recommendations (https://docs.aws.amazon.com/cost-management/latest/userguide/ce-rightsizing.html)
+	// recommendations generated. For more information, see Enabling Cost Explorer
+	// (https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html)
+	// and Optimizing your cost with Rightsizing Recommendations
+	// (https://docs.aws.amazon.com/cost-management/latest/userguide/ce-rightsizing.html)
 	// in the Cost Management User Guide.
 	SavingsOpportunity *SavingsOpportunity
 
 	noSmithyDocumentSerde
 }
 
-// Describes the projected metrics of an Amazon ECS service recommendation
-// option. To determine the performance difference between your current Amazon ECS
-// service and the recommended option, compare the metric data of your service
-// against its projected metric data.
+// Describes the projected metrics of an Amazon ECS service recommendation option.
+// To determine the performance difference between your current Amazon ECS service
+// and the recommended option, compare the metric data of your service against its
+// projected metric data.
 type ECSServiceRecommendedOptionProjectedMetric struct {
 
 	// An array of objects that describe the projected metric.
@@ -456,21 +532,24 @@ type ECSServiceUtilizationMetric struct {
 
 	// The name of the utilization metric. The following utilization metrics are
 	// available:
-	//     - Cpu — The amount of CPU capacity that's used in the service.
-	//     - Memory — The amount of memory that's used in the service.
+	//
+	// * Cpu — The amount of CPU capacity that's used in the service.
+	//
+	// *
+	// Memory — The amount of memory that's used in the service.
 	Name ECSServiceMetricName
 
-	// The statistic of the utilization metric. The Compute Optimizer API, Command
-	// Line Interface (CLI), and SDKs return utilization metrics using only the
-	// Maximumstatistic, which is the highest value observed during the specified
-	// period. The Compute Optimizer console displays graphs for some utilization
-	// metrics using the Average  statistic, which is the value of Sum  / SampleCount
-	// during the specified period. For more information, see Viewing resource
-	// recommendations (https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html)
+	// The statistic of the utilization metric. The Compute Optimizer API, Command Line
+	// Interface (CLI), and SDKs return utilization metrics using only the Maximum
+	// statistic, which is the highest value observed during the specified period. The
+	// Compute Optimizer console displays graphs for some utilization metrics using the
+	// Average statistic, which is the value of Sum / SampleCount during the specified
+	// period. For more information, see Viewing resource recommendations
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html)
 	// in the Compute Optimizer User Guide. You can also get averaged utilization
 	// metric data for your resources using Amazon CloudWatch. For more information,
-	// see the Amazon CloudWatch User Guide (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html)
-	// .
+	// see the Amazon CloudWatch User Guide
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
 	Statistic ECSServiceMetricStatistic
 
 	// The value of the utilization metric.
@@ -482,46 +561,57 @@ type ECSServiceUtilizationMetric struct {
 // Describes the effective recommendation preferences for a resource.
 type EffectiveRecommendationPreferences struct {
 
-	// Describes the CPU vendor and architecture for an instance or Auto Scaling
-	// group recommendations. For example, when you specify AWS_ARM64  with:
-	//     - A GetEC2InstanceRecommendations or GetAutoScalingGroupRecommendations request, Compute Optimizer returns recommendations that consist of Graviton2 instance types only.
-	//     - A GetEC2RecommendationProjectedMetrics request, Compute Optimizer returns projected utilization metrics for Graviton2 instance type recommendations only.
-	//     - A ExportEC2InstanceRecommendations or ExportAutoScalingGroupRecommendations request, Compute Optimizer exports recommendations that consist of Graviton2 instance types only.
+	// Describes the CPU vendor and architecture for an instance or Auto Scaling group
+	// recommendations. For example, when you specify AWS_ARM64 with:
+	//
+	// * A
+	// GetEC2InstanceRecommendations or GetAutoScalingGroupRecommendations request,
+	// Compute Optimizer returns recommendations that consist of Graviton2 instance
+	// types only.
+	//
+	// * A GetEC2RecommendationProjectedMetrics request, Compute Optimizer
+	// returns projected utilization metrics for Graviton2 instance type
+	// recommendations only.
+	//
+	// * A ExportEC2InstanceRecommendations or
+	// ExportAutoScalingGroupRecommendations request, Compute Optimizer exports
+	// recommendations that consist of Graviton2 instance types only.
 	CpuVendorArchitectures []CpuVendorArchitecture
 
 	// Describes the activation status of the enhanced infrastructure metrics
 	// preference. A status of Active confirms that the preference is applied in the
 	// latest recommendation refresh, and a status of Inactive confirms that it's not
 	// yet applied to recommendations. For more information, see Enhanced
-	// infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
+	// infrastructure metrics
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
 	// in the Compute Optimizer User Guide.
 	EnhancedInfrastructureMetrics EnhancedInfrastructureMetrics
 
-	// An object that describes the external metrics recommendation preference. If
-	// the preference is applied in the latest recommendation refresh, an object with a
+	// An object that describes the external metrics recommendation preference. If the
+	// preference is applied in the latest recommendation refresh, an object with a
 	// valid source value appears in the response. If the preference isn't applied to
 	// the recommendations already, then this object doesn't appear in the response.
 	ExternalMetricsPreference *ExternalMetricsPreference
 
 	// Describes the activation status of the inferred workload types preference. A
 	// status of Active confirms that the preference is applied in the latest
-	// recommendation refresh. A status of Inactive confirms that it's not yet
-	// applied to recommendations.
+	// recommendation refresh. A status of Inactive confirms that it's not yet applied
+	// to recommendations.
 	InferredWorkloadTypes InferredWorkloadTypesPreference
 
 	noSmithyDocumentSerde
 }
 
 // Describes a filter that returns a more specific list of account enrollment
-// statuses. Use this filter with the GetEnrollmentStatusesForOrganization  action.
+// statuses. Use this filter with the GetEnrollmentStatusesForOrganization action.
 type EnrollmentFilter struct {
 
 	// The name of the filter. Specify Status to return accounts with a specific
-	// enrollment status (for example, Active ).
+	// enrollment status (for example, Active).
 	Name EnrollmentFilterName
 
-	// The value of the filter. The valid values are Active , Inactive , Pending , and
-	// Failed .
+	// The value of the filter. The valid values are Active, Inactive, Pending, and
+	// Failed.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -530,7 +620,8 @@ type EnrollmentFilter struct {
 // Describes the estimated monthly savings amount possible, based on On-Demand
 // instance pricing, by adopting Compute Optimizer recommendations for a given
 // resource. For more information, see Estimated monthly savings and savings
-// opportunities (https://docs.aws.amazon.com/compute-optimizer/latest/ug/view-ec2-recommendations.html#ec2-savings-calculation)
+// opportunities
+// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/view-ec2-recommendations.html#ec2-savings-calculation)
 // in the Compute Optimizer User Guide.
 type EstimatedMonthlySavings struct {
 
@@ -564,44 +655,111 @@ type ExternalMetricsPreference struct {
 }
 
 // Describes a filter that returns a more specific list of recommendations. Use
-// this filter with the GetAutoScalingGroupRecommendations  and
-// GetEC2InstanceRecommendations actions. You can use EBSFilter  with the
-// GetEBSVolumeRecommendations action, LambdaFunctionRecommendationFilter with
-// the GetLambdaFunctionRecommendations  action, and JobFilter  with the
+// this filter with the GetAutoScalingGroupRecommendations and
+// GetEC2InstanceRecommendations actions. You can use EBSFilter with the
+// GetEBSVolumeRecommendations action, LambdaFunctionRecommendationFilter with the
+// GetLambdaFunctionRecommendations action, and JobFilter with the
 // DescribeRecommendationExportJobs action.
 type Filter struct {
 
 	// The name of the filter. Specify Finding to return recommendations with a
-	// specific finding classification (for example, Underprovisioned ). Specify
-	// RecommendationSourceTypeto return recommendations of a specific resource type
-	// (for example, Ec2Instance ). Specify FindingReasonCodes to return
-	// recommendations with a specific finding reason code (for example,
-	// CPUUnderprovisioned ).
+	// specific finding classification (for example, Underprovisioned). Specify
+	// RecommendationSourceType to return recommendations of a specific resource type
+	// (for example, Ec2Instance). Specify FindingReasonCodes to return recommendations
+	// with a specific finding reason code (for example, CPUUnderprovisioned).
 	Name FilterName
 
 	// The value of the filter. The valid values for this parameter are as follows,
-	// depending on what you specify for the name parameter and the resource type
-	// that you wish to filter results for:
-	//     - Specify Optimized or NotOptimized if you specify the name parameter as Finding and you want to filter results for Auto Scaling groups.
-	//     - Specify Underprovisioned , Overprovisioned , or Optimized if you specify the name parameter as Finding and you want to filter results for EC2 instances.
-	//     - Specify Ec2Instance or AutoScalingGroup if you specify the name parameter as RecommendationSourceType .
-	//     - Specify one of the following options if you specify the name parameter as FindingReasonCodes :
-	//         - CPUOverprovisioned — The instance’s CPU configuration can be sized down while still meeting the performance requirements of your workload.
-	//         - CPUUnderprovisioned — The instance’s CPU configuration doesn't meet the performance requirements of your workload and there is an alternative instance type that provides better CPU performance.
-	//         - MemoryOverprovisioned — The instance’s memory configuration can be sized down while still meeting the performance requirements of your workload.
-	//         - MemoryUnderprovisioned — The instance’s memory configuration doesn't meet the performance requirements of your workload and there is an alternative instance type that provides better memory performance.
-	//         - EBSThroughputOverprovisioned — The instance’s EBS throughput configuration can be sized down while still meeting the performance requirements of your workload.
-	//         - EBSThroughputUnderprovisioned — The instance’s EBS throughput configuration doesn't meet the performance requirements of your workload and there is an alternative instance type that provides better EBS throughput performance.
-	//         - EBSIOPSOverprovisioned — The instance’s EBS IOPS configuration can be sized down while still meeting the performance requirements of your workload.
-	//         - EBSIOPSUnderprovisioned — The instance’s EBS IOPS configuration doesn't meet the performance requirements of your workload and there is an alternative instance type that provides better EBS IOPS performance.
-	//         - NetworkBandwidthOverprovisioned — The instance’s network bandwidth configuration can be sized down while still meeting the performance requirements of your workload.
-	//         - NetworkBandwidthUnderprovisioned — The instance’s network bandwidth configuration doesn't meet the performance requirements of your workload and there is an alternative instance type that provides better network bandwidth performance. This finding reason happens when the NetworkIn or NetworkOut performance of an instance is impacted.
-	//         - NetworkPPSOverprovisioned — The instance’s network PPS (packets per second) configuration can be sized down while still meeting the performance requirements of your workload.
-	//         - NetworkPPSUnderprovisioned — The instance’s network PPS (packets per second) configuration doesn't meet the performance requirements of your workload and there is an alternative instance type that provides better network PPS performance.
-	//         - DiskIOPSOverprovisioned — The instance’s disk IOPS configuration can be sized down while still meeting the performance requirements of your workload.
-	//         - DiskIOPSUnderprovisioned — The instance’s disk IOPS configuration doesn't meet the performance requirements of your workload and there is an alternative instance type that provides better disk IOPS performance.
-	//         - DiskThroughputOverprovisioned — The instance’s disk throughput configuration can be sized down while still meeting the performance requirements of your workload.
-	//         - DiskThroughputUnderprovisioned — The instance’s disk throughput configuration doesn't meet the performance requirements of your workload and there is an alternative instance type that provides better disk throughput performance.
+	// depending on what you specify for the name parameter and the resource type that
+	// you wish to filter results for:
+	//
+	// * Specify Optimized or NotOptimized if you
+	// specify the name parameter as Finding and you want to filter results for Auto
+	// Scaling groups.
+	//
+	// * Specify Underprovisioned, Overprovisioned, or Optimized if
+	// you specify the name parameter as Finding and you want to filter results for EC2
+	// instances.
+	//
+	// * Specify Ec2Instance or AutoScalingGroup if you specify the name
+	// parameter as RecommendationSourceType.
+	//
+	// * Specify one of the following options
+	// if you specify the name parameter as FindingReasonCodes:
+	//
+	// * CPUOverprovisioned —
+	// The instance’s CPU configuration can be sized down while still meeting the
+	// performance requirements of your workload.
+	//
+	// * CPUUnderprovisioned — The
+	// instance’s CPU configuration doesn't meet the performance requirements of your
+	// workload and there is an alternative instance type that provides better CPU
+	// performance.
+	//
+	// * MemoryOverprovisioned — The instance’s memory configuration can
+	// be sized down while still meeting the performance requirements of your
+	// workload.
+	//
+	// * MemoryUnderprovisioned — The instance’s memory configuration
+	// doesn't meet the performance requirements of your workload and there is an
+	// alternative instance type that provides better memory performance.
+	//
+	// *
+	// EBSThroughputOverprovisioned — The instance’s EBS throughput configuration can
+	// be sized down while still meeting the performance requirements of your
+	// workload.
+	//
+	// * EBSThroughputUnderprovisioned — The instance’s EBS throughput
+	// configuration doesn't meet the performance requirements of your workload and
+	// there is an alternative instance type that provides better EBS throughput
+	// performance.
+	//
+	// * EBSIOPSOverprovisioned — The instance’s EBS IOPS configuration
+	// can be sized down while still meeting the performance requirements of your
+	// workload.
+	//
+	// * EBSIOPSUnderprovisioned — The instance’s EBS IOPS configuration
+	// doesn't meet the performance requirements of your workload and there is an
+	// alternative instance type that provides better EBS IOPS performance.
+	//
+	// *
+	// NetworkBandwidthOverprovisioned — The instance’s network bandwidth configuration
+	// can be sized down while still meeting the performance requirements of your
+	// workload.
+	//
+	// * NetworkBandwidthUnderprovisioned — The instance’s network bandwidth
+	// configuration doesn't meet the performance requirements of your workload and
+	// there is an alternative instance type that provides better network bandwidth
+	// performance. This finding reason happens when the NetworkIn or NetworkOut
+	// performance of an instance is impacted.
+	//
+	// * NetworkPPSOverprovisioned — The
+	// instance’s network PPS (packets per second) configuration can be sized down
+	// while still meeting the performance requirements of your workload.
+	//
+	// *
+	// NetworkPPSUnderprovisioned — The instance’s network PPS (packets per second)
+	// configuration doesn't meet the performance requirements of your workload and
+	// there is an alternative instance type that provides better network PPS
+	// performance.
+	//
+	// * DiskIOPSOverprovisioned — The instance’s disk IOPS configuration
+	// can be sized down while still meeting the performance requirements of your
+	// workload.
+	//
+	// * DiskIOPSUnderprovisioned — The instance’s disk IOPS configuration
+	// doesn't meet the performance requirements of your workload and there is an
+	// alternative instance type that provides better disk IOPS performance.
+	//
+	// *
+	// DiskThroughputOverprovisioned — The instance’s disk throughput configuration can
+	// be sized down while still meeting the performance requirements of your
+	// workload.
+	//
+	// * DiskThroughputUnderprovisioned — The instance’s disk throughput
+	// configuration doesn't meet the performance requirements of your workload and
+	// there is an alternative instance type that provides better disk throughput
+	// performance.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -644,48 +802,173 @@ type InstanceRecommendation struct {
 	EffectiveRecommendationPreferences *EffectiveRecommendationPreferences
 
 	// The finding classification of the instance. Findings for instances include:
-	//     - Underprovisioned —An instance is considered under-provisioned when at least one specification of your instance, such as CPU, memory, or network, does not meet the performance requirements of your workload. Under-provisioned instances may lead to poor application performance.
-	//     - Overprovisioned —An instance is considered over-provisioned when at least one specification of your instance, such as CPU, memory, or network, can be sized down while still meeting the performance requirements of your workload, and no specification is under-provisioned. Over-provisioned instances may lead to unnecessary infrastructure cost.
-	//     - Optimized —An instance is considered optimized when all specifications of your instance, such as CPU, memory, and network, meet the performance requirements of your workload and is not over provisioned. For optimized resources, Compute Optimizer might recommend a new generation instance type.
+	//
+	// *
+	// Underprovisioned —An instance is considered under-provisioned when at least one
+	// specification of your instance, such as CPU, memory, or network, does not meet
+	// the performance requirements of your workload. Under-provisioned instances may
+	// lead to poor application performance.
+	//
+	// * Overprovisioned —An instance is
+	// considered over-provisioned when at least one specification of your instance,
+	// such as CPU, memory, or network, can be sized down while still meeting the
+	// performance requirements of your workload, and no specification is
+	// under-provisioned. Over-provisioned instances may lead to unnecessary
+	// infrastructure cost.
+	//
+	// * Optimized —An instance is considered optimized when all
+	// specifications of your instance, such as CPU, memory, and network, meet the
+	// performance requirements of your workload and is not over provisioned. For
+	// optimized resources, Compute Optimizer might recommend a new generation instance
+	// type.
 	Finding Finding
 
-	// The reason for the finding classification of the instance. Finding reason
-	// codes for instances include:
-	//     - CPUOverprovisioned — The instance’s CPU configuration can be sized down while still meeting the performance requirements of your workload. This is identified by analyzing the CPUUtilization metric of the current instance during the look-back period.
-	//     - CPUUnderprovisioned — The instance’s CPU configuration doesn't meet the performance requirements of your workload and there is an alternative instance type that provides better CPU performance. This is identified by analyzing the CPUUtilization metric of the current instance during the look-back period.
-	//     - MemoryOverprovisioned — The instance’s memory configuration can be sized down while still meeting the performance requirements of your workload. This is identified by analyzing the memory utilization metric of the current instance during the look-back period.
-	//     - MemoryUnderprovisioned — The instance’s memory configuration doesn't meet the performance requirements of your workload and there is an alternative instance type that provides better memory performance. This is identified by analyzing the memory utilization metric of the current instance during the look-back period. Memory utilization is analyzed only for resources that have the unified CloudWatch agent installed on them. For more information, see Enabling memory utilization with the Amazon CloudWatch Agent (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent) in the Compute Optimizer User Guide. On Linux instances, Compute Optimizer analyses the mem_used_percent metric in the CWAgent namespace, or the legacy MemoryUtilization metric in the System/Linux namespace. On Windows instances, Compute Optimizer analyses the Memory % Committed Bytes In Use metric in the CWAgent namespace.
-	//     - EBSThroughputOverprovisioned — The instance’s EBS throughput configuration can be sized down while still meeting the performance requirements of your workload. This is identified by analyzing the VolumeReadOps and VolumeWriteOps metrics of EBS volumes attached to the current instance during the look-back period.
-	//     - EBSThroughputUnderprovisioned — The instance’s EBS throughput configuration doesn't meet the performance requirements of your workload and there is an alternative instance type that provides better EBS throughput performance. This is identified by analyzing the VolumeReadOps and VolumeWriteOps metrics of EBS volumes attached to the current instance during the look-back period.
-	//     - EBSIOPSOverprovisioned — The instance’s EBS IOPS configuration can be sized down while still meeting the performance requirements of your workload. This is identified by analyzing the VolumeReadBytes and VolumeWriteBytes metric of EBS volumes attached to the current instance during the look-back period.
-	//     - EBSIOPSUnderprovisioned — The instance’s EBS IOPS configuration doesn't meet the performance requirements of your workload and there is an alternative instance type that provides better EBS IOPS performance. This is identified by analyzing the VolumeReadBytes and VolumeWriteBytes metric of EBS volumes attached to the current instance during the look-back period.
-	//     - NetworkBandwidthOverprovisioned — The instance’s network bandwidth configuration can be sized down while still meeting the performance requirements of your workload. This is identified by analyzing the NetworkIn and NetworkOut metrics of the current instance during the look-back period.
-	//     - NetworkBandwidthUnderprovisioned — The instance’s network bandwidth configuration doesn't meet the performance requirements of your workload and there is an alternative instance type that provides better network bandwidth performance. This is identified by analyzing the NetworkIn and NetworkOut metrics of the current instance during the look-back period. This finding reason happens when the NetworkIn or NetworkOut performance of an instance is impacted.
-	//     - NetworkPPSOverprovisioned — The instance’s network PPS (packets per second) configuration can be sized down while still meeting the performance requirements of your workload. This is identified by analyzing the NetworkPacketsIn and NetworkPacketsIn metrics of the current instance during the look-back period.
-	//     - NetworkPPSUnderprovisioned — The instance’s network PPS (packets per second) configuration doesn't meet the performance requirements of your workload and there is an alternative instance type that provides better network PPS performance. This is identified by analyzing the NetworkPacketsIn and NetworkPacketsIn metrics of the current instance during the look-back period.
-	//     - DiskIOPSOverprovisioned — The instance’s disk IOPS configuration can be sized down while still meeting the performance requirements of your workload. This is identified by analyzing the DiskReadOps and DiskWriteOps metrics of the current instance during the look-back period.
-	//     - DiskIOPSUnderprovisioned — The instance’s disk IOPS configuration doesn't meet the performance requirements of your workload and there is an alternative instance type that provides better disk IOPS performance. This is identified by analyzing the DiskReadOps and DiskWriteOps metrics of the current instance during the look-back period.
-	//     - DiskThroughputOverprovisioned — The instance’s disk throughput configuration can be sized down while still meeting the performance requirements of your workload. This is identified by analyzing the DiskReadBytes and DiskWriteBytes metrics of the current instance during the look-back period.
-	//     - DiskThroughputUnderprovisioned — The instance’s disk throughput configuration doesn't meet the performance requirements of your workload and there is an alternative instance type that provides better disk throughput performance. This is identified by analyzing the DiskReadBytes and DiskWriteBytes metrics of the current instance during the look-back period.
+	// The reason for the finding classification of the instance. Finding reason codes
+	// for instances include:
 	//
-	// For more information about instance metrics, see List the available CloudWatch
-	// metrics for your instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/viewing_metrics_with_cloudwatch.html)
+	// * CPUOverprovisioned — The instance’s CPU configuration
+	// can be sized down while still meeting the performance requirements of your
+	// workload. This is identified by analyzing the CPUUtilization metric of the
+	// current instance during the look-back period.
+	//
+	// * CPUUnderprovisioned — The
+	// instance’s CPU configuration doesn't meet the performance requirements of your
+	// workload and there is an alternative instance type that provides better CPU
+	// performance. This is identified by analyzing the CPUUtilization metric of the
+	// current instance during the look-back period.
+	//
+	// * MemoryOverprovisioned — The
+	// instance’s memory configuration can be sized down while still meeting the
+	// performance requirements of your workload. This is identified by analyzing the
+	// memory utilization metric of the current instance during the look-back
+	// period.
+	//
+	// * MemoryUnderprovisioned — The instance’s memory configuration doesn't
+	// meet the performance requirements of your workload and there is an alternative
+	// instance type that provides better memory performance. This is identified by
+	// analyzing the memory utilization metric of the current instance during the
+	// look-back period. Memory utilization is analyzed only for resources that have
+	// the unified CloudWatch agent installed on them. For more information, see
+	// Enabling memory utilization with the Amazon CloudWatch Agent
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent)
+	// in the Compute Optimizer User Guide. On Linux instances, Compute Optimizer
+	// analyses the mem_used_percent metric in the CWAgent namespace, or the legacy
+	// MemoryUtilization metric in the System/Linux namespace. On Windows instances,
+	// Compute Optimizer analyses the Memory % Committed Bytes In Use metric in the
+	// CWAgent namespace.
+	//
+	// * EBSThroughputOverprovisioned — The instance’s EBS
+	// throughput configuration can be sized down while still meeting the performance
+	// requirements of your workload. This is identified by analyzing the
+	// VolumeReadBytes and VolumeWriteBytes metrics of EBS volumes attached to the
+	// current instance during the look-back period.
+	//
+	// * EBSThroughputUnderprovisioned —
+	// The instance’s EBS throughput configuration doesn't meet the performance
+	// requirements of your workload and there is an alternative instance type that
+	// provides better EBS throughput performance. This is identified by analyzing the
+	// VolumeReadBytes and VolumeWriteBytes> metrics of EBS volumes attached to the
+	// current instance during the look-back period.
+	//
+	// * EBSIOPSOverprovisioned — The
+	// instance’s EBS IOPS configuration can be sized down while still meeting the
+	// performance requirements of your workload. This is identified by analyzing the
+	// VolumeReadOps and VolumeWriteOps metric of EBS volumes attached to the current
+	// instance during the look-back period.
+	//
+	// * EBSIOPSUnderprovisioned — The
+	// instance’s EBS IOPS configuration doesn't meet the performance requirements of
+	// your workload and there is an alternative instance type that provides better EBS
+	// IOPS performance. This is identified by analyzing the VolumeReadOps and
+	// VolumeWriteOps metric of EBS volumes attached to the current instance during the
+	// look-back period.
+	//
+	// * NetworkBandwidthOverprovisioned — The instance’s network
+	// bandwidth configuration can be sized down while still meeting the performance
+	// requirements of your workload. This is identified by analyzing the NetworkIn and
+	// NetworkOut metrics of the current instance during the look-back period.
+	//
+	// *
+	// NetworkBandwidthUnderprovisioned — The instance’s network bandwidth
+	// configuration doesn't meet the performance requirements of your workload and
+	// there is an alternative instance type that provides better network bandwidth
+	// performance. This is identified by analyzing the NetworkIn and NetworkOut
+	// metrics of the current instance during the look-back period. This finding reason
+	// happens when the NetworkIn or NetworkOut performance of an instance is
+	// impacted.
+	//
+	// * NetworkPPSOverprovisioned — The instance’s network PPS (packets per
+	// second) configuration can be sized down while still meeting the performance
+	// requirements of your workload. This is identified by analyzing the
+	// NetworkPacketsIn and NetworkPacketsIn metrics of the current instance during the
+	// look-back period.
+	//
+	// * NetworkPPSUnderprovisioned — The instance’s network PPS
+	// (packets per second) configuration doesn't meet the performance requirements of
+	// your workload and there is an alternative instance type that provides better
+	// network PPS performance. This is identified by analyzing the NetworkPacketsIn
+	// and NetworkPacketsIn metrics of the current instance during the look-back
+	// period.
+	//
+	// * DiskIOPSOverprovisioned — The instance’s disk IOPS configuration can
+	// be sized down while still meeting the performance requirements of your workload.
+	// This is identified by analyzing the DiskReadOps and DiskWriteOps metrics of the
+	// current instance during the look-back period.
+	//
+	// * DiskIOPSUnderprovisioned — The
+	// instance’s disk IOPS configuration doesn't meet the performance requirements of
+	// your workload and there is an alternative instance type that provides better
+	// disk IOPS performance. This is identified by analyzing the DiskReadOps and
+	// DiskWriteOps metrics of the current instance during the look-back period.
+	//
+	// *
+	// DiskThroughputOverprovisioned — The instance’s disk throughput configuration can
+	// be sized down while still meeting the performance requirements of your workload.
+	// This is identified by analyzing the DiskReadBytes and DiskWriteBytes metrics of
+	// the current instance during the look-back period.
+	//
+	// *
+	// DiskThroughputUnderprovisioned — The instance’s disk throughput configuration
+	// doesn't meet the performance requirements of your workload and there is an
+	// alternative instance type that provides better disk throughput performance. This
+	// is identified by analyzing the DiskReadBytes and DiskWriteBytes metrics of the
+	// current instance during the look-back period.
+	//
+	// For more information about
+	// instance metrics, see List the available CloudWatch metrics for your instances
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/viewing_metrics_with_cloudwatch.html)
 	// in the Amazon Elastic Compute Cloud User Guide. For more information about EBS
-	// volume metrics, see Amazon CloudWatch metrics for Amazon EBS (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cloudwatch_ebs.html)
+	// volume metrics, see Amazon CloudWatch metrics for Amazon EBS
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cloudwatch_ebs.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	FindingReasonCodes []InstanceRecommendationFindingReasonCode
 
 	// The applications that might be running on the instance as inferred by Compute
 	// Optimizer. Compute Optimizer can infer if one of the following applications
 	// might be running on the instance:
-	//     - AmazonEmr - Infers that Amazon EMR might be running on the instance.
-	//     - ApacheCassandra - Infers that Apache Cassandra might be running on the instance.
-	//     - ApacheHadoop - Infers that Apache Hadoop might be running on the instance.
-	//     - Memcached - Infers that Memcached might be running on the instance.
-	//     - NGINX - Infers that NGINX might be running on the instance.
-	//     - PostgreSql - Infers that PostgreSQL might be running on the instance.
-	//     - Redis - Infers that Redis might be running on the instance.
-	//     - Kafka - Infers that Kafka might be running on the instance.
+	//
+	// * AmazonEmr - Infers that Amazon EMR might be
+	// running on the instance.
+	//
+	// * ApacheCassandra - Infers that Apache Cassandra might
+	// be running on the instance.
+	//
+	// * ApacheHadoop - Infers that Apache Hadoop might be
+	// running on the instance.
+	//
+	// * Memcached - Infers that Memcached might be running
+	// on the instance.
+	//
+	// * NGINX - Infers that NGINX might be running on the
+	// instance.
+	//
+	// * PostgreSql - Infers that PostgreSQL might be running on the
+	// instance.
+	//
+	// * Redis - Infers that Redis might be running on the instance.
+	//
+	// *
+	// Kafka - Infers that Kafka might be running on the instance.
 	InferredWorkloadTypes []InferredWorkloadType
 
 	// The Amazon Resource Name (ARN) of the current instance.
@@ -694,11 +977,13 @@ type InstanceRecommendation struct {
 	// The name of the current instance.
 	InstanceName *string
 
+	// The state of the instance when the recommendation was generated.
+	InstanceState InstanceState
+
 	// The timestamp of when the instance recommendation was last generated.
 	LastRefreshTimestamp *time.Time
 
-	// The number of days for which utilization metrics were analyzed for the
-	// instance.
+	// The number of days for which utilization metrics were analyzed for the instance.
 	LookBackPeriodInDays float64
 
 	// An array of objects that describe the recommendation options for the instance.
@@ -722,10 +1007,10 @@ type InstanceRecommendationOption struct {
 	// The level of effort required to migrate from the current instance type to the
 	// recommended instance type. For example, the migration effort is Low if Amazon
 	// EMR is the inferred workload type and an Amazon Web Services Graviton instance
-	// type is recommended. The migration effort is Medium if a workload type
-	// couldn't be inferred but an Amazon Web Services Graviton instance type is
-	// recommended. The migration effort is VeryLow if both the current and
-	// recommended instance types are of the same CPU architecture.
+	// type is recommended. The migration effort is Medium if a workload type couldn't
+	// be inferred but an Amazon Web Services Graviton instance type is recommended.
+	// The migration effort is VeryLow if both the current and recommended instance
+	// types are of the same CPU architecture.
 	MigrationEffort MigrationEffort
 
 	// The performance risk of the instance recommendation option. Performance risk
@@ -735,66 +1020,150 @@ type InstanceRecommendationOption struct {
 	// including CPU, memory, EBS throughput, EBS IOPS, disk throughput, disk IOPS,
 	// network throughput, and network PPS. The performance risk of the recommended
 	// instance is calculated as the maximum performance risk score across the analyzed
-	// resource specifications. The value ranges from 0  - 4 , with 0 meaning that
-	// the recommended resource is predicted to always provide enough hardware
-	// capability. The higher the performance risk is, the more likely you should
-	// validate whether the recommendation will meet the performance requirements of
-	// your workload before migrating your resource.
+	// resource specifications. The value ranges from 0 - 4, with 0 meaning that the
+	// recommended resource is predicted to always provide enough hardware capability.
+	// The higher the performance risk is, the more likely you should validate whether
+	// the recommendation will meet the performance requirements of your workload
+	// before migrating your resource.
 	PerformanceRisk float64
 
 	// Describes the configuration differences between the current instance and the
 	// recommended instance type. You should consider the configuration differences
 	// before migrating your workloads from the current instance to the recommended
-	// instance type. The Change the instance type guide for Linux (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html)
-	// and Change the instance type guide for Windows (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-resize.html)
+	// instance type. The Change the instance type guide for Linux
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html)
+	// and Change the instance type guide for Windows
+	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-resize.html)
 	// provide general guidance for getting started with an instance migration.
 	// Platform differences include:
-	//     - Hypervisor — The hypervisor of the recommended instance type is different than that of the current instance. For example, the recommended instance type uses a Nitro hypervisor and the current instance uses a Xen hypervisor. The differences that you should consider between these hypervisors are covered in the Nitro Hypervisor (http://aws.amazon.com/ec2/faqs/#Nitro_Hypervisor) section of the Amazon EC2 frequently asked questions. For more information, see Instances built on the Nitro System (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances) in the Amazon EC2 User Guide for Linux, or Instances built on the Nitro System (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instance-types.html#ec2-nitro-instances) in the Amazon EC2 User Guide for Windows.
-	//     - NetworkInterface — The network interface of the recommended instance type is different than that of the current instance. For example, the recommended instance type supports enhanced networking and the current instance might not. To enable enhanced networking for the recommended instance type, you must install the Elastic Network Adapter (ENA) driver or the Intel 82599 Virtual Function driver. For more information, see Networking and storage features (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#instance-networking-storage) and Enhanced networking on Linux (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking.html) in the Amazon EC2 User Guide for Linux, or Networking and storage features (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instance-types.html#instance-networking-storage) and Enhanced networking on Windows (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/enhanced-networking.html) in the Amazon EC2 User Guide for Windows.
-	//     - StorageInterface — The storage interface of the recommended instance type is different than that of the current instance. For example, the recommended instance type uses an NVMe storage interface and the current instance does not. To access NVMe volumes for the recommended instance type, you will need to install or upgrade the NVMe driver. For more information, see Networking and storage features (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#instance-networking-storage) and Amazon EBS and NVMe on Linux instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nvme-ebs-volumes.html) in the Amazon EC2 User Guide for Linux, or Networking and storage features (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instance-types.html#instance-networking-storage) and Amazon EBS and NVMe on Windows instances (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/nvme-ebs-volumes.html) in the Amazon EC2 User Guide for Windows.
-	//     - InstanceStoreAvailability — The recommended instance type does not support instance store volumes and the current instance does. Before migrating, you might need to back up the data on your instance store volumes if you want to preserve them. For more information, see How do I back up an instance store volume on my Amazon EC2 instance to Amazon EBS? (https://aws.amazon.com/premiumsupport/knowledge-center/back-up-instance-store-ebs/) in the Amazon Web Services Premium Support Knowledge Base. For more information, see Networking and storage features (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#instance-networking-storage) and Amazon EC2 instance store (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the Amazon EC2 User Guide for Linux, or see Networking and storage features (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instance-types.html#instance-networking-storage) and Amazon EC2 instance store (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/InstanceStorage.html) in the Amazon EC2 User Guide for Windows.
-	//     - VirtualizationType — The recommended instance type uses the hardware virtual machine (HVM) virtualization type and the current instance uses the paravirtual (PV) virtualization type. For more information about the differences between these virtualization types, see Linux AMI virtualization types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/virtualization_types.html) in the Amazon EC2 User Guide for Linux, or Windows AMI virtualization types (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/windows-ami-version-history.html#virtualization-types) in the Amazon EC2 User Guide for Windows.
-	//     - Architecture — The CPU architecture between the recommended instance type and the current instance is different. For example, the recommended instance type might use an Arm CPU architecture and the current instance type might use a different one, such as x86. Before migrating, you should consider recompiling the software on your instance for the new architecture. Alternatively, you might switch to an Amazon Machine Image (AMI) that supports the new architecture. For more information about the CPU architecture for each instance type, see Amazon EC2 Instance Types (http://aws.amazon.com/ec2/instance-types/) .
+	//
+	// * Hypervisor — The hypervisor of the recommended
+	// instance type is different than that of the current instance. For example, the
+	// recommended instance type uses a Nitro hypervisor and the current instance uses
+	// a Xen hypervisor. The differences that you should consider between these
+	// hypervisors are covered in the Nitro Hypervisor
+	// (http://aws.amazon.com/ec2/faqs/#Nitro_Hypervisor) section of the Amazon EC2
+	// frequently asked questions. For more information, see Instances built on the
+	// Nitro System
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances)
+	// in the Amazon EC2 User Guide for Linux, or Instances built on the Nitro System
+	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instance-types.html#ec2-nitro-instances)
+	// in the Amazon EC2 User Guide for Windows.
+	//
+	// * NetworkInterface — The network
+	// interface of the recommended instance type is different than that of the current
+	// instance. For example, the recommended instance type supports enhanced
+	// networking and the current instance might not. To enable enhanced networking for
+	// the recommended instance type, you must install the Elastic Network Adapter
+	// (ENA) driver or the Intel 82599 Virtual Function driver. For more information,
+	// see Networking and storage features
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#instance-networking-storage)
+	// and Enhanced networking on Linux
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking.html)
+	// in the Amazon EC2 User Guide for Linux, or Networking and storage features
+	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instance-types.html#instance-networking-storage)
+	// and Enhanced networking on Windows
+	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/enhanced-networking.html)
+	// in the Amazon EC2 User Guide for Windows.
+	//
+	// * StorageInterface — The storage
+	// interface of the recommended instance type is different than that of the current
+	// instance. For example, the recommended instance type uses an NVMe storage
+	// interface and the current instance does not. To access NVMe volumes for the
+	// recommended instance type, you will need to install or upgrade the NVMe driver.
+	// For more information, see Networking and storage features
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#instance-networking-storage)
+	// and Amazon EBS and NVMe on Linux instances
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nvme-ebs-volumes.html) in
+	// the Amazon EC2 User Guide for Linux, or Networking and storage features
+	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instance-types.html#instance-networking-storage)
+	// and Amazon EBS and NVMe on Windows instances
+	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/nvme-ebs-volumes.html)
+	// in the Amazon EC2 User Guide for Windows.
+	//
+	// * InstanceStoreAvailability — The
+	// recommended instance type does not support instance store volumes and the
+	// current instance does. Before migrating, you might need to back up the data on
+	// your instance store volumes if you want to preserve them. For more information,
+	// see How do I back up an instance store volume on my Amazon EC2 instance to
+	// Amazon EBS?
+	// (https://aws.amazon.com/premiumsupport/knowledge-center/back-up-instance-store-ebs/)
+	// in the Amazon Web Services Premium Support Knowledge Base. For more information,
+	// see Networking and storage features
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#instance-networking-storage)
+	// and Amazon EC2 instance store
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in
+	// the Amazon EC2 User Guide for Linux, or see Networking and storage features
+	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instance-types.html#instance-networking-storage)
+	// and Amazon EC2 instance store
+	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/InstanceStorage.html) in
+	// the Amazon EC2 User Guide for Windows.
+	//
+	// * VirtualizationType — The recommended
+	// instance type uses the hardware virtual machine (HVM) virtualization type and
+	// the current instance uses the paravirtual (PV) virtualization type. For more
+	// information about the differences between these virtualization types, see Linux
+	// AMI virtualization types
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/virtualization_types.html)
+	// in the Amazon EC2 User Guide for Linux, or Windows AMI virtualization types
+	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/windows-ami-version-history.html#virtualization-types)
+	// in the Amazon EC2 User Guide for Windows.
+	//
+	// * Architecture — The CPU architecture
+	// between the recommended instance type and the current instance is different. For
+	// example, the recommended instance type might use an Arm CPU architecture and the
+	// current instance type might use a different one, such as x86. Before migrating,
+	// you should consider recompiling the software on your instance for the new
+	// architecture. Alternatively, you might switch to an Amazon Machine Image (AMI)
+	// that supports the new architecture. For more information about the CPU
+	// architecture for each instance type, see Amazon EC2 Instance Types
+	// (http://aws.amazon.com/ec2/instance-types/).
 	PlatformDifferences []PlatformDifference
 
 	// An array of objects that describe the projected utilization metrics of the
-	// instance recommendation option. The Cpu  and Memory metrics are the only
+	// instance recommendation option. The Cpu and Memory metrics are the only
 	// projected utilization metrics returned. Additionally, the Memory metric is
 	// returned only for resources that have the unified CloudWatch agent installed on
-	// them. For more information, see Enabling Memory Utilization with the
-	// CloudWatch Agent (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent)
-	// .
+	// them. For more information, see Enabling Memory Utilization with the CloudWatch
+	// Agent
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
 	ProjectedUtilizationMetrics []UtilizationMetric
 
-	// The rank of the instance recommendation option. The top recommendation option
-	// is ranked as 1 .
+	// The rank of the instance recommendation option. The top recommendation option is
+	// ranked as 1.
 	Rank int32
 
-	// An object that describes the savings opportunity for the instance
-	// recommendation option. Savings opportunity includes the estimated monthly
-	// savings amount and percentage.
+	// An object that describes the savings opportunity for the instance recommendation
+	// option. Savings opportunity includes the estimated monthly savings amount and
+	// percentage.
 	SavingsOpportunity *SavingsOpportunity
 
 	noSmithyDocumentSerde
 }
 
 // Describes a filter that returns a more specific list of recommendation export
-// jobs. Use this filter with the DescribeRecommendationExportJobs action. You
-// can use EBSFilter  with the GetEBSVolumeRecommendations  action,
+// jobs. Use this filter with the DescribeRecommendationExportJobs action. You can
+// use EBSFilter with the GetEBSVolumeRecommendations action,
 // LambdaFunctionRecommendationFilter with the GetLambdaFunctionRecommendations
-// action, and Filter  with the GetAutoScalingGroupRecommendations  and
+// action, and Filter with the GetAutoScalingGroupRecommendations and
 // GetEC2InstanceRecommendations actions.
 type JobFilter struct {
 
-	// The name of the filter. Specify ResourceType to return export jobs of a
-	// specific resource type (for example, Ec2Instance ). Specify JobStatus to
-	// return export jobs with a specific status (e.g, Complete ).
+	// The name of the filter. Specify ResourceType to return export jobs of a specific
+	// resource type (for example, Ec2Instance). Specify JobStatus to return export
+	// jobs with a specific status (e.g, Complete).
 	Name JobFilterName
 
 	// The value of the filter. The valid values for this parameter are as follows,
-	// depending on what you specify for the name  parameter:
-	//     - Specify Ec2Instance or AutoScalingGroup if you specify the name parameter as ResourceType . There is no filter for EBS volumes because volume recommendations cannot be exported at this time.
-	//     - Specify Queued , InProgress , Complete , or Failed if you specify the name parameter as JobStatus .
+	// depending on what you specify for the name parameter:
+	//
+	// * Specify Ec2Instance or
+	// AutoScalingGroup if you specify the name parameter as ResourceType. There is no
+	// filter for EBS volumes because volume recommendations cannot be exported at this
+	// time.
+	//
+	// * Specify Queued, InProgress, Complete, or Failed if you specify the name
+	// parameter as JobStatus.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -826,8 +1195,8 @@ type LambdaFunctionMemoryRecommendationOption struct {
 	// function recommendation option.
 	ProjectedUtilizationMetrics []LambdaFunctionMemoryProjectedMetric
 
-	// The rank of the function recommendation option. The top recommendation option
-	// is ranked as 1 .
+	// The rank of the function recommendation option. The top recommendation option is
+	// ranked as 1.
 	Rank int32
 
 	// An object that describes the savings opportunity for the Lambda function
@@ -847,24 +1216,63 @@ type LambdaFunctionRecommendation struct {
 	// The amount of memory, in MB, that's allocated to the current function.
 	CurrentMemorySize int32
 
-	// The risk of the current Lambda function not meeting the performance needs of
-	// its workloads. The higher the risk, the more likely the current Lambda function
+	// The risk of the current Lambda function not meeting the performance needs of its
+	// workloads. The higher the risk, the more likely the current Lambda function
 	// requires more memory.
 	CurrentPerformanceRisk CurrentPerformanceRisk
 
 	// The finding classification of the function. Findings for functions include:
-	//     - Optimized — The function is correctly provisioned to run your workload based on its current configuration and its utilization history. This finding classification does not include finding reason codes.
-	//     - NotOptimized — The function is performing at a higher level (over-provisioned) or at a lower level (under-provisioned) than required for your workload because its current configuration is not optimal. Over-provisioned resources might lead to unnecessary infrastructure cost, and under-provisioned resources might lead to poor application performance. This finding classification can include the MemoryUnderprovisioned and MemoryUnderprovisioned finding reason codes.
-	//     - Unavailable — Compute Optimizer was unable to generate a recommendation for the function. This could be because the function has not accumulated sufficient metric data, or the function does not qualify for a recommendation. This finding classification can include the InsufficientData and Inconclusive finding reason codes. Functions with a finding of unavailable are not returned unless you specify the filter parameter with a value of Unavailable in your GetLambdaFunctionRecommendations request.
+	//
+	// *
+	// Optimized — The function is correctly provisioned to run your workload based on
+	// its current configuration and its utilization history. This finding
+	// classification does not include finding reason codes.
+	//
+	// * NotOptimized — The
+	// function is performing at a higher level (over-provisioned) or at a lower level
+	// (under-provisioned) than required for your workload because its current
+	// configuration is not optimal. Over-provisioned resources might lead to
+	// unnecessary infrastructure cost, and under-provisioned resources might lead to
+	// poor application performance. This finding classification can include the
+	// MemoryUnderprovisioned and MemoryUnderprovisioned finding reason codes.
+	//
+	// *
+	// Unavailable — Compute Optimizer was unable to generate a recommendation for the
+	// function. This could be because the function has not accumulated sufficient
+	// metric data, or the function does not qualify for a recommendation. This finding
+	// classification can include the InsufficientData and Inconclusive finding reason
+	// codes. Functions with a finding of unavailable are not returned unless you
+	// specify the filter parameter with a value of Unavailable in your
+	// GetLambdaFunctionRecommendations request.
 	Finding LambdaFunctionRecommendationFinding
 
-	// The reason for the finding classification of the function. Functions that have
-	// a finding classification of Optimized don't have a finding reason code.
-	// Finding reason codes for functions include:
-	//     - MemoryOverprovisioned — The function is over-provisioned when its memory configuration can be sized down while still meeting the performance requirements of your workload. An over-provisioned function might lead to unnecessary infrastructure cost. This finding reason code is part of the NotOptimized finding classification.
-	//     - MemoryUnderprovisioned — The function is under-provisioned when its memory configuration doesn't meet the performance requirements of the workload. An under-provisioned function might lead to poor application performance. This finding reason code is part of the NotOptimized finding classification.
-	//     - InsufficientData — The function does not have sufficient metric data for Compute Optimizer to generate a recommendation. For more information, see the Supported resources and requirements (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html) in the Compute Optimizer User Guide. This finding reason code is part of the Unavailable finding classification.
-	//     - Inconclusive — The function does not qualify for a recommendation because Compute Optimizer cannot generate a recommendation with a high degree of confidence. This finding reason code is part of the Unavailable finding classification.
+	// The reason for the finding classification of the function. Functions that have a
+	// finding classification of Optimized don't have a finding reason code. Finding
+	// reason codes for functions include:
+	//
+	// * MemoryOverprovisioned — The function is
+	// over-provisioned when its memory configuration can be sized down while still
+	// meeting the performance requirements of your workload. An over-provisioned
+	// function might lead to unnecessary infrastructure cost. This finding reason code
+	// is part of the NotOptimized finding classification.
+	//
+	// * MemoryUnderprovisioned —
+	// The function is under-provisioned when its memory configuration doesn't meet the
+	// performance requirements of the workload. An under-provisioned function might
+	// lead to poor application performance. This finding reason code is part of the
+	// NotOptimized finding classification.
+	//
+	// * InsufficientData — The function does not
+	// have sufficient metric data for Compute Optimizer to generate a recommendation.
+	// For more information, see the Supported resources and requirements
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html) in
+	// the Compute Optimizer User Guide. This finding reason code is part of the
+	// Unavailable finding classification.
+	//
+	// * Inconclusive — The function does not
+	// qualify for a recommendation because Compute Optimizer cannot generate a
+	// recommendation with a high degree of confidence. This finding reason code is
+	// part of the Unavailable finding classification.
 	FindingReasonCodes []LambdaFunctionRecommendationFindingReasonCode
 
 	// The Amazon Resource Name (ARN) of the current function.
@@ -876,8 +1284,7 @@ type LambdaFunctionRecommendation struct {
 	// The timestamp of when the function recommendation was last generated.
 	LastRefreshTimestamp *time.Time
 
-	// The number of days for which utilization metrics were analyzed for the
-	// function.
+	// The number of days for which utilization metrics were analyzed for the function.
 	LookbackPeriodInDays float64
 
 	// An array of objects that describe the memory configuration recommendation
@@ -895,22 +1302,26 @@ type LambdaFunctionRecommendation struct {
 
 // Describes a filter that returns a more specific list of Lambda function
 // recommendations. Use this filter with the GetLambdaFunctionRecommendations
-// action. You can use EBSFilter  with the GetEBSVolumeRecommendations  action,
-// JobFilter with the DescribeRecommendationExportJobs  action, and Filter with
-// the GetAutoScalingGroupRecommendations  and GetEC2InstanceRecommendations
-// actions.
+// action. You can use EBSFilter with the GetEBSVolumeRecommendations action,
+// JobFilter with the DescribeRecommendationExportJobs action, and Filter with the
+// GetAutoScalingGroupRecommendations and GetEC2InstanceRecommendations actions.
 type LambdaFunctionRecommendationFilter struct {
 
 	// The name of the filter. Specify Finding to return recommendations with a
-	// specific finding classification (for example, NotOptimized ). Specify
-	// FindingReasonCodeto return recommendations with a specific finding reason code
-	// (for example, MemoryUnderprovisioned ).
+	// specific finding classification (for example, NotOptimized). Specify
+	// FindingReasonCode to return recommendations with a specific finding reason code
+	// (for example, MemoryUnderprovisioned).
 	Name LambdaFunctionRecommendationFilterName
 
 	// The value of the filter. The valid values for this parameter are as follows,
-	// depending on what you specify for the name  parameter:
-	//     - Specify Optimized , NotOptimized , or Unavailable if you specify the name parameter as Finding .
-	//     - Specify MemoryOverprovisioned , MemoryUnderprovisioned , InsufficientData , or Inconclusive if you specify the name parameter as FindingReasonCode .
+	// depending on what you specify for the name parameter:
+	//
+	// * Specify Optimized,
+	// NotOptimized, or Unavailable if you specify the name parameter as Finding.
+	//
+	// *
+	// Specify MemoryOverprovisioned, MemoryUnderprovisioned, InsufficientData, or
+	// Inconclusive if you specify the name parameter as FindingReasonCode.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -921,21 +1332,24 @@ type LambdaFunctionUtilizationMetric struct {
 
 	// The name of the utilization metric. The following utilization metrics are
 	// available:
-	//     - Duration - The amount of time that your function code spends processing an event.
-	//     - Memory - The amount of memory used per invocation.
+	//
+	// * Duration - The amount of time that your function code spends
+	// processing an event.
+	//
+	// * Memory - The amount of memory used per invocation.
 	Name LambdaFunctionMetricName
 
-	// The statistic of the utilization metric. The Compute Optimizer API, Command
-	// Line Interface (CLI), and SDKs return utilization metrics using only the
-	// Maximumstatistic, which is the highest value observed during the specified
-	// period. The Compute Optimizer console displays graphs for some utilization
-	// metrics using the Average  statistic, which is the value of Sum  / SampleCount
-	// during the specified period. For more information, see Viewing resource
-	// recommendations (https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html)
+	// The statistic of the utilization metric. The Compute Optimizer API, Command Line
+	// Interface (CLI), and SDKs return utilization metrics using only the Maximum
+	// statistic, which is the highest value observed during the specified period. The
+	// Compute Optimizer console displays graphs for some utilization metrics using the
+	// Average statistic, which is the value of Sum / SampleCount during the specified
+	// period. For more information, see Viewing resource recommendations
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html)
 	// in the Compute Optimizer User Guide. You can also get averaged utilization
 	// metric data for your resources using Amazon CloudWatch. For more information,
-	// see the Amazon CloudWatch User Guide (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html)
-	// .
+	// see the Amazon CloudWatch User Guide
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
 	Statistic LambdaFunctionMetricStatistic
 
 	// The value of the utilization metric.
@@ -956,24 +1370,38 @@ type MemorySizeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a projected utilization metric of a recommendation option, such as
-// an Amazon EC2 instance. This represents the projected utilization of a
+// Describes a projected utilization metric of a recommendation option, such as an
+// Amazon EC2 instance. This represents the projected utilization of a
 // recommendation option had you used that resource during the analyzed period.
 // Compare the utilization metric data of your resource against its projected
 // utilization metric data to determine the performance difference between your
-// current resource and the recommended option. The Cpu  and Memory metrics are
-// the only projected utilization metrics returned when you run the
-// GetEC2RecommendationProjectedMetrics action. Additionally, the Memory metric
-// is returned only for resources that have the unified CloudWatch agent installed
-// on them. For more information, see Enabling Memory Utilization with the
-// CloudWatch Agent (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent)
-// .
+// current resource and the recommended option. The Cpu and Memory metrics are the
+// only projected utilization metrics returned when you run the
+// GetEC2RecommendationProjectedMetrics action. Additionally, the Memory metric is
+// returned only for resources that have the unified CloudWatch agent installed on
+// them. For more information, see Enabling Memory Utilization with the CloudWatch
+// Agent
+// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
 type ProjectedMetric struct {
 
 	// The name of the projected utilization metric. The following projected
 	// utilization metrics are returned:
-	//     - Cpu - The projected percentage of allocated EC2 compute units that would be in use on the recommendation option had you used that resource during the analyzed period. This metric identifies the processing power required to run an application on the recommendation option. Depending on the instance type, tools in your operating system can show a lower percentage than CloudWatch when the instance is not allocated a full processor core. Units: Percent
-	//     - Memory - The percentage of memory that would be in use on the recommendation option had you used that resource during the analyzed period. This metric identifies the amount of memory required to run an application on the recommendation option. Units: Percent The Memory metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see Enabling Memory Utilization with the CloudWatch Agent (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent) .
+	//
+	// * Cpu - The projected percentage of allocated
+	// EC2 compute units that would be in use on the recommendation option had you used
+	// that resource during the analyzed period. This metric identifies the processing
+	// power required to run an application on the recommendation option. Depending on
+	// the instance type, tools in your operating system can show a lower percentage
+	// than CloudWatch when the instance is not allocated a full processor core. Units:
+	// Percent
+	//
+	// * Memory - The percentage of memory that would be in use on the
+	// recommendation option had you used that resource during the analyzed period.
+	// This metric identifies the amount of memory required to run an application on
+	// the recommendation option. Units: Percent The Memory metric is returned only for
+	// resources that have the unified CloudWatch agent installed on them. For more
+	// information, see Enabling Memory Utilization with the CloudWatch Agent
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
 	Name MetricName
 
 	// The timestamps of the projected utilization metric.
@@ -1028,15 +1456,25 @@ type RecommendationExportJob struct {
 }
 
 // Describes the recommendation preferences to return in the response of a
-// GetAutoScalingGroupRecommendations , GetEC2InstanceRecommendations , and
+// GetAutoScalingGroupRecommendations, GetEC2InstanceRecommendations, and
 // GetEC2RecommendationProjectedMetrics request.
 type RecommendationPreferences struct {
 
 	// Specifies the CPU vendor and architecture for Amazon EC2 instance and Auto
-	// Scaling group recommendations. For example, when you specify AWS_ARM64  with:
-	//     - A GetEC2InstanceRecommendations or GetAutoScalingGroupRecommendations request, Compute Optimizer returns recommendations that consist of Graviton2 instance types only.
-	//     - A GetEC2RecommendationProjectedMetrics request, Compute Optimizer returns projected utilization metrics for Graviton2 instance type recommendations only.
-	//     - A ExportEC2InstanceRecommendations or ExportAutoScalingGroupRecommendations request, Compute Optimizer exports recommendations that consist of Graviton2 instance types only.
+	// Scaling group recommendations. For example, when you specify AWS_ARM64 with:
+	//
+	// *
+	// A GetEC2InstanceRecommendations or GetAutoScalingGroupRecommendations request,
+	// Compute Optimizer returns recommendations that consist of Graviton2 instance
+	// types only.
+	//
+	// * A GetEC2RecommendationProjectedMetrics request, Compute Optimizer
+	// returns projected utilization metrics for Graviton2 instance type
+	// recommendations only.
+	//
+	// * A ExportEC2InstanceRecommendations or
+	// ExportAutoScalingGroupRecommendations request, Compute Optimizer exports
+	// recommendations that consist of Graviton2 instance types only.
 	CpuVendorArchitectures []CpuVendorArchitecture
 
 	noSmithyDocumentSerde
@@ -1046,27 +1484,28 @@ type RecommendationPreferences struct {
 type RecommendationPreferencesDetail struct {
 
 	// The status of the enhanced infrastructure metrics recommendation preference.
-	// When the recommendations page is refreshed, a status of Active confirms that
-	// the preference is applied to the recommendations, and a status of Inactive
-	// confirms that the preference isn't yet applied to recommendations. For more
-	// information, see Enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
+	// When the recommendations page is refreshed, a status of Active confirms that the
+	// preference is applied to the recommendations, and a status of Inactive confirms
+	// that the preference isn't yet applied to recommendations. For more information,
+	// see Enhanced infrastructure metrics
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
 	// in the Compute Optimizer User Guide.
 	EnhancedInfrastructureMetrics EnhancedInfrastructureMetrics
 
-	// An object that describes the external metrics recommendation preference. If
-	// the preference is applied in the latest recommendation refresh, an object with a
+	// An object that describes the external metrics recommendation preference. If the
+	// preference is applied in the latest recommendation refresh, an object with a
 	// valid source value appears in the response. If the preference isn't applied to
 	// the recommendations already, then this object doesn't appear in the response.
 	ExternalMetricsPreference *ExternalMetricsPreference
 
 	// The status of the inferred workload types recommendation preference. When the
 	// recommendations page is refreshed, a status of Active confirms that the
-	// preference is applied to the recommendations, and a status of Inactive
-	// confirms that the preference isn't yet applied to recommendations.
+	// preference is applied to the recommendations, and a status of Inactive confirms
+	// that the preference isn't yet applied to recommendations.
 	InferredWorkloadTypes InferredWorkloadTypesPreference
 
 	// The target resource type of the recommendation preference to create. The
-	// Ec2Instanceoption encompasses standalone instances and instances that are part
+	// Ec2Instance option encompasses standalone instances and instances that are part
 	// of Auto Scaling groups. The AutoScalingGroup option encompasses only instances
 	// that are part of an Auto Scaling group.
 	ResourceType ResourceType
@@ -1074,15 +1513,16 @@ type RecommendationPreferencesDetail struct {
 	// An object that describes the scope of the recommendation preference.
 	// Recommendation preferences can be created at the organization level (for
 	// management accounts of an organization only), account level, and resource level.
-	// For more information, see Activating enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
+	// For more information, see Activating enhanced infrastructure metrics
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
 	// in the Compute Optimizer User Guide.
 	Scope *Scope
 
 	noSmithyDocumentSerde
 }
 
-// Describes the source of a recommendation, such as an Amazon EC2 instance or
-// Auto Scaling group.
+// Describes the source of a recommendation, such as an Amazon EC2 instance or Auto
+// Scaling group.
 type RecommendationSource struct {
 
 	// The Amazon Resource Name (ARN) of the recommendation source.
@@ -1100,8 +1540,7 @@ type RecommendationSummary struct {
 	// The Amazon Web Services account ID of the recommendation summary.
 	AccountId *string
 
-	// An object that describes the performance risk ratings for a given resource
-	// type.
+	// An object that describes the performance risk ratings for a given resource type.
 	CurrentPerformanceRiskRatings *CurrentPerformanceRiskRatings
 
 	// The resource type that the recommendation summary applies to.
@@ -1118,13 +1557,13 @@ type RecommendationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a projected utilization metric of a recommendation option. The Cpu
-// and Memory metrics are the only projected utilization metrics returned when
-// you run the GetEC2RecommendationProjectedMetrics  action. Additionally, the
-// Memorymetric is returned only for resources that have the unified CloudWatch
-// agent installed on them. For more information, see Enabling Memory Utilization
-// with the CloudWatch Agent (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent)
-// .
+// Describes a projected utilization metric of a recommendation option. The Cpu and
+// Memory metrics are the only projected utilization metrics returned when you run
+// the GetEC2RecommendationProjectedMetrics action. Additionally, the Memory metric
+// is returned only for resources that have the unified CloudWatch agent installed
+// on them. For more information, see Enabling Memory Utilization with the
+// CloudWatch Agent
+// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
 type RecommendedOptionProjectedMetric struct {
 
 	// An array of objects that describe a projected utilization metric.
@@ -1143,9 +1582,9 @@ type RecommendedOptionProjectedMetric struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the destination Amazon Simple Storage Service (Amazon S3) bucket
-// name and object keys of a recommendations export file, and its associated
-// metadata file.
+// Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name
+// and object keys of a recommendations export file, and its associated metadata
+// file.
 type S3Destination struct {
 
 	// The name of the Amazon S3 bucket used as the destination of an export file.
@@ -1162,15 +1601,16 @@ type S3Destination struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the destination Amazon Simple Storage Service (Amazon S3) bucket
-// name and key prefix for a recommendations export job. You must create the
-// destination Amazon S3 bucket for your recommendations export before you create
-// the export job. Compute Optimizer does not create the S3 bucket for you. After
-// you create the S3 bucket, ensure that it has the required permission policy to
-// allow Compute Optimizer to write the export file to it. If you plan to specify
-// an object prefix when you create the export job, you must include the object
-// prefix in the policy that you add to the S3 bucket. For more information, see
-// Amazon S3 Bucket Policy for Compute Optimizer (https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html)
+// Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name
+// and key prefix for a recommendations export job. You must create the destination
+// Amazon S3 bucket for your recommendations export before you create the export
+// job. Compute Optimizer does not create the S3 bucket for you. After you create
+// the S3 bucket, ensure that it has the required permission policy to allow
+// Compute Optimizer to write the export file to it. If you plan to specify an
+// object prefix when you create the export job, you must include the object prefix
+// in the policy that you add to the S3 bucket. For more information, see Amazon S3
+// Bucket Policy for Compute Optimizer
+// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html)
 // in the Compute Optimizer User Guide.
 type S3DestinationConfig struct {
 
@@ -1193,14 +1633,16 @@ type S3DestinationConfig struct {
 // generates savings estimates considering the price of existing resources, the
 // price of recommended resources, and historical usage data. Estimated monthly
 // savings reflects the projected dollar savings associated with each of the
-// recommendations generated. For more information, see Enabling Cost Explorer (https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html)
-// and Optimizing your cost with Rightsizing Recommendations (https://docs.aws.amazon.com/cost-management/latest/userguide/ce-rightsizing.html)
+// recommendations generated. For more information, see Enabling Cost Explorer
+// (https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html)
+// and Optimizing your cost with Rightsizing Recommendations
+// (https://docs.aws.amazon.com/cost-management/latest/userguide/ce-rightsizing.html)
 // in the Cost Management User Guide.
 type SavingsOpportunity struct {
 
-	// An object that describes the estimated monthly savings amount possible, based
-	// on On-Demand instance pricing, by adopting Compute Optimizer recommendations for
-	// a given resource.
+	// An object that describes the estimated monthly savings amount possible, based on
+	// On-Demand instance pricing, by adopting Compute Optimizer recommendations for a
+	// given resource.
 	EstimatedMonthlySavings *EstimatedMonthlySavings
 
 	// The estimated monthly savings possible as a percentage of monthly cost by
@@ -1213,8 +1655,8 @@ type SavingsOpportunity struct {
 // Describes the scope of a recommendation preference. Recommendation preferences
 // can be created at the organization level (for management accounts of an
 // organization only), account level, and resource level. For more information, see
-//
-// Activating enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
+// Activating enhanced infrastructure metrics
+// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
 // in the Compute Optimizer User Guide. You cannot create recommendation
 // preferences for Auto Scaling groups at the organization and account levels. You
 // can create recommendation preferences for Auto Scaling groups only at the
@@ -1227,15 +1669,30 @@ type SavingsOpportunity struct {
 type Scope struct {
 
 	// The name of the scope. The following scopes are possible:
-	//     - Organization - Specifies that the recommendation preference applies at the organization level, for all member accounts of an organization.
-	//     - AccountId - Specifies that the recommendation preference applies at the account level, for all resources of a given resource type in an account.
-	//     - ResourceArn - Specifies that the recommendation preference applies at the individual resource level.
+	//
+	// * Organization -
+	// Specifies that the recommendation preference applies at the organization level,
+	// for all member accounts of an organization.
+	//
+	// * AccountId - Specifies that the
+	// recommendation preference applies at the account level, for all resources of a
+	// given resource type in an account.
+	//
+	// * ResourceArn - Specifies that the
+	// recommendation preference applies at the individual resource level.
 	Name ScopeName
 
-	// The value of the scope. If you specified the name  of the scope as:
-	//     - Organization - The value must be ALL_ACCOUNTS .
-	//     - AccountId - The value must be a 12-digit Amazon Web Services account ID.
-	//     - ResourceArn - The value must be the Amazon Resource Name (ARN) of an EC2 instance or an Auto Scaling group.
+	// The value of the scope. If you specified the name of the scope as:
+	//
+	// *
+	// Organization - The value must be ALL_ACCOUNTS.
+	//
+	// * AccountId - The value must be
+	// a 12-digit Amazon Web Services account ID.
+	//
+	// * ResourceArn - The value must be
+	// the Amazon Resource Name (ARN) of an EC2 instance or an Auto Scaling
+	// group.
 	//
 	// Only EC2 instance and Auto Scaling group ARNs are currently supported.
 	Value *string
@@ -1246,16 +1703,25 @@ type Scope struct {
 // The Amazon ECS service configurations used for recommendations.
 type ServiceConfiguration struct {
 
-	// Describes the Auto Scaling configuration methods for an Amazon ECS service.
-	// This affects the generated recommendations. For example, if Auto Scaling is
+	// Describes the Auto Scaling configuration methods for an Amazon ECS service. This
+	// affects the generated recommendations. For example, if Auto Scaling is
 	// configured on a service’s CPU, then Compute Optimizer doesn’t generate CPU size
 	// recommendations. The Auto Scaling configuration methods include:
-	//     - TARGET_TRACKING_SCALING_CPU — If the Amazon ECS service is configured to use target scaling on CPU, Compute Optimizer doesn't generate CPU recommendations.
-	//     - TARGET_TRACKING_SCALING_MEMORY — If the Amazon ECS service is configured to use target scaling on memory, Compute Optimizer doesn't generate memory recommendations.
 	//
-	// For more information about step scaling and target scaling, see Step scaling
-	// policies for Application Auto Scaling (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html)
-	// and Target tracking scaling policies for Application Auto Scaling (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)
+	// *
+	// TARGET_TRACKING_SCALING_CPU — If the Amazon ECS service is configured to use
+	// target scaling on CPU, Compute Optimizer doesn't generate CPU
+	// recommendations.
+	//
+	// * TARGET_TRACKING_SCALING_MEMORY — If the Amazon ECS service
+	// is configured to use target scaling on memory, Compute Optimizer doesn't
+	// generate memory recommendations.
+	//
+	// For more information about step scaling and
+	// target scaling, see  Step scaling policies for Application Auto Scaling
+	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html)
+	// and  Target tracking scaling policies for Application Auto Scaling
+	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)
 	// in the Application Auto Scaling User Guide.
 	AutoScalingConfiguration AutoScalingConfiguration
 
@@ -1297,33 +1763,92 @@ type UtilizationMetric struct {
 
 	// The name of the utilization metric. The following utilization metrics are
 	// available:
-	//     - Cpu - The percentage of allocated EC2 compute units that are currently in use on the instance. This metric identifies the processing power required to run an application on the instance. Depending on the instance type, tools in your operating system can show a lower percentage than CloudWatch when the instance is not allocated a full processor core. Units: Percent
-	//     - Memory - The percentage of memory that is currently in use on the instance. This metric identifies the amount of memory required to run an application on the instance. Units: Percent The Memory metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see Enabling Memory Utilization with the CloudWatch Agent (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent) .
-	//     - EBS_READ_OPS_PER_SECOND - The completed read operations from all EBS volumes attached to the instance in a specified period of time. Unit: Count
-	//     - EBS_WRITE_OPS_PER_SECOND - The completed write operations to all EBS volumes attached to the instance in a specified period of time. Unit: Count
-	//     - EBS_READ_BYTES_PER_SECOND - The bytes read from all EBS volumes attached to the instance in a specified period of time. Unit: Bytes
-	//     - EBS_WRITE_BYTES_PER_SECOND - The bytes written to all EBS volumes attached to the instance in a specified period of time. Unit: Bytes
-	//     - DISK_READ_OPS_PER_SECOND - The completed read operations from all instance store volumes available to the instance in a specified period of time. If there are no instance store volumes, either the value is 0 or the metric is not reported.
-	//     - DISK_WRITE_OPS_PER_SECOND - The completed write operations from all instance store volumes available to the instance in a specified period of time. If there are no instance store volumes, either the value is 0 or the metric is not reported.
-	//     - DISK_READ_BYTES_PER_SECOND - The bytes read from all instance store volumes available to the instance. This metric is used to determine the volume of the data the application reads from the disk of the instance. This can be used to determine the speed of the application. If there are no instance store volumes, either the value is 0 or the metric is not reported.
-	//     - DISK_WRITE_BYTES_PER_SECOND - The bytes written to all instance store volumes available to the instance. This metric is used to determine the volume of the data the application writes onto the disk of the instance. This can be used to determine the speed of the application. If there are no instance store volumes, either the value is 0 or the metric is not reported.
-	//     - NETWORK_IN_BYTES_PER_SECOND - The number of bytes received by the instance on all network interfaces. This metric identifies the volume of incoming network traffic to a single instance.
-	//     - NETWORK_OUT_BYTES_PER_SECOND - The number of bytes sent out by the instance on all network interfaces. This metric identifies the volume of outgoing network traffic from a single instance.
-	//     - NETWORK_PACKETS_IN_PER_SECOND - The number of packets received by the instance on all network interfaces. This metric identifies the volume of incoming traffic in terms of the number of packets on a single instance.
-	//     - NETWORK_PACKETS_OUT_PER_SECOND - The number of packets sent out by the instance on all network interfaces. This metric identifies the volume of outgoing traffic in terms of the number of packets on a single instance.
+	//
+	// * Cpu - The percentage of allocated EC2 compute units that are
+	// currently in use on the instance. This metric identifies the processing power
+	// required to run an application on the instance. Depending on the instance type,
+	// tools in your operating system can show a lower percentage than CloudWatch when
+	// the instance is not allocated a full processor core. Units: Percent
+	//
+	// * Memory -
+	// The percentage of memory that is currently in use on the instance. This metric
+	// identifies the amount of memory required to run an application on the instance.
+	// Units: Percent The Memory metric is returned only for resources that have the
+	// unified CloudWatch agent installed on them. For more information, see Enabling
+	// Memory Utilization with the CloudWatch Agent
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
+	//
+	// *
+	// EBS_READ_OPS_PER_SECOND - The completed read operations from all EBS volumes
+	// attached to the instance in a specified period of time. Unit: Count
+	//
+	// *
+	// EBS_WRITE_OPS_PER_SECOND - The completed write operations to all EBS volumes
+	// attached to the instance in a specified period of time. Unit: Count
+	//
+	// *
+	// EBS_READ_BYTES_PER_SECOND - The bytes read from all EBS volumes attached to the
+	// instance in a specified period of time. Unit: Bytes
+	//
+	// *
+	// EBS_WRITE_BYTES_PER_SECOND - The bytes written to all EBS volumes attached to
+	// the instance in a specified period of time. Unit: Bytes
+	//
+	// *
+	// DISK_READ_OPS_PER_SECOND - The completed read operations from all instance store
+	// volumes available to the instance in a specified period of time. If there are no
+	// instance store volumes, either the value is 0 or the metric is not reported.
+	//
+	// *
+	// DISK_WRITE_OPS_PER_SECOND - The completed write operations from all instance
+	// store volumes available to the instance in a specified period of time. If there
+	// are no instance store volumes, either the value is 0 or the metric is not
+	// reported.
+	//
+	// * DISK_READ_BYTES_PER_SECOND - The bytes read from all instance store
+	// volumes available to the instance. This metric is used to determine the volume
+	// of the data the application reads from the disk of the instance. This can be
+	// used to determine the speed of the application. If there are no instance store
+	// volumes, either the value is 0 or the metric is not reported.
+	//
+	// *
+	// DISK_WRITE_BYTES_PER_SECOND - The bytes written to all instance store volumes
+	// available to the instance. This metric is used to determine the volume of the
+	// data the application writes onto the disk of the instance. This can be used to
+	// determine the speed of the application. If there are no instance store volumes,
+	// either the value is 0 or the metric is not reported.
+	//
+	// *
+	// NETWORK_IN_BYTES_PER_SECOND - The number of bytes received by the instance on
+	// all network interfaces. This metric identifies the volume of incoming network
+	// traffic to a single instance.
+	//
+	// * NETWORK_OUT_BYTES_PER_SECOND - The number of
+	// bytes sent out by the instance on all network interfaces. This metric identifies
+	// the volume of outgoing network traffic from a single instance.
+	//
+	// *
+	// NETWORK_PACKETS_IN_PER_SECOND - The number of packets received by the instance
+	// on all network interfaces. This metric identifies the volume of incoming traffic
+	// in terms of the number of packets on a single instance.
+	//
+	// *
+	// NETWORK_PACKETS_OUT_PER_SECOND - The number of packets sent out by the instance
+	// on all network interfaces. This metric identifies the volume of outgoing traffic
+	// in terms of the number of packets on a single instance.
 	Name MetricName
 
-	// The statistic of the utilization metric. The Compute Optimizer API, Command
-	// Line Interface (CLI), and SDKs return utilization metrics using only the
-	// Maximumstatistic, which is the highest value observed during the specified
-	// period. The Compute Optimizer console displays graphs for some utilization
-	// metrics using the Average  statistic, which is the value of Sum  / SampleCount
-	// during the specified period. For more information, see Viewing resource
-	// recommendations (https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html)
+	// The statistic of the utilization metric. The Compute Optimizer API, Command Line
+	// Interface (CLI), and SDKs return utilization metrics using only the Maximum
+	// statistic, which is the highest value observed during the specified period. The
+	// Compute Optimizer console displays graphs for some utilization metrics using the
+	// Average statistic, which is the value of Sum / SampleCount during the specified
+	// period. For more information, see Viewing resource recommendations
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html)
 	// in the Compute Optimizer User Guide. You can also get averaged utilization
 	// metric data for your resources using Amazon CloudWatch. For more information,
-	// see the Amazon CloudWatch User Guide (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html)
-	// .
+	// see the Amazon CloudWatch User Guide
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
 	Statistic MetricStatistic
 
 	// The value of the utilization metric.
@@ -1335,6 +1860,9 @@ type UtilizationMetric struct {
 // Describes the configuration of an Amazon Elastic Block Store (Amazon EBS)
 // volume.
 type VolumeConfiguration struct {
+
+	// Contains the image used to boot the instance during launch.
+	RootVolume *bool
 
 	// The baseline IOPS of the volume.
 	VolumeBaselineIOPS int32
@@ -1351,8 +1879,8 @@ type VolumeConfiguration struct {
 	// The size of the volume, in GiB.
 	VolumeSize int32
 
-	// The volume type. This can be gp2  for General Purpose SSD, io1  or io2 for
-	// Provisioned IOPS SSD, st1  for Throughput Optimized HDD, sc1  for Cold HDD, or
+	// The volume type. This can be gp2 for General Purpose SSD, io1 or io2 for
+	// Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or
 	// standard for Magnetic volumes.
 	VolumeType *string
 
@@ -1374,8 +1902,16 @@ type VolumeRecommendation struct {
 	CurrentPerformanceRisk CurrentPerformanceRisk
 
 	// The finding classification of the volume. Findings for volumes include:
-	//     - NotOptimized —A volume is considered not optimized when Compute Optimizer identifies a recommendation that can provide better performance for your workload.
-	//     - Optimized —An volume is considered optimized when Compute Optimizer determines that the volume is correctly provisioned to run your workload based on the chosen volume type. For optimized resources, Compute Optimizer might recommend a new generation volume type.
+	//
+	// *
+	// NotOptimized —A volume is considered not optimized when Compute Optimizer
+	// identifies a recommendation that can provide better performance for your
+	// workload.
+	//
+	// * Optimized —An volume is considered optimized when Compute Optimizer
+	// determines that the volume is correctly provisioned to run your workload based
+	// on the chosen volume type. For optimized resources, Compute Optimizer might
+	// recommend a new generation volume type.
 	Finding EBSFinding
 
 	// The timestamp of when the volume recommendation was last generated.
@@ -1396,8 +1932,8 @@ type VolumeRecommendation struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a recommendation option for an Amazon Elastic Block Store (Amazon
-// EBS) instance.
+// Describes a recommendation option for an Amazon Elastic Block Store (Amazon EBS)
+// instance.
 type VolumeRecommendationOption struct {
 
 	// An array of objects that describe a volume configuration.
@@ -1405,15 +1941,15 @@ type VolumeRecommendationOption struct {
 
 	// The performance risk of the volume recommendation option. Performance risk is
 	// the likelihood of the recommended volume type meeting the performance
-	// requirement of your workload. The value ranges from 0  - 4 , with 0 meaning
-	// that the recommended resource is predicted to always provide enough hardware
+	// requirement of your workload. The value ranges from 0 - 4, with 0 meaning that
+	// the recommended resource is predicted to always provide enough hardware
 	// capability. The higher the performance risk is, the more likely you should
 	// validate whether the recommendation will meet the performance requirements of
 	// your workload before migrating your resource.
 	PerformanceRisk float64
 
 	// The rank of the volume recommendation option. The top recommendation option is
-	// ranked as 1 .
+	// ranked as 1.
 	Rank int32
 
 	// An object that describes the savings opportunity for the EBS volume

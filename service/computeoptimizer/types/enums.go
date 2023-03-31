@@ -526,6 +526,7 @@ const (
 	ExportableInstanceFieldInferredWorkloadTypes                                           ExportableInstanceField = "InferredWorkloadTypes"
 	ExportableInstanceFieldRecommendationOptionsMigrationEffort                            ExportableInstanceField = "RecommendationOptionsMigrationEffort"
 	ExportableInstanceFieldEffectiveRecommendationPreferencesExternalMetricsSource         ExportableInstanceField = "EffectiveRecommendationPreferencesExternalMetricsSource"
+	ExportableInstanceFieldInstanceState                                                   ExportableInstanceField = "InstanceState"
 )
 
 // Values returns all known values for ExportableInstanceField. Note that this
@@ -586,6 +587,7 @@ func (ExportableInstanceField) Values() []ExportableInstanceField {
 		"InferredWorkloadTypes",
 		"RecommendationOptionsMigrationEffort",
 		"EffectiveRecommendationPreferencesExternalMetricsSource",
+		"InstanceState",
 	}
 }
 
@@ -688,6 +690,7 @@ const (
 	ExportableVolumeFieldRecommendationOptionsSavingsOpportunityPercentage          ExportableVolumeField = "RecommendationOptionsSavingsOpportunityPercentage"
 	ExportableVolumeFieldRecommendationOptionsEstimatedMonthlySavingsCurrency       ExportableVolumeField = "RecommendationOptionsEstimatedMonthlySavingsCurrency"
 	ExportableVolumeFieldRecommendationOptionsEstimatedMonthlySavingsValue          ExportableVolumeField = "RecommendationOptionsEstimatedMonthlySavingsValue"
+	ExportableVolumeFieldRootVolume                                                 ExportableVolumeField = "RootVolume"
 )
 
 // Values returns all known values for ExportableVolumeField. Note that this can
@@ -723,6 +726,7 @@ func (ExportableVolumeField) Values() []ExportableVolumeField {
 		"RecommendationOptionsSavingsOpportunityPercentage",
 		"RecommendationOptionsEstimatedMonthlySavingsCurrency",
 		"RecommendationOptionsEstimatedMonthlySavingsValue",
+		"RootVolume",
 	}
 }
 
@@ -917,6 +921,32 @@ func (InstanceRecommendationFindingReasonCode) Values() []InstanceRecommendation
 		"DiskIOPSUnderprovisioned",
 		"DiskThroughputOverprovisioned",
 		"DiskThroughputUnderprovisioned",
+	}
+}
+
+type InstanceState string
+
+// Enum values for InstanceState
+const (
+	InstanceStatePending      InstanceState = "pending"
+	InstanceStateRunning      InstanceState = "running"
+	InstanceStateShuttingDown InstanceState = "shutting-down"
+	InstanceStateTerminated   InstanceState = "terminated"
+	InstanceStateStopping     InstanceState = "stopping"
+	InstanceStateStopped      InstanceState = "stopped"
+)
+
+// Values returns all known values for InstanceState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceState) Values() []InstanceState {
+	return []InstanceState{
+		"pending",
+		"running",
+		"shutting-down",
+		"terminated",
+		"stopping",
+		"stopped",
 	}
 }
 

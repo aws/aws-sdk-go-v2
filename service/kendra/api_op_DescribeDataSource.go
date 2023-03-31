@@ -50,7 +50,7 @@ type DescribeDataSourceOutput struct {
 	// data source provider.
 	Configuration *types.DataSourceConfiguration
 
-	// The Unix timestamp of when the data source connector was created.
+	// The Unix timestamp when the data source connector was created.
 	CreatedAt *time.Time
 
 	// Configuration information for altering document metadata and content during
@@ -99,7 +99,7 @@ type DescribeDataSourceOutput struct {
 	// The type of the data source. For example, SHAREPOINT .
 	Type types.DataSourceType
 
-	// The Unix timestamp of when the data source connector was last updated.
+	// The Unix timestamp when the data source connector was last updated.
 	UpdatedAt *time.Time
 
 	// Configuration information for an Amazon Virtual Private Cloud to connect to

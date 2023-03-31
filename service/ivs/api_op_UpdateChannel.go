@@ -39,10 +39,12 @@ type UpdateChannelInput struct {
 	// Whether the channel is private (enabled for playback authorization).
 	Authorized bool
 
-	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to
-	// Full HD. Use LOW for near-real-time interaction with viewers. (Note: In the
-	// Amazon IVS console, LOW  and NORMAL correspond to Ultra-low and Standard,
-	// respectively.)
+	// Whether the channel allows insecure RTMP ingest. Default: false.
+	InsecureIngest bool
+
+	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full
+	// HD. Use LOW for near-real-time interaction with viewers. (Note: In the Amazon
+	// IVS console, LOW and NORMAL correspond to Ultra-low and Standard, respectively.)
 	LatencyMode types.ChannelLatencyMode
 
 	// Channel name.
@@ -55,8 +57,19 @@ type UpdateChannelInput struct {
 	// Channel type, which determines the allowable resolution and bitrate. If you
 	// exceed the allowable resolution or bitrate, the stream probably will disconnect
 	// immediately. Valid values:
-	//     - STANDARD : Video is transcoded: multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Transcoding allows higher playback quality across a range of download speeds. Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps. Audio is transcoded only for renditions 360p and below; above that, audio is passed through. This is the default.
-	//     - BASIC : Video is transmuxed: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Resolution can be up to 1080p and bitrate can be up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions between 480p and 1080p.
+	//
+	// * STANDARD: Video is transcoded: multiple qualities
+	// are generated from the original input, to automatically give viewers the best
+	// experience for their devices and network conditions. Transcoding allows higher
+	// playback quality across a range of download speeds. Resolution can be up to
+	// 1080p and bitrate can be up to 8.5 Mbps. Audio is transcoded only for renditions
+	// 360p and below; above that, audio is passed through. This is the default.
+	//
+	// *
+	// BASIC: Video is transmuxed: Amazon IVS delivers the original input to viewers.
+	// The viewer’s video-quality choice is limited to the original input. Resolution
+	// can be up to 1080p and bitrate can be up to 1.5 Mbps for 480p and up to 3.5 Mbps
+	// for resolutions between 480p and 1080p.
 	Type types.ChannelType
 
 	noSmithyDocumentSerde

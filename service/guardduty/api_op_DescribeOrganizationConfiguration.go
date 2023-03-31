@@ -15,8 +15,8 @@ import (
 // Returns information about the account selected as the delegated administrator
 // for GuardDuty. There might be regional differences because some data sources
 // might not be available in all the Amazon Web Services Regions where GuardDuty is
-// presently supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html)
-// .
+// presently supported. For more information, see Regions and endpoints
+// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 func (c *Client) DescribeOrganizationConfiguration(ctx context.Context, params *DescribeOrganizationConfigurationInput, optFns ...func(*Options)) (*DescribeOrganizationConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationConfigurationInput{}
@@ -34,20 +34,20 @@ func (c *Client) DescribeOrganizationConfiguration(ctx context.Context, params *
 
 type DescribeOrganizationConfigurationInput struct {
 
-	// The ID of the detector to retrieve information about the delegated
-	// administrator from.
+	// The ID of the detector to retrieve information about the delegated administrator
+	// from.
 	//
 	// This member is required.
 	DetectorId *string
 
-	// You can use this parameter to indicate the maximum number of items that you
-	// want in the response.
+	// You can use this parameter to indicate the maximum number of items that you want
+	// in the response.
 	MaxResults int32
 
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the list action. For subsequent calls to
-	// the action, fill nextToken  in the request with the value of NextToken from
-	// the previous response to continue listing data.
+	// the action, fill nextToken in the request with the value of NextToken from the
+	// previous response to continue listing data.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -62,16 +62,27 @@ type DescribeOrganizationConfigurationOutput struct {
 	MemberAccountLimitReached bool
 
 	// Indicates whether GuardDuty is automatically enabled for accounts added to the
-	// organization.
+	// organization. Even though this is still supported, we recommend using
+	// AutoEnableOrganizationMembers to achieve the similar results.
 	//
 	// Deprecated: This field is deprecated, use AutoEnableOrganizationMembers instead
 	AutoEnable bool
 
-	// Indicates the auto-enablement configuration of GuardDuty for the member
-	// accounts in the organization.
-	//     - NEW : Indicates that new accounts joining the organization are configured to have GuardDuty enabled automatically.
-	//     - ALL : Indicates that all accounts (new and existing members) in the organization are configured to have GuardDuty enabled automatically.
-	//     - NONE : Indicates that no account in the organization will be configured to have GuardDuty enabled automatically.
+	// Indicates the auto-enablement configuration of GuardDuty for the member accounts
+	// in the organization.
+	//
+	// * NEW: Indicates that when a new account joins the
+	// organization, they will have GuardDuty enabled automatically.
+	//
+	// * ALL: Indicates
+	// that all accounts in the Amazon Web Services Organization have GuardDuty enabled
+	// automatically. This includes NEW accounts that join the organization and
+	// accounts that may have been suspended or removed from the organization in
+	// GuardDuty.
+	//
+	// * NONE: Indicates that GuardDuty will not be automatically enabled
+	// for any accounts in the organization. GuardDuty must be managed for each account
+	// individually by the administrator.
 	AutoEnableOrganizationMembers types.AutoEnableMembers
 
 	// Describes which data sources are enabled automatically for member accounts.
@@ -82,8 +93,8 @@ type DescribeOrganizationConfigurationOutput struct {
 	// A list of features that are configured for this organization.
 	Features []types.OrganizationFeatureConfigurationResult
 
-	// The pagination parameter to be used on the next list operation to retrieve
-	// more items.
+	// The pagination parameter to be used on the next list operation to retrieve more
+	// items.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -166,12 +177,12 @@ var _ DescribeOrganizationConfigurationAPIClient = (*Client)(nil)
 // DescribeOrganizationConfigurationPaginatorOptions is the paginator options for
 // DescribeOrganizationConfiguration
 type DescribeOrganizationConfigurationPaginatorOptions struct {
-	// You can use this parameter to indicate the maximum number of items that you
-	// want in the response.
+	// You can use this parameter to indicate the maximum number of items that you want
+	// in the response.
 	Limit int32
 
-	// Set to true if pagination should stop if the service returns a pagination
-	// token that matches the most recent token provided to the service.
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
 }
 

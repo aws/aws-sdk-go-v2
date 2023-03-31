@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the processing of PUT  and DELETE actions for mapping users to their
+// Describes the processing of PUT and DELETE actions for mapping users to their
 // groups. This includes information on the status of actions currently processing
 // or yet to be processed, when actions were last updated, when actions were
 // received by Amazon Kendra, the latest action that should process and apply after
 // other actions, and useful error messages if an action could not be processed.
-// DescribePrincipalMappingis currently not supported in the Amazon Web Services
+// DescribePrincipalMapping is currently not supported in the Amazon Web Services
 // GovCloud (US-West) region.
 func (c *Client) DescribePrincipalMapping(ctx context.Context, params *DescribePrincipalMappingInput, optFns ...func(*Options)) (*DescribePrincipalMappingOutput, error) {
 	if params == nil {
@@ -35,19 +35,19 @@ func (c *Client) DescribePrincipalMapping(ctx context.Context, params *DescribeP
 
 type DescribePrincipalMappingInput struct {
 
-	// The identifier of the group required to check the processing of PUT  and DELETE
+	// The identifier of the group required to check the processing of PUT and DELETE
 	// actions for mapping users to their groups.
 	//
 	// This member is required.
 	GroupId *string
 
-	// The identifier of the index required to check the processing of PUT  and DELETE
+	// The identifier of the index required to check the processing of PUT and DELETE
 	// actions for mapping users to their groups.
 	//
 	// This member is required.
 	IndexId *string
 
-	// The identifier of the data source to check the processing of PUT  and DELETE
+	// The identifier of the data source to check the processing of PUT and DELETE
 	// actions for mapping users to their groups.
 	DataSourceId *string
 
@@ -56,25 +56,34 @@ type DescribePrincipalMappingInput struct {
 
 type DescribePrincipalMappingOutput struct {
 
-	// Shows the identifier of the data source to see information on the processing
-	// of PUT  and DELETE  actions for mapping users to their groups.
+	// Shows the identifier of the data source to see information on the processing of
+	// PUT and DELETE actions for mapping users to their groups.
 	DataSourceId *string
 
 	// Shows the identifier of the group to see information on the processing of PUT
-	// and DELETE  actions for mapping users to their groups.
+	// and DELETE actions for mapping users to their groups.
 	GroupId *string
 
-	// Shows the following information on the processing of PUT  and DELETE actions
-	// for mapping users to their groups:
-	//     - Status – the status can be either PROCESSING , SUCCEEDED , DELETING , DELETED , or FAILED .
-	//     - Last updated – the last date-time an action was updated.
-	//     - Received – the last date-time an action was received or submitted.
-	//     - Ordering ID – the latest action that should process and apply after other actions.
-	//     - Failure reason – the reason an action could not be processed.
+	// Shows the following information on the processing of PUT and DELETE actions for
+	// mapping users to their groups:
+	//
+	// * Status—the status can be either PROCESSING,
+	// SUCCEEDED, DELETING, DELETED, or FAILED.
+	//
+	// * Last updated—the last date-time an
+	// action was updated.
+	//
+	// * Received—the last date-time an action was received or
+	// submitted.
+	//
+	// * Ordering ID—the latest action that should process and apply after
+	// other actions.
+	//
+	// * Failure reason—the reason an action could not be processed.
 	GroupOrderingIdSummaries []types.GroupOrderingIdSummary
 
 	// Shows the identifier of the index to see information on the processing of PUT
-	// and DELETE  actions for mapping users to their groups.
+	// and DELETE actions for mapping users to their groups.
 	IndexId *string
 
 	// Metadata pertaining to the operation's result.

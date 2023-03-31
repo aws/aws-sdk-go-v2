@@ -52,7 +52,7 @@ type StartEarthObservationJobInput struct {
 	// The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
 	ExecutionRoleArn *string
 
-	// The Amazon Key Management Service (KMS) key ID for server-side encryption.
+	// The Key Management Service key ID for server-side encryption.
 	KmsKeyId *string
 
 	// Each tag consists of a key and a value.
@@ -99,7 +99,7 @@ type StartEarthObservationJobOutput struct {
 	// Input configuration information for the Earth Observation job.
 	InputConfig *types.InputConfigOutput
 
-	// The Amazon Key Management Service (KMS) key ID for server-side encryption.
+	// The Key Management Service key ID for server-side encryption.
 	KmsKeyId *string
 
 	// Each tag consists of a key and a value.

@@ -6061,6 +6061,11 @@ func awsRestjson1_deserializeDocumentEksPodPropertiesDetail(v **types.EksPodProp
 				sv.HostNetwork = ptr.Bool(jtv)
 			}
 
+		case "metadata":
+			if err := awsRestjson1_deserializeDocumentEksMetadata(&sv.Metadata, value); err != nil {
+				return err
+			}
+
 		case "nodeName":
 			if value != nil {
 				jtv, ok := value.(string)
