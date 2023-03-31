@@ -1,8 +1,0 @@
-{
-    "id": "d3e5a716-7460-49b4-bdf3-b78e4f960473",
-    "type": "feature",
-    "description": "In this release, you can now chose between soft delete and hard delete when calling the DeleteRecord API, so you have more flexibility when it comes to managing online store data.",
-    "modules": [
-        "service/sagemakerfeaturestoreruntime"
-    ]
-}

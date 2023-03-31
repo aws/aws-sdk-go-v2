@@ -1,8 +1,0 @@
-{
-    "id": "5e121825-0e92-44bd-a046-ab112d5ff028",
-    "type": "feature",
-    "description": "Deprecating AWS Server Migration Service.",
-    "modules": [
-        "service/sms"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.92.1 (2023-03-31)
+
+* **Documentation**: Documentation updates for EC2 On Demand Capacity Reservations
+
 # v1.92.0 (2023-03-30)
 
 * **Feature**: This release adds support for Tunnel Endpoint Lifecycle control, a new feature that provides Site-to-Site VPN customers with better visibility and control of their VPN tunnel maintenance updates.

@@ -1,8 +1,0 @@
-{
-    "id": "7e4456b4-18b6-488d-bda1-b4d1fe92f526",
-    "type": "documentation",
-    "description": "Documentation updates for EC2 On Demand Capacity Reservations",
-    "modules": [
-        "service/ec2"
-    ]
-}

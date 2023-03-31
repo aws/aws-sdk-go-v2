@@ -1,3 +1,7 @@
+# v1.14.0 (2023-03-31)
+
+* **Feature**: In this release, you can now chose between soft delete and hard delete when calling the DeleteRecord API, so you have more flexibility when it comes to managing online store data.
+
 # v1.13.6 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

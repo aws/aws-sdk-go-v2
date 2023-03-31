@@ -1,3 +1,20 @@
+# Release (2023-03-31)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.92.1](service/ec2/CHANGELOG.md#v1921-2023-03-31)
+  * **Documentation**: Documentation updates for EC2 On Demand Capacity Reservations
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.1.0](service/internetmonitor/CHANGELOG.md#v110-2023-03-31)
+  * **Feature**: This release adds a new feature for Amazon CloudWatch Internet Monitor that enables customers to deliver internet measurements to Amazon S3 buckets as well as CloudWatch Logs.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.10.1](service/resiliencehub/CHANGELOG.md#v1101-2023-03-31)
+  * **Documentation**: Adding EKS related documentation for appTemplateBody
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.31.1](service/s3/CHANGELOG.md#v1311-2023-03-31)
+  * **Documentation**: Documentation updates for Amazon S3
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.14.0](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1140-2023-03-31)
+  * **Feature**: In this release, you can now chose between soft delete and hard delete when calling the DeleteRecord API, so you have more flexibility when it comes to managing online store data.
+
 # Release (2023-03-30)
 
 ## Module Highlights

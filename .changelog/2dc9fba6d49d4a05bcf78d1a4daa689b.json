@@ -1,8 +1,0 @@
-{
-    "id": "2dc9fba6-d49d-4a05-bcf7-8d1a4daa689b",
-    "type": "documentation",
-    "description": "Documentation updates for Amazon S3",
-    "modules": [
-        "service/s3"
-    ]
-}

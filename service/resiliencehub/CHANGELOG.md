@@ -1,3 +1,7 @@
+# v1.10.1 (2023-03-31)
+
+* **Documentation**: Adding EKS related documentation for appTemplateBody
+
 # v1.10.0 (2023-03-22)
 
 * **Feature**: This release provides customers with the ability to import resources from within an EKS cluster and assess the resiliency of EKS cluster workloads.
