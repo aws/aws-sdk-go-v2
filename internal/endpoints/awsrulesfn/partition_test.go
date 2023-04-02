@@ -6,7 +6,7 @@ import (
 
 func TestGetPartition(t *testing.T) {
 	cases := map[string]struct {
-		Region string
+		Region        string
 		PartitionName string
 	}{
 		"test region match aws": {
@@ -22,11 +22,11 @@ func TestGetPartition(t *testing.T) {
 
 	for n, c := range cases {
 		t.Run(n, func(t *testing.T) {
-			p := GetPartition(c.Region)
+			p := GetPartition(partitions, c.Region)
 			expected := c.PartitionName
 			actual := p.Name
-			if expected != actual {
-				t.Errorf("expect %v, got %v", expected, actual)
+			if expected != *actual {
+				t.Errorf("expected %v, got %v", expected, actual)
 			}
 		})
 	}

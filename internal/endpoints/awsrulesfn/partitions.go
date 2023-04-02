@@ -3,168 +3,339 @@
 package awsrulesfn
 
 import (
-	"fmt"
-	"regexp"
-
 	"github.com/aws/smithy-go/ptr"
 )
 
-// Partition provides the metadata describing an AWS partition.
-type Partition struct {
-	Name               string
-	DnsSuffix          string
-	DualStackDnsSuffix string
-	SupportsFIPS       bool
-	SupportsDualStack  bool
-}
-
-// GetPartition returns an AWS [Partition] for the region provided. If the
-// partition cannot be determined nil will be returned.
-func GetPartition(region string) *Partition {
-	if v, ok := regionPartition[region]; ok {
-		p, ok := partitions[v.PartitionID]
-		if !ok {
-			panic(fmt.Sprintf(
-				"bad codegen, unable to get region looked up partition %v from partitions map",
-				v.PartitionID))
-		}
-		p.mergeWith(v.Metadata)
-		return &p
-	}
-
-	for _, r := range regionRegexps {
-		if r.RegionRegex.MatchString(region) {
-			p, ok := partitions[r.PartitionID]
-			if !ok {
-				panic(fmt.Sprintf(
-					"bad codegen, unable to get region regexp looked up partition %v from partitions map",
-					r.PartitionID))
-			}
-			return &p
-		}
-	}
-
-	p, ok := partitions[defaultPartition]
-	if !ok {
-		panic(fmt.Sprintf(
-			"bad codegen, unable to get default partition %v from partitions map",
-			defaultPartition))
-	}
-
-	return &p
-}
-
-func (p *Partition) mergeWith(other partitionMetadata) {
-	if vv := other.Name; vv != nil {
-		p.Name = *vv
-	}
-	if vv := other.DnsSuffix; vv != nil {
-		p.DnsSuffix = *vv
-	}
-	if vv := other.DualStackDnsSuffix; vv != nil {
-		p.DualStackDnsSuffix = *vv
-	}
-	if vv := other.SupportsFIPS; vv != nil {
-		p.SupportsFIPS = *vv
-	}
-	if vv := other.SupportsDualStack; vv != nil {
-		p.SupportsDualStack = *vv
-	}
-}
-
-const defaultPartition = "aws"
-
-var partitions = map[string]Partition{
-	"aws": {
-		Name:               "aws",
-		DnsSuffix:          "amazonaws.com",
-		DualStackDnsSuffix: "api.aws",
-		SupportsFIPS:       true,
-		SupportsDualStack:  true,
-	},
-	"aws-cn": {
-		Name:               "aws-cn",
-		DnsSuffix:          "amazonaws.com.cn",
-		DualStackDnsSuffix: "api.amazonwebservices.com.cn",
-		SupportsFIPS:       true,
-		SupportsDualStack:  true,
-	},
-}
-
-type partitionMetadata struct {
-	Name               *string
-	DnsSuffix          *string
-	DualStackDnsSuffix *string
-	SupportsFIPS       *bool
-	SupportsDualStack  *bool
-}
-
-var regionPartition = map[string]struct {
-	PartitionID string
-	Metadata    partitionMetadata
-}{
-	"aws-global": {
-		PartitionID: "aws",
-		Metadata: partitionMetadata{
-			Name:               nil,
-			DnsSuffix:          nil,
-			DualStackDnsSuffix: nil,
-			SupportsFIPS:       nil,
-			SupportsDualStack:  nil,
-		},
-	},
-	"us-east-1": {
-		PartitionID: "aws",
-		Metadata: partitionMetadata{
-			Name:               nil,
-			DnsSuffix:          nil,
-			DualStackDnsSuffix: nil,
-			SupportsFIPS:       nil,
-			SupportsDualStack:  nil,
-		},
-	},
-	"us-skip-1": {
-		PartitionID: "aws",
-		Metadata: partitionMetadata{
+var partitions = []Partition{
+	{
+		ID:          "aws",
+		RegionRegex: "^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$",
+		DefaultConfig: PartitionConfig{
 			Name:               ptr.String("aws"),
-			DnsSuffix:          ptr.String("other.amazonaws.com"),
-			DualStackDnsSuffix: ptr.String("other.api.aws"),
-			SupportsFIPS:       ptr.Bool(false),
+			DNSSuffix:          ptr.String("amazonaws.com"),
+			DualStackDNSSuffix: ptr.String("api.aws"),
+			SupportsFIPS:       ptr.Bool(true),
+			SupportsDualStack:  ptr.Bool(true),
+		},
+		Regions: map[string]PartitionConfig{
+			"af-south-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"ap-east-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"ap-northeast-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"ap-northeast-2": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"ap-northeast-3": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"ap-south-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"ap-south-2": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"ap-southeast-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"ap-southeast-2": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"ap-southeast-3": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"aws-global": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"ca-central-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"eu-central-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"eu-central-2": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"eu-north-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"eu-south-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"eu-south-2": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"eu-west-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"eu-west-2": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"eu-west-3": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"me-central-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"me-south-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"sa-east-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"us-east-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"us-east-2": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"us-west-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"us-west-2": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+		},
+	},
+	{
+		ID:          "aws-cn",
+		RegionRegex: "^cn\\-\\w+\\-\\d+$",
+		DefaultConfig: PartitionConfig{
+			Name:               ptr.String("aws-cn"),
+			DNSSuffix:          ptr.String("amazonaws.com.cn"),
+			DualStackDNSSuffix: ptr.String("api.amazonwebservices.com.cn"),
+			SupportsFIPS:       ptr.Bool(true),
+			SupportsDualStack:  ptr.Bool(true),
+		},
+		Regions: map[string]PartitionConfig{
+			"aws-cn-global": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"cn-north-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"cn-northwest-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+		},
+	},
+	{
+		ID:          "aws-us-gov",
+		RegionRegex: "^us\\-gov\\-\\w+\\-\\d+$",
+		DefaultConfig: PartitionConfig{
+			Name:               ptr.String("aws-us-gov"),
+			DNSSuffix:          ptr.String("amazonaws.com"),
+			DualStackDNSSuffix: ptr.String("api.aws"),
+			SupportsFIPS:       ptr.Bool(true),
+			SupportsDualStack:  ptr.Bool(true),
+		},
+		Regions: map[string]PartitionConfig{
+			"aws-us-gov-global": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"us-gov-east-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"us-gov-west-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+		},
+	},
+	{
+		ID:          "aws-iso",
+		RegionRegex: "^us\\-iso\\-\\w+\\-\\d+$",
+		DefaultConfig: PartitionConfig{
+			Name:               ptr.String("aws-iso"),
+			DNSSuffix:          ptr.String("c2s.ic.gov"),
+			DualStackDNSSuffix: ptr.String("c2s.ic.gov"),
+			SupportsFIPS:       ptr.Bool(true),
 			SupportsDualStack:  ptr.Bool(false),
 		},
-	},
-	"aws-cn-global": {
-		PartitionID: "aws-cn",
-		Metadata: partitionMetadata{
-			Name:               nil,
-			DnsSuffix:          nil,
-			DualStackDnsSuffix: nil,
-			SupportsFIPS:       nil,
-			SupportsDualStack:  nil,
+		Regions: map[string]PartitionConfig{
+			"aws-iso-global": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"us-iso-east-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"us-iso-west-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
 		},
 	},
-	"cn-north-5": {
-		PartitionID: "aws-cn",
-		Metadata: partitionMetadata{
-			Name:               nil,
-			DnsSuffix:          nil,
-			DualStackDnsSuffix: nil,
-			SupportsFIPS:       nil,
-			SupportsDualStack:  nil,
+	{
+		ID:          "aws-iso-b",
+		RegionRegex: "^us\\-isob\\-\\w+\\-\\d+$",
+		DefaultConfig: PartitionConfig{
+			Name:               ptr.String("aws-iso-b"),
+			DNSSuffix:          ptr.String("sc2s.sgov.gov"),
+			DualStackDNSSuffix: ptr.String("sc2s.sgov.gov"),
+			SupportsFIPS:       ptr.Bool(true),
+			SupportsDualStack:  ptr.Bool(false),
 		},
-	},
-}
-
-var regionRegexps = []struct {
-	PartitionID string
-	RegionRegex *regexp.Regexp
-}{
-	{
-		PartitionID: "aws",
-		RegionRegex: regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)-\\w+-\\d+$"),
-	},
-	{
-		PartitionID: "aws-cn",
-		RegionRegex: regexp.MustCompile("^(cn)-\\w+-\\d+$"),
+		Regions: map[string]PartitionConfig{
+			"aws-iso-b-global": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+			"us-isob-east-1": {
+				Name:               nil,
+				DNSSuffix:          nil,
+				DualStackDNSSuffix: nil,
+				SupportsFIPS:       nil,
+				SupportsDualStack:  nil,
+			},
+		},
 	},
 }
