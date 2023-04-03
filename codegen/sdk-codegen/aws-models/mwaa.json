@@ -445,9 +445,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -458,9 +458,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -471,9 +471,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -484,9 +484,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -497,9 +497,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -510,9 +510,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -523,9 +523,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -536,9 +536,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -549,9 +549,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -562,9 +562,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -575,9 +575,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-3",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -588,9 +588,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "sa-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -601,9 +601,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -614,9 +614,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -627,9 +627,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -640,9 +640,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -653,9 +653,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -666,9 +666,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -679,9 +679,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -692,9 +692,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -705,9 +705,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -718,9 +718,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -731,9 +731,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -744,9 +744,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -757,9 +757,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -770,9 +770,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -783,9 +794,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -796,9 +818,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -809,9 +842,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -822,9 +866,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -835,9 +879,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -849,8 +893,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -860,9 +904,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -872,10 +916,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1012,65 +1062,77 @@
                 "ExecutionRoleArn": {
                     "target": "com.amazonaws.mwaa#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the execution role for your environment. An execution role is an Amazon Web Services Identity and Access Management (IAM) role that grants MWAA permission to access Amazon Web Services services and resources used by your environment. For example, <code>arn:aws:iam::123456789:role/my-execution-role</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html\">Amazon MWAA Execution role</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the execution role for your environment. An execution role is an Amazon Web Services Identity and Access Management (IAM) role that grants MWAA permission to access Amazon Web Services services and resources used by your environment. For example, <code>arn:aws:iam::123456789:role/my-execution-role</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html\">Amazon MWAA Execution role</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SourceBucketArn": {
                     "target": "com.amazonaws.mwaa#S3BucketArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and supporting files are stored. For example, <code>arn:aws:s3:::my-airflow-bucket-unique-name</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html\">Create an Amazon S3 bucket for Amazon MWAA</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and supporting files are stored. For example, <code>arn:aws:s3:::my-airflow-bucket-unique-name</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html\">Create an Amazon S3 bucket for Amazon MWAA</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DagS3Path": {
                     "target": "com.amazonaws.mwaa#RelativePath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The relative path to the DAGs folder on your Amazon S3 bucket. For example, <code>dags</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html\">Adding or updating DAGs</a>.</p>",
+                        "smithy.api#documentation": "<p>The relative path to the DAGs folder on your Amazon S3 bucket. For example, <code>dags</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html\">Adding or updating DAGs</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NetworkConfiguration": {
                     "target": "com.amazonaws.mwaa#NetworkConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html\">About networking on Amazon MWAA</a>.</p>",
+                        "smithy.api#documentation": "<p>The VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html\">About networking on Amazon MWAA</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PluginsS3Path": {
                     "target": "com.amazonaws.mwaa#RelativePath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The relative path to the <code>plugins.zip</code> file on your Amazon S3 bucket. For example, <code>plugins.zip</code>. If specified, then the plugins.zip version is required. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html\">Installing custom plugins</a>.</p>"
+                        "smithy.api#documentation": "<p>The relative path to the <code>plugins.zip</code> file on your Amazon S3 bucket. For example, <code>plugins.zip</code>. If specified, then the <code>plugins.zip</code> version is required. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html\">Installing custom plugins</a>.</p>"
                     }
                 },
                 "PluginsS3ObjectVersion": {
                     "target": "com.amazonaws.mwaa#S3ObjectVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the plugins.zip file on your Amazon S3 bucket. A version must be specified each time a plugins.zip file is updated. To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html\">How S3 Versioning works</a>.</p>"
+                        "smithy.api#documentation": "<p>The version of the plugins.zip file on your Amazon S3 bucket. You must specify a version each time a plugins.zip file is updated. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html\">How S3 Versioning works</a>.</p>"
                     }
                 },
                 "RequirementsS3Path": {
                     "target": "com.amazonaws.mwaa#RelativePath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The relative path to the <code>requirements.txt</code> file on your Amazon S3 bucket. For example, <code>requirements.txt</code>. If specified, then a file version is required. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html\">Installing Python dependencies</a>.</p>"
+                        "smithy.api#documentation": "<p>The relative path to the <code>requirements.txt</code> file on your Amazon S3 bucket. For example, <code>requirements.txt</code>. If specified, then a version is required. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html\">Installing Python dependencies</a>.</p>"
                     }
                 },
                 "RequirementsS3ObjectVersion": {
                     "target": "com.amazonaws.mwaa#S3ObjectVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the requirements.txt file on your Amazon S3 bucket. A version must be specified each time a requirements.txt file is updated. To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html\">How S3 Versioning works</a>.</p>"
+                        "smithy.api#documentation": "<p>The version of the <code>requirements.txt</code> file on your Amazon S3 bucket. You must specify a version each time a requirements.txt file is updated. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html\">How S3 Versioning works</a>.</p>"
+                    }
+                },
+                "StartupScriptS3Path": {
+                    "target": "com.amazonaws.mwaa#RelativePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The relative path to the startup shell script in your Amazon S3 bucket. For example, <code>s3://mwaa-environment/startup.sh</code>.</p>\n         <p>\n            Amazon MWAA runs the script as your environment starts, and before running the Apache Airflow process.\n            You can use this script to install dependencies, modify Apache Airflow configuration options, and set environment variables. For more information, see\n            <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html\">Using a startup script</a>.\n        </p>"
+                    }
+                },
+                "StartupScriptS3ObjectVersion": {
+                    "target": "com.amazonaws.mwaa#S3ObjectVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the startup shell script in your Amazon S3 bucket. You must specify the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html\">version ID</a> that Amazon S3 assigns to the file\n            every time you update the script.\n        </p>\n         <p>\n            Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that are no more than 1,024 bytes long. The following is an example:\n        </p>\n         <p>\n            <code>3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo</code>\n         </p>\n         <p>\n            For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html\">Using a startup script</a>.\n        </p>"
                     }
                 },
                 "AirflowConfigurationOptions": {
                     "target": "com.amazonaws.mwaa#AirflowConfigurationOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key-value pairs containing the Apache Airflow configuration options you want to attach to your environment. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html\">Apache Airflow configuration options</a>.</p>"
+                        "smithy.api#documentation": "<p>A list of key-value pairs containing the Apache Airflow configuration options you want to attach to your environment. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html\">Apache Airflow configuration options</a>.</p>"
                     }
                 },
                 "EnvironmentClass": {
                     "target": "com.amazonaws.mwaa#EnvironmentClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment class type. Valid values: <code>mw1.small</code>, <code>mw1.medium</code>, <code>mw1.large</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html\">Amazon MWAA environment class</a>.</p>"
+                        "smithy.api#documentation": "<p>The environment class type. Valid values: <code>mw1.small</code>, <code>mw1.medium</code>, <code>mw1.large</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html\">Amazon MWAA environment class</a>.</p>"
                     }
                 },
                 "MaxWorkers": {
@@ -1082,7 +1144,7 @@
                 "KmsKey": {
                     "target": "com.amazonaws.mwaa#KmsKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS) key to encrypt the data in your environment. You can use an Amazon Web Services owned CMK, or a Customer managed CMK (advanced). To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/create-environment.html\">Create an Amazon MWAA environment</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS) key to encrypt the data in your environment. You can use an Amazon Web Services owned CMK, or a Customer managed CMK (advanced). For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/create-environment.html\">Create an Amazon MWAA environment</a>.</p>"
                     }
                 },
                 "AirflowVersion": {
@@ -1106,13 +1168,13 @@
                 "Tags": {
                     "target": "com.amazonaws.mwaa#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-value tag pairs you want to associate to your environment. For example, <code>\"Environment\": \"Staging\"</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
+                        "smithy.api#documentation": "<p>The key-value tag pairs you want to associate to your environment. For example, <code>\"Environment\": \"Staging\"</code>. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
                     }
                 },
                 "WebserverAccessMode": {
                     "target": "com.amazonaws.mwaa#WebserverAccessMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow <i>Web server</i> access mode. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html\">Apache Airflow access modes</a>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow <i>Web server</i> access mode. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html\">Apache Airflow access modes</a>.</p>"
                     }
                 },
                 "MinWorkers": {
@@ -1300,7 +1362,7 @@
                 "Status": {
                     "target": "com.amazonaws.mwaa#EnvironmentStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the Amazon MWAA environment. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - Indicates the request to create the environment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> - Indicates the request to create the environment failed, and the environment could not be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - Indicates the request was successful and the environment is ready to use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> - Indicates the request to update the environment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - Indicates the request to delete the environment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - Indicates the request to delete the environment is complete, and the environment has been deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNAVAILABLE</code> - Indicates the request failed, but the environment was unable to rollback and is not in a stable state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_FAILED</code> - Indicates the request to update the environment failed, and the environment has rolled back successfully and is ready to use.</p>\n            </li>\n         </ul>\n         <p>We recommend reviewing our troubleshooting guide for a list of common errors and their solutions. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/troubleshooting.html\">Amazon MWAA troubleshooting</a>.</p>"
+                        "smithy.api#documentation": "<p>The status of the Amazon MWAA environment. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - Indicates the request to create the environment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> - Indicates the request to create the environment failed, and the environment could not be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - Indicates the request was successful and the environment is ready to use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> - Indicates the request to update the environment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - Indicates the request to delete the environment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - Indicates the request to delete the environment is complete, and the environment has been deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNAVAILABLE</code> - Indicates the request failed, but the environment was unable to rollback and is not in a stable state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_FAILED</code> - Indicates the request to update the environment failed, and the environment has rolled back successfully and is ready to use.</p>\n            </li>\n         </ul>\n         <p>We recommend reviewing our troubleshooting guide for a list of common errors and their solutions. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/troubleshooting.html\">Amazon MWAA troubleshooting</a>.</p>"
                     }
                 },
                 "Arn": {
@@ -1318,19 +1380,19 @@
                 "WebserverUrl": {
                     "target": "com.amazonaws.mwaa#WebserverUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow <i>Web server</i> host name for the Amazon MWAA environment. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/access-airflow-ui.html\">Accessing the Apache Airflow UI</a>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow <i>Web server</i> host name for the Amazon MWAA environment. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/access-airflow-ui.html\">Accessing the Apache Airflow UI</a>.</p>"
                     }
                 },
                 "ExecutionRoleArn": {
                     "target": "com.amazonaws.mwaa#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to access Amazon Web Services resources in your environment. For example, <code>arn:aws:iam::123456789:role/my-execution-role</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html\">Amazon MWAA Execution role</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to access Amazon Web Services resources in your environment. For example, <code>arn:aws:iam::123456789:role/my-execution-role</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html\">Amazon MWAA Execution role</a>.</p>"
                     }
                 },
                 "ServiceRoleArn": {
                     "target": "com.amazonaws.mwaa#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the service-linked role of the environment. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-slr.html\">Amazon MWAA Service-linked role</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the service-linked role of the environment. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-slr.html\">Amazon MWAA Service-linked role</a>.</p>"
                     }
                 },
                 "KmsKey": {
@@ -1348,49 +1410,61 @@
                 "SourceBucketArn": {
                     "target": "com.amazonaws.mwaa#S3BucketArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and supporting files are stored. For example, <code>arn:aws:s3:::my-airflow-bucket-unique-name</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html\">Create an Amazon S3 bucket for Amazon MWAA</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and supporting files are stored. For example, <code>arn:aws:s3:::my-airflow-bucket-unique-name</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html\">Create an Amazon S3 bucket for Amazon MWAA</a>.</p>"
                     }
                 },
                 "DagS3Path": {
                     "target": "com.amazonaws.mwaa#RelativePath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The relative path to the DAGs folder on your Amazon S3 bucket. For example, <code>dags</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html\">Adding or updating DAGs</a>.</p>"
+                        "smithy.api#documentation": "<p>The relative path to the DAGs folder in your Amazon S3 bucket. For example, <code>s3://mwaa-environment/dags</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html\">Adding or updating DAGs</a>.</p>"
                     }
                 },
                 "PluginsS3Path": {
                     "target": "com.amazonaws.mwaa#RelativePath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The relative path to the <code>plugins.zip</code> file on your Amazon S3 bucket. For example, <code>plugins.zip</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html\">Installing custom plugins</a>.</p>"
+                        "smithy.api#documentation": "<p>The relative path to the file in your Amazon S3 bucket. For example, <code>s3://mwaa-environment/plugins.zip</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html\">Installing custom plugins</a>.</p>"
                     }
                 },
                 "PluginsS3ObjectVersion": {
                     "target": "com.amazonaws.mwaa#S3ObjectVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the plugins.zip file on your Amazon S3 bucket. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html\">Installing custom plugins</a>.</p>"
+                        "smithy.api#documentation": "<p>The version of the <code>plugins.zip</code> file in your Amazon S3 bucket. You must specify the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html\">version ID</a> that Amazon S3 assigns to the file.</p>\n         <p>\n            Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that are no more than 1,024 bytes long. The following is an example:\n        </p>\n         <p>\n            <code>3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo</code>\n         </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html\">Installing custom plugins</a>.</p>"
                     }
                 },
                 "RequirementsS3Path": {
                     "target": "com.amazonaws.mwaa#RelativePath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The relative path to the <code>requirements.txt</code> file on your Amazon S3 bucket. For example, <code>requirements.txt</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html\">Installing Python dependencies</a>.</p>"
+                        "smithy.api#documentation": "<p>The relative path to the <code>requirements.txt</code> file in your Amazon S3 bucket. For example, <code>s3://mwaa-environment/requirements.txt</code>. For more information, see\n            <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html\">Installing Python dependencies</a>.</p>"
                     }
                 },
                 "RequirementsS3ObjectVersion": {
                     "target": "com.amazonaws.mwaa#S3ObjectVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the requirements.txt file on your Amazon S3 bucket. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html\">Installing Python dependencies</a>.</p>"
+                        "smithy.api#documentation": "<p>The version of the <code>requirements.txt </code> file on your Amazon S3 bucket. You must specify the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html\">version ID</a> that Amazon S3 assigns to the file.</p>\n         <p>\n            Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that are no more than 1,024 bytes long. The following is an example:\n        </p>\n         <p>\n            <code>3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo</code>\n         </p>\n         <p>\n            For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html\">Installing Python dependencies</a>.\n        </p>"
+                    }
+                },
+                "StartupScriptS3Path": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The relative path to the startup shell script in your Amazon S3 bucket. For example, <code>s3://mwaa-environment/startup.sh</code>.</p>\n         <p>\n            Amazon MWAA runs the script as your environment starts, and before running the Apache Airflow process.\n            You can use this script to install dependencies, modify Apache Airflow configuration options, and set environment variables. For more information, see\n            <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html\">Using a startup script</a>.\n        </p>"
+                    }
+                },
+                "StartupScriptS3ObjectVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the startup shell script in your Amazon S3 bucket. You must specify the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html\">version ID</a> that Amazon S3 assigns to the file.</p>\n         <p>\n            Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that are no more than 1,024 bytes long. The following is an example:\n        </p>\n         <p>\n            <code>3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo</code>\n         </p>\n         <p>\n            For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html\">Using a startup script</a>.\n        </p>"
                     }
                 },
                 "AirflowConfigurationOptions": {
                     "target": "com.amazonaws.mwaa#AirflowConfigurationOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key-value pairs containing the Apache Airflow configuration options attached to your environment. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html\">Apache Airflow configuration options</a>.</p>"
+                        "smithy.api#documentation": "<p>A list of key-value pairs containing the Apache Airflow configuration options attached to your environment. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html\">Apache Airflow configuration options</a>.</p>"
                     }
                 },
                 "EnvironmentClass": {
                     "target": "com.amazonaws.mwaa#EnvironmentClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment class type. Valid values: <code>mw1.small</code>, <code>mw1.medium</code>, <code>mw1.large</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html\">Amazon MWAA environment class</a>.</p>"
+                        "smithy.api#documentation": "<p>The environment class type. Valid values: <code>mw1.small</code>, <code>mw1.medium</code>, <code>mw1.large</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html\">Amazon MWAA environment class</a>.</p>"
                     }
                 },
                 "MaxWorkers": {
@@ -1402,7 +1476,7 @@
                 "NetworkConfiguration": {
                     "target": "com.amazonaws.mwaa#NetworkConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html\">About networking on Amazon MWAA</a>.</p>"
+                        "smithy.api#documentation": "<p>Describes the VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html\">About networking on Amazon MWAA</a>.</p>"
                     }
                 },
                 "LoggingConfiguration": {
@@ -1426,13 +1500,13 @@
                 "Tags": {
                     "target": "com.amazonaws.mwaa#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-value tag pairs associated to your environment. For example, <code>\"Environment\": \"Staging\"</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
+                        "smithy.api#documentation": "<p>The key-value tag pairs associated to your environment. For example, <code>\"Environment\": \"Staging\"</code>. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
                     }
                 },
                 "WebserverAccessMode": {
                     "target": "com.amazonaws.mwaa#WebserverAccessMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow <i>Web server</i> access mode. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html\">Apache Airflow access modes</a>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow <i>Web server</i> access mode. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html\">Apache Airflow access modes</a>.</p>"
                     }
                 },
                 "MinWorkers": {
@@ -1797,7 +1871,7 @@
                 "Tags": {
                     "target": "com.amazonaws.mwaa#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-value tag pairs associated to your environment. To learn more, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
+                        "smithy.api#documentation": "<p>The key-value tag pairs associated to your environment. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
                     }
                 }
             }
@@ -2030,18 +2104,18 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.mwaa#SubnetList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of subnet IDs. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html\">About networking on Amazon MWAA</a>.</p>"
+                        "smithy.api#documentation": "<p>A list of subnet IDs. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html\">About networking on Amazon MWAA</a>.</p>"
                     }
                 },
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.mwaa#SecurityGroupList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of security group IDs. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html\">Security in your VPC on Amazon MWAA</a>.</p>"
+                        "smithy.api#documentation": "<p>A list of security group IDs. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html\">Security in your VPC on Amazon MWAA</a>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html\">About networking on Amazon MWAA</a>.</p>"
+                "smithy.api#documentation": "<p>Describes the VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html\">About networking on Amazon MWAA</a>.</p>"
             }
         },
         "com.amazonaws.mwaa#NextToken": {
@@ -2311,7 +2385,7 @@
                 "Tags": {
                     "target": "com.amazonaws.mwaa#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-value tag pairs you want to associate to your environment. For example, <code>\"Environment\": \"Staging\"</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>",
+                        "smithy.api#documentation": "<p>The key-value tag pairs you want to associate to your environment. For example, <code>\"Environment\": \"Staging\"</code>. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2557,7 +2631,7 @@
                 "ExecutionRoleArn": {
                     "target": "com.amazonaws.mwaa#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to access Amazon Web Services resources in your environment. For example, <code>arn:aws:iam::123456789:role/my-execution-role</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html\">Amazon MWAA Execution role</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to access Amazon Web Services resources in your environment. For example, <code>arn:aws:iam::123456789:role/my-execution-role</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html\">Amazon MWAA Execution role</a>.</p>"
                     }
                 },
                 "AirflowVersion": {
@@ -2569,49 +2643,61 @@
                 "SourceBucketArn": {
                     "target": "com.amazonaws.mwaa#S3BucketArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and supporting files are stored. For example, <code>arn:aws:s3:::my-airflow-bucket-unique-name</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html\">Create an Amazon S3 bucket for Amazon MWAA</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and supporting files are stored. For example, <code>arn:aws:s3:::my-airflow-bucket-unique-name</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html\">Create an Amazon S3 bucket for Amazon MWAA</a>.</p>"
                     }
                 },
                 "DagS3Path": {
                     "target": "com.amazonaws.mwaa#RelativePath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The relative path to the DAGs folder on your Amazon S3 bucket. For example, <code>dags</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html\">Adding or updating DAGs</a>.</p>"
+                        "smithy.api#documentation": "<p>The relative path to the DAGs folder on your Amazon S3 bucket. For example, <code>dags</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html\">Adding or updating DAGs</a>.</p>"
                     }
                 },
                 "PluginsS3Path": {
                     "target": "com.amazonaws.mwaa#RelativePath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The relative path to the <code>plugins.zip</code> file on your Amazon S3 bucket. For example, <code>plugins.zip</code>. If specified, then the plugins.zip version is required. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html\">Installing custom plugins</a>.</p>"
+                        "smithy.api#documentation": "<p>The relative path to the <code>plugins.zip</code> file on your Amazon S3 bucket. For example, <code>plugins.zip</code>. If specified, then the plugins.zip version is required. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html\">Installing custom plugins</a>.</p>"
                     }
                 },
                 "PluginsS3ObjectVersion": {
                     "target": "com.amazonaws.mwaa#S3ObjectVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the plugins.zip file on your Amazon S3 bucket. A version must be specified each time a plugins.zip file is updated. To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html\">How S3 Versioning works</a>.</p>"
+                        "smithy.api#documentation": "<p>The version of the plugins.zip file on your Amazon S3 bucket. You must specify a version each time a <code>plugins.zip</code> file is updated. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html\">How S3 Versioning works</a>.</p>"
                     }
                 },
                 "RequirementsS3Path": {
                     "target": "com.amazonaws.mwaa#RelativePath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The relative path to the <code>requirements.txt</code> file on your Amazon S3 bucket. For example, <code>requirements.txt</code>. If specified, then a file version is required. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html\">Installing Python dependencies</a>.</p>"
+                        "smithy.api#documentation": "<p>The relative path to the <code>requirements.txt</code> file on your Amazon S3 bucket. For example, <code>requirements.txt</code>. If specified, then a file version is required. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html\">Installing Python dependencies</a>.</p>"
                     }
                 },
                 "RequirementsS3ObjectVersion": {
                     "target": "com.amazonaws.mwaa#S3ObjectVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the requirements.txt file on your Amazon S3 bucket. A version must be specified each time a requirements.txt file is updated. To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html\">How S3 Versioning works</a>.</p>"
+                        "smithy.api#documentation": "<p>The version of the requirements.txt file on your Amazon S3 bucket. You must specify a version each time a <code>requirements.txt</code> file is updated. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html\">How S3 Versioning works</a>.</p>"
+                    }
+                },
+                "StartupScriptS3Path": {
+                    "target": "com.amazonaws.mwaa#RelativePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The relative path to the startup shell script in your Amazon S3 bucket. For example, <code>s3://mwaa-environment/startup.sh</code>.</p>\n         <p>\n            Amazon MWAA runs the script as your environment starts, and before running the Apache Airflow process.\n            You can use this script to install dependencies, modify Apache Airflow configuration options, and set environment variables. For more information, see\n            <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html\">Using a startup script</a>.\n        </p>"
+                    }
+                },
+                "StartupScriptS3ObjectVersion": {
+                    "target": "com.amazonaws.mwaa#S3ObjectVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The version of the startup shell script in your Amazon S3 bucket. You must specify the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html\">version ID</a> that Amazon S3 assigns to the file\n            every time you update the script.\n        </p>\n         <p>\n            Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that are no more than 1,024 bytes long. The following is an example:\n        </p>\n         <p>\n            <code>3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo</code>\n         </p>\n         <p>\n            For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html\">Using a startup script</a>.\n        </p>"
                     }
                 },
                 "AirflowConfigurationOptions": {
                     "target": "com.amazonaws.mwaa#AirflowConfigurationOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key-value pairs containing the Apache Airflow configuration options you want to attach to your environment. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html\">Apache Airflow configuration options</a>.</p>"
+                        "smithy.api#documentation": "<p>A list of key-value pairs containing the Apache Airflow configuration options you want to attach to your environment. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html\">Apache Airflow configuration options</a>.</p>"
                     }
                 },
                 "EnvironmentClass": {
                     "target": "com.amazonaws.mwaa#EnvironmentClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment class type. Valid values: <code>mw1.small</code>, <code>mw1.medium</code>, <code>mw1.large</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html\">Amazon MWAA environment class</a>.</p>"
+                        "smithy.api#documentation": "<p>The environment class type. Valid values: <code>mw1.small</code>, <code>mw1.medium</code>, <code>mw1.large</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html\">Amazon MWAA environment class</a>.</p>"
                     }
                 },
                 "MaxWorkers": {
@@ -2623,7 +2709,7 @@
                 "NetworkConfiguration": {
                     "target": "com.amazonaws.mwaa#UpdateNetworkConfigurationInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html\">About networking on Amazon MWAA</a>.</p>"
+                        "smithy.api#documentation": "<p>The VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html\">About networking on Amazon MWAA</a>.</p>"
                     }
                 },
                 "LoggingConfiguration": {
@@ -2641,7 +2727,7 @@
                 "WebserverAccessMode": {
                     "target": "com.amazonaws.mwaa#WebserverAccessMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow <i>Web server</i> access mode. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html\">Apache Airflow access modes</a>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow <i>Web server</i> access mode. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html\">Apache Airflow access modes</a>.</p>"
                     }
                 },
                 "MinWorkers": {
@@ -2695,13 +2781,13 @@
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.mwaa#SecurityGroupList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of security group IDs. A security group must be attached to the same VPC as the subnets. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html\">Security in your VPC on Amazon MWAA</a>.</p>",
+                        "smithy.api#documentation": "<p>A list of security group IDs. A security group must be attached to the same VPC as the subnets. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html\">Security in your VPC on Amazon MWAA</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. To learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html\">About networking on Amazon MWAA</a>.</p>"
+                "smithy.api#documentation": "<p>Defines the VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html\">About networking on Amazon MWAA</a>.</p>"
             }
         },
         "com.amazonaws.mwaa#UpdateSource": {

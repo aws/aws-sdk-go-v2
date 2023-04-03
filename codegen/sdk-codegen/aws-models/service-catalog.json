@@ -247,6 +247,15 @@
                     "target": "com.amazonaws.servicecatalog#ListTagOptions"
                 },
                 {
+                    "target": "com.amazonaws.servicecatalog#NotifyProvisionProductEngineWorkflowResult"
+                },
+                {
+                    "target": "com.amazonaws.servicecatalog#NotifyTerminateProvisionedProductEngineWorkflowResult"
+                },
+                {
+                    "target": "com.amazonaws.servicecatalog#NotifyUpdateProvisionedProductEngineWorkflowResult"
+                },
+                {
                     "target": "com.amazonaws.servicecatalog#ProvisionProduct"
                 },
                 {
@@ -669,9 +678,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -682,9 +691,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -695,9 +704,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -708,9 +717,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -721,9 +730,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -734,9 +743,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -747,9 +756,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -760,9 +769,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -773,9 +782,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "ap-southeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -786,9 +795,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -799,9 +808,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -812,9 +821,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -825,9 +834,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -838,9 +847,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -851,9 +860,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -864,9 +873,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -877,9 +886,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -890,9 +899,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -903,9 +912,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -916,9 +925,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": true,
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -929,9 +938,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -942,9 +951,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": true,
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -955,9 +964,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -968,9 +977,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": true,
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -981,9 +990,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -994,9 +1003,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": true,
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1007,9 +1016,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": true,
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1020,9 +1029,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1033,9 +1042,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1046,9 +1055,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1059,9 +1068,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": true,
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1072,9 +1081,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": true,
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1085,9 +1094,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1098,9 +1107,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1111,9 +1120,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": true,
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1124,9 +1133,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1137,9 +1146,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": true,
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1150,9 +1159,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": true,
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1163,9 +1172,20 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1176,9 +1196,20 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": true,
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1189,9 +1220,20 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1202,9 +1244,20 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": true,
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1215,9 +1268,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1228,9 +1281,9 @@
                                 }
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1242,8 +1295,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1253,9 +1306,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "UseFIPS": true,
                                 "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1265,10 +1318,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "UseFIPS": false,
                                 "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1314,7 +1373,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PortfolioId": {
@@ -1531,7 +1590,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PortfolioId": {
@@ -1544,7 +1603,7 @@
                 "PrincipalARN": {
                     "target": "com.amazonaws.servicecatalog#PrincipalARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the principal (IAM user, role, or group). This field allows an ARN with no <code>accountID</code> if \n      <code>PrincipalType</code> is <code>IAM_PATTERN</code>. </p>\n         <p>You can associate multiple <code>IAM</code> patterns even if the account has no principal with that name.\n      This is useful in Principal Name Sharing if you want to share a principal without creating it in the \n      account that owns the portfolio. </p>",
+                        "smithy.api#documentation": "<p>The ARN of the principal (user, role, or group). This field allows an ARN with no <code>accountID</code> if \n      <code>PrincipalType</code> is <code>IAM_PATTERN</code>. </p>\n         <p>You can associate multiple <code>IAM</code> patterns even if the account has no principal with that name.\n      This is useful in Principal Name Sharing if you want to share a principal without creating it in the \n      account that owns the portfolio. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1596,7 +1655,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ProductId": {
@@ -1644,6 +1703,9 @@
                     "target": "com.amazonaws.servicecatalog#DuplicateResourceException"
                 },
                 {
+                    "target": "com.amazonaws.servicecatalog#InvalidParametersException"
+                },
+                {
                     "target": "com.amazonaws.servicecatalog#LimitExceededException"
                 },
                 {
@@ -1681,7 +1743,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1790,7 +1852,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1842,7 +1904,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2134,7 +2196,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "SourceProductArn": {
@@ -2250,7 +2312,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PortfolioId": {
@@ -2355,7 +2417,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DisplayName": {
@@ -2452,7 +2514,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PortfolioId": {
@@ -2536,7 +2598,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Name": {
@@ -2676,7 +2738,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PlanName": {
@@ -2818,7 +2880,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ProductId": {
@@ -2927,7 +2989,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "IdempotencyToken": {
@@ -3051,7 +3113,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Id": {
@@ -3105,7 +3167,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Id": {
@@ -3159,7 +3221,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PortfolioId": {
@@ -3232,7 +3294,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Id": {
@@ -3280,7 +3342,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PlanId": {
@@ -3338,7 +3400,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ProductId": {
@@ -3400,7 +3462,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3484,7 +3546,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Id": {
@@ -3548,7 +3610,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CopyProductToken": {
@@ -3612,7 +3674,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Id": {
@@ -3890,7 +3952,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Id": {
@@ -3960,7 +4022,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Id": {
@@ -4038,7 +4100,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Id": {
@@ -4099,7 +4161,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Id": {
@@ -4166,7 +4228,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PlanId": {
@@ -4246,7 +4308,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ProvisioningArtifactId": {
@@ -4337,7 +4399,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ProductId": {
@@ -4457,7 +4519,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Id": {
@@ -4568,7 +4630,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -4603,7 +4665,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -4793,7 +4855,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PortfolioId": {
@@ -4806,7 +4868,7 @@
                 "PrincipalARN": {
                     "target": "com.amazonaws.servicecatalog#PrincipalARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the principal (IAM user, role, or group). This field allows an ARN with no <code>accountID</code> if \n         <code>PrincipalType</code> is <code>IAM_PATTERN</code>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the principal (user, role, or group). This field allows an ARN with no <code>accountID</code> if \n         <code>PrincipalType</code> is <code>IAM_PATTERN</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4857,7 +4919,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ProductId": {
@@ -4930,7 +4992,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -5045,6 +5107,57 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.servicecatalog#EngineWorkflowFailureReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\u0009\\u000a\\u000d\\u0020-\\uD7FF\\uE000-\\uFFFD]*$"
+            }
+        },
+        "com.amazonaws.servicecatalog#EngineWorkflowResourceIdentifier": {
+            "type": "structure",
+            "members": {
+                "UniqueTag": {
+                    "target": "com.amazonaws.servicecatalog#UniqueTagResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The unique key-value pair \n         for a tag \n         that identifies provisioned product resources.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The ID \n         for the provisioned product resources \n         that are part \n         of a resource group.\n      </p>"
+            }
+        },
+        "com.amazonaws.servicecatalog#EngineWorkflowStatus": {
+            "type": "enum",
+            "members": {
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.servicecatalog#EngineWorkflowToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20000
+                },
+                "smithy.api#pattern": "^[0-9A-Za-z+\\/=]+$"
+            }
+        },
         "com.amazonaws.servicecatalog#Error": {
             "type": "string"
         },
@@ -5109,7 +5222,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PlanId": {
@@ -5197,7 +5310,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Parameters": {
@@ -5433,7 +5546,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ProvisionedProductId": {
@@ -5556,7 +5669,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ProductId": {
@@ -5815,7 +5928,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PageToken": {
@@ -5893,7 +6006,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ResourceId": {
@@ -5972,7 +6085,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PortfolioId": {
@@ -6057,7 +6170,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ProductId": {
@@ -6139,7 +6252,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PortfolioId": {
@@ -6225,7 +6338,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PortfolioId": {
@@ -6332,7 +6445,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ProductId": {
@@ -6386,7 +6499,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PageToken": {
@@ -6458,7 +6571,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PortfolioId": {
@@ -6532,7 +6645,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ProvisionProductId": {
@@ -6656,7 +6769,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -6690,7 +6803,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ProductId": {
@@ -6748,7 +6861,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "AccessLevelFilter": {
@@ -6987,7 +7100,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -7021,7 +7134,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PageSize": {
@@ -7088,7 +7201,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ProvisionedProductId": {
@@ -7272,6 +7385,234 @@
                     "min": 0,
                     "max": 5
                 }
+            }
+        },
+        "com.amazonaws.servicecatalog#NotifyProvisionProductEngineWorkflowResult": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.servicecatalog#NotifyProvisionProductEngineWorkflowResultInput"
+            },
+            "output": {
+                "target": "com.amazonaws.servicecatalog#NotifyProvisionProductEngineWorkflowResultOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.servicecatalog#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.servicecatalog#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Notifies the result \n         of the provisioning engine execution.\n      </p>"
+            }
+        },
+        "com.amazonaws.servicecatalog#NotifyProvisionProductEngineWorkflowResultInput": {
+            "type": "structure",
+            "members": {
+                "WorkflowToken": {
+                    "target": "com.amazonaws.servicecatalog#EngineWorkflowToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The encrypted contents \n         of the provisioning engine execution payload \n         that Service Catalog sends \n         after the Terraform product provisioning workflow starts.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecordId": {
+                    "target": "com.amazonaws.servicecatalog#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The identifier \n         of the record.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.servicecatalog#EngineWorkflowStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The status \n         of the provisioning engine execution.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.servicecatalog#EngineWorkflowFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The reason \n         why the provisioning engine execution failed.\n      </p>"
+                    }
+                },
+                "ResourceIdentifier": {
+                    "target": "com.amazonaws.servicecatalog#EngineWorkflowResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID \n         for the provisioned product resources \n         that are part \n         of a resource group.\n      </p>"
+                    }
+                },
+                "Outputs": {
+                    "target": "com.amazonaws.servicecatalog#RecordOutputs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The output \n         of the provisioning engine execution.\n      </p>"
+                    }
+                },
+                "IdempotencyToken": {
+                    "target": "com.amazonaws.servicecatalog#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The idempotency token \n         that identifies the provisioning engine execution.\n      </p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.servicecatalog#NotifyProvisionProductEngineWorkflowResultOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.servicecatalog#NotifyTerminateProvisionedProductEngineWorkflowResult": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.servicecatalog#NotifyTerminateProvisionedProductEngineWorkflowResultInput"
+            },
+            "output": {
+                "target": "com.amazonaws.servicecatalog#NotifyTerminateProvisionedProductEngineWorkflowResultOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.servicecatalog#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.servicecatalog#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Notifies the result \n         of the terminate engine execution.\n      </p>"
+            }
+        },
+        "com.amazonaws.servicecatalog#NotifyTerminateProvisionedProductEngineWorkflowResultInput": {
+            "type": "structure",
+            "members": {
+                "WorkflowToken": {
+                    "target": "com.amazonaws.servicecatalog#EngineWorkflowToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The encrypted contents \n         of the terminate engine execution payload \n         that Service Catalog sends \n         after the Terraform product terminate workflow starts.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecordId": {
+                    "target": "com.amazonaws.servicecatalog#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The identifier \n         of the record.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.servicecatalog#EngineWorkflowStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The status \n         of the terminate engine execution.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.servicecatalog#EngineWorkflowFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The reason \n         why the terminate engine execution failed.\n      </p>"
+                    }
+                },
+                "IdempotencyToken": {
+                    "target": "com.amazonaws.servicecatalog#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The idempotency token \n         that identifies the terminate engine execution.\n      </p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.servicecatalog#NotifyTerminateProvisionedProductEngineWorkflowResultOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.servicecatalog#NotifyUpdateProvisionedProductEngineWorkflowResult": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.servicecatalog#NotifyUpdateProvisionedProductEngineWorkflowResultInput"
+            },
+            "output": {
+                "target": "com.amazonaws.servicecatalog#NotifyUpdateProvisionedProductEngineWorkflowResultOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.servicecatalog#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.servicecatalog#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Notifies the result \n         of the update engine execution.\n      </p>"
+            }
+        },
+        "com.amazonaws.servicecatalog#NotifyUpdateProvisionedProductEngineWorkflowResultInput": {
+            "type": "structure",
+            "members": {
+                "WorkflowToken": {
+                    "target": "com.amazonaws.servicecatalog#EngineWorkflowToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The encrypted contents \n         of the update engine execution payload \n         that Service Catalog sends \n         after the Terraform product update workflow starts.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecordId": {
+                    "target": "com.amazonaws.servicecatalog#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The identifier \n         of the record.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.servicecatalog#EngineWorkflowStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The status \n         of the update engine execution.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.servicecatalog#EngineWorkflowFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The reason \n         why the update engine execution failed.\n      </p>"
+                    }
+                },
+                "Outputs": {
+                    "target": "com.amazonaws.servicecatalog#RecordOutputs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The output \n         of the update engine execution.\n      </p>"
+                    }
+                },
+                "IdempotencyToken": {
+                    "target": "com.amazonaws.servicecatalog#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The idempotency token \n         that identifies the update engine execution.\n      </p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.servicecatalog#NotifyUpdateProvisionedProductEngineWorkflowResultOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalog#NullableBoolean": {
@@ -7637,7 +7978,7 @@
                 "PrincipalARN": {
                     "target": "com.amazonaws.servicecatalog#PrincipalARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the principal (IAM user, role, or group). This field allows for an ARN with no <code>accountID</code> if the\n      <code>PrincipalType</code> is an <code>IAM_PATTERN</code>. </p>"
+                        "smithy.api#documentation": "<p>The ARN of the principal (user, role, or group). This field allows for an ARN with no <code>accountID</code> if the\n      <code>PrincipalType</code> is an <code>IAM_PATTERN</code>. </p>"
                     }
                 },
                 "PrincipalType": {
@@ -7717,6 +8058,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MARKETPLACE"
+                    }
+                },
+                "DEFAULT_CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT_CUSTOM"
+                    }
+                },
+                "TERRAFORM_OPEN_SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERRAFORM_OPEN_SOURCE"
                     }
                 }
             },
@@ -8064,7 +8417,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ProductId": {
@@ -8269,13 +8622,13 @@
                 "UserArn": {
                     "target": "com.amazonaws.servicecatalog#UserArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM user.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user.</p>"
                     }
                 },
                 "UserArnSession": {
                     "target": "com.amazonaws.servicecatalog#UserArnSession",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM user in the session. This ARN might contain a session ID.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the user in the session. This ARN might contain a session ID.</p>"
                     }
                 }
             },
@@ -9090,6 +9443,18 @@
                     "traits": {
                         "smithy.api#enumValue": "MARKETPLACE_CAR"
                     }
+                },
+                "DEFAULT_CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT_CUSTOM"
+                    }
+                },
+                "TERRAFORM_OPEN_SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERRAFORM_OPEN_SOURCE"
+                    }
                 }
             }
         },
@@ -9467,7 +9832,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PortfolioId": {
@@ -9860,7 +10225,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "AccessLevelFilter": {
@@ -9972,7 +10337,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PortfolioId": {
@@ -10049,7 +10414,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Filters": {
@@ -10142,7 +10507,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "AccessLevelFilter": {
@@ -10284,6 +10649,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "THROTTLING"
+                    }
+                },
+                "InvalidParameterException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_PARAMETER"
                     }
                 }
             }
@@ -11075,7 +11446,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "RetainPhysicalResources": {
@@ -11110,6 +11481,46 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.servicecatalog#UniqueTagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)$"
+            }
+        },
+        "com.amazonaws.servicecatalog#UniqueTagResourceIdentifier": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.servicecatalog#UniqueTagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A unique key \n         that's attached \n         to a resource.\n      </p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.servicecatalog#UniqueTagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A unique value \n         that's attached \n         to a resource.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The unique key-value pair \n         for a tag \n         that identifies provisioned product resources.\n      </p>"
+            }
+        },
+        "com.amazonaws.servicecatalog#UniqueTagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)$"
+            }
+        },
         "com.amazonaws.servicecatalog#UpdateConstraint": {
             "type": "operation",
             "input": {
@@ -11136,7 +11547,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Id": {
@@ -11221,7 +11632,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Id": {
@@ -11318,7 +11729,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PortfolioId": {
@@ -11403,7 +11814,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Id": {
@@ -11524,7 +11935,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ProvisionedProductName": {
@@ -11649,7 +12060,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ProvisionedProductId": {
@@ -11662,7 +12073,7 @@
                 "ProvisionedProductProperties": {
                     "target": "com.amazonaws.servicecatalog#ProvisionedProductProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map that contains the provisioned product properties to be updated.</p>\n         <p>The <code>LAUNCH_ROLE</code> key accepts role ARNs. This key allows an\n         administrator to call <code>UpdateProvisionedProductProperties</code> to update the launch\n         role that is associated with a provisioned product. This role is used when an end user\n         calls a provisioning operation such as <code>UpdateProvisionedProduct</code>,\n            <code>TerminateProvisionedProduct</code>, or\n            <code>ExecuteProvisionedProductServiceAction</code>. Only a role ARN is valid. A user ARN is invalid. </p>\n         <p>The <code>OWNER</code> key accepts IAM user ARNs, IAM role ARNs, and STS \n         assumed-role ARNs. The owner is the user that has permission to see, update, terminate, and \n         execute service actions in the provisioned product.</p>\n         <p>The administrator can change the owner of a provisioned product to another IAM or STS entity within the \n         same account. Both end user owners and administrators can see ownership history of the provisioned \n         product using the <code>ListRecordHistory</code> API. The new owner can describe all past records \n         for the provisioned product using the <code>DescribeRecord</code> API. The previous owner can no \n         longer use <code>DescribeRecord</code>, but can still see the product's history from when he was \n         an owner using <code>ListRecordHistory</code>.</p>\n         <p>If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or \n         Service Catalog console such as update, terminate, and execute service actions. \n         If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through \n         API or the Service Catalog console on that provisioned product.</p>",
+                        "smithy.api#documentation": "<p>A map that contains the provisioned product properties to be updated.</p>\n         <p>The <code>LAUNCH_ROLE</code> key accepts role ARNs. This key allows an\n         administrator to call <code>UpdateProvisionedProductProperties</code> to update the launch\n         role that is associated with a provisioned product. This role is used when an end user\n         calls a provisioning operation such as <code>UpdateProvisionedProduct</code>,\n            <code>TerminateProvisionedProduct</code>, or\n            <code>ExecuteProvisionedProductServiceAction</code>. Only a role ARN is valid. A user ARN is invalid. </p>\n         <p>The <code>OWNER</code> key accepts user ARNs, IAM role ARNs, and STS \n         assumed-role ARNs. The owner is the user that has permission to see, update, terminate, and \n         execute service actions in the provisioned product.</p>\n         <p>The administrator can change the owner of a provisioned product to another IAM or STS entity within the \n         same account. Both end user owners and administrators can see ownership history of the provisioned \n         product using the <code>ListRecordHistory</code> API. The new owner can describe all past records \n         for the provisioned product using the <code>DescribeRecord</code> API. The previous owner can no \n         longer use <code>DescribeRecord</code>, but can still see the product's history from when he was \n         an owner using <code>ListRecordHistory</code>.</p>\n         <p>If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or \n         Service Catalog console such as update, terminate, and execute service actions. \n         If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through \n         API or the Service Catalog console on that provisioned product.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11737,7 +12148,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ProductId": {
@@ -11943,7 +12354,7 @@
                 "AcceptLanguage": {
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code> - English (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
                 }
             },
