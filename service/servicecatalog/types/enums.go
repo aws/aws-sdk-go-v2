@@ -120,6 +120,24 @@ func (DescribePortfolioShareType) Values() []DescribePortfolioShareType {
 	}
 }
 
+type EngineWorkflowStatus string
+
+// Enum values for EngineWorkflowStatus
+const (
+	EngineWorkflowStatusSucceeded EngineWorkflowStatus = "SUCCEEDED"
+	EngineWorkflowStatusFailed    EngineWorkflowStatus = "FAILED"
+)
+
+// Values returns all known values for EngineWorkflowStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EngineWorkflowStatus) Values() []EngineWorkflowStatus {
+	return []EngineWorkflowStatus{
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type EvaluationType string
 
 // Enum values for EvaluationType
@@ -236,6 +254,8 @@ type ProductType string
 const (
 	ProductTypeCloudFormationTemplate ProductType = "CLOUD_FORMATION_TEMPLATE"
 	ProductTypeMarketplace            ProductType = "MARKETPLACE"
+	ProductTypeDefaultCustom          ProductType = "DEFAULT_CUSTOM"
+	ProductTypeTerraformOpenSource    ProductType = "TERRAFORM_OPEN_SOURCE"
 )
 
 // Values returns all known values for ProductType. Note that this can be expanded
@@ -245,6 +265,8 @@ func (ProductType) Values() []ProductType {
 	return []ProductType{
 		"CLOUD_FORMATION_TEMPLATE",
 		"MARKETPLACE",
+		"DEFAULT_CUSTOM",
+		"TERRAFORM_OPEN_SOURCE",
 	}
 }
 
@@ -433,6 +455,8 @@ const (
 	ProvisioningArtifactTypeCloudFormationTemplate ProvisioningArtifactType = "CLOUD_FORMATION_TEMPLATE"
 	ProvisioningArtifactTypeMarketplaceAmi         ProvisioningArtifactType = "MARKETPLACE_AMI"
 	ProvisioningArtifactTypeMarketplaceCar         ProvisioningArtifactType = "MARKETPLACE_CAR"
+	ProvisioningArtifactTypeDefaultCustom          ProvisioningArtifactType = "DEFAULT_CUSTOM"
+	ProvisioningArtifactTypeTerraformOpenSource    ProvisioningArtifactType = "TERRAFORM_OPEN_SOURCE"
 )
 
 // Values returns all known values for ProvisioningArtifactType. Note that this can
@@ -443,6 +467,8 @@ func (ProvisioningArtifactType) Values() []ProvisioningArtifactType {
 		"CLOUD_FORMATION_TEMPLATE",
 		"MARKETPLACE_AMI",
 		"MARKETPLACE_CAR",
+		"DEFAULT_CUSTOM",
+		"TERRAFORM_OPEN_SOURCE",
 	}
 }
 
@@ -545,6 +571,7 @@ const (
 	ServiceActionAssociationErrorCodeLimitExceededException     ServiceActionAssociationErrorCode = "LIMIT_EXCEEDED"
 	ServiceActionAssociationErrorCodeResourceNotFoundException  ServiceActionAssociationErrorCode = "RESOURCE_NOT_FOUND"
 	ServiceActionAssociationErrorCodeThrottlingException        ServiceActionAssociationErrorCode = "THROTTLING"
+	ServiceActionAssociationErrorCodeInvalidParameterException  ServiceActionAssociationErrorCode = "INVALID_PARAMETER"
 )
 
 // Values returns all known values for ServiceActionAssociationErrorCode. Note that
@@ -558,6 +585,7 @@ func (ServiceActionAssociationErrorCode) Values() []ServiceActionAssociationErro
 		"LIMIT_EXCEEDED",
 		"RESOURCE_NOT_FOUND",
 		"THROTTLING",
+		"INVALID_PARAMETER",
 	}
 }
 

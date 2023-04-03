@@ -55,6 +55,9 @@ type RegisterResourceInput struct {
 	// (https://docs.aws.amazon.com/lake-formation/latest/dg/service-linked-roles.html).
 	UseServiceLinkedRole *bool
 
+	// Whether or not the resource is a federated resource.
+	WithFederation *bool
+
 	noSmithyDocumentSerde
 }
 

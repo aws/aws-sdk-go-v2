@@ -128,6 +128,16 @@ type ConstraintSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The ID for the provisioned product resources that are part of a resource group.
+type EngineWorkflowResourceIdentifier struct {
+
+	// The unique key-value pair for a tag that identifies provisioned product
+	// resources.
+	UniqueTag *UniqueTagResourceIdentifier
+
+	noSmithyDocumentSerde
+}
+
 // Details of an execution parameter value that is passed to a self-service action
 // when executed on a provisioned product.
 type ExecutionParameter struct {
@@ -370,8 +380,8 @@ type PortfolioShareDetail struct {
 // Information about a principal.
 type Principal struct {
 
-	// The ARN of the principal (IAM user, role, or group). This field allows for an
-	// ARN with no accountID if the PrincipalType is an IAM_PATTERN.
+	// The ARN of the principal (user, role, or group). This field allows for an ARN
+	// with no accountID if the PrincipalType is an IAM_PATTERN.
 	PrincipalARN *string
 
 	// The principal type. The supported value is IAM if you use a fully defined ARN,
@@ -575,10 +585,10 @@ type ProvisionedProductAttribute struct {
 	// CFN_STACKSET.
 	Type *string
 
-	// The Amazon Resource Name (ARN) of the IAM user.
+	// The Amazon Resource Name (ARN) of the user.
 	UserArn *string
 
-	// The ARN of the IAM user in the session. This ARN might contain a session ID.
+	// The ARN of the user in the session. This ARN might contain a session ID.
 	UserArnSession *string
 
 	noSmithyDocumentSerde
@@ -1468,6 +1478,19 @@ type TagOptionSummary struct {
 
 	// The TagOption value.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// The unique key-value pair for a tag that identifies provisioned product
+// resources.
+type UniqueTagResourceIdentifier struct {
+
+	// A unique key that's attached to a resource.
+	Key *string
+
+	// A unique value that's attached to a resource.
+	Value *string
 
 	noSmithyDocumentSerde
 }

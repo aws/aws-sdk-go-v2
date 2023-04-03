@@ -43,23 +43,22 @@ type PutPermissionPolicyInput struct {
 	// conform to the following:
 	//
 	// * The policy must be composed using IAM Policy
-	// version 2012-10-17 or version 2015-01-01.
+	// version 2012-10-17.
 	//
-	// * The policy must include
-	// specifications for Effect, Action, and Principal.
+	// * The policy must include specifications for Effect,
+	// Action, and Principal.
 	//
-	// * Effect must specify
-	// Allow.
+	// * Effect must specify Allow.
 	//
-	// * Action must specify wafv2:CreateWebACL, wafv2:UpdateWebACL, and
-	// wafv2:PutFirewallManagerRuleGroups and may optionally specify
-	// wafv2:GetRuleGroup. WAF rejects any extra actions or wildcard actions in the
-	// policy.
+	// * Action must specify
+	// wafv2:CreateWebACL, wafv2:UpdateWebACL, and wafv2:PutFirewallManagerRuleGroups
+	// and may optionally specify wafv2:GetRuleGroup. WAF rejects any extra actions or
+	// wildcard actions in the policy.
 	//
-	// * The policy must not include a Resource parameter.
+	// * The policy must not include a Resource
+	// parameter.
 	//
-	// For more
-	// information, see IAM Policies
+	// For more information, see IAM Policies
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html).
 	//
 	// This member is required.

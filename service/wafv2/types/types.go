@@ -39,8 +39,7 @@ type AllowAction struct {
 	// Defines custom handling for the web request. For information about customizing
 	// web requests and responses, see Customizing web requests and responses in WAF
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
-	// in the WAF Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	// in the WAF Developer Guide.
 	CustomRequestHandling *CustomRequestHandling
 
 	noSmithyDocumentSerde
@@ -62,6 +61,24 @@ type AndStatement struct {
 	//
 	// This member is required.
 	Statements []Statement
+
+	noSmithyDocumentSerde
+}
+
+// Specifies custom configurations for the associations between the web ACL and
+// protected resources. Use this to customize the maximum size of the request body
+// that your protected CloudFront distributions forward to WAF for inspection. The
+// default is 16 KB (16,384 kilobytes). You are charged additional fees when your
+// protected resources forward body sizes that are larger than the default. For
+// more information, see WAF Pricing (http://aws.amazon.com/waf/pricing/).
+type AssociationConfig struct {
+
+	// Customizes the maximum size of the request body that your protected CloudFront
+	// distributions forward to WAF for inspection. The default size is 16 KB (16,384
+	// kilobytes). You are charged additional fees when your protected resources
+	// forward body sizes that are larger than the default. For more information, see
+	// WAF Pricing (http://aws.amazon.com/waf/pricing/).
+	RequestBody map[string]RequestBodyAssociatedResourceTypeConfig
 
 	noSmithyDocumentSerde
 }
@@ -103,7 +120,8 @@ type AWSManagedRulesBotControlRuleSet struct {
 	// the least expensive. The targeted level includes all common level rules and adds
 	// rules with more advanced inspection criteria. For details, see WAF Bot Control
 	// rule group
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-bot.html).
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-bot.html)
+	// in the WAF Developer Guide.
 	//
 	// This member is required.
 	InspectionLevel InspectionLevel
@@ -120,8 +138,7 @@ type BlockAction struct {
 	// Defines a custom response for the web request. For information about customizing
 	// web requests and responses, see Customizing web requests and responses in WAF
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
-	// in the WAF Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	// in the WAF Developer Guide.
 	CustomResponse *CustomResponse
 
 	noSmithyDocumentSerde
@@ -133,9 +150,13 @@ type BlockAction struct {
 type Body struct {
 
 	// What WAF should do if the body is larger than WAF can inspect. WAF does not
-	// support inspecting the entire contents of the body of a web request when the
-	// body exceeds 8 KB (8192 bytes). Only the first 8 KB of the request body are
-	// forwarded to WAF by the underlying host service. The options for oversize
+	// support inspecting the entire contents of the web request body if the body
+	// exceeds the limit for the resource type. If the body is larger than the limit,
+	// the underlying host service only forwards the contents that are below the limit
+	// to WAF for inspection. The default limit is 8 KB (8,192 kilobytes) for regional
+	// resources and 16 KB (16,384 kilobytes) for CloudFront distributions. For
+	// CloudFront distributions, you can increase the limit in the web ACL
+	// AssociationConfig, for additional processing fees. The options for oversize
 	// handling are the following:
 	//
 	// * CONTINUE - Inspect the body normally, according
@@ -149,8 +170,8 @@ type Body struct {
 	//
 	// You can combine the
 	// MATCH or NO_MATCH settings for oversize handling with your rule and web ACL
-	// action settings, so that you block any request whose body is over 8 KB. Default:
-	// CONTINUE
+	// action settings, so that you block any request whose body is over the limit.
+	// Default: CONTINUE
 	OversizeHandling OversizeHandling
 
 	noSmithyDocumentSerde
@@ -267,8 +288,7 @@ type CaptchaAction struct {
 	// about customizing web requests and responses, see Customizing web requests and
 	// responses in WAF
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
-	// in the WAF Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	// in the WAF Developer Guide.
 	CustomRequestHandling *CustomRequestHandling
 
 	noSmithyDocumentSerde
@@ -345,8 +365,7 @@ type ChallengeAction struct {
 	// about customizing web requests and responses, see Customizing web requests and
 	// responses in WAF
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
-	// in the WAF Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	// in the WAF Developer Guide.
 	CustomRequestHandling *CustomRequestHandling
 
 	noSmithyDocumentSerde
@@ -468,8 +487,7 @@ type CountAction struct {
 	// Defines custom handling for the web request. For information about customizing
 	// web requests and responses, see Customizing web requests and responses in WAF
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
-	// in the WAF Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	// in the WAF Developer Guide.
 	CustomRequestHandling *CustomRequestHandling
 
 	noSmithyDocumentSerde
@@ -501,16 +519,14 @@ type CustomHTTPHeader struct {
 // and AllowAction. For information about customizing web requests and responses,
 // see Customizing web requests and responses in WAF
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
-// in the WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// in the WAF Developer Guide.
 type CustomRequestHandling struct {
 
 	// The HTTP headers to insert into the request. Duplicate header names are not
 	// allowed. For information about the limits on count and size for custom request
 	// and response settings, see WAF quotas
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html) in the WAF
-	// Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	// Developer Guide.
 	//
 	// This member is required.
 	InsertHeaders []CustomHTTPHeader
@@ -523,16 +539,14 @@ type CustomRequestHandling struct {
 // information about customizing web requests and responses, see Customizing web
 // requests and responses in WAF
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
-// in the WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// in the WAF Developer Guide.
 type CustomResponse struct {
 
 	// The HTTP status code to return to the client. For a list of status codes that
 	// you can use in your custom responses, see Supported status codes for custom
 	// response
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/customizing-the-response-status-codes.html)
-	// in the WAF Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	// in the WAF Developer Guide.
 	//
 	// This member is required.
 	ResponseCode *int32
@@ -549,8 +563,7 @@ type CustomResponse struct {
 	// For information about the limits on count and size for custom request and
 	// response settings, see WAF quotas
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html) in the WAF
-	// Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	// Developer Guide.
 	ResponseHeaders []CustomHTTPHeader
 
 	noSmithyDocumentSerde
@@ -565,8 +578,7 @@ type CustomResponseBody struct {
 	// For information about the limits on count and size for custom request and
 	// response settings, see WAF quotas
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html) in the WAF
-	// Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	// Developer Guide.
 	//
 	// This member is required.
 	Content *string
@@ -622,9 +634,12 @@ type FieldToMatch struct {
 	// Inspect the request body as plain text. The request body immediately follows the
 	// request headers. This is the part of a request that contains any additional data
 	// that you want to send to your web server as the HTTP request body, such as data
-	// from a form. Only the first 8 KB (8192 bytes) of the request body are forwarded
-	// to WAF for inspection by the underlying host service. For information about how
-	// to handle oversized request bodies, see the Body object configuration.
+	// from a form. A limited amount of the request body is forwarded to WAF for
+	// inspection by the underlying host service. For regional resources, the limit is
+	// 8 KB (8,192 kilobytes) and for CloudFront distributions, the limit is 16 KB
+	// (16,384 kilobytes). For CloudFront distributions, you can increase the limit in
+	// the web ACL's AssociationConfig, for additional processing fees. For information
+	// about how to handle oversized request bodies, see the Body object configuration.
 	Body *Body
 
 	// Inspect the request cookies. You must configure scope and pattern matching
@@ -648,9 +663,13 @@ type FieldToMatch struct {
 	// Inspect the request body as JSON. The request body immediately follows the
 	// request headers. This is the part of a request that contains any additional data
 	// that you want to send to your web server as the HTTP request body, such as data
-	// from a form. Only the first 8 KB (8192 bytes) of the request body are forwarded
-	// to WAF for inspection by the underlying host service. For information about how
-	// to handle oversized request bodies, see the JsonBody object configuration.
+	// from a form. A limited amount of the request body is forwarded to WAF for
+	// inspection by the underlying host service. For regional resources, the limit is
+	// 8 KB (8,192 kilobytes) and for CloudFront distributions, the limit is 16 KB
+	// (16,384 kilobytes). For CloudFront distributions, you can increase the limit in
+	// the web ACL's AssociationConfig, for additional processing fees. For information
+	// about how to handle oversized request bodies, see the JsonBody object
+	// configuration.
 	JsonBody *JsonBody
 
 	// Inspect the HTTP method. The method indicates the type of operation that the
@@ -748,26 +767,16 @@ type FirewallManagerRuleGroup struct {
 }
 
 // The processing guidance for an Firewall Manager rule. This is like a regular
-// rule Statement, but it can only contain a rule group reference.
+// rule Statement, but it can only contain a single rule group reference.
 type FirewallManagerStatement struct {
 
-	// A rule statement used to run the rules that are defined in a managed rule group.
-	// To use this, provide the vendor name and the name of the rule group in this
-	// statement. You can retrieve the required names by calling
-	// ListAvailableManagedRuleGroups. You cannot nest a ManagedRuleGroupStatement, for
-	// example for use inside a NotStatement or OrStatement. It can only be referenced
-	// as a top-level statement within a rule. You are charged additional fees when you
-	// use the WAF Bot Control managed rule group AWSManagedRulesBotControlRuleSet or
-	// the WAF Fraud Control account takeover prevention (ATP) managed rule group
-	// AWSManagedRulesATPRuleSet. For more information, see WAF Pricing
-	// (http://aws.amazon.com/waf/pricing/).
+	// A statement used by Firewall Manager to run the rules that are defined in a
+	// managed rule group. This is managed by Firewall Manager for an Firewall Manager
+	// WAF policy.
 	ManagedRuleGroupStatement *ManagedRuleGroupStatement
 
-	// A rule statement used to run the rules that are defined in a RuleGroup. To use
-	// this, create a rule group with your rules, then provide the ARN of the rule
-	// group in this statement. You cannot nest a RuleGroupReferenceStatement, for
-	// example for use inside a NotStatement or OrStatement. You can only use a rule
-	// group reference statement at the top level inside a web ACL.
+	// A statement used by Firewall Manager to run the rules that are defined in a rule
+	// group. This is managed by Firewall Manager for an Firewall Manager WAF policy.
 	RuleGroupReferenceStatement *RuleGroupReferenceStatement
 
 	noSmithyDocumentSerde
@@ -1229,9 +1238,13 @@ type JsonBody struct {
 	InvalidFallbackBehavior BodyParsingFallbackBehavior
 
 	// What WAF should do if the body is larger than WAF can inspect. WAF does not
-	// support inspecting the entire contents of the body of a web request when the
-	// body exceeds 8 KB (8192 bytes). Only the first 8 KB of the request body are
-	// forwarded to WAF by the underlying host service. The options for oversize
+	// support inspecting the entire contents of the web request body if the body
+	// exceeds the limit for the resource type. If the body is larger than the limit,
+	// the underlying host service only forwards the contents that are below the limit
+	// to WAF for inspection. The default limit is 8 KB (8,192 kilobytes) for regional
+	// resources and 16 KB (16,384 kilobytes) for CloudFront distributions. For
+	// CloudFront distributions, you can increase the limit in the web ACL
+	// AssociationConfig, for additional processing fees. The options for oversize
 	// handling are the following:
 	//
 	// * CONTINUE - Inspect the body normally, according
@@ -1245,8 +1258,8 @@ type JsonBody struct {
 	//
 	// You can combine the
 	// MATCH or NO_MATCH settings for oversize handling with your rule and web ACL
-	// action settings, so that you block any request whose body is over 8 KB. Default:
-	// CONTINUE
+	// action settings, so that you block any request whose body is over the limit.
+	// Default: CONTINUE
 	OversizeHandling OversizeHandling
 
 	noSmithyDocumentSerde
@@ -1728,7 +1741,10 @@ type ManagedRuleSetVersion struct {
 	// type, to reflect the relative cost of each rule. Simple rules that cost little
 	// to run use fewer WCUs than more complex rules that use more processing power.
 	// Rule group capacity is fixed at creation, which helps users plan their web ACL
-	// WCU usage when they use a rule group. The WCU limit for web ACLs is 1,500.
+	// WCU usage when they use a rule group. For more information, see WAF web ACL
+	// capacity units (WCU)
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/aws-waf-capacity-units.html)
+	// in the WAF Developer Guide.
 	Capacity int64
 
 	// The time that this version is set to expire. Times are in Coordinated Universal
@@ -2082,6 +2098,25 @@ type ReleaseSummary struct {
 
 	// The timestamp of the release.
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Customizes the maximum size of the request body that your protected CloudFront
+// distributions forward to WAF for inspection. The default size is 16 KB (16,384
+// kilobytes). You are charged additional fees when your protected resources
+// forward body sizes that are larger than the default. For more information, see
+// WAF Pricing (http://aws.amazon.com/waf/pricing/). This is used in the
+// AssociationConfig of the web ACL.
+type RequestBodyAssociatedResourceTypeConfig struct {
+
+	// Specifies the maximum size of the web request body component that an associated
+	// CloudFront distribution should send to WAF for inspection. This applies to
+	// statements in the web ACL that inspect the body or JSON body. Default: 16 KB
+	// (16,384 kilobytes)
+	//
+	// This member is required.
+	DefaultSizeInspectionLimit SizeInspectionLimit
 
 	noSmithyDocumentSerde
 }
@@ -2443,7 +2478,10 @@ type RuleGroup struct {
 	// type, to reflect the relative cost of each rule. Simple rules that cost little
 	// to run use fewer WCUs than more complex rules that use more processing power.
 	// Rule group capacity is fixed at creation, which helps users plan their web ACL
-	// WCU usage when they use a rule group. The WCU limit for web ACLs is 1,500.
+	// WCU usage when they use a rule group. For more information, see WAF web ACL
+	// capacity units (WCU)
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/aws-waf-capacity-units.html)
+	// in the WAF Developer Guide.
 	//
 	// This member is required.
 	Capacity int64
@@ -2480,13 +2518,10 @@ type RuleGroup struct {
 	// rule group. For information about customizing web requests and responses, see
 	// Customizing web requests and responses in WAF
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
-	// in the WAF Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). For
-	// information about the limits on count and size for custom request and response
-	// settings, see WAF quotas
+	// in the WAF Developer Guide. For information about the limits on count and size
+	// for custom request and response settings, see WAF quotas
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html) in the WAF
-	// Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	// Developer Guide.
 	CustomResponseBodies map[string]CustomResponseBody
 
 	// A description of the rule group that helps with identification.
@@ -2684,9 +2719,13 @@ type SingleQueryArgument struct {
 // component, using a comparison operator, such as greater than (>) or less than
 // (<). For example, you can use a size constraint statement to look for query
 // strings that are longer than 100 bytes. If you configure WAF to inspect the
-// request body, WAF inspects only the first 8192 bytes (8 KB). If the request body
-// for your web requests never exceeds 8192 bytes, you could use a size constraint
-// statement to block requests that have a request body greater than 8192 bytes. If
+// request body, WAF inspects only the number of bytes of the body up to the limit
+// for the web ACL. By default, for regional web ACLs, this limit is 8 KB (8,192
+// kilobytes) and for CloudFront web ACLs, this limit is 16 KB (16,384 kilobytes).
+// For CloudFront web ACLs, you can increase the limit in the web ACL
+// AssociationConfig, for additional fees. If you know that the request body for
+// your web requests should never exceed the inspection limit, you could use a size
+// constraint statement to block requests that have a larger request body size. If
 // you choose URI for the value of Part of the request to filter on, the slash (/)
 // in the URI counts as one character. For example, the URI /logo.jpg is nine
 // characters long.
@@ -2898,9 +2937,13 @@ type Statement struct {
 	// component, using a comparison operator, such as greater than (>) or less than
 	// (<). For example, you can use a size constraint statement to look for query
 	// strings that are longer than 100 bytes. If you configure WAF to inspect the
-	// request body, WAF inspects only the first 8192 bytes (8 KB). If the request body
-	// for your web requests never exceeds 8192 bytes, you could use a size constraint
-	// statement to block requests that have a request body greater than 8192 bytes. If
+	// request body, WAF inspects only the number of bytes of the body up to the limit
+	// for the web ACL. By default, for regional web ACLs, this limit is 8 KB (8,192
+	// kilobytes) and for CloudFront web ACLs, this limit is 16 KB (16,384 kilobytes).
+	// For CloudFront web ACLs, you can increase the limit in the web ACL
+	// AssociationConfig, for additional fees. If you know that the request body for
+	// your web requests should never exceed the inspection limit, you could use a size
+	// constraint statement to block requests that have a larger request body size. If
 	// you choose URI for the value of Part of the request to filter on, the slash (/)
 	// in the URI counts as one character. For example, the URI /logo.jpg is nine
 	// characters long.
@@ -3163,7 +3206,8 @@ type VisibilityConfig struct {
 
 	// A boolean indicating whether the associated resource sends metrics to Amazon
 	// CloudWatch. For the list of available metrics, see WAF Metrics
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics).
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics)
+	// in the WAF Developer Guide.
 	//
 	// This member is required.
 	CloudWatchMetricsEnabled bool
@@ -3193,7 +3237,7 @@ type VisibilityConfig struct {
 // and managed rule group. You can associate a web ACL with one or more Amazon Web
 // Services resources to protect. The resources can be an Amazon CloudFront
 // distribution, an Amazon API Gateway REST API, an Application Load Balancer, an
-// AppSync GraphQL API, Amazon Cognito user pool, or an App Runner service.
+// AppSync GraphQL API, an Amazon Cognito user pool, or an App Runner service.
 type WebACL struct {
 
 	// The Amazon Resource Name (ARN) of the web ACL that you want to associate with
@@ -3225,14 +3269,24 @@ type WebACL struct {
 	// This member is required.
 	VisibilityConfig *VisibilityConfig
 
+	// Specifies custom configurations for the associations between the web ACL and
+	// protected resources. Use this to customize the maximum size of the request body
+	// that your protected CloudFront distributions forward to WAF for inspection. The
+	// default is 16 KB (16,384 kilobytes). You are charged additional fees when your
+	// protected resources forward body sizes that are larger than the default. For
+	// more information, see WAF Pricing (http://aws.amazon.com/waf/pricing/).
+	AssociationConfig *AssociationConfig
+
 	// The web ACL capacity units (WCUs) currently being used by this web ACL. WAF uses
 	// WCUs to calculate and control the operating resources that are used to run your
 	// rules, rule groups, and web ACLs. WAF calculates capacity differently for each
 	// rule type, to reflect the relative cost of each rule. Simple rules that cost
 	// little to run use fewer WCUs than more complex rules that use more processing
 	// power. Rule group capacity is fixed at creation, which helps users plan their
-	// web ACL WCU usage when they use a rule group. The WCU limit for web ACLs is
-	// 1,500.
+	// web ACL WCU usage when they use a rule group. For more information, see WAF web
+	// ACL capacity units (WCU)
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/aws-waf-capacity-units.html)
+	// in the WAF Developer Guide.
 	Capacity int64
 
 	// Specifies how WAF should handle CAPTCHA evaluations for rules that don't have
@@ -3251,13 +3305,10 @@ type WebACL struct {
 	// you define in the web ACL. For information about customizing web requests and
 	// responses, see Customizing web requests and responses in WAF
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
-	// in the WAF Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). For
-	// information about the limits on count and size for custom request and response
-	// settings, see WAF quotas
+	// in the WAF Developer Guide. For information about the limits on count and size
+	// for custom request and response settings, see WAF quotas
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html) in the WAF
-	// Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	// Developer Guide.
 	CustomResponseBodies map[string]CustomResponseBody
 
 	// A description of the web ACL that helps with identification.

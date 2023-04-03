@@ -1,0 +1,8 @@
+{
+    "id": "9c870b52-695d-4b10-b55c-0d1c390e9910",
+    "type": "feature",
+    "description": "Add support for database-level federation",
+    "modules": [
+        "service/glue"
+    ]
+}

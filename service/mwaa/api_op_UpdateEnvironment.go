@@ -36,7 +36,7 @@ type UpdateEnvironmentInput struct {
 	Name *string
 
 	// A list of key-value pairs containing the Apache Airflow configuration options
-	// you want to attach to your environment. To learn more, see Apache Airflow
+	// you want to attach to your environment. For more information, see Apache Airflow
 	// configuration options
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html).
 	AirflowConfigurationOptions map[string]string
@@ -46,19 +46,19 @@ type UpdateEnvironmentInput struct {
 	AirflowVersion *string
 
 	// The relative path to the DAGs folder on your Amazon S3 bucket. For example,
-	// dags. To learn more, see Adding or updating DAGs
+	// dags. For more information, see Adding or updating DAGs
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html).
 	DagS3Path *string
 
-	// The environment class type. Valid values: mw1.small, mw1.medium, mw1.large. To
-	// learn more, see Amazon MWAA environment class
+	// The environment class type. Valid values: mw1.small, mw1.medium, mw1.large. For
+	// more information, see Amazon MWAA environment class
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html).
 	EnvironmentClass *string
 
 	// The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to
 	// access Amazon Web Services resources in your environment. For example,
-	// arn:aws:iam::123456789:role/my-execution-role. To learn more, see Amazon MWAA
-	// Execution role
+	// arn:aws:iam::123456789:role/my-execution-role. For more information, see Amazon
+	// MWAA Execution role
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html).
 	ExecutionRoleArn *string
 
@@ -80,32 +80,32 @@ type UpdateEnvironmentInput struct {
 	MinWorkers *int32
 
 	// The VPC networking components used to secure and enable network traffic between
-	// the Amazon Web Services resources for your environment. To learn more, see About
-	// networking on Amazon MWAA
+	// the Amazon Web Services resources for your environment. For more information,
+	// see About networking on Amazon MWAA
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html).
 	NetworkConfiguration *types.UpdateNetworkConfigurationInput
 
-	// The version of the plugins.zip file on your Amazon S3 bucket. A version must be
-	// specified each time a plugins.zip file is updated. To learn more, see How S3
-	// Versioning works
+	// The version of the plugins.zip file on your Amazon S3 bucket. You must specify a
+	// version each time a plugins.zip file is updated. For more information, see How
+	// S3 Versioning works
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html).
 	PluginsS3ObjectVersion *string
 
 	// The relative path to the plugins.zip file on your Amazon S3 bucket. For example,
-	// plugins.zip. If specified, then the plugins.zip version is required. To learn
-	// more, see Installing custom plugins
+	// plugins.zip. If specified, then the plugins.zip version is required. For more
+	// information, see Installing custom plugins
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html).
 	PluginsS3Path *string
 
-	// The version of the requirements.txt file on your Amazon S3 bucket. A version
-	// must be specified each time a requirements.txt file is updated. To learn more,
-	// see How S3 Versioning works
+	// The version of the requirements.txt file on your Amazon S3 bucket. You must
+	// specify a version each time a requirements.txt file is updated. For more
+	// information, see How S3 Versioning works
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html).
 	RequirementsS3ObjectVersion *string
 
 	// The relative path to the requirements.txt file on your Amazon S3 bucket. For
-	// example, requirements.txt. If specified, then a file version is required. To
-	// learn more, see Installing Python dependencies
+	// example, requirements.txt. If specified, then a file version is required. For
+	// more information, see Installing Python dependencies
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html).
 	RequirementsS3Path *string
 
@@ -114,13 +114,33 @@ type UpdateEnvironmentInput struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and
 	// supporting files are stored. For example,
-	// arn:aws:s3:::my-airflow-bucket-unique-name. To learn more, see Create an Amazon
-	// S3 bucket for Amazon MWAA
+	// arn:aws:s3:::my-airflow-bucket-unique-name. For more information, see Create an
+	// Amazon S3 bucket for Amazon MWAA
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html).
 	SourceBucketArn *string
 
-	// The Apache Airflow Web server access mode. To learn more, see Apache Airflow
-	// access modes
+	// The version of the startup shell script in your Amazon S3 bucket. You must
+	// specify the version ID
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html)
+	// that Amazon S3 assigns to the file every time you update the script. Version IDs
+	// are Unicode, UTF-8 encoded, URL-ready, opaque strings that are no more than
+	// 1,024 bytes long. The following is an example:
+	// 3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo For more
+	// information, see Using a startup script
+	// (https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html).
+	StartupScriptS3ObjectVersion *string
+
+	// The relative path to the startup shell script in your Amazon S3 bucket. For
+	// example, s3://mwaa-environment/startup.sh. Amazon MWAA runs the script as your
+	// environment starts, and before running the Apache Airflow process. You can use
+	// this script to install dependencies, modify Apache Airflow configuration
+	// options, and set environment variables. For more information, see Using a
+	// startup script
+	// (https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html).
+	StartupScriptS3Path *string
+
+	// The Apache Airflow Web server access mode. For more information, see Apache
+	// Airflow access modes
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html).
 	WebserverAccessMode types.WebserverAccessMode
 

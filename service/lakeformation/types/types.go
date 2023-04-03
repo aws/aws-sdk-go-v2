@@ -608,6 +608,9 @@ type ResourceInfo struct {
 	// The IAM role that registered a resource.
 	RoleArn *string
 
+	// Whether or not the resource is a federated resource.
+	WithFederation *bool
+
 	noSmithyDocumentSerde
 }
 

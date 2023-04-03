@@ -13069,6 +13069,13 @@ func awsAwsjson11_serializeDocumentDatabaseInput(v *types.DatabaseInput, value s
 		ok.String(*v.Description)
 	}
 
+	if v.FederatedDatabase != nil {
+		ok := object.Key("FederatedDatabase")
+		if err := awsAwsjson11_serializeDocumentFederatedDatabase(v.FederatedDatabase, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LocationUri != nil {
 		ok := object.Key("LocationUri")
 		ok.String(*v.LocationUri)
@@ -14061,6 +14068,23 @@ func awsAwsjson11_serializeDocumentExecutionProperty(v *types.ExecutionProperty,
 	if v.MaxConcurrentRuns != 0 {
 		ok := object.Key("MaxConcurrentRuns")
 		ok.Integer(v.MaxConcurrentRuns)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFederatedDatabase(v *types.FederatedDatabase, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConnectionName != nil {
+		ok := object.Key("ConnectionName")
+		ok.String(*v.ConnectionName)
+	}
+
+	if v.Identifier != nil {
+		ok := object.Key("Identifier")
+		ok.String(*v.Identifier)
 	}
 
 	return nil

@@ -39,8 +39,6 @@ type ListPortfolioAccessInput struct {
 
 	// The language code.
 	//
-	// * en - English (default)
-	//
 	// * jp - Japanese
 	//
 	// * zh - Chinese

@@ -47,14 +47,14 @@ type UpdateProvisionedProductPropertiesInput struct {
 	// with a provisioned product. This role is used when an end user calls a
 	// provisioning operation such as UpdateProvisionedProduct,
 	// TerminateProvisionedProduct, or ExecuteProvisionedProductServiceAction. Only a
-	// role ARN is valid. A user ARN is invalid. The OWNER key accepts IAM user ARNs,
-	// IAM role ARNs, and STS assumed-role ARNs. The owner is the user that has
-	// permission to see, update, terminate, and execute service actions in the
-	// provisioned product. The administrator can change the owner of a provisioned
-	// product to another IAM or STS entity within the same account. Both end user
-	// owners and administrators can see ownership history of the provisioned product
-	// using the ListRecordHistory API. The new owner can describe all past records for
-	// the provisioned product using the DescribeRecord API. The previous owner can no
+	// role ARN is valid. A user ARN is invalid. The OWNER key accepts user ARNs, IAM
+	// role ARNs, and STS assumed-role ARNs. The owner is the user that has permission
+	// to see, update, terminate, and execute service actions in the provisioned
+	// product. The administrator can change the owner of a provisioned product to
+	// another IAM or STS entity within the same account. Both end user owners and
+	// administrators can see ownership history of the provisioned product using the
+	// ListRecordHistory API. The new owner can describe all past records for the
+	// provisioned product using the DescribeRecord API. The previous owner can no
 	// longer use DescribeRecord, but can still see the product's history from when he
 	// was an owner using ListRecordHistory. If a provisioned product ownership is
 	// assigned to an end user, they can see and perform any action through the API or
@@ -67,8 +67,6 @@ type UpdateProvisionedProductPropertiesInput struct {
 	ProvisionedProductProperties map[string]string
 
 	// The language code.
-	//
-	// * en - English (default)
 	//
 	// * jp - Japanese
 	//

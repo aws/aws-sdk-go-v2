@@ -41,8 +41,8 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// The key-value tag pairs associated to your environment. To learn more, see
-	// Tagging Amazon Web Services resources
+	// The key-value tag pairs associated to your environment. For more information,
+	// see Tagging Amazon Web Services resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags map[string]string
 

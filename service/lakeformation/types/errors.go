@@ -85,7 +85,7 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A specified entity does not exist
+// A specified entity does not exist.
 type EntityNotFoundException struct {
 	Message *string
 

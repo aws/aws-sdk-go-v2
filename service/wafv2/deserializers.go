@@ -6806,6 +6806,42 @@ func awsAwsjson11_deserializeDocumentAndStatement(v **types.AndStatement, value 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAssociationConfig(v **types.AssociationConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssociationConfig
+	if *v == nil {
+		sv = &types.AssociationConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RequestBody":
+			if err := awsAwsjson11_deserializeDocumentRequestBody(&sv.RequestBody, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAWSManagedRulesATPRuleSet(v **types.AWSManagedRulesATPRuleSet, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11236,6 +11272,81 @@ func awsAwsjson11_deserializeDocumentReleaseSummary(v **types.ReleaseSummary, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRequestBody(v *map[string]types.RequestBodyAssociatedResourceTypeConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.RequestBodyAssociatedResourceTypeConfig
+	if *v == nil {
+		mv = map[string]types.RequestBodyAssociatedResourceTypeConfig{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.RequestBodyAssociatedResourceTypeConfig
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsAwsjson11_deserializeDocumentRequestBodyAssociatedResourceTypeConfig(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRequestBodyAssociatedResourceTypeConfig(v **types.RequestBodyAssociatedResourceTypeConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RequestBodyAssociatedResourceTypeConfig
+	if *v == nil {
+		sv = &types.RequestBodyAssociatedResourceTypeConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DefaultSizeInspectionLimit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SizeInspectionLimit to be of type string, got %T instead", value)
+				}
+				sv.DefaultSizeInspectionLimit = types.SizeInspectionLimit(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentRequestInspection(v **types.RequestInspection, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14172,6 +14283,11 @@ func awsAwsjson11_deserializeDocumentWebACL(v **types.WebACL, value interface{})
 					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
 				}
 				sv.ARN = ptr.String(jtv)
+			}
+
+		case "AssociationConfig":
+			if err := awsAwsjson11_deserializeDocumentAssociationConfig(&sv.AssociationConfig, value); err != nil {
+				return err
 			}
 
 		case "Capacity":

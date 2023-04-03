@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new version of the specified grant.
+// Creates a new version of the specified grant. For more information, see Granted
+// licenses in License Manager
+// (https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html)
+// in the License Manager User Guide.
 func (c *Client) CreateGrantVersion(ctx context.Context, params *CreateGrantVersionInput, optFns ...func(*Options)) (*CreateGrantVersionOutput, error) {
 	if params == nil {
 		params = &CreateGrantVersionInput{}
@@ -45,6 +48,9 @@ type CreateGrantVersionInput struct {
 
 	// Grant name.
 	GrantName *string
+
+	// The options specified for the grant.
+	Options *types.Options
 
 	// Current version of the grant.
 	SourceVersion *string

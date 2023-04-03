@@ -34,22 +34,23 @@ type GetWebACLForResourceInput struct {
 	//
 	// * For an Application
 	// Load Balancer:
-	// arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+	// arn:partition:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
 	//
 	// *
 	// For an Amazon API Gateway REST API:
-	// arn:aws:apigateway:region::/restapis/api-id/stages/stage-name
-	//
-	// * For an AppSync
-	// GraphQL API: arn:aws:appsync:region:account-id:apis/GraphQLApiId
+	// arn:partition:apigateway:region::/restapis/api-id/stages/stage-name
 	//
 	// * For an
-	// Amazon Cognito user pool:
-	// arn:aws:cognito-idp:region:account-id:userpool/user-pool-id
+	// AppSync GraphQL API:
+	// arn:partition:appsync:region:account-id:apis/GraphQLApiId
 	//
-	// * For an App Runner
-	// service:
-	// arn:aws:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
+	// * For an Amazon
+	// Cognito user pool:
+	// arn:partition:cognito-idp:region:account-id:userpool/user-pool-id
+	//
+	// * For an App
+	// Runner service:
+	// arn:partition:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
 	//
 	// This member is required.
 	ResourceArn *string

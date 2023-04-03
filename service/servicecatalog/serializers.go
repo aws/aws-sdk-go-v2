@@ -3920,6 +3920,171 @@ func (m *awsAwsjson11_serializeOpListTagOptions) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpNotifyProvisionProductEngineWorkflowResult struct {
+}
+
+func (*awsAwsjson11_serializeOpNotifyProvisionProductEngineWorkflowResult) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpNotifyProvisionProductEngineWorkflowResult) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*NotifyProvisionProductEngineWorkflowResultInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWS242ServiceCatalogService.NotifyProvisionProductEngineWorkflowResult")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentNotifyProvisionProductEngineWorkflowResultInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpNotifyTerminateProvisionedProductEngineWorkflowResult struct {
+}
+
+func (*awsAwsjson11_serializeOpNotifyTerminateProvisionedProductEngineWorkflowResult) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpNotifyTerminateProvisionedProductEngineWorkflowResult) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*NotifyTerminateProvisionedProductEngineWorkflowResultInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWS242ServiceCatalogService.NotifyTerminateProvisionedProductEngineWorkflowResult")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentNotifyTerminateProvisionedProductEngineWorkflowResultInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpNotifyUpdateProvisionedProductEngineWorkflowResult struct {
+}
+
+func (*awsAwsjson11_serializeOpNotifyUpdateProvisionedProductEngineWorkflowResult) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpNotifyUpdateProvisionedProductEngineWorkflowResult) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*NotifyUpdateProvisionedProductEngineWorkflowResultInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWS242ServiceCatalogService.NotifyUpdateProvisionedProductEngineWorkflowResult")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentNotifyUpdateProvisionedProductEngineWorkflowResultInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpProvisionProduct struct {
 }
 
@@ -4867,6 +5032,20 @@ func awsAwsjson11_serializeDocumentCopyOptions(v []types.CopyOption, value smith
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEngineWorkflowResourceIdentifier(v *types.EngineWorkflowResourceIdentifier, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.UniqueTag != nil {
+		ok := object.Key("UniqueTag")
+		if err := awsAwsjson11_serializeDocumentUniqueTagResourceIdentifier(v.UniqueTag, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentExecutionParameterMap(v map[string][]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5153,6 +5332,41 @@ func awsAwsjson11_serializeDocumentProvisioningPreferences(v *types.Provisioning
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRecordOutput(v *types.RecordOutput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.OutputKey != nil {
+		ok := object.Key("OutputKey")
+		ok.String(*v.OutputKey)
+	}
+
+	if v.OutputValue != nil {
+		ok := object.Key("OutputValue")
+		ok.String(*v.OutputValue)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecordOutputs(v []types.RecordOutput, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentRecordOutput(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentServiceActionAssociation(v *types.ServiceActionAssociation, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5319,6 +5533,23 @@ func awsAwsjson11_serializeDocumentTags(v []types.Tag, value smithyjson.Value) e
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUniqueTagResourceIdentifier(v *types.UniqueTagResourceIdentifier, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("Key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
 	return nil
 }
 
@@ -7247,6 +7478,123 @@ func awsAwsjson11_serializeOpDocumentListTagOptionsInput(v *ListTagOptionsInput,
 	if v.PageToken != nil {
 		ok := object.Key("PageToken")
 		ok.String(*v.PageToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentNotifyProvisionProductEngineWorkflowResultInput(v *NotifyProvisionProductEngineWorkflowResultInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FailureReason != nil {
+		ok := object.Key("FailureReason")
+		ok.String(*v.FailureReason)
+	}
+
+	if v.IdempotencyToken != nil {
+		ok := object.Key("IdempotencyToken")
+		ok.String(*v.IdempotencyToken)
+	}
+
+	if v.Outputs != nil {
+		ok := object.Key("Outputs")
+		if err := awsAwsjson11_serializeDocumentRecordOutputs(v.Outputs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RecordId != nil {
+		ok := object.Key("RecordId")
+		ok.String(*v.RecordId)
+	}
+
+	if v.ResourceIdentifier != nil {
+		ok := object.Key("ResourceIdentifier")
+		if err := awsAwsjson11_serializeDocumentEngineWorkflowResourceIdentifier(v.ResourceIdentifier, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
+	if v.WorkflowToken != nil {
+		ok := object.Key("WorkflowToken")
+		ok.String(*v.WorkflowToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentNotifyTerminateProvisionedProductEngineWorkflowResultInput(v *NotifyTerminateProvisionedProductEngineWorkflowResultInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FailureReason != nil {
+		ok := object.Key("FailureReason")
+		ok.String(*v.FailureReason)
+	}
+
+	if v.IdempotencyToken != nil {
+		ok := object.Key("IdempotencyToken")
+		ok.String(*v.IdempotencyToken)
+	}
+
+	if v.RecordId != nil {
+		ok := object.Key("RecordId")
+		ok.String(*v.RecordId)
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
+	if v.WorkflowToken != nil {
+		ok := object.Key("WorkflowToken")
+		ok.String(*v.WorkflowToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentNotifyUpdateProvisionedProductEngineWorkflowResultInput(v *NotifyUpdateProvisionedProductEngineWorkflowResultInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FailureReason != nil {
+		ok := object.Key("FailureReason")
+		ok.String(*v.FailureReason)
+	}
+
+	if v.IdempotencyToken != nil {
+		ok := object.Key("IdempotencyToken")
+		ok.String(*v.IdempotencyToken)
+	}
+
+	if v.Outputs != nil {
+		ok := object.Key("Outputs")
+		if err := awsAwsjson11_serializeDocumentRecordOutputs(v.Outputs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RecordId != nil {
+		ok := object.Key("RecordId")
+		ok.String(*v.RecordId)
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
+	if v.WorkflowToken != nil {
+		ok := object.Key("WorkflowToken")
+		ok.String(*v.WorkflowToken)
 	}
 
 	return nil

@@ -48,11 +48,11 @@ type AssociatePrincipalWithPortfolioInput struct {
 	// This member is required.
 	PortfolioId *string
 
-	// The ARN of the principal (IAM user, role, or group). This field allows an ARN
-	// with no accountID if PrincipalType is IAM_PATTERN. You can associate multiple
-	// IAM patterns even if the account has no principal with that name. This is useful
-	// in Principal Name Sharing if you want to share a principal without creating it
-	// in the account that owns the portfolio.
+	// The ARN of the principal (user, role, or group). This field allows an ARN with
+	// no accountID if PrincipalType is IAM_PATTERN. You can associate multiple IAM
+	// patterns even if the account has no principal with that name. This is useful in
+	// Principal Name Sharing if you want to share a principal without creating it in
+	// the account that owns the portfolio.
 	//
 	// This member is required.
 	PrincipalARN *string
@@ -64,8 +64,6 @@ type AssociatePrincipalWithPortfolioInput struct {
 	PrincipalType types.PrincipalType
 
 	// The language code.
-	//
-	// * en - English (default)
 	//
 	// * jp - Japanese
 	//

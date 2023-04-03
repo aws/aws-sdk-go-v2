@@ -42,15 +42,13 @@ type DisassociatePrincipalFromPortfolioInput struct {
 	// This member is required.
 	PortfolioId *string
 
-	// The ARN of the principal (IAM user, role, or group). This field allows an ARN
-	// with no accountID if PrincipalType is IAM_PATTERN.
+	// The ARN of the principal (user, role, or group). This field allows an ARN with
+	// no accountID if PrincipalType is IAM_PATTERN.
 	//
 	// This member is required.
 	PrincipalARN *string
 
 	// The language code.
-	//
-	// * en - English (default)
 	//
 	// * jp - Japanese
 	//

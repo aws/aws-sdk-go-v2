@@ -154,10 +154,10 @@ type AthenaConnectorSource struct {
 	noSmithyDocumentSerde
 }
 
-// A structure containing information for audit.
+// A structure containing the Lake Formation audit context.
 type AuditContext struct {
 
-	// The context for the audit..
+	// A string containing the additional audit context information.
 	AdditionalAuditContext *string
 
 	// All columns request for audit.
@@ -1078,7 +1078,9 @@ type ColumnStatisticsData struct {
 	// Date column statistics data.
 	DateColumnStatisticsData *DateColumnStatisticsData
 
-	// Decimal column statistics data.
+	// Decimal column statistics data. UnscaledValues within are Base64-encoded binary
+	// objects storing big-endian, two's complement representations of the decimal's
+	// unscaled value.
 	DecimalColumnStatisticsData *DecimalColumnStatisticsData
 
 	// Double column statistics data.
@@ -1960,6 +1962,10 @@ type Database struct {
 	// A description of the database.
 	Description *string
 
+	// A FederatedDatabase structure that references an entity outside the Glue Data
+	// Catalog.
+	FederatedDatabase *FederatedDatabase
+
 	// The location of the database (for example, an HDFS path).
 	LocationUri *string
 
@@ -2000,6 +2006,10 @@ type DatabaseInput struct {
 
 	// A description of the database.
 	Description *string
+
+	// A FederatedDatabase structure that references an entity outside the Glue Data
+	// Catalog.
+	FederatedDatabase *FederatedDatabase
 
 	// The location of the database (for example, an HDFS path).
 	LocationUri *string
@@ -3008,6 +3018,33 @@ type ExportLabelsTaskRunProperties struct {
 	noSmithyDocumentSerde
 }
 
+// A database that points to an entity outside the Glue Data Catalog.
+type FederatedDatabase struct {
+
+	// The name of the connection to the external metastore.
+	ConnectionName *string
+
+	// A unique identifier for the federated database.
+	Identifier *string
+
+	noSmithyDocumentSerde
+}
+
+// A table that points to an entity outside the Glue Data Catalog.
+type FederatedTable struct {
+
+	// The name of the connection to the external metastore.
+	ConnectionName *string
+
+	// A unique identifier for the federated database.
+	DatabaseIdentifier *string
+
+	// A unique identifier for the federated table.
+	Identifier *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a transform that locates records in the dataset that have missing
 // values and adds a new field with a value determined by imputation. The input
 // data set is used to train the machine learning model that determines what the
@@ -3628,7 +3665,7 @@ type Job struct {
 	//
 	// * When you specify an Apache Spark ETL job
 	// (JobCommand.Name="glueetl") or Apache Spark streaming ETL job
-	// (JobCommand.Name="gluestreaming"), you can allocate a minimum of 2 DPUs. The
+	// (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The
 	// default is 10 DPUs. This job type cannot have a fractional DPU allocation.
 	//
 	// For
@@ -6876,6 +6913,10 @@ type Table struct {
 
 	// A description of the table.
 	Description *string
+
+	// A FederatedTable structure that references an entity outside the Glue Data
+	// Catalog.
+	FederatedTable *FederatedTable
 
 	// Indicates whether the table has been registered with Lake Formation.
 	IsRegisteredWithLakeFormation bool

@@ -1433,6 +1433,12 @@ func awsAwsjson11_deserializeOpErrorBatchGetPartition(response *smithyhttp.Respo
 	case strings.EqualFold("EntityNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorEntityNotFoundException(response, errorBody)
 
+	case strings.EqualFold("FederationSourceException", errorCode):
+		return awsAwsjson11_deserializeErrorFederationSourceException(response, errorBody)
+
+	case strings.EqualFold("FederationSourceRetryableException", errorCode):
+		return awsAwsjson11_deserializeErrorFederationSourceRetryableException(response, errorBody)
+
 	case strings.EqualFold("GlueEncryptionException", errorCode):
 		return awsAwsjson11_deserializeErrorGlueEncryptionException(response, errorBody)
 
@@ -3250,6 +3256,9 @@ func awsAwsjson11_deserializeOpErrorCreateDatabase(response *smithyhttp.Response
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
+
+	case strings.EqualFold("FederatedResourceAlreadyExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorFederatedResourceAlreadyExistsException(response, errorBody)
 
 	case strings.EqualFold("GlueEncryptionException", errorCode):
 		return awsAwsjson11_deserializeErrorGlueEncryptionException(response, errorBody)
@@ -9953,6 +9962,9 @@ func awsAwsjson11_deserializeOpErrorGetDatabase(response *smithyhttp.Response, m
 	case strings.EqualFold("EntityNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorEntityNotFoundException(response, errorBody)
 
+	case strings.EqualFold("FederationSourceException", errorCode):
+		return awsAwsjson11_deserializeErrorFederationSourceException(response, errorBody)
+
 	case strings.EqualFold("GlueEncryptionException", errorCode):
 		return awsAwsjson11_deserializeErrorGlueEncryptionException(response, errorBody)
 
@@ -12353,6 +12365,12 @@ func awsAwsjson11_deserializeOpErrorGetPartition(response *smithyhttp.Response, 
 	case strings.EqualFold("EntityNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorEntityNotFoundException(response, errorBody)
 
+	case strings.EqualFold("FederationSourceException", errorCode):
+		return awsAwsjson11_deserializeErrorFederationSourceException(response, errorBody)
+
+	case strings.EqualFold("FederationSourceRetryableException", errorCode):
+		return awsAwsjson11_deserializeErrorFederationSourceRetryableException(response, errorBody)
+
 	case strings.EqualFold("GlueEncryptionException", errorCode):
 		return awsAwsjson11_deserializeErrorGlueEncryptionException(response, errorBody)
 
@@ -12598,6 +12616,12 @@ func awsAwsjson11_deserializeOpErrorGetPartitions(response *smithyhttp.Response,
 	switch {
 	case strings.EqualFold("EntityNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorEntityNotFoundException(response, errorBody)
+
+	case strings.EqualFold("FederationSourceException", errorCode):
+		return awsAwsjson11_deserializeErrorFederationSourceException(response, errorBody)
+
+	case strings.EqualFold("FederationSourceRetryableException", errorCode):
+		return awsAwsjson11_deserializeErrorFederationSourceRetryableException(response, errorBody)
 
 	case strings.EqualFold("GlueEncryptionException", errorCode):
 		return awsAwsjson11_deserializeErrorGlueEncryptionException(response, errorBody)
@@ -14174,6 +14198,12 @@ func awsAwsjson11_deserializeOpErrorGetTable(response *smithyhttp.Response, meta
 	case strings.EqualFold("EntityNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorEntityNotFoundException(response, errorBody)
 
+	case strings.EqualFold("FederationSourceException", errorCode):
+		return awsAwsjson11_deserializeErrorFederationSourceException(response, errorBody)
+
+	case strings.EqualFold("FederationSourceRetryableException", errorCode):
+		return awsAwsjson11_deserializeErrorFederationSourceRetryableException(response, errorBody)
+
 	case strings.EqualFold("GlueEncryptionException", errorCode):
 		return awsAwsjson11_deserializeErrorGlueEncryptionException(response, errorBody)
 
@@ -14299,6 +14329,12 @@ func awsAwsjson11_deserializeOpErrorGetTables(response *smithyhttp.Response, met
 	switch {
 	case strings.EqualFold("EntityNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorEntityNotFoundException(response, errorBody)
+
+	case strings.EqualFold("FederationSourceException", errorCode):
+		return awsAwsjson11_deserializeErrorFederationSourceException(response, errorBody)
+
+	case strings.EqualFold("FederationSourceRetryableException", errorCode):
+		return awsAwsjson11_deserializeErrorFederationSourceRetryableException(response, errorBody)
 
 	case strings.EqualFold("GlueEncryptionException", errorCode):
 		return awsAwsjson11_deserializeErrorGlueEncryptionException(response, errorBody)
@@ -15029,6 +15065,12 @@ func awsAwsjson11_deserializeOpErrorGetUnfilteredPartitionMetadata(response *smi
 	case strings.EqualFold("EntityNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorEntityNotFoundException(response, errorBody)
 
+	case strings.EqualFold("FederationSourceException", errorCode):
+		return awsAwsjson11_deserializeErrorFederationSourceException(response, errorBody)
+
+	case strings.EqualFold("FederationSourceRetryableException", errorCode):
+		return awsAwsjson11_deserializeErrorFederationSourceRetryableException(response, errorBody)
+
 	case strings.EqualFold("GlueEncryptionException", errorCode):
 		return awsAwsjson11_deserializeErrorGlueEncryptionException(response, errorBody)
 
@@ -15155,6 +15197,12 @@ func awsAwsjson11_deserializeOpErrorGetUnfilteredPartitionsMetadata(response *sm
 	case strings.EqualFold("EntityNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorEntityNotFoundException(response, errorBody)
 
+	case strings.EqualFold("FederationSourceException", errorCode):
+		return awsAwsjson11_deserializeErrorFederationSourceException(response, errorBody)
+
+	case strings.EqualFold("FederationSourceRetryableException", errorCode):
+		return awsAwsjson11_deserializeErrorFederationSourceRetryableException(response, errorBody)
+
 	case strings.EqualFold("GlueEncryptionException", errorCode):
 		return awsAwsjson11_deserializeErrorGlueEncryptionException(response, errorBody)
 
@@ -15280,6 +15328,12 @@ func awsAwsjson11_deserializeOpErrorGetUnfilteredTableMetadata(response *smithyh
 	switch {
 	case strings.EqualFold("EntityNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorEntityNotFoundException(response, errorBody)
+
+	case strings.EqualFold("FederationSourceException", errorCode):
+		return awsAwsjson11_deserializeErrorFederationSourceException(response, errorBody)
+
+	case strings.EqualFold("FederationSourceRetryableException", errorCode):
+		return awsAwsjson11_deserializeErrorFederationSourceRetryableException(response, errorBody)
 
 	case strings.EqualFold("GlueEncryptionException", errorCode):
 		return awsAwsjson11_deserializeErrorGlueEncryptionException(response, errorBody)
@@ -24917,6 +24971,111 @@ func awsAwsjson11_deserializeErrorEntityNotFoundException(response *smithyhttp.R
 	return output
 }
 
+func awsAwsjson11_deserializeErrorFederatedResourceAlreadyExistsException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.FederatedResourceAlreadyExistsException{}
+	err := awsAwsjson11_deserializeDocumentFederatedResourceAlreadyExistsException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorFederationSourceException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.FederationSourceException{}
+	err := awsAwsjson11_deserializeDocumentFederationSourceException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorFederationSourceRetryableException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.FederationSourceRetryableException{}
+	err := awsAwsjson11_deserializeDocumentFederationSourceRetryableException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorGlueEncryptionException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -31453,6 +31612,11 @@ func awsAwsjson11_deserializeDocumentDatabase(v **types.Database, value interfac
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "FederatedDatabase":
+			if err := awsAwsjson11_deserializeDocumentFederatedDatabase(&sv.FederatedDatabase, value); err != nil {
+				return err
+			}
+
 		case "LocationUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -34606,6 +34770,15 @@ func awsAwsjson11_deserializeDocumentEntityNotFoundException(v **types.EntityNot
 
 	for key, value := range shape {
 		switch key {
+		case "FromFederationSource":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.FromFederationSource = ptr.Bool(jtv)
+			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -35005,6 +35178,251 @@ func awsAwsjson11_deserializeDocumentExportLabelsTaskRunProperties(v **types.Exp
 					return fmt.Errorf("expected UriString to be of type string, got %T instead", value)
 				}
 				sv.OutputS3Path = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFederatedDatabase(v **types.FederatedDatabase, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FederatedDatabase
+	if *v == nil {
+		sv = &types.FederatedDatabase{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConnectionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
+				}
+				sv.ConnectionName = ptr.String(jtv)
+			}
+
+		case "Identifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FederationIdentifier to be of type string, got %T instead", value)
+				}
+				sv.Identifier = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFederatedResourceAlreadyExistsException(v **types.FederatedResourceAlreadyExistsException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FederatedResourceAlreadyExistsException
+	if *v == nil {
+		sv = &types.FederatedResourceAlreadyExistsException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AssociatedGlueResource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GlueResourceArn to be of type string, got %T instead", value)
+				}
+				sv.AssociatedGlueResource = ptr.String(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MessageString to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFederatedTable(v **types.FederatedTable, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FederatedTable
+	if *v == nil {
+		sv = &types.FederatedTable{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConnectionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
+				}
+				sv.ConnectionName = ptr.String(jtv)
+			}
+
+		case "DatabaseIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FederationIdentifier to be of type string, got %T instead", value)
+				}
+				sv.DatabaseIdentifier = ptr.String(jtv)
+			}
+
+		case "Identifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FederationIdentifier to be of type string, got %T instead", value)
+				}
+				sv.Identifier = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFederationSourceException(v **types.FederationSourceException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FederationSourceException
+	if *v == nil {
+		sv = &types.FederationSourceException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FederationSourceErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FederationSourceErrorCode to be of type string, got %T instead", value)
+				}
+				sv.FederationSourceErrorCode = types.FederationSourceErrorCode(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MessageString to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFederationSourceRetryableException(v **types.FederationSourceRetryableException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FederationSourceRetryableException
+	if *v == nil {
+		sv = &types.FederationSourceRetryableException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MessageString to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -36737,6 +37155,15 @@ func awsAwsjson11_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 
 	for key, value := range shape {
 		switch key {
+		case "FromFederationSource":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.FromFederationSource = ptr.Bool(jtv)
+			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -47471,6 +47898,11 @@ func awsAwsjson11_deserializeDocumentTable(v **types.Table, value interface{}) e
 					return fmt.Errorf("expected DescriptionString to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "FederatedTable":
+			if err := awsAwsjson11_deserializeDocumentFederatedTable(&sv.FederatedTable, value); err != nil {
+				return err
 			}
 
 		case "IsRegisteredWithLakeFormation":
