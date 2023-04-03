@@ -1,3 +1,7 @@
+# v1.17.0 (2023-04-03)
+
+* **Feature**: This release introduces Service Catalog support for Terraform open source. It enables 1. The notify* APIs to Service Catalog. These APIs are used by the terraform engine to notify the result of the provisioning engine execution. 2. Adds a new TERRAFORM_OPEN_SOURCE product type in CreateProduct API.
+
 # v1.16.10 (2023-03-30)
 
 * No change notes available for this release.

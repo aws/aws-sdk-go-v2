@@ -1,8 +1,0 @@
-{
-    "id": "927e5e04-491e-47f6-bf95-aba4f3c8c5da",
-    "type": "feature",
-    "description": "This release adds grant override options to the CreateGrantVersion API. These options can be used to specify grant replacement behavior during grant activation.",
-    "modules": [
-        "service/licensemanager"
-    ]
-}

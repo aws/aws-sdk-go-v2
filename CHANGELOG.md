@@ -1,3 +1,19 @@
+# Release (2023-04-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.45.0](service/glue/CHANGELOG.md#v1450-2023-04-03)
+  * **Feature**: Add support for database-level federation
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.21.0](service/lakeformation/CHANGELOG.md#v1210-2023-04-03)
+  * **Feature**: Add support for database-level federation
+* `github.com/aws/aws-sdk-go-v2/service/licensemanager`: [v1.18.0](service/licensemanager/CHANGELOG.md#v1180-2023-04-03)
+  * **Feature**: This release adds grant override options to the CreateGrantVersion API. These options can be used to specify grant replacement behavior during grant activation.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.15.0](service/mwaa/CHANGELOG.md#v1150-2023-04-03)
+  * **Feature**: This Amazon MWAA release adds the ability to customize the Apache Airflow environment by launching a shell script at startup. This shell script is hosted in your environment's Amazon S3 bucket. Amazon MWAA runs the script before installing requirements and initializing the Apache Airflow process.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.17.0](service/servicecatalog/CHANGELOG.md#v1170-2023-04-03)
+  * **Feature**: This release introduces Service Catalog support for Terraform open source. It enables 1. The notify* APIs to Service Catalog. These APIs are used by the terraform engine to notify the result of the provisioning engine execution. 2. Adds a new TERRAFORM_OPEN_SOURCE product type in CreateProduct API.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.27.0](service/wafv2/CHANGELOG.md#v1270-2023-04-03)
+  * **Feature**: For web ACLs that protect CloudFront protections, the default request body inspection size is now 16 KB, and you can use the new association configuration to increase the inspection size further, up to 64 KB. Sizes over 16 KB can incur additional costs.
+
 # Release (2023-03-31)
 
 ## General Highlights

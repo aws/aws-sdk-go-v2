@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.8
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.17.6
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.7
-	github.com/aws/aws-sdk-go-v2/service/glue v1.44.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.45.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.16.6
 	github.com/aws/aws-sdk-go-v2/service/iam v1.19.8
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.6
@@ -69,7 +69,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.19.1
-	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.16.10
+	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/ses v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.17.7
 	github.com/aws/aws-sdk-go-v2/service/shield v1.18.6
@@ -84,7 +84,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.9.6
 	github.com/aws/aws-sdk-go-v2/service/waf v1.12.6
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.13.8
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.26.3
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.28.7
 	github.com/aws/smithy-go v1.13.5
 	github.com/google/go-cmp v0.5.8

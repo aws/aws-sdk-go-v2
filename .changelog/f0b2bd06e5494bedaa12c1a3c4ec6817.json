@@ -1,8 +1,0 @@
-{
-    "id": "f0b2bd06-e549-4bed-aa12-c1a3c4ec6817",
-    "type": "feature",
-    "description": "Add support for database-level federation",
-    "modules": [
-        "service/lakeformation"
-    ]
-}
