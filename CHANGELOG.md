@@ -1,3 +1,21 @@
+# Release (2023-04-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder`: [v1.10.0](service/amplifyuibuilder/CHANGELOG.md#v1100-2023-04-04)
+  * **Feature**: Support StorageField and custom displays for data-bound options in form builder. Support non-string operands for predicates in collections. Support choosing client to get token from.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.28.1](service/autoscaling/CHANGELOG.md#v1281-2023-04-04)
+  * **Documentation**: Documentation updates for Amazon EC2 Auto Scaling
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.93.0](service/ec2/CHANGELOG.md#v1930-2023-04-04)
+  * **Feature**: C6in, M6in, M6idn, R6in and R6idn bare metal instances are powered by 3rd Generation Intel Xeon Scalable processors and offer up to 200 Gbps of network bandwidth.
+* `github.com/aws/aws-sdk-go-v2/service/elasticinference`: [v1.13.0](service/elasticinference/CHANGELOG.md#v1130-2023-04-04)
+  * **Feature**: Updated public documentation for the Describe and Tagging APIs.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.73.0](service/sagemaker/CHANGELOG.md#v1730-2023-04-04)
+  * **Feature**: Amazon SageMaker Asynchronous Inference now allows customer's to receive failure model responses in S3 and receive success/failure model responses in SNS notifications.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.19.0](service/sagemakerruntime/CHANGELOG.md#v1190-2023-04-04)
+  * **Feature**: Amazon SageMaker Asynchronous Inference now provides customers a FailureLocation as a response parameter in InvokeEndpointAsync API to capture the model failure responses.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.28.0](service/wafv2/CHANGELOG.md#v1280-2023-04-04)
+  * **Feature**: This release rolls back association config feature for webACLs that protect CloudFront protections.
+
 # Release (2023-04-03)
 
 ## Module Highlights

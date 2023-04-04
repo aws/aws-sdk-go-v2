@@ -1,3 +1,7 @@
+# v1.13.0 (2023-04-04)
+
+* **Feature**: Updated public documentation for the Describe and Tagging APIs.
+
 # v1.12.6 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

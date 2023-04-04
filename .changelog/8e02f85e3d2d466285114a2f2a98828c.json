@@ -1,8 +1,0 @@
-{
-    "id": "8e02f85e-3d2d-4662-8511-4a2f2a98828c",
-    "type": "feature",
-    "description": "This release rolls back association config feature for webACLs that protect CloudFront protections.",
-    "modules": [
-        "service/wafv2"
-    ]
-}

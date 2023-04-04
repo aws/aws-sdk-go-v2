@@ -1,3 +1,7 @@
+# v1.10.0 (2023-04-04)
+
+* **Feature**: Support StorageField and custom displays for data-bound options in form builder. Support non-string operands for predicates in collections. Support choosing client to get token from.
+
 # v1.9.6 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

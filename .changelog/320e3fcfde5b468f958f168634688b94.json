@@ -1,8 +1,0 @@
-{
-    "id": "320e3fcf-de5b-468f-958f-168634688b94",
-    "type": "feature",
-    "description": "Amazon SageMaker Asynchronous Inference now provides customers a FailureLocation as a response parameter in InvokeEndpointAsync API to capture the model failure responses.",
-    "modules": [
-        "service/sagemakerruntime"
-    ]
-}

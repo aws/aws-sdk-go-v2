@@ -1,3 +1,7 @@
+# v1.28.0 (2023-04-04)
+
+* **Feature**: This release rolls back association config feature for webACLs that protect CloudFront protections.
+
 # v1.27.0 (2023-04-03)
 
 * **Feature**: For web ACLs that protect CloudFront protections, the default request body inspection size is now 16 KB, and you can use the new association configuration to increase the inspection size further, up to 64 KB. Sizes over 16 KB can incur additional costs.

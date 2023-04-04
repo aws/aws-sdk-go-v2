@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.15.6
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.20.6
 	github.com/aws/aws-sdk-go-v2/service/athena v1.25.0
-	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.28.0
+	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.28.1
 	github.com/aws/aws-sdk-go-v2/service/batch v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.26.6
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.26.2
@@ -20,7 +20,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.20.7
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.14.8
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.16.7
-	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.14.6
+	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.14.7
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.13.6
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.22.6
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.30.1
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.16.7
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.20.6
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.2
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.92.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.93.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.18.7
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.24.2
 	github.com/aws/aws-sdk-go-v2/service/efs v1.19.9
@@ -84,7 +84,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.9.6
 	github.com/aws/aws-sdk-go-v2/service/waf v1.12.6
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.13.8
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.27.0
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.28.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.28.7
 	github.com/aws/smithy-go v1.13.5
 	github.com/google/go-cmp v0.5.8

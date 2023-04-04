@@ -1,8 +1,0 @@
-{
-    "id": "60b815ae-f770-48eb-aa27-c0d012e64ebf",
-    "type": "feature",
-    "description": "Amazon SageMaker Asynchronous Inference now allows customer's to receive failure model responses in S3 and receive success/failure model responses in SNS notifications.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

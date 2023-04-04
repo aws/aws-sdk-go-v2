@@ -1,8 +1,0 @@
-{
-    "id": "45ace204-882d-46a6-85dc-3f2864ecd3aa",
-    "type": "feature",
-    "description": "This release updates the value of MaxResults.",
-    "modules": [
-        "service/dataexchange"
-    ]
-}
