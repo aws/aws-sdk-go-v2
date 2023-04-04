@@ -23,10 +23,14 @@ const defaultPartition = "aws"
 
 // GetPartition returns an AWS [Partition] for the region provided. If the
 // partition cannot be determined nil will be returned.
-func GetPartition(partitions []Partition, region string) *PartitionConfig {
+func GetPartition(region string) *PartitionConfig {
+	return getPartition(partitions, region)
+}
+
+func getPartition(partitions []Partition, region string) *PartitionConfig {
 	for _, partition := range partitions {
 		if v, ok := partition.Regions[region]; ok {
-			v.mergeWith(partition.DefaultConfig)
+			v = mergePartition(v, partition.DefaultConfig)
 			return &v
 		}
 	}
@@ -49,20 +53,21 @@ func GetPartition(partitions []Partition, region string) *PartitionConfig {
 	return nil
 }
 
-func (p *PartitionConfig) mergeWith(other PartitionConfig) {
-	if p.Name == nil {
-		p.Name = other.Name
+func mergePartition(into PartitionConfig, from PartitionConfig) PartitionConfig {
+	if into.Name == nil {
+		into.Name = from.Name
 	}
-	if p.DNSSuffix == nil {
-		p.DNSSuffix = other.DNSSuffix
+	if into.DNSSuffix == nil {
+		into.DNSSuffix = from.DNSSuffix
 	}
-	if p.DualStackDNSSuffix == nil {
-		p.DualStackDNSSuffix = other.DualStackDNSSuffix
+	if into.DualStackDNSSuffix == nil {
+		into.DualStackDNSSuffix = from.DualStackDNSSuffix
 	}
-	if p.SupportsFIPS == nil {
-		p.SupportsFIPS = other.SupportsFIPS
+	if into.SupportsFIPS == nil {
+		into.SupportsFIPS = from.SupportsFIPS
 	}
-	if p.SupportsDualStack == nil {
-		p.SupportsDualStack = other.SupportsDualStack
+	if into.SupportsDualStack == nil {
+		into.SupportsDualStack = from.SupportsDualStack
 	}
+	return into
 }
