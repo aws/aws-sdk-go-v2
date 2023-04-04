@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stores the metadata information about a feature on a form or view.
+// Stores the metadata information about a feature on a form.
 func (c *Client) PutMetadataFlag(ctx context.Context, params *PutMetadataFlagInput, optFns ...func(*Options)) (*PutMetadataFlagOutput, error) {
 	if params == nil {
 		params = &PutMetadataFlagInput{}

@@ -297,6 +297,11 @@ func awsRestjson1_deserializeOpHttpBindingsInvokeEndpointAsyncOutput(v *InvokeEn
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
 
+	if headerValues := response.Header.Values("X-Amzn-SageMaker-FailureLocation"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.FailureLocation = ptr.String(headerValues[0])
+	}
+
 	if headerValues := response.Header.Values("X-Amzn-SageMaker-OutputLocation"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.OutputLocation = ptr.String(headerValues[0])

@@ -94,6 +94,9 @@ type InvokeEndpointAsyncInput struct {
 
 type InvokeEndpointAsyncOutput struct {
 
+	// The Amazon S3 URI where the inference failure response payload is stored.
+	FailureLocation *string
+
 	// Identifier for an inference request. This will be the same as the InferenceId
 	// specified in the input. Amazon SageMaker will generate an identifier for you if
 	// you do not specify one.

@@ -144,11 +144,12 @@ type CreateAutoScalingGroupInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide. Default: 0 seconds
 	HealthCheckGracePeriod *int32
 
-	// A comma-separated list of one or more health check types. The valid values are
-	// EC2, ELB, and VPC_LATTICE. EC2 is the default health check and cannot be
-	// disabled. For more information, see Health checks for Auto Scaling instances
+	// A comma-separated value string of one or more health check types. The valid
+	// values are EC2, ELB, and VPC_LATTICE. EC2 is the default health check and cannot
+	// be disabled. For more information, see Health checks for Auto Scaling instances
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html) in the
-	// Amazon EC2 Auto Scaling User Guide.
+	// Amazon EC2 Auto Scaling User Guide. Only specify EC2 if you must clear a value
+	// that was previously set.
 	HealthCheckType *string
 
 	// The ID of the instance used to base the launch configuration on. If specified,

@@ -2709,20 +2709,6 @@ func awsAwsjson11_serializeDocumentAndStatement(v *types.AndStatement, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociationConfig(v *types.AssociationConfig, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.RequestBody != nil {
-		ok := object.Key("RequestBody")
-		if err := awsAwsjson11_serializeDocumentRequestBody(v.RequestBody, ok); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
 func awsAwsjson11_serializeDocumentAWSManagedRulesATPRuleSet(v *types.AWSManagedRulesATPRuleSet, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3914,32 +3900,6 @@ func awsAwsjson11_serializeDocumentRegularExpressionList(v []types.Regex, value 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRequestBody(v map[string]types.RequestBodyAssociatedResourceTypeConfig, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	for key := range v {
-		om := object.Key(key)
-		mapVar := v[key]
-		if err := awsAwsjson11_serializeDocumentRequestBodyAssociatedResourceTypeConfig(&mapVar, om); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentRequestBodyAssociatedResourceTypeConfig(v *types.RequestBodyAssociatedResourceTypeConfig, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if len(v.DefaultSizeInspectionLimit) > 0 {
-		ok := object.Key("DefaultSizeInspectionLimit")
-		ok.String(string(v.DefaultSizeInspectionLimit))
-	}
-
-	return nil
-}
-
 func awsAwsjson11_serializeDocumentRequestInspection(v *types.RequestInspection, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4931,13 +4891,6 @@ func awsAwsjson11_serializeOpDocumentCreateRuleGroupInput(v *CreateRuleGroupInpu
 func awsAwsjson11_serializeOpDocumentCreateWebACLInput(v *CreateWebACLInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
-
-	if v.AssociationConfig != nil {
-		ok := object.Key("AssociationConfig")
-		if err := awsAwsjson11_serializeDocumentAssociationConfig(v.AssociationConfig, ok); err != nil {
-			return err
-		}
-	}
 
 	if v.CaptchaConfig != nil {
 		ok := object.Key("CaptchaConfig")
@@ -5978,13 +5931,6 @@ func awsAwsjson11_serializeOpDocumentUpdateRuleGroupInput(v *UpdateRuleGroupInpu
 func awsAwsjson11_serializeOpDocumentUpdateWebACLInput(v *UpdateWebACLInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
-
-	if v.AssociationConfig != nil {
-		ok := object.Key("AssociationConfig")
-		if err := awsAwsjson11_serializeDocumentAssociationConfig(v.AssociationConfig, ok); err != nil {
-			return err
-		}
-	}
 
 	if v.CaptchaConfig != nil {
 		ok := object.Key("CaptchaConfig")

@@ -989,6 +989,11 @@ func validateFieldInputConfig(v *types.FieldInputConfig) error {
 			invalidParams.AddNested("ValueMappings", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.FileUploaderConfig != nil {
+		if err := validateFileUploaderFieldConfig(v.FileUploaderConfig); err != nil {
+			invalidParams.AddNested("FileUploaderConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1021,6 +1026,24 @@ func validateFieldValidationConfiguration(v *types.FieldValidationConfiguration)
 	invalidParams := smithy.InvalidParamsError{Context: "FieldValidationConfiguration"}
 	if v.Type == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFileUploaderFieldConfig(v *types.FileUploaderFieldConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FileUploaderFieldConfig"}
+	if len(v.AccessLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessLevel"))
+	}
+	if v.AcceptedFileTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcceptedFileTypes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1075,6 +1098,60 @@ func validateFormDataTypeConfig(v *types.FormDataTypeConfig) error {
 	}
 	if v.DataTypeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataTypeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFormInputValueProperty(v *types.FormInputValueProperty) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FormInputValueProperty"}
+	if v.BindingProperties != nil {
+		if err := validateFormInputValuePropertyBindingProperties(v.BindingProperties); err != nil {
+			invalidParams.AddNested("BindingProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Concat != nil {
+		if err := validateFormInputValuePropertyList(v.Concat); err != nil {
+			invalidParams.AddNested("Concat", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFormInputValuePropertyBindingProperties(v *types.FormInputValuePropertyBindingProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FormInputValuePropertyBindingProperties"}
+	if v.Property == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Property"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFormInputValuePropertyList(v []types.FormInputValueProperty) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FormInputValuePropertyList"}
+	for i := range v {
+		if err := validateFormInputValueProperty(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1302,8 +1379,17 @@ func validateValueMapping(v *types.ValueMapping) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ValueMapping"}
+	if v.DisplayValue != nil {
+		if err := validateFormInputValueProperty(v.DisplayValue); err != nil {
+			invalidParams.AddNested("DisplayValue", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	} else if v.Value != nil {
+		if err := validateFormInputValueProperty(v.Value); err != nil {
+			invalidParams.AddNested("Value", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

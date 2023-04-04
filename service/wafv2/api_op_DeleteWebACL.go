@@ -24,20 +24,18 @@ import (
 // * For Amazon CloudFront distributions,
 // use the CloudFront call ListDistributionsByWebACLId. For information, see
 // ListDistributionsByWebACLId
-// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html)
-// in the Amazon CloudFront API Reference.
+// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html).
 //
-// * To disassociate a resource from a web
-// ACL, use the following calls:
+// *
+// To disassociate a resource from a web ACL, use the following calls:
 //
-// * For regional resources, call
-// DisassociateWebACL.
+// * For
+// regional resources, call DisassociateWebACL.
 //
-// * For Amazon CloudFront distributions, provide an empty web
-// ACL ID in the CloudFront call UpdateDistribution. For information, see
-// UpdateDistribution
-// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html)
-// in the Amazon CloudFront API Reference.
+// * For Amazon CloudFront
+// distributions, provide an empty web ACL ID in the CloudFront call
+// UpdateDistribution. For information, see UpdateDistribution
+// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html).
 func (c *Client) DeleteWebACL(ctx context.Context, params *DeleteWebACLInput, optFns ...func(*Options)) (*DeleteWebACLOutput, error) {
 	if params == nil {
 		params = &DeleteWebACLInput{}
@@ -80,7 +78,7 @@ type DeleteWebACLInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
 	//

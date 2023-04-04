@@ -28,22 +28,6 @@ func (ActionValue) Values() []ActionValue {
 	}
 }
 
-type AssociatedResourceType string
-
-// Enum values for AssociatedResourceType
-const (
-	AssociatedResourceTypeCloudfront AssociatedResourceType = "CLOUDFRONT"
-)
-
-// Values returns all known values for AssociatedResourceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
-func (AssociatedResourceType) Values() []AssociatedResourceType {
-	return []AssociatedResourceType{
-		"CLOUDFRONT",
-	}
-}
-
 type BodyParsingFallbackBehavior string
 
 // Enum values for BodyParsingFallbackBehavior
@@ -884,7 +868,6 @@ const (
 	ParameterExceptionFieldChallengeConfig                ParameterExceptionField = "CHALLENGE_CONFIG"
 	ParameterExceptionFieldTokenDomain                    ParameterExceptionField = "TOKEN_DOMAIN"
 	ParameterExceptionFieldAtpRuleSetResponseInspection   ParameterExceptionField = "ATP_RULE_SET_RESPONSE_INSPECTION"
-	ParameterExceptionFieldAssociatedResourceType         ParameterExceptionField = "ASSOCIATED_RESOURCE_TYPE"
 )
 
 // Values returns all known values for ParameterExceptionField. Note that this can
@@ -958,7 +941,6 @@ func (ParameterExceptionField) Values() []ParameterExceptionField {
 		"CHALLENGE_CONFIG",
 		"TOKEN_DOMAIN",
 		"ATP_RULE_SET_RESPONSE_INSPECTION",
-		"ASSOCIATED_RESOURCE_TYPE",
 	}
 }
 
@@ -1118,28 +1100,6 @@ func (SensitivityLevel) Values() []SensitivityLevel {
 	return []SensitivityLevel{
 		"LOW",
 		"HIGH",
-	}
-}
-
-type SizeInspectionLimit string
-
-// Enum values for SizeInspectionLimit
-const (
-	SizeInspectionLimitKb16 SizeInspectionLimit = "KB_16"
-	SizeInspectionLimitKb32 SizeInspectionLimit = "KB_32"
-	SizeInspectionLimitKb48 SizeInspectionLimit = "KB_48"
-	SizeInspectionLimitKb64 SizeInspectionLimit = "KB_64"
-)
-
-// Values returns all known values for SizeInspectionLimit. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
-func (SizeInspectionLimit) Values() []SizeInspectionLimit {
-	return []SizeInspectionLimit{
-		"KB_16",
-		"KB_32",
-		"KB_48",
-		"KB_64",
 	}
 }
 

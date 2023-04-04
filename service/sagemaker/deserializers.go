@@ -34322,6 +34322,11 @@ func awsAwsjson11_deserializeDocumentAsyncInferenceNotificationConfig(v **types.
 				sv.ErrorTopic = ptr.String(jtv)
 			}
 
+		case "IncludeInferenceResponseIn":
+			if err := awsAwsjson11_deserializeDocumentAsyncNotificationTopicTypeList(&sv.IncludeInferenceResponseIn, value); err != nil {
+				return err
+			}
+
 		case "SuccessTopic":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -34376,6 +34381,15 @@ func awsAwsjson11_deserializeDocumentAsyncInferenceOutputConfig(v **types.AsyncI
 				return err
 			}
 
+		case "S3FailurePath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DestinationS3Uri to be of type string, got %T instead", value)
+				}
+				sv.S3FailurePath = ptr.String(jtv)
+			}
+
 		case "S3OutputPath":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -34391,6 +34405,42 @@ func awsAwsjson11_deserializeDocumentAsyncInferenceOutputConfig(v **types.AsyncI
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAsyncNotificationTopicTypeList(v *[]types.AsyncNotificationTopicTypes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AsyncNotificationTopicTypes
+	if *v == nil {
+		cv = []types.AsyncNotificationTopicTypes{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AsyncNotificationTopicTypes
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AsyncNotificationTopicTypes to be of type string, got %T instead", value)
+			}
+			col = types.AsyncNotificationTopicTypes(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

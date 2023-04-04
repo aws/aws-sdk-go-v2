@@ -16991,6 +16991,13 @@ func awsAwsjson11_serializeDocumentAsyncInferenceNotificationConfig(v *types.Asy
 		ok.String(*v.ErrorTopic)
 	}
 
+	if v.IncludeInferenceResponseIn != nil {
+		ok := object.Key("IncludeInferenceResponseIn")
+		if err := awsAwsjson11_serializeDocumentAsyncNotificationTopicTypeList(v.IncludeInferenceResponseIn, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SuccessTopic != nil {
 		ok := object.Key("SuccessTopic")
 		ok.String(*v.SuccessTopic)
@@ -17015,11 +17022,27 @@ func awsAwsjson11_serializeDocumentAsyncInferenceOutputConfig(v *types.AsyncInfe
 		}
 	}
 
+	if v.S3FailurePath != nil {
+		ok := object.Key("S3FailurePath")
+		ok.String(*v.S3FailurePath)
+	}
+
 	if v.S3OutputPath != nil {
 		ok := object.Key("S3OutputPath")
 		ok.String(*v.S3OutputPath)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAsyncNotificationTopicTypeList(v []types.AsyncNotificationTopicTypes, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

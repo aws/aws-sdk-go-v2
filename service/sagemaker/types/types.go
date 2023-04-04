@@ -1442,6 +1442,9 @@ type AsyncInferenceNotificationConfig struct {
 	// provided, no notification is sent on failure.
 	ErrorTopic *string
 
+	// The Amazon SNS topics where you want the inference response to be included.
+	IncludeInferenceResponseIn []AsyncNotificationTopicTypes
+
 	// Amazon SNS topic to post a notification to when inference completes
 	// successfully. If no topic is provided, no notification is sent on success.
 	SuccessTopic *string
@@ -1452,11 +1455,6 @@ type AsyncInferenceNotificationConfig struct {
 // Specifies the configuration for asynchronous inference invocation outputs.
 type AsyncInferenceOutputConfig struct {
 
-	// The Amazon S3 location to upload inference responses to.
-	//
-	// This member is required.
-	S3OutputPath *string
-
 	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
 	// that SageMaker uses to encrypt the asynchronous inference output in Amazon S3.
 	KmsKeyId *string
@@ -1464,6 +1462,12 @@ type AsyncInferenceOutputConfig struct {
 	// Specifies the configuration for notifications of inference results for
 	// asynchronous inference.
 	NotificationConfig *AsyncInferenceNotificationConfig
+
+	// The Amazon S3 location to upload failure inference responses to.
+	S3FailurePath *string
+
+	// The Amazon S3 location to upload inference responses to.
+	S3OutputPath *string
 
 	noSmithyDocumentSerde
 }
@@ -3095,14 +3099,20 @@ type ContainerDefinition struct {
 	// SageMaker requirements. SageMaker supports both registry/repository[:tag] and
 	// registry/repository[@digest] image path formats. For more information, see Using
 	// Your Own Algorithms with Amazon SageMaker
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html)
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html). The
+	// model artifacts in an Amazon S3 bucket and the Docker image for inference
+	// container in Amazon EC2 Container Registry must be in the same region as the
+	// model or endpoint you are creating.
 	Image *string
 
 	// Specifies whether the model container is in Amazon ECR or a private Docker
 	// registry accessible from your Amazon Virtual Private Cloud (VPC). For
 	// information about storing containers in a private Docker registry, see Use a
 	// Private Docker Registry for Real-Time Inference Containers
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-containers-inference-private.html)
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-containers-inference-private.html).
+	// The model artifacts in an Amazon S3 bucket and the Docker image for inference
+	// container in Amazon EC2 Container Registry must be in the same region as the
+	// model or endpoint you are creating.
 	ImageConfig *ImageConfig
 
 	// The inference specification name in the model package version.

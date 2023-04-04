@@ -6079,25 +6079,6 @@ func validateAsyncInferenceConfig(v *types.AsyncInferenceConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AsyncInferenceConfig"}
 	if v.OutputConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
-	} else if v.OutputConfig != nil {
-		if err := validateAsyncInferenceOutputConfig(v.OutputConfig); err != nil {
-			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateAsyncInferenceOutputConfig(v *types.AsyncInferenceOutputConfig) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AsyncInferenceOutputConfig"}
-	if v.S3OutputPath == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3OutputPath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

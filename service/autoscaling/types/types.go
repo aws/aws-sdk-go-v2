@@ -137,7 +137,7 @@ type AutoScalingGroup struct {
 	// This member is required.
 	DesiredCapacity *int32
 
-	// A comma-separated list of one or more health check types.
+	// A comma-separated value string of one or more health check types.
 	//
 	// This member is required.
 	HealthCheckType *string

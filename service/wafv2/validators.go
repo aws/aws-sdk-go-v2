@@ -1189,23 +1189,6 @@ func validateAndStatement(v *types.AndStatement) error {
 	}
 }
 
-func validateAssociationConfig(v *types.AssociationConfig) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AssociationConfig"}
-	if v.RequestBody != nil {
-		if err := validateRequestBody(v.RequestBody); err != nil {
-			invalidParams.AddNested("RequestBody", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateAWSManagedRulesATPRuleSet(v *types.AWSManagedRulesATPRuleSet) error {
 	if v == nil {
 		return nil
@@ -2185,39 +2168,6 @@ func validateRegexPatternSetReferenceStatement(v *types.RegexPatternSetReference
 	}
 }
 
-func validateRequestBody(v map[string]types.RequestBodyAssociatedResourceTypeConfig) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "RequestBody"}
-	for key := range v {
-		value := v[key]
-		if err := validateRequestBodyAssociatedResourceTypeConfig(&value); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateRequestBodyAssociatedResourceTypeConfig(v *types.RequestBodyAssociatedResourceTypeConfig) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "RequestBodyAssociatedResourceTypeConfig"}
-	if len(v.DefaultSizeInspectionLimit) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("DefaultSizeInspectionLimit"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateRequestInspection(v *types.RequestInspection) error {
 	if v == nil {
 		return nil
@@ -3042,11 +2992,6 @@ func validateOpCreateWebACLInput(v *CreateWebACLInput) error {
 	if v.ChallengeConfig != nil {
 		if err := validateChallengeConfig(v.ChallengeConfig); err != nil {
 			invalidParams.AddNested("ChallengeConfig", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.AssociationConfig != nil {
-		if err := validateAssociationConfig(v.AssociationConfig); err != nil {
-			invalidParams.AddNested("AssociationConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3899,11 +3844,6 @@ func validateOpUpdateWebACLInput(v *UpdateWebACLInput) error {
 	if v.ChallengeConfig != nil {
 		if err := validateChallengeConfig(v.ChallengeConfig); err != nil {
 			invalidParams.AddNested("ChallengeConfig", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.AssociationConfig != nil {
-		if err := validateAssociationConfig(v.AssociationConfig); err != nil {
-			invalidParams.AddNested("AssociationConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

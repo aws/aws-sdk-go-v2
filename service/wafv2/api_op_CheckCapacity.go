@@ -19,9 +19,7 @@ import (
 // relative cost of each rule. Simple rules that cost little to run use fewer WCUs
 // than more complex rules that use more processing power. Rule group capacity is
 // fixed at creation, which helps users plan their web ACL WCU usage when they use
-// a rule group. For more information, see WAF web ACL capacity units (WCU)
-// (https://docs.aws.amazon.com/waf/latest/developerguide/aws-waf-capacity-units.html)
-// in the WAF Developer Guide.
+// a rule group. The WCU limit for web ACLs is 1,500.
 func (c *Client) CheckCapacity(ctx context.Context, params *CheckCapacityInput, optFns ...func(*Options)) (*CheckCapacityOutput, error) {
 	if params == nil {
 		params = &CheckCapacityInput{}
@@ -46,7 +44,7 @@ type CheckCapacityInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
 	//

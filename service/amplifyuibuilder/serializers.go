@@ -2500,6 +2500,11 @@ func awsRestjson1_serializeDocumentCreateFormData(v *types.CreateFormData, value
 		ok.String(string(v.FormActionType))
 	}
 
+	if len(v.LabelDecorator) > 0 {
+		ok := object.Key("labelDecorator")
+		ok.String(string(v.LabelDecorator))
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -2570,6 +2575,11 @@ func awsRestjson1_serializeDocumentCreateThemeData(v *types.CreateThemeData, val
 func awsRestjson1_serializeDocumentExchangeCodeForTokenRequestBody(v *types.ExchangeCodeForTokenRequestBody, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ClientId != nil {
+		ok := object.Key("clientId")
+		ok.String(*v.ClientId)
+	}
 
 	if v.Code != nil {
 		ok := object.Key("code")
@@ -2644,6 +2654,13 @@ func awsRestjson1_serializeDocumentFieldInputConfig(v *types.FieldInputConfig, v
 	if v.DescriptiveText != nil {
 		ok := object.Key("descriptiveText")
 		ok.String(*v.DescriptiveText)
+	}
+
+	if v.FileUploaderConfig != nil {
+		ok := object.Key("fileUploaderConfig")
+		if err := awsRestjson1_serializeDocumentFileUploaderFieldConfig(v.FileUploaderConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.IsArray != nil {
@@ -2814,6 +2831,45 @@ func awsRestjson1_serializeDocumentFieldValidationConfiguration(v *types.FieldVa
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFileUploaderFieldConfig(v *types.FileUploaderFieldConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AcceptedFileTypes != nil {
+		ok := object.Key("acceptedFileTypes")
+		if err := awsRestjson1_serializeDocumentStrValues(v.AcceptedFileTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.AccessLevel) > 0 {
+		ok := object.Key("accessLevel")
+		ok.String(string(v.AccessLevel))
+	}
+
+	if v.IsResumable != nil {
+		ok := object.Key("isResumable")
+		ok.Boolean(*v.IsResumable)
+	}
+
+	if v.MaxFileCount != nil {
+		ok := object.Key("maxFileCount")
+		ok.Integer(*v.MaxFileCount)
+	}
+
+	if v.MaxSize != nil {
+		ok := object.Key("maxSize")
+		ok.Integer(*v.MaxSize)
+	}
+
+	if v.ShowThumbnails != nil {
+		ok := object.Key("showThumbnails")
+		ok.Boolean(*v.ShowThumbnails)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFormBindingElement(v *types.FormBindingElement, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2919,15 +2975,104 @@ func awsRestjson1_serializeDocumentFormDataTypeConfig(v *types.FormDataTypeConfi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFormInputBindingProperties(v map[string]types.FormInputBindingPropertiesValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentFormInputBindingPropertiesValue(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFormInputBindingPropertiesValue(v *types.FormInputBindingPropertiesValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BindingProperties != nil {
+		ok := object.Key("bindingProperties")
+		if err := awsRestjson1_serializeDocumentFormInputBindingPropertiesValueProperties(v.BindingProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Type != nil {
+		ok := object.Key("type")
+		ok.String(*v.Type)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFormInputBindingPropertiesValueProperties(v *types.FormInputBindingPropertiesValueProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Model != nil {
+		ok := object.Key("model")
+		ok.String(*v.Model)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFormInputValueProperty(v *types.FormInputValueProperty, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BindingProperties != nil {
+		ok := object.Key("bindingProperties")
+		if err := awsRestjson1_serializeDocumentFormInputValuePropertyBindingProperties(v.BindingProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Concat != nil {
+		ok := object.Key("concat")
+		if err := awsRestjson1_serializeDocumentFormInputValuePropertyList(v.Concat, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Value != nil {
 		ok := object.Key("value")
 		ok.String(*v.Value)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFormInputValuePropertyBindingProperties(v *types.FormInputValuePropertyBindingProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Field != nil {
+		ok := object.Key("field")
+		ok.String(*v.Field)
+	}
+
+	if v.Property != nil {
+		ok := object.Key("property")
+		ok.String(*v.Property)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFormInputValuePropertyList(v []types.FormInputValueProperty, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentFormInputValueProperty(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -3046,6 +3191,11 @@ func awsRestjson1_serializeDocumentPredicate(v *types.Predicate, value smithyjso
 		ok.String(*v.Operand)
 	}
 
+	if v.OperandType != nil {
+		ok := object.Key("operandType")
+		ok.String(*v.OperandType)
+	}
+
 	if v.Operator != nil {
 		ok := object.Key("operator")
 		ok.String(*v.Operator)
@@ -3090,6 +3240,11 @@ func awsRestjson1_serializeDocumentRefreshTokenRequestBody(v *types.RefreshToken
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientId != nil {
+		ok := object.Key("clientId")
+		ok.String(*v.ClientId)
+	}
+
 	if v.Token != nil {
 		ok := object.Key("token")
 		ok.String(*v.Token)
@@ -3101,6 +3256,11 @@ func awsRestjson1_serializeDocumentRefreshTokenRequestBody(v *types.RefreshToken
 func awsRestjson1_serializeDocumentSectionalElement(v *types.SectionalElement, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Excluded != nil {
+		ok := object.Key("excluded")
+		ok.Boolean(*v.Excluded)
+	}
 
 	if v.Level != nil {
 		ok := object.Key("level")
@@ -3360,6 +3520,11 @@ func awsRestjson1_serializeDocumentUpdateFormData(v *types.UpdateFormData, value
 		ok.String(string(v.FormActionType))
 	}
 
+	if len(v.LabelDecorator) > 0 {
+		ok := object.Key("labelDecorator")
+		ok.String(string(v.LabelDecorator))
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -3468,6 +3633,13 @@ func awsRestjson1_serializeDocumentValueMappingList(v []types.ValueMapping, valu
 func awsRestjson1_serializeDocumentValueMappings(v *types.ValueMappings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BindingProperties != nil {
+		ok := object.Key("bindingProperties")
+		if err := awsRestjson1_serializeDocumentFormInputBindingProperties(v.BindingProperties, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Values != nil {
 		ok := object.Key("values")

@@ -19,10 +19,10 @@ import (
 //
 // * Classic Load Balancer
 //
-// * Network Load Balancer
+// * Gateway Load Balancer
 //
 // *
-// Gateway Load Balancer
+// Network Load Balancer
 //
 // * VPC Lattice
 //

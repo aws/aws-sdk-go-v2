@@ -513,6 +513,9 @@ type CreateFormData struct {
 	// The FormCTA object that stores the call to action configuration for the form.
 	Cta *FormCTA
 
+	// Specifies an icon or decoration to display on the form.
+	LabelDecorator LabelDecorator
+
 	// One or more key-value pairs to use when tagging the form data.
 	Tags map[string]string
 
@@ -554,6 +557,9 @@ type ExchangeCodeForTokenRequestBody struct {
 	//
 	// This member is required.
 	RedirectUri *string
+
+	// The ID of the client to request the token from.
+	ClientId *string
 
 	noSmithyDocumentSerde
 }
@@ -598,6 +604,9 @@ type FieldInputConfig struct {
 
 	// The text to display to describe the field.
 	DescriptiveText *string
+
+	// The configuration for the file uploader field.
+	FileUploaderConfig *FileUploaderFieldConfig
 
 	// Specifies whether to render the field as an array. This property is ignored if
 	// the dataSourceType for the form is a Data Store.
@@ -691,6 +700,46 @@ type FieldValidationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the configuration for the file uploader field.
+type FileUploaderFieldConfig struct {
+
+	// The file types that are allowed to be uploaded by the file uploader. Provide
+	// this information in an array of strings specifying the valid file extensions.
+	//
+	// This member is required.
+	AcceptedFileTypes []string
+
+	// The access level to assign to the uploaded files in the Amazon S3 bucket where
+	// they are stored. The valid values for this property are private, protected, or
+	// public. For detailed information about the permissions associated with each
+	// access level, see File access levels
+	// (https://docs.amplify.aws/lib/storage/configureaccess/q/platform/js/) in the
+	// Amplify documentation.
+	//
+	// This member is required.
+	AccessLevel StorageAccessLevel
+
+	// Allows the file upload operation to be paused and resumed. The default value is
+	// false. When isResumable is set to true, the file uploader uses a multipart
+	// upload to break the files into chunks before upload. The progress of the upload
+	// isn't continuous, because the file uploader uploads a chunk at a time.
+	IsResumable *bool
+
+	// Specifies the maximum number of files that can be selected to upload. The
+	// default value is an unlimited number of files.
+	MaxFileCount *int32
+
+	// The maximum file size in bytes that the file uploader will accept. The default
+	// value is an unlimited file size.
+	MaxSize *int32
+
+	// Specifies whether to display or hide the image preview after selecting a file
+	// for upload. The default value is true to display the image preview.
+	ShowThumbnails *bool
+
+	noSmithyDocumentSerde
+}
+
 // Contains the configuration settings for a Form user interface (UI) element for
 // an Amplify app. A form is a component you can add to your project by specifying
 // a data source as the default configuration for the form.
@@ -749,6 +798,9 @@ type Form struct {
 
 	// Stores the call to action configuration for the form.
 	Cta *FormCTA
+
+	// Specifies an icon or decoration to display on the form.
+	LabelDecorator LabelDecorator
 
 	// One or more key-value pairs to use when tagging the form.
 	Tags map[string]string
@@ -822,12 +874,61 @@ type FormDataTypeConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Represents the data binding configuration for a form's input fields at
+// runtime.You can use FormInputBindingPropertiesValue to add exposed properties to
+// a form to allow different values to be entered when a form is reused in
+// different places in an app.
+type FormInputBindingPropertiesValue struct {
+
+	// Describes the properties to customize with data at runtime.
+	BindingProperties *FormInputBindingPropertiesValueProperties
+
+	// The property type.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the data binding configuration for a specific property using data
+// stored in Amazon Web Services. For Amazon Web Services connected properties, you
+// can bind a property to data stored in an Amplify DataStore model.
+type FormInputBindingPropertiesValueProperties struct {
+
+	// An Amplify DataStore model.
+	Model *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the configuration for an input field on a form. Use
 // FormInputValueProperty to specify the values to render or bind by default.
 type FormInputValueProperty struct {
 
+	// The information to bind fields to data at runtime.
+	BindingProperties *FormInputValuePropertyBindingProperties
+
+	// A list of form properties to concatenate to create the value to assign to this
+	// field property.
+	Concat []FormInputValueProperty
+
 	// The value to assign to the input field.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Associates a form property to a binding property. This enables exposed
+// properties on the top level form to propagate data to the form's property
+// values.
+type FormInputValuePropertyBindingProperties struct {
+
+	// The form property to bind to the data field.
+	//
+	// This member is required.
+	Property *string
+
+	// The data field to bind the property to.
+	Field *string
 
 	noSmithyDocumentSerde
 }
@@ -947,6 +1048,9 @@ type Predicate struct {
 	// The value to use when performing the evaluation.
 	Operand *string
 
+	// The type of value to use when performing the evaluation.
+	OperandType *string
+
 	// The operator to use to perform the evaluation.
 	Operator *string
 
@@ -956,7 +1060,7 @@ type Predicate struct {
 	noSmithyDocumentSerde
 }
 
-// Stores the metadata information about a feature on a form or view.
+// Stores the metadata information about a feature on a form.
 type PutMetadataFlagBody struct {
 
 	// The new information to store.
@@ -976,6 +1080,9 @@ type RefreshTokenRequestBody struct {
 	// This member is required.
 	Token *string
 
+	// The ID of the client to request the token from.
+	ClientId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -988,6 +1095,10 @@ type SectionalElement struct {
 	//
 	// This member is required.
 	Type *string
+
+	// Excludes a sectional element that was generated by default for a specified data
+	// model.
+	Excluded *bool
 
 	// Specifies the size of the font for a Heading sectional element. Valid values are
 	// 1 | 2 | 3 | 4 | 5 | 6.
@@ -1179,6 +1290,9 @@ type UpdateFormData struct {
 	// Specifies whether to perform a create or update action on the form.
 	FormActionType FormActionType
 
+	// Specifies an icon or decoration to display on the form.
+	LabelDecorator LabelDecorator
+
 	// The name of the form.
 	Name *string
 
@@ -1237,6 +1351,9 @@ type ValueMappings struct {
 	//
 	// This member is required.
 	Values []ValueMapping
+
+	// The information to bind fields to data at runtime.
+	BindingProperties map[string]FormInputBindingPropertiesValue
 
 	noSmithyDocumentSerde
 }

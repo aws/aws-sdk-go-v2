@@ -13,13 +13,12 @@ import (
 // Disassociates the specified regional application resource from any existing web
 // ACL association. A resource can have at most one web ACL association. A regional
 // application can be an Application Load Balancer (ALB), an Amazon API Gateway
-// REST API, an AppSync GraphQL API, an Amazon Cognito user pool, or an App Runner
+// REST API, an AppSync GraphQL API, a Amazon Cognito user pool, or an App Runner
 // service. For Amazon CloudFront, don't use this call. Instead, use your
 // CloudFront distribution configuration. To disassociate a web ACL, provide an
 // empty web ACL ID in the CloudFront call UpdateDistribution. For information, see
 // UpdateDistribution
-// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html)
-// in the Amazon CloudFront API Reference.
+// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html).
 func (c *Client) DisassociateWebACL(ctx context.Context, params *DisassociateWebACLInput, optFns ...func(*Options)) (*DisassociateWebACLOutput, error) {
 	if params == nil {
 		params = &DisassociateWebACLInput{}
@@ -42,23 +41,22 @@ type DisassociateWebACLInput struct {
 	//
 	// * For an Application Load
 	// Balancer:
-	// arn:partition:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+	// arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
 	//
 	// *
 	// For an Amazon API Gateway REST API:
-	// arn:partition:apigateway:region::/restapis/api-id/stages/stage-name
+	// arn:aws:apigateway:region::/restapis/api-id/stages/stage-name
+	//
+	// * For an AppSync
+	// GraphQL API: arn:aws:appsync:region:account-id:apis/GraphQLApiId
 	//
 	// * For an
-	// AppSync GraphQL API:
-	// arn:partition:appsync:region:account-id:apis/GraphQLApiId
+	// Amazon Cognito user pool:
+	// arn:aws:cognito-idp:region:account-id:userpool/user-pool-id
 	//
-	// * For an Amazon
-	// Cognito user pool:
-	// arn:partition:cognito-idp:region:account-id:userpool/user-pool-id
-	//
-	// * For an App
-	// Runner service:
-	// arn:partition:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
+	// * For an App Runner
+	// service:
+	// arn:aws:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
 	//
 	// This member is required.
 	ResourceArn *string

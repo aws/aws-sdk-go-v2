@@ -44,7 +44,7 @@ import (
 // Rule, RuleGroup, and managed rule group. You can associate a web ACL with one or
 // more Amazon Web Services resources to protect. The resources can be an Amazon
 // CloudFront distribution, an Amazon API Gateway REST API, an Application Load
-// Balancer, an AppSync GraphQL API, an Amazon Cognito user pool, or an App Runner
+// Balancer, an AppSync GraphQL API, Amazon Cognito user pool, or an App Runner
 // service.
 func (c *Client) UpdateWebACL(ctx context.Context, params *UpdateWebACLInput, optFns ...func(*Options)) (*UpdateWebACLOutput, error) {
 	if params == nil {
@@ -93,7 +93,7 @@ type UpdateWebACLInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
-	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito
+	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
 	//
@@ -111,14 +111,6 @@ type UpdateWebACLInput struct {
 	// This member is required.
 	VisibilityConfig *types.VisibilityConfig
 
-	// Specifies custom configurations for the associations between the web ACL and
-	// protected resources. Use this to customize the maximum size of the request body
-	// that your protected CloudFront distributions forward to WAF for inspection. The
-	// default is 16 KB (16,384 kilobytes). You are charged additional fees when your
-	// protected resources forward body sizes that are larger than the default. For
-	// more information, see WAF Pricing (http://aws.amazon.com/waf/pricing/).
-	AssociationConfig *types.AssociationConfig
-
 	// Specifies how WAF should handle CAPTCHA evaluations for rules that don't have
 	// their own CaptchaConfig settings. If you don't specify this, WAF uses its
 	// default settings for CaptchaConfig.
@@ -135,10 +127,13 @@ type UpdateWebACLInput struct {
 	// you define in the web ACL. For information about customizing web requests and
 	// responses, see Customizing web requests and responses in WAF
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
-	// in the WAF Developer Guide. For information about the limits on count and size
-	// for custom request and response settings, see WAF quotas
+	// in the WAF Developer Guide
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). For
+	// information about the limits on count and size for custom request and response
+	// settings, see WAF quotas
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html) in the WAF
-	// Developer Guide.
+	// Developer Guide
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 	CustomResponseBodies map[string]types.CustomResponseBody
 
 	// A description of the web ACL that helps with identification.

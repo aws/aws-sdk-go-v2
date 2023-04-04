@@ -1,0 +1,8 @@
+{
+    "id": "4890adbf-e092-4ad6-95ed-18cea7c399dd",
+    "type": "documentation",
+    "description": "Documentation updates for Amazon EC2 Auto Scaling",
+    "modules": [
+        "service/autoscaling"
+    ]
+}

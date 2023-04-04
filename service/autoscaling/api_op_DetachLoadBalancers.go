@@ -10,19 +10,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API call has been replaced with a new "traffic sources" API call
-// (DetachTrafficSources) that can detach multiple traffic sources types. While we
-// continue to support DetachLoadBalancers, and you can use both the original
-// DetachLoadBalancers API call and the new DetachTrafficSources API call on the
-// same Auto Scaling group, we recommend using the new "traffic sources" API call
-// to simplify how you manage traffic sources. Detaches one or more Classic Load
-// Balancers from the specified Auto Scaling group. This operation detaches only
-// Classic Load Balancers. If you have Application Load Balancers, Network Load
-// Balancers, or Gateway Load Balancers, use the DetachLoadBalancerTargetGroups API
-// instead. When you detach a load balancer, it enters the Removing state while
-// deregistering the instances in the group. When all instances are deregistered,
-// then you can no longer describe the load balancer using the
-// DescribeLoadBalancers API call. The instances remain running.
+// This API operation is superseded by DetachTrafficSources, which can detach
+// multiple traffic sources types. We recommend using DetachTrafficSources to
+// simplify how you manage traffic sources. However, we continue to support
+// DetachLoadBalancers. You can use both the original DetachLoadBalancers API
+// operation and DetachTrafficSources on the same Auto Scaling group. Detaches one
+// or more Classic Load Balancers from the specified Auto Scaling group. This
+// operation detaches only Classic Load Balancers. If you have Application Load
+// Balancers, Network Load Balancers, or Gateway Load Balancers, use the
+// DetachLoadBalancerTargetGroups API instead. When you detach a load balancer, it
+// enters the Removing state while deregistering the instances in the group. When
+// all instances are deregistered, then you can no longer describe the load
+// balancer using the DescribeLoadBalancers API call. The instances remain running.
 func (c *Client) DetachLoadBalancers(ctx context.Context, params *DetachLoadBalancersInput, optFns ...func(*Options)) (*DetachLoadBalancersOutput, error) {
 	if params == nil {
 		params = &DetachLoadBalancersInput{}

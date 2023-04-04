@@ -4988,6 +4988,11 @@ func awsRestjson1_deserializeDocumentFieldInputConfig(v **types.FieldInputConfig
 				sv.DescriptiveText = ptr.String(jtv)
 			}
 
+		case "fileUploaderConfig":
+			if err := awsRestjson1_deserializeDocumentFileUploaderFieldConfig(&sv.FileUploaderConfig, value); err != nil {
+				return err
+			}
+
 		case "isArray":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -5327,6 +5332,95 @@ func awsRestjson1_deserializeDocumentFieldValidationConfiguration(v **types.Fiel
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFileUploaderFieldConfig(v **types.FileUploaderFieldConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FileUploaderFieldConfig
+	if *v == nil {
+		sv = &types.FileUploaderFieldConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "acceptedFileTypes":
+			if err := awsRestjson1_deserializeDocumentStrValues(&sv.AcceptedFileTypes, value); err != nil {
+				return err
+			}
+
+		case "accessLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageAccessLevel to be of type string, got %T instead", value)
+				}
+				sv.AccessLevel = types.StorageAccessLevel(jtv)
+			}
+
+		case "isResumable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsResumable = ptr.Bool(jtv)
+			}
+
+		case "maxFileCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxFileCount = ptr.Int32(int32(i64))
+			}
+
+		case "maxSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxSize = ptr.Int32(int32(i64))
+			}
+
+		case "showThumbnails":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ShowThumbnails = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentForm(v **types.Form, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5398,6 +5492,15 @@ func awsRestjson1_deserializeDocumentForm(v **types.Form, value interface{}) err
 					return fmt.Errorf("expected Uuid to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "labelDecorator":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LabelDecorator to be of type string, got %T instead", value)
+				}
+				sv.LabelDecorator = types.LabelDecorator(jtv)
 			}
 
 		case "name":
@@ -5684,6 +5787,126 @@ func awsRestjson1_deserializeDocumentFormDataTypeConfig(v **types.FormDataTypeCo
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFormInputBindingProperties(v *map[string]types.FormInputBindingPropertiesValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.FormInputBindingPropertiesValue
+	if *v == nil {
+		mv = map[string]types.FormInputBindingPropertiesValue{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.FormInputBindingPropertiesValue
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentFormInputBindingPropertiesValue(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFormInputBindingPropertiesValue(v **types.FormInputBindingPropertiesValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FormInputBindingPropertiesValue
+	if *v == nil {
+		sv = &types.FormInputBindingPropertiesValue{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bindingProperties":
+			if err := awsRestjson1_deserializeDocumentFormInputBindingPropertiesValueProperties(&sv.BindingProperties, value); err != nil {
+				return err
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Type = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFormInputBindingPropertiesValueProperties(v **types.FormInputBindingPropertiesValueProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FormInputBindingPropertiesValueProperties
+	if *v == nil {
+		sv = &types.FormInputBindingPropertiesValueProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "model":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Model = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFormInputValueProperty(v **types.FormInputValueProperty, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5706,6 +5929,16 @@ func awsRestjson1_deserializeDocumentFormInputValueProperty(v **types.FormInputV
 
 	for key, value := range shape {
 		switch key {
+		case "bindingProperties":
+			if err := awsRestjson1_deserializeDocumentFormInputValuePropertyBindingProperties(&sv.BindingProperties, value); err != nil {
+				return err
+			}
+
+		case "concat":
+			if err := awsRestjson1_deserializeDocumentFormInputValuePropertyList(&sv.Concat, value); err != nil {
+				return err
+			}
+
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5721,6 +5954,89 @@ func awsRestjson1_deserializeDocumentFormInputValueProperty(v **types.FormInputV
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFormInputValuePropertyBindingProperties(v **types.FormInputValuePropertyBindingProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FormInputValuePropertyBindingProperties
+	if *v == nil {
+		sv = &types.FormInputValuePropertyBindingProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "field":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Field = ptr.String(jtv)
+			}
+
+		case "property":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Property = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFormInputValuePropertyList(v *[]types.FormInputValueProperty, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FormInputValueProperty
+	if *v == nil {
+		cv = []types.FormInputValueProperty{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FormInputValueProperty
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentFormInputValueProperty(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -6228,6 +6544,15 @@ func awsRestjson1_deserializeDocumentPredicate(v **types.Predicate, value interf
 				sv.Operand = ptr.String(jtv)
 			}
 
+		case "operandType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OperandType to be of type string, got %T instead", value)
+				}
+				sv.OperandType = ptr.String(jtv)
+			}
+
 		case "operator":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6387,6 +6712,15 @@ func awsRestjson1_deserializeDocumentSectionalElement(v **types.SectionalElement
 
 	for key, value := range shape {
 		switch key {
+		case "excluded":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Excluded = ptr.Bool(jtv)
+			}
+
 		case "level":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7209,6 +7543,11 @@ func awsRestjson1_deserializeDocumentValueMappings(v **types.ValueMappings, valu
 
 	for key, value := range shape {
 		switch key {
+		case "bindingProperties":
+			if err := awsRestjson1_deserializeDocumentFormInputBindingProperties(&sv.BindingProperties, value); err != nil {
+				return err
+			}
+
 		case "values":
 			if err := awsRestjson1_deserializeDocumentValueMappingList(&sv.Values, value); err != nil {
 				return err
