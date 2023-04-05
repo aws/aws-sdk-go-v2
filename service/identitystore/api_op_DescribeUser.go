@@ -57,20 +57,20 @@ type DescribeUserOutput struct {
 	// This member is required.
 	UserId *string
 
-	// The user's physical address.
+	// The physical address of the user.
 	Addresses []types.Address
 
-	// The user's name value for display.
+	// The display name of the user.
 	DisplayName *string
 
-	// The user's email value.
+	// The email address of the user.
 	Emails []types.Email
 
 	// A list of ExternalId objects that contains the identifiers issued to this
 	// resource by an external identity provider.
 	ExternalIds []types.ExternalId
 
-	// A string containing the user's geographical region or location.
+	// A string containing the geographical region or location of the user.
 	Locale *string
 
 	// The name of the user.
@@ -91,7 +91,7 @@ type DescribeUserOutput struct {
 	// The time zone for a user.
 	Timezone *string
 
-	// A string containing the user's title.
+	// A string containing the title of the user.
 	Title *string
 
 	// A unique string used to identify the user. The length limit is 128 characters.
@@ -100,7 +100,7 @@ type DescribeUserOutput struct {
 	// as an attribute of the user object in the identity store.
 	UserName *string
 
-	// A string indicating the user's type.
+	// A string indicating the type of user.
 	UserType *string
 
 	// Metadata pertaining to the operation's result.

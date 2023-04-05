@@ -1,0 +1,8 @@
+{
+    "id": "493c6fdc-0d90-4990-803c-1e4eefb537fc",
+    "type": "feature",
+    "description": "Fix ParticipantToken ExpirationTime format",
+    "modules": [
+        "service/ivsrealtime"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "bbc7eb5b-8346-4c17-b61d-8f726c39035c",
+    "type": "documentation",
+    "description": "This is a document only updated to add information about Amazon Elastic Inference (EI).",
+    "modules": [
+        "service/ecs"
+    ]
+}

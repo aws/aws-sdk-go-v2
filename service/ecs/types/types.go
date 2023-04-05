@@ -2056,29 +2056,30 @@ type FSxWindowsFileServerVolumeConfiguration struct {
 // An object representing a container health check. Health check parameters that
 // are specified in a container definition override any Docker health checks that
 // exist in the container image (such as those specified in a parent image or from
-// the image's Dockerfile). The Amazon ECS container agent only monitors and
-// reports on the health checks specified in the task definition. Amazon ECS does
-// not monitor Docker health checks that are embedded in a container image and not
-// specified in the container definition. Health check parameters that are
-// specified in a container definition override any Docker health checks that exist
-// in the container image. You can view the health status of both individual
-// containers and a task with the DescribeTasks API operation or when viewing the
-// task details in the console. The following describes the possible healthStatus
-// values for a container:
+// the image's Dockerfile). This configuration maps to the HEALTHCHECK parameter of
+// docker run (https://docs.docker.com/engine/reference/run/). The Amazon ECS
+// container agent only monitors and reports on the health checks specified in the
+// task definition. Amazon ECS does not monitor Docker health checks that are
+// embedded in a container image and not specified in the container definition.
+// Health check parameters that are specified in a container definition override
+// any Docker health checks that exist in the container image. You can view the
+// health status of both individual containers and a task with the DescribeTasks
+// API operation or when viewing the task details in the console. The following
+// describes the possible healthStatus values for a container:
 //
-// * HEALTHY-The container health check has passed
-// successfully.
+// * HEALTHY-The
+// container health check has passed successfully.
 //
-// * UNHEALTHY-The container health check has failed.
+// * UNHEALTHY-The container
+// health check has failed.
 //
-// * UNKNOWN-The
-// container health check is being evaluated or there's no container health check
-// defined.
+// * UNKNOWN-The container health check is being
+// evaluated or there's no container health check defined.
 //
-// The following describes the possible healthStatus values for a task.
-// The container health check status of nonessential containers only affects the
-// health status of a task if no essential containers have health checks
-// defined.
+// The following describes
+// the possible healthStatus values for a task. The container health check status
+// of non-essential containers don't have an effect on the health status of a
+// task.
 //
 // * HEALTHY-All essential containers within the task have passed their
 // health checks.
@@ -2087,23 +2088,19 @@ type FSxWindowsFileServerVolumeConfiguration struct {
 // health check.
 //
 // * UNKNOWN-The essential containers within the task are still
-// having their health checks evaluated or there are only nonessential containers
-// with health checks defined.
+// having their health checks evaluated, there are only nonessential containers
+// with health checks defined, or there are no container health checks defined.
 //
-// If a task is run manually, and not as part of a
-// service, the task will continue its lifecycle regardless of its health status.
-// For tasks that are part of a service, if the task reports as unhealthy then the
-// task will be stopped and the service scheduler will replace it. For tasks that
-// are a part of a service and the service uses the ECS rolling deployment type,
-// the deployment is paused while the new tasks have the UNKNOWN task health check
-// status. For example, tasks that define health checks for nonessential containers
-// when no essential containers have health checks will have the UNKNOWN health
-// check status indefinitely which prevents the deployment from completing. The
-// following are notes about container health check support:
+// If
+// a task is run manually, and not as part of a service, the task will continue its
+// lifecycle regardless of its health status. For tasks that are part of a service,
+// if the task reports as unhealthy then the task will be stopped and the service
+// scheduler will replace it. The following are notes about container health check
+// support:
 //
-// * Container health
-// checks require version 1.17.0 or greater of the Amazon ECS container agent. For
-// more information, see Updating the Amazon ECS container agent
+// * Container health checks require version 1.17.0 or greater of the
+// Amazon ECS container agent. For more information, see Updating the Amazon ECS
+// container agent
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html).
 //
 // *
@@ -2197,7 +2194,8 @@ type HostVolumeProperties struct {
 type InferenceAccelerator struct {
 
 	// The Elastic Inference accelerator device name. The deviceName must also be
-	// referenced in a container definition as a ResourceRequirement.
+	// referenced in a container definition as a ResourceRequirement
+	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ResourceRequirement.html).
 	//
 	// This member is required.
 	DeviceName *string
@@ -2307,8 +2305,9 @@ type KeyValuePair struct {
 	noSmithyDocumentSerde
 }
 
-// Linux-specific options that are applied to the container, such as Linux
-// KernelCapabilities.
+// The Linux-specific options that are applied to the container, such as Linux
+// KernelCapabilities
+// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_KernelCapabilities.html).
 type LinuxParameters struct {
 
 	// The Linux capabilities for the container that are added to or dropped from the
@@ -2377,9 +2376,7 @@ type LinuxParameters struct {
 	noSmithyDocumentSerde
 }
 
-// The load balancer configuration to use with a service or task set. For specific
-// notes and restrictions regarding the use of load balancers with services and
-// task sets, see the CreateService and CreateTaskSet actions. When you add,
+// The load balancer configuration to use with a service or task set. When you add,
 // update, or remove a load balancer configuration, Amazon ECS starts a new
 // deployment with the updated Elastic Load Balancing configuration. This causes
 // tasks to register to and deregister from load balancers. We recommend that you
@@ -2581,15 +2578,18 @@ type ManagedScaling struct {
 	// Determines whether to use managed scaling for the capacity provider.
 	Status ManagedScalingStatus
 
-	// The target capacity value for the capacity provider. The specified value must be
-	// greater than 0 and less than or equal to 100. A value of 100 results in the
-	// Amazon EC2 instances in your Auto Scaling group being completely used.
+	// The target capacity utilization as a percentage for the capacity provider. The
+	// specified value must be greater than 0 and less than or equal to 100. For
+	// example, if you want the capacity provider to maintain 10% spare capacity, then
+	// that means the utilization is 90%, so use a targetCapacity of 90. The default
+	// value of 100 percent results in the Amazon EC2 instances in your Auto Scaling
+	// group being completely used.
 	TargetCapacity *int32
 
 	noSmithyDocumentSerde
 }
 
-// Details for a volume mount point that's used in a container definition.
+// The details for a volume mount point that's used in a container definition.
 type MountPoint struct {
 
 	// The path on the container to mount the host volume at.
@@ -2909,9 +2909,11 @@ type PortMapping struct {
 	// host port that was previously specified in a running task is also reserved while
 	// the task is running. That is, after a task stops, the host port is released. The
 	// current reserved ports are displayed in the remainingResources of
-	// DescribeContainerInstances output. A container instance can have up to 100
-	// reserved ports at a time. This number includes the default reserved ports.
-	// Automatically assigned ports aren't included in the 100 reserved ports quota.
+	// DescribeContainerInstances
+	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeContainerInstances.html)
+	// output. A container instance can have up to 100 reserved ports at a time. This
+	// number includes the default reserved ports. Automatically assigned ports aren't
+	// included in the 100 reserved ports quota.
 	HostPort *int32
 
 	// The name that's used for the port mapping. This parameter only applies to
@@ -3052,7 +3054,7 @@ type Resource struct {
 // information, see Working with GPUs on Amazon ECS
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html) or
 // Working with Amazon Elastic Inference on Amazon ECS
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html)
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/url-ecs-dev;ecs-inference.html)
 // in the Amazon Elastic Container Service Developer Guide
 type ResourceRequirement struct {
 
@@ -3067,7 +3069,9 @@ type ResourceRequirement struct {
 	// container. The number of GPUs that's reserved for all containers in a task can't
 	// exceed the number of available GPUs on the container instance that the task is
 	// launched on. If the InferenceAccelerator type is used, the value matches the
-	// deviceName for an InferenceAccelerator specified in a task definition.
+	// deviceName for an InferenceAccelerator
+	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html)
+	// specified in a task definition.
 	//
 	// This member is required.
 	Value *string
@@ -3146,7 +3150,7 @@ type Secret struct {
 	noSmithyDocumentSerde
 }
 
-// Details on a service within a cluster
+// Details on a service within a cluster.
 type Service struct {
 
 	// The capacity provider strategy the service uses. When using the DescribeServices
@@ -3470,9 +3474,8 @@ type ServiceConnectService struct {
 	// creates for this Amazon ECS service. This must be unique within the Cloud Map
 	// namespace. The name can contain up to 64 characters. The name can include
 	// lowercase letters, numbers, underscores (_), and hyphens (-). The name can't
-	// start with a hyphen. If this parameter isn't specified, the default value of
-	// discoveryName.namespace is used. If the discoveryName isn't specified, the port
-	// mapping name from the task definition is used in portName.namespace.
+	// start with a hyphen. If the discoveryName isn't specified, the port mapping name
+	// from the task definition is used in portName.namespace.
 	DiscoveryName *string
 
 	// The port number for the Service Connect proxy to listen on. Use the value of
@@ -3507,10 +3510,9 @@ type ServiceConnectServiceResource struct {
 	// name of the new Cloud Map service that Amazon ECS creates for this Amazon ECS
 	// service. This must be unique within the Cloud Map namespace. The name can
 	// contain up to 64 characters. The name can include lowercase letters, numbers,
-	// underscores (_), and hyphens (-). The name can't start with a hyphen. If this
-	// parameter isn't specified, the default value of discoveryName.namespace is used.
-	// If the discoveryName isn't specified, the port mapping name from the task
-	// definition is used in portName.namespace.
+	// underscores (_), and hyphens (-). The name can't start with a hyphen. If the
+	// discoveryName isn't specified, the port mapping name from the task definition is
+	// used in portName.namespace.
 	DiscoveryName *string
 
 	noSmithyDocumentSerde
@@ -4144,9 +4146,10 @@ type TaskDefinition struct {
 	// supported for tasks run on Fargate.
 	RequiresAttributes []Attribute
 
-	// The task launch types the task definition was validated against. To determine
-	// which task launch types the task definition is validated for, see the
-	// TaskDefinition$compatibilities parameter.
+	// The task launch types the task definition was validated against. For more
+	// information, see Amazon ECS launch types
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
+	// in the Amazon Elastic Container Service Developer Guide.
 	RequiresCompatibilities []Compatibility
 
 	// The revision of the task in a particular family. The revision is a version

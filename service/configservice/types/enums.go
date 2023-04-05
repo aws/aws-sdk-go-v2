@@ -889,6 +889,29 @@ const (
 	ResourceTypeEventsConnection                         ResourceType = "AWS::Events::Connection"
 	ResourceTypeEventSchemasSchema                       ResourceType = "AWS::EventSchemas::Schema"
 	ResourceTypeMediaPackagePackagingConfiguration       ResourceType = "AWS::MediaPackage::PackagingConfiguration"
+	ResourceTypeKinesisVideoSignalingChannel             ResourceType = "AWS::KinesisVideo::SignalingChannel"
+	ResourceTypeAppStreamDirectoryConfig                 ResourceType = "AWS::AppStream::DirectoryConfig"
+	ResourceTypeLookoutVisionProject                     ResourceType = "AWS::LookoutVision::Project"
+	ResourceTypeRoute53RecoveryControlCluster            ResourceType = "AWS::Route53RecoveryControl::Cluster"
+	ResourceTypeRoute53RecoveryControlSafetyRule         ResourceType = "AWS::Route53RecoveryControl::SafetyRule"
+	ResourceTypeRoute53RecoveryControlControlPanel       ResourceType = "AWS::Route53RecoveryControl::ControlPanel"
+	ResourceTypeRoute53RecoveryControlRoutingControl     ResourceType = "AWS::Route53RecoveryControl::RoutingControl"
+	ResourceTypeRoute53RecoveryReadinessResourceSet      ResourceType = "AWS::Route53RecoveryReadiness::ResourceSet"
+	ResourceTypeRoboMakerSimulationApplication           ResourceType = "AWS::RoboMaker::SimulationApplication"
+	ResourceTypeRoboMakerRobotApplication                ResourceType = "AWS::RoboMaker::RobotApplication"
+	ResourceTypeHealthLakeFHIRDatastore                  ResourceType = "AWS::HealthLake::FHIRDatastore"
+	ResourceTypePinpointSegment                          ResourceType = "AWS::Pinpoint::Segment"
+	ResourceTypePinpointApplicationSettings              ResourceType = "AWS::Pinpoint::ApplicationSettings"
+	ResourceTypeEventsRule                               ResourceType = "AWS::Events::Rule"
+	ResourceTypeEC2DHCPOptions                           ResourceType = "AWS::EC2::DHCPOptions"
+	ResourceTypeEC2NetworkInsightsPath                   ResourceType = "AWS::EC2::NetworkInsightsPath"
+	ResourceTypeEC2TrafficMirrorFilter                   ResourceType = "AWS::EC2::TrafficMirrorFilter"
+	ResourceTypeEc2ipam                                  ResourceType = "AWS::EC2::IPAM"
+	ResourceTypeIoTTwinMakerScene                        ResourceType = "AWS::IoTTwinMaker::Scene"
+	ResourceTypeNetworkManagerTransitGatewayRegistration ResourceType = "AWS::NetworkManager::TransitGatewayRegistration"
+	ResourceTypeCustomerProfilesDomain                   ResourceType = "AWS::CustomerProfiles::Domain"
+	ResourceTypeAutoScalingWarmPool                      ResourceType = "AWS::AutoScaling::WarmPool"
+	ResourceTypeConnectPhoneNumber                       ResourceType = "AWS::Connect::PhoneNumber"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -1147,6 +1170,29 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::Events::Connection",
 		"AWS::EventSchemas::Schema",
 		"AWS::MediaPackage::PackagingConfiguration",
+		"AWS::KinesisVideo::SignalingChannel",
+		"AWS::AppStream::DirectoryConfig",
+		"AWS::LookoutVision::Project",
+		"AWS::Route53RecoveryControl::Cluster",
+		"AWS::Route53RecoveryControl::SafetyRule",
+		"AWS::Route53RecoveryControl::ControlPanel",
+		"AWS::Route53RecoveryControl::RoutingControl",
+		"AWS::Route53RecoveryReadiness::ResourceSet",
+		"AWS::RoboMaker::SimulationApplication",
+		"AWS::RoboMaker::RobotApplication",
+		"AWS::HealthLake::FHIRDatastore",
+		"AWS::Pinpoint::Segment",
+		"AWS::Pinpoint::ApplicationSettings",
+		"AWS::Events::Rule",
+		"AWS::EC2::DHCPOptions",
+		"AWS::EC2::NetworkInsightsPath",
+		"AWS::EC2::TrafficMirrorFilter",
+		"AWS::EC2::IPAM",
+		"AWS::IoTTwinMaker::Scene",
+		"AWS::NetworkManager::TransitGatewayRegistration",
+		"AWS::CustomerProfiles::Domain",
+		"AWS::AutoScaling::WarmPool",
+		"AWS::Connect::PhoneNumber",
 	}
 }
 

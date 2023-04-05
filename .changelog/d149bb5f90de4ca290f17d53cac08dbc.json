@@ -1,0 +1,8 @@
+{
+    "id": "d149bb5f-90de-4ca2-90f1-7d53cac08dbc",
+    "type": "feature",
+    "description": "App Runner adds support for seven new vCPU and memory configurations.",
+    "modules": [
+        "service/apprunner"
+    ]
+}

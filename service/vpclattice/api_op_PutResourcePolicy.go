@@ -31,7 +31,8 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 
 type PutResourcePolicyInput struct {
 
-	// An IAM policy.
+	// An IAM policy. The policy string in JSON must not contain newlines or blank
+	// lines.
 	//
 	// This member is required.
 	Policy *string

@@ -254,7 +254,6 @@ type ProductType string
 const (
 	ProductTypeCloudFormationTemplate ProductType = "CLOUD_FORMATION_TEMPLATE"
 	ProductTypeMarketplace            ProductType = "MARKETPLACE"
-	ProductTypeDefaultCustom          ProductType = "DEFAULT_CUSTOM"
 	ProductTypeTerraformOpenSource    ProductType = "TERRAFORM_OPEN_SOURCE"
 )
 
@@ -265,7 +264,6 @@ func (ProductType) Values() []ProductType {
 	return []ProductType{
 		"CLOUD_FORMATION_TEMPLATE",
 		"MARKETPLACE",
-		"DEFAULT_CUSTOM",
 		"TERRAFORM_OPEN_SOURCE",
 	}
 }
@@ -455,7 +453,6 @@ const (
 	ProvisioningArtifactTypeCloudFormationTemplate ProvisioningArtifactType = "CLOUD_FORMATION_TEMPLATE"
 	ProvisioningArtifactTypeMarketplaceAmi         ProvisioningArtifactType = "MARKETPLACE_AMI"
 	ProvisioningArtifactTypeMarketplaceCar         ProvisioningArtifactType = "MARKETPLACE_CAR"
-	ProvisioningArtifactTypeDefaultCustom          ProvisioningArtifactType = "DEFAULT_CUSTOM"
 	ProvisioningArtifactTypeTerraformOpenSource    ProvisioningArtifactType = "TERRAFORM_OPEN_SOURCE"
 )
 
@@ -467,7 +464,6 @@ func (ProvisioningArtifactType) Values() []ProvisioningArtifactType {
 		"CLOUD_FORMATION_TEMPLATE",
 		"MARKETPLACE_AMI",
 		"MARKETPLACE_CAR",
-		"DEFAULT_CUSTOM",
 		"TERRAFORM_OPEN_SOURCE",
 	}
 }

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new user within the specified identity store.
+// Creates a user within the specified identity store.
 func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns ...func(*Options)) (*CreateUserOutput, error) {
 	if params == nil {
 		params = &CreateUserInput{}
@@ -37,17 +37,17 @@ type CreateUserInput struct {
 	// A list of Address objects containing addresses associated with the user.
 	Addresses []types.Address
 
-	// A string containing the user's name. This value is typically formatted for
+	// A string containing the name of the user. This value is typically formatted for
 	// display when the user is referenced. For example, "John Doe."
 	DisplayName *string
 
 	// A list of Email objects containing email addresses associated with the user.
 	Emails []types.Email
 
-	// A string containing the user's geographical region or location.
+	// A string containing the geographical region or location of the user.
 	Locale *string
 
-	// An object containing the user's name.
+	// An object containing the name of the user.
 	Name *types.Name
 
 	// A string containing an alternate name for the user.
@@ -60,24 +60,25 @@ type CreateUserInput struct {
 	// English" or "en-us."
 	PreferredLanguage *string
 
-	// A string containing a URL that may be associated with the user.
+	// A string containing a URL that might be associated with the user.
 	ProfileUrl *string
 
-	// A string containing the user's time zone.
+	// A string containing the time zone of the user.
 	Timezone *string
 
-	// A string containing the user's title. Possible values are left unspecified given
-	// that they depend on each customer's specific needs.
+	// A string containing the title of the user. Possible values are left unspecified.
+	// The value can vary based on your specific use case.
 	Title *string
 
 	// A unique string used to identify the user. The length limit is 128 characters.
 	// This value can consist of letters, accented characters, symbols, numbers, and
 	// punctuation. This value is specified at the time the user is created and stored
-	// as an attribute of the user object in the identity store.
+	// as an attribute of the user object in the identity store. "Administrator" and
+	// "AWSAdministrators" are reserved names and can't be used for users or groups.
 	UserName *string
 
-	// A string indicating the user's type. Possible values depend on each customer's
-	// specific needs, so they are left unspecified.
+	// A string indicating the type of user. Possible values are left unspecified. The
+	// value can vary based on your specific use case.
 	UserType *string
 
 	noSmithyDocumentSerde

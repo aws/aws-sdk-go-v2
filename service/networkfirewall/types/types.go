@@ -978,7 +978,7 @@ type RulesSource struct {
 	// a stateful rule group. Use this option to specify simple Suricata rules with
 	// protocol, source and destination, ports, direction, and rule options. For
 	// information about the Suricata Rules format, see Rules Format
-	// (https://suricata.readthedocs.io/rules/intro.html#).
+	// (https://suricata.readthedocs.iorules/intro.html#).
 	StatefulRules []StatefulRule
 
 	// Stateless inspection criteria to be used in a stateless rule group.
@@ -1171,7 +1171,7 @@ type StatefulEngineOptions struct {
 // this option to specify a simple Suricata rule with protocol, source and
 // destination, ports, direction, and rule options. For information about the
 // Suricata Rules format, see Rules Format
-// (https://suricata.readthedocs.io/rules/intro.html#).
+// (https://suricata.readthedocs.iorules/intro.html#).
 type StatefulRule struct {
 
 	// Defines what Network Firewall should do with the packets in a traffic flow when

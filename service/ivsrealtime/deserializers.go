@@ -1750,18 +1750,15 @@ func awsRestjson1_deserializeDocumentParticipantToken(v **types.ParticipantToken
 
 		case "expirationTime":
 			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.ExpirationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
-
-				default:
-					return fmt.Errorf("expected ParticipantTokenExpirationTime to be a JSON Number, got %T instead", value)
-
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParticipantTokenExpirationTime to be of type string, got %T instead", value)
 				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.ExpirationTime = ptr.Time(t)
 			}
 
 		case "participantId":

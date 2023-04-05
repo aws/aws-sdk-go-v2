@@ -12,5 +12,5 @@
 // compatibility purposes. For more information, see IAM Identity Center rename
 // (https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html#renamed).
 // This reference guide describes the identity store operations that you can call
-// programatically and includes detailed information on data types and errors.
+// programatically and includes detailed information about data types and errors.
 package identitystore

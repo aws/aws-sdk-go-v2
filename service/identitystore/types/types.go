@@ -40,8 +40,7 @@ type Address struct {
 
 // A unique identifier for a user or group that is not the primary identifier. This
 // value can be an identifier from an external identity provider (IdP) that is
-// associated with the user, the group, or a unique attribute. For example, a
-// unique GroupDisplayName.
+// associated with the user, the group, or a unique attribute.
 //
 // The following types satisfy this interface:
 //
@@ -139,7 +138,7 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
-// A group object that contains a specified group’s metadata and attributes.
+// A group object that contains the metadata and attributes for a specified group.
 type Group struct {
 
 	// The identifier for a group in the identity store.
@@ -155,11 +154,11 @@ type Group struct {
 	// A string containing a description of the specified group.
 	Description *string
 
-	// The group’s display name value. The length limit is 1,024 characters. This value
-	// can consist of letters, accented characters, symbols, numbers, punctuation, tab,
-	// new line, carriage return, space, and nonbreaking space in this attribute. This
-	// value is specified at the time the group is created and stored as an attribute
-	// of the group object in the identity store.
+	// The display name value for the group. The length limit is 1,024 characters. This
+	// value can consist of letters, accented characters, symbols, numbers,
+	// punctuation, tab, new line, carriage return, space, and nonbreaking space in
+	// this attribute. This value is specified at the time the group is created and
+	// stored as an attribute of the group object in the identity store.
 	DisplayName *string
 
 	// A list of ExternalId objects that contains the identifiers issued to this
@@ -286,7 +285,7 @@ type UniqueAttribute struct {
 	noSmithyDocumentSerde
 }
 
-// A user object that contains a specified user’s metadata and attributes.
+// A user object that contains the metadata and attributes for a specified user.
 type User struct {
 
 	// The globally unique identifier for the identity store.
@@ -302,8 +301,8 @@ type User struct {
 	// A list of Address objects containing addresses associated with the user.
 	Addresses []Address
 
-	// A string containing the user's name that's formatted for display when the user
-	// is referenced. For example, "John Doe."
+	// A string containing the name of the user that is formatted for display when the
+	// user is referenced. For example, "John Doe."
 	DisplayName *string
 
 	// A list of Email objects containing email addresses associated with the user.
@@ -313,10 +312,10 @@ type User struct {
 	// resource by an external identity provider.
 	ExternalIds []ExternalId
 
-	// A string containing the user's geographical region or location.
+	// A string containing the geographical region or location of the user.
 	Locale *string
 
-	// An object containing the user's name.
+	// An object containing the name of the user.
 	Name *Name
 
 	// A string containing an alternate name for the user.
@@ -329,14 +328,14 @@ type User struct {
 	// English" or "en-us."
 	PreferredLanguage *string
 
-	// A string containing a URL that may be associated with the user.
+	// A string containing a URL that might be associated with the user.
 	ProfileUrl *string
 
-	// A string containing the user's time zone.
+	// A string containing the time zone of the user.
 	Timezone *string
 
-	// A string containing the user's title. Possible values depend on each customer's
-	// specific needs, so they are left unspecified.
+	// A string containing the title of the user. Possible values are left unspecified.
+	// The value can vary based on your specific use case.
 	Title *string
 
 	// A unique string used to identify the user. The length limit is 128 characters.
@@ -345,8 +344,8 @@ type User struct {
 	// as an attribute of the user object in the identity store.
 	UserName *string
 
-	// A string indicating the user's type. Possible values depend on each customer's
-	// specific needs, so they are left unspecified.
+	// A string indicating the type of user. Possible values are left unspecified. The
+	// value can vary based on your specific use case.
 	UserType *string
 
 	noSmithyDocumentSerde
