@@ -1,21 +1,21 @@
 package awsrulesfn
 
 import (
-	"testing"
 	"github.com/google/go-cmp/cmp"
+	"testing"
 )
 
 func TestParseARN(t *testing.T) {
 	cases := []struct {
-		input     string
-		expect    *ARN
+		input  string
+		expect *ARN
 	}{
 		{
-			input:     "invalid",
+			input:  "invalid",
 			expect: nil,
 		},
 		{
-			input:     "arn:nope",
+			input:  "arn:nope",
 			expect: nil,
 		},
 		{
@@ -24,8 +24,8 @@ func TestParseARN(t *testing.T) {
 				Partition:  "aws",
 				Service:    "ecr",
 				Region:     "us-west-2",
-				AccountId:  "123456789012",
-				ResourceId: []string{"repository", "foo", "bar"},
+				AccountID:  "123456789012",
+				ResourceID: []string{"repository", "foo", "bar"},
 			},
 		},
 		{
@@ -34,8 +34,8 @@ func TestParseARN(t *testing.T) {
 				Partition:  "aws",
 				Service:    "elasticbeanstalk",
 				Region:     "us-east-1",
-				AccountId:  "123456789012",
-				ResourceId: []string{"environment", "My App", "MyEnvironment"},
+				AccountID:  "123456789012",
+				ResourceID: []string{"environment", "My App", "MyEnvironment"},
 			},
 		},
 		{
@@ -44,8 +44,8 @@ func TestParseARN(t *testing.T) {
 				Partition:  "aws",
 				Service:    "iam",
 				Region:     "",
-				AccountId:  "123456789012",
-				ResourceId: []string{"user", "David"},
+				AccountID:  "123456789012",
+				ResourceID: []string{"user", "David"},
 			},
 		},
 		{
@@ -54,8 +54,8 @@ func TestParseARN(t *testing.T) {
 				Partition:  "aws",
 				Service:    "rds",
 				Region:     "eu-west-1",
-				AccountId:  "123456789012",
-				ResourceId: []string{"db", "mysql-db"},
+				AccountID:  "123456789012",
+				ResourceID: []string{"db", "mysql-db"},
 			},
 		},
 		{
@@ -64,8 +64,8 @@ func TestParseARN(t *testing.T) {
 				Partition:  "aws",
 				Service:    "s3",
 				Region:     "",
-				AccountId:  "",
-				ResourceId: []string{"my_corporate_bucket", "exampleobject.png"},
+				AccountID:  "",
+				ResourceID: []string{"my_corporate_bucket", "exampleobject.png"},
 			},
 		},
 	}
