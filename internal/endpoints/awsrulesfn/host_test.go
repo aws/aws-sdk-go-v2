@@ -15,7 +15,7 @@ func TestIsVirtualHostableS3Bucket(t *testing.T) {
 			expect: true,
 		},
 		"single label no split too short": {
-			input:     "a",
+			input:  "a",
 			expect: false,
 		},
 		"single label with split": {
@@ -24,7 +24,7 @@ func TestIsVirtualHostableS3Bucket(t *testing.T) {
 			expect:          true,
 		},
 		"multiple labels no split": {
-			input:     "abc.123-",
+			input:  "abc.123-",
 			expect: false,
 		},
 		"multiple labels with split": {
@@ -35,32 +35,32 @@ func TestIsVirtualHostableS3Bucket(t *testing.T) {
 		"multiple labels with split invalid label": {
 			input:           "abc.123-...",
 			allowSubDomains: true,
-			expect: false,
+			expect:          false,
 		},
 		"max length host label": {
 			input:  "012345678901234567890123456789012345678901234567890123456789123",
 			expect: true,
 		},
 		"too large host label": {
-			input:     "0123456789012345678901234567890123456789012345678901234567891234",
+			input:  "0123456789012345678901234567890123456789012345678901234567891234",
 			expect: false,
 		},
 		"too small host label": {
-			input:     "",
+			input:  "",
 			expect: false,
 		},
 		"lower case only": {
-			input:     "AbC",
+			input:  "AbC",
 			expect: false,
 		},
 		"like IP address": {
-			input:     "127.111.222.123",
+			input:  "127.111.222.123",
 			expect: false,
 		},
 		"multiple labels like IP address": {
 			input:           "127.111.222.123",
 			allowSubDomains: true,
-			expect: false,
+			expect:          false,
 		},
 	}
 

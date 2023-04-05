@@ -1,10 +1,9 @@
 package awsrulesfn
 
 import (
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/netip"
 	"strings"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
-
 )
 
 // IsVirtualHostableS3Bucket returns if the input is a DNS compatible bucket
