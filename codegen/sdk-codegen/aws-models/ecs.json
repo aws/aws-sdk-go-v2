@@ -632,9 +632,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -645,9 +645,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -658,9 +658,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -671,9 +671,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -684,9 +684,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -697,9 +697,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -710,9 +710,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -723,9 +723,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -736,9 +736,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -749,9 +749,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -762,9 +762,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -775,9 +775,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -788,9 +788,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -801,9 +801,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -814,9 +814,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -827,9 +827,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -840,9 +840,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -853,9 +853,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -866,9 +866,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -879,9 +879,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -892,9 +892,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -905,9 +905,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -918,9 +918,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -931,9 +931,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -944,9 +944,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -957,9 +957,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -970,9 +970,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -983,9 +983,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -996,9 +996,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1009,9 +1009,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1022,9 +1022,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1035,9 +1035,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1048,9 +1048,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1061,9 +1061,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1074,9 +1074,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1087,9 +1087,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1100,9 +1100,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1113,9 +1113,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1126,9 +1126,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1139,9 +1139,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1152,9 +1152,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-iso-west-1"
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1165,9 +1176,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1178,9 +1200,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1191,9 +1224,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1204,9 +1248,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1218,8 +1262,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1229,9 +1273,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1241,10 +1285,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -2997,7 +3047,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs and maintains your desired number of tasks from a specified task definition. If\n\t\t\tthe number of tasks running in a service drops below the <code>desiredCount</code>,\n\t\t\tAmazon ECS runs another copy of the task in the specified cluster. To update an existing\n\t\t\tservice, see the <a>UpdateService</a> action.</p>\n         <p>In addition to maintaining the desired count of tasks in your service, you can\n\t\t\toptionally run your service behind one or more load balancers. The load balancers\n\t\t\tdistribute traffic across the tasks that are associated with the service. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html\">Service load balancing</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>Tasks for services that don't use a load balancer are considered healthy if they're in\n\t\t\tthe <code>RUNNING</code> state. Tasks for services that use a load balancer are\n\t\t\tconsidered healthy if they're in the <code>RUNNING</code> state and are reported as\n\t\t\thealthy by the load balancer.</p>\n         <p>There are two service scheduler strategies available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLICA</code> - The replica scheduling strategy places and\n\t\t\t\t\tmaintains your desired number of tasks across your cluster. By default, the\n\t\t\t\t\tservice scheduler spreads tasks across Availability Zones. You can use task\n\t\t\t\t\tplacement strategies and constraints to customize task placement decisions. For\n\t\t\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DAEMON</code> - The daemon scheduling strategy deploys exactly one\n\t\t\t\t\ttask on each active container instance that meets all of the task placement\n\t\t\t\t\tconstraints that you specify in your cluster. The service scheduler also\n\t\t\t\t\tevaluates the task placement constraints for running tasks. It also stops tasks\n\t\t\t\t\tthat don't meet the placement constraints. When using this strategy, you don't\n\t\t\t\t\tneed to specify a desired number of tasks, a task placement strategy, or use\n\t\t\t\t\tService Auto Scaling policies. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p>You can optionally specify a deployment configuration for your service. The deployment\n\t\t\tis initiated by changing properties. For example, the deployment might be initiated by\n\t\t\tthe task definition or by your desired count of a service. This is done with an <a>UpdateService</a> operation. The default value for a replica service for\n\t\t\t\t<code>minimumHealthyPercent</code> is 100%. The default value for a daemon service\n\t\t\tfor <code>minimumHealthyPercent</code> is 0%.</p>\n         <p>If a service uses the <code>ECS</code> deployment controller, the minimum healthy\n\t\t\tpercent represents a lower limit on the number of tasks in a service that must remain in\n\t\t\tthe <code>RUNNING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of your desired number of tasks (rounded up to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can deploy without using additional cluster capacity. For example, if you\n\t\t\tset your service to have desired number of four tasks and a minimum healthy percent of\n\t\t\t50%, the scheduler might stop two existing tasks to free up cluster capacity before\n\t\t\tstarting two new tasks. If they're in the <code>RUNNING</code> state, tasks for services\n\t\t\tthat don't use a load balancer are considered healthy . If they're in the\n\t\t\t\t<code>RUNNING</code> state and reported as healthy by the load balancer, tasks for\n\t\t\tservices that <i>do</i> use a load balancer are considered healthy . The\n\t\t\tdefault value for minimum healthy percent is 100%.</p>\n         <p>If a service uses the <code>ECS</code> deployment controller, the <b>maximum percent</b> parameter represents an upper limit on the\n\t\t\tnumber of tasks in a service that are allowed in the <code>RUNNING</code> or\n\t\t\t\t<code>PENDING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of the desired number of tasks (rounded down to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can define the deployment batch size. For example, if your service has a\n\t\t\tdesired number of four tasks and a maximum percent value of 200%, the scheduler may\n\t\t\tstart four new tasks before stopping the four older tasks (provided that the cluster\n\t\t\tresources required to do this are available). The default value for maximum percent is\n\t\t\t200%.</p>\n         <p>If a service uses either the <code>CODE_DEPLOY</code> or <code>EXTERNAL</code>\n\t\t\tdeployment controller types and tasks that use the EC2 launch type, the\n\t\t\t\t<b>minimum healthy percent</b> and <b>maximum percent</b> values are used only to define the lower and upper limit\n\t\t\ton the number of the tasks in the service that remain in the <code>RUNNING</code> state.\n\t\t\tThis is while the container instances are in the <code>DRAINING</code> state. If the\n\t\t\ttasks in the service use the Fargate launch type, the minimum healthy\n\t\t\tpercent and maximum percent values aren't used. This is the case even if they're\n\t\t\tcurrently visible when describing your service.</p>\n         <p>When creating a service that uses the <code>EXTERNAL</code> deployment controller, you\n\t\t\tcan specify only parameters that aren't controlled at the task set level. The only\n\t\t\trequired parameter is the service name. You control your services using the <a>CreateTaskSet</a> operation. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">Amazon ECS deployment types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>When the service scheduler launches new tasks, it determines task placement. For\n\t\t\tinformation about task placement and task placement strategies, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html\">Amazon ECS\n\t\t\t\ttask placement</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Runs and maintains your desired number of tasks from a specified task definition. If\n\t\t\tthe number of tasks running in a service drops below the <code>desiredCount</code>,\n\t\t\tAmazon ECS runs another copy of the task in the specified cluster. To update an existing\n\t\t\tservice, see the <a>UpdateService</a> action.</p>\n         <note>\n            <p>Starting April 15, 2023, Amazon Web Services will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. </p>\n         </note>\n         <p>In addition to maintaining the desired count of tasks in your service, you can\n\t\t\toptionally run your service behind one or more load balancers. The load balancers\n\t\t\tdistribute traffic across the tasks that are associated with the service. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html\">Service load balancing</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>Tasks for services that don't use a load balancer are considered healthy if they're in\n\t\t\tthe <code>RUNNING</code> state. Tasks for services that use a load balancer are\n\t\t\tconsidered healthy if they're in the <code>RUNNING</code> state and are reported as\n\t\t\thealthy by the load balancer.</p>\n         <p>There are two service scheduler strategies available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLICA</code> - The replica scheduling strategy places and\n\t\t\t\t\tmaintains your desired number of tasks across your cluster. By default, the\n\t\t\t\t\tservice scheduler spreads tasks across Availability Zones. You can use task\n\t\t\t\t\tplacement strategies and constraints to customize task placement decisions. For\n\t\t\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DAEMON</code> - The daemon scheduling strategy deploys exactly one\n\t\t\t\t\ttask on each active container instance that meets all of the task placement\n\t\t\t\t\tconstraints that you specify in your cluster. The service scheduler also\n\t\t\t\t\tevaluates the task placement constraints for running tasks. It also stops tasks\n\t\t\t\t\tthat don't meet the placement constraints. When using this strategy, you don't\n\t\t\t\t\tneed to specify a desired number of tasks, a task placement strategy, or use\n\t\t\t\t\tService Auto Scaling policies. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p>You can optionally specify a deployment configuration for your service. The deployment\n\t\t\tis initiated by changing properties. For example, the deployment might be initiated by\n\t\t\tthe task definition or by your desired count of a service. This is done with an <a>UpdateService</a> operation. The default value for a replica service for\n\t\t\t\t<code>minimumHealthyPercent</code> is 100%. The default value for a daemon service\n\t\t\tfor <code>minimumHealthyPercent</code> is 0%.</p>\n         <p>If a service uses the <code>ECS</code> deployment controller, the minimum healthy\n\t\t\tpercent represents a lower limit on the number of tasks in a service that must remain in\n\t\t\tthe <code>RUNNING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of your desired number of tasks (rounded up to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can deploy without using additional cluster capacity. For example, if you\n\t\t\tset your service to have desired number of four tasks and a minimum healthy percent of\n\t\t\t50%, the scheduler might stop two existing tasks to free up cluster capacity before\n\t\t\tstarting two new tasks. If they're in the <code>RUNNING</code> state, tasks for services\n\t\t\tthat don't use a load balancer are considered healthy . If they're in the\n\t\t\t\t<code>RUNNING</code> state and reported as healthy by the load balancer, tasks for\n\t\t\tservices that <i>do</i> use a load balancer are considered healthy . The\n\t\t\tdefault value for minimum healthy percent is 100%.</p>\n         <p>If a service uses the <code>ECS</code> deployment controller, the <b>maximum percent</b> parameter represents an upper limit on the\n\t\t\tnumber of tasks in a service that are allowed in the <code>RUNNING</code> or\n\t\t\t\t<code>PENDING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of the desired number of tasks (rounded down to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can define the deployment batch size. For example, if your service has a\n\t\t\tdesired number of four tasks and a maximum percent value of 200%, the scheduler may\n\t\t\tstart four new tasks before stopping the four older tasks (provided that the cluster\n\t\t\tresources required to do this are available). The default value for maximum percent is\n\t\t\t200%.</p>\n         <p>If a service uses either the <code>CODE_DEPLOY</code> or <code>EXTERNAL</code>\n\t\t\tdeployment controller types and tasks that use the EC2 launch type, the\n\t\t\t\t<b>minimum healthy percent</b> and <b>maximum percent</b> values are used only to define the lower and upper limit\n\t\t\ton the number of the tasks in the service that remain in the <code>RUNNING</code> state.\n\t\t\tThis is while the container instances are in the <code>DRAINING</code> state. If the\n\t\t\ttasks in the service use the Fargate launch type, the minimum healthy\n\t\t\tpercent and maximum percent values aren't used. This is the case even if they're\n\t\t\tcurrently visible when describing your service.</p>\n         <p>When creating a service that uses the <code>EXTERNAL</code> deployment controller, you\n\t\t\tcan specify only parameters that aren't controlled at the task set level. The only\n\t\t\trequired parameter is the service name. You control your services using the <a>CreateTaskSet</a> operation. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">Amazon ECS deployment types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>When the service scheduler launches new tasks, it determines task placement. For\n\t\t\tinformation about task placement and task placement strategies, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html\">Amazon ECS\n\t\t\t\ttask placement</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecs#CreateServiceRequest": {
@@ -3128,7 +3178,7 @@
                 "propagateTags": {
                     "target": "com.amazonaws.ecs#PropagateTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to propagate the tags from the task definition to the task. If no\n\t\t\tvalue is specified, the tags aren't propagated. Tags can only be propagated to the task\n\t\t\tduring task creation. To add tags to a task after task creation, use the <a>TagResource</a> API action.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to propagate the tags from the task definition to the task. If no\n\t\t\tvalue is specified, the tags aren't propagated. Tags can only be propagated to the task\n\t\t\tduring task creation. To add tags to a task after task creation, use the <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html\">TagResource</a> API action.</p>"
                     }
                 },
                 "enableExecuteCommand": {
@@ -5619,7 +5669,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing a container health check. Health check parameters that are\n\t\t\tspecified in a container definition override any Docker health checks that exist in the\n\t\t\tcontainer image (such as those specified in a parent image or from the image's\n\t\t\tDockerfile).</p>\n         <note>\n            <p>The Amazon ECS container agent only monitors and reports on the health checks specified\n\t\t\t\tin the task definition. Amazon ECS does not monitor Docker health checks that are\n\t\t\t\tembedded in a container image and not specified in the container definition. Health\n\t\t\t\tcheck parameters that are specified in a container definition override any Docker\n\t\t\t\thealth checks that exist in the container image.</p>\n         </note>\n         <p>You can view the health status of both individual containers and a task with the\n\t\t\tDescribeTasks API operation or when viewing the task details in the console.</p>\n         <p>The following describes the possible <code>healthStatus</code> values for a\n\t\t\tcontainer:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HEALTHY</code>-The container health check has passed\n\t\t\t\t\tsuccessfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNHEALTHY</code>-The container health check has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNKNOWN</code>-The container health check is being evaluated or\n\t\t\t\t\tthere's no container health check defined.</p>\n            </li>\n         </ul>\n         <p>The following describes the possible <code>healthStatus</code> values for a task. The\n\t\t\tcontainer health check status of nonessential containers only affects the health status\n\t\t\tof a task if no essential containers have health checks defined.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HEALTHY</code>-All essential containers within the task have\n\t\t\t\t\tpassed their health checks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNHEALTHY</code>-One or more essential containers have failed\n\t\t\t\t\ttheir health check.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNKNOWN</code>-The essential containers within the task are still\n\t\t\t\t\thaving their health checks evaluated or there are only nonessential containers\n\t\t\t\t\twith health checks defined.</p>\n            </li>\n         </ul>\n         <p>If a task is run manually, and not as part of a service, the task will continue its\n\t\t\tlifecycle regardless of its health status. For tasks that are part of a service, if the\n\t\t\ttask reports as unhealthy then the task will be stopped and the service scheduler will\n\t\t\treplace it.</p>\n         <important>\n            <p>For tasks that are a part of a service and the service uses the <code>ECS</code>\n\t\t\t\trolling deployment type, the deployment is paused while the new tasks have the\n\t\t\t\t\t<code>UNKNOWN</code> task health check status. For example, tasks that define\n\t\t\t\thealth checks for nonessential containers when no essential containers have health\n\t\t\t\tchecks will have the <code>UNKNOWN</code> health check status indefinitely which\n\t\t\t\tprevents the deployment from completing.</p>\n         </important>\n         <p>The following are notes about container health check support:</p>\n         <ul>\n            <li>\n               <p>Container health checks require version 1.17.0 or greater of the Amazon ECS\n\t\t\t\t\tcontainer agent. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the\n\t\t\t\t\t\tAmazon ECS container agent</a>.</p>\n            </li>\n            <li>\n               <p>Container health checks are supported for Fargate tasks if\n\t\t\t\t\tyou're using platform version <code>1.1.0</code> or greater. For more\n\t\t\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">Fargate\n\t\t\t\t\t\tplatform versions</a>.</p>\n            </li>\n            <li>\n               <p>Container health checks aren't supported for tasks that are part of a service\n\t\t\t\t\tthat's configured to use a Classic Load Balancer.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>An object representing a container health check. Health check parameters that are\n\t\t\tspecified in a container definition override any Docker health checks that exist in the\n\t\t\tcontainer image (such as those specified in a parent image or from the image's\n\t\t\tDockerfile). This configuration maps to the <code>HEALTHCHECK</code> parameter of <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p>\n         <note>\n            <p>The Amazon ECS container agent only monitors and reports on the health checks specified\n\t\t\t\tin the task definition. Amazon ECS does not monitor Docker health checks that are\n\t\t\t\tembedded in a container image and not specified in the container definition. Health\n\t\t\t\tcheck parameters that are specified in a container definition override any Docker\n\t\t\t\thealth checks that exist in the container image.</p>\n         </note>\n         <p>You can view the health status of both individual containers and a task with the\n\t\t\tDescribeTasks API operation or when viewing the task details in the console.</p>\n         <p>The following describes the possible <code>healthStatus</code> values for a\n\t\t\tcontainer:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HEALTHY</code>-The container health check has passed\n\t\t\t\t\tsuccessfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNHEALTHY</code>-The container health check has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNKNOWN</code>-The container health check is being evaluated or\n\t\t\t\t\tthere's no container health check defined.</p>\n            </li>\n         </ul>\n         <p>The following describes the possible <code>healthStatus</code> values for a task. The\n\t\t\tcontainer health check status of\n\t\t\tnon-essential containers don't have an effect on the health status of a task.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HEALTHY</code>-All essential containers within the task have\n\t\t\t\t\tpassed their health checks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNHEALTHY</code>-One or more essential containers have failed\n\t\t\t\t\ttheir health check.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNKNOWN</code>-The essential containers within the task are still\n\t\t\t\t\thaving their health checks evaluated, there are only nonessential containers\n\t\t\t\t\twith health checks defined, or there are no container health checks\n\t\t\t\t\tdefined.</p>\n            </li>\n         </ul>\n         <p>If a task is run manually, and not as part of a service, the task will continue its\n\t\t\tlifecycle regardless of its health status. For tasks that are part of a service, if the\n\t\t\ttask reports as unhealthy then the task will be stopped and the service scheduler will\n\t\t\treplace it.</p>\n         <p>The following are notes about container health check support:</p>\n         <ul>\n            <li>\n               <p>Container health checks require version 1.17.0 or greater of the Amazon ECS\n\t\t\t\t\tcontainer agent. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the\n\t\t\t\t\t\tAmazon ECS container agent</a>.</p>\n            </li>\n            <li>\n               <p>Container health checks are supported for Fargate tasks if\n\t\t\t\t\tyou're using platform version <code>1.1.0</code> or greater. For more\n\t\t\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">Fargate\n\t\t\t\t\t\tplatform versions</a>.</p>\n            </li>\n            <li>\n               <p>Container health checks aren't supported for tasks that are part of a service\n\t\t\t\t\tthat's configured to use a Classic Load Balancer.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.ecs#HealthStatus": {
@@ -5693,7 +5743,7 @@
                 "deviceName": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Elastic Inference accelerator device name. The <code>deviceName</code> must also\n\t\t\tbe referenced in a container definition as a <a>ResourceRequirement</a>.</p>",
+                        "smithy.api#documentation": "<p>The Elastic Inference accelerator device name. The <code>deviceName</code> must also\n\t\t\tbe referenced in a container definition as a <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ResourceRequirement.html\">ResourceRequirement</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5982,7 +6032,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Linux-specific options that are applied to the container, such as Linux <a>KernelCapabilities</a>.</p>"
+                "smithy.api#documentation": "<p>The Linux-specific options that are applied to the container, such as Linux <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_KernelCapabilities.html\">KernelCapabilities</a>.</p>"
             }
         },
         "com.amazonaws.ecs#ListAccountSettings": {
@@ -6868,7 +6918,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The load balancer configuration to use with a service or task set.</p>\n         <p>For specific notes and restrictions regarding the use of load balancers with services\n\t\t\tand task sets, see the CreateService and CreateTaskSet actions.</p>\n         <p>When you add, update, or remove a load balancer configuration, Amazon ECS starts a new\n\t\t\tdeployment with the updated Elastic Load Balancing configuration. This causes tasks to register to and\n\t\t\tderegister from load balancers.</p>\n         <p>We recommend that you verify this on a test environment before you update the Elastic Load Balancing\n\t\t\tconfiguration. </p>\n         <p>A service-linked role is required for services that use multiple target groups. For\n\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html\">Using\n\t\t\t\tservice-linked roles</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The load balancer configuration to use with a service or task set.</p>\n         <p>When you add, update, or remove a load balancer configuration, Amazon ECS starts a new\n\t\t\tdeployment with the updated Elastic Load Balancing configuration. This causes tasks to register to and\n\t\t\tderegister from load balancers.</p>\n         <p>We recommend that you verify this on a test environment before you update the Elastic Load Balancing\n\t\t\tconfiguration. </p>\n         <p>A service-linked role is required for services that use multiple target groups. For\n\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html\">Using\n\t\t\t\tservice-linked roles</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecs#LoadBalancers": {
@@ -7074,7 +7124,7 @@
                 "targetCapacity": {
                     "target": "com.amazonaws.ecs#ManagedScalingTargetCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target capacity value for the capacity provider. The specified value must be\n\t\t\tgreater than <code>0</code> and less than or equal to <code>100</code>. A value of\n\t\t\t\t<code>100</code> results in the Amazon EC2 instances in your Auto Scaling group being\n\t\t\tcompletely used.</p>"
+                        "smithy.api#documentation": "<p>The target capacity utilization as a percentage for the capacity provider. The\n\t\t\tspecified value must be greater than <code>0</code> and less than or equal to\n\t\t\t\t<code>100</code>. For example, if you want the capacity provider to maintain 10%\n\t\t\tspare capacity, then that means the utilization is 90%, so use a\n\t\t\t\t<code>targetCapacity</code> of <code>90</code>. The default value of\n\t\t\t\t<code>100</code> percent results in the Amazon EC2 instances in your Auto Scaling group being\n\t\t\tcompletely used.</p>"
                     }
                 },
                 "minimumScalingStepSize": {
@@ -7196,7 +7246,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details for a volume mount point that's used in a container definition.</p>"
+                "smithy.api#documentation": "<p>The details for a volume mount point that's used in a container definition.</p>"
             }
         },
         "com.amazonaws.ecs#MountPointList": {
@@ -7591,7 +7641,7 @@
                 "hostPort": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port number on the container instance to reserve for your container.</p>\n         <p>If you specify a <code>containerPortRange</code>, leave this field empty and the value of\n\t\t\tthe <code>hostPort</code> is set as follows:</p>\n         <ul>\n            <li>\n               <p>For containers in a task with the <code>awsvpc</code> network mode, the\n\t\t\t\t\t\t<code>hostPort</code> is set to the same value as the\n\t\t\t\t\t\t<code>containerPort</code>. This is a static mapping strategy.</p>\n            </li>\n            <li>\n               <p>For containers in a task with the <code>bridge</code> network mode, the Amazon ECS\n\t\t\t\t\tagent finds open ports on the host and automaticaly binds them to the container\n\t\t\t\t\tports. This is a dynamic mapping strategy.</p>\n            </li>\n         </ul>\n         <p>If you use containers in a task with the <code>awsvpc</code> or <code>host</code>\n\t\t\tnetwork mode, the <code>hostPort</code> can either be left blank or set to the same\n\t\t\tvalue as the <code>containerPort</code>.</p>\n         <p>If you use containers in a task with the <code>bridge</code> network mode, you can\n\t\t\tspecify a non-reserved host port for your container port mapping, or you can omit the\n\t\t\t\t<code>hostPort</code> (or set it to <code>0</code>) while specifying a\n\t\t\t\t<code>containerPort</code> and your container automatically receives a port in the\n\t\t\tephemeral port range for your container instance operating system and Docker\n\t\t\tversion.</p>\n         <p>The default ephemeral port range for Docker version 1.6.0 and later is listed on the\n\t\t\tinstance under <code>/proc/sys/net/ipv4/ip_local_port_range</code>. If this kernel\n\t\t\tparameter is unavailable, the default ephemeral port range from 49153 through 65535 is\n\t\t\tused. Do not attempt to specify a host port in the ephemeral port range as these are\n\t\t\treserved for automatic assignment. In general, ports below 32768 are outside of the\n\t\t\tephemeral port range.</p>\n         <p>The default reserved ports are 22 for SSH, the Docker ports 2375 and 2376, and the\n\t\t\tAmazon ECS container agent ports 51678-51680. Any host port that was previously specified in\n\t\t\ta running task is also reserved while the task is running. That is, after a task stops,\n\t\t\tthe host port is released. The current reserved ports are displayed in the\n\t\t\t\t<code>remainingResources</code> of <a>DescribeContainerInstances</a>\n\t\t\toutput. A container instance can have up to 100 reserved ports at a time. This number\n\t\t\tincludes the default reserved ports. Automatically assigned ports aren't included in the\n\t\t\t100 reserved ports quota.</p>"
+                        "smithy.api#documentation": "<p>The port number on the container instance to reserve for your container.</p>\n         <p>If you specify a <code>containerPortRange</code>, leave this field empty and the value of\n\t\t\tthe <code>hostPort</code> is set as follows:</p>\n         <ul>\n            <li>\n               <p>For containers in a task with the <code>awsvpc</code> network mode, the\n\t\t\t\t\t\t<code>hostPort</code> is set to the same value as the\n\t\t\t\t\t\t<code>containerPort</code>. This is a static mapping strategy.</p>\n            </li>\n            <li>\n               <p>For containers in a task with the <code>bridge</code> network mode, the Amazon ECS\n\t\t\t\t\tagent finds open ports on the host and automaticaly binds them to the container\n\t\t\t\t\tports. This is a dynamic mapping strategy.</p>\n            </li>\n         </ul>\n         <p>If you use containers in a task with the <code>awsvpc</code> or <code>host</code>\n\t\t\tnetwork mode, the <code>hostPort</code> can either be left blank or set to the same\n\t\t\tvalue as the <code>containerPort</code>.</p>\n         <p>If you use containers in a task with the <code>bridge</code> network mode, you can\n\t\t\tspecify a non-reserved host port for your container port mapping, or you can omit the\n\t\t\t\t<code>hostPort</code> (or set it to <code>0</code>) while specifying a\n\t\t\t\t<code>containerPort</code> and your container automatically receives a port in the\n\t\t\tephemeral port range for your container instance operating system and Docker\n\t\t\tversion.</p>\n         <p>The default ephemeral port range for Docker version 1.6.0 and later is listed on the\n\t\t\tinstance under <code>/proc/sys/net/ipv4/ip_local_port_range</code>. If this kernel\n\t\t\tparameter is unavailable, the default ephemeral port range from 49153 through 65535 is\n\t\t\tused. Do not attempt to specify a host port in the ephemeral port range as these are\n\t\t\treserved for automatic assignment. In general, ports below 32768 are outside of the\n\t\t\tephemeral port range.</p>\n         <p>The default reserved ports are 22 for SSH, the Docker ports 2375 and 2376, and the\n\t\t\tAmazon ECS container agent ports 51678-51680. Any host port that was previously specified in\n\t\t\ta running task is also reserved while the task is running. That is, after a task stops,\n\t\t\tthe host port is released. The current reserved ports are displayed in the\n\t\t\t<code>remainingResources</code> of <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeContainerInstances.html\">DescribeContainerInstances</a>\n\t\t\toutput. A container instance can have up to 100 reserved ports at a time. This number\n\t\t\tincludes the default reserved ports. Automatically assigned ports aren't included in the\n\t\t\t100 reserved ports quota.</p>"
                     }
                 },
                 "protocol": {
@@ -8350,7 +8400,7 @@
                 "value": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value for the specified resource type.</p>\n         <p>If the <code>GPU</code> type is used, the value is the number of physical\n\t\t\t\t<code>GPUs</code> the Amazon ECS container agent reserves for the container. The number\n\t\t\tof GPUs that's reserved for all containers in a task can't exceed the number of\n\t\t\tavailable GPUs on the container instance that the task is launched on.</p>\n         <p>If the <code>InferenceAccelerator</code> type is used, the <code>value</code> matches\n\t\t\tthe <code>deviceName</code> for an <a>InferenceAccelerator</a> specified in a\n\t\t\ttask definition.</p>",
+                        "smithy.api#documentation": "<p>The value for the specified resource type.</p>\n         <p>If the <code>GPU</code> type is used, the value is the number of physical\n\t\t\t\t<code>GPUs</code> the Amazon ECS container agent reserves for the container. The number\n\t\t\tof GPUs that's reserved for all containers in a task can't exceed the number of\n\t\t\tavailable GPUs on the container instance that the task is launched on.</p>\n         <p>If the <code>InferenceAccelerator</code> type is used, the <code>value</code> matches\n\t\t\tthe <code>deviceName</code> for an <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html\">InferenceAccelerator</a> specified in a\n\t\t\ttask definition.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8363,7 +8413,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The type and amount of a resource to assign to a container. The supported resource\n\t\t\ttypes are GPUs and Elastic Inference accelerators. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html\">Working with\n\t\t\t\tGPUs on Amazon ECS</a> or <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html\">Working with\n\t\t\t\tAmazon Elastic Inference on Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>\n         </p>"
+                "smithy.api#documentation": "<p>The type and amount of a resource to assign to a container. The supported resource types are\n\t\t\tGPUs and Elastic Inference accelerators. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html\">Working with\n\t\t\t\tGPUs on Amazon ECS</a> or <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/url-ecs-dev;ecs-inference.html\">Working with\n\t\t\t\tAmazon Elastic Inference on Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>\n         </p>"
             }
         },
         "com.amazonaws.ecs#ResourceRequirements": {
@@ -8433,7 +8483,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a new task using the specified task definition.</p>\n         <p>You can allow Amazon ECS to place tasks for you, or you can customize how Amazon ECS places\n\t\t\ttasks using placement constraints and placement strategies. For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html\">Scheduling Tasks</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>Alternatively, you can use <a>StartTask</a> to use your own scheduler or\n\t\t\tplace tasks manually on specific container instances.</p>\n         <p>The Amazon ECS API follows an eventual consistency model. This is because of the\n\t\t\tdistributed nature of the system supporting the API. This means that the result of an\n\t\t\tAPI command you run that affects your Amazon ECS resources might not be immediately visible\n\t\t\tto all subsequent commands you run. Keep this in mind when you carry out an API command\n\t\t\tthat immediately follows a previous API command.</p>\n         <p>To manage eventual consistency, you can do the following:</p>\n         <ul>\n            <li>\n               <p>Confirm the state of the resource before you run a command to modify it. Run\n\t\t\t\t\tthe DescribeTasks command using an exponential backoff algorithm to ensure that\n\t\t\t\t\tyou allow enough time for the previous command to propagate through the system.\n\t\t\t\t\tTo do this, run the DescribeTasks command repeatedly, starting with a couple of\n\t\t\t\t\tseconds of wait time and increasing gradually up to five minutes of wait\n\t\t\t\t\ttime.</p>\n            </li>\n            <li>\n               <p>Add wait time between subsequent commands, even if the DescribeTasks command\n\t\t\t\t\treturns an accurate response. Apply an exponential backoff algorithm starting\n\t\t\t\t\twith a couple of seconds of wait time, and increase gradually up to about five\n\t\t\t\t\tminutes of wait time.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Starts a new task using the specified task definition.</p>\n         <p>You can allow Amazon ECS to place tasks for you, or you can customize how Amazon ECS places\n\t\t\ttasks using placement constraints and placement strategies. For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html\">Scheduling Tasks</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>Alternatively, you can use <a>StartTask</a> to use your own scheduler or\n\t\t\tplace tasks manually on specific container instances.</p>\n         <note>\n            <p>Starting April 15, 2023, Amazon Web Services will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. </p>\n         </note>\n         <p>The Amazon ECS API follows an eventual consistency model. This is because of the\n\t\t\tdistributed nature of the system supporting the API. This means that the result of an\n\t\t\tAPI command you run that affects your Amazon ECS resources might not be immediately visible\n\t\t\tto all subsequent commands you run. Keep this in mind when you carry out an API command\n\t\t\tthat immediately follows a previous API command.</p>\n         <p>To manage eventual consistency, you can do the following:</p>\n         <ul>\n            <li>\n               <p>Confirm the state of the resource before you run a command to modify it. Run\n\t\t\t\t\tthe DescribeTasks command using an exponential backoff algorithm to ensure that\n\t\t\t\t\tyou allow enough time for the previous command to propagate through the system.\n\t\t\t\t\tTo do this, run the DescribeTasks command repeatedly, starting with a couple of\n\t\t\t\t\tseconds of wait time and increasing gradually up to five minutes of wait\n\t\t\t\t\ttime.</p>\n            </li>\n            <li>\n               <p>Add wait time between subsequent commands, even if the DescribeTasks command\n\t\t\t\t\treturns an accurate response. Apply an exponential backoff algorithm starting\n\t\t\t\t\twith a couple of seconds of wait time, and increase gradually up to about five\n\t\t\t\t\tminutes of wait time.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.ecs#RunTaskRequest": {
@@ -8897,7 +8947,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details on a service within a cluster</p>"
+                "smithy.api#documentation": "<p>Details on a service within a cluster.</p>"
             }
         },
         "com.amazonaws.ecs#ServiceConnectClientAlias": {
@@ -8971,7 +9021,7 @@
                 "discoveryName": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>discoveryName</code> is the name of the new Cloud Map service that Amazon ECS creates\n\t\t\tfor this Amazon ECS service. This must be unique within the Cloud Map namespace. The name can contain up to 64 characters. The name can include lowercase letters,\n\t\t\tnumbers, underscores (_), and hyphens (-). The name can't start with a hyphen.</p>\n         <p>If this parameter isn't specified, the default value of <code>discoveryName.namespace</code> is used. If the <code>discoveryName</code> isn't specified, the port mapping name from the task definition is used in <code>portName.namespace</code>.</p>"
+                        "smithy.api#documentation": "<p>The <code>discoveryName</code> is the name of the new Cloud Map service that Amazon ECS creates\n\t\t\tfor this Amazon ECS service. This must be unique within the Cloud Map namespace. The name can contain up to 64 characters. The name can include lowercase letters,\n\t\t\tnumbers, underscores (_), and hyphens (-). The name can't start with a hyphen.</p>\n         <p>If the <code>discoveryName</code> isn't specified, the port mapping name from the task definition is used in <code>portName.namespace</code>.</p>"
                     }
                 },
                 "clientAliases": {
@@ -9003,7 +9053,7 @@
                 "discoveryName": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The discovery name of this Service Connect resource.</p>\n         <p>The <code>discoveryName</code> is the name of the new Cloud Map service that Amazon ECS creates\n\t\t\tfor this Amazon ECS service. This must be unique within the Cloud Map namespace. The name can contain up to 64 characters. The name can include lowercase letters,\n\t\t\tnumbers, underscores (_), and hyphens (-). The name can't start with a hyphen.</p>\n         <p>If this parameter isn't specified, the default value of <code>discoveryName.namespace</code> is used. If the <code>discoveryName</code> isn't specified, the port mapping name from the task definition is used in <code>portName.namespace</code>.</p>"
+                        "smithy.api#documentation": "<p>The discovery name of this Service Connect resource.</p>\n         <p>The <code>discoveryName</code> is the name of the new Cloud Map service that Amazon ECS creates\n\t\t\tfor this Amazon ECS service. This must be unique within the Cloud Map namespace. The name can contain up to 64 characters. The name can include lowercase letters,\n\t\t\tnumbers, underscores (_), and hyphens (-). The name can't start with a hyphen.</p>\n         <p>If the <code>discoveryName</code> isn't specified, the port mapping name from the task definition is used in <code>portName.namespace</code>.</p>"
                     }
                 },
                 "discoveryArn": {
@@ -9290,7 +9340,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a new task from the specified task definition on the specified container\n\t\t\tinstance or instances.</p>\n         <p>Alternatively, you can use <a>RunTask</a> to place tasks for you. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html\">Scheduling Tasks</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Starts a new task from the specified task definition on the specified container\n\t\t\tinstance or instances.</p>\n         <note>\n            <p>Starting April 15, 2023, Amazon Web Services will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. </p>\n         </note>\n         <p>Alternatively, you can use <a>RunTask</a> to place tasks for you. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html\">Scheduling Tasks</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecs#StartTaskRequest": {
@@ -10238,7 +10288,7 @@
                 "requiresCompatibilities": {
                     "target": "com.amazonaws.ecs#CompatibilityList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The task launch types the task definition was validated against. To determine which\n\t\t\ttask launch types the task definition is validated for, see the <a>TaskDefinition$compatibilities</a> parameter.</p>"
+                        "smithy.api#documentation": "<p>The task launch types the task definition was validated against.  For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html\">Amazon ECS launch types</a>\n\t\t\tin the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 },
                 "cpu": {

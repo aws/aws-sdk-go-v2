@@ -2382,6 +2382,12 @@
                     "traits": {
                         "smithy.api#enumValue": "IPV4"
                     }
+                },
+                "IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV6"
+                    }
                 }
             }
         },
@@ -3241,7 +3247,7 @@
                     "name": "network-firewall"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>This is the API Reference for Network Firewall. This guide is for developers who need\n         detailed information about the Network Firewall API actions, data types, and errors. </p>\n         <ul>\n            <li>\n               <p>The REST API requires you to handle connection details, such as calculating\n               signatures, handling request retries, and error handling. For general information\n               about using the Amazon Web Services REST APIs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-apis.html\">Amazon Web Services APIs</a>. </p>\n               <p>To access Network Firewall using the REST API endpoint:\n                  <code>https://network-firewall.<region>.amazonaws.com </code>\n               </p>\n            </li>\n            <li>\n               <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to\n               the programming language or platform that you're using. For more information, see\n               <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>\n            </li>\n            <li>\n               <p>For descriptions of Network Firewall features, including and step-by-step\n               instructions on how to use them through the Network Firewall console, see the <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/\">Network Firewall Developer\n                  Guide</a>.</p>\n            </li>\n         </ul>\n         <p>Network Firewall is a stateful, managed, network firewall and intrusion detection and\n         prevention service for Amazon Virtual Private Cloud (Amazon VPC). With Network Firewall, you can filter traffic at the\n         perimeter of your VPC. This includes filtering traffic going to and coming from an internet\n         gateway, NAT gateway, or over VPN or Direct Connect. Network Firewall uses rules that are compatible\n      with Suricata, a free, open source network analysis and threat detection engine.\n      Network Firewall supports Suricata version 5.0.2. For information about Suricata,\n          see the <a href=\"https://suricata.io/\">Suricata website</a>.</p>\n         <p>You can use Network Firewall to monitor and protect your VPC traffic in a number of ways.\n         The following are just a few examples: </p>\n         <ul>\n            <li>\n               <p>Allow domains or IP addresses for known Amazon Web Services service endpoints, such as Amazon S3, and\n               block all other forms of traffic.</p>\n            </li>\n            <li>\n               <p>Use custom lists of known bad domains to limit the types of domain names that your\n               applications can access.</p>\n            </li>\n            <li>\n               <p>Perform deep packet inspection on traffic entering or leaving your VPC.</p>\n            </li>\n            <li>\n               <p>Use stateful protocol detection to filter protocols like HTTPS, regardless of the\n               port used.</p>\n            </li>\n         </ul>\n         <p>To enable Network Firewall for your VPCs, you perform steps in both Amazon VPC and in\n         Network Firewall. For information about using Amazon VPC, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/\">Amazon VPC User Guide</a>.</p>\n         <p>To start using Network Firewall, do the following: </p>\n         <ol>\n            <li>\n               <p>(Optional) If you don't already have a VPC that you want to protect, create it in\n               Amazon VPC. </p>\n            </li>\n            <li>\n               <p>In Amazon VPC, in each Availability Zone where you want to have a firewall endpoint, create a\n               subnet for the sole use of Network Firewall. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, create stateless and stateful rule groups,\n                 to define the components of the network traffic filtering behavior that you want your firewall to have. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, create a firewall policy that uses your rule groups and\n                 specifies additional default traffic filtering behavior. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, create a firewall and specify your new firewall policy and\n                 VPC subnets. Network Firewall creates a firewall endpoint in each subnet that you\n               specify, with the behavior that's defined in the firewall policy.</p>\n            </li>\n            <li>\n               <p>In Amazon VPC, use ingress routing enhancements to route traffic through the new firewall\n               endpoints.</p>\n            </li>\n         </ol>",
+                "smithy.api#documentation": "<p>This is the API Reference for Network Firewall. This guide is for developers who need\n         detailed information about the Network Firewall API actions, data types, and errors. </p>\n         <ul>\n            <li>\n               <p>The REST API requires you to handle connection details, such as calculating\n               signatures, handling request retries, and error handling. For general information\n               about using the Amazon Web Services REST APIs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-apis.html\">Amazon Web Services APIs</a>. </p>\n               <p>To access Network Firewall using the REST API endpoint:\n                  <code>https://network-firewall.<region>.amazonaws.com </code>\n               </p>\n            </li>\n            <li>\n               <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to\n               the programming language or platform that you're using. For more information, see\n               <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>\n            </li>\n            <li>\n               <p>For descriptions of Network Firewall features, including and step-by-step\n               instructions on how to use them through the Network Firewall console, see the <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/\">Network Firewall Developer\n                  Guide</a>.</p>\n            </li>\n         </ul>\n         <p>Network Firewall is a stateful, managed, network firewall and intrusion detection and\n         prevention service for Amazon Virtual Private Cloud (Amazon VPC). With Network Firewall, you can filter traffic at the\n         perimeter of your VPC. This includes filtering traffic going to and coming from an internet\n         gateway, NAT gateway, or over VPN or Direct Connect. Network Firewall uses rules that are compatible\n      with Suricata, a free, open source network analysis and threat detection engine.\n      Network Firewall supports Suricata version 6.0.9. For information about Suricata,\n          see the <a href=\"https://suricata.io/\">Suricata website</a>.</p>\n         <p>You can use Network Firewall to monitor and protect your VPC traffic in a number of ways.\n         The following are just a few examples: </p>\n         <ul>\n            <li>\n               <p>Allow domains or IP addresses for known Amazon Web Services service endpoints, such as Amazon S3, and\n               block all other forms of traffic.</p>\n            </li>\n            <li>\n               <p>Use custom lists of known bad domains to limit the types of domain names that your\n               applications can access.</p>\n            </li>\n            <li>\n               <p>Perform deep packet inspection on traffic entering or leaving your VPC.</p>\n            </li>\n            <li>\n               <p>Use stateful protocol detection to filter protocols like HTTPS, regardless of the\n               port used.</p>\n            </li>\n         </ul>\n         <p>To enable Network Firewall for your VPCs, you perform steps in both Amazon VPC and in\n         Network Firewall. For information about using Amazon VPC, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/\">Amazon VPC User Guide</a>.</p>\n         <p>To start using Network Firewall, do the following: </p>\n         <ol>\n            <li>\n               <p>(Optional) If you don't already have a VPC that you want to protect, create it in\n               Amazon VPC. </p>\n            </li>\n            <li>\n               <p>In Amazon VPC, in each Availability Zone where you want to have a firewall endpoint, create a\n               subnet for the sole use of Network Firewall. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, create stateless and stateful rule groups,\n                 to define the components of the network traffic filtering behavior that you want your firewall to have. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, create a firewall policy that uses your rule groups and\n                 specifies additional default traffic filtering behavior. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, create a firewall and specify your new firewall policy and\n                 VPC subnets. Network Firewall creates a firewall endpoint in each subnet that you\n               specify, with the behavior that's defined in the firewall policy.</p>\n            </li>\n            <li>\n               <p>In Amazon VPC, use ingress routing enhancements to route traffic through the new firewall\n               endpoints.</p>\n            </li>\n         </ol>",
                 "smithy.api#title": "AWS Network Firewall",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -3603,9 +3609,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "af-south-1",
                                 "UseFIPS": false,
-                                "Region": "af-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3616,9 +3622,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-east-1",
                                 "UseFIPS": false,
-                                "Region": "ap-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3629,9 +3635,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3642,9 +3648,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3655,9 +3661,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-3",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3668,9 +3674,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-south-1",
                                 "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3681,9 +3687,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3694,9 +3700,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3707,9 +3713,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ca-central-1",
                                 "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3720,9 +3726,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ca-central-1",
                                 "UseFIPS": true,
-                                "Region": "ca-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3733,9 +3739,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-central-1",
                                 "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3746,9 +3752,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-north-1",
                                 "UseFIPS": false,
-                                "Region": "eu-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3759,9 +3765,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-south-1",
                                 "UseFIPS": false,
-                                "Region": "eu-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3772,9 +3778,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3785,9 +3791,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-2",
                                 "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3798,9 +3804,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-3",
                                 "UseFIPS": false,
-                                "Region": "eu-west-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3811,9 +3817,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "me-south-1",
                                 "UseFIPS": false,
-                                "Region": "me-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3824,9 +3830,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "sa-east-1",
                                 "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3837,9 +3843,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3850,9 +3856,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3863,9 +3869,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-2",
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3876,9 +3882,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-2",
                                 "UseFIPS": true,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3889,9 +3895,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3902,9 +3908,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-1",
                                 "UseFIPS": true,
-                                "Region": "us-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3915,9 +3921,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3928,9 +3934,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": true,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3941,9 +3947,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3954,9 +3960,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3967,9 +3973,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3980,9 +3986,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3993,9 +3999,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4006,9 +4012,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4019,9 +4025,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4032,9 +4038,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4045,9 +4051,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4058,9 +4064,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4071,9 +4077,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4084,9 +4090,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4095,9 +4101,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4108,9 +4114,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4119,9 +4125,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4132,9 +4138,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4143,9 +4149,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4156,9 +4162,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4167,9 +4173,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4180,9 +4186,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4193,9 +4199,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4207,8 +4213,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4218,9 +4224,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4230,9 +4236,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4918,7 +4924,7 @@
                 "StatefulRules": {
                     "target": "com.amazonaws.networkfirewall#StatefulRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of individual stateful rules inspection criteria to be used together in a stateful rule group.\n       Use this option to specify simple Suricata rules with protocol, source and destination, ports, direction, and rule options.\n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.io/rules/intro.html#\">Rules Format</a>. </p>"
+                        "smithy.api#documentation": "<p>An array of individual stateful rules inspection criteria to be used together in a stateful rule group.\n       Use this option to specify simple Suricata rules with protocol, source and destination, ports, direction, and rule options.\n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.iorules/intro.html#\">Rules Format</a>. </p>"
                     }
                 },
                 "StatelessRulesAndCustomActions": {
@@ -5187,7 +5193,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A single Suricata rules specification, for use in a stateful rule group.\n       Use this option to specify a simple Suricata rule with protocol, source and destination, ports, direction, and rule options.\n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.io/rules/intro.html#\">Rules Format</a>. </p>"
+                "smithy.api#documentation": "<p>A single Suricata rules specification, for use in a stateful rule group.\n       Use this option to specify a simple Suricata rule with protocol, source and destination, ports, direction, and rule options.\n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.iorules/intro.html#\">Rules Format</a>. </p>"
             }
         },
         "com.amazonaws.networkfirewall#StatefulRuleDirection": {
