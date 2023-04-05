@@ -1,3 +1,21 @@
+# Release (2023-04-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.31.0](service/configservice/CHANGELOG.md#v1310-2023-04-05)
+  * **Feature**: This release adds resourceType enums for types released in March 2023.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.24.3](service/ecs/CHANGELOG.md#v1243-2023-04-05)
+  * **Documentation**: This is a document only updated to add information about Amazon Elastic Inference (EI).
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.16.7](service/identitystore/CHANGELOG.md#v1167-2023-04-05)
+  * **Documentation**: Documentation updates for Identity Store CLI command reference.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.1.0](service/ivsrealtime/CHANGELOG.md#v110-2023-04-05)
+  * **Feature**: Fix ParticipantToken ExpirationTime format
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.26.0](service/networkfirewall/CHANGELOG.md#v1260-2023-04-05)
+  * **Feature**: AWS Network Firewall now supports IPv6-only subnets.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.18.0](service/servicecatalog/CHANGELOG.md#v1180-2023-04-05)
+  * **Feature**: removed incorrect product type value
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.0.1](service/vpclattice/CHANGELOG.md#v101-2023-04-05)
+  * **Documentation**: This release removes the entities in the API doc model package for auth policies.
+
 # Release (2023-04-04)
 
 ## Module Highlights

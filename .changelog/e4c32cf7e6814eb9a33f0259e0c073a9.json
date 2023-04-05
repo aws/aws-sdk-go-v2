@@ -1,8 +1,0 @@
-{
-    "id": "e4c32cf7-e681-4eb9-a33f-0259e0c073a9",
-    "type": "documentation",
-    "description": "This release removes the entities in the API doc model package for auth policies.",
-    "modules": [
-        "service/vpclattice"
-    ]
-}

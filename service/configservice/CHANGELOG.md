@@ -1,3 +1,7 @@
+# v1.31.0 (2023-04-05)
+
+* **Feature**: This release adds resourceType enums for types released in March 2023.
+
 # v1.30.1 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

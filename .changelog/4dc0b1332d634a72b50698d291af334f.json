@@ -1,8 +1,0 @@
-{
-    "id": "4dc0b133-2d63-4a72-b506-98d291af334f",
-    "type": "feature",
-    "description": "This release adds resourceType enums for types released in March 2023.",
-    "modules": [
-        "service/configservice"
-    ]
-}

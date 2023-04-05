@@ -1,3 +1,7 @@
+# v1.24.3 (2023-04-05)
+
+* **Documentation**: This is a document only updated to add information about Amazon Elastic Inference (EI).
+
 # v1.24.2 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

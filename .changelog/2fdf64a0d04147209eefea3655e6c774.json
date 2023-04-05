@@ -1,8 +1,0 @@
-{
-    "id": "2fdf64a0-d041-4720-9eef-ea3655e6c774",
-    "type": "feature",
-    "description": "AWS Network Firewall now supports IPv6-only subnets.",
-    "modules": [
-        "service/networkfirewall"
-    ]
-}

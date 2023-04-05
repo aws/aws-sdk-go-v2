@@ -1,8 +1,0 @@
-{
-    "id": "c54fe8fa-4690-4c50-88d1-78b90268f81e",
-    "type": "feature",
-    "description": "removed incorrect product type value",
-    "modules": [
-        "service/servicecatalog"
-    ]
-}

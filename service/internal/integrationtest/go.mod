@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.16.7
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.19.1
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.15.6
-	github.com/aws/aws-sdk-go-v2/service/appstream v1.20.6
+	github.com/aws/aws-sdk-go-v2/service/appstream v1.20.7
 	github.com/aws/aws-sdk-go-v2/service/athena v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.28.1
 	github.com/aws/aws-sdk-go-v2/service/batch v1.23.0
@@ -17,13 +17,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.14.5
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.24.4
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.25.7
-	github.com/aws/aws-sdk-go-v2/service/codebuild v1.20.7
+	github.com/aws/aws-sdk-go-v2/service/codebuild v1.20.8
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.14.8
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.16.7
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.14.7
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.13.6
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.22.6
-	github.com/aws/aws-sdk-go-v2/service/configservice v1.30.1
+	github.com/aws/aws-sdk-go-v2/service/configservice v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.15.6
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.25.1
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.15.6
@@ -33,7 +33,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.93.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.18.7
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.24.2
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.24.3
 	github.com/aws/aws-sdk-go-v2/service/efs v1.19.9
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.26.6
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.15.6
@@ -69,7 +69,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.19.1
-	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.17.0
+	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/ses v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.17.7
 	github.com/aws/aws-sdk-go-v2/service/shield v1.18.6

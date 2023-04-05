@@ -1,3 +1,7 @@
+# v1.19.1 (2023-04-05)
+
+* No change notes available for this release.
+
 # v1.19.0 (2023-04-04)
 
 * **Feature**: Amazon SageMaker Asynchronous Inference now provides customers a FailureLocation as a response parameter in InvokeEndpointAsync API to capture the model failure responses.
