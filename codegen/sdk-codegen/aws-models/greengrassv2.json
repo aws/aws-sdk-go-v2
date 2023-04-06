@@ -591,13 +591,13 @@
                 "merge": {
                     "target": "com.amazonaws.greengrassv2#ComponentConfigurationString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A serialized JSON string that contains the configuration object to merge to target\n      devices. The core device merges this configuration with the component's existing\n      configuration. If this is the first time a component deploys on a device, the core device\n      merges this configuration with the component's default configuration. This means that the core\n      device keeps it's existing configuration for keys and values that you don't specify in this\n      object. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#merge-configuration-update\">Merge configuration updates</a> in the <i>IoT Greengrass V2 Developer\n          Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A serialized JSON string that contains the configuration object to merge to target\n      devices. The core device merges this configuration with the component's existing\n      configuration. If this is the first time a component deploys on a device, the core device\n      merges this configuration with the component's default configuration. This means that the core\n      device keeps it's existing configuration for keys and values that you don't specify in this\n      object. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#merge-configuration-update\">Merge configuration updates</a> in the <i>IoT Greengrass V2 Developer\n      Guide</i>.</p>"
                     }
                 },
                 "reset": {
                     "target": "com.amazonaws.greengrassv2#ComponentConfigurationPathList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of configuration nodes to reset to default values on target devices. Use JSON\n      pointers to specify each node to reset. JSON pointers start with a forward slash\n      (<code>/</code>) and use forward slashes to separate the key for each level in the object.\n      For more information, see the <a href=\"https://tools.ietf.org/html/rfc6901\">JSON pointer\n        specification</a> and <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#reset-configuration-update\">Reset configuration updates</a> in the <i>IoT Greengrass V2 Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The list of configuration nodes to reset to default values on target devices. Use JSON\n      pointers to specify each node to reset. JSON pointers start with a forward slash\n        (<code>/</code>) and use forward slashes to separate the key for each level in the object.\n      For more information, see the <a href=\"https://tools.ietf.org/html/rfc6901\">JSON pointer\n        specification</a> and <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#reset-configuration-update\">Reset configuration updates</a> in the <i>IoT Greengrass V2 Developer\n      Guide</i>.</p>"
                     }
                 }
             },
@@ -663,7 +663,7 @@
                 "configurationUpdate": {
                     "target": "com.amazonaws.greengrassv2#ComponentConfigurationUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration updates to deploy for the component. You can define\n      <i>reset</i> updates and <i>merge</i> updates. A reset updates\n      the keys that you specify to the default configuration for the component. A merge updates the\n      core device's component configuration with the keys and values that you specify. The IoT Greengrass Core\n      software applies reset updates before it applies merge updates. For more information, see\n      <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html\">Update component\n        configurations</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The configuration updates to deploy for the component. You can define\n        <i>reset</i> updates and <i>merge</i> updates. A reset updates\n      the keys that you specify to the default configuration for the component. A merge updates the\n      core device's component configuration with the keys and values that you specify. The IoT Greengrass Core\n      software applies reset updates before it applies merge updates. For more information, see\n        <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html\">Update component\n        configurations</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>"
                     }
                 },
                 "runWith": {
@@ -1045,7 +1045,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a component. Components are software that run on Greengrass core devices. After you\n      develop and test a component on your core device, you can use this operation to upload your\n      component to IoT Greengrass. Then, you can deploy the component to other core devices.</p>\n         <p>You can use this operation to do the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Create components from recipes</b>\n               </p>\n               <p>Create a component from a recipe, which is a file that defines the component's\n          metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For\n          more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html\">IoT Greengrass component recipe\n            reference</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>\n               <p>To create a component from a recipe, specify <code>inlineRecipe</code> when you call\n          this operation.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Create components from Lambda functions</b>\n               </p>\n               <p>Create a component from an Lambda function that runs on IoT Greengrass. This creates a recipe\n          and artifacts from the Lambda function's deployment package. You can use this operation to\n          migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass V2.</p>\n               <p>This function only accepts Lambda functions that use the following runtimes:</p>\n               <ul>\n                  <li>\n                     <p>Python 2.7 – <code>python2.7</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Python 3.7 – <code>python3.7</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Python 3.8 – <code>python3.8</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Python 3.9 – <code>python3.9</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Java 8 – <code>java8</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Java 11 – <code>java11</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Node.js 10 – <code>nodejs10.x</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Node.js 12 – <code>nodejs12.x</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Node.js 14 – <code>nodejs14.x</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>To create a component from a Lambda function, specify <code>lambdaFunction</code>\n          when you call this operation.</p>\n               <note>\n                  <p>IoT Greengrass currently supports Lambda functions on only Linux core devices.</p>\n               </note>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a component. Components are software that run on Greengrass core devices. After you\n      develop and test a component on your core device, you can use this operation to upload your\n      component to IoT Greengrass. Then, you can deploy the component to other core devices.</p>\n         <p>You can use this operation to do the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Create components from recipes</b>\n               </p>\n               <p>Create a component from a recipe, which is a file that defines the component's\n          metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For\n          more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html\">IoT Greengrass component recipe\n            reference</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>\n               <p>To create a component from a recipe, specify <code>inlineRecipe</code> when you call\n          this operation.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Create components from Lambda functions</b>\n               </p>\n               <p>Create a component from an Lambda function that runs on IoT Greengrass. This creates a recipe\n          and artifacts from the Lambda function's deployment package. You can use this operation to\n          migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass V2.</p>\n               <p>This function only accepts Lambda functions that use the following runtimes:</p>\n               <ul>\n                  <li>\n                     <p>Python 2.7 – <code>python2.7</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Python 3.7 – <code>python3.7</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Python 3.8 – <code>python3.8</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Python 3.9 – <code>python3.9</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Java 8 – <code>java8</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Java 11 – <code>java11</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Node.js 10 – <code>nodejs10.x</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Node.js 12 – <code>nodejs12.x</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Node.js 14 – <code>nodejs14.x</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>To create a component from a Lambda function, specify <code>lambdaFunction</code> when\n          you call this operation.</p>\n               <note>\n                  <p>IoT Greengrass currently supports Lambda functions on only Linux core devices.</p>\n               </note>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/greengrass/v2/createComponentVersion",
@@ -1491,7 +1491,7 @@
                 "action": {
                     "target": "com.amazonaws.greengrassv2#DeploymentComponentUpdatePolicyAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether or not to notify components and wait for components to become safe to update.\n      Choose from the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NOTIFY_COMPONENTS</code> – The deployment notifies each component before\n          it stops and updates that component. Components can use the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetocomponentupdates\">SubscribeToComponentUpdates</a> IPC operation to receive these notifications. Then,\n          components can respond with the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-defercomponentupdate\">DeferComponentUpdate</a> IPC operation. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html\">Create deployments</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SKIP_NOTIFY_COMPONENTS</code> – The deployment doesn't notify components\n          or wait for them to be safe to update.</p>\n            </li>\n         </ul>\n         <p>Default: <code>NOTIFY_COMPONENTS</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Whether or not to notify components and wait for components to become safe to update.\n      Choose from the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NOTIFY_COMPONENTS</code> – The deployment notifies each component before\n          it stops and updates that component. Components can use the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetocomponentupdates\">SubscribeToComponentUpdates</a> IPC operation to receive these notifications. Then,\n          components can respond with the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-defercomponentupdate\">DeferComponentUpdate</a> IPC operation. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html\">Create\n            deployments</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SKIP_NOTIFY_COMPONENTS</code> – The deployment doesn't notify components\n          or wait for them to be safe to update.</p>\n            </li>\n         </ul>\n         <p>Default: <code>NOTIFY_COMPONENTS</code>\n         </p>"
                     }
                 }
             },
@@ -1528,7 +1528,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about how long a component on a core device can validate its\n      configuration updates before it times out. Components can use the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetovalidateconfigurationupdates\">SubscribeToValidateConfigurationUpdates</a> IPC operation to receive notifications when\n      a deployment specifies a configuration update. Then, components can respond with the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-sendconfigurationvalidityreport\">SendConfigurationValidityReport</a> IPC operation. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html\">Create deployments</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Contains information about how long a component on a core device can validate its\n      configuration updates before it times out. Components can use the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetovalidateconfigurationupdates\">SubscribeToValidateConfigurationUpdates</a> IPC operation to receive notifications when\n      a deployment specifies a configuration update. Then, components can respond with the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-sendconfigurationvalidityreport\">SendConfigurationValidityReport</a> IPC operation. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html\">Create\n        deployments</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.greengrassv2#DeploymentFailureHandlingPolicy": {
@@ -1951,7 +1951,7 @@
                 "coreDeviceExecutionStatus": {
                     "target": "com.amazonaws.greengrassv2#EffectiveDeploymentExecutionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the deployment job on the Greengrass core device.</p>",
+                        "smithy.api#documentation": "<p>The status of the deployment job on the Greengrass core device.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> – The deployment job is running.</p>\n            </li>\n            <li>\n               <p>\n                  <code>QUEUED</code> – The deployment job is in the job queue and waiting to\n          run.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – The deployment failed. For more information, see the\n            <code>statusDetails</code> field.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> – The deployment to an IoT thing was completed\n          successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TIMED_OUT</code> – The deployment didn't complete in the allotted time.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELED</code> – The deployment was canceled by the user.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REJECTED</code> – The deployment was rejected. For more information, see\n          the <code>statusDetails</code> field.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code> – The deployment to an IoT thing group was completed\n          successfully.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2059,6 +2059,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "REJECTED"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
                     }
                 }
             }
@@ -2218,7 +2224,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the pre-signed URL to download a public or a Lambda component artifact. Core devices call this\n      operation to identify the URL that they can use to download an artifact to install.</p>",
+                "smithy.api#documentation": "<p>Gets the pre-signed URL to download a public or a Lambda component artifact. Core devices\n      call this operation to identify the URL that they can use to download an artifact to\n      install.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/greengrass/v2/components/{arn}/artifacts/{artifactName+}",
@@ -2354,7 +2360,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves metadata for a Greengrass core device.</p>\n         <note>\n            <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core\n        software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then\n        the reported status of that device might not reflect its current status. The status timestamp\n        indicates when the device status was last updated.</p>\n            <p>Core devices send status updates at the following times:</p>\n            <ul>\n               <li>\n                  <p>When the IoT Greengrass Core software starts</p>\n               </li>\n               <li>\n                  <p>When the core device receives a deployment from the Amazon Web Services Cloud</p>\n               </li>\n               <li>\n                  <p>When the status of any component on the core device becomes <code>BROKEN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>At a <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss\">regular interval\n            that you can configure</a>, which defaults to 24 hours</p>\n               </li>\n               <li>\n                  <p>For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and\n            cloud deployment</p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#documentation": "<p>Retrieves metadata for a Greengrass core device.</p>\n         <note>\n            <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the\n        IoT Greengrass Core software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud,\n        then the reported status of that device might not reflect its current status. The status\n        timestamp indicates when the device status was last updated.</p>\n            <p>Core devices send status updates at the following times:</p>\n            <ul>\n               <li>\n                  <p>When the IoT Greengrass Core software starts</p>\n               </li>\n               <li>\n                  <p>When the core device receives a deployment from the Amazon Web Services Cloud</p>\n               </li>\n               <li>\n                  <p>When the status of any component on the core device becomes\n            <code>BROKEN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>At a <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss\">regular interval that you can configure</a>, which defaults to 24 hours</p>\n               </li>\n               <li>\n                  <p>For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and\n            cloud deployment</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/greengrass/v2/coreDevices/{coreDeviceThingName}",
@@ -2726,7 +2732,7 @@
                     "name": "greengrass"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>IoT Greengrass brings local compute, messaging, data management, sync, and ML inference capabilities\n      to edge devices. This enables devices to collect and analyze data closer to the source of\n      information, react autonomously to local events, and communicate securely with each other on\n      local networks. Local devices can also communicate securely with Amazon Web Services IoT Core and export IoT data\n      to the Amazon Web Services Cloud. IoT Greengrass developers can use Lambda functions and components to create and\n      deploy applications to fleets of edge devices for local operation.</p>\n         <p>IoT Greengrass Version 2 provides a new major version of the IoT Greengrass Core software, new APIs, and a new console.\n      Use this API reference to learn how to use the IoT Greengrass V2 API operations to manage components,\n      manage deployments, and core devices.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html\">What is IoT Greengrass?</a> in\n      the <i>IoT Greengrass V2 Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>IoT Greengrass brings local compute, messaging, data management, sync, and ML inference capabilities\n      to edge devices. This enables devices to collect and analyze data closer to the source of\n      information, react autonomously to local events, and communicate securely with each other on\n      local networks. Local devices can also communicate securely with Amazon Web Services IoT Core and export IoT data\n      to the Amazon Web Services Cloud. IoT Greengrass developers can use Lambda functions and components to create and\n      deploy applications to fleets of edge devices for local operation.</p>\n         <p>IoT Greengrass Version 2 provides a new major version of the IoT Greengrass Core software, new APIs, and a new console.\n      Use this API reference to learn how to use the IoT Greengrass V2 API operations to manage components,\n      manage deployments, and core devices.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html\">What is IoT Greengrass?</a> in the\n        <i>IoT Greengrass V2 Developer Guide</i>.</p>",
                 "smithy.api#title": "AWS IoT Greengrass V2",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -3147,44 +3153,6 @@
                                                             "type": "endpoint"
                                                         },
                                                         {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "us-gov-east-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://greengrass.us-gov-east-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "us-gov-west-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://greengrass.us-gov-west-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
                                                             "conditions": [],
                                                             "endpoint": {
                                                                 "url": "https://greengrass.{Region}.{PartitionResult#dnsSuffix}",
@@ -3580,6 +3548,17 @@
                             }
                         },
                         {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -3590,6 +3569,17 @@
                                 "Region": "us-iso-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3606,6 +3596,17 @@
                             }
                         },
                         {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -3616,6 +3617,17 @@
                                 "Region": "us-isob-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3681,6 +3693,12 @@
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
                         }
                     ],
                     "version": "1.0"
@@ -3730,13 +3748,13 @@
                 "lastReportedTimestamp": {
                     "target": "com.amazonaws.greengrassv2#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time the Greengrass core device sent a message containing a certain component to the\n      Amazon Web Services Cloud.</p>\n         <p>A component does not need to see a state change for this field to update.</p>"
+                        "smithy.api#documentation": "<p>The last time the Greengrass core device sent a message containing a component's state to the\n      Amazon Web Services Cloud.</p>\n         <p>A component does not need to see a state change for this field to update.</p>"
                     }
                 },
                 "lastInstallationSource": {
                     "target": "com.amazonaws.greengrassv2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The most recent deployment source that brought the component to the Greengrass core device. For\n      a thing group deployment or thing deployment, the source will be the The ID of the deployment. and for\n      local deployments it will be <code>LOCAL</code>.</p>"
+                        "smithy.api#documentation": "<p>The most recent deployment source that brought the component to the Greengrass core device. For\n      a thing group deployment or thing deployment, the source will be the The ID of the deployment. and for\n      local deployments it will be <code>LOCAL</code>.</p>\n         <note>\n            <p>Any deployment will attempt to reinstall currently broken components on the device,\n        which will update the last installation source.</p>\n         </note>"
                     }
                 },
                 "lifecycleStatusCodes": {
@@ -3888,7 +3906,7 @@
                 "criteriaList": {
                     "target": "com.amazonaws.greengrassv2#IoTJobAbortCriteriaList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of criteria that define when and how to cancel the configuration deployment.</p>",
+                        "smithy.api#documentation": "<p>The list of criteria that define when and how to cancel the configuration\n      deployment.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3918,7 +3936,7 @@
                     "target": "com.amazonaws.greengrassv2#IoTJobAbortThresholdPercentage",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The minimum percentage of <code>failureType</code> failures that occur before the job can\n      cancel.</p>\n         <p>This parameter supports up to two digits after the decimal (for example, you can specify\n      <code>10.9</code> or <code>10.99</code>, but not <code>10.999</code>).</p>",
+                        "smithy.api#documentation": "<p>The minimum percentage of <code>failureType</code> failures that occur before the job can\n      cancel.</p>\n         <p>This parameter supports up to two digits after the decimal (for example, you can specify\n        <code>10.9</code> or <code>10.99</code>, but not <code>10.999</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3932,7 +3950,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains criteria that define when and how to cancel a job.</p>\n         <p>The deployment stops if the following conditions are true:</p>\n         <ol>\n            <li>\n               <p>The number of things that receive the deployment exceeds the\n          <code>minNumberOfExecutedThings</code>.</p>\n            </li>\n            <li>\n               <p>The percentage of failures with type <code>failureType</code> exceeds the\n          <code>thresholdPercentage</code>.</p>\n            </li>\n         </ol>"
+                "smithy.api#documentation": "<p>Contains criteria that define when and how to cancel a job.</p>\n         <p>The deployment stops if the following conditions are true:</p>\n         <ol>\n            <li>\n               <p>The number of things that receive the deployment exceeds the\n            <code>minNumberOfExecutedThings</code>.</p>\n            </li>\n            <li>\n               <p>The percentage of failures with type <code>failureType</code> exceeds the\n            <code>thresholdPercentage</code>.</p>\n            </li>\n         </ol>"
             }
         },
         "com.amazonaws.greengrassv2#IoTJobAbortCriteriaList": {
@@ -4020,7 +4038,7 @@
                     "target": "com.amazonaws.greengrassv2#IoTJobRolloutIncrementFactor",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The exponential factor to increase the rollout rate for the job.</p>\n         <p>This parameter supports up to one digit after the decimal (for example, you can specify\n      <code>1.5</code>, but not <code>1.55</code>).</p>",
+                        "smithy.api#documentation": "<p>The exponential factor to increase the rollout rate for the job.</p>\n         <p>This parameter supports up to one digit after the decimal (for example, you can specify\n        <code>1.5</code>, but not <code>1.55</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4210,7 +4228,7 @@
                 "permission": {
                     "target": "com.amazonaws.greengrassv2#LambdaFilesystemPermission",
                     "traits": {
-                        "smithy.api#documentation": "<p>The permission to access the device: read/only (<code>ro</code>) or read/write\n      (<code>rw</code>).</p>\n         <p>Default: <code>ro</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The permission to access the device: read/only (<code>ro</code>) or read/write\n        (<code>rw</code>).</p>\n         <p>Default: <code>ro</code>\n         </p>"
                     }
                 },
                 "addGroupOwner": {
@@ -4247,7 +4265,7 @@
                 "type": {
                     "target": "com.amazonaws.greengrassv2#LambdaEventSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of event source. Choose from the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PUB_SUB</code> – Subscribe to local publish/subscribe messages. This event\n          source type doesn't support MQTT wildcards (<code>+</code> and <code>#</code>) in the\n          event source topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IOT_CORE</code> – Subscribe to Amazon Web Services IoT Core MQTT messages. This event source\n          type supports MQTT wildcards (<code>+</code> and <code>#</code>) in the event source\n          topic.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of event source. Choose from the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PUB_SUB</code> – Subscribe to local publish/subscribe messages. This\n          event source type doesn't support MQTT wildcards (<code>+</code> and <code>#</code>) in\n          the event source topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IOT_CORE</code> – Subscribe to Amazon Web Services IoT Core MQTT messages. This event source\n          type supports MQTT wildcards (<code>+</code> and <code>#</code>) in the event source\n          topic.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4336,7 +4354,7 @@
                     "target": "com.amazonaws.greengrassv2#OptionalBoolean",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>Whether or not the Lambda function is pinned, or long-lived.</p>\n         <ul>\n            <li>\n               <p>A pinned Lambda function starts\n          when IoT Greengrass starts and keeps running in its own container.</p>\n            </li>\n            <li>\n               <p>A non-pinned Lambda function starts only when it receives a work item and exists after\n          it idles for <code>maxIdleTimeInSeconds</code>. If the function has multiple work items,\n          the IoT Greengrass Core software creates multiple instances of the function.</p>\n            </li>\n         </ul>\n         <p>Default: <code>true</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Whether or not the Lambda function is pinned, or long-lived.</p>\n         <ul>\n            <li>\n               <p>A pinned Lambda function starts when IoT Greengrass starts and keeps running in its own\n          container.</p>\n            </li>\n            <li>\n               <p>A non-pinned Lambda function starts only when it receives a work item and exists after\n          it idles for <code>maxIdleTimeInSeconds</code>. If the function has multiple work items,\n          the IoT Greengrass Core software creates multiple instances of the function.</p>\n            </li>\n         </ul>\n         <p>Default: <code>true</code>\n         </p>"
                     }
                 },
                 "inputPayloadEncodingType": {
@@ -4354,7 +4372,7 @@
                 "environmentVariables": {
                     "target": "com.amazonaws.greengrassv2#LambdaEnvironmentVariables",
                     "traits": {
-                        "smithy.api#documentation": "<p>The map of environment variables that are available to the Lambda function when it runs.</p>"
+                        "smithy.api#documentation": "<p>The map of environment variables that are available to the Lambda function when it\n      runs.</p>"
                     }
                 },
                 "linuxProcessParams": {
@@ -4651,7 +4669,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a paginated list of all versions for a component. Greater versions are listed first.</p>",
+                "smithy.api#documentation": "<p>Retrieves a paginated list of all versions for a component. Greater versions are listed\n      first.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/greengrass/v2/components/{arn}/versions",
@@ -4829,7 +4847,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a paginated list of Greengrass core devices.</p>\n         <note>\n            <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core\n        software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then\n        the reported status of that device might not reflect its current status. The status timestamp\n        indicates when the device status was last updated.</p>\n            <p>Core devices send status updates at the following times:</p>\n            <ul>\n               <li>\n                  <p>When the IoT Greengrass Core software starts</p>\n               </li>\n               <li>\n                  <p>When the core device receives a deployment from the Amazon Web Services Cloud</p>\n               </li>\n               <li>\n                  <p>When the status of any component on the core device becomes <code>BROKEN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>At a <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss\">regular interval\n            that you can configure</a>, which defaults to 24 hours</p>\n               </li>\n               <li>\n                  <p>For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and\n            cloud deployment</p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#documentation": "<p>Retrieves a paginated list of Greengrass core devices.</p>\n         <note>\n            <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the\n        IoT Greengrass Core software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud,\n        then the reported status of that device might not reflect its current status. The status\n        timestamp indicates when the device status was last updated.</p>\n            <p>Core devices send status updates at the following times:</p>\n            <ul>\n               <li>\n                  <p>When the IoT Greengrass Core software starts</p>\n               </li>\n               <li>\n                  <p>When the core device receives a deployment from the Amazon Web Services Cloud</p>\n               </li>\n               <li>\n                  <p>When the status of any component on the core device becomes\n            <code>BROKEN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>At a <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss\">regular interval that you can configure</a>, which defaults to 24 hours</p>\n               </li>\n               <li>\n                  <p>For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and\n            cloud deployment</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/greengrass/v2/coreDevices",
@@ -5027,7 +5045,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a paginated list of deployment jobs that IoT Greengrass sends to Greengrass core\n      devices.</p>",
+                "smithy.api#documentation": "<p>Retrieves a paginated list of deployment jobs that IoT Greengrass sends to Greengrass core devices.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/greengrass/v2/coreDevices/{coreDeviceThingName}/effectiveDeployments",
@@ -5118,7 +5136,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a paginated list of the components that a Greengrass core device runs. By default,\n      this list doesn't include components that are deployed as dependencies of other components. To\n      include dependencies in the response, set the <code>topologyFilter</code> parameter to\n        <code>ALL</code>.</p>\n         <note>\n            <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core\n        software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then\n        the reported status of that device might not reflect its current status. The status timestamp\n        indicates when the device status was last updated.</p>\n            <p>Core devices send status updates at the following times:</p>\n            <ul>\n               <li>\n                  <p>When the IoT Greengrass Core software starts</p>\n               </li>\n               <li>\n                  <p>When the core device receives a deployment from the Amazon Web Services Cloud</p>\n               </li>\n               <li>\n                  <p>When the status of any component on the core device becomes <code>BROKEN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>At a <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss\">regular interval that you can configure</a>, which defaults to 24 hours</p>\n               </li>\n               <li>\n                  <p>For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and\n            cloud deployment</p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#documentation": "<p>Retrieves a paginated list of the components that a Greengrass core device runs. By default,\n      this list doesn't include components that are deployed as dependencies of other components. To\n      include dependencies in the response, set the <code>topologyFilter</code> parameter to\n        <code>ALL</code>.</p>\n         <note>\n            <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the\n        IoT Greengrass Core software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud,\n        then the reported status of that device might not reflect its current status. The status\n        timestamp indicates when the device status was last updated.</p>\n            <p>Core devices send status updates at the following times:</p>\n            <ul>\n               <li>\n                  <p>When the IoT Greengrass Core software starts</p>\n               </li>\n               <li>\n                  <p>When the core device receives a deployment from the Amazon Web Services Cloud</p>\n               </li>\n               <li>\n                  <p>When the status of any component on the core device becomes\n            <code>BROKEN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>At a <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss\">regular interval that you can configure</a>, which defaults to 24 hours</p>\n               </li>\n               <li>\n                  <p>For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and\n            cloud deployment</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/greengrass/v2/coreDevices/{coreDeviceThingName}/installedComponents",
@@ -5374,7 +5392,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of components that meet the component, version, and platform requirements\n      of a deployment. Greengrass core devices call this operation when they receive a deployment to\n      identify the components to install.</p>\n         <p>This operation identifies components that meet all dependency requirements for a\n      deployment. If the requirements conflict, then this operation returns an error and the\n      deployment fails. For example, this occurs if component <code>A</code> requires version\n        <code>>2.0.0</code> and component <code>B</code> requires version <code><2.0.0</code>\n      of a component dependency.</p>\n         <p>When you specify the component candidates to resolve, IoT Greengrass compares each component's\n      digest from the core device with the component's digest in the Amazon Web Services Cloud. If the digests don't\n      match, then IoT Greengrass specifies to use the version from the Amazon Web Services Cloud.</p>\n         <important>\n            <p>To use this operation, you must use the data plane API endpoint and authenticate with an\n        IoT device certificate. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/greengrass.html\">IoT Greengrass endpoints and quotas</a>.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Retrieves a list of components that meet the component, version, and platform requirements\n      of a deployment. Greengrass core devices call this operation when they receive a deployment to\n      identify the components to install.</p>\n         <p>This operation identifies components that meet all dependency requirements for a\n      deployment. If the requirements conflict, then this operation returns an error and the\n      deployment fails. For example, this occurs if component <code>A</code> requires version\n        <code>>2.0.0</code> and component <code>B</code> requires version <code><2.0.0</code>\n      of a component dependency.</p>\n         <p>When you specify the component candidates to resolve, IoT Greengrass compares each component's\n      digest from the core device with the component's digest in the Amazon Web Services Cloud. If the digests\n      don't match, then IoT Greengrass specifies to use the version from the Amazon Web Services Cloud.</p>\n         <important>\n            <p>To use this operation, you must use the data plane API endpoint and authenticate with an\n        IoT device certificate. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/greengrass.html\">IoT Greengrass endpoints and quotas</a>.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/greengrass/v2/resolveComponentCandidates",
