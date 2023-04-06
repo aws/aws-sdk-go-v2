@@ -1,3 +1,7 @@
+# v1.45.1 (2023-04-06)
+
+* No change notes available for this release.
+
 # v1.45.0 (2023-04-03)
 
 * **Feature**: Add support for database-level federation

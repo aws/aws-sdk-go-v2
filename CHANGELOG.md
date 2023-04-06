@@ -1,3 +1,15 @@
+# Release (2023-04-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.27.0](service/cloudformation/CHANGELOG.md#v1270-2023-04-06)
+  * **Feature**: Including UPDATE_COMPLETE as a failed status for DeleteStack waiter.
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.22.0](service/greengrassv2/CHANGELOG.md#v1220-2023-04-06)
+  * **Feature**: Add support for SUCCEEDED value in coreDeviceExecutionStatus field. Documentation updates for Greengrass V2.
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.21.0](service/proton/CHANGELOG.md#v1210-2023-04-06)
+  * **Feature**: This release adds support for the AWS Proton service sync feature. Service sync enables managing an AWS Proton service (creating and updating instances) and all of it's corresponding service instances from a Git repository.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.42.1](service/rds/CHANGELOG.md#v1421-2023-04-06)
+  * **Documentation**: Adds and updates the SDK examples
+
 # Release (2023-04-05)
 
 ## Module Highlights

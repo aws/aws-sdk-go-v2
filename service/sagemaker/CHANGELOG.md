@@ -1,3 +1,7 @@
+# v1.73.1 (2023-04-06)
+
+* No change notes available for this release.
+
 # v1.73.0 (2023-04-04)
 
 * **Feature**: Amazon SageMaker Asynchronous Inference now allows customer's to receive failure model responses in S3 and receive success/failure model responses in SNS notifications.

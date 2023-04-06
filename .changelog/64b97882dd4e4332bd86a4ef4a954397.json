@@ -1,8 +1,0 @@
-{
-    "id": "64b97882-dd4e-4332-bd86-a4ef4a954397",
-    "type": "feature",
-    "description": "Including UPDATE_COMPLETE as a failed status for DeleteStack waiter.",
-    "modules": [
-        "service/cloudformation"
-    ]
-}

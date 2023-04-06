@@ -1,3 +1,7 @@
+# v1.27.0 (2023-04-06)
+
+* **Feature**: Including UPDATE_COMPLETE as a failed status for DeleteStack waiter.
+
 # v1.26.6 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions
