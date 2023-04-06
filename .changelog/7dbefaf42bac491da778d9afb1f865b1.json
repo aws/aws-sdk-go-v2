@@ -1,0 +1,8 @@
+{
+    "id": "7dbefaf4-2bac-491d-a778-d9afb1f865b1",
+    "type": "bugfix",
+    "description": "Correct timestamp type for data lifecycle manager.",
+    "modules": [
+        "service/dlm"
+    ]
+}

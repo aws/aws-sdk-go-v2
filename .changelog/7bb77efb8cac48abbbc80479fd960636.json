@@ -1,0 +1,8 @@
+{
+    "id": "7bb77efb-8cac-48ab-bbc8-0479fd960636",
+    "type": "announcement",
+    "description": "This release includes breaking changes for the timestamp trait on the data lifecycle management client.",
+    "modules": [
+        "service/dlm"
+    ]
+}
