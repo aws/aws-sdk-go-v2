@@ -58,14 +58,11 @@ type ModifyDBClusterInput struct {
 	// modifications are asynchronously applied as soon as possible, regardless of the
 	// PreferredMaintenanceWindow setting for the DB cluster. If this parameter is
 	// disabled, changes to the DB cluster are applied during the next maintenance
-	// window. The ApplyImmediately parameter only affects the
-	// EnableIAMDatabaseAuthentication, MasterUserPassword, and NewDBClusterIdentifier
-	// values. If the ApplyImmediately parameter is disabled, then changes to the
-	// EnableIAMDatabaseAuthentication, MasterUserPassword, and NewDBClusterIdentifier
-	// values are applied during the next maintenance window. All other changes are
-	// applied immediately, regardless of the value of the ApplyImmediately parameter.
-	// By default, this parameter is disabled. Valid for: Aurora DB clusters and
-	// Multi-AZ DB clusters
+	// window. Most modifications can be applied immediately or during the next
+	// scheduled maintenance window. Some modifications, such as turning on deletion
+	// protection and changing the master password, are applied immediately—regardless
+	// of when you choose to apply them. By default, this parameter is disabled. Valid
+	// for: Aurora DB clusters and Multi-AZ DB clusters
 	ApplyImmediately bool
 
 	// A value that indicates whether minor engine upgrades are applied automatically

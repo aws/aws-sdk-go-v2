@@ -1,0 +1,8 @@
+{
+    "id": "c52e29cb-0bc1-4958-b66a-a365b5b1e365",
+    "type": "feature",
+    "description": "Add support for SUCCEEDED value in coreDeviceExecutionStatus field. Documentation updates for Greengrass V2.",
+    "modules": [
+        "service/greengrassv2"
+    ]
+}

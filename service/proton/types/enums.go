@@ -2,6 +2,40 @@
 
 package types
 
+type BlockerStatus string
+
+// Enum values for BlockerStatus
+const (
+	BlockerStatusActive   BlockerStatus = "ACTIVE"
+	BlockerStatusResolved BlockerStatus = "RESOLVED"
+)
+
+// Values returns all known values for BlockerStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BlockerStatus) Values() []BlockerStatus {
+	return []BlockerStatus{
+		"ACTIVE",
+		"RESOLVED",
+	}
+}
+
+type BlockerType string
+
+// Enum values for BlockerType
+const (
+	BlockerTypeAutomated BlockerType = "AUTOMATED"
+)
+
+// Values returns all known values for BlockerType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BlockerType) Values() []BlockerType {
+	return []BlockerType{
+		"AUTOMATED",
+	}
+}
+
 type ComponentDeploymentUpdateType string
 
 // Enum values for ComponentDeploymentUpdateType
@@ -386,7 +420,10 @@ type SyncType string
 
 // Enum values for SyncType
 const (
+	// Syncs environment and service templates to Proton.
 	SyncTypeTemplateSync SyncType = "TEMPLATE_SYNC"
+	// Syncs services and service instances to Proton.
+	SyncTypeServiceSync SyncType = "SERVICE_SYNC"
 )
 
 // Values returns all known values for SyncType. Note that this can be expanded in
@@ -395,6 +432,7 @@ const (
 func (SyncType) Values() []SyncType {
 	return []SyncType{
 		"TEMPLATE_SYNC",
+		"SERVICE_SYNC",
 	}
 }
 

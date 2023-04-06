@@ -527,6 +527,30 @@ type EffectiveDeployment struct {
 
 	// The status of the deployment job on the Greengrass core device.
 	//
+	// * IN_PROGRESS –
+	// The deployment job is running.
+	//
+	// * QUEUED – The deployment job is in the job
+	// queue and waiting to run.
+	//
+	// * FAILED – The deployment failed. For more
+	// information, see the statusDetails field.
+	//
+	// * COMPLETED – The deployment to an
+	// IoT thing was completed successfully.
+	//
+	// * TIMED_OUT – The deployment didn't
+	// complete in the allotted time.
+	//
+	// * CANCELED – The deployment was canceled by the
+	// user.
+	//
+	// * REJECTED – The deployment was rejected. For more information, see the
+	// statusDetails field.
+	//
+	// * SUCCEEDED – The deployment to an IoT thing group was
+	// completed successfully.
+	//
 	// This member is required.
 	CoreDeviceExecutionStatus EffectiveDeploymentExecutionStatus
 
@@ -614,12 +638,14 @@ type InstalledComponent struct {
 
 	// The most recent deployment source that brought the component to the Greengrass
 	// core device. For a thing group deployment or thing deployment, the source will
-	// be the The ID of the deployment. and for local deployments it will be LOCAL.
+	// be the The ID of the deployment. and for local deployments it will be LOCAL. Any
+	// deployment will attempt to reinstall currently broken components on the device,
+	// which will update the last installation source.
 	LastInstallationSource *string
 
-	// The last time the Greengrass core device sent a message containing a certain
-	// component to the Amazon Web Services Cloud. A component does not need to see a
-	// state change for this field to update.
+	// The last time the Greengrass core device sent a message containing a component's
+	// state to the Amazon Web Services Cloud. A component does not need to see a state
+	// change for this field to update.
 	LastReportedTimestamp *time.Time
 
 	// The status of how current the data is. This response is based off of component

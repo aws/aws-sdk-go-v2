@@ -49,7 +49,8 @@ func (c *Client) DeleteCustomDBEngineVersion(ctx context.Context, params *Delete
 
 type DeleteCustomDBEngineVersionInput struct {
 
-	// The database engine. The only supported engine is custom-oracle-ee.
+	// The database engine. The only supported engines are custom-oracle-ee and
+	// custom-oracle-ee-cdb.
 	//
 	// This member is required.
 	Engine *string

@@ -18,8 +18,8 @@ import (
 // The action returns staleness counts (counts of resources that are up-to-date,
 // behind a template major version, or behind a template minor version), the total
 // number of resources, and the number of resources that are in a failed state,
-// grouped by resource type. Components, environments, and service templates are
-// exceptions—see the components, environments, and serviceTemplates field
+// grouped by resource type. Components, environments, and service templates return
+// less information - see the components, environments, and serviceTemplates field
 // descriptions. For context, the action also returns the total number of each type
 // of Proton template in the Amazon Web Services account. For more information, see
 // Proton dashboard

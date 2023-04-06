@@ -119,28 +119,24 @@ type CreateDBInstanceReadReplicaInput struct {
 	// in the VPC associated with the DB subnet group. If no DB subnet group is
 	// specified, then the new DB instance isn't created in a VPC. Constraints:
 	//
-	// * Can
-	// only be specified if the source DB instance identifier specifies a DB instance
-	// in another Amazon Web Services Region.
+	// * If
+	// supplied, must match the name of an existing DBSubnetGroup.
 	//
-	// * If supplied, must match the name of an
-	// existing DBSubnetGroup.
+	// * The specified DB
+	// subnet group must be in the same Amazon Web Services Region in which the
+	// operation is running.
 	//
-	// * The specified DB subnet group must be in the same
-	// Amazon Web Services Region in which the operation is running.
+	// * All read replicas in one Amazon Web Services Region
+	// that are created from the same source DB instance must either:>
 	//
-	// * All read
-	// replicas in one Amazon Web Services Region that are created from the same source
-	// DB instance must either:>
+	// * Specify DB
+	// subnet groups from the same VPC. All these read replicas are created in the same
+	// VPC.
 	//
-	// * Specify DB subnet groups from the same VPC. All
-	// these read replicas are created in the same VPC.
+	// * Not specify a DB subnet group. All these read replicas are created
+	// outside of any VPC.
 	//
-	// * Not specify a DB subnet
-	// group. All these read replicas are created outside of any VPC.
-	//
-	// Example:
-	// mydbsubnetgroup
+	// Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
 	// A value that indicates whether the DB instance has deletion protection enabled.

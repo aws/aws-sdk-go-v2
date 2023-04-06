@@ -39,7 +39,8 @@ func (c *Client) ModifyCustomDBEngineVersion(ctx context.Context, params *Modify
 
 type ModifyCustomDBEngineVersionInput struct {
 
-	// The DB engine. The only supported value is custom-oracle-ee.
+	// The DB engine. The only supported values are custom-oracle-ee and
+	// custom-oracle-ee-cdb.
 	//
 	// This member is required.
 	Engine *string

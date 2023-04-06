@@ -63,12 +63,17 @@ type DescribeDBClustersInput struct {
 	// Resource Names (ARNs). The results list only includes information about the DB
 	// clusters identified by these ARNs.
 	//
-	// * domain - Accepts Active Directory
-	// directory IDs. The results list only includes information about the DB clusters
-	// associated with these domains.
+	// * db-cluster-resource-id - Accepts DB
+	// cluster resource identifiers. The results list will only include information
+	// about the DB clusters identified by these DB cluster resource identifiers.
 	//
-	// * engine - Accepts engine names. The results
-	// list only includes information about the DB clusters for these engines.
+	// *
+	// domain - Accepts Active Directory directory IDs. The results list only includes
+	// information about the DB clusters associated with these domains.
+	//
+	// * engine -
+	// Accepts engine names. The results list only includes information about the DB
+	// clusters for these engines.
 	Filters []types.Filter
 
 	// Optional Boolean parameter that specifies whether the output includes

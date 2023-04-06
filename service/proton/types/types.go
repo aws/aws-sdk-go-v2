@@ -104,6 +104,9 @@ type Component struct {
 	// A description of the component.
 	Description *string
 
+	// The last token the client requested.
+	LastClientRequestToken *string
+
 	// The time when a deployment of the component was last attempted.
 	LastDeploymentAttemptedAt *time.Time
 
@@ -194,6 +197,7 @@ type CountsSummary struct {
 	Components *ResourceCountsSummary
 
 	// The total number of environment templates in the Amazon Web Services account.
+	// The environmentTemplates object will only contain total members.
 	EnvironmentTemplates *ResourceCountsSummary
 
 	// The staleness counts for Proton environments in the Amazon Web Services account.
@@ -304,8 +308,8 @@ type Environment struct {
 
 	// The linked repository that you use to host your rendered infrastructure
 	// templates for self-managed provisioning. A linked repository is a repository
-	// that has been registered with Proton. For more information, see
-	// CreateRepository.
+	// that has been registered with Proton. For more information, see CreateRepository
+	// (https://docs.aws.amazon.com/proton/latest/APIReference/API_CreateRepository.html).
 	ProvisioningRepository *RepositoryBranch
 
 	// The environment spec.
@@ -870,6 +874,12 @@ type RepositorySummary struct {
 	// This member is required.
 	Arn *string
 
+	// The Amazon Resource Name (ARN) of the of your connection that connects Proton to
+	// your repository.
+	//
+	// This member is required.
+	ConnectionArn *string
+
 	// The repository name.
 	//
 	// This member is required.
@@ -1217,6 +1227,9 @@ type ServiceInstance struct {
 	// The message associated with the service instance deployment status.
 	DeploymentStatusMessage *string
 
+	// The last client request token received.
+	LastClientRequestToken *string
+
 	// The service spec that was used to create the service instance.
 	//
 	// This value conforms to the media type: application/yaml
@@ -1383,6 +1396,67 @@ type ServiceSummary struct {
 
 	// A service status message.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// If a service instance is manually updated, Proton wants to prevent accidentally
+// overriding a manual change. A blocker is created because of the manual update or
+// deletion of a service instance. The summary describes the blocker as being
+// active or resolved.
+type ServiceSyncBlockerSummary struct {
+
+	// The name of the service that you want to get the sync blocker summary for. If
+	// given a service instance name and a service name, it will return the blockers
+	// only applying to the instance that is blocked. If given only a service name, it
+	// will return the blockers that apply to all of the instances. In order to get the
+	// blockers for a single instance, you will need to make two distinct calls, one to
+	// get the sync blocker summary for the service and the other to get the sync
+	// blocker for the service instance.
+	//
+	// This member is required.
+	ServiceName *string
+
+	// The latest active blockers for the synced service.
+	LatestBlockers []SyncBlocker
+
+	// The name of the service instance that you want sync your service configuration
+	// with.
+	ServiceInstanceName *string
+
+	noSmithyDocumentSerde
+}
+
+// Detailed data of the service sync configuration.
+type ServiceSyncConfig struct {
+
+	// The name of the code repository branch that holds the service code Proton will
+	// sync with.
+	//
+	// This member is required.
+	Branch *string
+
+	// The file path to the service sync configuration file.
+	//
+	// This member is required.
+	FilePath *string
+
+	// The name of the code repository that holds the service code Proton will sync
+	// with.
+	//
+	// This member is required.
+	RepositoryName *string
+
+	// The name of the repository provider that holds the repository Proton will sync
+	// with.
+	//
+	// This member is required.
+	RepositoryProvider RepositoryProvider
+
+	// The name of the service that the service instance is added to.
+	//
+	// This member is required.
+	ServiceName *string
 
 	noSmithyDocumentSerde
 }
@@ -1585,6 +1659,62 @@ type ServiceTemplateVersionSummary struct {
 
 	// A service template minor version status message.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Detailed data of the sync blocker.
+type SyncBlocker struct {
+
+	// The time when the sync blocker was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The reason why the sync blocker was created.
+	//
+	// This member is required.
+	CreatedReason *string
+
+	// The ID of the sync blocker.
+	//
+	// This member is required.
+	Id *string
+
+	// The status of the sync blocker.
+	//
+	// This member is required.
+	Status BlockerStatus
+
+	// The type of the sync blocker.
+	//
+	// This member is required.
+	Type BlockerType
+
+	// The contexts for the sync blocker.
+	Contexts []SyncBlockerContext
+
+	// The time the sync blocker was resolved.
+	ResolvedAt *time.Time
+
+	// The reason the sync blocker was resolved.
+	ResolvedReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Detailed data of the context of the sync blocker.
+type SyncBlockerContext struct {
+
+	// The key for the sync blocker context.
+	//
+	// This member is required.
+	Key *string
+
+	// The value of the sync blocker context.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }

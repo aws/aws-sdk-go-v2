@@ -1,0 +1,8 @@
+{
+    "id": "94fa8965-ad95-4d4f-82f7-c7c83d2c7037",
+    "type": "documentation",
+    "description": "Adds and updates the SDK examples",
+    "modules": [
+        "service/rds"
+    ]
+}

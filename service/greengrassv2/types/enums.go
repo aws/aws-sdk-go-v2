@@ -171,6 +171,7 @@ const (
 	EffectiveDeploymentExecutionStatusTimedOut   EffectiveDeploymentExecutionStatus = "TIMED_OUT"
 	EffectiveDeploymentExecutionStatusCanceled   EffectiveDeploymentExecutionStatus = "CANCELED"
 	EffectiveDeploymentExecutionStatusRejected   EffectiveDeploymentExecutionStatus = "REJECTED"
+	EffectiveDeploymentExecutionStatusSucceeded  EffectiveDeploymentExecutionStatus = "SUCCEEDED"
 )
 
 // Values returns all known values for EffectiveDeploymentExecutionStatus. Note
@@ -186,6 +187,7 @@ func (EffectiveDeploymentExecutionStatus) Values() []EffectiveDeploymentExecutio
 		"TIMED_OUT",
 		"CANCELED",
 		"REJECTED",
+		"SUCCEEDED",
 	}
 }
 

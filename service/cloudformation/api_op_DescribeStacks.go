@@ -848,6 +848,30 @@ func stackDeleteCompleteStateRetryable(ctx context.Context, input *DescribeStack
 		}
 	}
 
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "UPDATE_COMPLETE"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
 	return true, nil
 }
 

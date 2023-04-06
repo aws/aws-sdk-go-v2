@@ -78,20 +78,24 @@ type CreateDBInstanceInput struct {
 	// * aurora-postgresql
 	//
 	// *
-	// custom-oracle-ee (for RDS Custom for Oracle instances)
+	// custom-oracle-ee (for RDS Custom for Oracle DB instances)
 	//
-	// * custom-sqlserver-ee
-	// (for RDS Custom for SQL Server instances)
+	// *
+	// custom-oracle-ee-cdb (for RDS Custom for Oracle DB instances)
 	//
-	// * custom-sqlserver-se (for RDS Custom
-	// for SQL Server instances)
+	// *
+	// custom-sqlserver-ee (for RDS Custom for SQL Server DB instances)
 	//
-	// * custom-sqlserver-web (for RDS Custom for SQL Server
-	// instances)
+	// *
+	// custom-sqlserver-se (for RDS Custom for SQL Server DB instances)
+	//
+	// *
+	// custom-sqlserver-web (for RDS Custom for SQL Server DB instances)
 	//
 	// * mariadb
 	//
-	// * mysql
+	// *
+	// mysql
 	//
 	// * oracle-ee
 	//
@@ -99,10 +103,10 @@ type CreateDBInstanceInput struct {
 	//
 	// * oracle-se2
 	//
-	// *
-	// oracle-se2-cdb
+	// * oracle-se2-cdb
 	//
-	// * postgres
+	// *
+	// postgres
 	//
 	// * sqlserver-ee
 	//
@@ -110,8 +114,7 @@ type CreateDBInstanceInput struct {
 	//
 	// * sqlserver-ex
 	//
-	// *
-	// sqlserver-web
+	// * sqlserver-web
 	//
 	// This member is required.
 	Engine *string

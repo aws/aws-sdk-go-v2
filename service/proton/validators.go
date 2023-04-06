@@ -250,6 +250,46 @@ func (m *validateOpCreateService) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateServiceInstance struct {
+}
+
+func (*validateOpCreateServiceInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateServiceInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateServiceInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateServiceInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateServiceSyncConfig struct {
+}
+
+func (*validateOpCreateServiceSyncConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateServiceSyncConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateServiceSyncConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateServiceSyncConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateServiceTemplate struct {
 }
 
@@ -445,6 +485,26 @@ func (m *validateOpDeleteService) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteServiceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteServiceSyncConfig struct {
+}
+
+func (*validateOpDeleteServiceSyncConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteServiceSyncConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteServiceSyncConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteServiceSyncConfigInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -685,6 +745,66 @@ func (m *validateOpGetServiceInstance) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetServiceInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetServiceInstanceSyncStatus struct {
+}
+
+func (*validateOpGetServiceInstanceSyncStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetServiceInstanceSyncStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetServiceInstanceSyncStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetServiceInstanceSyncStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetServiceSyncBlockerSummary struct {
+}
+
+func (*validateOpGetServiceSyncBlockerSummary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetServiceSyncBlockerSummary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetServiceSyncBlockerSummaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetServiceSyncBlockerSummaryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetServiceSyncConfig struct {
+}
+
+func (*validateOpGetServiceSyncConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetServiceSyncConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetServiceSyncConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetServiceSyncConfigInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1310,6 +1430,46 @@ func (m *validateOpUpdateServicePipeline) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateServiceSyncBlocker struct {
+}
+
+func (*validateOpUpdateServiceSyncBlocker) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateServiceSyncBlocker) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateServiceSyncBlockerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateServiceSyncBlockerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateServiceSyncConfig struct {
+}
+
+func (*validateOpUpdateServiceSyncConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateServiceSyncConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateServiceSyncConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateServiceSyncConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateServiceTemplate struct {
 }
 
@@ -1418,6 +1578,14 @@ func addOpCreateServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateService{}, middleware.After)
 }
 
+func addOpCreateServiceInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateServiceInstance{}, middleware.After)
+}
+
+func addOpCreateServiceSyncConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateServiceSyncConfig{}, middleware.After)
+}
+
 func addOpCreateServiceTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateServiceTemplate{}, middleware.After)
 }
@@ -1456,6 +1624,10 @@ func addOpDeleteRepositoryValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteService{}, middleware.After)
+}
+
+func addOpDeleteServiceSyncConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteServiceSyncConfig{}, middleware.After)
 }
 
 func addOpDeleteServiceTemplateValidationMiddleware(stack *middleware.Stack) error {
@@ -1504,6 +1676,18 @@ func addOpGetServiceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetServiceInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetServiceInstance{}, middleware.After)
+}
+
+func addOpGetServiceInstanceSyncStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetServiceInstanceSyncStatus{}, middleware.After)
+}
+
+func addOpGetServiceSyncBlockerSummaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetServiceSyncBlockerSummary{}, middleware.After)
+}
+
+func addOpGetServiceSyncConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetServiceSyncConfig{}, middleware.After)
 }
 
 func addOpGetServiceTemplateValidationMiddleware(stack *middleware.Stack) error {
@@ -1628,6 +1812,14 @@ func addOpUpdateServiceInstanceValidationMiddleware(stack *middleware.Stack) err
 
 func addOpUpdateServicePipelineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateServicePipeline{}, middleware.After)
+}
+
+func addOpUpdateServiceSyncBlockerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateServiceSyncBlocker{}, middleware.After)
+}
+
+func addOpUpdateServiceSyncConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateServiceSyncConfig{}, middleware.After)
 }
 
 func addOpUpdateServiceTemplateValidationMiddleware(stack *middleware.Stack) error {
@@ -2068,6 +2260,59 @@ func validateOpCreateServiceInput(v *CreateServiceInput) error {
 	}
 }
 
+func validateOpCreateServiceInstanceInput(v *CreateServiceInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateServiceInstanceInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if v.Spec == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Spec"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateServiceSyncConfigInput(v *CreateServiceSyncConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateServiceSyncConfigInput"}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if len(v.RepositoryProvider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryProvider"))
+	}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.Branch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Branch"))
+	}
+	if v.FilePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilePath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateServiceTemplateInput(v *CreateServiceTemplateInput) error {
 	if v == nil {
 		return nil
@@ -2255,6 +2500,21 @@ func validateOpDeleteServiceInput(v *DeleteServiceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteServiceInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteServiceSyncConfigInput(v *DeleteServiceSyncConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteServiceSyncConfigInput"}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2463,6 +2723,54 @@ func validateOpGetServiceInstanceInput(v *GetServiceInstanceInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetServiceInstanceSyncStatusInput(v *GetServiceInstanceSyncStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetServiceInstanceSyncStatusInput"}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if v.ServiceInstanceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceInstanceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetServiceSyncBlockerSummaryInput(v *GetServiceSyncBlockerSummaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetServiceSyncBlockerSummaryInput"}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetServiceSyncConfigInput(v *GetServiceSyncConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetServiceSyncConfigInput"}
 	if v.ServiceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
 	}
@@ -3000,6 +3308,51 @@ func validateOpUpdateServicePipelineInput(v *UpdateServicePipelineInput) error {
 	}
 	if len(v.DeploymentType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("DeploymentType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateServiceSyncBlockerInput(v *UpdateServiceSyncBlockerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateServiceSyncBlockerInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.ResolvedReason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolvedReason"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateServiceSyncConfigInput(v *UpdateServiceSyncConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateServiceSyncConfigInput"}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if len(v.RepositoryProvider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryProvider"))
+	}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.Branch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Branch"))
+	}
+	if v.FilePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilePath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
